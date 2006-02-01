@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_G_STAMP_V02" familiarName="g" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    
+    <parameter name="power" type="ContinuousValue" value="25">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">100</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">10</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">250</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="milli">50</Frequency>
+    
+    <sampling-scale>
+        <min-samples>10</min-samples>
+        <max-samples>500</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="Altura" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Altura [m]" physicsunitname="metro" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0.</PhysicsVal></min>
+            <max><PhysicsVal type="float">1.50</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.000346</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.0005</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Tempo Relativo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo Relativo [ms]" physicsunitname="segundos" physicsunitsymbol="s" multiplier="milli" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">200000</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+</HardwareInfo>

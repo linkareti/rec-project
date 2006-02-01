@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="CAVENDISH_G_V1.0" familiarName="Cavendish-G" name="Cavendish-G" version="01" manufacturer="Elab - UTL" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+            
+    <parameter name="expGType" type="OnOffValue" value="1">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">0</value>
+        </selection-list>
+    </parameter>
+    <parameter name="angInit" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">-89</value>
+            <value order="2">89</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="l" type="ContinuousValue" value="500">
+        <selection-list>
+            <value order="1">200</value>
+            <value order="2">1000</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="s0" type="ContinuousValue" value="0.0465">
+        <selection-list>
+            <value order="1">0.04</value>
+            <value order="2">0.1</value>
+	    <value order="3">0.0001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="d" type="ContinuousValue" value="0.05">
+        <selection-list>
+            <value order="1">0.01</value>
+            <value order="2">0.1</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="mm0" type="ContinuousValue" value="0.015">
+        <selection-list>
+            <value order="1">0.015</value>
+            <value order="2">1.5</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="mm1" type="ContinuousValue" value="0.015">
+        <selection-list>
+            <value order="1">0.015</value>
+            <value order="2">1.5</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="mM0" type="ContinuousValue" value="1.5">
+        <selection-list>
+            <value order="1">0.015</value>
+            <value order="2">1.5</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="mM1" type="ContinuousValue" value="1.5">
+        <selection-list>
+            <value order="1">0.015</value>
+            <value order="2">1.5</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="targetSize" type="ContinuousValue" value="100">
+        <selection-list>
+            <value order="1">50</value>
+            <value order="2">500</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="c" type="ContinuousValue" value="8.263E-9">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">1</value>
+	    <value order="3">1E-12</value>
+        </selection-list>
+    </parameter>
+    <parameter name="k" type="ContinuousValue" value="1.418E-7">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">1</value>
+	    <value order="3">1E-10</value>
+        </selection-list>
+    </parameter>
+    <parameter name="g" type="ContinuousValue" value="6.67E-11">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">1</value>
+	    <value order="3">1E-14</value>
+        </selection-list>
+    </parameter>
+
+    <!-- os proximos parametros não vamos utilizar nesta experiência, servem só como exemplo do que existe!-->
+    <!--<parameter name="Filter1" type="SelectionListValue" value="Pink">
+        <selection-list>
+            <value order="1">Pink</value>
+            <value order="2">Yellow</value>
+            <value order="3">Green</value>
+            <value order="4">Transparent</value>
+        </selection-list>
+    </parameter>  
+    <parameter name="calibrar" type="OnOffValue" value="0">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">0</value>
+        </selection-list>
+    </parameter>-->
+    <!-- com o BlackBoxValue podem passar o que quiserem, e' para ser usado so' em casos MUITO especiais!!-->
+    <!--<parameter name="FlowChart" type="BlackBoxValue" value="none">  
+    </parameter> -->
+    <!--FIM DOS PARAMETROS EXEMPLO-->
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">50</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">500</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>500</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="T. Relativo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo Relativo" physicsunitname="segundos" physicsunitsymbol="s" multiplier="milli" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">100000</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>                  
+    <ChannelInfo name="Angulo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Angulo" physicsunitname="radianos" physicsunitsymbol="rad" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-10</PhysicsVal></min>
+            <max><PhysicsVal type="float">10</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1E-7</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Velocidade Angular" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Velocidade Angular" physicsunitname="radianos por segundo" physicsunitsymbol="rad/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-30.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">30.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1E-7</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+ </HardwareInfo>

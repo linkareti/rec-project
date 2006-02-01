@@ -1,0 +1,18 @@
+//
+// CORBABase.idl
+//
+// Created on 27 de Março de 2003, 12:54
+// by jp
+//
+
+module org{
+module omg{
+
+module CORBA{
+
+    valuetype StringValue string;
+    valuetype WStringValue wstring;
+
+};
+
+};};

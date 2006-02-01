@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="EXP_PLANCK_STAMP_V1.1" familiarName="Planck" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    <customizer href="pt.utl.ist.elab.client.serial.stamp.planck.PlanckCustomizer"/>
+        
+    <parameter name="Mode" type="SelectionListValue" value="All">
+        <selection-list>
+            <value order="1">All</value>
+            <value order="2">Fixed</value>
+        </selection-list>
+    </parameter>
+
+    <parameter name="Filter1" type="SelectionListValue" value="Pink">
+        <selection-list>
+            <value order="1">Pink</value>
+            <value order="2">Yellow</value>
+            <value order="3">Green</value>
+            <value order="4">Transparent</value>
+        </selection-list>
+    </parameter>        
+        
+    <parameter name="Filter2" type="SelectionListValue" value="0">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">20</value>
+            <value order="3">40</value>
+            <value order="4">60</value>
+            <value order="5">80</value>
+            <value order="6">90</value>
+        </selection-list>
+    </parameter>        
+        
+    <parameter name="AngPos" type="ContinuousValue" value="180">
+        <selection-list>
+            <value order="1">120</value>
+            <value order="2">220</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    
+    <frequency-scale label="FrequencyType">
+        <min-frequency><Frequency type="FrequencyType" multiplier="milli">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="FrequencyType" multiplier="milli">1000</Frequency></max-frequency>
+        <step-frequency><Frequency type="FrequencyType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="FrequencyType" multiplier="none">100</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>1000</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="T. Relativo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo Relativo" physicsunitname="segundos" physicsunitsymbol="s" multiplier="milli" selected="true">
+            <min><PhysicsVal type="long">0</PhysicsVal></min>
+            <max><PhysicsVal type="long">2000000000</PhysicsVal></max>
+            <step><PhysicsVal type="long">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="long">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>              
+    <ChannelInfo name="Angulo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Angulo" physicsunitname="Grau" physicsunitsymbol="º" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">360.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Intensidade" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Intensidade" physicsunitname="Volt" physicsunitsymbol="V" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">6</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+ </HardwareInfo>

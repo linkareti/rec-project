@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_CONDCALOR_STAMP_V1.0" familiarName="Condução do calor" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    <customizer href="pt.utl.ist.elab.client.serial.stamp.conducaoCalor.TCustomizer"/>
+    
+    <parameter name="Modo" type="SelectionListValue" value="Powered Control">
+        <selection-list>
+            <value order="1">Estacionario</value>
+            <value order="2">Oscilatorio</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="Tempo aquecimento" type="ContinuousValue" value="50">
+        <selection-list>
+            <value order="1">10</value>
+            <value order="2">120</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="Temperatura maxima" type="ContinuousValue" value="50">
+        <selection-list>
+            <value order="1">25</value>
+            <value order="2">75</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="none">10</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="none">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">1</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>1000</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="T 1 - Latão" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Temperatura [ºC]" physicsunitname="Graus Celsius" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-40.</PhysicsVal></min>
+            <max><PhysicsVal type="float">100.</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="T 2 - Latão" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Temperatura [ºC]" physicsunitname="Graus Celsius" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-40.</PhysicsVal></min>
+            <max><PhysicsVal type="float">100.</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="T 3 - Latão" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Temperatura [ºC]" physicsunitname="Graus Celsius" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-40.</PhysicsVal></min>
+            <max><PhysicsVal type="float">100.</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="T 1 - Ferro" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Temperatura [ºC]" physicsunitname="Graus Celsius" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-40.</PhysicsVal></min>
+            <max><PhysicsVal type="float">100.</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="T 2 - Ferro" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Temperatura [ºC]" physicsunitname="Graus Celsius" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-40.</PhysicsVal></min>
+            <max><PhysicsVal type="float">100.</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="T 3 - Ferro" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Temperatura [ºC]" physicsunitname="Graus Celsius" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-40.</PhysicsVal></min>
+            <max><PhysicsVal type="float">100.</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="T 1 - Cobre" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Temperatura [ºC]" physicsunitname="Graus Celsius" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-40.</PhysicsVal></min>
+            <max><PhysicsVal type="float">100.</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="T 2 - Cobre" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Temperatura [ºC]" physicsunitname="Graus Celsius" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-40.</PhysicsVal></min>
+            <max><PhysicsVal type="float">100.</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="T 3 - Cobre" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Temperatura [ºC]" physicsunitname="Graus Celsius" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-40.</PhysicsVal></min>
+            <max><PhysicsVal type="float">100.</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>   
+    <ChannelInfo name="T. Relativo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo Relativo [s]" physicsunitname="segundos" physicsunitsymbol="s" multiplier="none" selected="true">
+            <min><PhysicsVal type="long">0</PhysicsVal></min>
+            <max><PhysicsVal type="long">4294967295</PhysicsVal></max>
+            <step><PhysicsVal type="long">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="long">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>         
+ </HardwareInfo>

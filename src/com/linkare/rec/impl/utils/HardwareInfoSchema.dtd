@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    Typical usage:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE HardwareInfo SYSTEM "HardwareInfoSchema.dtd">
+
+    <HardwareInfo>
+    ...
+    </HardwareInfo>
+-->
+
+<!ELEMENT AvailableOutputIDataSource EMPTY>
+<!ATTLIST AvailableOutputIDataSource
+    href CDATA #IMPLIED
+  >
+
+<!ELEMENT ChannelInfo (AvailableOutputIDataSource|Frequency|customizer|sampling-scale|scale|frequency-scale|parameter)*>
+<!ATTLIST ChannelInfo
+    direction CDATA #IMPLIED
+    independent CDATA #IMPLIED
+    name CDATA #IMPLIED
+  >
+
+<!ELEMENT Frequency (#PCDATA)>
+<!ATTLIST Frequency
+    type CDATA #IMPLIED
+    multiplier CDATA #IMPLIED
+  >
+
+<!ELEMENT HardwareInfo (Frequency|ChannelInfo|customizer|sampling-scale|description|frequency-scale|parameter)*>
+<!ATTLIST HardwareInfo
+    manufacturer CDATA #IMPLIED
+    familiarName CDATA #IMPLIED
+    name CDATA #IMPLIED
+    driverVersion CDATA #IMPLIED
+    id CDATA #IMPLIED
+    version CDATA #IMPLIED
+  >
+
+<!ELEMENT PhysicsVal (#PCDATA)>
+<!ATTLIST PhysicsVal
+    href CDATA #IMPLIED
+    type CDATA #IMPLIED
+    file CDATA #IMPLIED
+    mimetype CDATA #IMPLIED
+  >
+
+<!ELEMENT description (#PCDATA)>
+
+<!ELEMENT errordefault (#PCDATA|PhysicsVal)*>
+
+<!ELEMENT frequency-scale (step-frequency|min-frequency|max-frequency)*>
+<!ATTLIST frequency-scale
+    label CDATA #IMPLIED
+  >
+
+<!ELEMENT max (PhysicsVal)*>
+
+<!ELEMENT max-frequency (Frequency)*>
+
+<!ELEMENT max-samples (#PCDATA)>
+
+<!ELEMENT min (PhysicsVal)*>
+
+<!ELEMENT min-frequency (Frequency)*>
+
+<!ELEMENT min-samples (#PCDATA)>
+
+<!ELEMENT parameter (selection-list)*>
+<!ATTLIST parameter
+    value CDATA #IMPLIED
+    type CDATA #IMPLIED
+    name CDATA #IMPLIED
+  >
+
+<!ELEMENT sampling-scale (min-samples|max-samples|step-samples)*>
+
+<!ELEMENT scale (min|errordefault|step|max)*>
+<!ATTLIST scale
+    selected CDATA #IMPLIED
+    label CDATA #IMPLIED
+    physicsunitname CDATA #IMPLIED
+    multiplier CDATA #IMPLIED
+    physicsunitsymbol CDATA #IMPLIED
+  >
+
+<!ELEMENT selection-list (value)*>
+
+<!ELEMENT step (PhysicsVal)*>
+
+<!ELEMENT step-frequency (Frequency)*>
+
+<!ELEMENT step-samples (#PCDATA)>
+
+<!ELEMENT value (#PCDATA)>
+<!ATTLIST value
+    order CDATA #IMPLIED
+  >

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_SCUBA_STAMP_V02" familiarName="Scuba" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    
+    <parameter name="xini" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">900</value>
+	    <value order="3">10</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="xfin" type="ContinuousValue" value="900">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">900</value>
+            <value order="3">10</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="calib" type="OnOffValue" value="0">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">0</value>
+        </selection-list>
+    </parameter>
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">0.5</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">2250</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">0.1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="milli">2250</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>500</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="Pressão relativa 1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">10</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.020</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Pressão relativa 2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">10</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.020</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Pressão relativa 3" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">10</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.020</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Pressão relativa 4" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">10</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.020</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Profundidade" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Profundidade [mm]" physicsunitname="metro" physicsunitsymbol="m" multiplier="milli" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">900</PhysicsVal></max>
+            <step><PhysicsVal type="float">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+</HardwareInfo>
+

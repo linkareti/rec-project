@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Como funciona o programa</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF">
+<p>Todos os programas criados s&atilde;o sequenciais. A m&aacute;quina de estados 
+  come&ccedil;a por ler o primeiro <a href="howtoaddblocks.html">bloco</a>, se 
+  for um <a href="../blocks/compBlocks.html">bloco de compara&ccedil;&atilde;o</a> 
+  acontece uma de duas situa&ccedil;&otilde;es:</p>
+<p>1-A compara&ccedil;&atilde;o resulta verdadeira e o programa passa para o pr&oacute;ximo 
+  bloco na mesma coluna.</p>
+<p>2-A compara&ccedil;&atilde;o &eacute; falsa e o programa vai para o bloco imediatamente 
+  &agrave; direita. Se n&atilde;o existe nenhum bloco &agrave; direita(note que se entende existir bloco
+&agrave; direita como: existir uma liga&ccedil;&atilde;o com o bloco à direita) o programa 
+  &eacute; reiniciado.</p>
+<p><b>nota:</b> no caso de conjuntos de <a href="../blocks/compBlocks.html">blocos 
+  de ANDs</a>, se uma das condi&ccedil;&otilde;es n&atilde;o se verificar, vai 
+  para o bloco &agrave; direita do primeiro bloco do conjunto.</p>
+<p>Caso o bloco em quest&atilde;o n&atilde;o seja de compara&ccedil;&atilde;o, 
+  o programa efectua a opera&ccedil;&atilde;o desejada e segue para o pr&oacute;ximo 
+  bloco na mesma coluna. Se este n&atilde;o existe, o programa &eacute; reiniciado.</p>
+<p>Todos os programas come&ccedil;am no <a href="../blocks/blockStart.html">bloco 
+  <i>Inicio Programa</i></a><i> </i>(linha 1, coluna 1). </p>
+<p>O primeiro bloco &eacute; adicionado imediatamente abaixo do bloco <i>Inicio 
+  Programa</i>, ou seja, na 2&ordm; linha e 1&ordm;coluna. </p>
+<p>Sempre que &eacute; adicionado um novo bloco, surge uma janela de configura&ccedil;&atilde;o 
+  que permite personalizar o bloco. Por exemplo para o bloco de atribui&ccedil;&atilde;o 
+  de valores &agrave;s <a href="howvars.html">vari&aacute;veis</a> surge a seguinte 
+  janela:</p>
+<p><img src="../images/atribui.GIF" width="261" height="205"></p>
+<p><a href="howtoaddblocks.htm">Ver: <i>como adicionar blocos</i></a></p>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.0" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenuLab">
+          <Properties>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.mnemo.lab&quot;, &quot;L&quot;).charAt(0)" type="code"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.lab&quot;, &quot;Laboratory&quot;)" type="code"/>
+            </Property>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemConnect">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findImageIconOrDefault(&quot;ReCBaseUI$rec.bui.icon.connect&quot;, new ImageIcon(getClass().getResource(&quot;/com/linkare/rec/impl/baseUI/resources/earth16.gif&quot;)))" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.connect&quot;, &quot;Connect&quot;)" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.tip.connect&quot;, &quot;Connect to the laboratory&quot;)" type="code"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemConnectActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonAutoPlay">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="RadioButton"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JSeparator" name="jSeparator1">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemExit">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Item"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuView">
+          <Properties>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.mnemo.lab&quot;, &quot;L&quot;).charAt(0)" type="code"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.lab&quot;, &quot;Laboratory&quot;)" type="code"/>
+            </Property>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemApparatus">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findImageIconOrDefault(&quot;ReCBaseUI$rec.bui.icon.connect&quot;, new ImageIcon(getClass().getResource(&quot;/com/linkare/rec/impl/baseUI/resources/earth16.gif&quot;)))" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.connect&quot;, &quot;Connect&quot;)" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.tip.connect&quot;, &quot;Connect to the laboratory&quot;)" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUsers">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findImageIconOrDefault(&quot;ReCBaseUI$rec.bui.icon.connect&quot;, new ImageIcon(getClass().getResource(&quot;/com/linkare/rec/impl/baseUI/resources/earth16.gif&quot;)))" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.connect&quot;, &quot;Connect&quot;)" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.tip.connect&quot;, &quot;Connect to the laboratory&quot;)" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemChat">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findImageIconOrDefault(&quot;ReCBaseUI$rec.bui.icon.connect&quot;, new ImageIcon(getClass().getResource(&quot;/com/linkare/rec/impl/baseUI/resources/earth16.gif&quot;)))" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.connect&quot;, &quot;Connect&quot;)" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.tip.connect&quot;, &quot;Connect to the laboratory&quot;)" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemVideo">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findImageIconOrDefault(&quot;ReCBaseUI$rec.bui.icon.connect&quot;, new ImageIcon(getClass().getResource(&quot;/com/linkare/rec/impl/baseUI/resources/earth16.gif&quot;)))" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.connect&quot;, &quot;Connect&quot;)" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.tip.connect&quot;, &quot;Connect to the laboratory&quot;)" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JSeparator" name="jSeparator2">
+            </MenuItem>
+            <Menu class="javax.swing.JMenu" name="jMenuToolBars">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Menu"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemToolLab">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Item"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemToolView">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Item"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuWindow">
+          <Properties>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.mnemo.lab&quot;, &quot;L&quot;).charAt(0)" type="code"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.lab&quot;, &quot;Laboratory&quot;)" type="code"/>
+            </Property>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCascade">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findImageIconOrDefault(&quot;ReCBaseUI$rec.bui.icon.connect&quot;, new ImageIcon(getClass().getResource(&quot;/com/linkare/rec/impl/baseUI/resources/earth16.gif&quot;)))" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.connect&quot;, &quot;Connect&quot;)" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.tip.connect&quot;, &quot;Connect to the laboratory&quot;)" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemTile">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findImageIconOrDefault(&quot;ReCBaseUI$rec.bui.icon.connect&quot;, new ImageIcon(getClass().getResource(&quot;/com/linkare/rec/impl/baseUI/resources/earth16.gif&quot;)))" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.connect&quot;, &quot;Connect&quot;)" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.tip.connect&quot;, &quot;Connect to the laboratory&quot;)" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuHelp">
+          <Properties>
+            <Property name="mnemonic" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.mnemo.lab&quot;, &quot;L&quot;).charAt(0)" type="code"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.lab&quot;, &quot;Laboratory&quot;)" type="code"/>
+            </Property>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemContents">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findImageIconOrDefault(&quot;ReCBaseUI$rec.bui.icon.connect&quot;, new ImageIcon(getClass().getResource(&quot;/com/linkare/rec/impl/baseUI/resources/earth16.gif&quot;)))" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.connect&quot;, &quot;Connect&quot;)" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.tip.connect&quot;, &quot;Connect to the laboratory&quot;)" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAbout">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findImageIconOrDefault(&quot;ReCBaseUI$rec.bui.icon.connect&quot;, new ImageIcon(getClass().getResource(&quot;/com/linkare/rec/impl/baseUI/resources/earth16.gif&quot;)))" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.lbl.connect&quot;, &quot;Connect&quot;)" type="code"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCBaseUI$rec.bui.tip.connect&quot;, &quot;Connect to the laboratory&quot;)" type="code"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
+  </NonVisualComponents>
+  <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="exitForm"/>
+  </Events>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="This is going to be used to accelerate the production of the MenuBar file"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Center"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+  </SubComponents>
+</Form>

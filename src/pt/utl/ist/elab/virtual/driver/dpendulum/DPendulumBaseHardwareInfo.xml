@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="DPENDULUM_V1.0" familiarName="Pêndulo duplo" name="Pêndulo duplo" version="01" manufacturer="Elab - UTL" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    <customizer href="pt.utl.ist.elab.virtual.client.dpendulum.DPendulumCustomizer"/>
+        
+    <parameter name="P1 ini angle" type="ContinuousValue" value="90">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">360</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="P2 ini angle" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">360</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="P1 length" type="ContinuousValue" value="50">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">150</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="P2 length" type="ContinuousValue" value="50">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">150</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="P1 Mass" type="ContinuousValue" value="500">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">1000</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="P2 Mass" type="ContinuousValue" value="800">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">1000</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="P1 vel ang ini" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">10</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="P2 vel ang ini" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">10</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+        
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">10</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">10</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>1000</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="T. Relativo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo Relativo" physicsunitname="segundos" physicsunitsymbol="s" multiplier="milli" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">100000</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>                  
+    <ChannelInfo name="Ângulo 1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Ângulo" physicsunitname="Grau" physicsunitsymbol="rad" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-3.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">3.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Ângulo 2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Ângulo" physicsunitname="Grau" physicsunitsymbol="rad" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-3.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">3.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Velocidade angular 1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Velocidade angular 1" physicsunitname="rad/s" physicsunitsymbol="rad/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+    <ChannelInfo name="Velocidade angular 2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Velocidade angular 2" physicsunitname="rad/s" physicsunitsymbol="rad/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+ </HardwareInfo>

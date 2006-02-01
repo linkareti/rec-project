@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by André on 2 de Junho de 2003, 15:42 -->
+
+<HardwareInfo id="ELAB_WEBROBOT_V01" familiarName="Web-Robot" name="none" version="none" manufacturer="none" driverVersion="1.0">
+    <description>
+        <![CDATA[Controlar um robot atraves da internet
+        ]]>
+    </description>
+    <customizer href="pt.utl.ist.elab.client.webrobot.customizer.WebRobotCustomizer"/>    
+
+    <parameter name="FlowChart" type="BlackBoxValue" value="none">  
+    </parameter> 
+  
+    <frequency-scale label="0.5 Hz">
+        <min-frequency><Frequency type="FrequencyType" multiplier="none">0.5</Frequency></min-frequency>
+        <max-frequency><Frequency type="FrequencyType" multiplier="none">0.5</Frequency></max-frequency>
+        <step-frequency><Frequency type="FrequencyType" multiplier="none">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="FrequencyType" multiplier="none">0.5</Frequency>    
+
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>120</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="IR0" independent="false" direction="CHANNEL_INPUT">
+        <scale label="I0 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="IR1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="I1 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="IR2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="I2 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="IR3" independent="false" direction="CHANNEL_INPUT">
+        <scale label="I3 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="IR4" independent="false" direction="CHANNEL_INPUT">
+        <scale label="I4 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="IR5" independent="false" direction="CHANNEL_INPUT">
+        <scale label="I5 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="IR6" independent="false" direction="CHANNEL_INPUT">
+        <scale label="I6 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="IR7" independent="false" direction="CHANNEL_INPUT">
+        <scale label="I7 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="b0" independent="false" direction="CHANNEL_INPUT">
+        <scale label="b0 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="boolean">0</PhysicsVal></min>
+            <max><PhysicsVal type="boolean">1</PhysicsVal></max>
+            <step><PhysicsVal type="boolean">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="boolean">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>    
+    <ChannelInfo name="b1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="b1 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="boolean">0</PhysicsVal></min>
+            <max><PhysicsVal type="boolean">1</PhysicsVal></max>
+            <step><PhysicsVal type="boolean">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="boolean">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="b2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="b2 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="boolean">0</PhysicsVal></min>
+            <max><PhysicsVal type="boolean">1</PhysicsVal></max>
+            <step><PhysicsVal type="boolean">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="boolean">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="b3" independent="false" direction="CHANNEL_INPUT">
+        <scale label="b3 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="boolean">0</PhysicsVal></min>
+            <max><PhysicsVal type="boolean">1</PhysicsVal></max>
+            <step><PhysicsVal type="boolean">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="boolean">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="b4" independent="false" direction="CHANNEL_INPUT">
+        <scale label="b4 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="boolean">0</PhysicsVal></min>
+            <max><PhysicsVal type="boolean">1</PhysicsVal></max>
+            <step><PhysicsVal type="boolean">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="boolean">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="b5" independent="false" direction="CHANNEL_INPUT">
+        <scale label="b5 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="boolean">0</PhysicsVal></min>
+            <max><PhysicsVal type="boolean">1</PhysicsVal></max>
+            <step><PhysicsVal type="boolean">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="boolean">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="b6" independent="false" direction="CHANNEL_INPUT">
+        <scale label="b6 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="boolean">0</PhysicsVal></min>
+            <max><PhysicsVal type="boolean">1</PhysicsVal></max>
+            <step><PhysicsVal type="boolean">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="boolean">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="b7" independent="false" direction="CHANNEL_INPUT">
+        <scale label="b7 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="boolean">0</PhysicsVal></min>
+            <max><PhysicsVal type="boolean">1</PhysicsVal></max>
+            <step><PhysicsVal type="boolean">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="boolean">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="A1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="A1 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="A2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="A2 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="A3" independent="false" direction="CHANNEL_INPUT">
+        <scale label="A3 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="A4" independent="false" direction="CHANNEL_INPUT">
+        <scale label="A4 value" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>           
+    
+    
+    
+    <ChannelInfo name="Coluna IVPWM" independent="false" direction="CHANNEL_INPUT">
+        <scale label="IVPWM col" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">255</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Linha" independent="false" direction="CHANNEL_INPUT">
+        
+        <scale label="Row Position" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">5000</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Coluna" independent="false" direction="CHANNEL_INPUT">
+        
+        
+        <scale label="Col Position" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">5000</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+</HardwareInfo>
+

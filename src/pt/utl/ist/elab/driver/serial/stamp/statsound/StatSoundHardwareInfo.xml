@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_STATSOUND_STAMP_V01" familiarName="Ondas estacionarias e velocidade do som" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experi�ncia serve para - n�o esquecer de alterar esta descri��o
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    <customizer href="pt.utl.ist.elab.client.serial.stamp.StatSoundCustomizer"/>
+    
+    <parameter name="Piston start" type="ContinuousValue" value="1300">
+        <selection-list>
+            <value order="1">1258</value>
+            <value order="2">1480</value>
+	    <value order="3">1</value>
+        </selection-list>
+        
+    </parameter>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <parameter name="Piston end" value="1300" type="ContinuousValue">
+        <selection-list>
+            <value order="1">1258</value>
+            <value order="2">1480</value>
+	    <value order="3">1</value>
+        </selection-list>
+        
+    </parameter>
+    <parameter name="Frequency start" type="ContinuousValue" value="250">
+        <selection-list>
+            <value order="1">100</value>
+            <value order="2">2000</value>
+	    <value order="3">1</value>
+        </selection-list>
+        
+    </parameter>
+    <parameter name="Frequency end" type="ContinuousValue" value="250">
+        <selection-list>
+            <value order="1">100</value>
+            <value order="2">2000</value>
+	    <value order="3">1</value>
+        </selection-list>
+        
+    </parameter>
+    <parameter name="Wave form" type="SelectionListValue" value="Wave 1">
+        <selection-list>
+            <value order="1">Wave 1</value>
+            <value order="2">Wave 2</value>
+            <value order="3">Wave 3</value>
+            <value order="4">Wave 4</value>
+        </selection-list>
+    </parameter>
+    <parameter name="Type of experiment" type="SelectionListValue" value="Vary Piston">
+        <selection-list>
+            <value order="1">Vary Piston</value>
+            <value order="2">Vary Freq</value>
+            <value order="3">Sound Vel</value>
+            
+        </selection-list>
+    </parameter>
+    <parameter name="Status" type="SelectionListValue" value="0000">
+        <selection-list>
+            <value order="1">0000</value>
+            <value order="2">0001</value>
+            <value order="3">0010</value>
+            
+            <value order="4">0011</value>
+            <value order="5">0100</value>
+            <value order="6">0101</value>
+            <value order="7">0110</value>
+            <value order="8">0111</value>
+            <value order="9">1000</value>
+        </selection-list>
+    </parameter>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <parameter name="Calibration" type="SelectionListValue" value="1">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">1</value>
+            
+            
+            
+            
+            
+            
+            
+            
+        </selection-list>
+    </parameter>
+    <frequency-scale label="Sampling Frequency">
+        <min-frequency><Frequency type="FrequencyType" multiplier="none">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="FrequencyType" multiplier="none">125</Frequency></max-frequency>
+        <step-frequency><Frequency type="FrequencyType" multiplier="none">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="FrequencyType" multiplier="none">1</Frequency>
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>600</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    <ChannelInfo name="pos" independent="true" direction="CHANNEL_INPUT">
+        <scale label="piston position" physicsunitname="Millimeter" physicsunitsymbol="mm" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">1480</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="temp" independent="true" direction="CHANNEL_INPUT">
+        <scale label="temperature" physicsunitname="Centigrade" physicsunitsymbol="ºC" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">100</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="rms" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Root mean square" physicsunitname="RMS" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-5000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">5000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="wave1" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Wave 1 sound channel" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="c:\StatSoundByteArray.txt" mimetype="sound/wav"> </PhysicsVal></min>
+            
+            
+            
+            <max><PhysicsVal type="byteArray" file="c:\StatSoundByteArray.txt" mimetype="sound/wav"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="c:\StatSoundByteArray.txt" mimetype="sound/wav"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="c:\StatSoundByteArray.txt" mimetype="sound/wav"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="wave2" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Wave 1 sound channel" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="c:\StatSoundByteArray.txt" mimetype="sound/wav"> </PhysicsVal></min>
+            
+            
+            
+            <max><PhysicsVal type="byteArray" file="c:\StatSoundByteArray.txt" mimetype="sound/wav"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="c:\StatSoundByteArray.txt" mimetype="sound/wav"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="c:\StatSoundByteArray.txt" mimetype="sound/wav"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+</HardwareInfo>
+

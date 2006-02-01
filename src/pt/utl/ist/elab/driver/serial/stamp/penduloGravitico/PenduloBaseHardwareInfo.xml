@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_PENDULO_GRAV_STAMP_V01" familiarName="Pendulo gravitico amortecido" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experi�ncia serve para - n�o esquecer de alterar esta descri��o
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    
+    <parameter name="Altura" type="ContinuousValue" value="50">
+        <selection-list>
+            <value order="1">15.2</value>
+            <value order="2">24.8</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="Angulo inicial" type="ContinuousValue" value="5">
+        <selection-list>
+            <value order="1">1.1</value>
+            <value order="2">13.5</value>
+            <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    
+    <frequency-scale label="Sampling Frequency">
+        <min-frequency><Frequency type="FrequencyType" multiplier="none">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="FrequencyType" multiplier="none">110</Frequency></max-frequency>
+        <step-frequency><Frequency type="FrequencyType" multiplier="none">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="FrequencyType" multiplier="none">50</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>500</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="Angulo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Angulo[º]" physicsunitname="º" physicsunitsymbol="º" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-90</PhysicsVal></min>
+            <max><PhysicsVal type="float">90</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.00001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+
+</HardwareInfo>
+
