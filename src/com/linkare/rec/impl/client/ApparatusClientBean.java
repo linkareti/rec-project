@@ -21,8 +21,11 @@ import java.util.*;
 import com.linkare.rec.acquisition.UserInfo;
 
 /**
- *
- * @author  jp
+ * This class implements a client for a lab apparatus... It hides the 
+ * sordid CORBA details and implements a JavaBeans style interface to the
+ * backend system. It is not a user interface component, but rather enables
+ * faster integration between the backend model and the UI via events
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ApparatusClientBean implements DataClientOperations,ExpUsersListSource,IChatServer,ApparatusConnector
 {
@@ -41,6 +44,9 @@ public class ApparatusClientBean implements DataClientOperations,ExpUsersListSou
     private transient MultiCastHardwareWrapper mchw=null;
     private transient DataClient _this=null;
     private transient ObjectID oid=null;
+	/**
+	 * An internal management boolean which keeps the connected state
+	 */
     public boolean connectedBefore=false;
     private UserInfo userInfo = null;
     
@@ -71,6 +77,10 @@ public class ApparatusClientBean implements DataClientOperations,ExpUsersListSou
         
     }
     
+	/**
+	 * Determines if the client is currently connected to an apparatus server
+	 * @return The current connection state (True if this bean is connected to an end system)
+	 */
     public boolean isConnected()
     {
         boolean connected = false;
@@ -89,12 +99,24 @@ public class ApparatusClientBean implements DataClientOperations,ExpUsersListSou
         return connected;
     }
     
-    /**** DataClient Operations ****/
+    /**
+	 * This sets the user information by which the user identifies itself
+	 * @param userInfo The information by which the server uniquely identifies
+	 * the client. It may depend on the authentication plugin
+	 * of the server, but usually it will be a username and password
+	 * or just a username. IF using the default SecurityManager 
+	 * at the server (open access)
+	 */
     public void setUserInfo(UserInfo userInfo)
     {
         this.userInfo = userInfo;
     }
     
+	/**
+	 * Returns the user identification currently being used by this apparatus client
+	 * @return The UserInfo Object currently being used to identify the client
+	 * with the apparatus server
+	 */
     public com.linkare.rec.acquisition.UserInfo getUserInfo()
     {
         //TODO check with JP
@@ -104,11 +126,19 @@ public class ApparatusClientBean implements DataClientOperations,ExpUsersListSou
         return userInfo;
     }
     
+	/**
+	 * Implementation of Operations interface for CORBA comm
+	 */
     public void hardwareChange()
     {
         //silent noop - MCHardwares don't send HardwareChanges
     }
     
+	/**
+	 * Implementation of Operations interface for CORBA comm
+	 * @param millisecs_to_lock_success The number of milliseconds until possibility of lock
+	 * is lost
+	 */
     public void hardwareLockable(long millisecs_to_lock_success)
     {
         fireApparatusConnectorListenerApparatusLockable(millisecs_to_lock_success);

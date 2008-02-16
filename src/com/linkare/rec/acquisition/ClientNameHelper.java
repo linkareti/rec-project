@@ -1,5 +1,7 @@
 package com.linkare.rec.acquisition;
 
+import java.util.HashMap;
+
 /** CORBA Helper class */
 abstract public class ClientNameHelper
 {
