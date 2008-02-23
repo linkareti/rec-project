@@ -8,7 +8,7 @@ package pt.utl.ist.elab.driver.webrobot.interfaces;
 
 /**
  *
- * @author  André
+ * @author  Andre
  */
 public interface InputOutput {
     
