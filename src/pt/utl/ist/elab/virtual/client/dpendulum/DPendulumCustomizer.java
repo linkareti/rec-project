@@ -1101,7 +1101,7 @@ public class DPendulumCustomizer extends javax.swing.JPanel implements com.linka
 	
 	public String getCustomizerTitle()
 	{
-	    return "Pêndulo duplo";
+	    return "Pendulo duplo";
 	}
 	
 	public javax.swing.JMenuBar getMenuBar()

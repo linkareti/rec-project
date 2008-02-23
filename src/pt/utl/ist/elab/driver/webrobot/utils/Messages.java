@@ -1,14 +1,14 @@
 /*
  * Messages.java
  *
- * Created on 14 de Março de 2003, 17:18
+ * Created on 14 de Marco de 2003, 17:18
  */
 
 package pt.utl.ist.elab.driver.webrobot.utils;
 
 /**
  *
- * @author  André
+ * @author  Andre
  */
 
 

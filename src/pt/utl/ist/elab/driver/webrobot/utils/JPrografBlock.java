@@ -8,7 +8,7 @@ package pt.utl.ist.elab.driver.webrobot.utils;
 
 /**
  *
- * @author  André
+ * @author  Andre
  */
 public class JPrografBlock
 {    

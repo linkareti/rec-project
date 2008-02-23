@@ -8,7 +8,7 @@ package pt.utl.ist.elab.virtual.client.dpendulum.displays;
 
 /**
  *
- * @author  André
+ * @author  Andre
  */
 public class W2 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph 
 {
@@ -23,6 +23,6 @@ public class W2 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGra
     
     public String getName()
     {
-        return "Gráfico 4";
+        return "Grafico 4";
     }
 }

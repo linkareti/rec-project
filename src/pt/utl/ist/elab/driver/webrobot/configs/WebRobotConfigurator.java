@@ -8,7 +8,7 @@ package pt.utl.ist.elab.driver.webrobot.configs;
 
 /**
  *
- * @author  André
+ * @author  Andre
  */
 
 import pt.utl.ist.elab.driver.webrobot.debug.*;
@@ -703,7 +703,7 @@ public class WebRobotConfigurator extends javax.swing.JFrame {
         }
         catch(java.io.IOException ioe)
         {
-            Debugger.print(this,"Não consegui escrever as propriedades\n"+ioe);
+            Debugger.print(this,"Nao consegui escrever as propriedades\n"+ioe);
         }        
     }
     

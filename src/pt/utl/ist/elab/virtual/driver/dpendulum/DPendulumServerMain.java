@@ -13,7 +13,7 @@ import java.util.logging.*;
 
 /**
  *
- * @author  André
+ * @author  Andre
  */
 public class DPendulumServerMain 
 {     

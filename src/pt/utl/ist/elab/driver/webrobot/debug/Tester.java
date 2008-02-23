@@ -11,7 +11,7 @@ import com.linkare.rec.impl.exceptions.*;
 
 /**
  *
- * @author  André
+ * @author  Andre
  * Use this class to test doubts
  */
 public class Tester {
