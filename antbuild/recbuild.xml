@@ -7,7 +7,7 @@
 		<property name="webserver"	 value="/var/www/html/rec"/>
 		<property name="recserver"	 value="/home/elab/ReC7.0"/>
 		<path id="project.classpath">
-			<fileset dir="../../lib">
+			<fileset dir="../lib">
 				<include name="*.jar"/>
 				<include name="${outputDir}/**/*.class"/>
 			</fileset>
