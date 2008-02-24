@@ -52,10 +52,10 @@
                 <attribute name="webserverDir"/>
 		<sequential>
 			<copy todir="${recsserver}/@{recserverDir}">
-                                <fileset dir="${distDir}/@{jarDriverName}_sig.jar"/>
+                                <fileset file="${distDir}/@{jarDriverName}_sig.jar"/>
 	                </copy>
 			<copy todir="${webserver}/@{webserverDir}">
-                                <fileset dir="${distDir}/@{jarClientName}_sig.jar"/>
+                                <fileset file="${distDir}/@{jarClientName}_sig.jar"/>
                 	</copy>
 		</sequential>
 	</macrodef>
