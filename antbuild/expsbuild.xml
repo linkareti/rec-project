@@ -74,12 +74,14 @@
                 <attribute name="jarClientName"/>
                 <attribute name="jarDriverName"/>
                 <attribute name="webserverDir"/>
-		<copy todir="${recsserver}/@{recserverDir}">
-                                <fileset dir="${distDir}/@{jarDriverName}_sig.jar"/>
-                </copy>
-		<copy todir="${webserver}/@{webserverDir}">
-                                <fileset dir="${distDir}/@{jarClientName}_sig.jar"/>
-                </copy>
+		<sequential>
+			<copy todir="${recserver}/@{recserverDir}">
+                        	<fileset file="${distDir}/@{jarDriverName}_sig.jar"/>
+                	</copy>
+			<copy todir="${webserver}/@{webserverDir}">
+                                <fileset file="${distDir}/@{jarClientName}_sig.jar"/>
+                	</copy>
+		</sequential>
 	</macrodef>
 <!--COMPILE-->
 
@@ -189,7 +191,7 @@
 	</target>
 
 <!--Full deploy-->
-	<target name="deploy" depends="deployBaseStamp, deployBaseUSB, deployElabFullClient", "deployCondCalor"/>
+	<target name="deploy" depends="deployBaseStamp, deployBaseUSB, deployElabFullClient, deployCondCalor"/>
 
 <!--UTILS-->
 	<target name="showcp" depends="init">
