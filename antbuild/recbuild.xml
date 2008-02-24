@@ -22,9 +22,9 @@
 	
 	<target name="compile" depends="prepare">
 		<javac 	srcdir="${sourceDir}" destdir="${outputDir}"
-			fork="yes" executable="/opt/jdk1.6.0/bin/javac" 
 			deprecation="yes" 
-			source="1.6" target="1.6">
+			source="1.6" target="1.6"
+			encoding="UTF-8">
 			<classpath refid="project.classpath"/>
 			<include name="com/linkare/**/*.java"/>
 			<compilerarg value="-Xlint"/>
