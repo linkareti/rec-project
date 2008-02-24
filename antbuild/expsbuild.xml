@@ -1,0 +1,61 @@
+<project name="ReCExperiments" default="compile" basedir=".">
+	<target name="init">
+     		<property name="sourceDir" value="../../src/pt/utl/ist/elab/driver/serial/stamp/"/>
+		<property name="outputDir" value="/tmp/build/exps" />
+		<property name="distDir"   value="../../dist/jars" />
+		<path id="project.classpath">
+			<fileset dir="../../lib">
+				<include name="*.jar"/>
+				<include name="${outputDir}/**/*.class"/>
+			</fileset>
+    		</path>
+	</target>
+	<target name="clean" depends="init">
+		<delete dir="${outputDir}" />
+	</target>
+	<target name="prepare" depends="clean">
+		<mkdir dir="${outputDir}" />
+	</target>
+	
+	<target name="compileStamp" depends="prepare">
+		<javac 	srcdir="${sourceDir}" destdir="${outputDir}"
+			source="1.6" target="1.6">
+			<classpath refid="project.classpath"/>
+			<include name="*.java"/>
+			<include name="transproc/**/*.java"/>
+		</javac>
+   	</target>
+	<target name="compileCondCalor" depends="prepare,jarBaseStamp">
+                <javac  srcdir="${sourceDir}" destdir="${outputDir}"
+                        source="1.6" target="1.6">
+                        <classpath>
+				<path refid="project.classpath"/>
+				<path location="${distDir}/ElabBaseStampDriver.jar"/>
+			</classpath>
+                        <include name="conducaoCalor/**/*.java"/>
+                </javac>
+        </target>
+
+	<target name="compile" depends="compileStamp"/>
+
+	<target name="jarBaseStamp" depends="compileStamp">
+        	<mkdir dir="${distDir}"/>
+        	<jar destfile="${distDir}/ElabBaseStampDriver.jar" basedir="${outputDir}">
+			<include name="**/stamp/*.class"/>
+                        <include name="**/transproc/**/*.class"/>
+		</jar>
+    	</target>
+
+	<target name="jar" depends="jarBaseStamp"/>
+
+	<target name="showcp" depends="init">
+		<!-- get the source compile classpath in a printable form -->
+		<pathconvert pathsep="${line.separator}|   |-- "
+             		property="echo.path.compile"
+             		refid="project.classpath">
+		</pathconvert>
+		<echo message="|-- compile classpath"/>
+		<echo message="|   |"/>
+		<echo message="|   |-- ${echo.path.compile}"/>
+	</target>
+</project>

@@ -1,0 +1,93 @@
+<project name="ReCCore" default="jar" basedir=".">
+	<target name="init">
+     		<property name="sourceDir"       value="../../src/"/>
+		<property name="outputDir"       value="/tmp/build/rec"/>
+		<property name="distDir"	 value="../../dist/jars" />
+		<property name="sigFileLocation" value="../../cert/ISTJavaSign.KeyStore.p12"/>
+		<property name="webserver"	 value="/var/www/html/rec"/>
+		<property name="recserver"	 value="/home/elab/ReC7.0"/>
+		<path id="project.classpath">
+			<fileset dir="../../lib">
+				<include name="*.jar"/>
+				<include name="${outputDir}/**/*.class"/>
+			</fileset>
+    		</path>
+	</target>
+	<target name="clean" depends="init">
+		<delete dir="${outputDir}" />
+	</target>
+	<target name="prepare" depends="clean">
+		<mkdir dir="${outputDir}" />
+	</target>
+	
+	<target name="compile" depends="prepare">
+		<javac 	srcdir="${sourceDir}" destdir="${outputDir}"
+			fork="yes" executable="/opt/jdk1.6.0/bin/javac" 
+			deprecation="yes" 
+			source="1.6" target="1.6">
+			<classpath refid="project.classpath"/>
+			<include name="com/linkare/**/*.java"/>
+			<compilerarg value="-Xlint"/>
+		</javac>
+   	</target>
+
+	<target name="jarReCData" depends="compile">
+        	<mkdir dir="${distDir}"/>
+        	<jar destfile="${distDir}/ReCData.jar" basedir="${outputDir}">
+			<include name="com/linkare/rec/data/**/*.class"/>
+		</jar>
+    	</target>
+	<target name="jarReCMulticast" depends="compile">
+        	<mkdir dir="${distDir}"/>
+        	<jar destfile="${distDir}/ReCMulticastController.jar" basedir="${outputDir}">
+			<include name="com/linkare/rec/impl/**/*.class"/>
+			<include name="com/linkare/rec/acquisition/**/*.class"/>
+		</jar>
+    	</target>
+	<target name="jarReCClient" depends="compile">
+        	<mkdir dir="${distDir}"/>
+		<copy todir="${outputDir}/com/linkare/rec/impl/baseUI/resources/">
+			<fileset dir="${sourceDir}/com/linkare/rec/impl/baseUI/resources/"/>
+		</copy>
+		<copy todir="${outputDir}/com/linkare/rec/impl/exceptions/resources/">
+			<fileset dir="${sourceDir}/com/linkare/rec/impl/exceptions/resources/"/>
+		</copy>
+        	<jar destfile="${distDir}/ReCClient.jar" basedir="${outputDir}">
+			<include name="com/linkare/rec/impl/**/*.class"/>
+			<include name="com/linkare/rec/acquisition/**/*.class"/>
+			<include name="com/linkare/rec/impl/baseUI/resources/**/*.*"/>
+			<include name="com/linkare/rec/impl/exceptions/resources/**/*.*"/>
+		</jar>
+    	</target>
+
+	<target name="jar" depends="jarReCData, jarReCClient, jarReCMulticast"/>
+	
+	<target name="jarsigners" depends="jar">
+		<signjar  destDir="${distDir}"
+			  keystore="${sigFileLocation}" storepass="2n2l1s3" storetype="pkcs12"
+			  alias="ISTJavaSign">
+    			 <fileset dir="${distDir}" includes="*.jar" excludes="*_sig.jar"/>
+			 <globmapper from="*.jar" to="*_sig.jar"/>
+		</signjar>
+	</target>
+	
+	<target name="deploy" depends="jarsigners">
+		<copy todir="${recserver}">
+                        <fileset dir="${distDir}/recbase" includes="*_sig.jar"/>
+                </copy>		
+		<copy todir="${webserver}">
+                        <fileset dir="${distDir}/recbase" includes="*_sig.jar"/>
+                </copy>		
+	</target>
+
+	<target name="showcp" depends="init">
+		<!-- get the source compile classpath in a printable form -->
+		<pathconvert pathsep="${line.separator}|   |-- "
+             		property="echo.path.compile"
+             		refid="project.classpath">
+		</pathconvert>
+		<echo message="|-- compile classpath"/>
+		<echo message="|   |"/>
+		<echo message="|   |-- ${echo.path.compile}"/>
+	</target>
+</project>
