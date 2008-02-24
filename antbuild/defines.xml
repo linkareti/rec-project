@@ -1,0 +1,45 @@
+<project name="ReCDefines" default="init" basedir=".">
+        <target name="init">
+                <property name="sourceDir"       value="../src/"/>
+                <property name="outputDir"       value="/tmp/build/rec"/>
+                <property name="distDir"         value="../dist/jars" />
+                <property name="sigFileLocation" value="../cert/ISTJavaSign.KeyStore.p12"/>
+                <property name="webserver"       value="/var/www/html/rec"/>
+                <property name="recserver"       value="/home/elab/ReC7.0"/>
+                <path id="rec.classpath">
+                        <fileset dir="../lib">
+                                <include name="*.jar"/>
+                                <include name="${outputDir}/**/*.class"/>
+                        </fileset>
+                </path>
+		<path id="exps.classpath">
+                        <fileset dir="../lib">
+                                <include name="*.jar"/>
+                                <include name="${outputDir}/**/*.class"/>
+                        </fileset>
+                        <fileset dir="${distDir}">
+                                <include name="ReCClient.jar"/>
+                                <include name="ReCData.jar"/>
+                                <include name="ReCMulticast.jar"/>
+                        </fileset>
+                </path>
+        </target>
+        <target name="clean" depends="init">
+                <delete dir="${outputDir}" />
+        </target>
+
+        <target name="prepare" depends="clean">
+                <mkdir dir="${outputDir}" />
+        </target>
+
+	<target name="showcp" depends="init">
+                <!-- get the source compile classpath in a printable form -->
+                <pathconvert pathsep="${line.separator}|   |-- "
+                        property="echo.path.compile"
+                        refid="project.classpath">
+                </pathconvert>
+                <echo message="|-- compile classpath"/>
+                <echo message="|   |"/>
+                <echo message="|   |-- ${echo.path.compile}"/>
+        </target>
+</project>

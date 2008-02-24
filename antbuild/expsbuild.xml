@@ -1,30 +1,5 @@
-<project name="ReCExperiments" default="compile" basedir=".">
-<!--INIT DEFS-->
-	<target name="init">
-     		<property name="sourceDir"       value="../src"/>
-		<property name="outputDir"       value="/tmp/build/exps" />
-		<property name="distDir"         value="../dist/jars" />
-		<property name="sigFileLocation" value="../cert/ISTJavaSign.KeyStore.p12"/>
-                <property name="webserver"       value="/var/www/html/rec"/>
-                <property name="recserver"       value="/home/elab/ReC7.0"/>
-		<path id="project.classpath">
-			<fileset dir="../lib">
-				<include name="*.jar"/>
-				<include name="${outputDir}/**/*.class"/>
-			</fileset>
-			<fileset dir="${distDir}">
-				<include name="ReCClient.jar"/>
-				<include name="ReCData.jar"/>
-				<include name="ReCMulticast.jar"/>
-			</fileset>
-    		</path>
-	</target>
-	<target name="clean" depends="init">
-		<delete dir="${outputDir}" />
-	</target>
-	<target name="prepare" depends="clean">
-		<mkdir dir="${outputDir}" />
-	</target>
+<project name="ReCExperiments" default="compileExps" basedir=".">
+	<import file="defines.xml"/>
 <!--MACROS-->	
 	<macrodef name="compileExperiment">
 		<attribute name="expName"/>
@@ -35,9 +10,10 @@
                         	deprecation="yes" encoding="UTF-8">
                         	<classpath>
 					<path location="${distDir}/ElabBaseStampDriver.jar"/>
-                        		<path refid="project.classpath"/>
+                        		<path refid="exps.classpath"/>
 				</classpath>
-				<include name="**/@{expName}/**/*.java"/>	
+				<include name="**/@{expName}/**/*.java"/>
+				<compilerarg value="-Xlint"/>
                 	</javac>
 		</sequential>
 	</macrodef>
@@ -75,11 +51,11 @@
                 <attribute name="jarDriverName"/>
                 <attribute name="webserverDir"/>
 		<sequential>
-			<copy todir="${recserver}/@{recserverDir}">
-                        	<fileset file="${distDir}/@{jarDriverName}_sig.jar"/>
-                	</copy>
+			<copy todir="${recsserver}/@{recserverDir}">
+                                <fileset dir="${distDir}/@{jarDriverName}_sig.jar"/>
+	                </copy>
 			<copy todir="${webserver}/@{webserverDir}">
-                                <fileset file="${distDir}/@{jarClientName}_sig.jar"/>
+                                <fileset dir="${distDir}/@{jarClientName}_sig.jar"/>
                 	</copy>
 		</sequential>
 	</macrodef>
@@ -89,9 +65,10 @@
 		<javac 	srcdir="${sourceDir}/pt/utl/ist/elab/driver/serial/stamp/" destdir="${outputDir}"
 			source="1.6" target="1.6"
 			deprecation="yes" encoding="UTF-8">
-			<classpath refid="project.classpath"/>
+			<classpath refid="exps.classpath"/>
 			<include name="*.java"/>
 			<include name="transproc/**/*.java"/>
+			<compilerarg value="-Xlint"/>
 		</javac>
    	</target>
 
@@ -99,9 +76,10 @@
                 <javac  srcdir="${sourceDir}/pt/utl/ist/elab/driver/usb/cypress/" destdir="${outputDir}"
                         source="1.6" target="1.6"
                         deprecation="yes" encoding="UTF-8">
-                        <classpath refid="project.classpath"/>
+                        <classpath refid="exps.classpath"/>
                         <include name="*.java"/>
                         <include name="transproc/**/*.java"/>
+			<compilerarg value="-Xlint"/>
                 </javac>
         </target>
 
@@ -109,8 +87,9 @@
 		<javac 	srcdir="${sourceDir}/pt/utl/ist/elab/client" destdir="${outputDir}"
 			source="1.6" target="1.6"
 			deprecation="yes" encoding="UTF-8">
-			<classpath refid="project.classpath"/>
+			<classpath refid="exps.classpath"/>
 			<include name="FullClient.java"/>
+			<compilerarg value="-Xlint"/>
 		</javac>
    	</target>
 
@@ -118,7 +97,7 @@
 		<compileExperiment expName="conducaoCalor"/>
         </target>
 
-	<target name="compile" depends="compileCondCalor"/>
+	<target name="compileExps" depends="compileCondCalor,compileBaseUSB,compileElabFullClient"/>
 
 
 <!--JAR CREATION-->	
@@ -167,7 +146,7 @@
         </target>
 
 <!--All jars-->
-	<target name="jar" depends="jarCondCalor, jarElabFullClient, jarBaseUSB"/>
+	<target name="jarExps" depends="jarCondCalor, jarElabFullClient, jarBaseUSB"/>
 
 <!--Deploy -->
 	<target name="deployBaseStamp" depends="jarBaseStamp">
@@ -191,17 +170,5 @@
 	</target>
 
 <!--Full deploy-->
-	<target name="deploy" depends="deployBaseStamp, deployBaseUSB, deployElabFullClient, deployCondCalor"/>
-
-<!--UTILS-->
-	<target name="showcp" depends="init">
-		<!-- get the source compile classpath in a printable form -->
-		<pathconvert pathsep="${line.separator}|   |-- "
-             		property="echo.path.compile"
-             		refid="project.classpath">
-		</pathconvert>
-		<echo message="|-- compile classpath"/>
-		<echo message="|   |"/>
-		<echo message="|   |-- ${echo.path.compile}"/>
-	</target>
+	<target name="deployExps" depends="deployBaseStamp, deployBaseUSB, deployElabFullClient, deployCondCalor"/>
 </project>
