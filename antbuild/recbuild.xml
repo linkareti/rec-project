@@ -72,11 +72,11 @@
 	</target>
 	
 	<target name="deploy" depends="jarsigners">
-		<copy todir="${recserver}">
-                        <fileset dir="${distDir}/recbase" includes="*_sig.jar"/>
+		<copy todir="${recserver}/recbase">
+                        <fileset dir="${distDir}" includes="*_sig.jar"/>
                 </copy>		
-		<copy todir="${webserver}">
-                        <fileset dir="${distDir}/recbase" includes="*_sig.jar"/>
+		<copy todir="${webserver}/recbase">
+                        <fileset dir="${distDir}" includes="*_sig.jar"/>
                 </copy>		
 	</target>
 
