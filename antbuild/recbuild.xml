@@ -1,9 +1,9 @@
 <project name="ReCCore" default="jar" basedir=".">
 	<target name="init">
-     		<property name="sourceDir"       value="../../src/"/>
+     		<property name="sourceDir"       value="../src/"/>
 		<property name="outputDir"       value="/tmp/build/rec"/>
-		<property name="distDir"	 value="../../dist/jars" />
-		<property name="sigFileLocation" value="../../cert/ISTJavaSign.KeyStore.p12"/>
+		<property name="distDir"	 value="../dist/jars" />
+		<property name="sigFileLocation" value="../cert/ISTJavaSign.KeyStore.p12"/>
 		<property name="webserver"	 value="/var/www/html/rec"/>
 		<property name="recserver"	 value="/home/elab/ReC7.0"/>
 		<path id="project.classpath">
