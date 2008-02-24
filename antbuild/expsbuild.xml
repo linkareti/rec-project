@@ -1,12 +1,21 @@
 <project name="ReCExperiments" default="compile" basedir=".">
+<!--INIT DEFS-->
 	<target name="init">
-     		<property name="sourceDir" value="../../src/pt/utl/ist/elab/driver/serial/stamp/"/>
-		<property name="outputDir" value="/tmp/build/exps" />
-		<property name="distDir"   value="../../dist/jars" />
+     		<property name="sourceDir"       value="../src"/>
+		<property name="outputDir"       value="/tmp/build/exps" />
+		<property name="distDir"         value="../dist/jars" />
+		<property name="sigFileLocation" value="../cert/ISTJavaSign.KeyStore.p12"/>
+                <property name="webserver"       value="/var/www/html/rec"/>
+                <property name="recserver"       value="/home/elab/ReC7.0"/>
 		<path id="project.classpath">
-			<fileset dir="../../lib">
+			<fileset dir="../lib">
 				<include name="*.jar"/>
 				<include name="${outputDir}/**/*.class"/>
+			</fileset>
+			<fileset dir="${distDir}">
+				<include name="ReCClient.jar"/>
+				<include name="ReCData.jar"/>
+				<include name="ReCMulticast.jar"/>
 			</fileset>
     		</path>
 	</target>
@@ -16,38 +25,173 @@
 	<target name="prepare" depends="clean">
 		<mkdir dir="${outputDir}" />
 	</target>
-	
-	<target name="compileStamp" depends="prepare">
-		<javac 	srcdir="${sourceDir}" destdir="${outputDir}"
-			source="1.6" target="1.6">
+<!--MACROS-->	
+	<macrodef name="compileExperiment">
+		<attribute name="expName"/>
+		<sequential>
+			<echo>Compiling experiment: @{expName}</echo>
+			<javac  srcdir="${sourceDir}" destdir="${outputDir}"
+                        	source="1.6" target="1.6"
+                        	deprecation="yes" encoding="UTF-8">
+                        	<classpath>
+					<path location="${distDir}/ElabBaseStampDriver.jar"/>
+                        		<path refid="project.classpath"/>
+				</classpath>
+				<include name="**/@{expName}/**/*.java"/>	
+                	</javac>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="createExpJars">
+		<attribute name="expName"/>
+		<attribute name="jarClientName"/>
+		<attribute name="jarDriverName"/>
+		<attribute name="resourcesLoc"/>
+                <sequential>
+			<copy todir="${outputDir}/@{resourcesLoc}">
+                        	<fileset dir="${sourceDir}/@{resourcesLoc}"/>
+                	</copy>
+			<jar destfile="${distDir}/@{jarClientName}.jar" basedir="${outputDir}">
+				<include name="**/client/**/@{expName}/**/*.class"/>
+				<include name="@{resourcesLoc}/*.*"/>
+			</jar>
+			<jar destfile="${distDir}/@{jarDriverName}.jar" basedir="${outputDir}">
+				<include name="**/driver/**/@{expName}/**/*.class"/>
+			</jar>
+			<signjar  jar="${distDir}/@{jarClientName}.jar" signedjar="${distDir}/@{jarClientName}_sig.jar"
+				  keystore="${sigFileLocation}" storepass="2n2l1s3" storetype="pkcs12"
+				  alias="ISTJavaSign">
+                	</signjar>
+			<signjar  jar="${distDir}/@{jarDriverName}.jar" signedjar="${distDir}/@{jarDriverName}_sig.jar"
+				  keystore="${sigFileLocation}" storepass="2n2l1s3" storetype="pkcs12"
+				  alias="ISTJavaSign">
+                	</signjar>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="deployExp">
+		<attribute name="recserverDir"/>
+                <attribute name="jarClientName"/>
+                <attribute name="jarDriverName"/>
+                <attribute name="webserverDir"/>
+		<copy todir="${recsserver}/@{recserverDir}">
+                                <fileset dir="${distDir}/@{jarDriverName}_sig.jar"/>
+                </copy>
+		<copy todir="${webserver}/@{webserverDir}">
+                                <fileset dir="${distDir}/@{jarClientName}_sig.jar"/>
+                </copy>
+	</macrodef>
+<!--COMPILE-->
+
+	<target name="compileBaseStamp" depends="prepare">
+		<javac 	srcdir="${sourceDir}/pt/utl/ist/elab/driver/serial/stamp/" destdir="${outputDir}"
+			source="1.6" target="1.6"
+			deprecation="yes" encoding="UTF-8">
 			<classpath refid="project.classpath"/>
 			<include name="*.java"/>
 			<include name="transproc/**/*.java"/>
 		</javac>
    	</target>
-	<target name="compileCondCalor" depends="prepare,jarBaseStamp">
-                <javac  srcdir="${sourceDir}" destdir="${outputDir}"
-                        source="1.6" target="1.6">
-                        <classpath>
-				<path refid="project.classpath"/>
-				<path location="${distDir}/ElabBaseStampDriver.jar"/>
-			</classpath>
-                        <include name="conducaoCalor/**/*.java"/>
+
+	<target name="compileBaseUSB" depends="prepare">
+                <javac  srcdir="${sourceDir}/pt/utl/ist/elab/driver/usb/cypress/" destdir="${outputDir}"
+                        source="1.6" target="1.6"
+                        deprecation="yes" encoding="UTF-8">
+                        <classpath refid="project.classpath"/>
+                        <include name="*.java"/>
+                        <include name="transproc/**/*.java"/>
                 </javac>
         </target>
 
-	<target name="compile" depends="compileStamp"/>
+	<target name="compileElabFullClient" depends="prepare">
+		<javac 	srcdir="${sourceDir}/pt/utl/ist/elab/client" destdir="${outputDir}"
+			source="1.6" target="1.6"
+			deprecation="yes" encoding="UTF-8">
+			<classpath refid="project.classpath"/>
+			<include name="FullClient.java"/>
+		</javac>
+   	</target>
 
-	<target name="jarBaseStamp" depends="compileStamp">
+	<target name="compileCondCalor" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="conducaoCalor"/>
+        </target>
+
+	<target name="compile" depends="compileCondCalor"/>
+
+
+<!--JAR CREATION-->	
+	<target name="jarBaseStamp" depends="compileBaseStamp">
         	<mkdir dir="${distDir}"/>
         	<jar destfile="${distDir}/ElabBaseStampDriver.jar" basedir="${outputDir}">
 			<include name="**/stamp/*.class"/>
-                        <include name="**/transproc/**/*.class"/>
+                        <include name="**/stamp/transproc/**/*.class"/>
 		</jar>
+		<signjar  jar="${distDir}/ElabBaseStampDriver.jar" signedjar="${distDir}/ElabBaseStampDriver_sig.jar"
+                                  keystore="${sigFileLocation}" storepass="2n2l1s3" storetype="pkcs12"
+                                  alias="ISTJavaSign">
+                </signjar>
     	</target>
 
-	<target name="jar" depends="jarBaseStamp"/>
+	<target name="jarBaseUSB" depends="compileBaseUSB">
+        	<mkdir dir="${distDir}"/>
+        	<jar destfile="${distDir}/ElabBaseUSBDriver.jar" basedir="${outputDir}">
+			<include name="**/cypress/*.class"/>
+                        <include name="**/cypress/transproc/**/*.class"/>
+		</jar>
+		<signjar  jar="${distDir}/ElabBaseUSBDriver.jar" signedjar="${distDir}/ElabBaseUSBDriver_sig.jar"
+                                  keystore="${sigFileLocation}" storepass="2n2l1s3" storetype="pkcs12"
+                                  alias="ISTJavaSign">
+                </signjar>
+    	</target>
 
+	<target name="jarElabFullClient" depends="compileElabFullClient">
+        	<mkdir dir="${distDir}"/>
+		<copy todir="${outputDir}/pt/utl/ist/elab/resources/">
+                	<fileset dir="${sourceDir}/pt/utl/ist/elab/resources/"/>
+                </copy>
+        	<jar destfile="${distDir}/ElabFullClient.jar" basedir="${outputDir}">
+			<include name="pt/utl/ist/elab/client/FullClient*.*"/>
+		        <include name="pt/utl/ist/elab/resources/*.*"/>
+		</jar>
+		<signjar  jar="${distDir}/ElabFullClient.jar" signedjar="${distDir}/ElabFullClient_sig.jar"
+                                  keystore="${sigFileLocation}" storepass="2n2l1s3" storetype="pkcs12"
+                                  alias="ISTJavaSign">
+                </signjar>
+    	</target>
+
+<!--Experiments jars-->
+	<target name="jarCondCalor" depends="prepare, compileCondCalor">
+                <createExpJars expName="conducaoCalor" jarClientName="ElabTCustomizer" jarDriverName="ElabTStampDriver" resourcesLoc="pt/utl/ist/elab/client/serial/stamp/conducaoCalor/resources/"/>
+        </target>
+
+<!--All jars-->
+	<target name="jar" depends="jarCondCalor, jarElabFullClient, jarBaseUSB"/>
+
+<!--Deploy -->
+	<target name="deployBaseStamp" depends="jarBaseStamp">
+                <copy todir="${recserver}/recbase">
+                        <fileset dir="${distDir}" includes="ElabBaseStampDriver_sig.jar"/>
+                </copy>
+        </target>
+	<target name="deployBaseUSB" depends="jarBaseUSB">
+                <copy todir="${recserver}/recbase">
+                        <fileset dir="${distDir}" includes="ElabBaseUSBDriver_sig.jar"/>
+                </copy>
+        </target>
+	<target name="deployElabFullClient" depends="jarElabFullClient">
+                <copy todir="${webserver}/eLab">
+                        <fileset dir="${distDir}" includes="ElabFullClient_sig.jar"/>
+                </copy>
+        </target>
+
+	<target name="deployCondCalor" depends="jarCondCalor">
+		<deployExp recserverDir="driver/eLab/T" webserverDir="eLab/t" jarDriverName="ElabTStampDriver" jarClientName="ElabTCustomizer"/>
+	</target>
+
+<!--Full deploy-->
+	<target name="deploy" depends="deployBaseStamp, deployBaseUSB, deployElabFullClient", "deployCondCalor"/>
+
+<!--UTILS-->
 	<target name="showcp" depends="init">
 		<!-- get the source compile classpath in a printable form -->
 		<pathconvert pathsep="${line.separator}|   |-- "
