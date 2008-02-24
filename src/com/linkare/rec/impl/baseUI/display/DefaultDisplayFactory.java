@@ -14,6 +14,7 @@ package com.linkare.rec.impl.baseUI.display;
 import com.linkare.rec.impl.baseUI.config.Display;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import java.util.Vector;
 import java.util.logging.*;
 import com.linkare.rec.impl.logging.*;
 
@@ -43,7 +44,7 @@ public class DefaultDisplayFactory extends AbstractDisplayFactory
     public com.linkare.rec.impl.client.experiment.ExpDataDisplay[] getDisplays()
     {
         Display[] displays = getInitDisplays();
-        java.util.Vector tempDisplays = new java.util.Vector(displays.length);
+        Vector<ExpDataDisplayTreeIconAndName> tempDisplays = new Vector<ExpDataDisplayTreeIconAndName>(displays.length);
         
         for(int i=0; i<displays.length; i++)
         {

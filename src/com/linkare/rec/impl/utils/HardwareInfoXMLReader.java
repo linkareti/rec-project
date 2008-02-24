@@ -440,7 +440,7 @@ public class HardwareInfoXMLReader
 							String file=attrfile.getValue();
 							
 							if(!file.startsWith("file:"))
-							    file=(new java.io.File(file)).toURL().toExternalForm();
+							    file=(new java.io.File(file)).toURI().toURL().toExternalForm();
 							
 							if(mime!=null)
 							{

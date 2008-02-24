@@ -1,7 +1,7 @@
 /*
  * FrequencyControl.java
  *
- * Created on 27 de Março de 2003, 16:39
+ * Created on 27 de Marco de 2003, 16:39
  */
 
 package audio.media.protocol.sinewavegenerator;

@@ -2,6 +2,7 @@ package com.linkare.rec.data;
 
 public final class Multiplier implements org.omg.CORBA.portable.IDLEntity
 {
+    
 	//
 	// Internal member value
 	//

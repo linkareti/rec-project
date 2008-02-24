@@ -217,17 +217,14 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
             return;
         }
         
-        Arrays.sort(newUsersList,new Comparator()
+        Arrays.sort(newUsersList,new Comparator<UserInfo>()
         {
-            public int compare(Object o1,Object o2)
+            public int compare(UserInfo u1, UserInfo u2)
             {
-                if(o1==null && o2==null) return 0;
+                if(u1==null && u2==null) return 0;
                 
-                if(o1==null || !(o1 instanceof UserInfo)) return -1;
-                if(o2==null || !(o2 instanceof UserInfo)) return +1;
-                
-                UserInfo u1=(UserInfo)o1;
-                UserInfo u2=(UserInfo)o2;
+                if(u1==null) return -1;
+                if(u2==null) return +1;
                 
                 if(u1.getUserName()==null && u2.getUserName()==null) return 0;
                 if(u1.getUserName()==null || u1.getUserName().equals(IChatServer.EVERYONE_USER_ALIAS)) return -1;

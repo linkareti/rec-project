@@ -18,7 +18,7 @@ import com.linkare.rec.data.metadata.*;
 public class DefaultHistogramDatasetProxy extends org.jfree.data.xy.AbstractIntervalXYDataset implements com.linkare.rec.impl.client.experiment.ExpDataModelListener
 {
     
-    private Vector oCountHits=null;
+    private Vector<Long> oCountHits=null;
     
     /** Creates a new instance of DefaultXYDatasetProxy */
     public DefaultHistogramDatasetProxy()
@@ -84,7 +84,7 @@ public class DefaultHistogramDatasetProxy extends org.jfree.data.xy.AbstractInte
         
         deltaX=6.*stDev/(double)nClasses;
         
-        oCountHits=new Vector(nClasses);
+        oCountHits=new Vector<Long>(nClasses);
         for(int i=0;i<nClasses;i++)
         {
             oCountHits.add(i,new Long(0));//iniciar contagens a zero...

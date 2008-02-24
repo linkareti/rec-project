@@ -6,7 +6,7 @@ package pt.utl.ist.elab.driver.serial.stamp;
  *    Added suport to Basic Atom. Now we can control RTS, DTR and echo
  */
 
-import javax.comm.*;
+import gnu.io.*;
 import com.linkare.rec.impl.driver.*;
 import com.linkare.rec.impl.threading.*;
 import com.linkare.rec.impl.utils.EventQueue;
@@ -17,7 +17,6 @@ import com.linkare.rec.data.metadata.*;
 import com.linkare.rec.impl.logging.*;
 import java.util.logging.*;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.*;
 
 
 public abstract class AbstractStampDriver extends BaseDriver implements StampFinderListener, StampCommandListener

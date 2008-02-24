@@ -17,6 +17,7 @@ import java.util.*;
  */
 public class PropertyObjectTableCellEditor extends AbstractCellEditor implements TableCellEditor
 {
+    static final long serialVersionUID = 3067172209892390454L;
     private PropertyObject value=null;
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
     {
@@ -209,7 +210,6 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
     /************************************************************/
     public class PropertyCustomEditorButton extends JButton
     {
-	
 	/** Creates a new instance of IndexedPropertyCustomEditorButton */
 	public PropertyCustomEditorButton()
 	{

@@ -153,7 +153,7 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
     private void jButtonOpenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOpenActionPerformed
     {//GEN-HEADEREND:event_jButtonOpenActionPerformed
         jDialog1.pack();
-        jDialog1.show();
+        jDialog1.setVisible(true);
     }//GEN-LAST:event_jButtonOpenActionPerformed
     
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOKActionPerformed
@@ -174,7 +174,7 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
         
         
         getContentPane().add(customizer.getCustomizerComponent(), java.awt.BorderLayout.CENTER);
-        jDialog1.hide();
+        jDialog1.setVisible(true);
         pack();
         
         JOptionPane.showMessageDialog(this, "To serialize just press the OK button of the customizer...", "How to...", JOptionPane.INFORMATION_MESSAGE);
@@ -191,7 +191,7 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
      */
     public static void main(String args[])
     {
-        new DefaultConfigBuilder().show();
+        new DefaultConfigBuilder().setVisible(true);
     }
     
     public void canceled()

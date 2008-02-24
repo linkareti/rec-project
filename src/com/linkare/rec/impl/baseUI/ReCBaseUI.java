@@ -29,6 +29,8 @@ import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.protocols.ReCProtocols;
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JInternalFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.ImageIcon;
@@ -75,7 +77,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
     private java.util.Timer timerLock = new java.util.Timer();
     
     //Stores the already added Offline Apparatus Displays
-    private java.util.ArrayList offlineApparatusDisplaysList = null;
+    private java.util.ArrayList<JInternalFrame> offlineApparatusDisplaysList = null;
     
     private Object synch = new Object();
     
@@ -111,7 +113,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         if(recBaseUI.getDesktopLocationBundleKey() != null)
             mDIDesktopPane.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault(recBaseUI.getDesktopLocationBundleKey(), new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/about_box.png"))).getImage(), true);
         setIconImage(ReCResourceBundle.findImageIconOrDefault(recBaseUI.getIconLocationBundleKey(), new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/ReCIconHand16.gif"))).getImage());
-        reCSplash.show();
+        reCSplash.setVisible(true);
         reCSplash.requestFocus();
         
         reCSplash.setStatusMessage(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.init.commPlat", "Initializing Communication Platform..."));
@@ -188,10 +190,10 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
     
     
     
-    public void show()
+    public void setVisible(boolean visible)
     {
-        super.show();
-        
+        super.setVisible(visible);
+        if(visible){
         if(!recBaseUI.isAutoConnectLab())
         {
             try
@@ -210,6 +212,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         {
             loginFrame.setVisible(true, recBaseUI.isEnableLoginPassword());
         }
+	}
     }
     
     /** This method is called from within the constructor to
@@ -819,7 +822,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
             if(currentLab != null)
                 currentLab.setEnabled(true);
             if(waitDialog != null)
-                waitDialog.hide();
+                waitDialog.setVisible(false);
             if(currentLab.getDesktopLocationBundleKey() != null)
                 mDIDesktopPane.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault(currentLab.getDesktopLocationBundleKey(), new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(), false);
         }
@@ -919,7 +922,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
     {//GEN-HEADEREND:event_apparatusClientBeanApparatusUnreachable
         statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.unreachable", "Unreachable..."));
         if(waitDialog != null)
-            waitDialog.hide();
+            waitDialog.setVisible(false);
     }//GEN-LAST:event_apparatusClientBeanApparatusUnreachable
     
     private void apparatusClientBeanApparatusStateUnknow(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)//GEN-FIRST:event_apparatusClientBeanApparatusStateUnknow
@@ -928,7 +931,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         controllerPanel.setEnablePlay(false);
         controllerPanel.setEnableStop(false);
         if(waitDialog != null)
-            waitDialog.hide();
+            waitDialog.setVisible(false);
     }//GEN-LAST:event_apparatusClientBeanApparatusStateUnknow
     
     private void apparatusClientBeanApparatusStateStoping(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)//GEN-FIRST:event_apparatusClientBeanApparatusStateStoping
@@ -1013,7 +1016,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         controllerPanel.setEnablePlay(false);
         controllerPanel.setEnableStop(false);
         if(waitDialog != null)
-            waitDialog.hide();
+            waitDialog.setVisible(false);
     }//GEN-LAST:event_apparatusClientBeanApparatusNotRegistered
     
     private void apparatusClientBeanApparatusNotOwner(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)//GEN-FIRST:event_apparatusClientBeanApparatusNotOwner
@@ -1039,7 +1042,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         controllerPanel.setEnablePlay(false);
         controllerPanel.setEnableStop(false);
         if(waitDialog != null)
-            waitDialog.hide();
+            waitDialog.setVisible(false);
     }//GEN-LAST:event_apparatusClientBeanApparatusMaxUsers
     
     private void apparatusClientBeanApparatusLocked(com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent evt)//GEN-FIRST:event_apparatusClientBeanApparatusLocked
@@ -1165,7 +1168,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
             if(currentCustomizer!=null)
             {
                 if(waitDialog != null)
-                    waitDialog.hide();
+                    waitDialog.setVisible(false);
                 controllerPanel.setEnableCustomize(true);
                 if(!showedMessageConfig)
                 {
@@ -1229,7 +1232,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         
         
         if(offlineApparatusDisplaysList == null)
-            offlineApparatusDisplaysList = new java.util.ArrayList();
+            offlineApparatusDisplaysList = new ArrayList<JInternalFrame>();
         
         OfflineInternalFrame offInternalFrame = null;
         
@@ -1369,7 +1372,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         }.start();
         
         waitDialog = new WaitDialog(this, true, ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.loadingCustomizer", "Loading customizer..."), ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.customize", new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/Preferences16.gif"))));
-        waitDialog.show();                        
+        waitDialog.setVisible(true);                        
     }//GEN-LAST:event_laboratoryTreeApparatusSelectionChange
     
     private void laboratoryTreeLabSelectionChange(com.linkare.rec.impl.baseUI.labsTree.LabSelectionEvent evt)//GEN-FIRST:event_laboratoryTreeLabSelectionChange
@@ -1395,7 +1398,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
     private void exitForm(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_exitForm
         shuttingDown = true;
         
-        hide();
+        setVisible(false);
         
         apparatusClientBean.disconnect();
         labClientBean.disconnect();
@@ -1420,7 +1423,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
      */
     public static void main(String args[])
     {
-        new ReCBaseUI().show();
+        new ReCBaseUI().setVisible(true);
     }
     
     /**
@@ -1956,7 +1959,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         if(factory != null)
         {
             //I will only give the selected displays :)
-            java.util.Vector selectedDisplays = new java.util.Vector();
+            Vector<Display> selectedDisplays = new Vector<Display>();
             Display[] availableDisplays = expHistory.getApparatusConfig().getDisplay();
             for(int i=0; i<availableDisplays.length; i++)
             {
@@ -2222,7 +2225,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
             finishedDisconnection = true;
             
             if(waitDialog != null)
-                waitDialog.hide();
+                waitDialog.setVisible(false);
             
             if(recBaseUI.getDesktopLocationBundleKey() != null)
                 mDIDesktopPane.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault(recBaseUI.getDesktopLocationBundleKey(), new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(), true);
@@ -2240,7 +2243,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
             
             waitDialog = new WaitDialog(this, false, ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.connectingToLab", "Connecting to lab"), ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.icon.connect", new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/earth16.gif"))));
             //waitDialog.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault("ReCBaseUI$rec.bui.image.waitConnectLab", new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/connectlab.jpg"))).getImage(), true);
-            waitDialog.show();
+            waitDialog.setVisible(true  );
             
             labClientBean.getUserInfo().setUserName(loginFrame.getUsername());
             labClientBean.getUserInfo().setPassword(loginFrame.getPassword());

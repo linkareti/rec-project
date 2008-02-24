@@ -166,7 +166,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	    if (hardwares == null)
 		return;
 
-	    Vector apparatusListTemp = new Vector(hardwares == null ? 0 : hardwares.length);
+	    Vector<Apparatus> apparatusListTemp = new Vector<Apparatus>(hardwares == null ? 0 : hardwares.length);
 
 	    if (hardwares != null) {
 		for (int i = 0; i < hardwares.length; i++) {
@@ -227,7 +227,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 	    fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_DISCONNECTED);
 
-	    apparatusList = new Vector();
+	    apparatusList = new Vector<Apparatus>();
 	    connectedBefore = false;
 	}
     }
@@ -480,7 +480,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	}
     }
 
-    private Vector usersList = new Vector();
+    private Vector<UserInfo> usersList = new Vector<UserInfo>();
 
     /** Holds value of property usersListRefreshPeriod. */
     private long usersListRefreshPeriod = 20000;

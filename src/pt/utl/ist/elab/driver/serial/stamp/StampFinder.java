@@ -11,10 +11,9 @@
 
 package pt.utl.ist.elab.driver.serial.stamp;
 
-import javax.comm.*;
+import gnu.io.*;
 import com.linkare.rec.impl.logging.*;
 import java.util.logging.*;
-import java.io.*;
 import java.util.*;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
 /**
@@ -239,7 +238,7 @@ public class StampFinder
     
     public void startSearch()
     {
-        Enumeration commPortIdentifiers=javax.comm.CommPortIdentifier.getPortIdentifiers();
+        Enumeration commPortIdentifiers=gnu.io.CommPortIdentifier.getPortIdentifiers();
         
         LinkedList tempPorts=new LinkedList();
         
@@ -399,7 +398,7 @@ public class StampFinder
                 //currentPortOpen.addEventListener(stampFinderRunnerEventListener);
                 //currentPortOpen.notifyOnDataAvailable(true);
                 
-            }catch(javax.comm.PortInUseException e)
+            }catch(gnu.io.PortInUseException e)
             {
                 LoggerUtil.logThrowable("Serial port "+cpi.getName()+" is currently in use...",e,Logger.getLogger(STAMP_FINDER_LOGGER));
                 currentPort++;
@@ -458,7 +457,7 @@ public class StampFinder
         private class StampFinderRunnerPortListener implements StampCommandListener
         {
             
-                        /*public synchronized void serialEvent(javax.comm.SerialPortEvent serialPortEvent)
+                        /*public synchronized void serialEvent(gnu.io.SerialPortEvent serialPortEvent)
                         {
                             Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Received port event "+currentPortOpen.getName()+" whith type="+serialPortEvent.getEventType()+"  - DataAvailableEventType="+SerialPortEvent.DATA_AVAILABLE);
                          

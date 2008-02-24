@@ -6,15 +6,13 @@
 
 package com.linkare.customizer;
 
-import java.beans.*;
-
 /**
  *
  * @author  jp
  */
 public class PropertyObjectTableModel extends javax.swing.table.DefaultTableModel
 {
-    
+    static final long serialVersionUID = -8067094998233082207L;   
     /** Creates a new instance of IndexedPropertyObjectTableModel */
     public PropertyObjectTableModel()
     {

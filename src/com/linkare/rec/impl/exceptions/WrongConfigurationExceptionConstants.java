@@ -13,7 +13,6 @@ public class WrongConfigurationExceptionConstants
 	public static final int SCALE_INVALID=3;
 	public static final String SCALE_INVALID_MSG="The selected scale is not any of the allowed scales!";
 	
-	private static final java.util.ResourceBundle wrongConfigurationExceptionRB = java.util.ResourceBundle.getBundle("com/linkare/rec/impl/exceptions/resources/WrongConfigurationException");
 
 	public static String getTranslatedMessage(WrongConfigurationException e)
 	{

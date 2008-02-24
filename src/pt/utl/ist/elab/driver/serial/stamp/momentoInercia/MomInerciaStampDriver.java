@@ -6,7 +6,7 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.momentoInercia;
 
-import javax.comm.*;
+import gnu.io.*;
 import com.linkare.rec.impl.driver.*;
 import com.linkare.rec.impl.threading.*;
 import com.linkare.rec.impl.utils.EventQueue;

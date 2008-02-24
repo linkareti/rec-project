@@ -89,7 +89,7 @@ public class ElabSecurityManager implements ISecurityManager
             {
                 GregorianCalendar cal = new GregorianCalendar();
                 fw = new FileWriter(logins, true);
-                fw.write(userName + " started: " + (String)resource.getProperties().get(resource.PROPKEY_MCHARDWARE_ID) + " in: " + cal.get(cal.DAY_OF_MONTH) + "/" +
+                fw.write(userName + " started: " + (String)resource.getProperties().get(resource.getResourceType().PROPKEY_MCHARDWARE_ID) + " in: " + cal.get(cal.DAY_OF_MONTH) + "/" +
                 (cal.get(cal.MONTH) + 1) + "/" + cal.get(cal.YEAR) + " at " +
                 cal.get(cal.HOUR_OF_DAY) + ":" + cal.get(cal.MINUTE) + LS
                 );

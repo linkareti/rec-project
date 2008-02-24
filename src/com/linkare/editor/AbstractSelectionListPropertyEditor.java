@@ -25,7 +25,7 @@ public abstract class AbstractSelectionListPropertyEditor extends PropertyEditor
 	super();
     }
     
-    private Vector tagsInitStringsValueList=new Vector();
+    private Vector<Object> tagsInitStringsValueList=new Vector<Object>();
     
     public void addTableValue(Object value,String tag,String initString)
     {
@@ -49,7 +49,7 @@ public abstract class AbstractSelectionListPropertyEditor extends PropertyEditor
 	    tagsInitStringsValueList.clear();
 	    return;
 	}
-	tagsInitStringsValueList=new Vector(valueList.length);
+	tagsInitStringsValueList=new Vector<Object>(valueList.length);
 	for(int i=0;i<valueList.length;i++)
 	{
 	    tagsInitStringsValueList.set(i,(Object)(new Object[]{tags[i],initStrings[i],valueList[i]}));

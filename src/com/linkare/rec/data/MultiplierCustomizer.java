@@ -6,7 +6,6 @@
 
 package com.linkare.rec.data;
 
-import javax.swing.JOptionPane;
 /**
  *
  * @author  Administrator

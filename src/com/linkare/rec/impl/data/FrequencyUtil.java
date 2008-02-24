@@ -8,7 +8,6 @@ package com.linkare.rec.impl.data;
 
 import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.data.synch.FrequencyDefType;
-import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.metadata.SamplesNumScale;
 import com.linkare.rec.data.metadata.FrequencyScale;

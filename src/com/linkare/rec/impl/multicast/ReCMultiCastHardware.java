@@ -40,6 +40,7 @@ import com.linkare.rec.impl.multicast.security.DefaultResource;
 import com.linkare.rec.impl.multicast.security.DefaultUser;
 import com.linkare.rec.impl.multicast.security.IOperation;
 import com.linkare.rec.impl.multicast.security.IResource;
+import com.linkare.rec.impl.multicast.security.ResourceType;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.ConditionChecker;
@@ -479,7 +480,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations
             proxyHardwareInfo=this.hardware.getHardwareInfo();
             proxyHardwareUniqueId=proxyHardwareInfo.getHardwareUniqueID();
             
-            getResource().getProperties().put(IResource.PROPKEY_MCHARDWARE_ID, proxyHardwareUniqueId);
+            getResource().getProperties().put(ResourceType.MCHARDWARE.getPropertyKey(), proxyHardwareUniqueId);
             
             dataClient.hardwareStateChange(this.hardware.getHardwareState());
             log(Level.INFO,"Hardware State is now " + proxyHardwareState);

@@ -6,7 +6,7 @@
 
 package pt.utl.ist.elab.driver.serial.stamp;
 
-import javax.comm.SerialPort;
+import gnu.io.SerialPort;
 /**
  *
  * @author  jp

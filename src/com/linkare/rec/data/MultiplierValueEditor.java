@@ -6,7 +6,6 @@
 
 package com.linkare.rec.data;
 
-import java.beans.*;
 import com.linkare.rec.data.*;
 import com.linkare.editor.AbstractSelectionListPropertyEditor;
 /**

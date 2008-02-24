@@ -8,18 +8,18 @@ package pt.utl.ist.elab.driver.webrobot.serial;
 
 /**
  *
- * @author  Andr�
+ * @author  Andre
  */
 
 import pt.utl.ist.elab.driver.webrobot.utils.*;
 import pt.utl.ist.elab.driver.webrobot.debug.*;
 import pt.utl.ist.elab.driver.webrobot.*;
 
-public class SerialComm implements javax.comm.SerialPortEventListener
+public class SerialComm implements gnu.io.SerialPortEventListener
 {
     
-    private static javax.comm.CommPortIdentifier commPortIdentifier;
-    public static javax.comm.SerialPort serialPort;
+    private static gnu.io.CommPortIdentifier commPortIdentifier;
+    public static gnu.io.SerialPort serialPort;
     private static java.io.InputStream inputStream;
     private static java.io.OutputStream outputStream;
     private static String comName="/dev/ttyS1";
@@ -27,10 +27,10 @@ public class SerialComm implements javax.comm.SerialPortEventListener
     private static String appName="Elab-WebRobot";    
     private static String encoding="Cp437";
     private static int baud=9600;
-    private static int databits=javax.comm.SerialPort.DATABITS_8;
-    private static int flowcontrol=javax.comm.SerialPort.FLOWCONTROL_NONE;
-    private static int parity=javax.comm.SerialPort.PARITY_NONE;
-    private static int stopbits=javax.comm.SerialPort.STOPBITS_1;
+    private static int databits=gnu.io.SerialPort.DATABITS_8;
+    private static int flowcontrol=gnu.io.SerialPort.FLOWCONTROL_NONE;
+    private static int parity=gnu.io.SerialPort.PARITY_NONE;
+    private static int stopbits=gnu.io.SerialPort.STOPBITS_1;
     
     /**The robot sends its sensors states in two packets... :(
      */
@@ -126,9 +126,9 @@ public class SerialComm implements javax.comm.SerialPortEventListener
     {
         try
         {
-            commPortIdentifier=javax.comm.CommPortIdentifier.getPortIdentifier(comName);
+            commPortIdentifier=gnu.io.CommPortIdentifier.getPortIdentifier(comName);
         }
-        catch(javax.comm.NoSuchPortException nspe)
+        catch(gnu.io.NoSuchPortException nspe)
         {
             System.out.println("A porta:"+comName+" n�o foi encontrada\n"+nspe);
             return;
@@ -136,9 +136,9 @@ public class SerialComm implements javax.comm.SerialPortEventListener
         
         try
         {
-            serialPort=(javax.comm.SerialPort)commPortIdentifier.open(appName,2000);            
+            serialPort=(gnu.io.SerialPort)commPortIdentifier.open(appName,2000);            
         }
-        catch(javax.comm.PortInUseException piue)
+        catch(gnu.io.PortInUseException piue)
         {
             System.out.println("Esta porta est� a ser usada por outra aplica��o\n"+piue);
             return;
@@ -148,16 +148,16 @@ public class SerialComm implements javax.comm.SerialPortEventListener
 	{
             serialPort.setSerialPortParams(baud, databits,stopbits,parity);
         }
-	catch(javax.comm.UnsupportedCommOperationException ucoe)
+	catch(gnu.io.UnsupportedCommOperationException ucoe)
         {
             System.out.println("N�o consegui abrir a porta com os parametros selecionados!\n"+ucoe+"\nA porta ser� fechada");
             System.out.println("baud="+baud);
             System.out.println("databits="+databits);
-            System.out.println("databits_default="+javax.comm.SerialPort.DATABITS_8);
+            System.out.println("databits_default="+gnu.io.SerialPort.DATABITS_8);
             System.out.println("stopbits="+stopbits);
-            System.out.println("stopbits_default="+javax.comm.SerialPort.STOPBITS_1);
+            System.out.println("stopbits_default="+gnu.io.SerialPort.STOPBITS_1);
             System.out.println("parity="+parity);
-            System.out.println("parity_none="+javax.comm.SerialPort.PARITY_NONE);
+            System.out.println("parity_none="+gnu.io.SerialPort.PARITY_NONE);
             serialPort.close();
             return;
         }
@@ -166,7 +166,7 @@ public class SerialComm implements javax.comm.SerialPortEventListener
         {
             serialPort.setFlowControlMode(flowcontrol);
         }
-        catch(javax.comm.UnsupportedCommOperationException ucoe)
+        catch(gnu.io.UnsupportedCommOperationException ucoe)
         {
             System.out.println("O flow control escolhido n�o � suportado...\n"+ucoe+"\nA porta ser� fechada");
             serialPort.close();
@@ -244,11 +244,11 @@ public class SerialComm implements javax.comm.SerialPortEventListener
     /**WINDOWS VERSION ONLY WORKS WITH THIS METHOD!!*/
     int firstNBytes=0;
    
-    /*public synchronized void serialEvent(javax.comm.SerialPortEvent serialPortEvent) 
+    /*public synchronized void serialEvent(gnu.io.SerialPortEvent serialPortEvent) 
     {        
         try
         {
-        if(serialPortEvent.getEventType()==javax.comm.SerialPortEvent.DATA_AVAILABLE)
+        if(serialPortEvent.getEventType()==gnu.io.SerialPortEvent.DATA_AVAILABLE)
 	{
             if(serialPort.isRTS())
             {
@@ -321,11 +321,11 @@ public class SerialComm implements javax.comm.SerialPortEventListener
     private int readByte=0;                
     private int nBytes=0;
                     
-    public synchronized void serialEvent(javax.comm.SerialPortEvent serialPortEvent) 
+    public synchronized void serialEvent(gnu.io.SerialPortEvent serialPortEvent) 
     {        
         try
         {
-            if(serialPortEvent.getEventType()==javax.comm.SerialPortEvent.DATA_AVAILABLE)
+            if(serialPortEvent.getEventType()==gnu.io.SerialPortEvent.DATA_AVAILABLE)
             {
                 if(serialPort.isRTS())
                 {

@@ -12,7 +12,6 @@ package com.linkare.rec.data;
 
 
 
-import java.beans.*;
 import com.linkare.editor.*;
 
 

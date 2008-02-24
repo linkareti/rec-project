@@ -13,6 +13,7 @@ import java.util.HashMap;
  */
 public class StampCommand implements java.io.Serializable
 {
+        static final long serialVersionUID = -2953294044465039790L;
 	private String commandIdentifier=null;
 	private String command=null;
 	private HashMap commandDataMap=null;

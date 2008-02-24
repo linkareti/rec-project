@@ -10,13 +10,12 @@
 
 package pt.utl.ist.elab.driver.serial.stamp;
 
-import javax.comm.*;
+import gnu.io.*;
 import java.io.*;
-import java.util.*;
 import java.util.logging.*;
 import com.linkare.rec.impl.logging.*;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import com.linkare.rec.impl.utils.*;
+
 /**
  *
  * @author  jp
@@ -40,7 +39,6 @@ public class BaseStampIO
     //private BufferedReader inReader=null;
     private Reader inReader=null;
     private OutputStream outStream=null;
-    private boolean exit=false;
     
     /** Utility field used by event firing mechanism. */
     private StampCommandListener listener =  null;
@@ -62,8 +60,7 @@ public class BaseStampIO
 		if(currentSerialPortReader!=null) 
 		    currentSerialPortReader.exitNow();
 		portName=sPort.getName();
-		sPort.close();
-		exit=false;
+		sPort.close();	
 		CommPortIdentifier cpi=CommPortIdentifier.getPortIdentifier(portName);
 		this.sPort=(SerialPort)cpi.open(applicationNameLockPort,100);
 		this.sPort.setSerialPortParams(portBaudRate,portDataBits,portStopBits,portParity);
@@ -92,13 +89,13 @@ public class BaseStampIO
 		if(sPort.getBaudRate()>=9600)
 		{
 		    try
-		    { Thread.currentThread().sleep(50);}catch(Exception e)
+		    { Thread.sleep(50);}catch(Exception e)
 		    {}
 		    for(int i=0; i<message.length; i++)
 		    {
 			outStream.write(message,i,1);outStream.flush();
 			try
-			{ Thread.currentThread().sleep(50);}catch(Exception e)
+			{ Thread.sleep(50);}catch(Exception e)
 			{}
 		    }
 		}
@@ -106,7 +103,7 @@ public class BaseStampIO
 		{
 		    
 		    try
-		    { Thread.currentThread().sleep(50);}catch(Exception e)
+		    { Thread.sleep(50);}catch(Exception e)
 		    {}
 		    outStream.write(message);outStream.flush();
 		}
@@ -139,7 +136,7 @@ public class BaseStampIO
 	    
 	    while(!exit)
 	    {
-		Thread.currentThread().yield();
+		Thread.yield();
 		
 		try
 		{
@@ -271,7 +268,6 @@ public class BaseStampIO
     {        
         Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Shutting down port...");
 	//sPort.removeEventListener();
-	exit=true;
 	if(currentSerialPortReader!=null)
 	    currentSerialPortReader.exitNow();
 	

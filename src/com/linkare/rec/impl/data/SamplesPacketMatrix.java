@@ -56,7 +56,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource,Serializable
     
     
     
-    private transient ArrayList samples=null;
+    private transient ArrayList<SamplesPacket> samples=null;
     
     
     
@@ -80,7 +80,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource,Serializable
     
     {
 	
-	samples=new ArrayList(1000);
+	samples=new ArrayList<SamplesPacket>(1000);
 	
 	try
 	
@@ -106,7 +106,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource,Serializable
     
     {
 	
-	samples=new ArrayList(samples_packets.length);
+	samples=new ArrayList<SamplesPacket>(samples_packets.length);
 	
 	addSamplesPackets(samples_packets);
 	
@@ -615,14 +615,14 @@ public class SamplesPacketMatrix implements SamplesPacketSource,Serializable
                     if(f.exists())
                     {
                         ObjectInputStream ois=new ObjectInputStream(new FileInputStream(f));
-                        samples=(ArrayList)ois.readObject();
+                        samples=(ArrayList<SamplesPacket>)ois.readObject();
                         ois.close();
                     }
                     else
                         System.out.println("The file " + f + " doesn't exist...");
 		}
 		else
-		    samples=(ArrayList)read;
+		    samples=(ArrayList<SamplesPacket>)read;
 	    }
 	}
 	catch(Exception e)

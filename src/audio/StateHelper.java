@@ -1,7 +1,7 @@
 /*
  * StateHelper.java
  *
- * Created on 26 de Março de 2003, 17:13
+ * Created on 26 de Marco de 2003, 17:13
  */
 
 package audio;

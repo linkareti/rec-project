@@ -11,7 +11,7 @@ public class MultiplierBeanInfo extends SimpleBeanInfo
 
 
 
-    // Bean descriptor //GEN-FIRST:BeanDescriptor
+    // Bean descriptor//GEN-FIRST:BeanDescriptor
     private static BeanDescriptor beanDescriptor = new BeanDescriptor  ( Multiplier.class , com.linkare.customizer.DefaultPropertySheetCustomizer.class );
 
     private static BeanDescriptor getBdescriptor(){
@@ -27,7 +27,7 @@ public class MultiplierBeanInfo extends SimpleBeanInfo
 }//GEN-LAST:BeanDescriptor
 
 
-    // Property identifiers //GEN-FIRST:Properties
+    // Property identifiers//GEN-FIRST:Properties
     private static final int PROPERTY_expValue = 0;
     private static final int PROPERTY_value = 1;
 
@@ -65,9 +65,9 @@ public class MultiplierBeanInfo extends SimpleBeanInfo
 
 	// Here you can add code for customizing the event sets array.
 
-  //GEN-LAST:Events
+//GEN-LAST:Events
 
-    // Method identifiers //GEN-FIRST:Methods
+    // Method identifiers//GEN-FIRST:Methods
     private static final int METHOD_equals0 = 0;
     private static final int METHOD_toExpString1 = 1;
     private static final int METHOD_toString2 = 2;
@@ -99,11 +99,11 @@ public class MultiplierBeanInfo extends SimpleBeanInfo
     private static final int defaultEventIndex = -1;//GEN-END:Idx
 
 
- //GEN-FIRST:Superclass
+//GEN-FIRST:Superclass
 
 	// Here you can add code for customizing the Superclass BeanInfo.
 
- //GEN-LAST:Superclass
+//GEN-LAST:Superclass
 
 	/**
 	 * Gets the bean's <code>BeanDescriptor</code>s.

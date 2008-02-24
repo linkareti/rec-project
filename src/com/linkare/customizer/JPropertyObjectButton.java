@@ -16,6 +16,7 @@ import javax.swing.border.*;
  */
 public class JPropertyObjectButton extends JButton
 {
+    static final long serialVersionUID = 6053878914227672535L;
     PropertyObject value=null;
     
     private boolean isSelected=false;

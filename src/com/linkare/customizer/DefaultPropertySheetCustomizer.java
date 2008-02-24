@@ -90,7 +90,7 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
                 Object oldValue=null;
                 try
                 {
-                    oldValue=pd.getReadMethod().invoke(object, (Object)null);
+                    oldValue=pd.getReadMethod().invoke(object, (Object[])null);
                 }
                 catch(Exception e)
                 {
@@ -193,7 +193,7 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
                     Object oValue=null;
                     try
                     {
-                        oValue=desc.getReadMethod().invoke(object, (Object)null);
+                        oValue=desc.getReadMethod().invoke(object, (Object[])null);
                     }
                     catch(Exception e)
                     {

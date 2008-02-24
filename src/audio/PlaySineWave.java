@@ -1,7 +1,7 @@
 /*
  * PlaySineWave.java
  *
- * Created on 25 de Março de 2003, 19:14
+ * Created on 25 de Marco de 2003, 19:14
  */
 
 package audio;

@@ -23,6 +23,7 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.data.SamplesPacketReadException;
 import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
+import com.linkare.rec.impl.multicast.security.ResourceType;
 import com.linkare.rec.impl.utils.DataCollector;
 import com.linkare.rec.impl.utils.Deactivatable;
 import com.linkare.rec.impl.utils.ORBBean;
@@ -124,7 +125,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
     {
         this.oid=oid;
         java.util.Map props=resource.getProperties();
-        props.put(IResource.PROPKEY_DATAPRODUCER_ID, oid);
+        props.put(ResourceType.DATAPRODUCER.getPropertyKey(), oid);
         ((DefaultResource)resource).setProperties(props);
     }
     
