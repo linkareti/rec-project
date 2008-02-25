@@ -4,7 +4,7 @@
 	<target name="compileReC" depends="prepare">
 		<javac 	srcdir="${sourceDir}" destdir="${outputDir}"
 			deprecation="yes" 
-			source="1.6" target="1.6"
+			source="${JVMTarget}" target="${JVMTarget}"
 			encoding="UTF-8">
 			<classpath refid="rec.classpath"/>
 			<include name="com/linkare/**/*.java"/>

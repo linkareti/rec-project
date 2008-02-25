@@ -6,7 +6,7 @@
 		<sequential>
 			<echo>Compiling experiment: @{expName}</echo>
 			<javac  srcdir="${sourceDir}" destdir="${outputDir}"
-                        	source="1.6" target="1.6"
+                        	source="${JVMTarget}" target="${JVMTarget}"
                         	deprecation="yes" encoding="UTF-8">
                         	<classpath>
 					<path location="${distDir}/ElabBaseStampDriver.jar"/>
@@ -62,7 +62,7 @@
 
 	<target name="compileBaseStamp" depends="prepare">
 		<javac 	srcdir="${sourceDir}/pt/utl/ist/elab/driver/serial/stamp/" destdir="${outputDir}"
-			source="1.6" target="1.6"
+			source="${JVMTarget}" target="${JVMTarget}"
 			deprecation="yes" encoding="UTF-8">
 			<classpath refid="exps.classpath"/>
 			<include name="*.java"/>
@@ -73,7 +73,7 @@
 
 	<target name="compileBaseUSB" depends="prepare">
                 <javac  srcdir="${sourceDir}/pt/utl/ist/elab/driver/usb/cypress/" destdir="${outputDir}"
-                        source="1.6" target="1.6"
+                        source="${JVMTarget}" target="${JVMTarget}"
                         deprecation="yes" encoding="UTF-8">
                         <classpath refid="exps.classpath"/>
                         <include name="*.java"/>
@@ -84,7 +84,7 @@
 
 	<target name="compileElabFullClient" depends="prepare">
 		<javac 	srcdir="${sourceDir}/pt/utl/ist/elab/client" destdir="${outputDir}"
-			source="1.6" target="1.6"
+			source="${JVMTarget}" target="${JVMTarget}"
 			deprecation="yes" encoding="UTF-8">
 			<classpath refid="exps.classpath"/>
 			<include name="FullClient.java"/>
@@ -216,7 +216,7 @@
                 <createExpJars expName="gamma" jarClientName="ElabGammaCustomizer" jarDriverName="ElabGammaUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/gamma/"/>
         </target>
 	<target name="jarPolaroid" depends="prepare, compilePolaroid">
-                <createExpJars expName="gamma" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/polaroid/"/>
+                <createExpJars expName="polaroid" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/polaroid/"/>
         </target>
 	<target name="jarG" depends="prepare, compileG">
                 <createExpJars expName="g" jarClientName="ElabGCustomizer" jarDriverName="ElabGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/g/"/>

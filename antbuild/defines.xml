@@ -7,6 +7,7 @@
                 <property name="webserver"       value="/var/www/html/rec"/>
                 <property name="recserver"       value="/home/elab/ReC7.0"/>
                 <property name="tempLibSignDir"         value="/tmp/signlibs/"/>
+		<property name="JVMTarget"	 value="1.6"/>
                 <path id="rec.classpath">
                         <fileset dir="../lib">
                                 <include name="*.jar"/>

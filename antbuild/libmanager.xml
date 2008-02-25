@@ -4,8 +4,8 @@
 		<property name="openorbWebLoc" 		value="/var/www/html/rec/openorb/" />
 		<property name="openorbSrvLoc" 		value="/home/elab/ReC7.0/openorb/" />
 		<property name="jfreechartWebLoc" 	value="/var/www/html/rec/jfreechart/" />
-		<property name="telescopioWebLoc"	value="/var/www/html/eLab/telescopio/"/>
-		<property name="meteoWebLoc"		value="/var/www/html/eLab/meteo/"/>
+		<property name="telescopioWebLoc"	value="/var/www/html/rec/eLab/telescopio/"/>
+		<property name="meteoWebLoc"		value="/var/www/html/rec/eLab/meteo/"/>
 	</target>
 	<target name="signLibs" depends="init">
 		<mkdir dir="${tempLibSignDir}"/>
