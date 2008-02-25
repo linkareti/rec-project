@@ -47,7 +47,7 @@
 		<signjar  destDir="${distDir}"
 			  keystore="${sigFileLocation}" storepass="2n2l1s3" storetype="pkcs12"
 			  alias="ISTJavaSign">
-    			 <fileset dir="${distDir}" includes="*.jar" excludes="*_sig.jar"/>
+    			 <fileset dir="${distDir}" includes="ReC*.jar" excludes="*_sig.jar"/>
 			 <globmapper from="*.jar" to="*_sig.jar"/>
 		</signjar>
 	</target>

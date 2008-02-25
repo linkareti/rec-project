@@ -22,14 +22,13 @@
 		<attribute name="expName"/>
 		<attribute name="jarClientName"/>
 		<attribute name="jarDriverName"/>
-		<attribute name="resourcesLoc"/>
+		<attribute name="resourcesTopLoc"/>
                 <sequential>
-			<copy todir="${outputDir}/@{resourcesLoc}">
-                        	<fileset dir="${sourceDir}/@{resourcesLoc}"/>
+			<copy todir="${outputDir}/@{resourcesTopLoc}">
+                        	<fileset dir="${sourceDir}/@{resourcesTopLoc}" excludes="**/*.java, **/*.form"/>
                 	</copy>
 			<jar destfile="${distDir}/@{jarClientName}.jar" basedir="${outputDir}">
-				<include name="**/client/**/@{expName}/**/*.class"/>
-				<include name="@{resourcesLoc}/*.*"/>
+				<include name="**/client/**/@{expName}/**/*.*"/>
 			</jar>
 			<jar destfile="${distDir}/@{jarDriverName}.jar" basedir="${outputDir}">
 				<include name="**/driver/**/@{expName}/**/*.class"/>
@@ -51,7 +50,7 @@
                 <attribute name="jarDriverName"/>
                 <attribute name="webserverDir"/>
 		<sequential>
-			<copy todir="${recsserver}/@{recserverDir}">
+			<copy todir="${recserver}/@{recserverDir}">
                                 <fileset file="${distDir}/@{jarDriverName}_sig.jar"/>
 	                </copy>
 			<copy todir="${webserver}/@{webserverDir}">
@@ -96,8 +95,65 @@
 	<target name="compileCondCalor" depends="prepare,jarBaseStamp">
 		<compileExperiment expName="conducaoCalor"/>
         </target>
+	<target name="compileAleatorio" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="Aleatorio"/>
+        </target>
+	<target name="compileMeteo" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="meteo"/>
+        </target>
+	<target name="compileTelescopio" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="telescopio"/>
+        </target>
+	<target name="compileWebRobot" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="webrobot"/>
+        </target>
+	<target name="compileGamma" depends="prepare,jarBaseUSB">
+		<compileExperiment expName="gamma"/>
+        </target>
+	<target name="compilePolaroid" depends="prepare,jarBaseUSB">
+		<compileExperiment expName="polaroid"/>
+        </target>
+	<target name="compileG" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="g"/>
+        </target>
+	<target name="compileMomInercia" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="momentoInercia"/>
+        </target>
+	<target name="compilePendulo" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="pendulo"/>
+        </target>
+	<target name="compilePenduloGravitico" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="penduloGravitico"/>
+        </target>
+	<target name="compilePlanck" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="planck"/>
+        </target>
+	<target name="compilePV" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="pv"/>
+        </target>
+	<target name="compileRadioactividade" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="radioactividade"/>
+        </target>
+<!--	<target name="compileRayleigh" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="rayleigh"/>
+        </target>-->
+	<target name="compileScuba" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="scuba"/>
+        </target>
+	<target name="compileStatSound" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="statsound"/>
+        </target>
+	<target name="compileThomson" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="thomson"/>
+        </target>
 
-	<target name="compileExps" depends="compileCondCalor,compileBaseUSB,compileElabFullClient"/>
+	<target name="compileExps" depends="compileCondCalor,compileBaseUSB,compileElabFullClient,
+					    compileAleatorio, compileMeteo, compileTelescopio,
+					    compileWebRobot, compileGamma, compilePolaroid,
+					    compileG, compileMomInercia, compilePendulo,
+					    compilePenduloGravitico, compilePlanck, compilePV,
+					    compileRadioactividade, compileScuba,
+					    compileStatSound, compileThomson"/>
 
 
 <!--JAR CREATION-->	
@@ -142,11 +198,64 @@
 
 <!--Experiments jars-->
 	<target name="jarCondCalor" depends="prepare, compileCondCalor">
-                <createExpJars expName="conducaoCalor" jarClientName="ElabTCustomizer" jarDriverName="ElabTStampDriver" resourcesLoc="pt/utl/ist/elab/client/serial/stamp/conducaoCalor/resources/"/>
+                <createExpJars expName="conducaoCalor" jarClientName="ElabTCustomizer" jarDriverName="ElabTStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/conducaoCalor/"/>
         </target>
-
+	<target name="jarAleatorio" depends="prepare, compileAleatorio">
+                <createExpJars expName="Aleatorio" jarClientName="ElabAleatorioCustomizer" jarDriverName="ElabAleatorioDriver" resourcesTopLoc="pt/utl/ist/elab/client/Aleatorio/"/>
+        </target>
+	<target name="jarMeteo" depends="prepare, compileMeteo">
+                <createExpJars expName="meteo" jarClientName="ElabMeteoCustomizer" jarDriverName="ElabMeteoDriver" resourcesTopLoc="pt/utl/ist/elab/client/meteo/"/>
+        </target>
+	<target name="jarTelescopio" depends="prepare, compileTelescopio">
+                <createExpJars expName="telescopio" jarClientName="ElabTelescopioCustomizer" jarDriverName="ElabTelescopioDriver" resourcesTopLoc="pt/utl/ist/elab/client/telescopio/"/>
+        </target>
+	<target name="jarWebRobot" depends="prepare, compileWebRobot">
+                <createExpJars expName="webrobot" jarClientName="ElabWebRobotCustomizer" jarDriverName="ElabWebRobotDriver" resourcesTopLoc="pt/utl/ist/elab/client/webrobot/"/>
+        </target>
+	<target name="jarGamma" depends="prepare, compileGamma">
+                <createExpJars expName="gamma" jarClientName="ElabGammaCustomizer" jarDriverName="ElabGammaUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/gamma/"/>
+        </target>
+	<target name="jarPolaroid" depends="prepare, compilePolaroid">
+                <createExpJars expName="gamma" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/polaroid/"/>
+        </target>
+	<target name="jarG" depends="prepare, compileG">
+                <createExpJars expName="g" jarClientName="ElabGCustomizer" jarDriverName="ElabGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/g/"/>
+        </target>
+	<target name="jarMomInercia" depends="prepare, compileMomInercia">
+                <createExpJars expName="momentoInercia" jarClientName="ElabMomInerciaCustomizer" jarDriverName="ElabMomInerciaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/momentoInercia/"/>
+        </target>
+	<target name="jarPendulo" depends="prepare, compilePendulo">
+                <createExpJars expName="pendulo" jarClientName="ElabPenduloCustomizer" jarDriverName="ElabPenduloStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/pendulo/"/>
+        </target>
+	<target name="jarPenduloGravitico" depends="prepare, compilePenduloGravitico">
+                <createExpJars expName="penduloGravitico" jarClientName="ElabPGCustomizer" jarDriverName="ElabPGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/penduloGravitico/"/>
+        </target>
+	<target name="jarPlanck" depends="prepare, compilePlanck">
+                <createExpJars expName="planck" jarClientName="ElabPlanckCustomizer" jarDriverName="ElabPlanckStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/planck/"/>
+        </target>
+	<target name="jarPV" depends="prepare, compilePV">
+                <createExpJars expName="pv" jarClientName="ElabPVCustomizer" jarDriverName="ElabPVStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/pv/"/>		
+        </target>
+	<target name="jarRadioactividade" depends="prepare, compileRadioactividade">
+                <createExpJars expName="radioactividade" jarClientName="ElabRadioactividadeCustomizer" jarDriverName="ElabRadioactividadeStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/radioactividade/"/>
+        </target>
+	<target name="jarScuba" depends="prepare, compileScuba">
+                <createExpJars expName="scuba" jarClientName="ElabScubaCustomizer" jarDriverName="ElabScubaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/scuba/"/>
+        </target>
+	<target name="jarStatSound" depends="prepare, compileStatSound">
+                <createExpJars expName="statsound" jarClientName="ElabStatSoundCustomizer" jarDriverName="ElabStatSoundDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/statsound/"/>
+        </target>
+	<target name="jarThomson" depends="prepare, compileThomson">
+                <createExpJars expName="thomson" jarClientName="ElabThomsonCustomizer" jarDriverName="ElabThomsonStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/thomson/"/>
+        </target>
 <!--All jars-->
-	<target name="jarExps" depends="jarCondCalor, jarElabFullClient, jarBaseUSB"/>
+	<target name="jarExps" depends="jarElabFullClient, jarBaseUSB,
+					jarCondCalor, jarAleatorio, jarMeteo,
+					jarTelescopio, jarWebRobot, jarGamma,
+					jarPolaroid, jarG, jarMomInercia,
+					jarPendulo, jarPenduloGravitico,
+					jarPlanck, jarPV, jarRadioactividade,
+					jarScuba, jarStatSound, jarThomson"/>
 
 <!--Deploy -->
 	<target name="deployBaseStamp" depends="jarBaseStamp">
@@ -168,7 +277,61 @@
 	<target name="deployCondCalor" depends="jarCondCalor">
 		<deployExp recserverDir="driver/eLab/T" webserverDir="eLab/t" jarDriverName="ElabTStampDriver" jarClientName="ElabTCustomizer"/>
 	</target>
+	<target name="deployAleatorio" depends="jarAleatorio">
+		<deployExp recserverDir="driver/eLab/Aleatorio" webserverDir="eLab/aleatorio" jarDriverName="ElabAleatorioDriver" jarClientName="ElabAleatorioCustomizer"/>
+	</target>
+	<target name="deployMeteo" depends="jarMeteo">
+		<deployExp recserverDir="tmp/" webserverDir="eLab/meteo" jarDriverName="ElabMeteoDriver" jarClientName="ElabMeteoCustomizer"/>
+	</target>
+	<target name="deployTelescopio" depends="jarTelescopio">
+		<deployExp recserverDir="tmp/" webserverDir="eLab/telescopio" jarDriverName="ElabTelescopioDriver" jarClientName="ElabTelescopioCustomizer"/>
+	</target>
+	<target name="deployWebRobot" depends="jarWebRobot">
+		<deployExp recserverDir="tmp/" webserverDir="eLab/webrobot" jarDriverName="ElabWebRobotDriver" jarClientName="ElabWebRobotCustomizer"/>
+	</target>
+	<target name="deployGamma" depends="jarGamma">
+		<deployExp recserverDir="driver/eLab/Gamma" webserverDir="eLab/gamma" jarDriverName="ElabGammaUSBDriver" jarClientName="ElabGammaCustomizer"/>
+	</target>
+	<target name="deployPolaroid" depends="jarPolaroid">
+		<deployExp recserverDir="driver/eLab/Polaroid" webserverDir="eLab/polaroid" jarDriverName="ElabPolaroidUSBDriver" jarClientName="ElabPolaroidCustomizer"/>
+	</target>
+	<target name="deployG" depends="jarG">
+		<deployExp recserverDir="driver/eLab/G" webserverDir="eLab/g" jarDriverName="ElabGStampDriver" jarClientName="ElabGCustomizer"/>
+	</target>
+	<target name="deployMomInercia" depends="jarMomInercia">
+		<deployExp recserverDir="driver/eLab/Discos" webserverDir="eLab/discos" jarDriverName="ElabMomInerciaStampDriver" jarClientName="ElabMomInerciaCustomizer"/>
+	</target>
+	<target name="deployPendulo" depends="jarPendulo">
+		<deployExp recserverDir="driver/eLab/Pendulo" webserverDir="eLab/pendulo" jarDriverName="ElabPenduloStampDriver" jarClientName="ElabPenduloCustomizer"/>
+	</target>
+	<target name="deployPenduloGravitico" depends="jarPenduloGravitico">
+		<deployExp recserverDir="driver/eLab/PG" webserverDir="eLab/pg" jarDriverName="ElabPGStampDriver" jarClientName="ElabPGCustomizer"/>
+	</target>
+	<target name="deployPlanck" depends="jarPlanck">
+		<deployExp recserverDir="driver/eLab/Planck" webserverDir="eLab/planck" jarDriverName="ElabPlanckStampDriver" jarClientName="ElabPlanckCustomizer"/>
+	</target>
+	<target name="deployPV" depends="jarPV">
+		<deployExp recserverDir="driver/eLab/PV" webserverDir="eLab/pv" jarDriverName="ElabPVStampDriver" jarClientName="ElabPVCustomizer"/>
+	</target>
+	<target name="deployRadioactividade" depends="jarRadioactividade">
+		<deployExp recserverDir="driver/eLab/Radioactividade" webserverDir="eLab/radio" jarDriverName="ElabRadioactividadeStampDriver" jarClientName="ElabRadioactividadeCustomizer"/>
+	</target>
+	<target name="deployScuba" depends="jarScuba">
+		<deployExp recserverDir="driver/eLab/Scuba" webserverDir="eLab/scuba" jarDriverName="ElabScubaStampDriver" jarClientName="ElabScubaCustomizer"/>
+	</target>
+	<target name="deployStatSound" depends="jarStatSound">
+		<deployExp recserverDir="tmp/" webserverDir="eLab/statsound" jarDriverName="ElabStatSoundDriver" jarClientName="ElabStatSoundCustomizer"/>
+	</target>
+	<target name="deployThomson" depends="jarThomson">
+		<deployExp recserverDir="driver/eLab/Thomson" webserverDir="eLab/thomson" jarDriverName="ElabThomsonStampDriver" jarClientName="ElabThomsonCustomizer"/>
+	</target>
 
 <!--Full deploy-->
-	<target name="deployExps" depends="deployBaseStamp, deployBaseUSB, deployElabFullClient, deployCondCalor"/>
+	<target name="deployExps" depends="deployBaseStamp, deployBaseUSB, deployElabFullClient, 
+					   deployCondCalor, deployAleatorio, deployMeteo,
+					   deployTelescopio, deployWebRobot, deployGamma,
+					   deployPolaroid, deployG, deployMomInercia,
+					   deployPendulo, deployPenduloGravitico,
+					   deployPlanck, deployPV, deployRadioactividade,
+					   deployScuba, deployStatSound, deployThomson"/>
 </project>

@@ -1,0 +1,33 @@
+<project name="ReCLibManager" default="deployLibs" basedir=".">
+        <import file="defines.xml"/>
+	<target name="init2">
+		<property name="openorbWebLoc" 		value="/var/www/html/rec/openorb/" />
+		<property name="openorbSrvLoc" 		value="/home/elab/ReC7.0/openorb/" />
+		<property name="jfreechartWebLoc" 	value="/var/www/html/rec/jfreechart/" />
+		<property name="telescopioWebLoc"	value="/var/www/html/eLab/telescopio/"/>
+		<property name="meteoWebLoc"		value="/var/www/html/eLab/meteo/"/>
+	</target>
+	<target name="signLibs" depends="init">
+		<mkdir dir="${tempLibSignDir}"/>
+		<signjar  destDir="${tempLibSignDir}"
+                          keystore="${sigFileLocation}" storepass="2n2l1s3" storetype="pkcs12"
+                          alias="ISTJavaSign">
+                          <fileset dir="../lib/" includes="*.jar" excludes="*_sig.jar"/>
+                          <globmapper from="*.jar" to="*_sig.jar"/>
+                </signjar>
+	</target>
+	<target name="deployLibs" depends="init2, signLibs">
+		<copy todir="${openorbWebLoc}">
+			<fileset dir="${tempLibSignDir}" includes="openorb_orb*, avalon-fr*, xercesIm*, logkit_sig*, tools-1.4*, xml-a*"/>
+		</copy>
+		<copy todir="${jfreechartWebLoc}">
+			<fileset dir="${tempLibSignDir}" includes="jfreec*, jcomm*"/>
+		</copy>
+		<copy todir="${telescopioWebLoc}">
+			<fileset dir="${tempLibSignDir}" includes="fits*"/>
+		</copy>
+		<copy todir="${meteoWebLoc}">
+			<fileset dir="${tempLibSignDir}" includes="JCFN*"/>
+		</copy>
+	</target>
+</project>

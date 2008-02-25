@@ -6,6 +6,7 @@
                 <property name="sigFileLocation" value="../cert/ISTJavaSign.KeyStore.p12"/>
                 <property name="webserver"       value="/var/www/html/rec"/>
                 <property name="recserver"       value="/home/elab/ReC7.0"/>
+                <property name="tempLibSignDir"         value="/tmp/signlibs/"/>
                 <path id="rec.classpath">
                         <fileset dir="../lib">
                                 <include name="*.jar"/>
