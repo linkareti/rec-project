@@ -227,7 +227,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 	    fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_DISCONNECTED);
 
-	    apparatusList = new Vector<Apparatus>();
+	    apparatusList = new ArrayList<Apparatus>();
 	    connectedBefore = false;
 	}
     }
