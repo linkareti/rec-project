@@ -8,7 +8,7 @@
 			encoding="UTF-8">
 			<classpath refid="rec.classpath"/>
 			<include name="com/linkare/**/*.java"/>
-			<compilerarg value="-Xlint"/>
+			<compilerarg value="-Xlint:unchecked, cast, -serial"/>
 		</javac>
    	</target>
 
