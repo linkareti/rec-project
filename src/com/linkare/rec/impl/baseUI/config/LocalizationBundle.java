@@ -7,6 +7,9 @@
 
 package com.linkare.rec.impl.baseUI.config;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.CommonBean {
 	private java.lang.String _Location;
 	private java.lang.String _Name;
@@ -139,25 +142,25 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 	public void changePropertyByName(String name, Object value) {
 		if (name == null) return;
 		name = name.intern();
-		if (name == "location")
+		if (name.equals("location"))
 			setLocation((java.lang.String)value);
-		else if (name == "name")
+		else if (name.equals("name"))
 			setName((java.lang.String)value);
 		else
 			throw new IllegalArgumentException(name+" is not a valid property name for LocalizationBundle");
 	}
 
 	public Object fetchPropertyByName(String name) {
-		if (name == "location")
+		if (name.equals("location"))
 			return getLocation();
-		if (name == "name")
+		if (name.equals("name"))
 			return getName();
 		throw new IllegalArgumentException(name+" is not a valid property name for LocalizationBundle");
 	}
 
 	// Return an array of all of the properties that are beans and are set.
 	public CommonBean[] childBeans(boolean recursive) {
-		java.util.List children = new java.util.LinkedList();
+		List<CommonBean> children = new LinkedList<CommonBean>();
 		childBeans(recursive, children);
 		com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children.size()];
 		return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);

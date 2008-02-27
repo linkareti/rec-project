@@ -19,7 +19,7 @@ public class SequencedObjectIO implements Serializable {
     private boolean isTemporary=false;
     private transient RandomAccessFile raf;
     private transient ObjectOutputStream seqWriteStream;
-    private ArrayList objectsLocations=null;
+    private ArrayList<long[]> objectsLocations=null;
     private int currentIndex=0;
     
     public SequencedObjectIO() throws IOException {
@@ -51,7 +51,7 @@ public class SequencedObjectIO implements Serializable {
             
             if(f==null) {
                 f=File.createTempFile("TempIndexedObjectIO_",".mser");
-                objectsLocations=new ArrayList();
+                objectsLocations=new ArrayList<long[]>();
                 isTemporary=true;
                 if(file!=null)
                     file.delete();
@@ -79,7 +79,7 @@ public class SequencedObjectIO implements Serializable {
                     //System.out.println("Renamed and moved contents of file from:" + file.getAbsolutePath() + "to:" + f.getAbsolutePath());
                 }
                 else
-                    objectsLocations=new ArrayList();
+                    objectsLocations=new ArrayList<long []>();
                 
             }
             

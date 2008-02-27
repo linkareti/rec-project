@@ -21,9 +21,9 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     private String _DisplayStringBundleKey = "";
     private String _Location = "";
     private String _DesktopLocationBundleKey = "";
-    private List _Apparatus = new ArrayList();	// List<Apparatus>
-    private List _WebResource = new ArrayList();	// List<WebResource>
-    private List _LocalizationBundle = new ArrayList();	// List<LocalizationBundle>
+    private List<Apparatus> _Apparatus = new ArrayList<Apparatus>();	// List<Apparatus>
+    private List<WebResource> _WebResource = new ArrayList<WebResource>();	// List<WebResource>
+    private List<LocalizationBundle> _LocalizationBundle = new ArrayList<LocalizationBundle>();	// List<LocalizationBundle>
     private PropertyChangeSupport eventListeners;
     
     public Lab()
@@ -58,6 +58,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     }
     
     // This attribute is mandatory
+    @Override
     public void setOrder(int value)
     {
 	PropertyChangeEvent event = null;
@@ -71,6 +72,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     }
     
     //It was returning a String...changed to int and added get_Order() (this one returns string)
+    @Override
     public int getOrder()
     {
 	return _Order;
@@ -210,7 +212,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     public com.linkare.rec.impl.baseUI.config.Apparatus[] getApparatus()
     {
 	Apparatus[] arr = new Apparatus[_Apparatus.size()];
-	return (Apparatus[]) _Apparatus.toArray(arr);
+	return _Apparatus.toArray(arr);
     }
     
     public List fetchApparatusList()
@@ -220,7 +222,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     
     public com.linkare.rec.impl.baseUI.config.Apparatus getApparatus(int index)
     {
-	return (Apparatus)_Apparatus.get(index);
+	return _Apparatus.get(index);
     }
     
     // Return the number of apparatus
@@ -300,7 +302,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     public com.linkare.rec.impl.baseUI.config.WebResource[] getWebResource()
     {
 	WebResource[] arr = new WebResource[_WebResource.size()];
-	return (WebResource[]) _WebResource.toArray(arr);
+	return _WebResource.toArray(arr);
     }
     
     public List fetchWebResourceList()
@@ -310,7 +312,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     
     public com.linkare.rec.impl.baseUI.config.WebResource getWebResource(int index)
     {
-	return (WebResource)_WebResource.get(index);
+	return _WebResource.get(index);
     }
     
     // Return the number of webResource
@@ -390,7 +392,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     public com.linkare.rec.impl.baseUI.config.LocalizationBundle[] getLocalizationBundle()
     {
 	LocalizationBundle[] arr = new LocalizationBundle[_LocalizationBundle.size()];
-	return (LocalizationBundle[]) _LocalizationBundle.toArray(arr);
+	return _LocalizationBundle.toArray(arr);
     }
     
     public List fetchLocalizationBundleList()
@@ -400,7 +402,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     
     public com.linkare.rec.impl.baseUI.config.LocalizationBundle getLocalizationBundle(int index)
     {
-	return (LocalizationBundle)_LocalizationBundle.get(index);
+	return _LocalizationBundle.get(index);
     }
     
     // Return the number of localizationBundle
@@ -565,26 +567,22 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	{
 	    Node childNode = children.item(i);
 	    String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern() : childNode.getLocalName().intern());
-	    String childNodeValue = "";
-	    if (childNode.getFirstChild() != null)
-	    {
-		childNodeValue = childNode.getFirstChild().getNodeValue();
-	    }
-	    if (childNodeName == "Apparatus")
+	    
+	    if (childNodeName.equals("Apparatus"))
 	    {
 		Apparatus aApparatus = new com.linkare.rec.impl.baseUI.config.Apparatus();
 		aApparatus._setPropertyChangeSupport(eventListeners);
 		aApparatus.readNode(childNode);
 		_Apparatus.add(aApparatus);
 	    }
-	    else if (childNodeName == "WebResource")
+	    else if (childNodeName.equals("WebResource"))
 	    {
 		WebResource aWebResource = new com.linkare.rec.impl.baseUI.config.WebResource();
 		aWebResource._setPropertyChangeSupport(eventListeners);
 		aWebResource.readNode(childNode);
 		_WebResource.add(aWebResource);
 	    }
-	    else if (childNodeName == "LocalizationBundle")
+	    else if (childNodeName.equals("LocalizationBundle"))
 	    {
 		LocalizationBundle aLocalizationBundle = new com.linkare.rec.impl.baseUI.config.LocalizationBundle();
 		aLocalizationBundle._setPropertyChangeSupport(eventListeners);
@@ -600,7 +598,6 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     
     public void validate() throws ValidateException
     {
-	boolean restrictionFailure = false;
 	// Validating property order
 
 	// Validating property iconLocationBundleKey
@@ -768,14 +765,14 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
     // Return an array of all of the properties that are beans and are set.
     public com.linkare.rec.impl.baseUI.config.CommonBean[] childBeans(boolean recursive)
     {
-	List children = new LinkedList();
+	List<CommonBean> children = new LinkedList<CommonBean>();
 	childBeans(recursive, children);
 	com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children.size()];
 	return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);
     }
     
     // Put all child beans into the beans list.
-    public void childBeans(boolean recursive, List beans)
+    public void childBeans(boolean recursive, List<CommonBean> beans)
     {
 	for (Iterator it = _Apparatus.iterator(); it.hasNext();
 	)
@@ -818,6 +815,7 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 	}
     }
     
+    @Override
     public boolean equals(Object o)
     {
 	if (o == this)

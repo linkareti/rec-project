@@ -39,7 +39,7 @@ public class OfflineInternalFrame extends javax.swing.JInternalFrame
      */
     private String hardwareID;
     
-    private java.util.ArrayList dataDisplayList = null;
+    private ArrayList<ExpDataDisplay> dataDisplayList = null;
     
     private static final String DISPLAY_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.display", "Display");	
     
@@ -81,7 +81,7 @@ public class OfflineInternalFrame extends javax.swing.JInternalFrame
     {
 	if (dataDisplayList == null )
 	{
-	    dataDisplayList = new java.util.ArrayList();
+	    dataDisplayList = new ArrayList<ExpDataDisplay>();
 	}
 		
 	dataDisplayList.add(dataDisplay);

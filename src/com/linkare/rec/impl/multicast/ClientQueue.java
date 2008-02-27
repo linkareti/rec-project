@@ -34,7 +34,7 @@ public class ClientQueue
     private int maximumClients=1;
     private IClientQueueListener clientQueueListener=null;
     //private internal state variables
-    private ArrayList queueOrg=null;
+    private ArrayList<DataClientForQueue> queueOrg=null;
     private EventQueue messageQueue=new EventQueue(new ClientQueueDispatcher());
     private ClientsConnectionCheck clientsConnectionChecker=new ClientsConnectionCheck();
     private IDataClientForQueueListener dataClientForQueueAdapter=new DataClientForQueueAdapter();
@@ -69,7 +69,7 @@ public class ClientQueue
         
         Iterator iter=iterator();
         
-        ArrayList userInfosOut=new ArrayList(queueOrg.size());
+        ArrayList<UserInfo> userInfosOut=new ArrayList<UserInfo>(queueOrg.size());
         while(iter.hasNext())
         {
             Object nextObj = iter.next();
@@ -489,7 +489,7 @@ public class ClientQueue
     public void setMaximumClients(int maximumClients)
     {
         this.maximumClients = maximumClients;
-        queueOrg=new ArrayList(maximumClients);
+        queueOrg=new ArrayList<DataClientForQueue>(maximumClients);
     }
     
     /** Getter for property clientQueueListener.

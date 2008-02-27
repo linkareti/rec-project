@@ -721,7 +721,7 @@ public class HardwareInfoXMLReader
 	String[] visitElement_selection_list(Element element)
 	{ // <selection-list>
 		// element.getValue();
-		TreeMap tableSelectionList=new TreeMap();
+		TreeMap<Integer, String> tableSelectionList=new TreeMap<Integer, String>();
 		NodeList nodes = element.getChildNodes();
 		for (int i = 0; i < nodes.getLength(); i++)
 		{

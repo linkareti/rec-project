@@ -16,25 +16,25 @@ import java.util.Map;
 public class DefaultOperation implements IOperation
 {
     private short operation;
-    private HashMap properties;
+    private HashMap<String, Object> properties;
     
     /** Creates a new instance of DefaultOperation */
     public DefaultOperation()
     {
 	setOperation((short)-1);
-	setProperties(new HashMap());
+	setProperties(new HashMap<String, Object>());
     }
     
     /** Creates a new instance of DefaultOperation */
     public DefaultOperation(short operation)
     {
 	setOperation(operation);
-	setProperties(new HashMap());
+	setProperties(new HashMap<String, Object>());
     }
     
     
     /** Creates a new instance of DefaultOperation */
-    public DefaultOperation(short operation,Map properties)
+    public DefaultOperation(short operation,Map<String, Object> properties)
     {
 	setOperation(operation);
 	setProperties(properties);
@@ -62,7 +62,7 @@ public class DefaultOperation implements IOperation
      * @return Value of property properties.
      *
      */
-    public Map getProperties()
+    public Map<String, Object> getProperties()
     {
 	return properties;
     }
@@ -71,9 +71,9 @@ public class DefaultOperation implements IOperation
      * @param properties New value of property properties.
      *
      */
-    public void setProperties(Map properties)
+    public void setProperties(Map<String, Object> properties)
     {
-	this.properties = new HashMap(properties);
+	this.properties = new HashMap<String, Object>(properties);
     }
     
     

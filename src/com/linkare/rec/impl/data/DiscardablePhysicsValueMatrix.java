@@ -26,7 +26,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource
     public static final String FREE_THRESHOLD_NAME = com.linkare.rec.impl.utils.Defaults.defaultIfEmpty(System.getProperty(SYSPROP_FREE_THRESHOLD_NAME), "10");
 
     
-    private HashMap samplesRows=null;
+    private HashMap<Integer, PhysicsValue[]> samplesRows=null;
     private int lastSampleCount=0;
     private int totalSamples=1;
     
@@ -67,7 +67,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource
             return;
 	
 	int startSampleIndex=lastSampleCount;
-	HashMap tempSamples=new HashMap(dataSamples.length);
+	HashMap<Integer, PhysicsValue[]> tempSamples=new HashMap<Integer, PhysicsValue[]>(dataSamples.length);
 	for(int i=0;i<dataSamples.length;i++)
 	    tempSamples.put(new Integer(startSampleIndex+i),dataSamples[i]);
 	
@@ -126,11 +126,11 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource
     {
 	this.totalSamples=totalSamples;
 	if(samplesRows==null)
-	    samplesRows=new HashMap(totalSamples);
+	    samplesRows=new HashMap<Integer, PhysicsValue[]>(totalSamples);
 	else
 	{
-	    Map tempRows=samplesRows;
-	    samplesRows=new HashMap(totalSamples);
+	    Map<Integer, PhysicsValue[]> tempRows=samplesRows;
+	    samplesRows=new HashMap<Integer, PhysicsValue[]>(totalSamples);
 	    samplesRows.putAll(tempRows);
 	}
     }

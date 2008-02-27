@@ -37,7 +37,7 @@ public class DataReceiverQueue implements java.io.Serializable
     private int maximumDataReceivers=1;
     private IDataReceiverQueueListener dataReceiverQueueListener=null;
     //private internal state variables
-    private ArrayList queueOrg=null;
+    private ArrayList<DataReceiverForQueue> queueOrg=null;
     private EventQueue messageQueue=new EventQueue(new DataReceiverQueueDispatcher());
     private DataReceiversConnectionCheck dataReceiversConnectionChecker=new DataReceiversConnectionCheck();
     private IDataReceiverForQueueListener dataReceiverForQueueAdapter=new DataReceiverForQueueAdapter();
@@ -99,20 +99,9 @@ public class DataReceiverQueue implements java.io.Serializable
     public boolean add(DataReceiver dr,IResource resource,DataProducerState currentState)
     throws MaximumClientsReached,NotAuthorized
     {
-        /*System.out.println("***********************");
-        System.out.println("***********************");
-        System.out.println("*******   1   *********");
-        System.out.println("***********************");
-        System.out.println("***********************");*/
         log(Level.INFO,"DataReceiverQueue - trying to register new dataReceiver!");
         boolean retVal=false;
         DataReceiverForQueue drfq=new DataReceiverForQueue(dr,dataReceiverForQueueAdapter);
-        /*System.out.println("***********************");
-        System.out.println("***********************");
-        System.out.println("*******   2   *********");
-        System.out.println("***********************");
-        System.out.println("***********************");*/
-        
         //TODO - Reimplement DataReceiver or find alternative way to check security at this level
         //if(!SecurityManagerFactory.authenticate(resource,dr.getAsDefaultUser()))
         //    throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_PASSWORD_NOT_MATCH);
@@ -239,7 +228,7 @@ public class DataReceiverQueue implements java.io.Serializable
     public void setMaximumDataReceivers(int maximumDataReceivers)
     {
         this.maximumDataReceivers = maximumDataReceivers;
-        queueOrg=new ArrayList(maximumDataReceivers);
+        queueOrg=new ArrayList<DataReceiverForQueue>(maximumDataReceivers);
     }
     
     /** Getter for property dataReceiverQueueListener.

@@ -12,6 +12,8 @@
 
 package com.linkare.rec.impl.utils;
 
+import java.util.ArrayList;
+
 
 
 /**
@@ -30,7 +32,7 @@ public class EventQueue
 
     private EventQueueThread threadedQueueDispatcher=null;
 
-    private java.util.ArrayList levts=null;
+    private ArrayList<Object> levts=null;
 
     private volatile boolean stopdispatching=false;
 
@@ -44,7 +46,7 @@ public class EventQueue
 
 	this.dispatcher=dispatcher;
 
-	levts=new java.util.ArrayList(1000);
+	levts=new ArrayList<Object>(1000);
 
 	threadedQueueDispatcher=new EventQueueThread();
 

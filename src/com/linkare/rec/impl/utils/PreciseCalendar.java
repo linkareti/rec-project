@@ -174,7 +174,7 @@ public class PreciseCalendar extends GregorianCalendar
 	long totalMillisDelta=(long)Math.floor(totalDelta);
 	long totalPicosDelta=(long)Math.floor((totalDelta-Math.floor(totalDelta))*1E9);
 	int microsDelta=(int)Math.floor((double)totalPicosDelta/1.E6);
-	int nanosDelta=(int)Math.floor((double)(totalPicosDelta-microsDelta*1E6)/1.E3);
+	int nanosDelta=(int)Math.floor((totalPicosDelta-microsDelta*1E6)/1.E3);
 	int picosDelta=(int)(totalPicosDelta-microsDelta*1E6-nanosDelta*1E3);
 	
 	PreciseCalendar start=new PreciseCalendar(timeStart);

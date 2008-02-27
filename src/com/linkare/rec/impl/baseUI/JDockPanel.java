@@ -18,7 +18,7 @@ import java.beans.*;
 public class JDockPanel extends javax.swing.JPanel
 {
     private Component lastComponent=null;
-    private Hashtable lastPositionOfHidden=new Hashtable();
+    private Hashtable<Component, Double> lastPositionOfHidden=new Hashtable<Component, Double>();
     private int dividerSize = 4;
     
     /** Creates new form DockPanel */

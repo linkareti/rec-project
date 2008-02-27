@@ -8,11 +8,10 @@ package com.linkare.rec.acquisition;
 * Sexta-feira, 2 de Janeiro de 2004 15H12m GMT
 */
 
-
+@SuppressWarnings("unchecked")
 //ok, not known at this time
 public abstract class DataProducerPOA extends org.omg.PortableServer.Servant implements com.linkare.rec.acquisition.DataProducerOperations, org.omg.CORBA.portable.InvokeHandler
 {
-
   // Constructors
 
   private static java.util.Hashtable _methods = new java.util.Hashtable ();

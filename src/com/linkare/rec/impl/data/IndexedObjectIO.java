@@ -17,7 +17,7 @@ public class IndexedObjectIO implements Serializable {
     private boolean isTemporary=false;
     private transient RandomAccessFile raf;
     private transient ObjectOutputStream seqWriteStream;
-    private HashMap objectsLocations=null;
+    private HashMap<Object, long[]> objectsLocations=null;
     private long lastPos = 0;
     
     /** Creates a new instance of IndexedObjectIO */
@@ -53,7 +53,7 @@ public class IndexedObjectIO implements Serializable {
         if(file!=null && f!=null && f.equals(file))
             return;
         else {
-            objectsLocations=new HashMap();
+            objectsLocations=new HashMap<Object, long[]>();
             
             
             if(f==null) {

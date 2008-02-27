@@ -345,17 +345,17 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
     {
 	if (name == null) return;
 	name = name.intern();
-	if (name == "order")
+	if (name.equals("order"))
 	    setOrder(((Integer)value).intValue());
-	else if (name == "offlineCapable")
+	else if (name.equals("offlineCapable"))
 	    setOfflineCapable(((Boolean)value).booleanValue());
-	else if (name == "displayStringBundleKey")
+	else if (name.equals("displayStringBundleKey"))
 	    setDisplayStringBundleKey((String)value);
-	else if (name == "iconLocationBundleKey")
+	else if (name.equals("iconLocationBundleKey"))
 	    setIconLocationBundleKey((String)value);
-	else if (name == "toolTipBundleKey")
+	else if (name.equals("toolTipBundleKey"))
 	    setToolTipBundleKey((String)value);
-	else if (name == "classLocationBundleKey")
+	else if (name.equals("classLocationBundleKey"))
 	    setClassLocationBundleKey((String)value);
 	else
 	    throw new IllegalArgumentException(name+" is not a valid property name for Display");
@@ -363,17 +363,17 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
     
     public Object fetchPropertyByName(String name)
     {
-	if (name == "order")
+	if (name.equals("order"))
 	    return new Integer(getOrder());
-	if (name == "offlineCapable")
+	if (name.equals("offlineCapable"))
 	    return new Boolean(getOfflineCapable());
-	if (name == "displayStringBundleKey")
+	if (name.equals("displayStringBundleKey"))
 	    return getDisplayStringBundleKey();
-	if (name == "iconLocationBundleKey")
+	if (name.equals("iconLocationBundleKey"))
 	    return getIconLocationBundleKey();
-	if (name == "toolTipBundleKey")
+	if (name.equals("toolTipBundleKey"))
 	    return getToolTipBundleKey();
-	if (name == "classLocationBundleKey")
+	if (name.equals("classLocationBundleKey"))
 	    return getClassLocationBundleKey();
 	throw new IllegalArgumentException(name+" is not a valid property name for Display");
     }
@@ -381,7 +381,7 @@ public class Display extends DisplayNode implements com.linkare.rec.impl.baseUI.
     // Return an array of all of the properties that are beans and are set.
     public com.linkare.rec.impl.baseUI.config.CommonBean[] childBeans(boolean recursive)
     {
-	List children = new LinkedList();
+	List<CommonBean> children = new LinkedList<CommonBean>();
 	childBeans(recursive, children);
 	com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children.size()];
 	return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);

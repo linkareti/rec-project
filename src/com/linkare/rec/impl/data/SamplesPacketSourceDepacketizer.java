@@ -21,7 +21,7 @@ import com.linkare.rec.acquisition.MaxPacketNumUnknown;
 public class SamplesPacketSourceDepacketizer implements SamplesSource
 {
     private SamplesPacketSource samplesPacketSource;
-    private ArrayList samplesLocations=null;
+    private ArrayList<int []> samplesLocations=null;
     private int lastSampleCount = TOTAL_SAMPLES_UNDEFINED.value;
     private int largestPacketGot = TOTAL_PACKETS_UNDEFINED.value;
     private SamplesPacketSourceAdapter adapter=null;
@@ -183,7 +183,7 @@ public class SamplesPacketSourceDepacketizer implements SamplesSource
 	
 	this.samplesPacketSource=samplesPacketSource;
 	
-	this.samplesLocations=new ArrayList(100);
+	this.samplesLocations=new ArrayList<int []>(100);
 
 	if(this.samplesPacketSource!=null)
 	{

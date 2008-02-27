@@ -38,6 +38,6 @@ public interface IOperation extends java.io.Serializable
     public static final String PROPKEY_HARDWARE_ID = "MCHardware.UniqueID";
     public static final String PROPKEY_HARDWAREINFO = "MCHardware.HardwareInfo";
     short getOperation();
-    Map getProperties();
+    Map<String, Object> getProperties();
     
 }

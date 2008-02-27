@@ -166,7 +166,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	    if (hardwares == null)
 		return;
 
-	    Vector<Apparatus> apparatusListTemp = new Vector<Apparatus>(hardwares == null ? 0 : hardwares.length);
+	    ArrayList<Apparatus> apparatusListTemp = new ArrayList<Apparatus>(hardwares == null ? 0 : hardwares.length);
 
 	    if (hardwares != null) {
 		for (int i = 0; i < hardwares.length; i++) {

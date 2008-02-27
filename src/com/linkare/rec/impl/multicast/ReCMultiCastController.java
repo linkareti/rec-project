@@ -248,14 +248,14 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 
 	/* End Inner Class - Hardware Connection Checker */
 
-	private ArrayList multiCastHardwares = null;
+	private ArrayList<ReCMultiCastHardware> multiCastHardwares = null;
 
 	/* Inner class - HardwareChangeListener implementation */
 	// Also contains the list of hardwares... in House Management
 	private class HardwareChangeAdapter implements HardwareChangeListener {
 
 		public HardwareChangeAdapter() {
-			multiCastHardwares = new ArrayList(MAXIMUM_HARDWARES);
+			multiCastHardwares = new ArrayList<ReCMultiCastHardware>(MAXIMUM_HARDWARES);
 		}
 
 		public void hardwareAdded(HardwareAddEvt evt) {
@@ -337,7 +337,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 		}
 
 		public MultiCastHardware[] enumerateHardwares(IUser userOp) {
-			ArrayList multicastHardwareArrayList = new ArrayList(multiCastHardwares.size());
+			ArrayList<MultiCastHardware> multicastHardwareArrayList = new ArrayList<MultiCastHardware>(multiCastHardwares.size());
 			IOperation op = new DefaultOperation(IOperation.OP_LIST_HARDWARE);
 
 			synchronized (multiCastHardwares) {

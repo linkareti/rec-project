@@ -17,7 +17,7 @@ public interface CommonBean
 
 	public CommonBean[] childBeans(boolean recursive);
 
-	public void childBeans(boolean recursive, List beans);
+	public void childBeans(boolean recursive, List<CommonBean> beans);
 
 	public boolean equals(Object o);
 

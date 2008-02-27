@@ -717,7 +717,7 @@ public class ApparatusClientBean implements DataClientOperations,ExpUsersListSou
     }
     
     
-    private Vector usersList=new Vector();
+    private Vector<UserInfo> usersList=new Vector<UserInfo>();
     private Vector expUsersList=new Vector();
     
     /** Holds value of property usersListRefreshPeriod. */

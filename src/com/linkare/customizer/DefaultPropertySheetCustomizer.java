@@ -115,7 +115,7 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
     
     private Hashtable createHashPropertyDesc(PropertyDescriptor[] pds)
     {
-        Hashtable retVal=new Hashtable();
+        Hashtable<String, PropertyDescriptor> retVal=new Hashtable<String, PropertyDescriptor>();
         if(pds!=null)
         {
             for(int i=0;i<pds.length;i++)

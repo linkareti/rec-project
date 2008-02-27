@@ -15,7 +15,7 @@ public interface IResource extends java.io.Serializable
 {
     IResource getEnclosingResource();
     
-    Map getProperties();
+    Map<String, String> getProperties();
     
     ResourceType getResourceType();
 }

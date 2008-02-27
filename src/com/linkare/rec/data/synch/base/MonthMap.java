@@ -13,8 +13,8 @@ package com.linkare.rec.data.synch.base;
 public class MonthMap
 {
 	
-	private static final java.util.HashMap monthNameMap=new java.util.HashMap();
-	private static final java.util.HashMap monthValueMap=new java.util.HashMap();
+	private static final java.util.HashMap<Integer, String> monthNameMap=new java.util.HashMap<Integer, String>();
+	private static final java.util.HashMap<String, Object> monthValueMap=new java.util.HashMap<String, Object>();
 	static
 	{
 		monthNameMap.put(new Integer(java.util.Calendar.JANUARY),"Janeiro");

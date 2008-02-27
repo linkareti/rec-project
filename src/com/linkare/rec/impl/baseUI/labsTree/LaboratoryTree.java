@@ -360,7 +360,7 @@ public class LaboratoryTree extends javax.swing.JPanel
      */
     private java.util.ArrayList getExpandedPaths()
     {
-        java.util.ArrayList expandedPaths = new java.util.ArrayList();
+        java.util.ArrayList<TreePath> expandedPaths = new java.util.ArrayList<TreePath>();
         addExpandedPaths(labTree.getPathForRow(0), expandedPaths);
         return expandedPaths;
     }
@@ -373,7 +373,7 @@ public class LaboratoryTree extends javax.swing.JPanel
      * @param  path      the path
      * @param  pathlist  the list of expanded paths
      */
-    private void addExpandedPaths(javax.swing.tree.TreePath path, java.util.ArrayList pathlist)
+    private void addExpandedPaths(javax.swing.tree.TreePath path, java.util.ArrayList<TreePath> pathlist)
     {
         java.util.Enumeration enume = labTree.getExpandedDescendants(path);
         if(enume == null)

@@ -27,7 +27,7 @@ public class ReCListResourceBundle extends ReCResourceBundle
     /**
      * Implementation of ResourceBundle.getKeys.
      */
-    public Enumeration getKeys() {
+    public Enumeration<String> getKeys() {
         return delegate.getKeys(); 
     }
 }

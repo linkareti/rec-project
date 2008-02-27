@@ -314,7 +314,7 @@ public class DefaultAcquisitionConfig extends DisplayNode implements com.linkare
     // Return an array of all of the properties that are beans and are set.
     public com.linkare.rec.impl.baseUI.config.CommonBean[] childBeans(boolean recursive)
     {
-	List children = new LinkedList();
+	List<CommonBean> children = new LinkedList<CommonBean>();
 	childBeans(recursive, children);
 	com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children.size()];
 	return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);

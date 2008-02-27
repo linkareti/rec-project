@@ -124,7 +124,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
     public void setOID(String oid)
     {
         this.oid=oid;
-        java.util.Map props=resource.getProperties();
+        java.util.Map<String, String> props=resource.getProperties();
         props.put(ResourceType.DATAPRODUCER.getPropertyKey(), oid);
         ((DefaultResource)resource).setProperties(props);
     }

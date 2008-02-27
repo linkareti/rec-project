@@ -107,7 +107,7 @@ public class PhysicsValueUtil
 	    case PhysicsValueType._FloatVal:
 		return (double)pv.getFloatValue();
 	    case PhysicsValueType._DoubleVal:
-		return (double)pv.getDoubleValue();
+		return pv.getDoubleValue();
 	    case PhysicsValueType._ByteArrayVal:
 		return (double)pv.getByteArrayValue().getData().length;
 	    default:

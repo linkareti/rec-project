@@ -27,6 +27,7 @@ import org.omg.PortableServer.*;
  * @author  jp
  * @version
  */
+@SuppressWarnings("unchecked") //TODO...
 public class ORBBean
 {    
     public static ORBBean getORBBean()

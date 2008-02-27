@@ -7,7 +7,7 @@ package com.linkare.rec.acquisition;
 * from I:/Projects/REC/IdlCompile/ReC7.idl
 * Sabado, 17 de Janeiro de 2004 19H00m GMT
 */
-
+@SuppressWarnings("unchecked")
 public abstract class MultiCastControllerPOA extends org.omg.PortableServer.Servant
  implements com.linkare.rec.acquisition.MultiCastControllerOperations, org.omg.CORBA.portable.InvokeHandler
 {

@@ -13,7 +13,7 @@ import java.util.Hashtable;
  */
 public class ExpHistoryCounter
 {
-    public static Hashtable expCounter=new Hashtable();
+    public static Hashtable<String, Long> expCounter=new Hashtable<String, Long>();
     
     private ExpHistoryCounter()
     {

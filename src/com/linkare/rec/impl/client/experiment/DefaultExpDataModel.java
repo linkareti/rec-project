@@ -30,7 +30,7 @@ public class DefaultExpDataModel extends AbstractExpDataModel
     
     private DateTime timeStart=null;
     //private DataAcquisitionThread dataCollector=null;
-    private Hashtable channels=null;
+    private Hashtable<String, ChannelAcquisitionConfig> channels=null;
     
     
     static
@@ -87,7 +87,7 @@ public class DefaultExpDataModel extends AbstractExpDataModel
                 return null;
             
             if(channels==null)
-                channels=new Hashtable(ch_configs.length);
+                channels=new Hashtable<String, ChannelAcquisitionConfig>(ch_configs.length);
             
             for(int i=0;i<ch_configs.length;i++)
                 channels.put(""+i,ch_configs[i]);

@@ -309,7 +309,7 @@ public class WebResource extends DisplayNode  implements CommonBean, OrderedItem
     // Return an array of all of the properties that are beans and are set.
     public CommonBean[] childBeans(boolean recursive)
     {
-	List children = new LinkedList();
+	List<CommonBean> children = new LinkedList<CommonBean>();
 	childBeans(recursive, children);
 	CommonBean[] result = new CommonBean[children.size()];
 	return (CommonBean[]) children.toArray(result);

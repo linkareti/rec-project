@@ -325,7 +325,7 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
         {
             if (dataDisplayList == null )
             {
-                dataDisplayList = new java.util.ArrayList();
+                dataDisplayList = new java.util.ArrayList<ExpDataDisplay>();
             }
             
             dataDisplayList.add(dataDisplay);
@@ -480,6 +480,6 @@ public class ExperimentInternalFrame extends JInternalFrame implements ExpDataMo
     private ExpDataModel expDataModel;
     
     /** Utility field holding list of ExpDataModelListeners. */
-    private transient ArrayList dataDisplayList;
+    private transient ArrayList<ExpDataDisplay> dataDisplayList;
     
 }

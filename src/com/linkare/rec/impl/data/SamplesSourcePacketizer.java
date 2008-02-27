@@ -11,7 +11,7 @@ public class SamplesSourcePacketizer implements SamplesPacketSource
     private SamplesSource samplesSource=null;
     private Frequency frequency=null;
     private int packetSize=1;
-    private ArrayList packetsLocations=null;
+    private ArrayList<int []> packetsLocations=null;
     private int totalPackets=1;
     private int countSamplesCurrentPacket=0;
     private int currentPacketSampleStartIndex=0;
@@ -184,7 +184,7 @@ public class SamplesSourcePacketizer implements SamplesPacketSource
 	
 	this.samplesSource = samplesSource;
 	
-	this.packetsLocations=new ArrayList(getTotalPackets());
+	this.packetsLocations=new ArrayList<int []>(getTotalPackets());
 	this.currentPacketSampleStartIndex=0;
 	this.countSamplesCurrentPacket=0;
 
@@ -242,8 +242,8 @@ public class SamplesSourcePacketizer implements SamplesPacketSource
 	
 	if(packetsLocations!=null)
 	{
-	    ArrayList tempPacketsLocations=packetsLocations;
-	    packetsLocations=new ArrayList(totalPackets);
+	    ArrayList<int []> tempPacketsLocations=packetsLocations;
+	    packetsLocations=new ArrayList<int []>(totalPackets);
 	    packetsLocations.addAll(tempPacketsLocations);
 	    tempPacketsLocations=null;
 	    System.gc();

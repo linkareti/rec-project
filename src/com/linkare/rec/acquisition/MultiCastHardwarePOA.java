@@ -8,7 +8,7 @@ package com.linkare.rec.acquisition;
 * Sabado, 17 de Janeiro de 2004 19H00m GMT
 */
 
-
+@SuppressWarnings("unchecked")
 //if you get here in a middle of1 an acquisition call getAllSamplesUntilNow
 public abstract class MultiCastHardwarePOA extends org.omg.PortableServer.Servant
  implements com.linkare.rec.acquisition.MultiCastHardwareOperations, org.omg.CORBA.portable.InvokeHandler

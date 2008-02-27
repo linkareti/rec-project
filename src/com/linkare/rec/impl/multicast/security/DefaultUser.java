@@ -10,6 +10,7 @@ import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.acquisition.Property;
 import java.util.HashMap;
 import java.util.Map;
+import org.omg.CORBA.Any;
 /**
  *
  * @author  Administrator
@@ -18,14 +19,14 @@ public class DefaultUser implements IUser
 {
     private String userName;
     private byte[] auth;
-    private HashMap properties;
+    private HashMap<String, Any> properties;
     
     /** Creates a new instance of DefaultUser */
     public DefaultUser()
     {
 	setUserName("<empty user name>");
 	setAuth("<empty pass>".getBytes());
-	setProperties(new HashMap());
+	setProperties(new HashMap<String, Any>());
     }
     
     public DefaultUser(UserInfo userInfo)
@@ -41,7 +42,7 @@ public class DefaultUser implements IUser
 	
 	Property[] props=userInfo.getUserProps();
 	
-	setProperties(new HashMap());
+	setProperties(new HashMap<String, Any>());
 	
 	for(int i=0;i<props.length;i++)
 	{
@@ -89,7 +90,7 @@ public class DefaultUser implements IUser
      * @return Value of property properties.
      *
      */
-    public Map getProperties()
+    public Map<String, Any> getProperties()
     {
 	return properties;
     }
@@ -98,9 +99,9 @@ public class DefaultUser implements IUser
      * @param properties New value of property properties.
      *
      */
-    public void setProperties(Map properties)
+    public void setProperties(Map<String, Any> properties)
     {
-	this.properties = new HashMap(properties);
+	this.properties = new HashMap<String, Any>(properties);
     }
     
     

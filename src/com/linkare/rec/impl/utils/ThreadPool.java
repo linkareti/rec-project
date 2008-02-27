@@ -6,12 +6,12 @@ public class ThreadPool
 {
     private final int nThreads;
     private final PoolWorkerThread[] threads;
-    private final LinkedList queue;
+    private final LinkedList<Runnable> queue;
 
     public ThreadPool(int nThreads)
     {
         this.nThreads = nThreads;
-        queue = new LinkedList();
+        queue = new LinkedList<Runnable>();
         threads = new PoolWorkerThread[nThreads];
 
         for (int i=0; i<nThreads; i++) {
@@ -43,7 +43,7 @@ public class ThreadPool
                         }
                     }
 
-                    r = (Runnable) queue.removeFirst();
+                    r = queue.removeFirst();
                 }
 
                 // If we don't catch RuntimeException, 

@@ -49,7 +49,7 @@ public class BaseHardware implements HardwareOperations,BaseDataProducerListener
     private HardwareAcquisitionConfig config=null;
     
     private BaseDataProducer dataProducerInEffect= null;
-    private Vector oldDataProducers=new Vector();
+    private Vector<BaseDataProducer> oldDataProducers=new Vector<BaseDataProducer>();
     
     protected DataClientWrapper dataClient=null;
     

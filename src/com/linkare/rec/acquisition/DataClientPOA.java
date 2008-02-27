@@ -7,7 +7,7 @@ package com.linkare.rec.acquisition;
 * from I:/Projects/REC/IdlCompile/ReC7.idl
 * Terca-feira, 30 de Dezembro de 2003 11H33m GMT
 */
-
+@SuppressWarnings("unchecked")
 public abstract class DataClientPOA extends org.omg.PortableServer.Servant implements com.linkare.rec.acquisition.DataClientOperations, org.omg.CORBA.portable.InvokeHandler
 {
 

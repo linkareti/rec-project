@@ -225,7 +225,7 @@ public abstract class AbstractIndexedPropertyEditor extends PropertyEditorSuppor
     private String[] splitArrayString(String strCSArray)
     {
 	
-	ArrayList splitStrList=new ArrayList();
+	ArrayList<String> splitStrList=new ArrayList<String>();
 	int locatePos=0;
 	while(strCSArray.length()>0)
 	{

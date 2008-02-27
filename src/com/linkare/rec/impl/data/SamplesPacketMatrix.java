@@ -593,7 +593,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource,Serializable
     }
     
     
-    
+    @SuppressWarnings("unchecked") //readObject warnings...
     private void readObject(ObjectInputStream stream) throws IOException,ClassNotFoundException
     
     {

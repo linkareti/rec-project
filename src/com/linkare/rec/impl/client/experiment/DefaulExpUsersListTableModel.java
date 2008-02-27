@@ -71,17 +71,15 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
         }
         
         
-        Arrays.sort(expUsers,new Comparator()
+        Arrays.sort(expUsers,new Comparator<UserInfo>()
         {
-            public int compare(Object o1,Object o2)
+            public int compare(UserInfo u1,UserInfo u2)
             {
-                if(o1==null && o2==null) return 0;
+                if(u1==null && u2==null) return 0;
                 
-                if(o1==null || !(o1 instanceof UserInfo)) return -1;
-                if(o2==null || !(o2 instanceof UserInfo)) return +1;
+                if(u1==null) return -1;
+                if(u2==null) return +1;
                 
-                UserInfo u1=(UserInfo)o1;
-                UserInfo u2=(UserInfo)o2;
                 
                 if(u1.getNextLockTime() == null && u2.getNextLockTime() == null)
                     return 0;
@@ -113,7 +111,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
         });
         
         
-        Vector expUsersList=new Vector(expUsers.length);
+        Vector<String[]> expUsersList=new Vector<String[]>(expUsers.length);
         
         for(int i=0;i<expUsers.length;i++)
         {

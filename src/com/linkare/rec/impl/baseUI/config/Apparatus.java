@@ -26,10 +26,10 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
     private String _DisplayFactoryClassLocationBundleKey = "";         
     private String _CustomizerClassLocationBundleKey = "";
     private String _Location = "";
-    private List _DefaultAcquisitionConfig = new ArrayList();	// List<DefaultAcquisitionConfig>
-    private List _Display = new ArrayList();	// List<Display>
-    private List _WebResource = new ArrayList();	// List<WebResource>
-    private List _LocalizationBundle = new ArrayList();	// List<LocalizationBundle>
+    private List<DefaultAcquisitionConfig> _DefaultAcquisitionConfig = new ArrayList<DefaultAcquisitionConfig>();	// List<DefaultAcquisitionConfig>
+    private List<Display> _Display = new ArrayList<Display>();	// List<Display>
+    private List<WebResource> _WebResource = new ArrayList<WebResource>();	// List<WebResource>
+    private List<LocalizationBundle> _LocalizationBundle = new ArrayList<LocalizationBundle>();	// List<LocalizationBundle>
     private PropertyChangeSupport eventListeners;
     
     public Apparatus()
@@ -1109,14 +1109,14 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
     // Return an array of all of the properties that are beans and are set.
     public com.linkare.rec.impl.baseUI.config.CommonBean[] childBeans(boolean recursive)
     {
-	List children = new LinkedList();
+	List<CommonBean> children = new LinkedList<CommonBean>();
 	childBeans(recursive, children);
 	com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children.size()];
 	return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);
     }
     
     // Put all child beans into the beans list.
-    public void childBeans(boolean recursive, List beans)
+    public void childBeans(boolean recursive, List<CommonBean> beans)
     {
 	for (Iterator it = _DefaultAcquisitionConfig.iterator();
 	it.hasNext(); )

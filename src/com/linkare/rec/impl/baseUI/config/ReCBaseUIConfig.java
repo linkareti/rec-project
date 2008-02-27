@@ -114,6 +114,7 @@ import javax.jnlp.*;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import java.util.logging.*;
 import com.linkare.rec.impl.utils.Defaults;
+import java.util.LinkedList;
 
 
 public class ReCBaseUIConfig implements CommonBean
@@ -159,8 +160,8 @@ public class ReCBaseUIConfig implements CommonBean
     private String _FrameTitleBundleKey;
     private String _IconSponsorLocationBundleKey = "";
     private String _HelpPageLocationBundleKey = "";
-    private List _Lab = new ArrayList();	// List<Lab>
-    private List _WebResource = new ArrayList();	// List<WebResource>
+    private List<Lab> _Lab = new ArrayList<Lab>();	// List<Lab>
+    private List<WebResource> _WebResource = new ArrayList<WebResource>();	// List<WebResource>
     private PropertyChangeSupport eventListeners;
     
     
@@ -1315,14 +1316,14 @@ public class ReCBaseUIConfig implements CommonBean
     // Return an array of all of the properties that are beans and are set.
     public CommonBean[] childBeans(boolean recursive)
     {
-	List children = new java.util.LinkedList();
+	List<CommonBean> children = new LinkedList<CommonBean>();
 	childBeans(recursive, children);
 	CommonBean[] result = new CommonBean[children.size()];
 	return (CommonBean[]) children.toArray(result);
     }
     
     // Put all child beans into the beans list.
-    public void childBeans(boolean recursive, List beans)
+    public void childBeans(boolean recursive, List<CommonBean> beans)
     {
 	for (Iterator it = _Lab.iterator(); it.hasNext(); )
 	{

@@ -1,5 +1,5 @@
 package com.linkare.rec.acquisition;
-
+@SuppressWarnings("unchecked")
 public abstract class HardwarePOA extends org.omg.PortableServer.Servant
 implements com.linkare.rec.acquisition.HardwareOperations, org.omg.CORBA.portable.InvokeHandler
 {

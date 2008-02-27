@@ -43,7 +43,7 @@ public abstract class ReCResourceBundle extends ResourceBundle
         System.out.println(message);
     }
     
-    private static HashMap bundles=new HashMap();
+    private static HashMap<String, ReCResourceBundle> bundles=new HashMap<String, ReCResourceBundle>();
     
     public static String findString(String bundleName,String key)
     throws MissingResourceException
@@ -225,10 +225,10 @@ public abstract class ReCResourceBundle extends ResourceBundle
     public static ReCResourceBundle loadResourceBundle(String bundleName,String bundleLocation,Locale locale)
     {
 	//first try to locate the bundle in the cache
-	ArrayList bundleKeys=calculateLanguageVariants(bundleName,locale);
-	String bundleNameKey=(String)bundleKeys.get(0);
+	ArrayList<String> bundleKeys=calculateLanguageVariants(bundleName,locale);
+	String bundleNameKey=bundleKeys.get(0);
 	if(bundles.containsKey(bundleNameKey))
-	    return (ReCResourceBundle)bundles.get(bundleNameKey);
+	    return bundles.get(bundleNameKey);
 	
 	//next calculate the languageVariants
 	ArrayList bundleLocations=calculateLanguageVariants(bundleLocation, locale);
@@ -240,7 +240,7 @@ public abstract class ReCResourceBundle extends ResourceBundle
 	    if(bundle!=null)
 	    {
 		bundles.put(bundleKeys.get(i), bundle);
-		propagateBundle(bundle,bundleLocationCurrent,(String)bundleKeys.get(i));
+		propagateBundle(bundle,bundleLocationCurrent, bundleKeys.get(i));
 		return bundle;
 	    }
 	    else
@@ -249,7 +249,7 @@ public abstract class ReCResourceBundle extends ResourceBundle
 		if(bundle!=null)
 		{
 		    bundles.put(bundleKeys.get(i),bundle);
-		    propagateBundle(bundle,bundleLocationCurrent,(String)bundleKeys.get(i));
+		    propagateBundle(bundle,bundleLocationCurrent, bundleKeys.get(i));
 		    return bundle;
 		}
 	    }
@@ -338,7 +338,7 @@ public abstract class ReCResourceBundle extends ResourceBundle
 	return null;
     }
     
-    private static ArrayList calculateLanguageVariants(String base,Locale locale)
+    private static ArrayList<String> calculateLanguageVariants(String base,Locale locale)
     {
 	String language1=locale.getLanguage();
 	String country1=locale.getCountry();
@@ -349,7 +349,7 @@ public abstract class ReCResourceBundle extends ResourceBundle
 	String country2=defLocale.getCountry();
 	String variant2=defLocale.getVariant();
 	
-	ArrayList retVal=new ArrayList(7);
+	ArrayList<String> retVal=new ArrayList<String>(7);
 	
 	String temp="";
 	if(language1!=null && !language1.equals(""))

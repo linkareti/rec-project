@@ -14,7 +14,7 @@ import org.omg.CORBA.portable.OutputStream;
 import org.omg.CORBA.portable.ResponseHandler;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.Servant;
-
+@SuppressWarnings("unchecked")
 public abstract class RepositoryManagerPOA extends Servant implements RepositoryManagerOperations, InvokeHandler
 {
     
