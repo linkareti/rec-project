@@ -111,6 +111,9 @@ public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec
         g2D.drawImage(imgSeringe,center_x,center_y,imgSeringe.getWidth(),imgSeringe.getHeight(),null);
         int volumepos=(int)Math.floor(40.*(volume-VOL_MIN)/(VOL_MAX-VOL_MIN));
         int pressureColor=155*(int)Math.floor((pressure-PRESS_MIN)/(PRESS_MAX-PRESS_MIN));
+	if(pressureColor > 155){
+		pressureColor = 155;
+	}
         g2D.drawImage(imgEmbolo,center_x+4,center_y+20+volumepos,imgEmbolo.getWidth(),imgEmbolo.getHeight(),null);
         g2D.setColor(new Color(0,255,255,100+pressureColor));
         g2D.fillRect(center_x+3,center_y+11,31,volumepos+10-1);
