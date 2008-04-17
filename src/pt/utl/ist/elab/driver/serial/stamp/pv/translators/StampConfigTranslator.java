@@ -43,13 +43,13 @@ public class StampConfigTranslator extends AbstractStampTranslator
 		int dt = ((Integer)command.getCommandData(FREQ_INTERBAL_STR)).intValue();
 		
 		
-		if(userposhigh>50 || userposhigh<20)
+		if(userposhigh>70 || userposhigh<40)
 		{
 		    System.out.println("userposhigh is wrong..." + userposhigh);
 		    return false;
 		}
 		
-		if(userposlow>50 || userposlow<20)
+		if(userposlow>70 || userposlow<40)
 		{
 		    System.out.println("userposlow is wrong..." + userposlow);
 		    return false;
