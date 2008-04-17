@@ -30,10 +30,10 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	initComponents();
 	
 	Hashtable slidersPosLabels=new Hashtable(4);
-	slidersPosLabels.put(new Integer(2000),new JLabel("2.0"));
-	slidersPosLabels.put(new Integer(3000),new JLabel("3.0"));
 	slidersPosLabels.put(new Integer(4000),new JLabel("4.0"));
 	slidersPosLabels.put(new Integer(5000),new JLabel("5.0"));
+	slidersPosLabels.put(new Integer(6000),new JLabel("6.0"));
+	slidersPosLabels.put(new Integer(7000),new JLabel("7.0"));
 	
 	sldPos1.setLabelTable(slidersPosLabels);
 	sldPos2.setLabelTable(slidersPosLabels);
@@ -294,8 +294,8 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanel5.setMinimumSize(new java.awt.Dimension(350, 160));
         jPanel5.setPreferredSize(new java.awt.Dimension(350, 160));
         sldPos1.setMajorTickSpacing(1000);
-        sldPos1.setMaximum(5000);
-        sldPos1.setMinimum(2000);
+        sldPos1.setMaximum(7000);
+        sldPos1.setMinimum(4000);
         sldPos1.setMinorTickSpacing(100);
         sldPos1.setPaintLabels(true);
         sldPos1.setPaintTicks(true);
@@ -319,8 +319,8 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         jPanel5.add(sldPos1, gridBagConstraints);
 
         sldPos2.setMajorTickSpacing(1000);
-        sldPos2.setMaximum(5000);
-        sldPos2.setMinimum(2000);
+        sldPos2.setMaximum(7000);
+        sldPos2.setMinimum(4000);
         sldPos2.setMinorTickSpacing(100);
         sldPos2.setPaintLabels(true);
         sldPos2.setPaintTicks(true);
@@ -356,7 +356,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(lblErrorVolsAreEqua, gridBagConstraints);
 
-        tfPos1.setText("2.0");
+        tfPos1.setText("4.0");
         tfPos1.addFocusListener(new java.awt.event.FocusAdapter()
         {
             public void focusLost(java.awt.event.FocusEvent evt)
@@ -534,10 +534,10 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	{//GEN-HEADEREND:event_btnDefaultsActionPerformed
 	    sldNumSamples.setValue(150);
 	    tfNumSamples.setText("150");
-	    sldPos1.setValue(2000);
-	    tfPos1.setValue(new Float(2.0));
-	    sldPos2.setValue(5000);
-	    tfPos2.setValue(new Float(5.0));
+	    sldPos1.setValue(4000);
+	    tfPos1.setValue(new Float(4.0));
+	    sldPos2.setValue(7000);
+	    tfPos2.setValue(new Float(7.0));
 	    sldFreq.setValue(150);
 	    tfFreq.setText(""+150);
 	}//GEN-LAST:event_btnDefaultsActionPerformed
