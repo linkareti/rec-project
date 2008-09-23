@@ -3,44 +3,39 @@
  *
  * Created on 2 de Junho de 2003, 14:18
  */
-
 package pt.utl.ist.elab.client.serial.stamp.rayleigh.displays;
-
 
 import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
 import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
 import com.linkare.rec.data.config.*;
 
 /**
  *
  * @author  jp
  */
-public class RaySensor extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay, com.linkare.rec.impl.client.experiment.ExpDataModelListener
-{
-    
-    private BufferedImage imgTube1=new BufferedImage(50,400,BufferedImage.TYPE_INT_ARGB);
-    private Icon icon=new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
+public class RaySensor extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay, com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+
+    private BufferedImage imgTube1 = new BufferedImage(50, 400, BufferedImage.TYPE_INT_ARGB);
+    private Icon icon = new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
     private java.text.DecimalFormat decf = new java.text.DecimalFormat();
-    
+
     /** Creates new form SeringeSensor */
-    public RaySensor()
-    {
-	initComponents();
-	setPreferredSize(new Dimension(imgTube1.getWidth()+2*10,imgTube1.getHeight()+2*10));
-	setMinimumSize(getPreferredSize());
-	setMaximumSize(getPreferredSize());
-	
-	Graphics2D g2D=(Graphics2D)imgTube1.getGraphics();
-	g2D.setColor(Color.white);
-	g2D.drawRect(0,0,imgTube1.getWidth()-1,imgTube1.getHeight()-1);
-        
+    public RaySensor() {
+        initComponents();
+        setPreferredSize(new Dimension(imgTube1.getWidth() + 2 * 10, imgTube1.getHeight() + 2 * 10));
+        setMinimumSize(getPreferredSize());
+        setMaximumSize(getPreferredSize());
+
+        Graphics2D g2D = (Graphics2D) imgTube1.getGraphics();
+        g2D.setColor(Color.white);
+        g2D.drawRect(0, 0, imgTube1.getWidth() - 1, imgTube1.getHeight() - 1);
+
         decf.setGroupingUsed(false);
         decf.setMaximumFractionDigits(2);
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -79,129 +74,128 @@ public class RaySensor extends javax.swing.JPanel implements com.linkare.rec.imp
      * @see #getComponentGraphics
      * @see #repaint
      */
-    public void paint(Graphics g)
-    {
-	super.paint(g);
-	Graphics2D g2D=(Graphics2D)g;
+    public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D g2D = (Graphics2D) g;
 
-        int imgWidth=(int)getBounds().getWidth();
-	int imgHeight=(int)getBounds().getHeight();
-        
-        int draw_height = (int)(imgTube1.getHeight() * height / HEIGHT_MAX);
-        
-	int x_start=imgWidth/2-imgTube1.getWidth()/2;
-	int y_start=imgHeight/2-imgTube1.getHeight()/2;
-	
-	g2D.drawImage(imgTube1,x_start,y_start,imgTube1.getWidth(),imgTube1.getHeight(),null);
-	
+        int imgWidth = (int) getBounds().getWidth();
+        int imgHeight = (int) getBounds().getHeight();
+
+        int draw_height = (int) (imgTube1.getHeight() * height / HEIGHT_MAX);
+
+        int x_start = imgWidth / 2 - imgTube1.getWidth() / 2;
+        int y_start = imgHeight / 2 - imgTube1.getHeight() / 2;
+
+        g2D.drawImage(imgTube1, x_start, y_start, imgTube1.getWidth(), imgTube1.getHeight(), null);
+
         g2D.setColor(java.awt.Color.ORANGE);
-        
-        g2D.fillRect(x_start, y_start + imgTube1.getHeight() - draw_height - 5, imgTube1.getWidth(), 5);         
-        
-        g2D.drawString("Posi\u00e7\u00e3o = " + decf.format(height) + "mm", x_start + imgTube1.getWidth() + 10, y_start + imgTube1.getHeight()/2 - 10);
-        g2D.drawString("Intensidade = " + decf.format(intensity) + "V", x_start + imgTube1.getWidth() + 10, y_start + imgTube1.getHeight()/2 + 10);
-        
-        /*g2D.drawLine(x_start, y_start + imgTube1.getHeight() - draw_height, x_start + 100, y_start + 140);
-        g2D.drawLine(x_start, y_start + imgTube1.getHeight() - draw_height - 5, x_start + 100, y_start + 135);
-        g2D.drawLine(x_start + imgTube1.getWidth(), y_start + imgTube1.getHeight() - draw_height, x_start + imgTube1.getWidth() + 100, y_start + 140);
-        g2D.drawLine(x_start + imgTube1.getWidth(), y_start + imgTube1.getHeight() - draw_height - 5, x_start + imgTube1.getWidth() + 100, y_start + 135);
-        
-        g2D.setColor(java.awt.Color.GRAY);
-        g2D.fillRect(x_start + 80, y_start + 120, 2*imgTube1.getWidth(), 40);*/
-        
-	//g2D.setFont(new Font("Verdana",Font.PLAIN,12));
-	//g2D.setColor(new Color(255,255,230));
-	//g2D.drawString("P ["+header.getChannelsConfig(0).getSelectedScale().getMultiplier()+header.getChannelsConfig(0).getSelectedScale().getPhysicsUnitSymbol()+"] = " + (int)pressure,center_x+imgSeringe.getWidth()+10,center_y+imgSeringe.getHeight());
-	//g2D.drawString("V ["+header.getChannelsConfig(1).getSelectedScale().getMultiplier()+header.getChannelsConfig(1).getSelectedScale().getPhysicsUnitSymbol()+"] = " + (int)volume,center_x+imgSeringe.getWidth()+10,center_y+imgSeringe.getHeight()+g2D.getFontMetrics().getHeight()+8);
-	
-    }    
+
+        g2D.fillRect(x_start, y_start + imgTube1.getHeight() - draw_height - 5, imgTube1.getWidth(), 5);
+
+        g2D.drawString("Posi\u00e7\u00e3o = " + decf.format(height) + "mm", x_start + imgTube1.getWidth() + 10, y_start + imgTube1.getHeight() / 2 - 10);
+        g2D.drawString("Intensidade = " + decf.format(intensity) + "V", x_start + imgTube1.getWidth() + 10, y_start + imgTube1.getHeight() / 2 + 10);
+
+    /*g2D.drawLine(x_start, y_start + imgTube1.getHeight() - draw_height, x_start + 100, y_start + 140);
+    g2D.drawLine(x_start, y_start + imgTube1.getHeight() - draw_height - 5, x_start + 100, y_start + 135);
+    g2D.drawLine(x_start + imgTube1.getWidth(), y_start + imgTube1.getHeight() - draw_height, x_start + imgTube1.getWidth() + 100, y_start + 140);
+    g2D.drawLine(x_start + imgTube1.getWidth(), y_start + imgTube1.getHeight() - draw_height - 5, x_start + imgTube1.getWidth() + 100, y_start + 135);
     
+    g2D.setColor(java.awt.Color.GRAY);
+    g2D.fillRect(x_start + 80, y_start + 120, 2*imgTube1.getWidth(), 40);*/
+
+    //g2D.setFont(new Font("Verdana",Font.PLAIN,12));
+    //g2D.setColor(new Color(255,255,230));
+    //g2D.drawString("P ["+header.getChannelsConfig(0).getSelectedScale().getMultiplier()+header.getChannelsConfig(0).getSelectedScale().getPhysicsUnitSymbol()+"] = " + (int)pressure,center_x+imgSeringe.getWidth()+10,center_y+imgSeringe.getHeight());
+    //g2D.drawString("V ["+header.getChannelsConfig(1).getSelectedScale().getMultiplier()+header.getChannelsConfig(1).getSelectedScale().getPhysicsUnitSymbol()+"] = " + (int)volume,center_x+imgSeringe.getWidth()+10,center_y+imgSeringe.getHeight()+g2D.getFontMetrics().getHeight()+8);
+
+    }
     public double HEIGHT_MAX = 1600.;
-    public double HEIGHT_MIN = 0.; 
+    public double HEIGHT_MIN = 0.;
     public double height = 0.;
     public double intensity = 0.;
-    
-    
-    public void setHeight(double height)
-    {
-	this.height=height;
-	repaint();
+
+    public void setHeight(double height) {
+        this.height = height;
+        repaint();
     }
-    
-    public void setIntensity(double intensity)
-    {
+
+    public void setIntensity(double intensity) {
         this.intensity = intensity;
     }
-    
-    public javax.swing.JComponent getDisplay()
-    {
-	return this;
+
+    public javax.swing.JComponent getDisplay() {
+        return this;
     }
-    
-    public Icon getIcon()
-    {
-	return icon;
+
+    public Icon getIcon() {
+        return icon;
     }
-    
-    private ExpDataModel model=null;
-    public void setExpDataModel(ExpDataModel model)
-    {
-	if(this.model!=null)
-	    this.model.removeExpDataModelListener(this);
-	this.model=model;
-	if(this.model!=null)
-	    this.model.addExpDataModelListener(this);
-	
-    }
-    
-    public void dataModelRunning()
-    {
-    }
-    
-    public void dataModelStoped()
-    {
-    }
-    
-    public void headerAvailable(HardwareAcquisitionConfig header)
-    {
-	acqHeaderInited=true;
-	
-	this.header=header;	
-    }
-    private HardwareAcquisitionConfig header=null;
-    private boolean acqHeaderInited=false;
-    public void newSamples(NewExpDataEvent evt)
-    {
-        for(int i=evt.getSamplesStartIndex(); i<=evt.getSamplesEndIndex(); i++)
-        {
-            setIntensity(model.getValueAt(i, 1).getValue().getDoubleValue()); 
-            setHeight(model.getValueAt(i, 0).getValue().getIntValue()); 
+    private ExpDataModel model = null;
+
+    public void setExpDataModel(ExpDataModel model) {
+        if (this.model != null) {
+            this.model.removeExpDataModelListener(this);
+        }
+        this.model = model;
+        if (this.model != null) {
+            this.model.addExpDataModelListener(this);
         }
     }
-    
-    public String getName()
-    {
-	return "Sensor";
+
+    public void dataModelRunning() {
     }
-    
-    public JMenuBar getMenuBar()
-    {
-	return null;
+
+    public void dataModelStoped() {
     }
-    
-    public JToolBar getToolBar()
-    {
-	return null;
+
+    public void headerAvailable(HardwareAcquisitionConfig header) {
+        acqHeaderInited = true;
+
+        this.header = header;
     }
-    
+    private HardwareAcquisitionConfig header = null;
+    private boolean acqHeaderInited = false;
+
+    public void newSamples(NewExpDataEvent evt) {
+        for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
+            setIntensity(model.getValueAt(i, 1).getValue().getDoubleValue());
+            setHeight(model.getValueAt(i, 0).getValue().getIntValue());
+        }
+    }
+
+    public String getName() {
+        return "Sensor";
+    }
+
+    public JMenuBar getMenuBar() {
+        return null;
+    }
+
+    public JToolBar getToolBar() {
+        return null;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         RaySensor r = new RaySensor();
         javax.swing.JFrame jf = new javax.swing.JFrame();
         jf.getContentPane().add(r);
         jf.pack();
         jf.show();
+    }
+
+    public void dataModelWaiting() {
+    }
+
+    public void dataModelStartedNoData() {
+    }
+
+    public void dataModelStarted() {
+    }
+
+    public void dataModelEnded() {
+    }
+
+    public void dataModelError() {
     }
 }

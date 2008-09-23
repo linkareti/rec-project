@@ -6,7 +6,7 @@
 
 package pt.utl.ist.elab.client.serial.stamp.rayleigh.displays;
 
-import pt.utl.ist.elab.rec.impl.baseUI.graph.*;
+import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
 
 /**
  *

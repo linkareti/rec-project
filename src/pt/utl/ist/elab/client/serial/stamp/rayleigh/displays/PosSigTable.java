@@ -6,12 +6,13 @@
 
 package pt.utl.ist.elab.client.serial.stamp.rayleigh.displays;
 
+import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
+
 /**
  *
  * @author  andre
  */
 
-import pt.utl.ist.elab.rec.impl.baseUI.table.*;
 
 public class PosSigTable extends MultSeriesTable
 {
