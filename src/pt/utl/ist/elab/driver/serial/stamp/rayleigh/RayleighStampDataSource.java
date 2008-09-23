@@ -12,6 +12,7 @@ import com.linkare.rec.acquisition.*;
 import com.linkare.rec.data.config.*;
 import com.linkare.rec.data.acquisition.*;
 import com.linkare.rec.data.metadata.*;
+import com.linkare.rec.impl.data.PhysicsValueFactory;
 import com.linkare.rec.impl.logging.*;
 import com.linkare.rec.impl.utils.*;
 import java.util.logging.*;
@@ -69,6 +70,10 @@ public class RayleighStampDataSource extends AbstractStampDataSource
         delay_time = 1000/(float)(getAcquisitionHeader().getSelectedFrequency().getFrequency());
         setPacketSize(1);
 	//setPacketSize((int)Math.ceil(1./(8.*config.getSelectedFrequency().getFrequency()*config.getSelectedFrequency().getMultiplier().getExpValue())));
+    }
+
+    public void stopNow() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

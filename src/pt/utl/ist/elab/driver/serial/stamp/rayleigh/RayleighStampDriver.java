@@ -67,7 +67,7 @@ public class RayleighStampDriver extends AbstractStampDriver
 	
 	StampTranslator translator=StampTranslatorProcessorManager.getTranslator(stampConfig);
 	if(!translator.translate(stampConfig))
-	    throw new WrongConfigurationException(-1,"Cannot translate StampCommand!");
+	    throw new WrongConfigurationException("Cannot translate StampCommand!",-1);
 	
 	config.getChannelsConfig(0).setTotalSamples(config.getTotalSamples());
 	config.getChannelsConfig(1).setTotalSamples(config.getTotalSamples());
@@ -184,8 +184,7 @@ public class RayleighStampDriver extends AbstractStampDriver
 	    config.getChannelsConfig(1).setTimeStart(dt);
             config.getChannelsConfig(2).setTimeStart(dt);
 	    config.setTimeStart(dt);
-	    if(dataSource!=null)
-		dataSource.setRunning(true);
+            fireIDriverStateListenerDriverStarted();
 	    
 	}
 	else if(cmd.getCommandIdentifier().trim().equalsIgnoreCase(StampConfiguredProcessor.COMMAND_IDENTIFIER))
