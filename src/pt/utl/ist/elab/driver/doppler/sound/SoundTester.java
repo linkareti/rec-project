@@ -436,6 +436,11 @@ public class SoundTester extends javax.swing.JFrame
             this.acquired = acquired;
             fireDatasetChanged();
         }
+
+        @Override
+        public Comparable getSeriesKey(int arg0) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
         
     }
     
@@ -491,6 +496,11 @@ public class SoundTester extends javax.swing.JFrame
         {
             this.acquired = acquired;
             fireDatasetChanged();
+        }
+
+        @Override
+        public Comparable getSeriesKey(int arg0) {
+            throw new UnsupportedOperationException("Not supported yet.");
         }
         
     }

@@ -9,6 +9,7 @@ import com.linkare.rec.impl.utils.*;
 import com.linkare.rec.impl.driver.*;
 import com.linkare.rec.impl.logging.*;
 import java.util.logging.*;
+import pt.utl.ist.elab.driver.serial.stamp.radioactividade.RadioactividadeStampDriver;
 
 /**
  *
