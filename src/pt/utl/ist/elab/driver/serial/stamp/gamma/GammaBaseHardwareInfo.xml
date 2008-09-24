@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_GAMMA_V1.0" familiarName="Gamma" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+
+    <parameter name="Volume" type="ContinuousValue" value="10">
+        <selection-list>
+            <value order="1">5</value>
+            <value order="2">20</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+
+    <frequency-scale label="1000 Hz">
+        <min-frequency><Frequency type="FrequencyType" multiplier="none">500</Frequency></min-frequency>
+        <max-frequency><Frequency type="FrequencyType" multiplier="none">1000</Frequency></max-frequency>
+        <step-frequency><Frequency type="FrequencyType" multiplier="none">50</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="FrequencyType" multiplier="none">1000</Frequency>
+    
+    <sampling-scale>
+        <min-samples>100</min-samples>
+        <max-samples>520</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="T. Relativo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo Relativo" physicsunitname="segundos" physicsunitsymbol="s" multiplier="milli" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">4294967295</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.0001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>                  
+    <ChannelInfo name="Pressao" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Pressao" physicsunitname="Bar" physicsunitsymbol="Bar" multiplier="milli" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1150</PhysicsVal></max>            				 
+            <step><PhysicsVal type="float">0.00001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">2</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>      
+    <ChannelInfo name="Pressao_Mic" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Pressao_Mic" physicsunitname="V" physicsunitsymbol="V" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">5</PhysicsVal></max>            				 
+            <step><PhysicsVal type="float">0.00001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.002</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>  
+    <ChannelInfo name="Periodo_Osc" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Periodo_Osc" physicsunitname="Tempo" physicsunitsymbol="s" multiplier="micro" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">100000000</PhysicsVal></max>            				 
+            <step><PhysicsVal type="float">0.000001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>        
+</HardwareInfo>
+
