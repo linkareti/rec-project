@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_CC_STAMP_V02" familiarName="Condensador Cilíndrico" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    
+    <parameter name="Calibrate" type="OnOffValue" value="0">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">0</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="StartPosition" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">670</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="EndPosition" type="ContinuousValue" value="670">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">670</value>
+            <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">670</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="milli">10</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>20</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="Frequência" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Frequência [kHz]" physicsunitname="Hertz" physicsunitsymbol="Hz" multiplier="kilo" selected="true">
+            <min><PhysicsVal type="float">800</PhysicsVal></min>
+            <max><PhysicsVal type="float">2500</PhysicsVal></max>
+            <step><PhysicsVal type="float">10</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">10</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Capacidade" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Capacidade [pF]" physicsunitname="Farad" physicsunitsymbol="F" multiplier="pico" selected="true">
+            <min><PhysicsVal type="float">800</PhysicsVal></min>
+            <max><PhysicsVal type="float">2500</PhysicsVal></max>
+            <step><PhysicsVal type="float">10</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">10</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Distância" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Distância [mm]" physicsunitname="metros" physicsunitsymbol="m" multiplier="milli" selected="true">
+            <min><PhysicsVal type="float">2</PhysicsVal></min>
+            <max><PhysicsVal type="float">5</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.20</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+
+</HardwareInfo>
+
