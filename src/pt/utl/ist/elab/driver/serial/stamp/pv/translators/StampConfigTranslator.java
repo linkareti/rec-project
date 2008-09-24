@@ -20,7 +20,7 @@ public class StampConfigTranslator extends AbstractStampTranslator
 	public static final String USER_POS_HIGH_STR="UserPosHigh";
 	public static final String USER_POS_LOW_STR="UserPosLow";
 	public static final String NUMSAMPLES_STR="Numero de Amostras";
-	public static final String FREQ_INTERBAL_STR="Intervalo entre amostras";
+	public static final String FREQ_INTERVAL_STR="Intervalo entre amostras";
 	
 	/** Creates a new instance of StampRelayTranslator */
 	public StampConfigTranslator()
@@ -40,7 +40,7 @@ public class StampConfigTranslator extends AbstractStampTranslator
 		userposlowf=userposlowf*10.F;
 		int userposlow=(int)Math.floor(userposlowf);
 		int userposhigh=(int)Math.floor(userposhighf);
-		int dt = ((Integer)command.getCommandData(FREQ_INTERBAL_STR)).intValue();
+		int dt = ((Integer)command.getCommandData(FREQ_INTERVAL_STR)).intValue();
 		
 		
 		if(userposhigh>70 || userposhigh<40)
