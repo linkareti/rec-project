@@ -6,14 +6,13 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.gamma.processors;
 
-import pt.utl.ist.elab.driver.usb.cypress.transproc.*;
-import pt.utl.ist.elab.driver.usb.cypress.*;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
 
 /**
  *
  * @author  bruno
  */
-public class StampGammaProcessor2 extends AbstractCypressProcessor
+public class StampGammaProcessor2 extends AbstractStampProcessor
 {
     public static final String COMMAND_IDENTIFIER = "TIME=";
     public static final String TIME = "time";
@@ -30,7 +29,7 @@ public class StampGammaProcessor2 extends AbstractCypressProcessor
      * @return boolean - wether the processing was successfull
      *
      */
-    public boolean process(CypressCommand command)
+    public boolean process(StampCommand command)
     {
 	
 	int time = 0;

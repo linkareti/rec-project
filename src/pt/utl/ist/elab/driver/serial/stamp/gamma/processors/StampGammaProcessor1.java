@@ -6,14 +6,13 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.gamma.processors;
 
-import pt.utl.ist.elab.driver.usb.cypress.transproc.*;
-import pt.utl.ist.elab.driver.usb.cypress.*;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
 
 /**
  *
  * @author  bruno
  */
-public class StampGammaProcessor1 extends AbstractCypressProcessor
+public class StampGammaProcessor1 extends AbstractStampProcessor
 {
     public static final String COMMAND_IDENTIFIER = "VAL=";
     public static final String ONDA_MIC = "OndaMic";
@@ -30,7 +29,7 @@ public class StampGammaProcessor1 extends AbstractCypressProcessor
      * @return boolean - wether the processing was successfull
      *
      */
-    public boolean process(CypressCommand command)
+    public boolean process(StampCommand command)
     {
 	
 	int ondamic = 0;
