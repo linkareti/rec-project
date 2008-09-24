@@ -122,8 +122,7 @@ public class GammaStampDriver extends AbstractStampDriver
 	StampTranslatorProcessorManager.initStampProcessorsTranslators(
 	new String[]
 	{
-	    packageName+"processors.StampGammaProcessor1",
-            packageName+"processors.StampGammaProcessor2",
+	    packageName+"processors.StampGammaProcessor",
 	    packageName+"translators.StampConfigTranslator",
 	}
 	);

@@ -12,13 +12,15 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
  *
  * @author  bruno
  */
-public class StampGammaProcessor1 extends AbstractStampProcessor
+public class StampGammaProcessor extends AbstractStampProcessor
 {
-    public static final String COMMAND_IDENTIFIER = "VAL=";
+    public static final String COMMAND_IDENTIFIER = "G";
     public static final String ONDA_MIC = "OndaMic";
     public static final String PRESSAO = "Pressao";
+    public static final String TIME = "time";
+    
     /** Creates a new instance of StampHelloProcessor */
-    public StampGammaProcessor1()
+    public StampGammaProcessor()
     {
 	super(COMMAND_IDENTIFIER);
     }
@@ -34,10 +36,11 @@ public class StampGammaProcessor1 extends AbstractStampProcessor
 	
 	int ondamic = 0;
         int pressao = 0;
-	
+	int time = 0;
+        
 	String[] splitedStr = command.getCommand().split(" ");
 	
-	if(command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0]!=null)
+	if(command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0]!=null && splitedStr[1]!=null && splitedStr[2]!=null)
 	{
 	    try
 	    {                
@@ -49,6 +52,10 @@ public class StampGammaProcessor1 extends AbstractStampProcessor
 		Float oOndamic = new Float(( (ondamic) * 5) / 4096F);
 		command.addCommandData(ONDA_MIC, oOndamic);                		
 		
+                time = Integer.parseInt(splitedStr[0]);
+		Float oTime = new Float(time / 2F);
+		command.addCommandData(TIME, oTime);
+                
 		command.setData(true);
 		return true;
 		

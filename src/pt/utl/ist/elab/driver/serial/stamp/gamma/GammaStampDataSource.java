@@ -10,8 +10,7 @@ import com.linkare.rec.data.config.*;
 import com.linkare.rec.data.acquisition.*;
 import java.util.logging.*;
 import pt.utl.ist.elab.driver.serial.stamp.*;
-import pt.utl.ist.elab.driver.serial.stamp.gamma.processors.StampGammaProcessor1;
-import pt.utl.ist.elab.driver.serial.stamp.gamma.processors.StampGammaProcessor2;
+import pt.utl.ist.elab.driver.serial.stamp.gamma.processors.StampGammaProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
 
 /**
@@ -42,13 +41,15 @@ public class GammaStampDataSource extends AbstractStampDataSource {
         if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
             return;
         }
-        if (cmd.getCommandIdentifier().equals(StampGammaProcessor1.COMMAND_IDENTIFIER)) {
+        if (cmd.getCommandIdentifier().equals(StampGammaProcessor.COMMAND_IDENTIFIER)) {
             float mic;
             float pressao;
+            float time;
             PhysicsValue[] values = new PhysicsValue[4];
             try {
-                mic = ((Float) cmd.getCommandData(StampGammaProcessor1.ONDA_MIC)).floatValue();
-                pressao = ((Float) cmd.getCommandData(StampGammaProcessor1.PRESSAO)).floatValue();
+                mic = ((Float) cmd.getCommandData(StampGammaProcessor.ONDA_MIC)).floatValue();
+                pressao = ((Float) cmd.getCommandData(StampGammaProcessor.PRESSAO)).floatValue();
+                time = ((Float) cmd.getCommandData(StampGammaProcessor.TIME)).floatValue();
             } catch (ClassCastException e) {
                 e.printStackTrace();
                 return;
@@ -65,30 +66,15 @@ public class GammaStampDataSource extends AbstractStampDataSource {
             values[2] = new PhysicsValue(PhysicsValFactory.fromFloat(mic),
                     getAcquisitionHeader().getChannelsConfig(2).getSelectedScale().getDefaultErrorValue(),
                     getAcquisitionHeader().getChannelsConfig(2).getSelectedScale().getMultiplier());
-            super.addDataRow(values);
 
-        }
-        if (cmd.getCommandIdentifier().equals(StampGammaProcessor2.COMMAND_IDENTIFIER)) {
-            float time;
-            PhysicsValue[] values = new PhysicsValue[4];
-            try {
-                time = ((Float) cmd.getCommandData(StampGammaProcessor2.TIME)).floatValue();
-            } catch (ClassCastException e) {
-                e.printStackTrace();
-                return;
-            }
-
-            /*values[0] = new PhysicsValue(PhysicsValFactory.fromLong(timeDelayMillis),
-            getAcquisitionHeader().getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(),
-            getAcquisitionHeader().getChannelsConfig(0).getSelectedScale().getMultiplier()
-            );
-             */
             values[3] = new PhysicsValue(PhysicsValFactory.fromFloat(time),
                     getAcquisitionHeader().getChannelsConfig(3).getSelectedScale().getDefaultErrorValue(),
                     getAcquisitionHeader().getChannelsConfig(3).getSelectedScale().getMultiplier());
+            
             super.addDataRow(values);
 
         }
+        
 
         counter++;
         if (counter == total_samples) {

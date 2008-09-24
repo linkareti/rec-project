@@ -18,9 +18,9 @@
         </selection-list>
     </parameter>
 
-    <frequency-scale label="1000 Hz">
-        <min-frequency><Frequency type="FrequencyType" multiplier="none">500</Frequency></min-frequency>
-        <max-frequency><Frequency type="FrequencyType" multiplier="none">1000</Frequency></max-frequency>
+    <frequency-scale label="500 Hz">
+        <min-frequency><Frequency type="FrequencyType" multiplier="none">50</Frequency></min-frequency>
+        <max-frequency><Frequency type="FrequencyType" multiplier="none">500</Frequency></max-frequency>
         <step-frequency><Frequency type="FrequencyType" multiplier="none">50</Frequency></step-frequency>
     </frequency-scale>
     <Frequency type="FrequencyType" multiplier="none">1000</Frequency>
