@@ -40,7 +40,7 @@ public class StampGammaProcessor extends AbstractStampProcessor
         
 	String[] splitedStr = command.getCommand().split(" ");
 	
-	if(command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0]!=null && splitedStr[1]!=null && splitedStr[2]!=null)
+	if(command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr!=null && splitedStr.length>=3 && splitedStr[0]!=null && splitedStr[1]!=null && splitedStr[2]!=null)
 	{
 	    try
 	    {                
