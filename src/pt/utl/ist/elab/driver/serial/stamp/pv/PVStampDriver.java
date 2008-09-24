@@ -71,7 +71,7 @@ public class PVStampDriver extends AbstractStampDriver
 	stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR,
 	    new Integer(config.getTotalSamples()));
 	
-	stampConfig.addCommandData(StampConfigTranslator.FREQ_INTERBAL_STR,
+	stampConfig.addCommandData(StampConfigTranslator.FREQ_INTERVAL_STR,
 	    new Integer((int)config.getSelectedFrequency().getFrequency()));
 	
 	StampTranslator translator=StampTranslatorProcessorManager.getTranslator(stampConfig);
