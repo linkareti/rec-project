@@ -152,6 +152,9 @@
 	<target name="compileThomson" depends="prepare,jarBaseStamp">
 		<compileExperiment expName="thomson"/>
         </target>
+        <target name="compileCondensadorCilindrico" depends="prepare,jarBaseStamp">
+		<compileExperiment expName="condensadorCilindrico"/>
+        </target>
 
 	<target name="compileExps" depends="compileCondCalor,compileBaseUSB,compileElabFullClient,
 					    compileAleatorio, compileMeteo, compileTelescopio,
@@ -159,7 +162,7 @@
 					    compileG, compileMomInercia, compilePendulo,
 					    compilePenduloGravitico, compilePlanck, compilePV,
 					    compileRadioactividade, compileScuba,
-					    compileStatSound, compileThomson"/>
+					    compileStatSound, compileThomson,compileCondensadorCilindrico"/>
 
 
 <!--JAR CREATION-->	
@@ -262,6 +265,9 @@
 	<target name="jarThomson" depends="prepare, compileThomson">
                 <createExpJars expName="thomson" jarClientName="ElabThomsonCustomizer" jarDriverName="ElabThomsonStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/thomson/"/>
         </target>
+        <target name="jarCondensadorCilindrico" depends="prepare, compileCondensadorCilindrico">
+                <createExpJars expName="gamma" jarClientName="ElabCondensadorCilindricoCustomizer" jarDriverName="ElabCondensadorCilindricoDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/"/>
+        </target>
 <!--All jars-->
 	<target name="jarExps" depends="jarElabFullClient, jarBaseUSB,
 					jarCondCalor, jarAleatorio, jarMeteo,
@@ -269,7 +275,7 @@
 					jarPolaroid, jarG, jarMomInercia,
 					jarPendulo, jarPenduloGravitico,
 					jarPlanck, jarPV, jarRadioactividade,
-					jarScuba, jarStatSound, jarThomson"/>
+					jarScuba, jarStatSound, jarThomson, jarCondensadorCilindrico"/>
 
 <!--Deploy -->
 	<target name="deployBaseStamp" depends="jarBaseStamp">
@@ -346,6 +352,9 @@
 	<target name="deployThomson" depends="jarThomson">
 		<deployExp recserverDir="driver/eLab/Thomson" webserverDir="eLab/thomson" jarDriverName="ElabThomsonStampDriver" jarClientName="ElabThomsonCustomizer"/>
 	</target>
+        <target name="deployCondensadorCilindrico" depends="jarCondensadorCilindrico">
+		<deployExp recserverDir="driver/eLab/CondensadorCilindrico" webserverDir="eLab/condensadorcilindrico" jarDriverName="ElabCondensadorCilindricoDriver" jarClientName="ElabCondensadorCilindricoCustomizer"/>
+	</target>
 
 <!--Full deploy-->
 	<target name="deployExps" depends="deployBaseStamp, deployBaseUSB, deployElabFullClient, 
@@ -354,5 +363,5 @@
 					   deployPolaroid, deployG, deployMomInercia,
 					   deployPendulo, deployPenduloGravitico,
 					   deployPlanck, deployPV, deployRadioactividade,
-					   deployScuba, deployStatSound, deployThomson"/>
+					   deployScuba, deployStatSound, deployThomson, deployCondensadorCilindrico"/>
 </project>
