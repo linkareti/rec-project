@@ -7,7 +7,6 @@
 package pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico.processors;
 
 import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
 
 /**
  *
@@ -15,7 +14,7 @@ import pt.utl.ist.elab.driver.serial.stamp.*;
  */
 public class StampCCProcessor extends AbstractStampProcessor
 {
-    public static final String COMMAND_IDENTIFIER = "CC";
+    public static final String COMMAND_IDENTIFIER = "C";
     public static final String CAPACIDADE_FREQ_STR="CAPACIDADE_FREQ";
     public static final String CAPACIDADE_FARAD_STR="CAPACIDADE_FARAD";
     public static final String DISTANCIA_STR="VOLUME";
@@ -50,7 +49,7 @@ public class StampCCProcessor extends AbstractStampProcessor
                 Float oCapacidadeFarad= new Float(capacidadeFreq);
 		command.addCommandData(CAPACIDADE_FARAD_STR,oCapacidadeFarad);
 		
-		distancia= Integer.parseInt(splitedStr[2]);
+		distancia= Integer.parseInt(splitedStr[1]);
 		Float oDistancia= new Float((float)distancia/1000);
 		command.addCommandData(DISTANCIA_STR,oDistancia);
 		
