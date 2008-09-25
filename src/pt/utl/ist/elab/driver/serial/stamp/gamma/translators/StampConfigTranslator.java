@@ -34,12 +34,12 @@ public class StampConfigTranslator extends AbstractStampTranslator
         if(command.getCommandIdentifier()==null) return false;
         if(!command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER)) return false;
         
-        int numsamples = ((Integer)command.getCommandData(NUMSAMPLES_STR)).intValue() - 20;
+        int numsamples = ((Integer)command.getCommandData(NUMSAMPLES_STR)).intValue();
         int volume = ((Integer)command.getCommandData(VOLUME_STR)).intValue();
         
-        int vol_to_send = (volume - 5 ) * 33 / 15;
+        int vol_to_send = 350- ((volume - 5 ) * 350)/15;
         
-        int T = (1000000 / ((Integer)command.getCommandData(FREQ_STR)).intValue());
+        int T = (1 / ((Integer)command.getCommandData(FREQ_STR)).intValue()/5.4253E-04);
         
         String commandStr = command.getCommandIdentifier() + " " + vol_to_send + " " +  T + " " + numsamples;
         command.setCommand(commandStr);
