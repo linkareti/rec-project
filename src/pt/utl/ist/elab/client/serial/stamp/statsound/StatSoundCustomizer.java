@@ -825,7 +825,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements com.linka
         acqConfig.getSelectedHardwareParameter("Frequency start").setParameterValue(""+freqIni);
         acqConfig.getSelectedHardwareParameter("Frequency end").setParameterValue(""+freqFin);
         acqConfig.getSelectedHardwareParameter("Wave form").setParameterValue(""+jComboBoxSoundVel.getSelectedIndex());        
-        acqConfig.getSelectedHardwareParameter("Number of points").setParameterValue(""+nSamples);        
+//        acqConfig.getSelectedHardwareParameter("Number of points").setParameterValue(""+nSamples);        
         /**Status = nibble with MIC1MIC2MIC3TEMP*/
         String status="";
         if(jRadioButtonMic2.isSelected())
