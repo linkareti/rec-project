@@ -39,7 +39,7 @@ public class StampConfigTranslator extends AbstractStampTranslator
         
         int vol_to_send = 350- ((volume - 5 ) * 350)/15;
         
-        int T = (1 / ((Integer)command.getCommandData(FREQ_STR)).intValue()/5.4253E-04);
+        int T = (int)(1. / ((Integer)command.getCommandData(FREQ_STR)).doubleValue()/5.4253E-04);
         
         String commandStr = command.getCommandIdentifier() + " " + vol_to_send + " " +  T + " " + numsamples;
         command.setCommand(commandStr);
