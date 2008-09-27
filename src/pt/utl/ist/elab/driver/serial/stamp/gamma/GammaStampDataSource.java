@@ -42,19 +42,22 @@ public class GammaStampDataSource extends AbstractStampDataSource {
             return;
         }
         if (cmd.getCommandIdentifier().equals(StampGammaProcessor.COMMAND_IDENTIFIER)) {
-            float mic;
-            float pressao;
-            float time;
+            float mic=0;
+            float pressao=0;
+            float time=0;
             PhysicsValue[] values = new PhysicsValue[4];
             try {
+			   if(counter>0){
                 mic = ((Float) cmd.getCommandData(StampGammaProcessor.ONDA_MIC)).floatValue();
                 pressao = ((Float) cmd.getCommandData(StampGammaProcessor.PRESSAO)).floatValue();
                 time = ((Float) cmd.getCommandData(StampGammaProcessor.TIME)).floatValue();
+				}
             } catch (ClassCastException e) {
                 e.printStackTrace();
                 return;
             }
-
+			
+			if(counter>0){
             values[0] = new PhysicsValue(PhysicsValFactory.fromFloat(timeDelayMillis),
                     getAcquisitionHeader().getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(),
                     getAcquisitionHeader().getChannelsConfig(0).getSelectedScale().getMultiplier());
@@ -67,17 +70,18 @@ public class GammaStampDataSource extends AbstractStampDataSource {
                     getAcquisitionHeader().getChannelsConfig(2).getSelectedScale().getDefaultErrorValue(),
                     getAcquisitionHeader().getChannelsConfig(2).getSelectedScale().getMultiplier());
 
-            values[3] = new PhysicsValue(PhysicsValFactory.fromFloat(time),
+            values[3] = new PhysicsValue(PhysicsValFactory.fromFloat(time*(counter-1)),
                     getAcquisitionHeader().getChannelsConfig(3).getSelectedScale().getDefaultErrorValue(),
                     getAcquisitionHeader().getChannelsConfig(3).getSelectedScale().getMultiplier());
             
             super.addDataRow(values);
+			}
 
         }
         
 
         counter++;
-        if (counter == total_samples) {
+        if (counter > total_samples) {
             Logger.getLogger(GAMMA_DS_LOGGER).log(Level.INFO, "DataSource Ended");
             setDataSourceEnded();
 
