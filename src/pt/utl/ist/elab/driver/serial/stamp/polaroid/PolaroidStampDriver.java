@@ -33,7 +33,7 @@ public class PolaroidStampDriver extends AbstractStampDriver
     public PolaroidStampDriver()
     {
 	super();
-	setDriverUniqueID("ELAB_POLAROID_V1.3");
+	setDriverUniqueID("<ELAB_POLAROID>");
 	setApplicationNameLockPort("Polaroid Stamp Driver V0.2");
 	setTimeOutPerPort(10000);
         //This driver is communicating with a pic which does not need
