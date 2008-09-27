@@ -39,7 +39,11 @@ public class StampGammaProcessor extends AbstractStampProcessor {
 
         String[] splitedStr = command.getCommand().split("\t");
 
-        if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr != null && splitedStr.length >= 2 && splitedStr[0] != null && splitedStr[1] != null && splitedStr[2] != null) {
+        if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && 
+                splitedStr != null && 
+                splitedStr.length >= 2 && 
+                splitedStr[0] != null && 
+                splitedStr[1] != null) {
             try {
                 if ("PARAMETROS".equals(splitedStr[0])) {
                     clock_freq = Integer.parseInt(splitedStr[1]);
