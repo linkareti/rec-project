@@ -219,16 +219,19 @@ public class BaseStampIO
 	if(lineRead==null) return;
 	
 	int commandpos=lineRead.indexOf(" ");
-	StampCommand inCommand;
+	Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINEST, "lineRead= "+lineRead+", commandPos (lineRead.indexOf(\" \")="+commandpos);
+	//sPort.removeEventListener();
+        StampCommand inCommand;
 	if(commandpos!=-1)
 	{
 	    inCommand = new StampCommand(lineRead.substring(0,commandpos));
 	    inCommand.setCommand(lineRead.substring(commandpos+1));
-	    
+	    Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINEST, "Found a command with an identifier = "+inCommand.getCommandIdentifier());
 	}
 	else
 	{
 	    inCommand = new StampCommand(lineRead);
+            Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINEST, "Found a command without an explicit identifier = "+inCommand.getCommandIdentifier());
 	}
 	
 	fireStampCommandListenerHandleStampCommand(inCommand);
