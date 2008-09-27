@@ -36,6 +36,9 @@ public class PolaroidStampDriver extends AbstractStampDriver
 	setDriverUniqueID("ELAB_POLAROID_V1.3");
 	setApplicationNameLockPort("Polaroid Stamp Driver V0.2");
 	setTimeOutPerPort(10000);
+        //This driver is communicating with a pic which does not need
+        //the wait for echo to work...
+        setWaitForEcho(false);
 	setPortBaudRate(115200);
 	loadCommandHandlers();
     }
