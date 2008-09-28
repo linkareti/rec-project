@@ -4,7 +4,7 @@
  * Created on 16 de Junho de 2003, 15:13
  */
 
-//package pt.utl.ist.elab.driver.Aleatorio.configurator;
+package pt.utl.ist.elab.driver.Aleatorio.configurator;
 
 /**
  *

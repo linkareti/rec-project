@@ -6,6 +6,8 @@
 
 package test;
 
+import com.linkare.rec.impl.utils.MathUtil;
+
 /**
  *
  * @author  Administrator

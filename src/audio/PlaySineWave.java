@@ -207,7 +207,7 @@ public class PlaySineWave extends javax.swing.JFrame implements ControllerListen
 		{
 			//InterLacedSineWaveDataSource sinewds=new InterLacedSineWaveDataSource();
 			//InterLacedSineWaveDataSource ilds=new InterLacedSineWaveDataSource();
-			PackageManager.getProtocolPrefixList().add("test.audio");
+			PackageManager.getProtocolPrefixList().add("audio");
 			//PackageManager.commitProtocolPrefixList();
 			
 			MediaLocator loc=new MediaLocator("sinewavegenerator:");

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="old/|test/|testCorbaURL/|pt/utl/ist/elab/virtual/" kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/avalon-framework.jar"/>
 	<classpathentry kind="lib" path="lib/javaws.jar"/>
-	<classpathentry kind="lib" path="lib/jcommon-0.9.5.jar"/>
-	<classpathentry kind="lib" path="lib/jfreechart-0.9.20.jar"/>
 	<classpathentry kind="lib" path="lib/logkit.jar"/>
 	<classpathentry kind="lib" path="lib/openorb_orb_omg-1.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/openorb_orb-1.4.0.jar"/>
@@ -13,6 +11,14 @@
 	<classpathentry kind="lib" path="lib/tools-1.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/jcommon-1.0.12.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.9.jar"/>
+	<classpathentry kind="lib" path="lib/jmf.jar"/>
+	<classpathentry kind="lib" path="lib/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="lib/fits1.3.jar"/>
+	<classpathentry kind="lib" path="lib/JCFN.jar"/>
+	<classpathentry kind="lib" path="lib/jsr80.jar"/>
+	<classpathentry kind="lib" path="lib/jsr80_ri.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
