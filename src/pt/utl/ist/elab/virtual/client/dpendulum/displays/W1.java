@@ -8,7 +8,7 @@ package pt.utl.ist.elab.virtual.client.dpendulum.displays;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class W1 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph 
 {

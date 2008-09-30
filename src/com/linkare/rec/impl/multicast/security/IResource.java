@@ -9,7 +9,7 @@ package com.linkare.rec.impl.multicast.security;
 import java.util.Map;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface IResource extends java.io.Serializable
 {

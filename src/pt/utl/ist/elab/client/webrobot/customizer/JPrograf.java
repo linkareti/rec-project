@@ -42,12 +42,21 @@
 
 package pt.utl.ist.elab.client.webrobot.customizer;
 
-import com.linkare.rec.data.metadata.HardwareInfo;
+import javax.jnlp.BasicService;
+import javax.jnlp.ServiceManager;
+
+import pt.utl.ist.elab.client.webrobot.customizer.Utils.AbsoluteConstraints;
+import pt.utl.ist.elab.client.webrobot.customizer.Utils.AbsoluteLayout;
+import pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame;
+import pt.utl.ist.elab.client.webrobot.customizer.Utils.CopyPaste;
+import pt.utl.ist.elab.client.webrobot.customizer.Utils.ExtensionFilter;
+import pt.utl.ist.elab.client.webrobot.customizer.Utils.PrintComponent;
+import pt.utl.ist.elab.client.webrobot.customizer.Utils.SaveData;
+import pt.utl.ist.elab.client.webrobot.customizer.Utils.Undo;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.*;
-import pt.utl.ist.elab.client.webrobot.customizer.Utils.*;
+import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import javax.jnlp.*;
 
 /**
  *

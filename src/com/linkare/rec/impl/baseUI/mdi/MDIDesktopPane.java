@@ -1,9 +1,13 @@
 package com.linkare.rec.impl.baseUI.mdi;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.beans.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.beans.PropertyVetoException;
+
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
+
 import com.linkare.rec.impl.baseUI.ImageBorder;
 
 /**

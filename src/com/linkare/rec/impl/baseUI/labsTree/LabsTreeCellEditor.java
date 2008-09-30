@@ -8,19 +8,25 @@ package com.linkare.rec.impl.baseUI.labsTree;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import javax.swing.JTree;
-import javax.swing.tree.*;
 import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
-import java.util.EventObject;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
+import java.util.EventObject;
+
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTree;
+import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
+import javax.swing.event.CellEditorListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeCellEditor;
+
 import com.linkare.rec.impl.baseUI.config.Display;
 import com.linkare.rec.impl.baseUI.config.DisplayNode;
 

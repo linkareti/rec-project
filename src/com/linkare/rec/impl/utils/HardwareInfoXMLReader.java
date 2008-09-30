@@ -9,41 +9,44 @@
 
 package com.linkare.rec.impl.utils;
 
-import com.linkare.rec.data.acquisition.ByteArrayValue;
-import com.linkare.rec.data.acquisition.PhysicsVal;
-import com.linkare.rec.data.Multiplier;
-import java.net.URLConnection;
-import java.net.URL;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import java.util.TreeMap;
-import java.util.Collection;
-import com.linkare.rec.data.metadata.ChannelInfo;
-import com.linkare.rec.data.metadata.Scale;
-import com.linkare.rec.data.metadata.ChannelDirection;
-import com.linkare.rec.data.metadata.ParameterType;
-import com.linkare.rec.data.metadata.ChannelParameter;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.data.metadata.SamplesNumScale;
-import com.linkare.rec.data.metadata.FrequencyScale;
-import com.linkare.rec.impl.protocols.ReCProtocols;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.FileInputStream;
-import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.data.synch.FrequencyDefType;
-import org.w3c.dom.Document;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Collection;
+import java.util.TreeMap;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
-import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import com.linkare.rec.data.Multiplier;
+import com.linkare.rec.data.acquisition.ByteArrayValue;
+import com.linkare.rec.data.acquisition.PhysicsVal;
+import com.linkare.rec.data.metadata.ChannelDirection;
+import com.linkare.rec.data.metadata.ChannelInfo;
+import com.linkare.rec.data.metadata.ChannelParameter;
+import com.linkare.rec.data.metadata.FrequencyScale;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.metadata.ParameterType;
+import com.linkare.rec.data.metadata.SamplesNumScale;
+import com.linkare.rec.data.metadata.Scale;
+import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.data.synch.FrequencyDefType;
+import com.linkare.rec.impl.protocols.ReCProtocols;
 
 
 public class HardwareInfoXMLReader

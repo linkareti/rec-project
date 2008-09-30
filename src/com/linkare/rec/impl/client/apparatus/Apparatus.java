@@ -6,8 +6,8 @@
 
 package com.linkare.rec.impl.client.apparatus;
 
-import com.linkare.rec.impl.wrappers.MultiCastHardwareWrapper;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.wrappers.MultiCastHardwareWrapper;
 /**
  *
  * @author  Jose Pedro Pereira

@@ -6,26 +6,39 @@
 
 package com.linkare.rec.impl.driver;
 
-import com.linkare.rec.data.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.synch.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.exceptions.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.impl.wrappers.*;
-import com.linkare.rec.impl.events.*;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.acquisition.DataClient;
+import com.linkare.rec.acquisition.DataProducer;
+import com.linkare.rec.acquisition.DataReceiver;
+import com.linkare.rec.acquisition.Hardware;
+import com.linkare.rec.acquisition.HardwareOperations;
+import com.linkare.rec.acquisition.HardwarePOATie;
+import com.linkare.rec.acquisition.HardwareState;
+import com.linkare.rec.acquisition.IncorrectStateException;
+import com.linkare.rec.acquisition.NotAvailableException;
+import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.events.HardwareStateChangeEvent;
+import com.linkare.rec.impl.exceptions.IncorrectStateExceptionConstants;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.EventQueue;
+import com.linkare.rec.impl.utils.EventQueueDispatcher;
+import com.linkare.rec.impl.utils.HardwareBinder;
+import com.linkare.rec.impl.utils.HardwareInfoXMLReader;
+import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.impl.wrappers.DataClientWrapper;
+import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class BaseHardware implements HardwareOperations,BaseDataProducerListener
 {

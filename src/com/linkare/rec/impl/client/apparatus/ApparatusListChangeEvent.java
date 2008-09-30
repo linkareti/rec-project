@@ -8,7 +8,7 @@ package com.linkare.rec.impl.client.apparatus;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ApparatusListChangeEvent extends java.util.EventObject
 {

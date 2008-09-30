@@ -10,20 +10,27 @@
 
 package pt.utl.ist.elab.driver.usb.cypress;
 
-import javax.usb.*;
-import javax.usb.event.*;
-import javax.usb.util.*;
-import com.ibm.jusb.*;
-import java.io.*;
-import java.util.*;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
-import pt.utl.ist.elab.driver.usb.cypress.transproc.*;
-import pt.utl.ist.elab.driver.usb.cypress.transproc.processors.*;
-import com.linkare.rec.impl.utils.*;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.usb.UsbDevice;
+import javax.usb.UsbEndpoint;
+import javax.usb.UsbInterface;
+import javax.usb.UsbPipe;
+import javax.usb.event.UsbDeviceListener;
+import javax.usb.event.UsbPipeListener;
+import javax.usb.util.StandardRequest;
+
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressCommand;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressCommandListener;
+
+import com.ibm.jusb.UsbConfigurationImp;
+import com.linkare.rec.impl.logging.LoggerUtil;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class BaseCypressIO implements UsbDeviceListener, UsbPipeListener
 {

@@ -8,7 +8,7 @@ package pt.utl.ist.elab.driver.Aleatorio.Utils;
 
 /**
  *
- * @author  pc
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class ImageAnalyser extends javax.swing.JPanel implements java.lang.Cloneable {
     

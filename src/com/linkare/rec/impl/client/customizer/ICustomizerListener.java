@@ -8,7 +8,7 @@ package com.linkare.rec.impl.client.customizer;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface ICustomizerListener extends java.util.EventListener
 {

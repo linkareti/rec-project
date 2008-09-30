@@ -11,7 +11,7 @@ import com.linkare.rec.impl.utils.Defaults;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class TestResources {
     

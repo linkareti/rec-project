@@ -6,12 +6,12 @@
 
 package com.linkare.rec.impl.driver;
 
-import com.linkare.rec.impl.wrappers.*;
-import com.linkare.rec.data.acquisition.*;
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DataProducer2IDataSourceAdapter extends BaseDataSource
 {

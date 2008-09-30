@@ -6,12 +6,13 @@
 
 package com.linkare.rec.impl.baseUI.labsTree;
 
-import javax.swing.*;
-import com.linkare.rec.impl.i18n.*;
+import javax.swing.Icon;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DisplayTreeNode
 {

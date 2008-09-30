@@ -6,26 +6,22 @@
 
 package pt.utl.ist.elab.driver.webrobot;
 
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.impl.utils.EventQueue;
-import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.threading.*; 
-import com.linkare.rec.impl.protocols.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.driver.webrobot.serial.*;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
-/**
- *
- * @author  Andr�
- */
+import pt.utl.ist.elab.driver.webrobot.serial.SerialComm;
 
-import pt.utl.ist.elab.driver.webrobot.debug.*;
+import com.linkare.rec.acquisition.IncorrectStateException;
+import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.config.ParameterConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.driver.BaseDriver;
+import com.linkare.rec.impl.driver.IDataSource;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.rec.impl.utils.Defaults;
 
 public class RobotDriver extends BaseDriver
 {    

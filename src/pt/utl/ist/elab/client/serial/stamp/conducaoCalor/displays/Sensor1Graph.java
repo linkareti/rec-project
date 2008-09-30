@@ -6,12 +6,11 @@
 
 package pt.utl.ist.elab.client.serial.stamp.conducaoCalor.displays;
 
-import com.linkare.rec.impl.baseUI.graph.*;
-import com.linkare.rec.impl.client.experiment.*;
+import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class Sensor1Graph extends MultSeriesXYExperimentGraph
 {

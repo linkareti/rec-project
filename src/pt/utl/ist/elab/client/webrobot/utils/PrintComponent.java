@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.webrobot.utils;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class PrintComponent implements java.awt.print.Printable
 {

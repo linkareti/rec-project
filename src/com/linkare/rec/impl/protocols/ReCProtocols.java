@@ -6,12 +6,12 @@
 
 package com.linkare.rec.impl.protocols;
 
-import java.net.URL;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ReCProtocols 
 {

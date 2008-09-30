@@ -7,24 +7,15 @@
 package pt.utl.ist.elab.driver.webrobot;
 
 
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.driver.webrobot.serial.*;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
-/**
- *
- * @author  Andr�
-*/
+import pt.utl.ist.elab.driver.webrobot.serial.SerialComm;
 
-import pt.utl.ist.elab.driver.webrobot.debug.*;
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.impl.data.PhysicsValFactory;
+import com.linkare.rec.impl.driver.BaseDataSource;
 
 public class RobotStateMachine extends BaseDataSource implements pt.utl.ist.elab.driver.webrobot.interfaces.AuxVars,
                                                                 pt.utl.ist.elab.driver.webrobot.interfaces.Sensors,

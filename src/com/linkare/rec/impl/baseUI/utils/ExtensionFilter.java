@@ -10,7 +10,7 @@ package com.linkare.rec.impl.baseUI.utils;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class ExtensionFilter extends javax.swing.filechooser.FileFilter {
     

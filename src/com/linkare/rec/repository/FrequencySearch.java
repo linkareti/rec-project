@@ -1,8 +1,9 @@
 package com.linkare.rec.repository;
 
+import org.omg.CORBA.portable.IDLEntity;
+
 import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.impl.data.FrequencyUtil;
-import org.omg.CORBA.portable.IDLEntity;
 
 public final class FrequencySearch implements IDLEntity
 {

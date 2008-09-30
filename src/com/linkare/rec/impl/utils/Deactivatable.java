@@ -9,7 +9,7 @@ package com.linkare.rec.impl.utils;
 import org.omg.PortableServer.POA;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface Deactivatable 
 {    

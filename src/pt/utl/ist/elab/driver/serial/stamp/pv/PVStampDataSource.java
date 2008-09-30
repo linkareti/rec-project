@@ -6,24 +6,16 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.pv;
 
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.*;
-import pt.utl.ist.elab.driver.serial.stamp.pv.processors.*;
-import pt.utl.ist.elab.driver.serial.stamp.pv.translators.*;
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
+import pt.utl.ist.elab.driver.serial.stamp.pv.processors.StampPVProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.data.PhysicsValueFactory;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PVStampDataSource extends AbstractStampDataSource
 {

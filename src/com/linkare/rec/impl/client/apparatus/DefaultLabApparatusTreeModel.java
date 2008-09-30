@@ -6,7 +6,7 @@
 
 package com.linkare.rec.impl.client.apparatus;
 
-import javax.swing.tree.*;
+import javax.swing.tree.DefaultMutableTreeNode;
 /**
  *
  * @author  Jose Pedro Pereira

@@ -6,14 +6,15 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Vector;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.client.chat.IChatServer;
-import com.linkare.rec.data.synch.DateTime;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
  * @author  Jos� Pedro Pereira

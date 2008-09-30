@@ -8,35 +8,18 @@ package pt.utl.ist.elab.driver.Aleatorio.configurator;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class AleatorioConfigurator extends javax.swing.JFrame {
     
-    private int numberOfDice;
     
-    private int BWThreshold;
     
-    private int HoughThreshold1;
-    
-    private int HoughThreshold2;
-    
-    private int HoughThreshold3;
-    
-    private int minimumValuePerDie = 1;
-    
-    private int maximumValuePerDie = 6;
-    
-    private int maximumWidthOfDie = 33;
-    
-    private int movieDurationSec = 10;
-    
-    private double minimumWaveDurationSec = 1.5;
-    
-    private double maximumWaveDurationSec = 10;
-    
-    private int convolutionThreshold;
-    
-    /** Creates new form AleatorioConfigurator */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 690513689414949840L;
+
+	/** Creates new form AleatorioConfigurator */
     public AleatorioConfigurator() {
         initComponents();
         readProperties();
@@ -598,7 +581,7 @@ public class AleatorioConfigurator extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        new AleatorioConfigurator().show();
+        new AleatorioConfigurator().setVisible(true);
     }
     
     

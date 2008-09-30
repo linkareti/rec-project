@@ -5,12 +5,13 @@
  */
 
 package com.linkare.rec.impl.client.experiment;
-import com.linkare.rec.impl.wrappers.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
+import com.linkare.rec.acquisition.MaximumClientsReached;
+import com.linkare.rec.data.config.ChannelAcquisitionConfig;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface ExpDataModel
 {

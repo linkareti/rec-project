@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.serial.stamp.statsound.displays;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class TablePistonRMS extends MyDefaultTable
 {

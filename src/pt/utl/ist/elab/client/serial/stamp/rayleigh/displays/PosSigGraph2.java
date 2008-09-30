@@ -12,7 +12,7 @@ import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class PosSigGraph2 extends MultSeriesXYExperimentGraph
 {

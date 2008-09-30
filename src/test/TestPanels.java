@@ -8,7 +8,7 @@ package test;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class TestPanels extends javax.swing.JFrame
 {

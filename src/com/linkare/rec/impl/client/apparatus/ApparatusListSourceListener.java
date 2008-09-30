@@ -6,7 +6,6 @@
 
 package com.linkare.rec.impl.client.apparatus;
 
-import java.util.EventListener;
 
 /**
  *

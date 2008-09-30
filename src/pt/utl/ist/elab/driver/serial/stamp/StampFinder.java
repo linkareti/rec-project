@@ -11,14 +11,22 @@
 
 package pt.utl.ist.elab.driver.serial.stamp;
 
-import gnu.io.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import java.util.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommandListener;
+
+import com.linkare.rec.impl.logging.LoggerUtil;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class StampFinder
 {

@@ -9,7 +9,7 @@ package com.linkare.rec.impl.client.experiment;
 import javax.swing.Icon;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface ExpDataDisplay
 {

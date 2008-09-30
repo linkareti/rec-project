@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.Aleatorio.utils;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class StorageSingleton {
     

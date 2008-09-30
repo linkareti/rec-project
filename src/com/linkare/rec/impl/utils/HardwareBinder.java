@@ -6,13 +6,15 @@
 
 package com.linkare.rec.impl.utils;
 
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.impl.wrappers.*;
+import com.linkare.rec.acquisition.Hardware;
+import com.linkare.rec.acquisition.MultiCastController;
+import com.linkare.rec.acquisition.MultiCastControllerHelper;
+import com.linkare.rec.impl.wrappers.MultiCastControllerWrapper;
 
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class HardwareBinder extends Thread
 {

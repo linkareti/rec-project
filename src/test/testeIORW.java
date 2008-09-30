@@ -9,7 +9,7 @@ package test;
 import java.io.*;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class testeIORW
 {

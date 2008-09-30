@@ -5,16 +5,23 @@
  */
 
 package audio.media.protocol.sinewavegenerator;
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.event.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class FrequencyControl extends javax.swing.JPanel implements javax.media.Control
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1094710469434690323L;
 	private InterLacedSineWaveStream baseStream=null;
 	
 	public FrequencyControl(InterLacedSineWaveStream baseStream)

@@ -6,8 +6,8 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.statsound.processors;
 
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 /**
  *

@@ -5,7 +5,8 @@
  */
 package pt.utl.ist.elab.driver.serial.stamp.gamma.processors;
 
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 /**
  *

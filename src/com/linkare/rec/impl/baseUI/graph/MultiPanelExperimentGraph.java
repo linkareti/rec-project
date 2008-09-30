@@ -6,22 +6,17 @@
 
 package com.linkare.rec.impl.baseUI.graph;
 
-import com.linkare.rec.impl.client.experiment.*;
 import javax.swing.Icon;
-import java.util.logging.*;
-import org.jfree.chart.*;
-import org.jfree.chart.plot.*;
-import org.jfree.chart.axis.*;
-import org.jfree.chart.renderer.*;
-import org.jfree.chart.labels.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.metadata.Scale;
+
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class MultiPanelExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener
 {

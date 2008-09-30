@@ -6,11 +6,11 @@ package com.linkare.rec.impl.client.experiment;
  * Created on 7 de Maio de 2003, 12:02
  */
 
-import com.linkare.rec.impl.utils.*;
+import com.linkare.rec.impl.utils.IntersectableEvent;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  *
  * ->Changed by Andre on 16/07/04;
  *  intersectTo

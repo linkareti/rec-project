@@ -8,16 +8,24 @@ package pt.utl.ist.elab.client.serial.stamp.thomson.displays;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Robot;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.i18n.*;
-import java.awt.*;
-import java.awt.image.*;
-import java.awt.event.*;
-import javax.swing.*;
+import com.linkare.rec.impl.utils.Defaults;
 
 public class UserAnalysisPanel extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay, com.linkare.rec.impl.client.experiment.ExpDataModelListener
 {

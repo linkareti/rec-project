@@ -7,21 +7,15 @@
 package com.linkare.rec.impl.baseUI;
 
 
-import javax.swing.*;
-import javax.swing.border.*;
-import java.awt.Color;
-import java.awt.Rectangle;
-import java.awt.Component;
-import javax.swing.table.*;
-import javax.swing.event.*;
-import java.util.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.impl.utils.Defaults;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
+import com.linkare.rec.impl.client.experiment.ExpHistory;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
  * @author  Jos� Pedro Pereira

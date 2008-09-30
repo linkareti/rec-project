@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.meteo.displays;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class LumXYGraphDisplay extends MeteoTimeExperimentGraph
 {

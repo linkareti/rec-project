@@ -9,7 +9,7 @@ package pt.utl.ist.elab.driver.usb.cypress.transproc;
 import java.util.HashMap;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class CypressCommand implements java.io.Serializable
 {

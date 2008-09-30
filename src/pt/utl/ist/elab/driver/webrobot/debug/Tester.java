@@ -6,12 +6,11 @@
 
 package pt.utl.ist.elab.driver.webrobot.debug;
 
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.impl.exceptions.*;
+import com.linkare.rec.acquisition.WrongConfigurationException;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  * Use this class to test doubts
  */
 public class Tester {

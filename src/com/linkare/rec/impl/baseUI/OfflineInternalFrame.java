@@ -8,18 +8,19 @@ package com.linkare.rec.impl.baseUI;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import com.linkare.rec.impl.client.experiment.*;
 import java.util.ArrayList;
-import javax.swing.JInternalFrame;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import javax.swing.*;
-import java.awt.Color;
-import com.linkare.rec.impl.utils.Defaults;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.swing.Icon;
+import javax.swing.JComponent;
+
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.logging.LoggerUtil;
 
 public class OfflineInternalFrame extends javax.swing.JInternalFrame
 {

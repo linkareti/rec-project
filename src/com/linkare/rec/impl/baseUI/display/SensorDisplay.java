@@ -6,17 +6,24 @@
 
 package com.linkare.rec.impl.baseUI.display;
 
-import javax.swing.*;
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.data.config.*;
 import java.awt.Color;
-import com.linkare.rec.impl.data.PhysicsValueUtil;
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
+import javax.swing.Icon;
+import javax.swing.JMenuBar;
+import javax.swing.JToolBar;
+
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.Scale;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class SensorDisplay extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,ExpDataModelListener,java.io.Externalizable
 {

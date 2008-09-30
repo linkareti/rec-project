@@ -6,14 +6,15 @@
 
 package com.linkare.rec.impl.data;
 
-import com.linkare.rec.data.metadata.Scale;
+import java.text.DecimalFormat;
+
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.acquisition.PhysicsValueType;
-import java.text.*;
+import com.linkare.rec.data.metadata.Scale;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PhysicsValueUtil
 {

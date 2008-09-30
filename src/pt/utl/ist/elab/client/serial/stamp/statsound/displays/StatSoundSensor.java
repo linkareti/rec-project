@@ -11,12 +11,20 @@ package pt.utl.ist.elab.client.serial.stamp.statsound.displays;
  * @author  Andr�
  */
 
-import java.awt.*;
-import javax.swing.*;
-import java.awt.image.*;
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
+import javax.swing.Icon;
+import javax.swing.JMenuBar;
+import javax.swing.JToolBar;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 public class StatSoundSensor extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay, com.linkare.rec.impl.client.experiment.ExpDataModelListener
 {

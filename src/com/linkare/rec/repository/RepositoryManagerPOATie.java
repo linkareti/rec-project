@@ -1,8 +1,9 @@
 package com.linkare.rec.repository;
 
+import org.omg.PortableServer.POA;
+
 import com.linkare.rec.acquisition.DataProducer;
 import com.linkare.rec.acquisition.UserInfo;
-import org.omg.PortableServer.POA;
 
 public class RepositoryManagerPOATie extends RepositoryManagerPOA
 {

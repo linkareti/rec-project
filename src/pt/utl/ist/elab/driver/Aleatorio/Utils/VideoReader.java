@@ -6,15 +6,16 @@
 
 package pt.utl.ist.elab.driver.Aleatorio.Utils;
 
-import pt.utl.ist.elab.driver.Aleatorio.Hardware.WebCamThread;
-import pt.utl.ist.elab.driver.Aleatorio.AleatorioDataSource;
 import javax.media.Buffer;
 import javax.media.format.VideoFormat;
 import javax.media.util.BufferToImage;
 
+import pt.utl.ist.elab.driver.Aleatorio.AleatorioDataSource;
+import pt.utl.ist.elab.driver.Aleatorio.Hardware.WebCamThread;
+
 /**
  *
- * @author  pc
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class VideoReader extends Thread {
     

@@ -8,7 +8,7 @@ package com.linkare.rec.impl.baseUI;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class UsersListPanel extends javax.swing.JPanel
 {

@@ -7,15 +7,15 @@
 
 package pt.utl.ist.elab.client.serial.stamp.pendulo;
 
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.*;
-import com.linkare.rec.data.synch.*;
-import com.linkare.rec.impl.i18n.*;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer
 {

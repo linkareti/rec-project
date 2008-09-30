@@ -6,17 +6,30 @@ package pt.utl.ist.elab.driver.serial.stamp;
  *    Added suport to Basic Atom. Now we can control RTS, DTR and echo
  */
 
-import gnu.io.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
+import gnu.io.SerialPort;
+
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommandListener;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslatorProcessorManager;
+
+import com.linkare.rec.acquisition.IncorrectStateException;
+import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.driver.BaseDriver;
+import com.linkare.rec.impl.driver.IDataSource;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.threading.AbstractConditionDecisor;
+import com.linkare.rec.impl.threading.IConditionDecisor;
+import com.linkare.rec.impl.threading.TimedOutException;
+import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
 
 
 public abstract class AbstractStampDriver extends BaseDriver implements StampFinderListener, StampCommandListener

@@ -8,7 +8,7 @@ package pt.utl.ist.elab.driver.serial.stamp;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class StopEvent
 {

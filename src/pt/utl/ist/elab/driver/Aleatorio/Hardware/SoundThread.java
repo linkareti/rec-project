@@ -6,13 +6,20 @@
 
 package pt.utl.ist.elab.driver.Aleatorio.Hardware;
 
-import javax.sound.sampled.*;
-import java.io.*;
-import pt.utl.ist.elab.driver.Aleatorio.Utils.*;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
+
+import pt.utl.ist.elab.driver.Aleatorio.Utils.Oscilador;
 //import java.util.Hashtable;
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class SoundThread implements Runnable{
     
@@ -59,7 +66,7 @@ public class SoundThread implements Runnable{
             }
             if(nBytesRead >= 0)
             {
-                int nBytesWritten = linha.write(abData,0,nBytesRead);
+                linha.write(abData,0,nBytesRead);
             }            
         }
         System.out.println(">>>Draining the sound data!");

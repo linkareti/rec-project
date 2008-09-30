@@ -8,12 +8,12 @@ package com.linkare.rec.impl.multicast.startup;
 
 import com.linkare.rec.acquisition.MultiCastController;
 import com.linkare.rec.acquisition.MultiCastControllerPOATie;
-import com.linkare.rec.impl.utils.ORBBean;
-import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
+import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.impl.utils.ORBBean;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class MultiCastControllerMain
 {

@@ -6,15 +6,14 @@
 
 package pt.utl.ist.elab.client.webrobot.displays;
 
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.data.config.*;
-import pt.utl.ist.elab.client.webrobot.utils.*;
+import pt.utl.ist.elab.client.webrobot.utils.ExtensionFilter;
+
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class AnalogTableDisplay extends javax.swing.JPanel implements ExpDataDisplay
 {

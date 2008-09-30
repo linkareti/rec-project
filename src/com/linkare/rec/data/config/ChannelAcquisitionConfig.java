@@ -1,6 +1,5 @@
 package com.linkare.rec.data.config;
 
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity
 {

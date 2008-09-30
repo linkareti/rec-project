@@ -11,10 +11,14 @@ package pt.utl.ist.elab.client.serial.stamp.thomson.displays;
  * @author  ivo
  */
 
-import java.awt.*;
-import java.awt.image.*;
-import javax.swing.border.*;
-import com.linkare.rec.impl.i18n.*;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Insets;
+
+import javax.swing.border.Border;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 
 public class MainPanel extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay, com.linkare.rec.impl.client.experiment.ExpDataModelListener

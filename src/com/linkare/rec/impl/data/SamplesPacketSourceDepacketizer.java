@@ -6,17 +6,19 @@
 
 package com.linkare.rec.impl.data;
 
+import java.util.ArrayList;
+
+import javax.swing.event.EventListenerList;
+
+import com.linkare.rec.acquisition.MaxPacketNumUnknown;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.acquisition.SamplesPacket;
-import com.linkare.rec.data.acquisition.TOTAL_SAMPLES_UNDEFINED;
 import com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED;
-import java.util.ArrayList;
-import javax.swing.event.EventListenerList;
-import com.linkare.rec.acquisition.MaxPacketNumUnknown;
+import com.linkare.rec.data.acquisition.TOTAL_SAMPLES_UNDEFINED;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class SamplesPacketSourceDepacketizer implements SamplesSource
 {

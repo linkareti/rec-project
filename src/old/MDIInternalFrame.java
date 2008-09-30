@@ -8,7 +8,7 @@ package old;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class MDIInternalFrame extends javax.swing.JInternalFrame implements MDIPositions 
 {

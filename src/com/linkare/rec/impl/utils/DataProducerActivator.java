@@ -8,14 +8,21 @@ package com.linkare.rec.impl.utils;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import org.omg.CORBA.LocalObject;
-import org.omg.PortableServer.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
+import org.omg.PortableServer.ForwardRequest;
+import org.omg.PortableServer.POA;
+import org.omg.PortableServer.Servant;
+import org.omg.PortableServer.ServantActivator;
+
+import com.linkare.rec.acquisition.DataProducerPOATie;
+import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
 
 public class DataProducerActivator extends LocalObject implements ServantActivator

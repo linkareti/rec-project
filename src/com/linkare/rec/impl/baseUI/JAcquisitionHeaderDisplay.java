@@ -6,14 +6,15 @@
 
 package com.linkare.rec.impl.baseUI;
 
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import java.awt.Graphics;
+
 import javax.swing.JComponent;
-import java.awt.*;
-import com.linkare.rec.impl.utils.Defaults;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class JAcquisitionHeaderDisplay extends javax.swing.JPanel implements AcquisitionHeaderDisplay
 {

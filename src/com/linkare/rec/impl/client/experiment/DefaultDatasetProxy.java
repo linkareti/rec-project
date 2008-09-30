@@ -5,10 +5,10 @@
  */
 
 package com.linkare.rec.impl.client.experiment;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.synch.*;
-import com.linkare.rec.data.*;
+import com.linkare.rec.data.Multiplier;
+import com.linkare.rec.data.synch.DateTime;
+import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.data.synch.FrequencyDefType;
 
 /**
  *

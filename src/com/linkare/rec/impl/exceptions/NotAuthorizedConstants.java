@@ -6,7 +6,7 @@
 
 package com.linkare.rec.impl.exceptions;
 
-import com.linkare.rec.acquisition.*;
+import com.linkare.rec.acquisition.WrongConfigurationException;
 
 public class NotAuthorizedConstants
 {

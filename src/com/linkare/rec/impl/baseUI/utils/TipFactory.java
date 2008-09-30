@@ -8,12 +8,19 @@ package com.linkare.rec.impl.baseUI.utils;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JComponent;
+import javax.swing.JToolTip;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 
 public class TipFactory
 {

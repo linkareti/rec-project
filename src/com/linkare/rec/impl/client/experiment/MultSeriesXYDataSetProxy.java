@@ -6,13 +6,11 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset implements com.linkare.rec.impl.client.experiment.ExpDataModelListener
 {

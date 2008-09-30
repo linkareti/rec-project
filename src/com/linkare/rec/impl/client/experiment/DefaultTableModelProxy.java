@@ -6,13 +6,10 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.data.acquisition.PhysicsValue;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import javax.swing.event.TableModelListener;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener
 {

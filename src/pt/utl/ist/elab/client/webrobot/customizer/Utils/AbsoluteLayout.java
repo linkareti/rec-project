@@ -13,7 +13,11 @@
 
 package pt.utl.ist.elab.client.webrobot.customizer.Utils;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.LayoutManager;
+import java.awt.LayoutManager2;
 
 /** AbsoluteLayout is a LayoutManager that works as a replacement for "null" layout to
 * allow placement of components in absolute positions.

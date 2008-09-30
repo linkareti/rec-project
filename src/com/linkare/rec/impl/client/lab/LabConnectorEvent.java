@@ -8,7 +8,7 @@ package com.linkare.rec.impl.client.lab;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class LabConnectorEvent extends java.util.EventObject
 {

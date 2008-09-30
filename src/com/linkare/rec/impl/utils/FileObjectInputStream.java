@@ -13,7 +13,7 @@ import java.io.ObjectInputStream;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class FileObjectInputStream extends ObjectInputStream
 {

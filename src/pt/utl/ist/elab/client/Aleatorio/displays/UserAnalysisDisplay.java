@@ -6,22 +6,12 @@
 
 package pt.utl.ist.elab.client.Aleatorio.displays;
 
-import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
-import com.linkare.rec.impl.client.experiment.ExpDataModel;
-import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
-import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
-import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import javax.swing.Icon;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import java.awt.*;
-import javax.swing.event.*;
-import java.io.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class UserAnalysisDisplay extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay, com.linkare.rec.impl.client.experiment.ExpDataModelListener{
     

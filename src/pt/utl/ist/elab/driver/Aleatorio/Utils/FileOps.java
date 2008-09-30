@@ -8,10 +8,13 @@ package pt.utl.ist.elab.driver.Aleatorio.Utils;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 
-import java.io.*;
+import java.io.FileDescriptor;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 public class FileOps {
     

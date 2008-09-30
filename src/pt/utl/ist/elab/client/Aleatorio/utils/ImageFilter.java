@@ -9,7 +9,7 @@ package pt.utl.ist.elab.client.Aleatorio.utils;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class ImageFilter extends javax.swing.filechooser.FileFilter{
     

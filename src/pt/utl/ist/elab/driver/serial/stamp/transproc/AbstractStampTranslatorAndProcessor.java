@@ -8,7 +8,7 @@ package pt.utl.ist.elab.driver.serial.stamp.transproc;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public abstract class AbstractStampTranslatorAndProcessor implements StampTranslator, StampProcessor
 {

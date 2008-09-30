@@ -6,9 +6,9 @@
 
 package com.linkare.rec.impl.baseUI;
 
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import com.linkare.rec.impl.utils.Defaults;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *

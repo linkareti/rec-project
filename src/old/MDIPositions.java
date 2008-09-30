@@ -8,7 +8,7 @@ package old;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public interface MDIPositions 
 {

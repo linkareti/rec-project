@@ -8,15 +8,14 @@ package pt.utl.ist.elab.client.usb.cypress.polaroid;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.*;
-import com.linkare.rec.impl.i18n.*;
-import com.linkare.rec.data.synch.*;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class PolaroidCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer
 {

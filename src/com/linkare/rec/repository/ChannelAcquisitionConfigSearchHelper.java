@@ -1,13 +1,14 @@
 package com.linkare.rec.repository;
 
-import com.linkare.rec.data.config.VTChannelParameterConfigListHelper;
-import com.linkare.rec.data.metadata.VTScaleHelper;
 import org.omg.CORBA.Any;
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.StructMember;
 import org.omg.CORBA.TypeCode;
 import org.omg.CORBA.portable.InputStream;
 import org.omg.CORBA.portable.OutputStream;
+
+import com.linkare.rec.data.config.VTChannelParameterConfigListHelper;
+import com.linkare.rec.data.metadata.VTScaleHelper;
 
 
 abstract public class ChannelAcquisitionConfigSearchHelper

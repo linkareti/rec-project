@@ -7,18 +7,14 @@
 
 package pt.utl.ist.elab.client.serial.stamp.g;
 
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.*;
-import com.linkare.rec.data.synch.*;
-import com.linkare.rec.impl.i18n.*;
-import java.util.Hashtable;
-import javax.swing.JLabel;
-import javax.swing.text.NumberFormatter;
-import java.text.DecimalFormat;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer
 {

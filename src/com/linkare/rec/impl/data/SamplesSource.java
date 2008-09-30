@@ -6,10 +6,10 @@
 
 package com.linkare.rec.impl.data;
 
-import com.linkare.rec.data.acquisition.*;
+import com.linkare.rec.data.acquisition.PhysicsValue;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface SamplesSource
 {

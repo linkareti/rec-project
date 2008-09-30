@@ -9,7 +9,7 @@ package pt.utl.ist.elab.driver.serial.stamp.transproc;
 import java.util.HashMap;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class StampCommand implements java.io.Serializable
 {

@@ -6,18 +6,20 @@
 
 package com.linkare.rec.impl.wrappers;
 
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import org.omg.CORBA.SystemException;
+
 import com.linkare.rec.acquisition.DataProducerState;
 import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.DataReceiverOperations;
 import com.linkare.rec.impl.logging.LoggerUtil;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-import org.omg.CORBA.SystemException;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DataReceiverWrapper implements DataReceiverOperations
 {

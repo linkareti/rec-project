@@ -8,7 +8,7 @@ package old.configOld;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DisplayCollection extends java.util.Vector
 {

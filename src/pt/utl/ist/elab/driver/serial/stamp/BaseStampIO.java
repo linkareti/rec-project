@@ -8,15 +8,25 @@
  */
 package pt.utl.ist.elab.driver.serial.stamp;
 
-import gnu.io.*;
-import java.io.*;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommandListener;
+
+import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class BaseStampIO {
 

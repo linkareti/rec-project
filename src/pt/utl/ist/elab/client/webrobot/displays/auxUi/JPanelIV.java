@@ -6,10 +6,10 @@
 
 package pt.utl.ist.elab.client.webrobot.displays.auxUi;
 
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.data.config.*;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 /**
  *

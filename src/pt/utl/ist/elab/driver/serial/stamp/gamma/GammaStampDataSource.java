@@ -5,17 +5,21 @@
  */
 package pt.utl.ist.elab.driver.serial.stamp.gamma;
 
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.acquisition.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.gamma.processors.StampGammaProcessor;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.data.PhysicsValFactory;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class GammaStampDataSource extends AbstractStampDataSource {
 

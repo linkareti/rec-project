@@ -8,15 +8,17 @@ package com.linkare.rec.impl.baseUI.display;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import com.linkare.rec.impl.baseUI.config.Display;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import java.util.Vector;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.impl.baseUI.config.Display;
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.logging.LoggerUtil;
 
 public class DefaultDisplayFactory extends AbstractDisplayFactory
 {

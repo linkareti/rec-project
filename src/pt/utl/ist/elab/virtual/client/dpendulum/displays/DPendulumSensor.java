@@ -8,7 +8,7 @@ package pt.utl.ist.elab.virtual.client.dpendulum.displays;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 import com.linkare.rec.impl.client.experiment.*;

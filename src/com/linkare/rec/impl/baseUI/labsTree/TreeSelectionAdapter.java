@@ -8,7 +8,7 @@ package com.linkare.rec.impl.baseUI.labsTree;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public abstract class TreeSelectionAdapter implements TreeSelectionChangeListener
 {

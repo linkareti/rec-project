@@ -10,8 +10,6 @@
 
 package pt.utl.ist.elab.driver.doppler.sound;
 
-import java.io.File;
-import java.io.FileInputStream;
 
 /**
  *

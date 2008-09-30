@@ -6,10 +6,10 @@
 
 package com.linkare.rec.impl.exceptions;
 
-import com.linkare.rec.acquisition.*;
+import com.linkare.rec.acquisition.MaximumClientsReached;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class MaximumClientsReachedConstants
 {

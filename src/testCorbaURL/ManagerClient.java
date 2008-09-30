@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  * @version
  */
 public class ManagerClient

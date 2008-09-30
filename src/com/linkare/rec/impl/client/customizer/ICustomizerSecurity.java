@@ -8,7 +8,7 @@ package com.linkare.rec.impl.client.customizer;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public interface ICustomizerSecurity extends ICustomizer
 {

@@ -9,11 +9,10 @@
 
 package pt.utl.ist.elab.driver.Aleatorio.Hardware;
 
-import pt.utl.ist.elab.driver.Aleatorio.Utils.FileOps;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class HardwareInit {
     

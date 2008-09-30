@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultOperation implements IOperation
 {

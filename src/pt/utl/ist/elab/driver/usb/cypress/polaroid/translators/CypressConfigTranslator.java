@@ -6,8 +6,9 @@
 
 package pt.utl.ist.elab.driver.usb.cypress.polaroid.translators;
 
-import pt.utl.ist.elab.driver.usb.cypress.transproc.*;
-import pt.utl.ist.elab.driver.usb.cypress.*;
+import pt.utl.ist.elab.driver.usb.cypress.AbstractCypressDriver;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.AbstractCypressTranslator;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressCommand;
 
 /**
  *

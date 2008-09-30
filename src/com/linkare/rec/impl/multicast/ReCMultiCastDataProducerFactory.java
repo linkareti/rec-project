@@ -6,15 +6,15 @@
 
 package com.linkare.rec.impl.multicast;
 
-import com.linkare.rec.impl.multicast.security.IResource;
-import com.linkare.rec.impl.utils.Deactivator;
 import java.io.File;
 import java.util.Date;
-import com.linkare.rec.impl.multicast.ReCMultiCastDataProducerListener;
+
+import com.linkare.rec.impl.multicast.security.IResource;
+import com.linkare.rec.impl.utils.Deactivator;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public final class ReCMultiCastDataProducerFactory
 {

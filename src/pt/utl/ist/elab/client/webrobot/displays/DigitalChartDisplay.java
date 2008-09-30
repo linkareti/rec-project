@@ -6,12 +6,12 @@
 
 package pt.utl.ist.elab.client.webrobot.displays;
 
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.data.config.*;
-import pt.utl.ist.elab.client.webrobot.utils.*;
-import pt.utl.ist.elab.client.webrobot.displays.proxys.*;
+import pt.utl.ist.elab.client.webrobot.displays.proxys.DefaultChartModelProxy;
+import pt.utl.ist.elab.client.webrobot.utils.PrintComponent;
+
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 
 /**
  *

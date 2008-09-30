@@ -8,7 +8,7 @@ package test;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ColorArrayPropertyEditor extends com.linkare.editor.AbstractIndexedPropertyEditor
 {

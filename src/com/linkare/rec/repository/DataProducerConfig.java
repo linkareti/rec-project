@@ -1,7 +1,8 @@
 package com.linkare.rec.repository;
 
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import org.omg.CORBA.portable.IDLEntity;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 
 public final class DataProducerConfig implements IDLEntity
 {

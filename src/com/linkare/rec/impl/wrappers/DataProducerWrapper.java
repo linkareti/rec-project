@@ -6,18 +6,26 @@
 
 package com.linkare.rec.impl.wrappers;
 
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.acquisition.SamplesPacket;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
 import org.omg.CORBA.SystemException;
+
+import com.linkare.rec.acquisition.DataProducer;
+import com.linkare.rec.acquisition.DataProducerOperations;
+import com.linkare.rec.acquisition.DataProducerState;
+import com.linkare.rec.acquisition.DataReceiver;
+import com.linkare.rec.acquisition.MaximumClientsReached;
+import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
+import com.linkare.rec.acquisition.NotAvailableException;
+import com.linkare.rec.data.acquisition.SamplesPacket;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DataProducerWrapper implements DataProducerOperations
 {

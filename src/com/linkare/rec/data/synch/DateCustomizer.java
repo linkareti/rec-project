@@ -6,10 +6,10 @@
 
 package com.linkare.rec.data.synch;
 
-import java.beans.*;
+import java.beans.Beans;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DateCustomizer extends javax.swing.JPanel implements java.beans.Customizer
 {

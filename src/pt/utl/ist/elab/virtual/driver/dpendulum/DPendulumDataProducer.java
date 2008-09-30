@@ -8,7 +8,7 @@ package pt.utl.ist.elab.virtual.driver.dpendulum;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 import com.linkare.rec.impl.data.*;

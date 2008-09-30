@@ -26,7 +26,6 @@ import com.linkare.rec.impl.multicast.security.DefaultOperation;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
 import com.linkare.rec.impl.multicast.security.DefaultUser;
 import com.linkare.rec.impl.multicast.security.IOperation;
-import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.IUser;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.utils.Defaults;

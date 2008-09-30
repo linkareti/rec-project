@@ -9,7 +9,7 @@ import java.awt.Dimension;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class ImageStorePanel extends javax.swing.JPanel {
     

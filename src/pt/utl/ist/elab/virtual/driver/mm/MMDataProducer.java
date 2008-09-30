@@ -8,7 +8,7 @@ package pt.utl.ist.elab.virtual.driver.mm;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 import com.linkare.rec.data.acquisition.PhysicsVal;

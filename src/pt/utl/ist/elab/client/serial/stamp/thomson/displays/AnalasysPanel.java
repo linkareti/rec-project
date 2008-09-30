@@ -11,11 +11,10 @@ package pt.utl.ist.elab.client.serial.stamp.thomson.displays;
  * @author  ivo
  */
 
-import java.awt.*;
-import java.awt.image.*;
-import javax.swing.border.*;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.i18n.*;
+import java.awt.Image;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.utils.Defaults;
 
 public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay, com.linkare.rec.impl.client.experiment.ExpDataModelListener
 {

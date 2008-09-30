@@ -6,12 +6,13 @@
 
 package pt.utl.ist.elab.driver.serial.stamp;
 
-import com.linkare.rec.impl.driver.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+
+import com.linkare.rec.impl.driver.BaseDataSource;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public abstract class AbstractStampDataSource extends BaseDataSource
 {

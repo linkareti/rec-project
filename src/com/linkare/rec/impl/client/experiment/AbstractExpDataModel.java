@@ -6,20 +6,32 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.synch.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.wrappers.*;
-import java.util.*;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.acquisition.DataReceiver;
+import com.linkare.rec.acquisition.DataReceiverHelper;
+import com.linkare.rec.acquisition.DataReceiverOperations;
+import com.linkare.rec.acquisition.MaxPacketNumUnknown;
+import com.linkare.rec.acquisition.MaximumClientsReached;
+import com.linkare.rec.acquisition.NotAvailableException;
+import com.linkare.rec.data.acquisition.SamplesPacket;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.data.SamplesPacketReadException;
+import com.linkare.rec.impl.data.SamplesPacketSourceDepacketizer;
+import com.linkare.rec.impl.data.SamplesSourceEvent;
+import com.linkare.rec.impl.data.SamplesSourceEventListener;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.DataCollector;
+import com.linkare.rec.impl.utils.DataCollectorState;
+import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.impl.utils.ObjectID;
+import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public abstract class AbstractExpDataModel extends DataCollector implements ExpDataModel, DataReceiverOperations
 {

@@ -6,12 +6,14 @@
 
 package com.linkare.rec.impl.multicast.security;
 
-import com.linkare.rec.impl.multicast.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.impl.logging.LoggerUtil;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public final class SecurityManagerFactory
 {

@@ -6,12 +6,14 @@
 
 package com.linkare.rec.impl.data;
 
-import com.linkare.rec.data.acquisition.PhysicsValue;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
+
+import com.linkare.rec.data.acquisition.PhysicsValue;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DiscardablePhysicsValueMatrixIO
 {

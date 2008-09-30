@@ -6,14 +6,20 @@
 
 package com.linkare.rec.impl.baseUI.labsTree;
 
-import javax.swing.event.*;
-import javax.swing.tree.*;
-import com.linkare.rec.impl.baseUI.config.*;
+import javax.swing.event.EventListenerList;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
+import com.linkare.rec.impl.baseUI.config.Apparatus;
+import com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig;
+import com.linkare.rec.impl.baseUI.config.Display;
+import com.linkare.rec.impl.baseUI.config.DisplayNode;
+import com.linkare.rec.impl.baseUI.config.Lab;
 import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
+import com.linkare.rec.impl.baseUI.config.WebResource;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class LabsTreeModel extends DefaultTreeModel
 {

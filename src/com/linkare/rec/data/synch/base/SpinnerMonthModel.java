@@ -8,7 +8,7 @@ package com.linkare.rec.data.synch.base;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class SpinnerMonthModel extends javax.swing.AbstractSpinnerModel
 {

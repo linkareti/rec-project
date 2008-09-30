@@ -5,12 +5,7 @@
  */
 
 package com.linkare.rec.impl.client.experiment;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.synch.*;
-import com.linkare.rec.data.*;
-import java.util.*;
-import com.linkare.rec.data.metadata.*;
+import java.util.Vector;
 /**
  *
  * @author  Jos� Pedro Pereira

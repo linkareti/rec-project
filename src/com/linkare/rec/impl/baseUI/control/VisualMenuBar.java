@@ -8,11 +8,12 @@ package com.linkare.rec.impl.baseUI.control;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import javax.swing.ImageIcon;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class VisualMenuBar extends javax.swing.JFrame
 {

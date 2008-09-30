@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.webrobot.customizer.Interfaces;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public interface Model
 {

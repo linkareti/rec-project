@@ -6,14 +6,13 @@
 
 package pt.utl.ist.elab.client.webrobot.customizer;
 
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.*;
-import pt.utl.ist.elab.client.webrobot.customizer.Utils.*;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class WebRobotCustomizer implements com.linkare.rec.impl.client.customizer.ICustomizer
 {

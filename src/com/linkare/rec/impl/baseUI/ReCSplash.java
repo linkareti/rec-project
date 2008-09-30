@@ -11,12 +11,11 @@ package com.linkare.rec.impl.baseUI;
  * @author  Jos� Pedro Pereira
  */
 
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.Defaults;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
-import javax.swing.ImageIcon;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class ReCSplash extends javax.swing.JDialog
 {        

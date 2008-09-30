@@ -6,13 +6,15 @@
 
 package pt.utl.ist.elab.driver.usb.cypress.transproc;
 
-import java.util.*;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
+import java.util.Hashtable;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class CypressTranslatorProcessorManager
 {

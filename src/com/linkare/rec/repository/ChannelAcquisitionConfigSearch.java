@@ -1,9 +1,10 @@
 package com.linkare.rec.repository;
 
-import com.linkare.rec.data.config.ParameterConfig;
-import com.linkare.rec.data.config.ChannelAcquisitionConfig;
-import com.linkare.rec.data.metadata.Scale;
 import org.omg.CORBA.portable.IDLEntity;
+
+import com.linkare.rec.data.config.ChannelAcquisitionConfig;
+import com.linkare.rec.data.config.ParameterConfig;
+import com.linkare.rec.data.metadata.Scale;
 
 
 public final class ChannelAcquisitionConfigSearch implements IDLEntity

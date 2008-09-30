@@ -6,21 +6,19 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.synch.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.wrappers.*;
-import java.util.*;
-import java.util.logging.*;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.data.config.ChannelAcquisitionConfig;
+import com.linkare.rec.data.synch.DateTime;
+import com.linkare.rec.impl.logging.LoggerUtil;
 
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultExpDataModel extends AbstractExpDataModel
 {

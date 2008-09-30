@@ -7,7 +7,8 @@
 package pt.utl.ist.elab.driver.usb.cypress.transproc.processors;
 
 import pt.utl.ist.elab.driver.usb.cypress.AbstractCypressDriver;
-import pt.utl.ist.elab.driver.usb.cypress.transproc.*;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.AbstractCypressProcessor;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressCommand;
 
 public class CypressStartProcessor extends AbstractCypressProcessor
 {

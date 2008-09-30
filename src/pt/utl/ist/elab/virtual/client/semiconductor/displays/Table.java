@@ -8,7 +8,7 @@ package pt.utl.ist.elab.virtual.client.semiconductor.displays;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class Table extends com.linkare.rec.impl.baseUI.table.MultSeriesTable
 {

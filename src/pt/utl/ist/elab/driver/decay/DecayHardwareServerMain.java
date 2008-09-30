@@ -5,15 +5,18 @@
  */
 
 package pt.utl.ist.elab.driver.decay;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import pt.utl.ist.elab.driver.serial.stamp.radioactividade.RadioactividadeStampDriver;
+
+import com.linkare.rec.impl.driver.BaseHardware;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.ORBBean;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DecayHardwareServerMain
 {

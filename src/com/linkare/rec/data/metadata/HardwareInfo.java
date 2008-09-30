@@ -1,10 +1,10 @@
 package com.linkare.rec.data.metadata;
 
+import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.impl.data.FrequencyUtil;
-import com.linkare.rec.impl.data.PhysicsValueUtil;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.impl.exceptions.*;
+import com.linkare.rec.impl.exceptions.WrongConfigurationExceptionConstants;
 
 public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity
 {

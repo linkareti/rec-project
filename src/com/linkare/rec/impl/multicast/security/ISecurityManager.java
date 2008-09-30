@@ -6,11 +6,10 @@
 
 package com.linkare.rec.impl.multicast.security;
 
-import com.linkare.rec.acquisition.*;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface ISecurityManager
 {

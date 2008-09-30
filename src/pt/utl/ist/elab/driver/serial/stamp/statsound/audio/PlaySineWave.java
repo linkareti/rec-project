@@ -6,16 +6,9 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.statsound.audio;
 
-import javax.media.*;
-import javax.media.format.*;
-import javax.media.protocol.*;
-import javax.media.control.*;
-import java.util.*;
-import java.io.*;
-import java.awt.*;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PlaySineWave extends javax.swing.JFrame 
 {

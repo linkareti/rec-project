@@ -6,20 +6,29 @@
 
 package com.linkare.rec.impl.baseUI;
 
-import com.linkare.rec.impl.client.experiment.*;
-import java.util.ArrayList;
-import javax.swing.JInternalFrame;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import javax.swing.*;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JInternalFrame;
+import javax.swing.JToolBar;
+import javax.swing.SwingUtilities;
+
+import com.linkare.rec.data.acquisition.TOTAL_SAMPLES_UNDEFINED;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.logging.LoggerUtil;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ExperimentInternalFrame extends JInternalFrame implements ExpDataModelListener
 {

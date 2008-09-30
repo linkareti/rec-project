@@ -6,26 +6,36 @@
 
 package pt.utl.ist.elab.client.meteo.displays;
 
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterGraphics;
+import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.swing.Icon;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.baseUI.table.ExcelAdapter;
+import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
-import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
-import com.linkare.rec.impl.baseUI.table.*;
-import com.linkare.rec.impl.baseUI.*;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import javax.swing.Icon;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import java.awt.print.*;
-import java.awt.*;
-import javax.swing.table.*;
-import javax.swing.event.*;
-import java.io.*;
 
 /**
  *
- * @author  jp & Andr�
+ * @author José Pedro Pereira - Linkare TI & Andr�
  */
 public class MeteoTable extends javax.swing.JPanel implements ExpDataDisplay, Printable
 {

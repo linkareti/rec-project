@@ -7,20 +7,23 @@
 package com.linkare.rec.impl.baseUI.display;
 
 
+import java.awt.Graphics;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+
+import javax.swing.Icon;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import javax.swing.Icon;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import java.awt.print.*;
-import java.awt.*;
-import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultExperimentHeaderInfo extends javax.swing.JPanel implements ExpDataDisplay,
 ExpDataModelListener,Printable

@@ -6,7 +6,7 @@
 
 package pt.utl.ist.elab.client.serial.stamp.planck.displays;
 
-import com.linkare.rec.impl.baseUI.table.*;
+import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
 /**
  *

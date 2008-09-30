@@ -1,10 +1,12 @@
 package audio.media.protocol.sinewavegenerator;
 
-import javax.media.*;
-import javax.media.format.*;
-import javax.media.protocol.*;
-import javax.media.protocol.DataSource;
-import java.io.IOException;
+import javax.media.Buffer;
+import javax.media.Control;
+import javax.media.Format;
+import javax.media.format.AudioFormat;
+import javax.media.protocol.BufferTransferHandler;
+import javax.media.protocol.ContentDescriptor;
+import javax.media.protocol.PushBufferStream;
 
 public class InterLacedSineWaveStream implements PushBufferStream, Runnable
 {
@@ -151,7 +153,7 @@ public class InterLacedSineWaveStream implements PushBufferStream, Runnable
 		transferHandler.transferData(this);
 		try
 		{
-		    Thread.currentThread().sleep((long)(((double)maxDataLength)*1000./4./44100.*0.5));
+			Thread.sleep((long)(((double)maxDataLength)*1000./4./44100.*0.5));
 		} catch (InterruptedException ise)
 		{
 		}
@@ -166,7 +168,8 @@ public class InterLacedSineWaveStream implements PushBufferStream, Runnable
 	return controls;
     }
     
-    public Object getControl(String controlType)
+    @SuppressWarnings("unchecked")
+	public Object getControl(String controlType)
     {
 	try
 	{
@@ -210,7 +213,7 @@ public class InterLacedSineWaveStream implements PushBufferStream, Runnable
 	    for (int i = 0; i < buffer_len; i++)
 	    {
 		
-		double time=(double)i*delta_t;
+		//double time=(double)i*delta_t;
 		double d_left_value=Math.sin(2*Math.PI*wave_left_freq*delta_t+wave_left_shift);
 		double d_right_value=Math.sin(2*Math.PI*wave_right_freq*delta_t+wave_right_shift);
 		
@@ -256,7 +259,7 @@ public class InterLacedSineWaveStream implements PushBufferStream, Runnable
 	    buffer.setSequenceNumber( seqNo );
 	    buffer.setLength(data_out.length);
 	    buffer.setOffset(0);
-	    buffer.setFlags(buffer.FLAG_RELATIVE_TIME);
+	    buffer.setFlags(Buffer.FLAG_RELATIVE_TIME);
 	    buffer.setTimeStamp(0);
 	    buffer.setHeader( null );
 	    seqNo++;

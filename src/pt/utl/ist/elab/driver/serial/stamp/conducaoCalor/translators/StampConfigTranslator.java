@@ -6,10 +6,12 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.conducaoCalor.translators;
 
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampTranslator;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 /**
  *

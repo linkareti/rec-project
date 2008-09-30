@@ -8,7 +8,7 @@ package com.linkare.rec.impl.data;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface SamplesPacketSourceEventListener extends java.util.EventListener
 {

@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class EditSubDel extends javax.swing.JDialog {
     

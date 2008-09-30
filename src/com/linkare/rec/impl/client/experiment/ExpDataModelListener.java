@@ -6,10 +6,9 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface ExpDataModelListener extends java.util.EventListener
 {

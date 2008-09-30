@@ -1,14 +1,13 @@
 package com.linkare.rec.data.metadata;
 
+import org.omg.CORBA.portable.IDLEntity;
+
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.ChannelAcquisitionConfig;
 import com.linkare.rec.data.config.ParameterConfig;
-import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.data.synch.Frequency;
-
 import com.linkare.rec.impl.data.FrequencyUtil;
 import com.linkare.rec.impl.exceptions.WrongConfigurationExceptionConstants;
-import org.omg.CORBA.portable.IDLEntity;
 
 public final class ChannelInfo implements IDLEntity
 {

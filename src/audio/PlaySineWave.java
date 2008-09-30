@@ -6,20 +6,42 @@
 
 package audio;
 
-import javax.media.*;
-import javax.media.format.*;
-import javax.media.protocol.*;
-import javax.media.control.*;
-import java.util.*;
-import java.io.*;
-import java.awt.*;
+import java.io.IOException;
+
+import javax.media.CaptureDeviceInfo;
+import javax.media.CaptureDeviceManager;
+import javax.media.ConfigureCompleteEvent;
+import javax.media.Control;
+import javax.media.ControllerEvent;
+import javax.media.ControllerListener;
+import javax.media.DataSink;
+import javax.media.EndOfMediaEvent;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.NoDataSinkException;
+import javax.media.NoProcessorException;
+import javax.media.PackageManager;
+import javax.media.Player;
+import javax.media.PrefetchCompleteEvent;
+import javax.media.Processor;
+import javax.media.RealizeCompleteEvent;
+import javax.media.ResourceUnavailableEvent;
+import javax.media.control.StreamWriterControl;
+import javax.media.format.AudioFormat;
+import javax.media.protocol.DataSource;
+import javax.media.protocol.FileTypeDescriptor;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PlaySineWave extends javax.swing.JFrame implements ControllerListener
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5984299468419225805L;
+
 	/** Creates new form PlaySineWave */
 	public PlaySineWave()
 	{

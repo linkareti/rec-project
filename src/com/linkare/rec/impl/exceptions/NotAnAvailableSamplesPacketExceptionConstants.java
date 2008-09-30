@@ -1,5 +1,5 @@
 package com.linkare.rec.impl.exceptions;
-import com.linkare.rec.acquisition.*;
+import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
 
 public class NotAnAvailableSamplesPacketExceptionConstants
 {

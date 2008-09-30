@@ -6,19 +6,42 @@
 
 package com.linkare.rec.impl.client;
 
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.events.*;
-import com.linkare.rec.impl.client.apparatus.*;
-import com.linkare.rec.impl.client.chat.*;
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.impl.wrappers.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import java.util.*;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.acquisition.DataClient;
+import com.linkare.rec.acquisition.DataClientHelper;
+import com.linkare.rec.acquisition.DataClientOperations;
+import com.linkare.rec.acquisition.DataProducer;
+import com.linkare.rec.acquisition.HardwareState;
+import com.linkare.rec.acquisition.IncorrectStateException;
+import com.linkare.rec.acquisition.MaximumClientsReached;
+import com.linkare.rec.acquisition.NotAuthorized;
+import com.linkare.rec.acquisition.NotAvailableException;
+import com.linkare.rec.acquisition.NotOwnerException;
+import com.linkare.rec.acquisition.NotRegistered;
 import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.apparatus.Apparatus;
+import com.linkare.rec.impl.client.apparatus.ApparatusConnector;
+import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
+import com.linkare.rec.impl.client.apparatus.ApparatusConnectorListener;
+import com.linkare.rec.impl.client.chat.ChatConnectionEvent;
+import com.linkare.rec.impl.client.chat.ChatMessageEvent;
+import com.linkare.rec.impl.client.chat.ChatRoomEvent;
+import com.linkare.rec.impl.client.chat.IChatMessageListener;
+import com.linkare.rec.impl.client.chat.IChatServer;
+import com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener;
+import com.linkare.rec.impl.client.experiment.ExpUsersListEvent;
+import com.linkare.rec.impl.client.experiment.ExpUsersListSource;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.impl.utils.ObjectID;
+import com.linkare.rec.impl.wrappers.DataProducerWrapper;
+import com.linkare.rec.impl.wrappers.MultiCastHardwareWrapper;
 
 /**
  * This class implements a client for a lab apparatus... It hides the 

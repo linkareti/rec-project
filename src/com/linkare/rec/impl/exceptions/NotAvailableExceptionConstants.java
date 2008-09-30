@@ -6,11 +6,11 @@
 
 package com.linkare.rec.impl.exceptions;
 
-import com.linkare.rec.acquisition.*;
+import com.linkare.rec.acquisition.WrongConfigurationException;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class NotAvailableExceptionConstants
 {

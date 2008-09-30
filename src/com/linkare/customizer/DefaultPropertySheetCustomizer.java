@@ -1,23 +1,32 @@
-/*
- * AbstractIndexedPropertyCustomEditor.java
- *
- * Created on 14 de Dezembro de 2003, 12:38
- */
-
 package com.linkare.customizer;
 
-import java.beans.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.table.*;
+import java.beans.BeanInfo;
+import java.beans.Beans;
+import java.beans.Customizer;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.beans.PropertyEditor;
+import java.beans.PropertyEditorManager;
+import java.util.Hashtable;
+
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
 {
-    private Object object=null;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6296122228455871968L;
+	private Object object=null;
     public DefaultPropertySheetCustomizer()
     {
         super();
@@ -64,7 +73,7 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
         
         if(updating) return;
         
-        if(evt.getType()==evt.UPDATE)
+        if(evt.getType()==TableModelEvent.UPDATE)
         {
             TableModel model=tblProperty.getModel();
             int startRow=evt.getFirstRow();
@@ -79,7 +88,7 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
                 return;
             }
             
-            Hashtable pds=createHashPropertyDesc(bi.getPropertyDescriptors());
+            Hashtable<String,PropertyDescriptor> pds=createHashPropertyDesc(bi.getPropertyDescriptors());
             
             for(int i=startRow;i<=endRow;i++)
             {
@@ -113,7 +122,7 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
         
     }//GEN-LAST:event_propertyObjectTableModelTableChanged
     
-    private Hashtable createHashPropertyDesc(PropertyDescriptor[] pds)
+    private Hashtable<String, PropertyDescriptor> createHashPropertyDesc(PropertyDescriptor[] pds)
     {
         Hashtable<String, PropertyDescriptor> retVal=new Hashtable<String, PropertyDescriptor>();
         if(pds!=null)
@@ -127,7 +136,7 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
         return retVal;
     }
     
-    private PropertyDescriptor getPropertyDescriptor(Hashtable hash,String name)
+    private PropertyDescriptor getPropertyDescriptor(Hashtable<String, PropertyDescriptor> hash,String name)
     {
         PropertyDescriptor pd=null;
         Object opd=hash.get(name);
@@ -146,7 +155,7 @@ public class DefaultPropertySheetCustomizer extends JPanel implements Customizer
     public void setObject(Object object)
     {
         updating=true;
-        Object oldObject=this.object;
+        //Object oldObject=this.object;
         this.object=object;
         
         ((DefaultTableModel)tblProperty.getModel()).setRowCount(0);

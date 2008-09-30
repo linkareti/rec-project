@@ -6,15 +6,10 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.data.acquisition.PhysicsValue;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.data.config.*;
+import com.linkare.rec.data.metadata.Scale;
+import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import javax.swing.event.TableModelListener;
 /**
  *
  * @author  Andr�

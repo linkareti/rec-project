@@ -8,7 +8,7 @@ package test;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 import pt.utl.ist.elab.client.serial.stamp.thomson.displays.*;

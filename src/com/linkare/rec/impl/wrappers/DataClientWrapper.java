@@ -6,19 +6,21 @@
 
 package com.linkare.rec.impl.wrappers;
 
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import org.omg.CORBA.SystemException;
+
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.DataClientOperations;
 import com.linkare.rec.acquisition.HardwareState;
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.impl.logging.LoggerUtil;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-import org.omg.CORBA.SystemException;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DataClientWrapper implements DataClientOperations
 {

@@ -5,8 +5,6 @@
  */
 
 package com.linkare.rec.impl.client.experiment;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
 
 /**
  *

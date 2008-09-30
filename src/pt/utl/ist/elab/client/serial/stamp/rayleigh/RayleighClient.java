@@ -6,12 +6,11 @@
 
 package pt.utl.ist.elab.client.serial.stamp.rayleigh;
 
-import com.linkare.rec.impl.baseUI.*;
-import javax.swing.JFrame;
+import com.linkare.rec.impl.baseUI.ReCBaseUI;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class RayleighClient
 {

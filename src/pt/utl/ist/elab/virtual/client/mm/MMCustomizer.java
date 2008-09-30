@@ -8,7 +8,7 @@ package pt.utl.ist.elab.virtual.client.mm;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  *
  *  1- Desenhar o GUI! Não esquecer de ir logo internacionalizando...
  *

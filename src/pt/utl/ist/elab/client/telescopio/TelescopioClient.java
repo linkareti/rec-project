@@ -6,12 +6,13 @@
 
 package pt.utl.ist.elab.client.telescopio;
 
-import com.linkare.rec.impl.baseUI.*;
 import javax.swing.JFrame;
+
+import com.linkare.rec.impl.baseUI.ReCBaseUI;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class TelescopioClient
 {

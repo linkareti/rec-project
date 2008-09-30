@@ -91,30 +91,41 @@
 
 package com.linkare.rec.impl.baseUI.config;
 
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import com.linkare.rec.impl.protocols.ReCProtocols;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.jnlp.BasicService;
+import javax.jnlp.ServiceManager;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import javax.jnlp.*;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.logging.LoggerUtil;
-import java.util.logging.*;
+import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.utils.Defaults;
-import java.util.LinkedList;
 
 
 public class ReCBaseUIConfig implements CommonBean

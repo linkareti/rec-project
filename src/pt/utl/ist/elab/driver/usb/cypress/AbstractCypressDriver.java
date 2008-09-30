@@ -2,21 +2,30 @@ package pt.utl.ist.elab.driver.usb.cypress;
 
 
 
-import javax.usb.*;
-import javax.usb.event.*;
-import javax.usb.util.*;
-import com.ibm.jusb.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.usb.UsbDevice;
+
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressCommand;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressCommandListener;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressProcessor;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressTranslatorProcessorManager;
+
+import com.linkare.rec.acquisition.IncorrectStateException;
+import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.driver.BaseDriver;
+import com.linkare.rec.impl.driver.IDataSource;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.threading.AbstractConditionDecisor;
+import com.linkare.rec.impl.threading.IConditionDecisor;
+import com.linkare.rec.impl.threading.TimedOutException;
+import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.driver.usb.cypress.transproc.*;
-import pt.utl.ist.elab.driver.usb.cypress.transproc.processors.*;
 
 
 public abstract class AbstractCypressDriver extends BaseDriver implements CypressFinderListener, CypressCommandListener

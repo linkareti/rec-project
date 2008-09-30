@@ -6,25 +6,34 @@
 
 package com.linkare.rec.impl.multicast;
 
-import com.linkare.rec.acquisition.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+
+import com.linkare.rec.acquisition.DataClient;
+import com.linkare.rec.acquisition.HardwareState;
+import com.linkare.rec.acquisition.MaximumClientsReached;
+import com.linkare.rec.acquisition.NotAuthorized;
+import com.linkare.rec.acquisition.NotRegistered;
+import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.impl.client.chat.ChatMessageEvent;
+import com.linkare.rec.impl.client.chat.IChatServer;
 import com.linkare.rec.impl.events.HardwareChangeEvent;
 import com.linkare.rec.impl.events.HardwareLockEvent;
 import com.linkare.rec.impl.events.HardwareStateChangeEvent;
 import com.linkare.rec.impl.exceptions.MaximumClientsReachedConstants;
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
-import com.linkare.rec.impl.logging.LoggerUtil;
-import com.linkare.rec.impl.multicast.security.*;
+import com.linkare.rec.impl.multicast.security.DefaultOperation;
+import com.linkare.rec.impl.multicast.security.DefaultUser;
+import com.linkare.rec.impl.multicast.security.IOperation;
+import com.linkare.rec.impl.multicast.security.IResource;
+import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.logging.Level;
-import com.linkare.rec.impl.client.chat.*;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ClientQueue
 {

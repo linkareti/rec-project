@@ -7,15 +7,10 @@
 package pt.utl.ist.elab.driver.serial.stamp.statsound.audio;
 
 
-import javax.media.*;
-import javax.media.format.*;
-import javax.media.control.*;
-import java.io.*;
-import java.nio.channels.*;
-import java.nio.*;
-import java.util.*;
-import pt.utl.ist.elab.driver.serial.stamp.statsound.*;
-import pt.utl.ist.elab.driver.serial.stamp.statsound.audio.media.protocol.sinewavegenerator.*;
+import javax.media.CaptureDeviceInfo;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.control.FormatControl;
 
 /**
  *

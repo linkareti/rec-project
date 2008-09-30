@@ -6,26 +6,26 @@
 
 package com.linkare.rec.impl.multicast;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.linkare.rec.acquisition.DataProducerState;
 import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.MaximumClientsReached;
 import com.linkare.rec.acquisition.NotAuthorized;
 import com.linkare.rec.impl.events.DataProducerStateChangeEvent;
 import com.linkare.rec.impl.events.NewSamplesEvent;
-import com.linkare.rec.impl.utils.EventQueue;
-import com.linkare.rec.impl.multicast.security.IResource;
-import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.exceptions.MaximumClientsReachedConstants;
 import com.linkare.rec.impl.logging.LoggerUtil;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+import com.linkare.rec.impl.multicast.security.IResource;
+import com.linkare.rec.impl.utils.EventQueue;
+import com.linkare.rec.impl.utils.EventQueueDispatcher;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 
 //TODO -> TESTING implements java.io.Serializable

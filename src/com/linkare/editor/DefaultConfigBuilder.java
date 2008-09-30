@@ -8,19 +8,26 @@ package com.linkare.editor;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import com.linkare.rec.impl.client.customizer.*;
-import com.linkare.rec.impl.utils.HardwareInfoXMLReader;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.client.customizer.CustomizerUIUtil;
+import com.linkare.rec.impl.client.customizer.ICustomizer;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.utils.HardwareInfoXMLReader;
 
 public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomizerListener
 {
-    private ICustomizer customizer = null;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -687470796173092986L;
+	
+	private ICustomizer customizer = null;
     
     /** Creates new form DefaultConfigBuilder */
     public DefaultConfigBuilder()
@@ -144,7 +151,7 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
     {//GEN-HEADEREND:event_jButtonBrowseActionPerformed
         JFileChooser jfc = new JFileChooser();
         int answer = jfc.showOpenDialog(this);
-        if(answer != jfc.APPROVE_OPTION)
+        if(answer != JFileChooser.APPROVE_OPTION)
             return;
         
         jTextFieldHInfoXML.setText(jfc.getSelectedFile().getAbsolutePath());
@@ -204,7 +211,7 @@ public class DefaultConfigBuilder extends javax.swing.JFrame implements ICustomi
     {
         JFileChooser jfc = new JFileChooser();
         int answer = jfc.showSaveDialog(this);
-        if(answer != jfc.APPROVE_OPTION)
+        if(answer != JFileChooser.APPROVE_OPTION)
             return;
         
         try

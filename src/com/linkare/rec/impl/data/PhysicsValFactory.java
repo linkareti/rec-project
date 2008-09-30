@@ -6,11 +6,11 @@
 
 package com.linkare.rec.impl.data;
 
-import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.ByteArrayValue;
+import com.linkare.rec.data.acquisition.PhysicsVal;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PhysicsValFactory
 {

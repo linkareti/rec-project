@@ -7,16 +7,16 @@
 package com.linkare.rec.impl.baseUI.control;
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
-import javax.swing.ImageIcon;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.impl.utils.Defaults;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import java.awt.Point;
 import java.beans.PropertyChangeEvent;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.swing.ImageIcon;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class ControllerPanel extends javax.swing.JPanel implements java.io.Serializable
 {

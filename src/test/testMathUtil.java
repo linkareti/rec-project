@@ -10,7 +10,7 @@ import com.linkare.rec.impl.utils.MathUtil;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class testMathUtil
 {

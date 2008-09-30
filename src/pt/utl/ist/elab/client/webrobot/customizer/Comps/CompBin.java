@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.webrobot.customizer.Comps;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class CompBin extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Block 
 {

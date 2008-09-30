@@ -6,11 +6,10 @@
 
 package com.linkare.rec.data;
 
-import com.linkare.rec.data.*;
 import com.linkare.editor.AbstractSelectionListPropertyEditor;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class MultiplierValueEditor extends AbstractSelectionListPropertyEditor
 {

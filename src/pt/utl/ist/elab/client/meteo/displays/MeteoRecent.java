@@ -8,13 +8,14 @@ package pt.utl.ist.elab.client.meteo.displays;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.config.*;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 public class MeteoRecent extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener
 {

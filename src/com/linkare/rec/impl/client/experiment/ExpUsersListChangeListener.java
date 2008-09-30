@@ -6,8 +6,6 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import java.util.EventListener;
-import com.linkare.rec.acquisition.UserInfo;
 
 /**
  *

@@ -8,11 +8,16 @@ package com.linkare.rec.data;
 
 /**
  *
- * @author  Administrator
+ * @author  José Pedro Pereira - Linkare TI
  */
 public class MultiplierCustomizer extends javax.swing.JPanel implements java.beans.Customizer
 {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 10662401807877360L;
 
 	/** Creates new customizer MultiplierCustomizer */
 	public MultiplierCustomizer()

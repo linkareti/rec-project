@@ -10,7 +10,7 @@ package pt.utl.ist.elab.client.webrobot.customizer.Utils;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class ExtensionFilter extends javax.swing.filechooser.FileFilter {
     

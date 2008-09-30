@@ -8,10 +8,12 @@ package com.linkare.rec.impl.baseUI.labsTree;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import com.linkare.rec.impl.baseUI.config.*;
+import com.linkare.rec.impl.baseUI.config.Apparatus;
+import com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig;
+import com.linkare.rec.impl.baseUI.config.Lab;
 
 public class DefaultConfigSelectionEvent extends ApparatusSelectionEvent
 {

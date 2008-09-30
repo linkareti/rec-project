@@ -6,10 +6,9 @@
 
 package com.linkare.rec.impl.client.apparatus;
 
-import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface ApparatusConnectorListener extends java.util.EventListener
 {

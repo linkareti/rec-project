@@ -14,23 +14,25 @@ package com.linkare.rec.impl.data;
 
 
 
-import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
-
-import com.linkare.rec.data.acquisition.SamplesPacket;
-
-import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
-
-import com.linkare.rec.impl.logging.LoggerUtil;
-
-import com.linkare.rec.impl.utils.FileObjectOutputStream;
-
-import java.io.*;
-
-import java.util.*;
-
-import java.util.logging.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
+
+import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
+import com.linkare.rec.data.acquisition.SamplesPacket;
+import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.FileObjectOutputStream;
 
 
 
@@ -38,7 +40,7 @@ import javax.swing.event.EventListenerList;
  *
  *
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  *
  */
 

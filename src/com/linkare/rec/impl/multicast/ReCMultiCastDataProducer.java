@@ -6,6 +6,15 @@
 
 package com.linkare.rec.impl.multicast;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.logging.Level;
+
+import org.omg.PortableServer.POA;
+import org.omg.PortableServer.Servant;
+
 import com.linkare.rec.acquisition.DataProducer;
 import com.linkare.rec.acquisition.DataProducerHelper;
 import com.linkare.rec.acquisition.DataProducerOperations;
@@ -13,34 +22,28 @@ import com.linkare.rec.acquisition.DataProducerState;
 import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.DataReceiverHelper;
 import com.linkare.rec.acquisition.DataReceiverOperations;
-import com.linkare.rec.acquisition.MaxPacketNumUnknown;
 import com.linkare.rec.acquisition.MaximumClientsReached;
 import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
-import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.acquisition.NotAuthorized;
+import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.data.SamplesPacketReadException;
-import com.linkare.rec.impl.multicast.security.IResource;
+import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
+import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.ResourceType;
 import com.linkare.rec.impl.utils.DataCollector;
 import com.linkare.rec.impl.utils.Deactivatable;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
-import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
-import java.io.Serializable;
-import java.util.logging.Level;
-import org.omg.PortableServer.POA;
-import org.omg.PortableServer.Servant;
-import java.io.*;
 
 
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ReCMultiCastDataProducer extends DataCollector implements DataProducerOperations, Deactivatable, Serializable
 {

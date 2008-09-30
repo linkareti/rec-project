@@ -6,9 +6,7 @@
 
 package pt.utl.ist.elab.client.serial.stamp.planck.displays;
 
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
 
 /**
  *

@@ -8,12 +8,16 @@ package pt.utl.ist.elab.client.serial.stamp.thomson.displays;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import java.awt.*;
-import java.awt.image.*;
-import javax.swing.border.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Insets;
+
+import javax.swing.border.Border;
 
 public class ImageBorder implements Border
 {

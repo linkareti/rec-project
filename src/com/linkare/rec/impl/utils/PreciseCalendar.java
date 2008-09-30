@@ -6,13 +6,16 @@
 
 package com.linkare.rec.impl.utils;
 
-import java.util.GregorianCalendar;
-import java.util.Calendar;
-import com.linkare.rec.data.synch.*;
 import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import com.linkare.rec.data.synch.DateTime;
+import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.data.synch.FrequencyDefType;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PreciseCalendar extends GregorianCalendar
 {

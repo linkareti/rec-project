@@ -8,10 +8,9 @@ package pt.utl.ist.elab.driver.Aleatorio.Utils;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 
-import java.lang.Math.*;
 
 public class LMFit {
     

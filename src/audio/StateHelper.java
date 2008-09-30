@@ -5,10 +5,18 @@
  */
 
 package audio;
-import javax.media.*;
+import javax.media.ConfigureCompleteEvent;
+import javax.media.ControllerClosedEvent;
+import javax.media.ControllerErrorEvent;
+import javax.media.ControllerEvent;
+import javax.media.EndOfMediaEvent;
+import javax.media.Player;
+import javax.media.PrefetchCompleteEvent;
+import javax.media.Processor;
+import javax.media.RealizeCompleteEvent;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
  
  public class StateHelper implements javax.media.ControllerListener {

@@ -6,22 +6,29 @@
 
 package com.linkare.rec.impl.baseUI.graph;
 
-import com.linkare.rec.impl.client.experiment.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import javax.swing.Icon;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
-import org.jfree.chart.*;
-import org.jfree.chart.plot.*;
-import org.jfree.chart.axis.*;
-import org.jfree.chart.renderer.*;
-import org.jfree.chart.renderer.xy.*;
-import org.jfree.chart.labels.*;
-import com.linkare.rec.data.config.*;
+
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.labels.XYToolTipGenerator;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener
 {

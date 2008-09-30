@@ -9,7 +9,7 @@ package com.linkare.rec.impl.multicast;
 import java.util.logging.Level;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface ReCMultiCastDataProducerListener
 {

@@ -6,14 +6,14 @@
 
 package com.linkare.rec.impl.driver;
 
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface IDriver
 {

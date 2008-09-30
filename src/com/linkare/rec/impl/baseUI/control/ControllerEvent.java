@@ -8,7 +8,7 @@ package com.linkare.rec.impl.baseUI.control;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class ControllerEvent extends java.util.EventObject
 {    

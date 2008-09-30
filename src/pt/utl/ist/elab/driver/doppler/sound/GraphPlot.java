@@ -1,6 +1,10 @@
 package pt.utl.ist.elab.driver.doppler.sound;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
 import javax.swing.JPanel;
 
 public class GraphPlot extends JPanel

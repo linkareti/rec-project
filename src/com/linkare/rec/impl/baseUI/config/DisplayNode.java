@@ -6,11 +6,12 @@
 
 package com.linkare.rec.impl.baseUI.config;
 
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import javax.swing.Icon;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public abstract class DisplayNode
 {

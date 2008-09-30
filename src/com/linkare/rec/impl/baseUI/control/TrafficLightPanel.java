@@ -8,13 +8,13 @@ package com.linkare.rec.impl.baseUI.control;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 import javax.swing.Icon;
 import javax.swing.Timer;
+
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
 
 public class TrafficLightPanel extends javax.swing.JPanel
 {

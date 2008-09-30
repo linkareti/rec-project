@@ -6,24 +6,34 @@
 
 package com.linkare.rec.impl.baseUI;
 
-import javax.swing.*;
-import javax.swing.tree.*;
-import javax.swing.text.html.*;
-import javax.swing.text.*;
-import java.io.*;
-import java.text.*;
-import java.util.*;
-import java.awt.event.*;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.baseUI.labsTree.*;
-import com.linkare.rec.impl.baseUI.config.*;
-import com.linkare.rec.impl.client.chat.*;
-import com.linkare.rec.impl.client.experiment.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.text.Collator;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.ListCellRenderer;
+import javax.swing.SwingUtilities;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.impl.baseUI.config.Apparatus;
+import com.linkare.rec.impl.baseUI.labsTree.LabsTreeModel;
+import com.linkare.rec.impl.client.chat.ChatMessageEvent;
+import com.linkare.rec.impl.client.chat.IChatMessageListener;
+import com.linkare.rec.impl.client.chat.IChatServer;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.EventQueue;
+import com.linkare.rec.impl.utils.EventQueueDispatcher;
 /**
  *
  * @author  Jos� Pedro Pereira

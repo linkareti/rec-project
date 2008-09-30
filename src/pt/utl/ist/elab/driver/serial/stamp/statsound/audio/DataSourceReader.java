@@ -29,16 +29,39 @@
  */
 package pt.utl.ist.elab.driver.serial.stamp.statsound.audio;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.Vector;
 import java.util.Enumeration;
-import javax.media.*;
-import javax.media.format.*;
-import javax.media.protocol.*;
+import java.util.Vector;
+
+import javax.media.Buffer;
+import javax.media.ConfigureCompleteEvent;
+import javax.media.ControllerEvent;
+import javax.media.ControllerListener;
+import javax.media.DataSink;
+import javax.media.EndOfMediaEvent;
+import javax.media.IncompatibleSourceException;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.PlugInManager;
+import javax.media.PrefetchCompleteEvent;
+import javax.media.Processor;
+import javax.media.RealizeCompleteEvent;
+import javax.media.ResourceUnavailableEvent;
+import javax.media.SizeChangeEvent;
+import javax.media.StartEvent;
+import javax.media.datasink.DataSinkErrorEvent;
+import javax.media.datasink.DataSinkEvent;
+import javax.media.datasink.DataSinkListener;
+import javax.media.datasink.EndOfStreamEvent;
+import javax.media.format.AudioFormat;
+import javax.media.protocol.BufferTransferHandler;
+import javax.media.protocol.ContentDescriptor;
 import javax.media.protocol.DataSource;
-import javax.media.datasink.*;
-import javax.media.control.MonitorControl;
+import javax.media.protocol.PullBufferDataSource;
+import javax.media.protocol.PullBufferStream;
+import javax.media.protocol.PushBufferDataSource;
+import javax.media.protocol.PushBufferStream;
+import javax.media.protocol.SourceStream;
 
 
 /**

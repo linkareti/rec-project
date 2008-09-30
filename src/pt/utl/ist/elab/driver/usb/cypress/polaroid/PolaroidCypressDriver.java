@@ -6,28 +6,33 @@
 
 package pt.utl.ist.elab.driver.usb.cypress.polaroid;
 
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.impl.utils.EventQueue;
-import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.*;
-import com.linkare.rec.data.synch.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.threading.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.driver.usb.cypress.*;
-import pt.utl.ist.elab.driver.usb.cypress.transproc.*;
-import pt.utl.ist.elab.driver.usb.cypress.transproc.processors.*;
-import pt.utl.ist.elab.driver.usb.cypress.polaroid.processors.*;
-import pt.utl.ist.elab.driver.usb.cypress.polaroid.translators.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import pt.utl.ist.elab.driver.usb.cypress.AbstractCypressDataSource;
+import pt.utl.ist.elab.driver.usb.cypress.AbstractCypressDriver;
+import pt.utl.ist.elab.driver.usb.cypress.polaroid.translators.CypressConfigTranslator;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressCommand;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressTranslator;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressTranslatorProcessorManager;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.processors.CypressConfiguredProcessor;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.processors.CypressNotConfiguredProcessor;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.processors.CypressStartProcessor;
+
+import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.synch.DateTime;
+import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.rec.impl.threading.AbstractConditionDecisor;
+import com.linkare.rec.impl.threading.IConditionDecisor;
+import com.linkare.rec.impl.threading.TimedOutException;
+import com.linkare.rec.impl.threading.WaitForConditionResult;
+import com.linkare.rec.impl.utils.Defaults;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PolaroidCypressDriver extends AbstractCypressDriver
 {

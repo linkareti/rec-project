@@ -8,18 +8,25 @@ package com.linkare.rec.impl.baseUI.labsTree;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultMutableTreeNode;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import com.linkare.rec.impl.baseUI.config.*;
 
-import com.linkare.rec.impl.baseUI.config.*;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTree;
+import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+
+import com.linkare.rec.impl.baseUI.config.Display;
+import com.linkare.rec.impl.baseUI.config.DisplayNode;
+import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DisplayNodeTreeCellRenderer extends DefaultTreeCellRenderer
 {

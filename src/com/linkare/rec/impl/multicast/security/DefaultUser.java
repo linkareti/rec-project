@@ -6,14 +6,16 @@
 
 package com.linkare.rec.impl.multicast.security;
 
-import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.acquisition.Property;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.omg.CORBA.Any;
+
+import com.linkare.rec.acquisition.Property;
+import com.linkare.rec.acquisition.UserInfo;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultUser implements IUser
 {

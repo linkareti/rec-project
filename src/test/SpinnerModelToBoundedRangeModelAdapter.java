@@ -11,7 +11,7 @@ import javax.swing.event.*;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class SpinnerModelToBoundedRangeModelAdapter extends SpinnerNumberModel
 {

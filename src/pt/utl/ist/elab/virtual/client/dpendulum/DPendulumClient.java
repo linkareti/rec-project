@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DPendulumClient
 {

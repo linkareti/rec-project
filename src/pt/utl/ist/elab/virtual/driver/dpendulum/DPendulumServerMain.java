@@ -13,7 +13,7 @@ import java.util.logging.*;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class DPendulumServerMain 
 {     

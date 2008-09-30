@@ -8,7 +8,7 @@ package com.linkare.rec.impl.client.experiment;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class ExpUsersListEvent extends java.util.EventObject
 {

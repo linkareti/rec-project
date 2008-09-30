@@ -9,7 +9,7 @@ package com.linkare.rec.impl.data;
 import com.linkare.rec.impl.utils.IntersectableEvent;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class SamplesSourceEvent extends java.util.EventObject implements IntersectableEvent
 {

@@ -8,16 +8,16 @@ package com.linkare.rec.impl.baseUI.control;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import java.util.logging.*;
-import javax.swing.ImageIcon;
-import javax.swing.Action;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.Defaults;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import java.beans.PropertyChangeEvent;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.swing.ImageIcon;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class ToolBarPanel extends javax.swing.JPanel
 {

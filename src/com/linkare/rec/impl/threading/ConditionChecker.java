@@ -6,7 +6,6 @@
 
 package com.linkare.rec.impl.threading;
 
-import java.util.*;
 /**
  *
  * @author  Jose Pedro Pereira

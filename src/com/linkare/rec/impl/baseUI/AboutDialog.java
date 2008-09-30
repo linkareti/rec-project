@@ -7,12 +7,12 @@
 package com.linkare.rec.impl.baseUI;
 
 import java.net.URL;
+
 import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
-import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class AboutDialog extends javax.swing.JDialog
 {

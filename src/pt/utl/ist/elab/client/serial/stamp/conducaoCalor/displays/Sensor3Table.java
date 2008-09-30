@@ -6,8 +6,7 @@
 
 package pt.utl.ist.elab.client.serial.stamp.conducaoCalor.displays;
 
-import com.linkare.rec.impl.baseUI.table.*;
-import com.linkare.rec.impl.client.experiment.*;
+import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
 /**
  *

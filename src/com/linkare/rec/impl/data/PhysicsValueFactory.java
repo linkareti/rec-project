@@ -5,12 +5,12 @@
  */
 
 package com.linkare.rec.impl.data;
-import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.Multiplier;
+import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.metadata.Scale;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PhysicsValueFactory
 {

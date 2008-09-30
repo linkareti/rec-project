@@ -11,15 +11,19 @@
 
 package pt.utl.ist.elab.driver.usb.cypress;
 
-import javax.usb.*;
-import javax.usb.event.*;
-import javax.usb.util.*;
-import com.ibm.jusb.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import java.io.*;
-import java.util.*;
-import pt.utl.ist.elab.driver.usb.cypress.transproc.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.usb.UsbDevice;
+import javax.usb.UsbException;
+import javax.usb.UsbHostManager;
+import javax.usb.UsbHub;
+import javax.usb.UsbServices;
+
+import com.linkare.rec.impl.logging.LoggerUtil;
 /**
  *
  * @author  André

@@ -6,12 +6,15 @@
 
 package pt.utl.ist.elab.client.serial.stamp.penduloGravitico;
 
-import javax.swing.*;
-import com.linkare.rec.impl.client.experiment.*;
+import javax.swing.Icon;
+import javax.swing.JPanel;
+
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PGSensorDisplay extends JPanel implements ExpDataDisplay
 {

@@ -6,18 +6,32 @@
 
 package com.linkare.rec.impl.wrappers;
 
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.logging.LoggerUtil;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
 import org.omg.CORBA.SystemException;
+
+import com.linkare.rec.acquisition.DataClient;
+import com.linkare.rec.acquisition.DataProducer;
+import com.linkare.rec.acquisition.HardwareState;
+import com.linkare.rec.acquisition.IncorrectStateException;
+import com.linkare.rec.acquisition.MaximumClientsReached;
+import com.linkare.rec.acquisition.MultiCastHardware;
+import com.linkare.rec.acquisition.MultiCastHardwareOperations;
+import com.linkare.rec.acquisition.NotAuthorized;
+import com.linkare.rec.acquisition.NotAvailableException;
+import com.linkare.rec.acquisition.NotOwnerException;
+import com.linkare.rec.acquisition.NotRegistered;
+import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class MultiCastHardwareWrapper implements MultiCastHardwareOperations
 {

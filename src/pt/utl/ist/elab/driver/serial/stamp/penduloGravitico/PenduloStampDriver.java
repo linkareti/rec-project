@@ -6,25 +6,30 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.penduloGravitico;
 
-import gnu.io.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.impl.utils.EventQueue;
-import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.data.synch.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.threading.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.*;
-import pt.utl.ist.elab.driver.serial.stamp.penduloGravitico.processors.*;
-import pt.utl.ist.elab.driver.serial.stamp.penduloGravitico.translators.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
+import pt.utl.ist.elab.driver.serial.stamp.penduloGravitico.translators.StampConfigTranslator;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslator;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslatorProcessorManager;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampConfiguredProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampNotConfiguredProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProcessor;
+
+import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.synch.DateTime;
+import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.rec.impl.threading.AbstractConditionDecisor;
+import com.linkare.rec.impl.threading.IConditionDecisor;
+import com.linkare.rec.impl.threading.TimedOutException;
+import com.linkare.rec.impl.threading.WaitForConditionResult;
+import com.linkare.rec.impl.utils.Defaults;
 /**
  *
  * @author  André

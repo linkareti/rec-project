@@ -1,10 +1,11 @@
 package pt.utl.ist.elab.driver.serial.stamp.statsound.audio.media.protocol.sinewavegenerator;
 
-import javax.media.*;
-import javax.media.format.*;
-import javax.media.protocol.*;
-import javax.media.protocol.DataSource;
-import java.io.IOException;
+import javax.media.Control;
+import javax.media.Format;
+import javax.media.format.AudioFormat;
+import javax.media.protocol.BufferTransferHandler;
+import javax.media.protocol.ContentDescriptor;
+import javax.media.protocol.PushBufferStream;
 
 public class InterLacedSineWaveStream2 implements PushBufferStream{
     

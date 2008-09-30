@@ -7,23 +7,19 @@
 package pt.utl.ist.elab.driver.doppler.sound;
 
 import java.awt.Dimension;
-import org.jfree.chart.labels.StandardXYToolTipGenerator;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
-import org.jfree.data.xy.AbstractXYDataset;
-import org.jfree.data.xy.XYDataItem;
-import org.jfree.data.xy.XYSeries;
+
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.axis.ValueAxis;
-import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
+import org.jfree.data.xy.AbstractXYDataset;
 
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class SoundTester extends javax.swing.JFrame
 {

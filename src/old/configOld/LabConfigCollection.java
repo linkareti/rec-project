@@ -9,7 +9,7 @@ package old.configOld;
 import javax.swing.*;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class LabConfigCollection extends java.util.Vector
 {

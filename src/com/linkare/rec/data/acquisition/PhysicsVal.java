@@ -1,7 +1,8 @@
 package com.linkare.rec.data.acquisition;
 
-import com.linkare.rec.impl.data.PhysicsValueUtil;
 import org.omg.CORBA.portable.IDLEntity;
+
+import com.linkare.rec.impl.data.PhysicsValueUtil;
 
 
 public final class PhysicsVal implements IDLEntity

@@ -8,7 +8,7 @@ package pt.utl.ist.elab.driver.webrobot.utils;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class TestAscii {
     

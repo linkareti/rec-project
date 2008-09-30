@@ -1,9 +1,9 @@
 package audio.media.protocol.sinewavegenerator;
 
-import javax.media.Time;
-import javax.media.MediaLocator;
-import javax.media.protocol.*;
 import java.io.IOException;
+
+import javax.media.Time;
+import javax.media.protocol.PushBufferDataSource;
 
 public class DataSource extends PushBufferDataSource
 {
@@ -74,6 +74,7 @@ public class DataSource extends PushBufferDataSource
 		return controls;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Object getControl(String controlType)
 	{
 		try

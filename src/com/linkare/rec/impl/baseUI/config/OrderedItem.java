@@ -8,7 +8,7 @@ package com.linkare.rec.impl.baseUI.config;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface OrderedItem
 {    

@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.serial.stamp.pv;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PVXYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
 {

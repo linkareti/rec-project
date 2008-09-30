@@ -16,7 +16,7 @@ import com.linkare.rec.impl.utils.Defaults;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public final class ReCUIConfig
 {

@@ -8,7 +8,7 @@ package com.linkare.rec.impl.utils;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface EventQueueDispatcher
 {

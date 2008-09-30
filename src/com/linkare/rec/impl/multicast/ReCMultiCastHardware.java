@@ -6,6 +6,10 @@
 
 package com.linkare.rec.impl.multicast;
 
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.DataClientHelper;
 import com.linkare.rec.acquisition.DataClientOperations;
@@ -26,9 +30,8 @@ import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.impl.events.HardwareChangeListener;
+import com.linkare.rec.impl.data.FrequencyUtil;
 import com.linkare.rec.impl.events.HardwareLockEvent;
-import com.linkare.rec.impl.events.HardwareRemoveEvt;
 import com.linkare.rec.impl.events.LockCountDown;
 import com.linkare.rec.impl.exceptions.IncorrectStateExceptionConstants;
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
@@ -39,26 +42,21 @@ import com.linkare.rec.impl.multicast.security.DefaultOperation;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
 import com.linkare.rec.impl.multicast.security.DefaultUser;
 import com.linkare.rec.impl.multicast.security.IOperation;
-import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.ResourceType;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.ConditionChecker;
-import com.linkare.rec.impl.data.FrequencyUtil;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
 import com.linkare.rec.impl.wrappers.HardwareWrapper;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 
 
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ReCMultiCastHardware implements MultiCastHardwareOperations
 {

@@ -8,7 +8,7 @@ package pt.utl.ist.elab.driver.Aleatorio.Utils;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class ImageStorePanel extends javax.swing.JPanel {
     

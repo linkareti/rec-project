@@ -6,12 +6,13 @@
 
 package com.linkare.rec.data.synch;
 
-import java.beans.*;
-import java.awt.*;
-import java.awt.geom.Rectangle2D;
+import java.awt.Component;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyEditorSupport;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DateEditor extends PropertyEditorSupport
 {

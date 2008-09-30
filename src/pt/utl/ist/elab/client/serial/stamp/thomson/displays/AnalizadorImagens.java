@@ -7,9 +7,10 @@
 //package javaelab;
 package pt.utl.ist.elab.client.serial.stamp.thomson.displays;
 
-import java.lang.Math.*;
-import java.awt.*;
-import com.linkare.rec.impl.utils.*;
+import java.awt.Color;
+import java.awt.Image;
+
+import com.linkare.rec.impl.utils.Defaults;
 
 /**
  *

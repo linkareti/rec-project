@@ -9,7 +9,7 @@ package pt.utl.ist.elab.client.Aleatorio;
 import com.linkare.rec.impl.baseUI.ReCBaseUI;
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class AleatorioClient
 {

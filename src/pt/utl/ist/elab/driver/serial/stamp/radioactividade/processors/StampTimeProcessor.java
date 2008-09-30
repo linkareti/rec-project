@@ -6,9 +6,8 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.radioactividade.processors;
 
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
-import pt.utl.ist.elab.driver.serial.stamp.radioactividade.*;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 /**
  *

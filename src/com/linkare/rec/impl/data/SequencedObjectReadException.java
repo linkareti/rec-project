@@ -8,7 +8,7 @@ package com.linkare.rec.impl.data;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class SequencedObjectReadException extends java.io.IOException
 {

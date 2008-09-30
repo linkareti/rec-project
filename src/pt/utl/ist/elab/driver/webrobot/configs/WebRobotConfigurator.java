@@ -8,10 +8,10 @@ package pt.utl.ist.elab.driver.webrobot.configs;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 
-import pt.utl.ist.elab.driver.webrobot.debug.*;
+import pt.utl.ist.elab.driver.webrobot.debug.Debugger;
 
 public class WebRobotConfigurator extends javax.swing.JFrame {
 

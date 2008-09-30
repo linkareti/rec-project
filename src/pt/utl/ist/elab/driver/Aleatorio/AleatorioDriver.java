@@ -6,38 +6,39 @@
 
 package pt.utl.ist.elab.driver.Aleatorio;
 
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.data.acquisition.PhysicsValue;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED;
+import java.util.logging.Logger;
+
+import pt.utl.ist.elab.driver.Aleatorio.Hardware.HardwareInit;
+import pt.utl.ist.elab.driver.Aleatorio.Hardware.SoundThread;
+import pt.utl.ist.elab.driver.Aleatorio.Hardware.WebCamThread;
+import pt.utl.ist.elab.driver.Aleatorio.Utils.VideoReader;
+
+import com.linkare.rec.acquisition.IncorrectStateException;
+import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.acquisition.IncorrectStateException;
-import com.linkare.rec.acquisition.WrongConfigurationException;
-import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.data.synch.DateTime;
+import com.linkare.rec.impl.driver.BaseDriver;
+import com.linkare.rec.impl.driver.IDataSource;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
-import com.linkare.rec.data.synch.*;
-import java.util.logging.*;
-import java.util.*;
-import pt.utl.ist.elab.driver.Aleatorio.Hardware.*;
-import pt.utl.ist.elab.driver.Aleatorio.Utils.*;
+import com.linkare.rec.impl.utils.Defaults;
 
 
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class AleatorioDriver extends BaseDriver{
     
     //private transient com.linkare.rec.impl.driver.IDriverStateListener = null;
-    private static final String APPLICATION_IDENTIFIER = "E-Lab (Aleatorio Driver)";
-    private static final String DRIVER_UNIQUE_ID = "ELAB_ALEATORIO_V02";
-    private static final String HW_VERSION = "0.1";
+    public static final String APPLICATION_IDENTIFIER = "E-Lab (Aleatorio Driver)";
+    public static final String DRIVER_UNIQUE_ID = "ELAB_ALEATORIO_V02";
+    public static final String HW_VERSION = "0.1";
     
-    private static AleatorioDriver SingletonDriver = null;
+    private static AleatorioDriver instance = null;
     
     private HardwareAcquisitionConfig config = null;
     private HardwareInfo info = null;

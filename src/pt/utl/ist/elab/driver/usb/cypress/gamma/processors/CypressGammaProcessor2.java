@@ -6,8 +6,8 @@
 
 package pt.utl.ist.elab.driver.usb.cypress.gamma.processors;
 
-import pt.utl.ist.elab.driver.usb.cypress.transproc.*;
-import pt.utl.ist.elab.driver.usb.cypress.*;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.AbstractCypressProcessor;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressCommand;
 
 /**
  *

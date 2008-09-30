@@ -1,7 +1,8 @@
 package com.linkare.rec.repository;
 
-import com.linkare.rec.data.synch.DateTime;
 import org.omg.CORBA.portable.IDLEntity;
+
+import com.linkare.rec.data.synch.DateTime;
 
 public final class DateTimeSearch implements IDLEntity
 {

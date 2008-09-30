@@ -6,12 +6,15 @@
 
 package pt.utl.ist.elab.client.decay;
 
-import javax.swing.*;
-import com.linkare.rec.impl.client.experiment.*;
+import javax.swing.Icon;
+import javax.swing.JPanel;
+
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DecaySensorDisplay extends JPanel implements ExpDataDisplay
 {

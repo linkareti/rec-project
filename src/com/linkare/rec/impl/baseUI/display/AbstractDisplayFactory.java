@@ -8,7 +8,7 @@ package com.linkare.rec.impl.baseUI.display;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 

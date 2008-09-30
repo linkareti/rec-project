@@ -6,15 +6,17 @@ package pt.utl.ist.elab.driver.Aleatorio;
  * Created on 4 de Junho de 2003, 16:47
  */
 
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.impl.driver.BaseHardware;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.ORBBean;
 
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class AleatorioServerMain{
     
@@ -36,7 +38,7 @@ public class AleatorioServerMain{
         try
 	{
             ORBBean.getORBBean(args);
-            BaseHardware baseHardware=new BaseHardware(new AleatorioDriver());
+            new BaseHardware(new AleatorioDriver());
             
             try {Thread.currentThread().join();}
             catch(Exception ignored){}

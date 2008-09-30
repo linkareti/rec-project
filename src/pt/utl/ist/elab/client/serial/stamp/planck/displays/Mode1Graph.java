@@ -6,10 +6,10 @@
 
 package pt.utl.ist.elab.client.serial.stamp.planck.displays;
 
-import com.linkare.rec.impl.baseUI.graph.*;
+import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class Mode1Graph extends MultSeriesXYExperimentGraph
 {

@@ -5,11 +5,16 @@
  */
 
 package com.linkare.rec.impl.client.experiment;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
-import javax.swing.*;
-import java.awt.event.*;
-import org.jfree.data.xy.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JToggleButton;
+
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
+import com.linkare.rec.data.acquisition.PhysicsValueType;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 
 /**
  *

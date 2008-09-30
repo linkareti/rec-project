@@ -6,28 +6,21 @@
 
 package com.linkare.rec.impl.utils;
 
-import com.linkare.rec.data.acquisition.PhysicsValue;
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import com.linkare.rec.acquisition.DataProducerState;
-import com.linkare.rec.acquisition.DataProducerOperations;
+import com.linkare.rec.acquisition.MaxPacketNumUnknown;
 import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
 import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.impl.data.SamplesPacketMatrix;
-import com.linkare.rec.impl.data.SamplesPacketReadException;
-import com.linkare.rec.impl.data.SamplesPacketSourceEvent;
-import com.linkare.rec.impl.data.SamplesPacketSourceEventListener;
-import com.linkare.rec.impl.exceptions.NotAnAvailableSamplesPacketExceptionConstants;
-import javax.swing.event.EventListenerList;
-import com.linkare.rec.acquisition.MaxPacketNumUnknown;
+import com.linkare.rec.impl.data.SamplesPacketSource;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.data.synch.*;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
-import java.io.*;
-import java.util.Vector;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public abstract class DataCollector extends Thread implements Serializable
 {

@@ -9,7 +9,7 @@ package com.linkare.rec.impl.events;
 import com.linkare.rec.impl.utils.IntersectableEvent;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class HardwareStateChangeEvent implements IntersectableEvent
 {

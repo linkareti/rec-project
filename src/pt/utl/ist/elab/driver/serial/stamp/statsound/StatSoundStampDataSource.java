@@ -6,29 +6,21 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.statsound;
 
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.*;
-import com.linkare.rec.data.acquisition.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.*;
-import pt.utl.ist.elab.driver.serial.stamp.statsound.processors.*;
-import pt.utl.ist.elab.driver.serial.stamp.statsound.translators.*;
-import pt.utl.ist.elab.driver.serial.stamp.statsound.audio.*;
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
+import pt.utl.ist.elab.driver.serial.stamp.statsound.audio.DataSoundListener;
+import pt.utl.ist.elab.driver.serial.stamp.statsound.audio.NewDataBufferEvent;
+import pt.utl.ist.elab.driver.serial.stamp.statsound.audio.SoundRecorder;
+import pt.utl.ist.elab.driver.serial.stamp.statsound.processors.StampStatSoundProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.statsound.processors.StampStatSoundTempProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.data.PhysicsValFactory;
+import com.linkare.rec.impl.data.PhysicsValueFactory;
 /**
  *
- * @author  jp & Andr�
+ * @author José Pedro Pereira - Linkare TI & Andr�
  */
 public class StatSoundStampDataSource extends AbstractStampDataSource implements DataSoundListener
 {

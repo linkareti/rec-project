@@ -6,8 +6,13 @@
 
 package com.linkare.rec.impl.utils;
 
-import java.io.*;
-import java.net.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
 import com.linkare.rec.data.acquisition.ByteArrayValue;
 
 /*
@@ -16,7 +21,7 @@ import javax.media.*;
  */
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ByteArrayValBuffer
 {

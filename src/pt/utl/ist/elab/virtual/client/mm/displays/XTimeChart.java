@@ -8,7 +8,7 @@ package pt.utl.ist.elab.virtual.client.mm.displays;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class XTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
 {

@@ -7,11 +7,9 @@
 package com.linkare.rec.impl.baseUI;
 
 import com.linkare.rec.impl.client.experiment.ExpHistory;
-import java.awt.GridLayout;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ExpHistoryPanelNew extends javax.swing.JPanel
 {

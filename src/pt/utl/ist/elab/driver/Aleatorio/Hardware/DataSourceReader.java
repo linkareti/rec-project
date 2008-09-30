@@ -30,17 +30,43 @@ package pt.utl.ist.elab.driver.Aleatorio.Hardware;
  * redistribute the Software for such purposes.
  */
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.Vector;
 import java.util.Enumeration;
-import javax.media.*;
-import javax.media.format.*;
-import javax.media.protocol.*;
-import javax.media.util.BufferToImage;
+import java.util.Vector;
+
+import javax.media.Buffer;
+import javax.media.ConfigureCompleteEvent;
+import javax.media.Controller;
+import javax.media.ControllerEvent;
+import javax.media.ControllerListener;
+import javax.media.DataSink;
+import javax.media.EndOfMediaEvent;
+import javax.media.IncompatibleSourceException;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.PlugInManager;
+import javax.media.PrefetchCompleteEvent;
+import javax.media.Processor;
+import javax.media.RealizeCompleteEvent;
+import javax.media.ResourceUnavailableEvent;
+import javax.media.SizeChangeEvent;
+import javax.media.StartEvent;
+import javax.media.StopEvent;
+import javax.media.datasink.DataSinkErrorEvent;
+import javax.media.datasink.DataSinkEvent;
+import javax.media.datasink.DataSinkListener;
+import javax.media.datasink.EndOfStreamEvent;
+import javax.media.format.VideoFormat;
+import javax.media.protocol.BufferTransferHandler;
+import javax.media.protocol.ContentDescriptor;
 import javax.media.protocol.DataSource;
-import javax.media.datasink.*;
-import javax.media.control.MonitorControl;
+import javax.media.protocol.PullBufferDataSource;
+import javax.media.protocol.PullBufferStream;
+import javax.media.protocol.PushBufferDataSource;
+import javax.media.protocol.PushBufferStream;
+import javax.media.protocol.SourceStream;
+import javax.media.util.BufferToImage;
+
 import pt.utl.ist.elab.driver.Aleatorio.AleatorioDataSource;
 
 
@@ -90,7 +116,7 @@ implements ControllerListener, DataSinkListener {
         
         // Put the Processor into configured state.
         p.configure();
-        if (!waitForState(p.Configured)) {
+        if (!waitForState(Processor.Configured)) {
             System.err.println("Failed to configure the processor.");
             return false;
         }
@@ -99,7 +125,7 @@ implements ControllerListener, DataSinkListener {
         p.setContentDescriptor(new ContentDescriptor(ContentDescriptor.RAW));
         
         p.realize();
-        if (!waitForState(p.Realized)) {
+        if (!waitForState(Controller.Realized)) {
             System.err.println("Failed to realize the processor.");
             return false;
         }
@@ -141,11 +167,12 @@ implements ControllerListener, DataSinkListener {
      * thus allowing the RawSyncBufferMux to be used.
      * This is a handy trick.  You wouldn't know this, would you? :)
      */
-    void enableSyncMux() {
-        Vector muxes = PlugInManager.getPlugInList(null, null,
+    @SuppressWarnings("unchecked")
+	void enableSyncMux() {
+        Vector<String> muxes = PlugInManager.getPlugInList(null, null,
         PlugInManager.MULTIPLEXER);
         for (int i = 0; i < muxes.size(); i++) {
-            String cname = (String)muxes.elementAt(i);
+            String cname = muxes.elementAt(i);
             if (cname.equals("com.sun.media.multiplexer.RawBufferMux")) {
                 muxes.removeElementAt(i);
                 break;
@@ -167,7 +194,7 @@ implements ControllerListener, DataSinkListener {
         
         // Prefetch the processor.
         p.prefetch();
-        if (!waitForState(p.Prefetched)) {
+        if (!waitForState(Controller.Prefetched)) {
             System.err.println("Failed to prefetch the processor.");
             throw new Exception();
             //return false;
@@ -263,7 +290,7 @@ implements ControllerListener, DataSinkListener {
         PushBufferStream pushStrms[] = null;
         
         // Data sink listeners.
-        private Vector listeners = new Vector(1);
+        private Vector<DataSinkListener> listeners = new Vector<DataSinkListener>(1);
         
         // Stored all the streams that are not yet finished (i.e. EOM
         // has not been received.
@@ -406,7 +433,7 @@ implements ControllerListener, DataSinkListener {
         protected void sendEvent(DataSinkEvent event) {
             if (!listeners.isEmpty()) {
                 synchronized (listeners) {
-                    Enumeration list = listeners.elements();
+                    Enumeration<DataSinkListener> list = listeners.elements();
                     while (list.hasMoreElements()) {
                         DataSinkListener listener =
                         (DataSinkListener)list.nextElement();

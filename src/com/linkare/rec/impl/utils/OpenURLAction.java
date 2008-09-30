@@ -6,10 +6,13 @@
 
 package com.linkare.rec.impl.utils;
 
-import javax.swing.*;
-import javax.jnlp.*;
 import java.awt.event.ActionEvent;
-import java.net.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.jnlp.BasicService;
+import javax.jnlp.ServiceManager;
+import javax.jnlp.UnavailableServiceException;
 /**
  *
  * @author  bruno

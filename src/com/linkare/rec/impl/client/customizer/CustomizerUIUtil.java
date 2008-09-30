@@ -6,16 +6,22 @@
 
 package com.linkare.rec.impl.client.customizer;
 
-import java.net.*;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
-import javax.swing.*;
-import java.awt.*;
-import com.linkare.rec.data.metadata.HardwareInfo;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.logging.LoggerUtil;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class CustomizerUIUtil
 {

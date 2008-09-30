@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.Aleatorio.displays;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class SessionGraphDisplay extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay, com.linkare.rec.impl.client.experiment.ExpDataModelListener{
     

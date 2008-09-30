@@ -6,9 +6,9 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.polaroid.translators;
 
-import pt.utl.ist.elab.driver.serial.stamp.polaroid.translators.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampTranslator;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 /**
  *

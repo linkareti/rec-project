@@ -6,14 +6,15 @@
 
 package com.linkare.rec.impl.driver;
 
-import java.util.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.impl.data.*;
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.data.DiscardablePhysicsValueMatrix;
+import com.linkare.rec.impl.data.SamplesReadException;
+import com.linkare.rec.impl.data.SamplesSourceEventListener;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public abstract class BaseDataSource implements IDataSource
 {
@@ -79,7 +80,7 @@ public abstract class BaseDataSource implements IDataSource
     
     public void addDataRow(PhysicsValue[] dataSample)
     {	
-	samples.addDataRow(dataSample);
+	samples.addDataRows(dataSample);
     }    
 
     private HardwareAcquisitionConfig config=null;

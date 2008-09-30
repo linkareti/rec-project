@@ -9,7 +9,7 @@ package com.linkare.rec.impl.events;
 import com.linkare.rec.acquisition.Hardware;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class HardwareAddEvt
 {

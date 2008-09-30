@@ -6,10 +6,11 @@
 
 package com.linkare.rec.impl.protocols.mmst;
 
-import java.net.*;
+import java.net.URL;
+import java.net.URLConnection;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class Handler extends java.net.URLStreamHandler
 {

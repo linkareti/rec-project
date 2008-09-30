@@ -9,7 +9,7 @@ package com.linkare.rec.impl.driver;
 import com.linkare.rec.impl.data.SamplesSourceEventListener;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface IDataSourceListener extends SamplesSourceEventListener
 {

@@ -8,7 +8,7 @@ package pt.utl.ist.elab.driver.serial.stamp.statsound.audio;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class NewDataBufferEvent {
     

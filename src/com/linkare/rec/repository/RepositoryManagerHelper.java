@@ -1,6 +1,9 @@
 package com.linkare.rec.repository;
 
-import org.omg.CORBA.*;
+import org.omg.CORBA.Any;
+import org.omg.CORBA.BAD_PARAM;
+import org.omg.CORBA.ORB;
+import org.omg.CORBA.TypeCode;
 import org.omg.CORBA.portable.Delegate;
 import org.omg.CORBA.portable.InputStream;
 import org.omg.CORBA.portable.ObjectImpl;

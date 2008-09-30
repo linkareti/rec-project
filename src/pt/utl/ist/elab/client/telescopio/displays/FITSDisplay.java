@@ -8,12 +8,12 @@ package pt.utl.ist.elab.client.telescopio.displays;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.i18n.*;
-import eap.fitsbrowser.*;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+
+import eap.fitsbrowser.FITSFileDisplay;
 
 
 public class FITSDisplay extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay, com.linkare.rec.impl.client.experiment.ExpDataModelListener

@@ -8,7 +8,7 @@ package pt.utl.ist.elab.driver.webrobot.interfaces;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public interface AuxVars {
      

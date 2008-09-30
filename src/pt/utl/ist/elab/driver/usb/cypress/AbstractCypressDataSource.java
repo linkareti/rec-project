@@ -6,18 +6,12 @@
 
 package pt.utl.ist.elab.driver.usb.cypress;
 
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.driver.usb.cypress.transproc.*;
-import pt.utl.ist.elab.driver.usb.cypress.transproc.processors.*;
+import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressCommand;
+
+import com.linkare.rec.impl.driver.BaseDataSource;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public abstract class AbstractCypressDataSource extends BaseDataSource
 {

@@ -6,7 +6,7 @@
 
 package pt.utl.ist.elab.client.webrobot;
 
-import com.linkare.rec.impl.baseUI.*;
+import com.linkare.rec.impl.baseUI.ReCBaseUI;
 
 /**
  *

@@ -1,8 +1,9 @@
 package com.linkare.rec.repository;
 
+import org.omg.CORBA.portable.IDLEntity;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.config.ParameterConfig;
-import org.omg.CORBA.portable.IDLEntity;
 
 public final class HardwareAcquisitionConfigSearch implements IDLEntity
 {

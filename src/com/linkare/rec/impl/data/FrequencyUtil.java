@@ -6,16 +6,16 @@
 
 package com.linkare.rec.impl.data;
 
-import com.linkare.rec.data.synch.Frequency;
-import com.linkare.rec.data.synch.FrequencyDefType;
+import com.linkare.rec.data.metadata.FrequencyScale;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.metadata.SamplesNumScale;
-import com.linkare.rec.data.metadata.FrequencyScale;
+import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.data.synch.FrequencyDefType;
 import com.linkare.rec.impl.utils.MathUtil;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class FrequencyUtil
 {

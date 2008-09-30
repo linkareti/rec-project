@@ -8,14 +8,15 @@ package pt.utl.ist.elab.client.serial.stamp.thomson.displays;
 
 
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.net.URL;
-import java.awt.image.*;
-import javax.swing.border.*;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Insets;
 import java.util.Vector;
-import com.linkare.rec.impl.i18n.*;
+
+import javax.swing.border.Border;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
  * @author  ivo

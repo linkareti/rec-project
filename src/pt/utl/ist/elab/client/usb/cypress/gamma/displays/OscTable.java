@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.usb.cypress.gamma.displays;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class OscTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable
 {

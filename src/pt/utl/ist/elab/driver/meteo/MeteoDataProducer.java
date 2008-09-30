@@ -6,22 +6,17 @@
 
 package pt.utl.ist.elab.driver.meteo;
 
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.*;
-import java.util.logging.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import java.sql.*;
+import pt.utl.ist.cfn.math.MathUtils;
+import pt.utl.ist.cfn.serial.SerialComm;
 
-import pt.utl.ist.cfn.serial.*;
-import pt.utl.ist.cfn.sql.*;
-import pt.utl.ist.cfn.math.*;
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.impl.data.PhysicsValFactory;
+import com.linkare.rec.impl.driver.BaseDataSource;
 
 /**
  *

@@ -11,11 +11,15 @@ package pt.utl.ist.elab.driver.meteo;
  * @author  Andr�
  */
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import pt.utl.ist.cfn.serial.*;
-import pt.utl.ist.cfn.sql.*;
-import pt.utl.ist.cfn.math.*;
+import pt.utl.ist.cfn.math.MathUtils;
+import pt.utl.ist.cfn.serial.NewSerialDataEvent;
+import pt.utl.ist.cfn.serial.SerialComm;
+import pt.utl.ist.cfn.serial.SerialDataListener;
 
 public class MeteoDataSource implements SerialDataListener 
 {

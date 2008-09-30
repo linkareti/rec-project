@@ -6,15 +6,16 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.polaroid;
 
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.acquisition.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.polaroid.processors.*;
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
+import pt.utl.ist.elab.driver.serial.stamp.polaroid.processors.StampPolaroidProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.data.PhysicsValFactory;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class PolaroidStampDataSource extends AbstractStampDataSource
 {

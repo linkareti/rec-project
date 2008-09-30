@@ -6,14 +6,21 @@
 
 package com.linkare.rec.impl.baseUI;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.beans.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
+import java.util.Hashtable;
+
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
+import javax.swing.JSplitPane;
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class JDockPanel extends javax.swing.JPanel
 {

@@ -8,16 +8,26 @@ package com.linkare.rec.impl.baseUI.control;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import javax.swing.ImageIcon;
 import java.beans.PropertyChangeEvent;
-import com.linkare.rec.impl.baseUI.config.*;
-import com.linkare.rec.impl.baseUI.labsTree.*;
-import javax.swing.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
+import com.linkare.rec.impl.baseUI.config.Apparatus;
+import com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig;
+import com.linkare.rec.impl.baseUI.config.Display;
+import com.linkare.rec.impl.baseUI.config.Lab;
+import com.linkare.rec.impl.baseUI.config.WebResource;
+import com.linkare.rec.impl.baseUI.labsTree.DefaultConfigSelectionEvent;
+import com.linkare.rec.impl.baseUI.labsTree.DisplaySelectionEvent;
+import com.linkare.rec.impl.baseUI.labsTree.WebResourceSelectionEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class MenuBar extends javax.swing.JMenuBar
 {

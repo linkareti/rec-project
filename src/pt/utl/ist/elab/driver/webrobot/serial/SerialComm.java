@@ -8,12 +8,10 @@ package pt.utl.ist.elab.driver.webrobot.serial;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 
-import pt.utl.ist.elab.driver.webrobot.utils.*;
-import pt.utl.ist.elab.driver.webrobot.debug.*;
-import pt.utl.ist.elab.driver.webrobot.*;
+import pt.utl.ist.elab.driver.webrobot.RobotStateMachine;
 
 public class SerialComm implements gnu.io.SerialPortEventListener
 {

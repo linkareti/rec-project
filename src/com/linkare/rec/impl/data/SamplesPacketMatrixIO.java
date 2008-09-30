@@ -6,12 +6,15 @@
 
 package com.linkare.rec.impl.data;
 
-import com.linkare.rec.data.acquisition.SamplesPacket;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import com.linkare.rec.data.acquisition.SamplesPacket;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class SamplesPacketMatrixIO implements Serializable
 {

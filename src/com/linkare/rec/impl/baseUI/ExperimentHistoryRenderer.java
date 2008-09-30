@@ -6,14 +6,15 @@
 
 package com.linkare.rec.impl.baseUI;
 
-import javax.swing.JTable;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import javax.swing.JComponent;
+
 import com.linkare.rec.impl.client.experiment.ExpHistory;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ExperimentHistoryRenderer 
 {

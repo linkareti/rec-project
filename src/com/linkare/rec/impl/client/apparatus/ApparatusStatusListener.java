@@ -8,7 +8,7 @@ package com.linkare.rec.impl.client.apparatus;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public interface ApparatusStatusListener 
 {

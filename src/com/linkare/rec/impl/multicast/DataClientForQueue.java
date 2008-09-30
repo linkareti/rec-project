@@ -6,31 +6,30 @@
 
 package com.linkare.rec.impl.multicast;
 
+import java.util.logging.Level;
+
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.NotAuthorized;
-import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.acquisition.PROPKEY_USERINFO_CERTIFICATE;
 import com.linkare.rec.acquisition.PROPKEY_USERINFO_PASS;
+import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.impl.client.chat.ChatMessageEvent;
 import com.linkare.rec.impl.events.HardwareChangeEvent;
 import com.linkare.rec.impl.events.HardwareLockEvent;
 import com.linkare.rec.impl.events.HardwareStateChangeEvent;
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
-import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.multicast.security.DefaultUser;
+import com.linkare.rec.impl.multicast.security.IResource;
+import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.wrappers.DataClientWrapper;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import com.linkare.rec.impl.multicast.security.IResource;
-import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
-import com.linkare.rec.impl.multicast.security.DefaultUser;
 
 
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 
 public class DataClientForQueue

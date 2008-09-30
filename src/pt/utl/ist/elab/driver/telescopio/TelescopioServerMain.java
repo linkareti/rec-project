@@ -6,10 +6,12 @@
 
 package pt.utl.ist.elab.driver.telescopio;
 
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.impl.driver.BaseHardware;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.ORBBean;
 
 /**
  *

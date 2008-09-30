@@ -7,11 +7,23 @@
 
 package com.linkare.rec.impl.baseUI.config;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.ValidateException;
-import java.beans.*;
-import java.io.*;
-import java.util.*;
-import org.w3c.dom.*;
 
 public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.config.CommonBean, OrderedItem
 {

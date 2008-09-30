@@ -7,24 +7,27 @@
 package pt.utl.ist.elab.driver.serial.stamp.thomson;
 
 
-import java.lang.Math.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.io.IOException;
+import java.util.Vector;
 
-//video
-
-import javax.swing.*;
-import javax.swing.border.*;
-import java.io.*;
-import javax.media.*;
-import javax.media.datasink.*;
-import javax.media.format.*;
-import javax.media.protocol.*;
-import javax.media.util.*;
-import javax.media.control.*;
-import java.util.*;
-import java.awt.*;
-import java.awt.image.*;
-import java.awt.event.*;
-import com.sun.image.codec.jpeg.*;
+import javax.media.Buffer;
+import javax.media.CannotRealizeException;
+import javax.media.CaptureDeviceInfo;
+import javax.media.CaptureDeviceManager;
+import javax.media.Format;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.NoPlayerException;
+import javax.media.Player;
+import javax.media.control.FormatControl;
+import javax.media.control.FrameGrabbingControl;
+import javax.media.format.VideoFormat;
+import javax.media.protocol.CaptureDevice;
+import javax.media.protocol.DataSource;
+import javax.media.util.BufferToImage;
 
 
 // import com.sun.media.vfw.VFWCapture;         // JMF 2.1.1c version

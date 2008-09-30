@@ -1,6 +1,11 @@
 package com.linkare.rec.data;
 
-import java.beans.*;
+import java.beans.BeanDescriptor;
+import java.beans.EventSetDescriptor;
+import java.beans.IntrospectionException;
+import java.beans.MethodDescriptor;
+import java.beans.PropertyDescriptor;
+import java.beans.SimpleBeanInfo;
 
 public class MultiplierBeanInfo extends SimpleBeanInfo
 {

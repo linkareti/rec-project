@@ -6,19 +6,30 @@
 
 package com.linkare.editor;
 
-import java.beans.*;
-import javax.swing.*;
-import javax.swing.table.*;
-import java.lang.reflect.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyEditor;
+import java.lang.reflect.Array;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultIndexedPropertyCustomEditor extends JPanel
 {
-    public DefaultIndexedPropertyCustomEditor(PropertyEditor componentPropertyEditor)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3169823411394104976L;
+
+	public DefaultIndexedPropertyCustomEditor(PropertyEditor componentPropertyEditor)
     {
 	super();
 	initComponents();
@@ -40,14 +51,14 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel
 	
     }
     
-    public DefaultIndexedPropertyCustomEditor(PropertyEditor componentPropertyEditor,Class baseArrayClassDefined)
+    public DefaultIndexedPropertyCustomEditor(PropertyEditor componentPropertyEditor,Class<?> baseArrayClassDefined)
     {
 	this(componentPropertyEditor);
 	initComponents();
 	this.baseArrayClassDefined=baseArrayClassDefined;
     }
     
-    public DefaultIndexedPropertyCustomEditor(PropertyEditor componentPropertyEditor,Class baseArrayClassDefined,Object value)
+    public DefaultIndexedPropertyCustomEditor(PropertyEditor componentPropertyEditor,Class<?> baseArrayClassDefined,Object value)
     {
 	this(componentPropertyEditor);
 	initComponents();
@@ -240,7 +251,7 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel
 
     private void btnRemoveRowsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRemoveRowsActionPerformed
     {//GEN-HEADEREND:event_btnRemoveRowsActionPerformed
-	int countTotalRows=tblIndexedProperty.getModel().getRowCount();
+	//int countTotalRows=tblIndexedProperty.getModel().getRowCount();
 	int[] rowsSelected=tblIndexedProperty.getSelectedRows();
 	for(int i=rowsSelected.length-1;i>=0;i--)
 	{
@@ -252,9 +263,9 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel
      * @return Value of property definedBaseClass.
      *
      */
-    public Class getBaseArrayClass()
+    public Class<?> getBaseArrayClass()
     {    
-	Class baseArrayClass=null;
+	Class<?> baseArrayClass=null;
 	if(baseArrayClassDefined!=null)
 	    baseArrayClass=baseArrayClassDefined;
 	else if(getValue()!=null)
@@ -270,7 +281,7 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel
      * @param definedBaseClass New value of property definedBaseClass.
      *
      */
-    public void setBaseArrayClass(Class baseArrayClassDefined)
+    public void setBaseArrayClass(Class<?> baseArrayClassDefined)
     {
 	this.baseArrayClassDefined = baseArrayClassDefined;
     }    
@@ -343,7 +354,7 @@ public class DefaultIndexedPropertyCustomEditor extends JPanel
     // End of variables declaration//GEN-END:variables
 
     /** Holds value of property definedBaseClass. */
-    private Class baseArrayClassDefined;    
+    private Class<?> baseArrayClassDefined;    
     
     /** Holds value of property componentPropertyEditor. */
     private PropertyEditor componentPropertyEditor;

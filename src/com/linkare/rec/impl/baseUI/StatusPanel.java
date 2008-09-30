@@ -8,12 +8,9 @@ package com.linkare.rec.impl.baseUI;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
-import com.linkare.rec.impl.utils.Defaults;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class StatusPanel extends javax.swing.JPanel
 {

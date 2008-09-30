@@ -8,7 +8,7 @@ package pt.utl.ist.elab.virtual.client.mm.displays;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 import org.opensourcephysics.display.DrawingPanel;

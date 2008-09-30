@@ -12,7 +12,7 @@ package com.linkare.rec.data;
 
 
 
-import com.linkare.editor.*;
+import com.linkare.editor.AbstractSelectionListPropertyEditor;
 
 
 
@@ -20,7 +20,7 @@ import com.linkare.editor.*;
  *
  *
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  *
  */
 

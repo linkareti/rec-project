@@ -11,13 +11,23 @@ package pt.utl.ist.elab.client.serial.stamp.conducaoCalor.displays;
  * @author  Andr�
  */
 
-import java.awt.*;
-import java.awt.geom.*;
-import javax.swing.*;
-import java.awt.image.*;
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+
+import javax.swing.Icon;
+import javax.swing.JMenuBar;
+import javax.swing.JToolBar;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 public class TSensor extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay, com.linkare.rec.impl.client.experiment.ExpDataModelListener
 {

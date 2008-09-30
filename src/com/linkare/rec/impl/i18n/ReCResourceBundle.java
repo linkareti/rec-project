@@ -6,17 +6,27 @@
 
 package com.linkare.rec.impl.i18n;
 
-import java.util.*;
-import com.linkare.rec.impl.protocols.ReCProtocols;
-import java.net.*;
-import java.io.*;
-import javax.swing.Icon;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import javax.swing.ImageIcon;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.LoggerUtil;
+
+import com.linkare.rec.impl.protocols.ReCProtocols;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public abstract class ReCResourceBundle extends ResourceBundle
 {

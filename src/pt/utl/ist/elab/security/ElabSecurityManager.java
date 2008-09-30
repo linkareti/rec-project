@@ -8,19 +8,25 @@ package pt.utl.ist.elab.security;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  *
  * It may support sql authentication, but first I will use the CFN mail authentication...
  */
 
-import com.linkare.rec.impl.multicast.security.ISecurityManager;
-import com.linkare.rec.impl.multicast.security.IResource;
-import com.linkare.rec.impl.multicast.security.IUser;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import com.linkare.rec.impl.logging.LoggerUtil;
-import java.util.logging.*;
-import java.sql.*;
-import java.util.*;
-import java.io.*;
+import com.linkare.rec.impl.multicast.security.IOperation;
+import com.linkare.rec.impl.multicast.security.IResource;
+import com.linkare.rec.impl.multicast.security.ISecurityManager;
+import com.linkare.rec.impl.multicast.security.IUser;
+import com.linkare.rec.impl.multicast.security.ResourceType;
 
 public class ElabSecurityManager implements ISecurityManager
 {
@@ -34,8 +40,6 @@ public class ElabSecurityManager implements ISecurityManager
         }
     }
     
-    private Connection conn = null;
-    private Properties props = null;
     private File logins = null;
     private FileWriter fw = null;
     
@@ -45,10 +49,6 @@ public class ElabSecurityManager implements ISecurityManager
         logins = new File("logins.txt");
     }
     
-    //Aparentemente o REC chama este método duas vezes e eu só quero incrementar o nlogin uma vez por autenticação
-    private boolean alreadyAuthenticated = false;
-    private IUser user = null;
-    private boolean dbAuth = false;
     private String LS = System.getProperty("line.separator");
     
     public boolean authenticate(IResource resource, IUser user)
@@ -56,8 +56,8 @@ public class ElabSecurityManager implements ISecurityManager
         Logger.getLogger(ELAB_SECURITY_MANAGER_LOGGER).log(Level.INFO,"Authenticating "+ user.getUserName());
         
         //First try to authenticate from the members db...
-        String userName = user.getUserName();
-        String pass = "" + new String(user.getAuth()).trim().hashCode();
+        //String userName = user.getUserName();
+        //String pass = "" + new String(user.getAuth()).trim().hashCode();
         
         /*GregorianCalendar cal = new GregorianCalendar();
         try
@@ -83,15 +83,16 @@ public class ElabSecurityManager implements ISecurityManager
     public boolean authorize(com.linkare.rec.impl.multicast.security.IResource resource, com.linkare.rec.impl.multicast.security.IUser user, com.linkare.rec.impl.multicast.security.IOperation op)
     {
         String userName = user.getUserName();
-        if(op.getOperation() == op.OP_START)
+        if(op.getOperation() == IOperation.OP_START)
         {
             try
             {
                 GregorianCalendar cal = new GregorianCalendar();
                 fw = new FileWriter(logins, true);
-                fw.write(userName + " started: " + (String)resource.getProperties().get(resource.getResourceType().MCCONTROLLER.getPropertyKey()) + " in: " + cal.get(GregorianCalendar.DAY_OF_MONTH) + "/" +
-                (cal.get(cal.MONTH) + 1) + "/" + cal.get(cal.YEAR) + " at " +
-                cal.get(cal.HOUR_OF_DAY) + ":" + cal.get(cal.MINUTE) + LS
+                resource.getResourceType();
+				fw.write(userName + " started: " + (String)resource.getProperties().get(ResourceType.MCCONTROLLER.getPropertyKey()) + " in: " + cal.get(GregorianCalendar.DAY_OF_MONTH) + "/" +
+                (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR) + " at " +
+                cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + LS
                 );
                 fw.close();
             }
@@ -108,8 +109,8 @@ public class ElabSecurityManager implements ISecurityManager
     {
         String userName = "andre";
         GregorianCalendar cal = new GregorianCalendar();
-        System.out.println( userName + "logged in to lab in: " + cal.get(cal.DAY_OF_MONTH) + "/" +
-        (cal.get(cal.MONTH) + 1) + "/" + cal.get(cal.YEAR) + " at " +
-        cal.get(cal.HOUR_OF_DAY) + ":" + cal.get(cal.MINUTE)                   );
+        System.out.println( userName + "logged in to lab in: " + cal.get(Calendar.DAY_OF_MONTH) + "/" +
+        (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR) + " at " +
+        cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE)                   );
     }
 }

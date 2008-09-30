@@ -6,15 +6,16 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico;
 
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.acquisition.*;
-import pt.utl.ist.elab.driver.serial.stamp.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico.processors.*;
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
+import pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico.processors.StampCCProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.data.PhysicsValueFactory;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class CCStampDataSource extends AbstractStampDataSource
 {

@@ -1,17 +1,24 @@
 package com.linkare.rec.repository;
 
-import com.linkare.rec.acquisition.DataProducer;
-import com.linkare.rec.acquisition.DataProducerHelper;
-import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.acquisition.UserInfoHelper;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Properties;
+
 import org.omg.CORBA.MARSHAL;
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.Object;
-import org.omg.CORBA.portable.*;
+import org.omg.CORBA.portable.ApplicationException;
+import org.omg.CORBA.portable.Delegate;
+import org.omg.CORBA.portable.InputStream;
+import org.omg.CORBA.portable.ObjectImpl;
+import org.omg.CORBA.portable.OutputStream;
+import org.omg.CORBA.portable.RemarshalException;
+
+import com.linkare.rec.acquisition.DataProducer;
+import com.linkare.rec.acquisition.DataProducerHelper;
+import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.acquisition.UserInfoHelper;
 
 public class _RepositoryManagerStub extends ObjectImpl implements RepositoryManager
 {

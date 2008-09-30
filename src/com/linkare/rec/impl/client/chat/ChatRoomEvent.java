@@ -8,7 +8,7 @@ package com.linkare.rec.impl.client.chat;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 public class ChatRoomEvent extends java.util.EventObject
 {

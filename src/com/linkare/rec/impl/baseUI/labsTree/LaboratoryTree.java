@@ -6,15 +6,20 @@
 
 package com.linkare.rec.impl.baseUI.labsTree;
 
-import javax.swing.tree.*;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import javax.swing.ToolTipManager;
-import com.linkare.rec.impl.baseUI.config.*;
-import com.linkare.rec.impl.baseUI.labsTree.*;
-import com.linkare.rec.impl.baseUI.ImageBorder;
-import com.linkare.rec.impl.utils.Defaults;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
+
+import com.linkare.rec.impl.baseUI.config.Apparatus;
+import com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig;
+import com.linkare.rec.impl.baseUI.config.Display;
+import com.linkare.rec.impl.baseUI.config.DisplayNode;
+import com.linkare.rec.impl.baseUI.config.Lab;
+import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
+import com.linkare.rec.impl.baseUI.config.WebResource;
 
 /**
  *

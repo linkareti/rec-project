@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.webrobot.customizer.Utils;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class TableModelAdapter implements javax.swing.event.TableModelListener {
     

@@ -8,20 +8,14 @@ package pt.utl.ist.elab.driver.telescopio;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.data.*;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import java.util.logging.*;
+import com.linkare.rec.data.acquisition.PhysicsVal;
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.impl.data.PhysicsValFactory;
+import com.linkare.rec.impl.driver.BaseDataSource;
 
 public class TelescopioDataProducer extends BaseDataSource
 {

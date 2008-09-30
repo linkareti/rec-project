@@ -14,6 +14,11 @@ public final class UserInfo implements IDLEntity
 
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6540699781482142489L;
+
 	private String userName = null;
 
 	private com.linkare.rec.acquisition.Property[] userProps = null;

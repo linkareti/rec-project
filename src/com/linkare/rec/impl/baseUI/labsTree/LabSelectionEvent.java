@@ -11,7 +11,7 @@ package com.linkare.rec.impl.baseUI.labsTree;
  * @author  adnre
  */
 
-import com.linkare.rec.impl.baseUI.config.*;
+import com.linkare.rec.impl.baseUI.config.Lab;
 
 public class LabSelectionEvent extends java.util.EventObject
 {

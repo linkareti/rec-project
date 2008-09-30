@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.Aleatorio.displays;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class AnalysisPanel extends javax.swing.JPanel implements java.lang.Cloneable {
     

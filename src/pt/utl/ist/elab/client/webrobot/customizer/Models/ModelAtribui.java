@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.webrobot.customizer.Models;
 
 /**
  *
- * @author  Andre
+ * @author André Neto - LEFT - IST
  */
 public class ModelAtribui extends pt.utl.ist.elab.client.webrobot.customizer.Models.ModelBlock implements pt.utl.ist.elab.client.webrobot.customizer.Interfaces.Model
 {

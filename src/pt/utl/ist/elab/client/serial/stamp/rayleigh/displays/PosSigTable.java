@@ -10,7 +10,7 @@ import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 

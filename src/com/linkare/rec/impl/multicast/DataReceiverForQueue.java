@@ -14,25 +14,16 @@ package com.linkare.rec.impl.multicast;
 
 
 
-import com.linkare.rec.acquisition.DataProducerState;
+import java.util.logging.Level;
 
 import com.linkare.rec.acquisition.DataReceiver;
-
 import com.linkare.rec.acquisition.NotAuthorized;
-
 import com.linkare.rec.impl.events.DataProducerStateChangeEvent;
-
 import com.linkare.rec.impl.events.NewSamplesEvent;
-
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
-
 import com.linkare.rec.impl.utils.EventQueue;
-
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
-
 import com.linkare.rec.impl.wrappers.DataReceiverWrapper;
-
-import java.util.logging.Level;
 
 
 
@@ -44,7 +35,7 @@ import java.util.logging.Level;
  *
  *
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  *
  */
 

@@ -6,11 +6,11 @@
 
 package com.linkare.rec.impl.client.customizer;
 
-import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface ICustomizer extends CustomizerInfo
 {

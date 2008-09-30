@@ -6,11 +6,13 @@
 
 package com.linkare.rec.impl.i18n;
 
-import java.util.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.PropertyResourceBundle;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ReCPropertyResourceBundle extends ReCResourceBundle
 {

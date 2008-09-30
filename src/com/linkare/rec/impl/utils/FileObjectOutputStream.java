@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class FileObjectOutputStream extends ObjectOutputStream
 {

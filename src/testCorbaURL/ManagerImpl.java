@@ -9,7 +9,7 @@ package testCorbaURL;
 import com.linkare.rec.impl.utils.*;
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ManagerImpl implements ManagerOperations
 {

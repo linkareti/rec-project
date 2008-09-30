@@ -13,7 +13,7 @@ import com.linkare.rec.impl.protocols.ReCProtocols;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class WebResource implements Comparable,ActionListener
 {

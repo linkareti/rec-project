@@ -5,10 +5,9 @@
  */
 
 package pt.utl.ist.elab.client.meteo.displays;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.impl.client.experiment.*;
-import org.jfree.data.time.*;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 /**
  *

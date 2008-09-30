@@ -6,12 +6,14 @@
 
 package pt.utl.ist.elab.client.webrobot.displays;
 
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.data.config.*;
-import pt.utl.ist.elab.client.webrobot.utils.*;
-import pt.utl.ist.elab.client.webrobot.customizer.Utils.*;
+import pt.utl.ist.elab.client.webrobot.customizer.Utils.AbsoluteConstraints;
+import pt.utl.ist.elab.client.webrobot.customizer.Utils.AbsoluteLayout;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 /**
  *
  * @author  Andr�

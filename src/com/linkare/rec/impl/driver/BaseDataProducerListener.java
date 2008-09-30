@@ -8,7 +8,7 @@ package com.linkare.rec.impl.driver;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface BaseDataProducerListener extends java.util.EventListener
 {

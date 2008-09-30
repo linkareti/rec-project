@@ -6,16 +6,16 @@ package pt.utl.ist.elab.client.Aleatorio.displays;
  * Created on 2 de Junho de 2003, 11:54
  */
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import javax.swing.JPanel;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JPanel;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 public class GraphPanel extends JPanel{
     

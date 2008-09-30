@@ -6,13 +6,12 @@
 
 package com.linkare.rec.impl.driver;
 
-import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.data.SamplesSource;
 
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface IDataSource extends SamplesSource
 {

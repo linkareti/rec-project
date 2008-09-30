@@ -1,9 +1,10 @@
 package pt.utl.ist.elab.driver.serial.stamp.statsound.audio.media.protocol.sinewavegenerator;
 
-import javax.media.Time;
-import javax.media.MediaLocator;
-import javax.media.protocol.*;
 import java.io.IOException;
+
+import javax.media.Time;
+import javax.media.protocol.ContentDescriptor;
+import javax.media.protocol.PullBufferDataSource;
 
 public class DataSource extends PullBufferDataSource
 {

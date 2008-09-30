@@ -7,10 +7,12 @@ package pt.utl.ist.elab.driver.Aleatorio.Utils;
 
 import java.awt.Dimension;
 
-import javax.media.*;
-import javax.media.control.*;
-import javax.media.format.*;
-import javax.media.protocol.*;
+import javax.media.Format;
+import javax.media.control.FormatControl;
+import javax.media.format.AudioFormat;
+import javax.media.format.VideoFormat;
+import javax.media.protocol.CaptureDevice;
+import javax.media.protocol.DataSource;
 
 
 public class DeviceInfo

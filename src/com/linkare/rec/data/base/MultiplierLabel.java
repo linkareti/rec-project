@@ -5,11 +5,12 @@
  */
 
 package com.linkare.rec.data.base;
-import com.linkare.rec.data.*;
-import javax.swing.*;
+import javax.swing.JLabel;
+
+import com.linkare.rec.data.Multiplier;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class MultiplierLabel extends JLabel
 {

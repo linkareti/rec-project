@@ -10,7 +10,7 @@ import javax.swing.*;
 import com.linkare.rec.impl.protocols.*;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class WebResourceCollection extends java.util.Vector
 {

@@ -6,16 +6,12 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-import javax.swing.*;
-import com.linkare.rec.impl.wrappers.DataProducerWrapper;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.acquisition.NotAvailableException;
-import com.linkare.rec.acquisition.MaxPacketNumUnknown;
 import javax.swing.Icon;
+
+import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ExpHistory
 {

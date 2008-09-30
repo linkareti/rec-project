@@ -6,16 +6,11 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.statsound.audio;
 
-import javax.media.*;
-import javax.media.format.*;
-import javax.media.control.*;
-import java.io.*;
-import java.util.*;
-import pt.utl.ist.elab.driver.serial.stamp.statsound.*;
-import pt.utl.ist.elab.driver.serial.stamp.statsound.audio.media.protocol.sinewavegenerator.*;
+import pt.utl.ist.elab.driver.serial.stamp.statsound.audio.media.protocol.sinewavegenerator.DataSource;
+import pt.utl.ist.elab.driver.serial.stamp.statsound.audio.media.protocol.sinewavegenerator.InterLacedSineWaveStream;
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
 public class SoundProducer implements javax.media.ControllerListener, Runnable

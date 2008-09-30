@@ -1,10 +1,12 @@
 package com.linkare.rec.impl.data;
 
-import com.linkare.rec.data.acquisition.SamplesPacket;
-import com.linkare.rec.data.acquisition.PhysicsValue;
-import com.linkare.rec.data.synch.Frequency;
 import java.util.ArrayList;
+
 import javax.swing.event.EventListenerList;
+
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.data.acquisition.SamplesPacket;
+import com.linkare.rec.data.synch.Frequency;
 
 public class SamplesSourcePacketizer implements SamplesPacketSource
 {

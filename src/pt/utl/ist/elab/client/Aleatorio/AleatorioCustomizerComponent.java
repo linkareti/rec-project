@@ -8,10 +8,10 @@ package pt.utl.ist.elab.client.Aleatorio;
 
 /**
  *
- * @author  PC
+ * @author Pedro Carvalho - LEFT - IST
  */
 
-import com.linkare.rec.impl.i18n.*;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class AleatorioCustomizerComponent extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
     

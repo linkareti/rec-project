@@ -7,41 +7,45 @@
 package com.linkare.rec.impl.baseUI;
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
 
-import com.linkare.rec.impl.baseUI.utils.*;
-import com.linkare.rec.impl.baseUI.mdi.*;
-import com.linkare.rec.impl.baseUI.config.*;
-import com.linkare.rec.impl.baseUI.labsTree.*;
-import com.linkare.rec.impl.baseUI.control.*;
-import com.linkare.rec.impl.baseUI.display.*;
-import com.linkare.rec.impl.client.*;
-import com.linkare.rec.impl.client.lab.*;
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.impl.client.apparatus.*;
-import com.linkare.rec.impl.client.customizer.*;
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.impl.client.lab.*;
-import com.linkare.rec.impl.client.apparatus.*;
-import com.linkare.rec.impl.utils.Defaults;
-import com.linkare.rec.impl.utils.ORBBean;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.protocols.ReCProtocols;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Vector;
-import javax.swing.JInternalFrame;
-import javax.swing.SwingUtilities;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
+
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import java.awt.Point;
-import java.util.logging.*;
-import java.util.prefs.*;
-import com.linkare.rec.impl.logging.*;
+import javax.swing.SwingUtilities;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.baseUI.config.Display;
+import com.linkare.rec.impl.baseUI.config.DisplayNode;
+import com.linkare.rec.impl.baseUI.config.Lab;
+import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
+import com.linkare.rec.impl.baseUI.display.DefaultDisplayFactory;
+import com.linkare.rec.impl.baseUI.display.DisplayFactory;
+import com.linkare.rec.impl.baseUI.labsTree.ApparatusSelectionEvent;
+import com.linkare.rec.impl.baseUI.labsTree.DisplayTreeNodeUtils;
+import com.linkare.rec.impl.baseUI.utils.TipFactory;
+import com.linkare.rec.impl.client.customizer.CustomizerUIUtil;
+import com.linkare.rec.impl.client.customizer.ICustomizer;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.customizer.ICustomizerSecurity;
+import com.linkare.rec.impl.client.experiment.DefaultExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpHistory;
+import com.linkare.rec.impl.client.experiment.ExpHistoryDisplayFactory;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.ORBBean;
 
 
 public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener, ExpHistoryDisplayFactory

@@ -1,10 +1,7 @@
 package com.linkare.rec.repository;
 
-import com.linkare.rec.acquisition.DataProducer;
-import com.linkare.rec.acquisition.DataProducerHelper;
-import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.acquisition.UserInfoHelper;
 import java.util.Hashtable;
+
 import org.omg.CORBA.BAD_OPERATION;
 import org.omg.CORBA.CompletionStatus;
 import org.omg.CORBA.ORB;
@@ -14,6 +11,11 @@ import org.omg.CORBA.portable.OutputStream;
 import org.omg.CORBA.portable.ResponseHandler;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.Servant;
+
+import com.linkare.rec.acquisition.DataProducer;
+import com.linkare.rec.acquisition.DataProducerHelper;
+import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.acquisition.UserInfoHelper;
 @SuppressWarnings("unchecked")
 public abstract class RepositoryManagerPOA extends Servant implements RepositoryManagerOperations, InvokeHandler
 {

@@ -8,13 +8,12 @@ package com.linkare.rec.impl.baseUI.control;
 
 /**
  *
- * @author  andre
+ * @author André Neto - LEFT - IST
  */
-import com.linkare.rec.impl.baseUI.config.*;
-import com.linkare.rec.impl.utils.Defaults;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import java.util.logging.*;
-import com.linkare.rec.impl.logging.*;
 
 public class CountDownProgressPanel extends javax.swing.JPanel
 {

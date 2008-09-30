@@ -8,7 +8,7 @@ package com.linkare.rec.data.synch.base;
 
 /**
  *
- * @author  Administrator
+ * @author José Pedro Pereira - Linkare TI
  */
 public class MonthMap
 {

@@ -6,10 +6,11 @@
 
 package com.linkare.rec.impl.i18n;
 
-import java.util.*;
+import java.util.Enumeration;
+import java.util.ListResourceBundle;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public class ReCListResourceBundle extends ReCResourceBundle
 {

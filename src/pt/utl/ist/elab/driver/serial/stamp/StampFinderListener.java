@@ -9,7 +9,7 @@ package pt.utl.ist.elab.driver.serial.stamp;
 import gnu.io.SerialPort;
 /**
  *
- * @author  jp
+ * @author José Pedro Pereira - Linkare TI
  */
 public interface StampFinderListener extends java.util.EventListener
 {
