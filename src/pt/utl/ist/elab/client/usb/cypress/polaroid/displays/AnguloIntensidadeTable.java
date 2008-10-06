@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.client.usb.cypress.polaroid.displays;
 
+
 /**
  *
  * @author  andre

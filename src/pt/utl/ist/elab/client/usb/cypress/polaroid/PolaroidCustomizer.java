@@ -280,13 +280,13 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements com.linkar
         acqConfig.getSelectedHardwareParameter("PosFixo").setParameterValue("" + jSliderPolFixo.getValue());
         acqConfig.getSelectedHardwareParameter("LuzPol").setParameterValue("" + ((jCheckBoxLightPol.isSelected()) ? 1 : 0));
         acqConfig.getSelectedHardwareParameter("Calib").setParameterValue("" + ((jCheckBoxCalib.isSelected()) ? 1 : 0));
-        int nSamples = Math.abs(((jSliderPolVarEnd.getValue() - jSliderPolVarIni.getValue()) * 155) / 180);
+        int nSamples = (int)Math.abs((double)(jSliderPolVarEnd.getValue() - jSliderPolVarIni.getValue()) / 0.1535);
         if(nSamples == 0)
         {
             nSamples = 1;
             acqConfig.getSelectedHardwareParameter("PosEndPolMovel").setParameterValue("" + jSliderPolVarEnd.getValue() + 2);
         }
-        acqConfig.setTotalSamples(Math.abs(jSliderPolVarEnd.getValue() - jSliderPolVarIni.getValue()));
+        acqConfig.setTotalSamples(nSamples);
         fireICustomizerListenerDone();
     }//GEN-LAST:event_btnOKActionPerformed
     
