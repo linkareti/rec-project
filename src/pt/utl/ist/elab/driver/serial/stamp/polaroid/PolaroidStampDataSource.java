@@ -24,8 +24,7 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
     /** Creates a new instance of RadioactividadeStampDataSource */
     public PolaroidStampDataSource() {
     }
-    private int timeDelayMillis = -1;
-    private float delay_time = 0;
+    
     private int counter = 0;
     private int total_samples = 0;
 
@@ -62,27 +61,30 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
             super.addDataRow(values);
 
             counter++;
-            if (counter == total_samples) {
+            if (counter > total_samples) {
+                Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO, "DataSource Ended");
                 setDataSourceEnded();
             }
         }
     }
     
-    protected static String STAMP_DRIVER_LOGGER = "StampDriver.Logger";
+   public static String POLAROID_DS_LOGGER = "PolaroidDataSource.Logger";
     
+
     static {
-        Logger l = LogManager.getLogManager().getLogger(STAMP_DRIVER_LOGGER);
+        Logger l = LogManager.getLogManager().getLogger(POLAROID_DS_LOGGER);
         if (l == null) {
-            LogManager.getLogManager().addLogger(Logger.getLogger(STAMP_DRIVER_LOGGER));
+            LogManager.getLogManager().addLogger(Logger.getLogger(POLAROID_DS_LOGGER));
         }
     }
+
 
     public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
         super.setAcquisitionHeader(config);
 
         total_samples = config.getTotalSamples();
 
-        Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,"Total samples as defined in datasource is now "+config.getTotalSamples());
+        Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO,"Total samples as defined in datasource is now "+config.getTotalSamples());
 
     }
     private boolean stopped = false;
