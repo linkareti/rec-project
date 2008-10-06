@@ -251,6 +251,8 @@ public class PolaroidStampDriver extends AbstractStampDriver
     
     public void startNow() throws TimedOutException
     {
+        wroteStart=false;
+        
 	if(stampConfig==null)
 	    throw new TimedOutException("No configuration available yet!");
 	
