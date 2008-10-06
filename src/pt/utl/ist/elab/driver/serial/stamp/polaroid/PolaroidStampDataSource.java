@@ -29,23 +29,28 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
     private int total_samples = 0;
 
     public void processDataCommand(StampCommand cmd) {
-        if (stopped) {
-            return;
-        }
+        Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO,"Processing DATA command "+cmd.getCommandIdentifier());
+        Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO,"stoped= "+stopped+", cmd="+cmd+", cmd.isData="+cmd.isData());
+        
         if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
             return;
         }
+         
         if (cmd.getCommandIdentifier().equals(StampPolaroidProcessor.COMMAND_IDENTIFIER)) {
             int angulo;
             float intensidade;
             PhysicsValue[] values = new PhysicsValue[2];
             try {
+                 Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO,"reading data values");
+               
                 angulo = ((Integer) cmd.getCommandData(StampPolaroidProcessor.ANGULO)).intValue();
                 intensidade = ((Float) cmd.getCommandData(StampPolaroidProcessor.INTENSIDADE)).floatValue();
             } catch (ClassCastException e) {
                 e.printStackTrace();
                 return;
             }
+
+            Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO,"Creating fisics values "+angulo+","+intensidade);
 
             values[0] = new PhysicsValue(PhysicsValFactory.fromInt(angulo),
                     getAcquisitionHeader().getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(),
@@ -54,13 +59,14 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
             values[1] = new PhysicsValue(PhysicsValFactory.fromFloat(intensidade),
                     getAcquisitionHeader().getChannelsConfig(1).getSelectedScale().getDefaultErrorValue(),
                     getAcquisitionHeader().getChannelsConfig(1).getSelectedScale().getMultiplier());
+            
+            Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO,"Dispatching new rows...");
+
             super.addDataRow(values);
 
             counter++;
+            Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO,"Total samples is now ..."+counter);
 
-            super.addDataRow(values);
-
-            counter++;
             if (counter > total_samples) {
                 Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO, "DataSource Ended");
                 setDataSourceEnded();
@@ -70,7 +76,6 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
     
    public static String POLAROID_DS_LOGGER = "PolaroidDataSource.Logger";
     
-
     static {
         Logger l = LogManager.getLogManager().getLogger(POLAROID_DS_LOGGER);
         if (l == null) {
