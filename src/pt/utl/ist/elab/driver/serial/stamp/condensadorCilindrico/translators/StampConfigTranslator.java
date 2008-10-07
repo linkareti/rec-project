@@ -81,21 +81,14 @@ public class StampConfigTranslator extends AbstractStampTranslator {
         }
 
         String endPosStr = "" + endPos;
-        while (endPosStr.length() < 2) {
-            endPosStr = "0" + endPosStr;
-        }
+       
+        
         String startPosStr = "" + startPos;
-        while (startPosStr.length() < 2) {
-            startPosStr = "0" + startPosStr;
-        }
+        
         String numSamplesStr = "" + numsamples;
-        while (numSamplesStr.length() < 3) {
-            numSamplesStr = "0" + numSamplesStr;
-        }
+        
         String numPointsStr = "" + numPoints ;
-        while (numPointsStr.length() < 4) {
-            numPointsStr = "0" + numPointsStr;
-        }
+        
         String commandStr = command.getCommandIdentifier() + " " + calib + " " + startPosStr + " " + endPosStr + " " + numPointsStr+" "+numSamplesStr;
         command.setCommand(commandStr);
 
