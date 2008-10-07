@@ -10,10 +10,10 @@
         ]]>
     </description>
     
-    <parameter name="Calibrate" type="OnOffValue" value="0">
+    <parameter name="Calibrate" type="SelectionListValue" value="0">
         <selection-list>
-            <value order="1">1</value>
-            <value order="2">0</value>
+            <value order="1">0</value>
+            <value order="2">1</value>
         </selection-list>
     </parameter>
     
