@@ -43,7 +43,7 @@
     
     <sampling-scale>
         <min-samples>1</min-samples>
-        <max-samples>20</max-samples>
+        <max-samples>10000</max-samples>
         <step-samples>1</step-samples>
     </sampling-scale>
     
