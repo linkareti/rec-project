@@ -35,9 +35,9 @@ public class StampConfigTranslator extends AbstractStampTranslator {
         }
         int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
         float startPosf = ((Float) command.getCommandData(START_POS_STR)).floatValue();
-        startPosf = startPosf * 10.F;
+        startPosf = startPosf * 670/24;
         float endPosf = ((Float) command.getCommandData(END_POS_STR)).floatValue();
-        endPosf = endPosf * 10.F;
+        endPosf = endPosf * 670/24;
         int endPos = (int) Math.floor(endPosf);
         int startPos = (int) Math.floor(startPosf);
 
