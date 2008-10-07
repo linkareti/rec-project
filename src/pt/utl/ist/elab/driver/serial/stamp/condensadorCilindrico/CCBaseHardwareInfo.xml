@@ -2,7 +2,7 @@
 
 <!-- Created by jp on 9 de Maio de 2003, 19:07 -->
 
-<HardwareInfo id="ELAB_CC_STAMP_V02" familiarName="Condensador Cilíndrico" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+<HardwareInfo id="ELAB_CC_STAMP_V02" familiarName="Condensador Cilindrico" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
     <description>
         <![CDATA[ 
         Esta experiência serve para - não esquecer de alterar esta descrição
@@ -20,15 +20,15 @@
     <parameter name="StartPosition" type="ContinuousValue" value="0">
         <selection-list>
             <value order="1">0</value>
-            <value order="2">670</value>
+            <value order="2">24</value>
 	    <value order="3">0.1</value>
         </selection-list>
     </parameter>
     
-    <parameter name="EndPosition" type="ContinuousValue" value="670">
+    <parameter name="EndPosition" type="ContinuousValue" value="24">
         <selection-list>
             <value order="1">0</value>
-            <value order="2">670</value>
+            <value order="2">24</value>
             <value order="3">0.1</value>
         </selection-list>
     </parameter>
@@ -65,9 +65,9 @@
     </ChannelInfo>
     <ChannelInfo name="Distância" independent="false" direction="CHANNEL_INPUT">
         <scale label="Distância [mm]" physicsunitname="metros" physicsunitsymbol="m" multiplier="milli" selected="true">
-            <min><PhysicsVal type="float">2</PhysicsVal></min>
-            <max><PhysicsVal type="float">5</PhysicsVal></max>
-            <step><PhysicsVal type="float">0.001</PhysicsVal></step>
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">24</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
             <errordefault><PhysicsVal type="float">0.20</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>

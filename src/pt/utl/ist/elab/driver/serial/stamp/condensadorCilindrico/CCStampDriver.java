@@ -34,8 +34,8 @@ public class CCStampDriver extends AbstractStampDriver
 	setDriverUniqueID("ELAB_CC_STAMP_V02");
 	setApplicationNameLockPort("CondCilindrico Stamp Driver V0.2");
 	setTimeOutPerPort(10000);
-        setPortBaudRate(115200);
         setWaitForEcho(false);
+        setPortBaudRate(115200);
 	loadCommandHandlers();
     }
     
