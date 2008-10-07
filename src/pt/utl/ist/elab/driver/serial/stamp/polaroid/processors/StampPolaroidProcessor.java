@@ -32,7 +32,7 @@ public class StampPolaroidProcessor extends AbstractStampProcessor
     public boolean process(StampCommand command)
     {
 	
-	int angulo = 0;
+	float angulo = 0;
         float intensidade = 0;
 	
 	String[] splitedStr = command.getCommand().split("\t");
@@ -41,11 +41,11 @@ public class StampPolaroidProcessor extends AbstractStampProcessor
 	{
 	    try
 	    {
-                angulo = Integer.parseInt(splitedStr[0]);
+                angulo = Float.parseFloat(splitedStr[0]);
                 Float oAngulo = new Float(angulo * 0.1535);
                 command.addCommandData(ANGULO, oAngulo);
 
-                intensidade = Integer.parseInt(splitedStr[1]);
+                intensidade = Float.parseFloat(splitedStr[1]);
                 Float oIntensidade = new Float((intensidade * 5) / 4095F);
                 command.addCommandData(INTENSIDADE, oIntensidade);
 

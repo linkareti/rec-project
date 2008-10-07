@@ -8,6 +8,7 @@ package pt.utl.ist.elab.driver.serial.stamp.polaroid;
 import com.linkare.rec.impl.data.*;
 import com.linkare.rec.data.config.*;
 import com.linkare.rec.data.acquisition.*;
+import com.linkare.rec.impl.logging.LoggerUtil;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -37,22 +38,22 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
         }
          
         if (cmd.getCommandIdentifier().equals(StampPolaroidProcessor.COMMAND_IDENTIFIER)) {
-            int angulo;
+            float angulo;
             float intensidade;
             PhysicsValue[] values = new PhysicsValue[2];
             try {
                  Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO,"reading data values");
                
-                angulo = ((Integer) cmd.getCommandData(StampPolaroidProcessor.ANGULO)).intValue();
+                angulo = ((Float) cmd.getCommandData(StampPolaroidProcessor.ANGULO)).floatValue();
                 intensidade = ((Float) cmd.getCommandData(StampPolaroidProcessor.INTENSIDADE)).floatValue();
             } catch (ClassCastException e) {
-                e.printStackTrace();
+                LoggerUtil.logThrowable("Unable to parse data values", e, Logger.getLogger(POLAROID_DS_LOGGER));
                 return;
             }
 
             Logger.getLogger(POLAROID_DS_LOGGER).log(Level.INFO,"Creating fisics values "+angulo+","+intensidade);
 
-            values[0] = new PhysicsValue(PhysicsValFactory.fromInt(angulo),
+            values[0] = new PhysicsValue(PhysicsValFactory.fromFloat(angulo),
                     getAcquisitionHeader().getChannelsConfig(0).getSelectedScale().getDefaultErrorValue(),
                     getAcquisitionHeader().getChannelsConfig(0).getSelectedScale().getMultiplier());
 
