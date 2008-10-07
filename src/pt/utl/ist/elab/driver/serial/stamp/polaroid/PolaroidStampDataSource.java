@@ -81,6 +81,8 @@ public class PolaroidStampDataSource extends AbstractStampDataSource {
 
         total_samples = config.getTotalSamples();
 
+        setPacketSize(Math.min(total_samples, 20));
+        
     }
     private boolean stopped = false;
 
