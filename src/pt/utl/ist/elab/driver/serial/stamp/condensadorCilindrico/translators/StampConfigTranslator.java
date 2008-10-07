@@ -60,8 +60,8 @@ public class StampConfigTranslator extends AbstractStampTranslator {
             return false;
         }
 
-        if (numsamples > 20) {
-            System.out.println("numsamples>20");
+        if (numsamples > 10000) {
+            System.out.println("numsamples>10000");
             return false;
         }
 
