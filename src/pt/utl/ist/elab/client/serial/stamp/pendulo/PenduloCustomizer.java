@@ -301,7 +301,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
         jPanel51.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.hini")));
         jPanel51.setMinimumSize(new java.awt.Dimension(100, 350));
-        jPanel51.setPreferredSize(new java.awt.Dimension(100, 350));
+        jPanel51.setPreferredSize(new java.awt.Dimension(130, 350));
         sldHeight.setMajorTickSpacing(10);
         sldHeight.setMaximum(90);
         sldHeight.setMinimum(50);
@@ -351,11 +351,11 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
         jPanel511.setLayout(new java.awt.GridBagLayout());
 
-        jPanel511.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.friction.tittle")));
+        jPanel511.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.friction.title")));
         jPanel511.setMinimumSize(new java.awt.Dimension(150, 50));
         jPanel511.setPreferredSize(new java.awt.Dimension(150, 50));
         radioStatus00.setSelected(true);
-        radioStatus00.setText("no friction");
+        radioStatus00.setText(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.nofriction"));
         buttonGroupStatus.add(radioStatus00);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
