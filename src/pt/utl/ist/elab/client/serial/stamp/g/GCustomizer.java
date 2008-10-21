@@ -129,7 +129,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
         jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
-        jPanel5.setBorder(new javax.swing.border.TitledBorder("Launching Power"));
+        jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findString("ReCExpG$rec.exp.g.lbl.power")));
         jPanel5.setMinimumSize(new java.awt.Dimension(350, 80));
         jPanel5.setPreferredSize(new java.awt.Dimension(350, 80));
         sldPos1.setMajorTickSpacing(10);
