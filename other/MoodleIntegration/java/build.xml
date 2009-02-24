@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project basedir="." name="moodlewsconsumer" default="compile">
+	
+	<property file="build.properties"/>
+	
+	<path id="project.classpath">
+		<fileset dir="${jaxws.implementation}">
+		    <include name="webservices-tools.jar"/>
+			<include name="webservices-rt.jar"/>
+			<include name="webservices-api.jar"/>
+			<include name="webservices-extra.jar"/>
+			<include name="webservices-extra-api.jar"/>
+		</fileset>
+	</path>
+	
+	<taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+	 <classpath
+	    path="jaxws.classpath"/>
+	</taskdef>
+	
+	<target name="generate-artifacts-from-wsdl">
+		<mkdir dir="${build.dir}"/>
+		<wsimport 	wsdl="${wsdl_auth.url}" 
+					sourcedestdir="${src.dir}"
+					destdir="${build.dir}"
+					keep="true" 
+					xendorsed="true"/>
+
+		<wsimport 	wsdl="${wsdl_courses.url}" 
+					sourcedestdir="${src.dir}"
+					destdir="${build.dir}"
+					keep="true" 
+					xendorsed="true"/>
+
+		<wsimport 	wsdl="${wsdl_students.url}" 
+					sourcedestdir="${src.dir}"
+					destdir="${build.dir}"
+					keep="true" 
+					xendorsed="true"/>
+
+		<wsimport 	wsdl="${wsdl_teachers.url}" 
+					sourcedestdir="${src.dir}"
+					destdir="${build.dir}"
+					keep="true" 
+					xendorsed="true"/>
+	</target>
+	
+	<target name="compile" depends="generate-artifacts-from-wsdl">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" debug="true">
+			<classpath path="jaxws.classpath">
+			</classpath>
+		</javac>
+	</target>
+	
+</project>
