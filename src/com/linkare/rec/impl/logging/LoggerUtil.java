@@ -27,7 +27,7 @@ public class LoggerUtil {
 	 */
 	public static void logThrowable(String info_message, Throwable t,
 			Logger logger) {
-		if (info_message != null && logger != null
+		if (info_message != null && logger != null && logger.getLevel() != null
 				&& logger.getLevel().intValue() <= Level.WARNING.intValue()) {
 			if (t != null) {
 				StackTraceElement[] trace = t.getStackTrace();
@@ -39,7 +39,7 @@ public class LoggerUtil {
 			logger.log(Level.WARNING, info_message);
 		}
 
-		if (t != null && logger != null
+		if (t != null && logger != null && logger.getLevel() != null
 				&& logger.getLevel().intValue() <= Level.FINEST.intValue()) {
 			logger.log(Level.FINEST, info_message, t);
 		}

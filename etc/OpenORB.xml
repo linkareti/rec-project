@@ -1,0 +1,64 @@
+<!-- ================================================================== -->
+<!-- =                        OpenORB XML profile                     = -->
+<!-- ================================================================== -->
+
+<!--
+<!DOCTYPE OpenORB 
+    PUBLIC "-//openorb.sf.net//OpenORB Config//EN" 
+    "http://openorb.sf.net/config/OpenORB.dtd"> 
+-->
+
+<OpenORB profile="default" 
+  xmlns="http://openorb.sf.net/config"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  
+	<!--I can't load the default.xml from the openorb.home...so I've decided to do it this way. Check JP
+		<profile name="default" xlink:href="${openorb.home}config/default.xml#default">-->
+	<profile name="default" xlink:href="/org/openorb/config/default.xml#default">
+		<import xlink:href="/org/openorb/config/default.xml#CorbalocService" />
+		<import xlink:href="/org/openorb/config/default.xml#InitRef">
+			<property name="MultiCastController" value="corbaloc::1.2@elab.ist.utl.pt:9003/MultiCastController" />
+		</import>
+		<import xlink:href="/org/openorb/config/default.xml#iiop">
+			<property name="allowBiDir" value="true" />
+			<property name="sendBufferSize" value="64000" />
+			<property name="recieveBufferSize" value="64000" />
+			<property name="bufferedOutputStreamSize" value="8192"/>
+                        <property name="serverMinSocketAcceptTimeout" value="-1" />
+		</import>
+	</profile>
+
+	<profile name="debug" extends="default" >
+		<description>
+		Activates debugging mode.
+		</description>
+		<import xlink:href="/org/openorb/config/default.xml#openorb" >
+			<property name="debug.level" value="HIGH" />
+			<property name="debug.trace" value="DEBUG" />
+			<property name="useStaticThreadGroup" value="true" />
+		</import>
+	</profile>
+	
+	<profile name="ReCMultiCastController" extends="default" >
+		<import xlink:href="/org/openorb/config/default.xml#iiop">
+			<property name="port" value="9003"/>
+                        <property name="bidirOnlyServer" value="false"/>
+		</import>
+	</profile>
+	
+	<profile name="ReCHardware" extends="default" >
+		<import xlink:href="/org/openorb/config/default.xml#iiop">
+                    <property name="bidirOnlyServer" value="false"/>
+		    <!--<property name="port" value="9005"/>-->
+		</import>
+	</profile>
+	
+        <profile name="ReCClient" extends="default" >
+		<import xlink:href="/org/openorb/config/default.xml#iiop">
+                        <property name="publishIP" value="true" />
+			<property name="bidirOnlyServer" value="true"/>
+		<!--	<property name="port" value="9006"/>-->
+		</import>
+	</profile>	
+</OpenORB>
+
