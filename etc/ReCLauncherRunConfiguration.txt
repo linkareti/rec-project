@@ -1,0 +1,3 @@
+# ReCLaucher Run Configuration
+
+-DReCBaseUIConfig=file://${project_loc:NewReCFace}/etc/ReCBaseUIConfig.xml -Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -DReC.MultiCastController.BindName=MultiCastController -DReC.MultiCastController.InitRef=MultiCastController -Dopenorb.config=http://elab.ist.utl.pt/rec/openorb/OpenORB.xml -Dopenorb.profile=ReCClient -Djava.util.logging.config.file=etc/logging.properties

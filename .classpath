@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="old/|test/|testCorbaURL/|pt/utl/ist/elab/virtual/" kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="lib" path="lib/avalon-framework.jar"/>
 	<classpathentry kind="lib" path="lib/javaws.jar"/>
 	<classpathentry kind="lib" path="lib/logkit.jar"/>
