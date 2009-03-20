@@ -4,7 +4,7 @@
  * Created on 27 de Janeiro de 2004, 2:06
  */
 
-package com.linkare.rec.impl.newface.newconfig;
+package com.linkare.rec.impl.newface.config;
 
 /**
  *

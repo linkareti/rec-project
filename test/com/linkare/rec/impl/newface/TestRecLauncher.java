@@ -7,13 +7,12 @@
 
 package com.linkare.rec.impl.newface;
 
-
 /**
  * @author Henrique Fernandes
  */
 public class TestRecLauncher extends UserInterfaceTest {
 
-    public static void main(String[] args) {
-	new TestRecLauncher().run();
-    }
+	public static void main(String[] args) {
+		new TestRecLauncher().run();
+	}
 }

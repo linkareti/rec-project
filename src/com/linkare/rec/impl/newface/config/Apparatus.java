@@ -1,4 +1,4 @@
-package com.linkare.rec.impl.newface.newconfig;
+package com.linkare.rec.impl.newface.config;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -14,13 +14,19 @@ public class UnexpectedErrorPane extends AbstractContentPane {
 
     private static final long serialVersionUID = -6644614851974160202L;
 
-    public static final int ACTION_QUIT = 0;
+    /**
+	 * The QUIT action identifier.
+	 */
+	public static final String ACTION_QUIT = UnexpectedErrorPane.class.getSimpleName() + "_ACTION_QUIT";
     
-    public static final int ACTION_ALERT = 1;
-    
+    /**
+     * The ALERT action identifier.
+     */
+    public static final String ACTION_ALERT = UnexpectedErrorPane.class.getSimpleName() + "_ACTION_ALERT";
+
     protected Exception error;
     
-    private int actionValue;
+    private String actionValue;
 
     /** Creates new form UnexpectedErrorFriendlyPane */
     public UnexpectedErrorPane(Exception error) {
@@ -31,15 +37,15 @@ public class UnexpectedErrorPane extends AbstractContentPane {
     /**
      * @return the actionValue
      */
-    public int getActionValue() {
+    public String getActionValue() {
         return actionValue;
     }
 
     /**
      * @param actionValue the actionValue to set
      */
-    public void setActionValue(int actionValue) {
-        changeSupport.firePropertyChange("actionValue", this.actionValue, this.actionValue = actionValue);
+    public void setActionValue(String actionValue) {
+    	this.actionValue = actionValue;
     }
 
     /** This method is called from within the constructor to
@@ -116,14 +122,16 @@ public class UnexpectedErrorPane extends AbstractContentPane {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-	setActionValue(ACTION_QUIT);
-	fireContentPaneCloseEvent(evt);
+    	setActionValue(ACTION_QUIT);
+		// Action forward
+		fireActionPerformed(evt);
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSendAlertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendAlertActionPerformed
-        // TODO send allert...
-	setActionValue(ACTION_ALERT);
-	fireContentPaneCloseEvent(evt);
+	    // TODO send allert...
+		setActionValue(ACTION_ALERT);
+		// Action forward
+		fireActionPerformed(evt);
     }//GEN-LAST:event_btnSendAlertActionPerformed
 
 

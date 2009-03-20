@@ -16,14 +16,14 @@ import javax.swing.JSplitPane;
  */
 public class SplitPane extends JSplitPane {
 
-    private static final long serialVersionUID = 8779412805575129170L;
+	private static final long serialVersionUID = 8779412805575129170L;
 
-    /**
+	/**
      * 
      */
-    public SplitPane() {
-	setBorder(BorderFactory.createEmptyBorder());
-	setContinuousLayout(false);
-    }
-    
+	public SplitPane() {
+		setBorder(BorderFactory.createEmptyBorder());
+		setContinuousLayout(false);
+	}
+
 }

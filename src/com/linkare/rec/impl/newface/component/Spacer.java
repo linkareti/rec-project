@@ -18,14 +18,14 @@ import javax.swing.JComponent;
  */
 public class Spacer extends JComponent {
 
-    private static final long serialVersionUID = -2820313727305327858L;
-    
-    private static final Dimension DEFAULT_SPACER_SIZE = new Dimension(10, 10);
+	private static final long serialVersionUID = -2820313727305327858L;
 
-    public Spacer() {
-	super();
-	setPreferredSize(DEFAULT_SPACER_SIZE);
-	setMinimumSize(DEFAULT_SPACER_SIZE);
-    }
-    
+	private static final Dimension DEFAULT_SPACER_SIZE = new Dimension(10, 10);
+
+	public Spacer() {
+		super();
+		setPreferredSize(DEFAULT_SPACER_SIZE);
+		setMinimumSize(DEFAULT_SPACER_SIZE);
+	}
+
 }

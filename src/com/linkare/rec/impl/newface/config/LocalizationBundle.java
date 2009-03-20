@@ -1,4 +1,4 @@
-package com.linkare.rec.impl.newface.newconfig;
+package com.linkare.rec.impl.newface.config;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;

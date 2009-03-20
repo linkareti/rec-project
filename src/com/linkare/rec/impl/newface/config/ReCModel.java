@@ -5,7 +5,7 @@
  * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package com.linkare.rec.impl.newface.newconfig;
+package com.linkare.rec.impl.newface.config;
 
 import java.awt.Dimension;
 
@@ -23,6 +23,6 @@ import com.linkare.rec.impl.newface.ReCView;
  */
 public interface ReCModel {
 
-    Dimension getApplicationPreferredSize();
+    //Dimension getApplicationPreferredSize();
 
 }

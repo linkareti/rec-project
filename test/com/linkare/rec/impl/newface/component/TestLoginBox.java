@@ -14,22 +14,18 @@ import com.linkare.rec.impl.newface.UserInterfaceTest;
  */
 public class TestLoginBox extends UserInterfaceTest {
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-	new TestLoginBox().run();
-    }
-    
-    @Override
-    public Runnable userInterface() {
-	return new Runnable(){
-	    @Override public void run() {
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new TestLoginBox().run();
+	}
+
+	@Override
+	public void runUserInterface() {
 		DefaultDialog<LoginBox> dialog = new DefaultDialog<LoginBox>(new LoginBox());
 		dialog.setVisible(true);
 		System.exit(STATUS_SUCCESS);
-	    }
-	};
-    }
+	}
 
 }

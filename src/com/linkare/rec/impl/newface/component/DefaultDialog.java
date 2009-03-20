@@ -7,70 +7,73 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Component;
+import java.util.logging.Logger;
+
 import javax.swing.JDialog;
 
 /**
- * Represents the default dialog and launcher for the ReC Application.
+ * Represents the default dialog for the ReC Application.
  * <p>
  * All common dialogs must be launched using <code>DefaultDialog</code>.
  * 
  * @param <C>
- *            The dialog content type
+ *            The dialog content type.
  * 
  * @author Henrique Fernandes
  */
-public class DefaultDialog<C extends AbstractContentPane> extends JDialog implements ContentPaneListener {
+public class DefaultDialog<C extends AbstractContentPane> extends JDialog {
 
-    private static final long serialVersionUID = -4557205313830746322L;
+	private static final long serialVersionUID = -4557205313830746322L;
+	
+	@SuppressWarnings("unused")
+	private static final Logger log = Logger.getLogger(DefaultDialog.class.getName());
 
-    private C content;
+	private C content;
 
-    public DefaultDialog(C content) {
-	super();
-	this.content = content;
+	public DefaultDialog(C content) {
+		this(content, null);
+	}
+	
+	public DefaultDialog(C content, Component container) {
+		super();
+		this.content = content;
+		init();
+		setLocationRelativeTo(container);
+	}
 
-	init();
-	setModal(true);
-    }
+	protected void init() {
+		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+		add(content);
+		pack();
+		setModal(true);
+	}
 
-    protected void init() {
-	content.addContentPaneListener(this);
-	setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
-	add(content);
-	pack();
-	setLocationRelativeTo(null);
-    }
+	/**
+	 * @return the dialog content.
+	 */
+	public C getContent() {
+		return content;
+	}
 
-    /**
-     * @return the dialog content.
-     */
-    public C getContent() {
-	return content;
-    }
+	// -------------------------------------------------------------------------
+	// Static
 
-    @Override
-    public void contentPaneClose(Object evt) {
-	setVisible(false);
-    }
+	/**
+	 * Shows an unexpected error friendly dialog. (Modal)
+	 * 
+	 * @param error
+	 *            The unexpected exception error.
+	 * 
+	 * @return The <code>UnexpectedErrorPane</code> action command.
+	 * @see UnexpectedErrorPane
+	 */
+	public static String showUnexpectedErrorPane(Exception error) {
+		DefaultDialog<UnexpectedErrorPane> dialog = new DefaultDialog<UnexpectedErrorPane>(new UnexpectedErrorPane(
+				error));
 
-    // -------------------------------------------------------------------------
-    // Static
-
-    /**
-     * Shows an unexpected error friendly dialog. (Modal)
-     * 
-     * @param error
-     *            The unexpected exception error.
-     * 
-     * @return The <code>UnexpectedErrorPane</code> action command.
-     * @see UnexpectedErrorPane
-     */
-    public static int showUnexpectedErrorPane(Exception error) {
-	DefaultDialog<UnexpectedErrorPane> dialog = new DefaultDialog<UnexpectedErrorPane>(new UnexpectedErrorPane(
-		error));
-
-	dialog.setVisible(true);
-	return dialog.getContent().getActionValue();
-    }
+		dialog.setVisible(true);
+		return dialog.getContent().getActionValue();
+	}
 
 }

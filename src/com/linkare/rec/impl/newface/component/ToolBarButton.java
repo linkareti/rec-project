@@ -16,15 +16,11 @@ import javax.swing.JButton;
  */
 public class ToolBarButton extends JButton {
 
-    private static final long serialVersionUID = 4968001190347564024L;
+	private static final long serialVersionUID = 4968001190347564024L;
 
-    /**
-     * 
-     */
-    public ToolBarButton() {
-	setBorderPainted(false);
-	setBorder(BorderFactory.createEmptyBorder());
-    }
+	public ToolBarButton() {
+		setBorderPainted(false);
+		setBorder(BorderFactory.createEmptyBorder());
+	}
 
-    
 }

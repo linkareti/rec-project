@@ -14,12 +14,12 @@ import javax.swing.UIManager;
  */
 public class TestRecLauncherWithSystemLAF extends UserInterfaceTest {
 
-    public static void main(String[] args) {
-	new TestRecLauncherWithSystemLAF().run();
-    }
+	public static void main(String[] args) {
+		new TestRecLauncherWithSystemLAF().run();
+	}
 
-    @Override
-    protected void initLafClassName() {
-	setLafClassName(UIManager.getSystemLookAndFeelClassName());
-    }
+	@Override
+	protected void initLafClassName() {
+		setLafClassName(UIManager.getSystemLookAndFeelClassName());
+	}
 }

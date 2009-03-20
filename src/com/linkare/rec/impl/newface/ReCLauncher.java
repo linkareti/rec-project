@@ -17,9 +17,9 @@ import javax.swing.UIManager;
 import com.linkare.rec.impl.exceptions.ExceptionCode;
 import com.linkare.rec.impl.exceptions.ReCConfigurationException;
 import com.linkare.rec.impl.newface.component.DefaultDialog;
+import com.linkare.rec.impl.newface.config.ReCFaceConfig;
 import com.linkare.rec.impl.newface.laf.flat.ElabTheme;
 import com.linkare.rec.impl.newface.laf.flat.FlatLookAndFeel;
-import com.linkare.rec.impl.newface.newconfig.ReCFaceConfig;
 
 /**
  * Main entry for ReC Application.
@@ -28,144 +28,138 @@ import com.linkare.rec.impl.newface.newconfig.ReCFaceConfig;
  */
 class ReCLauncher {
 
-    private static final Logger log = Logger.getLogger(ReCLauncher.class.getName());
-    
-    protected static final int STATUS_SUCCESS = 0;
-    
-    protected static final int STATUS_INVALID_CONFIGURATION = 10;
-    
-    protected static final int STATUS_INVALID_LAF = 11;
-    
-    
+	private static final Logger log = Logger.getLogger(ReCLauncher.class.getName());
 
-    /**
-     * Holder for the ReC System properties. Maps the property name and the
-     * required flag.
-     * 
-     * TODO Check if some property is missing
-     */
-    public enum ReCSystemProperty {
+	protected static final int STATUS_SUCCESS = 0;
 
-	RECBASEUICONFIG("ReCBaseUIConfig", true), 
-	REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true), 
-	REC_MULTICASTCONTROLLER_INITREF("ReC.MultiCastController.InitRef", true),
-	OPENORB_CONFIG("openorb.config", true), 
-	OPENORB_PROFILE("openorb.profile", true), 
-	ORG_OMG_CORBA_ORBCLASS("org.omg.CORBA.ORBClass", true), 
-	ORG_OMG_CORBA_ORBSINGLETONCLASS("org.omg.CORBA.ORBSingletonClass", true);
+	protected static final int STATUS_INVALID_CONFIGURATION = 10;
 
-	String name;
-	boolean required;
+	protected static final int STATUS_INVALID_LAF = 11;
 
-	ReCSystemProperty(String name, boolean required) {
-	    this.name = name;
-	    this.required = required;
-	}
+	/**
+	 * Holder for the ReC System properties. Maps the property name and the
+	 * required flag.
+	 * 
+	 * TODO Check if some property is missing
+	 */
+	public enum ReCSystemProperty {
 
-	public String getName() {
-	    return name;
-	}
+		RECBASEUICONFIG("ReCBaseUIConfig", true), 
+		REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true), 
+		REC_MULTICASTCONTROLLER_INITREF("ReC.MultiCastController.InitRef", true),
+		OPENORB_CONFIG("openorb.config", true), 
+		OPENORB_PROFILE("openorb.profile", true), 
+		ORG_OMG_CORBA_ORBCLASS("org.omg.CORBA.ORBClass", true), 
+		ORG_OMG_CORBA_ORBSINGLETONCLASS("org.omg.CORBA.ORBSingletonClass", true);
 
-	public boolean isRequired() {
-	    return required;
-	}
-    }
+		String name;
+		boolean required;
 
-    /**
-     * Starts the ReC application with the default LAF.
-     */
-    public void run() {
-	run(null);
-    }
-    
-    /**
-     * Starts the ReC application with the given LAF Class Name.
-     */
-    public void run(final String lafClassName) {
-	log.fine("Starting Standalone ReC");
-	
-	SwingUtilities.invokeLater(new Runnable() {
-	    @Override
-	    public void run() {
-		// TODO Launch Splash
-		log.warning("TODO - Launch Splash Screen Here");
-		
-		try { // to Check System Properties Availability
-		    checkSystemProperties();
-
-		} catch (ReCConfigurationException e) {
-		    // Show a friendly message and exit
-		    DefaultDialog.showUnexpectedErrorPane(e);
-		    System.exit(STATUS_INVALID_CONFIGURATION);
+		ReCSystemProperty(String name, boolean required) {
+			this.name = name;
+			this.required = required;
 		}
-		
-		// Init System Properties 
-		// (Web Start properties are set on jnlp descriptor)
-		//TODO check anti-aliasing on windows
-		System.setProperty("swing.aatext","true");
-		// Anti-aliasing for mac 
-		System.setProperty("apple.awt.textantialiasing", "on");
-		
-		try { // to Set Look and Feel
-		    
-		    if (lafClassName != null) {
-			UIManager.setLookAndFeel(lafClassName);
-		    } else {
-			UIManager.setLookAndFeel(new FlatLookAndFeel<ElabTheme>(new ElabTheme()));
-		    }
-		    
-		} catch (Exception e) {
-		    DefaultDialog.showUnexpectedErrorPane(e);
-		    System.exit(STATUS_INVALID_LAF);
-		} 
 
-		// TODO Parse xml config
-		
-		// Run User Interface
-		userInterface().run();
+		public String getName() {
+			return name;
+		}
 
-	    }
-	}); // End SwingUtilities.invokeLater
-    }
-    
-    /**
-     * @return The user interface launch runnable.
-     */
-    protected Runnable userInterface() {
-	return new Runnable(){
-	    @Override public void run() {
+		public boolean isRequired() {
+			return required;
+		}
+	}
+
+	/**
+	 * Starts the ReC application with the default LAF.
+	 */
+	public void run() {
+		run(null);
+	}
+
+	/**
+	 * Starts the ReC application with the given LAF Class Name.
+	 */
+	public void run(final String lafClassName) {
+		log.fine("Starting Standalone ReC");
+
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Launch Splash
+				log.warning("TODO - Launch Splash Screen Here");
+
+				try { // to Check System Properties Availability
+					checkSystemProperties();
+
+				} catch (ReCConfigurationException e) {
+					// Show a friendly message and exit
+					DefaultDialog.showUnexpectedErrorPane(e);
+					System.exit(STATUS_INVALID_CONFIGURATION);
+				}
+
+				// Init System Properties
+				// (Web Start properties are set on jnlp descriptor)
+				// TODO check anti-aliasing on windows
+				System.setProperty("swing.aatext", "true");
+				// Anti-aliasing for mac
+				System.setProperty("apple.awt.textantialiasing", "on");
+
+				try { // to Set Look and Feel
+
+					if (lafClassName != null) {
+						UIManager.setLookAndFeel(lafClassName);
+					} else {
+						UIManager.setLookAndFeel(new FlatLookAndFeel<ElabTheme>(new ElabTheme()));
+					}
+
+				} catch (Exception e) {
+					DefaultDialog.showUnexpectedErrorPane(e);
+					System.exit(STATUS_INVALID_LAF);
+				}
+
+				// TODO Parse xml config
+
+				// Run User Interface
+				runUserInterface();
+
+			}
+		}); // End SwingUtilities.invokeLater
+	}
+
+	/**
+	 * @return The user interface launch.
+	 */
+	protected void runUserInterface() {
 		new ReCView(new ReCFaceConfig()).setVisible(true);
-	    }
-	};
-    }
+	}
 
-    /**
-     * Check for the ReC System Properties Availability.
-     * 
-     * @throws ReCConfigurationException
-     *             If some required property is missing.
-     */
-    public void checkSystemProperties() {
-	List<String> missingRequiredProperties = new ArrayList<String>();
+	/**
+	 * Check for the ReC System Properties Availability.
+	 * 
+	 * @throws ReCConfigurationException
+	 *             If some required property is missing.
+	 */
+	public void checkSystemProperties() {
+		List<String> missingRequiredProperties = new ArrayList<String>();
 
-	for (ReCSystemProperty property : ReCSystemProperty.values()) {
-	    String propertyValue = System.getProperty(property.getName());
-	    log.fine(property.getName() + "=" + propertyValue);
-	    
-	    if (property.isRequired()) { // Required Property
-		if (propertyValue == null || (propertyValue != null && propertyValue.isEmpty())) {
-		    missingRequiredProperties.add(property.getName());
+		for (ReCSystemProperty property : ReCSystemProperty.values()) {
+			String propertyValue = System.getProperty(property.getName());
+			log.fine(property.getName() + "=" + propertyValue);
+
+			if (property.isRequired()) { // Required Property
+				if (propertyValue == null || (propertyValue != null && propertyValue.isEmpty())) {
+					missingRequiredProperties.add(property.getName());
+				}
+			} else { // Optional Property
+				log.warning("Optinal ReC system property is missing: " + property);
+			}
 		}
-	    } else { // Optional Property
-		log.warning("Optinal ReC system property is missing: " + property);
-	    }
-	}
 
-	if (!missingRequiredProperties.isEmpty()) {
-	    log.severe("Required ReC system properties are missing: " + missingRequiredProperties);
-	    throw new ReCConfigurationException(ExceptionCode.MISSING_SYSTEM_PROPERTIES,
-		    "Please check the required system properties before run. " + missingRequiredProperties);
+		if (!missingRequiredProperties.isEmpty()) {
+			log.severe("Required ReC system properties are missing: " + missingRequiredProperties);
+			throw new ReCConfigurationException(ExceptionCode.MISSING_SYSTEM_PROPERTIES,
+					"Please check the required system properties before run. " + missingRequiredProperties);
+		}
 	}
-    }
 
 }

@@ -8,7 +8,9 @@
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Color;
+import java.util.logging.Logger;
 
+import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 
 /**
@@ -19,21 +21,44 @@ public class LoginBox extends GradientPane {
 
     private static final long serialVersionUID = 698114786085470559L;
     
-    /** Creates new form LoginBox */
-    public LoginBox() {
-        super(GradientStyle.VERTICAL_LINEAR_DARK_TO_LIGHT);
-        
-        initComponents();
-        customInit();
-    }
+    @SuppressWarnings("unused")
+	private static final Logger log = Logger.getLogger(LoginBox.class.getName());
+    
+    /**
+	 * The LOGIN action identifier.
+	 */
+	public static final String ACTION_DO_LOGIN = LoginBox.class.getSimpleName() + "_ACTION_LOGIN";
+	
+	/** Creates new form LoginBox */
+	public LoginBox() {
+		super(GradientStyle.VERTICAL_LINEAR_DARK_TO_LIGHT);
 
-    private void customInit() {
-	Color fgColor = UIManager.getColor(SpecialLAFProperties.ENABLED_FOREGROUND_ON_DARK.getName());
-	if (fgColor != null) {
-	    lblUserName.setForeground(fgColor);
-	    lblPassword.setForeground(fgColor);
+		initComponents();
+		customInit();
 	}
-    }
+
+	private void customInit() {
+		Color fgColor = UIManager.getColor(SpecialLAFProperties.ENABLED_FOREGROUND_ON_DARK.getName());
+		if (fgColor != null) {
+			lblUserName.setForeground(fgColor);
+			lblPassword.setForeground(fgColor);
+		}
+	}
+	
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return txtUsername.getText();
+	}
+	
+	/**
+	 * @see JPasswordField#getPassword()
+	 * @return the password text
+	 */
+	public String getPassword() {
+		return new String(passField.getPassword());
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -77,6 +102,12 @@ public class LoginBox extends GradientPane {
         add(lblPassword, gridBagConstraints);
 
         btnNext.setText("Avançar");
+        btnNext.setActionCommand(ACTION_DO_LOGIN);
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -91,6 +122,11 @@ public class LoginBox extends GradientPane {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         add(passField, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+    	// Action forward
+    	fireActionPerformed(evt);
+    }//GEN-LAST:event_btnNextActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

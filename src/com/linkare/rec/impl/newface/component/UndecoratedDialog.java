@@ -7,47 +7,36 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Component;
+
 /**
- * An Undecorated Dialog and launcher for the ReC Application. <p>
+ * An Undecorated Dialog for the ReC Application.
+ * <p>
  * 
- * @param <C> The dialog content type
+ * @param <C>
+ *            The dialog content type
  * 
  * @author Henrique Fernandes
  */
 public class UndecoratedDialog<C extends AbstractContentPane> extends DefaultDialog<C> {
 
-    private static final long serialVersionUID = -605288573925533710L;
+	private static final long serialVersionUID = -605288573925533710L;
 
-    /**
-     * @param content
-     */
-    public UndecoratedDialog(C content) {
-	super(content);
-    }
+	/**
+	 * @param content
+	 */
+	public UndecoratedDialog(C content) {
+		super(content);
+	}
 
-    /*
-     * @see com.linkare.rec.impl.newface.component.DefaultDialog#initComponents()
-     */
-    @Override
-    protected void init() {
-	setUndecorated(true);
-	super.init();
-    }
-    
-    /**
-     * Shows an unexpected error friendly dialog. (Modal)
-     * 
-     * @param error The unexpected exception error.
-     * 
-     * @return The <code>UnexpectedErrorPane</code> result.
-     * @see UnexpectedErrorPane
-     */
-    public static int showUnexpectedErrorPane(Exception error) {
-	UndecoratedDialog<UnexpectedErrorPane> dialog = 
-	    new UndecoratedDialog<UnexpectedErrorPane>(new UnexpectedErrorPane(error));
-	
-	dialog.setModal(true);
-	dialog.setVisible(true);
-	return dialog.getContent().getActionValue();
-    }
+	public UndecoratedDialog(C content, Component container) {
+		super(content, container);
+	}
+
+	@Override
+	protected void init() {
+		setUndecorated(true);
+		super.init();
+	}
+
 }

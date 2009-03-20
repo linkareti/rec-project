@@ -8,23 +8,24 @@
 package com.linkare.rec.impl.newface.component;
 
 /**
+ * The special LAF properties bridge. Use this holder to define special
+ * resources provided on the default ReC Flat Look and Feel.
  * 
  * @author Henrique Fernandes
  */
 public enum SpecialLAFProperties {
-    
-    ENABLED_FOREGROUND_ON_DARK("enabledForegroundOnDark"),
-    BACKGROUND_LIGHTCOLOR("Background.lightColor"),
-    BACKGROUND_DARKCOLOR("Background.darkColor"),
-    ;
 
-    private String name;
+	ENABLED_FOREGROUND_ON_DARK("enabledForegroundOnDark"), 
+	BACKGROUND_LIGHTCOLOR("Background.lightColor"), 
+	BACKGROUND_DARKCOLOR("Background.darkColor");
 
-    SpecialLAFProperties(String name) {
-	this.name = name;
-    }
+	private String name;
 
-    public String getName() {
-	return name;
-    }
+	SpecialLAFProperties(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
 }

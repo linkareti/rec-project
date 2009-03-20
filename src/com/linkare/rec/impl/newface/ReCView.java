@@ -8,30 +8,81 @@
 package com.linkare.rec.impl.newface;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
-import com.linkare.rec.impl.newface.newconfig.ReCFaceConfig;
+import com.linkare.rec.impl.newface.component.GlassPane;
+import com.linkare.rec.impl.newface.component.LoginBox;
+import com.linkare.rec.impl.newface.component.MessageBox;
+import com.linkare.rec.impl.newface.component.UndecoratedDialog;
+import com.linkare.rec.impl.newface.component.GlassPane.CatchEvents;
+import com.linkare.rec.impl.newface.config.ReCFaceConfig;
+
 
 /**
  * The entry Frame to the ReC Application.
  * 
  * @author Henrique Fenandes
  */
-public class ReCView extends javax.swing.JFrame {
+public class ReCView extends javax.swing.JFrame implements ActionListener {
 
     private static final long serialVersionUID = -8746255689938838099L;
     
+    @SuppressWarnings("unused")
+	private static final Logger log = Logger.getLogger(ReCView.class.getName());
+    
+    /**
+	 * The SHOW_LOGIN_BOX action identifier.
+	 */
+	public static final String ACTION_SHOW_LOGIN_BOX = ReCView.class.getSimpleName() + "_ACTION_SHOW_LOGIN_BOX";
+    
+    /**
+     * The ReC configuration.
+     */
     private ReCFaceConfig faceConfig;
+
+    /**
+     * The glass pane.
+     */
+    private static final GlassPane GLASS_PANE = new GlassPane(CatchEvents.ALL);
+    
+    /**
+     * The LoginBox
+     */
+    private UndecoratedDialog<LoginBox> loginDialog;
+    
+    /**
+     * The messagebox
+     */
+    private UndecoratedDialog<MessageBox> messageBox;
 	
     /** Creates new form ReCFrame */
     public ReCView(ReCFaceConfig faceConfig) {
     	this.faceConfig = faceConfig;
     	
         initComponents();
-
-        setPreferredSize(new Dimension(faceConfig.getAppPreferredWidth(), faceConfig.getAppPreferredHeight()));
-        pack();
-        setLocationRelativeTo(null);
+        customInit();
     }
+
+	/**
+	 * @param faceConfig
+	 */
+	private void customInit() {
+		
+		// LoginBox Dialog
+		loginDialog = new UndecoratedDialog<LoginBox>(new LoginBox(), this);
+		loginDialog.getContent().addActionListener(this);
+		
+		// MessageBox Dialog
+		messageBox = new UndecoratedDialog<MessageBox>(new MessageBox(), this);
+		
+		// ReCView (This Frame)
+		setGlassPane(GLASS_PANE);
+		setPreferredSize(new Dimension(faceConfig.getAppPreferredWidth(), faceConfig.getAppPreferredHeight()));
+		pack();
+		setLocationRelativeTo(null);
+	}
 
     /**
      * @return the faceConfig
@@ -39,10 +90,27 @@ public class ReCView extends javax.swing.JFrame {
     public ReCFaceConfig getFaceConfig() {
         return faceConfig;
     }
-
     
-    
-
+    /*
+     * Actions Handler 
+     */
+    @Override
+	public void actionPerformed(ActionEvent evt) {
+    	
+    	if (ReCView.ACTION_SHOW_LOGIN_BOX.equals(evt.getActionCommand())) {
+    		getGlassPane().setVisible(true);
+        	loginDialog.setVisible(true);
+        	
+    	} else if (LoginBox.ACTION_DO_LOGIN.equals(evt.getActionCommand())) {
+			// TODO login
+			
+			//getGlassPane().setVisible(visible);
+	    	loginDialog.setVisible(false);
+	    	
+	    	messageBox.getContent().setMessage("A ligar ao ELab...");
+	    	messageBox.setVisible(true);
+		}
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -69,7 +137,7 @@ public class ReCView extends javax.swing.JFrame {
         toolBar.add(leftSpace);
 
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/on.gif"))); // NOI18N
-        btnLogin.setFocusable(false);
+        btnLogin.setActionCommand(ACTION_SHOW_LOGIN_BOX);
         btnLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolBar.add(btnLogin);

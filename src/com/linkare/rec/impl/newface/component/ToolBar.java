@@ -15,19 +15,14 @@ import javax.swing.JToolBar;
  */
 public class ToolBar extends JToolBar {
 
-    private static final long serialVersionUID = -563387474458273040L;
-    
-    private static final String TOOLBAR_NAME = "ReCToolBar";
+	private static final long serialVersionUID = -563387474458273040L;
 
-    public ToolBar() {
-	super(TOOLBAR_NAME, JToolBar.HORIZONTAL);
-	setFloatable(false);
-	setRollover(true);
+	private static final String TOOLBAR_NAME = "ReCToolBar";
 
-	initComponents();
-    }
+	public ToolBar() {
+		super(TOOLBAR_NAME, JToolBar.HORIZONTAL);
+		setFloatable(false);
+		setRollover(true);
+	}
 
-    private void initComponents() {
-	//add(new ToolBarButton());
-    }
 }
