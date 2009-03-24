@@ -20,6 +20,10 @@
 	<classpathentry kind="lib" path="lib/JCFN.jar"/>
 	<classpathentry kind="lib" path="lib/jsr80.jar"/>
 	<classpathentry kind="lib" path="lib/jsr80_ri.jar"/>
+	<classpathentry kind="lib" path="lib/test/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="lib/test/commons-beanutils-core-1.8.0.jar"/>
+	<classpathentry kind="lib" path="lib/test/commons-logging.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

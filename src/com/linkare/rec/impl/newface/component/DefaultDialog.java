@@ -8,6 +8,8 @@
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
 import javax.swing.JDialog;
@@ -69,9 +71,13 @@ public class DefaultDialog<C extends AbstractContentPane> extends JDialog {
 	 * @see UnexpectedErrorPane
 	 */
 	public static String showUnexpectedErrorPane(Exception error) {
-		DefaultDialog<UnexpectedErrorPane> dialog = new DefaultDialog<UnexpectedErrorPane>(new UnexpectedErrorPane(
+		final DefaultDialog<UnexpectedErrorPane> dialog = new DefaultDialog<UnexpectedErrorPane>(new UnexpectedErrorPane(
 				error));
-
+		dialog.getContent().addActionListener(new ActionListener(){
+			@Override public void actionPerformed(ActionEvent e) {
+				dialog.setVisible(false); // for any action
+			}
+		});
 		dialog.setVisible(true);
 		return dialog.getContent().getActionValue();
 	}

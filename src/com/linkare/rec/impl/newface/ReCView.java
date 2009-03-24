@@ -77,6 +77,9 @@ public class ReCView extends javax.swing.JFrame implements ActionListener {
 		// MessageBox Dialog
 		messageBox = new UndecoratedDialog<MessageBox>(new MessageBox(), this);
 		
+		// Toolbar
+		btnLogin.addActionListener(this);
+		
 		// ReCView (This Frame)
 		setGlassPane(GLASS_PANE);
 		setPreferredSize(new Dimension(faceConfig.getAppPreferredWidth(), faceConfig.getAppPreferredHeight()));
@@ -96,12 +99,13 @@ public class ReCView extends javax.swing.JFrame implements ActionListener {
      */
     @Override
 	public void actionPerformed(ActionEvent evt) {
+    	String action = evt.getActionCommand();
     	
-    	if (ReCView.ACTION_SHOW_LOGIN_BOX.equals(evt.getActionCommand())) {
+    	if (ReCView.ACTION_SHOW_LOGIN_BOX.equals(action)) {
     		getGlassPane().setVisible(true);
         	loginDialog.setVisible(true);
         	
-    	} else if (LoginBox.ACTION_DO_LOGIN.equals(evt.getActionCommand())) {
+    	} else if (LoginBox.ACTION_DO_LOGIN.equals(action)) {
 			// TODO login
 			
 			//getGlassPane().setVisible(visible);

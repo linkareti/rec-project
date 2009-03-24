@@ -7,12 +7,17 @@
 
 package com.linkare.rec.impl.newface;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.xml.bind.JAXBException;
 
 import com.linkare.rec.impl.exceptions.ExceptionCode;
 import com.linkare.rec.impl.exceptions.ReCConfigurationException;
@@ -20,6 +25,8 @@ import com.linkare.rec.impl.newface.component.DefaultDialog;
 import com.linkare.rec.impl.newface.config.ReCFaceConfig;
 import com.linkare.rec.impl.newface.laf.flat.ElabTheme;
 import com.linkare.rec.impl.newface.laf.flat.FlatLookAndFeel;
+import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * Main entry for ReC Application.
@@ -34,7 +41,9 @@ class ReCLauncher {
 
 	protected static final int STATUS_INVALID_CONFIGURATION = 10;
 
-	protected static final int STATUS_INVALID_LAF = 11;
+	protected static final int STATUS_INVALID_LAF = 20;
+
+	protected static final int STATUS_INVALID_REC_FACE_CONFIG = 30;
 
 	/**
 	 * Holder for the ReC System properties. Maps the property name and the
@@ -44,7 +53,8 @@ class ReCLauncher {
 	 */
 	public enum ReCSystemProperty {
 
-		RECBASEUICONFIG("ReCBaseUIConfig", true), 
+		RECBASEUICONFIG("ReCBaseUIConfig", true),
+		RECFACECONFIG("ReCFaceConfig", true), 
 		REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true), 
 		REC_MULTICASTCONTROLLER_INITREF("ReC.MultiCastController.InitRef", true),
 		OPENORB_CONFIG("openorb.config", true), 
@@ -67,7 +77,11 @@ class ReCLauncher {
 		public boolean isRequired() {
 			return required;
 		}
+
 	}
+
+	/** Holds the ReC Configuration */
+	protected ReCFaceConfig reCFaceConfig;
 
 	/**
 	 * Starts the ReC application with the default LAF.
@@ -85,26 +99,15 @@ class ReCLauncher {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				// TODO Launch Splash
-				log.warning("TODO - Launch Splash Screen Here");
-
-				try { // to Check System Properties Availability
-					checkSystemProperties();
-
-				} catch (ReCConfigurationException e) {
-					// Show a friendly message and exit
-					DefaultDialog.showUnexpectedErrorPane(e);
-					System.exit(STATUS_INVALID_CONFIGURATION);
-				}
-
-				// Init System Properties
-				// (Web Start properties are set on jnlp descriptor)
-				// TODO check anti-aliasing on windows
-				System.setProperty("swing.aatext", "true");
-				// Anti-aliasing for mac
-				System.setProperty("apple.awt.textantialiasing", "on");
-
+				
 				try { // to Set Look and Feel
+					
+					// Init System Properties
+					// (Web Start properties are set on jnlp descriptor)
+					// TODO check anti-aliasing on windows
+					System.setProperty("swing.aatext", "true");
+					// Anti-aliasing for mac
+					System.setProperty("apple.awt.textantialiasing", "on");
 
 					if (lafClassName != null) {
 						UIManager.setLookAndFeel(lafClassName);
@@ -116,10 +119,37 @@ class ReCLauncher {
 					DefaultDialog.showUnexpectedErrorPane(e);
 					System.exit(STATUS_INVALID_LAF);
 				}
+				log.info("Look and Feel is correctly installed.");
+				
+				// TODO Launch Splash
+				log.warning("TODO - Launch Splash Screen Here");
 
-				// TODO Parse xml config
+				try { // to Check System Properties Availability
+					checkSystemProperties();
+
+				} catch (ReCConfigurationException e) {
+					// Show a friendly message and exit
+					DefaultDialog.showUnexpectedErrorPane(e);
+					System.exit(STATUS_INVALID_CONFIGURATION);
+				}
+				log.info("ReC System Properties are ok.");
+
+				try { // to parse xml configuration
+					String configLocation = System.getProperty(ReCSystemProperty.RECFACECONFIG.getName());
+					if (log.isLoggable(Level.FINE)) {
+						log.fine("Unmarshalling ReCFaceConfig from input stream location = " + configLocation);
+					}
+					InputStream is = ReCProtocols.getURL(configLocation).openConnection().getInputStream();
+					reCFaceConfig = ReCFaceConfig.unmarshall(is);
+					
+				} catch (Exception e) {
+					DefaultDialog.showUnexpectedErrorPane(e);
+					System.exit(STATUS_INVALID_REC_FACE_CONFIG);
+				}
+				log.info("ReCFaceConfig is ok.");
 
 				// Run User Interface
+				log.info("Starting user interface...");
 				runUserInterface();
 
 			}
@@ -127,10 +157,10 @@ class ReCLauncher {
 	}
 
 	/**
-	 * @return The user interface launch.
+	 * The user interface launch.
 	 */
 	protected void runUserInterface() {
-		new ReCView(new ReCFaceConfig()).setVisible(true);
+		new ReCView(reCFaceConfig).setVisible(true);
 	}
 
 	/**

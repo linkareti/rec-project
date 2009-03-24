@@ -1,434 +1,453 @@
 package com.linkare.rec.impl.newface.config;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //TODO Equals, Hashcode and Check PropertyChangeListener add on indexed properties
 
 @XmlRootElement
 public class ReCFaceConfig extends AbstractConfigBean {
+	
+	@SuppressWarnings("unused")
+	private static final Logger log = Logger.getLogger(ReCFaceConfig.class.getName());
 
-  private boolean autoConnectLab = false;
-  
-  private boolean showVideoFrame = false;
-  
-  private boolean enableVideoFrame = true;
-  
-  private boolean enableLoginPassword = false;
-  
-  private boolean showChatFrame = false;
-  
-  private boolean enableChatFrame = true;
-  
-  private boolean showUserList = false;
-  
-  private boolean enableUsersList = true;
-  
-  private long usersListRefreshRateMs = 2000;
-  
-  private boolean enterApparatusChatRoom = false;
-  
-  private String aboutPageLocationBundleKey = "";
-  
-  private String splashIconLocationBundleKey = "";
-  
-  private String iconLocationBundleKey = "";
-  
-  private String desktopLocationBundleKey = null;
-  
-  private String frameTitleBundleKey;
-  
-  private String iconSponsorLocationBundleKey = "";
-  
-  private String helpPageLocationBundleKey = "";
-  
-  private List<Lab> labList = new ArrayList<Lab>();
-  
-  private List<WebResource> webResourceList = new ArrayList<WebResource>();
+	private boolean autoConnectLab = false;
 
-  private int appPreferredWidth = 848;
+	private boolean showVideoFrame = false;
 
-  private int appPreferredHeight = 478;
+	private boolean enableVideoFrame = true;
 
-  /**
-   * Creates a new <code>ReCConfig</code>.
-   */
-  public ReCFaceConfig() {  
-  }
-  
-  //---------------------------------------------------------------------------
-  // Getters
+	private boolean enableLoginPassword = false;
 
-  /**
-   * @return the autoConnectLab
-   */
-  @XmlAttribute
-  public boolean isAutoConnectLab() {
-    return autoConnectLab;
-  }
+	private boolean showChatFrame = false;
 
-  /**
-   * @return the showVideoFrame
-   */
-  @XmlAttribute
-  public boolean isShowVideoFrame() {
-    return showVideoFrame;
-  }
+	private boolean enableChatFrame = true;
 
-  /**
-   * @return the enableVideoFrame
-   */
-  @XmlAttribute
-  public boolean isEnableVideoFrame() {
-    return enableVideoFrame;
-  }
+	private boolean showUserList = false;
 
-  /**
-   * @return the enableLoginPassword
-   */
-  @XmlAttribute
-  public boolean isEnableLoginPassword() {
-    return enableLoginPassword;
-  }
+	private boolean enableUsersList = true;
 
-  /**
-   * @return the showChatFrame
-   */
-  @XmlAttribute
-  public boolean isShowChatFrame() {
-    return showChatFrame;
-  }
+	private long usersListRefreshRateMs = 2000;
 
-  /**
-   * @return the enableChatFrame
-   */
-  @XmlAttribute
-  public boolean isEnableChatFrame() {
-    return enableChatFrame;
-  }
+	private boolean enterApparatusChatRoom = false;
 
-  /**
-   * @return the showUserList
-   */
-  @XmlAttribute
-  public boolean isShowUserList() {
-    return showUserList;
-  }
+	private String aboutPageLocationBundleKey = "";
 
-  /**
-   * @return the enableUsersList
-   */
-  @XmlAttribute
-  public boolean isEnableUsersList() {
-    return enableUsersList;
-  }
+	private String splashIconLocationBundleKey = "";
 
-  /**
-   * @return the usersListRefreshRateMs
-   */
-  @XmlAttribute
-  public long getUsersListRefreshRateMs() {
-    return usersListRefreshRateMs;
-  }
+	private String iconLocationBundleKey = "";
 
-  /**
-   * @return the enterApparatusChatRoom
-   */
-  @XmlAttribute
-  public boolean isEnterApparatusChatRoom() {
-    return enterApparatusChatRoom;
-  }
+	private String desktopLocationBundleKey = null;
 
-  /**
-   * @return the aboutPageLocationBundleKey
-   */
-  @XmlAttribute
-  public String getAboutPageLocationBundleKey() {
-    return aboutPageLocationBundleKey;
-  }
+	private String frameTitleBundleKey;
 
-  /**
-   * @return the splashIconLocationBundleKey
-   */
-  @XmlAttribute
-  public String getSplashIconLocationBundleKey() {
-    return splashIconLocationBundleKey;
-  }
+	private String iconSponsorLocationBundleKey = "";
 
-  /**
-   * @return the iconLocationBundleKey
-   */
-  @XmlAttribute
-  public String getIconLocationBundleKey() {
-    return iconLocationBundleKey;
-  }
+	private String helpPageLocationBundleKey = "";
 
-  /**
-   * @return the desktopLocationBundleKey
-   */
-  @XmlAttribute
-  public String getDesktopLocationBundleKey() {
-    return desktopLocationBundleKey;
-  }
+	private List<Lab> labList = new ArrayList<Lab>();
 
-  /**
-   * @return the frameTitleBundleKey
-   */
-  @XmlAttribute
-  public String getFrameTitleBundleKey() {
-    return frameTitleBundleKey;
-  }
+	private List<WebResource> webResourceList = new ArrayList<WebResource>();
 
-  /**
-   * @return the iconSponsorLocationBundleKey
-   */
-  @XmlAttribute
-  public String getIconSponsorLocationBundleKey() {
-    return iconSponsorLocationBundleKey;
-  }
+	private int appPreferredWidth = 848;
 
-  /**
-   * @return the helpPageLocationBundleKey
-   */
-  @XmlAttribute
-  public String getHelpPageLocationBundleKey() {
-    return helpPageLocationBundleKey;
-  }
+	private int appPreferredHeight = 478;
 
-  /**
-   * @return the lab
-   */
-  public List<Lab> getLab() {
-    return labList;
-  }
+	/**
+	 * Creates a new <code>ReCConfig</code>. Default Constructor.
+	 */
+	public ReCFaceConfig() {
+	}
+	
+	/**
+	 * Marshalls the current configuration to the OutputStream.
+	 * @param os OutputStream
+	 * @throws JAXBException If a JAXB error occours.
+	 */
+	public void marshall(OutputStream os) throws JAXBException {
+		JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
 
-    /**
-     * @return the webResource
-     */
-    public List<WebResource> getWebResource() {
-	return webResourceList;
-    }
+		Marshaller m = jc.createMarshaller();
+		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		m.marshal(this, os);
+	}
+	
+	/**
+	 * Unmarshalls a new <code>ReCConfig</code> from the input stream. 
+	 * @param is The source input stream
+	 * @throws JAXBException If a JAXB error occours.
+	 */
+	public static ReCFaceConfig unmarshall(InputStream is) throws JAXBException {
+		JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
+		Unmarshaller un = jc.createUnmarshaller();
+		return (ReCFaceConfig) un.unmarshal(is);
+	}
 
-    /**
-     * @return the appPreferredWidth
-     */
-    public int getAppPreferredWidth() {
-	return appPreferredWidth;
-    }
+	// -------------------------------------------------------------------------
+	// Getters
 
-    /**
-     * @return the appPreferredHeight
-     */
-    public int getAppPreferredHeight() {
-	return appPreferredHeight;
-    }
+	/**
+	 * @return the autoConnectLab
+	 */
+	@XmlAttribute
+	public boolean isAutoConnectLab() {
+		return autoConnectLab;
+	}
 
-    // ---------------------------------------------------------------------------
-    // Setters
+	/**
+	 * @return the showVideoFrame
+	 */
+	@XmlAttribute
+	public boolean isShowVideoFrame() {
+		return showVideoFrame;
+	}
 
-    /**
-     * @param appPreferredWidth
-     *            the appPreferredWidth to set
-     */
-    public void setAppPreferredWidth(int appPreferredWidth) {
-	this.appPreferredWidth = appPreferredWidth;
-    }
+	/**
+	 * @return the enableVideoFrame
+	 */
+	@XmlAttribute
+	public boolean isEnableVideoFrame() {
+		return enableVideoFrame;
+	}
 
-    /**
-     * @param appPreferredHeight
-     *            the appPreferredHeight to set
-     */
-    public void setAppPreferredHeight(int appPreferredHeight) {
-	this.appPreferredHeight = appPreferredHeight;
-    }
+	/**
+	 * @return the enableLoginPassword
+	 */
+	@XmlAttribute
+	public boolean isEnableLoginPassword() {
+		return enableLoginPassword;
+	}
 
-/**
-   * @param autoConnectLab the autoConnectLab to set
-   */
-  public void setAutoConnectLab(boolean autoConnectLab) {
-    changeSupport.firePropertyChange("autoConnectLab", this.autoConnectLab,
-        this.autoConnectLab = autoConnectLab);
-  }
+	/**
+	 * @return the showChatFrame
+	 */
+	@XmlAttribute
+	public boolean isShowChatFrame() {
+		return showChatFrame;
+	}
 
-  /**
-   * @param showVideoFrame the showVideoFrame to set
-   */
-  public void setShowVideoFrame(boolean showVideoFrame) {
-    changeSupport.firePropertyChange("showVideoFrame", this.showVideoFrame,
-        this.showVideoFrame = showVideoFrame);
-  }
+	/**
+	 * @return the enableChatFrame
+	 */
+	@XmlAttribute
+	public boolean isEnableChatFrame() {
+		return enableChatFrame;
+	}
 
-  /**
-   * @param enableVideoFrame the enableVideoFrame to set
-   */
-  public void setEnableVideoFrame(boolean enableVideoFrame) {
-    changeSupport.firePropertyChange("enableVideoFrame", this.enableVideoFrame,
-        this.enableVideoFrame = enableVideoFrame);
-  }
+	/**
+	 * @return the showUserList
+	 */
+	@XmlAttribute
+	public boolean isShowUserList() {
+		return showUserList;
+	}
 
-  /**
-   * @param enableLoginPassword the enableLoginPassword to set
-   */
-  public void setEnableLoginPassword(boolean enableLoginPassword) {
-    changeSupport.firePropertyChange("enableLoginPassword",
-        this.enableLoginPassword,
-        this.enableLoginPassword = enableLoginPassword);
-  }
+	/**
+	 * @return the enableUsersList
+	 */
+	@XmlAttribute
+	public boolean isEnableUsersList() {
+		return enableUsersList;
+	}
 
-  /**
-   * @param showChatFrame the showChatFrame to set
-   */
-  public void setShowChatFrame(boolean showChatFrame) {
-    changeSupport.firePropertyChange("showChatFrame", this.showChatFrame,
-        this.showChatFrame = showChatFrame);
-  }
+	/**
+	 * @return the usersListRefreshRateMs
+	 */
+	@XmlAttribute
+	public long getUsersListRefreshRateMs() {
+		return usersListRefreshRateMs;
+	}
 
-  /**
-   * @param enableChatFrame the enableChatFrame to set
-   */
-  public void setEnableChatFrame(boolean enableChatFrame) {
-    changeSupport.firePropertyChange("enableChatFrame", this.enableChatFrame,
-        this.enableChatFrame = enableChatFrame);
-  }
+	/**
+	 * @return the enterApparatusChatRoom
+	 */
+	@XmlAttribute
+	public boolean isEnterApparatusChatRoom() {
+		return enterApparatusChatRoom;
+	}
 
-  /**
-   * @param showUserList the showUserList to set
-   */
-  public void setShowUserList(boolean showUserList) {
-    changeSupport.firePropertyChange("showUserList", this.showUserList,
-        this.showUserList = showUserList);
-  }
+	/**
+	 * @return the aboutPageLocationBundleKey
+	 */
+	@XmlAttribute
+	public String getAboutPageLocationBundleKey() {
+		return aboutPageLocationBundleKey;
+	}
 
-  /**
-   * @param enableUsersList the enableUsersList to set
-   */
-  public void setEnableUsersList(boolean enableUsersList) {
-    changeSupport.firePropertyChange("enableUsersList", this.enableUsersList,
-        this.enableUsersList = enableUsersList);
-  }
+	/**
+	 * @return the splashIconLocationBundleKey
+	 */
+	@XmlAttribute
+	public String getSplashIconLocationBundleKey() {
+		return splashIconLocationBundleKey;
+	}
 
-  /**
-   * @param usersListRefreshRateMs the usersListRefreshRateMs to set
-   */
-  public void setUsersListRefreshRateMs(long usersListRefreshRateMs) {
-    changeSupport.firePropertyChange("usersListRefreshRateMs",
-        this.usersListRefreshRateMs,
-        this.usersListRefreshRateMs = usersListRefreshRateMs);
-  }
+	/**
+	 * @return the iconLocationBundleKey
+	 */
+	@XmlAttribute
+	public String getIconLocationBundleKey() {
+		return iconLocationBundleKey;
+	}
 
-  /**
-   * @param enterApparatusChatRoom the enterApparatusChatRoom to set
-   */
-  public void setEnterApparatusChatRoom(boolean enterApparatusChatRoom) {
-    changeSupport.firePropertyChange("enterApparatusChatRoom",
-        this.enterApparatusChatRoom,
-        this.enterApparatusChatRoom = enterApparatusChatRoom);
-  }
+	/**
+	 * @return the desktopLocationBundleKey
+	 */
+	@XmlAttribute
+	public String getDesktopLocationBundleKey() {
+		return desktopLocationBundleKey;
+	}
 
-  /**
-   * @param aboutPageLocationBundleKey the aboutPageLocationBundleKey to set
-   */
-  public void setAboutPageLocationBundleKey(String aboutPageLocationBundleKey) {
-    if (this.aboutPageLocationBundleKey == null
-        && aboutPageLocationBundleKey == null) {
-      return; // to avoid unwanted events to trigger
-    }
-    changeSupport.firePropertyChange("aboutPageLocationBundleKey",
-        this.aboutPageLocationBundleKey,
-        this.aboutPageLocationBundleKey = aboutPageLocationBundleKey);
-  }
+	/**
+	 * @return the frameTitleBundleKey
+	 */
+	@XmlAttribute
+	public String getFrameTitleBundleKey() {
+		return frameTitleBundleKey;
+	}
 
-  /**
-   * @param splashIconLocationBundleKey the splashIconLocationBundleKey to set
-   */
-  public void setSplashIconLocationBundleKey(String splashIconLocationBundleKey) {
-    if (this.splashIconLocationBundleKey == null
-        && splashIconLocationBundleKey == null) {
-      return; // to avoid unwanted events to trigger
-    }
-    changeSupport.firePropertyChange("splashIconLocationBundleKey",
-        this.splashIconLocationBundleKey,
-        this.splashIconLocationBundleKey = splashIconLocationBundleKey);
-  }
+	/**
+	 * @return the iconSponsorLocationBundleKey
+	 */
+	@XmlAttribute
+	public String getIconSponsorLocationBundleKey() {
+		return iconSponsorLocationBundleKey;
+	}
 
-  /**
-   * @param iconLocationBundleKey the iconLocationBundleKey to set
-   */
-  public void setIconLocationBundleKey(String iconLocationBundleKey) {
-    if (this.iconLocationBundleKey == null && iconLocationBundleKey == null) {
-      return; // to avoid unwanted events to trigger
-    }
-    changeSupport.firePropertyChange("iconLocationBundleKey",
-        this.iconLocationBundleKey,
-        this.iconLocationBundleKey = iconLocationBundleKey);
-  }
+	/**
+	 * @return the helpPageLocationBundleKey
+	 */
+	@XmlAttribute
+	public String getHelpPageLocationBundleKey() {
+		return helpPageLocationBundleKey;
+	}
 
-  /**
-   * @param desktopLocationBundleKey the desktopLocationBundleKey to set
-   */
-  public void setDesktopLocationBundleKey(String desktopLocationBundleKey) {
-    if (this.desktopLocationBundleKey == null
-        && desktopLocationBundleKey == null) {
-      return; // to avoid unwanted events to trigger
-    }
-    changeSupport.firePropertyChange("desktopLocationBundleKey",
-        this.desktopLocationBundleKey,
-        this.desktopLocationBundleKey = desktopLocationBundleKey);
-  }
+	/**
+	 * @return the lab
+	 */
+	@XmlElement
+	public List<Lab> getLab() {
+		return labList;
+	}
 
-  /**
-   * @param frameTitleBundleKey the frameTitleBundleKey to set
-   */
-  public void setFrameTitleBundleKey(String frameTitleBundleKey) {
-    if (this.frameTitleBundleKey == null && frameTitleBundleKey == null) {
-      return; // to avoid unwanted events to trigger
-    }
-    changeSupport.firePropertyChange("frameTitleBundleKey",
-        this.frameTitleBundleKey,
-        this.frameTitleBundleKey = frameTitleBundleKey);
-  }
+	/**
+	 * @return the webResource
+	 */
+	@XmlElement
+	public List<WebResource> getWebResource() {
+		return webResourceList;
+	}
 
-  /**
-   * @param iconSponsorLocationBundleKey the iconSponsorLocationBundleKey to set
-   */
-  public void setIconSponsorLocationBundleKey(String iconSponsorLocationBundleKey) {
-    if (this.iconSponsorLocationBundleKey == null
-        && iconSponsorLocationBundleKey == null) {
-      return; // to avoid unwanted events to trigger
-    }
-    changeSupport.firePropertyChange("iconSponsorLocationBundleKey",
-        this.iconSponsorLocationBundleKey,
-        this.iconSponsorLocationBundleKey = iconSponsorLocationBundleKey);
-  }
+	/**
+	 * @return the appPreferredWidth
+	 */
+	@XmlAttribute
+	public int getAppPreferredWidth() {
+		return appPreferredWidth;
+	}
 
-  /**
-   * @param helpPageLocationBundleKey the helpPageLocationBundleKey to set
-   */
-  public void setHelpPageLocationBundleKey(String helpPageLocationBundleKey) {
-    if (this.helpPageLocationBundleKey == null
-        && helpPageLocationBundleKey == null) {
-      return; // to avoid unwanted events to trigger
-    }
-    changeSupport.firePropertyChange("helpPageLocationBundleKey",
-        this.helpPageLocationBundleKey,
-        this.helpPageLocationBundleKey = helpPageLocationBundleKey);
-  }
+	/**
+	 * @return the appPreferredHeight
+	 */
+	@XmlAttribute
+	public int getAppPreferredHeight() {
+		return appPreferredHeight;
+	}
 
-  /**
-   * @param lab the lab to set
-   */
-  public void setLab(List<Lab> lab) {
-    this.labList = lab;
-  }
+	// -------------------------------------------------------------------------
+	// Setters
 
-  /**
-   * @param webResource the webResource to set
-   */
-  public void setWebResource(List<WebResource> webResource) {
-    this.webResourceList = webResource;
-  }
-  
+	/**
+	 * @param appPreferredWidth
+	 *            the appPreferredWidth to set
+	 */
+	public void setAppPreferredWidth(int appPreferredWidth) {
+		this.appPreferredWidth = appPreferredWidth;
+	}
+
+	/**
+	 * @param appPreferredHeight
+	 *            the appPreferredHeight to set
+	 */
+	public void setAppPreferredHeight(int appPreferredHeight) {
+		this.appPreferredHeight = appPreferredHeight;
+	}
+
+	/**
+	 * @param autoConnectLab
+	 *            the autoConnectLab to set
+	 */
+	public void setAutoConnectLab(boolean autoConnectLab) {
+		changeSupport.firePropertyChange("autoConnectLab", this.autoConnectLab, this.autoConnectLab = autoConnectLab);
+	}
+
+	/**
+	 * @param showVideoFrame
+	 *            the showVideoFrame to set
+	 */
+	public void setShowVideoFrame(boolean showVideoFrame) {
+		changeSupport.firePropertyChange("showVideoFrame", this.showVideoFrame, this.showVideoFrame = showVideoFrame);
+	}
+
+	/**
+	 * @param enableVideoFrame
+	 *            the enableVideoFrame to set
+	 */
+	public void setEnableVideoFrame(boolean enableVideoFrame) {
+		changeSupport.firePropertyChange("enableVideoFrame", this.enableVideoFrame,
+				this.enableVideoFrame = enableVideoFrame);
+	}
+
+	/**
+	 * @param enableLoginPassword
+	 *            the enableLoginPassword to set
+	 */
+	public void setEnableLoginPassword(boolean enableLoginPassword) {
+		changeSupport.firePropertyChange("enableLoginPassword", this.enableLoginPassword,
+				this.enableLoginPassword = enableLoginPassword);
+	}
+
+	/**
+	 * @param showChatFrame
+	 *            the showChatFrame to set
+	 */
+	public void setShowChatFrame(boolean showChatFrame) {
+		changeSupport.firePropertyChange("showChatFrame", this.showChatFrame, this.showChatFrame = showChatFrame);
+	}
+
+	/**
+	 * @param enableChatFrame
+	 *            the enableChatFrame to set
+	 */
+	public void setEnableChatFrame(boolean enableChatFrame) {
+		changeSupport.firePropertyChange("enableChatFrame", this.enableChatFrame,
+				this.enableChatFrame = enableChatFrame);
+	}
+
+	/**
+	 * @param showUserList
+	 *            the showUserList to set
+	 */
+	public void setShowUserList(boolean showUserList) {
+		changeSupport.firePropertyChange("showUserList", this.showUserList, this.showUserList = showUserList);
+	}
+
+	/**
+	 * @param enableUsersList
+	 *            the enableUsersList to set
+	 */
+	public void setEnableUsersList(boolean enableUsersList) {
+		changeSupport.firePropertyChange("enableUsersList", this.enableUsersList,
+				this.enableUsersList = enableUsersList);
+	}
+
+	/**
+	 * @param usersListRefreshRateMs
+	 *            the usersListRefreshRateMs to set
+	 */
+	public void setUsersListRefreshRateMs(long usersListRefreshRateMs) {
+		changeSupport.firePropertyChange("usersListRefreshRateMs", this.usersListRefreshRateMs,
+				this.usersListRefreshRateMs = usersListRefreshRateMs);
+	}
+
+	/**
+	 * @param enterApparatusChatRoom
+	 *            the enterApparatusChatRoom to set
+	 */
+	public void setEnterApparatusChatRoom(boolean enterApparatusChatRoom) {
+		changeSupport.firePropertyChange("enterApparatusChatRoom", this.enterApparatusChatRoom,
+				this.enterApparatusChatRoom = enterApparatusChatRoom);
+	}
+
+	/**
+	 * @param aboutPageLocationBundleKey
+	 *            the aboutPageLocationBundleKey to set
+	 */
+	public void setAboutPageLocationBundleKey(String aboutPageLocationBundleKey) {
+		changeSupport.firePropertyChange("aboutPageLocationBundleKey", this.aboutPageLocationBundleKey,
+				this.aboutPageLocationBundleKey = aboutPageLocationBundleKey);
+	}
+
+	/**
+	 * @param splashIconLocationBundleKey
+	 *            the splashIconLocationBundleKey to set
+	 */
+	public void setSplashIconLocationBundleKey(String splashIconLocationBundleKey) {
+		changeSupport.firePropertyChange("splashIconLocationBundleKey", this.splashIconLocationBundleKey,
+				this.splashIconLocationBundleKey = splashIconLocationBundleKey);
+	}
+
+	/**
+	 * @param iconLocationBundleKey
+	 *            the iconLocationBundleKey to set
+	 */
+	public void setIconLocationBundleKey(String iconLocationBundleKey) {
+		changeSupport.firePropertyChange("iconLocationBundleKey", this.iconLocationBundleKey,
+				this.iconLocationBundleKey = iconLocationBundleKey);
+	}
+
+	/**
+	 * @param desktopLocationBundleKey
+	 *            the desktopLocationBundleKey to set
+	 */
+	public void setDesktopLocationBundleKey(String desktopLocationBundleKey) {
+		changeSupport.firePropertyChange("desktopLocationBundleKey", this.desktopLocationBundleKey,
+				this.desktopLocationBundleKey = desktopLocationBundleKey);
+	}
+
+	/**
+	 * @param frameTitleBundleKey
+	 *            the frameTitleBundleKey to set
+	 */
+	public void setFrameTitleBundleKey(String frameTitleBundleKey) {
+		changeSupport.firePropertyChange("frameTitleBundleKey", this.frameTitleBundleKey,
+				this.frameTitleBundleKey = frameTitleBundleKey);
+	}
+
+	/**
+	 * @param iconSponsorLocationBundleKey
+	 *            the iconSponsorLocationBundleKey to set
+	 */
+	public void setIconSponsorLocationBundleKey(String iconSponsorLocationBundleKey) {
+		changeSupport.firePropertyChange("iconSponsorLocationBundleKey", this.iconSponsorLocationBundleKey,
+				this.iconSponsorLocationBundleKey = iconSponsorLocationBundleKey);
+	}
+
+	/**
+	 * @param helpPageLocationBundleKey
+	 *            the helpPageLocationBundleKey to set
+	 */
+	public void setHelpPageLocationBundleKey(String helpPageLocationBundleKey) {
+		changeSupport.firePropertyChange("helpPageLocationBundleKey", this.helpPageLocationBundleKey,
+				this.helpPageLocationBundleKey = helpPageLocationBundleKey);
+	}
+
+	/**
+	 * @param lab
+	 *            the lab to set
+	 */
+	public void setLab(List<Lab> lab) {
+		this.labList = lab;
+	}
+
+	/**
+	 * @param webResource
+	 *            the webResource to set
+	 */
+	public void setWebResource(List<WebResource> webResource) {
+		this.webResourceList = webResource;
+	}
+	
 }

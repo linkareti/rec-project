@@ -63,7 +63,6 @@ public class MessageBox extends GradientPane {
         lblMessage = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
-        setPreferredSize(new java.awt.Dimension(360, 194));
 
         lblMessage.setText("Mensagem");
 
@@ -74,7 +73,7 @@ public class MessageBox extends GradientPane {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblMessage)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

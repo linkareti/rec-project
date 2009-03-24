@@ -8,8 +8,6 @@ public class Display extends DisplayNode {
 
     private boolean offlineCapable = false;
 
-    private boolean selected = true;
-
     private String displayStringBundleKey = "";
 
     private String iconLocationBundleKey = "";
@@ -27,15 +25,6 @@ public class Display extends DisplayNode {
     @XmlAttribute
     public boolean isOfflineCapable() {
 	return offlineCapable;
-    }
-
-    /**
-     * @return the selected
-     */
-    @Override
-    @XmlAttribute
-    public boolean isSelected() {
-	return selected;
     }
 
     /**
@@ -76,15 +65,6 @@ public class Display extends DisplayNode {
      */
     public void setOfflineCapable(boolean offlineCapable) {
 	this.offlineCapable = offlineCapable;
-    }
-
-    /**
-     * @param selected
-     *            the selected to set
-     */
-    @Override
-    public void setSelected(boolean selected) {
-	this.selected = selected;
     }
 
     /**
