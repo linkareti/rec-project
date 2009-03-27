@@ -30,9 +30,9 @@ public class GradientPane extends AbstractContentPane {
 
 	private GradientStyle style = GradientStyle.VERTICAL_LINEAR_LIGHT_TO_DARK;
 
-	private Color lightColor = UIManager.getColor(SpecialLAFProperties.BACKGROUND_LIGHTCOLOR.getName());
+	private Color lightColor = UIManager.getColor(SpecialLAFProperties.GRADIENT_LIGHTCOLOR.getName());
 
-	private Color darkColor = UIManager.getColor(SpecialLAFProperties.BACKGROUND_DARKCOLOR.getName());
+	private Color darkColor = UIManager.getColor(SpecialLAFProperties.GRADIENT_DARKCOLOR.getName());
 
 	/** Default */
 	public GradientPane() {

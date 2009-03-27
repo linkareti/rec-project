@@ -56,14 +56,18 @@ public class ReCView extends javax.swing.JFrame implements ActionListener {
      * The messagebox
      */
     private UndecoratedDialog<MessageBox> messageBox;
-	
-    /** Creates new form ReCFrame */
-    public ReCView(ReCFaceConfig faceConfig) {
-    	this.faceConfig = faceConfig;
-    	
-        initComponents();
-        customInit();
-    }
+
+	/**
+	 * Creates new form ReCFrame
+	 * 
+	 * @param faceConfig
+	 */
+	public ReCView(ReCFaceConfig faceConfig) {
+		this.faceConfig = faceConfig;
+
+		initComponents();
+		customInit();
+	}
 
 	/**
 	 * @param faceConfig

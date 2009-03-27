@@ -5,14 +5,18 @@
  * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package com.linkare.rec.impl.newface.laf.flat;
+package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
 import java.awt.Color;
 
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 import javax.swing.plaf.FontUIResource;
 
+import com.linkare.rec.impl.newface.laf.flat.FlatTheme;
+
 /**
- * 
+ * @deprecated
  * @author Henrique Fernandes
  */
 public class ElabTheme extends FlatTheme {
@@ -33,6 +37,8 @@ public class ElabTheme extends FlatTheme {
 
     // ASK The color for BACKGROUND_DARKCOLOR
     private static final Color BACKGROUND_DARKCOLOR = new Color(0x0C1011);
+
+	private static final Border TEXTFIELD_BORDER = BorderFactory.createLineBorder(Color.BLACK);
     
 //    private static final Color CONTROL_FOREGROUND = new Color(0x000000);
 //    
@@ -87,5 +93,10 @@ public class ElabTheme extends FlatTheme {
     public Color getForegroundOnDark() {
 	return WHITE;
     }
+
+	@Override
+	public Border getTextfieldBorder() {
+		return TEXTFIELD_BORDER;
+	}
 
 }

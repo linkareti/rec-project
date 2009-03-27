@@ -23,6 +23,9 @@ import javax.swing.ImageIcon;
 public class FlatLAFResources {
     
     public enum FlatLAFResourcesEnum {
+    /**
+     * @deprecated FIXME Define a gradient instead
+     */
 	FLATMENUBAR_BACKGROUD_IMG("headerBkg.jpg");
 	
 	private String name;

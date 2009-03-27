@@ -32,38 +32,40 @@ import com.linkare.rec.impl.newface.laf.flat.resources.FlatLAFResources.FlatLAFR
  */
 public class FlatMenuUI extends BasicMenuUI {
 
-    private static final BufferedImage backgroundImg = FlatLAFResources
-	    .getImage(FlatLAFResourcesEnum.FLATMENUBAR_BACKGROUD_IMG.getName());
+	private static final BufferedImage backgroundImg = FlatLAFResources
+			.getImage(FlatLAFResourcesEnum.FLATMENUBAR_BACKGROUD_IMG.getName());
 
-    public static ComponentUI createUI(JComponent x) {
-	return new FlatMenuUI();
-    }
-    
-    @Override
-    protected void paintBackground(Graphics g, JMenuItem menuItem, Color bgColor) {
-	// Simply draw the background image
-	g.drawImage(backgroundImg, 0, 0, menuItem.getWidth(), menuItem.getHeight(), 0, 0, backgroundImg.getWidth(),
-		backgroundImg.getHeight(), null);
-    }
-
-    @Override
-    protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
-	ButtonModel model = menuItem.getModel();
-	FontMetrics fm = SwingUtilities2.getFontMetrics(menuItem, g);
-	int mnemIndex = menuItem.getDisplayedMnemonicIndex();
-	
-	if(!model.isEnabled()) {
-	    super.paintText(g, menuItem, textRect, text);
-	} else {
-	    // *** paint the text normally
-	    g.setColor(UIManager.getColor("MenuItem.foreground"));
-	    
-	    if (model.isArmed()|| (menuItem instanceof JMenu && model.isSelected())) {
-		g.setColor(UIManager.getColor("MenuItem.selectionForeground")); // Uses protected field.
-	    }
-	    SwingUtilities2.drawStringUnderlineCharAt(menuItem, g,text,
-                           mnemIndex, textRect.x, textRect.y + fm.getAscent());
+	public static ComponentUI createUI(JComponent x) {
+		return new FlatMenuUI();
 	}
-    }
-    
+
+	@Override
+	protected void paintBackground(Graphics g, JMenuItem menuItem, Color bgColor) {
+		// Simply draw the background image
+		g.drawImage(backgroundImg, 0, 0, menuItem.getWidth(), menuItem.getHeight(), 0, 0, backgroundImg.getWidth(),
+				backgroundImg.getHeight(), null);
+	}
+
+	@Override
+	protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
+		ButtonModel model = menuItem.getModel();
+		FontMetrics fm = SwingUtilities2.getFontMetrics(menuItem, g);
+		int mnemIndex = menuItem.getDisplayedMnemonicIndex();
+
+		if (!model.isEnabled()) {
+			super.paintText(g, menuItem, textRect, text);
+		} else {
+			// *** paint the text normally
+			g.setColor(UIManager.getColor("MenuItem.foreground"));
+
+			if (model.isArmed() || (menuItem instanceof JMenu && model.isSelected())) {
+				g.setColor(UIManager.getColor("MenuItem.selectionForeground")); // Uses
+																				// protected
+																				// field.
+			}
+			SwingUtilities2.drawStringUnderlineCharAt(menuItem, g, text, mnemIndex, textRect.x, textRect.y
+					+ fm.getAscent());
+		}
+	}
+
 }

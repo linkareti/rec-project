@@ -18,12 +18,12 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  */
 public class FlatSplitPaneUI extends BasicSplitPaneUI {
 
-    public static ComponentUI createUI(JComponent x) {
-	return new FlatSplitPaneUI();
-    }
-    
-   @Override
-   public BasicSplitPaneDivider createDefaultDivider() {
-	return new FlatSplitPaneDivider(this);
-   }
+	public static ComponentUI createUI(JComponent x) {
+		return new FlatSplitPaneUI();
+	}
+
+	@Override
+	public BasicSplitPaneDivider createDefaultDivider() {
+		return new FlatSplitPaneDivider(this);
+	}
 }

@@ -11,11 +11,14 @@ import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.UIDefaults;
+import javax.swing.border.Border;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.FontUIResource;
 
 /**
+ * @deprecated
  * @author Henrique Fernandes
+ * @author João Florindo
  */
 public abstract class FlatTheme {
     
@@ -34,7 +37,8 @@ public abstract class FlatTheme {
 	PANEL_FONT("Panel.font"), 
 	BACKGROUND_DARKCOLOR("Background.darkColor"),
 	BACKGROUND_LIGHTCOLOR("Background.lightColor"), 
-	ENABLED_FOREGROUND_ON_DARK("enabledForegroundOnDark");
+	ENABLED_FOREGROUND_ON_DARK("enabledForegroundOnDark"), 
+	TEXTFIELD_BORDER("TextField.border");
 	
 	private String name;
 
@@ -66,14 +70,19 @@ public abstract class FlatTheme {
 
     /**
      * Add this theme's custom entries to the defaults table.
-     *
+     * 
      * @param table the defaults table, non-null
      */
     public void addCustomEntriesToTable(UIDefaults table) {
+    	
 	Object[] defaults = new Object[] {
 		// General
 		UIResourceKeyEnum.ENABLED_FOREGROUND_ON_DARK.getName(), 
 			getEnabledForegroundOnDark(),
+			
+		// Controls
+		UIResourceKeyEnum.TEXTFIELD_BORDER.getName(), 
+			getTextfieldBorder(),
 		
 		// Background Gradient
 		UIResourceKeyEnum.BACKGROUND_DARKCOLOR.getName(), 
@@ -82,7 +91,7 @@ public abstract class FlatTheme {
 			getBackgroundLightColor(),
 		
 		// MenuBar
-		"MenuBarUI", FlatMenuBarUI.class.getName(), // MetalLookAndFeel inheritance Hack
+		"MenuBarUI", FlatMenuBarUI.class.getName(), // Hack for MetalLookAndFeel inheritance
 		UIResourceKeyEnum.MENUBAR_BORDER_KEY.getName(), 
 			getEmptyBorder(),
 		UIResourceKeyEnum.MENUITEM_DISABLEDFOREGROUND_KEY.getName(),
@@ -112,7 +121,9 @@ public abstract class FlatTheme {
 	table.putDefaults(defaults);
     }
     
-    public abstract Color getControlForeground();
+    public abstract Border getTextfieldBorder();
+
+	public abstract Color getControlForeground();
     
     public abstract FontUIResource getControlBodyFont();
 

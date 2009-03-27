@@ -9,7 +9,7 @@ package com.linkare.rec.impl.newface;
 
 import java.util.logging.Logger;
 
-import javax.swing.UIManager;
+import com.linkare.rec.impl.newface.laf.flat.FlatLookAndFeel;
 
 /**
  * Base class for User Interface Tests.
@@ -22,9 +22,7 @@ public abstract class UserInterfaceTest extends ReCLauncher {
 
 	// public static final String GLOBAL_UI_TEST_LAF_CLASSNAME = UIManager.getCrossPlatformLookAndFeelClassName();
 	// public static final String GLOBAL_UI_TEST_LAF_CLASSNAME = UIManager.getSystemLookAndFeelClassName();
-	public static final String GLOBAL_UI_TEST_LAF_CLASSNAME = null; // FlatLAF
-
-	protected String lafClassName;
+	public static final String GLOBAL_UI_TEST_LAF_CLASSNAME = FlatLookAndFeel.class.getName(); // FlatLAF
 
 	public UserInterfaceTest() {
 		initLafClassName();
@@ -34,28 +32,13 @@ public abstract class UserInterfaceTest extends ReCLauncher {
 	 * Sets the Global LAF for User Interface Testing.
 	 */
 	protected void initLafClassName() {
-		lafClassName = GLOBAL_UI_TEST_LAF_CLASSNAME;
+		setLafClassName(GLOBAL_UI_TEST_LAF_CLASSNAME);
 	}
 
 	@Override
 	public void run() {
 		log.info("Running User Interface Test for " + this.getClass().getSimpleName());
-		super.run(lafClassName);
-	}
-
-	/**
-	 * @return the lafClassName
-	 */
-	public String getLafClassName() {
-		return lafClassName;
-	}
-
-	/**
-	 * @param lafClassName
-	 *            the lafClassName to set
-	 */
-	public void setLafClassName(String lafClassName) {
-		this.lafClassName = lafClassName;
+		super.run();
 	}
 
 }
