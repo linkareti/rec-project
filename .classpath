@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry excluding="old/|test/|testCorbaURL/|pt/utl/ist/elab/virtual/" kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="uiTools"/>
 	<classpathentry kind="lib" path="lib/avalon-framework.jar"/>
 	<classpathentry kind="lib" path="lib/javaws.jar"/>
 	<classpathentry kind="lib" path="lib/logkit.jar"/>
@@ -23,6 +24,7 @@
 	<classpathentry kind="lib" path="lib/test/commons-beanutils-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/test/commons-beanutils-core-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/test/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/uitools/swingx.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>

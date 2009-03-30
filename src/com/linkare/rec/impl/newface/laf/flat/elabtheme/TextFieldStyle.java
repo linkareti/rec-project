@@ -6,7 +6,10 @@
  */
 package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
+import java.awt.Font;
 import java.util.Map;
+
+import javax.swing.plaf.FontUIResource;
 
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
@@ -17,6 +20,8 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 public class TextFieldStyle extends DefaultStyle {
 	
 	public static final String ID = "TextField";
+	
+	public static final FontUIResource TEXTFIELD_FONT = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 14);
 	
 	/**
 	 * Creates the <code>TextFieldStyle</code>.
@@ -34,6 +39,7 @@ public class TextFieldStyle extends DefaultStyle {
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
 		map.put(BORDER, SOLID_THIN_BLACK_BORDER);
+		map.put(FONT, TEXTFIELD_FONT);
 	}
 
 	// -------------------------------------------------------------------------

@@ -115,6 +115,7 @@ public class LoginBox extends GradientPane {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         add(btnNext, gridBagConstraints);
 
+        passField.setEchoChar('\u2022');
         passField.setPreferredSize(new java.awt.Dimension(150, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
