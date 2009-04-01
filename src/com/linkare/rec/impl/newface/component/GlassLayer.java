@@ -1,5 +1,5 @@
 /* 
- * GlassPane.java created on Mar 12, 2009
+ * GlassLayer.java created on Mar 12, 2009
  *
  * Copyright 2009 Linkare TI. All rights reserved.
  * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -25,7 +25,7 @@ import javax.swing.JComponent;
  * 
  * @author Henrique Fernandes
  */
-public class GlassPane extends JComponent {
+public class GlassLayer extends JComponent {
 	
 	public enum CatchEvents {
 		ALL,
@@ -41,14 +41,14 @@ public class GlassPane extends JComponent {
 	/**
 	 * Creates a new GlassPane.
 	 */
-	public GlassPane() {
+	public GlassLayer() {
 		setBackground(DEFAULT_BACKGROUND);
 	}
 	
 	/**
 	 * Creates a new GlassPane.
 	 */
-	public GlassPane(CatchEvents eventsToCatch) {
+	public GlassLayer(CatchEvents eventsToCatch) {
 		setBackground(DEFAULT_BACKGROUND);
 		
 		if (CatchEvents.ALL == eventsToCatch) {
