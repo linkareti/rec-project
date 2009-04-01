@@ -89,12 +89,11 @@ public class FlatLookAndFeel extends
 
 		Object[] classDefaults = {
 
-				"MenuBarUI", FlatMenuBarUI.class.getName(),
-				"MenuUI", FlatMenuUI.class.getName(),
+				//"MenuBarUI", FlatMenuBarUI.class.getName(),
+				//"MenuUI", FlatMenuUI.class.getName(),
 				"ToolBarUI", FlatToolBarUI.class.getName(),
 				"SplitPaneUI", FlatSplitPaneUI.class.getName(),
-				"LabelUI", MetalLabelUI.class.getName(),
-				
+				//"LabelUI", MetalLabelUI.class.getName(),
 				//"PanelUI", BasicPanelUI.class.getName(),
 				//"TextFieldUI", BasicTextFieldUI.class.getName()
 		};

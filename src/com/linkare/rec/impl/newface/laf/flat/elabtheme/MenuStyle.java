@@ -6,6 +6,8 @@
  */
 package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
+import java.util.Map;
+
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -28,6 +30,17 @@ public class MenuStyle extends DefaultStyle {
 		return ID;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void updatePropertyMap(Map<String, Object> map) {
+		super.updatePropertyMap(map);
+		map.put(FOREGROUND, WHITE_DEFAULT_COLOR);
+		map.put(BORDER, EMPTY_BORDER_MARGIN_4);
+	}
+
+	
 	// -------------------------------------------------------------------------
 	// TODO Getters (Used to marshal values to xml)
 	

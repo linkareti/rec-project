@@ -38,10 +38,10 @@ public class MenuItemStyle extends DefaultStyle {
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, EMPTY_BORDER);
+		map.put(BORDER, EMPTY_BORDER_MARGIN_4);
 		map.put(DISABLED_FOREGROUND, MENUITEM_DISABLEDFOREGROUND_COLOR);
-		map.put(FOREGROUND, MENUITEM_FOREGROUND_COLOR);
-		map.put(SELECTION_FOREGROUND, WHITE_DEFAULT_COLOR);
+		//map.put(FOREGROUND, MENUITEM_FOREGROUND_COLOR);
+		//map.put(SELECTION_FOREGROUND, WHITE_DEFAULT_COLOR);
 	}
 
 	// -------------------------------------------------------------------------

@@ -36,6 +36,8 @@ class ReCLauncher {
 
 	protected static final int STATUS_SUCCESS = 0;
 
+	protected static final int STATUS_EXCEPTION = 1;
+	
 	protected static final int STATUS_INVALID_CONFIGURATION = 10;
 
 	protected static final int STATUS_INVALID_LAF = 20;
@@ -140,8 +142,9 @@ class ReCLauncher {
 					log.info("ReCFaceConfig is unmarshalled.");
 
 					// ORB initialization
-					ORBBean.getORBBean();
-					log.info("ORBBean is initialized.");
+					// FIXME IIES Proxy? - Caused by: java.net.ConnectException: Connection refused: connect 
+					//ORBBean.getORBBean(); // Error behind 
+					//log.info("ORBBean is initialized.");
 					
 					// TODO tips = new TipFactory();
 					
@@ -177,11 +180,15 @@ class ReCLauncher {
 					// RECBASE UI END
 					
 					runUserInterface();
-
+				
+				} catch (ReCConfigurationException e) {
+					DefaultDialog.showUnexpectedErrorPane(e);
+					System.exit(STATUS_INVALID_REC_FACE_CONFIG);
+					
 				} catch (Exception e) {
 					log.log(Level.SEVERE, "Some unexpected error occured.", e);
 					DefaultDialog.showUnexpectedErrorPane(e);
-					System.exit(STATUS_INVALID_REC_FACE_CONFIG);
+					System.exit(STATUS_EXCEPTION);
 				}
 
 			}

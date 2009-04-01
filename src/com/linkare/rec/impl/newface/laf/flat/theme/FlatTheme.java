@@ -16,14 +16,12 @@ import javax.swing.UIDefaults;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.linkare.rec.impl.newface.laf.flat.FlatMenuBarUI;
-
 /**
  * 
  * @author Henrique Fernandes
  */
 @XmlTransient
-public abstract class FlatTheme {
+public abstract class FlatTheme extends OceanThemeAdaptor {
 
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(FlatTheme.class.getName());
@@ -58,14 +56,16 @@ public abstract class FlatTheme {
 	 * @param table the defaults table, non-null
 	 */
 	public void addCustomEntriesToTable(UIDefaults table) {
+		super.addCustomEntriesToTable(table);
+		
 		List<Object> defaults = new ArrayList<Object>();
 		for (AbstractStyle style : getThemeStyles()) {
 			defaults.addAll(style.getProperties());
 		}
-		// Hack for MetalLookAndFeel inheritance)
-		defaults.add("MenuBarUI");
-		defaults.add(FlatMenuBarUI.class.getName());
-		// Hack end
+//		// Hack for MetalLookAndFeel inheritance)
+//		defaults.add("MenuBarUI");
+//		defaults.add(FlatMenuBarUI.class.getName());
+//		// Hack end
 		
 		table.putDefaults((Object[]) defaults.toArray(new Object[defaults.size()]));
 	}
