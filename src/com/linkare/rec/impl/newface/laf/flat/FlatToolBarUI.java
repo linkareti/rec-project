@@ -16,7 +16,7 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicToolBarUI;
 
 /**
- * 
+ * @deprecated
  * @author Henrique Fernandes
  */
 public class FlatToolBarUI extends BasicToolBarUI {

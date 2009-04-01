@@ -18,7 +18,7 @@ import com.linkare.rec.impl.newface.laf.flat.resources.FlatLAFResources;
 import com.linkare.rec.impl.newface.laf.flat.resources.FlatLAFResources.FlatLAFResourcesEnum;
 
 /**
- * 
+ * @deprecated
  * @author Henrique Fernandes
  */
 public class FlatMenuBarUI extends BasicMenuBarUI {

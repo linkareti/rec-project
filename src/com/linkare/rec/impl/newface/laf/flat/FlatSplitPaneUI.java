@@ -13,7 +13,7 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 /**
- * 
+ * @deprecated
  * @author Henrique Fernandes
  */
 public class FlatSplitPaneUI extends BasicSplitPaneUI {

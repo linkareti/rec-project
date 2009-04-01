@@ -13,10 +13,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JTextField;
 import javax.swing.UIDefaults;
-import javax.swing.plaf.basic.BasicLookAndFeel;
-import javax.swing.plaf.basic.BasicPanelUI;
-import javax.swing.plaf.basic.BasicTextFieldUI;
-import javax.swing.plaf.metal.MetalLabelUI;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.text.DefaultEditorKit;
 
@@ -30,8 +27,8 @@ import com.linkare.rec.impl.newface.laf.flat.theme.FlatTheme;
  */
 public class FlatLookAndFeel extends 
 //	SynthLookAndFeel // The LAF from Java 5
-	MetalLookAndFeel // This inheritance can be useful 
-//BasicLookAndFeel // The Default Base LAF for FlatLookAndFeel
+	MetalLookAndFeel // The current base LAF for Flat 
+//BasicLookAndFeel // The initial default Base LAF for FlatLookAndFeel. 
 {
 
 	private static final Logger log = Logger.getLogger(FlatLookAndFeel.class.getName());
@@ -88,14 +85,7 @@ public class FlatLookAndFeel extends
 		super.initClassDefaults(table);
 
 		Object[] classDefaults = {
-
-				//"MenuBarUI", FlatMenuBarUI.class.getName(),
-				//"MenuUI", FlatMenuUI.class.getName(),
-				"ToolBarUI", FlatToolBarUI.class.getName(),
-				"SplitPaneUI", FlatSplitPaneUI.class.getName(),
-				//"LabelUI", MetalLabelUI.class.getName(),
-				//"PanelUI", BasicPanelUI.class.getName(),
-				//"TextFieldUI", BasicTextFieldUI.class.getName()
+				"SplitPaneUI", BasicSplitPaneUI.class.getName(),
 		};
 
 		if (log.isLoggable(Level.FINER)) {
@@ -112,84 +102,84 @@ public class FlatLookAndFeel extends
 		// TODO Set key bindings like Nimbus LAF
 		
 		// Key bindings are already set in the Metal LAF
-		Object fieldInputMap = new UIDefaults.LazyInputMap(new Object[] {
-				"ctrl C", DefaultEditorKit.copyAction,
-				"ctrl V", DefaultEditorKit.pasteAction,
-				"ctrl X", DefaultEditorKit.cutAction,
-				"COPY", DefaultEditorKit.copyAction,
-				"PASTE", DefaultEditorKit.pasteAction,
-				"CUT", DefaultEditorKit.cutAction,
-				"shift LEFT", DefaultEditorKit.selectionBackwardAction,
-				"shift KP_LEFT", DefaultEditorKit.selectionBackwardAction,
-				"shift RIGHT", DefaultEditorKit.selectionForwardAction,
-				"shift KP_RIGHT", DefaultEditorKit.selectionForwardAction,
-				"ctrl LEFT", DefaultEditorKit.previousWordAction,
-				"ctrl KP_LEFT", DefaultEditorKit.previousWordAction,
-				"ctrl RIGHT", DefaultEditorKit.nextWordAction,
-				"ctrl KP_RIGHT", DefaultEditorKit.nextWordAction,
-				"ctrl shift LEFT", DefaultEditorKit.selectionPreviousWordAction,
-				"ctrl shift KP_LEFT", DefaultEditorKit.selectionPreviousWordAction,
-				"ctrl shift RIGHT", DefaultEditorKit.selectionNextWordAction,
-				"ctrl shift KP_RIGHT", DefaultEditorKit.selectionNextWordAction,
-				"ctrl A", DefaultEditorKit.selectAllAction,
-				"HOME", DefaultEditorKit.beginLineAction,
-				"END", DefaultEditorKit.endLineAction,
-				"shift HOME", DefaultEditorKit.selectionBeginLineAction,
-				"shift END", DefaultEditorKit.selectionEndLineAction,
-				"BACK_SPACE", DefaultEditorKit.deletePrevCharAction,
-				"ctrl H", DefaultEditorKit.deletePrevCharAction,
-				"DELETE", DefaultEditorKit.deleteNextCharAction,
-				"RIGHT", DefaultEditorKit.forwardAction,
-				"LEFT", DefaultEditorKit.backwardAction,
-				"KP_RIGHT", DefaultEditorKit.forwardAction,
-				"KP_LEFT", DefaultEditorKit.backwardAction,
-				"ENTER", JTextField.notifyAction,
-				"ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
-				"control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
-		});
-
-		Object passwordInputMap = new UIDefaults.LazyInputMap(new Object[] {
-				"ctrl C", DefaultEditorKit.copyAction,
-				"ctrl V", DefaultEditorKit.pasteAction,
-				"ctrl X", DefaultEditorKit.cutAction,
-				"COPY", DefaultEditorKit.copyAction,
-				"PASTE", DefaultEditorKit.pasteAction,
-				"CUT", DefaultEditorKit.cutAction,
-				"shift LEFT", DefaultEditorKit.selectionBackwardAction,
-				"shift KP_LEFT", DefaultEditorKit.selectionBackwardAction,
-				"shift RIGHT", DefaultEditorKit.selectionForwardAction,
-				"shift KP_RIGHT", DefaultEditorKit.selectionForwardAction,
-				"ctrl LEFT", DefaultEditorKit.beginLineAction,
-				"ctrl KP_LEFT", DefaultEditorKit.beginLineAction,
-				"ctrl RIGHT", DefaultEditorKit.endLineAction,
-				"ctrl KP_RIGHT", DefaultEditorKit.endLineAction,
-				"ctrl shift LEFT", DefaultEditorKit.selectionBeginLineAction,
-				"ctrl shift KP_LEFT", DefaultEditorKit.selectionBeginLineAction,
-				"ctrl shift RIGHT", DefaultEditorKit.selectionEndLineAction,
-				"ctrl shift KP_RIGHT", DefaultEditorKit.selectionEndLineAction,
-				"ctrl A", DefaultEditorKit.selectAllAction,
-				"HOME", DefaultEditorKit.beginLineAction,
-				"END", DefaultEditorKit.endLineAction,
-				"shift HOME", DefaultEditorKit.selectionBeginLineAction,
-				"shift END", DefaultEditorKit.selectionEndLineAction,
-				"BACK_SPACE", DefaultEditorKit.deletePrevCharAction,
-				"ctrl H", DefaultEditorKit.deletePrevCharAction,
-				"DELETE", DefaultEditorKit.deleteNextCharAction,
-				"RIGHT", DefaultEditorKit.forwardAction,
-				"LEFT", DefaultEditorKit.backwardAction,
-				"KP_RIGHT", DefaultEditorKit.forwardAction,
-				"KP_LEFT", DefaultEditorKit.backwardAction,
-				"ENTER", JTextField.notifyAction,
-				"ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
-				"control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
-		});
-
-		Object[] componentDefaults = {
-				"TextField.focusInputMap", fieldInputMap,
-				"PasswordField.focusInputMap", passwordInputMap,
-		};
-
-		table.putDefaults(componentDefaults);
+//		Object fieldInputMap = new UIDefaults.LazyInputMap(new Object[] {
+//				"ctrl C", DefaultEditorKit.copyAction,
+//				"ctrl V", DefaultEditorKit.pasteAction,
+//				"ctrl X", DefaultEditorKit.cutAction,
+//				"COPY", DefaultEditorKit.copyAction,
+//				"PASTE", DefaultEditorKit.pasteAction,
+//				"CUT", DefaultEditorKit.cutAction,
+//				"shift LEFT", DefaultEditorKit.selectionBackwardAction,
+//				"shift KP_LEFT", DefaultEditorKit.selectionBackwardAction,
+//				"shift RIGHT", DefaultEditorKit.selectionForwardAction,
+//				"shift KP_RIGHT", DefaultEditorKit.selectionForwardAction,
+//				"ctrl LEFT", DefaultEditorKit.previousWordAction,
+//				"ctrl KP_LEFT", DefaultEditorKit.previousWordAction,
+//				"ctrl RIGHT", DefaultEditorKit.nextWordAction,
+//				"ctrl KP_RIGHT", DefaultEditorKit.nextWordAction,
+//				"ctrl shift LEFT", DefaultEditorKit.selectionPreviousWordAction,
+//				"ctrl shift KP_LEFT", DefaultEditorKit.selectionPreviousWordAction,
+//				"ctrl shift RIGHT", DefaultEditorKit.selectionNextWordAction,
+//				"ctrl shift KP_RIGHT", DefaultEditorKit.selectionNextWordAction,
+//				"ctrl A", DefaultEditorKit.selectAllAction,
+//				"HOME", DefaultEditorKit.beginLineAction,
+//				"END", DefaultEditorKit.endLineAction,
+//				"shift HOME", DefaultEditorKit.selectionBeginLineAction,
+//				"shift END", DefaultEditorKit.selectionEndLineAction,
+//				"BACK_SPACE", DefaultEditorKit.deletePrevCharAction,
+//				"ctrl H", DefaultEditorKit.deletePrevCharAction,
+//				"DELETE", DefaultEditorKit.deleteNextCharAction,
+//				"RIGHT", DefaultEditorKit.forwardAction,
+//				"LEFT", DefaultEditorKit.backwardAction,
+//				"KP_RIGHT", DefaultEditorKit.forwardAction,
+//				"KP_LEFT", DefaultEditorKit.backwardAction,
+//				"ENTER", JTextField.notifyAction,
+//				"ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
+//				"control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
+//		});
+//
+//		Object passwordInputMap = new UIDefaults.LazyInputMap(new Object[] {
+//				"ctrl C", DefaultEditorKit.copyAction,
+//				"ctrl V", DefaultEditorKit.pasteAction,
+//				"ctrl X", DefaultEditorKit.cutAction,
+//				"COPY", DefaultEditorKit.copyAction,
+//				"PASTE", DefaultEditorKit.pasteAction,
+//				"CUT", DefaultEditorKit.cutAction,
+//				"shift LEFT", DefaultEditorKit.selectionBackwardAction,
+//				"shift KP_LEFT", DefaultEditorKit.selectionBackwardAction,
+//				"shift RIGHT", DefaultEditorKit.selectionForwardAction,
+//				"shift KP_RIGHT", DefaultEditorKit.selectionForwardAction,
+//				"ctrl LEFT", DefaultEditorKit.beginLineAction,
+//				"ctrl KP_LEFT", DefaultEditorKit.beginLineAction,
+//				"ctrl RIGHT", DefaultEditorKit.endLineAction,
+//				"ctrl KP_RIGHT", DefaultEditorKit.endLineAction,
+//				"ctrl shift LEFT", DefaultEditorKit.selectionBeginLineAction,
+//				"ctrl shift KP_LEFT", DefaultEditorKit.selectionBeginLineAction,
+//				"ctrl shift RIGHT", DefaultEditorKit.selectionEndLineAction,
+//				"ctrl shift KP_RIGHT", DefaultEditorKit.selectionEndLineAction,
+//				"ctrl A", DefaultEditorKit.selectAllAction,
+//				"HOME", DefaultEditorKit.beginLineAction,
+//				"END", DefaultEditorKit.endLineAction,
+//				"shift HOME", DefaultEditorKit.selectionBeginLineAction,
+//				"shift END", DefaultEditorKit.selectionEndLineAction,
+//				"BACK_SPACE", DefaultEditorKit.deletePrevCharAction,
+//				"ctrl H", DefaultEditorKit.deletePrevCharAction,
+//				"DELETE", DefaultEditorKit.deleteNextCharAction,
+//				"RIGHT", DefaultEditorKit.forwardAction,
+//				"LEFT", DefaultEditorKit.backwardAction,
+//				"KP_RIGHT", DefaultEditorKit.forwardAction,
+//				"KP_LEFT", DefaultEditorKit.backwardAction,
+//				"ENTER", JTextField.notifyAction,
+//				"ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
+//				"control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
+//		});
+//
+//		Object[] componentDefaults = {
+//				"TextField.focusInputMap", fieldInputMap,
+//				"PasswordField.focusInputMap", passwordInputMap,
+//		};
+//
+//		table.putDefaults(componentDefaults);
 	}
 
 	@Override

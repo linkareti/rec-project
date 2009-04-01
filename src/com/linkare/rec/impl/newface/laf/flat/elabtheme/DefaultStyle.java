@@ -51,7 +51,7 @@ public class DefaultStyle extends AbstractStyle {
 	
 	// Fonts
 	
-	public static final FontUIResource DEFAULT_FONT = new FontUIResource("Arial", Font.PLAIN, 12);
+	public static final FontUIResource DEFAULT_FONT = new FontUIResource("Arial", Font.PLAIN, 13);
 	
 	// Borders
 	
@@ -59,7 +59,7 @@ public class DefaultStyle extends AbstractStyle {
 	
 	public static final BorderUIResource EMPTY_BORDER = new BorderUIResource(BorderFactory.createEmptyBorder());
 	
-	public static final BorderUIResource EMPTY_BORDER_MARGIN_4 = new BorderUIResource(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+	public static final BorderUIResource EMPTY_BORDER_MARGIN_4 = new BorderUIResource(BorderFactory.createEmptyBorder(6, 4, 4, 4));
 	
 	/**
 	 * Creates the <code>DefaultStyle</code>.
