@@ -12,6 +12,9 @@ import java.util.logging.Logger;
 
 import javax.swing.UIManager;
 
+import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
+
+
 /**
  *
  * @author Henrique Fernandes
@@ -34,7 +37,7 @@ public class MessageBox extends GradientPane {
 	}
 
 	private void customInit() {
-		Color fgColor = UIManager.getColor(SpecialLAFProperties.ENABLED_FOREGROUND_ON_DARK.getName());
+		Color fgColor = UIManager.getColor(SpecialELabProperties.ENABLED_FOREGROUND_ON_DARK.getName());
 		if (fgColor != null) {
 			lblMessage.setForeground(fgColor);
 		}

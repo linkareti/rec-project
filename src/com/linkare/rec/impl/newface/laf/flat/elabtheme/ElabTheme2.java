@@ -38,6 +38,9 @@ public class ElabTheme2 extends FlatTheme {
 	public static final String DISABLED_FOREGROUND_ON_DARK = "disabledForegroundOnDark";
     private static final Color DISABLED_FOREGROUND_ON_DARK_VALUE = new Color(0xE4EEED);
     
+    public static final String SELECTION_FOREGROUND_ON_DARK = "selectionForegroundOnDark";
+	private static final Color SELECTION_FOREGROUND_ON_DARK_VALUE = DefaultStyle.WHITE_DEFAULT_COLOR;
+    
 	/**
 	 * Creates the <code>ElabTheme2</code>.
 	 */
@@ -52,12 +55,13 @@ public class ElabTheme2 extends FlatTheme {
 	public void addCustomEntriesToTable(UIDefaults table) {
 		super.addCustomEntriesToTable(table);
 		
-		// Add custom them entries to ui defaults
+		// Add custom theme entries to ui defaults
 		Object[] defaults = new Object[] {
 			GRADIENT_DARKCOLOR, GRADIENT_DARKCOLOR_VALUE,
 			GRADIENT_LIGHTCOLOR, GRADIENT_LIGHTCOLOR_VALUE,
 			ENABLED_FOREGROUND_ON_DARK, ENABLED_FOREGROUND_ON_DARK_VALUE,
 			DISABLED_FOREGROUND_ON_DARK, DISABLED_FOREGROUND_ON_DARK_VALUE,
+			SELECTION_FOREGROUND_ON_DARK, SELECTION_FOREGROUND_ON_DARK_VALUE,
 		};
 		table.putDefaults(defaults);
 	}

@@ -21,8 +21,9 @@ import com.linkare.rec.impl.exceptions.ReCConfigurationException;
 import com.linkare.rec.impl.newface.component.DefaultDialog;
 import com.linkare.rec.impl.newface.config.ReCFaceConfig;
 import com.linkare.rec.impl.newface.laf.flat.FlatLookAndFeel;
-import com.linkare.rec.impl.newface.laf.flat.elabtheme.ElabTheme;
+import com.linkare.rec.impl.newface.utils.OS;
 import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.rec.impl.utils.ORBBean;
 
 /**
  * Main entry for ReC Application.
@@ -110,24 +111,24 @@ class ReCLauncher {
 					// Set Look and Feel
 
 					// Init System Properties
-					// (Web Start properties are set on jnlp descriptor)
-					// TODO check anti-aliasing on windows
-					System.setProperty("swing.aatext", "true");
-
-					// mac properties
-					if (System.getProperty("os.name").equals("Mac OS X")) {
+					// TODO Web Start properties should be set in the jnlp descriptor
+					if (OS.isMacOSX()) {
 						System.setProperty("apple.laf.useScreenMenuBar", "false");
 						System.setProperty("apple.awt.textantialiasing", "on");
+						
+					} else if (OS.isWindows()) {
+						// TODO check anti-aliasing on windows
+						System.setProperty("swing.aatext", "true");
 					}
 					UIManager.setLookAndFeel(lafClassName);
 					log.info("Look and Feel is correctly installed.");
 
-					// TODO Launch Splash
+					// TODO Launch Splash Screen
 					log.warning("TODO - Launch Splash Screen Here");
 
 					// Check System Properties Availability
 					checkSystemProperties();
-					log.info("ReC System Properties are ok.");
+					log.info("ReC System Properties are checked.");
 
 					// Parse xml configuration
 					String configLocation = System.getProperty(ReCSystemProperty.RECFACECONFIG.getName());
@@ -136,12 +137,45 @@ class ReCLauncher {
 					}
 					InputStream is = ReCProtocols.getURL(configLocation).openConnection().getInputStream();
 					reCFaceConfig = ReCFaceConfig.unmarshall(is);
+					log.info("ReCFaceConfig is unmarshalled.");
 
-					log.info("ReCFaceConfig is ok.");
-
+					// ORB initialization
+					ORBBean.getORBBean();
+					log.info("ORBBean is initialized.");
+					
+					// TODO tips = new TipFactory();
+					
 					// Run User Interface
 					log.info("Starting user interface...");
-
+					
+					// -------------------------------------------------------------------------
+					// RECBASEUI INIT
+					
+//				        if(recBaseUI.getDesktopLocationBundleKey() != null)
+//				            mDIDesktopPane.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault(recBaseUI.getDesktopLocationBundleKey(), new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/about_box.png"))).getImage(), true);
+//				        setIconImage(ReCResourceBundle.findImageIconOrDefault(recBaseUI.getIconLocationBundleKey(), new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/ReCIconHand16.gif"))).getImage());
+//				        
+//				        apparatusClientBean.setUsersListRefreshPeriod(recBaseUI.getUsersListRefreshRateMs());
+//				        labClientBean.setUsersListRefreshPeriod(recBaseUI.getUsersListRefreshRateMs());
+//				        
+//				        usersListPanel.getModel().setAutoRefresh(recBaseUI.getUsersListRefreshRateMs());
+//				        usersListPanel.getModel().setExpUsersListSource(apparatusClientBean);
+//				        
+//				        chatFrame.setChatServer(labClientBean);
+//				        chatFrame.setUser(new com.linkare.rec.acquisition.UserInfo(loginFrame.getUsername()));
+//				        
+//				        laboratoryTree.populateTree(recBaseUI);
+//				        
+//				        if(recBaseUI.isAutoConnectLab())
+//				        {
+//				            setAutoConnectLab(true);
+//				            currentLab = recBaseUI.getLab()[0];
+//				        }
+//				    }
+					
+					// -------------------------------------------------------------------------
+					// RECBASE UI END
+					
 					runUserInterface();
 
 				} catch (Exception e) {

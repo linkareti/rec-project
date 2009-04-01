@@ -15,6 +15,9 @@ import java.awt.Paint;
 
 import javax.swing.UIManager;
 
+import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
+
+
 /**
  * 
  * @author Henrique Fernandes
@@ -30,9 +33,9 @@ public class GradientPane extends AbstractContentPane {
 
 	private GradientStyle style = GradientStyle.VERTICAL_LINEAR_LIGHT_TO_DARK;
 
-	private Color lightColor = UIManager.getColor(SpecialLAFProperties.GRADIENT_LIGHTCOLOR.getName());
+	private Color lightColor = UIManager.getColor(SpecialELabProperties.GRADIENT_LIGHTCOLOR.getName());
 
-	private Color darkColor = UIManager.getColor(SpecialLAFProperties.GRADIENT_DARKCOLOR.getName());
+	private Color darkColor = UIManager.getColor(SpecialELabProperties.GRADIENT_DARKCOLOR.getName());
 
 	/** Default */
 	public GradientPane() {

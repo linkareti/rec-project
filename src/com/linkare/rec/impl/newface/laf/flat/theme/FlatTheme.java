@@ -16,6 +16,8 @@ import javax.swing.UIDefaults;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.linkare.rec.impl.newface.laf.flat.FlatMenuBarUI;
+
 /**
  * 
  * @author Henrique Fernandes
@@ -60,6 +62,11 @@ public abstract class FlatTheme {
 		for (AbstractStyle style : getThemeStyles()) {
 			defaults.addAll(style.getProperties());
 		}
+		// Hack for MetalLookAndFeel inheritance)
+		defaults.add("MenuBarUI");
+		defaults.add(FlatMenuBarUI.class.getName());
+		// Hack end
+		
 		table.putDefaults((Object[]) defaults.toArray(new Object[defaults.size()]));
 	}
 

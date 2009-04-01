@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import com.linkare.rec.impl.newface.component.GlassLayer;
 import com.linkare.rec.impl.newface.component.LoginBox;
 import com.linkare.rec.impl.newface.component.MessageBox;
+import com.linkare.rec.impl.newface.component.SimpleLoginBox;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
 import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
 import com.linkare.rec.impl.newface.config.ReCFaceConfig;
@@ -50,7 +51,7 @@ public class ReCView extends javax.swing.JFrame implements ActionListener {
     /**
      * The LoginBox
      */
-    private UndecoratedDialog<LoginBox> loginDialog;
+    private UndecoratedDialog<SimpleLoginBox> loginDialog;
     
     /**
      * The messagebox
@@ -74,8 +75,20 @@ public class ReCView extends javax.swing.JFrame implements ActionListener {
 	 */
 	private void customInit() {
 		
+		// TODO init user interface with ReCFaceConfig values
+		
+//      //Check the user preferences...
+//      preferences = Preferences.userRoot().userNodeForPackage(ReCBaseUI.class);
+//      
+//      String username = preferences.get(USER_NAME_PREF, System.getProperty("user.name"));
+//      String pass = preferences.get(USER_PASS_PREF, System.getProperty("user.name"));
+//      loginFrame.setUsername(username);
+//      loginFrame.setPassword(pass);
+//      //end users prefs
+	
+		
 		// LoginBox Dialog
-		loginDialog = new UndecoratedDialog<LoginBox>(new LoginBox(), this);
+		loginDialog = new UndecoratedDialog<SimpleLoginBox>(new SimpleLoginBox(), this);
 		loginDialog.getContent().addActionListener(this);
 		
 		// MessageBox Dialog
@@ -109,7 +122,7 @@ public class ReCView extends javax.swing.JFrame implements ActionListener {
     		getGlassPane().setVisible(true);
         	loginDialog.setVisible(true);
         	
-    	} else if (LoginBox.ACTION_DO_LOGIN.equals(action)) {
+    	} else if (SimpleLoginBox.ACTION_DO_LOGIN.equals(action)) {
 			// TODO login
 			
 			//getGlassPane().setVisible(visible);

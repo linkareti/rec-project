@@ -39,6 +39,7 @@ public abstract class AbstractStyle {
 	public static final String FOREGROUND = "foreground";
 	public static final String DISABLED_FOREGROUND = "disabledForeground";
 	public static final String SELECTION_FOREGROUND = "selectionForeground";
+	public static final String SELECTION_BACKGROUND = "selectionBackground";
 	
 
 	private String id;

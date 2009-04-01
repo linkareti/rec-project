@@ -7,6 +7,7 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import com.linkare.rec.impl.newface.utils.LAFConnector;
 import java.awt.Color;
 import java.util.logging.Logger;
 
@@ -19,20 +20,20 @@ import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
  *
  * @author hfernandes
  */
-public class LoginBox extends GradientPane {
+public class SimpleLoginBox extends GradientPane {
 
     private static final long serialVersionUID = 698114786085470559L;
     
     @SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(LoginBox.class.getName());
+	private static final Logger log = Logger.getLogger(SimpleLoginBox.class.getName());
     
     /**
 	 * The LOGIN action identifier.
 	 */
-	public static final String ACTION_DO_LOGIN = LoginBox.class.getSimpleName() + "_ACTION_LOGIN";
+	public static final String ACTION_DO_LOGIN = SimpleLoginBox.class.getSimpleName() + "_ACTION_LOGIN";
 	
 	/** Creates new form LoginBox */
-	public LoginBox() {
+	public SimpleLoginBox() {
 		super(GradientStyle.VERTICAL_LINEAR_DARK_TO_LIGHT);
 
 		initComponents();
@@ -43,7 +44,7 @@ public class LoginBox extends GradientPane {
 		Color fgColor = UIManager.getColor(SpecialELabProperties.ENABLED_FOREGROUND_ON_DARK.getName());
 		if (fgColor != null) {
 			lblUserName.setForeground(fgColor);
-			lblPassword.setForeground(fgColor);
+			//lblPassword.setForeground(fgColor);
 		}
 	}
 	
@@ -59,8 +60,11 @@ public class LoginBox extends GradientPane {
 	 * @return the password text
 	 */
 	public String getPassword() {
-		return new String(passField.getPassword());
+		//return new String(passField.getPassword());
+        return null;
 	}
+
+    // FIXME Let a component override the elab default laf behaviour
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -74,37 +78,31 @@ public class LoginBox extends GradientPane {
 
         lblUserName = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
-        lblPassword = new javax.swing.JLabel();
         btnNext = new javax.swing.JButton();
-        passField = new javax.swing.JPasswordField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
-        setPreferredSize(new java.awt.Dimension(360, 194));
+        setPreferredSize(new java.awt.Dimension(360, 160));
         setLayout(new java.awt.GridBagLayout());
 
-        lblUserName.setText("Nome de Utilizador");
+        lblUserName.setForeground(LAFConnector.getColor(SpecialELabProperties.SELECTION_FOREGROUND_ON_DARK));
+        lblUserName.setText("Indique um nome de utilizador");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 2, 0);
         add(lblUserName, gridBagConstraints);
 
-        txtUsername.setPreferredSize(new java.awt.Dimension(200, 28));
+        txtUsername.setPreferredSize(new java.awt.Dimension(215, 28));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         add(txtUsername, gridBagConstraints);
 
-        lblPassword.setText("Palavra Passe");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(4, 0, 2, 0);
-        add(lblPassword, gridBagConstraints);
-
-        btnNext.setText("Avançar");
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/component/resources/avancar.jpg"))); // NOI18N
         btnNext.setActionCommand(ACTION_DO_LOGIN);
+        btnNext.setBorder(null);
+        btnNext.setBorderPainted(false);
+        btnNext.setContentAreaFilled(false);
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextActionPerformed(evt);
@@ -112,18 +110,10 @@ public class LoginBox extends GradientPane {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         add(btnNext, gridBagConstraints);
-
-        passField.setEchoChar('\u2022');
-        passField.setPreferredSize(new java.awt.Dimension(150, 28));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        add(passField, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
@@ -134,9 +124,7 @@ public class LoginBox extends GradientPane {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNext;
-    private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUserName;
-    private javax.swing.JPasswordField passField;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 

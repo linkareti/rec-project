@@ -40,6 +40,7 @@ public class TextFieldStyle extends DefaultStyle {
 		super.updatePropertyMap(map);
 		map.put(BORDER, SOLID_THIN_BLACK_BORDER);
 		map.put(FONT, TEXTFIELD_FONT);
+		
 	}
 
 	// -------------------------------------------------------------------------

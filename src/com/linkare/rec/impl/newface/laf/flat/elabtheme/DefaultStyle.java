@@ -45,6 +45,10 @@ public class DefaultStyle extends AbstractStyle {
 	
 	public static final Color DEFAULT_FOREGROUND = new Color(0x231F20);
 	
+	public static final Color SELECTION_BACKGROUND_DEFAULT_COLOR = new Color(0xFFECC6);
+	
+	public static final Color SELECTION_FOREGROUND_DEFAULT_COLOR = new Color(0x231F20);
+	
 	// Fonts
 	
 	public static final FontUIResource DEFAULT_FONT = new FontUIResource("Arial", Font.PLAIN, 12);
@@ -67,7 +71,8 @@ public class DefaultStyle extends AbstractStyle {
 		// Common properties definition
 		map.put(FOREGROUND, DEFAULT_FOREGROUND);
 		map.put(FONT, DEFAULT_FONT);
-		
+		map.put(SELECTION_BACKGROUND, SELECTION_BACKGROUND_DEFAULT_COLOR);
+		map.put(SELECTION_FOREGROUND, SELECTION_FOREGROUND_DEFAULT_COLOR);
 	}
 	
 	// -------------------------------------------------------------------------

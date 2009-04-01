@@ -16,6 +16,8 @@ import javax.swing.UIDefaults;
 import javax.swing.plaf.basic.BasicLookAndFeel;
 import javax.swing.plaf.basic.BasicPanelUI;
 import javax.swing.plaf.basic.BasicTextFieldUI;
+import javax.swing.plaf.metal.MetalLabelUI;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.text.DefaultEditorKit;
 
 import com.linkare.rec.impl.newface.laf.flat.elabtheme.ElabTheme2;
@@ -28,8 +30,8 @@ import com.linkare.rec.impl.newface.laf.flat.theme.FlatTheme;
  */
 public class FlatLookAndFeel extends 
 //	SynthLookAndFeel // The LAF from Java 5
-//	MetalLookAndFeel // This inheritance can be useful 
-BasicLookAndFeel // The Default Base LAF for FlatLookAndFeel
+	MetalLookAndFeel // This inheritance can be useful 
+//BasicLookAndFeel // The Default Base LAF for FlatLookAndFeel
 {
 
 	private static final Logger log = Logger.getLogger(FlatLookAndFeel.class.getName());
@@ -91,9 +93,10 @@ BasicLookAndFeel // The Default Base LAF for FlatLookAndFeel
 				"MenuUI", FlatMenuUI.class.getName(),
 				"ToolBarUI", FlatToolBarUI.class.getName(),
 				"SplitPaneUI", FlatSplitPaneUI.class.getName(),
+				"LabelUI", MetalLabelUI.class.getName(),
 				
-				"PanelUI", BasicPanelUI.class.getName(),
-				"TextFieldUI", BasicTextFieldUI.class.getName()
+				//"PanelUI", BasicPanelUI.class.getName(),
+				//"TextFieldUI", BasicTextFieldUI.class.getName()
 		};
 
 		if (log.isLoggable(Level.FINER)) {
@@ -107,6 +110,8 @@ BasicLookAndFeel // The Default Base LAF for FlatLookAndFeel
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 
+		// TODO Set key bindings like Nimbus LAF
+		
 		// Key bindings are already set in the Metal LAF
 		Object fieldInputMap = new UIDefaults.LazyInputMap(new Object[] {
 				"ctrl C", DefaultEditorKit.copyAction,
