@@ -12,11 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
-import com.linkare.rec.impl.newface.component.GlassPane;
+import com.linkare.rec.impl.newface.component.GlassLayer;
 import com.linkare.rec.impl.newface.component.LoginBox;
 import com.linkare.rec.impl.newface.component.MessageBox;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
-import com.linkare.rec.impl.newface.component.GlassPane.CatchEvents;
+import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
 import com.linkare.rec.impl.newface.config.ReCFaceConfig;
 
 
@@ -45,7 +45,7 @@ public class ReCView extends javax.swing.JFrame implements ActionListener {
     /**
      * The glass pane.
      */
-    private static final GlassPane GLASS_PANE = new GlassPane(CatchEvents.ALL);
+    private static final GlassLayer GLASS_PANE = new GlassLayer(CatchEvents.ALL);
     
     /**
      * The LoginBox
