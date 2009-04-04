@@ -7,6 +7,7 @@ package com.linkare.rec.impl.multicast;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Iterator;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +29,8 @@ import com.linkare.rec.impl.multicast.security.DefaultUser;
 import com.linkare.rec.impl.multicast.security.IOperation;
 import com.linkare.rec.impl.multicast.security.IUser;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
+import com.linkare.rec.impl.threading.ExecutorScheduler;
+import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.Defaults;
 
 /**
@@ -61,7 +64,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	 * An internal Thread checking for hardware connections Checks mostly if they are alive
 	 */
 	private HardwareConnectionCheck hardwareConnectionChecker = null;
-
+    
 	/*
 	 * The maximum number of apparatus available on this lab
 	 */
@@ -112,11 +115,13 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 			// REMOVE THIS TRY CATCH BLOCK AFTER FINISHING THE TEST PHASE...
 			logThrowable("Error initializing the ReCMultiCastController", e);
 		}
-
+        
 		// Create a hardware connection checker
 		hardwareConnectionChecker = new HardwareConnectionCheck();
 		// Start it up
-		hardwareConnectionChecker.start();
+		//hardwareConnectionChecker.start();
+        
+        log(Level.INFO, "Started ReCMulticastController OK.");
 	}
 
 	/* my Remote Interface Implementation* */
@@ -201,29 +206,34 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	}
 
 	/* Inner Class - Hardware Connection Checker */
-	private class HardwareConnectionCheck extends Thread {
-		private boolean shutdown = false;
-
-		public void shutdown() {
-			shutdown = true;
-			try {
-				synchronized (this) {
-					this.join();
-				}
-			}
-			catch (Exception e) {
-			}
-		}
+	private class HardwareConnectionCheck extends ScheduledWorkUnit {
+//		private boolean shutdown = false;
+        
+        HardwareConnectionCheck() {
+            ExecutorScheduler.scheduleAtFixedRate(this, 1, 5, SECONDS);
+        }
+                        
+//		public void shutdown() {
+////			shutdown = true;
+////			try {
+////				synchronized (this) {
+////					this.join();
+////				}
+////			}
+////			catch (Exception e) {
+////			}
+//		}
 
 		public void run() {
-			while (!shutdown) {
-				synchronized (this) {
-					try {
-						this.wait(5000);
-					}
-					catch (Exception ignored) {
-					}
-				}
+//			while (!shutdown) {
+//				synchronized (this) {
+//					try {
+//                        log(Level.FINE, "Hardware connector waiting...");
+//						this.wait(5000);
+//					}
+//					catch (Exception ignored) {
+//					}
+//				}
 				synchronized (multiCastHardwares) {
 					Iterator iterHardwares = ((ArrayList) multiCastHardwares.clone()).iterator();
 					while (iterHardwares.hasNext()) {
@@ -239,9 +249,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 							logThrowable("MultiCastController - Error cheking hardware connection status!", e);
 						}
 					}
+					log(Level.FINE, "Hardware connector waiting... " + Thread.currentThread().getName());
 				}
-
-			}
+//			}
 		}
 	}
 
