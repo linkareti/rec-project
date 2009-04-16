@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.UIDefaults;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.metal.MetalScrollBarUI;
 import javax.swing.text.DefaultEditorKit;
 
 import com.linkare.rec.impl.newface.laf.flat.elabtheme.ElabTheme2;
@@ -86,6 +87,7 @@ public class FlatLookAndFeel extends
 
 		Object[] classDefaults = {
 				"SplitPaneUI", BasicSplitPaneUI.class.getName(),
+				"ScrollBarUI", FlatScrollBarUI.class.getName(),
 		};
 
 		if (log.isLoggable(Level.FINER)) {
