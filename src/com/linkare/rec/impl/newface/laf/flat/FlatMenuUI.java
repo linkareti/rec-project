@@ -21,7 +21,7 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicMenuUI;
 
-import sun.swing.SwingUtilities2;
+//import sun.swing.SwingUtilities2;
 
 import com.linkare.rec.impl.newface.laf.flat.resources.FlatLAFResources;
 import com.linkare.rec.impl.newface.laf.flat.resources.FlatLAFResources.FlatLAFResourcesEnum;
@@ -48,24 +48,24 @@ public class FlatMenuUI extends BasicMenuUI {
 
 	@Override
 	protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
-		ButtonModel model = menuItem.getModel();
-		FontMetrics fm = SwingUtilities2.getFontMetrics(menuItem, g);
-		int mnemIndex = menuItem.getDisplayedMnemonicIndex();
-
-		if (!model.isEnabled()) {
-			super.paintText(g, menuItem, textRect, text);
-		} else {
-			// *** paint the text normally
-			g.setColor(UIManager.getColor("MenuItem.foreground"));
-
-			if (model.isArmed() || (menuItem instanceof JMenu && model.isSelected())) {
-				g.setColor(UIManager.getColor("MenuItem.selectionForeground")); // Uses
-																				// protected
-																				// field.
-			}
-			SwingUtilities2.drawStringUnderlineCharAt(menuItem, g, text, mnemIndex, textRect.x, textRect.y
-					+ fm.getAscent());
-		}
+//		ButtonModel model = menuItem.getModel();
+//		FontMetrics fm = SwingUtilities2.getFontMetrics(menuItem, g);
+//		int mnemIndex = menuItem.getDisplayedMnemonicIndex();
+//
+//		if (!model.isEnabled()) {
+//			super.paintText(g, menuItem, textRect, text);
+//		} else {
+//			// *** paint the text normally
+//			g.setColor(UIManager.getColor("MenuItem.foreground"));
+//
+//			if (model.isArmed() || (menuItem instanceof JMenu && model.isSelected())) {
+//				g.setColor(UIManager.getColor("MenuItem.selectionForeground")); // Uses
+//																				// protected
+//																				// field.
+//			}
+//			SwingUtilities2.drawStringUnderlineCharAt(menuItem, g, text, mnemIndex, textRect.x, textRect.y
+//					+ fm.getAscent());
+//		}
 	}
 
 }
