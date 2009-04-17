@@ -105,11 +105,11 @@ public class FlatScrollBarUI extends MetalScrollBarUI{
     	    return;
     	}
 
-//        g.translate( thumbBounds.x, thumbBounds.y );
+        g.translate( thumbBounds.x, thumbBounds.y );
 
     	if ( scrollbar.getOrientation() == JScrollBar.VERTICAL )
     	{
-    		g.translate( thumbBounds.x, thumbBounds.y -INSETS);
+    		//g.translate( thumbBounds.x, thumbBounds.y -INSETS);
     		
     	    g.setColor( COLOR_THUMB_BACKGROUND );
     	    g.fillRect( 2, 1, thumbBounds.width - 4, thumbBounds.height - 2 );
