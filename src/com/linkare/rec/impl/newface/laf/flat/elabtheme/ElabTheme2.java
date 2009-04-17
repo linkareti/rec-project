@@ -85,6 +85,7 @@ public class ElabTheme2 extends FlatTheme {
 		result.add(MenuStyle.class);
 		result.add(SplitPaneDividerStyle.class);
 		result.add(ScrollBarStyle.class);
+		result.add(ComboBoxStyle.class);
 		
 		return result;
 	}
