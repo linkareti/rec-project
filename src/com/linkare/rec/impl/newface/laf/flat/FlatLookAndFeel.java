@@ -88,6 +88,7 @@ public class FlatLookAndFeel extends
 		Object[] classDefaults = {
 				"SplitPaneUI", BasicSplitPaneUI.class.getName(),
 				"ScrollBarUI", FlatScrollBarUI.class.getName(),
+				"ComboBoxUI", FlatComboBoxUI.class.getName(),
 		};
 
 		if (log.isLoggable(Level.FINER)) {
