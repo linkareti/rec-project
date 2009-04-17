@@ -43,7 +43,7 @@ public class FlatScrollBarUI extends MetalScrollBarUI{
 	public static final Color COLOR_PRESS_BACKGROUND = new Color(0xFFFFFF);
 	public static final float ALPHA = 0.0f; 
 	//INSETS
-	public static final Integer INSETS = 10;
+	public static final Integer INSETS = 0;
 	
 
     protected FlatScrollButton increaseButton;
