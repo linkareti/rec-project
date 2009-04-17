@@ -41,6 +41,9 @@ public abstract class AbstractStyle {
 	public static final String SELECTION_FOREGROUND = "selectionForeground";
 	public static final String SELECTION_BACKGROUND = "selectionBackground";
 	
+	//COMBOBOX ARRROW BUTTON COLOR'S DEFINITION
+	public static final String ARROWBUTTON_ENABLEDFOREGROUND = "arrowButton.enabledForeground";
+	public static final String ARROWBUTTON_DISABLEDFOREGROUND = "arrowButton.disabledForeground";
 
 	private String id;
 
