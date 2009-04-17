@@ -6,10 +6,14 @@
  */
 package com.linkare.rec.impl.newface.laf.flat;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Scrollbar;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -32,13 +36,15 @@ public class FlatScrollBarUI extends MetalScrollBarUI{
 	//FIXME: Corrigir esta forma de obter as cores. Tem de ser por intermédio de propriedades
 	//ENABLED COLORS
 	public static final Color COLOR_BORDER = new Color(0x848485);	
-	public static final Color COLOR_BACKGROUND = new Color(0xDCE6F2);
+	public static final Color COLOR_THUMB_BACKGROUND = new Color(0xDCE6F2);
+	public static final Color COLOR_BACKGROUND = new Color(0xDAE1DF);
 	//OTHER COLORS
 	public static final Color COLOR_DIS_BACKGROUND = new Color(0xFFFFFF);
 	public static final Color COLOR_PRESS_BACKGROUND = new Color(0xFFFFFF);
+	public static final float ALPHA = 0.0f; 
 	//INSETS
 	public static final Integer INSETS = 10;
-
+	
 
     protected FlatScrollButton increaseButton;
     protected FlatScrollButton decreaseButton;
@@ -51,20 +57,13 @@ public class FlatScrollBarUI extends MetalScrollBarUI{
 	
     protected void paintTrack( Graphics g, JComponent c, Rectangle trackBounds ){
         
-        g.translate( trackBounds.x, trackBounds.y );
+      g.translate( trackBounds.x, trackBounds.y );  
+        scrollbar.setBackground(scrollbar.getParent().getBackground());
 
 		if ( scrollbar.getOrientation() == JScrollBar.VERTICAL )
 		{
-			//TOP INSETS
-		    g.setColor( COLOR_DIS_BACKGROUND );
-			for(int i=0;i < INSETS;i++){
-				g.drawLine( 0, i, trackBounds.width - 1, i );	// INSETS	
-			}
-			
-			//BOTTOM INSETS
-			for(int i=trackBounds.height - INSETS;i < trackBounds.height;i++){
-				g.drawLine( 0, i, trackBounds.width - 1, i);	// INSETS	
-			}
+		    g.setColor( COLOR_BACKGROUND);
+    	    g.fillRect( 1, INSETS, trackBounds.width - 1, trackBounds.height - INSETS*2);
 			
 			//FIXME: COMO É ?? CORES ENABLE/DISABLE
 		    if ( c.isEnabled() ) {
@@ -82,17 +81,9 @@ public class FlatScrollBarUI extends MetalScrollBarUI{
 		}
 		else  // HORIZONTAL
 		{
-			//LEFT INSETS
-		    g.setColor( COLOR_DIS_BACKGROUND );
-			for(int i=0;i < INSETS;i++){
-				g.drawLine( i, 0, i, trackBounds.height - 1 );	// INSETS	
-			}
-			
-			//RIGHT INSETS
-			for(int i=trackBounds.width - INSETS;i < trackBounds.width;i++){
-				g.drawLine( i, 0, i, trackBounds.height - 1 );	// INSETS	
-			}
-			
+    	    g.setColor( COLOR_BACKGROUND);
+    	    g.fillRect( INSETS + 1, 1, trackBounds.width - INSETS*2, trackBounds.height - 2);
+    	    
 		    if ( c.isEnabled() ) {
 		        g.setColor( COLOR_BORDER );
 				g.drawLine( INSETS, 0, trackBounds.width - INSETS, 0 );  // TOP
@@ -104,7 +95,7 @@ public class FlatScrollBarUI extends MetalScrollBarUI{
 //		        MetalUtils.drawDisabledBorder(g, 0, 0, trackBounds.width, trackBounds.height );
 		    }
 		}
-
+		
         g.translate( -trackBounds.x, -trackBounds.y );
     }
    
@@ -114,14 +105,13 @@ public class FlatScrollBarUI extends MetalScrollBarUI{
     	    return;
     	}
 
-        g.translate( thumbBounds.x, thumbBounds.y );
+//        g.translate( thumbBounds.x, thumbBounds.y );
 
     	if ( scrollbar.getOrientation() == JScrollBar.VERTICAL )
     	{
-    	    if ( !isFreeStanding ) {
-                thumbBounds.width += 2;
-    	    }
-    	    g.setColor( COLOR_BACKGROUND );
+    		g.translate( thumbBounds.x, thumbBounds.y -INSETS);
+    		
+    	    g.setColor( COLOR_THUMB_BACKGROUND );
     	    g.fillRect( 2, 1, thumbBounds.width - 4, thumbBounds.height - 2 );
     	    
     	    g.setColor( COLOR_BORDER );
@@ -129,24 +119,17 @@ public class FlatScrollBarUI extends MetalScrollBarUI{
     	    g.drawLine( 1, 1, 1, thumbBounds.height - 2 );//LEFT
     	    g.drawLine( 1, thumbBounds.height - 2, thumbBounds.width - 2, thumbBounds.height - 2 );//BOTTOM
     	    g.drawLine( thumbBounds.width - 2, 1, thumbBounds.width - 2, thumbBounds.height - 2 );//RIGHT
-    	    
-    	    if ( !isFreeStanding ) {
-                thumbBounds.width -= 2;
-    	    }
-
     	}
     	else  // HORIZONTAL
     	{
-    	    if ( !isFreeStanding ) {
-    	        thumbBounds.height += 2;
-    	    }
-
-    	    g.setColor( COLOR_BACKGROUND );
-    	    g.fillRect( 0, 0, thumbBounds.width - 1, thumbBounds.height - 2 );
+    	    g.setColor( COLOR_THUMB_BACKGROUND);
+    	    g.fillRect( 2, 2, thumbBounds.width - 2, thumbBounds.height - 4);
     	    
-    	    if ( !isFreeStanding ) {
-    	        thumbBounds.height -= 2;
-    	    }
+    	    g.setColor( COLOR_BORDER );
+    	    g.drawLine( 1, 1, thumbBounds.width , 1 );//TOP
+    	    g.drawLine( 0, 1, 0, thumbBounds.height - 2 );//LEFT
+    	    g.drawLine( 1, thumbBounds.height - 2, thumbBounds.width , thumbBounds.height - 2 );//BOTTOM
+    	    g.drawLine( thumbBounds.width , 1, thumbBounds.width , thumbBounds.height - 2 );//RIGHT
     	}
             
     	g.translate( -thumbBounds.x, -thumbBounds.y );
@@ -180,18 +163,16 @@ public class FlatScrollBarUI extends MetalScrollBarUI{
 	}
     
     
-    public Dimension getPreferredSize( JComponent c )
-    {
-        if ( scrollbar.getOrientation() == JScrollBar.VERTICAL )
-        {
-        	return new Dimension( scrollBarWidth, scrollBarWidth * 3 + 10 );
-        }
-        else  // Horizontal
-        {
-            return new Dimension( scrollBarWidth * 3 + 10, scrollBarWidth );
-        }
-
-    }
+//    public void paint(Graphics g, JComponent c) {
+//    	Rectangle flatBoundsTrack = getTrackBounds();
+//    	flatBoundsTrack.width -= INSETS;
+//    	flatBoundsTrack.height -= INSETS;
+//    	paintTrack(g, c, flatBoundsTrack);		
+//    	Rectangle thumbBounds = getThumbBounds();
+//    	if (thumbBounds.intersects(g.getClipBounds())) {
+//    	    paintThumb(g, c, thumbBounds);
+//    	}
+//    }
     
 	/** Returns the view that represents the decrease view. 
 	*/
