@@ -40,7 +40,7 @@ public class ScrollBarStyle extends DefaultStyle{
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(PT_WIDTH, 40);
+		map.put(PT_WIDTH, 20);
 	}
 	
 	// -------------------------------------------------------------------------
