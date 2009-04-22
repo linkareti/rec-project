@@ -27,7 +27,6 @@ import com.sun.media.ui.ComboBox;
  */
 public class FlatComboBoxUI extends MetalComboBoxUI{
 	
-	private static final Color COLOR_BORDER_SOLID_THIN_BLUE = new Color(0x8CABB3);	
 	private static final Color COLOR_ARROWBUTTON = new Color(0x64797F);
     
     public static ComponentUI createUI(JComponent c) {
