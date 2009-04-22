@@ -114,8 +114,8 @@ public class FlatScrollButton extends MetalScrollButton{
 	 	    g.setColor( arrowColor );
 	 		int startY = ((h+1) - arrowHeight) / 2;
 	 		int startX = (w / 2);
-	 		for (int line = 0; line < arrowHeight; line++) {
-	 		    g.drawLine( startX-line, startY+line, startX +line+1, startY+line);
+	 		for (int line = 0; line <= arrowHeight; line++) {
+	 		    g.drawLine( startX-line, startY+line, startX +line, startY+line);
 	 		}
 	 	        
 	 		// Draw the Button
@@ -146,7 +146,7 @@ public class FlatScrollButton extends MetalScrollButton{
 	 		int startY = (((h+1) - arrowHeight) / 2)+ arrowHeight-1;
 	 		int startX = (w / 2);
 	 		for (int line = 0; line < arrowHeight; line++) {
-	 		    g.drawLine( startX-line, startY-line, startX +line+1, startY-line);
+	 		    g.drawLine( startX-line, startY-line, startX +line, startY-line);
 	 		}
 		
 	 		if (isEnabled) {
