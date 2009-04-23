@@ -1,7 +1,7 @@
 package com.linkare.rec.impl.newface.component.media;
 
 /**
- * Define as opções de transcoding.
+ * Define as opÃ§Ãµes de transcoding.
  * @author bcatarino
  */
 public class TranscodingConfig {

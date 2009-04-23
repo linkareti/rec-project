@@ -6,16 +6,15 @@ package com.linkare.rec.impl.newface.component.media;
  */
 public enum MediaPlayerState {
 
-    // O Player n„o tem nenhum media associado.
+    // O Player n√£o tem nenhum media associado.
     EMPTY,
 
-    // O Player est· parado.
+    // O Player est√° parado.
     STOPPED,
     
-    // O Player est· a reproduzir.
+    // O Player est√° a reproduzir.
     PLAYING,
 
-    // O Player est· em pausa.
+    // O Player est√° em pausa.
     PAUSED;
-
 }
