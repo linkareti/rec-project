@@ -19,6 +19,7 @@ import java.awt.LayoutManager;
 import java.awt.Rectangle;
 import java.awt.Scrollbar;
 
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JScrollBar;
@@ -26,12 +27,14 @@ import javax.swing.JTabbedPane;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.IconUIResource;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalScrollBarUI;
 import javax.swing.plaf.metal.MetalScrollButton;
 import javax.swing.plaf.metal.MetalTabbedPaneUI;
 import javax.swing.plaf.metal.MetalTabbedPaneUI.TabbedPaneLayout;
+import javax.swing.text.IconView;
 import javax.swing.text.View;
 
 import org.jfree.util.Log;
@@ -66,7 +69,7 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI{
     	if (tabPane.getTabLayoutPolicy() == JTabbedPane.SCROLL_TAB_LAYOUT) {
                 return super.createLayoutManager(); 
     	}
-            return new TabbedPaneLayout();
+        return new TabbedPaneLayout();
     }
     
 
@@ -74,13 +77,11 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI{
     protected void paintTabBackground( Graphics g, int tabPlacement,
             int tabIndex, int x, int y, int w, int h, boolean isSelected ) {
 	    	
-	   	 int slantWidth = (h+10) / 2;
 	     if ( isSelected ) {
 	         g.setColor( COLOR_SELECTED_TAB_BG);
 	     } else {
 	         g.setColor( COLOR_UNSELECTED_TAB_BG );
 	     }
-    	
     	switch ( tabPlacement ) {
         	case LEFT:
 			    g.fillRect( x + 5, y + 1, w - 5, h - 1);
@@ -97,6 +98,7 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI{
 			    break;
 		    case TOP:
 		        default:
+    		
 			    g.fillRect( x, y  , w - 2 , h + 4 );
 //		        g.fillRect( x + 4, y + 2, (w - 1) - 3, (h - 1) - 1 );
 //			    g.fillRect( x + (w - 1) - 3, y + 5, 3, h - 3 );
@@ -109,22 +111,8 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI{
 
           ensureCurrentLayout();
           paintTabArea(g, tabPlacement, selectedIndex);
-
     }
     
-
-
-
-//    protected void paintTab(Graphics g, int tabPlacement,
-//    		Rectangle[] rects, int tabIndex, 
-//    		Rectangle iconRect, Rectangle textRect) {
-//    	Rectangle tabRect = rects[tabIndex];
-//    	int selectedIndex = tabPane.getSelectedIndex();
-//    	boolean isSelected = selectedIndex == tabIndex;
-//
-////    		paintTabBackground(g, tabPlacement, tabIndex, tabRect.x, tabRect.y,
-////    				tabRect.width, tabRect.height, isSelected);
-//    }
     
     private void ensureCurrentLayout() {
         if (!tabPane.isValid()) {
@@ -151,13 +139,14 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI{
     protected void paintTabBorder( Graphics g, int tabPlacement,
     		int tabIndex, int x, int y, int w, int h, 
     		boolean isSelected) {
-   
+
+    	
     }
     
     protected void paintContentBorderLeftEdge(Graphics g, int tabPlacement,
             int selectedIndex,
             int x, int y, int w, int h) { 
-    
+
     }
     
     protected void paintText(Graphics g, int tabPlacement,
@@ -172,28 +161,29 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI{
     		// html
     		v.paint(g, textRect);
     	} else {
+    	
     		// plain text
     		int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
-
+    		//FIXME Substituir estas constantes por propriedades
     		if (tabPane.isEnabled() && isSelected){ 
     			g.setColor(COLOR_SELECTED_TAB_FG);
     			SwingUtilities2.drawStringUnderlineCharAt(tabPane, g,
     					title, mnemIndex,
     					textRect.x, textRect.y + metrics.getAscent());
 
-    		} else if(!isSelected){
+    		} else if(tabPane.isEnabled() && !isSelected){
     			g.setColor(COLOR_UNSELECTED_TAB_FG);
     			SwingUtilities2.drawStringUnderlineCharAt(tabPane, g,
     					title, mnemIndex,
     					textRect.x, textRect.y + metrics.getAscent());
 
-    		}else{ // tab disabled
+    		}else { // tab disabled
     			g.setColor(COLOR_DISABLE_TAB_FG);
     			SwingUtilities2.drawStringUnderlineCharAt(tabPane, g,
     					title, mnemIndex,
-    					textRect.x - 1, textRect.y + metrics.getAscent() - 1);
+    					textRect.x , textRect.y + metrics.getAscent() );
 
     		}
     	}
-} 
+    } 
 }
