@@ -7,8 +7,12 @@ import com.linkare.rec.impl.newface.component.media.TranscodingConfig;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.component.media.VideoBox;
 import com.linkare.rec.impl.newface.component.media.VideoCodecs;
+import com.linkare.rec.impl.newface.component.media.VideoViewerController.MediaTimeChangedEvent;
+import java.util.Calendar;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 /**
@@ -17,12 +21,15 @@ import javax.swing.JTextField;
  */
 public class TestMediaPane extends UserInterfaceTest {
 
-    private static final String MRL = "/home/bcatarino/Documentos/NetBeansProjects/xpto.avi";
+//    private static final String MRL = "/home/bcatarino/Documentos/NetBeansProjects/xpto.avi";
+    private static final String MRL = "rtsp://elabmc.ist.utl.pt/radiare.sdp";
     
     VideoViewerController controller = VideoViewerController.getInstance();
     VideoBox vbox;
 
     JTextField tf;
+    JCheckBox cb;
+    JSlider slider;
 
     int screenNumber = 0;
 
@@ -31,6 +38,14 @@ public class TestMediaPane extends UserInterfaceTest {
 	}
 
     public void setComponents(final MediaPane mp) {
+        
+        controller.addMediaTimeChangedEventListener(new VideoViewerController.MediaTimeChangedEventListener() {
+            @Override
+            public void timeChanged(MediaTimeChangedEvent evt) {
+                adjustSlider();
+                System.out.println("Evento apanhado!!!!");
+            }
+        });
         mp.add(getPlayButton());
         mp.add(getPauseButton());
         mp.add(getStopButton());
@@ -38,15 +53,31 @@ public class TestMediaPane extends UserInterfaceTest {
         mp.add(getPrevButton());
         mp.add(getNextButton());
         mp.add(getButtonCapture());
-        mp.add(getButtonSave());
-        mp.add(getButton3());
+        mp.add(cb = getCheckBox());
+        mp.add(getButtonFrame0());
+        mp.add(getButtonGotoFrame());
         mp.add(tf = getLinkText());
         mp.add(getButtonOpen());
+        mp.add(slider = getMySlider());
     }
 
-    private TestSlider getMySlider() {
+    private void adjustSlider() {
 
-        TestSlider ts = new TestSlider();
+        System.out.println("A aceder ao Marker " + Thread.currentThread());
+        int max = slider.getMaximum();
+        long current = controller.getCurrentMediaTime();
+        long length = controller.getTotalMediaTime();
+        if (length == 0)
+            length = 1;
+
+        int val = (int)(max * (current) / length);
+
+        slider.setValue(val);
+    }
+
+    private JSlider getMySlider() {
+
+        final JSlider ts = new JSlider();
         ts.setMaximum(1000000);
         ts.setSize(300, 50);
         ts.setLocation(40, 440);
@@ -54,7 +85,7 @@ public class TestMediaPane extends UserInterfaceTest {
         ts.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                controller.adjustVideoPosition();
+                controller.adjustVideoPosition(ts.getValue(), ts.getMaximum());
             }
         });
         return ts;
@@ -122,6 +153,7 @@ public class TestMediaPane extends UserInterfaceTest {
                 VideoBox newBox = new VideoBox();
                 newBox.changeSize(800, 600);
                 newBox.setVisible(true);
+                newBox.getVideoOutput().setSize(800, 600);
                 frame.add(newBox);
                 
                 controller.setVideoOutput(newBox.getVideoOutput());
@@ -175,6 +207,16 @@ public class TestMediaPane extends UserInterfaceTest {
         return button;
     }
 
+    private JCheckBox getCheckBox() {
+
+        JCheckBox cb = new JCheckBox();
+        cb.setText("Save to File");
+        cb.setVisible(true);
+        cb.setLocation(140, 400);
+        cb.setSize(80, 30);
+        return cb;
+    }
+
     private JButton getButtonSave() {
         JButton button = new JButton();
         button.setVisible(true);
@@ -198,16 +240,40 @@ public class TestMediaPane extends UserInterfaceTest {
         return button;
     }
 
-    private JButton getButton3() {
+    private JButton getButtonFrame0() {
         JButton button = new JButton();
         button.setVisible(true);
         button.setSize(80, 30);
-        button.setLocation(240, 400);
-        button.setText(">>");
+        button.setLocation(40, 530);
+        button.setText("frm0");
         button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                controller.move(1);
+                Calendar c = Calendar.getInstance();
+                c.set(Calendar.YEAR, 1970);
+                c.set(Calendar.MONTH, Calendar.JANUARY);
+                c.set(Calendar.DAY_OF_MONTH, 1);
+                controller.setFrame0(c.getTimeInMillis());
+            }
+        });
+        return button;
+    }
+
+    private JButton getButtonGotoFrame() {
+        JButton button = new JButton();
+        button.setVisible(true);
+        button.setSize(80, 30);
+        button.setLocation(140, 530);
+        button.setText("goto");
+        button.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Calendar c = Calendar.getInstance();
+                c.set(Calendar.YEAR, 1970);
+                c.set(Calendar.MONTH, Calendar.JANUARY);
+                c.set(Calendar.DAY_OF_MONTH, 1);
+//                c.set(Calendar.HOUR, 0);
+                controller.moveTo(c.getTimeInMillis());
             }
         });
         return button;
@@ -238,7 +304,19 @@ public class TestMediaPane extends UserInterfaceTest {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 controller.releaseMedia();
-                controller.setMediaToPlay(tf.getText());
+                if (cb.isSelected()) {
+                    TranscodingConfig config = new TranscodingConfig();
+                    config.setMuxer(Muxers.MP4);
+                    config.setVideoCodec(VideoCodecs.MP4V);
+                    config.setVideoBitrate(800);
+                    config.setVideoScale(1);
+                    config.setAudioCodec(AudioCodecs.MPGA);
+                    config.setAudioBitrate(128);
+                    config.setSoundChannels(2);
+                    controller.setMediaToPlay(tf.getText(), config, "myVideoFile.mp4");
+                } else {
+                    controller.setMediaToPlay(tf.getText());
+                }
             }
         });
         return button;
@@ -249,7 +327,7 @@ public class TestMediaPane extends UserInterfaceTest {
 
         MediaPane mp = new MediaPane();
         setComponents(mp);
-        TestSlider marker = getMySlider();
+        JSlider marker = getMySlider();
         mp.add(marker);
         mp.getVideoBox().getVideoOutput().setVisible(true);
 
@@ -258,7 +336,6 @@ public class TestMediaPane extends UserInterfaceTest {
 
         controller.setMediaToPlay(MRL);
         controller.setVideoOutput(vbox.getVideoOutput());
-        controller.registerMarker(marker);
 
 		dialog.setVisible(true);
 		System.exit(STATUS_SUCCESS);
