@@ -27,14 +27,14 @@ public class FlatMenuBarUI extends BasicMenuBarUI {
 	    .getImage(FlatLAFResourcesEnum.FLATMENUBAR_BACKGROUD_IMG.getName());
 
     public static ComponentUI createUI(JComponent x) {
-	return new FlatMenuBarUI();
+    	return new FlatMenuBarUI();
     }
-    
+
     @Override
     public void paint(Graphics g, JComponent c) {
-	// Simply draw the background image
-	g.drawImage(backgroundImg, 0, 0, c.getWidth(), c.getHeight(), 0, 0, backgroundImg.getWidth(),
-		backgroundImg.getHeight(), null);
+    	// Simply draw the background image
+    	g.drawImage(backgroundImg, 0, 0, c.getWidth(), c.getHeight(), 0, 0, backgroundImg.getWidth(),
+    			backgroundImg.getHeight(), null);
     }
     
 }
