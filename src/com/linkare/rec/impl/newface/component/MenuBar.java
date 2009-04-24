@@ -22,8 +22,6 @@ public class MenuBar extends JMenuBar {
 
     private JMenu topMenuLaboratory;
     
-    private JMenuItem menuItemLaboratoryExit;
-    
     private JMenu topMenuView;
     
     private JMenu topMenuLanguage;
@@ -40,10 +38,10 @@ public class MenuBar extends JMenuBar {
 	topMenuLaboratory = new JMenu();
 	topMenuLaboratory.setText("Laboratório");
 
-	menuItemLaboratoryExit = new JMenuItem();
-	menuItemLaboratoryExit.setText("Sair");
-
-	topMenuLaboratory.add(menuItemLaboratoryExit);
+	topMenuLaboratory.add(new JMenuItem("Menu Item 3"));
+    topMenuLaboratory.add(new JMenuItem("Menu Item 2"));
+    topMenuLaboratory.add(new JMenuItem("Menu Item 1"));
+    topMenuLaboratory.add(new JMenuItem("Sair"));
 	add(topMenuLaboratory);
 
 	// Menu View
@@ -60,7 +58,11 @@ public class MenuBar extends JMenuBar {
 
 	// Menu Help
 	topMenuHelp = new JMenu();
-	topMenuHelp.setText("Ajuda");
+    topMenuHelp.setText("Ajuda");
+	topMenuHelp.add(new JMenuItem("Indice"));
+    topMenuHelp.add(new JMenuItem("Acerca"));
+    topMenuHelp.add(new JMenuItem("Contens"));
+
 	add(topMenuHelp);
     }
 }
