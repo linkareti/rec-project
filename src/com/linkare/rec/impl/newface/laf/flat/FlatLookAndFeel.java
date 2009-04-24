@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JTextField;
 import javax.swing.UIDefaults;
+import javax.swing.plaf.basic.BasicMenuUI;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalScrollBarUI;
@@ -20,6 +21,7 @@ import javax.swing.text.DefaultEditorKit;
 
 import com.linkare.rec.impl.newface.laf.flat.elabtheme.ElabTheme2;
 import com.linkare.rec.impl.newface.laf.flat.theme.FlatTheme;
+import com.sun.swing.internal.plaf.basic.resources.basic;
 
 /**
  * Implements a Flat LookAndFeel targeted for web.
@@ -90,6 +92,7 @@ public class FlatLookAndFeel extends
 				"ScrollBarUI", FlatScrollBarUI.class.getName(),
 				"ComboBoxUI", FlatComboBoxUI.class.getName(),
 				"TabbedPaneUI", FlatTabbedPaneUI.class.getName(),
+				"MenuUI", BasicMenuUI.class.getName(),
 		};
 
 		if (log.isLoggable(Level.FINER)) {
