@@ -7,7 +7,13 @@
 package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.Map;
+
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.plaf.InsetsUIResource;
 
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
@@ -17,12 +23,25 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class MenuItemStyle extends DefaultStyle {
 
+	//ENABLED COLORS
+	private static final Color COLOR_MENU_ITEM_BG = new Color(0x285357);
+	private static final Color COLOR_MENU_ITEM_FG = new Color(0xE4EEED);
+	private static final Color COLOR_MENU_BORDER = new Color(0xE4EEED);
+	private static final Color COLOR_MENU_DISABLED_FG = new Color(0x22363A);
+	//PROPERTIES
+	private static final String PT_MENU_SELECTION_BG = "selectionBackground";
+	private static final String PT_MENU_SELECTION_FG = "selectionForeground"; 
+	private static final String PT_MENU_DISABLED_FG = "disabledForeground"; 
+	private static final String PT_MENU_MARGIN = "margin";
+	 
+	//BORDER
+	public static final Border SOLID_THIN_BORDER = BorderFactory.createLineBorder(COLOR_MENU_BORDER);
+		
+	//LABEL FONT
+	public static final Font FONT_MENU = new FontUIResource("Arial", Font.BOLD, 10);
+	
 	public static final String ID = "MenuItem";
 	
-	public static final Object MENUITEM_DISABLEDFOREGROUND_COLOR = new Color(0x677478);
-	
-	public static final Color MENUITEM_FOREGROUND_COLOR = new Color(0xE4EEED);
-
 	/**
 	 * Creates the <code>MenuItemStyle</code>.
 	 */
@@ -38,10 +57,11 @@ public class MenuItemStyle extends DefaultStyle {
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, EMPTY_BORDER_MARGIN_4);
-		map.put(DISABLED_FOREGROUND, MENUITEM_DISABLEDFOREGROUND_COLOR);
-		//map.put(FOREGROUND, MENUITEM_FOREGROUND_COLOR);
-		//map.put(SELECTION_FOREGROUND, WHITE_DEFAULT_COLOR);
+		map.put(BORDER, EMPTY_BORDER_MARGIN_2);
+		map.put(FOREGROUND, COLOR_MENU_ITEM_FG);
+		map.put(BACKGROUND, COLOR_MENU_ITEM_BG);
+		map.put(PT_MENU_SELECTION_FG, COLOR_MENU_ITEM_BG);
+		map.put(FONT, FONT_MENU);
 	}
 
 	// -------------------------------------------------------------------------

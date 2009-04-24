@@ -59,6 +59,7 @@ public class DefaultStyle extends AbstractStyle {
 	
 	public static final BorderUIResource EMPTY_BORDER = new BorderUIResource(BorderFactory.createEmptyBorder());
 	
+	public static final BorderUIResource EMPTY_BORDER_MARGIN_2 = new BorderUIResource(BorderFactory.createEmptyBorder(4, 6, 4, 6));
 	public static final BorderUIResource EMPTY_BORDER_MARGIN_4 = new BorderUIResource(BorderFactory.createEmptyBorder(6, 4, 4, 4));
 	
 	/**

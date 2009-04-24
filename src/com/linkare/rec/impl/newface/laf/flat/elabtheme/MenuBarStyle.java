@@ -6,6 +6,7 @@
  */
 package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
+import java.awt.Color;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -19,6 +20,10 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class MenuBarStyle extends DefaultStyle {
 
+	//ENABLED COLORS
+	private static final Color COLOR_MENU_BG = new Color(0x285357);
+	
+	public static final String ID = "MenuBar";
 	/**
 	 * Creates the <code>MenuBarStyle</code>.
 	 */
@@ -28,9 +33,9 @@ public class MenuBarStyle extends DefaultStyle {
 
 	@Override
 	protected String defineStyleId() {
-		return "MenuBar";
+		return  ID;
 	}
-
+	
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
@@ -40,11 +45,5 @@ public class MenuBarStyle extends DefaultStyle {
 	// -------------------------------------------------------------------------
 	// TODO Getters (Used to marshal values to xml)
 	
-	/**
-	 * @return The Border property value as String.
-	 */
-	@XmlAttribute
-	public String getBorder() {
-		return getPropertyMap().get(BORDER).toString();
-	}
+
 }

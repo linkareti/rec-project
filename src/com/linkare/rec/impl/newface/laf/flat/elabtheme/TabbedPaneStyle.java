@@ -20,10 +20,7 @@ public class TabbedPaneStyle extends DefaultStyle{
 	public static final String ID = "TabbedPane";
 		
 	//LABEL FONT
-	public static final Font FONT_TABBEDPANE = new FontUIResource("Arial", Font.BOLD, 10);	
-		
-	//PROPERTIES
-	private static final String  PT_FONT  = "font";	
+	public static final Font FONT_TABBEDPANE = new FontUIResource("Arial", Font.BOLD, 11);	
 
 	/**
 	 * Creates the <code>ComboBoxStyle</code>.
@@ -40,6 +37,6 @@ public class TabbedPaneStyle extends DefaultStyle{
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(PT_FONT, FONT_TABBEDPANE);
+		map.put(FONT, FONT_TABBEDPANE);
 	}
 }
