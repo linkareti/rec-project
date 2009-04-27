@@ -7,9 +7,14 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.security.KeyFactory;
+import javax.swing.BorderFactory;
+import javax.swing.JComboBox.KeySelectionManager;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
+import javax.swing.KeyStroke;
 
 /**
  * ReC MenuBar
@@ -41,6 +46,11 @@ public class MenuBar extends JMenuBar {
 	topMenuLaboratory.add(new JMenuItem("Menu Item 3"));
     topMenuLaboratory.add(new JMenuItem("Menu Item 2"));
     topMenuLaboratory.add(new JMenuItem("Menu Item 1"));
+    topMenuLaboratory.add(new JSeparator());
+    topMenuLaboratory.add(new JMenuItem("Menu Item 3"));
+    topMenuLaboratory.add(new JMenuItem("Menu Item 2"));
+    topMenuLaboratory.add(new JSeparator());
+    topMenuLaboratory.add(new JMenuItem("Menu Item 1"));
     topMenuLaboratory.add(new JMenuItem("Sair"));
 	add(topMenuLaboratory);
 
@@ -61,6 +71,7 @@ public class MenuBar extends JMenuBar {
     topMenuHelp.setText("Ajuda");
 	topMenuHelp.add(new JMenuItem("Indice"));
     topMenuHelp.add(new JMenuItem("Acerca"));
+    topMenuHelp.add(new JSeparator());
     topMenuHelp.add(new JMenuItem("Contens"));
 
 	add(topMenuHelp);

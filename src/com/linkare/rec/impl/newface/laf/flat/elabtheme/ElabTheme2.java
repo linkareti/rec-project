@@ -77,6 +77,8 @@ public class ElabTheme2 extends FlatTheme {
 		result.add(DefaultStyle.class);
 		result.add(MenuBarStyle.class);
 		result.add(MenuItemStyle.class);
+		result.add(PopupMenuStyle.class);
+		result.add(SeparatorStyle.class);
 		result.add(PanelStyle.class);
 		result.add(TextFieldStyle.class);
 		result.add(PasswordFieldStyle.class);
@@ -87,6 +89,9 @@ public class ElabTheme2 extends FlatTheme {
 		result.add(ScrollBarStyle.class);
 		result.add(ComboBoxStyle.class);
 		result.add(TabbedPaneStyle.class);
+		result.add(RadioButtonMenuItemStyle.class);
+		result.add(CheckBoxMenuItemStyle.class);
+		
 		
 		return result;
 	}

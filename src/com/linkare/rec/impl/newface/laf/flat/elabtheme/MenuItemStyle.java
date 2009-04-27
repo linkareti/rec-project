@@ -18,25 +18,27 @@ import javax.swing.plaf.InsetsUIResource;
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
- * @author Henrique Fernandes
+ * @author João Florindo
  */
 @Style
 public class MenuItemStyle extends DefaultStyle {
 
 	//ENABLED COLORS
-	private static final Color COLOR_MENU_ITEM_BG = new Color(0x285357);
+	private static final Color COLOR_MENU_ITEM_BG = new Color(0x263537);
 	private static final Color COLOR_MENU_ITEM_FG = new Color(0xE4EEED);
 	private static final Color COLOR_MENU_BORDER = new Color(0xE4EEED);
 	private static final Color COLOR_MENU_DISABLED_FG = new Color(0x22363A);
+	private static final Color COLOR_MENU_ACCELERATOR_FG = new Color(0xE4EEED);
+	
 	//PROPERTIES
 	private static final String PT_MENU_SELECTION_BG = "selectionBackground";
 	private static final String PT_MENU_SELECTION_FG = "selectionForeground"; 
 	private static final String PT_MENU_DISABLED_FG = "disabledForeground"; 
+	private static final String PT_MENU_ACCELERATOR_FG = "acceleratorForeground";
 	private static final String PT_MENU_MARGIN = "margin";
+	private static final String PT_FONT_ACCELERATOR = "acceleratorFont";
+
 	 
-	//BORDER
-	public static final Border SOLID_THIN_BORDER = BorderFactory.createLineBorder(COLOR_MENU_BORDER);
-		
 	//LABEL FONT
 	public static final Font FONT_MENU = new FontUIResource("Arial", Font.BOLD, 10);
 	
@@ -61,7 +63,10 @@ public class MenuItemStyle extends DefaultStyle {
 		map.put(FOREGROUND, COLOR_MENU_ITEM_FG);
 		map.put(BACKGROUND, COLOR_MENU_ITEM_BG);
 		map.put(PT_MENU_SELECTION_FG, COLOR_MENU_ITEM_BG);
+		map.put(PT_MENU_SELECTION_BG, PT_MENU_SELECTION_FG);
 		map.put(FONT, FONT_MENU);
+		map.put(PT_FONT_ACCELERATOR, FONT_MENU);
+		map.put(PT_MENU_ACCELERATOR_FG, COLOR_MENU_ACCELERATOR_FG);
 	}
 
 	// -------------------------------------------------------------------------
