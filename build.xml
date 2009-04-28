@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="ReCNewFace" default="default" basedir=".">
-    <description>Builds, tests, and runs the project ReCNewFace.</description>
+<project name="rec-newface" default="default" basedir=".">
+    <description>Builds, tests, and runs the project rec-newface.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -94,6 +94,5 @@
         </copy>
 
     </target>
-
 
 </project>
