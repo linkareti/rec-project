@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  * This class is responsible for managing threading pool scheduling and
  * priorities
  * 
- * @author André Nuno Calado Leitão - Linkare TI
+ * @author AndrÃ© Nuno Calado LeitÃ£o - Linkare TI
  * @version 0.1
  * 
  */
@@ -25,8 +25,8 @@ public final class ProcessingManager {
 	    new LinkedBlockingQueue<Runnable>());
 
     /**
-     * Singleton instance A construção do objecto ProcessingManager de imediato
-     * permite evitar as questões de multithreaded access
+     * Singleton instance A construï¿½ï¿½o do objecto ProcessingManager de imediato
+     * permite evitar as questï¿½es de multithreaded access
      */
     private final static ProcessingManager instance = new ProcessingManager();
 
@@ -38,9 +38,9 @@ public final class ProcessingManager {
     }
 
     /**
-     * Este método permite aceder à instância singletão do Processing Manager
+     * Este mï¿½todo permite aceder ï¿½ instï¿½ncia singletï¿½o do Processing Manager
      * 
-     * @return A instância única de ProcessingManager
+     * @return A instï¿½ncia ï¿½nica de ProcessingManager
      */
 
     public static ProcessingManager getInstance() {
@@ -60,7 +60,7 @@ public final class ProcessingManager {
 	    this.threadPoolMinPriority.execute(task);
 	    break;
 	default:
-	    System.out.println("ERRO, prioridade não reconhecida.....");
+	    System.out.println("ERRO, prioridade nï¿½o reconhecida.....");
 	    break;
 	}
     }
@@ -77,7 +77,7 @@ public final class ProcessingManager {
 	    this.threadPoolMinPriority.getQueue().add(task);
 	    break;
 	default:
-	    System.out.println("ERRO, prioridade não reconhecida.....");
+	    System.out.println("ERRO, prioridade nï¿½o reconhecida.....");
 	    break;
 	}
     }
