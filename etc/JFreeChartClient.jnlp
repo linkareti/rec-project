@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<jnlp spec="1.0+" codebase="http://elab.ist.utl.pt/rec/jfreechart" href="JFreeChartClient.jnlp">
+    <information>
+        <title>Remote Experienced Control Client Library</title>
+        <vendor>EDUCARE S.A.</vendor>
+	<homepage href="http://elab.ist.utl.pt/rec"/>
+	<description kind="one-line">The JFreeChart classes </description>
+	<description kind="tooltip">JFreeChart</description>
+	<icon href="ReCClient_iconified.gif"/>
+	<icon kind="splash" href="rec_logo.gif"/>
+    </information>
+    <resources>
+        <jar href="jfreechart-1.0.9_sig.jar"/>
+        <jar href="jcommon-1.0.12_sig.jar"/>
+    </resources>
+    <component-desc/>
+    <security>
+        <all-permissions/>
+    </security>
+</jnlp>

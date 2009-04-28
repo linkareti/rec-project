@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<jnlp spec="1.0+" codebase="http://elab.ist.utl.pt/rec/openorb" href="OpenORBClient.jnlp">
+    <information>
+        <title>OpenORB Library</title>
+        <vendor>OpenORB.org</vendor>
+	<homepage href="http://openorb.sourceforge.net"/>
+	<description kind="one-line">The base classes for the ORB Implementation OpenORB</description>
+	<description kind="tooltip">OpenORB Client Library</description>
+    </information>
+    <resources>
+        <jar href="openorb_orb-1.4.0_sig.jar"/>	
+	<jar href="avalon-framework_sig.jar"/>
+	<jar href="xercesImpl_sig.jar"/> 
+	<jar href="logkit_sig.jar"/> 
+	<jar href="tools-1.4.0_sig.jar"/>
+	<jar href="xml-apis_sig.jar"/>
+	<jar href="openorb_orb_omg-1.4.0_sig.jar"/>
+	<!--<jar href="openorb_ots-1.4.0_sig.jar"/>
+	<jar href="openorb_pss-1.4.0_sig.jar"/>-->
+	<property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB"/>
+	<property name="org.omg.CORBA.ORBSingletonClass" value="org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton"/>
+	<property name="ReC.MultiCastController.BindName" value="MultiCastController"/>
+	<property name="ReC.MultiCastController.InitRef" value="MultiCastController"/>
+	<property name="openorb.config" value="http://elab.ist.utl.pt/rec/openorb/OpenORB.xml"/>
+  	<property name="openorb.profile" value="ReCClient"/>
+    </resources>
+    <component-desc/>
+    <security>
+        <all-permissions/>
+    </security>
+</jnlp>
