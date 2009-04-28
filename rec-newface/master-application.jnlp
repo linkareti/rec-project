@@ -1,0 +1,53 @@
+<jnlp spec="1.0+" codebase="${jnlp.codebase}" href="launch.jnlp">
+    <information>
+        <title>${APPLICATION.TITLE}</title>
+        <vendor>${APPLICATION.VENDOR}</vendor>
+        <homepage href="${APPLICATION.HOMEPAGE}"/>
+        <description>${APPLICATION.DESC}</description>
+        <description kind="short">${APPLICATION.DESC.SHORT}</description>
+<!--${JNLP.ICONS}-->
+<!--${JNLP.OFFLINE.ALLOWED}-->
+    </information>
+<!--${JNLP.SECURITY}-->
+
+    <resources>
+<!--${JNLP.RESOURCES.RUNTIME}-->
+<!--${JNLP.RESOURCES.MAIN.JAR}-->
+
+<!--${JNLP.RESOURCES.JARS .DISABLED}-->
+<!-- jnlp resources jars - auto-generate removing .DISABLED above -->
+<jar href="lib/appframework-1.0.3.jar"/>
+<jar href="lib/swing-worker-1.1.jar"/>
+<jar href="lib/swingx.jar"/>
+<jar href="lib/ReC.jar"/>
+<jar href="lib/openorb_orb-1.4.0.jar"/>
+<jar href="lib/openorb_orb_omg-1.4.0.jar"/>
+<jar href="lib/openorb_ots-1.4.0.jar"/>
+<jar href="lib/openorb_pss-1.4.0.jar"/>
+<jar href="lib/avalon-framework.jar"/>
+<jar href="lib/comm.jar"/>
+<jar href="lib/fits1.3.jar"/>
+<!--<jar href="lib/javaws.jar"/>-->
+<jar href="lib/JCFN.jar"/>
+<jar href="lib/jcommon-1.0.12.jar"/>
+<jar href="lib/jfreechart-1.0.9.jar"/>
+<jar href="lib/jmf.jar"/>
+<jar href="lib/jsr80.jar"/>
+<jar href="lib/jsr80_ri.jar"/>
+<jar href="lib/jvlc-0.9.0.jar"/>
+<jar href="lib/logkit.jar"/>
+<jar href="lib/RXTXcomm.jar"/>
+<jar href="lib/tools-1.4.0.jar"/>
+<jar href="lib/xercesImpl.jar"/>
+<jar href="lib/xml-apis.jar"/>
+
+<!--${JNLP.RESOURCES.EXTENSIONS}-->
+    <extension name="OpenORBClient" href="openORB/OpenORBClient.jnlp" />
+    
+    <property name="ReCFaceConfig" value="config/ReCFaceConfig.xml" />
+    </resources>
+
+    <application-desc main-class="${jnlp.main.class}">
+    <!--${JNLP.APPLICATION.ARGS}-->
+    </application-desc>
+</jnlp>

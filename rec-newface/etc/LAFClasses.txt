@@ -1,0 +1,27 @@
+# Substance
+
+laf.17=org.jvnet.substance.skin.NebulaLookAndFeel
+laf.16=org.jvnet.substance.skin.ModerateLookAndFeel
+laf.15=org.jvnet.substance.skin.MistSilverLookAndFeel
+laf.14=org.jvnet.substance.skin.MistAquaLookAndFeel
+laf.13=org.jvnet.substance.skin.MagmaLookAndFeel
+laf.12=org.jvnet.substance.skin.EmeraldDuskLookAndFeel
+laf.11=org.jvnet.substance.skin.CremeCoffeeLookAndFeel
+laf.10=org.jvnet.substance.skin.CremeLookAndFeel
+laf.24=org.jvnet.substance.skin.SaharaLookAndFeel
+laf.23=org.jvnet.substance.skin.RavenGraphiteGlassLookAndFeel
+laf.22=org.jvnet.substance.skin.RavenGraphiteLookAndFeel
+laf.21=org.jvnet.substance.skin.RavenLookAndFeel
+laf.20=org.jvnet.substance.skin.OfficeSilver2007LookAndFeel
+laf.9=org.jvnet.substance.skin.ChallengerDeepLookAndFeel
+laf.8=org.jvnet.substance.skin.BusinessBlueSteelLookAndFeel
+laf.7=org.jvnet.substance.skin.BusinessBlackSteelLookAndFeel
+laf.6=org.jvnet.substance.skin.BusinessLookAndFeel
+laf.5=org.jvnet.substance.skin.AutumnLookAndFeel
+laf.4=com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel
+laf.3=com.sun.java.swing.plaf.windows.WindowsLookAndFeel
+laf.2=com.sun.java.swing.plaf.motif.MotifLookAndFeel
+laf.1=com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
+laf.0=javax.swing.plaf.metal.MetalLookAndFeel
+laf.19=org.jvnet.substance.skin.OfficeBlue2007LookAndFeel
+laf.18=org.jvnet.substance.skin.NebulaBrickWallLookAndFeel
