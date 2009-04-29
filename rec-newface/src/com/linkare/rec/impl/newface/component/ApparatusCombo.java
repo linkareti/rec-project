@@ -13,4 +13,9 @@ import javax.swing.JComboBox;
  */
 public class ApparatusCombo extends JComboBox {
 
+	public ApparatusCombo() {
+		super();
+		setRenderer(new ApparatusRenderer());
+	}
+	
 }

@@ -11,12 +11,16 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import com.linkare.rec.impl.newface.ReCApplication;
+
 /**
  *
  * @author iies-consultor922
  */
 public class ApparatusSelectBox extends javax.swing.JPanel {
 
+    private ReCApplication recApplication = ReCApplication.getApplication();
+    
     /** Creates new form ApparatusSelectBox */
     public ApparatusSelectBox() {
         initComponents();
@@ -42,7 +46,7 @@ public class ApparatusSelectBox extends javax.swing.JPanel {
         lblChooseApparatus.setText(resourceMap.getString("lblChooseApparatus.text")); // NOI18N
         lblChooseApparatus.setName("lblChooseApparatus"); // NOI18N
 
-        apparatusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        apparatusCombo.setModel(recApplication.getApparatusComboBoxModel());
         apparatusCombo.setName("apparatusCombo"); // NOI18N
         apparatusCombo.setNextFocusableComponent(btnEnter);
 

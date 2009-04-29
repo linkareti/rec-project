@@ -11,9 +11,13 @@ import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorListener;
 import com.linkare.rec.impl.exceptions.ExceptionCode;
 import com.linkare.rec.impl.exceptions.ReCConfigurationException;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.newface.component.ApparatusComboBoxModel;
 import com.linkare.rec.impl.newface.component.DefaultDialog;
 import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
+import com.linkare.rec.impl.newface.config.Apparatus;
 import com.linkare.rec.impl.newface.config.Lab;
+import com.linkare.rec.impl.newface.config.LocalizationBundle;
 import com.linkare.rec.impl.newface.config.ReCFaceConfig;
 import com.linkare.rec.impl.newface.utils.OS;
 import com.linkare.rec.impl.protocols.ReCProtocols;
@@ -24,6 +28,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jnlp.BasicService;
@@ -111,7 +116,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
     protected boolean connectedToLab = false;
     protected LabClientBean labClientBean;
     protected Lab currentLab;
-    protected DefaultComboBoxModel apparatusComboBoxModel;
+    protected ApparatusComboBoxModel apparatusComboBoxModel;
 
 
 
@@ -174,8 +179,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
         this.recFaceConfig = reCFaceConfig;
     }
 
-    
-    @Override
+	public ApparatusComboBoxModel getApparatusComboBoxModel() {
+		return apparatusComboBoxModel;
+	}
+
+	@Override
     protected void initialize(String[] args) {
         super.initialize(args);
 
@@ -273,6 +281,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
                 log.fine("recFaceConfig.isAutoConnectLab() = " + recFaceConfig.isAutoConnectLab());
                 log.fine("currentLab = " + currentLab);
             }
+            
+            // Load Localization Bundles
+            for (LocalizationBundle bundle : recFaceConfig.getLocalizationBundle()) {
+            	ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
+            }
+            apparatusComboBoxModel = new ApparatusComboBoxModel(currentLab.getApparatus());
 
             // Show view
             log.info("Starting user interface...");
@@ -354,6 +368,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
     public void connect() {
         log.info("Connect user " + labClientBean.getUserInfo().getUserName());
         labClientBean.connect(currentLab.getLocation());
+
+    }
+
+    @Action
+    public void disconnect() {
+        log.info("Disconnect user " + labClientBean.getUserInfo().getUserName());
+        labClientBean.disconnect();
     }
 
     @Override
@@ -367,21 +388,26 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
                 break;
             case LabConnectorEvent.STATUS_CONNECTED:
                 log.fine("STATUS_CONNECTED");
+                setConnectedToLab(true);
                 break;
             case LabConnectorEvent.STATUS_DISCONNECTING:
                 log.fine("STATUS_DISCONNECTING");
                 break;
             case LabConnectorEvent.STATUS_DISCONNECTED:
                 log.fine("STATUS_DISCONNECTED");
+                setConnectedToLab(false);
                 break;
             case LabConnectorEvent.STATUS_UNREACHABLE:
                 log.fine("STATUS_UNREACHABLE");
+                setConnectedToLab(false);
                 break;
             case LabConnectorEvent.STATUS_NOT_AUTHORIZED:
                 log.fine("STATUS_NOT_AUTHORIZED");
+                setConnectedToLab(false);
                 break;
             case LabConnectorEvent.STATUS_NOT_REGISTERED:
                 log.fine("STATUS_NOT_REGISTERED");
+                setConnectedToLab(false);
                 break;
             default:
                 log.warning("Unknown lab status!");
@@ -399,7 +425,16 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
         }
 
         if(evt!=null && evt.getApparatus()!=null) {
-            // TODO
+//            for (int i = 0; i < evt.getApparatus().length; i++) {
+//                Apparatus app = laboratoryTree.getApparatus(evt.getApparatus()[i].getHardwareInfo().getHardwareUniqueID());
+//                if (app == null) {
+//                    continue;
+//                }
+//
+//                if (!app.isEnabled()) {
+//                    app.setEnabled(true);
+//                }
+//            }
         }
     }
 

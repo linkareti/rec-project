@@ -5,12 +5,15 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import com.linkare.rec.impl.newface.config.Apparatus;
 import java.awt.Component;
+
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import org.jdesktop.application.ResourceMap;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.newface.config.Apparatus;
 
 /**
  *
@@ -18,12 +21,11 @@ import org.jdesktop.application.ResourceMap;
  */
 public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 
-    private ResourceMap resourceMap;
-
     private Apparatus apparatus;
 
-    public ApparatusRenderer(ResourceMap resourceMap) {
-        this.resourceMap = resourceMap;
+    public ApparatusRenderer() {
+    	setOpaque(false);
+    	//setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
     }
 
     @Override
@@ -33,7 +35,7 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
         // Value must be an Apparatus
         apparatus = (Apparatus) value;
 
-        // Set colors
+        // FIXME Set colors
         if (isSelected) {
             setBackground(list.getSelectionBackground());
             setForeground(list.getSelectionForeground());
@@ -41,12 +43,15 @@ public class ApparatusRenderer extends JLabel implements ListCellRenderer {
             setBackground(list.getBackground());
             setForeground(list.getForeground());
         }
-
-        // Set Icon
-        setIcon(resourceMap.getIcon(apparatus.getIconLocationBundleKey()));
-
-        // Set Text
-        setText(resourceMap.getString(apparatus.getDisplayStringBundleKey()));
+        
+        // Icon
+        setIcon(ReCResourceBundle.findImageIconOrDefault(apparatus.getIconLocationBundleKey(), null));
+        
+        // Text
+        setText(ReCResourceBundle.findString(apparatus.getDisplayStringBundleKey()));
+        
+        // State
+        //setEnabled(apparatus.isEnabled());
 
         return this;
     }
