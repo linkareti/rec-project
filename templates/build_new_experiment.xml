@@ -2,10 +2,6 @@
 <project name="Experiment" default="create.experiment" basedir=".">
 	<description>Create the structure of a new experiment in the elab project</description>
 
-	<property name="experiment.name" value="polaroid" />
-								
-
-
 	<property file="build.experiments.properties" />
 
 	<property name="experiments.directory" value="../experiments" />
