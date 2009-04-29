@@ -33,26 +33,6 @@ public class ReCFaceConfigMigration {
 	private static final String RESULT_XML_FILE = "etc/ReCFaceConfig.xml";
 
 	private static MyPropertyUtils propertyUtils = new MyPropertyUtils();
-
-	public static class MyReCBaseUIConfig extends ReCBaseUIConfig {
-
-		private List<LocalizationBundle> _locBundle = new ArrayList<LocalizationBundle>();
-
-		public MyReCBaseUIConfig() {
-			super();
-		}
-
-		public ReCResourceBundle addLocalizationBundle(LocalizationBundle bundle)
-	    {
-			_locBundle.add(new LocalizationBundle(bundle));
-		return ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());        
-	    }
-
-		public LocalizationBundle[] getLocalizationBundle() {
-			LocalizationBundle[] arr = new LocalizationBundle[_locBundle.size()];
-			return (LocalizationBundle[]) _locBundle.toArray(arr);
-		}
-	}
 	
 	/**
 	 * Run me to Generate the New Face Configuration xml.
@@ -69,8 +49,7 @@ public class ReCFaceConfigMigration {
 			// System.setProperty(key, value);
 
 			// Unmarshal input xml values
-			//ReCBaseUIConfig reCBaseUIConfig = ReCBaseUIConfig.sharedInstance();
-			MyReCBaseUIConfig reCBaseUIConfig = new MyReCBaseUIConfig();
+			ReCBaseUIConfig reCBaseUIConfig = ReCBaseUIConfig.sharedInstance();
 
 			// Update default ReCBaseUIConfig values (if needed)
 			// (...)
