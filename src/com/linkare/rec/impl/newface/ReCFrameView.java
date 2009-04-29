@@ -20,6 +20,7 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.util.logging.Logger;
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -58,8 +59,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
         getFrame().setGlassPane(glassPane);
 
         // Hide status indicators
-        lblTaskMessage.setVisible(false);
-        progressCicleTask.setVisible(false);
+        //lblTaskMessage.setVisible(false);
+        //progressCicleTask.setVisible(false);
         
         // Hide the status pane
         statusPanel.setVisible(false);
@@ -145,18 +146,24 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 
             // Get username
             getLoginBox().setVisible(true);
+
+        } else {
+            recApplication.disconnect();
         }
     }
 
     private javax.swing.Action toggleConnectionStateActionData(boolean connected) {
         javax.swing.Action toggleConnectionStateAction =
-                getContext().getActionMap().get("toggleConnectionState");
+                getContext().getActionMap(ReCFrameView.class, this).get("toggleConnectionState");
+
         toggleConnectionStateAction.putValue(javax.swing.Action.NAME,
-                getResourceMap().getString("toggleConnectionState.Action"+(connected ? "" : "Disconnect")+".text"));
+                getResourceMap().getString("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.text"));
         toggleConnectionStateAction.putValue(javax.swing.Action.SHORT_DESCRIPTION,
-                getResourceMap().getString("toggleConnectionState.Action"+(connected ? "" : "Disconnect")+".shortDescription"));
+                getResourceMap().getString("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.shortDescription"));
         toggleConnectionStateAction.putValue(javax.swing.Action.SMALL_ICON,
-                getResourceMap().getString("toggleConnectionState.Action"+(connected ? "" : "Disconnect")+".icon"));
+                getResourceMap().getImageIcon("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.smallIcon"));
+        toggleConnectionStateAction.putValue(javax.swing.Action.LARGE_ICON_KEY,
+                getResourceMap().getImageIcon("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.icon"));
 
         return toggleConnectionStateAction;
     }
@@ -167,14 +174,16 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
     @Override
     public void labStatusChanged(LabConnectorEvent evt) {
 
-        setStatusMessageVisible(true);
+        //setStatusMessageVisible(true);
 
         switch (evt.getStatusCode()) {
+            case LabConnectorEvent.STATUS_CONNECTING:
+                // Nothing to do. The progress indicator is displayed
+                // on LoginBox
+                break;
+
             case LabConnectorEvent.STATUS_CONNECTED:
-                //TODO
-                toolBtnConnect.setIcon(getResourceMap().getIcon("toggleConnectionState.ActionDisconnect.icon"));
-                //toolBtnConnect.setAction(toggleConnectionStateActionData(true));
-                //getFrame().pack();
+                toolBtnConnect.setAction(toggleConnectionStateActionData(true));
                 updateStatus(getResourceMap().getString("lblTaskMessage.connected.text"));
                 getLoginBox().setVisible(false);
                 setGlassPaneVisible(false);
@@ -190,6 +199,17 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
                 updateStatus(getResourceMap().getString("lblTaskMessage.unreachable.text"));
                 getLoginBox().setVisible(false);
                 setGlassPaneVisible(false);
+                break;
+
+            case LabConnectorEvent.STATUS_DISCONNECTING:
+                progressCicleTask.start();
+                updateStatus(getResourceMap().getString("lblTaskMessage.disconnecting.text"));
+                break;
+
+            case LabConnectorEvent.STATUS_DISCONNECTED:
+                toolBtnConnect.setAction(toggleConnectionStateActionData(false));
+                updateStatus(getResourceMap().getString("lblTaskMessage.disconnected.text"));
+                progressCicleTask.stop();
                 break;
 
         }
@@ -243,6 +263,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
         toolBtnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         toolBtnConnect.setName("toolBtnConnect"); // NOI18N
         toolBtnConnect.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolBtnConnect.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                toolBtnConnectPropertyChange(evt);
+            }
+        });
         toolBar.add(toolBtnConnect);
         toolBtnConnect.getAccessibleContext().setAccessibleName(resourceMap.getString("toolBtnConnect.AccessibleContext.accessibleName")); // NOI18N
 
@@ -341,6 +366,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void toolBtnConnectPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_toolBtnConnectPropertyChange
+        if ("text".equals(evt.getPropertyName())) {
+            // Disable text display on toggle connection state button
+            ((JButton)evt.getSource()).setText("");
+        }
+    }//GEN-LAST:event_toolBtnConnectPropertyChange
 
 
 

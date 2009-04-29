@@ -6,12 +6,13 @@
  */
 package com.linkare.rec.impl.newface.config.migration;
 
-import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,6 +20,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import com.linkare.rec.impl.baseUI.config.LocalizationBundle;
+import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.config.ReCFaceConfig;
 
 /**
@@ -30,6 +34,26 @@ public class ReCFaceConfigMigration {
 
 	private static MyPropertyUtils propertyUtils = new MyPropertyUtils();
 
+	public static class MyReCBaseUIConfig extends ReCBaseUIConfig {
+
+		private List<LocalizationBundle> _locBundle = new ArrayList<LocalizationBundle>();
+
+		public MyReCBaseUIConfig() {
+			super();
+		}
+
+		public ReCResourceBundle addLocalizationBundle(LocalizationBundle bundle)
+	    {
+			_locBundle.add(new LocalizationBundle(bundle));
+		return ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());        
+	    }
+
+		public LocalizationBundle[] getLocalizationBundle() {
+			LocalizationBundle[] arr = new LocalizationBundle[_locBundle.size()];
+			return (LocalizationBundle[]) _locBundle.toArray(arr);
+		}
+	}
+	
 	/**
 	 * Run me to Generate the New Face Configuration xml.
 	 * 
@@ -45,7 +69,8 @@ public class ReCFaceConfigMigration {
 			// System.setProperty(key, value);
 
 			// Unmarshal input xml values
-			ReCBaseUIConfig reCBaseUIConfig = ReCBaseUIConfig.sharedInstance();
+			//ReCBaseUIConfig reCBaseUIConfig = ReCBaseUIConfig.sharedInstance();
+			MyReCBaseUIConfig reCBaseUIConfig = new MyReCBaseUIConfig();
 
 			// Update default ReCBaseUIConfig values (if needed)
 			// (...)

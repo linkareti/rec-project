@@ -60,6 +60,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	private List<Lab> labList = new ArrayList<Lab>();
 
 	private List<WebResource> webResourceList = new ArrayList<WebResource>();
+	
+	private List<LocalizationBundle> localizationBundleList = new ArrayList<LocalizationBundle>();
 
 	private int appPreferredWidth = 848;
 
@@ -233,7 +235,7 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	public String getHelpPageLocationBundleKey() {
 		return helpPageLocationBundleKey;
 	}
-
+	
 	/**
 	 * @return the lab
 	 */
@@ -248,6 +250,14 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	@XmlElement
 	public List<WebResource> getWebResource() {
 		return webResourceList;
+	}
+	
+	/**
+	 * @return the localizationBundle
+	 */
+	@XmlElement
+	public List<LocalizationBundle> getLocalizationBundle() {
+		return localizationBundleList;
 	}
 
 	/**
@@ -448,6 +458,14 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 */
 	public void setWebResource(List<WebResource> webResource) {
 		this.webResourceList = webResource;
+	}
+	
+	/**
+	 * @param localizationBundle
+	 *            the localizationBundle to set
+	 */
+	public void setLocalizationBundle(List<LocalizationBundle> localizationBundle) {
+		this.localizationBundleList = localizationBundle;
 	}
 	
 }
