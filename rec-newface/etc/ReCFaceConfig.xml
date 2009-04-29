@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <reCFaceConfig usersListRefreshRateMs="10000" splashIconLocationBundleKey="ReCBaseUI$rec.bui.icon.splash" showVideoFrame="false" showUserList="true" showChatFrame="true" iconSponsorLocationBundleKey="bundleName#bundleKey" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.frame" helpPageLocationBundleKey="ReCBaseUI$rec.bui.url.help" frameTitleBundleKey="ReCBaseUI$rec.bui.title.frame" enterApparatusChatRoom="true" enableVideoFrame="false" enableUsersList="true" enableLoginPassword="false" enableChatFrame="true" autoConnectLab="false" appPreferredWidth="848" appPreferredHeight="478" aboutPageLocationBundleKey="ReCBaseUI$rec.bui.url.about">
-    <lab toolTipBundleKey="ReCLabeLab$rec.lab.tip.elab" location="corbaloc:iiop:1.2@elab.ist.utl.pt:9003/MultiCastController" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.lab" displayStringBundleKey="ReCLabeLab$rec.lab.title.elab" desktopLocationBundleKey="ReCBaseUI$rec.bui.image.desktop">
+    <localizationBundle name="ReCBaseUI" 
+			location="recresource:///com/linkare/rec/impl/baseUI/resources/ReCBaseUI"/>
+    <localizationBundle name="ReCLabeLab" 
+			location="recresource:///pt/utl/ist/elab/resources/ReCLabeLab"/>
+    <localizationBundle name="ReCExpSemiconductors"
+                        location="recresource:///pt/utl/ist/elab/virtual/client/semiconductor/resources/ReCExpSemiconductors"/>
+    <localizationBundle name="ReCExpScuba"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/scuba/resources/ReCExpScuba"/>
+    <localizationBundle name="ReCExpG"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/g/resources/ReCExpG"/>
+    <localizationBundle name="ReCExpRadio"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/radioactividade/resources/ReCExpRadio"/>
+    <localizationBundle name="ReCExpPendulo"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/pendulo/resources/ReCExpPendulo"/>
+    <localizationBundle name="ReCExpPV"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/pv/resources/ReCExpPV"/>
+    <localizationBundle name="ReCExpPlanck"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/planck/resources/ReCExpPlanck"/>
+    <localizationBundle name="ReCExpDiscos"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/momentoInercia/resources/ReCExpDiscos"/>
+    <localizationBundle name="ReCExpAleatorio"
+                        location="recresource:///pt/utl/ist/elab/client/Aleatorio/Resource/ReCExpAleatorio"/>
+    <localizationBundle name="ReCExpT"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/conducaoCalor/resources/ReCExpT"/>
+    <localizationBundle name="ReCExpMeteo"
+                        location="recresource:///pt/utl/ist/elab/client/meteo/resources/ReCExpMeteo"/>
+    <localizationBundle name="ReCExpStatSound"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/statsound/resources/ReCExpStatSound"/>
+    <localizationBundle name="ReCExpWebRobot"
+                        location="recresource:///pt/utl/ist/elab/client/webrobot/resources/ReCExpWebRobot"/>
+    <localizationBundle name="ReCExpThomson"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/thomson/resources/ReCExpThomson"/>
+    <localizationBundle name="ReCExpPolaroid"
+                        location="recresource:///pt/utl/ist/elab/client/usb/cypress/polaroid/resources/ReCExpPolaroid"/>
+    <localizationBundle name="ReCExpGamma"
+                        location="recresource:///pt/utl/ist/elab/client/usb/cypress/gamma/resources/ReCExpGamma"/>
+    <localizationBundle name="ReCExpTelescopio"
+                        location="recresource:///pt/utl/ist/elab/client/telescopio/resources/ReCExpTelescopio"/>
+    <localizationBundle name="ReCExpPG"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/penduloGravitico/resources/ReCExpPG"/>
+    <localizationBundle name="ReCExpCC"
+                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/resources/ReCExpCC"/>
+	<lab toolTipBundleKey="ReCLabeLab$rec.lab.tip.elab" location="corbaloc:iiop:1.2@elab.ist.utl.pt:9003/MultiCastController" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.lab" displayStringBundleKey="ReCLabeLab$rec.lab.title.elab" desktopLocationBundleKey="ReCBaseUI$rec.bui.image.desktop">
         <apparatus videoLocation="" toolTipBundleKey="ReCExpG$rec.exp.tip.g" location="ELAB_G_STAMP_V02" iconLocationBundleKey="ReCExpG$rec.exp.icon.g" headerDisplayClassLocationBundleKey="" displayStringBundleKey="ReCExpG$rec.exp.title.g" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="ReCExpG$rec.exp.background.g" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="ReCExpG$rec.exp.customizer.g" visible="true" selected="true" order="0" enabled="false" connected="false">
             <defaultAcquisitionConfig toolTipBundleKey="ReCExpG$rec.exp.dftcfg.g.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize" displayStringBundleKey="ReCExpG$rec.exp.dftcfg.g.title.1" classLocationBundleKey="ReCExpG$rec.exp.dftcfg.g.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
             <display toolTipBundleKey="ReCExpG$rec.exp.display.g.tip.sensor" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpG$rec.exp.display.g.title.sensor" classLocationBundleKey="ReCExpG$rec.exp.display.g.loc.sensor" visible="true" selected="true" order="0" enabled="false" connected="false"/>
