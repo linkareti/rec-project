@@ -91,6 +91,12 @@ public class ElabTheme extends FlatTheme {
 		result.add(TabbedPaneStyle.class);
 		result.add(RadioButtonMenuItemStyle.class);
 		result.add(CheckBoxMenuItemStyle.class);
+		result.add(FlatButtonStyle.class);
+		result.add(ButtonStyle.class);
+		result.add(RadioButtonStyle.class);
+		result.add(CheckBoxStyle.class);
+		result.add(SliderStyle.class);
+		result.add(TableStyle.class);
 		
 		
 		return result;
