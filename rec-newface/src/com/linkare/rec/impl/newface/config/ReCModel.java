@@ -17,7 +17,8 @@ import com.linkare.rec.impl.newface.ReCFrameView;
  * 
  * The <code>ReCView</code> can be set up to display and interact with any data
  * model which implements the <code>ReCModel</code>.
- *  
+ * 
+ * @deprecated 
  * @author Henrique Fernandes
  * @see ReCView
  */
