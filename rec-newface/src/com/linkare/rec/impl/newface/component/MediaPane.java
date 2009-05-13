@@ -33,6 +33,7 @@ public class MediaPane extends javax.swing.JPanel {
 
         videoBox = new com.linkare.rec.impl.newface.component.VideoBox();
         chatBox = new com.linkare.rec.impl.newface.component.ChatBox();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setName("Form"); // NOI18N
 
@@ -40,17 +41,22 @@ public class MediaPane extends javax.swing.JPanel {
 
         chatBox.setName("chatBox"); // NOI18N
 
+        jSeparator1.setName("jSeparator1"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(videoBox, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
             .addComponent(chatBox, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+            .addComponent(videoBox, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(videoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(videoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chatBox, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
         );
@@ -59,6 +65,7 @@ public class MediaPane extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.linkare.rec.impl.newface.component.ChatBox chatBox;
+    private javax.swing.JSeparator jSeparator1;
     private com.linkare.rec.impl.newface.component.VideoBox videoBox;
     // End of variables declaration//GEN-END:variables
 

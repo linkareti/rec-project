@@ -42,18 +42,18 @@ public class VideoBox extends javax.swing.JPanel {
         lblVideo.setName("lblVideo"); // NOI18N
 
         videoMock.setBackground(resourceMap.getColor("videoMock.background")); // NOI18N
-        videoMock.setBorder(new javax.swing.border.LineBorder(resourceMap.getColor("videoMock.border.lineColor"), 2, true)); // NOI18N
+        videoMock.setBorder(javax.swing.BorderFactory.createLineBorder(resourceMap.getColor("videoMock.border.lineColor"))); // NOI18N
         videoMock.setName("videoMock"); // NOI18N
 
         javax.swing.GroupLayout videoMockLayout = new javax.swing.GroupLayout(videoMock);
         videoMock.setLayout(videoMockLayout);
         videoMockLayout.setHorizontalGroup(
             videoMockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 245, Short.MAX_VALUE)
+            .addGap(0, 247, Short.MAX_VALUE)
         );
         videoMockLayout.setVerticalGroup(
             videoMockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

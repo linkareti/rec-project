@@ -22,7 +22,7 @@ public class TestLoginBox extends ReCApplication {
 	@Override
 	protected void showView() {
 		DefaultDialog<SimpleLoginBox> dialog = new DefaultDialog<SimpleLoginBox>(new SimpleLoginBox());
-        dialog.setDefaultCloseOperation(DefaultDialog.EXIT_ON_CLOSE);
+        //dialog.setDefaultCloseOperation(DefaultDialog.EXIT_ON_CLOSE);
 		dialog.setVisible(true);
         System.exit(0);
 	}

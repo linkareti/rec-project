@@ -7,11 +7,11 @@
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Color;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 
 import javax.swing.JButton;
+import javax.swing.UIManager;
+import javax.swing.plaf.metal.MetalButtonUI;
 
 /**
  * 
@@ -27,10 +27,14 @@ public class FlatButton extends JButton implements Serializable{
 	private Color pressedGradientBottomColor = null;
 	private boolean isBackgroundGradient = false;
 	
-    private final PropertyChangeSupport pcs = new PropertyChangeSupport( this );
+    //private final PropertyChangeSupport pcs = new PropertyChangeSupport( this );
     
 	public FlatButton() {
 		super();
+
+        if (UIManager.get(getUIClassID()) == null) {
+            setUI(new MetalButtonUI());
+        }
 	}
 
 	public String getUIClassID() {

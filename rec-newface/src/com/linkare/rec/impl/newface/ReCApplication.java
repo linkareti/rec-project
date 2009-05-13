@@ -4,7 +4,66 @@
 
 package com.linkare.rec.impl.newface;
 
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.CONNECTED_TO_LAB;
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.CONNECT_PERFORMED;
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.APPARATUS_ENTER_PERFORMED;
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.DISCONNECTED_OFFLINE;
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.DISCONNECT_PERFORMED;
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.CONNECTED_TO_APPARATUS;
+
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.CONNECTING;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.CONNECTED;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.DISCONNECTING;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.DISCONNECTED;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.LOCKABLE;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.LOCKED;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATECONFIGURING;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATECONFIGURED;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.INCORRECTSTATE;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.MAXUSERS;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.NOTAUTHORIZED;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.NOTOWNER;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.NOTREGISTERED;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATECONFIGERROR;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATERESETING;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATERESETED;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATESTARTING;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATESTARTED;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATESTOPING;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATESTOPED;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATEUNKNOW;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.UNREACHABLE;
+
+import java.awt.Component;
+import java.io.InputStream;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EventObject;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.jnlp.BasicService;
+import javax.jnlp.ServiceManager;
+import javax.jnlp.UnavailableServiceException;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import org.jdesktop.application.Action;
+import org.jdesktop.application.Application;
+import org.jdesktop.application.ResourceMap;
+import org.jdesktop.application.SingleFrameApplication;
+
+import com.linkare.rec.impl.client.ApparatusClientBean;
 import com.linkare.rec.impl.client.LabClientBean;
+import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
+import com.linkare.rec.impl.client.apparatus.ApparatusConnectorListener;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
@@ -22,37 +81,18 @@ import com.linkare.rec.impl.newface.config.ReCFaceConfig;
 import com.linkare.rec.impl.newface.utils.OS;
 import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.utils.ORBBean;
-import java.awt.Component;
-import java.io.InputStream;
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.ArrayList;
-import java.util.EventObject;
-import java.util.List;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.jnlp.BasicService;
-import javax.jnlp.ServiceManager;
-import javax.jnlp.UnavailableServiceException;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import org.jdesktop.application.Action;
-import org.jdesktop.application.Application;
-import org.jdesktop.application.ResourceMap;
-import org.jdesktop.application.SingleFrameApplication;
-import org.jdesktop.application.Task;
 
 /**
  * The main class of the application.
  */
-public class ReCApplication extends SingleFrameApplication implements ApparatusListSourceListener, LabConnectorListener {
+public class ReCApplication extends SingleFrameApplication 
+	implements ApparatusListSourceListener, LabConnectorListener, ApparatusConnectorListener {
 
     private static final Logger log = Logger.getLogger(ReCApplication.class.getName());
     
+    // Handler for application uncaught exceptions
+    // see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4714232
     static {
-        // Handler for application uncaught exceptions
-        // see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4714232
         Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
             @Override
             public void uncaughtException(Thread thread, Throwable t) {
@@ -95,6 +135,73 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	}
 
+	/**
+	 * Defines application Navigation Workflow 
+	 * 
+	 * @author hfernandes
+	 */
+	public enum NavigationWorkflow {
+		
+		// State declaration
+		DISCONNECTED_OFFLINE,
+		CONNECT_PERFORMED,
+		CONNECTED_TO_LAB,
+		APPARATUS_ENTER_PERFORMED,
+		CONNECTED_TO_APPARATUS,
+		DISCONNECT_PERFORMED;
+		// State declaration end
+		
+		private static Map<NavigationWorkflow, Set<NavigationWorkflow>> availableTransitions;
+		
+		private static Set<NavigationWorkflow> transitions(NavigationWorkflow ... transitions) {
+			HashSet<NavigationWorkflow> result = new HashSet<NavigationWorkflow>();
+			for (NavigationWorkflow transition : transitions)
+				result.add(transition);
+			return result;
+		}
+		
+		// Workflow definition
+		static {
+			availableTransitions = new HashMap<NavigationWorkflow, Set<NavigationWorkflow>>();
+			availableTransitions.put(DISCONNECTED_OFFLINE, 
+					transitions(CONNECT_PERFORMED));
+			
+			availableTransitions.put(CONNECTED_TO_LAB, 
+					transitions(APPARATUS_ENTER_PERFORMED, DISCONNECT_PERFORMED));
+			
+			availableTransitions.put(CONNECTED_TO_APPARATUS, 
+					transitions(DISCONNECT_PERFORMED));
+			
+			availableTransitions.put(DISCONNECT_PERFORMED, 
+					transitions(DISCONNECTED_OFFLINE));
+		}
+		// Workflow definition end
+		
+		public boolean canGoTo(NavigationWorkflow newState) {
+			boolean result = true;
+			Set<NavigationWorkflow> currentStateTransitions = availableTransitions.get(this);
+			if (currentStateTransitions == null) {
+				if (log.isLoggable(Level.WARNING)) {
+					log.warning(this + " was not configured on available transitions map.");
+				}
+				result = false;
+			}
+			
+			result = (result == false) ? false : currentStateTransitions.contains(newState);
+			
+			if (log.isLoggable(Level.FINE)) {
+				log.fine("Transition " + this + " => " + newState + " allowed? " + result);
+			}
+			
+			
+			return result;
+		}
+		
+		public boolean matches(NavigationWorkflow state) {
+			return this == state;
+		}
+	}
+
     /** Holds the jws basic service context */
     protected BasicService basicService;
 
@@ -104,8 +211,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
     /** Holds the application shared UnexpectedErrorBox Dialog */
     protected static DefaultDialog<UnexpectedErrorPane> unexpectedErrorBox;
 
-
-    
     /** Holds the listeners to the ReC Application underlying model changes */
     protected List<ReCApplicationListener> appListeners;
 
@@ -113,15 +218,19 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
     /** Holds the ReC Configuration */
 	protected ReCFaceConfig recFaceConfig;
-    protected boolean connectedToLab = false;
+	protected NavigationWorkflow currentState;
     protected LabClientBean labClientBean;
+    protected ApparatusClientBean apparatusClientBean;
     protected Lab currentLab;
-    protected ApparatusComboBoxModel apparatusComboBoxModel;
+    private com.linkare.rec.impl.client.apparatus.Apparatus currentApparatus = null;
+    private Apparatus currentApparatusConfig = null;
+    protected ApparatusComboBoxModel apparatusComboBoxModel = new ApparatusComboBoxModel();
 
 
 
 	/** Creates a new <code>ReCApplication</code> */
 	public ReCApplication() {
+		this.currentState = DISCONNECTED_OFFLINE;
     }
 
     /**
@@ -163,12 +272,24 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
         labClientBean.getUserInfo().setPassword(username);
     }
 
-    public boolean isConnectedToLab() {
-        return connectedToLab;
-    }
+    public String getUsername() {
+    	String result = "";
+    	if (labClientBean != null && labClientBean.getUserInfo() != null) {
+    		result = labClientBean.getUserInfo().getUserName(); 
+    	}
+		return result;
+	}
 
-    public void setConnectedToLab(boolean connectedToLab) {
-        this.connectedToLab = connectedToLab;
+    public String getCurrentLabName() {
+		return ReCResourceBundle.findStringOrDefault(currentLab.getDisplayStringBundleKey(), "<empty>");
+	}
+    
+	public NavigationWorkflow getCurrentState() {
+		return currentState;
+	}
+
+	public void setCurrentState(NavigationWorkflow newState) {
+        this.currentState = newState;
     }
 
     public ReCFaceConfig getReCFaceConfig() {
@@ -182,6 +303,9 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public ApparatusComboBoxModel getApparatusComboBoxModel() {
 		return apparatusComboBoxModel;
 	}
+	
+	// -------------------------------------------------------------------------
+	// Application Startup Workflow
 
 	@Override
     protected void initialize(String[] args) {
@@ -191,7 +315,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
         if (log.isLoggable(Level.FINE)) {
             log.fine("Initializing system properties...");
-            //log.fine("Platform: " + OS.getOSName());
         }
 
         // TODO Move to jnlp ?
@@ -223,16 +346,17 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
             }
 
             public void willExit(EventObject e) {
-                //TODO handle exit
+                // TODO handle app exit
+
+                if (apparatusClientBean != null) {
+                    apparatusClientBean.disconnect();
+                    log.info("Apparatus has been client disconnected");
+                }
                 if (labClientBean != null) {
                     labClientBean.disconnect();
                     log.info("Lab client has been disconnected");
                 }
-
-//                if (apparatusClientBean != null) {
-//                    apparatusClientBean.disconnect();
-//                    log.info("Apparatus has been client disconnected");
-//                }
+                
                 log.fine("Will exit ReC");
             }
         };
@@ -242,9 +366,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
             log.fine("Starting ReC");
             log.fine("Running on EDT? " + (SwingUtilities.isEventDispatchThread() ? "YES" : "NO"));
         }
-
-        //TODO Enable and check assertions
-        assert SwingUtilities.isEventDispatchThread() == true : "This should run on EDT";
 
         try {
             // TODO Launch Splash Screen (AppFramework?)
@@ -267,12 +388,16 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
             ORBBean.getORBBean();
             log.info("ORBBean is initialized.");
 
-            // LabClient setup
+            // Lab Client setup
             labClientBean = new LabClientBean();
             labClientBean.setUsersListRefreshPeriod(recFaceConfig.getUsersListRefreshRateMs());
             labClientBean.addApparatusListSourceListener(this);
             labClientBean.addLabConnectorListener(this);
-
+            
+            // Apparatus Client setup
+            apparatusClientBean = new ApparatusClientBean();
+            apparatusClientBean.addApparatusConnectorListener(this);
+            
             // Current Lab setup
 //            if(recFaceConfig.isAutoConnectLab()) {
                 currentLab = recFaceConfig.getLab().get(0);
@@ -291,15 +416,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
             // Show view
             log.info("Starting user interface...");
             showView();
-
-       } catch (RuntimeException e) {
-            log.log(Level.SEVERE, "Some error occured.", e);
-            show(getUnexpectedErrorBox(e));
-            //System.exit(ExceptionCode.THE_FAMOUS_UNKNOWN_ERROR.getId());
-//        } catch (ReCException e) {
-//            log.log(Level.SEVERE, "Some error occured.", e);
-//            show(getUnexpectedErrorBox(e));
-//            System.exit(e.getCode().getId());
 
         } catch (Exception e) {
             log.log(Level.SEVERE, "Some error occured.", e);
@@ -325,6 +441,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
      */
     @Override
     protected void ready() {
+    	log.fine("Ready");
         super.ready();
     }
 
@@ -333,7 +450,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
         log.fine("Shutting down");
         super.shutdown();
     }
-
 
 
     /**
@@ -364,20 +480,95 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
         }
     }
 
+    // -------------------------------------------------------------------------
+	// Actions
+  
     @Action
     public void connect() {
-        log.info("Connect user " + labClientBean.getUserInfo().getUserName());
-        labClientBean.connect(currentLab.getLocation());
-
+    	if (currentState.canGoTo(CONNECT_PERFORMED)) {
+    		setCurrentState(CONNECT_PERFORMED);
+    		
+    		log.info("Connect user " + getUsername());
+    		labClientBean.connect(currentLab.getLocation());
+    		
+    	}
     }
 
     @Action
     public void disconnect() {
-        log.info("Disconnect user " + labClientBean.getUserInfo().getUserName());
-        labClientBean.disconnect();
+    	if (currentState.canGoTo(DISCONNECT_PERFORMED)) {
+    		setCurrentState(DISCONNECT_PERFORMED);
+    		log.info("Disconnect user " + labClientBean.getUserInfo().getUserName());
+    		
+            apparatusClientBean.disconnect();
+    		labClientBean.disconnect();
+            apparatusComboBoxModel.setAllApparatusEnabled(false);
+    	}
+        
+//        if(!connectLab && !alreadyDisconnected)// && currentLab != null && currentLab.isEnabled())
+//        {
+//            alreadyDisconnected = true;
+//            DisplayTreeNodeUtils.disableLab(currentLab);
+//            if(currentApparatusConfig != null)
+//            {
+//                DisplayTreeNodeUtils.disableAllApparatusContents(currentApparatusConfig);
+//            }
+//            apparatusClientBean.disconnect();
+//            labClientBean.disconnect();
+//            currentLab.setEnabled(false);
+//            countDownProgressPanel.setStop(true);
+//            controllerPanel.setEnablePlay(false);
+//            controllerPanel.setEnableStop(false);
+//            
+//            finishedDisconnection = true;
+//            
+//            if(waitDialog != null)
+//                waitDialog.setVisible(false);
+//            
+//            if(recBaseUI.getDesktopLocationBundleKey() != null)
+//                mDIDesktopPane.setBackgroundImage(ReCResourceBundle.findImageIconOrDefault(recBaseUI.getDesktopLocationBundleKey(), new ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(), true);
+//            else
+//                mDIDesktopPane.setBackgroundImage(null, false);
+//            
+//        }
     }
+    
+    @Action
+    public void enterApparatus() {
+    	if (currentState.canGoTo(APPARATUS_ENTER_PERFORMED)) {
+    		setCurrentState(APPARATUS_ENTER_PERFORMED);
+    		
+    		apparatusClientBean.getUserInfo().setUserName(getUsername());
+            apparatusClientBean.getUserInfo().setPassword(getUsername());
+            
+            apparatusClientBean.setApparatus(getCurrentApparatus());
+            
+//            if(isEnterApparatusRoom())
+//            {
+//                chatFrame.setChatServer(apparatusClientBean);
+//                chatFrame.setUser(new com.linkare.rec.acquisition.UserInfo(loginFrame.getUsername()));
+//            }
+            
+//            new Thread()
+//            {
+//                public void run()
+//                {
+                    apparatusClientBean.connect();
+//                }
+//            }.start();
+    	}
+    }
+    
+    private com.linkare.rec.impl.client.apparatus.Apparatus getCurrentApparatus() {	
+    	currentApparatusConfig = (Apparatus) apparatusComboBoxModel.getSelectedItem();
+    	currentApparatus = labClientBean.getApparatusByID(currentApparatusConfig.getLocation());
+		return currentApparatus;
+	}
+    
+    // -------------------------------------------------------------------------
+	// Event handling
 
-    @Override
+	@Override
     public void labStatusChanged(LabConnectorEvent evt) {
         if (log.isLoggable(Level.FINE)) {
             log.fine("Lab status changed to " + evt.getStatusCode());
@@ -388,60 +579,335 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
                 break;
             case LabConnectorEvent.STATUS_CONNECTED:
                 log.fine("STATUS_CONNECTED");
-                setConnectedToLab(true);
+                setCurrentState(CONNECTED_TO_LAB);
                 break;
             case LabConnectorEvent.STATUS_DISCONNECTING:
                 log.fine("STATUS_DISCONNECTING");
                 break;
             case LabConnectorEvent.STATUS_DISCONNECTED:
                 log.fine("STATUS_DISCONNECTED");
-                setConnectedToLab(false);
+                setCurrentState(DISCONNECTED_OFFLINE);
                 break;
             case LabConnectorEvent.STATUS_UNREACHABLE:
                 log.fine("STATUS_UNREACHABLE");
-                setConnectedToLab(false);
+                setCurrentState(DISCONNECTED_OFFLINE);
                 break;
             case LabConnectorEvent.STATUS_NOT_AUTHORIZED:
                 log.fine("STATUS_NOT_AUTHORIZED");
-                setConnectedToLab(false);
+                setCurrentState(DISCONNECTED_OFFLINE);
                 break;
             case LabConnectorEvent.STATUS_NOT_REGISTERED:
                 log.fine("STATUS_NOT_REGISTERED");
-                setConnectedToLab(false);
+                setCurrentState(DISCONNECTED_OFFLINE);
                 break;
             default:
                 log.warning("Unknown lab status!");
         }
         
         // Forward event to the view
-        fireLabStatusChanged(evt);
+        fireLabStateChanged(evt);
         
     }
 
     @Override
     public void apparatusListChanged(ApparatusListChangeEvent evt) {
-        if (log.isLoggable(Level.FINE)) {
-            log.fine("Apparatus list change event: " + evt);
-        }
-
+    	
         if(evt!=null && evt.getApparatus()!=null) {
-//            for (int i = 0; i < evt.getApparatus().length; i++) {
-//                Apparatus app = laboratoryTree.getApparatus(evt.getApparatus()[i].getHardwareInfo().getHardwareUniqueID());
-//                if (app == null) {
-//                    continue;
-//                }
-//
-//                if (!app.isEnabled()) {
-//                    app.setEnabled(true);
-//                }
-//            }
+        	
+        	if (log.isLoggable(Level.FINE)) {
+                log.fine("Apparatus list change event: " + Arrays.deepToString(evt.getApparatus()));
+                log.fine("Total available apparatus: " + evt.getApparatus().length);
+            }
+        	
+        	// Enable apparatus combo box list
+        	for (com.linkare.rec.impl.client.apparatus.Apparatus clientApparatus : evt.getApparatus()) {
+        		Apparatus apparatus = apparatusComboBoxModel.getApparatus(clientApparatus.getHardwareInfo().getHardwareUniqueID());
+        		
+        		if (apparatus != null && !apparatus.isEnabled()) {
+        			apparatus.setEnabled(true);
+        		}
+        	}
+        	
+        	// Update view
+        	apparatusComboBoxModel.fireContentsChanged(this);
+        	
+        	// Forward event to the view
+            fireApparatusListChanged(evt);
         }
     }
 
+    // -------------------------------------------------------------------------
+	// Apparatus events
     
+    public enum ApparatusEvent {
+    	CONNECTING,
+    	CONNECTED,
+    	DISCONNECTING,
+    	DISCONNECTED,
+    	LOCKABLE,
+    	LOCKED,
+    	STATECONFIGURING,
+    	STATECONFIGURED,
+    	INCORRECTSTATE,
+    	MAXUSERS,
+    	NOTAUTHORIZED,
+    	NOTOWNER,
+    	NOTREGISTERED,
+    	STATECONFIGERROR,
+    	STATERESETING,
+    	STATERESETED,
+    	STATESTARTING,
+    	STATESTARTED,
+    	STATESTOPING,
+    	STATESTOPED,
+    	STATEUNKNOW,
+    	UNREACHABLE;
+    }
+    
+    @Override
+	public void apparatusConnecting(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt);
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(CONNECTING, evt);
+	}
+    
+    @Override
+	public void apparatusConnected(ApparatusConnectorEvent evt) {
+    	if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt);
+        }
+		setCurrentState(CONNECTED_TO_APPARATUS);
+		
+		// Forward event to the view
+        fireApparatusStateChanged(CONNECTED, evt);
+	}
+    
+    @Override
+	public void apparatusDisconnecting(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(DISCONNECTING, evt);
+	}
+
+	@Override
+	public void apparatusDisconnected(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(DISCONNECTED, evt);
+	}
+
+	@Override
+	public void apparatusLockable(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt);
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(LOCKABLE, evt);
+	}
+
+	@Override
+	public void apparatusLocked(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(LOCKED, evt);
+	}
+	
+	@Override
+	public void apparatusStateConfiguring(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(STATECONFIGURING, evt);
+	}
+	
+	@Override
+	public void apparatusStateConfigured(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(STATECONFIGURED, evt);
+	}
+	
+	@Override
+	public void apparatusIncorrectState(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(INCORRECTSTATE, evt);
+	}
+
+	@Override
+	public void apparatusMaxUsers(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(MAXUSERS, evt);
+	}
+
+	@Override
+	public void apparatusNotAuthorized(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(NOTAUTHORIZED, evt);
+	}
+
+	@Override
+	public void apparatusNotOwner(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(NOTOWNER, evt);
+	}
+
+	@Override
+	public void apparatusNotRegistered(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(NOTREGISTERED, evt);
+	}
+
+	@Override
+	public void apparatusStateConfigError(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(STATECONFIGERROR, evt);
+	}
+
+	@Override
+	public void apparatusStateReseting(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(STATERESETING, evt);
+	}
+	
+	@Override
+	public void apparatusStateReseted(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(STATERESETED, evt);
+	}
+	
+	@Override
+	public void apparatusStateStarting(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(STATESTARTING, evt);
+	}
+
+	@Override
+	public void apparatusStateStarted(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(STATESTARTED, evt);
+	}
+	
+	@Override
+	public void apparatusStateStoping(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(STATESTOPING, evt);
+	}
+
+	@Override
+	public void apparatusStateStoped(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+	
+		// Forward event to the view
+        fireApparatusStateChanged(STATESTOPED, evt);
+	}
+
+	@Override
+	public void apparatusStateUnknow(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(STATEUNKNOW, evt);
+	}
+
+	@Override
+	public void apparatusUnreachable(ApparatusConnectorEvent evt) {
+		if (log.isLoggable(Level.FINE)) {
+            log.fine("ApparatusConnectorEvent " + evt.getMessage());
+        }
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        fireApparatusStateChanged(UNREACHABLE, evt);
+	}
 
     // -------------------------------------------------------------------------
-    // App Listeners
+    // Application Listeners
 
     public List<ReCApplicationListener> getAppListeners() {
         if (appListeners == null) {
@@ -458,9 +924,21 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
         getAppListeners().remove(listener);
     }
 
-    public void fireLabStatusChanged(LabConnectorEvent evt) {
+    public void fireLabStateChanged(LabConnectorEvent evt) {
         for (ReCApplicationListener listener : getAppListeners()) {
-            listener.labStatusChanged(evt);
+            listener.labStateChanged(evt);
+        }
+    }
+    
+    public void fireApparatusListChanged(ApparatusListChangeEvent evt) {
+        for (ReCApplicationListener listener : getAppListeners()) {
+            listener.apparatusListChanged(evt);
+        }
+    }
+    
+    public void fireApparatusStateChanged(ApparatusEvent evtSelector, ApparatusConnectorEvent evt) {
+        for (ReCApplicationListener listener : getAppListeners()) {
+            listener.apparatusStateChanged(evtSelector, evt);
         }
     }
 
@@ -481,4 +959,5 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
     public static void main(String[] args) {
         Application.launch(ReCApplication.class, args);
     }
+
 }

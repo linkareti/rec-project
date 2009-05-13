@@ -15,7 +15,7 @@ import com.linkare.rec.impl.newface.ReCApplication;
 
 /**
  *
- * @author iies-consultor922
+ * @author Henrique Fernandes
  */
 public class ApparatusSelectBox extends javax.swing.JPanel {
 
@@ -25,6 +25,14 @@ public class ApparatusSelectBox extends javax.swing.JPanel {
     public ApparatusSelectBox() {
         initComponents();
     }
+    
+    public ApparatusCombo getApparatusCombo() {
+		return apparatusCombo;
+	}
+    
+    public FlatButton getButtonToggleEnter() {
+		return btnToggleEnter;
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -37,7 +45,7 @@ public class ApparatusSelectBox extends javax.swing.JPanel {
 
         lblChooseApparatus = new javax.swing.JLabel();
         apparatusCombo = new com.linkare.rec.impl.newface.component.ApparatusCombo();
-        btnEnter = new javax.swing.JButton();
+        btnToggleEnter = new com.linkare.rec.impl.newface.component.FlatButton();
 
         setName("Form"); // NOI18N
 
@@ -48,10 +56,11 @@ public class ApparatusSelectBox extends javax.swing.JPanel {
 
         apparatusCombo.setModel(recApplication.getApparatusComboBoxModel());
         apparatusCombo.setName("apparatusCombo"); // NOI18N
-        apparatusCombo.setNextFocusableComponent(btnEnter);
 
-        btnEnter.setText(resourceMap.getString("btnEnter.text")); // NOI18N
-        btnEnter.setName("btnEnter"); // NOI18N
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ApparatusSelectBox.class, this);
+        btnToggleEnter.setAction(actionMap.get("enterApparatus")); // NOI18N
+        btnToggleEnter.setText(resourceMap.getString("btnToggleEnter.text")); // NOI18N
+        btnToggleEnter.setName("btnToggleEnter"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -62,7 +71,7 @@ public class ApparatusSelectBox extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(apparatusCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                     .addComponent(lblChooseApparatus)
-                    .addComponent(btnEnter))
+                    .addComponent(btnToggleEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -73,20 +82,17 @@ public class ApparatusSelectBox extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(apparatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEnter)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addComponent(btnToggleEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         apparatusCombo.getAccessibleContext().setAccessibleName(resourceMap.getString("apparatusCombo.AccessibleContext.accessibleName")); // NOI18N
         apparatusCombo.getAccessibleContext().setAccessibleDescription(resourceMap.getString("apparatusCombo.AccessibleContext.accessibleDescription")); // NOI18N
-        btnEnter.getAccessibleContext().setAccessibleName(resourceMap.getString("btnEnter.AccessibleContext.accessibleName")); // NOI18N
-        btnEnter.getAccessibleContext().setAccessibleDescription(resourceMap.getString("btnEnter.AccessibleContext.accessibleDescription")); // NOI18N
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.linkare.rec.impl.newface.component.ApparatusCombo apparatusCombo;
-    private javax.swing.JButton btnEnter;
+    private com.linkare.rec.impl.newface.component.FlatButton btnToggleEnter;
     private javax.swing.JLabel lblChooseApparatus;
     // End of variables declaration//GEN-END:variables
 

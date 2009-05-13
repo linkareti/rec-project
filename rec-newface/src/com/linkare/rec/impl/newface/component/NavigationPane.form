@@ -19,29 +19,37 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="apparatusSelectBox1" alignment="0" pref="220" max="32767" attributes="0"/>
-          <Component id="experimentHistoryBox1" alignment="0" pref="220" max="32767" attributes="0"/>
+          <Component id="separator" alignment="0" pref="220" max="32767" attributes="0"/>
+          <Component id="experimentHistoryBox" alignment="0" pref="220" max="32767" attributes="0"/>
+          <Component id="apparatusSelectBox" alignment="0" pref="220" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="apparatusSelectBox1" min="-2" pref="115" max="-2" attributes="0"/>
+              <Component id="apparatusSelectBox" min="-2" pref="115" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="experimentHistoryBox1" pref="349" max="32767" attributes="0"/>
+              <Component id="separator" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="experimentHistoryBox" min="-2" pref="341" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="com.linkare.rec.impl.newface.component.ApparatusSelectBox" name="apparatusSelectBox1">
+    <Component class="com.linkare.rec.impl.newface.component.ApparatusSelectBox" name="apparatusSelectBox">
       <Properties>
-        <Property name="name" type="java.lang.String" value="apparatusSelectBox1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="apparatusSelectBox" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="com.linkare.rec.impl.newface.component.ExperimentHistoryBox" name="experimentHistoryBox1">
+    <Component class="com.linkare.rec.impl.newface.component.ExperimentHistoryBox" name="experimentHistoryBox">
       <Properties>
-        <Property name="name" type="java.lang.String" value="experimentHistoryBox1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="experimentHistoryBox" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="separator">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="separator" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>
