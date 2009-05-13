@@ -11,6 +11,8 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import com.linkare.rec.impl.newface.ReCFrameView;
+
 /**
  *
  * @author iies-consultor922
@@ -21,6 +23,10 @@ public class NavigationPane extends javax.swing.JPanel {
     public NavigationPane() {
         initComponents();
     }
+    
+    public ApparatusSelectBox getApparatusSelectBox() {
+		return apparatusSelectBox;
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -31,35 +37,42 @@ public class NavigationPane extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        apparatusSelectBox1 = new com.linkare.rec.impl.newface.component.ApparatusSelectBox();
-        experimentHistoryBox1 = new com.linkare.rec.impl.newface.component.ExperimentHistoryBox();
+        apparatusSelectBox = new com.linkare.rec.impl.newface.component.ApparatusSelectBox();
+        experimentHistoryBox = new com.linkare.rec.impl.newface.component.ExperimentHistoryBox();
+        separator = new javax.swing.JSeparator();
 
         setName("Form"); // NOI18N
 
-        apparatusSelectBox1.setName("apparatusSelectBox1"); // NOI18N
+        apparatusSelectBox.setName("apparatusSelectBox"); // NOI18N
 
-        experimentHistoryBox1.setName("experimentHistoryBox1"); // NOI18N
+        experimentHistoryBox.setName("experimentHistoryBox"); // NOI18N
+
+        separator.setName("separator"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(apparatusSelectBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-            .addComponent(experimentHistoryBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+            .addComponent(separator, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+            .addComponent(experimentHistoryBox, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+            .addComponent(apparatusSelectBox, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(apparatusSelectBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(apparatusSelectBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(experimentHistoryBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
+                .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(experimentHistoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.linkare.rec.impl.newface.component.ApparatusSelectBox apparatusSelectBox1;
-    private com.linkare.rec.impl.newface.component.ExperimentHistoryBox experimentHistoryBox1;
+    private com.linkare.rec.impl.newface.component.ApparatusSelectBox apparatusSelectBox;
+    private com.linkare.rec.impl.newface.component.ExperimentHistoryBox experimentHistoryBox;
+    private javax.swing.JSeparator separator;
     // End of variables declaration//GEN-END:variables
 
 }

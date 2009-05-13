@@ -8,7 +8,7 @@ package com.linkare.rec.impl.newface.component;
 import javax.swing.JList;
 
 /**
- *
+ * @deprecated 
  * @author Henrique Fernandes
  */
 public class ChatMessageList extends JList {

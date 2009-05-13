@@ -4,25 +4,35 @@
 
 package com.linkare.rec.impl.newface;
 
-import com.linkare.rec.impl.client.lab.LabConnectorEvent;
-import com.linkare.rec.impl.newface.component.GlassLayer;
-import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
-import com.linkare.rec.impl.newface.component.SimpleLoginBox;
-import com.linkare.rec.impl.newface.component.UndecoratedDialog;
-import com.linkare.rec.impl.newface.utils.LAFConnector;
-import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.CONNECTED_TO_LAB;
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.CONNECT_PERFORMED;
+
 import java.awt.Dimension;
-import java.util.logging.Level;
-import org.jdesktop.application.Action;
-import org.jdesktop.application.ResourceMap;
-import org.jdesktop.application.SingleFrameApplication;
-import org.jdesktop.application.FrameView;
-import org.jdesktop.application.TaskMonitor;
 import java.util.logging.Logger;
+
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+
+import org.jdesktop.application.Action;
+import org.jdesktop.application.FrameView;
+import org.jdesktop.application.ResourceMap;
+import org.jdesktop.application.SingleFrameApplication;
+import org.jdesktop.application.TaskMonitor;
+
+import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
+import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
+import com.linkare.rec.impl.client.lab.LabConnectorEvent;
+import com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent;
+import com.linkare.rec.impl.newface.component.ApparatusCombo;
+import com.linkare.rec.impl.newface.component.FlatButton;
+import com.linkare.rec.impl.newface.component.GlassLayer;
+import com.linkare.rec.impl.newface.component.SimpleLoginBox;
+import com.linkare.rec.impl.newface.component.UndecoratedDialog;
+import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
+import com.linkare.rec.impl.newface.utils.LAFConnector;
+import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 
 /**
  * The application's main frame.
@@ -119,7 +129,16 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
         }
         return aboutBox;
     }
-
+    
+    public ApparatusCombo getApparatusCombo() {
+    	return layoutContainerPane.getNavigationPane().getApparatusSelectBox().getApparatusCombo();
+    }
+    
+    public FlatButton getButtonToggleEnter() {
+    	return layoutContainerPane.getNavigationPane().getApparatusSelectBox().getButtonToggleEnter();
+	}
+    
+    
     public void setGlassPaneVisible(boolean visible) {
         getFrame().getGlassPane().setVisible(visible);
     }
@@ -140,14 +159,16 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 
     @Action
     public void toggleConnectionState() {
-        if (!recApplication.isConnectedToLab()) {
-            // When disconected...
+        if (recApplication.getCurrentState().canGoTo(CONNECT_PERFORMED)) {
+        	// Perform connect
+        	
             setGlassPaneVisible(true);
 
             // Get username
             getLoginBox().setVisible(true);
 
         } else {
+        	// Perform disconnect
             recApplication.disconnect();
         }
     }
@@ -172,7 +193,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
     // Response to application model events
 
     @Override
-    public void labStatusChanged(LabConnectorEvent evt) {
+    public void labStateChanged(LabConnectorEvent evt) {
 
         //setStatusMessageVisible(true);
 
@@ -184,7 +205,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 
             case LabConnectorEvent.STATUS_CONNECTED:
                 toolBtnConnect.setAction(toggleConnectionStateActionData(true));
-                updateStatus(getResourceMap().getString("lblTaskMessage.connected.text"));
+                updateStatus(getResourceMap().getString("lblTaskMessage.connected.text", recApplication.getUsername(), recApplication.getCurrentLabName()));
                 getLoginBox().setVisible(false);
                 setGlassPaneVisible(false);
                 break;
@@ -214,8 +235,32 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 
         }
     }
+  
+	@Override
+	public void apparatusListChanged(ApparatusListChangeEvent evt) {
+		if (recApplication.getCurrentState().matches(CONNECTED_TO_LAB)) {
+			getApparatusCombo().setEnabled(true);
+		}
+	}
+	
+	@Override
+	public void apparatusStateChanged(ApparatusEvent eventSelector, ApparatusConnectorEvent evt) {
+		
+		switch (eventSelector) {
+			case CONNECTED:
+				// TODO update
+				getButtonToggleEnter().setText("SAIR");
+				getApparatusCombo().setEditable(false);
+				getApparatusCombo().setPopupVisible(false);
+				getApparatusCombo().setEnabled(false);
+				break;
+	
+			default:
+				break;
+		}
+	}
 
-    /** This method is called from within the constructor to
+	/** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
      * always regenerated by the Form Editor.
@@ -373,8 +418,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
             ((JButton)evt.getSource()).setText("");
         }
     }//GEN-LAST:event_toolBtnConnectPropertyChange
-
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

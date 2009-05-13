@@ -18,6 +18,10 @@ public class LayoutContainerPane extends GradientPane {
         super(GradientStyle.VERTICAL_LINEAR_LIGHT_TO_DARK);
         initComponents();
     }
+    
+    public NavigationPane getNavigationPane() {
+		return navigationPane;
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.

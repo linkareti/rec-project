@@ -20,13 +20,13 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="txtInputMsg" alignment="0" pref="221" max="32767" attributes="0"/>
-          <Component id="scrollPane" alignment="0" pref="221" max="32767" attributes="0"/>
+          <Component id="msgScrollPane" alignment="0" pref="221" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="scrollPane" pref="242" max="32767" attributes="0"/>
+              <Component id="msgScrollPane" pref="242" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txtInputMsg" min="-2" pref="29" max="-2" attributes="0"/>
           </Group>
@@ -37,15 +37,15 @@
     <Component class="javax.swing.JTextField" name="txtInputMsg">
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="txtInputMsg.text"/>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="com.linkare.rec.impl.newface.component.Chat" id="sendMessage" methodName="sendMessage"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="txtInputMsg" noResource="true"/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="@Focus(display=false)"/>
-      </AuxValues>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="scrollPane">
+    <Container class="javax.swing.JScrollPane" name="msgScrollPane">
       <Properties>
-        <Property name="name" type="java.lang.String" value="scrollPane" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="msgScrollPane" noResource="true"/>
       </Properties>
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -53,25 +53,12 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="com.linkare.rec.impl.newface.component.ChatMessageList" name="chatMessageList">
+        <Component class="javax.swing.JEditorPane" name="msgPane">
           <Properties>
-            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Jo&#xe3;o: Ol&#xe1;!"/>
-                <StringItem index="1" value="Henrique: Oi, j&#xe1; defini as configura&#xe7;&#xe3;o da experi&#xea;ncia. Vou iniciar."/>
-                <StringItem index="2" value="Jo&#xe3;o: Ok."/>
-                <StringItem index="3" value="Jo&#xe3;o: Vou verificar os resultados."/>
-              </StringArray>
-            </Property>
-            <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.modules.form.editors2.FontEditor">
-              <FontInfo relative="true">
-                <Font component="chatMessageList" property="font" relativeSize="false" size="11"/>
-              </FontInfo>
-            </Property>
-            <Property name="name" type="java.lang.String" value="chatMessageList" noResource="true"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[20, 40]"/>
-            </Property>
+            <Property name="contentType" type="java.lang.String" resourceKey="msgPane.contentType"/>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" resourceKey="msgPane.text"/>
+            <Property name="name" type="java.lang.String" value="msgPane" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
