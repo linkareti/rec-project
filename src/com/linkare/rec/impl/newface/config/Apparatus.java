@@ -9,248 +9,320 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class Apparatus extends DisplayNode {
 
-  private String displayStringBundleKey = "";
-  
-  private String iconLocationBundleKey = "";
-  
-  private String desktopLocationBundleKey = "";
-  
-  private String toolTipBundleKey = "";
-  
-  private String dataModelClassLocationBundleKey = "";
-  
-  private String videoLocation = "";
-  
-  private String headerDisplayClassLocationBundleKey = "";
-  
-  private String displayFactoryClassLocationBundleKey = "";         
-  
-  private String customizerClassLocationBundleKey = "";
-  
-  private String location = "";
-  
-  private List<DefaultAcquisitionConfig> defaultAcquisitionConfig = new ArrayList<DefaultAcquisitionConfig>(); // List<DefaultAcquisitionConfig>
-  
-  private List<Display> display = new ArrayList<Display>();  // List<Display>
-  
-  private List<WebResource> webResource = new ArrayList<WebResource>();  // List<WebResource>
-  
-  private List<LocalizationBundle> localizationBundle = new ArrayList<LocalizationBundle>(); // List<LocalizationBundle>
-  
-  public Apparatus() {
-    // TODO Auto-generated constructor stub
-  }
+    private String displayStringBundleKey = "";
 
-  /**
-   * @return the displayStringBundleKey
-   */
-  @XmlAttribute
-  public String getDisplayStringBundleKey() {
-    return displayStringBundleKey;
-  }
+    private String iconLocationBundleKey = "";
 
-  /**
-   * @return the iconLocationBundleKey
-   */
-  @XmlAttribute
-  public String getIconLocationBundleKey() {
-    return iconLocationBundleKey;
-  }
+    private String desktopLocationBundleKey = "";
 
-  /**
-   * @return the desktopLocationBundleKey
-   */
-  @XmlAttribute
-  public String getDesktopLocationBundleKey() {
-    return desktopLocationBundleKey;
-  }
+    private String toolTipBundleKey = "";
 
-  /**
-   * @return the toolTipBundleKey
-   */
-  @XmlAttribute
-  public String getToolTipBundleKey() {
-    return toolTipBundleKey;
-  }
+    private String dataModelClassLocationBundleKey = "";
 
-  /**
-   * @return the dataModelClassLocationBundleKey
-   */
-  @XmlAttribute
-  public String getDataModelClassLocationBundleKey() {
-    return dataModelClassLocationBundleKey;
-  }
+    private String videoLocation = "";
 
-  /**
-   * @return the videoLocation
-   */
-  @XmlAttribute
-  public String getVideoLocation() {
-    return videoLocation;
-  }
+    private String headerDisplayClassLocationBundleKey = "";
 
-  /**
-   * @return the headerDisplayClassLocationBundleKey
-   */
-  @XmlAttribute
-  public String getHeaderDisplayClassLocationBundleKey() {
-    return headerDisplayClassLocationBundleKey;
-  }
+    private String displayFactoryClassLocationBundleKey = "";
 
-  /**
-   * @return the displayFactoryClassLocationBundleKey
-   */
-  @XmlAttribute
-  public String getDisplayFactoryClassLocationBundleKey() {
-    return displayFactoryClassLocationBundleKey;
-  }
+    private String customizerClassLocationBundleKey = "";
 
-  /**
-   * @return the customizerClassLocationBundleKey
-   */
-  @XmlAttribute
-  public String getCustomizerClassLocationBundleKey() {
-    return customizerClassLocationBundleKey;
-  }
+    private String location = "";
 
-  /**
-   * @return the location
-   */
-  @XmlAttribute
-  public String getLocation() {
-    return location;
-  }
+    private List<DefaultAcquisitionConfig> defaultAcquisitionConfig = new ArrayList<DefaultAcquisitionConfig>();
 
-  /**
-   * @return the defaultAcquisitionConfig
-   */
-  public List<DefaultAcquisitionConfig> getDefaultAcquisitionConfig() {
-    return defaultAcquisitionConfig;
-  }
+    private List<Display> display = new ArrayList<Display>();
 
-  /**
-   * @return the display
-   */
-  public List<Display> getDisplay() {
-    return display;
-  }
+    private List<WebResource> webResource = new ArrayList<WebResource>();
 
-  /**
-   * @return the webResource
-   */
-  public List<WebResource> getWebResource() {
-    return webResource;
-  }
+    private List<LocalizationBundle> localizationBundle = new ArrayList<LocalizationBundle>();
 
-  /**
-   * @return the localizationBundle
-   */
-  public List<LocalizationBundle> getLocalizationBundle() {
-    return localizationBundle;
-  }
+    public Apparatus() {
+    }
 
-  /**
-   * @param displayStringBundleKey the displayStringBundleKey to set
-   */
-  public void setDisplayStringBundleKey(String displayStringBundleKey) {
-    this.displayStringBundleKey = displayStringBundleKey;
-  }
+    /**
+     * @return the displayStringBundleKey
+     */
+    @XmlAttribute
+    public String getDisplayStringBundleKey() {
+        return displayStringBundleKey;
+    }
 
-  /**
-   * @param iconLocationBundleKey the iconLocationBundleKey to set
-   */
-  public void setIconLocationBundleKey(String iconLocationBundleKey) {
-    this.iconLocationBundleKey = iconLocationBundleKey;
-  }
+    /**
+     * @return the iconLocationBundleKey
+     */
+    @XmlAttribute
+    public String getIconLocationBundleKey() {
+        return iconLocationBundleKey;
+    }
 
-  /**
-   * @param desktopLocationBundleKey the desktopLocationBundleKey to set
-   */
-  public void setDesktopLocationBundleKey(String desktopLocationBundleKey) {
-    this.desktopLocationBundleKey = desktopLocationBundleKey;
-  }
+    /**
+     * @return the desktopLocationBundleKey
+     */
+    @XmlAttribute
+    public String getDesktopLocationBundleKey() {
+        return desktopLocationBundleKey;
+    }
 
-  /**
-   * @param toolTipBundleKey the toolTipBundleKey to set
-   */
-  public void setToolTipBundleKey(String toolTipBundleKey) {
-    this.toolTipBundleKey = toolTipBundleKey;
-  }
+    /**
+     * @return the toolTipBundleKey
+     */
+    @XmlAttribute
+    public String getToolTipBundleKey() {
+        return toolTipBundleKey;
+    }
 
-  /**
-   * @param dataModelClassLocationBundleKey the dataModelClassLocationBundleKey to set
-   */
-  public void setDataModelClassLocationBundleKey(
-      String dataModelClassLocationBundleKey) {
-    this.dataModelClassLocationBundleKey = dataModelClassLocationBundleKey;
-  }
+    /**
+     * @return the dataModelClassLocationBundleKey
+     */
+    @XmlAttribute
+    public String getDataModelClassLocationBundleKey() {
+        return dataModelClassLocationBundleKey;
+    }
 
-  /**
-   * @param videoLocation the videoLocation to set
-   */
-  public void setVideoLocation(String videoLocation) {
-    this.videoLocation = videoLocation;
-  }
+    /**
+     * @return the videoLocation
+     */
+    @XmlAttribute
+    public String getVideoLocation() {
+        return videoLocation;
+    }
 
-  /**
-   * @param headerDisplayClassLocationBundleKey the headerDisplayClassLocationBundleKey to set
-   */
-  public void setHeaderDisplayClassLocationBundleKey(
-      String headerDisplayClassLocationBundleKey) {
-    this.headerDisplayClassLocationBundleKey = headerDisplayClassLocationBundleKey;
-  }
+    /**
+     * @return the headerDisplayClassLocationBundleKey
+     */
+    @XmlAttribute
+    public String getHeaderDisplayClassLocationBundleKey() {
+        return headerDisplayClassLocationBundleKey;
+    }
 
-  /**
-   * @param displayFactoryClassLocationBundleKey the displayFactoryClassLocationBundleKey to set
-   */
-  public void setDisplayFactoryClassLocationBundleKey(
-      String displayFactoryClassLocationBundleKey) {
-    this.displayFactoryClassLocationBundleKey = displayFactoryClassLocationBundleKey;
-  }
+    /**
+     * @return the displayFactoryClassLocationBundleKey
+     */
+    @XmlAttribute
+    public String getDisplayFactoryClassLocationBundleKey() {
+        return displayFactoryClassLocationBundleKey;
+    }
 
-  /**
-   * @param customizerClassLocationBundleKey the customizerClassLocationBundleKey to set
-   */
-  public void setCustomizerClassLocationBundleKey(
-      String customizerClassLocationBundleKey) {
-    this.customizerClassLocationBundleKey = customizerClassLocationBundleKey;
-  }
+    /**
+     * @return the customizerClassLocationBundleKey
+     */
+    @XmlAttribute
+    public String getCustomizerClassLocationBundleKey() {
+        return customizerClassLocationBundleKey;
+    }
 
-  /**
-   * @param location the location to set
-   */
-  public void setLocation(String location) {
-    this.location = location;
-  }
+    /**
+     * @return the location
+     */
+    @XmlAttribute
+    public String getLocation() {
+        return location;
+    }
 
-  /**
-   * @param defaultAcquisitionConfig the defaultAcquisitionConfig to set
-   */
-  public void setDefaultAcquisitionConfig(
-      List<DefaultAcquisitionConfig> defaultAcquisitionConfig) {
-    this.defaultAcquisitionConfig = defaultAcquisitionConfig;
-  }
+    /**
+     * @return the defaultAcquisitionConfig
+     */
+    public List<DefaultAcquisitionConfig> getDefaultAcquisitionConfig() {
+        return defaultAcquisitionConfig;
+    }
 
-  /**
-   * @param display the display to set
-   */
-  public void setDisplay(List<Display> display) {
-    this.display = display;
-  }
+    /**
+     * @return the display
+     */
+    public List<Display> getDisplay() {
+        return display;
+    }
 
-  /**
-   * @param webResource the webResource to set
-   */
-  public void setWebResource(List<WebResource> webResource) {
-    this.webResource = webResource;
-  }
+    /**
+     * @return the webResource
+     */
+    public List<WebResource> getWebResource() {
+        return webResource;
+    }
 
-  /**
-   * @param localizationBundle the localizationBundle to set
-   */
-  public void setLocalizationBundle(List<LocalizationBundle> localizationBundle) {
-    this.localizationBundle = localizationBundle;
-  }
-  
-  
+    /**
+     * @return the localizationBundle
+     */
+    public List<LocalizationBundle> getLocalizationBundle() {
+        return localizationBundle;
+    }
+
+    /**
+     * @param displayStringBundleKey the displayStringBundleKey to set
+     */
+    public void setDisplayStringBundleKey(String displayStringBundleKey) {
+        this.displayStringBundleKey = displayStringBundleKey;
+    }
+
+    /**
+     * @param iconLocationBundleKey the iconLocationBundleKey to set
+     */
+    public void setIconLocationBundleKey(String iconLocationBundleKey) {
+        this.iconLocationBundleKey = iconLocationBundleKey;
+    }
+
+    /**
+     * @param desktopLocationBundleKey the desktopLocationBundleKey to set
+     */
+    public void setDesktopLocationBundleKey(String desktopLocationBundleKey) {
+        this.desktopLocationBundleKey = desktopLocationBundleKey;
+    }
+
+    /**
+     * @param toolTipBundleKey the toolTipBundleKey to set
+     */
+    public void setToolTipBundleKey(String toolTipBundleKey) {
+        this.toolTipBundleKey = toolTipBundleKey;
+    }
+
+    /**
+     * @param dataModelClassLocationBundleKey the dataModelClassLocationBundleKey to set
+     */
+    public void setDataModelClassLocationBundleKey(
+            String dataModelClassLocationBundleKey) {
+        this.dataModelClassLocationBundleKey = dataModelClassLocationBundleKey;
+    }
+
+    /**
+     * @param videoLocation the videoLocation to set
+     */
+    public void setVideoLocation(String videoLocation) {
+        this.videoLocation = videoLocation;
+    }
+
+    /**
+     * @param headerDisplayClassLocationBundleKey the headerDisplayClassLocationBundleKey to set
+     */
+    public void setHeaderDisplayClassLocationBundleKey(
+            String headerDisplayClassLocationBundleKey) {
+        this.headerDisplayClassLocationBundleKey = headerDisplayClassLocationBundleKey;
+    }
+
+    /**
+     * @param displayFactoryClassLocationBundleKey the displayFactoryClassLocationBundleKey to set
+     */
+    public void setDisplayFactoryClassLocationBundleKey(
+            String displayFactoryClassLocationBundleKey) {
+        this.displayFactoryClassLocationBundleKey = displayFactoryClassLocationBundleKey;
+    }
+
+    /**
+     * @param customizerClassLocationBundleKey the customizerClassLocationBundleKey to set
+     */
+    public void setCustomizerClassLocationBundleKey(
+            String customizerClassLocationBundleKey) {
+        this.customizerClassLocationBundleKey = customizerClassLocationBundleKey;
+    }
+
+    /**
+     * @param location the location to set
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
+     * @param defaultAcquisitionConfig the defaultAcquisitionConfig to set
+     */
+    public void setDefaultAcquisitionConfig(
+            List<DefaultAcquisitionConfig> defaultAcquisitionConfig) {
+        this.defaultAcquisitionConfig = defaultAcquisitionConfig;
+    }
+
+    /**
+     * @param display the display to set
+     */
+    public void setDisplay(List<Display> display) {
+        this.display = display;
+    }
+
+    /**
+     * @param webResource the webResource to set
+     */
+    public void setWebResource(List<WebResource> webResource) {
+        this.webResource = webResource;
+    }
+
+    /**
+     * @param localizationBundle the localizationBundle to set
+     */
+    public void setLocalizationBundle(List<LocalizationBundle> localizationBundle) {
+        this.localizationBundle = localizationBundle;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Apparatus other = (Apparatus) obj;
+        if ((this.displayStringBundleKey == null) ? (other.displayStringBundleKey != null) : !this.displayStringBundleKey.equals(other.displayStringBundleKey)) {
+            return false;
+        }
+        if ((this.iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !this.iconLocationBundleKey.equals(other.iconLocationBundleKey)) {
+            return false;
+        }
+        if ((this.desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null) : !this.desktopLocationBundleKey.equals(other.desktopLocationBundleKey)) {
+            return false;
+        }
+        if ((this.toolTipBundleKey == null) ? (other.toolTipBundleKey != null) : !this.toolTipBundleKey.equals(other.toolTipBundleKey)) {
+            return false;
+        }
+        if ((this.dataModelClassLocationBundleKey == null) ? (other.dataModelClassLocationBundleKey != null) : !this.dataModelClassLocationBundleKey.equals(other.dataModelClassLocationBundleKey)) {
+            return false;
+        }
+        if ((this.videoLocation == null) ? (other.videoLocation != null) : !this.videoLocation.equals(other.videoLocation)) {
+            return false;
+        }
+        if ((this.headerDisplayClassLocationBundleKey == null) ? (other.headerDisplayClassLocationBundleKey != null) : !this.headerDisplayClassLocationBundleKey.equals(other.headerDisplayClassLocationBundleKey)) {
+            return false;
+        }
+        if ((this.displayFactoryClassLocationBundleKey == null) ? (other.displayFactoryClassLocationBundleKey != null) : !this.displayFactoryClassLocationBundleKey.equals(other.displayFactoryClassLocationBundleKey)) {
+            return false;
+        }
+        if ((this.customizerClassLocationBundleKey == null) ? (other.customizerClassLocationBundleKey != null) : !this.customizerClassLocationBundleKey.equals(other.customizerClassLocationBundleKey)) {
+            return false;
+        }
+        if ((this.location == null) ? (other.location != null) : !this.location.equals(other.location)) {
+            return false;
+        }
+        if (this.defaultAcquisitionConfig != other.defaultAcquisitionConfig && (this.defaultAcquisitionConfig == null || !this.defaultAcquisitionConfig.equals(other.defaultAcquisitionConfig))) {
+            return false;
+        }
+        if (this.display != other.display && (this.display == null || !this.display.equals(other.display))) {
+            return false;
+        }
+        if (this.webResource != other.webResource && (this.webResource == null || !this.webResource.equals(other.webResource))) {
+            return false;
+        }
+        if (this.localizationBundle != other.localizationBundle && (this.localizationBundle == null || !this.localizationBundle.equals(other.localizationBundle))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + (this.displayStringBundleKey != null ? this.displayStringBundleKey.hashCode() : 0);
+        hash = 83 * hash + (this.iconLocationBundleKey != null ? this.iconLocationBundleKey.hashCode() : 0);
+        hash = 83 * hash + (this.desktopLocationBundleKey != null ? this.desktopLocationBundleKey.hashCode() : 0);
+        hash = 83 * hash + (this.toolTipBundleKey != null ? this.toolTipBundleKey.hashCode() : 0);
+        hash = 83 * hash + (this.dataModelClassLocationBundleKey != null ? this.dataModelClassLocationBundleKey.hashCode() : 0);
+        hash = 83 * hash + (this.videoLocation != null ? this.videoLocation.hashCode() : 0);
+        hash = 83 * hash + (this.headerDisplayClassLocationBundleKey != null ? this.headerDisplayClassLocationBundleKey.hashCode() : 0);
+        hash = 83 * hash + (this.displayFactoryClassLocationBundleKey != null ? this.displayFactoryClassLocationBundleKey.hashCode() : 0);
+        hash = 83 * hash + (this.customizerClassLocationBundleKey != null ? this.customizerClassLocationBundleKey.hashCode() : 0);
+        hash = 83 * hash + (this.location != null ? this.location.hashCode() : 0);
+        hash = 83 * hash + (this.defaultAcquisitionConfig != null ? this.defaultAcquisitionConfig.hashCode() : 0);
+        hash = 83 * hash + (this.display != null ? this.display.hashCode() : 0);
+        hash = 83 * hash + (this.webResource != null ? this.webResource.hashCode() : 0);
+        hash = 83 * hash + (this.localizationBundle != null ? this.localizationBundle.hashCode() : 0);
+        return hash;
+    }
+    
 }

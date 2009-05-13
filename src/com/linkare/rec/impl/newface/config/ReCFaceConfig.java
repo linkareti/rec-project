@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -15,7 +14,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-//TODO Equals, Hashcode and Check PropertyChangeListener add on indexed properties
+//TODO Check PropertyChangeListener add on indexed properties
 
 @XmlRootElement
 public class ReCFaceConfig extends AbstractConfigBean {
@@ -467,5 +466,111 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	public void setLocalizationBundle(List<LocalizationBundle> localizationBundle) {
 		this.localizationBundleList = localizationBundle;
 	}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ReCFaceConfig other = (ReCFaceConfig) obj;
+        if (this.autoConnectLab != other.autoConnectLab) {
+            return false;
+        }
+        if (this.showVideoFrame != other.showVideoFrame) {
+            return false;
+        }
+        if (this.enableVideoFrame != other.enableVideoFrame) {
+            return false;
+        }
+        if (this.enableLoginPassword != other.enableLoginPassword) {
+            return false;
+        }
+        if (this.showChatFrame != other.showChatFrame) {
+            return false;
+        }
+        if (this.enableChatFrame != other.enableChatFrame) {
+            return false;
+        }
+        if (this.showUserList != other.showUserList) {
+            return false;
+        }
+        if (this.enableUsersList != other.enableUsersList) {
+            return false;
+        }
+        if (this.usersListRefreshRateMs != other.usersListRefreshRateMs) {
+            return false;
+        }
+        if (this.enterApparatusChatRoom != other.enterApparatusChatRoom) {
+            return false;
+        }
+        if ((this.aboutPageLocationBundleKey == null) ? (other.aboutPageLocationBundleKey != null) : !this.aboutPageLocationBundleKey.equals(other.aboutPageLocationBundleKey)) {
+            return false;
+        }
+        if ((this.splashIconLocationBundleKey == null) ? (other.splashIconLocationBundleKey != null) : !this.splashIconLocationBundleKey.equals(other.splashIconLocationBundleKey)) {
+            return false;
+        }
+        if ((this.iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !this.iconLocationBundleKey.equals(other.iconLocationBundleKey)) {
+            return false;
+        }
+        if ((this.desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null) : !this.desktopLocationBundleKey.equals(other.desktopLocationBundleKey)) {
+            return false;
+        }
+        if ((this.frameTitleBundleKey == null) ? (other.frameTitleBundleKey != null) : !this.frameTitleBundleKey.equals(other.frameTitleBundleKey)) {
+            return false;
+        }
+        if ((this.iconSponsorLocationBundleKey == null) ? (other.iconSponsorLocationBundleKey != null) : !this.iconSponsorLocationBundleKey.equals(other.iconSponsorLocationBundleKey)) {
+            return false;
+        }
+        if ((this.helpPageLocationBundleKey == null) ? (other.helpPageLocationBundleKey != null) : !this.helpPageLocationBundleKey.equals(other.helpPageLocationBundleKey)) {
+            return false;
+        }
+        if (this.labList != other.labList && (this.labList == null || !this.labList.equals(other.labList))) {
+            return false;
+        }
+        if (this.webResourceList != other.webResourceList && (this.webResourceList == null || !this.webResourceList.equals(other.webResourceList))) {
+            return false;
+        }
+        if (this.localizationBundleList != other.localizationBundleList && (this.localizationBundleList == null || !this.localizationBundleList.equals(other.localizationBundleList))) {
+            return false;
+        }
+        if (this.appPreferredWidth != other.appPreferredWidth) {
+            return false;
+        }
+        if (this.appPreferredHeight != other.appPreferredHeight) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + (this.autoConnectLab ? 1 : 0);
+        hash = 59 * hash + (this.showVideoFrame ? 1 : 0);
+        hash = 59 * hash + (this.enableVideoFrame ? 1 : 0);
+        hash = 59 * hash + (this.enableLoginPassword ? 1 : 0);
+        hash = 59 * hash + (this.showChatFrame ? 1 : 0);
+        hash = 59 * hash + (this.enableChatFrame ? 1 : 0);
+        hash = 59 * hash + (this.showUserList ? 1 : 0);
+        hash = 59 * hash + (this.enableUsersList ? 1 : 0);
+        hash = 59 * hash + (int) (this.usersListRefreshRateMs ^ (this.usersListRefreshRateMs >>> 32));
+        hash = 59 * hash + (this.enterApparatusChatRoom ? 1 : 0);
+        hash = 59 * hash + (this.aboutPageLocationBundleKey != null ? this.aboutPageLocationBundleKey.hashCode() : 0);
+        hash = 59 * hash + (this.splashIconLocationBundleKey != null ? this.splashIconLocationBundleKey.hashCode() : 0);
+        hash = 59 * hash + (this.iconLocationBundleKey != null ? this.iconLocationBundleKey.hashCode() : 0);
+        hash = 59 * hash + (this.desktopLocationBundleKey != null ? this.desktopLocationBundleKey.hashCode() : 0);
+        hash = 59 * hash + (this.frameTitleBundleKey != null ? this.frameTitleBundleKey.hashCode() : 0);
+        hash = 59 * hash + (this.iconSponsorLocationBundleKey != null ? this.iconSponsorLocationBundleKey.hashCode() : 0);
+        hash = 59 * hash + (this.helpPageLocationBundleKey != null ? this.helpPageLocationBundleKey.hashCode() : 0);
+        hash = 59 * hash + (this.labList != null ? this.labList.hashCode() : 0);
+        hash = 59 * hash + (this.webResourceList != null ? this.webResourceList.hashCode() : 0);
+        hash = 59 * hash + (this.localizationBundleList != null ? this.localizationBundleList.hashCode() : 0);
+        hash = 59 * hash + this.appPreferredWidth;
+        hash = 59 * hash + this.appPreferredHeight;
+        return hash;
+    }
 	
 }
