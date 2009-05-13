@@ -45,7 +45,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(Chat.class.getName());
 	
-	private static final String CHAT_TEMPLATE_RESOURCE = "chatTemplate.html";
+	private static final String CHAT_TEMPLATE_RESOURCE = "resources/chatTemplate.htm";
 
     private static final String USERMESSAGE__TEMPLATE__ID = "userMessage__TEMPLATE__";
     
