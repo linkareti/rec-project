@@ -4,8 +4,7 @@
 
 package com.linkare.rec.impl.newface;
 
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.CONNECTED_TO_LAB;
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.CONNECT_PERFORMED;
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
 
 import java.awt.Dimension;
 import java.util.logging.Logger;

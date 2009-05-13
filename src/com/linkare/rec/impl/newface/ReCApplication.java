@@ -4,35 +4,8 @@
 
 package com.linkare.rec.impl.newface;
 
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.CONNECTED_TO_LAB;
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.CONNECT_PERFORMED;
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.APPARATUS_ENTER_PERFORMED;
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.DISCONNECTED_OFFLINE;
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.DISCONNECT_PERFORMED;
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.CONNECTED_TO_APPARATUS;
-
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.CONNECTING;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.CONNECTED;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.DISCONNECTING;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.DISCONNECTED;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.LOCKABLE;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.LOCKED;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATECONFIGURING;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATECONFIGURED;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.INCORRECTSTATE;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.MAXUSERS;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.NOTAUTHORIZED;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.NOTOWNER;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.NOTREGISTERED;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATECONFIGERROR;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATERESETING;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATERESETED;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATESTARTING;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATESTARTED;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATESTOPING;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATESTOPED;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.STATEUNKNOW;
-import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.UNREACHABLE;
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
+import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.*;
 
 import java.awt.Component;
 import java.io.InputStream;
