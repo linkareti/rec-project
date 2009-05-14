@@ -30,13 +30,13 @@
     <LocalizationBundle name="ReCExpG"
                         location="recresource:///pt/utl/ist/elab/client/g/resources/ReCExpG"/>
     <LocalizationBundle name="ReCExpRadio"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/radioactividade/resources/ReCExpRadio"/>
+                        location="recresource:///pt/utl/ist/elab/client/radioactividade/resources/ReCExpRadio"/>
     <LocalizationBundle name="ReCExpPendulo"
                         location="recresource:///pt/utl/ist/elab/client/pendulo/resources/ReCExpPendulo"/>
     <LocalizationBundle name="ReCExpPV"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/pv/resources/ReCExpPV"/>
+                        location="recresource:///pt/utl/ist/elab/client/pv/resources/ReCExpPV"/>
     <LocalizationBundle name="ReCExpPlanck"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/planck/resources/ReCExpPlanck"/>
+                        location="recresource:///pt/utl/ist/elab/client/planck/resources/ReCExpPlanck"/>
     <LocalizationBundle name="ReCExpDiscos"
                         location="recresource:///pt/utl/ist/elab/client/momentoinercia/resources/ReCExpDiscos"/>
     <LocalizationBundle name="ReCExpAleatorio"
