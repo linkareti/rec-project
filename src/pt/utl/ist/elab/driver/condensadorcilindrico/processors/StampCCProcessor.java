@@ -4,7 +4,7 @@
  * Created on 12 de Novembro de 2002, 16:19
  */
 
-package pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico.processors;
+package pt.utl.ist.elab.driver.condensadorcilindrico.processors;
 
 import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;

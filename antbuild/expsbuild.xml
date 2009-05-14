@@ -266,7 +266,7 @@
                 <createExpJars expName="thomson" jarClientName="ElabThomsonCustomizer" jarDriverName="ElabThomsonStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/thomson/"/>
         </target>
         <target name="jarCondensadorCilindrico" depends="prepare, compileCondensadorCilindrico">
-                <createExpJars expName="gamma" jarClientName="ElabCondensadorCilindricoCustomizer" jarDriverName="ElabCondensadorCilindricoDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/"/>
+                <createExpJars expName="gamma" jarClientName="ElabCondensadorCilindricoCustomizer" jarDriverName="ElabCondensadorCilindricoDriver" resourcesTopLoc="pt/utl/ist/elab/client/condensadorcilindrico/"/>
         </target>
 <!--All jars-->
 	<target name="jarExps" depends="jarElabFullClient, jarBaseUSB,

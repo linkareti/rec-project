@@ -3,7 +3,7 @@
  *
  * Created on 12 de Novembro de 2002, 15:44
  */
-package pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico.translators;
+package pt.utl.ist.elab.driver.condensadorcilindrico.translators;
 
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampTranslator;

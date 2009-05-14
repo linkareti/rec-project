@@ -4,14 +4,14 @@
  * Created on 15 de Maio de 2003, 19:38
  */
 
-package pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico;
+package pt.utl.ist.elab.driver.condensadorcilindrico;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import pt.utl.ist.elab.driver.condensadorcilindrico.translators.StampConfigTranslator;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
-import pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico.translators.StampConfigTranslator;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslator;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslatorProcessorManager;
@@ -104,7 +104,7 @@ public class CCStampDriver extends AbstractStampDriver
     public Object getHardwareInfo()
     {
 	
-	String baseHardwareInfoFile="recresource://pt/utl/ist/elab/driver/serial/stamp/condensadorCilindrico/CCBaseHardwareInfo.xml";
+	String baseHardwareInfoFile="recresource://pt/utl/ist/elab/driver/condensadorcilindrico/CCBaseHardwareInfo.xml";
 	String prop=Defaults.defaultIfEmpty(System.getProperty("eLab.CC.HardwareInfo"),baseHardwareInfoFile);
 	
 	if(prop.indexOf("://")==-1)

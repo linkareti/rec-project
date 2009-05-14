@@ -5,7 +5,7 @@
  */
 
 
-package pt.utl.ist.elab.client.serial.stamp.condensadorCilindrico;
+package pt.utl.ist.elab.client.condensadorcilindrico;
 
 import java.text.DecimalFormat;
 import java.util.Hashtable;
@@ -594,7 +594,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	
 	public javax.swing.ImageIcon getCustomizerIcon()
 	{
-	    return new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/resources/cc_iconified.gif"));
+	    return new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/condensadorcilindrico/resources/cc_iconified.gif"));
 	}
 	
 	public String getCustomizerTitle()

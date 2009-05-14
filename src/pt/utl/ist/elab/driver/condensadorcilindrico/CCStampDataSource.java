@@ -4,10 +4,10 @@
  * Created on 15 de Maio de 2003, 19:38
  */
 
-package pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico;
+package pt.utl.ist.elab.driver.condensadorcilindrico;
 
+import pt.utl.ist.elab.driver.condensadorcilindrico.processors.StampCCProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
-import pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico.processors.StampCCProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;

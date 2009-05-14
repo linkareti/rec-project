@@ -4,7 +4,7 @@
  * Created on 26 de Junho de 2002, 16:44
  */
 
-package pt.utl.ist.elab.driver.serial.stamp.condensadorCilindrico;
+package pt.utl.ist.elab.driver.condensadorcilindrico;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 

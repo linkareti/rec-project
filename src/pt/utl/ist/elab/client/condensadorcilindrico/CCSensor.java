@@ -4,7 +4,7 @@
  * Created on 03 February 2004, 19:26
  */
 
-package pt.utl.ist.elab.client.serial.stamp.condensadorCilindrico;
+package pt.utl.ist.elab.client.condensadorcilindrico;
 
 /**
  *

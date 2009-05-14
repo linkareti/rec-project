@@ -4,7 +4,7 @@
  * Created on 26 de Maio de 2003, 19:01
  */
 
-package pt.utl.ist.elab.client.serial.stamp.condensadorCilindrico;
+package pt.utl.ist.elab.client.condensadorcilindrico;
 
 import javax.swing.JFrame;
 

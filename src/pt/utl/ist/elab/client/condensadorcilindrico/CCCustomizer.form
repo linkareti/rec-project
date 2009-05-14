@@ -85,7 +85,7 @@
         <Component class="javax.swing.JCheckBox" name="jChkCalibrate">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/resources/ReCExpCC.properties" key="rec.exp.customizer.title4" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpCC${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/condensadorcilindrico/resources/ReCExpCC.properties" key="rec.exp.customizer.title4" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpCC${key}&quot;)"/>
             </Property>
           </Properties>
           <Constraints>
@@ -117,7 +117,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Number of samples">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/resources/ReCExpCC.properties" key="rec.exp.customizer.title2" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpCC${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/condensadorcilindrico/resources/ReCExpCC.properties" key="rec.exp.customizer.title2" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpCC${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -196,7 +196,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Time between samples [ms]">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/resources/ReCExpCC.properties" key="rec.exp.customizer.title3" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpCC${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/condensadorcilindrico/resources/ReCExpCC.properties" key="rec.exp.customizer.title3" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpCC${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -352,7 +352,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/resources/ReCExpCC.properties" key="rec.exp.customizer.label1" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpCC${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/condensadorcilindrico/resources/ReCExpCC.properties" key="rec.exp.customizer.label1" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpCC${key}&quot;)"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
