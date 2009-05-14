@@ -10,9 +10,13 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.LinearGradientPaint;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
@@ -22,13 +26,19 @@ import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
+import javax.swing.LookAndFeel;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.MetalButtonUI;
 
+import sun.swing.SwingUtilities2;
+
 import com.linkare.rec.impl.newface.component.FlatButton;
+import com.sun.xml.internal.bind.v2.model.impl.ModelBuilder;
 
 
 /**
@@ -37,55 +47,59 @@ import com.linkare.rec.impl.newface.component.FlatButton;
  */
 public class FlatButtonUI extends MetalButtonUI{
 	
-	private Color color_gradient_top = new Color(0xacd651);
-	private Color color_gradient_bottom = new Color(0x9fcb42);
-	private static final Color DEFAULT_COLOR_BORDER = Color.BLACK;
-	
 	public static ComponentUI createUI(JComponent x) {
 		return new FlatButtonUI();
 	}
-	
-    protected Color getFocusColor() {
-        return color_gradient_top;
-    }
-    
+	  
     // ********************************
     //          Paint
     // ********************************
     protected void paintButtonPressed(Graphics g, AbstractButton b) {
     	FlatButton fButton = (FlatButton)b;
-    	
-    	if(fButton.getBorder()==null)
-    		fButton.setBorder(BorderFactory.createLineBorder(Color.black));
-    	
-    	if ( fButton.isBackgroundGradient() && fButton.getPressedGradientBottomColor() != null && fButton.getPressedGradientTopColor() != null) {
-			FlatUtils.drawGradient(fButton, g, 0, 0, 0, b.getHeight(),
-				new float[] {.0f, 1.0f},
-				new Color[] {fButton.getPressedGradientBottomColor(), fButton.getPressedGradientTopColor()});
-    	}else{
-    		Dimension size = b.getSize();
-    		g.setColor(fButton.getBackground());
-    		g.fillRect(0, 0, size.width, size.height);
-    	}
+    	    	
+    	fButton.setForeground(fButton.getForegroundOn());
+    	fButton.setBorder(BorderFactory.createLineBorder(fButton.getColorBorderOn()));
+		FlatUtils.drawGradient(fButton, g, 0, 0, 0, b.getHeight(),
+			new float[] {.0f, 1.0f},
+			new Color[] {fButton.getGradientTopOn(), fButton.getGradientBottomOn()});
     }
 
 
     public void update(Graphics g, JComponent c) {
+    	AbstractButton b = (AbstractButton)c;
+    	ButtonModel model = b.getModel();
     	FlatButton fButton = (FlatButton)c;
     	
-    	if(fButton.getBorder()==null)
-    		fButton.setBorder(BorderFactory.createLineBorder(DEFAULT_COLOR_BORDER));
-    	    	
-    	if(fButton.getGradientBottomColor() != null)
-    		color_gradient_bottom = fButton.getGradientBottomColor();
-    	
-    	if(fButton.getGradientTopColor()!= null)
-    		color_gradient_top = fButton.getGradientTopColor();
-    	
-    	
-    	FlatUtils.drawGradient(fButton, g, 0, 0, 0, c.getHeight(),
+    	fButton.setForeground(fButton.getForegroundOff());
+		fButton.setBorder(BorderFactory.createLineBorder(fButton.getColorBorderOff()));
+		FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(),
 				new float[] {.0f, 1.0f},
-				new Color[] {color_gradient_bottom, color_gradient_top});
-		super.paint(g,fButton);
+				new Color[] {fButton.getGradientTopOff(), fButton.getGradientBottomOff()});
+		
+		if(model.isEnabled() && ( model.isPressed() || model.isSelected()))
+			paintButtonPressed(g,b);
+	
+		paint(g, c);
     }
+    
+    protected void paintText(Graphics g, JComponent c, Rectangle textRect, String text) {
+    	AbstractButton b = (AbstractButton) c;			     
+    	ButtonModel model = b.getModel();
+    	FontMetrics fm = SwingUtilities2.getFontMetrics(c, g);
+    	int mnemIndex = b.getDisplayedMnemonicIndex();
+
+    	/* Draw the Text */
+    	if(model.isEnabled()) {
+    		/*** paint the text normally */
+    		g.setColor(b.getForeground());
+    	}
+    	else {
+    		/*** paint the text disabled ***/
+    		g.setColor(getDisabledTextColor());
+    	}
+    	SwingUtilities2.drawStringUnderlineCharAt(c, g,text,mnemIndex,
+    			textRect.x, textRect.y + fm.getAscent());
+    }
+    
+    
 }
