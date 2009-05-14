@@ -9,7 +9,7 @@
     <localizationBundle name="ReCExpScuba"
                         location="recresource:///pt/utl/ist/elab/client/serial/stamp/scuba/resources/ReCExpScuba"/>
     <localizationBundle name="ReCExpG"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/g/resources/ReCExpG"/>
+                        location="recresource:///pt/utl/ist/elab/client/g/resources/ReCExpG"/>
     <localizationBundle name="ReCExpRadio"
                         location="recresource:///pt/utl/ist/elab/client/serial/stamp/radioactividade/resources/ReCExpRadio"/>
     <localizationBundle name="ReCExpPendulo"
@@ -19,11 +19,11 @@
     <localizationBundle name="ReCExpPlanck"
                         location="recresource:///pt/utl/ist/elab/client/serial/stamp/planck/resources/ReCExpPlanck"/>
     <localizationBundle name="ReCExpDiscos"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/momentoInercia/resources/ReCExpDiscos"/>
+                        location="recresource:///pt/utl/ist/elab/client/momentoinercia/resources/ReCExpDiscos"/>
     <localizationBundle name="ReCExpAleatorio"
                         location="recresource:///pt/utl/ist/elab/client/Aleatorio/Resource/ReCExpAleatorio"/>
     <localizationBundle name="ReCExpT"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/conducaoCalor/resources/ReCExpT"/>
+                        location="recresource:///pt/utl/ist/elab/client/conducaocalor/resources/ReCExpT"/>
     <localizationBundle name="ReCExpMeteo"
                         location="recresource:///pt/utl/ist/elab/client/meteo/resources/ReCExpMeteo"/>
     <localizationBundle name="ReCExpStatSound"
