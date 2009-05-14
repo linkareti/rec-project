@@ -33,9 +33,9 @@
     <localizationBundle name="ReCExpThomson"
                         location="recresource:///pt/utl/ist/elab/client/thomson/resources/ReCExpThomson"/>
     <localizationBundle name="ReCExpPolaroid"
-                        location="recresource:///pt/utl/ist/elab/client/usb/cypress/polaroid/resources/ReCExpPolaroid"/>
+                        location="recresource:///pt/utl/ist/elab/client/polaroid/resources/ReCExpPolaroid"/>
     <localizationBundle name="ReCExpGamma"
-                        location="recresource:///pt/utl/ist/elab/client/usb/cypress/gamma/resources/ReCExpGamma"/>
+                        location="recresource:///pt/utl/ist/elab/client/gamma/resources/ReCExpGamma"/>
     <localizationBundle name="ReCExpTelescopio"
                         location="recresource:///pt/utl/ist/elab/client/telescopio/resources/ReCExpTelescopio"/>
     <localizationBundle name="ReCExpPG"

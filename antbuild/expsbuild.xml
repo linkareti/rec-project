@@ -222,17 +222,17 @@
                 <createExpJars expName="webrobot" jarClientName="ElabWebRobotCustomizer" jarDriverName="ElabWebRobotDriver" resourcesTopLoc="pt/utl/ist/elab/client/webrobot/"/>
         </target>
 	<!--target name="jarGamma" depends="prepare, compileGamma">
-                <createExpJars expName="gamma" jarClientName="ElabGammaCustomizer" jarDriverName="ElabGammaUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/gamma/"/>
+                <createExpJars expName="gamma" jarClientName="ElabGammaCustomizer" jarDriverName="ElabGammaUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/gamma/"/>
         </target>
 	<target name="jarPolaroid" depends="prepare, compilePolaroid">
-                <createExpJars expName="polaroid" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/polaroid/"/>
+                <createExpJars expName="polaroid" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/polaroid/"/>
         </target-->
         
         <target name="jarGamma" depends="prepare, compileGamma">
-                <createExpJars expName="gamma" jarClientName="ElabGammaCustomizer" jarDriverName="ElabGammaDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/gamma/"/>
+                <createExpJars expName="gamma" jarClientName="ElabGammaCustomizer" jarDriverName="ElabGammaDriver" resourcesTopLoc="pt/utl/ist/elab/client/gamma/"/>
         </target>
 	<target name="jarPolaroid" depends="prepare, compilePolaroid">
-                <createExpJars expName="polaroid" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/polaroid/"/>
+                <createExpJars expName="polaroid" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidDriver" resourcesTopLoc="pt/utl/ist/elab/client/polaroid/"/>
         </target>
         
 	<target name="jarG" depends="prepare, compileG">
