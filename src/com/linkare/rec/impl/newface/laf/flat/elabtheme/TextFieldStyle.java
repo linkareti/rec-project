@@ -6,9 +6,12 @@
  */
 package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 import javax.swing.plaf.FontUIResource;
 
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
@@ -21,7 +24,8 @@ public class TextFieldStyle extends DefaultStyle {
 	
 	public static final String ID = "TextField";
 	
-	public static final FontUIResource TEXTFIELD_FONT = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 14);
+	public static final FontUIResource TEXTFIELD_FONT = new FontUIResource(DEFAULT_FONT.getFontName(), Font.BOLD, 12);
+	public static final Border THIN_BLUE_BORDER = BorderFactory.createLineBorder(new Color(0x517DA8));
 	
 	/**
 	 * Creates the <code>TextFieldStyle</code>.
@@ -38,8 +42,9 @@ public class TextFieldStyle extends DefaultStyle {
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, SOLID_THIN_BLACK_BORDER);
+		map.put(BORDER, THIN_BLUE_BORDER);
 		map.put(FONT, TEXTFIELD_FONT);
+		map.put(BACKGROUND, Color.white);
 		
 	}
 
