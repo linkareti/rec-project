@@ -4,7 +4,7 @@
  * Created on 29 de Janeiro de 2003, 11:34
  */
 
-package ie.elab.driver.solitoes;
+package pt.utl.ist.elab.driver.solitoes;
 
 /**
  *
