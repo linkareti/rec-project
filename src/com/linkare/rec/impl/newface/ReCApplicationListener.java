@@ -15,6 +15,8 @@ import com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent;
  * @author Henrique Fernandes
  */
 public interface ReCApplicationListener {
+	
+	void applicationEvent(ReCAppEvent evt);
 
     void labStateChanged(LabConnectorEvent evt);
 

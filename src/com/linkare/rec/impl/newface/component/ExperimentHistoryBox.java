@@ -15,7 +15,7 @@ package com.linkare.rec.impl.newface.component;
  *
  * @author iies-consultor922
  */
-public class ExperimentHistoryBox extends javax.swing.JPanel {
+public class ExperimentHistoryBox extends AbstractContentPane {
 
     /** Creates new form ExperimentHistoryBox */
     public ExperimentHistoryBox() {
@@ -39,11 +39,6 @@ public class ExperimentHistoryBox extends javax.swing.JPanel {
         scrollPane.setBorder(null);
         scrollPane.setName("scrollPane"); // NOI18N
 
-        experimentHistoryList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         experimentHistoryList.setName("experimentHistoryList"); // NOI18N
         scrollPane.setViewportView(experimentHistoryList);
 

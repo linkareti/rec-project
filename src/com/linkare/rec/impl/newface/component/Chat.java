@@ -17,24 +17,22 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
 
+import org.apache.commons.lang.StringEscapeUtils;
+import org.jdesktop.application.Action;
 
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.impl.client.chat.ChatConnectionEvent;
 import com.linkare.rec.impl.client.chat.ChatMessageEvent;
 import com.linkare.rec.impl.client.chat.ChatRoomEvent;
 import com.linkare.rec.impl.client.chat.IChatMessageListener;
-import com.sun.xml.internal.ws.util.StringUtils;
-
-import org.apache.commons.lang.StringEscapeUtils;
-import org.jdesktop.application.Action;
-
-import pt.utl.ist.elab.client.webrobot.customizer.Comps.Esquerda;
+import com.linkare.rec.impl.client.chat.IChatServer;
+import com.linkare.rec.impl.utils.EventQueue;
+import com.linkare.rec.impl.utils.EventQueueDispatcher;
 
 /**
  *
@@ -105,7 +103,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 			this.user = user;
 			this.message = message;
 			this.result = USERMESSAGE_TEMPLATE.replaceFirst(__USER__, user)
-					.replaceFirst(__MESSAGE__, message);
+					.replaceFirst(__MESSAGE__, StringEscapeUtils.escapeJava(message));
 		}
 		
 		@Override
@@ -114,12 +112,24 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		}
 
 	}
+
+	private class MessageQueueDispatcher implements EventQueueDispatcher {
+
+		public void dispatchEvent(Object evt) {
+			if (evt instanceof ChatMessageEvent && chatServer != null)
+				chatServer.sendMessage((ChatMessageEvent) evt);
+		}
+
+		public int getPriority() {
+			return Thread.NORM_PRIORITY - 1;
+		}
+
+	}
    
+	private EventQueue messageQueue = null;
+
+	private UserInfo[] usersList;
 	
-    private HTMLDocument getHTMLDocument() {
-    	return (HTMLDocument)msgPane.getDocument();
-    }
-    
 	/** Creates new form Chat */
     public Chat() {
         initComponents();
@@ -129,50 +139,139 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
         
     }
 
+    private HTMLDocument getHTMLDocument() {
+    	return (HTMLDocument)msgPane.getDocument();
+    }
+    
     @Override
     public void roomChanged(ChatRoomEvent evt) {
-        log.fine(evt.toString());
+        if (log.isLoggable(Level.FINE)) {
+        	log.fine(evt.toString());
+		}
     }
 
     @Override
     public void connectionChanged(ChatConnectionEvent evt) {
-    	log.fine(evt.toString());
+    	if (log.isLoggable(Level.FINE)) {
+        	log.fine(evt.toString());
+		}
+    	
+    	if (evt.isConnected()) {
+    		msgPane.setText(CHAT_TEMPLATE);
+    		txtInputMsg.setText("");
+    	}
     }
 
     @Override
-    public void userListChanged(UserInfo[] usrInfo) {
-    	log.fine(Arrays.deepToString(usrInfo));
+    public void userListChanged(UserInfo[] usersList) {
+    	if (log.isLoggable(Level.FINE)) {
+    		log.fine(Arrays.deepToString(usersList));
+    	}
+    	this.usersList = usersList;
+    	
+    	boolean foundUserEveryone = false;
+    	
+    	for (UserInfo user : usersList) {
+    		if (IChatServer.EVERYONE_USER_ALIAS.equals(user.getUserName())) {
+    			everyone = user;
+    			foundUserEveryone = true;
+    		}
+		}
+    	
+    	if (!foundUserEveryone) {
+    		everyone = null;
+    	}
     }
 
     @Override
     public void newChatMessage(ChatMessageEvent evt) {
-    	log.fine(evt.toString());
+    	if (log.isLoggable(Level.FINE)) {
+			log.fine(evt != null ? evt.getMessage() : "null event");
+		}
+    	
+    	String userFrom = evt.getUserFrom().getUserName();
+    	String msg = evt.getMessage();
+    	
+    	if (msg.length() > 0) {
+    		String escapedMsg = StringEscapeUtils.escapeHtml(msg);
+    		
+    		Element msgList = getHTMLDocument().getElement(MESSAGE_LIST);
+    		try {
+    			getHTMLDocument().insertBeforeEnd(msgList, 
+    					new UserMessage(userFrom, escapedMsg).toString());
+    			msgPane.scrollToReference(MESSAGE_LIST_END);
+
+    		} catch (BadLocationException e) {
+    			log.log(Level.SEVERE, "Trying to insert html element", e);
+    		} catch (IOException e) {
+    			log.log(Level.SEVERE, "Trying to insert html element", e);
+    		}
+    	}
     }
     
     @Action
     public void sendMessage() {
-    	String msg = StringEscapeUtils.escapeJava(txtInputMsg.getText());
-    	if (msg.length() > 0) {
-    		String escapedMsg = StringEscapeUtils.escapeHtml(msg);
-    		log.fine(escapedMsg);
-	    	Element msgList = getHTMLDocument().getElement(MESSAGE_LIST);
-	        try {
-				getHTMLDocument().insertBeforeEnd(msgList, 
-						new UserMessage("Henrique", escapedMsg).toString());
-				msgPane.scrollToReference(MESSAGE_LIST_END);
-				
-			} catch (BadLocationException e) {
-				log.log(Level.SEVERE, "Trying to insert html element", e);
-			} catch (IOException e) {
-				log.log(Level.SEVERE, "Trying to insert html element", e);
-			}
-			clearInputMessage();
-    	}
+    	
+    	String msg = txtInputMsg.getText();
+    	
+        if ( userInfo != null && chatServer !=null && msg.length() > 0 ) {
+        	
+        	ChatMessageEvent newMessage = new ChatMessageEvent(this, userInfo, everyone, msg);
+            messageQueue.addEvent(newMessage);
+//            if( !((UserInfo)comboUsersChat.getSelectedItem()).getUserName().equals(IChatServer.EVERYONE_USER_ALIAS) )
+//                newChatMessage(newMessage);
+            
+            clearInputMessage();
+        }
     }
     
     private void clearInputMessage() {
     	txtInputMsg.setText("");
     }
+    
+	/**
+	 * @return the chatServer
+	 */
+	public IChatServer getChatServer() {
+		return chatServer;
+	}
+
+	/**
+	 * @return the userInfo
+	 */
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	/**
+	 * @param chatServer the chatServer to set
+	 */
+	public void setChatServer(IChatServer chatServer) {
+		if(chatServer!=null)
+            chatServer.removeChatMessageListener(this);
+        this.chatServer = chatServer;
+        if(chatServer!=null)
+            chatServer.addChatMessageListener(this);
+        if(messageQueue == null)
+            messageQueue = new EventQueue(new MessageQueueDispatcher());
+	}
+
+	/**
+	 * @param userInfo the userInfo to set
+	 */
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
+	/*
+	 * @see javax.swing.JComponent#setEnabled(boolean)
+	 */
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		txtInputMsg.setEnabled(enabled);
+		msgPane.setEnabled(enabled);
+	}
 
 	/** This method is called from within the constructor to
      * initialize the form.
@@ -225,4 +324,11 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
     private javax.swing.JTextField txtInputMsg;
     // End of variables declaration//GEN-END:variables
 
+    /** Holds value of property setChatServer. */
+    private IChatServer chatServer;
+    
+    /** Holds value of property user. */
+    private UserInfo userInfo;
+    
+    private UserInfo everyone;
 }

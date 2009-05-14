@@ -6,7 +6,12 @@ package com.linkare.rec.impl.newface;
 
 import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
 
+import com.linkare.rec.impl.newface.ReCAboutBox;
+
+import java.awt.Component;
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
@@ -24,11 +29,18 @@ import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent;
+import com.linkare.rec.impl.newface.component.AbstractContentPane;
 import com.linkare.rec.impl.newface.component.ApparatusCombo;
+import com.linkare.rec.impl.newface.component.ApparatusDescriptionPane;
+import com.linkare.rec.impl.newface.component.ApparatusSelectBox;
+import com.linkare.rec.impl.newface.component.ChatBox;
+import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
 import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.GlassLayer;
+import com.linkare.rec.impl.newface.component.LayoutContainerPane;
 import com.linkare.rec.impl.newface.component.SimpleLoginBox;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
+import com.linkare.rec.impl.newface.component.VideoBox;
 import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
@@ -45,6 +57,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
     // For now, application model is unique. So there is no need for abstraction here.
     private ReCApplication recApplication = ReCApplication.getApplication();
 
+    private List<AbstractContentPane> interactiveBoxes;
     
     public ReCFrameView(SingleFrameApplication app) {
         super(app);
@@ -61,27 +74,28 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 
         // Initialize components
         initComponents();
-
+         
+        // Collect boxes that are enabled/disabled between lab connect/disconnect
+        collectInterativeBoxes();
+        
         // Set frame properties
         getFrame().setPreferredSize(DEFAULT_FRAME_SIZE);
         getFrame().setResizable(false);
         getFrame().setGlassPane(glassPane);
 
+        // Hide apparatus description fields
+        getApparatusDescriptionPane().setFieldsVisible(false);
+        
+        // Chat
+        getChatBox().getChat().setChatServer(recApplication.getChatServer());
+        getChatBox().getChat().setUserInfo(recApplication.getUserInfo());
+
         // Hide status indicators
         //lblTaskMessage.setVisible(false);
         //progressCicleTask.setVisible(false);
         
-        // Hide the status pane
+        // Hide bottom status pane
         statusPanel.setVisible(false);
-
-        // status display initialization
-//        int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
-//        messageTimer = new Timer(messageTimeout, new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                statusMessageLabel.setText("");
-//            }
-//        });
-//        messageTimer.setRepeats(false);
 
         // connecting action tasks to status bar via TaskMonitor
         TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
@@ -108,7 +122,49 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 
     }
 
-    public UndecoratedDialog<SimpleLoginBox> getLoginBox() {
+	/**
+	 * Init boxes that are enabled/disabled between lab connect/disconnect
+	 */
+	private void collectInterativeBoxes() {
+		interactiveBoxes = new ArrayList<AbstractContentPane>();
+        interactiveBoxes.add(getApparatusSelectBox());
+        interactiveBoxes.add(getExperimentHistoryBox());
+        interactiveBoxes.add(getApparatusDescriptionPane());
+        interactiveBoxes.add(getVideoBox());
+        interactiveBoxes.add(getChatBox());
+	}
+	
+	public void setInteractiveBoxesEnabled(boolean enabled) {
+		for (AbstractContentPane box : interactiveBoxes) {
+			box.setChildComponentsEnabled(enabled);
+		}
+	}
+
+    private LayoutContainerPane getLayoutContainerPane() {
+		return layoutContainerPane;
+	}
+    
+    private ChatBox getChatBox() {
+		return getLayoutContainerPane().getMediaPane().getChatBox();
+	}
+
+	private VideoBox getVideoBox() {
+		return getLayoutContainerPane().getMediaPane().getVideoBox();
+	}
+
+	private ApparatusDescriptionPane getApparatusDescriptionPane() {
+		return getLayoutContainerPane().getApparatusDescriptionPane();
+	}
+
+	private ExperimentHistoryBox getExperimentHistoryBox() {
+		return getLayoutContainerPane().getNavigationPane().getExperimentHistoryBox();
+	}
+
+	private ApparatusSelectBox getApparatusSelectBox() {
+		return getLayoutContainerPane().getNavigationPane().getApparatusSelectBox();
+	}
+
+	public UndecoratedDialog<SimpleLoginBox> getLoginBox() {
         if (loginBox == null) {
             SimpleLoginBox simpleLoginBoxPane = new SimpleLoginBox();
             simpleLoginBoxPane.setIdleIcon(idleIcon);
@@ -130,11 +186,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
     }
     
     public ApparatusCombo getApparatusCombo() {
-    	return layoutContainerPane.getNavigationPane().getApparatusSelectBox().getApparatusCombo();
+    	return getLayoutContainerPane().getNavigationPane().getApparatusSelectBox().getApparatusCombo();
     }
     
     public FlatButton getButtonToggleEnter() {
-    	return layoutContainerPane.getNavigationPane().getApparatusSelectBox().getButtonToggleEnter();
+    	return getLayoutContainerPane().getNavigationPane().getApparatusSelectBox().getButtonToggleEnter();
 	}
     
     
@@ -150,7 +206,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
         lblTaskMessage.setVisible(visible);
     }
 
-
     @Action
     public void showAboutBox() {
         recApplication.show(getAboutBox());
@@ -160,17 +215,20 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
     public void toggleConnectionState() {
         if (recApplication.getCurrentState().canGoTo(CONNECT_PERFORMED)) {
         	// Perform connect
-        	
-            setGlassPaneVisible(true);
-
-            // Get username
-            getLoginBox().setVisible(true);
+            showLoginBox();
 
         } else {
         	// Perform disconnect
             recApplication.disconnect();
         }
     }
+
+	private void showLoginBox() {
+		setGlassPaneVisible(true);
+
+		// Get username
+		getLoginBox().setVisible(true);
+	}
 
     private javax.swing.Action toggleConnectionStateActionData(boolean connected) {
         javax.swing.Action toggleConnectionStateAction =
@@ -190,6 +248,15 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 
     // -------------------------------------------------------------------------
     // Response to application model events
+    
+    @Override
+	public void applicationEvent(ReCAppEvent evt) {
+    	switch (evt.getCommand()) {
+	        case SHOW_LOGIN:
+	        	showLoginBox();
+	            break;
+    	}
+	}
 
     @Override
     public void labStateChanged(LabConnectorEvent evt) {
@@ -205,6 +272,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
             case LabConnectorEvent.STATUS_CONNECTED:
                 toolBtnConnect.setAction(toggleConnectionStateActionData(true));
                 updateStatus(getResourceMap().getString("lblTaskMessage.connected.text", recApplication.getUsername(), recApplication.getCurrentLabName()));
+                getLayoutContainerPane().getApparatusDescriptionPane().setFieldsVisible(true);
+                setInteractiveBoxesEnabled(true);
                 getLoginBox().setVisible(false);
                 setGlassPaneVisible(false);
                 break;
@@ -229,12 +298,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
             case LabConnectorEvent.STATUS_DISCONNECTED:
                 toolBtnConnect.setAction(toggleConnectionStateActionData(false));
                 updateStatus(getResourceMap().getString("lblTaskMessage.disconnected.text"));
+                getLayoutContainerPane().getApparatusDescriptionPane().setFieldsVisible(false);
+                setInteractiveBoxesEnabled(false);
                 progressCicleTask.stop();
                 break;
 
         }
     }
-  
+
 	@Override
 	public void apparatusListChanged(ApparatusListChangeEvent evt) {
 		if (recApplication.getCurrentState().matches(CONNECTED_TO_LAB)) {
@@ -247,8 +318,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 		
 		switch (eventSelector) {
 			case CONNECTED:
-				// TODO update
+				// FIXME update
 				getButtonToggleEnter().setText("SAIR");
+				// FIXME this is fixing the focus repaint problem. get a better way.
+				getApparatusSelectBox().repaint();
+				
+				
 				getApparatusCombo().setEditable(false);
 				getApparatusCombo().setPopupVisible(false);
 				getApparatusCombo().setEnabled(false);
