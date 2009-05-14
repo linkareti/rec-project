@@ -84,7 +84,7 @@
               <KeyStroke key="Ctrl+S"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
-              <Image iconType="3" name="/pt/utl/ist/elab/client/webrobot/customizer/Icons/OK16.gif"/>
+              <Image iconType="3" name="/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif"/>
             </Property>
             <Property name="text" type="java.lang.String" value="OK"/>
             <Property name="toolTipText" type="java.lang.String" value="Concluir diagrama de estados"/>
@@ -324,7 +324,7 @@
                   <KeyStroke key="Ctrl+S"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
-                  <Image iconType="3" name="/pt/utl/ist/elab/client/webrobot/customizer/Icons/OK16.gif"/>
+                  <Image iconType="3" name="/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="OK"/>
                 <Property name="toolTipText" type="java.lang.String" value="Concluir diagrama de estados"/>
@@ -574,7 +574,7 @@
             <Component class="javax.swing.JToggleButton" name="jToggleButtonPWM">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
-                  <Image iconType="3" name="/pt/utl/ist/elab/client/webrobot/customizer/Icons/PWM16.gif"/>
+                  <Image iconType="3" name="/pt/utl/ist/elab/client/webrobot/customizer/Icons/pwm16.gif"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Escolhe o PWM"/>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
@@ -585,7 +585,7 @@
             <Component class="javax.swing.JToggleButton" name="jToggleButtonIVPWM">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
-                  <Image iconType="3" name="/pt/utl/ist/elab/client/webrobot/customizer/Icons/IVPWM16.gif"/>
+                  <Image iconType="3" name="/pt/utl/ist/elab/client/webrobot/customizer/Icons/ivpwm16.gif"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="IV-PWM"/>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
@@ -663,7 +663,7 @@
             <Component class="javax.swing.JButton" name="jButtonOK">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
-                  <Image iconType="3" name="/pt/utl/ist/elab/client/webrobot/customizer/Icons/OK16.gif"/>
+                  <Image iconType="3" name="/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Concluir o diagrama de estados"/>
               </Properties>

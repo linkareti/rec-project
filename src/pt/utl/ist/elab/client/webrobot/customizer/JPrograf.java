@@ -269,7 +269,7 @@ public class JPrograf extends javax.swing.JPanel
         jMenuItemOK.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemOK.setText("OK");
         jMenuItemOK.setToolTipText("Concluir diagrama de estados");
-        jMenuItemOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/OK16.gif")));
+        jMenuItemOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif")));
         jMenuItemOK.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -472,7 +472,7 @@ public class JPrograf extends javax.swing.JPanel
         jMenuItemOK1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemOK1.setText("OK");
         jMenuItemOK1.setToolTipText("Concluir diagrama de estados");
-        jMenuItemOK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/OK16.gif")));
+        jMenuItemOK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif")));
         jMenuItemOK1.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -637,12 +637,12 @@ public class JPrograf extends javax.swing.JPanel
 
         jToolBarMain.add(jToolBarP2);
 
-        jToggleButtonPWM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/PWM16.gif")));
+        jToggleButtonPWM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/pwm16.gif")));
         jToggleButtonPWM.setToolTipText("Escolhe o PWM");
         buttonGroupToolBar.add(jToggleButtonPWM);
         jToolBarP3.add(jToggleButtonPWM);
 
-        jToggleButtonIVPWM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/IVPWM16.gif")));
+        jToggleButtonIVPWM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/ivpwm16.gif")));
         jToggleButtonIVPWM.setToolTipText("IV-PWM");
         buttonGroupToolBar.add(jToggleButtonIVPWM);
         jToolBarP3.add(jToggleButtonIVPWM);
@@ -683,7 +683,7 @@ public class JPrograf extends javax.swing.JPanel
 
         jToolBarOKCancel.add(jButton1);
 
-        jButtonOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/OK16.gif")));
+        jButtonOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/webrobot/customizer/Icons/ok16.gif")));
         jButtonOK.setToolTipText("Concluir o diagrama de estados");
         jButtonOK.addActionListener(new java.awt.event.ActionListener()
         {

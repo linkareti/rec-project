@@ -33,11 +33,11 @@ PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN"
 	<mapID target="images.Contacts16" url="images/Contacts16.gif" />
 	<mapID target="images.CompInt16" url="images/CompInt16.gif" />
 	<mapID target="images.JPrograf" url="images/JPrograf.gif" />
-	<mapID target="images.IVPWM16" url="images/IVPWM16.gif" />
+	<mapID target="images.IVPWM16" url="images/ivpwm16.gif" />
 	<mapID target="images.Prograf" url="images/Prograf.gif" />
 	<mapID target="images.Frente16" url="images/Frente16.gif" />
 	<mapID target="images.popup" url="images/popup.gif" />
-	<mapID target="images.PWM16" url="images/PWM16.gif" />
+	<mapID target="images.PWM16" url="images/pwm16.gif" />
 	<mapID target="images.Open16" url="images/Open16.gif" />
 	<mapID target="images.Play16" url="images/Play16.gif" />
 	<mapID target="images.JPrograf16" url="images/JPrograf16.gif" />
