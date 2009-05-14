@@ -4,11 +4,9 @@
  * Created on 26 de Junho de 2002, 16:44
  */
 
-package pt.utl.ist.elab.driver.decay;
+package pt.utl.ist.elab.driver.radioactividade;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import pt.utl.ist.elab.driver.radioactividade.RadioactividadeStampDriver;
 
 import com.linkare.rec.impl.driver.BaseHardware;
 import com.linkare.rec.impl.logging.LoggerUtil;
@@ -18,7 +16,7 @@ import com.linkare.rec.impl.utils.ORBBean;
  *
  * @author José Pedro Pereira - Linkare TI
  */
-public class DecayHardwareServerMain
+public class RadioactividadeHardwareServerMain
 {
 
 	private static String RADIOACTIVIDADE_HARDWARE_LOGGER="RadioactividadeHardware.Logger";

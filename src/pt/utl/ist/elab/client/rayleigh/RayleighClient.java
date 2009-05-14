@@ -4,16 +4,15 @@
  * Created on 26 de Maio de 2003, 19:01
  */
 
-package pt.utl.ist.elab.virtual.client.semiconductor;
+package pt.utl.ist.elab.client.rayleigh;
 
-import com.linkare.rec.impl.baseUI.*;
-import javax.swing.JFrame;
+import com.linkare.rec.impl.baseUI.ReCBaseUI;
 
 /**
  *
  * @author José Pedro Pereira - Linkare TI
  */
-public class SClient
+public class RayleighClient
 {
     
     /**
@@ -21,19 +20,20 @@ public class SClient
      */
     public static void main(String[] args)
     {
-	JFrame.setDefaultLookAndFeelDecorated(true);
-	ReCBaseUI ui = new ReCBaseUI();
-	ui.setApparatusAutoConnectID("SCONDUCTOR_V1.0");
-	ui.show();
+	/*JFrame.setDefaultLookAndFeelDecorated(true);
+	ReCBaseUI ui=new ReCBaseUI();
+	initUI(ui);
+	//ui.setApparatusAutoConnectId("EXP_RAYLEIGH_STAMP_V1.1");
+	ui.show();*/
     }
     
-    /*public static void initUI(RecBaseUI ui)
+     public static void initUI(ReCBaseUI ui)
     {
 	/*ui.addAcqDisplay("ELAB_PV_STAMP_V02","pt.utl.ist.elab.client.pv.SeringeSensor");
 	ui.addAcqDisplay("ELAB_PV_STAMP_V02","com.linkare.rec.impl.baseUI.table.DefaultExperimentDataTable");
 	ui.addAcqDisplay("ELAB_PV_STAMP_V02","com.linkare.rec.impl.baseUI.graph.DefaultExperimentTimeSeriesGraph");
 	ui.addAcqDisplay("ELAB_PV_STAMP_V02","com.linkare.rec.impl.baseUI.display.DefaultExperimentHeaderInfo");
 	 */
-    //}
+    }
     
 }
