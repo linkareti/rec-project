@@ -32,7 +32,7 @@
     <LocalizationBundle name="ReCExpRadio"
                         location="recresource:///pt/utl/ist/elab/client/serial/stamp/radioactividade/resources/ReCExpRadio"/>
     <LocalizationBundle name="ReCExpPendulo"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/pendulo/resources/ReCExpPendulo"/>
+                        location="recresource:///pt/utl/ist/elab/client/pendulo/resources/ReCExpPendulo"/>
     <LocalizationBundle name="ReCExpPV"
                         location="recresource:///pt/utl/ist/elab/client/serial/stamp/pv/resources/ReCExpPV"/>
     <LocalizationBundle name="ReCExpPlanck"
@@ -58,7 +58,7 @@
     <LocalizationBundle name="ReCExpTelescopio"
                         location="recresource:///pt/utl/ist/elab/client/telescopio/resources/ReCExpTelescopio"/>
     <LocalizationBundle name="ReCExpPG"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/penduloGravitico/resources/ReCExpPG"/>
+                        location="recresource:///pt/utl/ist/elab/client/pendulogravitico/resources/ReCExpPG"/>
     <LocalizationBundle name="ReCExpCC"
                         location="recresource:///pt/utl/ist/elab/client/condensadorcilindrico/resources/ReCExpCC"/>
 

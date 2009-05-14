@@ -13,7 +13,7 @@
     <localizationBundle name="ReCExpRadio"
                         location="recresource:///pt/utl/ist/elab/client/serial/stamp/radioactividade/resources/ReCExpRadio"/>
     <localizationBundle name="ReCExpPendulo"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/pendulo/resources/ReCExpPendulo"/>
+                        location="recresource:///pt/utl/ist/elab/client/pendulo/resources/ReCExpPendulo"/>
     <localizationBundle name="ReCExpPV"
                         location="recresource:///pt/utl/ist/elab/client/serial/stamp/pv/resources/ReCExpPV"/>
     <localizationBundle name="ReCExpPlanck"
@@ -39,7 +39,7 @@
     <localizationBundle name="ReCExpTelescopio"
                         location="recresource:///pt/utl/ist/elab/client/telescopio/resources/ReCExpTelescopio"/>
     <localizationBundle name="ReCExpPG"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/penduloGravitico/resources/ReCExpPG"/>
+                        location="recresource:///pt/utl/ist/elab/client/pendulogravitico/resources/ReCExpPG"/>
     <localizationBundle name="ReCExpCC"
                         location="recresource:///pt/utl/ist/elab/client/condensadorcilindrico/resources/ReCExpCC"/>
 	<lab toolTipBundleKey="ReCLabeLab$rec.lab.tip.elab" location="corbaloc:iiop:1.2@elab.ist.utl.pt:9003/MultiCastController" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.lab" displayStringBundleKey="ReCLabeLab$rec.lab.title.elab" desktopLocationBundleKey="ReCBaseUI$rec.bui.image.desktop">

@@ -242,10 +242,10 @@
                 <createExpJars expName="momentoInercia" jarClientName="ElabMomInerciaCustomizer" jarDriverName="ElabMomInerciaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/momentoinercia/"/>
         </target>
 	<target name="jarPendulo" depends="prepare, compilePendulo">
-                <createExpJars expName="pendulo" jarClientName="ElabPenduloCustomizer" jarDriverName="ElabPenduloStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/pendulo/"/>
+                <createExpJars expName="pendulo" jarClientName="ElabPenduloCustomizer" jarDriverName="ElabPenduloStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/pendulo/"/>
         </target>
 	<target name="jarPenduloGravitico" depends="prepare, compilePenduloGravitico">
-                <createExpJars expName="penduloGravitico" jarClientName="ElabPGCustomizer" jarDriverName="ElabPGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/penduloGravitico/"/>
+                <createExpJars expName="penduloGravitico" jarClientName="ElabPGCustomizer" jarDriverName="ElabPGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/pendulogravitico/"/>
         </target>
 	<target name="jarPlanck" depends="prepare, compilePlanck">
                 <createExpJars expName="planck" jarClientName="ElabPlanckCustomizer" jarDriverName="ElabPlanckStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/planck/"/>
