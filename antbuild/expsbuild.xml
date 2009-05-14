@@ -207,7 +207,7 @@
 
 <!--Experiments jars-->
 	<target name="jarCondCalor" depends="prepare, compileCondCalor">
-                <createExpJars expName="conducaoCalor" jarClientName="ElabTCustomizer" jarDriverName="ElabTStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/conducaoCalor/"/>
+                <createExpJars expName="conducaoCalor" jarClientName="ElabTCustomizer" jarDriverName="ElabTStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/conducaocalor/"/>
         </target>
 	<target name="jarAleatorio" depends="prepare, compileAleatorio">
                 <createExpJars expName="Aleatorio" jarClientName="ElabAleatorioCustomizer" jarDriverName="ElabAleatorioDriver" resourcesTopLoc="pt/utl/ist/elab/client/Aleatorio/"/>
@@ -236,10 +236,10 @@
         </target>
         
 	<target name="jarG" depends="prepare, compileG">
-                <createExpJars expName="g" jarClientName="ElabGCustomizer" jarDriverName="ElabGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/g/"/>
+                <createExpJars expName="g" jarClientName="ElabGCustomizer" jarDriverName="ElabGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/g/"/>
         </target>
 	<target name="jarMomInercia" depends="prepare, compileMomInercia">
-                <createExpJars expName="momentoInercia" jarClientName="ElabMomInerciaCustomizer" jarDriverName="ElabMomInerciaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/momentoInercia/"/>
+                <createExpJars expName="momentoInercia" jarClientName="ElabMomInerciaCustomizer" jarDriverName="ElabMomInerciaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/momentoinercia/"/>
         </target>
 	<target name="jarPendulo" depends="prepare, compilePendulo">
                 <createExpJars expName="pendulo" jarClientName="ElabPenduloCustomizer" jarDriverName="ElabPenduloStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/pendulo/"/>
