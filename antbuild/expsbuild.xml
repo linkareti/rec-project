@@ -257,13 +257,13 @@
                 <createExpJars expName="radioactividade" jarClientName="ElabRadioactividadeCustomizer" jarDriverName="ElabRadioactividadeStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/radioactividade/"/>
         </target>
 	<target name="jarScuba" depends="prepare, compileScuba">
-                <createExpJars expName="scuba" jarClientName="ElabScubaCustomizer" jarDriverName="ElabScubaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/scuba/"/>
+                <createExpJars expName="scuba" jarClientName="ElabScubaCustomizer" jarDriverName="ElabScubaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/scuba/"/>
         </target>
 	<target name="jarStatSound" depends="prepare, compileStatSound">
-                <createExpJars expName="statsound" jarClientName="ElabStatSoundCustomizer" jarDriverName="ElabStatSoundDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/statsound/"/>
+                <createExpJars expName="statsound" jarClientName="ElabStatSoundCustomizer" jarDriverName="ElabStatSoundDriver" resourcesTopLoc="pt/utl/ist/elab/client/statsound/"/>
         </target>
 	<target name="jarThomson" depends="prepare, compileThomson">
-                <createExpJars expName="thomson" jarClientName="ElabThomsonCustomizer" jarDriverName="ElabThomsonStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/thomson/"/>
+                <createExpJars expName="thomson" jarClientName="ElabThomsonCustomizer" jarDriverName="ElabThomsonStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/thomson/"/>
         </target>
         <target name="jarCondensadorCilindrico" depends="prepare, compileCondensadorCilindrico">
                 <createExpJars expName="gamma" jarClientName="ElabCondensadorCilindricoCustomizer" jarDriverName="ElabCondensadorCilindricoDriver" resourcesTopLoc="pt/utl/ist/elab/client/condensadorcilindrico/"/>

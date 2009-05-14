@@ -26,7 +26,7 @@
     <LocalizationBundle name="ReCExpSemiconductors"
                         location="recresource:///pt/utl/ist/elab/virtual/client/semiconductor/resources/ReCExpSemiconductors"/>
     <LocalizationBundle name="ReCExpScuba"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/scuba/resources/ReCExpScuba"/>
+                        location="recresource:///pt/utl/ist/elab/client/scuba/resources/ReCExpScuba"/>
     <LocalizationBundle name="ReCExpG"
                         location="recresource:///pt/utl/ist/elab/client/g/resources/ReCExpG"/>
     <LocalizationBundle name="ReCExpRadio"
@@ -46,11 +46,11 @@
     <LocalizationBundle name="ReCExpMeteo"
                         location="recresource:///pt/utl/ist/elab/client/meteo/resources/ReCExpMeteo"/>
     <LocalizationBundle name="ReCExpStatSound"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/statsound/resources/ReCExpStatSound"/>
+                        location="recresource:///pt/utl/ist/elab/client/statsound/resources/ReCExpStatSound"/>
     <LocalizationBundle name="ReCExpWebRobot"
                         location="recresource:///pt/utl/ist/elab/client/webrobot/resources/ReCExpWebRobot"/>
     <LocalizationBundle name="ReCExpThomson"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/thomson/resources/ReCExpThomson"/>
+                        location="recresource:///pt/utl/ist/elab/client/thomson/resources/ReCExpThomson"/>
     <LocalizationBundle name="ReCExpPolaroid"
                         location="recresource:///pt/utl/ist/elab/client/usb/cypress/polaroid/resources/ReCExpPolaroid"/>
     <LocalizationBundle name="ReCExpGamma"

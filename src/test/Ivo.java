@@ -11,7 +11,7 @@ package test;
  * @author André Neto - LEFT - IST
  */
 
-import pt.utl.ist.elab.client.serial.stamp.thomson.displays.*;
+import pt.utl.ist.elab.client.thomson.displays.*;
 
 import java.awt.*;
 import java.awt.image.*;
