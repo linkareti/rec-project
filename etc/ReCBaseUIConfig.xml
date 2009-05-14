@@ -60,7 +60,7 @@
     <LocalizationBundle name="ReCExpPG"
                         location="recresource:///pt/utl/ist/elab/client/serial/stamp/penduloGravitico/resources/ReCExpPG"/>
     <LocalizationBundle name="ReCExpCC"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/resources/ReCExpCC"/>
+                        location="recresource:///pt/utl/ist/elab/client/condensadorcilindrico/resources/ReCExpCC"/>
 
     <WebResource locationBundleKey="ReCLabeLab$rec.lab.url.eescola" 
 		 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage" 

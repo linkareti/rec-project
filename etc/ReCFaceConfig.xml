@@ -41,7 +41,7 @@
     <localizationBundle name="ReCExpPG"
                         location="recresource:///pt/utl/ist/elab/client/serial/stamp/penduloGravitico/resources/ReCExpPG"/>
     <localizationBundle name="ReCExpCC"
-                        location="recresource:///pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/resources/ReCExpCC"/>
+                        location="recresource:///pt/utl/ist/elab/client/condensadorcilindrico/resources/ReCExpCC"/>
 	<lab toolTipBundleKey="ReCLabeLab$rec.lab.tip.elab" location="corbaloc:iiop:1.2@elab.ist.utl.pt:9003/MultiCastController" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.lab" displayStringBundleKey="ReCLabeLab$rec.lab.title.elab" desktopLocationBundleKey="ReCBaseUI$rec.bui.image.desktop">
         <apparatus videoLocation="" toolTipBundleKey="ReCExpG$rec.exp.tip.g" location="ELAB_G_STAMP_V02" iconLocationBundleKey="ReCExpG$rec.exp.icon.g" headerDisplayClassLocationBundleKey="" displayStringBundleKey="ReCExpG$rec.exp.title.g" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="ReCExpG$rec.exp.background.g" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="ReCExpG$rec.exp.customizer.g" visible="true" selected="true" order="0" enabled="false" connected="false">
             <defaultAcquisitionConfig toolTipBundleKey="ReCExpG$rec.exp.dftcfg.g.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize" displayStringBundleKey="ReCExpG$rec.exp.dftcfg.g.title.1" classLocationBundleKey="ReCExpG$rec.exp.dftcfg.g.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
