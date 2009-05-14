@@ -6,9 +6,6 @@ package com.linkare.rec.impl.newface;
 
 import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
 
-import com.linkare.rec.impl.newface.ReCAboutBox;
-
-import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -251,6 +248,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
     
     @Override
 	public void applicationEvent(ReCAppEvent evt) {
+    	
     	switch (evt.getCommand()) {
 	        case SHOW_LOGIN:
 	        	showLoginBox();

@@ -11,8 +11,6 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import java.awt.Window;
-
 import org.jdesktop.application.Application;
 
 import com.linkare.rec.impl.newface.ReCApplication;
