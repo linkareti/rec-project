@@ -11,18 +11,25 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import com.linkare.rec.impl.newface.laf.flat.Focus;
+import java.awt.Component;
+
 
 /**
  *
  * @author iies-consultor922
  */
-public class ApparatusDescriptionPane extends javax.swing.JPanel {
+public class ApparatusDescriptionPane extends AbstractContentPane {
 
     /** Creates new form ApparatusPane */
     public ApparatusDescriptionPane() {
         initComponents();
     }
+    
+    public void setFieldsVisible(boolean visible) {
+    	for (Component component : getComponents()) {
+    		component.setVisible(visible);
+    	}
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.

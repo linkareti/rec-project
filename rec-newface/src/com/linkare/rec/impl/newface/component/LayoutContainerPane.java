@@ -7,6 +7,10 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Dialog;
+
+import com.linkare.rec.impl.newface.ReCFrameView;
+
 /**
  *
  * @author hfernandes
@@ -22,6 +26,14 @@ public class LayoutContainerPane extends GradientPane {
     public NavigationPane getNavigationPane() {
 		return navigationPane;
 	}
+    
+    public ApparatusDescriptionPane getApparatusDescriptionPane() {
+		return apparatusDescriptionPane;
+	}
+    
+    public MediaPane getMediaPane() {
+		return mediaPane;
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -35,11 +47,7 @@ public class LayoutContainerPane extends GradientPane {
         splitLeft = new javax.swing.JSplitPane();
         splitRight = new javax.swing.JSplitPane();
         navigationPane = new com.linkare.rec.impl.newface.component.NavigationPane();
-        apparatusTabbedPane = new javax.swing.JTabbedPane();
-        apparatusDescriptionPane1 = new com.linkare.rec.impl.newface.component.ApparatusDescriptionPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        apparatusDescriptionPane = new com.linkare.rec.impl.newface.component.ApparatusDescriptionPane();
         mediaPane = new com.linkare.rec.impl.newface.component.MediaPane();
 
         setName("Form"); // NOI18N
@@ -58,34 +66,8 @@ public class LayoutContainerPane extends GradientPane {
         navigationPane.setName("navigationPane"); // NOI18N
         splitRight.setLeftComponent(navigationPane);
 
-        apparatusTabbedPane.setName("apparatusTabbedPane"); // NOI18N
-
-        apparatusDescriptionPane1.setName("apparatusDescriptionPane1"); // NOI18N
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(LayoutContainerPane.class);
-        apparatusTabbedPane.addTab(resourceMap.getString("apparatusDescriptionPane1.TabConstraints.tabTitle"), resourceMap.getIcon("apparatusDescriptionPane1.TabConstraints.tabIcon"), apparatusDescriptionPane1); // NOI18N
-
-        jPanel1.setName("jPanel1"); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 329, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
-        );
-
-        apparatusTabbedPane.addTab(resourceMap.getString("jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
-
-        jPanel2.setName("jPanel2"); // NOI18N
-        apparatusTabbedPane.addTab(resourceMap.getString("jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
-
-        jPanel3.setName("jPanel3"); // NOI18N
-        apparatusTabbedPane.addTab(resourceMap.getString("jPanel3.TabConstraints.tabTitle"), jPanel3); // NOI18N
-
-        splitRight.setRightComponent(apparatusTabbedPane);
+        apparatusDescriptionPane.setName("apparatusDescriptionPane"); // NOI18N
+        splitRight.setRightComponent(apparatusDescriptionPane);
 
         splitLeft.setLeftComponent(splitRight);
 
@@ -97,11 +79,7 @@ public class LayoutContainerPane extends GradientPane {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.linkare.rec.impl.newface.component.ApparatusDescriptionPane apparatusDescriptionPane1;
-    private javax.swing.JTabbedPane apparatusTabbedPane;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private com.linkare.rec.impl.newface.component.ApparatusDescriptionPane apparatusDescriptionPane;
     private com.linkare.rec.impl.newface.component.MediaPane mediaPane;
     private com.linkare.rec.impl.newface.component.NavigationPane navigationPane;
     private javax.swing.JSplitPane splitLeft;

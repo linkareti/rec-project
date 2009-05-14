@@ -21,6 +21,14 @@ public class MediaPane extends javax.swing.JPanel {
     public MediaPane() {
         initComponents();
     }
+    
+    public ChatBox getChatBox() {
+		return chatBox;
+	}
+    
+    public VideoBox getVideoBox() {
+		return videoBox;
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.

@@ -17,7 +17,7 @@ import com.linkare.rec.impl.newface.ReCApplication;
  *
  * @author Henrique Fernandes
  */
-public class ApparatusSelectBox extends javax.swing.JPanel {
+public class ApparatusSelectBox extends AbstractContentPane {
 
     private ReCApplication recApplication = ReCApplication.getApplication();
     

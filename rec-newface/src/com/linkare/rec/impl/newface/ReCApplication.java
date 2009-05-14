@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
-import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -33,12 +32,14 @@ import org.jdesktop.application.Application;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 
+import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.impl.client.ApparatusClientBean;
 import com.linkare.rec.impl.client.LabClientBean;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorListener;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener;
+import com.linkare.rec.impl.client.chat.IChatServer;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorListener;
 import com.linkare.rec.impl.exceptions.ExceptionCode;
@@ -54,6 +55,7 @@ import com.linkare.rec.impl.newface.config.ReCFaceConfig;
 import com.linkare.rec.impl.newface.utils.OS;
 import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.impl.newface.ReCAppEvent.ReCCommand;
 
 /**
  * The main class of the application.
@@ -252,6 +254,14 @@ public class ReCApplication extends SingleFrameApplication
     	}
 		return result;
 	}
+    
+    public UserInfo getUserInfo() {
+    	UserInfo result = null;
+    	if (labClientBean != null) {
+    		result = labClientBean.getUserInfo();
+    	}
+    	return result;
+	}
 
     public String getCurrentLabName() {
 		return ReCResourceBundle.findStringOrDefault(currentLab.getDisplayStringBundleKey(), "<empty>");
@@ -275,6 +285,10 @@ public class ReCApplication extends SingleFrameApplication
 
 	public ApparatusComboBoxModel getApparatusComboBoxModel() {
 		return apparatusComboBoxModel;
+	}
+	
+	public IChatServer getChatServer() {
+		return labClientBean;
 	}
 	
 	// -------------------------------------------------------------------------
@@ -414,14 +428,22 @@ public class ReCApplication extends SingleFrameApplication
      */
     @Override
     protected void ready() {
-    	log.fine("Ready");
-        super.ready();
+    	super.ready();
+    	if (log.isLoggable(Level.FINE)) {
+    		log.fine("Ready");
+    	}
+        
+        // Forward event to the view
+        fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SHOW_LOGIN));
     }
 
     @Override
     protected void shutdown() {
-        log.fine("Shutting down");
-        super.shutdown();
+    	super.shutdown();
+    	if (log.isLoggable(Level.FINE)) {
+			log.fine("Shutting down");
+		}
+        
     }
 
 
@@ -912,6 +934,12 @@ public class ReCApplication extends SingleFrameApplication
     public void fireApparatusStateChanged(ApparatusEvent evtSelector, ApparatusConnectorEvent evt) {
         for (ReCApplicationListener listener : getAppListeners()) {
             listener.apparatusStateChanged(evtSelector, evt);
+        }
+    }
+    
+    public void fireApplicationEvent(ReCAppEvent evt) {
+        for (ReCApplicationListener listener : getAppListeners()) {
+            listener.applicationEvent(evt);
         }
     }
 

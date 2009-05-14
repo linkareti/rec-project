@@ -13,6 +13,10 @@ package com.linkare.rec.impl.newface.component;
 
 import java.awt.Window;
 
+import org.jdesktop.application.Application;
+
+import com.linkare.rec.impl.newface.ReCApplication;
+
 /**
  *
  * @author JOE
@@ -255,4 +259,28 @@ public class FormComponents extends AbstractContentPane {
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
+    
+    /* Construct the Application object.  The following
+     * complications, relative to just calling
+     * applicationClass.newInstance(), allow a privileged app to
+     * have a private static inner Application subclass.
+     */
+    private static class FormComponentsVisualCheck extends ReCApplication {
+
+        public FormComponentsVisualCheck() {
+            // Required for AppFramework instatiation
+        }
+
+        @Override
+        protected void showView() {
+            DefaultDialog<FormComponents> dialog = new DefaultDialog<FormComponents>(new FormComponents());
+            dialog.setVisible(true);
+            System.exit(0);
+        }
+
+    }
+
+    public static void main(final String[] args) {
+        Application.launch(FormComponentsVisualCheck.class, args);
+    }
 }

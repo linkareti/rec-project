@@ -7,7 +7,10 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Component;
 import java.awt.Window;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -17,11 +20,19 @@ import javax.swing.JPanel;
  * @author Henrique Fernandes
  */
 public abstract class AbstractContentPane extends JPanel {
+	
+	@SuppressWarnings("unused")
+	private static final Logger log = Logger
+			.getLogger(AbstractContentPane.class.getName());
 
 	private static final long serialVersionUID = -4706961491108859138L;
 
     protected Window container;
 
+    public AbstractContentPane() {
+        this(null);
+    }
+    
     public AbstractContentPane(Window container) {
         this.container = container;
     }
@@ -39,50 +50,18 @@ public abstract class AbstractContentPane extends JPanel {
             container.setVisible(false);
         }
     }
-
-
-//	protected ActionSupport actionSupport;
-//	
-//	public AbstractContentPane() {
-//		super();
-//		actionSupport = new ActionSupport(this, listenerList);
-//	}
-//
-//	/**
-//	 * Adds an <code>ActionListener</code> to the bean.
-//	 * @param l the <code>ActionListener</code> to be added
-//	 */
-//	public void addActionListener(ActionListener l) {
-//		actionSupport.addActionListener(l);
-//	}
-//
-//	/**
-//	 * Removes an <code>ActionListener</code> from the bean.
-//	 * @param l the listener to be removed
-//	 */
-//	public void removeActionListener(ActionListener l) {
-//		actionSupport.removeActionListener(l);
-//	}
-//
-//	/**
-//	 * Returns an array of all the <code>ActionListener</code>s added
-//	 * to the bean with addActionListener().
-//	 *
-//	 * @return all of the <code>ActionListener</code>s added or an empty
-//	 *         array if no listeners have been added
-//	 */
-//	public ActionListener[] getActionListeners() {
-//		return actionSupport.getActionListeners();
-//	}
-//
-//	/**
-//	 * Notifies all listeners that have registered interest for
-//	 * notification on this event type.
-//	 *
-//	 * @param event  the <code>ActionEvent</code> object
-//	 */
-//	protected void fireActionPerformed(ActionEvent event) {
-//		actionSupport.fireActionPerformed(event);
-//	}
+    
+    /**
+     * Sets all child components enabled/disabled. (One level only)
+     * @param enabled True to set enabled, false to disabled.
+     */
+    public void setChildComponentsEnabled(boolean enabled) {
+    	for (Component childComponent : getComponents()) {
+    		childComponent.setEnabled(enabled);
+    		if (log.isLoggable(Level.FINE)) {
+				log.fine("component " + childComponent.getName() + (enabled ? " enabled" : " disabled"));
+			}
+    	}
+	}
 
 }

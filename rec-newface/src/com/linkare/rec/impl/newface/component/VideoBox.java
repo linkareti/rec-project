@@ -15,7 +15,7 @@ package com.linkare.rec.impl.newface.component;
  *
  * @author iies-consultor922
  */
-public class VideoBox extends javax.swing.JPanel {
+public class VideoBox extends AbstractContentPane {
 
     /** Creates new form VideoBox */
     public VideoBox() {

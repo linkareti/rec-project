@@ -27,6 +27,10 @@ public class NavigationPane extends javax.swing.JPanel {
     public ApparatusSelectBox getApparatusSelectBox() {
 		return apparatusSelectBox;
 	}
+    
+    public ExperimentHistoryBox getExperimentHistoryBox() {
+		return experimentHistoryBox;
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
