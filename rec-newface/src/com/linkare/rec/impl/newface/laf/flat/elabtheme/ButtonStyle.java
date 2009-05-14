@@ -31,10 +31,11 @@ public class ButtonStyle extends DefaultStyle{
 	private static final BorderUIResource COLOR_BORDER = new BorderUIResource(BorderFactory.createLineBorder(new Color(0x7da921)));
 	private static final Color COLOR_BUTTON_BG = new Color(0xacd651);
 	private static final Color COLOR_BUTTON_FG = new Color(0x2B7A3B);
-	private static final InsetsUIResource MARGIN_BUTTON = new InsetsUIResource(6,14,6,14);
+	private static final InsetsUIResource MARGIN_BUTTON = new InsetsUIResource(2,8,2,8);
 	
 	//PROPERTIES
 	private static final String PT_GRADIENT = "gradient";
+	private static final String ROLLOVER = "rollover";	
 	private static final String MARGIN = "margin";	
 	
 	
@@ -55,11 +56,11 @@ public class ButtonStyle extends DefaultStyle{
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, COLOR_BORDER);
 		map.put(FONT, FONT_BUTTON);
 		map.put(PT_GRADIENT, BUTTON_GRADIENT);
 		map.put(FOREGROUND, COLOR_BUTTON_FG);
-		map.put(MARGIN, MARGIN_BUTTON);
+//		map.put(MARGIN, MARGIN_BUTTON);
+		map.put(ROLLOVER, false);
 		
 	}
 
