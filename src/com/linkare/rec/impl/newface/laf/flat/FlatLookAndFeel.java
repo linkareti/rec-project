@@ -90,8 +90,8 @@ public class FlatLookAndFeel extends
 				"ComboBoxUI", FlatComboBoxUI.class.getName(),
 				"TabbedPaneUI", FlatTabbedPaneUI.class.getName(),
 				"MenuUI", BasicMenuUI.class.getName(),
-				// FIXME Please do not burn my CPU :)
-//				"FlatButtonUI", FlatButtonUI.class.getName(),
+				"FlatButtonUI", FlatButtonUI.class.getName(),
+				"ButtonUI", FlatOriginalButtonUI.class.getName(),
 				"RadioButtonUI", FlatRadioButtonUI.class.getName(),
 				"CheckBoxUI", FlatCheckBoxUI.class.getName(),
 				"SliderUI", FlatSliderUI.class.getName(),
