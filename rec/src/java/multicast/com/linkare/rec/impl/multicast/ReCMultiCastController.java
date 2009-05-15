@@ -31,6 +31,7 @@ import com.linkare.rec.impl.multicast.security.IUser;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
+import com.linkare.rec.impl.utils.DataProducerActivator;
 import com.linkare.rec.impl.utils.Defaults;
 
 /**
@@ -38,6 +39,9 @@ import com.linkare.rec.impl.utils.Defaults;
  */
 public class ReCMultiCastController implements MultiCastControllerOperations {
 
+	public static final DataProducerActivator DP_DEACTIVATOR=new DataProducerActivator();
+	
+	
 	public static String MCCONTROLLER_LOGGER = "MultiCastController.Logger";
 
 	/*

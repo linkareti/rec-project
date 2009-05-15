@@ -144,9 +144,9 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
         try
         {
             log(Level.FINEST,"Trying to create DataProducer CORBA Object... " + getOID());
-            Servant servant=ORBBean.getORBBean().registerDataProducerPOAServant(DataProducer.class,this,ORBBean.StrToOid(getOID()));
+            Servant servant=ORBBean.getORBBean().registerDataProducerPOAServant(DataProducer.class,this,ORBBean.StrToOid(getOID()),ReCMultiCastController.DP_DEACTIVATOR);
             log(Level.FINEST,"Registered with the POA... " + getOID());
-            return (_this=DataProducerHelper.narrow(ORBBean.getORBBean().getDataProducerPOA().servant_to_reference(servant)));
+            return (_this=DataProducerHelper.narrow(ORBBean.getORBBean().getDataProducerPOA(ReCMultiCastController.DP_DEACTIVATOR).servant_to_reference(servant)));
         }catch(Exception e)
         {
             logThrowable("Couldn't register this DataProducer with the ORB!",e);
@@ -211,7 +211,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
     {
         try
         {
-            return ORBBean.getORBBean().getDataProducerPOA();
+            return ORBBean.getORBBean().getDataProducerPOA(ReCMultiCastController.DP_DEACTIVATOR);
         }catch(Exception e)
         {
             //e.printStackTrace();

@@ -32,6 +32,7 @@ import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 import org.omg.PortableServer.RequestProcessingPolicyValue;
 import org.omg.PortableServer.Servant;
+import org.omg.PortableServer.ServantManager;
 import org.omg.PortableServer.ServantRetentionPolicyValue;
 import org.omg.PortableServer.ThreadPolicyValue;
 
@@ -201,7 +202,7 @@ public class ORBBean
     }
     
     
-    public synchronized POA getDataProducerPOA() throws Exception
+    public synchronized POA getDataProducerPOA(ServantManager deactivator) throws Exception
     {
         synchronized(orb_synch)
         {
@@ -245,7 +246,7 @@ public class ORBBean
                         
                         dataProducerPOA=rootPOA.create_POA("DataProducerPOA",null,poa_policies);
                         
-                        dataProducerPOA.set_servant_manager(new DataProducerActivator());
+                        dataProducerPOA.set_servant_manager(deactivator);
                         
                         dataProducerPOA.the_POAManager().activate();
                 }
@@ -406,7 +407,7 @@ public class ORBBean
         }
     }
     
-    public Servant registerDataProducerPOAServant(Class remoteInterface, java.lang.Object servantDelegate, byte[] oid)  throws Exception
+    public Servant registerDataProducerPOAServant(Class remoteInterface, java.lang.Object servantDelegate, byte[] oid, ServantManager deactivator)  throws Exception
     {
         synchronized(orb_synch)
         {
@@ -420,9 +421,9 @@ public class ORBBean
             {delegateInterface,POA.class});
             
             Servant servant=(Servant)servantCtr.newInstance(new java.lang.Object[]
-            {servantDelegate,getDataProducerPOA()});
+            {servantDelegate,getDataProducerPOA(deactivator)});
             
-            getDataProducerPOA().activate_object_with_id(oid,servant);
+            getDataProducerPOA(deactivator).activate_object_with_id(oid,servant);
             
             return servant;
         }
