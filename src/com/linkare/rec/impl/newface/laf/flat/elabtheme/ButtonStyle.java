@@ -28,8 +28,8 @@ public class ButtonStyle extends DefaultStyle{
 	
 	
 	private static final FontUIResource FONT_BUTTON = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
-	private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] { new Float(.1f), new Float(0f),	new ColorUIResource(0xDBDBDB), new ColorUIResource(0xffffff), new ColorUIResource(0xD6E8FF) });
-	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0xC8CCC5)), BorderFactory.createEmptyBorder(2, 3, 2, 3));
+	private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] { new Float(.1f), new Float(0f),	new ColorUIResource(0xDBDBDB), new ColorUIResource(0xDBDBDB), new ColorUIResource(0xE0E3FF) });
+	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0xC8CCC5)), BorderFactory.createEmptyBorder(16, 4, 16, 4));
 	private static final Color COLOR_BUTTON_FG = new Color(0x848187);
 	
 	//PROPERTIES
