@@ -4,7 +4,7 @@
  * Created on October 27, 2004, 03:34 AM
  */
 
-package pt.utl.ist.elab.virtual.client.cavendish;
+package pt.utl.ist.elab.virtual.client.cg;
 
 import com.linkare.rec.impl.baseUI.ReCBaseUI;
 import javax.swing.JFrame;
