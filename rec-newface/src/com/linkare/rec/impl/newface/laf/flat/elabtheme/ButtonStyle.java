@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
@@ -26,17 +27,14 @@ import javax.swing.plaf.InsetsUIResource;
 public class ButtonStyle extends DefaultStyle{
 	
 	
-	private static final FontUIResource FONT_BUTTON = new FontUIResource(DEFAULT_FONT.getFontName(), Font.BOLD, 12);
-	private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] { new Float(.3f), new Float(0f),	new ColorUIResource(0xacd651), new ColorUIResource(0xffffff), new ColorUIResource(0x9fcb42) });
-	private static final BorderUIResource COLOR_BORDER = new BorderUIResource(BorderFactory.createLineBorder(new Color(0x7da921)));
-	private static final Color COLOR_BUTTON_BG = new Color(0xacd651);
-	private static final Color COLOR_BUTTON_FG = new Color(0x2B7A3B);
-	private static final InsetsUIResource MARGIN_BUTTON = new InsetsUIResource(2,8,2,8);
+	private static final FontUIResource FONT_BUTTON = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
+	private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] { new Float(.1f), new Float(0f),	new ColorUIResource(0xDBDBDB), new ColorUIResource(0xffffff), new ColorUIResource(0xD6E8FF) });
+	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0xC8CCC5)), BorderFactory.createEmptyBorder(2, 3, 2, 3));
+	private static final Color COLOR_BUTTON_FG = new Color(0x848187);
 	
 	//PROPERTIES
 	private static final String PT_GRADIENT = "gradient";
 	private static final String ROLLOVER = "rollover";	
-	private static final String MARGIN = "margin";	
 	
 	
 	public static final String ID = "Button";
@@ -56,10 +54,9 @@ public class ButtonStyle extends DefaultStyle{
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(FONT, FONT_BUTTON);
 		map.put(PT_GRADIENT, BUTTON_GRADIENT);
+		map.put(BORDER, COLOR_BORDER);
 		map.put(FOREGROUND, COLOR_BUTTON_FG);
-//		map.put(MARGIN, MARGIN_BUTTON);
 		map.put(ROLLOVER, false);
 		
 	}
