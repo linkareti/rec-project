@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
@@ -24,8 +25,8 @@ import javax.swing.plaf.FontUIResource;
 public class FlatButtonStyle extends DefaultStyle{
 
 	
-	private static final FontUIResource FONT_BUTTON = new FontUIResource(DEFAULT_FONT.getFontName(), Font.BOLD, 12);
-	
+	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0x7da921)), BorderFactory.createEmptyBorder(4, 16, 4, 16));
+	private static final Color COLOR_BUTTON_FG = new Color(0x2B7A3B);
 	
 	public static final String ID = "FlatButton";
 	/**
@@ -43,6 +44,7 @@ public class FlatButtonStyle extends DefaultStyle{
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(FONT, FONT_BUTTON);
+		map.put(BORDER, COLOR_BORDER);
+		map.put(FOREGROUND, COLOR_BUTTON_FG);
 	}
 }
