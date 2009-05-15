@@ -27,9 +27,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.impl.baseUI.config.Apparatus;
 import com.linkare.rec.impl.baseUI.labsTree.LabsTreeModel;
-import com.linkare.rec.impl.client.chat.ChatMessageEvent;
 import com.linkare.rec.impl.client.chat.IChatMessageListener;
 import com.linkare.rec.impl.client.chat.IChatServer;
+import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.EventQueue;
@@ -87,7 +87,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
                 UserInfo user = (UserInfo)value;
                 
                 String userName = user.getUserName();
-                if(userName.equals(IChatServer.EVERYONE_USER_ALIAS))
+                if(userName.equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
                     userName = EVERYONE_STR;
                 JLabel jLabelName = new JLabel(userName);                
      
@@ -135,9 +135,9 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
     {
         String userFrom = evt.getUserFrom().getUserName();
         String userTo = evt.getUserTo().getUserName();
-        if(userFrom.equals(IChatServer.EVERYONE_USER_ALIAS))
+        if(userFrom.equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
             userFrom = EVERYONE_STR;
-        if(userTo.equals(IChatServer.EVERYONE_USER_ALIAS))
+        if(userTo.equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
             userTo = EVERYONE_STR;
         
         String htmlMessage = "<p style=\"padding-top: 0px;padding-left: 0px;padding-right: 0px;padding-bottom: 0px; margin: 0px 0px 0px 0px;\">";
@@ -237,7 +237,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
                 if(u2==null) return +1;
                 
                 if(u1.getUserName()==null && u2.getUserName()==null) return 0;
-                if(u1.getUserName()==null || u1.getUserName().equals(IChatServer.EVERYONE_USER_ALIAS)) return -1;
+                if(u1.getUserName()==null || u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) return -1;
                 if(u2.getUserName()==null) return +1;
                 
                 return Collator.getInstance().compare(u1.getUserName(),u2.getUserName());
@@ -460,7 +460,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
             ChatMessageEvent newMessage=new ChatMessageEvent(this, user, (UserInfo)comboUsersChat.getSelectedItem(),taChatMessage.getText());
             messageQueue.addEvent(newMessage);
             
-            if( !((UserInfo)comboUsersChat.getSelectedItem()).getUserName().equals(IChatServer.EVERYONE_USER_ALIAS) )
+            if( !((UserInfo)comboUsersChat.getSelectedItem()).getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS) )
                 newChatMessage(newMessage);
         }
         
