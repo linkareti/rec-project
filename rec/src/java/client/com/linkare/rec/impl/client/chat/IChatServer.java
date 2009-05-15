@@ -7,6 +7,7 @@
 package com.linkare.rec.impl.client.chat;
 
 import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.impl.events.ChatMessageEvent;
 
 /**
  *
@@ -14,9 +15,6 @@ import com.linkare.rec.acquisition.UserInfo;
  */
 public interface IChatServer
 {
-    public String EVERYONE_USER = null;
-    public String EVERYONE_USER_ALIAS = "Everyone";
-    
     public void sendMessage(ChatMessageEvent evt);
     
     UserInfo[] getUsers();

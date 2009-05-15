@@ -36,7 +36,7 @@ public class ExperimentHistoryRenderer
 	
 	private ExpHistoryPanelNew panelExp=null;
 	
-	public JComponent getJComponent(ExpHistory value)
+	public JComponent getJComponent(ExpHistoryUINode value)
 	{
 		return new ExperimentHistoryPanel(panelExp,value);
 	}

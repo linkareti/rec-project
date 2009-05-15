@@ -30,13 +30,13 @@ import com.linkare.rec.impl.client.apparatus.ApparatusConnector;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorListener;
 import com.linkare.rec.impl.client.chat.ChatConnectionEvent;
-import com.linkare.rec.impl.client.chat.ChatMessageEvent;
 import com.linkare.rec.impl.client.chat.ChatRoomEvent;
 import com.linkare.rec.impl.client.chat.IChatMessageListener;
 import com.linkare.rec.impl.client.chat.IChatServer;
 import com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener;
 import com.linkare.rec.impl.client.experiment.ExpUsersListEvent;
 import com.linkare.rec.impl.client.experiment.ExpUsersListSource;
+import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
@@ -230,7 +230,7 @@ public class ApparatusClientBean implements DataClientOperations,ExpUsersListSou
     
     public void receiveMessage(String clientFrom, String clientTo, String message)
     {
-        fireIChatMessageListenerNewChatMessage(new ChatMessageEvent(this,new UserInfo(clientFrom),new UserInfo(clientTo==EVERYONE_USER?EVERYONE_USER_ALIAS:clientTo),message));
+        fireIChatMessageListenerNewChatMessage(new ChatMessageEvent(this,new UserInfo(clientFrom),new UserInfo(clientTo==ChatMessageEvent.EVERYONE_USER?ChatMessageEvent.EVERYONE_USER_ALIAS:clientTo),message));
     }
     /**** End DataClient Operations ****/
     
@@ -810,7 +810,7 @@ public class ApparatusClientBean implements DataClientOperations,ExpUsersListSou
         else
             users=new UserInfo[1];
         
-        users[0]=new UserInfo(EVERYONE_USER_ALIAS);
+        users[0]=new UserInfo(ChatMessageEvent.EVERYONE_USER_ALIAS);
         
         if(usersObj!=null)
             for(int i=0; i<usersObj.length; i++)

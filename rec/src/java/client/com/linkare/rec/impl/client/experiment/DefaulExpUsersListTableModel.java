@@ -13,7 +13,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.impl.client.chat.IChatServer;
+import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
@@ -93,7 +93,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
                 if(u2.getNextLockTime()[0] == null)
                     return +1;
                 
-                if(u1.getUserName().equals(IChatServer.EVERYONE_USER_ALIAS) || u1.getUserName().equals(IChatServer.EVERYONE_USER_ALIAS))
+                if(u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS) || u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
                     return 0;
                 
                 if(u1.getNextLockTime()[0].getMilliSeconds()-u2.getNextLockTime()[0].getMilliSeconds()==0)
@@ -116,7 +116,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
         
         for(int i=0;i<expUsers.length;i++)
         {
-            if(expUsers[i].getUserName() != null && !expUsers[i].getUserName().equals(IChatServer.EVERYONE_USER_ALIAS))
+            if(expUsers[i].getUserName() != null && !expUsers[i].getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
             {
                 String userName = expUsers[i].getUserName();
                 String controlInMin = "";

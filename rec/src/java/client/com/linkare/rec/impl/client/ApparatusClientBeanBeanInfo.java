@@ -101,7 +101,7 @@ public class ApparatusClientBeanBeanInfo extends SimpleBeanInfo
             methods[METHOD_receiveMessage7].setDisplayName ( "" );
             methods[METHOD_reset8] = new MethodDescriptor ( com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("reset", new Class[] {}));
             methods[METHOD_reset8].setDisplayName ( "" );
-            methods[METHOD_sendMessage9] = new MethodDescriptor ( com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("sendMessage", new Class[] {com.linkare.rec.impl.client.chat.ChatMessageEvent.class}));
+            methods[METHOD_sendMessage9] = new MethodDescriptor ( com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("sendMessage", new Class[] {com.linkare.rec.impl.events.ChatMessageEvent.class}));
             methods[METHOD_sendMessage9].setDisplayName ( "" );
             methods[METHOD_start10] = new MethodDescriptor ( com.linkare.rec.impl.client.ApparatusClientBean.class.getMethod("start", new Class[] {}));
             methods[METHOD_start10].setDisplayName ( "" );

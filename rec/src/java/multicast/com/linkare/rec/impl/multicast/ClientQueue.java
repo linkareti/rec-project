@@ -16,8 +16,7 @@ import com.linkare.rec.acquisition.MaximumClientsReached;
 import com.linkare.rec.acquisition.NotAuthorized;
 import com.linkare.rec.acquisition.NotRegistered;
 import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.impl.client.chat.ChatMessageEvent;
-import com.linkare.rec.impl.client.chat.IChatServer;
+import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.events.HardwareChangeEvent;
 import com.linkare.rec.impl.events.HardwareLockEvent;
 import com.linkare.rec.impl.events.HardwareStateChangeEvent;
@@ -129,8 +128,8 @@ public class ClientQueue {
 
             UserInfo otherUser = userNameToUserInfo(clientTo);
 
-            if (otherUser == null || otherUser.getUserName().equals(IChatServer.EVERYONE_USER_ALIAS))
-                otherUser = new UserInfo(IChatServer.EVERYONE_USER);
+            if (otherUser == null || otherUser.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
+                otherUser = new UserInfo(ChatMessageEvent.EVERYONE_USER);
 
             DefaultOperation op = new DefaultOperation(IOperation.OP_SEND_MESSAGE);
             op.getProperties().put(IOperation.PROPKEY_USERID_OTHER, otherUser);
@@ -140,7 +139,7 @@ public class ClientQueue {
                         Level.INFO,
                         "ClientQueue - The user " + user.getUserName()
                                 + " is not authorized to send messages to the user "
-                                + (clientTo == IChatServer.EVERYONE_USER ? IChatServer.EVERYONE_USER_ALIAS : clientTo)
+                                + (clientTo == ChatMessageEvent.EVERYONE_USER ? ChatMessageEvent.EVERYONE_USER_ALIAS : clientTo)
                                 + " ! - Going to send a NotAuthorized Exception!");
                 throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
             }

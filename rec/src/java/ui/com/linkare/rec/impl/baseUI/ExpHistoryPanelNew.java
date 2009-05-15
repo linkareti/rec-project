@@ -58,7 +58,7 @@ public class ExpHistoryPanelNew extends javax.swing.JPanel
     private javax.swing.JScrollPane scrollPaneExperimentHistory;
     // End of variables declaration//GEN-END:variables
     
-    public void addExpHistory(ExpHistory item)
+    public void addExpHistory(ExpHistoryUINode item)
     {
 	try
 	{

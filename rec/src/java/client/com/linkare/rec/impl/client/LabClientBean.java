@@ -30,7 +30,6 @@ import com.linkare.rec.impl.client.apparatus.Apparatus;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListSource;
 import com.linkare.rec.impl.client.chat.ChatConnectionEvent;
-import com.linkare.rec.impl.client.chat.ChatMessageEvent;
 import com.linkare.rec.impl.client.chat.ChatRoomEvent;
 import com.linkare.rec.impl.client.chat.IChatMessageListener;
 import com.linkare.rec.impl.client.chat.IChatServer;
@@ -40,6 +39,7 @@ import com.linkare.rec.impl.client.experiment.ExpUsersListSource;
 import com.linkare.rec.impl.client.lab.LabConnector;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorListener;
+import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
@@ -210,7 +210,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
     public void receiveMessage(String clientFrom, String clientTo, String message) {
 	fireIChatMessageListenerNewChatMessage(new ChatMessageEvent(this, new UserInfo(clientFrom), new UserInfo(
-		clientTo == EVERYONE_USER ? EVERYONE_USER_ALIAS : clientTo), message));
+		clientTo == ChatMessageEvent.EVERYONE_USER ? ChatMessageEvent.EVERYONE_USER_ALIAS : clientTo), message));
     }
 
     /** ** End DataClient Operations *** */
@@ -523,7 +523,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	else
 	    users = new UserInfo[1];
 
-	users[0] = new UserInfo(EVERYONE_USER_ALIAS);
+	users[0] = new UserInfo(ChatMessageEvent.EVERYONE_USER_ALIAS);
 
 	if (usersObj != null)
 	    for (int i = 0; i < usersObj.length; i++)

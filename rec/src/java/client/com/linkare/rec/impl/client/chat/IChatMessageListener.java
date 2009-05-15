@@ -7,6 +7,7 @@
 package com.linkare.rec.impl.client.chat;
 
 import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.impl.events.ChatMessageEvent;
 
 /**
  *

@@ -4,7 +4,7 @@
  * Created on 01 May 2003, 12:46
  */
 
-package com.linkare.rec.impl.client.chat;
+package com.linkare.rec.impl.events;
 
 import com.linkare.rec.acquisition.UserInfo;
 
@@ -15,7 +15,11 @@ import com.linkare.rec.acquisition.UserInfo;
 public class ChatMessageEvent extends java.util.EventObject
 {
     
-    /** Holds value of property userTo. */
+	public static final String EVERYONE_USER_ALIAS = "Everyone";
+
+	public static final String EVERYONE_USER = null;
+
+	/** Holds value of property userTo. */
     private UserInfo userTo;
     
     /** Holds value of property userFrom. */
@@ -23,6 +27,7 @@ public class ChatMessageEvent extends java.util.EventObject
     
     /** Holds value of property message. */
     private String message;
+
     
     /** Creates a new instance of ChatMessageEvent */
     public ChatMessageEvent(Object source,UserInfo userFrom,UserInfo userTo,String message)

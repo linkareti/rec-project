@@ -45,7 +45,7 @@ public class ExperimentHistoryPanel extends javax.swing.JPanel
     private ImageIcon ICON_DELETE = null;
     
     /** Creates new form ExperimentHistoryCell */
-    public ExperimentHistoryPanel(ExpHistoryPanelNew panelExp,ExpHistory value)
+    public ExperimentHistoryPanel(ExpHistoryPanelNew panelExp,ExpHistoryUINode value)
     {
 	super();		
 	

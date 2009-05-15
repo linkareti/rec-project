@@ -963,7 +963,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
     {//GEN-HEADEREND:event_apparatusClientBeanApparatusStateStarted
         started=true;
         
-        ExpHistory expHistory = new ExpHistory(this, evt.getDataSource(), apparatusClientBean.getApparatus(), currentApparatusConfig);
+        ExpHistoryUINode expHistory = new ExpHistoryUINode(this, evt.getDataSource(), apparatusClientBean.getApparatus(), currentApparatusConfig);
         expHistory.setLocallyOwned(locked);
         
         expHistoryPanelNew.addExpHistory(expHistory);
@@ -1923,8 +1923,11 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         frame.setVisible(true);
     }
     
-    public void startExperiment(ExpHistory expHistory)
+    public void startExperiment(ExpHistory abstractExpHistory)
     {
+    	
+    	ExpHistoryUINode expHistory=(ExpHistoryUINode) abstractExpHistory;
+    	
         ExpDataDisplay[] displays = null;
         DisplayFactory factory = null;
         

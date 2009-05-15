@@ -95,7 +95,7 @@ public class LabClientBeanBeanInfo extends SimpleBeanInfo
             methods[METHOD_hardwareStateChange5].setDisplayName ( "" );
             methods[METHOD_receiveMessage6] = new MethodDescriptor ( com.linkare.rec.impl.client.LabClientBean.class.getMethod("receiveMessage", new Class[] {java.lang.String.class, java.lang.String.class, java.lang.String.class}));
             methods[METHOD_receiveMessage6].setDisplayName ( "" );
-            methods[METHOD_sendMessage7] = new MethodDescriptor ( com.linkare.rec.impl.client.LabClientBean.class.getMethod("sendMessage", new Class[] {com.linkare.rec.impl.client.chat.ChatMessageEvent.class}));
+            methods[METHOD_sendMessage7] = new MethodDescriptor ( com.linkare.rec.impl.client.LabClientBean.class.getMethod("sendMessage", new Class[] {com.linkare.rec.impl.events.ChatMessageEvent.class}));
             methods[METHOD_sendMessage7].setDisplayName ( "" );
             methods[METHOD_startAutoRefresh8] = new MethodDescriptor ( com.linkare.rec.impl.client.LabClientBean.class.getMethod("startAutoRefresh", new Class[] {Long.TYPE}));
             methods[METHOD_startAutoRefresh8].setDisplayName ( "" );
