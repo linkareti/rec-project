@@ -47,42 +47,52 @@ import com.sun.xml.internal.bind.v2.model.impl.ModelBuilder;
  */
 public class FlatButtonUI extends MetalButtonUI{
 	
+	private final static String propertyPrefix = "FlatButton" + ".";
+	 
 	public static ComponentUI createUI(JComponent x) {
 		return new FlatButtonUI();
 	}
 	  
+    protected String getPropertyPrefix() {
+        return propertyPrefix;
+    }
+    
     // ********************************
     //          Paint
     // ********************************
+	
+	@Override
     protected void paintButtonPressed(Graphics g, AbstractButton b) {
-    	FlatButton fButton = (FlatButton)b;
-    	    	
-    	fButton.setForeground(fButton.getForegroundOn());
-    	fButton.setBorder(BorderFactory.createLineBorder(fButton.getColorBorderOn()));
-		FlatUtils.drawGradient(fButton, g, 0, 0, 0, b.getHeight(),
-			new float[] {.0f, 1.0f},
-			new Color[] {fButton.getGradientTopOn(), fButton.getGradientBottomOn()});
+//    	FlatButton fButton = (FlatButton)b;
+//    	    	
+//    	fButton.setForeground(fButton.getForegroundOn());
+//    	fButton.setBorder(BorderFactory.createLineBorder(fButton.getColorBorderOn()));
+//		FlatUtils.drawGradient(fButton, g, 0, 0, 0, b.getHeight(),
+//			new float[] {.0f, 1.0f},
+//			new Color[] {fButton.getGradientTopOn(), fButton.getGradientBottomOn()});
     }
 
 
-    public void update(Graphics g, JComponent c) {
-    	AbstractButton b = (AbstractButton)c;
-    	ButtonModel model = b.getModel();
+    public void paint(Graphics g, JComponent c) {
     	FlatButton fButton = (FlatButton)c;
     	
-    	fButton.setForeground(fButton.getForegroundOff());
-		fButton.setBorder(BorderFactory.createLineBorder(fButton.getColorBorderOff()));
 		FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(),
 				new float[] {.0f, 1.0f},
 				new Color[] {fButton.getGradientTopOff(), fButton.getGradientBottomOff()});
 		
-		if(model.isEnabled() && ( model.isPressed() || model.isSelected()))
-			paintButtonPressed(g,b);
-	
-		paint(g, c);
+		super.paint(g, c);
     }
     
-    protected void paintText(Graphics g, JComponent c, Rectangle textRect, String text) {
+    /* 
+     * Para não ser desenhado o focus no FlatButton
+	 */
+	@Override
+	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect,
+			Rectangle textRect, Rectangle iconRect) {
+	
+	}
+
+	protected void paintText(Graphics g, JComponent c, Rectangle textRect, String text) {
     	AbstractButton b = (AbstractButton) c;			     
     	ButtonModel model = b.getModel();
     	FontMetrics fm = SwingUtilities2.getFontMetrics(c, g);
