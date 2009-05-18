@@ -15,7 +15,7 @@
 	</target>
 
 	<target name="echo.message.experiment.allready.exists" if="experiment.allready.exists">
-		<echo>Experiment directory ${experiments.directory}/${experiment.name} allready exists! Will not be created.</echo>
+		<echo>Experiment directory ${experiments.directory}/${experiment.name} allready exists! Creating non existent files (existent files will not be overriden).</echo>
 	</target>
 
 	<target name="create.experiment" depends="check.experiment.exists,echo.message.experiment.allready.exists" unless="experiment.allready.exists">
