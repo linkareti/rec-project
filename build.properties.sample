@@ -1,0 +1,10 @@
+build.dir=
+dist.dir=
+lib.java.dir=lib/java
+src.java.dir=src/java
+javac.encoding=UTF-8
+javac.debug=true
+javac.optimize=true
+javac.sourcelevel=1.6
+
+copy.encoding=UTF-8
