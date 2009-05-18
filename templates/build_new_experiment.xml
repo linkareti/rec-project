@@ -5,7 +5,7 @@
 	<property file="build.experiments.properties" />
 
 	<property name="experiments.directory" value="../experiments" />
-
+	
 	<target name="check.experiment.exists">
 		<fail unless="experiment.name">experiment.name must be set to build
 			a single experiment directory structure. pass it to jvm as arg like
@@ -18,7 +18,7 @@
 		<echo>Experiment directory ${experiments.directory}/${experiment.name} allready exists! Creating non existent files (existent files will not be overriden).</echo>
 	</target>
 
-	<target name="create.experiment" depends="check.experiment.exists,echo.message.experiment.allready.exists" unless="experiment.allready.exists">
+	<target name="create.experiment" depends="check.experiment.exists,echo.message.experiment.allready.exists">
 		<fail unless="experiment.name">experiment.name must be set to build
 			a single experiment directory structure. pass it to jvm as arg like
 			-Dexperiment.name="experiment name"</fail>
@@ -26,7 +26,7 @@
 
 		<mkdir dir="${experiments.directory}/${experiment.name}" />
 
-		<copy todir="${experiments.directory}/${experiment.name}">
+		<copy todir="${experiments.directory}/${experiment.name}" encoding="UTF-8" includeemptydirs="true" outputencoding="UTF-8" overwrite="false">
 			<fileset dir="experiment" />
 		</copy>
 
