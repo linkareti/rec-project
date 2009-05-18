@@ -63,7 +63,7 @@ public class FlatOriginalButtonUI extends MetalButtonUI{
 	
     
     /* 
-     * Para não ser desenhado o focus no FlatButton
+     * Para não ser desenhado o focus no Button
 	 */
 	@Override
     protected void paintButtonPressed(Graphics g, AbstractButton b) {
@@ -71,7 +71,7 @@ public class FlatOriginalButtonUI extends MetalButtonUI{
 
 
     /* 
-     * Para não ser desenhado o focus no FlatButton
+     * Para não ser desenhado o focus no Button
 	 */
 	@Override
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect,
