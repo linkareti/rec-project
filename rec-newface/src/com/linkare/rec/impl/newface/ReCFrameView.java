@@ -7,11 +7,15 @@ package com.linkare.rec.impl.newface;
 import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
 
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -25,6 +29,7 @@ import org.jdesktop.application.TaskMonitor;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent;
 import com.linkare.rec.impl.newface.component.AbstractContentPane;
 import com.linkare.rec.impl.newface.component.ApparatusCombo;
@@ -39,13 +44,14 @@ import com.linkare.rec.impl.newface.component.SimpleLoginBox;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
 import com.linkare.rec.impl.newface.component.VideoBox;
 import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
+import com.linkare.rec.impl.newface.config.Apparatus;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 
 /**
  * The application's main frame.
  */
-public class ReCFrameView extends FrameView implements ReCApplicationListener {
+public class ReCFrameView extends FrameView implements ReCApplicationListener, ItemListener {
 
     private static final Logger log = Logger.getLogger(ReCFrameView.class.getName());
 
@@ -55,6 +61,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
     private ReCApplication recApplication = ReCApplication.getApplication();
 
     private List<AbstractContentPane> interactiveBoxes;
+
+	private boolean firstSelectedApparatusConfigChange = true;
     
     public ReCFrameView(SingleFrameApplication app) {
         super(app);
@@ -79,6 +87,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
         getFrame().setPreferredSize(DEFAULT_FRAME_SIZE);
         getFrame().setResizable(false);
         getFrame().setGlassPane(glassPane);
+        
+        // Add Apparatus Combo Item listener
+        getApparatusCombo().addItemListener(this);
 
         // Hide apparatus description fields
         getApparatusDescriptionPane().setFieldsVisible(false);
@@ -86,7 +97,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
         // Chat
         getChatBox().getChat().setChatServer(recApplication.getChatServer());
         getChatBox().getChat().setUserInfo(recApplication.getUserInfo());
-
+        
         // Hide status indicators
         //lblTaskMessage.setVisible(false);
         //progressCicleTask.setVisible(false);
@@ -242,6 +253,25 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 
         return toggleConnectionStateAction;
     }
+    
+    @Override
+	public void itemStateChanged(ItemEvent evt) {
+    	if ( evt == null ) 
+    		return;
+    	
+    	// ApparatusCombo selection change
+    	if (getApparatusCombo() == evt.getSource()) {
+	    	if (ItemEvent.SELECTED == evt.getStateChange()) {
+	    		if (log.isLoggable(Level.FINE)) {
+	    			log.fine(evt.toString());
+	    		}
+	    		
+	    		Apparatus apparatus = (Apparatus) evt.getItem();
+	    		
+	    		recApplication.setSelectedApparatusConfig(apparatus);
+	    	}
+    	}
+	}
 
     // -------------------------------------------------------------------------
     // Response to application model events
@@ -253,6 +283,16 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 	        case SHOW_LOGIN:
 	        	showLoginBox();
 	            break;
+	            
+	        case SELECTED_APPARATUS_CONFIG_CHANGE:
+	        	if (firstSelectedApparatusConfigChange) {
+	        		getLayoutContainerPane().getApparatusDescriptionPane().setFieldsVisible(true);
+	        		firstSelectedApparatusConfigChange = false;
+	        	}
+	        	Apparatus selectedApparatusConfig = recApplication.getSelectedApparatusConfig();
+	        	
+	        	getApparatusDescriptionPane().setApparatusConfig(selectedApparatusConfig);
+                break;
     	}
 	}
 
@@ -270,10 +310,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
             case LabConnectorEvent.STATUS_CONNECTED:
                 toolBtnConnect.setAction(toggleConnectionStateActionData(true));
                 updateStatus(getResourceMap().getString("lblTaskMessage.connected.text", recApplication.getUsername(), recApplication.getCurrentLabName()));
-                getLayoutContainerPane().getApparatusDescriptionPane().setFieldsVisible(true);
                 setInteractiveBoxesEnabled(true);
                 getLoginBox().setVisible(false);
                 setGlassPaneVisible(false);
+                firstSelectedApparatusConfigChange = true;
                 break;
 
             case LabConnectorEvent.STATUS_NOT_AUTHORIZED:
@@ -308,6 +348,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 	public void apparatusListChanged(ApparatusListChangeEvent evt) {
 		if (recApplication.getCurrentState().matches(CONNECTED_TO_LAB)) {
 			getApparatusCombo().setEnabled(true);
+			recApplication.setSelectedApparatusConfig((Apparatus) getApparatusCombo().getSelectedItem());
 		}
 	}
 	
@@ -318,19 +359,36 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener {
 			case CONNECTED:
 				// FIXME update
 				getButtonToggleEnter().setText("SAIR");
-				// FIXME this is fixing the focus repaint problem. get a better way.
+				// FIXME this is fixing the focus repaint problem. Find a better way.
 				getApparatusSelectBox().repaint();
 				
-				
-				getApparatusCombo().setEditable(false);
-				getApparatusCombo().setPopupVisible(false);
 				getApparatusCombo().setEnabled(false);
+				
+				getLayoutContainerPane().enableApparatusTabbedPane();
 				break;
 	
 			default:
 				break;
 		}
 	}
+	
+	// TODO
+	
+//	private javax.swing.Action toggleApparatusEnterActionData(boolean entered) {
+//        javax.swing.Action toggleConnectionStateAction =
+//                getContext().getActionMap(ReCFrameView.class, this).get("toggleConnectionState");
+//
+//        toggleConnectionStateAction.putValue(javax.swing.Action.NAME,
+//                getResourceMap().getString("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.text"));
+//        toggleConnectionStateAction.putValue(javax.swing.Action.SHORT_DESCRIPTION,
+//                getResourceMap().getString("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.shortDescription"));
+//        toggleConnectionStateAction.putValue(javax.swing.Action.SMALL_ICON,
+//                getResourceMap().getImageIcon("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.smallIcon"));
+//        toggleConnectionStateAction.putValue(javax.swing.Action.LARGE_ICON_KEY,
+//                getResourceMap().getImageIcon("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.icon"));
+//
+//        return toggleConnectionStateAction;
+//    }
 
 	/** This method is called from within the constructor to
      * initialize the form.

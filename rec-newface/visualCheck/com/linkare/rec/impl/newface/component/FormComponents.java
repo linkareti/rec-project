@@ -11,6 +11,7 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import org.jdesktop.application.Action;
 import org.jdesktop.application.Application;
 
 import com.linkare.rec.impl.newface.ReCApplication;
@@ -60,6 +61,8 @@ public class FormComponents extends AbstractContentPane {
 
         jPanel3.setEnabled(false);
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(FormComponents.class, this);
+        flatButton1.setAction(actionMap.get("btnAction")); // NOI18N
         flatButton1.setText("AVANÇAR");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -69,17 +72,17 @@ public class FormComponents extends AbstractContentPane {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(flatButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(flatButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Experiência", jPanel3);
+        jTabbedPane1.addTab("Experiência", new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/component/resources/plus.png")), jPanel3); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,12 +110,12 @@ public class FormComponents extends AbstractContentPane {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
+            .addGap(0, 414, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -120,7 +123,7 @@ public class FormComponents extends AbstractContentPane {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 319, Short.MAX_VALUE)
+            .addGap(0, 301, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(37, 37, 37)
@@ -129,10 +132,10 @@ public class FormComponents extends AbstractContentPane {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(37, Short.MAX_VALUE)))
+                    .addContainerGap(19, Short.MAX_VALUE)))
         );
 
-//        jTabbedPane1.addTab("Descrição", new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/alpha0_ico.png")), jPanel1); // NOI18N
+        jTabbedPane1.addTab("Descrição", new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/alpha0_ico.png")), jPanel1); // NOI18N
 
         jPanel2.setEnabled(false);
 
@@ -187,7 +190,7 @@ public class FormComponents extends AbstractContentPane {
                                 .addComponent(jRadioButton2)
                                 .addComponent(jCheckBox2)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(63, 63, 63)))))
         );
@@ -280,5 +283,10 @@ public class FormComponents extends AbstractContentPane {
 
     public static void main(final String[] args) {
         Application.launch(FormComponentsVisualCheck.class, args);
+    }
+
+    @Action
+    public void btnAction() {
+        // FIXME Change BUTTON colors !
     }
 }

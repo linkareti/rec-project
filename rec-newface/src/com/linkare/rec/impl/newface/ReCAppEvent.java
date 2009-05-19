@@ -5,7 +5,8 @@ import java.util.EventObject;
 public class ReCAppEvent extends EventObject {
 
 	public enum ReCCommand {
-		SHOW_LOGIN;
+		SHOW_LOGIN,
+		SELECTED_APPARATUS_CONFIG_CHANGE;
 	}
 	
 	private ReCCommand command;

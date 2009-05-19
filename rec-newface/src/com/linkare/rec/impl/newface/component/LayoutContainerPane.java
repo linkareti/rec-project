@@ -34,6 +34,11 @@ public class LayoutContainerPane extends GradientPane {
     public MediaPane getMediaPane() {
 		return mediaPane;
 	}
+    
+    public void enableApparatusTabbedPane() {
+    	apparatusTabbedPane = new ApparatusTabbedPane(apparatusDescriptionPane);
+    	splitRight.setRightComponent(apparatusTabbedPane);
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -85,5 +90,7 @@ public class LayoutContainerPane extends GradientPane {
     private javax.swing.JSplitPane splitLeft;
     private javax.swing.JSplitPane splitRight;
     // End of variables declaration//GEN-END:variables
+    
+    private ApparatusTabbedPane apparatusTabbedPane;
 
 }

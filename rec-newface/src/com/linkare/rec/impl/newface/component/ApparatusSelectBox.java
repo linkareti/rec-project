@@ -60,6 +60,7 @@ public class ApparatusSelectBox extends AbstractContentPane {
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ApparatusSelectBox.class, this);
         btnToggleEnter.setAction(actionMap.get("enterApparatus")); // NOI18N
         btnToggleEnter.setText(resourceMap.getString("btnToggleEnter.text")); // NOI18N
+        btnToggleEnter.setFont(btnToggleEnter.getFont().deriveFont(btnToggleEnter.getFont().getStyle() | java.awt.Font.BOLD));
         btnToggleEnter.setName("btnToggleEnter"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
