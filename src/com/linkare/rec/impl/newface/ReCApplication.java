@@ -26,7 +26,6 @@ import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-
 import org.jdesktop.application.Action;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.ResourceMap;
@@ -40,6 +39,8 @@ import com.linkare.rec.impl.client.apparatus.ApparatusConnectorListener;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener;
 import com.linkare.rec.impl.client.chat.IChatServer;
+import com.linkare.rec.impl.client.customizer.CustomizerUIUtil;
+import com.linkare.rec.impl.client.customizer.ICustomizer;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorListener;
 import com.linkare.rec.impl.exceptions.ExceptionCode;
@@ -197,15 +198,17 @@ public class ReCApplication extends SingleFrameApplication
     protected LabClientBean labClientBean;
     protected ApparatusClientBean apparatusClientBean;
     protected Lab currentLab;
-    private com.linkare.rec.impl.client.apparatus.Apparatus currentApparatus = null;
-    private Apparatus currentApparatusConfig = null;
-    protected ApparatusComboBoxModel apparatusComboBoxModel = new ApparatusComboBoxModel();
+    private com.linkare.rec.impl.client.apparatus.Apparatus currentApparatus;
+    private Apparatus selectedApparatusConfig;
+    protected ApparatusComboBoxModel apparatusComboBoxModel;
 
+	private ICustomizer seletedCustomizer;
 
 
 	/** Creates a new <code>ReCApplication</code> */
 	public ReCApplication() {
-		this.currentState = DISCONNECTED_OFFLINE;
+		setCurrentState(DISCONNECTED_OFFLINE);
+		apparatusComboBoxModel = new ApparatusComboBoxModel();
     }
 
     /**
@@ -289,6 +292,31 @@ public class ReCApplication extends SingleFrameApplication
 	
 	public IChatServer getChatServer() {
 		return labClientBean;
+	}
+	
+	public void setSelectedApparatusConfig(Apparatus apparatus) {
+		this.selectedApparatusConfig = apparatus;
+		
+		// Notify the view
+        fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SELECTED_APPARATUS_CONFIG_CHANGE));
+        
+//		seletedCustomizer = CustomizerUIUtil.loadCustomizer(
+//				ReCResourceBundle.findString(selectedApparatusConfig.getCustomizerClassLocationBundleKey()));
+	}
+	
+	private com.linkare.rec.impl.client.apparatus.Apparatus getCurrentApparatus() {	
+    	setSelectedApparatusConfig((Apparatus) apparatusComboBoxModel.getSelectedItem());
+    	currentApparatus = labClientBean.getApparatusByID(selectedApparatusConfig.getLocation());
+		return currentApparatus;
+	}
+    
+	
+	public Apparatus getSelectedApparatusConfig() {
+		return selectedApparatusConfig;
+	}
+	
+	public ICustomizer getCurrentCustomizer() {
+		return seletedCustomizer;
 	}
 	
 	// -------------------------------------------------------------------------
@@ -385,7 +413,7 @@ public class ReCApplication extends SingleFrameApplication
             apparatusClientBean = new ApparatusClientBean();
             apparatusClientBean.addApparatusConnectorListener(this);
             
-            // Current Lab setup
+            // TODO Current Lab setup
 //            if(recFaceConfig.isAutoConnectLab()) {
                 currentLab = recFaceConfig.getLab().get(0);
 //            }
@@ -418,6 +446,9 @@ public class ReCApplication extends SingleFrameApplication
         recView.getFrame().pack();
         recView.getFrame().setLocationRelativeTo(null);
         show(recView);
+        
+        // Ask the view to show login box
+        fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SHOW_LOGIN));
     }
 
     /*
@@ -432,9 +463,7 @@ public class ReCApplication extends SingleFrameApplication
     	if (log.isLoggable(Level.FINE)) {
     		log.fine("Ready");
     	}
-        
-        // Forward event to the view
-        fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SHOW_LOGIN));
+    	// FIXME This stage is not reached
     }
 
     @Override
@@ -443,7 +472,6 @@ public class ReCApplication extends SingleFrameApplication
     	if (log.isLoggable(Level.FINE)) {
 			log.fine("Shutting down");
 		}
-        
     }
 
 
@@ -554,12 +582,6 @@ public class ReCApplication extends SingleFrameApplication
     	}
     }
     
-    private com.linkare.rec.impl.client.apparatus.Apparatus getCurrentApparatus() {	
-    	currentApparatusConfig = (Apparatus) apparatusComboBoxModel.getSelectedItem();
-    	currentApparatus = labClientBean.getApparatusByID(currentApparatusConfig.getLocation());
-		return currentApparatus;
-	}
-    
     // -------------------------------------------------------------------------
 	// Event handling
 
@@ -626,7 +648,7 @@ public class ReCApplication extends SingleFrameApplication
         	// Update view
         	apparatusComboBoxModel.fireContentsChanged(this);
         	
-        	// Forward event to the view
+        	// Forward events to the view
             fireApparatusListChanged(evt);
         }
     }

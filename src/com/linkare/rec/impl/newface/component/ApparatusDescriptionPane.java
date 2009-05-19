@@ -12,25 +12,51 @@
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Component;
+import java.util.logging.Logger;
+
+import javax.swing.ImageIcon;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.newface.config.Apparatus;
 
 
 /**
  *
- * @author iies-consultor922
+ * @author Henrique Fernandes
  */
 public class ApparatusDescriptionPane extends AbstractContentPane {
-
+	
+	@SuppressWarnings("unused")
+	private static final Logger log = Logger
+			.getLogger(ApparatusDescriptionPane.class.getName());
+	
     /** Creates new form ApparatusPane */
     public ApparatusDescriptionPane() {
         initComponents();
     }
     
-    public void setFieldsVisible(boolean visible) {
+	public void setFieldsVisible(boolean visible) {
     	for (Component component : getComponents()) {
     		component.setVisible(visible);
     	}
 	}
+	
+	public void setApparatusConfig(Apparatus apparatusConfig) {
+		if (apparatusConfig == null) {
+			// TODO clear selection
+			return;
+		} else {
+			if (apparatusConfig.getDesktopLocationBundleKey() != null) {
+				lblApparatusName.setText(ReCResourceBundle.findString(apparatusConfig
+						.getDisplayStringBundleKey()));
 
+				lblApparatusImg.setIcon(ReCResourceBundle.findImageIconOrDefault(apparatusConfig.getDesktopLocationBundleKey(), 
+						new ImageIcon())); // FIXME Set default icon
+			}
+		}
+
+	}
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

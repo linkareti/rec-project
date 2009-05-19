@@ -199,13 +199,16 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
     		try {
     			getHTMLDocument().insertBeforeEnd(msgList, 
     					new UserMessage(userFrom, escapedMsg).toString());
-    			msgPane.scrollToReference(MESSAGE_LIST_END);
+    			
 
     		} catch (BadLocationException e) {
     			log.log(Level.SEVERE, "Trying to insert html element", e);
     		} catch (IOException e) {
     			log.log(Level.SEVERE, "Trying to insert html element", e);
     		}
+
+            log.fine("dasasdasdasdasdasd");
+            msgPane.scrollToReference(MESSAGE_LIST_END);
     	}
     }
     

@@ -11,6 +11,7 @@ import com.linkare.rec.impl.newface.ReCApplication;
 import com.linkare.rec.impl.newface.component.ProgressCicle.State;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
+import java.awt.Color;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import org.jdesktop.application.Action;
@@ -57,8 +58,8 @@ public class SimpleLoginBox extends GradientPane {
 
         labelUsername = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
-        btnNext = new javax.swing.JButton();
         progressCicle = new com.linkare.rec.impl.newface.component.ProgressCicle();
+        flatButton1 = new com.linkare.rec.impl.newface.component.FlatButton();
 
         setName("Form"); // NOI18N
         setPreferredSize(new java.awt.Dimension(360, 164));
@@ -70,20 +71,19 @@ public class SimpleLoginBox extends GradientPane {
         labelUsername.setName("labelUsername"); // NOI18N
 
         txtUsername.setText(resourceMap.getString("txtUsername.text")); // NOI18N
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(SimpleLoginBox.class, this);
+        txtUsername.setAction(actionMap.get("next")); // NOI18N
+        txtUsername.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK), javax.swing.BorderFactory.createEmptyBorder(2, 3, 2, 3)));
         txtUsername.setName("txtUsername"); // NOI18N
         txtUsername.setPreferredSize(new java.awt.Dimension(215, 28));
-
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(SimpleLoginBox.class, this);
-        btnNext.setAction(actionMap.get("next")); // NOI18N
-        btnNext.setIcon(resourceMap.getIcon("btnNext.icon")); // NOI18N
-        btnNext.setText(resourceMap.getString("btnNext.text")); // NOI18N
-        btnNext.setBorder(null);
-        btnNext.setBorderPainted(false);
-        btnNext.setName("btnNext"); // NOI18N
 
         progressCicle.setText(resourceMap.getString("progressCicle.text")); // NOI18N
         progressCicle.setIdleIcon(resourceMap.getIcon("progressCicle.idleIcon")); // NOI18N
         progressCicle.setName("progressCicle"); // NOI18N
+
+        flatButton1.setAction(actionMap.get("next")); // NOI18N
+        flatButton1.setFont(flatButton1.getFont().deriveFont(flatButton1.getFont().getStyle() | java.awt.Font.BOLD));
+        flatButton1.setName("flatButton1"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -93,25 +93,25 @@ public class SimpleLoginBox extends GradientPane {
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNext)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(flatButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(230, 230, 230)
                         .addComponent(progressCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(labelUsername)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(40, 40, 40)
                 .addComponent(labelUsername)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(progressCicle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNext))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(progressCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(flatButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -135,7 +135,7 @@ public class SimpleLoginBox extends GradientPane {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNext;
+    private com.linkare.rec.impl.newface.component.FlatButton flatButton1;
     private javax.swing.JLabel labelUsername;
     private com.linkare.rec.impl.newface.component.ProgressCicle progressCicle;
     private javax.swing.JTextField txtUsername;

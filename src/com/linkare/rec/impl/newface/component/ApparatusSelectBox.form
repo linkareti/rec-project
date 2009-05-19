@@ -74,6 +74,11 @@
           <action class="com.linkare.rec.impl.newface.ReCApplication" id="enterApparatus" methodName="enterApparatus"/>
         </Property>
         <Property name="text" type="java.lang.String" resourceKey="btnToggleEnter.text"/>
+        <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font bold="true" component="btnToggleEnter" property="font" relativeSize="true" size="0"/>
+          </FontInfo>
+        </Property>
         <Property name="name" type="java.lang.String" value="btnToggleEnter" noResource="true"/>
       </Properties>
     </Component>

@@ -37,11 +37,12 @@ public class FlatComboBoxUI extends MetalComboBoxUI{
     	button.setIcon(new FlatComboBoxIcon());
     	button.setBorder(BorderFactory.createEmptyBorder(2, 6, 2, 6));
 		button.setBackground(COLOR_ARROWBUTTON);
+		
+		// ASK Joao, why did you remove this?
+		button.setFocusable(false);
+		button.setFocusPainted(false);
+		button.setRolloverEnabled(false);
 		return button;
     }
-    
-    
    
 }
-
-
