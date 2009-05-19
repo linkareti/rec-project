@@ -39,9 +39,10 @@
             <!-- var url="http://[fill in your URL]/${JNLP.FILE}" -->
 
             <span id="jws-launcher">
-            <script src="http://java.com/js/deployJava.js"></script>
+            <script src="js/deployJava.js"></script>
             <script>
-                var url="${JNLP.FILE}"
+                // var url="${JNLP.FILE}"
+                var url="http://elab.ist.utl.pt/rec/rec-newface/launch.jnlp"
                 deployJava.createWebStartLaunchButton(url, "1.6")
             </script>
             </span>
