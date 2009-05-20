@@ -78,7 +78,7 @@ public class FlatButtonUI extends MetalButtonUI{
     	
 		FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(),
 				new float[] {.0f, 1.0f},
-				new Color[] {fButton.getGradientTopOff(), fButton.getGradientBottomOff()});
+				new Color[] {fButton.getGradientTop(), fButton.getGradientBottom()});
 		
 		super.paint(g, c);
     }
