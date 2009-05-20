@@ -9,8 +9,10 @@ package com.linkare.rec.impl.newface.component;
 import java.awt.Color;
 import java.io.Serializable;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
 import javax.swing.plaf.metal.MetalButtonUI;
 
 /**
@@ -20,17 +22,24 @@ import javax.swing.plaf.metal.MetalButtonUI;
 public class FlatButton extends JButton implements Serializable{
 
 	private static final String uiClassID = "FlatButtonUI";
+
+	private Color borderColor;
 	
-	private Color gradientTopOff = new Color(0xacd651);
-	private Color gradientBottomOff = new Color(0x9fcb42);
-	private Color gradientTopOn = new Color(0xffae48);
-	private Color gradientBottomOn = new Color(0xff930d);
+	private Color gradientTop = GRADIENTTOP_OFF;
+	private Color gradientBottom = GRADIENTBOTTOM_OFF;
+	private Color foreground = FOREGROUND_OFF;
 	
-	private Color colorBorderOff = new Color(0x7da921);
-	private Color colorBorderOn = new Color(0xe38b1d);
 	
-	private Color foregroundOff = new Color(0x2B7A3B);
-	private Color foregroundOn = new Color(0x89381E);
+	public static final Color GRADIENTTOP_OFF = new Color(0xacd651);
+	public static final Color GRADIENTBOTTOM_OFF = new Color(0x9fcb42);
+	public static final Color GRADIENTTOP_ON = new Color(0xffae48);
+	public static final Color GRADIENTBOTTOM_ON = new Color(0xff930d);
+
+	public static final Color COLORBORDER_OFF = new Color(0x7da921);
+	public static final Color COLORBORDER_ON = new Color(0xe38b1d);
+	
+	public static final Color FOREGROUND_OFF = new Color(0x2B7A3B);
+	public static final Color FOREGROUND_ON = new Color(0x89381E);
 	
 	public FlatButton() {
 		super();
@@ -48,129 +57,59 @@ public class FlatButton extends JButton implements Serializable{
 
 
 	/**
-	 * @param gradientTopOff the gradientTopOff to set
+	 * @param gradientTopOff the gradientTop to set
 	 */
-	public void setGradientTopOff(Color gradientTopOff) {
-		this.gradientTopOff = gradientTopOff;
+	public void setGradientTop(Color gradientTop) {
+		this.gradientTop  = gradientTop;
 	}
 
 	/**
-	 * @return the gradientTopOff
+	 * @return the gradientTop
 	 */
-	public Color getGradientTopOff() {
-		return gradientTopOff;
+	public Color getGradientTop() {
+		return gradientTop;
 	}
 
 	/**
-	 * @param gradientBottomOff the gradientBottomOff to set
+	 * @param gradientBottom the gradientBottom to set
 	 */
-	public void setGradientBottomOff(Color gradientBottomOff) {
-		this.gradientBottomOff = gradientBottomOff;
+	public void setGradientBottom(Color gradientBottom) {
+		this.gradientBottom = gradientBottom;
 	}
 
 	/**
-	 * @return the gradientBottomOff
+	 * @return the gradientBottom
 	 */
-	public Color getGradientBottomOff() {
-		return gradientBottomOff;
+	public Color getGradientBottom() {
+		return gradientBottom;
 	}
 
 	/**
-	 * @param gradientTopOn the gradientTopOn to set
+	 * @param foreground the foreground to set
 	 */
-	public void setGradientTopOn(Color gradientTopOn) {
-		this.gradientTopOn = gradientTopOn;
+	public void setForeground(Color foreground) {
+		this.foreground = foreground;
 	}
 
 	/**
-	 * @return the gradientTopOn
+	 * @return the foreground
 	 */
-	public Color getGradientTopOn() {
-		return gradientTopOn;
+	public Color getForeground() {
+		return foreground;
 	}
 
 	/**
-	 * @param gradientBottomOn the gradientBottomOn to set
+	 * @param borderColor the borderColor to set
 	 */
-	public void setGradientBottomOn(Color gradientBottomOn) {
-		this.gradientBottomOn = gradientBottomOn;
+	public void setBorderColor(Color borderColor) {
+		setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(borderColor), BorderFactory.createEmptyBorder(4, 16, 4, 16)));
 	}
 
 	/**
-	 * @return the gradientBottomOn
+	 * @return the borderColor
 	 */
-	public Color getGradientBottomOn() {
-		return gradientBottomOn;
-	}
-
-	/**
-	 * @param colorBorderOn the colorBorderOn to set
-	 */
-	public void setColorBorderOn(Color colorBorderOn) {
-		this.colorBorderOn = colorBorderOn;
-	}
-
-
-
-	/**
-	 * @return the colorBorderOn
-	 */
-	public Color getColorBorderOn() {
-		return colorBorderOn;
-	}
-
-
-
-	/**
-	 * @param colorBorderOff the colorBorderOff to set
-	 */
-	public void setColorBorderOff(Color colorBorderOff) {
-		this.colorBorderOff = colorBorderOff;
-	}
-
-
-
-	/**
-	 * @return the colorBorderOff
-	 */
-	public Color getColorBorderOff() {
-		return colorBorderOff;
-	}
-
-
-
-	/**
-	 * @param foregroundOff the foregroundOff to set
-	 */
-	public void setForegroundOff(Color foregroundOff) {
-		this.foregroundOff = foregroundOff;
-	}
-
-
-
-	/**
-	 * @return the foregroundOff
-	 */
-	public Color getForegroundOff() {
-		return foregroundOff;
-	}
-
-
-
-	/**
-	 * @param foregroundOn the foregroundOn to set
-	 */
-	public void setForegroundOn(Color foregroundOn) {
-		this.foregroundOn = foregroundOn;
-	}
-
-
-
-	/**
-	 * @return the foregroundOn
-	 */
-	public Color getForegroundOn() {
-		return foregroundOn;
+	public Color getBorderColor() {
+		return borderColor;
 	}
 
 }
