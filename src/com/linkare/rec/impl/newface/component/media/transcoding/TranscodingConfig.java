@@ -1,7 +1,7 @@
-package com.linkare.rec.impl.newface.component.media;
+package com.linkare.rec.impl.newface.component.media.transcoding;
 
 /**
- * Define as opções de transcoding.
+ * Define as opções de transcoding a serem usadas pelo VLM.
  * @author bcatarino
  */
 public class TranscodingConfig {
@@ -13,6 +13,8 @@ public class TranscodingConfig {
     private int videoScale;
     private int audioBitrate;
     private int soundChannels;
+
+    //TODO ver que outras opções se pode passar ao VLM e se vale a pena implementar
 
     public int getAudioBitrate() {
         return audioBitrate;

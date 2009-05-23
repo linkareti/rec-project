@@ -1,8 +1,9 @@
 package com.linkare.rec.impl.newface.component.media;
 
+import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
+import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEventListener;
+import com.linkare.rec.impl.newface.component.media.transcoding.TranscodingConfig;
 import java.awt.Canvas;
-import java.util.EventListener;
-import java.util.EventObject;
 import javax.swing.event.EventListenerList;
 import org.videolan.jvlc.Audio;
 import org.videolan.jvlc.JVLC;
@@ -14,10 +15,10 @@ import org.videolan.jvlc.MediaPlayer;
 import org.videolan.jvlc.VLM;
 import org.videolan.jvlc.Video;
 import org.videolan.jvlc.event.MediaPlayerListener;
-import org.videolan.jvlc.internal.LibVlc;
 
 /**
- * 
+ * Wrapper em volta do JVLC e que contém as funcionalidades de controlo
+ * e manipulação de vídeo e audio.
  * @author bcatarino
  */
 public class VideoViewerController {
@@ -36,7 +37,7 @@ public class VideoViewerController {
 
     /**
      * Time do Player que corresponde ao momento 0 da experiência e que tem um
-     * tempo relativo-
+     * tempo relativo.
      */
     private long relativeFrame0;
 
@@ -51,6 +52,9 @@ public class VideoViewerController {
      */
     MediaPlayerState state;
 
+    /**
+     * Principal componente de acesso às funções nativas do VLC.
+     */
     private JVLC jvlc;
 
     /**
@@ -108,7 +112,7 @@ public class VideoViewerController {
     }
 
     /**
-     * Obtém uma instância para o controlador de vídeo. 
+     * Obtém uma instância para o controlador de vídeo, com opções por default.
      * @return instância do controlador do JVLC Player.
      */
     public static VideoViewerController getInstance() {
@@ -119,10 +123,17 @@ public class VideoViewerController {
     }
 
     /**
-     * Obtém uma instância para o controlador de vídeo.
-     * @param Parâmetros adicionais de criação do VLC (como especificado na
-     * documentação do VLC).
+     * Obtém uma instância para o controlador de vídeo, permitindo definir
+     * parâmetros adicionais, à semelhança da instanciação do VLC nativo através
+     * da consola. Ter em conta que nem todos os parâmetros foram testados.
+     * É desconhecido se o JVLC oferece suporte para todos os parâmetros
+     * suportados nativamente.
+     * @param params Parâmetros adicionais de criação do VLC (como especificado
+     * na documentação do VLC). Cada posição do array corresponde a um parâmetro
+     * adicional.
      * @return instância do controlador do JVLC Player.
+     * @see <a href="http://wiki.videolan.org/Documentation:Play_HowTo/Advanced_Use_of_VLC">
+     * Lista de parâmetros suportados pelo VLC.</a>.
      */
     public static VideoViewerController getInstance(String[] params) {
 
@@ -132,15 +143,17 @@ public class VideoViewerController {
     }
 
     /**
-     * Inicializa os componentes do VLC.
-     * @param urlToMedia
+     * Inicializa os vários objectos que fazem parte do VLC.
      */
     private void initPlayer() {
 
         this.jvlc.setLogVerbosity(LoggerVerbosityLevel.WARNING);
         this.video = new Video(jvlc);
         this.audio = new Audio(jvlc);
-        this.mediaList = jvlc.getMediaList();
+        // O construtor com parâmetros do JVLC não instancia a media list.
+        // Nesses casos, é necessário garantir que a MediaList é instanciada.
+        this.mediaList = jvlc.getMediaList() == null
+                ? new MediaList(jvlc) : jvlc.getMediaList();
         this.mediaListPlayer = new MediaListPlayer(jvlc);
         this.vlm = jvlc.getVLM();
         this.mediaListPlayer.setMediaList(mediaList);
@@ -149,27 +162,25 @@ public class VideoViewerController {
 
     
     /**
-     * Define o Canvas onde será feito o rendering do vídeo.
+     * Define o Canvas onde será feito o rendering do vídeo. Se o vídeo já
+     * estiver associado a um canvas, faz o reparent e o resize do vídeo para
+     * o tamanho do novo canvas.
      * @param jvlcCanvas
      */
     public void setVideoOutput(final Canvas jvlcCanvas) {
-        if (!player.hasVideoOutput())
+        
+        if (!player.hasVideoOutput()) {
             jvlc.setVideoOutput(jvlcCanvas);
-        else {
-            //FIXME reparent após estar a reproduzir n mostra vídeo.
-            long currentTime = player.getTime();
-            stop();
+        } else {
             video.reparent(player, jvlcCanvas);
-            video.setSize(jvlcCanvas.getWidth(), jvlcCanvas.getHeight());
-            releaseMedia();
-            play();
-            player.setTime(currentTime);
+            player.resize(jvlcCanvas.getWidth(), jvlcCanvas.getHeight());
         }
     }
 
     /**
-     * Define o url do media a reproduzir.
-     * @param mrl URL a reproduzir.
+     * Define o url do media a reproduzir. Inicializa os restantes objectos
+     * do JVLC que são específicos de cada execução de um media.
+     * @param mrl URL a reproduzir. Pode ser um URL remoto ou local.
      */
     public void setMediaToPlay(String mrl) {
 
@@ -183,9 +194,12 @@ public class VideoViewerController {
     }
 
     /**
-     * Define o url do media a reproduzir. Define também que a stream será
-     * gravada para o ficheiro em paralelo.
-     * @param mrl URL a reproduzir.
+     * Define o url do media a reproduzir. Inicializa os restantes objectos
+     * do JVLC que são específicos de cada execução de um media. Define também
+     * que a stream recebida será gravada para o ficheiro em paralelo. 
+     * @param mrl URL a reproduzir. Pode ser um URL remoto ou local. Contudo,
+     * se for um URL para um media local, a gravação para ficheiro não é feita
+     * de forma sincronizada com a reprodução.
      * @param config Configurações necessárias ao transcoding do vídeo para
      * ficheiro local.
      * @param destFile Nome do ficheiro no qual se pretende gravar o vídeo.
@@ -194,6 +208,7 @@ public class VideoViewerController {
             String destFile) {
 
         setMediaToPlay(mrl);
+        //TODO Estudar a necessidade de sincronizar reprodução de vídeo local com gravação para ficheiro.
         streamToFile(config, destFile);
     }
     
@@ -201,6 +216,7 @@ public class VideoViewerController {
      * Liberta os recursos.
      */
     public void releaseMedia() {
+        //TODO ver se este release tem, de facto algum efeito. O JVLC já faz algures o release do mediaDescriptor (ver onde!)
         if (mediaList.size() > 0) {
             MediaDescriptor md = mediaList.getMediaDescriptorAtIndex(0);
             md.release();
@@ -209,8 +225,8 @@ public class VideoViewerController {
     }
 
     /**
-     * Media Listener que define o comportamento do player do VLC quando cada
-     * um dos eventos é disparado.
+     * Devolve um Media Listener padrão que define o comportamento do player
+     * do VLC quando cada um dos eventos internos do JVLC é disparado.
      * @return
      */
     private MediaPlayerListener getDefaultMediaListener() {
@@ -229,6 +245,7 @@ public class VideoViewerController {
 
             @Override
             public void stopped(MediaPlayer arg0) {
+                //TODO por vezes o JVLC pára sem razão aparente. perceber diferenças e como dar a volta! Ver se o evento associado é um stopped ou endReached
                 VideoViewerController.this.state = MediaPlayerState.STOPPED;
                 fireMediaTimeChangedEvent(new MediaTimeChangedEvent(arg0));
             }
@@ -241,32 +258,28 @@ public class VideoViewerController {
 
             @Override
             public void timeChanged(MediaPlayer arg0, long arg1) {
-
                 fireMediaTimeChangedEvent(new MediaTimeChangedEvent(arg0));
             }
 
             @Override
             public void positionChanged(MediaPlayer arg0) {
-                
             }
 
             @Override
             public void errorOccurred(MediaPlayer arg0) {
-                
             }
         };
     }
 
     /**
-     * Liga o som se este estiver desligado. Se o som estiver ligado, então
-     * desliga-o.
+     * Liga o som se este estiver desligado. Se o som estiver ligado, desliga.
      */
     public void toggleMute() {
         audio.toggleMute();
     }
 
     /**
-     * Altera o volume do som. O máximo que o VLC permite é 200.
+     * Altera o volume do som. 
      * @param units Valor para o qual se pretende alterar o som, entre 0 e 200.
      */
     public void setVolume(int units) {
@@ -289,13 +302,15 @@ public class VideoViewerController {
      * 1 representam fast-forward.
      */
     public void setPlayRate(float rate) {
+        //TODO curiosity, valores inferiores a 1 têm o mesmo efeito que 1 ou no effect?
         player.setRate(rate);
     }
 
     /**
      * Se o player estiver parado, mas com um media carregado, reproduz de novo.
-     *  Caso contrário, faz togglePause. Se tiver opção de streaming activada,
-     * faz streaming também para o destino escolhido.
+     *  Caso contrário, faz togglePause. <br>
+     * Se tiver opção de streaming para ficheiro activada, faz streaming também
+     * para o destino escolhido.
      */
     public void play() {
         
@@ -305,7 +320,7 @@ public class VideoViewerController {
             if(streamToFile)
                 vlm.playMedia(BROADCAST_NAME);
         } else {
-            mediaListPlayer.pause();
+            pause();
             if(streamToFile)
                 vlm.pauseMedia(BROADCAST_NAME);
         }
@@ -320,13 +335,16 @@ public class VideoViewerController {
 
         if (streamToFile)
             vlm.stopMedia(BROADCAST_NAME);
+
+        //TODO deve libertar algum tipo de recursos???
     }
 
     /**
-     * Coloca o player em pausa.
+     * Coloca o player em pausa, no caso de estar a reproduzir um ficheiro
+     * local. Se estiver a reproduzir através de streaming, faz stop ao media.
      */
     public void pause() {
-        
+        //TODO ver se existe alguma forma de fazer mesmo pause quando está a reproduzir streaming (pause através do mediaPlayer ou do JVLC?)
         mediaListPlayer.pause();
 
         if (streamToFile)
@@ -334,7 +352,7 @@ public class VideoViewerController {
     }
 
     /**
-     * Permite capturar uma frame e gravar numa imagem no formato jpeg.
+     * Permite capturar uma frame e gravar numa imagem no formato png ou jpeg.
      * @param fileName Nome do ficheiro que se pretende gravar. Pode ser um
      * path absoluto ou relativo.
      * @param width Comprimento da imagem guardada, em pixeis.
@@ -356,12 +374,13 @@ public class VideoViewerController {
      * aplicação que utilize esta funcionalidade.
      */
     public void releaseVLC() {
+        //TODO ver efeito disto
         jvlc.release();
     }
 
     /**
      * Grava a stream actual para ficheiro.
-     * @param config Propriedades para configuração do módulo de transcode do
+     * @param config Propriedades para configuração do módulo de transcoding do
      * vídeo para ficheiro. Todos os campos são obrigatórios.
      * @param destFile URL para o filesystem local onde se pretende gravar
      * o ficheiro de vídeo.
@@ -390,6 +409,17 @@ public class VideoViewerController {
     }
 
     /**
+     * Pára de fazer streaming, libertando os recursos do VLM.
+     */
+    public void stopStreaming() {
+
+        vlm.deleteMedia(BROADCAST_NAME);
+        //TODO ver se o release vem antes ou depois do delete e as implicacoes
+        vlm.release();
+        streamToFile = false;
+    }
+
+    /**
      * Verifica se as propriedades de transcoding obrigatórias estão preenchidas.
      * @param config Conjunto de propriedades de configuração do vídeo.
      * @return true se todas as propriedades necessárias ao transcoding da
@@ -410,8 +440,10 @@ public class VideoViewerController {
 
     /**
      * Permite mover para uma posição do vídeo específica, relativa, de forma
-     * síncrona com a experiência, com base na frame0 previamente definida.
-     * @param time Momento do tempo para o qual se pretende "saltar".
+     * síncrona com a experiência, com base na frame0 previamente definida. Só
+     * funciona se estiver a reproduzir ficheiros locais. Lança um evento de
+     * MediaTimeChanged indicativo da alteração do current time do vídeo.
+     * @param time Momento de tempo para o qual se pretende "saltar".
      */
     public void moveTo(long time) {
 
@@ -420,12 +452,15 @@ public class VideoViewerController {
         player.setTime(nextTime);
 
         fireMediaTimeChangedEvent(new MediaTimeChangedEvent(player));
-        refreshVideo();
+        refreshPausedVideo();
     }
 
     /**
-     * Move o vídeo um determinado número de frames.
-     * @param nFrames
+     * Move o vídeo um determinado número de frames. Só funciona se estiver a
+     * reproduzir um ficheiro local. Lança um evento de MediaTimeChanged
+     * indicativo da alteração do current time do vídeo.
+     * @param nFrames Número de frames que se pretende mover. Pode ser um valor
+     * positivo (avançar) ou negativo (recuar).
      */
     public void move(int nFrames) {
 
@@ -433,29 +468,31 @@ public class VideoViewerController {
         player.setTime(nextTime);
 
         fireMediaTimeChangedEvent(new MediaTimeChangedEvent(player));
-        refreshVideo();
+        refreshPausedVideo();
     }
 
     /**
      * Permite actualizar o ecrã do vídeo com a Frame actual, dada pelo
-     * vídeoplayer, no caso de o player estar em pausa.
+     * videoplayer, no caso de o player estar em pausa.
      */
-    private void refreshVideo() {
+    private void refreshPausedVideo() {
 
+        //TODO ver se o VLC nativo tem o mesmo comportamento ou se existe alguma configuração do VLC que actualiza automaticamente o vídeo quando está em pausa.
         if (state == MediaPlayerState.PAUSED) {
             pause();
             //FIXME correcção que não seja um workaround.
             try {
-                Thread.sleep(50);
+                    Thread.sleep(50);
             } catch (InterruptedException e) {}
             pause();
         }
     }
 
     /**
-     * Efectua os cálculos da frame para a qual se vai mover
+     * Calcula qual a nova frame para o qual se vai mover, baseado no nº de
+     * frames que se pretende mover o vídeo.
      * @param nFrames Número de frames que se pretende mover, face ao tempo
-     * actual do player.
+     * actual do player. Pode ser um valor positivo ou negativo.
      * @return Novo tempo calculado que corresponde à frame actual mais o nº
      * de frames que se pretende mover.
      */
@@ -482,71 +519,29 @@ public class VideoViewerController {
     }
 
     /**
-     * Devolve o tamanho total do media actualmente em reprodução.
+     * Devolve o tamanho total do media actualmente em reprodução. Se estiver
+     * a reproduzir em streaming, devolve sempre 0.
      * @return
      */
     public long getTotalMediaTime() {
         return player.getLength();
     }
 
-    public LibVlc.LibVlcMediaInstance getLibVLCMediaInstance() {
-
-        Class c = player.getClass();
-        try {
-            java.lang.reflect.Field f = c.getDeclaredField("instance");
-            f.setAccessible(true);
-            LibVlc.LibVlcMediaInstance o = (LibVlc.LibVlcMediaInstance)f.get(player);
-            System.out.println(o);
-            return o;
-        } catch (NoSuchFieldException e) {
-        } catch (IllegalAccessException e) {
-        }
-        return null;
-    }
-
-    public LibVlc getLibVLC() {
-
-        Class c = player.getClass();
-        try {
-            java.lang.reflect.Field f = c.getDeclaredField("libvlc");
-            f.setAccessible(true);
-            LibVlc o = (LibVlc)f.get(player);
-            System.out.println(o);
-            return o;
-        } catch (NoSuchFieldException e) {
-        } catch (IllegalAccessException e) {
-        }
-        return null;
-    }
-
     /**
      * Calcula a nova posição do vídeo baseado no valor actual que um dado
      * marcador de tempo tem (por exemplo, um slider), face ao seu valor máximo.
+     *  Só deve ser chamado se o media a reproduzir for um ficheiro local.
      * @param pos Valor actual do marcador de tempo.
      * @param max Valor máximo do marcador de tempo.
      */
     public void adjustVideoPosition(int pos, int max) {
+
         //TODO falta sincronizar correctamente para que o player não sobreponha frames às definidas por acção do utilizador.
-//        MediaPlayerCallback callback = new MediaPlayerCallback(player, mediaListener);
-//        synchronized(video) {
-//        synchronized(mediaList.getMediaDescriptorAtIndex(0)) {
-//        synchronized(player) {
-//            synchronized(mediaListener) {
-//                   synchronized(callback) {
-//        LibVlc.SYNC_INSTANCE.libvlc_media_player_set_time(arg0, arg1, arg2)
-                System.out.println("A aceder ao Marker no adjustVideo" + Thread.currentThread());
-                
-                long newPosition = getNewVideoPosition(pos, max);
-
-                player.setTime(newPosition);
-                System.out.println(player.getTime());
-
-                refreshVideo();
-//            }
-//        }
-//        }
-//        }
-//        }
+        //TODO perceber porque é que ao chegar a uma determinada thread sem estar a reproduzir, faz stop ao vídeo.
+        System.out.println("A aceder ao Marker no adjustVideo" + Thread.currentThread());
+        long newPosition = getNewVideoPosition(pos, max);
+        player.setTime(newPosition);
+        refreshPausedVideo();
     }
 
     /**
@@ -578,27 +573,13 @@ public class VideoViewerController {
      */
     public void setFrame0(long frame0) {
 
-        this.absoluteFrame0 = frame0;
         this.relativeFrame0 = player.getTime();
+        this.absoluteFrame0 = frame0;
     }
 
     /********************************************************************
      *                  Código para event handling                      *
      ********************************************************************/
-    
-    /**
-     * Classe que representa o evento de timeChanged sempre que o tempo do
-     * player muda.
-     */
-    public class MediaTimeChangedEvent extends EventObject {
-        public MediaTimeChangedEvent(Object source) {
-            super(source);
-        }
-    }
-
-    public interface MediaTimeChangedEventListener extends EventListener {
-        void timeChanged(MediaTimeChangedEvent evt);
-    }
 
     public void addMediaTimeChangedEventListener(MediaTimeChangedEventListener listener) {
         eventListeners.add(MediaTimeChangedEventListener.class, listener);
