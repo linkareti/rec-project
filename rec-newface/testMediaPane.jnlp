@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp codebase="file:///home/bcatarino/Documentos/RecNewface/dist" href="../testMediaPane.jnlp" spec="1.0+">
+    <information>
+        <title>eLab</title>
+        <vendor>Linkare TI, Instituto Superior Técnico</vendor>
+        <homepage href="http://elab.ist.utl.pt/rec/"/>
+        <description>Teste ao módulo de vídeo.</description>
+        <description kind="short">eLab</description>
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <property name="ReCFaceConfig" value="config/ReCFaceConfig.xml"/>
+        <property name="ReC.MultiCastController.BindName" value="MultiCastController"/>
+        <property name="ReC.MultiCastController.InitRef" value="MultiCastController"/>
+        <property name="openorb.config" value="http://elab.ist.utl.pt/rec/openorb/OpenORB.xml"/>
+        <property name="openorb.profile" value="ReCClient"/>
+        <property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB"/>
+        <property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton"/>
+        <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
+        <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
+
+<!--	<j2se java-vm-args="-DReCFaceConfig=file:etc/ReCFaceConfig.xml -DReCBaseUIConfig=file:etc/ReCBaseUIConfig.xml -Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -DReC.MultiCastController.BindName=MultiCastController -DReC.MultiCastController.InitRef=MultiCastController -Dopenorb.config=http://elab.ist.utl.pt/rec/openorb/OpenORB.xml -Dopenorb.profile=ReCClient -Djava.util.logging.config.file=etc/logging.properties" version="1.6+"/>-->
+	<j2se version="1.6+"/>
+        <jar eager="true" href="rec-newface.jar" main="true"/>
+        <jar href="lib/appframework-1.0.3.jar"/>
+        <jar href="lib/swing-worker-1.1.jar"/>
+        <jar href="lib/swingx.jar"/>
+        <jar href="lib/ReC.jar"/>
+        <jar href="lib/openorb_orb-1.4.0.jar"/>
+        <jar href="lib/openorb_orb_omg-1.4.0.jar"/>
+        <jar href="lib/openorb_ots-1.4.0.jar"/>
+        <jar href="lib/openorb_pss-1.4.0.jar"/>
+        <jar href="lib/avalon-framework.jar"/>
+        <jar href="lib/comm.jar"/>
+        <jar href="lib/fits1.3.jar"/>
+        <jar href="lib/JCFN.jar"/>
+        <jar href="lib/jcommon-1.0.12.jar"/>
+        <jar href="lib/jfreechart-1.0.9.jar"/>
+        <jar href="lib/jmf.jar"/>
+        <jar href="lib/jsr80.jar"/>
+        <jar href="lib/jsr80_ri.jar"/>
+        <jar href="lib/jvlc-0.9.0.jar"/>
+        <jar href="lib/logkit.jar"/>
+        <jar href="lib/RXTXcomm.jar"/>
+        <jar href="lib/tools-1.4.0.jar"/>
+        <jar href="lib/xercesImpl.jar"/>
+        <jar href="lib/xml-apis.jar"/>
+        <jar href="lib/jna.jar"/>
+    </resources>
+
+    <!-- *******************************************************************
+         ****************** Resources por SO / Arch ************************
+         ******************************************************************* -->
+
+<!-- falta archs x86-64 (ou x86_64?), amd64 e amd-->
+    <resources arch="x86" os="Windows 2000">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <jar href="lib/vlcplugins_win32_x86.jar"/>
+    </resources>
+    
+    <resources arch="x86" os="Windows XP">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <jar href="lib/vlcplugins_win32_x86.jar"/>
+    </resources>
+    
+<!-- por vezes o os.name devolve Windows NT no vista -->
+    <resources arch="x86" os="Windows NT">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <jar href="lib/vlcplugins_win32_x86.jar"/>
+    </resources>
+    
+    <resources arch="x86" os="Windows Vista">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <jar href="lib/vlcplugins_win32_x86.jar"/>
+    </resources>
+    
+    <resources arch="x86" os="Windows 7">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <jar href="lib/vlcplugins_win32_x86.jar"/>
+    </resources>
+
+<!-- falta i686 e i586(? isto existe?). também pode ser usado x86_64, x86, sparc, ppc, ppc64 e armv41 -->
+    <resources arch="i386" os="Linux">
+        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <jar href="lib/vlcplugins_linux_i686.jar"/>
+    </resources>
+    
+<!-- confirmar se as libs de linux funcionam em Solaris -->
+    <resources arch="sparc" os="SunOS">
+        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <jar href="lib/vlcplugins_linux_i686.jar"/>
+    </resources>
+    
+<!--Testar no mac e ver como se define as nativelibs. Só para MAC > v10-->
+<!-- existem ainda os ppc32, ppc64 (Mac OS X) e PowerPC (Mac OS)-->
+   <!-- <resources arch="ppc" os="Mac OS X">
+        <nativelib href="lib/libsvlc_mac_ppc.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc.jar"/>
+    </resources>-->
+
+    <resources arch="ppc64" os="Mac OS X">
+        <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc64.jar"/>
+    </resources>
+    
+
+    <application-desc main-class="com.linkare.rec.impl.newface.component.TestMediaPane">
+    </application-desc>
+</jnlp>
