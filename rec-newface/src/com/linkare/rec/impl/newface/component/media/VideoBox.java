@@ -13,13 +13,22 @@ public class VideoBox extends javax.swing.JPanel {
         initComponents();
     }
 
+    /**
+     * Devolve o Canvas associado ao painel de vídeo e onde será mostrado
+     * o output do vídeo.
+     * @return
+     */
     public Canvas getVideoOutput() {
         return videoCanvas;
     }
 
+    /**
+     * Altera o tamanho da videobox.
+     * @param width
+     * @param height
+     */
     public void changeSize(int width, int height) {
         this.setSize(width, height);
-//        videoCanvas.setSize(width, height);
     }
 
     /** This method is called from within the constructor to
