@@ -4,6 +4,7 @@ import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEventListener;
 import com.linkare.rec.impl.newface.component.media.transcoding.TranscodingConfig;
 import java.awt.Canvas;
+import java.io.File;
 import javax.swing.event.EventListenerList;
 import org.videolan.jvlc.Audio;
 import org.videolan.jvlc.JVLC;
@@ -29,6 +30,12 @@ public class VideoViewerController {
      * Identificador dado à stream que se pretende gravar para ficheiro.
      */
     private static final String BROADCAST_NAME = "MyBroadcast";
+
+    /**
+     * Tempo de espera entre o pause e o play quando se move a posição do vídeo
+     * quando este está em pausa.
+     */
+    private static final int PAUSE_TIME = 50;
 
     /**
      * Indica se está a gravar também para ficheiro ou não.
@@ -143,6 +150,19 @@ public class VideoViewerController {
     }
 
     /**
+     * Cria a parent directory onde o ficheiro dado pelo destFile será criado.
+     * @param destFile Caminho absoluto para um ficheiro.
+     */
+    private void createParentDirs(String destFile) {
+
+        File file = new File(destFile);
+        File parentDir = file.getParentFile();
+        if (!parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+    }
+
+    /**
      * Inicializa os vários objectos que fazem parte do VLC.
      */
     private void initPlayer() {
@@ -152,11 +172,11 @@ public class VideoViewerController {
         this.audio = new Audio(jvlc);
         // O construtor com parâmetros do JVLC não instancia a media list.
         // Nesses casos, é necessário garantir que a MediaList é instanciada.
-        this.mediaList = jvlc.getMediaList() == null
-                ? new MediaList(jvlc) : jvlc.getMediaList();
-        this.mediaListPlayer = new MediaListPlayer(jvlc);
+//        this.mediaList = jvlc.getMediaList() == null
+//                ? new MediaList(jvlc) : jvlc.getMediaList();
+//        this.mediaListPlayer = new MediaListPlayer(jvlc);
         this.vlm = jvlc.getVLM();
-        this.mediaListPlayer.setMediaList(mediaList);
+//        this.mediaListPlayer.setMediaList(mediaList);
         this.state = MediaPlayerState.EMPTY;
     }
 
@@ -178,12 +198,28 @@ public class VideoViewerController {
     }
 
     /**
+     * Indica se já existe um canvas associado ao output do vídeo. true, se sim.
+     * false, caso contrário.
+     * @return
+     */
+    public boolean hasVideoOutput() {
+        return player.hasVideoOutput();
+    }
+
+    /**
      * Define o url do media a reproduzir. Inicializa os restantes objectos
      * do JVLC que são específicos de cada execução de um media.
      * @param mrl URL a reproduzir. Pode ser um URL remoto ou local.
      */
     public void setMediaToPlay(String mrl) {
 
+//        releaseMedia();
+        // O construtor com parâmetros do JVLC não instancia a media list.
+        // Nesses casos, é necessário garantir que a MediaList é instanciada.
+        this.mediaList = jvlc.getMediaList() == null
+                ? new MediaList(jvlc) : jvlc.getMediaList();
+        this.mediaListPlayer = new MediaListPlayer(jvlc);
+        this.mediaListPlayer.setMediaList(mediaList);
         mediaListener = getDefaultMediaListener();
         MediaDescriptor mediaDescriptor = new MediaDescriptor(jvlc, mrl);
         this.player = mediaDescriptor.getMediaPlayer();
@@ -217,10 +253,16 @@ public class VideoViewerController {
      */
     public void releaseMedia() {
         //TODO ver se este release tem, de facto algum efeito. O JVLC já faz algures o release do mediaDescriptor (ver onde!)
-        if (mediaList.size() > 0) {
-            MediaDescriptor md = mediaList.getMediaDescriptorAtIndex(0);
-            md.release();
-        }
+//        if (mediaList.size() > 0) {
+//            MediaDescriptor md = mediaList.getMediaDescriptorAtIndex(0);
+//            md.release();
+//        }
+
+        // Os recursos são libertados no finalize dos objectos.
+        this.mediaListener = null;
+        this.player = null;
+        this.mediaListPlayer = null;
+        this.mediaList = null;
         this.state = MediaPlayerState.EMPTY;
     }
 
@@ -253,6 +295,7 @@ public class VideoViewerController {
             @Override
             public void endReached(MediaPlayer arg0) {
                 VideoViewerController.this.state = MediaPlayerState.STOPPED;
+                VideoViewerController.this.releaseMedia();
                 fireMediaTimeChangedEvent(new MediaTimeChangedEvent(arg0));
             }
 
@@ -313,7 +356,7 @@ public class VideoViewerController {
      * para o destino escolhido.
      */
     public void play() {
-        
+
         setPlayRate(1f);
         if (this.state == MediaPlayerState.STOPPED) {
             mediaListPlayer.playItem(0, true);
@@ -346,19 +389,32 @@ public class VideoViewerController {
     public void pause() {
         //TODO ver se existe alguma forma de fazer mesmo pause quando está a reproduzir streaming (pause através do mediaPlayer ou do JVLC?)
         mediaListPlayer.pause();
+        
+        //TODO em streaming, em vez de pausar, pode fazer reparent para um canvas escondido... ver com JP se pode ser!!!!
 
         if (streamToFile)
             vlm.pauseMedia(BROADCAST_NAME);
     }
 
     /**
+     * Indica se o player está preparado para reproduzir media.
+     * @return
+     */
+    public boolean willPlay() {
+        return player != null && player.willPlay();
+    }
+
+    /**
      * Permite capturar uma frame e gravar numa imagem no formato png ou jpeg.
+     * Se a parent directory do ficheiro a ser criado não existir, será criada.
+     * Se width e height iguais a 0, é usado o tamanho da janela do vídeo.
      * @param fileName Nome do ficheiro que se pretende gravar. Pode ser um
      * path absoluto ou relativo.
      * @param width Comprimento da imagem guardada, em pixeis.
      * @param height Altura da imagem guardada, em pixeis.
      */
     public void captureScreen(String fileName, int width, int height) {
+        createParentDirs(fileName);
         video.getSnapshot(player, fileName, width, height);
     }
 
@@ -379,7 +435,8 @@ public class VideoViewerController {
     }
 
     /**
-     * Grava a stream actual para ficheiro.
+     * Grava a stream actual para ficheiro. Se a parent directory do ficheiro a
+     * ser criado não existir, será criada.
      * @param config Propriedades para configuração do módulo de transcoding do
      * vídeo para ficheiro. Todos os campos são obrigatórios.
      * @param destFile URL para o filesystem local onde se pretende gravar
@@ -401,6 +458,8 @@ public class VideoViewerController {
                 + ",audio-sync}" +
                 ":duplicate{dst=std{access=file,mux=" + config.getMuxer()
                                     + ",dst=" + destFile + "}}";
+
+        createParentDirs(destFile);
 
         vlm.addBroadcast(BROADCAST_NAME, mediaList.getMediaDescriptorAtIndex(0)
                 .getMrl(), sout, new String[0], true, false);
@@ -467,6 +526,9 @@ public class VideoViewerController {
         long nextTime = getFrameToMove(nFrames);
         player.setTime(nextTime);
 
+        //TODO retirar daqui
+        player.setTime(player.getLength() - 100);
+
         fireMediaTimeChangedEvent(new MediaTimeChangedEvent(player));
         refreshPausedVideo();
     }
@@ -482,7 +544,7 @@ public class VideoViewerController {
             pause();
             //FIXME correcção que não seja um workaround.
             try {
-                    Thread.sleep(50);
+                    Thread.sleep(PAUSE_TIME);
             } catch (InterruptedException e) {}
             pause();
         }
@@ -502,6 +564,12 @@ public class VideoViewerController {
         long currentTime = player.getTime();
 
         double timeToMove = nFrames * 1000 / fps;
+
+        // Recua N milisegundos para compensar o tempo do sleep em pausa
+        //FIXME tem de ser um valor superior ao sleep time....
+        if (nFrames < 0)
+            currentTime -= PAUSE_TIME;
+        
         long nextTime = currentTime + (long)timeToMove;
         return nextTime;
     }
@@ -524,7 +592,10 @@ public class VideoViewerController {
      * @return
      */
     public long getTotalMediaTime() {
-        return player.getLength();
+
+        if (player != null)
+            return player.getLength();
+        return 0;
     }
 
     /**
