@@ -28,25 +28,32 @@ public class ZipExtractor {
 
         try {
             
-            ZipFile file = new ZipFile(zipFile);
-            Enumeration<? extends ZipEntry> entries = file.entries();
+            createDirectories(zipFile, destDir);
+            createFiles(zipFile, destDir);
 
-            while (entries.hasMoreElements()) {
-                
-                ZipEntry entry = entries.nextElement();
-                String name = entry.getName();
-
-                if(entry.isDirectory()) {
-                    extractDirectory(destDir + File.separator + name);
-                } else if (!entry.isDirectory()) {
-                    extractSingleFile(file, entry, destDir + File.separator + name);
-                }
-                System.out.println("name: " + entry.getName());
-            }
         } catch (IOException e) {
             //TODO tratamento correcto da excepção!!!!
             e.printStackTrace();
         }
+    }
+
+    private static void createDirectories(String zipFile, String destDir) throws IOException {
+
+        ZipFile file = new ZipFile(zipFile);
+        Enumeration<? extends ZipEntry> entries = file.entries();
+
+        while (entries.hasMoreElements()) {
+
+            ZipEntry entry = entries.nextElement();
+            String name = entry.getName();
+
+//            System.out.println("Zip file entry name: " + entry.getName());
+            if(entry.isDirectory()) {
+                extractDirectory(destDir + File.separator + name);
+                System.out.println("dir name: " + entry.getName());
+            } 
+        }
+        System.out.println("Criou todas as directorias");
     }
 
     private static void extractDirectory(String dirName) {
@@ -54,9 +61,29 @@ public class ZipExtractor {
         dir.mkdirs();
     }
 
+    private static void createFiles(String zipFile, String destDir)
+            throws FileNotFoundException, IOException {
+        
+        ZipFile file = new ZipFile(zipFile);
+        Enumeration<? extends ZipEntry> entries = file.entries();
+
+        while (entries.hasMoreElements()) {
+
+            ZipEntry entry = entries.nextElement();
+            String name = entry.getName();
+
+//            System.out.println("Zip file entry name: " + entry.getName());
+            if(!entry.isDirectory()) {
+                extractSingleFile(file, entry, destDir + File.separator + name);
+                System.out.println("file name: " + entry.getName());
+            }
+        }
+        System.out.println("Extraiu todos os ficheiros");
+    }
+
     private static void extractSingleFile(ZipFile file, ZipEntry entry,
             String fileName) throws FileNotFoundException, IOException {
-        
+
         InputStream input = file.getInputStream(entry);
         FileOutputStream output = new FileOutputStream(fileName);
         byte[] buffer = new byte[1024];
