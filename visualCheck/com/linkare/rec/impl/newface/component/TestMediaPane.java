@@ -37,6 +37,8 @@ public class TestMediaPane extends AbstractContentPane {
 
     VideoViewerController controller;
 
+    private boolean attached = true;
+
     public static void main(final String[] args) {
 
         for (Map.Entry<Object,Object> map : System.getProperties().entrySet())
@@ -115,6 +117,15 @@ public class TestMediaPane extends AbstractContentPane {
         button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (!controller.willPlay()) {
+                    System.out.println("Entrou no willPlay");
+                    controller.setMediaToPlay(MRL);
+                    System.out.println("Fez set do media");
+                }
+
+                if (!controller.hasVideoOutput())
+                    setVideoOutput();
+
                 controller.play();
             }
         });
@@ -161,17 +172,22 @@ public class TestMediaPane extends AbstractContentPane {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-                JFrame frame = new JFrame("Video");
-                frame.setSize(800, 600);
-                frame.setVisible(true);
+                if (attached) {
+                    JFrame frame = new JFrame("Video");
+                    frame.setSize(800, 600);
+                    frame.setVisible(true);
 
-                com.linkare.rec.impl.newface.component.media.VideoBox newBox = new com.linkare.rec.impl.newface.component.media.VideoBox();
-                newBox.changeSize(800, 600);
-                newBox.setVisible(true);
-                newBox.getVideoOutput().setSize(800, 600);
-                frame.add(newBox);
+                    com.linkare.rec.impl.newface.component.media.VideoBox newBox = new com.linkare.rec.impl.newface.component.media.VideoBox();
+                    newBox.changeSize(800, 600);
+                    newBox.setVisible(true);
+                    newBox.getVideoOutput().setSize(800, 600);
+                    frame.add(newBox);
 
-                controller.setVideoOutput(newBox.getVideoOutput());
+                    controller.setVideoOutput(newBox.getVideoOutput());
+                } else {
+                    setVideoOutput();
+                }
+                attached = !attached;
             }
         });
         return button;
@@ -216,8 +232,11 @@ public class TestMediaPane extends AbstractContentPane {
         button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String formatedDate = DateFormat.getDateInstance(DateFormat.SHORT).format(new Date());
-                controller.captureScreen("Pic" + formatedDate + ".png", 800, 600);
+                String formatedDate = DateFormat.getDateInstance(DateFormat.LONG).format(new Date());
+                String userHome = System.getProperty("user.home") 
+                        + File.separator + ".eLab"
+                        + File.separator + "screeshots" + File.separator;
+                controller.captureScreen(userHome + "Pic" + formatedDate + ".png", 800, 600);
             }
         });
         return button;
@@ -244,6 +263,8 @@ public class TestMediaPane extends AbstractContentPane {
                     config.setAudioBitrate(128);
                     config.setSoundChannels(2);
                     controller.streamToFile(config, System.getProperty("user.home")
+                        + File.separator + ".eLab"
+                        + File.separator + "savedExperiences"
                         + File.separator + "myVideo.avi");
                 } else
                     controller.stopStreaming();
@@ -267,30 +288,6 @@ public class TestMediaPane extends AbstractContentPane {
             }
         });
         return ts;
-    }
-
-    private JButton getButtonSave() {
-        JButton button = new JButton();
-        button.setVisible(true);
-        button.setSize(80, 30);
-        button.setLocation(140, 400);
-        button.setText("save");
-        button.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TranscodingConfig config = new TranscodingConfig();
-                config.setMuxer(Muxers.MP4);
-                config.setVideoCodec(VideoCodecs.MP4V);
-                config.setVideoBitrate(800);
-                config.setVideoScale(1);
-                config.setAudioCodec(AudioCodecs.MPGA);
-                config.setAudioBitrate(128);
-                config.setSoundChannels(2);
-                controller.streamToFile(config, System.getProperty("user.home")
-                        + File.separator + "myVideo.avi");
-            }
-        });
-        return button;
     }
 
     private JButton getButtonFrame0() {
@@ -325,6 +322,7 @@ public class TestMediaPane extends AbstractContentPane {
                 c.set(Calendar.YEAR, 1970);
                 c.set(Calendar.MONTH, Calendar.JANUARY);
                 c.set(Calendar.DAY_OF_MONTH, 1);
+                // No eLab, ao carregar numa experiência, numa amostra da experiência, deve ir para o timestamp dessa amostra.
                 controller.moveTo(c.getTimeInMillis());
             }
         });
@@ -359,7 +357,10 @@ public class TestMediaPane extends AbstractContentPane {
                     config.setAudioCodec(AudioCodecs.MPGA);
                     config.setAudioBitrate(128);
                     config.setSoundChannels(2);
-                    controller.setMediaToPlay(tf.getText(), config, "myVideoFile.mp4");
+                    controller.setMediaToPlay(tf.getText(), config, System.getProperty("user.home")
+                        + File.separator + ".eLab"
+                        + File.separator + "savedExperiences"
+                        + File.separator + "myVideo.mp4");
                 } else {
                     controller.setMediaToPlay(tf.getText());
                 }
@@ -422,8 +423,8 @@ public class TestMediaPane extends AbstractContentPane {
         protected void showView() {
             TestMediaPane tmp = new TestMediaPane();
             DefaultDialog<TestMediaPane> dialog = new DefaultDialog<TestMediaPane>(tmp);
-            tmp.setMediaToPlay(MRL);
-            tmp.setVideoOutput();
+//            tmp.setMediaToPlay(MRL);
+//            tmp.setVideoOutput();
             dialog.setVisible(true);
             System.exit(0);
         }
