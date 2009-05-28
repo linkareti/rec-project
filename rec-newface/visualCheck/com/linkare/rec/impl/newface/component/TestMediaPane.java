@@ -33,17 +33,23 @@ public class TestMediaPane extends AbstractContentPane {
     //Windows Local
 //    private static final String MRL = "C:\\Development\\NetBeansProjects\\xpto.avi";
     //rtsp 
-    private static final String MRL = "rtsp://elabmc.ist.utl.pt/planck.sdp";
+    private static final String MRL = "rtsp://elabmc.ist.utl.pt/radiare.sdp";
 
     VideoViewerController controller;
 
     private boolean attached = true;
 
+//    private String mrl;
+
     public static void main(final String[] args) {
 
+        System.out.println("A listar system properties.... ");
+        
         for (Map.Entry<Object,Object> map : System.getProperties().entrySet())
             System.out.println(map.getKey() + " = " + map.getValue());
+        
         MediaSetup.setup();
+        
         Application.launch(MediaPaneVisualCheck.class, args);
     }
 
@@ -56,6 +62,7 @@ public class TestMediaPane extends AbstractContentPane {
         super(container);
         String[] arg = MediaSetup.getDefaultMediaParameters();
         controller = VideoViewerController.getInstance(arg);
+        controller.setMediaToPlay(MRL);
         initComponents();
     }
 
@@ -117,11 +124,8 @@ public class TestMediaPane extends AbstractContentPane {
         button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (!controller.willPlay()) {
-                    System.out.println("Entrou no willPlay");
-                    controller.setMediaToPlay(MRL);
-                    System.out.println("Fez set do media");
-                }
+
+                System.out.println("Vai tocar " + controller.getCurrentMedia());
 
                 if (!controller.hasVideoOutput())
                     setVideoOutput();
@@ -156,9 +160,7 @@ public class TestMediaPane extends AbstractContentPane {
         button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                System.out.println("TestMediaPane: Vai parar o vídeo!!!!!!!!!!!!!!");
                 controller.stop();
-                System.out.println("TestMediaPane: parou o vídeo!!!!!!!!!!!!!!");
             }
         });
         return button;
@@ -381,7 +383,7 @@ public class TestMediaPane extends AbstractContentPane {
 
     private void adjustSlider() {
 
-//        System.out.println("A aceder ao Marker " + Thread.currentThread());
+        System.out.println("A aceder ao Marker " + Thread.currentThread());
         int max = slider.getMaximum();
         long current = controller.getCurrentMediaTime();
         long length = controller.getTotalMediaTime();
@@ -425,8 +427,6 @@ public class TestMediaPane extends AbstractContentPane {
         protected void showView() {
             TestMediaPane tmp = new TestMediaPane();
             DefaultDialog<TestMediaPane> dialog = new DefaultDialog<TestMediaPane>(tmp);
-//            tmp.setMediaToPlay(MRL);
-//            tmp.setVideoOutput();
             dialog.setVisible(true);
             System.exit(0);
         }
