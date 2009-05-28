@@ -27,7 +27,11 @@ public class ZipExtractor {
     public static void extractFiles(String zipFile, String destDir) {
 
         try {
-            
+
+            // Uma vez que não há garantia que os folders sejam criados antes
+            // dos ficheiros, criamos primeiro a directoria base, de seguida as
+            // directorias filhas e apenas no final, os ficheiros.
+            extractDirectory(destDir);
             createDirectories(zipFile, destDir);
             createFiles(zipFile, destDir);
 
@@ -47,13 +51,10 @@ public class ZipExtractor {
             ZipEntry entry = entries.nextElement();
             String name = entry.getName();
 
-//            System.out.println("Zip file entry name: " + entry.getName());
             if(entry.isDirectory()) {
                 extractDirectory(destDir + File.separator + name);
-                System.out.println("dir name: " + entry.getName());
             } 
         }
-        System.out.println("Criou todas as directorias");
     }
 
     private static void extractDirectory(String dirName) {
@@ -72,13 +73,10 @@ public class ZipExtractor {
             ZipEntry entry = entries.nextElement();
             String name = entry.getName();
 
-//            System.out.println("Zip file entry name: " + entry.getName());
             if(!entry.isDirectory()) {
                 extractSingleFile(file, entry, destDir + File.separator + name);
-                System.out.println("file name: " + entry.getName());
             }
         }
-        System.out.println("Extraiu todos os ficheiros");
     }
 
     private static void extractSingleFile(ZipFile file, ZipEntry entry,
