@@ -56,60 +56,48 @@ public class MediaPlayerCallback implements LibVlcCallback
     /**
      * {@inheritDoc}
      */
+    @Override
     public void callback(libvlc_event_t libvlc_event, Pointer userData)
     {
         if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPlaying.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai entrar em playing");
             listener.playing(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Entrou em playing");
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPaused.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai entrar em paused");
             listener.paused(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Entrou em paused");
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerEndReached.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai chegar ao fim");
             listener.endReached(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Entrou em stopped");
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPositionChanged.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai mudar posição");
             listener.positionChanged(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Mudou posição");
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerStopped.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai entrar em stopped");
             listener.stopped(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Entrou em stopped");
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerTimeChanged.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai mudar tempo");
             //TODO suprimir listener.timeChanged quando foi feito um ajuste pelo user mas este ainda não foi feito no vídeo, de facto.
             libvlc_event.event_type_specific.setType(LibVlc.media_player_time_changed.class);
             LibVlc.media_player_time_changed timeChanged = (media_player_time_changed) libvlc_event.event_type_specific
                 .readField("media_player_time_changed");
-            System.out.println("MediaPlayerCallback: all: " + timeChanged.new_time);
-            System.out.println("MediaPlayerCallback: new time: " + timeChanged.new_time);
-            listener.timeChanged(mediaPlayer, timeChanged.new_time);
-            System.out.println("MediaPlayerCallback: Mudou o tempo");
+
+            // Evita que em streaming sejam lançados e tratados eventos desnecessários.
+            if (timeChanged != null && timeChanged.new_time > 0)
+                listener.timeChanged(mediaPlayer, timeChanged.new_time);
+
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerEncounteredError.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Erro encontrado");
             log.warn("Media player encountered error.");
             listener.errorOccurred(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Ocorreu erro");
         }
         else
         {
-            System.out.println("MediaPlayerCallback: Evento não suportado");
             log.debug("Unsupported event error. Event id: {}", libvlc_event.type);
         }
     }
