@@ -33,7 +33,7 @@ public class TestMediaPane extends AbstractContentPane {
     //Windows Local
 //    private static final String MRL = "C:\\Development\\NetBeansProjects\\xpto.avi";
     //rtsp 
-    private static final String MRL = "rtsp://elabmc.ist.utl.pt/radiare.sdp";
+    private static final String MRL = "rtsp://elabmc.ist.utl.pt/planck.sdp";
 
     VideoViewerController controller;
 
@@ -156,7 +156,9 @@ public class TestMediaPane extends AbstractContentPane {
         button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                System.out.println("TestMediaPane: Vai parar o vídeo!!!!!!!!!!!!!!");
                 controller.stop();
+                System.out.println("TestMediaPane: parou o vídeo!!!!!!!!!!!!!!");
             }
         });
         return button;
@@ -379,7 +381,7 @@ public class TestMediaPane extends AbstractContentPane {
 
     private void adjustSlider() {
 
-        System.out.println("A aceder ao Marker " + Thread.currentThread());
+//        System.out.println("A aceder ao Marker " + Thread.currentThread());
         int max = slider.getMaximum();
         long current = controller.getCurrentMediaTime();
         long length = controller.getTotalMediaTime();
