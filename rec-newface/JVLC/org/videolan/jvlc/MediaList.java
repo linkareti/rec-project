@@ -46,6 +46,8 @@ public class MediaList
 
     private List<String> items = new ArrayList<String>();
 
+    private boolean released;
+
     public MediaList(JVLC jvlc)
     {
         this.jvlc = jvlc;
@@ -182,13 +184,23 @@ public class MediaList
             .libvlc_media_list_insert_media(instance, descriptor.getInstance(), index, exception);
     }
 
+    public void release()
+    {
+        if (released)
+        {
+            return;
+        }
+        released = true;
+        jvlc.getLibvlc().libvlc_media_list_release(instance);
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void finalize() throws Throwable
     {
-        jvlc.getLibvlc().libvlc_media_list_release(instance);
+        release();
         super.finalize();
     }
 

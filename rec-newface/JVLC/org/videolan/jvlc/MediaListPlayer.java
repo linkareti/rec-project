@@ -36,6 +36,8 @@ public class MediaListPlayer
 
     private final JVLC jvlc;
 
+    private boolean released;
+
     public MediaListPlayer(JVLC jvlc)
     {
         libvlc_exception_t exception = new libvlc_exception_t();
@@ -84,7 +86,6 @@ public class MediaListPlayer
 
     public void pause()
     {
-        System.out.println("Isto funca ou não?");
         libvlc_exception_t exception = new libvlc_exception_t();
         jvlc.getLibvlc().libvlc_media_list_player_pause(instance, exception);
     }
@@ -197,7 +198,8 @@ public class MediaListPlayer
         }
         catch(InterruptedException e)
         {
-            //
+            //Bruno retirar daqui!!!
+            e.printStackTrace();
         }
     }
     
@@ -207,13 +209,23 @@ public class MediaListPlayer
         jvlc.getLibvlc().libvlc_media_list_player_set_media_player(instance, mediaInstance.getInstance(), exception);        
     }
 
+    public void release()
+    {
+        if (released)
+        {
+            return;
+        }
+        released = true;
+        jvlc.getLibvlc().libvlc_media_list_player_release(instance);
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void finalize() throws Throwable
     {
-        jvlc.getLibvlc().libvlc_media_list_player_release(instance);
+        release();
         super.finalize();
     }
 

@@ -81,6 +81,7 @@ public class JVLC
         MediaDescriptor mediaDescriptor = new MediaDescriptor(this, media);
         MediaPlayer mediaInstance = new MediaPlayer(mediaDescriptor);
         mediaInstance.play();
+        //Bruno o media descriptor é libertado logo após o play?
         mediaDescriptor.release();
         return mediaInstance;
     }
