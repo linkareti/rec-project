@@ -148,10 +148,10 @@ public class MediaSetup {
      */
     public static String[] getDefaultMediaParameters() {
 
-        String pluginsPath = System.getProperty("user.home") + File.separator
-                + System.getProperty("vlc.plugins.destdir");
+        File pluginsDir = new File(System.getProperty("user.home"),
+                System.getProperty("vlc.plugins.destdir"));
 
-        System.out.println("Plugins Path = " + pluginsPath);
+        System.out.println("Plugins Path = " + pluginsDir.getAbsolutePath());
 
         int i = 0;
         //TODO ver se todos são necessários ou se deve apagar alguns ou acrescentar outros.
@@ -159,7 +159,7 @@ public class MediaSetup {
         arg[i++] = "--intf=dummy";
         arg[i++] = "--ignore-config";
         arg[i++] = "--no-plugins-cache";
-        arg[i++] = "--plugin-path=" + pluginsPath;
+        arg[i++] = "--plugin-path=" + pluginsDir.getAbsolutePath();
         return arg;
     }
 }
