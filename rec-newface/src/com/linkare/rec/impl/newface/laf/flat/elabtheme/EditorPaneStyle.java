@@ -25,26 +25,16 @@ import com.linkare.rec.impl.newface.laf.flat.FlatComboBoxUI;
 public class EditorPaneStyle extends DefaultStyle{
 	
 	public static final String ID = "EditorPane";
-	
-	//LABEL FONT
-	public static final Font FONT_EDITORPANE = new FontUIResource("Arial", Font.BOLD, 12);	
-	
-	//PROPERTIES
-	private static final String PT_EDITORPANE_BG = "background";
-	private static final String PT_EDITORPANE_FG = "foreground";
+
+	public static final Border THIN_BLUE_BORDER = BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new Color(0x517DA8)), javax.swing.BorderFactory.createEmptyBorder(2, 3, 2, 3));
 	
 	//COLORS	
 	private static final Color COLOR_BORDER_SOLID_THIN_BLUE = new Color(0x8CABB3);	
 	private static final Color COLOR_EDITORPANE_FG = BLACK_DEFAULT_COLOR;
 	private static final Color COLOR_EDITORPANE_BG = WHITE_DEFAULT_COLOR;
-	private static final Color COLOR_EDITORPANE_FONT = new Color(0x64797F);
-	
-	//BORDER
-	private static final Border BORDER_COMBOBOX = BorderFactory.createLineBorder(COLOR_BORDER_SOLID_THIN_BLUE);
-
 	
 	/**
-	 * Creates the <code>ComboBoxStyle</code>.
+	 * Creates the <code>EditorPaneStyle</code>.
 	 */
 	public EditorPaneStyle() {
 		super();
@@ -58,10 +48,9 @@ public class EditorPaneStyle extends DefaultStyle{
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, BORDER_COMBOBOX);
-		map.put(PT_EDITORPANE_FG, COLOR_EDITORPANE_FG);
-		map.put(PT_EDITORPANE_BG, COLOR_EDITORPANE_BG);
-		map.put(FONT, FONT_EDITORPANE);
+		map.put(BORDER, THIN_BLUE_BORDER);
+		map.put(FOREGROUND, COLOR_EDITORPANE_FG);
+		map.put(BACKGROUND, COLOR_EDITORPANE_BG);
 	}
 
 }
