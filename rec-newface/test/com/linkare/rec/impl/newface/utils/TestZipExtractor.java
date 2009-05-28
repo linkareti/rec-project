@@ -1,11 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.linkare.rec.impl.newface.utils;
 
-import com.linkare.rec.impl.newface.utils.ZipExtractor;
 import java.io.File;
 
 /**
