@@ -23,6 +23,7 @@ import javax.swing.plaf.basic.BasicMenuUI;
  * Implements a Flat LookAndFeel targeted for web.
  * 
  * @author Henrique Fernandes
+ * @author João Florindo
  */
 public class FlatLookAndFeel extends 
 //	SynthLookAndFeel // The LAF from Java 5
@@ -97,6 +98,7 @@ public class FlatLookAndFeel extends
 				"RadioButtonUI", FlatRadioButtonUI.class.getName(),
 				"CheckBoxUI", FlatCheckBoxUI.class.getName(),
 				"SliderUI", FlatSliderUI.class.getName(),
+				"TableUI", FlatTableUI.class.getName(), 
 		};
 
 		if (log.isLoggable(Level.FINER)) {
