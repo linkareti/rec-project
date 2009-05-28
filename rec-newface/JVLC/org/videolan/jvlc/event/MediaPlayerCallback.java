@@ -25,8 +25,8 @@
 
 package org.videolan.jvlc.event;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.logging.Logger;
+
 import org.videolan.jvlc.MediaPlayer;
 import org.videolan.jvlc.internal.LibVlc;
 import org.videolan.jvlc.internal.LibVlcEventType;
@@ -39,14 +39,11 @@ import com.sun.jna.Pointer;
 
 public class MediaPlayerCallback implements LibVlcCallback
 {
+	private static final Logger log = Logger
+			.getLogger(MediaPlayerCallback.class.getName());
 
     private MediaPlayerListener listener;
     private MediaPlayer mediaPlayer;
-
-    /**
-     * Logger.
-     */
-    private Logger log = LoggerFactory.getLogger(MediaPlayerCallback.class);
 
     public MediaPlayerCallback(MediaPlayer mediaInstance, MediaPlayerListener listener)
     {
@@ -93,12 +90,12 @@ public class MediaPlayerCallback implements LibVlcCallback
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerEncounteredError.ordinal())
         {
-            log.warn("Media player encountered error.");
+            log.warning("Media player encountered error.");
             listener.errorOccurred(mediaPlayer);
         }
         else
         {
-            log.debug("Unsupported event error. Event id: {}", libvlc_event.type);
+            log.fine(String.format("Unsupported event error. Event id: {%d}", libvlc_event.type));
         }
     }
 }
