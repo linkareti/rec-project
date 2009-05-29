@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +33,7 @@ import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 
 import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.ApparatusClientBean;
 import com.linkare.rec.impl.client.LabClientBean;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
@@ -41,6 +43,7 @@ import com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener;
 import com.linkare.rec.impl.client.chat.IChatServer;
 import com.linkare.rec.impl.client.customizer.CustomizerUIUtil;
 import com.linkare.rec.impl.client.customizer.ICustomizer;
+import com.linkare.rec.impl.client.customizer.ICustomizerSecurity;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorListener;
 import com.linkare.rec.impl.exceptions.ExceptionCode;
@@ -48,6 +51,7 @@ import com.linkare.rec.impl.exceptions.ReCConfigurationException;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.component.ApparatusComboBoxModel;
 import com.linkare.rec.impl.newface.component.DefaultDialog;
+import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
 import com.linkare.rec.impl.newface.config.Apparatus;
 import com.linkare.rec.impl.newface.config.Lab;
@@ -120,11 +124,12 @@ public class ReCApplication extends SingleFrameApplication
 		
 		// State declaration
 		DISCONNECTED_OFFLINE,
-		CONNECT_PERFORMED,
+		LAB_CONNECT_PERFORMED,
 		CONNECTED_TO_LAB,
-		APPARATUS_ENTER_PERFORMED,
+		APPARATUS_CONNECT_PERFORMED,
 		CONNECTED_TO_APPARATUS,
-		DISCONNECT_PERFORMED;
+		APPARATUS_DISCONNECT_PERFORMED,
+		LAB_DISCONNECT_PERFORMED;
 		// State declaration end
 		
 		private static Map<NavigationWorkflow, Set<NavigationWorkflow>> availableTransitions;
@@ -140,15 +145,16 @@ public class ReCApplication extends SingleFrameApplication
 		static {
 			availableTransitions = new HashMap<NavigationWorkflow, Set<NavigationWorkflow>>();
 			availableTransitions.put(DISCONNECTED_OFFLINE, 
-					transitions(CONNECT_PERFORMED));
+					transitions(LAB_CONNECT_PERFORMED));
 			
 			availableTransitions.put(CONNECTED_TO_LAB, 
-					transitions(APPARATUS_ENTER_PERFORMED, DISCONNECT_PERFORMED));
+					transitions(APPARATUS_CONNECT_PERFORMED, LAB_DISCONNECT_PERFORMED));
 			
 			availableTransitions.put(CONNECTED_TO_APPARATUS, 
-					transitions(DISCONNECT_PERFORMED));
+					transitions(LAB_DISCONNECT_PERFORMED, 
+							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
 			
-			availableTransitions.put(DISCONNECT_PERFORMED, 
+			availableTransitions.put(LAB_DISCONNECT_PERFORMED, 
 					transitions(DISCONNECTED_OFFLINE));
 		}
 		// Workflow definition end
@@ -179,30 +185,30 @@ public class ReCApplication extends SingleFrameApplication
 	}
 
     /** Holds the jws basic service context */
-    protected BasicService basicService;
+    private BasicService basicService;
 
     /** ResourceMap shortcut */
-    protected ResourceMap resourceMap;
+    private ResourceMap resourceMap;
 
     /** Holds the application shared UnexpectedErrorBox Dialog */
-    protected static DefaultDialog<UnexpectedErrorPane> unexpectedErrorBox;
+    private static DefaultDialog<UnexpectedErrorPane> unexpectedErrorBox;
 
     /** Holds the listeners to the ReC Application underlying model changes */
-    protected List<ReCApplicationListener> appListeners;
+    private List<ReCApplicationListener> appListeners;
 
     // ReC Application state model
 
     /** Holds the ReC Configuration */
-	protected ReCFaceConfig recFaceConfig;
-	protected NavigationWorkflow currentState;
-    protected LabClientBean labClientBean;
-    protected ApparatusClientBean apparatusClientBean;
-    protected Lab currentLab;
+    private ReCFaceConfig recFaceConfig;
+    private NavigationWorkflow currentState;
+    private LabClientBean labClientBean;
+    private ApparatusClientBean apparatusClientBean;
+    private Lab currentLab;
     private com.linkare.rec.impl.client.apparatus.Apparatus currentApparatus;
     private Apparatus selectedApparatusConfig;
-    protected ApparatusComboBoxModel apparatusComboBoxModel;
-
-	private ICustomizer seletedCustomizer;
+    private ApparatusComboBoxModel apparatusComboBoxModel;
+    private ICustomizer currentCustomizer;
+    private HardwareAcquisitionConfig hardwareAcquisitionConfig;
 
 
 	/** Creates a new <code>ReCApplication</code> */
@@ -294,14 +300,20 @@ public class ReCApplication extends SingleFrameApplication
 		return labClientBean;
 	}
 	
+	public HardwareAcquisitionConfig getHardwareAcquisitionConfig() {
+		return hardwareAcquisitionConfig;
+	}
+	
+	public void setHardwareAcquisitionConfig(
+			HardwareAcquisitionConfig hardwareAcquisitionConfig) {
+		this.hardwareAcquisitionConfig = hardwareAcquisitionConfig;
+	}
+
 	public void setSelectedApparatusConfig(Apparatus apparatus) {
 		this.selectedApparatusConfig = apparatus;
 		
 		// Notify the view
         fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SELECTED_APPARATUS_CONFIG_CHANGE));
-        
-//		seletedCustomizer = CustomizerUIUtil.loadCustomizer(
-//				ReCResourceBundle.findString(selectedApparatusConfig.getCustomizerClassLocationBundleKey()));
 	}
 	
 	private com.linkare.rec.impl.client.apparatus.Apparatus getCurrentApparatus() {	
@@ -316,7 +328,7 @@ public class ReCApplication extends SingleFrameApplication
 	}
 	
 	public ICustomizer getCurrentCustomizer() {
-		return seletedCustomizer;
+		return currentCustomizer;
 	}
 	
 	// -------------------------------------------------------------------------
@@ -508,8 +520,8 @@ public class ReCApplication extends SingleFrameApplication
   
     @Action
     public void connect() {
-    	if (currentState.canGoTo(CONNECT_PERFORMED)) {
-    		setCurrentState(CONNECT_PERFORMED);
+    	if (currentState.canGoTo(LAB_CONNECT_PERFORMED)) {
+    		setCurrentState(LAB_CONNECT_PERFORMED);
     		
     		log.info("Connect user " + getUsername());
     		labClientBean.connect(currentLab.getLocation());
@@ -519,8 +531,8 @@ public class ReCApplication extends SingleFrameApplication
 
     @Action
     public void disconnect() {
-    	if (currentState.canGoTo(DISCONNECT_PERFORMED)) {
-    		setCurrentState(DISCONNECT_PERFORMED);
+    	if (currentState.canGoTo(LAB_DISCONNECT_PERFORMED)) {
+    		setCurrentState(LAB_DISCONNECT_PERFORMED);
     		log.info("Disconnect user " + labClientBean.getUserInfo().getUserName());
     		
             apparatusClientBean.disconnect();
@@ -557,9 +569,9 @@ public class ReCApplication extends SingleFrameApplication
     }
     
     @Action
-    public void enterApparatus() {
-    	if (currentState.canGoTo(APPARATUS_ENTER_PERFORMED)) {
-    		setCurrentState(APPARATUS_ENTER_PERFORMED);
+    public void toggleApparatusState() {
+    	if (currentState.canGoTo(APPARATUS_CONNECT_PERFORMED)) {
+    		setCurrentState(APPARATUS_CONNECT_PERFORMED);
     		
     		apparatusClientBean.getUserInfo().setUserName(getUsername());
             apparatusClientBean.getUserInfo().setPassword(getUsername());
@@ -579,6 +591,10 @@ public class ReCApplication extends SingleFrameApplication
                     apparatusClientBean.connect();
 //                }
 //            }.start();
+                    
+    	} else if (currentState.canGoTo(APPARATUS_DISCONNECT_PERFORMED)) {
+    		
+    		apparatusClientBean.disconnect();
     	}
     }
     
@@ -697,13 +713,30 @@ public class ReCApplication extends SingleFrameApplication
     	if (log.isLoggable(Level.FINE)) {
             log.fine("ApparatusConnectorEvent " + evt);
         }
+    	
 		setCurrentState(CONNECTED_TO_APPARATUS);
+		
+		// Load customizer
+		currentCustomizer = CustomizerUIUtil.loadCustomizer(
+				ReCResourceBundle.findString(selectedApparatusConfig.getCustomizerClassLocationBundleKey()));
+		
+		// Set user info
+		if(currentCustomizer instanceof ICustomizerSecurity) {
+            ((ICustomizerSecurity)currentCustomizer).setUserInfo(new com.linkare.rec.acquisition.UserInfo(getUsername()));
+		}
+		
+		// Set Hardware 
+		setHardwareAcquisitionConfig(currentApparatus.getHardwareInfo().createBaseHardwareAcquisitionConfig());
+		
+		// Init customizer
+		currentCustomizer.setHardwareInfo(getCurrentApparatus().getHardwareInfo());
+		currentCustomizer.setHardwareAcquisitionConfig(getHardwareAcquisitionConfig());
 		
 		// Forward event to the view
         fireApparatusStateChanged(CONNECTED, evt);
 	}
-    
-    @Override
+
+	@Override
 	public void apparatusDisconnecting(ApparatusConnectorEvent evt) {
 		if (log.isLoggable(Level.FINE)) {
             log.fine("ApparatusConnectorEvent " + evt.getMessage());
@@ -719,7 +752,9 @@ public class ReCApplication extends SingleFrameApplication
 		if (log.isLoggable(Level.FINE)) {
             log.fine("ApparatusConnectorEvent " + evt.getMessage());
         }
-		// TODO Auto-generated method stub
+	
+		// Disconnect from apparatus but remain connected to laboratory
+		setCurrentState(CONNECTED_TO_LAB);
 		
 		// Forward event to the view
         fireApparatusStateChanged(DISCONNECTED, evt);

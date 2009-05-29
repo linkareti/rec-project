@@ -42,6 +42,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 	}
 	
 	public void setApparatusConfig(Apparatus apparatusConfig) {
+		
 		if (apparatusConfig == null) {
 			// TODO clear selection
 			return;

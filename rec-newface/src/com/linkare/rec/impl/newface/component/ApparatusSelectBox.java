@@ -19,8 +19,6 @@ import com.linkare.rec.impl.newface.ReCApplication;
  */
 public class ApparatusSelectBox extends AbstractContentPane {
 
-    private ReCApplication recApplication = ReCApplication.getApplication();
-    
     /** Creates new form ApparatusSelectBox */
     public ApparatusSelectBox() {
         initComponents();
@@ -32,6 +30,34 @@ public class ApparatusSelectBox extends AbstractContentPane {
     
     public FlatButton getButtonToggleEnter() {
 		return btnToggleEnter;
+	}
+    
+    public void toggleApparatusStateActionData(boolean connected) {
+    	
+    	javax.swing.Action toggleApparatusStateAction =
+    		getContext().getActionMap(ReCApplication.class, getRecApplication()).get("toggleApparatusState");
+
+    	toggleApparatusStateAction.putValue(javax.swing.Action.NAME,
+    			getContext().getResourceMap().getString("toggleApparatusState"+ (connected ? "" : "Disconnect") +".Action.text"));
+    	toggleApparatusStateAction.putValue(javax.swing.Action.SHORT_DESCRIPTION,
+    			getContext().getResourceMap().getString("toggleApparatusState"+ (connected ? "" : "Disconnect") +".Action.shortDescription"));
+    		
+    	if(connected){
+    		btnToggleEnter.setGradientBottom(FlatButton.GRADIENTBOTTOM_OFF);
+    		btnToggleEnter.setGradientTop(FlatButton.GRADIENTTOP_OFF);
+    		btnToggleEnter.setForeground(FlatButton.FOREGROUND_OFF);
+    		btnToggleEnter.setBorderColor(FlatButton.COLORBORDER_OFF);
+    	}else{
+    		btnToggleEnter.setGradientBottom(FlatButton.GRADIENTBOTTOM_ON);
+    		btnToggleEnter.setGradientTop(FlatButton.GRADIENTTOP_ON);
+    		btnToggleEnter.setForeground(FlatButton.FOREGROUND_ON);
+    		btnToggleEnter.setBorderColor(FlatButton.COLORBORDER_ON);
+    	}
+    	
+    	btnToggleEnter.setAction(toggleApparatusStateAction);
+    	
+    	// TODO this is fixing the focus repaint problem. Find a better way.
+    	repaint();
 	}
 
     /** This method is called from within the constructor to
@@ -54,11 +80,11 @@ public class ApparatusSelectBox extends AbstractContentPane {
         lblChooseApparatus.setText(resourceMap.getString("lblChooseApparatus.text")); // NOI18N
         lblChooseApparatus.setName("lblChooseApparatus"); // NOI18N
 
-        apparatusCombo.setModel(recApplication.getApparatusComboBoxModel());
+        apparatusCombo.setModel(getRecApplication().getApparatusComboBoxModel());
         apparatusCombo.setName("apparatusCombo"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ApparatusSelectBox.class, this);
-        btnToggleEnter.setAction(actionMap.get("enterApparatus")); // NOI18N
+        btnToggleEnter.setAction(actionMap.get("toggleApparatusState")); // NOI18N
         btnToggleEnter.setText(resourceMap.getString("btnToggleEnter.text")); // NOI18N
         btnToggleEnter.setFont(btnToggleEnter.getFont().deriveFont(btnToggleEnter.getFont().getStyle() | java.awt.Font.BOLD));
         btnToggleEnter.setName("btnToggleEnter"); // NOI18N

@@ -14,6 +14,11 @@ import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
+import org.jdesktop.application.ApplicationContext;
+import org.jdesktop.application.ResourceMap;
+
+import com.linkare.rec.impl.newface.ReCApplication;
+
 /**
  * Represents the base for all ReC standart panels.
  * 
@@ -21,7 +26,8 @@ import javax.swing.JPanel;
  */
 public abstract class AbstractContentPane extends JPanel {
 	
-	@SuppressWarnings("unused")
+	private ReCApplication recApplication = ReCApplication.getApplication();
+	
 	private static final Logger log = Logger
 			.getLogger(AbstractContentPane.class.getName());
 
@@ -64,4 +70,18 @@ public abstract class AbstractContentPane extends JPanel {
     	}
 	}
 
+	/**
+	 * @return the recApplication
+	 */
+	public ReCApplication getRecApplication() {
+		return recApplication;
+	}
+
+	public ApplicationContext getContext() {
+		return recApplication.getContext();
+	}
+	
+	public ResourceMap getResourceMap() {
+		return getContext().getResourceMap();
+	}
 }
