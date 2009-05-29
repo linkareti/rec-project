@@ -125,7 +125,7 @@ public class TestMediaPane extends AbstractContentPane {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-                System.out.println("Vai tocar " + controller.getCurrentMedia());
+                //System.out.println("Vai tocar " + controller.getCurrentMedia());
 
                 if (!controller.hasVideoOutput())
                     setVideoOutput();

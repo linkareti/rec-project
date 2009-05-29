@@ -13,6 +13,7 @@
             <source-roots>
                 <root id="src.dir" name="Source"/>
                 <root id="src.visualCheck.dir" name="Visual Check"/>
+                <root id="src.JVLC.dir"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir" name="Test"/>
