@@ -98,7 +98,7 @@ public class FlatLookAndFeel extends
 				"RadioButtonUI", FlatRadioButtonUI.class.getName(),
 				"CheckBoxUI", FlatCheckBoxUI.class.getName(),
 				"SliderUI", FlatSliderUI.class.getName(),
-				"TableUI", FlatTableUI.class.getName(), 
+				"FlatTableUI", FlatTableUI.class.getName(), 
 		};
 
 		if (log.isLoggable(Level.FINER)) {
