@@ -12,13 +12,23 @@
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JViewport;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.Application;
 
 import com.linkare.rec.impl.newface.ReCApplication;
+import com.linkare.rec.impl.newface.laf.flat.FlatTableCellRenderer;
 
 /**
  *
@@ -30,7 +40,7 @@ public class FormComponents extends AbstractContentPane {
     public FormComponents() {
         initComponents();
     }
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -43,9 +53,7 @@ public class FormComponents extends AbstractContentPane {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
-        flatButton1 = new com.linkare.rec.impl.newface.component.FlatButton();
+        flatTable1 = new com.linkare.rec.impl.newface.component.FlatTable();
         jPanel2 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -55,72 +63,42 @@ public class FormComponents extends AbstractContentPane {
         jSlider2 = new javax.swing.JSlider();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        flatButton1 = new com.linkare.rec.impl.newface.component.FlatButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"dfgdsfgsdf", "gsdfg", "sdfgsdf", "gsd"},
-                {"gsdfgs", "sdfg", "sdfgsd", "sdffg"},
-                {"dfgsd", "sdfgsdf", "gdsgsdf", "sdf"},
-                {"fsdfg", "sdfg", "fgsdfg", "gsdfg"}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setShowHorizontalLines(false);
-        jTable1.setShowVerticalLines(false);
-        jTable1.getTableHeader().setResizingAllowed(false);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getAccessibleContext().setAccessibleParent(null);
+        String data[][] = {{"Vinod","Computer","3"},
+        		{"Rahul","History","2"},
+        		{"Manoj","Biology","4"},	{"Manoj","Biology","4"},		{"Manoj","Biology","4"},	{"Manoj","Biology","4"},	{"Manoj","Biology","4"},{"Manoj","Biology","4"},	{"Manoj","Biology","4"},	{"Manoj","Biology","4"},	{"Manoj","Biology","4"},
+        		{"Sanjay","PSD","5"}};
+        String col [] = {"Name","Course","Year"};
+        
+        flatTable1.setTableModel(data,col);
+        
+        
+        jScrollPane1.setViewportView(flatTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(202, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
         );
 
         jTabbedPane1.addTab("Descrição", new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/resources/alpha0.png")), jPanel1); // NOI18N
-
-        jPanel3.setEnabled(false);
-
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(FormComponents.class, this);
-        flatButton1.setAction(actionMap.get("btnAction")); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(flatButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(293, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(flatButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Experiência", new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/component/resources/plus.png")), jPanel3); // NOI18N
 
         jPanel2.setEnabled(false);
 
@@ -205,6 +183,29 @@ public class FormComponents extends AbstractContentPane {
 
         jTabbedPane1.addTab("Resultados", jPanel2);
 
+        jPanel3.setEnabled(false);
+
+        flatButton1.setText("flatButton1");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(flatButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(265, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(flatButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(187, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Experiência", new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/newface/component/resources/plus.png")), jPanel3); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,6 +227,7 @@ public class FormComponents extends AbstractContentPane {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.linkare.rec.impl.newface.component.FlatButton flatButton1;
+    private com.linkare.rec.impl.newface.component.FlatTable flatTable1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JPanel jPanel1;
@@ -237,7 +239,6 @@ public class FormComponents extends AbstractContentPane {
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSlider jSlider2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
@@ -285,4 +286,6 @@ public class FormComponents extends AbstractContentPane {
     		state=true;
     	}
     }
+    
+
 }
