@@ -1,5 +1,5 @@
-build.dir=
-dist.dir=
+build.dir=build/java
+dist.dir=dist/java
 lib.java.dir=lib/java
 src.java.dir=src/java
 javac.encoding=UTF-8
@@ -8,3 +8,23 @@ javac.optimize=true
 javac.sourcelevel=1.6
 
 copy.encoding=UTF-8
+
+#this next section esplicits which experiments are going to be compiled, packaged, distributed...
+#you need only one list, the reason they are separated is to allow building elab and elab virtual separatly
+#just uncomment the one you need
+#list of experiments in ELab
+experiment.list=aleatorio,gamma,T,webrobot
+#list of virtual experiments in ELab Virtual
+#experiment.list=mm,cg
+
+###DEPLOYMENT####
+rec.server=
+rec.server.dir=
+web.server=
+web.server.dir=
+
+##KEYSTORY CONFIGURATION###
+keystore=.keystore
+keypass=linkare
+storepass=linkare
+alias=linkare
