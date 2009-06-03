@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+		=======================================================
+		============ 2009/03/29 Build Rec - Elab ==============
+		=======================================================
+	-->
+
+<project name="ReC - eLab build system" default="help" basedir=".">
+	<description>
+		Compile, package, sign and run the project ReC and each of the experiments.
+	</description>
+
+	<property file="build.properties" description="general properties for building project" />
+
+	<!--
+		=====================================================
+		====================== Generic ======================
+		=====================================================
+	-->
+
+	<target name="help" description="General usage of the build system, it shows a description of each target, and how to use them">
+		<echo>ReC - eBab build system</echo>
+	</target>
+
+	<target name="process.list.with.generic.target">
+		<fail unless="experiment.list">experiments.list must be set to compile
+				that list of experiments. define it in build.properties or pass 
+				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<fail unless="ant.target">ant.target must be set to know which operation is to be performed on the list of experiments. 
+			define it in build.properties or pass it to jvm as arg like, for example, -Dant.target="compile.experiment"</fail>
+		<script language="javascript">
+			<![CDATA[
+				var list=project.getProperty("experiment.list");
+				var target=project.getProperty("ant.target");
+			    var splitVars=list.split(",");
+			
+			    for(var i=0;i<splitVars.length;i++)
+			    {    
+					var antcall=project.createTask("antcall");
+					antcall.init();
+					antcall.setTarget(target);
+					var antcallParam=antcall.createParam();
+					antcallParam.setName("experiment.name");
+					antcallParam.setValue(splitVars[i]);
+					antcall.execute();
+				}
+			]]>
+		</script>
+	</target>
+
+	<!--
+		=====================================================
+		==================== REC Common =====================
+		=====================================================
+	-->
+
+	<target name="clean.rec.common" description="Delete the build folder containing the common shared compiled code.">
+		<delete dir="${build.dir}/ReC/common" />
+	</target>
+
+	<target name="compile.rec.common" description="Compile the common part of the ReC project independently.">
+		<mkdir dir="${build.dir}/ReC/common" />
+		<javac srcdir="rec/${src.java.dir}/common" destdir="${build.dir}/ReC/common" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<include name="**/*.java" />
+			<classpath>
+				<fileset dir="rec/lib/compile/common/">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="rec/lib/java/common/">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+	</target>
+
+	<target name="jar.rec.common" description="Create a jar with the common part of the ReC project.">
+		<mkdir dir="${dist.dir}/ReC/common" />
+		<jar destfile="${dist.dir}/ReC/common/ReCCommon.jar" basedir="${build.dir}/ReC/common">
+			<include name="**/*.class" />
+		</jar>
+	</target>
+
+	<target name="sign.rec.common">
+		<signjar destDir="${dist.dir}/ReC/common" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${dist.dir}/ReC/common" includes="ReCCommon.jar" excludes="*_sig.jar" />
+			<globmapper from="*.jar" to="*_sig.jar" />
+		</signjar>
+	</target>
+
+	<target name="deploy.rec.common">
+	</target>
+
+	<target name="dist.rec.common" depends="clean.rec.common,compile.rec.common,jar.rec.common,sign.rec.common">
+
+	</target>
+
+	<!--
+		=====================================================
+		==================== ReC Client =====================
+		=====================================================
+	-->
+
+	<target name="clean.rec.client">
+		<delete dir="${build.dir}/ReC/client" />
+	</target>
+
+	<target name="compile.rec.client">
+		<mkdir dir="${build.dir}/ReC/client" />
+		<javac srcdir="rec/${src.java.dir}/client" destdir="${build.dir}/ReC/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<include name="**/*.java" />
+			<classpath>
+				<fileset dir="rec/lib/compile/client/">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="rec/lib/java/client/">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${build.dir}/ReC/common" />
+			</classpath>
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<javac srcdir="rec/${src.java.dir}/ui" destdir="${build.dir}/ReC/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<include name="**/*.java" />
+			<classpath>
+				<fileset dir="lib/">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="rec/lib/compile/client/">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="rec/lib/java/client/">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${build.dir}/ReC/common" />
+			</classpath>
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+	</target>
+
+	<target name="jar.rec.client">
+		<mkdir dir="${dist.dir}/ReC/client" />
+		<jar destfile="${dist.dir}/ReC/client/ReCClient.jar" basedir="${build.dir}/ReC/client">
+			<include name="**/*.class" />
+		</jar>
+	</target>
+
+	<target name="sign.rec.client">
+		<signjar destDir="${dist.dir}/ReC/client" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${dist.dir}/ReC/client" includes="ReCClient.jar" excludes="*_sig.jar" />
+			<globmapper from="*.jar" to="*_sig.jar" />
+		</signjar>
+	</target>
+
+	<target name="deploy.rec.client">
+	</target>
+
+	<target name="dist.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client,sign.rec.client">
+
+	</target>
+
+	<!--
+		=====================================================
+		==================== ReC Driver =====================
+		=====================================================
+	-->
+
+	<target name="clean.rec.hardwareserver">
+		<delete dir="${build.dir}/ReC/hardwareserver" />
+	</target>
+
+	<target name="compile.rec.hardwareserver">
+		<mkdir dir="${build.dir}/ReC/hardwareserver" />
+		<javac srcdir="rec/${src.java.dir}/hardwareserver" destdir="${build.dir}/ReC/hardwareserver" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<include name="**/*.java" />
+			<classpath>
+				<fileset dir="rec/lib/compile/hardwareserver/">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="rec/lib/java/hardwareserver/">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${build.dir}/ReC/common" />
+			</classpath>
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+	</target>
+
+	<target name="jar.rec.hardwareserver">
+		<mkdir dir="${dist.dir}/ReC/hardwareserver" />
+		<jar destfile="${dist.dir}/ReC/hardwareserver/ReCHardwareServer.jar" basedir="${build.dir}/ReC/hardwareserver">
+			<include name="**/*.class" />
+		</jar>
+	</target>
+
+	<target name="deploy.rec.hardwareserver">
+	</target>
+
+	<target name="dist.rec.hardwareserver" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
+
+	</target>
+
+	<!--
+		=====================================================
+		============= ReC Multicast Controller===============
+		=====================================================
+	-->
+
+	<target name="clean.rec.multicastcontroller">
+		<delete dir="${build.dir}/ReC/multicast" />
+	</target>
+
+	<target name="compile.rec.multicastcontroller">
+		<mkdir dir="${build.dir}/ReC/multicast" />
+		<javac srcdir="rec/${src.java.dir}/multicast" destdir="${build.dir}/ReC/multicast" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<include name="**/*.java" />
+			<classpath>
+				<fileset dir="rec/lib/compile/multicast/">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="rec/lib/java/multicast/">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${build.dir}/ReC/common" />
+			</classpath>
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+	</target>
+
+	<target name="jar.rec.multicastcontroller">
+		<mkdir dir="${dist.dir}/ReC/multicast" />
+		<jar destfile="${dist.dir}/ReC/multicast/ReCMulticastController.jar" basedir="${build.dir}/ReC/multicast">
+			<include name="**/*.class" />
+			<manifest>
+				<attribute name="Main-Class" value="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain"/>
+				<section name="Implementarion details">
+				    <attribute name="Implementation-Title" value="ReC Multicast Controller"/>
+				    <attribute name="Implementation-Version" value="${version} ${TODAY}"/> 
+				    <attribute name="Implementation-Vendor" value="Linkare TI"/>
+				</section>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="deploy.rec.multicastcontroller">
+	</target>
+
+	<target name="dist.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
+
+	</target>
+
+	<target name="debug.rec.multicast">
+		<java jar="${dist.dir}/ReC/multicast/ReCMulticastController.jar" fork="true" failonerror="true" maxmemory="256m">
+			<arg value="-h" />
+			<classpath>
+				<pathelement path="${java.class.path}" />
+			</classpath>
+			<jvmarg value="-Xdebug" />
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=y" />
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+		</java>
+	</target>
+
+	<target name="run.rec.multicast">
+		<java jar="${dist.dir}/ReC/multicast/ReCMulticastController.jar" fork="true" failonerror="true" maxmemory="256m">
+			<arg value="-h" />
+			<classpath>
+				<pathelement path="${java.class.path}" />
+			</classpath>
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+		</java>
+	</target>
+
+	<!--
+		=====================================================
+		=================== Elab Client =====================
+		=====================================================
+	-->
+
+	<target name="clean.elab.client">
+		<delete dir="${build.dir}/ELab/client" />
+	</target>
+
+	<target name="compile.elab.client">
+		<mkdir dir="${build.dir}/ELab/client" />
+		<javac srcdir="elab/${src.java.dir}/client" destdir="${build.dir}/ELab/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<include name="**/*.java" />
+			<classpath>
+				<pathelement location="${build.dir}/ReC/client" />
+			</classpath>
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<javac srcdir="elab/${src.java.dir}/ui" destdir="${build.dir}/ELab/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<include name="**/*.java" />
+			<classpath>
+				<pathelement location="${build.dir}/ReC/client" />
+			</classpath>
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+	</target>
+
+	<target name="jar.elab.client">
+		<mkdir dir="${dist.dir}/ELab/client" />
+		<jar destfile="${dist.dir}/ELab/client/ELabClient.jar" basedir="${build.dir}/ELab/client">
+			<include name="**/*.class" />
+		</jar>
+	</target>
+
+	<target name="sign.elab.client">
+		<signjar destDir="${dist.dir}/ELab/client" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${dist.dir}/ELab/client" includes="ELabClient.jar" excludes="*_sig.jar" />
+			<globmapper from="*.jar" to="*_sig.jar" />
+		</signjar>
+	</target>
+
+	<target name="deploy.elab.client">
+	</target>
+
+	<target name="dist.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
+
+	</target>
+
+	<!--
+		=====================================================
+		=================== Elab driver =====================
+		=====================================================
+	-->
+
+	<target name="clean.elab.hardwareserver">
+		<delete dir="${build.dir}/ELab/hardwareserver" />
+	</target>
+
+	<target name="compile.elab.hardwareserver">
+		<mkdir dir="${build.dir}/ELab/hardwareserver" />
+		<javac srcdir="elab/${src.java.dir}/driver" destdir="${build.dir}/ELab/hardwareserver" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<include name="**/*.java" />
+			<classpath>
+				<fileset dir="elab/lib/java/driver/">
+					<include name="**/*.jar" />
+				</fileset>
+				<pathelement location="${build.dir}/ReC/hardwareserver" />
+				<pathelement location="${build.dir}/ReC/common" />
+			</classpath>
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+	</target>
+
+	<target name="jar.elab.hardwareserver">
+		<mkdir dir="${dist.dir}/ELab/hardwareserver" />
+		<jar destfile="${dist.dir}/ELab/hardwareserver/ELabHardwareServer.jar" basedir="${build.dir}/ELab/hardwareserver">
+			<include name="**/*.class" />
+		</jar>
+	</target>
+
+	<target name="deploy.elab.hardwareserver">
+	</target>
+
+	<target name="dist.elab.hardwareserver" depends="clean.elab.hardwareserver,compile.elab.hardwareserver,jar.elab.hardwareserver">
+
+	</target>
+
+	<!--
+		=====================================================
+		=========== Elab Multicast Controller ===============
+		=====================================================
+	-->
+
+	<target name="clean.elab.multicastcontroller">
+		<delete dir="${build.dir}/ELab/multicast" />
+	</target>
+
+	<target name="compile.elab.multicastcontroller">
+		<mkdir dir="${build.dir}/ELab/multicast" />
+		<javac srcdir="elab/${src.java.dir}/multicast" destdir="${build.dir}/ELab/multicast" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<include name="**/*.java" />
+			<classpath>
+				<pathelement location="${build.dir}/ReC/multicast" />
+				<pathelement location="${build.dir}/ReC/common" />
+			</classpath>
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+	</target>
+
+	<target name="jar.elab.multicastcontroller">
+		<mkdir dir="${dist.dir}/ELab/multicast" />
+		<jar destfile="${dist.dir}/ELab/multicast/ELabMulticastController.jar" basedir="${build.dir}/ELab/multicast">
+			<include name="**/*.class" />
+		</jar>
+	</target>
+
+	<target name="deploy.elab.multicastcontroller">
+	</target>
+
+	<target name="dist.elab.multicastcontroller" depends="clean.elab.multicastcontroller,compile.elab.multicastcontroller,jar.elab.multicastcontroller">
+
+	</target>
+
+	<!--
+		=====================================================
+		===============ReC Entire Project====================
+		=====================================================
+	-->
+
+	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller,clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller">
+	</target>
+
+	<target name="compile.all" depends="compile.rec.common,compile.rec.client,compile.rec.hardwareserver,compile.rec.multicastcontroller,compile.elab.client,compile.elab.hardwareserver,compile.elab.multicastcontroller">
+	</target>
+
+	<target name="jar.all" depends="jar.rec.common,jar.rec.client,jar.rec.hardwareserver,jar.rec.multicastcontroller,jar.elab.client,jar.elab.hardwareserver,jar.elab.multicastcontroller">
+	</target>
+
+	<target name="sign.all" depends="sign.rec.common,sign.rec.client,sign.elab.client">
+
+	</target>
+
+	<target name="deploy.all" depends="deploy.rec.common,deploy.rec.client,deploy.rec.hardwareserver,deploy.rec.multicastcontroller,deploy.elab.client,deploy.elab.hardwareserver,deploy.elab.multicastcontroller">
+
+	</target>
+
+	<target name="dist.all" depends="dist.rec.common,dist.rec.client,dist.rec.hardwareserver,dist.rec.multicastcontroller,dist.elab.client,dist.elab.hardwareserver,dist.elab.multicastcontroller">
+
+	</target>
+
+	<!--
+		=====================================================
+		================ReC Experiments======================
+		=====================================================
+	-->
+
+	<!--MACROS-->
+
+	<macrodef name="clean.experiment">
+		<attribute name="experiment.name" />
+		<sequential>
+			<delete dir="${build.dir}/experiments/${experiment.name}" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="compile.experiment">
+		<attribute name="experiment.name" />
+		<sequential>
+			<mkdir dir="${build.dir}/experiments/${experiment.name}/client" />
+			<mkdir dir="${build.dir}/experiments/${experiment.name}/server" />
+			<echo>Compiling experiment: @{experiment.name}</echo>
+
+			<javac srcdir="experiments/${experiment.name}/${src.java.dir}/client" destdir="${build.dir}/experiments/${experiment.name}/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+				<include name="**/*.java" />
+				<classpath>
+					<pathelement location="${build.dir}/common" />
+					<pathelement location="${build.dir}/client" />
+				</classpath>
+				<compilerarg value="-Xlint:unchecked, cast, -serial" />
+			</javac>
+
+			<javac srcdir="experiments/${experiment.name}/${src.java.dir}/server" destdir="${build.dir}/experiments/${experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+				<include name="**/*.java" />
+				<classpath>
+					<fileset dir="lib/">
+						<include name="**/*.jar" />
+					</fileset>
+					<pathelement location="${build.dir}/common" />
+					<pathelement location="${build.dir}/hardwareserver" />
+				</classpath>
+				<compilerarg value="-Xlint:unchecked, cast, -serial" />
+			</javac>
+
+		</sequential>
+	</macrodef>
+
+	<macrodef name="jar.experiment">
+		<attribute name="experiment.name" />
+		<sequential>
+			<mkdir dir="${dist.dir}/experiments/${experiment.name}/client" />
+			<mkdir dir="${dist.dir}/experiments/${experiment.name}/server" />
+			<jar destfile="${dist.dir}/experiments/${experiment.name}/client/@{experiment.name}Client.jar" basedir="${build.dir}/experiments/${experiment.name}/client">
+				<include name="**/*.class" />
+			</jar>
+			<jar destfile="${dist.dir}/experiments/${experiment.name}/server/@{experiment.name}Driver.jar" basedir="${build.dir}/experiments/${experiment.name}/server">
+				<include name="**/*.class" />
+			</jar>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sign.experiment">
+		<attribute name="experiment.name" />
+		<sequential>
+			<signjar jar="${dist.dir}/experiments/${experiment.name}/client/@{experiment.name}Client.jar" signedjar="${dist.dir}/experiments/${experiment.name}/client/@{experiment.name}Client_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" />
+			<signjar jar="${dist.dir}/experiments/${experiment.name}/server/@{experiment.name}Driver.jar" signedjar="${dist.dir}/experiments/${experiment.name}/server/@{experiment.name}Driver_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="deploy.experiment">
+		<sequential>
+			<copy todir="${rec.server}/@{rec.server.dir}">
+				<fileset file="${dist.dir}/experiments/${experiment.name}/server/@{experiment.name}Driver_sig.jar" />
+			</copy>
+			<copy todir="${web.server}/@{web.server.dir}">
+				<fileset file="${dist.dir}/experiments/${experiment.name}/client/@{experiment.name}Client_sig.jar" />
+			</copy>
+		</sequential>
+	</macrodef>
+
+	<!--/MACROS-->
+
+	<target name="clean.experiments">
+		<delete dir="${build.dir}/experiments/" />
+	</target>
+
+	<target name="clean.experiments.list">
+		<fail unless="experiment.list"> experiments.list must be set to clean
+				that list of experiments. define it in build.properties or pass 
+				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<antcall target="process.list.with.generic.target">
+			<param name="ant.target" value="clean.experiment" />
+		</antcall>
+	</target>
+
+	<target name="compile.experiments.list">
+		<fail unless="experiment.list"> experiments.list must be set to compile
+			that list of experiments. define it in build.properties or pass 
+			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<antcall target="process.list.with.generic.target">
+			<param name="ant.target" value="compile.experiment" />
+		</antcall>
+	</target>
+
+	<target name="compile.experiment">
+		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
+		<compile.experiment experiment.name="${experiment.name}" />
+	</target>
+
+	<target name="jar.experiments.list">
+		<fail unless="experiment.list"> experiments.list must be set to package
+			that list of experiments. define it in build.properties or pass 
+			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<antcall target="process.list.with.generic.target">
+			<param name="ant.target" value="jar.experiment" />
+		</antcall>
+	</target>
+
+	<target name="jar.experiment">
+		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
+		<jar.experiment experiment.name="${experiment.name}" />
+	</target>
+
+	<target name="sign.experiments.list">
+		<fail unless="experiment.list"> experiments.list must be set to package
+				that list of experiments. define it in build.properties or pass 
+				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<antcall target="process.list.with.generic.target">
+			<param name="ant.target" value="sign.experiment" />
+		</antcall>
+	</target>
+
+	<target name="sign.experiment">
+		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
+		<sign.experiment experiment.name="${experiment.name}" />
+	</target>
+
+	<!--
+		================================================================
+		============================= Jnlp =============================
+		================================================================
+		-->
+
+	<property name="template.file" value="templates/jnlp/template.xml" />
+	<property name="properties.dir" value="Y:\perfil\Meus Documentos\Linkare\ReC Properties\jnlp\properties" />
+
+	<target name="create.jnlp.for.experiment">
+
+		<propertyfile file="experiments/${experiment.name}/etc/build.properties" />
+
+		<echo>Building Jnlp file for experiment: ${experiment.name}</echo>
+		<fail unless="experiment.name">experiment.name must be set to build
+			a single experiment jnlp. pass it to jvm as arg like
+			-Dexperiment.name="experiment name"</fail>
+		<copy file="${template.file}" tofile="${result.dir}\${experiment.name}.jnlp" />
+		<replace file="${result.dir}\${experiment.name}.jnlp" propertyFile="${properties.dir}\${experiment.name}.properties">
+			<replacefilter token="@codebase@" property="codebase" />
+			<replacefilter token="@href@" property="href" />
+			<replacefilter token="@title@" property="title" />
+			<replacefilter token="@vendor@" property="vendor" />
+			<replacefilter token="@homepage@" property="homepage" />
+			<replacefilter token="@one-line@" property="one-line" />
+			<replacefilter token="@tootip@" property="tootip" />
+			<replacefilter token="@short@" property="short" />
+			<replacefilter token="@j2se-version@" property="j2se-version" />
+			<replacefilter token="@jar@" property="jar" />
+			<replacefilter token="@main-class@" property="main-class" />
+		</replace>
+	</target>
+
+	<target name="create.jnlp.for.experiments.in.list">
+		<fail unless="experiment.list">experiment.list must be set to build the jnlp for that list of experiments. 
+			Pass it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."
+		</fail>
+		<antcall target="process.list.with.generic.target">
+			<param name="ant.target" value="create.jnlp.for.experiment" />
+		</antcall>
+	</target>
+
+</project>
