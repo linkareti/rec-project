@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="@codebase@" href="@href@">
+    <information>
+        <title>@title@</title>
+        <vendor>@vendor@</vendor>
+	<homepage href="@homepage@"/>
+	<description kind="one-line">@one-line@</description>
+	<description kind="tooltip">@tootip@</description>
+	<description kind="short">@short@</description>
+	<icon href="fullclient_iconified.gif"/>
+	<icon kind="splash" href="elab_logo.png"/>
+    </information>
+    <resources>
+        <j2se version="@j2se-version@"/>
+        <jar href="../ElabFullClient_sig.jar"/>
+        <jar href="@jar@" main="true"/>
+	<extension name="JFreeChartClient" href="../../jfreechart/JFreeChartClient.jnlp" />
+	<extension name="ReCClient" href="../../recbase/ReCClient.jnlp" />
+	<extension name="OpenORBClient" href="../../openorb/OpenORBClient.jnlp" />
+	<property name="ReC.PercentFreeMemoryThreshold2Serialization" value="80" />
+    </resources>
+    <application-desc main-class="@main-class@">
+    	<argument>-resources:http://elab.ist.utl.pt/rec/eLab/FullClient.properties</argument>
+    </application-desc>
+    <security>
+        <all-permissions/>
+    </security>
+</jnlp> 
