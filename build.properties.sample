@@ -28,3 +28,7 @@ keystore=.keystore
 keypass=linkare
 storepass=linkare
 alias=linkare
+
+##RUN CONFIGURATION##
+max.memory=1024m
+min.memory=128m
