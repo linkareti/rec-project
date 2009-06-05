@@ -54,22 +54,33 @@
 		=====================================================
 	-->
 
+	<property name="rec.common.build.dir" value="${build.dir}/rec/common"></property>
+	<property name="rec.common.dist.dir" value="${dist.dir}/rec/common"></property>
+	
+	<property name="rec.lib.dir" value="rec/lib"></property>
+	<property name="rec.lib.java.dir" value="rec/lib/java"></property>
+	<property name="rec.lib.compile.dir" value="rec/lib/compile"></property>
+	
+	
+	<path id="rec.compile.classpath">
+		<fileset dir="${rec.lib.compile.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${rec.lib.java.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+		
 	<target name="clean.rec.common" description="Delete the build folder containing the common shared compiled code.">
 		<delete dir="${build.dir}/ReC/common" />
 	</target>
 
 	<target name="compile.rec.common" description="Compile the common part of the ReC project independently.">
-		<mkdir dir="${build.dir}/ReC/common" />
-		<javac srcdir="rec/${src.java.dir}/common" destdir="${build.dir}/ReC/common" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<mkdir dir="${rec.common.build.dir}" />
+		<javac srcdir="rec/${src.java.dir}/common" destdir="${rec.common.build.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
-			<classpath>
-				<fileset dir="rec/lib/compile/common/">
-					<include name="**/*.jar" />
-				</fileset>
-				<fileset dir="rec/lib/java/common/">
-					<include name="**/*.jar" />
-				</fileset>
-			</classpath>
+			<classpath refid="rec.compile.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 	</target>
@@ -233,11 +244,11 @@
 		<jar destfile="${dist.dir}/ReC/multicast/ReCMulticastController.jar" basedir="${build.dir}/ReC/multicast">
 			<include name="**/*.class" />
 			<manifest>
-				<attribute name="Main-Class" value="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain"/>
+				<attribute name="Main-Class" value="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" />
 				<section name="Implementarion details">
-				    <attribute name="Implementation-Title" value="ReC Multicast Controller"/>
-				    <attribute name="Implementation-Version" value="${version} ${TODAY}"/> 
-				    <attribute name="Implementation-Vendor" value="Linkare TI"/>
+					<attribute name="Implementation-Title" value="ReC Multicast Controller" />
+					<attribute name="Implementation-Version" value="${version} ${TODAY}" />
+					<attribute name="Implementation-Vendor" value="Linkare TI" />
 				</section>
 			</manifest>
 		</jar>
@@ -442,13 +453,13 @@
 	</macrodef>
 
 	<macrodef name="compile.experiment">
-		<attribute name="experiment.name" />
+		<attribute name="experiment" />
 		<sequential>
-			<mkdir dir="${build.dir}/experiments/${experiment.name}/client" />
-			<mkdir dir="${build.dir}/experiments/${experiment.name}/server" />
-			<echo>Compiling experiment: @{experiment.name}</echo>
+			<mkdir dir="${build.dir}/experiments/@{experiment}/client" />
+			<mkdir dir="${build.dir}/experiments/@{experiment}/server" />
+			<echo>Compiling experiment: @{experiment}</echo>
 
-			<javac srcdir="experiments/${experiment.name}/${src.java.dir}/client" destdir="${build.dir}/experiments/${experiment.name}/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<javac srcdir="experiments/@{experiment}/${src.java.dir}/client" destdir="${build.dir}/experiments/@{experiment}/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 				<include name="**/*.java" />
 				<classpath>
 					<pathelement location="${build.dir}/common" />
@@ -457,7 +468,7 @@
 				<compilerarg value="-Xlint:unchecked, cast, -serial" />
 			</javac>
 
-			<javac srcdir="experiments/${experiment.name}/${src.java.dir}/server" destdir="${build.dir}/experiments/${experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<javac srcdir="experiments/@{experiment}/${src.java.dir}/server" destdir="${build.dir}/experiments/@{experiment}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 				<include name="**/*.java" />
 				<classpath>
 					<fileset dir="lib/">
@@ -520,27 +531,50 @@
 		</antcall>
 	</target>
 
+	
+	
+	<macrodef name="process.list">
+		<attribute name="list"/>
+		<attribute name="task"/>
+		<attribute name="attribute.name"/>
+			<sequential>
+			<script language="javascript">
+				<![CDATA[
+					var list="@{list}";
+					var task="@{task}";
+					var attribute_name="@{attribute.name}";
+				    var splitVars=list.split(",");
+				
+				    for(var i=0;i<splitVars.length;i++)
+				    {    
+						var oTask=project.createTask(task);
+						oTask.init();
+						oTask.setDynamicAttribute(attribute_name,splitVars[i]);
+						oTask.execute();
+					}
+				]]>
+			</script>
+			</sequential>
+		</macrodef>
+	
+	
 	<target name="compile.experiments.list">
 		<fail unless="experiment.list"> experiments.list must be set to compile
 			that list of experiments. define it in build.properties or pass 
 			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<antcall target="process.list.with.generic.target">
-			<param name="ant.target" value="compile.experiment" />
-		</antcall>
+		<process.list task="compile.experiment" list="${experiment.list}" attribute.name="experiment"/>
 	</target>
 
 	<target name="compile.experiment">
 		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<compile.experiment experiment.name="${experiment.name}" />
+		<compile.experiment experiment="${experiment.name}" />
 	</target>
 
 	<target name="jar.experiments.list">
 		<fail unless="experiment.list"> experiments.list must be set to package
 			that list of experiments. define it in build.properties or pass 
 			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<antcall target="process.list.with.generic.target">
-			<param name="ant.target" value="jar.experiment" />
-		</antcall>
+		<process.list task="jar.experiment" list="${experiment.list}" attribute.name="experiment.name"/>
 	</target>
 
 	<target name="jar.experiment">
@@ -604,4 +638,16 @@
 		</antcall>
 	</target>
 
+	<!--
+		================================================================
+		========================== Libraries ===========================
+		================================================================
+		-->
+	<target name="sign.libraries">
+		
+	</target>
+
+	<target name="deploy.libraries">
+		
+	</target>
 </project>
