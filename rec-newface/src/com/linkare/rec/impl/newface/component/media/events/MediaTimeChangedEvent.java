@@ -3,8 +3,7 @@ package com.linkare.rec.impl.newface.component.media.events;
 import java.util.EventObject;
 
 /**
- * Classe que representa o evento de timeChanged sempre que o tempo do
- * player muda.
+ * Represents the player's event of media time changing.
  */
 public class MediaTimeChangedEvent extends EventObject {
     public MediaTimeChangedEvent(Object source) {
