@@ -7,6 +7,9 @@ package com.linkare.rec.impl.newface;
 import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
 import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.*;
 
+import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
+import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
+import java.awt.Canvas;
 import java.awt.Component;
 import java.io.InputStream;
 import java.lang.Thread.UncaughtExceptionHandler;
@@ -17,7 +20,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,7 +53,6 @@ import com.linkare.rec.impl.exceptions.ReCConfigurationException;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.component.ApparatusComboBoxModel;
 import com.linkare.rec.impl.newface.component.DefaultDialog;
-import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
 import com.linkare.rec.impl.newface.config.Apparatus;
 import com.linkare.rec.impl.newface.config.Lab;
@@ -61,6 +62,9 @@ import com.linkare.rec.impl.newface.utils.OS;
 import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.newface.ReCAppEvent.ReCCommand;
+import com.linkare.rec.impl.newface.component.media.MediaSetup;
+import com.linkare.rec.impl.newface.component.media.VideoViewerController;
+import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
 
 /**
  * The main class of the application.
@@ -82,6 +86,67 @@ public class ReCApplication extends SingleFrameApplication
         });
     }
 
+    /**
+     * Sets the video output for this application controller.
+     * @param videoOutput
+     */
+    void setVideoOutput(Canvas videoOutput) {
+        mediaController.setVideoOutput(videoOutput);
+    }
+
+    /**
+     * Initializes the mediaController with default parameters for vlc, if it
+     * hasn't been initialized yet.
+     */
+    private void initializeMediaController() {
+
+        if (mediaController == null) {
+            //TODO local mais adequado para fazer o setup?
+            MediaSetup.setup();
+            String[] defaultVlcParams = MediaSetup.getDefaultMediaParameters();
+            mediaController = VideoViewerController.getInstance(defaultVlcParams);
+            mediaController.addMediaApplicationEventListener(new MediaApplicationEventListener() {
+                @Override
+                public void timeChanged(MediaTimeChangedEvent evt) {
+                    log.fine("Handling time changed!!!!!!!");
+                    //TODO lançar evento para a view para colocar slider com time actual do controller.
+                }
+
+                @Override
+                public void notConnected(MediaStoppedEvent evt) {
+                    log.fine("Handling not connected!!!!!!!");
+                    //TODO em streaming, não se conectou porque deixou de receber ESs. Deve começar de novo, n fazer nd ou mostrar msg ao utilizador?
+                }
+
+                @Override
+                public void stopped(MediaStoppedEvent evt) {
+                    log.fine("Handling stopped!!!!!!!");
+                    //TODO lançar evento para a view para colocar slider a 0.
+                }
+            });
+        }
+    }
+
+    /**
+     * Plays the media identified by the given mrl.
+     * @param mrl URL for the media to play.
+     */
+    public void playMedia(String mrl) {
+
+        log.info("Playing media: " + mrl);
+        mediaController.setMediaToPlay(mrl);
+        mediaController.play();
+    }
+
+    /**
+     * Stops the media played. Releases the media resources.
+     */
+    private void stopMedia() {
+        log.info("Stopping media...");
+        mediaController.stop();
+        mediaController.releaseMedia();
+    }
+
 	/**
 	 * Holds the ReC System properties. Maps the property name and the
 	 * required flag.
@@ -95,7 +160,11 @@ public class ReCApplication extends SingleFrameApplication
 		OPENORB_CONFIG("openorb.config", true),
 		OPENORB_PROFILE("openorb.profile", true),
 		ORG_OMG_CORBA_ORBCLASS("org.omg.CORBA.ORBClass", true),
-		ORG_OMG_CORBA_ORBSINGLETONCLASS("org.omg.CORBA.ORBSingletonClass", true);
+		ORG_OMG_CORBA_ORBSINGLETONCLASS("org.omg.CORBA.ORBSingletonClass", true),
+        REC_VIDEO_ENABLED("video.enabled", false),
+        VLC_PLUGINS_FILENAME("vlc.plugins.filename", true),
+        VLC_PLUGINS_DESTDIR("vlc.plugins.destdir", true);
+
 
 		String name;
 		boolean required;
@@ -195,6 +264,11 @@ public class ReCApplication extends SingleFrameApplication
 
     /** Holds the listeners to the ReC Application underlying model changes */
     private List<ReCApplicationListener> appListeners;
+
+    /**
+     * Controller for the video module.
+     */
+    private VideoViewerController mediaController;
 
     // ReC Application state model
 
@@ -330,6 +404,10 @@ public class ReCApplication extends SingleFrameApplication
 	public ICustomizer getCurrentCustomizer() {
 		return currentCustomizer;
 	}
+
+    public VideoViewerController getMediaController() {
+        return mediaController;
+    }
 	
 	// -------------------------------------------------------------------------
 	// Application Startup Workflow
@@ -525,7 +603,8 @@ public class ReCApplication extends SingleFrameApplication
     		
     		log.info("Connect user " + getUsername());
     		labClientBean.connect(currentLab.getLocation());
-    		
+
+            initializeMediaController();
     	}
     }
 
@@ -591,10 +670,11 @@ public class ReCApplication extends SingleFrameApplication
                     apparatusClientBean.connect();
 //                }
 //            }.start();
-                    
+
     	} else if (currentState.canGoTo(APPARATUS_DISCONNECT_PERFORMED)) {
     		
     		apparatusClientBean.disconnect();
+
     	}
     }
     
@@ -638,7 +718,7 @@ public class ReCApplication extends SingleFrameApplication
         }
         
         // Forward event to the view
-        fireLabStateChanged(evt);
+         fireLabStateChanged(evt);
         
     }
 
@@ -667,6 +747,13 @@ public class ReCApplication extends SingleFrameApplication
         	// Forward events to the view
             fireApparatusListChanged(evt);
         }
+    }
+
+    // -------------------------------------------------------------------------
+    // Video events
+
+    public enum VideoEvent {
+        
     }
 
     // -------------------------------------------------------------------------
@@ -703,7 +790,7 @@ public class ReCApplication extends SingleFrameApplication
             log.fine("ApparatusConnectorEvent " + evt);
         }
 		// TODO Auto-generated method stub
-		
+
 		// Forward event to the view
         fireApparatusStateChanged(CONNECTING, evt);
 	}
@@ -731,6 +818,11 @@ public class ReCApplication extends SingleFrameApplication
 		// Init customizer
 		currentCustomizer.setHardwareInfo(getCurrentApparatus().getHardwareInfo());
 		currentCustomizer.setHardwareAcquisitionConfig(getHardwareAcquisitionConfig());
+
+        if ("S".equals(System.getProperty(ReCSystemProperty.REC_VIDEO_ENABLED.getName())))
+//            playMedia(ReCResourceBundle.findString(selectedApparatusConfig.getVideoLocation()));
+//            playMedia("rtsp://elabmc.ist.utl.pt/radiare.sdp");
+            playMedia("/home/bcatarino/Documentos/NetBeansProjects/xpto.avi");
 		
 		// Forward event to the view
         fireApparatusStateChanged(CONNECTED, evt);
@@ -752,10 +844,13 @@ public class ReCApplication extends SingleFrameApplication
 		if (log.isLoggable(Level.FINE)) {
             log.fine("ApparatusConnectorEvent " + evt.getMessage());
         }
-	
+
+        if ("S".equals(System.getProperty(ReCSystemProperty.REC_VIDEO_ENABLED.getName())))
+            stopMedia();
+        
 		// Disconnect from apparatus but remain connected to laboratory
 		setCurrentState(CONNECTED_TO_LAB);
-		
+
 		// Forward event to the view
         fireApparatusStateChanged(DISCONNECTED, evt);
 	}

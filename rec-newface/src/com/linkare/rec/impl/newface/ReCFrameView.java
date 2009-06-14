@@ -381,6 +381,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	private void connectToApparatus() {
+
+        if ("S".equals(System.getProperty(ReCApplication.ReCSystemProperty.REC_VIDEO_ENABLED.getName()))) {
+            getVideoBox().initializeVideoOutput();
+            recApplication.setVideoOutput(getVideoBox().getVideoOutput());
+        }
+        
 		getApparatusSelectBox().toggleApparatusStateActionData(false);
 		getApparatusCombo().setEnabled(false);
 		getLayoutContainerPane().enableApparatusTabbedPane();
@@ -395,9 +401,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		
 		// Goto customizer tab
 		getApparatusTabbedPane().setSelectedTabIndex(1);
+
 	}
 	
 	private void disconnectFromApparatus() {
+        if ("S".equals(System.getProperty(ReCApplication.ReCSystemProperty.REC_VIDEO_ENABLED.getName())))
+            getVideoBox().destroyVideoOutput();
 		getApparatusSelectBox().toggleApparatusStateActionData(true);
 		getApparatusCombo().setEnabled(true);
 		getLayoutContainerPane().disableApparatusTabbedPane();
