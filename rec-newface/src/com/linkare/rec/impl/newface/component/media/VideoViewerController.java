@@ -1,7 +1,8 @@
 package com.linkare.rec.impl.newface.component.media;
 
+import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
+import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
-import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEventListener;
 import com.linkare.rec.impl.newface.component.media.transcoding.TranscodingConfig;
 import java.awt.Canvas;
 import java.io.File;
@@ -44,19 +45,20 @@ public class VideoViewerController {
     /**
      * Indica se está a gravar também para ficheiro ou não.
      */
+    //Delete vlm != null tem o mm efeito.
     private boolean streamToFile = false;
 
     /**
      * Time do Player que corresponde ao momento 0 da experiência e que tem um
-     * tempo relativo.
+     * tempo relativo. 
      */
-    private long relativeFrame0;
+    private long relativeFrame0 = -1;
 
     /**
      * Tempo absoluto que deverá corresponder à frame0 e que estará 
      * sincronizado com um tempo relativo do player.
      */
-    private long absoluteFrame0;
+    private long absoluteFrame0 = -1;
 
     /**
      * Estado actual do media player.
@@ -171,6 +173,7 @@ public class VideoViewerController {
      */
     private void initPlayer() {
 
+        //Bruno Alterar para deixar de ter log a warning... (tirar log do vlc).
         this.jvlc.setLogVerbosity(LoggerVerbosityLevel.WARNING);
         this.video = new Video(jvlc);
         this.audio = new Audio(jvlc);
@@ -183,6 +186,7 @@ public class VideoViewerController {
         // Nesses casos, é necessário garantir que a MediaList é instanciada.
         this.mediaList = jvlc.getMediaList() == null
                 ? new MediaList(jvlc) : jvlc.getMediaList();
+        this.jvlc.setMediaList(mediaList);
         this.mediaListPlayer = new MediaListPlayer(jvlc);
         this.mediaListPlayer.setMediaList(mediaList);
         this.mediaListPlayer.setMediaInstance(player);
@@ -193,8 +197,8 @@ public class VideoViewerController {
     
     /**
      * Define o Canvas onde será feito o rendering do vídeo. Se o vídeo já
-     * estiver associado a um canvas, faz o reparent e o resize do vídeo para
-     * o tamanho do novo canvas.
+     * estiver associado a um canvas, faz o reparent. Faz o resize do vídeo 
+     * para o tamanho do novo canvas.
      * @param jvlcCanvas
      */
     public void setVideoOutput(final Canvas jvlcCanvas) {
@@ -203,14 +207,13 @@ public class VideoViewerController {
             jvlc.setVideoOutput(jvlcCanvas);
         } else {
             video.reparent(player, jvlcCanvas);
-            player.resize(jvlcCanvas.getWidth(), jvlcCanvas.getHeight());
         }
+        player.resize(jvlcCanvas.getWidth(), jvlcCanvas.getHeight());
     }
 
     /**
-     * Indica se já existe um canvas associado ao output do vídeo. true, se sim.
-     * false, caso contrário.
-     * @return
+     * Indica se já existe um canvas associado ao output do vídeo. 
+     * @return true, se sim. false, caso contrário.
      */
     public boolean hasVideoOutput() {
         return player.hasVideoOutput();
@@ -228,6 +231,7 @@ public class VideoViewerController {
         MediaDescriptor mediaDescriptor = new MediaDescriptor(jvlc, mrl);
         this.mediaList.insertMediaDescriptor(mediaDescriptor, 0);
         this.state = MediaPlayerState.STOPPED;
+        resetFrame0();
     }
 
     /**
@@ -257,7 +261,7 @@ public class VideoViewerController {
         if (mediaList.size() > 0) {
             MediaDescriptor md = mediaList.getMediaDescriptorAtIndex(0);
             md.release();
-            //Bruno devia apagar a primeira posição da lista!!!
+            //Bruno devia apagar a primeira posição da lista!!!?!?!?
         }
         
         this.state = MediaPlayerState.EMPTY;
@@ -268,7 +272,7 @@ public class VideoViewerController {
      * reprodução.
      * @return
      */
-    public String getCurrentMedia() {
+    public String getCurrentMediaURL() {
         MediaDescriptor descriptor = mediaList.getMediaDescriptorAtIndex(0);
         if (descriptor != null)
             return descriptor.getMrl();
@@ -298,19 +302,26 @@ public class VideoViewerController {
             public void stopped(MediaPlayer arg0) {
                 //TODO em streaming, por vezes o JVLC pára por n receber mais ESs. Porquê???? Possível receber ESs separadamente?
                 VideoViewerController.this.state = MediaPlayerState.STOPPED;
-                fireMediaTimeChangedEvent(new MediaTimeChangedEvent(arg0));
+                fireMediaStoppedEvent(new MediaStoppedEvent(this));
             }
 
             @Override
             public void endReached(MediaPlayer arg0) {
-                VideoViewerController.this.state = MediaPlayerState.STOPPED;
+
+                log.info("MediaPlayer end reached.");
+
                 VideoViewerController.this.releaseMedia();
-                fireMediaTimeChangedEvent(new MediaTimeChangedEvent(arg0));
+
+                // O cliente tem de colocar a scroll no 0 quando recebe um evento destes.
+                fireMediaStoppedEvent(new MediaStoppedEvent(this));
+//Delete                fireMediaTimeChangedEvent(new MediaTimeChangedEvent(arg0));
+
+                VideoViewerController.this.state = MediaPlayerState.STOPPED;
             }
 
             @Override
             public void timeChanged(MediaPlayer arg0, long arg1) {
-                fireMediaTimeChangedEvent(new MediaTimeChangedEvent(arg0));
+                fireMediaTimeChangedEvent(new MediaTimeChangedEvent(this));
             }
 
             @Override
@@ -361,14 +372,13 @@ public class VideoViewerController {
      * Se o player estiver parado, mas com um media carregado, reproduz de novo.
      *  Caso contrário, faz togglePause. <br>
      * Se tiver opção de streaming para ficheiro activada, faz streaming também
-     * para o destino escolhido.
+     * para o destino escolhido. Deve ser usado apenas para vídeo locais. 
      */
     public void play() {
 
         setPlayRate(1f);
         if (this.state == MediaPlayerState.STOPPED) {
-//            mediaListPlayer.playItem(0, true);
-            mediaListPlayer.play();
+            mediaListPlayer.playItem(0, true);
             if(vlm != null)
                 vlm.playMedia(BROADCAST_NAME);
         } else {
@@ -379,11 +389,26 @@ public class VideoViewerController {
     }
 
     /**
-     * Termina a execução do player.
+     * Permite a execução de um mrl directamente, sem ser necessário criar os
+     * objectos auxiliares, como o MediaPlayer e os descriptors. Deve ser usado
+     * sempre que se pretende efectuar o play de um vídeo remotamente.
+     * @param mrl Media URL remoto que se pretende usar.
+     */
+    //Delete: N funciona como pretendido e nem sequer tem o event handling!!!!
+//    public void play(String mrl) {
+//        jvlc.play(mrl);
+//        //TODO falta a parte do VLM
+//    }
+
+    /**
+     * Termina a execução do player. Se estiver a fazer transcoding, termina
+     * também e liberta os recursos do vlm.
      */
     public void stop() {
 
-        //TODO ver como e que o myuniportal faz stop e liberta recursos para n ter estes problemas. testar se tem os mms problemas.
+        if (state != MediaPlayerState.PLAYING && state != MediaPlayerState.PAUSED)
+            return;
+        
         try {
             mediaListPlayer.stop();
         } catch (Throwable e) {
@@ -462,6 +487,7 @@ public class VideoViewerController {
             throw new IllegalArgumentException();
         }
 
+        //TODO more config needed/possible?
         String sout = "#transcode{vcodec=" + config.getVideoCodec()
                 + ",vb=" + config.getVideoBitrate()
                 + ",scale= " + config.getVideoScale()
@@ -488,6 +514,7 @@ public class VideoViewerController {
         vlm.deleteMedia(BROADCAST_NAME);
         vlm.release();
         vlm = null;
+        //Delete vlm a null faz o mm
         streamToFile = false;
     }
 
@@ -519,11 +546,15 @@ public class VideoViewerController {
      */
     public void moveTo(long time) {
 
+        // Apenas move o vídeo se a frame0 tiver sido inicializada.
+        if (absoluteFrame0 == -1)
+            return;
+        
         long diff = time - absoluteFrame0;
         long nextTime = relativeFrame0 + diff;
         player.setTime(nextTime);
 
-        fireMediaTimeChangedEvent(new MediaTimeChangedEvent(player));
+        fireMediaTimeChangedEvent(new MediaTimeChangedEvent(this));
         refreshPausedVideo();
     }
 
@@ -539,7 +570,7 @@ public class VideoViewerController {
         long nextTime = getFrameToMove(nFrames);
         player.setTime(nextTime);
 
-        fireMediaTimeChangedEvent(new MediaTimeChangedEvent(player));
+        fireMediaTimeChangedEvent(new MediaTimeChangedEvent(this));
         refreshPausedVideo();
     }
 
@@ -618,7 +649,7 @@ public class VideoViewerController {
     public void adjustVideoPosition(int pos, int max) {
 
         //TODO falta sincronizar correctamente para que o player não sobreponha frames às definidas por acção do utilizador.
-        System.out.println("TimeChanged event tratado por " + Thread.currentThread());
+        log.fine("TimeChanged event tratado por " + Thread.currentThread());
         long newPosition = getNewVideoPosition(pos, max);
         player.setTime(newPosition);
         refreshPausedVideo();
@@ -657,11 +688,20 @@ public class VideoViewerController {
         this.absoluteFrame0 = frame0;
     }
 
+    /**
+     * Coloca a frame0 com o valor inicial.
+     */
+    private void resetFrame0() {
+        this.relativeFrame0 = -1;
+        this.absoluteFrame0 = -1;
+    }
+
     /********************************************************************
      *                  Código para event handling                      *
      ********************************************************************/
 
-    public void addMediaTimeChangedEventListener(MediaTimeChangedEventListener listener) {
+    //Delete
+    /*public void addMediaTimeChangedEventListener(MediaTimeChangedEventListener listener) {
         eventListeners.add(MediaTimeChangedEventListener.class, listener);
     }
 
@@ -675,6 +715,39 @@ public class VideoViewerController {
             if (listeners[i]==MediaTimeChangedEventListener.class) {
                 ((MediaTimeChangedEventListener)listeners[i+1]).timeChanged(evt);
             }
+        }
+    }*/
+
+    public void addMediaApplicationEventListener(MediaApplicationEventListener listener) {
+        eventListeners.add(MediaApplicationEventListener.class, listener);
+    }
+
+    public void removeMediaApplicationEventListener(MediaApplicationEventListener listener) {
+        eventListeners.remove(MediaApplicationEventListener.class, listener);
+    }
+
+    private void fireMediaTimeChangedEvent(MediaTimeChangedEvent evt) {
+
+        MediaApplicationEventListener[] listeners = eventListeners.getListeners(
+                MediaApplicationEventListener.class);
+        for (int i=0; i<listeners.length; i++) {
+            listeners[i].timeChanged(evt);
+        }
+    }
+
+    private void fireMediaStoppedEvent(MediaStoppedEvent evt) {
+        MediaApplicationEventListener[] listeners = eventListeners.getListeners(
+                MediaApplicationEventListener.class);
+        for (int i=0; i<listeners.length; i++) {
+            listeners[i].stopped(evt);
+        }
+    }
+
+    private void fireMediaNotConnectedEvent(MediaStoppedEvent evt) {
+          MediaApplicationEventListener[] listeners = eventListeners.getListeners(
+                MediaApplicationEventListener.class);
+        for (int i=0; i<listeners.length; i++) {
+            listeners[i].notConnected(evt);
         }
     }
 }

@@ -17,6 +17,9 @@ import java.util.logging.Logger;
  */
 public class MediaSetup {
 
+    private static final Logger log =
+            Logger.getLogger(VideoViewerController.class.getName());
+
     /**
      * Efectua todo o setup inicial da aplicação relacionada com o módulo de
      * vídeo, que inclui: <ul>
@@ -53,11 +56,11 @@ public class MediaSetup {
     //Delete???
     private static void printOSInfo() {
 
-        System.out.println("jna.library.path: " + System.getProperty("jna.library.path"));
+        log.fine("jna.library.path: " + System.getProperty("jna.library.path"));
 
-        System.out.println("############ OS NAME: " + System.getProperty("os.name"));
-        System.out.println("############ OS ARCH: " + System.getProperty("os.arch"));
-        System.out.println("############ OS VERSION: " + System.getProperty("os.version"));
+        log.fine("############ OS NAME: " + System.getProperty("os.name"));
+        log.fine("############ OS ARCH: " + System.getProperty("os.arch"));
+        log.fine("############ OS VERSION: " + System.getProperty("os.version"));
     }
 
     private static void loadNativeLibraries() {
@@ -79,9 +82,9 @@ public class MediaSetup {
 
         try {
             
-            System.out.println("!!!!!!!!!!!!!!! Loading " + name + "!!!!!!!!!!!!!!!!!!");
+            log.fine("!!!!!!!!!!!!!!! Loading " + name + "!!!!!!!!!!!!!!!!!!");
             System.loadLibrary(name);
-            System.out.println("!!!!!!!!!!!!!!! Done Loading " + name + "!!!!!!!!!!!!!!!!!!");
+            log.fine("!!!!!!!!!!!!!!! Done Loading " + name + "!!!!!!!!!!!!!!!!!!");
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -105,13 +108,13 @@ public class MediaSetup {
             
             //TODO verificar se a directoria já existe e não extrair nesse caso.
             String userHome = System.getProperty("user.home");
-            System.out.println("User home is " + userHome);
+            log.fine("User home is " + userHome);
 
 //            String vlcCorePath = userHome + File.separator + System.getProperty("vlc.core.destdir");
 //            System.out.println("Plugins copied to " + vlcCorePath);
 
             String pluginsPath = userHome + File.separator + System.getProperty("vlc.plugins.destdir");
-            System.out.println("Plugins copied to " + pluginsPath);
+            log.fine("Plugins copied to " + pluginsPath);
 
             File pluginsDir = new File(pluginsPath);
             // Só extrai os plugins do zip se n existir a directoria de destino
@@ -119,19 +122,19 @@ public class MediaSetup {
             if (!pluginsDir.exists()) {
                 //TODO fazer de forma a substituir sempre os ficheiros que alteraram (filesize, md5sum???)
                 String pluginsResourceName = System.getProperty("vlc.plugins.filename");
-                System.out.println("Resource name is " + pluginsResourceName);
+                log.fine("Resource name is " + pluginsResourceName);
 
                 ClassLoader loader = Thread.currentThread().getContextClassLoader();
                 InputStream pluginsFileStream = loader.getResourceAsStream(pluginsResourceName);
                 String path = saveToTempFile(pluginsFileStream);
                 pluginsFileStream.close();
 
-                System.out.println("File to be extracted: " + path);
+                log.fine("File to be extracted: " + path);
                 ZipExtractor.extractFiles(path, pluginsPath);
 
-                System.out.println("Terminou extracção de plugins");
+                log.fine("Terminou extracção de plugins");
             } else {
-                System.out.println("Não extraiu plugins!!!!");
+                log.fine("Não extraiu plugins!!!!");
             }
             
         } catch (IOException ex) {
@@ -151,7 +154,7 @@ public class MediaSetup {
         File pluginsDir = new File(System.getProperty("user.home"),
                 System.getProperty("vlc.plugins.destdir"));
 
-        System.out.println("Plugins Path = " + pluginsDir.getAbsolutePath());
+        log.fine("Plugins Path = " + pluginsDir.getAbsolutePath());
 
         int i = 0;
         //TODO ver se todos são necessários ou se deve apagar alguns ou acrescentar outros.
