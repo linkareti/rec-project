@@ -35,6 +35,7 @@ import org.videolan.jvlc.internal.LibVlc.libvlc_event_t;
 import org.videolan.jvlc.internal.LibVlc.media_player_time_changed;
 
 import com.sun.jna.Pointer;
+import org.videolan.jvlc.MediaDescriptor;
 
 
 public class MediaPlayerCallback implements LibVlcCallback
@@ -56,6 +57,16 @@ public class MediaPlayerCallback implements LibVlcCallback
     @Override
     public void callback(libvlc_event_t libvlc_event, Pointer userData)
     {
+        //Delete não parece ter comportamento adicional
+        /*if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerOpening.ordinal())
+        {
+            System.out.println("!!!!!!!!!!!!I'm opening media!!!!!!!!!!!!!");
+        }
+        else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerBuffering.ordinal())
+        {
+            System.out.println("!!!!!!!!!!!!I'm buffering!!!!!!!!!!!!!");
+        }
+        else*/
         if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPlaying.ordinal())
         {
             listener.playing(mediaPlayer);
@@ -84,7 +95,8 @@ public class MediaPlayerCallback implements LibVlcCallback
                 .readField("media_player_time_changed");
 
             // Evita que em streaming sejam lançados e tratados eventos desnecessários.
-            if (timeChanged != null && timeChanged.new_time > 0)
+//            System.out.println(Thread.currentThread());
+//            if (timeChanged != null && timeChanged.new_time > 0)
                 listener.timeChanged(mediaPlayer, timeChanged.new_time);
 
         }
