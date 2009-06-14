@@ -25,6 +25,8 @@
 
 package org.videolan.jvlc;
 
+import com.sun.jna.Native;
+import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -167,6 +169,13 @@ public class MediaPlayer
         libvlc.libvlc_media_player_set_rate(instance, rate, exception);
     }
 
+    public void setVideoOutput(Canvas canvas)
+    {
+        int drawable = (int)Native.getComponentID(canvas);
+        libvlc_exception_t exception = new libvlc_exception_t();
+        libvlc.libvlc_media_player_set_drawable(instance, drawable, exception );
+    }
+
     public boolean hasVideoOutput()
     {
         libvlc_exception_t exception = new libvlc_exception_t();
@@ -183,8 +192,10 @@ public class MediaPlayer
     {
         MediaPlayerCallback callback = new MediaPlayerCallback(this, listener);
         libvlc_exception_t exception = new libvlc_exception_t();
+        //Bruno adicionar tb o buffering e tv o opening?
         for (LibVlcEventType event : EnumSet.range(
-            LibVlcEventType.libvlc_MediaPlayerPlaying,
+            LibVlcEventType.libvlc_MediaPlayerOpening,
+//            LibVlcEventType.libvlc_MediaPlayerPlaying,
 //Bruno se em vez de time changed, for a position changed?????? altera em pausa???            LibVlcEventType.libvlc_MediaPlayerTimeChanged))
             LibVlcEventType.libvlc_MediaPlayerPositionChanged))
         {
@@ -230,7 +241,8 @@ public class MediaPlayer
         for (MediaPlayerCallback callback : callbacks)
         {
             for (LibVlcEventType event : EnumSet.range(
-                LibVlcEventType.libvlc_MediaPlayerPlaying,
+                LibVlcEventType.libvlc_MediaPlayerOpening,
+//                LibVlcEventType.libvlc_MediaPlayerPlaying,
                 LibVlcEventType.libvlc_MediaPlayerPositionChanged))
             {
                 libvlc.libvlc_event_detach(eventManager, event.ordinal(), callback, null, exception);

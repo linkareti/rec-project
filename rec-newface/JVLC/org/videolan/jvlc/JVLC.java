@@ -97,6 +97,10 @@ public class JVLC
     {
         return new Logger(this);
     }
+
+    public void setMediaList(MediaList list) {
+        mediaList = list;
+    }
     
     /**
      * Returns the mediaList.
