@@ -832,9 +832,9 @@ public class ReCApplication extends SingleFrameApplication
 		currentCustomizer.setHardwareAcquisitionConfig(getHardwareAcquisitionConfig());
 
         if ("S".equals(System.getProperty(ReCSystemProperty.REC_VIDEO_ENABLED.getName())))
-//            playMedia(ReCResourceBundle.findString(selectedApparatusConfig.getVideoLocation()));
+            playMedia(ReCResourceBundle.findString(selectedApparatusConfig.getVideoLocation()));
 //            playMedia("rtsp://elabmc.ist.utl.pt/radiare.sdp");
-            playMedia("/home/bcatarino/Documentos/NetBeansProjects/xpto.avi");
+//            playMedia("/home/bcatarino/Documentos/NetBeansProjects/xpto.avi");
 		
 		// Forward event to the view
         fireApparatusStateChanged(CONNECTED, evt);
