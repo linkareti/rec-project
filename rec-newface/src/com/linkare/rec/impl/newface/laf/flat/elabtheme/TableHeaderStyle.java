@@ -43,5 +43,7 @@ public class TableHeaderStyle extends DefaultStyle{
 		super.updatePropertyMap(map);
 		map.put(FOREGROUND, COLOR_HEADER_FG);
 		map.put(BACKGROUND, COLOR_HEADER_BG);
+		map.put("cellBorder" , EMPTY_BORDER_MARGIN_4);
+		map.put(FONT , DEFAULT_FONT.deriveFont(java.awt.Font.BOLD));
 	}
 }
