@@ -37,6 +37,7 @@ import com.linkare.rec.impl.newface.component.ApparatusCombo;
 import com.linkare.rec.impl.newface.component.ApparatusDescriptionPane;
 import com.linkare.rec.impl.newface.component.ApparatusSelectBox;
 import com.linkare.rec.impl.newface.component.ApparatusTabbedPane;
+import com.linkare.rec.impl.newface.component.ApparatusUserList;
 import com.linkare.rec.impl.newface.component.ChatBox;
 import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
 import com.linkare.rec.impl.newface.component.FlatButton;
@@ -47,6 +48,7 @@ import com.linkare.rec.impl.newface.component.UndecoratedDialog;
 import com.linkare.rec.impl.newface.component.VideoBox;
 import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
 import com.linkare.rec.impl.newface.config.Apparatus;
+import com.linkare.rec.impl.newface.userList.ExpUsersListSource;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 
@@ -99,7 +101,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         // Chat
         getChatBox().getChat().setChatServer(recApplication.getChatServer());
         getChatBox().getChat().setUserInfo(recApplication.getUserInfo());
-        
+               
         // Hide status indicators
         //lblTaskMessage.setVisible(false);
         //progressCicleTask.setVisible(false);
@@ -142,6 +144,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         interactiveBoxes.add(getApparatusDescriptionPane());
         interactiveBoxes.add(getVideoBox());
         interactiveBoxes.add(getChatBox());
+        //FIXME: Será que isto é para colocar aqui? 
+//        interactiveBoxes.add(getApparatusUserListPane());
 	}
 	
 	public void setInteractiveBoxesEnabled(boolean enabled) {
@@ -152,6 +156,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
     private LayoutContainerPane getLayoutContainerPane() {
 		return layoutContainerPane;
+	}
+    
+    private ApparatusUserList getApparatusUserListPane() {
+		return getLayoutContainerPane().getApparatusUserList();
 	}
     
     private ChatBox getChatBox() {
@@ -398,6 +406,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		// Update description pane
 		getApparatusDescriptionPane().setApparatusConfig(
 				recApplication.getSelectedApparatusConfig());
+		
+		//UserList Pane
+		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getRecFaceConfig().getUsersListRefreshRateMs());
+        getApparatusUserListPane().getModel().setExpUsersListSource((ExpUsersListSource) recApplication.getApparatusClientBean());
 		
 		// Goto customizer tab
 		getApparatusTabbedPane().setSelectedTabIndex(1);

@@ -290,6 +290,14 @@ public class ReCApplication extends SingleFrameApplication
 		setCurrentState(DISCONNECTED_OFFLINE);
 		apparatusComboBoxModel = new ApparatusComboBoxModel();
     }
+	
+	public ReCFaceConfig getRecFaceConfig(){
+		return recFaceConfig;
+	}
+	
+	public ApparatusClientBean getApparatusClientBean(){
+		return apparatusClientBean;
+	}
 
     /**
      * @param cause The unexpected error cause
@@ -503,6 +511,10 @@ public class ReCApplication extends SingleFrameApplication
             apparatusClientBean = new ApparatusClientBean();
             apparatusClientBean.addApparatusConnectorListener(this);
             
+            // User List
+            apparatusClientBean.setUsersListRefreshPeriod(recFaceConfig.getUsersListRefreshRateMs());
+            labClientBean.setUsersListRefreshPeriod(recFaceConfig.getUsersListRefreshRateMs());
+      
             // TODO Current Lab setup
 //            if(recFaceConfig.isAutoConnectLab()) {
                 currentLab = recFaceConfig.getLab().get(0);
