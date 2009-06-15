@@ -1,6 +1,7 @@
 package com.linkare.rec.impl.newface.component;
 
 import com.linkare.rec.impl.newface.ReCApplication;
+import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
 import com.linkare.rec.impl.newface.component.media.transcoding.AudioCodecs;
 import com.linkare.rec.impl.newface.component.media.transcoding.Muxers;
@@ -9,6 +10,7 @@ import com.linkare.rec.impl.newface.component.media.transcoding.VideoCodecs;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEventListener;
 import com.linkare.rec.impl.newface.component.media.MediaSetup;
+import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
 import java.awt.Window;
 import java.io.File;
 import java.text.DateFormat;
@@ -94,7 +96,18 @@ public class TestMediaPane extends AbstractContentPane {
         );
 
         this.add(vbox);
-        controller.addMediaTimeChangedEventListener(new MediaTimeChangedEventListener() {
+        controller.addMediaApplicationEventListener(new MediaApplicationEventListener() {
+
+            @Override
+            public void notConnected(MediaStoppedEvent evt) {
+                slider.setValue(0);
+            }
+
+            @Override
+            public void stopped(MediaStoppedEvent evt) {
+                slider.setValue(0);
+            }
+
             @Override
             public void timeChanged(MediaTimeChangedEvent evt) {
                 adjustSlider();
@@ -125,7 +138,7 @@ public class TestMediaPane extends AbstractContentPane {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-                //System.out.println("Vai tocar " + controller.getCurrentMedia());
+//                System.out.println("Vai tocar " + controller.getCurrentMedia());
 
                 if (!controller.hasVideoOutput())
                     setVideoOutput();
@@ -183,6 +196,7 @@ public class TestMediaPane extends AbstractContentPane {
 
                     com.linkare.rec.impl.newface.component.media.VideoBox newBox = new com.linkare.rec.impl.newface.component.media.VideoBox();
                     newBox.changeSize(800, 600);
+//                    newBox.changeVideoOutputSize(800, 600);
                     newBox.setVisible(true);
                     newBox.getVideoOutput().setSize(800, 600);
                     frame.add(newBox);
