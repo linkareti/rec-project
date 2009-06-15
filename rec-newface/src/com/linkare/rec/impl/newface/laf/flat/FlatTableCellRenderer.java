@@ -30,10 +30,10 @@ public class FlatTableCellRenderer extends JLabel implements TableCellRenderer {
 		
 		setBorder(BorderFactory.createEmptyBorder(2, 8, 2, 8));
 		
-		table.getTableHeader().setResizingAllowed(false);
-		table.getTableHeader().setReorderingAllowed(false);
-		
-		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		//Contemplated on the constructor's FlatTable
+//		table.getTableHeader().setResizingAllowed(false);
+//		table.getTableHeader().setReorderingAllowed(false);
+//		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		
 		switch(vColIndex){
 			case 0:	setHorizontalAlignment(SwingConstants.LEFT);break;
