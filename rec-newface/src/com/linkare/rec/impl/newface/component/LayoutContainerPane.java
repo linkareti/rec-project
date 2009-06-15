@@ -38,6 +38,10 @@ public class LayoutContainerPane extends GradientPane {
     	}
 		return apparatusDescriptionPane;
 	}
+	
+	public ApparatusUserList getApparatusUserList() {
+		return apparatusTabbedPane.getApparatusUserList();
+	}
     
     public ApparatusTabbedPane getApparatusTabbedPane() {
     	return apparatusTabbedPane;
@@ -117,5 +121,7 @@ public class LayoutContainerPane extends GradientPane {
     private javax.swing.JSplitPane splitLeft;
     private javax.swing.JSplitPane splitRight;
     // End of variables declaration//GEN-END:variables
+
+
 
 }

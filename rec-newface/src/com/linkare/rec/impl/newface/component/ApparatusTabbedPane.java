@@ -25,6 +25,10 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
     	return descriptionPane;
     }
     
+    public ApparatusUserList getApparatusUserList(){
+    	return apparatusUserList;
+    }
+    
     public void addCustomizerComponent(JComponent controller) {
     	controllerHolderScrollPane.setViewportView(controller);
     }
@@ -48,6 +52,7 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
         controllerHolderScrollPane = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        apparatusUserList = new com.linkare.rec.impl.newface.component.ApparatusUserList();
         experimentActionBar = new com.linkare.rec.impl.newface.component.ExperimentActionBar();
 
         setName("Form"); // NOI18N
@@ -72,14 +77,14 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
             controllerHolderPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controllerHolderPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                 .addContainerGap())
         );
         controllerHolderPaneLayout.setVerticalGroup(
             controllerHolderPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controllerHolderPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -92,26 +97,34 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 493, Short.MAX_VALUE)
+            .addGap(0, 509, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addGap(0, 392, Short.MAX_VALUE)
         );
 
         tabbedPane.addTab(resourceMap.getString("jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
 
         jPanel2.setName("jPanel2"); // NOI18N
 
+        apparatusUserList.setName("apparatusUserList1"); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 493, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(apparatusUserList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(apparatusUserList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab(resourceMap.getString("jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
@@ -124,6 +137,7 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.linkare.rec.impl.newface.component.ApparatusUserList apparatusUserList;
     private javax.swing.JPanel controllerHolderPane;
     private javax.swing.JScrollPane controllerHolderScrollPane;
     private com.linkare.rec.impl.newface.component.ApparatusDescriptionPane descriptionPane;

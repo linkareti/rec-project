@@ -44,8 +44,10 @@ public class FlatTable extends JTable{
         }
 		
        	setRowHeight(30);
-	}
-	
+		getTableHeader().setResizingAllowed(false);
+		getTableHeader().setReorderingAllowed(false);
+		setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    }	
 	public String getUIClassID() {
 		return uiClassID ;
 	}
@@ -61,7 +63,7 @@ public class FlatTable extends JTable{
 		for (int i = 0; i < getColumnCount(); i++) {
 			tc = getColumnModel().getColumn(i);
 //			tc.setCellRenderer(new FlatTableCellRenderer());
-//			tc.setHeaderRenderer(new FlatTableCellRenderer());
+			tc.setHeaderRenderer(new FlatTableCellRenderer());
 		}
 	}
 	
@@ -78,5 +80,10 @@ public class FlatTable extends JTable{
 		DefaultTableModel model = new DefaultTableModel(data,columnNames);
 		setTableModel(model);
 	}
+	
+	public boolean isCellEditable(int row, int column)
+	{
+		return false;
+	} 
 }
 
