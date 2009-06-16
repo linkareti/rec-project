@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/ReC/rec-newface/src/com/linkare/rec/impl/newface/ReCApplication.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.linkare.rec.impl.newface.ReCApplication"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="ReC"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DReCFaceConfig=file:rec-newface/etc/ReCFaceConfig.xml&#13;&#10;-DReCBaseUIConfig=file:etc/ReCBaseUIConfig.xml -Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -DReC.MultiCastController.BindName=MultiCastController -DReC.MultiCastController.InitRef=MultiCastController -Dopenorb.config=${resource_loc:/ReC/etc/OpenORB.xml}&#13;&#10;-Dopenorb.profile=ReCClient -Djava.util.logging.config.file=etc/logging.properties&#13;&#10;-Dvlc.plugins.filename=blabla.zip&#13;&#10;-Dvlc.plugins.destdir=file:///C:/TEMP"/>
+</launchConfiguration>
