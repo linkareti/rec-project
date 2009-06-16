@@ -14,6 +14,9 @@ import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.impl.client.chat.IChatServer;
+import com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener;
+import com.linkare.rec.impl.client.experiment.ExpUsersListEvent;
+import com.linkare.rec.impl.client.experiment.ExpUsersListSource;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**

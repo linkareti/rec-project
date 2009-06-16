@@ -62,7 +62,7 @@ public class FlatTable extends JTable{
 		setModel(tm);	
 		for (int i = 0; i < getColumnCount(); i++) {
 			tc = getColumnModel().getColumn(i);
-//			tc.setCellRenderer(new FlatTableCellRenderer());
+			tc.setCellRenderer(new FlatTableCellRenderer());
 			tc.setHeaderRenderer(new FlatTableCellRenderer());
 		}
 	}

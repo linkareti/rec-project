@@ -65,9 +65,14 @@ import com.sun.xml.internal.bind.v2.model.impl.ModelBuilder;
  */
 public class FlatTableUI extends BasicTableUI {
 
-	private static final Color SELECTION_ROW_COLOR = new Color(0xF4F3A3);
-	private static final Color EVEN_ROW_COLOR = new Color(0xF6F9F8);
+	public static final Color SELECTION_ROW_COLOR = new Color(0xF4F3A3);
+	public static final Color EVEN_ROW_COLOR = new Color(0xF6F9F8);
 	private PropertyChangeListener fAncestorPropertyChangeListener = createAncestorPropertyChangeListener();
+	public static final Dimension INTERCELL_SPACING=new Dimension(0, 4);
+	/**
+	 * 
+	 */
+	private static final int INTERCELL_SPACING_HALF_HEIGHT = (int) (INTERCELL_SPACING.getHeight()/2);
 
 	public static ComponentUI createUI(JComponent c) {
 		return new FlatTableUI();
@@ -83,9 +88,12 @@ public class FlatTableUI extends BasicTableUI {
 		table.setShowVerticalLines(false);
 		table.setShowHorizontalLines(false);
 		table.setShowGrid(false);
-		table.setIntercellSpacing(new Dimension(0, 0));
+		table.setIntercellSpacing(INTERCELL_SPACING);
+		
+		table.setOpaque(false);
 		
 		table.addPropertyChangeListener("ancestor",	fAncestorPropertyChangeListener);
+		
 		
 	}
 
@@ -103,8 +111,11 @@ public class FlatTableUI extends BasicTableUI {
 		// JViewport's parent is
 		// a JScrollPane, then install the custom BugFixedViewportLayout.
 		if (table.getParent() instanceof JViewport	&& table.getParent().getParent() instanceof JScrollPane) {
-			JScrollPane scrollPane = (JScrollPane) table.getParent().getParent();
+			JViewport viewPort = (JViewport) table.getParent();
+			viewPort.setOpaque(false);
+			JScrollPane scrollPane = (JScrollPane) viewPort.getParent();
 			scrollPane.getViewport().setLayout(new BugFixedViewportLayout());
+			LookAndFeel.installProperty(scrollPane, "opaque", Boolean.FALSE);
 		}
 	}
 
@@ -123,11 +134,13 @@ public class FlatTableUI extends BasicTableUI {
 		// rows in the table,
 		// start the counter at 0.
 		int currentRow = rowAtPoint < 0 ? 0 : rowAtPoint;
+		int rowHeight = table.getRowHeight();
 		while (topY < g.getClipBounds().y + g.getClipBounds().height) {
-			int bottomY = topY + table.getRowHeight();
+			
 			g.setColor(getRowColor(currentRow));
-			g.fillRect(g.getClipBounds().x, topY, g.getClipBounds().width,	bottomY);
-			topY = bottomY;
+			g.fillRect(g.getClipBounds().x, topY+INTERCELL_SPACING_HALF_HEIGHT, g.getClipBounds().width,rowHeight-INTERCELL_SPACING.height);
+			
+			topY += rowHeight;
 			currentRow++;
 		}
 

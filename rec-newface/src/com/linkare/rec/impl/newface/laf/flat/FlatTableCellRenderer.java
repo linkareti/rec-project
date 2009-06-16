@@ -1,34 +1,60 @@
 package com.linkare.rec.impl.newface.laf.flat;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.TableCellRenderer;
 
+import com.linkare.rec.impl.newface.laf.flat.elabtheme.DefaultStyle;
 
-public class FlatTableCellRenderer extends JLabel implements TableCellRenderer {
+import sun.swing.DefaultLookup;
+
+
+public class FlatTableCellRenderer implements TableCellRenderer {
 	// This method is called each time a column header
 	// using this renderer needs to be rendered.
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int rowIndex, int vColIndex) {
+		
+//		JPanel pnl=new JPanel();
+//		pnl.setOpaque(false);
+//		pnl.setLayout(new BorderLayout());
+//		
+//		pnl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		
+		JLabel lbl=new JLabel();
+		
+		
 		// 'value' is column header value of column 'vColIndex'
 		// rowIndex is always -1
 		// isSelected is always false
 		// hasFocus is always false
 
 		// Configure the component with the specified value
-		setText(value.toString());
-
+		lbl.setText(value.toString());
+		
 		// Set tool tip if desired
-		setToolTipText((String)value);
+		lbl.setToolTipText((String)value);
 		
-		setFont(getFont().deriveFont(java.awt.Font.BOLD));
+		lbl.setFont(lbl.getFont().deriveFont(java.awt.Font.BOLD));
 		
-		setBorder(BorderFactory.createEmptyBorder(2, 8, 2, 8));
+		lbl.setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 8));
+		
+		if(rowIndex==-1)
+		{
+			lbl.setBorder(DefaultStyle.EMPTY_BORDER_MARGIN_4);
+		}
+		
+		
+		lbl.setOpaque(isSelected);
+		lbl.setBackground(FlatTableUI.SELECTION_ROW_COLOR);
+			
 		
 		//Contemplated on the constructor's FlatTable
 //		table.getTableHeader().setResizingAllowed(false);
@@ -36,13 +62,14 @@ public class FlatTableCellRenderer extends JLabel implements TableCellRenderer {
 //		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		
 		switch(vColIndex){
-			case 0:	setHorizontalAlignment(SwingConstants.LEFT);break;
-			case 1: setHorizontalAlignment(SwingConstants.RIGHT);break;
-			default: setHorizontalAlignment(SwingConstants.LEFT);
+			case 0:	lbl.setHorizontalAlignment(SwingConstants.LEFT);break;
+			case 1: lbl.setHorizontalAlignment(SwingConstants.RIGHT);break;
+			default: lbl.setHorizontalAlignment(SwingConstants.LEFT);
 		}
 
 		// Since the renderer is a component, return itself
-		return this;
+//		pnl.add(lbl,BorderLayout.CENTER);
+		return lbl;
 	}
 
 	// The following methods override the defaults for performance reasons
