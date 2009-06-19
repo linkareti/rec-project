@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by pqueiro on 3 de Abril de 2005, 06:54 -->
+
+<HardwareInfo id="BIOT_SAVART_V1.0" familiarName="Biot-Savart" name="Biot-Savart" version="01" manufacturer="Elab - UTL" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Esta experiencia serve para calcular o campo magnetico gerado por dois fios condutores
+        percorridos por uma corrente i1 e i2 de acordo com a lei de Biot-Savart.
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+            
+    <parameter name="i1_ini" type="ContinuousValue" value="0.6">
+        <selection-list>
+            <value order="1">-10</value>
+            <value order="2">10</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="i1_fin" type="ContinuousValue" value="-0.2">
+        <selection-list>
+            <value order="1">-10</value>
+            <value order="2">10</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="i2_ini" type="ContinuousValue" value="-0.2">
+        <selection-list>
+            <value order="1">-10</value>
+            <value order="2">10</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="i2_fin" type="ContinuousValue" value="0.6">
+        <selection-list>
+            <value order="1">-10</value>
+            <value order="2">10</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="dist" type="ContinuousValue" value="0.1">
+        <selection-list>
+            <value order="1">0.01</value>
+            <value order="2">0.5</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="xpto" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">-0.15</value>
+            <value order="2">0.15</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="ypto" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">-0.15</value>
+            <value order="2">0.15</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+	
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">500</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">300</Frequency>
+    
+    <sampling-scale>
+        <min-samples>10</min-samples>
+        <max-samples>500</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="T. Relativo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo Relativo" physicsunitname="segundos" physicsunitsymbol="s" multiplier="milli" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">100000</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>                  
+    <ChannelInfo name="Campo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Campo" physicsunitname="Tesla" physicsunitsymbol="T" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Campo 1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Campo 1" physicsunitname="Tesla" physicsunitsymbol="T" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Campo 2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Campo 2" physicsunitname="Tesla" physicsunitsymbol="T" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1000.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1000.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Intensidade 1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Intensidade 1" physicsunitname="Ampere" physicsunitsymbol="A" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-20.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">20.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Intensidade 2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Intensidade 2" physicsunitname="Ampere" physicsunitsymbol="A" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-20.0</PhysicsVal></min>
+            <max><PhysicsVal type="float">20.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="data2d" independent="false" direction="CHANNEL_INPUT">
+        <scale label="data" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+ </HardwareInfo>
