@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by E.An on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="INTERFERENCIA_YOUNG_V1.0" familiarName="Interferencia-Young" name="Interferencia-Young" version="01" manufacturer="Elab - UTL" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Este experiencia virtual permite ao utilizador reproduzir a experiencia de interferencia de ondas electromagneticas de comprimento de onda bem defenido na gama do espectro visivel.
+        Pode-se deste modo observar os padroes de interferencia registados pela interferencia de ondas profenientes de duas fontes de luz coerentes (duas fendas) e avaliar tambem o grafico da intensidade da onda resultante da interferencia no plano de projeccao.
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+            
+    <parameter name="lambda" type="ContinuousValue" value="580">
+        <selection-list>
+            <value order="1">380</value>
+            <value order="2">780</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="dfendas" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">0.1</value>
+            <value order="2">6</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="dplanos" type="ContinuousValue" value="5">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">6</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+     <parameter name="lpadrao" type="ContinuousValue" value="4">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">20</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    
+
+    <!-- os proximos parametros não vamos utilizar nesta experiência, servem só como exemplo do que existe!-->
+    <!--<parameter name="Filter1" type="SelectionListValue" value="Pink">
+        <selection-list>
+            <value order="1">Pink</value>
+            <value order="2">Yellow</value>
+            <value order="3">Green</value>
+            <value order="4">Transparent</value>
+        </selection-list>
+    </parameter>  
+    <parameter name="calibrar" type="OnOffValue" value="0">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">0</value>
+        </selection-list>
+    </parameter>-->
+    <!-- com o BlackBoxValue podem passar o que quiserem, e' para ser usado so' em casos MUITO especiais!!-->
+    <!--<parameter name="FlowChart" type="BlackBoxValue" value="none">  
+    </parameter> -->
+    <!--FIM DOS PARAMETROS EXEMPLO-->
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">50</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1000</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">100</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>2000</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="Posicao" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Posicao em X" physicsunitname="milimetros" physicsunitsymbol="mm" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-6</PhysicsVal></min>
+            <max><PhysicsVal type="float">6</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.0009</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1E-7</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>                  
+    <ChannelInfo name="Intensidade" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Intensidade" physicsunitname="none" physicsunitsymbol="%" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">1</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.00001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1E-7</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+
+    <!--// byte[] Imagem do Padrao -->
+    <ChannelInfo name="imageIcon" independent="false" direction="CHANNEL_INPUT">
+        <scale label="imageIcon" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    
+ </HardwareInfo>

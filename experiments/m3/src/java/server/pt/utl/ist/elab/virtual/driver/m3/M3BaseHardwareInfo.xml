@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : M3BaseHardwareInfo.xml
+    Created on : 16 de Fevereiro de 2005, 22:35
+    Author     : n0dP
+    Description:
+        Purpose of the document follows.
+-->
+
+<HardwareInfo id="MOLAS3_V1.0" familiarName="Molas-3" name="Molas-3" version="01" manufacturer="Elab - UTL" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Observe-se o comportamento de 3 molas ligadas entre si por uma massa, quando esta é perturbada.
+        <b></b>
+        ]]>
+    </description>
+            
+    <parameter name="massa" type="ContinuousValue" value="0.01">
+        <selection-list>
+            <value order="1">0.01</value>
+            <value order="2">10</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="k1" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">10</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="k2" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">10</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="k3" type="ContinuousValue" value="1">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">10</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="x0" type="ContinuousValue" value="5">
+        <selection-list>
+            <value order="1">-30</value>
+            <value order="2">30</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    <parameter name="y0" type="ContinuousValue" value="5">
+        <selection-list>
+            <value order="1">-30</value>
+            <value order="2">30</value>
+	    <value order="3">0.01</value>
+        </selection-list>
+    </parameter>
+    
+    <!-- Tempo entre amostras -->
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">50</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">500</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">100</Frequency>
+    
+    <!-- Numero de amostras -->
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>500</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="Tempo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo" physicsunitname="segundos" physicsunitsymbol="s" multiplier="milli" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">100000</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>                  
+    <ChannelInfo name="Posicao" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Posicao" physicsunitname="Metro" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">50.0</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Velocidade" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Velocidade" physicsunitname="m/s" physicsunitsymbol="m/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">400</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="x" independent="false" direction="CHANNEL_INPUT">
+        <scale label="x" physicsunitname="m" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">400</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="y" independent="false" direction="CHANNEL_INPUT">
+        <scale label="y" physicsunitname="m" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">400</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+ </HardwareInfo>

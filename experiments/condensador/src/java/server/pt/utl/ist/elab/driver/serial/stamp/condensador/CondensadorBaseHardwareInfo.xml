@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_CONDENSADOR_STAMP_V01" familiarName="Condensador" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    
+    <parameter name="UserPosLow" type="ContinuousValue" value="2">
+        <selection-list>
+            <value order="1">2</value>
+            <value order="2">5</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="UserPosHigh" type="ContinuousValue" value="5">
+        <selection-list>
+            <value order="1">2</value>
+            <value order="2">5</value>
+            <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    
+    
+<!--    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">10000</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="milli">10</Frequency>
+-->    
+
+    <!-- 
+        Alterar para valores correctos 
+    -->
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>241</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <!-- 
+        Direction="CHANNEL_INPUT" ???
+        Verificar se a frequência deve estar em Hz
+        Alterar valores máximos e mínimos para os correctos
+        Alterar multiplicador da frequência
+        Alterar erro
+    -->
+    <ChannelInfo name="Frequência própria" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Frequência própria [Hz]" physicsunitname="Hertz" physicsunitsymbol="Hz" multiplier="milli" selected="true">
+            <min><PhysicsVal type="int">800</PhysicsVal></min>
+            <max><PhysicsVal type="int">2500</PhysicsVal></max>
+            <step><PhysicsVal type="int">10</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">10</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    
+    <!--
+        Ṽerificar nome posição
+        Alterar posições
+        Alterar erro
+    -->
+    <ChannelInfo name="Posição" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Posição [cm]" physicsunitname="metro" physicsunitsymbol="m" multiplier="centi" selected="true">
+            <min><PhysicsVal type="float">2</PhysicsVal></min>
+            <max><PhysicsVal type="float">5</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.001</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.20</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+
+</HardwareInfo>
+

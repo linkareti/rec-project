@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<HardwareInfo id="CARGAS3D_V1.0" familiarName="Cargas3D" name="Cargas3D" version="01" manufacturer="Elab - UTL" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Simule-se o campo eléctrico criado por um número finito de cargas pontuais e estáticas.
+        <b></b>
+        ]]>
+    </description>
+            
+    <parameter name="Sistema" type="BlackBoxValue" value="none">  
+    </parameter>
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">50</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">500</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">100</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>500</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+          
+    <ChannelInfo name="Linhas" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Linhas" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    
+    <ChannelInfo name="Superficies" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Superficies" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+ </HardwareInfo>

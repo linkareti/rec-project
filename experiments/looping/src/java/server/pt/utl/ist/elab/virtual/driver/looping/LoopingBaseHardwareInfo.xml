@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="LOOPING_V1.0" familiarName="Looping" name="Looping" version="01" manufacturer="Elab - UTL" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Com esta experiência pode-se simular um percurso semelhante ao de uma montanha russa, que inclui um descida, 
+        uma lomba e um looping, podendo as dimensões destes variar. Pretende-se estudar a conservação da energia mecânica 
+        e as accelerações sentidas por um passageiro dentro do carro da montanha russa.
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+            
+    <parameter name="xini" type="ContinuousValue" value="0.1">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">15</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="vini" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">20</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="h1" type="ContinuousValue" value="15">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">100</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="h2" type="ContinuousValue" value="10">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">100</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="g" type="ContinuousValue" value="9.8">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">98</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="r" type="ContinuousValue" value="4">
+        <selection-list>
+            <value order="1">3</value>
+            <value order="2">50</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+
+    <!-- os proximos parametros não vamos utilizar nesta experiência, servem só como exemplo do que existe!-->
+    <!--<parameter name="Filter1" type="SelectionListValue" value="Pink">
+        <selection-list>
+            <value order="1">Pink</value>
+            <value order="2">Yellow</value>
+            <value order="3">Green</value>
+            <value order="4">Transparent</value>
+        </selection-list>
+    </parameter>  
+    <parameter name="calibrar" type="OnOffValue" value="0">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">0</value>
+        </selection-list>
+    </parameter>-->
+    <!-- com o BlackBoxValue podem passar o que quiserem, e' para ser usado so' em casos MUITO especiais!!-->
+    <!--<parameter name="FlowChart" type="BlackBoxValue" value="none">  
+    </parameter> -->
+    <!--FIM DOS PARAMETROS EXEMPLO-->
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">50</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">500</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">100</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>500</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="T. Relativo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo Relativo" physicsunitname="segundos" physicsunitsymbol="s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">100000</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>                
+      <ChannelInfo name="PosicaoX" independent="false" direction="CHANNEL_INPUT">
+        <scale label="PosicaoX" physicsunitname="Metro" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">110</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.51</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>  
+      
+    <ChannelInfo name="PosicaoY" independent="false" direction="CHANNEL_INPUT">
+        <scale label="PosicaoY" physicsunitname="Metro" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">100</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="KE" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Energia Cinetica" physicsunitname="J/kg" physicsunitsymbol="J/kg" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">10000</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="PE" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Energia Potencial" physicsunitname="J/kg" physicsunitsymbol="J/kg" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">10000</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+     <ChannelInfo name="ME" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Energia Mecanica" physicsunitname="J/kg" physicsunitsymbol="J/kg" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">0</PhysicsVal></min>
+            <max><PhysicsVal type="float">10000</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+ 
+ </HardwareInfo>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by pqueiro on 3 de Abril de 2005, 06:54 -->
+
+<HardwareInfo id="DISCOS_INERCIA_V1.0" familiarName="Discos-Inercia" name="Discos-Inercia" version="01" manufacturer="Elab - UTL" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Esta experiencia serve para simular a descida de dois discos de diferente 
+        momento de inercia ao longo de um plano inclinado.
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+            
+    <parameter name="r1i" type="ContinuousValue" value="0.15">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">0.15</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="r1e" type="ContinuousValue" value="0.15">
+        <selection-list>
+            <value order="1">0.15</value>
+            <value order="2">0.30</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="r2i" type="ContinuousValue" value="0">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">0.15</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="r2e" type="ContinuousValue" value="0.15">
+        <selection-list>
+            <value order="1">0.15</value>
+            <value order="2">0.30</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="m1" type="ContinuousValue" value="0.5">
+        <selection-list>
+            <value order="1">0.1</value>
+            <value order="2">1</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="m2" type="ContinuousValue" value="0.5">
+        <selection-list>
+            <value order="1">0.1</value>
+            <value order="2">1</value>
+	    <value order="3">0.001</value>
+        </selection-list>
+    </parameter>
+    <parameter name="inc" type="ContinuousValue" value="20">
+        <selection-list>
+            <value order="1">0</value>
+            <value order="2">45</value>
+	    <value order="3">0.1</value>
+        </selection-list>
+    </parameter>
+	
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">20</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">50</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">30</Frequency>
+    
+    <sampling-scale>
+        <min-samples>10</min-samples>
+        <max-samples>150</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="T. Relativo" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Tempo Relativo" physicsunitname="segundos" physicsunitsymbol="s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1</PhysicsVal></min>
+            <max><PhysicsVal type="float">10000</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">1</PhysicsVal></errordefault>
+        </scale>  
+    </ChannelInfo>
+    <ChannelInfo name="x1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Deslocamento X 1" physicsunitname="metro" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1</PhysicsVal></min>
+            <max><PhysicsVal type="float">1E15</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="x2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Deslocamento X 2" physicsunitname="metro" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1</PhysicsVal></min>
+            <max><PhysicsVal type="float">1E15</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="y1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Deslocamento Y 1" physicsunitname="metro" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1E15</PhysicsVal></min>
+            <max><PhysicsVal type="float">1E15</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="y2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Deslocamento Y 2" physicsunitname="metro" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1E15</PhysicsVal></min>
+            <max><PhysicsVal type="float">1E15</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="vCM1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Velocidade 1" physicsunitname="metros/segundo" physicsunitsymbol="m/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1</PhysicsVal></min>
+            <max><PhysicsVal type="float">1E15</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="vCM2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Velocidade 2" physicsunitname="metros/segundo" physicsunitsymbol="m/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1</PhysicsVal></min>
+            <max><PhysicsVal type="float">1E15</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="VelAngular1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Velocidade Angular 1" physicsunitname="rad/segundo" physicsunitsymbol="rad/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1</PhysicsVal></min>
+            <max><PhysicsVal type="float">1E15</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="VelAngular2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Velocidade Angular 2" physicsunitname="rad/segundo" physicsunitsymbol="rad/s" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1</PhysicsVal></min>
+            <max><PhysicsVal type="float">1E15</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="EspacoPercorrido1" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Espaco Percorrido 1" physicsunitname="metro" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1</PhysicsVal></min>
+            <max><PhysicsVal type="float">1E15</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="EspacoPercorrido2" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Espaco Percorrido 2" physicsunitname="metro" physicsunitsymbol="m" multiplier="none" selected="true">
+            <min><PhysicsVal type="float">-1</PhysicsVal></min>
+            <max><PhysicsVal type="float">1E15</PhysicsVal></max>
+            <step><PhysicsVal type="float">0.01</PhysicsVal></step>
+            <errordefault><PhysicsVal type="float">0.05</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+ </HardwareInfo>
