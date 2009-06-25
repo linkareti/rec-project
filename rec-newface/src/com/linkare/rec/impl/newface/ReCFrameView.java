@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -28,9 +27,7 @@ import org.jdesktop.application.TaskMonitor;
 
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
-import com.linkare.rec.impl.client.customizer.CustomizerUIUtil;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent;
 import com.linkare.rec.impl.newface.component.AbstractContentPane;
 import com.linkare.rec.impl.newface.component.ApparatusCombo;
@@ -88,7 +85,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         
         // Set frame properties
         getFrame().setPreferredSize(DEFAULT_FRAME_SIZE);
-        getFrame().setResizable(false);
+        //getFrame().setResizable(false); 
         getFrame().setGlassPane(glassPane);
         
         // Add Apparatus Combo Item listener
@@ -100,7 +97,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         // Chat
         getChatBox().getChat().setChatServer(recApplication.getChatServer());
         getChatBox().getChat().setUserInfo(recApplication.getUserInfo());
-               
+        
         // Hide status indicators
         //lblTaskMessage.setVisible(false);
         //progressCicleTask.setVisible(false);
@@ -143,7 +140,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         interactiveBoxes.add(getApparatusDescriptionPane());
         interactiveBoxes.add(getVideoBox());
         interactiveBoxes.add(getChatBox());
-        //FIXME: Será que isto é para colocar aqui? 
+        //FIXME: Será que isto é para colocar aqui?
 //        interactiveBoxes.add(getApparatusUserListPane());
 	}
 	
@@ -389,16 +386,22 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private void connectToApparatus() {
 
-        if ("S".equals(System.getProperty(ReCApplication.ReCSystemProperty.REC_VIDEO_ENABLED.getName()))) {
+        if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED) {
             getVideoBox().initializeVideoOutput();
             recApplication.setVideoOutput(getVideoBox().getVideoOutput());
         }
         
 		getApparatusSelectBox().toggleApparatusStateActionData(false);
+		getApparatusSelectBox().getProgressCicle().stop();
+		
 		getApparatusCombo().setEnabled(false);
+		
 		getLayoutContainerPane().enableApparatusTabbedPane();
 		
-		// Add costumizer component
+		updateStatus(getResourceMap().getString("lblTaskMessage.connectedToApparatus.text",
+				recApplication.getCurrentApparatusHardwareFamiliarName()));
+		
+		// Add customizer component
 		getApparatusTabbedPane().addCustomizerComponent(
 				recApplication.getCurrentCustomizer().getCustomizerComponent());
 		
@@ -407,20 +410,29 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 				recApplication.getSelectedApparatusConfig());
 		
 		//UserList Pane
-		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getRecFaceConfig().getUsersListRefreshRateMs());
-        getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
+		// CRITICAL João: Verificar tempo e carga de execução destas chamadas e
+		// identificar se é uma situção com que temos mesmo de viver.
+//		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getRecFaceConfig().getUsersListRefreshRateMs());
+//		getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
 		
 		// Goto customizer tab
 		getApparatusTabbedPane().setSelectedTabIndex(1);
-
 	}
 	
 	private void disconnectFromApparatus() {
-        if ("S".equals(System.getProperty(ReCApplication.ReCSystemProperty.REC_VIDEO_ENABLED.getName())))
+        if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED) {
             getVideoBox().destroyVideoOutput();
+        }
+        
 		getApparatusSelectBox().toggleApparatusStateActionData(true);
+		getApparatusSelectBox().getProgressCicle().stop();
+		
 		getApparatusCombo().setEnabled(true);
+		
 		getLayoutContainerPane().disableApparatusTabbedPane();
+		
+		updateStatus(getResourceMap().getString("lblTaskMessage.connectedToLab.text",
+				recApplication.getCurrentLabName()));
 	}
 	
 
@@ -601,8 +613,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     // End of variables declaration//GEN-END:variables
 
 //    private final Timer messageTimer;
-    private final Icon idleIcon;
-    private final Icon[] busyIcons = new Icon[15];
+    public static Icon idleIcon;
+    public static Icon[] busyIcons = new Icon[15];
     private final int busyAnimationRate;
 
     private JDialog aboutBox;

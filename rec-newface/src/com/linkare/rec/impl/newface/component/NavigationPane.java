@@ -11,11 +11,9 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import com.linkare.rec.impl.newface.ReCFrameView;
-
 /**
  *
- * @author iies-consultor922
+ * @author Henrique Fernandes
  */
 public class NavigationPane extends javax.swing.JPanel {
 

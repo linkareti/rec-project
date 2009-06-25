@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/rec-newface/src/com/linkare/rec/impl/newface/ReCApplication.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.linkare.rec.impl.newface.ReCApplication"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="rec-newface"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DReCFaceConfig=file:etc/ReCFaceConfig.xml -DReCBaseUIConfig=file:etc/ReCBaseUIConfig.xml -Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -DReC.MultiCastController.BindName=MultiCastController -DReC.MultiCastController.InitRef=MultiCastController -Dopenorb.config=file:etc/OpenORB.xml -Dopenorb.profile=ReCClient -Djava.util.logging.config.file=etc/logging.properties"/>
+</launchConfiguration>

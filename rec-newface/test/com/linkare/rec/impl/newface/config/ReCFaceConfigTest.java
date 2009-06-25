@@ -24,6 +24,7 @@ public class ReCFaceConfigTest {
 		
 		ReCFaceConfig unmarshall = ReCFaceConfig.unmarshall(new FileInputStream(XML_FILE));
 		assertNotNull(unmarshall);
+		
 	}
 
 }

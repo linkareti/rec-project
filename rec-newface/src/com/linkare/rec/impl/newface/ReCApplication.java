@@ -146,6 +146,14 @@ public class ReCApplication extends SingleFrameApplication
         mediaController.stop();
         mediaController.releaseMedia();
     }
+    
+    /**
+     * Temporary flag that enables video development.
+     * 
+     * FIXME Remove flag after video testing.
+     */
+    public static boolean IS_VIDEO_DEVELOPMENT_ENABLED = 
+    	"yes".equals(System.getProperty(ReCSystemProperty.VIDEO_DEVELOPMENT_ENABLED.getName())); 
 
 	/**
 	 * Holds the ReC System properties. Maps the property name and the
@@ -161,9 +169,11 @@ public class ReCApplication extends SingleFrameApplication
 		OPENORB_PROFILE("openorb.profile", true),
 		ORG_OMG_CORBA_ORBCLASS("org.omg.CORBA.ORBClass", true),
 		ORG_OMG_CORBA_ORBSINGLETONCLASS("org.omg.CORBA.ORBSingletonClass", true),
-        REC_VIDEO_ENABLED("video.enabled", false),
-        VLC_PLUGINS_FILENAME("vlc.plugins.filename", true),
-        VLC_PLUGINS_DESTDIR("vlc.plugins.destdir", true);
+        
+		VIDEO_DEVELOPMENT_ENABLED("video.development.enabled", false), // FIXME Remove after video tests
+		
+        VLC_PLUGINS_FILENAME("vlc.plugins.filename", IS_VIDEO_DEVELOPMENT_ENABLED),
+        VLC_PLUGINS_DESTDIR("vlc.plugins.destdir", IS_VIDEO_DEVELOPMENT_ENABLED);
 
 
 		String name;
@@ -355,8 +365,12 @@ public class ReCApplication extends SingleFrameApplication
 	}
 
     public String getCurrentLabName() {
-		return ReCResourceBundle.findStringOrDefault(currentLab.getDisplayStringBundleKey(), "<empty>");
+		return ReCResourceBundle.findStringOrDefault(currentLab.getDisplayStringBundleKey(), "");
 	}
+    
+    public String getCurrentApparatusHardwareFamiliarName() {
+    	return currentApparatus.getHardwareInfo().getFamiliarName();
+    }
     
 	public NavigationWorkflow getCurrentState() {
 		return currentState;
@@ -616,7 +630,10 @@ public class ReCApplication extends SingleFrameApplication
     		log.info("Connect user " + getUsername());
     		labClientBean.connect(currentLab.getLocation());
 
-            initializeMediaController();
+			// TODO Verify if this is the best place to do it...
+    		if (IS_VIDEO_DEVELOPMENT_ENABLED) {
+    			initializeMediaController();
+    		}
     	}
     }
 
@@ -663,30 +680,20 @@ public class ReCApplication extends SingleFrameApplication
     public void toggleApparatusState() {
     	if (currentState.canGoTo(APPARATUS_CONNECT_PERFORMED)) {
     		setCurrentState(APPARATUS_CONNECT_PERFORMED);
-    		
+            
     		apparatusClientBean.getUserInfo().setUserName(getUsername());
             apparatusClientBean.getUserInfo().setPassword(getUsername());
-            
             apparatusClientBean.setApparatus(getCurrentApparatus());
             
-//            if(isEnterApparatusRoom())
-//            {
-//                chatFrame.setChatServer(apparatusClientBean);
-//                chatFrame.setUser(new com.linkare.rec.acquisition.UserInfo(loginFrame.getUsername()));
-//            }
-            
-//            new Thread()
-//            {
-//                public void run()
-//                {
-                    apparatusClientBean.connect();
-//                }
-//            }.start();
-
+            new Thread() {
+                public void run() {
+                    apparatusClientBean.connect(); // Background task
+                }
+            }.start();
+                    
     	} else if (currentState.canGoTo(APPARATUS_DISCONNECT_PERFORMED)) {
     		
     		apparatusClientBean.disconnect();
-
     	}
     }
     
@@ -730,7 +737,7 @@ public class ReCApplication extends SingleFrameApplication
         }
         
         // Forward event to the view
-         fireLabStateChanged(evt);
+        fireLabStateChanged(evt);
         
     }
 
@@ -764,6 +771,7 @@ public class ReCApplication extends SingleFrameApplication
     // -------------------------------------------------------------------------
     // Video events
 
+	// FIXME Catarino: Define video events...
     public enum VideoEvent {
         
     }
@@ -802,7 +810,7 @@ public class ReCApplication extends SingleFrameApplication
             log.fine("ApparatusConnectorEvent " + evt);
         }
 		// TODO Auto-generated method stub
-
+		
 		// Forward event to the view
         fireApparatusStateChanged(CONNECTING, evt);
 	}
@@ -830,11 +838,10 @@ public class ReCApplication extends SingleFrameApplication
 		// Init customizer
 		currentCustomizer.setHardwareInfo(getCurrentApparatus().getHardwareInfo());
 		currentCustomizer.setHardwareAcquisitionConfig(getHardwareAcquisitionConfig());
-
-        if ("S".equals(System.getProperty(ReCSystemProperty.REC_VIDEO_ENABLED.getName())))
+		
+        if (IS_VIDEO_DEVELOPMENT_ENABLED) {
             playMedia(ReCResourceBundle.findString(selectedApparatusConfig.getVideoLocation()));
-//            playMedia("rtsp://elabmc.ist.utl.pt/radiare.sdp");
-//            playMedia("/home/bcatarino/Documentos/NetBeansProjects/xpto.avi");
+		}		
 		
 		// Forward event to the view
         fireApparatusStateChanged(CONNECTED, evt);
@@ -857,12 +864,13 @@ public class ReCApplication extends SingleFrameApplication
             log.fine("ApparatusConnectorEvent " + evt.getMessage());
         }
 
-        if ("S".equals(System.getProperty(ReCSystemProperty.REC_VIDEO_ENABLED.getName())))
+        if (IS_VIDEO_DEVELOPMENT_ENABLED) {
             stopMedia();
+      	}
         
 		// Disconnect from apparatus but remain connected to laboratory
 		setCurrentState(CONNECTED_TO_LAB);
-
+		
 		// Forward event to the view
         fireApparatusStateChanged(DISCONNECTED, evt);
 	}

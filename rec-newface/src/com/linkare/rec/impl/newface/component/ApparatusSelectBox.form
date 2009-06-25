@@ -24,7 +24,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="apparatusCombo" alignment="0" pref="236" max="32767" attributes="0"/>
                   <Component id="lblChooseApparatus" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnToggleEnter" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnToggleEnter" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="progressCicle" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -38,7 +42,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="apparatusCombo" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnToggleEnter" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="progressCicle" max="32767" attributes="1"/>
+                  <Component id="btnToggleEnter" alignment="0" max="32767" attributes="1"/>
+              </Group>
               <EmptySpace pref="62" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -71,7 +78,7 @@
     <Component class="com.linkare.rec.impl.newface.component.FlatButton" name="btnToggleEnter">
       <Properties>
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-          <action class="com.linkare.rec.impl.newface.ReCApplication" id="toggleApparatusState" methodName="toggleApparatusState"/>
+          <action class="com.linkare.rec.impl.newface.component.ApparatusSelectBox" id="toggleApparatusState" methodName="toggleApparatusState"/>
         </Property>
         <Property name="text" type="java.lang.String" resourceKey="btnToggleEnter.text"/>
         <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.modules.form.editors2.FontEditor">
@@ -80,6 +87,12 @@
           </FontInfo>
         </Property>
         <Property name="name" type="java.lang.String" value="btnToggleEnter" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="com.linkare.rec.impl.newface.component.ProgressCicle" name="progressCicle">
+      <Properties>
+        <Property name="idleIcon" type="javax.swing.Icon" resourceKey="progressCicle.idleIcon"/>
+        <Property name="name" type="java.lang.String" value="progressCicle" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

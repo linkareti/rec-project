@@ -53,7 +53,7 @@ public class FormComponents extends AbstractContentPane {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        flatTable1 = new com.linkare.rec.impl.newface.component.FlatTable();
+        //flatTable1 = new com.linkare.rec.impl.newface.component.FlatTable();
         jPanel2 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -76,7 +76,7 @@ public class FormComponents extends AbstractContentPane {
         		{"Sanjay","PSD","5"}};
         String col [] = {"Name","Course","Year"};
         
-        flatTable1.setTableModel(data,col);
+        //flatTable1.setTableModel(data,col);
         
         
         jScrollPane1.setViewportView(flatTable1);

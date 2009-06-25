@@ -14,8 +14,8 @@ import javax.swing.JTabbedPane;
 import org.jdesktop.application.ResourceMap;
 
 /**
- *
  * @author Henrique Fernandes
+ * @deprecated use ApparatusTabbedPane
  */
 public class ApparatusTabbedXPane extends JTabbedPane {
 
@@ -45,7 +45,5 @@ public class ApparatusTabbedXPane extends JTabbedPane {
         addTab(resourceMap.getString("usersTab.title"), usersPane); 
        
 	}
-	
-	
 	
 }
