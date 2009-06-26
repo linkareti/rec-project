@@ -68,8 +68,8 @@ public abstract class AbstractStyle {
 			String propertyKey = getId() + DOT + entry.getKey();
 			result.add(propertyKey);
 			result.add(entry.getValue());
-			if (log.isLoggable(Level.FINE)) {
-				log.fine("UI Property: " + propertyKey + "=" + entry.getValue());
+			if (log.isLoggable(Level.FINER)) {
+				log.finer("UI Property: " + propertyKey + "=" + entry.getValue());
 			}
 		}
 		assert (result.size() % 2 == 0); // Must be even

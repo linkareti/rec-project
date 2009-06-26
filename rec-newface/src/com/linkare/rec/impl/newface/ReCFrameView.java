@@ -374,6 +374,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	public void apparatusStateChanged(ApparatusEvent eventSelector, ApparatusConnectorEvent evt) {
 		
 		switch (eventSelector) {
+			case CONNECTING:
+				getApparatusSelectBox().getProgressCicle().start();
+				break;
 			case CONNECTED:
 				connectToApparatus();
 				break;
@@ -425,7 +428,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         }
         
 		getApparatusSelectBox().toggleApparatusStateActionData(true);
-		getApparatusSelectBox().getProgressCicle().stop();
+//		getApparatusSelectBox().getProgressCicle().stop();
 		
 		getApparatusCombo().setEnabled(true);
 		

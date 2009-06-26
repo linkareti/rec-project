@@ -679,6 +679,7 @@ public class ReCApplication extends SingleFrameApplication
     @Action
     public void toggleApparatusState() {
     	if (currentState.canGoTo(APPARATUS_CONNECT_PERFORMED)) {
+    		
     		setCurrentState(APPARATUS_CONNECT_PERFORMED);
             
     		apparatusClientBean.getUserInfo().setUserName(getUsername());

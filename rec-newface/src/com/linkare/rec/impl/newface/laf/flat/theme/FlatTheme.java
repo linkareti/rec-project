@@ -45,8 +45,8 @@ public abstract class FlatTheme extends OceanThemeAdaptor {
 				log.log(Level.SEVERE, "Error creating style.", e);
 			}
 		}
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Registered Styles: " + styleClasses);
+		if (log.isLoggable(Level.FINER)) {
+			log.finer("Registered Styles: " + styleClasses);
 		}
 	}
 

@@ -11,19 +11,23 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import javax.swing.Icon;
+import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
+
+import java.util.logging.Logger;
+
+import org.jdesktop.application.Action;
 
 import com.linkare.rec.impl.newface.ReCApplication;
 import com.linkare.rec.impl.newface.ReCFrameView;
-import com.linkare.rec.impl.newface.component.ProgressCicle.State;
-
-import org.jdesktop.application.Action;
 
 /**
  *
  * @author Henrique Fernandes
  */
 public class ApparatusSelectBox extends AbstractContentPane {
+	
+	private static final Logger log = Logger.getLogger(ApparatusSelectBox.class
+			.getName());
 
 	private ReCApplication recApplication = ReCApplication.getApplication();
 	
@@ -150,7 +154,6 @@ public class ApparatusSelectBox extends AbstractContentPane {
 
     @Action
     public void toggleApparatusState() {
-    	progressCicle.start();
     	recApplication.toggleApparatusState();
     }
 

@@ -65,7 +65,7 @@ public abstract class AbstractContentPane extends JPanel {
     	for (Component childComponent : getComponents()) {
     		childComponent.setEnabled(enabled);
     		if (log.isLoggable(Level.FINE)) {
-				log.fine("component " + childComponent.getName() + (enabled ? " enabled" : " disabled"));
+				log.finer("component " + childComponent.getName() + (enabled ? " enabled" : " disabled"));
 			}
     	}
 	}

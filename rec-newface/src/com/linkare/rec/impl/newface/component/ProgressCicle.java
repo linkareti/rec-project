@@ -48,7 +48,6 @@ public class ProgressCicle extends JLabel {
                 ProgressCicle.this.setIcon(busyIcons[busyIconIndex]);
             }
         });
-        log.fine("busy icon timer initiated");
     }
 
     public void setIdleIcon(Icon idleIcon) {
