@@ -134,6 +134,12 @@ public class ReCApplication extends SingleFrameApplication
     public void playMedia(String mrl) {
 
         log.info("Playing media: " + mrl);
+        if (mrl.equals("")) {
+            log.info("There is not a valid media to play for this " +
+                    "experience. Proceding without video.");
+            return;
+        }
+        
         mediaController.setMediaToPlay(mrl);
         mediaController.play();
     }
@@ -772,9 +778,11 @@ public class ReCApplication extends SingleFrameApplication
     // -------------------------------------------------------------------------
     // Video events
 
-	// FIXME Catarino: Define video events...
+	//Bruno ver se é necessário mais algum evento e tratar os eventos no cliente adequadamente
     public enum VideoEvent {
-        
+        NOTCONNECTED,
+        STOPPED,
+        TIMECHANGED
     }
 
     // -------------------------------------------------------------------------
@@ -841,7 +849,7 @@ public class ReCApplication extends SingleFrameApplication
 		currentCustomizer.setHardwareAcquisitionConfig(getHardwareAcquisitionConfig());
 		
         if (IS_VIDEO_DEVELOPMENT_ENABLED) {
-            playMedia(ReCResourceBundle.findString(selectedApparatusConfig.getVideoLocation()));
+            playMedia(ReCResourceBundle.findString(selectedApparatusConfig.getMediaConfig().getVideoLocation()));
 		}		
 		
 		// Forward event to the view
