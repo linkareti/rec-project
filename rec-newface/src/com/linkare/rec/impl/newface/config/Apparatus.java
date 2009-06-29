@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType
@@ -19,7 +20,7 @@ public class Apparatus extends DisplayNode {
 
     private String dataModelClassLocationBundleKey = "";
 
-    private String videoLocation = "";
+    //private String videoLocation = "";
 
     private String headerDisplayClassLocationBundleKey = "";
 
@@ -28,6 +29,8 @@ public class Apparatus extends DisplayNode {
     private String customizerClassLocationBundleKey = "";
 
     private String location = "";
+
+    private MediaConfig mediaConfig = null;
 
     private List<DefaultAcquisitionConfig> defaultAcquisitionConfig = new ArrayList<DefaultAcquisitionConfig>();
 
@@ -83,10 +86,11 @@ public class Apparatus extends DisplayNode {
     /**
      * @return the videoLocation
      */
-    @XmlAttribute
-    public String getVideoLocation() {
-        return videoLocation;
-    }
+    //Delete
+//    @XmlAttribute
+//    public String getVideoLocation() {
+//        return videoLocation;
+//    }
 
     /**
      * @return the headerDisplayClassLocationBundleKey
@@ -118,6 +122,15 @@ public class Apparatus extends DisplayNode {
     @XmlAttribute
     public String getLocation() {
         return location;
+    }
+
+    //Bruno tem de estar como XmlElement ou assim????
+    /**
+     * @return the mediaConfig
+     */
+    @XmlElement
+    public MediaConfig getMediaConfig() {
+        return mediaConfig;
     }
 
     /**
@@ -187,9 +200,10 @@ public class Apparatus extends DisplayNode {
     /**
      * @param videoLocation the videoLocation to set
      */
-    public void setVideoLocation(String videoLocation) {
-        this.videoLocation = videoLocation;
-    }
+    //Delete
+//    public void setVideoLocation(String videoLocation) {
+//        this.videoLocation = videoLocation;
+//    }
 
     /**
      * @param headerDisplayClassLocationBundleKey the headerDisplayClassLocationBundleKey to set
@@ -220,6 +234,13 @@ public class Apparatus extends DisplayNode {
      */
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    /**
+     * @param mediaConfig the mediaConfig to set
+     */
+    public void setMediaConfig(MediaConfig mediaConfig) {
+        this.mediaConfig = mediaConfig;
     }
 
     /**
@@ -275,9 +296,10 @@ public class Apparatus extends DisplayNode {
         if ((this.dataModelClassLocationBundleKey == null) ? (other.dataModelClassLocationBundleKey != null) : !this.dataModelClassLocationBundleKey.equals(other.dataModelClassLocationBundleKey)) {
             return false;
         }
-        if ((this.videoLocation == null) ? (other.videoLocation != null) : !this.videoLocation.equals(other.videoLocation)) {
-            return false;
-        }
+        //Delete
+//        if ((this.videoLocation == null) ? (other.videoLocation != null) : !this.videoLocation.equals(other.videoLocation)) {
+//            return false;
+//        }
         if ((this.headerDisplayClassLocationBundleKey == null) ? (other.headerDisplayClassLocationBundleKey != null) : !this.headerDisplayClassLocationBundleKey.equals(other.headerDisplayClassLocationBundleKey)) {
             return false;
         }
@@ -288,6 +310,9 @@ public class Apparatus extends DisplayNode {
             return false;
         }
         if ((this.location == null) ? (other.location != null) : !this.location.equals(other.location)) {
+            return false;
+        }
+        if (this.mediaConfig != other.mediaConfig && (this.mediaConfig == null || !this.mediaConfig.equals(other.mediaConfig))) {
             return false;
         }
         if (this.defaultAcquisitionConfig != other.defaultAcquisitionConfig && (this.defaultAcquisitionConfig == null || !this.defaultAcquisitionConfig.equals(other.defaultAcquisitionConfig))) {
@@ -313,11 +338,13 @@ public class Apparatus extends DisplayNode {
         hash = 83 * hash + (this.desktopLocationBundleKey != null ? this.desktopLocationBundleKey.hashCode() : 0);
         hash = 83 * hash + (this.toolTipBundleKey != null ? this.toolTipBundleKey.hashCode() : 0);
         hash = 83 * hash + (this.dataModelClassLocationBundleKey != null ? this.dataModelClassLocationBundleKey.hashCode() : 0);
-        hash = 83 * hash + (this.videoLocation != null ? this.videoLocation.hashCode() : 0);
+//Delete
+        //        hash = 83 * hash + (this.videoLocation != null ? this.videoLocation.hashCode() : 0);
         hash = 83 * hash + (this.headerDisplayClassLocationBundleKey != null ? this.headerDisplayClassLocationBundleKey.hashCode() : 0);
         hash = 83 * hash + (this.displayFactoryClassLocationBundleKey != null ? this.displayFactoryClassLocationBundleKey.hashCode() : 0);
         hash = 83 * hash + (this.customizerClassLocationBundleKey != null ? this.customizerClassLocationBundleKey.hashCode() : 0);
         hash = 83 * hash + (this.location != null ? this.location.hashCode() : 0);
+        hash = 83 * hash + (this.mediaConfig != null ? this.mediaConfig.hashCode() : 0);
         hash = 83 * hash + (this.defaultAcquisitionConfig != null ? this.defaultAcquisitionConfig.hashCode() : 0);
         hash = 83 * hash + (this.display != null ? this.display.hashCode() : 0);
         hash = 83 * hash + (this.webResource != null ? this.webResource.hashCode() : 0);
