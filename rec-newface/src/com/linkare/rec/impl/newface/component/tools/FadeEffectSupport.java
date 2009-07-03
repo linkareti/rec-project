@@ -40,7 +40,6 @@ public class FadeEffectSupport<C extends JComponent> implements FadeEffect, Acti
     }
 
     public void fadeIn() {
-        System.out.println("fade in");
         alpha = TRANSLUCENT;
         animationStartTime = System.nanoTime() / 1000000;
         currentState = State.FADING_IN;
@@ -49,7 +48,6 @@ public class FadeEffectSupport<C extends JComponent> implements FadeEffect, Acti
     }
 
     public void fadeOut() {
-        System.out.println("fade out");
         alpha = OPAQUE;
         animationStartTime = System.nanoTime() / 1000000;
         currentState = State.FADING_OUT;
