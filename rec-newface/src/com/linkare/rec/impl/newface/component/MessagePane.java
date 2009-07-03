@@ -70,7 +70,7 @@ public class MessagePane extends JComponent {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(MessagePane.class);
         jButton1.setIcon(resourceMap.getIcon("btnClose.icon")); // NOI18N
         jButton1.setText(resourceMap.getString("btnClose.text")); // NOI18N
-        jButton1.setBorderPainted(false);
+        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.setFocusPainted(false);
         jButton1.setName("btnClose"); // NOI18N
 
@@ -84,7 +84,7 @@ public class MessagePane extends JComponent {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap())

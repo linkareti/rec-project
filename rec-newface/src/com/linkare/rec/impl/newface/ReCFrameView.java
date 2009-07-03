@@ -18,6 +18,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPopupMenu;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.FrameView;
@@ -40,6 +41,7 @@ import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
 import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.GlassLayer;
 import com.linkare.rec.impl.newface.component.LayoutContainerPane;
+import com.linkare.rec.impl.newface.component.MessagePane;
 import com.linkare.rec.impl.newface.component.SimpleLoginBox;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
 import com.linkare.rec.impl.newface.component.VideoBox;
@@ -395,7 +397,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         }
         
 		getApparatusSelectBox().toggleApparatusStateActionData(false);
-		getApparatusSelectBox().getProgressCicle().stop();
+		
 		
 		getApparatusCombo().setEnabled(false);
 		
@@ -419,7 +421,20 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 //		getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
 		
 		// Goto customizer tab
-		getApparatusTabbedPane().setSelectedTabIndex(1);
+		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_CUSTOMIZER);
+
+        // Show MessagePane
+		// CRITICAL Definir um Gestor de Popups
+        JPopupMenu popMenu = new JPopupMenu();
+        popMenu.setOpaque(false);
+        MessagePane messagePane = new MessagePane();
+        messagePane.setPreferredSize(new Dimension(getApparatusTabbedPane().getWidth() - 2, 60));
+        popMenu.add(messagePane);
+        popMenu.show(getApparatusTabbedPane(), 0, 
+        		getApparatusTabbedPane().getHeight() - getApparatusTabbedPane().getExperimentActionBar().getHeight() - messagePane.getPreferredSize().height);
+        // CRITICAL Definir um Gestor de Popups
+        
+        getApparatusSelectBox().getProgressCicle().stop();
 	}
 	
 	private void disconnectFromApparatus() {
@@ -428,7 +443,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         }
         
 		getApparatusSelectBox().toggleApparatusStateActionData(true);
-//		getApparatusSelectBox().getProgressCicle().stop();
 		
 		getApparatusCombo().setEnabled(true);
 		
