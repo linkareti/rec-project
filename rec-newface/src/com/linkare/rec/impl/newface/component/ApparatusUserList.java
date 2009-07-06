@@ -25,7 +25,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import com.linkare.rec.impl.client.ApparatusClientBean;
 import com.linkare.rec.impl.newface.laf.flat.FlatLookAndFeel;
-import com.linkare.rec.impl.newface.userList.DefaulExpUsersListTableModel;
 
 /**
  * 
@@ -64,25 +63,25 @@ public class ApparatusUserList extends javax.swing.JPanel {
 		flatTable1.setName("flatTable1"); // NOI18N
 		jScrollPane1.setViewportView(flatTable1);
 
-		// javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		// this.setLayout(layout);
-		// layout.setHorizontalGroup(
-		// layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-		// .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-		// layout.createSequentialGroup()
-		// .addContainerGap(15, Short.MAX_VALUE)
-		// .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,
-		// 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-		// .addContainerGap())
-		// );
-		// layout.setVerticalGroup(
-		// layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-		// .addGroup(layout.createSequentialGroup()
-		// .addContainerGap()
-		// .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,
-		// 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-		// .addContainerGap(14, Short.MAX_VALUE))
-		// );
+		 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		 this.setLayout(layout);
+		 layout.setHorizontalGroup(
+		 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+		 layout.createSequentialGroup()
+		 .addContainerGap(15, Short.MAX_VALUE)
+		 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,
+		 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+		 .addContainerGap())
+		 );
+		 layout.setVerticalGroup(
+		 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		 .addGroup(layout.createSequentialGroup()
+		 .addContainerGap()
+		 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,
+		 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+		 .addContainerGap(14, Short.MAX_VALUE))
+		 );
 	}// </editor-fold>//GEN-END:initComponents
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
@@ -91,56 +90,53 @@ public class ApparatusUserList extends javax.swing.JPanel {
 
 	// End of variables declaration//GEN-END:variables
 
-	public static void main(String[] args) {
-		
-		try {
-			UIManager.setLookAndFeel(FlatLookAndFeel.class.getCanonicalName());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		final JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout());
-		final ApparatusUserList apparatusList = new ApparatusUserList();
-		frame.getContentPane().add(apparatusList, BorderLayout.CENTER);
-		
-		JButton btn=new JButton("DoIt!");
-		frame.getContentPane().add(btn,BorderLayout.SOUTH);
-		
-		btn.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hi");
-				DefaulExpUsersListTableModel model = apparatusList.getModel();
-				model.setExpUsersListSource(new ApparatusClientBean());
-				System.out.println("model is now "+model);
-				System.out.println("model.class is now "+model!=null?model.getClass():"ops, no model!");
-				System.out.println("Hi again!");
-			}});
-		
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				frame.pack();
-				frame.setVisible(true);
-			}
-		});
-		
-		
-
-	}
+//	public static void main(String[] args) {
+//		
+//		try {
+//			UIManager.setLookAndFeel(FlatLookAndFeel.class.getCanonicalName());
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (InstantiationException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		final JFrame frame = new JFrame();
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.getContentPane().setLayout(new BorderLayout());
+//		final ApparatusUserList apparatusList = new ApparatusUserList();
+//		frame.getContentPane().add(apparatusList, BorderLayout.CENTER);
+//		
+//		JButton btn=new JButton("DoIt!");
+//		frame.getContentPane().add(btn,BorderLayout.SOUTH);
+//		
+//		btn.addActionListener(new ActionListener(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				System.out.println("Hi");
+//				DefaulExpUsersListTableModel model = apparatusList.getModel();
+//				model.setExpUsersListSource(new ApparatusClientBean());
+//				System.out.println("model is now "+model);
+//				System.out.println("model.class is now "+model!=null?model.getClass():"ops, no model!");
+//				System.out.println("Hi again!");
+//			}});
+//		
+//		SwingUtilities.invokeLater(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				frame.pack();
+//				frame.setVisible(true);
+//			}
+//		});
+//	}
 
 }
