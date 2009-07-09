@@ -48,47 +48,39 @@ public class ApparatusUserList extends javax.swing.JPanel {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-		jScrollPane1 = new javax.swing.JScrollPane();
-		flatTable1 = new com.linkare.rec.impl.newface.component.FlatTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        flatTable1 = new com.linkare.rec.impl.newface.component.FlatTable();
 
-		setName("Form"); // NOI18N
+        setName("Form"); // NOI18N
+        setLayout(new java.awt.GridBagLayout());
 
-		jScrollPane1.setName("jScrollPane1"); // NOI18N
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-		flatTable1.setModel(new DefaulExpUsersListTableModel());
+        flatTable1.setModel(new DefaulExpUsersListTableModel());
+        flatTable1.setName("flatTable1"); // NOI18N
+        jScrollPane1.setViewportView(flatTable1);
 
-		flatTable1.setName("flatTable1"); // NOI18N
-		jScrollPane1.setViewportView(flatTable1);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 230;
+        gridBagConstraints.ipady = 263;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 1);
+        add(jScrollPane1, gridBagConstraints);
+    }// </editor-fold>//GEN-END:initComponents
 
-		 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		 this.setLayout(layout);
-		 layout.setHorizontalGroup(
-		 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-		 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-		 layout.createSequentialGroup()
-		 .addContainerGap(15, Short.MAX_VALUE)
-		 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,
-		 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-		 .addContainerGap())
-		 );
-		 layout.setVerticalGroup(
-		 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-		 .addGroup(layout.createSequentialGroup()
-		 .addContainerGap()
-		 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,
-		 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-		 .addContainerGap(14, Short.MAX_VALUE))
-		 );
-	}// </editor-fold>//GEN-END:initComponents
-
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private com.linkare.rec.impl.newface.component.FlatTable flatTable1;
-	private javax.swing.JScrollPane jScrollPane1;
-
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.linkare.rec.impl.newface.component.FlatTable flatTable1;
+    private javax.swing.JScrollPane jScrollPane1;
+    // End of variables declaration//GEN-END:variables
 
 //	public static void main(String[] args) {
 //		

@@ -52,34 +52,7 @@ public class FlatTable extends JTable{
 		return uiClassID ;
 	}
 
-	/**
-	 * @param tm the TableModel to set
-	 */
-	public void setTableModel(TableModel tm) {
-		if(tm == null)
-			return;
-		
-		setModel(tm);	
-		for (int i = 0; i < getColumnCount(); i++) {
-			tc = getColumnModel().getColumn(i);
-			tc.setCellRenderer(new FlatTableCellRenderer());
-			tc.setHeaderRenderer(new FlatTableCellRenderer());
-		}
-	}
 	
- 
-	/**
-	 * 
-	 * @param data set the Table's Data
-	 * @param columnNames set the name of each Column's Table
-	 */
-	public void setTableModel(Object[][] data, Object[] columnNames) {
-		if(data == null || columnNames == null)
-			return;
-		
-		DefaultTableModel model = new DefaultTableModel(data,columnNames);
-		setTableModel(model);
-	}
 	
 	public boolean isCellEditable(int row, int column)
 	{
