@@ -22,14 +22,7 @@ public class FlatTableCellRenderer implements TableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int rowIndex, int vColIndex) {
 		
-//		JPanel pnl=new JPanel();
-//		pnl.setOpaque(false);
-//		pnl.setLayout(new BorderLayout());
-//		
-//		pnl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		
 		JLabel lbl=new JLabel();
-		
 		
 		// 'value' is column header value of column 'vColIndex'
 		// rowIndex is always -1
@@ -67,8 +60,6 @@ public class FlatTableCellRenderer implements TableCellRenderer {
 			default: lbl.setHorizontalAlignment(SwingConstants.LEFT);
 		}
 
-		// Since the renderer is a component, return itself
-//		pnl.add(lbl,BorderLayout.CENTER);
 		return lbl;
 	}
 
