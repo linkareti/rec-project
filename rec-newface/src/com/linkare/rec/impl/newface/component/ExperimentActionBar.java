@@ -18,6 +18,18 @@ public class ExperimentActionBar extends javax.swing.JPanel {
         initComponents();
     }
 
+    public void setPlayStopButtonEnabled(boolean enabled) {
+        btnPlayStop.setEnabled(enabled);
+    }
+    
+    public void setActionStateLabelVisible(boolean visible) {
+        lblActionState.setVisible(visible);
+    }
+    
+    public void setActionStateText(String text) {
+    	lblActionState.setText(text);
+	}
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -27,35 +39,54 @@ public class ExperimentActionBar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnPlayStop = new javax.swing.JButton();
+        checkAutoPlay = new javax.swing.JCheckBox();
+        lblActionState = new com.linkare.rec.impl.newface.component.ExperimentActionLabel();
 
         setMaximumSize(new java.awt.Dimension(32767, 40));
         setName("Form"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ExperimentActionBar.class);
-        jButton1.setIcon(resourceMap.getIcon("jButton1.icon")); // NOI18N
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        jButton1.setBorderPainted(false);
-        jButton1.setName("jButton1"); // NOI18N
+        btnPlayStop.setIcon(resourceMap.getIcon("btnPlayStop.icon")); // NOI18N
+        btnPlayStop.setText(resourceMap.getString("btnPlayStop.text")); // NOI18N
+        btnPlayStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        btnPlayStop.setBorderPainted(false);
+        btnPlayStop.setEnabled(false);
+        btnPlayStop.setName("btnPlayStop"); // NOI18N
+
+        checkAutoPlay.setText(resourceMap.getString("checkAutoPlay.text")); // NOI18N
+        checkAutoPlay.setName("checkAutoPlay"); // NOI18N
+
+        lblActionState.setText(resourceMap.getString("lblActionState.text")); // NOI18N
+        lblActionState.setName("lblActionState"); // NOI18N
+        lblActionState.setVisible(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addContainerGap(446, Short.MAX_VALUE))
+                .addComponent(btnPlayStop)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkAutoPlay)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(lblActionState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1)
+            .addComponent(btnPlayStop)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(checkAutoPlay, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(lblActionState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnPlayStop;
+    private javax.swing.JCheckBox checkAutoPlay;
+    private com.linkare.rec.impl.newface.component.ExperimentActionLabel lblActionState;
     // End of variables declaration//GEN-END:variables
 
 }

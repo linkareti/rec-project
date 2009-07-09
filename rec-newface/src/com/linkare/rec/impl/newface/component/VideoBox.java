@@ -16,7 +16,7 @@ import java.awt.Color;
 
 /**
  *
- * @author iies-consultor922
+ * @author Bruno Catarino
  */
 public class VideoBox extends AbstractContentPane {
 

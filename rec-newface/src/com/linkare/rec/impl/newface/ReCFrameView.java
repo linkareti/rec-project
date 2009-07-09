@@ -7,6 +7,8 @@ package com.linkare.rec.impl.newface;
 import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
+import javax.swing.Timer;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.FrameView;
@@ -28,6 +31,7 @@ import org.jdesktop.application.TaskMonitor;
 
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent;
 import com.linkare.rec.impl.newface.component.AbstractContentPane;
@@ -37,6 +41,7 @@ import com.linkare.rec.impl.newface.component.ApparatusSelectBox;
 import com.linkare.rec.impl.newface.component.ApparatusTabbedPane;
 import com.linkare.rec.impl.newface.component.ApparatusUserList;
 import com.linkare.rec.impl.newface.component.ChatBox;
+import com.linkare.rec.impl.newface.component.ExperimentActionBar;
 import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
 import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.GlassLayer;
@@ -48,6 +53,7 @@ import com.linkare.rec.impl.newface.component.VideoBox;
 import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
 import com.linkare.rec.impl.newface.config.Apparatus;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
+import com.linkare.rec.impl.newface.utils.TimeUtils;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 
 /**
@@ -64,7 +70,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
     private List<AbstractContentPane> interactiveBoxes;
 
-	private boolean firstSelectedApparatusConfigChange = true;
+	private boolean firstSelectedApparatusChange = true;
+
+	private long apparatusLockInitialTimeMs;
+
+	private long millisToLockSuccess;
     
     public ReCFrameView(SingleFrameApplication app) {
         super(app);
@@ -103,6 +113,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         // Hide status indicators
         //lblTaskMessage.setVisible(false);
         //progressCicleTask.setVisible(false);
+        
+        // Init timers
+		apparatusLockTimer = new Timer(999, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				apparatusLockTimerTick();
+			}
+		});
         
         // Hide bottom status pane
         statusPanel.setVisible(false);
@@ -174,6 +192,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	
 	private ApparatusTabbedPane getApparatusTabbedPane() {
 		return getLayoutContainerPane().getApparatusTabbedPane();
+	}
+	
+	private ExperimentActionBar getExperimentActionBar() {
+		return getApparatusTabbedPane().getExperimentActionBar();
 	}
 
 	private ExperimentHistoryBox getExperimentHistoryBox() {
@@ -266,12 +288,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         return toggleConnectionStateAction;
     }
     
+    // Listen to user input
     @Override
 	public void itemStateChanged(ItemEvent evt) {
-    	if ( evt == null ) 
+    	if ( evt == null ) {
     		return;
+    	}
     	
-    	// ApparatusCombo selection change
+    	// Listen to ApparatusCombo selection change
     	if (getApparatusCombo() == evt.getSource()) {
 	    	if (ItemEvent.SELECTED == evt.getStateChange()) {
 	    		if (log.isLoggable(Level.FINE)) {
@@ -296,14 +320,18 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	        	showLoginBox();
 	            break;
 	            
-	        case SELECTED_APPARATUS_CONFIG_CHANGE:
-	        	if (firstSelectedApparatusConfigChange) {
+	        case SELECTED_APPARATUS_CHANGE:
+	        	if (firstSelectedApparatusChange) {
 	        		getApparatusDescriptionPane().setFieldsVisible(true);
-	        		firstSelectedApparatusConfigChange = false;
+	        		firstSelectedApparatusChange = false;
 	        	}
 	        	getApparatusDescriptionPane().setApparatusConfig(
 	        			recApplication.getSelectedApparatusConfig());
                 break;
+                
+	        case APPARATUS_CONFIGURED:
+	        	getExperimentActionBar().setPlayStopButtonEnabled(true);
+	        	break;
     	}
 	}
 
@@ -352,7 +380,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		setInteractiveBoxesEnabled(true);
 		getLoginBox().setVisible(false);
 		setGlassPaneVisible(false);
-		firstSelectedApparatusConfigChange = true;
+		firstSelectedApparatusChange = true;
 	}
 	
 	private void disconnectFromLaboratory() {
@@ -368,7 +396,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	public void apparatusListChanged(ApparatusListChangeEvent evt) {
 		if (recApplication.getCurrentState().matches(CONNECTED_TO_LAB)) {
 			getApparatusCombo().setEnabled(true);
-			recApplication.setSelectedApparatusConfig((Apparatus) getApparatusCombo().getSelectedItem());
 		}
 	}
 	
@@ -379,8 +406,24 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			case CONNECTING:
 				getApparatusSelectBox().getProgressCicle().start();
 				break;
+				
 			case CONNECTED:
 				connectToApparatus();
+				getApparatusSelectBox().getProgressCicle().stop();
+				break;
+			
+			case LOCKABLE:
+				millisToLockSuccess = evt.getMillisToLockSuccess();
+				
+				apparatusLockInitialTimeMs = TimeUtils.getSystemCurrentTimeMs();
+				
+				getExperimentActionBar().setActionStateText(
+						recApplication.getContext().getResourceMap(ExperimentActionBar.class).getString(
+								"lblActionState.apparatusLockable.text", TimeUtils.msToSeconds(millisToLockSuccess)));
+				
+				getExperimentActionBar().setActionStateLabelVisible(true);
+				
+				apparatusLockTimer.start();
 				break;
 				
 			case DISCONNECTED:
@@ -433,8 +476,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         popMenu.show(getApparatusTabbedPane(), 0, 
         		getApparatusTabbedPane().getHeight() - getApparatusTabbedPane().getExperimentActionBar().getHeight() - messagePane.getPreferredSize().height);
         // CRITICAL Definir um Gestor de Popups
-        
-        getApparatusSelectBox().getProgressCicle().stop();
 	}
 	
 	private void disconnectFromApparatus() {
@@ -452,7 +493,17 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 				recApplication.getCurrentLabName()));
 	}
 	
+	private void apparatusLockTimerTick() {
+		long lockCountDown = TimeUtils.msToSeconds(
+				millisToLockSuccess - (TimeUtils.getSystemCurrentTimeMs() - apparatusLockInitialTimeMs));
 
+		if (lockCountDown > 0) {
+			getExperimentActionBar().setActionStateText(
+					recApplication.getContext().getResourceMap(ExperimentActionBar.class).getString(
+							"lblActionState.apparatusLockable.text", lockCountDown));
+		}
+	}
+	
 	/** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -606,8 +657,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     }// </editor-fold>//GEN-END:initComponents
 
     private void toolBtnConnectPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_toolBtnConnectPropertyChange
-        if ("text".equals(evt.getPropertyName())) {
-            // Disable text display on toggle connection state button
+    	if ("text".equals(evt.getPropertyName())) {
+            // Disable text display on toggle connection state button from toolbar
             ((JButton)evt.getSource()).setText("");
         }
     }//GEN-LAST:event_toolBtnConnectPropertyChange
@@ -630,6 +681,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     // End of variables declaration//GEN-END:variables
 
 //    private final Timer messageTimer;
+    private Timer apparatusLockTimer;
     public static Icon idleIcon;
     public static Icon[] busyIcons = new Icon[15];
     private final int busyAnimationRate;

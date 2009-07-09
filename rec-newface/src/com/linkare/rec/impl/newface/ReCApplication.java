@@ -45,6 +45,7 @@ import com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener;
 import com.linkare.rec.impl.client.chat.IChatServer;
 import com.linkare.rec.impl.client.customizer.CustomizerUIUtil;
 import com.linkare.rec.impl.client.customizer.ICustomizer;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.client.customizer.ICustomizerSecurity;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorListener;
@@ -70,7 +71,7 @@ import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEvent
  * The main class of the application.
  */
 public class ReCApplication extends SingleFrameApplication 
-	implements ApparatusListSourceListener, LabConnectorListener, ApparatusConnectorListener {
+	implements ApparatusListSourceListener, LabConnectorListener, ApparatusConnectorListener, ICustomizerListener {
 
     private static final Logger log = Logger.getLogger(ReCApplication.class.getName());
     
@@ -213,6 +214,7 @@ public class ReCApplication extends SingleFrameApplication
 		CONNECTED_TO_LAB,
 		APPARATUS_CONNECT_PERFORMED,
 		CONNECTED_TO_APPARATUS,
+		APPARATUS_CONFIGURED,
 		APPARATUS_DISCONNECT_PERFORMED,
 		LAB_DISCONNECT_PERFORMED;
 		// State declaration end
@@ -236,6 +238,11 @@ public class ReCApplication extends SingleFrameApplication
 					transitions(APPARATUS_CONNECT_PERFORMED, LAB_DISCONNECT_PERFORMED));
 			
 			availableTransitions.put(CONNECTED_TO_APPARATUS, 
+					transitions(APPARATUS_CONFIGURED,
+							LAB_DISCONNECT_PERFORMED, 
+							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
+			
+			availableTransitions.put(APPARATUS_CONFIGURED, 
 					transitions(LAB_DISCONNECT_PERFORMED, 
 							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
 			
@@ -295,10 +302,12 @@ public class ReCApplication extends SingleFrameApplication
     private ApparatusClientBean apparatusClientBean;
     private Lab currentLab;
     private com.linkare.rec.impl.client.apparatus.Apparatus currentApparatus;
-    private Apparatus selectedApparatusConfig;
+    private Apparatus selectedApparatus;
     private ApparatusComboBoxModel apparatusComboBoxModel;
     private ICustomizer currentCustomizer;
-    private HardwareAcquisitionConfig hardwareAcquisitionConfig;
+    private HardwareAcquisitionConfig currentBaseHardwareAcquisitionConfig;
+	private HardwareAcquisitionConfig userAcquisitionConfig;
+
 
 
 	/** Creates a new <code>ReCApplication</code> */
@@ -402,31 +411,22 @@ public class ReCApplication extends SingleFrameApplication
 		return labClientBean;
 	}
 	
-	public HardwareAcquisitionConfig getHardwareAcquisitionConfig() {
-		return hardwareAcquisitionConfig;
+	private com.linkare.rec.impl.client.apparatus.Apparatus updateCurrentApparatusFromComboModel() {	
+		setSelectedApparatusConfig((Apparatus) apparatusComboBoxModel.getSelectedItem());
+    	currentApparatus = labClientBean.getApparatusByID(selectedApparatus.getLocation());
+    	return currentApparatus;
 	}
 	
-	public void setHardwareAcquisitionConfig(
-			HardwareAcquisitionConfig hardwareAcquisitionConfig) {
-		this.hardwareAcquisitionConfig = hardwareAcquisitionConfig;
-	}
-
 	public void setSelectedApparatusConfig(Apparatus apparatus) {
-		this.selectedApparatusConfig = apparatus;
+		this.selectedApparatus = apparatus;
 		
 		// Notify the view
-        fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SELECTED_APPARATUS_CONFIG_CHANGE));
-	}
-	
-	private com.linkare.rec.impl.client.apparatus.Apparatus getCurrentApparatus() {	
-    	setSelectedApparatusConfig((Apparatus) apparatusComboBoxModel.getSelectedItem());
-    	currentApparatus = labClientBean.getApparatusByID(selectedApparatusConfig.getLocation());
-		return currentApparatus;
+        fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SELECTED_APPARATUS_CHANGE));
 	}
     
 	
 	public Apparatus getSelectedApparatusConfig() {
-		return selectedApparatusConfig;
+		return selectedApparatus;
 	}
 	
 	public ICustomizer getCurrentCustomizer() {
@@ -690,8 +690,10 @@ public class ReCApplication extends SingleFrameApplication
             
     		apparatusClientBean.getUserInfo().setUserName(getUsername());
             apparatusClientBean.getUserInfo().setPassword(getUsername());
-            apparatusClientBean.setApparatus(getCurrentApparatus());
             
+            apparatusClientBean.setApparatus(updateCurrentApparatusFromComboModel());
+            
+            // CRITICAL Check this background task implmentation
             new Thread() {
                 public void run() {
                     apparatusClientBean.connect(); // Background task
@@ -770,6 +772,8 @@ public class ReCApplication extends SingleFrameApplication
         	// Update view
         	apparatusComboBoxModel.fireContentsChanged(this);
         	
+        	updateCurrentApparatusFromComboModel();
+        	
         	// Forward events to the view
             fireApparatusListChanged(evt);
         }
@@ -829,28 +833,31 @@ public class ReCApplication extends SingleFrameApplication
     	if (log.isLoggable(Level.FINE)) {
             log.fine("ApparatusConnectorEvent " + evt);
         }
-    	
-		setCurrentState(CONNECTED_TO_APPARATUS);
 		
 		// Load customizer
 		currentCustomizer = CustomizerUIUtil.loadCustomizer(
-				ReCResourceBundle.findString(selectedApparatusConfig.getCustomizerClassLocationBundleKey()));
+				ReCResourceBundle.findString(selectedApparatus.getCustomizerClassLocationBundleKey()));
 		
 		// Set user info
 		if(currentCustomizer instanceof ICustomizerSecurity) {
             ((ICustomizerSecurity)currentCustomizer).setUserInfo(new com.linkare.rec.acquisition.UserInfo(getUsername()));
 		}
 		
-		// Set Hardware 
-		setHardwareAcquisitionConfig(currentApparatus.getHardwareInfo().createBaseHardwareAcquisitionConfig());
+		// Set current base hardware aquisition config 
+		currentBaseHardwareAcquisitionConfig = currentApparatus.getHardwareInfo().createBaseHardwareAcquisitionConfig();
 		
 		// Init customizer
-		currentCustomizer.setHardwareInfo(getCurrentApparatus().getHardwareInfo());
-		currentCustomizer.setHardwareAcquisitionConfig(getHardwareAcquisitionConfig());
+		currentCustomizer.setHardwareInfo(currentApparatus.getHardwareInfo());
+		currentCustomizer.setHardwareAcquisitionConfig(currentBaseHardwareAcquisitionConfig);
+		
+		// Listen to current customizer events (done/canceled)
+		currentCustomizer.addICustomizerListener(this);
 		
         if (IS_VIDEO_DEVELOPMENT_ENABLED) {
-            playMedia(ReCResourceBundle.findString(selectedApparatusConfig.getMediaConfig().getVideoLocation()));
-		}		
+            playMedia(ReCResourceBundle.findString(selectedApparatus.getMediaConfig().getVideoLocation()));
+		}
+		
+		setCurrentState(CONNECTED_TO_APPARATUS);
 		
 		// Forward event to the view
         fireApparatusStateChanged(CONNECTED, evt);
@@ -891,8 +898,10 @@ public class ReCApplication extends SingleFrameApplication
         }
 		// TODO Auto-generated method stub
 		
-		// Forward event to the view
-        fireApparatusStateChanged(LOCKABLE, evt);
+		if (currentState.matches(APPARATUS_CONFIGURED)) {
+			// Forward event to the view
+			fireApparatusStateChanged(LOCKABLE, evt);
+		}
 	}
 
 	@Override
@@ -1080,6 +1089,36 @@ public class ReCApplication extends SingleFrameApplication
 		
 		// Forward event to the view
         fireApparatusStateChanged(UNREACHABLE, evt);
+	}
+	
+	// -------------------------------------------------------------------------
+	// Customizer events
+	
+	@Override
+	public void done() {
+		if (log.isLoggable(Level.FINE)) {
+			log.fine("Customizer Done");
+		}
+		
+		// Store user's last acquisition configuration
+		userAcquisitionConfig = getCurrentCustomizer().getAcquisitionConfig();
+		
+		setCurrentState(APPARATUS_CONFIGURED);
+		
+		// Forward event to the view
+        fireApplicationEvent(new ReCAppEvent(this, ReCCommand.APPARATUS_CONFIGURED));
+	}
+	
+	@Override
+	public void canceled() {
+		if (log.isLoggable(Level.FINE)) {
+			log.fine("Customizer Canceled");
+		}
+		
+		// TODO Auto-generated method stub
+		
+		// Forward event to the view
+        //fireApplicationEvent(new ReCAppEvent(this, ReCCommand.CUSTOMIZER_CANCELED));
 	}
 
     // -------------------------------------------------------------------------

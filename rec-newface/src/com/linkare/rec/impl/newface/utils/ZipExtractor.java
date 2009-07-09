@@ -36,7 +36,7 @@ public class ZipExtractor {
             createFiles(zipFile, destDir);
 
         } catch (IOException e) {
-            //TODO tratamento correcto da excepção!!!!
+            //FIXME tratamento correcto da excepção!!!!
             e.printStackTrace();
         }
     }
