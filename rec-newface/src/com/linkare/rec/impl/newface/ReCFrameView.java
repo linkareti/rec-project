@@ -160,7 +160,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         interactiveBoxes.add(getApparatusDescriptionPane());
         interactiveBoxes.add(getVideoBox());
         interactiveBoxes.add(getChatBox());
-        //FIXME: Será que isto é para colocar aqui?
 //        interactiveBoxes.add(getApparatusUserListPane());
 	}
 	
@@ -459,9 +458,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		
 		//UserList Pane
 		// CRITICAL João: Verificar tempo e carga de execução destas chamadas e
-		// identificar se é uma situção com que temos mesmo de viver.
-//		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getRecFaceConfig().getUsersListRefreshRateMs());
-//		getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
+		// identificar se é uma situção5 com que temos mesmo de viver.
+		getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
+		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getRecFaceConfig().getUsersListRefreshRateMs());
+
 		
 		// Goto customizer tab
 		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_CUSTOMIZER);
