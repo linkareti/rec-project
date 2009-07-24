@@ -286,12 +286,22 @@
 
 	</target>
 
+	<path id="rec.run.multicastcontroller.classpath">
+		<fileset dir="lib/">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${rec.lib.java.multicast.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${rec.common.dist.dir}/">
+			<include name="ReCCommon_sig.jar" />
+		</fileset>
+	</path>
+	
 	<target name="debug.rec.multicast">
 		<java jar="${rec.multicast.dist.dir}/ReCMulticastController.jar" fork="true" failonerror="true" maxmemory="256m">
 			<arg value="-h" />
-			<classpath>
-				<pathelement path="${java.class.path}" />
-			</classpath>
+			<classpath refid="rec.run.multicastcontroller.classpath" />
 			<jvmarg value="-Xdebug" />
 			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=y" />
 			<jvmarg value="-Xms${min.memory}" />
@@ -302,9 +312,7 @@
 	<target name="run.rec.multicast">
 		<java jar="${rec.multicast.dist.dir}/ReCMulticastController.jar" fork="true" failonerror="true" maxmemory="256m">
 			<arg value="-h" />
-			<classpath>
-				<pathelement path="${java.class.path}" />
-			</classpath>
+			<classpath refid="rec.run.multicastcontroller.classpath" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
 		</java>
@@ -768,11 +776,39 @@
 		========================== Libraries ===========================
 		================================================================
 		-->
-	<target name="sign.libraries">
+	
+	<property name="openorbWebLoc" 		value="/var/www/html/rec/openorb/" />
+	<property name="openorbSrvLoc" 		value="/home/elab/ReC7.0/openorb/" />
+	<property name="jfreechartWebLoc" 	value="/var/www/html/rec/jfreechart/" />
+	<property name="telescopioWebLoc"	value="/var/www/html/rec/eLab/telescopio/"/>
+	<property name="meteoWebLoc"		value="/var/www/html/rec/eLab/meteo/"/>
 
-	</target>
+	<macrodef name="sign.jars.in.directory">
+		<attribute name="source.dir.name" />
+		<attribute name="destination.dir.name" />
+		<sequential>
+			<mkdir dir="@{destination.dir.name}"/>
+			<signjar destDir="@{destination.dir.name}">
+				keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}"
+				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar"/>
+				<globmapper from="*.jar" to="*_sig.jar"/>
+			</signjar>
+		</sequential>
+	</macrodef>
 
 	<target name="deploy.libraries">
+		<copy todir="${openorbWebLoc}">
+			<fileset dir="${tempLibSignDir}" includes="openorb_orb*, avalon-fr*, xercesIm*, logkit_sig*, tools-1.4*, xml-a*"/>
+		</copy>
+		<copy todir="${jfreechartWebLoc}">
+			<fileset dir="${tempLibSignDir}" includes="jfreec*, jcomm*"/>
+		</copy>
+		<copy todir="${telescopioWebLoc}">
+			<fileset dir="${tempLibSignDir}" includes="fits*"/>
+		</copy>
+		<copy todir="${meteoWebLoc}">
+			<fileset dir="${tempLibSignDir}" includes="JCFN*"/>
+		</copy>
 
 	</target>
 </project>
