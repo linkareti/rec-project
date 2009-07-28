@@ -28,28 +28,28 @@
 		=====================================================
 	-->
 
-	<property name="rec.common.build.dir" value="${build.dir}/rec/common">
-	</property>
-	<property name="rec.common.dist.dir" value="${dist.dir}/rec/common">
-	</property>
+	<property name="rec.common.build.dir" value="${build.dir}/rec/common" />
+	<property name="rec.common.dist.dir" value="${dist.dir}/rec/common" />
 
-	<property name="rec.common.src.java.dir" value="rec/src/java/common">
-	</property>
+	<property name="rec.common.src.java.dir" value="rec/src/java/common" />
 
-	<property name="rec.lib.dir" value="rec/lib">
-	</property>
-	<property name="rec.lib.java.common.dir" value="${rec.lib.dir}/java/common/">
-	</property>
-	<property name="rec.lib.compile.common.dir" value="${rec.lib.dir}/compile/common/">
-	</property>
+	<property name="rec.lib.dir" value="rec/lib" />
+	
+	<path id="rec.common.lib.path">
+		<fileset dir="${rec.lib.dir}/java/common/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<path id="rec.common.compile.lib.path">
+		<fileset dir="${rec.lib.dir}/compile/common/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
 
 	<path id="rec.compile.common.classpath">
-		<fileset dir="${rec.lib.compile.common.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-		<fileset dir="${rec.lib.java.common.dir}">
-			<include name="**/*.jar" />
-		</fileset>
+		<path refid="rec.common.lib.path" />
+		<path refid="rec.common.compile.lib.path" />
 	</path>
 
 	<target name="clean.rec.common" description="Delete the build folder containing the common shared compiled code.">
@@ -89,31 +89,30 @@
 		=====================================================
 	-->
 
-	<property name="rec.client.build.dir" value="${build.dir}/rec/client">
-	</property>
-	<property name="rec.client.dist.dir" value="${dist.dir}/rec/client">
-	</property>
+	<property name="rec.client.build.dir" value="${build.dir}/rec/client" />
+	<property name="rec.client.dist.dir" value="${dist.dir}/rec/client" />
 
-	<property name="rec.client.src.java.dir" value="rec/src/java/client">
-	</property>
-	<property name="rec.ui.src.java.dir" value="rec/src/java/ui">
-	</property>
-
-	<property name="rec.lib.java.client.dir" value="${rec.lib.dir}/java/client/">
-	</property>
-	<property name="rec.lib.compile.client.dir" value="${rec.lib.dir}/compile/client/">
-	</property>
+	<property name="rec.client.src.java.dir" value="rec/src/java/client" />
+	<property name="rec.ui.src.java.dir" value="rec/src/java/ui" />
+	
+	<path id="rec.client.lib.path">
+		<fileset dir="${rec.lib.dir}/java/client/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<path id="rec.client.compile.lib.path">
+		<fileset dir="${rec.lib.dir}/compile/client/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
 
 	<path id="rec.compile.client.classpath">
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
-		<fileset dir="${rec.lib.compile.client.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-		<fileset dir="${rec.lib.java.client.dir}">
-			<include name="**/*.jar" />
-		</fileset>
+		<path refid="rec.client.lib.path"/>
+		<path refid="rec.client.compile.lib.path"/>
 	</path>
 
 	<path id="rec.compile.client.dependencies.classpath">
@@ -164,29 +163,29 @@
 		=====================================================
 	-->
 
-	<property name="rec.hardwareserver.build.dir" value="${build.dir}/rec/hardwareserver">
-	</property>
-	<property name="rec.hardwareserver.dist.dir" value="${dist.dir}/rec/hardwareserver">
-	</property>
+	<property name="rec.hardwareserver.build.dir" value="${build.dir}/rec/hardwareserver" />
+	<property name="rec.hardwareserver.dist.dir" value="${dist.dir}/rec/hardwareserver" />
 
-	<property name="rec.hardwareserver.src.java.dir" value="rec/src/java/hardwareserver">
-	</property>
-
-	<property name="rec.lib.java.hardwareserver.dir" value="${rec.lib.dir}/java/hardwareserver/">
-	</property>
-	<property name="rec.lib.compile.hardwareserver.dir" value="${rec.lib.dir}/compile/hardwareserver/">
-	</property>
+	<property name="rec.hardwareserver.src.java.dir" value="rec/src/java/hardwareserver" />
+	
+	<path id="rec.hardwareserver.lib.path">
+		<fileset dir="${rec.lib.dir}/java/hardwareserver/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<path id="rec.hardwareserver.compile.lib.path">
+		<fileset dir="${rec.lib.dir}/compile/hardwareserver/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
 
 	<path id="rec.compile.hardwareserver.classpath">
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
-		<fileset dir="${rec.lib.compile.hardwareserver.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-		<fileset dir="${rec.lib.java.hardwareserver.dir}">
-			<include name="**/*.jar" />
-		</fileset>
+		<path refid="rec.hardwareserver.lib.path" />
+		<path refid="rec.hardwareserver.compile.lib.path" />
 	</path>
 
 	<path id="rec.compile.hardwareserver.dependencies.classpath">
@@ -224,29 +223,29 @@
 		=====================================================
 	-->
 
-	<property name="rec.multicast.build.dir" value="${build.dir}/rec/multicast">
-	</property>
-	<property name="rec.multicast.dist.dir" value="${dist.dir}/rec/multicast">
-	</property>
+	<property name="rec.multicast.build.dir" value="${build.dir}/rec/multicast" />
+	<property name="rec.multicast.dist.dir" value="${dist.dir}/rec/multicast" />
 
-	<property name="rec.multicast.src.java.dir" value="rec/src/java/multicast">
-	</property>
-
-	<property name="rec.lib.java.multicast.dir" value="${rec.lib.dir}/java/multicast/">
-	</property>
-	<property name="rec.lib.compile.multicast.dir" value="${rec.lib.dir}/compile/multicast/">
-	</property>
+	<property name="rec.multicast.src.java.dir" value="rec/src/java/multicast" />
+	
+	<path id="rec.multicast.lib.path">
+		<fileset dir="${rec.lib.dir}/java/multicast/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<path id="rec.multicast.compile.lib.path">
+		<fileset dir="${rec.lib.dir}/compile/multicast/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
 
 	<path id="rec.compile.multicastcontroller.classpath">
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
-		<fileset dir="${rec.lib.compile.multicast.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-		<fileset dir="${rec.lib.java.multicast.dir}">
-			<include name="**/*.jar" />
-		</fileset>
+		<path refid="rec.multicast.lib.path" />
+		<path refid="rec.multicast.compile.lib.path" />
 	</path>
 
 	<path id="rec.compile.multicastcontroller.dependencies.classpath">
@@ -290,27 +289,24 @@
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
-		<fileset dir="${rec.lib.java.multicast.dir}">
-			<include name="**/*.jar" />
-		</fileset>
-		<fileset dir="${rec.common.dist.dir}/">
-			<include name="ReCCommon_sig.jar" />
-		</fileset>
+		<path refid="rec.multicast.lib.path" />
+		<pathelement location="${rec.common.build.dir}/" />
+		<pathelement location="${rec.multicast.build.dir}/" />
 	</path>
 	
 	<target name="debug.rec.multicast">
-		<java jar="${rec.multicast.dist.dir}/ReCMulticastController.jar" fork="true" failonerror="true" maxmemory="256m">
+		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="256m">
 			<arg value="-h" />
 			<classpath refid="rec.run.multicastcontroller.classpath" />
 			<jvmarg value="-Xdebug" />
-			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=y" />
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${multicast.debug.address.port},server=y,suspend=y" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
 		</java>
 	</target>
 
 	<target name="run.rec.multicast">
-		<java jar="${rec.multicast.dist.dir}/ReCMulticastController.jar" fork="true" failonerror="true" maxmemory="256m">
+		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="256m">
 			<arg value="-h" />
 			<classpath refid="rec.run.multicastcontroller.classpath" />
 			<jvmarg value="-Xms${min.memory}" />
@@ -324,33 +320,32 @@
 		=====================================================
 	-->
 
-	<property name="elab.client.build.dir" value="${build.dir}/elab/client">
-	</property>
-	<property name="elab.client.dist.dir" value="${dist.dir}/elab/client">
-	</property>
+	<property name="elab.client.build.dir" value="${build.dir}/elab/client" />
+	<property name="elab.client.dist.dir" value="${dist.dir}/elab/client" />
 
-	<property name="elab.client.src.java.dir" value="elab/src/java/client">
-	</property>
-	<property name="elab.ui.src.java.dir" value="elab/src/java/ui">
-	</property>
+	<property name="elab.client.src.java.dir" value="elab/src/java/client" />
+	<property name="elab.ui.src.java.dir" value="elab/src/java/ui" />
 
-	<property name="elab.lib.dir" value="elab/lib">
-	</property>
-	<property name="elab.lib.java.client.dir" value="${elab.lib.dir}/java/client/">
-	</property>
-	<property name="elab.lib.compile.client.dir" value="${elab.lib.dir}/compile/client/">
-	</property>
+	<property name="elab.lib.dir" value="elab/lib" />
+	
+	<path id="elab.client.lib.path">
+		<fileset dir="${elab.lib.dir}/java/client/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<path id="elab.client.compile.lib.path">
+		<fileset dir="${elab.lib.dir}/compile/client/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
 
 	<path id="elab.compile.client.classpath">
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
-		<!--fileset dir="${elab.lib.compile.client.dir}">
-			<include name="**/*.jar" />
-		</fileset-->
-		<fileset dir="${elab.lib.java.client.dir}">
-			<include name="**/*.jar" />
-		</fileset>
+		<path refid="elab.client.lib.path" />
+		<path refid="elab.client.compile.lib.path" />
 	</path>
 
 	<path id="elab.compile.client.dependencies.classpath">
@@ -401,24 +396,30 @@
 		=====================================================
 	-->
 
-	<property name="elab.hardwareserver.build.dir" value="${build.dir}/elab/hardwareserver">
-	</property>
-	<property name="elab.hardwareserver.dist.dir" value="${dist.dir}/elab/hardwareserver">
-	</property>
+	<property name="elab.hardwareserver.build.dir" value="${build.dir}/elab/hardwareserver" />
+	<property name="elab.hardwareserver.dist.dir" value="${dist.dir}/elab/hardwareserver" />
 
-	<property name="elab.hardwareserver.src.java.dir" value="elab/src/java/driver">
-	</property>
+	<property name="elab.hardwareserver.src.java.dir" value="elab/src/java/driver" />
 
-	<property name="elab.lib.java.hardwareserver.dir" value="${elab.lib.dir}/java/driver/">
-	</property>
+	
+	<path id="elab.hardwareserver.lib.path">
+		<fileset dir="${elab.lib.dir}/java/driver/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<path id="elab.hardwareserver.compile.lib.path">
+		<fileset dir="${elab.lib.dir}/compile/driver/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
 
 	<path id="elab.compile.hardwareserver.classpath">
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
-		<fileset dir="${elab.lib.java.hardwareserver.dir}">
-			<include name="**/*.jar" />
-		</fileset>
+		<path refid="elab.hardwareserver.lib.path" />
+		<path refid="elab.hardwareserver.compile.lib.path" />
 	</path>
 
 	<path id="elab.compile.hardwareserver.dependencies.classpath">
@@ -457,21 +458,29 @@
 		=====================================================
 	-->
 
-	<property name="elab.multicast.build.dir" value="${build.dir}/elab/multicast">
-	</property>
-	<property name="elab.multicast.dist.dir" value="${dist.dir}/elab/multicast">
-	</property>
+	<property name="elab.multicast.build.dir" value="${build.dir}/elab/multicast" />
+	<property name="elab.multicast.dist.dir" value="${dist.dir}/elab/multicast" />
 
-	<property name="elab.multicast.src.java.dir" value="elab/src/java/multicast">
-	</property>
+	<property name="elab.multicast.src.java.dir" value="elab/src/java/multicast" />
 
-	<property name="elab.lib.java.multicast.dir" value="${elab.lib.dir}/java/multicast/">
-	</property>
+	<path id="elab.multicast.lib.path">
+		<fileset dir="${elab.lib.dir}/java/multicast/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<path id="elab.multicast.compile.lib.path">
+		<fileset dir="${elab.lib.dir}/compile/multicast/">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
 
 	<path id="elab.compile.multicastcontroller.classpath">
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
+		<path refid="elab.multicast.lib.path" />
+		<path refid="elab.multicast.compile.lib.path" />
 	</path>
 
 	<path id="elab.compile.multicastcontroller.dependencies.classpath">
@@ -533,18 +542,13 @@
 		=====================================================
 	-->
 
-	<property name="experiments.build.dir" value="${build.dir}/experiments">
-	</property>
-	<property name="experiments.dist.dir" value="${dist.dir}/experiments">
-	</property>
+	<property name="experiments.build.dir" value="${build.dir}/experiments" />
+	<property name="experiments.dist.dir" value="${dist.dir}/experiments" />
 
-	<property name="rec.hardwareserver.src.java.dir" value="rec/src/java/hardwareserver">
-	</property>
+	<property name="rec.hardwareserver.src.java.dir" value="rec/src/java/hardwareserver" />
 
-	<property name="experiment.lib.java.dir" value="${rec.lib.dir}/java/hardwareserver/">
-	</property>
-	<property name="experiment.compile.dir" value="${rec.lib.dir}/compile/hardwareserver/">
-	</property>
+	<property name="experiment.lib.java.dir" value="${rec.lib.dir}/java/hardwareserver/" />
+	<property name="experiment.compile.dir" value="${rec.lib.dir}/compile/hardwareserver/" />
 
 	<property name="template.file" value="templates/jnlp/template.xml" />
 
@@ -765,24 +769,49 @@
 	<target name="dist.experiment.list" depends="clean.experiments.list,compile.experiments.list,jar.experiments.list,sign.experiments.list">
 		<fail unless="experiment.list">experiment.list must be set to build the jnlp for that list of experiments. 
 			Pass it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="create.jnlp.for.experiment" list="%{experiment.list}" attribute.name="experiment.name" />
+		<process.list task="create.jnlp.for.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 	
-	<target name="run.experiment">
-		
+	
+	
+	<path id="experiment.driver.classpath">
+		<fileset dir="lib/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="run.experiment.client">
+		<java classname="pt.utl.ist.elab.client.${experiment.name}.${experiment.name}Client" fork="true" failonerror="true" maxmemory="256m">
+			<arg value="-h" />
+			<classpath>
+				<fileset dir="lib/">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+		</java>
 	</target>
+	
+	<target name="run.experiment.driver">
+		<java classname="pt.utl.ist.elab.driver.${experiment.name}.AleatorioServerMain" fork="true" failonerror="true" maxmemory="256m">
+			<arg value="-h" />
+			<classpath>
+				<fileset dir="lib/">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+		</java>
+	</target>
+
 	<!--
 		================================================================
 		========================== Libraries ===========================
 		================================================================
 		-->
 	
-	<property name="openorbWebLoc" 		value="/var/www/html/rec/openorb/" />
-	<property name="openorbSrvLoc" 		value="/home/elab/ReC7.0/openorb/" />
-	<property name="jfreechartWebLoc" 	value="/var/www/html/rec/jfreechart/" />
-	<property name="telescopioWebLoc"	value="/var/www/html/rec/eLab/telescopio/"/>
-	<property name="meteoWebLoc"		value="/var/www/html/rec/eLab/meteo/"/>
-
 	<macrodef name="sign.jars.in.directory">
 		<attribute name="source.dir.name" />
 		<attribute name="destination.dir.name" />
@@ -797,18 +826,6 @@
 	</macrodef>
 
 	<target name="deploy.libraries">
-		<copy todir="${openorbWebLoc}">
-			<fileset dir="${tempLibSignDir}" includes="openorb_orb*, avalon-fr*, xercesIm*, logkit_sig*, tools-1.4*, xml-a*"/>
-		</copy>
-		<copy todir="${jfreechartWebLoc}">
-			<fileset dir="${tempLibSignDir}" includes="jfreec*, jcomm*"/>
-		</copy>
-		<copy todir="${telescopioWebLoc}">
-			<fileset dir="${tempLibSignDir}" includes="fits*"/>
-		</copy>
-		<copy todir="${meteoWebLoc}">
-			<fileset dir="${tempLibSignDir}" includes="JCFN*"/>
-		</copy>
 
 	</target>
 </project>
