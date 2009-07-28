@@ -545,11 +545,6 @@
 	<property name="experiments.build.dir" value="${build.dir}/experiments" />
 	<property name="experiments.dist.dir" value="${dist.dir}/experiments" />
 
-	<property name="rec.hardwareserver.src.java.dir" value="rec/src/java/hardwareserver" />
-
-	<property name="experiment.lib.java.dir" value="${rec.lib.dir}/java/hardwareserver/" />
-	<property name="experiment.compile.dir" value="${rec.lib.dir}/compile/hardwareserver/" />
-
 	<property name="template.file" value="templates/jnlp/template.xml" />
 
 	<!--MACROS-->
@@ -592,7 +587,7 @@
 
 			<mkdir dir="${experiments.build.dir}/@{experiment.name}/client" />
 			<mkdir dir="${experiments.build.dir}/@{experiment.name}/server" />
-			<echo>Compiling experiment: @{experiment}</echo>
+			<echo>Compiling experiment: @{experiment.name}</echo>
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
 
@@ -688,6 +683,51 @@
 			</replace>
 		</sequential>
 	</macrodef>
+	
+	<macrodef name="run.experiment.client">
+		<attribute name="experiment.name"/>
+		<sequential>
+			<java classname="pt.utl.ist.elab.client.@{experiment.name}.ClientMain" fork="true" failonerror="true" maxmemory="256m">
+				<arg value="-h" />
+				<classpath>
+					<fileset dir="lib/">
+						<include name="**/*.jar" />
+					</fileset>
+					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
+						<include name="**/*.jar" />
+					</fileset>
+					<pathelement location="${rec.common.build.dir}" />
+					<pathelement location="${rec.client.build.dir}" />
+					<pathelement location="${rec.ui.build.dir}" />
+					<pathelement location="${experiments.build.dir}/@{experiment.name}/client/" />
+				</classpath>
+				<jvmarg value="-Xms${min.memory}" />
+				<jvmarg value="-Xmx${max.memory}" />
+			</java>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="run.experiment.driver">
+		<attribute name="experiment.name"/>
+		<sequential>
+			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true" maxmemory="256m">
+				<arg value="-h" />
+				<classpath>
+					<fileset dir="lib/">
+						<include name="**/*.jar" />
+					</fileset>
+					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
+						<include name="**/*.jar" />
+					</fileset>
+					<pathelement location="${rec.common.build.dir}" />
+					<pathelement location="${rec.hardwareserver.build.dir}" />
+					<pathelement location="${experiments.build.dir}/@{experiment.name}/server/" />
+				</classpath>
+				<jvmarg value="-Xms${min.memory}" />
+				<jvmarg value="-Xmx${max.memory}" />
+			</java>
+		</sequential>
+	</macrodef>
 
 	<!--/MACROS-->
 
@@ -771,41 +811,19 @@
 			Pass it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
 		<process.list task="create.jnlp.for.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
-	
-	
-	
-	<path id="experiment.driver.classpath">
-		<fileset dir="lib/">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
-	
+		
 	<target name="run.experiment.client">
-		<java classname="pt.utl.ist.elab.client.${experiment.name}.${experiment.name}Client" fork="true" failonerror="true" maxmemory="256m">
-			<arg value="-h" />
-			<classpath>
-				<fileset dir="lib/">
-					<include name="**/*.jar" />
-				</fileset>
-			</classpath>
-			<jvmarg value="-Xms${min.memory}" />
-			<jvmarg value="-Xmx${max.memory}" />
-		</java>
+		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<run.experiment.client experiment.name="${experiment.name}" />
 	</target>
 	
 	<target name="run.experiment.driver">
-		<java classname="pt.utl.ist.elab.driver.${experiment.name}.AleatorioServerMain" fork="true" failonerror="true" maxmemory="256m">
-			<arg value="-h" />
-			<classpath>
-				<fileset dir="lib/">
-					<include name="**/*.jar" />
-				</fileset>
-			</classpath>
-			<jvmarg value="-Xms${min.memory}" />
-			<jvmarg value="-Xmx${max.memory}" />
-		</java>
+		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<run.experiment.driver experiment.name="${experiment.name}" />
 	</target>
-
+	
 	<!--
 		================================================================
 		========================== Libraries ===========================
