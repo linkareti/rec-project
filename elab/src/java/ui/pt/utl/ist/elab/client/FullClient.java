@@ -1,5 +1,5 @@
 /*
- * RadioactividadeClient.java
+ * ClientMain.java
  *
  * Created on 26 de Maio de 2003, 19:01
  */
