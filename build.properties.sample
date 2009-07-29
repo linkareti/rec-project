@@ -34,21 +34,21 @@ max.memory=1024m
 min.memory=128m
 
 ###########################SYSTEM PROPERTIES###############################
-	rec.multicastcontroller.bindname=MultiCastController 
+rec.multicastcontroller.bindname=MultiCastController 
 rec.multicastcontroller.initref=MultiCastController 
-	java.util.logging.config.file=loggers.config.properties
-		org.omg.CORBA.ORBClass=org.openorb.orb.core.ORB 
-	org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton 
-	com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl
-	openorb.config=$OUTPUT_BASE_DIR/openorb/OpenORB.xml 
-		openorb.config.virtual=$OUTPUT_BASE_DIR/openorb/OpenORBVirtual.xml
+java.util.logging.config.file=loggers.config.properties
+org.omg.CORBA.ORBClass=org.openorb.orb.core.ORB 
+org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton 
+com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl
+openorb.config=$OUTPUT_BASE_DIR/openorb/OpenORB.xml 
+openorb.config.virtual=$OUTPUT_BASE_DIR/openorb/OpenORBVirtual.xml
 	
-	##MULTICAST PROPERTIES - MULTICAST##
+##MULTICAST PROPERTIES - MULTICAST##
 multicast.openorb.profile=recMultiCastController 
 rec.multicast.securitymanager=pt.utl.ist.elab.security.ElabSecurityManager 
 rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE=15 
 multicast.debug.address.port=8000
 
-	##SYSTEM PROPERTIES - EXPERIMENTS## valerá a pena definir por experiencia?
+##SYSTEM PROPERTIES - EXPERIMENTS## valerï¿½ a pena definir por experiencia?
 experiment.openorb.profile=recHardware 
 experiment.eLab.HardwareInfo=MMBaseHardwareInfo.xml
