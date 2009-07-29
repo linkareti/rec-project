@@ -1,7 +1,6 @@
 build.dir=build/java
 dist.dir=dist/java
-lib.java.dir=lib/java
-src.java.dir=src/java
+
 javac.encoding=UTF-8
 javac.debug=true
 javac.optimize=true
@@ -14,6 +13,7 @@ copy.encoding=UTF-8
 #just uncomment the one you need
 #list of experiments in ELab
 experiment.list=aleatorio,gamma,T,webrobot
+experiment.name=aleatorio
 #list of virtual experiments in ELab Virtual
 #experiment.list=mm,cg
 
@@ -23,7 +23,7 @@ rec.server.dir=
 web.server=
 web.server.dir=
 
-##KEYSTORY CONFIGURATION###
+##KEYSTORE CONFIGURATION###
 keystore=.keystore
 keypass=linkare
 storepass=linkare
@@ -32,3 +32,23 @@ alias=linkare
 ##RUN CONFIGURATION##
 max.memory=1024m
 min.memory=128m
+
+###########################SYSTEM PROPERTIES###############################
+	rec.multicastcontroller.bindname=MultiCastController 
+rec.multicastcontroller.initref=MultiCastController 
+	java.util.logging.config.file=loggers.config.properties
+		org.omg.CORBA.ORBClass=org.openorb.orb.core.ORB 
+	org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton 
+	com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl
+	openorb.config=$OUTPUT_BASE_DIR/openorb/OpenORB.xml 
+		openorb.config.virtual=$OUTPUT_BASE_DIR/openorb/OpenORBVirtual.xml
+	
+	##MULTICAST PROPERTIES - MULTICAST##
+multicast.openorb.profile=recMultiCastController 
+rec.multicast.securitymanager=pt.utl.ist.elab.security.ElabSecurityManager 
+rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE=15 
+multicast.debug.address.port=8000
+
+	##SYSTEM PROPERTIES - EXPERIMENTS## valerá a pena definir por experiencia?
+experiment.openorb.profile=recHardware 
+experiment.eLab.HardwareInfo=MMBaseHardwareInfo.xml
