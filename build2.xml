@@ -294,23 +294,37 @@
 		<pathelement location="${rec.multicast.build.dir}/" />
 	</path>
 	
-	<target name="debug.rec.multicast">
-		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="256m">
+	<target name="run.rec.multicast">
+		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="{max.memory}">
 			<arg value="-h" />
+			<!--bootclasspath location=" TODO /openorb/openorb_orb_omg-1.4.0_sig.jar"/-->
+			<classpath refid="rec.run.multicastcontroller.classpath" />
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}"/>
+			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}"/>
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}"/>
+			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}"/>
+			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}"/>
+			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}"/>		
+		</java>
+	</target>
+	
+	<target name="debug.rec.multicast">
+		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="{max.memory}">
+			<arg value="-h" />
+			<!--bootclasspath location=" TODO /openorb/openorb_orb_omg-1.4.0_sig.jar"/-->
 			<classpath refid="rec.run.multicastcontroller.classpath" />
 			<jvmarg value="-Xdebug" />
 			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${multicast.debug.address.port},server=y,suspend=y" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
-		</java>
-	</target>
-
-	<target name="run.rec.multicast">
-		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="256m">
-			<arg value="-h" />
-			<classpath refid="rec.run.multicastcontroller.classpath" />
-			<jvmarg value="-Xms${min.memory}" />
-			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}"/>
+			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}"/>
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}"/>
+			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}"/>
+			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}"/>
+			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}"/>
 		</java>
 	</target>
 
@@ -703,6 +717,11 @@
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
+				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}"/>
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}"/>
+				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}"/>
+				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}"/>
+				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}"/>
 			</java>
 		</sequential>
 	</macrodef>
@@ -725,6 +744,11 @@
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
+				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}"/>
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}"/>
+				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}"/>
+				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}"/>
+				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}"/>
 			</java>
 		</sequential>
 	</macrodef>
