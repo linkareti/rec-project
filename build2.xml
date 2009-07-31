@@ -22,13 +22,16 @@
 		<echo>ReC - eBab build system</echo>
 	</target>
 
+	<property name="build.dir.classes" value="${build.dir}/classes"/>
+	<property name="build.dir.jars" value="${build.dir}/jars"/>
 	<!--
 		=====================================================
 		==================== REC Common =====================
 		=====================================================
 	-->
 
-	<property name="rec.common.build.dir" value="${build.dir}/rec/common" />
+	<property name="rec.common.classes.dir" value="${build.dir.classes}/rec/common" />
+	<property name="rec.common.build.dir" value="${build.dir.jars}/rec/common" />
 	<property name="rec.common.dist.dir" value="${dist.dir}/rec/common" />
 
 	<property name="rec.common.src.java.dir" value="rec/src/java/common" />
@@ -53,12 +56,12 @@
 	</path>
 
 	<target name="clean.rec.common" description="Delete the build folder containing the common shared compiled code.">
-		<delete dir="${rec.common.build.dir}" />
+		<delete dir="${rec.common.classes.dir}" />
 	</target>
 
 	<target name="compile.rec.common" description="Compile the common part of the ReC project independently.">
-		<mkdir dir="${rec.common.build.dir}" />
-		<javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.build.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<mkdir dir="${rec.common.classes.dir}" />
+		<javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.common.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -66,30 +69,31 @@
 	</target>
 
 	<target name="jar.rec.common" description="Create a jar with the common part of the ReC project.">
-		<mkdir dir="${rec.common.dist.dir}" />
-		<jar destfile="${rec.common.dist.dir}/ReCCommon.jar" basedir="${rec.common.build.dir}">
+		<mkdir dir="${rec.common.build.dir}" />
+		<jar destfile="${rec.common.build.dir}/ReCCommon.jar" basedir="${rec.common.classes.dir}">
 			<include name="**/*.class" />
 		</jar>
 	</target>
 
 	<target name="sign.rec.common">
-		<signjar destDir="${rec.common.dist.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
-			<fileset dir="${rec.common.dist.dir}" includes="ReCCommon.jar" excludes="*_sig.jar" />
+		<signjar destDir="${rec.common.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${rec.common.build.dir}" includes="ReCCommon.jar" excludes="*_sig.jar" />
 			<globmapper from="*.jar" to="*_sig.jar" />
 		</signjar>
 	</target>
 
-	<target name="dist.rec.common" depends="clean.rec.common,compile.rec.common,jar.rec.common,sign.rec.common">
+	<target name="build.rec.common" depends="clean.rec.common,compile.rec.common,jar.rec.common,sign.rec.common">
 
 	</target>
-
+	
 	<!--
 		=====================================================
 		==================== ReC Client =====================
 		=====================================================
 	-->
 
-	<property name="rec.client.build.dir" value="${build.dir}/rec/client" />
+	<property name="rec.client.classes.dir" value="${build.dir.classes}/rec/client" />
+	<property name="rec.client.build.dir" value="${build.dir.jars}/rec/client" />
 	<property name="rec.client.dist.dir" value="${dist.dir}/rec/client" />
 
 	<property name="rec.client.src.java.dir" value="rec/src/java/client" />
@@ -117,22 +121,22 @@
 
 	<path id="rec.compile.client.dependencies.classpath">
 		<path refid="rec.compile.client.classpath" />
-		<pathelement location="${rec.common.build.dir}/" />
+		<pathelement location="${rec.common.classes.dir}/" />
 	</path>
 
 	<target name="clean.rec.client" description="Delete the build folder containing the common shared compiled code.">
-		<delete dir="${rec.client.build.dir}" />
+		<delete dir="${rec.client.classes.dir}" />
 	</target>
 
 	<target name="compile.rec.client">
-		<mkdir dir="${rec.client.build.dir}" />
-		<javac srcdir="${rec.client.src.java.dir}" destdir="${rec.client.build.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<mkdir dir="${rec.client.classes.dir}" />
+		<javac srcdir="${rec.client.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.client.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
-		<javac srcdir="${rec.ui.src.java.dir}" destdir="${rec.client.build.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<javac srcdir="${rec.ui.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.client.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -140,30 +144,31 @@
 	</target>
 
 	<target name="jar.rec.client">
-		<mkdir dir="${rec.client.dist.dir}" />
-		<jar destfile="${rec.client.dist.dir}/ReCClient.jar" basedir="${rec.client.build.dir}">
+		<mkdir dir="${rec.client.build.dir}" />
+		<jar destfile="${rec.client.build.dir}/ReCClient.jar" basedir="${rec.client.classes.dir}">
 			<include name="**/*.class" />
 		</jar>
 	</target>
 
 	<target name="sign.rec.client">
-		<signjar destDir="${rec.client.dist.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
-			<fileset dir="${rec.client.dist.dir}" includes="ReCClient.jar" excludes="*_sig.jar" />
+		<signjar destDir="${rec.client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${rec.client.build.dir}" includes="ReCClient.jar" excludes="*_sig.jar" />
 			<globmapper from="*.jar" to="*_sig.jar" />
 		</signjar>
 	</target>
 
-	<target name="dist.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client,sign.rec.client">
+	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client,sign.rec.client">
 
 	</target>
-
+	
 	<!--
 		=====================================================
 		================ ReC Hardware Server ================
 		=====================================================
 	-->
 
-	<property name="rec.hardwareserver.build.dir" value="${build.dir}/rec/hardwareserver" />
+	<property name="rec.hardwareserver.classes.dir" value="${build.dir.classes}/rec/hardwareserver" />
+	<property name="rec.hardwareserver.build.dir" value="${build.dir.jars}/rec/hardwareserver" />
 	<property name="rec.hardwareserver.dist.dir" value="${dist.dir}/rec/hardwareserver" />
 
 	<property name="rec.hardwareserver.src.java.dir" value="rec/src/java/hardwareserver" />
@@ -190,16 +195,16 @@
 
 	<path id="rec.compile.hardwareserver.dependencies.classpath">
 		<path refid="rec.compile.hardwareserver.classpath" />
-		<pathelement location="${rec.common.build.dir}/" />
+		<pathelement location="${rec.common.classes.dir}/" />
 	</path>
 
 	<target name="clean.rec.hardwareserver">
-		<delete dir="${rec.hardwareserver.build.dir}" />
+		<delete dir="${rec.hardwareserver.classes.dir}" />
 	</target>
 
 	<target name="compile.rec.hardwareserver">
-		<mkdir dir="${rec.hardwareserver.build.dir}" />
-		<javac srcdir="${rec.hardwareserver.src.java.dir}" destdir="${build.dir}/ReC/hardwareserver" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<mkdir dir="${rec.hardwareserver.classes.dir}" />
+		<javac srcdir="${rec.hardwareserver.src.java.dir}" destdir="${rec.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.hardwareserver.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -207,23 +212,24 @@
 	</target>
 
 	<target name="jar.rec.hardwareserver">
-		<mkdir dir="${rec.hardwareserver.dist.dir}" />
-		<jar destfile="${rec.hardwareserver.dist.dir}/ReCHardwareServer.jar" basedir="${rec.hardwareserver.build.dir}">
+		<mkdir dir="${rec.hardwareserver.build.dir}" />
+		<jar destfile="${rec.hardwareserver.build.dir}/ReCHardwareServer.jar" basedir="${rec.hardwareserver.classes.dir}">
 			<include name="**/*.class" />
 		</jar>
 	</target>
 
-	<target name="dist.rec.hardwareserver" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
+	<target name="build.rec.hardwareserver" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
 
 	</target>
-
+	
 	<!--
 		=====================================================
 		============= ReC Multicast Controller===============
 		=====================================================
 	-->
 
-	<property name="rec.multicast.build.dir" value="${build.dir}/rec/multicast" />
+	<property name="rec.multicast.classes.dir" value="${build.dir.classes}/rec/multicast" />
+	<property name="rec.multicast.build.dir" value="${build.dir.jars}/rec/multicast" />
 	<property name="rec.multicast.dist.dir" value="${dist.dir}/rec/multicast" />
 
 	<property name="rec.multicast.src.java.dir" value="rec/src/java/multicast" />
@@ -250,16 +256,16 @@
 
 	<path id="rec.compile.multicastcontroller.dependencies.classpath">
 		<path refid="rec.compile.multicastcontroller.classpath" />
-		<pathelement location="${rec.common.build.dir}/" />
+		<pathelement location="${rec.common.classes.dir}/" />
 	</path>
 
 	<target name="clean.rec.multicastcontroller">
-		<delete dir="${rec.multicast.build.dir}" />
+		<delete dir="${rec.multicast.classes.dir}" />
 	</target>
 
 	<target name="compile.rec.multicastcontroller">
-		<mkdir dir="${rec.multicast.build.dir}" />
-		<javac srcdir="${rec.multicast.src.java.dir}" destdir="${rec.multicast.build.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<mkdir dir="${rec.multicast.classes.dir}" />
+		<javac srcdir="${rec.multicast.src.java.dir}" destdir="${rec.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.multicastcontroller.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -267,8 +273,8 @@
 	</target>
 
 	<target name="jar.rec.multicastcontroller">
-		<mkdir dir="${rec.multicast.dist.dir}" />
-		<jar destfile="${rec.multicast.dist.dir}/ReCMulticastController.jar" basedir="${rec.multicast.build.dir}">
+		<mkdir dir="${rec.multicast.build.dir}" />
+		<jar destfile="${rec.multicast.build.dir}/ReCMulticastController.jar" basedir="${rec.multicast.classes.dir}">
 			<include name="**/*.class" />
 			<manifest>
 				<attribute name="Main-Class" value="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" />
@@ -281,17 +287,17 @@
 		</jar>
 	</target>
 
-	<target name="dist.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
+	<target name="build.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
 
 	</target>
-
+	
 	<path id="rec.run.multicastcontroller.classpath">
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
 		<path refid="rec.multicast.lib.path" />
-		<pathelement location="${rec.common.build.dir}/" />
-		<pathelement location="${rec.multicast.build.dir}/" />
+		<pathelement location="${rec.common.classes.dir}/" />
+		<pathelement location="${rec.multicast.classes.dir}/" />
 	</path>
 	
 	<target name="run.rec.multicast">
@@ -344,7 +350,8 @@
 		=====================================================
 	-->
 
-	<property name="elab.client.build.dir" value="${build.dir}/elab/client" />
+	<property name="elab.client.classes.dir" value="${build.dir.classes}/elab/client" />
+	<property name="elab.client.build.dir" value="${build.dir.jars}/elab/client" />
 	<property name="elab.client.dist.dir" value="${dist.dir}/elab/client" />
 
 	<property name="elab.client.src.java.dir" value="elab/src/java/client" />
@@ -374,22 +381,22 @@
 
 	<path id="elab.compile.client.dependencies.classpath">
 		<path refid="elab.compile.client.classpath" />
-		<pathelement location="${rec.client.build.dir}/" />
+		<pathelement location="${rec.client.classes.dir}/" />
 	</path>
 
 	<target name="clean.elab.client">
-		<delete dir="${elab.client.build.dir}" />
+		<delete dir="${elab.client.classes.dir}" />
 	</target>
 
 	<target name="compile.elab.client">
-		<mkdir dir="${elab.client.build.dir}" />
-		<javac srcdir="${elab.client.src.java.dir}" destdir="${elab.client.build.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<mkdir dir="${elab.client.classes.dir}" />
+		<javac srcdir="${elab.client.src.java.dir}" destdir="${elab.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="elab.compile.client.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
-		<javac srcdir="${elab.ui.src.java.dir}" destdir="${elab.client.build.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<javac srcdir="${elab.ui.src.java.dir}" destdir="${elab.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="elab.compile.client.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -397,30 +404,31 @@
 	</target>
 
 	<target name="jar.elab.client">
-		<mkdir dir="${elab.client.dist.dir}" />
-		<jar destfile="${elab.client.dist.dir}/ELabClient.jar" basedir="${elab.client.build.dir}">
+		<mkdir dir="${elab.client.build.dir}" />
+		<jar destfile="${elab.client.build.dir}/ELabClient.jar" basedir="${elab.client.classes.dir}">
 			<include name="**/*.class" />
 		</jar>
 	</target>
 
 	<target name="sign.elab.client">
-		<signjar destDir="${elab.client.dist.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
-			<fileset dir="${elab.client.dist.dir}" includes="ELabClient.jar" excludes="*_sig.jar" />
+		<signjar destDir="${elab.client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${elab.client.build.dir}" includes="ELabClient.jar" excludes="*_sig.jar" />
 			<globmapper from="*.jar" to="*_sig.jar" />
 		</signjar>
 	</target>
 
-	<target name="dist.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
+	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
 
 	</target>
-
+	
 	<!--
 		=====================================================
 		=================== Elab driver =====================
 		=====================================================
 	-->
 
-	<property name="elab.hardwareserver.build.dir" value="${build.dir}/elab/hardwareserver" />
+	<property name="elab.hardwareserver.classes.dir" value="${build.dir.classes}/elab/hardwareserver" />
+	<property name="elab.hardwareserver.build.dir" value="${build.dir.jars}/elab/hardwareserver" />
 	<property name="elab.hardwareserver.dist.dir" value="${dist.dir}/elab/hardwareserver" />
 
 	<property name="elab.hardwareserver.src.java.dir" value="elab/src/java/driver" />
@@ -448,17 +456,17 @@
 
 	<path id="elab.compile.hardwareserver.dependencies.classpath">
 		<path refid="elab.compile.hardwareserver.classpath" />
-		<pathelement location="${rec.common.build.dir}/" />
-		<pathelement location="${rec.hardwareserver.build.dir}/" />
+		<pathelement location="${rec.common.classes.dir}/" />
+		<pathelement location="${rec.hardwareserver.classes.dir}/" />
 	</path>
 
 	<target name="clean.elab.hardwareserver">
-		<delete dir="${elab.hardwareserver.build.dir}" />
+		<delete dir="${elab.hardwareserver.classes.dir}" />
 	</target>
 
 	<target name="compile.elab.hardwareserver">
-		<mkdir dir="${elab.hardwareserver.build.dir}" />
-		<javac srcdir="${elab.hardwareserver.src.java.dir}" destdir="${elab.hardwareserver.build.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<mkdir dir="${elab.hardwareserver.classes.dir}" />
+		<javac srcdir="${elab.hardwareserver.src.java.dir}" destdir="${elab.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="elab.compile.hardwareserver.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -466,23 +474,24 @@
 	</target>
 
 	<target name="jar.elab.hardwareserver">
-		<mkdir dir="${elab.hardwareserver.dist.dir}" />
-		<jar destfile="${elab.hardwareserver.dist.dir}/ELabHardwareServer.jar" basedir="${elab.hardwareserver.build.dir}">
+		<mkdir dir="${elab.hardwareserver.build.dir}" />
+		<jar destfile="${elab.hardwareserver.build.dir}/ELabHardwareServer.jar" basedir="${elab.hardwareserver.classes.dir}">
 			<include name="**/*.class" />
 		</jar>
 	</target>
 
-	<target name="dist.elab.hardwareserver" depends="clean.elab.hardwareserver,compile.elab.hardwareserver,jar.elab.hardwareserver">
+	<target name="build.elab.hardwareserver" depends="clean.elab.hardwareserver,compile.elab.hardwareserver,jar.elab.hardwareserver">
 
 	</target>
-
+	
 	<!--
 		=====================================================
 		=========== Elab Multicast Controller ===============
 		=====================================================
 	-->
 
-	<property name="elab.multicast.build.dir" value="${build.dir}/elab/multicast" />
+	<property name="elab.multicast.classes.dir" value="${build.dir.classes}/elab/multicast" />
+	<property name="elab.multicast.build.dir" value="${build.dir.jars}/elab/multicast" />
 	<property name="elab.multicast.dist.dir" value="${dist.dir}/elab/multicast" />
 
 	<property name="elab.multicast.src.java.dir" value="elab/src/java/multicast" />
@@ -509,17 +518,17 @@
 
 	<path id="elab.compile.multicastcontroller.dependencies.classpath">
 		<path refid="elab.compile.multicastcontroller.classpath" />
-		<pathelement location="${rec.common.build.dir}/" />
-		<pathelement location="${rec.multicast.build.dir}/" />
+		<pathelement location="${rec.common.classes.dir}/" />
+		<pathelement location="${rec.multicast.classes.dir}/" />
 	</path>
 
 	<target name="clean.elab.multicastcontroller">
-		<delete dir="${elab.multicast.build.dir}" />
+		<delete dir="${elab.multicast.classes.dir}" />
 	</target>
 
 	<target name="compile.elab.multicastcontroller">
-		<mkdir dir="${elab.multicast.build.dir}" />
-		<javac srcdir="${elab.multicast.src.java.dir}" destdir="${elab.multicast.build.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+		<mkdir dir="${elab.multicast.classes.dir}" />
+		<javac srcdir="${elab.multicast.src.java.dir}" destdir="${elab.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="elab.compile.multicastcontroller.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
@@ -527,16 +536,16 @@
 	</target>
 
 	<target name="jar.elab.multicastcontroller">
-		<mkdir dir="${elab.multicast.dist.dir}" />
-		<jar destfile="${elab.multicast.dist.dir}/ELabMulticastController.jar" basedir="${elab.multicast.build.dir}">
+		<mkdir dir="${elab.multicast.build.dir}" />
+		<jar destfile="${elab.multicast.build.dir}/ELabMulticastController.jar" basedir="${elab.multicast.classes.dir}">
 			<include name="**/*.class" />
 		</jar>
 	</target>
 
-	<target name="dist.elab.multicastcontroller" depends="clean.elab.multicastcontroller,compile.elab.multicastcontroller,jar.elab.multicastcontroller">
+	<target name="build.elab.multicastcontroller" depends="clean.elab.multicastcontroller,compile.elab.multicastcontroller,jar.elab.multicastcontroller">
 
 	</target>
-
+	
 	<!--
 		=====================================================
 		===============ReC Entire Project====================
@@ -544,21 +553,53 @@
 	-->
 
 	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller,clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller,clean.all.experiments">
+	
 	</target>
 
 	<target name="compile.all" depends="compile.rec.common,compile.rec.client,compile.rec.hardwareserver,compile.rec.multicastcontroller,compile.elab.client,compile.elab.hardwareserver,compile.elab.multicastcontroller,compile.experiments.list">
+	
 	</target>
 
 	<target name="jar.all" depends="jar.rec.common,jar.rec.client,jar.rec.hardwareserver,jar.rec.multicastcontroller,jar.elab.client,jar.elab.hardwareserver,jar.elab.multicastcontroller,jar.experiments.list">
+	
 	</target>
 
 	<target name="sign.all" depends="sign.rec.common,sign.rec.client,sign.elab.client,sign.experiments.list">
 
 	</target>
 
-	<target name="dist.all" depends="dist.rec.common,dist.rec.client,dist.rec.hardwareserver,dist.rec.multicastcontroller,dist.elab.client,dist.elab.hardwareserver,dist.elab.multicastcontroller">
-
+	<target name="build.all" depends="build.rec.common,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller,build.elab.client,build.elab.hardwareserver,build.elab.multicastcontroller">
+	
 	</target>
+	
+	<fileset id="dist.files.multicast">
+		<includesfile name="${${elab.multicast.build.dir}/ELabMulticastController.jar}"/>
+	</fileset>
+	<fileset id="dist.files.full.client">
+		<includesfile/>
+	</fileset>
+	
+	<target name="dist" depends="build.all">
+		<mkdir dir="${dist.dir}"/>
+		
+		<zip destfile="${dist.dir}/elab-multicast.zip" update="true" comment="eLab Multicast Controller">
+			<fileset refid="dist.files.multicast" />
+		</zip>
+		
+		<zip destfile="${dist.dir}/elab-client-jnlp.zip" update="true" comment="eLab Full Client">
+			<fileset refid="dist.files.full.client" />
+		</zip>
+		
+		<dist.all.experiments/>
+	</target>
+	
+	<macrodef name="dist.all.experiments">
+		<attribute name="experiment.name"/>
+		<sequential>
+			<zip destfile="${dist.dir}/elab-exp1-client.zip" update="true" comment="eLab @{experiment.name} Client"></zip>
+			<zip destfile="${dist.dir}/elab-exp1-hwserver.zip" update="true" comment="eLab @{experiment.name} Driver"></zip>
+		</sequential>
+	</macrodef>
 
 	<!--
 		=====================================================
@@ -566,7 +607,8 @@
 		=====================================================
 	-->
 
-	<property name="experiments.build.dir" value="${build.dir}/experiments" />
+	<property name="experiments.classes.dir" value="${build.dir.classes}/experiments" />
+	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
 	<property name="experiments.dist.dir" value="${dist.dir}/experiments" />
 
 	<property name="template.file" value="templates/jnlp/template.xml" />
@@ -601,7 +643,7 @@
 	<macrodef name="clean.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<delete dir="${experiments.build.dir}/@{experiment.name}" />
+			<delete dir="${experiments.classes.dir}/@{experiment.name}" />
 		</sequential>
 	</macrodef>
 
@@ -609,18 +651,18 @@
 		<attribute name="experiment.name" />
 		<sequential>
 
-			<mkdir dir="${experiments.build.dir}/@{experiment.name}/client" />
-			<mkdir dir="${experiments.build.dir}/@{experiment.name}/server" />
+			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client" />
+			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server" />
 			<echo>Compiling experiment: @{experiment.name}</echo>
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
 
-			<javac srcdir="experiments/@{experiment.name}/src/java/client" destdir="${experiments.build.dir}/@{experiment.name}/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<javac srcdir="experiments/@{experiment.name}/src/java/client" destdir="${experiments.classes.dir}/@{experiment.name}/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 				<include name="**/*.java" />
 				<classpath>
-					<pathelement location="${rec.common.build.dir}" />
-					<pathelement location="${rec.client.build.dir}" />
-					<pathelement location="${rec.ui.build.dir}" />
+					<pathelement location="${rec.common.classes.dir}" />
+					<pathelement location="${rec.client.classes.dir}" />
+					<pathelement location="${rec.ui.classes.dir}" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/client">
 						<include name="**/*.jar" />
 					</fileset>
@@ -628,14 +670,14 @@
 				<compilerarg value="-Xlint:unchecked, cast, -serial" />
 			</javac>
 
-			<javac srcdir="experiments/@{experiment.name}/src/java/server" destdir="${experiments.build.dir}/@{experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<javac srcdir="experiments/@{experiment.name}/src/java/server" destdir="${experiments.classes.dir}/@{experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 				<include name="**/*.java" />
 				<classpath>
 					<fileset dir="lib/">
 						<include name="**/*.jar" />
 					</fileset>
-					<pathelement location="${rec.common.build.dir}" />
-					<pathelement location="${rec.hardwareserver.build.dir}" />
+					<pathelement location="${rec.common.classes.dir}" />
+					<pathelement location="${rec.hardwareserver.classes.dir}" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/server">
 						<include name="**/*.jar" />
 					</fileset>
@@ -651,15 +693,15 @@
 	<macrodef name="jar.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<mkdir dir="${experiments.dist.dir}/${experiment.name}/client" />
-			<mkdir dir="${experiments.dist.dir}/${experiment.name}/server" />
+			<mkdir dir="${experiments.build.dir}/${experiment.name}/client" />
+			<mkdir dir="${experiments.build.dir}/${experiment.name}/server" />
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
 
-			<jar destfile="${experiments.dist.dir}/${experiment.name}/client/@{experiment.name}Client.jar" basedir="${experiments.build.dir}/${experiment.name}/client">
+			<jar destfile="${experiments.build.dir}/${experiment.name}/client/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/${experiment.name}/client">
 				<include name="**/*.class" />
 			</jar>
-			<jar destfile="${experiments.dist.dir}/${experiment.name}/server/@{experiment.name}Driver.jar" basedir="${experiments.build.dir}/${experiment.name}/server">
+			<jar destfile="${experiments.build.dir}/${experiment.name}/server/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/${experiment.name}/server">
 				<include name="**/*.class" />
 			</jar>
 
@@ -671,7 +713,7 @@
 	<macrodef name="sign.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<signjar jar="${experiments.dist.dir}/${experiment.name}/client/@{experiment.name}Client.jar" signedjar="${experiments.dist.dir}/${experiment.name}/client/@{experiment.name}Client_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" />
+			<signjar jar="${experiments.build.dir}/${experiment.name}/client/@{experiment.name}Client.jar" signedjar="${experiments.build.dir}/${experiment.name}/client/@{experiment.name}Client_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" />
 			<!--signjar jar="${experiments.dist.dir}/${experiment.name}/server/@{experiment.name}Driver.jar" signedjar="${experiments.dist.dir}/${experiment.name}/server/@{experiment.name}Driver_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" /-->
 		</sequential>
 	</macrodef>
@@ -680,10 +722,10 @@
 		<attribute name="experiment.name" />
 		<sequential>
 			<copy todir="${rec.server}/@{rec.server.dir}">
-				<fileset file="${experiments.dist.dir}/${experiment.name}/server/@{experiment.name}Driver_sig.jar" />
+				<fileset file="${experiments.build.dir}/${experiment.name}/server/@{experiment.name}Driver_sig.jar" />
 			</copy>
 			<copy todir="${web.server}/@{web.server.dir}">
-				<fileset file="${experiments.dist.dir}/${experiment.name}/client/@{experiment.name}Client_sig.jar" />
+				<fileset file="${experiments.build.dir}/${experiment.name}/client/@{experiment.name}Client_sig.jar" />
 			</copy>
 		</sequential>
 	</macrodef>
@@ -691,8 +733,8 @@
 	<macrodef name="create.jnlp.for.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<copy file="${template.file}" overwrite="yes" tofile="${experiments.dist.dir}/@{experiment.name}/${experiment.name}.jnlp" />
-			<replace file="${experiments.dist.dir}/@{experiment.name}/${experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+			<copy file="${template.file}" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" />
+			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 				<replacefilter token="@codebase@" property="@{experiment.name}.codebase" />
 				<replacefilter token="@href@" property="@{experiment.name}.href" />
 				<replacefilter token="@title@" property="@{experiment.name}.title" />
@@ -723,7 +765,7 @@
 					<pathelement location="${rec.common.build.dir}" />
 					<pathelement location="${rec.client.build.dir}" />
 					<pathelement location="${rec.ui.build.dir}" />
-					<pathelement location="${experiments.build.dir}/@{experiment.name}/client/" />
+					<pathelement location="${experiments.classes.dir}/@{experiment.name}/client/" />
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
@@ -755,7 +797,7 @@
 					</fileset>
 					<pathelement location="${rec.common.build.dir}" />
 					<pathelement location="${rec.hardwareserver.build.dir}" />
-					<pathelement location="${experiments.build.dir}/@{experiment.name}/server/" />
+					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
