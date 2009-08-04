@@ -572,25 +572,23 @@
 	
 	</target>
 	
-	<fileset id="dist.files.multicast">
-		<includesfile name="${${elab.multicast.build.dir}/ELabMulticastController.jar}"/>
-	</fileset>
-	<fileset id="dist.files.full.client">
-		<includesfile/>
-	</fileset>
-	
-	<target name="dist" depends="build.all">
-		<mkdir dir="${dist.dir}"/>
+	<!--depends="build.all"-->
+	<target name="dist" >
+		<mkdir dir="${dist.dir}" />
 		
 		<zip destfile="${dist.dir}/elab-multicast.zip" update="true" comment="eLab Multicast Controller">
-			<fileset refid="dist.files.multicast" />
+			<fileset file="${rec.multicast.build.dir}/ReCMulticastController.jar" />
+			<fileset file="${elab.multicast.build.dir}/ELabMulticastController.jar" />
+			<fileset file="${rec.common.build.dir}/ReCCommon_sig.jar" />
 		</zip>
 		
 		<zip destfile="${dist.dir}/elab-client-jnlp.zip" update="true" comment="eLab Full Client">
-			<fileset refid="dist.files.full.client" />
+			<fileset file="${rec.client.build.dir}/ReCClient_sig.jar" />
+			<fileset file="${elab.client.build.dir}/ELabClient_sig.jar" />
+			<fileset file="${rec.common.build.dir}/ReCCommon_sig.jar" />
 		</zip>
 		
-		<dist.all.experiments/>
+		<!-- dist.all.experiments/ -->
 	</target>
 	
 	<macrodef name="dist.all.experiments">
