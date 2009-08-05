@@ -295,6 +295,7 @@
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
+		<path refid="rec.common.lib.path" />
 		<path refid="rec.multicast.lib.path" />
 		<pathelement location="${rec.common.classes.dir}/" />
 		<pathelement location="${rec.multicast.classes.dir}/" />
@@ -760,9 +761,9 @@
 					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
 						<include name="**/*.jar" />
 					</fileset>
-					<pathelement location="${rec.common.build.dir}" />
-					<pathelement location="${rec.client.build.dir}" />
-					<pathelement location="${rec.ui.build.dir}" />
+					<pathelement location="${rec.common.classes.dir}" />
+					<pathelement location="${rec.client.classes.dir}" />
+					<pathelement location="${rec.ui.classes.dir}" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/client/" />
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
@@ -784,6 +785,7 @@
 	<macrodef name="run.experiment.driver">
 		<attribute name="experiment.name"/>
 		<sequential>
+			<echo>starting @{experiment.name} driver</echo>
 			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true" maxmemory="256m">
 				<arg value="-h" />
 				<classpath>
@@ -793,8 +795,8 @@
 					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
 						<include name="**/*.jar" />
 					</fileset>
-					<pathelement location="${rec.common.build.dir}" />
-					<pathelement location="${rec.hardwareserver.build.dir}" />
+					<pathelement location="${rec.common.classes.dir}" />
+					<pathelement location="${rec.hardwareserver.classes.dir}" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
@@ -880,7 +882,7 @@
 		<process.list task="deploy.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
-	<target name="dist.experiment" depends="clean.experiment,compile.experiment,jar.experiment,sign.experiment">
+	<target name="build.experiment" depends="clean.experiment,compile.experiment,jar.experiment,sign.experiment">
 		<fail unless="experiment.name">experiment.name must be set to build a single experiment jnlp. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<create.jnlp.for.experiment experiment.name="${experiment.name}"/>
