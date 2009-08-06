@@ -52,3 +52,4 @@ multicast.debug.address.port=8000
 ##SYSTEM PROPERTIES - EXPERIMENTS## valer� a pena definir por experiencia?
 experiment.openorb.profile=recHardware 
 experiment.eLab.HardwareInfo=MMBaseHardwareInfo.xml
+experiment.driver.debug.address.port=8001
