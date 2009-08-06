@@ -22,8 +22,8 @@
 		<echo>ReC - eBab build system</echo>
 	</target>
 
-	<property name="build.dir.classes" value="${build.dir}/classes"/>
-	<property name="build.dir.jars" value="${build.dir}/jars"/>
+	<property name="build.dir.classes" value="${build.dir}/classes" />
+	<property name="build.dir.jars" value="${build.dir}/jars" />
 	<!--
 		=====================================================
 		==================== REC Common =====================
@@ -37,16 +37,16 @@
 	<property name="rec.common.src.java.dir" value="rec/src/java/common" />
 
 	<property name="rec.lib.dir" value="rec/lib" />
-	
+
 	<path id="rec.common.lib.path">
 		<fileset dir="${rec.lib.dir}/java/common/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
-	
+
 	<path id="rec.common.compile.lib.path">
 		<fileset dir="${rec.lib.dir}/compile/common/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
@@ -85,7 +85,7 @@
 	<target name="build.rec.common" depends="clean.rec.common,compile.rec.common,jar.rec.common,sign.rec.common">
 
 	</target>
-	
+
 	<!--
 		=====================================================
 		==================== ReC Client =====================
@@ -98,16 +98,16 @@
 
 	<property name="rec.client.src.java.dir" value="rec/src/java/client" />
 	<property name="rec.ui.src.java.dir" value="rec/src/java/ui" />
-	
+
 	<path id="rec.client.lib.path">
 		<fileset dir="${rec.lib.dir}/java/client/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
-	
+
 	<path id="rec.client.compile.lib.path">
 		<fileset dir="${rec.lib.dir}/compile/client/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
@@ -115,8 +115,8 @@
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
-		<path refid="rec.client.lib.path"/>
-		<path refid="rec.client.compile.lib.path"/>
+		<path refid="rec.client.lib.path" />
+		<path refid="rec.client.compile.lib.path" />
 	</path>
 
 	<path id="rec.compile.client.dependencies.classpath">
@@ -160,7 +160,7 @@
 	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client,sign.rec.client">
 
 	</target>
-	
+
 	<!--
 		=====================================================
 		================ ReC Hardware Server ================
@@ -172,16 +172,16 @@
 	<property name="rec.hardwareserver.dist.dir" value="${dist.dir}/rec/hardwareserver" />
 
 	<property name="rec.hardwareserver.src.java.dir" value="rec/src/java/hardwareserver" />
-	
+
 	<path id="rec.hardwareserver.lib.path">
 		<fileset dir="${rec.lib.dir}/java/hardwareserver/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
-	
+
 	<path id="rec.hardwareserver.compile.lib.path">
 		<fileset dir="${rec.lib.dir}/compile/hardwareserver/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
@@ -221,7 +221,7 @@
 	<target name="build.rec.hardwareserver" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
 
 	</target>
-	
+
 	<!--
 		=====================================================
 		============= ReC Multicast Controller===============
@@ -233,16 +233,16 @@
 	<property name="rec.multicast.dist.dir" value="${dist.dir}/rec/multicast" />
 
 	<property name="rec.multicast.src.java.dir" value="rec/src/java/multicast" />
-	
+
 	<path id="rec.multicast.lib.path">
 		<fileset dir="${rec.lib.dir}/java/multicast/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
-	
+
 	<path id="rec.multicast.compile.lib.path">
 		<fileset dir="${rec.lib.dir}/compile/multicast/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
@@ -290,7 +290,7 @@
 	<target name="build.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
 
 	</target>
-	
+
 	<path id="rec.run.multicastcontroller.classpath">
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
@@ -300,7 +300,7 @@
 		<pathelement location="${rec.common.classes.dir}/" />
 		<pathelement location="${rec.multicast.classes.dir}/" />
 	</path>
-	
+
 	<target name="run.rec.multicast">
 		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="${max.memory}">
 			<arg value="-h" />
@@ -308,20 +308,20 @@
 			<classpath refid="rec.run.multicastcontroller.classpath" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
-			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}"/>
-			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}"/>
-			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}"/>
-			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}"/>
-			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}"/>
-			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}"/>
-			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}"/>
-			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}"/>
-			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}"/>
-			<sysproperty key="openorb.config" value="${openorb.config}"/>
-			<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}"/>
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}" />
+			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}" />
+			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}" />
+			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+			<sysproperty key="openorb.config" value="${openorb.config}" />
+			<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
 		</java>
 	</target>
-	
+
 	<target name="debug.rec.multicast">
 		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="${max.memory}">
 			<arg value="-h" />
@@ -331,17 +331,17 @@
 			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${multicast.debug.address.port},server=y,suspend=y" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
-			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}"/>
-			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}"/>
-			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}"/>
-			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}"/>
-			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}"/>
-			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}"/>
-			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}"/>
-			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}"/>
-			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}"/>
-			<sysproperty key="openorb.config" value="${openorb.config}"/>
-			<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}"/>
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}" />
+			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}" />
+			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}" />
+			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+			<sysproperty key="openorb.config" value="${openorb.config}" />
+			<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
 		</java>
 	</target>
 
@@ -359,16 +359,16 @@
 	<property name="elab.ui.src.java.dir" value="elab/src/java/ui" />
 
 	<property name="elab.lib.dir" value="elab/lib" />
-	
+
 	<path id="elab.client.lib.path">
 		<fileset dir="${elab.lib.dir}/java/client/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
-	
+
 	<path id="elab.client.compile.lib.path">
 		<fileset dir="${elab.lib.dir}/compile/client/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
@@ -421,7 +421,7 @@
 	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
 
 	</target>
-	
+
 	<!--
 		=====================================================
 		=================== Elab driver =====================
@@ -434,16 +434,16 @@
 
 	<property name="elab.hardwareserver.src.java.dir" value="elab/src/java/driver" />
 
-	
+
 	<path id="elab.hardwareserver.lib.path">
 		<fileset dir="${elab.lib.dir}/java/driver/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
-	
+
 	<path id="elab.hardwareserver.compile.lib.path">
 		<fileset dir="${elab.lib.dir}/compile/driver/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
@@ -484,7 +484,7 @@
 	<target name="build.elab.hardwareserver" depends="clean.elab.hardwareserver,compile.elab.hardwareserver,jar.elab.hardwareserver">
 
 	</target>
-	
+
 	<!--
 		=====================================================
 		=========== Elab Multicast Controller ===============
@@ -499,13 +499,13 @@
 
 	<path id="elab.multicast.lib.path">
 		<fileset dir="${elab.lib.dir}/java/multicast/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
-	
+
 	<path id="elab.multicast.compile.lib.path">
 		<fileset dir="${elab.lib.dir}/compile/multicast/">
-			<include name="**/*.jar"/>
+			<include name="**/*.jar" />
 		</fileset>
 	</path>
 
@@ -546,7 +546,7 @@
 	<target name="build.elab.multicastcontroller" depends="clean.elab.multicastcontroller,compile.elab.multicastcontroller,jar.elab.multicastcontroller">
 
 	</target>
-	
+
 	<!--
 		=====================================================
 		===============ReC Entire Project====================
@@ -554,15 +554,15 @@
 	-->
 
 	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller,clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller,clean.all.experiments">
-	
+
 	</target>
 
 	<target name="compile.all" depends="compile.rec.common,compile.rec.client,compile.rec.hardwareserver,compile.rec.multicastcontroller,compile.elab.client,compile.elab.hardwareserver,compile.elab.multicastcontroller,compile.experiments.list">
-	
+
 	</target>
 
 	<target name="jar.all" depends="jar.rec.common,jar.rec.client,jar.rec.hardwareserver,jar.rec.multicastcontroller,jar.elab.client,jar.elab.hardwareserver,jar.elab.multicastcontroller,jar.experiments.list">
-	
+
 	</target>
 
 	<target name="sign.all" depends="sign.rec.common,sign.rec.client,sign.elab.client,sign.experiments.list">
@@ -570,33 +570,35 @@
 	</target>
 
 	<target name="build.all" depends="build.rec.common,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller,build.elab.client,build.elab.hardwareserver,build.elab.multicastcontroller">
-	
+
 	</target>
-	
+
 	<!--depends="build.all"-->
-	<target name="dist" >
+	<target name="dist">
 		<mkdir dir="${dist.dir}" />
-		
+
 		<zip destfile="${dist.dir}/elab-multicast.zip" update="true" comment="eLab Multicast Controller">
 			<fileset file="${rec.multicast.build.dir}/ReCMulticastController.jar" />
 			<fileset file="${elab.multicast.build.dir}/ELabMulticastController.jar" />
 			<fileset file="${rec.common.build.dir}/ReCCommon_sig.jar" />
 		</zip>
-		
+
 		<zip destfile="${dist.dir}/elab-client-jnlp.zip" update="true" comment="eLab Full Client">
 			<fileset file="${rec.client.build.dir}/ReCClient_sig.jar" />
 			<fileset file="${elab.client.build.dir}/ELabClient_sig.jar" />
 			<fileset file="${rec.common.build.dir}/ReCCommon_sig.jar" />
 		</zip>
-		
+
 		<!-- dist.all.experiments/ -->
 	</target>
-	
+
 	<macrodef name="dist.all.experiments">
-		<attribute name="experiment.name"/>
+		<attribute name="experiment.name" />
 		<sequential>
-			<zip destfile="${dist.dir}/elab-exp1-client.zip" update="true" comment="eLab @{experiment.name} Client"></zip>
-			<zip destfile="${dist.dir}/elab-exp1-hwserver.zip" update="true" comment="eLab @{experiment.name} Driver"></zip>
+			<zip destfile="${dist.dir}/elab-exp1-client.zip" update="true" comment="eLab @{experiment.name} Client">
+			</zip>
+			<zip destfile="${dist.dir}/elab-exp1-hwserver.zip" update="true" comment="eLab @{experiment.name} Driver">
+			</zip>
 		</sequential>
 	</macrodef>
 
@@ -748,11 +750,11 @@
 			</replace>
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="run.experiment.client">
-		<attribute name="experiment.name"/>
+		<attribute name="experiment.name" />
 		<sequential>
-			<java classname="pt.utl.ist.elab.client.@{experiment.name}.ClientMain" fork="true" failonerror="true" maxmemory="256m">
+			<java classname="pt.utl.ist.elab.client.@{experiment.name}.ClientMain" fork="true" failonerror="true">
 				<arg value="-h" />
 				<classpath>
 					<fileset dir="lib/">
@@ -768,25 +770,25 @@
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
-				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}"/>
-				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}"/>
-				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}"/>
-				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}"/>
-				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}"/>
-				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}"/>
-				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}"/>
-				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}"/>
-				<sysproperty key="openorb.config" value="${openorb.config}"/>
-				<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}"/>
+				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}" />
+				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
+				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+				<sysproperty key="openorb.config" value="${openorb.config}" />
+				<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
 			</java>
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="run.experiment.driver">
-		<attribute name="experiment.name"/>
+		<attribute name="experiment.name" />
 		<sequential>
 			<echo>starting @{experiment.name} driver</echo>
-			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true" maxmemory="256m">
+			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true">
 				<arg value="-h" />
 				<classpath>
 					<fileset dir="lib/">
@@ -795,22 +797,60 @@
 					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
 						<include name="**/*.jar" />
 					</fileset>
+					<path refid="rec.common.lib.path"/>
 					<pathelement location="${rec.common.classes.dir}" />
 					<pathelement location="${rec.hardwareserver.classes.dir}" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
-				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}"/>
-				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}"/>
-				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}"/>
-				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}"/>
-				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}"/>
-				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}"/>
-				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}"/>
-				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}"/>
-				<sysproperty key="openorb.config" value="${openorb.config}"/>
-				<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}"/>
+				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}" />
+				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
+				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+				<sysproperty key="openorb.config" value="${openorb.config}" />
+				<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
+			</java>
+		</sequential>
+	</macrodef>
+
+
+	<macrodef name="debug.experiment.driver">
+		<attribute name="experiment.name" />
+		<sequential>
+			<echo>starting @{experiment.name} driver</echo>
+			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true">
+				<arg value="-h" />
+				<classpath>
+					<fileset dir="lib/">
+						<include name="**/*.jar" />
+					</fileset>
+					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
+						<include name="**/*.jar" />
+					</fileset>
+					<path refid="rec.common.lib.path"/>
+					<pathelement location="${rec.common.classes.dir}" />
+					<pathelement location="${rec.hardwareserver.classes.dir}" />
+					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
+				</classpath>
+				<jvmarg value="-Xms${min.memory}" />
+				<jvmarg value="-Xmx${max.memory}" />
+				<jvmarg value="-Xdebug" />
+				<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.driver.debug.address.port},server=y,suspend=y" />
+				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}" />
+				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
+				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+				<sysproperty key="openorb.config" value="${openorb.config}" />
+				<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
 			</java>
 		</sequential>
 	</macrodef>
@@ -885,11 +925,11 @@
 	<target name="build.experiment" depends="clean.experiment,compile.experiment,jar.experiment,sign.experiment">
 		<fail unless="experiment.name">experiment.name must be set to build a single experiment jnlp. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
-		<create.jnlp.for.experiment experiment.name="${experiment.name}"/>
+		<create.jnlp.for.experiment experiment.name="${experiment.name}" />
 	</target>
-	
+
 	<target name="teste jnlp">
-		<create.jnlp.for.experiment experiment.name="${experiment.name}"/>
+		<create.jnlp.for.experiment experiment.name="${experiment.name}" />
 	</target>
 
 	<target name="dist.experiment.list" depends="clean.experiments.list,compile.experiments.list,jar.experiments.list,sign.experiments.list">
@@ -897,34 +937,40 @@
 			Pass it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
 		<process.list task="create.jnlp.for.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
-		
+
 	<target name="run.experiment.client">
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<run.experiment.client experiment.name="${experiment.name}" />
 	</target>
-	
+
 	<target name="run.experiment.driver">
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<run.experiment.driver experiment.name="${experiment.name}" />
 	</target>
 	
+	<target name="debug.experiment.driver">
+		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<debug.experiment.driver experiment.name="${experiment.name}" />
+	</target>
+
 	<!--
 		================================================================
 		========================== Libraries ===========================
 		================================================================
 		-->
-	
+
 	<macrodef name="sign.jars.in.directory">
 		<attribute name="source.dir.name" />
 		<attribute name="destination.dir.name" />
 		<sequential>
-			<mkdir dir="@{destination.dir.name}"/>
+			<mkdir dir="@{destination.dir.name}" />
 			<signjar destDir="@{destination.dir.name}">
 				keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}"
-				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar"/>
-				<globmapper from="*.jar" to="*_sig.jar"/>
+				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
 		</sequential>
 	</macrodef>
