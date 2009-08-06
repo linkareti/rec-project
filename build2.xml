@@ -291,7 +291,7 @@
 
 	</target>
 
-	<path id="rec.run.multicastcontroller.classpath">
+	<path id="run.multicastcontroller.classpath">
 		<fileset dir="lib/">
 			<include name="**/*.jar" />
 		</fileset>
@@ -305,7 +305,7 @@
 		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="${max.memory}">
 			<arg value="-h" />
 			<!--bootclasspath location=" TODO /openorb/openorb_orb_omg-1.4.0_sig.jar"/-->
-			<classpath refid="rec.run.multicastcontroller.classpath" />
+			<classpath refid="run.multicastcontroller.classpath" />
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
 			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
@@ -326,7 +326,7 @@
 		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="${max.memory}">
 			<arg value="-h" />
 			<!--bootclasspath location=" TODO /openorb/openorb_orb_omg-1.4.0_sig.jar"/-->
-			<classpath refid="rec.run.multicastcontroller.classpath" />
+			<classpath refid="run.multicastcontroller.classpath" />
 			<jvmarg value="-Xdebug" />
 			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${multicast.debug.address.port},server=y,suspend=y" />
 			<jvmarg value="-Xms${min.memory}" />
@@ -750,7 +750,7 @@
 			</replace>
 		</sequential>
 	</macrodef>
-
+	
 	<macrodef name="run.experiment.client">
 		<attribute name="experiment.name" />
 		<sequential>
@@ -763,6 +763,8 @@
 					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
 						<include name="**/*.jar" />
 					</fileset>
+					<path refid="rec.common.lib.path"/>
+					<path refid="rec.client.lib.path"/>
 					<pathelement location="${rec.common.classes.dir}" />
 					<pathelement location="${rec.client.classes.dir}" />
 					<pathelement location="${rec.ui.classes.dir}" />
