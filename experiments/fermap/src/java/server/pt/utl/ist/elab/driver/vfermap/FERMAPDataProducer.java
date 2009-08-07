@@ -15,9 +15,9 @@ import java.awt.image.*;
 import java.awt.*;
 import org.opensourcephysics.display.*;
 
-import pt.utl.ist.elab.virtual.VirtualBaseDataSource;
-import pt.utl.ist.elab.virtual.VirtualBaseDriver;
-import pt.utl.ist.elab.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
+import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;
@@ -179,23 +179,23 @@ public class FERMAPDataProducer extends VirtualBaseDataSource implements Runnabl
     }
     //TESTE
     private Thread animaThread;
-    private pt.utl.ist.elab.virtual.client.fermap.displays.Animation ferAn;
+    private pt.utl.ist.elab.client.vfermap.displays.Animation ferAn;
     //TESTE
-    public void startAnima(pt.utl.ist.elab.virtual.client.fermap.displays.Animation ferAn){
+    public void startAnima(pt.utl.ist.elab.client.vfermap.displays.Animation ferAn){
         this.ferAn = ferAn;
         animaThread = new Thread(this);
         animaThread.start();
     }
     //TESTE
-    private pt.utl.ist.elab.virtual.client.fermap.displays.FERHistogram ferHist;
-    public void startHist(pt.utl.ist.elab.virtual.client.fermap.displays.FERHistogram ferHist){
+    private pt.utl.ist.elab.client.vfermap.displays.FERHistogram ferHist;
+    public void startHist(pt.utl.ist.elab.client.vfermap.displays.FERHistogram ferHist){
         this.ferHist = ferHist;
         animaThread = new Thread(this);
         animaThread.start();
     }
     //TESTE
-    private pt.utl.ist.elab.virtual.client.fermap.displays.FERMAPImage ferIm;
-    public void startM(pt.utl.ist.elab.virtual.client.fermap.displays.FERMAPImage ferIm){
+    private pt.utl.ist.elab.client.vfermap.displays.FERMAPImage ferIm;
+    public void startM(pt.utl.ist.elab.client.vfermap.displays.FERMAPImage ferIm){
         this.ferIm = ferIm;
         animaThread = new Thread(this);
         animaThread.start();

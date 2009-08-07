@@ -15,8 +15,8 @@ import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.Defaults;
 
-import pt.utl.ist.elab.virtual.VirtualBaseDataSource;
-import pt.utl.ist.elab.virtual.VirtualBaseDriver;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
 import pt.utl.ist.elab.virtual.driver.*;
 import java.util.logging.*;
 
