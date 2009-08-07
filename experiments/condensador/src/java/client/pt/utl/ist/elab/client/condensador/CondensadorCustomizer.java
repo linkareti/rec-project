@@ -7,15 +7,16 @@
 
 package pt.utl.ist.elab.client.condensador;
 
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.*;
-import com.linkare.rec.data.synch.*;
+import java.text.DecimalFormat;
 import java.util.Hashtable;
+
 import javax.swing.JLabel;
 import javax.swing.text.NumberFormatter;
-import java.text.DecimalFormat;
-import com.linkare.rec.impl.i18n.*;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
  * @author  andreamado
@@ -23,13 +24,18 @@ import com.linkare.rec.impl.i18n.*;
 public class CondensadorCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer
 {
     
-    
-    /** Creates new form CondensadorCustomizer */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4023232416359412355L;
+
+
+	/** Creates new form CondensadorCustomizer */
     public CondensadorCustomizer()
     {
 	initComponents();
 	
-	Hashtable slidersPosLabels=new Hashtable(4);
+	Hashtable<Integer, JLabel> slidersPosLabels=new Hashtable<Integer, JLabel>(4);
         //TODO por as distancias reais
 	slidersPosLabels.put(new Integer(2000),new JLabel("2.0"));
 	slidersPosLabels.put(new Integer(3000),new JLabel("3.0"));

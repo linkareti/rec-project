@@ -4,7 +4,7 @@
  * Created on 5 de Abril de 2005, 0:45
  */
 
-package pt.utl.ist.elab.virtual.client.colisao;
+package pt.utl.ist.elab.client.vcolisao;
 
 import java.awt.*;
 import org.opensourcephysics.display.*;

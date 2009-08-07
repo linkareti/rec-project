@@ -7,12 +7,21 @@
 package pt.utl.ist.elab.client.condensador;
 
 
-import java.awt.*;
-import javax.swing.*;
-import java.awt.image.*;
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
+import javax.swing.Icon;
+import javax.swing.JMenuBar;
+import javax.swing.JToolBar;
+
+import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 /**
  *
@@ -21,7 +30,11 @@ import com.linkare.rec.data.config.*;
 public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,com.linkare.rec.impl.client.experiment.ExpDataModelListener
 {
     
-    private BufferedImage imgEmbolo=new BufferedImage(30,57,BufferedImage.TYPE_INT_ARGB);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -637849045031864644L;
+	private BufferedImage imgEmbolo=new BufferedImage(30,57,BufferedImage.TYPE_INT_ARGB);
     private BufferedImage imgSeringe=new BufferedImage(36,65,BufferedImage.TYPE_INT_ARGB);
     private Icon icon=new javax.swing.ImageIcon(getClass().getResource("/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
     

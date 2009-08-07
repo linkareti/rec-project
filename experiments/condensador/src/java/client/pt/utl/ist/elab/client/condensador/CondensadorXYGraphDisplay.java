@@ -13,7 +13,12 @@ package pt.utl.ist.elab.client.condensador;
 public class CondensadorXYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
 {
     
-    /** Creates a new instance of CondensadorXYGraphDisplay */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8154865519188889282L;
+
+	/** Creates a new instance of CondensadorXYGraphDisplay */
     public CondensadorXYGraphDisplay()
     {
 	super();

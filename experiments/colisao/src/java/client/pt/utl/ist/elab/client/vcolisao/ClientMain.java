@@ -4,7 +4,7 @@
  * Created on 16 de Outubro de 2004, 11:29
  */
 
-package pt.utl.ist.elab.virtual.client.colisao;
+package pt.utl.ist.elab.client.vcolisao;
 
 import com.linkare.rec.impl.baseUI.ReCBaseUI;
 import javax.swing.JFrame;
