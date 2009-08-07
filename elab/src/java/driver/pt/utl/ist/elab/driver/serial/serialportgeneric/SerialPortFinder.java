@@ -264,15 +264,15 @@ public class SerialPortFinder {
 	}
 
 	public void startSearch() {
-		Enumeration commPortIdentifiers = gnu.io.CommPortIdentifier.getPortIdentifiers();
+		Enumeration<CommPortIdentifier> commPortIdentifiers = gnu.io.CommPortIdentifier.getPortIdentifiers();
 
-		LinkedList tempPorts = new LinkedList();
+		LinkedList<CommPortIdentifier> tempPorts = new LinkedList<CommPortIdentifier>();
 
 		Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
 				"Are there COMM Ports on the System? " + commPortIdentifiers.hasMoreElements());
 
 		while (commPortIdentifiers.hasMoreElements()) {
-			CommPortIdentifier identifier = (CommPortIdentifier) commPortIdentifiers.nextElement();
+			CommPortIdentifier identifier = commPortIdentifiers.nextElement();
 			if (identifier.getPortType() == CommPortIdentifier.PORT_SERIAL)
 				tempPorts.add(identifier);
 		}

@@ -80,21 +80,29 @@ public class GenericSerialPortDriver extends AbstractSerialPortDriver {
 		/*
 		 * fireIDriverStateListenerDriverConfiguring();
 		 * 
-		 * stampConfig = new StampCommand(CONFIG_OUT_STRING); stampConfig.addCommandData(StampConfigTranslator.MODE_STR,
-		 * Defaults.defaultIfEmpty(config .getSelectedHardwareParameterValue(StampConfigTranslator.MODE_STR), info
-		 * .getHardwareParameterValue(StampConfigTranslator.MODE_STR)));
-		 * stampConfig.addCommandData(StampConfigTranslator.HEIGHT_STR, Defaults.defaultIfEmpty(config
-		 * .getSelectedHardwareParameterValue(StampConfigTranslator.HEIGHT_STR), info
-		 * .getHardwareParameterValue(StampConfigTranslator.HEIGHT_STR)));
-		 * stampConfig.addCommandData(StampConfigTranslator.MATERIAL_STR, Defaults.defaultIfEmpty(config
-		 * .getSelectedHardwareParameterValue(StampConfigTranslator.MATERIAL_STR), info
+		 * stampConfig = new StampCommand(CONFIG_OUT_STRING);
+		 * stampConfig.addCommandData(StampConfigTranslator.MODE_STR,
+		 * Defaults.defaultIfEmpty(config
+		 * .getSelectedHardwareParameterValue(StampConfigTranslator.MODE_STR),
+		 * info .getHardwareParameterValue(StampConfigTranslator.MODE_STR)));
+		 * stampConfig.addCommandData(StampConfigTranslator.HEIGHT_STR,
+		 * Defaults.defaultIfEmpty(config
+		 * .getSelectedHardwareParameterValue(StampConfigTranslator.HEIGHT_STR),
+		 * info .getHardwareParameterValue(StampConfigTranslator.HEIGHT_STR)));
+		 * stampConfig.addCommandData(StampConfigTranslator.MATERIAL_STR,
+		 * Defaults.defaultIfEmpty(config
+		 * .getSelectedHardwareParameterValue(StampConfigTranslator
+		 * .MATERIAL_STR), info
 		 * .getHardwareParameterValue(StampConfigTranslator.MATERIAL_STR)));
 		 * 
-		 * stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(config.getTotalSamples()));
+		 * stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new
+		 * Integer(config.getTotalSamples()));
 		 * 
-		 * StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig); if
-		 * (!translator.translate(stampConfig)) throw new WrongConfigurationException("Cannot translate StampCommand!",
-		 * -1);
+		 * StampTranslator translator =
+		 * StampTranslatorProcessorManager.getTranslator(stampConfig); if
+		 * (!translator.translate(stampConfig)) throw new
+		 * WrongConfigurationException("Cannot translate StampCommand!", -1);
+		 * 
 		 * 
 		 * config.getChannelsConfig(0).setTotalSamples(config.getTotalSamples());
 		 * 
@@ -144,8 +152,9 @@ public class GenericSerialPortDriver extends AbstractSerialPortDriver {
 
 	protected void loadExtraCommandHandlers() {
 		/*
-		 * SerialPortTranslatorProcessorManager.initStampProcessorsTranslators(new String[] { packageName +
-		 * "processors.StampCounterProcessor", packageName + "processors.StampTimeProcessor", packageName +
+		 * SerialPortTranslatorProcessorManager.initStampProcessorsTranslators(new
+		 * String[] { packageName + "processors.StampCounterProcessor",
+		 * packageName + "processors.StampTimeProcessor", packageName +
 		 * "translators.StampConfigTranslator", });
 		 */
 	}
@@ -174,8 +183,7 @@ public class GenericSerialPortDriver extends AbstractSerialPortDriver {
 			if (isEqualToNewConfig(cmd, new Object())) {
 				// currentConfig = newConfig;
 				fireIDriverStateListenerDriverConfiguring();
-			}
-			else {
+			} else {
 				// newConfig = currentConfig;
 				return;
 			}
@@ -329,24 +337,38 @@ public class GenericSerialPortDriver extends AbstractSerialPortDriver {
 		}
 
 		/*
-		 * if (cmd.getCommandIdentifier().equals(ID_STR)) { if (waitingStart) { waitingStart = false;
-		 * writeMessage(stampConfig.getCommand()); wroteStart = false; fireIDriverStateListenerDriverStarting(); } else
-		 * if (stoping) { stoping = false; fireIDriverStateListenerDriverStoping(); super.stopDataSource(); } else if
-		 * (reseting) { reseting = false; fireIDriverStateListenerDriverReseted(); super.stopDataSource(); } else if
-		 * (started) { started = false; fireIDriverStateListenerDriverStoping(); fireIDriverStateListenerDriverStoped();
-		 * super.stopDataSource(); } else if (initing) { initing = false; fireIDriverStateListenerDriverReseting();
+		 * if (cmd.getCommandIdentifier().equals(ID_STR)) { if (waitingStart) {
+		 * waitingStart = false; writeMessage(stampConfig.getCommand());
+		 * wroteStart = false; fireIDriverStateListenerDriverStarting(); } else
+		 * if (stoping) { stoping = false;
+		 * fireIDriverStateListenerDriverStoping(); super.stopDataSource(); }
+		 * else if (reseting) { reseting = false;
+		 * fireIDriverStateListenerDriverReseted(); super.stopDataSource(); }
+		 * else if (started) { started = false;
+		 * fireIDriverStateListenerDriverStoping();
+		 * fireIDriverStateListenerDriverStoped(); super.stopDataSource(); }
+		 * else if (initing) { initing = false;
+		 * fireIDriverStateListenerDriverReseting();
 		 * fireIDriverStateListenerDriverReseted(); } } else if
-		 * (cmd.getCommandIdentifier().equals(SerialPortStartProcessor.COMMAND_IDENTIFIER)) { started = true;
-		 * config.getChannelsConfig(0).setTimeStart(new DateTime()); config.setTimeStart(new DateTime());
-		 * fireIDriverStateListenerDriverStarted(); /* if(dataSource!=null) dataSource.setRunning(true);
+		 * (cmd.getCommandIdentifier
+		 * ().equals(SerialPortStartProcessor.COMMAND_IDENTIFIER)) { started =
+		 * true; config.getChannelsConfig(0).setTimeStart(new DateTime());
+		 * config.setTimeStart(new DateTime());
+		 * fireIDriverStateListenerDriverStarted(); /* if(dataSource!=null)
+		 * dataSource.setRunning(true);
 		 */
 		/*
-		 * } else if (cmd.getCommandIdentifier().equals(SerialPortConfiguredProcessor.COMMAND_IDENTIFIER)) { // OK to
-		 * go... - still gonna receive start...! }
+		 * } else if
+		 * (cmd.getCommandIdentifier().equals(SerialPortConfiguredProcessor
+		 * .COMMAND_IDENTIFIER)) { // OK to go... - still gonna receive
+		 * start...! }
 		 * 
-		 * else if (cmd.getCommandIdentifier().equals(SerialPortNotConfiguredProcessor.COMMAND_IDENTIFIER)) { if
-		 * (waitingStart && wroteStart) { waitingStart = false; fireIDriverStateListenerDriverStoped();
-		 * super.stopDataSource(); } else if (started) { started = false; fireIDriverStateListenerDriverReseting();
+		 * else if
+		 * (cmd.getCommandIdentifier().equals(SerialPortNotConfiguredProcessor
+		 * .COMMAND_IDENTIFIER)) { if (waitingStart && wroteStart) {
+		 * waitingStart = false; fireIDriverStateListenerDriverStoped();
+		 * super.stopDataSource(); } else if (started) { started = false;
+		 * fireIDriverStateListenerDriverReseting();
 		 * fireIDriverStateListenerDriverReseted(); super.stopDataSource(); } }
 		 */
 

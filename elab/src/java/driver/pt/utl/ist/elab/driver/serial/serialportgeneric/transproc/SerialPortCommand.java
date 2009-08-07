@@ -16,10 +16,11 @@ public class SerialPortCommand implements java.io.Serializable {
 	static final long serialVersionUID = -2953294044465039790L;
 	private String commandIdentifier = null;
 	private String command = null;
-	private HashMap commandDataMap = null;
+	private HashMap<Object, Object> commandDataMap = null;
 	private boolean isData = false;
 
-	/** Creates a new instance of SerialPortCommand */
+	/** Creates a new instance of SerialPortCommand 
+	 * @param commandIdentifier */
 	public SerialPortCommand(String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 	}
@@ -42,7 +43,7 @@ public class SerialPortCommand implements java.io.Serializable {
 
 	public void addCommandData(Object commandDataKey, Object commandDataObject) {
 		if (this.commandDataMap == null)
-			this.commandDataMap = new HashMap(1);
+			this.commandDataMap = new HashMap<Object, Object>(1);
 
 		if (this.commandDataMap.containsKey(commandDataKey))
 			this.commandDataMap.remove(commandDataKey);
