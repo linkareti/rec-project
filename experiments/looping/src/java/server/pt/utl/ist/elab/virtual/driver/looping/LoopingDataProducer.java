@@ -11,13 +11,15 @@ package pt.utl.ist.elab.virtual.driver.looping;
  * @author  Emanuel Antunes
  */
 
-import com.linkare.rec.data.acquisition.PhysicsVal;
+import org.opensourcephysics.numerics.ODE;
+import org.opensourcephysics.numerics.ODESolver;
+import org.opensourcephysics.numerics.RK45;
+
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
+
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
-import com.linkare.rec.impl.logging.*;
-import pt.utl.ist.elab.virtual.driver.*;
-import org.opensourcephysics.numerics.*;
-import java.util.logging.*;
 
 public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
     //O numero de canais(de dados) que existem!
@@ -264,7 +266,7 @@ public class LoopingDataProducer extends VirtualBaseDataSource implements ODE {
                     
                 }  while(loop.getState()[0]<=2*Math.PI && loop.getState()[0]>0 && currentSample <= nSamples && !stopped);
                 
-                if(turningBack){  getState()[1]=-getState()[1];}
+                if(turningBack){  loop.getState()[1]=-loop.getState()[1];}
                 passLoop= true;
                 
                 while(x_<3*Math.PI+3*r1 && currentSample < nSamples && !stopped){
