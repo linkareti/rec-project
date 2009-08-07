@@ -4,11 +4,11 @@
 	<classpathentry kind="src" path="rec/src/java/hardwareserver"/>
 	<classpathentry kind="src" path="rec/src/java/client"/>
 	<classpathentry kind="src" path="rec/src/java/multicast"/>
-	<classpathentry kind="src" path="rec/src/java/ui"/>
-	<classpathentry kind="src" path="elab/src/java/client"/>
 	<classpathentry kind="src" path="elab/src/java/driver"/>
 	<classpathentry kind="src" path="elab/src/java/multicast"/>
+	<classpathentry kind="src" path="elab/src/java/client"/>
 	<classpathentry kind="src" path="elab/src/java/ui"/>
+	<classpathentry kind="src" path="rec/src/java/ui"/>
 	<classpathentry kind="lib" path="lib/avalon-framework.jar"/>
 	<classpathentry kind="lib" path="lib/logkit.jar"/>
 	<classpathentry kind="lib" path="lib/tools-1.4.0.jar"/>
