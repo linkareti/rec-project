@@ -6,16 +6,18 @@
 
 package pt.utl.ist.elab.virtual.client.poisson.displays;
 
-import com.linkare.rec.impl.client.experiment.ExpDataModel;
-import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
-import com.linkare.rec.data.acquisition.PhysicsValue;
+import java.text.DecimalFormat;
+
+import org.opensourcephysics.frames.Scalar2DFrame;
+
+import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
-import com.linkare.rec.impl.i18n.*;
-import pt.utl.ist.elab.virtual.utils.*;
-import org.opensourcephysics.frames.*;
-import java.text.DecimalFormat;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  *
