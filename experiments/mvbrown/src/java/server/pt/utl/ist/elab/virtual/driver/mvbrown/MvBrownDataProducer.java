@@ -11,18 +11,21 @@ package pt.utl.ist.elab.virtual.driver.mvbrown;
  * @author  nomead
  */
 
-import org.jfree.chart.*;
-import org.jfree.data.xy.*;
-import org.jfree.chart.plot.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.PixelGrabber;
 
-import java.awt.image.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.IntervalXYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
-import com.linkare.rec.data.acquisition.PhysicsVal;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
+
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
-import com.linkare.rec.impl.logging.*;
-import pt.utl.ist.elab.virtual.driver.*;
-import java.util.logging.*;
 
 public class MvBrownDataProducer extends VirtualBaseDataSource {//implements Runnable {
     
@@ -533,7 +536,7 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {//implements Run
                                 f[i+1] = (float) state[i][2];
                             }
                             
-                            byte [] b = pt.utl.ist.elab.virtual.utils.ByteUtil.floatArrayToByteArray(f);
+                            byte [] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
                             
                             value[0] = new PhysicsValue(PhysicsValFactory.fromByteArray(b, "data/raw"), null, com.linkare.rec.data.Multiplier.none);
                         }
@@ -546,7 +549,7 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {//implements Run
                                 f[i+2] = (float) state[i][4];
                             }
                             
-                            byte [] b = pt.utl.ist.elab.virtual.utils.ByteUtil.floatArrayToByteArray(f);
+                            byte [] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
                             value[0] = new PhysicsValue(PhysicsValFactory.fromByteArray(b, "data/raw"), null, com.linkare.rec.data.Multiplier.none);
                         }
                         else {
@@ -555,7 +558,7 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {//implements Run
                             for (int i = 0; i < numPart; i++)
                                 f[i] = (float) state[i][0];
                             
-                            byte [] b = pt.utl.ist.elab.virtual.utils.ByteUtil.floatArrayToByteArray(f);
+                            byte [] b = pt.utl.ist.elab.driver.virtual.utils.ByteUtil.floatArrayToByteArray(f);
                             value[0] = new PhysicsValue(PhysicsValFactory.fromByteArray(b, "data/raw"), null, com.linkare.rec.data.Multiplier.none);
                         }
                         sleep(tbs);
@@ -816,13 +819,13 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {//implements Run
     //Graficos de 2 vars
     private byte[] graphImageBytes(XYSeries serie){
         
-        String labels[] = serie.getName().split(" vs ");
+        String labels[] = serie.getDescription().split(" vs ");
         
         JFreeChart tmpChart;
         if (conPts)
-            tmpChart = ChartFactory.createXYLineChart(serie.getName(), labels[0], labels[1], new XYSeriesCollection(serie), PlotOrientation.VERTICAL, true, true, true);
+            tmpChart = ChartFactory.createXYLineChart(serie.getDescription(), labels[0], labels[1], new XYSeriesCollection(serie), PlotOrientation.VERTICAL, true, true, true);
         else
-            tmpChart = ChartFactory.createScatterPlot(serie.getName(), labels[0], labels[1], new XYSeriesCollection(serie), PlotOrientation.VERTICAL, true, true, true);
+            tmpChart = ChartFactory.createScatterPlot(serie.getDescription(), labels[0], labels[1], new XYSeriesCollection(serie), PlotOrientation.VERTICAL, true, true, true);
         
         BufferedImage tempImg = ((JFreeChart) tmpChart).createBufferedImage(w,h,BufferedImage.TYPE_BYTE_INDEXED,null);
         
@@ -860,19 +863,19 @@ public class MvBrownDataProducer extends VirtualBaseDataSource {//implements Run
     
     private void relateDataset(){
         for (int i = 0; i < datasets.length; i++)
-            serieRelateAxis(datasets[i].getName(),i,(byte) 0);
+            serieRelateAxis(datasets[i].getDescription(),i,(byte) 0);
     }
     
     private void relatePosDataset(){
         axis[1] = new byte[datasetGenPos.getSeriesCount()][3];
         for (int i = 0; i < datasetGenPos.getSeriesCount(); i++)
-            serieRelateAxis(((XYSeriesCollection)datasetGenPos).getSeries(i).getName(),i,(byte) 1);
+            serieRelateAxis(((XYSeriesCollection)datasetGenPos).getSeries(i).getDescription(),i,(byte) 1);
     }
     
     private void relateVelDataset(){
         axis[2] = new byte[datasetGenVel.getSeriesCount()][3];
         for (int i = 0; i < datasetGenVel.getSeriesCount(); i++)
-            serieRelateAxis(((XYSeriesCollection)datasetGenVel).getSeries(i).getName(),i,(byte) 2);
+            serieRelateAxis(((XYSeriesCollection)datasetGenVel).getSeries(i).getDescription(),i,(byte) 2);
     }
     
     //3-> 3 tipos de graficos, 0 : graficos 2 vars, 1 : grafico da posicao, 2 : grafico da velocidade
