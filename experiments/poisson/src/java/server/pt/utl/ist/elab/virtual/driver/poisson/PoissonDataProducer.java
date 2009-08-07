@@ -11,18 +11,20 @@ package pt.utl.ist.elab.virtual.driver.poisson;
  * @author  andre
  */
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
+import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
-import com.linkare.rec.impl.logging.*;
-import pt.utl.ist.elab.virtual.driver.*;
-import pt.utl.ist.elab.virtual.utils.*;
-
-import org.opensourcephysics.numerics.*;
-import java.util.logging.*;
-
-import java.io.*;
-import java.net.*;
 
 
 public class PoissonDataProducer extends VirtualBaseDataSource
