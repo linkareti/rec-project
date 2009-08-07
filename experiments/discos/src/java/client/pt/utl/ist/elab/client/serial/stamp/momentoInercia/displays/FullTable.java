@@ -6,8 +6,7 @@
 
 package pt.utl.ist.elab.client.serial.stamp.momentoInercia.displays;
 
-import pt.utl.ist.elab.rec.impl.baseUI.table.*;
-import pt.utl.ist.elab.rec.impl.client.experiment.*;
+import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
 /**
  *

@@ -6,8 +6,7 @@
 
 package pt.utl.ist.elab.client.serial.stamp.momentoInercia.displays;
 
-import pt.utl.ist.elab.rec.impl.baseUI.graph.*;
-import pt.utl.ist.elab.rec.impl.client.experiment.*;
+import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
 
 /**
  *
@@ -26,6 +25,6 @@ public class PowerGraph extends MultSeriesXYExperimentGraph
     
     public String getName()
     {
-        return "Potência dissipada";
+        return "Potï¿½ncia dissipada";
     }
 }

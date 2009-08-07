@@ -7,12 +7,21 @@
 package pt.utl.ist.elab.client.serial.stamp.momentoInercia.displays;
 
 
-import java.awt.*;
-import javax.swing.*;
-import java.awt.image.*;
-import com.linkare.rec.impl.client.experiment.*;
-import com.linkare.rec.data.acquisition.*;
-import com.linkare.rec.data.config.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
+import javax.swing.Icon;
+import javax.swing.JMenuBar;
+import javax.swing.JToolBar;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 /**
  *
@@ -341,4 +350,45 @@ public class MomInerciaSensor extends javax.swing.JPanel implements com.linkare.
             }
         }
     }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dataModelEnded() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dataModelError() {
+		//FIXME - New Methods 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dataModelStarted() {
+		//FIXME - New Methods 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dataModelStartedNoData() {
+		//FIXME - New Methods 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dataModelWaiting() {
+		//FIXME - New Methods 
+	}
 }

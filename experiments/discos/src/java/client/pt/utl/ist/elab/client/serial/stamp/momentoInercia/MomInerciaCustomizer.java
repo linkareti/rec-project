@@ -7,14 +7,15 @@
 
 package pt.utl.ist.elab.client.serial.stamp.momentoInercia;
 
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.*;
-import com.linkare.rec.data.synch.*;
-import java.util.Hashtable;
-import javax.swing.JLabel;
-import javax.swing.text.NumberFormatter;
 import java.text.DecimalFormat;
+import java.util.Hashtable;
+
+import javax.swing.JLabel;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 /**
  *
  * @author  André

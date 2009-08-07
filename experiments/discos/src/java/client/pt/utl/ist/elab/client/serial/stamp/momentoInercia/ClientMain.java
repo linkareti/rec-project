@@ -6,8 +6,9 @@
 
 package pt.utl.ist.elab.client.serial.stamp.momentoInercia;
 
-import com.linkare.rec.impl.baseUI.*;
 import javax.swing.JFrame;
+
+import com.linkare.rec.impl.baseUI.ReCBaseUI;
 
 /**
  *
@@ -22,13 +23,13 @@ public class ClientMain
     public static void main(String[] args)
     {
 	JFrame.setDefaultLookAndFeelDecorated(true);
-	RecBaseUI ui=new RecBaseUI();
+	ReCBaseUI ui=new ReCBaseUI();
 	initUI(ui);
-	ui.setApparatusAutoConnectId("EXP_ANGULAR_STAMP_V1.0");
+	ui.setApparatusAutoConnectID("EXP_ANGULAR_STAMP_V1.0");
 	ui.show();
     }
     
-     public static void initUI(RecBaseUI ui)
+     public static void initUI(ReCBaseUI ui)
     {
 	/*ui.addAcqDisplay("ELAB_PV_STAMP_V02","pt.utl.ist.elab.client.serial.stamp.pv.SeringeSensor");
 	ui.addAcqDisplay("ELAB_PV_STAMP_V02","com.linkare.rec.impl.baseUI.table.DefaultExperimentDataTable");
