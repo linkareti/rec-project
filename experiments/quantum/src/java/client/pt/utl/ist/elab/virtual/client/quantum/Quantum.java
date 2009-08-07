@@ -6,17 +6,41 @@
 
 package pt.utl.ist.elab.virtual.client.quantum;
 
-import org.opensourcephysics.display.*;
-import org.opensourcephysics.display.axes.XAxis;
-import java.awt.event.*;
-import java.awt.*;
-import javax.swing.*;
-import pt.utl.ist.elab.virtual.guipack.*;
-import pt.utl.ist.elab.virtual.utils.Complex;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
-import org.jfree.chart.encoders.*;
-import java.awt.print.*;
-import java.io.*;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import org.jfree.chart.encoders.EncoderUtil;
+import org.jfree.chart.encoders.ImageFormat;
+import org.opensourcephysics.display.Dimensioned;
+import org.opensourcephysics.display.Drawable;
+import org.opensourcephysics.display.DrawingPanel;
+import org.opensourcephysics.display.Interactive;
+import org.opensourcephysics.display.InteractiveMouseHandler;
+import org.opensourcephysics.display.InteractivePanel;
+import org.opensourcephysics.display.axes.XAxis;
+
+import pt.utl.ist.elab.driver.virtual.utils.Complex;
 
 /**
  *
@@ -25,7 +49,7 @@ import java.io.*;
 public class Quantum extends InteractivePanel implements InteractiveMouseHandler, ActionListener {
     
     protected String actionStr = java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.displays.animation.actionStr");
-    protected pt.utl.ist.elab.virtual.guipack.PopupMenu gaussMenu;
+    protected pt.utl.ist.elab.client.virtual.guipack.PopupMenu gaussMenu;
     private XAxis eixo;
     private KSPanel ks;
     private ComplexGaussian gaussian;
@@ -38,7 +62,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
         
         buildPopuMenu();
         
-        gaussMenu = new pt.utl.ist.elab.virtual.guipack.PopupMenu(this);
+        gaussMenu = new pt.utl.ist.elab.client.virtual.guipack.PopupMenu(this);
         gaussMenu.addItem(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.gaussMenu.title.1"),java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.gaussMenu.tip.1"));
         gaussMenu.addItem(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.gaussMenu.title.2"),java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.gaussMenu.tip.2"));
         gaussMenu.addItem(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.gaussMenu.title.3"),java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.gaussMenu.tip.3"));

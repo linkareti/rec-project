@@ -1,24 +1,28 @@
 /*
  * Animation.java
  *
- * Created on 1 de Março de 2005, 5:52
+ * Created on 1 de Marï¿½o de 2005, 5:52
  */
 
 package pt.utl.ist.elab.virtual.client.quantum.displays;
 
-import pt.utl.ist.elab.virtual.utils.*;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import com.linkare.rec.impl.client.experiment.ExpDataModel;
-import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
-import com.linkare.rec.data.acquisition.PhysicsValue;
+import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.driver.virtual.utils.Complex;
+import pt.utl.ist.elab.driver.vquantum.QuantumDataProducer;
+import pt.utl.ist.elab.virtual.client.quantum.ComplexGaussian;
+import pt.utl.ist.elab.virtual.client.quantum.Quantum;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
-
-import pt.utl.ist.elab.virtual.client.quantum.*;
-import pt.utl.ist.elab.virtual.driver.quantum.QuantumDataProducer;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 /**
  *
  * @author  nomead

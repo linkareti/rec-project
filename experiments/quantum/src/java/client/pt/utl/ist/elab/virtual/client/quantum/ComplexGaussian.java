@@ -1,17 +1,24 @@
 /*
  * ComplexGaussian.java
  *
- * Created on 29 de Março de 2005, 15:00
+ * Created on 29 de Marï¿½o de 2005, 15:00
  */
 
 package pt.utl.ist.elab.virtual.client.quantum;
 
-import pt.utl.ist.elab.virtual.utils.*;
-import org.opensourcephysics.display.*;
-import org.opensourcephysics.numerics.ParsedFunction;
-import org.opensourcephysics.numerics.ParserException;
-import java.awt.*;
-import java.awt.geom.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Rectangle2D;
+
+import org.opensourcephysics.display.DrawingPanel;
+import org.opensourcephysics.display.Interactive;
+
+import pt.utl.ist.elab.driver.virtual.utils.Complex;
+import pt.utl.ist.elab.driver.virtual.utils.FFT;
 /**
  *
  * @author  nomead

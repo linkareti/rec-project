@@ -1,14 +1,16 @@
 /*
  * Bounded.java
  *
- * Created on 29 de Março de 2005, 19:29
+ * Created on 29 de Marï¿½o de 2005, 19:29
  */
 
 package pt.utl.ist.elab.virtual.client.quantum;
 
-import java.awt.geom.Rectangle2D;
-import org.opensourcephysics.display.*;
 import java.awt.Color;
+import java.awt.geom.Rectangle2D;
+
+import org.opensourcephysics.display.DrawingPanel;
+import org.opensourcephysics.display.Interactive;
 /**
  *
  * @author  nomead

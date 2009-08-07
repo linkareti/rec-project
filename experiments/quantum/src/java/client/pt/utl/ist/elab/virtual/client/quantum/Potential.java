@@ -1,15 +1,23 @@
 /*
  * Potential.java
  *
- * Created on 28 de Março de 2005, 22:03
+ * Created on 28 de Marï¿½o de 2005, 22:03
  */
 
 package pt.utl.ist.elab.virtual.client.quantum;
 
-import org.opensourcephysics.numerics.*;
-import org.opensourcephysics.display.*;
-import java.awt.*;
-import java.awt.geom.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Rectangle2D;
+
+import org.opensourcephysics.display.DrawingPanel;
+import org.opensourcephysics.display.Interactive;
+import org.opensourcephysics.numerics.ParsedFunction;
+import org.opensourcephysics.numerics.ParserException;
 /**
  *
  * @author  nomead

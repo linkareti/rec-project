@@ -6,8 +6,9 @@
 
 package pt.utl.ist.elab.virtual.client.quantum;
 
-import com.linkare.rec.impl.baseUI.ReCBaseUI;
 import javax.swing.JFrame;
+
+import com.linkare.rec.impl.baseUI.ReCBaseUI;
 
 /**
  *

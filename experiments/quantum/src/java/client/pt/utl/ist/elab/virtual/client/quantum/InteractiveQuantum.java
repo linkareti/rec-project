@@ -6,16 +6,16 @@
 
 package pt.utl.ist.elab.virtual.client.quantum;
 
-import org.opensourcephysics.display.*;
-import org.opensourcephysics.display.axes.XAxis;
-import java.awt.event.*;
-import java.awt.*;
-import javax.swing.*;
-import pt.utl.ist.elab.virtual.guipack.*;
+import java.awt.event.MouseEvent;
 
-import org.jfree.chart.encoders.*;
-import java.awt.print.*;
-import java.io.*;
+import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
+
+import org.opensourcephysics.display.Interactive;
+import org.opensourcephysics.display.InteractiveMouseHandler;
+import org.opensourcephysics.display.InteractivePanel;
+
+import pt.utl.ist.elab.client.virtual.guipack.InteractiveMenu;
 
 /**
  *
@@ -25,7 +25,7 @@ public class InteractiveQuantum extends Quantum implements InteractiveMouseHandl
     
     private Bounded focusInter;
     private InteractiveMenu par;
-    private pt.utl.ist.elab.virtual.guipack.PopupMenu potentialMenu;
+    private pt.utl.ist.elab.client.virtual.guipack.PopupMenu potentialMenu;
     
     
     public InteractiveQuantum(InteractiveMenu parent){
@@ -38,7 +38,7 @@ public class InteractiveQuantum extends Quantum implements InteractiveMouseHandl
         item.addActionListener(par);
         popupmenu.add(item,0);
         
-        potentialMenu = new pt.utl.ist.elab.virtual.guipack.PopupMenu(par);
+        potentialMenu = new pt.utl.ist.elab.client.virtual.guipack.PopupMenu(par);
         potentialMenu.addItem(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.potentialMenu.title.1"),java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.potentialMenu.tip.1"));
         potentialMenu.addItem(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.potentialMenu.title.2"),java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.potentialMenu.tip.2"));
         potentialMenu.addItem(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.potentialMenu.title.3"),java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum").getString("rec.exp.customizer.potentialMenu.tip.3"));

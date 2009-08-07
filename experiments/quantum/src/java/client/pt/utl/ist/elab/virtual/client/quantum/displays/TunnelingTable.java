@@ -6,7 +6,7 @@
 
 package pt.utl.ist.elab.virtual.client.quantum.displays;
 
-import com.linkare.rec.impl.baseUI.table.*;
+import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
 /**
  *

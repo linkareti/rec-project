@@ -10,13 +10,13 @@ package pt.utl.ist.elab.virtual.client.quantum;
  * @author  nomead
  *
  */
-import pt.utl.ist.elab.virtual.guipack.*;
-import com.linkare.rec.impl.i18n.*;
-import com.linkare.rec.data.metadata.HardwareInfo;
+import pt.utl.ist.elab.client.virtual.guipack.GUtils;
+import pt.utl.ist.elab.client.virtual.guipack.InteractiveMenu;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.ICustomizer;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 
 public class QuantumCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer, InteractiveMenu {
     
