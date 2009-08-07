@@ -4,7 +4,7 @@
  * Created on 27 de Fevereiro de 2005, 03:34 AM
  */
 
-package pt.utl.ist.elab.virtual.client.pend2m;
+package pt.utl.ist.elab.client.vpend2m;
 
 import com.linkare.rec.impl.baseUI.ReCBaseUI;
 import javax.swing.JFrame;

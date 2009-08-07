@@ -4,14 +4,15 @@
  * Created on 27 de Fevereiro de 2005, 03:35 AM
  */
 
-package pt.utl.ist.elab.virtual.client.pend2m;
+package pt.utl.ist.elab.client.vpend2m;
 
 /**
  *
  * @author  Antonio J. R. Figueiredo
  *          Last Review : 6/04/2005
  */
-import pt.utl.ist.elab.virtual.guipack.*;
+import pt.utl.ist.elab.client.virtual.guipack.*;
+
 import com.linkare.rec.impl.i18n.*;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;

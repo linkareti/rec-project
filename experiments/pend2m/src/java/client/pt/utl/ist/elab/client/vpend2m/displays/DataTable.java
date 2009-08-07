@@ -1,10 +1,10 @@
 /*
  * DataTable.java
  *
- * Created on 1 de Março de 2005, 2:38
+ * Created on 1 de Marï¿½o de 2005, 2:38
  */
 
-package pt.utl.ist.elab.virtual.client.pend2m.displays;
+package pt.utl.ist.elab.client.vpend2m.displays;
 
 import com.linkare.rec.impl.baseUI.table.*;
 

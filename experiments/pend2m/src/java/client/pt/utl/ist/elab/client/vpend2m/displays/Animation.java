@@ -1,12 +1,13 @@
 /*
  * Animation.java
  *
- * Created on 1 de Março de 2005, 5:52
+ * Created on 1 de Marï¿½o de 2005, 5:52
  */
 
-package pt.utl.ist.elab.virtual.client.pend2m.displays;
+package pt.utl.ist.elab.client.vpend2m.displays;
 
-import pt.utl.ist.elab.virtual.client.pend2m.Pend2M;
+import pt.utl.ist.elab.client.vpend2m.Pend2M;
+
 import org.opensourcephysics.displayejs.*;
 import java.awt.event.*;
 

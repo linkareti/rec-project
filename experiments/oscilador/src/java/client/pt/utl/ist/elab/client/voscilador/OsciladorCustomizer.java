@@ -1,10 +1,10 @@
 /*
  * OsciladorCustomizer.java
  *
- * Created on 30 de Março de 2005, 19:10
+ * Created on 30 de Marï¿½o de 2005, 19:10
  */
 
-package pt.utl.ist.elab.virtual.client.oscilador;
+package pt.utl.ist.elab.client.voscilador;
 
 /**
  *
@@ -310,7 +310,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements com.linka
             if (frequencia < 0){ // Frequencias negativas
                 frequencia = 0.5;
                 // Mensagem de erro
-                JOptionPane.showMessageDialog(this, "O valor introduzido é negativo!", "Erro no Input", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "O valor introduzido ï¿½ negativo!", "Erro no Input", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(NumberFormatException nfe) {
@@ -332,7 +332,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements com.linka
             if (alturaInicial < 0){ // Altura inicial negativa
                 alturaInicial = 0.2;
                 // Mensagem de erro
-                JOptionPane.showMessageDialog(this, "O valor introduzido é negativo!", "Erro no Input", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "O valor introduzido ï¿½ negativo!", "Erro no Input", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(NumberFormatException nfe) {
@@ -354,7 +354,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements com.linka
             if (g < 0){ // Constantes graviticas negativas
                 g = 9.8;
                 // Mensagem de erro
-                JOptionPane.showMessageDialog(this, "O valor introduzido é negativo!", "Erro no Input", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "O valor introduzido ï¿½ negativo!", "Erro no Input", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(NumberFormatException nfe) {
@@ -376,7 +376,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements com.linka
             if (a <= 0){ // a negativo
                 a = 1;
                 // Mensagem de erro
-                JOptionPane.showMessageDialog(this, "O valor deste parâmetro tem de ser positivo!", "Erro no Input", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "O valor deste parï¿½metro tem de ser positivo!", "Erro no Input", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(NumberFormatException nfe) {

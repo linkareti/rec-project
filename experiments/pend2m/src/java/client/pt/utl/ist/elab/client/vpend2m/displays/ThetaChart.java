@@ -1,10 +1,10 @@
 /*
  * ThetaChart.java
  *
- * Created on 1 de Março de 2005, 2:30
+ * Created on 1 de Marï¿½o de 2005, 2:30
  */
 
-package pt.utl.ist.elab.virtual.client.pend2m.displays;
+package pt.utl.ist.elab.client.vpend2m.displays;
 
 /**
  *

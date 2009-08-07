@@ -4,7 +4,7 @@
  * Created on 8 de Abril de 2005, 18:08
  */
 
-package pt.utl.ist.elab.virtual.client.oscilador.displays;
+package pt.utl.ist.elab.client.voscilador.displays;
 
 /**
  *

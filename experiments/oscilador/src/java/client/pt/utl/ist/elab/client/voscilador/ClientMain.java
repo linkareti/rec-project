@@ -4,7 +4,7 @@
  * Created on 29 de Mar�o de 2005, 1:15
  */
 
-package pt.utl.ist.elab.virtual.client.oscilador;
+package pt.utl.ist.elab.client.voscilador;
 
 import com.linkare.rec.impl.baseUI.ReCBaseUI;
 import javax.swing.JFrame;

@@ -4,10 +4,11 @@
  * Created on 28 de Fevereiro de 2005, 5:28
  */
 
-package pt.utl.ist.elab.virtual.client.pend2m;
+package pt.utl.ist.elab.client.vpend2m;
 
 import org.opensourcephysics.displayejs.*;
-import pt.utl.ist.elab.virtual.guipack.*;
+
+import pt.utl.ist.elab.client.virtual.guipack.*;
 
 /**
  *

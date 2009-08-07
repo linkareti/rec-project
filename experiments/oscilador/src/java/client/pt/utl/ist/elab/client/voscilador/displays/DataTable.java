@@ -4,7 +4,7 @@
  * Created on 16 October 2003, 23:33
  */
 
-package pt.utl.ist.elab.virtual.client.oscilador.displays;
+package pt.utl.ist.elab.client.voscilador.displays;
 
 import com.linkare.rec.impl.baseUI.table.*;
 

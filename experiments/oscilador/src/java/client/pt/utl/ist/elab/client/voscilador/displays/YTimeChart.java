@@ -4,21 +4,21 @@
  * Created on October 15, 2004, 2:06 PM
  */
 
-package pt.utl.ist.elab.virtual.client.oscilador.displays;
+package pt.utl.ist.elab.client.voscilador.displays;
 
 /**
  *
  * @author  andre
  */
-public class XTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
+public class YTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
 {
     
     /** Creates a new instance of AnguloIntensidadeChart */
-    public XTimeChart()
+    public YTimeChart()
     {
         super();
 	setChannelDisplayX(0);
-	setChannelDisplayY(2);
+	setChannelDisplayY(3);
     }
     
 }
