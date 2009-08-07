@@ -1,18 +1,20 @@
 /*
  * Cargas3DCustomizer.java
  *
- * Criado a 18 de Março de 2005, 11:29
+ * Criado a 18 de Marï¿½o de 2005, 11:29
  */
 
 package pt.utl.ist.elab.virtual.client.cargas3d;
-import org.opensourcephysics.displayejs.*;
-import org.opensourcephysics.display.*;
-import com.linkare.rec.impl.i18n.*;
-import com.linkare.rec.data.metadata.HardwareInfo;
+import org.opensourcephysics.displayejs.DrawingPanel3D;
+import org.opensourcephysics.displayejs.InteractionEvent;
+import org.opensourcephysics.displayejs.InteractionListener;
+import org.opensourcephysics.displayejs.InteractionTargetElementPosition;
+import org.opensourcephysics.displayejs.InteractiveCharge;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.ICustomizer;
+import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
-import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  *
  * @autor  n0dP2
@@ -90,9 +92,9 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements com.linkar
         return acqConfig;
     }
     
-    //ESTE É PARA ALTERAR
+    //ESTE ï¿½ PARA ALTERAR
     public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
-        //Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e' bom manter!
+        //Aqui sï¿½o fornecidos parametros do ultimo utilizador que fez a exp, e' bom manter!
         this.acqConfig=acqConfig;
         if(acqConfig!=null) {
             //            int xini = (int)(Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("xini")));
@@ -117,7 +119,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements com.linkar
         return new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/virtual/client/cargas3d/resources/cargas3d_iconified.png"));
     }
     
-    //ESTE É PARA ALTERAR
+    //ESTE ï¿½ PARA ALTERAR
     public String getCustomizerTitle() {
         return ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.12","3D Charges Experiment Configuration Utility");
     }
@@ -704,55 +706,55 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements com.linkar
     private void editOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editOKActionPerformed
         
         Sistema.editarCarga(
-                pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textX1,0f, 10f),
-                pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textY1,0f, 10f),
-                pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textZ1,0f, 10f),
-                pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textQ1,-25f, 25f),
+                pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textX1,0f, 10f),
+                pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textY1,0f, 10f),
+                pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textZ1,0f, 10f),
+                pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textQ1,-25f, 25f),
                 Sistema.sistema.indexOf(painelCargas.interaction.carga));
         painelTabs.setSelectedIndex(0);
         painelCargas.refresh();
     }//GEN-LAST:event_editOKActionPerformed
     
     private void textQ1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textQ1FocusLost
-        pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textQ1,-25f, 25f);
+        pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textQ1,-25f, 25f);
     }//GEN-LAST:event_textQ1FocusLost
     
     private void textZ1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textZ1FocusLost
-        pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textZ1,0f, 10f);
+        pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textZ1,0f, 10f);
     }//GEN-LAST:event_textZ1FocusLost
     
     private void textY1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textY1FocusLost
-        pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textY1,0f, 10f);
+        pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textY1,0f, 10f);
     }//GEN-LAST:event_textY1FocusLost
     
     private void textX1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textX1FocusLost
-        pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textX1,0f, 10f);
+        pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textX1,0f, 10f);
     }//GEN-LAST:event_textX1FocusLost
     
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         Sistema.novaCarga(
-                pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textX,0f, 10f),
-                pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textY,0f, 10f),
-                pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textZ,0f, 10f),
-                pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textQ,-25f, 25f));
+                pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textX,0f, 10f),
+                pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textY,0f, 10f),
+                pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textZ,0f, 10f),
+                pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textQ,-25f, 25f));
         painelTabs.setSelectedIndex(0);
         painelCargas.refresh();
     }//GEN-LAST:event_addButtonActionPerformed
     
     private void textQFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textQFocusLost
-        pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textQ,-25f, 25f);
+        pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textQ,-25f, 25f);
     }//GEN-LAST:event_textQFocusLost
     
     private void textZFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textZFocusLost
-        pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textZ,0f, 10f);
+        pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textZ,0f, 10f);
     }//GEN-LAST:event_textZFocusLost
     
     private void textYFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textYFocusLost
-        pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textY,0f, 10f);
+        pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textY,0f, 10f);
     }//GEN-LAST:event_textYFocusLost
     
     private void textXFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textXFocusLost
-        pt.utl.ist.elab.virtual.guipack.GUtils.validateInput(textX,0f, 10f);
+        pt.utl.ist.elab.client.virtual.guipack.GUtils.validateInput(textX,0f, 10f);
     }//GEN-LAST:event_textXFocusLost
     
     private void painelTabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_painelTabsStateChanged
@@ -791,10 +793,10 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements com.linkar
                 setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
                 carga.getStyle().setFillPattern(cor);
                 
-                textX1.setText(Double.toString(pt.utl.ist.elab.virtual.guipack.QMethods.arredondar(carga.getX(),2)));
-                textY1.setText(Double.toString(pt.utl.ist.elab.virtual.guipack.QMethods.arredondar(carga.getY(),2)));
-                textZ1.setText(Double.toString(pt.utl.ist.elab.virtual.guipack.QMethods.arredondar(carga.getZ(),2)));
-                textQ1.setText(Float.toString(pt.utl.ist.elab.virtual.guipack.QMethods.arredondar(carga.getCharge(),2)));
+                textX1.setText(Double.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(carga.getX(),2)));
+                textY1.setText(Double.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(carga.getY(),2)));
+                textZ1.setText(Double.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(carga.getZ(),2)));
+                textQ1.setText(Float.toString(pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondar(carga.getCharge(),2)));
             }
         }
     }

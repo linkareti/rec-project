@@ -7,14 +7,14 @@ package pt.utl.ist.elab.virtual.client.cargas3d.displays;
  * @author  n0dP2
  */
 
-import com.linkare.rec.impl.client.experiment.ExpDataModel;
-import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
-import com.linkare.rec.data.acquisition.PhysicsValue;
+import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.virtual.client.cargas3d.Sistema;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
-import pt.utl.ist.elab.virtual.utils.*;
-import pt.utl.ist.elab.virtual.client.cargas3d.*;
+import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 
 public class Linhas extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener
 {
