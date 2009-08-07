@@ -5,6 +5,10 @@
 	<classpathentry kind="src" path="rec/src/java/client"/>
 	<classpathentry kind="src" path="rec/src/java/multicast"/>
 	<classpathentry kind="src" path="rec/src/java/ui"/>
+	<classpathentry kind="src" path="elab/src/java/client"/>
+	<classpathentry kind="src" path="elab/src/java/driver"/>
+	<classpathentry kind="src" path="elab/src/java/multicast"/>
+	<classpathentry kind="src" path="elab/src/java/ui"/>
 	<classpathentry kind="lib" path="lib/avalon-framework.jar"/>
 	<classpathentry kind="lib" path="lib/logkit.jar"/>
 	<classpathentry kind="lib" path="lib/tools-1.4.0.jar"/>
@@ -25,7 +29,8 @@
 	<classpathentry kind="lib" path="elab/lib/java/client/OSP3D.jar"/>
 	<classpathentry kind="lib" path="elab/lib/windows/3d/vecmath.jar"/>
 	<classpathentry kind="lib" path="lib/win32/comm.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="elab/lib/windows/3d/j3daudio.jar"/>
+	<classpathentry kind="lib" path="elab/lib/windows/3d/j3dcore.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="rec/lib/compile/client/javaws.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/jfreechart-1.0.9.jar"/>
@@ -35,5 +40,6 @@
 	<classpathentry kind="lib" path="rec/lib/java/common/openorb_pss-1.4.0.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/jsr80_ri.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/jsr80.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_11"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
