@@ -18,9 +18,9 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
-import pt.utl.ist.elab.virtual.VirtualBaseDataSource;
-import pt.utl.ist.elab.virtual.VirtualBaseDriver;
-import pt.utl.ist.elab.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
+import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;

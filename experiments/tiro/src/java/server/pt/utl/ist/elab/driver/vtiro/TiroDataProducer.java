@@ -6,8 +6,8 @@
 
 package pt.utl.ist.elab.driver.vtiro;
 
-import pt.utl.ist.elab.virtual.VirtualBaseDataSource;
-import pt.utl.ist.elab.virtual.VirtualBaseDriver;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
@@ -54,7 +54,7 @@ public class TiroDataProducer extends VirtualBaseDataSource implements Runnable 
     }
 
     //TESTE
-    public void start(pt.utl.ist.elab.virtual.client.tiro.displays.Animation an){
+    public void start(pt.utl.ist.elab.client.vtiro.displays.Animation an){
         this.an = an;
         animaThread = new Thread(this);
         animaThread.start();
@@ -62,7 +62,7 @@ public class TiroDataProducer extends VirtualBaseDataSource implements Runnable 
     
     
     //TESTE
-    pt.utl.ist.elab.virtual.client.tiro.displays.Animation an;
+    pt.utl.ist.elab.client.vtiro.displays.Animation an;
     private Thread animaThread;
     public void run() {
         while (animaThread == Thread.currentThread() && !stopped && state[0] < w){
