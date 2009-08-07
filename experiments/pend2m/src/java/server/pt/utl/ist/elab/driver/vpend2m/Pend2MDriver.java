@@ -1,10 +1,10 @@
 /*
- * QuantumDriver.java
+ * Pend2MDriver.java
  *
- * Created on 24 de Abril de 2003, 8:53
+ * Created on 27 de Fevereiro de 2005, 8:53
  */
 
-package pt.utl.ist.elab.virtual.driver.quantum;
+package pt.utl.ist.elab.driver.vpend2m;
 
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -23,31 +23,31 @@ import com.linkare.rec.impl.utils.Defaults;
 
 /**
  *
- * @author  nomead
+ * @author  Antonio J. R. Figueiredo
+ *          Last Review : 6/04/2005
  */
 
-
-public class QuantumDriver extends VirtualBaseDriver {
+public class Pend2MDriver extends VirtualBaseDriver {
     
-    private static String Quantum_DRIVER_LOGGER="Quantum.Logger";
+    private static String Pend2M_DRIVER_LOGGER="Pend2M.Logger";
     static {
-        Logger l=LogManager.getLogManager().getLogger(Quantum_DRIVER_LOGGER);
+        Logger l=LogManager.getLogManager().getLogger(Pend2M_DRIVER_LOGGER);
         if(l==null) {
-            LogManager.getLogManager().addLogger(Logger.getLogger(Quantum_DRIVER_LOGGER));
+            LogManager.getLogManager().addLogger(Logger.getLogger(Pend2M_DRIVER_LOGGER));
         }
     }
     
     /* Hardware and driver related variables*/
-    private static final String APPLICATION_IDENTIFIER = "E-Lab (Mecanica Quantica Driver)";
-    private static final String DRIVER_UNIQUE_ID = "MECANICA_QUANTICA_V1.0";
+    private static final String APPLICATION_IDENTIFIER = "E-Lab (Pendulo-Duplo Motorizado Driver)";
+    private static final String DRIVER_UNIQUE_ID = "PENDULO_DUPLO_MOTORIZADO_V1.0";
     private static final String HW_VERSION = "0.1";
     
     protected VirtualBaseDataSource dataSource = null;
     protected HardwareAcquisitionConfig config=null;
     protected HardwareInfo info=null;
     
-    /** Creates a new instance of CGDriver */
-    public QuantumDriver() {
+    /** Creates a new instance of Pend2MDriver */
+    public Pend2MDriver() {
     }
     
     
@@ -59,7 +59,7 @@ public class QuantumDriver extends VirtualBaseDriver {
             configure(config,info);
         }
         catch(Exception e) {
-            LoggerUtil.logThrowable("Error on config...",e,Logger.getLogger(Quantum_DRIVER_LOGGER));
+            LoggerUtil.logThrowable("Error on config...",e,Logger.getLogger(Pend2M_DRIVER_LOGGER));
             throw new WrongConfigurationException();
         }
     }
@@ -67,34 +67,24 @@ public class QuantumDriver extends VirtualBaseDriver {
     public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
         this.config=config;
         this.info=info;
-        
+
+        int tbs = (int) config.getSelectedFrequency().getFrequency();
         int nSamples = config.getTotalSamples();
         
-        double x0 = Double.parseDouble(config.getSelectedHardwareParameterValue("x0"));
-        short deltaX = Short.parseShort(config.getSelectedHardwareParameterValue("deltaX"));
-        byte log2N = Byte.parseByte(config.getSelectedHardwareParameterValue("log2N"));
-        short dX0 = Short.parseShort(config.getSelectedHardwareParameterValue("dX0"));
+        float theta = Float.parseFloat(config.getSelectedHardwareParameterValue("theta"));
+        float phi = Float.parseFloat(config.getSelectedHardwareParameterValue("phi"));
+        float thetaDot = Float.parseFloat(config.getSelectedHardwareParameterValue("thetaDot"));
+        float phiDot = Float.parseFloat(config.getSelectedHardwareParameterValue("phiDot"));
+        float l1 = Float.parseFloat(config.getSelectedHardwareParameterValue("l1"));
+        float l2 = Float.parseFloat(config.getSelectedHardwareParameterValue("l2"));
+        float a = Float.parseFloat(config.getSelectedHardwareParameterValue("a"));
+        float fase = Float.parseFloat(config.getSelectedHardwareParameterValue("fase"));
+        float w = Float.parseFloat(config.getSelectedHardwareParameterValue("w"));
+        float m1 = Float.parseFloat(config.getSelectedHardwareParameterValue("m1"));
+        float m2 = Float.parseFloat(config.getSelectedHardwareParameterValue("m2"));
+        float g = Float.parseFloat(config.getSelectedHardwareParameterValue("g"));
         
-        String xDt = config.getSelectedHardwareParameterValue("xDt");
-        String nDt = config.getSelectedHardwareParameterValue("nDt");
-        double dt = Double.parseDouble(xDt+"e-"+nDt);
-        
-        String xE = config.getSelectedHardwareParameterValue("xEnergy");
-        String nE = config.getSelectedHardwareParameterValue("nEnergy");
-        double energy = Double.parseDouble(xE+"e"+nE);
-        
-        double tol = Double.parseDouble("1e-"+config.getSelectedHardwareParameterValue("logTol"));
-        
-        String xTbs = config.getSelectedHardwareParameterValue("xTbs");
-        String nTbs = config.getSelectedHardwareParameterValue("nTbs");
-        double tbs = Double.parseDouble(xTbs+"e-"+nTbs);
-        
-        boolean wraparoundKS = config.getSelectedHardwareParameterValue("wraparoundKS").trim().equals("1")?true:false;
-        boolean wraparoundXS = config.getSelectedHardwareParameterValue("wraparoundXS").trim().equals("1")?true:false;
-        boolean tunneling = config.getSelectedHardwareParameterValue("tunneling").trim().equals("1")?true:false;
-        
-        dataSource = new QuantumDataProducer(this,dX0,x0,energy,log2N,deltaX,tol,dt,tbs,nSamples,wraparoundKS,wraparoundXS,tunneling);
-        ((QuantumDataProducer) dataSource).configPotentials(config.getSelectedHardwareParameterValue("potentials"));
+        dataSource = new Pend2MDataProducer(this, theta, phi, thetaDot, phiDot, l1, l2, m1, m2, w, fase, a, g, tbs, nSamples);
         
         for(int i=0;i<config.getChannelsConfig().length;i++)
             config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
@@ -130,8 +120,8 @@ public class QuantumDriver extends VirtualBaseDriver {
     
     public Object getHardwareInfo() {
         fireIDriverStateListenerDriverReseting();
-        String baseHardwareInfoFile="recresource://pt/utl/ist/elab/virtual/driver/quantum/QuantumBaseHardwareInfo.xml";
-        String prop=Defaults.defaultIfEmpty(System.getProperty("eLab.Quantum.HardwareInfo"),baseHardwareInfoFile);
+        String baseHardwareInfoFile="recresource://pt/utl/ist/elab/virtual/driver/pend2m/Pend2MBaseHardwareInfo.xml";
+        String prop=Defaults.defaultIfEmpty(System.getProperty("eLab.Pend2M.HardwareInfo"),baseHardwareInfoFile);
         
         if(prop.indexOf("://")==-1)
             prop="file:///" + System.getProperty("user.dir") + "/" + prop;
@@ -140,11 +130,11 @@ public class QuantumDriver extends VirtualBaseDriver {
         try {
             url=ReCProtocols.getURL(prop);
         }catch(java.net.MalformedURLException e) {
-            LoggerUtil.logThrowable("Unable to load resource: " + prop,e,Logger.getLogger(Quantum_DRIVER_LOGGER));
+            LoggerUtil.logThrowable("Unable to load resource: " + prop,e,Logger.getLogger(Pend2M_DRIVER_LOGGER));
             try {
                 url=new java.net.URL(baseHardwareInfoFile);
             }catch(java.net.MalformedURLException e2) {
-                LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile,e2,Logger.getLogger(Quantum_DRIVER_LOGGER));
+                LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile,e2,Logger.getLogger(Pend2M_DRIVER_LOGGER));
             }
         }
         fireIDriverStateListenerDriverReseted();

@@ -1,10 +1,15 @@
 /*
- * QuantumDriver.java
+ * YoungInterfDriver.java
  *
- * Created on 24 de Abril de 2003, 8:53
+ * Created on 27 de Dezembro de 2004, 17:24
  */
 
-package pt.utl.ist.elab.virtual.driver.quantum;
+package pt.utl.ist.elab.driver.vyounginterf;
+
+/**
+ *
+ * @author  Emanuel Antunes
+ */
 
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -21,34 +26,29 @@ import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.utils.Defaults;
 
-/**
- *
- * @author  nomead
- */
-
-
-public class QuantumDriver extends VirtualBaseDriver {
+public class YoungInterfDriver  extends VirtualBaseDriver{
     
-    private static String Quantum_DRIVER_LOGGER="Quantum.Logger";
+    //O codigo desta classe e sempre igual!!! Alterar so os nomes para o vosso caso!
+    private static String YOUNGINTERF_DRIVER_LOGGER="YoungInterf.Logger";
     static {
-        Logger l=LogManager.getLogManager().getLogger(Quantum_DRIVER_LOGGER);
+        Logger l=LogManager.getLogManager().getLogger(YOUNGINTERF_DRIVER_LOGGER);
         if(l==null) {
-            LogManager.getLogManager().addLogger(Logger.getLogger(Quantum_DRIVER_LOGGER));
+            LogManager.getLogManager().addLogger(Logger.getLogger(YOUNGINTERF_DRIVER_LOGGER));
         }
     }
     
     /* Hardware and driver related variables*/
-    private static final String APPLICATION_IDENTIFIER = "E-Lab (Mecanica Quantica Driver)";
-    private static final String DRIVER_UNIQUE_ID = "MECANICA_QUANTICA_V1.0";
+    private static final String APPLICATION_IDENTIFIER = "E-Lab (Interferencia-Young Driver)";
+    private static final String DRIVER_UNIQUE_ID = "INTERFERENCIA_YOUNG_V1.0";
     private static final String HW_VERSION = "0.1";
     
     protected VirtualBaseDataSource dataSource = null;
     protected HardwareAcquisitionConfig config=null;
     protected HardwareInfo info=null;
     
-    /** Creates a new instance of CGDriver */
-    public QuantumDriver() {
-    }
+    
+    /** Creates a new instance of YoungInterfDriver */
+    public YoungInterfDriver() {  }
     
     
     public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException, WrongConfigurationException {
@@ -59,46 +59,33 @@ public class QuantumDriver extends VirtualBaseDriver {
             configure(config,info);
         }
         catch(Exception e) {
-            LoggerUtil.logThrowable("Error on config...",e,Logger.getLogger(Quantum_DRIVER_LOGGER));
+            LoggerUtil.logThrowable("Error on config...",e,Logger.getLogger(YOUNGINTERF_DRIVER_LOGGER));
             throw new WrongConfigurationException();
         }
     }
     
     public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
+        //Recebemos ordem para configurar, no HardwareAcquisitionConfig estao todas as informacoes escolhidas pelo cliente...agora e' so' pedir
         this.config=config;
         this.info=info;
+        float lambda = Float.parseFloat(config.getSelectedHardwareParameterValue("lambda"));
+        float dfendas = Float.parseFloat(config.getSelectedHardwareParameterValue("dfendas"));
+        float dplanos = Float.parseFloat(config.getSelectedHardwareParameterValue("dplanos"));
+        float lpadrao = Float.parseFloat(config.getSelectedHardwareParameterValue("lpadrao"));
         
+        int tbs = (int)config.getSelectedFrequency().getFrequency();
         int nSamples = config.getTotalSamples();
         
-        double x0 = Double.parseDouble(config.getSelectedHardwareParameterValue("x0"));
-        short deltaX = Short.parseShort(config.getSelectedHardwareParameterValue("deltaX"));
-        byte log2N = Byte.parseByte(config.getSelectedHardwareParameterValue("log2N"));
-        short dX0 = Short.parseShort(config.getSelectedHardwareParameterValue("dX0"));
         
-        String xDt = config.getSelectedHardwareParameterValue("xDt");
-        String nDt = config.getSelectedHardwareParameterValue("nDt");
-        double dt = Double.parseDouble(xDt+"e-"+nDt);
+        //Vamos criar o nosso produtor de dados!
+        dataSource = new YoungInterfDataProducer(this, dfendas , dplanos , lambda , lpadrao , tbs, nSamples);
         
-        String xE = config.getSelectedHardwareParameterValue("xEnergy");
-        String nE = config.getSelectedHardwareParameterValue("nEnergy");
-        double energy = Double.parseDouble(xE+"e"+nE);
-        
-        double tol = Double.parseDouble("1e-"+config.getSelectedHardwareParameterValue("logTol"));
-        
-        String xTbs = config.getSelectedHardwareParameterValue("xTbs");
-        String nTbs = config.getSelectedHardwareParameterValue("nTbs");
-        double tbs = Double.parseDouble(xTbs+"e-"+nTbs);
-        
-        boolean wraparoundKS = config.getSelectedHardwareParameterValue("wraparoundKS").trim().equals("1")?true:false;
-        boolean wraparoundXS = config.getSelectedHardwareParameterValue("wraparoundXS").trim().equals("1")?true:false;
-        boolean tunneling = config.getSelectedHardwareParameterValue("tunneling").trim().equals("1")?true:false;
-        
-        dataSource = new QuantumDataProducer(this,dX0,x0,energy,log2N,deltaX,tol,dt,tbs,nSamples,wraparoundKS,wraparoundXS,tunneling);
-        ((QuantumDataProducer) dataSource).configPotentials(config.getSelectedHardwareParameterValue("potentials"));
-        
-        for(int i=0;i<config.getChannelsConfig().length;i++)
+        //NECESSARIO!! Colocar o numero de amostra para todos os canais!
+        for(int i=0;i<config.getChannelsConfig().length;i++) {
             config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
+        }
         
+        //NAO ESQUECER ESTA LINHA!
         dataSource.setAcquisitionHeader(config);
         
         fireIDriverStateListenerDriverConfigured();
@@ -130,8 +117,9 @@ public class QuantumDriver extends VirtualBaseDriver {
     
     public Object getHardwareInfo() {
         fireIDriverStateListenerDriverReseting();
-        String baseHardwareInfoFile="recresource://pt/utl/ist/elab/virtual/driver/quantum/QuantumBaseHardwareInfo.xml";
-        String prop=Defaults.defaultIfEmpty(System.getProperty("eLab.Quantum.HardwareInfo"),baseHardwareInfoFile);
+        //MUITO IMPORTANTE!!! ALTERAR AS PROXIMAS DUAS LINHAS!!!
+        String baseHardwareInfoFile="recresource://pt/utl/ist/elab/driver/virtual//YoungInterfBaseHardwareInfo.xml";
+        String prop=Defaults.defaultIfEmpty(System.getProperty("eLab.YoungInterf.HardwareInfo"),baseHardwareInfoFile);
         
         if(prop.indexOf("://")==-1)
             prop="file:///" + System.getProperty("user.dir") + "/" + prop;
@@ -140,11 +128,11 @@ public class QuantumDriver extends VirtualBaseDriver {
         try {
             url=ReCProtocols.getURL(prop);
         }catch(java.net.MalformedURLException e) {
-            LoggerUtil.logThrowable("Unable to load resource: " + prop,e,Logger.getLogger(Quantum_DRIVER_LOGGER));
+            LoggerUtil.logThrowable("Unable to load resource: " + prop,e,Logger.getLogger("YoungInterf"));
             try {
                 url=new java.net.URL(baseHardwareInfoFile);
             }catch(java.net.MalformedURLException e2) {
-                LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile,e2,Logger.getLogger(Quantum_DRIVER_LOGGER));
+                LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile,e2,Logger.getLogger("YoungInterf"));
             }
         }
         fireIDriverStateListenerDriverReseted();

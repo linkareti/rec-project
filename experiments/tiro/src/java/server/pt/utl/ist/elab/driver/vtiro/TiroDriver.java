@@ -1,10 +1,10 @@
 /*
- * QuantumDriver.java
+ * TiroDriver.java
  *
  * Created on 24 de Abril de 2003, 8:53
  */
 
-package pt.utl.ist.elab.virtual.driver.quantum;
+package pt.utl.ist.elab.driver.vtiro;
 
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -27,27 +27,27 @@ import com.linkare.rec.impl.utils.Defaults;
  */
 
 
-public class QuantumDriver extends VirtualBaseDriver {
+public class TiroDriver extends VirtualBaseDriver {
     
-    private static String Quantum_DRIVER_LOGGER="Quantum.Logger";
+    private static String Tiro_DRIVER_LOGGER="Tiro.Logger";
     static {
-        Logger l=LogManager.getLogManager().getLogger(Quantum_DRIVER_LOGGER);
+        Logger l=LogManager.getLogManager().getLogger(Tiro_DRIVER_LOGGER);
         if(l==null) {
-            LogManager.getLogManager().addLogger(Logger.getLogger(Quantum_DRIVER_LOGGER));
+            LogManager.getLogManager().addLogger(Logger.getLogger(Tiro_DRIVER_LOGGER));
         }
     }
     
     /* Hardware and driver related variables*/
-    private static final String APPLICATION_IDENTIFIER = "E-Lab (Mecanica Quantica Driver)";
-    private static final String DRIVER_UNIQUE_ID = "MECANICA_QUANTICA_V1.0";
+    private static final String APPLICATION_IDENTIFIER = "E-Lab (Cart Pole Driver)";
+    private static final String DRIVER_UNIQUE_ID = "CART_POLE_V1.0";
     private static final String HW_VERSION = "0.1";
     
     protected VirtualBaseDataSource dataSource = null;
     protected HardwareAcquisitionConfig config=null;
     protected HardwareInfo info=null;
     
-    /** Creates a new instance of CGDriver */
-    public QuantumDriver() {
+    /** Creates a new instance of TiroDriver */
+    public TiroDriver() {
     }
     
     
@@ -59,7 +59,7 @@ public class QuantumDriver extends VirtualBaseDriver {
             configure(config,info);
         }
         catch(Exception e) {
-            LoggerUtil.logThrowable("Error on config...",e,Logger.getLogger(Quantum_DRIVER_LOGGER));
+            LoggerUtil.logThrowable("Error on config...",e,Logger.getLogger(Tiro_DRIVER_LOGGER));
             throw new WrongConfigurationException();
         }
     }
@@ -68,33 +68,13 @@ public class QuantumDriver extends VirtualBaseDriver {
         this.config=config;
         this.info=info;
         
-        int nSamples = config.getTotalSamples();
+        double g = Float.parseFloat(config.getSelectedHardwareParameterValue("g"));
+        double w = Float.parseFloat(config.getSelectedHardwareParameterValue("w"));
+        double h = Float.parseFloat(config.getSelectedHardwareParameterValue("h"));
+        double v = Float.parseFloat(config.getSelectedHardwareParameterValue("v"));
+        double theta = Float.parseFloat(config.getSelectedHardwareParameterValue("theta"));
         
-        double x0 = Double.parseDouble(config.getSelectedHardwareParameterValue("x0"));
-        short deltaX = Short.parseShort(config.getSelectedHardwareParameterValue("deltaX"));
-        byte log2N = Byte.parseByte(config.getSelectedHardwareParameterValue("log2N"));
-        short dX0 = Short.parseShort(config.getSelectedHardwareParameterValue("dX0"));
-        
-        String xDt = config.getSelectedHardwareParameterValue("xDt");
-        String nDt = config.getSelectedHardwareParameterValue("nDt");
-        double dt = Double.parseDouble(xDt+"e-"+nDt);
-        
-        String xE = config.getSelectedHardwareParameterValue("xEnergy");
-        String nE = config.getSelectedHardwareParameterValue("nEnergy");
-        double energy = Double.parseDouble(xE+"e"+nE);
-        
-        double tol = Double.parseDouble("1e-"+config.getSelectedHardwareParameterValue("logTol"));
-        
-        String xTbs = config.getSelectedHardwareParameterValue("xTbs");
-        String nTbs = config.getSelectedHardwareParameterValue("nTbs");
-        double tbs = Double.parseDouble(xTbs+"e-"+nTbs);
-        
-        boolean wraparoundKS = config.getSelectedHardwareParameterValue("wraparoundKS").trim().equals("1")?true:false;
-        boolean wraparoundXS = config.getSelectedHardwareParameterValue("wraparoundXS").trim().equals("1")?true:false;
-        boolean tunneling = config.getSelectedHardwareParameterValue("tunneling").trim().equals("1")?true:false;
-        
-        dataSource = new QuantumDataProducer(this,dX0,x0,energy,log2N,deltaX,tol,dt,tbs,nSamples,wraparoundKS,wraparoundXS,tunneling);
-        ((QuantumDataProducer) dataSource).configPotentials(config.getSelectedHardwareParameterValue("potentials"));
+        dataSource = new TiroDataProducer(this,w,h,v,theta,g);
         
         for(int i=0;i<config.getChannelsConfig().length;i++)
             config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
@@ -130,8 +110,8 @@ public class QuantumDriver extends VirtualBaseDriver {
     
     public Object getHardwareInfo() {
         fireIDriverStateListenerDriverReseting();
-        String baseHardwareInfoFile="recresource://pt/utl/ist/elab/virtual/driver/quantum/QuantumBaseHardwareInfo.xml";
-        String prop=Defaults.defaultIfEmpty(System.getProperty("eLab.Quantum.HardwareInfo"),baseHardwareInfoFile);
+        String baseHardwareInfoFile="recresource://pt/utl/ist/elab/virtual/driver/tiro/TiroBaseHardwareInfo.xml";
+        String prop=Defaults.defaultIfEmpty(System.getProperty("eLab.Tiro.HardwareInfo"),baseHardwareInfoFile);
         
         if(prop.indexOf("://")==-1)
             prop="file:///" + System.getProperty("user.dir") + "/" + prop;
@@ -140,11 +120,11 @@ public class QuantumDriver extends VirtualBaseDriver {
         try {
             url=ReCProtocols.getURL(prop);
         }catch(java.net.MalformedURLException e) {
-            LoggerUtil.logThrowable("Unable to load resource: " + prop,e,Logger.getLogger(Quantum_DRIVER_LOGGER));
+            LoggerUtil.logThrowable("Unable to load resource: " + prop,e,Logger.getLogger(Tiro_DRIVER_LOGGER));
             try {
                 url=new java.net.URL(baseHardwareInfoFile);
             }catch(java.net.MalformedURLException e2) {
-                LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile,e2,Logger.getLogger(Quantum_DRIVER_LOGGER));
+                LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile,e2,Logger.getLogger(Tiro_DRIVER_LOGGER));
             }
         }
         fireIDriverStateListenerDriverReseted();

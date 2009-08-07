@@ -13,14 +13,15 @@ package pt.utl.ist.elab.virtual.driver.quantum;
 
 import org.opensourcephysics.numerics.ParsedFunction;
 import org.opensourcephysics.numerics.ParserException;
-import pt.utl.ist.elab.virtual.utils.*;
 
-import com.linkare.rec.data.acquisition.PhysicsVal;
+import pt.utl.ist.elab.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.virtual.VirtualBaseDriver;
+import pt.utl.ist.elab.virtual.utils.ByteUtil;
+import pt.utl.ist.elab.virtual.utils.Complex;
+import pt.utl.ist.elab.virtual.utils.FFT;
+
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
-import com.linkare.rec.impl.logging.*;
-import pt.utl.ist.elab.virtual.driver.*;
-import java.util.logging.*;
 
 public class QuantumDataProducer extends VirtualBaseDataSource implements Runnable {
     //O numero de canais(de dados) que existem!

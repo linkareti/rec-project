@@ -11,17 +11,17 @@ package pt.utl.ist.elab.virtual.driver.stdmap;
  * @author  nomead
  */
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.awt.image.PixelGrabber;
+
+import pt.utl.ist.elab.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.virtual.VirtualBaseDriver;
 import pt.utl.ist.elab.virtual.utils.ByteUtil;
-import java.awt.image.*;
-import java.awt.*;
-import org.opensourcephysics.display.*;
 
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
-import com.linkare.rec.impl.logging.*;
-import pt.utl.ist.elab.virtual.driver.*;
-import java.util.logging.*;
 
 public class STDMAPDataProducer extends VirtualBaseDataSource implements Runnable
 {
