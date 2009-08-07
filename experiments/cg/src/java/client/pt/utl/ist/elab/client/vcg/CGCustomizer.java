@@ -4,7 +4,7 @@
  * Created on October 27, 2004, 03:35 AM
  */
 
-package pt.utl.ist.elab.virtual.client.cg;
+package pt.utl.ist.elab.client.vcg;
 
 /**
  *
@@ -15,15 +15,15 @@ package pt.utl.ist.elab.virtual.client.cg;
  * angInit -> graus
  *
  */
-import com.linkare.rec.impl.i18n.*;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.ICustomizer;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
-import com.linkare.rec.data.synch.Frequency;
+import org.opensourcephysics.display.Circle;
+import org.opensourcephysics.display.DrawingPanel;
+import org.opensourcephysics.display.axes.XAxis;
 
-import org.opensourcephysics.display.*;
-import org.opensourcephysics.display.axes.*;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer
 {

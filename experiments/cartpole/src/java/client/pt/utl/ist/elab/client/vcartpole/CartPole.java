@@ -4,16 +4,38 @@
  * Created on 16 de Fevereiro de 2005, 0:04
  */
 
-package pt.utl.ist.elab.virtual.client.cartpole;
+package pt.utl.ist.elab.client.vcartpole;
 
-import pt.utl.ist.elab.virtual.guipack.*;
-import org.opensourcephysics.displayejs.*;
-import java.awt.image.*;
-import java.awt.event.*;
-import javax.swing.*;
-import org.jfree.chart.encoders.*;
-import java.awt.print.*;
-import java.io.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+import org.jfree.chart.encoders.EncoderUtil;
+import org.jfree.chart.encoders.ImageFormat;
+import org.opensourcephysics.displayejs.DrawingPanel3D;
+import org.opensourcephysics.displayejs.Group;
+import org.opensourcephysics.displayejs.InteractionListener;
+import org.opensourcephysics.displayejs.InteractiveArrow;
+import org.opensourcephysics.displayejs.InteractiveBox;
+import org.opensourcephysics.displayejs.InteractiveSphere;
+import org.opensourcephysics.displayejs.InteractiveTrace;
+
+import pt.utl.ist.elab.client.virtual.guipack.InteractiveMenu;
+import pt.utl.ist.elab.client.virtual.guipack.PopupMenu;
 
 /**
  *

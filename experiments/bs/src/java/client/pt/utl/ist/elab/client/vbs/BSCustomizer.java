@@ -13,7 +13,7 @@
  *
  */
 
-package pt.utl.ist.elab.virtual.client.bs;
+package pt.utl.ist.elab.client.vbs;
 
 import com.linkare.rec.impl.i18n.*;
 import com.linkare.rec.data.metadata.HardwareInfo;
@@ -30,7 +30,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 //<<<<<<< BSCustomizer.java
-import pt.utl.ist.elab.virtual.client.bs.VariablePanel;
+import pt.utl.ist.elab.client.vbs.VariablePanel;
 //=======
 import org.opensourcephysics.display.*;
 //>>>>>>> 1.11

@@ -4,7 +4,7 @@
  * Created on 2 de Abril de 2005, 19:52
  */
 
-package pt.utl.ist.elab.virtual.client.bs;
+package pt.utl.ist.elab.client.vbs;
 
 import com.linkare.rec.impl.baseUI.ReCBaseUI;
 import javax.swing.JFrame;

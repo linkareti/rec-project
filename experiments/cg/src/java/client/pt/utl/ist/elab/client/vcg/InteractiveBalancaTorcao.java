@@ -4,11 +4,16 @@
  * Created on 2 de Dezembro de 2004, 6:30
  */
 
-package pt.utl.ist.elab.virtual.client.cg;
+package pt.utl.ist.elab.client.vcg;
 
-import org.opensourcephysics.displayejs.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import org.opensourcephysics.displayejs.Group;
+import org.opensourcephysics.displayejs.InteractionEvent;
+import org.opensourcephysics.displayejs.InteractionListener;
+import org.opensourcephysics.displayejs.InteractiveSphere;
+
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 

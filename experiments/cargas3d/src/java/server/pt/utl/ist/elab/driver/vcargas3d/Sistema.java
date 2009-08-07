@@ -4,10 +4,11 @@
  * Created on 19 de Mar�o de 2005, 16:19
  */
 
-package pt.utl.ist.elab.virtual.driver.cargas3d;
-import org.opensourcephysics.displayejs.*;
-import java.util.ArrayList;
+package pt.utl.ist.elab.driver.vcargas3d;
 import java.awt.Color;
+import java.util.ArrayList;
+
+import org.opensourcephysics.displayejs.InteractiveCharge;
 /**
  *
  * @author n0dP2

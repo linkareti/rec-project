@@ -4,7 +4,7 @@
  * Created on October 27, 2004, 03:34 AM
  */
 
-package pt.utl.ist.elab.virtual.client.cartpole;
+package pt.utl.ist.elab.client.vcg;
 
 import com.linkare.rec.impl.baseUI.ReCBaseUI;
 import javax.swing.JFrame;
@@ -23,7 +23,7 @@ public class ClientMain
     {
 	JFrame.setDefaultLookAndFeelDecorated(true);
 	ReCBaseUI ui=new ReCBaseUI();
-	ui.setApparatusAutoConnectID("CART_POLE_V1.0");
+	ui.setApparatusAutoConnectID("CAVENDISH_G_V1.0");
 	ui.show();
     }        
 }

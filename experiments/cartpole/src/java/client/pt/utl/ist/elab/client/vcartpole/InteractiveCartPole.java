@@ -4,11 +4,15 @@
  * Created on 16 de Fevereiro de 2005, 0:30
  */
 
-package pt.utl.ist.elab.virtual.client.cartpole;
+package pt.utl.ist.elab.client.vcartpole;
 
-import pt.utl.ist.elab.virtual.guipack.*;
-import org.opensourcephysics.displayejs.*;
-import java.awt.event.*;
+import org.opensourcephysics.displayejs.InteractionEvent;
+import org.opensourcephysics.displayejs.InteractionListener;
+import org.opensourcephysics.displayejs.InteractiveArrow;
+import org.opensourcephysics.displayejs.InteractiveSphere;
+
+import pt.utl.ist.elab.client.virtual.guipack.InteractiveMenu;
+import pt.utl.ist.elab.client.virtual.guipack.PopupMenu;
 
 /**
  *

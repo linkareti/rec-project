@@ -16,12 +16,12 @@ import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
 import com.linkare.rec.impl.logging.*;
 
-import pt.utl.ist.elab.virtual.VirtualBaseDataSource;
-import pt.utl.ist.elab.virtual.VirtualBaseDriver;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
+import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 import pt.utl.ist.elab.virtual.driver.*;
 import org.opensourcephysics.display2d.*;
 import java.util.logging.*;
-import pt.utl.ist.elab.virtual.utils.ByteUtil;
 
 public class BSDataProducer extends VirtualBaseDataSource {
     //O numero de canais(de dados) que existem!

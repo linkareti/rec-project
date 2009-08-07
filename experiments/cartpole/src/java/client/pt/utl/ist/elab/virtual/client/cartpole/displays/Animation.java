@@ -1,7 +1,7 @@
 /*
  * Animation.java
  *
- * Created on 1 de Março de 2005, 5:52
+ * Created on 1 de Marï¿½o de 2005, 5:52
  */
 
 package pt.utl.ist.elab.virtual.client.cartpole.displays;
@@ -16,7 +16,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
-import pt.utl.ist.elab.virtual.client.cartpole.CartPole;
+import pt.utl.ist.elab.client.vcartpole.CartPole;
 /**
  *
  * @author  nomead
@@ -41,7 +41,7 @@ public class Animation extends CartPole implements ExpDataDisplay, ExpDataModelL
     }*/
     
     public void move(double x, double theta, double xdot, double thetadot, double action, double time){
-        statusStr = "t : "+pt.utl.ist.elab.virtual.guipack.GUtils.trimDecimalN(time,5)+" s";
+        statusStr = "t : "+pt.utl.ist.elab.client.virtual.guipack.GUtils.trimDecimalN(time,5)+" s";
         move(x*10,theta,xdot*10,thetadot,action*10);
     }
     

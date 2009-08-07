@@ -1,4 +1,4 @@
-package pt.utl.ist.elab.virtual.client.bs;
+package pt.utl.ist.elab.client.vbs;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

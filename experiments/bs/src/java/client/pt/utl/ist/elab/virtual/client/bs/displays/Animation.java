@@ -21,7 +21,8 @@ import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
-import pt.utl.ist.elab.virtual.utils.ByteUtil;
+
+import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 
 public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelListener {
 	private DrawingPanel drawingPanel;

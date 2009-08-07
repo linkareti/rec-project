@@ -1,24 +1,25 @@
 /*
  * Cargas3DDataProducer.java
  *
- * Created on 22 de Março de 2005, 14:37
+ * Created on 22 de Marï¿½o de 2005, 14:37
  */
 
-package pt.utl.ist.elab.virtual.driver.cargas3d;
+package pt.utl.ist.elab.driver.vcargas3d;
 
 /**
  *
  * @author  n0dP2
  */
 
+import org.opensourcephysics.displayejs.InteractiveCharge;
+
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
+import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
-import com.linkare.rec.impl.logging.*;
-import pt.utl.ist.elab.virtual.driver.*;
-import org.opensourcephysics.displayejs.*;
-import java.util.logging.*;
-import pt.utl.ist.elab.virtual.utils.*;
 
 public class Cargas3DDataProducer extends VirtualBaseDataSource {
     //        public DrawingPanel3D panel = new DrawingPanel3D();
@@ -32,7 +33,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
     private java.util.ArrayList sistema;
     
     
-    //Aproveitamos para inicializar todas as variáveis logo no construtor...
+    //Aproveitamos para inicializar todas as variï¿½veis logo no construtor...
     public Cargas3DDataProducer(VirtualBaseDriver driver, java.util.ArrayList sistema) {
         this.driver = driver;
         this.sistema = sistema;
@@ -43,7 +44,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
         this.sistema = sistema;
     }
     
-    //Este é o processo que nos vai simular e criar as amostras para enviar ao cliente!
+    //Este ï¿½ o processo que nos vai simular e criar as amostras para enviar ao cliente!
     private class ProducerThread extends Thread {
         
         private java.util.ArrayList linhas = new java.util.ArrayList();
@@ -90,7 +91,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
                     for(z=0f;z<10;z=z+0.1f){
                         
                         calculaCampo();
-                        int EFF= pt.utl.ist.elab.virtual.guipack.QMethods.arredondarInt(EF);
+                        int EFF= pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EF);
                         
                         //considere-se apenas o campo dentro de certos
                         //limites na caixa
@@ -111,8 +112,8 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
                     }
                 }
             }
-            EFFmin=pt.utl.ist.elab.virtual.guipack.QMethods.arredondarInt(EFmin);
-            EFFmax=pt.utl.ist.elab.virtual.guipack.QMethods.arredondarInt(EFmax);
+            EFFmin=pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EFmin);
+            EFFmax=pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EFmax);
             //calculou-se o minimo e maximo
             //volte-se a calcular para selecionar os valores
             //tendo em consideracao o max e o min
@@ -123,7 +124,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
             
             //divisao do espaco a considerar para
             //o modulo do campo
-            int razao = pt.utl.ist.elab.virtual.guipack.QMethods.arredondarInt((EFmax-EFmin)/50);
+            int razao = pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt((EFmax-EFmin)/50);
             
             //inicializem-se as listas
             for(int i =0;i<20;i++){
@@ -137,7 +138,7 @@ public class Cargas3DDataProducer extends VirtualBaseDataSource {
                     for(z=0f;z<10;z=z+0.1f){
                         
                         calculaCampo();
-                        int EFF= pt.utl.ist.elab.virtual.guipack.QMethods.arredondarInt(EF);
+                        int EFF= pt.utl.ist.elab.client.virtual.guipack.QMethods.arredondarInt(EF);
                         // o meio e' a tolerancia em guardar os pontos
                         int meio = (int)(EFF*0.02);
                         for(int i=1;i<=20;i++){

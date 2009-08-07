@@ -4,16 +4,19 @@
  * Created on 17 de Fevereiro de 2005, 5:07
  */
 
-package pt.utl.ist.elab.virtual.client.cartpole;
+package pt.utl.ist.elab.client.vcartpole;
 
-import pt.utl.ist.elab.virtual.guipack.*;
-import com.linkare.rec.impl.i18n.*;
-import com.linkare.rec.data.metadata.HardwareInfo;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import pt.utl.ist.elab.client.virtual.guipack.GUtils;
+import pt.utl.ist.elab.client.virtual.guipack.InteractiveMenu;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.ICustomizer;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.Frequency;
-import java.awt.event.*;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 
 /**
  *

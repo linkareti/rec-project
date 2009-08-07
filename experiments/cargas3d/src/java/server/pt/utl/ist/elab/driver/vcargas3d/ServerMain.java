@@ -4,7 +4,7 @@
  * Created on 22 de Mar�o de 2005, 14:38
  */
 
-package pt.utl.ist.elab.virtual.driver.cargas3d;
+package pt.utl.ist.elab.driver.vcargas3d;
 
 import com.linkare.rec.impl.utils.*;
 import com.linkare.rec.impl.driver.*;

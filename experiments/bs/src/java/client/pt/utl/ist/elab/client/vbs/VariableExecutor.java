@@ -1,4 +1,4 @@
-package pt.utl.ist.elab.virtual.client.bs;
+package pt.utl.ist.elab.client.vbs;
 
 public interface VariableExecutor {
 	public void execute();

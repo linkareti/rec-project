@@ -4,9 +4,9 @@
  * Created on 3 de Dezembro de 2004, 0:10
  */
 
-package pt.utl.ist.elab.virtual.client.cg;
+package pt.utl.ist.elab.client.vcg;
 
-import org.opensourcephysics.displayejs.*;
+import org.opensourcephysics.displayejs.InteractiveSphere;
 
 /**
  *

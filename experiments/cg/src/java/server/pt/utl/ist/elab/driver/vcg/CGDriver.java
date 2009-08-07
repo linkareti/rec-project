@@ -9,8 +9,8 @@ package pt.utl.ist.elab.driver.vcg;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import pt.utl.ist.elab.virtual.VirtualBaseDataSource;
-import pt.utl.ist.elab.virtual.VirtualBaseDriver;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;

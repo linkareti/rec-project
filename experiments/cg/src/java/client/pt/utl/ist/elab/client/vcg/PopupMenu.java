@@ -1,4 +1,4 @@
-package pt.utl.ist.elab.virtual.client.cg;
+package pt.utl.ist.elab.client.vcg;
 
 /*
  * PopupMenu.java
@@ -9,8 +9,18 @@ package pt.utl.ist.elab.virtual.client.cg;
  * Created on 27 de Outubro de 2004, 5:18
  */
 
-import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
 
 /**
  *

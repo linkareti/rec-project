@@ -4,20 +4,22 @@
  * Created on 22 de Mar�o de 2005, 14:38
  */
 
-package pt.utl.ist.elab.virtual.driver.cargas3d;
+package pt.utl.ist.elab.driver.vcargas3d;
 
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDataSource;
+import pt.utl.ist.elab.driver.virtual.VirtualBaseDriver;
+
+import com.linkare.rec.acquisition.IncorrectStateException;
+import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.driver.IDataSource;
-import com.linkare.rec.acquisition.WrongConfigurationException;
-import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.utils.Defaults;
-import pt.utl.ist.elab.virtual.client.cargas3d.*;
-
-import pt.utl.ist.elab.virtual.driver.*;
-import java.util.logging.*;
 /**
  *
  * @author n0dP2

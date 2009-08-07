@@ -4,11 +4,19 @@
  * Created on 27 de Outubro de 2004, 5:13
  */
 
-package pt.utl.ist.elab.virtual.client.cg;
+package pt.utl.ist.elab.client.vcg;
 
-import org.opensourcephysics.displayejs.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import org.opensourcephysics.displayejs.DrawingPanel3D;
+import org.opensourcephysics.displayejs.InteractionListener;
+import org.opensourcephysics.displayejs.InteractiveCylinderSimple;
+import org.opensourcephysics.displayejs.InteractivePlane;
+import org.opensourcephysics.displayejs.InteractiveTrace;
+
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**

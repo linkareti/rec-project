@@ -11,9 +11,9 @@ package pt.utl.ist.elab.virtual.client.cg.displays;
  * @author  nomead
  */
 
-import pt.utl.ist.elab.virtual.client.cg.PopupMenu;
-import pt.utl.ist.elab.virtual.client.cg.BalancaTorcao;
-import pt.utl.ist.elab.virtual.client.cg.CGCustomizer;
+import pt.utl.ist.elab.client.vcg.BalancaTorcao;
+import pt.utl.ist.elab.client.vcg.CGCustomizer;
+import pt.utl.ist.elab.client.vcg.PopupMenu;
 
 import org.opensourcephysics.display.Circle;
 import org.opensourcephysics.display.DrawingPanel;
