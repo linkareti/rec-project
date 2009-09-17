@@ -19,6 +19,7 @@ import com.linkare.rec.impl.logging.*;
 import com.linkare.rec.impl.utils.*;
 import com.linkare.rec.impl.threading.*;
 import java.util.logging.*;
+
 import pt.utl.ist.elab.driver.serial.stamp.*;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.*;
@@ -212,6 +213,8 @@ public class StatSoundStampDriver extends AbstractStampDriver
     
     public void processCommand(StampCommand cmd)
     {
+    	Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,"Passou por aqui com mensagem: " + cmd.getCommand() + " " + cmd.getCommandIdentifier() + " processado por " + cmd.getProcessor().toString());
+    	
 	if(cmd==null || cmd.getCommandIdentifier()==null)
 	{
 	    Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,"Can not interpret command " +cmd);
