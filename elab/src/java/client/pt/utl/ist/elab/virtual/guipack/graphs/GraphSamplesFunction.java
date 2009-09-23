@@ -1,7 +1,7 @@
 /*
  * GraphSamplesFunction.java
  *
- * Created on 23 de Março de 2005, 16:54
+ * Created on 23 de Marco de 2005, 16:54
  */
 
 package pt.utl.ist.elab.virtual.guipack.graphs;
