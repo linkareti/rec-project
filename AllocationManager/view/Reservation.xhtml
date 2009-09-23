@@ -1,0 +1,111 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Reservation Details</f:facet>
+
+
+        <s:decorate id="startDate" template="layout/display.xhtml">
+            <ui:define name="label">Start date</ui:define>
+            <h:outputText value="#{reservationHome.instance.startDate}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="stopDate" template="layout/display.xhtml">
+            <ui:define name="label">Stop date</ui:define>
+            <h:outputText value="#{reservationHome.instance.stopDate}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/ReservationEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty reservationFrom ? 'ReservationList' : reservationFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Experiment</h:panelGroup>
+        </f:facet>
+    <div class="association" id="experimentParent">
+
+        <h:outputText value="There is no experiment associated with this reservation."
+                   rendered="#{reservationHome.instance.experiment == null}"/>
+
+        <rich:dataTable var="_experiment"
+                   value="#{reservationHome.instance.experiment}"
+                rendered="#{reservationHome.instance.experiment != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="experimentTable">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
+                <h:outputText value="#{_experiment.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Description</f:facet>
+                <h:outputText value="#{_experiment.description}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Laboratory id</f:facet>
+                <h:outputText value="#{_experiment.laboratory.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{_experiment.name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Active</f:facet>
+                <h:outputText value="#{_experiment.state.active}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Help message</f:facet>
+                <h:outputText value="#{_experiment.state.helpMessage}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Label</f:facet>
+                <h:outputText value="#{_experiment.state.label}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Url</f:facet>
+                <h:outputText value="#{_experiment.state.url}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewexperiment"
+                     value="View"
+                      view="/Experiment.xhtml">
+                    <f:param name="experimentId"
+                           value="#{_experiment.id}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

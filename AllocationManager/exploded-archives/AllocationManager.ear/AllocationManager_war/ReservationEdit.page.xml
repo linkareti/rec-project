@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
+      no-conversation-view-id="/ReservationList.xhtml"
+      login-required="true">
+
+   <begin-conversation join="true" flush-mode="MANUAL"/>
+
+   <action execute="#{reservationHome.wire}"/>
+
+   <param name="reservationFrom"/>
+   <param name="reservationId" value="#{reservationHome.reservationId}"/>
+   <param name="experimentFrom"/>
+   <param name="experimentId" value="#{experimentHome.experimentId}"/>
+   <param name="laboratoryFrom"/>
+   <param name="laboratoryId" value="#{laboratoryHome.laboratoryId}"/>
+
+
+
+
+   <navigation from-action="#{reservationHome.persist}">
+      <rule if-outcome="persisted">
+         <end-conversation/>
+         <redirect view-id="/Reservation.xhtml"/>
+      </rule>
+   </navigation>
+
+   <navigation from-action="#{reservationHome.update}">
+      <rule if-outcome="updated">
+         <end-conversation/>
+         <redirect view-id="/Reservation.xhtml"/>
+      </rule>
+   </navigation>
+
+   <navigation from-action="#{reservationHome.remove}">
+      <rule if-outcome="removed">
+         <end-conversation/>
+         <redirect view-id="/ReservationList.xhtml"/>
+      </rule>
+   </navigation>
+
+</page>

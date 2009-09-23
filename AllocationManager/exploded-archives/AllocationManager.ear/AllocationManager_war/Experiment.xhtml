@@ -1,0 +1,175 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Experiment Details</f:facet>
+
+
+        <s:decorate id="description" template="layout/display.xhtml">
+            <ui:define name="label">Description</ui:define>
+            <h:outputText value="#{experimentHome.instance.description}"/>
+        </s:decorate>
+
+        <s:decorate id="name" template="layout/display.xhtml">
+            <ui:define name="label">Name</ui:define>
+            <h:outputText value="#{experimentHome.instance.name}"/>
+        </s:decorate>
+
+        <s:decorate id="active" template="layout/display.xhtml">
+            <ui:define name="label">Active</ui:define>
+            <h:outputText value="#{experimentHome.instance.state.active}"/>
+        </s:decorate>
+        <s:decorate id="helpMessage" template="layout/display.xhtml">
+            <ui:define name="label">Help message</ui:define>
+            <h:outputText value="#{experimentHome.instance.state.helpMessage}"/>
+        </s:decorate>
+        <s:decorate id="label" template="layout/display.xhtml">
+            <ui:define name="label">Label</ui:define>
+            <h:outputText value="#{experimentHome.instance.state.label}"/>
+        </s:decorate>
+        <s:decorate id="url" template="layout/display.xhtml">
+            <ui:define name="label">Url</ui:define>
+            <h:outputText value="#{experimentHome.instance.state.url}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/ExperimentEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty experimentFrom ? 'ExperimentList' : experimentFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Laboratory</h:panelGroup>
+        </f:facet>
+    <div class="association" id="laboratoryParent">
+
+        <h:outputText value="There is no laboratory associated with this experiment."
+                   rendered="#{experimentHome.instance.laboratory == null}"/>
+
+        <rich:dataTable var="_laboratory"
+                   value="#{experimentHome.instance.laboratory}"
+                rendered="#{experimentHome.instance.laboratory != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="laboratoryTable">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
+                <h:outputText value="#{_laboratory.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Description</f:facet>
+                <h:outputText value="#{_laboratory.description}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{_laboratory.name}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Active</f:facet>
+                <h:outputText value="#{_laboratory.state.active}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Help message</f:facet>
+                <h:outputText value="#{_laboratory.state.helpMessage}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Label</f:facet>
+                <h:outputText value="#{_laboratory.state.label}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Url</f:facet>
+                <h:outputText value="#{_laboratory.state.url}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewlaboratory"
+                     value="View"
+                      view="/Laboratory.xhtml">
+                    <f:param name="laboratoryId"
+                           value="#{_laboratory.id}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Reservations</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="reservationsChildren">
+
+        <h:outputText value="There are no reservations associated with this experiment."
+                   rendered="#{empty experimentHome.reservations}"/>
+
+        <rich:dataTable value="#{experimentHome.reservations}"
+                       var="_reservation"
+                  rendered="#{not empty experimentHome.reservations}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="reservationsTable">
+            <rich:column sortBy="#{_reservation.id}">
+                <f:facet name="header">Id</f:facet>
+                <h:outputText value="#{_reservation.id}"/>
+            </rich:column>
+            <rich:column sortBy="#{_reservation.startDate}">
+                <f:facet name="header">Start date</f:facet>
+                <h:outputText value="#{_reservation.startDate}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_reservation.stopDate}">
+                <f:facet name="header">Stop date</f:facet>
+                <h:outputText value="#{_reservation.stopDate}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectreservation"
+                     value="Select"
+                      view="/Reservation.xhtml">
+                    <f:param name="reservationId"
+                            value="#{_reservation.id}"/>
+                    <f:param name="reservationFrom" value="Experiment"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add reservation"
+                view="/ReservationEdit.xhtml">
+            <f:param name="experimentId"
+                    value="#{experimentHome.instance.id}"/>
+            <f:param name="reservationFrom" value="Experiment"/>
+        </s:button>
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>
