@@ -13,7 +13,9 @@
       <jar-file>../../vehicles.jar</jar-file>
       -->
       <properties>
-         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+         <!--property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/ -->
+         <property name="hibernate.dialect" value="com.linkare.rec.am.utils.AllocationManagerMySQLInnoDBDialect" />
+                  
          <property name="hibernate.hbm2ddl.auto" value="validate"/>
          <property name="hibernate.jdbc.batch_size" value="20"/>
          <property name="jboss.entity.manager.factory.jndi.name" value="java:/AllocationManagerEntityManagerFactory"/>
