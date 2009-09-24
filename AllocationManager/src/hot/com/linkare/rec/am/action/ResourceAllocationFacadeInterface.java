@@ -1,8 +1,8 @@
 package com.linkare.rec.am.action;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
-@Local
+@Remote
 public interface ResourceAllocationFacadeInterface {
 
 }
