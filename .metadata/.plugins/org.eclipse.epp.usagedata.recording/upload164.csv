@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+locale,sysinfo,,,"pt_PT",1253665128485
+processors,sysinfo,,,"2",1253665128485
+java.runtime.name,sysinfo,,,"Java(TM) SE Runtime Environment",1253665128485
+java.runtime.version,sysinfo,,,"1.6.0_14-b08",1253665128485
+java.specification.name,sysinfo,,,"Java Platform API Specification",1253665128485
+java.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1253665128485
+java.specification.version,sysinfo,,,"1.6",1253665128485
+java.vendor,sysinfo,,,"Sun Microsystems Inc.",1253665128485
+java.version,sysinfo,,,"1.6.0_14",1253665128485
+java.vm.info,sysinfo,,,"mixed mode",1253665128485
+java.vm.name,sysinfo,,,"Java HotSpot(TM) Client VM",1253665128485
+java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1253665128485
+java.vm.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1253665128485
+java.vm.specification.version,sysinfo,,,"1.0",1253665128485
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1253665128485
+java.vm.version,sysinfo,,,"14.0-b16",1253665128485
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253666350236
+closed,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253666352421
+stopped,bundle,org.eclipse.jst.ws.axis.creation.ui,1.0.406.v200903031852,"org.eclipse.jst.ws.axis.creation.ui",1253666352693
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.ui,1.0.405.v200901261650,"org.eclipse.jst.ws.axis.consumption.ui",1253666352694
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.core,1.0.306.v200810082309,"org.eclipse.jst.ws.axis.consumption.core",1253666352694
+stopped,bundle,org.eclipse.jst.ws.axis2.creation.ui,1.0.103.v200807162242,"org.eclipse.jst.ws.axis2.creation.ui",1253666352695
+stopped,bundle,org.eclipse.jst.ws.axis2.consumption.ui,1.0.102.v200807232000,"org.eclipse.jst.ws.axis2.consumption.ui",1253666352699
+stopped,bundle,org.eclipse.jst.ws.axis2.creation.core,1.0.105.v200901220134,"org.eclipse.jst.ws.axis2.creation.core",1253666352700
+stopped,bundle,org.eclipse.jst.ws.axis2.consumption.core,1.0.104.v200810151442,"org.eclipse.jst.ws.axis2.consumption.core",1253666352700

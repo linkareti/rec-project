@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.mylyn.tasks.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.tasks.ui",1253748173040
+started,bundle,org.eclipse.mylyn.team.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.team.ui",1253748173040
+os,sysinfo,,,"linux",1253748173043
+arch,sysinfo,,,"x86",1253748173043
+ws,sysinfo,,,"gtk",1253748173043
+locale,sysinfo,,,"pt_PT",1253748173043
+processors,sysinfo,,,"2",1253748173043
+java.runtime.name,sysinfo,,,"Java(TM) SE Runtime Environment",1253748173043
+java.runtime.version,sysinfo,,,"1.6.0_14-b08",1253748173043
+java.specification.name,sysinfo,,,"Java Platform API Specification",1253748173043
+java.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1253748173043
+java.specification.version,sysinfo,,,"1.6",1253748173043
+java.vendor,sysinfo,,,"Sun Microsystems Inc.",1253748173043
+java.version,sysinfo,,,"1.6.0_14",1253748173043
+java.vm.info,sysinfo,,,"mixed mode",1253748173043
+java.vm.name,sysinfo,,,"Java HotSpot(TM) Client VM",1253748173043
+java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1253748173043
+java.vm.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1253748173043
+java.vm.specification.version,sysinfo,,,"1.0",1253748173043
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1253748173043
+java.vm.version,sysinfo,,,"14.0-b16",1253748173043
+started,bundle,org.eclipse.equinox.p2.ui,1.0.100.v20090527-1812,"org.eclipse.equinox.p2.ui",1253748230559
+started,bundle,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk",1253748231162
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253748231432
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.help.installationDialog",1253748236244

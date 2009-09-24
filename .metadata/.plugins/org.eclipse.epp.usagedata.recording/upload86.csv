@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493284323
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493291504
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1253493300197
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493311885
+started,bundle,org.eclipse.ui.browser,3.2.300.v20090526,"org.eclipse.ui.browser",1253493334593
+started,bundle,org.eclipse.wst.server.core,1.1.101.v20090515,"org.eclipse.wst.server.core",1253493334902
+started,bundle,org.eclipse.wst.server.ui,1.1.102.v20090515,"org.eclipse.wst.server.ui",1253493334911
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493336884
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493365497
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493373296
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253493373301
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493373490
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253493379020
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253493379021
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493379024
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493379171
+opened,view,org.eclipse.wst.server.ui,1.1.102.v20090515,"org.eclipse.wst.server.ui.ServersView",1253493383120
+activated,view,org.eclipse.wst.server.ui,1.1.102.v20090515,"org.eclipse.wst.server.ui.ServersView",1253493383138
+started,bundle,org.eclipse.debug.core,3.5.0.v20090526-1600,"org.eclipse.debug.core",1253493383582
+started,bundle,org.eclipse.datatools.connectivity,1.1.2.v200906020553,"org.eclipse.datatools.connectivity",1253493385563
+started,bundle,org.eclipse.datatools.connectivity.ui,1.1.4.v200906020553,"org.eclipse.datatools.connectivity.ui",1253493385565
+started,bundle,org.eclipse.datatools.connectivity.ui.dse,1.1.3.v200906020553,"org.eclipse.datatools.connectivity.ui.dse",1253493385568
+started,bundle,org.eclipse.datatools.enablement.ingres.ui,1.0.0.v200906111145,"org.eclipse.datatools.enablement.ingres.ui",1253493385583
+started,bundle,org.eclipse.datatools.connectivity.sqm.core,1.1.0.v200906020553,"org.eclipse.datatools.connectivity.sqm.core",1253493385706
+started,bundle,org.eclipse.datatools.connectivity.sqm.core.ui,1.1.100.v200906020553,"org.eclipse.datatools.connectivity.sqm.core.ui",1253493385709

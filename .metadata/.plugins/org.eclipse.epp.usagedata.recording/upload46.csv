@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,view,org.eclipse.ui.navigator.resources,3.4.0.I20090525-2000,"org.eclipse.ui.navigator.ProjectExplorer",1253471172901
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.browser.RepositoryBrowser",1253471174393
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471222859
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.help.aboutAction",1253471228033
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471228058
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471234831
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253471244117
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471244338
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471249739
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253471252097
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253471252097
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253471252097
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471252122
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471261703
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471264593
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253471274976
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253471274977
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253471274978
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253471277685
+opened,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.properties.PropertiesView",1253471285211
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.properties.PropertiesView",1253471285229
+error,log,,,"SVN: '0x00400014: Show Properties' operation finished with error",1253471285239
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471285603
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471295130
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253471300938

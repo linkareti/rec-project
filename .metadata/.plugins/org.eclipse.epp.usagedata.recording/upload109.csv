@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+opened,view,org.eclipse.ui.ide,3.5.0.I20090525-2000,"org.eclipse.ui.views.AllMarkersView",1253495420900
+activated,view,org.eclipse.ui.ide,3.5.0.I20090525-2000,"org.eclipse.ui.views.AllMarkersView",1253495420917
+closed,view,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.pde.runtime.LogView",1253495420918
+started,bundle,org.eclipse.equinox.p2.ui,1.0.100.v20090527-1812,"org.eclipse.equinox.p2.ui",1253495423477
+started,bundle,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk",1253495423499
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495423905
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253495443821
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495443846
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495444214
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495462876
+error,log,,,"Transfer Exception",1253495695646
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495695781
+error,log,,,"An error occurred while collecting items to be installed",1253495698350
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495704740
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495705669
+closed,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495707134
+stopped,bundle,org.eclipse.jst.ws.axis.creation.ui,1.0.406.v200903031852,"org.eclipse.jst.ws.axis.creation.ui",1253495707502
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.ui,1.0.405.v200901261650,"org.eclipse.jst.ws.axis.consumption.ui",1253495707503
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.core,1.0.306.v200810082309,"org.eclipse.jst.ws.axis.consumption.core",1253495707503
+stopped,bundle,org.eclipse.jst.ws.axis2.creation.ui,1.0.103.v200807162242,"org.eclipse.jst.ws.axis2.creation.ui",1253495707503
+stopped,bundle,org.eclipse.jst.ws.axis2.consumption.ui,1.0.102.v200807232000,"org.eclipse.jst.ws.axis2.consumption.ui",1253495707504
+stopped,bundle,org.eclipse.jst.ws.axis2.creation.core,1.0.105.v200901220134,"org.eclipse.jst.ws.axis2.creation.core",1253495707504
+stopped,bundle,org.eclipse.jst.ws.axis2.consumption.core,1.0.104.v200810151442,"org.eclipse.jst.ws.axis2.consumption.core",1253495707504
+stopped,bundle,org.eclipse.jst.ws.axis2.ui,1.0.302.v200905260749,"org.eclipse.jst.ws.axis2.ui",1253495707504
+stopped,bundle,org.eclipse.jst.ws.axis2.core,1.0.104.v200810151442,"org.eclipse.jst.ws.axis2.core",1253495707505

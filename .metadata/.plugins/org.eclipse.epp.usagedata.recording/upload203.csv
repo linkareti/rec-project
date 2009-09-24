@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.properties.PropertiesView",1253747881974
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253747881974
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253747881974
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253747882001
+started,bundle,org.eclipse.ui.browser,3.2.300.v20090526,"org.eclipse.ui.browser",1253747891343
+started,bundle,org.eclipse.wst.server.core,1.1.101.v20090515,"org.eclipse.wst.server.core",1253747892118
+started,bundle,org.eclipse.wst.server.ui,1.1.102.v20090515,"org.eclipse.wst.server.ui",1253747892138
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253747893644
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253747942533
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253747949543
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253747949595
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253747949721
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253747974874
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253747980115
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253747999203
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253747999255
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.properties.PropertiesView",1253748004413
+error,log,,,"SVN: '0x00400014: Show Properties' operation finished with error",1253748004577
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253748004719
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253748014643
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253748016139
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253748045653
+started,bundle,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.ui.views.log",1253748050531
+opened,view,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.pde.runtime.LogView",1253748050917
+activated,view,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.pde.runtime.LogView",1253748050951

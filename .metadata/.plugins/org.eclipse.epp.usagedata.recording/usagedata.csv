@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+opened,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253749001218
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253749001231
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749011063
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1253749051394
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749051448
+error,log,,,"SVN: '0x0000000e: Import' operation finished with error",1253749051958
+activated,view,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.pde.runtime.LogView",1253749052019
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749052125
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.copy",1253749064457
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749548330
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253749549951
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749558246
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749601682
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749610225
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253749763119
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749763150
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749768416
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749866759
+activated,view,org.eclipse.ui.navigator.resources,3.4.0.I20090525-2000,"org.eclipse.ui.navigator.ProjectExplorer",1253749868141
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253749884429
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253750010145
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253750010146
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253750010176
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253750026762
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253752619662

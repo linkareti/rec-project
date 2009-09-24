@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253462267359
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253462267359
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253462267377
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253462276691
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253462485101
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253462488814
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.paste",1253462603136
+error,log,,,"SVN: '0x00400006: Validate Repository Location' operation finished with error",1253462623026
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.copy",1253463197390
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253463200413
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253463204085
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253463519109
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253463521777
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253463521903
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253463529382
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253463533381
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253463542444
+error,log,,,"SVN: '0x00400006: Validate Repository Location' operation finished with error",1253463603487
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253463629142
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253463629177
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253463629543
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253463629616
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253463629617
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253463629618
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253463629723

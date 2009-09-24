@@ -1,0 +1,18 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253691474130
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253691474130
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691474149
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253691477206
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253691477302
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253691477426
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691508923
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691619631
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691647700
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.properties",1253691652715
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691652743
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.properties.PropertiesView",1253691659226
+error,log,,,"SVN: '0x00400014: Show Properties' operation finished with error",1253691659372
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691659476
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691663890
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691820339
+closed,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691822665

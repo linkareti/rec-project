@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+error,log,,,"Operation details",1253494365179
+error,log,,,"Operation details",1253494365191
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253494392886
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494392905
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494393245
+error,log,,,"Transfer Exception",1253494456285
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494464951
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494464952
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494465067
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494465069
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494471067
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494477743
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494485802
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494491769
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494537757
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494540511
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253494563556
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494563592
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494563997
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494783903
+error,log,,,"Transfer Exception",1253494829945
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494830008
+started,bundle,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.ui.views.log",1253494835817
+opened,view,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.pde.runtime.LogView",1253494836109
+activated,view,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.pde.runtime.LogView",1253494836153
