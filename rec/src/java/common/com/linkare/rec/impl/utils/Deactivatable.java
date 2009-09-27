@@ -7,14 +7,17 @@
 package com.linkare.rec.impl.utils;
 
 import org.omg.PortableServer.POA;
+
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface Deactivatable 
-{    
-    public boolean alreadySerialized();
-    public boolean isDeactivationPossible();
-    public String getOID();
-    public POA getPOA();
+public interface Deactivatable {
+	public boolean alreadySerialized();
+
+	public boolean isDeactivationPossible();
+
+	public String getOID();
+
+	public POA getPOA();
 }

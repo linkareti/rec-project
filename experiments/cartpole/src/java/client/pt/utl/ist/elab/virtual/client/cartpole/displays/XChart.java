@@ -7,16 +7,16 @@
 package pt.utl.ist.elab.virtual.client.cartpole.displays;
 
 /**
- *
- * @author  nomead
+ * 
+ * @author nomead
  */
 public class XChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
-    
-    /** Creates a new instance of XChart */
-    public XChart(){
-        super();
-	setChannelDisplayX(0);
-	setChannelDisplayY(2);
-    }
-    
+
+	/** Creates a new instance of XChart */
+	public XChart() {
+		super();
+		setChannelDisplayX(0);
+		setChannelDisplayY(2);
+	}
+
 }

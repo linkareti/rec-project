@@ -9,22 +9,19 @@
 package pt.utl.ist.elab.client.vsemiconductor.displays;
 
 /**
- *
- * @author  Pedro Queir� e Nuno Fernandes
+ * 
+ * @author Pedro Queir� e Nuno Fernandes
  */
-public class Ft extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph
-{
-    
-    /** Creates a new instance of W */
-    public Ft() 
-    {
-        super();
-        setChannelDisplayX(4);
-        setChannelDisplayY(5);        
-    }    
-    
-    public String getName()
-    {
-        return "Campo Electrico em funcao da temperatura";
-    }
+public class Ft extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+
+	/** Creates a new instance of W */
+	public Ft() {
+		super();
+		setChannelDisplayX(4);
+		setChannelDisplayY(5);
+	}
+
+	public String getName() {
+		return "Campo Electrico em funcao da temperatura";
+	}
 }

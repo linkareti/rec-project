@@ -10,8 +10,7 @@ package com.linkare.editor;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class IndexedPropertyObjectTableModel extends
-		javax.swing.table.DefaultTableModel {
+public class IndexedPropertyObjectTableModel extends javax.swing.table.DefaultTableModel {
 
 	/**
 	 * 

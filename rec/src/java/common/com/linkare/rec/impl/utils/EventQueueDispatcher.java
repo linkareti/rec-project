@@ -7,12 +7,12 @@
 package com.linkare.rec.impl.utils;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface EventQueueDispatcher
-{
-    
-    public void dispatchEvent(Object evt);
-    public int getPriority();
+public interface EventQueueDispatcher {
+
+	public void dispatchEvent(Object evt);
+
+	public int getPriority();
 }

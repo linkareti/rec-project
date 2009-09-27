@@ -24,16 +24,14 @@ public class IndexedPropertyObject {
 	private Class<?> valueClass;
 
 	/** Creates a new instance of IndexedPropertyObject */
-	public IndexedPropertyObject(PropertyEditor propertyEditor,
-			Class<?> valueClass) {
+	public IndexedPropertyObject(PropertyEditor propertyEditor, Class<?> valueClass) {
 		setPropertyEditor(propertyEditor);
 		setValueClass(valueClass);
 		setValue(null);
 	}
 
 	/** Creates a new instance of IndexedPropertyObject */
-	public IndexedPropertyObject(PropertyEditor propertyEditor,
-			Class<?> valueClass, Object value) {
+	public IndexedPropertyObject(PropertyEditor propertyEditor, Class<?> valueClass, Object value) {
 		this(propertyEditor, valueClass);
 		setValue(value);
 	}
@@ -51,8 +49,7 @@ public class IndexedPropertyObject {
 	/**
 	 * Setter for property value.
 	 * 
-	 * @param value
-	 *            New value of property value.
+	 * @param value New value of property value.
 	 * 
 	 */
 	public void setValue(Object value) {
@@ -77,8 +74,7 @@ public class IndexedPropertyObject {
 					this.value = new Double(0.);
 
 			} catch (Exception e) {
-				javax.swing.JOptionPane.showMessageDialog(null,
-						"Couldn't init value...\n\r" + e.getMessage());
+				javax.swing.JOptionPane.showMessageDialog(null, "Couldn't init value...\n\r" + e.getMessage());
 			}
 		}
 	}
@@ -96,8 +92,7 @@ public class IndexedPropertyObject {
 	/**
 	 * Setter for property propertyEditor.
 	 * 
-	 * @param propertyEditor
-	 *            New value of property propertyEditor.
+	 * @param propertyEditor New value of property propertyEditor.
 	 * 
 	 */
 	public void setPropertyEditor(PropertyEditor propertyEditor) {
@@ -117,8 +112,7 @@ public class IndexedPropertyObject {
 	/**
 	 * Setter for property valueClass.
 	 * 
-	 * @param valueClass
-	 *            New value of property valueClass.
+	 * @param valueClass New value of property valueClass.
 	 * 
 	 */
 	public void setValueClass(Class<?> valueClass) {

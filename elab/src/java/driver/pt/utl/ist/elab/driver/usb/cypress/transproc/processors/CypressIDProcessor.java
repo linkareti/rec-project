@@ -9,18 +9,14 @@ package pt.utl.ist.elab.driver.usb.cypress.transproc.processors;
 import pt.utl.ist.elab.driver.usb.cypress.transproc.AbstractCypressProcessor;
 import pt.utl.ist.elab.driver.usb.cypress.transproc.CypressCommand;
 
-public class CypressIDProcessor extends AbstractCypressProcessor
-{
-    
-    public CypressIDProcessor()
-    {
-	super(pt.utl.ist.elab.driver.usb.cypress.AbstractCypressDriver.ID_STR);
-    }
-    
-    
-    public boolean process(CypressCommand command)
-    {
-	command.addCommandData(getCommandIdentifier(),Boolean.TRUE);
-	return true;
-    }
+public class CypressIDProcessor extends AbstractCypressProcessor {
+
+	public CypressIDProcessor() {
+		super(pt.utl.ist.elab.driver.usb.cypress.AbstractCypressDriver.ID_STR);
+	}
+
+	public boolean process(CypressCommand command) {
+		command.addCommandData(getCommandIdentifier(), Boolean.TRUE);
+		return true;
+	}
 }

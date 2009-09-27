@@ -51,9 +51,8 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	/**
 	 * The free memory space after which the data dumping to disk occurs
 	 */
-	public static final double FREE_THRESHOLD_VALUE = com.linkare.rec.impl.utils.Defaults
-			.defaultIfEmpty(System.getProperty(SYSPROP_FREE_THRESHOLD_NAME),
-					DEFAULT_FREE_THRESHOLD);
+	public static final double FREE_THRESHOLD_VALUE = com.linkare.rec.impl.utils.Defaults.defaultIfEmpty(System
+			.getProperty(SYSPROP_FREE_THRESHOLD_NAME), DEFAULT_FREE_THRESHOLD);
 
 	/**
 	 * An indexed {@link HashMap} of rowNumber to {@link PhysicsValue}[] of data
@@ -104,8 +103,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * Adds new datarows to this matrix The first index of the data rows is the
 	 * row and the second is the column
 	 * 
-	 * @param dataSamples
-	 *            The row/rows of samples to add to this matrix
+	 * @param dataSamples The row/rows of samples to add to this matrix
 	 */
 	public void addDataRows(PhysicsValue[]... dataSamples) {
 		// Check if the samples are null, or have no values and return
@@ -114,8 +112,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 			return;
 
 		// Create a new map to hold all the new samples arrived
-		HashMap<Integer, PhysicsValue[]> tempSamples = new HashMap<Integer, PhysicsValue[]>(
-				dataSamples.length);
+		HashMap<Integer, PhysicsValue[]> tempSamples = new HashMap<Integer, PhysicsValue[]>(dataSamples.length);
 
 		// Just add all dataRows and keep increasing the counter
 		for (PhysicsValue[] dataRow : dataSamples) {
@@ -128,10 +125,8 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 			try {
 				ioDelegate.write(tempSamples);
 			} catch (IOException e) {
-				LoggerUtil
-						.logThrowable(
-								"Unable to write packets to file... defaulting to memory...",
-								e, Logger.getLogger("SwapIOLogger"));
+				LoggerUtil.logThrowable("Unable to write packets to file... defaulting to memory...", e, Logger
+						.getLogger("SwapIOLogger"));
 				samplesRows.putAll(tempSamples);
 			}
 		} else {
@@ -168,8 +163,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * variable accordingly to what is expected to be the total value of
 	 * allocation required
 	 * 
-	 * @param totalSamples
-	 *            The total number of expected samples
+	 * @param totalSamples The total number of expected samples
 	 */
 	public void setTotalSamples(int totalSamples) {
 		// Saves the total samples number for later...
@@ -215,15 +209,12 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * argument
 	 * 
 	 * 
-	 * @param sampleIndex
-	 *            The index of the sample to remove
+	 * @param sampleIndex The index of the sample to remove
 	 * @return The removed {@link PhysicsValue}[] data
-	 * @throws SamplesReadException
-	 *             if it was not possible to find the sample at the index
-	 *             specified
+	 * @throws SamplesReadException if it was not possible to find the sample at
+	 *             the index specified
 	 */
-	private PhysicsValue[] removeSample(int sampleIndex)
-			throws SamplesReadException {
+	private PhysicsValue[] removeSample(int sampleIndex) throws SamplesReadException {
 		if (serialized) {
 			return ioDelegate.remove(sampleIndex, sampleIndex)[0];
 		}
@@ -231,9 +222,8 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 		if (samplesRows.containsKey(new Integer(sampleIndex)))
 			return (PhysicsValue[]) samplesRows.remove(sampleIndex);
 		else
-			throw new SamplesReadException(new IOException(
-					"Error trying to read sample " + sampleIndex
-							+ " from memory!"), sampleIndex);
+			throw new SamplesReadException(new IOException("Error trying to read sample " + sampleIndex
+					+ " from memory!"), sampleIndex);
 	}
 
 	/**
@@ -243,15 +233,11 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * and will then clear them from the underlying array as by the method
 	 * {@link #removeSample(int)}
 	 * 
-	 * @param sampleStartIndex
-	 *            The index of the starting row (inclusive)
-	 * @param sampleEndIndex
-	 *            The index of the ending row (inclusive)
-	 * @throws SamplesReadException
-	 *             If some data is not available
+	 * @param sampleStartIndex The index of the starting row (inclusive)
+	 * @param sampleEndIndex The index of the ending row (inclusive)
+	 * @throws SamplesReadException If some data is not available
 	 */
-	public PhysicsValue[][] getSamples(int sampleStartIndex, int sampleEndIndex)
-			throws SamplesReadException {
+	public PhysicsValue[][] getSamples(int sampleStartIndex, int sampleEndIndex) throws SamplesReadException {
 
 		// If it is on disk, then read it from disk
 		if (serialized) {
@@ -259,8 +245,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 		}
 
 		// Allocate the returning array with the correct size
-		PhysicsValue[][] retVal = new PhysicsValue[sampleEndIndex
-				- sampleStartIndex + 1][];
+		PhysicsValue[][] retVal = new PhysicsValue[sampleEndIndex - sampleStartIndex + 1][];
 
 		for (int i = sampleStartIndex; i <= sampleEndIndex; i++) {
 			retVal[i - sampleStartIndex] = removeSample(i);
@@ -273,12 +258,10 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * Registers SamplesSourceEventListener to receive events about newly added
 	 * data to this {@link SamplesSource}
 	 * 
-	 * @param listener
-	 *            The listener to register.
+	 * @param listener The listener to register.
 	 * 
 	 */
-	public synchronized void addSamplesSourceEventListener(
-			SamplesSourceEventListener listener) {
+	public synchronized void addSamplesSourceEventListener(SamplesSourceEventListener listener) {
 		if (listenerList == null) {
 			listenerList = new javax.swing.event.EventListenerList();
 		}
@@ -289,12 +272,10 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * Removes SamplesSourceEventListener from the list of listeners to receive
 	 * events about newly added data to this {@link SamplesSource}
 	 * 
-	 * @param listener
-	 *            The listener to remove.
+	 * @param listener The listener to remove.
 	 * 
 	 */
-	public synchronized void removeSamplesSourceEventListener(
-			SamplesSourceEventListener listener) {
+	public synchronized void removeSamplesSourceEventListener(SamplesSourceEventListener listener) {
 		listenerList.remove(SamplesSourceEventListener.class, listener);
 	}
 
@@ -302,13 +283,12 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 	 * Notifies all registered listeners about the existence of new data, and
 	 * sends them the largest sample index available from now on
 	 * 
-	 * @param sampleLargestIndex
-	 *            the current maximum sample index available on new data
+	 * @param sampleLargestIndex the current maximum sample index available on
+	 *            new data
 	 * 
 	 */
 	private void fireNewSamples(int sampleLargestIndex) {
-		SamplesSourceEvent event = new SamplesSourceEvent(this,
-				sampleLargestIndex);
+		SamplesSourceEvent event = new SamplesSourceEvent(this, sampleLargestIndex);
 		if (listenerList == null)
 			return;
 
@@ -317,8 +297,7 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 		Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == SamplesSourceEventListener.class) {
-				((SamplesSourceEventListener) listeners[i + 1])
-						.newSamples(event);
+				((SamplesSourceEventListener) listeners[i + 1]).newSamples(event);
 			}
 		}
 	}

@@ -6,8 +6,8 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.transproc;
 
-public interface StampTranslator
-{
-    public String getCommandIdentifier();	
-    public boolean translate(StampCommand command);
+public interface StampTranslator {
+	public String getCommandIdentifier();
+
+	public boolean translate(StampCommand command);
 }

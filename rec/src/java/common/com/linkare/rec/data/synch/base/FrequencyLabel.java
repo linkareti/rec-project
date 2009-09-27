@@ -7,44 +7,43 @@
 package com.linkare.rec.data.synch.base;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class FrequencyLabel extends javax.swing.JLabel
-{
+public class FrequencyLabel extends javax.swing.JLabel {
 
 	/** Holds value of property frequency. */
 	private com.linkare.rec.data.synch.Frequency frequency;
 
 	/** Creates a new instance of FrequencyLabel */
-	public FrequencyLabel()
-	{
+	public FrequencyLabel() {
 	}
 
-	public String getText()
-	{
-		if(this.frequency==null) return "";
+	public String getText() {
+		if (this.frequency == null)
+			return "";
 
 		return this.frequency.toString();
 	}
 
-	public void setText(String str)
-	{
+	public void setText(String str) {
 	}
 
-	/** Getter for property frequency.
+	/**
+	 * Getter for property frequency.
+	 * 
 	 * @return Value of property frequency.
 	 */
-	public com.linkare.rec.data.synch.Frequency getFrequency()
-	{
+	public com.linkare.rec.data.synch.Frequency getFrequency() {
 		return this.frequency;
 	}
 
-	/** Setter for property frequency.
+	/**
+	 * Setter for property frequency.
+	 * 
 	 * @param frequency New value of property frequency.
 	 */
-	public void setFrequency(com.linkare.rec.data.synch.Frequency frequency)
-	{
+	public void setFrequency(com.linkare.rec.data.synch.Frequency frequency) {
 		this.frequency = frequency;
 		repaint();
 	}

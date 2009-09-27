@@ -10,41 +10,34 @@ import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyEditorSupport;
+
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class DateEditor extends PropertyEditorSupport
-{
-	
+public class DateEditor extends PropertyEditorSupport {
+
 	/** Creates new DateEditor */
-	public DateEditor()
-	{
+	public DateEditor() {
 	}
-	
-	public boolean supportsCustomEditor()
-	{return true;}
-	
-	public Component getCustomEditor()
-	{
-	    DateCustomizer customizer=new DateCustomizer();
-	    customizer.addPropertyChangeListener("date",
-		new PropertyChangeListener()
-		{
-		    public void propertyChange(PropertyChangeEvent evt)
-		    {
-    	    		setValue( evt.getNewValue() );
-		    }
-		}
-		);
-	    customizer.setObject(getValue());
-	    return customizer;
+
+	public boolean supportsCustomEditor() {
+		return true;
 	}
-	
-	
-	public String getAsText()
-	{
-	    return getValue().toString();
+
+	public Component getCustomEditor() {
+		DateCustomizer customizer = new DateCustomizer();
+		customizer.addPropertyChangeListener("date", new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				setValue(evt.getNewValue());
+			}
+		});
+		customizer.setObject(getValue());
+		return customizer;
 	}
-	
+
+	public String getAsText() {
+		return getValue().toString();
+	}
+
 }

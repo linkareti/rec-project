@@ -7,14 +7,14 @@
 package pt.utl.ist.elab.virtual.client.bs.displays;
 
 /**
- *
- * @author  Queiro'
+ * 
+ * @author Queiro'
  */
 public class BTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public BTimeChart() {
-        super();
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public BTimeChart() {
+		super();
 		setChannelDisplayX(0);
 		setChannelDisplayY(1);
-    }
+	}
 }

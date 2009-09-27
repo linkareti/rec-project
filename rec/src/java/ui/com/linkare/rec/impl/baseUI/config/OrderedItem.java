@@ -7,10 +7,9 @@
 package com.linkare.rec.impl.baseUI.config;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface OrderedItem
-{    
-    public int getOrder();    
+public interface OrderedItem {
+	public int getOrder();
 }

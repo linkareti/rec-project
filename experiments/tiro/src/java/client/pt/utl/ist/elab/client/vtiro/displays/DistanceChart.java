@@ -7,16 +7,16 @@
 package pt.utl.ist.elab.client.vtiro.displays;
 
 /**
- *
- * @author  nomead
+ * 
+ * @author nomead
  */
 public class DistanceChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
-    
-    /** Creates a new instance of DistanceChart */
-    public DistanceChart(){
-        super();
-	setChannelDisplayX(6);
-	setChannelDisplayY(5);
-    }
-    
+
+	/** Creates a new instance of DistanceChart */
+	public DistanceChart() {
+		super();
+		setChannelDisplayX(6);
+		setChannelDisplayY(5);
+	}
+
 }

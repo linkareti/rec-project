@@ -9,22 +9,19 @@
 package pt.utl.ist.elab.client.vsemiconductor.displays;
 
 /**
- *
- * @author  Pedro Queir� e Nuno Fernandes
+ * 
+ * @author Pedro Queir� e Nuno Fernandes
  */
-public class Ena extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph
-{
-    
-    /** Creates a new instance of W */
-    public Ena() 
-    {
-        super();
-        setChannelDisplayX(7);
-        setChannelDisplayY(3);        
-    }    
-    
-    public String getName()
-    {
-        return "Campo Electrico em funcao do numero de aceitadores";
-    }
+public class Ena extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+
+	/** Creates a new instance of W */
+	public Ena() {
+		super();
+		setChannelDisplayX(7);
+		setChannelDisplayY(3);
+	}
+
+	public String getName() {
+		return "Campo Electrico em funcao do numero de aceitadores";
+	}
 }

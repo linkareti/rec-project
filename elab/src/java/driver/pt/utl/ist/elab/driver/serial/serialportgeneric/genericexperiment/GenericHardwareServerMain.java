@@ -15,8 +15,8 @@ import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
- * Please, replace this class by your own class if you don't want such a generic class that recieves a stamp driver class name
- * through an argument.
+ * Please, replace this class by your own class if you don't want such a generic
+ * class that recieves a stamp driver class name through an argument.
  * 
  * @author José Pedro Pereira - Linkare TI
  * @author Francisco Dias - Linkare TI, also had passed here on March 2009
@@ -27,7 +27,6 @@ public abstract class GenericHardwareServerMain {
 	// TODO : please, replace this values
 	private static String HARDWARE_LOGGER = "GenericHardware.Logger";
 	private static String HARDWARE_UNIQUE_ID = "UNIQUE_ID_HERE";
-
 
 	static {
 		Logger l = LogManager.getLogManager().getLogger(HARDWARE_LOGGER);

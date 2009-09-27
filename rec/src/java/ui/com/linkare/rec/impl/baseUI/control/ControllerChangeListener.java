@@ -7,10 +7,9 @@
 package com.linkare.rec.impl.baseUI.control;
 
 /**
- *
- * @author  André
+ * 
+ * @author André
  */
-public interface ControllerChangeListener extends java.util.EventListener
-{   
-    public void controlChanged(ControllerEvent evt);
+public interface ControllerChangeListener extends java.util.EventListener {
+	public void controlChanged(ControllerEvent evt);
 }

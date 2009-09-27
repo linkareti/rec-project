@@ -7,18 +7,16 @@
 package pt.utl.ist.elab.client.vmm.displays;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
-public class XTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
-{
-    
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public XTimeChart()
-    {
-        super();
-	setChannelDisplayX(0);
-	setChannelDisplayY(1);
-    }
-    
+public class XTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public XTimeChart() {
+		super();
+		setChannelDisplayX(0);
+		setChannelDisplayY(1);
+	}
+
 }

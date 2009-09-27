@@ -9,11 +9,11 @@ package com.linkare.rec.impl.client.customizer;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface CustomizerInfo
-{
-    public ImageIcon getCustomizerIcon();
-    public String getCustomizerTitle();
+public interface CustomizerInfo {
+	public ImageIcon getCustomizerIcon();
+
+	public String getCustomizerTitle();
 }

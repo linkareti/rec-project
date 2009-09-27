@@ -24,8 +24,7 @@ public class PropertyObject {
 	private String name;
 
 	/** Creates a new instance of IndexedPropertyObject */
-	public PropertyObject(String name, PropertyEditor propertyEditor,
-			Class<?> valueClass, boolean editable) {
+	public PropertyObject(String name, PropertyEditor propertyEditor, Class<?> valueClass, boolean editable) {
 		setName(name);
 		setPropertyEditor(propertyEditor);
 		setValueClass(valueClass);
@@ -33,8 +32,8 @@ public class PropertyObject {
 	}
 
 	/** Creates a new instance of IndexedPropertyObject */
-	public PropertyObject(String name, PropertyEditor propertyEditor,
-			Class<?> valueClass, boolean editable, Object value) {
+	public PropertyObject(String name, PropertyEditor propertyEditor, Class<?> valueClass, boolean editable,
+			Object value) {
 		this(name, propertyEditor, valueClass, editable);
 		setValue(value);
 	}
@@ -52,8 +51,7 @@ public class PropertyObject {
 	/**
 	 * Setter for property value.
 	 * 
-	 * @param value
-	 *            New value of property value.
+	 * @param value New value of property value.
 	 * 
 	 */
 	public void setValue(Object value) {
@@ -78,8 +76,7 @@ public class PropertyObject {
 					this.value = new Double(0.);
 
 			} catch (Exception e) {
-				javax.swing.JOptionPane.showMessageDialog(null,
-						"Couldn't init value...\n\r" + e.getMessage());
+				javax.swing.JOptionPane.showMessageDialog(null, "Couldn't init value...\n\r" + e.getMessage());
 			}
 		}
 	}
@@ -97,8 +94,7 @@ public class PropertyObject {
 	/**
 	 * Setter for property propertyEditor.
 	 * 
-	 * @param propertyEditor
-	 *            New value of property propertyEditor.
+	 * @param propertyEditor New value of property propertyEditor.
 	 * 
 	 */
 	public void setPropertyEditor(PropertyEditor propertyEditor) {
@@ -118,8 +114,7 @@ public class PropertyObject {
 	/**
 	 * Setter for property valueClass.
 	 * 
-	 * @param valueClass
-	 *            New value of property valueClass.
+	 * @param valueClass New value of property valueClass.
 	 * 
 	 */
 	public void setValueClass(Class<?> valueClass) {
@@ -139,8 +134,7 @@ public class PropertyObject {
 	/**
 	 * Setter for property readOnly.
 	 * 
-	 * @param readOnly
-	 *            New value of property readOnly.
+	 * @param readOnly New value of property readOnly.
 	 * 
 	 */
 	public void setEditable(boolean editable) {
@@ -160,8 +154,7 @@ public class PropertyObject {
 	/**
 	 * Setter for property name.
 	 * 
-	 * @param name
-	 *            New value of property name.
+	 * @param name New value of property name.
 	 * 
 	 */
 	public void setName(String name) {

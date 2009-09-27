@@ -6,14 +6,14 @@
 
 package pt.utl.ist.elab.client.virtual.guipack;
 
-import java.awt.event.*;
+import java.awt.event.ActionListener;
 
 /**
- *
- * @author  nomead
+ * 
+ * @author nomead
  */
 public interface InteractiveMenu extends ActionListener {
-    
-    public void update();
-    
+
+	public void update();
+
 }

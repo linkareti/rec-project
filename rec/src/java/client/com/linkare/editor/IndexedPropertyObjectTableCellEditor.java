@@ -32,16 +32,14 @@ import javax.swing.table.TableCellEditor;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class IndexedPropertyObjectTableCellEditor extends AbstractCellEditor
-		implements TableCellEditor {
+public class IndexedPropertyObjectTableCellEditor extends AbstractCellEditor implements TableCellEditor {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5044226805596506962L;
 	private IndexedPropertyObject value = null;
 
-	public Component getTableCellEditorComponent(JTable table, Object value,
-			boolean isSelected, int row, int column) {
+	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		if (value instanceof IndexedPropertyObject)
 			this.value = (IndexedPropertyObject) value;
 		else
@@ -49,8 +47,7 @@ public class IndexedPropertyObjectTableCellEditor extends AbstractCellEditor
 
 		if (this.value.getPropertyEditor() != null) {
 			panelEdit = new JPanel(new BorderLayout());
-			JButton btn = IndexedPropertyObjectTableCellRenderer
-					.createRendererButton(value, isSelected, true, table);
+			JButton btn = IndexedPropertyObjectTableCellRenderer.createRendererButton(value, isSelected, true, table);
 			btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					replaceEditingPanel();
@@ -106,8 +103,7 @@ public class IndexedPropertyObjectTableCellEditor extends AbstractCellEditor
 
 			if (this.value.getPropertyEditor().getTags() != null) {
 				combo = new JComboBox(this.value.getPropertyEditor().getTags());
-				combo.setSelectedItem(this.value.getPropertyEditor()
-						.getAsText());
+				combo.setSelectedItem(this.value.getPropertyEditor().getAsText());
 				combo.addItemListener(new ItemListener() {
 					public void itemStateChanged(ItemEvent evt) {
 						comboBoxItemStateChanged(evt);
@@ -143,8 +139,7 @@ public class IndexedPropertyObjectTableCellEditor extends AbstractCellEditor
 			this.value.setValue(this.value.getPropertyEditor().getValue());
 			fireEditingStopped();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,
-					"Unable to change value\n\rReason:" + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Unable to change value\n\rReason:" + e.getMessage());
 		}
 	}
 
@@ -156,8 +151,7 @@ public class IndexedPropertyObjectTableCellEditor extends AbstractCellEditor
 			this.value.setValue(this.value.getPropertyEditor().getValue());
 			fireEditingStopped();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,
-					"Unable to change value\n\rReason:" + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Unable to change value\n\rReason:" + e.getMessage());
 			tf.requestFocus();
 		}
 
@@ -174,8 +168,7 @@ public class IndexedPropertyObjectTableCellEditor extends AbstractCellEditor
 	}
 
 	private JButton createCustomEditorButton() {
-		if (value != null && value.getPropertyEditor() != null
-				&& value.getPropertyEditor().supportsCustomEditor()) {
+		if (value != null && value.getPropertyEditor() != null && value.getPropertyEditor().supportsCustomEditor()) {
 			return new IndexedPropertyCustomEditorButton();
 		}
 		return null;
@@ -208,8 +201,7 @@ public class IndexedPropertyObjectTableCellEditor extends AbstractCellEditor
 				value.getPropertyEditor().setValue(oldValue);
 				Component comp = value.getPropertyEditor().getCustomEditor();
 
-				dialog = new JDialog(new JDialog(), "Property Custom Editing",
-						true);
+				dialog = new JDialog(new JDialog(), "Property Custom Editing", true);
 
 				JButton btnOK = new JButton("OK");
 

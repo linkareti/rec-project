@@ -5,50 +5,46 @@
  */
 
 package pt.utl.ist.elab.driver.serial.stamp.momentoInercia;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.logging.*;
-import java.util.logging.*;
+
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.impl.driver.BaseHardware;
+import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.ORBBean;
 
 /**
- *
- * @author  jp
+ * 
+ * @author jp
  */
-public class ServerMain
-{
+public class ServerMain {
 
-	private static String T_HARDWARE_LOGGER="THardware.Logger";
-	
-	static
-	{
-		Logger l=LogManager.getLogManager().getLogger(T_HARDWARE_LOGGER);
-		if(l==null)
-		{
+	private static String T_HARDWARE_LOGGER = "THardware.Logger";
+
+	static {
+		Logger l = LogManager.getLogManager().getLogger(T_HARDWARE_LOGGER);
+		if (l == null) {
 			LogManager.getLogManager().addLogger(Logger.getLogger(T_HARDWARE_LOGGER));
 		}
 	}
-	
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args)
-	{
-		try
-		{
+	public static void main(String[] args) {
+		try {
 			ORBBean.getORBBean(args);
-			
-			BaseHardware baseHardware=new BaseHardware(new MomInerciaStampDriver());
-									
-			try
-			{
-			    Thread.currentThread().join();
-			}catch(Exception ignored){}
-			
+
+			BaseHardware baseHardware = new BaseHardware(new MomInerciaStampDriver());
+
+			try {
+				Thread.currentThread().join();
+			} catch (Exception ignored) {
+			}
+
 			ORBBean.getORBBean(args).killORB();
-		}catch(Exception e)
-		{
-			LoggerUtil.logThrowable("Error on Main...",e,Logger.getLogger(T_HARDWARE_LOGGER));
+		} catch (Exception e) {
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(T_HARDWARE_LOGGER));
 		}
 	}
 

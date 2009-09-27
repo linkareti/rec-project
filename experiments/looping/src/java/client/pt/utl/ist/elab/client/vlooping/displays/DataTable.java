@@ -6,19 +6,17 @@
 
 package pt.utl.ist.elab.client.vlooping.displays;
 
-import com.linkare.rec.impl.baseUI.table.*;
+import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
 /**
- *
- * @author  Emanuel A.
+ * 
+ * @author Emanuel A.
  */
-public class DataTable extends MultSeriesTable
-{
-    
-    /** Creates a new instance of TableFreqRMS */
-    public DataTable() 
-    {
-        super();
-        setColArray(new int[]{0,1,2,3,4,5});
-    }
+public class DataTable extends MultSeriesTable {
+
+	/** Creates a new instance of TableFreqRMS */
+	public DataTable() {
+		super();
+		setColArray(new int[] { 0, 1, 2, 3, 4, 5 });
+	}
 }

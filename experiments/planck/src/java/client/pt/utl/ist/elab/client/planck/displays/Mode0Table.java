@@ -9,21 +9,18 @@ package pt.utl.ist.elab.client.planck.displays;
 import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
 /**
- *
- * @author  Andr�
+ * 
+ * @author Andr�
  */
-public class Mode0Table extends MultSeriesTable
-{
-    
-    /** Creates a new instance of TableFreqRMS */
-    public Mode0Table() 
-    {
-        super();
-        setColArray(new int[]{1,2});
-    }
+public class Mode0Table extends MultSeriesTable {
 
-    public String getName()
-    {
-        return "Modo Varrimento";
-    }     
+	/** Creates a new instance of TableFreqRMS */
+	public Mode0Table() {
+		super();
+		setColArray(new int[] { 1, 2 });
+	}
+
+	public String getName() {
+		return "Modo Varrimento";
+	}
 }

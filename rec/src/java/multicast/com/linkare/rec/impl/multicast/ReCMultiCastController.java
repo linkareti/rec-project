@@ -4,10 +4,11 @@
 
 package com.linkare.rec.impl.multicast;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Iterator;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,9 +40,8 @@ import com.linkare.rec.impl.utils.Defaults;
  */
 public class ReCMultiCastController implements MultiCastControllerOperations {
 
-	public static final DataProducerActivator DP_DEACTIVATOR=new DataProducerActivator();
-	
-	
+	public static final DataProducerActivator DP_DEACTIVATOR = new DataProducerActivator();
+
 	public static String MCCONTROLLER_LOGGER = "MultiCastController.Logger";
 
 	/*
@@ -65,10 +65,11 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	private HardwareChangeAdapter hardwareChangeAdapter = null;
 
 	/*
-	 * An internal Thread checking for hardware connections Checks mostly if they are alive
+	 * An internal Thread checking for hardware connections Checks mostly if
+	 * they are alive
 	 */
 	private HardwareConnectionCheck hardwareConnectionChecker = null;
-    
+
 	/*
 	 * The maximum number of apparatus available on this lab
 	 */
@@ -99,8 +100,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 		String multiCastLocation = "";
 		try {
 			multiCastLocation = InetAddress.getLocalHost().getCanonicalHostName();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			logThrowable("Error determining MultiCastController Location", e);
 		}
 
@@ -114,18 +114,17 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 
 			// Create a client queue with a max of MAXIMUM_CLIENTS
 			clientQueue = new ClientQueue(clientQueueAdapter, MAXIMUM_CLIENTS);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// REMOVE THIS TRY CATCH BLOCK AFTER FINISHING THE TEST PHASE...
 			logThrowable("Error initializing the ReCMultiCastController", e);
 		}
-        
+
 		// Create a hardware connection checker
 		hardwareConnectionChecker = new HardwareConnectionCheck();
 		// Start it up
-		//hardwareConnectionChecker.start();
-        
-        log(Level.INFO, "Started ReCMulticastController OK.");
+		// hardwareConnectionChecker.start();
+
+		log(Level.INFO, "Started ReCMulticastController OK.");
 	}
 
 	/* my Remote Interface Implementation* */
@@ -170,7 +169,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	}
 
 	/*
-	 * @see com.linkare.rec.acquisition.MultiCastControllerOperations#registerHardware(com.linkare.rec.acquisition.Hardware)
+	 * @see
+	 * com.linkare.rec.acquisition.MultiCastControllerOperations#registerHardware
+	 * (com.linkare.rec.acquisition.Hardware)
 	 */
 	public void registerHardware(Hardware hardware) {
 		HardwareAddEvt evt = new HardwareAddEvt(hardware);
@@ -178,8 +179,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	}
 
 	/**
-	 * This method shuts down the ReCMultiCastController It destroys the internal hardwareConnectionChecker, the
-	 * hardwareChangeAdapter and the ClientQueueAdapter
+	 * This method shuts down the ReCMultiCastController It destroys the
+	 * internal hardwareConnectionChecker, the hardwareChangeAdapter and the
+	 * ClientQueueAdapter
 	 */
 	public void shutdown() {
 		log(Level.INFO, "Shutting down MultiCastController");
@@ -211,51 +213,50 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 
 	/* Inner Class - Hardware Connection Checker */
 	private class HardwareConnectionCheck extends ScheduledWorkUnit {
-//		private boolean shutdown = false;
-        
-        HardwareConnectionCheck() {
-            ExecutorScheduler.scheduleAtFixedRate(this, 1, 5, SECONDS);
-        }
-                        
-//		public void shutdown() {
-////			shutdown = true;
-////			try {
-////				synchronized (this) {
-////					this.join();
-////				}
-////			}
-////			catch (Exception e) {
-////			}
-//		}
+		// private boolean shutdown = false;
+
+		HardwareConnectionCheck() {
+			ExecutorScheduler.scheduleAtFixedRate(this, 1, 5, SECONDS);
+		}
+
+		// public void shutdown() {
+		// // shutdown = true;
+		// // try {
+		// // synchronized (this) {
+		// // this.join();
+		// // }
+		// // }
+		// // catch (Exception e) {
+		// // }
+		// }
 
 		public void run() {
-//			while (!shutdown) {
-//				synchronized (this) {
-//					try {
-//                        log(Level.FINE, "Hardware connector waiting...");
-//						this.wait(5000);
-//					}
-//					catch (Exception ignored) {
-//					}
-//				}
-				synchronized (multiCastHardwares) {
-					Iterator iterHardwares = ((ArrayList) multiCastHardwares.clone()).iterator();
-					while (iterHardwares.hasNext()) {
-						try {
-							ReCMultiCastHardware rmch = (ReCMultiCastHardware) iterHardwares.next();
-							if (!rmch.getHardware().isConnected()) {
-								rmch.shutdown();
-								multiCastHardwares.remove(rmch);
-								clientQueue.hardwareChanged(new HardwareChangeEvent());
-							}
+			// while (!shutdown) {
+			// synchronized (this) {
+			// try {
+			// log(Level.FINE, "Hardware connector waiting...");
+			// this.wait(5000);
+			// }
+			// catch (Exception ignored) {
+			// }
+			// }
+			synchronized (multiCastHardwares) {
+				Iterator iterHardwares = ((ArrayList) multiCastHardwares.clone()).iterator();
+				while (iterHardwares.hasNext()) {
+					try {
+						ReCMultiCastHardware rmch = (ReCMultiCastHardware) iterHardwares.next();
+						if (!rmch.getHardware().isConnected()) {
+							rmch.shutdown();
+							multiCastHardwares.remove(rmch);
+							clientQueue.hardwareChanged(new HardwareChangeEvent());
 						}
-						catch (Exception e) {
-							logThrowable("MultiCastController - Error cheking hardware connection status!", e);
-						}
+					} catch (Exception e) {
+						logThrowable("MultiCastController - Error cheking hardware connection status!", e);
 					}
-					log(Level.FINE, "Hardware connector waiting... " + Thread.currentThread().getName());
 				}
-//			}
+				log(Level.FINE, "Hardware connector waiting... " + Thread.currentThread().getName());
+			}
+			// }
 		}
 	}
 
@@ -280,8 +281,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 
 				try {
 					hardwareId = evt.getHardware().getHardwareInfo().getHardwareUniqueID();
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					logThrowable("Error Trying to add an Hardware - Couldn't get it's ID", e);
 				}
 
@@ -291,14 +291,15 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 					if (hardware.getHardwareUniqueId().equals(hardwareId)) {// oppps,
 						// allready
 						// exists
-						if (hardware.getHardware().isSameDelegate(evt.getHardware())) {// same id, same
+						if (hardware.getHardware().isSameDelegate(evt.getHardware())) {// same
+							// id,
+							// same
 							// delegate... just
 							// return and do nothing
 							log(Level.INFO, "Hardware with ID " + hardwareId
 									+ " is refreshing registration at the MultiCastController!");
 							return;
-						}
-						else {// same id, not same delegate... say it and
+						} else {// same id, not same delegate... say it and
 							// replace delegate...
 							log(Level.INFO,
 									"There seems to be two hardwares with the same ID registering at this MultiCastController. The ID in question is "
@@ -309,8 +310,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 								hardware.shutdown();
 								multiCastHardwares.remove(hardware);
 								break;
-							}
-							else {
+							} else {
 								log(Level.INFO, "The old hardware with " + hardwareId
 										+ " is still alive... Please give the new hardware a different ID...");
 								return;
@@ -335,8 +335,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 					DefaultResource hardwareResource = resource.createChildResource();
 					addedHardware = new ReCMultiCastHardware(hardwareResource, evt.getHardware(),
 							MAXIMUM_CLIENTS_PER_HARDWARE, clientQueue);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					logThrowable("Couldn't create a ReCMultiCastHardware for a Hardware that is registering!", e);
 					return;
 				}
@@ -346,11 +345,13 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 				multiCastHardwares.add(addedHardware);
 				changed = true;
 			}
-			if (changed) clientQueue.hardwareChanged(new HardwareChangeEvent());
+			if (changed)
+				clientQueue.hardwareChanged(new HardwareChangeEvent());
 		}
 
 		public MultiCastHardware[] enumerateHardwares(IUser userOp) {
-			ArrayList<MultiCastHardware> multicastHardwareArrayList = new ArrayList<MultiCastHardware>(multiCastHardwares.size());
+			ArrayList<MultiCastHardware> multicastHardwareArrayList = new ArrayList<MultiCastHardware>(
+					multiCastHardwares.size());
 			IOperation op = new DefaultOperation(IOperation.OP_LIST_HARDWARE);
 
 			synchronized (multiCastHardwares) {

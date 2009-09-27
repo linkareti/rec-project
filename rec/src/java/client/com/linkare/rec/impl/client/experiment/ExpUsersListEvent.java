@@ -7,21 +7,18 @@
 package com.linkare.rec.impl.client.experiment;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
-public class ExpUsersListEvent extends java.util.EventObject
-{
-    private com.linkare.rec.acquisition.UserInfo[] userInfo;
-    
-    public ExpUsersListEvent(Object source, com.linkare.rec.acquisition.UserInfo[] userInfo)
-    {
-	super(source);
-	this.userInfo = userInfo;
-    }
-    
-    public com.linkare.rec.acquisition.UserInfo[] getUserInfo()
-    {
-	return userInfo;
-    }
+public class ExpUsersListEvent extends java.util.EventObject {
+	private com.linkare.rec.acquisition.UserInfo[] userInfo;
+
+	public ExpUsersListEvent(Object source, com.linkare.rec.acquisition.UserInfo[] userInfo) {
+		super(source);
+		this.userInfo = userInfo;
+	}
+
+	public com.linkare.rec.acquisition.UserInfo[] getUserInfo() {
+		return userInfo;
+	}
 }

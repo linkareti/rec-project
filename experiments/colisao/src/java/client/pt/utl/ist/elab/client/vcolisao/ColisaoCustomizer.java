@@ -6,860 +6,910 @@
 
 package pt.utl.ist.elab.client.vcolisao;
 
-import java.awt.*;
-import org.opensourcephysics.display.*;
-import org.opensourcephysics.numerics.*;
-import javax.swing.*;
-import com.linkare.rec.impl.i18n.*;
-import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.client.customizer.ICustomizer;
-import com.linkare.rec.impl.client.customizer.ICustomizerListener;
-import com.linkare.rec.data.synch.Frequency;
+import javax.swing.JFrame;
 
+import org.opensourcephysics.display.Arrow;
+import org.opensourcephysics.display.Dataset;
+import org.opensourcephysics.display.DrawableShape;
+import org.opensourcephysics.display.PlottingPanel;
+
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
- *
- * @author  Emanuel Antunes
+ * 
+ * @author Emanuel Antunes
  */
 public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
-    
-    /** Creates new form LoppingCustomizer */
-    public ColisaoCustomizer(){
-        
-        initComponents();
-        initPreview();
-        
-        java.util.Hashtable ht = new java.util.Hashtable(7);
-        ht = new java.util.Hashtable(7);
-        for(int i = 2; i<=500; i+=83) {
-            ht.put(new Integer(i), new javax.swing.JLabel("" + i/10F)) ;       }
-        jSliderM1.setLabelTable(ht);
-        jSliderM2.setLabelTable(ht);
-        
-        ht = new java.util.Hashtable(7);
-        for(int i = 0; i<=200; i+=50) {
-            ht.put(new Integer(i), new javax.swing.JLabel("" + i/10F)) ;       }
-        jSliderV2.setLabelTable(ht);
-        jSliderV1.setLabelTable(ht);
-        
-        ht = new java.util.Hashtable(7);
-        for(int i = 5; i<=100; i+=20) {
-            ht.put(new Integer(i), new javax.swing.JLabel("" + i/100F)) ;       }
-        ht.put(new Integer(100), new javax.swing.JLabel("1.0")) ;
-        jSliderR1.setLabelTable(ht);
-        jSliderR2.setLabelTable(ht);
-        
-        updateVars();
-        updateTimer();
-    }
-    
-    private void initPreview(){
-        v1 = 0; v2=0; r1=7; r2=6; a=0.0;
-        updateVars();
-        
-        dpanel = new PlottingPanel("x (m)", "y (m)",ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.1" ,"Impact Preview"));//new DrawingPanel();
-        dpanel.setPreferredSize(new java.awt.Dimension(267,100));
-        
-        panelPreview.add(dpanel);
-        
-        dpanel.setSquareAspect(true);
-        dpanel.setPreferredMinMax(-1,1,-1,1);
-        moveBall();}
-    
-    public void moveBall(){
-        updateVars();
-        double x,y;
-        x = (r1+r2)*Math.cos(Math.toRadians(a));
-        y = (r1+r2)*-Math.sin(Math.toRadians(a));
-        dpanel.setPreferredMinMax(-1.2*(r1+r2),1.2*(r1+r2),-1.2*(r1+r2),1.2*(r1+r2));
-        dpanel.removeDrawable(vects[0]);
-        dpanel.removeDrawable(vects[1]);
-        dpanel.removeDrawable(circulos[0]);
-        dpanel.removeDrawable(circulos[1]);
-        
-        vects[0] = new Arrow(0,0,v1/10,0);
-        vects[1] = new Arrow(x,y, -(v2*Math.cos(Math.toRadians(a))/10) , (v2*Math.sin(Math.toRadians(a))/10));
-        vects[1].setColor(java.awt.Color.BLUE);
-        vects[0].setColor(java.awt.Color.RED);
-        circulos[1]= DrawableShape.createCircle(x, y, r2*2);
-        circulos[0] = DrawableShape.createCircle(0, 0, r1*2);
-        circulos[1].setMarkerColor((new java.awt.Color(0,0,255,90)), (new java.awt.Color(0,0,255)));
-        
-        dpanel.addDrawable(vects[0]);
-        dpanel.addDrawable(vects[1]);
-        dpanel.addDrawable(circulos[0]);
-        dpanel.addDrawable(circulos[1]);
-        dpanel.render();
-    }
-    
-    public void updateVars(){
-        v1 =  jSliderV1.getValue()/10f;
-        r1 =  jSliderR1.getValue()/100f;
-        v2 =  jSliderV2.getValue()/10f;
-        r2 =  jSliderR2.getValue()/100f;
-        a = jSliderA.getValue();
-    }
-    
-    public static void main(String args[]){
-        ReCResourceBundle.loadResourceBundle("ReCExpColisao", "recresource:///pt/utl/ist/elab/virtual/client/colisao/resources/ReCExpColisao");
-        javax.swing.JFrame dummy = new javax.swing.JFrame();
-        dummy.getContentPane().add(new ColisaoCustomizer());
-        dummy.pack();
-        dummy.show();
-        dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);}
-    
-    public void updateTimer(){
-        float expDuration = jSliderSamples.getValue()*jSliderTBS.getValue();
-        expDuration /= 1000;
-        jLabelExpTime.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.timer" ,"Experiment Duration: ")+expDuration+" s");
-    }
-    
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
-     */
-    private void initComponents() {//GEN-BEGIN:initComponents
-        java.awt.GridBagConstraints gridBagConstraints;
-
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        panelRoot = new javax.swing.JPanel();
-        panelRoot2 = new javax.swing.JPanel();
-        panelPreview = new javax.swing.JPanel();
-        panelTime = new javax.swing.JPanel();
-        panelTBSNS = new javax.swing.JPanel();
-        jPanelTBS = new javax.swing.JPanel();
-        jSliderTBS = new javax.swing.JSlider();
-        jTextFieldTBS = new javax.swing.JTextField();
-        jPanelNS = new javax.swing.JPanel();
-        jSliderSamples = new javax.swing.JSlider();
-        jTextFieldSamples = new javax.swing.JTextField();
-        jLabelExpTime = new javax.swing.JLabel();
-        tabVars = new javax.swing.JTabbedPane();
-        panelVars1 = new javax.swing.JPanel();
-        jPanelV1 = new javax.swing.JPanel();
-        jSliderV1 = new javax.swing.JSlider();
-        jTextFieldV1 = new javax.swing.JTextField();
-        jPanelV2 = new javax.swing.JPanel();
-        jSliderV2 = new javax.swing.JSlider();
-        jTextFieldV2 = new javax.swing.JTextField();
-        jPanelR1 = new javax.swing.JPanel();
-        jSliderR1 = new javax.swing.JSlider();
-        jTextFieldR1 = new javax.swing.JTextField();
-        jPanelR2 = new javax.swing.JPanel();
-        jSliderR2 = new javax.swing.JSlider();
-        jTextFieldR2 = new javax.swing.JTextField();
-        panelVars2 = new javax.swing.JPanel();
-        jPanelM1 = new javax.swing.JPanel();
-        jSliderM1 = new javax.swing.JSlider();
-        jTextFieldM1 = new javax.swing.JTextField();
-        jPanelM2 = new javax.swing.JPanel();
-        jSliderM2 = new javax.swing.JSlider();
-        jTextFieldM2 = new javax.swing.JTextField();
-        jPanelA = new javax.swing.JPanel();
-        jSliderA = new javax.swing.JSlider();
-        jTextFieldA = new javax.swing.JTextField();
-        jPanelC = new javax.swing.JPanel();
-        jRadioButtonElastica = new javax.swing.JRadioButton();
-        jRadioButtonNElastica = new javax.swing.JRadioButton();
-        jPanelBtns = new javax.swing.JPanel();
-        jPanelOKCnl = new javax.swing.JPanel();
-        jButtonOK = new javax.swing.JButton();
-        jButtonCancel = new javax.swing.JButton();
-        jPanelDfC = new javax.swing.JPanel();
-        jButtonDefaultConfig = new javax.swing.JButton();
-
-        setLayout(new java.awt.BorderLayout());
-
-        panelRoot.setLayout(new java.awt.BorderLayout());
-
-        panelRoot2.setLayout(new java.awt.BorderLayout());
-
-        panelPreview.setLayout(new java.awt.BorderLayout());
-
-        panelPreview.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.1" ,"System Preview")));
-        panelRoot2.add(panelPreview, java.awt.BorderLayout.CENTER);
-
-        panelTime.setLayout(new java.awt.BorderLayout());
-
-        panelTBSNS.setLayout(new java.awt.GridLayout(1, 0));
-
-        jPanelTBS.setLayout(new java.awt.BorderLayout());
-
-        jPanelTBS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.tbs" ,"TBS")));
-        jPanelTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.tip.tbs" ,"Time between samples"));
-        jPanelTBS.setVerifyInputWhenFocusTarget(false);
-        jSliderTBS.setPaintLabels(true);
-        jSliderTBS.setOrientation(javax.swing.JSlider.VERTICAL);
-        jSliderTBS.setPaintTicks(true);
-        jSliderTBS.setMinorTickSpacing(1);
-        jSliderTBS.setMajorTickSpacing(4);
-        jSliderTBS.setValue(5);
-        jSliderTBS.setMinimum(1);
-        jSliderTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.tip.tbs" ,"Time between samples"));
-        jSliderTBS.setMaximum(25);
-        jSliderTBS.setSnapToTicks(true);
-        jSliderTBS.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderTBSStateChanged(evt);
-            }
-        });
-
-        jPanelTBS.add(jSliderTBS, java.awt.BorderLayout.CENTER);
-
-        jTextFieldTBS.setColumns(4);
-        jTextFieldTBS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldTBS.setText("80");
-        jTextFieldTBS.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldTBSFocusLost(evt);
-            }
-        });
-
-        jPanelTBS.add(jTextFieldTBS, java.awt.BorderLayout.SOUTH);
-
-        panelTBSNS.add(jPanelTBS);
-
-        jPanelNS.setLayout(new java.awt.BorderLayout());
-
-        jPanelNS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.samples" ,"N Samples")));
-        jPanelNS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.tip.samples" ,"Number of samples"));
-        jPanelNS.setVerifyInputWhenFocusTarget(false);
-        jSliderSamples.setPaintLabels(true);
-        jSliderSamples.setOrientation(javax.swing.JSlider.VERTICAL);
-        jSliderSamples.setPaintTicks(true);
-        jSliderSamples.setMinorTickSpacing(20);
-        jSliderSamples.setMajorTickSpacing(100);
-        jSliderSamples.setValue(100);
-        jSliderSamples.setMinimum(1);
-        jSliderSamples.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.tip.samples" ,"Number of samples"));
-        jSliderSamples.setMaximum(1001);
-        jSliderSamples.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderSamplesStateChanged(evt);
-            }
-        });
-
-        jPanelNS.add(jSliderSamples, java.awt.BorderLayout.CENTER);
-
-        jTextFieldSamples.setColumns(4);
-        jTextFieldSamples.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldSamples.setText("100");
-        jTextFieldSamples.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldSamplesFocusLost(evt);
-            }
-        });
-
-        jPanelNS.add(jTextFieldSamples, java.awt.BorderLayout.SOUTH);
-
-        panelTBSNS.add(jPanelNS);
-
-        panelTime.add(panelTBSNS, java.awt.BorderLayout.CENTER);
-
-        jLabelExpTime.setText("Teste da label");
-        panelTime.add(jLabelExpTime, java.awt.BorderLayout.SOUTH);
-
-        panelRoot2.add(panelTime, java.awt.BorderLayout.EAST);
-
-        panelRoot.add(panelRoot2, java.awt.BorderLayout.CENTER);
-
-        panelVars1.setLayout(new java.awt.GridLayout(4, 0));
-
-        jPanelV1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.2" ,"Circle 1 Velocity (m/s)")));
-        jSliderV1.setPaintLabels(true);
-        jSliderV1.setPaintTicks(true);
-        jSliderV1.setMinorTickSpacing(10);
-        jSliderV1.setMajorTickSpacing(50);
-        jSliderV1.setValue(20);
-        jSliderV1.setMaximum(200);
-        jSliderV1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderV1StateChanged(evt);
-            }
-        });
-
-        jPanelV1.add(jSliderV1);
-
-        jTextFieldV1.setColumns(4);
-        jTextFieldV1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldV1.setText("2");
-        jTextFieldV1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldV1FocusLost(evt);
-            }
-        });
-
-        jPanelV1.add(jTextFieldV1);
-
-        panelVars1.add(jPanelV1);
-
-        jPanelV2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.3" ,"Circle 2 Velocity (m/s)")));
-        jPanelV2.setEnabled(false);
-        jSliderV2.setPaintLabels(true);
-        jSliderV2.setPaintTicks(true);
-        jSliderV2.setMinorTickSpacing(10);
-        jSliderV2.setMajorTickSpacing(50);
-        jSliderV2.setValue(20);
-        jSliderV2.setMaximum(200);
-        jSliderV2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderV2StateChanged(evt);
-            }
-        });
-
-        jPanelV2.add(jSliderV2);
-
-        jTextFieldV2.setColumns(4);
-        jTextFieldV2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldV2.setText("2");
-        jTextFieldV2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldV2FocusLost(evt);
-            }
-        });
-
-        jPanelV2.add(jTextFieldV2);
-
-        panelVars1.add(jPanelV2);
-
-        jPanelR1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.4" ,"Circle 1 Redius (m)")));
-        jPanelR1.setEnabled(false);
-        jSliderR1.setPaintLabels(true);
-        jSliderR1.setPaintTicks(true);
-        jSliderR1.setMinorTickSpacing(4);
-        jSliderR1.setMajorTickSpacing(20);
-        jSliderR1.setValue(5);
-        jSliderR1.setMinimum(5);
-        jSliderR1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderR1StateChanged(evt);
-            }
-        });
-
-        jPanelR1.add(jSliderR1);
-
-        jTextFieldR1.setColumns(4);
-        jTextFieldR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldR1.setText("0.05");
-        jTextFieldR1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldR1FocusLost(evt);
-            }
-        });
-
-        jPanelR1.add(jTextFieldR1);
-
-        panelVars1.add(jPanelR1);
-
-        jPanelR2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.5" ,"Circle 2 Radius (m)")));
-        jSliderR2.setPaintLabels(true);
-        jSliderR2.setPaintTicks(true);
-        jSliderR2.setMinorTickSpacing(4);
-        jSliderR2.setMajorTickSpacing(20);
-        jSliderR2.setValue(5);
-        jSliderR2.setMinimum(5);
-        jSliderR2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderR2StateChanged(evt);
-            }
-        });
-
-        jPanelR2.add(jSliderR2);
-
-        jTextFieldR2.setColumns(4);
-        jTextFieldR2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldR2.setText("0.05");
-        jTextFieldR2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldR2FocusLost(evt);
-            }
-        });
-
-        jPanelR2.add(jTextFieldR2);
-
-        panelVars1.add(jPanelR2);
-
-        tabVars.addTab(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.12" ,"Particle Settings"), panelVars1);
-
-        panelVars2.setLayout(new java.awt.GridLayout(4, 0));
-
-        jPanelM1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.6" ,"Circle 1 Mass (kg)")));
-        jSliderM1.setPaintLabels(true);
-        jSliderM1.setPaintTicks(true);
-        jSliderM1.setMinorTickSpacing(20);
-        jSliderM1.setMajorTickSpacing(83);
-        jSliderM1.setValue(150);
-        jSliderM1.setMinimum(2);
-        jSliderM1.setMaximum(500);
-        jSliderM1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderM1StateChanged(evt);
-            }
-        });
-
-        jPanelM1.add(jSliderM1);
-
-        jTextFieldM1.setColumns(4);
-        jTextFieldM1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldM1.setText("15");
-        jTextFieldM1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldM1FocusLost(evt);
-            }
-        });
-
-        jPanelM1.add(jTextFieldM1);
-
-        panelVars2.add(jPanelM1);
-
-        jPanelM2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.7" ,"Circle 1 Mass (kg)")));
-        jSliderM2.setPaintLabels(true);
-        jSliderM2.setPaintTicks(true);
-        jSliderM2.setMinorTickSpacing(20);
-        jSliderM2.setMajorTickSpacing(83);
-        jSliderM2.setValue(150);
-        jSliderM2.setMinimum(2);
-        jSliderM2.setMaximum(500);
-        jSliderM2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderM2StateChanged(evt);
-            }
-        });
-
-        jPanelM2.add(jSliderM2);
-
-        jTextFieldM2.setColumns(4);
-        jTextFieldM2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldM2.setText("15");
-        jTextFieldM2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldM2FocusLost(evt);
-            }
-        });
-
-        jPanelM2.add(jTextFieldM2);
-
-        panelVars2.add(jPanelM2);
-
-        jPanelA.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.8" ,"Impact Angle (degrees)")));
-        jSliderA.setPaintLabels(true);
-        jSliderA.setPaintTicks(true);
-        jSliderA.setMinorTickSpacing(10);
-        jSliderA.setMajorTickSpacing(60);
-        jSliderA.setValue(0);
-        jSliderA.setMaximum(360);
-        jSliderA.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderAStateChanged(evt);
-            }
-        });
-
-        jPanelA.add(jSliderA);
-
-        jTextFieldA.setColumns(4);
-        jTextFieldA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldA.setText("0");
-        jTextFieldA.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldAFocusLost(evt);
-            }
-        });
-
-        jPanelA.add(jTextFieldA);
-
-        panelVars2.add(jPanelA);
-
-        jPanelC.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.9" ,"Type of Impact")));
-        jRadioButtonElastica.setSelected(true);
-        jRadioButtonElastica.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.10" ,"Elastic"));
-        buttonGroup1.add(jRadioButtonElastica);
-        jPanelC.add(jRadioButtonElastica);
-
-        jRadioButtonNElastica.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.11" ,"Perfectly Inelastic"));
-        buttonGroup1.add(jRadioButtonNElastica);
-        jPanelC.add(jRadioButtonNElastica);
-
-        panelVars2.add(jPanelC);
-
-        tabVars.addTab(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.13" ,"Particle and Coliison Settings"), panelVars2);
-
-        panelRoot.add(tabVars, java.awt.BorderLayout.SOUTH);
-
-        add(panelRoot, java.awt.BorderLayout.CENTER);
-
-        jPanelBtns.setLayout(new java.awt.GridBagLayout());
-
-        jButtonOK.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.ok" ,"OK"));
-        jButtonOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOKActionPerformed(evt);
-            }
-        });
-
-        jPanelOKCnl.add(jButtonOK);
-
-        jButtonCancel.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.cancel" ,"Cancel"));
-        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelActionPerformed(evt);
-            }
-        });
-
-        jPanelOKCnl.add(jButtonCancel);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        jPanelBtns.add(jPanelOKCnl, gridBagConstraints);
-
-        jButtonDefaultConfig.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.dfc" ,"Default Configuration"));
-        jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDefaultConfigActionPerformed(evt);
-            }
-        });
-
-        jPanelDfC.add(jButtonDefaultConfig);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanelBtns.add(jPanelDfC, gridBagConstraints);
-
-        add(jPanelBtns, java.awt.BorderLayout.SOUTH);
-
-    }//GEN-END:initComponents
-    
-    private void jTextFieldR2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldR2FocusLost
-        adjustSlider2(jSliderR2 , jTextFieldR2);
-    }//GEN-LAST:event_jTextFieldR2FocusLost
-    
-    private void jTextFieldR1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldR1FocusLost
-        adjustSlider2(jSliderR1 , jTextFieldR1);
-    }//GEN-LAST:event_jTextFieldR1FocusLost
-    
-    private void jSliderR2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderR2StateChanged
-        moveBall();
-        jTextFieldR2.setText(""+jSliderR2.getValue()/100f);
-    }//GEN-LAST:event_jSliderR2StateChanged
-    
-    private void jSliderR1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderR1StateChanged
-        moveBall();
-        jTextFieldR1.setText(""+jSliderR1.getValue()/100f);
-    }//GEN-LAST:event_jSliderR1StateChanged
-    
-    private void jTextFieldV1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldV1FocusLost
-        adjustSlider1(jSliderV1 , jTextFieldV1);
-    }//GEN-LAST:event_jTextFieldV1FocusLost
-    
-    private void jSliderV1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderV1StateChanged
-        moveBall();
-        jTextFieldV1.setText(""+jSliderV1.getValue()/10f);
-    }//GEN-LAST:event_jSliderV1StateChanged
-    
-    private void jTextFieldSamplesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldSamplesFocusLost
-        adjustSlider(jSliderSamples , jTextFieldSamples);
-    }//GEN-LAST:event_jTextFieldSamplesFocusLost
-    
-    private void jSliderSamplesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderSamplesStateChanged
-        updateTimer();
-        jTextFieldSamples.setText(""+jSliderSamples.getValue());
-    }//GEN-LAST:event_jSliderSamplesStateChanged
-    
-    private void jTextFieldTBSFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTBSFocusLost
-        adjustSlider(jSliderTBS , jTextFieldTBS);
-    }//GEN-LAST:event_jTextFieldTBSFocusLost
-    
-    private void jSliderTBSStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderTBSStateChanged
-        updateTimer();
-        jTextFieldTBS.setText(""+jSliderTBS.getValue());
-    }//GEN-LAST:event_jSliderTBSStateChanged
-    
-    private void jTextFieldM2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldM2FocusLost
-        adjustSlider1(jSliderM2 , jTextFieldM2);
-    }//GEN-LAST:event_jTextFieldM2FocusLost
-    
-    private void jSliderM2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderM2StateChanged
-        jTextFieldM2.setText(""+jSliderM2.getValue()/10f);
-    }//GEN-LAST:event_jSliderM2StateChanged
-    
-    private void jTextFieldM1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldM1FocusLost
-        adjustSlider1(jSliderM1 , jTextFieldM1);
-    }//GEN-LAST:event_jTextFieldM1FocusLost
-    
-    private void jTextFieldAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldAFocusLost
-        adjustSlider(jSliderA , jTextFieldA);
-    }//GEN-LAST:event_jTextFieldAFocusLost
-    
-    private void jSliderAStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderAStateChanged
-        moveBall();
-        jTextFieldA.setText(""+jSliderA.getValue());
-    }//GEN-LAST:event_jSliderAStateChanged
-    
-    private void jTextFieldV2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldV2FocusLost
-        adjustSlider1(jSliderV2 , jTextFieldV2);
-    }//GEN-LAST:event_jTextFieldV2FocusLost
-    
-    private void jSliderV2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderV2StateChanged
-        moveBall();
-        jTextFieldV2.setText(""+jSliderV2.getValue()/10f);
-    }//GEN-LAST:event_jSliderV2StateChanged
-    
-    private void jSliderM1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderM1StateChanged
-        jTextFieldM1.setText(""+jSliderM1.getValue()/10f);
-    }//GEN-LAST:event_jSliderM1StateChanged
-    
-    private void jButtonDefaultConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDefaultConfigActionPerformed
-        jSliderA.setValue(0);
-        jSliderV1.setValue(20);
-        jSliderV2.setValue(20);
-        jSliderM1.setValue(150);
-        jSliderM2.setValue(150);
-        jSliderR1.setValue(5);
-        jSliderR2.setValue(5);
-        //jSliderTBS.setValue();
-        //jSliderSamples.setValue();
-    }//GEN-LAST:event_jButtonDefaultConfigActionPerformed
-    
-    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        fireICustomizerListenerCanceled();
-    }//GEN-LAST:event_jButtonCancelActionPerformed
-    
-    private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
-        acqConfig.setTotalSamples(jSliderSamples.getValue());
-        
-        acqConfig.setSelectedFrequency(new Frequency((double)jSliderTBS.getValue(),hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(),hardwareInfo.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
-        
-        acqConfig.getSelectedHardwareParameter("v1").setParameterValue("" + jSliderV1.getValue()/ 10f);
-        acqConfig.getSelectedHardwareParameter("v2").setParameterValue("" + jSliderV2.getValue() / 10F);
-        acqConfig.getSelectedHardwareParameter("m1").setParameterValue("" + jSliderM1.getValue() / 10F);
-        acqConfig.getSelectedHardwareParameter("m2").setParameterValue("" + jSliderM2.getValue() / 10F);
-        acqConfig.getSelectedHardwareParameter("r1").setParameterValue("" + jSliderR1.getValue() / 100F);
-        acqConfig.getSelectedHardwareParameter("r2").setParameterValue("" + jSliderR2.getValue() / 100F);
-        acqConfig.getSelectedHardwareParameter("a").setParameterValue("" + jSliderA.getValue());
-        if(jRadioButtonElastica.isSelected()){    acqConfig.getSelectedHardwareParameter("elasticCollision").setParameterValue("1");}
-        else{  acqConfig.getSelectedHardwareParameter("elasticCollision").setParameterValue("0");}
-        fireICustomizerListenerDone();
-        
-    }//GEN-LAST:event_jButtonOKActionPerformed
-    
-    //Metodos que verificam a validade do que foi introduzido na text field
-    
-    private void adjustSlider(javax.swing.JSlider slider, javax.swing.JTextField field) {
-        int num = 0;
-        try{
-            num = (int)(Float.parseFloat(field.getText().trim()) ); }
-        catch(NumberFormatException nfe) {
-            field.setText("" + slider.getValue());
-            return;}
-        if(num > slider.getMaximum() || num < slider.getMinimum() )
-            field.setText("" + slider.getValue() );
-        else
-            slider.setValue(num);  }
-    
-    
-    private void adjustSlider1(javax.swing.JSlider slider, javax.swing.JTextField field){
-        int num = 0;
-        try{
-            num = (int)(Float.parseFloat(field.getText().trim()) * 10); }
-        catch(NumberFormatException nfe) {
-            field.setText("" + slider.getValue() / 10f);
-            return;}
-        if(num > slider.getMaximum() || num < slider.getMinimum())
-            field.setText("" + slider.getValue()  / 10f);
-        else
-            slider.setValue(num);}
-    
-    private void adjustSlider2(javax.swing.JSlider slider, javax.swing.JTextField field){
-        int num = 0;
-        try{
-            num = (int)(Float.parseFloat(field.getText().trim()) * 100); }
-        catch(NumberFormatException nfe) {
-            field.setText("" + slider.getValue() / 100f);
-            return;}
-        if(num > slider.getMaximum() || num < slider.getMinimum())
-            field.setText("" + slider.getValue()  / 100f);
-        else
-            slider.setValue(num);}
-    
-    
-    
-    //****************************REC********************************************/
-    
-    
-    /** Utility field used by event firing mechanism. */
-    private javax.swing.event.EventListenerList listenerList =  null;
-    
-    
-    /** Registers ICustomizerListener to receive events.
-     * @param listener The listener to register.
-     */
-    public synchronized void addICustomizerListener(ICustomizerListener listener) {
-        if (listenerList == null ) {
-            listenerList = new javax.swing.event.EventListenerList();
-        }
-        listenerList.add(ICustomizerListener.class, listener);
-    }
-    
-    /** Removes ICustomizerListener from the list of listeners.
-     * @param listener The listener to remove.
-     */
-    public synchronized void removeICustomizerListener(ICustomizerListener listener) {
-        listenerList.remove(ICustomizerListener.class, listener);
-    }
-    
-    /** Notifies all registered listeners about the event.
-     *
-     * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-     */
-    private void fireICustomizerListenerCanceled() {
-        if (listenerList == null) return;
-        Object[] listeners = listenerList.getListenerList();
-        for (int i = listeners.length-2; i>=0; i-=2) {
-            if (listeners[i]==ICustomizerListener.class) {
-                ((ICustomizerListener)listeners[i+1]).canceled();
-            }
-        }
-    }
-    
-    /** Notifies all registered listeners about the event.
-     *
-     * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
-     */
-    private void fireICustomizerListenerDone() {
-        if (listenerList == null) return;
-        Object[] listeners = listenerList.getListenerList();
-        for (int i = listeners.length-2; i>=0; i-=2) {
-            if (listeners[i]
-            ==ICustomizerListener.class) {
-                
-                ((ICustomizerListener)listeners[i+1]).done();
-            }
-        }
-    }
-    
-    
-    private HardwareInfo hardwareInfo=null;
-    private HardwareAcquisitionConfig acqConfig=null;
-    
-    public HardwareAcquisitionConfig getAcquisitionConfig() {
-        return acqConfig;
-    }
-    
-    //ESTE É PARA ALTERAR
-    public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
-        //Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e' bom manter!
-        this.acqConfig=acqConfig;
-        if(acqConfig!=null) {
-            
-            int v1 = (int)(10*Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("v1")));
-            jSliderV1.setValue(v1);
-            int v2 = (int)(10*Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("v2")));
-            jSliderV2.setValue(v2);
-            
-            int m1 = (int)(10*Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("m1")));
-            jSliderM1.setValue(m1);
-            int m2 = (int)(10*Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("m2")));
-            jSliderM2.setValue(m2);
-            
-            int r1 = (int)(100*Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("r1")));
-            jSliderR1.setValue(r1);
-            int r2 = (int)(100*Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("r2")));
-            jSliderR2.setValue(r2);
-            
-            int a = (int)(10*Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("a")));
-            jSliderA.setValue(a);
-            
-            int elasticCollision = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("elasticCollision"));
-            jRadioButtonElastica.setSelected(elasticCollision == 1);
-            jRadioButtonNElastica.setSelected(elasticCollision == 0 );
-            
-            int tbs = (int)acqConfig.getSelectedFrequency().getFrequency();
-            jSliderTBS.setValue(tbs);
-            
-            int nSamples = acqConfig.getTotalSamples();
-            jSliderSamples.setValue(nSamples);
-        }
-    }
-    
-    public void setHardwareInfo(HardwareInfo hardwareInfo) {
-        this.hardwareInfo=hardwareInfo;
-    }
-    
-    protected HardwareInfo getHardwareInfo() {
-        return this.hardwareInfo;
-    }
-    
-    public javax.swing.JComponent getCustomizerComponent() {
-        return this;
-    }
-    
-    public javax.swing.ImageIcon getCustomizerIcon() {
-        return new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/virtual/client/colisao/resources/colisao_iconified.png"));
-    }
-    
-    //ESTE É PARA ALTERAR
-    public String getCustomizerTitle() {
-        return "Collision Experiment Configuration Utility";
-    }
-    
-    public javax.swing.JMenuBar getMenuBar() {
-        return null;
-    }
-    
-    private PlottingPanel dpanel;
-    private Dataset dataset;
-    private Arrow[] vects = new Arrow[2];
-    private DrawableShape[] circulos = new DrawableShape[2];
-    private double r1 , r2, v1, v2, a;
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonDefaultConfig;
-    private javax.swing.JButton jButtonOK;
-    private javax.swing.JLabel jLabelExpTime;
-    private javax.swing.JPanel jPanelA;
-    private javax.swing.JPanel jPanelBtns;
-    private javax.swing.JPanel jPanelC;
-    private javax.swing.JPanel jPanelDfC;
-    private javax.swing.JPanel jPanelM1;
-    private javax.swing.JPanel jPanelM2;
-    private javax.swing.JPanel jPanelNS;
-    private javax.swing.JPanel jPanelOKCnl;
-    private javax.swing.JPanel jPanelR1;
-    private javax.swing.JPanel jPanelR2;
-    private javax.swing.JPanel jPanelTBS;
-    private javax.swing.JPanel jPanelV1;
-    private javax.swing.JPanel jPanelV2;
-    private javax.swing.JRadioButton jRadioButtonElastica;
-    private javax.swing.JRadioButton jRadioButtonNElastica;
-    private javax.swing.JSlider jSliderA;
-    private javax.swing.JSlider jSliderM1;
-    private javax.swing.JSlider jSliderM2;
-    private javax.swing.JSlider jSliderR1;
-    private javax.swing.JSlider jSliderR2;
-    private javax.swing.JSlider jSliderSamples;
-    private javax.swing.JSlider jSliderTBS;
-    private javax.swing.JSlider jSliderV1;
-    private javax.swing.JSlider jSliderV2;
-    private javax.swing.JTextField jTextFieldA;
-    private javax.swing.JTextField jTextFieldM1;
-    private javax.swing.JTextField jTextFieldM2;
-    private javax.swing.JTextField jTextFieldR1;
-    private javax.swing.JTextField jTextFieldR2;
-    private javax.swing.JTextField jTextFieldSamples;
-    private javax.swing.JTextField jTextFieldTBS;
-    private javax.swing.JTextField jTextFieldV1;
-    private javax.swing.JTextField jTextFieldV2;
-    private javax.swing.JPanel panelPreview;
-    private javax.swing.JPanel panelRoot;
-    private javax.swing.JPanel panelRoot2;
-    private javax.swing.JPanel panelTBSNS;
-    private javax.swing.JPanel panelTime;
-    private javax.swing.JPanel panelVars1;
-    private javax.swing.JPanel panelVars2;
-    private javax.swing.JTabbedPane tabVars;
-    // End of variables declaration//GEN-END:variables
-    
+
+	/** Creates new form LoppingCustomizer */
+	public ColisaoCustomizer() {
+
+		initComponents();
+		initPreview();
+
+		java.util.Hashtable ht = new java.util.Hashtable(7);
+		ht = new java.util.Hashtable(7);
+		for (int i = 2; i <= 500; i += 83) {
+			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+		}
+		jSliderM1.setLabelTable(ht);
+		jSliderM2.setLabelTable(ht);
+
+		ht = new java.util.Hashtable(7);
+		for (int i = 0; i <= 200; i += 50) {
+			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 10F));
+		}
+		jSliderV2.setLabelTable(ht);
+		jSliderV1.setLabelTable(ht);
+
+		ht = new java.util.Hashtable(7);
+		for (int i = 5; i <= 100; i += 20) {
+			ht.put(new Integer(i), new javax.swing.JLabel("" + i / 100F));
+		}
+		ht.put(new Integer(100), new javax.swing.JLabel("1.0"));
+		jSliderR1.setLabelTable(ht);
+		jSliderR2.setLabelTable(ht);
+
+		updateVars();
+		updateTimer();
+	}
+
+	private void initPreview() {
+		v1 = 0;
+		v2 = 0;
+		r1 = 7;
+		r2 = 6;
+		a = 0.0;
+		updateVars();
+
+		dpanel = new PlottingPanel("x (m)", "y (m)", ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.1", "Impact Preview"));// new
+		// DrawingPanel();
+		dpanel.setPreferredSize(new java.awt.Dimension(267, 100));
+
+		panelPreview.add(dpanel);
+
+		dpanel.setSquareAspect(true);
+		dpanel.setPreferredMinMax(-1, 1, -1, 1);
+		moveBall();
+	}
+
+	public void moveBall() {
+		updateVars();
+		double x, y;
+		x = (r1 + r2) * Math.cos(Math.toRadians(a));
+		y = (r1 + r2) * -Math.sin(Math.toRadians(a));
+		dpanel.setPreferredMinMax(-1.2 * (r1 + r2), 1.2 * (r1 + r2), -1.2 * (r1 + r2), 1.2 * (r1 + r2));
+		dpanel.removeDrawable(vects[0]);
+		dpanel.removeDrawable(vects[1]);
+		dpanel.removeDrawable(circulos[0]);
+		dpanel.removeDrawable(circulos[1]);
+
+		vects[0] = new Arrow(0, 0, v1 / 10, 0);
+		vects[1] = new Arrow(x, y, -(v2 * Math.cos(Math.toRadians(a)) / 10), (v2 * Math.sin(Math.toRadians(a)) / 10));
+		vects[1].setColor(java.awt.Color.BLUE);
+		vects[0].setColor(java.awt.Color.RED);
+		circulos[1] = DrawableShape.createCircle(x, y, r2 * 2);
+		circulos[0] = DrawableShape.createCircle(0, 0, r1 * 2);
+		circulos[1].setMarkerColor((new java.awt.Color(0, 0, 255, 90)), (new java.awt.Color(0, 0, 255)));
+
+		dpanel.addDrawable(vects[0]);
+		dpanel.addDrawable(vects[1]);
+		dpanel.addDrawable(circulos[0]);
+		dpanel.addDrawable(circulos[1]);
+		dpanel.render();
+	}
+
+	public void updateVars() {
+		v1 = jSliderV1.getValue() / 10f;
+		r1 = jSliderR1.getValue() / 100f;
+		v2 = jSliderV2.getValue() / 10f;
+		r2 = jSliderR2.getValue() / 100f;
+		a = jSliderA.getValue();
+	}
+
+	public static void main(String args[]) {
+		ReCResourceBundle.loadResourceBundle("ReCExpColisao",
+				"recresource:///pt/utl/ist/elab/virtual/client/colisao/resources/ReCExpColisao");
+		javax.swing.JFrame dummy = new javax.swing.JFrame();
+		dummy.getContentPane().add(new ColisaoCustomizer());
+		dummy.pack();
+		dummy.show();
+		dummy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public void updateTimer() {
+		float expDuration = jSliderSamples.getValue() * jSliderTBS.getValue();
+		expDuration /= 1000;
+		jLabelExpTime.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.timer",
+				"Experiment Duration: ")
+				+ expDuration + " s");
+	}
+
+	/**
+	 * This method is called from within the constructor to initialize the form.
+	 * WARNING: Do NOT modify this code. The content of this method is always
+	 * regenerated by the Form Editor.
+	 */
+	private void initComponents() {// GEN-BEGIN:initComponents
+		java.awt.GridBagConstraints gridBagConstraints;
+
+		buttonGroup1 = new javax.swing.ButtonGroup();
+		panelRoot = new javax.swing.JPanel();
+		panelRoot2 = new javax.swing.JPanel();
+		panelPreview = new javax.swing.JPanel();
+		panelTime = new javax.swing.JPanel();
+		panelTBSNS = new javax.swing.JPanel();
+		jPanelTBS = new javax.swing.JPanel();
+		jSliderTBS = new javax.swing.JSlider();
+		jTextFieldTBS = new javax.swing.JTextField();
+		jPanelNS = new javax.swing.JPanel();
+		jSliderSamples = new javax.swing.JSlider();
+		jTextFieldSamples = new javax.swing.JTextField();
+		jLabelExpTime = new javax.swing.JLabel();
+		tabVars = new javax.swing.JTabbedPane();
+		panelVars1 = new javax.swing.JPanel();
+		jPanelV1 = new javax.swing.JPanel();
+		jSliderV1 = new javax.swing.JSlider();
+		jTextFieldV1 = new javax.swing.JTextField();
+		jPanelV2 = new javax.swing.JPanel();
+		jSliderV2 = new javax.swing.JSlider();
+		jTextFieldV2 = new javax.swing.JTextField();
+		jPanelR1 = new javax.swing.JPanel();
+		jSliderR1 = new javax.swing.JSlider();
+		jTextFieldR1 = new javax.swing.JTextField();
+		jPanelR2 = new javax.swing.JPanel();
+		jSliderR2 = new javax.swing.JSlider();
+		jTextFieldR2 = new javax.swing.JTextField();
+		panelVars2 = new javax.swing.JPanel();
+		jPanelM1 = new javax.swing.JPanel();
+		jSliderM1 = new javax.swing.JSlider();
+		jTextFieldM1 = new javax.swing.JTextField();
+		jPanelM2 = new javax.swing.JPanel();
+		jSliderM2 = new javax.swing.JSlider();
+		jTextFieldM2 = new javax.swing.JTextField();
+		jPanelA = new javax.swing.JPanel();
+		jSliderA = new javax.swing.JSlider();
+		jTextFieldA = new javax.swing.JTextField();
+		jPanelC = new javax.swing.JPanel();
+		jRadioButtonElastica = new javax.swing.JRadioButton();
+		jRadioButtonNElastica = new javax.swing.JRadioButton();
+		jPanelBtns = new javax.swing.JPanel();
+		jPanelOKCnl = new javax.swing.JPanel();
+		jButtonOK = new javax.swing.JButton();
+		jButtonCancel = new javax.swing.JButton();
+		jPanelDfC = new javax.swing.JPanel();
+		jButtonDefaultConfig = new javax.swing.JButton();
+
+		setLayout(new java.awt.BorderLayout());
+
+		panelRoot.setLayout(new java.awt.BorderLayout());
+
+		panelRoot2.setLayout(new java.awt.BorderLayout());
+
+		panelPreview.setLayout(new java.awt.BorderLayout());
+
+		panelPreview.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.1", "System Preview")));
+		panelRoot2.add(panelPreview, java.awt.BorderLayout.CENTER);
+
+		panelTime.setLayout(new java.awt.BorderLayout());
+
+		panelTBSNS.setLayout(new java.awt.GridLayout(1, 0));
+
+		jPanelTBS.setLayout(new java.awt.BorderLayout());
+
+		jPanelTBS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.tbs", "TBS")));
+		jPanelTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.tip.tbs",
+				"Time between samples"));
+		jPanelTBS.setVerifyInputWhenFocusTarget(false);
+		jSliderTBS.setPaintLabels(true);
+		jSliderTBS.setOrientation(javax.swing.JSlider.VERTICAL);
+		jSliderTBS.setPaintTicks(true);
+		jSliderTBS.setMinorTickSpacing(1);
+		jSliderTBS.setMajorTickSpacing(4);
+		jSliderTBS.setValue(5);
+		jSliderTBS.setMinimum(1);
+		jSliderTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.tip.tbs",
+				"Time between samples"));
+		jSliderTBS.setMaximum(25);
+		jSliderTBS.setSnapToTicks(true);
+		jSliderTBS.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				jSliderTBSStateChanged(evt);
+			}
+		});
+
+		jPanelTBS.add(jSliderTBS, java.awt.BorderLayout.CENTER);
+
+		jTextFieldTBS.setColumns(4);
+		jTextFieldTBS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldTBS.setText("80");
+		jTextFieldTBS.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(java.awt.event.FocusEvent evt) {
+				jTextFieldTBSFocusLost(evt);
+			}
+		});
+
+		jPanelTBS.add(jTextFieldTBS, java.awt.BorderLayout.SOUTH);
+
+		panelTBSNS.add(jPanelTBS);
+
+		jPanelNS.setLayout(new java.awt.BorderLayout());
+
+		jPanelNS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.samples", "N Samples")));
+		jPanelNS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.tip.samples",
+				"Number of samples"));
+		jPanelNS.setVerifyInputWhenFocusTarget(false);
+		jSliderSamples.setPaintLabels(true);
+		jSliderSamples.setOrientation(javax.swing.JSlider.VERTICAL);
+		jSliderSamples.setPaintTicks(true);
+		jSliderSamples.setMinorTickSpacing(20);
+		jSliderSamples.setMajorTickSpacing(100);
+		jSliderSamples.setValue(100);
+		jSliderSamples.setMinimum(1);
+		jSliderSamples.setToolTipText(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.tip.samples", "Number of samples"));
+		jSliderSamples.setMaximum(1001);
+		jSliderSamples.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				jSliderSamplesStateChanged(evt);
+			}
+		});
+
+		jPanelNS.add(jSliderSamples, java.awt.BorderLayout.CENTER);
+
+		jTextFieldSamples.setColumns(4);
+		jTextFieldSamples.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldSamples.setText("100");
+		jTextFieldSamples.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(java.awt.event.FocusEvent evt) {
+				jTextFieldSamplesFocusLost(evt);
+			}
+		});
+
+		jPanelNS.add(jTextFieldSamples, java.awt.BorderLayout.SOUTH);
+
+		panelTBSNS.add(jPanelNS);
+
+		panelTime.add(panelTBSNS, java.awt.BorderLayout.CENTER);
+
+		jLabelExpTime.setText("Teste da label");
+		panelTime.add(jLabelExpTime, java.awt.BorderLayout.SOUTH);
+
+		panelRoot2.add(panelTime, java.awt.BorderLayout.EAST);
+
+		panelRoot.add(panelRoot2, java.awt.BorderLayout.CENTER);
+
+		panelVars1.setLayout(new java.awt.GridLayout(4, 0));
+
+		jPanelV1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.2", "Circle 1 Velocity (m/s)")));
+		jSliderV1.setPaintLabels(true);
+		jSliderV1.setPaintTicks(true);
+		jSliderV1.setMinorTickSpacing(10);
+		jSliderV1.setMajorTickSpacing(50);
+		jSliderV1.setValue(20);
+		jSliderV1.setMaximum(200);
+		jSliderV1.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				jSliderV1StateChanged(evt);
+			}
+		});
+
+		jPanelV1.add(jSliderV1);
+
+		jTextFieldV1.setColumns(4);
+		jTextFieldV1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldV1.setText("2");
+		jTextFieldV1.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(java.awt.event.FocusEvent evt) {
+				jTextFieldV1FocusLost(evt);
+			}
+		});
+
+		jPanelV1.add(jTextFieldV1);
+
+		panelVars1.add(jPanelV1);
+
+		jPanelV2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.3", "Circle 2 Velocity (m/s)")));
+		jPanelV2.setEnabled(false);
+		jSliderV2.setPaintLabels(true);
+		jSliderV2.setPaintTicks(true);
+		jSliderV2.setMinorTickSpacing(10);
+		jSliderV2.setMajorTickSpacing(50);
+		jSliderV2.setValue(20);
+		jSliderV2.setMaximum(200);
+		jSliderV2.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				jSliderV2StateChanged(evt);
+			}
+		});
+
+		jPanelV2.add(jSliderV2);
+
+		jTextFieldV2.setColumns(4);
+		jTextFieldV2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldV2.setText("2");
+		jTextFieldV2.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(java.awt.event.FocusEvent evt) {
+				jTextFieldV2FocusLost(evt);
+			}
+		});
+
+		jPanelV2.add(jTextFieldV2);
+
+		panelVars1.add(jPanelV2);
+
+		jPanelR1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.4", "Circle 1 Redius (m)")));
+		jPanelR1.setEnabled(false);
+		jSliderR1.setPaintLabels(true);
+		jSliderR1.setPaintTicks(true);
+		jSliderR1.setMinorTickSpacing(4);
+		jSliderR1.setMajorTickSpacing(20);
+		jSliderR1.setValue(5);
+		jSliderR1.setMinimum(5);
+		jSliderR1.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				jSliderR1StateChanged(evt);
+			}
+		});
+
+		jPanelR1.add(jSliderR1);
+
+		jTextFieldR1.setColumns(4);
+		jTextFieldR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldR1.setText("0.05");
+		jTextFieldR1.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(java.awt.event.FocusEvent evt) {
+				jTextFieldR1FocusLost(evt);
+			}
+		});
+
+		jPanelR1.add(jTextFieldR1);
+
+		panelVars1.add(jPanelR1);
+
+		jPanelR2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.5", "Circle 2 Radius (m)")));
+		jSliderR2.setPaintLabels(true);
+		jSliderR2.setPaintTicks(true);
+		jSliderR2.setMinorTickSpacing(4);
+		jSliderR2.setMajorTickSpacing(20);
+		jSliderR2.setValue(5);
+		jSliderR2.setMinimum(5);
+		jSliderR2.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				jSliderR2StateChanged(evt);
+			}
+		});
+
+		jPanelR2.add(jSliderR2);
+
+		jTextFieldR2.setColumns(4);
+		jTextFieldR2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldR2.setText("0.05");
+		jTextFieldR2.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(java.awt.event.FocusEvent evt) {
+				jTextFieldR2FocusLost(evt);
+			}
+		});
+
+		jPanelR2.add(jTextFieldR2);
+
+		panelVars1.add(jPanelR2);
+
+		tabVars.addTab(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.12",
+				"Particle Settings"), panelVars1);
+
+		panelVars2.setLayout(new java.awt.GridLayout(4, 0));
+
+		jPanelM1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.6", "Circle 1 Mass (kg)")));
+		jSliderM1.setPaintLabels(true);
+		jSliderM1.setPaintTicks(true);
+		jSliderM1.setMinorTickSpacing(20);
+		jSliderM1.setMajorTickSpacing(83);
+		jSliderM1.setValue(150);
+		jSliderM1.setMinimum(2);
+		jSliderM1.setMaximum(500);
+		jSliderM1.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				jSliderM1StateChanged(evt);
+			}
+		});
+
+		jPanelM1.add(jSliderM1);
+
+		jTextFieldM1.setColumns(4);
+		jTextFieldM1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldM1.setText("15");
+		jTextFieldM1.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(java.awt.event.FocusEvent evt) {
+				jTextFieldM1FocusLost(evt);
+			}
+		});
+
+		jPanelM1.add(jTextFieldM1);
+
+		panelVars2.add(jPanelM1);
+
+		jPanelM2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.7", "Circle 1 Mass (kg)")));
+		jSliderM2.setPaintLabels(true);
+		jSliderM2.setPaintTicks(true);
+		jSliderM2.setMinorTickSpacing(20);
+		jSliderM2.setMajorTickSpacing(83);
+		jSliderM2.setValue(150);
+		jSliderM2.setMinimum(2);
+		jSliderM2.setMaximum(500);
+		jSliderM2.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				jSliderM2StateChanged(evt);
+			}
+		});
+
+		jPanelM2.add(jSliderM2);
+
+		jTextFieldM2.setColumns(4);
+		jTextFieldM2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldM2.setText("15");
+		jTextFieldM2.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(java.awt.event.FocusEvent evt) {
+				jTextFieldM2FocusLost(evt);
+			}
+		});
+
+		jPanelM2.add(jTextFieldM2);
+
+		panelVars2.add(jPanelM2);
+
+		jPanelA.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.8", "Impact Angle (degrees)")));
+		jSliderA.setPaintLabels(true);
+		jSliderA.setPaintTicks(true);
+		jSliderA.setMinorTickSpacing(10);
+		jSliderA.setMajorTickSpacing(60);
+		jSliderA.setValue(0);
+		jSliderA.setMaximum(360);
+		jSliderA.addChangeListener(new javax.swing.event.ChangeListener() {
+			public void stateChanged(javax.swing.event.ChangeEvent evt) {
+				jSliderAStateChanged(evt);
+			}
+		});
+
+		jPanelA.add(jSliderA);
+
+		jTextFieldA.setColumns(4);
+		jTextFieldA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		jTextFieldA.setText("0");
+		jTextFieldA.addFocusListener(new java.awt.event.FocusAdapter() {
+			public void focusLost(java.awt.event.FocusEvent evt) {
+				jTextFieldAFocusLost(evt);
+			}
+		});
+
+		jPanelA.add(jTextFieldA);
+
+		panelVars2.add(jPanelA);
+
+		jPanelC.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.9", "Type of Impact")));
+		jRadioButtonElastica.setSelected(true);
+		jRadioButtonElastica.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.10",
+				"Elastic"));
+		buttonGroup1.add(jRadioButtonElastica);
+		jPanelC.add(jRadioButtonElastica);
+
+		jRadioButtonNElastica.setText(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.11", "Perfectly Inelastic"));
+		buttonGroup1.add(jRadioButtonNElastica);
+		jPanelC.add(jRadioButtonNElastica);
+
+		panelVars2.add(jPanelC);
+
+		tabVars.addTab(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.13",
+				"Particle and Coliison Settings"), panelVars2);
+
+		panelRoot.add(tabVars, java.awt.BorderLayout.SOUTH);
+
+		add(panelRoot, java.awt.BorderLayout.CENTER);
+
+		jPanelBtns.setLayout(new java.awt.GridBagLayout());
+
+		jButtonOK.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.ok", "OK"));
+		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButtonOKActionPerformed(evt);
+			}
+		});
+
+		jPanelOKCnl.add(jButtonOK);
+
+		jButtonCancel.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.cancel",
+				"Cancel"));
+		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButtonCancelActionPerformed(evt);
+			}
+		});
+
+		jPanelOKCnl.add(jButtonCancel);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.weightx = 1.0;
+		jPanelBtns.add(jPanelOKCnl, gridBagConstraints);
+
+		jButtonDefaultConfig.setText(ReCResourceBundle.findStringOrDefault(
+				"ReCExpColisao$rec.exp.customizer.title.dfc", "Default Configuration"));
+		jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButtonDefaultConfigActionPerformed(evt);
+			}
+		});
+
+		jPanelDfC.add(jButtonDefaultConfig);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+		jPanelBtns.add(jPanelDfC, gridBagConstraints);
+
+		add(jPanelBtns, java.awt.BorderLayout.SOUTH);
+
+	}// GEN-END:initComponents
+
+	private void jTextFieldR2FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldR2FocusLost
+		adjustSlider2(jSliderR2, jTextFieldR2);
+	}// GEN-LAST:event_jTextFieldR2FocusLost
+
+	private void jTextFieldR1FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldR1FocusLost
+		adjustSlider2(jSliderR1, jTextFieldR1);
+	}// GEN-LAST:event_jTextFieldR1FocusLost
+
+	private void jSliderR2StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderR2StateChanged
+		moveBall();
+		jTextFieldR2.setText("" + jSliderR2.getValue() / 100f);
+	}// GEN-LAST:event_jSliderR2StateChanged
+
+	private void jSliderR1StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderR1StateChanged
+		moveBall();
+		jTextFieldR1.setText("" + jSliderR1.getValue() / 100f);
+	}// GEN-LAST:event_jSliderR1StateChanged
+
+	private void jTextFieldV1FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldV1FocusLost
+		adjustSlider1(jSliderV1, jTextFieldV1);
+	}// GEN-LAST:event_jTextFieldV1FocusLost
+
+	private void jSliderV1StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderV1StateChanged
+		moveBall();
+		jTextFieldV1.setText("" + jSliderV1.getValue() / 10f);
+	}// GEN-LAST:event_jSliderV1StateChanged
+
+	private void jTextFieldSamplesFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldSamplesFocusLost
+		adjustSlider(jSliderSamples, jTextFieldSamples);
+	}// GEN-LAST:event_jTextFieldSamplesFocusLost
+
+	private void jSliderSamplesStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderSamplesStateChanged
+		updateTimer();
+		jTextFieldSamples.setText("" + jSliderSamples.getValue());
+	}// GEN-LAST:event_jSliderSamplesStateChanged
+
+	private void jTextFieldTBSFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldTBSFocusLost
+		adjustSlider(jSliderTBS, jTextFieldTBS);
+	}// GEN-LAST:event_jTextFieldTBSFocusLost
+
+	private void jSliderTBSStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderTBSStateChanged
+		updateTimer();
+		jTextFieldTBS.setText("" + jSliderTBS.getValue());
+	}// GEN-LAST:event_jSliderTBSStateChanged
+
+	private void jTextFieldM2FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldM2FocusLost
+		adjustSlider1(jSliderM2, jTextFieldM2);
+	}// GEN-LAST:event_jTextFieldM2FocusLost
+
+	private void jSliderM2StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderM2StateChanged
+		jTextFieldM2.setText("" + jSliderM2.getValue() / 10f);
+	}// GEN-LAST:event_jSliderM2StateChanged
+
+	private void jTextFieldM1FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldM1FocusLost
+		adjustSlider1(jSliderM1, jTextFieldM1);
+	}// GEN-LAST:event_jTextFieldM1FocusLost
+
+	private void jTextFieldAFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldAFocusLost
+		adjustSlider(jSliderA, jTextFieldA);
+	}// GEN-LAST:event_jTextFieldAFocusLost
+
+	private void jSliderAStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderAStateChanged
+		moveBall();
+		jTextFieldA.setText("" + jSliderA.getValue());
+	}// GEN-LAST:event_jSliderAStateChanged
+
+	private void jTextFieldV2FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextFieldV2FocusLost
+		adjustSlider1(jSliderV2, jTextFieldV2);
+	}// GEN-LAST:event_jTextFieldV2FocusLost
+
+	private void jSliderV2StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderV2StateChanged
+		moveBall();
+		jTextFieldV2.setText("" + jSliderV2.getValue() / 10f);
+	}// GEN-LAST:event_jSliderV2StateChanged
+
+	private void jSliderM1StateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_jSliderM1StateChanged
+		jTextFieldM1.setText("" + jSliderM1.getValue() / 10f);
+	}// GEN-LAST:event_jSliderM1StateChanged
+
+	private void jButtonDefaultConfigActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonDefaultConfigActionPerformed
+		jSliderA.setValue(0);
+		jSliderV1.setValue(20);
+		jSliderV2.setValue(20);
+		jSliderM1.setValue(150);
+		jSliderM2.setValue(150);
+		jSliderR1.setValue(5);
+		jSliderR2.setValue(5);
+		// jSliderTBS.setValue();
+		// jSliderSamples.setValue();
+	}// GEN-LAST:event_jButtonDefaultConfigActionPerformed
+
+	private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCancelActionPerformed
+		fireICustomizerListenerCanceled();
+	}// GEN-LAST:event_jButtonCancelActionPerformed
+
+	private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
+		acqConfig.setTotalSamples(jSliderSamples.getValue());
+
+		acqConfig.setSelectedFrequency(new Frequency((double) jSliderTBS.getValue(), hardwareInfo
+				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
+				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+
+		acqConfig.getSelectedHardwareParameter("v1").setParameterValue("" + jSliderV1.getValue() / 10f);
+		acqConfig.getSelectedHardwareParameter("v2").setParameterValue("" + jSliderV2.getValue() / 10F);
+		acqConfig.getSelectedHardwareParameter("m1").setParameterValue("" + jSliderM1.getValue() / 10F);
+		acqConfig.getSelectedHardwareParameter("m2").setParameterValue("" + jSliderM2.getValue() / 10F);
+		acqConfig.getSelectedHardwareParameter("r1").setParameterValue("" + jSliderR1.getValue() / 100F);
+		acqConfig.getSelectedHardwareParameter("r2").setParameterValue("" + jSliderR2.getValue() / 100F);
+		acqConfig.getSelectedHardwareParameter("a").setParameterValue("" + jSliderA.getValue());
+		if (jRadioButtonElastica.isSelected()) {
+			acqConfig.getSelectedHardwareParameter("elasticCollision").setParameterValue("1");
+		} else {
+			acqConfig.getSelectedHardwareParameter("elasticCollision").setParameterValue("0");
+		}
+		fireICustomizerListenerDone();
+
+	}// GEN-LAST:event_jButtonOKActionPerformed
+
+	// Metodos que verificam a validade do que foi introduzido na text field
+
+	private void adjustSlider(javax.swing.JSlider slider, javax.swing.JTextField field) {
+		int num = 0;
+		try {
+			num = (int) (Float.parseFloat(field.getText().trim()));
+		} catch (NumberFormatException nfe) {
+			field.setText("" + slider.getValue());
+			return;
+		}
+		if (num > slider.getMaximum() || num < slider.getMinimum())
+			field.setText("" + slider.getValue());
+		else
+			slider.setValue(num);
+	}
+
+	private void adjustSlider1(javax.swing.JSlider slider, javax.swing.JTextField field) {
+		int num = 0;
+		try {
+			num = (int) (Float.parseFloat(field.getText().trim()) * 10);
+		} catch (NumberFormatException nfe) {
+			field.setText("" + slider.getValue() / 10f);
+			return;
+		}
+		if (num > slider.getMaximum() || num < slider.getMinimum())
+			field.setText("" + slider.getValue() / 10f);
+		else
+			slider.setValue(num);
+	}
+
+	private void adjustSlider2(javax.swing.JSlider slider, javax.swing.JTextField field) {
+		int num = 0;
+		try {
+			num = (int) (Float.parseFloat(field.getText().trim()) * 100);
+		} catch (NumberFormatException nfe) {
+			field.setText("" + slider.getValue() / 100f);
+			return;
+		}
+		if (num > slider.getMaximum() || num < slider.getMinimum())
+			field.setText("" + slider.getValue() / 100f);
+		else
+			slider.setValue(num);
+	}
+
+	// ****************************REC********************************************/
+
+	/** Utility field used by event firing mechanism. */
+	private javax.swing.event.EventListenerList listenerList = null;
+
+	/**
+	 * Registers ICustomizerListener to receive events.
+	 * 
+	 * @param listener The listener to register.
+	 */
+	public synchronized void addICustomizerListener(ICustomizerListener listener) {
+		if (listenerList == null) {
+			listenerList = new javax.swing.event.EventListenerList();
+		}
+		listenerList.add(ICustomizerListener.class, listener);
+	}
+
+	/**
+	 * Removes ICustomizerListener from the list of listeners.
+	 * 
+	 * @param listener The listener to remove.
+	 */
+	public synchronized void removeICustomizerListener(ICustomizerListener listener) {
+		listenerList.remove(ICustomizerListener.class, listener);
+	}
+
+	/**
+	 * Notifies all registered listeners about the event.
+	 * 
+	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
+	 */
+	private void fireICustomizerListenerCanceled() {
+		if (listenerList == null)
+			return;
+		Object[] listeners = listenerList.getListenerList();
+		for (int i = listeners.length - 2; i >= 0; i -= 2) {
+			if (listeners[i] == ICustomizerListener.class) {
+				((ICustomizerListener) listeners[i + 1]).canceled();
+			}
+		}
+	}
+
+	/**
+	 * Notifies all registered listeners about the event.
+	 * 
+	 * @param param1 Parameter #1 of the <CODE>EventObject<CODE> constructor.
+	 */
+	private void fireICustomizerListenerDone() {
+		if (listenerList == null)
+			return;
+		Object[] listeners = listenerList.getListenerList();
+		for (int i = listeners.length - 2; i >= 0; i -= 2) {
+			if (listeners[i] == ICustomizerListener.class) {
+
+				((ICustomizerListener) listeners[i + 1]).done();
+			}
+		}
+	}
+
+	private HardwareInfo hardwareInfo = null;
+	private HardwareAcquisitionConfig acqConfig = null;
+
+	public HardwareAcquisitionConfig getAcquisitionConfig() {
+		return acqConfig;
+	}
+
+	// ESTE É PARA ALTERAR
+	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
+		// Aqui são fornecidos parametros do ultimo utilizador que fez a exp, e'
+		// bom manter!
+		this.acqConfig = acqConfig;
+		if (acqConfig != null) {
+
+			int v1 = (int) (10 * Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("v1")));
+			jSliderV1.setValue(v1);
+			int v2 = (int) (10 * Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("v2")));
+			jSliderV2.setValue(v2);
+
+			int m1 = (int) (10 * Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("m1")));
+			jSliderM1.setValue(m1);
+			int m2 = (int) (10 * Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("m2")));
+			jSliderM2.setValue(m2);
+
+			int r1 = (int) (100 * Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("r1")));
+			jSliderR1.setValue(r1);
+			int r2 = (int) (100 * Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("r2")));
+			jSliderR2.setValue(r2);
+
+			int a = (int) (10 * Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("a")));
+			jSliderA.setValue(a);
+
+			int elasticCollision = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("elasticCollision"));
+			jRadioButtonElastica.setSelected(elasticCollision == 1);
+			jRadioButtonNElastica.setSelected(elasticCollision == 0);
+
+			int tbs = (int) acqConfig.getSelectedFrequency().getFrequency();
+			jSliderTBS.setValue(tbs);
+
+			int nSamples = acqConfig.getTotalSamples();
+			jSliderSamples.setValue(nSamples);
+		}
+	}
+
+	public void setHardwareInfo(HardwareInfo hardwareInfo) {
+		this.hardwareInfo = hardwareInfo;
+	}
+
+	protected HardwareInfo getHardwareInfo() {
+		return this.hardwareInfo;
+	}
+
+	public javax.swing.JComponent getCustomizerComponent() {
+		return this;
+	}
+
+	public javax.swing.ImageIcon getCustomizerIcon() {
+		return new javax.swing.ImageIcon(getClass().getResource(
+				"/pt/utl/ist/elab/virtual/client/colisao/resources/colisao_iconified.png"));
+	}
+
+	// ESTE É PARA ALTERAR
+	public String getCustomizerTitle() {
+		return "Collision Experiment Configuration Utility";
+	}
+
+	public javax.swing.JMenuBar getMenuBar() {
+		return null;
+	}
+
+	private PlottingPanel dpanel;
+	private Dataset dataset;
+	private Arrow[] vects = new Arrow[2];
+	private DrawableShape[] circulos = new DrawableShape[2];
+	private double r1, r2, v1, v2, a;
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.ButtonGroup buttonGroup1;
+	private javax.swing.JButton jButtonCancel;
+	private javax.swing.JButton jButtonDefaultConfig;
+	private javax.swing.JButton jButtonOK;
+	private javax.swing.JLabel jLabelExpTime;
+	private javax.swing.JPanel jPanelA;
+	private javax.swing.JPanel jPanelBtns;
+	private javax.swing.JPanel jPanelC;
+	private javax.swing.JPanel jPanelDfC;
+	private javax.swing.JPanel jPanelM1;
+	private javax.swing.JPanel jPanelM2;
+	private javax.swing.JPanel jPanelNS;
+	private javax.swing.JPanel jPanelOKCnl;
+	private javax.swing.JPanel jPanelR1;
+	private javax.swing.JPanel jPanelR2;
+	private javax.swing.JPanel jPanelTBS;
+	private javax.swing.JPanel jPanelV1;
+	private javax.swing.JPanel jPanelV2;
+	private javax.swing.JRadioButton jRadioButtonElastica;
+	private javax.swing.JRadioButton jRadioButtonNElastica;
+	private javax.swing.JSlider jSliderA;
+	private javax.swing.JSlider jSliderM1;
+	private javax.swing.JSlider jSliderM2;
+	private javax.swing.JSlider jSliderR1;
+	private javax.swing.JSlider jSliderR2;
+	private javax.swing.JSlider jSliderSamples;
+	private javax.swing.JSlider jSliderTBS;
+	private javax.swing.JSlider jSliderV1;
+	private javax.swing.JSlider jSliderV2;
+	private javax.swing.JTextField jTextFieldA;
+	private javax.swing.JTextField jTextFieldM1;
+	private javax.swing.JTextField jTextFieldM2;
+	private javax.swing.JTextField jTextFieldR1;
+	private javax.swing.JTextField jTextFieldR2;
+	private javax.swing.JTextField jTextFieldSamples;
+	private javax.swing.JTextField jTextFieldTBS;
+	private javax.swing.JTextField jTextFieldV1;
+	private javax.swing.JTextField jTextFieldV2;
+	private javax.swing.JPanel panelPreview;
+	private javax.swing.JPanel panelRoot;
+	private javax.swing.JPanel panelRoot2;
+	private javax.swing.JPanel panelTBSNS;
+	private javax.swing.JPanel panelTime;
+	private javax.swing.JPanel panelVars1;
+	private javax.swing.JPanel panelVars2;
+	private javax.swing.JTabbedPane tabVars;
+	// End of variables declaration//GEN-END:variables
+
 }

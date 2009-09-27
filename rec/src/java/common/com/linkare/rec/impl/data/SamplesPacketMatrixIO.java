@@ -12,73 +12,63 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.linkare.rec.data.acquisition.SamplesPacket;
+
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class SamplesPacketMatrixIO implements Serializable
-{
-    SequencedObjectIO ioDelegate=null;
-    
-    public SamplesPacketMatrixIO() throws IOException
-    {
-	ioDelegate=new SequencedObjectIO();
-    }
-    /** Getter for property file.
-     * @return Value of property file.
-     *
-     */
-    public File getFile() throws IOException
-    {
-	return ioDelegate.getFile();
-    }
-    
-    /** Setter for property file.
-     * @param file New value of property file.
-     *
-     */
-    public void setFile(File file) throws IOException
-    {
-	ioDelegate.setFile(file);
-    }
-    
-    public SamplesPacket[] getSamplesPackets(int packetStart, int packetEnd)
-    throws SamplesPacketReadException
-    {
-	try
-	{
-	    Object[] oRead=ioDelegate.readObjects(packetStart,packetEnd);
-	    SamplesPacket[] retVal=new SamplesPacket[packetEnd-packetStart+1];
-	    System.arraycopy(oRead, 0, retVal, 0, retVal.length);
-	    return retVal;
+public class SamplesPacketMatrixIO implements Serializable {
+	SequencedObjectIO ioDelegate = null;
+
+	public SamplesPacketMatrixIO() throws IOException {
+		ioDelegate = new SequencedObjectIO();
 	}
-	catch(SequencedObjectReadException e)
-	{
-	    throw new SamplesPacketReadException(e,e.getErrorIndex());
+
+	/**
+	 * Getter for property file.
+	 * 
+	 * @return Value of property file.
+	 * 
+	 */
+	public File getFile() throws IOException {
+		return ioDelegate.getFile();
 	}
-    }
-    
-    public void write(SamplesPacket[] packets)
-    throws IOException
-    {
-	ioDelegate.writeObjects(packets);
-    }
-    
-    public void write(Object[] packets)
-    throws IOException
-    {
-	ioDelegate.writeObjects(packets);
-    }
-    
-    public void write(ArrayList packets)
-    throws IOException
-    {
-	ioDelegate.writeObjects(packets.toArray());
-    }
-    
-    public int size()
-    {
-	return ioDelegate.size();
-    }
-    
+
+	/**
+	 * Setter for property file.
+	 * 
+	 * @param file New value of property file.
+	 * 
+	 */
+	public void setFile(File file) throws IOException {
+		ioDelegate.setFile(file);
+	}
+
+	public SamplesPacket[] getSamplesPackets(int packetStart, int packetEnd) throws SamplesPacketReadException {
+		try {
+			Object[] oRead = ioDelegate.readObjects(packetStart, packetEnd);
+			SamplesPacket[] retVal = new SamplesPacket[packetEnd - packetStart + 1];
+			System.arraycopy(oRead, 0, retVal, 0, retVal.length);
+			return retVal;
+		} catch (SequencedObjectReadException e) {
+			throw new SamplesPacketReadException(e, e.getErrorIndex());
+		}
+	}
+
+	public void write(SamplesPacket[] packets) throws IOException {
+		ioDelegate.writeObjects(packets);
+	}
+
+	public void write(Object[] packets) throws IOException {
+		ioDelegate.writeObjects(packets);
+	}
+
+	public void write(ArrayList packets) throws IOException {
+		ioDelegate.writeObjects(packets.toArray());
+	}
+
+	public int size() {
+		return ioDelegate.size();
+	}
+
 }

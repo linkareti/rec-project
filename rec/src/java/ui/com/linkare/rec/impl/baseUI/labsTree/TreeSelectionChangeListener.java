@@ -7,14 +7,17 @@
 package com.linkare.rec.impl.baseUI.labsTree;
 
 /**
- *
- * @author  André
+ * 
+ * @author André
  */
-public interface TreeSelectionChangeListener extends java.util.EventListener
-{
-    void apparatusSelectionChange(ApparatusSelectionEvent selectevent);
-    void defaultConfigSelectionChange(DefaultConfigSelectionEvent selectevent);
-    void displaySelectionChange(DisplaySelectionEvent selectevent);
-    void webResourceSelectionChange(WebResourceSelectionEvent selectevent);
-    void labSelectionChange(LabSelectionEvent selectevent);
+public interface TreeSelectionChangeListener extends java.util.EventListener {
+	void apparatusSelectionChange(ApparatusSelectionEvent selectevent);
+
+	void defaultConfigSelectionChange(DefaultConfigSelectionEvent selectevent);
+
+	void displaySelectionChange(DisplaySelectionEvent selectevent);
+
+	void webResourceSelectionChange(WebResourceSelectionEvent selectevent);
+
+	void labSelectionChange(LabSelectionEvent selectevent);
 }

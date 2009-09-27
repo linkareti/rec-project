@@ -7,18 +7,16 @@
 package pt.utl.ist.elab.client.voscilador.displays;
 
 /**
- *
- * @author  RF
+ * 
+ * @author RF
  */
-public class RadiusTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
-{
-    
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public RadiusTimeChart()
-    {
-        super();
-	setChannelDisplayX(0);
-	setChannelDisplayY(1);
-    }
-    
+public class RadiusTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public RadiusTimeChart() {
+		super();
+		setChannelDisplayX(0);
+		setChannelDisplayY(1);
+	}
+
 }

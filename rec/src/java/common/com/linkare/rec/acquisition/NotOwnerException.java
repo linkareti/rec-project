@@ -28,8 +28,7 @@ public final class NotOwnerException extends org.omg.CORBA.UserException {
 		currentOwner = _currentOwner;
 	} // ctor
 
-	public NotOwnerException(String $reason, int _errorCode,
-			String _currentOwner) {
+	public NotOwnerException(String $reason, int _errorCode, String _currentOwner) {
 		super(NotOwnerExceptionHelper.id() + "  " + $reason);
 		errorCode = _errorCode;
 		currentOwner = _currentOwner;

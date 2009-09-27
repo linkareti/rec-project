@@ -7,17 +7,15 @@
 package pt.utl.ist.elab.client.gamma.displays;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
-public class PressionTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable
-{
-    
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public PressionTable()
-    {
-        super();
-        setColArray(new int[]{0,1});
-    }
-    
+public class PressionTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable {
+
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public PressionTable() {
+		super();
+		setColArray(new int[] { 0, 1 });
+	}
+
 }

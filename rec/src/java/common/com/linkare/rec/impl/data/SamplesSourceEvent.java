@@ -7,46 +7,47 @@
 package com.linkare.rec.impl.data;
 
 import com.linkare.rec.impl.utils.IntersectableEvent;
+
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class SamplesSourceEvent extends java.util.EventObject implements IntersectableEvent
-{
-    private int sampleLargestIndex;
-    /** Creates a new instance of SamplesSourceEvent */
-    public SamplesSourceEvent(SamplesSource source,int sampleLargestIndex)
-    {
-	super(source);
-	setSampleLargestIndex(sampleLargestIndex);
-    }
-    
-    public boolean intersectTo(IntersectableEvent other)
-    {
-	if(other==null || !(other instanceof SamplesSourceEvent))
-	    return false;
-	
-	SamplesSourceEvent evt=(SamplesSourceEvent)other;
-	setSampleLargestIndex(Math.max(getSampleLargestIndex(),evt.getSampleLargestIndex()));
-	return true;
-    }
-    
-    /** Getter for property sampleLargestIndex.
-     * @return Value of property sampleLargestIndex.
-     *
-     */
-    public int getSampleLargestIndex()
-    {
-	return sampleLargestIndex;
-    }
-    
-    /** Setter for property sampleLargestIndex.
-     * @param sampleLargestIndex New value of property sampleLargestIndex.
-     *
-     */
-    private void setSampleLargestIndex(int sampleLargestIndex)
-    {
-	this.sampleLargestIndex = sampleLargestIndex;
-    }
-    
+public class SamplesSourceEvent extends java.util.EventObject implements IntersectableEvent {
+	private int sampleLargestIndex;
+
+	/** Creates a new instance of SamplesSourceEvent */
+	public SamplesSourceEvent(SamplesSource source, int sampleLargestIndex) {
+		super(source);
+		setSampleLargestIndex(sampleLargestIndex);
+	}
+
+	public boolean intersectTo(IntersectableEvent other) {
+		if (other == null || !(other instanceof SamplesSourceEvent))
+			return false;
+
+		SamplesSourceEvent evt = (SamplesSourceEvent) other;
+		setSampleLargestIndex(Math.max(getSampleLargestIndex(), evt.getSampleLargestIndex()));
+		return true;
+	}
+
+	/**
+	 * Getter for property sampleLargestIndex.
+	 * 
+	 * @return Value of property sampleLargestIndex.
+	 * 
+	 */
+	public int getSampleLargestIndex() {
+		return sampleLargestIndex;
+	}
+
+	/**
+	 * Setter for property sampleLargestIndex.
+	 * 
+	 * @param sampleLargestIndex New value of property sampleLargestIndex.
+	 * 
+	 */
+	private void setSampleLargestIndex(int sampleLargestIndex) {
+		this.sampleLargestIndex = sampleLargestIndex;
+	}
+
 }

@@ -42,8 +42,7 @@ public final class Property implements IDLEntity {
 	/**
 	 * Setter for property name.
 	 * 
-	 * @param name
-	 *            New value of property name.
+	 * @param name New value of property name.
 	 * 
 	 */
 	public void setName(java.lang.String name) {
@@ -63,8 +62,7 @@ public final class Property implements IDLEntity {
 	/**
 	 * Setter for property value.
 	 * 
-	 * @param value
-	 *            New value of property value.
+	 * @param value New value of property value.
 	 * 
 	 */
 	public void setValue(Any value) {

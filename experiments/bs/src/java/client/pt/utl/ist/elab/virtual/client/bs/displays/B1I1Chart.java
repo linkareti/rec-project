@@ -7,14 +7,14 @@
 package pt.utl.ist.elab.virtual.client.bs.displays;
 
 /**
- *
- * @author  Queiro'
+ * 
+ * @author Queiro'
  */
 public class B1I1Chart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public B1I1Chart() {
-        super();
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public B1I1Chart() {
+		super();
 		setChannelDisplayX(4);
 		setChannelDisplayY(2);
-    }
+	}
 }

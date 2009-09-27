@@ -7,18 +7,17 @@
 package pt.utl.ist.elab.driver.webrobot.debug;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
 public class Debugger {
-    
-    /** Creates a new instance of Debugger */
-    public Debugger() {
-    }
-    
-    public static void print(Object className,String text)
-    {
-        System.out.println(className.getClass().getName()+" says: "+text);
-    }
-    
+
+	/** Creates a new instance of Debugger */
+	public Debugger() {
+	}
+
+	public static void print(Object className, String text) {
+		System.out.println(className.getClass().getName() + " says: " + text);
+	}
+
 }

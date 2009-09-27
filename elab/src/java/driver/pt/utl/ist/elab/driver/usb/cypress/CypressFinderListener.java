@@ -13,7 +13,6 @@ package pt.utl.ist.elab.driver.usb.cypress;
 
 import javax.usb.UsbDevice;
 
-public interface CypressFinderListener extends java.util.EventListener
-{
+public interface CypressFinderListener extends java.util.EventListener {
 	public void cypressFound(UsbDevice device);
 }

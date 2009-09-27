@@ -104,8 +104,6 @@ public class ExpHistory {
 		this.locallyOwned = locallyOwned;
 	}
 
-	
-
 	public String getOwnerUserName() {
 		return ownerUserName;
 	}

@@ -46,8 +46,7 @@ public class Defaults {
 		return defaultValue;
 	}
 
-	public static javax.swing.ImageIcon defaultIfEmpty(Object value,
-			javax.swing.ImageIcon defaultValue) {
+	public static javax.swing.ImageIcon defaultIfEmpty(Object value, javax.swing.ImageIcon defaultValue) {
 		if (value != null && value instanceof javax.swing.ImageIcon)
 			return (javax.swing.ImageIcon) value;
 

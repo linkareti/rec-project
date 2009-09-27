@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDriver;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortCommand;
-import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortCommandList;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortCommandListener;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
@@ -68,7 +67,8 @@ public class BaseSerialPortIO<DriverState> {
 				outStream = this.sPort.getOutputStream();
 				inReader = new InputStreamReader(this.sPort.getInputStream(), "us-ascii");
 				(currentSerialPortReader = new SerialPortReader()).start();
-				// inReader=new BufferedReader(new InputStreamReader(this.sPort.getInputStream()),100);
+				// inReader=new BufferedReader(new
+				// InputStreamReader(this.sPort.getInputStream()),100);
 			}
 		} catch (Exception e) {
 			LoggerUtil.logThrowable(null, e, Logger.getLogger(STAMP_IO_LOGGER));
@@ -142,7 +142,8 @@ public class BaseSerialPortIO<DriverState> {
 							lineReadTemp = new StringBuffer(1024);
 						else {
 							lineReadTemp = new StringBuffer(GenericSerialPortDriver.currentBinaryLength + 5 /*
-																											 * length of
+																											 * length
+																											 * of
 																											 * _BIN
 																											 */);
 							lineReadTemp.append("_BIN\t");
@@ -160,10 +161,10 @@ public class BaseSerialPortIO<DriverState> {
 								}
 							} else {
 								if (lineReadTemp.length() <= GenericSerialPortDriver.currentBinaryLength + 5 /*
-																												 * length
-																												 * of
-																												 * _BIN
-																												 */)
+																											 * length
+																											 * of
+																											 * _BIN
+																											 */)
 									lineReadTemp.append(readChar);
 								else
 									break;
@@ -235,7 +236,8 @@ public class BaseSerialPortIO<DriverState> {
 				inCommand = new SerialPortCommand(lineRead.substring(0, commandpos));
 				inCommand.setCommand(lineRead.substring(commandpos + 1));
 			} else {
-				// Couldn't split by space, then use a tab... just in case some student
+				// Couldn't split by space, then use a tab... just in case some
+				// student
 				// tries to reinvent the wheel
 				commandpos = lineRead.indexOf("\t");
 				if (commandpos != -1) {
@@ -253,8 +255,7 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Registers StampCommandListener to receive events.
 	 * 
-	 * @param listener
-	 *            The listener to register.
+	 * @param listener The listener to register.
 	 */
 	public synchronized void setStampCommandListener(SerialPortCommandListener listener) {
 		this.listener = listener;
@@ -263,8 +264,7 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Removes StampCommandListener from the list of listeners.
 	 * 
-	 * @param listener
-	 *            The listener to remove.
+	 * @param listener The listener to remove.
 	 */
 	public synchronized void removeStampCommandListener() {
 		this.listener = null;
@@ -273,8 +273,7 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Notifies all registered listeners about the event.
 	 * 
-	 * @param event
-	 *            The event to be fired
+	 * @param event The event to be fired
 	 */
 	private void fireStampCommandListenerHandleStampCommand(SerialPortCommand event) {
 		if (listener != null) {
@@ -289,12 +288,18 @@ public class BaseSerialPortIO<DriverState> {
 		if (currentSerialPortReader != null) {
 			currentSerialPortReader.exitNow();
 			/*
-			 * try { System.out.println("Trying to close inReader..."); inReader.close(); System.out.println("closed
-			 * inReader..."); }catch(Exception e) { System.out.println("oopppsss... closing inReader");
-			 * LoggerUtil.logThrowable(null,e,Logger.getLogger(STAMP_IO_LOGGER)); }
+			 * try { System.out.println("Trying to close inReader...");
+			 * inReader.close(); System.out.println("closed
+			 * inReader..."); }catch(Exception e) { System.out.println("
+			 * oopppsss... closing inReader");
+			 * LoggerUtil.logThrowable(null,e,Logger
+			 * .getLogger(STAMP_IO_LOGGER)); }
 			 * 
-			 * try { System.out.println("Trying to close outStream..."); outStream.close(); System.out.println("Closed
-			 * outStream..."); }catch(Exception e) { LoggerUtil.logThrowable(null,e,Logger.getLogger(STAMP_IO_LOGGER)); }
+			 * try { System.out.println("Trying to close outStream...");
+			 * outStream.close(); System.out.println("Closed outStream...");
+			 * }catch(Exception e) {
+			 * LoggerUtil.logThrowable(null,e,Logger.getLogger
+			 * (STAMP_IO_LOGGER)); }
 			 */
 		}
 		if (sPort != null) {
@@ -318,8 +323,7 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Setter for property portParity.
 	 * 
-	 * @param portParity
-	 *            New value of property portParity.
+	 * @param portParity New value of property portParity.
 	 */
 	public void setPortParity(int portParity) {
 		this.portParity = portParity;
@@ -337,8 +341,7 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Setter for property portBaudRate.
 	 * 
-	 * @param portBaudRate
-	 *            New value of property portBaudRate.
+	 * @param portBaudRate New value of property portBaudRate.
 	 */
 	public void setPortBaudRate(int portBaudRate) {
 		this.portBaudRate = portBaudRate;
@@ -356,8 +359,7 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Setter for property portDataBits.
 	 * 
-	 * @param portDataBits
-	 *            New value of property portDataBits.
+	 * @param portDataBits New value of property portDataBits.
 	 */
 	public void setPortDataBits(int portDataBits) {
 		this.portDataBits = portDataBits;
@@ -375,8 +377,7 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Setter for property portStopBits.
 	 * 
-	 * @param portStopBits
-	 *            New value of property portStopBits.
+	 * @param portStopBits New value of property portStopBits.
 	 */
 	public void setPortStopBits(int portStopBits) {
 		this.portStopBits = portStopBits;
@@ -394,8 +395,8 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Setter for property applicationNameLockPort.
 	 * 
-	 * @param applicationNameLockPort
-	 *            New value of property applicationNameLockPort.
+	 * @param applicationNameLockPort New value of property
+	 *            applicationNameLockPort.
 	 */
 	public void setApplicationNameLockPort(String applicationNameLockPort) {
 		this.applicationNameLockPort = applicationNameLockPort;
@@ -414,8 +415,7 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Setter for property DTR.
 	 * 
-	 * @param DTR
-	 *            New value of property DTR.
+	 * @param DTR New value of property DTR.
 	 * 
 	 */
 	public void setDTR(boolean DTR) {
@@ -438,8 +438,7 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Setter for property RTS.
 	 * 
-	 * @param RTS
-	 *            New value of property RTS.
+	 * @param RTS New value of property RTS.
 	 * 
 	 */
 	public void setRTS(boolean RTS) {
@@ -462,8 +461,7 @@ public class BaseSerialPortIO<DriverState> {
 	/**
 	 * Setter for property waitForEcho.
 	 * 
-	 * @param waitForEcho
-	 *            New value of property waitForEcho.
+	 * @param waitForEcho New value of property waitForEcho.
 	 * 
 	 */
 	public void setWaitForEcho(boolean waitForEcho) {

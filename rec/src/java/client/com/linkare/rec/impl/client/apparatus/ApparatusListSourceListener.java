@@ -6,13 +6,11 @@
 
 package com.linkare.rec.impl.client.apparatus;
 
-
 /**
- *
- * @author  Jose Pedro Pereira
+ * 
+ * @author Jose Pedro Pereira
  */
-public interface ApparatusListSourceListener extends java.util.EventListener
-{
-    public void apparatusListChanged(ApparatusListChangeEvent newApparatusList);
-    
+public interface ApparatusListSourceListener extends java.util.EventListener {
+	public void apparatusListChanged(ApparatusListChangeEvent newApparatusList);
+
 }

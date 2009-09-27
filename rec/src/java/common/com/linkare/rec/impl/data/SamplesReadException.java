@@ -1,13 +1,13 @@
 package com.linkare.rec.impl.data;
 
 /**
- * This exception is thrown whenever there is a problem reading data samples 
+ * This exception is thrown whenever there is a problem reading data samples
  * from a {@link SamplesSource}
- *  
+ * 
  * @author José Pedro Pereira
  */
 public class SamplesReadException extends java.io.IOException {
-	
+
 	/**
 	 * The number of the sample data index that caused the error
 	 */

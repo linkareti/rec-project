@@ -48,31 +48,24 @@ import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.data.synch.FrequencyDefType;
 import com.linkare.rec.impl.protocols.ReCProtocols;
 
+public class HardwareInfoXMLReader {
 
-public class HardwareInfoXMLReader
-{
-	
-	
-	public static HardwareInfo readHardwareInfo(String file_loc)
-	throws FileNotFoundException,ParserConfigurationException,SAXException,IOException
-	{
+	public static HardwareInfo readHardwareInfo(String file_loc) throws FileNotFoundException,
+			ParserConfigurationException, SAXException, IOException {
 		return readHardwareInfo(new FileInputStream(file_loc));
 	}
-	
-	public static HardwareInfo readHardwareInfo(URL url)
-	throws IOException,ParserConfigurationException,SAXException
-	{
-		URLConnection con=url.openConnection();
+
+	public static HardwareInfo readHardwareInfo(URL url) throws IOException, ParserConfigurationException, SAXException {
+		URLConnection con = url.openConnection();
 		return readHardwareInfo(con.getInputStream());
 	}
-	
-	public static HardwareInfo readHardwareInfo(InputStream is)
-	throws ParserConfigurationException,SAXException,IOException
-	{
-		DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+
+	public static HardwareInfo readHardwareInfo(InputStream is) throws ParserConfigurationException, SAXException,
+			IOException {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setIgnoringElementContentWhitespace(true);
 		factory.setIgnoringComments(true);
-		//factory.setValidating(true);
+		// factory.setValidating(true);
 		factory.setNamespaceAware(true);
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		Document document = builder.parse(new InputSource(is));
@@ -80,720 +73,636 @@ public class HardwareInfoXMLReader
 		scanner.visitDocument();
 		return scanner.getHardwareInfo();
 	}
-	
+
 	/** org.w3c.dom.Document document */
 	Document document;
-	
+
 	/** Holds value of property hardwareInfo. */
 	private HardwareInfo hardwareInfo;
-	
+
 	/** Creates a new instance of HardwareInfoXMLReader */
-	public HardwareInfoXMLReader(Document document)
-	{
-		this.document=document;
+	public HardwareInfoXMLReader(Document document) {
+		this.document = document;
 	}
-	
-	
+
 	/** Scan through org.w3c.dom.Document document. */
-	public void visitDocument()
-	{
-		
+	public void visitDocument() {
+
 		Element element = document.getDocumentElement();
-		
-		if ((element != null) && element.getTagName().equals("HardwareInfo"))
-		{
+
+		if ((element != null) && element.getTagName().equals("HardwareInfo")) {
 			visitElement_HardwareInfo(element);
 		}
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named AvailableOutputIDataSource. */
-	void visitElement_AvailableOutputIDataSource(Element element, ChannelInfo info)
-	{ // <AvailableOutputIDataSource>
+	void visitElement_AvailableOutputIDataSource(Element element, ChannelInfo info) { // <AvailableOutputIDataSource>
 		// element.getValue();
 		NamedNodeMap attrs = element.getAttributes();
-		for (int i = 0; i < attrs.getLength(); i++)
-		{
-			Attr attr = (Attr)attrs.item(i);
-			if (attr.getName().equals("href"))
-			{ // <AvailableOutputIDataSource href="???">
+		for (int i = 0; i < attrs.getLength(); i++) {
+			Attr attr = (Attr) attrs.item(i);
+			if (attr.getName().equals("href")) { // <AvailableOutputIDataSource
+				// href="???">
 				// attr.getValue();
-				//TODO: Big silent noop for now... should instanciate IDataSource class, add it to a DataProducer and make it available...
+				// TODO: Big silent noop for now... should instanciate
+				// IDataSource class, add it to a DataProducer and make it
+				// available...
 			}
 		}
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named ChannelInfo. */
-	ChannelInfo visitElement_ChannelInfo(Element element)
-	{ // <ChannelInfo>
+	ChannelInfo visitElement_ChannelInfo(Element element) { // <ChannelInfo>
 		// element.getValue();
-		ChannelInfo info=new ChannelInfo();
+		ChannelInfo info = new ChannelInfo();
 		NamedNodeMap attrs = element.getAttributes();
-		for (int i = 0; i < attrs.getLength(); i++)
-		{
-			Attr attr = (Attr)attrs.item(i);
-			if (attr.getName().equals("direction"))
-			{ // <ChannelInfo direction="???">
+		for (int i = 0; i < attrs.getLength(); i++) {
+			Attr attr = (Attr) attrs.item(i);
+			if (attr.getName().equals("direction")) { // <ChannelInfo
+				// direction="???">
 				// attr.getValue();
-				String strDirection=attr.getValue();
-				if(strDirection.equals("CHANNEL_INPUT"))
+				String strDirection = attr.getValue();
+				if (strDirection.equals("CHANNEL_INPUT"))
 					info.setChannelDirection(ChannelDirection.CHANNEL_INPUT);
-				else if(strDirection.equals("CHANNEL_OUTPUT"))
+				else if (strDirection.equals("CHANNEL_OUTPUT"))
 					info.setChannelDirection(ChannelDirection.CHANNEL_OUTPUT);
 				else
 					throw new RuntimeException("Channel direction must be CHANNEL_INPUT or CHANNEL_OUTPUT");
-				
+
 			}
-			if (attr.getName().equals("independent"))
-			{ // <ChannelInfo independent="???">
+			if (attr.getName().equals("independent")) { // <ChannelInfo
+				// independent="???">
 				// attr.getValue();
-				String strIndependent=attr.getValue();
-				if(strIndependent.equals("true") || strIndependent.equals("yes") || strIndependent.equals("1"))
+				String strIndependent = attr.getValue();
+				if (strIndependent.equals("true") || strIndependent.equals("yes") || strIndependent.equals("1"))
 					info.setChannelIndependent(true);
-				else if(strIndependent.equals("false") || strIndependent.equals("no") || strIndependent.equals("0"))
+				else if (strIndependent.equals("false") || strIndependent.equals("no") || strIndependent.equals("0"))
 					info.setChannelIndependent(false);
 				else
 					throw new RuntimeException("Channel independent must be true/yes/1 or false/no/0");
 			}
-			if (attr.getName().equals("name"))
-			{ // <ChannelInfo name="???">
+			if (attr.getName().equals("name")) { // <ChannelInfo name="???">
 				// attr.getValue();
 				info.setChannelName(attr.getValue());
 			}
 		}
 		NodeList nodes = element.getChildNodes();
-		for (int i = 0; i < nodes.getLength(); i++)
-		{
+		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			switch (node.getNodeType())
-			{
-				case Node.CDATA_SECTION_NODE:
-					// ((org.w3c.dom.CDATASection)node).getData();
-					break;
-				case Node.ELEMENT_NODE:
-					Element nodeElement = (Element)node;
-					if (nodeElement.getTagName().equals("AvailableOutputIDataSource"))
-					{
-						visitElement_AvailableOutputIDataSource(nodeElement,info);
-					}
-					if (nodeElement.getTagName().equals("Frequency"))
-					{
-						info.setSelectedFrequency(visitElement_Frequency(nodeElement));
-					}
-					/*if (nodeElement.getTagName().equals("customizer"))
-					{
-						info.setURLCustomizerClass(visitElement_customizer(nodeElement));
-					}*/
-					if (nodeElement.getTagName().equals("frequency-scale"))
-					{
-						info.addFrequencies(visitElement_frequency_scale(nodeElement));
-					}
-					if (nodeElement.getTagName().equals("parameter"))
-					{
-						info.addChannelParameters(visitElement_parameter(nodeElement));
-					}
-					if (nodeElement.getTagName().equals("sampling-scale"))
-					{
-						info.setSamplingScale(visitElement_sampling_scale(nodeElement));
-					}
-					if (nodeElement.getTagName().equals("scale"))
-					{
-						com.linkare.rec.impl.utils.HardwareInfoXMLReader.ScaleSelector ss=visitElement_scale(nodeElement);
-						info.addScales(ss.getScale());
-						if(ss.isSelected())
-							info.setActualSelectedScale(ss.getScale());
-					}
-					break;
-				case Node.PROCESSING_INSTRUCTION_NODE:
-					// ((org.w3c.dom.ProcessingInstruction)node).getTarget();
-					// ((org.w3c.dom.ProcessingInstruction)node).getData();
-					break;
+			switch (node.getNodeType()) {
+			case Node.CDATA_SECTION_NODE:
+				// ((org.w3c.dom.CDATASection)node).getData();
+				break;
+			case Node.ELEMENT_NODE:
+				Element nodeElement = (Element) node;
+				if (nodeElement.getTagName().equals("AvailableOutputIDataSource")) {
+					visitElement_AvailableOutputIDataSource(nodeElement, info);
+				}
+				if (nodeElement.getTagName().equals("Frequency")) {
+					info.setSelectedFrequency(visitElement_Frequency(nodeElement));
+				}
+				/*
+				 * if (nodeElement.getTagName().equals("customizer")) {
+				 * info.setURLCustomizerClass
+				 * (visitElement_customizer(nodeElement)); }
+				 */
+				if (nodeElement.getTagName().equals("frequency-scale")) {
+					info.addFrequencies(visitElement_frequency_scale(nodeElement));
+				}
+				if (nodeElement.getTagName().equals("parameter")) {
+					info.addChannelParameters(visitElement_parameter(nodeElement));
+				}
+				if (nodeElement.getTagName().equals("sampling-scale")) {
+					info.setSamplingScale(visitElement_sampling_scale(nodeElement));
+				}
+				if (nodeElement.getTagName().equals("scale")) {
+					com.linkare.rec.impl.utils.HardwareInfoXMLReader.ScaleSelector ss = visitElement_scale(nodeElement);
+					info.addScales(ss.getScale());
+					if (ss.isSelected())
+						info.setActualSelectedScale(ss.getScale());
+				}
+				break;
+			case Node.PROCESSING_INSTRUCTION_NODE:
+				// ((org.w3c.dom.ProcessingInstruction)node).getTarget();
+				// ((org.w3c.dom.ProcessingInstruction)node).getData();
+				break;
 			}
 		}
 		return info;
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named Frequency. */
-	Frequency visitElement_Frequency(Element element)
-	{ // <Frequency>
+	Frequency visitElement_Frequency(Element element) { // <Frequency>
 		// element.getValue();
-		Frequency frequency=new Frequency();
+		Frequency frequency = new Frequency();
 		NamedNodeMap attrs = element.getAttributes();
-		for (int i = 0; i < attrs.getLength(); i++)
-		{
-			Attr attr = (Attr)attrs.item(i);
-			if (attr.getName().equals("type"))
-			{ // <Frequency type="???">
-				String def_type=attr.getValue();
-				if(def_type.equalsIgnoreCase("FrequencyType"))		    frequency.setFrequencyDefType(FrequencyDefType.FrequencyType);
-				else if(def_type.equalsIgnoreCase("SamplingIntervalType"))  frequency.setFrequencyDefType(FrequencyDefType.SamplingIntervalType);
-				else throw new RuntimeException("frequency type should be FrequencyType or SamplingIntervalType");
+		for (int i = 0; i < attrs.getLength(); i++) {
+			Attr attr = (Attr) attrs.item(i);
+			if (attr.getName().equals("type")) { // <Frequency type="???">
+				String def_type = attr.getValue();
+				if (def_type.equalsIgnoreCase("FrequencyType"))
+					frequency.setFrequencyDefType(FrequencyDefType.FrequencyType);
+				else if (def_type.equalsIgnoreCase("SamplingIntervalType"))
+					frequency.setFrequencyDefType(FrequencyDefType.SamplingIntervalType);
+				else
+					throw new RuntimeException("frequency type should be FrequencyType or SamplingIntervalType");
 			}
-			if (attr.getName().equals("multiplier"))
-			{ // <Frequency multiplier="???">
-				String multiplier=attr.getValue();
-				
+			if (attr.getName().equals("multiplier")) { // <Frequency
+				// multiplier="???">
+				String multiplier = attr.getValue();
+
 				frequency.setMultiplier(readMultiplier(attr.getValue()));
 			}
 		}
-		
-		frequency.setFrequency( Double.parseDouble(((Text)element.getFirstChild()).getData()));
+
+		frequency.setFrequency(Double.parseDouble(((Text) element.getFirstChild()).getData()));
 		return frequency;
 	}
-	
-	
-	private Multiplier readMultiplier(String multiplier)
-	{
-		if(multiplier.equalsIgnoreCase("fento"))   return Multiplier.fento;
-		if(multiplier.equalsIgnoreCase("pico"))    return Multiplier.pico;
-		if(multiplier.equalsIgnoreCase("nano"))    return Multiplier.nano;
-		if(multiplier.equalsIgnoreCase("micro"))   return Multiplier.micro;
-		if(multiplier.equalsIgnoreCase("milli"))   return Multiplier.mili;
-		if(multiplier.equalsIgnoreCase("none"))    return Multiplier.none;
-		if(multiplier.equalsIgnoreCase("kilo"))    return Multiplier.kilo;
-		if(multiplier.equalsIgnoreCase("mega"))    return Multiplier.mega;
-		if(multiplier.equalsIgnoreCase("giga"))    return Multiplier.giga;
-		if(multiplier.equalsIgnoreCase("tera"))    return Multiplier.tera;
+
+	private Multiplier readMultiplier(String multiplier) {
+		if (multiplier.equalsIgnoreCase("fento"))
+			return Multiplier.fento;
+		if (multiplier.equalsIgnoreCase("pico"))
+			return Multiplier.pico;
+		if (multiplier.equalsIgnoreCase("nano"))
+			return Multiplier.nano;
+		if (multiplier.equalsIgnoreCase("micro"))
+			return Multiplier.micro;
+		if (multiplier.equalsIgnoreCase("milli"))
+			return Multiplier.mili;
+		if (multiplier.equalsIgnoreCase("none"))
+			return Multiplier.none;
+		if (multiplier.equalsIgnoreCase("kilo"))
+			return Multiplier.kilo;
+		if (multiplier.equalsIgnoreCase("mega"))
+			return Multiplier.mega;
+		if (multiplier.equalsIgnoreCase("giga"))
+			return Multiplier.giga;
+		if (multiplier.equalsIgnoreCase("tera"))
+			return Multiplier.tera;
 		throw new RuntimeException("multiplier attribute should be fento,pico,nano,micro,milli,none,kilo,giga,tera");
 	}
-	
-	
+
 	/** Scan through org.w3c.dom.Element named HardwareInfo. */
-	void visitElement_HardwareInfo(Element element)
-	{ // <HardwareInfo>
+	void visitElement_HardwareInfo(Element element) { // <HardwareInfo>
 		// element.getValue();
-		hardwareInfo=new HardwareInfo();
+		hardwareInfo = new HardwareInfo();
 		NamedNodeMap attrs = element.getAttributes();
-		for (int i = 0; i < attrs.getLength(); i++)
-		{
-			Attr attr = (Attr)attrs.item(i);
-			if (attr.getName().equals("manufacturer"))
-			{ // <HardwareInfo manufacturer="???">
+		for (int i = 0; i < attrs.getLength(); i++) {
+			Attr attr = (Attr) attrs.item(i);
+			if (attr.getName().equals("manufacturer")) { // <HardwareInfo
+				// manufacturer="???">
 				// attr.getValue();
 				hardwareInfo.setHardwareManufacturer(attr.getValue());
 			}
-			if (attr.getName().equals("familiarName"))
-			{ // <HardwareInfo familiarName="???">
+			if (attr.getName().equals("familiarName")) { // <HardwareInfo
+				// familiarName="???">
 				// attr.getValue();
 				hardwareInfo.setFamiliarName(attr.getValue());
 			}
-			if (attr.getName().equals("name"))
-			{ // <HardwareInfo name="???">
+			if (attr.getName().equals("name")) { // <HardwareInfo name="???">
 				// attr.getValue();
 				hardwareInfo.setHardwareName(attr.getValue());
 			}
-			if (attr.getName().equals("driverVersion"))
-			{ // <HardwareInfo driverVersion="???">
+			if (attr.getName().equals("driverVersion")) { // <HardwareInfo
+				// driverVersion="???">
 				// attr.getValue();
 				hardwareInfo.setDriverVersion(attr.getValue());
 			}
-			if (attr.getName().equals("id"))
-			{ // <HardwareInfo id="???">
+			if (attr.getName().equals("id")) { // <HardwareInfo id="???">
 				// attr.getValue();
 				hardwareInfo.setHardwareUniqueID(attr.getValue());
 			}
-			if (attr.getName().equals("version"))
-			{ // <HardwareInfo version="???">
+			if (attr.getName().equals("version")) { // <HardwareInfo
+				// version="???">
 				// attr.getValue();
 				hardwareInfo.setHardwareVersion(attr.getValue());
 			}
 		}
 		NodeList nodes = element.getChildNodes();
-		for (int i = 0; i < nodes.getLength(); i++)
-		{
+		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			switch (node.getNodeType())
-			{
-				case Node.ELEMENT_NODE:
-					Element nodeElement = (Element)node;
-					if (nodeElement.getTagName().equals("ChannelInfo"))
-					{
-						hardwareInfo.addChannelsInfo(visitElement_ChannelInfo(nodeElement));
-					}
-					if (nodeElement.getTagName().equals("Frequency"))
-					{
-						hardwareInfo.setSelectedFrequency(visitElement_Frequency(nodeElement));
-					}
-					/*if (nodeElement.getTagName().equals("customizer"))
-					{
-						hardwareInfo.setURLCustomizerClass(visitElement_customizer(nodeElement));
-					}*/
-					if (nodeElement.getTagName().equals("description"))
-					{
-						hardwareInfo.setDescriptionText(visitElement_description(nodeElement));
-					}
-					if (nodeElement.getTagName().equals("frequency-scale"))
-					{
-						hardwareInfo.addHardwareFrequencies(visitElement_frequency_scale(nodeElement));
-					}
-					if (nodeElement.getTagName().equals("parameter"))
-					{
-						hardwareInfo.addHardwareParameters(visitElement_parameter(nodeElement));
-					}
-					if (nodeElement.getTagName().equals("sampling-scale"))
-					{
-						hardwareInfo.setSamplingScale(visitElement_sampling_scale(nodeElement));
-					}
-					break;
+			switch (node.getNodeType()) {
+			case Node.ELEMENT_NODE:
+				Element nodeElement = (Element) node;
+				if (nodeElement.getTagName().equals("ChannelInfo")) {
+					hardwareInfo.addChannelsInfo(visitElement_ChannelInfo(nodeElement));
+				}
+				if (nodeElement.getTagName().equals("Frequency")) {
+					hardwareInfo.setSelectedFrequency(visitElement_Frequency(nodeElement));
+				}
+				/*
+				 * if (nodeElement.getTagName().equals("customizer")) {
+				 * hardwareInfo
+				 * .setURLCustomizerClass(visitElement_customizer(nodeElement));
+				 * }
+				 */
+				if (nodeElement.getTagName().equals("description")) {
+					hardwareInfo.setDescriptionText(visitElement_description(nodeElement));
+				}
+				if (nodeElement.getTagName().equals("frequency-scale")) {
+					hardwareInfo.addHardwareFrequencies(visitElement_frequency_scale(nodeElement));
+				}
+				if (nodeElement.getTagName().equals("parameter")) {
+					hardwareInfo.addHardwareParameters(visitElement_parameter(nodeElement));
+				}
+				if (nodeElement.getTagName().equals("sampling-scale")) {
+					hardwareInfo.setSamplingScale(visitElement_sampling_scale(nodeElement));
+				}
+				break;
 			}
 		}
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named PhysicsVal. */
-	PhysicsVal visitElement_PhysicsVal(Element element)
-	{ // <PhysicsVal>
+	PhysicsVal visitElement_PhysicsVal(Element element) { // <PhysicsVal>
 		// element.getValue();
-		PhysicsVal value=new PhysicsVal();
+		PhysicsVal value = new PhysicsVal();
 		NamedNodeMap attrs = element.getAttributes();
-		for (int i = 0; i < attrs.getLength(); i++)
-		{
-			Attr attr = (Attr)attrs.item(i);
-			/*if (attr.getName().equals("href"))
-			{ // <PhysicsVal href="???">
-				// attr.getValue();
-				try
-				{
-					ByteArrayValBuffer buffer=new ByteArrayValBuffer(new URL(attr.getValue()));
-					value.setByteArrayValue(buffer.getByteArrayValue());
-					return value;
-				}catch(Exception e)
-				{
-					throw new RuntimeException(e.getMessage());
-				}
-			}*/
-			if (attr.getName().equals("type"))
-			{ // <PhysicsVal type="???">
-				String type=attr.getValue();
-				if(type.equalsIgnoreCase("boolean"))
-				{
-					String val=((Text)element.getFirstChild()).getData();
-					if(val.equalsIgnoreCase("true") || val.equalsIgnoreCase("yes") || val.equalsIgnoreCase("1") || val.equalsIgnoreCase("on"))
+		for (int i = 0; i < attrs.getLength(); i++) {
+			Attr attr = (Attr) attrs.item(i);
+			/*
+			 * if (attr.getName().equals("href")) { // <PhysicsVal href="???">
+			 * // attr.getValue(); try { ByteArrayValBuffer buffer=new
+			 * ByteArrayValBuffer(new URL(attr.getValue()));
+			 * value.setByteArrayValue(buffer.getByteArrayValue()); return
+			 * value; }catch(Exception e) { throw new
+			 * RuntimeException(e.getMessage()); } }
+			 */
+			if (attr.getName().equals("type")) { // <PhysicsVal type="???">
+				String type = attr.getValue();
+				if (type.equalsIgnoreCase("boolean")) {
+					String val = ((Text) element.getFirstChild()).getData();
+					if (val.equalsIgnoreCase("true") || val.equalsIgnoreCase("yes") || val.equalsIgnoreCase("1")
+							|| val.equalsIgnoreCase("on"))
 						value.setBooleanValue(true);
-					else if(val.equalsIgnoreCase("false") || val.equalsIgnoreCase("no") || val.equalsIgnoreCase("0") || val.equalsIgnoreCase("off"))
+					else if (val.equalsIgnoreCase("false") || val.equalsIgnoreCase("no") || val.equalsIgnoreCase("0")
+							|| val.equalsIgnoreCase("off"))
 						value.setBooleanValue(false);
 					else
 						throw new RuntimeException("PhysicsVal of type boolean must be true/yes/on/1 or false/no/off/0");
-					
+
 					return value;
-				}
-				else if(type.equalsIgnoreCase("byte"))
-				{
-					String val=((Text)element.getFirstChild()).getData();
+				} else if (type.equalsIgnoreCase("byte")) {
+					String val = ((Text) element.getFirstChild()).getData();
 					value.setByteValue(Byte.parseByte(val));
 					return value;
-				}
-				else if(type.equalsIgnoreCase("short"))
-				{
-					String val=((Text)element.getFirstChild()).getData();
+				} else if (type.equalsIgnoreCase("short")) {
+					String val = ((Text) element.getFirstChild()).getData();
 					value.setShortValue(Short.parseShort(val));
 					return value;
-				}
-				else if(type.equalsIgnoreCase("int"))
-				{
-					String val=((Text)element.getFirstChild()).getData();
+				} else if (type.equalsIgnoreCase("int")) {
+					String val = ((Text) element.getFirstChild()).getData();
 					value.setIntValue(Integer.parseInt(val));
 					return value;
-				}
-				else if(type.equalsIgnoreCase("long"))
-				{
-					String val=((Text)element.getFirstChild()).getData();
+				} else if (type.equalsIgnoreCase("long")) {
+					String val = ((Text) element.getFirstChild()).getData();
 					value.setLongValue(Long.parseLong(val));
 					return value;
-				}
-				else if(type.equalsIgnoreCase("float"))
-				{
-					String val=((Text)element.getFirstChild()).getData();
+				} else if (type.equalsIgnoreCase("float")) {
+					String val = ((Text) element.getFirstChild()).getData();
 					value.setFloatValue(Float.parseFloat(val));
 					return value;
-				}
-				else if(type.equalsIgnoreCase("double"))
-				{
-					String val=((Text)element.getFirstChild()).getData();
+				} else if (type.equalsIgnoreCase("double")) {
+					String val = ((Text) element.getFirstChild()).getData();
 					value.setDoubleValue(Double.parseDouble(val));
 					return value;
-				}
-				else if(type.equalsIgnoreCase("byteArray"))
-				{
-					String mime=null;	
-					Attr mimeType=(Attr)attrs.getNamedItem("mimetype");
-					if(mimeType!=null)
-					    mime=mimeType.getValue();
-					
-					Attr attrurl=(Attr)attrs.getNamedItem("href");
-					if(attrurl!=null)
-					{
-						try
-						{
-							String url=attrurl.getValue();
-							ByteArrayValBuffer buffer=new ByteArrayValBuffer(ReCProtocols.getURL(url));
-							if(mime!=null && mime.length()>0)
-							    buffer.setMimeType(mime);
-							
+				} else if (type.equalsIgnoreCase("byteArray")) {
+					String mime = null;
+					Attr mimeType = (Attr) attrs.getNamedItem("mimetype");
+					if (mimeType != null)
+						mime = mimeType.getValue();
+
+					Attr attrurl = (Attr) attrs.getNamedItem("href");
+					if (attrurl != null) {
+						try {
+							String url = attrurl.getValue();
+							ByteArrayValBuffer buffer = new ByteArrayValBuffer(ReCProtocols.getURL(url));
+							if (mime != null && mime.length() > 0)
+								buffer.setMimeType(mime);
+
 							value.setByteArrayValue(buffer.getByteArrayValue());
 							return value;
-						}catch(Exception e)
-						{
+						} catch (Exception e) {
 							throw new RuntimeException(e.getMessage());
 						}
 					}
-					Attr attrfile=(Attr)attrs.getNamedItem("file");
-					if(attrfile!=null)
-					{
-						try
-						{
-							String file=attrfile.getValue();
-							
-							if(!file.startsWith("file:"))
-							    file=(new java.io.File(file)).toURI().toURL().toExternalForm();
-							
-							if(mime!=null)
-							{
-							    ByteArrayValBuffer buffer=new ByteArrayValBuffer(mime,ReCProtocols.getURL(file));
-							    value.setByteArrayValue(buffer.getByteArrayValue());
-							    return value;
+					Attr attrfile = (Attr) attrs.getNamedItem("file");
+					if (attrfile != null) {
+						try {
+							String file = attrfile.getValue();
+
+							if (!file.startsWith("file:"))
+								file = (new java.io.File(file)).toURI().toURL().toExternalForm();
+
+							if (mime != null) {
+								ByteArrayValBuffer buffer = new ByteArrayValBuffer(mime, ReCProtocols.getURL(file));
+								value.setByteArrayValue(buffer.getByteArrayValue());
+								return value;
+							} else {
+								ByteArrayValBuffer buffer = new ByteArrayValBuffer(ReCProtocols.getURL(file));
+								value.setByteArrayValue(buffer.getByteArrayValue());
+								return value;
 							}
-							else
-							{
-							    ByteArrayValBuffer buffer=new ByteArrayValBuffer(ReCProtocols.getURL(file));
-							    value.setByteArrayValue(buffer.getByteArrayValue());
-							    return value;
-							}
-						}catch(Exception e)
-						{
+						} catch (Exception e) {
 							throw new RuntimeException(e.getMessage());
 						}
 					}
-					String val=((Text)element.getFirstChild()).getData();
-					if(mime==null)
-					    mime="application/octet-stream";
-					value.setByteArrayValue(new ByteArrayValue(val.getBytes(),mime));
+					String val = ((Text) element.getFirstChild()).getData();
+					if (mime == null)
+						mime = "application/octet-stream";
+					value.setByteArrayValue(new ByteArrayValue(val.getBytes(), mime));
 					return value;
-				}
-				else
-					throw new RuntimeException("PhysicsVal type attribute must be one of boolean,byte,short,int,long,float,double,bytearray");
+				} else
+					throw new RuntimeException(
+							"PhysicsVal type attribute must be one of boolean,byte,short,int,long,float,double,bytearray");
 			}
-			/*if (attr.getName().equals("file"))
-			{ // <PhysicsVal file="???">
-				// attr.getValue();
-				try
-				{
-					String mime=((Attr)attrs.getNamedItem("mimetype")).getValue();
-					String filepath=attr.getValue();
-					ByteArrayValBuffer buffer=new ByteArrayValBuffer(mime,filepath);
-					value.setByteArrayValue(buffer.getByteArrayValue());
-					return value;
-				}catch(Exception e)
-				{
-					throw new RuntimeException(e.getMessage());
-				}
-			}*/
+			/*
+			 * if (attr.getName().equals("file")) { // <PhysicsVal file="???">
+			 * // attr.getValue(); try { String
+			 * mime=((Attr)attrs.getNamedItem("mimetype")).getValue(); String
+			 * filepath=attr.getValue(); ByteArrayValBuffer buffer=new
+			 * ByteArrayValBuffer(mime,filepath);
+			 * value.setByteArrayValue(buffer.getByteArrayValue()); return
+			 * value; }catch(Exception e) { throw new
+			 * RuntimeException(e.getMessage()); } }
+			 */
 		}
-		
+
 		return null;
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named customizer. */
-	String visitElement_customizer(Element element)
-	{ // <customizer>
+	String visitElement_customizer(Element element) { // <customizer>
 		// element.getValue();
 		NamedNodeMap attrs = element.getAttributes();
-		for (int i = 0; i < attrs.getLength(); i++)
-		{
-			Attr attr = (Attr)attrs.item(i);
-			if (attr.getName().equals("href"))
-			{ // <customizer href="???">
+		for (int i = 0; i < attrs.getLength(); i++) {
+			Attr attr = (Attr) attrs.item(i);
+			if (attr.getName().equals("href")) { // <customizer href="???">
 				return attr.getValue();
 			}
 		}
 		return null;
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named description. */
-	String visitElement_description(Element element)
-	{ // <description>
+	String visitElement_description(Element element) { // <description>
 		// element.getValue();
-		String desc="";
+		String desc = "";
 		NodeList nodes = element.getChildNodes();
-		for(int i=0;i<nodes.getLength();i++)
-		{
-			Node node=nodes.item(i);
-			if(node.getNodeType()==Node.CDATA_SECTION_NODE)
-			{
-				desc=((CDATASection)node).getData();
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			if (node.getNodeType() == Node.CDATA_SECTION_NODE) {
+				desc = ((CDATASection) node).getData();
 				break;
 			}
 		}
 		return desc;
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named frequency-scale. */
-	FrequencyScale visitElement_frequency_scale(Element element)
-	{ // <frequency-scale>
+	FrequencyScale visitElement_frequency_scale(Element element) { // <frequency-scale>
 		// element.getValue();
-		
-		FrequencyScale freqscale=new FrequencyScale();
+
+		FrequencyScale freqscale = new FrequencyScale();
 		NamedNodeMap attrs = element.getAttributes();
-		for (int i = 0; i < attrs.getLength(); i++)
-		{
-			Attr attr = (Attr)attrs.item(i);
-			if (attr.getName().equals("label"))
-			{ // <frequency-scale label="???">
+		for (int i = 0; i < attrs.getLength(); i++) {
+			Attr attr = (Attr) attrs.item(i);
+			if (attr.getName().equals("label")) { // <frequency-scale
+				// label="???">
 				freqscale.setFrequencyScaleLabel(attr.getValue());
 			}
 		}
 		NodeList nodes = element.getChildNodes();
-		for (int i = 0; i < nodes.getLength(); i++)
-		{
+		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			switch (node.getNodeType())
-			{
-				case Node.ELEMENT_NODE:
-					Element nodeElement = (Element)node;
-					if (nodeElement.getTagName().equals("max-frequency"))
-					{
-						freqscale.setMaximumFrequency(visitElement_Frequency((Element)node.getChildNodes().item(0)));
-					}
-					if (nodeElement.getTagName().equals("min-frequency"))
-					{
-						freqscale.setMinimumFrequency(visitElement_Frequency((Element)node.getChildNodes().item(0)));
-					}
-					if (nodeElement.getTagName().equals("step-frequency"))
-					{
-						freqscale.setStepFrequency(visitElement_Frequency((Element)node.getChildNodes().item(0)));
-					}
-					break;
+			switch (node.getNodeType()) {
+			case Node.ELEMENT_NODE:
+				Element nodeElement = (Element) node;
+				if (nodeElement.getTagName().equals("max-frequency")) {
+					freqscale.setMaximumFrequency(visitElement_Frequency((Element) node.getChildNodes().item(0)));
+				}
+				if (nodeElement.getTagName().equals("min-frequency")) {
+					freqscale.setMinimumFrequency(visitElement_Frequency((Element) node.getChildNodes().item(0)));
+				}
+				if (nodeElement.getTagName().equals("step-frequency")) {
+					freqscale.setStepFrequency(visitElement_Frequency((Element) node.getChildNodes().item(0)));
+				}
+				break;
 			}
 		}
-		
+
 		return freqscale;
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named parameter. */
-	ChannelParameter visitElement_parameter(Element element)
-	{ // <parameter>
+	ChannelParameter visitElement_parameter(Element element) { // <parameter>
 		// element.getValue();
-		ChannelParameter parameter=new ChannelParameter();
-		
+		ChannelParameter parameter = new ChannelParameter();
+
 		NamedNodeMap attrs = element.getAttributes();
-		for (int i = 0; i < attrs.getLength(); i++)
-		{
-			Attr attr = (Attr)attrs.item(i);
-			if (attr.getName().equals("value"))
-			{ // <parameter value="???">
+		for (int i = 0; i < attrs.getLength(); i++) {
+			Attr attr = (Attr) attrs.item(i);
+			if (attr.getName().equals("value")) { // <parameter value="???">
 				// attr.getValue();
 				parameter.setSelectedParameterValue(attr.getValue());
 			}
-			if (attr.getName().equals("type"))
-			{ // <parameter type="???">
-				String type=attr.getValue();
-				if(type.equalsIgnoreCase("OnOffValue"))		    parameter.setParameterType(ParameterType.OnOffValue);
-				else if(type.equalsIgnoreCase("ContinuousValue"))   parameter.setParameterType(ParameterType.ContinuousValue);
-				else if(type.equalsIgnoreCase("SelectionListValue"))parameter.setParameterType(ParameterType.SelectionListValue);
-				else if(type.equalsIgnoreCase("BlackBoxValue"))	    parameter.setParameterType(ParameterType.BlackBoxValue);
-				else throw new RuntimeException("Parameter type must be one of OnOffValue/ContinuousValue/SelectionListValue/BlackBoxValue");
+			if (attr.getName().equals("type")) { // <parameter type="???">
+				String type = attr.getValue();
+				if (type.equalsIgnoreCase("OnOffValue"))
+					parameter.setParameterType(ParameterType.OnOffValue);
+				else if (type.equalsIgnoreCase("ContinuousValue"))
+					parameter.setParameterType(ParameterType.ContinuousValue);
+				else if (type.equalsIgnoreCase("SelectionListValue"))
+					parameter.setParameterType(ParameterType.SelectionListValue);
+				else if (type.equalsIgnoreCase("BlackBoxValue"))
+					parameter.setParameterType(ParameterType.BlackBoxValue);
+				else
+					throw new RuntimeException(
+							"Parameter type must be one of OnOffValue/ContinuousValue/SelectionListValue/BlackBoxValue");
 			}
-			if (attr.getName().equals("name"))
-			{ // <parameter name="???">
+			if (attr.getName().equals("name")) { // <parameter name="???">
 				parameter.setParameterName(attr.getValue());
 			}
 		}
 		NodeList nodes = element.getChildNodes();
-		for (int i = 0; i < nodes.getLength(); i++)
-		{
+		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			switch (node.getNodeType())
-			{
-				case Node.ELEMENT_NODE:
-					Element nodeElement = (Element)node;
-					if (nodeElement.getTagName().equals("selection-list"))
-					{
-						parameter.setParameterSelectionList(visitElement_selection_list(nodeElement));
-					}
-					break;
+			switch (node.getNodeType()) {
+			case Node.ELEMENT_NODE:
+				Element nodeElement = (Element) node;
+				if (nodeElement.getTagName().equals("selection-list")) {
+					parameter.setParameterSelectionList(visitElement_selection_list(nodeElement));
+				}
+				break;
 			}
 		}
 		return parameter;
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named sampling-scale. */
-	SamplesNumScale visitElement_sampling_scale(Element element)
-	{ // <sampling-scale>
+	SamplesNumScale visitElement_sampling_scale(Element element) { // <sampling-scale>
 		// element.getValue();
-		SamplesNumScale scale=new SamplesNumScale();
+		SamplesNumScale scale = new SamplesNumScale();
 		NodeList nodes = element.getChildNodes();
-		for (int i = 0; i < nodes.getLength(); i++)
-		{
+		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			switch (node.getNodeType())
-			{
-				case Node.ELEMENT_NODE:
-					Element nodeElement = (Element)node;
-					if (nodeElement.getTagName().equals("max-samples"))
-					{
-						String str_max_samples=((Text)nodeElement.getFirstChild()).getData();
-						scale.setMaxSamples(Integer.parseInt(str_max_samples));
-					}
-					if (nodeElement.getTagName().equals("min-samples"))
-					{
-						String str_min_samples=((Text)nodeElement.getFirstChild()).getData();
-						scale.setMinSamples(Integer.parseInt(str_min_samples));
-					}
-					if (nodeElement.getTagName().equals("step-samples"))
-					{
-						String str_step_samples=((Text)nodeElement.getFirstChild()).getData();
-						scale.setStep(Integer.parseInt(str_step_samples));
-					}
-					break;
+			switch (node.getNodeType()) {
+			case Node.ELEMENT_NODE:
+				Element nodeElement = (Element) node;
+				if (nodeElement.getTagName().equals("max-samples")) {
+					String str_max_samples = ((Text) nodeElement.getFirstChild()).getData();
+					scale.setMaxSamples(Integer.parseInt(str_max_samples));
+				}
+				if (nodeElement.getTagName().equals("min-samples")) {
+					String str_min_samples = ((Text) nodeElement.getFirstChild()).getData();
+					scale.setMinSamples(Integer.parseInt(str_min_samples));
+				}
+				if (nodeElement.getTagName().equals("step-samples")) {
+					String str_step_samples = ((Text) nodeElement.getFirstChild()).getData();
+					scale.setStep(Integer.parseInt(str_step_samples));
+				}
+				break;
 			}
 		}
 		return scale;
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named scale. */
-	com.linkare.rec.impl.utils.HardwareInfoXMLReader.ScaleSelector visitElement_scale(Element element)
-	{ // <scale>
+	com.linkare.rec.impl.utils.HardwareInfoXMLReader.ScaleSelector visitElement_scale(Element element) { // <scale>
 		// element.getValue();
-		Scale scale=new Scale();
-		boolean isSelected=false;
-		
+		Scale scale = new Scale();
+		boolean isSelected = false;
+
 		NamedNodeMap attrs = element.getAttributes();
-		for (int i = 0; i < attrs.getLength(); i++)
-		{
-			Attr attr = (Attr)attrs.item(i);
-			if (attr.getName().equals("selected"))
-			{ // <scale selected="???">
-				String str_isSelected=attr.getValue();
-				if(str_isSelected.equalsIgnoreCase("true") || str_isSelected.equalsIgnoreCase("yes") || str_isSelected.equalsIgnoreCase("1"))
-					isSelected=true;
-				else if(str_isSelected.equalsIgnoreCase("false") || str_isSelected.equalsIgnoreCase("no") || str_isSelected.equalsIgnoreCase("0"))
-					isSelected=false;
-				else throw new RuntimeException("selected attribute should be true/yes/1 or false/no/0");
+		for (int i = 0; i < attrs.getLength(); i++) {
+			Attr attr = (Attr) attrs.item(i);
+			if (attr.getName().equals("selected")) { // <scale selected="???">
+				String str_isSelected = attr.getValue();
+				if (str_isSelected.equalsIgnoreCase("true") || str_isSelected.equalsIgnoreCase("yes")
+						|| str_isSelected.equalsIgnoreCase("1"))
+					isSelected = true;
+				else if (str_isSelected.equalsIgnoreCase("false") || str_isSelected.equalsIgnoreCase("no")
+						|| str_isSelected.equalsIgnoreCase("0"))
+					isSelected = false;
+				else
+					throw new RuntimeException("selected attribute should be true/yes/1 or false/no/0");
 			}
-			if (attr.getName().equals("label"))
-			{ // <scale label="???">
+			if (attr.getName().equals("label")) { // <scale label="???">
 				// attr.getValue();
 				scale.setScaleLabel(attr.getValue());
 			}
-			if (attr.getName().equals("physicsunitname"))
-			{ // <scale physicsunitname="???">
+			if (attr.getName().equals("physicsunitname")) { // <scale
+				// physicsunitname="???">
 				// attr.getValue();
 				scale.setPhysicsUnitName(attr.getValue());
 			}
-			if (attr.getName().equals("multiplier"))
-			{ // <scale multiplier="???">
+			if (attr.getName().equals("multiplier")) { // <scale
+				// multiplier="???">
 				// attr.getValue();
 				scale.setMultiplier(readMultiplier(attr.getValue()));
 			}
-			if (attr.getName().equals("physicsunitsymbol"))
-			{ // <scale physicsunitsymbol="???">
+			if (attr.getName().equals("physicsunitsymbol")) { // <scale
+				// physicsunitsymbol="???">
 				// attr.getValue();
 				scale.setPhysicsUnitSymbol(attr.getValue());
 			}
 		}
 		NodeList nodes = element.getChildNodes();
-		for (int i = 0; i < nodes.getLength(); i++)
-		{
+		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			switch (node.getNodeType())
-			{
-				case Node.ELEMENT_NODE:
-					Element nodeElement = (Element)node;
-					if (nodeElement.getTagName().equals("errordefault"))
-					{
-						scale.setDefaultErrorValue(visitElement_PhysicsVal((Element)nodeElement.getFirstChild()));
-					}
-					if (nodeElement.getTagName().equals("max"))
-					{
-						scale.setMaximumValue(visitElement_PhysicsVal((Element)nodeElement.getFirstChild()));
-					}
-					if (nodeElement.getTagName().equals("min"))
-					{
-						scale.setMinimumValue(visitElement_PhysicsVal((Element)nodeElement.getFirstChild()));
-					}
-					if (nodeElement.getTagName().equals("step"))
-					{
-						scale.setStepValue(visitElement_PhysicsVal((Element)nodeElement.getFirstChild()));
-					}
-					break;
+			switch (node.getNodeType()) {
+			case Node.ELEMENT_NODE:
+				Element nodeElement = (Element) node;
+				if (nodeElement.getTagName().equals("errordefault")) {
+					scale.setDefaultErrorValue(visitElement_PhysicsVal((Element) nodeElement.getFirstChild()));
+				}
+				if (nodeElement.getTagName().equals("max")) {
+					scale.setMaximumValue(visitElement_PhysicsVal((Element) nodeElement.getFirstChild()));
+				}
+				if (nodeElement.getTagName().equals("min")) {
+					scale.setMinimumValue(visitElement_PhysicsVal((Element) nodeElement.getFirstChild()));
+				}
+				if (nodeElement.getTagName().equals("step")) {
+					scale.setStepValue(visitElement_PhysicsVal((Element) nodeElement.getFirstChild()));
+				}
+				break;
 			}
 		}
-		
-		return new com.linkare.rec.impl.utils.HardwareInfoXMLReader.ScaleSelector(scale,isSelected);
+
+		return new com.linkare.rec.impl.utils.HardwareInfoXMLReader.ScaleSelector(scale, isSelected);
 	}
-	
+
 	/** Scan through org.w3c.dom.Element named selection-list. */
-	String[] visitElement_selection_list(Element element)
-	{ // <selection-list>
+	String[] visitElement_selection_list(Element element) { // <selection-list>
 		// element.getValue();
-		TreeMap<Integer, String> tableSelectionList=new TreeMap<Integer, String>();
+		TreeMap<Integer, String> tableSelectionList = new TreeMap<Integer, String>();
 		NodeList nodes = element.getChildNodes();
-		for (int i = 0; i < nodes.getLength(); i++)
-		{
+		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			switch (node.getNodeType())
-			{
-				case Node.ELEMENT_NODE:
-					Element nodeElement = (Element)node;
-					if (nodeElement.getTagName().equals("value"))
-					{
-						String strOrderNum=((Attr)node.getAttributes().getNamedItem("order")).getValue();
-						String value=((Text)node.getFirstChild()).getData();
-						tableSelectionList.put(new Integer(strOrderNum),value);
-					}
-					break;
+			switch (node.getNodeType()) {
+			case Node.ELEMENT_NODE:
+				Element nodeElement = (Element) node;
+				if (nodeElement.getTagName().equals("value")) {
+					String strOrderNum = ((Attr) node.getAttributes().getNamedItem("order")).getValue();
+					String value = ((Text) node.getFirstChild()).getData();
+					tableSelectionList.put(new Integer(strOrderNum), value);
+				}
+				break;
 			}
 		}
-		
-		Collection col=tableSelectionList.values();
-		String[] selectionList=new String[col.size()];
-		Object[] selectionListObj=col.toArray();
-		System.arraycopy(selectionListObj,0,selectionList,0,selectionList.length);
-		tableSelectionList=null;selectionListObj=null;System.gc();
+
+		Collection col = tableSelectionList.values();
+		String[] selectionList = new String[col.size()];
+		Object[] selectionListObj = col.toArray();
+		System.arraycopy(selectionListObj, 0, selectionList, 0, selectionList.length);
+		tableSelectionList = null;
+		selectionListObj = null;
+		System.gc();
 		return selectionList;
-		
+
 	}
-	
-	/** Getter for property hardwareInfo.
+
+	/**
+	 * Getter for property hardwareInfo.
+	 * 
 	 * @return Value of property hardwareInfo.
 	 */
-	public HardwareInfo getHardwareInfo()
-	{
+	public HardwareInfo getHardwareInfo() {
 		return this.hardwareInfo;
 	}
-	
-	
-	
-	private class ScaleSelector
-	{
-		
-		
-		public ScaleSelector(Scale scale,boolean selected)
-		{
-			this.scale=scale;
-			this.selected=selected;
+
+	private class ScaleSelector {
+
+		public ScaleSelector(Scale scale, boolean selected) {
+			this.scale = scale;
+			this.selected = selected;
 		}
-		
+
 		/** Holds value of property scale. */
 		private Scale scale;
-		
+
 		/** Holds value of property selected. */
 		private boolean selected;
-		
-		/** Getter for property scale.
+
+		/**
+		 * Getter for property scale.
+		 * 
 		 * @return Value of property scale.
 		 */
-		public Scale getScale()
-		{
+		public Scale getScale() {
 			return this.scale;
 		}
-		
-		/** Getter for property selected.
+
+		/**
+		 * Getter for property selected.
+		 * 
 		 * @return Value of property selected.
 		 */
-		public boolean isSelected()
-		{
+		public boolean isSelected() {
 			return this.selected;
 		}
-		
+
 	}
-	
+
 }

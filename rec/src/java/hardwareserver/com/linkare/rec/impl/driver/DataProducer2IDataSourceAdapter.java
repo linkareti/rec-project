@@ -10,36 +10,32 @@ import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class DataProducer2IDataSourceAdapter extends BaseDataSource
-{
-	private DataProducerWrapper delegateDataProducer=null;
+public class DataProducer2IDataSourceAdapter extends BaseDataSource {
+	private DataProducerWrapper delegateDataProducer = null;
+
 	/** Creates a new instance of DataProducer2IDataSourceAdapter */
-	public DataProducer2IDataSourceAdapter(DataProducerWrapper delegateDataProducer)
-	{
-		this.delegateDataProducer=delegateDataProducer;
+	public DataProducer2IDataSourceAdapter(DataProducerWrapper delegateDataProducer) {
+		this.delegateDataProducer = delegateDataProducer;
 	}
-	
-	public String getName()
-	{
+
+	public String getName() {
 		return delegateDataProducer.getDataProducerName();
 	}
-	
-	int packetSize=1;
-	public int getPacketSize()
-	{
+
+	int packetSize = 1;
+
+	public int getPacketSize() {
 		return packetSize;
 	}
-	
-	public PhysicsValue[][] getSamples(int sampleIndexStart,int sampleIndexEnd)
-	{
+
+	public PhysicsValue[][] getSamples(int sampleIndexStart, int sampleIndexEnd) {
 		return null;
 	}
-	
-	public void stopNow()
-	{
+
+	public void stopNow() {
 	}
-	
+
 }

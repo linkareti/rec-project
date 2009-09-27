@@ -7,11 +7,11 @@
 package pt.utl.ist.elab.driver.statsound.audio;
 
 /**
- *
- * @author  Andr�
+ * 
+ * @author Andr�
  */
-public interface DataSoundListener extends java.util.EventListener
-{
-    public void bufferAvailable(NewDataBufferEvent evt);
-    public void rmsAvailable();
+public interface DataSoundListener extends java.util.EventListener {
+	public void bufferAvailable(NewDataBufferEvent evt);
+
+	public void rmsAvailable();
 }

@@ -14,8 +14,6 @@ import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortCommand;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortCommandListener;
-import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortProcessor;
-import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortTranslatorProcessorManager;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
@@ -25,7 +23,6 @@ import com.linkare.rec.impl.driver.BaseDriver;
 import com.linkare.rec.impl.driver.IDataSource;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
-import com.linkare.rec.impl.threading.IConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.EventQueue;
@@ -61,14 +58,18 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	protected void loadCommandHandlers() {
 		/*
-		 * SerialPortTranslatorProcessorManager
-		 * .initStampProcessorTranslator("pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortStartProcessor");
-		 * SerialPortTranslatorProcessorManager
-		 * .initStampProcessorTranslator("pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortConfiguredProcessor");
-		 * SerialPortTranslatorProcessorManager
-		 * .initStampProcessorTranslator("pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortNotConfiguredProcessor");
-		 * SerialPortTranslatorProcessorManager
-		 * .initStampProcessorTranslator("pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortIdProcessor");
+		 * SerialPortTranslatorProcessorManager.initStampProcessorTranslator(
+		 * "pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortStartProcessor"
+		 * ); SerialPortTranslatorProcessorManager
+		 * .initStampProcessorTranslator(
+		 * "pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortConfiguredProcessor"
+		 * ); SerialPortTranslatorProcessorManager
+		 * .initStampProcessorTranslator(
+		 * "pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortNotConfiguredProcessor"
+		 * ); SerialPortTranslatorProcessorManager
+		 * .initStampProcessorTranslator(
+		 * "pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortIdProcessor"
+		 * );
 		 */
 		loadExtraCommandHandlers();
 	}
@@ -91,7 +92,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	}
 
 	public void init(HardwareInfo info) {
-		
+
 		this.info = info;
 
 		if (serialIO != null)
@@ -101,13 +102,13 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		serialFinder.startSearch();
 		try {
 			WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
-				public int getConditionResult() {
+				public ConditionResult getConditionResult() {
 					synchronized (serialFinder) {
 						if (serialIO != null) {
-							return IConditionDecisor.CONDITION_MET_TRUE;
+							return ConditionResult.CONDITION_MET_TRUE;
 						}
 					}
-					return IConditionDecisor.CONDITION_NOT_MET;
+					return ConditionResult.CONDITION_NOT_MET;
 				}
 			}, 120 * 1000, serialFinder.getTimeOutPerPort());
 		} catch (TimedOutException e) {
@@ -148,7 +149,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			} catch (TimedOutException e) {
 				LoggerUtil.logThrowable("Error on start... - rethrowing IncorrectStateException!", e, Logger
 						.getLogger(STAMP_DRIVER_LOGGER));
-				// I'll try to reopen the stamp...this way it il not get stuck here...at least I hope so!
+				// I'll try to reopen the stamp...this way it il not get stuck
+				// here...at least I hope so!
 				fireIDriverStateListenerDriverReseting();
 				serialIO.reopen();
 				fireIDriverStateListenerDriverReseted();
@@ -198,23 +200,28 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public void handleStampCommand(SerialPortCommand command) {
 		// SerialPortProcessor processor = command.getProcessor();
 		/*
-		 * if (processor == null) { Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Didn't get a processor for
-		 * command " + command.getCommandIdentifier()); Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Droping
-		 * the command, as it is not understood!"); return; }
+		 * if (processor == null) {
+		 * Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Didn't get a
+		 * processor for command
+		 * " + command.getCommandIdentifier()); Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "
+		 * Droping the command, as it is not understood!"); return; }
 		 * 
-		 * if (processor.isData() && dataSource != null) { if (!processor.process(command)) {
-		 * Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Couldn't process data command in CommandDispatcher...
-		 * Strange..."); return; }
+		 * if (processor.isData() && dataSource != null) { if
+		 * (!processor.process(command)) {
+		 * Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Couldn't
+		 * process data command in CommandDispatcher... Strange..."); return; }
 		 */
 		/*
 		 * if (dataSource != null) dataSource.processDataCommand(command); else
-		 * Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "No data source to process command...");
+		 * Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,
+		 * "No data source to process command...");
 		 */
 		// stampCommands.addEvent(command);
 		/*
-		 * } else { if (!processor.process(command)) { Logger.getLogger(STAMP_DRIVER_LOGGER).log( Level.INFO, "The
-		 * processor didn't understand the message... Ooooppsss... Message was : " + command.getCommand() + " !");
-		 * return; }
+		 * } else { if (!processor.process(command)) {
+		 * Logger.getLogger(STAMP_DRIVER_LOGGER).log( Level.INFO, "The processor
+		 * didn't understand the message... Ooooppsss... Message was :
+		 * " + command.getCommand() + " !"); return; }
 		 */
 
 		processCommand(command);
@@ -236,13 +243,18 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		public void dispatchEvent(Object evt) {
 			/*
-			 * if(evt instanceof StampCommand) { StampCommand cmd=(StampCommand)evt; StampProcessor
-			 * processor=cmd.getProcessor(); if(processor==null || !processor.process(cmd)) {
-			 * Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,"Couldn't process data command in
-			 * CommandDispatcher... Strange..."); return; }
+			 * if(evt instanceof StampCommand) { StampCommand
+			 * cmd=(StampCommand)evt; StampProcessor
+			 * processor=cmd.getProcessor(); if(processor==null ||
+			 * !processor.process(cmd)) {
+			 * Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,"Couldn't
+			 * process data command in CommandDispatcher... Strange...");
+			 * return; }
 			 * 
-			 * if(cmd.isData() && dataSource!=null) dataSource.processDataCommand(cmd); else
-			 * Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,"CommandDispatcher doesn't know how to deal with
+			 * if(cmd.isData() && dataSource!=null)
+			 * dataSource.processDataCommand(cmd); else
+			 * Logger.getLogger(STAMP_DRIVER_LOGGER
+			 * ).log(Level.INFO,"CommandDispatcher doesn't know how to deal with
 			 * other than Data StampCommand's"); } else
 			 */
 			if (evt instanceof StopEvent) {
@@ -275,8 +287,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	/**
 	 * Setter for property applicationNameLockPort.
 	 * 
-	 * @param applicationNameLockPort
-	 *            New value of property applicationNameLockPort.
+	 * @param applicationNameLockPort New value of property
+	 *            applicationNameLockPort.
 	 */
 	public void setApplicationNameLockPort(String applicationNameLockPort) {
 		serialFinder.setApplicationNameLockPort(applicationNameLockPort);
@@ -294,8 +306,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	/**
 	 * Setter for property portParity.
 	 * 
-	 * @param portParity
-	 *            New value of property portParity.
+	 * @param portParity New value of property portParity.
 	 */
 	public void setPortParity(int portParity) {
 		serialFinder.setPortParity(portParity);
@@ -313,8 +324,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	/**
 	 * Setter for property portBaudRate.
 	 * 
-	 * @param portBaudRate
-	 *            New value of property portBaudRate.
+	 * @param portBaudRate New value of property portBaudRate.
 	 */
 	public void setPortBaudRate(int portBaudRate) {
 		serialFinder.setPortBaudRate(portBaudRate);
@@ -332,8 +342,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	/**
 	 * Setter for property portDataBits.
 	 * 
-	 * @param portDataBits
-	 *            New value of property portDataBits.
+	 * @param portDataBits New value of property portDataBits.
 	 */
 	public void setPortDataBits(int portDataBits) {
 		serialFinder.setPortDataBits(portDataBits);
@@ -351,8 +360,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	/**
 	 * Setter for property portStopBits.
 	 * 
-	 * @param portStopBits
-	 *            New value of property portStopBits.
+	 * @param portStopBits New value of property portStopBits.
 	 */
 	public void setPortStopBits(int portStopBits) {
 		serialFinder.setPortStopBits(portStopBits);
@@ -370,8 +378,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	/**
 	 * Setter for property timeOutPerPort.
 	 * 
-	 * @param timeOutPerPort
-	 *            New value of property timeOutPerPort.
+	 * @param timeOutPerPort New value of property timeOutPerPort.
 	 */
 	public void setTimeOutPerPort(long timeOutPerPort) {
 		serialFinder.setTimeOutPerPort(timeOutPerPort);
@@ -390,8 +397,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	/**
 	 * Setter for property DTR.
 	 * 
-	 * @param DTR
-	 *            New value of property DTR.
+	 * @param DTR New value of property DTR.
 	 * 
 	 */
 	public void setDTR(boolean DTR) {
@@ -411,8 +417,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	/**
 	 * Setter for property RTS.
 	 * 
-	 * @param RTS
-	 *            New value of property RTS.
+	 * @param RTS New value of property RTS.
 	 * 
 	 */
 	public void setRTS(boolean RTS) {
@@ -432,8 +437,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	/**
 	 * Setter for property waitForEcho.
 	 * 
-	 * @param waitForEcho
-	 *            New value of property waitForEcho.
+	 * @param waitForEcho New value of property waitForEcho.
 	 * 
 	 */
 	public void setWaitForEcho(boolean waitForEcho) {

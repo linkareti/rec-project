@@ -13,27 +13,25 @@ public class SerialPortRs232Parameter {
 	private Integer order = null;
 	private TransferFunction inputTransferFunction = null;
 	private TransferFunction outputTransferFunction = null;
-	
+
 	private String name = null;
 	private SerialPortRs232ParameterType type = SerialPortRs232ParameterType.UNDEFINED;
 	private Double defaultContinuousValue = null;
 	private Integer defaultSelection = null;
 	private Boolean defaultOnOff = null;
-	
 
 	public SerialPortRs232Parameter(String inputFormat, String outputFormat, Double maxValue, Double minValue,
 			Integer order) throws Exception {
 		if (inputFormat == null || outputFormat == null || order == null
 				|| (maxValue != null && minValue != null && minValue > maxValue))
 			throw new Exception("invalid.rs232.parameter");
-		
+
 		try {
 			if (!inputFormat.equals("")) {
 				this.inputFormat = new DecimalFormat();
 				this.inputFormat.applyPattern(inputFormat.replace("#", "0"));
 			}
-		}
-		catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			throw new Exception("parameter.input.format.not.valid");
 		}
 		try {
@@ -41,11 +39,10 @@ public class SerialPortRs232Parameter {
 				this.outputFormat = new DecimalFormat();
 				this.outputFormat.applyPattern(outputFormat.replace("#", "0"));
 			}
-		}
-		catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			throw new Exception("parameter.output.format.not.valid");
 		}
-			
+
 		this.maxValue = maxValue;
 		this.minValue = minValue;
 		this.order = order;
@@ -56,30 +53,28 @@ public class SerialPortRs232Parameter {
 	}
 
 	public void addInputTransferFunction(FunctionKind kind, Double a, Double b, Double c) throws Exception {
-		addTransferFunction(TransferFunctionType.INPUT,kind,a,b,c);
+		addTransferFunction(TransferFunctionType.INPUT, kind, a, b, c);
 	}
-	
+
 	public void addOutputTransferFunction(FunctionKind kind, Double a, Double b, Double c) throws Exception {
-		addTransferFunction(TransferFunctionType.OUTPUT,kind,a,b,c);
+		addTransferFunction(TransferFunctionType.OUTPUT, kind, a, b, c);
 	}
-	
-	private void addTransferFunction(TransferFunctionType type, FunctionKind kind, Double a, Double b, Double c) throws Exception {
+
+	private void addTransferFunction(TransferFunctionType type, FunctionKind kind, Double a, Double b, Double c)
+			throws Exception {
 		TransferFunction transferFunction = null;
 		if (type == TransferFunctionType.INPUT) {
 			if (inputTransferFunction == null) {
 				inputTransferFunction = new TransferFunction(TransferFunctionType.INPUT);
 				transferFunction = inputTransferFunction;
-			}
-			else
+			} else
 				throw new Exception("input.transference.function.already.exists.for.current.parameter");
-		}
-		else if (type == TransferFunctionType.OUTPUT) {
+		} else if (type == TransferFunctionType.OUTPUT) {
 			if (outputTransferFunction == null) {
 				outputTransferFunction = new TransferFunction(TransferFunctionType.INPUT);
 				transferFunction = outputTransferFunction;
-			}
-			else
-				throw new Exception("output.transference.function.already.exists.for.current.parameter");			
+			} else
+				throw new Exception("output.transference.function.already.exists.for.current.parameter");
 		}
 		if (kind == FunctionKind.LINEAR) {
 			transferFunction.addLinearFunction(a, b);
@@ -115,13 +110,13 @@ public class SerialPortRs232Parameter {
 			return value.toString();
 		return outputFormat.format(value).toString();
 	}
-	
+
 	public Double applyInputTransferFunction(Double value) {
 		if (inputTransferFunction == null)
 			return value;
 		return inputTransferFunction.applyOver(value);
 	}
-	
+
 	public Double applyOutputTransferFunction(Double value) {
 		if (outputTransferFunction == null)
 			return value;

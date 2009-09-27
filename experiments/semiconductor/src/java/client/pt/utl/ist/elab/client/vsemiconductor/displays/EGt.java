@@ -9,22 +9,19 @@
 package pt.utl.ist.elab.client.vsemiconductor.displays;
 
 /**
- *
- * @author  Pedro Queir� e Nuno Fernandes
+ * 
+ * @author Pedro Queir� e Nuno Fernandes
  */
-public class EGt extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph
-{
-    
-    /** Creates a new instance of W */
-    public EGt() 
-    {
-        super();
-        setChannelDisplayX(4);
-        setChannelDisplayY(1);        
-    }    
-    
-    public String getName()
-    {
-        return "Energy Gap em funcao da temperatura";
-    }
+public class EGt extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+
+	/** Creates a new instance of W */
+	public EGt() {
+		super();
+		setChannelDisplayX(4);
+		setChannelDisplayY(1);
+	}
+
+	public String getName() {
+		return "Energy Gap em funcao da temperatura";
+	}
 }

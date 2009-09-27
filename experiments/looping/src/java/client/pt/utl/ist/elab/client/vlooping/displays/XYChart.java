@@ -7,19 +7,17 @@
 package pt.utl.ist.elab.client.vlooping.displays;
 
 /**
- *
- * @author  Emanuel Antunes
+ * 
+ * @author Emanuel Antunes
  */
-public class XYChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
-{
-    
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public XYChart()
-    {
-        super();
-	setChannelDisplayX(1);
-	setChannelDisplayY(2);
-        
-    }
-    
+public class XYChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public XYChart() {
+		super();
+		setChannelDisplayX(1);
+		setChannelDisplayY(2);
+
+	}
+
 }

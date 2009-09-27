@@ -7,11 +7,11 @@
 package com.linkare.rec.impl.client.experiment;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface ExpHistoryDisplayFactory
-{
+public interface ExpHistoryDisplayFactory {
 	public void startExperiment(ExpHistory history);
+
 	public void showExperimentHeader(ExpHistory history);
 }

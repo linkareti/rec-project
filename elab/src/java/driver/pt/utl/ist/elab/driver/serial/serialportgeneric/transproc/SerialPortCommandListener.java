@@ -7,12 +7,11 @@
 package pt.utl.ist.elab.driver.serial.serialportgeneric.transproc;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface SerialPortCommandListener extends java.util.EventListener
-{
-	
+public interface SerialPortCommandListener extends java.util.EventListener {
+
 	public void handleStampCommand(SerialPortCommand command);
-	
+
 }

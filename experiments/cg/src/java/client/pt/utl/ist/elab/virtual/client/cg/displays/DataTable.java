@@ -6,17 +6,17 @@
 
 package pt.utl.ist.elab.virtual.client.cg.displays;
 
-import com.linkare.rec.impl.baseUI.table.*;
+import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
 /**
- *
- * @author  nomead
+ * 
+ * @author nomead
  */
 public class DataTable extends MultSeriesTable {
-    
-    /** Creates a new instance of DataTable */
-    public DataTable(){
-        super();
-        setColArray(new int[]{0,1,2});
-    }
+
+	/** Creates a new instance of DataTable */
+	public DataTable() {
+		super();
+		setColArray(new int[] { 0, 1, 2 });
+	}
 }

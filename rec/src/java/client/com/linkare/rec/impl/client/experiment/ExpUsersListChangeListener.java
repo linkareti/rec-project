@@ -6,12 +6,10 @@
 
 package com.linkare.rec.impl.client.experiment;
 
-
 /**
- *
- * @author  Jos� Pedro Pereira
+ * 
+ * @author Jos� Pedro Pereira
  */
-public interface ExpUsersListChangeListener extends java.util.EventListener
-{
-    public void usersListChanged(ExpUsersListEvent evt);
+public interface ExpUsersListChangeListener extends java.util.EventListener {
+	public void usersListChanged(ExpUsersListEvent evt);
 }

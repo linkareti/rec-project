@@ -7,16 +7,16 @@
 package pt.utl.ist.elab.virtual.client.cartpole.displays;
 
 /**
- *
- * @author  nomead
+ * 
+ * @author nomead
  */
 public class ThetaChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
-    
-    /** Creates a new instance of ThetaChart */
-    public ThetaChart(){
-        super();
-	setChannelDisplayX(1);
-	setChannelDisplayY(3);
-    }
-    
+
+	/** Creates a new instance of ThetaChart */
+	public ThetaChart() {
+		super();
+		setChannelDisplayX(1);
+		setChannelDisplayY(3);
+	}
+
 }

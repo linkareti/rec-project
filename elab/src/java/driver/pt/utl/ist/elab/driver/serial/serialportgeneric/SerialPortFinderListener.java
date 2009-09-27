@@ -7,11 +7,11 @@
 package pt.utl.ist.elab.driver.serial.serialportgeneric;
 
 import gnu.io.SerialPort;
+
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface SerialPortFinderListener extends java.util.EventListener
-{
+public interface SerialPortFinderListener extends java.util.EventListener {
 	public void stampFound(SerialPort sPort);
 }

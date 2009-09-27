@@ -9,22 +9,19 @@
 package pt.utl.ist.elab.client.vsemiconductor.displays;
 
 /**
- *
- * @author  Pedro Queir� e Nuno Fernandes
+ * 
+ * @author Pedro Queir� e Nuno Fernandes
  */
-public class VBInd extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph
-{
-    
-    /** Creates a new instance of W */
-    public VBInd() 
-    {
-        super();
-        setChannelDisplayX(6);
-        setChannelDisplayY(2);        
-    }    
-    
-    public String getName()
-    {
-        return "Potencial Intrinseco em funcao do numero de dadores";
-    }
+public class VBInd extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+
+	/** Creates a new instance of W */
+	public VBInd() {
+		super();
+		setChannelDisplayX(6);
+		setChannelDisplayY(2);
+	}
+
+	public String getName() {
+		return "Potencial Intrinseco em funcao do numero de dadores";
+	}
 }

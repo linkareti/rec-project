@@ -6,9 +6,10 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.transproc;
 
-public interface StampProcessor
-{
+public interface StampProcessor {
 	public String getCommandIdentifier();
+
 	public boolean process(StampCommand command);
+
 	public boolean isData();
 }

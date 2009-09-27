@@ -7,10 +7,9 @@
 package com.linkare.rec.impl.client.lab;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface LabConnectorListener extends java.util.EventListener
-{
+public interface LabConnectorListener extends java.util.EventListener {
 	public void labStatusChanged(com.linkare.rec.impl.client.lab.LabConnectorEvent evt);
 }

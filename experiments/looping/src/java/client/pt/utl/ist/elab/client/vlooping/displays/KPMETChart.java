@@ -7,18 +7,16 @@
 package pt.utl.ist.elab.client.vlooping.displays;
 
 /**
- *
- * @author  Emanuel A.
+ * 
+ * @author Emanuel A.
  */
-public class KPMETChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph
-{
-    
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public KPMETChart()
-    {
-        super();
-	setChannelDisplayX(0);
-	setChannelDisplayYArray(new int[]{3,4,5});
-    }
-    
+public class KPMETChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public KPMETChart() {
+		super();
+		setChannelDisplayX(0);
+		setChannelDisplayYArray(new int[] { 3, 4, 5 });
+	}
+
 }

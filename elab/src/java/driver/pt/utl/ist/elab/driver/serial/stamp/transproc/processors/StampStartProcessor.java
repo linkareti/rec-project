@@ -10,20 +10,17 @@ import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
-public class StampStartProcessor extends AbstractStampProcessor
-{
-  
-  public static final String COMMAND_IDENTIFIER = AbstractStampDriver.START_STRING;
-  
-  public StampStartProcessor()
-  {
-    super(COMMAND_IDENTIFIER);
-  }
+public class StampStartProcessor extends AbstractStampProcessor {
 
-  public boolean process(StampCommand command)
-  {
-    command.addCommandData(COMMAND_IDENTIFIER,Boolean.TRUE);
-    return true;
-  }
-  
+	public static final String COMMAND_IDENTIFIER = AbstractStampDriver.START_STRING;
+
+	public StampStartProcessor() {
+		super(COMMAND_IDENTIFIER);
+	}
+
+	public boolean process(StampCommand command) {
+		command.addCommandData(COMMAND_IDENTIFIER, Boolean.TRUE);
+		return true;
+	}
+
 }

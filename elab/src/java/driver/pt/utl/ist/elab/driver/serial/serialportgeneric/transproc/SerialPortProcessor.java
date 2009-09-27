@@ -6,9 +6,10 @@
 
 package pt.utl.ist.elab.driver.serial.serialportgeneric.transproc;
 
-public interface SerialPortProcessor
-{
+public interface SerialPortProcessor {
 	public String getCommandIdentifier();
+
 	public boolean process(SerialPortCommand command);
+
 	public boolean isData();
 }

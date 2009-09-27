@@ -12,8 +12,7 @@ import org.w3c.dom.Node;
 // This interface is the intersection of all generated methods.
 // 
 
-public interface CommonBean 
-{
+public interface CommonBean {
 	public void _setPropertyChangeSupport(PropertyChangeSupport listeners);
 
 	public void addPropertyChangeListener(PropertyChangeListener listener);

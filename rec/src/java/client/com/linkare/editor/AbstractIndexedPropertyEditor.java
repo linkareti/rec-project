@@ -21,8 +21,7 @@ import javax.swing.JOptionPane;
  * 
  * @author jp
  */
-public abstract class AbstractIndexedPropertyEditor extends
-		PropertyEditorSupport {
+public abstract class AbstractIndexedPropertyEditor extends PropertyEditorSupport {
 	private PropertyEditor componentPropertyEditor = null;
 	private Class<?> baseArrayClassDefined = null;
 	DefaultIndexedPropertyCustomEditor customEditor = null;
@@ -35,13 +34,10 @@ public abstract class AbstractIndexedPropertyEditor extends
 	public AbstractIndexedPropertyEditor(PropertyEditor componentPropertyEditor) {
 		super();
 		this.componentPropertyEditor = componentPropertyEditor;
-		customEditor = new DefaultIndexedPropertyCustomEditor(
-				this.componentPropertyEditor);
+		customEditor = new DefaultIndexedPropertyCustomEditor(this.componentPropertyEditor);
 	}
 
-	public AbstractIndexedPropertyEditor(
-			PropertyEditor componentPropertyEditor,
-			Class<?> baseArrayClassDefined) {
+	public AbstractIndexedPropertyEditor(PropertyEditor componentPropertyEditor, Class<?> baseArrayClassDefined) {
 		this(componentPropertyEditor);
 		this.baseArrayClassDefined = baseArrayClassDefined;
 		customEditor.setBaseArrayClass(baseArrayClassDefined);
@@ -81,8 +77,7 @@ public abstract class AbstractIndexedPropertyEditor extends
 
 		for (int i = 0; i < length; i++) {
 			componentPropertyEditor.setValue(Array.get(getValue(), i));
-			retVal.append(escapeIndexedString(componentPropertyEditor
-					.getAsText()));
+			retVal.append(escapeIndexedString(componentPropertyEditor.getAsText()));
 			if (i < length - 1)
 				retVal.append(",");
 		}
@@ -97,11 +92,9 @@ public abstract class AbstractIndexedPropertyEditor extends
 			if (value.getClass().isArray())
 				super.setValue(value);
 			else {
-				JOptionPane
-						.showMessageDialog(
-								null,
-								"This editor is being set a value that doesn't represent an array!",
-								"Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null,
+						"This editor is being set a value that doesn't represent an array!", "Error",
+						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 		} else
@@ -122,9 +115,7 @@ public abstract class AbstractIndexedPropertyEditor extends
 
 		for (int i = 0; i < length; i++) {
 			componentPropertyEditor.setValue(Array.get(getValue(), i));
-			retVal
-					.append(componentPropertyEditor
-							.getJavaInitializationString());
+			retVal.append(componentPropertyEditor.getJavaInitializationString());
 			if (i < length - 1)
 				retVal.append(",");
 		}
@@ -144,8 +135,7 @@ public abstract class AbstractIndexedPropertyEditor extends
 				indexedArrayDeepness += "[]";
 			}
 
-			return "new " + c.getName() + indexedArrayDeepness
-					+ retVal.toString();
+			return "new " + c.getName() + indexedArrayDeepness + retVal.toString();
 		}
 
 		return retVal.toString();
@@ -163,8 +153,7 @@ public abstract class AbstractIndexedPropertyEditor extends
 		return baseArrayClass;
 	}
 
-	public void setAsText(String text)
-			throws java.lang.IllegalArgumentException {
+	public void setAsText(String text) throws java.lang.IllegalArgumentException {
 		componentPropertyEditor.setValue(null);
 
 		if (componentPropertyEditor.getAsText() == null)
@@ -189,28 +178,23 @@ public abstract class AbstractIndexedPropertyEditor extends
 					"As neither componentPropertyEditor as a non null value neither do I, I can't determine Base Array Class... Please set it explicitly!");
 
 		if (baseArrayClass != null) {
-			Object oNewValue = Array.newInstance(baseArrayClass,
-					splitValues.length);
+			Object oNewValue = Array.newInstance(baseArrayClass, splitValues.length);
 			for (int i = 0; i < splitValues.length; i++) {
 				try {
-					componentPropertyEditor
-							.setAsText(unEscapeIndexedString(splitValues[i]));
+					componentPropertyEditor.setAsText(unEscapeIndexedString(splitValues[i]));
 					Array.set(oNewValue, i, componentPropertyEditor.getValue());
 				} catch (IllegalArgumentException e) {
-					throw new IllegalArgumentException(
-							"Couldn't set Indexed Value at index " + i
-									+ " because:\n\r" + e.getMessage());
+					throw new IllegalArgumentException("Couldn't set Indexed Value at index " + i + " because:\n\r"
+							+ e.getMessage());
 				} catch (ArrayIndexOutOfBoundsException e2) {
-					throw new IllegalArgumentException(
-							"Couldn't set Indexed Value at index " + i
-									+ " because:\n\r" + e2.getMessage());
+					throw new IllegalArgumentException("Couldn't set Indexed Value at index " + i + " because:\n\r"
+							+ e2.getMessage());
 				}
 			}
 
 			setValue(oNewValue);
 		} else
-			throw new IllegalArgumentException(
-					"Couldn't set Array Value because base Array Class is unknown");
+			throw new IllegalArgumentException("Couldn't set Array Value because base Array Class is unknown");
 
 	}
 
@@ -270,9 +254,8 @@ public abstract class AbstractIndexedPropertyEditor extends
 			return;
 
 		FontMetrics fm = g.getFontMetrics();
-		//int descent = fm.getDescent();
-		int ypos = (int) ((double) r.y + ((double) r.height + fm
-				.getStringBounds("{", g).getHeight()) / 2.)
+		// int descent = fm.getDescent();
+		int ypos = (int) ((double) r.y + ((double) r.height + fm.getStringBounds("{", g).getHeight()) / 2.)
 				- fm.getDescent();
 		// g.setClip(r.x,r.y,r.width,r.height);
 		if (getValue() == null) {
@@ -285,14 +268,10 @@ public abstract class AbstractIndexedPropertyEditor extends
 			return;
 		}
 		g.drawString("{", r.x + 1, ypos);
-		int leftpos = (int) Math.ceil(fm.getStringBounds("{", g).getWidth())
-				+ 1 + r.x;
-		int commaDiscount = (int) Math.ceil(fm.getStringBounds(",", g)
-				.getWidth());
-		int discountRight = (int) Math.ceil(fm.getStringBounds("}", g)
-				.getWidth());
-		int widthTotal = r.width + r.x - leftpos - discountRight - (length - 1)
-				* commaDiscount - 2 * (length - 1);
+		int leftpos = (int) Math.ceil(fm.getStringBounds("{", g).getWidth()) + 1 + r.x;
+		int commaDiscount = (int) Math.ceil(fm.getStringBounds(",", g).getWidth());
+		int discountRight = (int) Math.ceil(fm.getStringBounds("}", g).getWidth());
+		int widthTotal = r.width + r.x - leftpos - discountRight - (length - 1) * commaDiscount - 2 * (length - 1);
 		int displaceX = widthTotal / length;
 
 		if (displaceX <= 0) {
@@ -322,12 +301,11 @@ public abstract class AbstractIndexedPropertyEditor extends
 
 	public java.awt.Component getCustomEditor() {
 		customEditor.setValue(getValue());
-		customEditor.addPropertyChangeListener("value",
-				new PropertyChangeListener() {
-					public void propertyChange(PropertyChangeEvent evt) {
-						setValue(evt.getNewValue());
-					}
-				});
+		customEditor.addPropertyChangeListener("value", new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				setValue(evt.getNewValue());
+			}
+		});
 
 		return customEditor;
 	}

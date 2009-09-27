@@ -7,17 +7,15 @@
 package pt.utl.ist.elab.client.gamma.displays;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
-public class MicTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable
-{
-    
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public MicTable()
-    {
-        super();
-        setColArray(new int[]{0,2});
-    }
-    
+public class MicTable extends com.linkare.rec.impl.baseUI.table.MultSeriesTable {
+
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public MicTable() {
+		super();
+		setColArray(new int[] { 0, 2 });
+	}
+
 }

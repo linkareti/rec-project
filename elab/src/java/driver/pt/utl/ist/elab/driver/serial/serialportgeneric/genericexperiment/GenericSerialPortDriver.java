@@ -24,7 +24,6 @@ import com.linkare.rec.impl.driver.BaseHardware;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
-import com.linkare.rec.impl.threading.IConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
@@ -102,6 +101,8 @@ public class GenericSerialPortDriver extends AbstractSerialPortDriver {
 		 * StampTranslatorProcessorManager.getTranslator(stampConfig); if
 		 * (!translator.translate(stampConfig)) throw new
 		 * WrongConfigurationException("Cannot translate StampCommand!", -1);
+		 * 
+		 * 
 		 * 
 		 * 
 		 * config.getChannelsConfig(0).setTotalSamples(config.getTotalSamples());
@@ -392,11 +393,11 @@ public class GenericSerialPortDriver extends AbstractSerialPortDriver {
 		waitingStart = true;
 
 		WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
-			public int getConditionResult() {
+			public ConditionResult getConditionResult() {
 				if (currentDriverAction != DriverAction.STARTING)
-					return IConditionDecisor.CONDITION_MET_TRUE;
+					return ConditionResult.CONDITION_MET_TRUE;
 
-				return IConditionDecisor.CONDITION_NOT_MET;
+				return ConditionResult.CONDITION_NOT_MET;
 			}
 		}, 20000, 500);
 	}

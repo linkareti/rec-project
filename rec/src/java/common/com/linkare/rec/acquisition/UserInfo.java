@@ -43,8 +43,7 @@ public final class UserInfo implements IDLEntity
 
 	} // ctor
 
-	public UserInfo(String userName,
-			com.linkare.rec.acquisition.Property[] userProps)
+	public UserInfo(String userName, com.linkare.rec.acquisition.Property[] userProps)
 
 	{
 
@@ -96,8 +95,7 @@ public final class UserInfo implements IDLEntity
 	/**
 	 * Setter for property userName.
 	 * 
-	 * @param userName
-	 *            New value of property userName.
+	 * @param userName New value of property userName.
 	 * 
 	 * 
 	 * 
@@ -131,8 +129,7 @@ public final class UserInfo implements IDLEntity
 	/**
 	 * Setter for property userProps.
 	 * 
-	 * @param userProps
-	 *            New value of property userProps.
+	 * @param userProps New value of property userProps.
 	 * 
 	 * 
 	 * 
@@ -183,8 +180,7 @@ public final class UserInfo implements IDLEntity
 			if (getUserProps()[i] != null)
 
 				if ((propName == null && getUserProps()[i].getName() == null)
-						|| (propName != null && propName
-								.equals(getUserProps()[i].getName()))) {
+						|| (propName != null && propName.equals(getUserProps()[i].getName()))) {
 					return getUserProps()[i].getValue();
 				}
 
@@ -401,8 +397,7 @@ public final class UserInfo implements IDLEntity
 
 			System.arraycopy(userProps, 0, tempProps, 0, found_index);
 
-			System.arraycopy(userProps, found_index + 1, tempProps,
-					found_index, tempProps.length - found_index);
+			System.arraycopy(userProps, found_index + 1, tempProps, found_index, tempProps.length - found_index);
 
 			userProps = tempProps;
 			tempProps = null;
@@ -414,8 +409,7 @@ public final class UserInfo implements IDLEntity
 
 	public String toString() {
 		String retVal = getUserName();
-		if (getHardwaresConnectedTo() != null
-				&& !getHardwaresConnectedTo().equals("")) {
+		if (getHardwaresConnectedTo() != null && !getHardwaresConnectedTo().equals("")) {
 			retVal += " - " + getHardwaresConnectedTo();
 		}
 		return retVal;

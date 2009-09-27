@@ -19,8 +19,11 @@ public class SerialPortCommand implements java.io.Serializable {
 	private HashMap<Object, Object> commandDataMap = null;
 	private boolean isData = false;
 
-	/** Creates a new instance of SerialPortCommand 
-	 * @param commandIdentifier */
+	/**
+	 * Creates a new instance of SerialPortCommand
+	 * 
+	 * @param commandIdentifier
+	 */
 	public SerialPortCommand(String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 	}
@@ -63,12 +66,12 @@ public class SerialPortCommand implements java.io.Serializable {
 		return this.isData;
 	}
 
-	/*private SerialPortProcessor processor = null;
-
-	public SerialPortProcessor getProcessor() {
-		if (processor == null)
-			processor = SerialPortTranslatorProcessorManager.getProcessor(this);
-
-		return processor;
-	}*/
+	/*
+	 * private SerialPortProcessor processor = null;
+	 * 
+	 * public SerialPortProcessor getProcessor() { if (processor == null)
+	 * processor = SerialPortTranslatorProcessorManager.getProcessor(this);
+	 * 
+	 * return processor; }
+	 */
 }

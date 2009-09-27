@@ -10,26 +10,32 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.data.SamplesSource;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface IDataSource extends SamplesSource
-{
+public interface IDataSource extends SamplesSource {
 	public int getPacketSize();
+
 	public int getTotalSamples();
+
 	public String getName();
-	
+
 	public HardwareAcquisitionConfig getAcquisitionHeader();
-	
+
 	public void stopNow();
-	/** Registers IDataSourceListener to receive events.
+
+	/**
+	 * Registers IDataSourceListener to receive events.
+	 * 
 	 * @param listener The listener to register.
 	 */
 	public void addIDataSourceListener(IDataSourceListener listener);
-	
-	/** Removes IDataSourceListener from the list of listeners.
+
+	/**
+	 * Removes IDataSourceListener from the list of listeners.
+	 * 
 	 * @param listener The listener to remove.
 	 */
 	public void removeIDataSourceListener(IDataSourceListener listener);
-	
+
 }

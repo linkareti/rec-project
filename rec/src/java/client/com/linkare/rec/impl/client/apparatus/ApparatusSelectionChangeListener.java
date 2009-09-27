@@ -7,11 +7,11 @@
 package com.linkare.rec.impl.client.apparatus;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface ApparatusSelectionChangeListener extends java.util.EventListener
-{
-    //moved to labtree
-    //public void apparatusSelectionChange(ApparatusSelectionEvent selectevent);
+public interface ApparatusSelectionChangeListener extends java.util.EventListener {
+	// moved to labtree
+	// public void apparatusSelectionChange(ApparatusSelectionEvent
+	// selectevent);
 }

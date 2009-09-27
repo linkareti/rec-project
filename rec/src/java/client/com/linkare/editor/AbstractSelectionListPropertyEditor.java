@@ -24,8 +24,7 @@ import javax.swing.JTextField;
  * 
  * @author jp
  */
-public abstract class AbstractSelectionListPropertyEditor extends
-		PropertyEditorSupport {
+public abstract class AbstractSelectionListPropertyEditor extends PropertyEditorSupport {
 
 	/** Creates a new instance of BaseReCEditor */
 	public AbstractSelectionListPropertyEditor() {
@@ -35,31 +34,25 @@ public abstract class AbstractSelectionListPropertyEditor extends
 	private Vector<Object> tagsInitStringsValueList = new Vector<Object>();
 
 	public void addTableValue(Object value, String tag, String initString) {
-		tagsInitStringsValueList.add((Object) (new Object[] { tag, initString,
-				value }));
+		tagsInitStringsValueList.add((Object) (new Object[] { tag, initString, value }));
 	}
 
-	public void initTableValues(Object[] valueList, String[] tags,
-			String[] initStrings) throws Exception {
+	public void initTableValues(Object[] valueList, String[] tags, String[] initStrings) throws Exception {
 		if (valueList != null) {
 			if ((tags != null && tags.length != valueList.length)
 					|| (initStrings != null && initStrings.length != valueList.length))
-				throw new Exception(
-						"Tags List , InitStrings List and Values List is not of same length...");
+				throw new Exception("Tags List , InitStrings List and Values List is not of same length...");
 			else if (tags == null)
-				throw new Exception(
-						"Value List is not null and Tags List is null");
+				throw new Exception("Value List is not null and Tags List is null");
 			else if (initStrings == null)
-				throw new Exception(
-						"Value List is not null and InitStrings List is null");
+				throw new Exception("Value List is not null and InitStrings List is null");
 		} else {
 			tagsInitStringsValueList.clear();
 			return;
 		}
 		tagsInitStringsValueList = new Vector<Object>(valueList.length);
 		for (int i = 0; i < valueList.length; i++) {
-			tagsInitStringsValueList.set(i, (Object) (new Object[] { tags[i],
-					initStrings[i], valueList[i] }));
+			tagsInitStringsValueList.set(i, (Object) (new Object[] { tags[i], initStrings[i], valueList[i] }));
 		}
 
 	}
@@ -230,8 +223,8 @@ public abstract class AbstractSelectionListPropertyEditor extends
 			try {
 				setAsText(newTag);
 			} catch (IllegalArgumentException e) {
-				JOptionPane.showMessageDialog(this, e.getMessage(),
-						"Error setting value!", JOptionPane.WARNING_MESSAGE);
+				JOptionPane
+						.showMessageDialog(this, e.getMessage(), "Error setting value!", JOptionPane.WARNING_MESSAGE);
 			}
 
 		}

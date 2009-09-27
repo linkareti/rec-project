@@ -7,18 +7,16 @@
 package pt.utl.ist.elab.client.condensadorcilindrico;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class CCRawXYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
-{
-    
-    /** Creates a new instance of CCRawXYGraphDisplay */
-    public CCRawXYGraphDisplay()
-    {
-	super();
-	setChannelDisplayX(2);
-	setChannelDisplayY(0);
-    }
-    
+public class CCRawXYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+
+	/** Creates a new instance of CCRawXYGraphDisplay */
+	public CCRawXYGraphDisplay() {
+		super();
+		setChannelDisplayX(2);
+		setChannelDisplayY(0);
+	}
+
 }

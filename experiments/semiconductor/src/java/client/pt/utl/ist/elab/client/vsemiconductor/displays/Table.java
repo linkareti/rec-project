@@ -7,17 +7,15 @@
 package pt.utl.ist.elab.client.vsemiconductor.displays;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
-public class Table extends com.linkare.rec.impl.baseUI.table.MultSeriesTable
-{
-    
-    /** Creates a new instance of Table */
-    public Table() 
-    {
-        super();
-        setColArray(new int[]{0,1,2,3,4,5,6,7,8});
-    }
-    
+public class Table extends com.linkare.rec.impl.baseUI.table.MultSeriesTable {
+
+	/** Creates a new instance of Table */
+	public Table() {
+		super();
+		setColArray(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 });
+	}
+
 }

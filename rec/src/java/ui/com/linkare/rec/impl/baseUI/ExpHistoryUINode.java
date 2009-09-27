@@ -19,10 +19,11 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  */
 public class ExpHistoryUINode extends ExpHistory {
 
-    private com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig = null;
+	private com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig = null;
 
 	/**
 	 * Creates the <code>ExpHistoryUINode</code>.
+	 * 
 	 * @param expHistoryDisplayFactory
 	 * @param producerWrapper
 	 * @param apparatus
@@ -31,15 +32,14 @@ public class ExpHistoryUINode extends ExpHistory {
 	public ExpHistoryUINode(ExpHistoryDisplayFactory expHistoryDisplayFactory, DataProducerWrapper producerWrapper,
 			Apparatus apparatus, com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig) {
 		super(expHistoryDisplayFactory, producerWrapper, apparatus);
-		this.apparatusConfig=apparatusConfig;
+		this.apparatusConfig = apparatusConfig;
 	}
-	
-    public com.linkare.rec.impl.baseUI.config.Apparatus getApparatusConfig()
-    {
-        return this.apparatusConfig;
-    }
-    
-    /**
+
+	public com.linkare.rec.impl.baseUI.config.Apparatus getApparatusConfig() {
+		return this.apparatusConfig;
+	}
+
+	/**
 	 * Getter for property apparatusIcon.
 	 * 
 	 * @return Value of property apparatusIcon.

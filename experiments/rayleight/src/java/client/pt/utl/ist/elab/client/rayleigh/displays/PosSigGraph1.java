@@ -9,22 +9,19 @@ package pt.utl.ist.elab.client.rayleigh.displays;
 import com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
-public class PosSigGraph1 extends MultSeriesXYExperimentGraph
-{
-    
-    /** Creates a new instance of Sensor1Graph */
-    public PosSigGraph1() 
-    {
-        setChannelDisplayX(0);
-        setChannelDisplayY(1);
-        setUpdateFrequency(1);
-    }
-    
-    public String getName()
-    {
-        return "Grafico 1";
-    }
+public class PosSigGraph1 extends MultSeriesXYExperimentGraph {
+
+	/** Creates a new instance of Sensor1Graph */
+	public PosSigGraph1() {
+		setChannelDisplayX(0);
+		setChannelDisplayY(1);
+		setUpdateFrequency(1);
+	}
+
+	public String getName() {
+		return "Grafico 1";
+	}
 }

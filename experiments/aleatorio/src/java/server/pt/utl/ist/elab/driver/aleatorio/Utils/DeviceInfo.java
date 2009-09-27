@@ -14,29 +14,23 @@ import javax.media.format.VideoFormat;
 import javax.media.protocol.CaptureDevice;
 import javax.media.protocol.DataSource;
 
+public class DeviceInfo {
 
-public class DeviceInfo
-{
-
-	public static Format formatMatches (Format format, Format supported[] )
-	{
+	public static Format formatMatches(Format format, Format supported[]) {
 		if (supported == null)
 			return null;
-		for (int i = 0;  i < supported.length;  i++)
+		for (int i = 0; i < supported.length; i++)
 			if (supported[i].matches(format))
 				return supported[i];
 		return null;
 	}
 
-
-	public static boolean setFormat(DataSource dataSource, Format format)
-	{
+	public static boolean setFormat(DataSource dataSource, Format format) {
 		boolean formatApplied = false;
 
 		FormatControl formatControls[] = null;
 		formatControls = ((CaptureDevice) dataSource).getFormatControls();
-		for (int x = 0; x < formatControls.length; x++)
-		{
+		for (int x = 0; x < formatControls.length; x++) {
 			if (formatControls[x] == null)
 				continue;
 
@@ -44,8 +38,7 @@ public class DeviceInfo
 			if (supportedFormats == null)
 				continue;
 
-			if (DeviceInfo.formatMatches(format, supportedFormats) != null)
-			{
+			if (DeviceInfo.formatMatches(format, supportedFormats) != null) {
 				formatControls[x].setFormat(format);
 				formatApplied = true;
 			}
@@ -54,21 +47,15 @@ public class DeviceInfo
 		return formatApplied;
 	}
 
-
-	public static boolean isVideo(Format format)
-	{
+	public static boolean isVideo(Format format) {
 		return (format instanceof VideoFormat);
 	}
 
-
-	public static boolean isAudio(Format format)
-	{
+	public static boolean isAudio(Format format) {
 		return (format instanceof AudioFormat);
 	}
 
-
-	public static String formatToString(Format format)
-	{
+	public static String formatToString(Format format) {
 		if (isVideo(format))
 			return videoFormatToString((VideoFormat) format);
 
@@ -78,9 +65,7 @@ public class DeviceInfo
 		return ("--- unknown media device format ---");
 	}
 
-
-	public static String videoFormatToString(VideoFormat videoFormat)
-	{
+	public static String videoFormatToString(VideoFormat videoFormat) {
 		StringBuffer result = new StringBuffer();
 
 		// add width x height (size)
@@ -88,13 +73,10 @@ public class DeviceInfo
 		result.append("size=" + (int) d.getWidth() + "x" + (int) d.getHeight() + ", ");
 
 		/*
-		// try to add color depth
-		if (videoFormat instanceof IndexedColorFormat)
-		{
-			IndexedColorFormat f = (IndexedColorFormat) videoFormat;
-			result.append("color depth=" + f.getMapSize() + ", ");
-		}
-		*/
+		 * // try to add color depth if (videoFormat instanceof
+		 * IndexedColorFormat) { IndexedColorFormat f = (IndexedColorFormat)
+		 * videoFormat; result.append("color depth=" + f.getMapSize() + ", "); }
+		 */
 
 		// add encoding
 		result.append("encoding=" + videoFormat.getEncoding() + ", ");
@@ -105,9 +87,7 @@ public class DeviceInfo
 		return result.toString();
 	}
 
-
-	public static String audioFormatToString(AudioFormat audioFormat)
-	{
+	public static String audioFormatToString(AudioFormat audioFormat) {
 		StringBuffer result = new StringBuffer();
 
 		// short workaround

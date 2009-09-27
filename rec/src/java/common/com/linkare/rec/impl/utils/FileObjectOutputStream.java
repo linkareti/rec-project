@@ -12,35 +12,36 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class FileObjectOutputStream extends ObjectOutputStream
-{
-    private File file=null;
-    /** Creates a new instance of FileObjectOutputStream */
-    public FileObjectOutputStream(File file) throws IOException
-    {
-	super(new FileOutputStream(file));
-	setFile(file);
-    }
-    
-    /** Getter for property file.
-     * @return Value of property file.
-     *
-     */
-    public File getFile()
-    {
-	return file;
-    }
-    
-    /** Setter for property file.
-     * @param file New value of property file.
-     *
-     */
-    public void setFile(File file)
-    {
-	this.file = file;
-    }
-    
+public class FileObjectOutputStream extends ObjectOutputStream {
+	private File file = null;
+
+	/** Creates a new instance of FileObjectOutputStream */
+	public FileObjectOutputStream(File file) throws IOException {
+		super(new FileOutputStream(file));
+		setFile(file);
+	}
+
+	/**
+	 * Getter for property file.
+	 * 
+	 * @return Value of property file.
+	 * 
+	 */
+	public File getFile() {
+		return file;
+	}
+
+	/**
+	 * Setter for property file.
+	 * 
+	 * @param file New value of property file.
+	 * 
+	 */
+	public void setFile(File file) {
+		this.file = file;
+	}
+
 }

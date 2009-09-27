@@ -7,14 +7,14 @@
 package pt.utl.ist.elab.client.vdi.displays;
 
 /**
- *
- * @author  Queiro'
+ * 
+ * @author Queiro'
  */
 public class STime2Chart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public STime2Chart() {
-        super();
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public STime2Chart() {
+		super();
 		setChannelDisplayX(0);
 		setChannelDisplayY(10);
-    }
+	}
 }

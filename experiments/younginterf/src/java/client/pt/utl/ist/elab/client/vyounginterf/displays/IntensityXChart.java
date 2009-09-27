@@ -7,13 +7,15 @@
 package pt.utl.ist.elab.client.vyounginterf.displays;
 
 /**
- *
- * @author  Emanuel Antunes
+ * 
+ * @author Emanuel Antunes
  */
-public class IntensityXChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph{
-    
-    /** Creates a new instance of IntensityXChart */
-    public IntensityXChart(){
-        super();
-	setChannelDisplayX(0);
-	setChannelDisplayY(1);}}
+public class IntensityXChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+
+	/** Creates a new instance of IntensityXChart */
+	public IntensityXChart() {
+		super();
+		setChannelDisplayX(0);
+		setChannelDisplayY(1);
+	}
+}

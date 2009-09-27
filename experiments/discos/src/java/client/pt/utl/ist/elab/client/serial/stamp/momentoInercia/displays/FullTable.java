@@ -9,21 +9,18 @@ package pt.utl.ist.elab.client.serial.stamp.momentoInercia.displays;
 import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
 /**
- *
- * @author  Andr�
+ * 
+ * @author Andr�
  */
-public class FullTable extends MultSeriesTable
-{
-    
-    /** Creates a new instance of TableFreqRMS */
-    public FullTable() 
-    {
-        super();
-        setColArray(new int[]{2,0,1});
-    }
+public class FullTable extends MultSeriesTable {
 
-    public String getName()
-    {
-        return "Tabela";
-    }     
+	/** Creates a new instance of TableFreqRMS */
+	public FullTable() {
+		super();
+		setColArray(new int[] { 2, 0, 1 });
+	}
+
+	public String getName() {
+		return "Tabela";
+	}
 }

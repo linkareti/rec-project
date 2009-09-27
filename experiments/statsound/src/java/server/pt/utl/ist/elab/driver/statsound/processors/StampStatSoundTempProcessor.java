@@ -10,50 +10,43 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.AbstractStampProcessor;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 /**
- *
- * @author  bruno
+ * 
+ * @author bruno
  */
-public class StampStatSoundTempProcessor extends AbstractStampProcessor
-{
-    public static final String COMMAND_IDENTIFIER = "TEMP";
-    
-    /** Creates a new instance of StampHelloProcessor */
-    public StampStatSoundTempProcessor()
-    {
-	super(COMMAND_IDENTIFIER);
-    }
-    
-    /** This method makes the Processor process the command passed in...
-     *
-     * @param command the command that this processor will have to process
-     * @return boolean - wether the processing was successfull
-     *
-     */
-    public boolean process(StampCommand command)
-    {
-        int temp=0;        
-	String[] splitedStr = command.getCommand().split(" ");
-        if(command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0]!=null)
-	{
-	    try
-	    {
-		temp=Integer.parseInt(splitedStr[0]);
-                Integer oTemp=new Integer(temp);
-		command.addCommandData(COMMAND_IDENTIFIER,oTemp);		
-		command.setData(true);		
-		return true;		
-	    }
-	    catch(NumberFormatException e)
-	    {
-		e.printStackTrace();
+public class StampStatSoundTempProcessor extends AbstractStampProcessor {
+	public static final String COMMAND_IDENTIFIER = "TEMP";
+
+	/** Creates a new instance of StampHelloProcessor */
+	public StampStatSoundTempProcessor() {
+		super(COMMAND_IDENTIFIER);
+	}
+
+	/**
+	 * This method makes the Processor process the command passed in...
+	 * 
+	 * @param command the command that this processor will have to process
+	 * @return boolean - wether the processing was successfull
+	 * 
+	 */
+	public boolean process(StampCommand command) {
+		int temp = 0;
+		String[] splitedStr = command.getCommand().split(" ");
+		if (command.getCommandIdentifier().equalsIgnoreCase(COMMAND_IDENTIFIER) && splitedStr[0] != null) {
+			try {
+				temp = Integer.parseInt(splitedStr[0]);
+				Integer oTemp = new Integer(temp);
+				command.addCommandData(COMMAND_IDENTIFIER, oTemp);
+				command.setData(true);
+				return true;
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
 		return false;
-	    }
-	}	
-	return false;
-    }
-    
-    public boolean isData()
-    {
-	return true;
-    }    
+	}
+
+	public boolean isData() {
+		return true;
+	}
 }

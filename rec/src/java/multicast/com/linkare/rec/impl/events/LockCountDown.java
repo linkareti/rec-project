@@ -7,12 +7,11 @@
 package com.linkare.rec.impl.events;
 
 /**
- *
- * @author  Jose Pedro Pereira
+ * 
+ * @author Jose Pedro Pereira
  */
-public interface LockCountDown
-{
-    
-    public void startCountDown(long milliseconds_to_lock_success);
-    
+public interface LockCountDown {
+
+	public void startCountDown(long milliseconds_to_lock_success);
+
 }

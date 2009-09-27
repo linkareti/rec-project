@@ -6,29 +6,30 @@
 
 package pt.utl.ist.elab.driver.vquantum;
 
-import java.util.*;
+import java.util.Comparator;
+
 /**
- *
- * @author  nomead
+ * 
+ * @author nomead
  */
 public class SortPotentials implements Comparator {
-    
-    /**
-     * Compara a posicao dos potenciais
-     *
-     * @param o1 objecto 1
-     * @param o2 objecto 2
-     */
-    public int compare(Object o1, Object o2) {
-        double [] comp1 = (double[]) o1;
-        double [] comp2 = (double[]) o2;
 
-        if (comp1[0] > comp2[0])
-            return 1;
-        else if (comp1[0] < comp2[0])
-            return -1;
-        else
-            return 0;
-    }
-    
+	/**
+	 * Compara a posicao dos potenciais
+	 * 
+	 * @param o1 objecto 1
+	 * @param o2 objecto 2
+	 */
+	public int compare(Object o1, Object o2) {
+		double[] comp1 = (double[]) o1;
+		double[] comp2 = (double[]) o2;
+
+		if (comp1[0] > comp2[0])
+			return 1;
+		else if (comp1[0] < comp2[0])
+			return -1;
+		else
+			return 0;
+	}
+
 }

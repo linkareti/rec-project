@@ -7,16 +7,16 @@
 package pt.utl.ist.elab.virtual.client.cg.displays;
 
 /**
- *
- * @author  nomead
+ * 
+ * @author nomead
  */
 public class AngTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
-    
-    /** Creates a new instance of AngTimeChart */
-    public AngTimeChart(){
-        super();
-	setChannelDisplayX(0);
-	setChannelDisplayY(1);
-    }
-    
+
+	/** Creates a new instance of AngTimeChart */
+	public AngTimeChart() {
+		super();
+		setChannelDisplayX(0);
+		setChannelDisplayY(1);
+	}
+
 }

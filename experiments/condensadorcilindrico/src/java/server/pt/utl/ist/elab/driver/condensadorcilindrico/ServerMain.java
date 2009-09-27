@@ -5,6 +5,7 @@
  */
 
 package pt.utl.ist.elab.driver.condensadorcilindrico;
+
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -13,44 +14,37 @@ import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class ServerMain
-{
+public class ServerMain {
 
-	private static String PV_HARDWARE_LOGGER="PVHardware.Logger";
-	
-	static
-	{
-		Logger l=LogManager.getLogManager().getLogger(PV_HARDWARE_LOGGER);
-		if(l==null)
-		{
+	private static String PV_HARDWARE_LOGGER = "PVHardware.Logger";
+
+	static {
+		Logger l = LogManager.getLogManager().getLogger(PV_HARDWARE_LOGGER);
+		if (l == null) {
 			LogManager.getLogManager().addLogger(Logger.getLogger(PV_HARDWARE_LOGGER));
 		}
 	}
-	
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args)
-	{
-		try
-		{
+	public static void main(String[] args) {
+		try {
 			ORBBean.getORBBean(args);
-			
-			BaseHardware baseHardware=new BaseHardware(new CCStampDriver());
-									
-			try
-			{
-			    Thread.currentThread().join();
-			}catch(Exception ignored){}
-			
+
+			BaseHardware baseHardware = new BaseHardware(new CCStampDriver());
+
+			try {
+				Thread.currentThread().join();
+			} catch (Exception ignored) {
+			}
+
 			ORBBean.getORBBean(args).killORB();
-		}catch(Exception e)
-		{
-			LoggerUtil.logThrowable("Error on Main...",e,Logger.getLogger(PV_HARDWARE_LOGGER));
+		} catch (Exception e) {
+			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(PV_HARDWARE_LOGGER));
 		}
 	}
 

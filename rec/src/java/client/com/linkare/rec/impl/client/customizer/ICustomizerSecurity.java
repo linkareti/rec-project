@@ -7,10 +7,9 @@
 package com.linkare.rec.impl.client.customizer;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
-public interface ICustomizerSecurity extends ICustomizer
-{
-    public void setUserInfo(com.linkare.rec.acquisition.UserInfo uInfo);
+public interface ICustomizerSecurity extends ICustomizer {
+	public void setUserInfo(com.linkare.rec.acquisition.UserInfo uInfo);
 }

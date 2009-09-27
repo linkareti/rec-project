@@ -11,16 +11,22 @@ import java.awt.geom.Rectangle2D;
 
 import org.opensourcephysics.display.DrawingPanel;
 import org.opensourcephysics.display.Interactive;
+
 /**
- *
- * @author  nomead
+ * 
+ * @author nomead
  */
 public interface Bounded extends Interactive {
-    
-    public Rectangle2D getBounds(double x);
-    public boolean intersect(Rectangle2D rect);
-    public void mouseOut(DrawingPanel panel);
-    public void mouseOver(DrawingPanel panel);
-    public Color getPaintColor();
-    public Color getHighLightColor();
+
+	public Rectangle2D getBounds(double x);
+
+	public boolean intersect(Rectangle2D rect);
+
+	public void mouseOut(DrawingPanel panel);
+
+	public void mouseOver(DrawingPanel panel);
+
+	public Color getPaintColor();
+
+	public Color getHighLightColor();
 }

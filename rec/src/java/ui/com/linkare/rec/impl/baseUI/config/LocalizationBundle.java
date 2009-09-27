@@ -30,7 +30,7 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 	// This attribute is mandatory
 	public void setLocation(java.lang.String value) {
 		java.beans.PropertyChangeEvent event = null;
-		if (eventListeners != null ) {
+		if (eventListeners != null) {
 			event = new java.beans.PropertyChangeEvent(this, "location", getLocation(), value);
 		}
 		_Location = value;
@@ -42,11 +42,10 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 		return _Location;
 	}
 
-
 	// This attribute is mandatory
 	public void setName(java.lang.String value) {
 		java.beans.PropertyChangeEvent event = null;
-		if (eventListeners != null ) {
+		if (eventListeners != null) {
 			event = new java.beans.PropertyChangeEvent(this, "name", getName(), value);
 		}
 		_Name = value;
@@ -64,22 +63,22 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 		out.write(nodeName);
 		// location is an attribute
 		if (_Location != null) {
-			out.write(" location");	// NOI18N
-			out.write("='");	// NOI18N
+			out.write(" location"); // NOI18N
+			out.write("='"); // NOI18N
 			com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.writeXML(out, _Location, true);
-			out.write("'");	// NOI18N
+			out.write("'"); // NOI18N
 		}
 		// name is an attribute
 		if (_Name != null) {
-			out.write(" name");	// NOI18N
-			out.write("='");	// NOI18N
+			out.write(" name"); // NOI18N
+			out.write("='"); // NOI18N
 			com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.writeXML(out, _Name, true);
-			out.write("'");	// NOI18N
+			out.write("'"); // NOI18N
 		}
 		out.write(">\n");
 		String nextIndent = indent + "	";
 		out.write(indent);
-		out.write("</"+nodeName+">\n");
+		out.write("</" + nodeName + ">\n");
 	}
 
 	public void readNode(org.w3c.dom.Node node) {
@@ -98,7 +97,8 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 		org.w3c.dom.NodeList children = node.getChildNodes();
 		for (int i = 0, size = children.getLength(); i < size; ++i) {
 			org.w3c.dom.Node childNode = children.item(i);
-			String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern() : childNode.getLocalName().intern());
+			String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern() : childNode
+					.getLocalName().intern());
 			String childNodeValue = "";
 			if (childNode.getFirstChild() != null) {
 				childNodeValue = childNode.getFirstChild().getNodeValue();
@@ -110,11 +110,13 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 		boolean restrictionFailure = false;
 		// Validating property location
 		if (getLocation() == null) {
-			throw new com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.ValidateException("getLocation() == null", "location", this);	// NOI18N
+			throw new com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.ValidateException("getLocation() == null",
+					"location", this); // NOI18N
 		}
 		// Validating property name
 		if (getName() == null) {
-			throw new com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.ValidateException("getName() == null", "name", this);	// NOI18N
+			throw new com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.ValidateException("getName() == null", "name",
+					this); // NOI18N
 		}
 	}
 
@@ -140,14 +142,15 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 	}
 
 	public void changePropertyByName(String name, Object value) {
-		if (name == null) return;
+		if (name == null)
+			return;
 		name = name.intern();
 		if (name.equals("location"))
-			setLocation((java.lang.String)value);
+			setLocation((java.lang.String) value);
 		else if (name.equals("name"))
-			setName((java.lang.String)value);
+			setName((java.lang.String) value);
 		else
-			throw new IllegalArgumentException(name+" is not a valid property name for LocalizationBundle");
+			throw new IllegalArgumentException(name + " is not a valid property name for LocalizationBundle");
 	}
 
 	public Object fetchPropertyByName(String name) {
@@ -155,14 +158,15 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 			return getLocation();
 		if (name.equals("name"))
 			return getName();
-		throw new IllegalArgumentException(name+" is not a valid property name for LocalizationBundle");
+		throw new IllegalArgumentException(name + " is not a valid property name for LocalizationBundle");
 	}
 
 	// Return an array of all of the properties that are beans and are set.
 	public CommonBean[] childBeans(boolean recursive) {
 		List<CommonBean> children = new LinkedList<CommonBean>();
 		childBeans(recursive, children);
-		com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children.size()];
+		com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children
+				.size()];
 		return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);
 	}
 
@@ -185,8 +189,8 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 
 	public int hashCode() {
 		int result = 17;
-		result = 37*result + (_Location == null ? 0 : _Location.hashCode());
-		result = 37*result + (_Name == null ? 0 : _Name.hashCode());
+		result = 37 * result + (_Location == null ? 0 : _Location.hashCode());
+		result = 37 * result + (_Name == null ? 0 : _Name.hashCode());
 		return result;
 	}
 
@@ -202,86 +206,49 @@ public class LocalizationBundle implements com.linkare.rec.impl.baseUI.config.Co
 	}
 }
 
-
 /*
-		The following schema file has been used for generation:
-
-<?xml version='1.0' encoding='UTF-8'?>
-
-
-
-<!ELEMENT DefaultAcquisitionConfig>
-<!ATTLIST DefaultAcquisitionConfig
-    order CDATA #REQUIRED
-    displayStringBundleKey CDATA #REQUIRED
-    iconLocationBundleKey CDATA ""
-    toolTipBundleKey CDATA ""
-    classLocationBundleKey CDATA #REQUIRED
-  >
-
-<!ELEMENT Display>
-<!ATTLIST Display
-    order CDATA #REQUIRED
-    offlineCapable (true|false|0|1|yes|no) "false"
-    displayStringBundleKey CDATA #REQUIRED
-    iconLocationBundleKey CDATA ""
-    toolTipBundleKey CDATA ""
-    classLocationBundleKey CDATA #REQUIRED
-  >
-
-<!ELEMENT Apparatus (DefaultAcquisitionConfig|Display|WebResource|LocalizationBundle)*>
-<!ATTLIST Apparatus
-    order CDATA #REQUIRED
-    displayStringBundleKey CDATA #REQUIRED
-    iconLocationBundleKey CDATA ""
-    toolTipBundleKey CDATA ""
-    dataModelClassLocationBundleKey CDATA ""
-    videoLocation CDATA ""
-    headerDisplayClassLocationBundleKey CDATA ""
-    location CDATA #REQUIRED
-  >
-
-<!ELEMENT Lab (Apparatus|WebResource|LocalizationBundle)*>
-<!ATTLIST Lab
-    order CDATA #REQUIRED
-    iconLocationBundleKey CDATA ""
-    toolTipBundleKey CDATA ""
-    displayStringBundleKey CDATA #REQUIRED
-    location CDATA #REQUIRED
-  >
-
-<!ELEMENT WebResource>
-<!ATTLIST WebResource
-    order CDATA #REQUIRED
-    internalBrowser (true|false|0|1|yes|no) "false"
-    toolTipLocationBundleKey CDATA ""
-    displayStringBundleKey CDATA #REQUIRED
-    iconLocationBundleKey CDATA ""
-    locationBundleKey CDATA #REQUIRED
-  >
-
-<!ELEMENT LocalizationBundle>
-<!ATTLIST LocalizationBundle
-    location CDATA #REQUIRED
-    name CDATA #REQUIRED
-  >
-
-<!ELEMENT ReCBaseUIConfig (Lab|WebResource|LocalizationBundle)*>
-<!ATTLIST ReCBaseUIConfig
-    aboutPageLocationBundleKey CDATA ""
-    autoConnectLab (true|false|0|1|yes|no) "false"
-    showVideoFrame (true|false|0|1|yes|no) "false"
-    enableVideoFrame (true|false|0|1|yes|no) "true"
-    showChatFrame (true|false|0|1|yes|no) "false"
-    enableChatFrame (true|false|0|1|yes|no) "true"
-    showUserList (true|false|0|1|yes|no) "false"
-    enableUsersList (true|false|0|1|yes|no) "true"
-    usersListRefreshRateMs CDATA "2000"
-    enterApparatusChatRoom (true|false|0|1|yes|no) "false"
-    iconLocationBundleKey CDATA ""
-    frameTitleBundleKey CDATA #REQUIRED
-    iconSponsorLocationBundleKey CDATA ""
-    helpPageLocationBundleKey CDATA ""
-  >
-
-*/
+ * The following schema file has been used for generation:
+ * 
+ * <?xml version='1.0' encoding='UTF-8'?>
+ * 
+ * 
+ * 
+ * <!ELEMENT DefaultAcquisitionConfig> <!ATTLIST DefaultAcquisitionConfig order
+ * CDATA #REQUIRED displayStringBundleKey CDATA #REQUIRED iconLocationBundleKey
+ * CDATA "" toolTipBundleKey CDATA "" classLocationBundleKey CDATA #REQUIRED >
+ * 
+ * <!ELEMENT Display> <!ATTLIST Display order CDATA #REQUIRED offlineCapable
+ * (true|false|0|1|yes|no) "false" displayStringBundleKey CDATA #REQUIRED
+ * iconLocationBundleKey CDATA "" toolTipBundleKey CDATA ""
+ * classLocationBundleKey CDATA #REQUIRED >
+ * 
+ * <!ELEMENT Apparatus
+ * (DefaultAcquisitionConfig|Display|WebResource|LocalizationBundle)*> <!ATTLIST
+ * Apparatus order CDATA #REQUIRED displayStringBundleKey CDATA #REQUIRED
+ * iconLocationBundleKey CDATA "" toolTipBundleKey CDATA ""
+ * dataModelClassLocationBundleKey CDATA "" videoLocation CDATA ""
+ * headerDisplayClassLocationBundleKey CDATA "" location CDATA #REQUIRED >
+ * 
+ * <!ELEMENT Lab (Apparatus|WebResource|LocalizationBundle)*> <!ATTLIST Lab
+ * order CDATA #REQUIRED iconLocationBundleKey CDATA "" toolTipBundleKey CDATA
+ * "" displayStringBundleKey CDATA #REQUIRED location CDATA #REQUIRED >
+ * 
+ * <!ELEMENT WebResource> <!ATTLIST WebResource order CDATA #REQUIRED
+ * internalBrowser (true|false|0|1|yes|no) "false" toolTipLocationBundleKey
+ * CDATA "" displayStringBundleKey CDATA #REQUIRED iconLocationBundleKey CDATA
+ * "" locationBundleKey CDATA #REQUIRED >
+ * 
+ * <!ELEMENT LocalizationBundle> <!ATTLIST LocalizationBundle location CDATA
+ * #REQUIRED name CDATA #REQUIRED >
+ * 
+ * <!ELEMENT ReCBaseUIConfig (Lab|WebResource|LocalizationBundle)*> <!ATTLIST
+ * ReCBaseUIConfig aboutPageLocationBundleKey CDATA "" autoConnectLab
+ * (true|false|0|1|yes|no) "false" showVideoFrame (true|false|0|1|yes|no)
+ * "false" enableVideoFrame (true|false|0|1|yes|no) "true" showChatFrame
+ * (true|false|0|1|yes|no) "false" enableChatFrame (true|false|0|1|yes|no)
+ * "true" showUserList (true|false|0|1|yes|no) "false" enableUsersList
+ * (true|false|0|1|yes|no) "true" usersListRefreshRateMs CDATA "2000"
+ * enterApparatusChatRoom (true|false|0|1|yes|no) "false" iconLocationBundleKey
+ * CDATA "" frameTitleBundleKey CDATA #REQUIRED iconSponsorLocationBundleKey
+ * CDATA "" helpPageLocationBundleKey CDATA "" >
+ */

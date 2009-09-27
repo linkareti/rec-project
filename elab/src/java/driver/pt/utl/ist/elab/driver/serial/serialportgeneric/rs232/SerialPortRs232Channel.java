@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.rs232.TransferFunction.TransferFunctionType;
 
 public class SerialPortRs232Channel {
-	
+
 	private DecimalFormat format = null;
 	private Integer order = null;
 	private TransferFunction inputTransferFunction = null;
@@ -20,43 +20,40 @@ public class SerialPortRs232Channel {
 				this.format = new DecimalFormat();
 				this.format.applyPattern(format.replace("#", "0"));
 			}
-		}
-		catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			throw new Exception("parameter.input.format.not.valid");
 		}
 
 		this.order = order;
 	}
-	
+
 	public int getOrder() {
 		return order;
 	}
 
 	public void addInputTransferFunction(FunctionKind kind, Double a, Double b, Double c) throws Exception {
-		addTransferFunction(TransferFunctionType.INPUT,kind,a,b,c);
+		addTransferFunction(TransferFunctionType.INPUT, kind, a, b, c);
 	}
-	
+
 	public void addOutputTransferFunction(FunctionKind kind, Double a, Double b, Double c) throws Exception {
-		addTransferFunction(TransferFunctionType.OUTPUT,kind,a,b,c);
+		addTransferFunction(TransferFunctionType.OUTPUT, kind, a, b, c);
 	}
-	
-	private void addTransferFunction(TransferFunctionType type, FunctionKind kind, Double a, Double b, Double c) throws Exception {
+
+	private void addTransferFunction(TransferFunctionType type, FunctionKind kind, Double a, Double b, Double c)
+			throws Exception {
 		TransferFunction transferFunction = null;
 		if (type == TransferFunctionType.INPUT) {
 			if (inputTransferFunction == null) {
 				inputTransferFunction = new TransferFunction(TransferFunctionType.INPUT);
 				transferFunction = inputTransferFunction;
-			}
-			else
+			} else
 				throw new Exception("input.transference.function.already.exists.for.current.channel");
-		}
-		else if (type == TransferFunctionType.OUTPUT) {
+		} else if (type == TransferFunctionType.OUTPUT) {
 			if (outputTransferFunction == null) {
 				outputTransferFunction = new TransferFunction(TransferFunctionType.INPUT);
 				transferFunction = outputTransferFunction;
-			}
-			else
-				throw new Exception("output.transference.function.already.exists.for.current.channel");			
+			} else
+				throw new Exception("output.transference.function.already.exists.for.current.channel");
 		}
 		if (kind == FunctionKind.LINEAR) {
 			transferFunction.addLinearFunction(a, b);
@@ -78,5 +75,5 @@ public class SerialPortRs232Channel {
 			return value;
 		return outputTransferFunction.applyOver(value);
 	}
-	
+
 }

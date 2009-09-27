@@ -16,11 +16,14 @@ import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.baseUI.config.Display;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 
-public interface DisplayFactory
-{
-    public void init(Display[] displays);
-    public void setAcquisitionInfo(HardwareInfo hinfo);
-    public void setAcquisitionConfig(HardwareAcquisitionConfig hconfig);
-    public ExpDataDisplay[] getDisplays();
-    public void destroyDisplays();
+public interface DisplayFactory {
+	public void init(Display[] displays);
+
+	public void setAcquisitionInfo(HardwareInfo hinfo);
+
+	public void setAcquisitionConfig(HardwareAcquisitionConfig hconfig);
+
+	public ExpDataDisplay[] getDisplays();
+
+	public void destroyDisplays();
 }

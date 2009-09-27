@@ -90,8 +90,8 @@ public class SerialPortFinder {
 	/**
 	 * Setter for property applicationNameLockPort.
 	 * 
-	 * @param applicationNameLockPort
-	 *            New value of property applicationNameLockPort.
+	 * @param applicationNameLockPort New value of property
+	 *            applicationNameLockPort.
 	 */
 	public void setApplicationNameLockPort(String applicationNameLockPort) {
 		this.applicationNameLockPort = applicationNameLockPort;
@@ -109,8 +109,7 @@ public class SerialPortFinder {
 	/**
 	 * Setter for property stampIdentifier.
 	 * 
-	 * @param stampIdentifier
-	 *            New value of property stampIdentifier.
+	 * @param stampIdentifier New value of property stampIdentifier.
 	 */
 	public void setStampIdentifier(String stampIdentifier) {
 		this.serialIdentifier = stampIdentifier;
@@ -128,8 +127,7 @@ public class SerialPortFinder {
 	/**
 	 * Setter for property portParity.
 	 * 
-	 * @param portParity
-	 *            New value of property portParity.
+	 * @param portParity New value of property portParity.
 	 */
 	public void setPortParity(int portParity) {
 		this.portParity = portParity;
@@ -147,8 +145,7 @@ public class SerialPortFinder {
 	/**
 	 * Setter for property portBaudRate.
 	 * 
-	 * @param portBaudRate
-	 *            New value of property portBaudRate.
+	 * @param portBaudRate New value of property portBaudRate.
 	 */
 	public void setPortBaudRate(int portBaudRate) {
 		this.portBaudRate = portBaudRate;
@@ -166,8 +163,7 @@ public class SerialPortFinder {
 	/**
 	 * Setter for property portDataBits.
 	 * 
-	 * @param portDataBits
-	 *            New value of property portDataBits.
+	 * @param portDataBits New value of property portDataBits.
 	 */
 	public void setPortDataBits(int portDataBits) {
 		this.portDataBits = portDataBits;
@@ -185,8 +181,7 @@ public class SerialPortFinder {
 	/**
 	 * Setter for property portStopBits.
 	 * 
-	 * @param portStopBits
-	 *            New value of property portStopBits.
+	 * @param portStopBits New value of property portStopBits.
 	 */
 	public void setPortStopBits(int portStopBits) {
 		this.portStopBits = portStopBits;
@@ -205,8 +200,7 @@ public class SerialPortFinder {
 	/**
 	 * Setter for property DTR.
 	 * 
-	 * @param DTR
-	 *            New value of property DTR.
+	 * @param DTR New value of property DTR.
 	 * 
 	 */
 	public void setDTR(boolean DTR) {
@@ -226,8 +220,7 @@ public class SerialPortFinder {
 	/**
 	 * Setter for property RTS.
 	 * 
-	 * @param RTS
-	 *            New value of property RTS.
+	 * @param RTS New value of property RTS.
 	 * 
 	 */
 	public void setRTS(boolean RTS) {
@@ -247,8 +240,7 @@ public class SerialPortFinder {
 	/**
 	 * Setter for property waitForEcho.
 	 * 
-	 * @param waitForEcho
-	 *            New value of property waitForEcho.
+	 * @param waitForEcho New value of property waitForEcho.
 	 * 
 	 */
 	public void setWaitForEcho(boolean waitForEcho) {
@@ -299,8 +291,7 @@ public class SerialPortFinder {
 	/**
 	 * Registers StampFinderListener to receive events.
 	 * 
-	 * @param listener
-	 *            The listener to register.
+	 * @param listener The listener to register.
 	 */
 	public synchronized void addStampFinderListener(SerialPortFinderListener listener) {
 		if (listenerList == null) {
@@ -312,8 +303,7 @@ public class SerialPortFinder {
 	/**
 	 * Removes StampFinderListener from the list of listeners.
 	 * 
-	 * @param listener
-	 *            The listener to remove.
+	 * @param listener The listener to remove.
 	 */
 	public synchronized void removeStampFinderListener(pt.utl.ist.elab.driver.serial.stamp.StampFinderListener listener) {
 		listenerList.remove(pt.utl.ist.elab.driver.serial.stamp.StampFinderListener.class, listener);
@@ -322,8 +312,7 @@ public class SerialPortFinder {
 	/**
 	 * Notifies all registered listeners about the event.
 	 * 
-	 * @param event
-	 *            The event to be fired
+	 * @param event The event to be fired
 	 */
 	private void fireStampFinderListenerStampFound(SerialPort event) {
 		if (listenerList == null)
@@ -348,8 +337,7 @@ public class SerialPortFinder {
 	/**
 	 * Setter for property timeOutPerPort.
 	 * 
-	 * @param timeOutPerPort
-	 *            New value of property timeOutPerPort.
+	 * @param timeOutPerPort New value of property timeOutPerPort.
 	 */
 	public void setTimeOutPerPort(long timeOutPerPort) {
 		this.timeOutPerPort = timeOutPerPort;
@@ -419,7 +407,8 @@ public class SerialPortFinder {
 				stampIO.setWaitForEcho(isWaitForEcho());
 				stampIO.setStampCommandListener(serialPortFinderRunnerEventListener);
 				stampIO.setPort(currentPortOpen);
-				// currentReader=new BufferedReader(new InputStreamReader(currentPortOpen.getInputStream(),"us-ascii"));
+				// currentReader=new BufferedReader(new
+				// InputStreamReader(currentPortOpen.getInputStream(),"us-ascii"));
 				// currentPortOpen.addEventListener(stampFinderRunnerEventListener);
 				// currentPortOpen.notifyOnDataAvailable(true);
 
@@ -459,12 +448,18 @@ public class SerialPortFinder {
 					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Shuted down stampIO!");
 				}
 				/*
-				 * try { Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Closing port "+cpi.getName()+" IO
-				 * Stream!"); currentReader.close(); }catch(Exception e) { LoggerUtil.logThrowable("Error closing port
-				 * "+cpi.getName() +" IO Stream!",e,Logger.getLogger(STAMP_FINDER_LOGGER)); } try {
-				 * Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Closing port "+cpi.getName()+"!");
-				 * currentPortOpen.close(); }catch(Exception e) { LoggerUtil.logThrowable("Error closing port
-				 * "+cpi.getName()+"!",e,Logger.getLogger(STAMP_FINDER_LOGGER)); }
+				 * try {Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
+				 * "Closing port "+cpi.getName()+" IOStream!
+				 * "); currentReader.close(); }catch(Exception e) { LoggerUtil.logThrowable("
+				 * Error closing port "+cpi.getName() +" IO
+				 * Stream!",e,Logger.getLogger(STAMP_FINDER_LOGGER)); } try {
+				 * Logger
+				 * .getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Closing port "
+				 * +cpi.getName()+"!"); currentPortOpen.close();
+				 * }catch(Exception e) { LoggerUtil.logThrowable("Error closing
+				 * port
+				 * "+cpi.getName()+"!",e,Logger.getLogger(STAMP_FINDER_LOGGER));
+				 * }
 				 */
 			}
 
@@ -476,20 +471,33 @@ public class SerialPortFinder {
 		private class SerialPortFinderRunnerPortListener implements SerialPortCommandListener {
 
 			/*
-			 * public synchronized void serialEvent(gnu.io.SerialPortEvent serialPortEvent) {
-			 * Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Received port event "+currentPortOpen.getName()+"
-			 * whith type="+serialPortEvent.getEventType()+" - DataAvailableEventType="+SerialPortEvent.DATA_AVAILABLE);
+			 * public synchronized void serialEvent(gnu.io.SerialPortEvent
+			 * serialPortEvent) {
+			 * Logger.getLogger(STAMP_FINDER_LOGGER).log(Level
+			 * .INFO,"Received port event "+currentPortOpen.getName()+" whith
+			 * type="+serialPortEvent.getEventType()+" -
+			 * DataAvailableEventType="+SerialPortEvent.DATA_AVAILABLE);
 			 * 
-			 * if(serialPortEvent.getEventType()==SerialPortEvent.DATA_AVAILABLE) { String line="";
 			 * 
-			 * try { Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Reading line of data from port
-			 * "+currentPortOpen.getName()+"!"); line=currentReader.readLine();
-			 * Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Data Line is : '"+line+"'!"); }catch(IOException e) {
-			 * LoggerUtil.logThrowable("IO Error reading line from port
-			 * "+currentPortOpen.getName()+"!",e,Logger.getLogger(STAMP_FINDER_LOGGER)); }
-			 * if(line.equals(stampIdentifier)) { Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Identified STAMP
-			 * on port "+currentPortOpen.getName()+"!"); //currentPortOpen.removeEventListener();
-			 * fireStampFinderListenerStampFound(currentPortOpen); portFound=true; exit=true; } } }
+			 * 
+			 * if(serialPortEvent.getEventType()==SerialPortEvent.DATA_AVAILABLE)
+			 * { String line="";
+			 * 
+			 * try {
+			 * Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Reading
+			 * line of data from port "+currentPortOpen.getName()+"!");
+			 * line=currentReader.readLine();
+			 * Logger.getLogger(STAMP_FINDER_LOGGER
+			 * ).log(Level.INFO,"Data Line is : '"+line+"'!");
+			 * }catch(IOException e) { LoggerUtil.logThrowable("IO Error reading
+			 * line from port"+currentPortOpen.getName()+"!
+			 * ",e,Logger.getLogger(STAMP_FINDER_LOGGER)); }
+			 * if(line.equals(stampIdentifier)) {
+			 * Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Identified
+			 * STAMP on port "+currentPortOpen.getName()+"!");
+			 * //currentPortOpen.removeEventListener();
+			 * fireStampFinderListenerStampFound(currentPortOpen);
+			 * portFound=true; exit=true; } } }
 			 */
 
 			public void handleStampCommand(SerialPortCommand command) {

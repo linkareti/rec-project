@@ -9,26 +9,29 @@ package com.linkare.rec.impl.client.experiment;
 import com.linkare.rec.acquisition.UserInfo;
 
 /**
- *
- * @author  Jos� Pedro Pereira
+ * 
+ * @author Jos� Pedro Pereira
  */
-public interface ExpUsersListSource
-{
-    
-    /** Registers ExpUsersListChangeListener to receive events.
-     * @param listener The listener to register.
-     */
-    public void addExpUsersListChangeListener(ExpUsersListChangeListener listener);
-    
-    /** Removes ExpUsersListChangeListener from the list of listeners.
-     * @param listener The listener to remove.
-     */
-    public void removeExpUsersListChangeListener(ExpUsersListChangeListener listener);
-    
-    public UserInfo[] getUsers();
-    
-    public void startAutoRefresh(long delayMillis);
-    
-    public void stopAutoRefresh();
-    
+public interface ExpUsersListSource {
+
+	/**
+	 * Registers ExpUsersListChangeListener to receive events.
+	 * 
+	 * @param listener The listener to register.
+	 */
+	public void addExpUsersListChangeListener(ExpUsersListChangeListener listener);
+
+	/**
+	 * Removes ExpUsersListChangeListener from the list of listeners.
+	 * 
+	 * @param listener The listener to remove.
+	 */
+	public void removeExpUsersListChangeListener(ExpUsersListChangeListener listener);
+
+	public UserInfo[] getUsers();
+
+	public void startAutoRefresh(long delayMillis);
+
+	public void stopAutoRefresh();
+
 }

@@ -7,18 +7,16 @@
 package pt.utl.ist.elab.client.voscilador.displays;
 
 /**
- *
- * @author  andre
+ * 
+ * @author andre
  */
-public class VelRadiusTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
-{
-    
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public VelRadiusTimeChart()
-    {
-        super();
-	setChannelDisplayX(0);
-	setChannelDisplayY(9);
-    }
-    
+public class VelRadiusTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public VelRadiusTimeChart() {
+		super();
+		setChannelDisplayX(0);
+		setChannelDisplayY(9);
+	}
+
 }

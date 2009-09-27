@@ -13,14 +13,12 @@ package pt.utl.ist.elab.driver.virtual;
 
 import com.linkare.rec.impl.driver.BaseDataSource;
 
-public abstract class VirtualBaseDataSource extends BaseDataSource
-{
-    
-    /** Creates a new instance of VirtualDataSource */
-    public VirtualBaseDataSource()
-    {
-    }
-    
-    public abstract void startProduction();
-    
+public abstract class VirtualBaseDataSource extends BaseDataSource {
+
+	/** Creates a new instance of VirtualDataSource */
+	public VirtualBaseDataSource() {
+	}
+
+	public abstract void startProduction();
+
 }

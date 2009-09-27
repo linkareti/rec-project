@@ -9,21 +9,18 @@ package pt.utl.ist.elab.client.conducaocalor.displays;
 import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
 /**
- *
- * @author  Andr�
+ * 
+ * @author Andr�
  */
-public class Sensor1Table extends MultSeriesTable
-{
-    
-    /** Creates a new instance of TableFreqRMS */
-    public Sensor1Table() 
-    {
-        super();
-        setColArray(new int[]{9,0,3,6});
-    }
+public class Sensor1Table extends MultSeriesTable {
 
-    public String getName()
-    {
-        return "Sensor 1";
-    }     
+	/** Creates a new instance of TableFreqRMS */
+	public Sensor1Table() {
+		super();
+		setColArray(new int[] { 9, 0, 3, 6 });
+	}
+
+	public String getName() {
+		return "Sensor 1";
+	}
 }

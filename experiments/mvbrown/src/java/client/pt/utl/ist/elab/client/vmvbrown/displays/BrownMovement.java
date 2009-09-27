@@ -7,13 +7,13 @@
 package pt.utl.ist.elab.client.vmvbrown.displays;
 
 /**
- *
- * @author  nomead
+ * 
+ * @author nomead
  */
 public interface BrownMovement {
-    
-    public void moves(byte [] mv);
-    
-    public void config(int _numPart, byte _animaRadius, java.awt.Color _cor);
-    
+
+	public void moves(byte[] mv);
+
+	public void config(int _numPart, byte _animaRadius, java.awt.Color _cor);
+
 }

@@ -25,7 +25,5 @@ public class SerialPortRs232Error {
 	public String getMessage() {
 		return message;
 	}
-	
-	
-	
+
 }

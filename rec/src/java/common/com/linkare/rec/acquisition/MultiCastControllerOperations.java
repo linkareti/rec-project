@@ -15,45 +15,36 @@ public interface MultiCastControllerOperations {
 	 * 
 	 * @return A Collection of MultiCastHardware with the references to the
 	 *         apparatus that this user
-	 * @throws NotRegistered
-	 *             If the user hasn't register with the MCController or if it
-	 *             has been kicked off
-	 * @throws NotAuthorized
-	 *             If the user is not allowed to find a list of hardwares on the
-	 *             MCController
+	 * @throws NotRegistered If the user hasn't register with the MCController
+	 *             or if it has been kicked off
+	 * @throws NotAuthorized If the user is not allowed to find a list of
+	 *             hardwares on the MCController
 	 */
-	MultiCastHardware[] enumerateHardware(UserInfo user) throws NotRegistered,
-			NotAuthorized;
+	MultiCastHardware[] enumerateHardware(UserInfo user) throws NotRegistered, NotAuthorized;
 
 	/**
 	 * This method registers a DataClient on a Lab
 	 * 
-	 * @param data_client
-	 *            The DataClient interface to register on the
+	 * @param data_client The DataClient interface to register on the
 	 *            MultiCastController Server
-	 * @throws MaximumClientsReached
-	 *             if the maximum number of clients have been reached on the
-	 *             Multicast Server
-	 * @throws NotAuthorized
-	 *             if the user is not authorized to connect to the server
+	 * @throws MaximumClientsReached if the maximum number of clients have been
+	 *             reached on the Multicast Server
+	 * @throws NotAuthorized if the user is not authorized to connect to the
+	 *             server
 	 * 
 	 */
 
-	void registerDataClient(DataClient data_client)
-			throws MaximumClientsReached, NotAuthorized;
+	void registerDataClient(DataClient data_client) throws MaximumClientsReached, NotAuthorized;
 
 	/**
 	 * This methods fetchs the List of users currently connected to the Lab
 	 * 
-	 * @param user
-	 *            The user currently making the request
+	 * @param user The user currently making the request
 	 * @return A list of users
-	 * @throws NotRegistered
-	 *             If the user hasn't register with the MCController or if it
-	 *             has been kicked off
-	 * @throws NotAuthorized
-	 *             If the user is not allowed to find a list of hardwares on the
-	 *             MCController
+	 * @throws NotRegistered If the user hasn't register with the MCController
+	 *             or if it has been kicked off
+	 * @throws NotAuthorized If the user is not allowed to find a list of
+	 *             hardwares on the MCController
 	 * 
 	 */
 	UserInfo[] getClientList(UserInfo user) throws NotRegistered, NotAuthorized;
@@ -62,30 +53,24 @@ public interface MultiCastControllerOperations {
 	 * This method enables a user to send a message to other users through the
 	 * Multicast Controller... This is a global message in the Lab.
 	 * 
-	 * @param user
-	 *            The user currently sending the message
-	 * @param clientTo
-	 *            The final username to which the message is destined ... Note
-	 *            that a value of null or IChatServer.EVERYONE_USER_ALIAS
+	 * @param user The user currently sending the message
+	 * @param clientTo The final username to which the message is destined ...
+	 *            Note that a value of null or IChatServer.EVERYONE_USER_ALIAS
 	 *            broadcasts the message to every user currently logged in
-	 * @throws NotRegistered
-	 *             This user has never register or it has been kicked off
-	 *             somehow
-	 * @throws NotAuthorized
-	 *             This user is not authorized to send this message, either
-	 *             because its contents were not ok, or because it doesn't have
-	 *             permission to reach all of the recipients
+	 * @throws NotRegistered This user has never register or it has been kicked
+	 *             off somehow
+	 * @throws NotAuthorized This user is not authorized to send this message,
+	 *             either because its contents were not ok, or because it
+	 *             doesn't have permission to reach all of the recipients
 	 */
-	void sendMessage(UserInfo user, String clientTo, String message)
-			throws NotRegistered, NotAuthorized;
+	void sendMessage(UserInfo user, String clientTo, String message) throws NotRegistered, NotAuthorized;
 
 	/**
 	 * This method registers a Hardware on the MultiCast Server... This method
 	 * is mainly for Hardware Servers to register themselves on the Lab, and
 	 * shouldn't normally be used by clients
 	 * 
-	 * @param hardware
-	 *            The reference to the Hardware Server that needs to be
+	 * @param hardware The reference to the Hardware Server that needs to be
 	 *            registered on the MultiCastController
 	 */
 	void registerHardware(Hardware hardware);

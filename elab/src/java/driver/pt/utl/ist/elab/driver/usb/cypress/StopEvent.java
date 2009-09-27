@@ -7,15 +7,13 @@
 package pt.utl.ist.elab.driver.usb.cypress;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class StopEvent
-{
-    
-    /** Creates a new instance of StopEvent */
-    public StopEvent()
-    {
-    }
-    
+public class StopEvent {
+
+	/** Creates a new instance of StopEvent */
+	public StopEvent() {
+	}
+
 }

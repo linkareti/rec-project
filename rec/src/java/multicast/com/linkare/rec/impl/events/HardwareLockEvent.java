@@ -7,40 +7,39 @@
 package com.linkare.rec.impl.events;
 
 import com.linkare.rec.impl.multicast.DataClientForQueue;
+
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class HardwareLockEvent
-{
-	
+public class HardwareLockEvent {
+
 	/** Holds value of property milliseconds_to_lock_success. */
 	private long milliseconds_to_lock_success;
-	private LockCountDown counter=null;
-	private DataClientForQueue lockerClient=null;
+	private LockCountDown counter = null;
+	private DataClientForQueue lockerClient = null;
+
 	/** Creates a new instance of HardwareLockEvent */
-	public HardwareLockEvent(LockCountDown counter, long milliseconds_to_lock_success, DataClientForQueue lockerClient)
-	{
-		this.counter=counter;
-		this.milliseconds_to_lock_success=milliseconds_to_lock_success;
-		this.lockerClient=lockerClient;
+	public HardwareLockEvent(LockCountDown counter, long milliseconds_to_lock_success, DataClientForQueue lockerClient) {
+		this.counter = counter;
+		this.milliseconds_to_lock_success = milliseconds_to_lock_success;
+		this.lockerClient = lockerClient;
 	}
-	
-	/** Getter for property milliseconds_to_lock_success.
+
+	/**
+	 * Getter for property milliseconds_to_lock_success.
+	 * 
 	 * @return Value of property milliseconds_to_lock_success.
 	 */
-	public long getMilliseconds_to_lock_success()
-	{
+	public long getMilliseconds_to_lock_success() {
 		return this.milliseconds_to_lock_success;
 	}
-	
-	public void startCountDown()
-	{
-	    counter.startCountDown(milliseconds_to_lock_success);
+
+	public void startCountDown() {
+		counter.startCountDown(milliseconds_to_lock_success);
 	}
-	
-	public DataClientForQueue getLockerClient()
-	{
-	    return lockerClient;
+
+	public DataClientForQueue getLockerClient() {
+		return lockerClient;
 	}
 }

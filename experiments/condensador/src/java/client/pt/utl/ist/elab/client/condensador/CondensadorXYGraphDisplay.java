@@ -7,23 +7,21 @@
 package pt.utl.ist.elab.client.condensador;
 
 /**
- *
- * @author  jp
+ * 
+ * @author jp
  */
-public class CondensadorXYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
-{
-    
-    /**
+public class CondensadorXYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8154865519188889282L;
 
 	/** Creates a new instance of CondensadorXYGraphDisplay */
-    public CondensadorXYGraphDisplay()
-    {
-	super();
-	setChannelDisplayX(0);
-	setChannelDisplayY(1);
-    }
-    
+	public CondensadorXYGraphDisplay() {
+		super();
+		setChannelDisplayX(0);
+		setChannelDisplayY(1);
+	}
+
 }

@@ -18,22 +18,18 @@ public class LoggerUtil {
 	 * The warning message printed also includes information at the last class,
 	 * method and line where the error really occurred
 	 * 
-	 * @param info_message
-	 *            An additional message to be presented
-	 * @param t
-	 *            The {@link Throwable} to be logged
-	 * @param logger
-	 *            The {@link Logger} on which to log the exception and message
+	 * @param info_message An additional message to be presented
+	 * @param t The {@link Throwable} to be logged
+	 * @param logger The {@link Logger} on which to log the exception and
+	 *            message
 	 */
-	public static void logThrowable(String info_message, Throwable t,
-			Logger logger) {
+	public static void logThrowable(String info_message, Throwable t, Logger logger) {
 		if (info_message != null && logger != null && logger.getLevel() != null
 				&& logger.getLevel().intValue() <= Level.WARNING.intValue()) {
 			if (t != null) {
 				StackTraceElement[] trace = t.getStackTrace();
-				info_message = " @class " + trace[0].getClassName()
-						+ " ,@method " + trace[0].getMethodName() + " ,@line "
-						+ trace[0].getLineNumber() + " " + info_message;
+				info_message = " @class " + trace[0].getClassName() + " ,@method " + trace[0].getMethodName()
+						+ " ,@line " + trace[0].getLineNumber() + " " + info_message;
 			}
 
 			logger.log(Level.WARNING, info_message);

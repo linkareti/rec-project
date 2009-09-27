@@ -7,21 +7,18 @@
 package pt.utl.ist.elab.client.statsound.displays;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
-public class TablePistonRMS extends MyDefaultTable
-{
-    
-    /** Creates a new instance of TablePistonRMS */
-    public TablePistonRMS() 
-    {
-        super();
-        setColArray(new int[]{0,2,3});
-    }
-    
-    public String getName()
-    {
-        return "Table Piston vs RMS";
-    }        
+public class TablePistonRMS extends MyDefaultTable {
+
+	/** Creates a new instance of TablePistonRMS */
+	public TablePistonRMS() {
+		super();
+		setColArray(new int[] { 0, 2, 3 });
+	}
+
+	public String getName() {
+		return "Table Piston vs RMS";
+	}
 }

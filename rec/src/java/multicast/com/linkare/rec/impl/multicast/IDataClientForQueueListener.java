@@ -9,12 +9,13 @@ package com.linkare.rec.impl.multicast;
 import java.util.logging.Level;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface IDataClientForQueueListener
-{
+public interface IDataClientForQueueListener {
 	public void dataClientForQueueIsGone(DataClientForQueue dcfq);
+
 	public void log(Level debugLevel, String message);
-	public void logThrowable(String message,Throwable t);
+
+	public void logThrowable(String message, Throwable t);
 }

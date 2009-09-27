@@ -7,10 +7,9 @@
 package com.linkare.rec.impl.client.apparatus;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
-public interface ApparatusStatusListener 
-{
-    void hardwareStateChange (com.linkare.rec.acquisition.HardwareState newState);    
+public interface ApparatusStatusListener {
+	void hardwareStateChange(com.linkare.rec.acquisition.HardwareState newState);
 }

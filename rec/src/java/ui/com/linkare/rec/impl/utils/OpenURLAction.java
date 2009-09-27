@@ -13,59 +13,50 @@ import java.net.URL;
 import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
+
 /**
- *
- * @author  bruno
+ * 
+ * @author bruno
  */
-public class OpenURLAction extends javax.swing.AbstractAction
-{
-  
-  private BasicService bs = null;
-  private URL url=null;
-  /** Creates a new instance of OpenURLAction */
-  public OpenURLAction(final String strName,final String strURLResource)
-  {
-	this.putValue(this.NAME,strName);
-	  
-    try
-    {
-      url = new URL(strURLResource);
-    }
-    catch(MalformedURLException e)
-    {
-      this.setEnabled(false);
-	  e.printStackTrace();
-      return;
-    }
-	
-	try
-    {
-      bs = (BasicService)ServiceManager.lookup("javax.jnlp.BasicService");
-    }
-    catch(UnavailableServiceException e)
-    {
-      e.printStackTrace();
-    }
-  }
- 
-  /** Invoked when an action occurs.
-   */
-  public void actionPerformed(ActionEvent evt)
-  {
-    if(bs==null || url==null)
-      return;
-    
-    if(!bs.isOffline())
-    {
-      //if(bs.showDocument(url))
-        //System.out.println("A abrir o URL...");
-      //else
-        //System.out.println("N�o foi poss�vel abrir o URL.");
-    }
-    else
-    {
-      //System.out.println("Est� off-line... N�o � poss�vel abrir o URL.");
-    }
-  }
-  
+public class OpenURLAction extends javax.swing.AbstractAction {
+
+	private BasicService bs = null;
+	private URL url = null;
+
+	/** Creates a new instance of OpenURLAction */
+	public OpenURLAction(final String strName, final String strURLResource) {
+		this.putValue(this.NAME, strName);
+
+		try {
+			url = new URL(strURLResource);
+		} catch (MalformedURLException e) {
+			this.setEnabled(false);
+			e.printStackTrace();
+			return;
+		}
+
+		try {
+			bs = (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
+		} catch (UnavailableServiceException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Invoked when an action occurs.
+	 */
+	public void actionPerformed(ActionEvent evt) {
+		if (bs == null || url == null)
+			return;
+
+		if (!bs.isOffline()) {
+			// if(bs.showDocument(url))
+			// System.out.println("A abrir o URL...");
+			// else
+			// System.out.println("N�o foi poss�vel abrir o URL.");
+		} else {
+			// System.out.println("Est� off-line... N�o � poss�vel abrir o URL.");
+		}
+	}
+
 }

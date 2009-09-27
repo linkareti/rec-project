@@ -7,8 +7,7 @@ package com.linkare.rec.acquisition;
  * GMT
  */
 
-public final class WrongConfigurationException extends
-		org.omg.CORBA.UserException {
+public final class WrongConfigurationException extends org.omg.CORBA.UserException {
 	/**
 	 * 
 	 */

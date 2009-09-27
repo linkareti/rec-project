@@ -7,18 +7,16 @@
 package pt.utl.ist.elab.client.voscilador.displays;
 
 /**
- *
- * @author  andre
+ * 
+ * @author andre
  */
-public class ZTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
-{
-    
-    /** Creates a new instance of AnguloIntensidadeChart */
-    public ZTimeChart()
-    {
-        super();
-	setChannelDisplayX(0);
-	setChannelDisplayY(4);
-    }
-    
+public class ZTimeChart extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+
+	/** Creates a new instance of AnguloIntensidadeChart */
+	public ZTimeChart() {
+		super();
+		setChannelDisplayX(0);
+		setChannelDisplayY(4);
+	}
+
 }

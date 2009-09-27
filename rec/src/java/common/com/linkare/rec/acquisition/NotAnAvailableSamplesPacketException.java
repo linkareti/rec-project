@@ -7,8 +7,7 @@ package com.linkare.rec.acquisition;
  * GMT
  */
 
-public final class NotAnAvailableSamplesPacketException extends
-		org.omg.CORBA.UserException {
+public final class NotAnAvailableSamplesPacketException extends org.omg.CORBA.UserException {
 	/**
 	 * 
 	 */
@@ -23,15 +22,13 @@ public final class NotAnAvailableSamplesPacketException extends
 		super(NotAnAvailableSamplesPacketExceptionHelper.id());
 	} // ctor
 
-	public NotAnAvailableSamplesPacketException(int _errorCode,
-			int _firstPacketNotFound) {
+	public NotAnAvailableSamplesPacketException(int _errorCode, int _firstPacketNotFound) {
 		super(NotAnAvailableSamplesPacketExceptionHelper.id());
 		errorCode = _errorCode;
 		firstPacketNotFound = _firstPacketNotFound;
 	} // ctor
 
-	public NotAnAvailableSamplesPacketException(String $reason, int _errorCode,
-			int _firstPacketNotFound) {
+	public NotAnAvailableSamplesPacketException(String $reason, int _errorCode, int _firstPacketNotFound) {
 		super(NotAnAvailableSamplesPacketExceptionHelper.id() + "  " + $reason);
 		errorCode = _errorCode;
 		firstPacketNotFound = _firstPacketNotFound;

@@ -9,22 +9,19 @@
 package pt.utl.ist.elab.client.vsemiconductor.displays;
 
 /**
- *
- * @author  Pedro Queir� e Nuno Fernandes
+ * 
+ * @author Pedro Queir� e Nuno Fernandes
  */
-public class Fnd extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph
-{
-    
-    /** Creates a new instance of W */
-    public Fnd() 
-    {
-        super();
-        setChannelDisplayX(6);
-        setChannelDisplayY(5);        
-    }    
-    
-    public String getName()
-    {
-        return "Fermi em funcao do numero de dadores";
-    }
+public class Fnd extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
+
+	/** Creates a new instance of W */
+	public Fnd() {
+		super();
+		setChannelDisplayX(6);
+		setChannelDisplayY(5);
+	}
+
+	public String getName() {
+		return "Fermi em funcao do numero de dadores";
+	}
 }

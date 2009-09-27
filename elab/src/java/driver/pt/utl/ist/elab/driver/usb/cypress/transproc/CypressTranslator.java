@@ -6,8 +6,8 @@
 
 package pt.utl.ist.elab.driver.usb.cypress.transproc;
 
-public interface CypressTranslator
-{
-    public String getCommandIdentifier();	
-    public boolean translate(CypressCommand command);
+public interface CypressTranslator {
+	public String getCommandIdentifier();
+
+	public boolean translate(CypressCommand command);
 }

@@ -7,14 +7,18 @@
 package com.linkare.rec.impl.data;
 
 import com.linkare.rec.data.acquisition.SamplesPacket;
+
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public interface SamplesPacketSource
-{
-    public SamplesPacket[] getSamplesPackets(int packetStartIndex,int packetEndIndex) throws SamplesPacketReadException;
-    public void addSamplesPacketSourceEventListener(SamplesPacketSourceEventListener l);
-    public void removeSamplesPacketSourceEventListener(SamplesPacketSourceEventListener l);
-    public int getLargestNumPacket();
+public interface SamplesPacketSource {
+	public SamplesPacket[] getSamplesPackets(int packetStartIndex, int packetEndIndex)
+			throws SamplesPacketReadException;
+
+	public void addSamplesPacketSourceEventListener(SamplesPacketSourceEventListener l);
+
+	public void removeSamplesPacketSourceEventListener(SamplesPacketSourceEventListener l);
+
+	public int getLargestNumPacket();
 }

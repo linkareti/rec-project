@@ -7,22 +7,19 @@
 package pt.utl.ist.elab.virtual.client.dpendulum.displays;
 
 /**
- *
+ * 
  * @author André Neto - LEFT - IST
  */
-public class W1 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph 
-{
-    
-    /** Creates a new instance of Theta1 */
-    public W1() 
-    {
-        super();
-        setChannelDisplayX(0);
-        setChannelDisplayY(3);        
-    }    
-    
-    public String getName()
-    {
-        return "Grafico 3";
-    }
+public class W1 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+
+	/** Creates a new instance of Theta1 */
+	public W1() {
+		super();
+		setChannelDisplayX(0);
+		setChannelDisplayY(3);
+	}
+
+	public String getName() {
+		return "Grafico 3";
+	}
 }

@@ -6,8 +6,8 @@
 
 package pt.utl.ist.elab.driver.serial.serialportgeneric.transproc;
 
-public interface SerialPortTranslator
-{
-    public String getCommandIdentifier();	
-    public boolean translate(SerialPortCommand command);
+public interface SerialPortTranslator {
+	public String getCommandIdentifier();
+
+	public boolean translate(SerialPortCommand command);
 }

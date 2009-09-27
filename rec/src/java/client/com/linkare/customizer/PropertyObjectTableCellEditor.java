@@ -32,13 +32,11 @@ import javax.swing.table.TableCellEditor;
  * 
  * @author jp
  */
-public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
-		TableCellEditor {
+public class PropertyObjectTableCellEditor extends AbstractCellEditor implements TableCellEditor {
 	static final long serialVersionUID = 3067172209892390454L;
 	private PropertyObject value = null;
 
-	public Component getTableCellEditorComponent(JTable table, Object value,
-			boolean isSelected, int row, int column) {
+	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 		if (value instanceof PropertyObject)
 			this.value = (PropertyObject) value;
 		else
@@ -46,8 +44,7 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 
 		if (this.value.getPropertyEditor() != null) {
 			panelEdit = new JPanel(new BorderLayout());
-			JButton btn = PropertyObjectTableCellRenderer.createRendererButton(
-					value, isSelected, true, table);
+			JButton btn = PropertyObjectTableCellRenderer.createRendererButton(value, isSelected, true, table);
 			btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					replaceEditingPanel();
@@ -104,8 +101,7 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 			if (this.value.getPropertyEditor().getTags() != null) {
 
 				combo = new JComboBox(this.value.getPropertyEditor().getTags());
-				combo.setSelectedItem(this.value.getPropertyEditor()
-						.getAsText());
+				combo.setSelectedItem(this.value.getPropertyEditor().getAsText());
 				combo.addItemListener(new ItemListener() {
 					public void itemStateChanged(ItemEvent evt) {
 						comboBoxItemStateChanged(evt);
@@ -141,8 +137,7 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 			this.value.setValue(this.value.getPropertyEditor().getValue());
 			fireEditingStopped();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,
-					"Unable to change value\n\rReason:" + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Unable to change value\n\rReason:" + e.getMessage());
 		}
 	}
 
@@ -154,8 +149,7 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 			this.value.setValue(this.value.getPropertyEditor().getValue());
 			fireEditingStopped();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,
-					"Unable to change value\n\rReason:" + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Unable to change value\n\rReason:" + e.getMessage());
 			tf.requestFocus();
 		}
 
@@ -172,8 +166,7 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 	}
 
 	private JButton createCustomEditorButton() {
-		if (value != null && value.getPropertyEditor() != null
-				&& value.getPropertyEditor().supportsCustomEditor()) {
+		if (value != null && value.getPropertyEditor() != null && value.getPropertyEditor().supportsCustomEditor()) {
 			return new PropertyCustomEditorButton();
 		}
 		return null;
@@ -205,8 +198,7 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 				value.getPropertyEditor().setValue(oldValue);
 				Component comp = value.getPropertyEditor().getCustomEditor();
 
-				dialog = new JDialog(new JDialog(), "Property Custom Editing",
-						true);
+				dialog = new JDialog(new JDialog(), "Property Custom Editing", true);
 
 				JButton btnOK = new JButton("OK");
 

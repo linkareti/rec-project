@@ -7,18 +7,16 @@
 package pt.utl.ist.elab.client.scuba;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class Pressure4XYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph
-{
-    
-    /** Creates a new instance of PVXYGraphDisplay */
-    public Pressure4XYGraphDisplay()
-    {
-	super();
-	setChannelDisplayX(4);
-	setChannelDisplayY(3);
-    }
-    
+public class Pressure4XYGraphDisplay extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimentGraph {
+
+	/** Creates a new instance of PVXYGraphDisplay */
+	public Pressure4XYGraphDisplay() {
+		super();
+		setChannelDisplayX(4);
+		setChannelDisplayY(3);
+	}
+
 }

@@ -7,16 +7,16 @@
 package pt.utl.ist.elab.virtual.client.cartpole.displays;
 
 /**
- *
- * @author  nomead
+ * 
+ * @author nomead
  */
 public class ActionChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesXYExperimentGraph {
-    
-    /** Creates a new instance of ActionChart */
-    public ActionChart(){
-        super();
-	setChannelDisplayX(4);
-	setChannelDisplayYArray(new int[]{1,3,2,5});
-    }
-    
+
+	/** Creates a new instance of ActionChart */
+	public ActionChart() {
+		super();
+		setChannelDisplayX(4);
+		setChannelDisplayYArray(new int[] { 1, 3, 2, 5 });
+	}
+
 }

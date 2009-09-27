@@ -7,23 +7,20 @@
 package pt.utl.ist.elab.driver.usb.cypress.transproc;
 
 /**
- *
+ * 
  * @author José Pedro Pereira - Linkare TI
  */
-public abstract class AbstractCypressTranslator implements CypressTranslator
-{
-	private String commandIdentifier=null;
+public abstract class AbstractCypressTranslator implements CypressTranslator {
+	private String commandIdentifier = null;
 
 	/** Creates a new instance of SerialPortTranslatorAdapter */
-	public AbstractCypressTranslator(String commandIdentifier)
-	{
-		this.commandIdentifier=commandIdentifier;
+	public AbstractCypressTranslator(String commandIdentifier) {
+		this.commandIdentifier = commandIdentifier;
 		CypressTranslatorProcessorManager.registerTranslator(this);
 	}
-	
-	public String getCommandIdentifier()
-	{
-	    return commandIdentifier;
+
+	public String getCommandIdentifier() {
+		return commandIdentifier;
 	}
-	
+
 }
