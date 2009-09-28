@@ -9,6 +9,7 @@ package com.linkare.rec.impl.newface.component;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Vector;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -25,16 +26,18 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTableModel implements ExpUsersListChangeListener
 {
-    private static String UI_CLIENT_LOGGER="ReC.baseUI";
-    
-    static
-    {
-        Logger l=LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
-        if(l==null)
-        {
-            LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
-        }
-    }
+//    private static String UI_CLIENT_LOGGER="ReC.baseUI";
+//    
+//    static
+//    {
+//        Logger l=LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+//        if(l==null)
+//        {
+//            LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
+//        }
+//    }
+	private static final Logger log = Logger.getLogger(DefaulExpUsersListTableModel.class.getName());
+	
     public static long CONTROL_NOW=0;
     
     public static long CONTROL_AVAILABLE=-1;
@@ -145,9 +148,11 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
                     controlInMax = controlInMin;
                 }
                 
-                System.out.println("Username = " + userName);
-                System.out.println("controlInMin = " + controlInMin);
-                System.out.println("controlInMax = " + controlInMax);
+                if (log.isLoggable(Level.FINE)) {
+                	log.fine("Username = " + userName);
+                	log.fine("controlInMin = " + controlInMin);
+                	log.fine("controlInMax = " + controlInMax);
+                }
                 
                 expUsersList.add(new String[]
                 {userName, controlInMin});

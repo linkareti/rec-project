@@ -421,8 +421,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 								"lblActionState.apparatusLockable.text", TimeUtils.msToSeconds(millisToLockSuccess)));
 				
 				getExperimentActionBar().setActionStateLabelVisible(true);
+				getExperimentActionBar().setPlayStopButtonEnabled(true);
 				
 				apparatusLockTimer.start();
+				break;
+				
+			case LOCKED:
+				
+				// TODO apparatus locked
 				break;
 				
 			case DISCONNECTED:
@@ -458,7 +464,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		
 		//UserList Pane
 		// CRITICAL João: Verificar tempo e carga de execução destas chamadas e
-		// identificar se é uma situção5 com que temos mesmo de viver.
+		// identificar se é uma situção com que temos mesmo de viver.
 		getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
 		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getRecFaceConfig().getUsersListRefreshRateMs());
 
@@ -497,11 +503,18 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		long lockCountDown = TimeUtils.msToSeconds(
 				millisToLockSuccess - (TimeUtils.getSystemCurrentTimeMs() - apparatusLockInitialTimeMs));
 
-		if (lockCountDown > 0) {
+		boolean lockCountDownGreaterThanZero = lockCountDown > 0;
+		
+		if (lockCountDownGreaterThanZero) {
 			getExperimentActionBar().setActionStateText(
 					recApplication.getContext().getResourceMap(ExperimentActionBar.class).getString(
 							"lblActionState.apparatusLockable.text", lockCountDown));
+		} 
+	
+		if ( getExperimentActionBar().isPlayStopButtonEnabled() != lockCountDownGreaterThanZero ) {
+			getExperimentActionBar().setPlayStopButtonEnabled(lockCountDownGreaterThanZero);
 		}
+			
 	}
 	
 	/** This method is called from within the constructor to

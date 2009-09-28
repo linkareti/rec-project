@@ -21,7 +21,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  *
- * @author  Jos� Pedro Pereira
+ * @author  José Pedro Pereira
  */
 public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTableModel implements ExpUsersListChangeListener
 {

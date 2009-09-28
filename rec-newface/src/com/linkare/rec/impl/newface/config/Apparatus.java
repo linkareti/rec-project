@@ -3,9 +3,12 @@ package com.linkare.rec.impl.newface.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Icon;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 @XmlType
 public class Apparatus extends DisplayNode {
@@ -57,6 +60,10 @@ public class Apparatus extends DisplayNode {
     @XmlAttribute
     public String getIconLocationBundleKey() {
         return iconLocationBundleKey;
+    }
+    
+    public Icon getIcon() {
+    	return ReCResourceBundle.findImageIconOrDefault(getIconLocationBundleKey(), null);
     }
 
     /**

@@ -22,6 +22,10 @@ public class ExperimentActionBar extends javax.swing.JPanel {
         btnPlayStop.setEnabled(enabled);
     }
     
+    public boolean isPlayStopButtonEnabled() {
+    	return btnPlayStop.isEnabled();
+    }
+    
     public void setActionStateLabelVisible(boolean visible) {
         lblActionState.setVisible(visible);
     }
@@ -46,6 +50,8 @@ public class ExperimentActionBar extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(32767, 40));
         setName("Form"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ExperimentActionBar.class, this);
+        btnPlayStop.setAction(actionMap.get("play")); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ExperimentActionBar.class);
         btnPlayStop.setIcon(resourceMap.getIcon("btnPlayStop.icon")); // NOI18N
         btnPlayStop.setText(resourceMap.getString("btnPlayStop.text")); // NOI18N
@@ -81,7 +87,6 @@ public class ExperimentActionBar extends javax.swing.JPanel {
                 .addComponent(lblActionState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPlayStop;
