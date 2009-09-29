@@ -489,6 +489,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
             getVideoBox().destroyVideoOutput();
         }
         
+        getExperimentActionBar().setActionStateLabelVisible(false);
+        
 		getApparatusSelectBox().toggleApparatusStateActionData(true);
 		
 		getApparatusCombo().setEnabled(true);
