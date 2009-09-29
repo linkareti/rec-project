@@ -34,8 +34,8 @@ public class FlatSliderUI extends MetalSliderUI {
 	
 	public void paintThumb(Graphics g)  {
         Rectangle knobBounds = thumbRect;
-        Icon sliderH = new javax.swing.ImageIcon(getClass().getResource("./resources/sliderHead.png"));
-        Icon sliderV = new javax.swing.ImageIcon(getClass().getResource("./resources/sliderHeadV.png"));
+        Icon sliderH = new javax.swing.ImageIcon(FlatSliderUI.class.getResource("resources/sliderHead.png"));
+        Icon sliderV = new javax.swing.ImageIcon(FlatSliderUI.class.getResource("resources/sliderHeadV.png"));
         
         g.translate( knobBounds.x, knobBounds.y );
 
