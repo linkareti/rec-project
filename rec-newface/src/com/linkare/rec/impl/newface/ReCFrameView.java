@@ -329,7 +329,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
                 break;
                 
 	        case APPARATUS_CONFIGURED:
-	        	getExperimentActionBar().setPlayStopButtonEnabled(true);
+	        	//getExperimentActionBar().setPlayStopButtonEnabled(true);
 	        	break;
     	}
 	}
@@ -421,7 +421,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 								"lblActionState.apparatusLockable.text", TimeUtils.msToSeconds(millisToLockSuccess)));
 				
 				getExperimentActionBar().setActionStateLabelVisible(true);
-				getExperimentActionBar().setPlayStopButtonEnabled(true);
+				//getExperimentActionBar().setPlayStopButtonEnabled(true);
 				
 				apparatusLockTimer.start();
 				break;

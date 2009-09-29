@@ -1215,7 +1215,6 @@ public class ReCApplication extends SingleFrameApplication
 //        experimentInternalFrame.setSize(mDIDesktopPane.getSize().width-10, mDIDesktopPane.getSize().height-10);
         
         experimentInternalFrame.setVisible(true);
-        log.info("xxxxxxxx FIM");
 	}
 	
 	@Override
