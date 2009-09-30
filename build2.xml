@@ -57,15 +57,29 @@
 
 	<target name="clean.rec.common" description="Delete the build folder containing the common shared compiled code.">
 		<delete dir="${rec.common.classes.dir}" />
+		<delete dir="${rec.common.build.dir}" />
 	</target>
 
 	<target name="compile.rec.common" description="Compile the common part of the ReC project independently.">
 		<mkdir dir="${rec.common.classes.dir}" />
+		<mkdir dir="${rec.common.classes.dir}/META-INF" />
+
 		<javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.common.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+
+		<manifest file="${rec.common.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
 	</target>
 
 	<target name="jar.rec.common" description="Create a jar with the common part of the ReC project.">
@@ -126,10 +140,13 @@
 
 	<target name="clean.rec.client" description="Delete the build folder containing the common shared compiled code.">
 		<delete dir="${rec.client.classes.dir}" />
+		<delete dir="${rec.client.build.dir}" />
 	</target>
 
 	<target name="compile.rec.client">
 		<mkdir dir="${rec.client.classes.dir}" />
+		<mkdir dir="${rec.client.classes.dir}/META-INF" />
+
 		<javac srcdir="${rec.client.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.client.dependencies.classpath" />
@@ -141,6 +158,17 @@
 			<classpath refid="rec.compile.client.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+
+		<manifest file="${rec.client.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
 	</target>
 
 	<target name="jar.rec.client">
@@ -200,15 +228,29 @@
 
 	<target name="clean.rec.hardwareserver">
 		<delete dir="${rec.hardwareserver.classes.dir}" />
+		<delete dir="${rec.hardwareserver.build.dir}" />
 	</target>
 
 	<target name="compile.rec.hardwareserver">
 		<mkdir dir="${rec.hardwareserver.classes.dir}" />
+		<mkdir dir="${rec.hardwareserver.classes.dir}/META-INF" />
+
 		<javac srcdir="${rec.hardwareserver.src.java.dir}" destdir="${rec.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.hardwareserver.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+
+		<manifest file="${rec.hardwareserver.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
 	</target>
 
 	<target name="jar.rec.hardwareserver">
@@ -261,15 +303,29 @@
 
 	<target name="clean.rec.multicastcontroller">
 		<delete dir="${rec.multicast.classes.dir}" />
+		<delete dir="${rec.multicast.build.dir}" />
 	</target>
 
 	<target name="compile.rec.multicastcontroller">
 		<mkdir dir="${rec.multicast.classes.dir}" />
+		<mkdir dir="${rec.multicast.classes.dir}/META-INF" />
+
 		<javac srcdir="${rec.multicast.src.java.dir}" destdir="${rec.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.multicastcontroller.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+
+		<manifest file="${rec.multicast.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
 	</target>
 
 	<target name="jar.rec.multicastcontroller">
@@ -387,10 +443,13 @@
 
 	<target name="clean.elab.client">
 		<delete dir="${elab.client.classes.dir}" />
+		<delete dir="${elab.client.build.dir}" />
 	</target>
 
 	<target name="compile.elab.client">
 		<mkdir dir="${elab.client.classes.dir}" />
+		<mkdir dir="${elab.client.classes.dir}/META-INF" />
+
 		<javac srcdir="${elab.client.src.java.dir}" destdir="${elab.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="elab.compile.client.dependencies.classpath" />
@@ -402,6 +461,17 @@
 			<classpath refid="elab.compile.client.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+
+		<manifest file="${elab.client.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
 	</target>
 
 	<target name="jar.elab.client">
@@ -463,15 +533,30 @@
 
 	<target name="clean.elab.hardwareserver">
 		<delete dir="${elab.hardwareserver.classes.dir}" />
+		<delete dir="${elab.hardwareserver.classes.dir}/META-INF" />
 	</target>
 
 	<target name="compile.elab.hardwareserver">
 		<mkdir dir="${elab.hardwareserver.classes.dir}" />
+		<mkdir dir="${elab.hardwareserver.classes.dir}/META-INF" />
+		
 		<javac srcdir="${elab.hardwareserver.src.java.dir}" destdir="${elab.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="elab.compile.hardwareserver.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+
+		<manifest file="${elab.hardwareserver.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
 	</target>
 
 	<target name="jar.elab.hardwareserver">
@@ -525,15 +610,30 @@
 
 	<target name="clean.elab.multicastcontroller">
 		<delete dir="${elab.multicast.classes.dir}" />
+		<delete dir="${elab.multicast.classes.dir}/META-INF" />
 	</target>
 
 	<target name="compile.elab.multicastcontroller">
 		<mkdir dir="${elab.multicast.classes.dir}" />
+		<mkdir dir="${elab.multicast.classes.dir}/META-INF" />
+			
 		<javac srcdir="${elab.multicast.src.java.dir}" destdir="${elab.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="elab.compile.multicastcontroller.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+		
+		<manifest file="${elab.multicast.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
 	</target>
 
 	<target name="jar.elab.multicastcontroller">
@@ -554,7 +654,7 @@
 	-->
 
 	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller,clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller,clean.all.experiments">
-
+		<delete dir="${rec.client.build.dir}" />
 	</target>
 
 	<target name="compile.all" depends="compile.rec.common,compile.rec.client,compile.rec.hardwareserver,compile.rec.multicastcontroller,compile.elab.client,compile.elab.hardwareserver,compile.elab.multicastcontroller,compile.experiments.list">
@@ -750,7 +850,7 @@
 			</replace>
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="run.experiment.client">
 		<attribute name="experiment.name" />
 		<sequential>
@@ -763,8 +863,8 @@
 					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
 						<include name="**/*.jar" />
 					</fileset>
-					<path refid="rec.common.lib.path"/>
-					<path refid="rec.client.lib.path"/>
+					<path refid="rec.common.lib.path" />
+					<path refid="rec.client.lib.path" />
 					<pathelement location="${rec.common.classes.dir}" />
 					<pathelement location="${rec.client.classes.dir}" />
 					<pathelement location="${rec.ui.classes.dir}" />
@@ -799,7 +899,7 @@
 					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
 						<include name="**/*.jar" />
 					</fileset>
-					<path refid="rec.common.lib.path"/>
+					<path refid="rec.common.lib.path" />
 					<pathelement location="${rec.common.classes.dir}" />
 					<pathelement location="${rec.hardwareserver.classes.dir}" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
@@ -834,7 +934,7 @@
 					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
 						<include name="**/*.jar" />
 					</fileset>
-					<path refid="rec.common.lib.path"/>
+					<path refid="rec.common.lib.path" />
 					<pathelement location="${rec.common.classes.dir}" />
 					<pathelement location="${rec.hardwareserver.classes.dir}" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
@@ -951,7 +1051,7 @@
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<run.experiment.driver experiment.name="${experiment.name}" />
 	</target>
-	
+
 	<target name="debug.experiment.driver">
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
