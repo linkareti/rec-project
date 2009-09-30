@@ -439,6 +439,7 @@
 	<path id="elab.compile.client.dependencies.classpath">
 		<path refid="elab.compile.client.classpath" />
 		<pathelement location="${rec.client.classes.dir}/" />
+		<pathelement location="${rec.common.classes.dir}/" />
 	</path>
 
 	<target name="clean.elab.client">
@@ -653,19 +654,19 @@
 		=====================================================
 	-->
 
-	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller,clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller,clean.all.experiments">
-		<delete dir="${rec.client.build.dir}" />
+	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller,clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller">
+		<delete dir="${build.dir}" />
 	</target>
 
-	<target name="compile.all" depends="compile.rec.common,compile.rec.client,compile.rec.hardwareserver,compile.rec.multicastcontroller,compile.elab.client,compile.elab.hardwareserver,compile.elab.multicastcontroller,compile.experiments.list">
-
-	</target>
-
-	<target name="jar.all" depends="jar.rec.common,jar.rec.client,jar.rec.hardwareserver,jar.rec.multicastcontroller,jar.elab.client,jar.elab.hardwareserver,jar.elab.multicastcontroller,jar.experiments.list">
+	<target name="compile.all" depends="compile.rec.common,compile.rec.client,compile.rec.hardwareserver,compile.rec.multicastcontroller,compile.elab.client,compile.elab.hardwareserver,compile.elab.multicastcontroller">
 
 	</target>
 
-	<target name="sign.all" depends="sign.rec.common,sign.rec.client,sign.elab.client,sign.experiments.list">
+	<target name="jar.all" depends="jar.rec.common,jar.rec.client,jar.rec.hardwareserver,jar.rec.multicastcontroller,jar.elab.client,jar.elab.hardwareserver,jar.elab.multicastcontroller">
+
+	</target>
+
+	<target name="sign.all" depends="sign.rec.common,sign.rec.client,sign.elab.client">
 
 	</target>
 
@@ -673,8 +674,11 @@
 
 	</target>
 
-	<!--depends="build.all"-->
-	<target name="dist">
+	<target name="clean.dist">
+		<delete dir="${dist.dir}" />
+	</target>
+	
+	<target name="dist" depends="clean.dist,build.all">
 		<mkdir dir="${dist.dir}" />
 
 		<zip destfile="${dist.dir}/elab-multicast.zip" update="true" comment="eLab Multicast Controller">
