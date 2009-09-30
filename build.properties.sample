@@ -33,6 +33,14 @@ alias=linkare
 max.memory=1024m
 min.memory=128m
 
+##COMMON MANIFEST## (adopted from com.linkare.commons project)
+com.linkare.rec.spec.title=ReC - Elab
+com.linkare.rec.spec.version=1.0.0
+com.linkare.rec.spec.vendor=Linkare TI
+com.linkare.rec.impl.title=ReC - Elab
+com.linkare.rec.impl.version=1.0.0
+com.linkare.rec.impl.vendor=Linkare TI
+
 ###########################SYSTEM PROPERTIES###############################
 rec.multicastcontroller.bindname=MultiCastController 
 rec.multicastcontroller.initref=MultiCastController 
