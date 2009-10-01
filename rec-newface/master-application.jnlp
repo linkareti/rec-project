@@ -33,7 +33,7 @@
         <jar href="lib/jcommon-1.0.12.jar"/>
         <jar href="lib/jfreechart-1.0.9.jar"/>
         <jar href="lib/jmf.jar"/>
-        <jar href="lib/jna.jar"/>
+<!--        <jar href="lib/jna.jar"/>-->
         <jar href="lib/jsr80.jar"/>
         <jar href="lib/jsr80_ri.jar"/>
         <jar href="lib/logkit.jar"/>
@@ -48,60 +48,128 @@
         <property name="ReCFaceConfig" value="config/ReCFaceConfig.xml" />
         <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
         <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
-        <property name="video.enabled" value="N"/>
+        <!-- change this value to disable video -->
+        <property name="video.development.enabled" value="yes"/>
     </resources>
 
-<!-- *******************************************************************
+    <!-- *******************************************************************
          ****************** Resources por SO / Arch ************************
          ******************************************************************* -->
 
 <!-- falta archs x86-64 (ou x86_64?), amd64 e amd-->
     <resources arch="x86" os="Windows 2000">
         <nativelib href="lib/libsvlc_win32_x86.jar"/>
-        <jar href="lib/vlcplugins_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
     </resources>
-
+    <resources arch="amd" os="Windows 2000">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
     <resources arch="x86" os="Windows XP">
         <nativelib href="lib/libsvlc_win32_x86.jar"/>
-        <jar href="lib/vlcplugins_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
     </resources>
-
+    <resources arch="amd" os="Windows XP">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+    <resources arch="x86_64" os="Windows XP">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+    <resources arch="amd64" os="Windows XP">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
 <!-- por vezes o os.name devolve Windows NT no vista -->
     <resources arch="x86" os="Windows NT">
         <nativelib href="lib/libsvlc_win32_x86.jar"/>
-        <jar href="lib/vlcplugins_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
     </resources>
-
     <resources arch="x86" os="Windows Vista">
         <nativelib href="lib/libsvlc_win32_x86.jar"/>
-        <jar href="lib/vlcplugins_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
     </resources>
-
+    <resources arch="x86_64" os="Windows Vista">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+    <resources arch="amd" os="Windows Vista">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+    <resources arch="amd64" os="Windows Vista">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
     <resources arch="x86" os="Windows 7">
         <nativelib href="lib/libsvlc_win32_x86.jar"/>
-        <jar href="lib/vlcplugins_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+    <resources arch="x86_64" os="Windows 7">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+    <resources arch="amd" os="Windows 7">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+    <resources arch="amd64" os="Windows 7">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="../windowsInstaller.jnlp" name="windowsInstaller"/>
     </resources>
 
 <!-- falta i686 e i586(? isto existe?). também pode ser usado x86_64, x86, sparc, ppc, ppc64 e armv41 -->
     <resources arch="i386" os="Linux">
         <nativelib href="lib/libsvlc_linux_i686.jar"/>
-        <jar href="lib/vlcplugins_linux_i686.jar"/>
+        <extension href="../linuxInstaller.jnlp" name="linuxInstaller"/>
     </resources>
-
+    <resources arch="i586" os="Linux">
+        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <extension href="../linuxInstaller.jnlp" name="linuxInstaller"/>
+    </resources>
+    <resources arch="i686" os="Linux">
+        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <extension href="../linuxInstaller.jnlp" name="linuxInstaller"/>
+    </resources>
+    <resources arch="amd64" os="Linux">
+        <nativelib href="lib/libsvlc_linux_amd64.jar"/>
+        <extension href="../linuxInstaller.jnlp" name="linuxInstaller"/>
+    </resources>
+<!-- Se n for nenhuma das archs definidas... deixa dar erro!!!!-->
+    <!--<resources os="Linux">
+        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <extension name="linuxInstaller" href="../linuxInstaller.jnlp" />
+    </resources>-->
 <!-- confirmar se as libs de linux funcionam em Solaris -->
     <resources arch="sparc" os="SunOS">
         <nativelib href="lib/libsvlc_linux_i686.jar"/>
         <jar href="lib/vlcplugins_linux_i686.jar"/>
     </resources>
-
+    <resources arch="x86" os="SunOS">
+        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <extension href="../linuxInstaller.jnlp" name="linuxInstaller"/>
+    </resources>
+    <!-- para x86_64 necessita de novas libs? -->
+    <resources arch="x86_64" os="SunOS">
+        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <extension href="../linuxInstaller.jnlp" name="linuxInstaller"/>
+    </resources>
 <!--Testar no mac e ver como se define as nativelibs. Só para MAC > v10-->
 <!-- existem ainda os ppc32, ppc64 (Mac OS X) e PowerPC (Mac OS)-->
    <!-- <resources arch="ppc" os="Mac OS X">
         <nativelib href="lib/libsvlc_mac_ppc.jar"/>
         <jar href="lib/vlcplugins_mac_ppc.jar"/>
     </resources>-->
-
     <resources arch="ppc64" os="Mac OS X">
+        <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc64.jar"/>
+    </resources>
+    <resources arch="x86" os="Mac OS X">
+        <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc64.jar"/>
+    </resources>
+    <resources arch="x86_64" os="Mac OS X">
         <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
         <jar href="lib/vlcplugins_mac_ppc64.jar"/>
     </resources>
