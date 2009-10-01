@@ -260,7 +260,12 @@ public class ReCApplication extends SingleFrameApplication
 					transitions(APPARATUS_LOCKED,
 							LAB_DISCONNECT_PERFORMED, 
 							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
-			
+
+            //FIXME ver depois qual os estado que realmente é para ir
+            availableTransitions.put(APPARATUS_STARTED,
+					transitions(LAB_DISCONNECT_PERFORMED,
+                            APPARATUS_DISCONNECT_PERFORMED));
+
 			availableTransitions.put(APPARATUS_LOCKED, 
 					transitions(LAB_DISCONNECT_PERFORMED, 
 							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
