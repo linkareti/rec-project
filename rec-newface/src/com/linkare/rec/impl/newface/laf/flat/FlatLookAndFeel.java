@@ -48,7 +48,8 @@ public class FlatLookAndFeel extends
 	 */
 	public FlatLookAndFeel(FlatTheme theme) {
 		this.theme = theme;
-        FlatFocusRenderer.install(); // Setup focus
+        //Henrique prob com o canvas do vídeo. Fix later!
+//        FlatFocusRenderer.install(); // Setup focus
 	}
 
 	@Override
