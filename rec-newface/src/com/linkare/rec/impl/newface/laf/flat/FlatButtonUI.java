@@ -38,8 +38,6 @@ import javax.swing.plaf.metal.MetalButtonUI;
 import sun.swing.SwingUtilities2;
 
 import com.linkare.rec.impl.newface.component.FlatButton;
-import com.sun.xml.internal.bind.v2.model.impl.ModelBuilder;
-
 
 /**
  * 
