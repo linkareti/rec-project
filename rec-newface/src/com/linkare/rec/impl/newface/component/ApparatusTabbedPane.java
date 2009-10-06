@@ -7,13 +7,23 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.BorderLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author hfernandes
  */
-public class ApparatusTabbedPane extends javax.swing.JPanel {
+public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeListener {
+	
+	@SuppressWarnings("unused")
+	private static final Logger log = Logger.getLogger(ApparatusTabbedPane.class.getName());
 
     public static final int TAB_DESCRIPTION = 0;
 
@@ -23,10 +33,18 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
 
     public static final int TAB_USERS = 3;
 
+	private boolean lastSelectedTabResults = false;
+
 
     /** Creates new form ApparatusTabbedPane */
     public ApparatusTabbedPane() {
         initComponents();
+        
+        resultsActionBar = new ResultsActionBar();
+        resultsActionBar.setName("resultsActionBar");
+        resultsActionBar.setMinimumSize(experimentActionBar.getMinimumSize());
+        
+        tabbedPane.addChangeListener(this);
     }
 
     public ApparatusDescriptionPane getDescriptionPane() {
@@ -37,9 +55,17 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
     	return apparatusUserList1;
     }
     
-	public com.linkare.rec.impl.newface.component.ExperimentActionBar getExperimentActionBar() {
+	public ExperimentActionBar getExperimentActionBar() {
 		return experimentActionBar;
 	}
+	
+	public StatusActionBar getExperimentStatusActionBar() {
+		return statusActionBar;
+	}
+
+	public JPanel getResultsHolderPane(){
+    	return resultsHolderPane;
+    }
 
 	public void addCustomizerComponent(JComponent controller) {
     	controllerHolderScrollPane.setViewportView(controller);
@@ -48,6 +74,29 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
     public void setSelectedTabIndex(int index) {
     	tabbedPane.setSelectedIndex(index);
     }
+    
+    public void setTabIndexEnabled(int index, boolean enabled) {
+    	tabbedPane.setEnabledAt(index, enabled);
+    }
+    
+    @Override
+	public void stateChanged(ChangeEvent e) {
+		if (TAB_RESULTS == tabbedPane.getSelectedIndex()) {
+			
+			actionBarHolderPane.remove(experimentActionBar);
+			actionBarHolderPane.add(resultsActionBar, BorderLayout.LINE_START);
+			lastSelectedTabResults  = true;
+			revalidate();
+			repaint();
+			
+		} else if (lastSelectedTabResults) {
+			lastSelectedTabResults  = false;
+			actionBarHolderPane.remove(resultsActionBar);
+			actionBarHolderPane.add(experimentActionBar, BorderLayout.LINE_START);
+			revalidate();
+			repaint();
+		}
+	}
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -58,18 +107,32 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        actionBarHolderPane = new javax.swing.JPanel();
+        experimentActionBar = new com.linkare.rec.impl.newface.component.ExperimentActionBar();
+        statusActionBar = new com.linkare.rec.impl.newface.component.StatusActionBar();
         tabbedPane = new javax.swing.JTabbedPane();
         descriptionPane = new com.linkare.rec.impl.newface.component.ApparatusDescriptionPane();
         controllerHolderPane = new javax.swing.JPanel();
         controllerHolderScrollPane = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
+        resultsHolderPane = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         apparatusUserList1 = new com.linkare.rec.impl.newface.component.ApparatusUserList();
-        experimentActionBar = new com.linkare.rec.impl.newface.component.ExperimentActionBar();
 
         setName("Form"); // NOI18N
         setOpaque(false);
         setLayout(new java.awt.BorderLayout());
+
+        actionBarHolderPane.setName("actionBarHolderPane"); // NOI18N
+        actionBarHolderPane.setPreferredSize(new java.awt.Dimension(514, 34));
+        actionBarHolderPane.setLayout(new java.awt.BorderLayout());
+
+        experimentActionBar.setName("experimentActionBar"); // NOI18N
+        actionBarHolderPane.add(experimentActionBar, java.awt.BorderLayout.LINE_START);
+
+        statusActionBar.setName("statusActionBar"); // NOI18N
+        actionBarHolderPane.add(statusActionBar, java.awt.BorderLayout.CENTER);
+
+        add(actionBarHolderPane, java.awt.BorderLayout.SOUTH);
 
         tabbedPane.setName("tabbedPane"); // NOI18N
 
@@ -89,34 +152,22 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
             controllerHolderPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controllerHolderPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                 .addContainerGap())
         );
         controllerHolderPaneLayout.setVerticalGroup(
             controllerHolderPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controllerHolderPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tabbedPane.addTab(resourceMap.getString("controllerHolderPane.TabConstraints.tabTitle"), controllerHolderPane); // NOI18N
 
-        jPanel1.setEnabled(false);
-        jPanel1.setName("jPanel1"); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
-        );
-
-        tabbedPane.addTab(resourceMap.getString("jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
+        resultsHolderPane.setName("resultsHolderPane"); // NOI18N
+        resultsHolderPane.setLayout(new java.awt.BorderLayout());
+        tabbedPane.addTab(resourceMap.getString("resultsHolderPane.TabConstraints.tabTitle"), resultsHolderPane); // NOI18N
 
         jPanel2.setName("jPanel2"); // NOI18N
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
@@ -127,22 +178,21 @@ public class ApparatusTabbedPane extends javax.swing.JPanel {
         tabbedPane.addTab(resourceMap.getString("jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
 
         add(tabbedPane, java.awt.BorderLayout.CENTER);
-
-        experimentActionBar.setMinimumSize(new java.awt.Dimension(48, 10));
-        experimentActionBar.setName("experimentActionBar"); // NOI18N
-        add(experimentActionBar, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel actionBarHolderPane;
     private com.linkare.rec.impl.newface.component.ApparatusUserList apparatusUserList1;
     private javax.swing.JPanel controllerHolderPane;
     private javax.swing.JScrollPane controllerHolderScrollPane;
     private com.linkare.rec.impl.newface.component.ApparatusDescriptionPane descriptionPane;
     private com.linkare.rec.impl.newface.component.ExperimentActionBar experimentActionBar;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel resultsHolderPane;
+    private com.linkare.rec.impl.newface.component.StatusActionBar statusActionBar;
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 
+    private ResultsActionBar resultsActionBar;
 }

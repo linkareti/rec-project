@@ -26,19 +26,14 @@
               <Component id="btnPlayStop" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="checkAutoPlay" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="58" max="32767" attributes="0"/>
-              <Component id="lblActionState" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="btnPlayStop" alignment="0" min="-2" max="-2" attributes="0"/>
-          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-              <Component id="checkAutoPlay" alignment="3" pref="34" max="32767" attributes="0"/>
-              <Component id="lblActionState" alignment="3" min="-2" max="-2" attributes="0"/>
-          </Group>
+          <Component id="checkAutoPlay" alignment="0" pref="34" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -65,15 +60,6 @@
         <Property name="text" type="java.lang.String" resourceKey="checkAutoPlay.text"/>
         <Property name="name" type="java.lang.String" value="checkAutoPlay" noResource="true"/>
       </Properties>
-    </Component>
-    <Component class="com.linkare.rec.impl.newface.component.ExperimentActionLabel" name="lblActionState">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="lblActionState.text"/>
-        <Property name="name" type="java.lang.String" value="lblActionState" noResource="true"/>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="lblActionState.setVisible(false);"/>
-      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

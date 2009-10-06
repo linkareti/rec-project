@@ -260,15 +260,17 @@ public class ReCApplication extends SingleFrameApplication
 					transitions(APPARATUS_LOCKED,
 							LAB_DISCONNECT_PERFORMED, 
 							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
-
-            //FIXME ver depois qual os estado que realmente é para ir
-            availableTransitions.put(APPARATUS_STARTED,
-					transitions(LAB_DISCONNECT_PERFORMED,
-                            APPARATUS_DISCONNECT_PERFORMED));
-
+			
 			availableTransitions.put(APPARATUS_LOCKED, 
 					transitions(LAB_DISCONNECT_PERFORMED, 
 							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
+			
+			// CRITICAL Confirm this APPARATUS_STARTE transitions (LAB_DISCONNECT_PERFORMED, APPARATUS_DISCONNECT_PERFORMED
+			// Será que podemos fazer esta transição. Será que podemos desligar antes de chegar ao estado STOPED?
+			availableTransitions.put(APPARATUS_STARTED, 
+					transitions(LAB_DISCONNECT_PERFORMED, 
+							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
+			// CRITICAL Confirm this APPARATUS_STARTE transitions (LAB_DISCONNECT_PERFORMED, APPARATUS_DISCONNECT_PERFORMED
 			
 			availableTransitions.put(LAB_DISCONNECT_PERFORMED, 
 					transitions(DISCONNECTED_OFFLINE));
@@ -290,7 +292,6 @@ public class ReCApplication extends SingleFrameApplication
 			if (log.isLoggable(Level.FINE)) {
 				log.fine("Transition " + this + " => " + newState + " allowed? " + result);
 			}
-			
 			
 			return result;
 		}
@@ -321,18 +322,33 @@ public class ReCApplication extends SingleFrameApplication
 
     /** Holds the ReC Configuration */
     private ReCFaceConfig recFaceConfig;
+    
     private NavigationWorkflow currentState;
+    
     private LabClientBean labClientBean;
+    
     private ApparatusClientBean apparatusClientBean;
+    
     private Lab currentLab;
+    
     private com.linkare.rec.impl.client.apparatus.Apparatus currentApparatus;
-    //private com.linkare.rec.impl.newface.config.Apparatus currentApparatusConfig = null;
+    
     private Apparatus currentApparatusConfig;
+    
     private ApparatusComboBoxModel apparatusComboBoxModel;
+    
     private ICustomizer currentCustomizer;
+    
     private HardwareAcquisitionConfig currentHardwareAcquisitionConfig;
-	private HardwareAcquisitionConfig userAcquisitionConfig;
+	
+    private HardwareAcquisitionConfig userAcquisitionConfig;
+    
+    // TODO ExpHistory Refactoring
+	private ExperimentHistory experimentHistory;
 
+	private ExpDataModel experimentDataModel;
+	
+    private List<ExpDataDisplay> experimentDataDisplays;
 
 
 	/** Creates a new <code>ReCApplication</code> */
@@ -448,7 +464,6 @@ public class ReCApplication extends SingleFrameApplication
 		// Notify the view
         fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SELECTED_APPARATUS_CHANGE));
 	}
-    
 	
 	public Apparatus getSelectedApparatusConfig() {
 		return currentApparatusConfig;
@@ -461,6 +476,18 @@ public class ReCApplication extends SingleFrameApplication
     public VideoViewerController getMediaController() {
         return mediaController;
     }
+    
+    public ExperimentHistory getExperimentHistory() {
+		return experimentHistory;
+	}
+    
+    public ExpDataModel getExperimentDataModel() {
+		return experimentDataModel;
+	}
+
+	public List<ExpDataDisplay> getExperimentDataDisplays() {
+		return experimentDataDisplays;
+	}
 	
 	// -------------------------------------------------------------------------
 	// Application Startup Workflow
@@ -1058,42 +1085,24 @@ public class ReCApplication extends SingleFrameApplication
         }
         
         ExperimentHistory expHistory = new ExperimentHistory(this, evt.getDataSource(), apparatusClientBean.getApparatus(), currentApparatusConfig);
+        // CRITICAL Confirmar se o estado APPARATUS_LOCKED assegura que a experiment é mesmo minha!
         expHistory.setLocallyOwned(currentState.matches(APPARATUS_LOCKED));
-//        expHistoryPanelNew.addExpHistory(expHistory);
         
         if(currentState.matches(APPARATUS_LOCKED)) {
             startExperiment(expHistory);
-//            controllerPanel.setEnablePlay(false);
-//            controllerPanel.setEnableStop(true);
             
             // Forward event to the view
             fireApparatusStateChanged(STATESTARTED, evt);
-        } else {
-        	// TODO Check if this is really needed. 
-        	log.severe("Appartus SHOULD be locked?");
         }
-//        statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.started", "Started..."));
-        
-		
 	}
 	
 	@Override
 	public void startExperiment(ExpHistory expHistory) {
 		
-//		if (1 == 1)
-//        	throw new RuntimeException("hello");
-		
-		// CRITICAL ExpHistory Refactoring
-		ExperimentHistory experimentHistory = (ExperimentHistory) expHistory;
-		// CRITICAL ExpHistory Refactoring
-		
 		setCurrentState(APPARATUS_STARTED);
 		
-		List<ExpDataDisplay> displays = null;
-		 
+		experimentHistory = (ExperimentHistory) expHistory;
         DisplayFactory factory = new DefaultDisplayFactory();
-        
-        // TODO Check DisplayFactory Instantiation (is this needed?)
         
         // Was the user smart enough to make is own DisplayFactory?
 		String factoryLocation = null;
@@ -1121,14 +1130,11 @@ public class ReCApplication extends SingleFrameApplication
 						"Could not instantiate the display factory", e);
 			}
 		}
-
         
 		if (factory != null) {
-			
 			// I will only give the selected displays :)
 			List<Display> selectedDisplays = new ArrayList<Display>();
 			
-			// CRITICAL fix here (apparatus client bean problem)
 			List<Display> availableDisplays = experimentHistory.getNewApparatusConfig().getDisplay();
 			
 			for (Display display : availableDisplays) {
@@ -1145,25 +1151,24 @@ public class ReCApplication extends SingleFrameApplication
 			} catch (Exception e) {
 				log.log(Level.SEVERE, "Could not set aquisition config", e);
 			}
-			displays = factory.getDisplays();
+			experimentDataDisplays = factory.getDisplays();
 		}
 		
 		// Couldn't read from xml or from user
-		if (displays == null) {
+		if (experimentDataDisplays == null) {
 			try {
-				displays = new ArrayList<ExpDataDisplay>();
+				experimentDataDisplays = new ArrayList<ExpDataDisplay>();
 				Object dataDisplayTemp = java.beans.Beans
 						.instantiate(this.getClass().getClassLoader(),
 								"com.linkare.rec.impl.baseUI.DefaultExperimentDataTable"); // CRITICAL Check default datatable
 				if (java.beans.Beans.isInstanceOf(dataDisplayTemp,
 						ExpDataDisplay.class))
-					displays.set(0, (ExpDataDisplay) dataDisplayTemp);
+					experimentDataDisplays.set(0, (ExpDataDisplay) dataDisplayTemp);
 			} catch (Exception e) {
 				log.log(Level.SEVERE, "Could not instantiate default datatable", e);
 			}
 		}
 		
-		ExpDataModel dataModel = null;
 		// Did the user defined is own datamodel?
 		String dataModelLocation = null;
 		try {
@@ -1180,19 +1185,21 @@ public class ReCApplication extends SingleFrameApplication
 						.getClass().getClassLoader(), dataModelLocation);
 				if (java.beans.Beans.isInstanceOf(expDataModelTemp,
 						ExpDataModel.class))
-					dataModel = (ExpDataModel) expDataModelTemp;
+					experimentDataModel = (ExpDataModel) expDataModelTemp;
 			} catch (Exception e) {
 				log.log(Level.SEVERE, "Could not instantiate datamodel", e);
 			}
 		}
 		// if the user didn't defined is data model, then use the default one
-		if (dataModel == null)
-			dataModel = new DefaultExpDataModel();
-
+		if (experimentDataModel == null) {
+			experimentDataModel = new DefaultExpDataModel();
+		}
+		
 		try {
-			dataModel.setDpwDataSource(expHistory.getProducerWrapper());
+			experimentDataModel.setDpwDataSource(expHistory.getProducerWrapper());
 		} catch (Exception e) {
 			log.log(Level.SEVERE, "Failed data output connection...", e);
+			
 			// TODO statusPanelApparatus Failed data output connection
 //			statusPanelApparatus
 //					.setStatus(ReCResourceBundle
@@ -1201,25 +1208,6 @@ public class ReCApplication extends SingleFrameApplication
 //									"Failed data output connection..."));
 			return;
 		}
-		
-		// UI
-		
-		final ExperimentInternalFrame experimentInternalFrame = new ExperimentInternalFrame();
-        experimentInternalFrame.setExpDataModel(dataModel);
-        
-        //The experimentInternalFrame takes care of adding the expdatamodels to the displays
-        for(ExpDataDisplay display : displays)
-        {
-            experimentInternalFrame.addExpDataDisplay(display);
-        }
-        
-        experimentInternalFrame.setTitle(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.experiment", "Experiment") + expHistory.getExpCount() + " ["+ expHistory.getApparatusName() +"]");
-        experimentInternalFrame.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.tip.experiment", "Experiment") + expHistory.getExpCount() + " ["+ expHistory.getApparatusName() +"]");
-        
-//        mDIDesktopPane.add(experimentInternalFrame);
-//        experimentInternalFrame.setSize(mDIDesktopPane.getSize().width-10, mDIDesktopPane.getSize().height-10);
-        
-        experimentInternalFrame.setVisible(true);
 	}
 	
 	@Override
