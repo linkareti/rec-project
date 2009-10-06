@@ -43,6 +43,8 @@ public class NavigationPane extends javax.swing.JPanel {
         experimentHistoryBox = new com.linkare.rec.impl.newface.component.ExperimentHistoryBox();
         separator = new javax.swing.JSeparator();
 
+        setMaximumSize(new java.awt.Dimension(212, 500));
+        setMinimumSize(new java.awt.Dimension(212, 398));
         setName("Form"); // NOI18N
 
         apparatusSelectBox.setName("apparatusSelectBox"); // NOI18N

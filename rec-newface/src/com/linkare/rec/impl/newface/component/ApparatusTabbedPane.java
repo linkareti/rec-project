@@ -52,7 +52,7 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
     }
     
     public ApparatusUserList getApparatusUserList(){
-    	return apparatusUserList1;
+    	return apparatusUserList;
     }
     
 	public ExperimentActionBar getExperimentActionBar() {
@@ -115,8 +115,8 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
         controllerHolderPane = new javax.swing.JPanel();
         controllerHolderScrollPane = new javax.swing.JScrollPane();
         resultsHolderPane = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        apparatusUserList1 = new com.linkare.rec.impl.newface.component.ApparatusUserList();
+        userListHolderPane = new javax.swing.JPanel();
+        apparatusUserList = new com.linkare.rec.impl.newface.component.ApparatusUserList();
 
         setName("Form"); // NOI18N
         setOpaque(false);
@@ -159,7 +159,7 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
             controllerHolderPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controllerHolderPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -169,13 +169,14 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
         resultsHolderPane.setLayout(new java.awt.BorderLayout());
         tabbedPane.addTab(resourceMap.getString("resultsHolderPane.TabConstraints.tabTitle"), resultsHolderPane); // NOI18N
 
-        jPanel2.setName("jPanel2"); // NOI18N
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+        userListHolderPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        userListHolderPane.setName("userListHolderPane"); // NOI18N
+        userListHolderPane.setLayout(new javax.swing.BoxLayout(userListHolderPane, javax.swing.BoxLayout.LINE_AXIS));
 
-        apparatusUserList1.setName("apparatusUserList1"); // NOI18N
-        jPanel2.add(apparatusUserList1);
+        apparatusUserList.setName("apparatusUserList"); // NOI18N
+        userListHolderPane.add(apparatusUserList);
 
-        tabbedPane.addTab(resourceMap.getString("jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
+        tabbedPane.addTab(resourceMap.getString("userListHolderPane.TabConstraints.tabTitle"), userListHolderPane); // NOI18N
 
         add(tabbedPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -183,15 +184,15 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionBarHolderPane;
-    private com.linkare.rec.impl.newface.component.ApparatusUserList apparatusUserList1;
+    private com.linkare.rec.impl.newface.component.ApparatusUserList apparatusUserList;
     private javax.swing.JPanel controllerHolderPane;
     private javax.swing.JScrollPane controllerHolderScrollPane;
     private com.linkare.rec.impl.newface.component.ApparatusDescriptionPane descriptionPane;
     private com.linkare.rec.impl.newface.component.ExperimentActionBar experimentActionBar;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel resultsHolderPane;
     private com.linkare.rec.impl.newface.component.StatusActionBar statusActionBar;
     private javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JPanel userListHolderPane;
     // End of variables declaration//GEN-END:variables
 
     private ResultsActionBar resultsActionBar;

@@ -56,12 +56,12 @@ public class LayoutContainerPane extends GradientPane {
     		apparatusTabbedPane = new ApparatusTabbedPane();
     	}
     	apparatusTabbedPaneEnabled = true;
-    	splitRight.setRightComponent(apparatusTabbedPane);
+    	splitLeft.setRightComponent(apparatusTabbedPane);
 	}
     
     public void disableApparatusTabbedPane() {
     	apparatusTabbedPaneEnabled = false;
-    	splitRight.setRightComponent(apparatusDescriptionPane);
+    	splitLeft.setRightComponent(apparatusDescriptionPane);
     }
 
     /**
@@ -80,8 +80,8 @@ public class LayoutContainerPane extends GradientPane {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        splitLeft = new javax.swing.JSplitPane();
         splitRight = new javax.swing.JSplitPane();
+        splitLeft = new javax.swing.JSplitPane();
         navigationPane = new com.linkare.rec.impl.newface.component.NavigationPane();
         apparatusDescriptionPane = new com.linkare.rec.impl.newface.component.ApparatusDescriptionPane();
         mediaPane = new com.linkare.rec.impl.newface.component.MediaPane();
@@ -89,28 +89,36 @@ public class LayoutContainerPane extends GradientPane {
         setName("Form"); // NOI18N
         setLayout(new java.awt.BorderLayout());
 
+        splitRight.setBorder(null);
+        splitRight.setDividerSize(6);
+        splitRight.setResizeWeight(1.0);
+        splitRight.setName("splitRight"); // NOI18N
+        splitRight.setOpaque(false);
+
         splitLeft.setBorder(null);
         splitLeft.setDividerSize(6);
         splitLeft.setName("splitLeft"); // NOI18N
         splitLeft.setOpaque(false);
 
-        splitRight.setBorder(null);
-        splitRight.setDividerSize(6);
-        splitRight.setName("splitRight"); // NOI18N
-        splitRight.setOpaque(false);
-
+        navigationPane.setMaximumSize(new java.awt.Dimension(212, 32767));
+        navigationPane.setMinimumSize(new java.awt.Dimension(212, 400));
         navigationPane.setName("navigationPane"); // NOI18N
-        splitRight.setLeftComponent(navigationPane);
+        navigationPane.setPreferredSize(new java.awt.Dimension(212, 404));
+        splitLeft.setLeftComponent(navigationPane);
 
+        apparatusDescriptionPane.setMinimumSize(new java.awt.Dimension(388, 400));
         apparatusDescriptionPane.setName("apparatusDescriptionPane"); // NOI18N
-        splitRight.setRightComponent(apparatusDescriptionPane);
+        apparatusDescriptionPane.setPreferredSize(new java.awt.Dimension(400, 404));
+        splitLeft.setRightComponent(apparatusDescriptionPane);
 
-        splitLeft.setLeftComponent(splitRight);
+        splitRight.setLeftComponent(splitLeft);
 
+        mediaPane.setMinimumSize(new java.awt.Dimension(212, 400));
         mediaPane.setName("mediaPane"); // NOI18N
-        splitLeft.setRightComponent(mediaPane);
+        mediaPane.setPreferredSize(new java.awt.Dimension(212, 404));
+        splitRight.setRightComponent(mediaPane);
 
-        add(splitLeft, java.awt.BorderLayout.CENTER);
+        add(splitRight, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 

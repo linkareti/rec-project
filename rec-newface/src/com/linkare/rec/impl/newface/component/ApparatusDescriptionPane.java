@@ -73,6 +73,8 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
+        setMaximumSize(new java.awt.Dimension(32767, 500));
+        setMinimumSize(new java.awt.Dimension(388, 398));
         setName("Form"); // NOI18N
 
         lblApparatusName.setFont(lblApparatusName.getFont().deriveFont(lblApparatusName.getFont().getStyle() | java.awt.Font.BOLD, 16));
@@ -125,7 +127,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
                 .addGap(18, 18, 18)
                 .addComponent(lblApparatusImg, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap())

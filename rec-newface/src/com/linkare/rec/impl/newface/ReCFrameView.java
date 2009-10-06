@@ -4,7 +4,7 @@
 
 package com.linkare.rec.impl.newface;
 
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
+import static com.linkare.rec.impl.newface.NavigationWorkflow.*;
 import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State.*;
 
 import java.awt.Dimension;
@@ -70,7 +70,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
     private static final Logger log = Logger.getLogger(ReCFrameView.class.getName());
 
-    private static final Dimension DEFAULT_FRAME_SIZE = new Dimension(848, 478);
+    //private static final Dimension DEFAULT_FRAME_SIZE = new Dimension(848, 478);
 
     // For now, application model is unique. So there is no need for abstraction here.
     private ReCApplication recApplication = ReCApplication.getApplication();
@@ -103,7 +103,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         collectInterativeBoxes();
         
         // Set frame properties
-        getFrame().setPreferredSize(DEFAULT_FRAME_SIZE);
+        //getFrame().setPreferredSize(DEFAULT_FRAME_SIZE);
         //getFrame().setResizable(false); 
         getFrame().setGlassPane(glassPane);
         
@@ -205,7 +205,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 	
 	private StatusActionBar getExperimentStatusActionBar() {
-		return getApparatusTabbedPane().getExperimentStatusActionBar();
+		StatusActionBar result = null;
+		ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
+		if (apparatusTabbedPane != null) {
+			result = apparatusTabbedPane.getExperimentStatusActionBar();
+		}
+		return result;
 	}
 
 	private ExperimentHistoryBox getExperimentHistoryBox() {
@@ -526,7 +531,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
             getVideoBox().destroyVideoOutput();
         }
         
-        getExperimentStatusActionBar().setActionStateLabelVisible(false);
+        StatusActionBar experimentStatusActionBar = getExperimentStatusActionBar();
+        if (experimentStatusActionBar != null) {
+        	experimentStatusActionBar.setActionStateLabelVisible(false);
+        }
         
 		getApparatusSelectBox().toggleApparatusStateActionData(true);
 		
@@ -637,6 +645,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
         mainPanel.setAutoscrolls(true);
         mainPanel.setName("mainPanel"); // NOI18N
+        mainPanel.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+                onResize(evt);
+            }
+        });
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         toolBar.setFloatable(false);
@@ -765,6 +780,17 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
             ((JButton)evt.getSource()).setText("");
         }
     }//GEN-LAST:event_toolBtnConnectPropertyChange
+
+    private void onResize(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_onResize
+        if (log.isLoggable(Level.FINE)) {
+			log.fine("ReC Resize: Navigation=" + layoutContainerPane.getNavigationPane().getSize() + 
+					" Media=" + layoutContainerPane.getMediaPane().getSize() + 
+					" Center=" + layoutContainerPane.getApparatusDescriptionPane().getSize() + 
+					" LayoutContainer=" + layoutContainerPane.getSize() + 
+					" Frame=" + getFrame().getSize()
+			);
+		}
+    }//GEN-LAST:event_onResize
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

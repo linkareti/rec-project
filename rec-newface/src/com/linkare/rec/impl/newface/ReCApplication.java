@@ -4,25 +4,20 @@
 
 package com.linkare.rec.impl.newface;
 
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
+import static com.linkare.rec.impl.newface.NavigationWorkflow.*;
 import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.*;
 
-import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
 import java.awt.Canvas;
 import java.awt.Component;
+import java.awt.Window;
 import java.io.InputStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventObject;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,15 +25,16 @@ import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
 import javax.swing.JOptionPane;
+import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
+import org.jdesktop.application.View;
 
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.baseUI.ExperimentInternalFrame;
 import com.linkare.rec.impl.client.ApparatusClientBean;
 import com.linkare.rec.impl.client.LabClientBean;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
@@ -173,133 +169,6 @@ public class ReCApplication extends SingleFrameApplication
      */
     public static boolean IS_VIDEO_DEVELOPMENT_ENABLED = 
     	"yes".equals(System.getProperty(ReCSystemProperty.VIDEO_DEVELOPMENT_ENABLED.getName())); 
-
-	/**
-	 * Holds the ReC System properties. Maps the property name and the
-	 * required flag.
-	 */
-	public enum ReCSystemProperty {
-
-		//RECBASEUICONFIG("ReCBaseUIConfig", true),
-		RECFACECONFIG("ReCFaceConfig", true),
-		REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true),
-		REC_MULTICASTCONTROLLER_INITREF("ReC.MultiCastController.InitRef", true),
-		OPENORB_CONFIG("openorb.config", true),
-		OPENORB_PROFILE("openorb.profile", true),
-		ORG_OMG_CORBA_ORBCLASS("org.omg.CORBA.ORBClass", true),
-		ORG_OMG_CORBA_ORBSINGLETONCLASS("org.omg.CORBA.ORBSingletonClass", true),
-        
-		VIDEO_DEVELOPMENT_ENABLED("video.development.enabled", false), // FIXME Remove VIDEO_DEVELOPMENT_ENABLED flag after video tests
-		
-        VLC_PLUGINS_FILENAME("vlc.plugins.filename", IS_VIDEO_DEVELOPMENT_ENABLED),
-        VLC_PLUGINS_DESTDIR("vlc.plugins.destdir", IS_VIDEO_DEVELOPMENT_ENABLED);
-
-
-		String name;
-		boolean required;
-
-		ReCSystemProperty(String name, boolean required) {
-			this.name = name;
-			this.required = required;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public boolean isRequired() {
-			return required;
-		}
-
-	}
-
-	/**
-	 * Defines application Navigation Workflow 
-	 * 
-	 * @author hfernandes
-	 */
-	public enum NavigationWorkflow {
-		
-		// State declaration
-		DISCONNECTED_OFFLINE,
-		LAB_CONNECT_PERFORMED,
-		CONNECTED_TO_LAB,
-		APPARATUS_CONNECT_PERFORMED,
-		CONNECTED_TO_APPARATUS,
-		APPARATUS_CONFIGURED,
-		APPARATUS_LOCKED,
-		APPARATUS_STARTED,
-		APPARATUS_DISCONNECT_PERFORMED,
-		LAB_DISCONNECT_PERFORMED;
-		// State declaration end
-		
-		private static Map<NavigationWorkflow, Set<NavigationWorkflow>> availableTransitions;
-		
-		private static Set<NavigationWorkflow> transitions(NavigationWorkflow ... transitions) {
-			HashSet<NavigationWorkflow> result = new HashSet<NavigationWorkflow>();
-			for (NavigationWorkflow transition : transitions)
-				result.add(transition);
-			return result;
-		}
-		
-		// Workflow definition
-		static {
-			availableTransitions = new HashMap<NavigationWorkflow, Set<NavigationWorkflow>>();
-			availableTransitions.put(DISCONNECTED_OFFLINE, 
-					transitions(LAB_CONNECT_PERFORMED));
-			
-			availableTransitions.put(CONNECTED_TO_LAB, 
-					transitions(APPARATUS_CONNECT_PERFORMED, LAB_DISCONNECT_PERFORMED));
-			
-			availableTransitions.put(CONNECTED_TO_APPARATUS, 
-					transitions(APPARATUS_CONFIGURED,
-							LAB_DISCONNECT_PERFORMED, 
-							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
-			
-			availableTransitions.put(APPARATUS_CONFIGURED, 
-					transitions(APPARATUS_LOCKED,
-							LAB_DISCONNECT_PERFORMED, 
-							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
-			
-			availableTransitions.put(APPARATUS_LOCKED, 
-					transitions(LAB_DISCONNECT_PERFORMED, 
-							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
-			
-			// CRITICAL Confirm this APPARATUS_STARTE transitions (LAB_DISCONNECT_PERFORMED, APPARATUS_DISCONNECT_PERFORMED
-			// Será que podemos fazer esta transição. Será que podemos desligar antes de chegar ao estado STOPED?
-			availableTransitions.put(APPARATUS_STARTED, 
-					transitions(LAB_DISCONNECT_PERFORMED, 
-							APPARATUS_DISCONNECT_PERFORMED /*returns to CONNECTED_TO_LAB*/ ));
-			// CRITICAL Confirm this APPARATUS_STARTE transitions (LAB_DISCONNECT_PERFORMED, APPARATUS_DISCONNECT_PERFORMED
-			
-			availableTransitions.put(LAB_DISCONNECT_PERFORMED, 
-					transitions(DISCONNECTED_OFFLINE));
-		}
-		// Workflow definition end
-		
-		public boolean canGoTo(NavigationWorkflow newState) {
-			boolean result = true;
-			Set<NavigationWorkflow> currentStateTransitions = availableTransitions.get(this);
-			if (currentStateTransitions == null) {
-				if (log.isLoggable(Level.WARNING)) {
-					log.warning(this + " was not configured on available transitions map.");
-				}
-				result = false;
-			}
-			
-			result = (result == false) ? false : currentStateTransitions.contains(newState);
-			
-			if (log.isLoggable(Level.FINE)) {
-				log.fine("Transition " + this + " => " + newState + " allowed? " + result);
-			}
-			
-			return result;
-		}
-		
-		public boolean matches(NavigationWorkflow state) {
-			return this == state;
-		}
-	}
 
     /** Holds the jws basic service context */
     private BasicService basicService;
@@ -627,6 +496,15 @@ public class ReCApplication extends SingleFrameApplication
         // Ask the view to show login box
         fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SHOW_LOGIN));
     }
+    
+    @Override
+    public void show(View view) {
+    	// Do not load the session state for the View
+    	// TODO Add to ReCFaceConfig
+    	
+        RootPaneContainer c = (RootPaneContainer) view.getRootPane().getParent();
+        ((Window) c).setVisible(true);
+    }
 
     /*
      * This method runs after startup has completed and the GUI is
@@ -645,9 +523,13 @@ public class ReCApplication extends SingleFrameApplication
 
     @Override
     protected void shutdown() {
+//      Save session state for the component hierarchy rooted by
+//      the mainFrame.  SingleFrameApplication subclasses that override
+//      shutdown need to remember call {@code super.shutdown()}.
     	super.shutdown();
+    	
     	if (log.isLoggable(Level.FINE)) {
-			log.fine("Shutting down");
+			log.fine("Shutting down and saving session state");
 		}
     }
 

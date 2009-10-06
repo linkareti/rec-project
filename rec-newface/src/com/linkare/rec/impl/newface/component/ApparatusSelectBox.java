@@ -11,8 +11,6 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
-
 import java.util.logging.Logger;
 
 import org.jdesktop.application.Action;

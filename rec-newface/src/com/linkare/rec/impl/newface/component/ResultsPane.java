@@ -263,19 +263,22 @@ public class ResultsPane extends javax.swing.JPanel implements ExpDataModelListe
 
         displaySelectorPane = new com.linkare.rec.impl.newface.component.ResultsSelectorPane();
         displayPane = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnInfo = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
         displaySelectorPane.setName("displaySelectorPane"); // NOI18N
         displaySelectorPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
+        displayPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         displayPane.setName("displayPane"); // NOI18N
         displayPane.setLayout(new java.awt.BorderLayout());
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ResultsPane.class);
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
+        btnInfo.setIcon(resourceMap.getIcon("btnInfo.icon")); // NOI18N
+        btnInfo.setText(resourceMap.getString("btnInfo.text")); // NOI18N
+        btnInfo.setBorderPainted(false);
+        btnInfo.setName("btnInfo"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -283,9 +286,9 @@ public class ResultsPane extends javax.swing.JPanel implements ExpDataModelListe
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+                .addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -294,7 +297,7 @@ public class ResultsPane extends javax.swing.JPanel implements ExpDataModelListe
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jButton1))
+                        .addComponent(btnInfo))
                     .addComponent(displaySelectorPane, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
@@ -303,9 +306,9 @@ public class ResultsPane extends javax.swing.JPanel implements ExpDataModelListe
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInfo;
     private javax.swing.JPanel displayPane;
     private com.linkare.rec.impl.newface.component.ResultsSelectorPane displaySelectorPane;
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 
 
