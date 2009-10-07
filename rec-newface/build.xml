@@ -83,7 +83,7 @@
             <fileset file="etc/ReCFaceConfig.xml"/>
         </copy>
 		
-		<!-- config -->
+		<!-- javascript -->
 		<mkdir dir="dist/js"/>
         <copy todir="dist/js">
             <fileset file="deployJava.js"/>
@@ -99,6 +99,12 @@
         <copy todir="dist">
             <fileset file="screenshot.png"/>
         </copy>
+    	
+    	<!-- installer -->
+    	<copy todir="dist">
+    		<fileset file="windowsInstaller.jnlp"/>
+    		<fileset file="linuxInstaller.jnlp"/>
+    	</copy>
 
     </target>
 
