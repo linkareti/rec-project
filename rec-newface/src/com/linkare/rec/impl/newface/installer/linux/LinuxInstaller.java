@@ -1,8 +1,7 @@
 package com.linkare.rec.impl.newface.installer.linux;
 
 import com.linkare.rec.impl.newface.installer.Installer;
-import javax.jnlp.ExtensionInstallerService;
-import javax.jnlp.ServiceManager;
+import java.io.IOException;
 import javax.jnlp.UnavailableServiceException;
 import javax.swing.JOptionPane;
 
@@ -14,23 +13,19 @@ import javax.swing.JOptionPane;
  */
 public class LinuxInstaller extends Installer {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnavailableServiceException {
 
+        //Bruno deixa rebentar ou trata de alguma forma?
         new LinuxInstaller().install(args);
+        
     }
 
     @Override
-    public void install(String[] args) {
+    public void install(String[] args) throws UnavailableServiceException {
 
-        super.install(args);
-
-        ExtensionInstallerService installerService = null;
-                
         try {
 
-            // Bruno internacionalização das mensagens?
-            installerService = (ExtensionInstallerService) ServiceManager.
-                        		lookup("javax.jnlp.ExtensionInstallerService");
+            super.install(args);
 
             int result = JOptionPane.showConfirmDialog(null,
 				"A aplicação requer que os codecs de xvid estejam instalados." +
@@ -42,20 +37,16 @@ public class LinuxInstaller extends Installer {
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE );
 			boolean agree = (result == JOptionPane.YES_OPTION);
-			if (agree) {
-				installerService.installSucceeded(false);
-			} else {
+			if (!agree) {
 				JOptionPane.showMessageDialog(null,
 					"A execução da aplicação foi cancelada.");
-                //Bruno forma de não dar erro no final... simplesmente cancelar!!!! Ligação com application-desc?
-				installerService.installFailed();
+                getInstallerService().installFailed();
 			}
 
-            System.out.println("############################### Terminou instalação ###############################");
-
-        } catch (UnavailableServiceException ex) {
-            log.severe("Ocorreu um erro na instalação");
-            installerService.installFailed();
+        } catch (IOException e) {
+            getInstallerService().installFailed();
         }
+
+        getInstallerService().installSucceeded(false);
     }
 }
