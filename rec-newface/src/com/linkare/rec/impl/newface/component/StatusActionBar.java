@@ -23,10 +23,6 @@ public class StatusActionBar extends javax.swing.JPanel {
     public void setActionStateLabelVisible(boolean visible) {
         lblActionState.setVisible(visible);
     }
-
-    public void setActionStateText(String text) {
-    	lblActionState.setText(text);
-	}
     
     public void setActionStateText(String text, State state) {
     	lblActionState.setState(state);

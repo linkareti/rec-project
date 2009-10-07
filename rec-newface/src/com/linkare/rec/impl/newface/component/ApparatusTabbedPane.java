@@ -44,6 +44,8 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
         resultsActionBar.setName("resultsActionBar");
         resultsActionBar.setMinimumSize(experimentActionBar.getMinimumSize());
         
+        setTabIndexEnabled(TAB_RESULTS, false);
+        
         tabbedPane.addChangeListener(this);
     }
 
@@ -140,36 +142,23 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ApparatusTabbedPane.class);
         tabbedPane.addTab(resourceMap.getString("descriptionPane.TabConstraints.tabTitle"), resourceMap.getIcon("descriptionPane.TabConstraints.tabIcon"), descriptionPane); // NOI18N
 
+        controllerHolderPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 6, 6, 6));
         controllerHolderPane.setName("controllerHolderPane"); // NOI18N
+        controllerHolderPane.setLayout(new java.awt.BorderLayout());
 
         controllerHolderScrollPane.setBorder(null);
         controllerHolderScrollPane.setName("controllerHolderScrollPane"); // NOI18N
         controllerHolderScrollPane.setOpaque(false);
-
-        javax.swing.GroupLayout controllerHolderPaneLayout = new javax.swing.GroupLayout(controllerHolderPane);
-        controllerHolderPane.setLayout(controllerHolderPaneLayout);
-        controllerHolderPaneLayout.setHorizontalGroup(
-            controllerHolderPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controllerHolderPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        controllerHolderPaneLayout.setVerticalGroup(
-            controllerHolderPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controllerHolderPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(controllerHolderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        controllerHolderPane.add(controllerHolderScrollPane, java.awt.BorderLayout.CENTER);
 
         tabbedPane.addTab(resourceMap.getString("controllerHolderPane.TabConstraints.tabTitle"), controllerHolderPane); // NOI18N
 
+        resultsHolderPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 6, 6, 6));
         resultsHolderPane.setName("resultsHolderPane"); // NOI18N
         resultsHolderPane.setLayout(new java.awt.BorderLayout());
         tabbedPane.addTab(resourceMap.getString("resultsHolderPane.TabConstraints.tabTitle"), resultsHolderPane); // NOI18N
 
-        userListHolderPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        userListHolderPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 6, 6, 6));
         userListHolderPane.setName("userListHolderPane"); // NOI18N
         userListHolderPane.setLayout(new javax.swing.BoxLayout(userListHolderPane, javax.swing.BoxLayout.LINE_AXIS));
 

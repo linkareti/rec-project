@@ -19,27 +19,23 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="displayPane" alignment="0" pref="601" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <Component id="displaySelectorPane" pref="565" max="32767" attributes="0"/>
+              <Component id="displaySelectorPane" pref="567" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnInfo" min="-2" pref="24" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Component id="displayPane" alignment="0" pref="597" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
-                      <Component id="btnInfo" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="displaySelectorPane" min="-2" pref="37" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="displaySelectorPane" max="32767" attributes="1"/>
+                  <Component id="btnInfo" alignment="0" pref="25" max="32767" attributes="1"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="displayPane" pref="342" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="displayPane" pref="323" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,15 +48,12 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
         <Property name="alignment" type="int" value="0"/>
+        <Property name="horizontalGap" type="int" value="6"/>
+        <Property name="verticalGap" type="int" value="0"/>
       </Layout>
     </Container>
     <Container class="javax.swing.JPanel" name="displayPane">
       <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-            <EmptyBorder bottom="4" left="4" right="4" top="4"/>
-          </Border>
-        </Property>
         <Property name="name" type="java.lang.String" value="displayPane" noResource="true"/>
       </Properties>
 

@@ -7,15 +7,22 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import com.linkare.rec.impl.newface.ReCApplication;
+import org.jdesktop.application.Action;
+
 /**
  *
  * @author hfernandes
  */
 public class ExperimentActionBar extends javax.swing.JPanel {
 
+    private ReCApplication recApplication = ReCApplication.getApplication();
+    
     /** Creates new form ExperimentActionBar */
     public ExperimentActionBar() {
         initComponents();
+        
+        checkAutoPlay.setSelected(recApplication.getExperimentAutoplay());
     }
 
     public void setPlayStopButtonEnabled(boolean enabled) {
@@ -48,9 +55,9 @@ public class ExperimentActionBar extends javax.swing.JPanel {
         btnPlayStop.setText(resourceMap.getString("btnPlayStop.text")); // NOI18N
         btnPlayStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         btnPlayStop.setBorderPainted(false);
-        btnPlayStop.setEnabled(false);
         btnPlayStop.setName("btnPlayStop"); // NOI18N
 
+        checkAutoPlay.setAction(actionMap.get("setAutoplay")); // NOI18N
         checkAutoPlay.setText(resourceMap.getString("checkAutoPlay.text")); // NOI18N
         checkAutoPlay.setName("checkAutoPlay"); // NOI18N
 
@@ -70,6 +77,11 @@ public class ExperimentActionBar extends javax.swing.JPanel {
             .addComponent(checkAutoPlay, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    @Action
+    public void setAutoplay() {
+        recApplication.setExperimentAutoplay(checkAutoPlay.isSelected());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPlayStop;

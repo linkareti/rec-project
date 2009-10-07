@@ -219,6 +219,8 @@ public class ReCApplication extends SingleFrameApplication
 	
     private List<ExpDataDisplay> experimentDataDisplays;
 
+	private boolean experimentAutoplay = false;
+
 
 	/** Creates a new <code>ReCApplication</code> */
 	public ReCApplication() {
@@ -328,6 +330,9 @@ public class ReCApplication extends SingleFrameApplication
 	}
 	
 	public void setSelectedApparatusConfig(Apparatus apparatus) {
+		if (log.isLoggable(Level.FINE)) {
+			log.fine("Selected apparatus is " + apparatus);
+		}
 		this.currentApparatusConfig = apparatus;
 		
 		// Notify the view
@@ -627,6 +632,17 @@ public class ReCApplication extends SingleFrameApplication
 			}
     		apparatusClientBean.lock();
     	}
+    }
+
+    public void setExperimentAutoplay(boolean enabled) {
+    	if (log.isLoggable(Level.FINE)) {
+			log.fine("Auto-play enabled = " + enabled);
+		}
+    	this.experimentAutoplay = enabled;
+    }
+    
+    public boolean getExperimentAutoplay() {
+    	return experimentAutoplay;
     }
     
     // -------------------------------------------------------------------------
@@ -1151,8 +1167,12 @@ public class ReCApplication extends SingleFrameApplication
 		
 		setCurrentState(APPARATUS_CONFIGURED);
 		
-		// Forward event to the view
-        fireApplicationEvent(new ReCAppEvent(this, ReCCommand.APPARATUS_CONFIGURED));
+		if (experimentAutoplay) {
+			play();
+		} else {
+			// Forward event to the view
+			fireApplicationEvent(new ReCAppEvent(this, ReCCommand.APPARATUS_CONFIGURED));
+		}
 	}
 	
 	@Override
@@ -1226,5 +1246,7 @@ public class ReCApplication extends SingleFrameApplication
     public static void main(String[] args) {
         Application.launch(ReCApplication.class, args);
     }
+
+    
 
 }

@@ -37,7 +37,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  *
  * @author hfernandes
  */
-public class ResultsPane extends javax.swing.JPanel implements ExpDataModelListener, ActionListener {
+public class ResultsPane extends AbstractContentPane implements ExpDataModelListener, ActionListener {
 
 	private static final Logger log = Logger.getLogger(ResultsPane.class.getName());
 
@@ -268,9 +268,8 @@ public class ResultsPane extends javax.swing.JPanel implements ExpDataModelListe
         setName("Form"); // NOI18N
 
         displaySelectorPane.setName("displaySelectorPane"); // NOI18N
-        displaySelectorPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        displaySelectorPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 6, 0));
 
-        displayPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         displayPane.setName("displayPane"); // NOI18N
         displayPane.setLayout(new java.awt.BorderLayout());
 
@@ -284,23 +283,20 @@ public class ResultsPane extends javax.swing.JPanel implements ExpDataModelListe
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                .addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(btnInfo))
-                    .addComponent(displaySelectorPane, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -314,9 +310,6 @@ public class ResultsPane extends javax.swing.JPanel implements ExpDataModelListe
 
     @Override
 	public void actionPerformed(ActionEvent e) {
-    	if (log.isLoggable(Level.FINE)) {
-			log.fine(e.toString());
-		}
     	Object source = e.getSource();
     	String display = "";
 		if (source instanceof JButton) {
