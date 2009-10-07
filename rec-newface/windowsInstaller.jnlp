@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp codebase="file:///c:/NetBeansProjects/ReCNewFace" href="windowsInstaller.jnlp" spec="1.0+">
+<jnlp codebase="${jnlp.codebase}" href="windowsInstaller.jnlp" spec="1.0+">
     <information>
         <title>eLab</title>
         <vendor>Linkare TI, Instituto Superior Técnico</vendor>
@@ -13,15 +13,31 @@
     </security>
     <resources>
         <j2se version="1.6+"/>
-        <jar download="eager" href="dist/rec-newface.jar" main="true"/>
+        <jar download="eager" href="rec-newface.jar" main="true"/>
         <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
         <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
     </resources>
 
-    <!-- hopefully funciona para todas as archs e windows -->
-    <resources os="Windows">
-        <jar download="lazy" href="dist/lib/vlcplugins_win32_x86.jar"/>
-        <jar download="lazy" href="dist/lib/codecs_win32.jar"/>
+    <!-- obter as libs para as várias archs se necessário -->
+    <resources arch="x86" os="Windows">
+        <jar download="lazy" href="lib/vlcplugins_win32_x86.jar"/>
+        <jar download="lazy" href="lib/codecs_win32.jar"/>
     </resources>
+
+    <resources arch="x86_64" os="Windows">
+        <jar download="lazy" href="lib/vlcplugins_win32_x86.jar"/>
+        <jar download="lazy" href="lib/codecs_win32.jar"/>
+    </resources>
+
+    <resources arch="amd" os="Windows">
+        <jar download="lazy" href="lib/vlcplugins_win32_x86.jar"/>
+        <jar download="lazy" href="lib/codecs_win32.jar"/>
+    </resources>
+
+    <resources arch="amd64" os="Windows">
+        <jar download="lazy" href="lib/vlcplugins_win32_x86.jar"/>
+        <jar download="lazy" href="lib/codecs_win32.jar"/>
+    </resources>
+    
     <installer-desc main-class="com.linkare.rec.impl.newface.installer.windows.WindowsInstaller"/>
 </jnlp>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp codebase="file:///home/bcatarino/NetBeansProjects/ReCNewFace" href="linuxInstaller.jnlp" spec="1.0+">
+<jnlp codebase="${jnlp.codebase}" href="linuxInstaller.jnlp" spec="1.0+">
     <information>
         <title>eLab</title>
         <vendor>Linkare TI, Instituto Superior Técnico</vendor>
@@ -13,26 +13,26 @@
     </security>
     <resources>
         <j2se version="1.6+"/>
-        <jar download="eager" href="dist/rec-newface.jar" main="true"/>
+        <jar download="eager" href="rec-newface.jar" main="true"/>
         <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
         <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
     </resources>
 
     <!-- hopefully funciona para todas as archs e windows -->
     <resources arch="i386" os="Linux">
-        <jar download="lazy" href="dist/lib/vlcplugins_linux_i686.jar"/>
+        <jar download="lazy" href="lib/vlcplugins_linux_i686.jar"/>
     </resources>
 
     <resources arch="i586" os="Linux">
-        <jar download="lazy" href="dist/lib/vlcplugins_linux_i686.jar"/>
+        <jar download="lazy" href="lib/vlcplugins_linux_i686.jar"/>
     </resources>
 
     <resources arch="i686" os="Linux">
-        <jar download="lazy" href="dist/lib/vlcplugins_linux_i686.jar"/>
+        <jar download="lazy" href="lib/vlcplugins_linux_i686.jar"/>
     </resources>
 
     <resources arch="amd64" os="Linux">
-        <jar download="lazy" href="dist/lib/vlcplugins_linux_amd64.jar"/>
+        <jar download="lazy" href="lib/vlcplugins_linux_amd64.jar"/>
     </resources>
 
     <installer-desc main-class="com.linkare.rec.impl.newface.installer.linux.LinuxInstaller"/>
