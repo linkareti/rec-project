@@ -8,11 +8,15 @@ import com.linkare.rec.impl.newface.config.Display;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 
 public interface DisplayFactory {
-	
+
     public void init(List<Display> displays);
+
     public void setAcquisitionInfo(HardwareInfo hinfo);
+
     public void setAcquisitionConfig(HardwareAcquisitionConfig hconfig);
+
     public List<ExpDataDisplay> getDisplays();
+
     public void destroyDisplays();
-    
+
 }

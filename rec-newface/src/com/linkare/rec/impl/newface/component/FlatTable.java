@@ -1,4 +1,3 @@
-
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.Color;
@@ -30,33 +29,29 @@ import com.linkare.rec.impl.newface.laf.flat.FlatTableCellRenderer;
  * 
  * @author João FLorindo
  */
-public class FlatTable extends JTable{
+public class FlatTable extends JTable {
 
-	
-	private static final String uiClassID = "FlatTableUI";
-	private TableColumn tc = null;
-	
-    public FlatTable(){
-        super();
+    private static final String uiClassID = "FlatTableUI";
+    private TableColumn tc = null;
 
-       if (UIManager.get(getUIClassID()) == null) {
-            setUI(new BasicTableUI());
-        }
-		
-       	setRowHeight(30);
-		getTableHeader().setResizingAllowed(false);
-		getTableHeader().setReorderingAllowed(false);
-		setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-    }	
-	public String getUIClassID() {
-		return uiClassID ;
+    public FlatTable() {
+	super();
+
+	if (UIManager.get(getUIClassID()) == null) {
+	    setUI(new BasicTableUI());
 	}
 
-	
-	
-	public boolean isCellEditable(int row, int column)
-	{
-		return false;
-	} 
-}
+	setRowHeight(30);
+	getTableHeader().setResizingAllowed(false);
+	getTableHeader().setReorderingAllowed(false);
+	setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    }
 
+    public String getUIClassID() {
+	return uiClassID;
+    }
+
+    public boolean isCellEditable(int row, int column) {
+	return false;
+    }
+}

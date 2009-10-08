@@ -24,43 +24,41 @@ import javax.swing.plaf.InsetsUIResource;
  * 
  * @author João Florindo
  */
-public class ButtonStyle extends DefaultStyle{
-	
-	
-	private static final FontUIResource FONT_BUTTON = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
-	private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] { 
-			new Float(.1f), new Float(0f),	
-			new ColorUIResource(0xF3F3F3), new ColorUIResource(0xF3F3F3), new ColorUIResource(0xFEFEFE) });
-	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0xC2C2C2)), BorderFactory.createEmptyBorder(4, 16, 4, 16));
-	private static final Color COLOR_BUTTON_FG = new Color(0x848187);
-	
-	//PROPERTIES
-	private static final String PT_GRADIENT = "gradient";
-	private static final String ROLLOVER = "rollover";	
-	
-	
-	public static final String ID = "Button";
+public class ButtonStyle extends DefaultStyle {
 
-	/**
-	 * Creates the <code>ButtonStyle</code>.
-	 */
-	public ButtonStyle() {
-		super();
-	}
+    private static final FontUIResource FONT_BUTTON = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
+    private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] { new Float(.1f), new Float(0f),
+	    new ColorUIResource(0xF3F3F3), new ColorUIResource(0xF3F3F3), new ColorUIResource(0xFEFEFE) });
+    private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory
+	    .createLineBorder(new Color(0xC2C2C2)), BorderFactory.createEmptyBorder(4, 16, 4, 16));
+    private static final Color COLOR_BUTTON_FG = new Color(0x848187);
 
-	@Override
-	protected String defineStyleId() {
-		return ID;
-	}
+    //PROPERTIES
+    private static final String PT_GRADIENT = "gradient";
+    private static final String ROLLOVER = "rollover";
 
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-		map.put(PT_GRADIENT, BUTTON_GRADIENT);
-		map.put(BORDER, COLOR_BORDER);
-		map.put(FOREGROUND, COLOR_BUTTON_FG);
-		map.put(ROLLOVER, false);
-		
-	}
+    public static final String ID = "Button";
+
+    /**
+     * Creates the <code>ButtonStyle</code>.
+     */
+    public ButtonStyle() {
+	super();
+    }
+
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
+
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+	map.put(PT_GRADIENT, BUTTON_GRADIENT);
+	map.put(BORDER, COLOR_BORDER);
+	map.put(FOREGROUND, COLOR_BUTTON_FG);
+	map.put(ROLLOVER, false);
+
+    }
 
 }

@@ -39,43 +39,39 @@ import sun.swing.SwingUtilities2;
 
 import com.linkare.rec.impl.newface.component.FlatButton;
 
-
 /**
  * 
  * @author João Florindo
  */
-public class FlatOriginalButtonUI extends MetalButtonUI{
-	
-	private final static String propertyPrefix = "Button" + ".";
-	 
-	public static ComponentUI createUI(JComponent x) {
-		return new FlatOriginalButtonUI();
-	}
-	  
-    protected String getPropertyPrefix() {
-        return propertyPrefix;
+public class FlatOriginalButtonUI extends MetalButtonUI {
+
+    private final static String propertyPrefix = "Button" + ".";
+
+    public static ComponentUI createUI(JComponent x) {
+	return new FlatOriginalButtonUI();
     }
-    
+
+    protected String getPropertyPrefix() {
+	return propertyPrefix;
+    }
+
     // ********************************
     //          Paint
     // ********************************
-	
-    
-    /* 
+
+    /*
      * Para não ser desenhado o focus no Button
-	 */
-	@Override
+     */
+    @Override
     protected void paintButtonPressed(Graphics g, AbstractButton b) {
     }
 
-
-    /* 
+    /*
      * Para não ser desenhado o focus no Button
-	 */
-	@Override
-	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect,
-			Rectangle textRect, Rectangle iconRect) {
-	
-	}
+     */
+    @Override
+    protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
+
+    }
 
 }

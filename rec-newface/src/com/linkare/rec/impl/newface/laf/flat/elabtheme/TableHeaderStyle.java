@@ -18,32 +18,32 @@ import javax.swing.plaf.FontUIResource;
  * 
  * @author João FLorindo
  */
-public class TableHeaderStyle extends DefaultStyle{
+public class TableHeaderStyle extends DefaultStyle {
 
-	//ENABLED COLORS
-	private static final Color COLOR_HEADER_BG = new Color(0xCED7D5);
-	private static final Color COLOR_HEADER_FG = new Color(0x41494D);
-	
-	public static final String ID = "TableHeader";
-	
-	/**
-	 * Creates the <code>TableHeaderStyle</code>.
-	 */
-	public TableHeaderStyle() {
-		super();
-	}
+    //ENABLED COLORS
+    private static final Color COLOR_HEADER_BG = new Color(0xCED7D5);
+    private static final Color COLOR_HEADER_FG = new Color(0x41494D);
 
-	@Override
-	protected String defineStyleId() {
-		return ID;
-	}
+    public static final String ID = "TableHeader";
 
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-		map.put(FOREGROUND, COLOR_HEADER_FG);
-		map.put(BACKGROUND, COLOR_HEADER_BG);
-		map.put("cellBorder" , EMPTY_BORDER_MARGIN_4);
-		map.put(FONT , DEFAULT_FONT.deriveFont(java.awt.Font.BOLD));
-	}
+    /**
+     * Creates the <code>TableHeaderStyle</code>.
+     */
+    public TableHeaderStyle() {
+	super();
+    }
+
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
+
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+	map.put(FOREGROUND, COLOR_HEADER_FG);
+	map.put(BACKGROUND, COLOR_HEADER_BG);
+	map.put("cellBorder", EMPTY_BORDER_MARGIN_4);
+	map.put(FONT, DEFAULT_FONT.deriveFont(java.awt.Font.BOLD));
+    }
 }

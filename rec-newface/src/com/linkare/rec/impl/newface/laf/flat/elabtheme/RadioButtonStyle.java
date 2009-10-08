@@ -15,30 +15,29 @@ import java.util.Map;
  */
 public class RadioButtonStyle extends DefaultStyle {
 
-	public static final String ID = "RadioButton";
-	
-	//COLORS	
-	private static final Color COLOR_RADIOBUTTON_FG = new Color(0x515151);
-	private static final Color COLOR_RADIOBUTTON_BG = new Color(0xE4EEED);
-	
-	
-	/**
-	 * Creates the <code>RadioButtonStyle</code>.
-	 */
-	public RadioButtonStyle() {
-		super();
-	}
+    public static final String ID = "RadioButton";
 
-	@Override
-	protected String defineStyleId() {
-		return ID;
-	}
-	
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-		map.put(FOREGROUND, COLOR_RADIOBUTTON_FG);
-		map.put(BACKGROUND, COLOR_RADIOBUTTON_BG);
-	}
+    //COLORS	
+    private static final Color COLOR_RADIOBUTTON_FG = new Color(0x515151);
+    private static final Color COLOR_RADIOBUTTON_BG = new Color(0xE4EEED);
+
+    /**
+     * Creates the <code>RadioButtonStyle</code>.
+     */
+    public RadioButtonStyle() {
+	super();
+    }
+
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
+
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+	map.put(FOREGROUND, COLOR_RADIOBUTTON_FG);
+	map.put(BACKGROUND, COLOR_RADIOBUTTON_BG);
+    }
 
 }

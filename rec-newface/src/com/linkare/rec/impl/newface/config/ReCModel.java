@@ -8,13 +8,14 @@
 package com.linkare.rec.impl.newface.config;
 
 /**
- * The <code>ReCModel</code> interface specifies the methods the
- * <code>ReCView</code> will use to access the Remote Experience Control data model. <p>
+ * The <code>ReCModel</code> interface specifies the methods the <code>ReCView</code> will use to access the Remote
+ * Experience Control data model.
+ * <p>
  * 
- * The <code>ReCView</code> can be set up to display and interact with any data
- * model which implements the <code>ReCModel</code>.
+ * The <code>ReCView</code> can be set up to display and interact with any data model which implements the
+ * <code>ReCModel</code>.
  * 
- * @deprecated 
+ * @deprecated
  * @author Henrique Fernandes
  * @see ReCView
  */

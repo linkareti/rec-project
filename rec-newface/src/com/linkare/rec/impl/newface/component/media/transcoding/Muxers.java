@@ -2,8 +2,8 @@ package com.linkare.rec.impl.newface.component.media.transcoding;
 
 /**
  * Muxers suportados pelo módulo de transcoding do VLC.
- * @see <a href="http://www.videolan.org/streaming-features.html">
- * Formatos e Muxers suportados em trancoding</a>
+ * 
+ * @see <a href="http://www.videolan.org/streaming-features.html"> Formatos e Muxers suportados em trancoding</a>
  * @author bcatarino
  */
 public enum Muxers {
@@ -12,6 +12,6 @@ public enum Muxers {
 
     @Override
     public String toString() {
-        return this.name().toLowerCase();
+	return this.name().toLowerCase();
     }
 }

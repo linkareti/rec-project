@@ -16,29 +16,28 @@ import javax.swing.plaf.FontUIResource;
  * @deprecated
  * @author João FLorindo
  */
-public class TableStyle extends DefaultStyle{
+public class TableStyle extends DefaultStyle {
 
-	//ENABLED COLORS
+    //ENABLED COLORS
 
-	
-	//LABEL FONT
-	
-	public static final String ID = "Table";
-	
-	/**
-	 * Creates the <code>TableStyle</code>.
-	 */
-	public TableStyle() {
-		super();
-	}
+    //LABEL FONT
 
-	@Override
-	protected String defineStyleId() {
-		return ID;
-	}
+    public static final String ID = "Table";
 
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-	}
+    /**
+     * Creates the <code>TableStyle</code>.
+     */
+    public TableStyle() {
+	super();
+    }
+
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
+
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+    }
 }

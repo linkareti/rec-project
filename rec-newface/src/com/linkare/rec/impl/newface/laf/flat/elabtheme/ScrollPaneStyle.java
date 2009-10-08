@@ -8,23 +8,23 @@ import javax.swing.border.Border;
 
 public class ScrollPaneStyle extends DefaultStyle {
 
-	public static final String ID = "ScrollPane";
-	
-	/**
-	 * Creates the <code>ScrollPaneStyle</code>.
-	 */
-	public ScrollPaneStyle() {
-		super();
-	}
+    public static final String ID = "ScrollPane";
 
-	@Override
-	protected String defineStyleId() {
-		return ID;
-	}
+    /**
+     * Creates the <code>ScrollPaneStyle</code>.
+     */
+    public ScrollPaneStyle() {
+	super();
+    }
 
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-		map.put(BORDER, BorderFactory.createEmptyBorder());
-	}
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
+
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+	map.put(BORDER, BorderFactory.createEmptyBorder());
+    }
 }

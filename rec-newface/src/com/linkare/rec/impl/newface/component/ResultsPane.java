@@ -34,339 +34,349 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
- *
+ * 
  * @author hfernandes
  */
 public class ResultsPane extends AbstractContentPane implements ExpDataModelListener, ActionListener {
 
-	private static final Logger log = Logger.getLogger(ResultsPane.class.getName());
+    private static final Logger log = Logger.getLogger(ResultsPane.class.getName());
 
-	private class DisplaySelector {
-		private Icon icon;
-		private String name;
+    private class DisplaySelector {
+	private Icon icon;
+	private String name;
 
-		private DisplaySelector() {
-		}
-
-		public Icon getIcon() {
-			return icon;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setIcon(Icon icon) {
-			this.icon = icon;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
-		
+	private DisplaySelector() {
 	}
-	
-	private static class DisplaySelectorRenderer extends JLabel implements ListCellRenderer {
 
-		private static final Border NO_FOCUS_BORDER = new EmptyBorder(1, 2, 1, 2);
-		
-	    private DisplaySelector displaySelector;
+	public Icon getIcon() {
+	    return icon;
+	}
 
-	    public DisplaySelectorRenderer() {
-	    	super();
-	        setOpaque(true);
-	        setBorder(NO_FOCUS_BORDER);
+	public String getName() {
+	    return name;
+	}
+
+	public void setIcon(Icon icon) {
+	    this.icon = icon;
+	}
+
+	public void setName(String name) {
+	    this.name = name;
+	}
+
+	@Override
+	public String toString() {
+	    return name;
+	}
+
+    }
+
+    private static class DisplaySelectorRenderer extends JLabel implements ListCellRenderer {
+
+	private static final Border NO_FOCUS_BORDER = new EmptyBorder(1, 2, 1, 2);
+
+	private DisplaySelector displaySelector;
+
+	public DisplaySelectorRenderer() {
+	    super();
+	    setOpaque(true);
+	    setBorder(NO_FOCUS_BORDER);
+	}
+
+	@Override
+	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+		boolean cellHasFocus) {
+
+	    // Value must be an Apparatus
+	    displaySelector = (DisplaySelector) value;
+
+	    if (displaySelector != null) {
+
+		if (isSelected) {
+		    setBackground(list.getSelectionBackground());
+		    setForeground(list.getSelectionForeground());
+		} else {
+		    setBackground(list.getBackground());
+		    setForeground(list.getForeground());
+		}
+
+		// Font
+		setFont(list.getFont());
+
+		// Icon
+		setIcon(displaySelector.getIcon());
+
+		// Text
+		setText(displaySelector.getName());
+
+		// State
+		setEnabled(true);
 	    }
 
-	    @Override
-	    public Component getListCellRendererComponent(JList list, Object value,
-	            int index, boolean isSelected, boolean cellHasFocus) {
-
-	        // Value must be an Apparatus
-	    	displaySelector = (DisplaySelector) value;
-
-			if (displaySelector != null) {
-
-				if (isSelected) {
-		            setBackground(list.getSelectionBackground());
-		            setForeground(list.getSelectionForeground());
-		        }
-		        else {
-		            setBackground(list.getBackground());
-		            setForeground(list.getForeground());
-		        }
-				
-				// Font
-		        setFont(list.getFont());
-
-				// Icon
-				setIcon(displaySelector.getIcon());
-
-				// Text
-				setText(displaySelector.getName());
-
-				// State
-				setEnabled(true);
-	        }
-
-	        return this;
-	    }
-
+	    return this;
 	}
-	
-	private static final String RUNNING_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.running", "Running");
-    private static final String STATUS_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.experiment", "Experiment status");
-    private static final String PAUSED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.paused", "Paused");
-    private static final String STOPED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.stoped", "Stopped");
-    private static final String WAITING_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.waitingData", "Waiting for data...");
-    private static final String NODATA_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.nodata", "The experiment started but no data was available to fetch");
-    private static final String STARTED_NODATA_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.startedNoData", "Started, no data available yet...");
-    private static final String DATA_ENDED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.ended", "Data Ended");
-    private static final String DISPLAY_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.display", "Display");
-    private static final String DATA_MODEL_ERROR1_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.dataModel", "Data Model error!");
-    private static final String DATA_MODEL_ERROR2_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.dataModel.2", "Serious error in the data model, data was lost!");
 
-	private static final int BUTTON_LIMIT = 2;
+    }
+
+    private static final String RUNNING_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.running",
+	    "Running");
+    private static final String STATUS_STR = ReCResourceBundle.findStringOrDefault(
+	    "ReCBaseUI$rec.bui.status.experiment", "Experiment status");
+    private static final String PAUSED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.paused",
+	    "Paused");
+    private static final String STOPED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.stoped",
+	    "Stopped");
+    private static final String WAITING_STR = ReCResourceBundle.findStringOrDefault(
+	    "ReCBaseUI$rec.bui.status.waitingData", "Waiting for data...");
+    private static final String NODATA_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.nodata",
+	    "The experiment started but no data was available to fetch");
+    private static final String STARTED_NODATA_STR = ReCResourceBundle.findStringOrDefault(
+	    "ReCBaseUI$rec.bui.status.startedNoData", "Started, no data available yet...");
+    private static final String DATA_ENDED_STR = ReCResourceBundle.findStringOrDefault(
+	    "ReCBaseUI$rec.bui.status.ended", "Data Ended");
+    private static final String DISPLAY_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.display",
+	    "Display");
+    private static final String DATA_MODEL_ERROR1_STR = ReCResourceBundle.findStringOrDefault(
+	    "ReCBaseUI$rec.bui.error.dataModel", "Data Model error!");
+    private static final String DATA_MODEL_ERROR2_STR = ReCResourceBundle.findStringOrDefault(
+	    "ReCBaseUI$rec.bui.error.dataModel.2", "Serious error in the data model, data was lost!");
+
+    private static final int BUTTON_LIMIT = 2;
 
     /** Holds value of property expDataModel. */
-	private ExpDataModel experimentDataModel;
-	
-	/** Utility field holding list of ExpDataModelListeners. */
+    private ExpDataModel experimentDataModel;
+
+    /** Utility field holding list of ExpDataModelListeners. */
     private transient List<ExpDataDisplay> experimentDataDisplays;
-    
+
     private Map<String, Integer> displaySelectorNames = new HashMap<String, Integer>();
-    
+
     private Map<String, JComponent> displayMap = new HashMap<String, JComponent>();
-    
+
     private JComboBox comboDisplaySelector;
 
     /** Creates new form ResultsPane */
     public ResultsPane() {
-        initComponents();
+	initComponents();
     }
 
-    /** Getter for property expDataModel.
+    /**
+     * Getter for property expDataModel.
+     * 
      * @return Value of property expDataModel.
      */
-    public ExpDataModel getExperimentDataModel()
-    {
-        return this.experimentDataModel;
+    public ExpDataModel getExperimentDataModel() {
+	return this.experimentDataModel;
     }
-    
-    /** Setter for property expDataModel.
-     * @param expDataModel New value of property expDataModel.
+
+    /**
+     * Setter for property expDataModel.
+     * 
+     * @param expDataModel
+     *            New value of property expDataModel.
      */
-    public void setExperimentDataModel(ExpDataModel expDataModel)
-    {
-        if(expDataModel != null) {
-            expDataModel.removeExpDataModelListener(this);
-        }
-        this.experimentDataModel = expDataModel;
-        if(expDataModel != null) {
-            expDataModel.addExpDataModelListener(this);
-        }
-        if(experimentDataDisplays != null) {
-            for(ExpDataDisplay display : experimentDataDisplays) {
-                display.setExpDataModel(expDataModel);
-            }
-        }
+    public void setExperimentDataModel(ExpDataModel expDataModel) {
+	if (expDataModel != null) {
+	    expDataModel.removeExpDataModelListener(this);
+	}
+	this.experimentDataModel = expDataModel;
+	if (expDataModel != null) {
+	    expDataModel.addExpDataModelListener(this);
+	}
+	if (experimentDataDisplays != null) {
+	    for (ExpDataDisplay display : experimentDataDisplays) {
+		display.setExpDataModel(expDataModel);
+	    }
+	}
     }
-    
-    public void addExperimentDataDisplay(ExpDataDisplay dataDisplay)
-    {
-        if (experimentDataDisplays == null ) {
-        	experimentDataDisplays = new ArrayList<ExpDataDisplay>();
-        }
-        
-        experimentDataDisplays.add(dataDisplay);
-        
-        try {
-            final Icon icon = dataDisplay.getIcon();
-            String displayName = dataDisplay.getName();
-            
-            if(displayName == null) { 
-            	displayName = DISPLAY_STR;
-            }
-            
-            String displayNameFinal;
-            
-            if (displaySelectorNames.keySet().contains(displayName)) {
-            	Integer count = displaySelectorNames.get(displayName);
-            	displaySelectorNames.put(displayName, ++count);
-            	displayNameFinal = displayName + count;
-            } else {
-            	displaySelectorNames.put(displayName, Integer.valueOf(0));
-            	displayNameFinal = displayName;
-            }
-            
-            addDataDisplay(displayNameFinal, dataDisplay);
-            
-        }catch(Exception e) {
-        	log.log(Level.SEVERE, "Couldn't add DataDisplay Component " + dataDisplay + " to ExperimentInternalFrame!", e);
-        }                        
-        dataDisplay.setExpDataModel(experimentDataModel);            
+
+    public void addExperimentDataDisplay(ExpDataDisplay dataDisplay) {
+	if (experimentDataDisplays == null) {
+	    experimentDataDisplays = new ArrayList<ExpDataDisplay>();
+	}
+
+	experimentDataDisplays.add(dataDisplay);
+
+	try {
+	    final Icon icon = dataDisplay.getIcon();
+	    String displayName = dataDisplay.getName();
+
+	    if (displayName == null) {
+		displayName = DISPLAY_STR;
+	    }
+
+	    String displayNameFinal;
+
+	    if (displaySelectorNames.keySet().contains(displayName)) {
+		Integer count = displaySelectorNames.get(displayName);
+		displaySelectorNames.put(displayName, ++count);
+		displayNameFinal = displayName + count;
+	    } else {
+		displaySelectorNames.put(displayName, Integer.valueOf(0));
+		displayNameFinal = displayName;
+	    }
+
+	    addDataDisplay(displayNameFinal, dataDisplay);
+
+	} catch (Exception e) {
+	    log.log(Level.SEVERE, "Couldn't add DataDisplay Component " + dataDisplay + " to ExperimentInternalFrame!",
+		    e);
+	}
+	dataDisplay.setExpDataModel(experimentDataModel);
     }
-    
+
     public void finishedAddingDataDisplays() {
-		comboDisplaySelector.addActionListener(this);
+	comboDisplaySelector.addActionListener(this);
     }
-    
+
     private void addDataDisplay(String displayName, ExpDataDisplay dataDisplay) {
-    	displayMap.put(displayName, dataDisplay.getDisplay());
-    	addDisplaySelector(displayName, dataDisplay);
-	}
-    
+	displayMap.put(displayName, dataDisplay.getDisplay());
+	addDisplaySelector(displayName, dataDisplay);
+    }
+
     private void addDisplaySelector(String displayName, ExpDataDisplay dataDisplay) {
-    	if (displayMap.keySet().size() <= BUTTON_LIMIT) {
-    		JButton displayBtnSelector = createButtonDisplaySelector(displayName, dataDisplay.getIcon());
-    		displaySelectorPane.add(displayBtnSelector);
-    		if (displayMap.keySet().size() == 1) {
-    			showSelectedDisplay(displayName);
-    		}
-    	} else {
-    		DisplaySelector selector = new DisplaySelector();
-    		selector.setName(displayName);
-    		selector.setIcon(dataDisplay.getIcon());
-    		getComboDisplaySelector().addItem(selector);
-    	}
+	if (displayMap.keySet().size() <= BUTTON_LIMIT) {
+	    JButton displayBtnSelector = createButtonDisplaySelector(displayName, dataDisplay.getIcon());
+	    displaySelectorPane.add(displayBtnSelector);
+	    if (displayMap.keySet().size() == 1) {
+		showSelectedDisplay(displayName);
+	    }
+	} else {
+	    DisplaySelector selector = new DisplaySelector();
+	    selector.setName(displayName);
+	    selector.setIcon(dataDisplay.getIcon());
+	    getComboDisplaySelector().addItem(selector);
 	}
+    }
 
-	private JButton createButtonDisplaySelector(String displayName, Icon icon) {
-		JButton btnSelector = new JButton(displayName, icon);
-		btnSelector.setActionCommand(displayName);
-		btnSelector.addActionListener(this);
-		return btnSelector;
-	}
-	
-	private JComboBox getComboDisplaySelector() {
-		if (comboDisplaySelector == null) {
-			comboDisplaySelector = new JComboBox();
-			comboDisplaySelector.setRenderer(new DisplaySelectorRenderer());
-			displaySelectorPane.add(comboDisplaySelector);
-		}
-		return comboDisplaySelector;
-	}
+    private JButton createButtonDisplaySelector(String displayName, Icon icon) {
+	JButton btnSelector = new JButton(displayName, icon);
+	btnSelector.setActionCommand(displayName);
+	btnSelector.addActionListener(this);
+	return btnSelector;
+    }
 
-	/** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    private JComboBox getComboDisplaySelector() {
+	if (comboDisplaySelector == null) {
+	    comboDisplaySelector = new JComboBox();
+	    comboDisplaySelector.setRenderer(new DisplaySelectorRenderer());
+	    displaySelectorPane.add(comboDisplaySelector);
+	}
+	return comboDisplaySelector;
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
+     * content of this method is always regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        displaySelectorPane = new com.linkare.rec.impl.newface.component.ResultsSelectorPane();
-        displayPane = new javax.swing.JPanel();
-        btnInfo = new javax.swing.JButton();
+	displaySelectorPane = new com.linkare.rec.impl.newface.component.ResultsSelectorPane();
+	displayPane = new javax.swing.JPanel();
+	btnInfo = new javax.swing.JButton();
 
-        setName("Form"); // NOI18N
+	setName("Form"); // NOI18N
 
-        displaySelectorPane.setName("displaySelectorPane"); // NOI18N
-        displaySelectorPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 6, 0));
+	displaySelectorPane.setName("displaySelectorPane"); // NOI18N
+	displaySelectorPane.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 6, 0));
 
-        displayPane.setName("displayPane"); // NOI18N
-        displayPane.setLayout(new java.awt.BorderLayout());
+	displayPane.setName("displayPane"); // NOI18N
+	displayPane.setLayout(new java.awt.BorderLayout());
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ResultsPane.class);
-        btnInfo.setIcon(resourceMap.getIcon("btnInfo.icon")); // NOI18N
-        btnInfo.setText(resourceMap.getString("btnInfo.text")); // NOI18N
-        btnInfo.setBorderPainted(false);
-        btnInfo.setName("btnInfo"); // NOI18N
+	org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
+		com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ResultsPane.class);
+	btnInfo.setIcon(resourceMap.getIcon("btnInfo.icon")); // NOI18N
+	btnInfo.setText(resourceMap.getString("btnInfo.text")); // NOI18N
+	btnInfo.setBorderPainted(false);
+	btnInfo.setName("btnInfo"); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))
-        );
+	javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+	this.setLayout(layout);
+	layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+		javax.swing.GroupLayout.Alignment.TRAILING,
+		layout.createSequentialGroup().addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE,
+			567, Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+			.addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 24,
+				javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(displayPane,
+		javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE));
+	layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+		layout.createSequentialGroup().addGroup(
+			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(
+				displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE,
+				javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(btnInfo,
+				javax.swing.GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE)).addPreferredGap(
+			javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(displayPane,
+			javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInfo;
     private javax.swing.JPanel displayPane;
     private com.linkare.rec.impl.newface.component.ResultsSelectorPane displaySelectorPane;
+
     // End of variables declaration//GEN-END:variables
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+	Object source = e.getSource();
+	String display = "";
+	if (source instanceof JButton) {
+	    display = e.getActionCommand();
+	} else if (source instanceof JComboBox) {
+	    display = ((JComboBox) source).getSelectedItem().toString();
+	}
+	showSelectedDisplay(display);
+    }
+
+    private void showSelectedDisplay(String displayName) {
+	displayPane.removeAll();
+	displayPane.add(displayMap.get(displayName));
+	revalidate();
+	repaint();
+    }
 
     @Override
-	public void actionPerformed(ActionEvent e) {
-    	Object source = e.getSource();
-    	String display = "";
-		if (source instanceof JButton) {
-			display = e.getActionCommand();
-		} else if (source instanceof JComboBox) {
-			display = ((JComboBox)source).getSelectedItem().toString();
-		}
-		showSelectedDisplay(display);
-	}
+    public void dataModelEnded() {
+	// TODO Auto-generated method stub
 
-	private void showSelectedDisplay(String displayName) {
-		displayPane.removeAll();
-		displayPane.add(displayMap.get(displayName));
-		revalidate();
-		repaint();
-	}
-    
-	@Override
-	public void dataModelEnded() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void dataModelError() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void dataModelError() {
+	// TODO Auto-generated method stub
 
-	@Override
-	public void dataModelStarted() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void dataModelStartedNoData() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void dataModelStarted() {
+	// TODO Auto-generated method stub
 
-	@Override
-	public void dataModelStoped() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void dataModelWaiting() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void dataModelStartedNoData() {
+	// TODO Auto-generated method stub
 
-	@Override
-	public void newSamples(NewExpDataEvent evt) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
+
+    @Override
+    public void dataModelStoped() {
+	// TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void dataModelWaiting() {
+	// TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void newSamples(NewExpDataEvent evt) {
+	// TODO Auto-generated method stub
+
+    }
 
 }

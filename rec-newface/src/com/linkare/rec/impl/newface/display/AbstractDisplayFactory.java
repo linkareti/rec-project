@@ -9,41 +9,41 @@ import com.linkare.rec.impl.newface.config.Display;
 
 public abstract class AbstractDisplayFactory implements DisplayFactory {
 
-	protected HardwareAcquisitionConfig hardwareAcquisitionConfig;    
+    protected HardwareAcquisitionConfig hardwareAcquisitionConfig;
     protected HardwareInfo hardwareInfo;
     protected List<Display> displays;
-    
-	@Override
-	public abstract void destroyDisplays();
 
-	@Override
-	public abstract List<ExpDataDisplay> getDisplays();
-	
-	public List<Display> getInitDisplays() {
-		return displays;
-	}
-	
-	public HardwareAcquisitionConfig getHardwareAcquisitionConfig() {
-		return hardwareAcquisitionConfig;
-	}
+    @Override
+    public abstract void destroyDisplays();
 
-	public HardwareInfo getHardwareInfo() {
-		return hardwareInfo;
-	}
+    @Override
+    public abstract List<ExpDataDisplay> getDisplays();
 
-	@Override
-	public void init(List<Display> displays) {
-		this.displays = displays;
-	}
+    public List<Display> getInitDisplays() {
+	return displays;
+    }
 
-	@Override
-	public void setAcquisitionConfig(HardwareAcquisitionConfig hconfig) {
-		this.hardwareAcquisitionConfig = hconfig;
-	}
+    public HardwareAcquisitionConfig getHardwareAcquisitionConfig() {
+	return hardwareAcquisitionConfig;
+    }
 
-	@Override
-	public void setAcquisitionInfo(HardwareInfo hinfo) {
-		this.hardwareInfo = hinfo;
-	}
+    public HardwareInfo getHardwareInfo() {
+	return hardwareInfo;
+    }
+
+    @Override
+    public void init(List<Display> displays) {
+	this.displays = displays;
+    }
+
+    @Override
+    public void setAcquisitionConfig(HardwareAcquisitionConfig hconfig) {
+	this.hardwareAcquisitionConfig = hconfig;
+    }
+
+    @Override
+    public void setAcquisitionInfo(HardwareInfo hinfo) {
+	this.hardwareInfo = hinfo;
+    }
 
 }

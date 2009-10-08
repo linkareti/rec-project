@@ -2,6 +2,7 @@ package com.linkare.rec.impl.newface.component.media;
 
 /**
  * Estados do player.
+ * 
  * @author bcatarino
  */
 public enum MediaPlayerState {
@@ -11,7 +12,7 @@ public enum MediaPlayerState {
 
     // O Player está parado.
     STOPPED,
-    
+
     // O Player está a reproduzir.
     PLAYING,
 

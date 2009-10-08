@@ -17,39 +17,39 @@ import java.util.Map.Entry;
 import javax.swing.DefaultComboBoxModel;
 
 /**
- *
+ * 
  * @author Henrique Fernandes
  */
 public class ApparatusComboBoxModel extends DefaultComboBoxModel {
-	
-	/** Holds the apparatus location key -> apparatus mapping */
-	protected Map<String, Apparatus> apparatusMap = new HashMap<String, Apparatus>();
 
-	public ApparatusComboBoxModel() {
-		super();
-	}
-	
-	public ApparatusComboBoxModel(List<Apparatus> apparatusList) {
-        super((Apparatus[]) apparatusList.toArray(new Apparatus[apparatusList.size()]));
-        
-        for (Apparatus apparatus : apparatusList) {
-        	apparatusMap.put(apparatus.getLocation(), apparatus);        	
-		}
+    /** Holds the apparatus location key -> apparatus mapping */
+    protected Map<String, Apparatus> apparatusMap = new HashMap<String, Apparatus>();
+
+    public ApparatusComboBoxModel() {
+	super();
     }
 
-	public Apparatus getApparatus(String locationKey) {
-		return apparatusMap.get(locationKey);
-	}
+    public ApparatusComboBoxModel(List<Apparatus> apparatusList) {
+	super((Apparatus[]) apparatusList.toArray(new Apparatus[apparatusList.size()]));
 
-	public void fireContentsChanged(Object source) {
-		super.fireContentsChanged(source, 0, getSize());
+	for (Apparatus apparatus : apparatusList) {
+	    apparatusMap.put(apparatus.getLocation(), apparatus);
 	}
-	
-	public void setAllApparatusEnabled(boolean enabled) {
-		for (Entry<String, Apparatus> entry : apparatusMap.entrySet()) {
-			entry.getValue().setEnabled(enabled);
-		}
-		fireContentsChanged(this);
+    }
+
+    public Apparatus getApparatus(String locationKey) {
+	return apparatusMap.get(locationKey);
+    }
+
+    public void fireContentsChanged(Object source) {
+	super.fireContentsChanged(source, 0, getSize());
+    }
+
+    public void setAllApparatusEnabled(boolean enabled) {
+	for (Entry<String, Apparatus> entry : apparatusMap.entrySet()) {
+	    entry.getValue().setEnabled(enabled);
 	}
-	
+	fireContentsChanged(this);
+    }
+
 }

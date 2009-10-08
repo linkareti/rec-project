@@ -27,7 +27,7 @@ public class DisplayNode extends AbstractConfigBean {
      */
     @XmlAttribute
     public int getOrder() {
-        return order;
+	return order;
     }
 
     /**
@@ -35,7 +35,7 @@ public class DisplayNode extends AbstractConfigBean {
      */
     @XmlAttribute
     public boolean isEnabled() {
-        return enabled;
+	return enabled;
     }
 
     /**
@@ -43,7 +43,7 @@ public class DisplayNode extends AbstractConfigBean {
      */
     @XmlAttribute
     public boolean isVisible() {
-        return visible;
+	return visible;
     }
 
     /**
@@ -51,7 +51,7 @@ public class DisplayNode extends AbstractConfigBean {
      */
     @XmlAttribute
     public boolean isSelected() {
-        return selected;
+	return selected;
     }
 
     /**
@@ -59,85 +59,85 @@ public class DisplayNode extends AbstractConfigBean {
      */
     @XmlAttribute
     public boolean isConnected() {
-        return connected;
+	return connected;
     }
 
     /**
-     * @param order the order to set
+     * @param order
+     *            the order to set
      */
     public void setOrder(int order) {
-        changeSupport.firePropertyChange("order", this.order, this.order = order);
+	changeSupport.firePropertyChange("order", this.order, this.order = order);
     }
 
     /**
-     * @param enabled the enabled to set
+     * @param enabled
+     *            the enabled to set
      */
     public void setEnabled(boolean enabled) {
-        changeSupport.firePropertyChange("enabled", this.enabled,
-                this.enabled = enabled);
+	changeSupport.firePropertyChange("enabled", this.enabled, this.enabled = enabled);
     }
 
     /**
-     * @param visible the visible to set
+     * @param visible
+     *            the visible to set
      */
     public void setVisible(boolean visible) {
-        changeSupport.firePropertyChange("visible", this.visible,
-                this.visible = visible);
+	changeSupport.firePropertyChange("visible", this.visible, this.visible = visible);
     }
 
     /**
-     * @param selected the selected to set
+     * @param selected
+     *            the selected to set
      */
     public void setSelected(boolean selected) {
-        changeSupport.firePropertyChange("selected", this.selected,
-                this.selected = selected);
+	changeSupport.firePropertyChange("selected", this.selected, this.selected = selected);
     }
 
     /**
-     * @param connected the connected to set
+     * @param connected
+     *            the connected to set
      */
     public void setConnected(boolean connected) {
-        changeSupport.firePropertyChange("connected", this.connected,
-                this.connected = connected);
+	changeSupport.firePropertyChange("connected", this.connected, this.connected = connected);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final DisplayNode other = (DisplayNode) obj;
-        if (this.order != other.order) {
-            return false;
-        }
-        if (this.enabled != other.enabled) {
-            return false;
-        }
-        if (this.visible != other.visible) {
-            return false;
-        }
-        if (this.selected != other.selected) {
-            return false;
-        }
-        if (this.connected != other.connected) {
-            return false;
-        }
-        return true;
+	if (obj == null) {
+	    return false;
+	}
+	if (getClass() != obj.getClass()) {
+	    return false;
+	}
+	final DisplayNode other = (DisplayNode) obj;
+	if (this.order != other.order) {
+	    return false;
+	}
+	if (this.enabled != other.enabled) {
+	    return false;
+	}
+	if (this.visible != other.visible) {
+	    return false;
+	}
+	if (this.selected != other.selected) {
+	    return false;
+	}
+	if (this.connected != other.connected) {
+	    return false;
+	}
+	return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + this.order;
-        hash = 71 * hash + (this.enabled ? 1 : 0);
-        hash = 71 * hash + (this.visible ? 1 : 0);
-        hash = 71 * hash + (this.selected ? 1 : 0);
-        hash = 71 * hash + (this.connected ? 1 : 0);
-        return hash;
+	int hash = 7;
+	hash = 71 * hash + this.order;
+	hash = 71 * hash + (this.enabled ? 1 : 0);
+	hash = 71 * hash + (this.visible ? 1 : 0);
+	hash = 71 * hash + (this.selected ? 1 : 0);
+	hash = 71 * hash + (this.connected ? 1 : 0);
+	return hash;
     }
-    
-}
 
+}

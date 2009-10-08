@@ -11,5 +11,5 @@ package com.linkare.rec.impl.newface.config;
 public interface OrderedItem {
 
     public int getOrder();
-    
+
 }

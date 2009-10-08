@@ -18,33 +18,32 @@ import javax.swing.plaf.FontUIResource;
  */
 public class CheckBoxStyle extends DefaultStyle {
 
-	
-	//LABEL FONT
-	public static final Font FONT_CHECKBOX = new FontUIResource("Arial", Font.BOLD, 12);	
-	
-	private static final Color COLOR_CHECKBOX_FG = BLACK_DEFAULT_COLOR;
-	private static final Color COLOR_CHECKBOX_BG = WHITE_DEFAULT_COLOR;	
-	
-	public static final String ID = "CheckBox";
-	
-	/**
-	 * Creates the <code>CheckBox</code>.
-	 */
-	public CheckBoxStyle() {
-		super();
-	}
+    //LABEL FONT
+    public static final Font FONT_CHECKBOX = new FontUIResource("Arial", Font.BOLD, 12);
 
-	@Override
-	protected String defineStyleId() {
-		return ID;
-	}
+    private static final Color COLOR_CHECKBOX_FG = BLACK_DEFAULT_COLOR;
+    private static final Color COLOR_CHECKBOX_BG = WHITE_DEFAULT_COLOR;
 
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-		map.put(FOREGROUND, COLOR_CHECKBOX_FG);
-		map.put(BACKGROUND, COLOR_CHECKBOX_BG);
-		
-		map.put(FONT, FONT_CHECKBOX);
-	}
+    public static final String ID = "CheckBox";
+
+    /**
+     * Creates the <code>CheckBox</code>.
+     */
+    public CheckBoxStyle() {
+	super();
+    }
+
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
+
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+	map.put(FOREGROUND, COLOR_CHECKBOX_FG);
+	map.put(BACKGROUND, COLOR_CHECKBOX_BG);
+
+	map.put(FONT, FONT_CHECKBOX);
+    }
 }

@@ -22,29 +22,30 @@ import javax.swing.plaf.FontUIResource;
  * 
  * @author João Florindo
  */
-public class FlatButtonStyle extends DefaultStyle{
+public class FlatButtonStyle extends DefaultStyle {
 
-	
-	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0x7da921)), BorderFactory.createEmptyBorder(4, 16, 4, 16));
-	private static final Color COLOR_BUTTON_FG = new Color(0x2B7A3B);
-	
-	public static final String ID = "FlatButton";
-	/**
-	 * Creates the <code>FlatButtonStyle</code>.
-	 */
-	public FlatButtonStyle() {
-		super();
-	}
+    private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory
+	    .createLineBorder(new Color(0x7da921)), BorderFactory.createEmptyBorder(4, 16, 4, 16));
+    private static final Color COLOR_BUTTON_FG = new Color(0x2B7A3B);
 
-	@Override
-	protected String defineStyleId() {
-		return ID;
-	}
+    public static final String ID = "FlatButton";
 
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-		map.put(BORDER, COLOR_BORDER);
-		map.put(FOREGROUND, COLOR_BUTTON_FG);
-	}
+    /**
+     * Creates the <code>FlatButtonStyle</code>.
+     */
+    public FlatButtonStyle() {
+	super();
+    }
+
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
+
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+	map.put(BORDER, COLOR_BORDER);
+	map.put(FOREGROUND, COLOR_BUTTON_FG);
+    }
 }

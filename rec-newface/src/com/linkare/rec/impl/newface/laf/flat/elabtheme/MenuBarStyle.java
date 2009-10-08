@@ -12,7 +12,6 @@ import java.util.Map;
 
 import javax.swing.plaf.ColorUIResource;
 
-
 import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 
 /**
@@ -22,34 +21,32 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class MenuBarStyle extends DefaultStyle {
 
-	//ENABLED COLORS
-	private static final Color COLOR_MENU_BG = new Color(0x285357);
-	
-	public static final String ID = "MenuBar";
-	/**
-	 * Creates the <code>MenuBarStyle</code>.
-	 */
-	public MenuBarStyle() {
-		super();
-	}
+    //ENABLED COLORS
+    private static final Color COLOR_MENU_BG = new Color(0x285357);
 
-	@Override
-	protected String defineStyleId() {
-		return  ID;
-	}
-	
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-		map.put(BORDER, EMPTY_BORDER);
-		map.put("gradient", Arrays.asList(new Object[] {
-                new Float(1f), new Float(0f),
-                new ColorUIResource(0x0c1011), new ColorUIResource(0x2a3436), 
-                new ColorUIResource(0x2a3436) }));
-	}
+    public static final String ID = "MenuBar";
 
-	// -------------------------------------------------------------------------
-	// TODO Getters (Used to marshal values to xml)
-	
+    /**
+     * Creates the <code>MenuBarStyle</code>.
+     */
+    public MenuBarStyle() {
+	super();
+    }
+
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
+
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+	map.put(BORDER, EMPTY_BORDER);
+	map.put("gradient", Arrays.asList(new Object[] { new Float(1f), new Float(0f), new ColorUIResource(0x0c1011),
+		new ColorUIResource(0x2a3436), new ColorUIResource(0x2a3436) }));
+    }
+
+    // -------------------------------------------------------------------------
+    // TODO Getters (Used to marshal values to xml)
 
 }

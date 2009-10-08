@@ -2,6 +2,7 @@ package com.linkare.rec.impl.newface.component.media.transcoding;
 
 /**
  * Define as opções de transcoding a serem usadas pelo VLM.
+ * 
  * @author bcatarino
  */
 public class TranscodingConfig {
@@ -17,58 +18,58 @@ public class TranscodingConfig {
     //TODO ver que outras opções se pode passar ao VLM e se vale a pena implementar
 
     public int getAudioBitrate() {
-        return audioBitrate;
+	return audioBitrate;
     }
 
     public void setAudioBitrate(int audioBitrate) {
-        this.audioBitrate = audioBitrate;
+	this.audioBitrate = audioBitrate;
     }
 
     public AudioCodecs getAudioCodec() {
-        return audioCodec;
+	return audioCodec;
     }
 
     public void setAudioCodec(AudioCodecs audioCodec) {
-        this.audioCodec = audioCodec;
+	this.audioCodec = audioCodec;
     }
 
     public Muxers getMuxer() {
-        return muxer;
+	return muxer;
     }
 
     public void setMuxer(Muxers muxer) {
-        this.muxer = muxer;
+	this.muxer = muxer;
     }
 
     public int getSoundChannels() {
-        return soundChannels;
+	return soundChannels;
     }
 
     public void setSoundChannels(int soundChannels) {
-        this.soundChannels = soundChannels;
+	this.soundChannels = soundChannels;
     }
 
     public int getVideoBitrate() {
-        return videoBitrate;
+	return videoBitrate;
     }
 
     public void setVideoBitrate(int videoBitrate) {
-        this.videoBitrate = videoBitrate;
+	this.videoBitrate = videoBitrate;
     }
 
     public VideoCodecs getVideoCodec() {
-        return videoCodec;
+	return videoCodec;
     }
 
     public void setVideoCodec(VideoCodecs videoCodec) {
-        this.videoCodec = videoCodec;
+	this.videoCodec = videoCodec;
     }
 
     public int getVideoScale() {
-        return videoScale;
+	return videoScale;
     }
 
     public void setVideoScale(int videoScale) {
-        this.videoScale = videoScale;
+	this.videoScale = videoScale;
     }
 }

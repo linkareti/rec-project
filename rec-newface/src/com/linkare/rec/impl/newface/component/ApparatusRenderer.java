@@ -17,54 +17,52 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.config.Apparatus;
 
 /**
- *
+ * 
  * @author Henrique Fernandes
  */
 public class ApparatusRenderer extends JLabel implements ListCellRenderer {
 
-	private static final Border NO_FOCUS_BORDER = new EmptyBorder(1, 2, 1, 2);
-	
+    private static final Border NO_FOCUS_BORDER = new EmptyBorder(1, 2, 1, 2);
+
     private Apparatus apparatus;
 
     public ApparatusRenderer() {
-    	super();
-        setOpaque(true);
-        setBorder(NO_FOCUS_BORDER);
+	super();
+	setOpaque(true);
+	setBorder(NO_FOCUS_BORDER);
     }
 
     @Override
-    public Component getListCellRendererComponent(JList list, Object value,
-            int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+	    boolean cellHasFocus) {
 
-        // Value must be an Apparatus
-		apparatus = (Apparatus) value;
+	// Value must be an Apparatus
+	apparatus = (Apparatus) value;
 
-		if (apparatus != null) {
+	if (apparatus != null) {
 
-			if (isSelected) {
-	            setBackground(list.getSelectionBackground());
-	            setForeground(list.getSelectionForeground());
-	        }
-	        else {
-	            setBackground(list.getBackground());
-	            setForeground(list.getForeground());
-	        }
-			
-			// Font
-	        setFont(list.getFont());
+	    if (isSelected) {
+		setBackground(list.getSelectionBackground());
+		setForeground(list.getSelectionForeground());
+	    } else {
+		setBackground(list.getBackground());
+		setForeground(list.getForeground());
+	    }
 
-			// Icon
-			setIcon(ReCResourceBundle.findImageIconOrDefault(apparatus
-					.getIconLocationBundleKey(), null));
+	    // Font
+	    setFont(list.getFont());
 
-			// Text
-			setText(ReCResourceBundle.findString(apparatus.getDisplayStringBundleKey()));
+	    // Icon
+	    setIcon(ReCResourceBundle.findImageIconOrDefault(apparatus.getIconLocationBundleKey(), null));
 
-			// State
-			setEnabled(apparatus.isEnabled());
-        }
+	    // Text
+	    setText(ReCResourceBundle.findString(apparatus.getDisplayStringBundleKey()));
 
-        return this;
+	    // State
+	    setEnabled(apparatus.isEnabled());
+	}
+
+	return this;
     }
 
 }

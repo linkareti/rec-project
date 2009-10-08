@@ -16,28 +16,28 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class ToolBarStyle extends DefaultStyle {
 
-	public static final String ID = "ToolBar";
-	
-	/**
-	 * Creates the <code>ToolBarStyle</code>.
-	 */
-	public ToolBarStyle() {
-		super();
-	}
+    public static final String ID = "ToolBar";
 
-	@Override
-	protected String defineStyleId() {
-		return ID;
-	}
+    /**
+     * Creates the <code>ToolBarStyle</code>.
+     */
+    public ToolBarStyle() {
+	super();
+    }
 
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-		map.put(BACKGROUND, BLACK_DEFAULT_COLOR);
-		map.put(BORDER, EMPTY_BORDER);
-	}
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
 
-	// -------------------------------------------------------------------------
-	// TODO Getters (Used to marshal values to xml)
-	
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+	map.put(BACKGROUND, BLACK_DEFAULT_COLOR);
+	map.put(BORDER, EMPTY_BORDER);
+    }
+
+    // -------------------------------------------------------------------------
+    // TODO Getters (Used to marshal values to xml)
+
 }

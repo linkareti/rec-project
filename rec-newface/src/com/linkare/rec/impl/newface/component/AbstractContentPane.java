@@ -25,63 +25,64 @@ import com.linkare.rec.impl.newface.ReCApplication;
  * @author Henrique Fernandes
  */
 public abstract class AbstractContentPane extends JPanel {
-	
-	private ReCApplication recApplication = ReCApplication.getApplication();
-	
-	private static final Logger log = Logger
-			.getLogger(AbstractContentPane.class.getName());
 
-	private static final long serialVersionUID = -4706961491108859138L;
+    private ReCApplication recApplication = ReCApplication.getApplication();
+
+    private static final Logger log = Logger.getLogger(AbstractContentPane.class.getName());
+
+    private static final long serialVersionUID = -4706961491108859138L;
 
     protected Window container;
 
     public AbstractContentPane() {
-        this(null);
+	this(null);
     }
-    
+
     public AbstractContentPane(Window container) {
-        this.container = container;
+	this.container = container;
     }
 
     public Window getContainer() {
-        return container;
+	return container;
     }
 
     public void setContainer(Window container) {
-        this.container = container;
+	this.container = container;
     }
 
     public void closeContainer() {
-        if (container != null) {
-            container.setVisible(false);
-        }
+	if (container != null) {
+	    container.setVisible(false);
+	}
     }
-    
+
     /**
      * Sets all child components enabled/disabled. (One level only)
-     * @param enabled True to set enabled, false to disabled.
+     * 
+     * @param enabled
+     *            True to set enabled, false to disabled.
      */
     public void setChildComponentsEnabled(boolean enabled) {
-    	for (Component childComponent : getComponents()) {
-    		childComponent.setEnabled(enabled);
-    		if (log.isLoggable(Level.FINE)) {
-				log.finer("component " + childComponent.getName() + (enabled ? " enabled" : " disabled"));
-			}
-    	}
+	for (Component childComponent : getComponents()) {
+	    childComponent.setEnabled(enabled);
+	    if (log.isLoggable(Level.FINE)) {
+		log.finer("component " + childComponent.getName() + (enabled ? " enabled" : " disabled"));
+	    }
 	}
+    }
 
-	/**
-	 * @return the recApplication
-	 */
-	public ReCApplication getRecApplication() {
-		return recApplication;
-	}
+    /**
+     * @return the recApplication
+     */
+    public ReCApplication getRecApplication() {
+	return recApplication;
+    }
 
-	public ApplicationContext getContext() {
-		return recApplication.getContext();
-	}
-	
-	public ResourceMap getResourceMap() {
-		return getContext().getResourceMap();
-	}
+    public ApplicationContext getContext() {
+	return recApplication.getContext();
+    }
+
+    public ResourceMap getResourceMap() {
+	return getContext().getResourceMap();
+    }
 }

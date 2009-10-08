@@ -4,12 +4,14 @@ import java.util.EventListener;
 
 /**
  * Defines the events fired by VLC that the client should handle.
+ * 
  * @author bcatarino
  */
 public interface MediaApplicationEventListener extends EventListener {
 
     /**
      * Fired when playing a streaming media and no ES where received.
+     * 
      * @param evt
      */
     void notConnected(MediaStoppedEvent evt);

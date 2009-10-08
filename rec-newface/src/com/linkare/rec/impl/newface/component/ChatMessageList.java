@@ -8,7 +8,7 @@ package com.linkare.rec.impl.newface.component;
 import javax.swing.JList;
 
 /**
- * @deprecated 
+ * @deprecated
  * @author Henrique Fernandes
  */
 public class ChatMessageList extends JList {
@@ -18,11 +18,15 @@ public class ChatMessageList extends JList {
 
     // disable selection
 
-    public void setSelectedIndex(int index) {}
+    public void setSelectedIndex(int index) {
+    }
 
-	public void setSelectedIndices(int[] indices) {}
+    public void setSelectedIndices(int[] indices) {
+    }
 
-	public void setSelectedValue(Object anObject, boolean shouldScroll) {}
+    public void setSelectedValue(Object anObject, boolean shouldScroll) {
+    }
 
-	public void addSelectionInterval(int anchor, int lead) {}
+    public void addSelectionInterval(int anchor, int lead) {
+    }
 }

@@ -33,7 +33,7 @@ public class Lab extends AbstractConfigBean {
      */
     @XmlAttribute
     public String getIconLocationBundleKey() {
-        return iconLocationBundleKey;
+	return iconLocationBundleKey;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Lab extends AbstractConfigBean {
      */
     @XmlAttribute
     public String getToolTipBundleKey() {
-        return toolTipBundleKey;
+	return toolTipBundleKey;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Lab extends AbstractConfigBean {
      */
     @XmlAttribute
     public String getDisplayStringBundleKey() {
-        return displayStringBundleKey;
+	return displayStringBundleKey;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Lab extends AbstractConfigBean {
      */
     @XmlAttribute
     public String getLocation() {
-        return location;
+	return location;
     }
 
     /**
@@ -65,134 +65,148 @@ public class Lab extends AbstractConfigBean {
      */
     @XmlAttribute
     public String getDesktopLocationBundleKey() {
-        return desktopLocationBundleKey;
+	return desktopLocationBundleKey;
     }
 
     /**
      * @return the apparatus
      */
     public List<Apparatus> getApparatus() {
-        return apparatus;
+	return apparatus;
     }
 
     /**
      * @return the webResource
      */
     public List<WebResource> getWebResource() {
-        return webResource;
+	return webResource;
     }
 
     /**
      * @return the localizationBundle
      */
     public List<LocalizationBundle> getLocalizationBundle() {
-        return localizationBundle;
+	return localizationBundle;
     }
 
     /**
-     * @param iconLocationBundleKey the iconLocationBundleKey to set
+     * @param iconLocationBundleKey
+     *            the iconLocationBundleKey to set
      */
     public void setIconLocationBundleKey(String iconLocationBundleKey) {
-        this.iconLocationBundleKey = iconLocationBundleKey;
+	this.iconLocationBundleKey = iconLocationBundleKey;
     }
 
     /**
-     * @param toolTipBundleKey the toolTipBundleKey to set
+     * @param toolTipBundleKey
+     *            the toolTipBundleKey to set
      */
     public void setToolTipBundleKey(String toolTipBundleKey) {
-        this.toolTipBundleKey = toolTipBundleKey;
+	this.toolTipBundleKey = toolTipBundleKey;
     }
 
     /**
-     * @param displayStringBundleKey the displayStringBundleKey to set
+     * @param displayStringBundleKey
+     *            the displayStringBundleKey to set
      */
     public void setDisplayStringBundleKey(String displayStringBundleKey) {
-        this.displayStringBundleKey = displayStringBundleKey;
+	this.displayStringBundleKey = displayStringBundleKey;
     }
 
     /**
-     * @param location the location to set
+     * @param location
+     *            the location to set
      */
     public void setLocation(String location) {
-        this.location = location;
+	this.location = location;
     }
 
     /**
-     * @param desktopLocationBundleKey the desktopLocationBundleKey to set
+     * @param desktopLocationBundleKey
+     *            the desktopLocationBundleKey to set
      */
     public void setDesktopLocationBundleKey(String desktopLocationBundleKey) {
-        this.desktopLocationBundleKey = desktopLocationBundleKey;
+	this.desktopLocationBundleKey = desktopLocationBundleKey;
     }
 
     /**
-     * @param apparatus the apparatus to set
+     * @param apparatus
+     *            the apparatus to set
      */
     public void setApparatus(List<Apparatus> apparatus) {
-        this.apparatus = apparatus;
+	this.apparatus = apparatus;
     }
 
     /**
-     * @param webResource the webResource to set
+     * @param webResource
+     *            the webResource to set
      */
     public void setWebResource(List<WebResource> webResource) {
-        this.webResource = webResource;
+	this.webResource = webResource;
     }
 
     /**
-     * @param localizationBundle the localizationBundle to set
+     * @param localizationBundle
+     *            the localizationBundle to set
      */
     public void setLocalizationBundle(List<LocalizationBundle> localizationBundle) {
-        this.localizationBundle = localizationBundle;
+	this.localizationBundle = localizationBundle;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Lab other = (Lab) obj;
-        if ((this.iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !this.iconLocationBundleKey.equals(other.iconLocationBundleKey)) {
-            return false;
-        }
-        if ((this.toolTipBundleKey == null) ? (other.toolTipBundleKey != null) : !this.toolTipBundleKey.equals(other.toolTipBundleKey)) {
-            return false;
-        }
-        if ((this.displayStringBundleKey == null) ? (other.displayStringBundleKey != null) : !this.displayStringBundleKey.equals(other.displayStringBundleKey)) {
-            return false;
-        }
-        if ((this.location == null) ? (other.location != null) : !this.location.equals(other.location)) {
-            return false;
-        }
-        if ((this.desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null) : !this.desktopLocationBundleKey.equals(other.desktopLocationBundleKey)) {
-            return false;
-        }
-        if (this.apparatus != other.apparatus && (this.apparatus == null || !this.apparatus.equals(other.apparatus))) {
-            return false;
-        }
-        if (this.webResource != other.webResource && (this.webResource == null || !this.webResource.equals(other.webResource))) {
-            return false;
-        }
-        if (this.localizationBundle != other.localizationBundle && (this.localizationBundle == null || !this.localizationBundle.equals(other.localizationBundle))) {
-            return false;
-        }
-        return true;
+	if (obj == null) {
+	    return false;
+	}
+	if (getClass() != obj.getClass()) {
+	    return false;
+	}
+	final Lab other = (Lab) obj;
+	if ((this.iconLocationBundleKey == null) ? (other.iconLocationBundleKey != null) : !this.iconLocationBundleKey
+		.equals(other.iconLocationBundleKey)) {
+	    return false;
+	}
+	if ((this.toolTipBundleKey == null) ? (other.toolTipBundleKey != null) : !this.toolTipBundleKey
+		.equals(other.toolTipBundleKey)) {
+	    return false;
+	}
+	if ((this.displayStringBundleKey == null) ? (other.displayStringBundleKey != null)
+		: !this.displayStringBundleKey.equals(other.displayStringBundleKey)) {
+	    return false;
+	}
+	if ((this.location == null) ? (other.location != null) : !this.location.equals(other.location)) {
+	    return false;
+	}
+	if ((this.desktopLocationBundleKey == null) ? (other.desktopLocationBundleKey != null)
+		: !this.desktopLocationBundleKey.equals(other.desktopLocationBundleKey)) {
+	    return false;
+	}
+	if (this.apparatus != other.apparatus && (this.apparatus == null || !this.apparatus.equals(other.apparatus))) {
+	    return false;
+	}
+	if (this.webResource != other.webResource
+		&& (this.webResource == null || !this.webResource.equals(other.webResource))) {
+	    return false;
+	}
+	if (this.localizationBundle != other.localizationBundle
+		&& (this.localizationBundle == null || !this.localizationBundle.equals(other.localizationBundle))) {
+	    return false;
+	}
+	return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 19 * hash + (this.iconLocationBundleKey != null ? this.iconLocationBundleKey.hashCode() : 0);
-        hash = 19 * hash + (this.toolTipBundleKey != null ? this.toolTipBundleKey.hashCode() : 0);
-        hash = 19 * hash + (this.displayStringBundleKey != null ? this.displayStringBundleKey.hashCode() : 0);
-        hash = 19 * hash + (this.location != null ? this.location.hashCode() : 0);
-        hash = 19 * hash + (this.desktopLocationBundleKey != null ? this.desktopLocationBundleKey.hashCode() : 0);
-        hash = 19 * hash + (this.apparatus != null ? this.apparatus.hashCode() : 0);
-        hash = 19 * hash + (this.webResource != null ? this.webResource.hashCode() : 0);
-        hash = 19 * hash + (this.localizationBundle != null ? this.localizationBundle.hashCode() : 0);
-        return hash;
+	int hash = 3;
+	hash = 19 * hash + (this.iconLocationBundleKey != null ? this.iconLocationBundleKey.hashCode() : 0);
+	hash = 19 * hash + (this.toolTipBundleKey != null ? this.toolTipBundleKey.hashCode() : 0);
+	hash = 19 * hash + (this.displayStringBundleKey != null ? this.displayStringBundleKey.hashCode() : 0);
+	hash = 19 * hash + (this.location != null ? this.location.hashCode() : 0);
+	hash = 19 * hash + (this.desktopLocationBundleKey != null ? this.desktopLocationBundleKey.hashCode() : 0);
+	hash = 19 * hash + (this.apparatus != null ? this.apparatus.hashCode() : 0);
+	hash = 19 * hash + (this.webResource != null ? this.webResource.hashCode() : 0);
+	hash = 19 * hash + (this.localizationBundle != null ? this.localizationBundle.hashCode() : 0);
+	return hash;
     }
-    
+
 }

@@ -13,11 +13,13 @@ import java.lang.annotation.Target;
 /**
  * @author Henrique Fernandes
  */
-@Retention(value=RetentionPolicy.RUNTIME)
-@Target(value={ElementType.TYPE, ElementType.FIELD})
+@Retention(value = RetentionPolicy.RUNTIME)
+@Target(value = { ElementType.TYPE, ElementType.FIELD })
 public @interface Focus {
 
-    enum Effect{GLOW};
+    enum Effect {
+	GLOW
+    };
 
     boolean display() default true;
 

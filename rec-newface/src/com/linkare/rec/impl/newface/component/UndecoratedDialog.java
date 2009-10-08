@@ -20,23 +20,23 @@ import java.awt.Component;
  */
 public class UndecoratedDialog<C extends AbstractContentPane> extends DefaultDialog<C> {
 
-	private static final long serialVersionUID = -605288573925533710L;
+    private static final long serialVersionUID = -605288573925533710L;
 
-	/**
-	 * @param content
-	 */
-	public UndecoratedDialog(C content) {
-		this(content, null);
-	}
+    /**
+     * @param content
+     */
+    public UndecoratedDialog(C content) {
+	this(content, null);
+    }
 
-	public UndecoratedDialog(C content, Component container) {
-		super(content, container);
-	}
+    public UndecoratedDialog(C content, Component container) {
+	super(content, container);
+    }
 
-	@Override
-	protected void init() {
-		setUndecorated(true);
-		super.init();
-	}
+    @Override
+    protected void init() {
+	setUndecorated(true);
+	super.init();
+    }
 
 }

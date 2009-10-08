@@ -11,34 +11,30 @@ import javax.swing.table.TableColumnModel;
  */
 public class FlatTableHeader extends JTableHeader {
 
-	
-	
-	private String uiClassID = "FlatTableHeaderUI";
+    private String uiClassID = "FlatTableHeaderUI";
 
-	public FlatTableHeader() {
-		this(null);
-	}
+    public FlatTableHeader() {
+	this(null);
+    }
 
-	public FlatTableHeader(TableColumnModel cm) {
-		super();
+    public FlatTableHeader(TableColumnModel cm) {
+	super();
 
-		setFocusable(false); 
+	setFocusable(false);
 
-		if (cm == null)
-			cm = createDefaultColumnModel();
-		setColumnModel(cm);
+	if (cm == null)
+	    cm = createDefaultColumnModel();
+	setColumnModel(cm);
 
-		// Initialize local ivars
-		initializeLocalVars();
+	// Initialize local ivars
+	initializeLocalVars();
 
-		// Get UI going
-		updateUI();
-	}
-	
-	
-	public String getUIClassID() {
-		return uiClassID ;
-	}
-	
+	// Get UI going
+	updateUI();
+    }
+
+    public String getUIClassID() {
+	return uiClassID;
+    }
 
 }

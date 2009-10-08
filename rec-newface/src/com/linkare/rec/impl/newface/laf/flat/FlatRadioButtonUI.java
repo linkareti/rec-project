@@ -26,106 +26,104 @@ import javax.swing.text.View;
 
 import sun.swing.SwingUtilities2;
 
-
-
 /**
  * 
  * @author João FLorindo
  */
 public class FlatRadioButtonUI extends MetalRadioButtonUI {
 
-	public static ComponentUI createUI(JComponent x) {
-		return new FlatRadioButtonUI();
+    public static ComponentUI createUI(JComponent x) {
+	return new FlatRadioButtonUI();
+    }
+
+    public synchronized void paint(Graphics g, JComponent c) {
+	AbstractButton b = (AbstractButton) c;
+	ButtonModel model = b.getModel();
+
+	Dimension size = c.getSize();
+
+	int w = size.width;
+	int h = size.height;
+
+	Font f = c.getFont();
+	g.setFont(f);
+	FontMetrics fm = SwingUtilities2.getFontMetrics(c, g, f);
+
+	Rectangle viewRect = new Rectangle(size);
+	Rectangle iconRect = new Rectangle();
+	Rectangle textRect = new Rectangle();
+
+	Insets i = c.getInsets();
+	viewRect.x += i.left;
+	viewRect.y += i.top;
+	viewRect.width -= (i.right + viewRect.x);
+	viewRect.height -= (i.bottom + viewRect.y);
+
+	Icon altIcon = null;
+	Icon selectedIcon = null;
+	Icon disableIcon = null;
+
+	if (b instanceof javax.swing.JRadioButton) {
+	    altIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/radioButton.png"));
+	    selectedIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class
+		    .getResource("resources/radioButtonSelected.png"));
+	    disableIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class
+		    .getResource("resources/radioButtonDisable.png"));
+	} else if (b instanceof javax.swing.JCheckBox) {
+	    altIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/checkBox.png"));
+	    selectedIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class
+		    .getResource("resources/checkBoxSelected.png"));
+	    disableIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class
+		    .getResource("resources/checkBoxDisable.png"));
 	}
-	
-	public synchronized void paint(Graphics g, JComponent c) {
-        AbstractButton b = (AbstractButton) c;
-        ButtonModel model = b.getModel();
-        
-        Dimension size = c.getSize();
 
-        int w = size.width;
-        int h = size.height;
+	String text = SwingUtilities.layoutCompoundLabel(c, fm, b.getText(), altIcon != null ? altIcon
+		: getDefaultIcon(), b.getVerticalAlignment(), b.getHorizontalAlignment(), b.getVerticalTextPosition(),
+		b.getHorizontalTextPosition(), viewRect, iconRect, textRect, b.getIconTextGap());
 
-        Font f = c.getFont();
-        g.setFont(f);
-        FontMetrics fm = SwingUtilities2.getFontMetrics(c, g, f);
+	// fill background
+	if (c.isOpaque()) {
+	    g.setColor(b.getBackground());
+	    g.fillRect(0, 0, size.width, size.height);
+	}
 
-        Rectangle viewRect = new Rectangle(size);
-        Rectangle iconRect = new Rectangle();
-        Rectangle textRect = new Rectangle();
+	// Paint the radio button
+	if (altIcon != null) {
 
-        Insets i = c.getInsets();
-        viewRect.x += i.left;
-        viewRect.y += i.top;
-        viewRect.width -= (i.right + viewRect.x);
-        viewRect.height -= (i.bottom + viewRect.y);
-		
-        Icon altIcon = null;
-        Icon selectedIcon = null;
-        Icon disableIcon = null;
-        
-        if(b instanceof javax.swing.JRadioButton){
-        	altIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/radioButton.png"));
-        	selectedIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/radioButtonSelected.png"));
-        	disableIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/radioButtonDisable.png"));
-		}else if(b instanceof javax.swing.JCheckBox){
-			altIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/checkBox.png"));
-			selectedIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/checkBoxSelected.png"));
-			disableIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/checkBoxDisable.png"));
+	    if (!model.isEnabled()) {
+		if (model.isSelected()) {
+		    altIcon = selectedIcon;
+		} else {
+		    altIcon = disableIcon;
 		}
-        
-        String text = SwingUtilities.layoutCompoundLabel(
-                c, fm, b.getText(), altIcon != null ? altIcon : getDefaultIcon(),
-                b.getVerticalAlignment(), b.getHorizontalAlignment(),
-                b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
-                viewRect, iconRect, textRect, b.getIconTextGap());
-            
-        // fill background
-        if(c.isOpaque()) {
-            g.setColor(b.getBackground());
-            g.fillRect(0,0, size.width, size.height); 
-        }
-
-        
-		 // Paint the radio button
-        if(altIcon != null) { 
-        	
-        	if(!model.isEnabled()) {
-        		if(model.isSelected()) {
-        			altIcon = selectedIcon;
-        		} else {
-        			altIcon = disableIcon;
-        		} 
-        	} else if(model.isEnabled()) {
-        		if(model.isSelected()) {
-       				altIcon = selectedIcon;
-        		} 
-        	} 
-        }  
-        altIcon.paintIcon(c, g, iconRect.x, iconRect.y);
-        
-        // Draw the Text
-        if(text != null) {
-        	View v = (View) c.getClientProperty(BasicHTML.propertyKey);
-        	if (v != null) {
-        		v.paint(g, textRect);
-        	} else {
-        		int mnemIndex = b.getDisplayedMnemonicIndex();
-        		if(model.isEnabled()) {
-        			// *** paint the text normally
-        			g.setColor(b.getForeground());
-        		} else {
-        			// *** paint the text disabled
-        			g.setColor(getDisabledTextColor());
-        		}
-        		SwingUtilities2.drawStringUnderlineCharAt(c,g,text,
-        				mnemIndex, textRect.x, textRect.y + fm.getAscent());
-        	}
-        	if(b.hasFocus() && b.isFocusPainted() &&
-        			textRect.width > 0 && textRect.height > 0 ) {
-        		paintFocus(g,textRect,size);
-        	}
-        }
+	    } else if (model.isEnabled()) {
+		if (model.isSelected()) {
+		    altIcon = selectedIcon;
+		}
+	    }
 	}
+	altIcon.paintIcon(c, g, iconRect.x, iconRect.y);
+
+	// Draw the Text
+	if (text != null) {
+	    View v = (View) c.getClientProperty(BasicHTML.propertyKey);
+	    if (v != null) {
+		v.paint(g, textRect);
+	    } else {
+		int mnemIndex = b.getDisplayedMnemonicIndex();
+		if (model.isEnabled()) {
+		    // *** paint the text normally
+		    g.setColor(b.getForeground());
+		} else {
+		    // *** paint the text disabled
+		    g.setColor(getDisabledTextColor());
+		}
+		SwingUtilities2.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x, textRect.y
+			+ fm.getAscent());
+	    }
+	    if (b.hasFocus() && b.isFocusPainted() && textRect.width > 0 && textRect.height > 0) {
+		paintFocus(g, textRect, size);
+	    }
+	}
+    }
 }

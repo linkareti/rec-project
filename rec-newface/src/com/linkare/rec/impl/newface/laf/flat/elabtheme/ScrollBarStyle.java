@@ -18,33 +18,32 @@ import javax.swing.plaf.FontUIResource;
  * 
  * @author João FLorindo
  */
-public class ScrollBarStyle extends DefaultStyle{
+public class ScrollBarStyle extends DefaultStyle {
 
-	public static final String ID = "ScrollBar";
-	
-	//PROPERTIES
-	public static final String PT_WIDTH = "width";
+    public static final String ID = "ScrollBar";
 
-	/**
-	 * Creates the <code>ScrollBarStyle</code>.
-	 */
-	public ScrollBarStyle() {
-		super();
-	}
+    //PROPERTIES
+    public static final String PT_WIDTH = "width";
 
-	@Override
-	protected String defineStyleId() {
-		return ID;
-	}
+    /**
+     * Creates the <code>ScrollBarStyle</code>.
+     */
+    public ScrollBarStyle() {
+	super();
+    }
 
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-		map.put(PT_WIDTH, 18);
-	}
-	
-	// -------------------------------------------------------------------------
-	// TODO Getters (Used to marshal values to xml)
-	
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
+
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+	map.put(PT_WIDTH, 18);
+    }
+
+    // -------------------------------------------------------------------------
+    // TODO Getters (Used to marshal values to xml)
 
 }

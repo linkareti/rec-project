@@ -25,100 +25,93 @@ import javax.swing.plaf.basic.BasicMenuUI;
  * @author Henrique Fernandes
  * @author João Florindo
  */
-public class FlatLookAndFeel extends 
+public class FlatLookAndFeel extends
 //	SynthLookAndFeel // The LAF from Java 5
 	MetalLookAndFeel // The current base LAF for Flat 
 //BasicLookAndFeel // The initial default Base LAF for FlatLookAndFeel. 
 {
 
-	private static final Logger log = Logger.getLogger(FlatLookAndFeel.class.getName());
+    private static final Logger log = Logger.getLogger(FlatLookAndFeel.class.getName());
 
-	private static final long serialVersionUID = 3410155899630816365L;
+    private static final long serialVersionUID = 3410155899630816365L;
 
-	private FlatTheme theme;
+    private FlatTheme theme;
 
     /** Creates a new FlatLookAndFeel with the default ElabTheme */
-	public FlatLookAndFeel() {
-		this(new ElabTheme());
+    public FlatLookAndFeel() {
+	this(new ElabTheme());
+    }
+
+    /**
+     * Creates a new {@link FlatLookAndFeel} with the given Theme.
+     * 
+     * @param theme
+     */
+    public FlatLookAndFeel(FlatTheme theme) {
+	this.theme = theme;
+	// FIXME Disabled because it causes a bug on VideoCanvas rendering
+	//FlatFocusRenderer.install(); // Setup focus
+    }
+
+    @Override
+    public String getID() {
+	return "Flat";
+    }
+
+    @Override
+    public String getName() {
+	return "FlatLaf";
+    }
+
+    @Override
+    public String getDescription() {
+	return "Flat Look And Feel";
+    }
+
+    @Override
+    public boolean isNativeLookAndFeel() {
+	return false;
+    }
+
+    @Override
+    public boolean isSupportedLookAndFeel() {
+	return true;
+    }
+
+    public FlatTheme getTheme() {
+	return theme;
+    }
+
+    @Override
+    protected void initClassDefaults(UIDefaults table) {
+	super.initClassDefaults(table);
+
+	Object[] classDefaults = { "SplitPaneUI", BasicSplitPaneUI.class.getName(), "ScrollBarUI",
+		FlatScrollBarUI.class.getName(), "ComboBoxUI", FlatComboBoxUI.class.getName(), "TabbedPaneUI",
+		FlatTabbedPaneUI.class.getName(), "MenuUI", BasicMenuUI.class.getName(),
+		// TODO Change Names
+		"FlatButtonUI", FlatButtonUI.class.getName(), "ButtonUI", FlatOriginalButtonUI.class.getName(),
+
+		"RadioButtonUI", FlatRadioButtonUI.class.getName(), "CheckBoxUI", FlatCheckBoxUI.class.getName(),
+		"SliderUI", FlatSliderUI.class.getName(), "FlatTableUI", FlatTableUI.class.getName(), };
+
+	if (log.isLoggable(Level.FINER)) {
+	    log.finer("FlatLookAndFeel Class Defaults: " + Arrays.deepToString(classDefaults));
 	}
 
-	/**
-	 * Creates a new {@link FlatLookAndFeel} with the given Theme.
-	 * @param theme 
-	 */
-	public FlatLookAndFeel(FlatTheme theme) {
-		this.theme = theme;
-		// FIXME Disabled because it causes a bug on VideoCanvas rendering
-        //FlatFocusRenderer.install(); // Setup focus
-	}
+	table.putDefaults(classDefaults);
+    }
 
-	@Override
-	public String getID() {
-		return "Flat";
-	}
+    @Override
+    protected void initComponentDefaults(UIDefaults table) {
+	super.initComponentDefaults(table);
+	// TODO Set key bindings like Nimbus LAF
+    }
 
-	@Override
-	public String getName() {
-		return "FlatLaf";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Flat Look And Feel";
-	}
-
-	@Override
-	public boolean isNativeLookAndFeel() {
-		return false;
-	}
-
-	@Override
-	public boolean isSupportedLookAndFeel() {
-		return true;
-	}
-
-	public FlatTheme getTheme() {
-		return theme;
-	}
-
-	@Override
-	protected void initClassDefaults(UIDefaults table)
-	{
-		super.initClassDefaults(table);
-
-		Object[] classDefaults = {
-				"SplitPaneUI", BasicSplitPaneUI.class.getName(),
-				"ScrollBarUI", FlatScrollBarUI.class.getName(),
-				"ComboBoxUI", FlatComboBoxUI.class.getName(),
-				"TabbedPaneUI", FlatTabbedPaneUI.class.getName(),
-				"MenuUI", BasicMenuUI.class.getName(),
-				// TODO Change Names
-				"FlatButtonUI", FlatButtonUI.class.getName(),
-				"ButtonUI", FlatOriginalButtonUI.class.getName(),
-				
-				"RadioButtonUI", FlatRadioButtonUI.class.getName(),
-				"CheckBoxUI", FlatCheckBoxUI.class.getName(),
-				"SliderUI", FlatSliderUI.class.getName(),
-				"FlatTableUI", FlatTableUI.class.getName(), 
-		};
-
-		if (log.isLoggable(Level.FINER)) {
-			log.finer("FlatLookAndFeel Class Defaults: " + Arrays.deepToString(classDefaults));
-		}
-
-		table.putDefaults(classDefaults);
-	}
-
-	@Override
-	protected void initComponentDefaults(UIDefaults table) {
-		super.initComponentDefaults(table);
-		// TODO Set key bindings like Nimbus LAF
-	}
-
-	@Override
-	public UIDefaults getDefaults() {
-		UIDefaults table = super.getDefaults();
-		theme.addCustomEntriesToTable(table);
-		return table;
-	}
+    @Override
+    public UIDefaults getDefaults() {
+	UIDefaults table = super.getDefaults();
+	theme.addCustomEntriesToTable(table);
+	return table;
+    }
 }

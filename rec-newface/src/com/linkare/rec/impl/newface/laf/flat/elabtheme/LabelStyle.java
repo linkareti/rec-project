@@ -15,32 +15,31 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
  */
 @Style
 public class LabelStyle extends DefaultStyle {
-	
-	public static final String ID = "Label";
-	
-	/**
-	 * Creates the <code>TextFieldStyle</code>.
-	 */
-	public LabelStyle() {
-		super();
-	}
 
-	@Override
-	protected String defineStyleId() {
-		return ID;
-	}
+    public static final String ID = "Label";
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void updatePropertyMap(Map<String, Object> map) {
-		super.updatePropertyMap(map);
-		map.remove(FOREGROUND);
-	}
-	
-	
-	// -------------------------------------------------------------------------
-	// TODO Getters (Used to marshal values to xml)
-	
+    /**
+     * Creates the <code>TextFieldStyle</code>.
+     */
+    public LabelStyle() {
+	super();
+    }
+
+    @Override
+    protected String defineStyleId() {
+	return ID;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updatePropertyMap(Map<String, Object> map) {
+	super.updatePropertyMap(map);
+	map.remove(FOREGROUND);
+    }
+
+    // -------------------------------------------------------------------------
+    // TODO Getters (Used to marshal values to xml)
+
 }

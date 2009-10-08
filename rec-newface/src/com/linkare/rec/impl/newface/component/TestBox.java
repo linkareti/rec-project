@@ -11,11 +11,11 @@ import com.linkare.rec.impl.newface.laf.flat.Focus;
 import javax.swing.JTextField;
 
 /**
- *
+ * 
  * @author Henrique Fernandes
  */
-@Focus(display=false)
-public class TestBox extends JTextField{
+@Focus(display = false)
+public class TestBox extends JTextField {
 
     public TestBox() {
     }

@@ -7,6 +7,6 @@ import java.util.EventObject;
  */
 public class MediaTimeChangedEvent extends EventObject {
     public MediaTimeChangedEvent(Object source) {
-        super(source);
+	super(source);
     }
 }
