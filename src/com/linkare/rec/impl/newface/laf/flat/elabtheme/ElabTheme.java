@@ -84,6 +84,7 @@ public class ElabTheme extends FlatTheme {
 		result.add(PasswordFieldStyle.class);
 		result.add(ToolBarStyle.class);
 		result.add(LabelStyle.class);
+		result.add(EditorPaneStyle.class);
 		result.add(MenuStyle.class);
 		result.add(SplitPaneDividerStyle.class);
 		result.add(ScrollBarStyle.class);
@@ -96,8 +97,9 @@ public class ElabTheme extends FlatTheme {
 		result.add(RadioButtonStyle.class);
 		result.add(CheckBoxStyle.class);
 		result.add(SliderStyle.class);
-		result.add(TableStyle.class);
-		
+		result.add(ScrollPaneStyle.class);
+		result.add(FlatScrollPaneStyle.class);
+		result.add(TableHeaderStyle.class);
 		
 		return result;
 	}

@@ -1,6 +1,7 @@
 package com.linkare.rec.impl.newface.component;
 
 import com.linkare.rec.impl.newface.ReCApplication;
+import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
 import com.linkare.rec.impl.newface.component.media.transcoding.AudioCodecs;
 import com.linkare.rec.impl.newface.component.media.transcoding.Muxers;
@@ -9,6 +10,7 @@ import com.linkare.rec.impl.newface.component.media.transcoding.VideoCodecs;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEventListener;
 import com.linkare.rec.impl.newface.component.media.MediaSetup;
+import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
 import java.awt.Window;
 import java.io.File;
 import java.text.DateFormat;
@@ -39,11 +41,17 @@ public class TestMediaPane extends AbstractContentPane {
 
     private boolean attached = true;
 
+//    private String mrl;
+
     public static void main(final String[] args) {
 
+        System.out.println("A listar system properties.... ");
+        
         for (Map.Entry<Object,Object> map : System.getProperties().entrySet())
             System.out.println(map.getKey() + " = " + map.getValue());
+        
         MediaSetup.setup();
+        
         Application.launch(MediaPaneVisualCheck.class, args);
     }
 
@@ -56,6 +64,7 @@ public class TestMediaPane extends AbstractContentPane {
         super(container);
         String[] arg = MediaSetup.getDefaultMediaParameters();
         controller = VideoViewerController.getInstance(arg);
+        controller.setMediaToPlay(MRL);
         initComponents();
     }
 
@@ -87,7 +96,18 @@ public class TestMediaPane extends AbstractContentPane {
         );
 
         this.add(vbox);
-        controller.addMediaTimeChangedEventListener(new MediaTimeChangedEventListener() {
+        controller.addMediaApplicationEventListener(new MediaApplicationEventListener() {
+
+            @Override
+            public void notConnected(MediaStoppedEvent evt) {
+                slider.setValue(0);
+            }
+
+            @Override
+            public void stopped(MediaStoppedEvent evt) {
+                slider.setValue(0);
+            }
+
             @Override
             public void timeChanged(MediaTimeChangedEvent evt) {
                 adjustSlider();
@@ -117,11 +137,8 @@ public class TestMediaPane extends AbstractContentPane {
         button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (!controller.willPlay()) {
-                    System.out.println("Entrou no willPlay");
-                    controller.setMediaToPlay(MRL);
-                    System.out.println("Fez set do media");
-                }
+
+//                System.out.println("Vai tocar " + controller.getCurrentMedia());
 
                 if (!controller.hasVideoOutput())
                     setVideoOutput();
@@ -179,6 +196,7 @@ public class TestMediaPane extends AbstractContentPane {
 
                     com.linkare.rec.impl.newface.component.media.VideoBox newBox = new com.linkare.rec.impl.newface.component.media.VideoBox();
                     newBox.changeSize(800, 600);
+//                    newBox.changeVideoOutputSize(800, 600);
                     newBox.setVisible(true);
                     newBox.getVideoOutput().setSize(800, 600);
                     frame.add(newBox);
@@ -423,8 +441,6 @@ public class TestMediaPane extends AbstractContentPane {
         protected void showView() {
             TestMediaPane tmp = new TestMediaPane();
             DefaultDialog<TestMediaPane> dialog = new DefaultDialog<TestMediaPane>(tmp);
-//            tmp.setMediaToPlay(MRL);
-//            tmp.setVideoOutput();
             dialog.setVisible(true);
             System.exit(0);
         }

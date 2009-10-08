@@ -86,9 +86,9 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
         USERMESSAGE_TEMPLATE = userMessageTemplate.toString();
         CHAT_TEMPLATE = chatTemplateResult.toString();
         
-        if (log.isLoggable(Level.FINE)) {
-			log.fine(USERMESSAGE_TEMPLATE);
-			log.fine(CHAT_TEMPLATE);
+        if (log.isLoggable(Level.FINER)) {
+			log.finer(USERMESSAGE_TEMPLATE);
+			log.finer(CHAT_TEMPLATE);
 		}
     }
 
@@ -207,7 +207,6 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
     			log.log(Level.SEVERE, "Trying to insert html element", e);
     		}
 
-            log.fine("dasasdasdasdasdasd");
             msgPane.scrollToReference(MESSAGE_LIST_END);
     	}
     }

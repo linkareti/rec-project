@@ -11,6 +11,13 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Component;
+
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+
+import com.linkare.rec.impl.client.experiment.ExperimentHistory;
+
 /**
  *
  * @author iies-consultor922
@@ -60,6 +67,11 @@ public class ExperimentHistoryBox extends AbstractContentPane {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void addExperimentHistory(ExperimentHistory expHist){
+    	JComponent comp = new ExpHistoryPanel(expHist);
+    	experimentHistoryList.add(comp);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList experimentHistoryList;

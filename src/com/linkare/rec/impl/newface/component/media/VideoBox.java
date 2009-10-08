@@ -1,12 +1,13 @@
 package com.linkare.rec.impl.newface.component.media;
 
+import com.linkare.rec.impl.newface.component.AbstractContentPane;
 import java.awt.Canvas;
 
 /**
  * Painel de vídeo da aplicação.
  * @author bcatarino
  */
-public class VideoBox extends javax.swing.JPanel {
+public class VideoBox extends AbstractContentPane {
 
     /** Creates new form VideoPanel */
     public VideoBox() {

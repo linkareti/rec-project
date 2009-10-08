@@ -4,9 +4,12 @@
 
 package com.linkare.rec.impl.newface;
 
-import static com.linkare.rec.impl.newface.ReCApplication.NavigationWorkflow.*;
+import static com.linkare.rec.impl.newface.NavigationWorkflow.*;
+import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State.*;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -15,10 +18,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.Timer;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.FrameView;
@@ -26,8 +31,11 @@ import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.TaskMonitor;
 
+import com.linkare.rec.impl.baseUI.ExperimentInternalFrame;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
+import com.linkare.rec.impl.client.customizer.ICustomizerListener;
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent;
@@ -35,17 +43,25 @@ import com.linkare.rec.impl.newface.component.AbstractContentPane;
 import com.linkare.rec.impl.newface.component.ApparatusCombo;
 import com.linkare.rec.impl.newface.component.ApparatusDescriptionPane;
 import com.linkare.rec.impl.newface.component.ApparatusSelectBox;
+import com.linkare.rec.impl.newface.component.ApparatusTabbedPane;
+import com.linkare.rec.impl.newface.component.ApparatusUserList;
 import com.linkare.rec.impl.newface.component.ChatBox;
+import com.linkare.rec.impl.newface.component.ExpHistoryPanel;
+import com.linkare.rec.impl.newface.component.ExperimentActionBar;
 import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
 import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.GlassLayer;
 import com.linkare.rec.impl.newface.component.LayoutContainerPane;
+import com.linkare.rec.impl.newface.component.MessagePane;
+import com.linkare.rec.impl.newface.component.ResultsPane;
 import com.linkare.rec.impl.newface.component.SimpleLoginBox;
+import com.linkare.rec.impl.newface.component.StatusActionBar;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
 import com.linkare.rec.impl.newface.component.VideoBox;
 import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
 import com.linkare.rec.impl.newface.config.Apparatus;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
+import com.linkare.rec.impl.newface.utils.TimeUtils;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 
 /**
@@ -55,14 +71,18 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
     private static final Logger log = Logger.getLogger(ReCFrameView.class.getName());
 
-    private static final Dimension DEFAULT_FRAME_SIZE = new Dimension(848, 478);
+    //private static final Dimension DEFAULT_FRAME_SIZE = new Dimension(848, 478);
 
     // For now, application model is unique. So there is no need for abstraction here.
     private ReCApplication recApplication = ReCApplication.getApplication();
 
     private List<AbstractContentPane> interactiveBoxes;
 
-	private boolean firstSelectedApparatusConfigChange = true;
+	private boolean firstSelectedApparatusChange = true;
+
+	private long apparatusLockInitialTimeMs;
+
+	private long millisToLockSuccess;
     
     public ReCFrameView(SingleFrameApplication app) {
         super(app);
@@ -84,8 +104,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         collectInterativeBoxes();
         
         // Set frame properties
-        getFrame().setPreferredSize(DEFAULT_FRAME_SIZE);
-        getFrame().setResizable(false);
+        //getFrame().setPreferredSize(DEFAULT_FRAME_SIZE);
+        //getFrame().setResizable(false); 
         getFrame().setGlassPane(glassPane);
         
         // Add Apparatus Combo Item listener
@@ -101,6 +121,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         // Hide status indicators
         //lblTaskMessage.setVisible(false);
         //progressCicleTask.setVisible(false);
+        
+        // Init timers
+		apparatusLockTimer = new Timer(999, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				apparatusLockTimerTick();
+			}
+		});
         
         // Hide bottom status pane
         statusPanel.setVisible(false);
@@ -140,6 +168,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         interactiveBoxes.add(getApparatusDescriptionPane());
         interactiveBoxes.add(getVideoBox());
         interactiveBoxes.add(getChatBox());
+//        interactiveBoxes.add(getApparatusUserListPane());
 	}
 	
 	public void setInteractiveBoxesEnabled(boolean enabled) {
@@ -152,6 +181,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		return layoutContainerPane;
 	}
     
+    private ApparatusUserList getApparatusUserListPane() {
+		return getLayoutContainerPane().getApparatusUserList();
+	}
+    
     private ChatBox getChatBox() {
 		return getLayoutContainerPane().getMediaPane().getChatBox();
 	}
@@ -162,6 +195,23 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private ApparatusDescriptionPane getApparatusDescriptionPane() {
 		return getLayoutContainerPane().getApparatusDescriptionPane();
+	}
+	
+	private ApparatusTabbedPane getApparatusTabbedPane() {
+		return getLayoutContainerPane().getApparatusTabbedPane();
+	}
+	
+	private ExperimentActionBar getExperimentActionBar() {
+		return getApparatusTabbedPane().getExperimentActionBar();
+	}
+	
+	private StatusActionBar getExperimentStatusActionBar() {
+		StatusActionBar result = null;
+		ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
+		if (apparatusTabbedPane != null) {
+			result = apparatusTabbedPane.getExperimentStatusActionBar();
+		}
+		return result;
 	}
 
 	private ExperimentHistoryBox getExperimentHistoryBox() {
@@ -221,7 +271,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
     @Action
     public void toggleConnectionState() {
-        if (recApplication.getCurrentState().canGoTo(CONNECT_PERFORMED)) {
+        if (recApplication.getCurrentState().canGoTo(LAB_CONNECT_PERFORMED)) {
         	// Perform connect
             showLoginBox();
 
@@ -235,6 +285,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		setGlassPaneVisible(true);
 
 		// Get username
+		getLoginBox().getContent().setLoginProgressVisible(false);
 		getLoginBox().setVisible(true);
 	}
 
@@ -254,20 +305,16 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         return toggleConnectionStateAction;
     }
     
+    // Listen to user input
     @Override
 	public void itemStateChanged(ItemEvent evt) {
-    	if ( evt == null ) 
+    	if ( evt == null ) {
     		return;
-    	
-    	// ApparatusCombo selection change
+    	}
+    	// Listen to ApparatusCombo selection change
     	if (getApparatusCombo() == evt.getSource()) {
 	    	if (ItemEvent.SELECTED == evt.getStateChange()) {
-	    		if (log.isLoggable(Level.FINE)) {
-	    			log.fine(evt.toString());
-	    		}
-	    		
 	    		Apparatus apparatus = (Apparatus) evt.getItem();
-	    		
 	    		recApplication.setSelectedApparatusConfig(apparatus);
 	    	}
     	}
@@ -283,17 +330,25 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	        case SHOW_LOGIN:
 	        	showLoginBox();
 	            break;
-	            
-	        case SELECTED_APPARATUS_CONFIG_CHANGE:
-	        	if (firstSelectedApparatusConfigChange) {
-	        		getLayoutContainerPane().getApparatusDescriptionPane().setFieldsVisible(true);
-	        		firstSelectedApparatusConfigChange = false;
-	        	}
-	        	Apparatus selectedApparatusConfig = recApplication.getSelectedApparatusConfig();
-	        	
-	        	getApparatusDescriptionPane().setApparatusConfig(selectedApparatusConfig);
+	        case SELECTED_APPARATUS_CHANGE:
+	        	selectedApparatusChange();
                 break;
+	        case APPARATUS_CONFIGURED:
+	        	//TODO APPARATUS_CONFIGURED
+	        	break;
+	        case CUSTOMIZER_CANCELED:
+	        	//TODO CUSTOMIZER_CANCELED
+	        	break;
     	}
+	}
+
+	private void selectedApparatusChange() {
+		if (firstSelectedApparatusChange) {
+			getApparatusDescriptionPane().setFieldsVisible(true);
+			firstSelectedApparatusChange = false;
+		}
+		getApparatusDescriptionPane().setApparatusConfig(
+				recApplication.getSelectedApparatusConfig());
 	}
 
     @Override
@@ -308,12 +363,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
                 break;
 
             case LabConnectorEvent.STATUS_CONNECTED:
-                toolBtnConnect.setAction(toggleConnectionStateActionData(true));
-                updateStatus(getResourceMap().getString("lblTaskMessage.connected.text", recApplication.getUsername(), recApplication.getCurrentLabName()));
-                setInteractiveBoxesEnabled(true);
-                getLoginBox().setVisible(false);
-                setGlassPaneVisible(false);
-                firstSelectedApparatusConfigChange = true;
+                connectToLaboratory();
                 break;
 
             case LabConnectorEvent.STATUS_NOT_AUTHORIZED:
@@ -334,21 +384,34 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
                 break;
 
             case LabConnectorEvent.STATUS_DISCONNECTED:
-                toolBtnConnect.setAction(toggleConnectionStateActionData(false));
-                updateStatus(getResourceMap().getString("lblTaskMessage.disconnected.text"));
-                getLayoutContainerPane().getApparatusDescriptionPane().setFieldsVisible(false);
-                setInteractiveBoxesEnabled(false);
-                progressCicleTask.stop();
+                disconnectFromLaboratory();
                 break;
 
         }
     }
 
+	private void connectToLaboratory() {
+		toolBtnConnect.setAction(toggleConnectionStateActionData(true));
+		updateStatus(getResourceMap().getString("lblTaskMessage.connected.text", recApplication.getUsername(), recApplication.getCurrentLabName()));
+		setInteractiveBoxesEnabled(true);
+		getLoginBox().setVisible(false);
+		setGlassPaneVisible(false);
+		firstSelectedApparatusChange = true;
+	}
+	
+	private void disconnectFromLaboratory() {
+		toolBtnConnect.setAction(toggleConnectionStateActionData(false));
+		updateStatus(getResourceMap().getString("lblTaskMessage.disconnected.text"));
+		disconnectFromApparatus();
+		getLayoutContainerPane().getApparatusDescriptionPane().setFieldsVisible(false);
+		setInteractiveBoxesEnabled(false);
+		progressCicleTask.stop();
+	}
+
 	@Override
 	public void apparatusListChanged(ApparatusListChangeEvent evt) {
 		if (recApplication.getCurrentState().matches(CONNECTED_TO_LAB)) {
 			getApparatusCombo().setEnabled(true);
-			recApplication.setSelectedApparatusConfig((Apparatus) getApparatusCombo().getSelectedItem());
 		}
 	}
 	
@@ -356,40 +419,237 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	public void apparatusStateChanged(ApparatusEvent eventSelector, ApparatusConnectorEvent evt) {
 		
 		switch (eventSelector) {
+			case CONNECTING:
+				getApparatusSelectBox().getProgressCicle().start();
+				connectingToApparatus();
+				break;
 			case CONNECTED:
-				// FIXME update
-				getButtonToggleEnter().setText("SAIR");
-				// FIXME this is fixing the focus repaint problem. Find a better way.
-				getApparatusSelectBox().repaint();
-				
-				getApparatusCombo().setEnabled(false);
-				
-				getLayoutContainerPane().enableApparatusTabbedPane();
+				connectToApparatus();
+				getApparatusSelectBox().getProgressCicle().stop();
 				break;
-	
-			default:
+			case DISCONNECTING:
+				// TODO
 				break;
+			case DISCONNECTED:
+				disconnectFromApparatus();
+				break;
+			case LOCKABLE:
+				lockableApparatus(evt);
+				break;
+			case LOCKED:
+				lockApparatus();
+				break;
+			case STATECONFIGURING:
+				break;
+			case STATECONFIGURED:
+				configuredApparatus();
+				break;
+			case INCORRECTSTATE:
+				break;
+			case MAXUSERS:
+				break;
+			case NOTAUTHORIZED:
+				break;
+			case NOTOWNER:
+				break;
+			case NOTREGISTERED:
+				break;
+			case STATECONFIGERROR:
+				break;
+			case STATERESETING:
+				break;
+			case STATERESETED:
+				break;
+			case STATESTARTING:
+				startingExperiment();
+				progressCicleTask.start();
+				break;
+			case STATESTARTED:
+				startedExperiment();
+				showExperimentResults();
+				break;
+			case STATESTOPING:
+				break;
+			case STATESTOPED:
+				stopedExperiment();
+				progressCicleTask.stop();
+				break;
+			case STATEUNKNOW:
+				progressCicleTask.stop();
+				break;
+			case UNREACHABLE:
+				progressCicleTask.stop();
+				break;	
 		}
 	}
 	
-	// TODO
+	private void connectingToApparatus() {
+		// Goto results tab
+		ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
+		if (apparatusTabbedPane != null) {
+			apparatusTabbedPane.setSelectedTabIndex(ApparatusTabbedPane.TAB_DESCRIPTION);
+			apparatusTabbedPane.setTabIndexEnabled(ApparatusTabbedPane.TAB_RESULTS, false);
+			//TODO Clear results pane
+		}
+	}
 	
-//	private javax.swing.Action toggleApparatusEnterActionData(boolean entered) {
-//        javax.swing.Action toggleConnectionStateAction =
-//                getContext().getActionMap(ReCFrameView.class, this).get("toggleConnectionState");
-//
-//        toggleConnectionStateAction.putValue(javax.swing.Action.NAME,
-//                getResourceMap().getString("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.text"));
-//        toggleConnectionStateAction.putValue(javax.swing.Action.SHORT_DESCRIPTION,
-//                getResourceMap().getString("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.shortDescription"));
-//        toggleConnectionStateAction.putValue(javax.swing.Action.SMALL_ICON,
-//                getResourceMap().getImageIcon("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.smallIcon"));
-//        toggleConnectionStateAction.putValue(javax.swing.Action.LARGE_ICON_KEY,
-//                getResourceMap().getImageIcon("toggleConnectionState"+ (connected ? "Disconnect" : "") +".Action.icon"));
-//
-//        return toggleConnectionStateAction;
-//    }
+	private void connectToApparatus() {
 
+        if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED) {
+            getVideoBox().initializeVideoOutput();
+            recApplication.setVideoOutput(getVideoBox().getVideoOutput());
+        }
+        
+		getApparatusSelectBox().toggleApparatusStateActionData(false);
+		
+		getApparatusCombo().setEnabled(false);
+		
+		getLayoutContainerPane().enableApparatusTabbedPane();
+		
+		updateStatus(getResourceMap().getString("lblTaskMessage.connectedToApparatus.text",
+				recApplication.getCurrentApparatusHardwareFamiliarName()));
+		
+		// Add customizer component
+		getApparatusTabbedPane().addCustomizerComponent(
+				recApplication.getCurrentCustomizer().getCustomizerComponent());
+		
+		// Update description pane
+		getApparatusDescriptionPane().setApparatusConfig(
+				recApplication.getSelectedApparatusConfig());
+		
+		long timeStart=System.currentTimeMillis();
+		//UserList Pane
+		// CRITICAL João: Verificar tempo e carga de execução destas chamadas e
+		// identificar se é uma situção com que temos mesmo de viver.
+		// TODO Carregar em background
+		getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
+		log.fine("Users List source took @ "+(System.currentTimeMillis()-timeStart)/1000+"s to start...");
+		timeStart=System.currentTimeMillis();
+		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getRecFaceConfig().getUsersListRefreshRateMs());
+
+		log.fine("Auto Refresh set took @ "+(System.currentTimeMillis()-timeStart)/1000+"s to do!");
+		//getApparatusUserListPane().getModel().chechRefresh();
+
+		
+		// Goto customizer tab
+		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_CUSTOMIZER);
+
+        // Show MessagePane
+		// CRITICAL Definir um Gestor de Popups
+        JPopupMenu popMenu = new JPopupMenu();
+        popMenu.setOpaque(false);
+        MessagePane messagePane = new MessagePane();
+        messagePane.setPreferredSize(new Dimension(getApparatusTabbedPane().getWidth() - 2, 60));
+        popMenu.add(messagePane);
+        popMenu.show(getApparatusTabbedPane(), 0, 
+        		getApparatusTabbedPane().getHeight() - getApparatusTabbedPane().getExperimentActionBar().getHeight() - messagePane.getPreferredSize().height);
+        // CRITICAL Definir um Gestor de Popups
+	}
+	
+	private void disconnectFromApparatus() {
+        if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED) {
+            getVideoBox().destroyVideoOutput();
+        }
+        
+        StatusActionBar experimentStatusActionBar = getExperimentStatusActionBar();
+        if (experimentStatusActionBar != null) {
+        	experimentStatusActionBar.setActionStateLabelVisible(false);
+        }
+        
+		getApparatusSelectBox().toggleApparatusStateActionData(true);
+		
+		getApparatusCombo().setEnabled(true);
+		
+		getLayoutContainerPane().disableApparatusTabbedPane();
+		
+		updateStatus(getResourceMap().getString("lblTaskMessage.connectedToLab.text",
+				recApplication.getCurrentLabName()));
+	}
+	
+	/**
+	 * @param evt
+	 */
+	private void lockableApparatus(ApparatusConnectorEvent evt) {
+		millisToLockSuccess = evt.getMillisToLockSuccess();
+		
+		apparatusLockInitialTimeMs = TimeUtils.getSystemCurrentTimeMs();
+		
+		getExperimentStatusActionBar().setActionStateText(
+				recApplication.getContext().getResourceMap(StatusActionBar.class).getString(
+						"lblActionState.apparatusLockable.text", TimeUtils.msToSeconds(millisToLockSuccess)), GREEN);
+
+		getExperimentStatusActionBar().setActionStateLabelVisible(true);
+		
+		apparatusLockTimer.start();
+	}
+	
+	private void lockApparatus() {
+		apparatusLockTimer.stop();
+	}
+
+	private void configuredApparatus() {
+		getExperimentStatusActionBar().setActionStateText(recApplication.getContext().getResourceMap(StatusActionBar.class).getString(
+						"lblActionState.apparatusConfigured.text"), GREEN);
+	}
+	
+	private void startingExperiment() {
+		getExperimentStatusActionBar().setActionStateText(recApplication.getContext().getResourceMap(StatusActionBar.class).getString(
+						"lblActionState.apparatusStarting.text"), YELLOW);
+	}
+	
+	private void startedExperiment() {
+		// Goto results tab
+		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_RESULTS);
+		getExperimentStatusActionBar().setActionStateText(recApplication.getContext().getResourceMap(StatusActionBar.class).getString(
+						"lblActionState.apparatusStarted.text"), YELLOW);
+	}
+	
+	private void stopedExperiment() {
+		getExperimentStatusActionBar().setActionStateText(recApplication.getContext().getResourceMap(StatusActionBar.class).getString(
+						"lblActionState.apparatusStoped.text"), RED);
+	}
+
+	private void showExperimentResults() {
+		
+//      statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.started", "Started..."));
+		getExperimentHistoryBox().addExperimentHistory(recApplication.getExperimentHistory());
+		log.fine("........lkhkjlk.....");
+//      controllerPanel.setEnablePlay(false);
+//      controllerPanel.setEnableStop(true);
+		
+		ResultsPane resultsPane = new ResultsPane();
+		resultsPane.setExperimentDataModel(recApplication.getExperimentDataModel());
+		
+		for(ExpDataDisplay display : recApplication.getExperimentDataDisplays()) {
+			resultsPane.addExperimentDataDisplay(display);
+		}
+		resultsPane.finishedAddingDataDisplays();
+		
+		JPanel resultsHolderPane = getApparatusTabbedPane().getResultsHolderPane();
+		resultsHolderPane.add(resultsPane);
+		
+		getApparatusTabbedPane().setTabIndexEnabled(ApparatusTabbedPane.TAB_RESULTS, true);
+	}
+	
+	private void apparatusLockTimerTick() {
+		long lockCountDown = TimeUtils.msToSeconds(
+				millisToLockSuccess - (TimeUtils.getSystemCurrentTimeMs() - apparatusLockInitialTimeMs));
+
+		boolean lockCountDownGreaterThanZero = lockCountDown > 0;
+		
+		if (lockCountDownGreaterThanZero) {
+			getExperimentStatusActionBar().setActionStateText(
+					recApplication.getContext().getResourceMap(StatusActionBar.class).getString(
+							"lblActionState.apparatusLockable.text", lockCountDown), GREEN);
+		}
+	
+		if ( getExperimentActionBar().isPlayStopButtonEnabled() != lockCountDownGreaterThanZero ) {
+			getExperimentActionBar().setPlayStopButtonEnabled(lockCountDownGreaterThanZero);
+		}
+	}
+	
+	
+	
 	/** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -420,6 +680,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
         mainPanel.setAutoscrolls(true);
         mainPanel.setName("mainPanel"); // NOI18N
+        mainPanel.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+                onResize(evt);
+            }
+        });
         mainPanel.setLayout(new java.awt.BorderLayout());
 
         toolBar.setFloatable(false);
@@ -543,11 +810,22 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     }// </editor-fold>//GEN-END:initComponents
 
     private void toolBtnConnectPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_toolBtnConnectPropertyChange
-        if ("text".equals(evt.getPropertyName())) {
-            // Disable text display on toggle connection state button
+    	if ("text".equals(evt.getPropertyName())) {
+            // Disable text display on toggle connection state button from toolbar
             ((JButton)evt.getSource()).setText("");
         }
     }//GEN-LAST:event_toolBtnConnectPropertyChange
+
+    private void onResize(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_onResize
+        if (log.isLoggable(Level.FINE)) {
+			log.fine("ReC Resize: Navigation=" + layoutContainerPane.getNavigationPane().getSize() + 
+					" Media=" + layoutContainerPane.getMediaPane().getSize() + 
+					" Center=" + layoutContainerPane.getApparatusDescriptionPane().getSize() + 
+					" LayoutContainer=" + layoutContainerPane.getSize() + 
+					" Frame=" + getFrame().getSize()
+			);
+		}
+    }//GEN-LAST:event_onResize
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -567,8 +845,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     // End of variables declaration//GEN-END:variables
 
 //    private final Timer messageTimer;
-    private final Icon idleIcon;
-    private final Icon[] busyIcons = new Icon[15];
+    private Timer apparatusLockTimer;
+    public static Icon idleIcon;
+    public static Icon[] busyIcons = new Icon[15];
     private final int busyAnimationRate;
 
     private JDialog aboutBox;

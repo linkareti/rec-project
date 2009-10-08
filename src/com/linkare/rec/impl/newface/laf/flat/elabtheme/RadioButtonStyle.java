@@ -6,17 +6,24 @@
  */
 package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
+import java.awt.Color;
+import java.util.Map;
+
 /**
  * 
  * @author joao
  */
 public class RadioButtonStyle extends DefaultStyle {
 
-	public static final String ID = "CheckBox";
+	public static final String ID = "RadioButton";
+	
+	//COLORS	
+	private static final Color COLOR_RADIOBUTTON_FG = new Color(0x515151);
+	private static final Color COLOR_RADIOBUTTON_BG = new Color(0xE4EEED);
 	
 	
 	/**
-	 * Creates the <code>ComboBoxStyle</code>.
+	 * Creates the <code>RadioButtonStyle</code>.
 	 */
 	public RadioButtonStyle() {
 		super();
@@ -25,6 +32,13 @@ public class RadioButtonStyle extends DefaultStyle {
 	@Override
 	protected String defineStyleId() {
 		return ID;
+	}
+	
+	@Override
+	public void updatePropertyMap(Map<String, Object> map) {
+		super.updatePropertyMap(map);
+		map.put(FOREGROUND, COLOR_RADIOBUTTON_FG);
+		map.put(BACKGROUND, COLOR_RADIOBUTTON_BG);
 	}
 
 }

@@ -66,13 +66,13 @@ public class FlatRadioButtonUI extends MetalRadioButtonUI {
         Icon disableIcon = null;
         
         if(b instanceof javax.swing.JRadioButton){
-        	altIcon = new javax.swing.ImageIcon(getClass().getResource("./resources/radioButton.png"));
-        	selectedIcon = new javax.swing.ImageIcon(getClass().getResource("./resources/radioButtonSelected.png"));
-        	disableIcon = new javax.swing.ImageIcon(getClass().getResource("./resources/radioButtonDisable.png"));
+        	altIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/radioButton.png"));
+        	selectedIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/radioButtonSelected.png"));
+        	disableIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/radioButtonDisable.png"));
 		}else if(b instanceof javax.swing.JCheckBox){
-			altIcon = new javax.swing.ImageIcon(getClass().getResource("./resources/checkBox.png"));
-			selectedIcon = new javax.swing.ImageIcon(getClass().getResource("./resources/checkBoxSelected.png"));
-			disableIcon = new javax.swing.ImageIcon(getClass().getResource("./resources/checkBoxDisable.png"));
+			altIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/checkBox.png"));
+			selectedIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/checkBoxSelected.png"));
+			disableIcon = new javax.swing.ImageIcon(FlatRadioButtonUI.class.getResource("resources/checkBoxDisable.png"));
 		}
         
         String text = SwingUtilities.layoutCompoundLabel(

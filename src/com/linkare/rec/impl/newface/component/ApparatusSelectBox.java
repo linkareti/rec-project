@@ -11,27 +11,77 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.util.logging.Logger;
+
+import org.jdesktop.application.Action;
+
 import com.linkare.rec.impl.newface.ReCApplication;
+import com.linkare.rec.impl.newface.ReCFrameView;
 
 /**
  *
  * @author Henrique Fernandes
  */
 public class ApparatusSelectBox extends AbstractContentPane {
+	
+	private static final Logger log = Logger.getLogger(ApparatusSelectBox.class
+			.getName());
 
-    private ReCApplication recApplication = ReCApplication.getApplication();
-    
+	private ReCApplication recApplication = ReCApplication.getApplication();
+	
     /** Creates new form ApparatusSelectBox */
     public ApparatusSelectBox() {
         initComponents();
+        
+        progressCicle.setBusyIcons(ReCFrameView.busyIcons);
     }
     
-    public ApparatusCombo getApparatusCombo() {
+	public ApparatusCombo getApparatusCombo() {
 		return apparatusCombo;
 	}
     
     public FlatButton getButtonToggleEnter() {
 		return btnToggleEnter;
+	}
+    
+//    public void setProgressVisible(boolean visible) {
+//        progressCicle.setVisible(visible);
+//        progressCicle.setState(visible ? State.RUNNING : State.IDLE);
+//    }
+    
+    /**
+	 * @return the progressCicle
+	 */
+	public com.linkare.rec.impl.newface.component.ProgressCicle getProgressCicle() {
+		return progressCicle;
+	}
+
+	public void toggleApparatusStateActionData(boolean connected) {
+    	
+    	javax.swing.Action toggleApparatusStateAction =
+    		getContext().getActionMap(ReCApplication.class, getRecApplication()).get("toggleApparatusState");
+
+    	toggleApparatusStateAction.putValue(javax.swing.Action.NAME,
+    			getContext().getResourceMap().getString("toggleApparatusState"+ (connected ? "" : "Disconnect") +".Action.text"));
+    	toggleApparatusStateAction.putValue(javax.swing.Action.SHORT_DESCRIPTION,
+    			getContext().getResourceMap().getString("toggleApparatusState"+ (connected ? "" : "Disconnect") +".Action.shortDescription"));
+    		
+    	if(connected){
+    		btnToggleEnter.setGradientBottom(FlatButton.GRADIENTBOTTOM_OFF);
+    		btnToggleEnter.setGradientTop(FlatButton.GRADIENTTOP_OFF);
+    		btnToggleEnter.setForeground(FlatButton.FOREGROUND_OFF);
+    		btnToggleEnter.setBorderColor(FlatButton.COLORBORDER_OFF);
+    	}else{
+    		btnToggleEnter.setGradientBottom(FlatButton.GRADIENTBOTTOM_ON);
+    		btnToggleEnter.setGradientTop(FlatButton.GRADIENTTOP_ON);
+    		btnToggleEnter.setForeground(FlatButton.FOREGROUND_ON);
+    		btnToggleEnter.setBorderColor(FlatButton.COLORBORDER_ON);
+    	}
+    	
+    	btnToggleEnter.setAction(toggleApparatusStateAction);
+    	
+    	// TODO this is fixing the focus repaint problem. Find a better way.
+    	repaint();
 	}
 
     /** This method is called from within the constructor to
@@ -46,6 +96,7 @@ public class ApparatusSelectBox extends AbstractContentPane {
         lblChooseApparatus = new javax.swing.JLabel();
         apparatusCombo = new com.linkare.rec.impl.newface.component.ApparatusCombo();
         btnToggleEnter = new com.linkare.rec.impl.newface.component.FlatButton();
+        progressCicle = new com.linkare.rec.impl.newface.component.ProgressCicle();
 
         setName("Form"); // NOI18N
 
@@ -54,14 +105,17 @@ public class ApparatusSelectBox extends AbstractContentPane {
         lblChooseApparatus.setText(resourceMap.getString("lblChooseApparatus.text")); // NOI18N
         lblChooseApparatus.setName("lblChooseApparatus"); // NOI18N
 
-        apparatusCombo.setModel(recApplication.getApparatusComboBoxModel());
+        apparatusCombo.setModel(getRecApplication().getApparatusComboBoxModel());
         apparatusCombo.setName("apparatusCombo"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ApparatusSelectBox.class, this);
-        btnToggleEnter.setAction(actionMap.get("enterApparatus")); // NOI18N
+        btnToggleEnter.setAction(actionMap.get("toggleApparatusState")); // NOI18N
         btnToggleEnter.setText(resourceMap.getString("btnToggleEnter.text")); // NOI18N
         btnToggleEnter.setFont(btnToggleEnter.getFont().deriveFont(btnToggleEnter.getFont().getStyle() | java.awt.Font.BOLD));
         btnToggleEnter.setName("btnToggleEnter"); // NOI18N
+
+        progressCicle.setIdleIcon(resourceMap.getIcon("progressCicle.idleIcon")); // NOI18N
+        progressCicle.setName("progressCicle"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -72,7 +126,10 @@ public class ApparatusSelectBox extends AbstractContentPane {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(apparatusCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                     .addComponent(lblChooseApparatus)
-                    .addComponent(btnToggleEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnToggleEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(progressCicle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -83,7 +140,9 @@ public class ApparatusSelectBox extends AbstractContentPane {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(apparatusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnToggleEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(progressCicle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnToggleEnter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
@@ -91,10 +150,16 @@ public class ApparatusSelectBox extends AbstractContentPane {
         apparatusCombo.getAccessibleContext().setAccessibleDescription(resourceMap.getString("apparatusCombo.AccessibleContext.accessibleDescription")); // NOI18N
     }// </editor-fold>//GEN-END:initComponents
 
+    @Action
+    public void toggleApparatusState() {
+    	recApplication.toggleApparatusState();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.linkare.rec.impl.newface.component.ApparatusCombo apparatusCombo;
     private com.linkare.rec.impl.newface.component.FlatButton btnToggleEnter;
     private javax.swing.JLabel lblChooseApparatus;
+    private com.linkare.rec.impl.newface.component.ProgressCicle progressCicle;
     // End of variables declaration//GEN-END:variables
 
 }

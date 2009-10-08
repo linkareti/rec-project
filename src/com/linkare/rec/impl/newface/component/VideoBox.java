@@ -11,15 +11,60 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Canvas;
+import java.awt.Color;
+
 /**
  *
- * @author iies-consultor922
+ * @author Bruno Catarino
  */
 public class VideoBox extends AbstractContentPane {
 
     /** Creates new form VideoBox */
     public VideoBox() {
         initComponents();
+        videoCanvas.setVisible(false);
+    }
+
+    /**
+     * Creates the video canvas where the video will be displayed and adds the
+     * component to the VideoBox. 
+     */
+    public void initializeVideoOutput() {
+
+        videoCanvas.setSize(videoPanel.getWidth(), videoPanel.getHeight());
+        videoCanvas.setVisible(true);
+        videoCanvas.setBackground(Color.BLACK);
+    }
+
+    /**
+     * Remove the Canvas from the UI when not needed.
+     */
+    public void destroyVideoOutput() {
+
+        videoCanvas.setVisible(false);
+    }
+
+    /**
+     * Returns the component where the video will be displayed. The return
+     * of this method can be null, so a check for null is needed after
+     * invocation.
+     * @return
+     */
+    public Canvas getVideoOutput() {
+        return videoCanvas;
+    }
+
+    /**
+     * Resizes the VideoOutput.
+     * @param width
+     * @param height
+     */
+    public void changeVideoOutputSize(int width, int height) {
+
+        videoPanel.setSize(width, height);
+        if (videoCanvas != null)
+            videoCanvas.setSize(width, height);
     }
 
     /** This method is called from within the constructor to
@@ -32,7 +77,8 @@ public class VideoBox extends AbstractContentPane {
     private void initComponents() {
 
         lblVideo = new javax.swing.JLabel();
-        videoMock = new javax.swing.JPanel();
+        videoPanel = new javax.swing.JPanel();
+        videoCanvas = new java.awt.Canvas();
 
         setName("Form"); // NOI18N
 
@@ -41,19 +87,20 @@ public class VideoBox extends AbstractContentPane {
         lblVideo.setText(resourceMap.getString("lblVideo.text")); // NOI18N
         lblVideo.setName("lblVideo"); // NOI18N
 
-        videoMock.setBackground(resourceMap.getColor("videoMock.background")); // NOI18N
-        videoMock.setBorder(javax.swing.BorderFactory.createLineBorder(resourceMap.getColor("videoMock.border.lineColor"))); // NOI18N
-        videoMock.setName("videoMock"); // NOI18N
+        videoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        videoPanel.setName("videoPanel"); // NOI18N
 
-        javax.swing.GroupLayout videoMockLayout = new javax.swing.GroupLayout(videoMock);
-        videoMock.setLayout(videoMockLayout);
-        videoMockLayout.setHorizontalGroup(
-            videoMockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 247, Short.MAX_VALUE)
+        videoCanvas.setName("videoCanvas"); // NOI18N
+
+        javax.swing.GroupLayout videoPanelLayout = new javax.swing.GroupLayout(videoPanel);
+        videoPanel.setLayout(videoPanelLayout);
+        videoPanelLayout.setHorizontalGroup(
+            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
         );
-        videoMockLayout.setVerticalGroup(
-            videoMockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+        videoPanelLayout.setVerticalGroup(
+            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -63,7 +110,7 @@ public class VideoBox extends AbstractContentPane {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(videoMock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblVideo))
                 .addContainerGap())
         );
@@ -73,7 +120,7 @@ public class VideoBox extends AbstractContentPane {
                 .addContainerGap()
                 .addComponent(lblVideo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(videoMock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -81,7 +128,7 @@ public class VideoBox extends AbstractContentPane {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblVideo;
-    private javax.swing.JPanel videoMock;
+    private java.awt.Canvas videoCanvas;
+    private javax.swing.JPanel videoPanel;
     // End of variables declaration//GEN-END:variables
-
 }

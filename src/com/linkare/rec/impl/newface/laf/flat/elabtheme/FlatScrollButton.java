@@ -26,10 +26,10 @@ public class FlatScrollButton extends MetalScrollButton{
 	//FIXME: Corrigir esta forma de obter as cores. Tem de ser por intermédio de propriedades
 	//ENABLED COLORS
 	public static final Color COLOR_BORDER = new Color(0x848485);	
-	public static final Color COLOR_BACKGROUND = new Color(0xDAE1DF);
+	public static final Color COLOR_BACKGROUND = new Color(0xE4EEED);
 	//OTHER COLORS
-	public static final Color COLOR_DIS_BACKGROUND = new Color(0xFFFFFF);
-	public static final Color COLOR_PRESS_BACKGROUND = new Color(0xFFFFFF);
+	public static final Color COLOR_DIS_BACKGROUND = new Color(0xE4EEED);
+	public static final Color COLOR_PRESS_BACKGROUND = new Color(0xE4EEED);
 	
 	private boolean isFreeStanding = true;
 	
@@ -114,7 +114,7 @@ public class FlatScrollButton extends MetalScrollButton{
 	 	    g.setColor( arrowColor );
 	 		int startY = ((h+1) - arrowHeight) / 2;
 	 		int startX = (w / 2);
-	 		for (int line = 0; line <= arrowHeight; line++) {
+	 		for (int line = 0; line < arrowHeight; line++) {
 	 		    g.drawLine( startX-line, startY+line, startX +line, startY+line);
 	 		}
 	 	        

@@ -99,7 +99,8 @@
 		      order="2"/>-->
 	 <Apparatus 
 	    location="ELAB_G_STAMP_V02" 
-            customizerClassLocationBundleKey="ReCExpG$rec.exp.customizer.g" 
+        customizerClassLocationBundleKey="ReCExpG$rec.exp.customizer.g"
+        videoLocation="ReCExpG$rec.exp.url.g.video"
 	    toolTipBundleKey="ReCExpG$rec.exp.tip.g" 
 	    iconLocationBundleKey="ReCExpG$rec.exp.icon.g" 
 	    displayStringBundleKey="ReCExpG$rec.exp.title.g" 
@@ -160,6 +161,7 @@
         <Apparatus
             location="ELAB_RAD_STAMP_V02"
             customizerClassLocationBundleKey="ReCExpRadio$rec.exp.customizer.radio"
+            videoLocation="ReCExpRadio$rec.exp.url.radio.video"
             toolTipBundleKey="ReCExpRadio$rec.exp.tip.radio"
             iconLocationBundleKey="ReCExpRadio$rec.exp.icon.radio"
             displayStringBundleKey="ReCExpRadio$rec.exp.title.radio"
@@ -212,6 +214,7 @@
 	<Apparatus
             location="ELAB_SCUBA_STAMP_V02"
             customizerClassLocationBundleKey="ReCExpScuba$rec.exp.customizer.scuba"
+            videoLocation="ReCExpScuba$rec.exp.url.scuba.video"
             toolTipBundleKey="ReCExpScuba$rec.exp.tip.scuba"
             iconLocationBundleKey="ReCExpScuba$rec.exp.icon.scuba"
             displayStringBundleKey="ReCExpScuba$rec.exp.title.scuba"
@@ -280,6 +283,7 @@
         <Apparatus
             location="ELAB_PENDULO_STAMP_V02"
             customizerClassLocationBundleKey="ReCExpPendulo$rec.exp.customizer.pendulo"
+            videoLocation="ReCExpPendulo$rec.exp.url.pendulo.video"
             toolTipBundleKey="ReCExpPendulo$rec.exp.tip.pendulo"
             iconLocationBundleKey="ReCExpPendulo$rec.exp.icon.pendulo"
             displayStringBundleKey="ReCExpPendulo$rec.exp.title.pendulo"
@@ -334,6 +338,7 @@
         <Apparatus
             location="ELAB_PV_STAMP_V02"
             customizerClassLocationBundleKey="ReCExpPV$rec.exp.customizer.pv"
+            videoLocation="ReCExpPV$rec.exp.url.pv.video"
             toolTipBundleKey="ReCExpPV$rec.exp.tip.pv"
             iconLocationBundleKey="ReCExpPV$rec.exp.icon.pv"
             displayStringBundleKey="ReCExpPV$rec.exp.title.pv"
@@ -386,6 +391,7 @@
 	<Apparatus
             location="EXP_PLANCK_STAMP_V1.1"
             customizerClassLocationBundleKey="ReCExpPlanck$rec.exp.customizer.planck"
+            videoLocation="ReCExpPlanck$rec.exp.url.planck.video"
             toolTipBundleKey="ReCExpPlanck$rec.exp.tip.planck"
             iconLocationBundleKey="ReCExpPlanck$rec.exp.icon.planck"
             displayStringBundleKey="ReCExpPlanck$rec.exp.title.planck"
@@ -454,6 +460,7 @@
 	<Apparatus
             location="EXP_ANGULAR_STAMP_V1.0"
             customizerClassLocationBundleKey="ReCExpDiscos$rec.exp.customizer.momentoInercia"
+            videoLocation="ReCExpDiscos$rec.exp.url.momentoInercia.video"
             toolTipBundleKey="ReCExpDiscos$rec.exp.tip.momentoInercia"
             iconLocationBundleKey="ReCExpDiscos$rec.exp.icon.momentoInercia"
             displayStringBundleKey="ReCExpDiscos$rec.exp.title.momentoInercia"
@@ -510,6 +517,7 @@
 	<Apparatus
             location="ELAB_ALEATORIO_V02"
             customizerClassLocationBundleKey="ReCExpAleatorio$rec.exp.customizer.aleatorio"
+            videoLocation="ReCExpAleatorio$rec.exp.url.aleatorio.video"
             toolTipBundleKey="ReCExpAleatorio$rec.exp.tip.aleatorio"
             iconLocationBundleKey="ReCExpAleatorio$rec.exp.icon.aleatorio"
             displayStringBundleKey="ReCExpAleatorio$rec.exp.title.aleatorio"
@@ -572,6 +580,7 @@
 	<Apparatus
             location="ELAB_CONDCALOR_STAMP_V1.0"
             customizerClassLocationBundleKey="ReCExpT$rec.exp.customizer.conducaoCalor"
+            videoLocation="ReCExpT$rec.exp.url.conducaoCalor.video"
             toolTipBundleKey="ReCExpT$rec.exp.tip.conducaoCalor"
             iconLocationBundleKey="ReCExpT$rec.exp.icon.conducaoCalor"
             displayStringBundleKey="ReCExpT$rec.exp.title.conducaoCalor"
@@ -649,6 +658,7 @@
 	<Apparatus
             location="ELAB_METEO_V01"
             customizerClassLocationBundleKey="ReCExpMeteo$rec.exp.customizer.meteo"
+            videoLocation="ReCExpMeteo$rec.exp.url.meteo.video"
             toolTipBundleKey="ReCExpMeteo$rec.exp.tip.meteo"
             iconLocationBundleKey="ReCExpMeteo$rec.exp.icon.meteo"
             displayStringBundleKey="ReCExpMeteo$rec.exp.title.meteo"
@@ -735,6 +745,7 @@
 	<Apparatus
             location="ELAB_STATSOUND_STAMP_V01"
             customizerClassLocationBundleKey="ReCExpStatSound$rec.exp.customizer.statsound"
+            videoLocation="ReCExpStatSound$rec.exp.url.statsound.video"
             toolTipBundleKey="ReCExpStatSound$rec.exp.tip.statsound"
             iconLocationBundleKey="ReCExpStatSound$rec.exp.icon.statsound"
             displayStringBundleKey="ReCExpStatSound$rec.exp.title.statsound"
@@ -809,6 +820,7 @@
 	<Apparatus
             location="ELAB_WEBROBOT_V01"
             customizerClassLocationBundleKey="ReCExpWebRobot$rec.exp.customizer.webrobot"
+            videoLocation="ReCExpWebRobot$rec.exp.url.webrobot.video"
             toolTipBundleKey="ReCExpWebRobot$rec.exp.tip.webrobot"
             iconLocationBundleKey="ReCExpWebRobot$rec.exp.icon.webrobot"
             displayStringBundleKey="ReCExpWebRobot$rec.exp.title.webrobot"
@@ -895,6 +907,7 @@
 	<Apparatus
             location="ELAB_THOMSON_STAMP_V01"
             customizerClassLocationBundleKey="ReCExpThomson$rec.exp.customizer.thomson"
+            videoLocation="ReCExpThomson$rec.exp.url.thomson.video"
             toolTipBundleKey="ReCExpThomson$rec.exp.tip.thomson"
             iconLocationBundleKey="ReCExpThomson$rec.exp.icon.thomson"
             displayStringBundleKey="ReCExpThomson$rec.exp.title.thomson"
@@ -953,6 +966,7 @@
 	<Apparatus
             location="ELAB_POLAROID_V1.3"
             customizerClassLocationBundleKey="ReCExpPolaroid$rec.exp.customizer.polaroid"
+            videoLocation="ReCExpPolaroid$rec.exp.url.polaroid.video"
             toolTipBundleKey="ReCExpPolaroid$rec.exp.tip.polaroid"
             iconLocationBundleKey="ReCExpPolaroid$rec.exp.icon.polaroid"
             displayStringBundleKey="ReCExpPolaroid$rec.exp.title.polaroid"
@@ -1006,6 +1020,7 @@
 	<Apparatus
             location="ELAB_GAMMA_V1.0"
             customizerClassLocationBundleKey="ReCExpGamma$rec.exp.customizer.gamma"
+            videoLocation="ReCExpGamma$rec.exp.url.gamma.video"
             toolTipBundleKey="ReCExpGamma$rec.exp.tip.gamma"
             iconLocationBundleKey="ReCExpGamma$rec.exp.icon.gamma"
             displayStringBundleKey="ReCExpGamma$rec.exp.title.gamma"
@@ -1083,6 +1098,7 @@
 	<Apparatus
             location="ELAB_TELESCOPIO_V01"
             customizerClassLocationBundleKey="ReCExpTelescopio$rec.exp.customizer.telescopio"
+            videoLocation="ReCExpTelescopio$rec.exp.url.telescopio.video"
             toolTipBundleKey="ReCExpTelescopio$rec.exp.tip.telescopio"
             iconLocationBundleKey="ReCExpTelescopio$rec.exp.icon.telescopio"
             displayStringBundleKey="ReCExpTelescopio$rec.exp.title.telescopio"
@@ -1142,6 +1158,7 @@
 	<Apparatus
             location="ELAB_PENDULO_GRAV_STAMP_V01"
             customizerClassLocationBundleKey="ReCExpPG$rec.exp.customizer.pg"
+            videoLocation="ReCExpPG$rec.exp.url.pg.video"
             toolTipBundleKey="ReCExpPG$rec.exp.tip.pg"
             iconLocationBundleKey="ReCExpPG$rec.exp.icon.pg"
             displayStringBundleKey="ReCExpPG$rec.exp.title.pg"
@@ -1195,7 +1212,8 @@
 
 	<Apparatus 
 	    location="ELAB_CC_STAMP_V02" 
-        customizerClassLocationBundleKey="ReCExpCC$rec.exp.customizer.cc" 
+        customizerClassLocationBundleKey="ReCExpCC$rec.exp.customizer.cc"
+        videoLocation="ReCExpCC$rec.exp.url.cc.video"
 	    toolTipBundleKey="ReCExpCC$rec.exp.tip.cc" 
 	    iconLocationBundleKey="ReCExpCC$rec.exp.icon.cc" 
 	    displayStringBundleKey="ReCExpCC$rec.exp.title.cc" 

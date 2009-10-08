@@ -6,7 +6,9 @@ public class ReCAppEvent extends EventObject {
 
 	public enum ReCCommand {
 		SHOW_LOGIN,
-		SELECTED_APPARATUS_CONFIG_CHANGE;
+		SELECTED_APPARATUS_CHANGE, 
+		APPARATUS_CONFIGURED,
+		CUSTOMIZER_CANCELED;
 	}
 	
 	private ReCCommand command;

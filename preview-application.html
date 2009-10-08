@@ -24,12 +24,16 @@
                 display: block;
                 text-align: center;
             }
+            #link-launcher {
+                display: block;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
         <h1>e-lab</h1>
         <p>
-            Guia de implementacao do novo interface (<a href="#">spec</a>)
+            Guia de implementacao do novo interface (<a href="https://svn.internal.linkare.pt/ReC/branches/DocumentationAndJava6/rec-newface/docs/spec/e-labGuiaV04.pdf">e-labGuiaV04.pdf</a>)
         </p>
         <div id="launch">
             <img src="screenshot.png" alt="Screenshot"/> <br>
@@ -37,14 +41,16 @@
             <!-- Or use the following script element to launch with the Deployment Toolkit -->
             <!-- Open the deployJava.js script to view its documentation -->
             <!-- var url="http://[fill in your URL]/${JNLP.FILE}" -->
-
             <span id="jws-launcher">
-            <script src="js/deployJava.js"></script>
-            <script>
-                // var url="${JNLP.FILE}"
-                var url="http://elab.ist.utl.pt/rec/rec-newface/launch.jnlp"
-                deployJava.createWebStartLaunchButton(url, "1.6")
-            </script>
+                <script src="js/deployJava.js"></script>
+                <script>
+                    // var url="${JNLP.FILE}"
+                    var url="http://elab.ist.utl.pt/rec/rec-newface/launch.jnlp"
+                    deployJava.createWebStartLaunchButton(url, "1.6")
+                </script>
+            </span>
+            <span id="link-launcher">
+                <a href="http://elab.ist.utl.pt/rec/rec-newface/launch.jnlp">Launch</a>
             </span>
         </div>
     </body>

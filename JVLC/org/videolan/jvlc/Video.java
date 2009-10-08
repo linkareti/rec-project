@@ -85,6 +85,7 @@ public class Video
 	 */
 	public int getWidth(MediaPlayer media)  {
         libvlc_exception_t exception = new libvlc_exception_t();
+        //Bruno mal implementado??????????? n seria getWidth
         return libvlc.libvlc_video_get_height(media.getInstance(), exception);
 	}
 

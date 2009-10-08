@@ -27,13 +27,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="flatButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="230" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="progressCicle" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="labelUsername" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="txtUsername" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="71" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,9 +45,9 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="txtUsername" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="progressCicle" alignment="0" min="-2" max="-2" attributes="1"/>
-                  <Component id="flatButton1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="progressCicle" max="32767" attributes="1"/>
+                  <Component id="flatButton1" alignment="1" max="32767" attributes="1"/>
               </Group>
               <EmptySpace pref="43" max="32767" attributes="0"/>
           </Group>

@@ -25,8 +25,8 @@
 
 package org.videolan.jvlc.event;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.logging.Logger;
+
 import org.videolan.jvlc.MediaPlayer;
 import org.videolan.jvlc.internal.LibVlc;
 import org.videolan.jvlc.internal.LibVlcEventType;
@@ -35,18 +35,16 @@ import org.videolan.jvlc.internal.LibVlc.libvlc_event_t;
 import org.videolan.jvlc.internal.LibVlc.media_player_time_changed;
 
 import com.sun.jna.Pointer;
+import org.videolan.jvlc.MediaDescriptor;
 
 
 public class MediaPlayerCallback implements LibVlcCallback
 {
+	private static final Logger log = Logger
+			.getLogger(MediaPlayerCallback.class.getName());
 
     private MediaPlayerListener listener;
     private MediaPlayer mediaPlayer;
-
-    /**
-     * Logger.
-     */
-    private Logger log = LoggerFactory.getLogger(MediaPlayerCallback.class);
 
     public MediaPlayerCallback(MediaPlayer mediaInstance, MediaPlayerListener listener)
     {
@@ -56,61 +54,60 @@ public class MediaPlayerCallback implements LibVlcCallback
     /**
      * {@inheritDoc}
      */
+    @Override
     public void callback(libvlc_event_t libvlc_event, Pointer userData)
     {
+        //Delete não parece ter comportamento adicional
+        /*if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerOpening.ordinal())
+        {
+            System.out.println("!!!!!!!!!!!!I'm opening media!!!!!!!!!!!!!");
+        }
+        else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerBuffering.ordinal())
+        {
+            System.out.println("!!!!!!!!!!!!I'm buffering!!!!!!!!!!!!!");
+        }
+        else*/
         if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPlaying.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai entrar em playing");
             listener.playing(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Entrou em playing");
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPaused.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai entrar em paused");
             listener.paused(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Entrou em paused");
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerEndReached.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai chegar ao fim");
             listener.endReached(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Entrou em stopped");
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPositionChanged.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai mudar posição");
             listener.positionChanged(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Mudou posição");
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerStopped.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai entrar em stopped");
             listener.stopped(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Entrou em stopped");
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerTimeChanged.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Vai mudar tempo");
             //TODO suprimir listener.timeChanged quando foi feito um ajuste pelo user mas este ainda não foi feito no vídeo, de facto.
             libvlc_event.event_type_specific.setType(LibVlc.media_player_time_changed.class);
             LibVlc.media_player_time_changed timeChanged = (media_player_time_changed) libvlc_event.event_type_specific
                 .readField("media_player_time_changed");
-            System.out.println("MediaPlayerCallback: all: " + timeChanged.new_time);
-            System.out.println("MediaPlayerCallback: new time: " + timeChanged.new_time);
-            listener.timeChanged(mediaPlayer, timeChanged.new_time);
-            System.out.println("MediaPlayerCallback: Mudou o tempo");
+
+            // Evita que em streaming sejam lançados e tratados eventos desnecessários.
+//            System.out.println(Thread.currentThread());
+//            if (timeChanged != null && timeChanged.new_time > 0)
+                listener.timeChanged(mediaPlayer, timeChanged.new_time);
+
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerEncounteredError.ordinal())
         {
-            System.out.println("MediaPlayerCallback: Erro encontrado");
-            log.warn("Media player encountered error.");
+            log.warning("Media player encountered error.");
             listener.errorOccurred(mediaPlayer);
-            System.out.println("MediaPlayerCallback: Ocorreu erro");
         }
         else
         {
-            System.out.println("MediaPlayerCallback: Evento não suportado");
-            log.debug("Unsupported event error. Event id: {}", libvlc_event.type);
+            log.fine(String.format("Unsupported event error. Event id: {%d}", libvlc_event.type));
         }
     }
 }

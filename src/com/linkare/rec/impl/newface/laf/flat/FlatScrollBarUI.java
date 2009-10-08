@@ -36,11 +36,11 @@ public class FlatScrollBarUI extends MetalScrollBarUI{
 	//FIXME: Corrigir esta forma de obter as cores. Tem de ser por intermédio de propriedades
 	//ENABLED COLORS
 	public static final Color COLOR_BORDER = new Color(0x848485);	
-	public static final Color COLOR_THUMB_BACKGROUND = new Color(0xDCE6F2);
-	public static final Color COLOR_BACKGROUND = new Color(0xDAE1DF);
+	public static final Color COLOR_THUMB_BACKGROUND = new Color(0xDAE1DF);
+	public static final Color COLOR_BACKGROUND = new Color(0xE4EEED);
 	//OTHER COLORS
-	public static final Color COLOR_DIS_BACKGROUND = new Color(0xFFFFFF);
-	public static final Color COLOR_PRESS_BACKGROUND = new Color(0xFFFFFF);
+	public static final Color COLOR_DIS_BACKGROUND = new Color(0xE4EEED);
+	public static final Color COLOR_PRESS_BACKGROUND = new Color(0xE4EEED);
 	//INSETS
 //	public static final Integer INSETS = 1;
 	

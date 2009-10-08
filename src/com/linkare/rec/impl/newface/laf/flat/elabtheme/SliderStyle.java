@@ -19,18 +19,11 @@ public class SliderStyle extends DefaultStyle{
 
 	public static final String ID = "Slider";
 		
-	//LABEL FONT
-	public static final Font FONT_SLIDER = new FontUIResource("Arial", Font.BOLD, 12);	
-	
 	//COLORS	
-	private static final Color COLOR_SLIDER_FG = BLACK_DEFAULT_COLOR;
-	private static final Color COLOR_SLIDER_BG = WHITE_DEFAULT_COLOR;
+	private static final Color COLOR_SLIDER_FG = new Color(0x515151);
+	private static final Color COLOR_SLIDER_BG = new Color(0xE4EEED);
 	
 
-	//DIMENSION
-	private static final String TRACKWIDTH = "trackWidth";
-	private static final String VERTICALSIZE = "verticalSize";
-	
 	/**
 	 * Creates the <code>ComboBoxStyle</code>.
 	 */
@@ -48,6 +41,5 @@ public class SliderStyle extends DefaultStyle{
 		super.updatePropertyMap(map);
 		map.put(FOREGROUND, COLOR_SLIDER_FG);
 		map.put(BACKGROUND, COLOR_SLIDER_BG);
-		map.put(FONT, FONT_SLIDER);
 	}
 }

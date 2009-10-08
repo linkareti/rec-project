@@ -43,6 +43,8 @@ public class MediaPane extends javax.swing.JPanel {
         chatBox = new com.linkare.rec.impl.newface.component.ChatBox();
         jSeparator1 = new javax.swing.JSeparator();
 
+        setMaximumSize(new java.awt.Dimension(300, 500));
+        setMinimumSize(new java.awt.Dimension(212, 398));
         setName("Form"); // NOI18N
 
         videoBox.setName("videoBox"); // NOI18N

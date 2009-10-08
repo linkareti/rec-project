@@ -44,6 +44,8 @@ made subject to such option by the copyright holder.
 <project name="jnlp-impl" default="default" basedir="..">
 
     <property name="jnlp.file.name.default" value="launch.jnlp"/>
+    <property name="jnlp.wininstaller.file.name.default" value="windowsInstaller.jnlp"/>
+    <property name="jnlp.linuxinstaller.file.name.default" value="linuxInstaller.jnlp"/>
     <property name="jnlp.dest.dir" location="dist"/>
     
     <!-- helper file to create list of arguments, etc. -->
@@ -63,7 +65,7 @@ made subject to such option by the copyright holder.
     
     <!-- Init jnlp filename -->
     
-    <target name="-init-filename" depends="-check-filename-prop,-set-jnlp-filename-custom,-set-jnlp-filename-default"/>
+    <target name="-init-filename" depends="-check-filename-prop,-set-jnlp-filename-custom,-set-jnlp-filename-default,-set-installers-jnlp-filename-default"/>
     
     <target name="-set-jnlp-filename-custom" if="jnlp.file.name.set">
         <property name="jnlp.file" value="${jnlp.file.name}"/>
@@ -72,7 +74,12 @@ made subject to such option by the copyright holder.
     <target name="-set-jnlp-filename-default" unless="jnlp.file.name.set">
         <property name="jnlp.file" value="${jnlp.file.name.default}"/>
     </target>
-    
+
+    <target name="-set-installers-jnlp-filename-default">
+        <property name="winInstaller.jnlp.file" value="${jnlp.wininstaller.file.name.default}"/>
+        <property name="linuxInstaller.jnlp.file" value="${jnlp.linuxinstaller.file.name.default}"/>
+    </target>
+
     <target name="-check-filename-prop">
         <condition property="jnlp.file.name.set">
             <and>
@@ -98,6 +105,8 @@ made subject to such option by the copyright holder.
         <taskdef name="generate-jnlp" classname="org.netbeans.modules.javawebstart.anttasks.GenerateJnlpFileTask" 
             classpath="${libs.JWSAntTasks.classpath}"/>
         <generate-jnlp destfile="${jnlp.dest.dir}/${jnlp.file}_" template="master-${jnlp.descriptor}.jnlp" destdir="dist"/>
+        <generate-jnlp destfile="${jnlp.dest.dir}/${winInstaller.jnlp.file}_" template="windowsInstaller.jnlp" destdir="dist"/>
+        <generate-jnlp destfile="${jnlp.dest.dir}/${linuxInstaller.jnlp.file}_" template="linuxInstaller.jnlp" destdir="dist"/>
         <antcall target="-strip-empty-lines"/>
     </target>
     
@@ -110,6 +119,22 @@ made subject to such option by the copyright holder.
             </filterchain>
         </copy>
         <delete file="${jnlp.dest.dir}/${jnlp.file}_" failonerror="false"/>
+        <copy file="${jnlp.dest.dir}/${winInstaller.jnlp.file}_" tofile="${jnlp.dest.dir}/${winInstaller.jnlp.file}" overwrite="true" encoding="UTF-8">
+            <filterchain>
+                <linecontainsregexp>
+                    <regexp pattern=".+"/>
+                </linecontainsregexp>
+            </filterchain>
+        </copy>
+        <delete file="${jnlp.dest.dir}/${winInstaller.jnlp.file}_" failonerror="false"/>
+        <copy file="${jnlp.dest.dir}/${linuxInstaller.jnlp.file}_" tofile="${jnlp.dest.dir}/${linuxInstaller.jnlp.file}" overwrite="true" encoding="UTF-8">
+            <filterchain>
+                <linecontainsregexp>
+                    <regexp pattern=".+"/>
+                </linecontainsregexp>
+            </filterchain>
+        </copy>
+        <delete file="${jnlp.dest.dir}/${linuxInstaller.jnlp.file}_" failonerror="false"/>
     </target>
     
     <target name="-test-generate-task-available">

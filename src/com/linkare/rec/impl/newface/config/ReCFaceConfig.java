@@ -56,6 +56,8 @@ public class ReCFaceConfig extends AbstractConfigBean {
 
 	private String helpPageLocationBundleKey = "";
 
+//Delete    private MediaConfig mediaConfig = null;
+
 	private List<Lab> labList = new ArrayList<Lab>();
 
 	private List<WebResource> webResourceList = new ArrayList<WebResource>();
@@ -242,6 +244,16 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	public List<Lab> getLab() {
 		return labList;
 	}
+
+    //Bruno tem de estar como XmlElement ou assim????
+    /**
+     * @return the mediaConfig
+     */
+    //Delete
+//    @XmlElement
+//    public MediaConfig getMediaConfig() {
+//        return mediaConfig;
+//    }
 
 	/**
 	 * @return the webResource
@@ -443,6 +455,14 @@ public class ReCFaceConfig extends AbstractConfigBean {
 				this.helpPageLocationBundleKey = helpPageLocationBundleKey);
 	}
 
+    /**
+     * @param mediaConfig the mediaConfig to set
+     */
+    //Delete
+//    public void setMediaConfig(MediaConfig mediaConfig) {
+//        this.mediaConfig = mediaConfig;
+//    }
+
 	/**
 	 * @param lab
 	 *            the lab to set
@@ -527,6 +547,10 @@ public class ReCFaceConfig extends AbstractConfigBean {
         if ((this.helpPageLocationBundleKey == null) ? (other.helpPageLocationBundleKey != null) : !this.helpPageLocationBundleKey.equals(other.helpPageLocationBundleKey)) {
             return false;
         }
+        //Delete
+//        if (this.mediaConfig != other.mediaConfig && (this.mediaConfig == null || !this.mediaConfig.equals(other.mediaConfig))) {
+//            return false;
+//        }
         if (this.labList != other.labList && (this.labList == null || !this.labList.equals(other.labList))) {
             return false;
         }
@@ -565,6 +589,7 @@ public class ReCFaceConfig extends AbstractConfigBean {
         hash = 59 * hash + (this.frameTitleBundleKey != null ? this.frameTitleBundleKey.hashCode() : 0);
         hash = 59 * hash + (this.iconSponsorLocationBundleKey != null ? this.iconSponsorLocationBundleKey.hashCode() : 0);
         hash = 59 * hash + (this.helpPageLocationBundleKey != null ? this.helpPageLocationBundleKey.hashCode() : 0);
+//Delete        hash = 83 * hash + (this.mediaConfig != null ? this.mediaConfig.hashCode() : 0);
         hash = 59 * hash + (this.labList != null ? this.labList.hashCode() : 0);
         hash = 59 * hash + (this.webResourceList != null ? this.webResourceList.hashCode() : 0);
         hash = 59 * hash + (this.localizationBundleList != null ? this.localizationBundleList.hashCode() : 0);

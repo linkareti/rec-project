@@ -2,6 +2,12 @@
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
+    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[32767, 500]"/>
+    </Property>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[388, 398]"/>
+    </Property>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
   </Properties>
   <AuxValues>
@@ -22,10 +28,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="scrollApparatusDescription" alignment="0" max="32767" attributes="0"/>
                   <Component id="lblApparatusImg" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblApparatusName" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLink" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -39,9 +45,9 @@
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="lblApparatusImg" min="-2" pref="132" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="120" max="32767" attributes="0"/>
+              <Component id="scrollApparatusDescription" pref="179" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="btnLink" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -68,26 +74,27 @@
         <Property name="name" type="java.lang.String" value="lblApparatusImg" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnLink">
       <Properties>
-        <Property name="background" type="java.awt.Color" resourceKey="jButton1.background"/>
+        <Property name="background" type="java.awt.Color" resourceKey="btnLink.background"/>
         <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.modules.form.editors2.FontEditor">
           <FontInfo relative="true">
-            <Font component="jButton1" property="font" relativeSize="false" size="11"/>
+            <Font component="btnLink" property="font" relativeSize="false" size="11"/>
           </FontInfo>
         </Property>
-        <Property name="text" type="java.lang.String" resourceKey="jButton1.text"/>
+        <Property name="foreground" type="java.awt.Color" resourceKey="btnLink.foreground"/>
+        <Property name="text" type="java.lang.String" resourceKey="btnLink.text"/>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="btnLink" noResource="true"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="scrollApparatusDescription">
       <Properties>
-        <Property name="background" type="java.awt.Color" resourceKey="jScrollPane1.background"/>
+        <Property name="background" type="java.awt.Color" resourceKey="scrollApparatusDescription.background"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
-        <Property name="name" type="java.lang.String" value="jScrollPane1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="scrollApparatusDescription" noResource="true"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <AuxValues>

@@ -304,6 +304,7 @@ public interface LibVlc extends Library
 
     void libvlc_video_set_parent(LibVlcInstance libvlc_instance, long drawable, libvlc_exception_t exception);
 
+    //Bruno não é usado
     void libvlc_toggle_fullscreen(LibVlcMediaInstance libvlc_instance);
 
     void libvlc_set_fullscreen(LibVlcMediaInstance instance, int fullscreen, libvlc_exception_t exception);
@@ -312,18 +313,23 @@ public interface LibVlc extends Library
 
     int libvlc_video_get_height(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
+    //Bruno n e usado. Erro?
     int libvlc_video_get_width(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
+    //Bruno não é usado e chama-se libvlc_video_get_aspect_ratio
     String libvlc_video_get_aspect_ration(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
+    //Bruno não é usado e chama-se libvlc_video_set_aspect_ratio
     void libvlc_video_set_aspect_ration(LibVlcMediaInstance instance, String ratio, libvlc_exception_t exception);
 
     int libvlc_video_get_spu(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
     int libvlc_video_set_spu(LibVlcMediaInstance instance, int spu, libvlc_exception_t exception);
 
+    //Bruno não é usado
     String libvlc_video_get_crop_geometry(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
+    //Bruno não é usado
     void libvlc_video_set_crop_geometry(LibVlcMediaInstance instance, String geometry, libvlc_exception_t exception);
 
     void libvlc_video_take_snapshot(LibVlcMediaInstance instance, String filename, int width, int height,
@@ -349,6 +355,7 @@ public interface LibVlc extends Library
 
     int libvlc_audio_set_volume(LibVlcInstance instance, int volume, libvlc_exception_t exception);
 
+    //Bruno pode ser util de alguma forma? Para controlar se há output ou algo do género????
     int libvlc_audio_get_track_count(LibVlcMediaInstance mediaInstance, libvlc_exception_t exception);
 
     int libvlc_audio_get_track(LibVlcMediaInstance mediaInstance, libvlc_exception_t exception);
@@ -388,6 +395,7 @@ public interface LibVlc extends Library
 
     int libvlc_media_player_is_seekable(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
+    //Bruno não é usado! O que faz isto e de que forma ajuda?
     int libvlc_media_player_can_pause(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
     // media descriptor
@@ -404,6 +412,7 @@ public interface LibVlc extends Library
 
     // media player
 
+    //Bruno ver se é possível criar media player a partir daqui e usar sempre o mesmo.
     LibVlcMediaInstance libvlc_media_player_new(LibVlcInstance instance, libvlc_exception_t exception);
 
     LibVlcMediaInstance libvlc_media_player_new_from_media(LibVlcMediaDescriptor media, libvlc_exception_t exception);
@@ -414,6 +423,7 @@ public interface LibVlc extends Library
 
     void libvlc_media_player_stop(LibVlcMediaInstance media_player, libvlc_exception_t exception);
 
+    //Bruno não é usado!!!
     void libvlc_media_player_set_drawable(LibVlcMediaInstance libvlc_media_player, int drawable,
         libvlc_exception_t exception);
 

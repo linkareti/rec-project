@@ -11,11 +11,9 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import com.linkare.rec.impl.newface.ReCFrameView;
-
 /**
  *
- * @author iies-consultor922
+ * @author Henrique Fernandes
  */
 public class NavigationPane extends javax.swing.JPanel {
 
@@ -45,6 +43,8 @@ public class NavigationPane extends javax.swing.JPanel {
         experimentHistoryBox = new com.linkare.rec.impl.newface.component.ExperimentHistoryBox();
         separator = new javax.swing.JSeparator();
 
+        setMaximumSize(new java.awt.Dimension(212, 500));
+        setMinimumSize(new java.awt.Dimension(212, 398));
         setName("Form"); // NOI18N
 
         apparatusSelectBox.setName("apparatusSelectBox"); // NOI18N

@@ -25,6 +25,8 @@
 
 package org.videolan.jvlc;
 
+import com.sun.jna.Native;
+import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -50,6 +52,22 @@ public class MediaPlayer
     private List<MediaPlayerCallback> callbacks = new ArrayList<MediaPlayerCallback>();
 
     private MediaDescriptor mediaDescriptor;
+
+    private boolean released;
+
+    /**
+     * Construtor que permite criar um MediaPlayer sem indicar qual o media a
+     * tocar. 
+     * @param jvlc
+     */
+    //Bruno verificar se permite usar sempre o mesmo player durante toda a execução.
+    public MediaPlayer(JVLC jvlc) {
+
+        libvlc_exception_t exception = new libvlc_exception_t();
+        libvlc = jvlc.getLibvlc();
+        this.instance = libvlc.libvlc_media_player_new(jvlc.getInstance(), exception);
+        eventManager = libvlc.libvlc_media_player_event_manager(instance, exception);
+    }
 
     MediaPlayer(JVLC jvlc, LibVlcMediaInstance instance)
     {
@@ -128,19 +146,6 @@ public class MediaPlayer
     }
 
     /**
-     * Reparent
-     * @author bcatarino
-     * @param canvas
-     */
-    //Delete já não é necessário??? Video.reparent() faz o mesmo!?
-    /*public void setNewCanvas(java.awt.Canvas canvas) {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        long drawable = com.sun.jna.Native.getComponentID(canvas);
-        System.out.println("Drawable is: " + drawable);
-        libvlc.libvlc_media_player_set_drawable(instance, (int)drawable, exception);
-    }*/
-
-    /**
      * Resizes the video canvas currently bundled to the player without
      * needing to destroy the player and create a new one before the resizing.
      * @author bcatarino
@@ -164,6 +169,13 @@ public class MediaPlayer
         libvlc.libvlc_media_player_set_rate(instance, rate, exception);
     }
 
+    public void setVideoOutput(Canvas canvas)
+    {
+        int drawable = (int)Native.getComponentID(canvas);
+        libvlc_exception_t exception = new libvlc_exception_t();
+        libvlc.libvlc_media_player_set_drawable(instance, drawable, exception );
+    }
+
     public boolean hasVideoOutput()
     {
         libvlc_exception_t exception = new libvlc_exception_t();
@@ -180,13 +192,62 @@ public class MediaPlayer
     {
         MediaPlayerCallback callback = new MediaPlayerCallback(this, listener);
         libvlc_exception_t exception = new libvlc_exception_t();
+        //Bruno adicionar tb o buffering e tv o opening?
         for (LibVlcEventType event : EnumSet.range(
-            LibVlcEventType.libvlc_MediaPlayerPlaying,
-            LibVlcEventType.libvlc_MediaPlayerTimeChanged))
+            LibVlcEventType.libvlc_MediaPlayerOpening,
+//            LibVlcEventType.libvlc_MediaPlayerPlaying,
+//Bruno se em vez de time changed, for a position changed?????? altera em pausa???            LibVlcEventType.libvlc_MediaPlayerTimeChanged))
+            LibVlcEventType.libvlc_MediaPlayerPositionChanged))
         {
+            //Bruno de alguma forma não fazer event attach para determinado tipo. Adicionar tb o pause ao range??????
             libvlc.libvlc_event_attach(eventManager, event.ordinal(), callback, null, exception);
         }
         callbacks.add(callback);
+    }
+
+    /**
+     * Liberta os recursos do MediaPlayer. Remove também os listeners para os
+     * eventos lançados pelo MediaPlayer.
+     */
+    public void release()
+    {
+        if (released)
+        {
+            return;
+        }
+        try {
+            libvlc.libvlc_media_player_release(instance);
+        } catch (Throwable e) {
+            //TODO tratar excepção correctamente
+            e.printStackTrace();
+        }
+        released = true;
+        try {
+            detachCallbacks();
+        } catch (Throwable e) {
+            //TODO tratar excepção correctamente
+            e.printStackTrace();
+        }
+        
+        
+    }
+
+    /**
+     * Faz o remove dos listeners para os eventos do MediaPlayer.
+     */
+    public void detachCallbacks() {
+
+        libvlc_exception_t exception = new libvlc_exception_t();
+        for (MediaPlayerCallback callback : callbacks)
+        {
+            for (LibVlcEventType event : EnumSet.range(
+                LibVlcEventType.libvlc_MediaPlayerOpening,
+//                LibVlcEventType.libvlc_MediaPlayerPlaying,
+                LibVlcEventType.libvlc_MediaPlayerPositionChanged))
+            {
+                libvlc.libvlc_event_detach(eventManager, event.ordinal(), callback, null, exception);
+            }
+        }
     }
 
     /**
@@ -195,17 +256,8 @@ public class MediaPlayer
     @Override
     protected void finalize() throws Throwable
     {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        for (MediaPlayerCallback callback : callbacks)  
-        {
-            for (LibVlcEventType event : EnumSet.range(
-                LibVlcEventType.libvlc_MediaPlayerPlaying,
-                LibVlcEventType.libvlc_MediaPlayerPositionChanged))
-            {
-                libvlc.libvlc_event_detach(eventManager, event.ordinal(), callback, null, exception);
-            }
-        }
-        libvlc.libvlc_media_player_release(instance);
+
+//Bruno deve continuar a chamar o release no finaliza?        release();
         super.finalize();
     }
 

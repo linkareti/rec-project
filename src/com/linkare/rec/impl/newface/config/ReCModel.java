@@ -7,10 +7,6 @@
 
 package com.linkare.rec.impl.newface.config;
 
-import java.awt.Dimension;
-
-import com.linkare.rec.impl.newface.ReCFrameView;
-
 /**
  * The <code>ReCModel</code> interface specifies the methods the
  * <code>ReCView</code> will use to access the Remote Experience Control data model. <p>
@@ -22,6 +18,7 @@ import com.linkare.rec.impl.newface.ReCFrameView;
  * @author Henrique Fernandes
  * @see ReCView
  */
+@Deprecated
 public interface ReCModel {
 
     //Dimension getApplicationPreferredSize();
