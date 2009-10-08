@@ -49,7 +49,7 @@
         <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
         <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
         <!-- change this value to disable video -->
-        <property name="video.development.enabled" value="yes"/>
+        <property name="video.development.enabled" value="no"/>
     </resources>
 
     <!-- *******************************************************************
