@@ -30,73 +30,73 @@ import com.linkare.rec.impl.newface.config.ReCFaceConfig;
  */
 public class ReCFaceConfigMigration {
 
-	private static final String RESULT_XML_FILE = "etc/ReCFaceConfig.xml";
+    private static final String RESULT_XML_FILE = "etc/ReCFaceConfig.xml";
 
-	private static MyPropertyUtils propertyUtils = new MyPropertyUtils();
-	
-	/**
-	 * Run me to Generate the New Face Configuration xml.
-	 * 
-	 * @param args
-	 */
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
+    private static MyPropertyUtils propertyUtils = new MyPropertyUtils();
 
-        // FIXME uncomment after project refactoring
-        
-		try {
-			// Set properties for input format xml
-			// System.setProperty(key, value);
+    /**
+     * Run me to Generate the New Face Configuration xml.
+     * 
+     * @param args
+     */
+    @SuppressWarnings("unchecked")
+    public static void main(String[] args) {
 
-			// Unmarshal input xml values
-			ReCBaseUIConfig reCBaseUIConfig = ReCBaseUIConfig.sharedInstance();
+	// FIXME uncomment after project refactoring
 
-			// Update default ReCBaseUIConfig values (if needed)
-			// (...)
+	try {
+	    // Set properties for input format xml
+	    // System.setProperty(key, value);
 
-			// Get the Staging Area
-			Map stage = propertyUtils.describe(reCBaseUIConfig);
+	    // Unmarshal input xml values
+	    ReCBaseUIConfig reCBaseUIConfig = ReCBaseUIConfig.sharedInstance();
 
-			// Do the required mapping transformation (if needed)
-			// (...)
+	    // Update default ReCBaseUIConfig values (if needed)
+	    // (...)
 
-			// Perform a java deep copy to the new ReCConfig structure
-			// ReCFaceConfig newReCConfig = getTheNewReCConfig(reCBaseUIConfig);
-			ReCFaceConfig newReCConfig = getTheNewReCConfig(stage);
+	    // Get the Staging Area
+	    Map stage = propertyUtils.describe(reCBaseUIConfig);
 
-			// Marshal the new xml file
-			JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
-			final File f = new File(RESULT_XML_FILE);
+	    // Do the required mapping transformation (if needed)
+	    // (...)
 
-			Marshaller m = jc.createMarshaller();
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			m.marshal(newReCConfig, new FileOutputStream(f));
+	    // Perform a java deep copy to the new ReCConfig structure
+	    // ReCFaceConfig newReCConfig = getTheNewReCConfig(reCBaseUIConfig);
+	    ReCFaceConfig newReCConfig = getTheNewReCConfig(stage);
 
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
+	    // Marshal the new xml file
+	    JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
+	    final File f = new File(RESULT_XML_FILE);
+
+	    Marshaller m = jc.createMarshaller();
+	    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	    m.marshal(newReCConfig, new FileOutputStream(f));
+
+	} catch (JAXBException e) {
+	    e.printStackTrace();
+	} catch (FileNotFoundException e) {
+	    e.printStackTrace();
+	} catch (NoSuchMethodException e) {
+	    e.printStackTrace();
+	} catch (IllegalAccessException e) {
+	    e.printStackTrace();
+	} catch (InvocationTargetException e) {
+	    e.printStackTrace();
 	}
+    }
 
-	private static ReCFaceConfig getTheNewReCConfig(Object source) {
-		ReCFaceConfig dest = new ReCFaceConfig();
-		try { // to deep copy properties
-			Set<String> discard = new HashSet<String>();
-			discard.add("propertyChangeListeners");
+    private static ReCFaceConfig getTheNewReCConfig(Object source) {
+	ReCFaceConfig dest = new ReCFaceConfig();
+	try { // to deep copy properties
+	    Set<String> discard = new HashSet<String>();
+	    discard.add("propertyChangeListeners");
 
-			propertyUtils.deepCopyProperties(dest, source, discard);
+	    propertyUtils.deepCopyProperties(dest, source, discard);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return dest;
+	} catch (Exception e) {
+	    e.printStackTrace();
 	}
+	return dest;
+    }
 
 }

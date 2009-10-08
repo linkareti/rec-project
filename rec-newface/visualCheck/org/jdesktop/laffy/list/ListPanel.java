@@ -38,92 +38,91 @@ public class ListPanel extends OptionsSettablePanel {
 
     /** Creates new form TablePanel */
     public ListPanel() {
-        initComponents();
-        DEFAULT_BACKGROUND = jList1.getBackground();
-        DEFAULT_OPAQUE = jList1.isOpaque();
+	initComponents();
+	DEFAULT_BACKGROUND = jList1.getBackground();
+	DEFAULT_OPAQUE = jList1.isOpaque();
 
-        Item[] items = new Item[]{
-                /*
-                new Item("NASDAQ", -314.23),
-                new Item("Bond Market", 45.52),
-                new Item("Interest Rates", -3.52),
-                new Item("5 Yr Note", +45.52),
-                new Item("Something", 45.52)
-                 */
-                new Item(I18nResourceHandler.getMessage("NASDAQ"), -314.23),
-                new Item(I18nResourceHandler.getMessage("Bond_Market"), 45.52),
-                new Item(I18nResourceHandler.getMessage("Interest_Rates"), -3.52),
-                new Item(I18nResourceHandler.getMessage("5_Yr_Note"), +45.52),
-                new Item(I18nResourceHandler.getMessage("Something"), 45.52)
-        };
+	Item[] items = new Item[] {
+	/*
+	 * new Item("NASDAQ", -314.23), new Item("Bond Market", 45.52), new Item("Interest Rates", -3.52), new
+	 * Item("5 Yr Note", +45.52), new Item("Something", 45.52)
+	 */
+	new Item(I18nResourceHandler.getMessage("NASDAQ"), -314.23),
+		new Item(I18nResourceHandler.getMessage("Bond_Market"), 45.52),
+		new Item(I18nResourceHandler.getMessage("Interest_Rates"), -3.52),
+		new Item(I18nResourceHandler.getMessage("5_Yr_Note"), +45.52),
+		new Item(I18nResourceHandler.getMessage("Something"), 45.52) };
 
-        jList1.setListData(items);
-        jList2.setListData(items);
-        jList3.setListData(items);
-        jList4.setListData(items);
-        jList5.setListData(items);
-        jList6.setListData(items);
-        jList7.setListData(items);
-        jList8.setListData(items);
-        jList9.setListData(items);
-        jList10.setListData(items);
+	jList1.setListData(items);
+	jList2.setListData(items);
+	jList3.setListData(items);
+	jList4.setListData(items);
+	jList5.setListData(items);
+	jList6.setListData(items);
+	jList7.setListData(items);
+	jList8.setListData(items);
+	jList9.setListData(items);
+	jList10.setListData(items);
 
-        ItemCellRenderer r = new ItemCellRenderer();
-        jList9.setCellRenderer(r);
-        jList10.setCellRenderer(r);
+	ItemCellRenderer r = new ItemCellRenderer();
+	jList9.setCellRenderer(r);
+	jList10.setCellRenderer(r);
 
-        jList3.setSelectedIndex(2);
-        jList4.setSelectedIndex(2);
-        jList6.setSelectedIndex(2);
-        jList8.setSelectedIndex(2);
-        jList10.setSelectedIndex(2);
+	jList3.setSelectedIndex(2);
+	jList4.setSelectedIndex(2);
+	jList6.setSelectedIndex(2);
+	jList8.setSelectedIndex(2);
+	jList10.setSelectedIndex(2);
     }
 
     // =================================================================================================================
     // OptionsSettablePanel Methods
 
-    @Override public void setForceComponentsBackgroundColor(boolean force) {
-        Color c = force ? FORCED_BACKGROUND : DEFAULT_BACKGROUND;
-        // apply to all
-        for (Component component : getComponents()) {
-            if (component instanceof JScrollPane){
-                component = ((JScrollPane)component).getViewport().getView();
-            }
-            if (component instanceof JList) {
-                component.setBackground(c);
-            }
-        }
+    @Override
+    public void setForceComponentsBackgroundColor(boolean force) {
+	Color c = force ? FORCED_BACKGROUND : DEFAULT_BACKGROUND;
+	// apply to all
+	for (Component component : getComponents()) {
+	    if (component instanceof JScrollPane) {
+		component = ((JScrollPane) component).getViewport().getView();
+	    }
+	    if (component instanceof JList) {
+		component.setBackground(c);
+	    }
+	}
     }
 
-    @Override public void setForceComponentsNonOpaque(boolean force) {
-        setBackground(force ? Color.GREEN : DEFAULT_BACKGROUND);
-        boolean o = !force && DEFAULT_OPAQUE;
-        // apply to all
-        for (Component component : getComponents()) {
-            if (component instanceof JScrollPane){
-                component = ((JScrollPane)component).getViewport().getView();
-            }
-            if (component instanceof JList) {
-                ((JList)component).setOpaque(o);
-            }
-        }
+    @Override
+    public void setForceComponentsNonOpaque(boolean force) {
+	setBackground(force ? Color.GREEN : DEFAULT_BACKGROUND);
+	boolean o = !force && DEFAULT_OPAQUE;
+	// apply to all
+	for (Component component : getComponents()) {
+	    if (component instanceof JScrollPane) {
+		component = ((JScrollPane) component).getViewport().getView();
+	    }
+	    if (component instanceof JList) {
+		((JList) component).setOpaque(o);
+	    }
+	}
     }
 
-    @Override public void setForceComponentsToBasicUI(boolean force) {
-        // apply to all
-        for (Component component : getComponents()) {
-            if (component instanceof JScrollPane){
-                component = ((JScrollPane)component).getViewport().getView();
-            }
-            if (component instanceof JList) {
-                if (force){
-                    ((JList)component).setUI(new BasicListUI());
-                } else {
-                    ((JList)component).updateUI();
-                }
-            }
-        }
-        revalidate();
+    @Override
+    public void setForceComponentsToBasicUI(boolean force) {
+	// apply to all
+	for (Component component : getComponents()) {
+	    if (component instanceof JScrollPane) {
+		component = ((JScrollPane) component).getViewport().getView();
+	    }
+	    if (component instanceof JList) {
+		if (force) {
+		    ((JList) component).setUI(new BasicListUI());
+		} else {
+		    ((JList) component).updateUI();
+		}
+	    }
+	}
+	revalidate();
     }
 
     // =================================================================================================================
@@ -135,256 +134,262 @@ public class ListPanel extends OptionsSettablePanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
+	java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel8 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jList2 = new javax.swing.JList();
-        jList3 = new javax.swing.JList();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList5 = new FocusedList();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jList6 = new FocusedList();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jList7 = new javax.swing.JList();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jList8 = new javax.swing.JList();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jList9 = new javax.swing.JList();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jList10 = new javax.swing.JList();
+	jLabel8 = new javax.swing.JLabel();
+	jLabel2 = new javax.swing.JLabel();
+	jLabel3 = new javax.swing.JLabel();
+	jLabel4 = new javax.swing.JLabel();
+	jLabel1 = new javax.swing.JLabel();
+	jLabel6 = new javax.swing.JLabel();
+	jLabel9 = new javax.swing.JLabel();
+	jScrollPane1 = new javax.swing.JScrollPane();
+	jList1 = new javax.swing.JList();
+	jList2 = new javax.swing.JList();
+	jList3 = new javax.swing.JList();
+	jScrollPane2 = new javax.swing.JScrollPane();
+	jList4 = new javax.swing.JList();
+	jScrollPane3 = new javax.swing.JScrollPane();
+	jList5 = new FocusedList();
+	jScrollPane4 = new javax.swing.JScrollPane();
+	jList6 = new FocusedList();
+	jScrollPane5 = new javax.swing.JScrollPane();
+	jList7 = new javax.swing.JList();
+	jScrollPane6 = new javax.swing.JScrollPane();
+	jList8 = new javax.swing.JList();
+	jScrollPane7 = new javax.swing.JScrollPane();
+	jList9 = new javax.swing.JList();
+	jScrollPane8 = new javax.swing.JScrollPane();
+	jList10 = new javax.swing.JList();
 
-        setLayout(new java.awt.GridBagLayout());
+	setLayout(new java.awt.GridBagLayout());
 
-        jLabel8.setFont(jLabel8.getFont().deriveFont(jLabel8.getFont().getStyle() | java.awt.Font.BOLD, jLabel8.getFont().getSize()-2));
-        jLabel8.setForeground(java.awt.Color.darkGray);
-        //jLabel8.setText("Normal");
-        jLabel8.setText(I18nResourceHandler.getMessage("Normal"));
-        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        add(jLabel8, gridBagConstraints);
+	jLabel8.setFont(jLabel8.getFont().deriveFont(jLabel8.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel8.getFont().getSize() - 2));
+	jLabel8.setForeground(java.awt.Color.darkGray);
+	//jLabel8.setText("Normal");
+	jLabel8.setText(I18nResourceHandler.getMessage("Normal"));
+	jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 0;
+	gridBagConstraints.gridy = 1;
+	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+	add(jLabel8, gridBagConstraints);
 
-        jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()-2));
-        jLabel2.setForeground(java.awt.Color.darkGray);
-        //jLabel2.setText("Focused");
-        jLabel2.setText(I18nResourceHandler.getMessage("Focused"));
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        add(jLabel2, gridBagConstraints);
+	jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel2.getFont().getSize() - 2));
+	jLabel2.setForeground(java.awt.Color.darkGray);
+	//jLabel2.setText("Focused");
+	jLabel2.setText(I18nResourceHandler.getMessage("Focused"));
+	jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 0;
+	gridBagConstraints.gridy = 2;
+	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+	add(jLabel2, gridBagConstraints);
 
-        jLabel3.setFont(jLabel3.getFont().deriveFont(jLabel3.getFont().getStyle() | java.awt.Font.BOLD, jLabel3.getFont().getSize()-2));
-        jLabel3.setForeground(java.awt.Color.darkGray);
-        //jLabel3.setText("Without ScrollPane");
-        jLabel3.setText(I18nResourceHandler.getMessage("Without_ScrollPane"));
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        add(jLabel3, gridBagConstraints);
+	jLabel3.setFont(jLabel3.getFont().deriveFont(jLabel3.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel3.getFont().getSize() - 2));
+	jLabel3.setForeground(java.awt.Color.darkGray);
+	//jLabel3.setText("Without ScrollPane");
+	jLabel3.setText(I18nResourceHandler.getMessage("Without_ScrollPane"));
+	jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 0;
+	gridBagConstraints.gridy = 3;
+	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+	add(jLabel3, gridBagConstraints);
 
-        jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize()-2));
-        jLabel4.setForeground(java.awt.Color.darkGray);
-        //jLabel4.setText("Custom Cell Renderer");
-        jLabel4.setText(I18nResourceHandler.getMessage("Custom_Cell_Renderer"));
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        add(jLabel4, gridBagConstraints);
+	jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel4.getFont().getSize() - 2));
+	jLabel4.setForeground(java.awt.Color.darkGray);
+	//jLabel4.setText("Custom Cell Renderer");
+	jLabel4.setText(I18nResourceHandler.getMessage("Custom_Cell_Renderer"));
+	jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 0;
+	gridBagConstraints.gridy = 5;
+	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+	add(jLabel4, gridBagConstraints);
 
-        jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD, jLabel1.getFont().getSize()-2));
-        jLabel1.setForeground(java.awt.Color.darkGray);
-        //jLabel1.setText("Normal");
-        jLabel1.setText(I18nResourceHandler.getMessage("Normal"));
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
-        add(jLabel1, gridBagConstraints);
+	jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel1.getFont().getSize() - 2));
+	jLabel1.setForeground(java.awt.Color.darkGray);
+	//jLabel1.setText("Normal");
+	jLabel1.setText(I18nResourceHandler.getMessage("Normal"));
+	jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.gridy = 0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
+	add(jLabel1, gridBagConstraints);
 
-        jLabel6.setFont(jLabel6.getFont().deriveFont(jLabel6.getFont().getStyle() | java.awt.Font.BOLD, jLabel6.getFont().getSize()-2));
-        jLabel6.setForeground(java.awt.Color.darkGray);
-        //jLabel6.setText("Disabled");
-        jLabel6.setText(I18nResourceHandler.getMessage("Disabled"));
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
-        add(jLabel6, gridBagConstraints);
+	jLabel6.setFont(jLabel6.getFont().deriveFont(jLabel6.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel6.getFont().getSize() - 2));
+	jLabel6.setForeground(java.awt.Color.darkGray);
+	//jLabel6.setText("Disabled");
+	jLabel6.setText(I18nResourceHandler.getMessage("Disabled"));
+	jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 2;
+	gridBagConstraints.gridy = 0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
+	add(jLabel6, gridBagConstraints);
 
-        jLabel9.setFont(jLabel9.getFont().deriveFont(jLabel9.getFont().getStyle() | java.awt.Font.BOLD, jLabel9.getFont().getSize()-2));
-        jLabel9.setForeground(java.awt.Color.darkGray);
-        //jLabel9.setText("Custom Colors");
-        jLabel9.setText(I18nResourceHandler.getMessage("Custom_Colors"));
-        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        add(jLabel9, gridBagConstraints);
+	jLabel9.setFont(jLabel9.getFont().deriveFont(jLabel9.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel9.getFont().getSize() - 2));
+	jLabel9.setForeground(java.awt.Color.darkGray);
+	//jLabel9.setText("Custom Colors");
+	jLabel9.setText(I18nResourceHandler.getMessage("Custom_Colors"));
+	jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 0;
+	gridBagConstraints.gridy = 4;
+	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+	add(jLabel9, gridBagConstraints);
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(250, 100));
-        jScrollPane1.setViewportView(jList1);
+	jScrollPane1.setPreferredSize(new java.awt.Dimension(250, 100));
+	jScrollPane1.setViewportView(jList1);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
-        add(jScrollPane1, gridBagConstraints);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.gridy = 1;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+	add(jScrollPane1, gridBagConstraints);
 
-        jList2.setPreferredSize(new java.awt.Dimension(250, 100));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
-        add(jList2, gridBagConstraints);
+	jList2.setPreferredSize(new java.awt.Dimension(250, 100));
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.gridy = 3;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+	add(jList2, gridBagConstraints);
 
-        jList3.setEnabled(false);
-        jList3.setPreferredSize(new java.awt.Dimension(250, 100));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
-        add(jList3, gridBagConstraints);
+	jList3.setEnabled(false);
+	jList3.setPreferredSize(new java.awt.Dimension(250, 100));
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 2;
+	gridBagConstraints.gridy = 3;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+	add(jList3, gridBagConstraints);
 
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(250, 100));
+	jScrollPane2.setPreferredSize(new java.awt.Dimension(250, 100));
 
-        jList4.setEnabled(false);
-        jScrollPane2.setViewportView(jList4);
+	jList4.setEnabled(false);
+	jScrollPane2.setViewportView(jList4);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
-        add(jScrollPane2, gridBagConstraints);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 2;
+	gridBagConstraints.gridy = 1;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+	add(jScrollPane2, gridBagConstraints);
 
-        jScrollPane3.setPreferredSize(new java.awt.Dimension(250, 100));
-        jScrollPane3.setViewportView(jList5);
+	jScrollPane3.setPreferredSize(new java.awt.Dimension(250, 100));
+	jScrollPane3.setViewportView(jList5);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
-        add(jScrollPane3, gridBagConstraints);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.gridy = 2;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+	add(jScrollPane3, gridBagConstraints);
 
-        jScrollPane4.setPreferredSize(new java.awt.Dimension(250, 100));
+	jScrollPane4.setPreferredSize(new java.awt.Dimension(250, 100));
 
-        jList6.setEnabled(false);
-        jScrollPane4.setViewportView(jList6);
+	jList6.setEnabled(false);
+	jScrollPane4.setViewportView(jList6);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
-        add(jScrollPane4, gridBagConstraints);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 2;
+	gridBagConstraints.gridy = 2;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+	add(jScrollPane4, gridBagConstraints);
 
-        jScrollPane5.setPreferredSize(new java.awt.Dimension(250, 100));
+	jScrollPane5.setPreferredSize(new java.awt.Dimension(250, 100));
 
-        jList7.setBackground(java.awt.Color.gray);
-        jList7.setFont(jList7.getFont().deriveFont((jList7.getFont().getStyle() | java.awt.Font.ITALIC)));
-        jList7.setForeground(java.awt.Color.red);
-        jList7.setSelectionBackground(java.awt.Color.black);
-        jList7.setSelectionForeground(java.awt.Color.white);
-        jScrollPane5.setViewportView(jList7);
+	jList7.setBackground(java.awt.Color.gray);
+	jList7.setFont(jList7.getFont().deriveFont((jList7.getFont().getStyle() | java.awt.Font.ITALIC)));
+	jList7.setForeground(java.awt.Color.red);
+	jList7.setSelectionBackground(java.awt.Color.black);
+	jList7.setSelectionForeground(java.awt.Color.white);
+	jScrollPane5.setViewportView(jList7);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
-        add(jScrollPane5, gridBagConstraints);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.gridy = 4;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+	add(jScrollPane5, gridBagConstraints);
 
-        jScrollPane6.setPreferredSize(new java.awt.Dimension(250, 100));
+	jScrollPane6.setPreferredSize(new java.awt.Dimension(250, 100));
 
-        jList8.setBackground(java.awt.Color.gray);
-        jList8.setFont(jList8.getFont().deriveFont((jList8.getFont().getStyle() | java.awt.Font.ITALIC)));
-        jList8.setForeground(java.awt.Color.red);
-        jList8.setEnabled(false);
-        jList8.setName("disabledCustomColors"); // NOI18N
-        jList8.setSelectionBackground(java.awt.Color.black);
-        jList8.setSelectionForeground(java.awt.Color.white);
-        jScrollPane6.setViewportView(jList8);
+	jList8.setBackground(java.awt.Color.gray);
+	jList8.setFont(jList8.getFont().deriveFont((jList8.getFont().getStyle() | java.awt.Font.ITALIC)));
+	jList8.setForeground(java.awt.Color.red);
+	jList8.setEnabled(false);
+	jList8.setName("disabledCustomColors"); // NOI18N
+	jList8.setSelectionBackground(java.awt.Color.black);
+	jList8.setSelectionForeground(java.awt.Color.white);
+	jScrollPane6.setViewportView(jList8);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
-        add(jScrollPane6, gridBagConstraints);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 2;
+	gridBagConstraints.gridy = 4;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+	add(jScrollPane6, gridBagConstraints);
 
-        jScrollPane7.setPreferredSize(new java.awt.Dimension(250, 100));
-        jScrollPane7.setViewportView(jList9);
+	jScrollPane7.setPreferredSize(new java.awt.Dimension(250, 100));
+	jScrollPane7.setViewportView(jList9);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
-        add(jScrollPane7, gridBagConstraints);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.gridy = 5;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+	add(jScrollPane7, gridBagConstraints);
 
-        jScrollPane8.setPreferredSize(new java.awt.Dimension(250, 100));
+	jScrollPane8.setPreferredSize(new java.awt.Dimension(250, 100));
 
-        jList10.setEnabled(false);
-        jScrollPane8.setViewportView(jList10);
+	jList10.setEnabled(false);
+	jScrollPane8.setViewportView(jList10);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
-        add(jScrollPane8, gridBagConstraints);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 2;
+	gridBagConstraints.gridy = 5;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+	add(jScrollPane8, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -412,47 +417,53 @@ public class ListPanel extends OptionsSettablePanel {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+
     // End of variables declaration//GEN-END:variables
 
     public static final class FocusedList extends JList {
-        @Override public boolean hasFocus() { return true; }
+	@Override
+	public boolean hasFocus() {
+	    return true;
+	}
 
-        @Override public boolean isFocusOwner() { return true; }
+	@Override
+	public boolean isFocusOwner() {
+	    return true;
+	}
     }
 
     public static final class Item {
-        private String name;
-        private Double value;
+	private String name;
+	private Double value;
 
-        public Item(String name, Double value) {
-            this.name = name;
-            this.value = value;
-        }
+	public Item(String name, Double value) {
+	    this.name = name;
+	    this.value = value;
+	}
 
-        @Override public String toString() { return name; }
+	@Override
+	public String toString() {
+	    return name;
+	}
     }
 
     public static final class ItemCellRenderer extends DefaultListCellRenderer {
-        private NumberFormat format = NumberFormat.getCurrencyInstance();
+	private NumberFormat format = NumberFormat.getCurrencyInstance();
 
-        public Component getListCellRendererComponent(
-                JList list,
-                Object value,
-                int index,
-                boolean isSelected,
-                boolean cellHasFocus) {
-            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if (value instanceof Item) {
-                Item i = (Item) value;
+	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+		boolean cellHasFocus) {
+	    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+	    if (value instanceof Item) {
+		Item i = (Item) value;
 
-                Double n = i.value;
-                if (n.doubleValue() < 0) {
-                    setForeground(Color.RED);
-                }
+		Double n = i.value;
+		if (n.doubleValue() < 0) {
+		    setForeground(Color.RED);
+		}
 
-                setText(i.name + " - " + format.format(n.doubleValue()));
-            }
-            return this;
-        }
+		setText(i.name + " - " + format.format(n.doubleValue()));
+	    }
+	    return this;
+	}
     }
 }

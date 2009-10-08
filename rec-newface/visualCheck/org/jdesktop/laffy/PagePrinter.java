@@ -31,70 +31,69 @@ import java.awt.print.PrinterJob;
 
 /**
  * PagePrinter - Helper class for printing a page
- *
+ * 
  * @author Created by Jasper Potts (Jan 9, 2008)
  * @version 1.0
  */
 public class PagePrinter {
     /** Print a page using Java 1.2 API */
     public static void printPage(Page page) {
-        new PrintUtilities(page).print();
+	new PrintUtilities(page).print();
     }
 
     /** Print a page using Java 1.1 API */
     public static void printPageOld(Page page) {
-        PrintJob printJob = Toolkit.getDefaultToolkit().getPrintJob(Laffy.getInstance().getFrame(),
-                I18nResourceHandler.getMessage("Laffy_1.1_Printing_Test"), null, null);
-        if (printJob != null) {
-            Graphics pg = printJob.getGraphics();
-            if (pg != null) {
-                page.printAll(pg);
-                pg.dispose();
-            }
-            printJob.end();
-        }
+	PrintJob printJob = Toolkit.getDefaultToolkit().getPrintJob(Laffy.getInstance().getFrame(),
+		I18nResourceHandler.getMessage("Laffy_1.1_Printing_Test"), null, null);
+	if (printJob != null) {
+	    Graphics pg = printJob.getGraphics();
+	    if (pg != null) {
+		page.printAll(pg);
+		pg.dispose();
+	    }
+	    printJob.end();
+	}
     }
 
-
     public static class PrintUtilities implements Printable {
-        private Component componentToBePrinted;
+	private Component componentToBePrinted;
 
-        public PrintUtilities(Component componentToBePrinted) {
-            this.componentToBePrinted = componentToBePrinted;
-        }
+	public PrintUtilities(Component componentToBePrinted) {
+	    this.componentToBePrinted = componentToBePrinted;
+	}
 
-        public void print() {
-            PrinterJob printJob = PrinterJob.getPrinterJob();
-            printJob.setPrintable(this);
-            if (printJob.printDialog())
-                try {
-                    printJob.print();
-                } catch (PrinterException pe) {
-                    System.out.println(I18nResourceHandler.getMessage("Error_printing") + pe);
-                }
-        }
+	public void print() {
+	    PrinterJob printJob = PrinterJob.getPrinterJob();
+	    printJob.setPrintable(this);
+	    if (printJob.printDialog())
+		try {
+		    printJob.print();
+		} catch (PrinterException pe) {
+		    System.out.println(I18nResourceHandler.getMessage("Error_printing") + pe);
+		}
+	}
 
-        public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
-            if (pageIndex > 0) {
-                return (NO_SUCH_PAGE);
-            } else {
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
-                disableDoubleBuffering(componentToBePrinted);
-                componentToBePrinted.paint(g2d);
-                enableDoubleBuffering(componentToBePrinted);
-                return (PAGE_EXISTS);
-            }
-        }
+	public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
+	    if (pageIndex > 0) {
+		return (NO_SUCH_PAGE);
+	    } else {
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+		disableDoubleBuffering(componentToBePrinted);
+		componentToBePrinted.paint(g2d);
+		enableDoubleBuffering(componentToBePrinted);
+		return (PAGE_EXISTS);
+	    }
+	}
 
-        public void disableDoubleBuffering(Component c) {
-            RepaintManager currentManager = RepaintManager.currentManager(c);
-            currentManager.setDoubleBufferingEnabled(false);
-        }
+	public void disableDoubleBuffering(Component c) {
+	    RepaintManager currentManager = RepaintManager.currentManager(c);
+	    currentManager.setDoubleBufferingEnabled(false);
+	}
 
-        public void enableDoubleBuffering(Component c) {
-            RepaintManager currentManager = RepaintManager.currentManager(c);
-            currentManager.setDoubleBufferingEnabled(true);
-        }
+	public void enableDoubleBuffering(Component c) {
+	    RepaintManager currentManager = RepaintManager.currentManager(c);
+	    currentManager.setDoubleBufferingEnabled(true);
+	}
     }
 }

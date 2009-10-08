@@ -29,29 +29,29 @@ import java.beans.PropertyChangeListener;
 
 /**
  * DialogSection
- *
+ * 
  * @author Created by Jasper Potts (Sep 6, 2007)
  * @version 1.0
  */
 public abstract class DialogSection extends Section {
 
     public DialogSection(String name) {
-        super(name);
-        JComponent content = getDialogContent();
-        JInternalFrame internalFrame = new JInternalFrame(name) {
-            public boolean isSelected() {
-                return true;
-            }
-        };
-        internalFrame.getContentPane().add(content, BorderLayout.CENTER);
-        internalFrame.pack();
-        internalFrame.setVisible(true);
-//        internalFrame.setPreferredSize(new Dimension(100,100));
-        contentPanel.setContent(internalFrame);
+	super(name);
+	JComponent content = getDialogContent();
+	JInternalFrame internalFrame = new JInternalFrame(name) {
+	    public boolean isSelected() {
+		return true;
+	    }
+	};
+	internalFrame.getContentPane().add(content, BorderLayout.CENTER);
+	internalFrame.pack();
+	internalFrame.setVisible(true);
+	//        internalFrame.setPreferredSize(new Dimension(100,100));
+	contentPanel.setContent(internalFrame);
     }
 
     protected Action createFloatAction() {
-        return new ShowDialogAction();
+	return new ShowDialogAction();
     }
 
     protected abstract void showDialog();
@@ -62,19 +62,19 @@ public abstract class DialogSection extends Section {
     // Show Dialog Action
 
     private class ShowDialogAction extends AbstractAction {
-        /** Creates an {@code Action}. */
-        public ShowDialogAction() {
-            super(getName());
-            DialogSection.this.addPropertyChangeListener("name", new PropertyChangeListener() {
-                public void propertyChange(PropertyChangeEvent evt) {
-                    putValue(Action.NAME, getName());
-                }
-            });
-        }
+	/** Creates an {@code Action}. */
+	public ShowDialogAction() {
+	    super(getName());
+	    DialogSection.this.addPropertyChangeListener("name", new PropertyChangeListener() {
+		public void propertyChange(PropertyChangeEvent evt) {
+		    putValue(Action.NAME, getName());
+		}
+	    });
+	}
 
-        /** Invoked when an action occurs. */
-        public void actionPerformed(ActionEvent event) {
-            showDialog();
-        }
+	/** Invoked when an action occurs. */
+	public void actionPerformed(ActionEvent event) {
+	    showDialog();
+	}
     }
 }

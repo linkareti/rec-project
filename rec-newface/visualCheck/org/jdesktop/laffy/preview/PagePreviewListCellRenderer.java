@@ -34,32 +34,32 @@ import java.awt.RenderingHints;
 public class PagePreviewListCellRenderer extends DefaultListCellRenderer {
 
     public PagePreviewListCellRenderer() {
-        super();
-        setHorizontalAlignment(CENTER);
-        setVerticalTextPosition(BOTTOM);
-        setHorizontalTextPosition(CENTER);
-        setIconTextGap(0);
+	super();
+	setHorizontalAlignment(CENTER);
+	setVerticalTextPosition(BOTTOM);
+	setHorizontalTextPosition(CENTER);
+	setIconTextGap(0);
     }
 
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index,
-                                                  boolean isSelected, boolean cellHasFocus) {
-        super.getListCellRendererComponent(list, "", index, isSelected, cellHasFocus);
-        setFont(getFont().deriveFont(Font.BOLD, 16f));
-        setBorder(BorderFactory.createEmptyBorder(5, 0, 10, 0));
-        setForeground(Color.WHITE);
-        if (value instanceof Page) {
-            Page page = (Page) value;
-            setIcon(page.getPreviewIcon());
-            setText(page.getName());
-        }
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+	    boolean cellHasFocus) {
+	super.getListCellRendererComponent(list, "", index, isSelected, cellHasFocus);
+	setFont(getFont().deriveFont(Font.BOLD, 16f));
+	setBorder(BorderFactory.createEmptyBorder(5, 0, 10, 0));
+	setForeground(Color.WHITE);
+	if (value instanceof Page) {
+	    Page page = (Page) value;
+	    setIcon(page.getPreviewIcon());
+	    setText(page.getName());
+	}
 
-        return this;
+	return this;
     }
 
     protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create(0, 0, getWidth(), getHeight());
-        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        super.paintComponent(g2);
+	Graphics2D g2 = (Graphics2D) g.create(0, 0, getWidth(), getHeight());
+	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+	super.paintComponent(g2);
     }
 }

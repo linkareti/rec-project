@@ -30,7 +30,7 @@ import java.awt.Insets;
 /**
  * Represents a page of controls. The page "name" is special, and should be localized as it may appear in descriptive
  * contexts. Each page also contains a "preview" icon.
- *
+ * 
  * @author Richard Bair
  */
 public class Page extends JPanel {
@@ -46,48 +46,46 @@ public class Page extends JPanel {
     private int sectionCount = 0;
 
     public Page(String name, Section... sections) {
-        this(name, null, sections);
+	this(name, null, sections);
     }
 
     public Page(String name, Icon previewIcon, Section... sections) {
-        super(new GridBagLayout());
-        setName(name);
-        setBackground(Color.WHITE);
-        for (Section section : sections) {
-            add(section,
-                    new GridBagConstraints(0, sectionCount++, 1, 1, 1.0, 0, GridBagConstraints.CENTER,
-                            GridBagConstraints.HORIZONTAL, new Insets(10, 10, 0, 10), 0, 0));
-        }
-        JPanel fill = new JPanel();
-        fill.setOpaque(false);
-        add(fill,
-                new GridBagConstraints(0, sectionCount, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
-                        GridBagConstraints.BOTH, new Insets(10, 0, 0, 0), 0, 0));
-        this.preview = previewIcon == null ? getNoPreviewIcon() : previewIcon;
+	super(new GridBagLayout());
+	setName(name);
+	setBackground(Color.WHITE);
+	for (Section section : sections) {
+	    add(section, new GridBagConstraints(0, sectionCount++, 1, 1, 1.0, 0, GridBagConstraints.CENTER,
+		    GridBagConstraints.HORIZONTAL, new Insets(10, 10, 0, 10), 0, 0));
+	}
+	JPanel fill = new JPanel();
+	fill.setOpaque(false);
+	add(fill, new GridBagConstraints(0, sectionCount, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
+		GridBagConstraints.BOTH, new Insets(10, 0, 0, 0), 0, 0));
+	this.preview = previewIcon == null ? getNoPreviewIcon() : previewIcon;
     }
 
     public void setPreviewIcon(Icon icon) {
-        Icon old = preview;
-        preview = icon;
-        firePropertyChange("previewIcon", old, preview);
+	Icon old = preview;
+	preview = icon;
+	firePropertyChange("previewIcon", old, preview);
     }
 
     public Icon getPreviewIcon() {
-        return preview;
+	return preview;
     }
 
     private synchronized static Icon getNoPreviewIcon() {
-        if (NO_PREVIEW_ICON == null) {
-            try {
-                NO_PREVIEW_ICON = new ImageIcon(ImageIO.read(Page.class.getResource("icons/nopreview.png")));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return NO_PREVIEW_ICON;
+	if (NO_PREVIEW_ICON == null) {
+	    try {
+		NO_PREVIEW_ICON = new ImageIcon(ImageIO.read(Page.class.getResource("icons/nopreview.png")));
+	    } catch (Exception e) {
+		e.printStackTrace();
+	    }
+	}
+	return NO_PREVIEW_ICON;
     }
 
     public String toString() {
-        return getName();
+	return getName();
     }
 }

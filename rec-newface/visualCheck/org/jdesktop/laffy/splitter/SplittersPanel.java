@@ -32,38 +32,40 @@ public class SplittersPanel extends OptionsSettablePanel {
 
     /** Creates new form SplittersPanel */
     public SplittersPanel() {
-        initComponents();
-        DEFAULT_BACKGROUND = jSplitPane1.getBackground();
-        DEFAULT_OPAQUE = jSplitPane1.isOpaque();
+	initComponents();
+	DEFAULT_BACKGROUND = jSplitPane1.getBackground();
+	DEFAULT_OPAQUE = jSplitPane1.isOpaque();
     }
 
     // =================================================================================================================
     // OptionsSettablePanel Methods
 
-    @Override public void setForceComponentsBackgroundColor(boolean force) {
-        Color c = force ? FORCED_BACKGROUND : DEFAULT_BACKGROUND;
-//        boolean o = force ? true : DEFAULT_OPAQUE;
-        jSplitPane1.setBackground(c);
-        jSplitPane2.setBackground(c);
-        jSplitPane3.setBackground(c);
-        jSplitPane4.setBackground(c);
-        jSplitPane5.setBackground(c);
-        jSplitPane6.setBackground(c);
-        jSplitPane7.setBackground(c);
-        jSplitPane8.setBackground(c);
+    @Override
+    public void setForceComponentsBackgroundColor(boolean force) {
+	Color c = force ? FORCED_BACKGROUND : DEFAULT_BACKGROUND;
+	//        boolean o = force ? true : DEFAULT_OPAQUE;
+	jSplitPane1.setBackground(c);
+	jSplitPane2.setBackground(c);
+	jSplitPane3.setBackground(c);
+	jSplitPane4.setBackground(c);
+	jSplitPane5.setBackground(c);
+	jSplitPane6.setBackground(c);
+	jSplitPane7.setBackground(c);
+	jSplitPane8.setBackground(c);
     }
 
-    @Override public void setForceComponentsNonOpaque(boolean force) {
-        setBackground(force ? Color.GREEN : DEFAULT_BACKGROUND);
-        boolean o = force ? false : DEFAULT_OPAQUE;
-        jSplitPane1.setOpaque(o);
-        jSplitPane2.setOpaque(o);
-        jSplitPane3.setOpaque(o);
-        jSplitPane4.setOpaque(o);
-        jSplitPane5.setOpaque(o);
-        jSplitPane6.setOpaque(o);
-        jSplitPane7.setOpaque(o);
-        jSplitPane8.setOpaque(o);
+    @Override
+    public void setForceComponentsNonOpaque(boolean force) {
+	setBackground(force ? Color.GREEN : DEFAULT_BACKGROUND);
+	boolean o = force ? false : DEFAULT_OPAQUE;
+	jSplitPane1.setOpaque(o);
+	jSplitPane2.setOpaque(o);
+	jSplitPane3.setOpaque(o);
+	jSplitPane4.setOpaque(o);
+	jSplitPane5.setOpaque(o);
+	jSplitPane6.setOpaque(o);
+	jSplitPane7.setOpaque(o);
+	jSplitPane8.setOpaque(o);
     }
 
     // =================================================================================================================
@@ -75,395 +77,400 @@ public class SplittersPanel extends OptionsSettablePanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
-
-        jLabel8 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jSplitPane2 = new javax.swing.JSplitPane();
-        jPanel7 = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jSplitPane3 = new javax.swing.JSplitPane();
-        jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jSplitPane4 = new javax.swing.JSplitPane();
-        jPanel9 = new javax.swing.JPanel();
-        jButton9 = new javax.swing.JButton();
-        jPanel10 = new javax.swing.JPanel();
-        jButton10 = new javax.swing.JButton();
-        jSplitPane5 = new javax.swing.JSplitPane();
-        jPanel5 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jSplitPane6 = new javax.swing.JSplitPane();
-        jPanel11 = new javax.swing.JPanel();
-        jButton11 = new javax.swing.JButton();
-        jPanel12 = new javax.swing.JPanel();
-        jButton12 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jSplitPane7 = new javax.swing.JSplitPane();
-        jPanel13 = new javax.swing.JPanel();
-        jButton13 = new javax.swing.JButton();
-        jPanel14 = new javax.swing.JPanel();
-        jButton14 = new javax.swing.JButton();
-        jSplitPane8 = new javax.swing.JSplitPane();
-        jPanel15 = new javax.swing.JPanel();
-        jButton15 = new javax.swing.JButton();
-        jPanel16 = new javax.swing.JPanel();
-        jButton16 = new javax.swing.JButton();
-
-        setLayout(new java.awt.GridBagLayout());
-
-        jLabel8.setFont(jLabel8.getFont().deriveFont(jLabel8.getFont().getStyle() | java.awt.Font.BOLD, jLabel8.getFont().getSize()-2));
-        jLabel8.setForeground(java.awt.Color.darkGray);
-        //jLabel8.setText("Normal");
-        jLabel8.setText(I18nResourceHandler.getMessage("Normal"));
-        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        add(jLabel8, gridBagConstraints);
-
-        jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize()-2));
-        jLabel2.setForeground(java.awt.Color.darkGray);
-        //jLabel2.setText("Large Splitter");
-        jLabel2.setText(I18nResourceHandler.getMessage("Large_Splitter"));
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        add(jLabel2, gridBagConstraints);
-
-        jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD, jLabel1.getFont().getSize()-2));
-        jLabel1.setForeground(java.awt.Color.darkGray);
-        //jLabel1.setText("Horizontal");
-        jLabel1.setText(I18nResourceHandler.getMessage("Horizontal"));
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
-        add(jLabel1, gridBagConstraints);
-
-        jLabel3.setFont(jLabel3.getFont().deriveFont(jLabel3.getFont().getStyle() | java.awt.Font.BOLD, jLabel3.getFont().getSize()-2));
-        jLabel3.setForeground(java.awt.Color.darkGray);
-        //jLabel3.setText("One Touch");
-        jLabel3.setText(I18nResourceHandler.getMessage("One_Touch"));
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        add(jLabel3, gridBagConstraints);
-
-        jLabel5.setFont(jLabel5.getFont().deriveFont(jLabel5.getFont().getStyle() | java.awt.Font.BOLD, jLabel5.getFont().getSize()-2));
-        jLabel5.setForeground(java.awt.Color.darkGray);
-        //jLabel5.setText("Vertical");
-        jLabel5.setText(I18nResourceHandler.getMessage("Vertical"));
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
-        add(jLabel5, gridBagConstraints);
-
-        jSplitPane1.setDividerLocation(120);
-        jSplitPane1.setResizeWeight(0.5);
-        jSplitPane1.setPreferredSize(new java.awt.Dimension(300, 250));
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel1.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel1.setLayout(new java.awt.BorderLayout());
-
-        //jButton1.setText("Button");
-        jButton1.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel1.add(jButton1, java.awt.BorderLayout.CENTER);
-
-        jSplitPane1.setLeftComponent(jPanel1);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel2.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel2.setLayout(new java.awt.BorderLayout());
-
-        //jButton2.setText("Button");
-        jButton2.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel2.add(jButton2, java.awt.BorderLayout.CENTER);
-
-        jSplitPane1.setRightComponent(jPanel2);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(jSplitPane1, gridBagConstraints);
-
-        jSplitPane2.setDividerLocation(120);
-        jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane2.setResizeWeight(0.5);
-        jSplitPane2.setPreferredSize(new java.awt.Dimension(300, 250));
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel7.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel7.setLayout(new java.awt.BorderLayout());
-
-        //jButton7.setText("Button");
-        jButton7.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel7.add(jButton7, java.awt.BorderLayout.CENTER);
-
-        jSplitPane2.setTopComponent(jPanel7);
-
-        jPanel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel8.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel8.setLayout(new java.awt.BorderLayout());
-
-        //jButton8.setText("Button");
-        jButton8.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel8.add(jButton8, java.awt.BorderLayout.CENTER);
-
-        jSplitPane2.setRightComponent(jPanel8);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(jSplitPane2, gridBagConstraints);
-
-        jSplitPane3.setDividerLocation(120);
-        jSplitPane3.setDividerSize(30);
-        jSplitPane3.setResizeWeight(0.5);
-        jSplitPane3.setPreferredSize(new java.awt.Dimension(300, 250));
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel3.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel3.setLayout(new java.awt.BorderLayout());
-
-        //jButton3.setText("Button");
-        jButton3.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel3.add(jButton3, java.awt.BorderLayout.CENTER);
-
-        jSplitPane3.setLeftComponent(jPanel3);
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel4.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel4.setLayout(new java.awt.BorderLayout());
-
-        //jButton4.setText("Button");
-        jButton4.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel4.add(jButton4, java.awt.BorderLayout.CENTER);
-
-        jSplitPane3.setRightComponent(jPanel4);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(jSplitPane3, gridBagConstraints);
-
-        jSplitPane4.setDividerLocation(120);
-        jSplitPane4.setDividerSize(30);
-        jSplitPane4.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane4.setResizeWeight(0.5);
-        jSplitPane4.setPreferredSize(new java.awt.Dimension(300, 250));
-
-        jPanel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel9.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel9.setLayout(new java.awt.BorderLayout());
-
-        //jButton9.setText("Button");
-        jButton9.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel9.add(jButton9, java.awt.BorderLayout.CENTER);
-
-        jSplitPane4.setTopComponent(jPanel9);
-
-        jPanel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel10.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel10.setLayout(new java.awt.BorderLayout());
-
-        //jButton10.setText("Button");
-        jButton10.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel10.add(jButton10, java.awt.BorderLayout.CENTER);
-
-        jSplitPane4.setRightComponent(jPanel10);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(jSplitPane4, gridBagConstraints);
-
-        jSplitPane5.setDividerLocation(120);
-        jSplitPane5.setResizeWeight(0.5);
-        jSplitPane5.setOneTouchExpandable(true);
-        jSplitPane5.setPreferredSize(new java.awt.Dimension(300, 250));
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel5.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel5.setLayout(new java.awt.BorderLayout());
-
-        //jButton5.setText("Button");
-        jButton5.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel5.add(jButton5, java.awt.BorderLayout.CENTER);
-
-        jSplitPane5.setLeftComponent(jPanel5);
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel6.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel6.setLayout(new java.awt.BorderLayout());
-
-        //jButton6.setText("Button");
-        jButton6.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel6.add(jButton6, java.awt.BorderLayout.CENTER);
-
-        jSplitPane5.setRightComponent(jPanel6);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(jSplitPane5, gridBagConstraints);
-
-        jSplitPane6.setDividerLocation(120);
-        jSplitPane6.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane6.setResizeWeight(0.5);
-        jSplitPane6.setOneTouchExpandable(true);
-        jSplitPane6.setPreferredSize(new java.awt.Dimension(300, 250));
-
-        jPanel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel11.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel11.setLayout(new java.awt.BorderLayout());
-
-        //jButton11.setText("Button");
-        jButton11.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel11.add(jButton11, java.awt.BorderLayout.CENTER);
-
-        jSplitPane6.setTopComponent(jPanel11);
-
-        jPanel12.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel12.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel12.setLayout(new java.awt.BorderLayout());
-
-        //jButton12.setText("Button");
-        jButton12.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel12.add(jButton12, java.awt.BorderLayout.CENTER);
-
-        jSplitPane6.setRightComponent(jPanel12);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(jSplitPane6, gridBagConstraints);
-
-        jLabel9.setFont(jLabel9.getFont().deriveFont(jLabel9.getFont().getStyle() | java.awt.Font.BOLD, jLabel9.getFont().getSize()-2));
-        jLabel9.setForeground(java.awt.Color.darkGray);
-        //jLabel9.setText("Disabled");
-        jLabel9.setText(I18nResourceHandler.getMessage("Disabled"));
-        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-        add(jLabel9, gridBagConstraints);
-
-        jSplitPane7.setDividerLocation(120);
-        jSplitPane7.setResizeWeight(0.5);
-        jSplitPane7.setEnabled(false);
-        jSplitPane7.setPreferredSize(new java.awt.Dimension(300, 250));
-
-        jPanel13.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel13.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel13.setLayout(new java.awt.BorderLayout());
-
-        //jButton13.setText("Button");
-        jButton13.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel13.add(jButton13, java.awt.BorderLayout.CENTER);
-
-        jSplitPane7.setLeftComponent(jPanel13);
-
-        jPanel14.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel14.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel14.setLayout(new java.awt.BorderLayout());
-
-        //jButton14.setText("Button");
-        jButton14.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel14.add(jButton14, java.awt.BorderLayout.CENTER);
-
-        jSplitPane7.setRightComponent(jPanel14);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(jSplitPane7, gridBagConstraints);
-
-        jSplitPane8.setDividerLocation(120);
-        jSplitPane8.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane8.setResizeWeight(0.5);
-        jSplitPane8.setEnabled(false);
-        jSplitPane8.setPreferredSize(new java.awt.Dimension(300, 250));
-
-        jPanel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel15.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel15.setLayout(new java.awt.BorderLayout());
-
-        //jButton15.setText("Button");
-        jButton15.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel15.add(jButton15, java.awt.BorderLayout.CENTER);
-
-        jSplitPane8.setTopComponent(jPanel15);
-
-        jPanel16.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel16.setMinimumSize(new java.awt.Dimension(5, 5));
-        jPanel16.setLayout(new java.awt.BorderLayout());
-
-        //jButton16.setText("Button");
-        jButton16.setText(I18nResourceHandler.getMessage("Button"));
-        jPanel16.add(jButton16, java.awt.BorderLayout.CENTER);
-
-        jSplitPane8.setRightComponent(jPanel16);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        add(jSplitPane8, gridBagConstraints);
+	java.awt.GridBagConstraints gridBagConstraints;
+
+	jLabel8 = new javax.swing.JLabel();
+	jLabel2 = new javax.swing.JLabel();
+	jLabel1 = new javax.swing.JLabel();
+	jLabel3 = new javax.swing.JLabel();
+	jLabel5 = new javax.swing.JLabel();
+	jSplitPane1 = new javax.swing.JSplitPane();
+	jPanel1 = new javax.swing.JPanel();
+	jButton1 = new javax.swing.JButton();
+	jPanel2 = new javax.swing.JPanel();
+	jButton2 = new javax.swing.JButton();
+	jSplitPane2 = new javax.swing.JSplitPane();
+	jPanel7 = new javax.swing.JPanel();
+	jButton7 = new javax.swing.JButton();
+	jPanel8 = new javax.swing.JPanel();
+	jButton8 = new javax.swing.JButton();
+	jSplitPane3 = new javax.swing.JSplitPane();
+	jPanel3 = new javax.swing.JPanel();
+	jButton3 = new javax.swing.JButton();
+	jPanel4 = new javax.swing.JPanel();
+	jButton4 = new javax.swing.JButton();
+	jSplitPane4 = new javax.swing.JSplitPane();
+	jPanel9 = new javax.swing.JPanel();
+	jButton9 = new javax.swing.JButton();
+	jPanel10 = new javax.swing.JPanel();
+	jButton10 = new javax.swing.JButton();
+	jSplitPane5 = new javax.swing.JSplitPane();
+	jPanel5 = new javax.swing.JPanel();
+	jButton5 = new javax.swing.JButton();
+	jPanel6 = new javax.swing.JPanel();
+	jButton6 = new javax.swing.JButton();
+	jSplitPane6 = new javax.swing.JSplitPane();
+	jPanel11 = new javax.swing.JPanel();
+	jButton11 = new javax.swing.JButton();
+	jPanel12 = new javax.swing.JPanel();
+	jButton12 = new javax.swing.JButton();
+	jLabel9 = new javax.swing.JLabel();
+	jSplitPane7 = new javax.swing.JSplitPane();
+	jPanel13 = new javax.swing.JPanel();
+	jButton13 = new javax.swing.JButton();
+	jPanel14 = new javax.swing.JPanel();
+	jButton14 = new javax.swing.JButton();
+	jSplitPane8 = new javax.swing.JSplitPane();
+	jPanel15 = new javax.swing.JPanel();
+	jButton15 = new javax.swing.JButton();
+	jPanel16 = new javax.swing.JPanel();
+	jButton16 = new javax.swing.JButton();
+
+	setLayout(new java.awt.GridBagLayout());
+
+	jLabel8.setFont(jLabel8.getFont().deriveFont(jLabel8.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel8.getFont().getSize() - 2));
+	jLabel8.setForeground(java.awt.Color.darkGray);
+	//jLabel8.setText("Normal");
+	jLabel8.setText(I18nResourceHandler.getMessage("Normal"));
+	jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 0;
+	gridBagConstraints.gridy = 1;
+	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+	add(jLabel8, gridBagConstraints);
+
+	jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel2.getFont().getSize() - 2));
+	jLabel2.setForeground(java.awt.Color.darkGray);
+	//jLabel2.setText("Large Splitter");
+	jLabel2.setText(I18nResourceHandler.getMessage("Large_Splitter"));
+	jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 0;
+	gridBagConstraints.gridy = 2;
+	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+	add(jLabel2, gridBagConstraints);
+
+	jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel1.getFont().getSize() - 2));
+	jLabel1.setForeground(java.awt.Color.darkGray);
+	//jLabel1.setText("Horizontal");
+	jLabel1.setText(I18nResourceHandler.getMessage("Horizontal"));
+	jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.gridy = 0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
+	add(jLabel1, gridBagConstraints);
+
+	jLabel3.setFont(jLabel3.getFont().deriveFont(jLabel3.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel3.getFont().getSize() - 2));
+	jLabel3.setForeground(java.awt.Color.darkGray);
+	//jLabel3.setText("One Touch");
+	jLabel3.setText(I18nResourceHandler.getMessage("One_Touch"));
+	jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 0;
+	gridBagConstraints.gridy = 3;
+	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+	add(jLabel3, gridBagConstraints);
+
+	jLabel5.setFont(jLabel5.getFont().deriveFont(jLabel5.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel5.getFont().getSize() - 2));
+	jLabel5.setForeground(java.awt.Color.darkGray);
+	//jLabel5.setText("Vertical");
+	jLabel5.setText(I18nResourceHandler.getMessage("Vertical"));
+	jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridy = 0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
+	add(jLabel5, gridBagConstraints);
+
+	jSplitPane1.setDividerLocation(120);
+	jSplitPane1.setResizeWeight(0.5);
+	jSplitPane1.setPreferredSize(new java.awt.Dimension(300, 250));
+
+	jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel1.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel1.setLayout(new java.awt.BorderLayout());
+
+	//jButton1.setText("Button");
+	jButton1.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel1.add(jButton1, java.awt.BorderLayout.CENTER);
+
+	jSplitPane1.setLeftComponent(jPanel1);
+
+	jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel2.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel2.setLayout(new java.awt.BorderLayout());
+
+	//jButton2.setText("Button");
+	jButton2.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel2.add(jButton2, java.awt.BorderLayout.CENTER);
+
+	jSplitPane1.setRightComponent(jPanel2);
+
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.gridy = 1;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+	add(jSplitPane1, gridBagConstraints);
+
+	jSplitPane2.setDividerLocation(120);
+	jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+	jSplitPane2.setResizeWeight(0.5);
+	jSplitPane2.setPreferredSize(new java.awt.Dimension(300, 250));
+
+	jPanel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel7.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel7.setLayout(new java.awt.BorderLayout());
+
+	//jButton7.setText("Button");
+	jButton7.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel7.add(jButton7, java.awt.BorderLayout.CENTER);
+
+	jSplitPane2.setTopComponent(jPanel7);
+
+	jPanel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel8.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel8.setLayout(new java.awt.BorderLayout());
+
+	//jButton8.setText("Button");
+	jButton8.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel8.add(jButton8, java.awt.BorderLayout.CENTER);
+
+	jSplitPane2.setRightComponent(jPanel8);
+
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 2;
+	gridBagConstraints.gridy = 1;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+	add(jSplitPane2, gridBagConstraints);
+
+	jSplitPane3.setDividerLocation(120);
+	jSplitPane3.setDividerSize(30);
+	jSplitPane3.setResizeWeight(0.5);
+	jSplitPane3.setPreferredSize(new java.awt.Dimension(300, 250));
+
+	jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel3.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel3.setLayout(new java.awt.BorderLayout());
+
+	//jButton3.setText("Button");
+	jButton3.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel3.add(jButton3, java.awt.BorderLayout.CENTER);
+
+	jSplitPane3.setLeftComponent(jPanel3);
+
+	jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel4.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel4.setLayout(new java.awt.BorderLayout());
+
+	//jButton4.setText("Button");
+	jButton4.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel4.add(jButton4, java.awt.BorderLayout.CENTER);
+
+	jSplitPane3.setRightComponent(jPanel4);
+
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.gridy = 2;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+	add(jSplitPane3, gridBagConstraints);
+
+	jSplitPane4.setDividerLocation(120);
+	jSplitPane4.setDividerSize(30);
+	jSplitPane4.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+	jSplitPane4.setResizeWeight(0.5);
+	jSplitPane4.setPreferredSize(new java.awt.Dimension(300, 250));
+
+	jPanel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel9.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel9.setLayout(new java.awt.BorderLayout());
+
+	//jButton9.setText("Button");
+	jButton9.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel9.add(jButton9, java.awt.BorderLayout.CENTER);
+
+	jSplitPane4.setTopComponent(jPanel9);
+
+	jPanel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel10.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel10.setLayout(new java.awt.BorderLayout());
+
+	//jButton10.setText("Button");
+	jButton10.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel10.add(jButton10, java.awt.BorderLayout.CENTER);
+
+	jSplitPane4.setRightComponent(jPanel10);
+
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 2;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+	add(jSplitPane4, gridBagConstraints);
+
+	jSplitPane5.setDividerLocation(120);
+	jSplitPane5.setResizeWeight(0.5);
+	jSplitPane5.setOneTouchExpandable(true);
+	jSplitPane5.setPreferredSize(new java.awt.Dimension(300, 250));
+
+	jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel5.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel5.setLayout(new java.awt.BorderLayout());
+
+	//jButton5.setText("Button");
+	jButton5.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel5.add(jButton5, java.awt.BorderLayout.CENTER);
+
+	jSplitPane5.setLeftComponent(jPanel5);
+
+	jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel6.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel6.setLayout(new java.awt.BorderLayout());
+
+	//jButton6.setText("Button");
+	jButton6.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel6.add(jButton6, java.awt.BorderLayout.CENTER);
+
+	jSplitPane5.setRightComponent(jPanel6);
+
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+	add(jSplitPane5, gridBagConstraints);
+
+	jSplitPane6.setDividerLocation(120);
+	jSplitPane6.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+	jSplitPane6.setResizeWeight(0.5);
+	jSplitPane6.setOneTouchExpandable(true);
+	jSplitPane6.setPreferredSize(new java.awt.Dimension(300, 250));
+
+	jPanel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel11.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel11.setLayout(new java.awt.BorderLayout());
+
+	//jButton11.setText("Button");
+	jButton11.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel11.add(jButton11, java.awt.BorderLayout.CENTER);
+
+	jSplitPane6.setTopComponent(jPanel11);
+
+	jPanel12.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel12.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel12.setLayout(new java.awt.BorderLayout());
+
+	//jButton12.setText("Button");
+	jButton12.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel12.add(jButton12, java.awt.BorderLayout.CENTER);
+
+	jSplitPane6.setRightComponent(jPanel12);
+
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 2;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+	add(jSplitPane6, gridBagConstraints);
+
+	jLabel9.setFont(jLabel9.getFont().deriveFont(jLabel9.getFont().getStyle() | java.awt.Font.BOLD,
+		jLabel9.getFont().getSize() - 2));
+	jLabel9.setForeground(java.awt.Color.darkGray);
+	//jLabel9.setText("Disabled");
+	jLabel9.setText(I18nResourceHandler.getMessage("Disabled"));
+	jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 0;
+	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+	add(jLabel9, gridBagConstraints);
+
+	jSplitPane7.setDividerLocation(120);
+	jSplitPane7.setResizeWeight(0.5);
+	jSplitPane7.setEnabled(false);
+	jSplitPane7.setPreferredSize(new java.awt.Dimension(300, 250));
+
+	jPanel13.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel13.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel13.setLayout(new java.awt.BorderLayout());
+
+	//jButton13.setText("Button");
+	jButton13.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel13.add(jButton13, java.awt.BorderLayout.CENTER);
+
+	jSplitPane7.setLeftComponent(jPanel13);
+
+	jPanel14.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel14.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel14.setLayout(new java.awt.BorderLayout());
+
+	//jButton14.setText("Button");
+	jButton14.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel14.add(jButton14, java.awt.BorderLayout.CENTER);
+
+	jSplitPane7.setRightComponent(jPanel14);
+
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 1;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+	add(jSplitPane7, gridBagConstraints);
+
+	jSplitPane8.setDividerLocation(120);
+	jSplitPane8.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+	jSplitPane8.setResizeWeight(0.5);
+	jSplitPane8.setEnabled(false);
+	jSplitPane8.setPreferredSize(new java.awt.Dimension(300, 250));
+
+	jPanel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel15.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel15.setLayout(new java.awt.BorderLayout());
+
+	//jButton15.setText("Button");
+	jButton15.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel15.add(jButton15, java.awt.BorderLayout.CENTER);
+
+	jSplitPane8.setTopComponent(jPanel15);
+
+	jPanel16.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+	jPanel16.setMinimumSize(new java.awt.Dimension(5, 5));
+	jPanel16.setLayout(new java.awt.BorderLayout());
+
+	//jButton16.setText("Button");
+	jButton16.setText(I18nResourceHandler.getMessage("Button"));
+	jPanel16.add(jButton16, java.awt.BorderLayout.CENTER);
+
+	jSplitPane8.setRightComponent(jPanel16);
+
+	gridBagConstraints = new java.awt.GridBagConstraints();
+	gridBagConstraints.gridx = 2;
+	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+	gridBagConstraints.weightx = 1.0;
+	gridBagConstraints.weighty = 1.0;
+	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+	add(jSplitPane8, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

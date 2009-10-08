@@ -30,68 +30,56 @@ import java.awt.image.BufferedImage;
 
 /**
  * SplashWindow - Fun little progress splash screen for laffy
- *
+ * 
  * @author Created by Jasper Potts (Apr 16, 2008)
  */
 public class SplashWindow extends JWindow {
-    private static final Color[] COLORS = new Color[]{
-            new Color(255, 212, 3),
-            new Color(255, 177, 0),
-            new Color(255, 109, 0),
-            new Color(255, 2, 7),
-            new Color(172, 3, 36),
-            new Color(238, 4, 65),
-            new Color(255, 116, 182),
-            new Color(156, 145, 221),
-            new Color(96, 140, 213),
-            new Color(124, 178, 238),
-            new Color(162, 211, 254),
-            new Color(65, 156, 157),
-            new Color(0, 181, 174),
-            new Color(2, 191, 3),
-    };
+    private static final Color[] COLORS = new Color[] { new Color(255, 212, 3), new Color(255, 177, 0),
+	    new Color(255, 109, 0), new Color(255, 2, 7), new Color(172, 3, 36), new Color(238, 4, 65),
+	    new Color(255, 116, 182), new Color(156, 145, 221), new Color(96, 140, 213), new Color(124, 178, 238),
+	    new Color(162, 211, 254), new Color(65, 156, 157), new Color(0, 181, 174), new Color(2, 191, 3), };
 
     private BufferedImage splashText;
     private GraphicsPanel graphicsPanel = new GraphicsPanel();
     private float percentageComplete = 0f;
 
     public SplashWindow() {
-        splashText = Laffy.loadImage("splash.png");
-//            splashText = ImageIO.read(SplashWindow.class.getClassLoader().getResource(
-//                    "org/jdesktop/laffy/icons/splash.png"));
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(graphicsPanel, BorderLayout.CENTER);
-        pack();
-        setSize(319, 319);
-        setLocationRelativeTo(null);
+	splashText = Laffy.loadImage("splash.png");
+	//            splashText = ImageIO.read(SplashWindow.class.getClassLoader().getResource(
+	//                    "org/jdesktop/laffy/icons/splash.png"));
+	getContentPane().setLayout(new BorderLayout());
+	getContentPane().add(graphicsPanel, BorderLayout.CENTER);
+	pack();
+	setSize(319, 319);
+	setLocationRelativeTo(null);
     }
 
     public void setPercentageComplete(float percentageComplete) {
-        this.percentageComplete = Math.min(1, Math.max(0, percentageComplete));
-        repaint();
+	this.percentageComplete = Math.min(1, Math.max(0, percentageComplete));
+	repaint();
     }
 
     private class GraphicsPanel extends JPanel {
-        private GraphicsPanel() {
-            setBackground(Color.WHITE);
-        }
+	private GraphicsPanel() {
+	    setBackground(Color.WHITE);
+	}
 
-        @Override protected void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g;
-            for (int i = 0, x = 0; i < COLORS.length; i++) {
-                g2.setColor(COLORS[i]);
-                g2.fillRect(x, 0, 20, 319);
-                x += 23;
-            }
-            g2.setPaint(new LinearGradientPaint(0, 0, 319, 319,
-                    new float[]{
-                            Math.max(0, (percentageComplete * 1.2f) - 0.2001f),
-                            // -fudge to stop both being equal at %100
-                            Math.min(1, (percentageComplete * 1.2f) + 0.001f)}, // +fudge to stop both being equal at %0
-                    new Color[]{new Color(255, 255, 255, 0), Color.WHITE},
-                    MultipleGradientPaint.CycleMethod.NO_CYCLE));
-            g2.fillRect(0, 0, 319, 319);
-            g2.drawImage(splashText, 0, 40, this);
-        }
+	@Override
+	protected void paintComponent(Graphics g) {
+	    Graphics2D g2 = (Graphics2D) g;
+	    for (int i = 0, x = 0; i < COLORS.length; i++) {
+		g2.setColor(COLORS[i]);
+		g2.fillRect(x, 0, 20, 319);
+		x += 23;
+	    }
+	    g2.setPaint(new LinearGradientPaint(0, 0, 319, 319,
+		    new float[] { Math.max(0, (percentageComplete * 1.2f) - 0.2001f),
+		    // -fudge to stop both being equal at %100
+			    Math.min(1, (percentageComplete * 1.2f) + 0.001f) }, // +fudge to stop both being equal at %0
+		    new Color[] { new Color(255, 255, 255, 0), Color.WHITE },
+		    MultipleGradientPaint.CycleMethod.NO_CYCLE));
+	    g2.fillRect(0, 0, 319, 319);
+	    g2.drawImage(splashText, 0, 40, this);
+	}
     }
 }

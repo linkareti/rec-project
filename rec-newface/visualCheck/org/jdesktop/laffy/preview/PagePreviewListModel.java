@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * A simple list model which is based on a List of components. Each item returned from the model is an Item type, which
  * includes a preview image.
- *
+ * 
  * @author Richard Bair
  */
 public class PagePreviewListModel extends AbstractListModel implements ComboBoxModel {
@@ -42,13 +42,13 @@ public class PagePreviewListModel extends AbstractListModel implements ComboBoxM
     private JList pagePreviewList;
 
     public PagePreviewListModel(JList pagePreviewList) {
-        this.pagePreviewList = pagePreviewList;
-        this.pages = new ArrayList<Page>();
-        pagePreviewList.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                fireContentsChanged(this, -1, -1);
-            }
-        });
+	this.pagePreviewList = pagePreviewList;
+	this.pages = new ArrayList<Page>();
+	pagePreviewList.addListSelectionListener(new ListSelectionListener() {
+	    public void valueChanged(ListSelectionEvent e) {
+		fireContentsChanged(this, -1, -1);
+	    }
+	});
     }
 
     // =================================================================================================================
@@ -56,47 +56,48 @@ public class PagePreviewListModel extends AbstractListModel implements ComboBoxM
 
     /**
      * Returns the selected item
-     *
+     * 
      * @return The selected item or <code>null</code> if there is no selection
      */
     public Object getSelectedItem() {
-        return pagePreviewList.getSelectedValue();
+	return pagePreviewList.getSelectedValue();
     }
 
     /**
-     * Set the selected item. The implementation of this  method should notify all registered
+     * Set the selected item. The implementation of this method should notify all registered
      * <code>ListDataListener</code>s that the contents have changed.
-     *
-     * @param anItem the list object to select or <code>null</code> to clear the selection
+     * 
+     * @param anItem
+     *            the list object to select or <code>null</code> to clear the selection
      */
     public void setSelectedItem(Object anItem) {
-        pagePreviewList.setSelectedValue(anItem, true);
-        fireContentsChanged(this, -1, -1);
+	pagePreviewList.setSelectedValue(anItem, true);
+	fireContentsChanged(this, -1, -1);
     }
 
     // =================================================================================================================
     // AbstractListModel Methods
 
     private PropertyChangeListener previewListener = new PropertyChangeListener() {
-        public void propertyChange(PropertyChangeEvent evt) {
-            int index = pages.indexOf(evt.getSource());
-            if (index > 0) {
-                fireContentsChanged(PagePreviewListModel.this, index, index);
-            }
-        }
+	public void propertyChange(PropertyChangeEvent evt) {
+	    int index = pages.indexOf(evt.getSource());
+	    if (index > 0) {
+		fireContentsChanged(PagePreviewListModel.this, index, index);
+	    }
+	}
     };
 
     public void addPage(Page p) {
-        p.addPropertyChangeListener("previewIcon", previewListener);
-        pages.add(p);
-        fireContentsChanged(p, pages.size() - 2, pages.size() - 1);
+	p.addPropertyChangeListener("previewIcon", previewListener);
+	pages.add(p);
+	fireContentsChanged(p, pages.size() - 2, pages.size() - 1);
     }
 
     public int getSize() {
-        return pages.size();
+	return pages.size();
     }
 
     public Object getElementAt(int index) {
-        return pages.get(index);
+	return pages.get(index);
     }
 }
