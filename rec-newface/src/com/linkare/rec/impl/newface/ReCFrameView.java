@@ -523,12 +523,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		// identificar se é uma situção com que temos mesmo de viver.
 		// TODO Carregar em background
 		getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
-		System.out.println("Users List source took @ "+(System.currentTimeMillis()-timeStart)/1000+"s to start...");
+		log.fine("Users List source took @ "+(System.currentTimeMillis()-timeStart)/1000+"s to start...");
 		timeStart=System.currentTimeMillis();
 		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getRecFaceConfig().getUsersListRefreshRateMs());
 
-		System.out.println("Auto Refresh set took @ "+(System.currentTimeMillis()-timeStart)/1000+"s to do!");
-		getApparatusUserListPane().getModel().chechRefresh();
+		log.fine("Auto Refresh set took @ "+(System.currentTimeMillis()-timeStart)/1000+"s to do!");
+		//getApparatusUserListPane().getModel().chechRefresh();
 
 		
 		// Goto customizer tab
@@ -613,7 +613,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		
 //      statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.started", "Started..."));
 		getExperimentHistoryBox().addExperimentHistory(recApplication.getExperimentHistory());
-		System.out.println("........lkhkjlk.....");
+		log.fine("........lkhkjlk.....");
 //      controllerPanel.setEnablePlay(false);
 //      controllerPanel.setEnableStop(true);
 		

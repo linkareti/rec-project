@@ -10,31 +10,21 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  */
 public class ExperimentHistory extends ExpHistory {
 
-	protected com.linkare.rec.impl.newface.config.Apparatus newApparatusConfig;
-	
-//	public ExperimentHistory(ExpHistoryDisplayFactory expHistoryDisplayFactory,
-//			DataProducerWrapper producerWrapper, Apparatus apparatus,
-//			com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig) {
-//		super(expHistoryDisplayFactory, producerWrapper, apparatus, apparatusConfig);
-//	}
+    protected com.linkare.rec.impl.newface.config.Apparatus newApparatusConfig;
 
-	/** Creates a new instance of ExperimentHistory */
-	public ExperimentHistory(ExpHistoryDisplayFactory expHistoryDisplayFactory,
-			DataProducerWrapper producerWrapper,
-			Apparatus apparatus,
-			com.linkare.rec.impl.newface.config.Apparatus apparatusConfig) {
-		super(expHistoryDisplayFactory, producerWrapper, apparatus, null);
-		this.newApparatusConfig = apparatusConfig;
-	}
-	
-	public com.linkare.rec.impl.newface.config.Apparatus getNewApparatusConfig()
-    {
-        return this.newApparatusConfig;
+    /** Creates a new instance of ExperimentHistory */
+    public ExperimentHistory(ExpHistoryDisplayFactory expHistoryDisplayFactory, DataProducerWrapper producerWrapper,
+	    Apparatus apparatus, com.linkare.rec.impl.newface.config.Apparatus apparatusConfig) {
+	super(expHistoryDisplayFactory, producerWrapper, apparatus, null);
+	this.newApparatusConfig = apparatusConfig;
     }
-	
-    public Icon getApparatusIcon()
-    {
-    	return newApparatusConfig.getIcon();
-    }  
+
+    public com.linkare.rec.impl.newface.config.Apparatus getNewApparatusConfig() {
+	return this.newApparatusConfig;
+    }
+
+    public Icon getApparatusIcon() {
+	return newApparatusConfig.getIcon();
+    }
 
 }
