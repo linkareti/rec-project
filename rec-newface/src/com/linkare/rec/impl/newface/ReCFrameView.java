@@ -46,6 +46,7 @@ import com.linkare.rec.impl.newface.component.ApparatusSelectBox;
 import com.linkare.rec.impl.newface.component.ApparatusTabbedPane;
 import com.linkare.rec.impl.newface.component.ApparatusUserList;
 import com.linkare.rec.impl.newface.component.ChatBox;
+import com.linkare.rec.impl.newface.component.ExpHistoryPanel;
 import com.linkare.rec.impl.newface.component.ExperimentActionBar;
 import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
 import com.linkare.rec.impl.newface.component.FlatButton;
@@ -516,12 +517,19 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getApparatusDescriptionPane().setApparatusConfig(
 				recApplication.getSelectedApparatusConfig());
 		
+		long timeStart=System.currentTimeMillis();
 		//UserList Pane
 		// CRITICAL João: Verificar tempo e carga de execução destas chamadas e
 		// identificar se é uma situção com que temos mesmo de viver.
 		// TODO Carregar em background
 		getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
+		System.out.println("Users List source took @ "+(System.currentTimeMillis()-timeStart)/1000+"s to start...");
+		timeStart=System.currentTimeMillis();
 		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getRecFaceConfig().getUsersListRefreshRateMs());
+
+		System.out.println("Auto Refresh set took @ "+(System.currentTimeMillis()-timeStart)/1000+"s to do!");
+		getApparatusUserListPane().getModel().chechRefresh();
+
 		
 		// Goto customizer tab
 		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_CUSTOMIZER);
@@ -604,10 +612,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private void showExperimentResults() {
 		
 //      statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.started", "Started..."));
-		
-		// TODO João - Add entry to experiment history
-//      expHistoryPanelNew.addExpHistory(expHistory);
-	
+		getExperimentHistoryBox().addExperimentHistory(recApplication.getExperimentHistory());
+		System.out.println("........lkhkjlk.....");
 //      controllerPanel.setEnablePlay(false);
 //      controllerPanel.setEnableStop(true);
 		
