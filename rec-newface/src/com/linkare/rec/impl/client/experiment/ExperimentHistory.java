@@ -23,6 +23,7 @@ public class ExperimentHistory extends ExpHistory {
 	return this.newApparatusConfig;
     }
 
+    @Override
     public Icon getApparatusIcon() {
 	return newApparatusConfig.getIcon();
     }

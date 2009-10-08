@@ -24,7 +24,7 @@ public enum ExceptionCode {
 
     ExceptionCode(String description, int id) {
 	this.description = description;
-    this.id = id;
+	this.id = id;
     }
 
     /**
@@ -35,7 +35,7 @@ public enum ExceptionCode {
     }
 
     public int getId() {
-        return id;
+	return id;
     }
 
 }

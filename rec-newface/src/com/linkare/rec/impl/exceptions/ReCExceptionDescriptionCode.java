@@ -8,8 +8,7 @@
 package com.linkare.rec.impl.exceptions;
 
 /**
- * Interface for ReC Exceptions consolidation. Defines Exception code and
- * description.
+ * Interface for ReC Exceptions consolidation. Defines Exception code and description.
  * 
  * @author Henrique Fernandes
  */

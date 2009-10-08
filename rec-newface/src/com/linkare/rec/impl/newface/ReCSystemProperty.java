@@ -1,39 +1,35 @@
 package com.linkare.rec.impl.newface;
 
 /**
- * Holds the ReC System properties. Maps the property name and the
- * required flag.
+ * Holds the ReC System properties. Maps the property name and the required flag.
  */
 public enum ReCSystemProperty {
 
-	//RECBASEUICONFIG("ReCBaseUIConfig", true),
-	RECFACECONFIG("ReCFaceConfig", true),
-	REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true),
-	REC_MULTICASTCONTROLLER_INITREF("ReC.MultiCastController.InitRef", true),
-	OPENORB_CONFIG("openorb.config", true),
-	OPENORB_PROFILE("openorb.profile", true),
-	ORG_OMG_CORBA_ORBCLASS("org.omg.CORBA.ORBClass", true),
-	ORG_OMG_CORBA_ORBSINGLETONCLASS("org.omg.CORBA.ORBSingletonClass", true),
-    
-	VIDEO_DEVELOPMENT_ENABLED("video.development.enabled", false), // FIXME Remove VIDEO_DEVELOPMENT_ENABLED flag after video tests
-	
-    VLC_PLUGINS_FILENAME("vlc.plugins.filename", ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED),
-    VLC_PLUGINS_DESTDIR("vlc.plugins.destdir", ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED);
+    //RECBASEUICONFIG("ReCBaseUIConfig", true),
+    RECFACECONFIG("ReCFaceConfig", true), REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true), REC_MULTICASTCONTROLLER_INITREF(
+	    "ReC.MultiCastController.InitRef", true), OPENORB_CONFIG("openorb.config", true), OPENORB_PROFILE(
+	    "openorb.profile", true), ORG_OMG_CORBA_ORBCLASS("org.omg.CORBA.ORBClass", true), ORG_OMG_CORBA_ORBSINGLETONCLASS(
+	    "org.omg.CORBA.ORBSingletonClass", true),
 
-	String name;
-	boolean required;
+    VIDEO_DEVELOPMENT_ENABLED("video.development.enabled", false), // FIXME Remove VIDEO_DEVELOPMENT_ENABLED flag after video tests
 
-	ReCSystemProperty(String name, boolean required) {
-		this.name = name;
-		this.required = required;
-	}
+    VLC_PLUGINS_FILENAME("vlc.plugins.filename", ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED), VLC_PLUGINS_DESTDIR(
+	    "vlc.plugins.destdir", ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED);
 
-	public String getName() {
-		return name;
-	}
+    String name;
+    boolean required;
 
-	public boolean isRequired() {
-		return required;
-	}
+    ReCSystemProperty(String name, boolean required) {
+	this.name = name;
+	this.required = required;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public boolean isRequired() {
+	return required;
+    }
 
 }

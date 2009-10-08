@@ -15,7 +15,7 @@ package com.linkare.rec.impl.exceptions;
 public class ReCRuntimeException extends RuntimeException implements ReCExceptionDescriptionCode {
 
     private static final long serialVersionUID = 1101481717221162525L;
-    
+
     private ExceptionCode code;
 
     /**
