@@ -39,6 +39,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import java.awt.Point;
+import java.io.PrintWriter;
 import java.util.logging.*;
 import java.util.prefs.*;
 import com.linkare.rec.impl.logging.*;
@@ -1929,7 +1930,11 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         try
         {
             ///factoryLocation = ReCResourceBundle.findStringOrDefault(currentApparatusConfig.getDisplayFactoryClassLocationBundleKey(), null);
+            System.out.println("*** DISPLAY FACTORY : "+expHistory.getApparatusConfig().getDisplayFactoryClassLocationBundleKey());
+            System.out.println("*** Apparatus Config:");
+            expHistory.getApparatusConfig().writeNode(new PrintWriter(System.out), "Apparatus", "");
             factoryLocation = ReCResourceBundle.findStringOrDefault(expHistory.getApparatusConfig().getDisplayFactoryClassLocationBundleKey(), null);
+            System.out.println("**** Factory location is : "+factoryLocation);
         }
         catch(Exception ignored)
         {
