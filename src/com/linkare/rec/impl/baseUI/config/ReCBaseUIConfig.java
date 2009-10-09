@@ -241,12 +241,6 @@ public class ReCBaseUIConfig implements CommonBean
 	if(instance==null)
 	{
 	    instance=new ReCBaseUIConfig();
-	    try {
-		instance.write(System.out);
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
 	}
 	return instance;
     }
