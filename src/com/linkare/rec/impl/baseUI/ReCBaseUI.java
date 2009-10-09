@@ -40,6 +40,7 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import java.awt.Point;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.logging.*;
 import java.util.prefs.*;
 import com.linkare.rec.impl.logging.*;
@@ -1931,11 +1932,13 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         {
             ///factoryLocation = ReCResourceBundle.findStringOrDefault(currentApparatusConfig.getDisplayFactoryClassLocationBundleKey(), null);
             
-            System.out.println("*** DISPLAY FACTORY : "+expHistory.getApparatusConfig().getDisplayFactoryClassLocationBundleKey());
-            System.out.println("*** Apparatus Config:");
-            expHistory.getApparatusConfig().writeNode(new PrintWriter(System.out), "Apparatus", "");
+            Logger.getLogger(UI_CLIENT_LOGGER).info("*** DISPLAY FACTORY : "+expHistory.getApparatusConfig().getDisplayFactoryClassLocationBundleKey());
+            Logger.getLogger(UI_CLIENT_LOGGER).info("*** Apparatus Config:");
+            StringWriter sw=new StringWriter();
+            expHistory.getApparatusConfig().writeNode(sw, "Apparatus", "");
+            Logger.getLogger(UI_CLIENT_LOGGER).info(sw.getBuffer().toString());
             factoryLocation = ReCResourceBundle.findStringOrDefault(expHistory.getApparatusConfig().getDisplayFactoryClassLocationBundleKey(), null);
-            System.out.println("**** Factory location is : "+factoryLocation);
+            Logger.getLogger(UI_CLIENT_LOGGER).info("**** Factory location is : "+factoryLocation);
         }
         catch(Exception ignored)
         {
