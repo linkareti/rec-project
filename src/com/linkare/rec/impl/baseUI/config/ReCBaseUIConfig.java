@@ -229,6 +229,8 @@ public class ReCBaseUIConfig implements CommonBean
 	    logThrowable("Couldn't validate config file!", e);
             e.printStackTrace();
 	}
+	
+	
     
     }
     
@@ -237,8 +239,15 @@ public class ReCBaseUIConfig implements CommonBean
     public static ReCBaseUIConfig sharedInstance()
     {
 	if(instance==null)
+	{
 	    instance=new ReCBaseUIConfig();
-	
+	    try {
+		instance.write(System.out);
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	}
 	return instance;
     }
     
