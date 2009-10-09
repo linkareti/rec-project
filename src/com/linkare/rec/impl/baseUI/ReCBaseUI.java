@@ -1930,6 +1930,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
         try
         {
             ///factoryLocation = ReCResourceBundle.findStringOrDefault(currentApparatusConfig.getDisplayFactoryClassLocationBundleKey(), null);
+            
             System.out.println("*** DISPLAY FACTORY : "+expHistory.getApparatusConfig().getDisplayFactoryClassLocationBundleKey());
             System.out.println("*** Apparatus Config:");
             expHistory.getApparatusConfig().writeNode(new PrintWriter(System.out), "Apparatus", "");
