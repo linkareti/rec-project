@@ -1985,7 +1985,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
             try
             {
                 displays = new ExpDataDisplay[1];
-                Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(), "com.linkare.rec.impl.baseUI.DefaultExperimentDataTable");
+                Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(), "com.linkare.rec.impl.baseUI.table.DefaultExperimentDataTable");
                 if(java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class))
                     displays[0] = (ExpDataDisplay)dataDisplayTemp;
             }
