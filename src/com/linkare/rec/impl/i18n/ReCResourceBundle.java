@@ -148,6 +148,8 @@ public abstract class ReCResourceBundle extends ResourceBundle
     public static String findString(String key)
     throws MissingResourceException
     {
+	
+	
 	ResourceBundle bundle=null;
 	
 	if(key!=null && key.indexOf('$')!=-1)
@@ -180,6 +182,9 @@ public abstract class ReCResourceBundle extends ResourceBundle
     {
 	try
 	{
+	    if(key==null || key.trim().length()==0)
+		return defaultValue;
+	    
 	    return findString(key);
 	}catch(Exception e)
 	{
