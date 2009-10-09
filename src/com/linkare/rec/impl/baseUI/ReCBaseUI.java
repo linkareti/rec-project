@@ -1963,6 +1963,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
             Display[] availableDisplays = expHistory.getApparatusConfig().getDisplay();
             for(int i=0; i<availableDisplays.length; i++)
             {
+        	System.out.println("++++Trying to load display : "+availableDisplays[i]+" (selected: "+availableDisplays[i].isSelected()+")");
                 if(availableDisplays[i].isSelected())
                     selectedDisplays.add(availableDisplays[i]);
             }
@@ -1975,8 +1976,19 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
             }
             catch(Exception e)
             {
+        	System.out.println(e);
             }
             displays = factory.getDisplays();
+            
+            System.out.println("Got displays : "+displays!=null?""+displays.length:" none");
+            if(displays!=null)
+            {
+        	for(ExpDataDisplay display:displays)
+        	{
+        	    System.out.println("Display :" +display.getName()+" - "+display.getClass().getName());
+        	}
+            }
+            
         }
         
         //Couldn't read from xml or from user
