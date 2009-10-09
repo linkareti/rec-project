@@ -151,7 +151,7 @@ public class AleatorioDriver extends BaseDriver{
         catch (Exception e) {
             e.printStackTrace();
             throw new WrongConfigurationException("Erro no config...",20);
-        }//aqui parece estar certo, mas precisas de fazer mais que isso... deves definir as totalSamples para cada canal, e aqueles parâmetros pmarados que estás a definir lá para baixo algures...
+        }//aqui parece estar certo, mas precisas de fazer mais que isso... deves definir as totalSamples para cada canal, e aqueles parï¿½metros pmarados que estï¿½s a definir lï¿½ para baixo algures...
     }//config(HardwareAcquisitionConfig config,HardwareInfo info)
     public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
         fireIDriverStateListenerDriverConfiguring();
@@ -239,10 +239,10 @@ public class AleatorioDriver extends BaseDriver{
             
             fireIDriverStateListenerDriverStarted();
             
-            if (aleatorioDataSource != null)//Aqui nunca seria null ou comes uma excepç~~ao antes
+            if (aleatorioDataSource != null)//Aqui nunca seria null ou comes uma excepï¿½~~ao antes
             {   
                 //System.out.println(">>Starting Experiment!!");
-                aleatorioDataSource.setRunning(true);
+                //aleatorioDataSource.setRunning(true);
                 
                 (new Thread(new AleatorioThread())).start();
                 
@@ -267,7 +267,7 @@ public class AleatorioDriver extends BaseDriver{
         /*JP says: Don't use this!!
          And we don't use it!!  unless it's an emergency...*/
         fireIDriverStateListenerDriverStoping();
-        aleatorioDataSource.setRunning(false);
+        aleatorioDataSource.stopNow();
         webcam.stopRec();
         sound.stopWave();
         fireIDriverStateListenerDriverStoped();
@@ -418,7 +418,7 @@ public class AleatorioDriver extends BaseDriver{
     public javax.imageio.stream.ImageOutputStream image2jpegStream(java.awt.Image image) {
         byte[] tempArray = new byte[Integer.MAX_VALUE];
         javax.imageio.stream.ImageOutputStream ios = null;
-        //tu já viste a ByteArrayValBuffer... aceita ler de uma InputStream e dá-te um ByteArray já porreiro para enviar pelo ReC...
+        //tu jï¿½ viste a ByteArrayValBuffer... aceita ler de uma InputStream e dï¿½-te um ByteArray jï¿½ porreiro para enviar pelo ReC...
         try{
             ios = javax.imageio.ImageIO.createImageOutputStream(tempArray);
             javax.imageio.ImageIO.write((java.awt.image.RenderedImage) image, "jpg", ios);
