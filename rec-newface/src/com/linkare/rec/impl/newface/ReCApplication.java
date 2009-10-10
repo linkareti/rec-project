@@ -80,7 +80,6 @@ import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpHistory;
 import com.linkare.rec.impl.client.experiment.ExpHistoryDisplayFactory;
-import com.linkare.rec.impl.client.experiment.ExperimentHistory;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorListener;
 import com.linkare.rec.impl.exceptions.ExceptionCode;
@@ -89,6 +88,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.ReCAppEvent.ReCCommand;
 import com.linkare.rec.impl.newface.component.ApparatusComboBoxModel;
 import com.linkare.rec.impl.newface.component.DefaultDialog;
+import com.linkare.rec.impl.newface.component.ExperimentHistoryUINode;
 import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
 import com.linkare.rec.impl.newface.component.media.MediaSetup;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
@@ -244,9 +244,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
     private HardwareAcquisitionConfig userAcquisitionConfig;
 
-    // TODO ExpHistory Refactoring
-    private ExperimentHistory experimentHistory;
-
     private ExpDataModel experimentDataModel;
 
     private List<ExpDataDisplay> experimentDataDisplays;
@@ -381,10 +378,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
     public VideoViewerController getMediaController() {
 	return mediaController;
-    }
-
-    public ExperimentHistory getExperimentHistory() {
-	return experimentHistory;
     }
 
     public ExpDataModel getExperimentDataModel() {
@@ -763,7 +756,9 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
     // Apparatus events
 
     public enum ApparatusEvent {
-	CONNECTING, CONNECTED, DISCONNECTING, DISCONNECTED, LOCKABLE, LOCKED, STATECONFIGURING, STATECONFIGURED, INCORRECTSTATE, MAXUSERS, NOTAUTHORIZED, NOTOWNER, NOTREGISTERED, STATECONFIGERROR, STATERESETING, STATERESETED, STATESTARTING, STATESTARTED, STATESTOPING, STATESTOPED, STATEUNKNOW, UNREACHABLE;
+	CONNECTING, CONNECTED, DISCONNECTING, DISCONNECTED, LOCKABLE, LOCKED, STATECONFIGURING, STATECONFIGURED,
+	INCORRECTSTATE, MAXUSERS, NOTAUTHORIZED, NOTOWNER, NOTREGISTERED, STATECONFIGERROR, STATERESETING,
+	STATERESETED, STATESTARTING, STATESTARTED, STATESTOPING, STATESTOPED, STATEUNKNOW, UNREACHABLE;
     }
 
     @Override
@@ -993,15 +988,17 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	    log.fine("ApparatusConnectorEvent " + evt.getMessage());
 	}
 
-	ExperimentHistory expHistory = new ExperimentHistory(this, evt.getDataSource(), apparatusClientBean
-		.getApparatus(), currentApparatusConfig);
+	ExperimentHistoryUINode expHistoryUINode = new ExperimentHistoryUINode(this, evt.getDataSource(),
+		apparatusClientBean.getApparatus(), currentApparatusConfig);
+
 	// CRITICAL Confirmar se o estado APPARATUS_LOCKED assegura que a experiment é mesmo minha!
-	expHistory.setLocallyOwned(currentState.matches(APPARATUS_LOCKED));
+	expHistoryUINode.setLocallyOwned(currentState.matches(APPARATUS_LOCKED));
 
 	if (currentState.matches(APPARATUS_LOCKED)) {
-	    startExperiment(expHistory);
+	    startExperiment(expHistoryUINode);
 
 	    // Forward event to the view
+	    evt.setValue("ExperimentHistoryUINode", expHistoryUINode);
 	    fireApparatusStateChanged(STATESTARTED, evt);
 	}
     }
@@ -1011,13 +1008,14 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	setCurrentState(APPARATUS_STARTED);
 
-	experimentHistory = (ExperimentHistory) expHistory;
+	ExperimentHistoryUINode experimentHistory = (ExperimentHistoryUINode) expHistory;
+
 	DisplayFactory factory = new DefaultDisplayFactory();
 
 	// Was the user smart enough to make is own DisplayFactory?
 	String factoryLocation = null;
 	try {
-	    factoryLocation = ReCResourceBundle.findStringOrDefault(experimentHistory.getNewApparatusConfig()
+	    factoryLocation = ReCResourceBundle.findStringOrDefault(experimentHistory.getApparatusConfig()
 		    .getDisplayFactoryClassLocationBundleKey(), null);
 	} catch (Exception ignored) {
 	    // don't print the not found exception please...
@@ -1042,7 +1040,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	    // I will only give the selected displays :)
 	    List<Display> selectedDisplays = new ArrayList<Display>();
 
-	    List<Display> availableDisplays = experimentHistory.getNewApparatusConfig().getDisplay();
+	    List<Display> availableDisplays = experimentHistory.getApparatusConfig().getDisplay();
 
 	    for (Display display : availableDisplays) {
 		if (display.isSelected()) {
@@ -1075,7 +1073,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	// Did the user defined is own datamodel?
 	String dataModelLocation = null;
 	try {
-	    dataModelLocation = ReCResourceBundle.findStringOrDefault(expHistory.getApparatusConfig()
+	    dataModelLocation = ReCResourceBundle.findStringOrDefault(experimentHistory.getApparatusConfig()
 		    .getDataModelClassLocationBundleKey(), null);
 	} catch (Exception ignored) {
 	    // don't print the not found exception please...

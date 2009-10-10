@@ -27,10 +27,10 @@ import org.jdesktop.application.Action;
 
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.impl.client.chat.ChatConnectionEvent;
-import com.linkare.rec.impl.client.chat.ChatMessageEvent;
 import com.linkare.rec.impl.client.chat.ChatRoomEvent;
 import com.linkare.rec.impl.client.chat.IChatMessageListener;
 import com.linkare.rec.impl.client.chat.IChatServer;
+import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 
@@ -172,7 +172,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 	boolean foundUserEveryone = false;
 
 	for (UserInfo user : usersList) {
-	    if (IChatServer.EVERYONE_USER_ALIAS.equals(user.getUserName())) {
+	    if (ChatMessageEvent.EVERYONE_USER_ALIAS.equals(user.getUserName())) {
 		everyone = user;
 		foundUserEveryone = true;
 	    }
@@ -331,4 +331,5 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
     private UserInfo userInfo;
 
     private UserInfo everyone;
+
 }

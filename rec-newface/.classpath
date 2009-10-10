@@ -5,7 +5,6 @@
 	<classpathentry kind="src" path="visualCheck"/>
 	<classpathentry kind="src" path="JVLC"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.6"/>
-	<classpathentry kind="lib" path="lib/rec/ReC.jar"/>
 	<classpathentry kind="lib" path="lib/avalon-framework.jar"/>
 	<classpathentry kind="lib" path="lib/comm.jar"/>
 	<classpathentry kind="lib" path="lib/fits1.3.jar"/>
@@ -36,5 +35,14 @@
 	<classpathentry kind="lib" path="lib/apache-commons/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/substance/substance-lite.jar"/>
 	<classpathentry kind="lib" path="lib/jna.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ReCProject"/>
+	<classpathentry kind="lib" path="lib/rec/client-experiments/aleatorioClient.jar"/>
+	<classpathentry kind="lib" path="lib/rec/client-experiments/conducaocalorClient.jar"/>
+	<classpathentry kind="lib" path="lib/rec/client-experiments/gammaClient.jar"/>
+	<classpathentry kind="lib" path="lib/rec/client-experiments/gClient.jar"/>
+	<classpathentry kind="lib" path="lib/rec/client-experiments/pvClient.jar"/>
+	<classpathentry kind="lib" path="lib/rec/client-experiments/scubaClient.jar"/>
+	<classpathentry kind="lib" path="lib/rec/client-experiments/statsoundClient.jar"/>
+	<classpathentry kind="lib" path="lib/rec/client-experiments/TClient.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

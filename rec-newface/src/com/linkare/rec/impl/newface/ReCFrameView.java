@@ -48,6 +48,7 @@ import com.linkare.rec.impl.newface.component.ApparatusUserList;
 import com.linkare.rec.impl.newface.component.ChatBox;
 import com.linkare.rec.impl.newface.component.ExperimentActionBar;
 import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
+import com.linkare.rec.impl.newface.component.ExperimentHistoryUINode;
 import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.GlassLayer;
 import com.linkare.rec.impl.newface.component.LayoutContainerPane;
@@ -73,7 +74,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     //private static final Dimension DEFAULT_FRAME_SIZE = new Dimension(848, 478);
 
     // For now, application model is unique. So there is no need for abstraction here.
-    private ReCApplication recApplication = ReCApplication.getApplication();
+    private final ReCApplication recApplication = ReCApplication.getApplication();
 
     private List<AbstractContentPane> interactiveBoxes;
 
@@ -464,7 +465,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	    break;
 	case STATESTARTED:
 	    startedExperiment();
-	    showExperimentResults();
+	    showExperimentResults(evt);
 	    break;
 	case STATESTOPING:
 	    break;
@@ -611,11 +612,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			"lblActionState.apparatusStoped.text"), RED);
     }
 
-    private void showExperimentResults() {
+    private void showExperimentResults(ApparatusConnectorEvent evt) {
 
 	//      statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.started", "Started..."));
-	getExperimentHistoryBox().addExperimentHistory(recApplication.getExperimentHistory());
-	log.fine("........lkhkjlk.....");
+	getExperimentHistoryBox().addExperimentHistory((ExperimentHistoryUINode) evt.getValue());
 	//      controllerPanel.setEnablePlay(false);
 	//      controllerPanel.setEnableStop(true);
 
@@ -840,13 +840,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     // End of variables declaration//GEN-END:variables
 
     //    private final Timer messageTimer;
-    private Timer apparatusLockTimer;
+    private final Timer apparatusLockTimer;
     public static Icon idleIcon;
     public static Icon[] busyIcons = new Icon[15];
     private final int busyAnimationRate;
 
     private JDialog aboutBox;
     private UndecoratedDialog<SimpleLoginBox> loginBox;
-    private GlassLayer glassPane = new GlassLayer(CatchEvents.NONE);
+    private final GlassLayer glassPane = new GlassLayer(CatchEvents.NONE);
 
 }

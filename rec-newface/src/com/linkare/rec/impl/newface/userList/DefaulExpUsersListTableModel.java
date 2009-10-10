@@ -13,10 +13,10 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.UserInfo;
-import com.linkare.rec.impl.client.chat.IChatServer;
 import com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener;
 import com.linkare.rec.impl.client.experiment.ExpUsersListEvent;
 import com.linkare.rec.impl.client.experiment.ExpUsersListSource;
+import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
@@ -42,12 +42,12 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
     /** Holds value of property expUsersListSource. */
     private ExpUsersListSource expUsersListSource;
 
-    private String noUsersList;
-    private String lblUserName;
-    private String lbltime_to_control_min;
-    private String lbltime_to_control_max;
-    private String lblInControl;
-    private String lblControlNow;
+    private final String noUsersList;
+    private final String lblUserName;
+    private final String lbltime_to_control_min;
+    private final String lbltime_to_control_max;
+    private final String lblInControl;
+    private final String lblControlNow;
 
     /** Creates a new instance of DefaulExptUsersListTableModel */
     public DefaulExpUsersListTableModel() {
@@ -92,8 +92,8 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 		if (u2.getNextLockTime()[0] == null)
 		    return +1;
 
-		if (u1.getUserName().equals(IChatServer.EVERYONE_USER_ALIAS)
-			|| u1.getUserName().equals(IChatServer.EVERYONE_USER_ALIAS))
+		if (u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)
+			|| u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
 		    return 0;
 
 		if (u1.getNextLockTime()[0].getMilliSeconds() - u2.getNextLockTime()[0].getMilliSeconds() == 0)
@@ -103,6 +103,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 			: -1;
 	    }
 
+	    @Override
 	    public boolean equals(Object other) {
 		if (other == null || !(other.getClass() == this.getClass()))
 		    return false;
@@ -114,7 +115,8 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	Vector<String[]> expUsersList = new Vector<String[]>(expUsers.length);
 
 	for (int i = 0; i < expUsers.length; i++) {
-	    if (expUsers[i].getUserName() != null && !expUsers[i].getUserName().equals(IChatServer.EVERYONE_USER_ALIAS)) {
+	    if (expUsers[i].getUserName() != null
+		    && !expUsers[i].getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
 		String userName = expUsers[i].getUserName();
 		String controlInMin = "";
 		String controlInMax = "";
@@ -167,6 +169,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
      * @return true if the cell is editable
      * @see #setValueAt
      */
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
 	return false;
     }

@@ -16,8 +16,6 @@ import java.awt.Component;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import com.linkare.rec.impl.client.experiment.ExperimentHistory;
-
 /**
  * 
  * @author iies-consultor922
@@ -58,7 +56,7 @@ public class ExperimentHistoryBox extends AbstractContentPane {
 			javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE).addContainerGap()));
     }// </editor-fold>//GEN-END:initComponents
 
-    public void addExperimentHistory(ExperimentHistory expHist) {
+    public void addExperimentHistory(ExperimentHistoryUINode expHist) {
 	JComponent comp = new ExpHistoryPanel(expHist);
 	experimentHistoryList.add(comp);
     }

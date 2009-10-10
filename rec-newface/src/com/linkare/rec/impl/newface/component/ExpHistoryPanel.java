@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.linkare.rec.impl.client.experiment.ExperimentHistory;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
@@ -18,9 +17,9 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class ExpHistoryPanel extends javax.swing.JPanel {
 
-    private ExperimentHistory expHist = null;
+    private ExperimentHistoryUINode expHist = null;
 
-    public ExpHistoryPanel(ExperimentHistory expHist) {
+    public ExpHistoryPanel(ExperimentHistoryUINode expHist) {
 	this.expHist = expHist;
 	initComponents();
     }
