@@ -7,14 +7,17 @@
 package com.linkare.rec.impl.client.apparatus;
 
 /**
- * 
  * @author André Neto - LEFT - IST
+ * @param <T>
  */
-
 public class ApparatusConnectorEvent extends java.util.EventObject {
+
 	private String message = null;
 	private long millis_to_lock_success = 0;
 	private com.linkare.rec.impl.wrappers.DataProducerWrapper dataSource = null;
+
+	private String key;
+	private Object value;
 
 	public ApparatusConnectorEvent(Object source, String message) {
 		super(source);
@@ -43,4 +46,18 @@ public class ApparatusConnectorEvent extends java.util.EventObject {
 	public com.linkare.rec.impl.wrappers.DataProducerWrapper getDataSource() {
 		return dataSource;
 	}
+
+	public void setValue(String key, Object value) {
+		this.key = key;
+		this.value = value;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public Object getValue() {
+		return value;
+	}
+
 }
