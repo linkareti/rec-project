@@ -7,7 +7,6 @@
 package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
 import java.awt.Color;
-import java.awt.Scrollbar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -97,6 +96,8 @@ public class ElabTheme extends FlatTheme {
 	result.add(ScrollPaneStyle.class);
 	result.add(FlatScrollPaneStyle.class);
 	result.add(TableHeaderStyle.class);
+	result.add(FlatListStyle.class);
+	result.add(TextAreaStyle.class);
 
 	return result;
     }
