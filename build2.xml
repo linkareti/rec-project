@@ -540,7 +540,7 @@
 	<target name="compile.elab.hardwareserver">
 		<mkdir dir="${elab.hardwareserver.classes.dir}" />
 		<mkdir dir="${elab.hardwareserver.classes.dir}/META-INF" />
-		
+
 		<javac srcdir="${elab.hardwareserver.src.java.dir}" destdir="${elab.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="elab.compile.hardwareserver.dependencies.classpath" />
@@ -617,13 +617,13 @@
 	<target name="compile.elab.multicastcontroller">
 		<mkdir dir="${elab.multicast.classes.dir}" />
 		<mkdir dir="${elab.multicast.classes.dir}/META-INF" />
-			
+
 		<javac srcdir="${elab.multicast.src.java.dir}" destdir="${elab.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="elab.compile.multicastcontroller.dependencies.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
-		
+
 		<manifest file="${elab.multicast.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
 				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
@@ -677,7 +677,7 @@
 	<target name="clean.dist">
 		<delete dir="${dist.dir}" />
 	</target>
-	
+
 	<target name="dist" depends="clean.dist,build.all">
 		<mkdir dir="${dist.dir}" />
 
@@ -687,24 +687,13 @@
 			<fileset file="${rec.common.build.dir}/ReCCommon_sig.jar" />
 		</zip>
 
-		<zip destfile="${dist.dir}/elab-client-jnlp.zip" update="true" comment="eLab Full Client">
+		<zip destfile="${dist.dir}/elab-client.zip" update="true" comment="eLab Full Client">
 			<fileset file="${rec.client.build.dir}/ReCClient_sig.jar" />
 			<fileset file="${elab.client.build.dir}/ELabClient_sig.jar" />
 			<fileset file="${rec.common.build.dir}/ReCCommon_sig.jar" />
 		</zip>
 
-		<!-- dist.all.experiments/ -->
 	</target>
-
-	<macrodef name="dist.all.experiments">
-		<attribute name="experiment.name" />
-		<sequential>
-			<zip destfile="${dist.dir}/elab-exp1-client.zip" update="true" comment="eLab @{experiment.name} Client">
-			</zip>
-			<zip destfile="${dist.dir}/elab-exp1-hwserver.zip" update="true" comment="eLab @{experiment.name} Driver">
-			</zip>
-		</sequential>
-	</macrodef>
 
 	<!--
 		=====================================================
@@ -758,6 +747,8 @@
 
 			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client" />
 			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server" />
+			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client/META-INF" />
+			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server/META-INF" />
 			<echo>Compiling experiment: @{experiment.name}</echo>
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
@@ -768,12 +759,32 @@
 					<pathelement location="${rec.common.classes.dir}" />
 					<pathelement location="${rec.client.classes.dir}" />
 					<pathelement location="${rec.ui.classes.dir}" />
+					<pathelement location="${elab.common.classes.dir}" />
+					<pathelement location="${elab.client.classes.dir}" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/client">
 						<include name="**/*.jar" />
 					</fileset>
 				</classpath>
 				<compilerarg value="-Xlint:unchecked, cast, -serial" />
 			</javac>
+
+			<copy todir="${experiments.classes.dir}/@{experiment.name}/client" overwrite="true">
+				<fileset dir="experiments/@{experiment.name}/src/java/client">
+					<exclude name="**/*.java" />
+					<exclude name="**/*.form" />
+				</fileset>
+			</copy>
+
+			<manifest file="${experiments.classes.dir}/@{experiment.name}/client/META-INF/MANIFEST.MF">
+				<section name="common">
+					<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+					<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+					<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+					<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+					<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+					<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+				</section>
+			</manifest>
 
 			<javac srcdir="experiments/@{experiment.name}/src/java/server" destdir="${experiments.classes.dir}/@{experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 				<include name="**/*.java" />
@@ -783,12 +794,32 @@
 					</fileset>
 					<pathelement location="${rec.common.classes.dir}" />
 					<pathelement location="${rec.hardwareserver.classes.dir}" />
+					<pathelement location="${elab.common.classes.dir}" />
+					<pathelement location="${elab.hardwareserver.classes.dir}" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/server">
 						<include name="**/*.jar" />
 					</fileset>
 				</classpath>
 				<compilerarg value="-Xlint:unchecked, cast, -serial" />
 			</javac>
+
+			<copy todir="${experiments.classes.dir}/@{experiment.name}/server" overwrite="true">
+				<fileset dir="experiments/@{experiment.name}/src/java/server">
+					<exclude name="**/*.java" />
+					<exclude name="**/*.form" />
+				</fileset>
+			</copy>
+
+			<manifest file="${experiments.classes.dir}/@{experiment.name}/server/META-INF/MANIFEST.MF">
+				<section name="common">
+					<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+					<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+					<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+					<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+					<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+					<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+				</section>
+			</manifest>
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
 
@@ -798,16 +829,14 @@
 	<macrodef name="jar.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<mkdir dir="${experiments.build.dir}/${experiment.name}/client" />
-			<mkdir dir="${experiments.build.dir}/${experiment.name}/server" />
+			<mkdir dir="${experiments.build.dir}/@{experiment.name}/client" />
+			<mkdir dir="${experiments.build.dir}/@{experiment.name}/server" />
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
 
-			<jar destfile="${experiments.build.dir}/${experiment.name}/client/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/${experiment.name}/client">
-				<include name="**/*.class" />
+			<jar destfile="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client">
 			</jar>
-			<jar destfile="${experiments.build.dir}/${experiment.name}/server/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/${experiment.name}/server">
-				<include name="**/*.class" />
+			<jar destfile="${experiments.build.dir}/@{experiment.name}/server/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/@{experiment.name}/server">
 			</jar>
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
@@ -818,22 +847,39 @@
 	<macrodef name="sign.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<signjar jar="${experiments.build.dir}/${experiment.name}/client/@{experiment.name}Client.jar" signedjar="${experiments.build.dir}/${experiment.name}/client/@{experiment.name}Client_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" />
-			<!--signjar jar="${experiments.dist.dir}/${experiment.name}/server/@{experiment.name}Driver.jar" signedjar="${experiments.dist.dir}/${experiment.name}/server/@{experiment.name}Driver_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" /-->
+			<signjar jar="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client.jar" signedjar="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" />
+			<!--signjar jar="${experiments.dist.dir}/@{experiment.name}/server/@{experiment.name}Driver.jar" signedjar="${experiments.dist.dir}/@{experiment.name}/server/@{experiment.name}Driver_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" /-->
 		</sequential>
 	</macrodef>
 
-	<macrodef name="deploy.experiment">
+	<macrodef name="build.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<copy todir="${rec.server}/@{rec.server.dir}">
-				<fileset file="${experiments.build.dir}/${experiment.name}/server/@{experiment.name}Driver_sig.jar" />
-			</copy>
-			<copy todir="${web.server}/@{web.server.dir}">
-				<fileset file="${experiments.build.dir}/${experiment.name}/client/@{experiment.name}Client_sig.jar" />
-			</copy>
+			<clean.experiment experiment.name="@{experiment.name}" />
+			<compile.experiment experiment.name="@{experiment.name}" />
+			<jar.experiment experiment.name="@{experiment.name}" />
+			<sign.experiment experiment.name="@{experiment.name}" />
+			<create.jnlp.for.experiment experiment.name="@{experiment.name}" />
 		</sequential>
 	</macrodef>
+
+	<macrodef name="dist.experiment">
+		<attribute name="experiment.name" />
+		<sequential>
+			<build.experiment experiment.name="@{experiment.name}" />
+			<zip destfile="${dist.dir}/elab-@{experiment.name}-client.zip" update="true" comment="eLab @{experiment.name} Client">
+				<fileset file="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client_sig.jar" />
+			</zip>
+			<zip destfile="${dist.dir}/elab-@{experiment.name}-hwserver.zip" update="true" comment="eLab @{experiment.name} Driver">
+				<fileset file="${experiments.build.dir}/@{experiment.name}/server/@{experiment.name}Driver.jar" />
+			</zip>
+			<zip destfile="${dist.dir}/elab-@{experiment.name}.zip" update="true" comment="eLab @{experiment.name} Complete Distribution">
+				<fileset file="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client_sig.jar" />
+				<fileset file="${experiments.build.dir}/@{experiment.name}/server/@{experiment.name}Driver.jar" />
+			</zip>
+		</sequential>
+	</macrodef>
+
 
 	<macrodef name="create.jnlp.for.experiment">
 		<attribute name="experiment.name" />
@@ -976,10 +1022,6 @@
 		<process.list task="clean.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
-	<target name="clean.all.experiments">
-		<delete dir="${experiments.build.dir}" />
-	</target>
-
 	<target name="compile.experiment">
 		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
 		<compile.experiment experiment.name="${experiment.name}" />
@@ -1016,32 +1058,34 @@
 		<process.list task="sign.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
-	<target name="deploy.experiment">
-		<fail unless="experiment.name"> You need to specify which experiment to deploy with the property experiment.name</fail>
-		<deploy.experiment experiment.name="${experiment.name}" />
-	</target>
-
-	<target name="deploy.experiments.list">
-		<fail unless="experiment.list"> experiments.list must be set to deploy
-				that list of experiments. define it in build.properties or pass 
-				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="deploy.experiment" list="${experiment.list}" attribute.name="experiment.name" />
-	</target>
-
-	<target name="build.experiment" depends="clean.experiment,compile.experiment,jar.experiment,sign.experiment">
+	<target name="build.experiment">
 		<fail unless="experiment.name">experiment.name must be set to build a single experiment jnlp. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
-		<create.jnlp.for.experiment experiment.name="${experiment.name}" />
+		<build.experiment experiment.name="${experiment.name}" />
+	</target>
+
+	<target name="build.experiments.list">
+		<fail unless="experiment.list"> experiments.list must be set to build
+				that list of experiments. define it in build.properties or pass 
+				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<process.list task="build.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
 	<target name="teste jnlp">
 		<create.jnlp.for.experiment experiment.name="${experiment.name}" />
 	</target>
 
-	<target name="dist.experiment.list" depends="clean.experiments.list,compile.experiments.list,jar.experiments.list,sign.experiments.list">
-		<fail unless="experiment.list">experiment.list must be set to build the jnlp for that list of experiments. 
+	<target name="dist.experiment">
+		<fail unless="experiment.name"> You need to specify which experiment to dist with the property experiment.name</fail>
+		<mkdir dir="${dist.dir}" />
+		<dist.experiment experiment.name="${experiment.name}" />
+	</target>
+
+	<target name="dist.experiments.list">
+		<fail unless="experiment.list">experiment.list must be set to make the dist for that list of experiments. 
 			Pass it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="create.jnlp.for.experiment" list="${experiment.list}" attribute.name="experiment.name" />
+		<mkdir dir="${dist.dir}" />
+		<process.list task="dist.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
 	<target name="run.experiment.client">
