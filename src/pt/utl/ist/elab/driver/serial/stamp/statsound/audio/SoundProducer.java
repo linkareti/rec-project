@@ -9,6 +9,13 @@ package pt.utl.ist.elab.driver.serial.stamp.statsound.audio;
 import javax.media.*;
 import javax.media.format.*;
 import javax.media.control.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import java.io.*;
 import java.util.*;
 import pt.utl.ist.elab.driver.serial.stamp.statsound.*;
@@ -34,8 +41,9 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable
         new Thread(this).start();        
     }
     
-    public void startPlayingAudioFile(java.io.File file)
+    public void startPlayingAudioFile(java.io.File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
+    	/*
         System.out.println("Playing audio file!");
         playing = true;
         try
@@ -64,18 +72,39 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable
             System.out.println("Failed playing audio file");
             e.printStackTrace();
         }
+        */
+    	
+    	   	
+    	{
+			AudioInputStream AIStream = AudioSystem.getAudioInputStream(file);
+			DataLine.Info info = new DataLine.Info(SourceDataLine.class, AIStream.getFormat());
+			SourceDataLine line = (SourceDataLine) AudioSystem.getLine(info);
+			line.open( AIStream.getFormat() );
+			line.start();
+			byte[] buffer = new byte[16384]; 
+			int count;
+			while ((count = AIStream.read(buffer)) > 0)
+				line.write(buffer, 0, count);
+			AIStream.close();
+			line.drain();
+			line.stop();
+			line.close();
+			line = null;
+    	}
     }
     
-    public void startPlayingAudioFile(int waveForm)
+    public void startPlayingAudioFile(int waveForm) throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
         if(waveForm==0)
         {
             //startPlayingAudioFile(new java.io.File("/home/elab/java/pink.wav"));
-            startPlayingAudioFile(new java.io.File("/usr/local/ReC6.0/driver/eLab/StatSound/pink.wav"));
+            //startPlayingAudioFile(new java.io.File("/usr/local/ReC6.0/driver/eLab/StatSound/pink.wav"));
+        	startPlayingAudioFile(new java.io.File("/home/elab/whitenoise.wav"));
         }
         else if(waveForm==1)
         {
-            startPlayingAudioFile(new java.io.File("/usr/local/ReC6.0/driver/eLab/StatSound/pulse.wav"));
+            //startPlayingAudioFile(new java.io.File("/usr/local/ReC6.0/driver/eLab/StatSound/pulse.wav"));
+        	startPlayingAudioFile(new java.io.File("/home/elab/whitenoise.wav"));
         }
     }    
         
@@ -253,7 +282,16 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable
                     }
                     catch(NumberFormatException nfe)
                     {                        
-                    }                
+                    } catch (UnsupportedAudioFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (LineUnavailableException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}                
                 }
                 
                 if(!fileFound)
