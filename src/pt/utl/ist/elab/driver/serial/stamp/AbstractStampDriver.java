@@ -208,6 +208,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
     
     public void handleStampCommand(StampCommand command)
     {
+    Logger.getLogger("handleStampCommand: command=" + command.getCommandIdentifier() + " processor=" + command.getProcessor() == null ? "null" : command.getProcessor().getClass().getName());
 	StampProcessor processor=command.getProcessor();
 	if(processor==null)
 	{
@@ -215,6 +216,10 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	    Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,"Droping the command, as it is not understood!");
 	    return;
 	}
+	
+	//a little temporary hack to ignore TEMP lines
+	if (command.getCommandIdentifier().equalsIgnoreCase("TEMP"))
+		return;
 	
 	if(processor.isData() && dataSource!=null)
 	{
