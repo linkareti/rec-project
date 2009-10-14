@@ -215,8 +215,10 @@ public abstract class AbstractStampDriver extends BaseDriver implements
 				return;
 			}
 
-			if (dataSource != null)
+			if (dataSource != null) {
+				Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Processing data command...");
 				dataSource.processDataCommand(command);
+			}
 			else
 				Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,
 						"No data source to process command...");
@@ -230,6 +232,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements
 								+ command.getCommand() + " !");
 				return;
 			}
+			Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Trying to process this command...");
 			processCommand(command);
 		}
 	}
