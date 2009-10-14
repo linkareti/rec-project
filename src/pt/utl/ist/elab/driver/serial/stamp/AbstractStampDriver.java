@@ -216,7 +216,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements
 			}
 
 			if (dataSource != null) {
-				Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Processing data command...");
+				Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Processing data command " + command.getCommandIdentifier() + " on data source " + dataSource.getClass().getSimpleName());
 				dataSource.processDataCommand(command);
 			}
 			else

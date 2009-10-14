@@ -74,6 +74,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
     
     public void processDataCommand(StampCommand cmd)
     {
+    	System.out.println("Entering processDataCommand on StatSoundStampDataSource");
+    	
         if(cmd==null || !cmd.isData() || cmd.getCommandIdentifier()==null)
         {
             System.out.println("Return from process data...cmd isn't valid");
