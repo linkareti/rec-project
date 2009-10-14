@@ -16,6 +16,7 @@ import com.linkare.rec.data.metadata.*;
 import com.linkare.rec.impl.logging.*;
 import com.linkare.rec.impl.utils.*;
 import java.util.logging.*;
+
 import pt.utl.ist.elab.driver.serial.stamp.*;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
 import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.*;
@@ -81,6 +82,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
         
         PhysicsValue[] values=new PhysicsValue[7];
         
+        Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Inside processDataCommand using " + cmd.getCommandIdentifier());
+        
         if(cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER))
         {
             /**PISTON EXPERIMENT*/
@@ -141,6 +144,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
             {
                 for(double f=freqIni; f<=freqFin; f+=step)
                 {
+                    Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exp2 for loop");
                     if(expEnded)
                     {
                         stopPlaying();
@@ -153,12 +157,15 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
                         Thread.currentThread().sleep(150);
                         synchronized(syncWait)
                         {
+                        	Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering syncronized");
                             while(!rmsAvailable && !expEnded)
                             {
+                                Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exp2 while loop");
                                 syncWait.wait();
                             }
                             rmsAvailable=false;
                         }
+                        Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exiting syncronized");
                     }
                     
                     catch(InterruptedException ie)
@@ -184,6 +191,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
             }
             else if(!expEnded)
             {
+                Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Inside no expEnded");
                 startPlayingAudioFile(waveForm);
                 sr.startAcquiring(true);
                 try
@@ -191,12 +199,15 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
                     Thread.currentThread().sleep(800);
                     synchronized(syncWait)
                     {
+                        Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering not expEnded syncronized");
                         while(!rmsAvailable && !expEnded)
                         {
+                            Logger.getLogger("StampDriver.Logger").log(Level.INFO, "While not expEnded syncronized");
                             syncWait.wait();
                         }
                         rmsAvailable=false;
                     }
+                    Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exiting not expEnded syncronized");
                 }
                 catch(InterruptedException ie)
                 {
@@ -308,6 +319,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
         }
         catch(Exception ioe)
         {
+        	System.out.println("ERROR 1 : " + ioe.getClass()+ " " + ioe.toString());
         }
     }
     
