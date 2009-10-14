@@ -208,7 +208,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
     
     public void handleStampCommand(StampCommand command)
     {
-    Logger.getLogger("handleStampCommand: command=" + command.getCommandIdentifier() + " processor=" + command.getProcessor() == null ? "null" : command.getProcessor().getClass().getName());
+    Logger.getLogger("handleStampCommand: command=" + command.getCommandIdentifier() == null ? "null" : command.getCommandIdentifier() + " processor=" + command.getProcessor() == null ? "null" : command.getProcessor().getClass().getName());
 	StampProcessor processor=command.getProcessor();
 	if(processor==null)
 	{
