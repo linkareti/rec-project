@@ -12,11 +12,15 @@
     </information>
     <resources>
         <j2se version="@j2se-version@"/>
-        <jar href="../ElabFullClient_sig.jar"/>
-        <jar href="@jar@" main="true"/>
-	<extension name="JFreeChartClient" href="../../jfreechart/JFreeChartClient.jnlp" />
-	<extension name="ReCClient" href="../../recbase/ReCClient.jnlp" />
-	<extension name="OpenORBClient" href="../../openorb/OpenORBClient.jnlp" />
+        <jar href="@jar-full-client@" main="true"/>
+        
+        <!--Start Experiment Jars-->
+        <!--End Experiment Jars-->
+
+	<extension name="JFreeChartClient" href="jfreechart/JFreeChartClient.jnlp" />
+	<extension name="ReCClient" href="recbase/ReCClient.jnlp" />
+	<extension name="OpenORBClient" href="openorb/OpenORBClient.jnlp" />
+	<extension name="JVLC" href="jvlc/JVLC.jnlp" />
 	<property name="ReC.PercentFreeMemoryThreshold2Serialization" value="80" />
     </resources>
     <application-desc main-class="@main-class@">
