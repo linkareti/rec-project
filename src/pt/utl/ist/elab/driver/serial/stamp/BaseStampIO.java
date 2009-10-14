@@ -157,6 +157,7 @@ public class BaseStampIO {
                     if (!lineRead.equals("")) {
                         Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Processing message...");
                         processIncomingLine(lineRead);
+                        Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Processed message...");
                     }
 
                 } catch (Exception e) {
@@ -208,6 +209,7 @@ public class BaseStampIO {
             }
         }
 
+        Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Firing stamp command listener...");
         fireStampCommandListenerHandleStampCommand(inCommand);
     }
 
@@ -233,6 +235,7 @@ public class BaseStampIO {
         if (listener != null) {
             listener.handleStampCommand(event);
         }
+        Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "No listener for this event!!!!");
 
     }
 
