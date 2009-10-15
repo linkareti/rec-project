@@ -12,7 +12,10 @@
     </information>
     <resources>
         <j2se version="@j2se-version@"/>
-        <jar href="@jar-full-client@" main="true"/>
+        
+        <!-- Jar eLab Client -->
+        <!-- Jar ReC Client -->
+        <!-- Jar ReC Common -->
         
         <!--Start Experiment Jars-->
         <!--End Experiment Jars-->
