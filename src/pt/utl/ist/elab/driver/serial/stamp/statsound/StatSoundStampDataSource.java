@@ -68,8 +68,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
     /** Creates a new instance of RadioactividadeStampDataSource */
     public StatSoundStampDataSource()
     {
-//        sr = new SoundRecorder();
-//        sr.addDataSoundListener(this);
+        sr = new SoundRecorder();
+        sr.addDataSoundListener(this);
     }
         
     public void processDataCommand(StampCommand cmd)
