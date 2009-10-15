@@ -39,6 +39,6 @@
 	<classpathentry kind="lib" path="rec/lib/java/common/openorb_pss-1.4.0.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/jsr80_ri.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/jsr80.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_11"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
