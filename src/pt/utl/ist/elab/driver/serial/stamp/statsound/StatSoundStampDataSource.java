@@ -71,10 +71,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 //        sr = new SoundRecorder();
 //        sr.addDataSoundListener(this);
     }
-    
-    public void processDataCommand(StampCommand cmd) {}
-    
-    public void bananaSplit(StampCommand cmd)
+        
+    public void processDataCommand(StampCommand cmd)
     {
         Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering processDataCommand on StatSoundStampDataSource");    	
     	System.out.println("Entering processDataCommand on StatSoundStampDataSource");

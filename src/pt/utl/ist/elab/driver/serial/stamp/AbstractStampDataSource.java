@@ -17,5 +17,4 @@ public abstract class AbstractStampDataSource extends BaseDataSource
 {
 	public abstract void processDataCommand(StampCommand cmd);
 
-	public abstract void bananaSplit(StampCommand command);
 }
