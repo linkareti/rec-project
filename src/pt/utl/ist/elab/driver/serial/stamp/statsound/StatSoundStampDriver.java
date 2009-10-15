@@ -276,12 +276,12 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			dataSource.setNPoints(nPoints);
 			dataSource.setFirstTime(true);
 			if (typeOfExp.equalsIgnoreCase(dataSource.EXP_1)) {
-				//dataSource.playSinWave(freqIni);
-				//dataSource.startAcquiring(false);
+				dataSource.playSinWave(freqIni);
+				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			} else if (typeOfExp.equalsIgnoreCase(dataSource.EXP_2)) {
-				//dataSource.playSinWave(freqIni);
-				//dataSource.startAcquiring(false);
+				dataSource.playSinWave(freqIni);
+				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			} else {
 				dataSource.setWaveForm(waveForm);
