@@ -161,6 +161,7 @@ public class BaseStampIO {
                     }
 
                 } catch (Exception e) {
+                    Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Ops! Exception catched... " + e.toString());
                     LoggerUtil.logThrowable("Unable to read line from stamp serial port...", e, Logger.getLogger(STAMP_IO_LOGGER));
                     currentThread = null;
                     return;
