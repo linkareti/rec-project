@@ -14,6 +14,8 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class Apparatus extends DisplayNode {
 
     private String displayStringBundleKey = "";
+    
+    private String descriptionStringBundleKey = "";
 
     private String iconLocationBundleKey = "";
 
@@ -52,6 +54,11 @@ public class Apparatus extends DisplayNode {
     @XmlAttribute
     public String getDisplayStringBundleKey() {
 	return displayStringBundleKey;
+    }
+    
+    @XmlAttribute
+    public String getDescriptionStringBundleKey() {
+	return descriptionStringBundleKey;
     }
 
     /**
@@ -173,6 +180,14 @@ public class Apparatus extends DisplayNode {
      */
     public void setDisplayStringBundleKey(String displayStringBundleKey) {
 	this.displayStringBundleKey = displayStringBundleKey;
+    }
+
+    /**
+     * @param descriptionStringBundleKey
+     *            the descriptionStringBundleKey to set
+     */
+    public void setDescriptionStringBundleKey(String descriptionStringBundleKey) {
+	this.descriptionStringBundleKey = descriptionStringBundleKey;
     }
 
     /**

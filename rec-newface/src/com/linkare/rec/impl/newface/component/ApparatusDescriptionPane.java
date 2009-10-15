@@ -50,6 +50,8 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 
 		lblApparatusImg.setIcon(ReCResourceBundle.findImageIconOrDefault(apparatusConfig
 			.getDesktopLocationBundleKey(), new ImageIcon())); // FIXME Set default icon
+		
+		jTextArea1.setText(ReCResourceBundle.findString(apparatusConfig.getDescriptionStringBundleKey()));
 	    }
 	}
 
