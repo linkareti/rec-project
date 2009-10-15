@@ -50,7 +50,7 @@
 		</fileset>
 	</path>
 
-	<path id="rec.compile.common.classpath">
+	<path id="rec.common.libs.classpath">
 		<path refid="rec.common.lib.path" />
 		<path refid="rec.common.compile.lib.path" />
 	</path>
@@ -66,7 +66,7 @@
 
 		<javac srcdir="${rec.common.src.java.dir}" destdir="${rec.common.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
-			<classpath refid="rec.compile.common.classpath" />
+			<classpath refid="rec.common.libs.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
@@ -125,17 +125,19 @@
 		</fileset>
 	</path>
 
-	<path id="rec.compile.client.classpath">
-		<fileset dir="lib/">
-			<include name="**/*.jar" />
-		</fileset>
+	<path id="rec.client.libs.classpath">
 		<path refid="rec.client.lib.path" />
 		<path refid="rec.client.compile.lib.path" />
 	</path>
 
 	<path id="rec.compile.client.dependencies.classpath">
-		<path refid="rec.compile.client.classpath" />
 		<pathelement location="${rec.common.classes.dir}/" />
+		<path refid="rec.common.libs.classpath" />
+	</path>
+
+	<path id="rec.compile.client.classpath">
+		<path refid="rec.client.libs.classpath" />
+		<path refid="rec.compile.client.dependencies.classpath" />
 	</path>
 
 	<target name="clean.rec.client" description="Delete the build folder containing the common shared compiled code.">
@@ -149,13 +151,13 @@
 
 		<javac srcdir="${rec.client.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
-			<classpath refid="rec.compile.client.dependencies.classpath" />
+			<classpath refid="rec.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
 		<javac srcdir="${rec.ui.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
-			<classpath refid="rec.compile.client.dependencies.classpath" />
+			<classpath refid="rec.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
@@ -213,17 +215,19 @@
 		</fileset>
 	</path>
 
-	<path id="rec.compile.hardwareserver.classpath">
-		<fileset dir="lib/">
-			<include name="**/*.jar" />
-		</fileset>
+	<path id="rec.hardwareserver.libs.classpath">
 		<path refid="rec.hardwareserver.lib.path" />
 		<path refid="rec.hardwareserver.compile.lib.path" />
 	</path>
 
 	<path id="rec.compile.hardwareserver.dependencies.classpath">
-		<path refid="rec.compile.hardwareserver.classpath" />
 		<pathelement location="${rec.common.classes.dir}/" />
+		<path refid="rec.common.libs.classpath" />
+	</path>
+
+	<path id="rec.compile.hardwareserver.classpath">
+		<path refid="rec.hardwareserver.libs.classpath" />
+		<path refid="rec.compile.hardwareserver.dependencies.classpath" />
 	</path>
 
 	<target name="clean.rec.hardwareserver">
@@ -237,7 +241,7 @@
 
 		<javac srcdir="${rec.hardwareserver.src.java.dir}" destdir="${rec.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
-			<classpath refid="rec.compile.hardwareserver.dependencies.classpath" />
+			<classpath refid="rec.compile.hardwareserver.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
@@ -288,17 +292,19 @@
 		</fileset>
 	</path>
 
-	<path id="rec.compile.multicastcontroller.classpath">
-		<fileset dir="lib/">
-			<include name="**/*.jar" />
-		</fileset>
+	<path id="rec.multicastcontroller.libs.classpath">
 		<path refid="rec.multicast.lib.path" />
 		<path refid="rec.multicast.compile.lib.path" />
 	</path>
 
 	<path id="rec.compile.multicastcontroller.dependencies.classpath">
-		<path refid="rec.compile.multicastcontroller.classpath" />
 		<pathelement location="${rec.common.classes.dir}/" />
+		<path refid="rec.common.libs.classpath" />
+	</path>
+
+	<path id="rec.compile.multicastcontroller.classpath">
+		<path refid="rec.multicastcontroller.libs.classpath" />
+		<path refid="rec.compile.multicastcontroller.dependencies.classpath" />
 	</path>
 
 	<target name="clean.rec.multicastcontroller">
@@ -312,7 +318,7 @@
 
 		<javac srcdir="${rec.multicast.src.java.dir}" destdir="${rec.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
-			<classpath refid="rec.compile.multicastcontroller.dependencies.classpath" />
+			<classpath refid="rec.compile.multicastcontroller.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
@@ -348,9 +354,6 @@
 	</target>
 
 	<path id="run.multicastcontroller.classpath">
-		<fileset dir="lib/">
-			<include name="**/*.jar" />
-		</fileset>
 		<path refid="rec.common.lib.path" />
 		<path refid="rec.multicast.lib.path" />
 		<pathelement location="${rec.common.classes.dir}/" />
@@ -428,18 +431,21 @@
 		</fileset>
 	</path>
 
-	<path id="elab.compile.client.classpath">
-		<fileset dir="lib/">
-			<include name="**/*.jar" />
-		</fileset>
+	<path id="elab.client.libs.classpath">
 		<path refid="elab.client.lib.path" />
 		<path refid="elab.client.compile.lib.path" />
 	</path>
 
 	<path id="elab.compile.client.dependencies.classpath">
-		<path refid="elab.compile.client.classpath" />
+		<path refid="rec.client.libs.classpath" />
 		<pathelement location="${rec.client.classes.dir}/" />
+		<path refid="rec.common.libs.classpath" />
 		<pathelement location="${rec.common.classes.dir}/" />
+	</path>
+
+	<path id="elab.compile.client.classpath">
+		<path refid="elab.client.libs.classpath" />
+		<path refid="elab.compile.client.dependencies.classpath" />
 	</path>
 
 	<target name="clean.elab.client">
@@ -453,13 +459,13 @@
 
 		<javac srcdir="${elab.client.src.java.dir}" destdir="${elab.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
-			<classpath refid="elab.compile.client.dependencies.classpath" />
+			<classpath refid="elab.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
 		<javac srcdir="${elab.ui.src.java.dir}" destdir="${elab.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
-			<classpath refid="elab.compile.client.dependencies.classpath" />
+			<classpath refid="elab.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
@@ -518,18 +524,23 @@
 		</fileset>
 	</path>
 
-	<path id="elab.compile.hardwareserver.classpath">
-		<fileset dir="lib/">
-			<include name="**/*.jar" />
-		</fileset>
+	<path id="elab.hardwareserver.libs.classpath">
 		<path refid="elab.hardwareserver.lib.path" />
 		<path refid="elab.hardwareserver.compile.lib.path" />
 	</path>
 
 	<path id="elab.compile.hardwareserver.dependencies.classpath">
-		<path refid="elab.compile.hardwareserver.classpath" />
-		<pathelement location="${rec.common.classes.dir}/" />
 		<pathelement location="${rec.hardwareserver.classes.dir}/" />
+		<path refid="rec.hardwareserver.libs.classpath" />
+		<pathelement location="${rec.common.classes.dir}/" />
+		<path refid="rec.common.libs.classpath" />
+	</path>
+
+
+
+	<path id="elab.compile.hardwareserver.classpath">
+		<path refid="elab.hardwareserver.libs.classpath" />
+		<path refid="elab.compile.hardwareserver.dependencies.classpath" />
 	</path>
 
 	<target name="clean.elab.hardwareserver">
@@ -543,7 +554,7 @@
 
 		<javac srcdir="${elab.hardwareserver.src.java.dir}" destdir="${elab.hardwareserver.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
-			<classpath refid="elab.compile.hardwareserver.dependencies.classpath" />
+			<classpath refid="elab.compile.hardwareserver.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
@@ -595,18 +606,21 @@
 		</fileset>
 	</path>
 
-	<path id="elab.compile.multicastcontroller.classpath">
-		<fileset dir="lib/">
-			<include name="**/*.jar" />
-		</fileset>
+	<path id="elab.multicastcontroller.libs.classpath">
 		<path refid="elab.multicast.lib.path" />
 		<path refid="elab.multicast.compile.lib.path" />
 	</path>
 
 	<path id="elab.compile.multicastcontroller.dependencies.classpath">
-		<path refid="elab.compile.multicastcontroller.classpath" />
+		<path refid="rec.common.libs.classpath" />
 		<pathelement location="${rec.common.classes.dir}/" />
+		<path refid="rec.multicastcontroller.libs.classpath" />
 		<pathelement location="${rec.multicast.classes.dir}/" />
+	</path>
+
+	<path id="elab.compile.multicastcontroller.classpath">
+		<path refid="elab.multicastcontroller.libs.classpath" />
+		<path refid="elab.compile.multicastcontroller.dependencies.classpath" />
 	</path>
 
 	<target name="clean.elab.multicastcontroller">
@@ -620,7 +634,7 @@
 
 		<javac srcdir="${elab.multicast.src.java.dir}" destdir="${elab.multicast.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
-			<classpath refid="elab.compile.multicastcontroller.dependencies.classpath" />
+			<classpath refid="elab.compile.multicastcontroller.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
 
@@ -741,6 +755,25 @@
 		</sequential>
 	</macrodef>
 
+	<path id="compile.experiment.client.classpath">
+		<pathelement location="${rec.common.classes.dir}" />
+		<path refid="rec.common.libs.classpath" />
+		<pathelement location="${rec.client.classes.dir}" />
+		<pathelement location="${rec.ui.classes.dir}" />
+		<path refid="rec.client.libs.classpath" />
+		<pathelement location="${elab.client.classes.dir}" />
+		<path refid="elab.client.libs.classpath" />
+	</path>
+
+	<path id="compile.experiment.driver.classpath">
+		<pathelement location="${rec.common.classes.dir}" />
+		<path refid="rec.common.libs.classpath" />
+		<pathelement location="${rec.hardwareserver.classes.dir}" />
+		<path refid="rec.hardwareserver.libs.classpath" />
+		<pathelement location="${elab.hardwareserver.classes.dir}" />
+		<path refid="elab.hardwareserver.libs.classpath" />
+	</path>
+
 	<macrodef name="compile.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
@@ -756,11 +789,7 @@
 			<javac srcdir="experiments/@{experiment.name}/src/java/client" destdir="${experiments.classes.dir}/@{experiment.name}/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 				<include name="**/*.java" />
 				<classpath>
-					<pathelement location="${rec.common.classes.dir}" />
-					<pathelement location="${rec.client.classes.dir}" />
-					<pathelement location="${rec.ui.classes.dir}" />
-					<pathelement location="${elab.common.classes.dir}" />
-					<pathelement location="${elab.client.classes.dir}" />
+					<path refid="compile.experiment.client.classpath" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/client">
 						<include name="**/*.jar" />
 					</fileset>
@@ -789,13 +818,7 @@
 			<javac srcdir="experiments/@{experiment.name}/src/java/server" destdir="${experiments.classes.dir}/@{experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 				<include name="**/*.java" />
 				<classpath>
-					<fileset dir="lib/">
-						<include name="**/*.jar" />
-					</fileset>
-					<pathelement location="${rec.common.classes.dir}" />
-					<pathelement location="${rec.hardwareserver.classes.dir}" />
-					<pathelement location="${elab.common.classes.dir}" />
-					<pathelement location="${elab.hardwareserver.classes.dir}" />
+					<path refid="compile.experiment.driver.classpath" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/server">
 						<include name="**/*.jar" />
 					</fileset>
@@ -1125,7 +1148,4 @@
 		</sequential>
 	</macrodef>
 
-	<target name="deploy.libraries">
-
-	</target>
 </project>
