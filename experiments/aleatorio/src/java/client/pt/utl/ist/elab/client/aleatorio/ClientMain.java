@@ -6,7 +6,9 @@
 
 package pt.utl.ist.elab.client.aleatorio;
 
-//import com.linkare.rec.impl.baseUI.ReCBaseUI;
+import javax.swing.SwingUtilities;
+
+import com.linkare.rec.impl.baseUI.ReCBaseUI;
 
 /**
  * 
@@ -25,9 +27,18 @@ public class ClientMain {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-//		javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
-//		ReCBaseUI ui = new ReCBaseUI();
-//		ui.setApparatusAutoConnectID(NAME);
-//		ui.show();
+		javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				ReCBaseUI ui = new ReCBaseUI();
+				ui.setApparatusAutoConnectID(NAME);
+				ui.pack();
+				ui.setVisible(true);
+			}
+		});
+		
 	}
 }
