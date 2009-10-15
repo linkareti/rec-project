@@ -74,6 +74,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
     
     public void processDataCommand(StampCommand cmd)
     {
+        Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering processDataCommand on StatSoundStampDataSource");    	
     	System.out.println("Entering processDataCommand on StatSoundStampDataSource");
     	
         if(cmd==null || !cmd.isData() || cmd.getCommandIdentifier()==null)
@@ -376,7 +377,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
             this.expEnded=expEnded;
             syncWait.notifyAll();
         }
-        System.out.println("Data source set exp ended done!");
+        System.out.println("Data source set exp ended done! (" + (expEnded ? "true" : "false") + ")");
     }
     
     public void setWaveForm(int waveForm)
