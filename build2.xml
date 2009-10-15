@@ -708,6 +708,37 @@
 		</zip>
 
 	</target>
+	
+	<target name="create.jnlp.full.client">
+		<copy file="${template.file}" overwrite="yes" tofile="${build.dir}/ELabFullClient.jnlp" />
+		<replace file="${build.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
+			<replacefilter token="@codebase@" property="codebase" />
+			<replacefilter token="@href@" property="href" />
+			<replacefilter token="@title@" property="title" />
+			<replacefilter token="@vendor@" property="vendor" />
+			<replacefilter token="@homepage@" property="homepage" />
+			<replacefilter token="@one-line@" property="one-line" />
+			<replacefilter token="@tootip@" property="tootip" />
+			<replacefilter token="@short@" property="short" />
+			<replacefilter token="@j2se-version@" property="j2se-version" />
+		</replace>
+		<replace file="${build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
+		<replace file="${build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
+		<replace file="${build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
+		
+		<process.list task="add.experiment.to.full.jnlp" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
+	
+	<macrodef name="add.experiment.to.full.jnlp">
+		<attribute name="experiment.name" />
+		<sequential>
+			<replace file="${build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
+				<replacevalue><![CDATA[<jar href="client/@temporary.experiment.jar@"/>
+		<!--End Experiment Jars-->]]></replacevalue>
+			</replace>
+			<replace file="${build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
+		</sequential>
+	</macrodef>
 
 	<!--
 		=====================================================
@@ -918,9 +949,17 @@
 				<replacefilter token="@tootip@" property="@{experiment.name}.tootip" />
 				<replacefilter token="@short@" property="@{experiment.name}.short" />
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
-				<replacefilter token="@jar@" value="/client/@{experiment.name}Client_sig.jar" />
 				<replacefilter token="@main-class@" property="@{experiment.name}.main-class" />
 			</replace>
+			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;"/>
+			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
+			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
+			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
+				<replacevalue><![CDATA[<jar href="client/@temporary.experiment.jar@" main="true"/>
+		<!--End Experiment Jars-->]]></replacevalue>
+			</replace>
+		<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
+		
 		</sequential>
 	</macrodef>
 
@@ -1140,8 +1179,7 @@
 		<attribute name="destination.dir.name" />
 		<sequential>
 			<mkdir dir="@{destination.dir.name}" />
-			<signjar destDir="@{destination.dir.name}">
-				keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}"
+			<signjar destDir="@{destination.dir.name}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
 				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>

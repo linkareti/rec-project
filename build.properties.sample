@@ -61,3 +61,14 @@ multicast.debug.address.port=8000
 experiment.openorb.profile=recHardware 
 experiment.eLab.HardwareInfo=MMBaseHardwareInfo.xml
 experiment.driver.debug.address.port=8001
+
+##JNLP PROPERTIES
+.codebase=http://elab.ist.utl.pt/rec/eLab/
+.href=ElabFullClient.jnlp
+.title=eLab - Full Laboratory
+.vendor=I.S.T. - U.T.L.
+.homepage=http://elab.ist.utl.pt/rec
+.one-line=Estatistica de dados
+.tootip=Estatistica de dados
+.short=Estatistica de dados
+.j2se-version=1.6
