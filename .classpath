@@ -14,8 +14,6 @@
 	<classpathentry kind="lib" path="lib/tools-1.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
-	<classpathentry kind="lib" path="lib/jcommon-1.0.12.jar"/>
-	<classpathentry kind="lib" path="lib/jmf.jar"/>
 	<classpathentry kind="lib" path="lib/fits1.3.jar"/>
 	<classpathentry kind="lib" path="lib/JCFN.jar"/>
 	<classpathentry kind="lib" path="lib/test/commons-beanutils-1.8.0.jar"/>
@@ -31,6 +29,7 @@
 	<classpathentry kind="lib" path="lib/win32/comm.jar"/>
 	<classpathentry kind="lib" path="elab/lib/windows/3d/j3daudio.jar"/>
 	<classpathentry kind="lib" path="elab/lib/windows/3d/j3dcore.jar"/>
+	<classpathentry kind="lib" path="rec/lib/compile/client/jcommon-1.0.12.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="rec/lib/compile/client/javaws.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/jfreechart-1.0.9.jar"/>
