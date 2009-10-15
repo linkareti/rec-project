@@ -24,10 +24,12 @@ web.server=
 web.server.dir=
 
 ##KEYSTORE CONFIGURATION###
-keystore=.keystore
-keypass=linkare
-storepass=linkare
-alias=linkare
+keystore=cert/ISTJavaSign.KeyStore.p12
+#storetype=jks,pkcs12
+storetype=pkcs12
+keypass=askPass
+storepass=askPass
+alias=ISTJavaSign
 
 ##RUN CONFIGURATION##
 max.memory=1024m

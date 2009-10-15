@@ -90,7 +90,7 @@
 	</target>
 
 	<target name="sign.rec.common">
-		<signjar destDir="${rec.common.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+		<signjar storetype="${storetype}" destDir="${rec.common.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
 			<fileset dir="${rec.common.build.dir}" includes="ReCCommon.jar" excludes="*_sig.jar" />
 			<globmapper from="*.jar" to="*_sig.jar" />
 		</signjar>
@@ -181,7 +181,7 @@
 	</target>
 
 	<target name="sign.rec.client">
-		<signjar destDir="${rec.client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+		<signjar storetype="${storetype}" destDir="${rec.client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
 			<fileset dir="${rec.client.build.dir}" includes="ReCClient.jar" excludes="*_sig.jar" />
 			<globmapper from="*.jar" to="*_sig.jar" />
 		</signjar>
@@ -489,7 +489,7 @@
 	</target>
 
 	<target name="sign.elab.client">
-		<signjar destDir="${elab.client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+		<signjar storetype="${storetype}" destDir="${elab.client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
 			<fileset dir="${elab.client.build.dir}" includes="ELabClient.jar" excludes="*_sig.jar" />
 			<globmapper from="*.jar" to="*_sig.jar" />
 		</signjar>
@@ -901,7 +901,7 @@
 	<macrodef name="sign.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<signjar jar="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client.jar" signedjar="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" />
+			<signjar storetype="${storetype}" jar="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client.jar" signedjar="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" />
 			<!--signjar jar="${experiments.dist.dir}/@{experiment.name}/server/@{experiment.name}Driver.jar" signedjar="${experiments.dist.dir}/@{experiment.name}/server/@{experiment.name}Driver_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" /-->
 		</sequential>
 	</macrodef>
@@ -933,8 +933,7 @@
 			</zip>
 		</sequential>
 	</macrodef>
-
-
+	
 	<macrodef name="create.jnlp.for.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
@@ -1179,7 +1178,7 @@
 		<attribute name="destination.dir.name" />
 		<sequential>
 			<mkdir dir="@{destination.dir.name}" />
-			<signjar destDir="@{destination.dir.name}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<signjar storetype="${storetype}" destDir="@{destination.dir.name}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
 				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
