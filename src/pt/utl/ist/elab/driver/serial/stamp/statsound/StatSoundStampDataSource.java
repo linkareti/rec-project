@@ -251,9 +251,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
             Integer temp;
             try
             {
-                temp = (Integer)cmd.getCommandData(StampStatSoundTempProcessor.COMMAND_IDENTIFIER);
+                temp = Integer.valueOf(cmd.getCommand().split(" ")[0]); //cmd.getCommandData(StampStatSoundTempProcessor.COMMAND_IDENTIFIER);
             }
-            catch(ClassCastException e)
+            catch(Exception e)
             {
 
                 Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exception on temp if");
