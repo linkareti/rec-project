@@ -108,13 +108,16 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
                 
                 try
                 {
+                	Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos1");
                     synchronized(syncWait)
                     {
+                    	Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos2");
                         long time1 = System.currentTimeMillis();
                         Thread.currentThread().sleep(200);
                         
                         while(!rmsAvailable && !expEnded)
                         {
+                        	Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos3");
                             syncWait.wait();
                         }
                         long time2=System.currentTimeMillis();
@@ -122,6 +125,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
                         System.out.println("Waited:"+(time2-time1));
                         rmsAvailable = false;
                     }
+                    Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos4");
                 }
                 catch(InterruptedException ie)
                 {
@@ -251,6 +255,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
             }
             catch(ClassCastException e)
             {
+
+                Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exception on temp if");
                 e.printStackTrace();
                 return;
             }

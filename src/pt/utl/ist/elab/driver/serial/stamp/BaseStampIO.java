@@ -212,6 +212,7 @@ public class BaseStampIO {
 
         Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Firing stamp command listener...");
         fireStampCommandListenerHandleStampCommand(inCommand);
+        Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Fired stamp command listener...");
     }
 
     /** Registers StampCommandListener to receive events.
