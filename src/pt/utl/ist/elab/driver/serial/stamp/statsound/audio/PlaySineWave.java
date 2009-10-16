@@ -21,16 +21,22 @@ public class PlaySineWave extends javax.swing.JFrame
 {
         SoundRecorder sr=null;
         Process proc=null;
+        
+    static SoundProducer soundProducer = null;
+        
 	/** Creates new form PlaySineWave */
 	public PlaySineWave()
 	{
             try
             {
                 //proc=Runtime.getRuntime().exec("/opt/j2sdk_nb/j2sdk1.4.2/jre/bin/java pt.utl.ist.elab.driver.serial.stamp.statsound.audio.SoundProducer");
-                proc=Runtime.getRuntime().exec("/home/elab/DEBUG/ReC6.0/driver/eLab/StatSound/StartSoundProducer");
-                proc.toString();
+                //proc=Runtime.getRuntime().exec("/home/elab/DEBUG/ReC6.0/driver/eLab/StatSound/StartSoundProducer");
+                //proc.toString();
+            	
+            	soundProducer = new SoundProducer();
+
             }
-            catch(java.io.IOException ioe)
+            catch(Exception ioe)
             {
                 System.out.println("Could not start Sound Producer!");
                 ioe.printStackTrace();
