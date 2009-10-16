@@ -138,18 +138,22 @@ public class PhysicsValueFactory {
 	public static PhysicsValue fromInt(int value, Scale s) {
 		double step = s.getStepValue().toDouble();
 		int multiplier_exp = 0;
+		int antiInfiniteLoop = 0;
 		double error = 0;
 		if (s.getDefaultErrorValue() != null)
 			error = s.getDefaultErrorValue().toDouble();
 		if (error < step)
 			error = step;
 		double aux = step;
-		while (aux >= 10.) {
+		while (aux >= 10. && antiInfiniteLoop<20) {
+			antiInfiniteLoop++;
 			multiplier_exp--;
 			aux /= 10.;
 		}
 		aux = step;
-		while (aux < 1.) {
+		antiInfiniteLoop = 0;
+		while (aux < 1. && antiInfiniteLoop<20) {
+			antiInfiniteLoop++;
 			multiplier_exp++;
 			aux *= 10.;
 		}
