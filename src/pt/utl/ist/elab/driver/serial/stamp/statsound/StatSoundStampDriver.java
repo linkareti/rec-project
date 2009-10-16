@@ -108,9 +108,14 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 				.parseInt(config
 						.getSelectedHardwareParameterValue(StatSoundStampDataSource.WAVE_FORM));
 
-		nPoints = Integer
-				.parseInt(config
-						.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS));
+		try {
+			nPoints = Integer
+					.parseInt(config
+							.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS));
+		} catch (NumberFormatException e) {
+			System.out.println("nPoint throw an exception");
+			nPoints = 50;
+		}
 
 		stampConfig = new StampCommand(CONFIG_OUT_STRING);
 
