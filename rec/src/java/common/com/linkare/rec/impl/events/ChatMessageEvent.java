@@ -10,7 +10,7 @@ import com.linkare.rec.acquisition.UserInfo;
 
 /**
  * 
- * @author Jos� Pedro Pereira
+ * @author José Pedro Pereira
  */
 public class ChatMessageEvent extends java.util.EventObject {
 
