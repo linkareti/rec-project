@@ -326,47 +326,14 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
     {
         try
         {
-//            synchronized(this)
-//            {
-//                java.io.File file = new java.io.File("/tmp/startFreq");
-//                java.io.FileWriter fw = new java.io.FileWriter(file);
-//                fw.write(""+freq);
-//                fw.close();
-//            }
-        	
-
-        	new Runnable() {
-				public void run() {
-		        	try {
-						int seconds = 10;
-						int sampleRate = 8000;
-						double RAD = 2.0 * Math.PI;
-						
-						AudioFormat af = new
-						AudioFormat( (float)sampleRate, 8, 1, true, true );
-						DataLine.Info info = new
-						                DataLine.Info ( SourceDataLine.class, af );
-						SourceDataLine source =
-						(SourceDataLine) AudioSystem.getLine( info );
-						source.open( af );
-						source.start();
-						byte[] buf = new byte[sampleRate * seconds];
-						for ( int i=0; i<buf.length; i++ )
-						{
-						buf[i] =
-						(byte)( Math.sin( RAD * 2000 / sampleRate * i ) * 127.0 );
-						}
-						source.write( buf, 0, buf.length );
-						source.drain();
-						source.stop();
-						source.close();
-					} catch (LineUnavailableException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}.run();
-        	
+            synchronized(this)
+            {
+                java.io.File file = new java.io.File("/tmp/startFreq");
+                java.io.FileWriter fw = new java.io.FileWriter(file);
+                fw.write(""+freq);
+                fw.close();
+            }
+        	       	
         }
         catch(Exception ioe)
         {
