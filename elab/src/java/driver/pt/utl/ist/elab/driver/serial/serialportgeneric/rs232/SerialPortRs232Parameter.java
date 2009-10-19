@@ -1,5 +1,6 @@
 package pt.utl.ist.elab.driver.serial.serialportgeneric.rs232;
 
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.rs232.TransferFunction.TransferFunctionType;
@@ -8,19 +9,19 @@ public class SerialPortRs232Parameter {
 
 	private DecimalFormat inputFormat = null;
 	private DecimalFormat outputFormat = null;
-	private Double maxValue = null;
-	private Double minValue = null;
+	private Float maxValue = null;
+	private Float minValue = null;
 	private Integer order = null;
 	private TransferFunction inputTransferFunction = null;
 	private TransferFunction outputTransferFunction = null;
 
 	private String name = null;
 	private SerialPortRs232ParameterType type = SerialPortRs232ParameterType.UNDEFINED;
-	private Double defaultContinuousValue = null;
+	private Float defaultContinuousValue = null;
 	private Integer defaultSelection = null;
 	private Boolean defaultOnOff = null;
 
-	public SerialPortRs232Parameter(String inputFormat, String outputFormat, Double maxValue, Double minValue,
+	public SerialPortRs232Parameter(String inputFormat, String outputFormat, Float maxValue, Float minValue,
 			Integer order) throws Exception {
 		if (inputFormat == null || outputFormat == null || order == null
 				|| (maxValue != null && minValue != null && minValue > maxValue))
@@ -47,6 +48,18 @@ public class SerialPortRs232Parameter {
 		this.minValue = minValue;
 		this.order = order;
 	}
+
+	/**
+	 * Creates the <code>SerialPortRs232Parameter</code>.
+	 * @param input
+	 * @param output
+	 * @param maxvalue2
+	 * @param minvalue2
+	 * @param order2
+	 */
+//	public SerialPortRs232Parameter(String input, String output, float maxvalue2, float minvalue2, Integer order2) {
+//		SerialPortRs232Parameter(input, output, Float.valueOf(maxvalue2), Float.valueOf(minvalue2), order2);
+//	}
 
 	public int getOrder() {
 		return order;
@@ -91,11 +104,11 @@ public class SerialPortRs232Parameter {
 		}
 	}
 
-	public Double getMaxValue() {
+	public Float getMaxValue() {
 		return maxValue;
 	}
 
-	public Double getMinValue() {
+	public Float getMinValue() {
 		return minValue;
 	}
 
