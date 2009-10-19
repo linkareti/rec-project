@@ -12,24 +12,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
-import generated.ErrorsNode;
-import generated.ExpFunctionNode;
-import generated.HardwareNode;
-import generated.LinearFunctionNode;
-import generated.LogFunctionNode;
-import generated.ObjectFactory;
-import generated.OneChannelNode;
-import generated.OneErrorNode;
-import generated.OneParameterNode;
-import generated.OneTimeoutNode;
-import generated.ParamValuesNode;
-import generated.ParametersNode;
-import generated.PowerFunctionNode;
-import generated.Rs232Node;
-import generated.SinFunctionNode;
-import generated.TgFunctionNode;
-import generated.TimeoutNode;
-import generated.TransferFunctionNode;
 
 
 /**

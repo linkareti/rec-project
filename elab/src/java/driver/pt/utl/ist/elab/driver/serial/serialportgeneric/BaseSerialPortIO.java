@@ -221,7 +221,7 @@ public class BaseSerialPortIO {
 		}
 	}
 
-	private void processIncomingLine(String lineRead) {
+	private void processIncomingLine(String lineRead) throws Exception {
 		if (lineRead == null) {
 			return;
 		}
@@ -274,8 +274,9 @@ public class BaseSerialPortIO {
 	 * Notifies all registered listeners about the event.
 	 * 
 	 * @param event The event to be fired
+	 * @throws Exception 
 	 */
-	private void fireStampCommandListenerHandleStampCommand(SerialPortCommand event) {
+	private void fireStampCommandListenerHandleStampCommand(SerialPortCommand event) throws Exception {
 		if (listener != null) {
 			listener.handleStampCommand(event);
 		}
