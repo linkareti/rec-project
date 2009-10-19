@@ -12,6 +12,6 @@ package pt.utl.ist.elab.driver.serial.serialportgeneric.transproc;
  */
 public interface SerialPortCommandListener extends java.util.EventListener {
 
-	public void handleStampCommand(SerialPortCommand command);
+	public void handleStampCommand(SerialPortCommand command) throws Exception;
 
 }

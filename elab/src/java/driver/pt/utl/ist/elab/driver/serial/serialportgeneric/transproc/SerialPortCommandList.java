@@ -1,8 +1,8 @@
 package pt.utl.ist.elab.driver.serial.serialportgeneric.transproc;
 
 public enum SerialPortCommandList {
-	IDS("ids"), CFG("cfg"), CFGOK("cfgok"), CUR("cur"), STR("str"), DAT("dat"), END("end"), BIN("bin"), STP("stp"), STPOK(
-			"stpok"), RST("rst"), RSTOK("rstok"), ERR("err");
+	IDS("IDS"), CFG("CFG"), CFGOK("CFGOK"), CUR("CUR"), STR("STR"), STROK("STROK"), DAT("DAT"), END("END"), BIN("BIN"), STP("STP"), STPOK(
+			"STPOK"), RST("RST"), RSTOK("RSTOK"), ERR("ERR");
 
 	private String command = null;
 
@@ -12,6 +12,14 @@ public enum SerialPortCommandList {
 
 	public String toString() {
 		return this.command;
+	}
+	
+	public static boolean exists(String str) {
+		for (SerialPortCommandList commandList : SerialPortCommandList.values()) {
+			if (commandList.toString().equals(str))
+				return true;
+		}
+		return false;
 	}
 
 }

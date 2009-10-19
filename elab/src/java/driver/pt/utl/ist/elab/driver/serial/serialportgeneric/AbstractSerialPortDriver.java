@@ -30,26 +30,23 @@ import com.linkare.rec.impl.utils.EventQueueDispatcher;
 
 public abstract class AbstractSerialPortDriver extends BaseDriver implements SerialPortFinderListener,
 		SerialPortCommandListener {
-	protected static String STAMP_DRIVER_LOGGER = "StampDriver.Logger";
+	protected static String SERIAL_PORT_LOGGER = "SerialPortDriver.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(STAMP_DRIVER_LOGGER);
+		Logger l = LogManager.getLogManager().getLogger(SERIAL_PORT_LOGGER);
 		if (l == null) {
-			LogManager.getLogManager().addLogger(Logger.getLogger(STAMP_DRIVER_LOGGER));
+			LogManager.getLogManager().addLogger(Logger.getLogger(SERIAL_PORT_LOGGER));
 		}
 	}
 
-	public static String START_STRING = "STARTED";
-	public static String CONFIG_OUT_STRING = "cfg";
-	public static String CONFIG_ACCEPTED_STRING = "CONFIG_START_ACCEPTED";
-	public static String CONFIG_NOT_DONE_STRING = "CONFIG_START_NOT_DONE";
 	public static String ID_STR = "GENERIC_EXPERIENCE";
 
 	private BaseSerialPortIO serialIO = null;
-	private SerialPortFinder serialFinder = new SerialPortFinder();
-	private EventQueue serialCommands;
+	private SerialPortFinder serialFinder = null;
+	private EventQueue serialCommands = null;
 	protected AbstractSerialPortDataSource dataSource = null;
 
+	
 	public AbstractSerialPortDriver() {
 		serialFinder = new SerialPortFinder();
 		serialFinder.addStampFinderListener(this);
@@ -57,26 +54,12 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	}
 
 	protected void loadCommandHandlers() {
-		/*
-		 * SerialPortTranslatorProcessorManager.initStampProcessorTranslator(
-		 * "pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortStartProcessor"
-		 * ); SerialPortTranslatorProcessorManager
-		 * .initStampProcessorTranslator(
-		 * "pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortConfiguredProcessor"
-		 * ); SerialPortTranslatorProcessorManager
-		 * .initStampProcessorTranslator(
-		 * "pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortNotConfiguredProcessor"
-		 * ); SerialPortTranslatorProcessorManager
-		 * .initStampProcessorTranslator(
-		 * "pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.processors.SerialPortIdProcessor"
-		 * );
-		 */
 		loadExtraCommandHandlers();
 	}
 
 	protected abstract void loadExtraCommandHandlers();
 
-	/** * Base Driver impl ** */
+
 	public void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
 			throws WrongConfigurationException {
 		// silent noop - main validation is OK
@@ -100,22 +83,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		serialIO = null;
 		serialFinder.startSearch();
-		try {
-			WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
-				public ConditionResult getConditionResult() {
-					synchronized (serialFinder) {
-						if (serialIO != null) {
-							return ConditionResult.CONDITION_MET_TRUE;
-						}
-					}
-					return ConditionResult.CONDITION_NOT_MET;
-				}
-			}, 120 * 1000, serialFinder.getTimeOutPerPort());
-		} catch (TimedOutException e) {
-			LoggerUtil.logThrowable("Couldn't find port for STAMP in " + 120 + "s", e, Logger
-					.getLogger(STAMP_DRIVER_LOGGER));
-
-		}
 
 		if (serialIO != null) {
 			fireIDriverStateListenerDriverInited();
@@ -148,7 +115,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				startNow();
 			} catch (TimedOutException e) {
 				LoggerUtil.logThrowable("Error on start... - rethrowing IncorrectStateException!", e, Logger
-						.getLogger(STAMP_DRIVER_LOGGER));
+						.getLogger(SERIAL_PORT_LOGGER));
 				// I'll try to reopen the stamp...this way it il not get stuck
 				// here...at least I hope so!
 				fireIDriverStateListenerDriverReseting();
@@ -197,7 +164,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		}
 	}
 
-	public void handleStampCommand(SerialPortCommand command) {
+	public void handleStampCommand(SerialPortCommand command) throws Exception {
 		// SerialPortProcessor processor = command.getProcessor();
 		/*
 		 * if (processor == null) {
@@ -237,7 +204,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	public abstract HardwareAcquisitionConfig getAcquisitionHeader();
 
-	public abstract void processCommand(SerialPortCommand cmd);
+	public abstract void processCommand(SerialPortCommand cmd) throws Exception;
 
 	public class CommandDispatcher implements EventQueueDispatcher {
 
@@ -262,7 +229,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					// dataSource.setRunning(false);
 					dataSource.stopNow();
 			} else {
-				Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,
+				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
 						"CommandDispatcher doesn't know how to deal with other than StampCommand's");
 			}
 		}

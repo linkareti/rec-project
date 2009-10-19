@@ -8,7 +8,7 @@
  */
 package pt.utl.ist.elab.driver.serial.serialportgeneric;
 
-import gnu.io.CommPortIdentifier;
+ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
 import java.io.IOException;
@@ -30,7 +30,7 @@ import com.linkare.rec.impl.logging.LoggerUtil;
  * @author José Pedro Pereira - Linkare TI
  * @param <DriverState>
  */
-public class BaseSerialPortIO<DriverState> {
+public class BaseSerialPortIO {
 
 	private static String STAMP_IO_LOGGER = "BaseStampIO.Logger";
 
@@ -138,7 +138,7 @@ public class BaseSerialPortIO<DriverState> {
 					synchronized (sPort) {
 						char readChar = 0;
 						lineRead = null;
-						if (GenericSerialPortDriver.currentDriverAction != DriverAction.GETTING_BINARY)
+						if (GenericSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN)
 							lineReadTemp = new StringBuffer(1024);
 						else {
 							lineReadTemp = new StringBuffer(GenericSerialPortDriver.currentBinaryLength + 5 /*
@@ -153,7 +153,7 @@ public class BaseSerialPortIO<DriverState> {
 								sleep(0, 500);
 							}
 							readChar = (char) inReader.read();
-							if (GenericSerialPortDriver.currentDriverAction != DriverAction.GETTING_BINARY) {
+							if (GenericSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN) {
 								if (readChar != '\r' && readChar != '\n') {
 									lineReadTemp.append(readChar);
 								} else {
@@ -226,8 +226,8 @@ public class BaseSerialPortIO<DriverState> {
 			return;
 		}
 
-		if (GenericSerialPortDriver.currentDriverAction != DriverAction.GETTING_DATA
-				&& GenericSerialPortDriver.currentDriverAction != DriverAction.GETTING_BINARY) {
+		if (GenericSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN
+				&& GenericSerialPortDriver.currentDriverState != DriverState.RECEIVINGDATA) {
 
 			int commandpos = lineRead.indexOf("\t");
 			// sPort.removeEventListener();
