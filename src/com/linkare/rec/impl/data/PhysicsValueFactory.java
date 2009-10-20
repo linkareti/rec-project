@@ -170,18 +170,22 @@ public class PhysicsValueFactory {
 	public static PhysicsValue fromLong(long value, Scale s) {
 		double step = s.getStepValue().toDouble();
 		int multiplier_exp = 0;
+		int antiInfiniteLoop = 0;
 		double error = 0;
 		if (s.getDefaultErrorValue() != null)
 			error = s.getDefaultErrorValue().toDouble();
 		if (error < step)
 			error = step;
 		double aux = step;
-		while (aux >= 10.) {
+		while (aux >= 10. && antiInfiniteLoop<20) {
+			antiInfiniteLoop++;
 			multiplier_exp--;
 			aux /= 10.;
 		}
 		aux = step;
-		while (aux < 1.) {
+		antiInfiniteLoop = 0;
+		while (aux < 1. && antiInfiniteLoop<20) {
+			antiInfiniteLoop++;
 			multiplier_exp++;
 			aux *= 10.;
 		}
@@ -198,18 +202,22 @@ public class PhysicsValueFactory {
 	public static PhysicsValue fromShort(short value, Scale s) {
 		double step = s.getStepValue().toDouble();
 		int multiplier_exp = 0;
+		int antiInfiniteLoop = 0;
 		double error = 0;
 		if (s.getDefaultErrorValue() != null)
 			error = s.getDefaultErrorValue().toDouble();
 		if (error < step)
 			error = step;
 		double aux = step;
-		while (aux >= 10.) {
+		while (aux >= 10. && antiInfiniteLoop<20) {
+			antiInfiniteLoop++;
 			multiplier_exp--;
 			aux /= 10.;
 		}
 		aux = step;
-		while (aux < 1.) {
+		antiInfiniteLoop = 0;
+		while (aux < 1. && antiInfiniteLoop<20) {
+			antiInfiniteLoop++;
 			multiplier_exp++;
 			aux *= 10.;
 		}
@@ -226,18 +234,22 @@ public class PhysicsValueFactory {
 	public static PhysicsValue fromByte(byte value, Scale s) {
 		double step = s.getStepValue().toDouble();
 		int multiplier_exp = 0;
+		int antiInfiniteLoop = 0;
 		double error = 0;
 		if (s.getDefaultErrorValue() != null)
 			error = s.getDefaultErrorValue().toDouble();
 		if (error < step)
 			error = step;
 		double aux = step;
-		while (aux >= 10.) {
+		while (aux >= 10. && antiInfiniteLoop<20) {
+			antiInfiniteLoop++;
 			multiplier_exp--;
 			aux /= 10.;
 		}
 		aux = step;
-		while (aux < 1.) {
+		antiInfiniteLoop = 0;
+		while (aux < 1. && antiInfiniteLoop<20) {
+			antiInfiniteLoop++;
 			multiplier_exp++;
 			aux *= 10.;
 		}
@@ -254,18 +266,22 @@ public class PhysicsValueFactory {
 	public static PhysicsValue fromFloat(float value, Scale s) {
 		double step = s.getStepValue().toDouble();
 		int multiplier_exp = 0;
+		int antiInfiniteLoop = 0;
 		double error = 0;
 		if (s.getDefaultErrorValue() != null)
 			error = s.getDefaultErrorValue().toDouble();
 		if (error < step)
 			error = step;
 		double aux = step;
-		while (aux >= 10.) {
+		while (aux >= 10. && antiInfiniteLoop<20) {
+			antiInfiniteLoop++;
 			multiplier_exp--;
 			aux /= 10.;
 		}
 		aux = step;
-		while (aux < 1.) {
+		antiInfiniteLoop = 0;
+		while (aux < 1. && antiInfiniteLoop<20) {
+			antiInfiniteLoop++;
 			multiplier_exp++;
 			aux *= 10.;
 		}
