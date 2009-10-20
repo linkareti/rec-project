@@ -18,14 +18,15 @@
  */
 package org.jdesktop.laffy;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  * Represents a page of controls. The page "name" is special, and should be localized as it may appear in descriptive
@@ -34,58 +35,59 @@ import java.awt.Insets;
  * @author Richard Bair
  */
 public class Page extends JPanel {
-    /** Icon used when, for some reason, a preview icon could not be generated. */
-    private static Icon NO_PREVIEW_ICON;
+	/** Icon used when, for some reason, a preview icon could not be generated. */
+	private static Icon NO_PREVIEW_ICON;
 
-    /**
-     * The preview icon. Should never be null, as it will either be loading, or in the NO_PREVIEW_ICON state. The
-     * preview is regenerated whenever the component is reparented.
-     */
-    private Icon preview;
+	/**
+	 * The preview icon. Should never be null, as it will either be loading, or in the NO_PREVIEW_ICON state. The
+	 * preview is regenerated whenever the component is reparented.
+	 */
+	private Icon preview;
 
-    private int sectionCount = 0;
+	private int sectionCount = 0;
 
-    public Page(String name, Section... sections) {
-	this(name, null, sections);
-    }
-
-    public Page(String name, Icon previewIcon, Section... sections) {
-	super(new GridBagLayout());
-	setName(name);
-	setBackground(Color.WHITE);
-	for (Section section : sections) {
-	    add(section, new GridBagConstraints(0, sectionCount++, 1, 1, 1.0, 0, GridBagConstraints.CENTER,
-		    GridBagConstraints.HORIZONTAL, new Insets(10, 10, 0, 10), 0, 0));
+	public Page(String name, Section... sections) {
+		this(name, null, sections);
 	}
-	JPanel fill = new JPanel();
-	fill.setOpaque(false);
-	add(fill, new GridBagConstraints(0, sectionCount, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER,
-		GridBagConstraints.BOTH, new Insets(10, 0, 0, 0), 0, 0));
-	this.preview = previewIcon == null ? getNoPreviewIcon() : previewIcon;
-    }
 
-    public void setPreviewIcon(Icon icon) {
-	Icon old = preview;
-	preview = icon;
-	firePropertyChange("previewIcon", old, preview);
-    }
-
-    public Icon getPreviewIcon() {
-	return preview;
-    }
-
-    private synchronized static Icon getNoPreviewIcon() {
-	if (NO_PREVIEW_ICON == null) {
-	    try {
-		NO_PREVIEW_ICON = new ImageIcon(ImageIO.read(Page.class.getResource("icons/nopreview.png")));
-	    } catch (Exception e) {
-		e.printStackTrace();
-	    }
+	public Page(String name, Icon previewIcon, Section... sections) {
+		super(new GridBagLayout());
+		setName(name);
+		setBackground(Color.WHITE);
+		for (Section section : sections) {
+			add(section, new GridBagConstraints(0, sectionCount++, 1, 1, 1.0, 0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+					new Insets(10, 10, 0, 10), 0, 0));
+		}
+		JPanel fill = new JPanel();
+		fill.setOpaque(false);
+		add(fill, new GridBagConstraints(0, sectionCount, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(
+				10, 0, 0, 0), 0, 0));
+		this.preview = previewIcon == null ? getNoPreviewIcon() : previewIcon;
 	}
-	return NO_PREVIEW_ICON;
-    }
 
-    public String toString() {
-	return getName();
-    }
+	public void setPreviewIcon(Icon icon) {
+		Icon old = preview;
+		preview = icon;
+		firePropertyChange("previewIcon", old, preview);
+	}
+
+	public Icon getPreviewIcon() {
+		return preview;
+	}
+
+	private synchronized static Icon getNoPreviewIcon() {
+		if (NO_PREVIEW_ICON == null) {
+			try {
+				NO_PREVIEW_ICON = new ImageIcon(ImageIO.read(Page.class.getResource("icons/nopreview.png")));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return NO_PREVIEW_ICON;
+	}
+
+	@Override
+	public String toString() {
+		return getName();
+	}
 }

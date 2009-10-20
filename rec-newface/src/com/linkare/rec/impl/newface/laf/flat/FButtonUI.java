@@ -10,13 +10,13 @@ import javax.swing.plaf.metal.MetalButtonUI;
 
 public class FButtonUI extends MetalButtonUI {
 
-    public static ComponentUI createUI(JComponent x) {
-	return new FButtonUI();
-    }
+	public static ComponentUI createUI(JComponent x) {
+		return new FButtonUI();
+	}
 
-    @Override
-    protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
-	// Focus is rendered by FlatFocusRenderer
-    }
+	@Override
+	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
+		// Focus is rendered by FlatFocusRenderer
+	}
 
 }

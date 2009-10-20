@@ -7,69 +7,69 @@ package com.linkare.rec.impl.newface.component.media.transcoding;
  */
 public class TranscodingConfig {
 
-    private Muxers muxer;
-    private VideoCodecs videoCodec;
-    private AudioCodecs audioCodec;
-    private int videoBitrate;
-    private int videoScale;
-    private int audioBitrate;
-    private int soundChannels;
+	private Muxers muxer;
+	private VideoCodecs videoCodec;
+	private AudioCodecs audioCodec;
+	private int videoBitrate;
+	private int videoScale;
+	private int audioBitrate;
+	private int soundChannels;
 
-    //TODO ver que outras opções se pode passar ao VLM e se vale a pena implementar
+	//TODO ver que outras opções se pode passar ao VLM e se vale a pena implementar
 
-    public int getAudioBitrate() {
-	return audioBitrate;
-    }
+	public int getAudioBitrate() {
+		return audioBitrate;
+	}
 
-    public void setAudioBitrate(int audioBitrate) {
-	this.audioBitrate = audioBitrate;
-    }
+	public void setAudioBitrate(int audioBitrate) {
+		this.audioBitrate = audioBitrate;
+	}
 
-    public AudioCodecs getAudioCodec() {
-	return audioCodec;
-    }
+	public AudioCodecs getAudioCodec() {
+		return audioCodec;
+	}
 
-    public void setAudioCodec(AudioCodecs audioCodec) {
-	this.audioCodec = audioCodec;
-    }
+	public void setAudioCodec(AudioCodecs audioCodec) {
+		this.audioCodec = audioCodec;
+	}
 
-    public Muxers getMuxer() {
-	return muxer;
-    }
+	public Muxers getMuxer() {
+		return muxer;
+	}
 
-    public void setMuxer(Muxers muxer) {
-	this.muxer = muxer;
-    }
+	public void setMuxer(Muxers muxer) {
+		this.muxer = muxer;
+	}
 
-    public int getSoundChannels() {
-	return soundChannels;
-    }
+	public int getSoundChannels() {
+		return soundChannels;
+	}
 
-    public void setSoundChannels(int soundChannels) {
-	this.soundChannels = soundChannels;
-    }
+	public void setSoundChannels(int soundChannels) {
+		this.soundChannels = soundChannels;
+	}
 
-    public int getVideoBitrate() {
-	return videoBitrate;
-    }
+	public int getVideoBitrate() {
+		return videoBitrate;
+	}
 
-    public void setVideoBitrate(int videoBitrate) {
-	this.videoBitrate = videoBitrate;
-    }
+	public void setVideoBitrate(int videoBitrate) {
+		this.videoBitrate = videoBitrate;
+	}
 
-    public VideoCodecs getVideoCodec() {
-	return videoCodec;
-    }
+	public VideoCodecs getVideoCodec() {
+		return videoCodec;
+	}
 
-    public void setVideoCodec(VideoCodecs videoCodec) {
-	this.videoCodec = videoCodec;
-    }
+	public void setVideoCodec(VideoCodecs videoCodec) {
+		this.videoCodec = videoCodec;
+	}
 
-    public int getVideoScale() {
-	return videoScale;
-    }
+	public int getVideoScale() {
+		return videoScale;
+	}
 
-    public void setVideoScale(int videoScale) {
-	this.videoScale = videoScale;
-    }
+	public void setVideoScale(int videoScale) {
+		this.videoScale = videoScale;
+	}
 }

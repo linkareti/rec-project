@@ -11,14 +11,14 @@ package com.linkare.rec.impl.newface.component.tools;
  */
 public interface FadeEffect {
 
-    public enum State {
-	OPAQUE, TRANSLUCENT, FADING_IN, FADING_OUT
-    }
+	public enum State {
+		OPAQUE, TRANSLUCENT, FADING_IN, FADING_OUT
+	}
 
-    void fadeIn();
+	void fadeIn();
 
-    void fadeOut();
+	void fadeOut();
 
-    State getFadeEffectState();
+	State getFadeEffectState();
 
 }

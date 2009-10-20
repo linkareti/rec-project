@@ -19,706 +19,710 @@
 
 package org.jdesktop.laffy.buttons;
 
-import org.jdesktop.laffy.I18nResourceHandler;
-import org.jdesktop.laffy.OptionsSettablePanel;
-
-import javax.swing.JOptionPane;
-import javax.swing.JToggleButton;
-import javax.swing.plaf.basic.BasicToggleButtonUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+import javax.swing.JToggleButton;
+import javax.swing.plaf.basic.BasicToggleButtonUI;
+
+import org.jdesktop.laffy.I18nResourceHandler;
+import org.jdesktop.laffy.OptionsSettablePanel;
+
 /** @author Jasper Potts */
 public class TogglePanel extends OptionsSettablePanel {
-    //private static final java.util.ResourceBundle laffy = org.jdesktop.laffy.I18nResourceHandler.getResourceBundle();
-    private final Color DEFAULT_BACKGROUND;
-    private final boolean DEFAULT_OPAQUE;
+	//private static final java.util.ResourceBundle laffy = org.jdesktop.laffy.I18nResourceHandler.getResourceBundle();
+	private final Color DEFAULT_BACKGROUND;
+	private final boolean DEFAULT_OPAQUE;
 
-    /** Creates new form TooglePanel */
-    public TogglePanel() {
-	initComponents();
-	DEFAULT_BACKGROUND = oToggleButton.getBackground();
-	DEFAULT_OPAQUE = oToggleButton.isOpaque();
-	oToggleButton.setModel(new ButtonPanel.OverButtonModel());
-	pToggleButton.setModel(new ButtonPanel.PressedButtonModel());
-	foToggleButton.setModel(new ButtonPanel.OverButtonModel());
-	fpToggleButton.setModel(new ButtonPanel.PressedButtonModel());
-	soToggleButton.setModel(new ButtonPanel.OverSelectedButtonModel());
-	spToggleButton.setModel(new ButtonPanel.PressedSelectedButtonModel());
-	sfoToggleButton.setModel(new ButtonPanel.OverSelectedButtonModel());
-	sfpToggleButton.setModel(new ButtonPanel.PressedSelectedButtonModel());
-	// apply to all buttons
-	ActionListener actionListener = new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(TogglePanel.this, "Button Clicked!");
-	    }
-	};
-	for (Component component : getComponents()) {
-	    if (component instanceof JToggleButton) {
-		((JToggleButton) component).addActionListener(actionListener);
-	    }
-	}
-    }
-
-    // =================================================================================================================
-    // OptionsSettablePanel Methods
-
-    @Override
-    public void setForceComponentsBackgroundColor(boolean force) {
-	Color c = force ? FORCED_BACKGROUND : DEFAULT_BACKGROUND;
-	// apply to all buttons
-	for (Component component : getComponents()) {
-	    if (component instanceof JToggleButton) {
-		component.setBackground(c);
-	    }
-	}
-    }
-
-    @Override
-    public void setForceComponentsNonOpaque(boolean force) {
-	setBackground(force ? Color.GREEN : DEFAULT_BACKGROUND);
-	boolean o = force ? false : DEFAULT_OPAQUE;
-	// apply to all buttons
-	for (Component component : getComponents()) {
-	    if (component instanceof JToggleButton) {
-		((JToggleButton) component).setOpaque(o);
-	    }
-	}
-    }
-
-    @Override
-    public void setForceComponentsToBasicUI(boolean force) {
-	for (Component component : getComponents()) {
-	    if (component instanceof JToggleButton) {
-		if (force) {
-		    ((JToggleButton) component).setUI(new BasicToggleButtonUI());
-		} else {
-		    ((JToggleButton) component).updateUI();
+	/** Creates new form TooglePanel */
+	public TogglePanel() {
+		initComponents();
+		DEFAULT_BACKGROUND = oToggleButton.getBackground();
+		DEFAULT_OPAQUE = oToggleButton.isOpaque();
+		oToggleButton.setModel(new ButtonPanel.OverButtonModel());
+		pToggleButton.setModel(new ButtonPanel.PressedButtonModel());
+		foToggleButton.setModel(new ButtonPanel.OverButtonModel());
+		fpToggleButton.setModel(new ButtonPanel.PressedButtonModel());
+		soToggleButton.setModel(new ButtonPanel.OverSelectedButtonModel());
+		spToggleButton.setModel(new ButtonPanel.PressedSelectedButtonModel());
+		sfoToggleButton.setModel(new ButtonPanel.OverSelectedButtonModel());
+		sfpToggleButton.setModel(new ButtonPanel.PressedSelectedButtonModel());
+		// apply to all buttons
+		ActionListener actionListener = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(TogglePanel.this, "Button Clicked!");
+			}
+		};
+		for (Component component : getComponents()) {
+			if (component instanceof JToggleButton) {
+				((JToggleButton) component).addActionListener(actionListener);
+			}
 		}
-	    }
 	}
-	revalidate();
-    }
 
-    // =================================================================================================================
-    // Netbeans Code
+	// =================================================================================================================
+	// OptionsSettablePanel Methods
 
-    /**
-     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
-     * content of this method is always regenerated by the Form Editor.
-     */
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-	java.awt.GridBagConstraints gridBagConstraints;
+	@Override
+	public void setForceComponentsBackgroundColor(boolean force) {
+		Color c = force ? FORCED_BACKGROUND : DEFAULT_BACKGROUND;
+		// apply to all buttons
+		for (Component component : getComponents()) {
+			if (component instanceof JToggleButton) {
+				component.setBackground(c);
+			}
+		}
+	}
 
-	jLabel8 = new javax.swing.JLabel();
-	jLabel2 = new javax.swing.JLabel();
-	jLabel3 = new javax.swing.JLabel();
-	jLabel4 = new javax.swing.JLabel();
-	jLabel1 = new javax.swing.JLabel();
-	jLabel5 = new javax.swing.JLabel();
-	jLabel7 = new javax.swing.JLabel();
-	jLabel6 = new javax.swing.JLabel();
-	jToggleButton1 = new javax.swing.JToggleButton();
-	oToggleButton = new javax.swing.JToggleButton();
-	pToggleButton = new javax.swing.JToggleButton();
-	jToggleButton4 = new javax.swing.JToggleButton();
-	fpToggleButton = new JToggleButton() {
-	    public boolean isFocusPainted() {
-		return true;
-	    }
+	@Override
+	public void setForceComponentsNonOpaque(boolean force) {
+		setBackground(force ? Color.GREEN : DEFAULT_BACKGROUND);
+		boolean o = force ? false : DEFAULT_OPAQUE;
+		// apply to all buttons
+		for (Component component : getComponents()) {
+			if (component instanceof JToggleButton) {
+				((JToggleButton) component).setOpaque(o);
+			}
+		}
+	}
 
-	    public boolean isFocusOwner() {
-		return true;
-	    }
-	};
-	foToggleButton = new JToggleButton() {
-	    public boolean isFocusPainted() {
-		return true;
-	    }
+	@Override
+	public void setForceComponentsToBasicUI(boolean force) {
+		for (Component component : getComponents()) {
+			if (component instanceof JToggleButton) {
+				if (force) {
+					((JToggleButton) component).setUI(new BasicToggleButtonUI());
+				} else {
+					((JToggleButton) component).updateUI();
+				}
+			}
+		}
+		revalidate();
+	}
 
-	    public boolean isFocusOwner() {
-		return true;
-	    }
-	};
-	jToggleButton5 = new JToggleButton() {
-	    public boolean isFocusPainted() {
-		return true;
-	    }
+	// =================================================================================================================
+	// Netbeans Code
 
-	    public boolean isFocusOwner() {
-		return true;
-	    }
-	};
-	jToggleButton6 = new javax.swing.JToggleButton();
-	soToggleButton = new javax.swing.JToggleButton();
-	spToggleButton = new javax.swing.JToggleButton();
-	jToggleButton9 = new javax.swing.JToggleButton();
-	sfpToggleButton = new JToggleButton() {
-	    public boolean isFocusPainted() {
-		return true;
-	    }
+	/**
+	 * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
+	 * content of this method is always regenerated by the Form Editor.
+	 */
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
+		java.awt.GridBagConstraints gridBagConstraints;
 
-	    public boolean isFocusOwner() {
-		return true;
-	    }
-	};
-	sfoToggleButton = new JToggleButton() {
-	    public boolean isFocusPainted() {
-		return true;
-	    }
+		jLabel8 = new javax.swing.JLabel();
+		jLabel2 = new javax.swing.JLabel();
+		jLabel3 = new javax.swing.JLabel();
+		jLabel4 = new javax.swing.JLabel();
+		jLabel1 = new javax.swing.JLabel();
+		jLabel5 = new javax.swing.JLabel();
+		jLabel7 = new javax.swing.JLabel();
+		jLabel6 = new javax.swing.JLabel();
+		jToggleButton1 = new javax.swing.JToggleButton();
+		oToggleButton = new javax.swing.JToggleButton();
+		pToggleButton = new javax.swing.JToggleButton();
+		jToggleButton4 = new javax.swing.JToggleButton();
+		fpToggleButton = new JToggleButton() {
+			@Override
+			public boolean isFocusPainted() {
+				return true;
+			}
 
-	    public boolean isFocusOwner() {
-		return true;
-	    }
-	};
-	jToggleButton10 = new JToggleButton() {
-	    public boolean isFocusPainted() {
-		return true;
-	    }
+			@Override
+			public boolean isFocusOwner() {
+				return true;
+			}
+		};
+		foToggleButton = new JToggleButton() {
+			@Override
+			public boolean isFocusPainted() {
+				return true;
+			}
 
-	    public boolean isFocusOwner() {
-		return true;
-	    }
-	};
-	jLabel9 = new javax.swing.JLabel();
-	jToggleButton2 = new javax.swing.JToggleButton();
-	oToggleButton1 = new javax.swing.JToggleButton();
-	pToggleButton1 = new javax.swing.JToggleButton();
-	jToggleButton7 = new javax.swing.JToggleButton();
-	jLabel10 = new javax.swing.JLabel();
-	jToggleButton3 = new javax.swing.JToggleButton();
-	oToggleButton2 = new javax.swing.JToggleButton();
-	pToggleButton2 = new javax.swing.JToggleButton();
-	jToggleButton8 = new javax.swing.JToggleButton();
-	jLabel11 = new javax.swing.JLabel();
-	jToggleButton11 = new javax.swing.JToggleButton();
-	oToggleButton3 = new javax.swing.JToggleButton();
-	pToggleButton3 = new javax.swing.JToggleButton();
-	jToggleButton12 = new javax.swing.JToggleButton();
+			@Override
+			public boolean isFocusOwner() {
+				return true;
+			}
+		};
+		jToggleButton5 = new JToggleButton() {
+			@Override
+			public boolean isFocusPainted() {
+				return true;
+			}
 
-	setLayout(new java.awt.GridBagLayout());
+			@Override
+			public boolean isFocusOwner() {
+				return true;
+			}
+		};
+		jToggleButton6 = new javax.swing.JToggleButton();
+		soToggleButton = new javax.swing.JToggleButton();
+		spToggleButton = new javax.swing.JToggleButton();
+		jToggleButton9 = new javax.swing.JToggleButton();
+		sfpToggleButton = new JToggleButton() {
+			@Override
+			public boolean isFocusPainted() {
+				return true;
+			}
 
-	jLabel8.setFont(jLabel8.getFont().deriveFont(jLabel8.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel8.getFont().getSize() - 2));
-	jLabel8.setForeground(java.awt.Color.darkGray);
-	//jLabel8.setText("No Content Fill");
-	jLabel8.setText(I18nResourceHandler.getMessage("No_Content_Fill"));
-	jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 5;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-	add(jLabel8, gridBagConstraints);
+			@Override
+			public boolean isFocusOwner() {
+				return true;
+			}
+		};
+		sfoToggleButton = new JToggleButton() {
+			@Override
+			public boolean isFocusPainted() {
+				return true;
+			}
 
-	jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel2.getFont().getSize() - 2));
-	jLabel2.setForeground(java.awt.Color.darkGray);
-	//jLabel2.setText("Focused");
-	jLabel2.setText(I18nResourceHandler.getMessage("Focused"));
-	jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 2;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-	add(jLabel2, gridBagConstraints);
+			@Override
+			public boolean isFocusOwner() {
+				return true;
+			}
+		};
+		jToggleButton10 = new JToggleButton() {
+			@Override
+			public boolean isFocusPainted() {
+				return true;
+			}
 
-	jLabel3.setFont(jLabel3.getFont().deriveFont(jLabel3.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel3.getFont().getSize() - 2));
-	jLabel3.setForeground(java.awt.Color.darkGray);
-	//jLabel3.setText("Selected");
-	jLabel3.setText(I18nResourceHandler.getMessage("Selected"));
-	jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 3;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-	add(jLabel3, gridBagConstraints);
+			@Override
+			public boolean isFocusOwner() {
+				return true;
+			}
+		};
+		jLabel9 = new javax.swing.JLabel();
+		jToggleButton2 = new javax.swing.JToggleButton();
+		oToggleButton1 = new javax.swing.JToggleButton();
+		pToggleButton1 = new javax.swing.JToggleButton();
+		jToggleButton7 = new javax.swing.JToggleButton();
+		jLabel10 = new javax.swing.JLabel();
+		jToggleButton3 = new javax.swing.JToggleButton();
+		oToggleButton2 = new javax.swing.JToggleButton();
+		pToggleButton2 = new javax.swing.JToggleButton();
+		jToggleButton8 = new javax.swing.JToggleButton();
+		jLabel11 = new javax.swing.JLabel();
+		jToggleButton11 = new javax.swing.JToggleButton();
+		oToggleButton3 = new javax.swing.JToggleButton();
+		pToggleButton3 = new javax.swing.JToggleButton();
+		jToggleButton12 = new javax.swing.JToggleButton();
 
-	jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel4.getFont().getSize() - 2));
-	jLabel4.setForeground(java.awt.Color.darkGray);
-	//jLabel4.setText("Selected + Focused");
-	jLabel4.setText(I18nResourceHandler.getMessage("Selected_+_Focused"));
-	jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 4;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-	add(jLabel4, gridBagConstraints);
+		setLayout(new java.awt.GridBagLayout());
 
-	jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel1.getFont().getSize() - 2));
-	jLabel1.setForeground(java.awt.Color.darkGray);
-	//jLabel1.setText("Normal");
-	jLabel1.setText(I18nResourceHandler.getMessage("Normal"));
-	jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
-	add(jLabel1, gridBagConstraints);
+		jLabel8.setFont(jLabel8.getFont().deriveFont(jLabel8.getFont().getStyle() | java.awt.Font.BOLD, jLabel8.getFont().getSize() - 2));
+		jLabel8.setForeground(java.awt.Color.darkGray);
+		//jLabel8.setText("No Content Fill");
+		jLabel8.setText(I18nResourceHandler.getMessage("No_Content_Fill"));
+		jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 5;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+		add(jLabel8, gridBagConstraints);
 
-	jLabel5.setFont(jLabel5.getFont().deriveFont(jLabel5.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel5.getFont().getSize() - 2));
-	jLabel5.setForeground(java.awt.Color.darkGray);
-	//jLabel5.setText("Over");
-	jLabel5.setText(I18nResourceHandler.getMessage("Over"));
-	jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
-	add(jLabel5, gridBagConstraints);
+		jLabel2.setFont(jLabel2.getFont().deriveFont(jLabel2.getFont().getStyle() | java.awt.Font.BOLD, jLabel2.getFont().getSize() - 2));
+		jLabel2.setForeground(java.awt.Color.darkGray);
+		//jLabel2.setText("Focused");
+		jLabel2.setText(I18nResourceHandler.getMessage("Focused"));
+		jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+		add(jLabel2, gridBagConstraints);
 
-	jLabel7.setFont(jLabel7.getFont().deriveFont(jLabel7.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel7.getFont().getSize() - 2));
-	jLabel7.setForeground(java.awt.Color.darkGray);
-	//jLabel7.setText("Pressed");
-	jLabel7.setText(I18nResourceHandler.getMessage("Pressed"));
-	jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 3;
-	gridBagConstraints.gridy = 0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
-	add(jLabel7, gridBagConstraints);
+		jLabel3.setFont(jLabel3.getFont().deriveFont(jLabel3.getFont().getStyle() | java.awt.Font.BOLD, jLabel3.getFont().getSize() - 2));
+		jLabel3.setForeground(java.awt.Color.darkGray);
+		//jLabel3.setText("Selected");
+		jLabel3.setText(I18nResourceHandler.getMessage("Selected"));
+		jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+		add(jLabel3, gridBagConstraints);
 
-	jLabel6.setFont(jLabel6.getFont().deriveFont(jLabel6.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel6.getFont().getSize() - 2));
-	jLabel6.setForeground(java.awt.Color.darkGray);
-	//jLabel6.setText("Disabled");
-	jLabel6.setText(I18nResourceHandler.getMessage("Disabled"));
-	jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 4;
-	gridBagConstraints.gridy = 0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
-	add(jLabel6, gridBagConstraints);
+		jLabel4.setFont(jLabel4.getFont().deriveFont(jLabel4.getFont().getStyle() | java.awt.Font.BOLD, jLabel4.getFont().getSize() - 2));
+		jLabel4.setForeground(java.awt.Color.darkGray);
+		//jLabel4.setText("Selected + Focused");
+		jLabel4.setText(I18nResourceHandler.getMessage("Selected_+_Focused"));
+		jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+		add(jLabel4, gridBagConstraints);
 
-	jToggleButton1.setMnemonic('2');
-	//jToggleButton1.setText("Cancel");
-	jToggleButton1.setText(I18nResourceHandler.getMessage("Cancel"));
-	jToggleButton1.setContentAreaFilled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 5;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton1, gridBagConstraints);
+		jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD, jLabel1.getFont().getSize() - 2));
+		jLabel1.setForeground(java.awt.Color.darkGray);
+		//jLabel1.setText("Normal");
+		jLabel1.setText(I18nResourceHandler.getMessage("Normal"));
+		jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
+		add(jLabel1, gridBagConstraints);
 
-	oToggleButton.setMnemonic('2');
-	//oToggleButton.setText("Cancel");
-	oToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
-	oToggleButton.setContentAreaFilled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 5;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(oToggleButton, gridBagConstraints);
+		jLabel5.setFont(jLabel5.getFont().deriveFont(jLabel5.getFont().getStyle() | java.awt.Font.BOLD, jLabel5.getFont().getSize() - 2));
+		jLabel5.setForeground(java.awt.Color.darkGray);
+		//jLabel5.setText("Over");
+		jLabel5.setText(I18nResourceHandler.getMessage("Over"));
+		jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
+		add(jLabel5, gridBagConstraints);
 
-	pToggleButton.setMnemonic('2');
-	//pToggleButton.setText("Cancel");
-	pToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
-	pToggleButton.setContentAreaFilled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 3;
-	gridBagConstraints.gridy = 5;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(pToggleButton, gridBagConstraints);
+		jLabel7.setFont(jLabel7.getFont().deriveFont(jLabel7.getFont().getStyle() | java.awt.Font.BOLD, jLabel7.getFont().getSize() - 2));
+		jLabel7.setForeground(java.awt.Color.darkGray);
+		//jLabel7.setText("Pressed");
+		jLabel7.setText(I18nResourceHandler.getMessage("Pressed"));
+		jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 3;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
+		add(jLabel7, gridBagConstraints);
 
-	jToggleButton4.setMnemonic('2');
-	//jToggleButton4.setText("Cancel");
-	jToggleButton4.setText(I18nResourceHandler.getMessage("Cancel"));
-	jToggleButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-	jToggleButton4.setBorderPainted(false);
-	jToggleButton4.setEnabled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 4;
-	gridBagConstraints.gridy = 7;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton4, gridBagConstraints);
+		jLabel6.setFont(jLabel6.getFont().deriveFont(jLabel6.getFont().getStyle() | java.awt.Font.BOLD, jLabel6.getFont().getSize() - 2));
+		jLabel6.setForeground(java.awt.Color.darkGray);
+		//jLabel6.setText("Disabled");
+		jLabel6.setText(I18nResourceHandler.getMessage("Disabled"));
+		jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 4;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
+		add(jLabel6, gridBagConstraints);
 
-	fpToggleButton.setMnemonic('2');
-	//fpToggleButton.setText("Cancel");
-	fpToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 3;
-	gridBagConstraints.gridy = 2;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(fpToggleButton, gridBagConstraints);
+		jToggleButton1.setMnemonic('2');
+		//jToggleButton1.setText("Cancel");
+		jToggleButton1.setText(I18nResourceHandler.getMessage("Cancel"));
+		jToggleButton1.setContentAreaFilled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 5;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton1, gridBagConstraints);
 
-	foToggleButton.setMnemonic('2');
-	//foToggleButton.setText("Cancel");
-	foToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 2;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(foToggleButton, gridBagConstraints);
+		oToggleButton.setMnemonic('2');
+		//oToggleButton.setText("Cancel");
+		oToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
+		oToggleButton.setContentAreaFilled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 5;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(oToggleButton, gridBagConstraints);
 
-	jToggleButton5.setMnemonic('2');
-	//jToggleButton5.setText("Cancel");
-	jToggleButton5.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 2;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton5, gridBagConstraints);
+		pToggleButton.setMnemonic('2');
+		//pToggleButton.setText("Cancel");
+		pToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
+		pToggleButton.setContentAreaFilled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 3;
+		gridBagConstraints.gridy = 5;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(pToggleButton, gridBagConstraints);
 
-	jToggleButton6.setMnemonic('2');
-	jToggleButton6.setSelected(true);
-	//jToggleButton6.setText("Cancel");
-	jToggleButton6.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 3;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton6, gridBagConstraints);
+		jToggleButton4.setMnemonic('2');
+		//jToggleButton4.setText("Cancel");
+		jToggleButton4.setText(I18nResourceHandler.getMessage("Cancel"));
+		jToggleButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+		jToggleButton4.setBorderPainted(false);
+		jToggleButton4.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 4;
+		gridBagConstraints.gridy = 7;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton4, gridBagConstraints);
 
-	soToggleButton.setMnemonic('2');
-	soToggleButton.setSelected(true);
-	//soToggleButton.setText("Cancel");
-	soToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 3;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(soToggleButton, gridBagConstraints);
+		fpToggleButton.setMnemonic('2');
+		//fpToggleButton.setText("Cancel");
+		fpToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 3;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(fpToggleButton, gridBagConstraints);
 
-	spToggleButton.setMnemonic('2');
-	spToggleButton.setSelected(true);
-	//spToggleButton.setText("Cancel");
-	spToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 3;
-	gridBagConstraints.gridy = 3;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(spToggleButton, gridBagConstraints);
+		foToggleButton.setMnemonic('2');
+		//foToggleButton.setText("Cancel");
+		foToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(foToggleButton, gridBagConstraints);
 
-	jToggleButton9.setMnemonic('2');
-	jToggleButton9.setSelected(true);
-	//jToggleButton9.setText("Cancel");
-	jToggleButton9.setText(I18nResourceHandler.getMessage("Cancel"));
-	jToggleButton9.setEnabled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 4;
-	gridBagConstraints.gridy = 3;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton9, gridBagConstraints);
+		jToggleButton5.setMnemonic('2');
+		//jToggleButton5.setText("Cancel");
+		jToggleButton5.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton5, gridBagConstraints);
 
-	sfpToggleButton.setMnemonic('2');
-	sfpToggleButton.setSelected(true);
-	//sfpToggleButton.setText("Cancel");
-	sfpToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 3;
-	gridBagConstraints.gridy = 4;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(sfpToggleButton, gridBagConstraints);
+		jToggleButton6.setMnemonic('2');
+		jToggleButton6.setSelected(true);
+		//jToggleButton6.setText("Cancel");
+		jToggleButton6.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton6, gridBagConstraints);
 
-	sfoToggleButton.setMnemonic('2');
-	sfoToggleButton.setSelected(true);
-	//sfoToggleButton.setText("Cancel");
-	sfoToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 4;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(sfoToggleButton, gridBagConstraints);
+		soToggleButton.setMnemonic('2');
+		soToggleButton.setSelected(true);
+		//soToggleButton.setText("Cancel");
+		soToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(soToggleButton, gridBagConstraints);
 
-	jToggleButton10.setMnemonic('2');
-	jToggleButton10.setSelected(true);
-	//jToggleButton10.setText("Cancel");
-	jToggleButton10.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 4;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton10, gridBagConstraints);
+		spToggleButton.setMnemonic('2');
+		spToggleButton.setSelected(true);
+		//spToggleButton.setText("Cancel");
+		spToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 3;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(spToggleButton, gridBagConstraints);
 
-	jLabel9.setFont(jLabel9.getFont().deriveFont(jLabel9.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel9.getFont().getSize() - 2));
-	jLabel9.setForeground(java.awt.Color.darkGray);
-	//jLabel9.setText("Border Not Painted");
-	jLabel9.setText(I18nResourceHandler.getMessage("Border_Not_Painted"));
-	jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 7;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-	add(jLabel9, gridBagConstraints);
+		jToggleButton9.setMnemonic('2');
+		jToggleButton9.setSelected(true);
+		//jToggleButton9.setText("Cancel");
+		jToggleButton9.setText(I18nResourceHandler.getMessage("Cancel"));
+		jToggleButton9.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 4;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton9, gridBagConstraints);
 
-	jToggleButton2.setMnemonic('2');
-	//jToggleButton2.setText("Cancel");
-	jToggleButton2.setText(I18nResourceHandler.getMessage("Cancel"));
-	jToggleButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-	jToggleButton2.setBorderPainted(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 7;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton2, gridBagConstraints);
+		sfpToggleButton.setMnemonic('2');
+		sfpToggleButton.setSelected(true);
+		//sfpToggleButton.setText("Cancel");
+		sfpToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 3;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(sfpToggleButton, gridBagConstraints);
 
-	oToggleButton1.setMnemonic('2');
-	//oToggleButton1.setText("Cancel");
-	oToggleButton1.setText(I18nResourceHandler.getMessage("Cancel"));
-	oToggleButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-	oToggleButton1.setBorderPainted(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 7;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(oToggleButton1, gridBagConstraints);
+		sfoToggleButton.setMnemonic('2');
+		sfoToggleButton.setSelected(true);
+		//sfoToggleButton.setText("Cancel");
+		sfoToggleButton.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(sfoToggleButton, gridBagConstraints);
 
-	pToggleButton1.setMnemonic('2');
-	//pToggleButton1.setText("Cancel");
-	pToggleButton1.setText(I18nResourceHandler.getMessage("Cancel"));
-	pToggleButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-	pToggleButton1.setBorderPainted(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 3;
-	gridBagConstraints.gridy = 7;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(pToggleButton1, gridBagConstraints);
+		jToggleButton10.setMnemonic('2');
+		jToggleButton10.setSelected(true);
+		//jToggleButton10.setText("Cancel");
+		jToggleButton10.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton10, gridBagConstraints);
 
-	jToggleButton7.setMnemonic('2');
-	//jToggleButton7.setText("Cancel");
-	jToggleButton7.setText(I18nResourceHandler.getMessage("Cancel"));
-	jToggleButton7.setContentAreaFilled(false);
-	jToggleButton7.setEnabled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 4;
-	gridBagConstraints.gridy = 5;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton7, gridBagConstraints);
+		jLabel9.setFont(jLabel9.getFont().deriveFont(jLabel9.getFont().getStyle() | java.awt.Font.BOLD, jLabel9.getFont().getSize() - 2));
+		jLabel9.setForeground(java.awt.Color.darkGray);
+		//jLabel9.setText("Border Not Painted");
+		jLabel9.setText(I18nResourceHandler.getMessage("Border_Not_Painted"));
+		jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 7;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+		add(jLabel9, gridBagConstraints);
 
-	jLabel10.setFont(jLabel10.getFont().deriveFont(jLabel10.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel10.getFont().getSize() - 2));
-	jLabel10.setForeground(java.awt.Color.darkGray);
-	//jLabel10.setText("Normal");
-	jLabel10.setText(I18nResourceHandler.getMessage("Normal"));
-	jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 1;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-	add(jLabel10, gridBagConstraints);
+		jToggleButton2.setMnemonic('2');
+		//jToggleButton2.setText("Cancel");
+		jToggleButton2.setText(I18nResourceHandler.getMessage("Cancel"));
+		jToggleButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+		jToggleButton2.setBorderPainted(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 7;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton2, gridBagConstraints);
 
-	jToggleButton3.setMnemonic('2');
-	//jToggleButton3.setText("Cancel");
-	jToggleButton3.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 1;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton3, gridBagConstraints);
+		oToggleButton1.setMnemonic('2');
+		//oToggleButton1.setText("Cancel");
+		oToggleButton1.setText(I18nResourceHandler.getMessage("Cancel"));
+		oToggleButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+		oToggleButton1.setBorderPainted(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 7;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(oToggleButton1, gridBagConstraints);
 
-	oToggleButton2.setMnemonic('2');
-	//oToggleButton2.setText("Cancel");
-	oToggleButton2.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 1;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(oToggleButton2, gridBagConstraints);
+		pToggleButton1.setMnemonic('2');
+		//pToggleButton1.setText("Cancel");
+		pToggleButton1.setText(I18nResourceHandler.getMessage("Cancel"));
+		pToggleButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+		pToggleButton1.setBorderPainted(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 3;
+		gridBagConstraints.gridy = 7;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(pToggleButton1, gridBagConstraints);
 
-	pToggleButton2.setMnemonic('2');
-	//pToggleButton2.setText("Cancel");
-	pToggleButton2.setText(I18nResourceHandler.getMessage("Cancel"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 3;
-	gridBagConstraints.gridy = 1;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(pToggleButton2, gridBagConstraints);
+		jToggleButton7.setMnemonic('2');
+		//jToggleButton7.setText("Cancel");
+		jToggleButton7.setText(I18nResourceHandler.getMessage("Cancel"));
+		jToggleButton7.setContentAreaFilled(false);
+		jToggleButton7.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 4;
+		gridBagConstraints.gridy = 5;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton7, gridBagConstraints);
 
-	jToggleButton8.setMnemonic('2');
-	//jToggleButton8.setText("Cancel");
-	jToggleButton8.setText(I18nResourceHandler.getMessage("Cancel"));
-	jToggleButton8.setEnabled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 4;
-	gridBagConstraints.gridy = 1;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton8, gridBagConstraints);
+		jLabel10.setFont(jLabel10.getFont()
+				.deriveFont(jLabel10.getFont().getStyle() | java.awt.Font.BOLD, jLabel10.getFont().getSize() - 2));
+		jLabel10.setForeground(java.awt.Color.darkGray);
+		//jLabel10.setText("Normal");
+		jLabel10.setText(I18nResourceHandler.getMessage("Normal"));
+		jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+		add(jLabel10, gridBagConstraints);
 
-	jLabel11.setFont(jLabel11.getFont().deriveFont(jLabel11.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel11.getFont().getSize() - 2));
-	jLabel11.setForeground(java.awt.Color.darkGray);
-	//jLabel11.setText("Custom Border");
-	jLabel11.setText(I18nResourceHandler.getMessage("Custom_Border"));
-	jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 6;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
-	add(jLabel11, gridBagConstraints);
+		jToggleButton3.setMnemonic('2');
+		//jToggleButton3.setText("Cancel");
+		jToggleButton3.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton3, gridBagConstraints);
 
-	jToggleButton11.setMnemonic('2');
-	//jToggleButton11.setText("Cancel");
-	jToggleButton11.setText(I18nResourceHandler.getMessage("Cancel"));
-	jToggleButton11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 6;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton11, gridBagConstraints);
+		oToggleButton2.setMnemonic('2');
+		//oToggleButton2.setText("Cancel");
+		oToggleButton2.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(oToggleButton2, gridBagConstraints);
 
-	oToggleButton3.setMnemonic('2');
-	//oToggleButton3.setText("Cancel");
-	oToggleButton3.setText(I18nResourceHandler.getMessage("Cancel"));
-	oToggleButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 6;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(oToggleButton3, gridBagConstraints);
+		pToggleButton2.setMnemonic('2');
+		//pToggleButton2.setText("Cancel");
+		pToggleButton2.setText(I18nResourceHandler.getMessage("Cancel"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 3;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(pToggleButton2, gridBagConstraints);
 
-	pToggleButton3.setMnemonic('2');
-	//pToggleButton3.setText("Cancel");
-	pToggleButton3.setText(I18nResourceHandler.getMessage("Cancel"));
-	pToggleButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 3;
-	gridBagConstraints.gridy = 6;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(pToggleButton3, gridBagConstraints);
+		jToggleButton8.setMnemonic('2');
+		//jToggleButton8.setText("Cancel");
+		jToggleButton8.setText(I18nResourceHandler.getMessage("Cancel"));
+		jToggleButton8.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 4;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton8, gridBagConstraints);
 
-	jToggleButton12.setMnemonic('2');
-	//jToggleButton12.setText("Cancel");
-	jToggleButton12.setText(I18nResourceHandler.getMessage("Cancel"));
-	jToggleButton12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-	jToggleButton12.setEnabled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 4;
-	gridBagConstraints.gridy = 6;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-	add(jToggleButton12, gridBagConstraints);
-    }// </editor-fold>//GEN-END:initComponents
+		jLabel11.setFont(jLabel11.getFont()
+				.deriveFont(jLabel11.getFont().getStyle() | java.awt.Font.BOLD, jLabel11.getFont().getSize() - 2));
+		jLabel11.setForeground(java.awt.Color.darkGray);
+		//jLabel11.setText("Custom Border");
+		jLabel11.setText(I18nResourceHandler.getMessage("Custom_Border"));
+		jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 6;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
+		add(jLabel11, gridBagConstraints);
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton foToggleButton;
-    private javax.swing.JToggleButton fpToggleButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton10;
-    private javax.swing.JToggleButton jToggleButton11;
-    private javax.swing.JToggleButton jToggleButton12;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JToggleButton jToggleButton5;
-    private javax.swing.JToggleButton jToggleButton6;
-    private javax.swing.JToggleButton jToggleButton7;
-    private javax.swing.JToggleButton jToggleButton8;
-    private javax.swing.JToggleButton jToggleButton9;
-    private javax.swing.JToggleButton oToggleButton;
-    private javax.swing.JToggleButton oToggleButton1;
-    private javax.swing.JToggleButton oToggleButton2;
-    private javax.swing.JToggleButton oToggleButton3;
-    private javax.swing.JToggleButton pToggleButton;
-    private javax.swing.JToggleButton pToggleButton1;
-    private javax.swing.JToggleButton pToggleButton2;
-    private javax.swing.JToggleButton pToggleButton3;
-    private javax.swing.JToggleButton sfoToggleButton;
-    private javax.swing.JToggleButton sfpToggleButton;
-    private javax.swing.JToggleButton soToggleButton;
-    private javax.swing.JToggleButton spToggleButton;
-    // End of variables declaration//GEN-END:variables
+		jToggleButton11.setMnemonic('2');
+		//jToggleButton11.setText("Cancel");
+		jToggleButton11.setText(I18nResourceHandler.getMessage("Cancel"));
+		jToggleButton11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 6;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton11, gridBagConstraints);
+
+		oToggleButton3.setMnemonic('2');
+		//oToggleButton3.setText("Cancel");
+		oToggleButton3.setText(I18nResourceHandler.getMessage("Cancel"));
+		oToggleButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 6;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(oToggleButton3, gridBagConstraints);
+
+		pToggleButton3.setMnemonic('2');
+		//pToggleButton3.setText("Cancel");
+		pToggleButton3.setText(I18nResourceHandler.getMessage("Cancel"));
+		pToggleButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 3;
+		gridBagConstraints.gridy = 6;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(pToggleButton3, gridBagConstraints);
+
+		jToggleButton12.setMnemonic('2');
+		//jToggleButton12.setText("Cancel");
+		jToggleButton12.setText(I18nResourceHandler.getMessage("Cancel"));
+		jToggleButton12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+		jToggleButton12.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 4;
+		gridBagConstraints.gridy = 6;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+		add(jToggleButton12, gridBagConstraints);
+	}// </editor-fold>//GEN-END:initComponents
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JToggleButton foToggleButton;
+	private javax.swing.JToggleButton fpToggleButton;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JLabel jLabel10;
+	private javax.swing.JLabel jLabel11;
+	private javax.swing.JLabel jLabel2;
+	private javax.swing.JLabel jLabel3;
+	private javax.swing.JLabel jLabel4;
+	private javax.swing.JLabel jLabel5;
+	private javax.swing.JLabel jLabel6;
+	private javax.swing.JLabel jLabel7;
+	private javax.swing.JLabel jLabel8;
+	private javax.swing.JLabel jLabel9;
+	private javax.swing.JToggleButton jToggleButton1;
+	private javax.swing.JToggleButton jToggleButton10;
+	private javax.swing.JToggleButton jToggleButton11;
+	private javax.swing.JToggleButton jToggleButton12;
+	private javax.swing.JToggleButton jToggleButton2;
+	private javax.swing.JToggleButton jToggleButton3;
+	private javax.swing.JToggleButton jToggleButton4;
+	private javax.swing.JToggleButton jToggleButton5;
+	private javax.swing.JToggleButton jToggleButton6;
+	private javax.swing.JToggleButton jToggleButton7;
+	private javax.swing.JToggleButton jToggleButton8;
+	private javax.swing.JToggleButton jToggleButton9;
+	private javax.swing.JToggleButton oToggleButton;
+	private javax.swing.JToggleButton oToggleButton1;
+	private javax.swing.JToggleButton oToggleButton2;
+	private javax.swing.JToggleButton oToggleButton3;
+	private javax.swing.JToggleButton pToggleButton;
+	private javax.swing.JToggleButton pToggleButton1;
+	private javax.swing.JToggleButton pToggleButton2;
+	private javax.swing.JToggleButton pToggleButton3;
+	private javax.swing.JToggleButton sfoToggleButton;
+	private javax.swing.JToggleButton sfpToggleButton;
+	private javax.swing.JToggleButton soToggleButton;
+	private javax.swing.JToggleButton spToggleButton;
+	// End of variables declaration//GEN-END:variables
 
 }

@@ -10,6 +10,7 @@ package com.linkare.rec.impl.newface.component;
 import java.awt.Component;
 
 import javax.swing.JDialog;
+import javax.swing.WindowConstants;
 
 /**
  * Represents the default dialog for the ReC Application.
@@ -23,38 +24,38 @@ import javax.swing.JDialog;
  */
 public class DefaultDialog<C extends AbstractContentPane> extends JDialog {
 
-    private static final long serialVersionUID = -4557205313830746322L;
+	private static final long serialVersionUID = -4557205313830746322L;
 
-    protected C content;
+	protected C content;
 
-    protected Component container;
+	protected Component container;
 
-    public DefaultDialog(C content) {
-	this(content, null);
-    }
+	public DefaultDialog(C content) {
+		this(content, null);
+	}
 
-    public DefaultDialog(C content, Component container) {
-	super();
-	this.container = container;
-	this.content = content;
-	this.content.setContainer(this);
-	add(content);
-	init();
-    }
+	public DefaultDialog(C content, Component container) {
+		super();
+		this.container = container;
+		this.content = content;
+		this.content.setContainer(this);
+		add(content);
+		init();
+	}
 
-    /**
-     * @return the dialog content.
-     */
-    public C getContent() {
-	return content;
-    }
+	/**
+	 * @return the dialog content.
+	 */
+	public C getContent() {
+		return content;
+	}
 
-    protected void init() {
-	setPreferredSize(content.getPreferredSize());
-	setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
-	pack();
-	setModal(true);
-	setLocationRelativeTo(container);
-    }
+	protected void init() {
+		setPreferredSize(content.getPreferredSize());
+		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		pack();
+		setModal(true);
+		setLocationRelativeTo(container);
+	}
 
 }

@@ -19,11 +19,6 @@
 
 package org.jdesktop.laffy.preview;
 
-import org.jdesktop.laffy.Page;
-
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JList;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -31,35 +26,41 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
+
+import org.jdesktop.laffy.Page;
+
 public class PagePreviewListCellRenderer extends DefaultListCellRenderer {
 
-    public PagePreviewListCellRenderer() {
-	super();
-	setHorizontalAlignment(CENTER);
-	setVerticalTextPosition(BOTTOM);
-	setHorizontalTextPosition(CENTER);
-	setIconTextGap(0);
-    }
-
-    @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
-	    boolean cellHasFocus) {
-	super.getListCellRendererComponent(list, "", index, isSelected, cellHasFocus);
-	setFont(getFont().deriveFont(Font.BOLD, 16f));
-	setBorder(BorderFactory.createEmptyBorder(5, 0, 10, 0));
-	setForeground(Color.WHITE);
-	if (value instanceof Page) {
-	    Page page = (Page) value;
-	    setIcon(page.getPreviewIcon());
-	    setText(page.getName());
+	public PagePreviewListCellRenderer() {
+		super();
+		setHorizontalAlignment(CENTER);
+		setVerticalTextPosition(BOTTOM);
+		setHorizontalTextPosition(CENTER);
+		setIconTextGap(0);
 	}
 
-	return this;
-    }
+	@Override
+	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+		super.getListCellRendererComponent(list, "", index, isSelected, cellHasFocus);
+		setFont(getFont().deriveFont(Font.BOLD, 16f));
+		setBorder(BorderFactory.createEmptyBorder(5, 0, 10, 0));
+		setForeground(Color.WHITE);
+		if (value instanceof Page) {
+			Page page = (Page) value;
+			setIcon(page.getPreviewIcon());
+			setText(page.getName());
+		}
 
-    protected void paintComponent(Graphics g) {
-	Graphics2D g2 = (Graphics2D) g.create(0, 0, getWidth(), getHeight());
-	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-	super.paintComponent(g2);
-    }
+		return this;
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g.create(0, 0, getWidth(), getHeight());
+		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		super.paintComponent(g2);
+	}
 }

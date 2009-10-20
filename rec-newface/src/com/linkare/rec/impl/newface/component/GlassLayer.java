@@ -26,69 +26,70 @@ import javax.swing.JComponent;
  */
 public class GlassLayer extends JComponent {
 
-    public enum CatchEvents {
-	ALL, NONE
-    }
-
-    private static final long serialVersionUID = -4011172885863014229L;
-
-    private static final Color DEFAULT_BACKGROUND = new Color(0xE4EEED);
-
-    protected float opacity = 0.8f;
-
-    /**
-     * Creates a new GlassPane.
-     */
-    public GlassLayer() {
-	setBackground(DEFAULT_BACKGROUND);
-    }
-
-    /**
-     * Creates a new GlassPane.
-     */
-    public GlassLayer(CatchEvents eventsToCatch) {
-	setBackground(DEFAULT_BACKGROUND);
-
-	if (CatchEvents.ALL == eventsToCatch) {
-
-	    // Catch events
-	    addMouseListener(new MouseAdapter() {
-	    });
-	    addMouseMotionListener(new MouseMotionAdapter() {
-	    });
-	    addKeyListener(new KeyAdapter() {
-	    });
-
-	    // Request focus
-	    addComponentListener(new ComponentAdapter() {
-		public void componentShown(ComponentEvent evt) {
-		    requestFocusInWindow();
-		}
-	    });
-
-	    // Prevent focus with Tab
-	    setFocusTraversalKeysEnabled(false);
+	public enum CatchEvents {
+		ALL, NONE
 	}
-    }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-	Graphics2D g2 = (Graphics2D) g;
+	private static final long serialVersionUID = -4011172885863014229L;
 
-	// gets the current clipping area
-	Rectangle clip = g.getClipBounds();
+	private static final Color DEFAULT_BACKGROUND = new Color(0xE4EEED);
 
-	// sets a translucent composite with current opacity
-	AlphaComposite alpha = AlphaComposite.SrcOver.derive(opacity);
-	Composite composite = g2.getComposite();
-	g2.setComposite(alpha);
+	protected float opacity = 0.8f;
 
-	// background fill
-	g2.setColor(getBackground());
-	g2.fillRect(clip.x, clip.y, clip.width, clip.height);
+	/**
+	 * Creates a new GlassPane.
+	 */
+	public GlassLayer() {
+		setBackground(DEFAULT_BACKGROUND);
+	}
 
-	// get back to normal state
-	g2.setComposite(composite);
-    }
+	/**
+	 * Creates a new GlassPane.
+	 */
+	public GlassLayer(CatchEvents eventsToCatch) {
+		setBackground(DEFAULT_BACKGROUND);
+
+		if (CatchEvents.ALL == eventsToCatch) {
+
+			// Catch events
+			addMouseListener(new MouseAdapter() {
+			});
+			addMouseMotionListener(new MouseMotionAdapter() {
+			});
+			addKeyListener(new KeyAdapter() {
+			});
+
+			// Request focus
+			addComponentListener(new ComponentAdapter() {
+				@Override
+				public void componentShown(ComponentEvent evt) {
+					requestFocusInWindow();
+				}
+			});
+
+			// Prevent focus with Tab
+			setFocusTraversalKeysEnabled(false);
+		}
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+
+		// gets the current clipping area
+		Rectangle clip = g.getClipBounds();
+
+		// sets a translucent composite with current opacity
+		AlphaComposite alpha = AlphaComposite.SrcOver.derive(opacity);
+		Composite composite = g2.getComposite();
+		g2.setComposite(alpha);
+
+		// background fill
+		g2.setColor(getBackground());
+		g2.fillRect(clip.x, clip.y, clip.width, clip.height);
+
+		// get back to normal state
+		g2.setComposite(composite);
+	}
 
 }

@@ -9,8 +9,8 @@ import java.util.EventObject;
  */
 public class MediaNotConnectedEvent extends EventObject {
 
-    public MediaNotConnectedEvent(Object source) {
-	super(source);
-    }
+	public MediaNotConnectedEvent(Object source) {
+		super(source);
+	}
 
 }

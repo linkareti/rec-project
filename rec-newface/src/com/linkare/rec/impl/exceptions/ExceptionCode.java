@@ -15,27 +15,27 @@ package com.linkare.rec.impl.exceptions;
  */
 public enum ExceptionCode {
 
-    THE_FAMOUS_UNKNOWN_ERROR("Unknown Error", 1),
+	THE_FAMOUS_UNKNOWN_ERROR("Unknown Error", 1),
 
-    MISSING_SYSTEM_PROPERTIES("Missing System Properties", 10);
+	MISSING_SYSTEM_PROPERTIES("Missing System Properties", 10);
 
-    int id;
-    String description;
+	int id;
+	String description;
 
-    ExceptionCode(String description, int id) {
-	this.description = description;
-	this.id = id;
-    }
+	ExceptionCode(String description, int id) {
+		this.description = description;
+		this.id = id;
+	}
 
-    /**
-     * @return the <code>ExceptionCode</code> description.
-     */
-    public String getDescription() {
-	return description;
-    }
+	/**
+	 * @return the <code>ExceptionCode</code> description.
+	 */
+	public String getDescription() {
+		return description;
+	}
 
-    public int getId() {
-	return id;
-    }
+	public int getId() {
+		return id;
+	}
 
 }

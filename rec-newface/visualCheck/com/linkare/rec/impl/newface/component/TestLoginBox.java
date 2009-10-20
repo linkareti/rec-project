@@ -7,28 +7,29 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import com.linkare.rec.impl.newface.ReCApplication;
 import org.jdesktop.application.Application;
+
+import com.linkare.rec.impl.newface.ReCApplication;
 
 /**
  * @author Henrique Fernandes
  */
 public class TestLoginBox extends ReCApplication {
 
-    public TestLoginBox() {
-	// Required for AppFramework instatiation
-    }
+	public TestLoginBox() {
+		// Required for AppFramework instatiation
+	}
 
-    @Override
-    protected void showView() {
-	DefaultDialog<SimpleLoginBox> dialog = new DefaultDialog<SimpleLoginBox>(new SimpleLoginBox());
-	//dialog.setDefaultCloseOperation(DefaultDialog.EXIT_ON_CLOSE);
-	dialog.setVisible(true);
-	System.exit(0);
-    }
+	@Override
+	protected void showView() {
+		DefaultDialog<SimpleLoginBox> dialog = new DefaultDialog<SimpleLoginBox>(new SimpleLoginBox());
+		//dialog.setDefaultCloseOperation(DefaultDialog.EXIT_ON_CLOSE);
+		dialog.setVisible(true);
+		System.exit(0);
+	}
 
-    public static void main(String[] args) {
-	Application.launch(TestLoginBox.class, args);
-    }
+	public static void main(String[] args) {
+		Application.launch(TestLoginBox.class, args);
+	}
 
 }

@@ -4,5 +4,5 @@ import java.util.EventListener;
 
 //Delete
 public interface MediaTimeChangedEventListener extends EventListener {
-    void timeChanged(MediaTimeChangedEvent evt);
+	void timeChanged(MediaTimeChangedEvent evt);
 }

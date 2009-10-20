@@ -1,6 +1,6 @@
 package com.linkare.rec.impl.newface.config;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.FileInputStream;
 
@@ -11,19 +11,19 @@ import org.junit.Test;
 
 public class ReCFaceConfigTest {
 
-    private static final String XML_FILE = "etc/ReCFaceConfig.xml";
+	private static final String XML_FILE = "etc/ReCFaceConfig.xml";
 
-    @Test
-    public void testReCFaceConfigUnmarshall() throws Exception {
-	JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
-	Unmarshaller un = jc.createUnmarshaller();
-	ReCFaceConfig result = (ReCFaceConfig) un.unmarshal(new FileInputStream(XML_FILE));
+	@Test
+	public void testReCFaceConfigUnmarshall() throws Exception {
+		JAXBContext jc = JAXBContext.newInstance(ReCFaceConfig.class);
+		Unmarshaller un = jc.createUnmarshaller();
+		ReCFaceConfig result = (ReCFaceConfig) un.unmarshal(new FileInputStream(XML_FILE));
 
-	assertNotNull(result);
+		assertNotNull(result);
 
-	ReCFaceConfig unmarshall = ReCFaceConfig.unmarshall(new FileInputStream(XML_FILE));
-	assertNotNull(unmarshall);
+		ReCFaceConfig unmarshall = ReCFaceConfig.unmarshall(new FileInputStream(XML_FILE));
+		assertNotNull(unmarshall);
 
-    }
+	}
 
 }

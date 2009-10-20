@@ -11,22 +11,27 @@ import javax.swing.JList;
  * @deprecated
  * @author Henrique Fernandes
  */
+@Deprecated
 public class ChatMessageList extends JList {
 
-    public ChatMessageList() {
-    }
+	public ChatMessageList() {
+	}
 
-    // disable selection
+	// disable selection
 
-    public void setSelectedIndex(int index) {
-    }
+	@Override
+	public void setSelectedIndex(int index) {
+	}
 
-    public void setSelectedIndices(int[] indices) {
-    }
+	@Override
+	public void setSelectedIndices(int[] indices) {
+	}
 
-    public void setSelectedValue(Object anObject, boolean shouldScroll) {
-    }
+	@Override
+	public void setSelectedValue(Object anObject, boolean shouldScroll) {
+	}
 
-    public void addSelectionInterval(int anchor, int lead) {
-    }
+	@Override
+	public void addSelectionInterval(int anchor, int lead) {
+	}
 }

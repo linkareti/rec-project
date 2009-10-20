@@ -7,11 +7,11 @@ package com.linkare.rec.impl.newface.component.media.transcoding;
  * @author bcatarino
  */
 public enum VideoCodecs {
-    MP4V;
-    //TODO acrescentar restantes codecs suportados pelo VLC em trancoding.
+	MP4V;
+	//TODO acrescentar restantes codecs suportados pelo VLC em trancoding.
 
-    @Override
-    public String toString() {
-	return this.name().toLowerCase();
-    }
+	@Override
+	public String toString() {
+		return this.name().toLowerCase();
+	}
 }

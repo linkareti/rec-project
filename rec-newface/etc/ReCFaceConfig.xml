@@ -31,8 +31,12 @@
             <display toolTipBundleKey="ReCExpScuba$rec.exp.display.scuba.tip.4" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpScuba$rec.exp.display.scuba.title.4" classLocationBundleKey="ReCExpScuba$rec.exp.display.scuba.loc.4" visible="true" selected="true" order="0" enabled="false" connected="false"/>
             <display toolTipBundleKey="ReCExpScuba$rec.exp.display.scuba.tip.5" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpScuba$rec.exp.display.scuba.title.5" classLocationBundleKey="ReCExpScuba$rec.exp.display.scuba.loc.5" visible="true" selected="true" order="0" enabled="false" connected="false"/>
             <display toolTipBundleKey="ReCExpScuba$rec.exp.display.scuba.tip.6" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpScuba$rec.exp.display.scuba.title.6" classLocationBundleKey="ReCExpScuba$rec.exp.display.scuba.loc.6" visible="true" selected="true" order="0" enabled="false" connected="false"/>
-            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
-            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <WebResource locationBundleKey="ReCExpScuba$rec.exp.url.scuba.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpScuba$rec.exp.url.scuba.title.1"
+                 toolTipLocationBundleKey="ReCExpScuba$rec.exp.url.scuba.title.1"
+                 internalBrowser="false"
+                 order="1"/>
         </apparatus>
         <apparatus toolTipBundleKey="ReCExpT$rec.exp.tip.conducaoCalor" location="ELAB_CONDCALOR_STAMP_V1.0" iconLocationBundleKey="ReCExpT$rec.exp.icon.conducaoCalor" headerDisplayClassLocationBundleKey="" displayStringBundleKey="ReCExpT$rec.exp.title.conducaoCalor" descriptionStringBundleKey="ReCExpT$rec.exp.description.conducaoCalor" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="ReCExpT$rec.exp.background.conducaoCalor" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="ReCExpT$rec.exp.customizer.conducaoCalor" visible="true" selected="true" order="0" enabled="false" connected="false">
             <mediaConfig videoLocation="ReCExpT$rec.exp.url.conducaoCalor.video" canSave="true" offlinePlay="true"/>

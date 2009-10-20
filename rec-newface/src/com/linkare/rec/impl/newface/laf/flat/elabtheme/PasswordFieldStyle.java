@@ -14,21 +14,21 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class PasswordFieldStyle extends TextFieldStyle {
 
-    public static final String ID = "PasswordField";
+	public static final String ID = "PasswordField";
 
-    /**
-     * Creates the <code>TextFieldStyle</code>.
-     */
-    public PasswordFieldStyle() {
-	super();
-    }
+	/**
+	 * Creates the <code>TextFieldStyle</code>.
+	 */
+	public PasswordFieldStyle() {
+		super();
+	}
 
-    @Override
-    protected String defineStyleId() {
-	return ID;
-    }
+	@Override
+	protected String defineStyleId() {
+		return ID;
+	}
 
-    // -------------------------------------------------------------------------
-    // TODO Getters (Used to marshal values to xml)
+	// -------------------------------------------------------------------------
+	// TODO Getters (Used to marshal values to xml)
 
 }

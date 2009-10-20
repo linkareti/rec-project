@@ -16,9 +16,9 @@ import java.util.logging.ConsoleHandler;
  */
 public class ReCConsoleHandler extends ConsoleHandler {
 
-    public ReCConsoleHandler() {
-	super();
-	setOutputStream(System.out);
-    }
+	public ReCConsoleHandler() {
+		super();
+		setOutputStream(System.out);
+	}
 
 }

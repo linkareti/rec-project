@@ -20,32 +20,32 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class PanelStyle extends DefaultStyle {
 
-    public static final String ID = "Panel";
+	public static final String ID = "Panel";
 
-    public static final Color PANEL_BACKGROUND = new Color(0xE4EEED);
-    public static final Color PANEL_FOREGROUND = new Color(0x231F20);
+	public static final Color PANEL_BACKGROUND = new Color(0xE4EEED);
+	public static final Color PANEL_FOREGROUND = new Color(0x231F20);
 
-    /**
-     * Creates the <code>PanelStyle</code>.
-     */
-    public PanelStyle() {
-	super();
-    }
+	/**
+	 * Creates the <code>PanelStyle</code>.
+	 */
+	public PanelStyle() {
+		super();
+	}
 
-    @Override
-    protected String defineStyleId() {
-	return ID;
-    }
+	@Override
+	protected String defineStyleId() {
+		return ID;
+	}
 
-    @Override
-    public void updatePropertyMap(Map<String, Object> map) {
-	super.updatePropertyMap(map);
-	map.put(BACKGROUND, PANEL_BACKGROUND);
-	map.put(FOREGROUND, PANEL_FOREGROUND);
-	map.put(FONT, new FontUIResource("Arial", Font.PLAIN, 20));
-    }
+	@Override
+	public void updatePropertyMap(Map<String, Object> map) {
+		super.updatePropertyMap(map);
+		map.put(BACKGROUND, PANEL_BACKGROUND);
+		map.put(FOREGROUND, PANEL_FOREGROUND);
+		map.put(FONT, new FontUIResource("Arial", Font.PLAIN, 20));
+	}
 
-    // -------------------------------------------------------------------------
-    // TODO Getters (Used to marshal values to xml)
+	// -------------------------------------------------------------------------
+	// TODO Getters (Used to marshal values to xml)
 
 }

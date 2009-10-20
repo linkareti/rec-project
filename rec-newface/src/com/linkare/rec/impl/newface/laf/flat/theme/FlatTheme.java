@@ -23,62 +23,63 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlTransient
 public abstract class FlatTheme extends OceanThemeAdaptor {
 
-    @SuppressWarnings("unused")
-    private static final Logger log = Logger.getLogger(FlatTheme.class.getName());
+	@SuppressWarnings("unused")
+	private static final Logger log = Logger.getLogger(FlatTheme.class.getName());
 
-    private List<AbstractStyle> stylesList;
+	private List<AbstractStyle> stylesList;
 
-    /**
-     * Initializes the FlatTheme.
-     * 
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     */
-    public FlatTheme() {
-	super();
-	stylesList = new ArrayList<AbstractStyle>();
-	Set<Class<? extends AbstractStyle>> styleClasses = registerStyles();
-	for (Class<? extends AbstractStyle> clazz : styleClasses) {
-	    try {
-		AbstractStyle newInstance = clazz.newInstance();
-		stylesList.add(newInstance);
-	    } catch (Exception e) {
-		log.log(Level.SEVERE, "Error creating style.", e);
-	    }
+	/**
+	 * Initializes the FlatTheme.
+	 * 
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 */
+	public FlatTheme() {
+		super();
+		stylesList = new ArrayList<AbstractStyle>();
+		Set<Class<? extends AbstractStyle>> styleClasses = registerStyles();
+		for (Class<? extends AbstractStyle> clazz : styleClasses) {
+			try {
+				AbstractStyle newInstance = clazz.newInstance();
+				stylesList.add(newInstance);
+			} catch (Exception e) {
+				log.log(Level.SEVERE, "Error creating style.", e);
+			}
+		}
+		if (log.isLoggable(Level.FINER)) {
+			log.finer("Registered Styles: " + styleClasses);
+		}
 	}
-	if (log.isLoggable(Level.FINER)) {
-	    log.finer("Registered Styles: " + styleClasses);
+
+	/**
+	 * Add this theme's custom entries to the defaults table.
+	 * 
+	 * @param table
+	 *            the defaults table, non-null
+	 */
+	@Override
+	public void addCustomEntriesToTable(UIDefaults table) {
+		super.addCustomEntriesToTable(table);
+
+		List<Object> defaults = new ArrayList<Object>();
+		for (AbstractStyle style : getThemeStyles()) {
+			defaults.addAll(style.getProperties());
+		}
+		//		// Hack for MetalLookAndFeel inheritance)
+		//		defaults.add("MenuBarUI");
+		//		defaults.add(FlatMenuBarUI.class.getName());
+		//		// Hack end
+
+		table.putDefaults(defaults.toArray(new Object[defaults.size()]));
 	}
-    }
 
-    /**
-     * Add this theme's custom entries to the defaults table.
-     * 
-     * @param table
-     *            the defaults table, non-null
-     */
-    public void addCustomEntriesToTable(UIDefaults table) {
-	super.addCustomEntriesToTable(table);
-
-	List<Object> defaults = new ArrayList<Object>();
-	for (AbstractStyle style : getThemeStyles()) {
-	    defaults.addAll(style.getProperties());
+	/**
+	 * @return The <code>FlatTheme</code> styles.
+	 */
+	@XmlElement
+	public List<AbstractStyle> getThemeStyles() {
+		return stylesList;
 	}
-	//		// Hack for MetalLookAndFeel inheritance)
-	//		defaults.add("MenuBarUI");
-	//		defaults.add(FlatMenuBarUI.class.getName());
-	//		// Hack end
 
-	table.putDefaults((Object[]) defaults.toArray(new Object[defaults.size()]));
-    }
-
-    /**
-     * @return The <code>FlatTheme</code> styles.
-     */
-    @XmlElement
-    public List<AbstractStyle> getThemeStyles() {
-	return stylesList;
-    }
-
-    protected abstract Set<Class<? extends AbstractStyle>> registerStyles();
+	protected abstract Set<Class<? extends AbstractStyle>> registerStyles();
 }

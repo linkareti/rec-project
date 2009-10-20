@@ -19,300 +19,296 @@
 
 package org.jdesktop.laffy.texts;
 
+import java.awt.Color;
+
 import org.jdesktop.laffy.I18nResourceHandler;
 import org.jdesktop.laffy.OptionsSettablePanel;
-
-import java.awt.Color;
 
 /** @author Richard Bair */
 public class LabelPanel extends OptionsSettablePanel {
 
-    private final Color DEFAULT_BACKGROUND;
-    private final boolean DEFAULT_OPAQUE;
+	private final Color DEFAULT_BACKGROUND;
+	private final boolean DEFAULT_OPAQUE;
 
-    /** Creates new form ButtonPanel */
-    public LabelPanel() {
-	initComponents();
-	DEFAULT_BACKGROUND = jLabel1.getBackground();
-	DEFAULT_OPAQUE = jLabel1.isOpaque();
-    }
+	/** Creates new form ButtonPanel */
+	public LabelPanel() {
+		initComponents();
+		DEFAULT_BACKGROUND = jLabel1.getBackground();
+		DEFAULT_OPAQUE = jLabel1.isOpaque();
+	}
 
-    // =================================================================================================================
-    // OptionsSettablePanel Methods
+	// =================================================================================================================
+	// OptionsSettablePanel Methods
 
-    @Override
-    public void setForceComponentsBackgroundColor(boolean force) {
-	System.out.println("ButtonPanel.setForceComponetsbackgroundRed " + force);
-	Color c = force ? FORCED_BACKGROUND : DEFAULT_BACKGROUND;
-	//        boolean o = force ? true : DEFAULT_OPAQUE;
-	jLabel1.setBackground(c);
-	jLabel10.setBackground(c);
-	jLabel11.setBackground(c);
-	jLabel12.setBackground(c);
-	jLabel13.setBackground(c);
-	jLabel14.setBackground(c);
-	jLabel2.setBackground(c);
-	jLabel3.setBackground(c);
-	jLabel4.setBackground(c);
-	jLabel5.setBackground(c);
-	jLabel6.setBackground(c);
-	jLabel7.setBackground(c);
-	jLabel8.setBackground(c);
-	jLabel9.setBackground(c);
-	//        jLabel1.setOpaque(o);
-	//        jLabel10.setOpaque(o);
-	//        jLabel11.setOpaque(o);
-	//        jLabel12.setOpaque(o);
-	//        jLabel13.setOpaque(o);
-	//        jLabel14.setOpaque(o);
-	//        jLabel2.setOpaque(o);
-	//        jLabel3.setOpaque(o);
-	//        jLabel4.setOpaque(o);
-	//        jLabel5.setOpaque(o);
-	//        jLabel6.setOpaque(o);
-	//        jLabel7.setOpaque(o);
-	//        jLabel8.setOpaque(o);
-	//        jLabel9.setOpaque(o);
-    }
+	@Override
+	public void setForceComponentsBackgroundColor(boolean force) {
+		System.out.println("ButtonPanel.setForceComponetsbackgroundRed " + force);
+		Color c = force ? FORCED_BACKGROUND : DEFAULT_BACKGROUND;
+		//        boolean o = force ? true : DEFAULT_OPAQUE;
+		jLabel1.setBackground(c);
+		jLabel10.setBackground(c);
+		jLabel11.setBackground(c);
+		jLabel12.setBackground(c);
+		jLabel13.setBackground(c);
+		jLabel14.setBackground(c);
+		jLabel2.setBackground(c);
+		jLabel3.setBackground(c);
+		jLabel4.setBackground(c);
+		jLabel5.setBackground(c);
+		jLabel6.setBackground(c);
+		jLabel7.setBackground(c);
+		jLabel8.setBackground(c);
+		jLabel9.setBackground(c);
+		//        jLabel1.setOpaque(o);
+		//        jLabel10.setOpaque(o);
+		//        jLabel11.setOpaque(o);
+		//        jLabel12.setOpaque(o);
+		//        jLabel13.setOpaque(o);
+		//        jLabel14.setOpaque(o);
+		//        jLabel2.setOpaque(o);
+		//        jLabel3.setOpaque(o);
+		//        jLabel4.setOpaque(o);
+		//        jLabel5.setOpaque(o);
+		//        jLabel6.setOpaque(o);
+		//        jLabel7.setOpaque(o);
+		//        jLabel8.setOpaque(o);
+		//        jLabel9.setOpaque(o);
+	}
 
-    @Override
-    public void setForceComponentsNonOpaque(boolean force) {
-	setBackground(force ? Color.GREEN : DEFAULT_BACKGROUND);
-	boolean o = force ? false : DEFAULT_OPAQUE;
-	jLabel1.setOpaque(o);
-	jLabel10.setOpaque(o);
-	jLabel11.setOpaque(o);
-	jLabel12.setOpaque(o);
-	jLabel13.setOpaque(o);
-	jLabel14.setOpaque(o);
-	jLabel2.setOpaque(o);
-	jLabel3.setOpaque(o);
-	jLabel4.setOpaque(o);
-	jLabel5.setOpaque(o);
-	jLabel6.setOpaque(o);
-	jLabel7.setOpaque(o);
-	jLabel8.setOpaque(o);
-	jLabel9.setOpaque(o);
-    }
+	@Override
+	public void setForceComponentsNonOpaque(boolean force) {
+		setBackground(force ? Color.GREEN : DEFAULT_BACKGROUND);
+		boolean o = force ? false : DEFAULT_OPAQUE;
+		jLabel1.setOpaque(o);
+		jLabel10.setOpaque(o);
+		jLabel11.setOpaque(o);
+		jLabel12.setOpaque(o);
+		jLabel13.setOpaque(o);
+		jLabel14.setOpaque(o);
+		jLabel2.setOpaque(o);
+		jLabel3.setOpaque(o);
+		jLabel4.setOpaque(o);
+		jLabel5.setOpaque(o);
+		jLabel6.setOpaque(o);
+		jLabel7.setOpaque(o);
+		jLabel8.setOpaque(o);
+		jLabel9.setOpaque(o);
+	}
 
-    // =================================================================================================================
-    // Netbeans Code
+	// =================================================================================================================
+	// Netbeans Code
 
-    /**
-     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
-     * content of this method is always regenerated by the Form Editor.
-     */
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-	java.awt.GridBagConstraints gridBagConstraints;
+	/**
+	 * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
+	 * content of this method is always regenerated by the Form Editor.
+	 */
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
+		java.awt.GridBagConstraints gridBagConstraints;
 
-	jLabel1 = new javax.swing.JLabel();
-	jLabel6 = new javax.swing.JLabel();
-	jLabel8 = new javax.swing.JLabel();
-	jLabel2 = new javax.swing.JLabel();
-	jLabel4 = new javax.swing.JLabel();
-	jLabel9 = new javax.swing.JLabel();
-	jLabel10 = new javax.swing.JLabel();
-	jLabel12 = new javax.swing.JLabel();
-	jLabel3 = new javax.swing.JLabel();
-	jLabel5 = new javax.swing.JLabel();
-	jLabel7 = new javax.swing.JLabel();
-	jLabel11 = new javax.swing.JLabel();
-	jLabel13 = new javax.swing.JLabel();
-	jLabel14 = new javax.swing.JLabel();
+		jLabel1 = new javax.swing.JLabel();
+		jLabel6 = new javax.swing.JLabel();
+		jLabel8 = new javax.swing.JLabel();
+		jLabel2 = new javax.swing.JLabel();
+		jLabel4 = new javax.swing.JLabel();
+		jLabel9 = new javax.swing.JLabel();
+		jLabel10 = new javax.swing.JLabel();
+		jLabel12 = new javax.swing.JLabel();
+		jLabel3 = new javax.swing.JLabel();
+		jLabel5 = new javax.swing.JLabel();
+		jLabel7 = new javax.swing.JLabel();
+		jLabel11 = new javax.swing.JLabel();
+		jLabel13 = new javax.swing.JLabel();
+		jLabel14 = new javax.swing.JLabel();
 
-	setLayout(new java.awt.GridBagLayout());
+		setLayout(new java.awt.GridBagLayout());
 
-	jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel1.getFont().getSize() - 2));
-	jLabel1.setForeground(java.awt.Color.darkGray);
-	//jLabel1.setText("Normal");
-	jLabel1.setText(I18nResourceHandler.getMessage("Normal"));
-	jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
-	add(jLabel1, gridBagConstraints);
+		jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD, jLabel1.getFont().getSize() - 2));
+		jLabel1.setForeground(java.awt.Color.darkGray);
+		//jLabel1.setText("Normal");
+		jLabel1.setText(I18nResourceHandler.getMessage("Normal"));
+		jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
+		add(jLabel1, gridBagConstraints);
 
-	jLabel6.setFont(jLabel6.getFont().deriveFont(jLabel6.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel6.getFont().getSize() - 2));
-	jLabel6.setForeground(java.awt.Color.darkGray);
-	//jLabel6.setText("Disabled");
-	jLabel6.setText(I18nResourceHandler.getMessage("Disabled"));
-	jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 0;
-	gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
-	add(jLabel6, gridBagConstraints);
+		jLabel6.setFont(jLabel6.getFont().deriveFont(jLabel6.getFont().getStyle() | java.awt.Font.BOLD, jLabel6.getFont().getSize() - 2));
+		jLabel6.setForeground(java.awt.Color.darkGray);
+		//jLabel6.setText("Disabled");
+		jLabel6.setText(I18nResourceHandler.getMessage("Disabled"));
+		jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.insets = new java.awt.Insets(4, 2, 4, 2);
+		add(jLabel6, gridBagConstraints);
 
-	jLabel8.setFont(jLabel8.getFont().deriveFont(jLabel8.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel8.getFont().getSize() - 2));
-	jLabel8.setForeground(java.awt.Color.darkGray);
-	//jLabel8.setText("Custom Foreground");
-	jLabel8.setText(I18nResourceHandler.getMessage("Custom_Foreground"));
-	jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 2;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(8, 5, 8, 5);
-	add(jLabel8, gridBagConstraints);
+		jLabel8.setFont(jLabel8.getFont().deriveFont(jLabel8.getFont().getStyle() | java.awt.Font.BOLD, jLabel8.getFont().getSize() - 2));
+		jLabel8.setForeground(java.awt.Color.darkGray);
+		//jLabel8.setText("Custom Foreground");
+		jLabel8.setText(I18nResourceHandler.getMessage("Custom_Foreground"));
+		jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(8, 5, 8, 5);
+		add(jLabel8, gridBagConstraints);
 
-	jLabel2.setForeground(java.awt.Color.red);
-	//jLabel2.setText("The Quick Brown Fox");
-	jLabel2.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 2;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
-	add(jLabel2, gridBagConstraints);
+		jLabel2.setForeground(java.awt.Color.red);
+		//jLabel2.setText("The Quick Brown Fox");
+		jLabel2.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
+		add(jLabel2, gridBagConstraints);
 
-	//jLabel4.setText("The Quick Brown Fox");
-	jLabel4.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
-	jLabel4.setEnabled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 1;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
-	add(jLabel4, gridBagConstraints);
+		//jLabel4.setText("The Quick Brown Fox");
+		jLabel4.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
+		jLabel4.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
+		add(jLabel4, gridBagConstraints);
 
-	jLabel9.setFont(jLabel9.getFont().deriveFont(jLabel9.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel9.getFont().getSize() - 2));
-	jLabel9.setForeground(java.awt.Color.darkGray);
-	//jLabel9.setText("Custom Background");
-	jLabel9.setText(I18nResourceHandler.getMessage("Custom_Background"));
-	jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 3;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(8, 5, 8, 5);
-	add(jLabel9, gridBagConstraints);
+		jLabel9.setFont(jLabel9.getFont().deriveFont(jLabel9.getFont().getStyle() | java.awt.Font.BOLD, jLabel9.getFont().getSize() - 2));
+		jLabel9.setForeground(java.awt.Color.darkGray);
+		//jLabel9.setText("Custom Background");
+		jLabel9.setText(I18nResourceHandler.getMessage("Custom_Background"));
+		jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(8, 5, 8, 5);
+		add(jLabel9, gridBagConstraints);
 
-	jLabel10.setFont(jLabel10.getFont().deriveFont(jLabel10.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel10.getFont().getSize() - 2));
-	jLabel10.setForeground(java.awt.Color.darkGray);
-	//jLabel10.setText("Custom Font");
-	jLabel10.setText(I18nResourceHandler.getMessage("Custom_Font"));
-	jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 4;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(8, 5, 8, 5);
-	add(jLabel10, gridBagConstraints);
+		jLabel10.setFont(jLabel10.getFont()
+				.deriveFont(jLabel10.getFont().getStyle() | java.awt.Font.BOLD, jLabel10.getFont().getSize() - 2));
+		jLabel10.setForeground(java.awt.Color.darkGray);
+		//jLabel10.setText("Custom Font");
+		jLabel10.setText(I18nResourceHandler.getMessage("Custom_Font"));
+		jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(8, 5, 8, 5);
+		add(jLabel10, gridBagConstraints);
 
-	jLabel12.setFont(jLabel12.getFont().deriveFont(jLabel12.getFont().getStyle() | java.awt.Font.BOLD,
-		jLabel12.getFont().getSize() - 2));
-	jLabel12.setForeground(java.awt.Color.darkGray);
-	//jLabel12.setText("Normal");
-	jLabel12.setText(I18nResourceHandler.getMessage("Normal"));
-	jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 0;
-	gridBagConstraints.gridy = 1;
-	gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-	gridBagConstraints.insets = new java.awt.Insets(8, 5, 8, 5);
-	add(jLabel12, gridBagConstraints);
+		jLabel12.setFont(jLabel12.getFont()
+				.deriveFont(jLabel12.getFont().getStyle() | java.awt.Font.BOLD, jLabel12.getFont().getSize() - 2));
+		jLabel12.setForeground(java.awt.Color.darkGray);
+		//jLabel12.setText("Normal");
+		jLabel12.setText(I18nResourceHandler.getMessage("Normal"));
+		jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.insets = new java.awt.Insets(8, 5, 8, 5);
+		add(jLabel12, gridBagConstraints);
 
-	jLabel3.setBackground(java.awt.Color.red);
-	//jLabel3.setText("The Quick Brown Fox");
-	jLabel3.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 3;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
-	add(jLabel3, gridBagConstraints);
+		jLabel3.setBackground(java.awt.Color.red);
+		//jLabel3.setText("The Quick Brown Fox");
+		jLabel3.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
+		add(jLabel3, gridBagConstraints);
 
-	jLabel5.setFont(jLabel5.getFont().deriveFont((jLabel5.getFont().getStyle() | java.awt.Font.ITALIC)));
-	//jLabel5.setText("The Quick Brown Fox");
-	jLabel5.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 4;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
-	add(jLabel5, gridBagConstraints);
+		jLabel5.setFont(jLabel5.getFont().deriveFont((jLabel5.getFont().getStyle() | java.awt.Font.ITALIC)));
+		//jLabel5.setText("The Quick Brown Fox");
+		jLabel5.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
+		add(jLabel5, gridBagConstraints);
 
-	jLabel7.setForeground(java.awt.Color.red);
-	//jLabel7.setText("The Quick Brown Fox");
-	jLabel7.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
-	jLabel7.setEnabled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 2;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
-	add(jLabel7, gridBagConstraints);
+		jLabel7.setForeground(java.awt.Color.red);
+		//jLabel7.setText("The Quick Brown Fox");
+		jLabel7.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
+		jLabel7.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
+		add(jLabel7, gridBagConstraints);
 
-	jLabel11.setBackground(java.awt.Color.red);
-	//jLabel11.setText("The Quick Brown Fox");
-	jLabel11.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
-	jLabel11.setEnabled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 3;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
-	add(jLabel11, gridBagConstraints);
+		jLabel11.setBackground(java.awt.Color.red);
+		//jLabel11.setText("The Quick Brown Fox");
+		jLabel11.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
+		jLabel11.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 3;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
+		add(jLabel11, gridBagConstraints);
 
-	jLabel13.setFont(jLabel13.getFont().deriveFont((jLabel13.getFont().getStyle() | java.awt.Font.ITALIC)));
-	//jLabel13.setText("The Quick Brown Fox");
-	jLabel13.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
-	jLabel13.setEnabled(false);
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 2;
-	gridBagConstraints.gridy = 4;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
-	add(jLabel13, gridBagConstraints);
+		jLabel13.setFont(jLabel13.getFont().deriveFont((jLabel13.getFont().getStyle() | java.awt.Font.ITALIC)));
+		//jLabel13.setText("The Quick Brown Fox");
+		jLabel13.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
+		jLabel13.setEnabled(false);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 4;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
+		add(jLabel13, gridBagConstraints);
 
-	//jLabel14.setText("The Quick Brown Fox");
-	jLabel14.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
-	gridBagConstraints = new java.awt.GridBagConstraints();
-	gridBagConstraints.gridx = 1;
-	gridBagConstraints.gridy = 1;
-	gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-	gridBagConstraints.weightx = 1.0;
-	gridBagConstraints.weighty = 1.0;
-	gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
-	add(jLabel14, gridBagConstraints);
-    }// </editor-fold>//GEN-END:initComponents
+		//jLabel14.setText("The Quick Brown Fox");
+		jLabel14.setText(I18nResourceHandler.getMessage("The_Quick_Brown_Fox"));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 12);
+		add(jLabel14, gridBagConstraints);
+	}// </editor-fold>//GEN-END:initComponents
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    // End of variables declaration//GEN-END:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JLabel jLabel10;
+	private javax.swing.JLabel jLabel11;
+	private javax.swing.JLabel jLabel12;
+	private javax.swing.JLabel jLabel13;
+	private javax.swing.JLabel jLabel14;
+	private javax.swing.JLabel jLabel2;
+	private javax.swing.JLabel jLabel3;
+	private javax.swing.JLabel jLabel4;
+	private javax.swing.JLabel jLabel5;
+	private javax.swing.JLabel jLabel6;
+	private javax.swing.JLabel jLabel7;
+	private javax.swing.JLabel jLabel8;
+	private javax.swing.JLabel jLabel9;
+	// End of variables declaration//GEN-END:variables
 
 }

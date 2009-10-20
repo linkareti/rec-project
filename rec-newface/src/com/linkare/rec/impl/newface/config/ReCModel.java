@@ -22,6 +22,6 @@ package com.linkare.rec.impl.newface.config;
 @Deprecated
 public interface ReCModel {
 
-    //Dimension getApplicationPreferredSize();
+	//Dimension getApplicationPreferredSize();
 
 }

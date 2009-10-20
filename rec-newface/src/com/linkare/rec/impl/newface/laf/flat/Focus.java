@@ -17,11 +17,11 @@ import java.lang.annotation.Target;
 @Target(value = { ElementType.TYPE, ElementType.FIELD })
 public @interface Focus {
 
-    enum Effect {
-	GLOW
-    };
+	enum Effect {
+		GLOW
+	};
 
-    boolean display() default true;
+	boolean display() default true;
 
-    Effect effect() default Effect.GLOW;
+	Effect effect() default Effect.GLOW;
 }

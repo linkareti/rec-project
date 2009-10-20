@@ -1218,7 +1218,6 @@
 	    iconLocationBundleKey="ReCExpCC$rec.exp.icon.cc" 
 	    displayStringBundleKey="ReCExpCC$rec.exp.title.cc" 
 		desktopLocationBundleKey="ReCExpCC$rec.exp.background.cc" 
-		videoLocation="ReCExpCC$rec.exp.url.cc.video" 
 	    order="1">
 		
 	    <Display classLocationBundleKey="ReCExpCC$rec.exp.display.cc.loc.1"

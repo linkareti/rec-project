@@ -6,38 +6,35 @@
  */
 package com.linkare.rec.impl.newface.laf.flat.elabtheme;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.util.Map;
-
-import javax.swing.plaf.FontUIResource;
 
 /**
  * @deprecated
  * @author João FLorindo
  */
+@Deprecated
 public class TableStyle extends DefaultStyle {
 
-    //ENABLED COLORS
+	//ENABLED COLORS
 
-    //LABEL FONT
+	//LABEL FONT
 
-    public static final String ID = "Table";
+	public static final String ID = "Table";
 
-    /**
-     * Creates the <code>TableStyle</code>.
-     */
-    public TableStyle() {
-	super();
-    }
+	/**
+	 * Creates the <code>TableStyle</code>.
+	 */
+	public TableStyle() {
+		super();
+	}
 
-    @Override
-    protected String defineStyleId() {
-	return ID;
-    }
+	@Override
+	protected String defineStyleId() {
+		return ID;
+	}
 
-    @Override
-    public void updatePropertyMap(Map<String, Object> map) {
-	super.updatePropertyMap(map);
-    }
+	@Override
+	public void updatePropertyMap(Map<String, Object> map) {
+		super.updatePropertyMap(map);
+	}
 }

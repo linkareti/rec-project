@@ -18,14 +18,15 @@
  */
 package org.jdesktop.laffy;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.JInternalFrame;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.JInternalFrame;
 
 /**
  * DialogSection
@@ -35,46 +36,48 @@ import java.beans.PropertyChangeListener;
  */
 public abstract class DialogSection extends Section {
 
-    public DialogSection(String name) {
-	super(name);
-	JComponent content = getDialogContent();
-	JInternalFrame internalFrame = new JInternalFrame(name) {
-	    public boolean isSelected() {
-		return true;
-	    }
-	};
-	internalFrame.getContentPane().add(content, BorderLayout.CENTER);
-	internalFrame.pack();
-	internalFrame.setVisible(true);
-	//        internalFrame.setPreferredSize(new Dimension(100,100));
-	contentPanel.setContent(internalFrame);
-    }
+	public DialogSection(String name) {
+		super(name);
+		JComponent content = getDialogContent();
+		JInternalFrame internalFrame = new JInternalFrame(name) {
+			@Override
+			public boolean isSelected() {
+				return true;
+			}
+		};
+		internalFrame.getContentPane().add(content, BorderLayout.CENTER);
+		internalFrame.pack();
+		internalFrame.setVisible(true);
+		//        internalFrame.setPreferredSize(new Dimension(100,100));
+		contentPanel.setContent(internalFrame);
+	}
 
-    protected Action createFloatAction() {
-	return new ShowDialogAction();
-    }
+	@Override
+	protected Action createFloatAction() {
+		return new ShowDialogAction();
+	}
 
-    protected abstract void showDialog();
+	protected abstract void showDialog();
 
-    protected abstract JComponent getDialogContent();
+	protected abstract JComponent getDialogContent();
 
-    // =================================================================================================================
-    // Show Dialog Action
+	// =================================================================================================================
+	// Show Dialog Action
 
-    private class ShowDialogAction extends AbstractAction {
-	/** Creates an {@code Action}. */
-	public ShowDialogAction() {
-	    super(getName());
-	    DialogSection.this.addPropertyChangeListener("name", new PropertyChangeListener() {
-		public void propertyChange(PropertyChangeEvent evt) {
-		    putValue(Action.NAME, getName());
+	private class ShowDialogAction extends AbstractAction {
+		/** Creates an {@code Action}. */
+		public ShowDialogAction() {
+			super(getName());
+			DialogSection.this.addPropertyChangeListener("name", new PropertyChangeListener() {
+				public void propertyChange(PropertyChangeEvent evt) {
+					putValue(Action.NAME, getName());
+				}
+			});
 		}
-	    });
-	}
 
-	/** Invoked when an action occurs. */
-	public void actionPerformed(ActionEvent event) {
-	    showDialog();
+		/** Invoked when an action occurs. */
+		public void actionPerformed(ActionEvent event) {
+			showDialog();
+		}
 	}
-    }
 }

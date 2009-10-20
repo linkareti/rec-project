@@ -19,17 +19,18 @@
 
 package org.jdesktop.laffy.preview;
 
-import org.jdesktop.laffy.Page;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractListModel;
 import javax.swing.ComboBoxModel;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.jdesktop.laffy.Page;
 
 /**
  * A simple list model which is based on a List of components. Each item returned from the model is an Item type, which
@@ -38,66 +39,66 @@ import java.util.List;
  * @author Richard Bair
  */
 public class PagePreviewListModel extends AbstractListModel implements ComboBoxModel {
-    private List<Page> pages;
-    private JList pagePreviewList;
+	private List<Page> pages;
+	private JList pagePreviewList;
 
-    public PagePreviewListModel(JList pagePreviewList) {
-	this.pagePreviewList = pagePreviewList;
-	this.pages = new ArrayList<Page>();
-	pagePreviewList.addListSelectionListener(new ListSelectionListener() {
-	    public void valueChanged(ListSelectionEvent e) {
-		fireContentsChanged(this, -1, -1);
-	    }
-	});
-    }
-
-    // =================================================================================================================
-    // ComboBoxModel Methods
-
-    /**
-     * Returns the selected item
-     * 
-     * @return The selected item or <code>null</code> if there is no selection
-     */
-    public Object getSelectedItem() {
-	return pagePreviewList.getSelectedValue();
-    }
-
-    /**
-     * Set the selected item. The implementation of this method should notify all registered
-     * <code>ListDataListener</code>s that the contents have changed.
-     * 
-     * @param anItem
-     *            the list object to select or <code>null</code> to clear the selection
-     */
-    public void setSelectedItem(Object anItem) {
-	pagePreviewList.setSelectedValue(anItem, true);
-	fireContentsChanged(this, -1, -1);
-    }
-
-    // =================================================================================================================
-    // AbstractListModel Methods
-
-    private PropertyChangeListener previewListener = new PropertyChangeListener() {
-	public void propertyChange(PropertyChangeEvent evt) {
-	    int index = pages.indexOf(evt.getSource());
-	    if (index > 0) {
-		fireContentsChanged(PagePreviewListModel.this, index, index);
-	    }
+	public PagePreviewListModel(JList pagePreviewList) {
+		this.pagePreviewList = pagePreviewList;
+		this.pages = new ArrayList<Page>();
+		pagePreviewList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				fireContentsChanged(this, -1, -1);
+			}
+		});
 	}
-    };
 
-    public void addPage(Page p) {
-	p.addPropertyChangeListener("previewIcon", previewListener);
-	pages.add(p);
-	fireContentsChanged(p, pages.size() - 2, pages.size() - 1);
-    }
+	// =================================================================================================================
+	// ComboBoxModel Methods
 
-    public int getSize() {
-	return pages.size();
-    }
+	/**
+	 * Returns the selected item
+	 * 
+	 * @return The selected item or <code>null</code> if there is no selection
+	 */
+	public Object getSelectedItem() {
+		return pagePreviewList.getSelectedValue();
+	}
 
-    public Object getElementAt(int index) {
-	return pages.get(index);
-    }
+	/**
+	 * Set the selected item. The implementation of this method should notify all registered
+	 * <code>ListDataListener</code>s that the contents have changed.
+	 * 
+	 * @param anItem
+	 *            the list object to select or <code>null</code> to clear the selection
+	 */
+	public void setSelectedItem(Object anItem) {
+		pagePreviewList.setSelectedValue(anItem, true);
+		fireContentsChanged(this, -1, -1);
+	}
+
+	// =================================================================================================================
+	// AbstractListModel Methods
+
+	private PropertyChangeListener previewListener = new PropertyChangeListener() {
+		public void propertyChange(PropertyChangeEvent evt) {
+			int index = pages.indexOf(evt.getSource());
+			if (index > 0) {
+				fireContentsChanged(PagePreviewListModel.this, index, index);
+			}
+		}
+	};
+
+	public void addPage(Page p) {
+		p.addPropertyChangeListener("previewIcon", previewListener);
+		pages.add(p);
+		fireContentsChanged(p, pages.size() - 2, pages.size() - 1);
+	}
+
+	public int getSize() {
+		return pages.size();
+	}
+
+	public Object getElementAt(int index) {
+		return pages.get(index);
+	}
 }

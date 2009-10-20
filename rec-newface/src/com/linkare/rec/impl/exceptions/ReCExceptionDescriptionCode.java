@@ -14,9 +14,9 @@ package com.linkare.rec.impl.exceptions;
  */
 public interface ReCExceptionDescriptionCode {
 
-    /**
-     * @return The Exception code identifier.
-     */
-    ExceptionCode getCode();
+	/**
+	 * @return The Exception code identifier.
+	 */
+	ExceptionCode getCode();
 
 }

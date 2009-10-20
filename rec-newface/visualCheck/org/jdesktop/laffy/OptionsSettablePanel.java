@@ -18,10 +18,11 @@
  */
 package org.jdesktop.laffy;
 
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
+import javax.swing.JPanel;
 
 /**
  * OptionsSettablePanel
@@ -31,30 +32,30 @@ import java.beans.PropertyChangeListener;
  */
 public abstract class OptionsSettablePanel extends JPanel {
 
-    protected final static Color FORCED_BACKGROUND = new Color(151, 174, 20);
+	protected final static Color FORCED_BACKGROUND = new Color(151, 174, 20);
 
-    protected OptionsSettablePanel() {
-	super();
-	Laffy.getInstance().addPropertyChangeListener(new PropertyChangeListener() {
-	    public void propertyChange(PropertyChangeEvent evt) {
-		if ("forceNonOpaque".equals(evt.getPropertyName())) {
-		    setForceComponentsNonOpaque((Boolean) evt.getNewValue());
-		} else if ("forceBackgroundColor".equals(evt.getPropertyName())) {
-		    setForceComponentsBackgroundColor((Boolean) evt.getNewValue());
-		} else if ("forceComponentsToBasicUI".equals(evt.getPropertyName())) {
-		    setForceComponentsToBasicUI((Boolean) evt.getNewValue());
-		}
-	    }
-	});
-    }
+	protected OptionsSettablePanel() {
+		super();
+		Laffy.getInstance().addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				if ("forceNonOpaque".equals(evt.getPropertyName())) {
+					setForceComponentsNonOpaque((Boolean) evt.getNewValue());
+				} else if ("forceBackgroundColor".equals(evt.getPropertyName())) {
+					setForceComponentsBackgroundColor((Boolean) evt.getNewValue());
+				} else if ("forceComponentsToBasicUI".equals(evt.getPropertyName())) {
+					setForceComponentsToBasicUI((Boolean) evt.getNewValue());
+				}
+			}
+		});
+	}
 
-    public void setForceComponentsNonOpaque(boolean force) {
-    }
+	public void setForceComponentsNonOpaque(boolean force) {
+	}
 
-    public void setForceComponentsBackgroundColor(boolean force) {
-    }
+	public void setForceComponentsBackgroundColor(boolean force) {
+	}
 
-    public void setForceComponentsToBasicUI(boolean force) {
-    }
+	public void setForceComponentsToBasicUI(boolean force) {
+	}
 
 }

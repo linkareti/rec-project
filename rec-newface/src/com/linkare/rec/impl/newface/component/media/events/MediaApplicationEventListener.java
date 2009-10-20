@@ -9,14 +9,14 @@ import java.util.EventListener;
  */
 public interface MediaApplicationEventListener extends EventListener {
 
-    /**
-     * Fired when playing a streaming media and no ES where received.
-     * 
-     * @param evt
-     */
-    void notConnected(MediaStoppedEvent evt);
+	/**
+	 * Fired when playing a streaming media and no ES where received.
+	 * 
+	 * @param evt
+	 */
+	void notConnected(MediaStoppedEvent evt);
 
-    void stopped(MediaStoppedEvent evt);
+	void stopped(MediaStoppedEvent evt);
 
-    void timeChanged(MediaTimeChangedEvent evt);
+	void timeChanged(MediaTimeChangedEvent evt);
 }

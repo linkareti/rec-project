@@ -17,33 +17,33 @@ import javax.swing.UIManager;
  */
 public class LAFConnector /* extends UIManager */{
 
-    /**
-     * The special LAF properties bridge. Use this holder to define special resources provided on the default eLab Theme
-     * for Flat Look and Feel.
-     * 
-     * @author Henrique Fernandes
-     */
-    public enum SpecialELabProperties {
+	/**
+	 * The special LAF properties bridge. Use this holder to define special resources provided on the default eLab Theme
+	 * for Flat Look and Feel.
+	 * 
+	 * @author Henrique Fernandes
+	 */
+	public enum SpecialELabProperties {
 
-	ENABLED_FOREGROUND_ON_DARK("enabledForegroundOnDark"), SELECTION_FOREGROUND_ON_DARK("selectionForegroundOnDark"), GRADIENT_LIGHTCOLOR(
-		"gradientLightColor"), GRADIENT_DARKCOLOR("gradientDarkColor"), DEFAULT_WHITE(".defaultWhite"), ;
+		ENABLED_FOREGROUND_ON_DARK("enabledForegroundOnDark"), SELECTION_FOREGROUND_ON_DARK("selectionForegroundOnDark"),
+		GRADIENT_LIGHTCOLOR("gradientLightColor"), GRADIENT_DARKCOLOR("gradientDarkColor"), DEFAULT_WHITE(".defaultWhite"), ;
 
-	private String name;
+		private String name;
 
-	SpecialELabProperties(String name) {
-	    this.name = name;
+		SpecialELabProperties(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
 	}
 
-	public String getName() {
-	    return name;
+	public static final Color getColor(SpecialELabProperties lafColorProperty) {
+		return UIManager.getColor(lafColorProperty.getName());
 	}
-    }
 
-    public static final Color getColor(SpecialELabProperties lafColorProperty) {
-	return UIManager.getColor(lafColorProperty.getName());
-    }
-
-    public static final Font getFont(SpecialELabProperties lafFontProperty) {
-	return UIManager.getFont(lafFontProperty.getName());
-    }
+	public static final Font getFont(SpecialELabProperties lafFontProperty) {
+		return UIManager.getFont(lafFontProperty.getName());
+	}
 }

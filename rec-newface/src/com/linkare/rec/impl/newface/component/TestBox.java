@@ -7,8 +7,9 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import com.linkare.rec.impl.newface.laf.flat.Focus;
 import javax.swing.JTextField;
+
+import com.linkare.rec.impl.newface.laf.flat.Focus;
 
 /**
  * 
@@ -17,7 +18,7 @@ import javax.swing.JTextField;
 @Focus(display = false)
 public class TestBox extends JTextField {
 
-    public TestBox() {
-    }
+	public TestBox() {
+	}
 
 }

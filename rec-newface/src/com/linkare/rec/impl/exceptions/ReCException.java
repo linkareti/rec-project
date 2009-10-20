@@ -14,39 +14,39 @@ package com.linkare.rec.impl.exceptions;
  */
 public class ReCException extends Exception implements ReCExceptionDescriptionCode {
 
-    private static final long serialVersionUID = -4083319135076449860L;
+	private static final long serialVersionUID = -4083319135076449860L;
 
-    private ExceptionCode code;
+	private ExceptionCode code;
 
-    /**
-     * Creates a new <code>ReCException</code>.
-     * 
-     * @param code
-     * @param message
-     * @param cause
-     */
-    public ReCException(ExceptionCode code, String message, Throwable cause) {
-	super(message, cause);
-	this.code = code;
-    }
+	/**
+	 * Creates a new <code>ReCException</code>.
+	 * 
+	 * @param code
+	 * @param message
+	 * @param cause
+	 */
+	public ReCException(ExceptionCode code, String message, Throwable cause) {
+		super(message, cause);
+		this.code = code;
+	}
 
-    /**
-     * Creates a new <code>ReCException</code>.
-     * 
-     * @param code
-     * @param message
-     */
-    public ReCException(ExceptionCode code, String message) {
-	super(message);
-	this.code = code;
-    }
+	/**
+	 * Creates a new <code>ReCException</code>.
+	 * 
+	 * @param code
+	 * @param message
+	 */
+	public ReCException(ExceptionCode code, String message) {
+		super(message);
+		this.code = code;
+	}
 
-    /*
-     * @see com.linkare.rec.impl.exceptions.ReCExceptionMessageCode#getCode()
-     */
-    @Override
-    public ExceptionCode getCode() {
-	return code;
-    }
+	/*
+	 * @see com.linkare.rec.impl.exceptions.ReCExceptionMessageCode#getCode()
+	 */
+	@Override
+	public ExceptionCode getCode() {
+		return code;
+	}
 
 }

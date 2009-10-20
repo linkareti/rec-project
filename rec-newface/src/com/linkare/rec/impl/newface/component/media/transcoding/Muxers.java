@@ -7,11 +7,11 @@ package com.linkare.rec.impl.newface.component.media.transcoding;
  * @author bcatarino
  */
 public enum Muxers {
-    MP4;
-    //TODO acrescentar restantes muxers suportados pelo VLC em trancoding.
+	MP4;
+	//TODO acrescentar restantes muxers suportados pelo VLC em trancoding.
 
-    @Override
-    public String toString() {
-	return this.name().toLowerCase();
-    }
+	@Override
+	public String toString() {
+		return this.name().toLowerCase();
+	}
 }

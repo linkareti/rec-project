@@ -9,7 +9,7 @@ import java.util.EventObject;
  */
 public class MediaStoppedEvent extends EventObject {
 
-    public MediaStoppedEvent(Object source) {
-	super(source);
-    }
+	public MediaStoppedEvent(Object source) {
+		super(source);
+	}
 }

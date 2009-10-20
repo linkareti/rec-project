@@ -26,63 +26,63 @@ import com.linkare.rec.impl.newface.ReCApplication;
  */
 public abstract class AbstractContentPane extends JPanel {
 
-    private ReCApplication recApplication = ReCApplication.getApplication();
+	private ReCApplication recApplication = ReCApplication.getApplication();
 
-    private static final Logger log = Logger.getLogger(AbstractContentPane.class.getName());
+	private static final Logger log = Logger.getLogger(AbstractContentPane.class.getName());
 
-    private static final long serialVersionUID = -4706961491108859138L;
+	private static final long serialVersionUID = -4706961491108859138L;
 
-    protected Window container;
+	protected Window container;
 
-    public AbstractContentPane() {
-	this(null);
-    }
-
-    public AbstractContentPane(Window container) {
-	this.container = container;
-    }
-
-    public Window getContainer() {
-	return container;
-    }
-
-    public void setContainer(Window container) {
-	this.container = container;
-    }
-
-    public void closeContainer() {
-	if (container != null) {
-	    container.setVisible(false);
+	public AbstractContentPane() {
+		this(null);
 	}
-    }
 
-    /**
-     * Sets all child components enabled/disabled. (One level only)
-     * 
-     * @param enabled
-     *            True to set enabled, false to disabled.
-     */
-    public void setChildComponentsEnabled(boolean enabled) {
-	for (Component childComponent : getComponents()) {
-	    childComponent.setEnabled(enabled);
-	    if (log.isLoggable(Level.FINE)) {
-		log.finer("component " + childComponent.getName() + (enabled ? " enabled" : " disabled"));
-	    }
+	public AbstractContentPane(Window container) {
+		this.container = container;
 	}
-    }
 
-    /**
-     * @return the recApplication
-     */
-    public ReCApplication getRecApplication() {
-	return recApplication;
-    }
+	public Window getContainer() {
+		return container;
+	}
 
-    public ApplicationContext getContext() {
-	return recApplication.getContext();
-    }
+	public void setContainer(Window container) {
+		this.container = container;
+	}
 
-    public ResourceMap getResourceMap() {
-	return getContext().getResourceMap();
-    }
+	public void closeContainer() {
+		if (container != null) {
+			container.setVisible(false);
+		}
+	}
+
+	/**
+	 * Sets all child components enabled/disabled. (One level only)
+	 * 
+	 * @param enabled
+	 *            True to set enabled, false to disabled.
+	 */
+	public void setChildComponentsEnabled(boolean enabled) {
+		for (Component childComponent : getComponents()) {
+			childComponent.setEnabled(enabled);
+			if (log.isLoggable(Level.FINE)) {
+				log.finer("component " + childComponent.getName() + (enabled ? " enabled" : " disabled"));
+			}
+		}
+	}
+
+	/**
+	 * @return the recApplication
+	 */
+	public ReCApplication getRecApplication() {
+		return recApplication;
+	}
+
+	public ApplicationContext getContext() {
+		return recApplication.getContext();
+	}
+
+	public ResourceMap getResourceMap() {
+		return getContext().getResourceMap();
+	}
 }

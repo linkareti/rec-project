@@ -15,12 +15,12 @@ import javax.swing.JComboBox;
  */
 public class ApparatusCombo extends JComboBox {
 
-    @SuppressWarnings("unused")
-    private static final Logger log = Logger.getLogger(ApparatusCombo.class.getName());
+	@SuppressWarnings("unused")
+	private static final Logger log = Logger.getLogger(ApparatusCombo.class.getName());
 
-    public ApparatusCombo() {
-	super();
-	setRenderer(new ApparatusRenderer());
-    }
+	public ApparatusCombo() {
+		super();
+		setRenderer(new ApparatusRenderer());
+	}
 
 }

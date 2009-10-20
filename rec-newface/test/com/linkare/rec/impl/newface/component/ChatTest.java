@@ -8,10 +8,10 @@ import org.junit.Test;
 
 public class ChatTest {
 
-    @Test
-    public void testChatTemplateHtmlResource() throws Exception {
-	InputStream resourceAsStream = Chat.class.getResourceAsStream("resources/chatTemplate.htm");
-	assertNotNull("resource not found", resourceAsStream);
-    }
+	@Test
+	public void testChatTemplateHtmlResource() throws Exception {
+		InputStream resourceAsStream = Chat.class.getResourceAsStream("resources/chatTemplate.htm");
+		assertNotNull("resource not found", resourceAsStream);
+	}
 
 }

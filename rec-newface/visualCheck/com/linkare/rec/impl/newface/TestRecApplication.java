@@ -14,7 +14,7 @@ import org.jdesktop.application.Application;
  */
 public class TestRecApplication {
 
-    public static void main(String[] args) {
-	Application.launch(ReCApplication.class, args);
-    }
+	public static void main(String[] args) {
+		Application.launch(ReCApplication.class, args);
+	}
 }

@@ -12,34 +12,33 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  */
 public class ExperimentHistoryUINode extends ExpHistory {
 
-    private final com.linkare.rec.impl.newface.config.Apparatus apparatusConfig;
+	private final com.linkare.rec.impl.newface.config.Apparatus apparatusConfig;
 
-    /**
-     * Creates the <code>ExpHistoryUINode</code>.
-     * 
-     * @param expHistoryDisplayFactory
-     * @param producerWrapper
-     * @param apparatus
-     * @param apparatusConfig
-     */
-    public ExperimentHistoryUINode(ExpHistoryDisplayFactory expHistoryDisplayFactory,
-	    DataProducerWrapper producerWrapper, Apparatus apparatus,
-	    com.linkare.rec.impl.newface.config.Apparatus apparatusConfig) {
-	super(expHistoryDisplayFactory, producerWrapper, apparatus);
-	this.apparatusConfig = apparatusConfig;
-    }
+	/**
+	 * Creates the <code>ExpHistoryUINode</code>.
+	 * 
+	 * @param expHistoryDisplayFactory
+	 * @param producerWrapper
+	 * @param apparatus
+	 * @param apparatusConfig
+	 */
+	public ExperimentHistoryUINode(ExpHistoryDisplayFactory expHistoryDisplayFactory, DataProducerWrapper producerWrapper,
+			Apparatus apparatus, com.linkare.rec.impl.newface.config.Apparatus apparatusConfig) {
+		super(expHistoryDisplayFactory, producerWrapper, apparatus);
+		this.apparatusConfig = apparatusConfig;
+	}
 
-    public com.linkare.rec.impl.newface.config.Apparatus getApparatusConfig() {
-	return this.apparatusConfig;
-    }
+	public com.linkare.rec.impl.newface.config.Apparatus getApparatusConfig() {
+		return this.apparatusConfig;
+	}
 
-    /**
-     * Getter for property apparatusIcon.
-     * 
-     * @return Value of property apparatusIcon.
-     */
-    public Icon getApparatusIcon() {
-	return apparatusConfig.getIcon();
-    }
+	/**
+	 * Getter for property apparatusIcon.
+	 * 
+	 * @return Value of property apparatusIcon.
+	 */
+	public Icon getApparatusIcon() {
+		return apparatusConfig.getIcon();
+	}
 
 }

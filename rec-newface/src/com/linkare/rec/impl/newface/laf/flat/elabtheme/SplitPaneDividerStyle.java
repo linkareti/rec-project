@@ -16,27 +16,27 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
 @Style
 public class SplitPaneDividerStyle extends DefaultStyle {
 
-    public static final String ID = "SplitPaneDivider";
+	public static final String ID = "SplitPaneDivider";
 
-    /**
-     * Creates the <code>TextFieldStyle</code>.
-     */
-    public SplitPaneDividerStyle() {
-	super();
-    }
+	/**
+	 * Creates the <code>TextFieldStyle</code>.
+	 */
+	public SplitPaneDividerStyle() {
+		super();
+	}
 
-    @Override
-    protected String defineStyleId() {
-	return ID;
-    }
+	@Override
+	protected String defineStyleId() {
+		return ID;
+	}
 
-    @Override
-    public void updatePropertyMap(Map<String, Object> map) {
-	super.updatePropertyMap(map);
-	map.put(BORDER, EMPTY_BORDER);
-    }
+	@Override
+	public void updatePropertyMap(Map<String, Object> map) {
+		super.updatePropertyMap(map);
+		map.put(BORDER, EMPTY_BORDER);
+	}
 
-    // -------------------------------------------------------------------------
-    // TODO Getters (Used to marshal values to xml)
+	// -------------------------------------------------------------------------
+	// TODO Getters (Used to marshal values to xml)
 
 }
