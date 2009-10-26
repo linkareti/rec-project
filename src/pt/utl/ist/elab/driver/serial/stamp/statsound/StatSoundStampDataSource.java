@@ -321,6 +321,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
         }
     }
 
+
+private SoundThread soundBoard = null;
     
     public void playSinWave(double freq)
     {
@@ -328,10 +330,17 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
         {
             synchronized(this)
             {
-                java.io.File file = new java.io.File("/tmp/startFreq");
-                java.io.FileWriter fw = new java.io.FileWriter(file);
-                fw.write(""+freq);
-                fw.close();
+//                java.io.File file = new java.io.File("/tmp/startFreq");
+//                java.io.FileWriter fw = new java.io.FileWriter(file);
+//                fw.write(""+freq);
+//                fw.close();
+            	
+        		soundBoard = new SoundThread();
+        		soundBoard.newLine();
+        		soundBoard.configure((float) freq,(float)freq,15);
+        		soundBoard.newLine();
+        		soundBoard.run();
+            	
             }
         	       	
         }
