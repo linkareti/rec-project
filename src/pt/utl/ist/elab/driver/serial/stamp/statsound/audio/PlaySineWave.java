@@ -23,17 +23,26 @@ public class PlaySineWave extends javax.swing.JFrame
         Process proc=null;
         
     static SoundProducer soundProducer = null;
+	private SoundThread soundBoard = null;
         
 	/** Creates new form PlaySineWave */
 	public PlaySineWave()
 	{
             try
             {
+            	
+        		soundBoard = new SoundThread();
+        		soundBoard.newLine();
+        		soundBoard.configure(100,2000,2);
+        		soundBoard.newLine();
+        		soundBoard.run();
+        		
+        		
                 //proc=Runtime.getRuntime().exec("/opt/j2sdk_nb/j2sdk1.4.2/jre/bin/java pt.utl.ist.elab.driver.serial.stamp.statsound.audio.SoundProducer");
                 //proc=Runtime.getRuntime().exec("/home/elab/DEBUG/ReC6.0/driver/eLab/StatSound/StartSoundProducer");
                 //proc.toString();
             	
-            	soundProducer = new SoundProducer();
+            	//soundProducer = new SoundProducer();
 
             }
             catch(Exception ioe)

@@ -43,38 +43,22 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 	public void startPlayingAudioFile(java.io.File file)
 			throws UnsupportedAudioFileException, IOException,
 			LineUnavailableException {
-		/*
-		 * System.out.println("Playing audio file!"); playing = true; try { p =
-		 * null; p = javax.media.Manager.createPlayer(file.toURL());
-		 * 
-		 * p.addControllerListener(this);
-		 * 
-		 * p.realize(); if (!waitForState(p.Realized)) {
-		 * System.out.println("Failed to realize the processor."); return; }
-		 * 
-		 * p.start(); if(!waitForState(p.Started)) {
-		 * System.out.println("Failed to start the processor."); return; } }
-		 * catch(Exception e) { System.out.println("Failed playing audio file");
-		 * e.printStackTrace(); }
-		 */
+		AudioInputStream AIStream = AudioSystem.getAudioInputStream(file);
+		DataLine.Info Info = new DataLine.Info(SourceDataLine.class, AIStream
+				.getFormat());
+		SourceDataLine Line = (SourceDataLine) AudioSystem.getLine(Info);
+		Line.open(AIStream.getFormat());
+		Line.start();
+		byte[] Buffer = new byte[16384];
+		int Count;
+		while ((Count = AIStream.read(Buffer)) > 0)
+			Line.write(Buffer, 0, Count);
+		AIStream.close();
+		Line.drain();
+		Line.stop();
+		Line.close();
+		Line = null;
 
-		{
-			AudioInputStream AIStream = AudioSystem.getAudioInputStream(file);
-			DataLine.Info info = new DataLine.Info(SourceDataLine.class,
-					AIStream.getFormat());
-			SourceDataLine line = (SourceDataLine) AudioSystem.getLine(info);
-			line.open(AIStream.getFormat());
-			line.start();
-			byte[] buffer = new byte[16384];
-			int count;
-			while ((count = AIStream.read(buffer)) > 0)
-				line.write(buffer, 0, count);
-			AIStream.close();
-			line.drain();
-			line.stop();
-			line.close();
-			line = null;
-		}
 	}
 
 	public void startPlayingAudioFile(int waveForm)
@@ -89,9 +73,11 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 		} else if (waveForm == 1) {
 			// startPlayingAudioFile(new
 			// java.io.File("/usr/local/ReC6.0/driver/eLab/StatSound/pulse.wav"));
-			startPlayingAudioFile(new java.io.File("/home/elab/whitenoise.wav"));
+			startPlayingAudioFile(new java.io.File("/home/elab/pulse.wav"));
 		}
 	}
+	
+	private SoundThread soundBoard = null;
 
 	public void startPlayingSinWave(double freq) {
 		System.out.println("Playing sin wave with freq=" + freq);
@@ -99,39 +85,47 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 		playing = true;
 		this.freq = freq;
 		try {
-			javax.media.PackageManager.getProtocolPrefixList().add(
-					"pt.utl.ist.elab.driver.serial.stamp.statsound.audio");
-			javax.media.MediaLocator loc = new javax.media.MediaLocator(
-					"sinewavegenerator:");
-			DataSource source = (DataSource) javax.media.Manager
-					.createDataSource(loc);
 
-			baseStream = (InterLacedSineWaveStream) source.getStreams()[0];
-			baseStream.setWaveLeftFreq(freq);
-			baseStream.setWaveRightFreq(freq);
 
-			p = null;
-			p = javax.media.Manager.createPlayer(source);
-
-			p.addControllerListener(this);
-
-			p.realize();
-			if (!waitForState(p.Realized)) {
-				System.out.println("Failed to realize the processor.");
-				return;
-			}
-
-			p.prefetch();
-			if (!waitForState(p.Prefetched)) {
-				System.out.println("Failed to prefetch the processor.");
-				return;
-			}
-
-			p.start();
-			if (!waitForState(p.Started)) {
-				System.out.println("Failed to start the processor.");
-				return;
-			}
+    		soundBoard = new SoundThread();
+    		soundBoard.newLine();
+    		soundBoard.configure((float) freq,(float)freq,15);
+    		soundBoard.newLine();
+    		soundBoard.run();
+			
+//			javax.media.PackageManager.getProtocolPrefixList().add(
+//					"pt.utl.ist.elab.driver.serial.stamp.statsound.audio");
+//			javax.media.MediaLocator loc = new javax.media.MediaLocator(
+//					"sinewavegenerator:");
+//			DataSource source = (DataSource) javax.media.Manager
+//					.createDataSource(loc);
+//
+//			baseStream = (InterLacedSineWaveStream) source.getStreams()[0];
+//			baseStream.setWaveLeftFreq(freq);
+//			baseStream.setWaveRightFreq(freq);
+//
+//			p = null;
+//			p = javax.media.Manager.createPlayer(source);
+//
+//			p.addControllerListener(this);
+//
+//			p.realize();
+//			if (!waitForState(p.Realized)) {
+//				System.out.println("Failed to realize the processor.");
+//				return;
+//			}
+//
+//			p.prefetch();
+//			if (!waitForState(p.Prefetched)) {
+//				System.out.println("Failed to prefetch the processor.");
+//				return;
+//			}
+//
+//			p.start();
+//			if (!waitForState(p.Started)) {
+//				System.out.println("Failed to start the processor.");
+//				return;
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -142,11 +136,13 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 			return;
 		}
 		System.out.println("Stoping");
+		soundBoard.stopWave();
+		soundBoard = null;
 		playing = false;
-		if (p != null) {
-			p.stop();
-			p.deallocate();
-		}
+//		if (p != null) {
+//			p.stop();
+//			p.deallocate();
+//		}
 	}
 
 	public static void main(String args[]) {
