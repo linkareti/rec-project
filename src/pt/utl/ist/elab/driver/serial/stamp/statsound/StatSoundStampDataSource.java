@@ -373,9 +373,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	public void setExpEnded(boolean expEnded) {
 		synchronized (syncWait) {
-			if (soundBoard != null) {
-				soundBoard.stopWave();
-			}
 			this.expEnded = expEnded;
 			syncWait.notifyAll();
 		}
