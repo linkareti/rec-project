@@ -6,26 +6,31 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.statsound;
 
-import gnu.io.*;
-import com.linkare.rec.impl.driver.*;
-import com.linkare.rec.impl.threading.*;
-import com.linkare.rec.impl.utils.EventQueue;
-import com.linkare.rec.impl.utils.EventQueueDispatcher;
-import com.linkare.rec.acquisition.*;
-import com.linkare.rec.data.config.*;
-import com.linkare.rec.data.metadata.*;
-import com.linkare.rec.data.synch.*;
-import com.linkare.rec.impl.logging.*;
-import com.linkare.rec.impl.utils.*;
-import com.linkare.rec.impl.threading.*;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import pt.utl.ist.elab.driver.serial.stamp.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.*;
-import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.*;
-import pt.utl.ist.elab.driver.serial.stamp.statsound.processors.*;
-import pt.utl.ist.elab.driver.serial.stamp.statsound.translators.*;
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
+import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDriver;
+import pt.utl.ist.elab.driver.serial.stamp.statsound.translators.StampConfigTranslator;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslator;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.StampTranslatorProcessorManager;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampConfiguredProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampNotConfiguredProcessor;
+import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProcessor;
+
+import com.linkare.rec.acquisition.IncorrectStateException;
+import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.synch.DateTime;
+import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.rec.impl.threading.AbstractConditionDecisor;
+import com.linkare.rec.impl.threading.IConditionDecisor;
+import com.linkare.rec.impl.threading.TimedOutException;
+import com.linkare.rec.impl.threading.WaitForConditionResult;
+import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
@@ -280,12 +285,15 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			dataSource.setFreqStep(step);
 			dataSource.setNPoints(nPoints);
 			dataSource.setFirstTime(true);
+			
+			System.out.println("Debug Version 001");
+			
 			if (typeOfExp.equalsIgnoreCase(dataSource.EXP_1)) {
-				dataSource.playSinWave(freqIni);
+				dataSource.playSinWave(freqIni, freqFin);
 				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			} else if (typeOfExp.equalsIgnoreCase(dataSource.EXP_2)) {
-				dataSource.playSinWave(freqIni);
+				dataSource.playSinWave(freqIni, freqFin);
 				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			} else {
