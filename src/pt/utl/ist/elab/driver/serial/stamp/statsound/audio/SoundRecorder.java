@@ -7,6 +7,7 @@
 package pt.utl.ist.elab.driver.serial.stamp.statsound.audio;
 
 import javax.media.CaptureDeviceInfo;
+import javax.media.Manager;
 import javax.media.MediaLocator;
 import javax.media.control.FormatControl;
 
@@ -48,11 +49,9 @@ public class SoundRecorder implements DataSoundListener {
 		javax.media.protocol.DataSource ds = null;
 		try {
 			MediaLocator loc = new MediaLocator("javasound://48000");
-
-			// ds=Manager.createDataSource(loc);
-
-			// formatControls =
-			// ((javax.media.protocol.CaptureDevice)ds).getFormatControls();
+			ds=Manager.createDataSource(loc);
+			formatControls = ((javax.media.protocol.CaptureDevice)ds).getFormatControls();
+			
 			System.out.println("Format=" + formatControls[0].getFormat());
 		} catch (Exception e) {
 			System.out.println("Error creating data source and locator");
