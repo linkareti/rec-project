@@ -70,6 +70,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 
 	private Processor proc;
 	private Object waitSync = new Object();
+	private DataSource p_ds = null;
 	private boolean stateTransitionOK = true;
 
 	/**
@@ -77,6 +78,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 	 * from the processor to a customed DataSink.
 	 */
 	public boolean open(DataSource ds) {
+		p_ds = ds;
 		System.out.println("create processor for: " + ds.getContentType());
 		proc = null;
 		try {
@@ -140,6 +142,13 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		System.out.println("Processor=" + proc);
 
 		return true;
+	}
+
+	/**
+	 * @return the p_ds
+	 */
+	public DataSource getDatasource() {
+		return p_ds;
 	}
 
 	public void stopProcessor() {
