@@ -323,7 +323,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				soundBoard.newLine();
 				soundBoard.configure((float) freqIni, (float) freqFin, 30);
 				soundBoard.newLine();
-				soundBoard.run();
+				new Thread(soundBoard).start();
 
 			}
 
