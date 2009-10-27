@@ -311,12 +311,14 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				// fw.write(""+freq);
 				// fw.close();
 				
-				if (freqFin == 0)
+				if (freqFin == 0d)
 					freqFin = freqIni;
+				if (freqIni == 0d)
+					freqIni = freqFin;
 
 				System.out
 						.println("Creating a Sound Thread for a sounf of freq: "
-								+ freqFin + " to: " + freqFin);
+								+ freqIni + " to: " + freqFin);
 				soundBoard = new SoundThread();
 				soundBoard.newLine();
 				soundBoard.configure((float) freqIni, (float) freqFin, 30);
