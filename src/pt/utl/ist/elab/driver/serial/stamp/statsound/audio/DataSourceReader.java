@@ -145,8 +145,13 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 	public void stopProcessor() {
 		if (proc != null) {
 			proc.stop();
+			proc.removeControllerListener(this);
 			proc.close();
-			proc.deallocate();
+			if (proc.getState() != Processor.Configured)
+				proc.deallocate();
+			else
+				System.out.println("Processor not able to deallocation");
+			proc = null;
 		}
 	}
 

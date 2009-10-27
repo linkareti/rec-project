@@ -71,6 +71,9 @@ public class SoundRecorder implements DataSoundListener {
 		if (!acquiring) {
 			acquiring = false;
 			dsr.stopProcessor();
+			dsr.removeDataSoundListener(this);
+			dsr = null;
+			System.gc();
 			System.out.println("Stoping the sound acquisition!");
 		}
 	}
