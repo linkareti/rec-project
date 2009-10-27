@@ -336,9 +336,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	public void stopPlaying() {
 		//synchronized (this) {
 //			try {
-				if (soundBoard != null) {
-					soundBoard.stopWave();
-				}
 				// java.io.File file = new java.io.File("/tmp/stop");
 				// java.io.FileWriter fw = new java.io.FileWriter(file);
 				// fw.write("0");
@@ -357,6 +354,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	}
 
 	public void stopAcquiring() {
+		if (soundBoard != null) {
+			soundBoard.stopWave();
+		}
 		System.out.println("Trying to stop acquiring!");
 		if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP)
 				.equalsIgnoreCase(EXP_3)) {
