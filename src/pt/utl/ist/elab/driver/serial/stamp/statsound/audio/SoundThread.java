@@ -31,9 +31,14 @@ public class SoundThread implements Runnable {
 
 	private AudioInputStream audiostream = null;
 	private SourceDataLine linha = null;
+	
+	private int soundType = -1;
 
 	/** Creates a new instance of SoundThread */
 	public SoundThread() {
+	}
+	public SoundThread(int type) {
+		this.soundType = type;
 	}
 
 	/**
@@ -70,8 +75,19 @@ public class SoundThread implements Runnable {
 	public void newLine() {
 		System.out.println(">>> Creating new oscilator!");
 		try {
-			audiostream = new Oscilador(this.waveFrequency1,
-					this.waveFrequency2, waveAmplitude, length, waveFormat);
+			switch (soundType) {
+			case SoundThread.WAVE :
+				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat, 1);
+				break;
+			case SoundThread.PULSE :
+				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat, 2);
+				break;
+			case SoundThread.PINK_NOISE :
+				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat, 3);
+				break;
+			}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -156,5 +172,10 @@ public class SoundThread implements Runnable {
 			throw e.fillInStackTrace();
 		}
 	}// finalize
+	
+	public static final int WAVE = 0;
+	public static final int PINK_NOISE = 1;
+	public static final int PULSE = 2;
+	
 
 }

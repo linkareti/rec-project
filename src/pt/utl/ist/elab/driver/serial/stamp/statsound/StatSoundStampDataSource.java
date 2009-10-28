@@ -6,8 +6,14 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.statsound;
 
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.SourceDataLine;
 
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.statsound.audio.DataSoundListener;
@@ -199,8 +205,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				setDataSourceEnded();
 			} else if (!expEnded) {
 				Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-						"Inside no expEnded");
-				startPlayingAudioFile(waveForm);
+						"Inside no expEnded");				
 				sr.startAcquiring(true);
 				try {
 					Thread.currentThread().sleep(800);
@@ -289,60 +294,44 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		}
 	}
 
-	private void startPlayingAudioFile(int waveForm) {
-		try {
-			synchronized (this) {
-				// java.io.File file = new java.io.File("/tmp/startFile");
-				// java.io.FileWriter fw = new java.io.FileWriter(file);
-				// fw.write(""+waveForm);
-				// fw.close();
-			}
-		} catch (Exception ioe) {
-		}
+	private SoundThread soundBoard = null;
+	
+	public void playPulseWave(double freq, int time) {
+		System.out.println("Creating a Sound Thread for a pink noise of freq: "
+				+ freqIni);
+		soundBoard = new SoundThread(SoundThread.PULSE);
+		soundBoard.newLine();
+		soundBoard.configure((float) freqIni, 0f, time);
+		soundBoard.newLine();
+		new Thread(soundBoard).start();
+	}
+	
+	public void playPinkNoise(double freq, int time) {
+		System.out.println("Creating a Sound Thread for a pink noise of freq: "
+				+ freqIni);
+		soundBoard = new SoundThread(SoundThread.PINK_NOISE);
+		soundBoard.newLine();
+		soundBoard.configure((float) freqIni, 0f, time);
+		soundBoard.newLine();
+		new Thread(soundBoard).start();
 	}
 
-	private SoundThread soundBoard = null;
+	public void playSinWave(double freqIni, double freqFin, int time) {
+		if (freqFin == 0d)
+			freqFin = freqIni;
+		if (freqIni == 0d)
+			freqIni = freqFin;
 
-	public void playSinWave(double freqIni, double freqFin) {
-//		try {
-			//synchronized (this) {
-				// java.io.File file = new java.io.File("/tmp/startFreq");
-				// java.io.FileWriter fw = new java.io.FileWriter(file);
-				// fw.write(""+freq);
-				// fw.close();
-				
-				if (freqFin == 0d)
-					freqFin = freqIni;
-				if (freqIni == 0d)
-					freqIni = freqFin;
-
-				System.out
-						.println("Creating a Sound Thread for a sounf of freq: "
-								+ freqIni + " to: " + freqFin);
-				soundBoard = new SoundThread();
-				soundBoard.newLine();
-				soundBoard.configure((float) freqIni, (float) freqFin, 30);
-				soundBoard.newLine();
-				new Thread(soundBoard).start();
-
-			//}
-
-//		} catch (Exception ioe) {
-//			System.out.println("ERROR 1 : " + ioe.getClass() + " "
-//					+ ioe.toString());
-//		}
+		System.out.println("Creating a Sound Thread for a sounf of freq: "
+				+ freqIni + " to: " + freqFin);
+		soundBoard = new SoundThread(SoundThread.WAVE);
+		soundBoard.newLine();
+		soundBoard.configure((float) freqIni, (float) freqFin, time);
+		soundBoard.newLine();
+		new Thread(soundBoard).start();
 	}
 
 	public void stopPlaying() {
-		//synchronized (this) {
-//			try {
-				// java.io.File file = new java.io.File("/tmp/stop");
-				// java.io.FileWriter fw = new java.io.FileWriter(file);
-				// fw.write("0");
-				// fw.close();
-//			} catch (Exception e) {
-//			}
-		//}
 		System.out.println("Data source stop playing done!");
 	}
 

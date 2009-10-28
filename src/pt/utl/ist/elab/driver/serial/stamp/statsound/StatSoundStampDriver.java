@@ -289,15 +289,21 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			System.out.println("Debug Version 001");
 			
 			if (typeOfExp.equalsIgnoreCase(dataSource.EXP_1)) {
-				dataSource.playSinWave(freqIni, freqIni);
+				dataSource.playSinWave(freqIni, freqIni, 30);
 				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			} else if (typeOfExp.equalsIgnoreCase(dataSource.EXP_2)) {
-				dataSource.playSinWave(freqIni, freqFin);
+				dataSource.playSinWave(freqIni, freqFin, 5);
 				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			} else {
-				dataSource.setWaveForm(waveForm);
+				//dataSource.setWaveForm(waveForm);
+				if (waveForm == 1)
+					dataSource.playPinkNoise(freqIni, 5);
+				else if (waveForm == 2) {
+					dataSource.playPulseWave(freqIni, 5);
+				}
+				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			}
 			fireIDriverStateListenerDriverStarted();
