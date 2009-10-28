@@ -19,9 +19,7 @@ public class SoundThread implements Runnable {
 	private static final int EXTERNAL_BUFFER_SIZE = 44100;
 	private float waveSampleRate = 44100.0F; // sampleRate do audio
 	// determina o formato do audio
-	private AudioFormat waveFormat = new AudioFormat(
-			AudioFormat.Encoding.PCM_SIGNED, waveSampleRate, 16, 1, 2,
-			waveSampleRate, false);
+	private AudioFormat waveFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveSampleRate, 16, 1, 2, waveSampleRate, false);
 
 	private float waveFrequency1; // frequency of the audio wave in Hz
 	private float waveFrequency2; // frequency of the audio wave in Hz
@@ -31,12 +29,13 @@ public class SoundThread implements Runnable {
 
 	private AudioInputStream audiostream = null;
 	private SourceDataLine linha = null;
-	
+
 	private int soundType = -1;
 
 	/** Creates a new instance of SoundThread */
 	public SoundThread() {
 	}
+
 	public SoundThread(int type) {
 		this.soundType = type;
 	}
@@ -61,7 +60,7 @@ public class SoundThread implements Runnable {
 			}
 			if (nBytesRead >= 0) {
 				int nBytesWritten = linha.write(abData, 0, nBytesRead);
-				//System.out.println(nBytesRead);
+				// System.out.println(nBytesRead);
 			}
 		}
 		System.out.println(">>>Draining the sound data!");
@@ -76,25 +75,25 @@ public class SoundThread implements Runnable {
 		System.out.println(">>> Creating new oscilator!");
 		try {
 			switch (soundType) {
-			case SoundThread.WAVE :
+			case SoundThread.WAVE:
 				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat, 1);
 				break;
-			case SoundThread.PULSE :
+			case SoundThread.PULSE:
 				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat, 3);
 				break;
-			case SoundThread.PINK_NOISE :
+			case SoundThread.PINK_NOISE:
 				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat, 2);
 				break;
+			case -1 :
+				System.out.println("NOT DEFINED");
 			}
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 
-		DataLine.Info informacao = new DataLine.Info(SourceDataLine.class,
-				waveFormat);
+		DataLine.Info informacao = new DataLine.Info(SourceDataLine.class, waveFormat);
 
 		try {
 			linha = (SourceDataLine) AudioSystem.getLine(informacao);
@@ -108,17 +107,16 @@ public class SoundThread implements Runnable {
 		}
 	}// newLine
 
-	public void configure(float waveFrequency1, float waveFrequency2,
-			float waveDuration) {
+	public void configure(float waveFrequency1, float waveFrequency2, float waveDuration) {
 		this.waveFrequency1 = waveFrequency1;
 		this.waveFrequency2 = waveFrequency2;
 		this.waveDuration = waveDuration;
 
 		this.length = Math.round(waveSampleRate * this.waveDuration); // length
-																		// of
-																		// stream
-																		// in
-																		// frames
+		// of
+		// stream
+		// in
+		// frames
 
 	}
 
@@ -172,10 +170,9 @@ public class SoundThread implements Runnable {
 			throw e.fillInStackTrace();
 		}
 	}// finalize
-	
+
 	public static final int WAVE = 0;
 	public static final int PINK_NOISE = 1;
 	public static final int PULSE = 2;
-	
 
 }

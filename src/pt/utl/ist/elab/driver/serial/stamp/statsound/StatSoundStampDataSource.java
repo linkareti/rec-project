@@ -6,14 +6,8 @@
 
 package pt.utl.ist.elab.driver.serial.stamp.statsound;
 
-import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.SourceDataLine;
 
 import pt.utl.ist.elab.driver.serial.stamp.AbstractStampDataSource;
 import pt.utl.ist.elab.driver.serial.stamp.statsound.audio.DataSoundListener;
@@ -33,8 +27,7 @@ import com.linkare.rec.impl.data.PhysicsValueFactory;
  * 
  * @author jp & Andr�
  */
-public class StatSoundStampDataSource extends AbstractStampDataSource implements
-		DataSoundListener {
+public class StatSoundStampDataSource extends AbstractStampDataSource implements DataSoundListener {
 
 	private int counter = 0;
 	private int total_samples = 0;
@@ -74,10 +67,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	}
 
 	public void processDataCommand(StampCommand cmd) {
-		Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-				"Entering processDataCommand on StatSoundStampDataSource");
-		System.out
-				.println("Entering processDataCommand on StatSoundStampDataSource");
+		Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering processDataCommand on StatSoundStampDataSource");
+		System.out.println("Entering processDataCommand on StatSoundStampDataSource");
 
 		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			System.out.println("Return from process data...cmd isn't valid");
@@ -86,21 +77,14 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 		PhysicsValue[] values = new PhysicsValue[7];
 
-		Logger.getLogger("StampDriver.Logger")
-				.log(
-						Level.INFO,
-						"Inside processDataCommand using "
-								+ cmd.getCommandIdentifier());
+		Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Inside processDataCommand using " + cmd.getCommandIdentifier());
 
-		if (cmd.getCommandIdentifier().equals(
-				StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
+		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
 			/** PISTON EXPERIMENT */
-			if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP)
-					.equalsIgnoreCase(EXP_1)) {
+			if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).equalsIgnoreCase(EXP_1)) {
 				Integer pos;
 				try {
-					pos = (Integer) cmd
-							.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
+					pos = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
 				} catch (ClassCastException e) {
 					System.out.println("Error getting the position");
 					e.printStackTrace();
@@ -110,17 +94,14 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				int posValor = pos.intValue();
 
 				try {
-					Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-							"pos1");
+					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos1");
 					synchronized (syncWait) {
-						Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-								"pos2");
+						Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos2");
 						long time1 = System.currentTimeMillis();
 						Thread.currentThread().sleep(200);
 
 						while (!rmsAvailable && !expEnded) {
-							Logger.getLogger("StampDriver.Logger").log(
-									Level.INFO, "pos3");
+							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos3");
 							syncWait.wait();
 						}
 						long time2 = System.currentTimeMillis();
@@ -128,8 +109,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 						System.out.println("Waited:" + (time2 - time1));
 						rmsAvailable = false;
 					}
-					Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-							"pos4");
+					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos4");
 				} catch (InterruptedException ie) {
 				}
 
@@ -137,14 +117,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				double rmsRightValor = sr.getRMS(sr.RIGHT_CHANNEL);
 				sr.resetRMS();
 
-				values[0] = PhysicsValueFactory.fromInt(posValor, config
-						.getChannelsConfig(0).getSelectedScale());
-				values[1] = PhysicsValueFactory.fromDouble(freqIni, config
-						.getChannelsConfig(1).getSelectedScale());
-				values[2] = PhysicsValueFactory.fromDouble(rmsRightValor,
-						config.getChannelsConfig(2).getSelectedScale());
-				values[3] = PhysicsValueFactory.fromDouble(rmsLeftValor, config
-						.getChannelsConfig(3).getSelectedScale());
+				values[0] = PhysicsValueFactory.fromInt(posValor, config.getChannelsConfig(0).getSelectedScale());
+				values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
+				values[2] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(2).getSelectedScale());
+				values[3] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(3).getSelectedScale());
 
 				super.addDataRow(values);
 
@@ -153,11 +129,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					setDataSourceEnded();
 			}
 			/** FREQ EXPERIMENT */
-			else if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP)
-					.equalsIgnoreCase(EXP_2)) {
+			else if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).equalsIgnoreCase(EXP_2)) {
 				for (double f = freqIni; f <= freqFin; f += step) {
-					Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-							"Exp2 for loop");
+					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exp2 for loop");
 					if (expEnded) {
 						stopPlaying();
 						stopAcquiring();
@@ -167,17 +141,14 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					try {
 						Thread.currentThread().sleep(150);
 						synchronized (syncWait) {
-							Logger.getLogger("StampDriver.Logger").log(
-									Level.INFO, "Entering syncronized");
+							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering syncronized");
 							while (!rmsAvailable && !expEnded) {
-								Logger.getLogger("StampDriver.Logger").log(
-										Level.INFO, "Exp2 while loop");
+								Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exp2 while loop");
 								syncWait.wait();
 							}
 							rmsAvailable = false;
 						}
-						Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-								"Exiting syncronized");
+						Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exiting syncronized");
 					}
 
 					catch (InterruptedException ie) {
@@ -188,14 +159,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					double rmsRightValor = sr.getRMS(sr.RIGHT_CHANNEL);
 					sr.resetRMS();
 
-					values[0] = PhysicsValueFactory.fromInt(posIni, config
-							.getChannelsConfig(0).getSelectedScale());
-					values[1] = PhysicsValueFactory.fromDouble(f, config
-							.getChannelsConfig(1).getSelectedScale());
-					values[2] = PhysicsValueFactory.fromDouble(rmsRightValor,
-							config.getChannelsConfig(2).getSelectedScale());
-					values[3] = PhysicsValueFactory.fromDouble(rmsLeftValor,
-							config.getChannelsConfig(3).getSelectedScale());
+					values[0] = PhysicsValueFactory.fromInt(posIni, config.getChannelsConfig(0).getSelectedScale());
+					values[1] = PhysicsValueFactory.fromDouble(f, config.getChannelsConfig(1).getSelectedScale());
+					values[2] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(2).getSelectedScale());
+					values[3] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(3).getSelectedScale());
 
 					super.addDataRow(values);
 
@@ -204,24 +171,19 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				expEnded = true;
 				setDataSourceEnded();
 			} else if (!expEnded) {
-				Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-						"Inside no expEnded");				
+				Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Inside no expEnded");
 				sr.startAcquiring(true);
 				try {
 					Thread.currentThread().sleep(800);
 					synchronized (syncWait) {
-						Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-								"Entering not expEnded syncronized");
+						Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering not expEnded syncronized");
 						while (!rmsAvailable && !expEnded) {
-							Logger.getLogger("StampDriver.Logger").log(
-									Level.INFO,
-									"While not expEnded syncronized");
+							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "While not expEnded syncronized");
 							syncWait.wait();
 						}
 						rmsAvailable = false;
 					}
-					Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-							"Exiting not expEnded syncronized");
+					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exiting not expEnded syncronized");
 				} catch (InterruptedException ie) {
 				}
 
@@ -242,30 +204,25 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				System.arraycopy(acqByte, startPoint, toSend, 0, nPoints);
 
-				values[5] = new PhysicsValue(PhysicsValFactory.fromByteArray(
-						toSend, "sound/wav"), null,
-						com.linkare.rec.data.Multiplier.none);
+				values[5] = new PhysicsValue(PhysicsValFactory.fromByteArray(toSend, "sound/wav"), null, com.linkare.rec.data.Multiplier.none);
 
 				super.addDataRow(values);
 				setDataSourceEnded();
 				expEnded = true;
 			}
-		} else if (cmd.getCommandIdentifier().equals(
-				StampStatSoundTempProcessor.COMMAND_IDENTIFIER)) {
+		} else if (cmd.getCommandIdentifier().equals(StampStatSoundTempProcessor.COMMAND_IDENTIFIER)) {
 			Integer temp;
 			try {
 				temp = Integer.valueOf(cmd.getCommand().split(" ")[0]); // cmd.getCommandData(StampStatSoundTempProcessor.COMMAND_IDENTIFIER);
 			} catch (Exception e) {
 
-				Logger.getLogger("StampDriver.Logger").log(Level.INFO,
-						"Exception on temp if");
+				Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exception on temp if");
 				e.printStackTrace();
 				return;
 			}
 			int tempValor = temp.intValue();
 
-			values[4] = PhysicsValueFactory.fromInt(tempValor, config
-					.getChannelsConfig(4).getSelectedScale());
+			values[4] = PhysicsValueFactory.fromInt(tempValor, config.getChannelsConfig(4).getSelectedScale());
 
 			super.addDataRow(values);
 			counter++;
@@ -295,20 +252,18 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	}
 
 	private SoundThread soundBoard = null;
-	
+
 	public void playPulseWave(double freq, int time) {
-		System.out.println("Creating a Sound Thread for a pink noise of freq: "
-				+ freqIni);
+		System.out.println("Creating a Sound Thread for a pink noise of freq: " + freqIni);
 		soundBoard = new SoundThread(SoundThread.PULSE);
 		soundBoard.newLine();
 		soundBoard.configure((float) freqIni, 0f, time);
 		soundBoard.newLine();
 		new Thread(soundBoard).start();
 	}
-	
+
 	public void playPinkNoise(double freq, int time) {
-		System.out.println("Creating a Sound Thread for a pink noise of freq: "
-				+ freqIni);
+		System.out.println("Creating a Sound Thread for a pink noise of freq: " + freqIni);
 		soundBoard = new SoundThread(SoundThread.PINK_NOISE);
 		soundBoard.newLine();
 		soundBoard.configure((float) freqIni, 0f, time);
@@ -322,8 +277,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		if (freqIni == 0d)
 			freqIni = freqFin;
 
-		System.out.println("Creating a Sound Thread for a sounf of freq: "
-				+ freqIni + " to: " + freqFin);
+		System.out.println("Creating a Sound Thread for a sounf of freq: " + freqIni + " to: " + freqFin);
 		soundBoard = new SoundThread(SoundThread.WAVE);
 		soundBoard.newLine();
 		soundBoard.configure((float) freqIni, (float) freqFin, time);
@@ -347,8 +301,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			soundBoard.stopWave();
 		}
 		System.out.println("Trying to stop acquiring!");
-		if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP)
-				.equalsIgnoreCase(EXP_3)) {
+		if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).equalsIgnoreCase(EXP_3)) {
 			return;
 		}
 		System.out.println("Trying to stop acquiring @ 2!");
@@ -365,8 +318,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			this.expEnded = expEnded;
 			syncWait.notifyAll();
 		}
-		System.out.println("Data source set exp ended done! ("
-				+ (expEnded ? "true" : "false") + ")");
+		System.out.println("Data source set exp ended done! (" + (expEnded ? "true" : "false") + ")");
 	}
 
 	public void setWaveForm(int waveForm) {
