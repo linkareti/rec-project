@@ -27,6 +27,8 @@ public class Oscilador extends AudioInputStream {
 	public Oscilador(float frequencia1, float frequencia2, float amplitude, long lengthInFrames, AudioFormat audioFormat, int type) {
 		super(new ByteArrayInputStream(new byte[0]), new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audioFormat.getSampleRate(), 16, 2, 4, audioFormat.getFrameRate(),
 				audioFormat.isBigEndian()), lengthInFrames);
+		
+		System.out.println("new Oscilador : type=" + type + ", lengthInFrames=" + lengthInFrames + ", bufferLength=" +  lengthInFrames * getFormat().getFrameSize());
 
 		float fAmplitude = (float) (amplitude * Math.pow(2, getFormat().getSampleSizeInBits() - 1));
 		// int nPeriodLengthInFrames = Math.round(getFormat().getFrameRate() /
