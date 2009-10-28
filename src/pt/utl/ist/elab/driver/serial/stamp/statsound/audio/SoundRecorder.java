@@ -21,11 +21,12 @@ public class SoundRecorder implements DataSoundListener {
 	public static final int RIGHT_CHANNEL = 1;
 	
 	public static MediaLocator mediaLocator = null;
+	public static javax.media.protocol.DataSource ds = null;
+	public static FormatControl[] formatControls;
 
 	private boolean acquiring = true;
 	private byte[] acqBytes = new byte[0];
 
-	private FormatControl[] formatControls;
 	private DataSourceReader dsr = null;
 
 	/** Creates a new instance of SoundRecorder */
@@ -48,14 +49,13 @@ public class SoundRecorder implements DataSoundListener {
 		nBuffers = 0;
 		CaptureDeviceInfo di = null;
 		StateHelper sh = null;
-		javax.media.protocol.DataSource ds = null;
 		try {
 			if (mediaLocator == null) {
 				mediaLocator = new MediaLocator("javasound://48000");
+				ds = Manager.createDataSource(mediaLocator);
+				formatControls = ((javax.media.protocol.CaptureDevice)ds).getFormatControls();
+				System.out.println("Format=" + formatControls[0].getFormat());
 			}
-			ds = Manager.createDataSource(mediaLocator);
-			formatControls = ((javax.media.protocol.CaptureDevice)ds).getFormatControls();
-			System.out.println("Format=" + formatControls[0].getFormat());
 		} catch (Exception e) {
 			System.out.println("Error creating data source and locator");
 			e.printStackTrace();
