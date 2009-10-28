@@ -19,6 +19,8 @@ import javax.media.control.FormatControl;
 public class SoundRecorder implements DataSoundListener {
 	public static final int LEFT_CHANNEL = 0;
 	public static final int RIGHT_CHANNEL = 1;
+	
+	public static MediaLocator mediaLocator = null;
 
 	private boolean acquiring = true;
 	private byte[] acqBytes = new byte[0];
@@ -48,8 +50,10 @@ public class SoundRecorder implements DataSoundListener {
 		StateHelper sh = null;
 		javax.media.protocol.DataSource ds = null;
 		try {
-			MediaLocator loc = new MediaLocator("javasound://48000");
-			ds=Manager.createDataSource(loc);
+			if (mediaLocator == null) {
+				mediaLocator = new MediaLocator("javasound://48000");
+			}
+			ds = Manager.createDataSource(mediaLocator);
 			formatControls = ((javax.media.protocol.CaptureDevice)ds).getFormatControls();
 			System.out.println("Format=" + formatControls[0].getFormat());
 		} catch (Exception e) {
