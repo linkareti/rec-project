@@ -298,6 +298,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 				dataSource.setExpEnded(false);
 			} else {
 				//dataSource.setWaveForm(waveForm);
+				System.out.println("Running waveform : " + waveForm);
 				if (waveForm == 1)
 					dataSource.playPinkNoise(freqIni, 5);
 				else if (waveForm == 2) {
