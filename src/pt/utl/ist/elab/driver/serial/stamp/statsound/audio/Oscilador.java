@@ -89,7 +89,7 @@ public class Oscilador extends AudioInputStream {
 	        // fill with trash
 	        for (int i=0; i < 5*poles; i++) {
 	        	double x = rnd.nextGaussian();
-	            for (int j=0; j < poles; i++) {
+	            for (int j=0; j < poles; j++) {
 	                x -= multipliers[j] * values[j];
 	            }
 	            System.arraycopy(values, 0, values, 1, values.length-1);
