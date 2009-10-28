@@ -49,11 +49,7 @@ public class SoundRecorder implements DataSoundListener {
 		javax.media.protocol.DataSource ds = null;
 		try {
 			MediaLocator loc = new MediaLocator("javasound://48000");
-			try {
-				ds=Manager.createDataSource(loc);
-			} catch (NoDataSourceException e) {
-				
-			}
+			ds=Manager.createDataSource(loc);
 			formatControls = ((javax.media.protocol.CaptureDevice)ds).getFormatControls();
 			System.out.println("Format=" + formatControls[0].getFormat());
 		} catch (Exception e) {
