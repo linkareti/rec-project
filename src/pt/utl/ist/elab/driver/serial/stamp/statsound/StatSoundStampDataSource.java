@@ -143,7 +143,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			/** FREQ EXPERIMENT */
 			else if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).startsWith(EXP_2)) {
 				try {
-					Thread.currentThread().sleep(2000);
+					Thread.currentThread().sleep(5000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -183,10 +183,11 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					values[2] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(2).getSelectedScale());
 					values[3] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(3).getSelectedScale());
 
-					if (Math.abs(values[2].getValue().getFloatValue()) > 0.01 && Math.abs(values[3].getValue().getFloatValue()) > 0.01) {
+					if (Math.abs(values[2].getValue().getDoubleValue()) > 0.01d && Math.abs(values[3].getValue().getDoubleValue()) > 0.01d) {
 						System.out.println("Add row : " + values[2].getValue().getFloatValue() + " , " + values[3].getValue().getFloatValue());
 						super.addDataRow(values);
 					}
+					System.out.println("Passed through..." + f);
 
 					setFrequency(f);
 				}
