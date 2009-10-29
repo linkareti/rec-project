@@ -55,6 +55,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	private boolean firstTime = true;
 	private boolean rmsAvailable = false;
+	PhysicsValue[] oldValues = new PhysicsValue[7];
 
 	private SoundRecorder sr = null;
 
@@ -69,10 +70,17 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	public void processDataCommand(StampCommand cmd) {
 		Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering processDataCommand on StatSoundStampDataSource");
 		System.out.println("Entering processDataCommand on StatSoundStampDataSource");
+		System.out.println("EXP:= " + config.getSelectedHardwareParameterValue(TYPE_OF_EXP));
 
 		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			System.out.println("Return from process data...cmd isn't valid");
 			return;
+		}
+
+		if (freqFin < freqIni) {
+			int temp = freqFin;
+			freqFin = freqIni;
+			freqIni = temp;
 		}
 
 		PhysicsValue[] values = new PhysicsValue[7];
@@ -122,14 +130,18 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				values[2] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(2).getSelectedScale());
 				values[3] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(3).getSelectedScale());
 
-				super.addDataRow(values);
+				if (values[0].getValue().getFloatValue() != 0f && values[1].getValue().getFloatValue() != 0f && values[2].getValue().getFloatValue() != 0f
+						&& values[3].getValue().getFloatValue() != 0f) {
+					super.addDataRow(values);
+				}
+				// super.addDataRow(values);
 
 				counter++;
 				if (counter == total_samples)
 					setDataSourceEnded();
 			}
 			/** FREQ EXPERIMENT */
-			else if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).equalsIgnoreCase(EXP_2)) {
+			else if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).startsWith(EXP_2)) {
 				try {
 					Thread.currentThread().sleep(2000);
 				} catch (InterruptedException e) {
@@ -137,6 +149,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					e.printStackTrace();
 				}
 				for (double f = freqIni; f <= freqFin; f += step) {
+					System.out.println("freqIni :" + freqIni + " freqFin :" + freqFin + " step :" + step);
 					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exp2 for loop");
 					if (expEnded) {
 						stopPlaying();
@@ -170,7 +183,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					values[2] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(2).getSelectedScale());
 					values[3] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(3).getSelectedScale());
 
-					super.addDataRow(values);
+					if (Math.abs(values[2].getValue().getFloatValue()) > 0.01 && Math.abs(values[3].getValue().getFloatValue()) > 0.01) {
+						System.out.println("Add row : " + values[2].getValue().getFloatValue() + " , " + values[3].getValue().getFloatValue());
+						super.addDataRow(values);
+					}
 
 					setFrequency(f);
 				}

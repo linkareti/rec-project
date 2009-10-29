@@ -88,6 +88,12 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		freqFin = Integer
 				.parseInt(config
 						.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_END));
+		
+		if (freqFin < freqIni) {
+			int temp = freqFin;
+			freqFin = freqIni;
+			freqIni = temp;
+		}
 
 		typeOfExp = config
 				.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);
