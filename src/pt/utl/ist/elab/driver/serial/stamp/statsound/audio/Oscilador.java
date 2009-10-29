@@ -19,18 +19,18 @@ public class Oscilador extends AudioInputStream {
 	private byte[] m_abData;
 	private int m_nBufferPosition;
 	private long m_lRemainingFrames;
-	
-    private double[] multipliers;
-    private double[] values;
+
+	private double[] multipliers;
+	private double[] values;
 
 	/** Creates a new instance of Oscilador */
 	public Oscilador(float frequencia1, float frequencia2, float amplitude, long lengthInFrames, AudioFormat audioFormat, int type) {
 		super(new ByteArrayInputStream(new byte[0]), new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audioFormat.getSampleRate(), 16, 2, 4, audioFormat.getFrameRate(),
 				audioFormat.isBigEndian()), lengthInFrames);
-		
-		System.out.println("new Oscilador : type=" + type + ", lengthInFrames=" + lengthInFrames + ", bufferLength=" +  lengthInFrames * getFormat().getFrameSize());
 
-		float fAmplitude = (float) (amplitude * Math.pow(2, getFormat().getSampleSizeInBits() - 1));
+		System.out.println("new Oscilador : type=" + type + ", lengthInFrames=" + lengthInFrames + ", bufferLength=" + lengthInFrames * getFormat().getFrameSize());
+
+		float fAmplitude = 0.66f * (float) (amplitude * Math.pow(2, getFormat().getSampleSizeInBits() - 1));
 		// int nPeriodLengthInFrames = Math.round(getFormat().getFrameRate() /
 		// frequencia1);
 		// int nBufferLength = nPeriodLengthInFrames *
@@ -72,53 +72,55 @@ public class Oscilador extends AudioInputStream {
 				m_abData[nBaseAddr + 2] = (byte) (nValue & 0xFF);
 				m_abData[nBaseAddr + 3] = (byte) ((nValue >>> 8) & 0xFF);
 			}
-			
-		// PINK
+
+			// PINK
 		} else if (type == 2) {
-			
+
 			int poles = 5;
 			double alpha = 1.0;
 			multipliers = new double[poles];
 			values = new double[poles];
-			
+
 			Random rnd = new Random();
 
-	        double a = 1;
-	        for (int i=0; i < poles; i++) {
-	            a = (i - alpha/2) * a / (i+1);
-	            multipliers[i] = a;
-	        }
-	        // fill with trash
-	        for (int i=0; i < 5*poles; i++) {
-	        	double x = rnd.nextGaussian();
-	            for (int j=0; j < poles; j++) {
-	                x -= multipliers[j] * values[j];
-	            }
-	            System.arraycopy(values, 0, values, 1, values.length-1);
-	            values[0] = x;
-	        }
-	        
+			double a = 1;
+			for (int i = 0; i < poles; i++) {
+				a = (i - alpha / 2) * a / (i + 1);
+				multipliers[i] = a;
+			}
+			// fill with trash
+			for (int i = 0; i < 5 * poles; i++) {
+				double x = rnd.nextGaussian();
+				for (int j = 0; j < poles; j++) {
+					x -= multipliers[j] * values[j];
+				}
+				System.arraycopy(values, 0, values, 1, values.length - 1);
+				values[0] = x;
+			}
+
 			for (int nFrame = 0; nFrame < nFullLengthInFrames; nFrame++) {
 
-				double x = rnd.nextGaussian();
-		        
-		        for (int i=0; i < poles; i++) {
-		            x -= multipliers[i] * values[i];
-		        }
-		        System.arraycopy(values, 0, values, 1, values.length-1);
-		        values[0] = x;
+				if (nFrame % (Math.round(getFormat().getFrameRate() / frequencia1)) == 0) {
 
-		        float fValue = (float) x;
-						
-				
-				int nValue = Math.round(fValue * fAmplitude);
-				int nBaseAddr = nFrame * getFormat().getFrameSize();
-				m_abData[nBaseAddr + 0] = (byte) (nValue & 0xFF);
-				m_abData[nBaseAddr + 1] = (byte) ((nValue >>> 8) & 0xFF);
-				m_abData[nBaseAddr + 2] = (byte) (nValue & 0xFF);
-				m_abData[nBaseAddr + 3] = (byte) ((nValue >>> 8) & 0xFF);
+					double x = rnd.nextGaussian();
+
+					for (int i = 0; i < poles; i++) {
+						x -= multipliers[i] * values[i];
+					}
+					System.arraycopy(values, 0, values, 1, values.length - 1);
+					values[0] = x;
+
+					float fValue = (float) x;
+
+					int nValue = Math.round(fValue * fAmplitude);
+					int nBaseAddr = nFrame * getFormat().getFrameSize();
+					m_abData[nBaseAddr + 0] = (byte) (nValue & 0xFF);
+					m_abData[nBaseAddr + 1] = (byte) ((nValue >>> 8) & 0xFF);
+					m_abData[nBaseAddr + 2] = (byte) (nValue & 0xFF);
+					m_abData[nBaseAddr + 3] = (byte) ((nValue >>> 8) & 0xFF);
+				}
 			}
-		// PULSE
+			// PULSE
 		} else if (type == 3) {
 			int perFrames = Math.round(audioFormat.getFrameRate() / frequencia1);
 			int perFrames10 = Math.round(perFrames / 10f);
@@ -126,8 +128,7 @@ public class Oscilador extends AudioInputStream {
 			for (int nFrame = 0; nFrame < nFullLengthInFrames; nFrame++) {
 				if (nFrame % perFrames < perFrames10) {
 					fValue = 1f;
-				}
-				else {
+				} else {
 					fValue = 0f;
 				}
 				int nValue = Math.round(fValue * fAmplitude);
