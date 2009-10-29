@@ -134,11 +134,12 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				if (temp != null)
 					values[4] = PhysicsValueFactory.fromInt(temp.intValue(), config.getChannelsConfig(4).getSelectedScale());
 
-				if (values[0].getValue().getFloatValue() != 0f && values[1].getValue().getFloatValue() != 0f && values[2].getValue().getFloatValue() != 0f
-						&& values[3].getValue().getFloatValue() != 0f) {
+				if (Math.abs(values[2].getValue().getDoubleValue()) > 0.01d && Math.abs(values[3].getValue().getDoubleValue()) > 0.01d) {
+					System.out.println("Add row : " + values[2].getValue().getFloatValue() + " , " + values[3].getValue().getFloatValue());
 					super.addDataRow(values);
 				}
-				// super.addDataRow(values);
+				System.out.println("Passed through..." + posValor);
+				super.addDataRow(values);
 
 				counter++;
 				if (counter == total_samples)
@@ -186,7 +187,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					values[1] = PhysicsValueFactory.fromDouble(f, config.getChannelsConfig(1).getSelectedScale());
 					values[2] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(2).getSelectedScale());
 					values[3] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(3).getSelectedScale());
-					values[4] = PhysicsValueFactory.fromInt(temp.intValue(), config.getChannelsConfig(4).getSelectedScale());
+					if (temp != null)
+						values[4] = PhysicsValueFactory.fromInt(temp.intValue(), config.getChannelsConfig(4).getSelectedScale());
 
 					if (Math.abs(values[2].getValue().getDoubleValue()) > 0.01d && Math.abs(values[3].getValue().getDoubleValue()) > 0.01d) {
 						System.out.println("Add row : " + values[2].getValue().getFloatValue() + " , " + values[3].getValue().getFloatValue());
