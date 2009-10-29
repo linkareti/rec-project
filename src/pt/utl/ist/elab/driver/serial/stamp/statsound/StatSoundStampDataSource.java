@@ -133,6 +133,12 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				for (double f = freqIni; f <= freqFin; f += step) {
 					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exp2 for loop");
 					if (expEnded) {
+						try {
+							this.wait(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						stopPlaying();
 						stopAcquiring();
 						setDataSourceEnded();

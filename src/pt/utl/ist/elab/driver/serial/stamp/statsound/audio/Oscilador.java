@@ -30,7 +30,7 @@ public class Oscilador extends AudioInputStream {
 
 		System.out.println("new Oscilador : type=" + type + ", lengthInFrames=" + lengthInFrames + ", bufferLength=" + lengthInFrames * getFormat().getFrameSize());
 
-		float fAmplitude = 0.66f * (float) (amplitude * Math.pow(2, getFormat().getSampleSizeInBits() - 1));
+		float fAmplitude = 0.80f * (float) (amplitude * Math.pow(2, getFormat().getSampleSizeInBits() - 1));
 		// int nPeriodLengthInFrames = Math.round(getFormat().getFrameRate() /
 		// frequencia1);
 		// int nBufferLength = nPeriodLengthInFrames *
