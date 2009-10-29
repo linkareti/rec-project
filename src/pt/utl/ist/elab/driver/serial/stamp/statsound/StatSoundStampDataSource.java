@@ -247,7 +247,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 			values[4] = PhysicsValueFactory.fromInt(tempValor, config.getChannelsConfig(4).getSelectedScale());
 
-			super.addDataRow(values);
+			//super.addDataRow(values);
 			counter++;
 			if (counter == total_samples)
 				setDataSourceEnded();
