@@ -17,7 +17,7 @@ import java.io.*;
 public class SoundThread implements Runnable {
 
 	private static final int EXTERNAL_BUFFER_SIZE = 44100;
-	private float waveSampleRate = 44100.0F; // sampleRate do audio
+	private float waveSampleRate = 11025.0F; //44100.0F; // sampleRate do audio
 	// determina o formato do audio
 	private AudioFormat waveFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveSampleRate, 16, 1, 2, waveSampleRate, false);
 

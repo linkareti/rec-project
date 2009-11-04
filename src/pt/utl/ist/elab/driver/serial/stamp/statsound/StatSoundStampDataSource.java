@@ -50,7 +50,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	private int freqIni = 0;
 	private int freqFin = 0;
 	private int nPoints = 0;
-	
+
 	Integer temp = null;
 
 	private double step = 1;
@@ -67,6 +67,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	public StatSoundStampDataSource() {
 		sr = new SoundRecorder();
 		sr.addDataSoundListener(this);
+		soundPlaying = false;
 	}
 
 	public void processDataCommand(StampCommand cmd) {
@@ -147,6 +148,12 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			}
 			/** FREQ EXPERIMENT */
 			else if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).startsWith(EXP_2)) {
+
+				if (!soundPlaying) {
+					playSinWave(freqIni, freqFin, config.getTotalSamples());
+					soundPlaying = true;
+				}
+
 				try {
 					Thread.currentThread().sleep(5000);
 				} catch (InterruptedException e) {
@@ -157,6 +164,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					System.out.println("freqIni :" + freqIni + " freqFin :" + freqFin + " step :" + step);
 					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exp2 for loop");
 					if (expEnded) {
+						soundPlaying = false;
 						stopPlaying();
 						stopAcquiring();
 						setDataSourceEnded();
@@ -249,14 +257,15 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				e.printStackTrace();
 				return;
 			}
-			//int tempValor = temp.intValue();
+			// int tempValor = temp.intValue();
 
-			//values[4] = PhysicsValueFactory.fromInt(tempValor, config.getChannelsConfig(4).getSelectedScale());
+			// values[4] = PhysicsValueFactory.fromInt(tempValor,
+			// config.getChannelsConfig(4).getSelectedScale());
 
-			//super.addDataRow(values);
-			//counter++;
-			//if (counter == total_samples)
-			//	setDataSourceEnded();
+			// super.addDataRow(values);
+			// counter++;
+			// if (counter == total_samples)
+			// setDataSourceEnded();
 		}
 	}
 
@@ -281,6 +290,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	}
 
 	private SoundThread soundBoard = null;
+	private boolean soundPlaying = false;
 
 	public void playPulseWave(double freq, int time) {
 		System.out.println("Creating a Sound Thread for a pink noise of freq: " + freqIni);
@@ -306,6 +316,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		if (freqIni == 0d)
 			freqIni = freqFin;
 
+		soundPlaying = true;
+
 		System.out.println("Creating a Sound Thread for a sounf of freq: " + freqIni + " to: " + freqFin);
 		soundBoard = new SoundThread(SoundThread.WAVE);
 		soundBoard.newLine();
@@ -329,6 +341,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		if (soundBoard != null) {
 			soundBoard.stopWave();
 		}
+		soundPlaying = false;
 		System.out.println("Trying to stop acquiring!");
 		if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).equalsIgnoreCase(EXP_3)) {
 			return;
@@ -393,6 +406,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	}
 
 	public void stopNow() {
+		soundPlaying = false;
 		expEnded = true;
 		setDataSourceStoped();
 	}
