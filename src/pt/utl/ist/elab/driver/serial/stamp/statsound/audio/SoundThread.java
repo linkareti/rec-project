@@ -117,12 +117,14 @@ public class SoundThread implements Runnable {
 		this.waveFrequency2 = waveFrequency2;
 		this.waveDuration = waveDuration;
 
-		this.length = Math.round(waveSampleRate * this.waveDuration); // length
+		if (waveFrequency2 == 0.0f)
+			this.length = Math.round(waveUltraSampleRate * this.waveDuration); // length
+		else
+			this.length = Math.round(waveSampleRate * this.waveDuration); // length
 		// of
 		// stream
 		// in
 		// frames
-
 	}
 
 	/**
