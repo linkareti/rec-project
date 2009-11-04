@@ -20,7 +20,6 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.StampCommand;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.impl.data.PhysicsValFactory;
 import com.linkare.rec.impl.data.PhysicsValueFactory;
 
 /**
@@ -232,10 +231,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				sr.stopAcquiring();
 				
-				
-				
-				System.out.println("NPOINTS = " + nPoints);
-				System.out.println("LENGTH = " + sr.getAcqBytes().length);
+				//nPoints = 2000;
 				
 				byte[] toSend = new byte[nPoints];
 				byte[] acqByte = sr.getAcqBytes();
@@ -249,12 +245,21 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				if ((startPoint + nPoints) > acqByte.length) {
 					nPoints = acqByte.length / 2;
 				}
+				
+				for (int i = 0; i < Math.round(nPoints/4); i++) {
+					values = new PhysicsValue[7];
+					values[0] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
+					values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
+					values[2] = PhysicsValueFactory.fromDouble(acqByte[i] + acqByte[i+1]*256, config.getChannelsConfig(2).getSelectedScale());
+					values[3] = PhysicsValueFactory.fromDouble(acqByte[i+2] + acqByte[i+3]*256, config.getChannelsConfig(3).getSelectedScale());
+					super.addDataRow(values);
+				}
 
-				System.arraycopy(acqByte, startPoint, toSend, 0, nPoints);
-
-				values[5] = new PhysicsValue(PhysicsValFactory.fromByteArray(toSend, "sound/wav"), null, com.linkare.rec.data.Multiplier.none);
-
-				super.addDataRow(values);
+//				System.arraycopy(acqByte, startPoint, toSend, 0, nPoints);
+//
+//				values[5] = new PhysicsValue(PhysicsValFactory.fromByteArray(toSend, "sound/wav"), null, com.linkare.rec.data.Multiplier.none);
+//
+//				super.addDataRow(values);
 				setDataSourceEnded();
 				expEnded = true;
 			}
