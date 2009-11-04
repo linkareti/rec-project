@@ -18,8 +18,10 @@ public class SoundThread implements Runnable {
 
 	private static final int EXTERNAL_BUFFER_SIZE = 44100;
 	private float waveSampleRate = 11025.0F; //44100.0F; // sampleRate do audio
+	private float waveUltraSampleRate = 44100.0F; // sampleRate do audio
 	// determina o formato do audio
 	private AudioFormat waveFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveSampleRate, 16, 1, 2, waveSampleRate, false);
+	private AudioFormat waveFormatUltra = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, waveUltraSampleRate, 16, 1, 2, waveUltraSampleRate, false);
 
 	private float waveFrequency1; // frequency of the audio wave in Hz
 	private float waveFrequency2; // frequency of the audio wave in Hz
@@ -79,10 +81,10 @@ public class SoundThread implements Runnable {
 				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat, 1);
 				break;
 			case SoundThread.PULSE:
-				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat, 3);
+				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormatUltra, 3);
 				break;
 			case SoundThread.PINK_NOISE:
-				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat, 2);
+				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormatUltra, 2);
 				break;
 			case -1 :
 				System.out.println("NOT DEFINED");
@@ -97,7 +99,10 @@ public class SoundThread implements Runnable {
 
 		try {
 			linha = (SourceDataLine) AudioSystem.getLine(informacao);
-			linha.open(waveFormat);
+			if (soundType == SoundThread.WAVE)
+				linha.open(waveFormat);
+			else
+				linha.open(waveFormatUltra);
 		} catch (LineUnavailableException e) {
 			e.printStackTrace();
 			System.exit(1);

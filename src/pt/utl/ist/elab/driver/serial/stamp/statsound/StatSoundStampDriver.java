@@ -295,7 +295,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			System.out.println("Debug Version 001");
 			
 			if (typeOfExp.equalsIgnoreCase(dataSource.EXP_1)) {
-				dataSource.playSinWave(freqIni, freqIni, 60);
 				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			} else if (typeOfExp.equalsIgnoreCase(dataSource.EXP_2)) {
