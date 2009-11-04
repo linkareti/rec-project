@@ -94,6 +94,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			freqFin = freqIni;
 			freqIni = temp;
 		}
+		
+		
 
 		typeOfExp = config
 				.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);

@@ -217,7 +217,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Inside no expEnded");
 				sr.startAcquiring(true);
 				try {
-					Thread.currentThread().sleep(2000);
+					Thread.currentThread().sleep(800);
 					synchronized (syncWait) {
 						Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering not expEnded syncronized");
 						while (!rmsAvailable && !expEnded) {
@@ -232,9 +232,12 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				sr.stopAcquiring();
 				
-				System.out.println(config.getTotalSamples());
 				
-				byte[] toSend = new byte[config.getTotalSamples() /*nPoints*/];
+				
+				System.out.println("NPOINTS = " + config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS));
+				System.out.println("LENGTH = " + sr.getAcqBytes().length);
+				
+				byte[] toSend = new byte[Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS)) /*nPoints*/];
 				byte[] acqByte = sr.getAcqBytes();
 
 				int startPoint = acqByte.length / 2 - nPoints / 2;
