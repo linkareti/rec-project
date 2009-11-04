@@ -102,6 +102,11 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					return;
 				}
 
+				if (!soundPlaying) {
+					playSinWave(freqIni, freqFin, config.getTotalSamples());
+					soundPlaying = true;
+				}
+				
 				int posValor = pos.intValue();
 
 				try {
@@ -226,6 +231,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				}
 
 				sr.stopAcquiring();
+				
+				System.out.println("nPoints = " + nPoints);
 
 				byte[] toSend = new byte[nPoints];
 				byte[] acqByte = sr.getAcqBytes();
