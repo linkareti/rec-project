@@ -234,10 +234,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				
 				
 				
-				System.out.println("NPOINTS = " + config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS));
+				System.out.println("NPOINTS = " + nPoints);
 				System.out.println("LENGTH = " + sr.getAcqBytes().length);
 				
-				byte[] toSend = new byte[Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS)) /*nPoints*/];
+				byte[] toSend = new byte[nPoints];
 				byte[] acqByte = sr.getAcqBytes();
 
 				int startPoint = acqByte.length / 2 - nPoints / 2;
