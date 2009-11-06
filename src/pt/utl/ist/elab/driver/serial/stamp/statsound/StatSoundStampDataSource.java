@@ -102,7 +102,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				}
 
 				if (!soundPlaying) {
-					playSinWave(freqIni, freqFin, config.getTotalSamples());
+					playSinWave(freqIni, freqFin, config.getTotalSamples(), 0);
 					soundPlaying = true;
 				}
 				
@@ -154,7 +154,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			else if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).startsWith(EXP_2)) {
 
 				if (!soundPlaying) {
-					playSinWave(freqIni, freqFin, config.getTotalSamples());
+					playSinWave(freqIni, freqFin, config.getTotalSamples(), 0);
 					soundPlaying = true;
 				}
 
@@ -248,10 +248,18 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				
 				for (int i = 0; i < Math.round(nPoints/4); i++) {
 					values = new PhysicsValue[7];
+					
+					String string = "";
+					for (int j=0; j < 16; j++) {
+						string = string + " " + Integer.parseInt(String.valueOf(acqByte[i*4+j]), 16);
+					}
+					
+					System.out.println("block " + i + " : " + string);
+					
 					values[0] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
 					values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
-					values[2] = PhysicsValueFactory.fromDouble(acqByte[i*2] + acqByte[i*2+1]*256, config.getChannelsConfig(2).getSelectedScale());
-					values[3] = PhysicsValueFactory.fromDouble(acqByte[i*2+2] + acqByte[i*2+3]*256, config.getChannelsConfig(3).getSelectedScale());
+					values[2] = PhysicsValueFactory.fromDouble(acqByte[i*4] + acqByte[i*4+1]*255, config.getChannelsConfig(2).getSelectedScale());
+					values[3] = PhysicsValueFactory.fromDouble(acqByte[i*4+2] + acqByte[i*4+3]*255, config.getChannelsConfig(3).getSelectedScale());
 					super.addDataRow(values);
 				}
 
@@ -316,7 +324,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		new Thread(soundBoard).start();
 	}
 
-	public void playSinWave(double freqIni, double freqFin, int time) {
+	public void playSinWave(double freqIni, double freqFin, int time, int wait) {
 		if (freqFin == 0d)
 			freqFin = freqIni;
 		if (freqIni == 0d)
@@ -327,7 +335,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		System.out.println("Creating a Sound Thread for a sounf of freq: " + freqIni + " to: " + freqFin);
 		soundBoard = new SoundThread(SoundThread.WAVE);
 		soundBoard.newLine();
-		soundBoard.configure((float) freqIni, (float) freqFin, time, 0);
+		soundBoard.configure((float) freqIni, (float) freqFin, time, wait);
 		soundBoard.newLine();
 		new Thread(soundBoard).start();
 	}
