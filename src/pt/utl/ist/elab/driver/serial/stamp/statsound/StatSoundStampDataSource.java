@@ -251,7 +251,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					
 					String string = "";
 					for (int j=0; j < 16; j++) {
-						string = string + " " + Integer.parseInt(String.valueOf(acqByte[i*4+j]), 16);
+						string = string + " " + acqByte[i*4+j];
 					}
 					
 					System.out.println("block " + i + " : " + string);
