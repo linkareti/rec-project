@@ -258,8 +258,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					
 					values[0] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
 					values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
-					values[2] = PhysicsValueFactory.fromDouble(acqByte[i*4] + (acqByte[i*4+1])*255 + 256, config.getChannelsConfig(2).getSelectedScale());
-					values[3] = PhysicsValueFactory.fromDouble(acqByte[i*4+2] + (acqByte[i*4+3])*255 + 256, config.getChannelsConfig(3).getSelectedScale());
+					values[2] = PhysicsValueFactory.fromDouble( (short) (acqByte[i*4+1] << 8 | (255 & acqByte[i*4])) /*acqByte[i*4] + (acqByte[i*4+1])*255*/, config.getChannelsConfig(2).getSelectedScale());
+					values[3] = PhysicsValueFactory.fromDouble( (short) (acqByte[i*4+1] << 8 | (255 & acqByte[i*4])) /*acqByte[i*4+2] + (acqByte[i*4+3])*255*/, config.getChannelsConfig(3).getSelectedScale());
 					super.addDataRow(values);
 				}
 
