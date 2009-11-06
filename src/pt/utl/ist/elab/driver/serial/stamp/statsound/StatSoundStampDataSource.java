@@ -250,8 +250,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					values = new PhysicsValue[7];
 					
 					String string = "";
-					for (int j=0; j < 100; j++) {
-						string = string + " " + acqByte[i*4+j];
+					for (int j=0; j < 4; j++) {
+						string = string + " *" + i*4+j + "*:" + acqByte[i*4+j];
 					}
 					
 					System.out.println("block " + i + " : " + string);
@@ -264,8 +264,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 						values[3] = PhysicsValueFactory.fromDouble( (short) (acqByte[i*4+3] << 8 | (255 & acqByte[i*4+2])) /*acqByte[i*4+2] + (acqByte[i*4+3])*255*/, config.getChannelsConfig(3).getSelectedScale());
 					//}
 					//else {
-					//	values[3] = PhysicsValueFactory.fromDouble( (short) (acqByte[i+1] << 8 | (255 & acqByte[i])) /*acqByte[i*4] + (acqByte[i*4+1])*255*/, config.getChannelsConfig(2).getSelectedScale());
-					//	values[2] = PhysicsValueFactory.fromDouble( (short) (acqByte[i+3] << 8 | (255 & acqByte[i+2])) /*acqByte[i*4+2] + (acqByte[i*4+3])*255*/, config.getChannelsConfig(3).getSelectedScale());
+					//	values[3] = PhysicsValueFactory.fromDouble( (short) (acqByte[i*4+1] << 8 | (255 & acqByte[i*4])) /*acqByte[i*4] + (acqByte[i*4+1])*255*/, config.getChannelsConfig(2).getSelectedScale());
+					//	values[2] = PhysicsValueFactory.fromDouble( (short) (acqByte[i*4+3] << 8 | (255 & acqByte[i*4+2])) /*acqByte[i*4+2] + (acqByte[i*4+3])*255*/, config.getChannelsConfig(3).getSelectedScale());
 					//}
 					
 					
