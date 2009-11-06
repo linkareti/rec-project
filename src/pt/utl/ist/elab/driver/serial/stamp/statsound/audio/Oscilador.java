@@ -123,7 +123,8 @@ public class Oscilador extends AudioInputStream {
 			// PULSE
 		} else if (type == 3) {
 			System.out.println("#: " + audioFormat.getFrameRate() + " " + frequencia1);
-			int perFrames = Math.round(audioFormat.getFrameRate() / ((float) -1900 + frequencia1 * 15.2f ));
+			//int perFrames = Math.round(audioFormat.getFrameRate() / ((float) -1900 + frequencia1 * 15.2f ));
+			int perFrames = Math.round(audioFormat.getFrameRate() / frequencia1);
 			int perFrames10 = Math.round(perFrames / 10f);
 			float fValue = 0f;
 			for (int nFrame = 0; nFrame < nFullLengthInFrames; nFrame++) {
