@@ -33,7 +33,7 @@ public class PlaySineWave extends javax.swing.JFrame
             	
         		soundBoard = new SoundThread();
         		soundBoard.newLine();
-        		soundBoard.configure(100,2000,2);
+        		soundBoard.configure(100,2000,2,0);
         		soundBoard.newLine();
         		soundBoard.run();
         		

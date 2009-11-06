@@ -33,6 +33,7 @@ public class SoundThread implements Runnable {
 	private SourceDataLine linha = null;
 
 	private int soundType = -1;
+	private int wait;
 
 	/** Creates a new instance of SoundThread */
 	public SoundThread() {
@@ -112,10 +113,11 @@ public class SoundThread implements Runnable {
 		}
 	}// newLine
 
-	public void configure(float waveFrequency1, float waveFrequency2, float waveDuration) {
+	public void configure(float waveFrequency1, float waveFrequency2, float waveDuration, int wait) {
 		this.waveFrequency1 = waveFrequency1;
 		this.waveFrequency2 = waveFrequency2;
 		this.waveDuration = waveDuration;
+		this.wait = wait;
 
 		if (waveFrequency2 == 0.0f)
 			this.length = Math.round(waveUltraSampleRate * this.waveDuration); // length

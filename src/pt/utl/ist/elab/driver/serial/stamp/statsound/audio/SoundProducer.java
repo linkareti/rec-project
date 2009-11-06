@@ -89,7 +89,7 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 
     		soundBoard = new SoundThread();
     		soundBoard.newLine();
-    		soundBoard.configure((float) freq,(float)freq,15);
+    		soundBoard.configure((float) freq,(float)freq,15,0);
     		soundBoard.newLine();
     		soundBoard.run();
 			
