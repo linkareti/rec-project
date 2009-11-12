@@ -17,9 +17,12 @@
             <display toolTipBundleKey="ReCExpRadio$rec.exp.display.radio.tip.sensor" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpRadio$rec.exp.display.radio.title.sensor" classLocationBundleKey="ReCExpRadio$rec.exp.display.radio.loc.sensor" visible="true" selected="true" order="0" enabled="false" connected="false"/>
             <display toolTipBundleKey="ReCExpRadio$rec.exp.display.radio.tip.1" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpRadio$rec.exp.display.radio.title.1" classLocationBundleKey="ReCExpRadio$rec.exp.display.radio.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
             <display toolTipBundleKey="ReCExpRadio$rec.exp.display.radio.tip.2" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpRadio$rec.exp.display.radio.title.2" classLocationBundleKey="ReCExpRadio$rec.exp.display.radio.loc.2" visible="true" selected="true" order="0" enabled="false" connected="false"/>
-            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
-            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
-            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <WebResource locationBundleKey="ReCExpRadio$rec.exp.url.radio.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpRadio$rec.exp.url.radio.title.1"
+                 toolTipLocationBundleKey="ReCExpRadio$rec.exp.url.radio.title.1"
+                 internalBrowser="false"
+                 order="1"/>
         </apparatus>
         <apparatus toolTipBundleKey="ReCExpScuba$rec.exp.tip.scuba" location="ELAB_SCUBA_STAMP_V02" iconLocationBundleKey="ReCExpScuba$rec.exp.icon.scuba" headerDisplayClassLocationBundleKey="" displayStringBundleKey="ReCExpScuba$rec.exp.title.scuba" descriptionStringBundleKey="ReCExpScuba$rec.exp.description.scuba" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="ReCExpScuba$rec.exp.background.scuba" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="ReCExpScuba$rec.exp.customizer.scuba" visible="true" selected="true" order="0" enabled="false" connected="false">
             <defaultAcquisitionConfig toolTipBundleKey="ReCExpScuba$rec.exp.dftcfg.scuba.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize" displayStringBundleKey="ReCExpScuba$rec.exp.dftcfg.scuba.title.1" classLocationBundleKey="ReCExpScuba$rec.exp.dftcfg.scuba.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
