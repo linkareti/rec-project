@@ -16,6 +16,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
@@ -82,6 +83,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 			lblApparatusImg.setIcon(ReCResourceBundle.findImageIconOrDefault(desktopLocationBundleKey, new ImageIcon()));
 			txtApparatusDescription.setText(ReCResourceBundle.findString(descriptionStringBundleKey));
 			btnLink.setVisible(webResourceLocation != null);
+			log.info(webResourceLocation);
 			btnLink.setActionCommand(webResourceLocation);
 
 		}
@@ -181,11 +183,9 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 					uri = new URI(actionCommand);
 					desktop.browse(uri);
 				} catch (URISyntaxException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					log.log(Level.SEVERE, "Invalid URL.", e);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					log.log(Level.SEVERE, "User browser not found.", e);
 				}
 				
 			}

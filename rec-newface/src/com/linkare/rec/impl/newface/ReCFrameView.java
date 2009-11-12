@@ -10,7 +10,6 @@ import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State
 import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State.RED;
 import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State.YELLOW;
 
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -85,8 +84,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private long millisToLockSuccess;
 
-	private Desktop desktop;
-
 	public ReCFrameView(SingleFrameApplication app) {
 		super(app);
 
@@ -132,14 +129,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 				apparatusLockTimerTick();
 			}
 		});
-
-		// Init desktop access
-		// Before more Desktop API is used, first check 
-		// whether the API is supported by this particular 
-		// virtual machine (VM) on this particular host.
-		if (Desktop.isDesktopSupported()) {
-			desktop = Desktop.getDesktop();
-		}
 
 		// Hide bottom status pane
 		statusPanel.setVisible(false);
