@@ -11,22 +11,24 @@ import com.linkare.rec.impl.newface.utils.ZipExtractor;
 import com.sun.jna.Platform;
 
 /**
- * Classe que faz todo o setup inicial do módulo de vídeo, extraindo as libs nativas necessárias para o filesystem, de
- * forma independente do Sistema Operativo e carregando-as de acordo com as dependências.
- * 
+ * Classe que faz todo o setup inicial do módulo de vídeo, extraindo
+ * as libs nativas necessárias para o filesystem, de forma independente do
+ * Sistema Operativo e carregando-as de acordo com as dependências.
  * @author bcatarino
  */
 public class MediaSetup {
 
-	private static final Logger log = Logger.getLogger(VideoViewerController.class.getName());
+    private static final Logger log =
+            Logger.getLogger(VideoViewerController.class.getName());
 
 	/**
-	 * Efectua todo o setup inicial da aplicação relacionada com o módulo de vídeo, que inclui:
-	 * <ul>
-	 * <li>Load das bibliotecas nativas distribuídas juntamente com a aplicação e que são necessárias ao funcionamento
-	 * do módulo de vídeo, pela ordem de dependências correcta</li>
-	 * <li>Extracção dos plugins necessários ao funcionamento do vídeo para uma directoria do filesystem.</li>
-	 * </ul>
+     * Efectua todo o setup inicial da aplicação relacionada com o módulo de
+     * vídeo, que inclui: <ul>
+     * <li> Load das bibliotecas nativas distribuídas juntamente com a
+     * aplicação e que são necessárias ao funcionamento do módulo de vídeo,
+     * pela ordem de dependências correcta </li>
+     * <li> Extracção dos plugins necessários ao funcionamento do vídeo para
+     * uma directoria do filesystem. </li> </ul>
 	 */
 	public static void setup() {
 
@@ -142,14 +144,16 @@ public class MediaSetup {
 	}
 
 	/**
-	 * Devolve um conjunto de parâmetros de configuração do VLC que permite fazer uma inicialização por default. Deve
-	 * ter a system property <b>vlc.plugins.destdir</b> definida com um path relativo, cuja root será a user.home.
-	 * 
+     * Devolve um conjunto de parâmetros de configuração do VLC que permite
+     * fazer uma inicialização por default. Deve ter a system property
+     * <b>vlc.plugins.destdir</b> definida com um path relativo, cuja root será
+     * a user.home.
 	 * @return
 	 */
 	public static String[] getDefaultMediaParameters() {
 
-		File pluginsDir = new File(System.getProperty("user.home"), System.getProperty("vlc.plugins.destdir"));
+        File pluginsDir = new File(System.getProperty("user.home"),
+                System.getProperty("vlc.plugins.destdir"));
 
 		log.fine("Plugins Path = " + pluginsDir.getAbsolutePath());
 

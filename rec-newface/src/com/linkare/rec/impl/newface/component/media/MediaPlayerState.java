@@ -13,6 +13,9 @@ public enum MediaPlayerState {
 	// O Player está parado.
 	STOPPED,
 
+    // O player parou de reproduzir porque não recebeu mais streams.
+    STOPPED_BY_NO_MORE_ES,
+    
 	// O Player está a reproduzir.
 	PLAYING,
 

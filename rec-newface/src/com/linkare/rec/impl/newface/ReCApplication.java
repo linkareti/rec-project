@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventObject;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -93,6 +94,7 @@ import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
 import com.linkare.rec.impl.newface.component.media.MediaSetup;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
+import com.linkare.rec.impl.newface.component.media.events.MediaNotConnectedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
 import com.linkare.rec.impl.newface.config.Apparatus;
@@ -136,7 +138,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	/**
-	 * Initializes the mediaController with default parameters for vlc, if it hasn't been initialized yet.
+     * Initializes the mediaController with default parameters for vlc, if it
+     * hasn't been initialized yet.
 	 */
 	private void initializeMediaController() {
 
@@ -153,8 +156,9 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				}
 
 				@Override
-				public void notConnected(MediaStoppedEvent evt) {
+                public void notConnected(MediaNotConnectedEvent evt) {
 					log.fine("Handling not connected!!!!!!!");
+                    playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
 					//TODO em streaming, não se conectou porque deixou de receber ESs. Deve começar de novo, n fazer nd ou mostrar msg ao utilizador?
 				}
 
@@ -169,15 +173,14 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	/**
 	 * Plays the media identified by the given mrl.
-	 * 
-	 * @param mrl
-	 *            URL for the media to play.
+     * @param mrl URL for the media to play.
 	 */
 	public void playMedia(String mrl) {
 
 		log.info("Playing media: " + mrl);
 		if (mrl.equals("")) {
-			log.info("There is not a valid media to play for this " + "experience. Proceding without video.");
+            log.info("There is not a valid media to play for this " +
+                    "experience. Proceding without video.");
 			return;
 		}
 

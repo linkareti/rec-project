@@ -14,7 +14,7 @@ public interface MediaApplicationEventListener extends EventListener {
 	 * 
 	 * @param evt
 	 */
-	void notConnected(MediaStoppedEvent evt);
+    void notConnected(MediaNotConnectedEvent evt);
 
 	void stopped(MediaStoppedEvent evt);
 

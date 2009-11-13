@@ -1,5 +1,17 @@
 package com.linkare.rec.impl.newface.component;
 
+import com.linkare.rec.impl.newface.ReCApplication;
+import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
+import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
+import com.linkare.rec.impl.newface.component.media.transcoding.AudioCodecs;
+import com.linkare.rec.impl.newface.component.media.transcoding.Muxers;
+import com.linkare.rec.impl.newface.component.media.transcoding.TranscodingConfig;
+import com.linkare.rec.impl.newface.component.media.transcoding.VideoCodecs;
+import com.linkare.rec.impl.newface.component.media.VideoViewerController;
+import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEventListener;
+import com.linkare.rec.impl.newface.component.media.MediaSetup;
+import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
+import com.linkare.rec.impl.newface.component.media.events.MediaNotConnectedEvent;
 import java.awt.Window;
 import java.io.File;
 import java.text.DateFormat;
@@ -79,23 +91,30 @@ public class TestMediaPane extends AbstractContentPane {
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup().addContainerGap().addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jLabel1).addComponent(vbox,
-								javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(50, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup().addContainerGap().addComponent(jLabel1).addPreferredGap(
-								javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(vbox,
-								javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(328, Short.MAX_VALUE)));
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(vbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(vbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(328, Short.MAX_VALUE))
+        );
 
 		this.add(vbox);
 		controller.addMediaApplicationEventListener(new MediaApplicationEventListener() {
 
 			@Override
-			public void notConnected(MediaStoppedEvent evt) {
+            public void notConnected(MediaNotConnectedEvent evt) {
 				slider.setValue(0);
 			}
 
@@ -247,8 +266,9 @@ public class TestMediaPane extends AbstractContentPane {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				String formatedDate = DateFormat.getDateInstance(DateFormat.LONG).format(new Date());
-				String userHome = System.getProperty("user.home") + File.separator + ".eLab" + File.separator + "screeshots"
-						+ File.separator;
+                String userHome = System.getProperty("user.home") 
+                        + File.separator + ".eLab"
+                        + File.separator + "screeshots" + File.separator;
 				controller.captureScreen(userHome + "Pic" + formatedDate + ".png", 800, 600);
 			}
 		});
@@ -275,8 +295,10 @@ public class TestMediaPane extends AbstractContentPane {
 					config.setAudioCodec(AudioCodecs.MPGA);
 					config.setAudioBitrate(128);
 					config.setSoundChannels(2);
-					controller.streamToFile(config, System.getProperty("user.home") + File.separator + ".eLab" + File.separator
-							+ "savedExperiences" + File.separator + "myVideo.avi");
+                    controller.streamToFile(config, System.getProperty("user.home")
+                        + File.separator + ".eLab"
+                        + File.separator + "savedExperiences"
+                        + File.separator + "myVideo.avi");
 				} else
 					controller.stopStreaming();
 
@@ -368,8 +390,10 @@ public class TestMediaPane extends AbstractContentPane {
 					config.setAudioCodec(AudioCodecs.MPGA);
 					config.setAudioBitrate(128);
 					config.setSoundChannels(2);
-					controller.setMediaToPlay(tf.getText(), config, System.getProperty("user.home") + File.separator + ".eLab"
-							+ File.separator + "savedExperiences" + File.separator + "myVideo.mp4");
+                    controller.setMediaToPlay(tf.getText(), config, System.getProperty("user.home")
+                        + File.separator + ".eLab"
+                        + File.separator + "savedExperiences"
+                        + File.separator + "myVideo.mp4");
 				} else {
 					controller.setMediaToPlay(tf.getText());
 				}

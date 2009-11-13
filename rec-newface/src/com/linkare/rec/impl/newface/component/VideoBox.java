@@ -27,9 +27,26 @@ public class VideoBox extends AbstractContentPane {
 	}
 
 	/**
-	 * Creates the video canvas where the video will be displayed and adds the component to the VideoBox.
+     * Creates the video canvas where the video will be displayed and adds the
+     * component to the VideoBox. 
 	 */
 	public void initializeVideoOutput() {
+
+        //Bruno inicializar sempre 1 canvas novo 
+        videoCanvas = new java.awt.Canvas();
+        videoPanel.add(videoCanvas);
+//        videoCanvas.setBackground(org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(VideoBox.class).getColor("videoCanvas.background")); // NOI18N
+//        videoCanvas.setName("videoCanvas"); // NOI18N
+//        javax.swing.GroupLayout videoPanelLayout = new javax.swing.GroupLayout(videoPanel);
+//        videoPanel.setLayout(videoPanelLayout);
+//        videoPanelLayout.setHorizontalGroup(
+//            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addComponent(videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+//        );
+//        videoPanelLayout.setVerticalGroup(
+//            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addComponent(videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+//        );
 
 		videoCanvas.setSize(videoPanel.getWidth(), videoPanel.getHeight());
 		videoCanvas.setVisible(true);
@@ -37,17 +54,20 @@ public class VideoBox extends AbstractContentPane {
 	}
 
 	/**
-	 * Remove the Canvas from the UI when not needed.
+     * Remove the Canvas from the UI when not needed. This should happen to
+     * avoid the component lock by native JVC.
 	 */
 	public void destroyVideoOutput() {
 
-		videoCanvas.setVisible(false);
+        videoPanel.remove(videoCanvas);
+        videoCanvas = null;
+//        videoCanvas.setVisible(false);
 	}
 
 	/**
-	 * Returns the component where the video will be displayed. The return of this method can be null, so a check for
-	 * null is needed after invocation.
-	 * 
+     * Returns the component where the video will be displayed. The return
+     * of this method can be null, so a check for null is needed after
+     * invocation.
 	 * @return
 	 */
 	public Canvas getVideoOutput() {
@@ -56,7 +76,6 @@ public class VideoBox extends AbstractContentPane {
 
 	/**
 	 * Resizes the VideoOutput.
-	 * 
 	 * @param width
 	 * @param height
 	 */
@@ -82,34 +101,47 @@ public class VideoBox extends AbstractContentPane {
 		setName("Form"); // NOI18N
 
 		lblVideo.setFont(lblVideo.getFont().deriveFont(lblVideo.getFont().getStyle() | java.awt.Font.BOLD, 11));
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
-				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(VideoBox.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(VideoBox.class);
 		lblVideo.setText(resourceMap.getString("lblVideo.text")); // NOI18N
 		lblVideo.setName("lblVideo"); // NOI18N
 
 		videoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(null));
 		videoPanel.setName("videoPanel"); // NOI18N
 
+        videoCanvas.setBackground(resourceMap.getColor("videoCanvas.background")); // NOI18N
 		videoCanvas.setName("videoCanvas"); // NOI18N
 
 		javax.swing.GroupLayout videoPanelLayout = new javax.swing.GroupLayout(videoPanel);
 		videoPanel.setLayout(videoPanelLayout);
-		videoPanelLayout.setHorizontalGroup(videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE));
-		videoPanelLayout.setVerticalGroup(videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE));
+        videoPanelLayout.setHorizontalGroup(
+            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+        );
+        videoPanelLayout.setVerticalGroup(
+            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+        );
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup().addContainerGap().addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(videoPanel,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(
-								lblVideo)).addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup().addContainerGap().addComponent(lblVideo).addPreferredGap(
-						javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblVideo))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblVideo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(videoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 	}// </editor-fold>//GEN-END:initComponents
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

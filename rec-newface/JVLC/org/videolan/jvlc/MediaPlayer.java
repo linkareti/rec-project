@@ -216,20 +216,18 @@ public class MediaPlayer
             return;
         }
         try {
+            detachCallbacks();
+        } catch (Throwable e) {
+            //TODO tratar excepção correctamente
+            e.printStackTrace();
+        }
+        try {
             libvlc.libvlc_media_player_release(instance);
         } catch (Throwable e) {
             //TODO tratar excepção correctamente
             e.printStackTrace();
         }
         released = true;
-        try {
-            detachCallbacks();
-        } catch (Throwable e) {
-            //TODO tratar excepção correctamente
-            e.printStackTrace();
-        }
-        
-        
     }
 
     /**
