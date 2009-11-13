@@ -20,7 +20,6 @@
         <jar href="lib/appframework-1.0.3.jar"/>
         <jar href="lib/swing-worker-1.1.jar"/>
         <jar href="lib/swingx.jar"/>
-        <jar href="lib/ReC.jar"/>
         <jar href="lib/openorb_orb-1.4.0.jar"/>
         <jar href="lib/openorb_orb_omg-1.4.0.jar"/>
         <jar href="lib/openorb_ots-1.4.0.jar"/>
@@ -41,6 +40,13 @@
         <jar href="lib/tools-1.4.0.jar"/>
         <jar href="lib/xercesImpl.jar"/>
         <jar href="lib/xml-apis.jar"/>
+        <jar href="lib/ReCClient.jar"/>
+        <jar href="lib/ReCCommon.jar"/>
+        <jar href="lib/ReCHardwareServer.jar"/>
+        <jar href="lib/ReCMulticastController.jar"/>
+        <jar href="lib/scubaClient.jar"/>
+        <jar href="lib/radioactividadeClient.jar"/>
+        <jar href="lib/conducaocalorClient.jar"/>
 
 <!--${JNLP.RESOURCES.EXTENSIONS}-->
         <extension name="OpenORBClient" href="openORB/OpenORBClient.jnlp" />
@@ -49,7 +55,7 @@
         <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
         <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
         <!-- change this value to disable video -->
-        <property name="video.development.enabled" value="no"/>
+        <property name="video.development.enabled" value="yes"/>
     </resources>
 
     <!-- *******************************************************************
