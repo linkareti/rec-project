@@ -111,7 +111,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				//}
 
 				// EXP_1 does not vary on frequency but only on piston distance
-				playSinWave(freqIni, freqFin, 200, 0);
+				SoundThread th = playSinWave(freqIni, freqIni, 200, 0);
 				sr.startAcquiring(true);
 				try {
 					Thread.currentThread().sleep(100);
@@ -119,6 +119,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					e.printStackTrace();
 				}
 				sr.stopAcquiring();
+				th.stopWave();
 				
 				
 				
@@ -247,7 +248,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				sr.stopAcquiring();
 				
-				nPoints = 2000;
+				nPoints = 200;
 				
 				byte[] toSend = new byte[nPoints];
 				byte[] acqByte = sr.getAcqBytes();
@@ -349,7 +350,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		new Thread(soundBoard).start();
 	}
 
-	public void playSinWave(double freqIni, double freqFin, int time, int wait) {
+	public SoundThread playSinWave(double freqIni, double freqFin, int time, int wait) {
 		if (freqFin == 0d)
 			freqFin = freqIni;
 		if (freqIni == 0d)
@@ -363,6 +364,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		soundBoard.configure((float) freqIni, (float) freqFin, time, wait);
 		soundBoard.newLine();
 		new Thread(soundBoard).start();
+		return soundBoard;
 	}
 
 	public void stopPlaying() {
