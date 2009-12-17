@@ -69,6 +69,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		soundPlaying = false;
 	}
 
+	@SuppressWarnings("static-access")
 	public void processDataCommand(StampCommand cmd) {
 		Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering processDataCommand on StatSoundStampDataSource");
 		System.out.println("Entering processDataCommand on StatSoundStampDataSource");
@@ -90,8 +91,11 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Inside processDataCommand using " + cmd.getCommandIdentifier());
 
 		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
+			// receiving POS message ;)
+			
 			/** PISTON EXPERIMENT */
 			if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).equalsIgnoreCase(EXP_1)) {
+				
 				Integer pos;
 				try {
 					pos = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
@@ -101,35 +105,48 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					return;
 				}
 
-				if (!soundPlaying) {
-					playSinWave(freqIni, freqFin, config.getTotalSamples(), 0);
-					soundPlaying = true;
+				//if (!soundPlaying) {
+					//playSinWave(freqIni, freqFin, config.getTotalSamples(), 0);
+				//	soundPlaying = true;
+				//}
+
+				// EXP_1 does not vary on frequency but only on piston distance
+				playSinWave(freqIni, freqFin, 200, 0);
+				sr.startAcquiring(true);
+				try {
+					Thread.currentThread().sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
+				sr.stopAcquiring();
+				
+				
 				
 				int posValor = pos.intValue();
 
-				try {
-					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos1");
-					synchronized (syncWait) {
-						Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos2");
-						long time1 = System.currentTimeMillis();
-						Thread.currentThread().sleep(200);
-
-						while (!rmsAvailable && !expEnded) {
-							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos3");
-							syncWait.wait();
-						}
-						long time2 = System.currentTimeMillis();
-
-						System.out.println("Waited:" + (time2 - time1));
-						rmsAvailable = false;
-					}
-					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos4");
-				} catch (InterruptedException ie) {
-				}
+//				try {
+//					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos1");
+//					synchronized (syncWait) {
+//						Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos2");
+//						long time1 = System.currentTimeMillis();
+//						Thread.currentThread().sleep(200);
+//
+//						while (!rmsAvailable && !expEnded) {
+//							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos3");
+//							syncWait.wait();
+//						}
+//						long time2 = System.currentTimeMillis();
+//
+//						System.out.println("Waited:" + (time2 - time1));
+//						rmsAvailable = false;
+//					}
+//					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos4");
+//				} catch (InterruptedException ie) {
+//				}
 
 				double rmsLeftValor = sr.getRMS(sr.LEFT_CHANNEL);
-				double rmsRightValor = sr.getRMS(sr.RIGHT_CHANNEL);
+				double rmsRightValor = sr.getRMS(sr.RIGHT_CHANNEL);					
+				
 				sr.resetRMS();
 
 				values[0] = PhysicsValueFactory.fromInt(posValor, config.getChannelsConfig(0).getSelectedScale());
@@ -161,7 +178,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				try {
 					Thread.currentThread().sleep(5000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				for (double f = freqIni; f <= freqFin; f += step) {

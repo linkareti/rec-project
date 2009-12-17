@@ -59,8 +59,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	private double step = 0;
 
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info)
-			throws WrongConfigurationException {
+	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
 
 		fireIDriverStateListenerDriverConfiguring();
 
@@ -74,31 +73,21 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 		nSamples = 0;
 
-		typeOfExp = config
-				.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);
+		typeOfExp = config.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);
 
-		String posIni = config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.POS_INIT_STR);
-		String posFin = config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.POS_FIN_STR);
+		String posIni = config.getSelectedHardwareParameterValue(StampConfigTranslator.POS_INIT_STR);
+		String posFin = config.getSelectedHardwareParameterValue(StampConfigTranslator.POS_FIN_STR);
 
-		freqIni = Integer
-				.parseInt(config
-						.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_INI));
-		freqFin = Integer
-				.parseInt(config
-						.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_END));
-		
+		freqIni = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_INI));
+		freqFin = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_END));
+
 		if (freqFin < freqIni) {
 			int temp = freqFin;
 			freqFin = freqIni;
 			freqIni = temp;
 		}
-		
-		
 
-		typeOfExp = config
-				.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);
+		typeOfExp = config.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);
 		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_1)) {
 			/** This are the stamp n Samples... */
 			nSamples = config.getTotalSamples();
@@ -108,8 +97,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		}
 
 		if (config.getTotalSamples() != 1) {
-			step = Math.abs((double) (freqIni - freqFin))
-					/ ((double) (config.getTotalSamples() - 1));
+			step = Math.abs((double) (freqIni - freqFin)) / ((double) (config.getTotalSamples() - 1));
 			System.out.println("Step=" + step);
 		} else {
 			/** Step needs to be bigger than 1 to get out of the for cycle */
@@ -117,14 +105,10 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			freqIni = freqFin;
 		}
 
-		waveForm = Integer
-				.parseInt(config
-						.getSelectedHardwareParameterValue(StatSoundStampDataSource.WAVE_FORM));
+		waveForm = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.WAVE_FORM));
 
 		try {
-			nPoints = Integer
-					.parseInt(config
-							.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS));
+			nPoints = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS));
 		} catch (NumberFormatException e) {
 			System.out.println("nPoint throw an exception");
 			nPoints = 50;
@@ -132,49 +116,33 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 		stampConfig = new StampCommand(CONFIG_OUT_STRING);
 
-		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR,
-				new Integer(nSamples));
+		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(nSamples));
 
 		this.posIni = Integer.parseInt(posIni);
 
-		stampConfig.addCommandData(StampConfigTranslator.POS_INIT_STR,
-				new Integer(posIni));
+		stampConfig.addCommandData(StampConfigTranslator.POS_INIT_STR, new Integer(posIni));
 
-		stampConfig.addCommandData(StampConfigTranslator.POS_FIN_STR,
-				new Integer(posFin));
+		stampConfig.addCommandData(StampConfigTranslator.POS_FIN_STR, new Integer(posFin));
 
-		stampConfig
-				.addCommandData(
-						StampConfigTranslator.STATUS_STR,
-						new String(
-								config
-										.getSelectedHardwareParameterValue(StampConfigTranslator.STATUS_STR)));
+		stampConfig.addCommandData(StampConfigTranslator.STATUS_STR, new String(config.getSelectedHardwareParameterValue(StampConfigTranslator.STATUS_STR)));
 
-		stampConfig
-				.addCommandData(
-						StampConfigTranslator.RESET_STR,
-						new Integer(
-								config
-										.getSelectedHardwareParameterValue(StampConfigTranslator.RESET_STR)));
+		stampConfig.addCommandData(StampConfigTranslator.RESET_STR, new Integer(config.getSelectedHardwareParameterValue(StampConfigTranslator.RESET_STR)));
 
-		StampTranslator translator = StampTranslatorProcessorManager
-				.getTranslator(stampConfig);
+		StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig))
-			throw new WrongConfigurationException(
-					"Cannot translate StampCommand!", -1);
+			throw new WrongConfigurationException("Cannot translate StampCommand!", -1);
 
 		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_2)) {
 			config.setTotalSamples(config.getTotalSamples() + 1);
 		} else {
 			config.setTotalSamples(config.getTotalSamples() + 2); // +2 for temp
-																	// ini and
-																	// temp
-																	// final
+			// ini and
+			// temp
+			// final
 		}
 
 		for (int i = 0; i < config.getChannelsConfig().length; i++) {
-			config.getChannelsConfig(i).setTotalSamples(
-					config.getTotalSamples());
+			config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
 		}
 		this.config = config;
 
@@ -187,9 +155,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	public Object getHardwareInfo() {
 		String baseHardwareInfoFile = "recresource://pt/utl/ist/elab/driver/serial/stamp/statsound/StatSoundHardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System
-				.getProperty("eLab.StatSound.HardwareInfo"),
-				baseHardwareInfoFile);
+		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab.StatSound.HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
@@ -197,14 +163,11 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		try {
 			url = ReCProtocols.getURL(prop);
 		} catch (java.net.MalformedURLException e) {
-			LoggerUtil.logThrowable("Unable to load resource: " + prop, e,
-					Logger.getLogger(STAMP_DRIVER_LOGGER));
+			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(STAMP_DRIVER_LOGGER));
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: "
-						+ baseHardwareInfoFile, e2, Logger
-						.getLogger(STAMP_DRIVER_LOGGER));
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger.getLogger(STAMP_DRIVER_LOGGER));
 			}
 		}
 		System.out.println("Returning url=" + url);
@@ -222,11 +185,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 	protected void loadExtraCommandHandlers() {
 		String packageName = getClass().getPackage().getName() + ".";
-		StampTranslatorProcessorManager
-				.initStampProcessorsTranslators(new String[] {
-						packageName + "processors.StampStatSoundProcessor",
-						packageName + "processors.StampStatSoundTempProcessor",
-						packageName + "translators.StampConfigTranslator", });
+		StampTranslatorProcessorManager.initStampProcessorsTranslators(new String[] { packageName + "processors.StampStatSoundProcessor", packageName + "processors.StampStatSoundTempProcessor",
+				packageName + "translators.StampConfigTranslator", });
 	}
 
 	public void processCommand(StampCommand cmd) {
@@ -235,17 +195,12 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		// " processado por " + cmd.getProcessor().toString());
 
 		if (cmd == null || cmd.getCommandIdentifier() == null) {
-			Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,
-					"Can not interpret command " + cmd);
+			Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Can not interpret command " + cmd);
 			return;
 		}
 
 		if (cmd.getCommandIdentifier().equals(ID_STR)) {
-			if (dataSource != null
-					&& !dataSource.isExpEnded()
-					&& !config.getSelectedHardwareParameterValue(
-							dataSource.TYPE_OF_EXP).equalsIgnoreCase(
-							dataSource.EXP_1)) {
+			if (dataSource != null && !dataSource.isExpEnded() && !config.getSelectedHardwareParameterValue(dataSource.TYPE_OF_EXP).equalsIgnoreCase(dataSource.EXP_1)) {
 				System.out.println("Returning");
 				return;
 			}
@@ -277,8 +232,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 				fireIDriverStateListenerDriverReseting();
 				fireIDriverStateListenerDriverReseted();
 			}
-		} else if (cmd.getCommandIdentifier().equals(
-				StampStartProcessor.COMMAND_IDENTIFIER)) {
+		} else if (cmd.getCommandIdentifier().equals(StampStartProcessor.COMMAND_IDENTIFIER)) {
 			started = true;
 
 			for (int i = 0; i < config.getChannelsConfig().length; i++) {
@@ -293,9 +247,9 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			dataSource.setFreqStep(step);
 			dataSource.setNPoints(nPoints);
 			dataSource.setFirstTime(true);
-			
+
 			System.out.println("Debug Version 001");
-			
+
 			if (typeOfExp.equalsIgnoreCase(dataSource.EXP_1)) {
 				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
@@ -303,7 +257,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			} else {
-				//dataSource.setWaveForm(waveForm);
+				// dataSource.setWaveForm(waveForm);
 				System.out.println("Running waveform : " + waveForm);
 				if (waveForm == 0)
 					dataSource.playPinkNoise(freqIni, 15, 2000);
@@ -317,13 +271,11 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			if (dataSource != null) {
 				// dataSource.setRunning(true);
 			}
-		} else if (cmd.getCommandIdentifier().equals(
-				StampConfiguredProcessor.COMMAND_IDENTIFIER)) {
+		} else if (cmd.getCommandIdentifier().equals(StampConfiguredProcessor.COMMAND_IDENTIFIER)) {
 			// OK to go... - still gonna receive start...!
 		}
 
-		else if (cmd.getCommandIdentifier().equals(
-				StampNotConfiguredProcessor.COMMAND_IDENTIFIER)) {
+		else if (cmd.getCommandIdentifier().equals(StampNotConfiguredProcessor.COMMAND_IDENTIFIER)) {
 			if (waitingStart && wroteStart) {
 				waitingStart = false;
 				fireIDriverStateListenerDriverStoped();
@@ -372,14 +324,13 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 		waitingStart = true;
 
-		WaitForConditionResult.waitForConditionTrue(
-				new AbstractConditionDecisor() {
-					public int getConditionResult() {
-						if (!waitingStart)
-							return IConditionDecisor.CONDITION_MET_TRUE;
+		WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
+			public int getConditionResult() {
+				if (!waitingStart)
+					return IConditionDecisor.CONDITION_MET_TRUE;
 
-						return IConditionDecisor.CONDITION_NOT_MET;
-					}
-				}, 400000, 1000);
+				return IConditionDecisor.CONDITION_NOT_MET;
+			}
+		}, 400000, 1000);
 	}
 }
