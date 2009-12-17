@@ -105,45 +105,45 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					return;
 				}
 
-				//if (!soundPlaying) {
-					//playSinWave(freqIni, freqFin, config.getTotalSamples(), 0);
-				//	soundPlaying = true;
-				//}
-
-				// EXP_1 does not vary on frequency but only on piston distance
-				SoundThread th = playSinWave(freqIni, freqIni, 200, 0);
-				sr.startAcquiring(true);
-				try {
-					Thread.currentThread().sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				if (!soundPlaying) {
+					playSinWave(freqIni, freqFin, config.getTotalSamples(), 0);
+					soundPlaying = true;
 				}
-				sr.stopAcquiring();
-				th.stopWave();
-				
+
+//				// EXP_1 does not vary on frequency but only on piston distance
+//				SoundThread th = playSinWave(freqIni, freqIni, 200, 0);
+//				sr.startAcquiring(true);
+//				try {
+//					Thread.currentThread().sleep(100);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//				sr.stopAcquiring();
+//				th.stopWave();
+//				
 				
 				
 				int posValor = pos.intValue();
 
-//				try {
-//					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos1");
-//					synchronized (syncWait) {
-//						Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos2");
-//						long time1 = System.currentTimeMillis();
-//						Thread.currentThread().sleep(200);
-//
-//						while (!rmsAvailable && !expEnded) {
-//							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos3");
-//							syncWait.wait();
-//						}
-//						long time2 = System.currentTimeMillis();
-//
-//						System.out.println("Waited:" + (time2 - time1));
-//						rmsAvailable = false;
-//					}
-//					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos4");
-//				} catch (InterruptedException ie) {
-//				}
+				try {
+					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos1");
+					synchronized (syncWait) {
+						Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos2");
+						long time1 = System.currentTimeMillis();
+						Thread.currentThread().sleep(200);
+
+						while (!rmsAvailable && !expEnded) {
+							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos3");
+							syncWait.wait();
+						}
+						long time2 = System.currentTimeMillis();
+
+						System.out.println("Waited:" + (time2 - time1));
+						rmsAvailable = false;
+					}
+					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos4");
+				} catch (InterruptedException ie) {
+				}
 
 				double rmsLeftValor = sr.getRMS(sr.LEFT_CHANNEL);
 				double rmsRightValor = sr.getRMS(sr.RIGHT_CHANNEL);					
