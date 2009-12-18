@@ -52,7 +52,8 @@ public class SoundRecorder implements DataSoundListener {
 		try {
 			if (mediaLocator == null) {
 				//mediaLocator = new MediaLocator("javasound://48000");
-				mediaLocator = new MediaLocator("javasound://44100");
+				//mediaLocator = new MediaLocator("javasound://44100");
+				mediaLocator = new MediaLocator("javasound://11025");
 				ds = Manager.createDataSource(mediaLocator);
 				formatControls = ((javax.media.protocol.CaptureDevice)ds).getFormatControls();
 				//System.out.println("Format=" + formatControls[0].getFormat());
@@ -77,6 +78,7 @@ public class SoundRecorder implements DataSoundListener {
 			dsr.stopProcessor();
 			System.out.println("Stoping the sound acquisition!");
 		}
+
 	}
 
 	public double getRMS(int channel) {
@@ -176,9 +178,13 @@ public class SoundRecorder implements DataSoundListener {
 						* (rightData[i] - rightMean);
 			}
 
-			totalRMSSquareLeft += squareLeft;
-			totalRMSSquareRight += squareRight;
-			nPoints += leftData.length;
+			//totalRMSSquareLeft += squareLeft;
+			//totalRMSSquareRight += squareRight;
+			//nPoints += leftData.length;
+
+			totalRMSSquareLeft = squareLeft;
+			totalRMSSquareRight = squareRight;
+			nPoints = leftData.length;
 
 			fireRMSAvailabe();
 			notifyAll();
