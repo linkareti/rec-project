@@ -59,9 +59,16 @@ public class Oscilador extends AudioInputStream {
 
 		// SIN
 		if (type == 1) {
+			
+			double dCurrentPeriod = 0;
+			
 			for (int nFrame = 0; nFrame < nFullLengthInFrames; nFrame++) {
-				double dCurrentPeriod = 1. / (double) (frequencia1 + (double) nFrame / (double) nFullLengthInFrames * (frequencia2 - frequencia1));
 
+				if (nFrame % 1000 == 0) {
+					dCurrentPeriod = 1. / (double) (frequencia1 + (double) nFrame / (double) nFullLengthInFrames * (frequencia2 - frequencia1));
+					System.out.println("Frequencia : " + 1 / dCurrentPeriod);
+				}
+				
 				float fFullPosition = (float) nFrame / (float) nFullLengthInFrames * (lengthInSeconds);
 
 				float fValue = (float) Math.cos(fFullPosition * 2.0 * Math.PI / dCurrentPeriod);
