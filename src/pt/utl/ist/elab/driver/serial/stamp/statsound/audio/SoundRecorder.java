@@ -143,6 +143,8 @@ public class SoundRecorder implements DataSoundListener {
 	/** ONLY LITTLE ENDIAN IS ACCEPTED!! */
 	public void addDataToRMS(byte[] audioAcqBytes) {
 		synchronized (this) {
+						
+			
 			byte[] audioBytes = audioAcqBytes;
 			int[] audioData = null;
 			short[] leftData = null;

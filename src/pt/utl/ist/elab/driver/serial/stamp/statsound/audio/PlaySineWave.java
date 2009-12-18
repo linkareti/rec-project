@@ -147,6 +147,8 @@ public class PlaySineWave extends javax.swing.JFrame
 
     private void stopCaptureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopCaptureActionPerformed
        sr.stopAcquiring();
+       sr = null;
+       
     }//GEN-LAST:event_stopCaptureActionPerformed
 
     private void stopPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopPlayActionPerformed
