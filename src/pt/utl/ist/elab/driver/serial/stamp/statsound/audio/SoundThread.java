@@ -79,7 +79,7 @@ public class SoundThread implements Runnable {
 		try {
 			switch (soundType) {
 			case SoundThread.WAVE:
-				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormat, 1);
+				audiostream = new Oscilador(this.waveFrequency1*2, this.waveFrequency2*2, waveAmplitude, length, waveFormat, 1);
 				break;
 			case SoundThread.PULSE:
 				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormatUltra, 3);
