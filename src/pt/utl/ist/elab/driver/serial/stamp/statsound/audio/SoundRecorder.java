@@ -55,7 +55,7 @@ public class SoundRecorder implements DataSoundListener {
 				mediaLocator = new MediaLocator("javasound://44100");
 				ds = Manager.createDataSource(mediaLocator);
 				formatControls = ((javax.media.protocol.CaptureDevice)ds).getFormatControls();
-				System.out.println("Format=" + formatControls[0].getFormat());
+				//System.out.println("Format=" + formatControls[0].getFormat());
 			}
 		} catch (Exception e) {
 			System.out.println("Error creating data source and locator");
@@ -88,13 +88,13 @@ public class SoundRecorder implements DataSoundListener {
 			if (channel == LEFT_CHANNEL) {
 				double lReturn = 20 * getLog(10, Math.sqrt(totalRMSSquareLeft
 						/ nPoints) / 32768);
-				System.out.println("Return Left=" + lReturn);
+				//System.out.println("Return Left=" + lReturn);
 				notifyAll();
 				return lReturn;
 			} else {
 				double rReturn = 20 * getLog(10, Math.sqrt(totalRMSSquareRight
 						/ nPoints) / 32768);
-				System.out.println("Return right=" + rReturn);
+				//System.out.println("Return right=" + rReturn);
 				notifyAll();
 				return rReturn;
 			}
