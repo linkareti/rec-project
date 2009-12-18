@@ -147,6 +147,9 @@ public class SoundRecorder implements DataSoundListener {
 			int[] audioData = null;
 			short[] leftData = null;
 			short[] rightData = null;
+			
+			System.out.println("Add data to rms length: " + audioBytes.length);
+			
 			leftData = new short[audioBytes.length / 4];
 			rightData = new short[audioBytes.length / 4];
 			for (int i = 0; i + 4 <= audioBytes.length; i += 4) {
