@@ -79,7 +79,9 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		String posFin = config.getSelectedHardwareParameterValue(StampConfigTranslator.POS_FIN_STR);
 
 		freqIni = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_INI));
+		System.out.println("freqini : " + freqIni);
 		freqFin = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_END));
+		System.out.println("freqfin : " + freqFin);
 
 		if (freqFin < freqIni) {
 			int temp = freqFin;

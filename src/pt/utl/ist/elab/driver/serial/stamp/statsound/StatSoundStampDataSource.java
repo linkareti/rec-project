@@ -71,9 +71,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	@SuppressWarnings("static-access")
 	public void processDataCommand(StampCommand cmd) {
-		Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering processDataCommand on StatSoundStampDataSource");
-		System.out.println("Entering processDataCommand on StatSoundStampDataSource");
-		System.out.println("EXP:= " + config.getSelectedHardwareParameterValue(TYPE_OF_EXP));
+		//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering processDataCommand on StatSoundStampDataSource");
+		//System.out.println("Entering processDataCommand on StatSoundStampDataSource");
+		//System.out.println("EXP:= " + config.getSelectedHardwareParameterValue(TYPE_OF_EXP));
 
 		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			System.out.println("Return from process data...cmd isn't valid");
@@ -88,7 +88,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 		PhysicsValue[] values = new PhysicsValue[7];
 
-		Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Inside processDataCommand using " + cmd.getCommandIdentifier());
+		//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Inside processDataCommand using " + cmd.getCommandIdentifier());
 
 		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
 			// receiving POS message ;)
@@ -120,28 +120,26 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 //				}
 //				sr.stopAcquiring();
 //				th.stopWave();
-//				
-				
 				
 				int posValor = pos.intValue();
 
 				try {
-					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos1");
+					//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos1");
 					synchronized (syncWait) {
-						Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos2");
-						long time1 = System.currentTimeMillis();
+						//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos2");
+						//long time1 = System.currentTimeMillis();
 						Thread.currentThread().sleep(200);
 
 						while (!rmsAvailable && !expEnded) {
-							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos3");
+							//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos3");
 							syncWait.wait();
 						}
-						long time2 = System.currentTimeMillis();
+						//long time2 = System.currentTimeMillis();
 
-						System.out.println("Waited:" + (time2 - time1));
+						//System.out.println("Waited:" + (time2 - time1));
 						rmsAvailable = false;
 					}
-					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos4");
+					//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos4");
 				} catch (InterruptedException ie) {
 				}
 
@@ -158,9 +156,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					values[4] = PhysicsValueFactory.fromInt(temp.intValue(), config.getChannelsConfig(4).getSelectedScale());
 
 				if (Math.abs(values[2].getValue().getDoubleValue()) > 0.01d && Math.abs(values[3].getValue().getDoubleValue()) > 0.01d) {
-					System.out.println("Add row : " + values[2].getValue().getFloatValue() + " , " + values[3].getValue().getFloatValue());
+					//System.out.println("Add row : " + values[2].getValue().getFloatValue() + " , " + values[3].getValue().getFloatValue());
 					super.addDataRow(values);
 				}
+				
 				System.out.println("Passed through..." + posValor);
 				super.addDataRow(values);
 
