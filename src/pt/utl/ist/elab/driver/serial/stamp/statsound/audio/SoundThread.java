@@ -82,10 +82,12 @@ public class SoundThread implements Runnable {
 				audiostream = new Oscilador(this.waveFrequency1*2, this.waveFrequency2*2, waveAmplitude, length, waveFormat, 1);
 				break;
 			case SoundThread.PULSE:
-				audiostream = new Oscilador(this.waveFrequency1*2, this.waveFrequency2*2, waveAmplitude, length, waveFormatUltra, 3);
+				//audiostream = new Oscilador(this.waveFrequency1*2, this.waveFrequency2*2, waveAmplitude, length, waveFormatUltra, 3);
+				audiostream = new Oscilador(this.waveFrequency1*2, this.waveFrequency2*2, waveAmplitude, length, waveFormat, 3);
 				break;
 			case SoundThread.PINK_NOISE:
-				audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormatUltra, 2);
+				//audiostream = new Oscilador(this.waveFrequency1, this.waveFrequency2, waveAmplitude, length, waveFormatUltra, 2);
+				audiostream = new Oscilador(this.waveFrequency1*2, this.waveFrequency2*2, waveAmplitude, length, waveFormat, 2);
 				break;
 			case -1 :
 				System.out.println("NOT DEFINED");
@@ -100,10 +102,10 @@ public class SoundThread implements Runnable {
 
 		try {
 			linha = (SourceDataLine) AudioSystem.getLine(informacao);
-			if (soundType == SoundThread.WAVE)
+			//if (soundType == SoundThread.WAVE)
 				linha.open(waveFormat);
-			else
-				linha.open(waveFormatUltra);
+			//else
+			//	linha.open(waveFormatUltra);
 		} catch (LineUnavailableException e) {
 			e.printStackTrace();
 			System.exit(1);
