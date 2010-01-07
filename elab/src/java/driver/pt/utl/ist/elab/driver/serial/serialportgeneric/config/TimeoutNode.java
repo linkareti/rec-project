@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="stp" type="{}OneTimeoutNode"/>
  *         &lt;element name="rst" type="{}OneTimeoutNode"/>
  *         &lt;element name="hardware_died" type="{}OneTimeoutNode"/>
+ *         &lt;element name="listen_to_port" type="{}OneTimeoutNode"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -54,26 +55,35 @@ import javax.xml.bind.annotation.XmlType;
     "binNoData",
     "stp",
     "rst",
-    "hardwareDied"
+    "hardwareDied",
+    "portListen"
 })
 public class TimeoutNode {
 
-    @XmlElement(name = "default_timeout")
+    @XmlElement(name = "default_timeout", required = true)
     protected OneTimeoutNode defaultTimeout;
+    @XmlElement(required = true)
     protected OneTimeoutNode id;
+    @XmlElement(required = true)
     protected OneTimeoutNode cfg;
+    @XmlElement(required = true)
     protected OneTimeoutNode cur;
+    @XmlElement(required = true)
     protected OneTimeoutNode str;
-    @XmlElement(name = "dat_bin")
+    @XmlElement(name = "dat_bin", required = true)
     protected OneTimeoutNode datBin;
-    @XmlElement(name = "dat_no_data")
+    @XmlElement(name = "dat_no_data", required = true)
     protected OneTimeoutNode datNoData;
-    @XmlElement(name = "bin_no_data")
+    @XmlElement(name = "bin_no_data", required = true)
     protected OneTimeoutNode binNoData;
+    @XmlElement(required = true)
     protected OneTimeoutNode stp;
+    @XmlElement(required = true)
     protected OneTimeoutNode rst;
-    @XmlElement(name = "hardware_died")
+    @XmlElement(name = "hardware_died", required = true)
     protected OneTimeoutNode hardwareDied;
+    @XmlElement(name = "listen_to_port", required = true)
+    protected OneTimeoutNode portListen;
 
     /**
      * Gets the value of the defaultTimeout property.
@@ -337,6 +347,30 @@ public class TimeoutNode {
      */
     public void setHardwareDied(OneTimeoutNode value) {
         this.hardwareDied = value;
+    }
+
+    /**
+     * Gets the value of the portListen property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link OneTimeoutNode }
+     *     
+     */
+    public OneTimeoutNode getPortListen() {
+        return portListen;
+    }
+
+    /**
+     * Sets the value of the portListen property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link OneTimeoutNode }
+     *     
+     */
+    public void setPortListen(OneTimeoutNode value) {
+        this.portListen = value;
     }
 
 }

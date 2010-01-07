@@ -13,14 +13,17 @@ package pt.utl.ist.elab.driver.serial.serialportgeneric;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortCommand;
-import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortCommandListener;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandListener;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.config.HardwareNode;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
 
@@ -38,7 +41,7 @@ public class SerialPortFinder {
 		}
 	}
 	/** Holds value of property applicationNameLockPort. */
-	private String applicationNameLockPort = "SerialFinder App Lock";
+	private String applicationNameLockPort = "SerialPortFinder App Lock";
 
 	/** Holds value of property stampIdentifier. */
 	private String serialIdentifier = "STAMP_ID";
@@ -255,18 +258,32 @@ public class SerialPortFinder {
 		ports = null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void startSearch() {
+		
 		Enumeration<CommPortIdentifier> commPortIdentifiers = gnu.io.CommPortIdentifier.getPortIdentifiers();
-
 		LinkedList<CommPortIdentifier> tempPorts = new LinkedList<CommPortIdentifier>();
+		List<String> restrictedPorts = new ArrayList<String>();
 
 		Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
 				"Are there COMM Ports on the System? " + commPortIdentifiers.hasMoreElements());
 
+		if (AbstractSerialPortDriver.rs232configs != null) {
+			for (String port : AbstractSerialPortDriver.rs232configs.getRs232().getPortsRestrict().split(",")) {
+				restrictedPorts.add(port);
+			}
+		}
+
+		/*
+		 * Lists all the ports and filters included on rs232 configuration file
+		 */
 		while (commPortIdentifiers.hasMoreElements()) {
 			CommPortIdentifier identifier = commPortIdentifiers.nextElement();
-			if (identifier.getPortType() == CommPortIdentifier.PORT_SERIAL)
-				tempPorts.add(identifier);
+			if (identifier.getPortType() == CommPortIdentifier.PORT_SERIAL) {
+				if (restrictedPorts.contains(identifier.getName())) {
+					tempPorts.add(identifier);
+				}
+			}
 		}
 
 		ports = new CommPortIdentifier[tempPorts.size()];
@@ -407,10 +424,6 @@ public class SerialPortFinder {
 				stampIO.setWaitForEcho(isWaitForEcho());
 				stampIO.setStampCommandListener(serialPortFinderRunnerEventListener);
 				stampIO.setPort(currentPortOpen);
-				// currentReader=new BufferedReader(new
-				// InputStreamReader(currentPortOpen.getInputStream(),"us-ascii"));
-				// currentPortOpen.addEventListener(stampFinderRunnerEventListener);
-				// currentPortOpen.notifyOnDataAvailable(true);
 
 			} catch (gnu.io.PortInUseException e) {
 				LoggerUtil.logThrowable("Serial port " + cpi.getName() + " is currently in use...", e, Logger
@@ -443,24 +456,9 @@ public class SerialPortFinder {
 				synchronized (serialPortFinderRunnerEventListener) {
 					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
 							"NO id string detected on port " + cpi.getName());
-					// currentPortOpen.removeEventListener();
 					stampIO.shutdown();
 					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Shuted down stampIO!");
 				}
-				/*
-				 * try {Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
-				 * "Closing port "+cpi.getName()+" IOStream!
-				 * "); currentReader.close(); }catch(Exception e) { LoggerUtil.logThrowable("
-				 * Error closing port "+cpi.getName() +" IO
-				 * Stream!",e,Logger.getLogger(STAMP_FINDER_LOGGER)); } try {
-				 * Logger
-				 * .getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Closing port "
-				 * +cpi.getName()+"!"); currentPortOpen.close();
-				 * }catch(Exception e) { LoggerUtil.logThrowable("Error closing
-				 * port
-				 * "+cpi.getName()+"!",e,Logger.getLogger(STAMP_FINDER_LOGGER));
-				 * }
-				 */
 			}
 
 			currentPort++;
@@ -469,36 +467,6 @@ public class SerialPortFinder {
 		private boolean portFound = false;
 
 		private class SerialPortFinderRunnerPortListener implements SerialPortCommandListener {
-
-			/*
-			 * public synchronized void serialEvent(gnu.io.SerialPortEvent
-			 * serialPortEvent) {
-			 * Logger.getLogger(STAMP_FINDER_LOGGER).log(Level
-			 * .INFO,"Received port event "+currentPortOpen.getName()+" whith
-			 * type="+serialPortEvent.getEventType()+" -
-			 * DataAvailableEventType="+SerialPortEvent.DATA_AVAILABLE);
-			 * 
-			 * 
-			 * 
-			 * if(serialPortEvent.getEventType()==SerialPortEvent.DATA_AVAILABLE)
-			 * { String line="";
-			 * 
-			 * try {
-			 * Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Reading
-			 * line of data from port "+currentPortOpen.getName()+"!");
-			 * line=currentReader.readLine();
-			 * Logger.getLogger(STAMP_FINDER_LOGGER
-			 * ).log(Level.INFO,"Data Line is : '"+line+"'!");
-			 * }catch(IOException e) { LoggerUtil.logThrowable("IO Error reading
-			 * line from port"+currentPortOpen.getName()+"!
-			 * ",e,Logger.getLogger(STAMP_FINDER_LOGGER)); }
-			 * if(line.equals(stampIdentifier)) {
-			 * Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,"Identified
-			 * STAMP on port "+currentPortOpen.getName()+"!");
-			 * //currentPortOpen.removeEventListener();
-			 * fireStampFinderListenerStampFound(currentPortOpen);
-			 * portFound=true; exit=true; } } }
-			 */
 
 			public void handleStampCommand(SerialPortCommand command) {
 				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
@@ -515,6 +483,18 @@ public class SerialPortFinder {
 
 		}
 
+	}
+
+	/**
+	 * @param rs232configs
+	 */
+	public void populateProperties(HardwareNode rs232configs) {
+		this.setStampIdentifier(rs232configs.getId());
+		this.setPortBaudRate(rs232configs.getRs232().getBaud().intValue());
+		this.setPortStopBits(rs232configs.getRs232().getStopbits().intValue());
+		this.setPortParity(rs232configs.getRs232().getParitybits().intValue());
+		this.setPortDataBits(rs232configs.getRs232().getNumbits().intValue());
+		this.setTimeOutPerPort(rs232configs.getRs232().getTimeout().getPortListen().getTime().intValue());
 	}
 
 }

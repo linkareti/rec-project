@@ -8,13 +8,11 @@
 
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -69,6 +67,7 @@ public class ParametersNode {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link OneParameterNode }
+     * @return List<OneParameterNode>
      * 
      * 
      */
@@ -77,6 +76,16 @@ public class ParametersNode {
             parameter = new ArrayList<OneParameterNode>();
         }
         return this.parameter;
+    }
+    
+    public OneParameterNode getParameterToOrder(int order) {
+    	if (parameter == null)
+    		return new OneParameterNode();
+    	for (OneParameterNode oneParameterNode : parameter) {
+    		if (oneParameterNode.getOrder().intValue() == order)
+    			return oneParameterNode;
+		}
+    	return new OneParameterNode();
     }
 
 }

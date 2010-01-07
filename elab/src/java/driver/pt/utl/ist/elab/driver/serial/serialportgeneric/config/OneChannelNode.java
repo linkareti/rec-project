@@ -18,6 +18,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode.TransferFunctionType;
+
 
 /**
  * <p>Java class for OneChannelNode complex type.
@@ -130,4 +132,43 @@ public class OneChannelNode {
         this.order = value;
     }
 
+	public Double calculate(Double value) {
+		Double total = 0D;
+		boolean haveFunctions = false;
+		for (TransferFunctionNode node : transferFunction) {
+			if (!node.getLinear().isEmpty()) {
+				for (LinearFunctionNode	linear : node.getLinear()) {
+					haveFunctions = true;
+					total = total + linear.getParam().getDWeight() * value - linear.getParam().getDCenter();
+				}
+				for (PowerFunctionNode power : node.getPower()) {
+					haveFunctions = true;
+					total = total + power.getParam().getDWeight() * Math.pow((value - power.getParam().getDCenter()),power.getParam().getDPower());
+				}
+				for (ExpFunctionNode expon : node.getExponential()) {
+					haveFunctions = true;
+					total = total + expon.getParam().getDWeight() * Math.exp(expon.getParam().getDCoeficient() * (value - expon.getParam().getDCenter()));
+				}
+				for (LogFunctionNode log : node.getLogarithm()) {
+					haveFunctions = true;
+					total = total + log.getParam().getDWeight() * Math.log(log.getParam().getDWeight() * (value - log.getParam().getDCenter())); 
+				}
+				for (SinFunctionNode sin : node.getSin()) {
+					haveFunctions = true;
+					total = total + sin.getParam().getDWeight() * Math.sin(sin.getParam().getDCoeficient() * value - sin.getParam().getDDelta()); 
+				}
+				for (TgFunctionNode tg : node.getTg()) {
+					haveFunctions = true;
+					total = total + tg.getParam().getDWeight() * Math.tan(tg.getParam().getDCoeficient() * value - tg.getParam().getDDelta()); 
+				}
+			}
+		}
+		
+		if (haveFunctions)
+			return total;
+		else
+			return value;
+	}
+    
+    
 }

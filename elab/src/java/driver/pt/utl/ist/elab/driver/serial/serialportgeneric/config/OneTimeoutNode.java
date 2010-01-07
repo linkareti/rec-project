@@ -51,6 +51,10 @@ public class OneTimeoutNode {
     public BigInteger getTime() {
         return time;
     }
+    
+    public int getTimeInt() {
+    	return time.intValue();
+    }
 
     /**
      * Sets the value of the time property.

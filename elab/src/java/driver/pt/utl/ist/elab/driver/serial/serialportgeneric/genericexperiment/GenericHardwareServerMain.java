@@ -35,11 +35,12 @@ public abstract class GenericHardwareServerMain {
 	}
 
 	/**
-	 * @param args[0] : ORB Bean to be loaded
+	 * @param args : ORB Bean to be loaded
 	 */
 	public static void main(String[] args) {
 		try {
 			ORBBean.getORBBean(args);
+			@SuppressWarnings("unused")
 			BaseHardware baseHardware = new BaseHardware((IDriver) new GenericSerialPortDriver());
 			Thread.currentThread().join();
 

@@ -1,4 +1,4 @@
-package pt.utl.ist.elab.driver.serial.serialportgeneric.transproc;
+package pt.utl.ist.elab.driver.serial.serialportgeneric.command;
 
 public enum SerialPortCommandList {
 	IDS("IDS"), CFG("CFG"), CFGOK("CFGOK"), CUR("CUR"), STR("STR"), STROK("STROK"), DAT("DAT"), END("END"), BIN("BIN"), STP("STP"), STPOK(

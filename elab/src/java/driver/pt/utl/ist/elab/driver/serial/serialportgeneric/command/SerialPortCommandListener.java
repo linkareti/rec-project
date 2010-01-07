@@ -4,7 +4,7 @@
  * Created on 15 de Maio de 2003, 15:38
  */
 
-package pt.utl.ist.elab.driver.serial.serialportgeneric.transproc;
+package pt.utl.ist.elab.driver.serial.serialportgeneric.command;
 
 /**
  * 

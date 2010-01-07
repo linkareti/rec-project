@@ -3,7 +3,11 @@ package pt.utl.ist.elab.driver.serial.serialportgeneric;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortCommandList;
+import com.linkare.rec.acquisition.IncorrectStateException;
+import com.linkare.rec.impl.threading.TimedOutException;
+
+import pt.utl.ist.elab.driver.serial.serialportgeneric.config.TimeoutNode;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandList;
 
 /**
  * 
@@ -72,6 +76,13 @@ public enum DriverState {
 				default : 		return false;
 			}
 		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case UNKNOWN : return true;
+				case ERROR : return true;
+				default : return false;
+			}
+		}
 	} ,
 	
 	
@@ -116,6 +127,13 @@ public enum DriverState {
 				case RSTOK : 	return false;
 				case ERR : 		return true;
 				default : 		return false;
+			}
+		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case UNKNOWN : return true;
+				case ERROR : return true;
+				default : return false;
 			}
 		}
 	} ,
@@ -164,6 +182,12 @@ public enum DriverState {
 				default : 		return false;
 			}
 		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case STARTED : return true;
+				default : return false;
+			}
+		}		
 	} ,
 	
 	
@@ -208,6 +232,12 @@ public enum DriverState {
 				case RSTOK : 	return false;
 				case ERR : 		return true;
 				default : 		return false;
+			}
+		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case STARTED : return true;
+				default : return false;
 			}
 		}
 	} ,
@@ -256,6 +286,12 @@ public enum DriverState {
 				default : 		return false;
 			}
 		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case STOPED : return true;
+				default : return false;
+			}
+		}
 	} ,
 	
 	
@@ -300,6 +336,14 @@ public enum DriverState {
 				case RSTOK : 	return false;
 				case ERR : 		return true;
 				default : 		return false;
+			}
+		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case STOPED : return true;
+				case UNKNOWN : return true;
+				case RESETED : return true;
+				default : return false;
 			}
 		}
 	} ,
@@ -348,6 +392,14 @@ public enum DriverState {
 				default : 		return false;
 			}
 		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case STOPED : return true;
+				case UNKNOWN : return true;
+				case RESETED : return true;
+				default : return false;
+			}
+		}
 	} ,
 	
 	
@@ -392,6 +444,12 @@ public enum DriverState {
 				case RSTOK : 	return false;
 				case ERR : 		return true;
 				default : 		return false;
+			}
+		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case CONFIGURED : return true;
+				default : return false;
 			}
 		}
 	} ,
@@ -440,6 +498,13 @@ public enum DriverState {
 				default : 		return false;
 			}
 		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case CONFIGURED : return true;
+				case STOPED : return true;
+				default : return false;
+			}
+		}
 	} ,
 	
 	
@@ -484,6 +549,13 @@ public enum DriverState {
 				case RSTOK : 	return false;
 				case ERR : 		return true;
 				default : 		return false;
+			}
+		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case CONFIGURED : return true;
+				case STOPED : return true;
+				default : return false;
 			}
 		}
 	} ,
@@ -532,6 +604,12 @@ public enum DriverState {
 				default : 		return false;
 			}
 		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case STARTED : return true;
+				default : return false;
+			}
+		}
 	} ,
 	
 	
@@ -556,6 +634,12 @@ public enum DriverState {
 				default : 		return false;
 			}
 		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case STARTED : return true;
+				default : return false;
+			}
+		}
 	} ,
 	
 	
@@ -576,6 +660,13 @@ public enum DriverState {
 			switch (command) {
 				// should never achieve this point of code ;)
 				default : 		return false;
+			}
+		}
+		@Deprecated
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case STARTED : return true;
+				default : return false;
 			}
 		}
 	} ,
@@ -625,6 +716,15 @@ public enum DriverState {
 				default : 		return false;
 			}
 		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case UNKNOWN : return true;
+				case STOPED : return true;
+				case CONFIGURED : return true;
+				case RESETED : return true;
+				default : return false;
+			}
+		}
 	} ,
 	
 	
@@ -669,6 +769,11 @@ public enum DriverState {
 				case RSTOK : 	return false;
 				case ERR : 		return true;
 				default : 		return false;
+			}
+		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				default : return true;
 			}
 		}
 	} ,
@@ -717,6 +822,11 @@ public enum DriverState {
 				default : 		return false;
 			}
 		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				default : return true;
+			}
+		}
 	} ,
 	
 	
@@ -763,13 +873,172 @@ public enum DriverState {
 				default : 		return false;
 			}
 		}
+		public boolean acceptHardwareStatus(HardwareStatus status) {
+			switch (status) {
+				case RESETED : return true;
+				default : return false;
+			}
+		}
 	} ;
 	
 	
 	private static DriverState lastState = null;
+	private static long timeoutClock = 0;
 
 	public void setLastState(DriverState lastState) {
 		DriverState.lastState = lastState;
+	}
+	
+	public void startTimeoutClock() {
+		timeoutClock = System.currentTimeMillis();
+	}
+	
+	public static int getTimeoutClock() {
+		return (int) (System.currentTimeMillis() - timeoutClock) / 1000;
+	}
+	
+	/**
+	 * 
+	 * This method throws a TimedOutException when the driver stays too much time
+	 * on the same DriverState without communication from the hardware.
+	 * This exception must terminate the execution of the driver.
+	 * Use it wisely.
+	 * 
+	 * @throws IncorrectStateException
+	 * @author fdias
+	 */
+	public void explodeOnTimeout() throws IncorrectStateException {
+		// is hardware dead?
+		if (getTimeoutNode().getHardwareDied().getTimeInt() > getTimeoutClock()) {
+			logMe("TIMEOUT : Hardware died");
+			throw new IncorrectStateException();
+		}
+		// is current state on timeout?
+		switch (this) {
+			case UNKNOWN : {
+				if (getTimeoutNode().getId().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Id timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case ERROR : {
+				if (getTimeoutNode().getDefaultTimeout().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Default timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case RESETING : {
+				if (getTimeoutNode().getDefaultTimeout().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Default timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case RESETWAIT :  {
+				if (getTimeoutNode().getRst().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Reset timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case RESETED : {
+				if (getTimeoutNode().getId().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Id timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case STOPING : {
+				if (getTimeoutNode().getDefaultTimeout().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Default timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case STOPWAIT : {
+				if (getTimeoutNode().getStp().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Stop timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case STOPPED : {
+				if (getTimeoutNode().getId().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Id timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case CONFIGURING : {
+				if (getTimeoutNode().getDefaultTimeout().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Default timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case CONFIGUREWAIT : {
+				if (getTimeoutNode().getCfg().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Config timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case CONFIGURED : {
+				if (getTimeoutNode().getId().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Id timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case STARTING : {
+				if (getTimeoutNode().getDefaultTimeout().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Default timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case STARTWAIT : {
+				if (getTimeoutNode().getStr().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Start timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case STARTED : {
+				if (getTimeoutNode().getDatBin().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Dat/Bin timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case RECEIVINGCONFIG : {
+				if (getTimeoutNode().getCur().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : Current config timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case RECEIVINGDATA : {
+				if (getTimeoutNode().getDatNoData().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : No DAT data timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+			case RECEIVINGBIN : {
+				if (getTimeoutNode().getBinNoData().getTimeInt() > getTimeoutClock()) {
+					logMe("TIMEOUT : No BIN data timeout on state " + this.toString());
+					throw new IncorrectStateException();
+				}
+				break;
+			}
+		}
+	}
+	
+	private TimeoutNode getTimeoutNode() {
+		return AbstractSerialPortDriver.rs232configs.getRs232().getTimeout();
 	}
 	
 	private static DriverState logAndReturn(DriverState driverState) {
@@ -777,7 +1046,40 @@ public enum DriverState {
 		return driverState;
 	}
 	
+	private static void logMe(String message) {
+		Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,message);
+	}
+	
+	/**
+	 * 
+	 * In response to the current command, the current DriverState must change to
+	 * another DriverState. This decision is made by this method.
+	 * 
+	 * @param command
+	 * @return {@link DriverState}
+	 * @author fdias
+	 */
 	public abstract DriverState nextState(SerialPortCommandList command);
+	
+	/**
+	 * 
+	 * This command have data that deserves to be processed?
+	 * 
+	 * @param command
+	 * @return boolean
+	 * @author fdias
+	 */
 	public abstract boolean processeMe(SerialPortCommandList command);
 	
+	/**
+	 * 
+	 * Checks if the HardwareStatus from the hardware, that comes on IDS messages,
+	 * is expected on the current DriverState.
+	 * 
+	 * @param status
+	 * @return boolean
+	 * @author fdias
+	 */
+	public abstract boolean acceptHardwareStatus(HardwareStatus status);
+		
 }

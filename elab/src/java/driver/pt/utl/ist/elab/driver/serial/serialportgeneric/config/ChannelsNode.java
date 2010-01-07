@@ -8,11 +8,13 @@
 
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -42,6 +44,8 @@ import javax.xml.bind.annotation.XmlType;
 public class ChannelsNode {
 
     protected List<OneChannelNode> channel;
+    @XmlTransient
+    protected DecimalFormat valueFormat = null;
 
     /**
      * Gets the value of the channel property.
@@ -71,5 +75,21 @@ public class ChannelsNode {
         }
         return this.channel;
     }
+    
+    public OneChannelNode getChannelToOrder(int order) {
+    	if (channel == null)
+    		return new OneChannelNode();
+    	for (OneChannelNode oneChannelNode : channel) {
+			if (oneChannelNode.getOrder().intValue() == order)
+				return oneChannelNode;
+		}
+    	return new OneChannelNode();
+    }
+	
+	public String formatValue(Double value) {
+		if (valueFormat == null)
+			return value.toString();
+		return valueFormat.format(value).toString();
+	}
 
 }

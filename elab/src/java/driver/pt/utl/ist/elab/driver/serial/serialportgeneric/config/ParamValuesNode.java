@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import pt.utl.ist.elab.driver.serial.serialportgeneric.IncorrectRs232ValuesException;
+
 
 /**
  * <p>Java class for ParamValuesNode complex type.
@@ -49,6 +51,12 @@ public class ParamValuesNode {
     protected String power;
     @XmlAttribute(required = true)
     protected String weight;
+    
+    protected Double dcenter = Double.NaN;
+    protected Double dcoeficient = Double.NaN;
+    protected Double ddelta = Double.NaN;
+    protected Double dpower = Double.NaN;
+    protected Double dweight = Double.NaN;
 
     /**
      * Gets the value of the center property.
@@ -61,6 +69,9 @@ public class ParamValuesNode {
     public String getCenter() {
         return center;
     }
+    public Double getDCenter() {
+        return dcenter;
+    }
 
     /**
      * Sets the value of the center property.
@@ -68,10 +79,16 @@ public class ParamValuesNode {
      * @param value
      *     allowed object is
      *     {@link String }
+     * @throws IncorrectRs232ValuesException 
      *     
      */
-    public void setCenter(String value) {
+    public void setCenter(String value) throws IncorrectRs232ValuesException {
         this.center = value;
+        try {
+			this.dcenter = Double.valueOf(value);
+		} catch (NumberFormatException e) {
+			throw new IncorrectRs232ValuesException("Center definition is incorrect: " + value);
+		}
     }
 
     /**
@@ -85,6 +102,9 @@ public class ParamValuesNode {
     public String getCoeficient() {
         return coeficient;
     }
+    public Double getDCoeficient() {
+        return dcoeficient;
+    }
 
     /**
      * Sets the value of the coeficient property.
@@ -92,10 +112,16 @@ public class ParamValuesNode {
      * @param value
      *     allowed object is
      *     {@link String }
+     * @throws IncorrectRs232ValuesException 
      *     
      */
-    public void setCoeficient(String value) {
+    public void setCoeficient(String value) throws IncorrectRs232ValuesException {
         this.coeficient = value;
+        try {
+			this.dcoeficient = Double.valueOf(value);
+		} catch (NumberFormatException e) {
+			throw new IncorrectRs232ValuesException("Coeficient definition is incorrect: " + value);
+		}
     }
 
     /**
@@ -109,6 +135,9 @@ public class ParamValuesNode {
     public String getDelta() {
         return delta;
     }
+    public Double getDDelta() {
+        return ddelta;
+    }
 
     /**
      * Sets the value of the delta property.
@@ -116,10 +145,16 @@ public class ParamValuesNode {
      * @param value
      *     allowed object is
      *     {@link String }
+     * @throws IncorrectRs232ValuesException 
      *     
      */
-    public void setDelta(String value) {
+    public void setDelta(String value) throws IncorrectRs232ValuesException {
         this.delta = value;
+        try {
+			this.ddelta = Double.valueOf(value);
+		} catch (NumberFormatException e) {
+			throw new IncorrectRs232ValuesException("Delta definition is incorrect: " + value);
+		}
     }
 
     /**
@@ -133,6 +168,9 @@ public class ParamValuesNode {
     public String getPower() {
         return power;
     }
+    public Double getDPower() {
+        return dpower;
+    }
 
     /**
      * Sets the value of the power property.
@@ -140,10 +178,16 @@ public class ParamValuesNode {
      * @param value
      *     allowed object is
      *     {@link String }
+     * @throws IncorrectRs232ValuesException 
      *     
      */
-    public void setPower(String value) {
+    public void setPower(String value) throws IncorrectRs232ValuesException {
         this.power = value;
+        try {
+			this.dpower = Double.valueOf(value);
+		} catch (NumberFormatException e) {
+			throw new IncorrectRs232ValuesException("Power definition is incorrect: " + value);
+		}
     }
 
     /**
@@ -157,6 +201,9 @@ public class ParamValuesNode {
     public String getWeight() {
         return weight;
     }
+    public Double getDWeight() {
+        return dweight;
+    }
 
     /**
      * Sets the value of the weight property.
@@ -164,10 +211,16 @@ public class ParamValuesNode {
      * @param value
      *     allowed object is
      *     {@link String }
+     * @throws IncorrectRs232ValuesException 
      *     
      */
-    public void setWeight(String value) {
+    public void setWeight(String value) throws IncorrectRs232ValuesException {
         this.weight = value;
+        try {
+			this.dweight = Double.valueOf(value);
+		} catch (NumberFormatException e) {
+			throw new IncorrectRs232ValuesException("Weight definition is incorrect: " + value);
+		}
     }
 
 }

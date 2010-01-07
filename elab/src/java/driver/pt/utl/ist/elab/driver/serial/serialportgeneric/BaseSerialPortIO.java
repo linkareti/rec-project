@@ -8,7 +8,7 @@
  */
 package pt.utl.ist.elab.driver.serial.serialportgeneric;
 
- import gnu.io.CommPortIdentifier;
+import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
 import java.io.IOException;
@@ -20,10 +20,12 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDriver;
-import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortCommand;
-import pt.utl.ist.elab.driver.serial.serialportgeneric.transproc.SerialPortCommandListener;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandList;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandListener;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.threading.TimedOutException;
 
 /**
  * 
@@ -67,8 +69,6 @@ public class BaseSerialPortIO {
 				outStream = this.sPort.getOutputStream();
 				inReader = new InputStreamReader(this.sPort.getInputStream(), "us-ascii");
 				(currentSerialPortReader = new SerialPortReader()).start();
-				// inReader=new BufferedReader(new
-				// InputStreamReader(this.sPort.getInputStream()),100);
 			}
 		} catch (Exception e) {
 			LoggerUtil.logThrowable(null, e, Logger.getLogger(STAMP_IO_LOGGER));
@@ -160,11 +160,8 @@ public class BaseSerialPortIO {
 									break;
 								}
 							} else {
-								if (lineReadTemp.length() <= GenericSerialPortDriver.currentBinaryLength + 5 /*
-																											 * length
-																											 * of
-																											 * _BIN
-																											 */)
+								if (lineReadTemp.length() <= GenericSerialPortDriver.currentBinaryLength + 5)
+										/* 5 = length of _BIN header */
 									lineReadTemp.append(readChar);
 								else
 									break;
@@ -222,34 +219,43 @@ public class BaseSerialPortIO {
 	}
 
 	private void processIncomingLine(String lineRead) throws Exception {
+		SerialPortCommand inCommand = null;
+		String[] commandArray = null;
+
 		if (lineRead == null) {
 			return;
 		}
-
-		if (GenericSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN
-				&& GenericSerialPortDriver.currentDriverState != DriverState.RECEIVINGDATA) {
-
-			int commandpos = lineRead.indexOf("\t");
-			// sPort.removeEventListener();
-			SerialPortCommand inCommand;
-			if (commandpos != -1) {
-				inCommand = new SerialPortCommand(lineRead.substring(0, commandpos));
-				inCommand.setCommand(lineRead.substring(commandpos + 1));
-			} else {
-				// Couldn't split by space, then use a tab... just in case some
-				// student
-				// tries to reinvent the wheel
-				commandpos = lineRead.indexOf("\t");
-				if (commandpos != -1) {
-					inCommand = new SerialPortCommand(lineRead.substring(0, commandpos));
-					inCommand.setCommand(lineRead.substring(commandpos + 1));
-				} else {
-					inCommand = new SerialPortCommand(lineRead);
-				}
+		
+		if (AbstractSerialPortDriver.currentDriverState == DriverState.RECEIVINGBIN) {
+			if (lineRead.length() >= AbstractSerialPortDriver.totalBinaryLength) {
+				
 			}
-
-			fireStampCommandListenerHandleStampCommand(inCommand);
+			else {
+				// TODO : binary buffer
+			}
 		}
+
+		commandArray = lineRead.split("\t");
+		if (commandArray.length > 0) {
+			inCommand = new SerialPortCommand(commandArray[0]);
+			if (commandArray.length > 1) {
+				String commandTemp = "";
+				for (int i = 1; i < commandArray.length; i++) {
+					if (i > 1)
+						commandTemp = commandTemp + "\t" + commandArray[i];
+					else
+						commandTemp = commandArray[i];
+				}
+				inCommand.setCommand(commandTemp);
+			}
+		}
+		if (GenericSerialPortDriver.currentDriverState == DriverState.RECEIVINGDATA && !inCommand.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.END.toString()))
+			return;
+		
+		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Firing stamp command listener...");
+		fireStampCommandListenerHandleStampCommand(inCommand);
+		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Fired stamp command listener...");
+
 	}
 
 	/**
@@ -274,41 +280,30 @@ public class BaseSerialPortIO {
 	 * Notifies all registered listeners about the event.
 	 * 
 	 * @param event The event to be fired
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private void fireStampCommandListenerHandleStampCommand(SerialPortCommand event) throws Exception {
-		if (listener != null) {
-			listener.handleStampCommand(event);
+		try {
+			if (listener != null) {
+				listener.handleStampCommand(event);
+			}
+		} catch (TimedOutException e) {
+			Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "TIMEOUT: " + e.getMessage());
+			shutdown();
 		}
 
 	}
 
 	public void shutdown() {
 		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Shutting down port...");
-		// sPort.removeEventListener();
 		if (currentSerialPortReader != null) {
 			currentSerialPortReader.exitNow();
-			/*
-			 * try { System.out.println("Trying to close inReader...");
-			 * inReader.close(); System.out.println("closed
-			 * inReader..."); }catch(Exception e) { System.out.println("
-			 * oopppsss... closing inReader");
-			 * LoggerUtil.logThrowable(null,e,Logger
-			 * .getLogger(STAMP_IO_LOGGER)); }
-			 * 
-			 * try { System.out.println("Trying to close outStream...");
-			 * outStream.close(); System.out.println("Closed outStream...");
-			 * }catch(Exception e) {
-			 * LoggerUtil.logThrowable(null,e,Logger.getLogger
-			 * (STAMP_IO_LOGGER)); }
-			 */
 		}
 		if (sPort != null) {
 			Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Closing sPort...");
 			sPort.close();
 			Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Closed sPort...");
 		}
-
 		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Shutted down port...");
 	}
 

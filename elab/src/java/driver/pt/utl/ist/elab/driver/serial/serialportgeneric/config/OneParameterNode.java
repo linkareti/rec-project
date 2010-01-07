@@ -9,6 +9,7 @@
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import pt.utl.ist.elab.driver.serial.serialportgeneric.IncorrectRs232ValuesException;
 
 
 /**
@@ -58,6 +62,11 @@ public class OneParameterNode {
     protected BigInteger order;
     @XmlAttribute(required = true)
     protected String output;
+    
+    @XmlTransient
+    protected DecimalFormat inputFormat = null;
+    @XmlTransient
+    protected DecimalFormat outputFormat = null;
 
     /**
      * Gets the value of the transferFunction property.
@@ -107,10 +116,18 @@ public class OneParameterNode {
      * @param value
      *     allowed object is
      *     {@link String }
+     * @throws IncorrectRs232ValuesException 
      *     
      */
-    public void setInput(String value) {
+    public void setInput(String value) throws IncorrectRs232ValuesException {
         this.input = value;
+        inputFormat = new DecimalFormat();
+        try {
+			inputFormat.applyPattern(value.replace("#", "0"));
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		    throw new IncorrectRs232ValuesException("input format for this parameter is not valid");
+		}
     }
 
     /**
@@ -203,11 +220,79 @@ public class OneParameterNode {
      * @param value
      *     allowed object is
      *     {@link String }
+     * @throws IncorrectRs232ValuesException 
      *     
      */
-    public void setOutput(String value) {
+    public void setOutput(String value) throws IncorrectRs232ValuesException {
         this.output = value;
+        outputFormat = new DecimalFormat();
+        try {
+			outputFormat.applyPattern(value.replace("#", "0"));
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		    throw new IncorrectRs232ValuesException("output format for this parameter is not valid");
+		}
     }
 
-    
+	public Double calculate(Double value, TransferFunctionType type) {
+		Double total = 0D;
+		boolean haveFunctions = false;
+		for (TransferFunctionNode node : transferFunction) {
+			if (node.type.equalsIgnoreCase(type.toString())) {
+				if (!node.getLinear().isEmpty()) {
+					for (LinearFunctionNode	linear : node.getLinear()) {
+						haveFunctions = true;
+						total = total + linear.getParam().getDWeight() * value - linear.getParam().getDCenter();
+					}
+					for (PowerFunctionNode power : node.getPower()) {
+						haveFunctions = true;
+						total = total + power.getParam().getDWeight() * Math.pow((value - power.getParam().getDCenter()),power.getParam().getDPower());
+					}
+					for (ExpFunctionNode expon : node.getExponential()) {
+						haveFunctions = true;
+						total = total + expon.getParam().getDWeight() * Math.exp(expon.getParam().getDCoeficient() * (value - expon.getParam().getDCenter()));
+					}
+					for (LogFunctionNode log : node.getLogarithm()) {
+						haveFunctions = true;
+						total = total + log.getParam().getDWeight() * Math.log(log.getParam().getDWeight() * (value - log.getParam().getDCenter())); 
+					}
+					for (SinFunctionNode sin : node.getSin()) {
+						haveFunctions = true;
+						total = total + sin.getParam().getDWeight() * Math.sin(sin.getParam().getDCoeficient() * value - sin.getParam().getDDelta()); 
+					}
+					for (TgFunctionNode tg : node.getTg()) {
+						haveFunctions = true;
+						total = total + tg.getParam().getDWeight() * Math.tan(tg.getParam().getDCoeficient() * value - tg.getParam().getDDelta()); 
+					}
+				}
+			}
+		}
+		
+		if (haveFunctions)
+			return total;
+		else
+			return value;
+	}
+	
+	public String formatOutput(Double value) {
+		if (outputFormat == null)
+			return value.toString();
+		return outputFormat.format(value).toString();
+	}
+	public String formatOutput(Float value) {
+		if (outputFormat == null)
+			return value.toString();
+		return outputFormat.format(value).toString();
+	}
+
+	public String formatInput(Double value) {
+		if (inputFormat == null)
+			return value.toString();
+		return inputFormat.format(value).toString();
+	}
+	
+	public static enum TransferFunctionType {
+		INPUT, OUTPUT, BIDIRECTIONAL
+	}
+	
 }
