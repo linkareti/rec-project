@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253664868652
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664868681
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664875374
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664877017
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664880291
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253664901852
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253664907100
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664907128
+error,log,,,"SVN: '0x0000000d: Locate Projects' operation finished with error",1253664907490
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664907631
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664988532
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664991970
+error,log,,,"SVN: '0x00000011: Get Log Messages' operation finished with error",1253665010561
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.copy",1253665019428
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253665098818
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253665104246
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253665104283
+error,log,,,"SVN: '0x0000000d: Locate Projects' operation finished with error",1253665104675
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253665104785
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253665108142
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253665109761
+closed,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253665111505
+stopped,bundle,org.eclipse.jst.ws.axis.creation.ui,1.0.406.v200903031852,"org.eclipse.jst.ws.axis.creation.ui",1253665112188
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.ui,1.0.405.v200901261650,"org.eclipse.jst.ws.axis.consumption.ui",1253665112189
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.core,1.0.306.v200810082309,"org.eclipse.jst.ws.axis.consumption.core",1253665112189

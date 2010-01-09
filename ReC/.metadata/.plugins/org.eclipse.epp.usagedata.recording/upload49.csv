@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+error,log,,,"Operation details",1253473488526
+error,log,,,"Operation details",1253473488526
+error,log,,,"Operation details",1253473488526
+error,log,,,"Operation details",1253473488536
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253473524083
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473524111
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473525545
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473605126
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473608314
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.copy",1253474016208
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253474336677
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474336706
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474349445
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474357741
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474362144
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474381427
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474385015
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253474391792
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474391822
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474406182
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253474417348
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253474417348
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474417378
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474424339
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253474551918
