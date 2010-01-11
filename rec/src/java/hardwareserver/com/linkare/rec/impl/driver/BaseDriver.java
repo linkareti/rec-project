@@ -10,6 +10,7 @@ import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.threading.TimedOutException;
 
 /**
  * 
@@ -177,5 +178,5 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 			throws WrongConfigurationException;
 
 	public abstract void configure(HardwareAcquisitionConfig config, HardwareInfo info)
-			throws WrongConfigurationException;
+			throws WrongConfigurationException, IncorrectStateException, TimedOutException;
 }
