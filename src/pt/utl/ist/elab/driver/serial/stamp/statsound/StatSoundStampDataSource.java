@@ -249,7 +249,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				sr.stopAcquiring();
 				
-				nPoints = 500;
+				nPoints = 100;
 				
 				byte[] toSend = new byte[nPoints];
 				byte[] acqByte = sr.getAcqBytes();
@@ -336,7 +336,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	private boolean soundPlaying = false;
 
 	public void playPulseWave(double freq, int time, int wait) {
-		System.out.println("Creating a Sound Thread for a pink noise of freq: " + freqIni);
+		System.out.println("Creating a Sound Thread for a pulse of freq: " + freqIni);
 		soundBoard = new SoundThread(SoundThread.PULSE);
 		soundBoard.newLine();
 		soundBoard.configure((float) freqIni, 0f, time, wait);
