@@ -171,7 +171,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			else if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).startsWith(EXP_2)) {
 
 				if (!soundPlaying) {
-					playSinWave(freqIni, freqFin, (int) Math.round(config.getTotalSamples()/2.0), 0);
+					playSinWave(freqIni, freqFin, (int) Math.round(config.getTotalSamples()/2.0/1.3214), 0);
 					soundPlaying = true;
 				}
 
