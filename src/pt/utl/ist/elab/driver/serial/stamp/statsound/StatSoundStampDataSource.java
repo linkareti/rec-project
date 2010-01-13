@@ -177,7 +177,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				try {
 					// TEMPO INICIAL ATE AQUISICAO
-					Thread.currentThread().sleep(3000);
+					Thread.currentThread().sleep(1500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -193,7 +193,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					}
 					try {
 						// COMPASSO DE ESPERA
-						Thread.currentThread().sleep(150);
+						Thread.currentThread().sleep(180);
 						synchronized (syncWait) {
 							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering syncronized");
 							while (!rmsAvailable && !expEnded) {
