@@ -64,7 +64,7 @@ public class Oscilador extends AudioInputStream {
 									
 			for (int nFrame = 0; nFrame < nFullLengthInFrames; nFrame++) {
 				
-				if (nFrame % Math.round(nFullLengthInFrames/100) == 0 || dCurrentPeriod == 0)
+				//if (nFrame % Math.round(nFullLengthInFrames/100) == 0 || dCurrentPeriod == 0)
 					dCurrentPeriod = 1. / (double) (frequencia1 + (double) nFrame / (double) nFullLengthInFrames * (frequencia2 - frequencia1));
 				
 				float fFullPosition = (float) nFrame / (float) nFullLengthInFrames * (lengthInSeconds);
