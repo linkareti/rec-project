@@ -264,7 +264,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					nPoints = acqByte.length / 2;
 				}
 				
-				for (int i = 0; i < Math.round(nPoints/4); i++) {
+				//40 amostras por milissegundo
+				
+				for (int i = 0; i < Math.round(nPoints); i++) {
 					values = new PhysicsValue[7];
 					
 					String string = "";
