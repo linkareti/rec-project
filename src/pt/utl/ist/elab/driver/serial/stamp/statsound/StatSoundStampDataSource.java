@@ -249,7 +249,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				sr.stopAcquiring();
 				
-				nPoints = 200;
+				nPoints = 500;
 				
 				byte[] toSend = new byte[nPoints];
 				byte[] acqByte = sr.getAcqBytes();
@@ -264,7 +264,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					nPoints = acqByte.length / 2;
 				}
 				
-				for (int i = 0; i < Math.round(nPoints/4); i++) {
+				for (int i = 0; i < Math.round(nPoints/40); i++) {
 					values = new PhysicsValue[7];
 					
 					String string = "";
