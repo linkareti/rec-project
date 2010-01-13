@@ -339,6 +339,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		System.out.println("Creating a Sound Thread for a pulse of freq: " + freqIni);
 		soundBoard = new SoundThread(SoundThread.PULSE);
 		soundBoard.newLine();
+		freqIni = 200;
 		soundBoard.configure((float) freqIni, 0f, time, wait);
 		soundBoard.newLine();
 		new Thread(soundBoard).start();

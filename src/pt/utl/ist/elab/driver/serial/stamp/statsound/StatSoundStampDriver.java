@@ -270,7 +270,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 				if (waveForm == 0)
 					dataSource.playPinkNoise(freqIni, 15, 2000);
 				else if (waveForm == 1) {
-					freqIni = 200;
 					dataSource.playPulseWave(freqIni, 15, 2000);
 				}
 				dataSource.startAcquiring(false);
