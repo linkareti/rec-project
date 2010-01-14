@@ -130,7 +130,7 @@ public class Oscilador extends AudioInputStream {
 			System.out.println("#: " + audioFormat.getFrameRate() + " " + frequencia1/10);
 			//int perFrames = Math.round(audioFormat.getFrameRate() / ((float) -1900 + frequencia1 * 15.2f ));
 			int perFrames = Math.round(audioFormat.getFrameRate() / (frequencia1/10));
-			int perFrames10 =  10; //Math.round(perFrames / 10f);
+			int perFrames10 =  Math.round(perFrames / 25f);
 			float fValue = 0f;
 			for (int nFrame = 0; nFrame < nFullLengthInFrames; nFrame++) {
 				if (nFrame % perFrames < perFrames10) {
