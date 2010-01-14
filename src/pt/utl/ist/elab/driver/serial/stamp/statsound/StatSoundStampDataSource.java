@@ -204,7 +204,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					}
 					try {
 						// COMPASSO DE ESPERA
-						Thread.currentThread().sleep(180);
+						Thread.currentThread().sleep(200);
 						synchronized (syncWait) {
 							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering syncronized");
 							while (!rmsAvailable && !expEnded) {
