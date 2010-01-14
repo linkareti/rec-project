@@ -47,7 +47,7 @@ public class Installer {
 		new Installer().install(args);
 	}
 
-	private void printOSInfo() {
+	protected void printOSInfo() {
 
 		log.fine("jna.library.path: " + System.getProperty("jna.library.path"));
 
