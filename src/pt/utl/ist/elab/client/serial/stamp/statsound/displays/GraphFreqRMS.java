@@ -1,5 +1,5 @@
 /*
- * PistonRMS.java
+' * PistonRMS.java
  *
  * Created on October 13, 2003, 5:55 PM
  */
@@ -17,7 +17,7 @@ public class GraphFreqRMS extends MyDefaultXYExperimentGraph
     {
         super();
         setChannelDisplayX(1);
-        setChannelDisplayYArray(new int[]{2,3});
+        setChannelDisplayYArray(new int[]{3,4});
     }    
     
     public String getName()
