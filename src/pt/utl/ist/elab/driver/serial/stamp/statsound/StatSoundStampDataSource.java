@@ -221,10 +221,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 						values[4] = PhysicsValueFactory.fromInt(temp.intValue(), config.getChannelsConfig(4).getSelectedScale());
 
 					if (Math.abs(values[2].getValue().getDoubleValue()) > 0.01d && Math.abs(values[3].getValue().getDoubleValue()) > 0.01d) {
-						//System.out.println("Add row : " + values[2].getValue().getFloatValue() + " , " + values[3].getValue().getFloatValue());
 						super.addDataRow(values);
 					}
-					//System.out.println("Passed through..." + f);
 
 					setFrequency(f);
 				}
@@ -264,8 +262,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					nPoints = acqByte.length / 2;
 				}
 				
-				//40 amostras por milissegundo
-				
+				//44100/100 amostras por milissegundo
 				for (int i = 0; i < Math.round(nPoints); i++) {
 					values = new PhysicsValue[7];
 					
@@ -284,11 +281,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					super.addDataRow(values);
 				}
 
-//				System.arraycopy(acqByte, startPoint, toSend, 0, nPoints);
-//
-//				values[5] = new PhysicsValue(PhysicsValFactory.fromByteArray(toSend, "sound/wav"), null, com.linkare.rec.data.Multiplier.none);
-//
-//				super.addDataRow(values);
 				setDataSourceEnded();
 				expEnded = true;
 			}
