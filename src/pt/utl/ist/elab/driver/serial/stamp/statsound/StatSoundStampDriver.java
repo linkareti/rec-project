@@ -22,6 +22,7 @@ import pt.utl.ist.elab.driver.serial.stamp.transproc.processors.StampStartProces
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.logging.LoggerUtil;
@@ -77,6 +78,12 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 		String posIni = config.getSelectedHardwareParameterValue(StampConfigTranslator.POS_INIT_STR);
 		String posFin = config.getSelectedHardwareParameterValue(StampConfigTranslator.POS_FIN_STR);
+
+		System.out.println("Parametros recebidos:");
+		for (ParameterConfig pconfig : config.getSelectedHardwareParameters()) {
+			System.out.println(pconfig.getParameterName() + "=" + pconfig.getParameterValue());
+		}
+
 
 		freqIni = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_INI));
 		freqFin = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_END));
