@@ -71,9 +71,11 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 	@SuppressWarnings("static-access")
 	public void processDataCommand(StampCommand cmd) {
-		//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering processDataCommand on StatSoundStampDataSource");
-		//System.out.println("Entering processDataCommand on StatSoundStampDataSource");
-		//System.out.println("EXP:= " + config.getSelectedHardwareParameterValue(TYPE_OF_EXP));
+		// Logger.getLogger("StampDriver.Logger").log(Level.INFO,
+		// "Entering processDataCommand on StatSoundStampDataSource");
+		// System.out.println("Entering processDataCommand on StatSoundStampDataSource");
+		// System.out.println("EXP:= " +
+		// config.getSelectedHardwareParameterValue(TYPE_OF_EXP));
 
 		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			System.out.println("Return from process data...cmd isn't valid");
@@ -88,14 +90,15 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 		PhysicsValue[] values = new PhysicsValue[7];
 
-		//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Inside processDataCommand using " + cmd.getCommandIdentifier());
+		// Logger.getLogger("StampDriver.Logger").log(Level.INFO,
+		// "Inside processDataCommand using " + cmd.getCommandIdentifier());
 
 		if (cmd.getCommandIdentifier().equals(StampStatSoundProcessor.COMMAND_IDENTIFIER)) {
 			// receiving POS message ;)
-			
+
 			/** PISTON EXPERIMENT */
 			if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).equalsIgnoreCase(EXP_1)) {
-				
+
 				Integer pos;
 				try {
 					pos = (Integer) cmd.getCommandData(StampStatSoundProcessor.COMMAND_IDENTIFIER);
@@ -110,42 +113,47 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					soundPlaying = true;
 				}
 
-//				// EXP_1 does not vary on frequency but only on piston distance
-//				SoundThread th = playSinWave(freqIni, freqIni, 200, 0);
-//				sr.startAcquiring(true);
-//				try {
-//					Thread.currentThread().sleep(100);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//				sr.stopAcquiring();
-//				th.stopWave();
-				
+				// // EXP_1 does not vary on frequency but only on piston
+				// distance
+				// SoundThread th = playSinWave(freqIni, freqIni, 200, 0);
+				// sr.startAcquiring(true);
+				// try {
+				// Thread.currentThread().sleep(100);
+				// } catch (InterruptedException e) {
+				// e.printStackTrace();
+				// }
+				// sr.stopAcquiring();
+				// th.stopWave();
+
 				int posValor = pos.intValue();
 
 				try {
-					//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos1");
+					// Logger.getLogger("StampDriver.Logger").log(Level.INFO,
+					// "pos1");
 					synchronized (syncWait) {
-						//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos2");
-						//long time1 = System.currentTimeMillis();
+						// Logger.getLogger("StampDriver.Logger").log(Level.INFO,
+						// "pos2");
+						// long time1 = System.currentTimeMillis();
 						Thread.currentThread().sleep(200);
 
 						while (!rmsAvailable && !expEnded) {
-							//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos3");
+							// Logger.getLogger("StampDriver.Logger").log(Level.INFO,
+							// "pos3");
 							syncWait.wait();
 						}
-						//long time2 = System.currentTimeMillis();
+						// long time2 = System.currentTimeMillis();
 
-						//System.out.println("Waited:" + (time2 - time1));
+						// System.out.println("Waited:" + (time2 - time1));
 						rmsAvailable = false;
 					}
-					//Logger.getLogger("StampDriver.Logger").log(Level.INFO, "pos4");
+					// Logger.getLogger("StampDriver.Logger").log(Level.INFO,
+					// "pos4");
 				} catch (InterruptedException ie) {
 				}
 
 				double rmsLeftValor = sr.getRMS(sr.LEFT_CHANNEL);
-				double rmsRightValor = sr.getRMS(sr.RIGHT_CHANNEL);					
-				
+				double rmsRightValor = sr.getRMS(sr.RIGHT_CHANNEL);
+
 				sr.resetRMS();
 
 				values[0] = PhysicsValueFactory.fromInt(posValor, config.getChannelsConfig(0).getSelectedScale());
@@ -156,11 +164,13 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					values[4] = PhysicsValueFactory.fromInt(temp.intValue(), config.getChannelsConfig(4).getSelectedScale());
 
 				if (Math.abs(values[2].getValue().getDoubleValue()) > 0.01d && Math.abs(values[3].getValue().getDoubleValue()) > 0.01d) {
-					//System.out.println("Add row : " + values[2].getValue().getFloatValue() + " , " + values[3].getValue().getFloatValue());
+					// System.out.println("Add row : " +
+					// values[2].getValue().getFloatValue() + " , " +
+					// values[3].getValue().getFloatValue());
 					super.addDataRow(values);
 				}
-				
-				//System.out.println("Passed through..." + posValor);
+
+				// System.out.println("Passed through..." + posValor);
 				super.addDataRow(values);
 
 				counter++;
@@ -171,18 +181,19 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 			else if (config.getSelectedHardwareParameterValue(TYPE_OF_EXP).startsWith(EXP_2)) {
 
 				if (!soundPlaying) {
-					playSinWave(freqIni, freqFin, (int) Math.round(config.getTotalSamples()/4.0), 4);
+					playSinWave(freqIni, freqFin, (int) Math.round(config.getTotalSamples() / 4.0), 4);
 					soundPlaying = true;
 				}
 
 				try {
 					// TEMPO INICIAL ATE AQUISICAO
-					Thread.currentThread().sleep(1500);
+					Thread.currentThread().sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				for (double f = freqIni; f <= freqFin; f += step) {
-					//System.out.println("freqIni :" + freqIni + " freqFin :" + freqFin + " step :" + step);
+					// System.out.println("freqIni :" + freqIni + " freqFin :" +
+					// freqFin + " step :" + step);
 					Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Exp2 for loop");
 					if (expEnded) {
 						soundPlaying = false;
@@ -246,9 +257,9 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				}
 
 				sr.stopAcquiring();
-				
+
 				nPoints = 400;
-				
+
 				byte[] toSend = new byte[nPoints];
 				byte[] acqByte = sr.getAcqBytes();
 
@@ -261,23 +272,65 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				if ((startPoint + nPoints) > acqByte.length) {
 					nPoints = acqByte.length / 2;
 				}
-				
-				//44100/100 amostras por milissegundo
+
+				// 44100/100 amostras por milissegundo
 				for (int i = 0; i < Math.round(nPoints); i++) {
 					values = new PhysicsValue[7];
-					
+
 					String string = "";
-					for (int j=0; j < 4; j++) {
-						string = string + " *" + i*4+j + "*:" + acqByte[i*4+j];
+					for (int j = 0; j < 4; j++) {
+						string = string + " *" + i * 4 + j + "*:" + acqByte[i * 4 + j];
 					}
-					
+
 					System.out.println("block " + i + " : " + string);
-					
+
 					values[0] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
 					values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
-					values[2] = PhysicsValueFactory.fromDouble( ((double) (acqByte[i*4+1] << 8 | (255 & acqByte[i*4])) / 250.0   ) /*acqByte[i*4] + (acqByte[i*4+1])*255*/, config.getChannelsConfig(2).getSelectedScale());
-					values[3] = PhysicsValueFactory.fromDouble( (double) (acqByte[i*4+3] << 8 | (255 & acqByte[i*4+2])) /*acqByte[i*4+2] + (acqByte[i*4+3])*255*/, config.getChannelsConfig(3).getSelectedScale());
-					
+					values[2] = PhysicsValueFactory.fromDouble(((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i * 4])) / 250.0) /*
+																																	 * acqByte[
+																																	 * i
+																																	 * *
+																																	 * 4
+																																	 * ]
+																																	 * +
+																																	 * (
+																																	 * acqByte
+																																	 * [
+																																	 * i
+																																	 * *
+																																	 * 4
+																																	 * +
+																																	 * 1
+																																	 * ]
+																																	 * )
+																																	 * *
+																																	 * 255
+																																	 */, config.getChannelsConfig(2)
+							.getSelectedScale());
+					values[3] = PhysicsValueFactory
+							.fromDouble((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 2])) /*
+																										 * acqByte[
+																										 * i
+																										 * *
+																										 * 4
+																										 * +
+																										 * 2
+																										 * ]
+																										 * +
+																										 * (
+																										 * acqByte
+																										 * [
+																										 * i
+																										 * *
+																										 * 4
+																										 * +
+																										 * 3
+																										 * ]
+																										 * )
+																										 * *
+																										 * 255
+																										 */, config.getChannelsConfig(3).getSelectedScale());
+
 					super.addDataRow(values);
 				}
 
