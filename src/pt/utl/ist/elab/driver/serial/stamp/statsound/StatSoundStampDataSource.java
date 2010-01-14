@@ -352,17 +352,16 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		soundBoard = new SoundThread(SoundThread.PULSE);
 		soundBoard.newLine();
 		//fpulse
-		freqIni = freq;
-		soundBoard.configure((float) freqIni, 0f, time, wait);
+		soundBoard.configure((float) freq, 0f, time, wait);
 		soundBoard.newLine();
 		new Thread(soundBoard).start();
 	}
 
 	public void playPinkNoise(double freq, int time, int wait) {
-		System.out.println("Creating a Sound Thread for a pink noise of freq: " + freqIni);
+		System.out.println("Creating a Sound Thread for a pink noise of freq: " + freq);
 		soundBoard = new SoundThread(SoundThread.PINK_NOISE);
 		soundBoard.newLine();
-		soundBoard.configure((float) freqIni, 0f, time, wait);
+		soundBoard.configure((float) freq, 0f, time, wait);
 		soundBoard.newLine();
 		new Thread(soundBoard).start();
 	}
