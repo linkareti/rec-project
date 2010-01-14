@@ -96,7 +96,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		
 		//System.out.println("freqfin : " + freqFin);
 
-		if (freqFin < freqIni) {
+		if (freqFin < freqIni && !typeOfExp.equals(StatSoundStampDataSource.EXP_3)) {
 			int temp = freqFin;
 			freqFin = freqIni;
 			freqIni = temp;
@@ -106,6 +106,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_1)) {
 			/** This are the stamp n Samples... */
 			nSamples = config.getTotalSamples();
+		} else if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
+			nSamples = 500;
 		} else {
 			nSamples = 1;
 			posFin = posIni;
