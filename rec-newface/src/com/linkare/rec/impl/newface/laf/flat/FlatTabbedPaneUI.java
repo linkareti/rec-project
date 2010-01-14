@@ -86,7 +86,7 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 		ensureCurrentLayout();
 		paintTabArea(g, tabPlacement, selectedIndex);
 		g.setColor(COLOR_SELECTED_TAB_BG);
-		g.fillRect(0, 28, tabPane.getWidth(), tabPane.getHeight() - 28);
+		g.fillRect(0, 28, tabPane.getWidth(), tabPane.getHeight() - 29);
 	}
 
 	private void ensureCurrentLayout() {

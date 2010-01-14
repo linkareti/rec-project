@@ -40,6 +40,7 @@
 	<classpathentry kind="lib" path="lib/rec/client-experiments/pvClient.jar"/>
 	<classpathentry kind="lib" path="lib/rec/client-experiments/scubaClient.jar"/>
 	<classpathentry kind="lib" path="lib/rec/client-experiments/radioactividadeClient.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ReCProject"/>
+	<classpathentry kind="lib" path="lib/rec/client-experiments/penduloClient.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ReC"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

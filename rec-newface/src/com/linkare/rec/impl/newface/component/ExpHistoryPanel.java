@@ -1,5 +1,6 @@
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -17,9 +18,15 @@ public class ExpHistoryPanel extends javax.swing.JPanel {
 
 	private ExperimentHistoryUINode expHist = null;
 
+	public ExpHistoryPanel() {
+		setLayout(new FlowLayout());
+        add(new JLabel("Experiment History"));
+	}
+
 	public ExpHistoryPanel(ExperimentHistoryUINode expHist) {
 		this.expHist = expHist;
-		initComponents();
+		//initComponents();
+        add(new JLabel("Experiment History"));
 	}
 
 	/**

@@ -46,6 +46,7 @@ made subject to such option by the copyright holder.
     <property name="jnlp.file.name.default" value="launch.jnlp"/>
     <property name="jnlp.wininstaller.file.name.default" value="windowsInstaller.jnlp"/>
     <property name="jnlp.linuxinstaller.file.name.default" value="linuxInstaller.jnlp"/>
+	<property name="jnlp.macinstaller.file.name.default" value="macInstaller.jnlp"/> 
     <property name="jnlp.dest.dir" location="dist"/>
     
     <!-- helper file to create list of arguments, etc. -->
@@ -78,6 +79,7 @@ made subject to such option by the copyright holder.
     <target name="-set-installers-jnlp-filename-default">
         <property name="winInstaller.jnlp.file" value="${jnlp.wininstaller.file.name.default}"/>
         <property name="linuxInstaller.jnlp.file" value="${jnlp.linuxinstaller.file.name.default}"/>
+		<property name="macInstaller.jnlp.file" value="${jnlp.macinstaller.file.name.default}"/>
     </target>
 
     <target name="-check-filename-prop">
@@ -107,6 +109,7 @@ made subject to such option by the copyright holder.
         <generate-jnlp destfile="${jnlp.dest.dir}/${jnlp.file}_" template="master-${jnlp.descriptor}.jnlp" destdir="dist"/>
         <generate-jnlp destfile="${jnlp.dest.dir}/${winInstaller.jnlp.file}_" template="windowsInstaller.jnlp" destdir="dist"/>
         <generate-jnlp destfile="${jnlp.dest.dir}/${linuxInstaller.jnlp.file}_" template="linuxInstaller.jnlp" destdir="dist"/>
+		<generate-jnlp destfile="${jnlp.dest.dir}/${macInstaller.jnlp.file}_" template="macInstaller.jnlp" destdir="dist"/>
         <antcall target="-strip-empty-lines"/>
     </target>
     
@@ -135,6 +138,14 @@ made subject to such option by the copyright holder.
             </filterchain>
         </copy>
         <delete file="${jnlp.dest.dir}/${linuxInstaller.jnlp.file}_" failonerror="false"/>
+		<copy file="${jnlp.dest.dir}/${macInstaller.jnlp.file}_" tofile="${jnlp.dest.dir}/${macInstaller.jnlp.file}" overwrite="true" encoding="UTF-8">
+            <filterchain>
+                <linecontainsregexp>
+                    <regexp pattern=".+"/>
+                </linecontainsregexp>
+            </filterchain>
+        </copy>
+        <delete file="${jnlp.dest.dir}/${macInstaller.jnlp.file}_" failonerror="false"/>
     </target>
     
     <target name="-test-generate-task-available">

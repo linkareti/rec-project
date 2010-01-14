@@ -46,7 +46,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventObject;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -275,10 +274,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public static DefaultDialog<UnexpectedErrorPane> getUnexpectedErrorBox(Throwable cause) {
 		if (unexpectedErrorBox == null) {
 			unexpectedErrorBox = new DefaultDialog<UnexpectedErrorPane>(new UnexpectedErrorPane(cause));
-			unexpectedErrorBox.pack();
 			unexpectedErrorBox.setLocationRelativeTo(null);
 		}
 		unexpectedErrorBox.getContent().setErrorCause(cause);
+		unexpectedErrorBox.pack();
 		return unexpectedErrorBox;
 	}
 
@@ -1081,8 +1080,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		if (dataModelLocation != null) {
 			try {
 				Object expDataModelTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(), dataModelLocation);
-				if (java.beans.Beans.isInstanceOf(expDataModelTemp, ExpDataModel.class))
+				if (java.beans.Beans.isInstanceOf(expDataModelTemp, ExpDataModel.class)) {
+					// TODO - Verificar quando o exp data model é actualizado!!! Para enviar para a view.
 					experimentDataModel = (ExpDataModel) expDataModelTemp;
+				}
 			} catch (Exception e) {
 				log.log(Level.SEVERE, "Could not instantiate datamodel", e);
 			}

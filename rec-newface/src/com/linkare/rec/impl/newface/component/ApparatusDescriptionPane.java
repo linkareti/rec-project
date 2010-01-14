@@ -16,6 +16,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.MissingResourceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,22 +73,25 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 				descriptionStringBundleKey = apparatusConfig.getDescriptionStringBundleKey();
 			}
 			if (apparatusConfig.getWebResource() != null && apparatusConfig.getWebResource().size() > 0) {
-				// Get the first web resource for the link
-				WebResource webResource = apparatusConfig.getWebResource().get(0);
-				webResourceLocation = webResource.getLocationBundleKey();
-				webResourceLocation = ReCResourceBundle.findString(descriptionStringBundleKey);
+				String webResourceLocationBundleKey = null;
+				try {
+					// Get the first web resource for the link
+					WebResource webResource = apparatusConfig.getWebResource().get(0);
+					webResourceLocationBundleKey = webResource.getLocationBundleKey();
+					webResourceLocation = ReCResourceBundle.findStringOrDefault(webResourceLocationBundleKey, null);
+				} catch (MissingResourceException e) {
+					log.warning("Could not find the resource " + webResourceLocationBundleKey + " on the experiment bundle");
+				}
 			}
 
 			lblApparatusName.setText(ReCResourceBundle.findString(displayStringBundleKey));
 			// FIXME Set default icon
 			lblApparatusImg.setIcon(ReCResourceBundle.findImageIconOrDefault(desktopLocationBundleKey, new ImageIcon()));
-			txtApparatusDescription.setText(ReCResourceBundle.findString(descriptionStringBundleKey));
+			txtApparatusDescription.setText(ReCResourceBundle.findStringOrDefault(descriptionStringBundleKey,
+					"Apparatus description was not found."));
 			btnLink.setVisible(webResourceLocation != null);
-			log.info(webResourceLocation);
 			btnLink.setActionCommand(webResourceLocation);
-
 		}
-
 	}
 
 	/**
@@ -180,6 +184,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 			if (desktop.isSupported(Desktop.Action.BROWSE)) {
 				URI uri;
 				try {
+					log.fine("Browsing " + actionCommand);
 					uri = new URI(actionCommand);
 					desktop.browse(uri);
 				} catch (URISyntaxException e) {
