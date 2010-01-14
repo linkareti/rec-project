@@ -352,7 +352,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		soundBoard = new SoundThread(SoundThread.PULSE);
 		soundBoard.newLine();
 		//fpulse
-		freqIni = 200;
+		freqIni = 50;
 		soundBoard.configure((float) freqIni, 0f, time, wait);
 		soundBoard.newLine();
 		new Thread(soundBoard).start();
