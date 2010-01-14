@@ -348,11 +348,11 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 	private boolean soundPlaying = false;
 
 	public void playPulseWave(double freq, int time, int wait) {
-		System.out.println("Creating a Sound Thread for a pulse of freq: " + freqIni);
+		System.out.println("Creating a Sound Thread for a pulse of freq: " + freq);
 		soundBoard = new SoundThread(SoundThread.PULSE);
 		soundBoard.newLine();
 		//fpulse
-		freqIni = 50;
+		freqIni = freq;
 		soundBoard.configure((float) freqIni, 0f, time, wait);
 		soundBoard.newLine();
 		new Thread(soundBoard).start();
