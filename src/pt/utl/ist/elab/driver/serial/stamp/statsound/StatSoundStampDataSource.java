@@ -249,7 +249,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				sr.stopAcquiring();
 				
-				nPoints = 100;
+				nPoints = 400;
 				
 				byte[] toSend = new byte[nPoints];
 				byte[] acqByte = sr.getAcqBytes();

@@ -106,8 +106,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_1)) {
 			/** This are the stamp n Samples... */
 			nSamples = config.getTotalSamples();
-		} else if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
-			nSamples = 500;
+		//} else if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
+		//	nSamples = 500;
 		} else {
 			nSamples = 1;
 			posFin = posIni;
