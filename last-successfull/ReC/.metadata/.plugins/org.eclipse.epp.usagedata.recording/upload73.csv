@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk",1253475242810
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253475243157
+started,bundle,org.eclipse.equinox.p2.updatesite,1.0.100.v20090525,"org.eclipse.equinox.p2.updatesite",1253475245266
+error,log,,,"Unable to load the repository http://www.eclipse.org/subversive/downloads",1253475247796
+error,log,,,"Unable to load the repository http://download.eclipse.org/subversive",1253475252984
+error,log,,,"Unable to load the repository http://www.eclipse.org/subversive",1253475257378
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253475779038
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253475779075
+started,bundle,org.eclipse.ui.browser,3.2.300.v20090526,"org.eclipse.ui.browser",1253475782192
+started,bundle,org.eclipse.wst.server.core,1.1.101.v20090515,"org.eclipse.wst.server.core",1253475782521
+started,bundle,org.eclipse.wst.server.ui,1.1.102.v20090515,"org.eclipse.wst.server.ui",1253475782545
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253475787583
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253477777379
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253477777398
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253477789194
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253491000883
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253491006185
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253491335447
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253491335478
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253491337849
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253491403864
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253491408995
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.copy",1253491505485
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.paste",1253491516872
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.copy",1253491648544

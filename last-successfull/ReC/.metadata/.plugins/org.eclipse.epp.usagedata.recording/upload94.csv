@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.core.variables,3.2.200.v20090521,"org.eclipse.core.variables",1253493646590
+started,bundle,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui",1253493646600
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493668096
+started,bundle,org.eclipse.equinox.p2.ui,1.0.100.v20090527-1812,"org.eclipse.equinox.p2.ui",1253493672681
+started,bundle,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk",1253493672724
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493673069
+error,log,,,"Operation details",1253493684627
+error,log,,,"Operation details",1253493684628
+error,log,,,"Operation details",1253493684671
+error,log,,,"Operation details",1253493684702
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253493753495
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493753520
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493756414
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253493773917
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493773940
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493774358
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493973775
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494260718
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494350507
+started,bundle,org.eclipse.ui.browser,3.2.300.v20090526,"org.eclipse.ui.browser",1253494352731
+started,bundle,org.eclipse.wst.server.core,1.1.101.v20090515,"org.eclipse.wst.server.core",1253494353038
+started,bundle,org.eclipse.wst.server.ui,1.1.102.v20090515,"org.eclipse.wst.server.ui",1253494353047
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494354344
+error,log,,,"Operation details",1253494365154
+error,log,,,"Operation details",1253494365154
