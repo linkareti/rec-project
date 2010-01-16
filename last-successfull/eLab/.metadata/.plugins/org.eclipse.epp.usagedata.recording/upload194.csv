@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+java.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1253691336459
+java.specification.version,sysinfo,,,"1.6",1253691336459
+java.vendor,sysinfo,,,"Sun Microsystems Inc.",1253691336459
+java.version,sysinfo,,,"1.6.0_14",1253691336459
+java.vm.info,sysinfo,,,"mixed mode",1253691336459
+java.vm.name,sysinfo,,,"Java HotSpot(TM) Client VM",1253691336459
+java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1253691336459
+java.vm.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1253691336459
+java.vm.specification.version,sysinfo,,,"1.0",1253691336459
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1253691336459
+java.vm.version,sysinfo,,,"14.0-b16",1253691336459
+started,bundle,org.eclipse.team.cvs.ui,3.3.200.I20090521-1750,"org.eclipse.team.cvs.ui",1253691336639
+started,bundle,org.eclipse.mylyn.commons.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.commons.ui",1253691336776
+started,bundle,org.eclipse.mylyn.bugzilla.core,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.bugzilla.core",1253691337247
+started,bundle,org.eclipse.mylyn.bugzilla.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.bugzilla.ui",1253691337313
+started,bundle,org.eclipse.ui.forms,3.4.0.v20090526,"org.eclipse.ui.forms",1253691337415
+started,bundle,org.eclipse.mylyn.tasks.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.tasks.ui",1253691337730
+started,bundle,org.eclipse.mylyn.team.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.team.ui",1253691337792
+started,bundle,org.eclipse.mylyn.monitor.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.monitor.ui",1253691337977
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691355557
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1253691358665
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253691373065
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253691373165
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253691373293
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253691377865
