@@ -6,40 +6,32 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="LABORATORY")
-public class Laboratory extends Resource{
+@Table(name = "LABORATORY")
+@NamedQueries( {
+		@NamedQuery(name = "findByName", query = "SELECT lab FROM Laboratory lab WHERE lab.name=:name")})
+public class Laboratory extends Resource {
 
-	@Id 
-	@GeneratedValue
-	private long id;
-	
-	@Basic
+	@Id
 	private String name;
-	
+
 	@Basic
 	private String description;
-	
+
 	@Embedded
 	private State state;
-	
+
 	@Basic
-	@OneToMany (fetch=FetchType.LAZY, mappedBy="laboratory")
-	private List<Experiment> experiments=new ArrayList<Experiment>();
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "laboratory")
+	private List<Experiment> experiments = new ArrayList<Experiment>();
 
 	public String getName() {
 		return name;
@@ -71,5 +63,9 @@ public class Laboratory extends Resource{
 
 	public void setState(State state) {
 		this.state = state;
+	}
+
+	public static Laboratory findByName(String laboratorio, EntityManager em) {
+		return (Laboratory) em.createNamedQuery("findByName").setParameter("name", laboratorio).getResultList().get(0);
 	}
 }
