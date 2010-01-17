@@ -1,5 +1,6 @@
 package com.linkare.rec.am.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -51,7 +52,7 @@ public class Role {
 	}
 
 	@ManyToMany(mappedBy = "roles")
-	private List<User> users;
+	private List<User> users = new ArrayList<User>();
 
 	public List<User> getUsers() {
 		return users;
@@ -59,5 +60,14 @@ public class Role {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public void addUser(User user) {
+
+		this.users.add(user);
+	}
+
+	public void removeUser(User user) {
+		this.users.remove(user);
 	}
 }
