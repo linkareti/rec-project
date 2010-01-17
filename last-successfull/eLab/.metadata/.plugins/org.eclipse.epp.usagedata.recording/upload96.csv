@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494836250
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494845486
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494859130
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494862365
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494862515
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494865477
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494865773
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494868658
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253494888667
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494888692
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253494889082
+error,log,,,"Transfer Exception",1253495016965
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495033676
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495033677
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495033765
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495033766
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495036631
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495039589
+error,log,,,"Operation details",1253495056908
+error,log,,,"Operation details",1253495056910
+error,log,,,"Operation details",1253495056937
+error,log,,,"Operation details",1253495056948
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253495085829
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495085848
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253495086220

@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+error,log,,,"Unable to load the repository http://download.eclipse.org/subversive",1253470431137
+error,log,,,"Unable to load the repository http://www.eclipse.org/subversive",1253470557223
+error,log,,,"Operation details",1253470561768
+error,log,,,"Operation details",1253470561768
+error,log,,,"Operation details",1253470561770
+error,log,,,"Operation details",1253470561781
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253470582690
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253470582725
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253470592292
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253470598808
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.properties",1253470607134
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.properties",1253470612777
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253470773821
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253470785005
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.properties",1253470816824
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253470824010
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253470855316
+activated,perspective,org.eclipse.jst.j2ee.ui,1.1.300.v200905132034,"org.eclipse.jst.j2ee.J2EEPerspective",1253470858973
+activated,view,org.eclipse.ui.navigator.resources,3.4.0.I20090525-2000,"org.eclipse.ui.navigator.ProjectExplorer",1253470858988
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253470861689
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253470865423
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253470884343
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253471132450
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471164270
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.browser.RepositoryBrowser",1253471169715
