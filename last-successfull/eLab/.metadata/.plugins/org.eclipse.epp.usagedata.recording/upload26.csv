@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+ws,sysinfo,,,"gtk",1253456324328
+locale,sysinfo,,,"pt_PT",1253456324328
+processors,sysinfo,,,"2",1253456324329
+java.runtime.name,sysinfo,,,"Java(TM) SE Runtime Environment",1253456324329
+java.runtime.version,sysinfo,,,"1.6.0_14-b08",1253456324329
+java.specification.name,sysinfo,,,"Java Platform API Specification",1253456324329
+java.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1253456324329
+java.specification.version,sysinfo,,,"1.6",1253456324329
+java.vendor,sysinfo,,,"Sun Microsystems Inc.",1253456324329
+java.version,sysinfo,,,"1.6.0_14",1253456324329
+java.vm.info,sysinfo,,,"mixed mode",1253456324329
+java.vm.name,sysinfo,,,"Java HotSpot(TM) Client VM",1253456324329
+java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1253456324329
+java.vm.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1253456324329
+java.vm.specification.version,sysinfo,,,"1.0",1253456324329
+java.vm.vendor,sysinfo,,,"Sun Microsystems Inc.",1253456324329
+java.vm.version,sysinfo,,,"14.0-b16",1253456324329
+started,bundle,org.eclipse.mylyn.bugzilla.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.bugzilla.ui",1253456324338
+started,bundle,org.eclipse.mylyn.tasks.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.tasks.ui",1253456324385
+started,bundle,org.eclipse.mylyn.team.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.team.ui",1253456324389
+started,bundle,org.eclipse.mylyn.monitor.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.monitor.ui",1253456324412
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253456331848
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253456372877
+started,bundle,org.eclipse.equinox.p2.ui,1.0.100.v20090527-1812,"org.eclipse.equinox.p2.ui",1253456377813
+started,bundle,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk",1253456377836
