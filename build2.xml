@@ -1186,17 +1186,18 @@
 			</signjar>
 		</sequential>
 	</macrodef>
-
-	
 	
 	<target name="javadoc.rec">
-		 <javadoc destdir="${build.dir.javadocs}/rec" author="true" version="true" use="true" windowtitle="ReC - Javadocs" >
+		<javadoc destdir="${build.dir.javadocs}/rec" author="true" version="true" use="true" windowtitle="ReC - Javadocs" >
 		    <packageset dir="${rec.common.src.java.dir}" defaultexcludes="yes" >
 		    	<include name="com/linkare/rec/**"/>
 		    </packageset>
 		 	<classpath refid="rec.common.libs.classpath" />
 		 	<packageset dir="${rec.client.src.java.dir}" defaultexcludes="yes" >
 		 		<include name="com/linkare/**"/>
+		    </packageset>
+			 <packageset dir="${rec.ui.src.java.dir}" defaultexcludes="yes" >
+				<include name="com/linkare/rec/impl**"/>
 		    </packageset>
 		 	<classpath refid="rec.client.libs.classpath" />
 		 	<packageset dir="${rec.multicast.src.java.dir}" defaultexcludes="yes" >
@@ -1211,7 +1212,31 @@
 		    <bottom><![CDATA[<i>Copyright &#169; 2010 Linkare TI All Rights Reserved.</i>]]></bottom>
 		    <tag name="todo" scope="all" description="To do:"/>
 		    <link href="http://java.sun.com/javase/6/docs/api/"/>
+	  </javadoc>
+	</target>
+	
+	<target name="javadoc.elab">
+		 <javadoc destdir="${build.dir.javadocs}/elab" author="true" version="true" use="true" windowtitle="ELab - Javadocs" >
+		    <packageset dir="${elab.client.src.java.dir}" defaultexcludes="yes" >
+		    	<include name="pt/utl/ist/elab/**"/>
+		    </packageset>
+			<packageset dir="${elab.ui.src.java.dir}" defaultexcludes="yes" >
+		    	<include name="pt/utl/ist/elab/**"/>
+		    </packageset>		 	
+		 	<classpath refid="elab.client.libs.classpath" />
+		 	<packageset dir="${elab.multicast.src.java.dir}" defaultexcludes="yes" >
+		 		<include name="pt/utl/ist/elab/**"/>
+		    </packageset>
+		 	<classpath refid="elab.multicastcontroller.libs.classpath" />
+		 	<packageset dir="${elab.hardwareserver.src.java.dir}" defaultexcludes="yes" >
+		 		<include name="pt/utl/ist/elab/**"/>
+		    </packageset>
+		 	<classpath refid="elab.hardwareserver.libs.classpath" />
+		    <doctitle>ELab  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
+		    <bottom><![CDATA[<i>Copyright &#169; 2010 Linkare TI All Rights Reserved.</i>]]></bottom>
+		    <tag name="todo" scope="all" description="To do:"/>
+		    <link href="http://java.sun.com/javase/6/docs/api/"/>
 		  </javadoc>
-
 		</target>
+
 </project>
