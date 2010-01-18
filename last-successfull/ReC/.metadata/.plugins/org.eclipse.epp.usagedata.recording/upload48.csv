@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+closed,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.properties.RevPropertiesView",1253471344934
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471354264
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253471366067
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471366220
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.properties",1253471379121
+started,bundle,org.eclipse.wst.common.environment,1.0.202.v200807161459,"org.eclipse.wst.common.environment",1253471485228
+started,bundle,org.eclipse.jst.j2ee.web,1.1.300.v200904290430,"org.eclipse.jst.j2ee.web",1253471485344
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471485606
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471487893
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253471518652
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253472259238
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253472274217
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253472672630
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253472672804
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253472675346
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.copy",1253472686229
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253473269396
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473269425
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473270125
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473271534
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473272249
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473369526
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473372018
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473443958
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253473451016

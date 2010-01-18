@@ -1,0 +1,210 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="laboratorySearch" styleClass="edit">
+
+        <rich:simpleTogglePanel label="Laboratory Search Filter" switchType="ajax">
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Description</ui:define>
+                <h:inputText id="description" value="#{laboratoryList.laboratory.description}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Name</ui:define>
+                <h:inputText id="name" value="#{laboratoryList.laboratory.name}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Help message</ui:define>
+                <h:inputText id="helpMessage" value="#{laboratoryList.laboratory.state.helpMessage}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Label</ui:define>
+                <h:inputText id="label" value="#{laboratoryList.laboratory.state.label}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Url</ui:define>
+                <h:inputText id="url" value="#{laboratoryList.laboratory.state.url}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <h:selectOneRadio id="logic" value="#{laboratoryList.restrictionLogicOperator}" styleClass="radio">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </h:selectOneRadio>
+            </s:decorate>
+
+        </rich:simpleTogglePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/LaboratoryList.xhtml"/>
+            <s:button id="reset" value="Reset" includePageParams="false"/>
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">Laboratory Search Results (#{empty laboratoryList.resultList ? 0 : (laboratoryList.paginated ? laboratoryList.resultCount : laboratoryList.resultList.size)})</f:facet>
+    <div class="results" id="laboratoryList">
+
+    <h:outputText value="The laboratory search returned no results."
+               rendered="#{empty laboratoryList.resultList}"/>
+
+    <rich:dataTable id="laboratoryList"
+                var="_laboratory"
+              value="#{laboratoryList.resultList}"
+           rendered="#{not empty laboratoryList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{laboratoryList}"/>
+                    <ui:param name="propertyLabel" value="Id"/>
+                    <ui:param name="propertyPath" value="laboratory.id"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_laboratory.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{laboratoryList}"/>
+                    <ui:param name="propertyLabel" value="Description"/>
+                    <ui:param name="propertyPath" value="laboratory.description"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_laboratory.description}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{laboratoryList}"/>
+                    <ui:param name="propertyLabel" value="Name"/>
+                    <ui:param name="propertyPath" value="laboratory.name"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_laboratory.name}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{laboratoryList}"/>
+                    <ui:param name="propertyLabel" value="Active"/>
+                    <ui:param name="propertyPath" value="laboratory.state.active"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_laboratory.state.active}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{laboratoryList}"/>
+                    <ui:param name="propertyLabel" value="Help message"/>
+                    <ui:param name="propertyPath" value="laboratory.state.helpMessage"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_laboratory.state.helpMessage}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{laboratoryList}"/>
+                    <ui:param name="propertyLabel" value="Label"/>
+                    <ui:param name="propertyPath" value="laboratory.state.label"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_laboratory.state.label}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{laboratoryList}"/>
+                    <ui:param name="propertyLabel" value="Url"/>
+                    <ui:param name="propertyPath" value="laboratory.state.url"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_laboratory.state.url}"/>
+        </h:column>
+        <rich:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/#{empty from ? 'Laboratory' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+             propagation="#{empty from ? 'none' : 'default'}"
+                      id="laboratoryViewId">
+                <f:param name="laboratoryId"
+                        value="#{_laboratory.id}"/>
+            </s:link>
+            #{' '}
+            <s:link view="/LaboratoryEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="laboratoryEdit"
+                rendered="#{empty from}">
+                <f:param name="laboratoryId"
+                        value="#{_laboratory.id}"/>
+            </s:link>
+        </rich:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+
+        <s:link view="/LaboratoryList.xhtml"
+            rendered="#{laboratoryList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+
+        <s:link view="/LaboratoryList.xhtml"
+            rendered="#{laboratoryList.previousExists}"
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{laboratoryList.previousFirstResult}"/>
+        </s:link>
+
+        <s:link view="/LaboratoryList.xhtml"
+            rendered="#{laboratoryList.nextExists}"
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{laboratoryList.nextFirstResult}"/>
+        </s:link>
+
+        <s:link view="/LaboratoryList.xhtml"
+            rendered="#{laboratoryList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{laboratoryList.lastFirstResult}"/>
+        </s:link>
+
+    </div>
+
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/LaboratoryEdit.xhtml"
+                    id="create"
+           propagation="none"
+                 value="Create laboratory">
+            <f:param name="laboratoryId"/>
+        </s:button>
+    </s:div>
+
+</ui:define>
+
+</ui:composition>
