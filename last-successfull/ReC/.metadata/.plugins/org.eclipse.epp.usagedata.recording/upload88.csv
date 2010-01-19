@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253493553367
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253493553368
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253493553368
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493553370
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493553575
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493556643
+error,log,,,"Operation details",1253493576597
+error,log,,,"Operation details",1253493576597
+error,log,,,"Operation details",1253493576621
+error,log,,,"Operation details",1253493576633
+error,log,,,"Operation details",1253493589882
+error,log,,,"Operation details",1253493589884
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253493593600
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493593636
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493607624
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.help.installationDialog",1253493619727
+closed,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493631131
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253493631485
+stopped,bundle,org.eclipse.jst.ws.axis.creation.ui,1.0.406.v200903031852,"org.eclipse.jst.ws.axis.creation.ui",1253493631561
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.ui,1.0.405.v200901261650,"org.eclipse.jst.ws.axis.consumption.ui",1253493631565
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.core,1.0.306.v200810082309,"org.eclipse.jst.ws.axis.consumption.core",1253493631569
+stopped,bundle,org.eclipse.jst.ws.axis2.creation.ui,1.0.103.v200807162242,"org.eclipse.jst.ws.axis2.creation.ui",1253493631577
+stopped,bundle,org.eclipse.jst.ws.axis2.consumption.ui,1.0.102.v200807232000,"org.eclipse.jst.ws.axis2.consumption.ui",1253493631578
+stopped,bundle,org.eclipse.jst.ws.axis2.creation.core,1.0.105.v200901220134,"org.eclipse.jst.ws.axis2.creation.core",1253493631582
+stopped,bundle,org.eclipse.jst.ws.axis2.consumption.core,1.0.104.v200810151442,"org.eclipse.jst.ws.axis2.consumption.core",1253493631587
