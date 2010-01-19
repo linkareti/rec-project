@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.paste",1253491681200
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253491780589
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253491780616
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253491781003
+error,log,,,"Transfer Exception",1253492292698
+error,log,,,"Transfer Exception",1253492727621
+error,log,,,"An error occurred while collecting items to be installed",1253492737789
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493085647
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493094198
+error,log,,,"Operation details",1253493109078
+error,log,,,"Operation details",1253493109078
+error,log,,,"Operation details",1253493109118
+error,log,,,"Operation details",1253493109133
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253493165478
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493165519
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493165882
+closed,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493173600
+stopped,bundle,org.eclipse.jst.ws.axis.creation.ui,1.0.406.v200903031852,"org.eclipse.jst.ws.axis.creation.ui",1253493173963
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.ui,1.0.405.v200901261650,"org.eclipse.jst.ws.axis.consumption.ui",1253493173963
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.core,1.0.306.v200810082309,"org.eclipse.jst.ws.axis.consumption.core",1253493173963
+stopped,bundle,org.eclipse.jst.ws.axis2.creation.ui,1.0.103.v200807162242,"org.eclipse.jst.ws.axis2.creation.ui",1253493173963
+stopped,bundle,org.eclipse.jst.ws.axis2.consumption.ui,1.0.102.v200807232000,"org.eclipse.jst.ws.axis2.consumption.ui",1253493173963
+stopped,bundle,org.eclipse.jst.ws.axis2.creation.core,1.0.105.v200901220134,"org.eclipse.jst.ws.axis2.creation.core",1253493173964
+stopped,bundle,org.eclipse.jst.ws.axis2.consumption.core,1.0.104.v200810151442,"org.eclipse.jst.ws.axis2.consumption.core",1253493173965
+stopped,bundle,org.eclipse.jst.ws.axis2.ui,1.0.302.v200905260749,"org.eclipse.jst.ws.axis2.ui",1253493173965
