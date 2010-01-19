@@ -25,6 +25,9 @@
 	<property name="build.dir.classes" value="${build.dir}/classes" />
 	<property name="build.dir.jars" value="${build.dir}/jars" />
 	<property name="build.dir.javadocs" value="${build.dir}/javadocs" />
+	<property name="dist.client" value="${dist.dir}/client" />
+	<property name="dist.multicast" value="${dist.dir}/multicast" />
+	<property name="dist.hardwareserver" value="${dist.dir}/hardwareserver" />
 		
 	<!--
 		=====================================================
@@ -33,15 +36,17 @@
 	-->
 
 	<property name="rec.common.classes.dir" value="${build.dir.classes}/rec/common" />
-	<property name="rec.common.build.dir" value="${build.dir.jars}/rec/common" />
+	<property name="rec.common.build.dir" value="${build.dir.jars}/common" />
 	<property name="rec.common.dist.dir" value="${dist.dir}/rec/common" />
 
 	<property name="rec.common.src.java.dir" value="rec/src/java/common" />
-
+	
 	<property name="rec.lib.dir" value="rec/lib" />
+		
+	<property name="rec.common.lib.dir" value="${rec.lib.dir}/java/common/" />
 
 	<path id="rec.common.lib.path">
-		<fileset dir="${rec.lib.dir}/java/common/">
+		<fileset dir="${rec.common.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
@@ -59,7 +64,7 @@
 
 	<target name="clean.rec.common" description="Delete the build folder containing the common shared compiled code.">
 		<delete dir="${rec.common.classes.dir}" />
-		<delete dir="${rec.common.build.dir}" />
+		<delete file="${rec.common.build.dir}" />
 	</target>
 
 	<target name="compile.rec.common" description="Compile the common part of the ReC project independently.">
@@ -82,6 +87,16 @@
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
+		
+		<mkdir dir="${rec.common.build.dir}" />
+		<jar destfile="${rec.common.build.dir}/ReCCommon.jar" basedir="${rec.common.classes.dir}">
+			<include name="**/*.class" />
+		</jar>
+		
+		<signjar storetype="${storetype}" destDir="${rec.common.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${rec.common.build.dir}" includes="ReCCommon.jar" excludes="*_sig.jar" />
+			<globmapper from="*.jar" to="*_sig.jar" />
+		</signjar>
 	</target>
 
 	<target name="jar.rec.common" description="Create a jar with the common part of the ReC project.">
@@ -109,14 +124,16 @@
 	-->
 
 	<property name="rec.client.classes.dir" value="${build.dir.classes}/rec/client" />
-	<property name="rec.client.build.dir" value="${build.dir.jars}/rec/client" />
+	<property name="client.build.dir" value="${build.dir.jars}/client" />
 	<property name="rec.client.dist.dir" value="${dist.dir}/rec/client" />
 
 	<property name="rec.client.src.java.dir" value="rec/src/java/client" />
 	<property name="rec.ui.src.java.dir" value="rec/src/java/ui" />
+	
+	<property name="rec.client.lib.dir" value="${rec.lib.dir}/java/client/" />
 
 	<path id="rec.client.lib.path">
-		<fileset dir="${rec.lib.dir}/java/client/">
+		<fileset dir="${rec.client.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
@@ -144,7 +161,7 @@
 
 	<target name="clean.rec.client" description="Delete the build folder containing the common shared compiled code.">
 		<delete dir="${rec.client.classes.dir}" />
-		<delete dir="${rec.client.build.dir}" />
+		<delete file="${client.build.dir}" />
 	</target>
 
 	<target name="compile.rec.client">
@@ -173,24 +190,35 @@
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
+		
+		<mkdir dir="${client.build.dir}" />
+		<jar destfile="${client.build.dir}/ReCClient.jar" basedir="${rec.client.classes.dir}">
+			<include name="**/*.class" />
+		</jar>
+		
+		<signjar storetype="${storetype}" destDir="${client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${client.build.dir}" includes="ReCClient.jar" excludes="*_sig.jar" />
+			<globmapper from="*.jar" to="*_sig.jar" />
+		</signjar>
+		
 	</target>
 
 	<target name="jar.rec.client">
-		<mkdir dir="${rec.client.build.dir}" />
-		<jar destfile="${rec.client.build.dir}/ReCClient.jar" basedir="${rec.client.classes.dir}">
+		<mkdir dir="${client.build.dir}" />
+		<jar destfile="${client.build.dir}/ReCClient.jar" basedir="${rec.client.classes.dir}">
 			<include name="**/*.class" />
 		</jar>
 	</target>
 
 	<target name="sign.rec.client">
-		<signjar storetype="${storetype}" destDir="${rec.client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
-			<fileset dir="${rec.client.build.dir}" includes="ReCClient.jar" excludes="*_sig.jar" />
+		<signjar storetype="${storetype}" destDir="${client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${client.build.dir}" includes="ReCClient.jar" excludes="*_sig.jar" />
 			<globmapper from="*.jar" to="*_sig.jar" />
 		</signjar>
 	</target>
 
-	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client,sign.rec.client">
-
+	<target name="build.rec.client" depends="build.rec.common,clean.rec.client,compile.rec.client,jar.rec.client,sign.rec.client">
+		<copyfile dest="${client.build.dir}" src="${rec.common.build.dir}/ReCCommon_sig.jar" />
 	</target>
 
 	<!--
@@ -200,13 +228,15 @@
 	-->
 
 	<property name="rec.hardwareserver.classes.dir" value="${build.dir.classes}/rec/hardwareserver" />
-	<property name="rec.hardwareserver.build.dir" value="${build.dir.jars}/rec/hardwareserver" />
+	<property name="rec.hardwareserver.build.dir" value="${build.dir.jars}/hardwareserver" />
 	<property name="rec.hardwareserver.dist.dir" value="${dist.dir}/rec/hardwareserver" />
 
 	<property name="rec.hardwareserver.src.java.dir" value="rec/src/java/hardwareserver" />
+	
+	<property name="rec.hardwareserver.lib.dir" value="${rec.lib.dir}/java/hardwareserver/" />
 
 	<path id="rec.hardwareserver.lib.path">
-		<fileset dir="${rec.lib.dir}/java/hardwareserver/">
+		<fileset dir="${rec.hardwareserver.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
@@ -234,7 +264,7 @@
 
 	<target name="clean.rec.hardwareserver">
 		<delete dir="${rec.hardwareserver.classes.dir}" />
-		<delete dir="${rec.hardwareserver.build.dir}" />
+		<delete file="${rec.hardwareserver.build.dir}/ReCHardwareServer.jar" />
 	</target>
 
 	<target name="compile.rec.hardwareserver">
@@ -267,7 +297,7 @@
 	</target>
 
 	<target name="build.rec.hardwareserver" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
-
+		<copyfile dest="${rec.hardwareserver.build.dir}" src="${rec.common.build.dir}/ReCCommon.jar" />
 	</target>
 
 	<!--
@@ -277,13 +307,15 @@
 	-->
 
 	<property name="rec.multicast.classes.dir" value="${build.dir.classes}/rec/multicast" />
-	<property name="rec.multicast.build.dir" value="${build.dir.jars}/rec/multicast" />
+	<property name="rec.multicast.build.dir" value="${build.dir.jars}/multicast" />
 	<property name="rec.multicast.dist.dir" value="${dist.dir}/rec/multicast" />
 
 	<property name="rec.multicast.src.java.dir" value="rec/src/java/multicast" />
+	
+	<property name="rec.multicast.lib.dir" value="${rec.lib.dir}/java/multicast/" />
 
 	<path id="rec.multicast.lib.path">
-		<fileset dir="${rec.lib.dir}/java/multicast/">
+		<fileset dir="${rec.multicast.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
@@ -311,7 +343,7 @@
 
 	<target name="clean.rec.multicastcontroller">
 		<delete dir="${rec.multicast.classes.dir}" />
-		<delete dir="${rec.multicast.build.dir}" />
+		<delete file="${rec.multicast.build.dir}/ReCMulticastController.jar" />
 	</target>
 
 	<target name="compile.rec.multicastcontroller">
@@ -352,7 +384,7 @@
 	</target>
 
 	<target name="build.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
-
+		<copyfile dest="${rec.multicast.build.dir}" src="${rec.common.build.dir}/ReCCommon.jar" />
 	</target>
 
 	<path id="run.multicastcontroller.classpath">
@@ -413,16 +445,18 @@
 	-->
 
 	<property name="elab.client.classes.dir" value="${build.dir.classes}/elab/client" />
-	<property name="elab.client.build.dir" value="${build.dir.jars}/elab/client" />
+	<property name="client.build.dir" value="${build.dir.jars}/client" />
 	<property name="elab.client.dist.dir" value="${dist.dir}/elab/client" />
 
 	<property name="elab.client.src.java.dir" value="elab/src/java/client" />
 	<property name="elab.ui.src.java.dir" value="elab/src/java/ui" />
 
 	<property name="elab.lib.dir" value="elab/lib" />
+	
+	<property name="elab.client.lib.dir" value="${elab.lib.dir}/java/client/" />
 
 	<path id="elab.client.lib.path">
-		<fileset dir="${elab.lib.dir}/java/client/">
+		<fileset dir="${elab.client.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
@@ -452,7 +486,7 @@
 
 	<target name="clean.elab.client">
 		<delete dir="${elab.client.classes.dir}" />
-		<delete dir="${elab.client.build.dir}" />
+		<delete dir="${client.build.dir}" />
 	</target>
 
 	<target name="compile.elab.client">
@@ -481,18 +515,31 @@
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
+		
+		<mkdir dir="${client.build.dir}" />
+		<jar destfile="${client.build.dir}/ELabClient.jar" basedir="${elab.client.classes.dir}">
+			<include name="**/*.class" />
+		</jar>
+		
+		<signjar storetype="${storetype}" destDir="${client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${client.build.dir}" includes="ELabClient.jar" excludes="*_sig.jar" />
+			<globmapper from="*.jar" to="*_sig.jar" />
+		</signjar>
+		
+		<create.jnlp.full.client.compile codebase="${client.build.dir}" />
+		
 	</target>
 
 	<target name="jar.elab.client">
-		<mkdir dir="${elab.client.build.dir}" />
-		<jar destfile="${elab.client.build.dir}/ELabClient.jar" basedir="${elab.client.classes.dir}">
+		<mkdir dir="${client.build.dir}" />
+		<jar destfile="${client.build.dir}/ELabClient.jar" basedir="${elab.client.classes.dir}">
 			<include name="**/*.class" />
 		</jar>
 	</target>
 
 	<target name="sign.elab.client">
-		<signjar storetype="${storetype}" destDir="${elab.client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
-			<fileset dir="${elab.client.build.dir}" includes="ELabClient.jar" excludes="*_sig.jar" />
+		<signjar storetype="${storetype}" destDir="${client.build.dir}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<fileset dir="${client.build.dir}" includes="ELabClient.jar" excludes="*_sig.jar" />
 			<globmapper from="*.jar" to="*_sig.jar" />
 		</signjar>
 	</target>
@@ -500,7 +547,35 @@
 	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
 
 	</target>
+	
+	<target name="run.elab.client.web.start">
+	</target>
 
+	<target name="run.elab.client">
+		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="${max.memory}">
+			<arg value="-h" />
+			<!--bootclasspath location=" TODO /openorb/openorb_orb_omg-1.4.0_sig.jar"/-->
+			<classpath refid="run.multicastcontroller.classpath" />
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+			<sysproperty key="ReCFaceConfig" value="" />file:rec-newface/etc/ReCFaceConfig.xml
+			<sysproperty key="ReCBaseUIConfig" value="" />file:etc/ReCBaseUIConfig.xml
+			<sysproperty key="vlc.plugins.filename" value="" />blabla.zip
+			<sysproperty key="vlc.plugins.destdir" value="" />file:///C:/TEMP
+			<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+			<sysproperty key="openorb.profile" value="${multicast.openorb.profile}" />
+			<sysproperty key="rec.multicast.securitymanager" value="${rec.multicast.securitymanager}" />
+			<sysproperty key="rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE" value="${rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE}" />
+			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+			<sysproperty key="openorb.config" value="${openorb.config}" />
+			<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
+			
+		</java>
+	</target>
 	<!--
 		=====================================================
 		=================== Elab driver =====================
@@ -508,14 +583,16 @@
 	-->
 
 	<property name="elab.hardwareserver.classes.dir" value="${build.dir.classes}/elab/hardwareserver" />
-	<property name="elab.hardwareserver.build.dir" value="${build.dir.jars}/elab/hardwareserver" />
+	<property name="elab.hardwareserver.build.dir" value="${build.dir.jars}/hardwareserver" />
 	<property name="elab.hardwareserver.dist.dir" value="${dist.dir}/elab/hardwareserver" />
 
 	<property name="elab.hardwareserver.src.java.dir" value="elab/src/java/driver" />
+	
+	<property name="elab.hardwareserver.lib.dir" value="${elab.lib.dir}/java/driver/" />
 
 
 	<path id="elab.hardwareserver.lib.path">
-		<fileset dir="${elab.lib.dir}/java/driver/">
+		<fileset dir="${elab.hardwareserver.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
@@ -591,13 +668,15 @@
 	-->
 
 	<property name="elab.multicast.classes.dir" value="${build.dir.classes}/elab/multicast" />
-	<property name="elab.multicast.build.dir" value="${build.dir.jars}/elab/multicast" />
+	<property name="elab.multicast.build.dir" value="${build.dir.jars}/multicast" />
 	<property name="elab.multicast.dist.dir" value="${dist.dir}/elab/multicast" />
 
 	<property name="elab.multicast.src.java.dir" value="elab/src/java/multicast" />
+	
+	<property name="elab.multicast.lib.dir" value="${elab.lib.dir}/java/multicast/" />
 
 	<path id="elab.multicast.lib.path">
-		<fileset dir="${elab.lib.dir}/java/multicast/">
+		<fileset dir="${elab.multicast.lib.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
@@ -686,7 +765,7 @@
 
 	</target>
 
-	<target name="build.all" depends="build.rec.common,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller,build.elab.client,build.elab.hardwareserver,build.elab.multicastcontroller">
+	<target name="build.all" depends="build.rec.common,build.rec.client,build.rec.multicastcontroller,build.rec.hardwareserver,build.elab.client,build.elab.hardwareserver,build.elab.multicastcontroller">
 
 	</target>
 
@@ -694,7 +773,7 @@
 		<delete dir="${dist.dir}" />
 	</target>
 
-	<target name="dist" depends="clean.dist,build.all">
+	<target name="dist" depends="clean.dist,clean.all,build.all">
 		<mkdir dir="${dist.dir}" />
 
 		<zip destfile="${dist.dir}/elab-multicast.zip" update="true" comment="eLab Multicast Controller">
@@ -704,41 +783,80 @@
 		</zip>
 
 		<zip destfile="${dist.dir}/elab-client.zip" update="true" comment="eLab Full Client">
-			<fileset file="${rec.client.build.dir}/ReCClient_sig.jar" />
-			<fileset file="${elab.client.build.dir}/ELabClient_sig.jar" />
+			<fileset file="${client.build.dir}/ReCClient_sig.jar" />
+			<fileset file="${client.build.dir}/ELabClient_sig.jar" />
 			<fileset file="${rec.common.build.dir}/ReCCommon_sig.jar" />
 		</zip>
-
 	</target>
 	
-	<target name="create.jnlp.full.client">
-		<copy file="${template.file}" overwrite="yes" tofile="${build.dir}/ELabFullClient.jnlp" />
-		<replace file="${build.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
-			<replacefilter token="@codebase@" property="codebase" />
-			<replacefilter token="@href@" property="href" />
-			<replacefilter token="@title@" property="title" />
-			<replacefilter token="@vendor@" property="vendor" />
-			<replacefilter token="@homepage@" property="homepage" />
-			<replacefilter token="@one-line@" property="one-line" />
-			<replacefilter token="@tootip@" property="tootip" />
-			<replacefilter token="@short@" property="short" />
-			<replacefilter token="@j2se-version@" property="j2se-version" />
-		</replace>
-		<replace file="${build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
-		<replace file="${build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
-		<replace file="${build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
-		
-		<process.list task="add.experiment.to.full.jnlp" list="${experiment.list}" attribute.name="experiment.name" />
-	</target>
+	<macrodef name="create.jnlp.full.client.compile">
+		<attribute name="codebase"/>
+		<sequential>
+			<copy file="${template.file}" overwrite="yes" tofile="${client.build.dir}/ELabFullClient.jnlp" />
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@codebase@" value="@{codebase}"/>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
+				<replacefilter token="@href@" property="href" />
+				<replacefilter token="@title@" property="title" />
+				<replacefilter token="@vendor@" property="vendor" />
+				<replacefilter token="@homepage@" property="homepage" />
+				<replacefilter token="@one-line@" property="one-line" />
+				<replacefilter token="@tootip@" property="tootip" />
+				<replacefilter token="@short@" property="short" />
+				<replacefilter token="@j2se-version@" property="j2se-version" />
+				<replacefilter token="@main-class@" property="main-class" />
+			</replace>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;../common/ReCCommon_sig.jar&quot;/&gt;"/>
+				
+			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
+		</sequential>
+	</macrodef>
 	
-	<macrodef name="add.experiment.to.full.jnlp">
+	<macrodef name="add.experiment.to.full.jnlp.compile">
 		<attribute name="experiment.name" />
 		<sequential>
-			<replace file="${build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
+				<replacevalue><![CDATA[<jar href="@temporary.experiment.jar@"/>
+		<!--End Experiment Jars-->]]></replacevalue>
+			</replace>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar"/>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="create.jnlp.full.client.build">
+		<attribute name="codebase"/>
+		<sequential>
+			<copy file="${template.file}" overwrite="yes" tofile="${client.build.dir}/ELabFullClient.jnlp" />
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@href@" property="href" />
+				<replacefilter token="@title@" property="title" />
+				<replacefilter token="@vendor@" property="vendor" />
+				<replacefilter token="@homepage@" property="homepage" />
+				<replacefilter token="@one-line@" property="one-line" />
+				<replacefilter token="@tootip@" property="tootip" />
+				<replacefilter token="@short@" property="short" />
+				<replacefilter token="@j2se-version@" property="j2se-version" />
+				<replacefilter token="@main-class@" property="main-class" />
+			</replace>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
+				
+			<process.list task="add.experiment.to.full.jnlp.build" list="${experiment.list}" attribute.name="experiment.name" />
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="add.experiment.to.full.jnlp.build">
+		<attribute name="experiment.name" />
+		<attribute name="location" />
+		<sequential>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
 				<replacevalue><![CDATA[<jar href="client/@temporary.experiment.jar@"/>
 		<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-			<replace file="${build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
 		</sequential>
 	</macrodef>
 
@@ -750,6 +868,8 @@
 
 	<property name="experiments.classes.dir" value="${build.dir.classes}/experiments" />
 	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
+	<property name="experiments.build.dir.client" value="${build.dir.jars}/client" />
+	<property name="experiments.build.dir.server" value="${build.dir.jars}/hardwareserver" />
 	<property name="experiments.dist.dir" value="${dist.dir}/experiments" />
 
 	<property name="template.file" value="templates/jnlp/template.xml" />
@@ -885,14 +1005,14 @@
 	<macrodef name="jar.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<mkdir dir="${experiments.build.dir}/@{experiment.name}/client" />
-			<mkdir dir="${experiments.build.dir}/@{experiment.name}/server" />
+			<mkdir dir="${experiments.build.dir.client}" />
+			<mkdir dir="${experiments.build.dir.server}" />
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
 
-			<jar destfile="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client">
+			<jar destfile="${experiments.build.dir.client}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client">
 			</jar>
-			<jar destfile="${experiments.build.dir}/@{experiment.name}/server/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/@{experiment.name}/server">
+			<jar destfile="${experiments.build.dir.server}/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/@{experiment.name}/server">
 			</jar>
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
@@ -903,8 +1023,7 @@
 	<macrodef name="sign.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<signjar storetype="${storetype}" jar="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client.jar" signedjar="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" />
-			<!--signjar jar="${experiments.dist.dir}/@{experiment.name}/server/@{experiment.name}Driver.jar" signedjar="${experiments.dist.dir}/@{experiment.name}/server/@{experiment.name}Driver_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" /-->
+			<signjar storetype="${storetype}" jar="${experiments.build.dir.client}/@{experiment.name}Client.jar" signedjar="${experiments.build.dir.client}@{experiment.name}Client_sig.jar" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}" />
 		</sequential>
 	</macrodef>
 
@@ -924,14 +1043,14 @@
 		<sequential>
 			<build.experiment experiment.name="@{experiment.name}" />
 			<zip destfile="${dist.dir}/elab-@{experiment.name}-client.zip" update="true" comment="eLab @{experiment.name} Client">
-				<fileset file="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client_sig.jar" />
+				<fileset file="${experiments.build.dir.client}/@{experiment.name}/@{experiment.name}Client_sig.jar" />
 			</zip>
 			<zip destfile="${dist.dir}/elab-@{experiment.name}-hwserver.zip" update="true" comment="eLab @{experiment.name} Driver">
-				<fileset file="${experiments.build.dir}/@{experiment.name}/server/@{experiment.name}Driver.jar" />
+				<fileset file="${experiments.build.dir.server}/@{experiment.name}/@{experiment.name}Driver.jar" />
 			</zip>
 			<zip destfile="${dist.dir}/elab-@{experiment.name}.zip" update="true" comment="eLab @{experiment.name} Complete Distribution">
-				<fileset file="${experiments.build.dir}/@{experiment.name}/client/@{experiment.name}Client_sig.jar" />
-				<fileset file="${experiments.build.dir}/@{experiment.name}/server/@{experiment.name}Driver.jar" />
+				<fileset file="${experiments.build.dir.client}/@{experiment.name}/@{experiment.name}Client_sig.jar" />
+				<fileset file="${experiments.build.dir.server}/@{experiment.name}/@{experiment.name}Driver.jar" />
 			</zip>
 		</sequential>
 	</macrodef>
@@ -1186,6 +1305,12 @@
 			</signjar>
 		</sequential>
 	</macrodef>
+	
+	<target name="build.libs">
+		<sign.jars.in.directory source.dir.name="${rec.common.lib.dir}" destination.dir.name="${rec.multicast.build.dir}/libs"/>
+		<sign.jars.in.directory source.dir.name="${rec.multicast.lib.dir}" destination.dir.name=""/>
+		<sign.jars.in.directory source.dir.name="${elab.multicast.lib.dir}" destination.dir.name=""/>
+	</target>
 	
 
 	<!--
