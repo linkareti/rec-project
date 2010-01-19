@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.update.configurator,3.3.0.v20090312,"org.eclipse.update.configurator",1253664634220
+started,bundle,org.eclipse.wst.common.emf,1.1.300.v200905060430,"org.eclipse.wst.common.emf",1253664634220
+started,bundle,org.eclipse.wst.common.emfworkbench.integration,1.1.300.v200811200330,"org.eclipse.wst.common.emfworkbench.integration",1253664634220
+started,bundle,org.eclipse.wst.common.frameworks,1.1.300.v200904160730,"org.eclipse.wst.common.frameworks",1253664634220
+started,bundle,org.eclipse.wst.common.project.facet.core,1.4.0.v200906080535,"org.eclipse.wst.common.project.facet.core",1253664634220
+started,bundle,org.eclipse.wst.jsdt.core,1.0.200.v200905201910,"org.eclipse.wst.jsdt.core",1253664634220
+started,bundle,org.eclipse.wst.jsdt.manipulation,1.0.100.v200809240707,"org.eclipse.wst.jsdt.manipulation",1253664634220
+started,bundle,org.eclipse.wst.jsdt.ui,1.0.200.v200905242047,"org.eclipse.wst.jsdt.ui",1253664634220
+started,bundle,org.eclipse.wst.web,1.1.300.v200901261500,"org.eclipse.wst.web",1253664634220
+started,bundle,org.eclipse.mylyn.context.core,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.context.core",1253664634220
+started,bundle,org.eclipse.mylyn.context.ui,3.2.1.v20090722-0200-e3x,"org.eclipse.mylyn.context.ui",1253664634220
+os,sysinfo,,,"linux",1253664634228
+arch,sysinfo,,,"x86",1253664634228
+ws,sysinfo,,,"gtk",1253664634228
+locale,sysinfo,,,"pt_PT",1253664634228
+processors,sysinfo,,,"2",1253664634228
+java.runtime.name,sysinfo,,,"Java(TM) SE Runtime Environment",1253664634228
+java.runtime.version,sysinfo,,,"1.6.0_14-b08",1253664634228
+java.specification.name,sysinfo,,,"Java Platform API Specification",1253664634228
+java.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1253664634228
+java.specification.version,sysinfo,,,"1.6",1253664634228
+java.vendor,sysinfo,,,"Sun Microsystems Inc.",1253664634228
+java.version,sysinfo,,,"1.6.0_14",1253664634228
+java.vm.info,sysinfo,,,"mixed mode",1253664634228
+java.vm.name,sysinfo,,,"Java HotSpot(TM) Client VM",1253664634228
