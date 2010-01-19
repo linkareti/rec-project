@@ -670,7 +670,7 @@
 		=====================================================
 	-->
 
-	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller,clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller">
+	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller,clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller,clean.javadocs">
 		<delete dir="${build.dir}" />
 	</target>
 
@@ -1187,6 +1187,13 @@
 		</sequential>
 	</macrodef>
 	
+
+	<!--
+		================================================================
+		========================== Javadocs ============================
+		================================================================
+		-->
+	
 	<target name="javadoc.rec">
 		<javadoc destdir="${build.dir.javadocs}/rec" author="true" version="true" use="true" windowtitle="ReC - Javadocs" >
 		    <packageset dir="${rec.common.src.java.dir}" defaultexcludes="yes" >
@@ -1238,5 +1245,11 @@
 		    <link href="http://java.sun.com/javase/6/docs/api/"/>
 		  </javadoc>
 		</target>
+	
+	<target name="clean.javadocs">
+		<delete dir="${build.dir.javadocs}/rec" />
+		<delete dir="${build.dir.javadocs}/elab" />
+		<delete dir="${build.dir.javadocs}" />
+	</target>
 
 </project>
