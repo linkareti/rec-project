@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691377889
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691382781
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691410175
+started,bundle,org.eclipse.equinox.p2.ui,1.0.100.v20090527-1812,"org.eclipse.equinox.p2.ui",1253691413590
+started,bundle,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk",1253691413652
+started,bundle,org.eclipse.equinox.p2.metadata,1.0.100.v20090525,"org.eclipse.equinox.p2.metadata",1253691413818
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691414712
+started,bundle,org.eclipse.equinox.p2.extensionlocation,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.extensionlocation",1253691416964
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253691417559
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691417580
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253691440962
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691440963
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691441124
+started,bundle,org.eclipse.ui.browser,3.2.300.v20090526,"org.eclipse.ui.browser",1253691445348
+started,bundle,org.eclipse.wst.server.core,1.1.101.v20090515,"org.eclipse.wst.server.core",1253691446466
+started,bundle,org.eclipse.wst.server.ui,1.1.102.v20090515,"org.eclipse.wst.server.ui",1253691446508
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691451306
+opened,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.properties.RevPropertiesView",1253691459617
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.properties.RevPropertiesView",1253691459626
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253691459626
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253691459626
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691459646
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253691470418
+opened,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253691474106
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253691474128

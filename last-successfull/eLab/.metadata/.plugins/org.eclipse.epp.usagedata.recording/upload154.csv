@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.wst.server.ui,1.1.102.v20090515,"org.eclipse.wst.server.ui",1253664638832
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664640551
+started,bundle,org.eclipse.team.svn.core,0.7.8.I20090506-1500,"org.eclipse.team.svn.core",1253664646118
+started,bundle,org.eclipse.core.variables,3.2.200.v20090521,"org.eclipse.core.variables",1253664646298
+started,bundle,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui",1253664646344
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1253664646393
+started,bundle,org.polarion.eclipse.team.svn.connector.svnkit16,2.2.1.I20090708-1500,"org.polarion.eclipse.team.svn.connector.svnkit16",1253664646445
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664660372
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664664163
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253664687928
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253664687935
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253664688457
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253664703339
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253664729933
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664729971
+error,log,,,"SVN: '0x0000000d: Locate Projects' operation finished with error",1253664730304
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664730427
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664745144
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664759167
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664769376
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253664772152
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253664811792
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253664811793
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253664811794
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253664827549
