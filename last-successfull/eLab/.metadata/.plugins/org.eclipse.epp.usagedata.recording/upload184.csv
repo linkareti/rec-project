@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.properties",1253666695329
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253666710381
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.navigate.backwardHistory",1253666890789
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.navigate.backwardHistory",1253666892232
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.navigate.backwardHistory",1253666894484
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667008268
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667018464
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667058469
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667062263
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253667077005
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667077031
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.equinox.preferences"".",1253667088945
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667088998
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667089293
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667095215
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667105892
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667118908
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667186290
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667214095
+opened,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.properties.RevPropertiesView",1253667220009
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.properties.RevPropertiesView",1253667220022
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253667220022
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253667220022
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253667220043
+started,bundle,org.eclipse.equinox.p2.ui,1.0.100.v20090527-1812,"org.eclipse.equinox.p2.ui",1253667234191
