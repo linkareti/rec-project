@@ -2,6 +2,7 @@ package com.linkare.rec.am.action;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -13,6 +14,7 @@ import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.log.Log;
 
+import com.linkare.rec.am.model.Experiment;
 import com.linkare.rec.am.model.Laboratory;
 import com.linkare.rec.am.model.Role;
 import com.linkare.rec.am.model.State;
@@ -31,7 +33,7 @@ public class ResourceAllocationFacadeBean implements
 	@PersistenceContext(unitName = "AllocationManager")
 	private EntityManager em;
 
-	public String getReservations(String laboratorio, Date startDate,
+	public List<String> getReservations(String laboratorio, Date startDate,
 			Date endDate) throws Exception {
 
 		Laboratory lab = null;
@@ -40,13 +42,15 @@ public class ResourceAllocationFacadeBean implements
 
 		lab=Laboratory.findByName(laboratorio,em);
 		
-		validaDados(lab, startDate, endDate);
+		
 		// método de segurança: laboratório not null e laboratório existe.
 		// startDate not null and valid, endDate not null and valid e endDate >
 		// startDate
-		//		
+		//	
+		validaDados(lab, startDate, endDate);
 		// obtenção dos dados:
 		// select experiment from laboratory where laboratory.id=laboratorio.id
+		List<Experiment> listaExperiencias = Laboratory.findExperiments(laboratorio, em);
 		// for each experperiment exper:
 		// select reservations from experiment where experiment.id = exper.id
 		// for each reservation obtain users
@@ -55,7 +59,17 @@ public class ResourceAllocationFacadeBean implements
 		// adicionar entidade a listaEntidades
 		//            
 		// retorno listaEntidades
-		return "Esta String é um teste";
+		List<String> listaNomesExperiencias = new ArrayList<String>();
+		
+		if(listaExperiencias.size()>0){
+		for(Experiment exp:listaExperiencias){
+			listaNomesExperiencias.add(exp.getName());
+		}
+		}
+		else{
+			listaNomesExperiencias.add("sem experiencias");
+		}
+		return listaNomesExperiencias;
 
 	}
 
@@ -74,6 +88,9 @@ public class ResourceAllocationFacadeBean implements
 			throw new Exception("Não foi indicada data de inicio");
 		}
 
+		if(endDate.before(startDate)){
+			throw new Exception("data de inicio é posterior à data de fim");
+		}
 		// Query pesquisaLaboratorio =
 		// laboratorio.createNamedQuery("findAllEmployeesByFirstName");
 
