@@ -135,7 +135,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
         scrollApparatusDescription.setBackground(resourceMap.getColor("scrollApparatusDescription.background")); // NOI18N
         scrollApparatusDescription.setBorder(null);
         scrollApparatusDescription.setName("scrollApparatusDescription"); // NOI18N
-        scrollApparatusDescription.setOpaque(false);
+		scrollApparatusDescription.setOpaque(false);
 
         txtApparatusDescription.setEditable(false);
         txtApparatusDescription.setFont(txtApparatusDescription.getFont());
@@ -144,7 +144,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
         txtApparatusDescription.setTabSize(4);
         txtApparatusDescription.setText(resourceMap.getString("txtApparatusDescription.text")); // NOI18N
         txtApparatusDescription.setName("txtApparatusDescription"); // NOI18N
-        txtApparatusDescription.setOpaque(false);
+		txtApparatusDescription.setOpaque(true);
         scrollApparatusDescription.setViewportView(txtApparatusDescription);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

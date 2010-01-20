@@ -121,6 +121,10 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
 		setOpaque(false);
 		setLayout(new java.awt.BorderLayout());
 
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
+				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ApparatusTabbedPane.class);
+		actionBarHolderPane.setBackground(resourceMap.getColor("actionBarHolderPane.color"));
+		actionBarHolderPane.setOpaque(true);
 		actionBarHolderPane.setName("actionBarHolderPane"); // NOI18N
 		actionBarHolderPane.setPreferredSize(new java.awt.Dimension(514, 34));
 		actionBarHolderPane.setLayout(new java.awt.BorderLayout());
@@ -136,8 +140,7 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
 		tabbedPane.setName("tabbedPane"); // NOI18N
 
 		descriptionPane.setName("descriptionPane"); // NOI18N
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
-				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ApparatusTabbedPane.class);
+
 		tabbedPane.addTab(resourceMap.getString("descriptionPane.TabConstraints.tabTitle"), resourceMap
 				.getIcon("descriptionPane.TabConstraints.tabIcon"), descriptionPane); // NOI18N
 
@@ -182,5 +185,5 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
 	private javax.swing.JPanel userListHolderPane;
 	// End of variables declaration//GEN-END:variables
 
-	private ResultsActionBar resultsActionBar;
+	private final ResultsActionBar resultsActionBar;
 }

@@ -17,7 +17,7 @@ import com.linkare.rec.impl.newface.ReCApplication;
  */
 public class ExperimentActionBar extends javax.swing.JPanel {
 
-	private ReCApplication recApplication = ReCApplication.getApplication();
+	private final ReCApplication recApplication = ReCApplication.getApplication();
 
 	/** Creates new form ExperimentActionBar */
 	public ExperimentActionBar() {
@@ -41,6 +41,10 @@ public class ExperimentActionBar extends javax.swing.JPanel {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
+		this.setOpaque(false);
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
+				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ExperimentActionBar.class);
+
 
 		btnPlayStop = new javax.swing.JButton();
 		checkAutoPlay = new javax.swing.JCheckBox();
@@ -51,14 +55,15 @@ public class ExperimentActionBar extends javax.swing.JPanel {
 		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(
 				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ExperimentActionBar.class, this);
 		btnPlayStop.setAction(actionMap.get("play")); // NOI18N
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
-				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ExperimentActionBar.class);
+		btnPlayStop.setOpaque(false);
 		btnPlayStop.setIcon(resourceMap.getIcon("btnPlayStop.icon")); // NOI18N
 		btnPlayStop.setText(resourceMap.getString("btnPlayStop.text")); // NOI18N
 		btnPlayStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		btnPlayStop.setBorderPainted(false);
 		btnPlayStop.setName("btnPlayStop"); // NOI18N
+		btnPlayStop.setRolloverEnabled(false);
 
+		checkAutoPlay.setOpaque(false);
 		checkAutoPlay.setAction(actionMap.get("setAutoplay")); // NOI18N
 		checkAutoPlay.setText(resourceMap.getString("checkAutoPlay.text")); // NOI18N
 		checkAutoPlay.setName("checkAutoPlay"); // NOI18N

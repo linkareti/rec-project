@@ -15,6 +15,8 @@ import com.linkare.rec.impl.newface.component.ExperimentActionLabel.State;
  */
 public class StatusActionBar extends javax.swing.JPanel {
 
+	//	public static final Color BACKGROUND = new Color(0xCFD7D6);
+
 	/** Creates new form ExperimentActionBar */
 	public StatusActionBar() {
 		initComponents();
@@ -36,6 +38,10 @@ public class StatusActionBar extends javax.swing.JPanel {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
+		this.setOpaque(false);
+
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
+				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(StatusActionBar.class);
 
 		lblActionState = new com.linkare.rec.impl.newface.component.ExperimentActionLabel();
 
@@ -43,8 +49,6 @@ public class StatusActionBar extends javax.swing.JPanel {
 		setName("Form"); // NOI18N
 		setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
-				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(StatusActionBar.class);
 		lblActionState.setText(resourceMap.getString("lblActionState.text")); // NOI18N
 		lblActionState.setName("lblActionState"); // NOI18N
 		lblActionState.setVisible(false);
