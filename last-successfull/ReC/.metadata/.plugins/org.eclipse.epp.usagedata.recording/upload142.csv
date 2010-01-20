@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1253579170207
+started,bundle,org.polarion.eclipse.team.svn.connector.svnkit16,2.2.1.I20090708-1500,"org.polarion.eclipse.team.svn.connector.svnkit16",1253579170276
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253579192067
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253579201105
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253579225751
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253579225761
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253579225899
+error,log,,,"SVN: '0x00000011: Get Log Messages' operation finished with error",1253579270384
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253579277928
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253579277950
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253579279733
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253579326135
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253579331866
+error,log,,,"SVN: '0x00000011: Get Log Messages' operation finished with error",1253579350621
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.file.import",1253579354364
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253579354394
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253579357451
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253579443136
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253579446440
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253580148115
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253580149679
+closed,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253580151269
+stopped,bundle,org.eclipse.jst.ws.axis.creation.ui,1.0.406.v200903031852,"org.eclipse.jst.ws.axis.creation.ui",1253580151650
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.ui,1.0.405.v200901261650,"org.eclipse.jst.ws.axis.consumption.ui",1253580151650
+stopped,bundle,org.eclipse.jst.ws.axis.consumption.core,1.0.306.v200810082309,"org.eclipse.jst.ws.axis.consumption.core",1253580151655
