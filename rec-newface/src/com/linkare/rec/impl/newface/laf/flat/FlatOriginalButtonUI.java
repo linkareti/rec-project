@@ -1,4 +1,4 @@
-/* 
+/*
  * FlatButtonUI.java created on 2009/04/29
  *
  * Copyright 2009 Linkare TI. All rights reserved.
@@ -35,19 +35,14 @@ public class FlatOriginalButtonUI extends MetalButtonUI {
 	//          Paint
 	// ********************************
 
-	/*
-	 * Para não ser desenhado o focus no Button
-	 */
 	@Override
 	protected void paintButtonPressed(Graphics g, AbstractButton b) {
+		// FIXME João: Podes confirmar se este noop é está mesmo relacionado com o focus? Não poderá influenciar o comportamento do button pressed?
 	}
 
-	/*
-	 * Para não ser desenhado o focus no Button
-	 */
 	@Override
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
-
+		// Para não ser desenhado o focus no Button
 	}
 
 }

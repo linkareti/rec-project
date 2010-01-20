@@ -1,4 +1,4 @@
-/* 
+/*
  * FlatScrollButton.java created on 2009/04/15
  *
  * Copyright 2009 Linkare TI. All rights reserved.
@@ -80,9 +80,9 @@ public class FlatScrollButton extends MetalScrollButton {
 		int w = width;
 		int h = height;
 		int arrowHeight = (height + 1) / 4;
-		int arrowWidth = (height + 1) / 2;
+		//int arrowWidth = (height + 1) / 2;
 
-		//FIXME: Decidir se as cores mudam com o click 
+		//FIXME: Decidir se as cores mudam com o click
 		if (isPressed) {
 			g.setColor(COLOR_PRESS_BACKGROUND);
 		} else {
@@ -104,7 +104,7 @@ public class FlatScrollButton extends MetalScrollButton {
 			// Draw the Button
 			if (isEnabled) {
 				g.setColor(COLOR_BORDER);
-				// 		FIXME: Decidir como ficam as cores quando há PRESS	
+				// 		FIXME: Decidir como ficam as cores quando há PRESS
 				if (!isPressed) {
 					//		 			g.drawLine( 1, 1, width - 3, 1 );
 					//		 			g.drawLine( 1, 1, 1, height - 1 );
@@ -112,7 +112,7 @@ public class FlatScrollButton extends MetalScrollButton {
 
 				g.drawLine(0, height - 1, width - 1, height - 1); //BOTTOM
 				g.drawLine(width - 1, 1, width - 1, height - 1); //RIGHT
-				g.drawLine(0, 0, width - 1, 0); //UP	
+				g.drawLine(0, 0, width - 1, 0); //UP
 				g.drawLine(0, 0, 0, height - 1); //LEFT
 
 			} else { // 		FIXME: Decidir como ficam as cores quando há disable
@@ -138,7 +138,7 @@ public class FlatScrollButton extends MetalScrollButton {
 				}
 				g.drawLine(0, height - 1, width - 1, height - 1); //BOTTOM
 				g.drawLine(width - 1, 1, width - 1, height - 1); //RIGHT
-				g.drawLine(0, 0, width - 1, 0); //UP	
+				g.drawLine(0, 0, width - 1, 0); //UP
 				g.drawLine(0, 0, 0, height - 1); //LEFT
 			} else {
 				g.setColor(COLOR_DIS_BACKGROUND);
@@ -162,7 +162,7 @@ public class FlatScrollButton extends MetalScrollButton {
 				}
 				g.drawLine(0, height - 1, width - 1, height - 1); //BOTTOM
 				g.drawLine(width - 1, 1, width - 1, height - 1); //RIGHT
-				g.drawLine(0, 0, width - 1, 0); //UP	
+				g.drawLine(0, 0, width - 1, 0); //UP
 				g.drawLine(0, 0, 0, height - 1); //LEFT
 			} else {
 				g.setColor(COLOR_DIS_BACKGROUND);
@@ -186,7 +186,7 @@ public class FlatScrollButton extends MetalScrollButton {
 				}
 				g.drawLine(0, height - 1, width - 1, height - 1); //BOTTOM
 				g.drawLine(width - 1, 1, width - 1, height - 1); //RIGHT
-				g.drawLine(0, 0, width - 1, 0); //UP	
+				g.drawLine(0, 0, width - 1, 0); //UP
 				g.drawLine(0, 0, 0, height - 1); //LEFT
 			} else {
 				g.setColor(COLOR_DIS_BACKGROUND);

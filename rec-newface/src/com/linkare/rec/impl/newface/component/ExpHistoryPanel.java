@@ -20,13 +20,13 @@ public class ExpHistoryPanel extends javax.swing.JPanel {
 
 	public ExpHistoryPanel() {
 		setLayout(new FlowLayout());
-        add(new JLabel("Experiment History"));
+		add(new JLabel("Experiment History"));
 	}
 
 	public ExpHistoryPanel(ExperimentHistoryUINode expHist) {
 		this.expHist = expHist;
 		//initComponents();
-        add(new JLabel("Experiment History"));
+		add(new JLabel("Experiment History"));
 	}
 
 	/**
@@ -105,15 +105,15 @@ public class ExpHistoryPanel extends javax.swing.JPanel {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void btnExpAbrirActionPerformed(java.awt.event.ActionEvent evt) {
-
+		// João: em desenvolvimento
 	}
 
 	private void btnExpConfActionPerformed(java.awt.event.ActionEvent evt) {
-
+		// João: em desenvolvimento
 	}
 
 	private void btnExpApagarActionPerformed(java.awt.event.ActionEvent evt) {
-
+		// João: em desenvolvimento
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

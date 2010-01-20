@@ -15,6 +15,7 @@ public class DefaultDisplayFactory extends AbstractDisplayFactory {
 
 	/** Default Constructor */
 	public DefaultDisplayFactory() {
+		super();
 	}
 
 	@Override

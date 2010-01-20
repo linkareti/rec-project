@@ -19,7 +19,7 @@ public @interface Focus {
 
 	enum Effect {
 		GLOW
-	};
+	}
 
 	boolean display() default true;
 

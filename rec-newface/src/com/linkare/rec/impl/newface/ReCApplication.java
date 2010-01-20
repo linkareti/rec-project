@@ -110,8 +110,8 @@ import com.linkare.rec.impl.utils.ORBBean;
 /**
  * The main class of the application.
  */
-public class ReCApplication extends SingleFrameApplication implements ApparatusListSourceListener, LabConnectorListener,
-		ApparatusConnectorListener, ICustomizerListener, ExpHistoryDisplayFactory {
+public class ReCApplication extends SingleFrameApplication implements ApparatusListSourceListener,
+LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistoryDisplayFactory {
 
 	private static final Logger log = Logger.getLogger(ReCApplication.class.getName());
 
@@ -137,8 +137,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	/**
-     * Initializes the mediaController with default parameters for vlc, if it
-     * hasn't been initialized yet.
+	 * Initializes the mediaController with default parameters for vlc, if it hasn't been initialized yet.
 	 */
 	private void initializeMediaController() {
 
@@ -155,9 +154,9 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				}
 
 				@Override
-                public void notConnected(MediaNotConnectedEvent evt) {
+				public void notConnected(MediaNotConnectedEvent evt) {
 					log.fine("Handling not connected!!!!!!!");
-                    playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
+					playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
 					//TODO em streaming, não se conectou porque deixou de receber ESs. Deve começar de novo, n fazer nd ou mostrar msg ao utilizador?
 				}
 
@@ -172,14 +171,15 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	/**
 	 * Plays the media identified by the given mrl.
-     * @param mrl URL for the media to play.
+	 * 
+	 * @param mrl
+	 *            URL for the media to play.
 	 */
 	public void playMedia(String mrl) {
 
 		log.info("Playing media: " + mrl);
 		if (mrl.equals("")) {
-            log.info("There is not a valid media to play for this " +
-                    "experience. Proceding without video.");
+			log.info("There is not a valid media to play for this " + "experience. Proceding without video.");
 			return;
 		}
 
@@ -201,8 +201,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 * 
 	 * FIXME Remove IS_VIDEO_DEVELOPMENT_ENABLED flag after video testing.
 	 */
-	public static boolean IS_VIDEO_DEVELOPMENT_ENABLED = "yes".equals(System.getProperty(ReCSystemProperty.VIDEO_DEVELOPMENT_ENABLED
-			.getName()));
+	public static boolean IS_VIDEO_DEVELOPMENT_ENABLED = "yes".equals(System
+			.getProperty(ReCSystemProperty.VIDEO_DEVELOPMENT_ENABLED.getName()));
 
 	/** Holds the jws basic service context */
 	private BasicService basicService;
@@ -422,12 +422,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	@Override
 	protected void startup() {
 
-		// TODO The right Aplication exit handler!
 		ExitListener appExitHandler = new ExitListener() {
 			public boolean canExit(EventObject e) {
 				Object source = (e != null) ? e.getSource() : null;
 				Component owner = (source instanceof Component) ? (Component) source : null;
-				int option = JOptionPane.showConfirmDialog(owner, resourceMap.getString("Application.exitListener.message"));
+				int option = JOptionPane.showConfirmDialog(owner, resourceMap
+						.getString("Application.exitListener.message"));
 				return option == JOptionPane.YES_OPTION;
 			}
 
@@ -533,7 +533,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public void show(View view) {
 		// Do not load the session state for the View
 		// TODO Add to ReCFaceConfig
-
 		RootPaneContainer c = (RootPaneContainer) view.getRootPane().getParent();
 		((Window) c).setVisible(true);
 	}
@@ -545,10 +544,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	@Override
 	protected void ready() {
 		super.ready();
+		// This stage is reached just after login. Login modal dialog blocks this call.
 		if (log.isLoggable(Level.FINE)) {
 			log.fine("Ready");
 		}
-		// FIXME This stage is not reached. Why?
 	}
 
 	@Override
@@ -557,7 +556,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		//      the mainFrame.  SingleFrameApplication subclasses that override
 		//      shutdown need to remember call {@code super.shutdown()}.
 		super.shutdown();
-
 		if (log.isLoggable(Level.FINE)) {
 			log.fine("Shutting down and saving session state");
 		}
@@ -577,7 +575,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			log.fine(property.getName() + "=" + propertyValue);
 
 			if (property.isRequired()) { // Required Property
-				if (propertyValue == null || (propertyValue != null && propertyValue.isEmpty())) {
+				if (propertyValue == null || propertyValue.isEmpty()) {
 					missingRequiredProperties.add(property.getName());
 				}
 			} else { // Optional Property
@@ -633,7 +631,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 			apparatusClientBean.setApparatus(updateCurrentApparatusFromComboModel());
 
-			// CRITICAL Check this background task implmentation
+			// FIXME Check this background task implmentation
 			new Thread() {
 				@Override
 				public void run() {
@@ -727,7 +725,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 			// Enable apparatus combo box list
 			for (com.linkare.rec.impl.client.apparatus.Apparatus clientApparatus : evt.getApparatus()) {
-				Apparatus apparatus = apparatusComboBoxModel.getApparatus(clientApparatus.getHardwareInfo().getHardwareUniqueID());
+				Apparatus apparatus = apparatusComboBoxModel.getApparatus(clientApparatus.getHardwareInfo()
+						.getHardwareUniqueID());
 
 				if (apparatus != null && !apparatus.isEnabled()) {
 					apparatus.setEnabled(true);
@@ -756,9 +755,9 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	// Apparatus events
 
 	public enum ApparatusEvent {
-		CONNECTING, CONNECTED, DISCONNECTING, DISCONNECTED, LOCKABLE, LOCKED, STATECONFIGURING, STATECONFIGURED, INCORRECTSTATE, MAXUSERS,
-		NOTAUTHORIZED, NOTOWNER, NOTREGISTERED, STATECONFIGERROR, STATERESETING, STATERESETED, STATESTARTING, STATESTARTED, STATESTOPING,
-		STATESTOPED, STATEUNKNOW, UNREACHABLE;
+		CONNECTING, CONNECTED, DISCONNECTING, DISCONNECTED, LOCKABLE, LOCKED, STATECONFIGURING, STATECONFIGURED,
+		INCORRECTSTATE, MAXUSERS, NOTAUTHORIZED, NOTOWNER, NOTREGISTERED, STATECONFIGERROR, STATERESETING,
+		STATERESETED, STATESTARTING, STATESTARTED, STATESTOPING, STATESTOPED, STATEUNKNOW, UNREACHABLE;
 	}
 
 	@Override
@@ -783,10 +782,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		// Set user info
 		if (currentCustomizer instanceof ICustomizerSecurity) {
-			((ICustomizerSecurity) currentCustomizer).setUserInfo(new com.linkare.rec.acquisition.UserInfo(getUsername()));
+			((ICustomizerSecurity) currentCustomizer).setUserInfo(new com.linkare.rec.acquisition.UserInfo(
+					getUsername()));
 		}
 
-		// Set current base hardware aquisition config 
+		// Set current base hardware aquisition config
 		currentHardwareAcquisitionConfig = currentApparatus.getHardwareInfo().createBaseHardwareAcquisitionConfig();
 
 		// Init customizer
@@ -854,8 +854,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		setCurrentState(APPARATUS_LOCKED);
 
 		if (currentHardwareAcquisitionConfig == null) {
-			// TODO Check if this is really needed.
-			log.severe("SETTING currentBaseHardwareAcquisitionConfig again!");
 			currentHardwareAcquisitionConfig = currentApparatus.getHardwareInfo().createBaseHardwareAcquisitionConfig();
 		}
 		apparatusClientBean.configure(currentHardwareAcquisitionConfig);
@@ -883,7 +881,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		if (currentState.matches(APPARATUS_LOCKED)) {
 			apparatusClientBean.start();
 		} else {
-			// TODO Check if this is really needed. 
+			// TODO Check if this is really needed.
 			log.severe("Appartus SHOULD be locked?");
 		}
 
@@ -987,10 +985,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			log.fine("ApparatusConnectorEvent " + evt.getMessage());
 		}
 
-		ExperimentHistoryUINode expHistoryUINode = new ExperimentHistoryUINode(this, evt.getDataSource(), apparatusClientBean
-				.getApparatus(), currentApparatusConfig);
+		ExperimentHistoryUINode expHistoryUINode = new ExperimentHistoryUINode(this, evt.getDataSource(),
+				apparatusClientBean.getApparatus(), currentApparatusConfig);
 
-		// CRITICAL Confirmar se o estado APPARATUS_LOCKED assegura que a experiment é mesmo minha!
+		// TODO Confirmar se o estado APPARATUS_LOCKED assegura que a experiment é mesmo minha!
 		expHistoryUINode.setLocallyOwned(currentState.matches(APPARATUS_LOCKED));
 
 		if (currentState.matches(APPARATUS_LOCKED)) {
@@ -1026,7 +1024,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		} else { // Ok the user wants to load his own Factory
 			try {
-				Object displayFactoryTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(), factoryLocation);
+				Object displayFactoryTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+						factoryLocation);
 				if (java.beans.Beans.isInstanceOf(displayFactoryTemp, DisplayFactory.class))
 					factory = (DisplayFactory) displayFactoryTemp;
 			} catch (Exception e) {
@@ -1060,7 +1059,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			try {
 				experimentDataDisplays = new ArrayList<ExpDataDisplay>();
 				Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
-						"com.linkare.rec.impl.baseUI.DefaultExperimentDataTable"); // CRITICAL Check default datatable
+				"com.linkare.rec.impl.baseUI.DefaultExperimentDataTable");
 				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class))
 					experimentDataDisplays.set(0, (ExpDataDisplay) dataDisplayTemp);
 			} catch (Exception e) {
@@ -1079,7 +1078,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		if (dataModelLocation != null) {
 			try {
-				Object expDataModelTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(), dataModelLocation);
+				Object expDataModelTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
+						dataModelLocation);
 				if (java.beans.Beans.isInstanceOf(expDataModelTemp, ExpDataModel.class)) {
 					// TODO - Verificar quando o exp data model é actualizado!!! Para enviar para a view.
 					experimentDataModel = (ExpDataModel) expDataModelTemp;

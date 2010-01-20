@@ -17,6 +17,7 @@ public class WebResource extends DisplayNode {
 	private String locationBundleKey;
 
 	public WebResource() {
+		super();
 	}
 
 	/**

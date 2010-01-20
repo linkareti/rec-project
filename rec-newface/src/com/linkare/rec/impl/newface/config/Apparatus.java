@@ -46,6 +46,7 @@ public class Apparatus extends DisplayNode {
 	private List<LocalizationBundle> localizationBundle = new ArrayList<LocalizationBundle>();
 
 	public Apparatus() {
+		super();
 	}
 
 	/**

@@ -46,6 +46,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 		private String name;
 
 		private DisplaySelector() {
+			super();
 		}
 
 		public Icon getIcon() {
@@ -119,21 +120,21 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 
 	private static final String RUNNING_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.running", "Running");
 	private static final String STATUS_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.experiment",
-			"Experiment status");
+	"Experiment status");
 	private static final String PAUSED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.paused", "Paused");
 	private static final String STOPED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.stoped", "Stopped");
 	private static final String WAITING_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.waitingData",
-			"Waiting for data...");
+	"Waiting for data...");
 	private static final String NODATA_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.nodata",
-			"The experiment started but no data was available to fetch");
+	"The experiment started but no data was available to fetch");
 	private static final String STARTED_NODATA_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.startedNoData",
-			"Started, no data available yet...");
+	"Started, no data available yet...");
 	private static final String DATA_ENDED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.ended", "Data Ended");
 	private static final String DISPLAY_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.display", "Display");
 	private static final String DATA_MODEL_ERROR1_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.dataModel",
-			"Data Model error!");
+	"Data Model error!");
 	private static final String DATA_MODEL_ERROR2_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.dataModel.2",
-			"Serious error in the data model, data was lost!");
+	"Serious error in the data model, data was lost!");
 
 	private static final int BUTTON_LIMIT = 2;
 
@@ -143,9 +144,9 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 	/** Utility field holding list of ExpDataModelListeners. */
 	private transient List<ExpDataDisplay> experimentDataDisplays;
 
-	private Map<String, Integer> displaySelectorNames = new HashMap<String, Integer>();
+	private final Map<String, Integer> displaySelectorNames = new HashMap<String, Integer>();
 
-	private Map<String, JComponent> displayMap = new HashMap<String, JComponent>();
+	private final Map<String, JComponent> displayMap = new HashMap<String, JComponent>();
 
 	private JComboBox comboDisplaySelector;
 
@@ -290,17 +291,17 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				javax.swing.GroupLayout.Alignment.TRAILING,
 				layout.createSequentialGroup()
-						.addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE).addPreferredGap(
-								javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(btnInfo,
+				.addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE).addPreferredGap(
+						javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(btnInfo,
 								javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(
-				displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE));
+										displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup().addGroup(
 						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false).addComponent(displaySelectorPane,
 								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(
-								btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE)).addPreferredGap(
-						javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(displayPane,
-						javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)));
+										btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE)).addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(displayPane,
+														javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)));
 	}// </editor-fold>//GEN-END:initComponents
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

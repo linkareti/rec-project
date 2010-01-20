@@ -1,4 +1,4 @@
-/* 
+/*
  * FlatButtonUI.java created on 2009/04/29
  *
  * Copyright 2009 Linkare TI. All rights reserved.
@@ -45,7 +45,7 @@ public class FlatButtonUI extends MetalButtonUI {
 	@Override
 	protected void paintButtonPressed(Graphics g, AbstractButton b) {
 		//    	FlatButton fButton = (FlatButton)b;
-		//    	    	
+		//
 		//    	fButton.setForeground(fButton.getForegroundOn());
 		//    	fButton.setBorder(BorderFactory.createLineBorder(fButton.getColorBorderOn()));
 		//		FlatUtils.drawGradient(fButton, g, 0, 0, 0, b.getHeight(),
@@ -58,17 +58,14 @@ public class FlatButtonUI extends MetalButtonUI {
 		FlatButton fButton = (FlatButton) c;
 
 		FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(), new float[] { .0f, .2f, .4f }, new Color[] {
-				fButton.getGradientTop(), Color.white, fButton.getGradientBottom() });
+			fButton.getGradientTop(), Color.white, fButton.getGradientBottom() });
 
 		super.paint(g, c);
 	}
 
-	/*
-	 * Para não ser desenhado o focus no FlatButton
-	 */
 	@Override
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
-
+		// Para não ser desenhado o focus no FlatButton
 	}
 
 	@Override

@@ -11,6 +11,7 @@ public class LocalizationBundle extends AbstractConfigBean {
 	private String name;
 
 	public LocalizationBundle() {
+		super();
 	}
 
 	/**

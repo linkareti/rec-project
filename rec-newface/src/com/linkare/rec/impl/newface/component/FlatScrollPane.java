@@ -17,7 +17,7 @@ public class FlatScrollPane extends JScrollPane {
 	}
 
 	public FlatScrollPane() {
-
+		super();
 	}
 
 	@Override

@@ -18,6 +18,7 @@ public class MediaConfig extends DisplayNode {
 	private boolean offlinePlay;
 
 	public MediaConfig() {
+		super();
 	}
 
 	@XmlAttribute

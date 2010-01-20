@@ -50,12 +50,15 @@ public abstract class OptionsSettablePanel extends JPanel {
 	}
 
 	public void setForceComponentsNonOpaque(boolean force) {
+		// ?
 	}
 
 	public void setForceComponentsBackgroundColor(boolean force) {
+		// ?
 	}
 
 	public void setForceComponentsToBasicUI(boolean force) {
+		// ?
 	}
 
 }

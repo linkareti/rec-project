@@ -26,6 +26,7 @@ public class Lab extends AbstractConfigBean {
 	private List<LocalizationBundle> localizationBundle = new ArrayList<LocalizationBundle>();
 
 	public Lab() {
+		super();
 	}
 
 	/**

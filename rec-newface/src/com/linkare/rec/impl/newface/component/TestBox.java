@@ -19,6 +19,7 @@ import com.linkare.rec.impl.newface.laf.flat.Focus;
 public class TestBox extends JTextField {
 
 	public TestBox() {
+		super();
 	}
 
 }

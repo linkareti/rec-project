@@ -13,6 +13,7 @@ public class Display extends DisplayNode {
 	private String classLocationBundleKey = "";
 
 	public Display() {
+		super();
 	}
 
 	/**

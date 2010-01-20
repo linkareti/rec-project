@@ -15,6 +15,7 @@ public class DefaultAcquisitionConfig extends DisplayNode {
 	private String classLocationBundleKey = "";
 
 	public DefaultAcquisitionConfig() {
+		super();
 	}
 
 	/**

@@ -95,10 +95,10 @@ import com.linkare.rec.impl.newface.laf.flat.FlatLookAndFeel;
 public class Laffy extends AbstractBean {
 	private static Laffy instance = null;
 	private JFrame frame;
-	private JScrollPane pageScrollPane = new JScrollPane();
-	private JList pagePreviewList = new JList();
-	private PagePreviewListModel pagePreviewModel = new PagePreviewListModel(pagePreviewList);
-	private JSplitPane splitPane = new JSplitPane();
+	private final JScrollPane pageScrollPane = new JScrollPane();
+	private final JList pagePreviewList = new JList();
+	private final PagePreviewListModel pagePreviewModel = new PagePreviewListModel(pagePreviewList);
+	private final JSplitPane splitPane = new JSplitPane();
 	private SplashWindow splashWindow;
 
 	private boolean isForceNonOpaque = false;
@@ -110,6 +110,7 @@ public class Laffy extends AbstractBean {
 	private final List<Page> pages = new ArrayList<Page>();
 
 	private Laffy() {
+		super();
 	}
 
 	// called from main thread to load laffy
@@ -187,8 +188,8 @@ public class Laffy extends AbstractBean {
 			public void run() {
 				pages.add(new Page(I18nResourceHandler.getMessage("Buttons"), new Section(I18nResourceHandler.getMessage("Button"),
 						ButtonPanel.class), new Section(I18nResourceHandler.getMessage("Toggle_Button"), TogglePanel.class), new Section(
-						I18nResourceHandler.getMessage("Radio_Button"), RadioPanel.class), new Section(I18nResourceHandler
-						.getMessage("Check_Boxes"), CheckPanel.class)));
+								I18nResourceHandler.getMessage("Radio_Button"), RadioPanel.class), new Section(I18nResourceHandler
+										.getMessage("Check_Boxes"), CheckPanel.class)));
 				splashWindow.setPercentageComplete((0.5f / numOfPages) * pages.size());
 			}
 		});
@@ -196,7 +197,7 @@ public class Laffy extends AbstractBean {
 			public void run() {
 				pages.add(new Page(I18nResourceHandler.getMessage("Text_Components"), new Section(I18nResourceHandler.getMessage("Label"),
 						LabelPanel.class), new Section(I18nResourceHandler.getMessage("Text_Field"), TextFieldPanel.class), new Section(
-						I18nResourceHandler.getMessage("Text_Area"), TextAreaPanel.class)));
+								I18nResourceHandler.getMessage("Text_Area"), TextAreaPanel.class)));
 				splashWindow.setPercentageComplete((0.5f / numOfPages) * pages.size());
 			}
 		});
@@ -204,7 +205,7 @@ public class Laffy extends AbstractBean {
 			public void run() {
 				pages.add(new Page(I18nResourceHandler.getMessage("Combos_&_Spinners"), new Section(I18nResourceHandler
 						.getMessage("ComboBox"), ComboPanel.class), new Section(I18nResourceHandler.getMessage("Editable_ComboBox"),
-						EditableComboPanel.class), new Section(I18nResourceHandler.getMessage("Spinner"), SpinnerPanel.class)));
+								EditableComboPanel.class), new Section(I18nResourceHandler.getMessage("Spinner"), SpinnerPanel.class)));
 				splashWindow.setPercentageComplete((0.5f / numOfPages) * pages.size());
 			}
 		});
@@ -212,7 +213,7 @@ public class Laffy extends AbstractBean {
 			public void run() {
 				pages.add(new Page(I18nResourceHandler.getMessage("Progress"), new Section(I18nResourceHandler.getMessage("Progress_Bar"),
 						ProgressPanel.class), new Section(I18nResourceHandler.getMessage("Vertical_Progress_Bar"),
-						VerticalProgressPanel.class)));
+								VerticalProgressPanel.class)));
 				splashWindow.setPercentageComplete((0.5f / numOfPages) * pages.size());
 			}
 		});

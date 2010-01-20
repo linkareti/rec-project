@@ -22,7 +22,7 @@ public class ProgressCicle extends JLabel {
 
 	public enum State {
 		IDLE, RUNNING
-	};
+	}
 
 	private Icon idleIcon;
 
@@ -35,6 +35,7 @@ public class ProgressCicle extends JLabel {
 	private State currentState;
 
 	public ProgressCicle() {
+		super();
 	}
 
 	public ProgressCicle(Icon idleIcon, final Icon[] busyIcons, int busyAnimationRate) {

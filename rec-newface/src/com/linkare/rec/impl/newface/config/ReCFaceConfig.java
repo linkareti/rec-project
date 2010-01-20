@@ -72,6 +72,7 @@ public class ReCFaceConfig extends AbstractConfigBean {
 	 * Creates a new <code>ReCConfig</code>. Default Constructor.
 	 */
 	public ReCFaceConfig() {
+		super();
 	}
 
 	/**

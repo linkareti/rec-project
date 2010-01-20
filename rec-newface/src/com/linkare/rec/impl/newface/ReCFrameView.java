@@ -13,6 +13,7 @@ import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -105,7 +106,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 		// Set frame properties
 		//getFrame().setPreferredSize(DEFAULT_FRAME_SIZE);
-		//getFrame().setResizable(false); 
+		//getFrame().setResizable(false);
 		getFrame().setGlassPane(glassPane);
 
 		// Add Apparatus Combo Item listener
@@ -149,9 +150,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 				} else if ("message".equals(propertyName)) {
 					String taskMessage = (String) (evt.getNewValue());
 					lblTaskMessage.setText(taskMessage);
-
-				} else if ("progress".equals(propertyName)) {
-
 				}
 			}
 		});
@@ -492,6 +490,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			apparatusTabbedPane.setSelectedTabIndex(ApparatusTabbedPane.TAB_DESCRIPTION);
 			apparatusTabbedPane.setTabIndexEnabled(ApparatusTabbedPane.TAB_RESULTS, false);
 			//TODO Clear results pane
+
 		}
 	}
 
@@ -542,7 +541,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		popMenu.add(messagePane);
 		popMenu.show(getApparatusTabbedPane(), 0, getApparatusTabbedPane().getHeight()
 				- getApparatusTabbedPane().getExperimentActionBar().getHeight() - messagePane.getPreferredSize().height);
-		// CRITICAL Definir um Gestor de Popups
 	}
 
 	private void disconnectFromApparatus() {
@@ -601,9 +599,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		// Goto results tab
 		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_RESULTS);
 		getExperimentStatusActionBar()
-				.setActionStateText(
-						recApplication.getContext().getResourceMap(StatusActionBar.class).getString("lblActionState.apparatusStarted.text"),
-						YELLOW);
+		.setActionStateText(
+				recApplication.getContext().getResourceMap(StatusActionBar.class).getString("lblActionState.apparatusStarted.text"),
+				YELLOW);
 	}
 
 	private void stopedExperiment() {
@@ -678,9 +676,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		mainPanel.setAutoscrolls(true);
 		mainPanel.setName("mainPanel"); // NOI18N
 		mainPanel.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
-			public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+			@Override
+			public void ancestorMoved(HierarchyEvent e) {
+				// noop
 			}
-
 			public void ancestorResized(java.awt.event.HierarchyEvent evt) {
 				onResize(evt);
 			}
@@ -692,12 +691,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		toolBar.setName("toolBar"); // NOI18N
 		toolBar.setPreferredSize(new java.awt.Dimension(100, 31));
 
-		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(
-				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ReCFrameView.class, this);
+		javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ReCFrameView.class, this);
 		toolBtnConnect.setAction(actionMap.get("toggleConnectionState")); // NOI18N
 		toolBtnConnect.setBackground(null);
-		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
-				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ReCFrameView.class);
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ReCFrameView.class);
 		toolBtnConnect.setText(resourceMap.getString("toolBtnConnect.text")); // NOI18N
 		toolBtnConnect.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		toolBtnConnect.setBorderPainted(false);
@@ -717,10 +714,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 		javax.swing.GroupLayout toolBarCenterSpaceLayout = new javax.swing.GroupLayout(toolBarCenterSpace);
 		toolBarCenterSpace.setLayout(toolBarCenterSpaceLayout);
-		toolBarCenterSpaceLayout.setHorizontalGroup(toolBarCenterSpaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 790, Short.MAX_VALUE));
-		toolBarCenterSpaceLayout.setVerticalGroup(toolBarCenterSpaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 27, Short.MAX_VALUE));
+		toolBarCenterSpaceLayout.setHorizontalGroup(
+				toolBarCenterSpaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 790, Short.MAX_VALUE)
+		);
+		toolBarCenterSpaceLayout.setVerticalGroup(
+				toolBarCenterSpaceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 27, Short.MAX_VALUE)
+		);
 
 		toolBar.add(toolBarCenterSpace);
 
@@ -789,11 +790,16 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 		javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
 		statusPanel.setLayout(statusPanelLayout);
-		statusPanelLayout.setHorizontalGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE));
-		statusPanelLayout.setVerticalGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				statusPanelLayout.createSequentialGroup().addComponent(statusPanelSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 2,
-						javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(25, Short.MAX_VALUE)));
+		statusPanelLayout.setHorizontalGroup(
+				statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
+		);
+		statusPanelLayout.setVerticalGroup(
+				statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(statusPanelLayout.createSequentialGroup()
+						.addComponent(statusPanelSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(25, Short.MAX_VALUE))
+		);
 
 		setComponent(mainPanel);
 		setMenuBar(menuBar);

@@ -1,4 +1,4 @@
-/* 
+/*
  * Style.java created on Mar 27, 2009
  *
  * Copyright 2009 Linkare TI. All rights reserved.
@@ -19,4 +19,5 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = { ElementType.TYPE })
 public @interface Style {
+	// no fields
 }

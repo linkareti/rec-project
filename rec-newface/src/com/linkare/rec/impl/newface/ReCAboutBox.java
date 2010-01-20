@@ -8,6 +8,8 @@ import org.jdesktop.application.Action;
 
 public class ReCAboutBox extends javax.swing.JDialog {
 
+	private static final long serialVersionUID = -7979233125739727566L;
+
 	public ReCAboutBox(java.awt.Frame parent) {
 		super(parent);
 		initComponents();
@@ -90,25 +92,25 @@ public class ReCAboutBox extends javax.swing.JDialog {
 								javax.swing.GroupLayout.Alignment.LEADING,
 								layout.createSequentialGroup().addGroup(
 										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(versionLabel)
-												.addComponent(vendorLabel).addComponent(homepageLabel)).addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(appVersionLabel)
-												.addComponent(appVendorLabel).addComponent(appHomepageLabel))).addComponent(appTitleLabel,
-								javax.swing.GroupLayout.Alignment.LEADING).addComponent(appDescLabel,
-								javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-								.addComponent(closeButton)).addContainerGap()));
+										.addComponent(vendorLabel).addComponent(homepageLabel)).addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+														layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(appVersionLabel)
+														.addComponent(appVendorLabel).addComponent(appHomepageLabel))).addComponent(appTitleLabel,
+																javax.swing.GroupLayout.Alignment.LEADING).addComponent(appDescLabel,
+																		javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+																		.addComponent(closeButton)).addContainerGap()));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(imageLabel,
 				javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
-				layout.createSequentialGroup().addContainerGap().addComponent(appTitleLabel).addPreferredGap(
-						javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(appDescLabel).addPreferredGap(
-						javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(versionLabel).addComponent(
-								appVersionLabel)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(vendorLabel).addComponent(
-								appVendorLabel)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-						layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(homepageLabel).addComponent(
-								appHomepageLabel)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-						.addComponent(closeButton).addContainerGap()));
+						layout.createSequentialGroup().addContainerGap().addComponent(appTitleLabel).addPreferredGap(
+								javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(appDescLabel).addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+												layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(versionLabel).addComponent(
+														appVersionLabel)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+																layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(vendorLabel).addComponent(
+																		appVendorLabel)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+																				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(homepageLabel).addComponent(
+																						appHomepageLabel)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+																						.addComponent(closeButton).addContainerGap()));
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents

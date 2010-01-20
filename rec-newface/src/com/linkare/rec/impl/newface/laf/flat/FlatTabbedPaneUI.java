@@ -1,4 +1,4 @@
-/* 
+/*
  * FlatScrollBarUI.java created on 2009/04/16
  *
  * Copyright 2009 Linkare TI. All rights reserved.
@@ -106,17 +106,17 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 	@Override
 	protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex, Rectangle iconRect,
 			Rectangle textRect, boolean isSelected) {
-
+		// Painting spec
 	}
 
 	@Override
 	protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
-
+		// Painting spec
 	}
 
 	@Override
 	protected void paintContentBorderLeftEdge(Graphics g, int tabPlacement, int selectedIndex, int x, int y, int w, int h) {
-
+		// Painting spec
 	}
 
 	@Override

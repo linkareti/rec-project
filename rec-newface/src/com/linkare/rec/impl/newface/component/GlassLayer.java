@@ -1,4 +1,4 @@
-/* 
+/*
  * GlassLayer.java created on Mar 12, 2009
  *
  * Copyright 2009 Linkare TI. All rights reserved.
@@ -51,12 +51,15 @@ public class GlassLayer extends JComponent {
 
 		if (CatchEvents.ALL == eventsToCatch) {
 
-			// Catch events
+			// Catch all events
 			addMouseListener(new MouseAdapter() {
+				// Do nothing
 			});
 			addMouseMotionListener(new MouseMotionAdapter() {
+				// Do nothing
 			});
 			addKeyListener(new KeyAdapter() {
+				// Do nothing
 			});
 
 			// Request focus

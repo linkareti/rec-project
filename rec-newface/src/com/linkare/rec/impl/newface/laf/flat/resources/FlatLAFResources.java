@@ -1,4 +1,4 @@
-/* 
+/*
  * InternalResources.java created on Feb 26, 2009
  *
  * Copyright 2009 Linkare TI. All rights reserved.
@@ -54,6 +54,7 @@ public class FlatLAFResources {
 	}
 
 	private FlatLAFResources() {
+		super();
 	}
 
 	public static BufferedImage getImage(FlatLAFImageResourcesEnum key) {

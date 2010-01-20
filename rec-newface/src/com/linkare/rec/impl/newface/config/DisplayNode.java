@@ -20,6 +20,7 @@ public class DisplayNode extends AbstractConfigBean {
 	 * Creates a new <code>DisplayNode</code>.
 	 */
 	public DisplayNode() {
+		super();
 	}
 
 	/**

@@ -1,4 +1,4 @@
-/* 
+/*
  * ReCFormatter.java created on Mar 4, 2009
  *
  * Copyright 2009 Linkare TI. All rights reserved.
@@ -23,9 +23,9 @@ public class ReCFormatter extends Formatter {
 
 	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
-	private Date date = new Date();
+	private final Date date = new Date();
 
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
 	/*
 	 * @see java.util.logging.Formatter#format(java.util.logging.LogRecord)
@@ -61,6 +61,7 @@ public class ReCFormatter extends Formatter {
 				pw.close();
 				str.append(sw.toString());
 			} catch (Exception ex) {
+				// best effort
 			}
 		}
 		return str.toString();

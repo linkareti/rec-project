@@ -61,14 +61,18 @@ public class FlatTableCellRenderer implements TableCellRenderer {
 
 	// The following methods override the defaults for performance reasons
 	public void validate() {
+		// noop for performance
 	}
 
 	public void revalidate() {
+		// noop for performance
 	}
 
 	protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+		// noop for performance
 	}
 
 	public void firePropertyChange(String propertyName, boolean oldValue, boolean newValue) {
+		// noop for performance
 	}
 }
