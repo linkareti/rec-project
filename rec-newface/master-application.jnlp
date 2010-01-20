@@ -47,11 +47,21 @@
         <jar href="lib/scubaClient.jar"/>
         <jar href="lib/radioactividadeClient.jar"/>
         <jar href="lib/conducaocalorClient.jar"/>
+        <jar href="lib/gClient.jar"/>
+        <jar href="lib/pvClient.jar"/>
+        <jar href="lib/penduloClient.jar"/>
 
 <!--${JNLP.RESOURCES.EXTENSIONS}-->
         <extension name="OpenORBClient" href="openORB/OpenORBClient.jnlp" />
     
         <property name="ReCFaceConfig" value="config/ReCFaceConfig.xml" />
+        <property name="ReCBaseUIConfig" value="etc/ReCBaseUIConfig.xml" />
+        <property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB" />
+        <property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton" />
+        <property name="ReC.MultiCastController.BindName" value="MultiCastController" />
+        <property name="ReC.MultiCastController.InitRef" value="MultiCastController" />
+        <property name="openorb.config" value="etc/OpenORB.xml" />
+        <property name="openorb.profile" value="ReCClient" />
         <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
         <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
         <!-- change this value to disable video -->
