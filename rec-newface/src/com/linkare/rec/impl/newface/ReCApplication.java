@@ -579,7 +579,9 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 					missingRequiredProperties.add(property.getName());
 				}
 			} else { // Optional Property
-				log.warning("Optinal ReC system property is missing: " + property);
+				if (propertyValue == null || propertyValue.isEmpty()) {
+					log.warning("Optional ReC system property is missing: " + property);
+				}
 			}
 		}
 
