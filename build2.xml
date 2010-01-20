@@ -22,7 +22,7 @@
 		<echo>ReC - eBab build system</echo>
 	</target>
 
-	<property name="build.dir.classes" value="${build.dir}/classes" />
+	<property name="build.dir.compile" value="${build.dir}/classes" />
 	<property name="build.dir.jars" value="${build.dir}/jars" />
 	<property name="build.dir.javadocs" value="${build.dir}/javadocs" />
 	<property name="dist.client" value="${dist.dir}/client" />
@@ -35,7 +35,7 @@
 		=====================================================
 	-->
 
-	<property name="rec.common.classes.dir" value="${build.dir.classes}/rec/common" />
+	<property name="rec.common.classes.dir" value="${build.dir.compile}/rec/common" />
 	<property name="rec.common.build.dir" value="${build.dir.jars}/common" />
 	<property name="rec.common.dist.dir" value="${dist.dir}/rec/common" />
 
@@ -123,7 +123,7 @@
 		=====================================================
 	-->
 
-	<property name="rec.client.classes.dir" value="${build.dir.classes}/rec/client" />
+	<property name="rec.client.classes.dir" value="${build.dir.compile}/rec/client" />
 	<property name="client.build.dir" value="${build.dir.jars}/client" />
 	<property name="rec.client.dist.dir" value="${dist.dir}/rec/client" />
 
@@ -227,7 +227,7 @@
 		=====================================================
 	-->
 
-	<property name="rec.hardwareserver.classes.dir" value="${build.dir.classes}/rec/hardwareserver" />
+	<property name="rec.hardwareserver.classes.dir" value="${build.dir.compile}/rec/hardwareserver" />
 	<property name="rec.hardwareserver.build.dir" value="${build.dir.jars}/hardwareserver" />
 	<property name="rec.hardwareserver.dist.dir" value="${dist.dir}/rec/hardwareserver" />
 
@@ -306,7 +306,7 @@
 		=====================================================
 	-->
 
-	<property name="rec.multicast.classes.dir" value="${build.dir.classes}/rec/multicast" />
+	<property name="rec.multicast.classes.dir" value="${build.dir.compile}/rec/multicast" />
 	<property name="rec.multicast.build.dir" value="${build.dir.jars}/multicast" />
 	<property name="rec.multicast.dist.dir" value="${dist.dir}/rec/multicast" />
 
@@ -444,7 +444,7 @@
 		=====================================================
 	-->
 
-	<property name="elab.client.classes.dir" value="${build.dir.classes}/elab/client" />
+	<property name="elab.client.classes.dir" value="${build.dir.compile}/elab/client" />
 	<property name="client.build.dir" value="${build.dir.jars}/client" />
 	<property name="elab.client.dist.dir" value="${dist.dir}/elab/client" />
 
@@ -582,7 +582,7 @@
 		=====================================================
 	-->
 
-	<property name="elab.hardwareserver.classes.dir" value="${build.dir.classes}/elab/hardwareserver" />
+	<property name="elab.hardwareserver.classes.dir" value="${build.dir.compile}/elab/hardwareserver" />
 	<property name="elab.hardwareserver.build.dir" value="${build.dir.jars}/hardwareserver" />
 	<property name="elab.hardwareserver.dist.dir" value="${dist.dir}/elab/hardwareserver" />
 
@@ -667,7 +667,7 @@
 		=====================================================
 	-->
 
-	<property name="elab.multicast.classes.dir" value="${build.dir.classes}/elab/multicast" />
+	<property name="elab.multicast.classes.dir" value="${build.dir.compile}/elab/multicast" />
 	<property name="elab.multicast.build.dir" value="${build.dir.jars}/multicast" />
 	<property name="elab.multicast.dist.dir" value="${dist.dir}/elab/multicast" />
 
@@ -789,6 +789,26 @@
 		</zip>
 	</target>
 	
+	<target name="create.jnlp.full.client">
+		<copy file="${template.file}" overwrite="yes" tofile="${elab.client.build.dir}/ELabFullClient.jnlp" />
+		<replace file="${build.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
+			<replacefilter token="@codebase@" property="codebase" />
+			<replacefilter token="@href@" property="href" />
+			<replacefilter token="@title@" property="title" />
+			<replacefilter token="@vendor@" property="vendor" />
+			<replacefilter token="@homepage@" property="homepage" />
+			<replacefilter token="@one-line@" property="one-line" />
+			<replacefilter token="@tootip@" property="tootip" />
+			<replacefilter token="@short@" property="short" />
+			<replacefilter token="@j2se-version@" property="j2se-version" />
+		</replace>
+		<replace file="${elab.client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
+		<replace file="${elab.client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
+		<replace file="${elab.client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
+		
+		<process.list task="add.experiment.to.full.jnlp" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
+
 	<macrodef name="create.jnlp.full.client.compile">
 		<attribute name="codebase"/>
 		<sequential>
@@ -812,7 +832,7 @@
 			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="add.experiment.to.full.jnlp.compile">
 		<attribute name="experiment.name" />
 		<sequential>
@@ -866,7 +886,7 @@
 		=====================================================
 	-->
 
-	<property name="experiments.classes.dir" value="${build.dir.classes}/experiments" />
+	<property name="experiments.classes.dir" value="${build.dir.compile}/experiments" />
 	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
 	<property name="experiments.build.dir.client" value="${build.dir.jars}/client" />
 	<property name="experiments.build.dir.server" value="${build.dir.jars}/hardwareserver" />
