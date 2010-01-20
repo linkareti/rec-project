@@ -17,7 +17,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LABORATORY")
 @NamedQueries( {
-		@NamedQuery(name = "findByName", query = "SELECT lab FROM Laboratory lab WHERE lab.name=:name")})
+		@NamedQuery(name = "findByName", query = "SELECT lab FROM Laboratory lab WHERE lab.name=:name"),
+		@NamedQuery(name = "findExperiments", query = "SELECT experiments FROM Laboratory lab WHERE lab.name=:name")}
+)
 public class Laboratory extends Resource {
 
 	@Id
@@ -67,5 +69,9 @@ public class Laboratory extends Resource {
 
 	public static Laboratory findByName(String laboratorio, EntityManager em) {
 		return (Laboratory) em.createNamedQuery("findByName").setParameter("name", laboratorio).getResultList().get(0);
+	}
+	
+	public static List<Experiment> findExperiments(String laboratorio, EntityManager em) {
+		return (List<Experiment>) em.createNamedQuery("findExperiments").setParameter("name", laboratorio).getResultList().get(0);
 	}
 }
