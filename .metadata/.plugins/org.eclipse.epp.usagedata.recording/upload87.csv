@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+opened,view,org.eclipse.datatools.connectivity.ui.dse,1.1.3.v200906020553,"org.eclipse.datatools.connectivity.DataSourceExplorerNavigator",1253493385794
+activated,view,org.eclipse.datatools.connectivity.ui.dse,1.1.3.v200906020553,"org.eclipse.datatools.connectivity.DataSourceExplorerNavigator",1253493385820
+started,bundle,org.eclipse.wst.common.snippets,1.1.300.v200903120643,"org.eclipse.wst.common.snippets",1253493388148
+started,bundle,org.eclipse.gef,3.5.0.v20090528-1511,"org.eclipse.gef",1253493388171
+started,bundle,org.eclipse.draw2d,3.5.0.v20090528-1511,"org.eclipse.draw2d",1253493388252
+opened,view,org.eclipse.wst.common.snippets,1.1.300.v200903120643,"org.eclipse.wst.common.snippets.internal.ui.SnippetsView",1253493388580
+activated,view,org.eclipse.wst.common.snippets,1.1.300.v200903120643,"org.eclipse.wst.common.snippets.internal.ui.SnippetsView",1253493388609
+started,bundle,org.eclipse.equinox.p2.ui,1.0.100.v20090527-1812,"org.eclipse.equinox.p2.ui",1253493405642
+started,bundle,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk",1253493406029
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493406428
+started,bundle,org.eclipse.equinox.p2.updatesite,1.0.100.v20090525,"org.eclipse.equinox.p2.updatesite",1253493408513
+error,log,,,"Unable to load the repository http://www.eclipse.org/subversive/downloads",1253493410567
+error,log,,,"Unable to load the repository http://download.eclipse.org/subversive",1253493417304
+error,log,,,"Unable to load the repository http://www.eclipse.org/subversive",1253493421637
+error,log,,,"Operation details",1253493429912
+error,log,,,"Operation details",1253493429912
+error,log,,,"Operation details",1253493429914
+error,log,,,"Operation details",1253493429924
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253493442306
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493442345
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493452107
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493537712
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.update",1253493544330
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493544731
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253493546252

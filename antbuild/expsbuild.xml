@@ -207,7 +207,7 @@
 
 <!--Experiments jars-->
 	<target name="jarCondCalor" depends="prepare, compileCondCalor">
-                <createExpJars expName="conducaoCalor" jarClientName="ElabTCustomizer" jarDriverName="ElabTStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/conducaoCalor/"/>
+                <createExpJars expName="conducaoCalor" jarClientName="ElabTCustomizer" jarDriverName="ElabTStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/conducaocalor/"/>
         </target>
 	<target name="jarAleatorio" depends="prepare, compileAleatorio">
                 <createExpJars expName="Aleatorio" jarClientName="ElabAleatorioCustomizer" jarDriverName="ElabAleatorioDriver" resourcesTopLoc="pt/utl/ist/elab/client/Aleatorio/"/>
@@ -222,51 +222,51 @@
                 <createExpJars expName="webrobot" jarClientName="ElabWebRobotCustomizer" jarDriverName="ElabWebRobotDriver" resourcesTopLoc="pt/utl/ist/elab/client/webrobot/"/>
         </target>
 	<!--target name="jarGamma" depends="prepare, compileGamma">
-                <createExpJars expName="gamma" jarClientName="ElabGammaCustomizer" jarDriverName="ElabGammaUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/gamma/"/>
+                <createExpJars expName="gamma" jarClientName="ElabGammaCustomizer" jarDriverName="ElabGammaUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/gamma/"/>
         </target>
 	<target name="jarPolaroid" depends="prepare, compilePolaroid">
-                <createExpJars expName="polaroid" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/polaroid/"/>
+                <createExpJars expName="polaroid" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidUSBDriver" resourcesTopLoc="pt/utl/ist/elab/client/polaroid/"/>
         </target-->
         
         <target name="jarGamma" depends="prepare, compileGamma">
-                <createExpJars expName="gamma" jarClientName="ElabGammaCustomizer" jarDriverName="ElabGammaDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/gamma/"/>
+                <createExpJars expName="gamma" jarClientName="ElabGammaCustomizer" jarDriverName="ElabGammaDriver" resourcesTopLoc="pt/utl/ist/elab/client/gamma/"/>
         </target>
 	<target name="jarPolaroid" depends="prepare, compilePolaroid">
-                <createExpJars expName="polaroid" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidDriver" resourcesTopLoc="pt/utl/ist/elab/client/usb/cypress/polaroid/"/>
+                <createExpJars expName="polaroid" jarClientName="ElabPolaroidCustomizer" jarDriverName="ElabPolaroidDriver" resourcesTopLoc="pt/utl/ist/elab/client/polaroid/"/>
         </target>
         
 	<target name="jarG" depends="prepare, compileG">
-                <createExpJars expName="g" jarClientName="ElabGCustomizer" jarDriverName="ElabGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/g/"/>
+                <createExpJars expName="g" jarClientName="ElabGCustomizer" jarDriverName="ElabGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/g/"/>
         </target>
 	<target name="jarMomInercia" depends="prepare, compileMomInercia">
-                <createExpJars expName="momentoInercia" jarClientName="ElabMomInerciaCustomizer" jarDriverName="ElabMomInerciaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/momentoInercia/"/>
+                <createExpJars expName="momentoInercia" jarClientName="ElabMomInerciaCustomizer" jarDriverName="ElabMomInerciaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/momentoinercia/"/>
         </target>
 	<target name="jarPendulo" depends="prepare, compilePendulo">
-                <createExpJars expName="pendulo" jarClientName="ElabPenduloCustomizer" jarDriverName="ElabPenduloStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/pendulo/"/>
+                <createExpJars expName="pendulo" jarClientName="ElabPenduloCustomizer" jarDriverName="ElabPenduloStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/pendulo/"/>
         </target>
 	<target name="jarPenduloGravitico" depends="prepare, compilePenduloGravitico">
-                <createExpJars expName="penduloGravitico" jarClientName="ElabPGCustomizer" jarDriverName="ElabPGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/penduloGravitico/"/>
+                <createExpJars expName="penduloGravitico" jarClientName="ElabPGCustomizer" jarDriverName="ElabPGStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/pendulogravitico/"/>
         </target>
 	<target name="jarPlanck" depends="prepare, compilePlanck">
-                <createExpJars expName="planck" jarClientName="ElabPlanckCustomizer" jarDriverName="ElabPlanckStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/planck/"/>
+                <createExpJars expName="planck" jarClientName="ElabPlanckCustomizer" jarDriverName="ElabPlanckStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/planck/"/>
         </target>
 	<target name="jarPV" depends="prepare, compilePV">
-                <createExpJars expName="pv" jarClientName="ElabPVCustomizer" jarDriverName="ElabPVStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/pv/"/>		
+                <createExpJars expName="pv" jarClientName="ElabPVCustomizer" jarDriverName="ElabPVStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/pv/"/>		
         </target>
 	<target name="jarRadioactividade" depends="prepare, compileRadioactividade">
-                <createExpJars expName="radioactividade" jarClientName="ElabRadioactividadeCustomizer" jarDriverName="ElabRadioactividadeStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/radioactividade/"/>
+                <createExpJars expName="radioactividade" jarClientName="ElabRadioactividadeCustomizer" jarDriverName="ElabRadioactividadeStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/radioactividade/"/>
         </target>
 	<target name="jarScuba" depends="prepare, compileScuba">
-                <createExpJars expName="scuba" jarClientName="ElabScubaCustomizer" jarDriverName="ElabScubaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/scuba/"/>
+                <createExpJars expName="scuba" jarClientName="ElabScubaCustomizer" jarDriverName="ElabScubaStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/scuba/"/>
         </target>
 	<target name="jarStatSound" depends="prepare, compileStatSound">
-                <createExpJars expName="statsound" jarClientName="ElabStatSoundCustomizer" jarDriverName="ElabStatSoundDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/statsound/"/>
+                <createExpJars expName="statsound" jarClientName="ElabStatSoundCustomizer" jarDriverName="ElabStatSoundDriver" resourcesTopLoc="pt/utl/ist/elab/client/statsound/"/>
         </target>
 	<target name="jarThomson" depends="prepare, compileThomson">
-                <createExpJars expName="thomson" jarClientName="ElabThomsonCustomizer" jarDriverName="ElabThomsonStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/thomson/"/>
+                <createExpJars expName="thomson" jarClientName="ElabThomsonCustomizer" jarDriverName="ElabThomsonStampDriver" resourcesTopLoc="pt/utl/ist/elab/client/thomson/"/>
         </target>
         <target name="jarCondensadorCilindrico" depends="prepare, compileCondensadorCilindrico">
-                <createExpJars expName="gamma" jarClientName="ElabCondensadorCilindricoCustomizer" jarDriverName="ElabCondensadorCilindricoDriver" resourcesTopLoc="pt/utl/ist/elab/client/serial/stamp/condensadorCilindrico/"/>
+                <createExpJars expName="gamma" jarClientName="ElabCondensadorCilindricoCustomizer" jarDriverName="ElabCondensadorCilindricoDriver" resourcesTopLoc="pt/utl/ist/elab/client/condensadorcilindrico/"/>
         </target>
 <!--All jars-->
 	<target name="jarExps" depends="jarElabFullClient, jarBaseUSB,

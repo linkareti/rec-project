@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1253748805976
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253748832285
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253748845177
+started,bundle,org.polarion.eclipse.team.svn.connector.svnkit16,2.2.1.I20090708-1500,"org.polarion.eclipse.team.svn.connector.svnkit16",1253748847429
+opened,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253748847851
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253748847871
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253748847872
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.views.showView",1253748847872
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253748847892
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253748852398
+activated,view,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.pde.runtime.LogView",1253748852404
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253748852480
+error,log,,,"SVN: '0x00400107: Get Repository Resource Revision' operation finished with error",1253748852653
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253748857588
+error,log,,,"SVN: '0x00400106: Get Repository Folder Children' operation finished with error",1253748866133
+activated,view,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.pde.runtime.LogView",1253748866153
+activated,view,org.eclipse.team.svn.ui,0.7.8.I20090506-1500,"org.eclipse.team.svn.ui.repository.RepositoriesView",1253748868283
+activated,view,org.eclipse.ui.views.log,1.0.100.v20090527,"org.eclipse.pde.runtime.LogView",1253748873451
+started,bundle,org.eclipse.ui.browser,3.2.300.v20090526,"org.eclipse.ui.browser",1253748895954
+started,bundle,org.eclipse.wst.server.core,1.1.101.v20090515,"org.eclipse.wst.server.core",1253748896246
+started,bundle,org.eclipse.wst.server.ui,1.1.102.v20090515,"org.eclipse.wst.server.ui",1253748896269
+started,bundle,org.eclipse.equinox.p2.ui,1.0.100.v20090527-1812,"org.eclipse.equinox.p2.ui",1253748902328
+started,bundle,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk",1253748902712
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1253748903261
+executed,command,org.eclipse.equinox.p2.ui.sdk,1.0.100.v20090520-1905,"org.eclipse.equinox.p2.ui.sdk.install",1253748937940
