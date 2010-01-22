@@ -612,11 +612,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private void showExperimentResults(ApparatusConnectorEvent evt) {
 
 		//      statusPanelApparatus.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.started", "Started..."));
-		getExperimentHistoryBox().addExperimentHistory((ExperimentHistoryUINode) evt.getValue());
+		ExperimentHistoryUINode experimentHistoryUI = (ExperimentHistoryUINode) evt.getValue();
+		getExperimentHistoryBox().addExperimentHistory(experimentHistoryUI);
 		//      controllerPanel.setEnablePlay(false);
 		//      controllerPanel.setEnableStop(true);
 
-		ResultsPane resultsPane = new ResultsPane();
+		ResultsPane resultsPane = new ResultsPane(experimentHistoryUI);
 		resultsPane.setExperimentDataModel(recApplication.getExperimentDataModel());
 
 		for (ExpDataDisplay display : recApplication.getExperimentDataDisplays()) {
@@ -625,6 +626,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		resultsPane.finishedAddingDataDisplays();
 
 		JPanel resultsHolderPane = getApparatusTabbedPane().getResultsHolderPane();
+		resultsHolderPane.removeAll();
 		resultsHolderPane.add(resultsPane);
 
 		getApparatusTabbedPane().setTabIndexEnabled(ApparatusTabbedPane.TAB_RESULTS, true);

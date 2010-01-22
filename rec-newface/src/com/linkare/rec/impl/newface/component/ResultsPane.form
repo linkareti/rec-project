@@ -24,7 +24,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnInfo" min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
-          <Component id="displayPane" alignment="0" pref="597" max="32767" attributes="0"/>
+          <Component id="displayPane" alignment="0" pref="598" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -61,6 +61,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnInfo">
       <Properties>
+        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+          <action class="com.linkare.rec.impl.newface.component.ResultsPane" id="showExperimentInfo" methodName="showExperimentInfo"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnInfo.icon"/>
         <Property name="text" type="java.lang.String" resourceKey="btnInfo.text"/>
         <Property name="borderPainted" type="boolean" value="false"/>
