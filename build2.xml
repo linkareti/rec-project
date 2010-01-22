@@ -73,6 +73,13 @@
 			<classpath refid="rec.common.libs.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+		
+		<copy todir="${rec.common.classes.dir}" overwrite="true">
+			<fileset dir="${rec.common.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
 
 		<manifest file="${rec.common.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
@@ -160,12 +167,26 @@
 			<classpath refid="rec.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+		
+		<copy todir="${rec.client.classes.dir}" overwrite="true">
+			<fileset dir="${rec.client.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
 
 		<javac srcdir="${rec.ui.src.java.dir}" destdir="${rec.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="rec.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+		
+		<copy todir="${rec.client.classes.dir}" overwrite="true">
+			<fileset dir="${rec.ui.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
 
 		<manifest file="${rec.client.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
@@ -250,6 +271,13 @@
 			<classpath refid="rec.compile.hardwareserver.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+		
+		<copy todir="${rec.hardwareserver.classes.dir}" overwrite="true">
+			<fileset dir="${rec.hardwareserver.classes.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
 
 		<manifest file="${rec.hardwareserver.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
@@ -325,6 +353,13 @@
 			<classpath refid="rec.compile.multicastcontroller.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+		
+		<copy todir="${rec.multicast.classes.dir}" overwrite="true">
+			<fileset dir="${rec.multicast.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
 
 		<manifest file="${rec.multicast.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
@@ -459,12 +494,26 @@
 			<classpath refid="elab.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+		
+		<copy todir="${elab.client.classes.dir}" overwrite="true">
+			<fileset dir="${elab.client.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
 
 		<javac srcdir="${elab.ui.src.java.dir}" destdir="${elab.client.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 			<include name="**/*.java" />
 			<classpath refid="elab.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+		
+		<copy todir="${elab.client.classes.dir}" overwrite="true">
+			<fileset dir="${elab.ui.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
 
 		<manifest file="${elab.client.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
@@ -584,6 +633,13 @@
 			<classpath refid="elab.compile.hardwareserver.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+		
+		<copy todir="${elab.hardwareserver.classes.dir}" overwrite="true">
+			<fileset dir="${elab.hardwareserver.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
 
 		<manifest file="${elab.hardwareserver.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
@@ -662,6 +718,13 @@
 			<classpath refid="elab.compile.multicastcontroller.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
+		
+		<copy todir="${elab.multicast.classes.dir}" overwrite="true">
+			<fileset dir="${elab.multicast.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
 
 		<manifest file="${elab.multicast.classes.dir}/META-INF/MANIFEST.MF">
 			<section name="common">
@@ -1171,7 +1234,6 @@
     	<sequential>
     		<mkdir dir="@{destination.folder}" />
     			<jar destfile="@{destination.folder}/@{jar.name}" basedir="@{source.basedir}">
-    				<include name="**/*.class" />
     			</jar>    
         </sequential>
     </macrodef>
