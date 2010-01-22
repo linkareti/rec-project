@@ -1377,6 +1377,48 @@
 		<delete dir="${build.dir}/javadocs/rec" />
 		<delete dir="${build.dir}/javadocs/elab" />
 		<delete dir="${build.dir}/javadocs" />
-	</target>
+	</target>	
 
+	<macrodef name="pack.200.jar">
+		<attribute name="source.directory" />
+		<attribute name="destination.directory"/>
+		<sequential>
+			<delete failonerror="false">
+				<fileset dir="@{destination.directory}"> 
+					<include name="**/*_sig.jar" />
+					<include name="**/*_sig.jar.pack.gz" />
+				</fileset>
+			</delete>
+
+			<mkdir dir="@{destination.directory}" />
+
+			<copy todir="@{destination.directory}">
+				<fileset dir="@{source.directory}"> 
+					<include name="**/*.jar" />
+				</fileset>
+			</copy>
+
+			<p200ant repack="true">
+				<fileset dir="@{destination.directory}"> 
+					<include name="**/*.jar" />
+				</fileset>
+			</p200ant>
+
+			<signjar destDir="@{destination.directory}" keystore="${keystore}" storepass="${keypass}" alias="${alias}" storetype="${storetype}">
+				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+
+			<delete failonerror="false">
+				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="**/*_sig.jar" />
+			</delete>
+
+			<p200ant destdir="@{destination.directory}">
+				<fileset dir="@{destination.directory}"> 
+					<include name="**/*_sig.jar" />
+				</fileset>
+			</p200ant>
+
+		</sequential>
+	</macrodef>
 </project>
