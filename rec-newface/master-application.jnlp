@@ -32,7 +32,7 @@
         <jar href="lib/jcommon-1.0.12.jar"/>
         <jar href="lib/jfreechart-1.0.9.jar"/>
         <jar href="lib/jmf.jar"/>
-<!--        <jar href="lib/jna.jar"/>-->
+	<jar href="lib/jna.jar"/>
         <jar href="lib/jsr80.jar"/>
         <jar href="lib/jsr80_ri.jar"/>
         <jar href="lib/logkit.jar"/>
