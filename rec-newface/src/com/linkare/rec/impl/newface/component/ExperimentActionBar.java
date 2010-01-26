@@ -56,6 +56,7 @@ public class ExperimentActionBar extends javax.swing.JPanel {
 				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ExperimentActionBar.class, this);
 		btnPlayStop.setAction(actionMap.get("play")); // NOI18N
 		btnPlayStop.setOpaque(false);
+		btnPlayStop.setBackground(resourceMap.getColor("StatusBarBGColor.color"));
 		btnPlayStop.setIcon(resourceMap.getIcon("btnPlayStop.icon")); // NOI18N
 		btnPlayStop.setText(resourceMap.getString("btnPlayStop.text")); // NOI18N
 		btnPlayStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));

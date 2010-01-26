@@ -123,7 +123,7 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
 
 		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
 				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ApparatusTabbedPane.class);
-		actionBarHolderPane.setBackground(resourceMap.getColor("actionBarHolderPane.color"));
+		actionBarHolderPane.setBackground(resourceMap.getColor("StatusBarBGColor.color"));
 		actionBarHolderPane.setOpaque(true);
 		actionBarHolderPane.setName("actionBarHolderPane"); // NOI18N
 		actionBarHolderPane.setPreferredSize(new java.awt.Dimension(514, 34));

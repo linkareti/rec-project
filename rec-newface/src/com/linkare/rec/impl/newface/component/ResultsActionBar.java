@@ -34,6 +34,8 @@ public class ResultsActionBar extends javax.swing.JPanel {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
+		this.setOpaque(false);
+
 		btnPlayStop = new javax.swing.JButton();
 		btnPlayStop1 = new javax.swing.JButton();
 		btnPlayStop2 = new javax.swing.JButton();
@@ -45,31 +47,37 @@ public class ResultsActionBar extends javax.swing.JPanel {
 
 		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
 				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ResultsActionBar.class);
+
 		btnPlayStop.setIcon(resourceMap.getIcon("btnPlayStop.icon")); // NOI18N
 		btnPlayStop.setText(resourceMap.getString("btnPlayStop.text")); // NOI18N
 		btnPlayStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		btnPlayStop.setBorderPainted(false);
 		btnPlayStop.setName("btnPlayStop"); // NOI18N
+		btnPlayStop.setBackground(resourceMap.getColor("StatusBarBGColor.color"));
 
 		btnPlayStop1.setIcon(resourceMap.getIcon("btnPlayStop1.icon")); // NOI18N
 		btnPlayStop1.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		btnPlayStop1.setBorderPainted(false);
 		btnPlayStop1.setName("btnPlayStop1"); // NOI18N
+		btnPlayStop1.setBackground(resourceMap.getColor("StatusBarBGColor.color"));
 
 		btnPlayStop2.setIcon(resourceMap.getIcon("btnPlayStop2.icon")); // NOI18N
 		btnPlayStop2.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		btnPlayStop2.setBorderPainted(false);
 		btnPlayStop2.setName("btnPlayStop2"); // NOI18N
+		btnPlayStop2.setBackground(resourceMap.getColor("StatusBarBGColor.color"));
 
 		btnPlayStop3.setIcon(resourceMap.getIcon("btnPlayStop3.icon")); // NOI18N
 		btnPlayStop3.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		btnPlayStop3.setBorderPainted(false);
 		btnPlayStop3.setName("btnPlayStop3"); // NOI18N
+		btnPlayStop3.setBackground(resourceMap.getColor("StatusBarBGColor.color"));
 
 		btnPlayStop4.setIcon(resourceMap.getIcon("btnPlayStop4.icon")); // NOI18N
 		btnPlayStop4.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		btnPlayStop4.setBorderPainted(false);
 		btnPlayStop4.setName("btnPlayStop4"); // NOI18N
+		btnPlayStop4.setBackground(resourceMap.getColor("StatusBarBGColor.color"));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
