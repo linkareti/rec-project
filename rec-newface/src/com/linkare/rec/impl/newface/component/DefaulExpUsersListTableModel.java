@@ -44,9 +44,9 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	/** Holds value of property expUsersListSource. */
 	private ExpUsersListSource expUsersListSource;
 
-	private final String noUsersList;
-	private final String lblUserName;
-	private final String lbltime_to_control_min;
+	private String noUsersList;
+	private String lblUserName;
+	private String lbltime_to_control_min;
 	private String lbltime_to_control_max;
 	private String lblInControl;
 	private String lblControlNow;
@@ -54,13 +54,21 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	/** Creates a new instance of DefaulExptUsersListTableModel */
 	public DefaulExpUsersListTableModel() {
 		super();
-		noUsersList = "Não existem Utilizadores.";//ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.noUsersList", "No Users List Available");
-		lblUserName = "Utilizador";//ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.username", "Username:");
+		init();
+
+		setDataVector(new Object[0][1], new Object[] { noUsersList });
+	}
+
+	public void init() {
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(
+				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(DefaulExpUsersListTableModel.class);
+
+		noUsersList = resourceMap.getString("noUsersList.text");
+		lblUserName = resourceMap.getString("noUsersList.text");
 		//        lblInControl = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.inControl", "In control since");
 		//        lblControlNow = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.controlNow", "now!");
-		lbltime_to_control_min = "Acesso";//ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.timeToControlMin", "Control at (min)");
+		lbltime_to_control_min = resourceMap.getString("lbltime_to_control_min.text");
 		//        lbltime_to_control_max = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.timeToControlMax", "Control at (max)");
-		setDataVector(new Object[0][1], new Object[] { noUsersList });
 	}
 
 	public void usersListChanged(ExpUsersListEvent evt) {
