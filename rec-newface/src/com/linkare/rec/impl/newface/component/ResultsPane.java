@@ -314,6 +314,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ResultsPane.class, this);
         btnInfo.setAction(actionMap.get("showExperimentInfo")); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ResultsPane.class);
+		btnInfo.setBackground(resourceMap.getColor("BGColor.color"));
         btnInfo.setIcon(resourceMap.getIcon("btnInfo.icon")); // NOI18N
         btnInfo.setText(resourceMap.getString("btnInfo.text")); // NOI18N
         btnInfo.setBorderPainted(false);
