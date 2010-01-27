@@ -196,6 +196,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 			String escapedMsg = StringEscapeUtils.escapeHtml(msg);
 
 			Element msgList = getHTMLDocument().getElement(MESSAGE_LIST);
+
 			try {
 				getHTMLDocument().insertBeforeEnd(msgList, new UserMessage(userFrom, escapedMsg).toString());
 
@@ -205,7 +206,8 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 				log.log(Level.SEVERE, "Trying to insert html element", e);
 			}
 
-			msgPane.scrollToReference(MESSAGE_LIST_END);
+			msgPane.setCaretPosition(msgList.getEndOffset());
+
 		}
 	}
 
