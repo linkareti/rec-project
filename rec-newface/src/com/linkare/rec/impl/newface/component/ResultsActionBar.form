@@ -6,6 +6,7 @@
       <Dimension value="[32767, 40]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
+    <Property name="opaque" type="boolean" value="false"/>
   </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>
@@ -38,17 +39,18 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="btnPlayStop2" alignment="0" pref="34" max="32767" attributes="1"/>
-          <Component id="btnPlayStop1" alignment="1" pref="34" max="32767" attributes="1"/>
+          <Component id="btnPlayStop2" alignment="0" pref="35" max="32767" attributes="1"/>
+          <Component id="btnPlayStop1" alignment="1" pref="35" max="32767" attributes="1"/>
           <Component id="btnPlayStop" alignment="1" max="32767" attributes="1"/>
-          <Component id="btnPlayStop3" alignment="1" pref="34" max="32767" attributes="1"/>
-          <Component id="btnPlayStop4" alignment="1" pref="34" max="32767" attributes="1"/>
+          <Component id="btnPlayStop3" alignment="1" pref="35" max="32767" attributes="1"/>
+          <Component id="btnPlayStop4" alignment="1" pref="35" max="32767" attributes="1"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnPlayStop">
       <Properties>
+        <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnPlayStop.icon"/>
         <Property name="text" type="java.lang.String" resourceKey="btnPlayStop.text"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -58,10 +60,12 @@
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnPlayStop" noResource="true"/>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPlayStop1">
       <Properties>
+        <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnPlayStop1.icon"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -70,10 +74,13 @@
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnPlayStop1" noResource="true"/>
+        <Property name="opaque" type="boolean" value="false"/>
+        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPlayStop1.pressedIcon"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPlayStop2">
       <Properties>
+        <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnPlayStop2.icon"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -82,10 +89,13 @@
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnPlayStop2" noResource="true"/>
+        <Property name="opaque" type="boolean" value="false"/>
+        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPlayStop2.pressedIcon"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPlayStop3">
       <Properties>
+        <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnPlayStop3.icon"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -94,10 +104,13 @@
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnPlayStop3" noResource="true"/>
+        <Property name="opaque" type="boolean" value="false"/>
+        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPlayStop3.pressedIcon"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPlayStop4">
       <Properties>
+        <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnPlayStop4.icon"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -106,6 +119,8 @@
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnPlayStop4" noResource="true"/>
+        <Property name="opaque" type="boolean" value="false"/>
+        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPlayStop4.pressedIcon"/>
       </Properties>
     </Component>
   </SubComponents>

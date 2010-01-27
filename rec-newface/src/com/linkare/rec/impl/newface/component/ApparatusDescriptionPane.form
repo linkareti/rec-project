@@ -108,6 +108,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextArea" name="txtApparatusDescription">
           <Properties>
+            <Property name="background" type="java.awt.Color" resourceKey="txtApparatusDescription.background"/>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.modules.form.editors2.FontEditor">
               <FontInfo relative="true">
@@ -119,7 +120,6 @@
             <Property name="tabSize" type="int" value="4"/>
             <Property name="text" type="java.lang.String" resourceKey="txtApparatusDescription.text"/>
             <Property name="name" type="java.lang.String" value="txtApparatusDescription" noResource="true"/>
-            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

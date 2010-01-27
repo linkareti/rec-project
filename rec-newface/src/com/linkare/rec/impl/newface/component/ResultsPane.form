@@ -20,7 +20,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="displaySelectorPane" pref="567" max="32767" attributes="0"/>
+              <Component id="displaySelectorPane" pref="568" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnInfo" min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
@@ -64,6 +64,7 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
           <action class="com.linkare.rec.impl.newface.component.ResultsPane" id="showExperimentInfo" methodName="showExperimentInfo"/>
         </Property>
+        <Property name="background" type="java.awt.Color" resourceKey="btnInfo.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnInfo.icon"/>
         <Property name="text" type="java.lang.String" resourceKey="btnInfo.text"/>
         <Property name="borderPainted" type="boolean" value="false"/>

@@ -314,7 +314,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(ResultsPane.class, this);
         btnInfo.setAction(actionMap.get("showExperimentInfo")); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ResultsPane.class);
-		btnInfo.setBackground(resourceMap.getColor("BGColor.color"));
+        btnInfo.setBackground(resourceMap.getColor("btnInfo.background")); // NOI18N
         btnInfo.setIcon(resourceMap.getIcon("btnInfo.icon")); // NOI18N
         btnInfo.setText(resourceMap.getString("btnInfo.text")); // NOI18N
         btnInfo.setBorderPainted(false);
@@ -325,7 +325,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                .addComponent(displaySelectorPane, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(displayPane, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)

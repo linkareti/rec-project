@@ -64,7 +64,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 				com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(DefaulExpUsersListTableModel.class);
 
 		noUsersList = resourceMap.getString("noUsersList.text");
-		lblUserName = resourceMap.getString("noUsersList.text");
+		lblUserName = resourceMap.getString("lblUserName.text");
 		//        lblInControl = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.inControl", "In control since");
 		//        lblControlNow = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.controlNow", "now!");
 		lbltime_to_control_min = resourceMap.getString("lbltime_to_control_min.text");

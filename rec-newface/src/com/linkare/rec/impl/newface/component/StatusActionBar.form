@@ -6,6 +6,7 @@
       <Dimension value="[32767, 40]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
+    <Property name="opaque" type="boolean" value="false"/>
   </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="2"/>

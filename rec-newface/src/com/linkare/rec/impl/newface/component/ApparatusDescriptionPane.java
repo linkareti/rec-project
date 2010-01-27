@@ -135,8 +135,9 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
         scrollApparatusDescription.setBackground(resourceMap.getColor("scrollApparatusDescription.background")); // NOI18N
         scrollApparatusDescription.setBorder(null);
         scrollApparatusDescription.setName("scrollApparatusDescription"); // NOI18N
-		scrollApparatusDescription.setOpaque(false);
+        scrollApparatusDescription.setOpaque(false);
 
+        txtApparatusDescription.setBackground(resourceMap.getColor("txtApparatusDescription.background")); // NOI18N
         txtApparatusDescription.setEditable(false);
         txtApparatusDescription.setFont(txtApparatusDescription.getFont());
         txtApparatusDescription.setLineWrap(true);
@@ -144,7 +145,6 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
         txtApparatusDescription.setTabSize(4);
         txtApparatusDescription.setText(resourceMap.getString("txtApparatusDescription.text")); // NOI18N
         txtApparatusDescription.setName("txtApparatusDescription"); // NOI18N
-		txtApparatusDescription.setOpaque(true);
         scrollApparatusDescription.setViewportView(txtApparatusDescription);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -170,7 +170,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollApparatusDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLink)
+                .addComponent(btnLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
