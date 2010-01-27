@@ -76,3 +76,10 @@ short=Estatistica de dados
 j2se-version=1.6
 main-class=pt.utl.ist.elab.client.FullClient
 properties=FullClient.properties
+
+
+##MAIN CLASSES FOR THE VARIOUS COMPONENTS
+client.main-class=pt.utl.ist.elab.client.FullClient
+multicast.main-class=com.linkare.rec.impl.multicast.startup.MultiCastControllerMain
+experiment.client.main-class=pt.utl.ist.elab.client.@{experiment.name}.ClientMain
+experiment.driver.main-class=pt.utl.ist.elab.driver.@{experiment.name}.ServerMain
