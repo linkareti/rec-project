@@ -24,7 +24,15 @@
 
 	<property name="build.dir.compile" value="${basedir}/${build.dir}/compile" />
 	<property name="build.dir.dist" value="${basedir}/${build.dir}/dist" />
-		
+	
+  	<tstamp>
+		<format property="timestamp" pattern="dd-MM-yyyy hh:mm" locale="en,UK"/>
+	</tstamp>
+	
+	<tstamp>
+		<format property="today" pattern="dd-MM-yyyy" locale="en,UK"/>
+	</tstamp>
+	
 	<!--
 		=====================================================
 		==================== REC Common =====================
@@ -86,7 +94,7 @@
 				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
 				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
 				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
@@ -188,7 +196,7 @@
 				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
 				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
 				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
@@ -273,7 +281,7 @@
 				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
 				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
 				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
@@ -284,7 +292,12 @@
 	</target>
 
 	<target name="build.rec.hardwareserver" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
-
+		<mkdir dir="${hardwareserver.build.dir}/libs"/>
+		<copy todir="${hardwareserver.build.dir}/libs">
+			<fileset dir="${rec.hardwareserver.lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
 	</target>
 
 	<!--
@@ -349,12 +362,13 @@
 		</copy>
 
 		<manifest file="${rec.multicast.classes.dir}/META-INF/MANIFEST.MF">
+			<attribute name="Main-Class" value="${multicast.main-class}" />
 			<section name="common">
 				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
 				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
 				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
 				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
@@ -365,7 +379,12 @@
 	</target>
 
 	<target name="build.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
-		
+		<mkdir dir="${multicast.build.dir}/libs"/>
+		<copy todir="${multicast.build.dir}/libs">
+			<fileset dir="${rec.multicast.lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
 	</target>
 
 	<path id="run.multicastcontroller.classpath">
@@ -376,7 +395,7 @@
 	</path>
 
 	<target name="run.rec.multicast">
-		<java classname="com.linkare.rec.impl.multicast.startup.MultiCastControllerMain" fork="true" failonerror="true" maxmemory="${max.memory}">
+		<java classname="${multicast.main-class}" fork="true" failonerror="true" maxmemory="${max.memory}">
 			<arg value="-h" />
 			<!--bootclasspath location=" TODO /openorb/openorb_orb_omg-1.4.0_sig.jar"/-->
 			<classpath refid="run.multicastcontroller.classpath" />
@@ -506,7 +525,7 @@
 				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
 				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
 				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
@@ -627,7 +646,7 @@
 				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
 				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
 				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
@@ -710,7 +729,7 @@
 				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
 				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
 				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
@@ -722,7 +741,12 @@
 	</target>
 
 	<target name="build.elab.multicastcontroller" depends="clean.elab.multicastcontroller,compile.elab.multicastcontroller,jar.elab.multicastcontroller">
-
+		<mkdir dir="${multicast.build.dir}/libs"/>
+		<copy todir="${multicast.build.dir}/libs">
+			<fileset dir="${elab.multicast.lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
 	</target>
 
 	<!--
@@ -751,20 +775,26 @@
 		<delete dir="${dist.dir}" />
 	</target>
 
-	<target name="dist" depends="clean.dist,clean.all,build.all">
-		<mkdir dir="${dist.dir}" />
+    <target name="dist.multicast" depends="clean.rec.multicastcontroller,clean.elab.multicastcontroller,build.elab.multicastcontroller,build.rec.multicastcontroller">
+        <delete dir="${dist.dir}/multicast" />
+    	<mkdir dir="${dist.dir}/multicast" />
+    	<zip destfile="${dist.dir}/multicast/${today}-elab-multicast.zip" basedir="${multicast.build.dir}" update="true" comment="eLab Multicast Controller Distribuition" />
+    </target>
+		
+	<target name="dist.hardwareserver" depends="clean.rec.hardwareserver,clean.elab.hardwareserver,build.elab.hardwareserver,build.rec.hardwareserver">
+		<delete dir="${dist.dir}/hardwareserver" />
+	    <mkdir dir="${dist.dir}/hardwareserver" />
+	    <zip destfile="${dist.dir}/hardwareserver/${today}-elab-hardwareserver.zip" basedir="${hardwareserver.build.dir}" update="true" comment="eLab Hardwareserver Distribuition" />
+	</target>
+	
+	<target name="dist.client" depends="clean.rec.client,clean.elab.client,build.elab.client,build.rec.client">
+		<delete dir="${dist.dir}/client" />
+	    <mkdir dir="${dist.dir}/client" />
+	    <zip destfile="${dist.dir}/client/${today}-elab-client.zip" basedir="${client.build.dir}" update="true" comment="eLab Client Distribuition" />
+	</target>
+	
+	<target name="dist.all" depends="clean.dist,clean.all,build.all,dist.multicast,dist.hardwareserver,dist.client">
 
-		<zip destfile="${dist.dir}/elab-multicast.zip" update="true" comment="eLab Multicast Controller">
-			<fileset file="${rec.multicast.build.dir}/ReCMulticastController.jar" />
-			<fileset file="${elab.multicast.build.dir}/ELabMulticastController.jar" />
-			<fileset file="${rec.common.build.dir}/ReCCommon_sig.jar" />
-		</zip>
-
-		<zip destfile="${dist.dir}/elab-client.zip" update="true" comment="eLab Full Client">
-			<fileset file="${client.build.dir}/ReCClient_sig.jar" />
-			<fileset file="${client.build.dir}/ELabClient_sig.jar" />
-			<fileset file="${rec.common.build.dir}/ReCCommon_sig.jar" />
-		</zip>
 	</target>
 	
 	<target name="create.jnlp.full.client">
