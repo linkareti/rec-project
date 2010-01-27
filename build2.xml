@@ -40,7 +40,7 @@
 	-->
 
 	<property name="rec.common.classes.dir" value="${build.dir.compile}/classes/rec/common" />
-	<property name="rec.common.build.dir" value="${build.dir.dist}/common" />
+	<property name="common.build.dir" value="${build.dir.dist}/common" />
 
 	<property name="rec.common.src.java.dir" value="${basedir}/rec/src/java/common" />
 	
@@ -106,7 +106,7 @@
 	</target>
 
 	<target name="pack.jar.rec.common" description="Packages and compresses the jar for p200 distribution.">
-		<pack.200.single.jar destination.directory="${build.dir.dist}/common" source.directory="${build.dir.compile}" source.jar.without.extension="ReCCommon"/>
+		<pack.200.single.jar destination.directory="${common.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ReCCommon"/>
 	</target>
 
 	<target name="build.rec.common" depends="clean.rec.common,compile.rec.common,pack.jar.rec.common">
@@ -207,11 +207,11 @@
 		
 	</target>
 
-	<target name="jar.rec.client">
-		<create.jar destination.folder="${client.build.dir}" jar.name="ReCCLient.jar" source.basedir="${rec.client.classes.dir}"/>
+	<target name="pack.jar.rec.client" description="Packages and compresses the jar for p200 distribution.">
+		<pack.200.single.jar destination.directory="${client.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ReCClient"/>
 	</target>
 	
-	<target name="build.rec.client" depends="build.rec.common,clean.rec.client,compile.rec.client,jar.rec.client">
+	<target name="build.rec.client" depends="build.rec.common,clean.rec.client,compile.rec.client,pack.jar.rec.client">
 	</target>
 
 	<!--
@@ -537,12 +537,12 @@
 		<create.jnlp.full.client.compile codebase="${basedir}/${build.dir.compile}" />
 		
 	</target>
-
-	<target name="jar.elab.client">
-		<create.jar destination.folder="${client.build.dir}" jar.name="ELabClient.jar" source.basedir="${elab.client.classes.dir}"/>
+	
+	<target name="pack.jar.elab.client" description="Packages and compresses the jar for p200 distribution.">
+		<pack.200.single.jar destination.directory="${client.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ELabClient"/>
 	</target>
 
-	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client">
+	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,pack.jar.elab.client">
 
 	</target>
 	
@@ -755,15 +755,15 @@
 		=====================================================
 	-->
 
-	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller,clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller,clean.javadocs,clean.experiments.list">
+	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller,clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller,clean.javadocs">
 		<delete dir="${build.dir}" />
 	</target>
 
-	<target name="compile.all" depends="compile.rec.common,compile.rec.client,compile.rec.hardwareserver,compile.rec.multicastcontroller,compile.elab.client,compile.elab.hardwareserver,compile.elab.multicastcontroller,compile.experiments.list">
+	<target name="compile.all" depends="compile.rec.common,compile.rec.client,compile.rec.hardwareserver,compile.rec.multicastcontroller,compile.elab.client,compile.elab.hardwareserver,compile.elab.multicastcontroller">
 
 	</target>
 
-	<target name="jar.all" depends="pack.jar.rec.common,jar.rec.client,jar.rec.hardwareserver,jar.rec.multicastcontroller,jar.elab.client,jar.elab.hardwareserver,jar.elab.multicastcontroller">
+	<target name="jar.all" depends="pack.jar.rec.common,pack.jar.rec.client,jar.rec.hardwareserver,jar.rec.multicastcontroller,pack.jar.elab.client,jar.elab.hardwareserver,jar.elab.multicastcontroller">
 
 	</target>
 
@@ -954,15 +954,13 @@
 		<path refid="elab.hardwareserver.libs.classpath" />
 	</path>
 
-	<macrodef name="compile.experiment">
+	<macrodef name="compile.experiment.client">
 		<attribute name="experiment.name" />
 		<sequential>
 
 			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client" />
-			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server" />
 			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client/META-INF" />
-			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server/META-INF" />
-			<echo>Compiling experiment: @{experiment.name}</echo>
+			<echo>Compiling experiment client: @{experiment.name}</echo>
 
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
 
@@ -995,6 +993,25 @@
 				</section>
 			</manifest>
 
+			<jar.experiment.client experiment.name="@{experiment.name}" destination="${build.dir.compile}"/>
+			
+			<sign.jar jar.name="@{experiment.name}Client.jar" folder="${build.dir.compile}"/>
+			
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
+
+		</sequential>
+	</macrodef>
+
+	<macrodef name="compile.experiment.driver">
+		<attribute name="experiment.name" />
+		<sequential>
+
+			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server" />
+			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server/META-INF" />
+			<echo>Compiling experiment driver: @{experiment.name}</echo>
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
+
 			<javac srcdir="experiments/@{experiment.name}/src/java/server" destdir="${experiments.classes.dir}/@{experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
 				<include name="**/*.java" />
 				<classpath>
@@ -1024,30 +1041,28 @@
 				</section>
 			</manifest>
 
-			<jar.experiment.client experiment.name="@{experiment.name}" destination="${build.dir.compile}"/>
-			
-			<sign.jar jar.name="@{experiment.name}Client.jar" folder="${build.dir.compile}"/>
-			
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
 
 		</sequential>
 	</macrodef>
 
-	<macrodef name="jar.experiment.client">
-		<attribute name="experiment.name" />
-		<attribute name="destination"/>
-		<sequential>
-			<mkdir dir="@{destination}" />
-
-			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
-
-			<jar destfile="@{destination}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client">
-			</jar>
-
-			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
-
-		</sequential>
-	</macrodef>
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: name          
+         = = = = = = = = = = = = = = = = = -->
+    <macrodef name="jar.experiment.client">
+        <attribute name="experiment.name" />
+    	<attribute name="destination"/>
+        <sequential>
+            <mkdir dir="@{destination}"/>
+        	
+        	<ant antfile="build.xml" dir="experiments/@{experiment.name}" target="pre.jar" />
+        	
+        	<jar destfile="@{destination}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client"/>
+        	
+        	<ant antfile="build.xml" dir="experiments/@{experiment.name}" target="post.jar" />
+        	
+        </sequential>
+    </macrodef>
 
 	<macrodef name="jar.experiment.driver">
 		<attribute name="experiment.name" />
@@ -1070,7 +1085,7 @@
 		<sequential>
 			<clean.experiment experiment.name="@{experiment.name}" />
 			<compile.experiment experiment.name="@{experiment.name}" />
-			<jar.experiment experiment.name="@{experiment.name}" />
+			<jar.experime experiment.name="@{experiment.name}" />
 			<sign.experiment experiment.name="@{experiment.name}" />
 			<create.jnlp.for.experiment experiment.name="@{experiment.name}" />
 		</sequential>
@@ -1282,30 +1297,54 @@
 		<process.list task="clean.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
-	<target name="compile.experiment">
+	<target name="compile.experiment.client">
 		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<compile.experiment experiment.name="${experiment.name}" />
+		<compile.experiment.client experiment.name="${experiment.name}" />
+	</target>
+	
+	<target name="compile.experiment.driver">
+		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
+		<compile.experiment.driver experiment.name="${experiment.name}" />
 	</target>
 
-	<target name="compile.experiments.list">
+	<target name="compile.experiment.drivers.list">
 		<fail unless="experiment.list"> experiments.list must be set to compile
 			that list of experiments. define it in build.properties or pass 
 			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="compile.experiment" list="${experiment.list}" attribute.name="experiment.name" />
+		<process.list task="compile.experiment.driver" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
-	<target name="jar.experiment">
+	<target name="compile.experiment.clients.list">
+		<fail unless="experiment.list"> experiments.list must be set to compile
+			that list of experiments. define it in build.properties or pass 
+			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<process.list task="compile.experiment.client" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
+	
+	<target name="jar.experiment.client">
 		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<jar.experiment experiment.name="${experiment.name}" />
+		<jar.experiment.client experiment.name="${experiment.name}" destination="" />
+	</target>
+	
+	<target name="jar.experiment.driver">
+		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
+		<jar.experiment.driver experiment.name="${experiment.name}" destination="" />
 	</target>
 
-	<target name="jar.experiments.list">
+	<target name="jar.experiment.clients.list">
 		<fail unless="experiment.list"> experiments.list must be set to package
 			that list of experiments. define it in build.properties or pass 
 			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="jar.experiment" list="${experiment.list}" attribute.name="experiment.name" />
+		<process.list task="jar.experiment.client" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
 
+	<target name="jar.experiment.drivers.list">
+		<fail unless="experiment.list"> experiments.list must be set to package
+			that list of experiments. define it in build.properties or pass 
+			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<process.list task="jar.experiment.driver" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
+	
 	<target name="sign.experiment">
 		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
 		<sign.experiment experiment.name="${experiment.name}" />
@@ -1455,6 +1494,9 @@
 		<delete dir="${build.dir}/javadocs" />
 	</target>	
 
+	<taskdef name="p200ant" classname="de.matthiasmann.p200ant.P200AntTask" classpath="${rec.lib.dir}/compile/common//P200Ant.jar"/>
+
+	
 	<macrodef name="pack.200.all.jar.in.dir">
 		<attribute name="source.directory" />
 		<attribute name="destination.directory"/>
