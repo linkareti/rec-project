@@ -432,18 +432,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			}
 
 			public void willExit(EventObject e) {
-				// TODO handle app exit
-
-				if (apparatusClientBean != null) {
-					apparatusClientBean.disconnect();
-					log.info("Apparatus has been client disconnected");
-				}
-				if (labClientBean != null) {
-					labClientBean.disconnect();
-					log.info("Lab client has been disconnected");
-				}
-
-				log.fine("Will exit ReC");
+				log.fine("Exiting ReC...");
 			}
 		};
 		addExitListener(appExitHandler);
@@ -552,13 +541,23 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	@Override
 	protected void shutdown() {
+
 		//      Save session state for the component hierarchy rooted by
 		//      the mainFrame.  SingleFrameApplication subclasses that override
 		//      shutdown need to remember call {@code super.shutdown()}.
-		super.shutdown();
+
+		if (apparatusClientBean != null) {
+			apparatusClientBean.disconnect();
+			log.info("Apparatus has been client disconnected");
+		}
+		if (labClientBean != null) {
+			labClientBean.disconnect();
+			log.info("Lab client has been disconnected");
+		}
 		if (log.isLoggable(Level.FINE)) {
 			log.fine("Shutting down and saving session state");
 		}
+		super.shutdown();
 	}
 
 	/**
@@ -1173,7 +1172,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			play();
 		} else {
 			// Forward event to the view
-			fireApplicationEvent(new ReCAppEvent(this, ReCCommand.APPARATUS_CONFIGURED));
+			fireApplicationEvent(new ReCAppEvent(this, ReCCommand.CUSTOMIZER_DONE));
 		}
 	}
 

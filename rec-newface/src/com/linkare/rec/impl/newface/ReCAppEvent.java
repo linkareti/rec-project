@@ -7,7 +7,7 @@ public class ReCAppEvent extends EventObject {
 	private static final long serialVersionUID = -466417696213838689L;
 
 	public enum ReCCommand {
-		SHOW_LOGIN, SELECTED_APPARATUS_CHANGE, APPARATUS_CONFIGURED, CUSTOMIZER_CANCELED;
+		SHOW_LOGIN, SELECTED_APPARATUS_CHANGE, CUSTOMIZER_DONE, CUSTOMIZER_CANCELED;
 	}
 
 	private final ReCCommand command;

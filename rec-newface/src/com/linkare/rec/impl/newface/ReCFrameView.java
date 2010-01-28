@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,10 +27,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.Timer;
 
 import org.jdesktop.application.Action;
+import org.jdesktop.application.ApplicationActionMap;
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -52,8 +53,8 @@ import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
 import com.linkare.rec.impl.newface.component.ExperimentHistoryUINode;
 import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.GlassLayer;
+import com.linkare.rec.impl.newface.component.InfoPopup;
 import com.linkare.rec.impl.newface.component.LayoutContainerPane;
-import com.linkare.rec.impl.newface.component.MessagePane;
 import com.linkare.rec.impl.newface.component.ResultsPane;
 import com.linkare.rec.impl.newface.component.SimpleLoginBox;
 import com.linkare.rec.impl.newface.component.StatusActionBar;
@@ -72,8 +73,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private static final Logger log = Logger.getLogger(ReCFrameView.class.getName());
 
-	//private static final Dimension DEFAULT_FRAME_SIZE = new Dimension(848, 478);
-
 	// For now, application model is unique. So there is no need for abstraction here.
 	private final ReCApplication recApplication = ReCApplication.getApplication();
 
@@ -84,6 +83,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private long apparatusLockInitialTimeMs;
 
 	private long millisToLockSuccess;
+
+	private InfoPopup infoPopup;
 
 	public ReCFrameView(SingleFrameApplication app) {
 		super(app);
@@ -105,9 +106,15 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		collectInterativeBoxes();
 
 		// Set frame properties
-		//getFrame().setPreferredSize(DEFAULT_FRAME_SIZE);
-		//getFrame().setResizable(false);
 		getFrame().setGlassPane(glassPane);
+		getFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		getFrame().addWindowListener(new WindowListenerAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				ApplicationActionMap actionMap = getActionMap();
+				actionMap.get("quit").actionPerformed(new ActionEvent(this, 0, "close"));
+			}
+		});
 
 		// Add Apparatus Combo Item listener
 		getApparatusCombo().addItemListener(this);
@@ -154,6 +161,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			}
 		});
 
+	}
+
+	/**
+	 * @return The <code>ReCFrameView</code> action map.
+	 */
+	private ApplicationActionMap getActionMap() {
+		return org.jdesktop.application.Application.getInstance(ReCApplication.class).getContext().getActionMap(ReCFrameView.class,
+				ReCFrameView.this);
 	}
 
 	/**
@@ -329,13 +344,19 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		case SELECTED_APPARATUS_CHANGE:
 			selectedApparatusChange();
 			break;
-		case APPARATUS_CONFIGURED:
-			//TODO APPARATUS_CONFIGURED
+		case CUSTOMIZER_DONE:
+			customizerDone();
 			break;
 		case CUSTOMIZER_CANCELED:
-			//TODO CUSTOMIZER_CANCELED
+			// noop
 			break;
 		}
+	}
+
+	private void customizerDone() {
+		getExperimentStatusActionBar().setActionStateLabelVisible(true);
+		getExperimentStatusActionBar().setActionStateText(
+				recApplication.getContext().getResourceMap(StatusActionBar.class).getString("lblActionState.customizerDone.text"), YELLOW);
 	}
 
 	/**
@@ -440,6 +461,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			lockApparatus();
 			break;
 		case STATECONFIGURING:
+			configuringApparatus();
 			break;
 		case STATECONFIGURED:
 			configuredApparatus();
@@ -496,28 +518,53 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private void connectToApparatus() {
 
+		// Video
 		if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED) {
 			getVideoBox().initializeVideoOutput();
 			recApplication.setVideoOutput(getVideoBox().getVideoOutput());
 		}
 
+		// Toggle apparatus connected UI state 
 		getApparatusSelectBox().toggleApparatusStateActionData(false);
-
 		getApparatusCombo().setEnabled(false);
-
 		getLayoutContainerPane().enableApparatusTabbedPane();
-
 		updateStatus(getResourceMap().getString("lblTaskMessage.connectedToApparatus.text",
 				recApplication.getCurrentApparatusHardwareFamiliarName()));
+		getApparatusDescriptionPane().setApparatusConfig(recApplication.getSelectedApparatusConfig());
+		getApparatusTabbedPane().getExperimentActionBar().setPlayStopButtonEnabled(false);
 
 		// Add customizer component
 		getApparatusTabbedPane().addCustomizerComponent(recApplication.getCurrentCustomizer().getCustomizerComponent());
 
-		// Update description pane
-		getApparatusDescriptionPane().setApparatusConfig(recApplication.getSelectedApparatusConfig());
+		// Show Info Message
+		getInfoPopup().getMessagePane().setPreferredSize(getInfoPopupSizeFromApparatusTabbedPane());
+		getInfoPopup().show(getApparatusTabbedPane(), 0, getInfoPopupYFromApparatusTabbedPane());
 
+		// Goto customizer tab
+		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_CUSTOMIZER);
+
+		// Update UserList Pane
+		updateUserListPane();
+	}
+
+	private int getInfoPopupYFromApparatusTabbedPane() {
+		return getApparatusTabbedPane().getHeight() - getApparatusTabbedPane().getExperimentActionBar().getHeight()
+				- getInfoPopup().getMessagePane().getPreferredSize().height;
+	}
+
+	private Dimension getInfoPopupSizeFromApparatusTabbedPane() {
+		return new Dimension(getApparatusTabbedPane().getWidth() - 2, 60);
+	}
+
+	private InfoPopup getInfoPopup() {
+		if (infoPopup == null) {
+			infoPopup = new InfoPopup();
+		}
+		return infoPopup;
+	}
+
+	private void updateUserListPane() {
 		long timeStart = System.currentTimeMillis();
-		//UserList Pane
 		// CRITICAL João: Verificar tempo e carga de execução destas chamadas e
 		// identificar se é uma situção com que temos mesmo de viver.
 		// TODO Carregar em background
@@ -528,19 +575,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 		log.fine("Auto Refresh set took @ " + (System.currentTimeMillis() - timeStart) / 1000 + "s to do!");
 		//getApparatusUserListPane().getModel().chechRefresh();
-
-		// Goto customizer tab
-		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_CUSTOMIZER);
-
-		// Show MessagePane
-		// CRITICAL Definir um Gestor de Popups
-		JPopupMenu popMenu = new JPopupMenu();
-		popMenu.setOpaque(false);
-		MessagePane messagePane = new MessagePane();
-		messagePane.setPreferredSize(new Dimension(getApparatusTabbedPane().getWidth() - 2, 60));
-		popMenu.add(messagePane);
-		popMenu.show(getApparatusTabbedPane(), 0, getApparatusTabbedPane().getHeight()
-				- getApparatusTabbedPane().getExperimentActionBar().getHeight() - messagePane.getPreferredSize().height);
 	}
 
 	private void disconnectFromApparatus() {
@@ -548,17 +582,14 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			getVideoBox().destroyVideoOutput();
 		}
 
+		// Toggle apparatus connected UI state 
 		StatusActionBar experimentStatusActionBar = getExperimentStatusActionBar();
 		if (experimentStatusActionBar != null) {
 			experimentStatusActionBar.setActionStateLabelVisible(false);
 		}
-
 		getApparatusSelectBox().toggleApparatusStateActionData(true);
-
 		getApparatusCombo().setEnabled(true);
-
 		getLayoutContainerPane().disableApparatusTabbedPane();
-
 		updateStatus(getResourceMap().getString("lblTaskMessage.connectedToLab.text", recApplication.getCurrentLabName()));
 	}
 
@@ -583,6 +614,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		apparatusLockTimer.stop();
 	}
 
+	private void configuringApparatus() {
+		getExperimentStatusActionBar().setActionStateText(
+				recApplication.getContext().getResourceMap(StatusActionBar.class).getString("lblActionState.apparatusConfiguring.text"),
+				GREEN);
+	}
+
 	private void configuredApparatus() {
 		getExperimentStatusActionBar().setActionStateText(
 				recApplication.getContext().getResourceMap(StatusActionBar.class).getString("lblActionState.apparatusConfigured.text"),
@@ -599,8 +636,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		// Goto results tab
 		getApparatusTabbedPane().setSelectedTabIndex(ApparatusTabbedPane.TAB_RESULTS);
 		getExperimentStatusActionBar()
-		.setActionStateText(
-				recApplication.getContext().getResourceMap(StatusActionBar.class).getString("lblActionState.apparatusStarted.text"),
+				.setActionStateText(
+						recApplication.getContext().getResourceMap(StatusActionBar.class).getString("lblActionState.apparatusStarted.text"),
 				YELLOW);
 	}
 

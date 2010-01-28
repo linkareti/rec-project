@@ -40,7 +40,6 @@ import com.linkare.rec.impl.utils.EventQueueDispatcher;
  */
 public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
-	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(Chat.class.getName());
 
 	private static final String CHAT_TEMPLATE_RESOURCE = "resources/chatTemplate.htm";

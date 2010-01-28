@@ -81,21 +81,22 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		if (TAB_RESULTS == tabbedPane.getSelectedIndex()) {
+		if (TAB_DESCRIPTION == tabbedPane.getSelectedIndex()) {
+			log.fine("Description Tab");
 
+		} else if (TAB_RESULTS == tabbedPane.getSelectedIndex()) {
+			log.fine("Results Tab");
 			actionBarHolderPane.remove(experimentActionBar);
 			actionBarHolderPane.add(resultsActionBar, BorderLayout.LINE_START);
 			lastSelectedTabResults = true;
-			revalidate();
-			repaint();
 
 		} else if (lastSelectedTabResults) {
 			lastSelectedTabResults = false;
 			actionBarHolderPane.remove(resultsActionBar);
 			actionBarHolderPane.add(experimentActionBar, BorderLayout.LINE_START);
-			revalidate();
-			repaint();
 		}
+		revalidate();
+		repaint();
 	}
 
 	/**

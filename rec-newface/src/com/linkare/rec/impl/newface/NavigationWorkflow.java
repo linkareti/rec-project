@@ -43,20 +43,11 @@ public enum NavigationWorkflow {
 		availableTransitions.put(APPARATUS_CONFIGURED, transitions(APPARATUS_LOCKED, LAB_DISCONNECT_PERFORMED,
 				APPARATUS_DISCONNECT_PERFORMED /* returns to CONNECTED_TO_LAB */));
 
-		availableTransitions.put(APPARATUS_LOCKED, transitions(LAB_DISCONNECT_PERFORMED, APPARATUS_DISCONNECT_PERFORMED /*
-																														 * returns
-																														 * to
-																														 * CONNECTED_TO_LAB
-																														 */));
+		availableTransitions.put(APPARATUS_LOCKED, transitions(LAB_DISCONNECT_PERFORMED, APPARATUS_DISCONNECT_PERFORMED));
+		// returns to CONNECTED_TO_LAB
 
-		// CRITICAL Confirm this APPARATUS_STARTE transitions (LAB_DISCONNECT_PERFORMED, APPARATUS_DISCONNECT_PERFORMED
-		// Será que podemos fazer esta transição. Será que podemos desligar antes de chegar ao estado STOPED?
-		availableTransitions.put(APPARATUS_STARTED, transitions(LAB_DISCONNECT_PERFORMED, APPARATUS_DISCONNECT_PERFORMED /*
-																														  * returns
-																														  * to
-																														  * CONNECTED_TO_LAB
-																														  */));
-		// CRITICAL Confirm this APPARATUS_STARTE transitions (LAB_DISCONNECT_PERFORMED, APPARATUS_DISCONNECT_PERFORMED
+		availableTransitions.put(APPARATUS_STARTED, transitions(LAB_DISCONNECT_PERFORMED, APPARATUS_DISCONNECT_PERFORMED));
+		// returns to CONNECTED_TO_LAB
 
 		availableTransitions.put(LAB_DISCONNECT_PERFORMED, transitions(DISCONNECTED_OFFLINE));
 	}
