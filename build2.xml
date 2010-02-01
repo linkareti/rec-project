@@ -1494,7 +1494,7 @@
 		<delete dir="${build.dir}/javadocs" />
 	</target>	
 
-	<taskdef name="p200ant" classname="de.matthiasmann.p200ant.P200AntTask" classpath="${rec.lib.dir}/compile/common//P200Ant.jar"/>
+	<taskdef name="p200ant" classname="de.matthiasmann.p200ant.P200AntTask" classpath="${rec.lib.dir}/compile/common/p200ant.jar" />
 
 	
 	<macrodef name="pack.200.all.jar.in.dir">
