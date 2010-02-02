@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir=".." name="AllocationManager-IDE">
+    
+  <property file="nbproject/debug-jboss.properties"/>
+
+  <target name="debug-nb">
+    <nbjpdaconnect name="AllocationManager" host="${jpda.host}" address="${jpda.address}" transport="${jpda.transport}">
+      <!--classpath>
+        <path path="exploded-archives/AllocationManager.jar"/>
+      </classpath>
+      <sourcepath>
+        <path path="src"/>
+      </sourcepath-->
+    </nbjpdaconnect>
+  </target>
+</project>
