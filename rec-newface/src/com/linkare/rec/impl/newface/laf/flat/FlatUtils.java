@@ -27,7 +27,7 @@ public class FlatUtils {
 	static void drawGradient(JComponent c, Graphics g, int x, int y, int w, int h, float[] fractions, Color[] colors) {
 		LinearGradientPaint paint = null;
 
-		c.setOpaque(false);
+		c.setOpaque(true);
 		Graphics2D g2 = (Graphics2D) g.create();
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		Composite old = g2.getComposite();
