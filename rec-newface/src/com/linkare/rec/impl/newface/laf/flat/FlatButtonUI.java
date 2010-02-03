@@ -44,21 +44,23 @@ public class FlatButtonUI extends MetalButtonUI {
 
 	@Override
 	protected void paintButtonPressed(Graphics g, AbstractButton b) {
-		//    	FlatButton fButton = (FlatButton)b;
-		//
-		//    	fButton.setForeground(fButton.getForegroundOn());
-		//    	fButton.setBorder(BorderFactory.createLineBorder(fButton.getColorBorderOn()));
-		//		FlatUtils.drawGradient(fButton, g, 0, 0, 0, b.getHeight(),
-		//			new float[] {.0f, 1.0f},
-		//			new Color[] {fButton.getGradientTopOn(), fButton.getGradientBottomOn()});
+		//		FlatButton fButton = (FlatButton) b;
+
+		//		fButton.setForeground(fButton.getForeground());
+		//		fButton.setBorder(BorderFactory.createLineBorder(fButton.getBorderColor()));
+		//		FlatUtils.drawGradient(fButton, g, 0, 0, 0, b.getHeight(), new float[] { .0f, 1.0f }, new Color[] { fButton.getGradientTop(),
+		//				fButton.getGradientBottom() });
 	}
 
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		FlatButton fButton = (FlatButton) c;
 
-		FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(), new float[] { .0f, .2f, .4f }, new Color[] {
-			fButton.getGradientTop(), Color.white, fButton.getGradientBottom() });
+		//		FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(), new float[] { .0f, .2f, .4f }, new Color[] {
+		//				fButton.getGradientTop(), Color.white, fButton.getGradientBottom() });
+
+		FlatUtils.drawGradient(fButton, g, 0, 0, 0, fButton.getHeight(), new float[] { .0f, .4f }, new Color[] { fButton.getGradientTop(),
+				fButton.getGradientBottom() });
 
 		super.paint(g, c);
 	}
