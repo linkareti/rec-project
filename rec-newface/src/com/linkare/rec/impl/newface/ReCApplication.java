@@ -361,11 +361,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	}
 
 	public void setSelectedApparatusConfig(Apparatus apparatus) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Selected apparatus is " + apparatus);
-		}
 		this.currentApparatusConfig = apparatus;
-
 		// Notify the view
 		fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SELECTED_APPARATUS_CHANGE));
 	}
@@ -478,12 +474,11 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			labClientBean.setUsersListRefreshPeriod(recFaceConfig.getUsersListRefreshRateMs());
 
 			// TODO Current Lab setup
-			//            if(recFaceConfig.isAutoConnectLab()) {
+			// if(recFaceConfig.isAutoConnectLab()) {
 			currentLab = recFaceConfig.getLab().get(0);
-			//            }
+			// }
 			if (log.isLoggable(Level.FINE)) {
 				log.fine("recFaceConfig.isAutoConnectLab() = " + recFaceConfig.isAutoConnectLab());
-				log.fine("currentLab = " + currentLab);
 			}
 
 			// Load Localization Bundles
@@ -763,20 +758,12 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	@Override
 	public void apparatusConnecting(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt);
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(CONNECTING, evt);
 	}
 
 	@Override
 	public void apparatusConnected(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt);
-		}
-
 		// Load customizer
 		currentCustomizer = CustomizerUIUtil.loadCustomizer(ReCResourceBundle.findString(currentApparatusConfig
 				.getCustomizerClassLocationBundleKey()));
@@ -809,20 +796,12 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	@Override
 	public void apparatusDisconnecting(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(DISCONNECTING, evt);
 	}
 
 	@Override
 	public void apparatusDisconnected(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		if (IS_VIDEO_DEVELOPMENT_ENABLED) {
 			stopMedia();
 		}
@@ -836,10 +815,6 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	@Override
 	public void apparatusLockable(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt);
-		}
-
 		if (currentState.matches(APPARATUS_CONFIGURED)) {
 			// Forward event to the view
 			fireApparatusStateChanged(LOCKABLE, evt);
@@ -848,10 +823,6 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	@Override
 	public void apparatusLocked(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		setCurrentState(APPARATUS_LOCKED);
 
 		if (currentHardwareAcquisitionConfig == null) {
@@ -865,20 +836,12 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	@Override
 	public void apparatusStateConfiguring(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(STATECONFIGURING, evt);
 	}
 
 	@Override
 	public void apparatusStateConfigured(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		if (currentState.matches(APPARATUS_LOCKED)) {
 			apparatusClientBean.start();
 		} else {
@@ -892,90 +855,54 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	@Override
 	public void apparatusIncorrectState(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(INCORRECTSTATE, evt);
 	}
 
 	@Override
 	public void apparatusMaxUsers(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(MAXUSERS, evt);
 	}
 
 	@Override
 	public void apparatusNotAuthorized(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(NOTAUTHORIZED, evt);
 	}
 
 	@Override
 	public void apparatusNotOwner(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(NOTOWNER, evt);
 	}
 
 	@Override
 	public void apparatusNotRegistered(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(NOTREGISTERED, evt);
 	}
 
 	@Override
 	public void apparatusStateConfigError(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(STATECONFIGERROR, evt);
 	}
 
 	@Override
 	public void apparatusStateReseting(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(STATERESETING, evt);
 	}
 
 	@Override
 	public void apparatusStateReseted(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(STATERESETED, evt);
 	}
 
 	@Override
 	public void apparatusStateStarting(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(STATESTARTING, evt);
 	}
@@ -989,7 +916,6 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 		ExperimentHistoryUINode expHistoryUINode = new ExperimentHistoryUINode(this, evt.getDataSource(),
 				apparatusClientBean.getApparatus(), currentApparatusConfig);
 
-		// TODO Confirmar se o estado APPARATUS_LOCKED assegura que a experiment é mesmo minha!
 		expHistoryUINode.setLocallyOwned(currentState.matches(APPARATUS_LOCKED));
 
 		if (currentState.matches(APPARATUS_LOCKED)) {
@@ -1006,9 +932,11 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 		setCurrentState(APPARATUS_STARTED);
 
+		// Get experiment history
+		log.fine("ExpHistory apparatus id: " + expHistory != null ? expHistory.getApparatusID() : "");
 		ExperimentHistoryUINode experimentHistory = (ExperimentHistoryUINode) expHistory;
 
-		DisplayFactory factory = new DefaultDisplayFactory();
+		DisplayFactory factory = null;
 
 		// Was the user smart enough to make is own DisplayFactory?
 		String factoryLocation = null;
@@ -1077,12 +1005,13 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			// don't print the not found exception please...
 		}
 
+		experimentDataModel = null;
 		if (dataModelLocation != null) {
 			try {
 				Object expDataModelTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
 						dataModelLocation);
 				if (java.beans.Beans.isInstanceOf(expDataModelTemp, ExpDataModel.class)) {
-					// TODO - Verificar quando o exp data model é actualizado!!! Para enviar para a view.
+					log.fine("Instatiating ExpDataModel from " + dataModelLocation);
 					experimentDataModel = (ExpDataModel) expDataModelTemp;
 				}
 			} catch (Exception e) {
@@ -1091,6 +1020,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 		}
 		// if the user didn't defined is data model, then use the default one
 		if (experimentDataModel == null) {
+			log.fine("Setting default datamodel - DefaultExpDataModel.");
 			experimentDataModel = new DefaultExpDataModel();
 		}
 
@@ -1116,40 +1046,24 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	@Override
 	public void apparatusStateStoping(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(STATESTOPING, evt);
 	}
 
 	@Override
 	public void apparatusStateStoped(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(STATESTOPED, evt);
 	}
 
 	@Override
 	public void apparatusStateUnknow(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(STATEUNKNOW, evt);
 	}
 
 	@Override
 	public void apparatusUnreachable(ApparatusConnectorEvent evt) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("ApparatusConnectorEvent " + evt.getMessage());
-		}
-
 		// Forward event to the view
 		fireApparatusStateChanged(UNREACHABLE, evt);
 	}
@@ -1216,13 +1130,13 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 		}
 	}
 
-	public void fireApparatusStateChanged(ApparatusEvent evtSelector, ApparatusConnectorEvent evt) {
+	public void fireApparatusStateChanged(final ApparatusEvent evtSelector, final ApparatusConnectorEvent evt) {
 		for (ReCApplicationListener listener : getAppListeners()) {
 			listener.apparatusStateChanged(evtSelector, evt);
 		}
 	}
 
-	public void fireApplicationEvent(ReCAppEvent evt) {
+	public void fireApplicationEvent(final ReCAppEvent evt) {
 		for (ReCApplicationListener listener : getAppListeners()) {
 			listener.applicationEvent(evt);
 		}

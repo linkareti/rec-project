@@ -26,24 +26,24 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="btnPlayStop" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnPlayStop1" min="-2" max="-2" attributes="0"/>
+              <Component id="btnPrint" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnPlayStop2" min="-2" max="-2" attributes="0"/>
+              <Component id="btnSave" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnPlayStop3" min="-2" max="-2" attributes="0"/>
+              <Component id="btnCopy" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnPlayStop4" min="-2" max="-2" attributes="0"/>
+              <Component id="btnSelectAll" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="btnPlayStop2" alignment="0" pref="35" max="32767" attributes="1"/>
-          <Component id="btnPlayStop1" alignment="1" pref="35" max="32767" attributes="1"/>
+          <Component id="btnSave" alignment="0" pref="35" max="32767" attributes="1"/>
+          <Component id="btnPrint" alignment="1" pref="35" max="32767" attributes="1"/>
           <Component id="btnPlayStop" alignment="1" max="32767" attributes="1"/>
-          <Component id="btnPlayStop3" alignment="1" pref="35" max="32767" attributes="1"/>
-          <Component id="btnPlayStop4" alignment="1" pref="35" max="32767" attributes="1"/>
+          <Component id="btnCopy" alignment="1" pref="35" max="32767" attributes="1"/>
+          <Component id="btnSelectAll" alignment="1" pref="35" max="32767" attributes="1"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -63,65 +63,77 @@
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPlayStop1">
+    <Component class="javax.swing.JButton" name="btnPrint">
       <Properties>
         <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
-        <Property name="icon" type="javax.swing.Icon" resourceKey="btnPlayStop1.icon"/>
+        <Property name="icon" type="javax.swing.Icon" resourceKey="btnPrint.icon"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder bottom="4" left="4" right="4" top="4"/>
           </Border>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="name" type="java.lang.String" value="btnPlayStop1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="btnPrint" noResource="true"/>
         <Property name="opaque" type="boolean" value="false"/>
-        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPlayStop1.pressedIcon"/>
+        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPrint.pressedIcon"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrintActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPlayStop2">
+    <Component class="javax.swing.JButton" name="btnSave">
       <Properties>
         <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
-        <Property name="icon" type="javax.swing.Icon" resourceKey="btnPlayStop2.icon"/>
+        <Property name="icon" type="javax.swing.Icon" resourceKey="btnSave.icon"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder bottom="4" left="4" right="4" top="4"/>
           </Border>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="name" type="java.lang.String" value="btnPlayStop2" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="btnSave" noResource="true"/>
         <Property name="opaque" type="boolean" value="false"/>
-        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPlayStop2.pressedIcon"/>
+        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnSave.pressedIcon"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPlayStop3">
+    <Component class="javax.swing.JButton" name="btnCopy">
       <Properties>
         <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
-        <Property name="icon" type="javax.swing.Icon" resourceKey="btnPlayStop3.icon"/>
+        <Property name="icon" type="javax.swing.Icon" resourceKey="btnCopy.icon"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder bottom="4" left="4" right="4" top="4"/>
           </Border>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="name" type="java.lang.String" value="btnPlayStop3" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="btnCopy" noResource="true"/>
         <Property name="opaque" type="boolean" value="false"/>
-        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPlayStop3.pressedIcon"/>
+        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnCopy.pressedIcon"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCopyActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPlayStop4">
+    <Component class="javax.swing.JButton" name="btnSelectAll">
       <Properties>
         <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
-        <Property name="icon" type="javax.swing.Icon" resourceKey="btnPlayStop4.icon"/>
+        <Property name="icon" type="javax.swing.Icon" resourceKey="btnSelectAll.icon"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder bottom="4" left="4" right="4" top="4"/>
           </Border>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="name" type="java.lang.String" value="btnPlayStop4" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="btnSelectAll" noResource="true"/>
         <Property name="opaque" type="boolean" value="false"/>
-        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPlayStop4.pressedIcon"/>
+        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnSelectAll.pressedIcon"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelectAllActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

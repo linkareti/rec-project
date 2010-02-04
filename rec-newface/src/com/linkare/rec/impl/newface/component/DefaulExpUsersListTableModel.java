@@ -141,10 +141,10 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 					controlInMax = controlInMin;
 				}
 
-				if (log.isLoggable(Level.FINE)) {
-					log.fine("Username = " + userName);
-					log.fine("controlInMin = " + controlInMin);
-					log.fine("controlInMax = " + controlInMax);
+				if (log.isLoggable(Level.FINEST)) {
+					log.finest("Username = " + userName);
+					log.finest("controlInMin = " + controlInMin);
+					log.finest("controlInMax = " + controlInMax);
 				}
 
 				expUsersList.add(new String[] { userName, controlInMin });

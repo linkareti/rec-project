@@ -10,7 +10,6 @@ package com.linkare.rec.impl.newface.component;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.Border;
@@ -46,7 +46,9 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 	private static final Logger log = Logger.getLogger(ResultsPane.class.getName());
 
 	private class DisplaySelector {
+
 		private Icon icon;
+
 		private String name;
 
 		private DisplaySelector() {
@@ -73,7 +75,6 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 		public String toString() {
 			return name;
 		}
-
 	}
 
 	private static class DisplaySelectorRenderer extends JLabel implements ListCellRenderer {
@@ -122,48 +123,47 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 
 	}
 
-	private static final String RUNNING_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.running", "Running");
-	private static final String STATUS_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.experiment",
-	"Experiment status");
-	private static final String PAUSED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.paused", "Paused");
-	private static final String STOPED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.stoped", "Stopped");
-	private static final String WAITING_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.waitingData",
-	"Waiting for data...");
-	private static final String NODATA_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.nodata",
-	"The experiment started but no data was available to fetch");
-	private static final String STARTED_NODATA_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.startedNoData",
-	"Started, no data available yet...");
-	private static final String DATA_ENDED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.ended", "Data Ended");
 	private static final String DISPLAY_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.display", "Display");
-	private static final String DATA_MODEL_ERROR1_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.dataModel",
-	"Data Model error!");
-	private static final String DATA_MODEL_ERROR2_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.dataModel.2",
-	"Serious error in the data model, data was lost!");
 
 	private static final int BUTTON_LIMIT = 2;
-	private static final String EXPERIMENT_INFO = "$experiment-info";
 
 	/** Holds value of property expDataModel. */
 	private ExpDataModel experimentDataModel;
 
-	/** Utility field holding list of ExpDataModelListeners. */
-	private transient List<ExpDataDisplay> experimentDataDisplays;
+	private Map<String, Integer> displaySelectorNames = new HashMap<String, Integer>();
 
-	private final Map<String, Integer> displaySelectorNames = new HashMap<String, Integer>();
-
-	private final Map<String, JComponent> displayMap = new HashMap<String, JComponent>();
+	private Map<String, JComponent> displayMap = new HashMap<String, JComponent>();
 
 	private JComboBox comboDisplaySelector;
+
 	private JTextArea experimentInfoTextArea;
+
 	private ExperimentHistoryUINode experimentHistoryUI;
 
-	/** Creates new form ResultsPane */
-	public ResultsPane() {
+	private JScrollPane experimentInfoScrollPane;
+
+	private ResultsActionBar resultsActionBar;
+
+	/**
+	 * Creates new form ResultsPane
+	 * 
+	 * @param resultsActionBar
+	 */
+	public ResultsPane(ResultsActionBar resultsActionBar) {
 		initComponents();
+		this.resultsActionBar = resultsActionBar;
 	}
 
-	public ResultsPane(ExperimentHistoryUINode experimentHistoryUI) {
-		initComponents();
+	public void setExperimentResults(ExperimentHistoryUINode historyUINode, ExpDataModel expDataModel,
+			final List<ExpDataDisplay> expDataDisplays) {
+		setExperimentHistoryUI(historyUINode);
+		setExperimentDataModel(expDataModel);
+		addExperimentDataDisplays(expDataDisplays);
+		revalidate();
+		repaint();
+	}
+
+	private void setExperimentHistoryUI(ExperimentHistoryUINode experimentHistoryUI) {
 		this.experimentHistoryUI = experimentHistoryUI;
 	}
 
@@ -182,7 +182,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 	 * @param expDataModel
 	 *            New value of property expDataModel.
 	 */
-	public void setExperimentDataModel(ExpDataModel expDataModel) {
+	private void setExperimentDataModel(ExpDataModel expDataModel) {
 		if (expDataModel != null) {
 			expDataModel.removeExpDataModelListener(this);
 		}
@@ -190,49 +190,59 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 		if (expDataModel != null) {
 			expDataModel.addExpDataModelListener(this);
 		}
-		if (experimentDataDisplays != null) {
-			for (ExpDataDisplay display : experimentDataDisplays) {
-				display.setExpDataModel(expDataModel);
-			}
+	}
+
+	private void addExperimentDataDisplays(List<ExpDataDisplay> displays) {
+		for (ExpDataDisplay display : displays) {
+			addExperimentDataDisplay(display);
+		}
+		// TODO check first
+		showSelectedDisplay("Sensor");
+	}
+
+	public void clearExperimentResults() {
+		if (experimentHistoryUI != null) {
+			log.fine("Clearing last experiment results");
+
+			displayPane.removeAll();
+			displaySelectorPane.removeAll();
+
+			displaySelectorNames.clear();
+			displayMap.clear();
+
+			experimentHistoryUI = null;
+			comboDisplaySelector = null;
 		}
 	}
 
-	public void addExperimentDataDisplay(ExpDataDisplay dataDisplay) {
-		if (experimentDataDisplays == null) {
-			experimentDataDisplays = new ArrayList<ExpDataDisplay>();
-		}
-
-		experimentDataDisplays.add(dataDisplay);
-
+	private void addExperimentDataDisplay(ExpDataDisplay dataDisplay) {
 		try {
-			final Icon icon = dataDisplay.getIcon();
+			//final Icon icon = dataDisplay.getIcon();
 			String displayName = dataDisplay.getName();
-
 			if (displayName == null) {
 				displayName = DISPLAY_STR;
 			}
-
-			String displayNameFinal;
-
-			if (displaySelectorNames.keySet().contains(displayName)) {
-				Integer count = displaySelectorNames.get(displayName);
-				displaySelectorNames.put(displayName, ++count);
-				displayNameFinal = displayName + count;
-			} else {
-				displaySelectorNames.put(displayName, Integer.valueOf(0));
-				displayNameFinal = displayName;
-			}
-
-			addDataDisplay(displayNameFinal, dataDisplay);
+			String uniquedisplayName = getUniqueDisplayName(displayName);
+			addDataDisplay(uniquedisplayName, dataDisplay);
+			dataDisplay.setExpDataModel(experimentDataModel);
 
 		} catch (Exception e) {
-			log.log(Level.SEVERE, "Couldn't add DataDisplay Component " + dataDisplay + " to ExperimentInternalFrame!", e);
+			log.log(Level.SEVERE, "Couldn't add DataDisplay Component " + dataDisplay, e);
 		}
-		dataDisplay.setExpDataModel(experimentDataModel);
 	}
 
-	public void finishedAddingDataDisplays() {
-		comboDisplaySelector.addActionListener(this);
+	private String getUniqueDisplayName(String displayName) {
+		String displayNameFinal;
+
+		if (displaySelectorNames.keySet().contains(displayName)) {
+			Integer count = displaySelectorNames.get(displayName);
+			displaySelectorNames.put(displayName, ++count);
+			displayNameFinal = displayName + count;
+		} else {
+			displaySelectorNames.put(displayName, Integer.valueOf(0));
+			displayNameFinal = displayName;
+		}
+		return displayNameFinal;
 	}
 
 	private void addDataDisplay(String displayName, ExpDataDisplay dataDisplay) {
@@ -242,12 +252,13 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 
 	private void addDisplaySelector(String displayName, ExpDataDisplay dataDisplay) {
 		if (displayMap.keySet().size() <= BUTTON_LIMIT) {
+			// Add Button Selector 
+			log.fine("Adding button selector");
 			JButton displayBtnSelector = createButtonDisplaySelector(displayName, dataDisplay.getIcon());
 			displaySelectorPane.add(displayBtnSelector);
-			if (displayMap.keySet().size() == 1) {
-				showSelectedDisplay(displayName);
-			}
 		} else {
+			// Add Combo Entry Selector
+			log.fine("Adding combo entry selector");
 			DisplaySelector selector = new DisplaySelector();
 			selector.setName(displayName);
 			selector.setIcon(dataDisplay.getIcon());
@@ -266,6 +277,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 		if (comboDisplaySelector == null) {
 			comboDisplaySelector = new JComboBox();
 			comboDisplaySelector.setRenderer(new DisplaySelectorRenderer());
+			comboDisplaySelector.addActionListener(this);
 			displaySelectorPane.add(comboDisplaySelector);
 		}
 		return comboDisplaySelector;
@@ -273,22 +285,108 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 
 	@Action
 	public void showExperimentInfo() {
-		JTextArea infoPane = getExperimentInfoPane();
+		JTextArea infoTextArea = getExperimentInfoTextArea();
 		try {
-			infoPane.setText(experimentHistoryUI.getProducerWrapper().getAcquisitionHeader().toString());
+			infoTextArea.setText(experimentHistoryUI.getProducerWrapper().getAcquisitionHeader().toString());
 		} catch (NotAvailableException e) {
 			String msg = "AcquisitionHeader is not Available.";
 			log.log(Level.SEVERE, msg, e);
-			infoPane.setText(msg);
+			infoTextArea.setText(msg);
 		}
-		setDisplayPane(infoPane);
+		setDisplayPane(getExperimentInfoScrollPane(infoTextArea));
 	}
 
-	private JTextArea getExperimentInfoPane() {
+	private void showSelectedDisplay(String displayName) {
+		JComponent display = displayMap.get(displayName);
+		resultsActionBar.setActiveExpDataDisplay(display);
+		setDisplayPane(display);
+	}
+
+	private void setDisplayPane(JComponent component) {
+		displayPane.removeAll();
+		displayPane.add(component);
+		revalidate();
+		repaint();
+	}
+
+	private JTextArea getExperimentInfoTextArea() {
 		if (experimentInfoTextArea == null) {
 			experimentInfoTextArea = new JTextArea();
 		}
 		return experimentInfoTextArea;
+	}
+
+	private JScrollPane getExperimentInfoScrollPane(Component component) {
+		if (experimentInfoScrollPane == null) {
+			experimentInfoScrollPane = new JScrollPane();
+		}
+		experimentInfoScrollPane.setViewportView(component);
+		return experimentInfoScrollPane;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
+		String display = "";
+		if (source instanceof JButton) {
+			display = e.getActionCommand();
+		} else if (source instanceof JComboBox) {
+			display = ((JComboBox) source).getSelectedItem().toString();
+		}
+		showSelectedDisplay(display);
+	}
+
+	//	private static final String RUNNING_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.running", "Running");
+	//	private static final String STATUS_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.experiment",
+	//	"Experiment status");
+	//	private static final String PAUSED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.paused", "Paused");
+	//	private static final String STOPED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.stoped", "Stopped");
+	//	private static final String WAITING_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.waitingData",
+	//	"Waiting for data...");
+	//	private static final String NODATA_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.nodata",
+	//	"The experiment started but no data was available to fetch");
+	//	private static final String STARTED_NODATA_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.startedNoData",
+	//	"Started, no data available yet...");
+	//	private static final String DATA_ENDED_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.ended", "Data Ended");
+	//	private static final String DATA_MODEL_ERROR1_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.dataModel",
+	//	"Data Model error!");
+	//	private static final String DATA_MODEL_ERROR2_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.error.dataModel.2",
+	//	"Serious error in the data model, data was lost!");
+	//	private static final String EXPERIMENT_INFO = "$experiment-info";
+
+	@Override
+	public void dataModelEnded() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void dataModelError() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void dataModelStarted() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void dataModelStartedNoData() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void dataModelStoped() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void dataModelWaiting() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void newSamples(NewExpDataEvent evt) {
+		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -346,70 +444,5 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
     private javax.swing.JPanel displayPane;
     private com.linkare.rec.impl.newface.component.ResultsSelectorPane displaySelectorPane;
     // End of variables declaration//GEN-END:variables
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object source = e.getSource();
-		String display = "";
-		if (source instanceof JButton) {
-			display = e.getActionCommand();
-		} else if (source instanceof JComboBox) {
-			display = ((JComboBox) source).getSelectedItem().toString();
-		}
-		showSelectedDisplay(display);
-	}
-
-	private void showSelectedDisplay(String displayName) {
-		setDisplayPane(displayMap.get(displayName));
-	}
-
-	private void setDisplayPane(JComponent component) {
-		displayPane.removeAll();
-		displayPane.add(component);
-		revalidate();
-		repaint();
-	}
-
-	@Override
-	public void dataModelEnded() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void dataModelError() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void dataModelStarted() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void dataModelStartedNoData() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void dataModelStoped() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void dataModelWaiting() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void newSamples(NewExpDataEvent evt) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

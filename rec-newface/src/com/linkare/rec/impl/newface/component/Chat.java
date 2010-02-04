@@ -163,8 +163,8 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 
 	@Override
 	public void userListChanged(UserInfo[] usersList) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine(Arrays.deepToString(usersList));
+		if (log.isLoggable(Level.FINEST)) {
+			log.finest(Arrays.deepToString(usersList));
 		}
 		this.usersList = usersList;
 

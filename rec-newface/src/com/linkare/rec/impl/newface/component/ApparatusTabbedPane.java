@@ -59,6 +59,10 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
 		return experimentActionBar;
 	}
 
+	public ResultsActionBar getResultsActionBar() {
+		return resultsActionBar;
+	}
+
 	public StatusActionBar getExperimentStatusActionBar() {
 		return statusActionBar;
 	}
@@ -81,19 +85,15 @@ public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeLis
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		if (TAB_DESCRIPTION == tabbedPane.getSelectedIndex()) {
-			log.fine("Description Tab");
-
-		} else if (TAB_RESULTS == tabbedPane.getSelectedIndex()) {
-			log.fine("Results Tab");
+		if (TAB_RESULTS == tabbedPane.getSelectedIndex()) {
 			actionBarHolderPane.remove(experimentActionBar);
 			actionBarHolderPane.add(resultsActionBar, BorderLayout.LINE_START);
 			lastSelectedTabResults = true;
 
 		} else if (lastSelectedTabResults) {
-			lastSelectedTabResults = false;
 			actionBarHolderPane.remove(resultsActionBar);
 			actionBarHolderPane.add(experimentActionBar, BorderLayout.LINE_START);
+			lastSelectedTabResults = false;
 		}
 		revalidate();
 		repaint();
