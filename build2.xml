@@ -1548,26 +1548,20 @@
 		<sequential>
 			<delete failonerror="false">
 				<fileset dir="@{destination.directory}"> 
-					<includesfile name="@{source.jar.without.extension}_sig.jar"/> 
-					<includesfile name="@{source.jar.without.extension}_sig.jar.pack.gz"/>
+					<include name="@{source.jar.without.extension}_sig.jar"/> 
+					<include name="@{source.jar.without.extension}_sig.jar.pack.gz"/>
 				</fileset>
 			</delete>
-
 			<mkdir dir="@{destination.directory}" />
-
-			<copy file="@{source.directory}/@{source.jar.without.extension}.jar" todir="@{destination.directory}" />
-			
+			<copy file="@{source.directory}/@{source.jar.without.extension}.jar" todir="@{destination.directory}" overwrite="true"/>
 			<p200ant repack="true" srcfile="@{destination.directory}/@{source.jar.without.extension}.jar" />
-						
 			<signjar destDir="@{destination.directory}" keystore="${keystore}" storepass="${keypass}" alias="${alias}" storetype="${storetype}">
 				<fileset file="@{destination.directory}/@{source.jar.without.extension}.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
-
 			<delete failonerror="false">
 				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="**/*_sig.jar" />
 			</delete>
-
 			<p200ant repack="false" destdir="@{destination.directory}" srcfile="@{destination.directory}/@{source.jar.without.extension}_sig.jar" />
 
 		</sequential>
