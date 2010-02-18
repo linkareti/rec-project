@@ -19,6 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name="EXPERIMENT")
+@NamedQuery(name = "findByExperimentName", query = "SELECT exp FROM Experiment exp WHERE exp.name=:name")
 public class Experiment extends Resource{
 
 	@Id 
@@ -89,5 +90,9 @@ public class Experiment extends Resource{
 
 	public void setState(State state) {
 		this.state = state;
+	}
+	
+	public static Experiment findByName(String experiencia, EntityManager em) {
+		return (Experiment) em.createNamedQuery("findByExperimentName").setParameter("name", experiencia).getResultList().get(0);
 	}
 }

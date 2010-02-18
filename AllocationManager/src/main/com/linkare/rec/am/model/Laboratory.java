@@ -18,7 +18,8 @@ import javax.persistence.Table;
 @Table(name = "LABORATORY")
 @NamedQueries( {
 		@NamedQuery(name = "findByName", query = "SELECT lab FROM Laboratory lab WHERE lab.name=:name"),
-		@NamedQuery(name = "findExperiments", query = "SELECT experiments FROM Laboratory lab WHERE lab.name=:name")}
+		@NamedQuery(name = "findExperiments", query = "SELECT experiments FROM Laboratory lab WHERE lab.name=:name"),
+		@NamedQuery(name = "findExperiment", query = "SELECT experiment FROM Laboratory lab, Experiment experiment WHERE lab.name=:namelab and experiment.laboratory=lab and experiment.name=:nameexp")}
 )
 public class Laboratory extends Resource {
 
@@ -71,7 +72,18 @@ public class Laboratory extends Resource {
 		return (Laboratory) em.createNamedQuery("findByName").setParameter("name", laboratorio).getResultList().get(0);
 	}
 	
-	public static List<Experiment> findExperiments(String laboratorio, EntityManager em) {
-		return (List<Experiment>) em.createNamedQuery("findExperiments").setParameter("name", laboratorio).getResultList().get(0);
+	public static Experiment findExperiments(String laboratorio, EntityManager em) {
+		return (Experiment) em.createNamedQuery("findExperiments").setParameter("name", laboratorio).getResultList().get(0);
+	}
+	
+	public static Experiment findExperiment(String laboratorio,String experiencia, EntityManager em) {
+		
+		Experiment result = null;
+		List<Experiment> listaExperiencias = (List<Experiment>)em.createNamedQuery("findExperiment").setParameter("namelab", laboratorio).setParameter("nameexp", experiencia).getResultList();
+		if(listaExperiencias.size()>0){
+			result = listaExperiencias.get(0);
+		}
+		return result;
+			
 	}
 }

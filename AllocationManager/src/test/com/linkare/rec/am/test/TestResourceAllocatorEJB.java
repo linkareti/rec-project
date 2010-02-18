@@ -5,7 +5,9 @@ package com.linkare.rec.am.test;
 
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.naming.InitialContext;
 
@@ -42,13 +44,19 @@ public class TestResourceAllocatorEJB {
 	@Test
 	public void testGetReservations() {
 		
+		List<String> resposta = null;
+		
 		try {
-			theBean.getReservations("ola", new Date(), new Date());
+			Calendar DataFim = Calendar.getInstance();
+			DataFim.set(2001, 11, 12);
+			resposta = theBean.getReservations("ola","",DataFim.getTime() , new Date());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Failed with a BUMMM!");
 		}
 		
+		assertNotNull(resposta);
+		assertEquals(0,resposta.size());
 		//fail("Not yet implemented");
 	}
 

@@ -1,6 +1,7 @@
 package com.linkare.rec.am.action;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.jboss.seam.log.Log;
 
 import com.linkare.rec.am.model.Experiment;
 import com.linkare.rec.am.model.Laboratory;
+import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.Role;
 import com.linkare.rec.am.model.State;
 import com.linkare.rec.am.model.User;
@@ -33,50 +35,45 @@ public class ResourceAllocationFacadeBean implements
 	@PersistenceContext(unitName = "AllocationManager")
 	private EntityManager em;
 
-	public List<String> getReservations(String laboratorio, Date startDate,
+	public List<String> getReservations(String laboratorio, String nomeExperiencia,Date startDate,
 			Date endDate) throws Exception {
 
-		Laboratory lab = null;
-		//lab = (Laboratory) em.createNamedQuery("findByName").setParameter(
-		//		"name", laboratorio).getSingleResult();
 
-		lab=Laboratory.findByName(laboratorio,em);
+		Laboratory lab = null;
+		Experiment exp =null;
+
 		
-		
-		// método de segurança: laboratório not null e laboratório existe.
-		// startDate not null and valid, endDate not null and valid e endDate >
-		// startDate
+		// método de segurança: laboratório not null e laboratório exists.
+		// startDate not null and valid, endDate not null and valid, endDate >
+		// startDate and experiment exists in Laboratorio
 		//	
-		validaDados(lab, startDate, endDate);
-		// obtenção dos dados:
-		// select experiment from laboratory where laboratory.id=laboratorio.id
-		List<Experiment> listaExperiencias = Laboratory.findExperiments(laboratorio, em);
-		// for each experperiment exper:
-		// select reservations from experiment where experiment.id = exper.id
-		// for each reservation obtain users
-		// criar entidade com startDate,endDate,listaUsers, ownerUser,
-		// experiment
-		// adicionar entidade a listaEntidades
-		//            
-		// retorno listaEntidades
-		List<String> listaNomesExperiencias = new ArrayList<String>();
+		validaDados(laboratorio, nomeExperiencia, startDate, endDate);
 		
-		if(listaExperiencias.size()>0){
-		for(Experiment exp:listaExperiencias){
-			listaNomesExperiencias.add(exp.getName());
+		// obtenção dos dados:
+		List<Reservation> validReserves = Reservation.findReservationsInLab(laboratorio, nomeExperiencia, startDate, endDate, em);
+		// TODO:for each reservation obtain users
+
+
+		List<String> listaNomesExperiencias = new ArrayList<String>();
+		for(Reservation reserv:validReserves){
+		listaNomesExperiencias.add(reserv.toString());
 		}
-		}
-		else{
-			listaNomesExperiencias.add("sem experiencias");
-		}
+		// TODO:create return Data
+		
+
 		return listaNomesExperiencias;
 
 	}
 
-	private void validaDados(Laboratory laboratorio, Date startDate,
+	private void validaDados(String laboratorio, String experiencia, Date startDate,
 			Date endDate) throws Exception {
+		
+		Experiment exp =null;
+		Laboratory lab = null;
+		
+		lab=Laboratory.findByName(laboratorio,em);
 
-		if (laboratorio == null) {
+		if (lab == null) {
 			throw new Exception("Não foi referenciado laboratorio");
 		}
 
@@ -85,14 +82,18 @@ public class ResourceAllocationFacadeBean implements
 		}
 
 		if (endDate == null) {
-			throw new Exception("Não foi indicada data de inicio");
+			throw new Exception("Não foi indicada data de fim");
 		}
 
 		if(endDate.before(startDate)){
 			throw new Exception("data de inicio é posterior à data de fim");
 		}
-		// Query pesquisaLaboratorio =
-		// laboratorio.createNamedQuery("findAllEmployeesByFirstName");
+		
+		try{
+		exp = Laboratory.findExperiment(laboratorio, experiencia, em);
+		}catch (IndexOutOfBoundsException e){
+			throw new Exception("O laboratório não tem a experiência pretendida");
+		}	
 
 	}
 	
@@ -124,5 +125,23 @@ public class ResourceAllocationFacadeBean implements
 		
 		em.persist(lab);
 		
+		Experiment exp=new Experiment();
+		exp.setName("experienciaTeste");
+		exp.setDescription("Esta é uma expereincia teste");
+		exp.setLaboratory(lab);
+		exp.setState(new State());
+		
+		em.persist(exp);
+		
+		Reservation res = new Reservation();
+		res.setExperiment(exp);
+		Calendar begining = Calendar.getInstance();
+		begining.set(2005, 11, 10);
+		Calendar end = Calendar.getInstance();
+		end.set(2005, 11, 11);
+		res.setStartDate(begining.getTime());
+		res.setStopDate(end.getTime());
+		
+		em.persist(res);
 	}
 }

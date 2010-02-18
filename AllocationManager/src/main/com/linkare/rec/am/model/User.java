@@ -37,6 +37,9 @@ public class User {
 	@UserRoles
 	private List<Role> roles;
 	
+	@ManyToMany (cascade=CascadeType.ALL)
+	private List<Reservation> reservations;
+	
 	public long getId() {
 		return id;
 	}
@@ -67,5 +70,13 @@ public class User {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
 	}
 }
