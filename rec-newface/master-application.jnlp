@@ -27,12 +27,11 @@
         <jar href="lib/avalon-framework.jar"/>
         <jar href="lib/comm.jar"/>
         <jar href="lib/fits1.3.jar"/>
-<!--<jar href="lib/javaws.jar"/>-->
         <jar href="lib/JCFN.jar"/>
         <jar href="lib/jcommon-1.0.12.jar"/>
         <jar href="lib/jfreechart-1.0.9.jar"/>
         <jar href="lib/jmf.jar"/>
-	<jar href="lib/jna.jar"/>
+		<jar href="lib/jna.jar"/>
         <jar href="lib/jsr80.jar"/>
         <jar href="lib/jsr80_ri.jar"/>
         <jar href="lib/logkit.jar"/>
@@ -53,7 +52,7 @@
 
 <!--${JNLP.RESOURCES.EXTENSIONS}-->
         <extension name="OpenORBClient" href="openORB/OpenORBClient.jnlp" />
-    
+        
         <property name="ReCFaceConfig" value="config/ReCFaceConfig.xml" />
         <property name="ReCBaseUIConfig" value="etc/ReCBaseUIConfig.xml" />
         <property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB" />
@@ -64,8 +63,10 @@
         <property name="openorb.profile" value="ReCClient" />
         <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
         <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
+        
         <!-- change this value to disable video -->
         <property name="video.development.enabled" value="yes"/>
+        
     </resources>
 
     <!-- *******************************************************************
