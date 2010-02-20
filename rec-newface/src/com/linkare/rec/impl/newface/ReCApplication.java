@@ -566,7 +566,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 		for (ReCSystemProperty property : ReCSystemProperty.values()) {
 			String propertyValue = System.getProperty(property.getName());
-			log.fine(property.getName() + "=" + propertyValue);
+			log.info(property.getName() + "=" + propertyValue);
 
 			if (property.isRequired()) { // Required Property
 				if (propertyValue == null || propertyValue.isEmpty()) {
