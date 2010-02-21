@@ -35,7 +35,6 @@ import org.videolan.jvlc.internal.LibVlc.libvlc_event_t;
 import org.videolan.jvlc.internal.LibVlc.media_player_time_changed;
 
 import com.sun.jna.Pointer;
-import org.videolan.jvlc.MediaDescriptor;
 
 
 public class MediaPlayerCallback implements LibVlcCallback
@@ -43,8 +42,8 @@ public class MediaPlayerCallback implements LibVlcCallback
 	private static final Logger log = Logger
 			.getLogger(MediaPlayerCallback.class.getName());
 
-    private MediaPlayerListener listener;
-    private MediaPlayer mediaPlayer;
+    private final MediaPlayerListener listener;
+    private final MediaPlayer mediaPlayer;
 
     public MediaPlayerCallback(MediaPlayer mediaInstance, MediaPlayerListener listener)
     {
@@ -57,16 +56,6 @@ public class MediaPlayerCallback implements LibVlcCallback
     @Override
     public void callback(libvlc_event_t libvlc_event, Pointer userData)
     {
-        //Delete não parece ter comportamento adicional
-        /*if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerOpening.ordinal())
-        {
-            System.out.println("!!!!!!!!!!!!I'm opening media!!!!!!!!!!!!!");
-        }
-        else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerBuffering.ordinal())
-        {
-            System.out.println("!!!!!!!!!!!!I'm buffering!!!!!!!!!!!!!");
-        }
-        else*/
         if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPlaying.ordinal())
         {
             listener.playing(mediaPlayer);
@@ -89,13 +78,12 @@ public class MediaPlayerCallback implements LibVlcCallback
         }
         else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerTimeChanged.ordinal())
         {
-            //TODO suprimir listener.timeChanged quando foi feito um ajuste pelo user mas este ainda não foi feito no vídeo, de facto.
+			//TODO suprimir listener.timeChanged quando foi feito um ajuste pelo user mas este ainda não foi feito no vídeo, de facto.
             libvlc_event.event_type_specific.setType(LibVlc.media_player_time_changed.class);
             LibVlc.media_player_time_changed timeChanged = (media_player_time_changed) libvlc_event.event_type_specific
                 .readField("media_player_time_changed");
 
-            // Evita que em streaming sejam lançados e tratados eventos desnecessários.
-//            System.out.println(Thread.currentThread());
+			//Bruno Evita que em streaming sejam lançados e tratados eventos desnecessários. Ver se é necessário
 //            if (timeChanged != null && timeChanged.new_time > 0)
                 listener.timeChanged(mediaPlayer, timeChanged.new_time);
 
