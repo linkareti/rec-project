@@ -17,15 +17,19 @@ import java.awt.event.HierarchyEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import org.jdesktop.application.Action;
@@ -59,8 +63,10 @@ import com.linkare.rec.impl.newface.component.StatusActionBar;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
 import com.linkare.rec.impl.newface.component.VideoBox;
 import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
+import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.config.Apparatus;
 import com.linkare.rec.impl.newface.utils.LAFConnector;
+import com.linkare.rec.impl.newface.utils.PreferencesUtils;
 import com.linkare.rec.impl.newface.utils.TimeUtils;
 import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 
@@ -350,7 +356,79 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		case CUSTOMIZER_CANCELED:
 			// noop
 			break;
+		case ASK_FOR_VLC:
+			askForVLC();
+			break;
 		}
+	}
+
+	private void askForVLC() {
+
+		final String LINE_SEPARATOR = System.getProperty("line.separator");
+		String key = VideoViewerController.VLC_PATH_KEY;
+
+		//Bruno martelada só para testar sempre
+		Preferences.userRoot().remove(key);
+		String vlcPath = PreferencesUtils.readUserPreference(key);
+		if (vlcPath == null) {
+
+			//Bruno ver se o getFrame esta correcto
+			//Bruno colocar texto por props.
+			int result = JOptionPane.showConfirmDialog(this.getFrame(), "Não foi possível iniciar a reprodução de vídeo. " + LINE_SEPARATOR
+					+ "No entanto, pode visualizar a experiência instalando " + LINE_SEPARATOR
+					+ "o VLC. Deseja especificar a directoria de instalação do VLC?", "", JOptionPane.YES_NO_OPTION,
+					JOptionPane.QUESTION_MESSAGE);
+
+			if (result == JOptionPane.YES_OPTION) {
+
+				File executable = getVLCExecutableFile();
+				log.info("Selected file was: " + executable.getAbsolutePath());
+				PreferencesUtils.writeUserPreference(key, executable.getAbsolutePath());
+			}
+		}
+	}
+	
+	private File getVLCExecutableFile() {
+		
+		boolean proceed;
+		File selected = null;
+		do {
+		
+			proceed = true;
+			JFileChooser chooser = new JFileChooser();
+			//Bruno Ver o tipo de formatação da janela
+			chooser.showOpenDialog(this.getFrame());
+			selected = chooser.getSelectedFile();
+			
+			if (!isVLCExecutable(selected)) {
+				if (JOptionPane.showConfirmDialog(this.getFrame(),
+						"Não seleccionou um executável de VLC válido. Deseja prosseguir sem vídeo?", "", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+					proceed = false;
+				}
+			}
+		} while (!proceed);
+		
+		return selected;
+	}
+
+	/**
+	 * Verifies if the specified file is in fact the vlc executable. Guarantees that no other executable file of other
+	 * application is selected and launched by eLab.
+	 * 
+	 * @return true if the specified file is vlc executable. false otherwise.
+	 */
+	private boolean isVLCExecutable(File vlcExec) {
+
+		if (vlcExec == null) {
+			return false;
+		}
+
+		//Bruno ver se existe mais algum tipo de validação que garanta que é mesmo o executavel (em windows tem de ser o exe...)
+		if (!vlcExec.getName().substring(0, 3).equals("vlc")) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private void customizerDone() {
@@ -523,7 +601,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private void connectToApparatus() {
 
 		// Video
-		if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED) {
+		if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED && recApplication.getMediaController() != null) {
 			getVideoBox().initializeVideoOutput();
 			recApplication.setVideoOutput(getVideoBox().getVideoOutput());
 		}
@@ -582,7 +660,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	private void disconnectFromApparatus() {
-		if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED) {
+		if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED && recApplication.getMediaController() != null) {
 			getVideoBox().destroyVideoOutput();
 		}
 

@@ -40,6 +40,7 @@ import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.UNREACH
 import java.awt.Canvas;
 import java.awt.Component;
 import java.awt.Window;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
@@ -104,6 +105,7 @@ import com.linkare.rec.impl.newface.config.ReCFaceConfig;
 import com.linkare.rec.impl.newface.display.DefaultDisplayFactory;
 import com.linkare.rec.impl.newface.display.DisplayFactory;
 import com.linkare.rec.impl.newface.utils.OS;
+import com.linkare.rec.impl.newface.utils.PreferencesUtils;
 import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.utils.ORBBean;
 
@@ -141,31 +143,54 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	 */
 	private void initializeMediaController() {
 
-		if (mediaController == null) {
-			//TODO local mais adequado para fazer o setup?
-			MediaSetup.setup();
-			String[] defaultVlcParams = MediaSetup.getDefaultMediaParameters();
-			mediaController = VideoViewerController.getInstance(defaultVlcParams);
-			mediaController.addMediaApplicationEventListener(new MediaApplicationEventListener() {
-				@Override
-				public void timeChanged(MediaTimeChangedEvent evt) {
-					log.fine("Handling time changed!!!!!!!");
-					//TODO lançar evento para a view para colocar slider com time actual do controller.
-				}
+		try {
+			if (mediaController == null) {
 
-				@Override
-				public void notConnected(MediaNotConnectedEvent evt) {
-					log.fine("Handling not connected!!!!!!!");
-					playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
-					//TODO em streaming, não se conectou porque deixou de receber ESs. Deve começar de novo, n fazer nd ou mostrar msg ao utilizador?
-				}
+				MediaSetup.setup();
+				String[] defaultVlcParams = MediaSetup.getDefaultMediaParameters();
+				mediaController = VideoViewerController.getInstance(defaultVlcParams);
+				mediaController.addMediaApplicationEventListener(getMediaApplicationEventListener());
+			}
+		} catch (UnsatisfiedLinkError e) {
+			log.severe(e.toString());
+			fireApplicationEvent(new ReCAppEvent(this, ReCCommand.ASK_FOR_VLC));
+		}
+	}
 
-				@Override
-				public void stopped(MediaStoppedEvent evt) {
-					log.fine("Handling stopped!!!!!!!");
-					//TODO lançar evento para a view para colocar slider a 0.
-				}
-			});
+	private MediaApplicationEventListener getMediaApplicationEventListener() {
+
+		return new MediaApplicationEventListener() {
+			@Override
+			public void timeChanged(MediaTimeChangedEvent evt) {
+				log.fine("Handling time changed!!!!!!!");
+				//TODO lançar evento para a view para colocar slider com time actual do controller.
+			}
+
+			@Override
+			public void notConnected(MediaNotConnectedEvent evt) {
+				log.fine("Handling not connected!!!!!!!");
+				playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
+			}
+
+			@Override
+			public void stopped(MediaStoppedEvent evt) {
+				log.fine("Handling stopped!!!!!!!");
+				//TODO lançar evento para a view para colocar slider a 0.
+			}
+		};
+	}
+
+	/**
+	 * Plays the given media using the native vlc installed on the user's local machine.
+	 * 
+	 * @param mrl
+	 */
+	public void playMediaExternal(String mrl) {
+		try {
+			Runtime.getRuntime().exec(PreferencesUtils.readUserPreference("vlcpath") + " " + mrl);
+		} catch (IOException e) {
+			log.info("VLC not installed on the specified directory");
+			//Bruno mensagem de erro para o utilizador? verificar se a user preference está set ou se deu erro.
 		}
 	}
 
@@ -183,14 +208,21 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			return;
 		}
 
-		mediaController.setMediaToPlay(mrl);
-		mediaController.play();
+		if (mediaController != null) {
+			mediaController.setMediaToPlay(mrl);
+			mediaController.play();
+		} else {
+			playMediaExternal(mrl);
+		}
 	}
 
 	/**
 	 * Stops the media played. Releases the media resources.
 	 */
 	private void stopMedia() {
+		if (mediaController == null) {
+			return;
+		}
 		log.info("Stopping media...");
 		mediaController.stop();
 		mediaController.releaseMedia();
