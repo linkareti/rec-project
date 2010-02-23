@@ -17,7 +17,7 @@ import com.linkare.rec.impl.newface.utils.ZipExtractor;
  * 
  * @author bcatarino
  */
-public class Installer {
+public abstract class Installer {
 
 	protected Logger log = Logger.getLogger(Installer.class.getName());
 
@@ -40,12 +40,18 @@ public class Installer {
 		printOSInfo();
 
 		installNativeLibs();
+
+		installSpecificSO();
+
+		//Bruno ver se não há problema de isto estar aqui!
+		getInstallerService().installSucceeded(false);
 	}
 
-	public static void main(String[] args) throws UnavailableServiceException, IOException {
-
-		new Installer().install(args);
-	}
+	/**
+	 * Ponto de extensão para efectuar uma instalação específica para um determinado SO, para além da instalação default
+	 * já feita por esta classe.
+	 */
+	protected abstract void installSpecificSO() throws UnavailableServiceException;
 
 	protected void printOSInfo() {
 
@@ -58,7 +64,6 @@ public class Installer {
 
 	private void installNativeLibs() throws IOException {
 
-		//TODO verificar se a directoria já existe e não extrair nesse caso.
 		String userHome = System.getProperty("user.home");
 		log.fine("User home is " + userHome);
 
@@ -69,11 +74,12 @@ public class Installer {
 		// Só extrai os plugins do zip se n existir a directoria de destino
 		// onde irão ficar os plugins.
 		if (!pluginsDir.exists()) {
+
 			//TODO fazer de forma a substituir sempre os ficheiros que alteraram (filesize, md5sum???)
 			String pluginsResourceName = System.getProperty("vlc.plugins.filename");
 			log.fine("Resource name is " + pluginsResourceName);
 
-			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			ClassLoader loader = Installer.class.getClassLoader();
 			InputStream pluginsFileStream = loader.getResourceAsStream(pluginsResourceName);
 			String path = saveToTempFile(pluginsFileStream, "libsfile", "tmp");
 			pluginsFileStream.close();
