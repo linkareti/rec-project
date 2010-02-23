@@ -32,21 +32,8 @@ public class VideoBox extends AbstractContentPane {
 	 */
 	public void initializeVideoOutput() {
 
-        //Bruno inicializar sempre 1 canvas novo 
         videoCanvas = new java.awt.Canvas();
         videoPanel.add(videoCanvas);
-//        videoCanvas.setBackground(org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(VideoBox.class).getColor("videoCanvas.background")); // NOI18N
-//        videoCanvas.setName("videoCanvas"); // NOI18N
-//        javax.swing.GroupLayout videoPanelLayout = new javax.swing.GroupLayout(videoPanel);
-//        videoPanel.setLayout(videoPanelLayout);
-//        videoPanelLayout.setHorizontalGroup(
-//            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addComponent(videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-//        );
-//        videoPanelLayout.setVerticalGroup(
-//            videoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addComponent(videoCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-//        );
 
 		videoCanvas.setSize(videoPanel.getWidth(), videoPanel.getHeight());
 		videoCanvas.setVisible(true);
@@ -61,7 +48,6 @@ public class VideoBox extends AbstractContentPane {
 
         videoPanel.remove(videoCanvas);
         videoCanvas = null;
-//        videoCanvas.setVisible(false);
 	}
 
 	/**
