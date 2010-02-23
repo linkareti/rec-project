@@ -17,32 +17,27 @@ public class LinuxInstaller extends Installer {
 
 	public static void main(String[] args) throws UnavailableServiceException {
 
-		//Bruno deixa rebentar ou trata de alguma forma?
-		new LinuxInstaller().install(args);
-
+		try {
+			//Bruno deixa rebentar ou trata de alguma forma?
+			new LinuxInstaller().install(args);
+		} catch (IOException e) {
+			//Bruno fazer tratamento da excepção
+		}
 	}
 
 	@Override
-	public void install(String[] args) throws UnavailableServiceException {
+	public void installSpecificSO() throws UnavailableServiceException {
 
-		try {
+		int result = JOptionPane.showConfirmDialog(null, "A aplicação requer que os codecs de xvid estejam instalados."
+				+ System.getProperty("line.separator") + "Por favor, verifique no seu gestor de pacotes se tem o ffmpeg "
+				+ System.getProperty("line.separator") + "instalado. Deseja continuar?", "Instalação de codecs", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
 
-			super.install(args);
+		boolean agree = (result == JOptionPane.YES_OPTION);
 
-			int result = JOptionPane.showConfirmDialog(null, "A aplicação requer que os codecs de xvid estejam instalados."
-					+ System.getProperty("line.separator") + "Por favor, verifique no seu gestor de pacotes se tem o ffmpeg "
-					+ System.getProperty("line.separator") + "instalado. Deseja continuar?", "Instalação de codecs",
-					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-			boolean agree = (result == JOptionPane.YES_OPTION);
-			if (!agree) {
-				JOptionPane.showMessageDialog(null, "A execução da aplicação foi cancelada.");
-				getInstallerService().installFailed();
-			}
-
-		} catch (IOException e) {
+		if (!agree) {
+			JOptionPane.showMessageDialog(null, "A execução da aplicação foi cancelada.");
 			getInstallerService().installFailed();
 		}
-
-		getInstallerService().installSucceeded(false);
 	}
 }

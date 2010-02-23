@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.jnlp.ExtensionInstallerService;
 import javax.jnlp.UnavailableServiceException;
 import javax.swing.JOptionPane;
 
@@ -19,16 +18,13 @@ import com.linkare.rec.impl.newface.utils.ZipExtractor;
 public class WindowsInstaller extends Installer {
 
 	@Override
-	public void install(String[] args) throws UnavailableServiceException {
+	public void installSpecificSO() throws UnavailableServiceException {
 
 		log.fine("Beginning installation");
 
 		log.fine("Installed native libraries and extracted media plugins");
 
-		ExtensionInstallerService installerService = null;
 		try {
-
-			super.install(args);
 
 			int result = JOptionPane.showConfirmDialog(null, "A aplicação requer que os codecs de xvid estejam instalados."
 					+ System.getProperty("line.separator") + "Se não tem, ou não tem a certeza se estão instalados, carregue ok. "
@@ -48,21 +44,26 @@ public class WindowsInstaller extends Installer {
 				JOptionPane.showMessageDialog(null, "Os codecs não foram instalados. O vídeo poderá não ser visível.");
 			}
 
-		} catch (Exception ex) {
-
-			int installationResult = JOptionPane.showConfirmDialog(null,
-					"Erro na instalação. Deseja prosseguir, mesmo podendo não ter vídeo?", "", JOptionPane.OK_CANCEL_OPTION,
-					JOptionPane.QUESTION_MESSAGE);
-
-			if (installationResult != JOptionPane.OK_OPTION) {
-				getInstallerService().installFailed();
-			}
+		} catch (InterruptedException ex) {
+			handleException();
+		} catch (IOException ex) {
+			handleException();
 		}
-
-		getInstallerService().installSucceeded(false);
 	}
 
-	public boolean installXvid() throws IOException, InterruptedException {
+	private void handleException() throws UnavailableServiceException {
+
+		int installationResult = JOptionPane.showConfirmDialog(null,
+				"Erro na instalação. Deseja prosseguir, mesmo podendo não ter vídeo?",
+				"", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
+
+		if (installationResult != JOptionPane.OK_OPTION) {
+			getInstallerService().installFailed();
+		}
+	}
+
+	private boolean installXvid() throws IOException, InterruptedException {
 
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		InputStream pluginsFileStream = loader.getResourceAsStream("xvid.zip");
@@ -88,7 +89,11 @@ public class WindowsInstaller extends Installer {
 
 	public static void main(String[] args) throws UnavailableServiceException {
 
-		//Bruno deixa rebentar ou trata de alguma forma?
-		new WindowsInstaller().install(args);
+		try {
+			//Bruno deixa rebentar ou trata de alguma forma?
+			new WindowsInstaller().install(args);
+		} catch (IOException e) {
+			//Bruno falta tratamento do erro
+		}
 	}
 }
