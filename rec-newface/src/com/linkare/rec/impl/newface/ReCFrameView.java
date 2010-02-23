@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.prefs.Preferences;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -367,8 +366,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		final String LINE_SEPARATOR = System.getProperty("line.separator");
 		String key = VideoViewerController.VLC_PATH_KEY;
 
-		//Bruno martelada só para testar sempre
-		Preferences.userRoot().remove(key);
 		String vlcPath = PreferencesUtils.readUserPreference(key);
 		if (vlcPath == null) {
 
