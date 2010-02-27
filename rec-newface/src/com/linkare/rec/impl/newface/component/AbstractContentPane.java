@@ -24,7 +24,7 @@ import com.linkare.rec.impl.newface.ReCApplication;
  * 
  * @author Henrique Fernandes
  */
-public abstract class AbstractContentPane extends JPanel {
+public class AbstractContentPane extends JPanel {
 
 	private ReCApplication recApplication = ReCApplication.getApplication();
 
@@ -35,7 +35,7 @@ public abstract class AbstractContentPane extends JPanel {
 	protected Window container;
 
 	public AbstractContentPane() {
-		this(null);
+		super();
 	}
 
 	public AbstractContentPane(Window container) {
@@ -66,7 +66,7 @@ public abstract class AbstractContentPane extends JPanel {
 		for (Component childComponent : getComponents()) {
 			childComponent.setEnabled(enabled);
 			if (log.isLoggable(Level.FINE)) {
-				log.finer("component " + childComponent.getName() + (enabled ? " enabled" : " disabled"));
+				log.fine("component " + childComponent.getName() + (enabled ? " enabled" : " disabled"));
 			}
 		}
 	}

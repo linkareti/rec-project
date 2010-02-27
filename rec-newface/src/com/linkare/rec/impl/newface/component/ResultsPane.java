@@ -287,7 +287,11 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 	public void showExperimentInfo() {
 		JTextArea infoTextArea = getExperimentInfoTextArea();
 		try {
-			infoTextArea.setText(experimentHistoryUI.getProducerWrapper().getAcquisitionHeader().toString());
+			String acquisitionInfo = "Acquisition info is not available";
+			if (experimentHistoryUI.getProducerWrapper() != null && experimentHistoryUI.getProducerWrapper().getAcquisitionHeader() != null) {
+				acquisitionInfo = experimentHistoryUI.getProducerWrapper().getAcquisitionHeader().toString();
+			}
+			infoTextArea.setText(acquisitionInfo);
 		} catch (NotAvailableException e) {
 			String msg = "AcquisitionHeader is not Available.";
 			log.log(Level.SEVERE, msg, e);

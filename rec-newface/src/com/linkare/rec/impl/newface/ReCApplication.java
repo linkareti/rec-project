@@ -284,6 +284,10 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	private boolean experimentAutoplay = false;
 
+	private ExperimentHistoryUINode lastExperimentHistory;
+
+	private ApparatusConnectorEvent apparatusStateStartedEvent;
+
 	/** Creates a new <code>ReCApplication</code> */
 	public ReCApplication() {
 		setCurrentState(DISCONNECTED_OFFLINE);
@@ -344,6 +348,10 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			result = labClientBean.getUserInfo().getUserName();
 		}
 		return result;
+	}
+
+	public ExperimentHistoryUINode getLastExperimentHistory() {
+		return lastExperimentHistory;
 	}
 
 	public UserInfo getUserInfo() {
@@ -945,25 +953,24 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			log.fine("ApparatusConnectorEvent " + evt.getMessage());
 		}
 
-		ExperimentHistoryUINode expHistoryUINode = new ExperimentHistoryUINode(this, evt.getDataSource(),
+		lastExperimentHistory = new ExperimentHistoryUINode(this, evt.getDataSource(),
 				apparatusClientBean.getApparatus(), currentApparatusConfig);
 
-		expHistoryUINode.setLocallyOwned(currentState.matches(APPARATUS_LOCKED));
+		lastExperimentHistory.setLocallyOwned(currentState.matches(APPARATUS_LOCKED));
+
+		// Add history entry on view
+		fireApplicationEvent(new ReCAppEvent(this, ReCCommand.EXPERIMENT_HISTORY_ADDED));
 
 		if (currentState.matches(APPARATUS_LOCKED)) {
-			startExperiment(expHistoryUINode);
-
-			// Forward event to the view
-			evt.setValue("ExperimentHistoryUINode", expHistoryUINode);
-			fireApparatusStateChanged(STATESTARTED, evt);
+			this.apparatusStateStartedEvent = evt;
+			setCurrentState(APPARATUS_STARTED);
+			startExperiment(lastExperimentHistory);
 		}
+
 	}
 
 	@Override
 	public void startExperiment(ExpHistory expHistory) {
-
-		setCurrentState(APPARATUS_STARTED);
-
 		// Get experiment history
 		log.fine("ExpHistory apparatus id: " + expHistory != null ? expHistory.getApparatusID() : "");
 		ExperimentHistoryUINode experimentHistory = (ExperimentHistoryUINode) expHistory;
@@ -1069,6 +1076,10 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			//									"Failed data output connection..."));
 			return;
 		}
+
+		// Forward event to the view
+		apparatusStateStartedEvent.setValue("ExperimentHistoryUINode", experimentHistory);
+		fireApparatusStateChanged(STATESTARTED, apparatusStateStartedEvent);
 	}
 
 	@Override

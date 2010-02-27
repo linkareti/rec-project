@@ -125,6 +125,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
         btnLink.setForeground(resourceMap.getColor("btnLink.foreground")); // NOI18N
         btnLink.setText(resourceMap.getString("btnLink.text")); // NOI18N
         btnLink.setBorderPainted(false);
+        btnLink.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLink.setName("btnLink"); // NOI18N
         btnLink.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

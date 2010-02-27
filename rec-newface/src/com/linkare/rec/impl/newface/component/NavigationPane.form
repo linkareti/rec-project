@@ -26,8 +26,8 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="separator" alignment="0" pref="220" max="32767" attributes="0"/>
-          <Component id="experimentHistoryBox" alignment="0" pref="220" max="32767" attributes="0"/>
           <Component id="apparatusSelectBox" alignment="0" pref="220" max="32767" attributes="0"/>
+          <Component id="experimentHistoryBox" alignment="1" pref="220" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -36,8 +36,8 @@
               <Component id="apparatusSelectBox" min="-2" pref="115" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="separator" min="-2" pref="10" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="experimentHistoryBox" min="-2" pref="341" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="experimentHistoryBox" pref="341" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

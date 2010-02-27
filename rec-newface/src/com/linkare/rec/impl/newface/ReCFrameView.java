@@ -182,15 +182,16 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private void collectInterativeBoxes() {
 		interactiveBoxes = new ArrayList<AbstractContentPane>();
 		interactiveBoxes.add(getApparatusSelectBox());
-		interactiveBoxes.add(getExperimentHistoryBox());
+		interactiveBoxes.add(getExperimentHistoryBox().getHistoryListPane());
 		interactiveBoxes.add(getApparatusDescriptionPane());
 		interactiveBoxes.add(getVideoBox());
 		interactiveBoxes.add(getChatBox());
-		//        interactiveBoxes.add(getApparatusUserListPane());
 	}
 
 	public void setInteractiveBoxesEnabled(boolean enabled) {
 		for (AbstractContentPane box : interactiveBoxes) {
+			log.fine("Setting box " + box.getName() + " enabled = " + enabled);
+			box.setEnabled(enabled);
 			box.setChildComponentsEnabled(enabled);
 		}
 	}
@@ -355,6 +356,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		case CUSTOMIZER_CANCELED:
 			// noop
 			break;
+		case EXPERIMENT_HISTORY_ADDED:
+			addExperimentHistory();
+			break;
 		case ASK_FOR_VLC:
 			askForVLC();
 			break;
@@ -426,6 +430,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		}
 
 		return true;
+	}
+
+	private void addExperimentHistory() {
+		getExperimentHistoryBox().addExperimentHistory(recApplication.getLastExperimentHistory());
 	}
 
 	private void customizerDone() {
@@ -560,10 +568,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		case STATESTARTING:
 			progressCicleTask.start();
 			startingExperiment();
-			clearLastExperimentResults();
+			//			clearLastExperimentResults();
 			break;
 		case STATESTARTED:
 			startedExperiment();
+			clearLastExperimentResults();
 			showExperimentResults(evt);
 			break;
 		case STATESTOPING:
@@ -734,9 +743,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	private void showExperimentResults(ApparatusConnectorEvent evt) {
-		ExperimentHistoryUINode experimentHistoryUI = (ExperimentHistoryUINode) evt.getValue();
+		getLayoutContainerPane().enableApparatusTabbedPane();
 
-		//getExperimentHistoryBox().addExperimentHistory(experimentHistoryUI);
+		ExperimentHistoryUINode experimentHistoryUI = (ExperimentHistoryUINode) evt.getValue();
 
 		getResultsPane().setExperimentResults(experimentHistoryUI, recApplication.getExperimentDataModel(),
 				recApplication.getExperimentDataDisplays());
