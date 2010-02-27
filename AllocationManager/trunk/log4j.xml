@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- ========= -->
+    <!-- Appenders -->
+    <!-- ========= -->
+ 
+    <appender name="Console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="DEBUG"/>
+        <param name="Target" value="System.err"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd MM yyyy HH:mm:ss} %p %C %nLinha: %L %m %n%n"/>
+        </layout>
+    </appender>
+    
+    <appender name="DatedFileAppender" class="biz.minaret.log4j.DatedFileAppender">
+        <param name="Directory" value="${com.sun.aas.instanceRoot}/logs/allocationmanager"/>
+        <param name="Prefix" value="AllocationManager"/>
+        <param name="Suffix" value=".log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd MM yyyy HH:mm:ss} %p %C %nLinha: %L %m %n%n"/>
+        </layout>
+    </appender>
+    
+    <appender name="XMLFileAppender" class="biz.minaret.log4j.DatedFileAppender">
+        <param name="Directory" value="${com.sun.aas.instanceRoot}/logs/allocationmanager"/>
+        <param name="Prefix" value="AllocationManager"/>
+        <param name="Suffix" value=".xml"/>
+        <layout class="org.apache.log4j.xml.XMLLayout"/>
+    </appender>
+    
+    <appender name="FileAppender" class="org.apache.log4j.FileAppender">
+        <param name="Threshold" value="ERROR"/>
+        <param name="File" value="./AllocationManager.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd MM yyyy HH:mm:ss} %p %C %nLinha: %L %m %n%n"/>
+        </layout>
+    </appender>
+    
+    <appender name="SocketAppender" class="org.apache.log4j.net.SocketAppender">
+        <param name="RemoteHost" value="localhost"/>
+        <param name="Port" value="4445"/>
+        <param name="LocationInfo" value="false"/>
+    </appender>
+
+    <!-- ======= -->
+    <!-- Loggers -->
+    <!-- ======= -->
+
+    
+    <logger name="pt.ifap" additivity="true">
+        <level value="DEBUG"/>
+        <appender-ref ref="DatedFileAppender"/>
+        <appender-ref ref="SocketAppender"/>
+    </logger>
+
+    <!--root>
+        <param name="Level" value="INFO"/>
+        <appender-ref ref="Console"/>
+    </root-->
+	
+</log4j:configuration>

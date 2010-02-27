@@ -46,17 +46,16 @@ public class Reservation implements ScheduleEvent, Serializable {
     private String endTimeSlot;
     @Basic
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(nullable=false)
     private UserPrincipal user;
     @Basic
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     private Experiment experiment;
     @Basic
     private boolean allDay = false;
-    private String styleClass;
-    
-    @Basic
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false)
     private UserGroup group;
 
     /**
@@ -200,15 +199,10 @@ public class Reservation implements ScheduleEvent, Serializable {
      */
     @Override
     public String getStyleClass() {
-        return styleClass;
+        return null;
     }
 
-    /**
-     * @param styleClass the styleClass to set
-     */
-    public void setStyleClass(String styleClass) {
-        this.styleClass = styleClass;
-    }
+
 
     /**
      * @return the dataObj

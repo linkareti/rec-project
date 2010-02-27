@@ -14,6 +14,7 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -32,17 +33,18 @@ public class UserPrincipal implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
+    @JoinTable(name = "USER_GROUPS", joinColumns=
+            @JoinColumn(name="USER_ID", referencedColumnName="NAME"),
+        inverseJoinColumns=
+            @JoinColumn(name="GROUP_ID", referencedColumnName="NAME")
+)
+    @ManyToMany
+    private Set<UserGroup> groups = new HashSet<UserGroup>();
 
     /**
      * @return the groups
      */
-    @ManyToMany
-    @JoinTable(name="USER_GROUPS")
     public Set getGroups() { return groups; }
-
-
-    @ManyToMany
-    private Set<UserGroup> groups = new HashSet<UserGroup>();
 
     public String getName() {
         return name;

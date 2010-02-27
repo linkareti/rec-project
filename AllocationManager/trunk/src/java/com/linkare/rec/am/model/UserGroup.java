@@ -27,7 +27,6 @@ public class UserGroup implements Serializable {
     private Set<UserPrincipal> members = new HashSet<UserPrincipal>();
     @Basic
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
-    @Column(nullable = true)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
     @Override
