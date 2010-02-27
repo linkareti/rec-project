@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateReservationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_title}" for="title" />
+                    <h:inputText id="title" value="#{reservationController.selected.title}" title="#{bundle.CreateReservationTitle_title}" />
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_startDate}" for="startDate" />
+                    <h:inputText id="startDate" value="#{reservationController.selected.startDate}" title="#{bundle.CreateReservationTitle_startDate}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_endDate}" for="endDate" />
+                    <h:inputText id="endDate" value="#{reservationController.selected.endDate}" title="#{bundle.CreateReservationTitle_endDate}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_user}" for="user" />
+                    <h:selectOneMenu id="user" value="#{reservationController.selected.user}" title="#{bundle.CreateReservationTitle_user}" >
+                        <f:selectItems value="#{userPrincipalController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_experiment}" for="experiment" />
+                    <h:selectOneMenu id="experiment" value="#{reservationController.selected.experiment}" title="#{bundle.CreateReservationTitle_experiment}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_experiment}">
+                        <f:selectItems value="#{experimentController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_startTimeSlot}" for="startTimeSlot" />
+                    <h:inputText id="startTimeSlot" value="#{reservationController.selected.startTimeSlot}" title="#{bundle.CreateReservationTitle_startTimeSlot}" />
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_endTimeSlot}" for="endTimeSlot" />
+                    <h:inputText id="endTimeSlot" value="#{reservationController.selected.endTimeSlot}" title="#{bundle.CreateReservationTitle_endTimeSlot}" />
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_group}" for="group" />
+                    <h:selectOneMenu id="group" value="#{reservationController.selected.group}" title="#{bundle.CreateReservationTitle_group}" >
+                        <f:selectItems value="#{userGroupController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{reservationController.create}" value="#{bundle.CreateReservationSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{reservationController.prepareList}" value="#{bundle.CreateReservationShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateReservationIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

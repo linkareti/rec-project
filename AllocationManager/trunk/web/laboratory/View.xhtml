@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewLaboratoryTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewLaboratoryLabel_name}"/>
+                    <h:outputText value="#{laboratoryController.selected.name}" title="#{bundle.ViewLaboratoryTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewLaboratoryLabel_description}"/>
+                    <h:outputText value="#{laboratoryController.selected.description}" title="#{bundle.ViewLaboratoryTitle_description}"/>
+                    <h:outputText value="#{bundle.ViewLaboratoryLabel_stateLabel}"/>
+                    <h:outputText value="#{laboratoryController.selected.state.label}" title="#{bundle.ViewLaboratoryTitle_stateLabel}"/>
+                    <h:outputText value="#{bundle.ViewLaboratoryLabel_stateHelpMessage}"/>
+                    <h:outputText value="#{laboratoryController.selected.state.helpMessage}" title="#{bundle.ViewLaboratoryTitle_stateHelpMessage}"/>
+                    <h:outputText value="#{bundle.ViewLaboratoryLabel_stateURL}"/>
+                    <h:outputText value="#{laboratoryController.selected.state.url}" title="#{bundle.ViewLaboratoryTitle_stateURL}"/>
+                    <h:outputText value="#{bundle.ViewLaboratoryLabel_stateActive}"/>
+                    <h:outputText value="#{laboratoryController.selected.state.active}" title="#{bundle.ViewLaboratoryTitle_stateActive}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{laboratoryController.destroyAndView}" value="#{bundle.ViewLaboratoryDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewLaboratoryEditLink}"/>
+                <br />
+                <h:commandLink action="#{laboratoryController.prepareCreate}" value="#{bundle.ViewLaboratoryCreateLink}" />
+                <br />
+                <h:commandLink action="#{laboratoryController.prepareList}" value="#{bundle.ViewLaboratoryShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewLaboratoryIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

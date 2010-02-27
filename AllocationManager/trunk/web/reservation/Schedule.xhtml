@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ReservationScheduleTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form prependId="false" style="font-family: Arial, Helvetica, sans-serif;
+                    color: #3a4f54;
+                    background-color: #dfecf1;
+                    font-size: small">
+
+                <h:commandLink value="#{bundle.CreateReservationIndexLink}" action="/index" immediate="true" />
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                <p:ajaxStatus style="height:24px;display:block;">
+                    <f:facet name="start">
+                        <h:graphicImage value="resources/images/ajaxloading.gif" />
+                    </f:facet>
+                    <f:facet name="complete">
+                        <h:outputText value="" />
+                    </f:facet>
+                </p:ajaxStatus>
+                <p:schedule value="#{scheduleController.eventModel}" editable="true" locale="en" widgetVar="myschedule"
+                            eventSelectListener="#{scheduleController.onEventSelect}"
+                            dateSelectListener="#{scheduleController.onDateSelect}" draggable="false">
+                    <p:scheduleEventDialog header="Event Details">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel for="title" value="Title:" />
+                            <h:inputText id="title" value="#{scheduleController.event.title}" />
+                            <h:outputLabel value="#{bundle.CreateReservationLabel_experiment}" for="experiment" />
+                            <h:selectOneMenu id="experiment" value="#{scheduleController.event.experiment}" title="#{bundle.CreateReservationTitle_experiment}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_experiment}">
+                                <f:selectItems value="#{experimentController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel for="startDate" value="Start Date:" />
+                            <p:inputMask id="startDate" value="#{scheduleController.event.startDate}" mask="99/99/9999">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </p:inputMask>
+                            <h:outputLabel for="startTimeSlot" value="Start Time:" />
+                            <h:selectOneMenu id="startTimeSlot" value="#{scheduleController.event.startTimeSlot}" title="#{bundle.EditReservationTitle_startTimeSlot}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_startTimeSlot}">
+                                <f:selectItems value="#{reservationController.timeSlotSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel for="allDay" value="All Day:" />
+                            <h:selectBooleanCheckbox id="allDay" value="#{scheduleController.event.allDay}" disabled="true"/>
+                            <p:commandButton type="reset" value="Reset" />
+                            <p:commandButton value="Remove" actionListener="#{scheduleController.removeEvent}" oncomplete="myschedule.update();" />
+                            <p:commandButton value="Save" actionListener="#{scheduleController.saveEvent}" oncomplete="myschedule.update();" />
+                        </h:panelGrid>
+                    </p:scheduleEventDialog>
+                </p:schedule>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

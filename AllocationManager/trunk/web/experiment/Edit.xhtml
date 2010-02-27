@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditExperimentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditExperimentLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{experimentController.selected.name}" title="#{bundle.EditExperimentTitle_name}" />
+                    <h:outputLabel value="#{bundle.EditExperimentLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{experimentController.selected.description}" title="#{bundle.EditExperimentTitle_description}" />
+                    <h:outputLabel value="#{bundle.EditExperimentLabel_laboratory}" for="laboratory" />
+                    <h:selectOneMenu id="laboratory" value="#{experimentController.selected.laboratory}" title="#{bundle.EditExperimentTitle_laboratory}" >
+                        <f:selectItems value="#{laboratoryController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditExperimentLabel_stateLabel}" for="stateLabel" />
+                    <h:inputText id="stateLabel" value="#{experimentController.selected.state.label}" title="#{bundle.EditExperimentTitle_stateLabel}" />
+                    <h:outputLabel value="#{bundle.EditExperimentLabel_stateHelpMessage}" for="stateHelpMessage" />
+                    <h:inputText id="stateHelpMessage" value="#{experimentController.selected.state.helpMessage}" title="#{bundle.EditExperimentTitle_stateHelpMessage}" />
+                    <h:outputLabel value="#{bundle.EditExperimentLabel_stateURL}" for="stateURL" />
+                    <h:inputText id="stateURL" value="#{experimentController.selected.state.url}" title="#{bundle.EditExperimentTitle_stateURL}" />
+                    <h:outputLabel value="#{bundle.EditExperimentLabel_stateActive}" for="statActive" />
+                    <h:inputText id="stateActive" value="#{experimentController.selected.state.active}" title="#{bundle.EditExperimentTitle_stateActive}" />
+                </h:panelGrid>
+                <h:commandLink action="#{experimentController.update}" value="#{bundle.EditExperimentSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditExperimentViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{experimentController.prepareList}" value="#{bundle.EditExperimentShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditExperimentIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
