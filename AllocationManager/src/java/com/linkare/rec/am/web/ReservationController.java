@@ -4,7 +4,6 @@ import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.ReservationFacade;
-import java.io.Serializable;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -18,14 +17,13 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean(name = "reservationController")
+@ManagedBean (name="reservationController")
 @SessionScoped
-public class ReservationController implements Serializable {
+public class ReservationController {
 
     private Reservation current;
     private DataModel items = null;
-    @EJB
-    private com.linkare.rec.am.model.ReservationFacade ejbFacade;
+    @EJB private com.linkare.rec.am.model.ReservationFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -55,7 +53,7 @@ public class ReservationController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -68,7 +66,7 @@ public class ReservationController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Reservation) getItems().getRowData();
+        current = (Reservation)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -91,7 +89,7 @@ public class ReservationController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Reservation) getItems().getRowData();
+        current = (Reservation)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -108,7 +106,7 @@ public class ReservationController implements Serializable {
     }
 
     public String destroy() {
-        current = (Reservation) getItems().getRowData();
+        current = (Reservation)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();
@@ -141,14 +139,14 @@ public class ReservationController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -183,19 +181,14 @@ public class ReservationController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public SelectItem[] getTimeSlotSelectOne() {
-        return JsfUtil.getTimeSlotItems();
-    }
-
-    @FacesConverter(forClass = Reservation.class)
+    @FacesConverter(forClass=Reservation.class)
     public static class ReservationControllerConverter implements Converter {
 
-        @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ReservationController controller = (ReservationController) facesContext.getApplication().getELResolver().
+            ReservationController controller = (ReservationController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "reservationController");
             return controller.ejbFacade.find(getKey(value));
         }
@@ -220,8 +213,10 @@ public class ReservationController implements Serializable {
                 Reservation o = (Reservation) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + ReservationController.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+ReservationController.class.getName());
             }
         }
+
     }
+
 }

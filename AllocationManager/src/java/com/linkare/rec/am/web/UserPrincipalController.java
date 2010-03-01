@@ -4,7 +4,6 @@ import com.linkare.rec.am.model.UserPrincipal;
 import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.UserPrincipalFacade;
-import java.io.Serializable;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -18,14 +17,13 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean(name = "userPrincipalController")
+@ManagedBean (name="userPrincipalController")
 @SessionScoped
-public class UserPrincipalController implements Serializable {
+public class UserPrincipalController {
 
     private UserPrincipal current;
     private DataModel items = null;
-    @EJB
-    private com.linkare.rec.am.model.UserPrincipalFacade ejbFacade;
+    @EJB private com.linkare.rec.am.model.UserPrincipalFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -55,7 +53,7 @@ public class UserPrincipalController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -68,7 +66,7 @@ public class UserPrincipalController implements Serializable {
     }
 
     public String prepareView() {
-        current = (UserPrincipal) getItems().getRowData();
+        current = (UserPrincipal)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -91,7 +89,7 @@ public class UserPrincipalController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (UserPrincipal) getItems().getRowData();
+        current = (UserPrincipal)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -108,7 +106,7 @@ public class UserPrincipalController implements Serializable {
     }
 
     public String destroy() {
-        current = (UserPrincipal) getItems().getRowData();
+        current = (UserPrincipal)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();
@@ -141,14 +139,14 @@ public class UserPrincipalController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -183,14 +181,14 @@ public class UserPrincipalController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass = UserPrincipal.class)
+    @FacesConverter(forClass=UserPrincipal.class)
     public static class UserPrincipalControllerConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            UserPrincipalController controller = (UserPrincipalController) facesContext.getApplication().getELResolver().
+            UserPrincipalController controller = (UserPrincipalController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "userPrincipalController");
             return controller.ejbFacade.find(getKey(value));
         }
@@ -215,8 +213,10 @@ public class UserPrincipalController implements Serializable {
                 UserPrincipal o = (UserPrincipal) object;
                 return getStringKey(o.getName());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + UserPrincipalController.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+UserPrincipalController.class.getName());
             }
         }
+
     }
+
 }

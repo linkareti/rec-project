@@ -15,20 +15,26 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewReservationLabel_id}"/>
+                    <h:outputText value="#{reservationController.selected.id}" title="#{bundle.ViewReservationTitle_id}"/>
                     <h:outputText value="#{bundle.ViewReservationLabel_title}"/>
                     <h:outputText value="#{reservationController.selected.title}" title="#{bundle.ViewReservationTitle_title}"/>
                     <h:outputText value="#{bundle.ViewReservationLabel_startDate}"/>
                     <h:outputText value="#{reservationController.selected.startDate}" title="#{bundle.ViewReservationTitle_startDate}">
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:outputText>
                     <h:outputText value="#{bundle.ViewReservationLabel_endDate}"/>
                     <h:outputText value="#{reservationController.selected.endDate}" title="#{bundle.ViewReservationTitle_endDate}">
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:outputText>
                     <h:outputText value="#{bundle.ViewReservationLabel_user}"/>
                     <h:outputText value="#{reservationController.selected.user}" title="#{bundle.ViewReservationTitle_user}"/>
                     <h:outputText value="#{bundle.ViewReservationLabel_experiment}"/>
                     <h:outputText value="#{reservationController.selected.experiment}" title="#{bundle.ViewReservationTitle_experiment}"/>
+                    <h:outputText value="#{bundle.ViewReservationLabel_styleClass}"/>
+                    <h:outputText value="#{reservationController.selected.styleClass}" title="#{bundle.ViewReservationTitle_styleClass}"/>
+                    <h:outputText value="#{bundle.ViewReservationLabel_data}"/>
+                    <h:outputText value="#{reservationController.selected.data}" title="#{bundle.ViewReservationTitle_data}"/>
                     <h:outputText value="#{bundle.ViewReservationLabel_startTimeSlot}"/>
                     <h:outputText value="#{reservationController.selected.startTimeSlot}" title="#{bundle.ViewReservationTitle_startTimeSlot}"/>
                     <h:outputText value="#{bundle.ViewReservationLabel_endTimeSlot}"/>
@@ -47,10 +53,8 @@
                 <h:commandLink action="#{reservationController.prepareList}" value="#{bundle.ViewReservationShowAllLink}"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
-                <br />
-                <br />
                 <h:commandLink value="#{bundle.ViewReservationIndexLink}" action="/index" immediate="true" />
+
             </h:form>
         </ui:define>
     </ui:composition>

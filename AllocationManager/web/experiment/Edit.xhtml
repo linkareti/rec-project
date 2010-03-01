@@ -15,6 +15,8 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditExperimentLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{experimentController.selected.id}" title="#{bundle.EditExperimentTitle_id}" />
                     <h:outputLabel value="#{bundle.EditExperimentLabel_name}" for="name" />
                     <h:inputText id="name" value="#{experimentController.selected.name}" title="#{bundle.EditExperimentTitle_name}" />
                     <h:outputLabel value="#{bundle.EditExperimentLabel_description}" for="description" />
@@ -23,14 +25,8 @@
                     <h:selectOneMenu id="laboratory" value="#{experimentController.selected.laboratory}" title="#{bundle.EditExperimentTitle_laboratory}" >
                         <f:selectItems value="#{laboratoryController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditExperimentLabel_stateLabel}" for="stateLabel" />
-                    <h:inputText id="stateLabel" value="#{experimentController.selected.state.label}" title="#{bundle.EditExperimentTitle_stateLabel}" />
-                    <h:outputLabel value="#{bundle.EditExperimentLabel_stateHelpMessage}" for="stateHelpMessage" />
-                    <h:inputText id="stateHelpMessage" value="#{experimentController.selected.state.helpMessage}" title="#{bundle.EditExperimentTitle_stateHelpMessage}" />
-                    <h:outputLabel value="#{bundle.EditExperimentLabel_stateURL}" for="stateURL" />
-                    <h:inputText id="stateURL" value="#{experimentController.selected.state.url}" title="#{bundle.EditExperimentTitle_stateURL}" />
-                    <h:outputLabel value="#{bundle.EditExperimentLabel_stateActive}" for="statActive" />
-                    <h:inputText id="stateActive" value="#{experimentController.selected.state.active}" title="#{bundle.EditExperimentTitle_stateActive}" />
+                    <h:outputLabel value="#{bundle.EditExperimentLabel_state}" for="state" />
+                    <h:inputText id="state" value="#{experimentController.selected.state}" title="#{bundle.EditExperimentTitle_state}" />
                 </h:panelGrid>
                 <h:commandLink action="#{experimentController.update}" value="#{bundle.EditExperimentSaveLink}"/>
                 <br />
@@ -40,11 +36,9 @@
                 <h:commandLink action="#{experimentController.prepareList}" value="#{bundle.EditExperimentShowAllLink}" immediate="true"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
-                <br />
-                <br />
                 <h:commandLink value="#{bundle.EditExperimentIndexLink}" action="/index" immediate="true" />
             </h:form>
         </ui:define>
     </ui:composition>
+
 </html>

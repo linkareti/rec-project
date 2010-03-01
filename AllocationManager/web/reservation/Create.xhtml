@@ -15,30 +15,36 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{reservationController.selected.id}" title="#{bundle.CreateReservationTitle_id}" />
                     <h:outputLabel value="#{bundle.CreateReservationLabel_title}" for="title" />
                     <h:inputText id="title" value="#{reservationController.selected.title}" title="#{bundle.CreateReservationTitle_title}" />
                     <h:outputLabel value="#{bundle.CreateReservationLabel_startDate}" for="startDate" />
                     <h:inputText id="startDate" value="#{reservationController.selected.startDate}" title="#{bundle.CreateReservationTitle_startDate}" >
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.CreateReservationLabel_endDate}" for="endDate" />
                     <h:inputText id="endDate" value="#{reservationController.selected.endDate}" title="#{bundle.CreateReservationTitle_endDate}" >
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.CreateReservationLabel_user}" for="user" />
-                    <h:selectOneMenu id="user" value="#{reservationController.selected.user}" title="#{bundle.CreateReservationTitle_user}" >
+                    <h:selectOneMenu id="user" value="#{reservationController.selected.user}" title="#{bundle.CreateReservationTitle_user}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_user}">
                         <f:selectItems value="#{userPrincipalController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateReservationLabel_experiment}" for="experiment" />
                     <h:selectOneMenu id="experiment" value="#{reservationController.selected.experiment}" title="#{bundle.CreateReservationTitle_experiment}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_experiment}">
                         <f:selectItems value="#{experimentController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_styleClass}" for="styleClass" />
+                    <h:inputText id="styleClass" value="#{reservationController.selected.styleClass}" title="#{bundle.CreateReservationTitle_styleClass}" />
+                    <h:outputLabel value="#{bundle.CreateReservationLabel_data}" for="data" />
+                    <h:inputText id="data" value="#{reservationController.selected.data}" title="#{bundle.CreateReservationTitle_data}" />
                     <h:outputLabel value="#{bundle.CreateReservationLabel_startTimeSlot}" for="startTimeSlot" />
                     <h:inputText id="startTimeSlot" value="#{reservationController.selected.startTimeSlot}" title="#{bundle.CreateReservationTitle_startTimeSlot}" />
                     <h:outputLabel value="#{bundle.CreateReservationLabel_endTimeSlot}" for="endTimeSlot" />
                     <h:inputText id="endTimeSlot" value="#{reservationController.selected.endTimeSlot}" title="#{bundle.CreateReservationTitle_endTimeSlot}" />
                     <h:outputLabel value="#{bundle.CreateReservationLabel_group}" for="group" />
-                    <h:selectOneMenu id="group" value="#{reservationController.selected.group}" title="#{bundle.CreateReservationTitle_group}" >
+                    <h:selectOneMenu id="group" value="#{reservationController.selected.group}" title="#{bundle.CreateReservationTitle_group}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_group}">
                         <f:selectItems value="#{userGroupController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
@@ -47,9 +53,6 @@
                 <br />
                 <br />
                 <h:commandLink action="#{reservationController.prepareList}" value="#{bundle.CreateReservationShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.CreateReservationIndexLink}" action="/index" immediate="true" />

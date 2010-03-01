@@ -10,43 +10,40 @@
             <h:outputText value="#{bundle.ListUserGroupTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListUserGroupEmpty}" rendered="#{userGroupController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{userGroupController.items.rowCount > 0}">
-                    <h:outputText value="#{userGroupController.pagination.pageFirstItem + 1}..#{userGroupController.pagination.pageLastItem + 1}/#{userGroupController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{userGroupController.previous}" value="#{bundle.Previous} #{userGroupController.pagination.pageSize}" rendered="#{userGroupController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{userGroupController.next}" value="#{bundle.Next} #{userGroupController.pagination.pageSize}" rendered="#{userGroupController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{userGroupController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserGroupTitle_name}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.name}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{userGroupController.prepareView}" value="#{bundle.ListUserGroupViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{userGroupController.prepareEdit}" value="#{bundle.ListUserGroupEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{userGroupController.destroy}" value="#{bundle.ListUserGroupDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{userGroupController.prepareCreate}" value="#{bundle.ListUserGroupCreateLink}"/>
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
-                <br />
-                <br />
-                <h:commandLink value="#{bundle.ListUserGroupIndexLink}" action="/index" immediate="true" />
-            </h:form>
+        <h:form styleClass="jsfcrud_list_form">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputText escape="false" value="#{bundle.ListUserGroupEmpty}" rendered="#{userGroupController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{userGroupController.items.rowCount > 0}">
+                <h:outputText value="#{userGroupController.pagination.pageFirstItem + 1}..#{userGroupController.pagination.pageLastItem + 1}/#{userGroupController.pagination.itemsCount}"/>&nbsp;
+                <h:commandLink action="#{userGroupController.previous}" value="#{bundle.Previous} #{userGroupController.pagination.pageSize}" rendered="#{userGroupController.pagination.hasPreviousPage}"/>&nbsp;
+                <h:commandLink action="#{userGroupController.next}" value="#{bundle.Next} #{userGroupController.pagination.pageSize}" rendered="#{userGroupController.pagination.hasNextPage}"/>&nbsp;
+                <h:dataTable value="#{userGroupController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserGroupTitle_name}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{userGroupController.prepareView}" value="#{bundle.ListUserGroupViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{userGroupController.prepareEdit}" value="#{bundle.ListUserGroupEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{userGroupController.destroy}" value="#{bundle.ListUserGroupDestroyLink}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            <br />
+            <h:commandLink action="#{userGroupController.prepareCreate}" value="#{bundle.ListUserGroupCreateLink}"/>
+            <br />
+            <br />
+            <h:commandLink value="#{bundle.ListUserGroupIndexLink}" action="/index" immediate="true" />
+        </h:form>
         </ui:define>
     </ui:composition>
 

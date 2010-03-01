@@ -4,7 +4,6 @@ import com.linkare.rec.am.model.UserGroup;
 import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.UserGroupFacade;
-import java.io.Serializable;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -20,7 +19,7 @@ import javax.faces.model.SelectItem;
 
 @ManagedBean (name="userGroupController")
 @SessionScoped
-public class UserGroupController implements Serializable {
+public class UserGroupController {
 
     private UserGroup current;
     private DataModel items = null;
