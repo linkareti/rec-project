@@ -1055,11 +1055,11 @@
         <sequential>
             <mkdir dir="@{destination}"/>
         	
-        	<ant antfile="build.xml" dir="experiments/@{experiment.name}"/etc target="pre.jar" />
+        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre.jar" />
         	
         	<jar destfile="@{destination}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client"/>
         	
-        	<ant antfile="build.xml" dir="experiments/@{experiment.name}"/etc target="post.jar" />
+        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post.jar" />
         	
         </sequential>
     </macrodef>
