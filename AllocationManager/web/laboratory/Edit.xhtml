@@ -19,8 +19,14 @@
                     <h:inputText id="name" value="#{laboratoryController.selected.name}" title="#{bundle.EditLaboratoryTitle_name}" />
                     <h:outputLabel value="#{bundle.EditLaboratoryLabel_description}" for="description" />
                     <h:inputText id="description" value="#{laboratoryController.selected.description}" title="#{bundle.EditLaboratoryTitle_description}" />
-                    <h:outputLabel value="#{bundle.EditLaboratoryLabel_state}" for="state" />
-                    <h:inputText id="state" value="#{laboratoryController.selected.state}" title="#{bundle.EditLaboratoryTitle_state}" />
+                    <h:outputLabel value="#{bundle.EditLaboratoryLabel_stateLabel}" for="stateLabel" />
+                    <h:inputText id="stateLabel" value="#{laboratoryController.selected.state.label}" title="#{bundle.EditLaboratoryTitle_stateLabel}" />
+                    <h:outputLabel value="#{bundle.EditLaboratoryLabel_stateHelpMessage}" for="stateHelpMessage" />
+                    <h:inputText id="stateHelpMessage" value="#{laboratoryController.selected.state.helpMessage}" title="#{bundle.EditLaboratoryTitle_stateHelpMessage}" />
+                    <h:outputLabel value="#{bundle.EditLaboratoryLabel_stateURL}" for="stateURL" />
+                    <h:inputText id="stateURL" value="#{laboratoryController.selected.state.url}" title="#{bundle.EditLaboratoryTitle_stateURL}" />
+                    <h:outputLabel value="#{bundle.EditLaboratoryLabel_stateActive}" for="statActive" />
+                    <h:inputText id="stateActive" value="#{laboratoryController.selected.state.active}" title="#{bundle.EditLaboratoryTitle_stateActive}" />
                 </h:panelGrid>
                 <h:commandLink action="#{laboratoryController.update}" value="#{bundle.EditLaboratorySaveLink}"/>
                 <br />
@@ -28,6 +34,9 @@
                 <h:commandLink action="View" value="#{bundle.EditLaboratoryViewLink}" immediate="true"/>
                 <br />
                 <h:commandLink action="#{laboratoryController.prepareList}" value="#{bundle.EditLaboratoryShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.EditLaboratoryIndexLink}" action="/index" immediate="true" />

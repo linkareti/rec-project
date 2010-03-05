@@ -4,6 +4,9 @@ import com.linkare.rec.am.model.UserGroup;
 import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.UserGroupFacade;
+import com.linkare.rec.am.model.UserPrincipal;
+import java.io.Serializable;
+import java.util.List;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -16,17 +19,18 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.model.DualListModel;
 
-@ManagedBean (name="userGroupController")
+@ManagedBean(name = "userGroupController")
 @SessionScoped
-public class UserGroupController {
+public class UserGroupController implements Serializable {
 
     private UserGroup current;
     private DataModel items = null;
     @EJB private com.linkare.rec.am.model.UserGroupFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    
     public UserGroupController() {
     }
 
@@ -53,7 +57,7 @@ public class UserGroupController {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -66,7 +70,7 @@ public class UserGroupController {
     }
 
     public String prepareView() {
-        current = (UserGroup)getItems().getRowData();
+        current = (UserGroup) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -89,7 +93,7 @@ public class UserGroupController {
     }
 
     public String prepareEdit() {
-        current = (UserGroup)getItems().getRowData();
+        current = (UserGroup) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -106,7 +110,7 @@ public class UserGroupController {
     }
 
     public String destroy() {
-        current = (UserGroup)getItems().getRowData();
+        current = (UserGroup) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();
@@ -139,14 +143,14 @@ public class UserGroupController {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count-1;
+            selectedItemIndex = count - 1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -181,14 +185,14 @@ public class UserGroupController {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass=UserGroup.class)
+    @FacesConverter(value="UserGroupControllerConverter" ,forClass=UserGroup.class)
     public static class UserGroupControllerConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            UserGroupController controller = (UserGroupController)facesContext.getApplication().getELResolver().
+            UserGroupController controller = (UserGroupController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "userGroupController");
             return controller.ejbFacade.find(getKey(value));
         }
@@ -213,10 +217,8 @@ public class UserGroupController {
                 UserGroup o = (UserGroup) object;
                 return getStringKey(o.getName());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+UserGroupController.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + UserGroupController.class.getName());
             }
         }
-
     }
-
 }

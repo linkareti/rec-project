@@ -2,14 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.linkare.rec.am.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,26 +22,33 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class UserPrincipal implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     private String name;
-
     @Basic
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
     private List<Reservation> reservations = new ArrayList<Reservation>();
-
-    @JoinTable(name = "USER_GROUPS", joinColumns=
-            @JoinColumn(name="USER_ID", referencedColumnName="NAME"),
-        inverseJoinColumns=
-            @JoinColumn(name="GROUP_ID", referencedColumnName="NAME")
-)
+    @JoinTable(name = "USER_GROUPS", joinColumns =
+    @JoinColumn(name = "USER_ID", referencedColumnName = "NAME"),
+    inverseJoinColumns =
+    @JoinColumn(name = "GROUP_ID", referencedColumnName = "NAME"))
     @ManyToMany
-    private Set<UserGroup> groups = new HashSet<UserGroup>();
+    private List<UserGroup> groups = new ArrayList<UserGroup>();
 
     /**
      * @return the groups
      */
-    public Set getGroups() { return groups; }
+    public List<UserGroup> getGroups() {
+        return groups;
+    }
+
+    /**
+     * @param groups the groups to set
+     */
+    public void setGroups(List<UserGroup> groups) {
+        this.groups = groups;
+    }
 
     public String getName() {
         return name;
@@ -54,7 +58,7 @@ public class UserPrincipal implements Serializable {
         this.name = name;
     }
 
-     /**
+    /**
      * @return the reservations
      */
     public List<Reservation> getReservations() {
@@ -91,13 +95,4 @@ public class UserPrincipal implements Serializable {
     public String toString() {
         return name;
     }
-
-    
-    /**
-     * @param usergroups the usergroups to set
-     */
-    public void setGroups(HashSet<UserGroup> groups) {
-        this.groups = groups;
-    }
-
 }

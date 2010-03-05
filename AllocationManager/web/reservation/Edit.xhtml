@@ -15,17 +15,15 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditReservationLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{reservationController.selected.id}" title="#{bundle.EditReservationTitle_id}" />
                     <h:outputLabel value="#{bundle.EditReservationLabel_title}" for="title" />
                     <h:inputText id="title" value="#{reservationController.selected.title}" title="#{bundle.EditReservationTitle_title}" />
                     <h:outputLabel value="#{bundle.EditReservationLabel_startDate}" for="startDate" />
                     <h:inputText id="startDate" value="#{reservationController.selected.startDate}" title="#{bundle.EditReservationTitle_startDate}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditReservationLabel_endDate}" for="endDate" />
                     <h:inputText id="endDate" value="#{reservationController.selected.endDate}" title="#{bundle.EditReservationTitle_endDate}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditReservationLabel_user}" for="user" />
                     <h:selectOneMenu id="user" value="#{reservationController.selected.user}" title="#{bundle.EditReservationTitle_user}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_user}">
@@ -35,10 +33,6 @@
                     <h:selectOneMenu id="experiment" value="#{reservationController.selected.experiment}" title="#{bundle.EditReservationTitle_experiment}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_experiment}">
                         <f:selectItems value="#{experimentController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditReservationLabel_styleClass}" for="styleClass" />
-                    <h:inputText id="styleClass" value="#{reservationController.selected.styleClass}" title="#{bundle.EditReservationTitle_styleClass}" />
-                    <h:outputLabel value="#{bundle.EditReservationLabel_data}" for="data" />
-                    <h:inputText id="data" value="#{reservationController.selected.data}" title="#{bundle.EditReservationTitle_data}" />
                     <h:outputLabel value="#{bundle.EditReservationLabel_startTimeSlot}" for="startTimeSlot" />
                     <h:inputText id="startTimeSlot" value="#{reservationController.selected.startTimeSlot}" title="#{bundle.EditReservationTitle_startTimeSlot}" />
                     <h:outputLabel value="#{bundle.EditReservationLabel_endTimeSlot}" for="endTimeSlot" />
@@ -54,6 +48,9 @@
                 <h:commandLink action="View" value="#{bundle.EditReservationViewLink}" immediate="true"/>
                 <br />
                 <h:commandLink action="#{reservationController.prepareList}" value="#{bundle.EditReservationShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.EditReservationIndexLink}" action="/index" immediate="true" />

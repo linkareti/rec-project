@@ -23,8 +23,14 @@
                     <h:outputText value="#{experimentController.selected.description}" title="#{bundle.ViewExperimentTitle_description}"/>
                     <h:outputText value="#{bundle.ViewExperimentLabel_laboratory}"/>
                     <h:outputText value="#{experimentController.selected.laboratory}" title="#{bundle.ViewExperimentTitle_laboratory}"/>
-                    <h:outputText value="#{bundle.ViewExperimentLabel_state}"/>
-                    <h:outputText value="#{experimentController.selected.state}" title="#{bundle.ViewExperimentTitle_state}"/>
+                    <h:outputText value="#{bundle.ViewExperimentLabel_stateLabel}"/>
+                    <h:outputText value="#{experimentController.selected.state.label}" title="#{bundle.ViewExperimentTitle_stateLabel}"/>
+                    <h:outputText value="#{bundle.ViewExperimentLabel_stateHelpMessage}"/>
+                    <h:outputText value="#{experimentController.selected.state.helpMessage}" title="#{bundle.ViewExperimentTitle_stateHelpMessage}"/>
+                    <h:outputText value="#{bundle.ViewExperimentLabel_stateURL}"/>
+                    <h:outputText value="#{experimentController.selected.state.url}" title="#{bundle.ViewExperimentTitle_stateURL}"/>
+                    <h:outputText value="#{bundle.ViewExperimentLabel_stateActive}"/>
+                    <h:outputText value="#{experimentController.selected.state.active}" title="#{bundle.ViewExperimentTitle_stateActive}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{experimentController.destroyAndView}" value="#{bundle.ViewExperimentDestroyLink}"/>
@@ -35,6 +41,9 @@
                 <h:commandLink action="#{experimentController.prepareCreate}" value="#{bundle.ViewExperimentCreateLink}" />
                 <br />
                 <h:commandLink action="#{experimentController.prepareList}" value="#{bundle.ViewExperimentShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.ViewExperimentIndexLink}" action="/index" immediate="true" />

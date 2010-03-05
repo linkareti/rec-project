@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -17,12 +18,20 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateUserGroupLabel_name}" for="name" />
                     <h:inputText id="name" value="#{userGroupController.selected.name}" title="#{bundle.CreateUserGroupTitle_name}" />
+                    <h:outputLabel value="#{bundle.CreateUserGroupLabel_members}" for="members" />
+                    <h:selectManyListbox id="groups" value="#{userGroupController.selected.groups}" converter="UserPrincipalControllerConverter">
+                        <f:selectItems
+                            value="#{userPrincipalController.itemsAvailableSelectMany}"/>
+                    </h:selectManyListbox>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{userGroupController.create}" value="#{bundle.CreateUserGroupSaveLink}" />
                 <br />
                 <br />
                 <h:commandLink action="#{userGroupController.prepareList}" value="#{bundle.CreateUserGroupShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.CreateUserGroupIndexLink}" action="/index" immediate="true" />

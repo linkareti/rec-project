@@ -15,7 +15,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:outputText escape="false" value="#{bundle.ListReservationEmpty}" rendered="#{reservationController.items.rowCount == 0}"/>
-            <h:panelGroup rendered="#{reservationController.items.rowCount > 0}">
+            <h:panelGroup>
                 <h:outputText value="#{reservationController.pagination.pageFirstItem + 1}..#{reservationController.pagination.pageLastItem + 1}/#{reservationController.pagination.itemsCount}"/>&nbsp;
                 <h:commandLink action="#{reservationController.previous}" value="#{bundle.Previous} #{reservationController.pagination.pageSize}" rendered="#{reservationController.pagination.hasPreviousPage}"/>&nbsp;
                 <h:commandLink action="#{reservationController.next}" value="#{bundle.Next} #{reservationController.pagination.pageSize}" rendered="#{reservationController.pagination.hasNextPage}"/>&nbsp;

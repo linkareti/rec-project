@@ -4,6 +4,7 @@ import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.ReservationFacade;
+import java.io.Serializable;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -19,7 +20,7 @@ import javax.faces.model.SelectItem;
 
 @ManagedBean (name="reservationController")
 @SessionScoped
-public class ReservationController {
+public class ReservationController implements Serializable {
 
     private Reservation current;
     private DataModel items = null;
@@ -181,9 +182,14 @@ public class ReservationController {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass=Reservation.class)
+    public SelectItem[] getTimeSlotSelectOne() {
+        return JsfUtil.getTimeSlotItems();
+    }
+
+    @FacesConverter(value = "ReservationControllerConverter", forClass = Reservation.class)
     public static class ReservationControllerConverter implements Converter {
 
+        @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;

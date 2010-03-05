@@ -4,6 +4,7 @@ import com.linkare.rec.am.model.UserPrincipal;
 import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.UserPrincipalFacade;
+import java.io.Serializable;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -19,7 +20,7 @@ import javax.faces.model.SelectItem;
 
 @ManagedBean (name="userPrincipalController")
 @SessionScoped
-public class UserPrincipalController {
+public class UserPrincipalController implements Serializable {
 
     private UserPrincipal current;
     private DataModel items = null;
@@ -181,7 +182,7 @@ public class UserPrincipalController {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass=UserPrincipal.class)
+    @FacesConverter(value="UserPrincipalControllerConverter" ,forClass=UserPrincipal.class)
     public static class UserPrincipalControllerConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {

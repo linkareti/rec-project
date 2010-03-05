@@ -54,6 +54,7 @@ public class Reservation implements ScheduleEvent, Serializable {
     private Experiment experiment;
     @Basic
     private boolean allDay = false;
+    @Basic
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     private UserGroup group;

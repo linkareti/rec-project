@@ -2,11 +2,8 @@ package com.linkare.rec.am.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -23,8 +20,9 @@ public class UserGroup implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String name;
+    @Basic
     @ManyToMany(mappedBy = "groups")
-    private Set<UserPrincipal> members = new HashSet<UserPrincipal>();
+    private List<UserPrincipal> members = new ArrayList<UserPrincipal>();
     @Basic
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
     private List<Reservation> reservations = new ArrayList<Reservation>();
@@ -68,8 +66,12 @@ public class UserGroup implements Serializable {
     /**
      * @return the members
      */
-    public Set<UserPrincipal> members() {
+    public List<UserPrincipal> getMembers() {
         return members;
+    }
+
+    public void setMembers(List<UserPrincipal> members) {
+        this.members = members;
     }
 
     /**

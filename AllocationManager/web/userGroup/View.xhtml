@@ -17,6 +17,10 @@
                 <h:panelGrid columns="2">
                     <h:outputText value="#{bundle.ViewUserGroupLabel_name}"/>
                     <h:outputText value="#{userGroupController.selected.name}" title="#{bundle.ViewUserGroupTitle_name}"/>
+                    <h:outputLabel value="#{bundle.ViewUserGroupLabel_members}" for="members" />
+                    <h:selectManyListbox id="members" value="#{userGroupController.selected.members}">
+                        <f:selectItems value="#{userPrincipalController.itemsAvailableSelectMany}"/>
+                    </h:selectManyListbox>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{userGroupController.destroyAndView}" value="#{bundle.ViewUserGroupDestroyLink}"/>
@@ -27,6 +31,9 @@
                 <h:commandLink action="#{userGroupController.prepareCreate}" value="#{bundle.ViewUserGroupCreateLink}" />
                 <br />
                 <h:commandLink action="#{userGroupController.prepareList}" value="#{bundle.ViewUserGroupShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.ViewUserGroupIndexLink}" action="/index" immediate="true" />

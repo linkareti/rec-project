@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -17,6 +18,10 @@
                 <h:panelGrid columns="2">
                     <h:outputText value="#{bundle.ViewUserPrincipalLabel_name}"/>
                     <h:outputText value="#{userPrincipalController.selected.name}" title="#{bundle.ViewUserPrincipalTitle_name}"/>
+                    <h:outputLabel value="#{bundle.ViewUserPrincipalLabel_groups}" for="groups" />
+                    <h:selectManyListbox id="groups" value="#{userPrincipalController.selected.groups}">
+                        <f:selectItems value="#{userGroupController.itemsAvailableSelectMany}"/>
+                    </h:selectManyListbox>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{userPrincipalController.destroyAndView}" value="#{bundle.ViewUserPrincipalDestroyLink}"/>
@@ -29,8 +34,10 @@
                 <h:commandLink action="#{userPrincipalController.prepareList}" value="#{bundle.ViewUserPrincipalShowAllLink}"/>
                 <br />
                 <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <br />
+                <br />
                 <h:commandLink value="#{bundle.ViewUserPrincipalIndexLink}" action="/index" immediate="true" />
-
             </h:form>
         </ui:define>
     </ui:composition>

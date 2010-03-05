@@ -4,6 +4,7 @@ import com.linkare.rec.am.model.Experiment;
 import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.ExperimentFacade;
+import java.io.Serializable;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -19,7 +20,7 @@ import javax.faces.model.SelectItem;
 
 @ManagedBean (name="experimentController")
 @SessionScoped
-public class ExperimentController {
+public class ExperimentController implements Serializable {
 
     private Experiment current;
     private DataModel items = null;

@@ -2,7 +2,6 @@ package com.linkare.rec.am.model;
 
 import java.util.List;
 import javax.annotation.Generated;
-import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -11,7 +10,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public class UserPrincipal_ { 
 
 	public static volatile SingularAttribute<UserPrincipal, String> name;
-	public static volatile SetAttribute<UserPrincipal, UserGroup> groups;
+	public static volatile SingularAttribute<UserPrincipal, List> groups;
 	public static volatile SingularAttribute<UserPrincipal, List> reservations;
 
 }
