@@ -3,7 +3,6 @@ package com.linkare.rec.impl.newface.component;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicTableUI;
-import javax.swing.table.TableColumn;
 
 /**
  * 
@@ -12,7 +11,6 @@ import javax.swing.table.TableColumn;
 public class FlatTable extends JTable {
 
 	private static final String uiClassID = "FlatTableUI";
-	private TableColumn tc = null;
 
 	public FlatTable() {
 		super();
@@ -24,7 +22,7 @@ public class FlatTable extends JTable {
 		setRowHeight(30);
 		getTableHeader().setResizingAllowed(false);
 		getTableHeader().setReorderingAllowed(false);
-		setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
 	}
 
 	@Override
@@ -32,8 +30,10 @@ public class FlatTable extends JTable {
 		return uiClassID;
 	}
 
+
 	@Override
-	public boolean isCellEditable(int row, int column) {
+	public boolean isEnabled() {
 		return false;
 	}
+
 }

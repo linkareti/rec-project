@@ -68,7 +68,8 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 		//        lblInControl = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.inControl", "In control since");
 		//        lblControlNow = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.controlNow", "now!");
 		lbltime_to_control_min = resourceMap.getString("lbltime_to_control_min.text");
-		//        lbltime_to_control_max = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.timeToControlMax", "Control at (max)");
+		lbltime_to_control_max = resourceMap.getString("lbltime_to_control_max.text");
+
 	}
 
 	public void usersListChanged(ExpUsersListEvent evt) {
@@ -147,7 +148,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 					log.finest("controlInMax = " + controlInMax);
 				}
 
-				expUsersList.add(new String[] { userName, controlInMin });
+				expUsersList.add(new String[] { userName, controlInMin, controlInMax });
 			}
 		}
 
@@ -157,7 +158,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 		Object[][] valuesMatrix = new Object[values.length][];
 		System.arraycopy(values, 0, valuesMatrix, 0, values.length);
 
-		setDataVector(valuesMatrix, new Object[] { lblUserName, lbltime_to_control_min });
+		setDataVector(valuesMatrix, new Object[] { lblUserName, lbltime_to_control_min, lbltime_to_control_max });
 		fireTableDataChanged();
 
 	}
