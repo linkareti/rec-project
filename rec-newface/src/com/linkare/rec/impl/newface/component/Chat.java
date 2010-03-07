@@ -11,6 +11,9 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -18,6 +21,8 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
@@ -57,6 +62,12 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 	private static final String USERMESSAGE_TEMPLATE;
 
 	private static final String MESSAGE_LIST = "messageList";
+	
+	//BORDER
+	private static final Color COLOR_BORDER_SOLID_THIN_BLUE = new Color(0x517DA8);
+
+	public static final Border THIN_BLUE_BORDER = BorderFactory.createCompoundBorder(javax.swing.BorderFactory
+			.createLineBorder(COLOR_BORDER_SOLID_THIN_BLUE), javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
 	static {
 		boolean parsingUserMessageTemplate = false;
@@ -202,8 +213,9 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 			} catch (IOException e) {
 				log.log(Level.SEVERE, "Trying to insert html element", e);
 			}
-
-			msgPane.setCaretPosition(msgList.getEndOffset());
+			//TODO improve the method to scroll to the end of the jEditorPane
+			int editorPaneHeight = (int) msgPane.getBounds().getHeight();
+			msgPane.scrollRectToVisible(new Rectangle(new Point(0, editorPaneHeight + 15)));
 
 		}
 	}
@@ -221,8 +233,8 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 			log.info("mesage: " + msg);
 
 			messageQueue.addEvent(newMessage);
-			//            if( !((UserInfo)comboUsersChat.getSelectedItem()).getUserName().equals(IChatServer.EVERYONE_USER_ALIAS) )
-			//                newChatMessage(newMessage);
+			//			if (!((UserInfo) comboUsersChat.getSelectedItem()).getUserName().equals(IChatServer.EVERYONE_USER_ALIAS))
+			//				newChatMessage(newMessage);
 
 			clearInputMessage();
 		}
@@ -287,6 +299,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
     private void initComponents() {
 
         txtInputMsg = new javax.swing.JTextField();
+        pChatContainer = new javax.swing.JPanel();
         msgScrollPane = new javax.swing.JScrollPane();
         msgPane = new javax.swing.JEditorPane();
 
@@ -303,6 +316,10 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
             }
         });
 
+        pChatContainer.setName("pChatContainer"); // NOI18N
+        pChatContainer.setLayout(new javax.swing.BoxLayout(pChatContainer, javax.swing.BoxLayout.LINE_AXIS));
+		pChatContainer.setBorder(THIN_BLUE_BORDER);
+
         msgScrollPane.setName("msgScrollPane"); // NOI18N
 
         msgPane.setContentType(resourceMap.getString("msgPane.contentType")); // NOI18N
@@ -311,17 +328,19 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
         msgPane.setName("msgPane"); // NOI18N
         msgScrollPane.setViewportView(msgPane);
 
+        pChatContainer.add(msgScrollPane);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(txtInputMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-            .addComponent(msgScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+            .addComponent(pChatContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(msgScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addComponent(pChatContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtInputMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -334,6 +353,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JEditorPane msgPane;
     private javax.swing.JScrollPane msgScrollPane;
+    private javax.swing.JPanel pChatContainer;
     private javax.swing.JTextField txtInputMsg;
     // End of variables declaration//GEN-END:variables
 
