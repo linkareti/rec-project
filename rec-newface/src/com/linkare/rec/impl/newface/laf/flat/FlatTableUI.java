@@ -19,9 +19,12 @@ import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.LookAndFeel;
+import javax.swing.SwingConstants;
 import javax.swing.ViewportLayout;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTableUI;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  * 
@@ -31,12 +34,10 @@ public class FlatTableUI extends BasicTableUI {
 
 	public static final Color SELECTION_ROW_COLOR = new Color(0xF4F3A3);
 	public static final Color EVEN_ROW_COLOR = new Color(0xF6F9F8);
-	private PropertyChangeListener fAncestorPropertyChangeListener = createAncestorPropertyChangeListener();
 	public static final Dimension INTERCELL_SPACING = new Dimension(0, 4);
-	/**
-	 * 
-	 */
 	private static final int INTERCELL_SPACING_HALF_HEIGHT = (int) (INTERCELL_SPACING.getHeight() / 2);
+
+	private final PropertyChangeListener fAncestorPropertyChangeListener = createAncestorPropertyChangeListener();
 
 	public static ComponentUI createUI(JComponent c) {
 		return new FlatTableUI();
@@ -53,11 +54,9 @@ public class FlatTableUI extends BasicTableUI {
 		table.setShowHorizontalLines(false);
 		table.setShowGrid(false);
 		table.setIntercellSpacing(INTERCELL_SPACING);
-
 		table.setOpaque(false);
 
 		table.addPropertyChangeListener("ancestor", fAncestorPropertyChangeListener);
-
 	}
 
 	private PropertyChangeListener createAncestorPropertyChangeListener() {
@@ -80,6 +79,7 @@ public class FlatTableUI extends BasicTableUI {
 			scrollPane.getViewport().setLayout(new BugFixedViewportLayout());
 			LookAndFeel.installProperty(scrollPane, "opaque", Boolean.FALSE);
 		}
+
 	}
 
 	@Override
@@ -105,6 +105,26 @@ public class FlatTableUI extends BasicTableUI {
 
 			topY += rowHeight;
 			currentRow++;
+		}
+
+		TableColumnModel colmodel = table.getColumnModel();
+
+		if (colmodel.getColumnCount() == 3) {
+
+			// Set column widths
+			colmodel.getColumn(0).setPreferredWidth(125);
+			colmodel.getColumn(1).setPreferredWidth(20);
+			colmodel.getColumn(2).setPreferredWidth(20);
+
+			TableColumn namecol1 = colmodel.getColumn(0);
+			TableColumn namecol2 = colmodel.getColumn(1);
+			TableColumn namecol3 = colmodel.getColumn(2);
+
+			FlatTableCellRenderer renderer = new FlatTableCellRenderer();
+			renderer.setHorizontalAlignment(SwingConstants.CENTER);
+			namecol1.setCellRenderer(renderer);
+			namecol2.setCellRenderer(renderer);
+			namecol3.setCellRenderer(renderer);
 		}
 
 		super.paint(g, c);
