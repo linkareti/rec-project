@@ -4,6 +4,8 @@ import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.ReservationFacade;
+import com.linkare.rec.am.model.UserGroup;
+import com.linkare.rec.am.model.UserPrincipal;
 import java.io.Serializable;
 
 import java.util.ResourceBundle;
@@ -29,6 +31,10 @@ public class ReservationController implements Serializable {
     private int selectedItemIndex;
 
     public ReservationController() {
+    }
+
+    public Long getExperimentId() {
+        return getSelected().getExperiment() == null ? -1 : getSelected().getExperiment().getId();
     }
 
     public Reservation getSelected() {
@@ -80,6 +86,13 @@ public class ReservationController implements Serializable {
 
     public String create() {
         try {
+//            UserPrincipal up = new UserPrincipal();
+//            up.setName(""+System.currentTimeMillis());
+//            UserGroup ug = new UserGroup();
+//            ug.setName(""+System.currentTimeMillis());
+//
+//            current.setUserPrincipal(up);
+//            current.setUserGroup(ug);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ReservationCreated"));
             return prepareCreate();

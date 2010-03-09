@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import org.apache.log4j.BasicConfigurator;
 
 /**
  *
@@ -19,10 +18,6 @@ import org.apache.log4j.BasicConfigurator;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
-
-//    static {
-//        BasicConfigurator.configure();
-//    }
 
     // Inject Weld Bean Manager.
     @Inject

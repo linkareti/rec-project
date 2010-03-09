@@ -1,9 +1,10 @@
 package com.linkare.rec.am.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -28,14 +29,15 @@ public class Laboratory extends Resource implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @Column (updatable=false)
     private String name;
     @Basic
     private String description;
     @Embedded
     private State state = new State();
     @Basic
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "laboratory")
-    private List<Experiment> experiments = new ArrayList<Experiment>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "laboratory", cascade=CascadeType.ALL)
+    private List<Experiment> experiments;
 
     /**
      * Get the value of name

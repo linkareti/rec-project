@@ -16,7 +16,6 @@ import org.primefaces.model.ScheduleEvent;
  */
 @Stateless
 public class ReservationFacade {
-
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager em;
 
@@ -65,6 +64,6 @@ public class ReservationFacade {
         .setParameter("start", start)
         .setParameter("end", end)
         .getResultList();
-    }
+}
 
 }

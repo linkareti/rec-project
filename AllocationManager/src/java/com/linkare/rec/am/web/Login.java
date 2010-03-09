@@ -7,7 +7,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.log4j.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,7 +22,7 @@ import org.apache.log4j.Logger;
 @Default
 public class Login implements Authenticator, Serializable {
 
-    static Logger logger = Logger.getLogger(Login.class);
+    static Logger logger = Logger.getLogger("Login");
     @Inject
     Credentials credentials;
     private boolean loggedIn = false;

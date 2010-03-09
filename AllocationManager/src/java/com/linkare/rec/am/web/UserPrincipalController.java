@@ -185,6 +185,7 @@ public class UserPrincipalController implements Serializable {
     @FacesConverter(value="UserPrincipalControllerConverter" ,forClass=UserPrincipal.class)
     public static class UserPrincipalControllerConverter implements Converter {
 
+        @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
@@ -194,25 +195,27 @@ public class UserPrincipalController implements Serializable {
             return controller.ejbFacade.find(getKey(value));
         }
 
-        java.lang.String getKey(String value) {
-            java.lang.String key;
-            key = value;
+        java.lang.Long getKey(String value) {
+            java.lang.Long key;
+            key = Long.valueOf(value);
             return key;
         }
 
-        String getStringKey(java.lang.String value) {
+        String getStringKey(java.lang.Long value) {
             StringBuffer sb = new StringBuffer();
             sb.append(value);
             return sb.toString();
         }
 
+
+        @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
             }
             if (object instanceof UserPrincipal) {
                 UserPrincipal o = (UserPrincipal) object;
-                return getStringKey(o.getName());
+                return getStringKey(o.getId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+UserPrincipalController.class.getName());
             }

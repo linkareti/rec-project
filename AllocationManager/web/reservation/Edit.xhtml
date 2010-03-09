@@ -26,7 +26,7 @@
                         <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditReservationLabel_user}" for="user" />
-                    <h:selectOneMenu id="user" value="#{reservationController.selected.user}" title="#{bundle.EditReservationTitle_user}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_user}">
+                    <h:selectOneMenu id="user" value="#{reservationController.selected.userPrincipal}" title="#{bundle.EditReservationTitle_user}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_user}">
                         <f:selectItems value="#{userPrincipalController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditReservationLabel_experiment}" for="experiment" />

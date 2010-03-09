@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
@@ -45,19 +44,19 @@ public class Reservation implements ScheduleEvent, Serializable {
     @Basic
     private String endTimeSlot;
     @Basic
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable=false)
-    private UserPrincipal user;
+    private UserPrincipal userPrincipal;
     @Basic
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false)
     private Experiment experiment;
     @Basic
     private boolean allDay = false;
     @Basic
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false)
-    private UserGroup group;
+    private UserGroup userGroup;
 
     /**
      * Constructot
@@ -149,17 +148,17 @@ public class Reservation implements ScheduleEvent, Serializable {
     }
 
     /**
-     * @return the user
+     * @return the userPrincipal
      */
-    public UserPrincipal getUser() {
-        return user;
+    public UserPrincipal getUserPrincipal() {
+        return userPrincipal;
     }
 
     /**
-     * @param user the user to set
+     * @param userPrincipal the userPrincipal to set
      */
-    public void setUser(UserPrincipal user) {
-        this.user = user;
+    public void setUserPrincipal(UserPrincipal userPrincipal) {
+        this.userPrincipal = userPrincipal;
     }
 
     /**
@@ -202,8 +201,6 @@ public class Reservation implements ScheduleEvent, Serializable {
     public String getStyleClass() {
         return null;
     }
-
-
 
     /**
      * @return the dataObj
@@ -277,23 +274,21 @@ public class Reservation implements ScheduleEvent, Serializable {
         query.setParameter("start", startDate);
         query.setParameter("end", endDate);
 
-//		query.
-
         return (List<Reservation>) query.getResultList();
 
     }
 
     /**
-     * @return the group
+     * @return the userGroup
      */
-    public UserGroup getGroup() {
-        return group;
+    public UserGroup getUserGroup() {
+        return userGroup;
     }
 
     /**
-     * @param group the group to set
+     * @param userGroup the userGroup to set
      */
-    public void setGroup(UserGroup group) {
-        this.group = group;
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
     }
 }

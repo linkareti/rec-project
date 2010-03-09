@@ -20,7 +20,7 @@
                     <h:outputLabel value="#{bundle.CreateExperimentLabel_description}" for="description" />
                     <h:inputText id="description" value="#{experimentController.selected.description}" title="#{bundle.CreateExperimentTitle_description}" />
                     <h:outputLabel value="#{bundle.CreateExperimentLabel_laboratory}" for="laboratory" />
-                    <h:selectOneMenu id="laboratory"  value="#{experimentController.selected.laboratory}" title="#{bundle.CreateExperimentTitle_laboratory}" >
+                    <h:selectOneMenu id="laboratory"  value="#{experimentController.selected.laboratory}" title="#{bundle.CreateExperimentTitle_laboratory}">
                         <f:selectItems value="#{laboratoryController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateExperimentLabel_stateLabel}" for="stateLabel" />

@@ -2,8 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -25,7 +24,7 @@
                     <h:inputText id="stateHelpMessage" value="#{laboratoryController.selected.state.helpMessage}" title="#{bundle.EditLaboratoryTitle_stateHelpMessage}" />
                     <h:outputLabel value="#{bundle.EditLaboratoryLabel_stateURL}" for="stateURL" />
                     <h:inputText id="stateURL" value="#{laboratoryController.selected.state.url}" title="#{bundle.EditLaboratoryTitle_stateURL}" />
-                    <h:outputLabel value="#{bundle.EditLaboratoryLabel_stateActive}" for="statActive" />
+                    <h:outputLabel value="#{bundle.EditLaboratoryLabel_stateActive}" for="stateActive" />
                     <h:inputText id="stateActive" value="#{laboratoryController.selected.state.active}" title="#{bundle.EditLaboratoryTitle_stateActive}" />
                 </h:panelGrid>
                 <h:commandLink action="#{laboratoryController.update}" value="#{bundle.EditLaboratorySaveLink}"/>

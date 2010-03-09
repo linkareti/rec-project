@@ -182,7 +182,7 @@ public class ExperimentController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass=Experiment.class)
+    @FacesConverter(value="ExperimentControllerConverter", forClass=Experiment.class)
     public static class ExperimentControllerConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {

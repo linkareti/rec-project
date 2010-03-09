@@ -13,9 +13,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
 import javax.faces.event.ActionEvent;
-import javax.faces.model.SelectItem;
 import javax.inject.Inject;
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 
 import org.primefaces.event.ScheduleDateSelectEvent;
 import org.primefaces.event.ScheduleEntrySelectEvent;
@@ -30,7 +29,7 @@ import org.primefaces.model.ScheduleModel;
 @SessionScoped
 public class ScheduleController implements Serializable {
 
-    static Logger logger = Logger.getLogger(ScheduleController.class);
+    static Logger logger = Logger.getLogger("ScheduleController");
     private static ScheduleModel<ScheduleEvent> eventModel;
     private Reservation event = new Reservation();
     @EJB
@@ -135,9 +134,9 @@ public class ScheduleController implements Serializable {
         event.setEndDate(selectEvent.getDate());
         String userName = credentials.getUsername();
 //        String userName = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-        logger.debug(userName);
+        logger.info(userName);
         UserPrincipal user = getEjbUserFacade().find(userName);
-        event.setUser(user);
+        event.setUserPrincipal(user);
     }
 
     /**
@@ -154,13 +153,4 @@ public class ScheduleController implements Serializable {
         return ejbUserFacade;
     }
 
-    public SelectItem[] getTimeDateItemsAvailableSelectOne() {
-        SelectItem[] items = new SelectItem[48];
-        int i = 0;
-        for (SelectItem item : items) {
-            items[i++] = new SelectItem("", "---");
-        }
-        return items;
-
-    }
 }
