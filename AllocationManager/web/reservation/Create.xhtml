@@ -23,7 +23,7 @@
                         <f:selectItems value="#{experimentController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateReservationLabel_user}" for="user" />
-                    <h:selectOneMenu id="user" value="#{reservationController.selected.userPrincipal}" title="#{bundle.CreateReservationTitle_user}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_user}">
+                    <h:selectOneMenu id="user" value="#{reservationController.selected.userPrincipal}" title="#{bundle.CreateReservationTitle_userPrincipal}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_userPrincipal}">
                         <f:selectItems value="#{userPrincipalController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateReservationLabel_group}" for="group" />

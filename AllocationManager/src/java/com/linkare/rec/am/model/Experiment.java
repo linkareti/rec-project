@@ -38,7 +38,7 @@ public class Experiment extends Resource implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Laboratory laboratory;
     @Basic
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "experiment", cascade=CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "experiment")
     @Column(nullable = true)
     private List<Reservation> reservations;
     @Embedded

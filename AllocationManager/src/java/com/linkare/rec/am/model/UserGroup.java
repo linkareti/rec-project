@@ -3,10 +3,7 @@ package com.linkare.rec.am.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -20,10 +17,6 @@ public class UserGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Basic
-    @Column (insertable=true, updatable=true, unique=true, nullable=false)
     private String name;
     @Basic
     @ManyToMany(mappedBy = "groups")
@@ -35,7 +28,7 @@ public class UserGroup implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (name != null ? name.hashCode() : 0);
         return hash;
     }
 
@@ -45,7 +38,7 @@ public class UserGroup implements Serializable {
             return false;
         }
         UserGroup other = (UserGroup) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
             return false;
         }
         return true;
@@ -53,11 +46,7 @@ public class UserGroup implements Serializable {
 
     @Override
     public String toString() {
-        if (name != null && !name.trim().equals("")) {
-                return name;
-        } else {
-            return id.toString();
-        }
+        return name;
     }
 
     public boolean addMember(UserPrincipal user) {
@@ -116,12 +105,5 @@ public class UserGroup implements Serializable {
      */
     public void addReservations(Reservation reservation) {
         this.reservations.add(reservation);
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
     }
 }

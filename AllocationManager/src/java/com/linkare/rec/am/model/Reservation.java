@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
@@ -44,17 +45,17 @@ public class Reservation implements ScheduleEvent, Serializable {
     @Basic
     private String endTimeSlot;
     @Basic
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(nullable=false)
     private UserPrincipal userPrincipal;
     @Basic
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(nullable = false)
     private Experiment experiment;
     @Basic
     private boolean allDay = false;
     @Basic
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(nullable = false)
     private UserGroup userGroup;
 

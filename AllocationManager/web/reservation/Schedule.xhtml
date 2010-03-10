@@ -53,7 +53,7 @@
                                             <f:selectItems value="#{reservationController.timeSlotSelectOne}"/>
                                         </h:selectOneMenu>
                                         <h:outputLabel for="group" value="Group:" />
-                                        <h:selectOneMenu id="group" value="#{scheduleController.event.group}" title="#{bundle.CreateReservationTitle_group}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_group}">
+                                        <h:selectOneMenu id="group" value="#{scheduleController.event.userGroup}" title="#{bundle.CreateReservationTitle_group}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_group}">
                                             <f:selectItems value="#{userGroupController.itemsAvailableSelectOne}"/>
                                         </h:selectOneMenu>
                                         <p:commandButton type="reset" value="Reset" />

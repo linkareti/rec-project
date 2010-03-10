@@ -182,7 +182,7 @@ public class UserGroupController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(value="UserGroupControllerConverter" ,forClass=UserGroup.class)
+    @FacesConverter(forClass=UserGroup.class)
     public static class UserGroupControllerConverter implements Converter {
 
         @Override
@@ -195,13 +195,13 @@ public class UserGroupController implements Serializable {
             return controller.ejbFacade.find(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        java.lang.String getKey(String value) {
+            java.lang.String key;
+            key = value;
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(java.lang.String value) {
             StringBuffer sb = new StringBuffer();
             sb.append(value);
             return sb.toString();
@@ -214,7 +214,7 @@ public class UserGroupController implements Serializable {
             }
             if (object instanceof UserGroup) {
                 UserGroup o = (UserGroup) object;
-                return getStringKey(o.getId());
+                return getStringKey(o.getName());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+UserGroupController.class.getName());
             }

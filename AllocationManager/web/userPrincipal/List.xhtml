@@ -29,13 +29,13 @@
                     <h:column>
                         <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUserPrincipalTitle_groups}"/>
-                            </f:facet>
-                            <h:selectOneMenu value="#{item.userGroups}" readonly="true" converter="UserGroupControllerConverter">
+                        </f:facet>
+                            <h:selectOneMenu value="#{item.userGroups}" readonly="true">
                                 <f:selectItems value="#{item.userGroups}"/>
                             </h:selectOneMenu>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
                             <h:outputText value="&nbsp;"/>
                         </f:facet>
                         <h:commandLink action="#{userPrincipalController.prepareView}" value="#{bundle.ListUserPrincipalViewLink}"/>

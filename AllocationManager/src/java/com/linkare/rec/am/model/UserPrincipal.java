@@ -28,18 +28,14 @@ public class UserPrincipal implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Basic
-    @Column (insertable=true, updatable=true, unique=true, nullable=false)
     private String name;
     @Basic
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation", cascade=CascadeType.ALL)
     private List<Reservation> reservations;
     @JoinTable(name = "USER_GROUP", joinColumns =
-    @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
+    @JoinColumn(name = "USER_ID", referencedColumnName = "NAME"),
     inverseJoinColumns =
-    @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID"))
+    @JoinColumn(name = "GROUP_ID", referencedColumnName = "NAme"))
     @ManyToMany
     private List<UserGroup> userGroups;
 
@@ -82,7 +78,7 @@ public class UserPrincipal implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (name != null ? name.hashCode() : 0);
         return hash;
     }
 
@@ -92,7 +88,7 @@ public class UserPrincipal implements Serializable {
             return false;
         }
         UserPrincipal other = (UserPrincipal) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
             return false;
         }
         return true;
@@ -100,17 +96,6 @@ public class UserPrincipal implements Serializable {
 
     @Override
     public String toString() {
-        if (name != null && !name.trim().equals("")) {
                 return name;
-        } else {
-            return id.toString();
         }
     }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-}
