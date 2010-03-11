@@ -7,8 +7,12 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.awt.Color;
+
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import com.linkare.rec.impl.newface.ReCApplication;
 
@@ -21,6 +25,12 @@ public class ExpHistoryEntryPane extends JPanel {
 	private ExperimentHistoryUINode expHistoryUINode;
 
 	private JComponent parentContainer;
+
+	private static final Color LOCALLY_OWNED_BORDER_COLOR = new Color(252, 246, 140);
+
+	private static final Border LOCALLY_OWNED_BORDER = BorderFactory.createLineBorder(LOCALLY_OWNED_BORDER_COLOR, 3);
+
+	private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder();
 
 	/** Creates new form ExpHistoryEntryPane */
     public ExpHistoryEntryPane() {
@@ -39,6 +49,7 @@ public class ExpHistoryEntryPane extends JPanel {
 		lblImage.setIcon(expHistoryUINode.getApparatusIcon());
 		lblImage.setToolTipText(ReCApplication.getInstance().getContext().getResourceMap(ExpHistoryEntryPane.class).getString(
 				"lblImage.toolTipText", expHistoryUINode.getOwnerUserName()));
+		lblImage.setBorder(expHistoryUINode.isLocallyOwned() ? LOCALLY_OWNED_BORDER : EMPTY_BORDER);
 	}
 
 	/**
@@ -161,7 +172,7 @@ public class ExpHistoryEntryPane extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblLinkConfigMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLinkConfigMouseClicked
-        // TODO add your handling code here:
+		expHistoryUINode.showExperimentHeader();
     }//GEN-LAST:event_lblLinkConfigMouseClicked
 
     private void lblLinkRemoveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLinkRemoveMouseClicked

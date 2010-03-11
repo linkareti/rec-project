@@ -17,7 +17,7 @@ public class FlatTableHeader extends JTableHeader {
 	}
 
 	public FlatTableHeader(TableColumnModel cm) {
-
+		// João: Este construtor não devia invocar o super(cm) ?
 	}
 
 	@Override

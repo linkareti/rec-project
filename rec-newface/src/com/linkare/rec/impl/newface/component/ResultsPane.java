@@ -193,11 +193,15 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 	}
 
 	private void addExperimentDataDisplays(List<ExpDataDisplay> displays) {
+		String firstDisplay = null;
 		for (ExpDataDisplay display : displays) {
 			addExperimentDataDisplay(display);
+			if (firstDisplay == null) {
+				firstDisplay = display.getName();
+			}
 		}
-		// TODO check first
-		showSelectedDisplay("Sensor");
+		// TODO check first display name
+		showSelectedDisplay(firstDisplay);
 	}
 
 	public void clearExperimentResults() {

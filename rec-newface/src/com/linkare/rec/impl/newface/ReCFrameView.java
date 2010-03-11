@@ -17,6 +17,8 @@ import java.awt.event.HierarchyEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,20 +40,24 @@ import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.TaskMonitor;
 
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent;
+import com.linkare.rec.impl.newface.ReCApplication.ExperimentUIData;
 import com.linkare.rec.impl.newface.component.AbstractContentPane;
 import com.linkare.rec.impl.newface.component.ApparatusCombo;
 import com.linkare.rec.impl.newface.component.ApparatusDescriptionPane;
 import com.linkare.rec.impl.newface.component.ApparatusSelectBox;
+import com.linkare.rec.impl.newface.component.ApparatusTabbedHistoryPane;
 import com.linkare.rec.impl.newface.component.ApparatusTabbedPane;
 import com.linkare.rec.impl.newface.component.ApparatusUserList;
 import com.linkare.rec.impl.newface.component.ChatBox;
+import com.linkare.rec.impl.newface.component.DefaultDialog;
 import com.linkare.rec.impl.newface.component.ExperimentActionBar;
+import com.linkare.rec.impl.newface.component.ExperimentHeaderInfoBox;
 import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
-import com.linkare.rec.impl.newface.component.ExperimentHistoryUINode;
 import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.GlassLayer;
 import com.linkare.rec.impl.newface.component.InfoPopup;
@@ -75,6 +81,8 @@ import com.linkare.rec.impl.newface.utils.LAFConnector.SpecialELabProperties;
 public class ReCFrameView extends FrameView implements ReCApplicationListener, ItemListener {
 
 	private static final Logger log = Logger.getLogger(ReCFrameView.class.getName());
+
+	private static final int ONE_SECOND = 1000; // ms
 
 	// For now, application model is unique. So there is no need for abstraction here.
 	private final ReCApplication recApplication = ReCApplication.getApplication();
@@ -136,7 +144,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		//progressCicleTask.setVisible(false);
 
 		// Init timers
-		apparatusLockTimer = new Timer(999, new ActionListener() {
+		apparatusLockTimer = new Timer(ONE_SECOND, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				apparatusLockTimerTick();
@@ -241,6 +249,22 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		return getLayoutContainerPane().getNavigationPane().getApparatusSelectBox();
 	}
 
+	public DefaultDialog<ApparatusTabbedHistoryPane> getNewExperimentHistoryDialogBox(ExperimentUIData experimentUIData) {
+		ApparatusTabbedHistoryPane apparatusTabbedPane = new ApparatusTabbedHistoryPane();
+		// Set description
+		apparatusTabbedPane.getDescriptionPane().setApparatusConfig(experimentUIData.getHistoryUINode().getApparatusConfig());
+		// Set results
+		ResultsPane historyResultsPane = new ResultsPane(apparatusTabbedPane.getResultsActionBar());
+		historyResultsPane.setExperimentResults(experimentUIData.getHistoryUINode(), experimentUIData.getDataModel(), experimentUIData
+				.getDataDisplays());
+		apparatusTabbedPane.getResultsHolderPane().add(historyResultsPane);
+		// Return dialog
+		DefaultDialog<ApparatusTabbedHistoryPane> dialog = new DefaultDialog<ApparatusTabbedHistoryPane>(apparatusTabbedPane);
+		dialog.pack();
+		dialog.setLocationRelativeTo(getFrame());
+		return dialog;
+	}
+
 	public UndecoratedDialog<SimpleLoginBox> getLoginBox() {
 		if (loginBox == null) {
 			SimpleLoginBox simpleLoginBoxPane = new SimpleLoginBox();
@@ -250,7 +274,30 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		}
 		loginBox.getContent().setLoginProgressVisible(false);
 		loginBox.pack();
+		loginBox.setLocationRelativeTo(getFrame());
 		return loginBox;
+	}
+
+	public UndecoratedDialog<ExperimentHeaderInfoBox> getExperimentHeaderInfoBox(String info) {
+		if (experimentInfoBox == null) {
+			ExperimentHeaderInfoBox experimentInfoBoxPane = new ExperimentHeaderInfoBox();
+			experimentInfoBox = new UndecoratedDialog<ExperimentHeaderInfoBox>(experimentInfoBoxPane, getFrame());
+			experimentInfoBox.getContent().addPropertyChangeListener(new PropertyChangeListener() {
+				@Override
+				public void propertyChange(PropertyChangeEvent evt) {
+					if (evt != null) {
+						if (ExperimentHeaderInfoBox.CLOSE_ME == evt.getPropertyName()) {
+							setGlassPaneVisible(false);
+							experimentInfoBox.setVisible(false);
+						}
+					}
+				}
+			});
+		}
+		experimentInfoBox.getContent().setText(info);
+		experimentInfoBox.pack();
+		experimentInfoBox.setLocationRelativeTo(getFrame());
+		return experimentInfoBox;
 	}
 
 	public JDialog getAboutBox() {
@@ -359,9 +406,26 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		case EXPERIMENT_HISTORY_ADDED:
 			addExperimentHistory();
 			break;
+		case SHOW_EXPERIMENT_HISTORY_HEADER_INFO:
+			showExperimentHistoryHeaderInfo((HardwareAcquisitionConfig) evt.getValue());
+			break;
+		case SHOW_EXPERIMENT_HISTORY:
+			showExperimentHistory((ExperimentUIData) evt.getValue());
+			break;
 		case ASK_FOR_VLC:
 			askForVLC();
 			break;
+		}
+	}
+
+	private void showExperimentHistory(ExperimentUIData experimentUIData) {
+		getNewExperimentHistoryDialogBox(experimentUIData).setVisible(true);
+	}
+
+	private void showExperimentHistoryHeaderInfo(HardwareAcquisitionConfig config) {
+		if (config != null) {
+			setGlassPaneVisible(true);
+			getExperimentHeaderInfoBox(config.toString()).setVisible(true);
 		}
 	}
 
@@ -568,12 +632,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		case STATESTARTING:
 			progressCicleTask.start();
 			startingExperiment();
-			//			clearLastExperimentResults();
+			//clearLastExperimentResults();
 			break;
 		case STATESTARTED:
 			startedExperiment();
 			clearLastExperimentResults();
-			showExperimentResults(evt);
+			showExperimentResults((ExperimentUIData) evt.getValue());
 			break;
 		case STATESTOPING:
 			break;
@@ -685,9 +749,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	 * @param evt
 	 */
 	private void lockableApparatus(ApparatusConnectorEvent evt) {
-		millisToLockSuccess = evt.getMillisToLockSuccess();
-
 		apparatusLockInitialTimeMs = TimeUtils.getSystemCurrentTimeMs();
+		millisToLockSuccess = evt.getMillisToLockSuccess();
 
 		getExperimentStatusActionBar().setActionStateText(
 				getStatusActionBarResourceMap().getString("lblActionState.apparatusLockable.text",
@@ -695,7 +758,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 		getExperimentStatusActionBar().setActionStateLabelVisible(true);
 
-		apparatusLockTimer.start();
+		apparatusLockTimer.setInitialDelay(1); // ready, set
+		apparatusLockTimer.start(); // go
 	}
 
 	private void lockApparatus() {
@@ -742,13 +806,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getResultsPane().clearExperimentResults();
 	}
 
-	private void showExperimentResults(ApparatusConnectorEvent evt) {
+	private void showExperimentResults(ExperimentUIData experimentUIData) {
 		getLayoutContainerPane().enableApparatusTabbedPane();
 
-		ExperimentHistoryUINode experimentHistoryUI = (ExperimentHistoryUINode) evt.getValue();
-
-		getResultsPane().setExperimentResults(experimentHistoryUI, recApplication.getExperimentDataModel(),
-				recApplication.getExperimentDataDisplays());
+		getResultsPane().setExperimentResults(experimentUIData.getHistoryUINode(), experimentUIData.getDataModel(),
+				experimentUIData.getDataDisplays());
 
 		getApparatusTabbedPane().setTabIndexEnabled(ApparatusTabbedPane.TAB_RESULTS, true);
 	}
@@ -977,6 +1039,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private JDialog aboutBox;
 	private UndecoratedDialog<SimpleLoginBox> loginBox;
+	private UndecoratedDialog<ExperimentHeaderInfoBox> experimentInfoBox;
 	private final GlassLayer glassPane = new GlassLayer(CatchEvents.NONE);
 
 }

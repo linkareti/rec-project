@@ -19,7 +19,7 @@ import javax.swing.event.ChangeListener;
  * 
  * @author hfernandes
  */
-public class ApparatusTabbedPane extends javax.swing.JPanel implements ChangeListener {
+public class ApparatusTabbedPane extends AbstractContentPane implements ChangeListener {
 
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ApparatusTabbedPane.class.getName());

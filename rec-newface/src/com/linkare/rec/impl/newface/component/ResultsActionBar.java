@@ -34,6 +34,10 @@ public class ResultsActionBar extends javax.swing.JPanel {
 		btnPlayStop.setEnabled(enabled);
 	}
 
+        public void setPlayStopButtonVisible(boolean visible) {
+		btnPlayStop.setVisible(visible);
+	}
+
 	public boolean isPlayStopButtonEnabled() {
 		return btnPlayStop.isEnabled();
 	}

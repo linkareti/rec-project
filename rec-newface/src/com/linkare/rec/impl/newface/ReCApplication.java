@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventObject;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -116,6 +117,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistoryDisplayFactory {
 
 	private static final Logger log = Logger.getLogger(ReCApplication.class.getName());
+
+	private static final Locale PORTUGAL = new Locale("pt", "PT");
 
 	// Handler for application uncaught exceptions
 	// see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4714232
@@ -278,9 +281,11 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	private HardwareAcquisitionConfig userAcquisitionConfig;
 
-	private ExpDataModel experimentDataModel;
+	//	private ExpDataModel experimentDataModel;
+	//
+	//	private List<ExpDataDisplay> experimentDataDisplays;
 
-	private List<ExpDataDisplay> experimentDataDisplays;
+	//	private final ExperimentUIData experimentData;
 
 	private boolean experimentAutoplay = false;
 
@@ -418,13 +423,13 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 		return mediaController;
 	}
 
-	public ExpDataModel getExperimentDataModel() {
-		return experimentDataModel;
-	}
-
-	public List<ExpDataDisplay> getExperimentDataDisplays() {
-		return experimentDataDisplays;
-	}
+	//	public ExpDataModel getExperimentDataModel() {
+	//		return experimentDataModel;
+	//	}
+	//
+	//	public List<ExpDataDisplay> getExperimentDataDisplays() {
+	//		return experimentDataDisplays;
+	//	}
 
 	// -------------------------------------------------------------------------
 	// Application Startup Workflow
@@ -481,6 +486,9 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 		try {
 			// TODO Launch Splash Screen (AppFramework?)
 			log.warning("TODO Launch Splash Screen");
+
+			log.info("Setting default locale " + PORTUGAL);
+			Locale.setDefault(PORTUGAL);
 
 			// Check System Properties Availability
 			checkSystemProperties();
@@ -957,6 +965,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 				apparatusClientBean.getApparatus(), currentApparatusConfig);
 
 		lastExperimentHistory.setLocallyOwned(currentState.matches(APPARATUS_LOCKED));
+		lastExperimentHistory.setOwnerUserName(apparatusClientBean.getUserInfo().getUserName());
 
 		// Add history entry on view
 		fireApplicationEvent(new ReCAppEvent(this, ReCCommand.EXPERIMENT_HISTORY_ADDED));
@@ -964,17 +973,29 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 		if (currentState.matches(APPARATUS_LOCKED)) {
 			this.apparatusStateStartedEvent = evt;
 			setCurrentState(APPARATUS_STARTED);
-			startExperiment(lastExperimentHistory);
+			startNewExperiment(lastExperimentHistory);
 		}
 
 	}
 
+	public void startNewExperiment(ExpHistory expHistory) {
+		ExperimentUIData experimentData = initExperiment(expHistory);
+		// Forward event to the view
+		apparatusStateStartedEvent.setValue("ExperimentUIData", experimentData);
+		fireApparatusStateChanged(STATESTARTED, apparatusStateStartedEvent);
+	}
+
 	@Override
 	public void startExperiment(ExpHistory expHistory) {
-		// Get experiment history
-		log.fine("ExpHistory apparatus id: " + expHistory != null ? expHistory.getApparatusID() : "");
-		ExperimentHistoryUINode experimentHistory = (ExperimentHistoryUINode) expHistory;
+		ExperimentUIData experimentData = initExperiment(expHistory);
+		// Forward event to the view
+		fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SHOW_EXPERIMENT_HISTORY, experimentData));
+	}
 
+	private ExperimentUIData initExperiment(ExpHistory expHistory) {
+		ExperimentHistoryUINode experimentHistory = (ExperimentHistoryUINode) expHistory;
+		ExperimentUIData experimentData = new ExperimentUIData();
+		experimentData.setHistoryUINode(experimentHistory);
 		DisplayFactory factory = null;
 
 		// Was the user smart enough to make is own DisplayFactory?
@@ -1019,17 +1040,19 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			} catch (Exception e) {
 				log.log(Level.SEVERE, "Could not set aquisition config", e);
 			}
-			experimentDataDisplays = factory.getDisplays();
+			experimentData.setDataDisplays(factory.getDisplays());
 		}
 
 		// Couldn't read from xml or from user
-		if (experimentDataDisplays == null) {
+		if (experimentData.getDataDisplays() == null) {
 			try {
-				experimentDataDisplays = new ArrayList<ExpDataDisplay>();
+				ArrayList<ExpDataDisplay> experimentDataDisplays = new ArrayList<ExpDataDisplay>();
 				Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
 				"com.linkare.rec.impl.baseUI.DefaultExperimentDataTable");
-				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class))
+				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class)) {
 					experimentDataDisplays.set(0, (ExpDataDisplay) dataDisplayTemp);
+				}
+				experimentData.setDataDisplays(experimentDataDisplays);
 			} catch (Exception e) {
 				log.log(Level.SEVERE, "Could not instantiate default datatable", e);
 			}
@@ -1044,47 +1067,50 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			// don't print the not found exception please...
 		}
 
-		experimentDataModel = null;
 		if (dataModelLocation != null) {
 			try {
 				Object expDataModelTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
 						dataModelLocation);
 				if (java.beans.Beans.isInstanceOf(expDataModelTemp, ExpDataModel.class)) {
 					log.fine("Instatiating ExpDataModel from " + dataModelLocation);
-					experimentDataModel = (ExpDataModel) expDataModelTemp;
+					experimentData.setDataModel((ExpDataModel) expDataModelTemp);
 				}
 			} catch (Exception e) {
 				log.log(Level.SEVERE, "Could not instantiate datamodel", e);
 			}
 		}
+		DefaultExpDataModel experimentDataModel = null;
 		// if the user didn't defined is data model, then use the default one
-		if (experimentDataModel == null) {
+		if (experimentData.getDataModel() == null) {
 			log.fine("Setting default datamodel - DefaultExpDataModel.");
 			experimentDataModel = new DefaultExpDataModel();
 		}
 
 		try {
-			experimentDataModel.setDpwDataSource(expHistory.getProducerWrapper());
+			experimentDataModel.setDpwDataSource(experimentHistory.getProducerWrapper());
+			experimentData.setDataModel(experimentDataModel);
 		} catch (Exception e) {
 			log.log(Level.SEVERE, "Failed data output connection...", e);
-
-			// TODO statusPanelApparatus Failed data output connection
-			//			statusPanelApparatus
-			//					.setStatus(ReCResourceBundle
-			//							.findStringOrDefault(
-			//									"ReCBaseUI$rec.bui.linkare.rec.status.failedDataoutputConnection",
-			//									"Failed data output connection..."));
-			return;
+			// TODO statusPanelApparatus Failed data output connection - forward view event
 		}
 
-		// Forward event to the view
-		apparatusStateStartedEvent.setValue("ExperimentHistoryUINode", experimentHistory);
-		fireApparatusStateChanged(STATESTARTED, apparatusStateStartedEvent);
+		return experimentData;
 	}
 
 	@Override
 	public void showExperimentHeader(ExpHistory history) {
-		// TODO Auto-generated method stub
+		HardwareAcquisitionConfig config = null;
+		try {
+			config = history.getProducerWrapper().getAcquisitionHeader();
+			// Show info on view
+			if (config != null) {
+				fireApplicationEvent(new ReCAppEvent(this, ReCCommand.SHOW_EXPERIMENT_HISTORY_HEADER_INFO, config));
+			} else {
+				log.severe("Couldn't show Experiment Info... Aquisition Header is null.");
+			}
+		} catch (Exception ignored) {
+			log.log(Level.SEVERE, "Couldn't show Experiment Info...", ignored);
+		}
 	}
 
 	@Override
@@ -1202,6 +1228,44 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	 */
 	public static void main(String[] args) {
 		Application.launch(ReCApplication.class, args);
+	}
+
+	public static class ExperimentUIData {
+
+		private List<ExpDataDisplay> experimentDataDisplays;
+
+		private ExpDataModel experimentDataModel;
+		
+		private ExperimentHistoryUINode experimentHistoryUINode;
+
+		private ExperimentUIData() {
+			super();
+		}
+
+		public List<ExpDataDisplay> getDataDisplays() {
+			return experimentDataDisplays;
+		}
+
+		public ExpDataModel getDataModel() {
+			return experimentDataModel;
+		}
+
+		public void setDataDisplays(List<ExpDataDisplay> experimentDataDisplays) {
+			this.experimentDataDisplays = experimentDataDisplays;
+		}
+
+		public void setDataModel(ExpDataModel experimentDataModel) {
+			this.experimentDataModel = experimentDataModel;
+		}
+
+		public ExperimentHistoryUINode getHistoryUINode() {
+			return experimentHistoryUINode;
+		}
+
+		public void setHistoryUINode(ExperimentHistoryUINode experimentHistoryUINode) {
+			this.experimentHistoryUINode = experimentHistoryUINode;
+		}
+
 	}
 
 }
