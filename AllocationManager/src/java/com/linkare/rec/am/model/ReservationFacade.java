@@ -16,6 +16,7 @@ import org.primefaces.model.ScheduleEvent;
  */
 @Stateless
 public class ReservationFacade {
+
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager em;
 
@@ -60,10 +61,6 @@ public class ReservationFacade {
 
     public List<ScheduleEvent> fetchLazy2(Date start, Date end) {
         return em.createQuery(
-        "SELECT r FROM Reservation r WHERE r.startDate BETWEEN :start AND :end")
-        .setParameter("start", start)
-        .setParameter("end", end)
-        .getResultList();
-}
-
+                "SELECT r FROM Reservation r WHERE r.startDate BETWEEN :start AND :end").setParameter("start", start).setParameter("end", end).getResultList();
+    }
 }

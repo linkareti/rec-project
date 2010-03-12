@@ -18,13 +18,14 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean (name="userGroupController")
+@ManagedBean(name = "userGroupController")
 @SessionScoped
 public class UserGroupController implements Serializable {
 
     private UserGroup current;
     private DataModel items = null;
-    @EJB private com.linkare.rec.am.model.UserGroupFacade ejbFacade;
+    @EJB
+    private com.linkare.rec.am.model.UserGroupFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -54,7 +55,7 @@ public class UserGroupController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -67,7 +68,7 @@ public class UserGroupController implements Serializable {
     }
 
     public String prepareView() {
-        current = (UserGroup)getItems().getRowData();
+        current = (UserGroup) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -90,7 +91,7 @@ public class UserGroupController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (UserGroup)getItems().getRowData();
+        current = (UserGroup) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -107,7 +108,7 @@ public class UserGroupController implements Serializable {
     }
 
     public String destroy() {
-        current = (UserGroup)getItems().getRowData();
+        current = (UserGroup) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();
@@ -140,14 +141,14 @@ public class UserGroupController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count-1;
+            selectedItemIndex = count - 1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -185,12 +186,11 @@ public class UserGroupController implements Serializable {
     @FacesConverter(forClass=UserGroup.class)
     public static class UserGroupControllerConverter implements Converter {
 
-        @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            UserGroupController controller = (UserGroupController)facesContext.getApplication().getELResolver().
+            UserGroupController controller = (UserGroupController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "userGroupController");
             return controller.ejbFacade.find(getKey(value));
         }
@@ -207,7 +207,6 @@ public class UserGroupController implements Serializable {
             return sb.toString();
         }
 
-        @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
@@ -216,10 +215,8 @@ public class UserGroupController implements Serializable {
                 UserGroup o = (UserGroup) object;
                 return getStringKey(o.getName());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+UserGroupController.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + UserGroupController.class.getName());
             }
         }
-
     }
-
 }

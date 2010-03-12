@@ -12,12 +12,41 @@
         </ui:define>
         <ui:define name="body">
             <p:layout fullPage="true">
-                <p:layoutUnit position="west">
+                <p:layoutUnit position="west" style="font-family: Arial, Helvetica, sans-serif;
+                      color: #3a4f54;
+                      background-color: #dfecf1;
+                      font-size: small">
                     <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel for="title" value="Title:" />
+                            <h:inputText id="title" value="#{scheduleController.event.title}" />
+                            <h:outputLabel value="#{bundle.CreateReservationLabel_experiment}" for="experiment" />
+                            <h:selectOneMenu id="experiment" value="#{scheduleController.event.experiment}" title="#{bundle.CreateReservationTitle_experiment}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_experiment}">
+                                <f:selectItems value="#{experimentController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel for="startDate" value="Start Date:" />
+                            <p:inputMask id="startDate" value="#{scheduleController.event.startDate}" mask="99/99/9999">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </p:inputMask>
+                            <h:outputLabel for="startTimeSlot" value="Start Time:" />
+                            <h:selectOneMenu id="startTimeSlot" value="#{scheduleController.event.startTimeSlot}" title="#{bundle.EditReservationTitle_startTimeSlot}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_startTimeSlot}">
+                                <f:selectItems value="#{reservationController.timeSlotSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel for="group" value="Group:" />
+                            <h:selectOneMenu id="group" value="#{scheduleController.event.userGroup}" title="#{bundle.CreateReservationTitle_group}" required="true" requiredMessage="#{bundle.CreateReservationRequiredMessage_group}">
+                                <f:selectItems value="#{userGroupController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <p:commandButton type="reset" value="Reset" />
+                            <p:commandButton value="Remove" actionListener="#{scheduleController.removeEvent}" oncomplete="myschedule.update();" />
+                            <p:commandButton value="Save" actionListener="#{scheduleController.saveEvent}" oncomplete="myschedule.update();" />
+                        </h:panelGrid>
                         <h:commandLink value="#{bundle.CreateReservationIndexLink}" action="/index" immediate="true" />
                     </h:form>
                 </p:layoutUnit>
-                <p:layoutUnit position="center">
+                <p:layoutUnit position="center" style="font-family: Arial, Helvetica, sans-serif;
+                      color: #3a4f54;
+                      background-color: #dfecf1;
+                      font-size: small">
                     <h:panelGroup layout="block" style="width: 100%;height: 100%">
                         <h:form prependId="false" style="font-family: Arial, Helvetica, sans-serif;
                                 color: #3a4f54;
@@ -33,7 +62,7 @@
                                     <h:outputText value="" />
                                 </f:facet>
                             </p:ajaxStatus>
-                            <p:schedule value="#{scheduleController.eventModel}" editable="true" locale="en" widgetVar="myschedule"
+                            <p:schedule value="#{scheduleController.eventModel}" editable="true" widgetVar="myschedule"
                                         eventSelectListener="#{scheduleController.onEventSelect}"
                                         dateSelectListener="#{scheduleController.onDateSelect}" draggable="false">
                                 <p:scheduleEventDialog header="Event Details">

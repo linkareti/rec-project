@@ -1,18 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.linkare.rec.am.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -30,27 +24,27 @@ public class UserPrincipal implements Serializable {
     @Id
     private String name;
     @Basic
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation", cascade=CascadeType.ALL)
-    private List<Reservation> reservations;
-    @JoinTable(name = "USER_GROUP", joinColumns =
-    @JoinColumn(name = "USER_ID", referencedColumnName = "NAME"),
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
+    private List<Reservation> reservations = new ArrayList<Reservation>();
+    @JoinTable(name = "USERP_USERG", joinColumns =
+    @JoinColumn(name = "USERP_ID", referencedColumnName = "NAME"),
     inverseJoinColumns =
-    @JoinColumn(name = "GROUP_ID", referencedColumnName = "NAme"))
-    @ManyToMany
-    private List<UserGroup> userGroups;
+    @JoinColumn(name = "USERG_ID", referencedColumnName = "NAME"))
+    @ManyToMany (cascade=CascadeType.ALL)
+    private List<UserGroup> groups = new ArrayList<UserGroup>();
 
     /**
-     * @return the userGroups
+     * @return the groups
      */
-    public List<UserGroup> getUserGroups() {
-        return userGroups;
+    public List<UserGroup> getGroups() {
+        return groups;
     }
 
     /**
-     * @param userGroups the userGroups to set
+     * @param groups the groups to set
      */
-    public void setUserGroups(List<UserGroup> userGroups) {
-        this.userGroups = userGroups;
+    public void setGroups(List<UserGroup> groups) {
+        this.groups = groups;
     }
 
     public String getName() {
@@ -97,5 +91,5 @@ public class UserPrincipal implements Serializable {
     @Override
     public String toString() {
                 return name;
-        }
     }
+}

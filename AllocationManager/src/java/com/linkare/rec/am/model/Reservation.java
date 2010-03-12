@@ -45,17 +45,17 @@ public class Reservation implements ScheduleEvent, Serializable {
     @Basic
     private String endTimeSlot;
     @Basic
-    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(nullable=false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false)
     private UserPrincipal userPrincipal;
     @Basic
-    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     private Experiment experiment;
     @Basic
     private boolean allDay = false;
     @Basic
-    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     private UserGroup userGroup;
 

@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.linkare.rec.am.model;
 
 import java.util.List;
@@ -19,6 +14,7 @@ import javax.persistence.criteria.Root;
  */
 @Stateless
 public class LaboratoryFacade {
+
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager em;
 
@@ -60,5 +56,4 @@ public class LaboratoryFacade {
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-
 }

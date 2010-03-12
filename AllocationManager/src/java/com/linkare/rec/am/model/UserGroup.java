@@ -3,6 +3,7 @@ package com.linkare.rec.am.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -19,10 +20,10 @@ public class UserGroup implements Serializable {
     @Id
     private String name;
     @Basic
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups", cascade=CascadeType.ALL)
     private List<UserPrincipal> members;
     @Basic
-    @OneToMany(mappedBy = "userGroup")
+    @OneToMany(mappedBy = "userGroup", cascade=CascadeType.ALL)
     private List<Reservation> reservations;
 
     @Override

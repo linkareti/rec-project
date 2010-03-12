@@ -30,7 +30,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUserGroupTitle_members}"/>
                             </f:facet>
-                            <h:selectOneMenu value="#{item.members}" readonly="true">
+                            <h:selectOneMenu value="#{item.members}" readonly="true" converter="UserPrincipalControllerConverter">
                                 <f:selectItems value="#{item.members}"/>
                             </h:selectOneMenu>
                         </h:column>

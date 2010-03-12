@@ -18,7 +18,7 @@
                     <h:outputLabel value="#{bundle.CreateUserPrincipalLabel_name}" for="name" />
                     <h:inputText id="name" value="#{userPrincipalController.selected.name}" title="#{bundle.CreateUserPrincipalTitle_name}" />
                     <h:outputLabel value="#{bundle.CreateUserPrincipalLabel_groups}" for="groups" />
-                    <h:selectManyListbox id="groups" value="#{userPrincipalController.selected.userGroups}">
+                    <h:selectManyListbox id="groups" value="#{userPrincipalController.selected.groups}" converter="UserGroupControllerConverter">
                         <f:selectItems
                             value="#{userGroupController.itemsAvailableSelectMany}"/>
                     </h:selectManyListbox>

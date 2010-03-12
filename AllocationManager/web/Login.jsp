@@ -1,5 +1,5 @@
 
-<html>
+<html xmlns:p="http://primefaces.prime.com.tr/ui">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>AllocationManager - Login</title>
@@ -26,6 +26,10 @@
                         <tr>
                             <td align="left">Password:</td>
                             <td align="left" colspan="2"><input type="password" name="txtPassword" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                            </td>
                         </tr>
                         <tr>
                             <td></td>

@@ -185,7 +185,6 @@ public class UserPrincipalController implements Serializable {
     @FacesConverter(forClass=UserPrincipal.class)
     public static class UserPrincipalControllerConverter implements Converter {
 
-        @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
@@ -207,7 +206,6 @@ public class UserPrincipalController implements Serializable {
             return sb.toString();
         }
 
-        @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;

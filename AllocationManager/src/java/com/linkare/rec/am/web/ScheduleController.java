@@ -6,6 +6,7 @@ import com.linkare.rec.am.model.UserPrincipal;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.ejb.EJB;
@@ -15,6 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.ScheduleDateSelectEvent;
 import org.primefaces.event.ScheduleEntrySelectEvent;
@@ -35,7 +37,7 @@ public class ScheduleController implements Serializable {
     @EJB
     private com.linkare.rec.am.model.ReservationFacade ejbFacade;
     @EJB
-    private com.linkare.rec.am.model.UserFacade ejbUserFacade;
+    private com.linkare.rec.am.model.UserPrincipalFacade ejbUserPrincipalFacade;
     // Inject The Credentials Weld bean.
     @Inject
     Credentials credentials;
@@ -132,10 +134,10 @@ public class ScheduleController implements Serializable {
         event = new Reservation();
         event.setStartDate(selectEvent.getDate());
         event.setEndDate(selectEvent.getDate());
-        String userName = credentials.getUsername();
-//        String userName = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        String userName1 = credentials.getUsername();
+        String userName = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         logger.info(userName);
-        UserPrincipal user = getEjbUserFacade().find(userName);
+        UserPrincipal user = getEjbUserPrincipalFacade().find(userName);
         event.setUserPrincipal(user);
     }
 
@@ -149,8 +151,8 @@ public class ScheduleController implements Serializable {
     /**
      * @return the ejbUserFacade
      */
-    public com.linkare.rec.am.model.UserFacade getEjbUserFacade() {
-        return ejbUserFacade;
+    public com.linkare.rec.am.model.UserPrincipalFacade getEjbUserPrincipalFacade() {
+        return ejbUserPrincipalFacade;
     }
 
 }

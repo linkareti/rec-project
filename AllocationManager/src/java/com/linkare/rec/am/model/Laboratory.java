@@ -35,7 +35,7 @@ public class Laboratory extends Resource implements Serializable {
     private State state = new State();
     @Basic
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "laboratory")
-    private List<Experiment> experiments  = new ArrayList<Experiment>();
+    private List<Experiment> experiments = new ArrayList<Experiment>();
 
     /**
      * Get the value of name
@@ -140,7 +140,6 @@ public class Laboratory extends Resource implements Serializable {
 //    public static Experiment findExperiments(String laboratory, EntityManager em) {
 //        return (Experiment) em.createNamedQuery("findExperiments").setParameter("name", laboratory).getResultList().get(0);
 //    }
-
     public static Experiment findExperiment(String laboratory, String experiment, EntityManager em) {
 
         Experiment result = null;
