@@ -7,7 +7,7 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import java.awt.Component;
+import java.awt.Window;
 
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
@@ -28,15 +28,15 @@ public class DefaultDialog<C extends AbstractContentPane> extends JDialog {
 
 	protected C content;
 
-	protected Component container;
+	//protected Component container;
 
 	public DefaultDialog(C content) {
-		this(content, null);
+		this(null, "", content);
 	}
 
-	public DefaultDialog(C content, Component container) {
-		super();
-		this.container = container;
+	public DefaultDialog(Window owner, String title, C content) {
+		super(owner, title);
+		//this.container = container;
 		this.content = content;
 		this.content.setContainer(this);
 		add(content);
@@ -55,7 +55,7 @@ public class DefaultDialog<C extends AbstractContentPane> extends JDialog {
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		pack();
 		setModal(true);
-		setLocationRelativeTo(container);
+		//setLocationRelativeTo(container);
 	}
 
 }

@@ -7,7 +7,7 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import java.awt.Component;
+import java.awt.Window;
 
 /**
  * An Undecorated Dialog for the ReC Application.
@@ -22,15 +22,15 @@ public class UndecoratedDialog<C extends AbstractContentPane> extends DefaultDia
 
 	private static final long serialVersionUID = -605288573925533710L;
 
-	/**
-	 * @param content
-	 */
-	public UndecoratedDialog(C content) {
-		this(content, null);
-	}
+	//	/**
+	//	 * @param content
+	//	 */
+	//	public UndecoratedDialog(C content) {
+	//		this(content, null);
+	//	}
 
-	public UndecoratedDialog(C content, Component container) {
-		super(content, container);
+	public UndecoratedDialog(Window owner, C content) {
+		super(owner, "", content);
 	}
 
 	@Override

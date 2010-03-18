@@ -11,6 +11,7 @@ import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State
 import static com.linkare.rec.impl.newface.component.ExperimentActionLabel.State.YELLOW;
 
 import java.awt.Dimension;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.HierarchyEvent;
@@ -20,6 +21,7 @@ import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -66,6 +68,7 @@ import com.linkare.rec.impl.newface.component.ResultsPane;
 import com.linkare.rec.impl.newface.component.SimpleLoginBox;
 import com.linkare.rec.impl.newface.component.StatusActionBar;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
+import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
 import com.linkare.rec.impl.newface.component.VideoBox;
 import com.linkare.rec.impl.newface.component.GlassLayer.CatchEvents;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
@@ -83,6 +86,18 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private static final Logger log = Logger.getLogger(ReCFrameView.class.getName());
 
 	private static final int ONE_SECOND = 1000; // ms
+
+	// Handler for application uncaught exceptions
+	// see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4714232
+	static {
+		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+			@Override
+			public void uncaughtException(Thread thread, Throwable t) {
+				log.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
+				getUnexpectedErrorBox(t).setVisible(true);
+			}
+		});
+	}
 
 	// For now, application model is unique. So there is no need for abstraction here.
 	private final ReCApplication recApplication = ReCApplication.getApplication();
@@ -249,6 +264,21 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		return getLayoutContainerPane().getNavigationPane().getApparatusSelectBox();
 	}
 
+	/**
+	 * @param cause
+	 *            The unexpected error cause
+	 * @return The <code>NewUnexpectedErrorPane</code>
+	 */
+	public static DefaultDialog<UnexpectedErrorPane> getUnexpectedErrorBox(Throwable cause) {
+		if (unexpectedErrorBox == null) {
+			unexpectedErrorBox = new DefaultDialog<UnexpectedErrorPane>(new UnexpectedErrorPane(cause));
+			unexpectedErrorBox.setLocationRelativeTo(null);
+		}
+		unexpectedErrorBox.getContent().setErrorCause(cause);
+		unexpectedErrorBox.pack();
+		return unexpectedErrorBox;
+	}
+
 	public DefaultDialog<ApparatusTabbedHistoryPane> getNewExperimentHistoryDialogBox(ExperimentUIData experimentUIData) {
 		ApparatusTabbedHistoryPane apparatusTabbedPane = new ApparatusTabbedHistoryPane();
 		// Set description
@@ -259,9 +289,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 				.getDataDisplays());
 		apparatusTabbedPane.getResultsHolderPane().add(historyResultsPane);
 		// Return dialog
-		DefaultDialog<ApparatusTabbedHistoryPane> dialog = new DefaultDialog<ApparatusTabbedHistoryPane>(apparatusTabbedPane);
+		DefaultDialog<ApparatusTabbedHistoryPane> dialog = new DefaultDialog<ApparatusTabbedHistoryPane>(getFrame(), experimentUIData
+				.getHistoryUINode().getApparatusName(), apparatusTabbedPane);
 		dialog.pack();
 		dialog.setLocationRelativeTo(getFrame());
+		dialog.setModalityType(ModalityType.MODELESS);
 		return dialog;
 	}
 
@@ -270,7 +302,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			SimpleLoginBox simpleLoginBoxPane = new SimpleLoginBox();
 			simpleLoginBoxPane.setIdleIcon(idleIcon);
 			simpleLoginBoxPane.setBusyIcons(busyIcons);
-			loginBox = new UndecoratedDialog<SimpleLoginBox>(simpleLoginBoxPane, getFrame());
+			loginBox = new UndecoratedDialog<SimpleLoginBox>(getFrame(), simpleLoginBoxPane);
 		}
 		loginBox.getContent().setLoginProgressVisible(false);
 		loginBox.pack();
@@ -281,7 +313,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	public UndecoratedDialog<ExperimentHeaderInfoBox> getExperimentHeaderInfoBox(String info) {
 		if (experimentInfoBox == null) {
 			ExperimentHeaderInfoBox experimentInfoBoxPane = new ExperimentHeaderInfoBox();
-			experimentInfoBox = new UndecoratedDialog<ExperimentHeaderInfoBox>(experimentInfoBoxPane, getFrame());
+			experimentInfoBox = new UndecoratedDialog<ExperimentHeaderInfoBox>(getFrame(), experimentInfoBoxPane);
 			experimentInfoBox.getContent().addPropertyChangeListener(new PropertyChangeListener() {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
@@ -1040,6 +1072,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private JDialog aboutBox;
 	private UndecoratedDialog<SimpleLoginBox> loginBox;
 	private UndecoratedDialog<ExperimentHeaderInfoBox> experimentInfoBox;
+	private static DefaultDialog<UnexpectedErrorPane> unexpectedErrorBox;
 	private final GlassLayer glassPane = new GlassLayer(CatchEvents.NONE);
 
 }

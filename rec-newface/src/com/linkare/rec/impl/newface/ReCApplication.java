@@ -42,7 +42,6 @@ import java.awt.Component;
 import java.awt.Window;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventObject;
@@ -89,9 +88,7 @@ import com.linkare.rec.impl.exceptions.ReCConfigurationException;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.ReCAppEvent.ReCCommand;
 import com.linkare.rec.impl.newface.component.ApparatusComboBoxModel;
-import com.linkare.rec.impl.newface.component.DefaultDialog;
 import com.linkare.rec.impl.newface.component.ExperimentHistoryUINode;
-import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
 import com.linkare.rec.impl.newface.component.media.MediaSetup;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
@@ -119,18 +116,6 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	private static final Logger log = Logger.getLogger(ReCApplication.class.getName());
 
 	private static final Locale PORTUGAL = new Locale("pt", "PT");
-
-	// Handler for application uncaught exceptions
-	// see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4714232
-	static {
-		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
-			@Override
-			public void uncaughtException(Thread thread, Throwable t) {
-				log.log(Level.SEVERE, "An uncaught exception occurred in thread " + thread, t);
-				getUnexpectedErrorBox(t).setVisible(true);
-			}
-		});
-	}
 
 	/**
 	 * Sets the video output for this application controller.
@@ -245,9 +230,6 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	/** ResourceMap shortcut */
 	private ResourceMap resourceMap;
 
-	/** Holds the application shared UnexpectedErrorBox Dialog */
-	private static DefaultDialog<UnexpectedErrorPane> unexpectedErrorBox;
-
 	/** Holds the listeners to the ReC Application underlying model changes */
 	private List<ReCApplicationListener> appListeners;
 
@@ -305,21 +287,6 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	public ApparatusClientBean getApparatusClientBean() {
 		return apparatusClientBean;
-	}
-
-	/**
-	 * @param cause
-	 *            The unexpected error cause
-	 * @return The <code>NewUnexpectedErrorPane</code>
-	 */
-	public static DefaultDialog<UnexpectedErrorPane> getUnexpectedErrorBox(Throwable cause) {
-		if (unexpectedErrorBox == null) {
-			unexpectedErrorBox = new DefaultDialog<UnexpectedErrorPane>(new UnexpectedErrorPane(cause));
-			unexpectedErrorBox.setLocationRelativeTo(null);
-		}
-		unexpectedErrorBox.getContent().setErrorCause(cause);
-		unexpectedErrorBox.pack();
-		return unexpectedErrorBox;
 	}
 
 	public BasicService getBasicService() throws UnavailableServiceException {
@@ -541,7 +508,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 		} catch (Exception e) {
 			log.log(Level.SEVERE, "Some error occured.", e);
-			show(getUnexpectedErrorBox(e));
+			//show(getUnexpectedErrorBox(e));
 			System.exit(ExceptionCode.THE_FAMOUS_UNKNOWN_ERROR.getId());
 		}
 
