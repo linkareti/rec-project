@@ -18,9 +18,7 @@
                     <h:outputText value="#{bundle.ViewUserPrincipalLabel_name}"/>
                     <h:outputText value="#{userPrincipalController.selected.name}" title="#{bundle.ViewUserPrincipalTitle_name}"/>
                     <h:outputLabel value="#{bundle.ViewUserPrincipalLabel_groups}" for="groups" />
-                    <h:selectManyListbox id="groups" value="#{userPrincipalController.selected.groups}" disabled="true">
-                        <f:selectItems value="#{userGroupController.itemsAvailableSelectMany}"/>
-                    </h:selectManyListbox>
+                    <h:selectManyListbox id="groups" value="#{userPrincipalController.selected.groups}" disabled="true" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{userPrincipalController.destroyAndView}" value="#{bundle.ViewUserPrincipalDestroyLink}"/>
@@ -33,7 +31,7 @@
                 <h:commandLink action="#{userPrincipalController.prepareList}" value="#{bundle.ViewUserPrincipalShowAllLink}"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/protected/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.ViewUserPrincipalIndexLink}" action="/index" immediate="true" />

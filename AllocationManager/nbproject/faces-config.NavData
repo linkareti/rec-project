@@ -2,33 +2,34 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
-        <Node id="reservation/View.xhtml" x="400" y="750" zoom="true"/>
         <Node id="template.xhtml" x="650" y="300" zoom="true"/>
-        <Node id="userGroup/Edit.xhtml" x="150" y="900" zoom="true"/>
-        <Node id="experiment/List.xhtml" x="150" y="600" zoom="true"/>
-        <Node id="experiment/Create.xhtml" x="150" y="150" zoom="true"/>
-        <Node id="laboratory/Create.xhtml" x="1150" y="450" zoom="true"/>
-        <Node id="userPrincipal/List.xhtml" x="1650" y="150" zoom="true"/>
-        <Node id="userPrincipal/Edit.xhtml" x="650" y="750" zoom="true"/>
-        <Node id="backoffice.xhtml" x="400" y="600" zoom="true"/>
-        <Node id="experiment/Edit.xhtml" x="400" y="150" zoom="true"/>
-        <Node id="userGroup/Create.xhtml" x="150" y="450" zoom="true"/>
-        <Node id="experiment/View.xhtml" x="900" y="300" zoom="true"/>
-        <Node id="Login.jsp" x="1400" y="300" zoom="true"/>
-        <Node id="userPrincipal/View.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="protected/experiment/View.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="protected/reservation/List.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="protected/reservation/Edit.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="protected/userPrincipal/View.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="protected/userGroup/View.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="protected/backoffice.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="protected/userGroup/Edit.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="protected/laboratory/Edit.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="Login.jsp" x="508" y="375" zoom="true"/>
+        <Node id="protected/userPrincipal/Create.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="protected/laboratory/View.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="protected/experiment/List.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="protected/reservation/Create.xhtml" x="650" y="600" zoom="true"/>
         <Node id="AccessDenied.jsp" x="150" y="750" zoom="true"/>
-        <Node id="laboratory/View.xhtml" x="1150" y="150" zoom="true"/>
-        <Node id="reservation/List.xhtml" x="650" y="150" zoom="true"/>
-        <Node id="userPrincipal/Create.xhtml" x="1150" y="300" zoom="true"/>
-        <Node id="userGroup/View.xhtml" x="900" y="600" zoom="true"/>
-        <Node id="reservation/Schedule.xhtml" x="650" y="450" zoom="true"/>
-        <Node id="laboratory/Edit.xhtml" x="650" y="600" zoom="true"/>
-        <Node id="reservation/Edit.xhtml" x="400" y="450" zoom="true"/>
-        <Node id="userGroup/List.xhtml" x="400" y="900" zoom="true"/>
-        <Node id="index.xhtml" x="400" y="300" zoom="true"/>
-        <Node id="reservation/Create.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="protected/experiment/Create.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="protected/userPrincipal/Edit.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="protected/userGroup/List.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="timeout.jsp" x="650" y="750" zoom="true"/>
+        <Node id="protected/reservation/Schedule.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="protected/userPrincipal/List.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="protected/userGroup/Create.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="protected/reservation/View.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="index.xhtml" x="428" y="300" zoom="true"/>
+        <Node id="protected/experiment/Edit.xhtml" x="150" y="900" zoom="true"/>
         <Node id="LoginError.jsp" x="1400" y="150" zoom="true"/>
-        <Node id="laboratory/List.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="protected/laboratory/Create.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="protected/laboratory/List.xhtml" x="400" y="900" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

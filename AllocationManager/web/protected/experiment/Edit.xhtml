@@ -32,7 +32,7 @@
                     <h:outputLabel value="#{bundle.EditExperimentLabel_stateURL}" for="stateURL" />
                     <h:inputText id="stateURL" value="#{experimentController.selected.state.url}" title="#{bundle.EditExperimentTitle_stateURL}" />
                     <h:outputLabel value="#{bundle.EditExperimentLabel_stateActive}" for="stateActive" />
-                    <h:inputText id="stateActive" value="#{experimentController.selected.state.active}" title="#{bundle.EditExperimentTitle_stateActive}" />
+                    <h:selectBooleanCheckbox id="stateActive" value="#{experimentController.selected.state.active}" title="#{bundle.EditExperimentTitle_stateActive}" />
                 </h:panelGrid>
                 <h:commandLink action="#{experimentController.update}" value="#{bundle.EditExperimentSaveLink}"/>
                 <br />
@@ -42,7 +42,7 @@
                 <h:commandLink action="#{experimentController.prepareList}" value="#{bundle.EditExperimentShowAllLink}" immediate="true"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/protected/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.EditExperimentIndexLink}" action="/index" immediate="true" />

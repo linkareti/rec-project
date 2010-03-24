@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -19,7 +19,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @ManagedBean (name="laboratoryController")
-@SessionScoped
+@RequestScoped
 public class LaboratoryController implements Serializable {
 
     private Laboratory current;

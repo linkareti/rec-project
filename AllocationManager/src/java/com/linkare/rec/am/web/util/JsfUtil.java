@@ -2,11 +2,21 @@
 package com.linkare.rec.am.web.util;
 
 import java.util.List;
+import javax.faces.FactoryFinder;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.FacesContextFactory;
 import javax.faces.convert.Converter;
+import javax.faces.lifecycle.Lifecycle;
+import javax.faces.lifecycle.LifecycleFactory;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class JsfUtil {
     
@@ -80,5 +90,63 @@ public class JsfUtil {
         return items;
 
     }
+
+
+    public static Object getSessionMapValue(String key) {
+        return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(key);
+    }
+
+    public static void setSessionMapValue(String key, Object value) {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(key, value);
+    }
+
+
+    public static FacesContext getFacesContext(HttpServletRequest request, HttpServletResponse response) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (facesContext == null) {
+
+            FacesContextFactory contextFactory = (FacesContextFactory) FactoryFinder.getFactory(FactoryFinder.FACES_CONTEXT_FACTORY);
+            LifecycleFactory lifecycleFactory = (LifecycleFactory) FactoryFinder.getFactory(FactoryFinder.LIFECYCLE_FACTORY);
+            Lifecycle lifecycle = lifecycleFactory.getLifecycle(LifecycleFactory.DEFAULT_LIFECYCLE);
+
+            facesContext = contextFactory.getFacesContext(request.getSession().getServletContext(), request, response, lifecycle);
+
+            // Set using our inner class
+            InnerFacesContext.setFacesContextAsCurrentInstance(facesContext);
+
+            // set a new viewRoot, otherwise context.getViewRoot returns null
+            UIViewRoot view = facesContext.getApplication().getViewHandler().createView(facesContext, "");
+            facesContext.setViewRoot(view);
+        }
+        return facesContext;
+    }
+
+    protected Application getApplication(FacesContext facesContext) {
+        return facesContext.getApplication();
+    }
+
+    public Object getManagedBean(String beanName, FacesContext facesContext) {
+        Object obj1 = getApplication(facesContext).getELResolver().getValue(facesContext.getELContext(), null, beanName);
+        Object obj2 = getApplication(facesContext).getVariableResolver().resolveVariable(facesContext, beanName);
+        return obj2;
+    }
+
+    public static HttpSession getSession() {
+      ExternalContext extCon = FacesContext.getCurrentInstance().getExternalContext();
+      HttpSession session = (HttpSession) extCon.getSession(true);
+      return session;
+   }
+
+
+    // You need an inner class to be able to call FacesContext.setCurrentInstance
+    // since it's a protected method
+    private abstract static class InnerFacesContext extends FacesContext {
+
+        protected static void setFacesContextAsCurrentInstance(FacesContext facesContext) {
+            FacesContext.setCurrentInstance(facesContext);
+        }
+    }
+
+
     
 }

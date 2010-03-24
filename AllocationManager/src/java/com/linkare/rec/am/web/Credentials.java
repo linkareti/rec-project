@@ -7,7 +7,7 @@ package com.linkare.rec.am.web;
 
 import java.io.Serializable;
 import java.security.Principal;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -20,21 +20,12 @@ import javax.inject.Named;
  * and password entry values.
  */
 @Named
-@SessionScoped
+@RequestScoped
 @Default
 public class Credentials implements Serializable {
 
     private String username = null;
     private String password = null;
-
-    /**
-     * @return the User Principal
-     */
-    public Principal getUser() {
-            return FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
-    }
-
-
 
     /**
      * @return the username

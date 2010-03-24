@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,37 +24,44 @@ import org.primefaces.model.ScheduleEvent;
 @Entity
 @Table(name = "RESERVATION")
 @NamedQuery(name = "findReservationsBetweenDatesForLaboratory", query = "SELECT reserved FROM Reservation reserved WHERE reserved.startDate >=:start AND reserved.endDate <=:end and reserved.experiment in(SELECT experiment FROM Laboratory lab, Experiment experiment WHERE lab.name=:namelab and experiment.laboratory=lab)")
-public class Reservation implements ScheduleEvent, Serializable {
+public class Reservation extends Resource implements ScheduleEvent, Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+
     @Basic
     private String title;
+
     @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date startDate;
+
     @Basic
     private String startTimeSlot;
+
     @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date endDate;
+
     @Basic
     private String endTimeSlot;
-    @Basic
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
     @JoinColumn(nullable = false)
+    @ManyToOne
     private UserPrincipal userPrincipal;
-    @Basic
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
     @JoinColumn(nullable = false)
+    @ManyToOne
     private Experiment experiment;
+
     @Basic
     private boolean allDay = false;
-    @Basic
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
     @JoinColumn(nullable = false)
+    @ManyToOne
     private UserGroup userGroup;
 
     /**

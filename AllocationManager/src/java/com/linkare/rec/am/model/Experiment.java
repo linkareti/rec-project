@@ -1,10 +1,10 @@
 package com.linkare.rec.am.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,20 +28,24 @@ import javax.persistence.Table;
 public class Experiment extends Resource implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Basic
     private String name;
+
     @Basic
     private String description;
-    @Basic
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+    @JoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
     private Laboratory laboratory;
-    @Basic
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "experiment")
-    @Column(nullable = true)
-    private List<Reservation> reservations;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "experiment")
+    private List<Reservation> reservations = new ArrayList<Reservation>();
+
     @Embedded
     private State state = new State();
 

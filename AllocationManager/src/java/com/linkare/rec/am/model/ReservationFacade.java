@@ -2,6 +2,7 @@ package com.linkare.rec.am.model;
 
 import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +20,9 @@ public class ReservationFacade {
 
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager em;
+
+    @EJB
+    private UserPrincipalFacade userFacade;
 
     public void create(Reservation reservation) {
         em.persist(reservation);
@@ -59,8 +63,12 @@ public class ReservationFacade {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    public List<ScheduleEvent> fetchLazy2(Date start, Date end) {
-        return em.createQuery(
-                "SELECT r FROM Reservation r WHERE r.startDate BETWEEN :start AND :end").setParameter("start", start).setParameter("end", end).getResultList();
+    public List<ScheduleEvent> fetchLazy(Date start, Date end, UserPrincipal user) {
+        List<ScheduleEvent> eventList = em.createQuery(
+                "SELECT r FROM Reservation r "
+                + "WHERE r.userPrincipal=:user "
+                + "AND r.startDate BETWEEN :start AND :end").setParameter("user", user).setParameter("start", start).setParameter("end", end).getResultList();
+
+        return eventList;
     }
 }

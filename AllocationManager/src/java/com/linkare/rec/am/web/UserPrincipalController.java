@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -19,7 +19,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @ManagedBean (name="userPrincipalController")
-@SessionScoped
+@RequestScoped
 public class UserPrincipalController implements Serializable {
 
     private UserPrincipal current;
@@ -39,7 +39,7 @@ public class UserPrincipalController implements Serializable {
         return current;
     }
 
-    private UserPrincipalFacade getFacade() {
+    protected UserPrincipalFacade getFacade() {
         return ejbFacade;
     }
 
@@ -185,6 +185,7 @@ public class UserPrincipalController implements Serializable {
     @FacesConverter(forClass=UserPrincipal.class)
     public static class UserPrincipalControllerConverter implements Converter {
 
+        @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
@@ -206,6 +207,7 @@ public class UserPrincipalController implements Serializable {
             return sb.toString();
         }
 
+        @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
@@ -214,7 +216,7 @@ public class UserPrincipalController implements Serializable {
                 UserPrincipal o = (UserPrincipal) object;
                 return getStringKey(o.getName());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+UserPrincipalController.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+UserPrincipal.class.getName());
             }
         }
 

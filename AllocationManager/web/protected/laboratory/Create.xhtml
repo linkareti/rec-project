@@ -25,7 +25,7 @@
                     <h:outputLabel value="#{bundle.CreateLaboratoryLabel_stateURL}" for="stateURL" />
                     <h:inputText id="stateURL" value="#{laboratoryController.selected.state.url}" title="#{bundle.CreateLaboratoryTitle_stateURL}" />
                     <h:outputLabel value="#{bundle.CreateLaboratoryLabel_stateActive}" for="stateActive" />
-                    <h:inputText id="stateActive" value="#{laboratoryController.selected.state.active}" title="#{bundle.CreateLaboratoryTitle_stateActive}" />
+                    <h:selectBooleanCheckbox id="stateActive" value="#{laboratoryController.selected.state.active}" title="#{bundle.CreateLaboratoryTitle_stateActive}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{laboratoryController.create}" value="#{bundle.CreateLaboratorySaveLink}" />
@@ -34,7 +34,7 @@
                 <h:commandLink action="#{laboratoryController.prepareList}" value="#{bundle.CreateLaboratoryShowAllLink}" immediate="true"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/protected/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.CreateLaboratoryIndexLink}" action="/index" immediate="true" />

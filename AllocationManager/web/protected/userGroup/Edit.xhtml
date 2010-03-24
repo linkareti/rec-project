@@ -18,7 +18,7 @@
                     <h:outputLabel value="#{bundle.EditUserGroupLabel_name}" for="name" />
                     <h:inputText id="name" value="#{userGroupController.selected.name}" title="#{bundle.EditUserGroupTitle_name}" />
                     <h:outputLabel value="#{bundle.EditUserGrouplLabel_members}" for="members" />
-                    <h:selectManyListbox id="members" value="#{userGroupController.selected.members}" converter="UserPrincipalControllerConverter">
+                    <h:selectManyListbox id="members" value="#{userGroupController.selected.members}" converter="UserPrincipalConverter">
                         <f:selectItems
                             value="#{userPrincipalController.itemsAvailableSelectMany}"/>
                     </h:selectManyListbox>
@@ -31,7 +31,7 @@
                 <h:commandLink action="#{userGroupController.prepareList}" value="#{bundle.EditUserGroupShowAllLink}" immediate="true"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/protected/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.EditUserGroupIndexLink}" action="/index" immediate="true" />

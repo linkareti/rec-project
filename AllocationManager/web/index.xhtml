@@ -13,9 +13,14 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:commandLink action="backoffice" value="#{bundle.BackOfficeLink}"/>
+                <h:commandLink action="/protected/backoffice" value="#{bundle.BackOfficeLink}"/>
                 <br></br>
-                <h:commandLink action="reservation/Schedule" value="#{bundle.ReservationScheduleLink}" />
+                <h:commandLink action="/protected/reservation/Schedule" value="#{bundle.ReservationScheduleLink}" />
+                <br></br>
+                <br></br>
+                <h:commandLink action="#{login.logout}" >
+                    <h:outputText value="#{bundle.Logout}" />
+                </h:commandLink>
             </h:form>
         </ui:define>
     </ui:composition>

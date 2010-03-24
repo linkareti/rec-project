@@ -17,10 +17,6 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditUserPrincipalLabel_name}" for="name" />
                     <h:inputText id="name" value="#{userPrincipalController.selected.name}" title="#{bundle.EditUserPrincipalTitle_name}" />
-                    <h:outputLabel value="#{bundle.EditUserPrincipalLabel_groups}" for="groups" />
-                    <h:selectManyListbox id="groups" value="#{userPrincipalController.selected.groups}" converter="UserGroupControllerConverter">
-                        <f:selectItems value="#{userGroupController.itemsAvailableSelectMany}"/>
-                    </h:selectManyListbox>
                 </h:panelGrid>
                 <h:commandLink action="#{userPrincipalController.update}" value="#{bundle.EditUserPrincipalSaveLink}"/>
                 <br />
@@ -30,7 +26,7 @@
                 <h:commandLink action="#{userPrincipalController.prepareList}" value="#{bundle.EditUserPrincipalShowAllLink}" immediate="true"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/protected/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.EditUserPrincipalIndexLink}" action="/index" immediate="true" />

@@ -1,4 +1,4 @@
-package com.linkare.rec.am.web.util;
+package com.linkare.rec.am.web.listener;
 
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;

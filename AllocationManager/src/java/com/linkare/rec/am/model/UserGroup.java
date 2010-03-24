@@ -1,11 +1,14 @@
 package com.linkare.rec.am.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -14,17 +17,22 @@ import javax.persistence.OneToMany;
  * @author Joao
  */
 @Entity
-public class UserGroup implements Serializable {
+public class UserGroup extends Resource implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     private String name;
-    @Basic
-    @ManyToMany(mappedBy = "groups", cascade=CascadeType.ALL)
-    private List<UserPrincipal> members;
-    @Basic
-    @OneToMany(mappedBy = "userGroup", cascade=CascadeType.ALL)
-    private List<Reservation> reservations;
+
+    @JoinTable(name = "USERPRINCIPAL_USERGROUP", joinColumns =
+    @JoinColumn(name = "USERGROUP_ID", referencedColumnName = "NAME"),
+    inverseJoinColumns =
+    @JoinColumn(name = "USERPRINCIPAL_ID", referencedColumnName = "NAME"))
+    @ManyToMany
+    private List<UserPrincipal> members = new ArrayList<UserPrincipal>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userGroup", cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<Reservation>();
 
     @Override
     public int hashCode() {
@@ -48,6 +56,10 @@ public class UserGroup implements Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    public boolean hasMembers() {
+        return !members.isEmpty();
     }
 
     public boolean addMember(UserPrincipal user) {

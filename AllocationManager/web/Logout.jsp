@@ -1,5 +1,5 @@
 <%--
-    Document   : AccessDenied
+    Document   : LoginError
     Created on : 10/Fev/2010, 1:56:58
     Author     : Joao
 --%>
@@ -7,7 +7,7 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-            <title>Access Denied</title>
+            <title>Logout</title>
             <LINK REL="stylesheet" TYPE="text/css" MEDIA="all" HREF="/resources/css/crudjsf.css">
         </head>
         <body style="font-family: Arial, Helvetica, sans-serif;
@@ -15,11 +15,10 @@
                  background-color: #dfecf1;
                  font-size: small;">
             <br><center>
-                <h1 style="color: #e33b06;">Sorry, you do not have permission to perform this task!</h1>
+                <h1 style="color: #e33b06;">You have successfully logged out!</h1>
             <br><br>
-            <a href="/AllocationManager/faces/index.xhtml" style="color: #e33b06;">Index</a>
+            <a href="/AllocationManager/faces/Login.jsp" style="color: #e33b06;">Login</a>
             </center>
         </body>
     </html>
 </f:view>
-

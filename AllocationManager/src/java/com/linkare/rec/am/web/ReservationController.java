@@ -5,11 +5,13 @@ import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.ReservationFacade;
 import java.io.Serializable;
+import java.util.Calendar;
 
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -18,14 +20,19 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean (name="reservationController")
-@SessionScoped
+@ManagedBean(name = "reservationController")
+@RequestScoped
 public class ReservationController implements Serializable {
 
     private Reservation current;
+
     private DataModel items = null;
-    @EJB private com.linkare.rec.am.model.ReservationFacade ejbFacade;
+
+    @EJB
+    private com.linkare.rec.am.model.ReservationFacade ejbFacade;
+
     private PaginationHelper pagination;
+
     private int selectedItemIndex;
 
     public ReservationController() {
@@ -54,7 +61,7 @@ public class ReservationController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -67,7 +74,7 @@ public class ReservationController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Reservation)getItems().getRowData();
+        current = (Reservation) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -80,6 +87,7 @@ public class ReservationController implements Serializable {
 
     public String create() {
         try {
+            processEndDateAndEndTimeSlot();
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ReservationCreated"));
             return prepareCreate();
@@ -89,14 +97,35 @@ public class ReservationController implements Serializable {
         }
     }
 
+    public void processEndDateAndEndTimeSlot() {
+        String timeSlot = current.getStartTimeSlot();
+        StringTokenizer st = new StringTokenizer(timeSlot, ":");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(current.getStartDate());
+        cal.set(Calendar.HOUR, Integer.parseInt(st.nextToken()));
+        cal.set(Calendar.MINUTE, Integer.parseInt(st.nextToken()));
+        current.setStartDate(cal.getTime());
+        current.setStartTimeSlot(timeSlot);
+        if (cal.get(Calendar.MINUTE) == 30) {
+            cal.roll(Calendar.HOUR, true);
+            cal.set(Calendar.MINUTE, 0);
+        } else if (cal.get(Calendar.MINUTE) == 0) {
+            cal.set(Calendar.MINUTE, 30);
+        }
+
+        current.setEndDate(cal.getTime());
+        current.setEndTimeSlot(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
+    }
+
     public String prepareEdit() {
-        current = (Reservation)getItems().getRowData();
+        current = (Reservation) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
+            processEndDateAndEndTimeSlot();
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ReservationUpdated"));
             return "View";
@@ -107,7 +136,7 @@ public class ReservationController implements Serializable {
     }
 
     public String destroy() {
-        current = (Reservation)getItems().getRowData();
+        current = (Reservation) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();
@@ -140,14 +169,14 @@ public class ReservationController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count-1;
+            selectedItemIndex = count - 1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -194,7 +223,7 @@ public class ReservationController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ReservationController controller = (ReservationController)facesContext.getApplication().getELResolver().
+            ReservationController controller = (ReservationController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "reservationController");
             return controller.ejbFacade.find(getKey(value));
         }
@@ -211,6 +240,7 @@ public class ReservationController implements Serializable {
             return sb.toString();
         }
 
+        @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
@@ -219,10 +249,8 @@ public class ReservationController implements Serializable {
                 Reservation o = (Reservation) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+ReservationController.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Reservation.class.getName());
             }
         }
-
     }
-
 }

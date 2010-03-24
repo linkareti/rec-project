@@ -8,11 +8,14 @@ import javax.persistence.Embeddable;
  * @author Joao
  */
 @Embeddable
-public class State implements Serializable{
+public class State implements Serializable {
 
     private String label;
+
     private String helpMessage;
+
     private String url;
+
     private boolean active;
 
     /**
@@ -86,5 +89,4 @@ public class State implements Serializable{
     public void setActive(boolean active) {
         this.active = active;
     }
-
 }

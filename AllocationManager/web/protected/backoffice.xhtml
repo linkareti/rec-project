@@ -13,15 +13,16 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:commandLink action="/experiment/List" value="Show All Experiments"/>
+                <h:commandLink action="/protected/laboratory/List" value="Show All Laboratories"/>
                 <br></br>
-                <h:commandLink action="/laboratory/List" value="Show All Laboratories"/>
+                <h:commandLink action="/protected/experiment/List" value="Show All Experiments"/>
                 <br></br>
-                <h:commandLink action="/reservation/List" value="Show All Reservations"/>
+                <h:commandLink action="/protected/userPrincipal/List" value="Show All Users"/>
                 <br></br>
-                <h:commandLink action="/userPrincipal/List" value="Show All Users"/>
+                <h:commandLink action="/protected/userGroup/List" value="Show All Groups"/>
                 <br></br>
-                <h:commandLink action="/userGroup/List" value="Show All Groups"/>
+                <h:commandLink action="/protected/reservation/List" value="Show All Reservations"/>
+                <br></br>
                 <br></br>
                 <h:commandLink value="#{bundle.CreateReservationIndexLink}" action="/index" immediate="true" />
         </h:form>

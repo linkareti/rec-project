@@ -80,3 +80,11 @@ tr.jsfcrud_even_row {
     left: 50%;
     top: 50%;
 }
+
+option.option1 {
+    background-color: #ccc;
+}
+
+option.option2 {
+    background-color: #fcc;
+}

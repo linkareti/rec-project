@@ -66,7 +66,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListExperimentTitle_stateActive}"/>
                             </f:facet>
-                            <h:outputText value="#{item.state.active}"/>
+                            <h:selectBooleanCheckbox disabled="true" value="#{item.state.active}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -84,7 +84,7 @@
                 <h:commandLink action="#{experimentController.prepareCreate}" value="#{bundle.ListExperimentCreateLink}"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/protected/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.ListExperimentIndexLink}" action="/index" immediate="true" />

@@ -3,21 +3,21 @@
 <sun-web-app error-url="">
   <context-root>/AllocationManager</context-root>
   <security-role-mapping>
-    <role-name>student</role-name>
-    <principal-name>student</principal-name>
-    <group-name>student</group-name>
-  </security-role-mapping>
-  <security-role-mapping>
     <role-name>admin</role-name>
     <principal-name>admin</principal-name>
     <group-name>admin</group-name>
-    <group-name>student</group-name>
-    <group-name>teatcher</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>teatcher</role-name>
     <principal-name>teatcher</principal-name>
     <group-name>student</group-name>
+    <group-name>admin</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>user</role-name>
+    <principal-name>user</principal-name>
+    <group-name>admin</group-name>
+    <group-name>user</group-name>
     <group-name>teatcher</group-name>
   </security-role-mapping>
   <class-loader delegate="true"/>

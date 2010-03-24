@@ -10,7 +10,7 @@
                  font-size: small;display: block;">
         <center style="vertical-align: middle">
             <form name="loginForm" method="POST" 
-                  action="/AllocationManager/LoginServlet"
+                  action="/AllocationManager/LoginServlet?action=login"
                   style="color: #e33b06;">
                 <table>
                     <thead >

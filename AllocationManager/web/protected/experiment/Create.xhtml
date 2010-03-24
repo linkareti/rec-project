@@ -20,7 +20,7 @@
                     <h:outputLabel value="#{bundle.CreateExperimentLabel_description}" for="description" />
                     <h:inputText id="description" value="#{experimentController.selected.description}" title="#{bundle.CreateExperimentTitle_description}" />
                     <h:outputLabel value="#{bundle.CreateExperimentLabel_laboratory}" for="laboratory" />
-                    <h:selectOneMenu id="laboratory"  value="#{experimentController.selected.laboratory}" title="#{bundle.CreateExperimentTitle_laboratory}" >
+                    <h:selectOneMenu id="laboratory"  value="#{experimentController.selected.laboratory}" title="#{bundle.CreateExperimentTitle_laboratory}">
                         <f:selectItems value="#{laboratoryController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateExperimentLabel_stateLabel}" for="stateLabel" />
@@ -30,7 +30,7 @@
                     <h:outputLabel value="#{bundle.CreateExperimentLabel_stateURL}" for="stateURL" />
                     <h:inputText id="stateURL" value="#{experimentController.selected.state.url}" title="#{bundle.CreateExperimentTitle_stateURL}" />
                     <h:outputLabel value="#{bundle.CreateExperimentLabel_stateActive}" for="stateActive" />
-                    <h:inputText id="stateActive" value="#{experimentController.selected.state.active}" title="#{bundle.CreateExperimentTitle_stateActive}" />
+                    <h:selectBooleanCheckbox id="stateActive" value="#{experimentController.selected.state.active}" title="#{bundle.CreateExperimentTitle_stateActive}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{experimentController.create}" value="#{bundle.CreateExperimentSaveLink}" />
@@ -39,7 +39,7 @@
                 <h:commandLink action="#{experimentController.prepareList}" value="#{bundle.CreateExperimentShowAllLink}" immediate="true"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/protected/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.CreateExperimentIndexLink}" action="/index" immediate="true" />

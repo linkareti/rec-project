@@ -4,12 +4,15 @@ import com.linkare.rec.am.model.UserGroup;
 import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.UserGroupFacade;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringWriter;
 
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -19,15 +22,21 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "userGroupController")
-@SessionScoped
+@RequestScoped
 public class UserGroupController implements Serializable {
 
     private UserGroup current;
+
     private DataModel items = null;
+
     @EJB
     private com.linkare.rec.am.model.UserGroupFacade ejbFacade;
+
     private PaginationHelper pagination;
+
     private int selectedItemIndex;
+
+    private static Logger logger = Logger.getLogger("UserGroupController");
 
     public UserGroupController() {
     }
@@ -86,6 +95,12 @@ public class UserGroupController implements Serializable {
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String stacktrace = sw.toString();
+            getLogger().severe("Stack Trace: \n" + stacktrace);
+
             return null;
         }
     }
@@ -183,9 +198,10 @@ public class UserGroupController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass=UserGroup.class)
+    @FacesConverter(forClass = UserGroup.class)
     public static class UserGroupControllerConverter implements Converter {
 
+        @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
@@ -207,6 +223,7 @@ public class UserGroupController implements Serializable {
             return sb.toString();
         }
 
+        @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
@@ -215,8 +232,15 @@ public class UserGroupController implements Serializable {
                 UserGroup o = (UserGroup) object;
                 return getStringKey(o.getName());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + UserGroupController.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + UserGroup.class.getName());
             }
         }
+    }
+
+    /**
+     * @return the logger
+     */
+    public static Logger getLogger() {
+        return logger;
     }
 }

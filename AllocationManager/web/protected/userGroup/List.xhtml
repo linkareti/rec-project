@@ -30,7 +30,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUserGroupTitle_members}"/>
                             </f:facet>
-                            <h:selectOneMenu value="#{item.members}" readonly="true" converter="UserPrincipalControllerConverter">
+                            <h:selectOneMenu value="#{item.members}" readonly="true">
                                 <f:selectItems value="#{item.members}"/>
                             </h:selectOneMenu>
                         </h:column>
@@ -50,7 +50,7 @@
                 <h:commandLink action="#{userGroupController.prepareCreate}" value="#{bundle.ListUserGroupCreateLink}"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.BackOfficeLink}" action="/backoffice" immediate="true" />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/protected/backoffice" immediate="true" />
                 <br />
                 <br />
                 <h:commandLink value="#{bundle.ListUserGroupIndexLink}" action="/index" immediate="true" />

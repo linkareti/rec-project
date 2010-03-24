@@ -3,20 +3,18 @@ package com.linkare.rec.am.web;
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.ReservationFacade;
 import com.linkare.rec.am.model.UserPrincipal;
+import com.linkare.rec.am.web.util.JsfUtil;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
 import javax.faces.event.ActionEvent;
-import javax.inject.Inject;
 import java.util.logging.Logger;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.RequestScoped;
 
 import org.primefaces.event.ScheduleDateSelectEvent;
 import org.primefaces.event.ScheduleEntrySelectEvent;
@@ -28,23 +26,24 @@ import org.primefaces.model.ScheduleModel;
  * @author Joao
  */
 @ManagedBean(name = "scheduleController")
-@SessionScoped
+@RequestScoped
 public class ScheduleController implements Serializable {
 
-    static Logger logger = Logger.getLogger("ScheduleController");
+    private static Logger logger = Logger.getLogger("ScheduleController");
+
     private static ScheduleModel<ScheduleEvent> eventModel;
+
     private Reservation event = new Reservation();
+
     @EJB
     private com.linkare.rec.am.model.ReservationFacade ejbFacade;
+
     @EJB
     private com.linkare.rec.am.model.UserPrincipalFacade ejbUserPrincipalFacade;
-    // Inject The Credentials Weld bean.
-    @Inject
-    Credentials credentials;
 
     public ScheduleController() {
 
-        logger.info("ScheduleController");
+        getLogger().info("ScheduleController");
         eventModel = new ScheduleModel<ScheduleEvent>() {
 
             @Override
@@ -54,7 +53,9 @@ public class ScheduleController implements Serializable {
 
             @Override
             public void fetchEvents(Date start, Date end) {
-                setEvents(getFacade().fetchLazy2(start, end));	//clean other periods
+//                setEvents(getFacade().fetchLazy(start, end, (String)JsfUtil.getSessionMapValue("UserName")));	//clean other periods
+                UserPrincipal user = ejbUserPrincipalFacade.find((String)JsfUtil.getSessionMapValue("UserName"));
+                setEvents(getFacade().fetchLazy(start, end, user));	//clean other periods
             }
         };
     }
@@ -97,11 +98,11 @@ public class ScheduleController implements Serializable {
             if (cal.get(Calendar.MINUTE) == 30) {
                 cal.roll(Calendar.HOUR, true);
                 cal.set(Calendar.MINUTE, 0);
-            } else {
+            } else if (cal.get(Calendar.MINUTE) == 0) {
                 cal.set(Calendar.MINUTE, 30);
             }
             event.setEndDate(cal.getTime());
-            event.setEndTimeSlot(Integer.toString(cal.get(Calendar.HOUR_OF_DAY)) + ":" + Integer.toString(Calendar.MINUTE));
+            event.setEndTimeSlot(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
             eventModel.addEvent(event);
             getFacade().create(event);
         } else {
@@ -134,11 +135,7 @@ public class ScheduleController implements Serializable {
         event = new Reservation();
         event.setStartDate(selectEvent.getDate());
         event.setEndDate(selectEvent.getDate());
-        String userName1 = credentials.getUsername();
-        String userName = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-        logger.info(userName);
-        UserPrincipal user = getEjbUserPrincipalFacade().find(userName);
-        event.setUserPrincipal(user);
+        event.setUserPrincipal(getEjbUserPrincipalFacade().find((String)JsfUtil.getSessionMapValue("UserName")));
     }
 
     /**
@@ -153,6 +150,25 @@ public class ScheduleController implements Serializable {
      */
     public com.linkare.rec.am.model.UserPrincipalFacade getEjbUserPrincipalFacade() {
         return ejbUserPrincipalFacade;
+    }
+
+    /**
+     * @return the logger
+     */
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public void createReservation(ActionEvent actionEvent) {
+
+        getLogger().info("createReservation");
+        String userName = (String)JsfUtil.getSessionMapValue("UserName");
+        getLogger().info("Reservation created by: " + userName!= null ? userName : "null");
+        String name = (String)JsfUtil.getSessionMapValue("name");
+        name = name != null ? name : "null";
+        getLogger().info("name value: " + name);
+        event.setUserPrincipal(getEjbUserPrincipalFacade().find(userName));
+        saveEvent(actionEvent);
     }
 
 }

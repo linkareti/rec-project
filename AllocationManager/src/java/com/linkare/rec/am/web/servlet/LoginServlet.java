@@ -23,9 +23,11 @@ public class LoginServlet extends HttpServlet {
     @Inject
     BeanManager m;
     // Inject The Credentials Weld bean.
+
     @Inject
     Credentials credentials;
     // Inject the Login Weld bean.
+
     @Inject
     Login login;
 
@@ -38,16 +40,28 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-        credentials.setUsername(request.getParameter("txtUserName"));
-        credentials.setPassword(request.getParameter("txtPassword"));
 
-        login.login(request);
+        if (request.getParameter("action").equals("logout")) {
 
-        if (login.isLoggedIn()) {
-            response.sendRedirect(request.getContextPath() + "/faces/index.xhtml");
-        } else {
-            response.sendRedirect(request.getContextPath() + "/faces/LoginError.jsp");
+            login.logout(request);
+            response.sendRedirect("Logout.jsp");
+        
+        } else if (request.getParameter("action").equals("login")) {
+
+            credentials.setUsername(request.getParameter("txtUserName"));
+            credentials.setPassword(request.getParameter("txtPassword"));
+
+
+            login.login(request);
+
+            if (login.isLoggedIn()) {
+                request.getSession().setAttribute("UserName", credentials.getUsername());
+                response.sendRedirect(request.getContextPath() + "/faces/index.xhtml");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/faces/LoginError.jsp");
+            }
         }
+
 
     }
 

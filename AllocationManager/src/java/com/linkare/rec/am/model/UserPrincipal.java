@@ -1,9 +1,9 @@
 package com.linkare.rec.am.model;
 
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,19 +18,21 @@ import javax.persistence.OneToMany;
  * @author Joao
  */
 @Entity
-public class UserPrincipal implements Serializable {
+public class UserPrincipal extends Resource implements Principal ,Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     private String name;
-    @Basic
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userPrincipal")
     private List<Reservation> reservations = new ArrayList<Reservation>();
-    @JoinTable(name = "USERP_USERG", joinColumns =
-    @JoinColumn(name = "USERP_ID", referencedColumnName = "NAME"),
+
+    @JoinTable(name = "USERPRINCIPAL_USERGROUP", joinColumns =
+    @JoinColumn(name = "USERPRINCIPAL_ID", referencedColumnName = "NAME"),
     inverseJoinColumns =
-    @JoinColumn(name = "USERG_ID", referencedColumnName = "NAME"))
-    @ManyToMany (cascade=CascadeType.ALL)
+    @JoinColumn(name = "USERGROUP_ID", referencedColumnName = "NAME"))
+    @ManyToMany(mappedBy="members", cascade=CascadeType.ALL)
     private List<UserGroup> groups = new ArrayList<UserGroup>();
 
     /**
@@ -47,6 +49,7 @@ public class UserPrincipal implements Serializable {
         this.groups = groups;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -90,6 +93,6 @@ public class UserPrincipal implements Serializable {
 
     @Override
     public String toString() {
-                return name;
+        return name;
     }
 }

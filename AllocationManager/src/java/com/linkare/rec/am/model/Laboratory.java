@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -27,14 +28,17 @@ import javax.persistence.Table;
 public class Laboratory extends Resource implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     private String name;
+
     @Basic
     private String description;
+
     @Embedded
     private State state = new State();
-    @Basic
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "laboratory")
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "laboratory")
     private List<Experiment> experiments = new ArrayList<Experiment>();
 
     /**
