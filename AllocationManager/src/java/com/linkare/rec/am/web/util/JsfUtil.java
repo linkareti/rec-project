@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 public class JsfUtil {
     
-    private final static int MAX_ITEM_INDEX = 49;
+    private static final int MAX_ITEM_INDEX = 49;
     
     public static SelectItem[] getSelectItems(List<?> entities, boolean selectOne) {
         int size = selectOne ? entities.size() + 1 : entities.size();
@@ -122,14 +122,12 @@ public class JsfUtil {
         return facesContext;
     }
 
-    protected Application getApplication(FacesContext facesContext) {
+    protected static Application getApplication(FacesContext facesContext) {
         return facesContext.getApplication();
     }
 
-    public Object getManagedBean(String beanName, FacesContext facesContext) {
+    public static Object getManagedBean(String beanName, FacesContext facesContext) {
         return getApplication(facesContext).getELResolver().getValue(facesContext.getELContext(), null, beanName);
-//        Object obj2 = getApplication(facesContext).getVariableResolver().resolveVariable(facesContext, beanName);
-//        return obj2;
     }
 
     public static HttpSession getSession() {

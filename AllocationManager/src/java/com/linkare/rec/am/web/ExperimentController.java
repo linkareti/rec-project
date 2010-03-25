@@ -48,7 +48,7 @@ public class ExperimentController implements Serializable {
     public ExperimentController() {
     }
 
-    public Experiment getSelected() {
+    public final Experiment getSelected() {
         if (current == null) {
             current = new Experiment();
             selectedItemIndex = -1;
@@ -60,7 +60,7 @@ public class ExperimentController implements Serializable {
         return ejbFacade;
     }
 
-    public PaginationHelper getPagination() {
+    public final PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(DEFAULT_PAGE_SIZE) {
 
@@ -78,24 +78,24 @@ public class ExperimentController implements Serializable {
         return pagination;
     }
 
-    public String prepareList() {
+    public final String prepareList() {
         recreateModel();
         return LIST;
     }
 
-    public String prepareView() {
+    public final String prepareView() {
         current = (Experiment) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return VIEW;
     }
 
-    public String prepareCreate() {
+    public final String prepareCreate() {
         current = new Experiment();
         selectedItemIndex = -1;
         return CREATE;
     }
 
-    public String create() {
+    public final String create() {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("ExperimentCreated"));
@@ -106,13 +106,13 @@ public class ExperimentController implements Serializable {
         }
     }
 
-    public String prepareEdit() {
+    public final String prepareEdit() {
         current = (Experiment) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return EDIT;
     }
 
-    public String update() {
+    public final String update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("ExperimentUpdated"));
@@ -123,7 +123,7 @@ public class ExperimentController implements Serializable {
         }
     }
 
-    public String destroy() {
+    public final String destroy() {
         current = (Experiment) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
@@ -131,7 +131,7 @@ public class ExperimentController implements Serializable {
         return LIST;
     }
 
-    public String destroyAndView() {
+    public final String destroyAndView() {
         performDestroy();
         recreateModel();
         updateCurrentItem();
@@ -168,7 +168,7 @@ public class ExperimentController implements Serializable {
         }
     }
 
-    public DataModel getItems() {
+    public final DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
@@ -179,23 +179,23 @@ public class ExperimentController implements Serializable {
         items = null;
     }
 
-    public String next() {
+    public final String next() {
         getPagination().nextPage();
         recreateModel();
         return LIST;
     }
 
-    public String previous() {
+    public final String previous() {
         getPagination().previousPage();
         recreateModel();
         return LIST;
     }
 
-    public SelectItem[] getItemsAvailableSelectMany() {
+    public final SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
-    public SelectItem[] getItemsAvailableSelectOne() {
+    public final SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
@@ -203,7 +203,7 @@ public class ExperimentController implements Serializable {
     public static class ExperimentControllerConverter implements Converter {
 
         @Override
-        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+        public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
@@ -212,20 +212,20 @@ public class ExperimentController implements Serializable {
             return controller.ejbFacade.find(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
+        final java.lang.Long getKey(String value) {
             java.lang.Long key;
             key = Long.valueOf(value);
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        final String getStringKey(java.lang.Long value) {
             StringBuffer sb = new StringBuffer();
             sb.append(value);
             return sb.toString();
         }
 
         @Override
-        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
+        public final String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
             }

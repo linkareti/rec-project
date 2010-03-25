@@ -1,6 +1,5 @@
 package com.linkare.rec.am.web.listener;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
