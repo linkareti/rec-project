@@ -1,5 +1,6 @@
 package com.linkare.rec.am.model;
 
+import com.linkare.rec.am.model.util.BusinessException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +24,7 @@ public class ResourceAllocationFacade implements ResourceAllocationFacadeInterfa
 
     @Override
     public List<String> getReservations(String laboratory, String experimentName, Date startDate,
-            Date endDate) throws Exception {
+            Date endDate) throws BusinessException {
 
 
 //        Laboratory lab = null;
@@ -53,7 +54,7 @@ public class ResourceAllocationFacade implements ResourceAllocationFacadeInterfa
     }
 
     private void validaDados(String laboratory, String experiment, Date startDate,
-            Date endDate) throws Exception {
+            Date endDate) throws BusinessException {
 
         Experiment exp = null;
         Laboratory lab = null;
@@ -61,25 +62,25 @@ public class ResourceAllocationFacade implements ResourceAllocationFacadeInterfa
         lab = Laboratory.findByName(laboratory, em);
 
         if (lab == null) {
-            throw new Exception("laboratory not referenced");
+            throw new BusinessException("laboratory not referenced");
         }
 
         if (startDate == null) {
-            throw new Exception("start date not provided");
+            throw new BusinessException("start date not provided");
         }
 
         if (endDate == null) {
-            throw new Exception("end date not provided");
+            throw new BusinessException("end date not provided");
         }
 
         if (endDate.before(startDate)) {
-            throw new Exception("start date after end date");
+            throw new BusinessException("start date after end date");
         }
 
         try {
             exp = Laboratory.findExperiment(laboratory, experiment, em);
         } catch (IndexOutOfBoundsException e) {
-            throw new Exception("No laboratory with given experiment");
+            throw new BusinessException("No laboratory with given experiment");
         }
 
     }

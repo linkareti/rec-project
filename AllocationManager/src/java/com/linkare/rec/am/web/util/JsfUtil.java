@@ -69,7 +69,8 @@ public class JsfUtil {
     }
 
     public static SelectItem[] getTimeSlotItems() {
-        SelectItem[] items = new SelectItem[49];
+        int MAX_ITEM_INDEX = 49;
+        SelectItem[] items = new SelectItem[MAX_ITEM_INDEX];
         int i = 0;
         items[0] = new SelectItem("", "---");
         i++;

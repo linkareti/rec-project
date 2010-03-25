@@ -6,10 +6,8 @@
 package com.linkare.rec.am.web;
 
 import java.io.Serializable;
-import java.security.Principal;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**

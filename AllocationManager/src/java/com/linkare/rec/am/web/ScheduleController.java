@@ -31,6 +31,8 @@ public class ScheduleController implements Serializable {
 
     private static Logger logger = Logger.getLogger("ScheduleController");
 
+    private static final int MINUTE_STEP = 30;
+
     private static ScheduleModel<ScheduleEvent> eventModel;
 
     private Reservation event = new Reservation();
@@ -95,11 +97,11 @@ public class ScheduleController implements Serializable {
             cal.set(Calendar.MINUTE, Integer.parseInt(st.nextToken()));
             event.setStartDate(cal.getTime());
             event.setStartTimeSlot(timeSlot);
-            if (cal.get(Calendar.MINUTE) == 30) {
+            if (cal.get(Calendar.MINUTE) == MINUTE_STEP) {
                 cal.roll(Calendar.HOUR, true);
                 cal.set(Calendar.MINUTE, 0);
             } else if (cal.get(Calendar.MINUTE) == 0) {
-                cal.set(Calendar.MINUTE, 30);
+                cal.set(Calendar.MINUTE, MINUTE_STEP);
             }
             event.setEndDate(cal.getTime());
             event.setEndTimeSlot(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));

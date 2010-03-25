@@ -45,11 +45,11 @@ public class SessionListener implements HttpSessionListener {
    * before losing it.
    * User's redirection to the timeout page will be handled by the SessionTimeoutFilter.
    */
-  try {
+//  try {
 //   prepareLogoutInfoAndLogoutActiveUser(session);
-  } catch(Exception e) {
-   logger.log(Level.SEVERE,"error while logging out at session destroyed : " + e.getMessage(), e);
-  }
+//  } catch(Exception e) {
+//   logger.log(Level.SEVERE,"error while logging out at session destroyed : " + e.getMessage(), e);
+//  }
  }
 
  /**

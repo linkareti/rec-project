@@ -33,15 +33,17 @@ public class UserPrincipalController implements Serializable {
 
     private int selectedItemIndex;
 
-    private final String BUNDLE = "/Bundle";
+    private static final int DEFAULT_PAGE_SIZE = 10;
 
-    private final String VIEW = "View";
+    private static final String BUNDLE = "/Bundle";
 
-    private final String CREATE = "Create";
+    private static final String VIEW = "View";
 
-    private final String LIST = "List";
+    private static final String CREATE = "Create";
 
-    private final String EDIT = "Edit";
+    private static final String LIST = "List";
+
+    private static final String EDIT = "Edit";
 
     public UserPrincipalController() {
     }
@@ -60,7 +62,7 @@ public class UserPrincipalController implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+            pagination = new PaginationHelper(DEFAULT_PAGE_SIZE) {
 
                 @Override
                 public int getItemsCount() {
