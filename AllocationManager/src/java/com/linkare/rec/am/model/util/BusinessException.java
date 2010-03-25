@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
  *
  * @author Joao
  */
-public class BusinessException extends Exception {
+public final class BusinessException extends Exception {
 
     private String id;
 
@@ -51,6 +51,18 @@ public class BusinessException extends Exception {
 
     /**
      *
+     * @param message message
+     * @param e Exception
+     */
+    public BusinessException(Exception e, String message) {
+        setMessage(message);
+        getErrorList().add(e);
+        setId(getUniqueId());
+    }
+
+
+    /**
+     *
      * @param code code
      * @param message message
      */
@@ -66,7 +78,7 @@ public class BusinessException extends Exception {
      *
      * @param message message
      */
-    public BusinessException( String message) {
+    public BusinessException(String message) {
 
         setMessage(message);
         setId(getUniqueId());
@@ -218,7 +230,7 @@ public class BusinessException extends Exception {
     }
 
     public void setParams(String[] params) {
-        this.params = params;
+        this.params = params.clone();
     }
 
     public String[] getParams() {

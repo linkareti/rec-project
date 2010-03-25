@@ -21,9 +21,6 @@ public class ReservationFacade {
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager em;
 
-    @EJB
-    private UserPrincipalFacade userFacade;
-
     public void create(Reservation reservation) {
         em.persist(reservation);
     }

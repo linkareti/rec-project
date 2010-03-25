@@ -7,7 +7,6 @@ import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.FacesContextFactory;
 import javax.faces.convert.Converter;
@@ -19,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class JsfUtil {
+    
+    private final static int MAX_ITEM_INDEX = 49;
     
     public static SelectItem[] getSelectItems(List<?> entities, boolean selectOne) {
         int size = selectOne ? entities.size() + 1 : entities.size();
@@ -69,7 +70,6 @@ public class JsfUtil {
     }
 
     public static SelectItem[] getTimeSlotItems() {
-        int MAX_ITEM_INDEX = 49;
         SelectItem[] items = new SelectItem[MAX_ITEM_INDEX];
         int i = 0;
         items[0] = new SelectItem("", "---");
@@ -133,9 +133,7 @@ public class JsfUtil {
     }
 
     public static HttpSession getSession() {
-      ExternalContext extCon = FacesContext.getCurrentInstance().getExternalContext();
-      HttpSession session = (HttpSession) extCon.getSession(true);
-      return session;
+      return (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
    }
 
 

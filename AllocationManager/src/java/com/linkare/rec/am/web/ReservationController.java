@@ -47,6 +47,8 @@ public class ReservationController implements Serializable {
 
     private static final String EDIT = "Edit";
 
+    private static final int MINUTE_STEP = 30;
+
     public ReservationController() {
     }
 
@@ -118,11 +120,11 @@ public class ReservationController implements Serializable {
         cal.set(Calendar.MINUTE, Integer.parseInt(st.nextToken()));
         current.setStartDate(cal.getTime());
         current.setStartTimeSlot(timeSlot);
-        if (cal.get(Calendar.MINUTE) == 30) {
+        if (cal.get(Calendar.MINUTE) == MINUTE_STEP) {
             cal.roll(Calendar.HOUR, true);
             cal.set(Calendar.MINUTE, 0);
         } else if (cal.get(Calendar.MINUTE) == 0) {
-            cal.set(Calendar.MINUTE, 30);
+            cal.set(Calendar.MINUTE, MINUTE_STEP);
         }
 
         current.setEndDate(cal.getTime());

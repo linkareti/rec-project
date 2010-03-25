@@ -56,12 +56,8 @@ public class ResourceAllocationFacade implements ResourceAllocationFacadeInterfa
     private void validaDados(String laboratory, String experiment, Date startDate,
             Date endDate) throws BusinessException {
 
-        Experiment exp = null;
-        Laboratory lab = null;
-
-        lab = Laboratory.findByName(laboratory, em);
-
-        if (lab == null) {
+        
+        if (Laboratory.findByName(laboratory, em) == null) {
             throw new BusinessException("laboratory not referenced");
         }
 
@@ -78,9 +74,9 @@ public class ResourceAllocationFacade implements ResourceAllocationFacadeInterfa
         }
 
         try {
-            exp = Laboratory.findExperiment(laboratory, experiment, em);
+            Laboratory.findExperiment(laboratory, experiment, em);
         } catch (IndexOutOfBoundsException e) {
-            throw new BusinessException("No laboratory with given experiment");
+            throw new BusinessException(e,"No laboratory with given experiment");
         }
 
     }
