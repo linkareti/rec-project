@@ -52,7 +52,7 @@ public class ExtendedMenuRenderer extends MenuRenderer {
      *      javax.faces.convert.Converter, javax.faces.model.SelectItem, java.lang.Object,
      *      java.lang.Object[])
      */
-    protected void renderOption(FacesContext context, UIComponent component, Converter converter,
+    protected final void renderOption(FacesContext context, UIComponent component, Converter converter,
         SelectItem currentItem, Object currentSelections, Object[] submittedValues)
             throws IOException
     {

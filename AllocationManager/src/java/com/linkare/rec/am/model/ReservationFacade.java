@@ -59,7 +59,7 @@ public class ReservationFacade {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    public List<ScheduleEvent> fetchLazy(Date start, Date end, UserPrincipal user) {
+    public final List<ScheduleEvent> fetchLazy(Date start, Date end, UserPrincipal user) {
         List<ScheduleEvent> eventList = em.createQuery(
                 "SELECT r FROM Reservation r "
                 + "WHERE r.userPrincipal=:user "

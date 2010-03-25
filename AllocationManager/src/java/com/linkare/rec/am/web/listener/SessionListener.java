@@ -28,12 +28,12 @@ public class SessionListener implements HttpSessionListener {
  }
 
     @Override
- public void sessionCreated(HttpSessionEvent event) {
+ public final void sessionCreated(HttpSessionEvent event) {
   logger.info("session created : " + event.getSession().getId());
  }
 
     @Override
- public void sessionDestroyed(HttpSessionEvent event) {
+ public final void sessionDestroyed(HttpSessionEvent event) {
   // get the destroying session...
   HttpSession session = event.getSession();
   logger.info("session destroyed :" + session.getId() + " Logging out user...");

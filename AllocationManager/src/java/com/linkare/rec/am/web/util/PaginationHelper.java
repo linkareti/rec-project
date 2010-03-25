@@ -16,11 +16,11 @@ public abstract class PaginationHelper {
 
     public abstract DataModel createPageDataModel();
 
-    public int getPageFirstItem() {
+    public final int getPageFirstItem() {
         return page*pageSize;
     }
 
-    public int getPageLastItem() {
+    public final int getPageLastItem() {
         int i = getPageFirstItem() + pageSize -1;
         int count = getItemsCount() - 1;
         if (i > count) {
@@ -32,27 +32,27 @@ public abstract class PaginationHelper {
         return i;
     }
 
-    public boolean isHasNextPage() {
+    public final boolean isHasNextPage() {
         return (page+1)*pageSize+1 <= getItemsCount();
     }
 
-    public void nextPage() {
+    public final void nextPage() {
         if (isHasNextPage()) {
             page++;
         }
     }
 
-    public boolean isHasPreviousPage() {
+    public final boolean isHasPreviousPage() {
         return page > 0;
     }
 
-    public void previousPage() {
+    public final void previousPage() {
         if (isHasPreviousPage()) {
             page--;
         }
     }
 
-    public int getPageSize() {
+    public final int getPageSize() {
         return pageSize;
     }
 

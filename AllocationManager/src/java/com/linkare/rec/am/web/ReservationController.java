@@ -60,7 +60,7 @@ public class ReservationController implements Serializable {
         return current;
     }
 
-    private final ReservationFacade getFacade() {
+    private ReservationFacade getFacade() {
         return ejbFacade;
     }
 

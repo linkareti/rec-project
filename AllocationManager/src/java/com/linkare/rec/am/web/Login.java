@@ -91,7 +91,7 @@ public class Login implements Authenticator, Serializable {
     /**
      * @return the logger
      */
-    public final static Logger getLogger() {
+    public static final Logger getLogger() {
         return logger;
     }
 

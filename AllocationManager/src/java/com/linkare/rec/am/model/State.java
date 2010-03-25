@@ -50,7 +50,7 @@ public class State implements Serializable {
      *
      * @param helpMessage new value of helpMessage
      */
-    public void setHelpMessage(String helpMessage) {
+    public final void setHelpMessage(String helpMessage) {
         this.helpMessage = helpMessage;
     }
 

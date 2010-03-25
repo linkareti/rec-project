@@ -16,22 +16,22 @@ public class LifeCycleListener implements PhaseListener{
     /**
      * @return the logger
      */
-    public static Logger getLogger() {
+    public static final Logger getLogger() {
         return logger;
     }
 
     @Override
-    public PhaseId getPhaseId() {
+    public final PhaseId getPhaseId() {
         return PhaseId.ANY_PHASE;
     }
 
     @Override
-    public void beforePhase(PhaseEvent event) {
+    public final void beforePhase(PhaseEvent event) {
         getLogger().info("START PHASE " + event.getPhaseId());
     }
 
     @Override
-    public void afterPhase(PhaseEvent event) {
+    public final void afterPhase(PhaseEvent event) {
         getLogger().info("END PHASE " + event.getPhaseId());
     }
 

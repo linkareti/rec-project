@@ -48,7 +48,7 @@ public class LaboratoryController implements Serializable {
     public LaboratoryController() {
     }
 
-    public Laboratory getSelected() {
+    public final Laboratory getSelected() {
         if (current == null) {
             current = new Laboratory();
             selectedItemIndex = -1;
