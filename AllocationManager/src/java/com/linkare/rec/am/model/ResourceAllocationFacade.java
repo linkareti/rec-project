@@ -23,7 +23,7 @@ public class ResourceAllocationFacade implements ResourceAllocationFacadeInterfa
     private EntityManager em;
 
     @Override
-    public List<String> getReservations(String laboratory, String experimentName, Date startDate,
+    public final List<String> getReservations(String laboratory, String experimentName, Date startDate,
             Date endDate) throws BusinessException {
 
 
@@ -83,7 +83,7 @@ public class ResourceAllocationFacade implements ResourceAllocationFacadeInterfa
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override
-    public void initData() {
+    public final void initData() {
         UserPrincipal user = new UserPrincipal();
         user.setName("admin");
         em.persist(user);

@@ -20,6 +20,9 @@ import javax.servlet.http.HttpSession;
 public class JsfUtil {
     
     private static final int MAX_ITEM_INDEX = 49;
+
+    private JsfUtil(){
+    }
     
     public static SelectItem[] getSelectItems(List<?> entities, boolean selectOne) {
         int size = selectOne ? entities.size() + 1 : entities.size();

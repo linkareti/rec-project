@@ -62,32 +62,32 @@ public class ScheduleController implements Serializable {
         };
     }
 
-    public Date getRandomDate(Date base) {
+    public final Date getRandomDate(Date base) {
         Calendar date = Calendar.getInstance();
         date.setTime(base);
         date.add(Calendar.DATE, ((int) (Math.random() * 30)) + 1);	//set random day of month
         return date.getTime();
     }
 
-    public Date getInitialDate() {
+    public final Date getInitialDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY, calendar.get(Calendar.DATE), 0, 0, 0);
         return calendar.getTime();
     }
 
-    public ScheduleModel<ScheduleEvent> getEventModel() {
+    public final ScheduleModel<ScheduleEvent> getEventModel() {
         return eventModel;
     }
 
-    public Reservation getEvent() {
+    public final Reservation getEvent() {
         return event;
     }
 
-    public void setEvent(Reservation event) {
+    public final void setEvent(Reservation event) {
         this.event = event;
     }
 
-    public void saveEvent(ActionEvent actionEvent) {
+    public final void saveEvent(ActionEvent actionEvent) {
         if (event.getId() == null) {
             String timeSlot = event.getStartTimeSlot();
             StringTokenizer st = new StringTokenizer(timeSlot, ":");
@@ -113,7 +113,7 @@ public class ScheduleController implements Serializable {
         }
     }
 
-    public void addEvent(ActionEvent actionEvent) {
+    public final void addEvent(ActionEvent actionEvent) {
         if (event.getId() == null) {
             eventModel.addEvent(event);
         } else {
@@ -122,18 +122,18 @@ public class ScheduleController implements Serializable {
         event = new Reservation();
     }
 
-    public void removeEvent(ActionEvent actionEvent) {
+    public final void removeEvent(ActionEvent actionEvent) {
         if (event.getId() != null) {
             eventModel.deleteEvent(event);
             getFacade().remove(event);
         }
     }
 
-    public void onEventSelect(ScheduleEntrySelectEvent selectEvent) {
+    public final void onEventSelect(ScheduleEntrySelectEvent selectEvent) {
         event = (Reservation) selectEvent.getScheduleEvent();
     }
 
-    public void onDateSelect(ScheduleDateSelectEvent selectEvent) {
+    public final void onDateSelect(ScheduleDateSelectEvent selectEvent) {
         event = new Reservation();
         event.setStartDate(selectEvent.getDate());
         event.setEndDate(selectEvent.getDate());
@@ -143,25 +143,25 @@ public class ScheduleController implements Serializable {
     /**
      * @return the ejbFacade
      */
-    public ReservationFacade getFacade() {
+    public final ReservationFacade getFacade() {
         return ejbFacade;
     }
 
     /**
      * @return the ejbUserFacade
      */
-    public com.linkare.rec.am.model.UserPrincipalFacade getEjbUserPrincipalFacade() {
+    public final com.linkare.rec.am.model.UserPrincipalFacade getEjbUserPrincipalFacade() {
         return ejbUserPrincipalFacade;
     }
 
     /**
      * @return the logger
      */
-    public static Logger getLogger() {
+    public static final Logger getLogger() {
         return logger;
     }
 
-    public void createReservation(ActionEvent actionEvent) {
+    public final void createReservation(ActionEvent actionEvent) {
 
         getLogger().info("createReservation");
         String userName = (String)JsfUtil.getSessionMapValue("UserName");

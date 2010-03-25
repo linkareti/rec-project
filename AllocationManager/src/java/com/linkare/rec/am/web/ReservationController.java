@@ -52,7 +52,7 @@ public class ReservationController implements Serializable {
     public ReservationController() {
     }
 
-    public Reservation getSelected() {
+    public final Reservation getSelected() {
         if (current == null) {
             current = new Reservation();
             selectedItemIndex = -1;
@@ -60,11 +60,11 @@ public class ReservationController implements Serializable {
         return current;
     }
 
-    private ReservationFacade getFacade() {
+    private final ReservationFacade getFacade() {
         return ejbFacade;
     }
 
-    public PaginationHelper getPagination() {
+    public final PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(DEFAULT_PAGE_SIZE) {
 
@@ -82,24 +82,24 @@ public class ReservationController implements Serializable {
         return pagination;
     }
 
-    public String prepareList() {
+    public final String prepareList() {
         recreateModel();
         return LIST;
     }
 
-    public String prepareView() {
+    public final String prepareView() {
         current = (Reservation) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return VIEW;
     }
 
-    public String prepareCreate() {
+    public final String prepareCreate() {
         current = new Reservation();
         selectedItemIndex = -1;
         return CREATE;
     }
 
-    public String create() {
+    public final String create() {
         try {
             processEndDateAndEndTimeSlot();
             getFacade().create(current);
@@ -111,7 +111,7 @@ public class ReservationController implements Serializable {
         }
     }
 
-    public void processEndDateAndEndTimeSlot() {
+    public final void processEndDateAndEndTimeSlot() {
         String timeSlot = current.getStartTimeSlot();
         StringTokenizer st = new StringTokenizer(timeSlot, ":");
         Calendar cal = Calendar.getInstance();
@@ -131,13 +131,13 @@ public class ReservationController implements Serializable {
         current.setEndTimeSlot(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
     }
 
-    public String prepareEdit() {
+    public final String prepareEdit() {
         current = (Reservation) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return EDIT;
     }
 
-    public String update() {
+    public final String update() {
         try {
             processEndDateAndEndTimeSlot();
             getFacade().edit(current);
@@ -149,7 +149,7 @@ public class ReservationController implements Serializable {
         }
     }
 
-    public String destroy() {
+    public final String destroy() {
         current = (Reservation) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
@@ -157,7 +157,7 @@ public class ReservationController implements Serializable {
         return LIST;
     }
 
-    public String destroyAndView() {
+    public final String destroyAndView() {
         performDestroy();
         recreateModel();
         updateCurrentItem();
@@ -194,7 +194,7 @@ public class ReservationController implements Serializable {
         }
     }
 
-    public DataModel getItems() {
+    public final DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
@@ -205,27 +205,27 @@ public class ReservationController implements Serializable {
         items = null;
     }
 
-    public String next() {
+    public final String next() {
         getPagination().nextPage();
         recreateModel();
         return LIST;
     }
 
-    public String previous() {
+    public final String previous() {
         getPagination().previousPage();
         recreateModel();
         return LIST;
     }
 
-    public SelectItem[] getItemsAvailableSelectMany() {
+    public final SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
-    public SelectItem[] getItemsAvailableSelectOne() {
+    public final SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public SelectItem[] getTimeSlotSelectOne() {
+    public final SelectItem[] getTimeSlotSelectOne() {
         return JsfUtil.getTimeSlotItems();
     }
 
@@ -233,7 +233,7 @@ public class ReservationController implements Serializable {
     public static class ReservationControllerConverter implements Converter {
 
         @Override
-        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+        public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
@@ -242,20 +242,20 @@ public class ReservationController implements Serializable {
             return controller.ejbFacade.find(getKey(value));
         }
 
-        java.lang.String getKey(String value) {
+        final java.lang.String getKey(String value) {
             java.lang.String key;
             key = value;
             return key;
         }
 
-        String getStringKey(java.lang.String value) {
+        final String getStringKey(java.lang.String value) {
             StringBuffer sb = new StringBuffer();
             sb.append(value);
             return sb.toString();
         }
 
         @Override
-        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
+        public final String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
             }

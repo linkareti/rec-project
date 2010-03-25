@@ -14,6 +14,8 @@ import java.util.ResourceBundle;
  */
 public final class BusinessException extends Exception {
 
+    private static final String NOT_FOUND = "???";
+
     private String id;
 
     private String bundle;
@@ -112,7 +114,7 @@ public final class BusinessException extends Exception {
             try {
                 detail = bundle.getString(bundleID);
             } catch (Exception e) {
-                detail = "???" + bundleID + "???";
+                detail = NOT_FOUND + bundleID + NOT_FOUND;
             }
         }
         setCode(code);
@@ -136,7 +138,7 @@ public final class BusinessException extends Exception {
             try {
                 detail = bundle.getString(bundleID);
             } catch (Exception e) {
-                detail = "???" + bundleID + "???";
+                detail = NOT_FOUND + bundleID + NOT_FOUND;
             }
 
             if (params != null) {

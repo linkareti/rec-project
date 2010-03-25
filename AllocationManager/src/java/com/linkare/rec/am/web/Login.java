@@ -38,7 +38,7 @@ public class Login implements Authenticator, Serializable {
 
     private HttpSession session;
 
-    public void login(HttpServletRequest request) {
+    public final void login(HttpServletRequest request) {
 
         if ((getCredentials().getUsername() != null
                 && getCredentials().getUsername().trim().length() > 0)
@@ -57,7 +57,7 @@ public class Login implements Authenticator, Serializable {
         }
     }
 
-    public void logout(HttpServletRequest request) {
+    public final void logout(HttpServletRequest request) {
         try {
             request.logout();
             setLoggedIn(false);
@@ -66,18 +66,18 @@ public class Login implements Authenticator, Serializable {
         }
     }
 
-    public String logout() {
+    public final String logout() {
         JsfUtil.getSession().invalidate();
 //        return "/LoginServlet?action=logout";
         return "logout";
     }
 
-    public boolean isLoggedIn() {
+    public final boolean isLoggedIn() {
         return loggedIn;
     }
 
     @Override
-    public boolean authenticate() {
+    public final boolean authenticate() {
         try {
             request.login(getCredentials().getUsername(), getCredentials().getPassword());
             setLoggedIn(true);
@@ -91,49 +91,49 @@ public class Login implements Authenticator, Serializable {
     /**
      * @return the logger
      */
-    public static Logger getLogger() {
+    public final static Logger getLogger() {
         return logger;
     }
 
     /**
      * @param loggedIn the loggedIn to set
      */
-    public void setLoggedIn(boolean loggedIn) {
+    public final void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
 
     /**
      * @return the user
      */
-    public UserPrincipal getUser() {
+    public final UserPrincipal getUser() {
         return user;
     }
 
     /**
      * @param user the user to set
      */
-    public void setUser(UserPrincipal user) {
+    public final void setUser(UserPrincipal user) {
         this.user = user;
     }
 
     /**
      * @return the session
      */
-    public HttpSession getSession() {
+    public final HttpSession getSession() {
         return session;
     }
 
     /**
      * @param session the session to set
      */
-    public void setSession(HttpSession session) {
+    public final void setSession(HttpSession session) {
         this.session = session;
     }
 
     /**
      * @return the credentials
      */
-    public Credentials getCredentials() {
+    public final Credentials getCredentials() {
         return credentials;
     }
 }

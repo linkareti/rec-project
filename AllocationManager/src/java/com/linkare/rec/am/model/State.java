@@ -23,7 +23,7 @@ public class State implements Serializable {
      *
      * @return the value of label
      */
-    public String getLabel() {
+    public final String getLabel() {
         return label;
     }
 
@@ -32,7 +32,7 @@ public class State implements Serializable {
      *
      * @param label new value of label
      */
-    public void setLabel(String label) {
+    public final void setLabel(String label) {
         this.label = label;
     }
 
@@ -41,7 +41,7 @@ public class State implements Serializable {
      *
      * @return the value of helpMessage
      */
-    public String getHelpMessage() {
+    public final String getHelpMessage() {
         return helpMessage;
     }
 
@@ -59,7 +59,7 @@ public class State implements Serializable {
      *
      * @return the value of url
      */
-    public String getUrl() {
+    public final String getUrl() {
         return url;
     }
 
@@ -68,7 +68,7 @@ public class State implements Serializable {
      *
      * @param url new value of url
      */
-    public void setUrl(String url) {
+    public final void setUrl(String url) {
         this.url = url;
     }
 
@@ -77,7 +77,7 @@ public class State implements Serializable {
      *
      * @return the value of active
      */
-    public boolean isActive() {
+    public final boolean isActive() {
         return active;
     }
 
@@ -86,7 +86,7 @@ public class State implements Serializable {
      *
      * @param active new value of active
      */
-    public void setActive(boolean active) {
+    public final void setActive(boolean active) {
         this.active = active;
     }
 }
