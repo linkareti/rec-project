@@ -18,15 +18,30 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean (name="laboratoryController")
+@ManagedBean(name = "laboratoryController")
 @RequestScoped
 public class LaboratoryController implements Serializable {
 
     private Laboratory current;
+
     private DataModel items = null;
-    @EJB private com.linkare.rec.am.model.LaboratoryFacade ejbFacade;
+
+    @EJB
+    private com.linkare.rec.am.model.LaboratoryFacade ejbFacade;
+
     private PaginationHelper pagination;
+
     private int selectedItemIndex;
+
+    private final String BUNDLE = "/Bundle";
+
+    private final String VIEW = "View";
+
+    private final String CREATE = "Create";
+
+    private final String LIST = "List";
+
+    private final String EDIT = "Edit";
 
     public LaboratoryController() {
     }
@@ -54,7 +69,7 @@ public class LaboratoryController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -63,55 +78,55 @@ public class LaboratoryController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String prepareView() {
-        current = (Laboratory)getItems().getRowData();
+        current = (Laboratory) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return VIEW;
     }
 
     public String prepareCreate() {
         current = new Laboratory();
         selectedItemIndex = -1;
-        return "Create";
+        return CREATE;
     }
 
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("LaboratoryCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("LaboratoryCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Laboratory)getItems().getRowData();
+        current = (Laboratory) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return EDIT;
     }
 
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("LaboratoryUpdated"));
-            return "View";
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("LaboratoryUpdated"));
+            return VIEW;
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String destroy() {
-        current = (Laboratory)getItems().getRowData();
+        current = (Laboratory) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String destroyAndView() {
@@ -119,20 +134,20 @@ public class LaboratoryController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return VIEW;
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return LIST;
         }
     }
 
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("LaboratoryDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("LaboratoryDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
         }
     }
 
@@ -140,14 +155,14 @@ public class LaboratoryController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count-1;
+            selectedItemIndex = count - 1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -165,13 +180,13 @@ public class LaboratoryController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
@@ -182,14 +197,15 @@ public class LaboratoryController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass=Laboratory.class)
+    @FacesConverter(forClass = Laboratory.class)
     public static class LaboratoryControllerConverter implements Converter {
 
+        @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            LaboratoryController controller = (LaboratoryController)facesContext.getApplication().getELResolver().
+            LaboratoryController controller = (LaboratoryController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "laboratoryController");
             return controller.ejbFacade.find(getKey(value));
         }
@@ -206,6 +222,7 @@ public class LaboratoryController implements Serializable {
             return sb.toString();
         }
 
+        @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
@@ -214,10 +231,8 @@ public class LaboratoryController implements Serializable {
                 Laboratory o = (Laboratory) object;
                 return getStringKey(o.getName());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+LaboratoryController.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Laboratory.class.getName());
             }
         }
-
     }
-
 }

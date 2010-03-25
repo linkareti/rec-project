@@ -11,7 +11,7 @@ import javax.ejb.Remote;
 @Remote
 public interface ResourceAllocationFacadeInterface {
 
-    public List<String> getReservations(String laboratory, String experimentName, Date startDate, Date endDate) throws Exception;
+    List<String> getReservations(String laboratory, String experimentName, Date startDate, Date endDate) throws Exception;
 
-    public void initData();
+    void initData();
 }

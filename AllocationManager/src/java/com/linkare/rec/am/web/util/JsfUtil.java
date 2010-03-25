@@ -126,9 +126,9 @@ public class JsfUtil {
     }
 
     public Object getManagedBean(String beanName, FacesContext facesContext) {
-        Object obj1 = getApplication(facesContext).getELResolver().getValue(facesContext.getELContext(), null, beanName);
-        Object obj2 = getApplication(facesContext).getVariableResolver().resolveVariable(facesContext, beanName);
-        return obj2;
+        return getApplication(facesContext).getELResolver().getValue(facesContext.getELContext(), null, beanName);
+//        Object obj2 = getApplication(facesContext).getVariableResolver().resolveVariable(facesContext, beanName);
+//        return obj2;
     }
 
     public static HttpSession getSession() {

@@ -18,15 +18,30 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@ManagedBean (name="userPrincipalController")
+@ManagedBean(name = "userPrincipalController")
 @RequestScoped
 public class UserPrincipalController implements Serializable {
 
     private UserPrincipal current;
+
     private DataModel items = null;
-    @EJB private com.linkare.rec.am.model.UserPrincipalFacade ejbFacade;
+
+    @EJB
+    private com.linkare.rec.am.model.UserPrincipalFacade ejbFacade;
+
     private PaginationHelper pagination;
+
     private int selectedItemIndex;
+
+    private final String BUNDLE = "/Bundle";
+
+    private final String VIEW = "View";
+
+    private final String CREATE = "Create";
+
+    private final String LIST = "List";
+
+    private final String EDIT = "Edit";
 
     public UserPrincipalController() {
     }
@@ -54,7 +69,7 @@ public class UserPrincipalController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -63,55 +78,55 @@ public class UserPrincipalController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String prepareView() {
-        current = (UserPrincipal)getItems().getRowData();
+        current = (UserPrincipal) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return VIEW;
     }
 
     public String prepareCreate() {
         current = new UserPrincipal();
         selectedItemIndex = -1;
-        return "Create";
+        return CREATE;
     }
 
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserPrincipalCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("UserPrincipalCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (UserPrincipal)getItems().getRowData();
+        current = (UserPrincipal) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return EDIT;
     }
 
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserPrincipalUpdated"));
-            return "View";
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("UserPrincipalUpdated"));
+            return VIEW;
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String destroy() {
-        current = (UserPrincipal)getItems().getRowData();
+        current = (UserPrincipal) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String destroyAndView() {
@@ -119,20 +134,20 @@ public class UserPrincipalController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return VIEW;
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return LIST;
         }
     }
 
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserPrincipalDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("UserPrincipalDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
         }
     }
 
@@ -140,14 +155,14 @@ public class UserPrincipalController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count-1;
+            selectedItemIndex = count - 1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -165,13 +180,13 @@ public class UserPrincipalController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
@@ -182,7 +197,7 @@ public class UserPrincipalController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    @FacesConverter(forClass=UserPrincipal.class)
+    @FacesConverter(forClass = UserPrincipal.class)
     public static class UserPrincipalControllerConverter implements Converter {
 
         @Override
@@ -190,7 +205,7 @@ public class UserPrincipalController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            UserPrincipalController controller = (UserPrincipalController)facesContext.getApplication().getELResolver().
+            UserPrincipalController controller = (UserPrincipalController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "userPrincipalController");
             return controller.ejbFacade.find(getKey(value));
         }
@@ -216,10 +231,8 @@ public class UserPrincipalController implements Serializable {
                 UserPrincipal o = (UserPrincipal) object;
                 return getStringKey(o.getName());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+UserPrincipal.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + UserPrincipal.class.getName());
             }
         }
-
     }
-
 }

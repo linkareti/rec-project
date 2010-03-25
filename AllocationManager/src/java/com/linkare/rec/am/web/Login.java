@@ -28,7 +28,7 @@ public class Login implements Authenticator, Serializable {
     private static Logger logger = Logger.getLogger("Login");
 
     @Inject
-    Credentials credentials;
+    private Credentials credentials;
 
     private UserPrincipal user = null;
 
@@ -40,18 +40,18 @@ public class Login implements Authenticator, Serializable {
 
     public void login(HttpServletRequest request) {
 
-        if ((credentials.getUsername() != null
-                && credentials.getUsername().trim().length() > 0)
-                && (credentials.getPassword() != null
-                && credentials.getPassword().trim().length() > 0)) {
+        if ((getCredentials().getUsername() != null
+                && getCredentials().getUsername().trim().length() > 0)
+                && (getCredentials().getPassword() != null
+                && getCredentials().getPassword().trim().length() > 0)) {
 
             try {
-                request.login(credentials.getUsername(), credentials.getPassword());
+                request.login(getCredentials().getUsername(), getCredentials().getPassword());
                 setSession(request.getSession());
-                getLogger().info("User '" + credentials.getUsername() + "' logged in successfully");
+                getLogger().info("User '" + getCredentials().getUsername() + "' logged in successfully");
                 setLoggedIn(true);
             } catch (ServletException ex) {
-                getLogger().info("User '" + credentials.getUsername() + "' failed to login");
+                getLogger().info("User '" + getCredentials().getUsername() + "' failed to login");
                 setLoggedIn(false);
             }
         }
@@ -79,7 +79,7 @@ public class Login implements Authenticator, Serializable {
     @Override
     public boolean authenticate() {
         try {
-            request.login(credentials.getUsername(), credentials.getPassword());
+            request.login(getCredentials().getUsername(), getCredentials().getPassword());
             setLoggedIn(true);
         } catch (ServletException ex) {
             setLoggedIn(false);
@@ -128,5 +128,12 @@ public class Login implements Authenticator, Serializable {
      */
     public void setSession(HttpSession session) {
         this.session = session;
+    }
+
+    /**
+     * @return the credentials
+     */
+    public Credentials getCredentials() {
+        return credentials;
     }
 }

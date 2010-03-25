@@ -38,6 +38,16 @@ public class UserGroupController implements Serializable {
 
     private static Logger logger = Logger.getLogger("UserGroupController");
 
+    private final String BUNDLE = "/Bundle";
+
+    private final String VIEW = "View";
+
+    private final String CREATE = "Create";
+
+    private final String LIST = "List";
+
+    private final String EDIT = "Edit";
+
     public UserGroupController() {
     }
 
@@ -73,28 +83,28 @@ public class UserGroupController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String prepareView() {
         current = (UserGroup) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return VIEW;
     }
 
     public String prepareCreate() {
         current = new UserGroup();
         selectedItemIndex = -1;
-        return "Create";
+        return CREATE;
     }
 
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserGroupCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("UserGroupCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
 
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
@@ -108,16 +118,16 @@ public class UserGroupController implements Serializable {
     public String prepareEdit() {
         current = (UserGroup) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return EDIT;
     }
 
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserGroupUpdated"));
-            return "View";
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("UserGroupUpdated"));
+            return VIEW;
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
             return null;
         }
     }
@@ -127,7 +137,7 @@ public class UserGroupController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String destroyAndView() {
@@ -135,20 +145,20 @@ public class UserGroupController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return VIEW;
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return LIST;
         }
     }
 
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserGroupDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("UserGroupDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
         }
     }
 
@@ -181,13 +191,13 @@ public class UserGroupController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {

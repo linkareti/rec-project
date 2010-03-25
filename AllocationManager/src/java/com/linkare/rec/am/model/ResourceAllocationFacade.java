@@ -26,8 +26,8 @@ public class ResourceAllocationFacade implements ResourceAllocationFacadeInterfa
             Date endDate) throws Exception {
 
 
-        Laboratory lab = null;
-        Experiment exp = null;
+//        Laboratory lab = null;
+//        Experiment exp = null;
 
 
         // security method: laboratory not null and laboratory exists.

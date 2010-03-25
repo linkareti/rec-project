@@ -1,5 +1,6 @@
 package com.linkare.rec.am.web.listener;
 
+import java.util.logging.Logger;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
@@ -10,6 +11,15 @@ import javax.faces.event.PhaseListener;
  */
 public class LifeCycleListener implements PhaseListener{
 
+    private static Logger logger = Logger.getLogger("LifeCycleListener");
+
+    /**
+     * @return the logger
+     */
+    public static Logger getLogger() {
+        return logger;
+    }
+
     @Override
     public PhaseId getPhaseId() {
         return PhaseId.ANY_PHASE;
@@ -17,12 +27,12 @@ public class LifeCycleListener implements PhaseListener{
 
     @Override
     public void beforePhase(PhaseEvent event) {
-        System.out.println("START PHASE " + event.getPhaseId());
+        getLogger().info("START PHASE " + event.getPhaseId());
     }
 
     @Override
     public void afterPhase(PhaseEvent event) {
-        System.out.println("END PHASE " + event.getPhaseId());
+        getLogger().info("END PHASE " + event.getPhaseId());
     }
 
 }

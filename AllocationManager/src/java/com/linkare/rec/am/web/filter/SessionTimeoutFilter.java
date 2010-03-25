@@ -40,17 +40,13 @@ public class SessionTimeoutFilter implements Filter {
             HttpServletRequest httpServletRequest = (HttpServletRequest) request;
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
-            // is session expire control required for this request?
-            if (isSessionControlRequiredForThisResource(httpServletRequest)) {
-
-                // is session invalid?
-                if (isSessionInvalid(httpServletRequest)) {
+            // is session expire control required for this request AND is session invalid?
+            if (isSessionControlRequiredForThisResource(httpServletRequest)&&isSessionInvalid(httpServletRequest)) {
                     String timeoutUrl = httpServletRequest.getContextPath() + "/" + getTimeoutPage();
                     logger.info("session is invalid! redirecting to timeoutpage : " + timeoutUrl);
 
                     httpServletResponse.sendRedirect(timeoutUrl);
                     return;
-                }
             }
         }
         filterChain.doFilter(request, response);

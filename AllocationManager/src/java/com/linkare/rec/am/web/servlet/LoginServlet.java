@@ -21,15 +21,15 @@ public class LoginServlet extends HttpServlet {
 
     // Inject Weld Bean Manager.
     @Inject
-    BeanManager m;
+    private BeanManager m;
+    
     // Inject The Credentials Weld bean.
-
     @Inject
-    Credentials credentials;
+    private Credentials credentials;
+
     // Inject the Login Weld bean.
-
     @Inject
-    Login login;
+    private Login login;
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -43,19 +43,19 @@ public class LoginServlet extends HttpServlet {
 
         if (request.getParameter("action").equals("logout")) {
 
-            login.logout(request);
+            getLogin().logout(request);
             response.sendRedirect("Logout.jsp");
         
         } else if (request.getParameter("action").equals("login")) {
 
-            credentials.setUsername(request.getParameter("txtUserName"));
-            credentials.setPassword(request.getParameter("txtPassword"));
+            getCredentials().setUsername(request.getParameter("txtUserName"));
+            getCredentials().setPassword(request.getParameter("txtPassword"));
 
 
-            login.login(request);
+            getLogin().login(request);
 
-            if (login.isLoggedIn()) {
-                request.getSession().setAttribute("UserName", credentials.getUsername());
+            if (getLogin().isLoggedIn()) {
+                request.getSession().setAttribute("UserName", getCredentials().getUsername());
                 response.sendRedirect(request.getContextPath() + "/faces/index.xhtml");
             } else {
                 response.sendRedirect(request.getContextPath() + "/faces/LoginError.jsp");
@@ -94,6 +94,27 @@ public class LoginServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+
+    /**
+     * @return the m
+     */
+    public BeanManager getM() {
+        return m;
+    }
+
+    /**
+     * @return the credentials
+     */
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    /**
+     * @return the login
+     */
+    public Login getLogin() {
+        return login;
     }
     // </editor-fold>
 }

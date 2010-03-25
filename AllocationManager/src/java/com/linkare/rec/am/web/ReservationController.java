@@ -35,6 +35,16 @@ public class ReservationController implements Serializable {
 
     private int selectedItemIndex;
 
+    private final String BUNDLE = "/Bundle";
+
+    private final String VIEW = "View";
+
+    private final String CREATE = "Create";
+
+    private final String LIST = "List";
+
+    private final String EDIT = "Edit";
+
     public ReservationController() {
     }
 
@@ -70,29 +80,29 @@ public class ReservationController implements Serializable {
 
     public String prepareList() {
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String prepareView() {
         current = (Reservation) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return VIEW;
     }
 
     public String prepareCreate() {
         current = new Reservation();
         selectedItemIndex = -1;
-        return "Create";
+        return CREATE;
     }
 
     public String create() {
         try {
             processEndDateAndEndTimeSlot();
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ReservationCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("ReservationCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
             return null;
         }
     }
@@ -120,17 +130,17 @@ public class ReservationController implements Serializable {
     public String prepareEdit() {
         current = (Reservation) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        return EDIT;
     }
 
     public String update() {
         try {
             processEndDateAndEndTimeSlot();
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ReservationUpdated"));
-            return "View";
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("ReservationUpdated"));
+            return VIEW;
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
             return null;
         }
     }
@@ -140,7 +150,7 @@ public class ReservationController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String destroyAndView() {
@@ -148,20 +158,20 @@ public class ReservationController implements Serializable {
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            return VIEW;
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            return LIST;
         }
     }
 
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ReservationDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("ReservationDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
         }
     }
 
@@ -194,13 +204,13 @@ public class ReservationController implements Serializable {
     public String next() {
         getPagination().nextPage();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
-        return "List";
+        return LIST;
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
