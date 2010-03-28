@@ -212,16 +212,12 @@ public class ExperimentController implements Serializable {
             return controller.ejbFacade.find(getKey(value));
         }
 
-        final java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
-            return key;
+        private Long getKey(String value) {
+            return Long.valueOf(value);
         }
 
-        final String getStringKey(java.lang.Long value) {
-            StringBuffer sb = new StringBuffer();
-            sb.append(value);
-            return sb.toString();
+        private String getStringKey(java.lang.Long value) {
+            return value.toString();
         }
 
         @Override
