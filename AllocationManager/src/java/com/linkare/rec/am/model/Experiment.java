@@ -63,7 +63,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @param id new value of id
      */
-    public void setId(Long id) {
+    protected void setId(Long id) {
         this.id = id;
     }
 
@@ -72,7 +72,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @return the value of name
      */
-    public String getName() {
+    protected String getName() {
         return name;
     }
 
@@ -81,7 +81,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @param name new value of name
      */
-    public  void setName(String name) {
+    protected  void setName(String name) {
         this.name = name;
     }
 
@@ -90,7 +90,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @return the value of description
      */
-    public String getDescription() {
+    protected String getDescription() {
         return description;
     }
 
@@ -99,7 +99,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @param description new value of description
      */
-    public void setDescription(String description) {
+    protected void setDescription(String description) {
         this.description = description;
     }
 
@@ -108,7 +108,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @return value of laboratory
      */
-    public Laboratory getLaboratory() {
+    protected Laboratory getLaboratory() {
         return laboratory;
     }
 
@@ -117,7 +117,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @param laboratory new value of laboratory
      */
-    public void setLaboratory(Laboratory laboratory) {
+    protected void setLaboratory(Laboratory laboratory) {
         this.laboratory = laboratory;
     }
 
@@ -126,7 +126,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @return value of reservations
      */
-    public List<Reservation> getReservations() {
+    protected List<Reservation> getReservations() {
         return reservations;
     }
 
@@ -135,7 +135,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @param reservations new value of reservations
      */
-    public void setReservations(List<Reservation> reservations) {
+    protected void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
 
@@ -144,7 +144,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @return value of statee
      */
-    public State getState() {
+    protected State getState() {
         return state;
     }
 
@@ -153,7 +153,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @param statee new value of statee
      */
-    public void setState(State state) {
+    protected void setState(State state) {
         this.state = state;
     }
 

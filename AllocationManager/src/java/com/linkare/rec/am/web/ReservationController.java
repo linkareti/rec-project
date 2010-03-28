@@ -242,12 +242,16 @@ public class ReservationController implements Serializable {
             return controller.ejbFacade.find(getKey(value));
         }
 
-        private String getKey(String value) {
-            return value;
+        final java.lang.String getKey(String value) {
+            java.lang.String key;
+            key = value;
+            return key;
         }
 
-        private String getStringKey(String value) {
-            return value;
+        final String getStringKey(java.lang.String value) {
+            StringBuffer sb = new StringBuffer();
+            sb.append(value);
+            return sb.toString();
         }
 
         @Override
