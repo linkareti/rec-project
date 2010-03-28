@@ -1,0 +1,6 @@
+This project was developped using NetBeans.
+It has been tested in deployment with Glassfish and the users authentication
+should be specified for the Security realm of the application server. To do so,
+go to a URL such as http://localhost:4848/common/index.jsf (according to your
+own Glassfish configurations) and add the user admin (choose a password you
+like) for the realm (file).
