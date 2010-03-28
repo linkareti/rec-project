@@ -18,29 +18,29 @@ public class UserGroupFacade {
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager em;
 
-    public void create(UserGroup userGroup) {
+    public final void create(UserGroup userGroup) {
         em.persist(userGroup);
     }
 
-    public void edit(UserGroup userGroup) {
+    public final void edit(UserGroup userGroup) {
         em.merge(userGroup);
     }
 
-    public void remove(UserGroup userGroup) {
+    public final void remove(UserGroup userGroup) {
         em.remove(em.merge(userGroup));
     }
 
-    public UserGroup find(Object id) {
+    public final UserGroup find(Object id) {
         return em.find(UserGroup.class, id);
     }
 
-    public List<UserGroup> findAll() {
+    public final List<UserGroup> findAll() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(UserGroup.class));
         return em.createQuery(cq).getResultList();
     }
 
-    public List<UserGroup> findRange(int[] range) {
+    public final List<UserGroup> findRange(int[] range) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(UserGroup.class));
         Query q = em.createQuery(cq);
@@ -49,7 +49,7 @@ public class UserGroupFacade {
         return q.getResultList();
     }
 
-    public int count() {
+    public final int count() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<UserGroup> rt = cq.from(UserGroup.class);
         cq.select(em.getCriteriaBuilder().count(rt));

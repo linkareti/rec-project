@@ -18,29 +18,29 @@ public class ExperimentFacade {
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager em;
 
-    public void create(Experiment experiment) {
+    public final void create(Experiment experiment) {
         em.persist(experiment);
     }
 
-    public void edit(Experiment experiment) {
+    public final void edit(Experiment experiment) {
         em.merge(experiment);
     }
 
-    public void remove(Experiment experiment) {
+    public final void remove(Experiment experiment) {
         em.remove(em.merge(experiment));
     }
 
-    public Experiment find(Object id) {
+    public final Experiment find(Object id) {
         return em.find(Experiment.class, id);
     }
 
-    public List<Experiment> findAll() {
+    public final List<Experiment> findAll() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Experiment.class));
         return em.createQuery(cq).getResultList();
     }
 
-    public List<Experiment> findRange(int[] range) {
+    public final List<Experiment> findRange(int[] range) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Experiment.class));
         Query q = em.createQuery(cq);
@@ -49,7 +49,7 @@ public class ExperimentFacade {
         return q.getResultList();
     }
 
-    public int count() {
+    public final int count() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Experiment> rt = cq.from(Experiment.class);
         cq.select(em.getCriteriaBuilder().count(rt));

@@ -20,29 +20,29 @@ public class ReservationFacade {
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager em;
 
-    public void create(Reservation reservation) {
+    public final void create(Reservation reservation) {
         em.persist(reservation);
     }
 
-    public void edit(Reservation reservation) {
+    public final void edit(Reservation reservation) {
         em.merge(reservation);
     }
 
-    public void remove(Reservation reservation) {
+    public final void remove(Reservation reservation) {
         em.remove(em.merge(reservation));
     }
 
-    public Reservation find(Object id) {
+    public final Reservation find(Object id) {
         return em.find(Reservation.class, id);
     }
 
-    public List<Reservation> findAll() {
+    public final List<Reservation> findAll() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Reservation.class));
         return em.createQuery(cq).getResultList();
     }
 
-    public List<Reservation> findRange(int[] range) {
+    public final List<Reservation> findRange(int[] range) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Reservation.class));
         Query q = em.createQuery(cq);
@@ -51,7 +51,7 @@ public class ReservationFacade {
         return q.getResultList();
     }
 
-    public int count() {
+    public final int count() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Reservation> rt = cq.from(Reservation.class);
         cq.select(em.getCriteriaBuilder().count(rt));
@@ -59,7 +59,7 @@ public class ReservationFacade {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    public List<ScheduleEvent> fetchLazy(Date start, Date end, UserPrincipal user) {
+    public final List<ScheduleEvent> fetchLazy(Date start, Date end, UserPrincipal user) {
         List<ScheduleEvent> eventList = em.createQuery(
                 "SELECT r FROM Reservation r "
                 + "WHERE r.userPrincipal=:user "
