@@ -2,9 +2,7 @@ package com.linkare.rec.am.web;
 
 import com.linkare.rec.am.model.Experiment;
 import com.linkare.rec.am.web.util.JsfUtil;
-import com.linkare.rec.am.web.util.PaginationHelper;
 import com.linkare.rec.am.model.ExperimentFacade;
-import java.io.Serializable;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -14,36 +12,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
-import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "experimentController")
 @RequestScoped
-public class ExperimentController implements Serializable {
-
-    private Experiment current;
-
-    private DataModel items = null;
+public class ExperimentController extends AbstractController<Experiment, ExperimentFacade> {
 
     @EJB
     private com.linkare.rec.am.model.ExperimentFacade ejbFacade;
-
-    private PaginationHelper pagination;
-
-    private int selectedItemIndex;
-
-    private static final int DEFAULT_PAGE_SIZE = 10;
-
-    private static final String BUNDLE = "/Bundle";
-
-    private static final String VIEW = "View";
-
-    private static final String CREATE = "Create";
-
-    private static final String LIST = "List";
-
-    private static final String EDIT = "Edit";
 
     public ExperimentController() {
     }
@@ -56,45 +31,19 @@ public class ExperimentController implements Serializable {
         return current;
     }
 
-    private ExperimentFacade getFacade() {
+    @Override
+    protected ExperimentFacade getFacade() {
         return ejbFacade;
     }
 
-    public final PaginationHelper getPagination() {
-        if (pagination == null) {
-            pagination = new PaginationHelper(DEFAULT_PAGE_SIZE) {
-
-                @Override
-                public int getItemsCount() {
-                    return getFacade().count();
-                }
-
-                @Override
-                public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
-                }
-            };
-        }
-        return pagination;
-    }
-
-    public final String prepareList() {
-        recreateModel();
-        return LIST;
-    }
-
-    public final String prepareView() {
-        current = (Experiment) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return VIEW;
-    }
-
+    @Override
     public final String prepareCreate() {
         current = new Experiment();
         selectedItemIndex = -1;
         return CREATE;
     }
 
+    @Override
     public final String create() {
         try {
             getFacade().create(current);
@@ -106,12 +55,7 @@ public class ExperimentController implements Serializable {
         }
     }
 
-    public final String prepareEdit() {
-        current = (Experiment) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return EDIT;
-    }
-
+    @Override
     public final String update() {
         try {
             getFacade().edit(current);
@@ -123,80 +67,13 @@ public class ExperimentController implements Serializable {
         }
     }
 
-    public final String destroy() {
-        current = (Experiment) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        performDestroy();
-        recreateModel();
-        return LIST;
-    }
-
-    public final String destroyAndView() {
-        performDestroy();
-        recreateModel();
-        updateCurrentItem();
-        if (selectedItemIndex >= 0) {
-            return VIEW;
-        } else {
-            // all items were removed - go back to list
-            recreateModel();
-            return LIST;
-        }
-    }
-
-    private void performDestroy() {
+    protected void performDestroy() {
         try {
             getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("ExperimentDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
         }
-    }
-
-    private void updateCurrentItem() {
-        int count = getFacade().count();
-        if (selectedItemIndex >= count) {
-            // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
-            // go to previous page if last page disappeared:
-            if (pagination.getPageFirstItem() >= count) {
-                pagination.previousPage();
-            }
-        }
-        if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
-        }
-    }
-
-    public final DataModel getItems() {
-        if (items == null) {
-            items = getPagination().createPageDataModel();
-        }
-        return items;
-    }
-
-    private void recreateModel() {
-        items = null;
-    }
-
-    public final String next() {
-        getPagination().nextPage();
-        recreateModel();
-        return LIST;
-    }
-
-    public final String previous() {
-        getPagination().previousPage();
-        recreateModel();
-        return LIST;
-    }
-
-    public final SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
-    }
-
-    public final SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
     @FacesConverter(forClass = Experiment.class)

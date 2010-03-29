@@ -3,8 +3,6 @@ package com.linkare.rec.am.model;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -15,33 +13,36 @@ import org.primefaces.model.ScheduleEvent;
  * @author Joao
  */
 @Stateless
-public class ReservationFacade {
+public class ReservationFacade extends Facade<Reservation> {
 
-    @PersistenceContext(unitName = "AllocationManagerPU")
-    private EntityManager em;
-
+    @Override
     public void create(Reservation reservation) {
         em.persist(reservation);
     }
 
+    @Override
     public void edit(Reservation reservation) {
         em.merge(reservation);
     }
 
+    @Override
     public void remove(Reservation reservation) {
         em.remove(em.merge(reservation));
     }
 
+    @Override
     public Reservation find(Object id) {
         return em.find(Reservation.class, id);
     }
 
+    @Override
     public List<Reservation> findAll() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Reservation.class));
         return em.createQuery(cq).getResultList();
     }
 
+    @Override
     public List<Reservation> findRange(int[] range) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Reservation.class));
@@ -51,6 +52,7 @@ public class ReservationFacade {
         return q.getResultList();
     }
 
+    @Override
     public int count() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Reservation> rt = cq.from(Reservation.class);

@@ -2,8 +2,6 @@ package com.linkare.rec.am.model;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -13,33 +11,36 @@ import javax.persistence.criteria.Root;
  * @author Joao
  */
 @Stateless
-public class UserGroupFacade {
+public class UserGroupFacade extends Facade<UserGroup> {
 
-    @PersistenceContext(unitName = "AllocationManagerPU")
-    private EntityManager em;
-
+    @Override
     public void create(UserGroup userGroup) {
         em.persist(userGroup);
     }
 
+    @Override
     public void edit(UserGroup userGroup) {
         em.merge(userGroup);
     }
 
+    @Override
     public void remove(UserGroup userGroup) {
         em.remove(em.merge(userGroup));
     }
 
+    @Override
     public UserGroup find(Object id) {
         return em.find(UserGroup.class, id);
     }
 
+    @Override
     public List<UserGroup> findAll() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(UserGroup.class));
         return em.createQuery(cq).getResultList();
     }
 
+    @Override
     public List<UserGroup> findRange(int[] range) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(UserGroup.class));
@@ -49,6 +50,7 @@ public class UserGroupFacade {
         return q.getResultList();
     }
 
+    @Override
     public int count() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<UserGroup> rt = cq.from(UserGroup.class);

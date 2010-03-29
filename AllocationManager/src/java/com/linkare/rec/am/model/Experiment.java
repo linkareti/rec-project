@@ -28,24 +28,18 @@ import javax.persistence.Table;
 public class Experiment extends Resource implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Basic
     private String name;
-
     @Basic
     private String description;
-
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER)
     private Laboratory laboratory;
-
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "experiment")
     private List<Reservation> reservations = new ArrayList<Reservation>();
-
     @Embedded
     private State state = new State();
 
@@ -81,7 +75,7 @@ public class Experiment extends Resource implements Serializable {
      *
      * @param name new value of name
      */
-    public  void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

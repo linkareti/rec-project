@@ -13,33 +13,36 @@ import javax.persistence.criteria.Root;
  * @author Joao
  */
 @Stateless
-public class ExperimentFacade {
+public class ExperimentFacade extends Facade<Experiment> {
 
-    @PersistenceContext(unitName = "AllocationManagerPU")
-    private EntityManager em;
-
+    @Override
     public void create(Experiment experiment) {
         em.persist(experiment);
     }
 
+    @Override
     public void edit(Experiment experiment) {
         em.merge(experiment);
     }
 
+    @Override
     public void remove(Experiment experiment) {
         em.remove(em.merge(experiment));
     }
 
+    @Override
     public Experiment find(Object id) {
         return em.find(Experiment.class, id);
     }
 
+    @Override
     public List<Experiment> findAll() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Experiment.class));
         return em.createQuery(cq).getResultList();
     }
 
+    @Override
     public List<Experiment> findRange(int[] range) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Experiment.class));
@@ -49,6 +52,7 @@ public class ExperimentFacade {
         return q.getResultList();
     }
 
+    @Override
     public int count() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Experiment> rt = cq.from(Experiment.class);
