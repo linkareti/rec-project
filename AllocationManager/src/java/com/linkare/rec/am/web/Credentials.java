@@ -28,28 +28,28 @@ public class Credentials implements Serializable {
     /**
      * @return the username
      */
-    public final String getUsername() {
+    public String getUsername() {
         return username;
     }
 
     /**
      * @param username the username to set
      */
-    public final void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
     /**
      * @return the password
      */
-    public final String getPassword() {
+    public String getPassword() {
         return password;
     }
 
     /**
      * @param password the password to set
      */
-    public final void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }
