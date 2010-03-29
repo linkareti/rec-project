@@ -18,29 +18,29 @@ public class UserPrincipalFacade {
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager em;
 
-    public final void create(UserPrincipal userPrincipal) {
+    public void create(UserPrincipal userPrincipal) {
         em.persist(userPrincipal);
     }
 
-    public final void edit(UserPrincipal userPrincipal) {
+    public void edit(UserPrincipal userPrincipal) {
         em.merge(userPrincipal);
     }
 
-    public final void remove(UserPrincipal userPrincipal) {
+    public void remove(UserPrincipal userPrincipal) {
         em.remove(em.merge(userPrincipal));
     }
 
-    public final UserPrincipal find(Object id) {
+    public UserPrincipal find(Object id) {
         return em.find(UserPrincipal.class, id);
     }
 
-    public final List<UserPrincipal> findAll() {
+    public List<UserPrincipal> findAll() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(UserPrincipal.class));
         return em.createQuery(cq).getResultList();
     }
 
-    public final List<UserPrincipal> findRange(int[] range) {
+    public List<UserPrincipal> findRange(int[] range) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(UserPrincipal.class));
         Query q = em.createQuery(cq);
@@ -49,7 +49,7 @@ public class UserPrincipalFacade {
         return q.getResultList();
     }
 
-    public final int count() {
+    public int count() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<UserPrincipal> rt = cq.from(UserPrincipal.class);
         cq.select(em.getCriteriaBuilder().count(rt));
