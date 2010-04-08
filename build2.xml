@@ -105,11 +105,11 @@
 		
 	</target>
 
-	<target name="pack.jar.rec.common" description="Packages and compresses the jar for p200 distribution.">
+	<!--target name="pack.jar.rec.common" description="Packages and compresses the jar for p200 distribution.">
 		<pack.200.single.jar destination.directory="${common.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ReCCommon"/>
-	</target>
+	</target-->
 
-	<target name="build.rec.common" depends="clean.rec.common,compile.rec.common,pack.jar.rec.common">
+	<target name="build.rec.common" depends="clean.rec.common,compile.rec.common">
 
 	</target>
 	
@@ -207,11 +207,11 @@
 		
 	</target>
 
-	<target name="pack.jar.rec.client" description="Packages and compresses the jar for p200 distribution.">
+	<!--target name="pack.jar.rec.client" description="Packages and compresses the jar for p200 distribution.">
 		<pack.200.single.jar destination.directory="${client.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ReCClient"/>
-	</target>
+	</target-->
 	
-	<target name="build.rec.client" depends="build.rec.common,clean.rec.client,compile.rec.client,pack.jar.rec.client">
+	<target name="build.rec.client" depends="build.rec.common,clean.rec.client,compile.rec.client">
 	</target>
 
 	<!--
@@ -538,11 +538,11 @@
 		
 	</target>
 	
-	<target name="pack.jar.elab.client" description="Packages and compresses the jar for p200 distribution.">
+	<!--target name="pack.jar.elab.client" description="Packages and compresses the jar for p200 distribution.">
 		<pack.200.single.jar destination.directory="${client.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ELabClient"/>
-	</target>
+	</target-->
 
-	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,pack.jar.elab.client">
+	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client">
 
 	</target>
 	
@@ -763,7 +763,7 @@
 
 	</target>
 
-	<target name="jar.all" depends="pack.jar.rec.common,pack.jar.rec.client,jar.rec.hardwareserver,jar.rec.multicastcontroller,pack.jar.elab.client,jar.elab.hardwareserver,jar.elab.multicastcontroller">
+	<target name="jar.all" depends="jar.rec.hardwareserver,jar.rec.multicastcontroller,jar.elab.hardwareserver,jar.elab.multicastcontroller">
 
 	</target>
 
@@ -1055,11 +1055,11 @@
         <sequential>
             <mkdir dir="@{destination}"/>
         	
-        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre.jar" />
+        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
         	
         	<jar destfile="@{destination}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client"/>
         	
-        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post.jar" />
+        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
         	
         </sequential>
     </macrodef>
@@ -1084,10 +1084,12 @@
 		<attribute name="experiment.name" />
 		<sequential>
 			<clean.experiment experiment.name="@{experiment.name}" />
-			<compile.experiment experiment.name="@{experiment.name}" />
-			<jar.experime experiment.name="@{experiment.name}" />
-			<sign.experiment experiment.name="@{experiment.name}" />
-			<create.jnlp.for.experiment experiment.name="@{experiment.name}" />
+			<compile.experiment.client experiment.name="@{experiment.name}" />
+			<compile.experiment.driver experiment.name="@{experiment.name}" />
+			<!--jar.experiment.client experiment.name="@{experiment.name}" />
+			<jar.experiment.driver experiment.name="@{experiment.name}" />
+			<sign. experiment.name="@{experiment.name}" />
+			<create.jnlp.for.experiment experiment.name="@{experiment.name}" /-->
 		</sequential>
 	</macrodef>
 
@@ -1347,7 +1349,7 @@
 	
 	<target name="sign.experiment">
 		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<sign.experiment experiment.name="${experiment.name}" />
+		<sign.jar folder="" jar.name="${experiment.name}Client.jar" />
 	</target>
 
 	<target name="sign.experiments.list">
