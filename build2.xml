@@ -1086,9 +1086,9 @@
 			<clean.experiment experiment.name="@{experiment.name}" />
 			<compile.experiment.client experiment.name="@{experiment.name}" />
 			<compile.experiment.driver experiment.name="@{experiment.name}" />
-			<!--jar.experiment.client experiment.name="@{experiment.name}" />
-			<jar.experiment.driver experiment.name="@{experiment.name}" />
-			<sign. experiment.name="@{experiment.name}" />
+			<!--jar.experiment.client experiment.name="@{experiment.name}" /-->
+			<jar.experiment.driver experiment.name="@{experiment.name}" destination="${hardwareserver.build.dir}"/>
+			<!--sign. experiment.name="@{experiment.name}" />
 			<create.jnlp.for.experiment experiment.name="@{experiment.name}" /-->
 		</sequential>
 	</macrodef>
@@ -1330,7 +1330,7 @@
 	
 	<target name="jar.experiment.driver">
 		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<jar.experiment.driver experiment.name="${experiment.name}" destination="" />
+		<jar.experiment.driver experiment.name="${experiment.name}" destination="${hardwareserver.build.dir}" />
 	</target>
 
 	<target name="jar.experiment.clients.list">
