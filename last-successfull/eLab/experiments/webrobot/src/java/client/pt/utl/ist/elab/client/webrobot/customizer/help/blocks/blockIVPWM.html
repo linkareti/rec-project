@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Bloco de sensores de infravermelhos para actualiza&ccedil;&atilde;o do PWM</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF">
+<p><img src="../images/ivpwm.gif" width="72" height="40"></p>
+<p>Este bloco permite relacionar o valor dos sensores de infra-vermelhos, com 
+  diferentes velocidades para as rodas do robot.</p>
+<p><img src="../images/confIVPWM.GIF" width="492" height="310"></p>
+<p>&nbsp;</p>
+<p><b><i><font color="#003399">Configura&ccedil;&atilde;o dos sensores a utilizar</font></i></b></p>
+<p><img src="../images/confIVPWM2.GIF" width="492" height="310"></p>
+<p>S&atilde;o seleccionados os sensores a utilizar. Com a configura&ccedil;&atilde;o 
+  da figura ser&atilde;o utilizados os sensores I2, I3, e I4.</p>
+<p><b>nota:</b> todos os sensores s&atilde;o sempre lidos, mesmo que n&atilde;o 
+  seleccionados.</p>
+<p>&nbsp; </p>
+<p><b><i><font color="#003399">Configura&ccedil;&atilde;o dos n&iacute;veis</font></i></b></p>
+<p><img src="../images/confIVPWM3.GIF" width="492" height="310"></p>
+<p><i>&quot;</i><i>O sinal recebido pelo microcontrolador vindo de cada sensor 
+  é um sinal analógico entre 0 e 5 V. Correspondendo o caso de 5V, à existência 
+  de uma superfície bastante reflectora e os 0V correspondem à inexistência de 
+  reflexão. Geralmente as superfícies escuras reflectem, por isso é necessário 
+  tentar determinar um nível entre 0 e 5 V que permita distinguir o branco do 
+  preto.</i></p>
+<p><i>O microcontrolador contem um conversor Analógico/Digital incorporado que 
+  converte as tensões em valores entre 0 e 255, correspondendo o 0 a 0V e 255 
+  a 5V. O utilizador terá de escolher o nível que permita ao robot distinguir 
+  o branco do preto. Só podem ser configurados os sensores que estejam assinalados. 
+  Depois dos sensores escolhidos serem lidos, os valores são comparados com os 
+  níveis, sendo convertidos em binário, zero ou um, conforme estejam acima ou 
+  abaixo do nível.</i></p>
+<p><i> <b>Se o valor lido for superior ao valor do nível</b>, o sensor estará 
+  sobre uma superfície reflectora, neste caso este bloco considera que o valor 
+  desse sensor é 0. <b>Se o valor lido for inferior ao valor do nível</b>, o sensor 
+  estará sobre uma superfície não reflectora, neste caso este bloco considera 
+  que o valor desse sensor é 1.&quot;</i></p>
+<p align="right"><i>Retirado do Help do <a href="../whatis/prograf.html">Prograf</a></i></p>
+<p align="right">&nbsp;</p>
+<p align="left"><b><i><font color="#003399">Configura&ccedil;&atilde;o da velocidade 
+  dos motores</font></i></b></p>
+<p align="left">Se deseja adicionar um novo elemento, basta clicar com o bot&atilde;o 
+  esquerdo do rato sobre o bot&atilde;o <i>novo elemento</i>.</p>
+<p align="left"><img src="../images/confIVPWM4.GIF" width="492" height="309"></p>
+<p align="left">Note que s&oacute; pode configurar os sensores seleccionados previamente.</p>
+<p align="left">Para editar ou apagar elementos j&aacute; adicionados, basta clicar 
+  duas vezes com o bot&atilde;o esquerdo do rato sobre a linha que se deseja editar.</p>
+<p align="left">&nbsp;</p>
+<p align="left"><b><i><font color="#000099">Equival&ecirc;ncia</font></i></b></p>
+<p align="left"><font color="#000000">Todas as configura&ccedil;&otilde;es dos 
+  blocos de IVPWM podem ser efectuadas recorrendo a <a href="compBlocks.html">blocos 
+  de tipo AND</a> e <a href="blockpwm.html">blocos de PWM</a>.</font></p>
+<p align="left"><font color="#000000">Por exemplo, a configura&ccedil;&atilde;o 
+  anterior &eacute; equivalente a:</font></p>
+<p align="left"><img src="../images/confIVPWM5.GIF" width="651" height="360"></p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp;</p>
+<p align="right">&nbsp;</p>
+</body>
+</html>
