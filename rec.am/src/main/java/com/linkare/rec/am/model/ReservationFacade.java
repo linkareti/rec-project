@@ -2,14 +2,14 @@ package com.linkare.rec.am.model;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+
 import org.primefaces.model.ScheduleEvent;
 
 /**
- *
+ * 
  * @author Joao
  */
 @Stateless
@@ -17,56 +17,51 @@ public class ReservationFacade extends Facade<Reservation> {
 
     @Override
     public void create(Reservation reservation) {
-        em.persist(reservation);
+	em.persist(reservation);
     }
 
     @Override
     public void edit(Reservation reservation) {
-        em.merge(reservation);
+	em.merge(reservation);
     }
 
     @Override
     public void remove(Reservation reservation) {
-        em.remove(em.merge(reservation));
+	em.remove(em.merge(reservation));
     }
 
     @Override
     public Reservation find(Object id) {
-        return em.find(Reservation.class, id);
+	return em.find(Reservation.class, id);
     }
 
     @Override
     public List<Reservation> findAll() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Reservation.class));
-        return em.createQuery(cq).getResultList();
+	final Query query = em.createNamedQuery("Reservation.findAll");
+	return query.getResultList();
     }
 
     @Override
     public List<Reservation> findRange(int[] range) {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Reservation.class));
-        Query q = em.createQuery(cq);
-        q.setMaxResults(range[1] - range[0]);
-        q.setFirstResult(range[0]);
-        return q.getResultList();
+	final Query query = em.createNamedQuery("Reservation.findAll");
+	query.setMaxResults(range[1] - range[0]);
+	query.setFirstResult(range[0]);
+	return query.getResultList();
     }
 
     @Override
     public int count() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<Reservation> rt = cq.from(Reservation.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+	final Query query = em.createNamedQuery("Reservation.countAll");
+	return ((Long) query.getSingleResult()).intValue();
     }
 
     public List<ScheduleEvent> fetchLazy(Date start, Date end, UserPrincipal user) {
-        List<ScheduleEvent> eventList = em.createQuery(
-                "SELECT r FROM Reservation r "
-                + "WHERE r.userPrincipal=:user "
-                + "AND r.startDate BETWEEN :start AND :end").setParameter("user", user).setParameter("start", start).setParameter("end", end).getResultList();
+	List<ScheduleEvent> eventList = em.createQuery(
+						       "SELECT r FROM Reservation r " + "WHERE r.userPrincipal=:user "
+							       + "AND r.startDate BETWEEN :start AND :end").setParameter("user", user).setParameter("start",
+																		    start)
+					  .setParameter("end", end).getResultList();
 
-        return eventList;
+	return eventList;
     }
 }

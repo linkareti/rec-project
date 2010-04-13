@@ -5,19 +5,27 @@
 package com.linkare.rec.am.model;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.linkare.commons.jpa.Identifiable;
+import com.linkare.commons.jpa.utils.EntityManagerLocator;
+
 /**
- *
+ * 
  * This abstract class provides the methods that should be implemented by all entity facades.
- *
+ * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class Facade<T> {
+public abstract class Facade<T extends Identifiable<? extends Object>> {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "AllocationManagerPU")
     protected EntityManager em;
+
+    {
+	EntityManagerLocator.setCurrentEntityManager(em);
+    }
 
     public abstract void create(T t);
 

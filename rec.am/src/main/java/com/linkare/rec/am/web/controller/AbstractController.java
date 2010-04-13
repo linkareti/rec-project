@@ -5,11 +5,13 @@
 package com.linkare.rec.am.web.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+import com.linkare.commons.jpa.Identifiable;
 import com.linkare.rec.am.model.Facade;
 import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.web.util.PaginationHelper;
@@ -20,17 +22,28 @@ import com.linkare.rec.am.web.util.PaginationHelper;
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class AbstractController<Entity, EntityFacade extends Facade<Entity>> implements Serializable {
+public abstract class AbstractController<Entity extends Identifiable<? extends Object>, EntityFacade extends Facade<Entity>> implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     protected int selectedItemIndex;
-    protected PaginationHelper pagination;
+
+    protected PaginationHelper<Entity> pagination;
+
     protected Entity current;
-    protected DataModel items = null;
+
+    protected DataModel<Entity> items = null;
+
     public static final int DEFAULT_PAGE_SIZE = 10;
+
     public static final String BUNDLE = "/Bundle";
+
     public static final String VIEW = "View";
+
     public static final String CREATE = "Create";
+
     public static final String LIST = "List";
+
     public static final String EDIT = "Edit";
 
     public abstract Entity getSelected();
@@ -43,9 +56,9 @@ public abstract class AbstractController<Entity, EntityFacade extends Facade<Ent
 
     public abstract String update();
 
-    public PaginationHelper getPagination() {
+    public PaginationHelper<Entity> getPagination() {
 	if (pagination == null) {
-	    pagination = new PaginationHelper(DEFAULT_PAGE_SIZE) {
+	    pagination = new PaginationHelper<Entity>(DEFAULT_PAGE_SIZE) {
 
 		@Override
 		public int getItemsCount() {
@@ -53,8 +66,8 @@ public abstract class AbstractController<Entity, EntityFacade extends Facade<Ent
 		}
 
 		@Override
-		public DataModel createPageDataModel() {
-		    return new ListDataModel(getFacade().findRange(new int[] { getPageFirstItem(), getPageFirstItem() + getPageSize() }));
+		public DataModel<Entity> createPageDataModel() {
+		    return new ListDataModel<Entity>(getFacade().findRange(new int[] { getPageFirstItem(), getPageFirstItem() + getPageSize() }));
 		}
 	    };
 	}
@@ -67,14 +80,21 @@ public abstract class AbstractController<Entity, EntityFacade extends Facade<Ent
     }
 
     public String prepareView() {
-	current = (Entity) getItems().getRowData();
-	selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+	initCurrent();
 	return VIEW;
     }
 
+    private void initCurrent() {
+	if (current != null) {
+	    selectedItemIndex = 0;
+	} else {
+	    current = getFacade().find(getItems().getRowData().getPk());
+	    selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+	}
+    }
+
     public String prepareEdit() {
-	current = (Entity) getItems().getRowData();
-	selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+	initCurrent();
 	return EDIT;
     }
 
@@ -106,7 +126,7 @@ public abstract class AbstractController<Entity, EntityFacade extends Facade<Ent
 	}
     }
 
-    public DataModel getItems() {
+    public DataModel<Entity> getItems() {
 	if (items == null) {
 	    items = getPagination().createPageDataModel();
 	}
@@ -135,6 +155,10 @@ public abstract class AbstractController<Entity, EntityFacade extends Facade<Ent
 	getPagination().previousPage();
 	recreateModel();
 	return LIST;
+    }
+
+    public List<Entity> getAll() {
+	return getFacade().findAll();
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {

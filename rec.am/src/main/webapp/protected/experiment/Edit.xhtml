@@ -14,9 +14,8 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
+            	<h:inputHidden id="id" value="#{experimentController.selected.pk}" />
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditExperimentLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{experimentController.selected.id}" title="#{bundle.EditExperimentTitle_id}" />
                     <h:outputLabel value="#{bundle.EditExperimentLabel_name}" for="name" />
                     <h:inputText id="name" value="#{experimentController.selected.name}" title="#{bundle.EditExperimentTitle_name}" />
                     <h:outputLabel value="#{bundle.EditExperimentLabel_description}" for="description" />

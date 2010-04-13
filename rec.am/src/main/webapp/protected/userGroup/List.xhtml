@@ -28,14 +28,6 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserGroupTitle_members}"/>
-                            </f:facet>
-                            <h:selectOneMenu value="#{item.members}" readonly="true">
-                                <f:selectItems value="#{item.members}"/>
-                            </h:selectOneMenu>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
                             <h:commandLink action="#{userGroupController.prepareView}" value="#{bundle.ListUserGroupViewLink}"/>

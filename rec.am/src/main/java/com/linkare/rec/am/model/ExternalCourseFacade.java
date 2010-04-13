@@ -2,36 +2,36 @@ package com.linkare.rec.am.model;
 
 import java.util.List;
 
+import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.web.moodle.MoodleClientHelper;
-import com.linkare.rec.am.wsgen.moodle.CourseRecord;
 import com.linkare.rec.am.wsgen.moodle.UserRecord;
 
-public class ExternalCourseFacade extends Facade<CourseRecord> {
+public class ExternalCourseFacade extends Facade<ExternalCourse> {
 
-    private List<CourseRecord> courseRecords;
+    private List<ExternalCourse> courseRecords;
 
     @Override
-    public void create(CourseRecord courseRecord) {
+    public void create(ExternalCourse courseRecord) {
 	throw new UnsupportedOperationException("external.courses.create.not.available");
     }
 
     @Override
-    public void edit(CourseRecord courseRecord) {
+    public void edit(ExternalCourse courseRecord) {
 	throw new UnsupportedOperationException("external.courses.edit.not.available");
     }
 
     @Override
-    public void remove(CourseRecord courseRecord) {
+    public void remove(ExternalCourse courseRecord) {
 	throw new UnsupportedOperationException("external.courses.remove.not.available");
     }
 
     @Override
-    public CourseRecord find(Object id) {
+    public ExternalCourse find(Object id) {
 	return MoodleClientHelper.findCourse(id);
     }
 
     @Override
-    public List<CourseRecord> findAll() {
+    public List<ExternalCourse> findAll() {
 	if (courseRecords == null) {
 	    courseRecords = MoodleClientHelper.findCurrentUserCourses();
 	}
@@ -39,7 +39,7 @@ public class ExternalCourseFacade extends Facade<CourseRecord> {
     }
 
     @Override
-    public List<CourseRecord> findRange(int[] range) {
+    public List<ExternalCourse> findRange(int[] range) {
 	return findAll();
     }
 

@@ -3,120 +3,120 @@ package com.linkare.rec.am.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import com.linkare.commons.jpa.security.Group;
+import com.linkare.commons.jpa.security.User;
+import com.linkare.commons.utils.EqualityUtils;
 
 /**
- *
+ * 
  * @author Joao
  */
 @Entity
-public class UserGroup extends Resource implements Serializable {
+@NamedQueries( { @NamedQuery(name = "UserGroup.findAll", query = "Select ug from UserGroup as ug order by ug.name"),
+	@NamedQuery(name = "UserGroup.countAll", query = "Select count(ug) from UserGroup ug") })
+public class UserGroup extends Group implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    private String name;
-
-    @JoinTable(name = "USERPRINCIPAL_USERGROUP", joinColumns =
-    @JoinColumn(name = "USERGROUP_ID", referencedColumnName = "NAME"),
-    inverseJoinColumns =
-    @JoinColumn(name = "USERPRINCIPAL_ID", referencedColumnName = "NAME"))
-    @ManyToMany
-    private List<UserPrincipal> members = new ArrayList<UserPrincipal>();
+    @Transient
+    private List<UserPrincipal> nonMembers;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userGroup", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
     @Override
+    public boolean equals(final Object other) {
+	if (!(other instanceof UserGroup)) {
+	    return false;
+	}
+	return equalsTo((UserGroup) other);
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (name != null ? name.hashCode() : 0);
-        return hash;
+	int result = 14;
+	result = 29 * result + (getName() != null ? getName().hashCode() : 0);
+	return result;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof UserGroup)) {
-            return false;
-        }
-        UserGroup other = (UserGroup) object;
-        if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return name;
+    private boolean equalsTo(final UserGroup other) {
+	return EqualityUtils.equals(getName(), other.getName());
     }
 
     public boolean hasMembers() {
-        return !members.isEmpty();
+	return hasAnyChild();
     }
 
-    public boolean addMember(UserPrincipal user) {
-        return members.add(user);
+    public void addMember(UserPrincipal user) {
+	addDirectChild(user);
     }
 
-    public boolean removeMember(UserPrincipal user) {
-        return members.remove(user);
+    public void removeMember(UserPrincipal user) {
+	removeDirectChild(user);
     }
 
     public boolean isMember(UserPrincipal member) {
-        return members.contains(member);
+	return super.isMemberOf(member);
     }
 
     /**
      * @return the members
      */
-    public List<UserPrincipal> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<UserPrincipal> members) {
-        this.members = members;
+    public List<User> getMembers() {
+	return getAllUsers();
     }
 
     /**
-     * @return the name
+     * @return the members
      */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
+    public void setMembers(final List<UserPrincipal> users) {
+	getDirectChilds().addAll(users);
     }
 
     /**
      * @return the reservations
      */
     public List<Reservation> getReservations() {
-        return reservations;
+	return reservations;
     }
 
     /**
-     * @param reservations the reservations to set
+     * @param reservations
+     *            the reservations to set
      */
     public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
+	this.reservations = reservations;
     }
 
     /**
-     * @param reservations the reservations to set
+     * @param reservations
+     *            the reservations to set
      */
     public void addReservations(Reservation reservation) {
-        this.reservations.add(reservation);
+	this.reservations.add(reservation);
+    }
+
+    /**
+     * @return the nonMembers
+     */
+    public List<UserPrincipal> getNonMembers() {
+	return nonMembers;
+    }
+
+    /**
+     * @param nonMembers
+     *            the nonMembers to set
+     */
+    public void setNonMembers(List<UserPrincipal> nonMembers) {
+	this.nonMembers = nonMembers;
     }
 }

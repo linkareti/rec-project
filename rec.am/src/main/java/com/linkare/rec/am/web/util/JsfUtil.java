@@ -1,5 +1,6 @@
 package com.linkare.rec.am.web.util;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.FactoryFinder;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.linkare.commons.jpa.Identifiable;
+
 public final class JsfUtil {
 
     private static final int MAX_ITEM_INDEX = 49;
@@ -24,7 +27,7 @@ public final class JsfUtil {
     private JsfUtil() {
     }
 
-    public static SelectItem[] getSelectItems(List<?> entities, boolean selectOne) {
+    public static <T extends Identifiable<? extends Object>> SelectItem[] getSelectItems(List<T> entities, boolean selectOne) {
 	int size = selectOne ? entities.size() + 1 : entities.size();
 	SelectItem[] items = new SelectItem[size];
 	int i = 0;
@@ -32,7 +35,7 @@ public final class JsfUtil {
 	    items[0] = new SelectItem("", "---");
 	    i++;
 	}
-	for (Object x : entities) {
+	for (final T x : entities) {
 	    items[i++] = new SelectItem(x, x.toString());
 	}
 	return items;
@@ -72,6 +75,13 @@ public final class JsfUtil {
 	return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
     }
 
+    public static Object getObjectFromRequestParameter(String requestParameterName, Converter converter) {
+	final UIComponent component = JsfUtil.findComponent(FacesContext.getCurrentInstance().getViewRoot(), requestParameterName);
+	final String clientId = component == null ? null : component.getClientId();
+	final String value = JsfUtil.getRequestParameter(clientId);
+	return converter.getAsObject(FacesContext.getCurrentInstance(), component, value);
+    }
+
     public static SelectItem[] getTimeSlotItems() {
 	SelectItem[] items = new SelectItem[MAX_ITEM_INDEX];
 	int i = 0;
@@ -92,6 +102,20 @@ public final class JsfUtil {
 	}
 	return items;
 
+    }
+
+    public static UIComponent findComponent(UIComponent c, String id) {
+	if (id.equals(c.getId())) {
+	    return c;
+	}
+	Iterator<UIComponent> kids = c.getFacetsAndChildren();
+	while (kids.hasNext()) {
+	    UIComponent found = findComponent(kids.next(), id);
+	    if (found != null) {
+		return found;
+	    }
+	}
+	return null;
     }
 
     public static Object getSessionMapValue(String key) {

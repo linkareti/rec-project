@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.xml.rpc.ServiceException;
 
+import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.wsgen.moodle.CourseRecord;
 import com.linkare.rec.am.wsgen.moodle.LoginReturn;
 import com.linkare.rec.am.wsgen.moodle.MoodleWS;
@@ -33,17 +34,34 @@ public final class MoodleClientHelper {
     private MoodleClientHelper() {
     }
 
-    public static CourseRecord findCourse(final Object id) {
-	CourseRecord[] courseRecords = new CourseRecord[] {};
+    public static ExternalCourse findCourse(final Object id) {
+	final List<ExternalCourse> courseRecords = new ArrayList<ExternalCourse>(1);
 	try {
-	    courseRecords = MOODLEWS_PORT.get_course(getClient(), getSessionkey(), id == null ? null : id.toString(), "shortname").getCourses();
+	    courseRecords.addAll(toExternalCourses(MOODLEWS_PORT.get_course(getClient(), getSessionkey(), id == null ? null : id.toString(), "shortname")
+								.getCourses()));
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	}
-	return courseRecords.length == 0 ? null : courseRecords[0];
+	return courseRecords.size() == 0 ? null : courseRecords.get(0);
     }
 
-    public static List<CourseRecord> findCurrentUserCourses() {
+    private static List<ExternalCourse> toExternalCourses(final CourseRecord[] courseRecords) {
+	final List<ExternalCourse> result = new ArrayList<ExternalCourse>(courseRecords == null ? 0 : courseRecords.length);
+	for (final CourseRecord courseRecord : courseRecords) {
+	    result.add(new ExternalCourse(courseRecord));
+	}
+	return result;
+    }
+
+    private static List<ExternalCourse> toExternalCourses(final List<CourseRecord> courseRecords) {
+	final List<ExternalCourse> result = new ArrayList<ExternalCourse>(courseRecords == null ? 0 : courseRecords.size());
+	for (final CourseRecord courseRecord : courseRecords) {
+	    result.add(new ExternalCourse(courseRecord));
+	}
+	return result;
+    }
+
+    public static List<ExternalCourse> findCurrentUserCourses() {
 	final String username = SessionHelper.getUsername();
 	final List<CourseRecord> result = new ArrayList<CourseRecord>();
 	if (username != null) {
@@ -60,10 +78,10 @@ public final class MoodleClientHelper {
 		    }
 		}
 	    } catch (RemoteException e) {
-		return Collections.<CourseRecord> emptyList();
+		return Collections.<ExternalCourse> emptyList();
 	    }
 	}
-	return result;
+	return toExternalCourses(result);
     }
 
     public static UserRecord[] getStudents(final String courseShortName) {

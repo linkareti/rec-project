@@ -106,7 +106,7 @@ public class ExperimentController extends AbstractController<Experiment, Experim
 	    }
 	    if (object instanceof Experiment) {
 		Experiment o = (Experiment) object;
-		return getStringKey(o.getId());
+		return getStringKey(o.getPk());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
 			+ Experiment.class.getName());
