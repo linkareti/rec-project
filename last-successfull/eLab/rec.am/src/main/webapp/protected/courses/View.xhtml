@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewExperimentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewExperimentLabel_id}"/>
+                    <h:outputText value="#{externalCourseController.selected.id}" title="#{bundle.ViewExperimentTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewExperimentLabel_name}"/>
+                    <h:outputText value="#{externalCourseController.selected.shortname}" title="#{bundle.ViewExperimentTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewExperimentLabel_description}"/>
+                    <h:outputText value="#{externalCourseController.selected.fullname}" title="#{bundle.ViewExperimentTitle_description}"/>
+                    
+                    <h:outputLabel value="#{bundle.ViewUserGroupLabel_members}" for="teachers" />
+                    <h:dataTable value="#{externalCourseController.teachers}" var="teacher" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    	<h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperimentTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{teacher.username}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperimentTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{teacher.firstname}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperimentTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{teacher.lastname}"/>
+                        </h:column>
+                    </h:dataTable>
+                    
+                    <h:outputLabel value="#{bundle.ViewUserGroupLabel_members}" for="students" />
+                    <h:dataTable value="#{externalCourseController.students}" var="student" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    	<h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperimentTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{student.username}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperimentTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{student.firstname}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperimentTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{student.lastname}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{externalCourseController.prepareList}" value="#{bundle.ViewExperimentShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/protected/backoffice" immediate="true" />
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewExperimentIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
