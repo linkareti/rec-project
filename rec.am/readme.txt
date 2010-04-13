@@ -153,3 +153,7 @@ tag:				HEAD
 
 The installation of this plugin as well as moodle itself should be straightforward. Nevertheless, just as a reminder, don't forget to install the
 php-soap from urpmi (urpmi php-soap).
+
+Credentials for login through wspp: 
+admin
+Linkare.2009
