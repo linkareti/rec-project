@@ -9,7 +9,6 @@
 		<jta-data-source>jdbc/allocation</jta-data-source>
 		
 		<class>com.linkare.commons.jpa.security.Subject</class>
-		<class>com.linkare.commons.jpa.security.PrincipalsAssociation</class>
 		<class>com.linkare.commons.jpa.security.User</class>
 		<class>com.linkare.commons.jpa.security.Role</class>
 		

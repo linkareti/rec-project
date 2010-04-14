@@ -56,6 +56,17 @@ public abstract class AbstractController<Entity extends Identifiable<? extends O
 
     public abstract String update();
 
+    /**
+     * @return the current
+     */
+    public abstract Entity getCurrent();
+
+    /**
+     * @param current
+     *            the current to set
+     */
+    public abstract void setCurrent(Entity current);
+
     public PaginationHelper<Entity> getPagination() {
 	if (pagination == null) {
 	    pagination = new PaginationHelper<Entity>(DEFAULT_PAGE_SIZE) {

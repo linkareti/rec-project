@@ -2,11 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/template.xhtml">
 	<ui:define name="title">
-		<h:outputText value="#{bundle.ViewExperimentTitle}"></h:outputText>
+		<h:outputText value="#{bundle.page.role.edit.title}"></h:outputText>
 	</ui:define>
 	<ui:define name="body">
 		<h:panelGroup id="messagePanel" layout="block">
@@ -16,30 +17,22 @@
 		<h:form>
 
 			<ui:include src="inner-form.xhtml">
-				<ui:param name="operation" value="view" />
+				<ui:param name="operation" value="edit" />
 			</ui:include>
 
 			<br />
-			<h:commandLink action="#{experimentController.destroyAndView}"
-				value="#{bundle.ViewExperimentDestroyLink}" />
+			<h:commandLink action="View" value="#{bundle.operation.view}" />
+			<br />
+			<h:commandLink action="#{roleController.prepareList}"
+				value="#{bundle.operation.list}" immediate="true" />
 			<br />
 			<br />
-			<h:commandLink action="Edit" value="#{bundle.ViewExperimentEditLink}" />
-			<br />
-			<h:commandLink action="#{experimentController.prepareCreate}"
-				value="#{bundle.ViewExperimentCreateLink}" />
-			<br />
-			<h:commandLink action="#{experimentController.prepareList}"
-				value="#{bundle.ViewExperimentShowAllLink}" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle.BackOfficeLink}"
+			<h:commandLink value="#{bundle.operation.backoffice}"
 				action="/protected/backoffice" immediate="true" />
 			<br />
 			<br />
-			<h:commandLink value="#{bundle.ViewExperimentIndexLink}"
+			<h:commandLink value="#{bundle.operation.index}"
 				action="/index" immediate="true" />
-
 		</h:form>
 	</ui:define>
 </ui:composition>

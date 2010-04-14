@@ -22,11 +22,24 @@ import com.linkare.rec.am.web.util.JsfUtil;
 @RequestScoped
 public class ReservationController extends AbstractController<Reservation, ReservationFacade> {
 
+    private static final long serialVersionUID = 1L;
+
     @EJB
     private com.linkare.rec.am.model.ReservationFacade ejbFacade;
+
     private static final int MINUTE_STEP = 30;
 
-    public ReservationController() {
+    @Override
+    public Reservation getCurrent() {
+	if (current == null || current.getPk() == null) {
+	    current = (Reservation) JsfUtil.getObjectFromRequestParameter("current", new ReservationConverter());
+	}
+	return current;
+    }
+
+    @Override
+    public void setCurrent(Reservation current) {
+	this.current = current;
     }
 
     public final Reservation getSelected() {
@@ -109,8 +122,8 @@ public class ReservationController extends AbstractController<Reservation, Reser
 	return JsfUtil.getTimeSlotItems();
     }
 
-    @FacesConverter(forClass = Reservation.class)
-    public static class ReservationControllerConverter implements Converter {
+    @FacesConverter(value = "reservationConverter", forClass = Reservation.class)
+    public static class ReservationConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {

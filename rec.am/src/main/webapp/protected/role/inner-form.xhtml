@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:inputHidden rendered="#{operation != 'create'}" id="current" value="#{roleController.current}" converter="roleConverter" />
+<h:panelGrid columns="2">
+	<h:outputLabel value="#{bundle.EditRoleLabel_name}" for="name" />
+	<h:inputText id="name" value="#{roleController.selected.name}"
+		title="#{bundle.EditRoleTitle_name}"
+		disabled="#{operation != 'create'}" />
+
+	<h:outputLabel value="#{bundle.EditRoleLabel_members}"
+		for="members" rendered="#{operation != 'create'}" />
+	<h:dataTable id="members"
+		value="#{roleController.selected.allUsers}" var="member"
+		border="0" cellpadding="2" cellspacing="0"
+		rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+		style="border:solid 1px" rendered="#{operation != 'create'}">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.ListRoleTitle_name}" />
+			</f:facet>
+			<h:outputText value="#{member.username}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="&nbsp;" />
+			</f:facet>
+			<h:commandLink action="#{roleController.removeUser}"
+				value="Remove">
+				<f:param name="userId" value="#{member.idInternal}" />
+			</h:commandLink>
+		</h:column>
+	</h:dataTable>
+
+	<h:outputLabel value="#{bundle.EditRolelLabel_members}"
+		for="nonMembers" rendered="#{operation != 'create'}" />
+	<h:dataTable id="nonMembers" value="#{roleController.nonMembers}"
+		var="item" border="0" cellpadding="2" cellspacing="0"
+		rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+		style="border:solid 1px" rendered="#{operation != 'create'}">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="#{bundle.ListRoleTitle_name}" />
+			</f:facet>
+			<h:outputText value="#{item.username}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="&nbsp;" />
+			</f:facet>
+			<h:commandLink action="#{roleController.addUser}" value="Add">
+				<f:param name="userId" value="#{item.idInternal}" />
+			</h:commandLink>
+		</h:column>
+	</h:dataTable>
+</h:panelGrid>
+</html>

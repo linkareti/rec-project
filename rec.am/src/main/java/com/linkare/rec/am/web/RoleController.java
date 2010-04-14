@@ -15,50 +15,48 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import com.linkare.commons.jpa.security.Role;
+import com.linkare.rec.am.model.RoleFacade;
 import com.linkare.rec.am.model.UserGroup;
-import com.linkare.rec.am.model.UserGroupFacade;
 import com.linkare.rec.am.model.UserPrincipal;
 import com.linkare.rec.am.model.UserPrincipalFacade;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.JsfUtil;
 
-@ManagedBean(name = "userGroupController")
+@ManagedBean(name = "roleController")
 @RequestScoped
-public class UserGroupController extends AbstractController<UserGroup, UserGroupFacade> {
+public class RoleController extends AbstractController<Role, RoleFacade> {
 
     private static final long serialVersionUID = 1L;
 
-    private static Logger logger = Logger.getLogger("UserGroupController");
+    private static Logger logger = Logger.getLogger("RoleController");
 
     @EJB
-    private UserGroupFacade ejbFacade;
+    private RoleFacade ejbFacade;
 
     @EJB
     private UserPrincipalFacade userFacade;
 
-    public UserGroupController() {
-    }
-
-    @Override
-    protected UserGroupFacade getFacade() {
-	return ejbFacade;
-    }
-
-    public UserGroup getCurrent() {
+    public Role getCurrent() {
 	if (current == null || current.getPk() == null) {
-	    current = (UserGroup) JsfUtil.getObjectFromRequestParameter("current", new UserGroupControllerConverter());
+	    current = (Role) JsfUtil.getObjectFromRequestParameter("current", new RoleControllerConverter());
 	}
 	return current;
     }
 
-    public void setCurrent(UserGroup current) {
+    public void setCurrent(Role current) {
 	this.current = current;
     }
 
     @Override
-    public UserGroup getSelected() {
+    protected RoleFacade getFacade() {
+	return ejbFacade;
+    }
+
+    @Override
+    public Role getSelected() {
 	if (getCurrent() == null) {
-	    current = new UserGroup();
+	    current = new Role();
 	    selectedItemIndex = -1;
 	}
 	return current;
@@ -66,7 +64,7 @@ public class UserGroupController extends AbstractController<UserGroup, UserGroup
 
     @Override
     public final String prepareCreate() {
-	current = new UserGroup();
+	current = new Role();
 	selectedItemIndex = -1;
 	return CREATE;
     }
@@ -93,7 +91,7 @@ public class UserGroupController extends AbstractController<UserGroup, UserGroup
     public final String update() {
 	try {
 	    getFacade().edit(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("UserGroupUpdated"));
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("RoleUpdated"));
 	    return VIEW;
 	} catch (Exception e) {
 	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
@@ -105,7 +103,7 @@ public class UserGroupController extends AbstractController<UserGroup, UserGroup
     protected void performDestroy() {
 	try {
 	    getFacade().remove(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("UserGroupDeleted"));
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("RoleDeleted"));
 	} catch (Exception e) {
 	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
 	}
@@ -128,20 +126,20 @@ public class UserGroupController extends AbstractController<UserGroup, UserGroup
 	    return Collections.<UserPrincipal> emptyList();
 	}
 	final List<UserPrincipal> result = userFacade.findAll();
-	result.removeAll(getCurrent().getMembers());
+	result.removeAll(getCurrent().getAllChilds());
 	return result;
     }
 
-    @FacesConverter(value = "userGroupConverter", forClass = UserGroup.class)
-    public static class UserGroupControllerConverter implements Converter {
+    @FacesConverter(value = "roleConverter", forClass = Role.class)
+    public static class RoleControllerConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
 	    if (value == null || value.length() == 0) {
 		return null;
 	    }
-	    UserGroupController controller = (UserGroupController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
-															  "userGroupController");
+	    RoleController controller = (RoleController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
+														"roleController");
 	    return controller.ejbFacade.find(getKey(value));
 	}
 
@@ -158,8 +156,8 @@ public class UserGroupController extends AbstractController<UserGroup, UserGroup
 	    if (object == null) {
 		return null;
 	    }
-	    if (object instanceof UserGroup) {
-		UserGroup o = (UserGroup) object;
+	    if (object instanceof Role) {
+		Role o = (Role) object;
 		return getStringKey(o.getPk());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "

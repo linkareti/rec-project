@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:inputHidden rendered="#{operation != 'create'}" id="current"
+	value="#{laboratoryController.current}" converter="laboratoryConverter" />
+<h:panelGrid columns="2">
+	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_name}" for="name" />
+	<h:inputText id="name" value="#{laboratoryController.selected.name}"
+		title="#{bundle.CreateLaboratoryTitle_name}"
+		disabled="#{operation == 'view'}" />
+	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_description}"
+		for="description" />
+	<h:inputText id="description"
+		value="#{laboratoryController.selected.description}"
+		title="#{bundle.CreateLaboratoryTitle_description}"
+		disabled="#{operation == 'view'}" />
+	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_stateLabel}"
+		for="stateLabel" />
+	<h:inputText id="stateLabel"
+		value="#{laboratoryController.selected.state.label}"
+		title="#{bundle.CreateLaboratoryTitle_stateLabel}"
+		disabled="#{operation == 'view'}" />
+	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_stateHelpMessage}"
+		for="stateHelpMessage" />
+	<h:inputText id="stateHelpMessage"
+		value="#{laboratoryController.selected.state.helpMessage}"
+		title="#{bundle.CreateLaboratoryTitle_stateHelpMessage}"
+		disabled="#{operation == 'view'}" />
+	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_stateURL}"
+		for="stateURL" />
+	<h:inputText id="stateURL"
+		value="#{laboratoryController.selected.state.url}"
+		title="#{bundle.CreateLaboratoryTitle_stateURL}"
+		disabled="#{operation == 'view'}" />
+	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_stateActive}"
+		for="stateActive" />
+	<h:selectBooleanCheckbox id="stateActive"
+		value="#{laboratoryController.selected.state.active}"
+		title="#{bundle.CreateLaboratoryTitle_stateActive}"
+		disabled="#{operation == 'view'}" />
+</h:panelGrid>
+
+</html>

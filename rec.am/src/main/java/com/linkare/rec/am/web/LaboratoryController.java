@@ -19,10 +19,22 @@ import com.linkare.rec.am.web.util.JsfUtil;
 @RequestScoped
 public class LaboratoryController extends AbstractController<Laboratory, LaboratoryFacade> {
 
-    @EJB
-    private com.linkare.rec.am.model.LaboratoryFacade ejbFacade;
+    private static final long serialVersionUID = 1L;
 
-    public LaboratoryController() {
+    @EJB
+    private LaboratoryFacade ejbFacade;
+
+    @Override
+    public Laboratory getCurrent() {
+	if (current == null || current.getPk() == null) {
+	    current = (Laboratory) JsfUtil.getObjectFromRequestParameter("current", new LaboratoryConverter());
+	}
+	return current;
+    }
+
+    @Override
+    public void setCurrent(Laboratory current) {
+	this.current = current;
     }
 
     @Override
@@ -81,7 +93,7 @@ public class LaboratoryController extends AbstractController<Laboratory, Laborat
     }
 
     @FacesConverter(value = "laboratoryConverter", forClass = Laboratory.class)
-    public static class LaboratoryControllerConverter implements Converter {
+    public static class LaboratoryConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {

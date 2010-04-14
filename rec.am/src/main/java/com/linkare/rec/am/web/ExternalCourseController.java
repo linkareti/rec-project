@@ -11,6 +11,7 @@ import com.linkare.rec.am.model.ExternalCourseFacade;
 import com.linkare.rec.am.model.Laboratory;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.web.controller.AbstractController;
+import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.wsgen.moodle.UserRecord;
 
 /**
@@ -21,13 +22,25 @@ import com.linkare.rec.am.wsgen.moodle.UserRecord;
 @RequestScoped
 public class ExternalCourseController extends AbstractController<ExternalCourse, ExternalCourseFacade> {
 
+    private static final long serialVersionUID = 1L;
+
     private ExternalCourseFacade facade;
 
     private UserRecord[] students;
 
     private UserRecord[] teachers;
 
-    public ExternalCourseController() {
+    @Override
+    public ExternalCourse getCurrent() {
+	if (current == null || current.getPk() == null) {
+	    current = (ExternalCourse) JsfUtil.getObjectFromRequestParameter("current", new ExternalCourseConverter());
+	}
+	return current;
+    }
+
+    @Override
+    public void setCurrent(ExternalCourse current) {
+	this.current = current;
     }
 
     public final ExternalCourse getSelected() {
@@ -105,7 +118,7 @@ public class ExternalCourseController extends AbstractController<ExternalCourse,
     }
 
     @FacesConverter(value = "externalCourseConverter", forClass = ExternalCourse.class)
-    public static class ExternalCourseControllerConverter implements Converter {
+    public static class ExternalCourseConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {

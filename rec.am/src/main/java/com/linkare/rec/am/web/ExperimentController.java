@@ -19,10 +19,22 @@ import com.linkare.rec.am.web.util.JsfUtil;
 @RequestScoped
 public class ExperimentController extends AbstractController<Experiment, ExperimentFacade> {
 
-    @EJB
-    private com.linkare.rec.am.model.ExperimentFacade ejbFacade;
+    private static final long serialVersionUID = 1L;
 
-    public ExperimentController() {
+    @EJB
+    private ExperimentFacade ejbFacade;
+
+    @Override
+    public Experiment getCurrent() {
+	if (current == null || current.getPk() == null) {
+	    current = (Experiment) JsfUtil.getObjectFromRequestParameter("current", new ExperimentConverter());
+	}
+	return current;
+    }
+
+    @Override
+    public void setCurrent(Experiment current) {
+	this.current = current;
     }
 
     public final Experiment getSelected() {
@@ -78,8 +90,8 @@ public class ExperimentController extends AbstractController<Experiment, Experim
 	}
     }
 
-    @FacesConverter(forClass = Experiment.class)
-    public static class ExperimentControllerConverter implements Converter {
+    @FacesConverter(value = "experimentConverter", forClass = Experiment.class)
+    public static class ExperimentConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {

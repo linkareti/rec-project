@@ -19,10 +19,20 @@ import com.linkare.rec.am.web.util.JsfUtil;
 @RequestScoped
 public class UserPrincipalController extends AbstractController<UserPrincipal, UserPrincipalFacade> {
 
-    @EJB
-    private com.linkare.rec.am.model.UserPrincipalFacade ejbFacade;
+    private static final long serialVersionUID = 1L;
 
-    public UserPrincipalController() {
+    @EJB
+    private UserPrincipalFacade ejbFacade;
+
+    public UserPrincipal getCurrent() {
+	if (current == null || current.getPk() == null) {
+	    current = (UserPrincipal) JsfUtil.getObjectFromRequestParameter("current", new UserPrincipalConverter());
+	}
+	return current;
+    }
+
+    public void setCurrent(UserPrincipal current) {
+	this.current = current;
     }
 
     @Override
@@ -81,7 +91,7 @@ public class UserPrincipalController extends AbstractController<UserPrincipal, U
     }
 
     @FacesConverter(value = "userPrincipalConverter", forClass = UserPrincipal.class)
-    public static class UserPrincipalControllerConverter implements Converter {
+    public static class UserPrincipalConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {

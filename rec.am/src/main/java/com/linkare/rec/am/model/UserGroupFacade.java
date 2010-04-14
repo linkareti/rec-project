@@ -62,14 +62,8 @@ public class UserGroupFacade extends Facade<UserGroup> {
 	return ((Long) query.getSingleResult()).intValue();
     }
 
-    @SuppressWarnings("unchecked")
-    public List<UserPrincipal> findAllUsers() {
-	final Query query = em.createNamedQuery("UserPrincipal.findAll");
-	return query.getResultList();
-    }
-
     public List<UserPrincipal> getNonMembers(final List<User> members) {
-	final List<UserPrincipal> result = findAllUsers();
+	final List<UserPrincipal> result = userFacade.findAll();
 	result.removeAll(members);
 	return result;
     }

@@ -83,6 +83,6 @@ public class UserPrincipal extends User implements Principal, Serializable {
     }
 
     public List<Group> getGroups() {
-	return super.getAllGroups();
+	return super.getAllParentGroups();
     }
 }
