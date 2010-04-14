@@ -99,7 +99,7 @@
 	</target-->
 
 	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
-
+		<create.jnlp.full.client.build codebase="${codebase}"/>
 	</target>
 	
 	<target name="run.elab.client.web.start">

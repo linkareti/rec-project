@@ -96,9 +96,9 @@
 				</section>
 			</manifest>
 
-			<jar.experiment.client experiment.name="@{experiment.name}"/>
+			<!--jar.experiment.client experiment.name="@{experiment.name}"/>
 			
-			<sign.jar.rec jar.name="@{experiment.name}Client.jar" folder="${build.dir.compile}"/>
+			<sign.jar.rec jar.name="@{experiment.name}Client.jar" folder="${build.dir.compile}"/-->
 			
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
 
@@ -380,8 +380,8 @@
 	<macrodef name="create.jnlp.for.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
-			<copy file="${template.file}" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" />
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+			<copy file="${template.file}" overwrite="yes" tofile="${client.build.dir}/@{experiment.name}.jnlp" />
+			<replace file="${client.build.dir}/${experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 				<replacefilter token="@codebase@" property="@{experiment.name}.codebase" />
 				<replacefilter token="@href@" property="@{experiment.name}.href" />
 				<replacefilter token="@title@" property="@{experiment.name}.title" />
@@ -393,14 +393,14 @@
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
 				<replacefilter token="@main-class@" property="@{experiment.name}.main-class" />
 			</replace>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;"/>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;"/>
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
 				<replacevalue><![CDATA[<jar href="client/@temporary.experiment.jar@" main="true"/>
 		<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-		<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
+		<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
 		
 		</sequential>
 	</macrodef>

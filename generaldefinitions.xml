@@ -409,16 +409,15 @@
 	
 	<macrodef name="add.experiment.to.full.jnlp.build">
 		<attribute name="experiment.name" />
-		<attribute name="location" />
 		<sequential>
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
 				<replacevalue><![CDATA[<jar href="client/@temporary.experiment.jar@"/>
-		<!--End Experiment Jars-->]]></replacevalue>
+	<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
 		</sequential>
 	</macrodef>
-
+	
 	<!--
 		=====================================================
 		================ReC Experiments======================
