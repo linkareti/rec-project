@@ -6,7 +6,7 @@
 
 <ui:composition template="/template.xhtml">
 	<ui:define name="title">
-		<h:outputText value="#{bundle.IndexTitle}"></h:outputText>
+		<h:outputText value="#{bundle['page.index.title']}"></h:outputText>
 	</ui:define>
 	<ui:define name="body">
 		<h:panelGroup id="messagePanel" layout="block">
@@ -15,17 +15,16 @@
 		</h:panelGroup>
 		<h:form>
 			<h:commandLink action="/protected/backoffice"
-				value="#{bundle.BackOfficeLink}" />
+				value="#{bundle['menu.backoffice']}" />
 			<br></br>
 			<h:commandLink action="/protected/reservation/Schedule"
-				value="#{bundle.ReservationScheduleLink}" />
+				value="#{bundle['menu.reservationSchedule']}" />
 			<br></br>
 			<br></br>
 			<h:commandLink action="#{login.logout}">
-				<h:outputText value="#{bundle.Logout}" />
+				<h:outputText value="#{bundle['menu.logout']}" />
 			</h:commandLink>
 		</h:form>
 	</ui:define>
 </ui:composition>
 </html>
-

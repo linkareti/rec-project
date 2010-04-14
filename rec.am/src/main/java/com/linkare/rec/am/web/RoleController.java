@@ -73,10 +73,10 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
     public final String create() {
 	try {
 	    getFacade().create(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("UserGroupCreated"));
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.create"));
 	    return prepareCreate();
 	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
+	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
 
 	    StringWriter sw = new StringWriter();
 	    e.printStackTrace(new PrintWriter(sw));
@@ -91,10 +91,10 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
     public final String update() {
 	try {
 	    getFacade().edit(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("RoleUpdated"));
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.update"));
 	    return VIEW;
 	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
+	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
 	    return null;
 	}
     }
@@ -103,9 +103,9 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
     protected void performDestroy() {
 	try {
 	    getFacade().remove(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("RoleDeleted"));
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.remove"));
 	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
+	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
 	}
     }
 

@@ -6,41 +6,16 @@
 
 <ui:composition template="/template.xhtml">
 	<ui:define name="title">
-		<h:outputText value="#{bundle.ViewExperimentTitle}"></h:outputText>
+		<h:outputText value="#{bundle['page.experiment.view.title']}"></h:outputText>
 	</ui:define>
 	<ui:define name="body">
 		<h:panelGroup id="messagePanel" layout="block">
 			<h:messages errorStyle="color: red" infoStyle="color: green"
 				layout="table" />
 		</h:panelGroup>
-		<h:form>
-
-			<ui:include src="inner-form.xhtml">
-				<ui:param name="operation" value="view" />
-			</ui:include>
-
-			<br />
-			<h:commandLink action="#{experimentController.destroyAndView}"
-				value="#{bundle.ViewExperimentDestroyLink}" />
-			<br />
-			<br />
-			<h:commandLink action="Edit" value="#{bundle.ViewExperimentEditLink}" />
-			<br />
-			<h:commandLink action="#{experimentController.prepareCreate}"
-				value="#{bundle.ViewExperimentCreateLink}" />
-			<br />
-			<h:commandLink action="#{experimentController.prepareList}"
-				value="#{bundle.ViewExperimentShowAllLink}" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle.BackOfficeLink}"
-				action="/protected/backoffice" immediate="true" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle.ViewExperimentIndexLink}"
-				action="/index" immediate="true" />
-
-		</h:form>
+		<ui:include src="inner-form.xhtml">
+			<ui:param name="operation" value="view" />
+		</ui:include>
 	</ui:define>
 </ui:composition>
 

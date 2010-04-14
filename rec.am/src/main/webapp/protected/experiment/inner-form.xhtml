@@ -5,43 +5,79 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:inputHidden rendered="#{operation != 'create'}" id="current"
-	value="#{experimentController.current}" converter="experimentConverter" />
-<h:panelGrid columns="2">
-	<h:outputText value="#{bundle.ViewExperimentLabel_id}" />
-	<h:outputText value="#{experimentController.selected.id}"
-		title="#{bundle.ViewExperimentTitle_id}"
-		disabled="#{operation == 'view'}" />
-	<h:outputText value="#{bundle.ViewExperimentLabel_name}" />
-	<h:outputText value="#{experimentController.selected.name}"
-		title="#{bundle.ViewExperimentTitle_name}"
-		disabled="#{operation == 'view'}" />
-	<h:outputText value="#{bundle.ViewExperimentLabel_description}" />
-	<h:outputText value="#{experimentController.selected.description}"
-		title="#{bundle.ViewExperimentTitle_description}"
-		disabled="#{operation == 'view'}" />
-	<h:outputText value="#{bundle.ViewExperimentLabel_laboratory}" />
-	<h:outputText value="#{experimentController.selected.laboratory}"
-		title="#{bundle.ViewExperimentTitle_laboratory}"
-		disabled="#{operation == 'view'}" />
-	<h:outputText value="#{bundle.ViewExperimentLabel_stateLabel}" />
-	<h:outputText value="#{experimentController.selected.state.label}"
-		title="#{bundle.ViewExperimentTitle_stateLabel}"
-		disabled="#{operation == 'view'}" />
-	<h:outputText value="#{bundle.ViewExperimentLabel_stateHelpMessage}" />
-	<h:outputText
-		value="#{experimentController.selected.state.helpMessage}"
-		title="#{bundle.ViewExperimentTitle_stateHelpMessage}"
-		disabled="#{operation == 'view'}" />
-	<h:outputText value="#{bundle.ViewExperimentLabel_stateURL}" />
-	<h:outputText value="#{experimentController.selected.state.url}"
-		title="#{bundle.ViewExperimentTitle_stateURL}"
-		disabled="#{operation == 'view'}" />
-	<h:outputText value="#{bundle.ViewExperimentLabel_stateActive}" />
-	<h:selectBooleanCheckbox disabled="true"
-		value="#{experimentController.selected.state.active}"
-		title="#{bundle.ViewExperimentTitle_stateActive}"
-		disabled="#{operation == 'view'}" />
-</h:panelGrid>
+<h:form>
+
+	<h:inputHidden rendered="#{operation != 'create'}" id="current"
+		value="#{experimentController.current}"
+		converter="experimentConverter" />
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{bundle['experiment.name']}" for="name" />
+		<h:inputText id="name" value="#{experimentController.selected.name}"
+			title="#{bundle['experiment.description']}"
+			disabled="#{operation == 'view'}" />
+		<h:outputLabel value="#{bundle['experiment.description']}"
+			for="description" />
+		<h:inputText id="description"
+			value="#{experimentController.selected.description}"
+			title="#{bundle['experiment.description']}"
+			disabled="#{operation == 'view'}" />
+		<h:outputLabel value="#{bundle['experiment.laboratory']}"
+			for="laboratory" />
+		<h:selectOneMenu id="laboratory"
+			value="#{experimentController.selected.laboratory}"
+			title="#{bundle['experiment.laboratory']}"
+			disabled="#{operation == 'view'}">
+			<f:selectItems
+				value="#{laboratoryController.itemsAvailableSelectOne}" />
+		</h:selectOneMenu>
+		<h:outputLabel value="#{bundle['experiment.state.label']}"
+			for="state.label" />
+		<h:inputText id="state.label"
+			value="#{experimentController.selected.state.label}"
+			title="#{bundle['experiment.state.label']}"
+			disabled="#{operation == 'view'}" />
+		<h:outputLabel value="#{bundle['experiment.state.helpMessage']}"
+			for="state.helpMessage" />
+		<h:inputText id="state.helpMessage"
+			value="#{experimentController.selected.state.helpMessage}"
+			title="#{bundle['experiment.state.helpMessage']}"
+			disabled="#{operation == 'view'}" />
+		<h:outputLabel value="#{bundle['experiment.state.url']}"
+			for="state.url" />
+		<h:inputText id="state.url"
+			value="#{experimentController.selected.state.url}"
+			title="#{bundle['experiment.state.url']}"
+			disabled="#{operation == 'view'}" />
+		<h:outputLabel value="#{bundle['experiment.state.isActive']}"
+			for="state.isActive" />
+		<h:selectBooleanCheckbox id="state.isActive"
+			value="#{experimentController.selected.state.active}"
+			title="#{bundle['experiment.state.isActive']}"
+			disabled="#{operation == 'view'}" />
+	</h:panelGrid>
+
+	<h:panelGroup rendered="#{operation == 'create'}">
+		<h:commandLink action="#{experimentController.create}"
+			value="#{bundle['operation.save']}" />
+		<br />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'edit'}">
+		<h:commandLink action="View" value="#{bundle['operation.view']}" />
+		<br />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'view'}">
+		<h:commandLink action="Edit" value="#{bundle['operation.edit']}" />
+		<br />
+	</h:panelGroup>
+	<h:commandLink action="#{experimentController.prepareList}"
+		value="#{bundle['operation.list']}" immediate="true" />
+	<br />
+	<h:commandLink value="#{bundle['menu.backoffice']}"
+		action="/protected/backoffice" immediate="true" />
+	<br />
+	<h:commandLink value="#{bundle['menu.index']}" action="/index"
+		immediate="true" />
+
+</h:form>
 
 </html>

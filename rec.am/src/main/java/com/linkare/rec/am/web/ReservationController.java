@@ -67,10 +67,10 @@ public class ReservationController extends AbstractController<Reservation, Reser
 	try {
 	    processEndDateAndEndTimeSlot();
 	    getFacade().create(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("ReservationCreated"));
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.create"));
 	    return prepareCreate();
 	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
+	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
 	    return null;
 	}
     }
@@ -100,10 +100,10 @@ public class ReservationController extends AbstractController<Reservation, Reser
 	try {
 	    processEndDateAndEndTimeSlot();
 	    getFacade().edit(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("ReservationUpdated"));
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.update"));
 	    return VIEW;
 	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
+	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
 	    return null;
 	}
     }
@@ -112,9 +112,9 @@ public class ReservationController extends AbstractController<Reservation, Reser
     protected void performDestroy() {
 	try {
 	    getFacade().remove(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("ReservationDeleted"));
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.remove"));
 	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("PersistenceErrorOccured"));
+	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
 	}
     }
 

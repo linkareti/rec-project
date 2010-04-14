@@ -6,35 +6,16 @@
 
 <ui:composition template="/template.xhtml">
 	<ui:define name="title">
-		<h:outputText value="#{bundle.CreateLaboratoryTitle}"></h:outputText>
+		<h:outputText value="#{bundle['page.laboratory.create.title']}"></h:outputText>
 	</ui:define>
 	<ui:define name="body">
 		<h:panelGroup id="messagePanel" layout="block">
 			<h:messages errorStyle="color: red" infoStyle="color: green"
 				layout="table" />
 		</h:panelGroup>
-		<h:form>
-
-			<ui:include src="inner-form.xhtml">
-				<ui:param name="operation" value="create" />
-			</ui:include>
-
-			<br />
-			<h:commandLink action="#{laboratoryController.create}"
-				value="#{bundle.CreateLaboratorySaveLink}" />
-			<br />
-			<br />
-			<h:commandLink action="#{laboratoryController.prepareList}"
-				value="#{bundle.CreateLaboratoryShowAllLink}" immediate="true" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle.BackOfficeLink}"
-				action="/protected/backoffice" immediate="true" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle.CreateLaboratoryIndexLink}"
-				action="/index" immediate="true" />
-		</h:form>
+		<ui:include src="inner-form.xhtml">
+			<ui:param name="operation" value="create" />
+		</ui:include>
 	</ui:define>
 </ui:composition>
 

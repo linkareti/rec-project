@@ -5,57 +5,86 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:inputHidden rendered="#{operation != 'create'}" id="current" value="#{userGroupController.current}" converter="userGroupConverter" />
-<h:panelGrid columns="2">
-	<h:outputLabel value="#{bundle.EditUserGroupLabel_name}" for="name" />
-	<h:inputText id="name" value="#{userGroupController.selected.name}"
-		title="#{bundle.EditUserGroupTitle_name}"
-		disabled="#{operation != 'create'}" />
+<h:form>
 
-	<h:outputLabel value="#{bundle.EditUserGrouplLabel_members}"
-		for="members" rendered="#{operation != 'create'}" />
-	<h:dataTable id="members"
-		value="#{userGroupController.selected.members}" var="member"
-		border="0" cellpadding="2" cellspacing="0"
-		rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
-		style="border:solid 1px" rendered="#{operation != 'create'}">
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="#{bundle.ListUserGroupTitle_name}" />
-			</f:facet>
-			<h:outputText value="#{member.name}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="&nbsp;" />
-			</f:facet>
-			<h:commandLink action="#{userGroupController.removeUser}"
-				value="Remove">
-				<f:param name="userId" value="#{member.idInternal}" />
-			</h:commandLink>
-		</h:column>
-	</h:dataTable>
+	<h:inputHidden rendered="#{operation != 'create'}" id="current"
+		value="#{userGroupController.current}" converter="userGroupConverter" />
+	<h:panelGrid columns="3">
+		<h:outputLabel value="#{bundle.EditUserGroupLabel_name}" for="name" />
+		<h:inputText id="name" value="#{userGroupController.selected.name}"
+			title="#{bundle['group.name']}" required="true"
+			disabled="#{operation != 'create'}" />
 
-	<h:outputLabel value="#{bundle.EditUserGrouplLabel_members}"
-		for="nonMembers" rendered="#{operation != 'create'}" />
-	<h:dataTable id="nonMembers" value="#{userGroupController.nonMembers}"
-		var="item" border="0" cellpadding="2" cellspacing="0"
-		rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
-		style="border:solid 1px" rendered="#{operation != 'create'}">
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="#{bundle.ListUserGroupTitle_name}" />
-			</f:facet>
-			<h:outputText value="#{item.name}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="&nbsp;" />
-			</f:facet>
-			<h:commandLink action="#{userGroupController.addUser}" value="Add">
-				<f:param name="userId" value="#{item.idInternal}" />
-			</h:commandLink>
-		</h:column>
-	</h:dataTable>
-</h:panelGrid>
+		<h:outputLabel value="#{bundle.EditUserGrouplLabel_members}"
+			for="members" rendered="#{operation != 'create'}" />
+		<h:dataTable id="members"
+			value="#{userGroupController.selected.members}" var="member"
+			border="0" cellpadding="2" cellspacing="0"
+			rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+			style="border:solid 1px" rendered="#{operation != 'create'}">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{bundle.ListUserGroupTitle_name}" />
+				</f:facet>
+				<h:outputText value="#{member.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="&nbsp;" />
+				</f:facet>
+				<h:commandLink action="#{userGroupController.removeUser}"
+					value="Remove">
+					<f:param name="userId" value="#{member.idInternal}" />
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+
+		<h:outputLabel value="#{bundle['group.nonUserMembers']}"
+			for="nonMembers" rendered="#{operation != 'create'}" />
+		<h:dataTable id="nonMembers" value="#{userGroupController.nonMembers}"
+			var="item" border="0" cellpadding="2" cellspacing="0"
+			rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+			style="border:solid 1px" rendered="#{operation != 'create'}">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{bundle.ListUserGroupTitle_name}" />
+				</f:facet>
+				<h:outputText value="#{item.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="&nbsp;" />
+				</f:facet>
+				<h:commandLink action="#{userGroupController.addUser}" value="Add">
+					<f:param name="userId" value="#{item.idInternal}" />
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+		
+	</h:panelGrid>
+
+	<h:panelGroup rendered="#{operation == 'create'}">
+		<h:commandLink action="#{userGroupController.create}"
+			value="#{bundle['operation.save']}" />
+		<br />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'edit'}">
+		<h:commandLink action="View" value="#{bundle['operation.view']}" />
+		<br />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'view'}">
+		<h:commandLink action="Edit" value="#{bundle['operation.edit']}" />
+		<br />
+	</h:panelGroup>
+	<h:commandLink action="#{userGroupController.prepareList}"
+		value="#{bundle['operation.list']}" immediate="true" />
+	<br />
+	<h:commandLink value="#{bundle['menu.backoffice']}"
+		action="/protected/backoffice" immediate="true" />
+	<br />
+	<h:commandLink value="#{bundle['menu.index']}" action="/index"
+		immediate="true" />
+
+</h:form>
+
 </html>

@@ -7,33 +7,16 @@
 
 <ui:composition template="/template.xhtml">
 	<ui:define name="title">
-		<h:outputText value="#{bundle.page.role.edit.title}"></h:outputText>
+		<h:outputText value="#{bundle['page.role.edit.title']}"></h:outputText>
 	</ui:define>
 	<ui:define name="body">
 		<h:panelGroup id="messagePanel" layout="block">
 			<h:messages errorStyle="color: red" infoStyle="color: green"
 				layout="table" />
 		</h:panelGroup>
-		<h:form>
-
-			<ui:include src="inner-form.xhtml">
-				<ui:param name="operation" value="edit" />
-			</ui:include>
-
-			<br />
-			<h:commandLink action="View" value="#{bundle.operation.view}" />
-			<br />
-			<h:commandLink action="#{roleController.prepareList}"
-				value="#{bundle.operation.list}" immediate="true" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle.operation.backoffice}"
-				action="/protected/backoffice" immediate="true" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle.operation.index}"
-				action="/index" immediate="true" />
-		</h:form>
+		<ui:include src="inner-form.xhtml">
+			<ui:param name="operation" value="edit" />
+		</ui:include>
 	</ui:define>
 </ui:composition>
 

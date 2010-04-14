@@ -7,34 +7,16 @@
 
 <ui:composition template="/template.xhtml">
 	<ui:define name="title">
-		<h:outputText value="#{bundle.CreateExperimentTitle}"></h:outputText>
+		<h:outputText value="#{bundle['page.experiment.create.title']}"></h:outputText>
 	</ui:define>
 	<ui:define name="body">
 		<h:panelGroup id="messagePanel" layout="block">
 			<h:messages errorStyle="color: red" infoStyle="color: green"
 				layout="table" />
 		</h:panelGroup>
-		<h:form>
-			<ui:include src="inner-form.xhtml">
-				<ui:param name="operation" value="create" />
-			</ui:include>
-
-			<br />
-			<h:commandLink action="#{experimentController.create}"
-				value="#{bundle.CreateExperimentSaveLink}" />
-			<br />
-			<br />
-			<h:commandLink action="#{experimentController.prepareList}"
-				value="#{bundle.CreateExperimentShowAllLink}" immediate="true" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle.BackOfficeLink}"
-				action="/protected/backoffice" immediate="true" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle.CreateExperimentIndexLink}"
-				action="/index" immediate="true" />
-		</h:form>
+		<ui:include src="inner-form.xhtml">
+			<ui:param name="operation" value="create" />
+		</ui:include>
 	</ui:define>
 </ui:composition>
 </html>

@@ -5,43 +5,70 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:inputHidden rendered="#{operation != 'create'}" id="current"
-	value="#{laboratoryController.current}" converter="laboratoryConverter" />
-<h:panelGrid columns="2">
-	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_name}" for="name" />
-	<h:inputText id="name" value="#{laboratoryController.selected.name}"
-		title="#{bundle.CreateLaboratoryTitle_name}"
-		disabled="#{operation == 'view'}" />
-	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_description}"
-		for="description" />
-	<h:inputText id="description"
-		value="#{laboratoryController.selected.description}"
-		title="#{bundle.CreateLaboratoryTitle_description}"
-		disabled="#{operation == 'view'}" />
-	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_stateLabel}"
-		for="stateLabel" />
-	<h:inputText id="stateLabel"
-		value="#{laboratoryController.selected.state.label}"
-		title="#{bundle.CreateLaboratoryTitle_stateLabel}"
-		disabled="#{operation == 'view'}" />
-	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_stateHelpMessage}"
-		for="stateHelpMessage" />
-	<h:inputText id="stateHelpMessage"
-		value="#{laboratoryController.selected.state.helpMessage}"
-		title="#{bundle.CreateLaboratoryTitle_stateHelpMessage}"
-		disabled="#{operation == 'view'}" />
-	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_stateURL}"
-		for="stateURL" />
-	<h:inputText id="stateURL"
-		value="#{laboratoryController.selected.state.url}"
-		title="#{bundle.CreateLaboratoryTitle_stateURL}"
-		disabled="#{operation == 'view'}" />
-	<h:outputLabel value="#{bundle.CreateLaboratoryLabel_stateActive}"
-		for="stateActive" />
-	<h:selectBooleanCheckbox id="stateActive"
-		value="#{laboratoryController.selected.state.active}"
-		title="#{bundle.CreateLaboratoryTitle_stateActive}"
-		disabled="#{operation == 'view'}" />
-</h:panelGrid>
+<h:form>
+
+	<h:inputHidden rendered="#{operation != 'create'}" id="current"
+		value="#{laboratoryController.current}"
+		converter="laboratoryConverter" />
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{bundle['laboratory.name']}" for="name" />
+		<h:inputText id="name" value="#{laboratoryController.selected.name}"
+			title="#{bundle['laboratory.name']}"
+			disabled="#{operation == 'view'}" />
+		<h:outputLabel value="#{bundle['laboratory.description']}"
+			for="description" />
+		<h:inputText id="description"
+			value="#{laboratoryController.selected.description}"
+			title="#{bundle['laboratory.description']}"
+			disabled="#{operation == 'view'}" />
+		<h:outputLabel value="#{bundle['laboratory.state.label']}"
+			for="stateLabel" />
+		<h:inputText id="stateLabel"
+			value="#{laboratoryController.selected.state.label}"
+			title="#{bundle['laboratory.state.label']}"
+			disabled="#{operation == 'view'}" />
+		<h:outputLabel value="#{bundle['laboratory.state.helpMessage']}"
+			for="stateHelpMessage" />
+		<h:inputText id="stateHelpMessage"
+			value="#{laboratoryController.selected.state.helpMessage}"
+			title="#{bundle['laboratory.state.helpMessage']}"
+			disabled="#{operation == 'view'}" />
+		<h:outputLabel value="#{bundle['laboratory.state.url']}"
+			for="stateURL" />
+		<h:inputText id="stateURL"
+			value="#{laboratoryController.selected.state.url}"
+			title="#{bundle['laboratory.state.url']}"
+			disabled="#{operation == 'view'}" />
+		<h:outputLabel value="#{bundle['laboratory.state.isActive']}"
+			for="stateActive" />
+		<h:selectBooleanCheckbox id="stateActive"
+			value="#{laboratoryController.selected.state.active}"
+			title="#{bundle['laboratory.state.isActive']}"
+			disabled="#{operation == 'view'}" />
+	</h:panelGrid>
+
+	<h:panelGroup rendered="#{operation == 'create'}">
+		<h:commandLink action="#{laboratoryController.create}"
+			value="#{bundle['operation.save']}" />
+		<br />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'edit'}">
+		<h:commandLink action="View" value="#{bundle['operation.view']}" />
+		<br />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'view'}">
+		<h:commandLink action="Edit" value="#{bundle['operation.edit']}" />
+		<br />
+	</h:panelGroup>
+	<h:commandLink action="#{laboratoryController.prepareList}"
+		value="#{bundle['operation.list']}" immediate="true" />
+	<br />
+	<h:commandLink value="#{bundle['menu.backoffice']}"
+		action="/protected/backoffice" immediate="true" />
+	<br />
+	<h:commandLink value="#{bundle['menu.index']}" action="/index"
+		immediate="true" />
+
+</h:form>
 
 </html>

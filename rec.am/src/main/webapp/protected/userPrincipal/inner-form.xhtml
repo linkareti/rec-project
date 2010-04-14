@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:form>
+
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{bundle['user.username']}" for="name" />
+		<h:inputText id="name"
+			value="#{userPrincipalController.selected.name}"
+			title="#{bundle['user.username']}" required="true"
+			disabled="#{operation != 'create'}" />
+	</h:panelGrid>
+
+	<h:panelGroup rendered="#{operation == 'create'}">
+		<h:commandLink action="#{userPrincipalController.create}"
+			value="#{bundle['operation.save']}" />
+		<br />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'edit'}">
+		<h:commandLink action="View" value="#{bundle['operation.view']}" />
+		<br />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'view'}">
+		<h:commandLink action="Edit" value="#{bundle['operation.edit']}" />
+		<br />
+	</h:panelGroup>
+	<h:commandLink action="#{userPrincipalController.prepareList}"
+		value="#{bundle['operation.list']}" immediate="true" />
+	<br />
+	<h:commandLink value="#{bundle['menu.backoffice']}"
+		action="/protected/backoffice" immediate="true" />
+	<br />
+	<h:commandLink value="#{bundle['menu.index']}" action="/index"
+		immediate="true" />
+
+</h:form>
+
+</html>

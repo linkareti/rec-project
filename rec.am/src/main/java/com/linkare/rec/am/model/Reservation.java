@@ -340,4 +340,8 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     public void setMoodleRecord(MoodleRecord moodleRecord) {
 	this.moodleRecord = moodleRecord;
     }
+
+    public String getReservedBy() {
+	return getUserPrincipal() != null ? getUserPrincipal().getUsername() : getMoodleRecord().getExternalUser();
+    }
 }
