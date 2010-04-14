@@ -20,6 +20,7 @@ import javax.persistence.Temporal;
 import org.primefaces.model.ScheduleEvent;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
+import com.linkare.commons.utils.EqualityUtils;
 import com.linkare.rec.am.model.moodle.MoodleRecord;
 
 /**
@@ -35,9 +36,6 @@ import com.linkare.rec.am.model.moodle.MoodleRecord;
 public class Reservation extends DefaultDomainObject implements ScheduleEvent, Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Column(name = "RESERVATION_ID", unique = true, insertable = true, updatable = false, nullable = false)
-    private String id;
 
     @Basic
     @Column(name = "TITLE")
@@ -106,7 +104,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
      */
     @Override
     public String getId() {
-	return id;
+	return getIdInternal() == null ? null : String.valueOf(getIdInternal());
     }
 
     /**
@@ -117,7 +115,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
      */
     @Override
     public void setId(String id) {
-	this.id = id;
+	super.setIdInternal(Long.valueOf(id));
     }
 
     /**
@@ -245,7 +243,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     @Override
     public int hashCode() {
 	int hash = 0;
-	hash += (id != null ? id.hashCode() : 0);
+	hash += (getId() != null ? getId().hashCode() : 0);
 	return hash;
     }
 
@@ -255,10 +253,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
 	    return false;
 	}
 	Reservation other = (Reservation) object;
-	if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-	    return false;
-	}
-	return true;
+	return EqualityUtils.equals(this.getId(), other.getId());
     }
 
     @Override
@@ -266,7 +261,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
 	if (title != null && !title.trim().equals("")) {
 	    return title;
 	} else {
-	    return id;
+	    return getId();
 	}
     }
 

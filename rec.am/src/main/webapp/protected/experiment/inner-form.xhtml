@@ -26,31 +26,32 @@
 		<h:selectOneMenu id="laboratory"
 			value="#{experimentController.selected.laboratory}"
 			title="#{bundle['experiment.laboratory']}"
-			disabled="#{operation == 'view'}">
+			disabled="#{operation == 'view'}"
+			converter="laboratoryConverter">
 			<f:selectItems
 				value="#{laboratoryController.itemsAvailableSelectOne}" />
 		</h:selectOneMenu>
 		<h:outputLabel value="#{bundle['experiment.state.label']}"
-			for="state.label" />
-		<h:inputText id="state.label"
+			for="stateLabel" />
+		<h:inputText id="stateLabel"
 			value="#{experimentController.selected.state.label}"
 			title="#{bundle['experiment.state.label']}"
 			disabled="#{operation == 'view'}" />
 		<h:outputLabel value="#{bundle['experiment.state.helpMessage']}"
-			for="state.helpMessage" />
-		<h:inputText id="state.helpMessage"
+			for="stateHelpMessage" />
+		<h:inputText id="stateHelpMessage"
 			value="#{experimentController.selected.state.helpMessage}"
 			title="#{bundle['experiment.state.helpMessage']}"
 			disabled="#{operation == 'view'}" />
 		<h:outputLabel value="#{bundle['experiment.state.url']}"
-			for="state.url" />
-		<h:inputText id="state.url"
+			for="stateURL" />
+		<h:inputText id="stateURL"
 			value="#{experimentController.selected.state.url}"
 			title="#{bundle['experiment.state.url']}"
 			disabled="#{operation == 'view'}" />
 		<h:outputLabel value="#{bundle['experiment.state.isActive']}"
-			for="state.isActive" />
-		<h:selectBooleanCheckbox id="state.isActive"
+			for="stateActive" />
+		<h:selectBooleanCheckbox id="stateActive"
 			value="#{experimentController.selected.state.active}"
 			title="#{bundle['experiment.state.isActive']}"
 			disabled="#{operation == 'view'}" />
