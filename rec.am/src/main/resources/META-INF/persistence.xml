@@ -11,6 +11,8 @@
 		<class>com.linkare.commons.jpa.security.Subject</class>
 		<class>com.linkare.commons.jpa.security.User</class>
 		<class>com.linkare.commons.jpa.security.Role</class>
+		<class>com.linkare.commons.jpa.security.Identification</class>
+		<class>com.linkare.commons.jpa.security.Login</class>
 		
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
