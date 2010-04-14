@@ -5,7 +5,7 @@
 		=======================================================
 	-->
 
-<project name="ReC - general definitions" default="help" basedir=".">
+<project name="ReC - general definitions" basedir=".">
 	<description>
 		Compile, package, sign and run the project ReC and each of the experiments.
 	</description>
@@ -457,323 +457,7 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="clean.experiment">
-		<attribute name="experiment.name" />
-		<sequential>
-			<delete dir="${experiments.classes.dir}/@{experiment.name}" />
-			<delete file="${build.dir.compile}/@{experiment.name}Client.jar"/>
-			<delete file="${build.dir.compile}/@{experiment.name}Client_sig.jar"/>
-		</sequential>
-	</macrodef>
 
-	<path id="compile.experiment.client.classpath">
-		<pathelement location="${rec.common.classes.dir}" />
-		<path refid="rec.common.libs.classpath" />
-		<pathelement location="${rec.client.classes.dir}" />
-		<pathelement location="${rec.ui.classes.dir}" />
-		<path refid="rec.client.libs.classpath" />
-		<pathelement location="${elab.client.classes.dir}" />
-		<path refid="elab.client.libs.classpath" />
-	</path>
-
-	<path id="compile.experiment.driver.classpath">
-		<pathelement location="${rec.common.classes.dir}" />
-		<path refid="rec.common.libs.classpath" />
-		<pathelement location="${rec.hardwareserver.classes.dir}" />
-		<path refid="rec.hardwareserver.libs.classpath" />
-		<pathelement location="${elab.hardwareserver.classes.dir}" />
-		<path refid="elab.hardwareserver.libs.classpath" />
-	</path>
-
-	<macrodef name="compile.experiment.client">
-		<attribute name="experiment.name" />
-		<sequential>
-
-			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client" />
-			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/client/META-INF" />
-			<echo>Compiling experiment client: @{experiment.name}</echo>
-
-			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
-
-			<javac srcdir="experiments/@{experiment.name}/src/java/client" destdir="${experiments.classes.dir}/@{experiment.name}/client" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
-				<include name="**/*.java" />
-				<classpath>
-					<path refid="compile.experiment.client.classpath" />
-					<fileset dir="experiments/@{experiment.name}/lib/java/client">
-						<include name="**/*.jar" />
-					</fileset>
-				</classpath>
-				<compilerarg value="-Xlint:unchecked, cast, -serial" />
-			</javac>
-
-			<copy todir="${experiments.classes.dir}/@{experiment.name}/client" overwrite="true">
-				<fileset dir="experiments/@{experiment.name}/src/java/client">
-					<exclude name="**/*.java" />
-					<exclude name="**/*.form" />
-				</fileset>
-			</copy>
-
-			<manifest file="${experiments.classes.dir}/@{experiment.name}/client/META-INF/MANIFEST.MF">
-				<section name="common">
-					<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
-					<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
-					<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
-					<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-					<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${today}" />
-					<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
-				</section>
-			</manifest>
-
-			<jar.experiment.client experiment.name="@{experiment.name}" destination="${build.dir.compile}"/>
-			
-			<sign.jar jar.name="@{experiment.name}Client.jar" folder="${build.dir.compile}"/>
-			
-			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
-
-		</sequential>
-	</macrodef>
-
-	<macrodef name="compile.experiment.driver">
-		<attribute name="experiment.name" />
-		<sequential>
-
-			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server" />
-			<mkdir dir="${experiments.classes.dir}/@{experiment.name}/server/META-INF" />
-			<echo>Compiling experiment driver: @{experiment.name}</echo>
-
-			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-compile" />
-
-			<javac srcdir="experiments/@{experiment.name}/src/java/server" destdir="${experiments.classes.dir}/@{experiment.name}/server" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
-				<include name="**/*.java" />
-				<classpath>
-					<path refid="compile.experiment.driver.classpath" />
-					<fileset dir="experiments/@{experiment.name}/lib/java/server">
-						<include name="**/*.jar" />
-					</fileset>
-				</classpath>
-				<compilerarg value="-Xlint:unchecked, cast, -serial" />
-			</javac>
-
-			<copy todir="${experiments.classes.dir}/@{experiment.name}/server" overwrite="true">
-				<fileset dir="experiments/@{experiment.name}/src/java/server">
-					<exclude name="**/*.java" />
-					<exclude name="**/*.form" />
-				</fileset>
-			</copy>
-
-			<manifest file="${experiments.classes.dir}/@{experiment.name}/server/META-INF/MANIFEST.MF">
-				<section name="common">
-					<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
-					<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
-					<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
-					<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-					<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${TODAY}" />
-					<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
-				</section>
-			</manifest>
-
-			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
-
-		</sequential>
-	</macrodef>
-
-	<!-- = = = = = = = = = = = = = = = = =
-          macrodef: name          
-         = = = = = = = = = = = = = = = = = -->
-    <macrodef name="jar.experiment.client">
-        <attribute name="experiment.name" />
-    	<attribute name="destination"/>
-        <sequential>
-            <mkdir dir="@{destination}"/>
-        	
-        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
-        	
-        	<jar destfile="@{destination}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client"/>
-        	
-        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
-        	
-        </sequential>
-    </macrodef>
-
-	<macrodef name="jar.experiment.driver">
-		<attribute name="experiment.name" />
-		<attribute name="destination"/>
-		<sequential>
-			<mkdir dir="@{destination}" />
-
-			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
-
-			<jar destfile="@{destination}/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/@{experiment.name}/server">
-			</jar>
-
-			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
-
-		</sequential>
-	</macrodef>
-	
-	<macrodef name="build.experiment">
-		<attribute name="experiment.name" />
-		<sequential>
-			<clean.experiment experiment.name="@{experiment.name}" />
-			<compile.experiment.client experiment.name="@{experiment.name}" />
-			<compile.experiment.driver experiment.name="@{experiment.name}" />
-			<!--jar.experiment.client experiment.name="@{experiment.name}" /-->
-			<jar.experiment.driver experiment.name="@{experiment.name}" destination="${hardwareserver.build.dir}"/>
-			<!--sign. experiment.name="@{experiment.name}" />
-			<create.jnlp.for.experiment experiment.name="@{experiment.name}" /-->
-		</sequential>
-	</macrodef>
-
-	<macrodef name="dist.experiment">
-		<attribute name="experiment.name" />
-		<sequential>
-			<build.experiment experiment.name="@{experiment.name}" />
-			<zip destfile="${dist.dir}/elab-@{experiment.name}-client.zip" update="true" comment="eLab @{experiment.name} Client">
-				<fileset file="${experiments.build.dir.client}/@{experiment.name}/@{experiment.name}Client_sig.jar" />
-			</zip>
-			<zip destfile="${dist.dir}/elab-@{experiment.name}-hwserver.zip" update="true" comment="eLab @{experiment.name} Driver">
-				<fileset file="${experiments.build.dir.server}/@{experiment.name}/@{experiment.name}Driver.jar" />
-			</zip>
-			<zip destfile="${dist.dir}/elab-@{experiment.name}.zip" update="true" comment="eLab @{experiment.name} Complete Distribution">
-				<fileset file="${experiments.build.dir.client}/@{experiment.name}/@{experiment.name}Client_sig.jar" />
-				<fileset file="${experiments.build.dir.server}/@{experiment.name}/@{experiment.name}Driver.jar" />
-			</zip>
-		</sequential>
-	</macrodef>
-	
-	<macrodef name="create.jnlp.for.experiment">
-		<attribute name="experiment.name" />
-		<sequential>
-			<copy file="${template.file}" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" />
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
-				<replacefilter token="@codebase@" property="@{experiment.name}.codebase" />
-				<replacefilter token="@href@" property="@{experiment.name}.href" />
-				<replacefilter token="@title@" property="@{experiment.name}.title" />
-				<replacefilter token="@vendor@" property="@{experiment.name}.vendor" />
-				<replacefilter token="@homepage@" property="@{experiment.name}.homepage" />
-				<replacefilter token="@one-line@" property="@{experiment.name}.one-line" />
-				<replacefilter token="@tootip@" property="@{experiment.name}.tootip" />
-				<replacefilter token="@short@" property="@{experiment.name}.short" />
-				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
-				<replacefilter token="@main-class@" property="@{experiment.name}.main-class" />
-			</replace>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;"/>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
-				<replacevalue><![CDATA[<jar href="client/@temporary.experiment.jar@" main="true"/>
-		<!--End Experiment Jars-->]]></replacevalue>
-			</replace>
-		<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
-		
-		</sequential>
-	</macrodef>
-
-	<macrodef name="run.experiment.client">
-		<attribute name="experiment.name" />
-		<sequential>
-			<java classname="pt.utl.ist.elab.client.@{experiment.name}.ClientMain" fork="true" failonerror="true">
-				<arg value="-h" />
-				<classpath>
-					<fileset dir="lib/">
-						<include name="**/*.jar" />
-					</fileset>
-					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
-						<include name="**/*.jar" />
-					</fileset>
-					<path refid="rec.common.lib.path" />
-					<path refid="rec.client.lib.path" />
-					<pathelement location="${rec.common.classes.dir}" />
-					<pathelement location="${rec.client.classes.dir}" />
-					<pathelement location="${rec.ui.classes.dir}" />
-					<pathelement location="${experiments.classes.dir}/@{experiment.name}/client/" />
-				</classpath>
-				<jvmarg value="-Xms${min.memory}" />
-				<jvmarg value="-Xmx${max.memory}" />
-				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
-				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
-				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
-				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}" />
-				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
-				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
-				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
-				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-				<sysproperty key="openorb.config" value="${openorb.config}" />
-				<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
-			</java>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="run.experiment.driver">
-		<attribute name="experiment.name" />
-		<sequential>
-			<echo>starting @{experiment.name} driver</echo>
-			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true">
-				<arg value="-h" />
-				<classpath>
-					<fileset dir="lib/">
-						<include name="**/*.jar" />
-					</fileset>
-					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
-						<include name="**/*.jar" />
-					</fileset>
-					<path refid="rec.common.lib.path" />
-					<pathelement location="${rec.common.classes.dir}" />
-					<pathelement location="${rec.hardwareserver.classes.dir}" />
-					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
-				</classpath>
-				<jvmarg value="-Xms${min.memory}" />
-				<jvmarg value="-Xmx${max.memory}" />
-				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
-				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
-				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
-				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}" />
-				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
-				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
-				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
-				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-				<sysproperty key="openorb.config" value="${openorb.config}" />
-				<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
-			</java>
-		</sequential>
-	</macrodef>
-
-
-	<macrodef name="debug.experiment.driver">
-		<attribute name="experiment.name" />
-		<sequential>
-			<echo>starting @{experiment.name} driver</echo>
-			<java classname="pt.utl.ist.elab.driver.@{experiment.name}.ServerMain" fork="true" failonerror="true">
-				<arg value="-h" />
-				<classpath>
-					<fileset dir="lib/">
-						<include name="**/*.jar" />
-					</fileset>
-					<fileset dir="experiments/@{experiment.name}/lib/java/server/">
-						<include name="**/*.jar" />
-					</fileset>
-					<path refid="rec.common.lib.path" />
-					<pathelement location="${rec.common.classes.dir}" />
-					<pathelement location="${rec.hardwareserver.classes.dir}" />
-					<pathelement location="${experiments.classes.dir}/@{experiment.name}/server/" />
-				</classpath>
-				<jvmarg value="-Xms${min.memory}" />
-				<jvmarg value="-Xmx${max.memory}" />
-				<jvmarg value="-Xdebug" />
-				<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.driver.debug.address.port},server=y,suspend=y" />
-				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
-				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
-				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
-				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}" />
-				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
-				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
-				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
-				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-				<sysproperty key="openorb.config" value="${openorb.config}" />
-				<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
-			</java>
-		</sequential>
-	</macrodef>
 
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: create.jar          
@@ -803,17 +487,27 @@
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: sign.jar          
          = = = = = = = = = = = = = = = = = -->
-    <macrodef name="sign.jar">
+    <macrodef name="sign.jar.rec">
         <attribute name="folder" />
         <attribute name="jar.name" />
         <sequential>
-    		<signjar storetype="${storetype}" destDir="@{folder}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+    		<signjar storetype="${rec.storetype}" destDir="@{folder}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
     			<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
     			<globmapper from="*.jar" to="*_sig.jar" />
     		</signjar>            
         </sequential>
     </macrodef>
 
+	<macrodef name="sign.jar.elab">
+	   <attribute name="folder" />
+	   <attribute name="jar.name" />
+	   <sequential>
+	   		<signjar storetype="${elab.storetype}" destDir="@{folder}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
+	   			<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
+	   			<globmapper from="*.jar" to="*_sig.jar" />
+	   		</signjar>            
+	   </sequential>
+	</macrodef>
 	
 	<!--/MACROS-->
 
@@ -914,4 +608,23 @@
 		</sequential>
 	</macrodef>
 
+	<path id="compile.experiment.client.classpath">
+		<pathelement location="${rec.common.classes.dir}" />
+		<path refid="rec.common.libs.classpath" />
+		<pathelement location="${rec.client.classes.dir}" />
+		<pathelement location="${rec.ui.classes.dir}" />
+		<path refid="rec.client.libs.classpath" />
+		<pathelement location="${elab.client.classes.dir}" />
+		<path refid="elab.client.libs.classpath" />
+	</path>
+
+	<path id="compile.experiment.driver.classpath">
+		<pathelement location="${rec.common.classes.dir}" />
+		<path refid="rec.common.libs.classpath" />
+		<pathelement location="${rec.hardwareserver.classes.dir}" />
+		<path refid="rec.hardwareserver.libs.classpath" />
+		<pathelement location="${elab.hardwareserver.classes.dir}" />
+		<path refid="elab.hardwareserver.libs.classpath" />
+	</path>
+	
 </project>

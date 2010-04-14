@@ -5,7 +5,7 @@
 		=======================================================
 	-->
 
-<project name="ReC - eLab build system" default="help" basedir=".">
+<project name="Experiments - build system" default="help" basedir=".">
 	<description>
 		Compile, package, sign and run the project ReC and each of the experiments.
 	</description>
@@ -30,35 +30,32 @@
 		=====================================================
 	-->
 
-	<!--MACROS-->
-
 	<macrodef name="clean.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
 			<delete dir="${experiments.classes.dir}/@{experiment.name}" />
 			<delete file="${build.dir.compile}/@{experiment.name}Client.jar"/>
 			<delete file="${build.dir.compile}/@{experiment.name}Client_sig.jar"/>
+			<!--delete file="${client.build.dir}/@{experiment.name}Client.jar"/>
+			<delete file="${client.build.dir}/@{experiment.name}Client_sig.jar"/>
+			<delete file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar"/>
+			<delete file="${hardwareserver.build.dir}/@{experiment.name}Driver_sig.jar"/-->
 		</sequential>
 	</macrodef>
 
-	<path id="compile.experiment.client.classpath">
-		<pathelement location="${rec.common.classes.dir}" />
-		<path refid="rec.common.libs.classpath" />
-		<pathelement location="${rec.client.classes.dir}" />
-		<pathelement location="${rec.ui.classes.dir}" />
-		<path refid="rec.client.libs.classpath" />
-		<pathelement location="${elab.client.classes.dir}" />
-		<path refid="elab.client.libs.classpath" />
-	</path>
+	<target name="clean.experiment">
+		<fail unless="experiment.name"> experiments.name must be set. define it in build.properties or pass 
+				it to jvm as arg like -Dexperiment.name="experiment1"</fail>
+		<clean.experiment experiment.name="${experiment.name}" />
+	</target>
 
-	<path id="compile.experiment.driver.classpath">
-		<pathelement location="${rec.common.classes.dir}" />
-		<path refid="rec.common.libs.classpath" />
-		<pathelement location="${rec.hardwareserver.classes.dir}" />
-		<path refid="rec.hardwareserver.libs.classpath" />
-		<pathelement location="${elab.hardwareserver.classes.dir}" />
-		<path refid="elab.hardwareserver.libs.classpath" />
-	</path>
+	<target name="clean.experiments.list">
+		<fail unless="experiment.list"> experiments.list must be set to clean
+					that list of experiments. define it in build.properties or pass 
+					it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<process.list task="clean.experiment" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
+
 
 	<macrodef name="compile.experiment.client">
 		<attribute name="experiment.name" />
@@ -99,9 +96,9 @@
 				</section>
 			</manifest>
 
-			<jar.experiment.client experiment.name="@{experiment.name}" destination="${build.dir.compile}"/>
+			<jar.experiment.client experiment.name="@{experiment.name}"/>
 			
-			<sign.jar jar.name="@{experiment.name}Client.jar" folder="${build.dir.compile}"/>
+			<sign.jar.rec jar.name="@{experiment.name}Client.jar" folder="${build.dir.compile}"/>
 			
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
 
@@ -152,97 +149,110 @@
 		</sequential>
 	</macrodef>
 
-	<!-- = = = = = = = = = = = = = = = = =
-          macrodef: name          
-         = = = = = = = = = = = = = = = = = -->
-    <macrodef name="jar.experiment.client">
-        <attribute name="experiment.name" />
-    	<attribute name="destination"/>
-        <sequential>
-            <mkdir dir="@{destination}"/>
-        	
-        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
-        	
-        	<jar destfile="@{destination}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client"/>
-        	
-        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
-        	
-        </sequential>
-    </macrodef>
 
-	<macrodef name="jar.experiment.driver">
-		<attribute name="experiment.name" />
-		<attribute name="destination"/>
-		<sequential>
-			<mkdir dir="@{destination}" />
-
-			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
-
-			<jar destfile="@{destination}/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/@{experiment.name}/server">
-			</jar>
-
-			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
-
-		</sequential>
-	</macrodef>
+	<target name="compile.experiment.client">
+		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
+		<compile.experiment.client experiment.name="${experiment.name}" />
+	</target>
 	
-	<macrodef name="build.experiment">
-		<attribute name="experiment.name" />
-		<sequential>
-			<clean.experiment experiment.name="@{experiment.name}" />
-			<compile.experiment.client experiment.name="@{experiment.name}" />
-			<compile.experiment.driver experiment.name="@{experiment.name}" />
-			<!--jar.experiment.client experiment.name="@{experiment.name}" /-->
-			<jar.experiment.driver experiment.name="@{experiment.name}" destination="${hardwareserver.build.dir}"/>
-			<!--sign. experiment.name="@{experiment.name}" />
-			<create.jnlp.for.experiment experiment.name="@{experiment.name}" /-->
-		</sequential>
-	</macrodef>
+	<target name="compile.experiment.driver">
+		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
+		<compile.experiment.driver experiment.name="${experiment.name}" />
+	</target>
 
-	<macrodef name="dist.experiment">
-		<attribute name="experiment.name" />
-		<sequential>
-			<build.experiment experiment.name="@{experiment.name}" />
-			<zip destfile="${dist.dir}/elab-@{experiment.name}-client.zip" update="true" comment="eLab @{experiment.name} Client">
-				<fileset file="${experiments.build.dir.client}/@{experiment.name}/@{experiment.name}Client_sig.jar" />
-			</zip>
-			<zip destfile="${dist.dir}/elab-@{experiment.name}-hwserver.zip" update="true" comment="eLab @{experiment.name} Driver">
-				<fileset file="${experiments.build.dir.server}/@{experiment.name}/@{experiment.name}Driver.jar" />
-			</zip>
-			<zip destfile="${dist.dir}/elab-@{experiment.name}.zip" update="true" comment="eLab @{experiment.name} Complete Distribution">
-				<fileset file="${experiments.build.dir.client}/@{experiment.name}/@{experiment.name}Client_sig.jar" />
-				<fileset file="${experiments.build.dir.server}/@{experiment.name}/@{experiment.name}Driver.jar" />
-			</zip>
-		</sequential>
-	</macrodef>
+	<target name="compile.experiment.drivers.list">
+		<fail unless="experiment.list"> experiments.list must be set to compile
+			that list of experiments. define it in build.properties or pass 
+			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<process.list task="compile.experiment.driver" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
+
+	<target name="compile.experiment.clients.list">
+		<fail unless="experiment.list"> experiments.list must be set to compile
+			that list of experiments. define it in build.properties or pass 
+			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<process.list task="compile.experiment.client" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
 	
-	<macrodef name="create.jnlp.for.experiment">
-		<attribute name="experiment.name" />
-		<sequential>
-			<copy file="${template.file}" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" />
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
-				<replacefilter token="@codebase@" property="@{experiment.name}.codebase" />
-				<replacefilter token="@href@" property="@{experiment.name}.href" />
-				<replacefilter token="@title@" property="@{experiment.name}.title" />
-				<replacefilter token="@vendor@" property="@{experiment.name}.vendor" />
-				<replacefilter token="@homepage@" property="@{experiment.name}.homepage" />
-				<replacefilter token="@one-line@" property="@{experiment.name}.one-line" />
-				<replacefilter token="@tootip@" property="@{experiment.name}.tootip" />
-				<replacefilter token="@short@" property="@{experiment.name}.short" />
-				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
-				<replacefilter token="@main-class@" property="@{experiment.name}.main-class" />
-			</replace>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;"/>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
-			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
-				<replacevalue><![CDATA[<jar href="client/@temporary.experiment.jar@" main="true"/>
-		<!--End Experiment Jars-->]]></replacevalue>
-			</replace>
-		<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
+	
+	
+	<macrodef name="jar.experiment.client">
+	        <attribute name="experiment.name" />
+	        <sequential>
+	            <mkdir dir="${client.build.dir}"/>
+	        	
+	        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
+	        	
+	        	<jar destfile="${client.build.dir}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client"/>
+	        	
+	        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
+	        	
+	        </sequential>
+	    </macrodef>
+
+		<macrodef name="jar.experiment.driver">
+			<attribute name="experiment.name" />
+			<sequential>
+				<mkdir dir="${hardwareserver.build.dir}" />
+
+				<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
+
+				<jar destfile="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/@{experiment.name}/server">
+				</jar>
+
+				<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
+
+			</sequential>
+		</macrodef>
+
+	<target name="jar.experiment.client">
+		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
+		<jar.experiment.client experiment.name="${experiment.name}" />
+	</target>
+	
+	<target name="jar.experiment.driver">
+		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
+		<jar.experiment.driver experiment.name="${experiment.name}" />
+	</target>
+
+	<target name="jar.experiment.clients.list">
+		<fail unless="experiment.list"> experiments.list must be set to package
+			that list of experiments. define it in build.properties or pass 
+			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<process.list task="jar.experiment.client" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
+
+	<target name="jar.experiment.drivers.list">
+		<fail unless="experiment.list"> experiments.list must be set to package
+			that list of experiments. define it in build.properties or pass 
+			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<process.list task="jar.experiment.driver" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
 		
-		</sequential>
+
+	<macrodef name="sign.experiment">
+		<attribute name="experiment.name" />
+
+		<sequential>
+			<signjar storetype="${elab.storetype}" destDir="${client.build.dir}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
+				<fileset dir="${client.build.dir}" includes="@{experiment.name}Client.jar" excludes="*_sig.jar" />
+					<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>            
+		</sequential>	
 	</macrodef>
+	
+
+	<target name="sign.experiment">
+		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
+		<sign.experiment experiment.name="${experiment.name}"/>
+	</target>
+
+	<target name="sign.experiments.list">
+		<fail unless="experiment.list"> experiments.list must be set to package
+				that list of experiments. define it in build.properties or pass 
+				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
+		<process.list task="sign.experiment" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
 
 	<macrodef name="run.experiment.client">
 		<attribute name="experiment.name" />
@@ -313,6 +323,17 @@
 		</sequential>
 	</macrodef>
 
+	<target name="run.experiment.client">
+		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<run.experiment.client experiment.name="${experiment.name}" />
+	</target>
+
+	<target name="run.experiment.driver">
+		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<run.experiment.driver experiment.name="${experiment.name}" />
+	</target>
 
 	<macrodef name="debug.experiment.driver">
 		<attribute name="experiment.name" />
@@ -350,120 +371,53 @@
 		</sequential>
 	</macrodef>
 
-	<!-- = = = = = = = = = = = = = = = = =
-          macrodef: create.jar          
-         = = = = = = = = = = = = = = = = = -->
-    <macrodef name="create.jar">
-        <attribute name="destination.folder" />
-        <attribute name="jar.name" />
-        <attribute name="source.basedir" />
-
-    	<sequential>
-    		<mkdir dir="@{destination.folder}" />
-    			<jar destfile="@{destination.folder}/@{jar.name}" basedir="@{source.basedir}">
-					<manifest>
-    					<section name="common">
-    						<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
-    						<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
-    						<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
-    						<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-    						<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${TODAY}" />
-    						<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
-    					</section>
-    				</manifest>
-    			</jar>    
-        </sequential>
-    </macrodef>
-	
-	<!-- = = = = = = = = = = = = = = = = =
-          macrodef: sign.jar          
-         = = = = = = = = = = = = = = = = = -->
-    <macrodef name="sign.jar">
-        <attribute name="folder" />
-        <attribute name="jar.name" />
-        <sequential>
-    		<signjar storetype="${storetype}" destDir="@{folder}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
-    			<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
-    			<globmapper from="*.jar" to="*_sig.jar" />
-    		</signjar>            
-        </sequential>
-    </macrodef>
-
-	
-	<!--/MACROS-->
-
-	<target name="clean.experiment">
-		<fail unless="experiment.name"> experiments.name must be set. define it in build.properties or pass 
-				it to jvm as arg like -Dexperiment.name="experiment1"</fail>
-		<clean.experiment experiment.name="${experiment.name}" />
-	</target>
-
-	<target name="clean.experiments.list">
-		<fail unless="experiment.list"> experiments.list must be set to clean
-					that list of experiments. define it in build.properties or pass 
-					it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="clean.experiment" list="${experiment.list}" attribute.name="experiment.name" />
-	</target>
-
-	<target name="compile.experiment.client">
-		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<compile.experiment.client experiment.name="${experiment.name}" />
+	<target name="debug.experiment.driver">
+		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<debug.experiment.driver experiment.name="${experiment.name}" />
 	</target>
 	
-	<target name="compile.experiment.driver">
-		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<compile.experiment.driver experiment.name="${experiment.name}" />
-	</target>
+	<macrodef name="create.jnlp.for.experiment">
+		<attribute name="experiment.name" />
+		<sequential>
+			<copy file="${template.file}" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" />
+			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+				<replacefilter token="@codebase@" property="@{experiment.name}.codebase" />
+				<replacefilter token="@href@" property="@{experiment.name}.href" />
+				<replacefilter token="@title@" property="@{experiment.name}.title" />
+				<replacefilter token="@vendor@" property="@{experiment.name}.vendor" />
+				<replacefilter token="@homepage@" property="@{experiment.name}.homepage" />
+				<replacefilter token="@one-line@" property="@{experiment.name}.one-line" />
+				<replacefilter token="@tootip@" property="@{experiment.name}.tootip" />
+				<replacefilter token="@short@" property="@{experiment.name}.short" />
+				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
+				<replacefilter token="@main-class@" property="@{experiment.name}.main-class" />
+			</replace>
+			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;"/>
+			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
+			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
+			<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
+				<replacevalue><![CDATA[<jar href="client/@temporary.experiment.jar@" main="true"/>
+		<!--End Experiment Jars-->]]></replacevalue>
+			</replace>
+		<replace file="${experiments.build.dir}/@{experiment.name}/${experiment.name}.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
+		
+		</sequential>
+	</macrodef>
 
-	<target name="compile.experiment.drivers.list">
-		<fail unless="experiment.list"> experiments.list must be set to compile
-			that list of experiments. define it in build.properties or pass 
-			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="compile.experiment.driver" list="${experiment.list}" attribute.name="experiment.name" />
-	</target>
-
-	<target name="compile.experiment.clients.list">
-		<fail unless="experiment.list"> experiments.list must be set to compile
-			that list of experiments. define it in build.properties or pass 
-			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="compile.experiment.client" list="${experiment.list}" attribute.name="experiment.name" />
-	</target>
+	<macrodef name="build.experiment">
+		<attribute name="experiment.name" />
+		<sequential>
+			<clean.experiment experiment.name="@{experiment.name}" />
+			<compile.experiment.client experiment.name="@{experiment.name}" />
+			<compile.experiment.driver experiment.name="@{experiment.name}" />
+			<jar.experiment.client experiment.name="@{experiment.name}" />
+			<jar.experiment.driver experiment.name="@{experiment.name}" />
+			<sign.experiment experiment.name="${experiment.name}" />
+			<create.jnlp.for.experiment experiment.name="@{experiment.name}" />
+		</sequential>
+	</macrodef>
 	
-	<target name="jar.experiment.client">
-		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<jar.experiment.client experiment.name="${experiment.name}" destination="" />
-	</target>
-	
-	<target name="jar.experiment.driver">
-		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<jar.experiment.driver experiment.name="${experiment.name}" destination="${hardwareserver.build.dir}" />
-	</target>
-
-	<target name="jar.experiment.clients.list">
-		<fail unless="experiment.list"> experiments.list must be set to package
-			that list of experiments. define it in build.properties or pass 
-			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="jar.experiment.client" list="${experiment.list}" attribute.name="experiment.name" />
-	</target>
-
-	<target name="jar.experiment.drivers.list">
-		<fail unless="experiment.list"> experiments.list must be set to package
-			that list of experiments. define it in build.properties or pass 
-			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="jar.experiment.driver" list="${experiment.list}" attribute.name="experiment.name" />
-	</target>
-	
-	<target name="sign.experiment">
-		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<sign.jar folder="" jar.name="${experiment.name}Client.jar" />
-	</target>
-
-	<target name="sign.experiments.list">
-		<fail unless="experiment.list"> experiments.list must be set to package
-				that list of experiments. define it in build.properties or pass 
-				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<process.list task="sign.experiment" list="${experiment.list}" attribute.name="experiment.name" />
-	</target>
 
 	<target name="build.experiment">
 		<fail unless="experiment.name">experiment.name must be set to build a single experiment jnlp. 
@@ -477,202 +431,5 @@
 				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
 		<process.list task="build.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
-
-	<target name="teste jnlp">
-		<create.jnlp.for.experiment experiment.name="${experiment.name}" />
-	</target>
-
-	<target name="dist.experiment">
-		<fail unless="experiment.name"> You need to specify which experiment to dist with the property experiment.name</fail>
-		<mkdir dir="${dist.dir}" />
-		<dist.experiment experiment.name="${experiment.name}" />
-	</target>
-
-	<target name="dist.experiments.list">
-		<fail unless="experiment.list">experiment.list must be set to make the dist for that list of experiments. 
-			Pass it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
-		<mkdir dir="${dist.dir}" />
-		<process.list task="dist.experiment" list="${experiment.list}" attribute.name="experiment.name" />
-	</target>
-
-	<target name="run.experiment.client">
-		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
-			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
-		<run.experiment.client experiment.name="${experiment.name}" />
-	</target>
-
-	<target name="run.experiment.driver">
-		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
-			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
-		<run.experiment.driver experiment.name="${experiment.name}" />
-	</target>
-
-	<target name="debug.experiment.driver">
-		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
-			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
-		<debug.experiment.driver experiment.name="${experiment.name}" />
-	</target>
-
-	<!--
-		================================================================
-		========================== Libraries ===========================
-		================================================================
-		-->
-
-	<macrodef name="sign.jars.in.directory">
-		<attribute name="source.dir.name" />
-		<attribute name="destination.dir.name" />
-		<sequential>
-			<mkdir dir="@{destination.dir.name}" />
-			<signjar storetype="${storetype}" destDir="@{destination.dir.name}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
-				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
-				<globmapper from="*.jar" to="*_sig.jar" />
-			</signjar>
-		</sequential>
-	</macrodef>
 	
-	<target name="build.libs">
-		<sign.jars.in.directory source.dir.name="${rec.common.lib.dir}" destination.dir.name="${rec.multicast.build.dir}/libs"/>
-		<sign.jars.in.directory source.dir.name="${rec.multicast.lib.dir}" destination.dir.name=""/>
-		<sign.jars.in.directory source.dir.name="${elab.multicast.lib.dir}" destination.dir.name=""/>
-	</target>
-	
-
-	<!--
-		================================================================
-		========================== Javadocs ============================
-		================================================================
-		-->
-	
-	<target name="javadoc.rec">
-		<javadoc destdir="${build.dir}/javadocs/rec" author="true" version="true" use="true" windowtitle="ReC - Javadocs" >
-		    <packageset dir="${rec.common.src.java.dir}" defaultexcludes="yes" >
-		    	<include name="com/linkare/rec/**"/>
-		    </packageset>
-		 	<classpath refid="rec.common.libs.classpath" />
-		 	<packageset dir="${rec.client.src.java.dir}" defaultexcludes="yes" >
-		 		<include name="com/linkare/**"/>
-		    </packageset>
-			 <packageset dir="${rec.ui.src.java.dir}" defaultexcludes="yes" >
-				<include name="com/linkare/rec/impl**"/>
-		    </packageset>
-		 	<classpath refid="rec.client.libs.classpath" />
-		 	<packageset dir="${rec.multicast.src.java.dir}" defaultexcludes="yes" >
-		 		<include name="com/linkare/rec/impl/**"/>
-		    </packageset>
-		 	<classpath refid="rec.multicastcontroller.libs.classpath" />
-			 <packageset dir="${rec.hardwareserver.src.java.dir}" defaultexcludes="yes" >
-				<include name="com/linkare/rec/impl/**"/>
-		    </packageset>
-		 	<classpath refid="rec.hardwareserver.libs.classpath" />
-		    <doctitle>ReC  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
-		    <bottom><![CDATA[<i>Copyright &#169; 2010 Linkare TI All Rights Reserved.</i>]]></bottom>
-		    <tag name="todo" scope="all" description="To do:"/>
-		    <link href="http://java.sun.com/javase/6/docs/api/"/>
-	  </javadoc>
-	</target>
-	
-	<target name="javadoc.elab">
-		 <javadoc destdir="${build.dir}/javadocs/elab" author="true" version="true" use="true" windowtitle="ELab - Javadocs" >
-		    <packageset dir="${elab.client.src.java.dir}" defaultexcludes="yes" >
-		    	<include name="pt/utl/ist/elab/**"/>
-		    </packageset>
-			<packageset dir="${elab.ui.src.java.dir}" defaultexcludes="yes" >
-		    	<include name="pt/utl/ist/elab/**"/>
-		    </packageset>		 	
-		 	<classpath refid="elab.client.libs.classpath" />
-		 	<packageset dir="${elab.multicast.src.java.dir}" defaultexcludes="yes" >
-		 		<include name="pt/utl/ist/elab/**"/>
-		    </packageset>
-		 	<classpath refid="elab.multicastcontroller.libs.classpath" />
-		 	<packageset dir="${elab.hardwareserver.src.java.dir}" defaultexcludes="yes" >
-		 		<include name="pt/utl/ist/elab/**"/>
-		    </packageset>
-		 	<classpath refid="elab.hardwareserver.libs.classpath" />
-		    <doctitle>ELab  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
-		    <bottom><![CDATA[<i>Copyright &#169; 2010 Linkare TI All Rights Reserved.</i>]]></bottom>
-		    <tag name="todo" scope="all" description="To do:"/>
-		    <link href="http://java.sun.com/javase/6/docs/api/"/>
-		  </javadoc>
-		</target>
-	
-	<target name="clean.javadocs">
-		<delete dir="${build.dir}/javadocs/rec" />
-		<delete dir="${build.dir}/javadocs/elab" />
-		<delete dir="${build.dir}/javadocs" />
-	</target>	
-
-	<taskdef name="p200ant" classname="de.matthiasmann.p200ant.P200AntTask" classpath="${rec.lib.dir}/compile/common/p200ant.jar" />
-
-	
-	<macrodef name="pack.200.all.jar.in.dir">
-		<attribute name="source.directory" />
-		<attribute name="destination.directory"/>
-		<sequential>
-			<delete failonerror="false">
-				<fileset dir="@{destination.directory}"> 
-					<include name="**/*_sig.jar" />
-					<include name="**/*_sig.jar.pack.gz" />
-				</fileset>
-			</delete>
-
-			<mkdir dir="@{destination.directory}" />
-
-			<copy todir="@{destination.directory}">
-				<fileset dir="@{source.directory}"> 
-					<include name="**/*.jar" />
-				</fileset>
-			</copy>
-
-			<p200ant repack="true">
-				<fileset dir="@{destination.directory}"> 
-					<include name="**/*.jar" />
-				</fileset>
-			</p200ant>
-
-			<signjar destDir="@{destination.directory}" keystore="${keystore}" storepass="${keypass}" alias="${alias}" storetype="${storetype}">
-				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="*_sig.jar" />
-				<globmapper from="*.jar" to="*_sig.jar" />
-			</signjar>
-
-			<delete failonerror="false">
-				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="**/*_sig.jar" />
-			</delete>
-
-			<p200ant destdir="@{destination.directory}">
-				<fileset dir="@{destination.directory}"> 
-					<include name="**/*_sig.jar" />
-				</fileset>
-			</p200ant>
-
-		</sequential>
-	</macrodef>
-
-	
-	<macrodef name="pack.200.single.jar">
-		<attribute name="source.jar.without.extension" />
-		<attribute name="source.directory"/>
-		<attribute name="destination.directory"/>
-		<sequential>
-			<delete failonerror="false">
-				<fileset dir="@{destination.directory}"> 
-					<include name="@{source.jar.without.extension}_sig.jar"/> 
-					<include name="@{source.jar.without.extension}_sig.jar.pack.gz"/>
-				</fileset>
-			</delete>
-			<mkdir dir="@{destination.directory}" />
-			<copy file="@{source.directory}/@{source.jar.without.extension}.jar" todir="@{destination.directory}" overwrite="true"/>
-			<p200ant repack="true" srcfile="@{destination.directory}/@{source.jar.without.extension}.jar" />
-			<signjar destDir="@{destination.directory}" keystore="${keystore}" storepass="${keypass}" alias="${alias}" storetype="${storetype}">
-				<fileset file="@{destination.directory}/@{source.jar.without.extension}.jar" />
-				<globmapper from="*.jar" to="*_sig.jar" />
-			</signjar>
-			<delete failonerror="false">
-				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="**/*_sig.jar" />
-			</delete>
-			<p200ant repack="false" destdir="@{destination.directory}" srcfile="@{destination.directory}/@{source.jar.without.extension}_sig.jar" />
-
-		</sequential>
-	</macrodef>
-
 </project>

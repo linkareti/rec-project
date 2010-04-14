@@ -5,7 +5,7 @@
 		=======================================================
 	-->
 
-<project name="ReC - eLab build system" default="help" basedir=".">
+<project name="ReC Module - build system" default="help" basedir=".">
 	<description>
 		Compile, package, sign and run the project ReC and each of the experiments.
 	</description>
@@ -66,15 +66,23 @@
 		
 		<create.jar destination.folder="${build.dir.compile}" jar.name="ReCCommon.jar" source.basedir="${rec.common.classes.dir}"/>
 		
-		<sign.jar folder="${build.dir.compile}" jar.name="ReCCommon.jar" />
+		<sign.jar.rec folder="${build.dir.compile}" jar.name="ReCCommon.jar" />
 		
 	</target>
 
+	<target name="jar.rec.common">
+		<create.jar destination.folder="${common.build.dir}" jar.name="ReCCommon.jar" source.basedir="${rec.common.classes.dir}"/>
+	</target>
+	
+	<target name="sign.rec.common">
+		<sign.jar.rec folder="${common.build.dir}" jar.name="ReCCommon.jar" />
+	</target>
+	
 	<!--target name="pack.jar.rec.common" description="Packages and compresses the jar for p200 distribution.">
 		<pack.200.single.jar destination.directory="${common.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ReCCommon"/>
 	</target-->
 
-	<target name="build.rec.common" depends="clean.rec.common,compile.rec.common">
+	<target name="build.rec.common" depends="clean.rec.common,compile.rec.common, jar.rec.common, sign.rec.common">
 
 	</target>
 	
@@ -133,15 +141,23 @@
 
 		<create.jar destination.folder="${build.dir.compile}" jar.name="ReCClient.jar" source.basedir="${rec.client.classes.dir}"/>
 		
-		<sign.jar folder="${build.dir.compile}" jar.name="ReCClient.jar"/>
+		<sign.jar.rec folder="${build.dir.compile}" jar.name="ReCClient.jar"/>
 		
 	</target>
 
+	<target name="jar.rec.client">
+			<create.jar destination.folder="${client.build.dir}" jar.name="ReCClient.jar" source.basedir="${rec.client.classes.dir}"/>
+		</target>
+		
+		<target name="sign.rec.client">
+			<sign.jar.rec folder="${client.build.dir}" jar.name="ReCClient.jar" />
+		</target>
+	
 	<!--target name="pack.jar.rec.client" description="Packages and compresses the jar for p200 distribution.">
 		<pack.200.single.jar destination.directory="${client.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ReCClient"/>
 	</target-->
 	
-	<target name="build.rec.client" depends="build.rec.common,clean.rec.client,compile.rec.client">
+	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client,sign.rec.client">
 	</target>
 
 	<!--
@@ -188,12 +204,7 @@
 	</target>
 
 	<target name="build.rec.hardwareserver" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
-		<mkdir dir="${hardwareserver.build.dir}/libs"/>
-		<copy todir="${hardwareserver.build.dir}/libs">
-			<fileset dir="${rec.hardwareserver.lib.dir}">
-				<include name="**/*.jar" />
-			</fileset>
-		</copy>
+		
 	</target>
 
 	<!--
@@ -241,20 +252,8 @@
 	</target>
 
 	<target name="build.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
-		<mkdir dir="${multicast.build.dir}/libs"/>
-		<copy todir="${multicast.build.dir}/libs">
-			<fileset dir="${rec.multicast.lib.dir}">
-				<include name="**/*.jar" />
-			</fileset>
-		</copy>
+		
 	</target>
-
-	<path id="run.multicastcontroller.classpath">
-		<path refid="rec.common.lib.path" />
-		<path refid="rec.multicast.lib.path" />
-		<pathelement location="${rec.common.classes.dir}/" />
-		<pathelement location="${rec.multicast.classes.dir}/" />
-	</path>
 
 	<target name="run.rec.multicast">
 		<java classname="${multicast.main-class}" fork="true" failonerror="true" maxmemory="${max.memory}">
@@ -299,4 +298,8 @@
 			<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
 		</java>
 	</target>
+	
+	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller" />
+	
+	<target name="build.all" depends="build.rec.common,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller" />
 </project>

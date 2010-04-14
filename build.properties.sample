@@ -24,12 +24,20 @@ web.server=
 web.server.dir=
 
 ##KEYSTORE CONFIGURATION###
-keystore=cert/ISTJavaSign.KeyStore.p12
-#storetype=jks,pkcs12
-storetype=pkcs12
-keypass=askPass
-storepass=askPass
-alias=ISTJavaSign
+rec.keystore=cert/ISTJavaSign.KeyStore.p12
+#rec.storetype=jks,pkcs12
+rec.storetype=pkcs12
+rec.keypass=askPass
+rec.storepass=askPass
+rec.alias=ISTJavaSign
+
+##KEYSTORE CONFIGURATION###
+elab.keystore=cert/ISTJavaSign.KeyStore.p12
+#elab.storetype=jks,pkcs12
+elab.storetype=pkcs12
+elab.keypass=askPass
+elab.storepass=askPass
+elab.alias=ISTJavaSign
 
 ##RUN CONFIGURATION##
 max.memory=1024m

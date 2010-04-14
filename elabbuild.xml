@@ -5,7 +5,7 @@
 		=======================================================
 	-->
 
-<project name="ReC - eLab build system" default="help" basedir=".">
+<project name="ELab Module - build system" default="help" basedir=".">
 	<description>
 		Compile, package, sign and run the project ReC and each of the experiments.
 	</description>
@@ -80,17 +80,25 @@
 		
 		<create.jar destination.folder="${build.dir.compile}" jar.name="ELabClient.jar" source.basedir="${elab.client.classes.dir}"/>
 	
-		<sign.jar folder="${build.dir.compile}" jar.name="ELabClient.jar"/>
+		<sign.jar.elab folder="${build.dir.compile}" jar.name="ELabClient.jar"/>
 		
 		<create.jnlp.full.client.compile codebase="${basedir}/${build.dir.compile}" />
 		
+	</target>
+	
+	<target name="jar.elab.client">
+		<create.jar destination.folder="${client.build.dir}" jar.name="ELabClient.jar" source.basedir="${elab.client.classes.dir}"/>
+	</target>
+
+	<target name="sign.elab.client">
+		<sign.jar.elab folder="${client.build.dir}" jar.name="ELabClient.jar"/>
 	</target>
 	
 	<!--target name="pack.jar.elab.client" description="Packages and compresses the jar for p200 distribution.">
 		<pack.200.single.jar destination.directory="${client.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ELabClient"/>
 	</target-->
 
-	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client">
+	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
 
 	</target>
 	
@@ -216,12 +224,14 @@
 	</target>
 
 	<target name="build.elab.multicastcontroller" depends="clean.elab.multicastcontroller,compile.elab.multicastcontroller,jar.elab.multicastcontroller">
-		<mkdir dir="${multicast.build.dir}/libs"/>
-		<copy todir="${multicast.build.dir}/libs">
-			<fileset dir="${elab.multicast.lib.dir}">
-				<include name="**/*.jar" />
-			</fileset>
-		</copy>
+
 	</target>
 
+	<target name="clean.all" depends="clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller">
+		
+		</target>
+	
+	<target name="build.all" depends="build.elab.client,build.elab.hardwareserver,build.elab.multicastcontroller">
+	
+	</target>
 </project>
