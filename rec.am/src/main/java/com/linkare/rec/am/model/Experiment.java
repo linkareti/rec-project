@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -34,13 +33,17 @@ public class Experiment extends DefaultDomainObject implements Serializable {
 
     @Basic
     private String name;
+
     @Basic
     private String description;
+
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER)
     private Laboratory laboratory;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "experiment")
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "experiment")
     private List<Reservation> reservations = new ArrayList<Reservation>();
+
     @Embedded
     private State state = new State();
 

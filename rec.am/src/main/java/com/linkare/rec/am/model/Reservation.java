@@ -339,4 +339,28 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     public String getReservedBy() {
 	return getUserPrincipal() != null ? getUserPrincipal().getUsername() : getMoodleRecord().getExternalUser();
     }
+
+    public boolean hasUserPrincipal() {
+	return getUserPrincipal() != null;
+    }
+
+    public boolean hasExperiment() {
+	return getExperiment() != null;
+    }
+
+    public boolean hasUserGroup() {
+	return getUserGroup() != null;
+    }
+
+    public void remove() {
+	if (hasUserPrincipal()) {
+	    setUserPrincipal(null);
+	}
+	if (hasExperiment()) {
+	    setExperiment(null);
+	}
+	if (hasUserGroup()) {
+	    setUserGroup(null);
+	}
+    }
 }

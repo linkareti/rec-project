@@ -5,7 +5,6 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
@@ -28,7 +27,7 @@ public class UserPrincipal extends User implements Principal, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userPrincipal")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userPrincipal")
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
     public UserPrincipal() {

@@ -3,9 +3,7 @@ package com.linkare.rec.am.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
@@ -31,7 +29,7 @@ public class UserGroup extends Group implements Serializable {
     @Transient
     private List<UserPrincipal> nonMembers;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userGroup", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userGroup")
     private List<Reservation> reservations = new ArrayList<Reservation>();
 
     @Override

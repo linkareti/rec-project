@@ -11,6 +11,7 @@ public class ExternalCourse implements Identifiable<String> {
 
     public ExternalCourse() {
 	super();
+	this.delegate = new CourseRecord();
     }
 
     public ExternalCourse(final CourseRecord courseRecord) {
