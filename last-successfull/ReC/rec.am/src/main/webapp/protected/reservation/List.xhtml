@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{bundle['page.reservation.list.title']}"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+		<h:form styleClass="jsfcrud_list_form">
+			<h:panelGroup id="messagePanel" layout="block">
+				<h:messages errorStyle="color: red" infoStyle="color: green"
+					layout="table" />
+			</h:panelGroup>
+			<h:outputText escape="false" value="#{bundle['info.emptyList']}"
+				rendered="#{reservationController.items.rowCount == 0}" />
+			<h:panelGroup rendered="#{reservationController.items.rowCount > 0}">
+				<h:outputText
+					value="#{reservationController.pagination.pageFirstItem + 1}..#{reservationController.pagination.pageLastItem + 1}/#{reservationController.pagination.itemsCount}" />&nbsp;
+                    <h:commandLink
+					action="#{reservationController.previous}"
+					value="#{bundle['operation.previous']} #{reservationController.pagination.pageSize}"
+					rendered="#{reservationController.pagination.hasPreviousPage}" />&nbsp;
+                    <h:commandLink
+					action="#{reservationController.next}"
+					value="#{bundle['operation.next']} #{reservationController.pagination.pageSize}"
+					rendered="#{reservationController.pagination.hasNextPage}" />&nbsp;
+                    <h:dataTable value="#{reservationController.items}"
+					var="item" border="0" cellpadding="2" cellspacing="0"
+					rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+					style="border:solid 1px">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle['reservation.title']}" />
+						</f:facet>
+						<h:outputText value="#{item.title}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle['reservation.experiment']}" />
+						</f:facet>
+						<h:outputText value="#{item.experiment}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle['reservation.reservedBy']}" />
+						</f:facet>
+						<h:outputText value="#{item.reservedBy}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle['reservation.group']}" />
+						</f:facet>
+						<h:outputText value="#{item.userGroup}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle['reservation.startDate']}" />
+						</f:facet>
+						<h:outputText value="#{item.startDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle['reservation.startTimeSlot']}" />
+						</f:facet>
+						<h:outputText value="#{item.startTimeSlot}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle['reservation.endDate']}" />
+						</f:facet>
+						<h:outputText value="#{item.endDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle['reservation.endTimeSlot']}" />
+						</f:facet>
+						<h:outputText value="#{item.endTimeSlot}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="&nbsp;" />
+						</f:facet>
+						<h:commandLink action="#{reservationController.prepareView}"
+							value="#{bundle['operation.view']}" />
+						<h:outputText value=" " />
+						<h:commandLink action="#{reservationController.prepareEdit}"
+							value="#{bundle['operation.edit']}" />
+						<h:outputText value=" " />
+						<h:commandLink action="#{reservationController.destroy}"
+							value="#{bundle['operation.remove']}" />
+					</h:column>
+				</h:dataTable>
+			</h:panelGroup>
+			<br />
+			<h:commandLink action="#{reservationController.prepareCreate}"
+				value="#{bundle['operation.create']}" />
+			<br />
+			<br />
+			<h:commandLink value="#{bundle['menu.backoffice']}"
+				action="/protected/backoffice" immediate="true" />
+			<br />
+			<br />
+			<h:commandLink value="#{bundle['menu.index']}" action="/index"
+				immediate="true" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>
