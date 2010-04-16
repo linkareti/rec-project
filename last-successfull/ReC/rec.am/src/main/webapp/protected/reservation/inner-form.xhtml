@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+
+<h:form>
+
+	<h:inputHidden rendered="#{operation != 'create'}" id="current"
+		value="#{reservationController.current}"
+		converter="reservationConverter" />
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{bundle['reservation.title']}" for="title" />
+		<h:inputText id="title"
+			value="#{reservationController.selected.title}"
+			title="#{bundle['reservation.title']}" />
+		<h:outputLabel value="#{bundle['reservation.experiment']}"
+			for="experiment" />
+		<h:selectOneMenu id="experiment"
+			value="#{reservationController.selected.experiment}"
+			title="#{bundle['reservation.experiment']}" required="true"
+			converter="experimentConverter">
+			<f:attribute name="optionClasses" value="option1, option2" />
+			<f:selectItems
+				value="#{experimentController.itemsAvailableSelectOne}" />
+		</h:selectOneMenu>
+		<h:outputLabel value="#{bundle['reservation.user']}" for="user" />
+		<h:selectOneMenu id="user"
+			value="#{reservationController.selected.userPrincipal}"
+			title="#{bundle['reservation.user']}" required="true"
+			converter="userPrincipalConverter">
+			<f:selectItems
+				value="#{userPrincipalController.itemsAvailableSelectOne}" />
+		</h:selectOneMenu>
+		<h:outputLabel value="#{bundle['reservation.group']}" for="group" />
+		<h:selectOneMenu id="group"
+			value="#{reservationController.selected.userGroup}"
+			title="#{bundle['reservation.group']}" required="true"
+			converter="userGroupConverter">
+			<f:selectItems value="#{userGroupController.itemsAvailableSelectOne}" />
+		</h:selectOneMenu>
+		<h:outputLabel value="#{bundle['reservation.startDate']}"
+			for="startDate" />
+		<p:calendar id="startDate"
+			value="#{reservationController.selected.startDate}"
+			pattern="dd/MM/yyyy" />
+		<h:outputLabel value="#{bundle['reservation.startTimeSlot']}"
+			for="startTimeSlot" />
+		<h:selectOneMenu id="startTimeSlot"
+			value="#{reservationController.selected.startTimeSlot}"
+			title="#{bundle['reservation.startTimeSlot']}" required="true">
+			<f:selectItems value="#{reservationController.timeSlotSelectOne}" />
+		</h:selectOneMenu>
+	</h:panelGrid>
+
+	<h:panelGroup rendered="#{operation == 'create'}">
+		<h:commandLink action="#{reservationController.create}"
+			value="#{bundle['operation.save']}" />
+		<br />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'edit'}">
+		<h:commandLink action="View" value="#{bundle['operation.view']}" />
+		<br />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'view'}">
+		<h:commandLink action="Edit" value="#{bundle['operation.edit']}" />
+		<br />
+	</h:panelGroup>
+	<h:commandLink action="#{reservationController.prepareList}"
+		value="#{bundle['operation.list']}" immediate="true" />
+	<br />
+	<h:commandLink value="#{bundle['menu.backoffice']}"
+		action="/protected/backoffice" immediate="true" />
+	<br />
+	<h:commandLink value="#{bundle['menu.index']}" action="/index"
+		immediate="true" />
+
+</h:form>
+
+</html>
