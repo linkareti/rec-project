@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
+    <lifecycle>
+        <phase-listener>com.linkare.rec.am.web.listener.LifeCycleListener</phase-listener>
+    </lifecycle>
+    <converter>
+        <converter-id>UserPrincipalConverter</converter-id>
+        <converter-class>com.linkare.rec.am.web.UserPrincipalConverter</converter-class>
+    </converter>
+    <render-kit>
+        <renderer>
+            <component-family>javax.faces.SelectOne</component-family>
+            <renderer-type>javax.faces.Menu</renderer-type>
+            <renderer-class>com.linkare.rec.am.web.util.ExtendedMenuRenderer</renderer-class>
+        </renderer>
+        <renderer>
+            <component-family>javax.faces.SelectMany</component-family>
+            <renderer-type>javax.faces.Menu</renderer-type>
+            <renderer-class>com.linkare.rec.am.web.util.ExtendedMenuRenderer</renderer-class>
+        </renderer>
+    </render-kit>
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/../LoginServlet?action=logout</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>
