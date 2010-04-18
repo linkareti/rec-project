@@ -46,7 +46,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     private String title;
 
     @Basic
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "START_DATE")
     private Date startDate;
 
@@ -55,7 +55,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     private String startTimeSlot;
 
     @Basic
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "END_DATE")
     private Date endDate;
 

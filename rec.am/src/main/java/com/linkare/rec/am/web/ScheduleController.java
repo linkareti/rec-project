@@ -68,6 +68,8 @@ public class ScheduleController implements Serializable {
 
     private String theme;
 
+    private static Calendar cal = Calendar.getInstance();
+
     private List<ScheduleEvent> getEvents() {
 	final UserView userView = SessionHelper.getUserView();
 	if (userView.isExternal()) {
@@ -109,22 +111,24 @@ public class ScheduleController implements Serializable {
 
     public final String createOrUpdate() {
 	if (event.getId() == null) {
-	    String timeSlot = event.getStartTimeSlot();
-	    StringTokenizer st = new StringTokenizer(timeSlot, ":");
-	    Calendar cal = Calendar.getInstance();
+	    final String startTimeSlot = event.getStartTimeSlot();
+	    final StringTokenizer startTimeSlotTokenizer = new StringTokenizer(startTimeSlot, ":");
+
 	    cal.setTime(event.getStartDate());
-	    cal.set(Calendar.HOUR, Integer.parseInt(st.nextToken()));
-	    cal.set(Calendar.MINUTE, Integer.parseInt(st.nextToken()));
+	    cal.set(Calendar.HOUR, Integer.parseInt(startTimeSlotTokenizer.nextToken()));
+	    cal.set(Calendar.MINUTE, Integer.parseInt(startTimeSlotTokenizer.nextToken()));
 	    event.setStartDate(cal.getTime());
-	    event.setStartTimeSlot(timeSlot);
-	    if (cal.get(Calendar.MINUTE) == MINUTE_STEP) {
-		cal.roll(Calendar.HOUR, true);
-		cal.set(Calendar.MINUTE, 0);
-	    } else if (cal.get(Calendar.MINUTE) == 0) {
-		cal.set(Calendar.MINUTE, MINUTE_STEP);
-	    }
+	    event.setStartTimeSlot(startTimeSlot);
+
+	    final String endTimeSlot = event.getEndTimeSlot();
+	    final StringTokenizer endTimeSlotTokenizer = new StringTokenizer(endTimeSlot, ":");
+	    cal.setTime(event.getEndDate());
+	    cal.set(Calendar.HOUR, Integer.parseInt(endTimeSlotTokenizer.nextToken()));
+	    cal.set(Calendar.MINUTE, Integer.parseInt(endTimeSlotTokenizer.nextToken()));
+
 	    event.setEndDate(cal.getTime());
 	    event.setEndTimeSlot(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
+
 	    eventModel.addEvent(event);
 	    ejbFacade.create(event);
 	} else {
@@ -155,14 +159,32 @@ public class ScheduleController implements Serializable {
 	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + selectEvent.getDayDelta() + ", Minute delta:"
 		+ selectEvent.getMinuteDelta());
 	event = (Reservation) selectEvent.getScheduleEvent();
+	moveEventTime(event, selectEvent.getMinuteDelta());
 	createOrUpdate();
 	addMessage(message);
+    }
+
+    private void moveEventTime(final Reservation reservation, final int minuteDelta) {
+	cal.setTime(reservation.getStartDate());
+	cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + minuteDelta);
+	reservation.setStartDate(cal.getTime());
+
+	cal.setTime(reservation.getEndDate());
+	cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + minuteDelta);
+	reservation.setEndDate(cal.getTime());
+    }
+
+    private void extendEventTime(final Reservation reservation, final int minuteDelta) {
+	cal.setTime(reservation.getEndDate());
+	cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + minuteDelta);
+	reservation.setEndDate(cal.getTime());
     }
 
     public void onEventResize(ScheduleEntryResizeEvent selectEvent) {
 	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + selectEvent.getDayDelta() + ", Minute delta:"
 		+ selectEvent.getMinuteDelta());
 	event = (Reservation) selectEvent.getScheduleEvent();
+	extendEventTime(event, selectEvent.getMinuteDelta());
 	createOrUpdate();
 	addMessage(message);
     }
