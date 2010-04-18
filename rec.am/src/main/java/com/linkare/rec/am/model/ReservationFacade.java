@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.Query;
 
 import org.primefaces.model.ScheduleEvent;
@@ -13,6 +15,7 @@ import org.primefaces.model.ScheduleEvent;
  * @author Joao
  */
 @Stateless
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class ReservationFacade extends Facade<Reservation> {
 
     @Override
@@ -57,13 +60,28 @@ public class ReservationFacade extends Facade<Reservation> {
 	return ((Long) query.getSingleResult()).intValue();
     }
 
-    public List<ScheduleEvent> fetchLazy(Date start, Date end, UserPrincipal user) {
-	List<ScheduleEvent> eventList = em.createQuery(
-						       "SELECT r FROM Reservation r " + "WHERE r.userPrincipal=:user "
-							       + "AND r.startDate BETWEEN :start AND :end").setParameter("user", user).setParameter("start",
-																		    start)
-					  .setParameter("end", end).getResultList();
+    public List<ScheduleEvent> findReservationsFor(Date start, Date end, UserPrincipal user) {
+	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForInternalUserInDate").setParameter("internalUser",
+																 user.getUsername())
+					     .setParameter("start", start).setParameter("end", end).getResultList();
+	return events;
+    }
 
-	return eventList;
+    public List<ScheduleEvent> findReservationsFor(UserPrincipal user) {
+	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForInternalUser").setParameter("internalUser", user.getUsername())
+					     .getResultList();
+	return events;
+    }
+
+    public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final String externalUser) {
+	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForExternalUserInDate").setParameter("externalUser", externalUser)
+					     .setParameter("start", start).setParameter("end", end).getResultList();
+	return events;
+    }
+
+    public List<ScheduleEvent> findReservationsFor(final String externalUser) {
+	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForExternalUser").setParameter("externalUser", externalUser)
+					     .getResultList();
+	return events;
     }
 }

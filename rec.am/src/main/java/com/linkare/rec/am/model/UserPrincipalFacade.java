@@ -34,6 +34,12 @@ public class UserPrincipalFacade extends Facade<UserPrincipal> {
 	return userPrincipal;
     }
 
+    public UserPrincipal findByUsername(final String username) {
+	UserPrincipal userPrincipal = (UserPrincipal) em.createNamedQuery("UserPrincipal.findByUsername").setParameter("username", username).getSingleResult();
+	userPrincipal.getGroups();
+	return userPrincipal;
+    }
+
     @Override
     public List<UserPrincipal> findAll() {
 	final Query query = em.createNamedQuery("UserPrincipal.findAll");

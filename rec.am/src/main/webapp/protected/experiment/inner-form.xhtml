@@ -26,8 +26,7 @@
 		<h:selectOneMenu id="laboratory"
 			value="#{experimentController.selected.laboratory}"
 			title="#{bundle['experiment.laboratory']}"
-			disabled="#{operation == 'view'}"
-			converter="laboratoryConverter">
+			disabled="#{operation == 'view'}" converter="laboratoryConverter">
 			<f:selectItems
 				value="#{laboratoryController.itemsAvailableSelectOne}" />
 		</h:selectOneMenu>

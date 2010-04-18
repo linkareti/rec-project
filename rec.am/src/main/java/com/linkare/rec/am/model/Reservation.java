@@ -32,7 +32,11 @@ import com.linkare.rec.am.model.moodle.MoodleRecord;
 @NamedQueries( {
 	@NamedQuery(name = "Reservation.findAll", query = "Select r from Reservation r"),
 	@NamedQuery(name = "Reservation.countAll", query = "Select count(r) from Reservation r"),
-	@NamedQuery(name = "findReservationsBetweenDatesForLaboratory", query = "SELECT reserved FROM Reservation reserved WHERE reserved.startDate >=:start AND reserved.endDate <=:end and reserved.experiment in(SELECT experiment FROM Laboratory lab, Experiment experiment WHERE lab.name=:namelab and experiment.laboratory=lab)") })
+	@NamedQuery(name = "findReservationsBetweenDatesForLaboratory", query = "Select r from Reservation r where r.startDate >=:start and r.endDate <=:end and r.experiment in (Select e from Laboratory l, Experiment e where l.name=:namelab and e.laboratory=l)"),
+	@NamedQuery(name = "Reservation.findReservationsForInternalUserInDate", query = "Select r from Reservation r WHERE r.userPrincipal.username=:username and r.startDate between :start AND :end"),
+	@NamedQuery(name = "Reservation.findReservationsForInternalUser", query = "Select r from Reservation r WHERE r.userPrincipal.username=:username"),
+	@NamedQuery(name = "Reservation.findReservationsForExternalUserInDate", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.startDate between :start AND :end"),
+	@NamedQuery(name = "Reservation.findReservationsForExternalUser", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser") })
 public class Reservation extends DefaultDomainObject implements ScheduleEvent, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,6 +79,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     @JoinColumn(name = "KEY_GROUP", nullable = true)
     private UserGroup userGroup;
 
+    @Column(name = "RESERVATION_ID", insertable = true, updatable = false, unique = true)
+    private String reservationId;
+
     @Embedded
     private MoodleRecord moodleRecord;
 
@@ -97,25 +104,24 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     public Reservation() {
     }
 
-    /**
-     * Get the value of id
-     * 
-     * @return the value of id
-     */
-    @Override
-    public String getId() {
-	return getIdInternal() == null ? null : String.valueOf(getIdInternal());
+    public Reservation(final String externalUser, final String externalCourse, final String externalURL) {
+	this();
+	setMoodleRecord(new MoodleRecord(externalUser, externalCourse, externalURL));
     }
 
     /**
-     * Set the value of id
-     * 
-     * @param id
-     *            new value of id
+     * @return the id
      */
-    @Override
+    public String getId() {
+	return reservationId;
+    }
+
+    /**
+     * @param id
+     *            the id to set
+     */
     public void setId(String id) {
-	super.setIdInternal(Long.valueOf(id));
+	this.reservationId = id;
     }
 
     /**
@@ -340,26 +346,64 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
 	return getUserPrincipal() != null ? getUserPrincipal().getUsername() : getMoodleRecord().getExternalUser();
     }
 
-    public boolean hasUserPrincipal() {
+    public String getReservedTo() {
+	return getUserGroup() != null ? getUserGroup().getName() : getMoodleRecord().getExternalCourseId();
+    }
+
+    public boolean getHasUserPrincipal() {
 	return getUserPrincipal() != null;
     }
 
-    public boolean hasExperiment() {
+    public boolean getHasExperiment() {
 	return getExperiment() != null;
     }
 
-    public boolean hasUserGroup() {
+    public boolean getHasUserGroup() {
 	return getUserGroup() != null;
     }
 
+    public String getExternalUser() {
+	return getMoodleRecord() == null ? null : getMoodleRecord().getExternalUser();
+    }
+
+    public void setExternalUser(final String externalUser) {
+	if (getMoodleRecord() != null) {
+	    getMoodleRecord().setExternalUser(externalUser);
+	}
+    }
+
+    public String getExternalURL() {
+	return getMoodleRecord() == null ? null : getMoodleRecord().getMoodleUrl();
+    }
+
+    public void setExternalURL(final String externalURL) {
+	if (getMoodleRecord() != null) {
+	    getMoodleRecord().setMoodleUrl(externalURL);
+	}
+    }
+
+    public String getExternalCourse() {
+	return getMoodleRecord() == null ? null : getMoodleRecord().getExternalCourseId();
+    }
+
+    public void setExternalCourse(final String externalCourse) {
+	if (getMoodleRecord() != null) {
+	    getMoodleRecord().setExternalCourseId(externalCourse);
+	}
+    }
+
+    public boolean getHasMoodleRecord() {
+	return getMoodleRecord() != null;
+    }
+
     public void remove() {
-	if (hasUserPrincipal()) {
+	if (getHasUserPrincipal()) {
 	    setUserPrincipal(null);
 	}
-	if (hasExperiment()) {
+	if (getHasExperiment()) {
 	    setExperiment(null);
 	}
-	if (hasUserGroup()) {
+	if (getHasUserGroup()) {
 	    setUserGroup(null);
 	}
     }

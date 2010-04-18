@@ -43,10 +43,6 @@ public class Login implements Authenticator, Serializable {
     @SuppressWarnings("unchecked")
     private LoginProvider loginProvider;
 
-    public static final String USERNAME_SESSION_KEY = "username";
-
-    public static final String AUTHENTICATE_RESULT_SESSION_KEY = "authenticateResult";
-
     public void login(HttpServletRequest request) {
 
 	if ((getCredentials().getUsername() != null && getCredentials().getUsername().trim().length() > 0)

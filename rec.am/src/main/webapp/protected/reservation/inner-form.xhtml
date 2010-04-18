@@ -9,10 +9,13 @@
 
 <h:form>
 
-	<h:inputHidden rendered="#{operation != 'create'}" id="current"
-		value="#{reservationController.current}"
-		converter="reservationConverter" />
+	<h:inputHidden id="current" value="#{reservationController.current}"
+		converter="entityConverter" />
+	<h:inputHidden id="moodleRecord"
+		value="#{reservationController.selected.moodleRecord}" />
+
 	<h:panelGrid columns="2">
+
 		<h:outputLabel value="#{bundle['reservation.title']}" for="title" />
 		<h:inputText id="title"
 			value="#{reservationController.selected.title}"
@@ -27,21 +30,35 @@
 			<f:selectItems
 				value="#{experimentController.itemsAvailableSelectOne}" />
 		</h:selectOneMenu>
-		<h:outputLabel value="#{bundle['reservation.user']}" for="user" />
+		<h:outputLabel value="#{bundle['reservation.reservedBy']}" for="user"
+			rendered="#{!userView.external}" />
 		<h:selectOneMenu id="user"
 			value="#{reservationController.selected.userPrincipal}"
-			title="#{bundle['reservation.user']}" required="true"
-			converter="userPrincipalConverter">
+			title="#{bundle['reservation.user']}"
+			required="#{!userView.external}" converter="userPrincipalConverter"
+			rendered="#{!userView.external}">
 			<f:selectItems
 				value="#{userPrincipalController.itemsAvailableSelectOne}" />
 		</h:selectOneMenu>
-		<h:outputLabel value="#{bundle['reservation.group']}" for="group" />
+		<h:outputLabel value="#{bundle['reservation.reservedBy']}"
+			for="externalUser" rendered="#{userView.external}" />
+		<h:inputText id="externalUser"
+			value="#{reservationController.selected.externalUser}"
+			required="#{userView.external}" rendered="#{userView.external}" />
+		<h:outputLabel value="#{bundle['reservation.reservedTo']}" for="group"
+			rendered="#{!userView.external}" />
 		<h:selectOneMenu id="group"
 			value="#{reservationController.selected.userGroup}"
-			title="#{bundle['reservation.group']}" required="true"
-			converter="userGroupConverter">
+			title="#{bundle['reservation.group']}"
+			required="#{!userView.external}" converter="userGroupConverter"
+			rendered="#{!userView.external}">
 			<f:selectItems value="#{userGroupController.itemsAvailableSelectOne}" />
 		</h:selectOneMenu>
+		<h:outputLabel value="#{bundle['reservation.reservedTo']}"
+			for="externalCourse" rendered="#{userView.external}" />
+		<h:inputText id="externalCourse"
+			value="#{reservationController.selected.externalCourse}"
+			required="#{userView.external}" rendered="#{userView.external}" />
 		<h:outputLabel value="#{bundle['reservation.startDate']}"
 			for="startDate" />
 		<p:calendar id="startDate"

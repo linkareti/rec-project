@@ -22,7 +22,8 @@ import com.linkare.commons.utils.EqualityUtils;
  */
 @Entity
 @NamedQueries( { @NamedQuery(name = "UserPrincipal.findAll", query = "Select up from UserPrincipal up"),
-	@NamedQuery(name = "UserPrincipal.countAll", query = "Select count(up) from UserPrincipal up") })
+	@NamedQuery(name = "UserPrincipal.countAll", query = "Select count(up) from UserPrincipal up"),
+	@NamedQuery(name = "UserPrincipal.findByUsername", query = "Select up from UserPrincipal up where up.username = :username") })
 public class UserPrincipal extends User implements Principal, Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -10,10 +10,11 @@
 	<lifecycle>
 		<phase-listener>com.linkare.rec.am.web.listener.LifeCycleListener</phase-listener>
 	</lifecycle>
-	<converter>
-		<converter-id>UserPrincipalConverter</converter-id>
+	<!--
+		<converter> <converter-id>UserPrincipalConverter</converter-id>
 		<converter-class>com.linkare.rec.am.web.UserPrincipalConverter</converter-class>
-	</converter>
+		</converter>
+	-->
 	<render-kit>
 		<renderer>
 			<component-family>javax.faces.SelectOne</component-family>
@@ -32,6 +33,13 @@
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/../LoginServlet?action=logout</to-view-id>
 			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/protected/courses/List.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>Create</from-outcome>
+			<to-view-id>/protected/reservation/Create.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

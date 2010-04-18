@@ -86,12 +86,7 @@ public final class MoodleClientHelper {
 
     public static UserRecord[] getStudents(final String courseShortName) {
 	try {
-	    System.out.println("\n\n\n\nLOOKING FOR STUDENTS IN COURSE " + courseShortName);
 	    final UserRecord[] result = MOODLEWS_PORT.get_students(getClient(), getSessionkey(), courseShortName, "shortname").getUsers();
-	    for (final UserRecord userRecord : result) {
-		System.out.println("----------------------> " + userRecord.getFirstname());
-	    }
-	    System.out.println("\n\n\n\n\n");
 	    return result;
 	} catch (RemoteException e) {
 	    e.printStackTrace();

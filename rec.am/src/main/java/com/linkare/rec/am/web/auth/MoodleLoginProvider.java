@@ -8,15 +8,15 @@ import com.linkare.rec.am.wsgen.moodle.MoodleWS;
 import com.linkare.rec.am.wsgen.moodle.MoodleWSLocator;
 import com.linkare.rec.am.wsgen.moodle.MoodleWSPortType;
 
-public class MoodleLoginProvider extends LoginProvider<LoginReturn> {
+public class MoodleLoginProvider extends LoginProvider {
 
     @Override
-    public LoginReturn authenticate(final HttpServletRequest request, String username, String password) throws AuthenticationException {
+    public UserView authenticate(final HttpServletRequest request, String username, String password) throws AuthenticationException {
 	MoodleWS service = new MoodleWSLocator();
 	try {
 	    MoodleWSPortType port = service.getMoodleWSPort();
 	    final LoginReturn loginReturn = port.login(username, password);
-	    return loginReturn;
+	    return new UserView(username, "TO-BE-FETCHED", loginReturn);
 	} catch (Exception e) {
 	    throw new AuthenticationException(e);
 	}

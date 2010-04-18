@@ -155,4 +155,9 @@ public class ExternalCourse implements Identifiable<String> {
     public java.math.BigInteger getMyrole() {
 	return delegate.getMyrole();
     }
+
+    @Override
+    public String toString() {
+	return getShortname();
+    }
 }

@@ -59,6 +59,16 @@
 						<h:commandLink action="#{externalCourseController.prepareView}"
 							value="#{bundle['operation.view']}" />
 					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="&nbsp;" />
+						</f:facet>
+						<h:commandLink
+							action="#{reservationController.prepareCreateExternal}"
+							value="#{bundle['operation.makeReservation']}">
+							<f:param name="externalCourse" value="#{item.shortname}" />
+						</h:commandLink>
+					</h:column>
 				</h:dataTable>
 			</h:panelGroup>
 			<br />

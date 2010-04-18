@@ -15,7 +15,9 @@ import javax.faces.model.SelectItem;
 
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.ReservationFacade;
+import com.linkare.rec.am.model.moodle.MoodleRecord;
 import com.linkare.rec.am.web.controller.AbstractController;
+import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "reservationController")
@@ -25,15 +27,12 @@ public class ReservationController extends AbstractController<Reservation, Reser
     private static final long serialVersionUID = 1L;
 
     @EJB
-    private com.linkare.rec.am.model.ReservationFacade ejbFacade;
+    private ReservationFacade ejbFacade;
 
     private static final int MINUTE_STEP = 30;
 
     @Override
     public Reservation getCurrent() {
-	if (current == null || current.getPk() == null) {
-	    current = (Reservation) JsfUtil.getObjectFromRequestParameter("current", new ReservationConverter());
-	}
 	return current;
     }
 
@@ -58,6 +57,15 @@ public class ReservationController extends AbstractController<Reservation, Reser
     @Override
     public final String prepareCreate() {
 	current = new Reservation();
+	selectedItemIndex = -1;
+	return CREATE;
+    }
+
+    public final String prepareCreateExternal() {
+	final String externalUser = SessionHelper.getUsername();
+	final String externalCourse = JsfUtil.getRequestParameter("externalCourse");
+	final String externalURL = SessionHelper.getExternalURL();
+	current = new Reservation(externalUser, externalCourse, externalURL);
 	selectedItemIndex = -1;
 	return CREATE;
     }
@@ -151,6 +159,33 @@ public class ReservationController extends AbstractController<Reservation, Reser
 	    if (object instanceof Reservation) {
 		Reservation o = (Reservation) object;
 		return getStringKey(o.getPk());
+	    } else {
+		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
+			+ Reservation.class.getName());
+	    }
+	}
+    }
+
+    @FacesConverter(forClass = MoodleRecord.class)
+    public static class MoodleRecordConverter implements Converter {
+
+	@Override
+	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+	    if (value == null || value.length() == 0) {
+		return null;
+	    }
+	    final String[] valueElements = value.split("_");
+	    return new MoodleRecord(valueElements[0], valueElements[1], valueElements[2]);
+	}
+
+	@Override
+	public final String getAsString(FacesContext facesContext, UIComponent component, Object object) {
+	    if (object == null) {
+		return null;
+	    }
+	    if (object instanceof MoodleRecord) {
+		final MoodleRecord record = (MoodleRecord) object;
+		return record.getExternalUser() + "_" + record.getExternalCourseId() + "_" + record.getMoodleUrl();
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
 			+ Reservation.class.getName());

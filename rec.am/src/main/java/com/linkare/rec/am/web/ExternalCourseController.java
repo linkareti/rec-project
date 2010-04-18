@@ -8,7 +8,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.linkare.rec.am.model.ExternalCourseFacade;
-import com.linkare.rec.am.model.Laboratory;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.JsfUtil;
@@ -149,7 +148,7 @@ public class ExternalCourseController extends AbstractController<ExternalCourse,
 		return getStringKey(o.getPk());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
-			+ Laboratory.class.getName());
+			+ ExternalCourse.class.getName());
 	    }
 	}
     }
