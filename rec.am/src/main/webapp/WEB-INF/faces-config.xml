@@ -28,7 +28,7 @@
 		</renderer>
 	</render-kit>
 	<navigation-rule>
-		<from-view-id>/index.xhtml</from-view-id>
+		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>logout</from-outcome>
 			<to-view-id>Login.xhtml</to-view-id>
