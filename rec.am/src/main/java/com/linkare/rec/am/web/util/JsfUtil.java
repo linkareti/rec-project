@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.linkare.commons.jpa.Identifiable;
-
 public final class JsfUtil {
 
     private static final int MAX_ITEM_INDEX = 49;
@@ -27,7 +25,7 @@ public final class JsfUtil {
     private JsfUtil() {
     }
 
-    public static <T extends Identifiable<? extends Object>> SelectItem[] getSelectItems(List<T> entities, boolean selectOne) {
+    public static <T> SelectItem[] getSelectItems(List<T> entities, boolean selectOne) {
 	int size = selectOne ? entities.size() + 1 : entities.size();
 	SelectItem[] items = new SelectItem[size];
 	int i = 0;

@@ -5,8 +5,6 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import com.linkare.rec.am.wsgen.moodle.LoginReturn;
-
 /**
  * 
  * @author Paulo Zenida - Linkare TI
@@ -18,27 +16,17 @@ public class UserView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final String USER_VIEW_SESSION_KEY = "userView";
-
     private String username;
 
     private String domain;
-
-    private LoginReturn loginReturn;
 
     public UserView() {
 	super();
     }
 
     public UserView(String username, String domain) {
-	this(username, domain, null);
-    }
-
-    public UserView(String username, String domain, LoginReturn loginReturn) {
-	this();
 	this.username = username;
 	this.domain = domain;
-	this.loginReturn = loginReturn;
     }
 
     /**
@@ -71,22 +59,11 @@ public class UserView implements Serializable {
 	this.domain = domain;
     }
 
-    /**
-     * @return the loginReturn
-     */
-    public LoginReturn getLoginReturn() {
-	return loginReturn;
-    }
-
-    /**
-     * @param loginReturn
-     *            the loginReturn to set
-     */
-    public void setLoginReturn(LoginReturn loginReturn) {
-	this.loginReturn = loginReturn;
+    public boolean isAdmin() {
+	return false;
     }
 
     public boolean isExternal() {
-	return getLoginReturn() != null;
+	return false;
     }
 }

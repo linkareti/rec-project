@@ -64,7 +64,7 @@ public class ReservationController extends AbstractController<Reservation, Reser
     public final String prepareCreateExternal() {
 	final String externalUser = SessionHelper.getUsername();
 	final String externalCourse = JsfUtil.getRequestParameter("externalCourse");
-	final String externalURL = SessionHelper.getExternalURL();
+	final String externalURL = SessionHelper.getLoginDomain();
 	current = new Reservation(externalUser, externalCourse, externalURL);
 	selectedItemIndex = -1;
 	return CREATE;

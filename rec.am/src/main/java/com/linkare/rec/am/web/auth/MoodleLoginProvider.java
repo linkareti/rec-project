@@ -1,22 +1,28 @@
 package com.linkare.rec.am.web.auth;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.web.ex.AuthenticationException;
+import com.linkare.rec.am.web.moodle.MoodleClientHelper;
 import com.linkare.rec.am.wsgen.moodle.LoginReturn;
-import com.linkare.rec.am.wsgen.moodle.MoodleWS;
-import com.linkare.rec.am.wsgen.moodle.MoodleWSLocator;
-import com.linkare.rec.am.wsgen.moodle.MoodleWSPortType;
 
+/**
+ * 
+ * @author Paulo Zenida - Linkare TI
+ * 
+ */
 public class MoodleLoginProvider extends LoginProvider {
 
     @Override
-    public UserView authenticate(final HttpServletRequest request, String username, String password) throws AuthenticationException {
-	MoodleWS service = new MoodleWSLocator();
+    public UserView authenticate(final HttpServletRequest request, final String username, final String password, final String loginDomain)
+	    throws AuthenticationException {
 	try {
-	    MoodleWSPortType port = service.getMoodleWSPort();
-	    final LoginReturn loginReturn = port.login(username, password);
-	    return new UserView(username, "TO-BE-FETCHED", loginReturn);
+	    final LoginReturn loginReturn = MoodleClientHelper.login(username, password, loginDomain);
+	    final List<ExternalCourse> courses = MoodleClientHelper.getCurrentUserCourses(loginDomain, loginReturn);
+	    return new ExternalUserView(username, loginDomain, loginReturn, courses);
 	} catch (Exception e) {
 	    throw new AuthenticationException(e);
 	}

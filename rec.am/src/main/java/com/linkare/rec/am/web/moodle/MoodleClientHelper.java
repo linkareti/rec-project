@@ -1,10 +1,14 @@
 package com.linkare.rec.am.web.moodle;
 
 import java.math.BigInteger;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.rpc.ServiceException;
 
@@ -18,27 +22,56 @@ import com.linkare.rec.am.wsgen.moodle.UserRecord;
 
 public final class MoodleClientHelper {
 
-    private static final MoodleWSPortType MOODLEWS_PORT;
+    /**
+     * This map saves all the moodle client help instances, indexed by the login domains.
+     */
+    private static Map<String, MoodleClientHelper> instancesMap = new Hashtable<String, MoodleClientHelper>();
+
+    private final MoodleWSPortType MOODLEWS_PORT;
 
     static {
 	try {
-	    final MoodleWS moodleWS = new MoodleWSLocator();
-	    MOODLEWS_PORT = moodleWS.getMoodleWSPort();
+	    // TODO Get the appropriate URL for a given loginDomain
+	    instancesMap.put("Localhost Moodle", new MoodleClientHelper(new URL("http://localhost/moodle/wspp/service_pp.php")));
+	    instancesMap.put("IP Moodle", new MoodleClientHelper(new URL("http://192.168.1.2/moodle/wspp/service_pp.php")));
+	    instancesMap.put("Invalid Moodle", new MoodleClientHelper(new URL("http://localhost-invalid/moodle/wspp/service_pp.php")));
+	} catch (MalformedURLException e) {
+	    e.printStackTrace();
+	}
+    }
+
+    private MoodleClientHelper(final URL url) {
+	final MoodleWS moodleWS = new MoodleWSLocator();
+	try {
+	    MOODLEWS_PORT = moodleWS.getMoodleWSPort(url);
 	} catch (ServiceException e) {
 	    throw new RuntimeException("external.system.configuration.problems");
 	}
     }
 
-    private static final MoodleClientHelper INSTANCE = new MoodleClientHelper();
-
-    private MoodleClientHelper() {
+    public static LoginReturn login(final String username, final String password, final String loginDomain) {
+	try {
+	    return getInstance(loginDomain).MOODLEWS_PORT.login(username, password);
+	} catch (RemoteException e) {
+	    throw new RuntimeException(e);
+	}
     }
 
-    public static ExternalCourse findCourse(final Object id) {
+    public static List<ExternalCourse> getCurrentUserCourses(final String loginDomain, final LoginReturn loginReturn) {
+	try {
+	    return toExternalCourses(getInstance(loginDomain).MOODLEWS_PORT.get_my_courses(getClient(loginReturn), getSessionkey(loginReturn), null, null)
+									   .getCourses());
+	} catch (RemoteException e) {
+	    return Collections.<ExternalCourse> emptyList();
+	}
+    }
+
+    public static ExternalCourse findCourse(final Object id, final String loginDomain, final LoginReturn loginReturn) {
 	final List<ExternalCourse> courseRecords = new ArrayList<ExternalCourse>(1);
 	try {
-	    courseRecords.addAll(toExternalCourses(MOODLEWS_PORT.get_course(getClient(), getSessionkey(), id == null ? null : id.toString(), "shortname")
-								.getCourses()));
+	    courseRecords.addAll(toExternalCourses(getInstance(loginDomain).MOODLEWS_PORT.get_course(getClient(loginReturn), getSessionkey(loginReturn),
+												     id == null ? null : id.toString(), "shortname")
+											 .getCourses()));
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	}
@@ -53,63 +86,39 @@ public final class MoodleClientHelper {
 	return result;
     }
 
-    private static List<ExternalCourse> toExternalCourses(final List<CourseRecord> courseRecords) {
-	final List<ExternalCourse> result = new ArrayList<ExternalCourse>(courseRecords == null ? 0 : courseRecords.size());
-	for (final CourseRecord courseRecord : courseRecords) {
-	    result.add(new ExternalCourse(courseRecord));
-	}
-	return result;
-    }
-
-    public static List<ExternalCourse> findCurrentUserCourses() {
-	final String username = SessionHelper.getUsername();
-	final List<CourseRecord> result = new ArrayList<CourseRecord>();
-	if (username != null) {
-	    try {
-		final CourseRecord[] courses = MOODLEWS_PORT.get_courses(getClient(), getSessionkey(), new String[] {}, null).getCourses();
-		for (final CourseRecord courseRecord : courses) {
-		    final String id = courseRecord.getShortname();
-		    UserRecord[] teachers = MOODLEWS_PORT.get_teachers(getClient(), getSessionkey(), id, "shortname").getUsers();
-		    for (final UserRecord userRecord : teachers) {
-			if (username.equalsIgnoreCase(userRecord.getUsername())) {
-			    result.add(courseRecord);
-			    break;
-			}
-		    }
-		}
-	    } catch (RemoteException e) {
-		return Collections.<ExternalCourse> emptyList();
-	    }
-	}
-	return toExternalCourses(result);
-    }
-
-    public static UserRecord[] getStudents(final String courseShortName) {
+    public static UserRecord[] getStudents(final String courseShortName, final String loginDomain, final LoginReturn loginReturn) {
 	try {
-	    final UserRecord[] result = MOODLEWS_PORT.get_students(getClient(), getSessionkey(), courseShortName, "shortname").getUsers();
-	    return result;
+	    return getInstance(loginDomain).MOODLEWS_PORT.get_students(getClient(loginReturn), getSessionkey(loginReturn), courseShortName, "shortname")
+							 .getUsers();
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	    return new UserRecord[] {};
 	}
     }
 
-    public static UserRecord[] getTeachers(final String courseShortName) {
+    public static UserRecord[] getTeachers(final String courseShortName, final String loginDomain, final LoginReturn loginReturn) {
 	try {
-	    return MOODLEWS_PORT.get_teachers(getClient(), getSessionkey(), courseShortName, "shortname").getUsers();
+	    return getInstance(loginDomain).MOODLEWS_PORT.get_teachers(getClient(loginReturn), getSessionkey(loginReturn), courseShortName, "shortname")
+							 .getUsers();
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	    return new UserRecord[] {};
 	}
     }
 
-    private static BigInteger getClient() {
-	final LoginReturn loginReturn = SessionHelper.getLoginReturn();
+    private static MoodleClientHelper getInstance(final String loginDomain) {
+	final MoodleClientHelper instance = instancesMap.get(loginDomain);
+	if (instance == null) {
+	    throw new NullPointerException("no instance was found for " + loginDomain);
+	}
+	return instance;
+    }
+
+    private static BigInteger getClient(final LoginReturn loginReturn) {
 	return loginReturn == null ? null : loginReturn.getClient();
     }
 
-    private static String getSessionkey() {
-	final LoginReturn loginReturn = SessionHelper.getLoginReturn();
+    private static String getSessionkey(final LoginReturn loginReturn) {
 	return loginReturn == null ? null : loginReturn.getSessionkey();
     }
 }

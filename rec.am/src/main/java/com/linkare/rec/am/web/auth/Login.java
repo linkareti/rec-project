@@ -18,7 +18,7 @@ import com.linkare.rec.am.web.util.JsfUtil;
 
 /**
  * 
- * @author Joao
+ * @author João Lourenço - Linkare TI
  * 
  *         A simple Weld Bean that performs a login operation with user's credentials.
  */
@@ -27,10 +27,19 @@ import com.linkare.rec.am.web.util.JsfUtil;
 @Default
 public class Login implements Authenticator, Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     private static Logger logger = Logger.getLogger("Login");
+
+    public static final String INTERNAL_LOGIN_DOMAIN = "internal";
 
     @Inject
     private Credentials credentials;
+
+    private String loginDomain;
 
     private UserPrincipal user = null;
 
@@ -40,7 +49,6 @@ public class Login implements Authenticator, Serializable {
 
     private HttpSession session;
 
-    @SuppressWarnings("unchecked")
     private LoginProvider loginProvider;
 
     public void login(HttpServletRequest request) {
@@ -49,7 +57,7 @@ public class Login implements Authenticator, Serializable {
 		&& (getCredentials().getPassword() != null && getCredentials().getPassword().trim().length() > 0)) {
 
 	    try {
-		getLoginProvider().login(request, getCredentials().getUsername(), getCredentials().getPassword());
+		getLoginProvider().login(request, getCredentials().getUsername(), getCredentials().getPassword(), getLoginDomain());
 		getLogger().info("User '" + getCredentials().getUsername() + "' logged in successfully");
 		setLoggedIn(true);
 	    } catch (AuthenticationException ex) {
@@ -59,11 +67,9 @@ public class Login implements Authenticator, Serializable {
 	}
     }
 
-    @SuppressWarnings("unchecked")
     private LoginProvider getLoginProvider() {
-	// get the appropriate provider according to some configuration?
 	if (loginProvider == null) {
-	    loginProvider = new MoodleLoginProvider();
+	    loginProvider = INTERNAL_LOGIN_DOMAIN.equals(loginDomain) ? new RequestLoginProvider() : new MoodleLoginProvider();
 	}
 	return loginProvider;
     }
@@ -94,9 +100,8 @@ public class Login implements Authenticator, Serializable {
 	    setLoggedIn(true);
 	} catch (ServletException ex) {
 	    setLoggedIn(false);
-	} finally {
-	    return isLoggedIn();
 	}
+	return isLoggedIn();
     }
 
     /**
@@ -149,5 +154,20 @@ public class Login implements Authenticator, Serializable {
      */
     public Credentials getCredentials() {
 	return credentials;
+    }
+
+    /**
+     * @return the loginDomain
+     */
+    public String getLoginDomain() {
+	return loginDomain;
+    }
+
+    /**
+     * @param loginDomain
+     *            the loginDomain to set
+     */
+    public void setLoginDomain(String loginDomain) {
+	this.loginDomain = loginDomain;
     }
 }
