@@ -43,13 +43,9 @@
 
 						<p:scheduleEventDialog header="Event Details">
 							<h:panelGrid columns="2">
-								<h:outputLabel for="idInternal" value="#{bundle['domainObject.id']}" />
-								<h:inputText id="idInternal"
+								<h:inputHidden id="idInternal"
 									value="#{scheduleController.event.idInternal}" />
-								<h:outputLabel for="id"
-									value="#{bundle['reservation.id']}" />
-								<h:inputText id="id"
-									value="#{scheduleController.event.id}" />
+								<h:inputHidden id="id" value="#{scheduleController.event.id}" />
 								<h:outputLabel for="title2"
 									value="#{bundle['reservation.title']}" />
 								<h:inputText id="title2"
