@@ -1,15 +1,12 @@
 package com.linkare.rec.am.web.auth;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 
+import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.model.UserPrincipalFacade;
 import com.linkare.rec.am.web.ex.AuthenticationException;
 import com.linkare.rec.am.web.util.JsfUtil;
@@ -29,8 +26,6 @@ public class AuthenticationBean {
     @EJB
     private UserPrincipalFacade facade;
 
-    public static final String INTERNAL_LOGIN_DOMAIN = "internal";
-
     public String login() {
 	try {
 	    getLoginProvider().login((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest(), getUsername(), getPassword(),
@@ -45,7 +40,7 @@ public class AuthenticationBean {
 
     private LoginProvider getLoginProvider() {
 	if (loginProvider == null) {
-	    loginProvider = INTERNAL_LOGIN_DOMAIN.equals(loginDomain) ? new LocalLoginProvider(facade) : new MoodleLoginProvider();
+	    loginProvider = LoginDomain.INTERNAL_DOMAIN_NAME.equals(loginDomain) ? new LocalLoginProvider(facade) : new MoodleLoginProvider();
 	}
 	return loginProvider;
     }
@@ -98,15 +93,5 @@ public class AuthenticationBean {
      */
     public void setLoginDomain(String loginDomain) {
 	this.loginDomain = loginDomain;
-    }
-
-    public SelectItem[] getLoginDomains() {
-	// TODO Implement.......................
-	final List<String> domains = new ArrayList<String>(3);
-	domains.add("Localhost Moodle");
-	domains.add("IP Moodle");
-	domains.add("Invalid moodle");
-	domains.add("internal");
-	return JsfUtil.getSelectItems(domains, false);
     }
 }

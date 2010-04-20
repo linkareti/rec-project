@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.xml.rpc.ServiceException;
 
+import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.wsgen.moodle.CourseRecord;
 import com.linkare.rec.am.wsgen.moodle.LoginReturn;
@@ -29,15 +30,16 @@ public final class MoodleClientHelper {
 
     private final MoodleWSPortType MOODLEWS_PORT;
 
-    static {
-	try {
-	    // TODO Get the appropriate URL for a given loginDomain
-	    instancesMap.put("Localhost Moodle", new MoodleClientHelper(new URL("http://localhost/moodle/wspp/service_pp.php")));
-	    instancesMap.put("IP Moodle", new MoodleClientHelper(new URL("http://192.168.1.2/moodle/wspp/service_pp.php")));
-	    instancesMap.put("Invalid Moodle", new MoodleClientHelper(new URL("http://localhost-invalid/moodle/wspp/service_pp.php")));
-	} catch (MalformedURLException e) {
-	    e.printStackTrace();
+    public static void registerLoginDomains(final List<LoginDomain> loginDomains) throws MalformedURLException {
+	for (final LoginDomain loginDomain : loginDomains) {
+	    if (!ignoreDomain(loginDomain.getName())) {
+		instancesMap.put(loginDomain.getName(), new MoodleClientHelper(new URL(loginDomain.getUrl())));
+	    }
 	}
+    }
+
+    private static boolean ignoreDomain(final String name) {
+	return "internal".equalsIgnoreCase(name);
     }
 
     private MoodleClientHelper(final URL url) {
