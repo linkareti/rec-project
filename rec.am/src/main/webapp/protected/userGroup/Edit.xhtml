@@ -10,10 +10,6 @@
 		<h:outputText value="#{bundle['page.group.edit.title']}"></h:outputText>
 	</ui:define>
 	<ui:define name="body">
-		<h:panelGroup id="messagePanel" layout="block">
-			<h:messages errorStyle="color: red" infoStyle="color: green"
-				layout="table" />
-		</h:panelGroup>
 		<ui:include src="inner-form.xhtml">
 			<ui:param name="operation" value="edit" />
 		</ui:include>

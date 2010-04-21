@@ -8,23 +8,23 @@
 
 
 <h:form>
-
 	<h:inputHidden id="current" value="#{reservationController.current}"
 		converter="entityConverter" />
 	<h:inputHidden id="moodleRecord"
 		value="#{reservationController.selected.moodleRecord}" />
 
 	<h:panelGrid columns="2">
-
 		<h:outputLabel value="#{bundle['reservation.title']}" for="title" />
 		<h:inputText id="title"
-			value="#{reservationController.selected.title}"
+			value="#{reservationController.selected.title}" required="true"
+			label="#{bundle['reservation.title']}"
 			title="#{bundle['reservation.title']}" />
 		<h:outputLabel value="#{bundle['reservation.experiment']}"
 			for="experiment" />
 		<h:selectOneMenu id="experiment"
 			value="#{reservationController.selected.experiment}"
 			title="#{bundle['reservation.experiment']}" required="true"
+			label="#{bundle['reservation.experiment']}"
 			converter="experimentConverter">
 			<f:attribute name="optionClasses" value="option1, option2" />
 			<f:selectItems
@@ -34,7 +34,8 @@
 			rendered="#{!userView.external}" />
 		<h:selectOneMenu id="user"
 			value="#{reservationController.selected.userPrincipal}"
-			title="#{bundle['reservation.user']}"
+			title="#{bundle['reservation.reservedBy']}"
+			label="#{bundle['reservation.reservedBy']}"
 			required="#{!userView.external}" converter="userPrincipalConverter"
 			rendered="#{!userView.external}">
 			<f:selectItems
@@ -44,12 +45,14 @@
 			for="externalUser" rendered="#{userView.external}" />
 		<h:inputText id="externalUser"
 			value="#{reservationController.selected.externalUser}"
+			label="#{bundle['reservation.reservedBy']}"
 			required="#{userView.external}" rendered="#{userView.external}" />
 		<h:outputLabel value="#{bundle['reservation.reservedTo']}" for="group"
 			rendered="#{!userView.external}" />
 		<h:selectOneMenu id="group"
 			value="#{reservationController.selected.userGroup}"
-			title="#{bundle['reservation.group']}"
+			title="#{bundle['reservation.reservedTo']}"
+			label="#{bundle['reservation.reservedTo']}"
 			required="#{!userView.external}" converter="userGroupConverter"
 			rendered="#{!userView.external}">
 			<f:selectItems value="#{userGroupController.itemsAvailableSelectOne}" />
@@ -58,17 +61,27 @@
 			for="externalCourse" rendered="#{userView.external}" />
 		<h:inputText id="externalCourse"
 			value="#{reservationController.selected.externalCourse}"
+			label="#{bundle['reservation.reservedTo']}"
 			required="#{userView.external}" rendered="#{userView.external}" />
 		<h:outputLabel value="#{bundle['reservation.startDate']}"
 			for="startDate" />
 		<p:calendar id="startDate"
-			value="#{reservationController.selected.startDate}"
-			pattern="dd/MM/yyyy" />
+			value="#{reservationController.selected.startDate}" required="true"
+			label="#{bundle['reservation.startDate']}" pattern="dd/MM/yyyy" />
 		<h:outputLabel value="#{bundle['reservation.startTimeSlot']}"
 			for="startTimeSlot" />
 		<h:selectOneMenu id="startTimeSlot"
 			value="#{reservationController.selected.startTimeSlot}"
-			title="#{bundle['reservation.startTimeSlot']}" required="true">
+			title="#{bundle['reservation.startTimeSlot']}" required="true"
+			label="#{bundle['reservation.startTimeSlot']}">
+			<f:selectItems value="#{reservationController.timeSlotSelectOne}" />
+		</h:selectOneMenu>
+		<h:outputLabel value="#{bundle['reservation.endTimeSlot']}"
+			for="endTimeSlot" />
+		<h:selectOneMenu id="endTimeSlot"
+			value="#{reservationController.selected.endTimeSlot}"
+			title="#{bundle['reservation.endTimeSlot']}" required="true"
+			label="#{bundle['reservation.endTimeSlot']}">
 			<f:selectItems value="#{reservationController.timeSlotSelectOne}" />
 		</h:selectOneMenu>
 	</h:panelGrid>
@@ -88,13 +101,6 @@
 	</h:panelGroup>
 	<h:commandLink action="#{reservationController.prepareList}"
 		value="#{bundle['operation.list']}" immediate="true" />
-	<br />
-	<h:commandLink value="#{bundle['menu.backoffice']}"
-		action="/protected/backoffice" immediate="true" />
-	<br />
-	<h:commandLink value="#{bundle['menu.index']}" action="/index"
-		immediate="true" />
-
 </h:form>
 
 </html>

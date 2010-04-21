@@ -15,6 +15,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import org.primefaces.model.DualListModel;
+
 import com.linkare.rec.am.model.UserGroup;
 import com.linkare.rec.am.model.UserGroupFacade;
 import com.linkare.rec.am.model.UserPrincipal;
@@ -29,6 +31,8 @@ public class UserGroupController extends AbstractController<UserGroup, UserGroup
     private static final long serialVersionUID = 1L;
 
     private static Logger logger = Logger.getLogger("UserGroupController");
+
+    private DualListModel<UserPrincipal> users;
 
     @EJB
     private UserGroupFacade ejbFacade;
@@ -166,6 +170,24 @@ public class UserGroupController extends AbstractController<UserGroup, UserGroup
 			+ UserGroup.class.getName());
 	    }
 	}
+    }
+
+    /**
+     * @return the users
+     */
+    public DualListModel<UserPrincipal> getUsers() {
+	if (users == null) {
+	    users = new DualListModel<UserPrincipal>(getCurrent().getMembers(), getNonMembers());
+	}
+	return users;
+    }
+
+    /**
+     * @param users
+     *            the users to set
+     */
+    public void setUsers(DualListModel<UserPrincipal> users) {
+	this.users = users;
     }
 
     /**

@@ -1,32 +1,56 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
 
 <h:form>
-
 	<h:inputHidden rendered="#{operation != 'create'}" id="current"
 		value="#{userGroupController.current}" converter="userGroupConverter" />
-	<h:panelGrid columns="3">
-		<h:outputLabel value="#{bundle.EditUserGroupLabel_name}" for="name" />
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{bundle['group.name']}" for="name" />
 		<h:inputText id="name" value="#{userGroupController.selected.name}"
 			title="#{bundle['group.name']}" required="true"
-			disabled="#{operation != 'create'}" />
+			label="#{bundle['group.name']}" disabled="#{operation != 'create'}" />
 
-		<h:outputLabel value="#{bundle.EditUserGrouplLabel_members}"
-			for="members" rendered="#{operation != 'create'}" />
+
+<!-- 
+		<p:pickList value="#{userGroupController.users}" var="user"
+			itemLabel="#{user.username}" itemValue="#{user}" converter="userPrincipalConverter">
+			<f:facet name="add">
+				<p:graphicImage value="/images/picklist/add.png"
+					styleClass="pickListControl" />
+			</f:facet>
+			<f:facet name="addAll">
+				<p:graphicImage value="/images/picklist/addall.png"
+					styleClass="pickListControl" />
+			</f:facet>
+			<f:facet name="remove">
+				<p:graphicImage value="/images/picklist/remove.png"
+					styleClass="pickListControl" />
+			</f:facet>
+			<f:facet name="removeAll">
+				<p:graphicImage value="/images/picklist/removeall.png"
+					styleClass="pickListControl" />
+			</f:facet>
+		</p:pickList>
+ -->
+
+
+		<h:outputLabel value="#{bundle['group.childUsers']}" for="members"
+			rendered="#{operation != 'create'}" />
 		<h:dataTable id="members"
-			value="#{userGroupController.selected.members}" var="member"
-			border="0" cellpadding="2" cellspacing="0"
+			value="#{userGroupController.selected.members}" var="item" border="0"
+			cellpadding="2" cellspacing="0"
 			rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
 			style="border:solid 1px" rendered="#{operation != 'create'}">
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="#{bundle.ListUserGroupTitle_name}" />
+					<h:outputText value="#{bundle['user.username']}" />
 				</f:facet>
-				<h:outputText value="#{member.name}" />
+				<h:outputText value="#{item.name}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
@@ -47,7 +71,7 @@
 			style="border:solid 1px" rendered="#{operation != 'create'}">
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="#{bundle.ListUserGroupTitle_name}" />
+					<h:outputText value="#{bundle['user.username']}" />
 				</f:facet>
 				<h:outputText value="#{item.name}" />
 			</h:column>
@@ -60,7 +84,7 @@
 				</h:commandLink>
 			</h:column>
 		</h:dataTable>
-		
+
 	</h:panelGrid>
 
 	<h:panelGroup rendered="#{operation == 'create'}">
@@ -78,13 +102,6 @@
 	</h:panelGroup>
 	<h:commandLink action="#{userGroupController.prepareList}"
 		value="#{bundle['operation.list']}" immediate="true" />
-	<br />
-	<h:commandLink value="#{bundle['menu.backoffice']}"
-		action="/protected/backoffice" immediate="true" />
-	<br />
-	<h:commandLink value="#{bundle['menu.index']}" action="/index"
-		immediate="true" />
-
 </h:form>
 
 </html>

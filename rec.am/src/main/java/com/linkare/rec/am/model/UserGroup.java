@@ -70,8 +70,14 @@ public class UserGroup extends Group implements Serializable {
     /**
      * @return the members
      */
-    public List<User> getMembers() {
-	return getAllUsers();
+    public List<UserPrincipal> getMembers() {
+	final List<UserPrincipal> result = new ArrayList<UserPrincipal>();
+	for (final User user : getAllUsers()) {
+	    if (user instanceof UserPrincipal) {
+		result.add((UserPrincipal) user);
+	    }
+	}
+	return result;
     }
 
     /**

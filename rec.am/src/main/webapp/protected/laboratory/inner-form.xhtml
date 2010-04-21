@@ -13,7 +13,8 @@
 	<h:panelGrid columns="2">
 		<h:outputLabel value="#{bundle['laboratory.name']}" for="name" />
 		<h:inputText id="name" value="#{laboratoryController.selected.name}"
-			title="#{bundle['laboratory.name']}"
+			title="#{bundle['laboratory.name']}" required="true"
+			label="#{bundle['laboratory.name']}"
 			disabled="#{operation == 'view'}" />
 		<h:outputLabel value="#{bundle['laboratory.description']}"
 			for="description" />
@@ -62,13 +63,6 @@
 	</h:panelGroup>
 	<h:commandLink action="#{laboratoryController.prepareList}"
 		value="#{bundle['operation.list']}" immediate="true" />
-	<br />
-	<h:commandLink value="#{bundle['menu.backoffice']}"
-		action="/protected/backoffice" immediate="true" />
-	<br />
-	<h:commandLink value="#{bundle['menu.index']}" action="/index"
-		immediate="true" />
-
 </h:form>
 
 </html>

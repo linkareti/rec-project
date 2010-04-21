@@ -12,6 +12,7 @@
 		<h:inputText id="name"
 			value="#{userPrincipalController.selected.name}"
 			title="#{bundle['user.username']}" required="true"
+			label="#{bundle['user.username']}"
 			disabled="#{operation != 'create'}" />
 	</h:panelGrid>
 
@@ -30,13 +31,6 @@
 	</h:panelGroup>
 	<h:commandLink action="#{userPrincipalController.prepareList}"
 		value="#{bundle['operation.list']}" immediate="true" />
-	<br />
-	<h:commandLink value="#{bundle['menu.backoffice']}"
-		action="/protected/backoffice" immediate="true" />
-	<br />
-	<h:commandLink value="#{bundle['menu.index']}" action="/index"
-		immediate="true" />
-
 </h:form>
 
 </html>

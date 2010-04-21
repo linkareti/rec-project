@@ -11,10 +11,6 @@
 	</ui:define>
 	<ui:define name="body">
 		<h:form styleClass="jsfcrud_list_form">
-			<h:panelGroup id="messagePanel" layout="block">
-				<h:messages errorStyle="color: red" infoStyle="color: green"
-					layout="table" />
-			</h:panelGroup>
 			<h:outputText escape="false" value="#{bundle['info.emptyList']}"
 				rendered="#{experimentController.items.rowCount == 0}" />
 			<h:panelGroup rendered="#{experimentController.items.rowCount > 0}">
@@ -92,14 +88,6 @@
 			<br />
 			<h:commandLink action="#{experimentController.prepareCreate}"
 				value="#{bundle['operation.create']}" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle['menu.backoffice']}"
-				action="/protected/backoffice" immediate="true" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle['menu.index']}" action="/index"
-				immediate="true" />
 		</h:form>
 	</ui:define>
 </ui:composition>

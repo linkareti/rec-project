@@ -13,7 +13,8 @@
 	<h:panelGrid columns="2">
 		<h:outputLabel value="#{bundle['experiment.name']}" for="name" />
 		<h:inputText id="name" value="#{experimentController.selected.name}"
-			title="#{bundle['experiment.description']}"
+			title="#{bundle['experiment.description']}" required="true"
+			label="#{bundle['experiment.name']}"
 			disabled="#{operation == 'view'}" />
 		<h:outputLabel value="#{bundle['experiment.description']}"
 			for="description" />
@@ -73,12 +74,6 @@
 	<h:commandLink action="#{experimentController.prepareList}"
 		value="#{bundle['operation.list']}" immediate="true" />
 	<br />
-	<h:commandLink value="#{bundle['menu.backoffice']}"
-		action="/protected/backoffice" immediate="true" />
-	<br />
-	<h:commandLink value="#{bundle['menu.index']}" action="/index"
-		immediate="true" />
-
 </h:form>
 
 </html>

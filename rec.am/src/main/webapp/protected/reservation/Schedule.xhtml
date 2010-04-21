@@ -24,8 +24,6 @@
 					</f:facet>
 				</p:ajaxStatus>
 
-				<p:growl id="messages" showDetail="true" />
-
 				<h:panelGrid columns="1" width="90%">
 
 					<p:schedule value="#{scheduleController.eventModel}"
@@ -97,12 +95,12 @@
 									value="#{bundle['reservation.startDate']}" />
 								<p:calendar id="startDate2"
 									value="#{scheduleController.event.startDate}"
-									pattern="dd/MM/yyyy HH:mm" />
+									pattern="dd/MM/yyyy" />
 								<h:outputLabel for="endDate2"
 									value="#{bundle['reservation.endDate']}" />
 								<p:calendar id="endDate2" navigator="true"
 									value="#{scheduleController.event.endDate}"
-									pattern="dd/MM/yyyy HH:mm" />
+									pattern="dd/MM/yyyy" />
 								<h:outputLabel for="startTimeSlot2"
 									value="#{bundle['reservation.startTimeSlot']}" />
 								<h:selectOneMenu id="startTimeSlot2"
