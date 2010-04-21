@@ -41,20 +41,24 @@
 		<ant antfile="experimentsbuild.xml" dir="." target="build.experiments.list" />	
 	</target>
 	
-	<target name="dist.all" >
+	<target name="dist.all" depends="build.all" >
 		 <zip destfile="${build.dir}/client.zip">
 		    <zipfileset dir="${client.build.dir}" prefix="client"/>
 		    <zipfileset dir="${common.build.dir}" prefix="client"/>		    
 		  </zip>
 		
 		 <zip destfile="${build.dir}/server.zip">
-		    <zipfileset dir="${hardwareserver.build.dir}" prefix="server"/>
-		    <zipfileset dir="${common.build.dir}" prefix="server"/>		    
+		    <zipfileset dir="${hardwareserver.build.dir}" prefix="hardwareserver"/>
+		    <zipfileset dir="${common.build.dir}" prefix="hardwareserver"/>
+			<zipfileset dir="${rec.hardwareserver.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
+			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
 		  </zip>
 		 	
 		 <zip destfile="${build.dir}/multicast.zip">
 		    <zipfileset dir="${multicast.build.dir}" prefix="multicast"/>
 		    <zipfileset dir="${common.build.dir}" prefix="multicast"/>
+			<zipfileset dir="${rec.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
+			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
 		 </zip>
 	
 	</target>
