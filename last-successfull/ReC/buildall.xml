@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+		=======================================================
+		============ 2009/03/29 Build Rec - Elab ==============
+		=======================================================
+	-->
+
+<project name="ReC - elab build system" default="help" basedir=".">
+	<description>
+		Compile, package, sign and run the project ReC and each of the experiments.
+	</description>
+
+	<property file="build.properties" description="general properties for building project" />
+
+	<import file="generaldefinitions.xml"/>
+
+	<!--
+		=====================================================
+		====================== Generic ======================
+		=====================================================
+	-->
+
+	<target name="help" description="General usage of the build system, it shows a description of each target, and how to use them">
+		<echo>ReC - eBab build system</echo>
+	</target>
+
+	<target name="clean.each.module">
+		<ant antfile="recbuild.xml" dir="." target="clean.all" />
+		<ant antfile="elabbuild.xml" dir="." target="clean.all" />
+		<ant antfile="experimentsbuild.xml" dir="." target="clean.experiments.list" />
+	</target>
+	
+	<target name="clean.all">
+		<delete dir="${build.dir}"></delete>
+	</target>
+		
+	
+	<target name="build.all" depends="clean.all">
+		<ant antfile="recbuild.xml" dir="." target="build.all" />
+		<ant antfile="elabbuild.xml" dir="." target="build.all" />
+		<ant antfile="experimentsbuild.xml" dir="." target="build.experiments.list" />	
+	</target>
+	
+	<target name="dist.all" >
+		 <zip destfile="${build.dir}/client.zip">
+		    <zipfileset dir="${client.build.dir}" prefix="client"/>
+		    <zipfileset dir="${common.build.dir}" prefix="client"/>		    
+		  </zip>
+		
+		 <zip destfile="${build.dir}/server.zip">
+		    <zipfileset dir="${hardwareserver.build.dir}" prefix="server"/>
+		    <zipfileset dir="${common.build.dir}" prefix="server"/>		    
+		  </zip>
+		 	
+		 <zip destfile="${build.dir}/multicast.zip">
+		    <zipfileset dir="${multicast.build.dir}" prefix="multicast"/>
+		    <zipfileset dir="${common.build.dir}" prefix="multicast"/>
+		 </zip>
+	
+	</target>
+	
+</project>
