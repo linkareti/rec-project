@@ -33,10 +33,10 @@ import com.linkare.rec.am.model.moodle.MoodleRecord;
 	@NamedQuery(name = "Reservation.findAll", query = "Select r from Reservation r"),
 	@NamedQuery(name = "Reservation.countAll", query = "Select count(r) from Reservation r"),
 	@NamedQuery(name = "findReservationsBetweenDatesForLaboratory", query = "Select r from Reservation r where r.startDate >=:start and r.endDate <=:end and r.experiment in (Select e from Laboratory l, Experiment e where l.name=:namelab and e.laboratory=l)"),
-	@NamedQuery(name = "Reservation.findReservationsForInternalUserInDate", query = "Select r from Reservation r WHERE r.userPrincipal.username=:username and r.startDate between :start AND :end"),
+	@NamedQuery(name = "Reservation.findReservationsForInternalUserInDate", query = "Select r from Reservation r WHERE r.userPrincipal.username=:username and r.startDate between :start and :end"),
 	@NamedQuery(name = "Reservation.findReservationsForInternalUser", query = "Select r from Reservation r WHERE r.userPrincipal.username=:username"),
-	@NamedQuery(name = "Reservation.findReservationsForExternalUserInDate", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.startDate between :start AND :end"),
-	@NamedQuery(name = "Reservation.findReservationsForExternalUser", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser") })
+	@NamedQuery(name = "Reservation.findReservationsForExternalUserInDate", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.moodleRecord.moodleUrl=:loginDomain and r.startDate between :start and :end"),
+	@NamedQuery(name = "Reservation.findReservationsForExternalUser", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.moodleRecord.moodleUrl=:loginDomain") })
 public class Reservation extends DefaultDomainObject implements ScheduleEvent, Serializable {
 
     private static final long serialVersionUID = 1L;

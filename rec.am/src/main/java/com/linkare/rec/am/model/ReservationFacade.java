@@ -61,27 +61,27 @@ public class ReservationFacade extends Facade<Reservation> {
     }
 
     public List<ScheduleEvent> findReservationsFor(Date start, Date end, UserPrincipal user) {
-	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForInternalUserInDate").setParameter("internalUser",
-																 user.getUsername())
-					     .setParameter("start", start).setParameter("end", end).getResultList();
+	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForInternalUserInDate")
+					     .setParameter("username", user.getUsername()).setParameter("start", start).setParameter("end", end)
+					     .getResultList();
 	return events;
     }
 
     public List<ScheduleEvent> findReservationsFor(UserPrincipal user) {
-	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForInternalUser").setParameter("internalUser", user.getUsername())
+	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForInternalUser").setParameter("username", user.getUsername())
 					     .getResultList();
 	return events;
     }
 
-    public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final String externalUser) {
+    public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final String externalUser, final String loginDomain) {
 	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForExternalUserInDate").setParameter("externalUser", externalUser)
-					     .setParameter("start", start).setParameter("end", end).getResultList();
+					     .setParameter("loginDomain", loginDomain).setParameter("start", start).setParameter("end", end).getResultList();
 	return events;
     }
 
-    public List<ScheduleEvent> findReservationsFor(final String externalUser) {
+    public List<ScheduleEvent> findReservationsFor(final String externalUser, final String loginDomain) {
 	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForExternalUser").setParameter("externalUser", externalUser)
-					     .getResultList();
+					     .setParameter("loginDomain", loginDomain).getResultList();
 	return events;
     }
 }

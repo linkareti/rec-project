@@ -73,7 +73,7 @@ public class ScheduleController implements Serializable {
     private List<ScheduleEvent> getEvents() {
 	final UserView userView = SessionHelper.getUserView();
 	if (userView.isExternal()) {
-	    return ejbFacade.findReservationsFor(userView.getUsername());
+	    return ejbFacade.findReservationsFor(userView.getUsername(), userView.getDomain());
 	}
 	final UserPrincipal user = ejbUserPrincipalFacade.findByUsername(userView.getUsername());
 	return ejbFacade.findReservationsFor(user);
