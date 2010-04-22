@@ -322,30 +322,31 @@
                             <goal>execute</goal>
                         </goals>
                         <configuration>
-                             need another database to drop the targeted one 
-                            <url>jdbc:mysql://localhost:3306/allocation</url>
+                             need another database to drop the targeted one
+                            <url>jdbc:mysql://localhost:3306/mysql</url>
                             <autocommit>true</autocommit>
                             <sqlCommand>drop database allocation</sqlCommand>
-                             ignore error when database is not avaiable 
+                             ignore error when database is not avaiable
                             <onError>continue</onError>
                         </configuration>
-                    </execution>
+                    </execution>-->
 
-                    <execution>
+                    <!--<execution>
                         <id>create-db</id>
                         <phase>process-test-resources</phase>
                         <goals>
                             <goal>execute</goal>
                         </goals>
                         <configuration>
-                            <url>jdbc:mysql://localhost:3306/allocation</url>
-                             no transaction 
+                            <url>jdbc:mysql://localhost:3306</url>
+                             no transaction
                             <autocommit>true</autocommit>
                             <sqlCommand>create database allocation</sqlCommand>
+                            <onError>continue</onError>
                         </configuration>
-                    </execution>
+                    </execution>-->
 
-                    <execution>
+                    <!--<execution>
                         <id>create-schema</id>
                         <phase>process-test-resources</phase>
                         <goals>
@@ -356,10 +357,11 @@
                             <srcFiles>
                                 <srcFile>src/main/sql/create-am-schema.sql</srcFile>
                             </srcFiles>
+                            <onError>continue</onError>
                         </configuration>
-                    </execution>-->
+                    </execution>
 
-                    <!--<execution>
+                    <execution>
                         <id>create-data</id>
                         <phase>process-test-resources</phase>
                         <goals>
@@ -373,25 +375,67 @@
                                     <include>src/main/sql/data-initialization.sql</include>
                                 </includes>
                             </fileset>
+                            <onError>continue</onError>
                         </configuration>
                     </execution>-->
 
-                    <!-- drop db after test -->
-
-                    <!--<execution>
-                        <id>drop-db-after-test</id>
-                        <phase>test</phase>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>1.10</version>
+                <executions>
+                    <execution>
                         <goals>
-                            <goal>execute</goal>
+                            <goal>wsimport</goal>
                         </goals>
                         <configuration>
-                            <autocommit>true</autocommit>
-                            <sqlCommand>drop database allocation</sqlCommand>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/rec.am/AllocationManagerWSService.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <staleFile>${project.build.directory}/jaxws/stale/AllocationManagerWSService.stale</staleFile>
                         </configuration>
-
-                    </execution>-->
+                        <id>wsimport-generate-AllocationManagerWSService</id>
+                        <phase>generate-sources</phase>
+                    </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.xml</groupId>
+                        <artifactId>webservices-api</artifactId>
+                        <version>1.4</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <sourceDestDir>${project.build.directory}/generated-sources/jaxws-wsimport</sourceDestDir>
+                    <xnocompile>true</xnocompile>
+                    <verbose>true</verbose>
+                    <extension>true</extension>
+                    <catalog>${basedir}/src/jax-ws-catalog.xml</catalog>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src</directory>
+                            <targetPath>WEB-INF</targetPath>
+                            <includes>
+                                <include>jax-ws-catalog.xml</include>
+                                <include>wsdl/**</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
 </project>
+
+
+
+
