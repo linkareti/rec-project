@@ -1,0 +1,60 @@
+package com.linkare.rec.am.web.util;
+
+import javax.faces.model.DataModel;
+
+import com.linkare.commons.jpa.Identifiable;
+
+public abstract class PaginationHelper<Entity extends Identifiable<? extends Object>> {
+
+    private int pageSize;
+    private int page;
+
+    public PaginationHelper(int pageSize) {
+	this.pageSize = pageSize;
+    }
+
+    public abstract int getItemsCount();
+
+    public abstract DataModel<Entity> createPageDataModel();
+
+    public final int getPageFirstItem() {
+	return page * pageSize;
+    }
+
+    public final int getPageLastItem() {
+	int i = getPageFirstItem() + pageSize - 1;
+	int count = getItemsCount() - 1;
+	if (i > count) {
+	    i = count;
+	}
+	if (i < 0) {
+	    i = 0;
+	}
+	return i;
+    }
+
+    public final boolean isHasNextPage() {
+	return (page + 1) * pageSize + 1 <= getItemsCount();
+    }
+
+    public final void nextPage() {
+	if (isHasNextPage()) {
+	    page++;
+	}
+    }
+
+    public final boolean isHasPreviousPage() {
+	return page > 0;
+    }
+
+    public final void previousPage() {
+	if (isHasPreviousPage()) {
+	    page--;
+	}
+    }
+
+    public final int getPageSize() {
+	return pageSize;
+    }
+
+}
