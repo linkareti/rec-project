@@ -59,10 +59,10 @@
 		    <zipfileset dir="${multicast.build.dir}" prefix="multicast"/>
 		    <zipfileset dir="${common.build.dir}" prefix="multicast"/>
 			<zipfileset dir="${rec.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
-			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
-		 	<zipfileset dir="${templates.dir.openorb}" includes="OpenORBMultiCastTemplate.xml"  fullpath="multicast/orb/OpenORBMultiCast.xml" />
-		 	<zipfileset dir="${templates.dir.scripts}" includes="StartMultiCastController.sh" prefix="multicast" />
-		 	<zipfileset dir="${templates.dir.scripts}" includes="SetProperties.sh" prefix="multicast" />
+			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" excludes="**/*_sig.jar" prefix="multicast/lib" />
+		 	<zipfileset dir="${templates.dir.openorb}" includes="OpenORBMultiCastTemplate.xml"  fullpath="multicast/etc/openorb.xml" />
+		 	<zipfileset dir="${templates.dir.scripts}" includes="StartMultiCastController.sh" />
+		 	<zipfileset dir="${templates.dir.scripts}" includes="StartMultiCastController.bat" />
 		 </zip>
 	
 	</target>
