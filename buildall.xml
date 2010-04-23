@@ -52,6 +52,7 @@
 		    <zipfileset dir="${common.build.dir}" prefix="hardwareserver"/>
 			<zipfileset dir="${rec.hardwareserver.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
 			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
+		 	<zipfileset dir="${templates.dir.openorb}" includes="OpenORBHardwareTemplate.xml"  fullpath="hardwareserver/orb/OpenORBHardware.xml" />
 		  </zip>
 		 	
 		 <zip destfile="${build.dir}/multicast.zip">
@@ -59,6 +60,9 @@
 		    <zipfileset dir="${common.build.dir}" prefix="multicast"/>
 			<zipfileset dir="${rec.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
 			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
+		 	<zipfileset dir="${templates.dir.openorb}" includes="OpenORBMultiCastTemplate.xml"  fullpath="multicast/orb/OpenORBMultiCast.xml" />
+		 	<zipfileset dir="${templates.dir.scripts}" includes="StartMultiCastController.sh" prefix="multicast" />
+		 	<zipfileset dir="${templates.dir.scripts}" includes="SetProperties.sh" prefix="multicast" />
 		 </zip>
 	
 	</target>

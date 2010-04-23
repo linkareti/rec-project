@@ -21,6 +21,11 @@
 	<property name="build.dir.compile" value="${basedir}/${build.dir}/compile" />
 	<property name="build.dir.dist" value="${basedir}/${build.dir}/dist" />
 	
+	<property name="templates.dir" value="${basedir}/templates" />
+	<property name="templates.dir.openorb" value="${basedir}/templates/openorb" />
+	<property name="templates.dir.jnlp" value="${basedir}/templates/jnlp" />
+		<property name="templates.dir.scripts" value="${basedir}/templates/scripts" />
+	
   	<tstamp>
 		<format property="timestamp" pattern="dd-MM-yyyy hh:mm" locale="en,UK"/>
 	</tstamp>
