@@ -4,16 +4,21 @@
 	xsi:schemaLocation="
       http://java.sun.com/xml/ns/persistence
       http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-	<persistence-unit name="AllocationManagerPU" transaction-type="JTA">
+	<persistence-unit name="AllocationManagerPU"
+		transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>jdbc/allocation</jta-data-source>
-		
+
 		<class>com.linkare.commons.jpa.security.Subject</class>
 		<class>com.linkare.commons.jpa.security.User</class>
 		<class>com.linkare.commons.jpa.security.Role</class>
+		<class>com.linkare.commons.jpa.security.Group</class>
 		<class>com.linkare.commons.jpa.security.Identification</class>
 		<class>com.linkare.commons.jpa.security.Login</class>
-		
+		<class>com.linkare.commons.jpa.audit.AuditedObject</class>
+		<class>com.linkare.commons.jpa.audit.Auditor</class>
+		<class>com.linkare.commons.jpa.audit.AuditOperation</class>
+
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.archive.autodetection" value="class, hbm" />

@@ -1,6 +1,11 @@
 package com.linkare.rec.am.web;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -10,48 +15,56 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.linkare.rec.am.model.UserPrincipal;
-import com.linkare.rec.am.model.UserPrincipalFacade;
+import org.primefaces.model.DualListModel;
+
+import com.linkare.commons.jpa.security.Group;
+import com.linkare.commons.jpa.security.User;
+import com.linkare.rec.am.model.GroupFacade;
+import com.linkare.rec.am.model.UserFacade;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.JsfUtil;
 
-@ManagedBean(name = "userPrincipalController")
+@ManagedBean(name = "groupController")
 @RequestScoped
-public class UserPrincipalController extends AbstractController<UserPrincipal, UserPrincipalFacade> {
+public class GroupController extends AbstractController<Group, GroupFacade> {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB
-    private UserPrincipalFacade ejbFacade;
+    private static Logger logger = Logger.getLogger("GroupController");
 
-    public UserPrincipal getCurrent() {
-	if (current == null || current.getPk() == null) {
-	    current = (UserPrincipal) JsfUtil.getObjectFromRequestParameter("current", new UserPrincipalConverter());
-	}
+    private DualListModel<User> users;
+
+    @EJB
+    private GroupFacade ejbFacade;
+
+    @EJB
+    private UserFacade userFacade;
+
+    @Override
+    protected GroupFacade getFacade() {
+	return ejbFacade;
+    }
+
+    public Group getCurrent() {
 	return current;
     }
 
-    public void setCurrent(UserPrincipal current) {
+    public void setCurrent(final Group current) {
 	this.current = current;
     }
 
     @Override
-    public final UserPrincipal getSelected() {
+    public Group getSelected() {
 	if (current == null) {
-	    current = new UserPrincipal();
+	    current = new Group();
 	    selectedItemIndex = -1;
 	}
 	return current;
     }
 
     @Override
-    protected final UserPrincipalFacade getFacade() {
-	return ejbFacade;
-    }
-
-    @Override
     public final String prepareCreate() {
-	current = new UserPrincipal();
+	current = new Group();
 	selectedItemIndex = -1;
 	return CREATE;
     }
@@ -64,6 +77,12 @@ public class UserPrincipalController extends AbstractController<UserPrincipal, U
 	    return prepareCreate();
 	} catch (Exception e) {
 	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
+
+	    StringWriter sw = new StringWriter();
+	    e.printStackTrace(new PrintWriter(sw));
+	    String stacktrace = sw.toString();
+	    getLogger().severe("Stack Trace: \n" + stacktrace);
+
 	    return null;
 	}
     }
@@ -90,17 +109,25 @@ public class UserPrincipalController extends AbstractController<UserPrincipal, U
 	}
     }
 
-    @FacesConverter(value = "userPrincipalConverter", forClass = UserPrincipal.class)
-    public static class UserPrincipalConverter implements Converter {
+    public List<User> getNonMembers() {
+	if (current == null) {
+	    return Collections.<User> emptyList();
+	}
+	final List<User> result = userFacade.findAll();
+	result.removeAll(current.getAllUsers());
+	return result;
+    }
+
+    @FacesConverter(value = "groupConverter", forClass = Group.class)
+    public static class GroupControllerConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
 	    if (value == null || value.length() == 0) {
 		return null;
 	    }
-	    UserPrincipalController controller = (UserPrincipalController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(),
-																  null,
-																  "userPrincipalController");
+	    GroupController controller = (GroupController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
+														  "groupController");
 	    return controller.ejbFacade.find(getKey(value));
 	}
 
@@ -117,13 +144,44 @@ public class UserPrincipalController extends AbstractController<UserPrincipal, U
 	    if (object == null) {
 		return null;
 	    }
-	    if (object instanceof UserPrincipal) {
-		UserPrincipal o = (UserPrincipal) object;
-		return getStringKey(o.getPk());
+	    if (object instanceof Group) {
+		Group o = (Group) object;
+		return getStringKey(o.getIdInternal());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
-			+ UserPrincipal.class.getName());
+			+ Group.class.getName());
 	    }
 	}
+    }
+
+    /**
+     * @return the users
+     */
+    public DualListModel<User> getUsers() {
+	if (users == null) {
+	    users = new DualListModel<User>(getNonMembers(), current.getAllUsers());
+	}
+	return users;
+    }
+
+    /**
+     * @param users
+     *            the users to set
+     */
+    public void setUsers(DualListModel<User> users) {
+	this.users = users;
+    }
+
+    /**
+     * @return the logger
+     */
+    public static final Logger getLogger() {
+	return logger;
+    }
+
+    public String setUsersMembership() {
+	getFacade().setUsersMembership(getSelected(), getUsers().getTarget());
+	JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.association"));
+	return prepareEdit();
     }
 }

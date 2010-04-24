@@ -1,6 +1,5 @@
 package com.linkare.rec.am.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +14,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
 
@@ -30,20 +32,22 @@ import com.linkare.commons.jpa.DefaultDomainObject;
 	@NamedQuery(name = "findByName", query = "SELECT lab FROM Laboratory lab WHERE lab.name=:name"),
 	/* @NamedQuery(name = "findExperiments", query = "SELECT experiments FROM Laboratory lab WHERE lab.name=:name"), */
 	@NamedQuery(name = "findExperiment", query = "SELECT experiment FROM Laboratory lab, Experiment experiment WHERE lab.name=:namelab and experiment.laboratory=lab and experiment.name=:nameexp") })
-public class Laboratory extends DefaultDomainObject implements Serializable {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Laboratory extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "NAME", unique = true, insertable = true, updatable = false)
+    @Column(name = "NAME", unique = true, insertable = true, updatable = true)
     private String name;
 
     @Basic
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", insertable = true, updatable = true)
     private String description;
 
     @Embedded
     private State state = new State();
 
+    @XmlTransient
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "laboratory")
     private List<Experiment> experiments = new ArrayList<Experiment>();
 

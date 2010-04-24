@@ -24,19 +24,6 @@ public class ExperimentController extends AbstractController<Experiment, Experim
     @EJB
     private ExperimentFacade ejbFacade;
 
-    @Override
-    public Experiment getCurrent() {
-	if (current == null || current.getPk() == null) {
-	    current = (Experiment) JsfUtil.getObjectFromRequestParameter("current", new ExperimentConverter());
-	}
-	return current;
-    }
-
-    @Override
-    public void setCurrent(Experiment current) {
-	this.current = current;
-    }
-
     public final Experiment getSelected() {
 	if (current == null) {
 	    current = new Experiment();
@@ -118,7 +105,7 @@ public class ExperimentController extends AbstractController<Experiment, Experim
 	    }
 	    if (object instanceof Experiment) {
 		Experiment o = (Experiment) object;
-		return getStringKey(o.getPk());
+		return getStringKey(o.getIdInternal());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
 			+ Experiment.class.getName());

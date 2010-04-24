@@ -4,7 +4,7 @@ import javax.faces.model.DataModel;
 
 import com.linkare.commons.jpa.Identifiable;
 
-public abstract class PaginationHelper<Entity extends Identifiable<? extends Object>> {
+public abstract class PaginationHelper<Entity extends Identifiable> {
 
     private int pageSize;
     private int page;

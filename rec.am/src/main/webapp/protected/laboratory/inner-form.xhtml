@@ -7,9 +7,13 @@
 
 <h:form>
 
-	<h:inputHidden rendered="#{operation != 'create'}" id="current"
-		value="#{laboratoryController.current}"
-		converter="laboratoryConverter" />
+	<h:inputHidden id="idInternal"
+		value="#{laboratoryController.selected.idInternal}"
+		rendered="#{operation != 'create'}" />
+	<h:inputHidden id="version"
+		value="#{laboratoryController.selected.version}"
+		rendered="#{operation != 'create'}" />
+
 	<h:panelGrid columns="2">
 		<h:outputLabel value="#{bundle['laboratory.name']}" for="name" />
 		<h:inputText id="name" value="#{laboratoryController.selected.name}"
@@ -51,18 +55,10 @@
 	<h:panelGroup rendered="#{operation == 'create'}">
 		<h:commandLink action="#{laboratoryController.create}"
 			value="#{bundle['operation.save']}" />
-		<br />
 	</h:panelGroup>
 	<h:panelGroup rendered="#{operation == 'edit'}">
-		<h:commandLink action="View" value="#{bundle['operation.view']}" />
-		<br />
+		<h:commandLink action="#{laboratoryController.update}"
+			value="#{bundle['operation.save']}" />
 	</h:panelGroup>
-	<h:panelGroup rendered="#{operation == 'view'}">
-		<h:commandLink action="Edit" value="#{bundle['operation.edit']}" />
-		<br />
-	</h:panelGroup>
-	<h:commandLink action="#{laboratoryController.prepareList}"
-		value="#{bundle['operation.list']}" immediate="true" />
 </h:form>
-
 </html>

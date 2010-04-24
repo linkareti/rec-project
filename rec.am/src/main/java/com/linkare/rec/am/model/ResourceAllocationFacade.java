@@ -11,6 +11,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.linkare.commons.jpa.security.User;
 import com.linkare.rec.am.model.util.BusinessException;
 
 /**
@@ -78,7 +79,7 @@ public class ResourceAllocationFacade implements ResourceAllocationFacadeInterfa
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override
     public final void initData() {
-	UserPrincipal user = new UserPrincipal("admin");
+	User user = new User(null, "admin");
 	em.persist(user);
 
 	Laboratory lab = new Laboratory();

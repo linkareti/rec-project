@@ -12,18 +12,17 @@
 	<ui:define name="body">
 		<h:form styleClass="jsfcrud_list_form">
 			<h:outputText escape="false" value="#{bundle['info.emptyList']}"
-				rendered="#{userGroupController.items.rowCount == 0}" />
-			<h:panelGroup rendered="#{userGroupController.items.rowCount > 0}">
+				rendered="#{groupController.items.rowCount == 0}" />
+			<h:panelGroup rendered="#{groupController.items.rowCount > 0}">
 				<h:outputText
-					value="#{userGroupController.pagination.pageFirstItem + 1}..#{userGroupController.pagination.pageLastItem + 1}/#{userGroupController.pagination.itemsCount}" />&nbsp;
-                    <h:commandLink
-					action="#{userGroupController.previous}"
-					value="#{bundle['operation.previous']} #{userGroupController.pagination.pageSize}"
-					rendered="#{userGroupController.pagination.hasPreviousPage}" />&nbsp;
-                    <h:commandLink action="#{userGroupController.next}"
-					value="#{bundle['operation.next']} #{userGroupController.pagination.pageSize}"
-					rendered="#{userGroupController.pagination.hasNextPage}" />&nbsp;
-                    <h:dataTable value="#{userGroupController.items}"
+					value="#{groupController.pagination.pageFirstItem + 1}..#{groupController.pagination.pageLastItem + 1}/#{groupController.pagination.itemsCount}" />&nbsp;
+                    <h:commandLink action="#{groupController.previous}"
+					value="#{bundle['operation.previous']} #{groupController.pagination.pageSize}"
+					rendered="#{groupController.pagination.hasPreviousPage}" />&nbsp;
+                    <h:commandLink action="#{groupController.next}"
+					value="#{bundle['operation.next']} #{groupController.pagination.pageSize}"
+					rendered="#{groupController.pagination.hasNextPage}" />&nbsp;
+                    <h:dataTable value="#{groupController.items}"
 					var="item" border="0" cellpadding="2" cellspacing="0"
 					rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
 					style="border:solid 1px">
@@ -37,19 +36,19 @@
 						<f:facet name="header">
 							<h:outputText value="&nbsp;" />
 						</f:facet>
-						<h:commandLink action="#{userGroupController.prepareView}"
+						<h:commandLink action="#{groupController.prepareView}"
 							value="#{bundle['operation.view']}" />
 						<h:outputText value=" " />
-						<h:commandLink action="#{userGroupController.prepareEdit}"
+						<h:commandLink action="#{groupController.prepareEdit}"
 							value="#{bundle['operation.edit']}" />
 						<h:outputText value=" " />
-						<h:commandLink action="#{userGroupController.destroy}"
+						<h:commandLink action="#{groupController.destroy}"
 							value="#{bundle['operation.remove']}" />
 					</h:column>
 				</h:dataTable>
 			</h:panelGroup>
 			<br />
-			<h:commandLink action="#{userGroupController.prepareCreate}"
+			<h:commandLink action="#{groupController.prepareCreate}"
 				value="#{bundle['operation.create']}" />
 			<br />
 			<br />

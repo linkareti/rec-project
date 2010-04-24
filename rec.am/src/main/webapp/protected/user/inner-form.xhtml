@@ -7,30 +7,20 @@
 
 <h:form>
 
+	<h:inputHidden id="idInternal"
+		value="#{userController.selected.idInternal}" />
+	<h:inputHidden id="version" value="#{userController.selected.version}" />
 	<h:panelGrid columns="2">
-		<h:outputLabel value="#{bundle['user.username']}" for="name" />
-		<h:inputText id="name"
-			value="#{userPrincipalController.selected.name}"
+		<h:outputLabel value="#{bundle['user.username']}" for="username" />
+		<h:inputText id="username" value="#{userController.selected.username}"
 			title="#{bundle['user.username']}" required="true"
 			label="#{bundle['user.username']}"
 			disabled="#{operation != 'create'}" />
 	</h:panelGrid>
-
 	<h:panelGroup rendered="#{operation == 'create'}">
-		<h:commandLink action="#{userPrincipalController.create}"
+		<h:commandLink action="#{userController.create}"
 			value="#{bundle['operation.save']}" />
-		<br />
 	</h:panelGroup>
-	<h:panelGroup rendered="#{operation == 'edit'}">
-		<h:commandLink action="View" value="#{bundle['operation.view']}" />
-		<br />
-	</h:panelGroup>
-	<h:panelGroup rendered="#{operation == 'view'}">
-		<h:commandLink action="Edit" value="#{bundle['operation.edit']}" />
-		<br />
-	</h:panelGroup>
-	<h:commandLink action="#{userPrincipalController.prepareList}"
-		value="#{bundle['operation.list']}" immediate="true" />
 </h:form>
 
 </html>

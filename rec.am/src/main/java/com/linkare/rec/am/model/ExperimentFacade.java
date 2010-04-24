@@ -32,12 +32,14 @@ public class ExperimentFacade extends Facade<Experiment> {
 	return em.find(Experiment.class, id);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Experiment> findAll() {
 	final Query query = em.createNamedQuery("Experiment.findAll");
 	return query.getResultList();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Experiment> findRange(int[] range) {
 	final Query query = em.createNamedQuery("Experiment.findAll");

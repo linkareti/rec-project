@@ -15,11 +15,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import org.primefaces.model.DualListModel;
+
 import com.linkare.commons.jpa.security.Role;
+import com.linkare.commons.jpa.security.User;
 import com.linkare.rec.am.model.RoleFacade;
-import com.linkare.rec.am.model.UserGroup;
-import com.linkare.rec.am.model.UserPrincipal;
-import com.linkare.rec.am.model.UserPrincipalFacade;
+import com.linkare.rec.am.model.UserFacade;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.JsfUtil;
 
@@ -31,31 +32,30 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
 
     private static Logger logger = Logger.getLogger("RoleController");
 
+    private DualListModel<User> users;
+
     @EJB
     private RoleFacade ejbFacade;
 
     @EJB
-    private UserPrincipalFacade userFacade;
-
-    public Role getCurrent() {
-	if (current == null || current.getPk() == null) {
-	    current = (Role) JsfUtil.getObjectFromRequestParameter("current", new RoleControllerConverter());
-	}
-	return current;
-    }
-
-    public void setCurrent(Role current) {
-	this.current = current;
-    }
+    private UserFacade userFacade;
 
     @Override
     protected RoleFacade getFacade() {
 	return ejbFacade;
     }
 
+    public Role getCurrent() {
+	return current;
+    }
+
+    public void setCurrent(final Role current) {
+	this.current = current;
+    }
+
     @Override
     public Role getSelected() {
-	if (getCurrent() == null) {
+	if (current == null) {
 	    current = new Role();
 	    selectedItemIndex = -1;
 	}
@@ -109,24 +109,12 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
 	}
     }
 
-    public String addUser() {
-	final String userId = JsfUtil.getRequestParameter("userId");
-	getFacade().addUser(getSelected(), Long.valueOf(userId));
-	return null;
-    }
-
-    public String removeUser() {
-	final String userId = JsfUtil.getRequestParameter("userId");
-	getFacade().removeUser(getSelected(), Long.valueOf(userId));
-	return null;
-    }
-
-    public List<UserPrincipal> getNonMembers() {
-	if (getCurrent() == null) {
-	    return Collections.<UserPrincipal> emptyList();
+    public List<User> getNonMembers() {
+	if (current == null) {
+	    return Collections.<User> emptyList();
 	}
-	final List<UserPrincipal> result = userFacade.findAll();
-	result.removeAll(getCurrent().getAllChilds());
+	final List<User> result = userFacade.findAll();
+	result.removeAll(current.getAllChildren());
 	return result;
     }
 
@@ -158,12 +146,30 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
 	    }
 	    if (object instanceof Role) {
 		Role o = (Role) object;
-		return getStringKey(o.getPk());
+		return getStringKey(o.getIdInternal());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
-			+ UserGroup.class.getName());
+			+ Role.class.getName());
 	    }
 	}
+    }
+
+    /**
+     * @return the users
+     */
+    public DualListModel<User> getUsers() {
+	if (users == null) {
+	    users = new DualListModel<User>(getNonMembers(), current.getAllUsers());
+	}
+	return users;
+    }
+
+    /**
+     * @param users
+     *            the users to set
+     */
+    public void setUsers(DualListModel<User> users) {
+	this.users = users;
     }
 
     /**
@@ -171,5 +177,11 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
      */
     public static final Logger getLogger() {
 	return logger;
+    }
+
+    public String setUsersMembership() {
+	getFacade().setUsersMembership(getSelected(), getUsers().getTarget());
+	JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.association"));
+	return prepareEdit();
     }
 }

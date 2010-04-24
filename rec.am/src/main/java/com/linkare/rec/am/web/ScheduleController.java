@@ -36,11 +36,11 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
+import com.linkare.commons.jpa.security.User;
 import com.linkare.rec.am.model.ExternalCourseFacade;
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.ReservationFacade;
-import com.linkare.rec.am.model.UserPrincipal;
-import com.linkare.rec.am.model.UserPrincipalFacade;
+import com.linkare.rec.am.model.UserFacade;
 import com.linkare.rec.am.model.moodle.MoodleRecord;
 import com.linkare.rec.am.web.auth.UserView;
 import com.linkare.rec.am.web.moodle.SessionHelper;
@@ -62,7 +62,7 @@ public class ScheduleController implements Serializable {
     private ReservationFacade ejbFacade;
 
     @EJB
-    private UserPrincipalFacade ejbUserPrincipalFacade;
+    private UserFacade ejbUserFacade;
 
     private SelectItem[] externalCourses;
 
@@ -75,7 +75,7 @@ public class ScheduleController implements Serializable {
 	if (userView.isExternal()) {
 	    return ejbFacade.findReservationsFor(userView.getUsername(), userView.getDomain());
 	}
-	final UserPrincipal user = ejbUserPrincipalFacade.findByUsername(userView.getUsername());
+	final User user = ejbUserFacade.findByUsername(userView.getUsername());
 	return ejbFacade.findReservationsFor(user);
     }
 
@@ -149,9 +149,9 @@ public class ScheduleController implements Serializable {
 	if (userView.isExternal()) {
 	    event.setMoodleRecord(new MoodleRecord());
 	    event.getMoodleRecord().setExternalUser(userView.getUsername());
-	    event.getMoodleRecord().setMoodleUrl(userView.getDomain());
+	    event.getMoodleRecord().setDomain(userView.getDomain());
 	} else {
-	    event.setUserPrincipal(ejbUserPrincipalFacade.findByUsername(userView.getUsername()));
+	    event.setUser(ejbUserFacade.findByUsername(userView.getUsername()));
 	}
     }
 

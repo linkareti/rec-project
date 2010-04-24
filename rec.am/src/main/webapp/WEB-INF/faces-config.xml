@@ -10,11 +10,6 @@
 	<lifecycle>
 		<phase-listener>com.linkare.rec.am.web.listener.LifeCycleListener</phase-listener>
 	</lifecycle>
-	<!--
-		<converter> <converter-id>UserPrincipalConverter</converter-id>
-		<converter-class>com.linkare.rec.am.web.UserPrincipalConverter</converter-class>
-		</converter>
-	-->
 	<render-kit>
 		<renderer>
 			<component-family>javax.faces.SelectOne</component-family>

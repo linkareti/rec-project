@@ -18,18 +18,18 @@ public class MoodleRecord implements Serializable {
     @Column(name = "EXTERNAL_COURSE_ID", nullable = true, insertable = true, updatable = true)
     private String externalCourseId;
 
-    @Column(name = "MOODLE_URL", nullable = true, insertable = true, updatable = false)
-    private String moodleUrl;
+    @Column(name = "DOMAIN", nullable = true, insertable = true, updatable = false)
+    private String domain;
 
     public MoodleRecord() {
 	super();
     }
 
-    public MoodleRecord(String externalUser, String externalCourseId, String moodleUrl) {
+    public MoodleRecord(String externalUser, String externalCourseId, String domain) {
 	this();
 	this.externalUser = externalUser;
 	this.externalCourseId = externalCourseId;
-	this.moodleUrl = moodleUrl;
+	this.domain = domain;
     }
 
     /**
@@ -63,18 +63,18 @@ public class MoodleRecord implements Serializable {
     }
 
     /**
-     * @return the moodleUrl
+     * @return the domain
      */
-    public String getMoodleUrl() {
-	return moodleUrl;
+    public String getDomain() {
+	return domain;
     }
 
     /**
-     * @param moodleUrl
-     *            the moodleUrl to set
+     * @param domain
+     *            the domain to set
      */
-    public void setMoodleUrl(String moodleUrl) {
-	this.moodleUrl = moodleUrl;
+    public void setDomain(String domain) {
+	this.domain = domain;
     }
 
     @Override
@@ -90,17 +90,17 @@ public class MoodleRecord implements Serializable {
 	int result = 14;
 	result = 29 * result + (getExternalUser() != null ? getExternalUser().hashCode() : 0);
 	result = 29 * result + (getExternalCourseId() != null ? getExternalCourseId().hashCode() : 0);
-	result = 29 * result + (getMoodleUrl() != null ? getMoodleUrl().hashCode() : 0);
+	result = 29 * result + (getDomain() != null ? getDomain().hashCode() : 0);
 	return result;
     }
 
     private boolean equalsTo(final MoodleRecord other) {
 	return EqualityUtils.equals(getExternalUser(), other.getExternalUser()) && EqualityUtils.equals(getExternalCourseId(), other.getExternalCourseId())
-		&& EqualityUtils.equals(getMoodleUrl(), other.getMoodleUrl());
+		&& EqualityUtils.equals(getDomain(), other.getDomain());
     }
 
     @Override
     public String toString() {
-	return getExternalUser() + "-" + getExternalCourseId() + "-" + getMoodleUrl();
+	return getExternalUser() + "-" + getExternalCourseId() + "-" + getDomain();
     }
 }

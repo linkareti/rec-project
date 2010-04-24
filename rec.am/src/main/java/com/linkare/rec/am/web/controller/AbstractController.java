@@ -22,7 +22,7 @@ import com.linkare.rec.am.web.util.PaginationHelper;
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class AbstractController<Entity extends Identifiable<? extends Object>, EntityFacade extends Facade<Entity>> implements Serializable {
+public abstract class AbstractController<Entity extends Identifiable<?>, EntityFacade extends Facade<Entity>> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -56,17 +56,6 @@ public abstract class AbstractController<Entity extends Identifiable<? extends O
 
     public abstract String update();
 
-    /**
-     * @return the current
-     */
-    public abstract Entity getCurrent();
-
-    /**
-     * @param current
-     *            the current to set
-     */
-    public abstract void setCurrent(Entity current);
-
     public PaginationHelper<Entity> getPagination() {
 	if (pagination == null) {
 	    pagination = new PaginationHelper<Entity>(DEFAULT_PAGE_SIZE) {
@@ -99,7 +88,7 @@ public abstract class AbstractController<Entity extends Identifiable<? extends O
 	if (current != null) {
 	    selectedItemIndex = 0;
 	} else {
-	    current = getFacade().find(getItems().getRowData().getPk());
+	    current = getFacade().find(getItems().getRowData().id());
 	    selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
 	}
     }

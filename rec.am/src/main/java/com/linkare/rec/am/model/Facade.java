@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.linkare.commons.jpa.Identifiable;
-import com.linkare.commons.jpa.utils.EntityManagerLocator;
 
 /**
  * 
@@ -18,14 +17,10 @@ import com.linkare.commons.jpa.utils.EntityManagerLocator;
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class Facade<T extends Identifiable<? extends Object>> {
+public abstract class Facade<T extends Identifiable<?>> {
 
     @PersistenceContext(unitName = "AllocationManagerPU")
     protected EntityManager em;
-
-    {
-	EntityManagerLocator.setCurrentEntityManager(em);
-    }
 
     public abstract void create(T t);
 

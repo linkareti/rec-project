@@ -8,8 +8,10 @@
 
 
 <h:form>
-	<h:inputHidden id="current" value="#{reservationController.current}"
-		converter="entityConverter" />
+	<h:inputHidden id="idInternal"
+		value="#{reservationController.selected.idInternal}" />
+	<h:inputHidden id="version"
+		value="#{reservationController.selected.version}" />
 	<h:inputHidden id="moodleRecord"
 		value="#{reservationController.selected.moodleRecord}" />
 
@@ -33,13 +35,12 @@
 		<h:outputLabel value="#{bundle['reservation.reservedBy']}" for="user"
 			rendered="#{!userView.external}" />
 		<h:selectOneMenu id="user"
-			value="#{reservationController.selected.userPrincipal}"
+			value="#{reservationController.selected.user}"
 			title="#{bundle['reservation.reservedBy']}"
 			label="#{bundle['reservation.reservedBy']}"
-			required="#{!userView.external}" converter="userPrincipalConverter"
+			required="#{!userView.external}" converter="userConverter"
 			rendered="#{!userView.external}">
-			<f:selectItems
-				value="#{userPrincipalController.itemsAvailableSelectOne}" />
+			<f:selectItems value="#{userController.itemsAvailableSelectOne}" />
 		</h:selectOneMenu>
 		<h:outputLabel value="#{bundle['reservation.reservedBy']}"
 			for="externalUser" rendered="#{userView.external}" />
@@ -50,12 +51,12 @@
 		<h:outputLabel value="#{bundle['reservation.reservedTo']}" for="group"
 			rendered="#{!userView.external}" />
 		<h:selectOneMenu id="group"
-			value="#{reservationController.selected.userGroup}"
+			value="#{reservationController.selected.group}"
 			title="#{bundle['reservation.reservedTo']}"
 			label="#{bundle['reservation.reservedTo']}"
-			required="#{!userView.external}" converter="userGroupConverter"
+			required="#{!userView.external}" converter="groupConverter"
 			rendered="#{!userView.external}">
-			<f:selectItems value="#{userGroupController.itemsAvailableSelectOne}" />
+			<f:selectItems value="#{groupController.itemsAvailableSelectOne}" />
 		</h:selectOneMenu>
 		<h:outputLabel value="#{bundle['reservation.reservedTo']}"
 			for="externalCourse" rendered="#{userView.external}" />
@@ -89,18 +90,11 @@
 	<h:panelGroup rendered="#{operation == 'create'}">
 		<h:commandLink action="#{reservationController.create}"
 			value="#{bundle['operation.save']}" />
-		<br />
 	</h:panelGroup>
 	<h:panelGroup rendered="#{operation == 'edit'}">
-		<h:commandLink action="View" value="#{bundle['operation.view']}" />
-		<br />
+		<h:commandLink action="#{reservationController.update}"
+			value="#{bundle['operation.save']}" />
 	</h:panelGroup>
-	<h:panelGroup rendered="#{operation == 'view'}">
-		<h:commandLink action="Edit" value="#{bundle['operation.edit']}" />
-		<br />
-	</h:panelGroup>
-	<h:commandLink action="#{reservationController.prepareList}"
-		value="#{bundle['operation.list']}" immediate="true" />
 </h:form>
 
 </html>

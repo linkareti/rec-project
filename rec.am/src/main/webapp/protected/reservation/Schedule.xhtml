@@ -60,13 +60,12 @@
 								<h:outputLabel value="#{bundle['reservation.reservedBy']}"
 									for="user2" rendered="#{!userView.external}" />
 								<h:selectOneMenu id="user2"
-									value="#{scheduleController.event.userPrincipal}"
+									value="#{scheduleController.event.user}"
 									title="#{bundle['reservation.user']}"
 									required="#{!userView.external}"
-									rendered="#{!userView.external}"
-									converter="userPrincipalConverter">
+									rendered="#{!userView.external}" converter="userConverter">
 									<f:selectItems
-										value="#{userPrincipalController.itemsAvailableSelectOne}" />
+										value="#{userController.itemsAvailableSelectOne}" />
 								</h:selectOneMenu>
 								<h:outputLabel value="#{bundle['reservation.reservedBy']}"
 									for="externalUser2" rendered="#{userView.external}" />
@@ -76,12 +75,12 @@
 								<h:outputLabel value="#{bundle['reservation.reservedTo']}"
 									for="group2" rendered="#{!userView.external}" />
 								<h:selectOneMenu id="group2"
-									value="#{scheduleController.event.userGroup}"
+									value="#{scheduleController.event.group}"
 									title="#{bundle['reservation.group']}"
-									required="#{!userView.external}" converter="userGroupConverter"
+									required="#{!userView.external}" converter="groupConverter"
 									rendered="#{!userView.external}">
 									<f:selectItems
-										value="#{userGroupController.itemsAvailableSelectOne}" />
+										value="#{groupController.itemsAvailableSelectOne}" />
 								</h:selectOneMenu>
 								<h:outputLabel value="#{bundle['reservation.reservedTo']}"
 									for="externalCourse2" rendered="#{userView.external}" />

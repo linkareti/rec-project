@@ -12,7 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.linkare.rec.am.model.UserPrincipal;
+import com.linkare.commons.jpa.security.User;
 import com.linkare.rec.am.web.ex.AuthenticationException;
 import com.linkare.rec.am.web.util.JsfUtil;
 
@@ -41,7 +41,7 @@ public class Login implements Authenticator, Serializable {
 
     private String loginDomain;
 
-    private UserPrincipal user = null;
+    private User user = null;
 
     private boolean loggedIn = false;
 
@@ -122,7 +122,7 @@ public class Login implements Authenticator, Serializable {
     /**
      * @return the user
      */
-    public UserPrincipal getUser() {
+    public User getUser() {
 	return user;
     }
 
@@ -130,7 +130,7 @@ public class Login implements Authenticator, Serializable {
      * @param user
      *            the user to set
      */
-    public void setUser(UserPrincipal user) {
+    public void setUser(User user) {
 	this.user = user;
     }
 

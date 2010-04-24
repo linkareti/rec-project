@@ -1,6 +1,5 @@
 package com.linkare.rec.am.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +19,8 @@ import javax.persistence.Temporal;
 import org.primefaces.model.ScheduleEvent;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
+import com.linkare.commons.jpa.security.Group;
+import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.EqualityUtils;
 import com.linkare.rec.am.model.moodle.MoodleRecord;
 
@@ -33,11 +34,11 @@ import com.linkare.rec.am.model.moodle.MoodleRecord;
 	@NamedQuery(name = "Reservation.findAll", query = "Select r from Reservation r"),
 	@NamedQuery(name = "Reservation.countAll", query = "Select count(r) from Reservation r"),
 	@NamedQuery(name = "findReservationsBetweenDatesForLaboratory", query = "Select r from Reservation r where r.startDate >=:start and r.endDate <=:end and r.experiment in (Select e from Laboratory l, Experiment e where l.name=:namelab and e.laboratory=l)"),
-	@NamedQuery(name = "Reservation.findReservationsForInternalUserInDate", query = "Select r from Reservation r WHERE r.userPrincipal.username=:username and r.startDate between :start and :end"),
-	@NamedQuery(name = "Reservation.findReservationsForInternalUser", query = "Select r from Reservation r WHERE r.userPrincipal.username=:username"),
-	@NamedQuery(name = "Reservation.findReservationsForExternalUserInDate", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.moodleRecord.moodleUrl=:loginDomain and r.startDate between :start and :end"),
-	@NamedQuery(name = "Reservation.findReservationsForExternalUser", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.moodleRecord.moodleUrl=:loginDomain") })
-public class Reservation extends DefaultDomainObject implements ScheduleEvent, Serializable {
+	@NamedQuery(name = "Reservation.findReservationsForInternalUserInDate", query = "Select r from Reservation r WHERE r.user.username=:username and r.startDate between :start and :end"),
+	@NamedQuery(name = "Reservation.findReservationsForInternalUser", query = "Select r from Reservation r WHERE r.user.username=:username"),
+	@NamedQuery(name = "Reservation.findReservationsForExternalUserInDate", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.moodleRecord.domain=:loginDomain and r.startDate between :start and :end"),
+	@NamedQuery(name = "Reservation.findReservationsForExternalUser", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.moodleRecord.domain=:loginDomain") })
+public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     private static final long serialVersionUID = 1L;
 
@@ -65,7 +66,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
 
     @ManyToOne
     @JoinColumn(name = "KEY_USER", nullable = true)
-    private UserPrincipal userPrincipal;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "KEY_EXPERIMENT", nullable = true)
@@ -77,7 +78,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
 
     @ManyToOne
     @JoinColumn(name = "KEY_GROUP", nullable = true)
-    private UserGroup userGroup;
+    private Group group;
 
     @Column(name = "RESERVATION_ID", insertable = true, updatable = false, unique = true)
     private String reservationId;
@@ -104,9 +105,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     public Reservation() {
     }
 
-    public Reservation(final String externalUser, final String externalCourse, final String externalURL) {
+    public Reservation(final String externalUser, final String externalCourse, final String domain) {
 	this();
-	setMoodleRecord(new MoodleRecord(externalUser, externalCourse, externalURL));
+	setMoodleRecord(new MoodleRecord(externalUser, externalCourse, domain));
     }
 
     /**
@@ -181,18 +182,18 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     }
 
     /**
-     * @return the userPrincipal
+     * @return the user
      */
-    public UserPrincipal getUserPrincipal() {
-	return userPrincipal;
+    public User getUser() {
+	return user;
     }
 
     /**
-     * @param userPrincipal
-     *            the userPrincipal to set
+     * @param user
+     *            the user to set
      */
-    public void setUserPrincipal(UserPrincipal userPrincipal) {
-	this.userPrincipal = userPrincipal;
+    public void setUser(User user) {
+	this.user = user;
     }
 
     /**
@@ -313,18 +314,18 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     }
 
     /**
-     * @return the userGroup
+     * @return the group
      */
-    public UserGroup getUserGroup() {
-	return userGroup;
+    public Group getGroup() {
+	return group;
     }
 
     /**
-     * @param userGroup
-     *            the userGroup to set
+     * @param group
+     *            the group to set
      */
-    public void setUserGroup(UserGroup userGroup) {
-	this.userGroup = userGroup;
+    public void setGroup(Group group) {
+	this.group = group;
     }
 
     /**
@@ -343,23 +344,23 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     }
 
     public String getReservedBy() {
-	return getUserPrincipal() != null ? getUserPrincipal().getUsername() : getMoodleRecord().getExternalUser();
+	return getUser() != null ? getUser().getUsername() : getMoodleRecord().getExternalUser();
     }
 
     public String getReservedTo() {
-	return getUserGroup() != null ? getUserGroup().getName() : getMoodleRecord().getExternalCourseId();
+	return getGroup() != null ? getGroup().getName() : getMoodleRecord().getExternalCourseId();
     }
 
-    public boolean getHasUserPrincipal() {
-	return getUserPrincipal() != null;
+    public boolean getHasUser() {
+	return getUser() != null;
     }
 
     public boolean getHasExperiment() {
 	return getExperiment() != null;
     }
 
-    public boolean getHasUserGroup() {
-	return getUserGroup() != null;
+    public boolean getHasGroup() {
+	return getGroup() != null;
     }
 
     public String getExternalUser() {
@@ -372,13 +373,13 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
 	}
     }
 
-    public String getExternalURL() {
-	return getMoodleRecord() == null ? null : getMoodleRecord().getMoodleUrl();
+    public String getDomain() {
+	return getMoodleRecord() == null ? null : getMoodleRecord().getDomain();
     }
 
-    public void setExternalURL(final String externalURL) {
+    public void setDomain(final String domain) {
 	if (getMoodleRecord() != null) {
-	    getMoodleRecord().setMoodleUrl(externalURL);
+	    getMoodleRecord().setDomain(domain);
 	}
     }
 
@@ -397,14 +398,14 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent, S
     }
 
     public void remove() {
-	if (getHasUserPrincipal()) {
-	    setUserPrincipal(null);
+	if (getHasUser()) {
+	    setUser(null);
 	}
 	if (getHasExperiment()) {
 	    setExperiment(null);
 	}
-	if (getHasUserGroup()) {
-	    setUserGroup(null);
+	if (getHasGroup()) {
+	    setGroup(null);
 	}
     }
 }

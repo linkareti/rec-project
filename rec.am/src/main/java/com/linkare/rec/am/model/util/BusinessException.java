@@ -15,7 +15,7 @@ import javax.ejb.ApplicationException;
  * @author Joao
  */
 @ApplicationException
-public final class BusinessException extends Exception {
+public final class BusinessException extends RuntimeException {
 
     private static final String NOT_FOUND = "???";
 

@@ -31,16 +31,6 @@ public class ReservationController extends AbstractController<Reservation, Reser
 
     private static final int MINUTE_STEP = 30;
 
-    @Override
-    public Reservation getCurrent() {
-	return current;
-    }
-
-    @Override
-    public void setCurrent(Reservation current) {
-	this.current = current;
-    }
-
     public final Reservation getSelected() {
 	if (current == null) {
 	    current = new Reservation();
@@ -64,8 +54,8 @@ public class ReservationController extends AbstractController<Reservation, Reser
     public final String prepareCreateExternal() {
 	final String externalUser = SessionHelper.getUsername();
 	final String externalCourse = JsfUtil.getRequestParameter("externalCourse");
-	final String externalURL = SessionHelper.getLoginDomain();
-	current = new Reservation(externalUser, externalCourse, externalURL);
+	final String domain = SessionHelper.getLoginDomain();
+	current = new Reservation(externalUser, externalCourse, domain);
 	selectedItemIndex = -1;
 	return CREATE;
     }
@@ -158,7 +148,7 @@ public class ReservationController extends AbstractController<Reservation, Reser
 	    }
 	    if (object instanceof Reservation) {
 		Reservation o = (Reservation) object;
-		return getStringKey(o.getPk());
+		return getStringKey(o.getIdInternal());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
 			+ Reservation.class.getName());
@@ -185,7 +175,7 @@ public class ReservationController extends AbstractController<Reservation, Reser
 	    }
 	    if (object instanceof MoodleRecord) {
 		final MoodleRecord record = (MoodleRecord) object;
-		return record.getExternalUser() + "_" + record.getExternalCourseId() + "_" + record.getMoodleUrl();
+		return record.getExternalUser() + "_" + record.getExternalCourseId() + "_" + record.getDomain();
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
 			+ Reservation.class.getName());

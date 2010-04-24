@@ -8,19 +8,19 @@
 
 <h:form>
 	<h:inputHidden id="idInternal"
-		value="#{roleController.selected.idInternal}" />
-	<h:inputHidden id="version" value="#{roleController.selected.version}" />
-	<h:inputHidden id="current" value="#{roleController.current}"
-		converter="roleConverter" />
+		value="#{groupController.selected.idInternal}" />
+	<h:inputHidden id="version" value="#{groupController.selected.version}" />
+	<h:inputHidden id="current" value="#{groupController.current}"
+		converter="groupConverter" />
 	<h:panelGrid columns="2">
-		<h:outputLabel value="#{bundle['role.name']}" for="name" />
-		<h:inputText id="name" value="#{roleController.selected.name}"
-			title="#{bundle['role.name']}" required="true"
-			label="#{bundle['role.name']}" disabled="#{operation != 'create'}" />
+		<h:outputLabel value="#{bundle['group.name']}" for="name" />
+		<h:inputText id="name" value="#{groupController.selected.name}"
+			title="#{bundle['group.name']}" required="true"
+			label="#{bundle['group.name']}" disabled="#{operation != 'create'}" />
 
-		<h:outputLabel value="#{bundle['role.childUsers']}" for="members"
+		<h:outputLabel value="#{bundle['group.childUsers']}" for="members"
 			rendered="#{operation == 'edit'}" />
-		<p:pickList id="members" value="#{roleController.users}" var="user"
+		<p:pickList id="members" value="#{groupController.users}" var="user"
 			itemLabel="#{user.username}" itemValue="#{user}"
 			converter="userConverter" rendered="#{operation == 'edit'}">
 			<!-- 
@@ -43,13 +43,13 @@
  -->
 		</p:pickList>
 
-		<h:commandLink action="#{roleController.setUsersMembership}"
+		<h:commandLink action="#{groupController.setUsersMembership}"
 			value="#{bundle['operation.submit']}"
 			rendered="#{operation == 'edit'}" />
 
 	</h:panelGrid>
 	<h:panelGroup rendered="#{operation == 'create'}">
-		<h:commandLink action="#{roleController.create}"
+		<h:commandLink action="#{groupController.create}"
 			value="#{bundle['operation.save']}" />
 	</h:panelGroup>
 </h:form>

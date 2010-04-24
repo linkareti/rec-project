@@ -43,7 +43,7 @@ public class EntityConverter implements Converter, Serializable {
 	    return (String) value;
 	}
 	DefaultDomainObject entity = (DefaultDomainObject) value;
-	return entity.getPk() == null ? "" : entity.getPk().toString();
+	return entity.getIdInternal() == null ? "" : entity.getIdInternal().toString();
     }
 
     // Gets the class corresponding to the context in jsf page

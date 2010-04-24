@@ -7,10 +7,6 @@
 
 <h:form>
 
-	<h:inputHidden rendered="#{operation != 'create'}" id="current"
-		value="#{externalCourseController.current}"
-		converter="externalCourseConverter" />
-
 	<h:panelGrid columns="2">
 		<h:outputLabel value="#{bundle['externalCourse.shortname']}"
 			for="shortname" />
@@ -79,9 +75,6 @@
 			</h:column>
 		</h:dataTable>
 	</h:panelGrid>
-	<br />
-	<h:commandLink action="#{externalCourseController.prepareList}"
-		value="#{bundle['operation.list']}" />
 </h:form>
 
 </html>

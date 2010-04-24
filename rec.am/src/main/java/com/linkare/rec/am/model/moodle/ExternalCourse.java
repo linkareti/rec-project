@@ -20,7 +20,7 @@ public class ExternalCourse implements Identifiable<String> {
     }
 
     @Override
-    public String getPk() {
+    public String id() {
 	return delegate.getShortname();
     }
 

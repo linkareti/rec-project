@@ -10,37 +10,38 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.linkare.rec.am.model.Laboratory;
-import com.linkare.rec.am.model.LaboratoryFacade;
+import com.linkare.commons.jpa.exceptions.DomainException;
+import com.linkare.commons.jpa.security.User;
+import com.linkare.rec.am.model.UserFacade;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.JsfUtil;
 
-@ManagedBean(name = "laboratoryController")
+@ManagedBean(name = "userController")
 @RequestScoped
-public class LaboratoryController extends AbstractController<Laboratory, LaboratoryFacade> {
+public class UserController extends AbstractController<User, UserFacade> {
 
     private static final long serialVersionUID = 1L;
 
     @EJB
-    private LaboratoryFacade ejbFacade;
+    private UserFacade ejbFacade;
 
     @Override
-    public final Laboratory getSelected() {
+    public final User getSelected() {
 	if (current == null) {
-	    current = new Laboratory();
+	    current = new User();
 	    selectedItemIndex = -1;
 	}
 	return current;
     }
 
     @Override
-    protected LaboratoryFacade getFacade() {
+    protected final UserFacade getFacade() {
 	return ejbFacade;
     }
 
     @Override
     public final String prepareCreate() {
-	current = new Laboratory();
+	current = new User();
 	selectedItemIndex = -1;
 	return CREATE;
     }
@@ -52,8 +53,13 @@ public class LaboratoryController extends AbstractController<Laboratory, Laborat
 	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.create"));
 	    return prepareCreate();
 	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
+	    if (e.getCause() instanceof DomainException) {
+		JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString(e.getCause().getMessage()));
+	    } else {
+		JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
+	    }
 	    return null;
+
 	}
     }
 
@@ -79,16 +85,16 @@ public class LaboratoryController extends AbstractController<Laboratory, Laborat
 	}
     }
 
-    @FacesConverter(value = "laboratoryConverter", forClass = Laboratory.class)
-    public static class LaboratoryConverter implements Converter {
+    @FacesConverter(value = "userConverter", forClass = User.class)
+    public static class UserConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
 	    if (value == null || value.length() == 0) {
 		return null;
 	    }
-	    LaboratoryController controller = (LaboratoryController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
-															    "laboratoryController");
+	    UserController controller = (UserController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
+														"userController");
 	    return controller.ejbFacade.find(getKey(value));
 	}
 
@@ -105,12 +111,12 @@ public class LaboratoryController extends AbstractController<Laboratory, Laborat
 	    if (object == null) {
 		return null;
 	    }
-	    if (object instanceof Laboratory) {
-		Laboratory o = (Laboratory) object;
+	    if (object instanceof User) {
+		User o = (User) object;
 		return getStringKey(o.getIdInternal());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
-			+ Laboratory.class.getName());
+			+ User.class.getName());
 	    }
 	}
     }

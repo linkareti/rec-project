@@ -10,7 +10,6 @@ import javax.faces.convert.FacesConverter;
 import com.linkare.rec.am.model.ExternalCourseFacade;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.web.controller.AbstractController;
-import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.wsgen.moodle.UserRecord;
 
 /**
@@ -28,19 +27,6 @@ public class ExternalCourseController extends AbstractController<ExternalCourse,
     private UserRecord[] students;
 
     private UserRecord[] teachers;
-
-    @Override
-    public ExternalCourse getCurrent() {
-	if (current == null || current.getPk() == null) {
-	    current = (ExternalCourse) JsfUtil.getObjectFromRequestParameter("current", new ExternalCourseConverter());
-	}
-	return current;
-    }
-
-    @Override
-    public void setCurrent(ExternalCourse current) {
-	this.current = current;
-    }
 
     public final ExternalCourse getSelected() {
 	if (current == null) {
@@ -127,15 +113,7 @@ public class ExternalCourseController extends AbstractController<ExternalCourse,
 	    ExternalCourseController controller = (ExternalCourseController) facesContext.getApplication().getELResolver()
 											 .getValue(facesContext.getELContext(), null,
 												   "externalCourseController");
-	    return controller.getFacade().find(getKey(value));
-	}
-
-	private String getKey(String value) {
-	    return value;
-	}
-
-	private String getStringKey(String value) {
-	    return value;
+	    return controller.getFacade().find(value);
 	}
 
 	@Override
@@ -145,7 +123,7 @@ public class ExternalCourseController extends AbstractController<ExternalCourse,
 	    }
 	    if (object instanceof ExternalCourse) {
 		ExternalCourse o = (ExternalCourse) object;
-		return getStringKey(o.getPk());
+		return o.id();
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
 			+ ExternalCourse.class.getName());

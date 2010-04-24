@@ -10,6 +10,8 @@ import javax.persistence.Query;
 
 import org.primefaces.model.ScheduleEvent;
 
+import com.linkare.commons.jpa.security.User;
+
 /**
  * 
  * @author Joao
@@ -60,14 +62,14 @@ public class ReservationFacade extends Facade<Reservation> {
 	return ((Long) query.getSingleResult()).intValue();
     }
 
-    public List<ScheduleEvent> findReservationsFor(Date start, Date end, UserPrincipal user) {
+    public List<ScheduleEvent> findReservationsFor(Date start, Date end, User user) {
 	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForInternalUserInDate")
 					     .setParameter("username", user.getUsername()).setParameter("start", start).setParameter("end", end)
 					     .getResultList();
 	return events;
     }
 
-    public List<ScheduleEvent> findReservationsFor(UserPrincipal user) {
+    public List<ScheduleEvent> findReservationsFor(User user) {
 	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForInternalUser").setParameter("username", user.getUsername())
 					     .getResultList();
 	return events;

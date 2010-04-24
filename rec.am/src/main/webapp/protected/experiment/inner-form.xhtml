@@ -6,10 +6,10 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:form>
-
-	<h:inputHidden rendered="#{operation != 'create'}" id="current"
-		value="#{experimentController.current}"
-		converter="experimentConverter" />
+	<h:inputHidden id="idInternal"
+		value="#{experimentController.selected.idInternal}" />
+	<h:inputHidden id="version"
+		value="#{experimentController.selected.version}" />
 	<h:panelGrid columns="2">
 		<h:outputLabel value="#{bundle['experiment.name']}" for="name" />
 		<h:inputText id="name" value="#{experimentController.selected.name}"
@@ -61,19 +61,11 @@
 	<h:panelGroup rendered="#{operation == 'create'}">
 		<h:commandLink action="#{experimentController.create}"
 			value="#{bundle['operation.save']}" />
-		<br />
 	</h:panelGroup>
 	<h:panelGroup rendered="#{operation == 'edit'}">
-		<h:commandLink action="View" value="#{bundle['operation.view']}" />
-		<br />
+		<h:commandLink action="#{experimentController.update}"
+			value="#{bundle['operation.save']}" />
 	</h:panelGroup>
-	<h:panelGroup rendered="#{operation == 'view'}">
-		<h:commandLink action="Edit" value="#{bundle['operation.edit']}" />
-		<br />
-	</h:panelGroup>
-	<h:commandLink action="#{experimentController.prepareList}"
-		value="#{bundle['operation.list']}" immediate="true" />
-	<br />
 </h:form>
 
 </html>

@@ -1,5 +1,7 @@
 package com.linkare.rec.am.web.auth;
 
+import java.util.ResourceBundle;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -7,7 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import com.linkare.rec.am.model.LoginDomain;
-import com.linkare.rec.am.model.UserPrincipalFacade;
+import com.linkare.rec.am.model.UserFacade;
+import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.ex.AuthenticationException;
 import com.linkare.rec.am.web.util.JsfUtil;
 
@@ -24,7 +27,7 @@ public class AuthenticationBean {
     private LoginProvider loginProvider;
 
     @EJB
-    private UserPrincipalFacade facade;
+    private UserFacade facade;
 
     public String login() {
 	try {
@@ -32,7 +35,7 @@ public class AuthenticationBean {
 				     getLoginDomain());
 	} catch (AuthenticationException e) {
 	    e.printStackTrace();
-	    JsfUtil.addErrorMessage("error.login.failed");
+	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(AbstractController.BUNDLE).getString("error.login.failed"));
 	    return null;
 	}
 	return "index";

@@ -1,6 +1,5 @@
 package com.linkare.rec.am.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ import com.linkare.commons.jpa.DefaultDomainObject;
 @NamedQueries( { @NamedQuery(name = "Experiment.findAll", query = "Select e from Experiment e"),
 	@NamedQuery(name = "Experiment.countAll", query = "Select count(e) from Experiment e"),
 	@NamedQuery(name = "findByExperimentName", query = "SELECT exp FROM Experiment exp WHERE exp.name=:name") })
-public class Experiment extends DefaultDomainObject implements Serializable {
+public class Experiment extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
 
