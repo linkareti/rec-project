@@ -1,24 +1,23 @@
-#!/bin/bash   
+#!/bin/bash
 
 clear
 echo Starting multicast
 
-OUTPUT_BASE_DIR=/multicast
-export SYSTEM_PROPS="-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=$OUTPUT_BASE_DIR/orb/OpenORBMultiCast.xml"
+INITIAL_HEAP_MEM=@multicast.initial.heap@
+MAX_HEAP_MEM=@multicast.max.heap@
 
-RECCLASSPATH=$OUTPUT_BASE_DIR/openorb/xml-apis_sig.jar:$OUTPUT_BASE_DIR/openorb/tools-1.4.0_sig.jar:$OUTPUT_BASE_DIR/openorb/openorb_orb-1.4.0_sig.jar:$OUTPUT_BASE_DIR/openorb/openorb_pss-1.4.0_sig.jar:$OUTPUT_BASE_DIR/openorb/openorb_orb_omg-1.4.0_sig.jar:$OUTPUT_BASE_DIR/openorb/openorb_ots-1.4.0_sig.jar:$OUTPUT_BASE_DIR/openorb/logkit_sig.jar:$OUTPUT_BASE_DIR/openorb/xercesImpl_sig.jar:$OUTPUT_BASE_DIR/openorb/avalon-framework_sig.jar:$OUTPUT_BASE_DIR/recbase/ReCData_sig.jar:$OUTPUT_BASE_DIR/recbase/ReCMulticastController_sig.jar:.:$CLASSPATH
-export PATH OUTPUT_BASE_DIR SYSTEM_PROPS RECCLASSPATH
+MULTICAST_BASE_DIR=./multicast
 
-export SYSTEM_PROPS="-Dopenorb.profile=ReCMultiCastController -DReC.MultiCastController.BindName=MultiCastController -DReC.MultiCastController.InitRef=MultiCastController -Djava.util.logging.config.file=$OUTPUT_BASE_DIR/recbase/loggers.config.properties $SYSTEM_PROPS -Xms128m -Xmx256m"
+export GENERIC_ORB_SYSPROPS=-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=%MULTICAST_BASE_DIR%/etc/openorb.xml
+export MULTICAST_ORB_SYSPROPS=-Dopenorb.profile=ReCMultiCastController -DReC.MultiCastController.BindName=MultiCastController -DReC.MultiCastController.InitRef=MultiCastController
+export MEM_SYSPROPS=-Xms$INITIAL_HEAP_MEM -Xmx$MAX_HEAP_MEM
+export LOG_SYSPROPS=-Djava.util.logging.config.file=$MULTICAST_BASE_DIR$/etc/loggers.config.properties 
 
-export RECCLASSPATH=$OUTPUT_BASE_DIR/recbase/ReCMultiCastController_sig.jar:$RECCLASSPATH
+export RECCLASSPATH=$MULTICAST_BASE_DIR/lib/xml-apis.jar:$MULTICAST_BASE_DIR/lib/tools-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_orb-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_pss-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_orb_omg-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_ots-1.4.0.jar:$MULTICAST_BASE_DIR/lib/logkit.jar:$MULTICAST_BASE_DIR/lib/xercesImpl.jar:$MULTICAST_BASE_DIR/lib/avalon-framework.jar
+export MULTICAST_CLASSPATH=%MULTICAST_BASE_DIR%/ReCMulticastController.jar;%MULTICAST_BASE_DIR%/ELabMulticastController.jar;%MULTICAST_BASE_DIR%/ReCCommon.jar;
 
-export ARGS="-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,address=40000,suspend=n"
+echo ClassPath        : $RECCLASSPATH:$MULTICAST_CLASSPATH
+echo 
+echo System Properties: $GENERIC_ORB_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS 
 
-#export PREPEND=-Xbootclasspath/p:$OUTPUT_BASE_DIR/openorb/openorb_orb_omg-1.4.0_sig.jar
-
-echo $ARGS -classpath $RECCLASSPATH $SYSTEM_PROPS com.linkare.rec.impl.multicast.startup.MultiCastControllerMain 
-
-java $ARGS $PREPEND -classpath $RECCLASSPATH $SYSTEM_PROPS com.linkare.rec.impl.multicast.startup.MultiCastControllerMain &
-
-echo $!> /var/lock/rec_multicast
+java -classpath $RECCLASSPATH:$MULTICAST_CLASSPATH $GENERIC_ORB_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS com.linkare.rec.impl.multicast.startup.MultiCastControllerMain &
