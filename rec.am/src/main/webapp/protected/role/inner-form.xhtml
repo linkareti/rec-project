@@ -7,12 +7,12 @@
 	xmlns:p="http://primefaces.prime.com.tr/ui">
 
 <h:form>
-	<p:focus />
 	<h:inputHidden id="idInternal"
 		value="#{roleController.selected.idInternal}" />
 	<h:inputHidden id="version" value="#{roleController.selected.version}" />
 	<h:inputHidden id="current" value="#{roleController.current}"
 		converter="roleConverter" rendered="#{operation != 'create'}" />
+	<p:focus for="name" />
 	<h:panelGrid columns="2">
 		<h:outputLabel value="#{bundle['role.name']}" for="name" />
 		<h:inputText id="name" value="#{roleController.selected.name}"

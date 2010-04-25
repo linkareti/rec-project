@@ -7,10 +7,10 @@
 	xmlns:p="http://primefaces.prime.com.tr/ui">
 
 <h:form>
-	<p:focus />
 	<h:inputHidden id="idInternal"
 		value="#{userController.selected.idInternal}" />
 	<h:inputHidden id="version" value="#{userController.selected.version}" />
+	<p:focus for="username" />
 	<h:panelGrid columns="2">
 		<h:outputLabel value="#{bundle['user.username']}" for="username" />
 		<h:inputText id="username" value="#{userController.selected.username}"

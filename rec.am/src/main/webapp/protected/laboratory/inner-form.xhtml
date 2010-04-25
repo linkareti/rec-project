@@ -7,14 +7,13 @@
 	xmlns:p="http://primefaces.prime.com.tr/ui">
 
 <h:form>
-	<p:focus />
 	<h:inputHidden id="idInternal"
 		value="#{laboratoryController.selected.idInternal}"
 		rendered="#{operation != 'create'}" />
 	<h:inputHidden id="version"
 		value="#{laboratoryController.selected.version}"
 		rendered="#{operation != 'create'}" />
-
+	<p:focus for="name" />
 	<h:panelGrid columns="2">
 		<h:outputLabel value="#{bundle['laboratory.name']}" for="name" />
 		<h:inputText id="name" value="#{laboratoryController.selected.name}"

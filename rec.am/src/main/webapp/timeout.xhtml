@@ -13,7 +13,7 @@
 
 	<ui:define name="body">
 		<h1><h:outputText value="#{info.timeout}" /></h1>
-		<h:outputLink value="/index.faces">
+		<h:outputLink value="#{request.contextPath}/index.jsp">
 			<h:outputText value="#{bundle['label.login']}" />
 		</h:outputLink>
 	</ui:define>
