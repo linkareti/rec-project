@@ -6,19 +6,20 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.prime.com.tr/ui">
 
-<p:tab title="Menu">
-	<h:form>
-		<h:commandLink action="/protected/backoffice"
-			value="#{bundle['menu.backoffice']}"
-			rendered="#{!userView.external and userView.admin}" />
-		<br></br>
-		<h:commandLink action="/protected/reservation/Schedule"
-			value="#{bundle['menu.reservationSchedule']}" />
-		<br></br>
-		<br></br>
-		<h:commandLink action="#{authenticationBean.logout}">
-			<h:outputText value="#{bundle['menu.logout']}" />
-		</h:commandLink>
-	</h:form>
-</p:tab>
+<h:form>
+	<p:menu style="width:200px">
+		<p:submenu>
+			<p:menuitem value="#{bundle['menu.backoffice']}" ajax="false"
+				action="/protected/backoffice"
+				rendered="#{!userView.external and userView.admin}" />
+			<p:menuitem value="#{bundle['menu.schedule']}" ajax="false"
+				action="/protected/reservation/Schedule" />
+		</p:submenu>
+		<p:submenu>
+			<p:menuitem value="#{bundle['menu.logout']}"
+				action="#{authenticationBean.logout}" />
+		</p:submenu>
+	</p:menu>
+</h:form>
+
 </html>

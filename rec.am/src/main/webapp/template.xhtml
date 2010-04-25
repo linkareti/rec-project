@@ -26,10 +26,9 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit id="left" position="left" width="192" resizable="true"
-			closable="true" collapsible="true" minWidth="200">
-			<p:accordionPanel activeIndex="0">
-				<ui:insert name="menu"></ui:insert>
-			</p:accordionPanel>
+			closable="false" collapsible="true" minWidth="200"
+			header="#{bundle['menu.title']}">
+			<ui:insert name="menu"></ui:insert>
 		</p:layoutUnit>
 
 		<p:layoutUnit id="center" position="center" style="text-align:left"

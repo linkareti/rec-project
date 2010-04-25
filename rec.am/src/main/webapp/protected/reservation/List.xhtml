@@ -85,8 +85,14 @@
 						<h:commandLink action="#{reservationController.prepareEdit}"
 							value="#{bundle['operation.edit']}" />
 						<h:outputText value=" " />
-						<h:commandLink action="#{reservationController.destroy}"
-							value="#{bundle['operation.remove']}" />
+						<p:commandLink actionListener="#{reservationController.destroy}"
+							update="msg">
+							<h:outputText value="#{bundle['operation.remove']}" />
+							<p:confirmDialog yesLabel="#{bundle['label.yes']}"
+								noLabel="#{bundle['label.no']}"
+								message="#{bundle['label.confirmMessage']}"
+								header="#{bundle['label.confirmHeader']}" severity="warn" />
+						</p:commandLink>
 					</p:column>
 
 				</p:dataTable>

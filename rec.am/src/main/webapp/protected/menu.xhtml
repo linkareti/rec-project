@@ -6,33 +6,32 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.prime.com.tr/ui">
 
-<p:tab title="Menu">
-	<h:form>
-		<h:commandLink action="/protected/courses/List"
-			value="#{bundle['menu.externalCourse.list']}"
-			rendered="#{userView.external}" />
-		<br></br>
-		<h:commandLink action="/protected/laboratory/List"
-			value="#{bundle['menu.laboratory.list']}" />
-		<br></br>
-		<h:commandLink action="/protected/experiment/List"
-			value="#{bundle['menu.experiment.list']}" />
-		<br></br>
-		<h:commandLink action="/protected/user/List"
-			value="#{bundle['menu.user.list']}" />
-		<br></br>
-		<h:commandLink action="/protected/group/List"
-			value="#{bundle['menu.group.list']}" />
-		<br></br>
-		<h:commandLink action="/protected/role/List"
-			value="#{bundle['menu.role.list']}" />
-		<br></br>
-		<h:commandLink action="/protected/reservation/List"
-			value="#{bundle['menu.reservation.list']}" />
-		<br></br>
-		<br></br>
-		<h:commandLink value="#{bundle['menu.index']}" action="/index"
-			immediate="true" />
-	</h:form>
-</p:tab>
+<h:form>
+	<p:menu style="width:200px">
+		<p:submenu>
+			<p:menuitem value="#{bundle['menu.externalCourse.list']}"
+				action="/protected/courses/List" rendered="#{userView.external}" />
+			<p:menuitem value="#{bundle['menu.laboratory.list']}"
+				action="/protected/laboratory/List" ajax="false" />
+			<p:menuitem value="#{bundle['menu.experiment.list']}"
+				action="/protected/experiment/List" ajax="false" />
+			<p:menuitem value="#{bundle['menu.user.list']}"
+				action="/protected/user/List" ajax="false" />
+			<p:menuitem value="#{bundle['menu.group.list']}"
+				action="/protected/group/List" ajax="false" />
+			<p:menuitem value="#{bundle['menu.role.list']}"
+				action="/protected/role/List" ajax="false" />
+		</p:submenu>
+		<p:submenu>
+			<p:menuitem value="#{bundle['menu.reservation.list']}"
+				action="/protected/reservation/List" ajax="false" />
+		</p:submenu>
+		<p:submenu>
+			<p:menuitem value="#{bundle['menu.index']}" action="/index"
+				immediate="true" ajax="false" />
+			<p:menuitem value="#{bundle['menu.logout']}"
+				action="#{authenticationBean.logout}" ajax="false" />
+		</p:submenu>
+	</p:menu>
+</h:form>
 </html>
