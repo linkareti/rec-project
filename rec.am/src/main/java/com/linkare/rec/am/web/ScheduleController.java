@@ -16,6 +16,7 @@
 package com.linkare.rec.am.web;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -211,6 +212,6 @@ public class ScheduleController implements Serializable {
      *            the externalCourses to set
      */
     public void setExternalCourses(SelectItem[] externalCourses) {
-	this.externalCourses = externalCourses;
+	this.externalCourses = Arrays.copyOf(externalCourses, externalCourses.length);
     }
 }
