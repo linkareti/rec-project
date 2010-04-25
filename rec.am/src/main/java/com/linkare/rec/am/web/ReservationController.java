@@ -34,7 +34,6 @@ public class ReservationController extends AbstractController<Reservation, Reser
     public final Reservation getSelected() {
 	if (current == null) {
 	    current = new Reservation();
-	    selectedItemIndex = -1;
 	}
 	return current;
     }
@@ -47,7 +46,6 @@ public class ReservationController extends AbstractController<Reservation, Reser
     @Override
     public final String prepareCreate() {
 	current = new Reservation();
-	selectedItemIndex = -1;
 	return CREATE;
     }
 
@@ -56,7 +54,6 @@ public class ReservationController extends AbstractController<Reservation, Reser
 	final String externalCourse = JsfUtil.getRequestParameter("externalCourse");
 	final String domain = SessionHelper.getLoginDomain();
 	current = new Reservation(externalUser, externalCourse, domain);
-	selectedItemIndex = -1;
 	return CREATE;
     }
 

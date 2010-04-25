@@ -32,20 +32,24 @@ public class LaboratoryFacade extends Facade<Laboratory> {
 	return em.find(Laboratory.class, id);
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+    public List<Laboratory> findRange(int[] range) {
+	return find(false, range[0], range[1]);
+    }
+
     @Override
     public List<Laboratory> findAll() {
-	final Query query = em.createNamedQuery("Laboratory.findAll");
-	return query.getResultList();
+	return find(true, -1, -1);
     }
 
     @SuppressWarnings("unchecked")
-    @Override
-    public List<Laboratory> findRange(int[] range) {
-	final Query query = em.createNamedQuery("Laboratory.findAll");
-	query.setMaxResults(range[1] - range[0]);
-	query.setFirstResult(range[0]);
-	return query.getResultList();
+    public List<Laboratory> find(boolean all, int firstResult, int maxResults) {
+	Query q = em.createNamedQuery("Laboratory.findAll");
+	if (!all) {
+	    q.setMaxResults(maxResults);
+	    q.setFirstResult(firstResult);
+	}
+	return q.getResultList();
     }
 
     @Override

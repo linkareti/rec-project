@@ -57,7 +57,6 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
     public Role getSelected() {
 	if (current == null) {
 	    current = new Role();
-	    selectedItemIndex = -1;
 	}
 	return current;
     }
@@ -65,7 +64,6 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
     @Override
     public final String prepareCreate() {
 	current = new Role();
-	selectedItemIndex = -1;
 	return CREATE;
     }
 

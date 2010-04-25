@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
 
 <ui:composition template="/protected/backoffice.xhtml">
 	<ui:define name="title">
@@ -14,63 +15,40 @@
 			<h:outputText escape="false" value="#{bundle['info.emptyList']}"
 				rendered="#{experimentController.items.rowCount == 0}" />
 			<h:panelGroup rendered="#{experimentController.items.rowCount > 0}">
-				<h:outputText
-					value="#{experimentController.pagination.pageFirstItem + 1}..#{experimentController.pagination.pageLastItem + 1}/#{experimentController.pagination.itemsCount}" />&nbsp;
-                    <h:commandLink
-					action="#{experimentController.previous}"
-					value="#{bundle['operation.previous']} #{experimentController.pagination.pageSize}"
-					rendered="#{experimentController.pagination.hasPreviousPage}" />&nbsp;
-                    <h:commandLink action="#{experimentController.next}"
-					value="#{bundle['operation.next']} #{experimentController.pagination.pageSize}"
-					rendered="#{experimentController.pagination.hasNextPage}" />&nbsp;
-                    <h:dataTable value="#{experimentController.items}"
-					var="item" border="0" cellpadding="2" cellspacing="0"
-					rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
-					style="border:solid 1px">
-					<h:column>
+				<p:dataTable var="item" value="#{experimentController.items}"
+					selection="#{experimentController.current}" paginator="true"
+					rows="10" selectionMode="single" dynamic="false" update="display"
+					firstPageLinkLabel="#{bundle['label.firstPage']}"
+					lastPageLinkLabel="#{bundle['label.lastPage']}"
+					nextPageLinkLabel="#{bundle['label.nextPage']}"
+					previousPageLinkLabel="#{bundle['label.previousPage']}"
+					scrollable="true">
+					<!-- onselectComplete="dialog.show()" -->
+
+					<p:column width="200" sortBy="#{item.name}" filterBy="#{item.name}">
 						<f:facet name="header">
 							<h:outputText value="#{bundle['experiment.name']}" />
 						</f:facet>
 						<h:outputText value="#{item.name}" />
-					</h:column>
-					<h:column>
+					</p:column>
+
+					<p:column width="200" sortBy="#{item.description}"
+						filterBy="#{item.description}">
 						<f:facet name="header">
 							<h:outputText value="#{bundle['experiment.description']}" />
 						</f:facet>
 						<h:outputText value="#{item.description}" />
-					</h:column>
-					<h:column>
+					</p:column>
+
+					<p:column width="200" sortBy="#{item.laboratory}"
+						filterBy="#{item.laboratory}">
 						<f:facet name="header">
 							<h:outputText value="#{bundle['experiment.laboratory']}" />
 						</f:facet>
 						<h:outputText value="#{item.laboratory}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle['experiment.state.label']}" />
-						</f:facet>
-						<h:outputText value="#{item.state.label}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle['experiment.state.helpMessage']}" />
-						</f:facet>
-						<h:outputText value="#{item.state.helpMessage}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle['experiment.state.url']}" />
-						</f:facet>
-						<h:outputText value="#{item.state.url}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle['experiment.state.isActive']}" />
-						</f:facet>
-						<h:selectBooleanCheckbox disabled="true"
-							value="#{item.state.active}" />
-					</h:column>
-					<h:column>
+					</p:column>
+
+					<p:column width="150" resizable="true">
 						<f:facet name="header">
 							<h:outputText value="&nbsp;" />
 						</f:facet>
@@ -82,10 +60,10 @@
 						<h:outputText value=" " />
 						<h:commandLink action="#{experimentController.destroy}"
 							value="#{bundle['operation.remove']}" />
-					</h:column>
-				</h:dataTable>
+					</p:column>
+
+				</p:dataTable>
 			</h:panelGroup>
-			<br />
 			<h:commandLink action="#{experimentController.prepareCreate}"
 				value="#{bundle['operation.create']}" />
 		</h:form>

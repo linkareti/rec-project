@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
 
 <ui:composition template="/template.xhtml">
 	<ui:define name="title">
@@ -15,65 +16,49 @@
 				rendered="#{externalCourseController.items.rowCount == 0}" />
 			<h:panelGroup
 				rendered="#{externalCourseController.items.rowCount > 0}">
-				<h:outputText
-					value="#{externalCourseController.pagination.pageFirstItem + 1}..#{externalCourseController.pagination.pageLastItem + 1}/#{externalCourseController.pagination.itemsCount}" />&nbsp;
-                    <h:commandLink
-					action="#{externalCourseController.previous}"
-					value="#{bundle['operation.previous']} #{externalCourseController.pagination.pageSize}"
-					rendered="#{externalCourseController.pagination.hasPreviousPage}" />&nbsp;
-                    <h:commandLink
-					action="#{externalCourseController.next}"
-					value="#{bundle['operation.next']} #{externalCourseController.pagination.pageSize}"
-					rendered="#{externalCourseController.pagination.hasNextPage}" />&nbsp;
-                    <h:dataTable
-					value="#{externalCourseController.items}" var="item" border="0"
-					cellpadding="2" cellspacing="0"
-					rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
-					style="border:solid 1px">
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{bundle['domainObject.id']}" />
-						</f:facet>
-						<h:outputText value="#{item.id}" />
-					</h:column>
-					<h:column>
+
+				<p:dataTable var="item" value="#{externalCourseController.items}"
+					selection="#{externalCourseController.current}" paginator="true"
+					rows="10" selectionMode="single" dynamic="false" update="display"
+					firstPageLinkLabel="#{bundle['label.firstPage']}"
+					lastPageLinkLabel="#{bundle['label.lastPage']}"
+					nextPageLinkLabel="#{bundle['label.nextPage']}"
+					previousPageLinkLabel="#{bundle['label.previousPage']}"
+					scrollable="true">
+
+					<p:column width="200" sortBy="#{item.shortname}"
+						filterBy="#{item.shortname}">
 						<f:facet name="header">
 							<h:outputText value="#{bundle['externalCourse.shortname']}" />
 						</f:facet>
 						<h:outputText value="#{item.shortname}" />
-					</h:column>
-					<h:column>
+					</p:column>
+
+					<p:column width="200" sortBy="#{item.fullname}"
+						filterBy="#{item.fullname}">
 						<f:facet name="header">
 							<h:outputText value="#{bundle['externalCourse.fullname']}" />
 						</f:facet>
 						<h:outputText value="#{item.fullname}" />
-					</h:column>
-					<h:column>
+					</p:column>
+
+					<p:column width="150" resizable="true">
 						<f:facet name="header">
 							<h:outputText value="&nbsp;" />
 						</f:facet>
 						<h:commandLink action="#{externalCourseController.prepareView}"
 							value="#{bundle['operation.view']}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="&nbsp;" />
-						</f:facet>
+						<h:outputText value=" " />
 						<h:commandLink
-							action="#{reservationController.prepareCreateExternal}"
+							action="#{externalCourseController.prepareCreateExternal}"
 							value="#{bundle['operation.makeReservation']}">
 							<f:param name="externalCourse" value="#{item.shortname}" />
 						</h:commandLink>
-					</h:column>
-				</h:dataTable>
+					</p:column>
+
+				</p:dataTable>
+
 			</h:panelGroup>
-			<br />
-			<h:commandLink value="#{bundle['menu.backoffice']}"
-				action="/protected/backoffice" immediate="true" />
-			<br />
-			<br />
-			<h:commandLink value="#{bundle['menu.index']}" action="/index"
-				immediate="true" />
 		</h:form>
 	</ui:define>
 </ui:composition>

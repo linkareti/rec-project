@@ -43,18 +43,23 @@ public class GroupFacade extends Facade<Group> {
     }
 
     @Override
-    public List<Group> findAll() {
-	final Query query = em.createNamedQuery("Group.findAll");
-	return query.getResultList();
+    public List<Group> findRange(int[] range) {
+	return find(false, range[0], range[1]);
     }
 
     @Override
-    public List<Group> findRange(int[] range) {
-	final Query query = em.createNamedQuery("Group.findAll");
-	query.setMaxResults(range[1] - range[0]);
-	query.setFirstResult(range[0]);
-	final List<Group> result = query.getResultList();
-	return result;
+    public List<Group> findAll() {
+	return find(true, -1, -1);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Group> find(boolean all, int firstResult, int maxResults) {
+	Query q = em.createNamedQuery("Group.findAll");
+	if (!all) {
+	    q.setMaxResults(maxResults);
+	    q.setFirstResult(firstResult);
+	}
+	return q.getResultList();
     }
 
     @Override

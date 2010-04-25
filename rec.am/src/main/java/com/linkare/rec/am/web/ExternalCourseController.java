@@ -31,7 +31,6 @@ public class ExternalCourseController extends AbstractController<ExternalCourse,
     public final ExternalCourse getSelected() {
 	if (current == null) {
 	    current = new ExternalCourse();
-	    selectedItemIndex = -1;
 	}
 	return current;
     }
@@ -66,16 +65,6 @@ public class ExternalCourseController extends AbstractController<ExternalCourse,
 
     protected void performDestroy() {
 	throw new UnsupportedOperationException("external.courses.performDestroy.not.available");
-    }
-
-    @Override
-    public String next() {
-	throw new UnsupportedOperationException("external.courses.next.not.available");
-    }
-
-    @Override
-    public String previous() {
-	throw new UnsupportedOperationException("external.courses.previous.not.available");
     }
 
     @Override

@@ -32,20 +32,24 @@ public class ExperimentFacade extends Facade<Experiment> {
 	return em.find(Experiment.class, id);
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+    public List<Experiment> findRange(int[] range) {
+	return find(false, range[0], range[1]);
+    }
+
     @Override
     public List<Experiment> findAll() {
-	final Query query = em.createNamedQuery("Experiment.findAll");
-	return query.getResultList();
+	return find(true, -1, -1);
     }
 
     @SuppressWarnings("unchecked")
-    @Override
-    public List<Experiment> findRange(int[] range) {
-	final Query query = em.createNamedQuery("Experiment.findAll");
-	query.setMaxResults(range[1] - range[0]);
-	query.setFirstResult(range[0]);
-	return query.getResultList();
+    public List<Experiment> find(boolean all, int firstResult, int maxResults) {
+	Query q = em.createNamedQuery("Experiment.findAll");
+	if (!all) {
+	    q.setMaxResults(maxResults);
+	    q.setFirstResult(firstResult);
+	}
+	return q.getResultList();
     }
 
     @Override

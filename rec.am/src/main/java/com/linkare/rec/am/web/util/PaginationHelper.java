@@ -1,27 +1,46 @@
 package com.linkare.rec.am.web.util;
 
-import javax.faces.model.DataModel;
+import java.util.List;
+
+import org.primefaces.model.LazyDataModel;
 
 import com.linkare.commons.jpa.Identifiable;
+import com.linkare.rec.am.model.Facade;
 
-public abstract class PaginationHelper<Entity extends Identifiable> {
+public class PaginationHelper<Entity extends Identifiable<?>, EntityFacade extends Facade<Entity>> {
 
     private int pageSize;
+
     private int page;
 
-    public PaginationHelper(int pageSize) {
+    private EntityFacade facade;
+
+    public PaginationHelper(final EntityFacade facade, int pageSize) {
+	this.facade = facade;
 	this.pageSize = pageSize;
     }
 
-    public abstract int getItemsCount();
+    public int getItemsCount() {
+	return facade.count();
+    }
 
-    public abstract DataModel<Entity> createPageDataModel();
+    public LazyDataModel<Entity> createPageDataModel() {
+	return new LazyDataModel<Entity>() {
+
+	    private static final long serialVersionUID = 1L;
+
+	    @Override
+	    public List<Entity> fetchLazyData(int first, int pageSize) {
+		return facade.findRange(new int[] { getPageFirstItem(), getPageSize() });
+	    }
+	};
+    }
 
     public final int getPageFirstItem() {
 	return page * pageSize;
     }
 
-    public final int getPageLastItem() {
+    public int getPageLastItem() {
 	int i = getPageFirstItem() + pageSize - 1;
 	int count = getItemsCount() - 1;
 	if (i > count) {
@@ -33,28 +52,42 @@ public abstract class PaginationHelper<Entity extends Identifiable> {
 	return i;
     }
 
-    public final boolean isHasNextPage() {
+    public boolean getHasNextPage() {
 	return (page + 1) * pageSize + 1 <= getItemsCount();
     }
 
-    public final void nextPage() {
-	if (isHasNextPage()) {
+    public void nextPage() {
+	if (getHasNextPage()) {
 	    page++;
 	}
     }
 
-    public final boolean isHasPreviousPage() {
+    public boolean getHasPreviousPage() {
 	return page > 0;
     }
 
-    public final void previousPage() {
-	if (isHasPreviousPage()) {
+    public void previousPage() {
+	if (getHasPreviousPage()) {
 	    page--;
 	}
     }
 
-    public final int getPageSize() {
+    public int getPageSize() {
 	return pageSize;
     }
 
+    /**
+     * @return the page
+     */
+    public int getPage() {
+	return page;
+    }
+
+    /**
+     * @param page
+     *            the page to set
+     */
+    public void setPage(int page) {
+	this.page = page;
+    }
 }

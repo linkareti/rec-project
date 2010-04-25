@@ -41,21 +41,24 @@ public class RoleFacade extends Facade<Role> {
 	return role;
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+    public List<Role> findRange(int[] range) {
+	return find(false, range[0], range[1]);
+    }
+
     @Override
     public List<Role> findAll() {
-	final Query query = em.createNamedQuery("Role.findAll");
-	return query.getResultList();
+	return find(true, -1, -1);
     }
 
     @SuppressWarnings("unchecked")
-    @Override
-    public List<Role> findRange(int[] range) {
-	final Query query = em.createNamedQuery("Role.findAll");
-	query.setMaxResults(range[1] - range[0]);
-	query.setFirstResult(range[0]);
-	final List<Role> result = query.getResultList();
-	return result;
+    public List<Role> find(boolean all, int firstResult, int maxResults) {
+	Query q = em.createNamedQuery("Role.findAll");
+	if (!all) {
+	    q.setMaxResults(maxResults);
+	    q.setFirstResult(firstResult);
+	}
+	return q.getResultList();
     }
 
     @Override

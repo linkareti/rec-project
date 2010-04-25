@@ -29,7 +29,6 @@ public class UserController extends AbstractController<User, UserFacade> {
     public final User getSelected() {
 	if (current == null) {
 	    current = new User();
-	    selectedItemIndex = -1;
 	}
 	return current;
     }
@@ -42,7 +41,6 @@ public class UserController extends AbstractController<User, UserFacade> {
     @Override
     public final String prepareCreate() {
 	current = new User();
-	selectedItemIndex = -1;
 	return CREATE;
     }
 

@@ -11,7 +11,7 @@
 		value="#{groupController.selected.idInternal}" />
 	<h:inputHidden id="version" value="#{groupController.selected.version}" />
 	<h:inputHidden id="current" value="#{groupController.current}"
-		converter="groupConverter" />
+		converter="groupConverter" rendered="#{operation != 'create'}" />
 	<h:panelGrid columns="2">
 		<h:outputLabel value="#{bundle['group.name']}" for="name" />
 		<h:inputText id="name" value="#{groupController.selected.name}"

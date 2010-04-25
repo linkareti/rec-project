@@ -21,6 +21,14 @@ public class LaboratoryController extends AbstractController<Laboratory, Laborat
 
     private static final long serialVersionUID = 1L;
 
+    public Laboratory getLaboratory() {
+	return current;
+    }
+
+    public void setLaboratory(final Laboratory laboratory) {
+	current = laboratory;
+    }
+
     @EJB
     private LaboratoryFacade ejbFacade;
 
@@ -28,7 +36,6 @@ public class LaboratoryController extends AbstractController<Laboratory, Laborat
     public final Laboratory getSelected() {
 	if (current == null) {
 	    current = new Laboratory();
-	    selectedItemIndex = -1;
 	}
 	return current;
     }
@@ -41,7 +48,6 @@ public class LaboratoryController extends AbstractController<Laboratory, Laborat
     @Override
     public final String prepareCreate() {
 	current = new Laboratory();
-	selectedItemIndex = -1;
 	return CREATE;
     }
 

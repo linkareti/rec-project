@@ -26,15 +26,13 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
 
     private static final long serialVersionUID = 1L;
 
-    protected int selectedItemIndex;
-
-    protected PaginationHelper<Entity> pagination;
+    protected PaginationHelper<Entity, EntityFacade> pagination;
 
     protected Entity current;
 
     protected DataModel<Entity> items = null;
 
-    public static final int DEFAULT_PAGE_SIZE = 10;
+    public static final int DEFAULT_PAGE_SIZE = 20;
 
     public static final String BUNDLE = "/Bundle";
 
@@ -56,20 +54,9 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
 
     public abstract String update();
 
-    public PaginationHelper<Entity> getPagination() {
+    public PaginationHelper<Entity, EntityFacade> getPagination() {
 	if (pagination == null) {
-	    pagination = new PaginationHelper<Entity>(DEFAULT_PAGE_SIZE) {
-
-		@Override
-		public int getItemsCount() {
-		    return getFacade().count();
-		}
-
-		@Override
-		public DataModel<Entity> createPageDataModel() {
-		    return new ListDataModel<Entity>(getFacade().findRange(new int[] { getPageFirstItem(), getPageFirstItem() + getPageSize() }));
-		}
-	    };
+	    pagination = new PaginationHelper<Entity, EntityFacade>(getFacade(), DEFAULT_PAGE_SIZE);
 	}
 	return pagination;
     }
@@ -85,12 +72,7 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
     }
 
     private void initCurrent() {
-	if (current != null) {
-	    selectedItemIndex = 0;
-	} else {
-	    current = getFacade().find(getItems().getRowData().id());
-	    selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-	}
+	current = getFacade().find(((Entity) getItems().getRowData()).id());
     }
 
     public String prepareEdit() {
@@ -101,34 +83,15 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
     public String destroyAndView() {
 	performDestroy();
 	recreateModel();
-	updateCurrentItem();
-	if (selectedItemIndex >= 0) {
-	    return VIEW;
-	}
-	recreateModel();
 	return LIST;
     }
 
     protected abstract void performDestroy();
 
-    protected void updateCurrentItem() {
-	int count = getFacade().count();
-	if (selectedItemIndex >= count) {
-	    // selected index cannot be bigger than number of items:
-	    selectedItemIndex = count - 1;
-	    // go to previous page if last page disappeared:
-	    if (pagination.getPageFirstItem() >= count) {
-		pagination.previousPage();
-	    }
-	}
-	if (selectedItemIndex >= 0) {
-	    current = getFacade().findRange(new int[] { selectedItemIndex, selectedItemIndex + 1 }).get(0);
-	}
-    }
-
     public DataModel<Entity> getItems() {
 	if (items == null) {
-	    items = getPagination().createPageDataModel();
+	    // No need to fetch only a small subset since we deal with a small amount of data
+	    items = new ListDataModel<Entity>(getFacade().findAll());
 	}
 	return items;
     }
@@ -138,21 +101,8 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
     }
 
     public String destroy() {
-	current = (Entity) getItems().getRowData();
-	selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+	current = getItems().getRowData();
 	performDestroy();
-	recreateModel();
-	return LIST;
-    }
-
-    public String next() {
-	getPagination().nextPage();
-	recreateModel();
-	return LIST;
-    }
-
-    public String previous() {
-	getPagination().previousPage();
 	recreateModel();
 	return LIST;
     }
@@ -167,5 +117,20 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
 
     public SelectItem[] getItemsAvailableSelectOne() {
 	return JsfUtil.getSelectItems(getFacade().findAll(), true);
+    }
+
+    /**
+     * @return the current
+     */
+    public Entity getCurrent() {
+	return current;
+    }
+
+    /**
+     * @param current
+     *            the current to set
+     */
+    public void setCurrent(Entity current) {
+	this.current = current;
     }
 }

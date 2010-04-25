@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import com.linkare.commons.jpa.exceptions.DomainException;
@@ -41,35 +42,43 @@ public class UserFacade extends Facade<User> {
 
     @Override
     public User find(Object id) {
-	User user = em.find(User.class, id);
-	if (user != null) {
+	try {
+	    User user = em.find(User.class, id);
 	    user.getAllParentGroups();
 	    return user;
+	} catch (NoResultException e) {
+	    return null;
 	}
-	return null;
     }
 
     public User findByUsername(final String username) {
-	User user = (User) em.createNamedQuery("User.findByUsername").setParameter("username", username).getSingleResult();
-	if (user != null) {
+	try {
+	    User user = (User) em.createNamedQuery("User.findByUsername").setParameter("username", username).getSingleResult();
 	    user.getAllParentGroups();
 	    return user;
+	} catch (NoResultException e) {
+	    return null;
 	}
-	return null;
-    }
-
-    @Override
-    public List<User> findAll() {
-	final Query query = em.createNamedQuery("User.findAll");
-	return query.getResultList();
     }
 
     @Override
     public List<User> findRange(int[] range) {
-	final Query query = em.createNamedQuery("User.findAll");
-	query.setMaxResults(range[1] - range[0]);
-	query.setFirstResult(range[0]);
-	return query.getResultList();
+	return find(false, range[0], range[1]);
+    }
+
+    @Override
+    public List<User> findAll() {
+	return find(true, -1, -1);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<User> find(boolean all, int firstResult, int maxResults) {
+	Query q = em.createNamedQuery("User.findAll");
+	if (!all) {
+	    q.setMaxResults(maxResults);
+	    q.setFirstResult(firstResult);
+	}
+	return q.getResultList();
     }
 
     @Override

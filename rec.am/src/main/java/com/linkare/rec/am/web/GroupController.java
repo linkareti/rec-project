@@ -57,7 +57,6 @@ public class GroupController extends AbstractController<Group, GroupFacade> {
     public Group getSelected() {
 	if (current == null) {
 	    current = new Group();
-	    selectedItemIndex = -1;
 	}
 	return current;
     }
@@ -65,7 +64,6 @@ public class GroupController extends AbstractController<Group, GroupFacade> {
     @Override
     public final String prepareCreate() {
 	current = new Group();
-	selectedItemIndex = -1;
 	return CREATE;
     }
 

@@ -54,8 +54,6 @@ public class ScheduleController implements Serializable {
 
     private ScheduleModel eventModel;
 
-    private static final int MINUTE_STEP = 30;
-
     private Reservation event = new Reservation();
 
     @EJB

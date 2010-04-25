@@ -27,7 +27,6 @@ public class ExperimentController extends AbstractController<Experiment, Experim
     public final Experiment getSelected() {
 	if (current == null) {
 	    current = new Experiment();
-	    selectedItemIndex = -1;
 	}
 	return current;
     }
@@ -40,7 +39,6 @@ public class ExperimentController extends AbstractController<Experiment, Experim
     @Override
     public final String prepareCreate() {
 	current = new Experiment();
-	selectedItemIndex = -1;
 	return CREATE;
     }
 
