@@ -4,78 +4,75 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.Query;
 
+import com.linkare.commons.dao.security.RoleDAO;
 import com.linkare.commons.jpa.security.Role;
 import com.linkare.commons.jpa.security.User;
 
 /**
  * 
- * @author Joao
+ * @author Paulo Zenida - Linkare TI
+ * 
  */
 @Stateless
 public class RoleFacade extends Facade<Role> {
+
+    private RoleDAO roleDAO;
+
+    private RoleDAO getOrCreateDAO() {
+	if (roleDAO == null) {
+	    roleDAO = new RoleDAO(em);
+	}
+	return roleDAO;
+    }
 
     @EJB
     private UserFacade userFacade;
 
     @Override
     public void create(Role role) {
-	em.persist(role);
+	getOrCreateDAO().create(role);
     }
 
     @Override
     public void edit(Role role) {
-	em.merge(role);
+	getOrCreateDAO().edit(role);
     }
 
     @Override
     public void remove(Role role) {
-	em.remove(em.merge(role));
+	getOrCreateDAO().remove(role);
     }
 
     @Override
     public Role find(Object id) {
-	Role role = em.find(Role.class, id);
-	role.getAllChildren();
-	return role;
+	return getOrCreateDAO().find(id);
     }
 
     @Override
     public List<Role> findRange(int[] range) {
-	return find(false, range[0], range[1]);
+	return getOrCreateDAO().findRange(range);
     }
 
     @Override
     public List<Role> findAll() {
-	return find(true, -1, -1);
+	return getOrCreateDAO().findAll();
     }
 
-    @SuppressWarnings("unchecked")
     public List<Role> find(boolean all, int firstResult, int maxResults) {
-	Query q = em.createNamedQuery("Role.findAll");
-	if (!all) {
-	    q.setMaxResults(maxResults);
-	    q.setFirstResult(firstResult);
-	}
-	return q.getResultList();
+	return getOrCreateDAO().find(all, firstResult, maxResults);
     }
 
     @Override
     public int count() {
-	final Query query = em.createNamedQuery("Role.countAll");
-	return ((Long) query.getSingleResult()).intValue();
+	return getOrCreateDAO().count();
     }
 
     public List<User> getNonMembers(final List<User> members) {
-	final List<User> result = userFacade.findAll();
-	result.removeAll(members);
-	return result;
+	return getOrCreateDAO().getNonMembers(members);
     }
 
     public Role setUsersMembership(final Role role, final List<User> users) {
-	final Role mergedRole = em.merge(role);
-	mergedRole.setChildPrincipalsMembership(users);
-	return mergedRole;
+	return getOrCreateDAO().setUsersMembership(role, users);
     }
 }

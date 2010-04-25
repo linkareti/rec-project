@@ -2,7 +2,6 @@ package com.linkare.rec.am.model;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.linkare.commons.dao.security.GroupDAO;
@@ -11,13 +10,11 @@ import com.linkare.commons.jpa.security.User;
 
 /**
  * 
- * @author Joao
+ * @author Paulo Zenida - Linkare TI
+ * 
  */
 @Stateless
 public class GroupFacade extends Facade<Group> {
-
-    @EJB
-    private UserFacade userFacade;
 
     private GroupDAO groupDAO;
 
