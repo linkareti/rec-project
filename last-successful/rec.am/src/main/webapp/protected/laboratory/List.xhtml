@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="/protected/backoffice.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{bundle['page.laboratory.list.title']}"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+		<h:form styleClass="jsfcrud_list_form">
+			<h:outputText escape="false" value="#{bundle['info.emptyList']}"
+				rendered="#{laboratoryController.items.rowCount == 0}" />
+			<h:panelGroup rendered="#{laboratoryController.items.rowCount > 0}">
+				<p:dataTable var="item" value="#{laboratoryController.items}"
+					selection="#{laboratoryController.current}" paginator="true"
+					rows="10" selectionMode="single" dynamic="false" update="display"
+					firstPageLinkLabel="#{bundle['label.firstPage']}"
+					lastPageLinkLabel="#{bundle['label.lastPage']}"
+					nextPageLinkLabel="#{bundle['label.nextPage']}"
+					previousPageLinkLabel="#{bundle['label.previousPage']}"
+					scrollable="true">
+					<!-- onselectComplete="dialog.show()" -->
+
+					<p:column width="200" sortBy="#{item.name}" filterBy="#{item.name}">
+						<f:facet name="header">
+							<h:outputText value="#{bundle['laboratory.name']}" />
+						</f:facet>
+						<h:outputText value="#{item.name}" />
+					</p:column>
+
+					<p:column width="450" sortBy="#{item.description}"
+						filterBy="#{item.description}">
+						<f:facet name="header">
+							<h:outputText value="#{bundle['laboratory.description']}" />
+						</f:facet>
+						<h:outputText value="#{item.description}" />
+					</p:column>
+
+					<p:column width="150" resizable="true">
+						<f:facet name="header">
+							<h:outputText value="&nbsp;" />
+						</f:facet>
+						<h:commandLink action="#{laboratoryController.prepareView}"
+							value="#{bundle['operation.view']}" />
+						<h:outputText value=" " />
+						<h:commandLink action="#{laboratoryController.prepareEdit}"
+							value="#{bundle['operation.edit']}" />
+						<h:outputText value=" " />
+						<p:commandLink actionListener="#{laboratoryController.destroy}"
+							update="msg">
+							<h:outputText value="#{bundle['operation.remove']}" />
+							<p:confirmDialog yesLabel="#{bundle['label.yes']}"
+								noLabel="#{bundle['label.no']}"
+								message="#{bundle['label.confirmMessage']}"
+								header="#{bundle['label.confirmHeader']}" severity="warn" />
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+				<!-- 
+				<p:dialog header="Detail" widgetVar="dialog" modal="false"
+					fixedCenter="true" draggable="false" width="350px">
+					<h:panelGrid id="display" columns="2">
+						<h:outputLabel value="#{bundle['laboratory.name']}" for="name" />
+						<h:outputText id="name"
+							value="#{laboratoryController.laboratory.name}" />
+						<h:outputLabel value="#{bundle['laboratory.description']}"
+							for="description" />
+						<h:outputText id="description"
+							value="#{laboratoryController.laboratory.description}" />
+						<h:outputLabel value="#{bundle['laboratory.state.label']}"
+							for="stateLabel" />
+						<h:outputText id="stateLabel"
+							value="#{laboratoryController.laboratory.state.label}" />
+						<h:outputLabel value="#{bundle['laboratory.state.helpMessage']}"
+							for="stateHelpMessage" />
+						<h:outputText id="stateHelpMessage"
+							value="#{laboratoryController.laboratory.state.helpMessage}" />
+						<h:outputLabel value="#{bundle['laboratory.state.url']}"
+							for="stateURL" />
+						<h:outputText id="stateURL"
+							value="#{laboratoryController.laboratory.state.url}" />
+						<h:outputLabel value="#{bundle['laboratory.state.isActive']}"
+							for="stateActive" />
+						<h:outputText id="stateActive"
+							value="#{laboratoryController.laboratory.state.active}" />
+					</h:panelGrid>
+				</p:dialog>
+ -->
+			</h:panelGroup>
+			<h:commandLink action="#{laboratoryController.prepareCreate}"
+				value="#{bundle['operation.create']}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>
