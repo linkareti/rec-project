@@ -1,8 +1,8 @@
 package com.linkare.rec.am.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.linkare.commons.dao.security.RoleDAO;
@@ -25,9 +25,6 @@ public class RoleFacade extends Facade<Role> {
 	}
 	return roleDAO;
     }
-
-    @EJB
-    private UserFacade userFacade;
 
     @Override
     public void create(Role role) {
@@ -73,6 +70,16 @@ public class RoleFacade extends Facade<Role> {
     }
 
     public Role setUsersMembership(final Role role, final List<User> users) {
-	return getOrCreateDAO().setUsersMembership(role, users);
+	return getOrCreateDAO().setUsersMembership(role, mergeUsers(users));
+    }
+
+    private List<User> mergeUsers(final List<User> users) {
+	final List<User> mergedUsers = new ArrayList<User>();
+	for (User user : users) {
+	    final User mergedUser = em.merge(user);
+	    mergedUser.getParents();
+	    mergedUsers.add(mergedUser);
+	}
+	return mergedUsers;
     }
 }

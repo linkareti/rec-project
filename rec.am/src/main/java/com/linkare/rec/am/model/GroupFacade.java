@@ -1,5 +1,6 @@
 package com.linkare.rec.am.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -65,6 +66,16 @@ public class GroupFacade extends Facade<Group> {
     }
 
     public Group setUsersMembership(final Group group, final List<User> users) {
-	return getOrCreateDAO().setUsersMembership(group, users);
+	return getOrCreateDAO().setUsersMembership(group, mergeUsers(users));
+    }
+
+    private List<User> mergeUsers(final List<User> users) {
+	final List<User> mergedUsers = new ArrayList<User>();
+	for (User user : users) {
+	    final User mergedUser = em.merge(user);
+	    mergedUser.getParents();
+	    mergedUsers.add(mergedUser);
+	}
+	return mergedUsers;
     }
 }

@@ -397,7 +397,8 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 	return getMoodleRecord() != null;
     }
 
-    public void remove() {
+    @Override
+    public boolean delete() {
 	if (getHasUser()) {
 	    setUser(null);
 	}
@@ -407,5 +408,6 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 	if (getHasGroup()) {
 	    setGroup(null);
 	}
+	return true;
     }
 }

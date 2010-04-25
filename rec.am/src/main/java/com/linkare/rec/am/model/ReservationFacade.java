@@ -33,7 +33,7 @@ public class ReservationFacade extends Facade<Reservation> {
     @Override
     public void remove(Reservation reservation) {
 	reservation = em.merge(reservation);
-	reservation.remove();
+	reservation.delete();
 	em.remove(reservation);
     }
 
