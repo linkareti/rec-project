@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListLaboratoryTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListLaboratoryEmpty}" rendered="#{laboratoryController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{laboratoryController.items.rowCount > 0}">
+                    <h:outputText value="#{laboratoryController.pagination.pageFirstItem + 1}..#{laboratoryController.pagination.pageLastItem + 1}/#{laboratoryController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{laboratoryController.previous}" value="#{bundle.Previous} #{laboratoryController.pagination.pageSize}" rendered="#{laboratoryController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{laboratoryController.next}" value="#{bundle.Next} #{laboratoryController.pagination.pageSize}" rendered="#{laboratoryController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{laboratoryController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLaboratoryTitle_name}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLaboratoryTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.description}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLaboratoryTitle_stateLabel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.state.label}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLaboratoryTitle_stateHelpMessage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.state.helpMessage}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLaboratoryTitle_stateURL}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.state.url}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLaboratoryTitle_stateActive}"/>
+                            </f:facet>
+                            <h:selectBooleanCheckbox disabled="true" value="#{item.state.active}" style="align:center"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{laboratoryController.prepareView}" value="#{bundle.ListLaboratoryViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{laboratoryController.prepareEdit}" value="#{bundle.ListLaboratoryEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{laboratoryController.destroy}" value="#{bundle.ListLaboratoryDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{laboratoryController.prepareCreate}" value="#{bundle.ListLaboratoryCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.BackOfficeLink}" action="/protected/backoffice" immediate="true" />
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListLaboratoryIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
