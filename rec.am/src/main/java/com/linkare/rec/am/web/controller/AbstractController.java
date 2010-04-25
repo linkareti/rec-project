@@ -6,15 +6,17 @@ package com.linkare.rec.am.web.controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 import com.linkare.commons.jpa.Identifiable;
+import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.rec.am.model.Facade;
+import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JsfUtil;
-import com.linkare.rec.am.web.util.PaginationHelper;
 
 /**
  * 
@@ -26,23 +28,9 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
 
     private static final long serialVersionUID = 1L;
 
-    protected PaginationHelper<Entity, EntityFacade> pagination;
-
     protected Entity current;
 
     protected DataModel<Entity> items = null;
-
-    public static final int DEFAULT_PAGE_SIZE = 20;
-
-    public static final String BUNDLE = "/Bundle";
-
-    public static final String VIEW = "View";
-
-    public static final String CREATE = "Create";
-
-    public static final String LIST = "List";
-
-    public static final String EDIT = "Edit";
 
     public abstract Entity getSelected();
 
@@ -50,25 +38,40 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
 
     public abstract String prepareCreate();
 
-    public abstract String create();
-
-    public abstract String update();
-
-    public PaginationHelper<Entity, EntityFacade> getPagination() {
-	if (pagination == null) {
-	    pagination = new PaginationHelper<Entity, EntityFacade>(getFacade(), DEFAULT_PAGE_SIZE);
+    public String create() {
+	try {
+	    getFacade().create(current);
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_CREATE_KEY));
+	    return prepareCreate();
+	} catch (Exception e) {
+	    if (e.getCause() instanceof DomainException) {
+		JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
+	    } else {
+		JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+	    }
+	    return null;
 	}
-	return pagination;
+    }
+
+    public String update() {
+	try {
+	    getFacade().edit(current);
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_UPDATE_KEY));
+	    return ConstantUtils.VIEW;
+	} catch (Exception e) {
+	    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+	    return null;
+	}
     }
 
     public String prepareList() {
 	recreateModel();
-	return LIST;
+	return ConstantUtils.LIST;
     }
 
     public String prepareView() {
 	initCurrent();
-	return VIEW;
+	return ConstantUtils.VIEW;
     }
 
     private void initCurrent() {
@@ -77,16 +80,23 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
 
     public String prepareEdit() {
 	initCurrent();
-	return EDIT;
+	return ConstantUtils.EDIT;
     }
 
     public String destroyAndView() {
 	performDestroy();
 	recreateModel();
-	return LIST;
+	return ConstantUtils.LIST;
     }
 
-    protected abstract void performDestroy();
+    protected void performDestroy() {
+	try {
+	    getFacade().remove(current);
+	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_REMOVE_KEY));
+	} catch (Exception e) {
+	    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+	}
+    }
 
     public DataModel<Entity> getItems() {
 	if (items == null) {
@@ -104,7 +114,7 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
 	current = getItems().getRowData();
 	performDestroy();
 	recreateModel();
-	return LIST;
+	return ConstantUtils.LIST;
     }
 
     public List<Entity> getAll() {

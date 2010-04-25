@@ -39,34 +39,31 @@ public final class JsfUtil {
 	return items;
     }
 
-    public static void addErrorMessage(Exception ex, String defaultMsg) {
-	String msg = ex.getLocalizedMessage();
-	if (msg != null && msg.length() > 0) {
-	    addErrorMessage(msg);
-	} else {
-	    addErrorMessage(defaultMsg);
-	}
-    }
-
-    public static void addErrorMessages(List<String> messages) {
-	for (String message : messages) {
-	    addErrorMessage(message);
-	}
-    }
-
-    public static void addErrorMessage(String msg) {
-	FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
+    public static void addErrorMessage(final String summary, final String detail) {
+	FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
 	FacesContext.getCurrentInstance().addMessage(null, facesMsg);
     }
 
-    public static void addWarningMessage(String msg) {
-	FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, msg, msg);
+    public static void addErrorMessage(String detail) {
+	addErrorMessage(ConstantUtils.LABEL_ERROR, detail);
+    }
+
+    public static void addWarningMessage(final String summary, final String detail) {
+	FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, summary, detail);
 	FacesContext.getCurrentInstance().addMessage("warnInfo", facesMsg);
     }
 
-    public static void addSuccessMessage(String msg) {
-	FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg);
+    public static void addWarningMessage(String detail) {
+	addWarningMessage(ConstantUtils.LABEL_WARN, detail);
+    }
+
+    public static void addSuccessMessage(String summary, String detail) {
+	FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
 	FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
+    }
+
+    public static void addSuccessMessage(String detail) {
+	addSuccessMessage(ConstantUtils.LABEL_INFO, detail);
     }
 
     public static String getRequestParameter(String key) {

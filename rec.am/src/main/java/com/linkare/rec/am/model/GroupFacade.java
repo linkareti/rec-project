@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.Query;
 
+import com.linkare.commons.dao.security.GroupDAO;
 import com.linkare.commons.jpa.security.Group;
 import com.linkare.commons.jpa.security.User;
 
@@ -19,64 +19,55 @@ public class GroupFacade extends Facade<Group> {
     @EJB
     private UserFacade userFacade;
 
+    private GroupDAO groupDAO;
+
+    private GroupDAO getOrCreateDAO() {
+	if (groupDAO == null) {
+	    groupDAO = new GroupDAO(em);
+	}
+	return groupDAO;
+    }
+
     @Override
     public void create(Group group) {
-	em.persist(group);
+	getOrCreateDAO().create(group);
     }
 
     @Override
     public void edit(Group group) {
-	em.merge(group);
+	getOrCreateDAO().edit(group);
     }
 
     @Override
     public void remove(Group group) {
-	em.remove(em.merge(group));
+	getOrCreateDAO().remove(group);
     }
 
     @Override
     public Group find(Object id) {
-	Group group = em.find(Group.class, id);
-	// FIXME: Remove this dummy invocation....
-	group.getAllUsers();
-	return group;
+	return getOrCreateDAO().find(id);
     }
 
     @Override
     public List<Group> findRange(int[] range) {
-	return find(false, range[0], range[1]);
+	return getOrCreateDAO().findRange(range);
     }
 
     @Override
     public List<Group> findAll() {
-	return find(true, -1, -1);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Group> find(boolean all, int firstResult, int maxResults) {
-	Query q = em.createNamedQuery("Group.findAll");
-	if (!all) {
-	    q.setMaxResults(maxResults);
-	    q.setFirstResult(firstResult);
-	}
-	return q.getResultList();
+	return getOrCreateDAO().findAll();
     }
 
     @Override
     public int count() {
-	final Query query = em.createNamedQuery("Group.countAll");
-	return ((Long) query.getSingleResult()).intValue();
+	return getOrCreateDAO().count();
     }
 
     public List<User> getNonMembers(final List<User> members) {
-	final List<User> result = userFacade.findAll();
-	result.removeAll(members);
-	return result;
+	return getOrCreateDAO().getNonMembers(members);
     }
 
     public Group setUsersMembership(final Group group, final List<User> users) {
-	final Group mergedGroup = em.merge(group);
-	mergedGroup.setChildPrincipalsMembership(users);
-	return mergedGroup;
+	return getOrCreateDAO().setUsersMembership(group, users);
     }
 }

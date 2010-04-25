@@ -1,7 +1,5 @@
 package com.linkare.rec.am.web;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,6 +20,7 @@ import com.linkare.commons.jpa.security.User;
 import com.linkare.rec.am.model.RoleFacade;
 import com.linkare.rec.am.model.UserFacade;
 import com.linkare.rec.am.web.controller.AbstractController;
+import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "roleController")
@@ -64,47 +63,7 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
     @Override
     public final String prepareCreate() {
 	current = new Role();
-	return CREATE;
-    }
-
-    @Override
-    public final String create() {
-	try {
-	    getFacade().create(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.create"));
-	    return prepareCreate();
-	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
-
-	    StringWriter sw = new StringWriter();
-	    e.printStackTrace(new PrintWriter(sw));
-	    String stacktrace = sw.toString();
-	    getLogger().severe("Stack Trace: \n" + stacktrace);
-
-	    return null;
-	}
-    }
-
-    @Override
-    public final String update() {
-	try {
-	    getFacade().edit(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.update"));
-	    return VIEW;
-	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
-	    return null;
-	}
-    }
-
-    @Override
-    protected void performDestroy() {
-	try {
-	    getFacade().remove(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.remove"));
-	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
-	}
+	return ConstantUtils.CREATE;
     }
 
     public List<User> getNonMembers() {
@@ -179,7 +138,7 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
 
     public String setUsersMembership() {
 	getFacade().setUsersMembership(getSelected(), getUsers().getTarget());
-	JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.association"));
+	JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.association"));
 	return prepareEdit();
     }
 }

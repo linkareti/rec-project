@@ -1,7 +1,5 @@
 package com.linkare.rec.am.web;
 
-import java.util.ResourceBundle;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -13,7 +11,7 @@ import javax.faces.convert.FacesConverter;
 import com.linkare.rec.am.model.Laboratory;
 import com.linkare.rec.am.model.LaboratoryFacade;
 import com.linkare.rec.am.web.controller.AbstractController;
-import com.linkare.rec.am.web.util.JsfUtil;
+import com.linkare.rec.am.web.util.ConstantUtils;
 
 @ManagedBean(name = "laboratoryController")
 @RequestScoped
@@ -48,41 +46,7 @@ public class LaboratoryController extends AbstractController<Laboratory, Laborat
     @Override
     public final String prepareCreate() {
 	current = new Laboratory();
-	return CREATE;
-    }
-
-    @Override
-    public final String create() {
-	try {
-	    getFacade().create(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.create"));
-	    return prepareCreate();
-	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
-	    return null;
-	}
-    }
-
-    @Override
-    public final String update() {
-	try {
-	    getFacade().edit(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.update"));
-	    return VIEW;
-	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
-	    return null;
-	}
-    }
-
-    @Override
-    protected void performDestroy() {
-	try {
-	    getFacade().remove(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.remove"));
-	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
-	}
+	return ConstantUtils.CREATE;
     }
 
     @FacesConverter(value = "laboratoryConverter", forClass = Laboratory.class)

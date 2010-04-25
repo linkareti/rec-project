@@ -1,7 +1,6 @@
 package com.linkare.rec.am.web;
 
 import java.util.Calendar;
-import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
 import javax.ejb.EJB;
@@ -18,6 +17,7 @@ import com.linkare.rec.am.model.ReservationFacade;
 import com.linkare.rec.am.model.moodle.MoodleRecord;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.moodle.SessionHelper;
+import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "reservationController")
@@ -46,7 +46,7 @@ public class ReservationController extends AbstractController<Reservation, Reser
     @Override
     public final String prepareCreate() {
 	current = new Reservation();
-	return CREATE;
+	return ConstantUtils.CREATE;
     }
 
     public final String prepareCreateExternal() {
@@ -54,20 +54,7 @@ public class ReservationController extends AbstractController<Reservation, Reser
 	final String externalCourse = JsfUtil.getRequestParameter("externalCourse");
 	final String domain = SessionHelper.getLoginDomain();
 	current = new Reservation(externalUser, externalCourse, domain);
-	return CREATE;
-    }
-
-    @Override
-    public final String create() {
-	try {
-	    processEndDateAndEndTimeSlot();
-	    getFacade().create(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.create"));
-	    return prepareCreate();
-	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
-	    return null;
-	}
+	return ConstantUtils.CREATE;
     }
 
     public final void processEndDateAndEndTimeSlot() {
@@ -88,29 +75,6 @@ public class ReservationController extends AbstractController<Reservation, Reser
 
 	current.setEndDate(cal.getTime());
 	current.setEndTimeSlot(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-    }
-
-    @Override
-    public final String update() {
-	try {
-	    processEndDateAndEndTimeSlot();
-	    getFacade().edit(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.update"));
-	    return VIEW;
-	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
-	    return null;
-	}
-    }
-
-    @Override
-    protected void performDestroy() {
-	try {
-	    getFacade().remove(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(BUNDLE).getString("info.remove"));
-	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(BUNDLE).getString("error.persistence"));
-	}
     }
 
     public final SelectItem[] getTimeSlotSelectOne() {

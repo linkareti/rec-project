@@ -13,6 +13,29 @@
 	<ui:define name="menu">
 		<ui:include src="menu.xhtml" />
 	</ui:define>
-	<ui:define name="body" />
+	<ui:define name="body">
+		<p:panel id="skinnedPanel"
+			header="#{bundle['page.index.introduction.header']}"
+			footer="#{bundle['page.index.introduction.footer']}"
+			toggleable="true" closable="false" toggleSpeed="500"
+			styleClass="dark" closeListener="#{panelBean.handleClose}"
+			onCloseUpdate="msg" closeSpeed="2000"
+			toggleListener="#{panelBean.handleToggle}" onToggleUpdate="msg"
+			widgetVar="panel">
+			<h:form>
+				<h:outputText escape="false"
+					value="#{bundle['page.index.introduction.body']}" />
+			</h:form>
+
+			<f:facet name="options">
+				<p:menu>
+					<p:submenu label="#{bundle['menu.settings']}">
+						<p:menuitem value="#{bundle['menu.toggle']}" url="#"
+							icon="/images/update.png" onclick="panel.toggle()" />
+					</p:submenu>
+				</p:menu>
+			</f:facet>
+		</p:panel>
+	</ui:define>
 </ui:composition>
 </html>

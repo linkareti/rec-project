@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.model.UserFacade;
-import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.ex.AuthenticationException;
+import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "authenticationBean")
@@ -34,8 +34,7 @@ public class AuthenticationBean {
 	    getLoginProvider().login((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest(), getUsername(), getPassword(),
 				     getLoginDomain());
 	} catch (AuthenticationException e) {
-	    e.printStackTrace();
-	    JsfUtil.addErrorMessage(e, ResourceBundle.getBundle(AbstractController.BUNDLE).getString("error.login.failed"));
+	    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("error.login.failed"));
 	    return null;
 	}
 	return "index";
