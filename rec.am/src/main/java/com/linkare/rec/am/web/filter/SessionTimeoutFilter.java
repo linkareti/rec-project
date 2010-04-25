@@ -1,8 +1,9 @@
 package com.linkare.rec.am.web.filter;
 
 import java.io.IOException;
-import javax.servlet.Filter;
 import java.util.logging.Logger;
+
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -41,8 +42,6 @@ public class SessionTimeoutFilter implements Filter {
 	    // is session expire control required for this request AND is session invalid?
 	    if (isSessionControlRequiredForThisResource(httpServletRequest) && isSessionInvalid(httpServletRequest)) {
 		String timeoutUrl = httpServletRequest.getContextPath() + "/" + getTimeoutPage();
-		logger.info("session is invalid! redirecting to timeoutpage : " + timeoutUrl);
-
 		httpServletResponse.sendRedirect(timeoutUrl);
 		return;
 	    }
@@ -57,17 +56,12 @@ public class SessionTimeoutFilter implements Filter {
      */
     private boolean isSessionControlRequiredForThisResource(HttpServletRequest httpServletRequest) {
 	String requestPath = httpServletRequest.getRequestURI();
-	logger.info("isSessionControlRequired for:" + requestPath);
 	boolean controlRequired = !requestPath.contains(getTimeoutPage()) && !requestPath.contains(getLoginPage());
-	logger.info("isSessionControlRequired for:" + requestPath + "? " + controlRequired);
-
 	return controlRequired;
     }
 
     private boolean isSessionInvalid(HttpServletRequest httpServletRequest) {
 	boolean sessionInValid = (httpServletRequest.getRequestedSessionId() != null) && !httpServletRequest.isRequestedSessionIdValid();
-	logger.info("isSessionInvalid? " + sessionInValid);
-
 	return sessionInValid;
     }
 
@@ -85,6 +79,5 @@ public class SessionTimeoutFilter implements Filter {
 
     @Override
     public void destroy() {
-	//	throw new UnsupportedOperationException("Not supported yet.");
     }
 }
