@@ -18,7 +18,7 @@ public class Handler extends java.net.URLStreamHandler {
 		if (!url.toExternalForm().startsWith("recresource://"))
 			return null;
 		try {
-			return getClass().getResource(url.toExternalForm().substring("recresource://".length())).openConnection();
+			return getClass().getClassLoader().getResource(url.toExternalForm().substring("recresource://".length())).openConnection();
 
 		} catch (java.io.IOException e) {
 			e.printStackTrace();

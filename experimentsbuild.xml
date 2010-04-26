@@ -224,7 +224,7 @@
 	<macrodef name="run.experiment.client">
 		<attribute name="experiment.name" />
 		<sequential>
-			<java classname="pt.utl.ist.elab.client.@{experiment.name}.ClientMain" fork="true" failonerror="true">
+			<java classname="pt.utl.ist.elab.client.vpend2m.ClientMain" fork="true" failonerror="true">
 				<arg value="-h" />
 				<classpath>
 					<fileset dir="lib/">
@@ -242,16 +242,15 @@
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
-				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
+				<jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" />
 				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
 				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
 				<sysproperty key="openorb.profile" value="${experiment.openorb.profile}" />
-				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />
 				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 				<sysproperty key="openorb.config" value="${openorb.config}" />
-				<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
+				<sysproperty key="ReCBaseUIConfig" value="${rec.base.ui.config.xml}" />
 			</java>
 		</sequential>
 	</macrodef>
