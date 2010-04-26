@@ -40,32 +40,54 @@
 		<ant antfile="elabbuild.xml" dir="." target="build.all" />
 		<ant antfile="experimentsbuild.xml" dir="." target="build.experiments.list" />	
 	</target>
-	
-	<target name="dist.all" depends="build.all" >
-		 <zip destfile="${build.dir}/client.zip">
-		    <zipfileset dir="${client.build.dir}" prefix="client"/>
-		    <zipfileset dir="${common.build.dir}" prefix="client"/>		    
-		  </zip>
-		
-		 <zip destfile="${build.dir}/server.zip">
-		    <zipfileset dir="${hardwareserver.build.dir}" prefix="hardwareserver"/>
-		    <zipfileset dir="${common.build.dir}" prefix="hardwareserver"/>
-			<zipfileset dir="${rec.hardwareserver.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
-			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
-		 	<zipfileset dir="${templates.dir.openorb}" includes="OpenORBHardwareTemplate.xml"  fullpath="hardwareserver/orb/OpenORBHardware.xml" />
-		  </zip>
-		 	
-		 <zip destfile="${build.dir}/multicast.zip">
-		    <zipfileset dir="${multicast.build.dir}" includes="**/*.jar" prefix="multicast"/>
-		    <zipfileset dir="${common.build.dir}" includes="**/*.jar" prefix="multicast"/>
-			<zipfileset dir="${rec.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
-			<zipfileset dir="${rec.common.lib.dir}" excludes="**/*_sig.jar" includes="**/*.jar" prefix="multicast/lib" />
-		 	<zipfileset file="${templates.dir.logs}/loggers.config.properties"  fullpath="multicast/etc/loggers.config.properties" />
-		 	<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" />
-		 	<zipfileset file="${multicast.build.dir}/StartMultiCastController.sh" filemode="755" />
-		 	<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" />
-		 </zip>
-	
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: dist.all
+         - - - - - - - - - - - - - - - - - -->	
+	<target name="dist.all" depends="build.all,dist.client,dist.drivers,dist.multicast">
 	</target>
 	
+	<!-- ================================= 
+          target: dist.client              
+         ================================= -->
+    <target name="dist.client">
+    	<zip destfile="${build.dir}/client.zip">
+    	    <zipfileset dir="${client.build.dir}" prefix="client"/>
+    	    <zipfileset dir="${common.build.dir}" prefix="client"/>		    
+    	</zip>		
+    </target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: dist.multicast                      
+         - - - - - - - - - - - - - - - - - -->	
+	<target name="dist.multicast">
+		<zip destfile="${build.dir}/multicast.zip">
+			<zipfileset dir="${multicast.build.dir}" includes="**/*.jar" prefix="multicast"/>
+			<zipfileset dir="${common.build.dir}" includes="**/*.jar" prefix="multicast"/>
+			<zipfileset dir="${rec.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
+			<zipfileset dir="${rec.common.lib.dir}" excludes="**/*_sig.jar" includes="**/*.jar" prefix="multicast/lib" />
+			<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="multicast/etc/loggers.config.properties" />
+			<zipfileset file="${multicast.build.dir}/openorb.xml" fullpath="multicast/etc/openorb.xml" />
+			<zipfileset file="${multicast.build.dir}/StartMultiCastController.sh" filemode="755" />
+			<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" />
+		</zip>	
+	</target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: dist.drivers                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="dist.drivers">
+    	<zip destfile="${build.dir}/server.zip">
+    		<zipfileset dir="${hardwareserver.build.dir}" prefix="hardwareserver"/>
+    		<zipfileset dir="${common.build.dir}" prefix="hardwareserver"/>
+    		<zipfileset dir="${rec.hardwareserver.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
+    		<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
+    		<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
+    		<zipfileset file="${multicast.build.dir}/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
+    		<zipfileset file="${multicast.build.dir}/StartExperiment.sh" filemode="755" />
+    		<zipfileset file="${multicast.build.dir}/StartExperiment.bat" />
+    	</zip>
+    </target>
+
 </project>

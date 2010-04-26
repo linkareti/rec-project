@@ -258,7 +258,7 @@
 	</target>
 
 	<target name="build.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
-		<copy file="${rec.multicast.classes.dir}/openorb.xml" overwrite="yes" tofile="${rec.multicast.classes.dir}/openorb.xml" />
+		<copy file="${rec.multicast.classes.dir}/openorb.xml" overwrite="yes" tofile="${multicast.build.dir}/openorb.xml" />
 
 		<copy file="${templates.dir.scripts}/StartMultiCastController.sh" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.sh" />
 			<replace file="${multicast.build.dir}/StartMultiCastController.sh" propertyFile="build.properties">
