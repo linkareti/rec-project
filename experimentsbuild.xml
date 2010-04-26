@@ -137,14 +137,6 @@
 					<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 				</section>
 			</manifest>
-
-			<copy file="${templates.dir.openorb}/OpenORBHardwareTemplate.xml" overwrite="yes" tofile="${experiments.classes.dir}/@{experiment.name}/server/openorb.xml" />
-				<replace file="${experiments.classes.dir}/@{experiment.name}/server/openorb.xml" propertyFile="build.properties">
-					<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
-					<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
-				</replace>
-			
-			<copy file="${templates.dir.openorb}/OpenORBHardwareTemplate.xml" overwrite="yes" tofile="${experiments.classes.dir}/@{experiment.name}/server/openorb.xml" />
 			
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
 
@@ -356,7 +348,7 @@
 		<attribute name="experiment.name" />
 		<sequential>
 			<copy file="${template.file}" overwrite="yes" tofile="${client.build.dir}/@{experiment.name}.jnlp" />
-			<replace file="${client.build.dir}/${experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 				<replacefilter token="@codebase@" property="@{experiment.name}.codebase" />
 				<replacefilter token="@href@" property="@{experiment.name}.href" />
 				<replacefilter token="@title@" property="@{experiment.name}.title" />
@@ -366,7 +358,7 @@
 				<replacefilter token="@tootip@" property="@{experiment.name}.tootip" />
 				<replacefilter token="@short@" property="@{experiment.name}.short" />
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
-				<replacefilter token="@main-class@" property="@{experiment.name}.main-class" />
+				<replacefilter token="@main-class@" property="@{experiment.name}.client.main-class" />
 			</replace>
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;"/>
 			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>

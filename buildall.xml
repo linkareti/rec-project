@@ -77,6 +77,7 @@
 			<zipfileset dir="${common.build.dir}" excludes="**/*_sig.jar" includes="**/*.jar" prefix="multicast" />
 			<zipfileset dir="${rec.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
 			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
+			<zipfileset dir="${elab.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
 			<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="multicast/etc/loggers.config.properties" />
 			<zipfileset file="${rec.multicast.classes.dir}/openorb.xml" fullpath="multicast/etc/openorb.xml" />
 			<zipfileset file="${multicast.build.dir}/StartMultiCastController.sh" filemode="755" />
@@ -102,6 +103,9 @@
 				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
 			</replace>
+			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
+			</replace>
 
 			<copy file="${templates.dir.scripts}/StartExperiment.bat" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" token="@experiment.name@" value="@{experiment.name}" />
@@ -109,16 +113,21 @@
 				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
 			</replace>
+			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
+			</replace>
 
 			<zip destfile="${build.dir}/@{experiment.name}HarwareServer.zip">
 				<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
 				<zipfileset file="${hardwareserver.build.dir}/ELabHardwareServer.jar" prefix="hardwareserver" />
 				<zipfileset file="${hardwareserver.build.dir}/ReCHardwareServer.jar" prefix="hardwareserver" />
-				<zipfileset dir="${common.build.dir}" excludes="**/*_sig.jar" includes="**/*.jar"  prefix="hardwareserver" />
+				<zipfileset dir="${common.build.dir}" excludes="**/*_sig.jar" includes="**/*.jar" prefix="hardwareserver" />
 				<zipfileset dir="${rec.hardwareserver.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
 				<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
+				<zipfileset dir="${elab.hardwareserver.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
+				<zipfileset dir="experiments/@{experiment.name}/lib/java/server" includes="**/*.jar" prefix="hardwareserver/lib" />
 				<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
-				<zipfileset file="${experiments.classes.dir}/@{experiment.name}/server/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
+				<zipfileset file="${rec.hardwareserver.classes.dir}/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
 				<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" filemode="755" />
 				<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" filemode="755" />
 			</zip>
