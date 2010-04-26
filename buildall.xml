@@ -12,7 +12,7 @@
 
 	<property file="build.properties" description="general properties for building project" />
 
-	<import file="generaldefinitions.xml"/>
+	<import file="generaldefinitions.xml" />
 
 	<!--
 		=====================================================
@@ -29,65 +29,105 @@
 		<ant antfile="elabbuild.xml" dir="." target="clean.all" />
 		<ant antfile="experimentsbuild.xml" dir="." target="clean.experiments.list" />
 	</target>
-	
+
 	<target name="clean.all">
-		<delete dir="${build.dir}"></delete>
+		<delete dir="${build.dir}">
+		</delete>
 	</target>
-		
-	
+
+
 	<target name="build.all" depends="clean.all">
 		<ant antfile="recbuild.xml" dir="." target="build.all" />
 		<ant antfile="elabbuild.xml" dir="." target="build.all" />
-		<ant antfile="experimentsbuild.xml" dir="." target="build.experiments.list" />	
+		<ant antfile="experimentsbuild.xml" dir="." target="build.experiments.list" />
 	</target>
 
 
 	<!-- - - - - - - - - - - - - - - - - - 
           target: dist.all
-         - - - - - - - - - - - - - - - - - -->	
-	<target name="dist.all" depends="build.all,dist.client,dist.drivers,dist.multicast">
+         - - - - - - - - - - - - - - - - - -->
+	<target name="dist.all" depends="build.all,dist.client,dist.multicast, dist.harwareserver">
+
 	</target>
-	
-	<!-- ================================= 
-          target: dist.client              
-         ================================= -->
-    <target name="dist.client">
-    	<zip destfile="${build.dir}/client.zip">
-    	    <zipfileset dir="${client.build.dir}" prefix="client"/>
-    	    <zipfileset dir="${common.build.dir}" prefix="client"/>		    
-    	</zip>		
-    </target>
-	
-	<!-- - - - - - - - - - - - - - - - - - 
-          target: dist.multicast                      
-         - - - - - - - - - - - - - - - - - -->	
+
+	<target name="dist.client">
+		<zip destfile="${build.dir}/client.zip">
+			<zipfileset dir="${client.build.dir}" prefix="client" />
+			<zipfileset dir="${common.build.dir}" prefix="client" />
+		</zip>
+	</target>
+
 	<target name="dist.multicast">
+
+		<copy file="${templates.dir.scripts}/StartMultiCastController.sh" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.sh" />
+		<replace file="${multicast.build.dir}/StartMultiCastController.sh" propertyFile="build.properties">
+			<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
+			<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+		</replace>
+
+		<copy file="${templates.dir.scripts}/StartMultiCastController.bat" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.bat" />
+		<replace file="${multicast.build.dir}/StartMultiCastController.bat" propertyFile="build.properties">
+			<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
+			<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+		</replace>
+
 		<zip destfile="${build.dir}/multicast.zip">
-			<zipfileset dir="${multicast.build.dir}" includes="**/*.jar" prefix="multicast"/>
-			<zipfileset dir="${common.build.dir}" includes="**/*.jar" prefix="multicast"/>
+			<zipfileset file="${multicast.build.dir}/ELabMulticastController.jar" prefix="multicast" />
+			<zipfileset file="${multicast.build.dir}/ReCMulticastController.jar" prefix="multicast" />
+			<zipfileset dir="${common.build.dir}" excludes="**/*_sig.jar" includes="**/*.jar" prefix="multicast" />
 			<zipfileset dir="${rec.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
-			<zipfileset dir="${rec.common.lib.dir}" excludes="**/*_sig.jar" includes="**/*.jar" prefix="multicast/lib" />
+			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
 			<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="multicast/etc/loggers.config.properties" />
-			<zipfileset file="${multicast.build.dir}/openorb.xml" fullpath="multicast/etc/openorb.xml" />
+			<zipfileset file="${rec.multicast.classes.dir}/openorb.xml" fullpath="multicast/etc/openorb.xml" />
 			<zipfileset file="${multicast.build.dir}/StartMultiCastController.sh" filemode="755" />
 			<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" />
-		</zip>	
+		</zip>
+
+		<delete file="${multicast.build.dir}/StartMultiCastController.sh" />
+		<delete file="${multicast.build.dir}/StartMultiCastController.bat" />
+
 	</target>
-	
-	<!-- - - - - - - - - - - - - - - - - - 
-          target: dist.drivers                      
-         - - - - - - - - - - - - - - - - - -->
-    <target name="dist.drivers">
-    	<zip destfile="${build.dir}/server.zip">
-    		<zipfileset dir="${hardwareserver.build.dir}" prefix="hardwareserver"/>
-    		<zipfileset dir="${common.build.dir}" prefix="hardwareserver"/>
-    		<zipfileset dir="${rec.hardwareserver.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
-    		<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
-    		<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
-    		<zipfileset file="${multicast.build.dir}/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
-    		<zipfileset file="${multicast.build.dir}/StartExperiment.sh" filemode="755" />
-    		<zipfileset file="${multicast.build.dir}/StartExperiment.bat" />
-    	</zip>
-    </target>
+
+	<target name="dist.harwareserver">
+		<process.list task="dist.experiment.hardwareserver" list="${experiment.list}" attribute.name="experiment.name" />
+	</target>
+
+	<macrodef name="dist.experiment.hardwareserver">
+		<attribute name="experiment.name" />
+		<sequential>
+
+			<copy file="${templates.dir.scripts}/StartExperiment.sh" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.sh" />
+			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" token="@experiment.name@" value="@{experiment.name}" />
+			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="build.properties">
+				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
+				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
+			</replace>
+
+			<copy file="${templates.dir.scripts}/StartExperiment.bat" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
+			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" token="@experiment.name@" value="@{experiment.name}" />
+			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="build.properties">
+				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
+				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
+			</replace>
+
+			<zip destfile="${build.dir}/@{experiment.name}HarwareServer.zip">
+				<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
+				<zipfileset file="${hardwareserver.build.dir}/ELabHardwareServer.jar" prefix="hardwareserver" />
+				<zipfileset file="${hardwareserver.build.dir}/ReCHardwareServer.jar" prefix="hardwareserver" />
+				<zipfileset dir="${common.build.dir}" excludes="**/*_sig.jar" includes="**/*.jar"  prefix="hardwareserver" />
+				<zipfileset dir="${rec.hardwareserver.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
+				<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
+				<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
+				<zipfileset file="${experiments.classes.dir}/@{experiment.name}/server/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
+				<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" filemode="755" />
+				<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" filemode="755" />
+			</zip>
+
+			<delete file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" />
+			<delete file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
+
+		</sequential>
+	</macrodef>
+
 
 </project>

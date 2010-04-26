@@ -43,12 +43,6 @@
 		</sequential>
 	</macrodef>
 
-	<target name="clean.experiment">
-		<fail unless="experiment.name"> experiments.name must be set. define it in build.properties or pass 
-				it to jvm as arg like -Dexperiment.name="experiment1"</fail>
-		<clean.experiment experiment.name="${experiment.name}" />
-	</target>
-
 	<target name="clean.experiments.list">
 		<fail unless="experiment.list"> experiments.list must be set to clean
 					that list of experiments. define it in build.properties or pass 
@@ -157,17 +151,6 @@
 		</sequential>
 	</macrodef>
 
-
-	<target name="compile.experiment.client">
-		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<compile.experiment.client experiment.name="${experiment.name}" />
-	</target>
-	
-	<target name="compile.experiment.driver">
-		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<compile.experiment.driver experiment.name="${experiment.name}" />
-	</target>
-
 	<target name="compile.experiment.drivers.list">
 		<fail unless="experiment.list"> experiments.list must be set to compile
 			that list of experiments. define it in build.properties or pass 
@@ -213,16 +196,6 @@
 			</sequential>
 		</macrodef>
 
-	<target name="jar.experiment.client">
-		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<jar.experiment.client experiment.name="${experiment.name}" />
-	</target>
-	
-	<target name="jar.experiment.driver">
-		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<jar.experiment.driver experiment.name="${experiment.name}" />
-	</target>
-
 	<target name="jar.experiment.clients.list">
 		<fail unless="experiment.list"> experiments.list must be set to package
 			that list of experiments. define it in build.properties or pass 
@@ -248,12 +221,6 @@
 			</signjar>            
 		</sequential>	
 	</macrodef>
-	
-
-	<target name="sign.experiment">
-		<fail unless="experiment.name"> You need to specify which experiment to build with the property experiment.name</fail>
-		<sign.experiment experiment.name="${experiment.name}"/>
-	</target>
 
 	<target name="sign.experiments.list">
 		<fail unless="experiment.list"> experiments.list must be set to package
@@ -425,13 +392,6 @@
 			<create.jnlp.for.experiment experiment.name="@{experiment.name}" />
 		</sequential>
 	</macrodef>
-	
-
-	<target name="build.experiment">
-		<fail unless="experiment.name">experiment.name must be set to build a single experiment jnlp. 
-			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
-		<build.experiment experiment.name="${experiment.name}" />
-	</target>
 
 	<target name="build.experiments.list">
 		<fail unless="experiment.list"> experiments.list must be set to build

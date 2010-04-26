@@ -13,7 +13,6 @@ copy.encoding=UTF-8
 #just uncomment the one you need
 #list of experiments in ELab
 experiment.list=aleatorio,gamma,T,webrobot
-experiment.name=aleatorio
 #list of virtual experiments in ELab Virtual
 #experiment.list=mm,cg
 
@@ -73,8 +72,9 @@ multicast.max.heap=1024m
 
 ##SYSTEM PROPERTIES - EXPERIMENTS## valer� a pena definir por experiencia?
 experiment.openorb.profile=recHardware 
-experiment.eLab.HardwareInfo=MMBaseHardwareInfo.xml
 experiment.driver.debug.address.port=8001
+hardwareserver.initial.heap=128m
+hardwareserver.max.heap=1024m
 
 ##JNLP PROPERTIES
 codebase=http://elab.ist.utl.pt/rec/eLab/
