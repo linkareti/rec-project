@@ -56,13 +56,14 @@
 		  </zip>
 		 	
 		 <zip destfile="${build.dir}/multicast.zip">
-		    <zipfileset dir="${multicast.build.dir}" prefix="multicast"/>
-		    <zipfileset dir="${common.build.dir}" prefix="multicast"/>
+		    <zipfileset dir="${multicast.build.dir}" includes="**/*.jar" prefix="multicast"/>
+		    <zipfileset dir="${common.build.dir}" includes="**/*.jar" prefix="multicast"/>
 			<zipfileset dir="${rec.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
-			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" excludes="**/*_sig.jar" prefix="multicast/lib" />
-		 	<zipfileset dir="${templates.dir.openorb}" includes="OpenORBMultiCastTemplate.xml"  fullpath="multicast/etc/openorb.xml" />
-		 	<zipfileset dir="${templates.dir.scripts}" includes="StartMultiCastController.sh" />
-		 	<zipfileset dir="${templates.dir.scripts}" includes="StartMultiCastController.bat" />
+			<zipfileset dir="${rec.common.lib.dir}" excludes="**/*_sig.jar" includes="**/*.jar" prefix="multicast/lib" />
+		 	<zipfileset file="${templates.dir.logs}/loggers.config.properties"  fullpath="multicast/etc/loggers.config.properties" />
+		 	<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" />
+		 	<zipfileset file="${multicast.build.dir}/StartMultiCastController.sh" filemode="755" />
+		 	<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" />
 		 </zip>
 	
 	</target>

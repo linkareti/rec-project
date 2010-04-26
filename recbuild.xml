@@ -245,6 +245,12 @@
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
+		
+		<copy file="${templates.dir.openorb}/OpenORBMultiCastTemplate.xml" overwrite="yes" tofile="${rec.multicast.classes.dir}/openorb.xml" />
+			<replace file="${rec.multicast.classes.dir}/openorb.xml" propertyFile="build.properties">
+				<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+			</replace>		
 	</target>
 
 	<target name="jar.rec.multicastcontroller">
@@ -252,7 +258,19 @@
 	</target>
 
 	<target name="build.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
-		
+		<copy file="${rec.multicast.classes.dir}/openorb.xml" overwrite="yes" tofile="${rec.multicast.classes.dir}/openorb.xml" />
+
+		<copy file="${templates.dir.scripts}/StartMultiCastController.sh" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.sh" />
+			<replace file="${multicast.build.dir}/StartMultiCastController.sh" propertyFile="build.properties">
+				<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
+				<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+			</replace>
+
+		<copy file="${templates.dir.scripts}/StartMultiCastController.bat" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.bat" />
+			<replace file="${multicast.build.dir}/StartMultiCastController.bat" propertyFile="build.properties">
+				<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
+				<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+			</replace>
 	</target>
 
 	<target name="run.rec.multicast">
