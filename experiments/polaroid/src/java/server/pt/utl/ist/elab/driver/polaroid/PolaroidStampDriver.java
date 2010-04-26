@@ -96,8 +96,8 @@ public class PolaroidStampDriver extends AbstractStampDriver {
 
 	public Object getHardwareInfo() {
 
-		String baseHardwareInfoFile = "recresource://pt/utl/ist/elab/driver/polaroid/PolaroidBaseHardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab.Polaroid.HardwareInfo"), baseHardwareInfoFile);
+		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;

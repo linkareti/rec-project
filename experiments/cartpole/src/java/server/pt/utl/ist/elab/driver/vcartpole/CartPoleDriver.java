@@ -138,8 +138,8 @@ public class CartPoleDriver extends VirtualBaseDriver {
 
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://pt/utl/ist/elab/virtual/driver/cartpole/CartPoleBaseHardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab.CartPole.HardwareInfo"), baseHardwareInfoFile);
+		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;

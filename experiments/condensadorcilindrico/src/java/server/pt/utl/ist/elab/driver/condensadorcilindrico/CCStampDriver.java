@@ -91,8 +91,9 @@ public class CCStampDriver extends AbstractStampDriver {
 
 	public Object getHardwareInfo() {
 
-		String baseHardwareInfoFile = "recresource://pt/utl/ist/elab/driver/condensadorcilindrico/CCBaseHardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab.CC.HardwareInfo"), baseHardwareInfoFile);
+		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
+
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;

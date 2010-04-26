@@ -51,21 +51,21 @@ public class TiroDataProducer extends VirtualBaseDataSource implements Runnable 
 		state[6] -= g * dt;
 	}
 
-	// TESTE
-	public void start(pt.utl.ist.elab.client.vtiro.displays.Animation an) {
-		this.an = an;
-		animaThread = new Thread(this);
-		animaThread.start();
-	}
-
-	// TESTE
-	pt.utl.ist.elab.client.vtiro.displays.Animation an;
+//	// TESTE
+//	public void start(pt.utl.ist.elab.client.vtiro.displays.Animation an) {
+//		this.an = an;
+//		animaThread = new Thread(this);
+//		animaThread.start();
+//	}
+//
+//	// TESTE
+//	pt.utl.ist.elab.client.vtiro.displays.Animation an;
 	private Thread animaThread;
 
 	public void run() {
 		while (animaThread == Thread.currentThread() && !stopped && state[0] < w) {
 			step();
-			an.move(state[0], state[2], state[1], state[3], state[5]);
+//			an.move(state[0], state[2], state[1], state[3], state[5]);
 			System.out.println(state[4]);
 			try {
 				animaThread.sleep(Math.round(dt * 1000));

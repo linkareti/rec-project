@@ -28,26 +28,26 @@ public class Animation extends Tiro implements ExpDataDisplay, ExpDataModelListe
 	protected void config() {
 	}
 
-	// TESTE
-	public void start() {
-		pt.utl.ist.elab.driver.vtiro.TiroDataProducer data = new pt.utl.ist.elab.driver.vtiro.TiroDataProducer(null,
-				10, 10, 6.7, Math.PI / 4, 9.8);
-		data.start(this);
-	}
-
-	public static void main(String args[]) {
-		javax.swing.JFrame test = new javax.swing.JFrame();
-		test.addWindowListener(new java.awt.event.WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
-				System.exit(0);
-			};
-		});
-		Animation stdim = new Animation();
-		test.getContentPane().add(stdim);
-		test.pack();
-		test.show();
-		stdim.start();
-	}
+//	// TESTE
+//	public void start() {
+//		pt.utl.ist.elab.driver.vtiro.TiroDataProducer data = new pt.utl.ist.elab.driver.vtiro.TiroDataProducer(null,
+//				10, 10, 6.7, Math.PI / 4, 9.8);
+//		data.start(this);
+//	}
+//
+//	public static void main(String args[]) {
+//		javax.swing.JFrame test = new javax.swing.JFrame();
+//		test.addWindowListener(new java.awt.event.WindowAdapter() {
+//			public void windowClosing(java.awt.event.WindowEvent e) {
+//				System.exit(0);
+//			};
+//		});
+//		Animation stdim = new Animation();
+//		test.getContentPane().add(stdim);
+//		test.pack();
+//		test.show();
+//		stdim.start();
+//	}
 
 	public void dataModelEnded() {
 	}

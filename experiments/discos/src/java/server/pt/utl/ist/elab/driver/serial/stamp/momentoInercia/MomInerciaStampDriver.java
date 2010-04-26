@@ -88,8 +88,8 @@ public class MomInerciaStampDriver extends AbstractStampDriver {
 
 	public Object getHardwareInfo() {
 
-		String baseHardwareInfoFile = "recresource://pt/utl/ist/elab/driver/serial/stamp/momentoInercia/MomInerciaBaseHardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab.MomInercia.HardwareInfo"), baseHardwareInfoFile);
+		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;

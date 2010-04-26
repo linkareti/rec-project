@@ -164,8 +164,10 @@ public class MvBrownDriver extends VirtualBaseDriver {
 
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://pt/utl/ist/elab/virtual/driver/mvbrown/MvBrownBaseHardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab.MvBrown.HardwareInfo"), baseHardwareInfoFile);
+		
+		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
+
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;

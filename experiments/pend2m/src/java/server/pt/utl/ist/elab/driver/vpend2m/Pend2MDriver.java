@@ -119,8 +119,8 @@ public class Pend2MDriver extends VirtualBaseDriver {
 
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		String baseHardwareInfoFile = "recresource://pt/utl/ist/elab/virtual/driver/pend2m/Pend2MBaseHardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab.Pend2M.HardwareInfo"), baseHardwareInfoFile);
+		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;

@@ -128,8 +128,8 @@ public class TelescopioDriver extends BaseDriver {
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
 
-		String baseHardwareInfoFile = "recresource://pt/utl/ist/elab/driver/telescopio/TelescopioBaseHardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab.Telescopio.HardwareInfo"), baseHardwareInfoFile);
+		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;

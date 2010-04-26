@@ -102,8 +102,9 @@ public class AleatorioDriver extends BaseDriver {
 	public Object getHardwareInfo() {
 		// com.linkare.rec.impl.protocols.ReCProtocols.init();
 
-		String baseHardwareInfoFile = "recresource://pt/utl/ist/elab/driver/Aleatorio/AleatorioBaseHardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab.Aleatorio.HardwareInfo"), baseHardwareInfoFile);
+		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
+
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;

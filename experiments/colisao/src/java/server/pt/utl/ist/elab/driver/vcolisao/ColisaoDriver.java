@@ -120,9 +120,8 @@ public class ColisaoDriver extends VirtualBaseDriver {
 
 	public Object getHardwareInfo() {
 		fireIDriverStateListenerDriverReseting();
-		// MUITO IMPORTANTE!!! ALTERAR AS PROXIMAS DUAS LINHAS!!!
-		String baseHardwareInfoFile = "recresource://pt/utl/ist/elab/driver/virtual/colisao/ColisaoBaseHardwareInfo.xml";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab.Colisao.HardwareInfo"), baseHardwareInfoFile);
+		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
