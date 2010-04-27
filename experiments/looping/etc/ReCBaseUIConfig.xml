@@ -1,35 +1,14 @@
-<Apparatus location="**********"
+<Apparatus location="LOOPING_V1.0"
 	customizerClassLocationBundleKey="looping$rec.exp.customizer.looping"
-	videoLocation="looping$rec.exp.url.looping.video" toolTipBundleKey="looping$rec.exp.tip.looping"
-	iconLocationBundleKey="looping$rec.exp.icon.looping" displayStringBundleKey="looping$rec.exp.title.looping"
+	toolTipBundleKey="looping$rec.exp.tip.looping" iconLocationBundleKey="looping$rec.exp.icon.looping"
+	displayStringBundleKey="looping$rec.exp.title.looping"
 	desktopLocationBundleKey="looping$rec.exp.background.looping" order="1">
-
-	<WebResource locationBundleKey="looping$rec.exp.url.looping.1"
-		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
-		displayStringBundleKey="looping$rec.exp.url.looping.title.1"
-		toolTipLocationBundleKey="looping$rec.exp.url.looping.title.1"
-		internalBrowser="false" order="1" />
-	<WebResource locationBundleKey="looping$rec.exp.url.looping.2"
-		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
-		displayStringBundleKey="looping$rec.exp.url.looping.title.2"
-		toolTipLocationBundleKey="looping$rec.exp.url.looping.title.2"
-		internalBrowser="false" order="2" />
-	<WebResource locationBundleKey="looping$rec.exp.url.looping.video"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
-		displayStringBundleKey="looping$rec.exp.url.looping.title.video"
-		toolTipLocationBundleKey="looping$rec.exp.url.looping.title.video"
-		internalBrowser="false" order="3" />
-
-	<DefaultAcquisitionConfig
-		classLocationBundleKey="looping$rec.exp.dftcfg.looping.loc.1"
-		toolTipBundleKey="looping$rec.exp.dftcfg.looping.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
-		displayStringBundleKey="looping$rec.exp.dftcfg.looping.title.1" order="1" />
-
-	<Display classLocationBundleKey="looping$rec.exp.display.looping.loc.sensor"
-		toolTipBundleKey="looping$rec.exp.display.looping.tip.sensor"
+	<LocalizationBundle name="looping"
+		location="recresource:///pt/utl/ist/elab/virtual/client/looping/resources/messages" />
+	<Display classLocationBundleKey="looping$rec.exp.display.looping.loc.anim"
+		toolTipBundleKey="looping$rec.exp.display.looping.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
-		displayStringBundleKey="looping$rec.exp.display.looping.title.sensor"
+		displayStringBundleKey="looping$rec.exp.display.looping.title.anim"
 		offlineCapable="false" order="1" />
 	<Display classLocationBundleKey="looping$rec.exp.display.looping.loc.1"
 		toolTipBundleKey="looping$rec.exp.display.looping.tip.1"
@@ -41,4 +20,14 @@
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="looping$rec.exp.display.looping.title.2"
 		offlineCapable="false" order="3" />
+	<Display classLocationBundleKey="looping$rec.exp.display.looping.loc.3"
+		toolTipBundleKey="looping$rec.exp.display.looping.tip.3"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="looping$rec.exp.display.looping.title.3"
+		offlineCapable="false" order="4" />
+	<Display classLocationBundleKey="looping$rec.exp.display.looping.loc.4"
+		toolTipBundleKey="looping$rec.exp.display.looping.tip.4"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="looping$rec.exp.display.looping.title.4"
+		offlineCapable="false" order="5" />
 </Apparatus>

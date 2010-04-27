@@ -1,39 +1,23 @@
-<Apparatus location="**********"
+<Apparatus location="CART_POLE_V1.0"
 	customizerClassLocationBundleKey="cartpole$rec.exp.customizer.cartpole"
-	videoLocation="cartpole$rec.exp.url.cartpole.video" toolTipBundleKey="cartpole$rec.exp.tip.cartpole"
-	iconLocationBundleKey="cartpole$rec.exp.icon.cartpole" displayStringBundleKey="cartpole$rec.exp.title.cartpole"
+	toolTipBundleKey="cartpole$rec.exp.tip.cartpole" iconLocationBundleKey="cartpole$rec.exp.icon.cartpole"
+	displayStringBundleKey="cartpole$rec.exp.title.cartpole"
 	desktopLocationBundleKey="cartpole$rec.exp.background.cartpole" order="1">
-
-	<WebResource locationBundleKey="cartpole$rec.exp.url.cartpole.1"
-		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
-		displayStringBundleKey="cartpole$rec.exp.url.cartpole.title.1"
-		toolTipLocationBundleKey="cartpole$rec.exp.url.cartpole.title.1"
-		internalBrowser="false" order="1" />
-	<WebResource locationBundleKey="cartpole$rec.exp.url.cartpole.2"
-		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
-		displayStringBundleKey="cartpole$rec.exp.url.cartpole.title.2"
-		toolTipLocationBundleKey="cartpole$rec.exp.url.cartpole.title.2"
-		internalBrowser="false" order="2" />
-	<WebResource locationBundleKey="cartpole$rec.exp.url.cartpole.video"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
-		displayStringBundleKey="cartpole$rec.exp.url.cartpole.title.video"
-		toolTipLocationBundleKey="cartpole$rec.exp.url.cartpole.title.video"
-		internalBrowser="false" order="3" />
-
-	<DefaultAcquisitionConfig
-		classLocationBundleKey="cartpole$rec.exp.dftcfg.cartpole.loc.1"
-		toolTipBundleKey="cartpole$rec.exp.dftcfg.cartpole.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
-		displayStringBundleKey="cartpole$rec.exp.dftcfg.cartpole.title.1" order="1" />
-
-	<Display classLocationBundleKey="cartpole$rec.exp.display.cartpole.loc.sensor"
-		toolTipBundleKey="cartpole$rec.exp.display.cartpole.tip.sensor"
+	<LocalizationBundle name="cartpole"
+		location="recresource:///pt/utl/ist/elab/virtual/client/cartpole/resources/messages" />
+	<Display classLocationBundleKey="cartpole$rec.exp.display.cartpole.loc.anim"
+		toolTipBundleKey="cartpole$rec.exp.display.cartpole.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
-		displayStringBundleKey="cartpole$rec.exp.display.cartpole.title.sensor"
+		displayStringBundleKey="cartpole$rec.exp.display.cartpole.title.anim"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="cartpole$rec.exp.display.cartpole.loc.3"
+		toolTipBundleKey="cartpole$rec.exp.display.cartpole.tip.3"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="cartpole$rec.exp.display.cartpole.title.3"
 		offlineCapable="false" order="1" />
 	<Display classLocationBundleKey="cartpole$rec.exp.display.cartpole.loc.1"
 		toolTipBundleKey="cartpole$rec.exp.display.cartpole.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="cartpole$rec.exp.display.cartpole.title.1"
 		offlineCapable="false" order="2" />
 	<Display classLocationBundleKey="cartpole$rec.exp.display.cartpole.loc.2"
@@ -41,4 +25,9 @@
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="cartpole$rec.exp.display.cartpole.title.2"
 		offlineCapable="false" order="3" />
-</Apparatus>
+	<Display classLocationBundleKey="cartpole$rec.exp.display.cartpole.loc.4"
+		toolTipBundleKey="cartpole$rec.exp.display.cartpole.tip.4"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="cartpole$rec.exp.display.cartpole.title.4"
+		offlineCapable="false" order="4" />
+</Apparatus>	

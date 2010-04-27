@@ -1,9 +1,10 @@
-<Apparatus location="**********"
+<Apparatus location="ELAB_PENDULO_STAMP_V02"
 	customizerClassLocationBundleKey="pendulo$rec.exp.customizer.pendulo"
-	videoLocation="pendulo$rec.exp.url.pendulo.video" toolTipBundleKey="pendulo$rec.exp.tip.pendulo"
-	iconLocationBundleKey="pendulo$rec.exp.icon.pendulo" displayStringBundleKey="pendulo$rec.exp.title.pendulo"
+	toolTipBundleKey="pendulo$rec.exp.tip.pendulo" iconLocationBundleKey="pendulo$rec.exp.icon.pendulo"
+	displayStringBundleKey="pendulo$rec.exp.title.pendulo"
 	desktopLocationBundleKey="pendulo$rec.exp.background.pendulo" order="1">
-
+	<LocalizationBundle name="pendulo"
+		location="recresource:///pt/utl/ist/elab/client/serial/stamp/pendulo/resources/messages" />
 	<WebResource locationBundleKey="pendulo$rec.exp.url.pendulo.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="pendulo$rec.exp.url.pendulo.title.1"
@@ -42,3 +43,5 @@
 		displayStringBundleKey="pendulo$rec.exp.display.pendulo.title.2"
 		offlineCapable="false" order="3" />
 </Apparatus>
+		
+		

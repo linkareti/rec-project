@@ -1,44 +1,29 @@
-<Apparatus location="**********"
+<Apparatus location="MOLAS3_V1.0"
 	customizerClassLocationBundleKey="m3$rec.exp.customizer.m3"
-	videoLocation="m3$rec.exp.url.m3.video" toolTipBundleKey="m3$rec.exp.tip.m3"
-	iconLocationBundleKey="m3$rec.exp.icon.m3" displayStringBundleKey="m3$rec.exp.title.m3"
-	desktopLocationBundleKey="m3$rec.exp.background.m3" order="1">
-
-	<WebResource locationBundleKey="m3$rec.exp.url.m3.1"
-		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
-		displayStringBundleKey="m3$rec.exp.url.m3.title.1"
-		toolTipLocationBundleKey="m3$rec.exp.url.m3.title.1"
-		internalBrowser="false" order="1" />
-	<WebResource locationBundleKey="m3$rec.exp.url.m3.2"
-		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
-		displayStringBundleKey="m3$rec.exp.url.m3.title.2"
-		toolTipLocationBundleKey="m3$rec.exp.url.m3.title.2"
-		internalBrowser="false" order="2" />
-	<WebResource locationBundleKey="m3$rec.exp.url.m3.video"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
-		displayStringBundleKey="m3$rec.exp.url.m3.title.video"
-		toolTipLocationBundleKey="m3$rec.exp.url.m3.title.video"
-		internalBrowser="false" order="3" />
-
-	<DefaultAcquisitionConfig
-		classLocationBundleKey="m3$rec.exp.dftcfg.m3.loc.1"
-		toolTipBundleKey="m3$rec.exp.dftcfg.m3.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
-		displayStringBundleKey="m3$rec.exp.dftcfg.m3.title.1" order="1" />
-
-	<Display classLocationBundleKey="m3$rec.exp.display.m3.loc.sensor"
-		toolTipBundleKey="m3$rec.exp.display.m3.tip.sensor"
+	toolTipBundleKey="m3$rec.exp.tip.m3" iconLocationBundleKey="m3$rec.exp.icon.m3"
+	displayStringBundleKey="m3$rec.exp.title.m3" desktopLocationBundleKey="m3$rec.exp.background.m3"
+	order="1">
+	<LocalizationBundle name="m3"
+		location="recresource:///pt/utl/ist/elab/virtual/client/m3/resources/messages" />
+	<Display classLocationBundleKey="m3$rec.exp.display.m3.loc.anim"
+		toolTipBundleKey="m3$rec.exp.display.m3.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
-		displayStringBundleKey="m3$rec.exp.display.m3.title.sensor"
+		displayStringBundleKey="m3$rec.exp.display.m3.title.anim"
 		offlineCapable="false" order="1" />
 	<Display classLocationBundleKey="m3$rec.exp.display.m3.loc.1"
-		toolTipBundleKey="m3$rec.exp.display.m3.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
-		displayStringBundleKey="m3$rec.exp.display.m3.title.1"
-		offlineCapable="false" order="2" />
+		toolTipBundleKey="m3$rec.exp.display.m3.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="m3$rec.exp.display.m3.title.1" offlineCapable="false"
+		order="2" />
 	<Display classLocationBundleKey="m3$rec.exp.display.m3.loc.2"
-		toolTipBundleKey="m3$rec.exp.display.m3.tip.2"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
-		displayStringBundleKey="m3$rec.exp.display.m3.title.2"
-		offlineCapable="false" order="3" />
+		toolTipBundleKey="m3$rec.exp.display.m3.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="m3$rec.exp.display.m3.title.2" offlineCapable="false"
+		order="3" />
+	<Display classLocationBundleKey="m3$rec.exp.display.m3.loc.3"
+		toolTipBundleKey="m3$rec.exp.display.m3.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="m3$rec.exp.display.m3.title.3" offlineCapable="false"
+		order="4" />
+	<Display classLocationBundleKey="m3$rec.exp.display.m3.loc.4"
+		toolTipBundleKey="m3$rec.exp.display.m3.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="m3$rec.exp.display.m3.title.4" offlineCapable="false"
+		order="5" />
 </Apparatus>

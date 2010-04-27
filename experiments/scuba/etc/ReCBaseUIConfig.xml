@@ -1,31 +1,25 @@
-<Apparatus location="**********"
+<Apparatus location="ELAB_SCUBA_STAMP_V02"
 	customizerClassLocationBundleKey="scuba$rec.exp.customizer.scuba"
-	videoLocation="scuba$rec.exp.url.scuba.video" toolTipBundleKey="scuba$rec.exp.tip.scuba"
-	iconLocationBundleKey="scuba$rec.exp.icon.scuba" displayStringBundleKey="scuba$rec.exp.title.scuba"
+	toolTipBundleKey="scuba$rec.exp.tip.scuba" iconLocationBundleKey="scuba$rec.exp.icon.scuba"
+	displayStringBundleKey="scuba$rec.exp.title.scuba"
 	desktopLocationBundleKey="scuba$rec.exp.background.scuba" order="1">
-
+	<LocalizationBundle name="scuba"
+		location="recresource:///pt/utl/ist/elab/client/serial/stamp/scuba/resources/messages" />
 	<WebResource locationBundleKey="scuba$rec.exp.url.scuba.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="scuba$rec.exp.url.scuba.title.1"
 		toolTipLocationBundleKey="scuba$rec.exp.url.scuba.title.1"
 		internalBrowser="false" order="1" />
-	<WebResource locationBundleKey="scuba$rec.exp.url.scuba.2"
-		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
-		displayStringBundleKey="scuba$rec.exp.url.scuba.title.2"
-		toolTipLocationBundleKey="scuba$rec.exp.url.scuba.title.2"
-		internalBrowser="false" order="2" />
 	<WebResource locationBundleKey="scuba$rec.exp.url.scuba.video"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
 		displayStringBundleKey="scuba$rec.exp.url.scuba.title.video"
 		toolTipLocationBundleKey="scuba$rec.exp.url.scuba.title.video"
 		internalBrowser="false" order="3" />
-
 	<DefaultAcquisitionConfig
 		classLocationBundleKey="scuba$rec.exp.dftcfg.scuba.loc.1"
 		toolTipBundleKey="scuba$rec.exp.dftcfg.scuba.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
 		displayStringBundleKey="scuba$rec.exp.dftcfg.scuba.title.1" order="1" />
-
 	<Display classLocationBundleKey="scuba$rec.exp.display.scuba.loc.sensor"
 		toolTipBundleKey="scuba$rec.exp.display.scuba.tip.sensor"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
@@ -41,4 +35,24 @@
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="scuba$rec.exp.display.scuba.title.2"
 		offlineCapable="false" order="3" />
+	<Display classLocationBundleKey="scuba$rec.exp.display.scuba.loc.3"
+		toolTipBundleKey="scuba$rec.exp.display.scuba.tip.3"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.3"
+		offlineCapable="false" order="4" />
+	<Display classLocationBundleKey="scuba$rec.exp.display.scuba.loc.4"
+		toolTipBundleKey="scuba$rec.exp.display.scuba.tip.4"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.4"
+		offlineCapable="false" order="5" />
+	<Display classLocationBundleKey="scuba$rec.exp.display.scuba.loc.5"
+		toolTipBundleKey="scuba$rec.exp.display.scuba.tip.5"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.5"
+		offlineCapable="false" order="6" />
+	<Display classLocationBundleKey="scuba$rec.exp.display.scuba.loc.6"
+		toolTipBundleKey="scuba$rec.exp.display.scuba.tip.6"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.6"
+		offlineCapable="false" order="7" />
 </Apparatus>

@@ -1,39 +1,18 @@
-<Apparatus location="**********"
+<Apparatus location="FERMI_MAP_V1.0"
 	customizerClassLocationBundleKey="fermap$rec.exp.customizer.fermap"
-	videoLocation="fermap$rec.exp.url.fermap.video" toolTipBundleKey="fermap$rec.exp.tip.fermap"
-	iconLocationBundleKey="fermap$rec.exp.icon.fermap" displayStringBundleKey="fermap$rec.exp.title.fermap"
+	toolTipBundleKey="fermap$rec.exp.tip.fermap" iconLocationBundleKey="fermap$rec.exp.icon.fermap"
+	displayStringBundleKey="fermap$rec.exp.title.fermap"
 	desktopLocationBundleKey="fermap$rec.exp.background.fermap" order="1">
-
-	<WebResource locationBundleKey="fermap$rec.exp.url.fermap.1"
-		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
-		displayStringBundleKey="fermap$rec.exp.url.fermap.title.1"
-		toolTipLocationBundleKey="fermap$rec.exp.url.fermap.title.1"
-		internalBrowser="false" order="1" />
-	<WebResource locationBundleKey="fermap$rec.exp.url.fermap.2"
-		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
-		displayStringBundleKey="fermap$rec.exp.url.fermap.title.2"
-		toolTipLocationBundleKey="fermap$rec.exp.url.fermap.title.2"
-		internalBrowser="false" order="2" />
-	<WebResource locationBundleKey="fermap$rec.exp.url.fermap.video"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
-		displayStringBundleKey="fermap$rec.exp.url.fermap.title.video"
-		toolTipLocationBundleKey="fermap$rec.exp.url.fermap.title.video"
-		internalBrowser="false" order="3" />
-
-	<DefaultAcquisitionConfig
-		classLocationBundleKey="fermap$rec.exp.dftcfg.fermap.loc.1"
-		toolTipBundleKey="fermap$rec.exp.dftcfg.fermap.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
-		displayStringBundleKey="fermap$rec.exp.dftcfg.fermap.title.1" order="1" />
-
-	<Display classLocationBundleKey="fermap$rec.exp.display.fermap.loc.sensor"
-		toolTipBundleKey="fermap$rec.exp.display.fermap.tip.sensor"
+	<LocalizationBundle name="fermap"
+		location="recresource:///pt/utl/ist/elab/virtual/client/fermap/resources/messages" />
+	<Display classLocationBundleKey="fermap$rec.exp.display.fermap.loc.anim"
+		toolTipBundleKey="fermap$rec.exp.display.fermap.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
-		displayStringBundleKey="fermap$rec.exp.display.fermap.title.sensor"
+		displayStringBundleKey="fermap$rec.exp.display.fermap.title.anim"
 		offlineCapable="false" order="1" />
 	<Display classLocationBundleKey="fermap$rec.exp.display.fermap.loc.1"
 		toolTipBundleKey="fermap$rec.exp.display.fermap.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
 		displayStringBundleKey="fermap$rec.exp.display.fermap.title.1"
 		offlineCapable="false" order="2" />
 	<Display classLocationBundleKey="fermap$rec.exp.display.fermap.loc.2"

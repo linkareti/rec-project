@@ -1,9 +1,12 @@
-<Apparatus location="**********"
+<Apparatus location="ELAB_ALEATORIO_V02"
 	customizerClassLocationBundleKey="aleatorio$rec.exp.customizer.aleatorio"
-	videoLocation="aleatorio$rec.exp.url.aleatorio.video" toolTipBundleKey="aleatorio$rec.exp.tip.aleatorio"
-	iconLocationBundleKey="aleatorio$rec.exp.icon.aleatorio" displayStringBundleKey="aleatorio$rec.exp.title.aleatorio"
-	desktopLocationBundleKey="aleatorio$rec.exp.background.aleatorio" order="1">
-
+	toolTipBundleKey="aleatorio$rec.exp.tip.aleatorio"
+	iconLocationBundleKey="aleatorio$rec.exp.icon.aleatorio"
+	displayStringBundleKey="aleatorio$rec.exp.title.aleatorio"
+	desktopLocationBundleKey="aleatorio$rec.exp.background.aleatorio"
+	order="1">
+	<LocalizationBundle name="aleatorio"
+		location="recresource:///pt/utl/ist/elab/client/aleatorio/resources/messages" />
 	<WebResource locationBundleKey="aleatorio$rec.exp.url.aleatorio.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="aleatorio$rec.exp.url.aleatorio.title.1"
@@ -14,31 +17,34 @@
 		displayStringBundleKey="aleatorio$rec.exp.url.aleatorio.title.2"
 		toolTipLocationBundleKey="aleatorio$rec.exp.url.aleatorio.title.2"
 		internalBrowser="false" order="2" />
-	<WebResource locationBundleKey="aleatorio$rec.exp.url.aleatorio.video"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
-		displayStringBundleKey="aleatorio$rec.exp.url.aleatorio.title.video"
-		toolTipLocationBundleKey="aleatorio$rec.exp.url.aleatorio.title.video"
+	<WebResource locationBundleKey="aleatorio$rec.exp.url.aleatorio.3"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="aleatorio$rec.exp.url.aleatorio.title.3"
+		toolTipLocationBundleKey="aleatorio$rec.exp.url.aleatorio.title.3"
 		internalBrowser="false" order="3" />
-
-	<DefaultAcquisitionConfig
-		classLocationBundleKey="aleatorio$rec.exp.dftcfg.aleatorio.loc.1"
-		toolTipBundleKey="aleatorio$rec.exp.dftcfg.aleatorio.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
-		displayStringBundleKey="aleatorio$rec.exp.dftcfg.aleatorio.title.1" order="1" />
-
-	<Display classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.sensor"
-		toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.sensor"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
-		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.sensor"
-		offlineCapable="false" order="1" />
 	<Display classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.1"
 		toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.1"
-		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		iconLocationBundleKey="aleatorio$rec.exp.display.aleatorio.icon.1"
 		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.1"
-		offlineCapable="false" order="2" />
+		offlineCapable="false" order="1" />
 	<Display classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.2"
 		toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.2"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.2"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.3"
+		toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.3"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.3"
 		offlineCapable="false" order="3" />
+	<Display classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.4"
+		toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.4"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.4"
+		offlineCapable="false" order="4" />
+	<Display classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.5"
+		toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.5"
+		iconLocationBundleKey="aleatorio$rec.exp.display.aleatorio.icon.1"
+		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.5"
+		offlineCapable="true" order="5" />
 </Apparatus>
