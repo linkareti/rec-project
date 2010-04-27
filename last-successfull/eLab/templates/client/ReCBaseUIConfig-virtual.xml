@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by bruno on 21 de Maio de 2003, 17:33 -->
+<!-- Altered by jp on 22 de Janeiro de 2004, 01:40 -->
+<!--<!DOCTYPE ReCBaseUIConfig SYSTEM "ReCBaseUIConfig.dtd">-->
+<!-- The strings specified here should be entries on a localized Resource Bundle -->
+<ReCBaseUIConfig autoConnectLab="false" showVideoFrame="false" enableVideoFrame="false" showChatFrame="true" enableChatFrame="true" showUserList="true" enableUsersList="true" usersListRefreshRateMs="10000" enterApparatusChatRoom="true" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.frame" frameTitleBundleKey="ReCBaseUI$rec.bui.title.frame" iconSponsorLocationBundleKey="bundleName#bundleKey" helpPageLocationBundleKey="ReCBaseUI$rec.bui.url.help" aboutPageLocationBundleKey="ReCBaseUI$rec.bui.url.about">
+    <LocalizationBundle name="ReCBaseUI" location="recresource:///com/linkare/rec/impl/baseUI/resources/ReCBaseUI"/>
+    <LocalizationBundle name="ReCLabeLab" location="recresource:///pt/utl/ist/elab/resources/ReCLabeLab"/>
+    <LocalizationBundle name="ReCLabeLabVirtual" location="recresource:///pt/utl/ist/elab/resources/ReCLabeLabVirtual"/>
+    <LocalizationBundle name="ReCExpMM" location="recresource:///pt/utl/ist/elab/virtual/client/mm/resources/ReCExpMM"/>
+    <LocalizationBundle name="ReCExpCG" location="recresource:///pt/utl/ist/elab/virtual/client/cg/resources/ReCExpCG"/>
+    <LocalizationBundle name="ReCExpM3" location="recresource:///pt/utl/ist/elab/virtual/client/m3/resources/ReCExpM3"/>
+    <LocalizationBundle name="ReCExpSTDMAP" location="recresource:///pt/utl/ist/elab/virtual/client/stdmap/resources/ReCExpSTDMAP"/>
+    <LocalizationBundle name="ReCExpPend2M" location="recresource:///pt/utl/ist/elab/virtual/client/pend2m/resources/ReCExpPend2M"/>
+    <LocalizationBundle name="ReCExpFERMAP" location="recresource:///pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP"/>
+    <LocalizationBundle name="ReCExpMovProj" location="recresource:///pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj"/>
+    <LocalizationBundle name="ReCExpCargas3D" location="recresource:///pt/utl/ist/elab/virtual/client/cargas3d/resources/ReCExpCargas3D"/>
+    <LocalizationBundle name="ReCExpMvBrown" location="recresource:///pt/utl/ist/elab/virtual/client/mvbrown/resources/ReCExpMvBrown"/>
+    <LocalizationBundle name="ReCExpQuantum" location="recresource:///pt/utl/ist/elab/virtual/client/quantum/resources/ReCExpQuantum"/>
+    <LocalizationBundle name="ReCExpCartPole" location="recresource:///pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole"/>
+    <LocalizationBundle name="ReCExpYoungInterf" location="recresource:///pt/utl/ist/elab/virtual/client/younginterf/resources/ReCExpYoungInterf"/>
+    <LocalizationBundle name="ReCExpBS" location="recresource:///pt/utl/ist/elab/virtual/client/bs/resources/ReCExpBS"/>
+    <LocalizationBundle name="ReCExpLooping" location="recresource:///pt/utl/ist/elab/virtual/client/looping/resources/ReCExpLooping"/>
+    <LocalizationBundle name="ReCExpTiro" location="recresource:///pt/utl/ist/elab/virtual/client/tiro/resources/ReCExpTiro"/>
+    <LocalizationBundle name="ReCExpDI" location="recresource:///pt/utl/ist/elab/virtual/client/di/resources/ReCExpDI"/>
+    <LocalizationBundle name="ReCExpColisao" location="recresource:///pt/utl/ist/elab/virtual/client/colisao/resources/ReCExpColisao"/>
+    <LocalizationBundle name="ReCExpOscilador" location="recresource:///pt/utl/ist/elab/virtual/client/oscilador/resources/ReCExpOscilador"/>
+    <LocalizationBundle name="ReCExpPoisson" location="recresource:///pt/utl/ist/elab/virtual/client/poisson/resources/ReCExpPoisson"/>
+    <Lab location="corbaloc:iiop:1.2@elabmc.ist.utl.pt:9003/MultiCastController" displayStringBundleKey="ReCLabeLabVirtual$rec.lab.title.elab" toolTipBundleKey="ReCLabeLabVirtual$rec.lab.tip.elab" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.lab" desktopLocationBundleKey="ReCBaseUI$rec.bui.image.desktop" order="1">
+         <!--<LocalizationBundle name="bundleName"
+                             location="bundleLocation"/>
+         <LocalizationBundle name="bundleName"
+                             location="bundleLocation"/>-->
+        <WebResource locationBundleKey="ReCLabeLabVirtual$rec.lab.url.elab" iconLocationBundleKey="ReCLabeLabVirtual$rec.lab.icon.webpage" displayStringBundleKey="ReCLabeLabVirtual$rec.lab.url.title.elab" toolTipLocationBundleKey="ReCLabeLabVirtual$rec.lab.url.tip.elab" internalBrowser="false" order="1"/>
+        <!--<WebResource locationBundleKey="ReC_Base_Test$lab_elab_web_url_eescola"
+                      iconLocationBundleKey="ReCBaseUI$rec.bui.icon.web"
+                      displayStringBundleKey="ReC_Base_Test$lab_elab_web_url_eescola"
+                      toolTipLocationBundleKey="ReC_Base_Test$lab_elab_web_tip_eescola"
+                      internalBrowser="false"
+                      order="2"/>-->
+	<Apparatus location="MASSA_MOLA_V1.0" customizerClassLocationBundleKey="ReCExpMM$rec.exp.customizer.mm" toolTipBundleKey="ReCExpMM$rec.exp.tip.mm" iconLocationBundleKey="ReCExpMM$rec.exp.icon.mm" displayStringBundleKey="ReCExpMM$rec.exp.title.mm" desktopLocationBundleKey="ReCExpMM$rec.exp.background.mm" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.mm.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.mm.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.mm.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.mm.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.mm.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.mm.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.mm.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.mm.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.mm.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.mm.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.mm.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.mm.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpMM$rec.exp.display.mm.loc.anim" toolTipBundleKey="ReCExpMM$rec.exp.display.mm.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpMM$rec.exp.display.mm.title.anim" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpMM$rec.exp.display.mm.loc.1" toolTipBundleKey="ReCExpMM$rec.exp.display.mm.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpMM$rec.exp.display.mm.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpMM$rec.exp.display.mm.loc.2" toolTipBundleKey="ReCExpMM$rec.exp.display.mm.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMM$rec.exp.display.mm.title.2" offlineCapable="false" order="3"/>
+            <Display classLocationBundleKey="ReCExpMM$rec.exp.display.mm.loc.3" toolTipBundleKey="ReCExpMM$rec.exp.display.mm.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMM$rec.exp.display.mm.title.3" offlineCapable="false" order="4"/>
+            <Display classLocationBundleKey="ReCExpMM$rec.exp.display.mm.loc.4" toolTipBundleKey="ReCExpMM$rec.exp.display.mm.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMM$rec.exp.display.mm.title.4" offlineCapable="false" order="5"/>
+        </Apparatus>
+	<Apparatus location="CAVENDISH_G_V1.0" customizerClassLocationBundleKey="ReCExpCG$rec.exp.customizer.cg" toolTipBundleKey="ReCExpCG$rec.exp.tip.cg" iconLocationBundleKey="ReCExpCG$rec.exp.icon.cg" displayStringBundleKey="ReCExpCG$rec.exp.title.cg" desktopLocationBundleKey="ReCExpCG$rec.exp.background.cg" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.cg.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.cg.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.cg.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.cg.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.cg.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.cg.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.cg.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.cg.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.cg.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.cg.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.cg.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.cg.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpCG$rec.exp.display.cg.loc.anim" toolTipBundleKey="ReCExpCG$rec.exp.display.cg.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpCG$rec.exp.display.cg.title.anim" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpCG$rec.exp.display.cg.loc.1" toolTipBundleKey="ReCExpCG$rec.exp.display.cg.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpCG$rec.exp.display.cg.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpCG$rec.exp.display.cg.loc.2" toolTipBundleKey="ReCExpCG$rec.exp.display.cg.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpCG$rec.exp.display.cg.title.2" offlineCapable="false" order="3"/>          
+        </Apparatus>
+	<Apparatus location="MOLAS3_V1.0" customizerClassLocationBundleKey="ReCExpM3$rec.exp.customizer.m3" toolTipBundleKey="ReCExpM3$rec.exp.tip.m3" iconLocationBundleKey="ReCExpM3$rec.exp.icon.m3" displayStringBundleKey="ReCExpM3$rec.exp.title.m3" desktopLocationBundleKey="ReCExpM3$rec.exp.background.m3" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.m3.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.m3.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.m3.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.m3.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.m3.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.m3.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.m3.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.m3.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.m3.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.m3.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.m3.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.m3.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpM3$rec.exp.display.m3.loc.anim" toolTipBundleKey="ReCExpM3$rec.exp.display.m3.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpM3$rec.exp.display.m3.title.anim" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpM3$rec.exp.display.m3.loc.1" toolTipBundleKey="ReCExpM3$rec.exp.display.m3.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpM3$rec.exp.display.m3.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpM3$rec.exp.display.m3.loc.2" toolTipBundleKey="ReCExpM3$rec.exp.display.m3.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpM3$rec.exp.display.m3.title.2" offlineCapable="false" order="3"/>      
+	    <Display classLocationBundleKey="ReCExpM3$rec.exp.display.m3.loc.3" toolTipBundleKey="ReCExpM3$rec.exp.display.m3.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpM3$rec.exp.display.m3.title.3" offlineCapable="false" order="4"/> 
+	    <Display classLocationBundleKey="ReCExpM3$rec.exp.display.m3.loc.4" toolTipBundleKey="ReCExpM3$rec.exp.display.m3.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpM3$rec.exp.display.m3.title.4" offlineCapable="false" order="5"/>     
+        </Apparatus>
+	<Apparatus location="STANDARD_MAP_V1.0" customizerClassLocationBundleKey="ReCExpSTDMAP$rec.exp.customizer.stdmap" toolTipBundleKey="ReCExpSTDMAP$rec.exp.tip.stdmap" iconLocationBundleKey="ReCExpSTDMAP$rec.exp.icon.stdmap" displayStringBundleKey="ReCExpSTDMAP$rec.exp.title.stdmap" desktopLocationBundleKey="ReCExpSTDMAP$rec.exp.background.stdmap" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.stdmap.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.stdmap.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.stdmap.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.stdmap.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.stdmap.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.stdmap.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.stdmap.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.stdmap.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.stdmap.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.stdmap.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.stdmap.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.stdmap.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpSTDMAP$rec.exp.display.stdmap.loc.anim" toolTipBundleKey="ReCExpSTDMAP$rec.exp.display.stdmap.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpSTDMAP$rec.exp.display.stdmap.title.anim" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpSTDMAP$rec.exp.display.stdmap.loc.1" toolTipBundleKey="ReCExpSTDMAP$rec.exp.display.stdmap.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpSTDMAP$rec.exp.display.stdmap.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpSTDMAP$rec.exp.display.stdmap.loc.2" toolTipBundleKey="ReCExpSTDMAP$rec.exp.display.stdmap.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpSTDMAP$rec.exp.display.stdmap.title.2" offlineCapable="false" order="3"/>      
+        </Apparatus>
+	<Apparatus location="PENDULO_DUPLO_MOTORIZADO_V1.0" customizerClassLocationBundleKey="ReCExpPend2M$rec.exp.customizer.pend2m" toolTipBundleKey="ReCExpPend2M$rec.exp.tip.pend2m" iconLocationBundleKey="ReCExpPend2M$rec.exp.icon.pend2m" displayStringBundleKey="ReCExpPend2M$rec.exp.title.pend2m" desktopLocationBundleKey="ReCExpPend2M$rec.exp.background.pend2m" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.pend2m.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.pend2m.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.pend2m.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.pend2m.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.pend2m.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.pend2m.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.pend2m.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.pend2m.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.pend2m.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.pend2m.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.pend2m.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.pend2m.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpPend2M$rec.exp.display.pend2m.loc.anim" toolTipBundleKey="ReCExpPend2M$rec.exp.display.pend2m.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpPend2M$rec.exp.display.pend2m.title.anim" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpPend2M$rec.exp.display.pend2m.loc.3" toolTipBundleKey="ReCExpPend2M$rec.exp.display.pend2m.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpPend2M$rec.exp.display.pend2m.title.3" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpPend2M$rec.exp.display.pend2m.loc.1" toolTipBundleKey="ReCExpPend2M$rec.exp.display.pend2m.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpPend2M$rec.exp.display.pend2m.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpPend2M$rec.exp.display.pend2m.loc.2" toolTipBundleKey="ReCExpPend2M$rec.exp.display.pend2m.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpPend2M$rec.exp.display.pend2m.title.2" offlineCapable="false" order="3"/>      
+        </Apparatus>
+	<Apparatus location="FERMI_MAP_V1.0" customizerClassLocationBundleKey="ReCExpFERMAP$rec.exp.customizer.fermap" toolTipBundleKey="ReCExpFERMAP$rec.exp.tip.fermap" iconLocationBundleKey="ReCExpFERMAP$rec.exp.icon.fermap" displayStringBundleKey="ReCExpFERMAP$rec.exp.title.fermap" desktopLocationBundleKey="ReCExpFERMAP$rec.exp.background.fermap" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.fermap.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.fermap.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.fermap.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.fermap.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.fermap.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.fermap.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.fermap.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.fermap.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.fermap.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.fermap.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.fermap.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.fermap.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpFERMAP$rec.exp.display.fermap.loc.anim" toolTipBundleKey="ReCExpFERMAP$rec.exp.display.fermap.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpFERMAP$rec.exp.display.fermap.title.anim" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpFERMAP$rec.exp.display.fermap.loc.1" toolTipBundleKey="ReCExpFERMAP$rec.exp.display.fermap.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpFERMAP$rec.exp.display.fermap.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpFERMAP$rec.exp.display.fermap.loc.2" toolTipBundleKey="ReCExpFERMAP$rec.exp.display.fermap.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpFERMAP$rec.exp.display.fermap.title.2" offlineCapable="false" order="3"/>      
+        </Apparatus>
+	<Apparatus location="MOVIMENTO_DE_PROJECTEIS_V1.0" customizerClassLocationBundleKey="ReCExpMovProj$rec.exp.customizer.movproj" toolTipBundleKey="ReCExpMovProj$rec.exp.tip.movproj" iconLocationBundleKey="ReCExpMovProj$rec.exp.icon.movproj" displayStringBundleKey="ReCExpMovProj$rec.exp.title.movproj" desktopLocationBundleKey="ReCExpMovProj$rec.exp.background.movproj" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpMovProj$rec.exp.display.movproj.loc.anim" toolTipBundleKey="ReCExpMovProj$rec.exp.display.movproj.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpMovProj$rec.exp.display.movproj.title.anim" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpMovProj$rec.exp.display.movproj.loc.1" toolTipBundleKey="ReCExpMovProj$rec.exp.display.movproj.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMovProj$rec.exp.display.movproj.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpMovProj$rec.exp.display.movproj.loc.2" toolTipBundleKey="ReCExpMovProj$rec.exp.display.movproj.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMovProj$rec.exp.display.movproj.title.2" offlineCapable="false" order="3"/>      
+            <Display classLocationBundleKey="ReCExpMovProj$rec.exp.display.movproj.loc.3" toolTipBundleKey="ReCExpMovProj$rec.exp.display.movproj.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMovProj$rec.exp.display.movproj.title.3" offlineCapable="false" order="3"/>      
+            <Display classLocationBundleKey="ReCExpMovProj$rec.exp.display.movproj.loc.4" toolTipBundleKey="ReCExpMovProj$rec.exp.display.movproj.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMovProj$rec.exp.display.movproj.title.4" offlineCapable="false" order="3"/>      
+            <Display classLocationBundleKey="ReCExpMovProj$rec.exp.display.movproj.loc.5" toolTipBundleKey="ReCExpMovProj$rec.exp.display.movproj.tip.5" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMovProj$rec.exp.display.movproj.title.5" offlineCapable="false" order="3"/>      
+            <Display classLocationBundleKey="ReCExpMovProj$rec.exp.display.movproj.loc.6" toolTipBundleKey="ReCExpMovProj$rec.exp.display.movproj.tip.6" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMovProj$rec.exp.display.movproj.title.6" offlineCapable="false" order="3"/>      
+            <Display classLocationBundleKey="ReCExpMovProj$rec.exp.display.movproj.loc.7" toolTipBundleKey="ReCExpMovProj$rec.exp.display.movproj.tip.7" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpMovProj$rec.exp.display.movproj.title.7" offlineCapable="false" order="3"/>      
+        </Apparatus>
+	<Apparatus location="CARGAS3D_V1.0" customizerClassLocationBundleKey="ReCExpCargas3D$rec.exp.customizer.cargas3d" toolTipBundleKey="ReCExpCargas3D$rec.exp.tip.cargas3d" iconLocationBundleKey="ReCExpCargas3D$rec.exp.icon.cargas3d" displayStringBundleKey="ReCExpCargas3D$rec.exp.title.cargas3d" desktopLocationBundleKey="ReCExpCargas3D$rec.exp.background.cargas3d" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.cargas3d.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.cargas3d.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.cargas3d.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.cargas3d.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.cargas3d.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.cargas3d.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.cargas3d.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.cargas3d.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.cargas3d.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.cargas3d.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.cargas3d.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.cargas3d.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpCargas3D$rec.exp.display.cargas3d.loc.1" toolTipBundleKey="ReCExpCargas3D$rec.exp.display.cargas3d.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpCargas3D$rec.exp.display.cargas3d.title.1" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpCargas3D$rec.exp.display.cargas3d.loc.2" toolTipBundleKey="ReCExpCargas3D$rec.exp.display.cargas3d.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpCargas3D$rec.exp.display.cargas3d.title.2" offlineCapable="false" order="2"/>              
+     	</Apparatus>
+	<Apparatus location="MOVIMENTO_BROWNIANO_V1.0" customizerClassLocationBundleKey="ReCExpMvBrown$rec.exp.customizer.mvbrown" toolTipBundleKey="ReCExpMvBrown$rec.exp.tip.mvbrown" iconLocationBundleKey="ReCExpMvBrown$rec.exp.icon.mvbrown" displayStringBundleKey="ReCExpMvBrown$rec.exp.title.mvbrown" desktopLocationBundleKey="ReCExpMvBrown$rec.exp.background.mvbrown" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.loc.anim" toolTipBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.title.anim" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.loc.1" toolTipBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.loc.2" toolTipBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.title.2" offlineCapable="false" order="3"/>      
+            <Display classLocationBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.loc.3" toolTipBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.title.3" offlineCapable="false" order="4"/>      
+            <Display classLocationBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.loc.4" toolTipBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.title.4" offlineCapable="false" order="5"/>      
+            <Display classLocationBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.loc.5" toolTipBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.tip.5" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.title.5" offlineCapable="false" order="6"/>      
+            <Display classLocationBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.loc.6" toolTipBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.tip.6" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpMvBrown$rec.exp.display.mvbrown.title.6" offlineCapable="false" order="7"/>
+        </Apparatus>	
+	<Apparatus location="MECANICA_QUANTICA_V1.0" customizerClassLocationBundleKey="ReCExpQuantum$rec.exp.customizer.quantum" toolTipBundleKey="ReCExpQuantum$rec.exp.tip.quantum" iconLocationBundleKey="ReCExpQuantum$rec.exp.icon.quantum" displayStringBundleKey="ReCExpQuantum$rec.exp.title.quantum" desktopLocationBundleKey="ReCExpQuantum$rec.exp.background.quantum" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpQuantum$rec.exp.display.quantum.loc.anim" toolTipBundleKey="ReCExpQuantum$rec.exp.display.quantum.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpQuantum$rec.exp.display.quantum.title.anim" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpQuantum$rec.exp.display.quantum.loc.1" toolTipBundleKey="ReCExpQuantum$rec.exp.display.quantum.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpQuantum$rec.exp.display.quantum.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpQuantum$rec.exp.display.quantum.loc.2" toolTipBundleKey="ReCExpQuantum$rec.exp.display.quantum.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpQuantum$rec.exp.display.quantum.title.2" offlineCapable="false" order="3"/>
+    	</Apparatus>
+	<Apparatus location="CART_POLE_V1.0" customizerClassLocationBundleKey="ReCExpCartPole$rec.exp.customizer.cartpole" toolTipBundleKey="ReCExpCartPole$rec.exp.tip.cartpole" iconLocationBundleKey="ReCExpCartPole$rec.exp.icon.cartpole" displayStringBundleKey="ReCExpCartPole$rec.exp.title.cartpole" desktopLocationBundleKey="ReCExpCartPole$rec.exp.background.cartpole" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.cartpole.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.cartpole.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.cartpole.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.cartpole.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.cartpole.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.cartpole.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.cartpole.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.cartpole.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.cartpole.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.cartpole.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.cartpole.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.cartpole.title.1"
+                     order="1"/>
+                                -->                                                                                             
+            <Display classLocationBundleKey="ReCExpCartPole$rec.exp.display.cartpole.loc.anim" toolTipBundleKey="ReCExpCartPole$rec.exp.display.cartpole.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpCartPole$rec.exp.display.cartpole.title.anim" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpCartPole$rec.exp.display.cartpole.loc.3" toolTipBundleKey="ReCExpCartPole$rec.exp.display.cartpole.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpCartPole$rec.exp.display.cartpole.title.3" offlineCapable="false" order="1"/>
+ 	    <Display classLocationBundleKey="ReCExpCartPole$rec.exp.display.cartpole.loc.1" toolTipBundleKey="ReCExpCartPole$rec.exp.display.cartpole.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpCartPole$rec.exp.display.cartpole.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpCartPole$rec.exp.display.cartpole.loc.2" toolTipBundleKey="ReCExpCartPole$rec.exp.display.cartpole.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpCartPole$rec.exp.display.cartpole.title.2" offlineCapable="false" order="3"/>
+	    <Display classLocationBundleKey="ReCExpCartPole$rec.exp.display.cartpole.loc.4" toolTipBundleKey="ReCExpCartPole$rec.exp.display.cartpole.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpCartPole$rec.exp.display.cartpole.title.4" offlineCapable="false" order="4"/>
+        </Apparatus>
+	<Apparatus location="INTERFERENCIA_YOUNG_V1.0" customizerClassLocationBundleKey="ReCExpYoungInterf$rec.exp.customizer.younginterf" toolTipBundleKey="ReCExpYoungInterf$rec.exp.tip.younginterf" iconLocationBundleKey="ReCExpYoungInterf$rec.exp.icon.younginterf" displayStringBundleKey="ReCExpYoungInterf$rec.exp.title.younginterf" desktopLocationBundleKey="ReCExpYoungInterf$rec.exp.background.younginterf" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                                 
+ 	    <Display classLocationBundleKey="ReCExpYoungInterf$rec.exp.display.younginterf.loc.1" toolTipBundleKey="ReCExpYoungInterf$rec.exp.display.younginterf.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpYoungInterf$rec.exp.display.younginterf.title.1" offlineCapable="false" order="1"/>
+            <Display classLocationBundleKey="ReCExpYoungInterf$rec.exp.display.younginterf.loc.2" toolTipBundleKey="ReCExpYoungInterf$rec.exp.display.younginterf.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpYoungInterf$rec.exp.display.younginterf.title.2" offlineCapable="false" order="2"/>    
+            <Display classLocationBundleKey="ReCExpYoungInterf$rec.exp.display.younginterf.loc.3" toolTipBundleKey="ReCExpYoungInterf$rec.exp.display.younginterf.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpYoungInterf$rec.exp.display.younginterf.title.3" offlineCapable="false" order="3"/> 
+        </Apparatus>
+	<Apparatus location="BIOT_SAVART_V1.0" customizerClassLocationBundleKey="ReCExpBS$rec.exp.customizer.bs" toolTipBundleKey="ReCExpBS$rec.exp.tip.bs" iconLocationBundleKey="ReCExpBS$rec.exp.icon.bs" displayStringBundleKey="ReCExpBS$rec.exp.title.bs" desktopLocationBundleKey="ReCExpBS$rec.exp.background.bs" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                                 
+ 	    <Display classLocationBundleKey="ReCExpBS$rec.exp.display.bs.loc.anim" toolTipBundleKey="ReCExpBS$rec.exp.display.bs.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpBS$rec.exp.display.bs.title.anim" offlineCapable="false" order="1"/>
+            <Display classLocationBundleKey="ReCExpBS$rec.exp.display.bs.loc.1" toolTipBundleKey="ReCExpBS$rec.exp.display.bs.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpBS$rec.exp.display.bs.title.1" offlineCapable="false" order="2"/>    
+            <Display classLocationBundleKey="ReCExpBS$rec.exp.display.bs.loc.2" toolTipBundleKey="ReCExpBS$rec.exp.display.bs.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpBS$rec.exp.display.bs.title.2" offlineCapable="false" order="3"/> 
+	    <Display classLocationBundleKey="ReCExpBS$rec.exp.display.bs.loc.3" toolTipBundleKey="ReCExpBS$rec.exp.display.bs.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpBS$rec.exp.display.bs.title.3" offlineCapable="false" order="4"/> 
+            <Display classLocationBundleKey="ReCExpBS$rec.exp.display.bs.loc.4" toolTipBundleKey="ReCExpBS$rec.exp.display.bs.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpBS$rec.exp.display.bs.title.4" offlineCapable="false" order="5"/> 
+        </Apparatus>
+        <Apparatus location="LOOPING_V1.0" customizerClassLocationBundleKey="ReCExpLooping$rec.exp.customizer.looping" toolTipBundleKey="ReCExpLooping$rec.exp.tip.looping" iconLocationBundleKey="ReCExpLooping$rec.exp.icon.looping" displayStringBundleKey="ReCExpLooping$rec.exp.title.looping" desktopLocationBundleKey="ReCExpLooping$rec.exp.background.looping" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                                 
+ 	    <Display classLocationBundleKey="ReCExpLooping$rec.exp.display.looping.loc.anim" toolTipBundleKey="ReCExpLooping$rec.exp.display.looping.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpLooping$rec.exp.display.looping.title.anim" offlineCapable="false" order="1"/>
+            <Display classLocationBundleKey="ReCExpLooping$rec.exp.display.looping.loc.1" toolTipBundleKey="ReCExpLooping$rec.exp.display.looping.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpLooping$rec.exp.display.looping.title.1" offlineCapable="false" order="2"/>    
+            <Display classLocationBundleKey="ReCExpLooping$rec.exp.display.looping.loc.2" toolTipBundleKey="ReCExpLooping$rec.exp.display.looping.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpLooping$rec.exp.display.looping.title.2" offlineCapable="false" order="3"/> 
+	    <Display classLocationBundleKey="ReCExpLooping$rec.exp.display.looping.loc.3" toolTipBundleKey="ReCExpLooping$rec.exp.display.looping.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpLooping$rec.exp.display.looping.title.3" offlineCapable="false" order="4"/> 
+            <Display classLocationBundleKey="ReCExpLooping$rec.exp.display.looping.loc.4" toolTipBundleKey="ReCExpLooping$rec.exp.display.looping.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpLooping$rec.exp.display.looping.title.4" offlineCapable="false" order="5"/> 
+        </Apparatus>
+        <Apparatus location="TIRO_V1.0" customizerClassLocationBundleKey="ReCExpTiro$rec.exp.customizer.tiro" toolTipBundleKey="ReCExpTiro$rec.exp.tip.tiro" iconLocationBundleKey="ReCExpTiro$rec.exp.icon.tiro" displayStringBundleKey="ReCExpTiro$rec.exp.title.tiro" desktopLocationBundleKey="ReCExpTiro$rec.exp.background.tiro" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                                 
+ 	    <Display classLocationBundleKey="ReCExpTiro$rec.exp.display.tiro.loc.anim" toolTipBundleKey="ReCExpTiro$rec.exp.display.tiro.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpTiro$rec.exp.display.tiro.title.anim" offlineCapable="false" order="1"/>
+            <Display classLocationBundleKey="ReCExpTiro$rec.exp.display.tiro.loc.1" toolTipBundleKey="ReCExpTiro$rec.exp.display.tiro.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpTiro$rec.exp.display.tiro.title.1" offlineCapable="false" order="2"/>
+        </Apparatus>
+        <Apparatus location="DISCOS_INERCIA_V1.0" customizerClassLocationBundleKey="ReCExpDI$rec.exp.customizer.di" toolTipBundleKey="ReCExpDI$rec.exp.tip.di" iconLocationBundleKey="ReCExpDI$rec.exp.icon.di" displayStringBundleKey="ReCExpDI$rec.exp.title.di" desktopLocationBundleKey="ReCExpDI$rec.exp.background.di" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                                 
+ 	    <Display classLocationBundleKey="ReCExpDI$rec.exp.display.di.loc.anim" toolTipBundleKey="ReCExpDI$rec.exp.display.di.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpDI$rec.exp.display.di.title.anim" offlineCapable="false" order="1"/>
+            <Display classLocationBundleKey="ReCExpDI$rec.exp.display.di.loc.1" toolTipBundleKey="ReCExpDI$rec.exp.display.di.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpDI$rec.exp.display.di.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpDI$rec.exp.display.di.loc.2" toolTipBundleKey="ReCExpDI$rec.exp.display.di.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpDI$rec.exp.display.di.title.2" offlineCapable="false" order="3"/> 
+	    <Display classLocationBundleKey="ReCExpDI$rec.exp.display.di.loc.3" toolTipBundleKey="ReCExpDI$rec.exp.display.di.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpDI$rec.exp.display.di.title.3" offlineCapable="false" order="4"/>
+            <Display classLocationBundleKey="ReCExpDI$rec.exp.display.di.loc.4" toolTipBundleKey="ReCExpDI$rec.exp.display.di.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpDI$rec.exp.display.di.title.4" offlineCapable="false" order="5"/>
+            <Display classLocationBundleKey="ReCExpDI$rec.exp.display.di.loc.5" toolTipBundleKey="ReCExpDI$rec.exp.display.di.tip.5" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpDI$rec.exp.display.di.title.5" offlineCapable="false" order="6"/>
+	    <Display classLocationBundleKey="ReCExpDI$rec.exp.display.di.loc.6" toolTipBundleKey="ReCExpDI$rec.exp.display.di.tip.6" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpDI$rec.exp.display.di.title.6" offlineCapable="false" order="7"/>      
+	    <Display classLocationBundleKey="ReCExpDI$rec.exp.display.di.loc.7" toolTipBundleKey="ReCExpDI$rec.exp.display.di.tip.7" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpDI$rec.exp.display.di.title.7" offlineCapable="false" order="8"/>
+        </Apparatus>
+	<Apparatus location="COLISAO_V1.0" customizerClassLocationBundleKey="ReCExpColisao$rec.exp.customizer.colisao" toolTipBundleKey="ReCExpColisao$rec.exp.tip.colisao" iconLocationBundleKey="ReCExpColisao$rec.exp.icon.colisao" displayStringBundleKey="ReCExpColisao$rec.exp.title.colisao" desktopLocationBundleKey="ReCExpColisao$rec.exp.background.colisao" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                                 
+ 	    <Display classLocationBundleKey="ReCExpColisao$rec.exp.display.colisao.loc.anim" toolTipBundleKey="ReCExpColisao$rec.exp.display.colisao.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpColisao$rec.exp.display.colisao.title.anim" offlineCapable="false" order="1"/>
+            <Display classLocationBundleKey="ReCExpColisao$rec.exp.display.colisao.loc.1" toolTipBundleKey="ReCExpColisao$rec.exp.display.colisao.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpColisao$rec.exp.display.colisao.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpColisao$rec.exp.display.colisao.loc.2" toolTipBundleKey="ReCExpColisao$rec.exp.display.colisao.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpColisao$rec.exp.display.colisao.title.2" offlineCapable="false" order="3"/>
+	    <Display classLocationBundleKey="ReCExpColisao$rec.exp.display.colisao.loc.3" toolTipBundleKey="ReCExpColisao$rec.exp.display.colisao.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpColisao$rec.exp.display.colisao.title.3" offlineCapable="false" order="4"/>
+	    <Display classLocationBundleKey="ReCExpColisao$rec.exp.display.colisao.loc.4" toolTipBundleKey="ReCExpColisao$rec.exp.display.colisao.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpColisao$rec.exp.display.colisao.title.4" offlineCapable="false" order="5"/>
+        </Apparatus>
+	<Apparatus location="OSCILADOR_V1.0" customizerClassLocationBundleKey="ReCExpOscilador$rec.exp.customizer.oscilador" toolTipBundleKey="ReCExpOscilador$rec.exp.tip.oscilador" iconLocationBundleKey="ReCExpOscilador$rec.exp.icon.oscilador" displayStringBundleKey="ReCExpOscilador$rec.exp.title.oscilador" desktopLocationBundleKey="ReCExpOscilador$rec.exp.background.oscilador" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                                 
+ 	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.anim" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.anim" offlineCapable="false" order="1"/>
+            <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.1" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.1" offlineCapable="false" order="2"/>
+            <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.2" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.2" offlineCapable="false" order="3"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.3" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.3" offlineCapable="false" order="4"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.4" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.4" offlineCapable="false" order="5"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.5" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.5" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.5" offlineCapable="false" order="6"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.6" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.6" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.6" offlineCapable="false" order="7"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.7" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.7" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.7" offlineCapable="false" order="8"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.8" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.8" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.8" offlineCapable="false" order="9"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.9" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.9" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.9" offlineCapable="false" order="10"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.10" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.10" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.10" offlineCapable="false" order="11"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.11" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.11" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.11" offlineCapable="false" order="12"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.12" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.12" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.12" offlineCapable="false" order="13"/>
+	    <Display classLocationBundleKey="ReCExpOscilador$rec.exp.display.oscilador.loc.13" toolTipBundleKey="ReCExpOscilador$rec.exp.display.oscilador.tip.13" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpOscilador$rec.exp.display.oscilador.title.13" offlineCapable="false" order="14"/>
+	</Apparatus>
+	<Apparatus location="POISSON_V1.0" customizerClassLocationBundleKey="ReCExpPoisson$rec.exp.customizer.poisson" toolTipBundleKey="ReCExpPoisson$rec.exp.tip.poisson" iconLocationBundleKey="ReCExpPoisson$rec.exp.icon.poisson" displayStringBundleKey="ReCExpPoisson$rec.exp.title.poisson" desktopLocationBundleKey="ReCExpPoisson$rec.exp.background.poisson" order="1">
+            <!--<WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.2"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.2"
+                 internalBrowser="false"
+                 order="2"/>
+            <WebResource locationBundleKey="ReCExpMM$rec.exp.url.movproj.video"
+                 iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+                 displayStringBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 toolTipLocationBundleKey="ReCExpMM$rec.exp.url.movproj.title.video"
+                 internalBrowser="false"
+                 order="3"/>
+                                                                                                                             
+                                                                                                                             
+            <DefaultAcquisitionConfig classLocationBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.loc.1"
+                     toolTipBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.tip.1"
+                     iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+                     displayStringBundleKey="ReCExpMM$rec.exp.dftcfg.movproj.title.1"
+                     order="1"/>
+                                -->                                                                                                 
+ 	    <Display classLocationBundleKey="ReCExpPoisson$rec.exp.display.poisson.loc.anim" toolTipBundleKey="ReCExpPoisson$rec.exp.display.poisson.tip.anim" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpPoisson$rec.exp.display.poisson.title.anim" offlineCapable="false" order="1"/>
+	    <Display classLocationBundleKey="ReCExpPoisson$rec.exp.display.poisson.loc.1" toolTipBundleKey="ReCExpPoisson$rec.exp.display.poisson.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpPoisson$rec.exp.display.poisson.title.1" offlineCapable="false" order="2"/>
+        </Apparatus>
+    </Lab>
+</ReCBaseUIConfig>

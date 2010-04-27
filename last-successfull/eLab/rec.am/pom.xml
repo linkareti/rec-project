@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.linkare</groupId>
+    <artifactId>rec.am</artifactId>
+    <packaging>war</packaging>
+    <name>rec.am</name>
+    <version>1.0.0-SNAPSHOT</version>
+
+
+    <properties>
+        <!--
+                        Explicitly declaring the source encoding eliminates the following
+                        message: [WARNING] Using platform encoding (UTF-8 actually) to copy
+                        filtered resources, i.e. build is platform dependent!
+                -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--
+                        To set the jboss.home environment variable the Maven way, set the
+                        jboss.home property in an active profile in the Maven 2 settings.xml
+                        file
+                -->
+        <jboss.home>${env.JBOSS_HOME}</jboss.home>
+        <jboss.domain>default</jboss.domain>
+        <!-- The version of Weld extensions in use -->
+        <weld.extensions.version>1.0.0-CR2</weld.extensions.version>
+    </properties>
+
+    <repositories>
+        <!--
+                        Several key Java EE APIs and RIs are missing from the Maven Central
+                        Repository
+                -->
+                <!--
+                        The goal is to eventually eliminate the reliance on the JBoss
+                        repository
+                -->
+        <repository>
+            <id>public-repo</id>
+            <name>Linkare public repository</name>
+            <url>http://nexus.linkare.com/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>snap-repo</id>
+            <name>Linkare public snapshot repository</name>
+            <url>http://nexus.linkare.com/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>jboss-repo</id>
+            <name>JBoss maven repository</name>
+            <url>http://repository.jboss.com/maven2/</url>
+        </repository>
+        <repository>
+            <id>jboss-repo-org</id>
+            <name>JBoss.org maven repository</name>
+            <url>http://repository.jboss.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>prime-repo</id>
+            <name>Prime Technology Maven Repository</name>
+            <url>http://repository.prime.com.tr</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>java-net</id>
+            <name>Java.net</name>
+            <url>http://download.java.net/maven</url>
+        </repository>
+        <repository>
+            <id>java-net2</id>
+            <name>Java.net</name>
+            <url>http://download.java.net/maven/2</url>
+        </repository>
+
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Import scope will provide versions for dependencies below. -->
+            <dependency>
+                <groupId>org.jboss.weld</groupId>
+                <artifactId>weld-extensions-bom</artifactId>
+                <version>${weld.extensions.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <!-- CDI (JSR-299) -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- EJB -->
+        <dependency>
+            <groupId>org.jboss.ejb3</groupId>
+            <artifactId>jboss-ejb3-api</artifactId>
+            <scope>provided</scope>
+            <version>3.1.0</version>
+        </dependency>
+        <!--
+                        Common annotations (e.g., @PostConstruct, @PreDestroy, @Generated,
+                        @Resource)
+                -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Bean Validation (JSR-303) -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Bean Validation Implementation -->
+                <!--
+                        Provides portable constraints such as @NotEmpty, @Email and @Url
+                -->
+                <!--
+                        Hibernate Validator is only the JSR-303 implementation at the moment,
+                        so we can assume it's provided
+                -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.0.0.GA</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- JSF -->
+                <!-- JPA -->
+
+                <!-- Optional, but highly recommended. -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>5.10</version>
+            <scope>test</scope>
+            <classifier>jdk15</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>el-api</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>el-impl</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>2.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.java-persistence</groupId>
+            <artifactId>jpa-api</artifactId>
+            <version>2.0-cr-1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.0.2-FCS</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>2.0.2-FCS</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Axis suport for old WS-RPC -->
+        <dependency>
+            <groupId>org.apache.axis</groupId>
+            <artifactId>axis</artifactId>
+            <version>1.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.axis</groupId>
+            <artifactId>axis-jaxrpc</artifactId>
+            <version>1.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-discovery</groupId>
+            <artifactId>commons-discovery</artifactId>
+            <version>0.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+            <version>1.6.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Axis suport for old WS-RPC -->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.linkare</groupId>
+            <artifactId>jpa.security</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>com.linkare</groupId>
+        	<artifactId>jpa</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        	<scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>${artifactId}</finalName>
+        <plugins>
+            <!-- Compiler plugin enforces Java 1.6 compatiblity -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            <!-- Eclipse plugin can force download of source and JavaDoc jars -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <wtpversion>2.0</wtpversion>
+                    <!--
+                                                <downloadSources>true</downloadSources>
+                                                <downloadJavadocs>true</downloadJavadocs>
+                                        -->
+                </configuration>
+            </plugin>
+
+            <!-- Configure the JBoss AS Maven deploy plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jboss-maven-plugin</artifactId>
+                <configuration>
+                    <jbossHome>${jboss.home}</jbossHome>
+                    <serverName>${jboss.domain}</serverName>
+                    <fileNames>
+                        <fileName>${project.build.directory}/${build.finalName}.war
+                        </fileName>
+                    </fileNames>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>axistools-maven-plugin</artifactId>
+                <version>1.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <packageSpace>com.linkare.rec.am.wsgen.moodle</packageSpace>
+                    <sourceDirectory>src/main/resources</sourceDirectory>
+                    <outputDirectory>src/main/java</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.4</version>
+
+                <dependencies>
+                    <!-- MySQL JDBC driver -->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.6</version>
+                    </dependency>
+
+                </dependencies>
+
+                <!-- common configuration shared by all executions -->
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://localhost:3306/allocation</url>
+
+                    <!-- You can comment out username/password configurations and
+                         have maven to look them up in your settings.xml using ${settingsKey} -->
+                    <!--username>username</username -->
+                    <!--password>password</password -->
+                    <settingsKey>mysql</settingsKey>
+
+                    <!--all executions are ignored if -Dmaven.test.skip=true-->
+                    <skip>${maven.test.skip}</skip>
+                </configuration>
+
+                <executions>
+                    <!--<execution>
+                        <id>drop-db-before-test-if-any</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                             need another database to drop the targeted one
+                            <url>jdbc:mysql://localhost:3306/mysql</url>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>drop database allocation</sqlCommand>
+                             ignore error when database is not avaiable
+                            <onError>continue</onError>
+                        </configuration>
+                    </execution>-->
+
+                    <!--<execution>
+                        <id>create-db</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>jdbc:mysql://localhost:3306</url>
+                             no transaction
+                            <autocommit>true</autocommit>
+                            <sqlCommand>create database allocation</sqlCommand>
+                            <onError>continue</onError>
+                        </configuration>
+                    </execution>-->
+
+                    <!--<execution>
+                        <id>create-schema</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/sql/create-am-schema.sql</srcFile>
+                            </srcFiles>
+                            <onError>continue</onError>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>create-data</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <orderFile>ascending</orderFile>
+                            <fileset>
+                                <basedir>${basedir}</basedir>
+                                <includes>
+                                    <include>src/main/sql/data-initialization.sql</include>
+                                </includes>
+                            </fileset>
+                            <onError>continue</onError>
+                        </configuration>
+                    </execution>-->
+
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src</directory>
+                            <targetPath>WEB-INF</targetPath>
+                            <includes>
+                                <include>jax-ws-catalog.xml</include>
+                                <include>wsdl/**</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
+
+
