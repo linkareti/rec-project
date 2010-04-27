@@ -21,13 +21,8 @@
 		onCloseUpdate="msg" resizeListener="#{layoutBean.handleResize}"
 		onResizeUpdate="msg">
 
-		<p:layoutUnit id="top" position="top" resizable="true" height="80">
-			<h1><ui:insert name="title">Default Title</ui:insert></h1>
-		</p:layoutUnit>
-
-		<p:layoutUnit id="left" position="left" width="192" resizable="true"
-			closable="false" collapsible="true" minWidth="200"
-			header="#{bundle['menu.title']}">
+		<p:layoutUnit id="left" position="left" width="200" resizable="false"
+			closable="false" collapsible="true" header="#{bundle['menu.title']}">
 			<ui:insert name="menu"></ui:insert>
 		</p:layoutUnit>
 

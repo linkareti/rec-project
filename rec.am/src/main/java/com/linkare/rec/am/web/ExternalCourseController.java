@@ -72,11 +72,6 @@ public class ExternalCourseController extends AbstractController<ExternalCourse,
 	throw new UnsupportedOperationException("external.courses.destroy.not.available");
     }
 
-    @Override
-    public String destroyAndView() {
-	throw new UnsupportedOperationException("external.courses.destroyAndView.not.available");
-    }
-
     public UserRecord[] getTeachers() {
 	if (teachers == null) {
 	    teachers = getFacade().getTeachers(getSelected() == null ? null : getSelected().getShortname());

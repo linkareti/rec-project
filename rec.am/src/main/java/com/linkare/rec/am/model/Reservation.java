@@ -7,15 +7,14 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import org.joda.time.Interval;
 import org.primefaces.model.ScheduleEvent;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
@@ -33,7 +32,7 @@ import com.linkare.rec.am.model.moodle.MoodleRecord;
 @NamedQueries( {
 	@NamedQuery(name = "Reservation.findAll", query = "Select r from Reservation r"),
 	@NamedQuery(name = "Reservation.countAll", query = "Select count(r) from Reservation r"),
-	@NamedQuery(name = "findReservationsBetweenDatesForLaboratory", query = "Select r from Reservation r where r.startDate >=:start and r.endDate <=:end and r.experiment in (Select e from Laboratory l, Experiment e where l.name=:namelab and e.laboratory=l)"),
+	@NamedQuery(name = "Reservation.findByExperimentNameInInterval", query = "Select r from Reservation r where (r.startDate between :startDate and :endDate or r.endDate between :startDate and :endDate) and r.experiment.name=:experimentName"),
 	@NamedQuery(name = "Reservation.findReservationsForInternalUserInDate", query = "Select r from Reservation r WHERE r.user.username=:username and r.startDate between :start and :end"),
 	@NamedQuery(name = "Reservation.findReservationsForInternalUser", query = "Select r from Reservation r WHERE r.user.username=:username"),
 	@NamedQuery(name = "Reservation.findReservationsForExternalUserInDate", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.moodleRecord.domain=:loginDomain and r.startDate between :start and :end"),
@@ -52,17 +51,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     private Date startDate;
 
     @Basic
-    @Column(name = "START_TIME_SLOT")
-    private String startTimeSlot;
-
-    @Basic
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "END_DATE")
     private Date endDate;
-
-    @Basic
-    @Column(name = "END_TIME_SLOT")
-    private String endTimeSlot;
 
     @ManyToOne
     @JoinColumn(name = "KEY_USER", nullable = true)
@@ -178,6 +169,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
      *            new value of endDate
      */
     public void setEndDate(Date endDate) {
+	//	if(getStartDate() != null && endDate != null && !endDate.after(getStartDate())) {
+	//	    throw new DomainException("error.end")
+	//	}
 	this.endDate = endDate;
     }
 
@@ -273,47 +267,6 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     }
 
     /**
-     * @return the startTimeSlot
-     */
-    public String getStartTimeSlot() {
-	return startTimeSlot;
-    }
-
-    /**
-     * @param startTimeSlot
-     *            the startTimeSlot to set
-     */
-    public void setStartTimeSlot(String startTimeSlot) {
-	this.startTimeSlot = startTimeSlot;
-    }
-
-    /**
-     * @return the endTimeSlot
-     */
-    public String getEndTimeSlot() {
-	return endTimeSlot;
-    }
-
-    /**
-     * @param endTimeSlot
-     *            the endTimeSlot to set
-     */
-    public void setEndTimeSlot(String endTimeSlot) {
-	this.endTimeSlot = endTimeSlot;
-    }
-
-    public static List<Reservation> findReservationsInLab(String laboratorio, String nomeExperiencia, Date startDate, Date endDate, EntityManager em) {
-
-	Query query = em.createNamedQuery("findReservationsBetweenDatesForLaboratory");
-	query.setParameter("namelab", laboratorio);
-	query.setParameter("start", startDate);
-	query.setParameter("end", endDate);
-
-	return (List<Reservation>) query.getResultList();
-
-    }
-
-    /**
      * @return the group
      */
     public Group getGroup() {
@@ -397,6 +350,10 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 	return getMoodleRecord() != null;
     }
 
+    public Interval getInterval() {
+	return new Interval(getStartDate().getTime(), getEndDate().getTime());
+    }
+
     @Override
     public boolean delete() {
 	if (getHasUser()) {
@@ -409,5 +366,15 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 	    setGroup(null);
 	}
 	return true;
+    }
+
+    public boolean hasConflicts(List<Reservation> reservationsForExperimentNameAndInterval) {
+	for (final Reservation reservation : reservationsForExperimentNameAndInterval) {
+	    if (this != reservation && EqualityUtils.equals(this.getExperiment().getLaboratory(), reservation.getExperiment().getLaboratory())
+		    && this.getInterval().overlaps(reservation.getInterval())) {
+		return true;
+	    }
+	}
+	return false;
     }
 }

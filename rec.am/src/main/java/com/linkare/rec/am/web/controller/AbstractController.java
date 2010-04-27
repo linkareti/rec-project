@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
@@ -83,12 +84,6 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
 	return ConstantUtils.EDIT;
     }
 
-    public String destroyAndView() {
-	performDestroy();
-	recreateModel();
-	return ConstantUtils.LIST;
-    }
-
     protected void performDestroy() {
 	try {
 	    getFacade().remove(current);
@@ -113,8 +108,13 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
     public String destroy() {
 	current = getItems().getRowData();
 	performDestroy();
+	return prepareList();
+    }
+
+    public void destroy(ActionEvent event) {
+	current = getItems().getRowData();
+	performDestroy();
 	recreateModel();
-	return ConstantUtils.LIST;
     }
 
     public List<Entity> getAll() {

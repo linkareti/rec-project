@@ -32,8 +32,8 @@ public class GroupFacade extends Facade<Group> {
     }
 
     @Override
-    public void edit(Group group) {
-	getOrCreateDAO().edit(group);
+    public Group edit(Group group) {
+	return getOrCreateDAO().edit(group);
     }
 
     @Override

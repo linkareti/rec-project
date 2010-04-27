@@ -19,8 +19,8 @@ public class LoginDomainFacade extends Facade<LoginDomain> {
     }
 
     @Override
-    public void edit(LoginDomain loginDomain) {
-	em.merge(loginDomain);
+    public LoginDomain edit(LoginDomain loginDomain) {
+	return em.merge(loginDomain);
     }
 
     @Override

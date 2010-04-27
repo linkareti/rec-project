@@ -63,27 +63,21 @@
 			value="#{reservationController.selected.externalCourse}"
 			label="#{bundle['reservation.reservedTo']}"
 			required="#{userView.external}" rendered="#{userView.external}" />
-		<h:outputLabel value="#{bundle['reservation.startDate']}"
-			for="startDate" />
-		<p:calendar id="startDate"
-			value="#{reservationController.selected.startDate}" required="true"
-			label="#{bundle['reservation.startDate']}" pattern="dd/MM/yyyy" />
-		<h:outputLabel value="#{bundle['reservation.startTimeSlot']}"
-			for="startTimeSlot" />
-		<h:selectOneMenu id="startTimeSlot"
-			value="#{reservationController.selected.startTimeSlot}"
-			title="#{bundle['reservation.startTimeSlot']}" required="true"
-			label="#{bundle['reservation.startTimeSlot']}">
-			<f:selectItems value="#{reservationController.timeSlotSelectOne}" />
-		</h:selectOneMenu>
-		<h:outputLabel value="#{bundle['reservation.endTimeSlot']}"
-			for="endTimeSlot" />
-		<h:selectOneMenu id="endTimeSlot"
-			value="#{reservationController.selected.endTimeSlot}"
-			title="#{bundle['reservation.endTimeSlot']}" required="true"
-			label="#{bundle['reservation.endTimeSlot']}">
-			<f:selectItems value="#{reservationController.timeSlotSelectOne}" />
-		</h:selectOneMenu>
+		<h:outputLabel for="startDate"
+			value="#{bundle['reservation.startDate']}" />
+		<p:inputMask id="startDate"
+			value="#{reservationController.selected.startDate}"
+			mask="99/99/9999 99:99" label="#{bundle['reservation.startDate']}">
+			<f:convertDateTime timeZone="Europe/Lisbon" type="both"
+				pattern="dd/MM/yyyy HH:mm" />
+		</p:inputMask>
+		<h:outputLabel for="endDate" value="#{bundle['reservation.endDate']}" />
+		<p:inputMask id="endDate"
+			value="#{reservationController.selected.endDate}"
+			label="#{bundle['reservation.endDate']}" mask="99/99/9999 99:99">
+			<f:convertDateTime timeZone="Europe/Lisbon" type="both"
+				pattern="dd/MM/yyyy HH:mm" />
+		</p:inputMask>
 	</h:panelGrid>
 
 	<h:panelGroup rendered="#{operation == 'create'}">

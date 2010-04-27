@@ -41,7 +41,7 @@ public final class JsfUtil {
 
     public static void addErrorMessage(final String summary, final String detail) {
 	FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
-	FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+	FacesContext.getCurrentInstance().addMessage("errorInfo", facesMsg);
     }
 
     public static void addErrorMessage(String detail) {
@@ -80,28 +80,6 @@ public final class JsfUtil {
 	final String clientId = component == null ? null : component.getClientId();
 	final String value = JsfUtil.getRequestParameter(clientId);
 	return converter.getAsObject(FacesContext.getCurrentInstance(), component, value);
-    }
-
-    public static SelectItem[] getTimeSlotItems() {
-	SelectItem[] items = new SelectItem[MAX_ITEM_INDEX];
-	int i = 0;
-	items[0] = new SelectItem("", "---");
-	i++;
-	int hour = 0;
-	String minute = ":00";
-	String timeSlot;
-	while (i < items.length) {
-	    timeSlot = Integer.toString(hour) + minute;
-	    items[i++] = new SelectItem(timeSlot, timeSlot);
-	    if (minute.equals(":00")) {
-		minute = ":30";
-	    } else {
-		minute = ":00";
-		hour++;
-	    }
-	}
-	return items;
-
     }
 
     public static UIComponent findComponent(UIComponent c, String id) {

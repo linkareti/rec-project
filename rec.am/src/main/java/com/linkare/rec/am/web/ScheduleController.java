@@ -17,15 +17,12 @@ package com.linkare.rec.am.web;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
-import java.util.StringTokenizer;
+import java.util.ResourceBundle;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
@@ -37,7 +34,9 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
+import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.commons.jpa.security.User;
+import com.linkare.commons.utils.StringUtils;
 import com.linkare.rec.am.model.ExternalCourseFacade;
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.ReservationFacade;
@@ -45,6 +44,7 @@ import com.linkare.rec.am.model.UserFacade;
 import com.linkare.rec.am.model.moodle.MoodleRecord;
 import com.linkare.rec.am.web.auth.UserView;
 import com.linkare.rec.am.web.moodle.SessionHelper;
+import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "scheduleController")
@@ -66,8 +66,6 @@ public class ScheduleController implements Serializable {
     private SelectItem[] externalCourses;
 
     private String theme;
-
-    private static Calendar cal = Calendar.getInstance();
 
     private List<ScheduleEvent> getEvents() {
 	final UserView userView = SessionHelper.getUserView();
@@ -92,10 +90,8 @@ public class ScheduleController implements Serializable {
 
     public void addEvent(ActionEvent actionEvent) {
 	if (event.getId() == null) {
-	    eventModel.addEvent(event);
 	    createOrUpdate();
 	} else {
-	    eventModel.updateEvent(event);
 	    createOrUpdate();
 	}
 	event = new Reservation();
@@ -109,30 +105,24 @@ public class ScheduleController implements Serializable {
     }
 
     public final String createOrUpdate() {
-	if (event.getId() == null) {
-	    final String startTimeSlot = event.getStartTimeSlot();
-	    final StringTokenizer startTimeSlotTokenizer = new StringTokenizer(startTimeSlot, ":");
-
-	    cal.setTime(event.getStartDate());
-	    cal.set(Calendar.HOUR, Integer.parseInt(startTimeSlotTokenizer.nextToken()));
-	    cal.set(Calendar.MINUTE, Integer.parseInt(startTimeSlotTokenizer.nextToken()));
-	    event.setStartDate(cal.getTime());
-	    event.setStartTimeSlot(startTimeSlot);
-
-	    final String endTimeSlot = event.getEndTimeSlot();
-	    final StringTokenizer endTimeSlotTokenizer = new StringTokenizer(endTimeSlot, ":");
-	    cal.setTime(event.getEndDate());
-	    cal.set(Calendar.HOUR, Integer.parseInt(endTimeSlotTokenizer.nextToken()));
-	    cal.set(Calendar.MINUTE, Integer.parseInt(endTimeSlotTokenizer.nextToken()));
-
-	    event.setEndDate(cal.getTime());
-	    event.setEndTimeSlot(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-
-	    eventModel.addEvent(event);
-	    ejbFacade.create(event);
+	if (StringUtils.isBlank(event.getId())) {
+	    try {
+		// It is necessary to first update the model so that the event has a reservation id
+		eventModel.addEvent(event);
+		ejbFacade.create(event);
+	    } catch (Exception e) {
+		if (e.getCause() instanceof DomainException) {
+		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
+		} else {
+		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+		}
+		// Remove the newly added event if an exception was captured
+		eventModel.deleteEvent(event);
+	    }
 	} else {
+	    // It is necessary to get the merged event and only after that, update the event model
+	    event = ejbFacade.edit(event);
 	    eventModel.updateEvent(event);
-	    ejbFacade.edit(event);
 	}
 	return null;
     }
@@ -144,7 +134,6 @@ public class ScheduleController implements Serializable {
     public void onDateSelect(DateSelectEvent selectEvent) {
 	final UserView userView = SessionHelper.getUserView();
 	event = new Reservation("", selectEvent.getDate(), selectEvent.getDate());
-
 	if (userView.isExternal()) {
 	    event.setMoodleRecord(new MoodleRecord());
 	    event.getMoodleRecord().setExternalUser(userView.getUsername());
@@ -155,41 +144,15 @@ public class ScheduleController implements Serializable {
     }
 
     public void onEventMove(ScheduleEntryMoveEvent selectEvent) {
-	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + selectEvent.getDayDelta() + ", Minute delta:"
-		+ selectEvent.getMinuteDelta());
 	event = (Reservation) selectEvent.getScheduleEvent();
-	moveEventTime(event, selectEvent.getMinuteDelta());
 	createOrUpdate();
-	addMessage(message);
-    }
-
-    private void moveEventTime(final Reservation reservation, final int minuteDelta) {
-	cal.setTime(reservation.getStartDate());
-	cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + minuteDelta);
-	reservation.setStartDate(cal.getTime());
-
-	cal.setTime(reservation.getEndDate());
-	cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + minuteDelta);
-	reservation.setEndDate(cal.getTime());
-    }
-
-    private void extendEventTime(final Reservation reservation, final int minuteDelta) {
-	cal.setTime(reservation.getEndDate());
-	cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + minuteDelta);
-	reservation.setEndDate(cal.getTime());
+	JsfUtil.addSuccessMessage("Day delta:" + selectEvent.getDayDelta() + ", Minute delta:" + selectEvent.getMinuteDelta());
     }
 
     public void onEventResize(ScheduleEntryResizeEvent selectEvent) {
-	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + selectEvent.getDayDelta() + ", Minute delta:"
-		+ selectEvent.getMinuteDelta());
 	event = (Reservation) selectEvent.getScheduleEvent();
-	extendEventTime(event, selectEvent.getMinuteDelta());
 	createOrUpdate();
-	addMessage(message);
-    }
-
-    private void addMessage(FacesMessage message) {
-	FacesContext.getCurrentInstance().addMessage(null, message);
+	JsfUtil.addSuccessMessage("Event resized", "Day delta:" + selectEvent.getDayDelta() + ", Minute delta:" + selectEvent.getMinuteDelta());
     }
 
     public String getTheme() {

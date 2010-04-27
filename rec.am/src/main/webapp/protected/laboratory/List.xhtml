@@ -17,7 +17,7 @@
 			<h:panelGroup rendered="#{laboratoryController.items.rowCount > 0}">
 				<p:dataTable var="item" value="#{laboratoryController.items}"
 					selection="#{laboratoryController.current}" paginator="true"
-					rows="10" selectionMode="single" dynamic="false" update="display"
+					rows="10" selectionMode="single" dynamic="false"
 					firstPageLinkLabel="#{bundle['label.firstPage']}"
 					lastPageLinkLabel="#{bundle['label.lastPage']}"
 					nextPageLinkLabel="#{bundle['label.nextPage']}"
@@ -50,47 +50,12 @@
 						<h:commandLink action="#{laboratoryController.prepareEdit}"
 							value="#{bundle['operation.edit']}" />
 						<h:outputText value=" " />
-						<p:commandLink actionListener="#{laboratoryController.destroy}"
-							update="msg">
+						<h:commandLink action="#{laboratoryController.destroy}">
 							<h:outputText value="#{bundle['operation.remove']}" />
-							<p:confirmDialog yesLabel="#{bundle['label.yes']}"
-								noLabel="#{bundle['label.no']}"
-								message="#{bundle['label.confirmMessage']}"
-								header="#{bundle['label.confirmHeader']}" severity="warn" />
-						</p:commandLink>
+						</h:commandLink>
 					</p:column>
 
 				</p:dataTable>
-				<!-- 
-				<p:dialog header="Detail" widgetVar="dialog" modal="false"
-					fixedCenter="true" draggable="false" width="350px">
-					<h:panelGrid id="display" columns="2">
-						<h:outputLabel value="#{bundle['laboratory.name']}" for="name" />
-						<h:outputText id="name"
-							value="#{laboratoryController.laboratory.name}" />
-						<h:outputLabel value="#{bundle['laboratory.description']}"
-							for="description" />
-						<h:outputText id="description"
-							value="#{laboratoryController.laboratory.description}" />
-						<h:outputLabel value="#{bundle['laboratory.state.label']}"
-							for="stateLabel" />
-						<h:outputText id="stateLabel"
-							value="#{laboratoryController.laboratory.state.label}" />
-						<h:outputLabel value="#{bundle['laboratory.state.helpMessage']}"
-							for="stateHelpMessage" />
-						<h:outputText id="stateHelpMessage"
-							value="#{laboratoryController.laboratory.state.helpMessage}" />
-						<h:outputLabel value="#{bundle['laboratory.state.url']}"
-							for="stateURL" />
-						<h:outputText id="stateURL"
-							value="#{laboratoryController.laboratory.state.url}" />
-						<h:outputLabel value="#{bundle['laboratory.state.isActive']}"
-							for="stateActive" />
-						<h:outputText id="stateActive"
-							value="#{laboratoryController.laboratory.state.active}" />
-					</h:panelGrid>
-				</p:dialog>
- -->
 			</h:panelGroup>
 			<h:commandLink action="#{laboratoryController.prepareCreate}"
 				value="#{bundle['operation.create']}" />

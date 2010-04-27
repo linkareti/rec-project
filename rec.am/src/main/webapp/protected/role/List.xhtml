@@ -17,7 +17,7 @@
 			<h:panelGroup rendered="#{roleController.items.rowCount > 0}">
 				<p:dataTable var="item" value="#{roleController.items}"
 					selection="#{roleController.current}" paginator="true" rows="10"
-					selectionMode="single" dynamic="false" update="display"
+					selectionMode="single" dynamic="false"
 					firstPageLinkLabel="#{bundle['label.firstPage']}"
 					lastPageLinkLabel="#{bundle['label.lastPage']}"
 					nextPageLinkLabel="#{bundle['label.nextPage']}"
@@ -42,14 +42,9 @@
 						<h:commandLink action="#{roleController.prepareEdit}"
 							value="#{bundle['operation.edit']}" />
 						<h:outputText value=" " />
-						<p:commandLink actionListener="#{roleController.destroy}"
-							update="msg">
+						<h:commandLink action="#{roleController.destroy}">
 							<h:outputText value="#{bundle['operation.remove']}" />
-							<p:confirmDialog yesLabel="#{bundle['label.yes']}"
-								noLabel="#{bundle['label.no']}"
-								message="#{bundle['label.confirmMessage']}"
-								header="#{bundle['label.confirmHeader']}" severity="warn" />
-						</p:commandLink>
+						</h:commandLink>
 					</p:column>
 
 				</p:dataTable>

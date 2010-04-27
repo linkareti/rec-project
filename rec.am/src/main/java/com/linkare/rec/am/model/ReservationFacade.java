@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import org.primefaces.model.ScheduleEvent;
 
+import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.commons.jpa.security.User;
 
 /**
@@ -22,12 +23,36 @@ public class ReservationFacade extends Facade<Reservation> {
 
     @Override
     public void create(Reservation reservation) {
-	em.persist(reservation);
+	if (canCreate(reservation)) {
+	    em.persist(reservation);
+	} else {
+	    throw new DomainException("error.laboratory.taken");
+	}
+    }
+
+    @SuppressWarnings("unchecked")
+    protected boolean canCreate(final Reservation reservation) {
+	final Query query = em.createNamedQuery("Reservation.findByExperimentNameInInterval").setParameter("startDate", reservation.getStartDate())
+			      .setParameter("endDate", reservation.getEndDate()).setParameter("experimentName", reservation.getExperiment().getName());
+	final List<Reservation> reservationsForExperimentNameInInterval = query.getResultList();
+	return !reservation.hasConflicts(reservationsForExperimentNameInInterval);
     }
 
     @Override
-    public void edit(Reservation reservation) {
-	em.merge(reservation);
+    public Reservation edit(Reservation reservation) {
+	if (canEdit(reservation)) {
+	    return em.merge(reservation);
+	} else {
+	    throw new DomainException("error.laboratory.taken");
+	}
+    }
+
+    @SuppressWarnings("unchecked")
+    protected boolean canEdit(final Reservation reservation) {
+	final Query query = em.createNamedQuery("Reservation.findByExperimentNameInInterval").setParameter("startDate", reservation.getStartDate())
+			      .setParameter("endDate", reservation.getEndDate()).setParameter("experimentName", reservation.getExperiment().getName());
+	final List<Reservation> reservationsForExperimentNameInInterval = query.getResultList();
+	return !reservation.hasConflicts(reservationsForExperimentNameInInterval);
     }
 
     @Override

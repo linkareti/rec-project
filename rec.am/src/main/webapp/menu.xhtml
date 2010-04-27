@@ -16,6 +16,8 @@
 				action="/protected/reservation/Schedule" />
 		</p:submenu>
 		<p:submenu>
+			<p:menuitem value="#{bundle['menu.index']}" action="/index"
+				immediate="true" ajax="false" />
 			<p:menuitem value="#{bundle['menu.logout']}"
 				action="#{authenticationBean.logout}" />
 		</p:submenu>

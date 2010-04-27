@@ -18,8 +18,8 @@ public class LaboratoryFacade extends Facade<Laboratory> {
     }
 
     @Override
-    public void edit(Laboratory laboratory) {
-	em.merge(laboratory);
+    public Laboratory edit(Laboratory laboratory) {
+	return em.merge(laboratory);
     }
 
     @Override

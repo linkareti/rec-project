@@ -32,8 +32,8 @@ public class RoleFacade extends Facade<Role> {
     }
 
     @Override
-    public void edit(Role role) {
-	getOrCreateDAO().edit(role);
+    public Role edit(Role role) {
+	return getOrCreateDAO().edit(role);
     }
 
     @Override

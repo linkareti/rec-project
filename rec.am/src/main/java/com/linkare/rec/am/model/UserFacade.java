@@ -32,8 +32,8 @@ public class UserFacade extends Facade<User> {
     }
 
     @Override
-    public void edit(User user) {
-	getOrCreateDAO().edit(user);
+    public User edit(User user) {
+	return getOrCreateDAO().edit(user);
     }
 
     @Override

@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -19,6 +18,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
+import com.linkare.commons.utils.EqualityUtils;
 
 /**
  * 
@@ -128,46 +128,26 @@ public class Laboratory extends DefaultDomainObject {
     }
 
     @Override
-    public int hashCode() {
-	int hash = 0;
-	hash += (name != null ? name.hashCode() : 0);
-	return hash;
+    public boolean equals(final Object other) {
+	if (!(other instanceof Laboratory)) {
+	    return false;
+	}
+	return equalsTo((Laboratory) other);
     }
 
     @Override
-    public boolean equals(Object object) {
-	if (!(object instanceof Laboratory)) {
-	    return false;
-	}
-	Laboratory other = (Laboratory) object;
-	if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
-	    return false;
-	}
-	return true;
+    public int hashCode() {
+	int result = 14;
+	result = 29 * result + (getName() != null ? getName().hashCode() : 0);
+	return result;
+    }
+
+    private boolean equalsTo(final Laboratory other) {
+	return EqualityUtils.equals(getName(), other.getName());
     }
 
     @Override
     public String toString() {
-	return name;
-    }
-
-    public static Laboratory findByName(String laboratory, EntityManager em) {
-	return (Laboratory) em.createNamedQuery("findByName").setParameter("name", laboratory).getResultList().get(0);
-    }
-
-    //    public static Experiment findExperiments(String laboratory, EntityManager em) {
-    //        return (Experiment) em.createNamedQuery("findExperiments").setParameter("name", laboratory).getResultList().get(0);
-    //    }
-    public static Experiment findExperiment(String laboratory, String experiment, EntityManager em) {
-
-	Experiment result = null;
-	List<Experiment> experimentList = (List<Experiment>) em.createNamedQuery("findExperiment").setParameter("namelab", laboratory).setParameter("nameexp",
-																		    experiment)
-							       .getResultList();
-	if (experimentList.size() > 0) {
-	    result = experimentList.get(0);
-	}
-	return result;
-
+	return getName();
     }
 }

@@ -17,7 +17,7 @@
 			<h:panelGroup rendered="#{reservationController.items.rowCount > 0}">
 				<p:dataTable var="item" value="#{reservationController.items}"
 					selection="#{reservationController.current}" paginator="true"
-					rows="10" selectionMode="single" dynamic="false" update="display"
+					rows="10" selectionMode="single" dynamic="false"
 					firstPageLinkLabel="#{bundle['label.firstPage']}"
 					lastPageLinkLabel="#{bundle['label.lastPage']}"
 					nextPageLinkLabel="#{bundle['label.nextPage']}"
@@ -68,9 +68,19 @@
 					<p:column width="150" sortBy="#{item.startDate}"
 						filterBy="#{item.startDate}">
 						<f:facet name="header">
-							<h:outputText value="#{bundle['reservation.date']}" />
+							<h:outputText value="#{bundle['reservation.startDate']}" />
 						</f:facet>
 						<h:outputText value="#{item.startDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+
+					<p:column width="150" sortBy="#{item.endDate}"
+						filterBy="#{item.endDate}">
+						<f:facet name="header">
+							<h:outputText value="#{bundle['reservation.endDate']}" />
+						</f:facet>
+						<h:outputText value="#{item.endDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 						</h:outputText>
 					</p:column>
@@ -85,14 +95,9 @@
 						<h:commandLink action="#{reservationController.prepareEdit}"
 							value="#{bundle['operation.edit']}" />
 						<h:outputText value=" " />
-						<p:commandLink actionListener="#{reservationController.destroy}"
-							update="msg">
+						<h:commandLink action="#{reservationController.destroy}">
 							<h:outputText value="#{bundle['operation.remove']}" />
-							<p:confirmDialog yesLabel="#{bundle['label.yes']}"
-								noLabel="#{bundle['label.no']}"
-								message="#{bundle['label.confirmMessage']}"
-								header="#{bundle['label.confirmHeader']}" severity="warn" />
-						</p:commandLink>
+						</h:commandLink>
 					</p:column>
 
 				</p:dataTable>

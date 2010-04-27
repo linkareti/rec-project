@@ -24,7 +24,7 @@ public abstract class Facade<T extends Identifiable<?>> {
 
     public abstract void create(T t);
 
-    public abstract void edit(T t);
+    public abstract T edit(T t);
 
     public abstract void remove(T t);
 

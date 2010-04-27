@@ -1,7 +1,6 @@
 package com.linkare.rec.am.web;
 
 import java.util.Calendar;
-import java.util.StringTokenizer;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -10,7 +9,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.faces.model.SelectItem;
 
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.ReservationFacade;
@@ -58,27 +56,10 @@ public class ReservationController extends AbstractController<Reservation, Reser
     }
 
     public final void processEndDateAndEndTimeSlot() {
-	String timeSlot = current.getStartTimeSlot();
-	StringTokenizer st = new StringTokenizer(timeSlot, ":");
 	Calendar cal = Calendar.getInstance();
 	cal.setTime(current.getStartDate());
-	cal.set(Calendar.HOUR, Integer.parseInt(st.nextToken()));
-	cal.set(Calendar.MINUTE, Integer.parseInt(st.nextToken()));
 	current.setStartDate(cal.getTime());
-	current.setStartTimeSlot(timeSlot);
-	if (cal.get(Calendar.MINUTE) == MINUTE_STEP) {
-	    cal.roll(Calendar.HOUR, true);
-	    cal.set(Calendar.MINUTE, 0);
-	} else if (cal.get(Calendar.MINUTE) == 0) {
-	    cal.set(Calendar.MINUTE, MINUTE_STEP);
-	}
-
 	current.setEndDate(cal.getTime());
-	current.setEndTimeSlot(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE));
-    }
-
-    public final SelectItem[] getTimeSlotSelectOne() {
-	return JsfUtil.getTimeSlotItems();
     }
 
     @FacesConverter(value = "reservationConverter", forClass = Reservation.class)

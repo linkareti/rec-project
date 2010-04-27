@@ -15,9 +15,10 @@
 			<h:outputText escape="false" value="#{bundle['info.emptyList']}"
 				rendered="#{experimentController.items.rowCount == 0}" />
 			<h:panelGroup rendered="#{experimentController.items.rowCount > 0}">
-				<p:dataTable var="item" value="#{experimentController.items}"
+				<p:dataTable id="items" var="item"
+					value="#{experimentController.items}"
 					selection="#{experimentController.current}" paginator="true"
-					rows="10" selectionMode="single" dynamic="false" update="display"
+					rows="10" selectionMode="single" dynamic="false"
 					firstPageLinkLabel="#{bundle['label.firstPage']}"
 					lastPageLinkLabel="#{bundle['label.lastPage']}"
 					nextPageLinkLabel="#{bundle['label.nextPage']}"
@@ -58,14 +59,9 @@
 						<h:commandLink action="#{experimentController.prepareEdit}"
 							value="#{bundle['operation.edit']}" />
 						<h:outputText value=" " />
-						<p:commandLink actionListener="#{experimentController.destroy}"
-							update="msg">
+						<h:commandLink action="#{experimentController.destroy}">
 							<h:outputText value="#{bundle['operation.remove']}" />
-							<p:confirmDialog yesLabel="#{bundle['label.yes']}"
-								noLabel="#{bundle['label.no']}"
-								message="#{bundle['label.confirmMessage']}"
-								header="#{bundle['label.confirmHeader']}" severity="warn" />
-						</p:commandLink>
+						</h:commandLink>
 					</p:column>
 
 				</p:dataTable>

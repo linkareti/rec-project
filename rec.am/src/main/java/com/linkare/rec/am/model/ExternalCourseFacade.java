@@ -17,7 +17,7 @@ public class ExternalCourseFacade extends Facade<ExternalCourse> {
     }
 
     @Override
-    public void edit(ExternalCourse courseRecord) {
+    public ExternalCourse edit(ExternalCourse courseRecord) {
 	throw new UnsupportedOperationException("external.courses.edit.not.available");
     }
 

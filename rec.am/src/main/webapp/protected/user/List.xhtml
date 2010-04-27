@@ -17,7 +17,7 @@
 			<h:panelGroup rendered="#{userController.items.rowCount > 0}">
 				<p:dataTable var="item" value="#{userController.items}"
 					selection="#{userController.current}" paginator="true" rows="10"
-					selectionMode="single" dynamic="false" update="display"
+					selectionMode="single" dynamic="false"
 					firstPageLinkLabel="#{bundle['label.firstPage']}"
 					lastPageLinkLabel="#{bundle['label.lastPage']}"
 					nextPageLinkLabel="#{bundle['label.nextPage']}"
@@ -43,14 +43,9 @@
 						<h:commandLink action="#{userController.prepareEdit}"
 							value="#{bundle['operation.edit']}" />
 						<h:outputText value=" " />
-						<p:commandLink actionListener="#{userController.destroy}"
-							update="msg">
+						<h:commandLink action="#{userController.destroy}">
 							<h:outputText value="#{bundle['operation.remove']}" />
-							<p:confirmDialog yesLabel="#{bundle['label.yes']}"
-								noLabel="#{bundle['label.no']}"
-								message="#{bundle['label.confirmMessage']}"
-								header="#{bundle['label.confirmHeader']}" severity="warn" />
-						</p:commandLink>
+						</h:commandLink>
 					</p:column>
 				</p:dataTable>
 			</h:panelGroup>
