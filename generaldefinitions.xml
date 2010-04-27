@@ -20,22 +20,22 @@
 
 	<property name="build.dir.compile" value="${basedir}/${build.dir}/compile" />
 	<property name="build.dir.dist" value="${basedir}/${build.dir}/dist" />
-	
+
 	<property name="templates.dir" value="${basedir}/templates" />
 	<property name="templates.dir.openorb" value="${basedir}/templates/openorb" />
 	<property name="templates.dir.jnlp" value="${basedir}/templates/jnlp" />
 	<property name="templates.dir.scripts" value="${basedir}/templates/scripts" />
 	<property name="templates.dir.logs" value="${basedir}/templates/log" />
-		
-  	<tstamp>
+
+	<tstamp>
 		<format property="timestamp" pattern="dd-MM-yyyy hh:mm" locale="en,UK"/>
 	</tstamp>
-	
+
 	<tstamp>
 		<format property="today" pattern="dd-MM-yyyy" locale="en,UK"/>
 	</tstamp>
-	
-		<macrodef name="process.list">
+
+	<macrodef name="process.list">
 		<attribute name="list" />
 		<attribute name="task" />
 		<attribute name="attribute.name" />
@@ -59,7 +59,7 @@
 			</script>
 		</sequential>
 	</macrodef>
-	
+
 	<!--
 		=====================================================
 		==================== REC Common =====================
@@ -70,9 +70,9 @@
 	<property name="common.build.dir" value="${build.dir.dist}/common" />
 
 	<property name="rec.common.src.java.dir" value="${basedir}/rec/src/java/common" />
-	
+
 	<property name="rec.lib.dir" value="${basedir}/rec/lib" />
-		
+
 	<property name="rec.common.lib.dir" value="${rec.lib.dir}/java/common/" />
 
 	<path id="rec.common.lib.path">
@@ -91,7 +91,7 @@
 		<path refid="rec.common.lib.path" />
 		<path refid="rec.common.compile.lib.path" />
 	</path>
-	
+
 	<!--
 		=====================================================
 		==================== ReC Client =====================
@@ -103,7 +103,7 @@
 
 	<property name="rec.client.src.java.dir" value="${basedir}/rec/src/java/client" />
 	<property name="rec.ui.src.java.dir" value="${basedir}/rec/src/java/ui" />
-	
+
 	<property name="rec.client.lib.dir" value="${rec.lib.dir}/java/client/" />
 
 	<path id="rec.client.lib.path">
@@ -143,7 +143,7 @@
 	<property name="hardwareserver.build.dir" value="${build.dir.dist}/hardwareserver" />
 
 	<property name="rec.hardwareserver.src.java.dir" value="${basedir}/rec/src/java/hardwareserver" />
-	
+
 	<property name="rec.hardwareserver.lib.dir" value="${rec.lib.dir}/java/hardwareserver/" />
 
 	<path id="rec.hardwareserver.lib.path">
@@ -183,7 +183,7 @@
 	<property name="multicast.build.dir" value="${build.dir.dist}/multicast" />
 
 	<property name="rec.multicast.src.java.dir" value="${basedir}/rec/src/java/multicast" />
-	
+
 	<property name="rec.multicast.lib.dir" value="${rec.lib.dir}/java/multicast/" />
 
 	<path id="rec.multicast.lib.path">
@@ -233,7 +233,7 @@
 	<property name="elab.ui.src.java.dir" value="${basedir}/elab/src/java/ui" />
 
 	<property name="elab.lib.dir" value="${basedir}/elab/lib" />
-	
+
 	<property name="elab.client.lib.dir" value="${elab.lib.dir}/java/client/" />
 
 	<path id="elab.client.lib.path">
@@ -274,7 +274,7 @@
 	<property name="elab.hardwareserver.classes.dir" value="${build.dir.compile}/classes/elab/hardwareserver" />
 
 	<property name="elab.hardwareserver.src.java.dir" value="${basedir}/elab/src/java/driver" />
-	
+
 	<property name="elab.hardwareserver.lib.dir" value="${elab.lib.dir}/java/driver/" />
 
 
@@ -316,7 +316,7 @@
 	<property name="elab.multicast.classes.dir" value="${build.dir.compile}/classes/elab/multicast" />
 
 	<property name="elab.multicast.src.java.dir" value="${basedir}/elab/src/java/multicast" />
-	
+
 	<property name="elab.multicast.lib.dir" value="${elab.lib.dir}/java/multicast/" />
 
 	<path id="elab.multicast.lib.path">
@@ -373,7 +373,7 @@
 			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
 			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
 			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
-				
+
 			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
 	</macrodef>
@@ -382,13 +382,14 @@
 		<attribute name="experiment.name" />
 		<sequential>
 			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
-				<replacevalue><![CDATA[<jar href="@temporary.experiment.jar@"/>
-	<!--End Experiment Jars-->]]></replacevalue>
+				<replacevalue>
+					<![CDATA[<jar href="@temporary.experiment.jar@"/>
+					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
 			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar"/>
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="create.jnlp.full.client.build">
 		<attribute name="codebase"/>
 		<sequential>
@@ -408,22 +409,23 @@
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
-				
+
 			<process.list task="add.experiment.to.full.jnlp.build" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="add.experiment.to.full.jnlp.build">
 		<attribute name="experiment.name" />
 		<sequential>
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
-				<replacevalue><![CDATA[<jar href="client/@temporary.experiment.jar@"/>
-	<!--End Experiment Jars-->]]></replacevalue>
+				<replacevalue>
+					<![CDATA[<jar href="client/@temporary.experiment.jar@"/>
+					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
 		</sequential>
 	</macrodef>
-	
+
 	<!--
 		=====================================================
 		================ReC Experiments======================
@@ -467,53 +469,53 @@
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: create.jar          
          = = = = = = = = = = = = = = = = = -->
-    <macrodef name="create.jar">
-        <attribute name="destination.folder" />
-        <attribute name="jar.name" />
-        <attribute name="source.basedir" />
+	<macrodef name="create.jar">
+		<attribute name="destination.folder" />
+		<attribute name="jar.name" />
+		<attribute name="source.basedir" />
 
-    	<sequential>
-    		<mkdir dir="@{destination.folder}" />
-    			<jar destfile="@{destination.folder}/@{jar.name}" basedir="@{source.basedir}">
-					<manifest>
-    					<section name="common">
-    						<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
-    						<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
-    						<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
-    						<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-    						<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${TODAY}" />
-    						<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
-    					</section>
-    				</manifest>
-    			</jar>    
-        </sequential>
-    </macrodef>
-	
+		<sequential>
+			<mkdir dir="@{destination.folder}" />
+			<jar destfile="@{destination.folder}/@{jar.name}" basedir="@{source.basedir}">
+				<manifest>
+					<section name="common">
+						<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+						<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+						<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+						<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+						<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${TODAY}" />
+						<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+					</section>
+				</manifest>
+			</jar>
+		</sequential>
+	</macrodef>
+
 	<!-- = = = = = = = = = = = = = = = = =
           macrodef: sign.jar          
          = = = = = = = = = = = = = = = = = -->
-    <macrodef name="sign.jar.rec">
-        <attribute name="folder" />
-        <attribute name="jar.name" />
-        <sequential>
-    		<signjar storetype="${rec.storetype}" destDir="@{folder}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
-    			<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
-    			<globmapper from="*.jar" to="*_sig.jar" />
-    		</signjar>            
-        </sequential>
-    </macrodef>
+	<macrodef name="sign.jar.rec">
+		<attribute name="folder" />
+		<attribute name="jar.name" />
+		<sequential>
+			<signjar storetype="${rec.storetype}" destDir="@{folder}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
+				<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+		</sequential>
+	</macrodef>
 
 	<macrodef name="sign.jar.elab">
-	   <attribute name="folder" />
-	   <attribute name="jar.name" />
-	   <sequential>
-	   		<signjar storetype="${elab.storetype}" destDir="@{folder}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
-	   			<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
-	   			<globmapper from="*.jar" to="*_sig.jar" />
-	   		</signjar>            
-	   </sequential>
+		<attribute name="folder" />
+		<attribute name="jar.name" />
+		<sequential>
+			<signjar storetype="${elab.storetype}" destDir="@{folder}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
+				<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+		</sequential>
 	</macrodef>
-	
+
 	<!--/MACROS-->
 
 	<!--
@@ -532,7 +534,7 @@
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
 		</sequential>
-	</macrodef>	
+	</macrodef>
 
 	<!--
 		================================================================
@@ -631,5 +633,5 @@
 		<pathelement location="${elab.hardwareserver.classes.dir}" />
 		<path refid="elab.hardwareserver.libs.classpath" />
 	</path>
-	
+
 </project>

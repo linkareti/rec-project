@@ -9,8 +9,6 @@ package pt.utl.ist.elab.driver.decay;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import pt.utl.ist.elab.driver.radioactividade.RadioactividadeStampDriver;
-
 import com.linkare.rec.impl.driver.BaseHardware;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.ORBBean;
@@ -37,7 +35,7 @@ public class ServerMain {
 		try {
 			ORBBean.getORBBean(args);
 
-			BaseHardware baseHardware = new BaseHardware(new RadioactividadeStampDriver());
+//			BaseHardware baseHardware = new BaseHardware(new RadioactividadeStampDriver());
 
 			Thread.currentThread().join();
 

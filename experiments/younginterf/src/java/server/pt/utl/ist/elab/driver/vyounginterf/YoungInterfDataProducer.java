@@ -24,7 +24,6 @@ import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.impl.data.PhysicsValFactory;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class YoungInterfDataProducer extends VirtualBaseDataSource {
 
