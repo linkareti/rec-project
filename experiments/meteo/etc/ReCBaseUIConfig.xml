@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="meteo$rec.exp.customizer.meteo"
+	videoLocation="meteo$rec.exp.url.meteo.video" toolTipBundleKey="meteo$rec.exp.tip.meteo"
+	iconLocationBundleKey="meteo$rec.exp.icon.meteo" displayStringBundleKey="meteo$rec.exp.title.meteo"
+	desktopLocationBundleKey="meteo$rec.exp.background.meteo" order="1">
+
+	<WebResource locationBundleKey="meteo$rec.exp.url.meteo.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="meteo$rec.exp.url.meteo.title.1"
+		toolTipLocationBundleKey="meteo$rec.exp.url.meteo.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="meteo$rec.exp.url.meteo.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="meteo$rec.exp.url.meteo.title.2"
+		toolTipLocationBundleKey="meteo$rec.exp.url.meteo.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="meteo$rec.exp.url.meteo.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="meteo$rec.exp.url.meteo.title.video"
+		toolTipLocationBundleKey="meteo$rec.exp.url.meteo.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="meteo$rec.exp.dftcfg.meteo.loc.1"
+		toolTipBundleKey="meteo$rec.exp.dftcfg.meteo.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="meteo$rec.exp.dftcfg.meteo.title.1" order="1" />
+
+	<Display classLocationBundleKey="meteo$rec.exp.display.meteo.loc.sensor"
+		toolTipBundleKey="meteo$rec.exp.display.meteo.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="meteo$rec.exp.display.meteo.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="meteo$rec.exp.display.meteo.loc.1"
+		toolTipBundleKey="meteo$rec.exp.display.meteo.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="meteo$rec.exp.display.meteo.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="meteo$rec.exp.display.meteo.loc.2"
+		toolTipBundleKey="meteo$rec.exp.display.meteo.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="meteo$rec.exp.display.meteo.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="webrobot$rec.exp.customizer.webrobot"
+	videoLocation="webrobot$rec.exp.url.webrobot.video" toolTipBundleKey="webrobot$rec.exp.tip.webrobot"
+	iconLocationBundleKey="webrobot$rec.exp.icon.webrobot" displayStringBundleKey="webrobot$rec.exp.title.webrobot"
+	desktopLocationBundleKey="webrobot$rec.exp.background.webrobot" order="1">
+
+	<WebResource locationBundleKey="webrobot$rec.exp.url.webrobot.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="webrobot$rec.exp.url.webrobot.title.1"
+		toolTipLocationBundleKey="webrobot$rec.exp.url.webrobot.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="webrobot$rec.exp.url.webrobot.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="webrobot$rec.exp.url.webrobot.title.2"
+		toolTipLocationBundleKey="webrobot$rec.exp.url.webrobot.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="webrobot$rec.exp.url.webrobot.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="webrobot$rec.exp.url.webrobot.title.video"
+		toolTipLocationBundleKey="webrobot$rec.exp.url.webrobot.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="webrobot$rec.exp.dftcfg.webrobot.loc.1"
+		toolTipBundleKey="webrobot$rec.exp.dftcfg.webrobot.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="webrobot$rec.exp.dftcfg.webrobot.title.1" order="1" />
+
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.sensor"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.1"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="webrobot$rec.exp.display.webrobot.loc.2"
+		toolTipBundleKey="webrobot$rec.exp.display.webrobot.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="webrobot$rec.exp.display.webrobot.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="mvbrown$rec.exp.customizer.mvbrown"
+	videoLocation="mvbrown$rec.exp.url.mvbrown.video" toolTipBundleKey="mvbrown$rec.exp.tip.mvbrown"
+	iconLocationBundleKey="mvbrown$rec.exp.icon.mvbrown" displayStringBundleKey="mvbrown$rec.exp.title.mvbrown"
+	desktopLocationBundleKey="mvbrown$rec.exp.background.mvbrown" order="1">
+
+	<WebResource locationBundleKey="mvbrown$rec.exp.url.mvbrown.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="mvbrown$rec.exp.url.mvbrown.title.1"
+		toolTipLocationBundleKey="mvbrown$rec.exp.url.mvbrown.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="mvbrown$rec.exp.url.mvbrown.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="mvbrown$rec.exp.url.mvbrown.title.2"
+		toolTipLocationBundleKey="mvbrown$rec.exp.url.mvbrown.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="mvbrown$rec.exp.url.mvbrown.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="mvbrown$rec.exp.url.mvbrown.title.video"
+		toolTipLocationBundleKey="mvbrown$rec.exp.url.mvbrown.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="mvbrown$rec.exp.dftcfg.mvbrown.loc.1"
+		toolTipBundleKey="mvbrown$rec.exp.dftcfg.mvbrown.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="mvbrown$rec.exp.dftcfg.mvbrown.title.1" order="1" />
+
+	<Display classLocationBundleKey="mvbrown$rec.exp.display.mvbrown.loc.sensor"
+		toolTipBundleKey="mvbrown$rec.exp.display.mvbrown.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="mvbrown$rec.exp.display.mvbrown.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="mvbrown$rec.exp.display.mvbrown.loc.1"
+		toolTipBundleKey="mvbrown$rec.exp.display.mvbrown.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="mvbrown$rec.exp.display.mvbrown.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="mvbrown$rec.exp.display.mvbrown.loc.2"
+		toolTipBundleKey="mvbrown$rec.exp.display.mvbrown.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="mvbrown$rec.exp.display.mvbrown.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

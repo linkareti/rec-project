@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="cargas3d$rec.exp.customizer.cargas3d"
+	videoLocation="cargas3d$rec.exp.url.cargas3d.video" toolTipBundleKey="cargas3d$rec.exp.tip.cargas3d"
+	iconLocationBundleKey="cargas3d$rec.exp.icon.cargas3d" displayStringBundleKey="cargas3d$rec.exp.title.cargas3d"
+	desktopLocationBundleKey="cargas3d$rec.exp.background.cargas3d" order="1">
+
+	<WebResource locationBundleKey="cargas3d$rec.exp.url.cargas3d.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="cargas3d$rec.exp.url.cargas3d.title.1"
+		toolTipLocationBundleKey="cargas3d$rec.exp.url.cargas3d.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="cargas3d$rec.exp.url.cargas3d.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="cargas3d$rec.exp.url.cargas3d.title.2"
+		toolTipLocationBundleKey="cargas3d$rec.exp.url.cargas3d.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="cargas3d$rec.exp.url.cargas3d.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="cargas3d$rec.exp.url.cargas3d.title.video"
+		toolTipLocationBundleKey="cargas3d$rec.exp.url.cargas3d.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="cargas3d$rec.exp.dftcfg.cargas3d.loc.1"
+		toolTipBundleKey="cargas3d$rec.exp.dftcfg.cargas3d.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="cargas3d$rec.exp.dftcfg.cargas3d.title.1" order="1" />
+
+	<Display classLocationBundleKey="cargas3d$rec.exp.display.cargas3d.loc.sensor"
+		toolTipBundleKey="cargas3d$rec.exp.display.cargas3d.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="cargas3d$rec.exp.display.cargas3d.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="cargas3d$rec.exp.display.cargas3d.loc.1"
+		toolTipBundleKey="cargas3d$rec.exp.display.cargas3d.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="cargas3d$rec.exp.display.cargas3d.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="cargas3d$rec.exp.display.cargas3d.loc.2"
+		toolTipBundleKey="cargas3d$rec.exp.display.cargas3d.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="cargas3d$rec.exp.display.cargas3d.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

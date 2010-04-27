@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="momentoinercia$rec.exp.customizer.momentoinercia"
+	videoLocation="momentoinercia$rec.exp.url.momentoinercia.video" toolTipBundleKey="momentoinercia$rec.exp.tip.momentoinercia"
+	iconLocationBundleKey="momentoinercia$rec.exp.icon.momentoinercia" displayStringBundleKey="momentoinercia$rec.exp.title.momentoinercia"
+	desktopLocationBundleKey="momentoinercia$rec.exp.background.momentoinercia" order="1">
+
+	<WebResource locationBundleKey="momentoinercia$rec.exp.url.momentoinercia.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="momentoinercia$rec.exp.url.momentoinercia.title.1"
+		toolTipLocationBundleKey="momentoinercia$rec.exp.url.momentoinercia.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="momentoinercia$rec.exp.url.momentoinercia.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="momentoinercia$rec.exp.url.momentoinercia.title.2"
+		toolTipLocationBundleKey="momentoinercia$rec.exp.url.momentoinercia.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="momentoinercia$rec.exp.url.momentoinercia.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="momentoinercia$rec.exp.url.momentoinercia.title.video"
+		toolTipLocationBundleKey="momentoinercia$rec.exp.url.momentoinercia.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="momentoinercia$rec.exp.dftcfg.momentoinercia.loc.1"
+		toolTipBundleKey="momentoinercia$rec.exp.dftcfg.momentoinercia.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="momentoinercia$rec.exp.dftcfg.momentoinercia.title.1" order="1" />
+
+	<Display classLocationBundleKey="momentoinercia$rec.exp.display.momentoinercia.loc.sensor"
+		toolTipBundleKey="momentoinercia$rec.exp.display.momentoinercia.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="momentoinercia$rec.exp.display.momentoinercia.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="momentoinercia$rec.exp.display.momentoinercia.loc.1"
+		toolTipBundleKey="momentoinercia$rec.exp.display.momentoinercia.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="momentoinercia$rec.exp.display.momentoinercia.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="momentoinercia$rec.exp.display.momentoinercia.loc.2"
+		toolTipBundleKey="momentoinercia$rec.exp.display.momentoinercia.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="momentoinercia$rec.exp.display.momentoinercia.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

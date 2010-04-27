@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="mm$rec.exp.customizer.mm"
+	videoLocation="mm$rec.exp.url.mm.video" toolTipBundleKey="mm$rec.exp.tip.mm"
+	iconLocationBundleKey="mm$rec.exp.icon.mm" displayStringBundleKey="mm$rec.exp.title.mm"
+	desktopLocationBundleKey="mm$rec.exp.background.mm" order="1">
+
+	<WebResource locationBundleKey="mm$rec.exp.url.mm.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="mm$rec.exp.url.mm.title.1"
+		toolTipLocationBundleKey="mm$rec.exp.url.mm.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="mm$rec.exp.url.mm.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="mm$rec.exp.url.mm.title.2"
+		toolTipLocationBundleKey="mm$rec.exp.url.mm.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="mm$rec.exp.url.mm.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="mm$rec.exp.url.mm.title.video"
+		toolTipLocationBundleKey="mm$rec.exp.url.mm.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="mm$rec.exp.dftcfg.mm.loc.1"
+		toolTipBundleKey="mm$rec.exp.dftcfg.mm.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="mm$rec.exp.dftcfg.mm.title.1" order="1" />
+
+	<Display classLocationBundleKey="mm$rec.exp.display.mm.loc.sensor"
+		toolTipBundleKey="mm$rec.exp.display.mm.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="mm$rec.exp.display.mm.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="mm$rec.exp.display.mm.loc.1"
+		toolTipBundleKey="mm$rec.exp.display.mm.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="mm$rec.exp.display.mm.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="mm$rec.exp.display.mm.loc.2"
+		toolTipBundleKey="mm$rec.exp.display.mm.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="mm$rec.exp.display.mm.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

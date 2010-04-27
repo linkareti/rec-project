@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="solitoes$rec.exp.customizer.solitoes"
+	videoLocation="solitoes$rec.exp.url.solitoes.video" toolTipBundleKey="solitoes$rec.exp.tip.solitoes"
+	iconLocationBundleKey="solitoes$rec.exp.icon.solitoes" displayStringBundleKey="solitoes$rec.exp.title.solitoes"
+	desktopLocationBundleKey="solitoes$rec.exp.background.solitoes" order="1">
+
+	<WebResource locationBundleKey="solitoes$rec.exp.url.solitoes.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="solitoes$rec.exp.url.solitoes.title.1"
+		toolTipLocationBundleKey="solitoes$rec.exp.url.solitoes.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="solitoes$rec.exp.url.solitoes.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="solitoes$rec.exp.url.solitoes.title.2"
+		toolTipLocationBundleKey="solitoes$rec.exp.url.solitoes.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="solitoes$rec.exp.url.solitoes.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="solitoes$rec.exp.url.solitoes.title.video"
+		toolTipLocationBundleKey="solitoes$rec.exp.url.solitoes.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="solitoes$rec.exp.dftcfg.solitoes.loc.1"
+		toolTipBundleKey="solitoes$rec.exp.dftcfg.solitoes.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="solitoes$rec.exp.dftcfg.solitoes.title.1" order="1" />
+
+	<Display classLocationBundleKey="solitoes$rec.exp.display.solitoes.loc.sensor"
+		toolTipBundleKey="solitoes$rec.exp.display.solitoes.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="solitoes$rec.exp.display.solitoes.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="solitoes$rec.exp.display.solitoes.loc.1"
+		toolTipBundleKey="solitoes$rec.exp.display.solitoes.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="solitoes$rec.exp.display.solitoes.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="solitoes$rec.exp.display.solitoes.loc.2"
+		toolTipBundleKey="solitoes$rec.exp.display.solitoes.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="solitoes$rec.exp.display.solitoes.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

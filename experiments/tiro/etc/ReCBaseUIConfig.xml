@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="tiro$rec.exp.customizer.tiro"
+	videoLocation="tiro$rec.exp.url.tiro.video" toolTipBundleKey="tiro$rec.exp.tip.tiro"
+	iconLocationBundleKey="tiro$rec.exp.icon.tiro" displayStringBundleKey="tiro$rec.exp.title.tiro"
+	desktopLocationBundleKey="tiro$rec.exp.background.tiro" order="1">
+
+	<WebResource locationBundleKey="tiro$rec.exp.url.tiro.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="tiro$rec.exp.url.tiro.title.1"
+		toolTipLocationBundleKey="tiro$rec.exp.url.tiro.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="tiro$rec.exp.url.tiro.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="tiro$rec.exp.url.tiro.title.2"
+		toolTipLocationBundleKey="tiro$rec.exp.url.tiro.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="tiro$rec.exp.url.tiro.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="tiro$rec.exp.url.tiro.title.video"
+		toolTipLocationBundleKey="tiro$rec.exp.url.tiro.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="tiro$rec.exp.dftcfg.tiro.loc.1"
+		toolTipBundleKey="tiro$rec.exp.dftcfg.tiro.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="tiro$rec.exp.dftcfg.tiro.title.1" order="1" />
+
+	<Display classLocationBundleKey="tiro$rec.exp.display.tiro.loc.sensor"
+		toolTipBundleKey="tiro$rec.exp.display.tiro.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="tiro$rec.exp.display.tiro.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="tiro$rec.exp.display.tiro.loc.1"
+		toolTipBundleKey="tiro$rec.exp.display.tiro.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="tiro$rec.exp.display.tiro.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="tiro$rec.exp.display.tiro.loc.2"
+		toolTipBundleKey="tiro$rec.exp.display.tiro.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="tiro$rec.exp.display.tiro.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

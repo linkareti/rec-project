@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="younginterf$rec.exp.customizer.younginterf"
+	videoLocation="younginterf$rec.exp.url.younginterf.video" toolTipBundleKey="younginterf$rec.exp.tip.younginterf"
+	iconLocationBundleKey="younginterf$rec.exp.icon.younginterf" displayStringBundleKey="younginterf$rec.exp.title.younginterf"
+	desktopLocationBundleKey="younginterf$rec.exp.background.younginterf" order="1">
+
+	<WebResource locationBundleKey="younginterf$rec.exp.url.younginterf.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="younginterf$rec.exp.url.younginterf.title.1"
+		toolTipLocationBundleKey="younginterf$rec.exp.url.younginterf.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="younginterf$rec.exp.url.younginterf.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="younginterf$rec.exp.url.younginterf.title.2"
+		toolTipLocationBundleKey="younginterf$rec.exp.url.younginterf.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="younginterf$rec.exp.url.younginterf.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="younginterf$rec.exp.url.younginterf.title.video"
+		toolTipLocationBundleKey="younginterf$rec.exp.url.younginterf.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="younginterf$rec.exp.dftcfg.younginterf.loc.1"
+		toolTipBundleKey="younginterf$rec.exp.dftcfg.younginterf.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="younginterf$rec.exp.dftcfg.younginterf.title.1" order="1" />
+
+	<Display classLocationBundleKey="younginterf$rec.exp.display.younginterf.loc.sensor"
+		toolTipBundleKey="younginterf$rec.exp.display.younginterf.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="younginterf$rec.exp.display.younginterf.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="younginterf$rec.exp.display.younginterf.loc.1"
+		toolTipBundleKey="younginterf$rec.exp.display.younginterf.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="younginterf$rec.exp.display.younginterf.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="younginterf$rec.exp.display.younginterf.loc.2"
+		toolTipBundleKey="younginterf$rec.exp.display.younginterf.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="younginterf$rec.exp.display.younginterf.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

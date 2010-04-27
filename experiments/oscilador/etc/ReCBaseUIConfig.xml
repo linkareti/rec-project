@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="oscilador$rec.exp.customizer.oscilador"
+	videoLocation="oscilador$rec.exp.url.oscilador.video" toolTipBundleKey="oscilador$rec.exp.tip.oscilador"
+	iconLocationBundleKey="oscilador$rec.exp.icon.oscilador" displayStringBundleKey="oscilador$rec.exp.title.oscilador"
+	desktopLocationBundleKey="oscilador$rec.exp.background.oscilador" order="1">
+
+	<WebResource locationBundleKey="oscilador$rec.exp.url.oscilador.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="oscilador$rec.exp.url.oscilador.title.1"
+		toolTipLocationBundleKey="oscilador$rec.exp.url.oscilador.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="oscilador$rec.exp.url.oscilador.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="oscilador$rec.exp.url.oscilador.title.2"
+		toolTipLocationBundleKey="oscilador$rec.exp.url.oscilador.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="oscilador$rec.exp.url.oscilador.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="oscilador$rec.exp.url.oscilador.title.video"
+		toolTipLocationBundleKey="oscilador$rec.exp.url.oscilador.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="oscilador$rec.exp.dftcfg.oscilador.loc.1"
+		toolTipBundleKey="oscilador$rec.exp.dftcfg.oscilador.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="oscilador$rec.exp.dftcfg.oscilador.title.1" order="1" />
+
+	<Display classLocationBundleKey="oscilador$rec.exp.display.oscilador.loc.sensor"
+		toolTipBundleKey="oscilador$rec.exp.display.oscilador.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="oscilador$rec.exp.display.oscilador.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="oscilador$rec.exp.display.oscilador.loc.1"
+		toolTipBundleKey="oscilador$rec.exp.display.oscilador.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="oscilador$rec.exp.display.oscilador.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="oscilador$rec.exp.display.oscilador.loc.2"
+		toolTipBundleKey="oscilador$rec.exp.display.oscilador.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="oscilador$rec.exp.display.oscilador.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

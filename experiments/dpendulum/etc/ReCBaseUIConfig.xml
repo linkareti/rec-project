@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="dpendulum$rec.exp.customizer.dpendulum"
+	videoLocation="dpendulum$rec.exp.url.dpendulum.video" toolTipBundleKey="dpendulum$rec.exp.tip.dpendulum"
+	iconLocationBundleKey="dpendulum$rec.exp.icon.dpendulum" displayStringBundleKey="dpendulum$rec.exp.title.dpendulum"
+	desktopLocationBundleKey="dpendulum$rec.exp.background.dpendulum" order="1">
+
+	<WebResource locationBundleKey="dpendulum$rec.exp.url.dpendulum.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="dpendulum$rec.exp.url.dpendulum.title.1"
+		toolTipLocationBundleKey="dpendulum$rec.exp.url.dpendulum.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="dpendulum$rec.exp.url.dpendulum.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="dpendulum$rec.exp.url.dpendulum.title.2"
+		toolTipLocationBundleKey="dpendulum$rec.exp.url.dpendulum.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="dpendulum$rec.exp.url.dpendulum.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="dpendulum$rec.exp.url.dpendulum.title.video"
+		toolTipLocationBundleKey="dpendulum$rec.exp.url.dpendulum.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="dpendulum$rec.exp.dftcfg.dpendulum.loc.1"
+		toolTipBundleKey="dpendulum$rec.exp.dftcfg.dpendulum.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="dpendulum$rec.exp.dftcfg.dpendulum.title.1" order="1" />
+
+	<Display classLocationBundleKey="dpendulum$rec.exp.display.dpendulum.loc.sensor"
+		toolTipBundleKey="dpendulum$rec.exp.display.dpendulum.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="dpendulum$rec.exp.display.dpendulum.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="dpendulum$rec.exp.display.dpendulum.loc.1"
+		toolTipBundleKey="dpendulum$rec.exp.display.dpendulum.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="dpendulum$rec.exp.display.dpendulum.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="dpendulum$rec.exp.display.dpendulum.loc.2"
+		toolTipBundleKey="dpendulum$rec.exp.display.dpendulum.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="dpendulum$rec.exp.display.dpendulum.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>

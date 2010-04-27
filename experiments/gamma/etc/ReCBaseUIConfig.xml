@@ -1,0 +1,44 @@
+<Apparatus location="**********"
+	customizerClassLocationBundleKey="gamma$rec.exp.customizer.gamma"
+	videoLocation="gamma$rec.exp.url.gamma.video" toolTipBundleKey="gamma$rec.exp.tip.gamma"
+	iconLocationBundleKey="gamma$rec.exp.icon.gamma" displayStringBundleKey="gamma$rec.exp.title.gamma"
+	desktopLocationBundleKey="gamma$rec.exp.background.gamma" order="1">
+
+	<WebResource locationBundleKey="gamma$rec.exp.url.gamma.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="gamma$rec.exp.url.gamma.title.1"
+		toolTipLocationBundleKey="gamma$rec.exp.url.gamma.title.1"
+		internalBrowser="false" order="1" />
+	<WebResource locationBundleKey="gamma$rec.exp.url.gamma.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="gamma$rec.exp.url.gamma.title.2"
+		toolTipLocationBundleKey="gamma$rec.exp.url.gamma.title.2"
+		internalBrowser="false" order="2" />
+	<WebResource locationBundleKey="gamma$rec.exp.url.gamma.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="gamma$rec.exp.url.gamma.title.video"
+		toolTipLocationBundleKey="gamma$rec.exp.url.gamma.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="gamma$rec.exp.dftcfg.gamma.loc.1"
+		toolTipBundleKey="gamma$rec.exp.dftcfg.gamma.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="gamma$rec.exp.dftcfg.gamma.title.1" order="1" />
+
+	<Display classLocationBundleKey="gamma$rec.exp.display.gamma.loc.sensor"
+		toolTipBundleKey="gamma$rec.exp.display.gamma.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="gamma$rec.exp.display.gamma.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="gamma$rec.exp.display.gamma.loc.1"
+		toolTipBundleKey="gamma$rec.exp.display.gamma.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="gamma$rec.exp.display.gamma.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="gamma$rec.exp.display.gamma.loc.2"
+		toolTipBundleKey="gamma$rec.exp.display.gamma.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="gamma$rec.exp.display.gamma.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>
