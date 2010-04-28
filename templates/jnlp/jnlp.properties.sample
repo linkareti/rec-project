@@ -1,8 +1,10 @@
 codebase=
 href=
-title=
-vendor=
-homepage=
+jnlp.jfreechart.href=JFreeChartClient.jnlp
+jnlp.linuxinstaller.href=linuxInstaller.jnlp
+title=Remote Experienced Control Client Library
+vendor=Linkare TI, Instituto Superior Técnico
+homepage=http://elab.ist.utl.pt/rec
 one-line=
 tootip=
 short=
