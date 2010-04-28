@@ -130,9 +130,9 @@ public class YoungInterfDataProducer extends VirtualBaseDataSource {
 				int tag = 0;
 				int tag_ = 0;
 				boolean passa;
-				String s1 = ReCResourceBundle.findStringOrDefault(
-						"ReCExpYoungInterf$rec.exp.display.younginterf.string",
-						"Distance between maximums (minimums) (mm)");
+//				String s1 = ReCResourceBundle.findStringOrDefault(
+//						"ReCExpYoungInterf$rec.exp.display.younginterf.string",
+//						"Distance between maximums (minimums) (mm)");
 
 				// envia as amostra calculadas!
 				// 1- cria um array com o numero de canais existentes!
@@ -221,7 +221,7 @@ public class YoungInterfDataProducer extends VirtualBaseDataSource {
 				String title = "\u03BB = "
 						+ wl
 						+ " nm                                                                                                                "
-						+ s1 + " =  " + (float) deltaX + " \u00b1 " + (float) dx + " mm";
+						+ "Distance between maximums (minimums) (mm)" + " =  " + (float) deltaX + " \u00b1 " + (float) dx + " mm";
 				g.drawString(title, 2 + border, 20);
 				g.setFont(littleBold);
 

@@ -550,34 +550,36 @@ public class QuantumDataProducer extends VirtualBaseDataSource implements Runnab
 		return coefR[_n];
 	}
 
-	// TESTE
-	public void start(pt.utl.ist.elab.virtual.client.quantum.displays.Animation an) {
-		this.an = an;
-		animaThread = new Thread(this);
-		animaThread.start();
-	}
-
-	// TESTE
-	pt.utl.ist.elab.virtual.client.quantum.displays.Animation an;
-	private Thread animaThread;
+	//FIXME - driver should never depend on client side. should be fixed as soon as possible
+//	// TESTE
+//	public void start(pt.utl.ist.elab.virtual.client.quantum.displays.Animation an) {
+//		this.an = an;
+//		animaThread = new Thread(this);
+//		animaThread.start();
+//	}
+//
+//	// TESTE
+//	pt.utl.ist.elab.virtual.client.quantum.displays.Animation an;
+//	private Thread animaThread;
 
 	public void run() {
 		int currentSample = 0;
 		int counter = 0;
 
-		while (animaThread == Thread.currentThread() && currentSample < nSamples) {
-
-			step();
-			// an.moves(psi);
-			an.moves(ByteUtil.getObjectAsByteArray(psi));
-			currentSample++;
-			try {
-				animaThread.sleep(tbs);
-			} catch (InterruptedException e) {
-			}
-
-			counter++;
-		}
+		//FIXME - driver should never depend on client side. should be fixed as soon as possible
+//		while (animaThread == Thread.currentThread() && currentSample < nSamples) {
+//
+//			step();
+//			// an.moves(psi);
+//			an.moves(ByteUtil.getObjectAsByteArray(psi));
+//			currentSample++;
+//			try {
+//				animaThread.sleep(tbs);
+//			} catch (InterruptedException e) {
+//			}
+//
+//			counter++;
+//		}
 	}
 
 	private class ProducerThread extends Thread {

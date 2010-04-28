@@ -184,32 +184,35 @@ public class FERMAPDataProducer extends VirtualBaseDataSource implements Runnabl
 
 	// TESTE
 	private Thread animaThread;
-	private pt.utl.ist.elab.client.vfermap.displays.Animation ferAn;
+	//FIXME - driver should never depend on client side. should be fixed as soon as possible
+//	private pt.utl.ist.elab.client.vfermap.displays.Animation ferAn;
+//
+//	// TESTE
+//	public void startAnima(pt.utl.ist.elab.client.vfermap.displays.Animation ferAn) {
+//		this.ferAn = ferAn;
+//		animaThread = new Thread(this);
+//		animaThread.start();
+//	}
 
 	// TESTE
-	public void startAnima(pt.utl.ist.elab.client.vfermap.displays.Animation ferAn) {
-		this.ferAn = ferAn;
-		animaThread = new Thread(this);
-		animaThread.start();
-	}
+	//FIXME - driver should never depend on client side. should be fixed as soon as possible
+//	private pt.utl.ist.elab.client.vfermap.displays.FERHistogram ferHist;
+//
+//	public void startHist(pt.utl.ist.elab.client.vfermap.displays.FERHistogram ferHist) {
+//		this.ferHist = ferHist;
+//		animaThread = new Thread(this);
+//		animaThread.start();
+//	}
 
 	// TESTE
-	private pt.utl.ist.elab.client.vfermap.displays.FERHistogram ferHist;
+	//FIXME - driver should never depend on client side. should be fixed as soon as possible
+//	private pt.utl.ist.elab.client.vfermap.displays.FERMAPImage ferIm;
 
-	public void startHist(pt.utl.ist.elab.client.vfermap.displays.FERHistogram ferHist) {
-		this.ferHist = ferHist;
-		animaThread = new Thread(this);
-		animaThread.start();
-	}
-
-	// TESTE
-	private pt.utl.ist.elab.client.vfermap.displays.FERMAPImage ferIm;
-
-	public void startM(pt.utl.ist.elab.client.vfermap.displays.FERMAPImage ferIm) {
-		this.ferIm = ferIm;
-		animaThread = new Thread(this);
-		animaThread.start();
-	}
+//	public void startM(pt.utl.ist.elab.client.vfermap.displays.FERMAPImage ferIm) {
+//		this.ferIm = ferIm;
+//		animaThread = new Thread(this);
+//		animaThread.start();
+//	}
 
 	// TESTE
 	public byte[] getMapaData() {
@@ -245,131 +248,132 @@ public class FERMAPDataProducer extends VirtualBaseDataSource implements Runnabl
 	// TESTE
 	private boolean stop = false;
 
+	//FIXME - driver should never depend on client side. should be fixed as soon as possible
 	public void run() {
 		int currentSample = 0;
 		int counter = 0;
-
-		while (animaThread == Thread.currentThread() && currentSample < nSamples) {
-
-			if (tbs != 0) {
-
-				if (state[0] + state[1] * dt >= d - wAmp || state[0] + state[1] * tempDt >= d - wAmp) {
-
-					while (state[0] + bolaRadius * 2 - d - wAmp * Math.sin(state[2]) < -tol
-							&& (state[0] + state[1] * dt >= d - wAmp || state[0] + state[1] * tempDt >= d - wAmp)) {// (Math.abs(state[0]
-						// +
-						// state[1]*tempDt
-						// -
-						// wAmp*Math.sin(state[2])
-						// -
-						// wf*wAmp*Math.cos(state[2])*tempDt
-						// +
-						// wf*wf*wAmp*Math.sin(state[2])*tempDt*tempDt/2
-						// -
-						// d)
-						// >
-						// tol
-						// &&
-						// state[3]
-						// -
-						// (d-wAmp)/state[1]
-						// <
-						// 2*Math.PI/wf){
-
-						state[0] += state[1] * tempDt;
-						state[2] += wf * tempDt;
-
-						try {
-							animaThread.sleep(tbs);
-						} catch (InterruptedException e) {
-						}
-
-						if (ferAn != null)
-							ferAn.move(state[0], d + wAmp * Math.sin(state[2]));
-					}
-
-					if (state[0] + bolaRadius * 2 - d - wAmp * Math.sin(state[2]) >= -tol) {
-						state[1] = 2 * wf * wAmp * Math.cos(state[2]) - state[1];
-
-						if (ferHist != null) {
-							ferHist.append(state[1]);
-							ferHist.repaint();
-						} else if (ferIm != null) {
-							ferIm.setData((float) Math.abs((state[2] + 3 * Math.PI / 2d) % (2 * Math.PI)), (float) Math
-									.abs(state[1]));
-							ferIm.drawImageNonStatic((float) Math.abs((state[2] + 3 * Math.PI / 2d) % (2 * Math.PI)),
-									(float) Math.abs(state[1]));
-							ferIm.repaint();
-						} else
-							ferAn.setVel(state[1] / 100);
-
-					}
-
-					if (state[1] == 2 * wf * wAmp * Math.cos(state[2]) - state[1]) {// duvida
-						state[0] += state[1] * tempDt;
-						state[2] += wf * tempDt;
-
-						try {
-							animaThread.sleep(tbs);
-						} catch (InterruptedException e) {
-						}
-
-						if (ferAn != null)
-							ferAn.move(state[0], d + wAmp * Math.sin(state[2]));
-						// state[3] += tempDt;
-					}
-
-					state[0] += state[1] * tempDt;
-					state[2] += wf * tempDt;
-
-					try {
-						animaThread.sleep(tbs);
-					} catch (InterruptedException e) {
-					}
-
-					if (ferAn != null)
-						ferAn.move(state[0], d + wAmp * Math.sin(state[2]));
-					// state[3] += tempDt;
-				} else if (state[1] < 0 && state[0] + state[1] * dt < tol) {
-					// System.out.println(3);
-					while (state[0] > tol) {
-						state[0] += state[1] * tempDt;
-						state[2] += wf * tempDt;
-
-						// if (state[3]%dt == 0){
-						try {
-							animaThread.sleep(tbs);
-						} catch (InterruptedException e) {
-						}
-						// }
-						if (ferAn != null)
-							ferAn.move(state[0], d + wAmp * Math.sin(state[2]));
-						// state[3] += tempDt;
-					}
-					state[1] *= -1;
-					if (ferAn != null)
-						ferAn.setVel(state[1] / 100);
-					// state[3] = 0;
-
-					// ferAn.setVel(state[1]/10);
-				} else {
-					try {
-						animaThread.sleep(tbs);
-					} catch (InterruptedException e) {
-					}
-
-					state[0] += state[1] * dt;
-					state[2] += wf * dt;
-					// state[3] += dt;
-
-					if (ferAn != null)
-						ferAn.move(state[0], d + wAmp * Math.sin(state[2]));
-				}
-
-			}
-		}
-		if (ferHist != null)
-			ferHist.repaint();
+//
+//		while (animaThread == Thread.currentThread() && currentSample < nSamples) {
+//
+//			if (tbs != 0) {
+//
+//				if (state[0] + state[1] * dt >= d - wAmp || state[0] + state[1] * tempDt >= d - wAmp) {
+//
+//					while (state[0] + bolaRadius * 2 - d - wAmp * Math.sin(state[2]) < -tol
+//							&& (state[0] + state[1] * dt >= d - wAmp || state[0] + state[1] * tempDt >= d - wAmp)) {// (Math.abs(state[0]
+//						// +
+//						// state[1]*tempDt
+//						// -
+//						// wAmp*Math.sin(state[2])
+//						// -
+//						// wf*wAmp*Math.cos(state[2])*tempDt
+//						// +
+//						// wf*wf*wAmp*Math.sin(state[2])*tempDt*tempDt/2
+//						// -
+//						// d)
+//						// >
+//						// tol
+//						// &&
+//						// state[3]
+//						// -
+//						// (d-wAmp)/state[1]
+//						// <
+//						// 2*Math.PI/wf){
+//
+//						state[0] += state[1] * tempDt;
+//						state[2] += wf * tempDt;
+//
+//						try {
+//							animaThread.sleep(tbs);
+//						} catch (InterruptedException e) {
+//						}
+//
+//						if (ferAn != null)
+//							ferAn.move(state[0], d + wAmp * Math.sin(state[2]));
+//					}
+//
+//					if (state[0] + bolaRadius * 2 - d - wAmp * Math.sin(state[2]) >= -tol) {
+//						state[1] = 2 * wf * wAmp * Math.cos(state[2]) - state[1];
+//
+//						if (ferHist != null) {
+//							ferHist.append(state[1]);
+//							ferHist.repaint();
+//						} else if (ferIm != null) {
+//							ferIm.setData((float) Math.abs((state[2] + 3 * Math.PI / 2d) % (2 * Math.PI)), (float) Math
+//									.abs(state[1]));
+//							ferIm.drawImageNonStatic((float) Math.abs((state[2] + 3 * Math.PI / 2d) % (2 * Math.PI)),
+//									(float) Math.abs(state[1]));
+//							ferIm.repaint();
+//						} else
+//							ferAn.setVel(state[1] / 100);
+//
+//					}
+//
+//					if (state[1] == 2 * wf * wAmp * Math.cos(state[2]) - state[1]) {// duvida
+//						state[0] += state[1] * tempDt;
+//						state[2] += wf * tempDt;
+//
+//						try {
+//							animaThread.sleep(tbs);
+//						} catch (InterruptedException e) {
+//						}
+//
+//						if (ferAn != null)
+//							ferAn.move(state[0], d + wAmp * Math.sin(state[2]));
+//						// state[3] += tempDt;
+//					}
+//
+//					state[0] += state[1] * tempDt;
+//					state[2] += wf * tempDt;
+//
+//					try {
+//						animaThread.sleep(tbs);
+//					} catch (InterruptedException e) {
+//					}
+//
+//					if (ferAn != null)
+//						ferAn.move(state[0], d + wAmp * Math.sin(state[2]));
+//					// state[3] += tempDt;
+//				} else if (state[1] < 0 && state[0] + state[1] * dt < tol) {
+//					// System.out.println(3);
+//					while (state[0] > tol) {
+//						state[0] += state[1] * tempDt;
+//						state[2] += wf * tempDt;
+//
+//						// if (state[3]%dt == 0){
+//						try {
+//							animaThread.sleep(tbs);
+//						} catch (InterruptedException e) {
+//						}
+//						// }
+//						if (ferAn != null)
+//							ferAn.move(state[0], d + wAmp * Math.sin(state[2]));
+//						// state[3] += tempDt;
+//					}
+//					state[1] *= -1;
+//					if (ferAn != null)
+//						ferAn.setVel(state[1] / 100);
+//					// state[3] = 0;
+//
+//					// ferAn.setVel(state[1]/10);
+//				} else {
+//					try {
+//						animaThread.sleep(tbs);
+//					} catch (InterruptedException e) {
+//					}
+//
+//					state[0] += state[1] * dt;
+//					state[2] += wf * dt;
+//					// state[3] += dt;
+//
+//					if (ferAn != null)
+//						ferAn.move(state[0], d + wAmp * Math.sin(state[2]));
+//				}
+//
+//			}
+//		}
+//		if (ferHist != null)
+//			ferHist.repaint();
 	}
 
 	private void setUMax() {

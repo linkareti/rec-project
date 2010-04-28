@@ -168,34 +168,37 @@ public class STDMAPDataProducer extends VirtualBaseDataSource implements Runnabl
 		return ByteUtil.floatArrayToByteArray(iMapaData);
 	}
 
+	//FIXME - driver should never depend on client side. should be fixed as soon as possible
 	// TESTE
 	private Thread animaThread;
-	private pt.utl.ist.elab.client.vstdmap.displays.Animation stdAn;
+//	private pt.utl.ist.elab.client.vstdmap.displays.Animation stdAn;
 
 	// TESTE
-	public void startAnima(pt.utl.ist.elab.client.vstdmap.displays.Animation stdAn) {
-		this.stdAn = stdAn;
-		animaThread = new Thread(this);
-		animaThread.start();
-	}
+//	public void startAnima(pt.utl.ist.elab.client.vstdmap.displays.Animation stdAn) {
+//		this.stdAn = stdAn;
+//		animaThread = new Thread(this);
+//		animaThread.start();
+//	}
 
 	// TESTE
-	private pt.utl.ist.elab.client.vstdmap.displays.STDHistogram stdHist;
+	//FIXME - driver should never depend on client side. should be fixed as soon as possible
+//	private pt.utl.ist.elab.client.vstdmap.displays.STDHistogram stdHist;
 
-	public void startHist(pt.utl.ist.elab.client.vstdmap.displays.STDHistogram stdHist) {
-		this.stdHist = stdHist;
-		animaThread = new Thread(this);
-		animaThread.start();
-	}
+//	public void startHist(pt.utl.ist.elab.client.vstdmap.displays.STDHistogram stdHist) {
+//		this.stdHist = stdHist;
+//		animaThread = new Thread(this);
+//		animaThread.start();
+//	}
 
 	// TESTE
-	private pt.utl.ist.elab.client.vstdmap.displays.STDMAPImage stdIm;
-
-	public void startM(pt.utl.ist.elab.client.vstdmap.displays.STDMAPImage stdIm) {
-		this.stdIm = stdIm;
-		animaThread = new Thread(this);
-		animaThread.start();
-	}
+	//FIXME - driver should never depend on client side. should be fixed as soon as possible
+	//	private pt.utl.ist.elab.client.vstdmap.displays.STDMAPImage stdIm;
+//
+//	public void startM(pt.utl.ist.elab.client.vstdmap.displays.STDMAPImage stdIm) {
+//		this.stdIm = stdIm;
+//		animaThread = new Thread(this);
+//		animaThread.start();
+//	}
 
 	// TESTE
 	public byte[] getMapaData() {
@@ -226,53 +229,54 @@ public class STDMAPDataProducer extends VirtualBaseDataSource implements Runnabl
 		return ByteUtil.floatArrayToByteArray(mData);
 	}
 
-	// TESTE
+	//FIXME - driver should never depend on client side. should be fixed as soon as possible
+//	// TESTE
 	public void run() {
-		int currentSample = 0;
-		int counter = 0;
-
-		while (animaThread == Thread.currentThread() && currentSample < nSamples) {
-			if (mass != 0) {
-
-				theta += (thetaDot / 10d);
-
-				if ((counter * 100) % tbs == 0) {
-					thetaDot += (force * Math.sin(theta) / (mass * length * length));
-					currentSample++;
-
-					if (stdHist != null) {
-						double tempTd = thetaDot;
-						if (tempTd < 0)
-							tempTd = Math.abs(tempTd + 2 * Math.PI);
-
-						stdHist.append(Math.abs(thetaDot % (2 * Math.PI)));
-					} else if (stdIm != null) {
-						double tempT = theta;
-						double tempTd = thetaDot;
-						if (tempTd < 0)
-							tempTd = Math.abs(tempTd + 2 * Math.PI);
-						if (tempT < 0)
-							tempT = Math.abs(tempT + 2 * Math.PI);
-
-						stdIm.setData((float) tempT, (float) tempTd);
-						stdIm.drawImageNonStatic((float) (tempT % (2 * Math.PI)), (float) (tempTd % (2 * Math.PI)));
-						stdIm.repaint();
-					}
-					if (stdAn != null)
-						stdAn.move(theta, thetaDot);
-				} else if (stdAn != null)
-					stdAn.setTheta(theta);
-
-				counter++;
-				try {
-					animaThread.sleep(100);
-				} catch (InterruptedException e) {
-				}
-			}
-			if (stdHist != null) {
-				stdHist.repaint();
-			}
-		}
+//		int currentSample = 0;
+//		int counter = 0;
+//
+//		while (animaThread == Thread.currentThread() && currentSample < nSamples) {
+//			if (mass != 0) {
+//
+//				theta += (thetaDot / 10d);
+//
+//				if ((counter * 100) % tbs == 0) {
+//					thetaDot += (force * Math.sin(theta) / (mass * length * length));
+//					currentSample++;
+//
+//					if (stdHist != null) {
+//						double tempTd = thetaDot;
+//						if (tempTd < 0)
+//							tempTd = Math.abs(tempTd + 2 * Math.PI);
+//
+//						stdHist.append(Math.abs(thetaDot % (2 * Math.PI)));
+//					} else if (stdIm != null) {
+//						double tempT = theta;
+//						double tempTd = thetaDot;
+//						if (tempTd < 0)
+//							tempTd = Math.abs(tempTd + 2 * Math.PI);
+//						if (tempT < 0)
+//							tempT = Math.abs(tempT + 2 * Math.PI);
+//
+//						stdIm.setData((float) tempT, (float) tempTd);
+//						stdIm.drawImageNonStatic((float) (tempT % (2 * Math.PI)), (float) (tempTd % (2 * Math.PI)));
+//						stdIm.repaint();
+//					}
+//					if (stdAn != null)
+//						stdAn.move(theta, thetaDot);
+//				} else if (stdAn != null)
+//					stdAn.setTheta(theta);
+//
+//				counter++;
+//				try {
+//					animaThread.sleep(100);
+//				} catch (InterruptedException e) {
+//				}
+//			}
+//			if (stdHist != null) {
+//				stdHist.repaint();
+//			}
+//		}
 	}
 
 	private class ProducerThread extends Thread {
