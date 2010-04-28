@@ -164,7 +164,8 @@ public class FERMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 		mData = new float[10000 * 2];
 		// new pt.utl.ist.elab.virtual.driver.fermap.FERMAPDataProducer(null, 2,
 		// 100, 0, 10.1, 9, 100, 1, 1000).startM(this);
-		new pt.utl.ist.elab.driver.vfermap.FERMAPDataProducer(null, 2, xDot, psi, 0.1f, 9, 20, 1, 1000).startM(this);
+		//FIXME - client should never depend on driver part
+//		new pt.utl.ist.elab.driver.vfermap.FERMAPDataProducer(null, 2, xDot, psi, 0.1f, 9, 20, 1, 1000).startM(this);
 
 		statusStr = "";
 		repaint();

@@ -45,11 +45,12 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 
 		// Map Non-Static
 		staticImg = true;
-		pt.utl.ist.elab.driver.vstdmap.STDMAPDataProducer std = new pt.utl.ist.elab.driver.vstdmap.STDMAPDataProducer(
-				null, 1.1f, 0, nTheta, 2.1f, 0, nI, .21f, iter, (float) Math.PI, w, h, pixSize, staticImg);
+		//FIXME - client should never depend on driver part
+//		pt.utl.ist.elab.driver.vstdmap.STDMAPDataProducer std = new pt.utl.ist.elab.driver.vstdmap.STDMAPDataProducer(
+//				null, 1.1f, 0, nTheta, 2.1f, 0, nI, .21f, iter, (float) Math.PI, w, h, pixSize, staticImg);
 		popupmenu.getComponent(2).setEnabled(false);
 		popupmenu.getComponent(3).setEnabled(false);
-		makeImage(std.getMapaPixs());
+//		makeImage(std.getMapaPixs());
 		statusStr = "";
 		repaint();
 

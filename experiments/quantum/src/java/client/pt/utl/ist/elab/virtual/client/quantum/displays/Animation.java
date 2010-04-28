@@ -12,9 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
-import pt.utl.ist.elab.driver.virtual.utils.Complex;
-import pt.utl.ist.elab.driver.vquantum.QuantumDataProducer;
+//FIXME - client should never depend on driver part
+//import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
+//import pt.utl.ist.elab.driver.virtual.utils.Complex;
+//import pt.utl.ist.elab.driver.vquantum.QuantumDataProducer;
 import pt.utl.ist.elab.virtual.client.quantum.ComplexGaussian;
 import pt.utl.ist.elab.virtual.client.quantum.Quantum;
 
@@ -46,16 +47,18 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 		setPreferredMinMax(-60, 40, -1, 1);
 		repaint();
 
-		QuantumDataProducer q = new QuantumDataProducer(null, 100, -10, 100, 11, 2, 1e-5, 5e-20, 5e-18, 200, false,
-				true, true);
+		//FIXME - client should never depend on driver part
+//		QuantumDataProducer q = new QuantumDataProducer(null, 100, -10, 100, 11, 2, 1e-5, 5e-20, 5e-18, 200, false,
+//				true, true);
 		// q.configPotentials("0.0:5.0:f(x) = 100:false#6.0:1.0:f(x) = 50:false#");
-		q
-				.configPotentials("0.0:4.0:f(x) = -cos(x)*5:false#5.0:5.0:f(x) = sin(x)*5:false#10.5:2.0:f(x) = exp(-x*25)+3:false#-3.0:2.0:f(x) = 255:false#-5.0:1.5:f(x) = 90+x^3+4*x^2+5+cos(3*x):false");
-		q.start(this);
+//		q
+//				.configPotentials("0.0:4.0:f(x) = -cos(x)*5:false#5.0:5.0:f(x) = sin(x)*5:false#10.5:2.0:f(x) = exp(-x*25)+3:false#-3.0:2.0:f(x) = 255:false#-5.0:1.5:f(x) = 90+x^3+4*x^2+5+cos(3*x):false");
+//		q.start(this);
 	}
 
 	public void moves(byte[] mv) {
-		setPsi((Complex[]) ByteUtil.byteArrayToObject(mv));
+		//FIXME - client should never depend on driver part
+//		setPsi((Complex[]) ByteUtil.byteArrayToObject(mv));
 		repaint();
 	}
 
