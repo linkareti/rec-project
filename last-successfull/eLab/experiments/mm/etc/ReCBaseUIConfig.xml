@@ -1,0 +1,29 @@
+<Apparatus location="MASSA_MOLA_V1.0"
+	customizerClassLocationBundleKey="mm$rec.exp.customizer.mm"
+	toolTipBundleKey="mm$rec.exp.tip.mm" iconLocationBundleKey="mm$rec.exp.icon.mm"
+	displayStringBundleKey="mm$rec.exp.title.mm" desktopLocationBundleKey="mm$rec.exp.background.mm"
+	order="1">
+	<LocalizationBundle name="mm"
+		location="recresource:///pt/utl/ist/elab/virtual/client/mm/resources/messages" />
+	<Display classLocationBundleKey="mm$rec.exp.display.mm.loc.anim"
+		toolTipBundleKey="mm$rec.exp.display.mm.tip.anim"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="mm$rec.exp.display.mm.title.anim"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="mm$rec.exp.display.mm.loc.1"
+		toolTipBundleKey="mm$rec.exp.display.mm.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="mm$rec.exp.display.mm.title.1" offlineCapable="false"
+		order="2" />
+	<Display classLocationBundleKey="mm$rec.exp.display.mm.loc.2"
+		toolTipBundleKey="mm$rec.exp.display.mm.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="mm$rec.exp.display.mm.title.2" offlineCapable="false"
+		order="3" />
+	<Display classLocationBundleKey="mm$rec.exp.display.mm.loc.3"
+		toolTipBundleKey="mm$rec.exp.display.mm.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="mm$rec.exp.display.mm.title.3" offlineCapable="false"
+		order="4" />
+	<Display classLocationBundleKey="mm$rec.exp.display.mm.loc.4"
+		toolTipBundleKey="mm$rec.exp.display.mm.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="mm$rec.exp.display.mm.title.4" offlineCapable="false"
+		order="5" />
+</Apparatus>

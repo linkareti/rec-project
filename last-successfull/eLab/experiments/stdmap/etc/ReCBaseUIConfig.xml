@@ -1,0 +1,23 @@
+<Apparatus location="STANDARD_MAP_V1.0"
+	customizerClassLocationBundleKey="stdmap$rec.exp.customizer.stdmap"
+	toolTipBundleKey="stdmap$rec.exp.tip.stdmap" iconLocationBundleKey="stdmap$rec.exp.icon.stdmap"
+	displayStringBundleKey="stdmap$rec.exp.title.stdmap"
+	desktopLocationBundleKey="stdmap$rec.exp.background.stdmap" order="1">
+	<LocalizationBundle name="stdmap"
+		location="recresource:///pt/utl/ist/elab/virtual/client/stdmap/resources/messages" />
+	<Display classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.anim"
+		toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.anim"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.anim"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.1"
+		toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.2"
+		toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="stdmap$rec.exp.display.stdmap.title.2"
+		offlineCapable="false" order="3" />
+</Apparatus>
