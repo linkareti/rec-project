@@ -84,6 +84,8 @@
 		
 		<create.jnlp.full.client.compile codebase="${basedir}/${build.dir.compile}" />
 		
+		<create.baseuiconfig />
+				
 	</target>
 	
 	<target name="jar.elab.client">
@@ -100,6 +102,7 @@
 
 	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
 		<create.jnlp.full.client.build codebase="${codebase}"/>
+		<create.baseuiconfig />
 	</target>
 	
 	<target name="run.elab.client.web.start">

@@ -357,7 +357,7 @@
 	<macrodef name="create.jnlp.full.client.compile">
 		<attribute name="codebase"/>
 		<sequential>
-			<copy file="${template.file}" overwrite="yes" tofile="${build.dir.compile}/ELabFullClient.jnlp" />
+			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${build.dir.compile}/ELabFullClient.jnlp" />
 			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="@codebase@" value="@{codebase}"/>
 			<replace file="${build.dir.compile}/ELabFullClient.jnlp" propertyFile="build.properties">
 				<replacefilter token="@href@" property="href" />
@@ -393,7 +393,7 @@
 	<macrodef name="create.jnlp.full.client.build">
 		<attribute name="codebase"/>
 		<sequential>
-			<copy file="${template.file}" overwrite="yes" tofile="${client.build.dir}/ELabFullClient.jnlp" />
+			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/ELabFullClient.jnlp" />
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 				<replacefilter token="@href@" property="href" />
@@ -435,8 +435,10 @@
 	<property name="experiments.classes.dir" value="${build.dir.compile}/classes/experiments" />
 	<property name="experiments.build.dir" value="${build.dir.dist}/experiments" />
 
-	<property name="template.file" value="${basedir}/templates/jnlp/template.xml" />
+	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/template.xml" />
+	<property name="baseuiconfig.template.file" value="${basedir}/templates/client/ReCBaseUIConfigTemplate.xml" />
 
+		
 	<!--MACROS-->
 
 	<macrodef name="process.list">
@@ -634,4 +636,26 @@
 		<path refid="elab.hardwareserver.libs.classpath" />
 	</path>
 
+	<macrodef name="create.baseuiconfig">
+		<sequential>
+			<copy file="${baseuiconfig.template.file}" overwrite="yes" tofile="${client.build.dir}/RecBaseUIConfig.xml" />
+			<process.list task="add.experiment.baseuiconfig" list="${experiment.list}" attribute.name="experiment.name" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="add.experiment.baseuiconfig">
+		<attribute name="experiment.name" />
+		<sequential>		
+			
+		    <loadfile property="@{experiment.name}.baseuiconfig" srcFile="experiments/@{experiment.name}/etc/ReCBaseUIConfig.xml"/>
+			
+			<replace file="${client.build.dir}/RecBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;" >
+				<replacevalue>
+					<![CDATA[@temporary.experiment.apparatus@
+		<!--End Apparatus configuration-->]]></replacevalue>
+			</replace>
+			<replace file="${client.build.dir}/RecBaseUIConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.baseuiconfig}"/>
+		</sequential>
+	</macrodef>
+	
 </project>
