@@ -379,7 +379,7 @@
 			<compile.experiment.driver experiment.name="@{experiment.name}" />
 			<jar.experiment.client experiment.name="@{experiment.name}" />
 			<jar.experiment.driver experiment.name="@{experiment.name}" />
-			<sign.experiment experiment.name="${experiment.name}" />
+			<sign.experiment experiment.name="@{experiment.name}" />
 			<create.jnlp.for.experiment experiment.name="@{experiment.name}" />
 		</sequential>
 	</macrodef>

@@ -650,12 +650,12 @@
 			
 		    <loadfile property="@{experiment.name}.baseuiconfig" srcFile="experiments/@{experiment.name}/etc/ReCBaseUIConfig.xml"/>
 			
-			<replace file="${elab.client.classes.dir}/RecBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;" >
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;" >
 				<replacevalue>
 					<![CDATA[@temporary.experiment.apparatus@
 		<!--End Apparatus configuration-->]]></replacevalue>
 			</replace>
-			<replace file="${elab.client.classes.dir}/RecBaseUIConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.baseuiconfig}"/>
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.baseuiconfig}"/>
 		</sequential>
 	</macrodef>
 	

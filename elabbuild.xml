@@ -96,8 +96,8 @@
 
 	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
 		<create.jnlp.full.client.build codebase="${codebase}"/>
-		
-		<copyfile dest="${client.build.dir}/etc/ReCBaseUIConfig.xml" src="${elab.client.classes.dir}/ReCBaseUIConfig.xml"/>
+
+		<copy file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" tofile="${client.build.dir}/etc/ReCBaseUIConfig.xml"></copy>
 		
 		<sign.jars.in.directory source.dir.name="${elab.client.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
 				
