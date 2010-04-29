@@ -64,10 +64,6 @@
 			</section>
 		</manifest>
 		
-		<create.jar destination.folder="${build.dir.compile}" jar.name="ReCCommon.jar" source.basedir="${rec.common.classes.dir}"/>
-		
-		<sign.jar.rec folder="${build.dir.compile}" jar.name="ReCCommon.jar" />
-		
 	</target>
 
 	<target name="jar.rec.common">
@@ -138,14 +134,16 @@
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
-
-		<create.jar destination.folder="${build.dir.compile}" jar.name="ReCClient.jar" source.basedir="${rec.client.classes.dir}"/>
 		
-		<sign.jar.rec folder="${build.dir.compile}" jar.name="ReCClient.jar"/>
+		<copy file="${templates.dir.openorb}/OpenORBClientTemplate.xml" overwrite="yes" tofile="${rec.client.classes.dir}/openorb.xml" />
+		<replace file="${rec.client.classes.dir}/openorb.xml" propertyFile="build.properties">
+			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
+			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+		</replace>
 		
 	</target>
 
-	<target name="jar.rec.client">
+		<target name="jar.rec.client">
 			<create.jar destination.folder="${client.build.dir}" jar.name="ReCClient.jar" source.basedir="${rec.client.classes.dir}"/>
 		</target>
 		
@@ -158,6 +156,18 @@
 	</target-->
 	
 	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client,sign.rec.client">
+		
+		<sign.jars.in.directory source.dir.name="${rec.common.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
+		<sign.jars.in.directory source.dir.name="${rec.client.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
+	
+		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}"></copy>
+		
+		<copy file="${templates.dir.openorb}/OpenORBClientTemplate.xml" overwrite="yes" tofile="${client.build.dir}/etc/openorb.xml" />
+			<replace file="${client.build.dir}/etc/openorb.xml" propertyFile="build.properties">
+			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
+			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+		</replace>
+		
 	</target>
 
 	<!--
@@ -212,6 +222,23 @@
 
 	<target name="build.rec.hardwareserver" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
 		
+		<copy todir="${hardwareserver.build.dir}/lib" overwrite="true">
+			<fileset dir="${rec.common.lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+			<fileset dir="${rec.hardwareserver.lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+		
+		<copy file="${common.build.dir}/ReCCommon.jar" todir="${hardwareserver.build.dir}"></copy>
+		
+		<copy file="${templates.dir.openorb}/OpenORBHardwareTemplate.xml" overwrite="yes" tofile="${hardwareserver.build.dir}/etc/openorb.xml" />
+			<replace file="${hardwareserver.build.dir}/etc/openorb.xml" propertyFile="build.properties">
+			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
+			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+		</replace>
+				
 	</target>
 
 	<!--
@@ -265,7 +292,24 @@
 	</target>
 
 	<target name="build.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
+	
+		<copy todir="${multicast.build.dir}/lib" overwrite="true">
+			<fileset dir="${rec.common.lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+			<fileset dir="${rec.multicast.lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
 
+		<copy file="${common.build.dir}/ReCCommon.jar" todir="${multicast.build.dir}"></copy>
+		
+	<copy file="${templates.dir.openorb}/OpenORBMultiCastTemplate.xml" overwrite="yes" tofile="${multicast.build.dir}/etc/openorb.xml" />
+		<replace file="${multicast.build.dir}/etc/openorb.xml" propertyFile="build.properties">
+		<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
+		<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+	</replace>
+		
 	</target>
 
 	<target name="run.rec.multicast">

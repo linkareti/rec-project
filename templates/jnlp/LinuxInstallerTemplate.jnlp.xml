@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp codebase="${jnlp.codebase}" href="@jnlp.linuxinstaller.href@" spec="1.0+">
+<jnlp codebase="@codebase@" href="LinuxInstaller.jnlp" spec="1.0+">
     <information>
         <title>@title@</title>
         <vendor>@vendor@</vendor>
         <homepage href="@homepage@"/>
-        <description>Laboratório de experiências online.</description>
-        <description kind="short">eLab</description>
+        <description>Linux Installer.</description>
+        <description kind="short">Linux Installer</description>
         <offline-allowed/>
     </information>
     <security>

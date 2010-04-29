@@ -19,9 +19,10 @@
 	-->
 
 	<property name="build.dir.compile" value="${basedir}/${build.dir}/compile" />
-	<property name="build.dir.dist" value="${basedir}/${build.dir}/dist" />
+	<property name="build.dir.jars" value="${basedir}/${build.dir}/jars" />
 
 	<property name="templates.dir" value="${basedir}/templates" />
+	<property name="templates.dir.client" value="${basedir}/templates/client" />
 	<property name="templates.dir.openorb" value="${basedir}/templates/openorb" />
 	<property name="templates.dir.jnlp" value="${basedir}/templates/jnlp" />
 	<property name="templates.dir.scripts" value="${basedir}/templates/scripts" />
@@ -67,7 +68,7 @@
 	-->
 
 	<property name="rec.common.classes.dir" value="${build.dir.compile}/classes/rec/common" />
-	<property name="common.build.dir" value="${build.dir.dist}/common" />
+	<property name="common.build.dir" value="${build.dir.jars}/common" />
 
 	<property name="rec.common.src.java.dir" value="${basedir}/rec/src/java/common" />
 
@@ -99,7 +100,7 @@
 	-->
 
 	<property name="rec.client.classes.dir" value="${build.dir.compile}/classes/rec/client" />
-	<property name="client.build.dir" value="${build.dir.dist}/client" />
+	<property name="client.build.dir" value="${build.dir.jars}/client" />
 
 	<property name="rec.client.src.java.dir" value="${basedir}/rec/src/java/client" />
 	<property name="rec.ui.src.java.dir" value="${basedir}/rec/src/java/ui" />
@@ -140,7 +141,7 @@
 	-->
 
 	<property name="rec.hardwareserver.classes.dir" value="${build.dir.compile}/classes/rec/hardwareserver" />
-	<property name="hardwareserver.build.dir" value="${build.dir.dist}/hardwareserver" />
+	<property name="hardwareserver.build.dir" value="${build.dir.jars}/hardwareserver" />
 
 	<property name="rec.hardwareserver.src.java.dir" value="${basedir}/rec/src/java/hardwareserver" />
 
@@ -180,7 +181,7 @@
 	-->
 
 	<property name="rec.multicast.classes.dir" value="${build.dir.compile}/classes/rec/multicast" />
-	<property name="multicast.build.dir" value="${build.dir.dist}/multicast" />
+	<property name="multicast.build.dir" value="${build.dir.jars}/multicast" />
 
 	<property name="rec.multicast.src.java.dir" value="${basedir}/rec/src/java/multicast" />
 
@@ -357,9 +358,9 @@
 	<macrodef name="create.jnlp.full.client.compile">
 		<attribute name="codebase"/>
 		<sequential>
-			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${build.dir.compile}/ELabFullClient.jnlp" />
-			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="@codebase@" value="@{codebase}"/>
-			<replace file="${build.dir.compile}/ELabFullClient.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ELabFullClient.jnlp" />
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@codebase@" value="@{codebase}"/>
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
 				<replacefilter token="@href@" property="href" />
 				<replacefilter token="@title@" property="title" />
 				<replacefilter token="@vendor@" property="vendor" />
@@ -370,9 +371,9 @@
 				<replacefilter token="@j2se-version@" property="j2se-version" />
 				<replacefilter token="@main-class@" property="main-class" />
 			</replace>
-			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
-			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
-			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
 
 			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -381,12 +382,12 @@
 	<macrodef name="add.experiment.to.full.jnlp.compile">
 		<attribute name="experiment.name" />
 		<sequential>
-			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
 				<replacevalue>
-					<![CDATA[<jar href="@temporary.experiment.jar@"/>
-					<!--End Experiment Jars-->]]></replacevalue>
+		<![CDATA[<jar href="@temporary.experiment.jar@"/>
+		<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-			<replace file="${build.dir.compile}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar"/>
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar"/>
 		</sequential>
 	</macrodef>
 
@@ -419,10 +420,10 @@
 		<sequential>
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
 				<replacevalue>
-					<![CDATA[<jar href="client/@temporary.experiment.jar@"/>
-					<!--End Experiment Jars-->]]></replacevalue>
+		<![CDATA[<jar href="@temporary.experiment.jar@"/>
+		<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar"/>
 		</sequential>
 	</macrodef>
 
@@ -433,9 +434,9 @@
 	-->
 
 	<property name="experiments.classes.dir" value="${build.dir.compile}/classes/experiments" />
-	<property name="experiments.build.dir" value="${build.dir.dist}/experiments" />
+	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
 
-	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/template.xml" />
+	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/ELabFullClientTemplate.jnlp.xml" />
 	<property name="baseuiconfig.template.file" value="${basedir}/templates/client/ReCBaseUIConfigTemplate.xml" />
 
 		
@@ -531,7 +532,7 @@
 		<attribute name="destination.dir.name" />
 		<sequential>
 			<mkdir dir="@{destination.dir.name}" />
-			<signjar storetype="${storetype}" destDir="@{destination.dir.name}" keystore="${keystore}" keypass="${keypass}" storepass="${storepass}" alias="${alias}">
+			<signjar storetype="${rec.storetype}" destDir="@{destination.dir.name}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
 				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
@@ -638,7 +639,7 @@
 
 	<macrodef name="create.baseuiconfig">
 		<sequential>
-			<copy file="${baseuiconfig.template.file}" overwrite="yes" tofile="${client.build.dir}/RecBaseUIConfig.xml" />
+			<copy file="${baseuiconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
 			<process.list task="add.experiment.baseuiconfig" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
 	</macrodef>
@@ -649,12 +650,12 @@
 			
 		    <loadfile property="@{experiment.name}.baseuiconfig" srcFile="experiments/@{experiment.name}/etc/ReCBaseUIConfig.xml"/>
 			
-			<replace file="${client.build.dir}/RecBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;" >
+			<replace file="${elab.client.classes.dir}/RecBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;" >
 				<replacevalue>
 					<![CDATA[@temporary.experiment.apparatus@
 		<!--End Apparatus configuration-->]]></replacevalue>
 			</replace>
-			<replace file="${client.build.dir}/RecBaseUIConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.baseuiconfig}"/>
+			<replace file="${elab.client.classes.dir}/RecBaseUIConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.baseuiconfig}"/>
 		</sequential>
 	</macrodef>
 	

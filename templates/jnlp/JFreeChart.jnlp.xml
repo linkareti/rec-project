@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<jnlp spec="1.0+" codebase="@codebase@" href="@jnlp.jfreechart.href@">
+<jnlp spec="1.0+" codebase="@codebase@" href="JFreeChart.jnlp">
     <information>
         <title>@title@</title>
         <vendor>@vendor@</vendor>

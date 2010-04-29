@@ -77,15 +77,9 @@
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
-		
-		<create.jar destination.folder="${build.dir.compile}" jar.name="ELabClient.jar" source.basedir="${elab.client.classes.dir}"/>
 	
-		<sign.jar.elab folder="${build.dir.compile}" jar.name="ELabClient.jar"/>
-		
-		<create.jnlp.full.client.compile codebase="${basedir}/${build.dir.compile}" />
-		
-		<create.baseuiconfig />
-				
+		<create.baseuiconfig/>
+					
 	</target>
 	
 	<target name="jar.elab.client">
@@ -102,7 +96,11 @@
 
 	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
 		<create.jnlp.full.client.build codebase="${codebase}"/>
-		<create.baseuiconfig />
+		
+		<copyfile dest="${client.build.dir}/etc/ReCBaseUIConfig.xml" src="${elab.client.classes.dir}/ReCBaseUIConfig.xml"/>
+		
+		<sign.jars.in.directory source.dir.name="${elab.client.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
+				
 	</target>
 	
 	<target name="run.elab.client.web.start">
@@ -179,7 +177,13 @@
 	</target>
 
 	<target name="build.elab.hardwareserver" depends="clean.elab.hardwareserver,compile.elab.hardwareserver,jar.elab.hardwareserver">
-
+		
+		<copy todir="${hardwareserver.build.dir}/lib" overwrite="true">
+			<fileset dir="${elab.hardwareserver.lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+	
 	</target>
 
 	<!--
@@ -227,7 +231,13 @@
 	</target>
 
 	<target name="build.elab.multicastcontroller" depends="clean.elab.multicastcontroller,compile.elab.multicastcontroller,jar.elab.multicastcontroller">
-
+		
+		<copy todir="${multicast.build.dir}/lib" overwrite="true">
+			<fileset dir="${elab.multicast.lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+		
 	</target>
 
 	<target name="clean.all" depends="clean.elab.client,clean.elab.hardwareserver,clean.elab.multicastcontroller">

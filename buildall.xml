@@ -46,23 +46,31 @@
 	<!-- - - - - - - - - - - - - - - - - - 
           target: dist.all
          - - - - - - - - - - - - - - - - - -->
-	<target name="dist.all" depends="build.all,dist.client,dist.multicast, dist.harwareserver">
+	<target name="dist.all" depends="build.all,dist.client,dist.multicast,dist.harwareserver">
 
 	</target>
 
 	<target name="dist.client">
-		<zip destfile="${build.dir}/client.zip">
-			<zipfileset dir="${client.build.dir}" prefix="client" />
-			<zipfileset dir="${common.build.dir}" prefix="client" />
+
+		<zip destfile="${dist.dir}/FullClient.zip">
+			<zipfileset dir="${client.build.dir}" includes="**/*.jar,**/*.jnlp" prefix="client/lib" />
+			
+			<zipfileset dir="${client.build.dir}/lib" includes="**/*.jar" prefix="client/lib" />
+			
+			<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="client/etc/loggers.config.properties" />
+			<zipfileset file="${client.build.dir}/etc/openorb.xml" fullpath="client/etc/openorb.xml" />
+			<zipfileset file="${client.build.dir}/etc/ReCBaseUIConfig.xml" fullpath="client/etc/ReCBaseUIConfig.xml" />
 		</zip>
+
 	</target>
+
 
 	<target name="dist.multicast">
 
 		<copy file="${templates.dir.scripts}/StartMultiCastController.sh" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.sh" />
 		<replace file="${multicast.build.dir}/StartMultiCastController.sh" propertyFile="build.properties">
 			<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
-			<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+			e<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
 		</replace>
 
 		<copy file="${templates.dir.scripts}/StartMultiCastController.bat" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.bat" />
@@ -71,15 +79,15 @@
 			<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
 		</replace>
 
-		<zip destfile="${build.dir}/multicast.zip">
+		<zip destfile="${dist.dir}/multicast.zip">
 			<zipfileset file="${multicast.build.dir}/ELabMulticastController.jar" prefix="multicast" />
 			<zipfileset file="${multicast.build.dir}/ReCMulticastController.jar" prefix="multicast" />
-			<zipfileset dir="${common.build.dir}" excludes="**/*_sig.jar" includes="**/*.jar" prefix="multicast" />
-			<zipfileset dir="${rec.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
-			<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
-			<zipfileset dir="${elab.multicast.lib.dir}" includes="**/*.jar" prefix="multicast/lib" />
+			<zipfileset file="${multicast.build.dir}/ReCCommon.jar" prefix="multicast" />
+			
+			<zipfileset dir="${multicast.build.dir}/lib" includes="**/*.jar" prefix="multicast/lib" />
 			<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="multicast/etc/loggers.config.properties" />
-			<zipfileset file="${rec.multicast.classes.dir}/openorb.xml" fullpath="multicast/etc/openorb.xml" />
+			<zipfileset file="${multicast.build.dir}/etc/openorb.xml" fullpath="multicast/etc/openorb.xml" />
+			
 			<zipfileset file="${multicast.build.dir}/StartMultiCastController.sh" filemode="755" />
 			<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" />
 		</zip>
@@ -117,17 +125,16 @@
 				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
 			</replace>
 
-			<zip destfile="${build.dir}/@{experiment.name}HarwareServer.zip">
+			<zip destfile="${dist.dir}/@{experiment.name}HarwareServer.zip">
 				<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
 				<zipfileset file="${hardwareserver.build.dir}/ELabHardwareServer.jar" prefix="hardwareserver" />
 				<zipfileset file="${hardwareserver.build.dir}/ReCHardwareServer.jar" prefix="hardwareserver" />
-				<zipfileset dir="${common.build.dir}" excludes="**/*_sig.jar" includes="**/*.jar" prefix="hardwareserver" />
-				<zipfileset dir="${rec.hardwareserver.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
-				<zipfileset dir="${rec.common.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
-				<zipfileset dir="${elab.hardwareserver.lib.dir}" includes="**/*.jar" prefix="hardwareserver/lib" />
-				<zipfileset dir="experiments/@{experiment.name}/lib/java/server" includes="**/*.jar" prefix="hardwareserver/lib" />
+				<zipfileset file="${hardwareserver.build.dir}/ReCCommon.jar" prefix="hardwareserver" />
+				
+				<zipfileset dir="${hardwareserver.build.dir}/lib" includes="**/*.jar" prefix="hardwareserver/lib" />
+				
 				<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
-				<zipfileset file="${rec.hardwareserver.classes.dir}/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
+				<zipfileset file="${hardwareserver.build.dir}/etc/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
 				<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" filemode="755" />
 				<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" filemode="755" />
 			</zip>
