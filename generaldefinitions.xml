@@ -358,6 +358,10 @@
 	<macrodef name="create.jnlp.full.client.compile">
 		<attribute name="codebase"/>
 		<sequential>
+			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/OpenORB.jnlp" />
+			<replace file="${elab.client.classes.dir}/OpenORB.jnlp" token="@codebase@" value="@{codebase}"/>
+			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/JFreeChart.jnlp" />
+			<replace file="${elab.client.classes.dir}/JFreeChart.jnlp" token="@codebase@" value="@{codebase}"/>
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ELabFullClient.jnlp" />
 			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@codebase@" value="@{codebase}"/>
 			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
@@ -394,6 +398,14 @@
 	<macrodef name="create.jnlp.full.client.build">
 		<attribute name="codebase"/>
 		<sequential>
+			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/OpenORB.jnlp" />
+			<replace file="${client.build.dir}/OpenORB.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+			</replace>
+			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${client.build.dir}/JFreeChart.jnlp" />
+			<replace file="${client.build.dir}/JFreeChart.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+			</replace>
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/ELabFullClient.jnlp" />
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
@@ -437,6 +449,8 @@
 	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
 
 	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/ELabFullClientTemplate.jnlp.xml" />
+	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/OpenORB.jnlp.xml" />
+	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/JFreeChart.jnlp.xml" />
 	<property name="baseuiconfig.template.file" value="${basedir}/templates/client/ReCBaseUIConfigTemplate.xml" />
 
 		

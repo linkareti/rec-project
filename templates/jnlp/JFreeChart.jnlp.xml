@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <jnlp spec="1.0+" codebase="@codebase@" href="JFreeChart.jnlp">
     <information>
-        <title>@title@</title>
-        <vendor>@vendor@</vendor>
-	<homepage href="@homepage@"/>
+        <title>JFreeChart/title>
+        <vendor>JFreeChart</vendor>
+	<homepage href="http://www.jfree.org/jfreechart/"/>
 	<description kind="one-line">The JFreeChart classes</description>
 	<description kind="tooltip">JFreeChart</description>
 	<icon href="ReCClient_iconified.gif"/>
