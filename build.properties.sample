@@ -12,7 +12,7 @@ copy.encoding=UTF-8
 #you need only one list, the reason they are separated is to allow building elab and elab virtual separatly
 #just uncomment the one you need
 #list of experiments in ELab
-experiment.list=aleatorio,gamma,T,webrobot
+experiment.list=aleatorio,gamma,tiro,pend2m
 #list of virtual experiments in ELab Virtual
 #experiment.list=mm,cg
 
