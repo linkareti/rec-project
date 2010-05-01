@@ -28,10 +28,10 @@ public class ReservationController extends AbstractController<Long, Reservation,
     private ReservationFacade ejbFacade;
 
     public final Reservation getSelected() {
-	if (current == null) {
-	    current = new Reservation();
+	if (getCurrent() == null) {
+	    setCurrent(new Reservation());
 	}
-	return current;
+	return getCurrent();
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 
     @Override
     public final String prepareCreate() {
-	current = new Reservation();
+	setCurrent(new Reservation());
 	return ConstantUtils.CREATE;
     }
 
@@ -49,15 +49,15 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	final String externalUser = SessionHelper.getUsername();
 	final String externalCourse = JsfUtil.getRequestParameter("externalCourse");
 	final String domain = SessionHelper.getLoginDomain();
-	current = new Reservation(externalUser, externalCourse, domain);
+	setCurrent(new Reservation(externalUser, externalCourse, domain));
 	return ConstantUtils.CREATE;
     }
 
     public final void processEndDateAndEndTimeSlot() {
 	Calendar cal = Calendar.getInstance();
-	cal.setTime(current.getStartDate());
-	current.setStartDate(cal.getTime());
-	current.setEndDate(cal.getTime());
+	cal.setTime(getCurrent().getStartDate());
+	getCurrent().setStartDate(cal.getTime());
+	getCurrent().setEndDate(cal.getTime());
     }
 
     @FacesConverter(value = "reservationConverter", forClass = Reservation.class)

@@ -24,10 +24,10 @@ public class UserController extends AbstractController<Long, User, UserFacade> {
 
     @Override
     public final User getSelected() {
-	if (current == null) {
-	    current = new User();
+	if (getCurrent() == null) {
+	    setCurrent(new User());
 	}
-	return current;
+	return getCurrent();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class UserController extends AbstractController<Long, User, UserFacade> {
 
     @Override
     public final String prepareCreate() {
-	current = new User();
+	setCurrent(new User());
 	return ConstantUtils.CREATE;
     }
 

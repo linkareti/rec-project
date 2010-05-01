@@ -26,7 +26,7 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
 
     private static final long serialVersionUID = 1L;
 
-    protected Entity current;
+    private Entity current;
 
     protected DataModel<Entity> items = null;
 

@@ -23,10 +23,10 @@ public class ExperimentController extends AbstractController<Long, Experiment, E
     private ExperimentFacade ejbFacade;
 
     public final Experiment getSelected() {
-	if (current == null) {
-	    current = new Experiment();
+	if (getCurrent() == null) {
+	    setCurrent(new Experiment());
 	}
-	return current;
+	return getCurrent();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ExperimentController extends AbstractController<Long, Experiment, E
 
     @Override
     public final String prepareCreate() {
-	current = new Experiment();
+	setCurrent(new Experiment());
 	return ConstantUtils.CREATE;
     }
 

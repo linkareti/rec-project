@@ -41,34 +41,26 @@ public class RoleController extends AbstractController<Long, Role, RoleFacade> {
 	return ejbFacade;
     }
 
-    public Role getCurrent() {
-	return current;
-    }
-
-    public void setCurrent(final Role current) {
-	this.current = current;
-    }
-
     @Override
     public Role getSelected() {
-	if (current == null) {
-	    current = new Role();
+	if (getCurrent() == null) {
+	    setCurrent(new Role());
 	}
-	return current;
+	return getCurrent();
     }
 
     @Override
     public final String prepareCreate() {
-	current = new Role();
+	setCurrent(new Role());
 	return ConstantUtils.CREATE;
     }
 
     public List<User> getNonMembers() {
-	if (current == null) {
+	if (getCurrent() == null) {
 	    return Collections.<User> emptyList();
 	}
 	final List<User> result = userFacade.findAll();
-	result.removeAll(current.getAllChildren());
+	result.removeAll(getCurrent().getAllChildren());
 	return result;
     }
 
@@ -113,7 +105,7 @@ public class RoleController extends AbstractController<Long, Role, RoleFacade> {
      */
     public DualListModel<User> getUsers() {
 	if (users == null) {
-	    users = new DualListModel<User>(getNonMembers(), current.getAllUsers());
+	    users = new DualListModel<User>(getNonMembers(), getCurrent().getAllUsers());
 	}
 	return users;
     }

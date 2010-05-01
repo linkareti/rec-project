@@ -41,34 +41,26 @@ public class GroupController extends AbstractController<Long, Group, GroupFacade
 	return ejbFacade;
     }
 
-    public Group getCurrent() {
-	return current;
-    }
-
-    public void setCurrent(final Group current) {
-	this.current = current;
-    }
-
     @Override
     public Group getSelected() {
-	if (current == null) {
-	    current = new Group();
+	if (getCurrent() == null) {
+	    setCurrent(new Group());
 	}
-	return current;
+	return getCurrent();
     }
 
     @Override
     public final String prepareCreate() {
-	current = new Group();
+	setCurrent(new Group());
 	return ConstantUtils.CREATE;
     }
 
     public List<User> getNonMembers() {
-	if (current == null) {
+	if (getCurrent() == null) {
 	    return Collections.<User> emptyList();
 	}
 	final List<User> result = userFacade.findAll();
-	result.removeAll(current.getAllUsers());
+	result.removeAll(getCurrent().getAllUsers());
 	return result;
     }
 
@@ -113,7 +105,7 @@ public class GroupController extends AbstractController<Long, Group, GroupFacade
      */
     public DualListModel<User> getUsers() {
 	if (users == null) {
-	    users = new DualListModel<User>(getNonMembers(), current.getAllUsers());
+	    users = new DualListModel<User>(getNonMembers(), getCurrent().getAllUsers());
 	}
 	return users;
     }

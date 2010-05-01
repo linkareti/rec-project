@@ -29,10 +29,10 @@ public class ExternalCourseController extends AbstractController<String, Externa
     private UserRecord[] teachers;
 
     public final ExternalCourse getSelected() {
-	if (current == null) {
-	    current = new ExternalCourse();
+	if (getCurrent() == null) {
+	    setCurrent(new ExternalCourse());
 	}
-	return current;
+	return getCurrent();
     }
 
     @Override
