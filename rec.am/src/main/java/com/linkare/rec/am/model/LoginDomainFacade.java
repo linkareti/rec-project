@@ -15,8 +15,7 @@ public class LoginDomainFacade extends Facade<LoginDomain, Long> {
 
     @Override
     public LoginDomain find(final Long id) {
-	LoginDomain loginDomain = getEntityManager().find(LoginDomain.class, id);
-	return loginDomain;
+	return getEntityManager().find(LoginDomain.class, id);
     }
 
     @SuppressWarnings("unchecked")
