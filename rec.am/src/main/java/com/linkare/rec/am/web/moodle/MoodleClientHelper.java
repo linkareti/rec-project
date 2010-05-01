@@ -48,7 +48,7 @@ public final class MoodleClientHelper {
 	try {
 	    moodleWsPort = moodleWS.getMoodleWSPort(url);
 	} catch (ServiceException e) {
-	    throw new RuntimeException("external.system.configuration.problems");
+	    throw new RuntimeException("external.system.configuration.problems", e);
 	}
     }
 
