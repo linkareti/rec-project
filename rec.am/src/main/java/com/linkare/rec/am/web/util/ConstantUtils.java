@@ -35,6 +35,8 @@ public final class ConstantUtils {
     public static final String LIST = "List";
 
     public static final String EDIT = "Edit";
+    
+    public static final String INTERNAL_DOMAIN_NAME = "internal";
 
     public static final int DEFAULT_PAGE_SIZE = 20;
 }

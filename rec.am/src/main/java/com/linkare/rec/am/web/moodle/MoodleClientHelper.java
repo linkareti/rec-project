@@ -14,6 +14,7 @@ import javax.xml.rpc.ServiceException;
 
 import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
+import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.wsgen.moodle.CourseRecord;
 import com.linkare.rec.am.wsgen.moodle.LoginReturn;
 import com.linkare.rec.am.wsgen.moodle.MoodleWS;
@@ -39,7 +40,7 @@ public final class MoodleClientHelper {
     }
 
     private static boolean ignoreDomain(final String name) {
-	return "internal".equalsIgnoreCase(name);
+	return ConstantUtils.INTERNAL_DOMAIN_NAME.equalsIgnoreCase(name);
     }
 
     private MoodleClientHelper(final URL url) {
