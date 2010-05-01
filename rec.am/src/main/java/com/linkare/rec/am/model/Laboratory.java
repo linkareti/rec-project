@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -48,7 +47,7 @@ public class Laboratory extends DefaultDomainObject {
     private State state = new State();
 
     @XmlTransient
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "laboratory")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "laboratory")
     private List<Experiment> experiments = new ArrayList<Experiment>();
 
     /**

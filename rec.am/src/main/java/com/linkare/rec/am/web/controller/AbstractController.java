@@ -9,6 +9,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+import com.linkare.commons.jpa.Deletable;
 import com.linkare.commons.jpa.Identifiable;
 import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.rec.am.model.Facade;
@@ -21,8 +22,8 @@ import com.linkare.rec.am.web.util.JsfUtil;
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class AbstractController<ID extends Serializable, Entity extends Identifiable<ID>, EntityFacade extends Facade<Entity, ID>> implements
-	Serializable {
+public abstract class AbstractController<ID extends Serializable, Entity extends Identifiable<ID> & Deletable, EntityFacade extends Facade<Entity, ID>>
+	implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

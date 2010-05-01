@@ -1,9 +1,10 @@
 package com.linkare.rec.am.model.moodle;
 
+import com.linkare.commons.jpa.Deletable;
 import com.linkare.commons.jpa.Identifiable;
 import com.linkare.rec.am.wsgen.moodle.CourseRecord;
 
-public class ExternalCourse implements Identifiable<String> {
+public class ExternalCourse implements Identifiable<String>, Deletable {
 
     private static final long serialVersionUID = 1L;
 
@@ -159,5 +160,10 @@ public class ExternalCourse implements Identifiable<String> {
     @Override
     public String toString() {
 	return getShortname();
+    }
+
+    @Override
+    public boolean delete() {
+	return false;
     }
 }

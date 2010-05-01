@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.linkare.commons.jpa.Deletable;
 import com.linkare.commons.jpa.Identifiable;
 
 /**
@@ -18,7 +19,7 @@ import com.linkare.commons.jpa.Identifiable;
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class Facade<T extends Identifiable<ID>, ID extends Serializable> {
+public abstract class Facade<T extends Identifiable<ID> & Deletable, ID extends Serializable> {
 
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager entityManager;
@@ -48,6 +49,7 @@ public abstract class Facade<T extends Identifiable<ID>, ID extends Serializable
 
     public void remove(T t) {
 	final T mergedEntity = getEntityManager().merge(t);
+	mergedEntity.delete();
 	getEntityManager().remove(mergedEntity);
     }
 

@@ -1,6 +1,7 @@
 package com.linkare.rec.am.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -112,7 +113,7 @@ public class Experiment extends DefaultDomainObject {
      * @return value of reservations
      */
     public List<Reservation> getReservations() {
-	return reservations;
+	return reservations = reservations == null ? Collections.<Reservation> emptyList() : reservations;
     }
 
     /**
@@ -123,6 +124,10 @@ public class Experiment extends DefaultDomainObject {
      */
     public void setReservations(List<Reservation> reservations) {
 	this.reservations = reservations;
+    }
+
+    public boolean getHasReservations() {
+	return !getReservations().isEmpty();
     }
 
     /**
@@ -179,5 +184,14 @@ public class Experiment extends DefaultDomainObject {
 
     public static final Experiment findByName(String experiencia, EntityManager em) {
 	return (Experiment) em.createNamedQuery("findByExperimentName").setParameter("name", experiencia).getResultList().get(0);
+    }
+
+    @Override
+    public boolean delete() {
+	if (getHasReservations()) {
+	    return false;
+	}
+	setLaboratory(null);
+	return super.delete();
     }
 }
