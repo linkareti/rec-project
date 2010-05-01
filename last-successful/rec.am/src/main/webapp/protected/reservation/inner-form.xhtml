@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<h:form>
+	<h:inputHidden id="idInternal"
+		value="#{reservationController.selected.idInternal}" />
+	<h:inputHidden id="version"
+		value="#{reservationController.selected.version}" />
+	<h:inputHidden id="moodleRecord"
+		value="#{reservationController.selected.moodleRecord}" />
+	<p:focus for="title" />
+	<h:panelGrid columns="2">
+		<h:outputLabel value="#{bundle['reservation.title']}" for="title" />
+		<h:inputText id="title"
+			value="#{reservationController.selected.title}" required="true"
+			label="#{bundle['reservation.title']}"
+			title="#{bundle['reservation.title']}" />
+		<h:outputLabel value="#{bundle['reservation.experiment']}"
+			for="experiment" />
+		<h:selectOneMenu id="experiment"
+			value="#{reservationController.selected.experiment}"
+			title="#{bundle['reservation.experiment']}" required="true"
+			label="#{bundle['reservation.experiment']}"
+			converter="experimentConverter">
+			<f:attribute name="optionClasses" value="option1, option2" />
+			<f:selectItems
+				value="#{experimentController.itemsAvailableSelectOne}" />
+		</h:selectOneMenu>
+		<h:outputLabel value="#{bundle['reservation.reservedBy']}" for="user"
+			rendered="#{!userView.external}" />
+		<h:selectOneMenu id="user"
+			value="#{reservationController.selected.user}"
+			title="#{bundle['reservation.reservedBy']}"
+			label="#{bundle['reservation.reservedBy']}"
+			required="#{!userView.external}" converter="userConverter"
+			rendered="#{!userView.external}">
+			<f:selectItems value="#{userController.itemsAvailableSelectOne}" />
+		</h:selectOneMenu>
+		<h:outputLabel value="#{bundle['reservation.reservedBy']}"
+			for="externalUser" rendered="#{userView.external}" />
+		<h:inputText id="externalUser"
+			value="#{reservationController.selected.externalUser}"
+			label="#{bundle['reservation.reservedBy']}"
+			required="#{userView.external}" rendered="#{userView.external}" />
+		<h:outputLabel value="#{bundle['reservation.reservedTo']}" for="group"
+			rendered="#{!userView.external}" />
+		<h:selectOneMenu id="group"
+			value="#{reservationController.selected.group}"
+			title="#{bundle['reservation.reservedTo']}"
+			label="#{bundle['reservation.reservedTo']}"
+			required="#{!userView.external}" converter="groupConverter"
+			rendered="#{!userView.external}">
+			<f:selectItems value="#{groupController.itemsAvailableSelectOne}" />
+		</h:selectOneMenu>
+		<h:outputLabel value="#{bundle['reservation.reservedTo']}"
+			for="externalCourse" rendered="#{userView.external}" />
+		<h:inputText id="externalCourse"
+			value="#{reservationController.selected.externalCourse}"
+			label="#{bundle['reservation.reservedTo']}"
+			required="#{userView.external}" rendered="#{userView.external}" />
+		<h:outputLabel for="startDate"
+			value="#{bundle['reservation.startDate']}" />
+		<p:inputMask id="startDate"
+			value="#{reservationController.selected.startDate}"
+			mask="99/99/9999 99:99" label="#{bundle['reservation.startDate']}">
+			<f:convertDateTime timeZone="Europe/Lisbon" type="both"
+				pattern="dd/MM/yyyy HH:mm" />
+		</p:inputMask>
+		<h:outputLabel for="endDate" value="#{bundle['reservation.endDate']}" />
+		<p:inputMask id="endDate"
+			value="#{reservationController.selected.endDate}"
+			label="#{bundle['reservation.endDate']}" mask="99/99/9999 99:99">
+			<f:convertDateTime timeZone="Europe/Lisbon" type="both"
+				pattern="dd/MM/yyyy HH:mm" />
+		</p:inputMask>
+	</h:panelGrid>
+
+	<h:panelGroup rendered="#{operation == 'create'}">
+		<h:commandLink action="#{reservationController.create}"
+			value="#{bundle['operation.save']}" />
+	</h:panelGroup>
+	<h:panelGroup rendered="#{operation == 'edit'}">
+		<h:commandLink action="#{reservationController.update}"
+			value="#{bundle['operation.save']}" />
+	</h:panelGroup>
+</h:form>
+
+</html>
