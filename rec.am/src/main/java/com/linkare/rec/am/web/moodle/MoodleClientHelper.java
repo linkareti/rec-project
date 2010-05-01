@@ -29,7 +29,7 @@ public final class MoodleClientHelper {
      */
     private static Map<String, MoodleClientHelper> instancesMap = new Hashtable<String, MoodleClientHelper>();
 
-    private final MoodleWSPortType MOODLEWS_PORT;
+    private final MoodleWSPortType moodleWsPort;
 
     public static void registerLoginDomains(final List<LoginDomain> loginDomains) throws MalformedURLException {
 	for (final LoginDomain loginDomain : loginDomains) {
@@ -46,7 +46,7 @@ public final class MoodleClientHelper {
     private MoodleClientHelper(final URL url) {
 	final MoodleWS moodleWS = new MoodleWSLocator();
 	try {
-	    MOODLEWS_PORT = moodleWS.getMoodleWSPort(url);
+	    moodleWsPort = moodleWS.getMoodleWSPort(url);
 	} catch (ServiceException e) {
 	    throw new RuntimeException("external.system.configuration.problems");
 	}
@@ -54,7 +54,7 @@ public final class MoodleClientHelper {
 
     public static LoginReturn login(final String username, final String password, final String loginDomain) {
 	try {
-	    return getInstance(loginDomain).MOODLEWS_PORT.login(username, password);
+	    return getInstance(loginDomain).moodleWsPort.login(username, password);
 	} catch (RemoteException e) {
 	    throw new RuntimeException(e);
 	}
@@ -62,8 +62,8 @@ public final class MoodleClientHelper {
 
     public static List<ExternalCourse> getCurrentUserCourses(final String loginDomain, final LoginReturn loginReturn) {
 	try {
-	    return toExternalCourses(getInstance(loginDomain).MOODLEWS_PORT.get_my_courses(getClient(loginReturn), getSessionkey(loginReturn), null, null)
-									   .getCourses());
+	    return toExternalCourses(getInstance(loginDomain).moodleWsPort.get_my_courses(getClient(loginReturn), getSessionkey(loginReturn), null, null)
+									  .getCourses());
 	} catch (RemoteException e) {
 	    return Collections.<ExternalCourse> emptyList();
 	}
@@ -72,8 +72,8 @@ public final class MoodleClientHelper {
     public static ExternalCourse findCourse(final String id, final String loginDomain, final LoginReturn loginReturn) {
 	final List<ExternalCourse> courseRecords = new ArrayList<ExternalCourse>(1);
 	try {
-	    courseRecords.addAll(toExternalCourses(getInstance(loginDomain).MOODLEWS_PORT.get_course(getClient(loginReturn), getSessionkey(loginReturn),
-												     id == null ? null : id, "shortname").getCourses()));
+	    courseRecords.addAll(toExternalCourses(getInstance(loginDomain).moodleWsPort.get_course(getClient(loginReturn), getSessionkey(loginReturn),
+												    id == null ? null : id, "shortname").getCourses()));
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	}
@@ -90,8 +90,8 @@ public final class MoodleClientHelper {
 
     public static UserRecord[] getStudents(final String courseShortName, final String loginDomain, final LoginReturn loginReturn) {
 	try {
-	    return getInstance(loginDomain).MOODLEWS_PORT.get_students(getClient(loginReturn), getSessionkey(loginReturn), courseShortName, "shortname")
-							 .getUsers();
+	    return getInstance(loginDomain).moodleWsPort.get_students(getClient(loginReturn), getSessionkey(loginReturn), courseShortName, "shortname")
+							.getUsers();
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	    return new UserRecord[] {};
@@ -100,8 +100,8 @@ public final class MoodleClientHelper {
 
     public static UserRecord[] getTeachers(final String courseShortName, final String loginDomain, final LoginReturn loginReturn) {
 	try {
-	    return getInstance(loginDomain).MOODLEWS_PORT.get_teachers(getClient(loginReturn), getSessionkey(loginReturn), courseShortName, "shortname")
-							 .getUsers();
+	    return getInstance(loginDomain).moodleWsPort.get_teachers(getClient(loginReturn), getSessionkey(loginReturn), courseShortName, "shortname")
+							.getUsers();
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	    return new UserRecord[] {};
