@@ -41,4 +41,7 @@ public final class ConstantUtils {
     public static final String INTERNAL_DOMAIN_NAME = "internal";
 
     public static final int DEFAULT_PAGE_SIZE = 20;
+
+    private ConstantUtils() {
+    }
 }
