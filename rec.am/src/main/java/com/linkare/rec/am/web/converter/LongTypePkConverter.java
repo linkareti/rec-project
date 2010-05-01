@@ -1,7 +1,6 @@
 package com.linkare.rec.am.web.converter;
 
 import java.io.Serializable;
-import java.util.logging.Logger;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -17,8 +16,6 @@ import javax.faces.convert.FacesConverter;
 public class LongTypePkConverter implements Converter, Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    private static final Logger logger = Logger.getLogger("EntityConverter");
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {

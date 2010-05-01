@@ -1,7 +1,6 @@
 package com.linkare.rec.am.web.converter;
 
 import java.io.Serializable;
-import java.util.logging.Logger;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -16,8 +15,6 @@ import com.linkare.commons.jpa.DefaultDomainObject;
 public class EntityConverter implements Converter, Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    private static final Logger logger = Logger.getLogger("EntityConverter");
 
     @PersistenceContext(unitName = "AllocationManagerPU")
     protected EntityManager em;
