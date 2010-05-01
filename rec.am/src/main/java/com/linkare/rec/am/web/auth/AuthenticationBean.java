@@ -8,7 +8,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.model.UserFacade;
 import com.linkare.rec.am.web.ex.AuthenticationException;
 import com.linkare.rec.am.web.util.ConstantUtils;
@@ -42,7 +41,7 @@ public class AuthenticationBean {
 
     private LoginProvider getLoginProvider() {
 	if (loginProvider == null) {
-	    loginProvider = LoginDomain.INTERNAL_DOMAIN_NAME.equals(loginDomain) ? new LocalLoginProvider(facade) : new MoodleLoginProvider();
+	    loginProvider = ConstantUtils.INTERNAL_DOMAIN_NAME.equals(loginDomain) ? new LocalLoginProvider(facade) : new MoodleLoginProvider();
 	}
 	return loginProvider;
     }

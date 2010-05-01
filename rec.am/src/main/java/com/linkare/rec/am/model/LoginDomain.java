@@ -22,8 +22,6 @@ public class LoginDomain extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
 
-    public static String INTERNAL_DOMAIN_NAME = "Internal";
-
     @Column(name = "NAME", insertable = true, updatable = true, nullable = false, unique = true)
     private String name;
 
