@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.linkare.rec.am.web.controller;
 
 import java.io.Serializable;
@@ -25,7 +21,8 @@ import com.linkare.rec.am.web.util.JsfUtil;
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class AbstractController<Entity extends Identifiable<?>, EntityFacade extends Facade<Entity>> implements Serializable {
+public abstract class AbstractController<ID extends Serializable, Entity extends Identifiable<ID>, EntityFacade extends Facade<Entity, ID>> implements
+	Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -76,7 +73,7 @@ public abstract class AbstractController<Entity extends Identifiable<?>, EntityF
     }
 
     private void initCurrent() {
-	current = getFacade().find(((Entity) getItems().getRowData()).id());
+	current = getFacade().find(getItems().getRowData().id());
     }
 
     public String prepareEdit() {

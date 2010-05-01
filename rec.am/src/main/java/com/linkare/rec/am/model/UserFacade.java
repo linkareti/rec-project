@@ -15,7 +15,7 @@ import com.linkare.commons.jpa.security.User;
  */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class UserFacade extends Facade<User> {
+public class UserFacade extends Facade<User, Long> {
 
     private UserDAO userDAO;
 
@@ -27,22 +27,22 @@ public class UserFacade extends Facade<User> {
     }
 
     @Override
-    public void create(User user) {
+    public void create(final User user) {
 	getOrCreateDAO().create(user);
     }
 
     @Override
-    public User edit(User user) {
+    public User edit(final User user) {
 	return getOrCreateDAO().edit(user);
     }
 
     @Override
-    public void remove(User user) {
+    public void remove(final User user) {
 	getOrCreateDAO().remove(user);
     }
 
     @Override
-    public User find(Object id) {
+    public User find(final Long id) {
 	return getOrCreateDAO().find(id);
     }
 
@@ -51,7 +51,7 @@ public class UserFacade extends Facade<User> {
     }
 
     @Override
-    public List<User> findRange(int[] range) {
+    public List<User> findRange(final int[] range) {
 	return getOrCreateDAO().findRange(range);
     }
 

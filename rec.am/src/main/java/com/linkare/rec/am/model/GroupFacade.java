@@ -15,7 +15,7 @@ import com.linkare.commons.jpa.security.User;
  * 
  */
 @Stateless
-public class GroupFacade extends Facade<Group> {
+public class GroupFacade extends Facade<Group, Long> {
 
     private GroupDAO groupDAO;
 
@@ -27,27 +27,27 @@ public class GroupFacade extends Facade<Group> {
     }
 
     @Override
-    public void create(Group group) {
+    public void create(final Group group) {
 	getOrCreateDAO().create(group);
     }
 
     @Override
-    public Group edit(Group group) {
+    public Group edit(final Group group) {
 	return getOrCreateDAO().edit(group);
     }
 
     @Override
-    public void remove(Group group) {
+    public void remove(final Group group) {
 	getOrCreateDAO().remove(group);
     }
 
     @Override
-    public Group find(Object id) {
+    public Group find(final Long id) {
 	return getOrCreateDAO().find(id);
     }
 
     @Override
-    public List<Group> findRange(int[] range) {
+    public List<Group> findRange(final int[] range) {
 	return getOrCreateDAO().findRange(range);
     }
 

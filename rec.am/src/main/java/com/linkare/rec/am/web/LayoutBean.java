@@ -1,5 +1,7 @@
 package com.linkare.rec.am.web;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -16,7 +18,9 @@ import com.linkare.rec.am.web.util.JsfUtil;
  */
 @ManagedBean(name = "layoutBean")
 @RequestScoped
-public class LayoutBean {
+public class LayoutBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public void handleClose(CloseEvent event) {
 	JsfUtil.addSuccessMessage("Closed unit id:'" + event.getComponent().getId() + "'");

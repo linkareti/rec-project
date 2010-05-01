@@ -68,12 +68,11 @@ public final class MoodleClientHelper {
 	}
     }
 
-    public static ExternalCourse findCourse(final Object id, final String loginDomain, final LoginReturn loginReturn) {
+    public static ExternalCourse findCourse(final String id, final String loginDomain, final LoginReturn loginReturn) {
 	final List<ExternalCourse> courseRecords = new ArrayList<ExternalCourse>(1);
 	try {
 	    courseRecords.addAll(toExternalCourses(getInstance(loginDomain).MOODLEWS_PORT.get_course(getClient(loginReturn), getSessionkey(loginReturn),
-												     id == null ? null : id.toString(), "shortname")
-											 .getCourses()));
+												     id == null ? null : id, "shortname").getCourses()));
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	}

@@ -15,7 +15,7 @@ import com.linkare.rec.am.web.util.ConstantUtils;
 
 @ManagedBean(name = "userController")
 @RequestScoped
-public class UserController extends AbstractController<User, UserFacade> {
+public class UserController extends AbstractController<Long, User, UserFacade> {
 
     private static final long serialVersionUID = 1L;
 

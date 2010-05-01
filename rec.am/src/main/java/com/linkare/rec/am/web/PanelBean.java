@@ -1,5 +1,6 @@
 package com.linkare.rec.am.web;
 
+import java.io.Serializable;
 import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
@@ -18,7 +19,9 @@ import com.linkare.rec.am.web.util.JsfUtil;
  */
 @ManagedBean(name = "panelBean")
 @RequestScoped
-public class PanelBean {
+public class PanelBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public void handleClose(CloseEvent event) {
 	JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.panelClose"));

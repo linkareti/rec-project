@@ -120,9 +120,17 @@ public class ScheduleController implements Serializable {
 		eventModel.deleteEvent(event);
 	    }
 	} else {
-	    // It is necessary to get the merged event and only after that, update the event model
-	    event = ejbFacade.edit(event);
-	    eventModel.updateEvent(event);
+	    try {
+		// It is necessary to get the merged event and only after that, update the event model
+		event = ejbFacade.edit(event);
+		eventModel.updateEvent(event);
+	    } catch (Exception e) {
+		if (e.getCause() instanceof DomainException) {
+		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
+		} else {
+		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+		}
+	    }
 	}
 	return null;
     }

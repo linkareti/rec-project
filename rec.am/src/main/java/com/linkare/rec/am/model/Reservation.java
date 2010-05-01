@@ -15,11 +15,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 import org.joda.time.Interval;
+import org.joda.time.PeriodType;
 import org.primefaces.model.ScheduleEvent;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
 import com.linkare.commons.jpa.security.Group;
 import com.linkare.commons.jpa.security.User;
+import com.linkare.commons.utils.BooleanResult;
 import com.linkare.commons.utils.EqualityUtils;
 import com.linkare.rec.am.model.moodle.MoodleRecord;
 
@@ -40,6 +42,10 @@ import com.linkare.rec.am.model.moodle.MoodleRecord;
 public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     private static final long serialVersionUID = 1L;
+
+    private static final int MAXIMUM_INTERVAL_IN_MINUTES = 120;
+
+    private static final int MINUTE_INTERVAL = 15;
 
     @Basic
     @Column(name = "TITLE")
@@ -368,13 +374,40 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 	return true;
     }
 
-    public boolean hasConflicts(List<Reservation> reservationsForExperimentNameAndInterval) {
-	for (final Reservation reservation : reservationsForExperimentNameAndInterval) {
+    public boolean hasConflicts(List<Reservation> reservationsForExperimentNameInInterval) {
+	for (final Reservation reservation : reservationsForExperimentNameInInterval) {
 	    if (this != reservation && EqualityUtils.equals(this.getExperiment().getLaboratory(), reservation.getExperiment().getLaboratory())
 		    && this.getInterval().overlaps(reservation.getInterval())) {
 		return true;
 	    }
 	}
 	return false;
+    }
+
+    public boolean isValidPeriodInterval() {
+	return getInterval().toPeriod(PeriodType.minutes()).getMinutes() <= MAXIMUM_INTERVAL_IN_MINUTES;
+    }
+
+    public boolean isValidDates() {
+	return isValidDate(getStartDate()) && isValidDate(getEndDate());
+    }
+
+    @SuppressWarnings("deprecation")
+    private static boolean isValidDate(final Date date) {
+	return date != null && ((date.getMinutes() % MINUTE_INTERVAL) == 0);
+    }
+
+    public BooleanResult isValid(final List<Reservation> reservationsForExperimentNameInInterval) {
+	if (hasConflicts(reservationsForExperimentNameInInterval)) {
+	    return new BooleanResult(Boolean.FALSE, "error.laboratory.taken");
+	}
+	if (!isValidDates()) {
+	    return new BooleanResult(Boolean.FALSE, "error.invalid.chosen.dates");
+	}
+	if (!isValidPeriodInterval()) {
+	    return new BooleanResult(Boolean.FALSE, "error.invalid.period.interval");
+	}
+
+	return BooleanResult.TRUE_RESULT;
     }
 }

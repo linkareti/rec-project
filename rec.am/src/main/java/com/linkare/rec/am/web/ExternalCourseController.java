@@ -18,7 +18,7 @@ import com.linkare.rec.am.wsgen.moodle.UserRecord;
  */
 @ManagedBean(name = "externalCourseController")
 @RequestScoped
-public class ExternalCourseController extends AbstractController<ExternalCourse, ExternalCourseFacade> {
+public class ExternalCourseController extends AbstractController<String, ExternalCourse, ExternalCourseFacade> {
 
     private static final long serialVersionUID = 1L;
 

@@ -7,27 +7,27 @@ import com.linkare.rec.am.web.moodle.MoodleClientHelper;
 import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.wsgen.moodle.UserRecord;
 
-public class ExternalCourseFacade extends Facade<ExternalCourse> {
+public class ExternalCourseFacade extends Facade<ExternalCourse, String> {
 
     private List<ExternalCourse> courseRecords;
 
     @Override
-    public void create(ExternalCourse courseRecord) {
+    public void create(final ExternalCourse courseRecord) {
 	throw new UnsupportedOperationException("external.courses.create.not.available");
     }
 
     @Override
-    public ExternalCourse edit(ExternalCourse courseRecord) {
+    public ExternalCourse edit(final ExternalCourse courseRecord) {
 	throw new UnsupportedOperationException("external.courses.edit.not.available");
     }
 
     @Override
-    public void remove(ExternalCourse courseRecord) {
+    public void remove(final ExternalCourse courseRecord) {
 	throw new UnsupportedOperationException("external.courses.remove.not.available");
     }
 
     @Override
-    public ExternalCourse find(Object id) {
+    public ExternalCourse find(final String id) {
 	return MoodleClientHelper.findCourse(id, SessionHelper.getLoginDomain(), SessionHelper.getLoginReturn());
     }
 
@@ -40,7 +40,7 @@ public class ExternalCourseFacade extends Facade<ExternalCourse> {
     }
 
     @Override
-    public List<ExternalCourse> findRange(int[] range) {
+    public List<ExternalCourse> findRange(final int[] range) {
 	return findAll();
     }
 

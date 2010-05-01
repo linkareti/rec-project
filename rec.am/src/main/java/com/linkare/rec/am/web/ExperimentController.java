@@ -15,7 +15,7 @@ import com.linkare.rec.am.web.util.ConstantUtils;
 
 @ManagedBean(name = "experimentController")
 @RequestScoped
-public class ExperimentController extends AbstractController<Experiment, ExperimentFacade> {
+public class ExperimentController extends AbstractController<Long, Experiment, ExperimentFacade> {
 
     private static final long serialVersionUID = 1L;
 

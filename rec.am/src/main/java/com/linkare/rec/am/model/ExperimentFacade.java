@@ -10,30 +10,30 @@ import javax.persistence.Query;
  * @author Joao
  */
 @Stateless
-public class ExperimentFacade extends Facade<Experiment> {
+public class ExperimentFacade extends Facade<Experiment, Long> {
 
     @Override
-    public void create(Experiment experiment) {
+    public void create(final Experiment experiment) {
 	em.persist(experiment);
     }
 
     @Override
-    public Experiment edit(Experiment experiment) {
+    public Experiment edit(final Experiment experiment) {
 	return em.merge(experiment);
     }
 
     @Override
-    public void remove(Experiment experiment) {
+    public void remove(final Experiment experiment) {
 	em.remove(em.merge(experiment));
     }
 
     @Override
-    public Experiment find(Object id) {
+    public Experiment find(final Long id) {
 	return em.find(Experiment.class, id);
     }
 
     @Override
-    public List<Experiment> findRange(int[] range) {
+    public List<Experiment> findRange(final int[] range) {
 	return find(false, range[0], range[1]);
     }
 
@@ -43,7 +43,7 @@ public class ExperimentFacade extends Facade<Experiment> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Experiment> find(boolean all, int firstResult, int maxResults) {
+    public List<Experiment> find(final boolean all, final int firstResult, final int maxResults) {
 	Query q = em.createNamedQuery("Experiment.findAll");
 	if (!all) {
 	    q.setMaxResults(maxResults);

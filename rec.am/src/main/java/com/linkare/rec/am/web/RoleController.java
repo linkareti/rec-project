@@ -3,7 +3,6 @@ package com.linkare.rec.am.web;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -25,11 +24,9 @@ import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "roleController")
 @RequestScoped
-public class RoleController extends AbstractController<Role, RoleFacade> {
+public class RoleController extends AbstractController<Long, Role, RoleFacade> {
 
     private static final long serialVersionUID = 1L;
-
-    private static Logger logger = Logger.getLogger("RoleController");
 
     private DualListModel<User> users;
 
@@ -127,13 +124,6 @@ public class RoleController extends AbstractController<Role, RoleFacade> {
      */
     public void setUsers(DualListModel<User> users) {
 	this.users = users;
-    }
-
-    /**
-     * @return the logger
-     */
-    public static final Logger getLogger() {
-	return logger;
     }
 
     public String setUsersMembership() {

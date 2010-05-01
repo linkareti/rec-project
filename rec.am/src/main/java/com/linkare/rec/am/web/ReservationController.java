@@ -20,14 +20,12 @@ import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "reservationController")
 @RequestScoped
-public class ReservationController extends AbstractController<Reservation, ReservationFacade> {
+public class ReservationController extends AbstractController<Long, Reservation, ReservationFacade> {
 
     private static final long serialVersionUID = 1L;
 
     @EJB
     private ReservationFacade ejbFacade;
-
-    private static final int MINUTE_STEP = 30;
 
     public final Reservation getSelected() {
 	if (current == null) {

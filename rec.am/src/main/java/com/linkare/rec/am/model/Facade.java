@@ -4,6 +4,7 @@
  */
 package com.linkare.rec.am.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,7 +18,7 @@ import com.linkare.commons.jpa.Identifiable;
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class Facade<T extends Identifiable<?>> {
+public abstract class Facade<T extends Identifiable<?>, ID extends Serializable> {
 
     @PersistenceContext(unitName = "AllocationManagerPU")
     protected EntityManager em;
@@ -28,7 +29,7 @@ public abstract class Facade<T extends Identifiable<?>> {
 
     public abstract void remove(T t);
 
-    public abstract T find(Object id);
+    public abstract T find(ID id);
 
     public abstract List<T> findAll();
 

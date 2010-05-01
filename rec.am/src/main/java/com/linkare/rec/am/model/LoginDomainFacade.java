@@ -11,25 +11,25 @@ import javax.persistence.Query;
  * 
  */
 @Stateless
-public class LoginDomainFacade extends Facade<LoginDomain> {
+public class LoginDomainFacade extends Facade<LoginDomain, Long> {
 
     @Override
-    public void create(LoginDomain loginDomain) {
+    public void create(final LoginDomain loginDomain) {
 	em.persist(loginDomain);
     }
 
     @Override
-    public LoginDomain edit(LoginDomain loginDomain) {
+    public LoginDomain edit(final LoginDomain loginDomain) {
 	return em.merge(loginDomain);
     }
 
     @Override
-    public void remove(LoginDomain loginDomain) {
+    public void remove(final LoginDomain loginDomain) {
 	em.remove(em.merge(loginDomain));
     }
 
     @Override
-    public LoginDomain find(Object id) {
+    public LoginDomain find(final Long id) {
 	LoginDomain loginDomain = em.find(LoginDomain.class, id);
 	return loginDomain;
     }
@@ -43,7 +43,7 @@ public class LoginDomainFacade extends Facade<LoginDomain> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<LoginDomain> findRange(int[] range) {
+    public List<LoginDomain> findRange(final int[] range) {
 	final Query query = em.createNamedQuery("LoginDomain.findAll");
 	query.setMaxResults(range[1] - range[0]);
 	query.setFirstResult(range[0]);

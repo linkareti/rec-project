@@ -15,7 +15,7 @@ import com.linkare.commons.jpa.security.User;
  * 
  */
 @Stateless
-public class RoleFacade extends Facade<Role> {
+public class RoleFacade extends Facade<Role, Long> {
 
     private RoleDAO roleDAO;
 
@@ -27,27 +27,27 @@ public class RoleFacade extends Facade<Role> {
     }
 
     @Override
-    public void create(Role role) {
+    public void create(final Role role) {
 	getOrCreateDAO().create(role);
     }
 
     @Override
-    public Role edit(Role role) {
+    public Role edit(final Role role) {
 	return getOrCreateDAO().edit(role);
     }
 
     @Override
-    public void remove(Role role) {
+    public void remove(final Role role) {
 	getOrCreateDAO().remove(role);
     }
 
     @Override
-    public Role find(Object id) {
+    public Role find(final Long id) {
 	return getOrCreateDAO().find(id);
     }
 
     @Override
-    public List<Role> findRange(int[] range) {
+    public List<Role> findRange(final int[] range) {
 	return getOrCreateDAO().findRange(range);
     }
 
@@ -56,7 +56,7 @@ public class RoleFacade extends Facade<Role> {
 	return getOrCreateDAO().findAll();
     }
 
-    public List<Role> find(boolean all, int firstResult, int maxResults) {
+    public List<Role> find(final boolean all, final int firstResult, final int maxResults) {
 	return getOrCreateDAO().find(all, firstResult, maxResults);
     }
 
