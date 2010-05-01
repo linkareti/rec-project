@@ -53,13 +53,11 @@ public class SessionTimeoutFilter implements Filter {
      */
     private boolean isSessionControlRequiredForThisResource(HttpServletRequest httpServletRequest) {
 	String requestPath = httpServletRequest.getRequestURI();
-	boolean controlRequired = !requestPath.contains(getTimeoutPage()) && !requestPath.contains(getLoginPage());
-	return controlRequired;
+	return !requestPath.contains(getTimeoutPage()) && !requestPath.contains(getLoginPage());
     }
 
     private boolean isSessionInvalid(HttpServletRequest httpServletRequest) {
-	boolean sessionInValid = (httpServletRequest.getRequestedSessionId() != null) && !httpServletRequest.isRequestedSessionIdValid();
-	return sessionInValid;
+	return (httpServletRequest.getRequestedSessionId() != null) && !httpServletRequest.isRequestedSessionIdValid();
     }
 
     public String getTimeoutPage() {
