@@ -106,7 +106,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     public Reservation(final String externalUser, final String externalCourse, final String domain) {
 	this();
-	setMoodleRecord(new MoodleRecord(externalUser, externalCourse, domain));
+	this.moodleRecord = new MoodleRecord(externalUser, externalCourse, domain);
     }
 
     /**
