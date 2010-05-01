@@ -111,7 +111,7 @@ public final class MoodleClientHelper {
     private static MoodleClientHelper getInstance(final String loginDomain) {
 	final MoodleClientHelper instance = instancesMap.get(loginDomain);
 	if (instance == null) {
-	    throw new NullPointerException("no instance was found for " + loginDomain);
+	    throw new IllegalArgumentException("no instance was found for " + loginDomain);
 	}
 	return instance;
     }
