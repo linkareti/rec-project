@@ -1,7 +1,6 @@
 package com.linkare.rec.am.web.filter;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -21,8 +20,6 @@ import javax.servlet.http.HttpServletResponse;
  * 
  */
 public class SessionTimeoutFilter implements Filter {
-
-    private static Logger logger = Logger.getLogger("SessionTimeoutFilter");
 
     private String timeoutPage = "timeout.faces";
 
