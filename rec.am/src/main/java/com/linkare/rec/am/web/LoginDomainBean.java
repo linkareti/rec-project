@@ -54,7 +54,7 @@ public class LoginDomainBean implements Serializable {
 	    try {
 		MoodleClientHelper.registerLoginDomains(loginDomains);
 	    } catch (MalformedURLException e) {
-		throw new RuntimeException("error.invalidURL.registering.login.domains");
+		throw new RuntimeException("error.invalidURL.registering.login.domains", e);
 	    }
 	}
 	return JsfUtil.getSelectItems(loginDomains, false);
