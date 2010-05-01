@@ -1,27 +1,26 @@
 package com.linkare.rec.am.model;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 
 import com.linkare.commons.dao.security.UserDAO;
+import com.linkare.commons.jpa.security.Role;
 import com.linkare.commons.jpa.security.User;
 
 /**
  * 
  * @author Joao
  */
-@Stateless
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@Stateless(name = "UserFacade")
 public class UserFacade extends Facade<User, Long> {
 
     private UserDAO userDAO;
 
     private UserDAO getOrCreateDAO() {
 	if (userDAO == null) {
-	    userDAO = new UserDAO(em);
+	    userDAO = new UserDAO(getEntityManager());
 	}
 	return userDAO;
     }
@@ -67,5 +66,10 @@ public class UserFacade extends Facade<User, Long> {
 
     public User authenticate(final String username, final String password) {
 	return getOrCreateDAO().authenticate(username, password);
+    }
+
+    public List<Role> getRoles(final User user) {
+	final User mergedUser = getEntityManager().merge(user);
+	return mergedUser == null ? Collections.<Role> emptyList() : mergedUser.getAllParentRoles();
     }
 }

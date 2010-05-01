@@ -26,6 +26,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import org.joda.time.DateTime;
 import org.primefaces.event.DateSelectEvent;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
@@ -130,6 +131,8 @@ public class ScheduleController implements Serializable {
 		} else {
 		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
 		}
+		event = ejbFacade.find(event.getIdInternal());
+		eventModel.updateEvent(event);
 	    }
 	}
 	return null;
@@ -153,14 +156,25 @@ public class ScheduleController implements Serializable {
 
     public void onEventMove(ScheduleEntryMoveEvent selectEvent) {
 	event = (Reservation) selectEvent.getScheduleEvent();
+	moveEvent(true, event, selectEvent.getMinuteDelta());
 	createOrUpdate();
-	JsfUtil.addSuccessMessage("Day delta:" + selectEvent.getDayDelta() + ", Minute delta:" + selectEvent.getMinuteDelta());
+    }
+
+    private void moveEvent(final boolean moveBothDates, final Reservation event, final int minuteDelta) {
+	if (moveBothDates) {
+	    DateTime startDate = new DateTime(event.getStartDate());
+	    startDate = startDate.plusMinutes(minuteDelta);
+	    event.setStartDate(startDate.toDate());
+	}
+	DateTime endDate = new DateTime(event.getEndDate());
+	endDate = endDate.plusMinutes(minuteDelta);
+	event.setEndDate(endDate.toDate());
     }
 
     public void onEventResize(ScheduleEntryResizeEvent selectEvent) {
 	event = (Reservation) selectEvent.getScheduleEvent();
+	moveEvent(false, event, selectEvent.getMinuteDelta());
 	createOrUpdate();
-	JsfUtil.addSuccessMessage("Event resized", "Day delta:" + selectEvent.getDayDelta() + ", Minute delta:" + selectEvent.getMinuteDelta());
     }
 
     public String getTheme() {

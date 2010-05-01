@@ -9,27 +9,22 @@ import javax.persistence.Query;
  * 
  * @author Joao
  */
-@Stateless
+@Stateless(name = "ExperimentFacade")
 public class ExperimentFacade extends Facade<Experiment, Long> {
 
     @Override
     public void create(final Experiment experiment) {
-	em.persist(experiment);
+	getEntityManager().persist(experiment);
     }
 
     @Override
     public Experiment edit(final Experiment experiment) {
-	return em.merge(experiment);
-    }
-
-    @Override
-    public void remove(final Experiment experiment) {
-	em.remove(em.merge(experiment));
+	return getEntityManager().merge(experiment);
     }
 
     @Override
     public Experiment find(final Long id) {
-	return em.find(Experiment.class, id);
+	return getEntityManager().find(Experiment.class, id);
     }
 
     @Override
@@ -44,7 +39,7 @@ public class ExperimentFacade extends Facade<Experiment, Long> {
 
     @SuppressWarnings("unchecked")
     public List<Experiment> find(final boolean all, final int firstResult, final int maxResults) {
-	Query q = em.createNamedQuery("Experiment.findAll");
+	Query q = getEntityManager().createNamedQuery("Experiment.findAll");
 	if (!all) {
 	    q.setMaxResults(maxResults);
 	    q.setFirstResult(firstResult);
@@ -54,7 +49,7 @@ public class ExperimentFacade extends Facade<Experiment, Long> {
 
     @Override
     public int count() {
-	final Query query = em.createNamedQuery("Experiment.countAll");
+	final Query query = getEntityManager().createNamedQuery("Experiment.countAll");
 	return ((Long) query.getSingleResult()).intValue();
     }
 }

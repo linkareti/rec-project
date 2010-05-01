@@ -14,14 +14,14 @@ import com.linkare.commons.jpa.security.User;
  * @author Paulo Zenida - Linkare TI
  * 
  */
-@Stateless
+@Stateless(name = "GroupFacade")
 public class GroupFacade extends Facade<Group, Long> {
 
     private GroupDAO groupDAO;
 
     private GroupDAO getOrCreateDAO() {
 	if (groupDAO == null) {
-	    groupDAO = new GroupDAO(em);
+	    groupDAO = new GroupDAO(getEntityManager());
 	}
 	return groupDAO;
     }
@@ -72,7 +72,7 @@ public class GroupFacade extends Facade<Group, Long> {
     private List<User> mergeUsers(final List<User> users) {
 	final List<User> mergedUsers = new ArrayList<User>();
 	for (User user : users) {
-	    final User mergedUser = em.merge(user);
+	    final User mergedUser = getEntityManager().merge(user);
 	    mergedUser.getParents();
 	    mergedUsers.add(mergedUser);
 	}

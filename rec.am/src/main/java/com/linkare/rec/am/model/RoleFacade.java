@@ -14,14 +14,14 @@ import com.linkare.commons.jpa.security.User;
  * @author Paulo Zenida - Linkare TI
  * 
  */
-@Stateless
+@Stateless(name = "RoleFacade")
 public class RoleFacade extends Facade<Role, Long> {
 
     private RoleDAO roleDAO;
 
     private RoleDAO getOrCreateDAO() {
 	if (roleDAO == null) {
-	    roleDAO = new RoleDAO(em);
+	    roleDAO = new RoleDAO(getEntityManager());
 	}
 	return roleDAO;
     }
@@ -76,7 +76,7 @@ public class RoleFacade extends Facade<Role, Long> {
     private List<User> mergeUsers(final List<User> users) {
 	final List<User> mergedUsers = new ArrayList<User>();
 	for (User user : users) {
-	    final User mergedUser = em.merge(user);
+	    final User mergedUser = getEntityManager().merge(user);
 	    mergedUser.getParents();
 	    mergedUsers.add(mergedUser);
 	}

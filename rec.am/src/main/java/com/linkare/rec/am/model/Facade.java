@@ -14,20 +14,42 @@ import com.linkare.commons.jpa.Identifiable;
 
 /**
  * 
- * This abstract class provides the methods that should be implemented by all entity facades.
+ * It provides the methods that should be implemented by all entity facades.
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class Facade<T extends Identifiable<?>, ID extends Serializable> {
+public abstract class Facade<T extends Identifiable<ID>, ID extends Serializable> {
 
     @PersistenceContext(unitName = "AllocationManagerPU")
-    protected EntityManager em;
+    private EntityManager entityManager;
 
-    public abstract void create(T t);
+    /**
+     * @return the entityManager
+     */
+    public EntityManager getEntityManager() {
+	return entityManager;
+    }
 
-    public abstract T edit(T t);
+    /**
+     * @param entityManager
+     *            the entityManager to set
+     */
+    public void setEntityManager(EntityManager entityManager) {
+	this.entityManager = entityManager;
+    }
 
-    public abstract void remove(T t);
+    public void create(T t) {
+	getEntityManager().persist(t);
+    }
+
+    public T edit(T t) {
+	return getEntityManager().merge(t);
+    }
+
+    public void remove(T t) {
+	final T mergedEntity = getEntityManager().merge(t);
+	getEntityManager().remove(mergedEntity);
+    }
 
     public abstract T find(ID id);
 

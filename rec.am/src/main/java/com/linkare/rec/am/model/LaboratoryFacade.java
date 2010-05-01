@@ -9,27 +9,17 @@ import javax.persistence.Query;
  * 
  * @author Joao
  */
-@Stateless
+@Stateless(name = "LaboratoryFacade")
 public class LaboratoryFacade extends Facade<Laboratory, Long> {
 
     @Override
     public void create(final Laboratory laboratory) {
-	em.persist(laboratory);
-    }
-
-    @Override
-    public Laboratory edit(final Laboratory laboratory) {
-	return em.merge(laboratory);
-    }
-
-    @Override
-    public void remove(final Laboratory laboratory) {
-	em.remove(em.merge(laboratory));
+	getEntityManager().persist(laboratory);
     }
 
     @Override
     public Laboratory find(final Long id) {
-	return em.find(Laboratory.class, id);
+	return getEntityManager().find(Laboratory.class, id);
     }
 
     @Override
@@ -44,7 +34,7 @@ public class LaboratoryFacade extends Facade<Laboratory, Long> {
 
     @SuppressWarnings("unchecked")
     public List<Laboratory> find(final boolean all, final int firstResult, final int maxResults) {
-	Query q = em.createNamedQuery("Laboratory.findAll");
+	Query q = getEntityManager().createNamedQuery("Laboratory.findAll");
 	if (!all) {
 	    q.setMaxResults(maxResults);
 	    q.setFirstResult(firstResult);
@@ -54,7 +44,7 @@ public class LaboratoryFacade extends Facade<Laboratory, Long> {
 
     @Override
     public int count() {
-	final Query query = em.createNamedQuery("Laboratory.countAll");
+	final Query query = getEntityManager().createNamedQuery("Laboratory.countAll");
 	return ((Long) query.getSingleResult()).intValue();
     }
 }

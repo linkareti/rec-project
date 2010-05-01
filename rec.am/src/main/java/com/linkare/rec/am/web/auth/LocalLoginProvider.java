@@ -25,6 +25,6 @@ public class LocalLoginProvider extends LoginProvider {
 	if (user == null) {
 	    throw new AuthenticationException();
 	}
-	return new InternalUserView(username, loginDomain, user.getAllParentRoles());
+	return new InternalUserView(username, loginDomain, facade.getRoles(user));
     }
 }

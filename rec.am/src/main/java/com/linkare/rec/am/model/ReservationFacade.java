@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.Query;
 
 import org.primefaces.model.ScheduleEvent;
@@ -18,15 +16,14 @@ import com.linkare.commons.utils.BooleanResult;
  * 
  * @author Joao
  */
-@Stateless
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@Stateless(name = "ReservationFacade")
 public class ReservationFacade extends Facade<Reservation, Long> {
 
     @Override
     public void create(final Reservation reservation) {
 	final BooleanResult operationResult = canCreate(reservation);
 	if (operationResult.getResult() == Boolean.TRUE) {
-	    em.persist(reservation);
+	    getEntityManager().persist(reservation);
 	} else {
 	    throw new DomainException(operationResult.getMessage());
 	}
@@ -40,7 +37,7 @@ public class ReservationFacade extends Facade<Reservation, Long> {
     public Reservation edit(final Reservation reservation) {
 	final BooleanResult operationResult = canEdit(reservation);
 	if (operationResult.getResult() == Boolean.TRUE) {
-	    return em.merge(reservation);
+	    return getEntityManager().merge(reservation);
 	} else {
 	    throw new DomainException(operationResult.getMessage());
 	}
@@ -52,22 +49,24 @@ public class ReservationFacade extends Facade<Reservation, Long> {
 
     @SuppressWarnings("unchecked")
     private BooleanResult isValid(final Reservation reservation) {
-	final Query query = em.createNamedQuery("Reservation.findByExperimentNameInInterval").setParameter("startDate", reservation.getStartDate())
-			      .setParameter("endDate", reservation.getEndDate()).setParameter("experimentName", reservation.getExperiment().getName());
+	final Query query = getEntityManager().createNamedQuery("Reservation.findByExperimentNameInInterval").setParameter("startDate",
+															   reservation.getStartDate())
+					      .setParameter("endDate", reservation.getEndDate()).setParameter("experimentName",
+													      reservation.getExperiment().getName());
 	final List<Reservation> reservationsForExperimentNameInInterval = query.getResultList();
 	return reservation.isValid(reservationsForExperimentNameInInterval);
     }
 
     @Override
     public void remove(final Reservation reservation) {
-	final Reservation mergedReservation = em.merge(reservation);
+	final Reservation mergedReservation = getEntityManager().merge(reservation);
 	mergedReservation.delete();
-	em.remove(mergedReservation);
+	getEntityManager().remove(mergedReservation);
     }
 
     @Override
     public Reservation find(final Long id) {
-	return em.find(Reservation.class, id);
+	return getEntityManager().find(Reservation.class, id);
     }
 
     @Override
@@ -82,7 +81,7 @@ public class ReservationFacade extends Facade<Reservation, Long> {
 
     @SuppressWarnings("unchecked")
     public List<Reservation> find(final boolean all, final int firstResult, final int maxResults) {
-	Query q = em.createNamedQuery("Reservation.findAll");
+	Query q = getEntityManager().createNamedQuery("Reservation.findAll");
 	if (!all) {
 	    q.setMaxResults(maxResults);
 	    q.setFirstResult(firstResult);
@@ -92,35 +91,39 @@ public class ReservationFacade extends Facade<Reservation, Long> {
 
     @Override
     public int count() {
-	final Query query = em.createNamedQuery("Reservation.countAll");
+	final Query query = getEntityManager().createNamedQuery("Reservation.countAll");
 	return ((Long) query.getSingleResult()).intValue();
     }
 
     @SuppressWarnings("unchecked")
     public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final User user) {
-	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForInternalUserInDate")
-					     .setParameter("username", user.getUsername()).setParameter("start", start).setParameter("end", end)
-					     .getResultList();
+	final List<ScheduleEvent> events = getEntityManager().createNamedQuery("Reservation.findReservationsForInternalUserInDate")
+							     .setParameter("username", user.getUsername()).setParameter("start", start)
+							     .setParameter("end", end).getResultList();
 	return events;
     }
 
     @SuppressWarnings("unchecked")
     public List<ScheduleEvent> findReservationsFor(final User user) {
-	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForInternalUser").setParameter("username", user.getUsername())
-					     .getResultList();
+	final List<ScheduleEvent> events = getEntityManager().createNamedQuery("Reservation.findReservationsForInternalUser").setParameter("username",
+																	   user.getUsername())
+							     .getResultList();
 	return events;
     }
 
     @SuppressWarnings("unchecked")
     public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final String externalUser, final String loginDomain) {
-	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForExternalUserInDate").setParameter("externalUser", externalUser)
-					     .setParameter("loginDomain", loginDomain).setParameter("start", start).setParameter("end", end).getResultList();
+	final List<ScheduleEvent> events = getEntityManager().createNamedQuery("Reservation.findReservationsForExternalUserInDate")
+							     .setParameter("externalUser", externalUser).setParameter("loginDomain", loginDomain)
+							     .setParameter("start", start).setParameter("end", end).getResultList();
 	return events;
     }
 
+    @SuppressWarnings("unchecked")
     public List<ScheduleEvent> findReservationsFor(final String externalUser, final String loginDomain) {
-	final List<ScheduleEvent> events = em.createNamedQuery("Reservation.findReservationsForExternalUser").setParameter("externalUser", externalUser)
-					     .setParameter("loginDomain", loginDomain).getResultList();
+	final List<ScheduleEvent> events = getEntityManager().createNamedQuery("Reservation.findReservationsForExternalUser").setParameter("externalUser",
+																	   externalUser)
+							     .setParameter("loginDomain", loginDomain).getResultList();
 	return events;
     }
 }

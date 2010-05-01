@@ -43,6 +43,8 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     private static final long serialVersionUID = 1L;
 
+    private static final int MINIMUM_INTERVAL_IN_MINUTES = 15;
+
     private static final int MAXIMUM_INTERVAL_IN_MINUTES = 120;
 
     private static final int MINUTE_INTERVAL = 15;
@@ -376,7 +378,8 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     public boolean hasConflicts(List<Reservation> reservationsForExperimentNameInInterval) {
 	for (final Reservation reservation : reservationsForExperimentNameInInterval) {
-	    if (this != reservation && EqualityUtils.equals(this.getExperiment().getLaboratory(), reservation.getExperiment().getLaboratory())
+	    if (!EqualityUtils.equals(this.getIdInternal(), reservation.getIdInternal())
+		    && EqualityUtils.equals(this.getExperiment().getLaboratory(), reservation.getExperiment().getLaboratory())
 		    && this.getInterval().overlaps(reservation.getInterval())) {
 		return true;
 	    }
@@ -385,7 +388,8 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     }
 
     public boolean isValidPeriodInterval() {
-	return getInterval().toPeriod(PeriodType.minutes()).getMinutes() <= MAXIMUM_INTERVAL_IN_MINUTES;
+	int minutesInInterval = getInterval().toPeriod(PeriodType.minutes()).getMinutes();
+	return MINIMUM_INTERVAL_IN_MINUTES <= minutesInInterval && minutesInInterval <= MAXIMUM_INTERVAL_IN_MINUTES;
     }
 
     public boolean isValidDates() {
@@ -398,6 +402,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     }
 
     public BooleanResult isValid(final List<Reservation> reservationsForExperimentNameInInterval) {
+	if (getEndDate().before(getStartDate())) {
+	    return new BooleanResult(Boolean.FALSE, "error.end.before.start");
+	}
 	if (hasConflicts(reservationsForExperimentNameInInterval)) {
 	    return new BooleanResult(Boolean.FALSE, "error.laboratory.taken");
 	}
