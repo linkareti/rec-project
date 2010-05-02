@@ -1,0 +1,33 @@
+<Apparatus location="LOOPING_V1.0"
+	customizerClassLocationBundleKey="looping$rec.exp.customizer.looping"
+	toolTipBundleKey="looping$rec.exp.tip.looping" iconLocationBundleKey="looping$rec.exp.icon.looping"
+	displayStringBundleKey="looping$rec.exp.title.looping"
+	desktopLocationBundleKey="looping$rec.exp.background.looping" order="1">
+	<LocalizationBundle name="looping"
+		location="recresource:///pt/utl/ist/elab/virtual/client/looping/resources/messages" />
+	<Display classLocationBundleKey="looping$rec.exp.display.looping.loc.anim"
+		toolTipBundleKey="looping$rec.exp.display.looping.tip.anim"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="looping$rec.exp.display.looping.title.anim"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="looping$rec.exp.display.looping.loc.1"
+		toolTipBundleKey="looping$rec.exp.display.looping.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="looping$rec.exp.display.looping.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="looping$rec.exp.display.looping.loc.2"
+		toolTipBundleKey="looping$rec.exp.display.looping.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="looping$rec.exp.display.looping.title.2"
+		offlineCapable="false" order="3" />
+	<Display classLocationBundleKey="looping$rec.exp.display.looping.loc.3"
+		toolTipBundleKey="looping$rec.exp.display.looping.tip.3"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="looping$rec.exp.display.looping.title.3"
+		offlineCapable="false" order="4" />
+	<Display classLocationBundleKey="looping$rec.exp.display.looping.loc.4"
+		toolTipBundleKey="looping$rec.exp.display.looping.tip.4"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="looping$rec.exp.display.looping.title.4"
+		offlineCapable="false" order="5" />
+</Apparatus>
