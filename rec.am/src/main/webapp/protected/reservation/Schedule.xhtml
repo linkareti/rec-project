@@ -22,13 +22,12 @@
 				</p:ajaxStatus>
 				<p:schedule id="myschedule" value="#{scheduleController.eventModel}"
 					editable="true" widgetVar="myschedule" allDaySlot="false"
-					showWeekends="false" draggable="true" resizable="true"
+					showWeekends="true" draggable="true" resizable="true"
 					eventSelectListener="#{scheduleController.onEventSelect}"
 					dateSelectListener="#{scheduleController.onDateSelect}"
 					eventMoveListener="#{scheduleController.onEventMove}"
 					eventResizeListener="#{scheduleController.onEventResize}"
-					onEventMoveUpdate="msg, myschedule"
-					onEventResizeUpdate="msg, myschedule" slotMinutes="15"
+					onEventMoveUpdate="msg" onEventResizeUpdate="msg" slotMinutes="15"
 					view="agendaWeek">
 					<p:scheduleEventDialog header="#{bundle['label.event.header']}">
 						<h:inputHidden id="idInternal"
