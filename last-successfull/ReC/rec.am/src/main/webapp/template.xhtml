@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="title">Default Title</ui:insert></title>
+	<h:outputStylesheet name="css/jsfcrud.css" />
+</h:head>
+
+<h:body class="yui-skin-sam">
+
+	<p:growl id="msg" showDetail="true" />
+
+	<p:layout fullPage="true" toggleListener="#{layoutBean.handleToggle}"
+		onToggleUpdate="msg" closeListener="#{layoutBean.handleClose}"
+		onCloseUpdate="msg" resizeListener="#{layoutBean.handleResize}"
+		onResizeUpdate="msg">
+
+		<p:layoutUnit id="left" position="left" width="200" resizable="false"
+			closable="false" collapsible="true" header="#{bundle['menu.title']}">
+			<ui:insert name="menu"></ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center" style="text-align:left"
+			scrollable="true">
+			<p><ui:insert name="body">Default Body</ui:insert></p>
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+</html>
