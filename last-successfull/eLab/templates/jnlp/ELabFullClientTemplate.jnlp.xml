@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="@codebase@" href="ElabFullClient.jnlp">
+    <information>
+        <title>@title@</title>
+        <vendor>@vendor@</vendor>
+		<homepage href="@homepage@"/>
+		<description kind="one-line">@one-line@</description>
+		<description kind="tooltip">@tootip@</description>
+		<description kind="short">@short@</description>
+		<icon href="fullclient_iconified.gif"/>
+		<icon kind="splash" href="elab_logo.png"/>
+		<offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+		<j2se version="@j2se-version@"/>
+
+		<jar href="lib/"/>
+
+		<jar href="lib/avalon-framework_sig.jar"/>
+		<jar href="lib/fits1.3.jar_sig"/>
+		<jar href="lib/openorb_orb-1.4.0_sig.jar"/>
+        <jar href="lib/openorb_orb_omg-1.4.0_sig.jar"/>
+        <jar href="lib/openorb_ots-1.4.0_sig.jar"/>
+        <jar href="lib/openorb_pss-1.4.0_sig.jar"/>
+		<jar href="lib/tools-1.4.0_sig.jar"/>
+        <jar href="lib/xercesImpl_sig.jar"/>
+		<jar href="lib/xml-apis_sig.jar"/>
+        <jar href="lib/jfreechart-1.0.9_sig.jar"/>
+        <jar href="lib/logkit_sig.jar"/>
+        <jar href="lib/jcommon-1.0.12_sig.jar"/>
+        
+        <!-- jar href="lib/appframework-1.0.3.jar"/>
+        <jar href="lib/swing-worker-1.1.jar"/>
+        <jar href="lib/swingx.jar"/>
+        <jar href="lib/comm.jar"/>
+        <jar href="lib/JCFN.jar"/>
+        <jar href="lib/jmf.jar"/>
+		<jar href="lib/jna.jar"/>
+        <jar href="lib/jsr80.jar"/>
+        <jar href="lib/jsr80_ri.jar"/>        
+        <jar href="lib/RXTXcomm.jar"/-->
+
+        <!-- Jar eLab Client -->
+
+        <!-- Jar ReC Client -->
+
+        <!-- Jar ReC Common -->
+        
+        <!--Start Experiment Jars-->
+
+        <!--End Experiment Jars-->
+
+        
+        <extension name="JFreeChartClient" href="JFreeChart.jnlp" />
+		<extension name="OpenORBClient" href="OpenORB.jnlp" />
+		<!-- extension name="JVLC" href="jvlc.jnlp" /-->
+       
+        <property name="ReCFaceConfig" value="config/ReCFaceConfig.xml" />
+        <property name="ReCBaseUIConfig" value="etc/ReCBaseUIConfig.xml" />
+        <property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB" />
+        <property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton" />
+        <property name="ReC.MultiCastController.BindName" value="MultiCastController" />
+        <property name="ReC.MultiCastController.InitRef" value="MultiCastController" />
+        <property name="openorb.config" value="etc/OpenORB.xml" />
+        <property name="openorb.profile" value="ReCClient" />
+        <!-- property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
+        <property name="vlc.plugins.filename" value="vlcplugins.zip"/-->
+        
+        <!-- property name="ReC.PercentFreeMemoryThreshold2Serialization" value="80" /-->
+        
+        <!-- change this value to disable video -->
+        <property name="video.development.enabled" value="no"/>
+        
+    </resources>
+
+    <!-- *******************************************************************
+         ****************** Resources por SO / Arch ************************
+         ******************************************************************* -->
+
+<!-- falta archs x86-64 (ou x86_64?), amd64 e amd-->
+    <!-- resources arch="x86" os="Windows">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+    
+    <resources arch="x86_64" os="Windows">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+    
+    <resources arch="amd" os="Windows">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+
+    <resources arch="amd64" os="Windows">
+        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <extension href="windowsInstaller.jnlp" name="windowsInstaller"/>
+    </resources>
+
+    <resources arch="i386" os="Linux">
+        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
+    </resources>
+    <resources arch="i586" os="Linux">
+        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
+    </resources>
+    <resources arch="i686" os="Linux">
+        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
+    </resources>
+    <resources arch="amd64" os="Linux">
+        <nativelib href="lib/libsvlc_linux_amd64.jar"/>
+        <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
+    </resources>
+    <resources arch="ppc" os="Mac OS X">
+        <nativelib href="lib/libsvlc_mac_ppc.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc.jar"/>
+    </resources>
+    <resources arch="ppc64" os="Mac OS X">
+        <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc64.jar"/>
+    </resources>
+    <resources arch="x86" os="Mac OS X">
+        <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc64.jar"/>
+    </resources>
+    <resources arch="x86_64" os="Mac OS X">
+        <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc64.jar"/>
+    </resources-->
+    
+    <application-desc main-class="@main-class@">
+    	<argument>-resources:http://elab.ist.utl.pt/rec/eLab/FullClient.properties</argument>
+    </application-desc>
+    
+</jnlp>
