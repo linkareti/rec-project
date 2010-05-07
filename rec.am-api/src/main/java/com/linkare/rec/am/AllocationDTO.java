@@ -23,6 +23,19 @@ public class AllocationDTO implements Serializable {
 
     private List<String> owners;
 
+    public AllocationDTO() {
+	super();
+    }
+
+    public AllocationDTO(Calendar begin, Calendar end, String experimentId, List<String> users, List<String> owners) {
+	super();
+	this.begin = begin;
+	this.end = end;
+	this.experimentId = experimentId;
+	this.users = users;
+	this.owners = owners;
+    }
+
     /**
      * @return the begin
      */
