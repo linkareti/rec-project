@@ -1,0 +1,33 @@
+<Apparatus location="COLISAO_V1.0"
+	customizerClassLocationBundleKey="colisao$rec.exp.customizer.colisao"
+	toolTipBundleKey="colisao$rec.exp.tip.colisao" iconLocationBundleKey="colisao$rec.exp.icon.colisao"
+	displayStringBundleKey="colisao$rec.exp.title.colisao"
+	desktopLocationBundleKey="colisao$rec.exp.background.colisao" order="1">
+	<LocalizationBundle name="colisao"
+		location="recresource:///pt/utl/ist/elab/virtual/client/colisao/resources/messages" />
+	<Display classLocationBundleKey="colisao$rec.exp.display.colisao.loc.anim"
+		toolTipBundleKey="colisao$rec.exp.display.colisao.tip.anim"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="colisao$rec.exp.display.colisao.title.anim"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="colisao$rec.exp.display.colisao.loc.1"
+		toolTipBundleKey="colisao$rec.exp.display.colisao.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="colisao$rec.exp.display.colisao.title.1"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="colisao$rec.exp.display.colisao.loc.2"
+		toolTipBundleKey="colisao$rec.exp.display.colisao.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="colisao$rec.exp.display.colisao.title.2"
+		offlineCapable="false" order="3" />
+	<Display classLocationBundleKey="colisao$rec.exp.display.colisao.loc.3"
+		toolTipBundleKey="colisao$rec.exp.display.colisao.tip.3"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="colisao$rec.exp.display.colisao.title.3"
+		offlineCapable="false" order="4" />
+	<Display classLocationBundleKey="colisao$rec.exp.display.colisao.loc.4"
+		toolTipBundleKey="colisao$rec.exp.display.colisao.tip.4"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="colisao$rec.exp.display.colisao.title.4"
+		offlineCapable="false" order="5" />
+</Apparatus>
