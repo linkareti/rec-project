@@ -10,11 +10,14 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.NamingException;
 import javax.xml.rpc.ServiceException;
 
 import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
+import com.linkare.rec.am.service.LoginDomainService;
 import com.linkare.rec.am.web.util.ConstantUtils;
+import com.linkare.rec.am.web.util.JndiHelper;
 import com.linkare.rec.am.wsgen.moodle.CourseRecord;
 import com.linkare.rec.am.wsgen.moodle.LoginReturn;
 import com.linkare.rec.am.wsgen.moodle.MoodleWS;
@@ -22,16 +25,36 @@ import com.linkare.rec.am.wsgen.moodle.MoodleWSLocator;
 import com.linkare.rec.am.wsgen.moodle.MoodleWSPortType;
 import com.linkare.rec.am.wsgen.moodle.UserRecord;
 
+/**
+ * 
+ * @author Paulo Zenida - Linkare TI
+ * 
+ */
 public final class MoodleClientHelper {
 
     /**
      * This map saves all the moodle client help instances, indexed by the login domains.
      */
-    private static Map<String, MoodleClientHelper> instancesMap = new Hashtable<String, MoodleClientHelper>();
+    private static Map<String, MoodleClientHelper> instancesMap;
 
     private final MoodleWSPortType moodleWsPort;
 
-    public static void registerLoginDomains(final List<LoginDomain> loginDomains) throws MalformedURLException {
+    private static Map<String, MoodleClientHelper> getInstancesMap() {
+	if (instancesMap == null) {
+	    try {
+		final LoginDomainService loginDomainService = JndiHelper.getLoginDomainService();
+		registerLoginDomains(loginDomainService.findAll());
+	    } catch (NamingException e) {
+		throw new RuntimeException("error.accessing.loginDomainFacade.in.jndi", e);
+	    } catch (MalformedURLException e) {
+		throw new RuntimeException("error.invalidURL.registering.login.domains", e);
+	    }
+	}
+	return instancesMap;
+    }
+
+    private static void registerLoginDomains(final List<LoginDomain> loginDomains) throws MalformedURLException {
+	instancesMap = new Hashtable<String, MoodleClientHelper>();
 	for (final LoginDomain loginDomain : loginDomains) {
 	    if (!ignoreDomain(loginDomain.getName())) {
 		instancesMap.put(loginDomain.getName(), new MoodleClientHelper(new URL(loginDomain.getUrl())));
@@ -67,6 +90,22 @@ public final class MoodleClientHelper {
 	} catch (RemoteException e) {
 	    return Collections.<ExternalCourse> emptyList();
 	}
+    }
+
+    // TODO: Possible improvement point, by extending the Moodle WS to return the teachers of the course!
+    public static List<ExternalCourse> getUserLecturedCourses(final String username, final String loginDomain, final LoginReturn loginReturn) {
+	final List<ExternalCourse> result = new ArrayList<ExternalCourse>();
+	final List<ExternalCourse> externalCourses = getCurrentUserCourses(loginDomain, loginReturn);
+	for (final ExternalCourse externalCourse : externalCourses) {
+	    final UserRecord[] teachers = getTeachers(externalCourse.getShortname(), loginDomain, loginReturn);
+	    for (final UserRecord teacher : teachers) {
+		if (teacher.getUsername().equals(username)) {
+		    result.add(externalCourse);
+		    break;
+		}
+	    }
+	}
+	return result;
     }
 
     public static ExternalCourse findCourse(final String id, final String loginDomain, final LoginReturn loginReturn) {
@@ -109,7 +148,7 @@ public final class MoodleClientHelper {
     }
 
     private static MoodleClientHelper getInstance(final String loginDomain) {
-	final MoodleClientHelper instance = instancesMap.get(loginDomain);
+	final MoodleClientHelper instance = getInstancesMap().get(loginDomain);
 	if (instance == null) {
 	    throw new IllegalArgumentException("no instance was found for " + loginDomain);
 	}

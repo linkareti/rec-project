@@ -31,7 +31,7 @@ import com.linkare.commons.utils.EqualityUtils;
 	@NamedQuery(name = "findByName", query = "SELECT lab FROM Laboratory lab WHERE lab.name=:name"),
 	/* @NamedQuery(name = "findExperiments", query = "SELECT experiments FROM Laboratory lab WHERE lab.name=:name"), */
 	@NamedQuery(name = "findExperiment", query = "SELECT experiment FROM Laboratory lab, Experiment experiment WHERE lab.name=:namelab and experiment.laboratory=lab and experiment.name=:nameexp") })
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Laboratory extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
@@ -46,7 +46,6 @@ public class Laboratory extends DefaultDomainObject {
     @Embedded
     private State state = new State();
 
-    @XmlTransient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "laboratory")
     private List<Experiment> experiments = new ArrayList<Experiment>();
 
@@ -112,6 +111,7 @@ public class Laboratory extends DefaultDomainObject {
      * 
      * @return the value of experiments
      */
+    @XmlTransient
     public List<Experiment> getExperiments() {
 	return experiments;
     }

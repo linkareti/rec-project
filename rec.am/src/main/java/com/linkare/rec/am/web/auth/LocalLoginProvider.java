@@ -1,10 +1,11 @@
 package com.linkare.rec.am.web.auth;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.naming.NamingException;
 
 import com.linkare.commons.jpa.security.User;
-import com.linkare.rec.am.model.UserFacade;
+import com.linkare.rec.am.service.UserService;
 import com.linkare.rec.am.web.ex.AuthenticationException;
+import com.linkare.rec.am.web.util.JndiHelper;
 
 /**
  * 
@@ -13,18 +14,22 @@ import com.linkare.rec.am.web.ex.AuthenticationException;
  */
 public class LocalLoginProvider extends LoginProvider {
 
-    private UserFacade facade;
+    private UserService service;
 
-    public LocalLoginProvider(final UserFacade facade) {
-	this.facade = facade;
+    public LocalLoginProvider() {
+	try {
+	    this.service = JndiHelper.getUserService();
+	} catch (NamingException e) {
+	    throw new RuntimeException("error.canot.get.userService", e);
+	}
     }
 
     @Override
-    public UserView authenticate(HttpServletRequest request, String username, String password, String loginDomain) throws AuthenticationException {
-	final User user = facade.authenticate(username, password);
+    public UserView authenticate(final String username, final String password, final String loginDomain) throws AuthenticationException {
+	final User user = service.authenticate(username, password);
 	if (user == null) {
 	    throw new AuthenticationException();
 	}
-	return new InternalUserView(username, loginDomain, facade.getRoles(user));
+	return new InternalUserView(username, loginDomain, service.getRoles(user));
     }
 }

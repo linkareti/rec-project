@@ -1,6 +1,5 @@
 package com.linkare.rec.am.web;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -16,29 +15,26 @@ import org.primefaces.model.DualListModel;
 
 import com.linkare.commons.jpa.security.Group;
 import com.linkare.commons.jpa.security.User;
-import com.linkare.rec.am.model.GroupFacade;
-import com.linkare.rec.am.model.UserFacade;
+import com.linkare.rec.am.service.GroupService;
+import com.linkare.rec.am.service.GroupServiceLocal;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "groupController")
 @RequestScoped
-public class GroupController extends AbstractController<Long, Group, GroupFacade> {
+public class GroupController extends AbstractController<Long, Group, GroupService> {
 
     private static final long serialVersionUID = 1L;
 
     private DualListModel<User> users;
 
-    @EJB
-    private GroupFacade ejbFacade;
-
-    @EJB
-    private UserFacade userFacade;
+    @EJB(beanInterface = GroupServiceLocal.class)
+    private GroupService service;
 
     @Override
-    protected GroupFacade getFacade() {
-	return ejbFacade;
+    protected GroupService getService() {
+	return service;
     }
 
     @Override
@@ -56,12 +52,7 @@ public class GroupController extends AbstractController<Long, Group, GroupFacade
     }
 
     public List<User> getNonMembers() {
-	if (getCurrent() == null) {
-	    return Collections.<User> emptyList();
-	}
-	final List<User> result = userFacade.findAll();
-	result.removeAll(getCurrent().getAllUsers());
-	return result;
+	return getService().getNonMembers(getCurrent());
     }
 
     @FacesConverter(value = "groupConverter", forClass = Group.class)
@@ -74,7 +65,7 @@ public class GroupController extends AbstractController<Long, Group, GroupFacade
 	    }
 	    GroupController controller = (GroupController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
 														  "groupController");
-	    return controller.ejbFacade.find(getKey(value));
+	    return controller.service.find(getKey(value));
 	}
 
 	private Long getKey(String value) {
@@ -119,7 +110,7 @@ public class GroupController extends AbstractController<Long, Group, GroupFacade
     }
 
     public String setUsersMembership() {
-	getFacade().setUsersMembership(getSelected(), getUsers().getTarget());
+	getService().setUsersMembership(getSelected(), getUsers().getTarget());
 	JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.association"));
 	return prepareEdit();
     }

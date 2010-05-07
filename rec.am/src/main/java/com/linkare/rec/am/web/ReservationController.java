@@ -11,8 +11,9 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.linkare.rec.am.model.Reservation;
-import com.linkare.rec.am.model.ReservationFacade;
 import com.linkare.rec.am.model.moodle.MoodleRecord;
+import com.linkare.rec.am.service.ReservationService;
+import com.linkare.rec.am.service.ReservationServiceLocal;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.web.util.ConstantUtils;
@@ -20,12 +21,12 @@ import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "reservationController")
 @RequestScoped
-public class ReservationController extends AbstractController<Long, Reservation, ReservationFacade> {
+public class ReservationController extends AbstractController<Long, Reservation, ReservationService> {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB
-    private ReservationFacade ejbFacade;
+    @EJB(beanInterface = ReservationServiceLocal.class)
+    private ReservationService service;
 
     public final Reservation getSelected() {
 	if (getCurrent() == null) {
@@ -35,8 +36,8 @@ public class ReservationController extends AbstractController<Long, Reservation,
     }
 
     @Override
-    protected ReservationFacade getFacade() {
-	return ejbFacade;
+    protected ReservationService getService() {
+	return service;
     }
 
     @Override
@@ -49,7 +50,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	final String externalUser = SessionHelper.getUsername();
 	final String externalCourse = JsfUtil.getRequestParameter("externalCourse");
 	final String domain = SessionHelper.getLoginDomain();
-	setCurrent(new Reservation(externalUser, externalCourse, domain));
+	setCurrent(new Reservation(externalUser, externalCourse));
 	return ConstantUtils.CREATE;
     }
 
@@ -70,7 +71,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	    }
 	    ReservationController controller = (ReservationController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(),
 															      null, "reservationController");
-	    return controller.ejbFacade.find(getKey(value));
+	    return controller.service.find(getKey(value));
 	}
 
 	private Long getKey(String value) {
@@ -105,7 +106,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 		return null;
 	    }
 	    final String[] valueElements = value.split("_");
-	    return new MoodleRecord(valueElements[0], valueElements[1], valueElements[2]);
+	    return new MoodleRecord(valueElements[0], valueElements[1]);
 	}
 
 	@Override
@@ -115,7 +116,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	    }
 	    if (object instanceof MoodleRecord) {
 		final MoodleRecord record = (MoodleRecord) object;
-		return record.getExternalUser() + "_" + record.getExternalCourseId() + "_" + record.getDomain();
+		return record.getExternalUser() + "_" + record.getExternalCourseId();
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
 			+ Reservation.class.getName());

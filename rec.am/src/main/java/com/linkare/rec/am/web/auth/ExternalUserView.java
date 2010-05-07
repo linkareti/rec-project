@@ -58,4 +58,12 @@ public class ExternalUserView extends UserView {
     public boolean isAdmin() {
 	return false;
     }
+
+    /**
+     * One external user is a teacher if it is associated with any course
+     */
+    @Override
+    public boolean isTeacher() {
+	return !getAssociatedCourses().isEmpty();
+    }
 }

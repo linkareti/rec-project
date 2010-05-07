@@ -9,18 +9,19 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.linkare.commons.jpa.security.User;
-import com.linkare.rec.am.model.UserFacade;
+import com.linkare.rec.am.service.UserService;
+import com.linkare.rec.am.service.UserServiceLocal;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.ConstantUtils;
 
 @ManagedBean(name = "userController")
 @RequestScoped
-public class UserController extends AbstractController<Long, User, UserFacade> {
+public class UserController extends AbstractController<Long, User, UserService> {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB
-    private UserFacade ejbFacade;
+    @EJB(beanInterface = UserServiceLocal.class)
+    private UserService service;
 
     @Override
     public final User getSelected() {
@@ -31,8 +32,8 @@ public class UserController extends AbstractController<Long, User, UserFacade> {
     }
 
     @Override
-    protected final UserFacade getFacade() {
-	return ejbFacade;
+    protected final UserService getService() {
+	return service;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class UserController extends AbstractController<Long, User, UserFacade> {
 	    }
 	    UserController controller = (UserController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
 														"userController");
-	    return controller.ejbFacade.find(getKey(value));
+	    return controller.service.find(getKey(value));
 	}
 
 	private Long getKey(String value) {

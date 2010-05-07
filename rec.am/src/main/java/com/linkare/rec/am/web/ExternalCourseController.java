@@ -7,8 +7,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.linkare.rec.am.model.ExternalCourseFacade;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
+import com.linkare.rec.am.service.ExternalCourseService;
+import com.linkare.rec.am.service.ExternalCourseServiceBean;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.wsgen.moodle.UserRecord;
 
@@ -18,11 +19,11 @@ import com.linkare.rec.am.wsgen.moodle.UserRecord;
  */
 @ManagedBean(name = "externalCourseController")
 @RequestScoped
-public class ExternalCourseController extends AbstractController<String, ExternalCourse, ExternalCourseFacade> {
+public class ExternalCourseController extends AbstractController<String, ExternalCourse, ExternalCourseService> {
 
     private static final long serialVersionUID = 1L;
 
-    private ExternalCourseFacade facade;
+    private ExternalCourseService service;
 
     private UserRecord[] students;
 
@@ -36,11 +37,11 @@ public class ExternalCourseController extends AbstractController<String, Externa
     }
 
     @Override
-    protected ExternalCourseFacade getFacade() {
-	if (facade == null) {
-	    facade = new ExternalCourseFacade();
+    protected ExternalCourseService getService() {
+	if (service == null) {
+	    service = new ExternalCourseServiceBean();
 	}
-	return facade;
+	return service;
     }
 
     @Override
@@ -74,14 +75,14 @@ public class ExternalCourseController extends AbstractController<String, Externa
 
     public UserRecord[] getTeachers() {
 	if (teachers == null) {
-	    teachers = getFacade().getTeachers(getSelected() == null ? null : getSelected().getShortname());
+	    teachers = getService().getTeachers(getSelected() == null ? null : getSelected().getShortname());
 	}
 	return teachers;
     }
 
     public UserRecord[] getStudents() {
 	if (students == null) {
-	    students = getFacade().getStudents(getSelected() == null ? null : getSelected().getShortname());
+	    students = getService().getStudents(getSelected() == null ? null : getSelected().getShortname());
 	}
 	return students;
     }
@@ -97,7 +98,7 @@ public class ExternalCourseController extends AbstractController<String, Externa
 	    ExternalCourseController controller = (ExternalCourseController) facesContext.getApplication().getELResolver()
 											 .getValue(facesContext.getELContext(), null,
 												   "externalCourseController");
-	    return controller.getFacade().find(value);
+	    return controller.getService().find(value);
 	}
 
 	@Override

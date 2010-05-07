@@ -1,6 +1,5 @@
 package com.linkare.rec.am.web;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -16,29 +15,26 @@ import org.primefaces.model.DualListModel;
 
 import com.linkare.commons.jpa.security.Role;
 import com.linkare.commons.jpa.security.User;
-import com.linkare.rec.am.model.RoleFacade;
-import com.linkare.rec.am.model.UserFacade;
+import com.linkare.rec.am.service.RoleService;
+import com.linkare.rec.am.service.RoleServiceLocal;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "roleController")
 @RequestScoped
-public class RoleController extends AbstractController<Long, Role, RoleFacade> {
+public class RoleController extends AbstractController<Long, Role, RoleService> {
 
     private static final long serialVersionUID = 1L;
 
     private DualListModel<User> users;
 
-    @EJB
-    private RoleFacade ejbFacade;
-
-    @EJB
-    private UserFacade userFacade;
+    @EJB(beanInterface = RoleServiceLocal.class)
+    private RoleService service;
 
     @Override
-    protected RoleFacade getFacade() {
-	return ejbFacade;
+    protected RoleService getService() {
+	return service;
     }
 
     @Override
@@ -56,12 +52,7 @@ public class RoleController extends AbstractController<Long, Role, RoleFacade> {
     }
 
     public List<User> getNonMembers() {
-	if (getCurrent() == null) {
-	    return Collections.<User> emptyList();
-	}
-	final List<User> result = userFacade.findAll();
-	result.removeAll(getCurrent().getAllChildren());
-	return result;
+	return getService().getNonMembers(getCurrent());
     }
 
     @FacesConverter(value = "roleConverter", forClass = Role.class)
@@ -74,7 +65,7 @@ public class RoleController extends AbstractController<Long, Role, RoleFacade> {
 	    }
 	    RoleController controller = (RoleController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
 														"roleController");
-	    return controller.ejbFacade.find(getKey(value));
+	    return controller.service.find(getKey(value));
 	}
 
 	private Long getKey(String value) {
@@ -119,7 +110,7 @@ public class RoleController extends AbstractController<Long, Role, RoleFacade> {
     }
 
     public String setUsersMembership() {
-	getFacade().setUsersMembership(getSelected(), getUsers().getTarget());
+	getService().setUsersMembership(getSelected(), getUsers().getTarget());
 	JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.association"));
 	return prepareEdit();
     }

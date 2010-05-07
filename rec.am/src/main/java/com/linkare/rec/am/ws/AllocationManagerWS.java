@@ -1,35 +1,37 @@
 package com.linkare.rec.am.ws;
 
-import com.linkare.rec.am.model.Laboratory;
-import com.linkare.rec.am.model.LaboratoryFacade;
 import java.util.List;
+
 import javax.ejb.EJB;
-import javax.jws.WebService;
 import javax.ejb.Stateless;
 import javax.jws.WebParam;
+import javax.jws.WebService;
+
+import com.linkare.rec.am.model.Laboratory;
+import com.linkare.rec.am.service.LaboratoryService;
+import com.linkare.rec.am.service.LaboratoryServiceLocal;
 
 /**
- *
+ * 
  * @author Joao
  */
-@WebService(endpointInterface="com.linkare.rec.am.ws.AllocationManagerWSInterface")
+@WebService(endpointInterface = "com.linkare.rec.am.ws.AllocationManagerWSInterface")
 @Stateless()
 public class AllocationManagerWS {
 
+    @EJB(beanInterface = LaboratoryServiceLocal.class)
+    private LaboratoryService ejbRef;
 
-    @EJB
-    private LaboratoryFacade ejbRef;
-
-    public int count(){
-        return ejbRef.count();
+    public int count() {
+	return ejbRef.count();
     }
 
     /**
      * Web service operation
      */
-    
-    public String echo(@WebParam(name="name") String name) {
-        return "Hello " + name;
+
+    public String echo(@WebParam(name = "name") String name) {
+	return "Hello " + name;
     }
 
     /**
@@ -37,7 +39,7 @@ public class AllocationManagerWS {
      */
 
     public String find(Long id) {
-        return ejbRef.find(id).getName();
+	return ejbRef.find(id).getName();
     }
 
     /**
@@ -45,14 +47,14 @@ public class AllocationManagerWS {
      */
 
     public String findByName(String name) {
-        return "Not implemented";
-//        return ejbRef.findByName(name).getName();
+	return "Not implemented";
+	//        return ejbRef.findByName(name).getName();
     }
 
     /**
      * Web service operation
      */
     public List<Laboratory> getAllLaboratories() {
-        return ejbRef.findAll();
+	return ejbRef.findAll();
     }
 }

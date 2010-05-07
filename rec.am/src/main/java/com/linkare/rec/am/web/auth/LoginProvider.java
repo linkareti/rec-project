@@ -15,10 +15,9 @@ public abstract class LoginProvider {
 
     public void login(final HttpServletRequest request, final String username, final String password, final String loginDomain) throws AuthenticationException {
 	final HttpSession session = request.getSession();
-	UserView userView = authenticate(request, username, password, loginDomain);
+	UserView userView = authenticate(username, password, loginDomain);
 	session.setAttribute(ConstantUtils.USER_VIEW_SESSION_KEY, userView);
     }
 
-    public abstract UserView authenticate(final HttpServletRequest request, final String username, final String password, final String loginDomain)
-	    throws AuthenticationException;
+    public abstract UserView authenticate(final String username, final String password, final String loginDomain) throws AuthenticationException;
 }

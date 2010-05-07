@@ -1,8 +1,10 @@
-package com.linkare.rec.am.model;
+package com.linkare.rec.am.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import com.linkare.commons.dao.security.GroupDAO;
@@ -14,8 +16,9 @@ import com.linkare.commons.jpa.security.User;
  * @author Paulo Zenida - Linkare TI
  * 
  */
-@Stateless(name = "GroupFacade")
-public class GroupFacade extends Facade<Group, Long> {
+@Local(GroupServiceLocal.class)
+@Stateless(name = "GroupService")
+public class GroupServiceBean extends BusinessServiceBean<Group, Long> implements GroupService {
 
     private GroupDAO groupDAO;
 
@@ -61,10 +64,12 @@ public class GroupFacade extends Facade<Group, Long> {
 	return getOrCreateDAO().count();
     }
 
-    public List<User> getNonMembers(final List<User> members) {
-	return getOrCreateDAO().getNonMembers(members);
+    @Override
+    public List<User> getNonMembers(final Group group) {
+	return group == null ? Collections.<User> emptyList() : getOrCreateDAO().getNonMembers(group.getAllUsers());
     }
 
+    @Override
     public Group setUsersMembership(final Group group, final List<User> users) {
 	return getOrCreateDAO().setUsersMembership(group, mergeUsers(users));
     }

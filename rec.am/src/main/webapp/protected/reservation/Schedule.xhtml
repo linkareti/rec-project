@@ -20,9 +20,9 @@
 						<h:outputText value="" />
 					</f:facet>
 				</p:ajaxStatus>
-				<p:schedule id="myschedule" value="#{scheduleController.eventModel}"
-					editable="true" widgetVar="myschedule" allDaySlot="false"
-					showWeekends="true" draggable="true" resizable="true"
+				<p:schedule value="#{scheduleController.eventModel}" editable="true"
+					widgetVar="myschedule" allDaySlot="false" showWeekends="true"
+					draggable="true" resizable="true"
 					eventSelectListener="#{scheduleController.onEventSelect}"
 					dateSelectListener="#{scheduleController.onDateSelect}"
 					eventMoveListener="#{scheduleController.onEventMove}"

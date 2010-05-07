@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.linkare.rec.am.model;
+package com.linkare.rec.am.service;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +19,7 @@ import com.linkare.commons.jpa.Identifiable;
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class Facade<T extends Identifiable<ID> & Deletable, ID extends Serializable> {
+public abstract class BusinessServiceBean<T extends Identifiable<ID> & Deletable, ID extends Serializable> implements BusinessService<T, ID> {
 
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager entityManager;

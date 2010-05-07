@@ -12,7 +12,7 @@ import javax.faces.model.SelectItem;
 import com.linkare.commons.jpa.Deletable;
 import com.linkare.commons.jpa.Identifiable;
 import com.linkare.commons.jpa.exceptions.DomainException;
-import com.linkare.rec.am.model.Facade;
+import com.linkare.rec.am.service.BusinessService;
 import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JsfUtil;
 
@@ -22,7 +22,7 @@ import com.linkare.rec.am.web.util.JsfUtil;
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public abstract class AbstractController<ID extends Serializable, Entity extends Identifiable<ID> & Deletable, EntityFacade extends Facade<Entity, ID>>
+public abstract class AbstractController<ID extends Serializable, Entity extends Identifiable<ID> & Deletable, EntityFacade extends BusinessService<Entity, ID>>
 	implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,13 +33,13 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
 
     public abstract Entity getSelected();
 
-    protected abstract EntityFacade getFacade();
+    protected abstract EntityFacade getService();
 
     public abstract String prepareCreate();
 
     public String create() {
 	try {
-	    getFacade().create(current);
+	    getService().create(current);
 	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_CREATE_KEY));
 	    return prepareCreate();
 	} catch (Exception e) {
@@ -54,7 +54,7 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
 
     public String update() {
 	try {
-	    getFacade().edit(current);
+	    getService().edit(current);
 	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_UPDATE_KEY));
 	    return ConstantUtils.VIEW;
 	} catch (Exception e) {
@@ -74,7 +74,7 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
     }
 
     private void initCurrent() {
-	current = getFacade().find(getItems().getRowData().id());
+	current = getService().find(getItems().getRowData().id());
     }
 
     public String prepareEdit() {
@@ -84,7 +84,7 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
 
     protected void performDestroy() {
 	try {
-	    getFacade().remove(current);
+	    getService().remove(current);
 	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_REMOVE_KEY));
 	} catch (Exception e) {
 	    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
@@ -94,7 +94,7 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
     public DataModel<Entity> getItems() {
 	if (items == null) {
 	    // No need to fetch only a small subset since we deal with a small amount of data
-	    items = new ListDataModel<Entity>(getFacade().findAll());
+	    items = new ListDataModel<Entity>(getService().findAll());
 	}
 	return items;
     }
@@ -116,15 +116,15 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
     }
 
     public List<Entity> getAll() {
-	return getFacade().findAll();
+	return getService().findAll();
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-	return JsfUtil.getSelectItems(getFacade().findAll(), false);
+	return JsfUtil.getSelectItems(getService().findAll(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-	return JsfUtil.getSelectItems(getFacade().findAll(), true);
+	return JsfUtil.getSelectItems(getService().findAll(), true);
     }
 
     /**

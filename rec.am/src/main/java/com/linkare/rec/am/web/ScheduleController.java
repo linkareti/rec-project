@@ -38,11 +38,13 @@ import org.primefaces.model.ScheduleModel;
 import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.StringUtils;
-import com.linkare.rec.am.model.ExternalCourseFacade;
 import com.linkare.rec.am.model.Reservation;
-import com.linkare.rec.am.model.ReservationFacade;
-import com.linkare.rec.am.model.UserFacade;
 import com.linkare.rec.am.model.moodle.MoodleRecord;
+import com.linkare.rec.am.service.ExternalCourseServiceBean;
+import com.linkare.rec.am.service.ReservationService;
+import com.linkare.rec.am.service.ReservationServiceLocal;
+import com.linkare.rec.am.service.UserService;
+import com.linkare.rec.am.service.UserServiceLocal;
 import com.linkare.rec.am.web.auth.UserView;
 import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.web.util.ConstantUtils;
@@ -56,13 +58,15 @@ public class ScheduleController implements Serializable {
 
     private ScheduleModel eventModel;
 
+    private ScheduleModel lazyEventModel;
+
     private Reservation event = new Reservation();
 
-    @EJB
-    private ReservationFacade ejbFacade;
+    @EJB(beanInterface = ReservationServiceLocal.class)
+    private ReservationService reservationService;
 
-    @EJB
-    private UserFacade ejbUserFacade;
+    @EJB(beanInterface = UserServiceLocal.class)
+    private UserService userService;
 
     private SelectItem[] externalCourses;
 
@@ -71,14 +75,23 @@ public class ScheduleController implements Serializable {
     private List<ScheduleEvent> getEvents() {
 	final UserView userView = SessionHelper.getUserView();
 	if (userView.isExternal()) {
-	    return ejbFacade.findReservationsFor(userView.getUsername(), userView.getDomain());
+	    return reservationService.findReservationsFor(userView.getUsername(), userView.getDomain());
 	}
-	final User user = ejbUserFacade.findByUsername(userView.getUsername());
-	return ejbFacade.findReservationsFor(user);
+	final User user = userService.findByUsername(userView.getUsername());
+	return reservationService.findReservationsFor(user);
+    }
+
+    private List<ScheduleEvent> getAllEvents() {
+	return reservationService.findAllReservations();
     }
 
     public ScheduleModel getEventModel() {
 	return eventModel = eventModel == null ? new DefaultScheduleModel(getEvents()) : eventModel;
+    }
+
+    // TODO: It may be necessary to use a lazy event model later!!!
+    public ScheduleModel getLazyEventModel() {
+	return lazyEventModel = lazyEventModel == null ? new DefaultScheduleModel(getAllEvents()) : lazyEventModel;
     }
 
     public Reservation getEvent() {
@@ -101,7 +114,7 @@ public class ScheduleController implements Serializable {
     public void removeEvent(ActionEvent actionEvent) {
 	if (event.getId() != null) {
 	    eventModel.deleteEvent(event);
-	    ejbFacade.remove(event);
+	    reservationService.remove(event);
 	}
     }
 
@@ -110,7 +123,7 @@ public class ScheduleController implements Serializable {
 	    try {
 		// It is necessary to first update the model so that the event has a reservation id
 		eventModel.addEvent(event);
-		ejbFacade.create(event);
+		reservationService.create(event);
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
 		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
@@ -123,7 +136,7 @@ public class ScheduleController implements Serializable {
 	} else {
 	    try {
 		// It is necessary to get the merged event and only after that, update the event model
-		event = ejbFacade.edit(event);
+		event = reservationService.edit(event);
 		eventModel.updateEvent(event);
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
@@ -131,7 +144,7 @@ public class ScheduleController implements Serializable {
 		} else {
 		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
 		}
-		event = ejbFacade.find(event.getIdInternal());
+		event = reservationService.find(event.getIdInternal());
 		eventModel.updateEvent(event);
 	    }
 	}
@@ -148,9 +161,8 @@ public class ScheduleController implements Serializable {
 	if (userView.isExternal()) {
 	    event.setMoodleRecord(new MoodleRecord());
 	    event.getMoodleRecord().setExternalUser(userView.getUsername());
-	    event.getMoodleRecord().setDomain(userView.getDomain());
 	} else {
-	    event.setUser(ejbUserFacade.findByUsername(userView.getUsername()));
+	    event.setUser(userService.findByUsername(userView.getUsername()));
 	}
     }
 
@@ -189,7 +201,7 @@ public class ScheduleController implements Serializable {
      * @return the externalCourses
      */
     public SelectItem[] getExternalCourses() {
-	return externalCourses = externalCourses == null ? JsfUtil.getSelectItems(new ExternalCourseFacade().findAll(), true) : externalCourses;
+	return externalCourses = externalCourses == null ? JsfUtil.getSelectItems(new ExternalCourseServiceBean().findAll(), true) : externalCourses;
     }
 
     /**

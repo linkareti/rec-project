@@ -59,10 +59,29 @@ public class UserView implements Serializable {
 	this.domain = domain;
     }
 
+    /**
+     * This method should be overridden by the subclasses
+     * 
+     * @return returns dummy false
+     */
     public boolean isAdmin() {
 	return false;
     }
 
+    /**
+     * This method should be overridden by the subclasses
+     * 
+     * @return returns dummy false
+     */
+    public boolean isTeacher() {
+	return false;
+    }
+
+    /**
+     * This method should be overridden by the subclasses
+     * 
+     * @return returns dummy false
+     */
     public boolean isExternal() {
 	return false;
     }

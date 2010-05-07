@@ -1,7 +1,6 @@
 package com.linkare.rec.am.web;
 
 import java.io.Serializable;
-import java.net.MalformedURLException;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,8 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 
 import com.linkare.rec.am.model.LoginDomain;
-import com.linkare.rec.am.model.LoginDomainFacade;
-import com.linkare.rec.am.web.moodle.MoodleClientHelper;
+import com.linkare.rec.am.service.LoginDomainService;
+import com.linkare.rec.am.service.LoginDomainServiceLocal;
 import com.linkare.rec.am.web.util.JsfUtil;
 
 /**
@@ -25,24 +24,24 @@ public class LoginDomainBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB
-    private LoginDomainFacade facade;
+    @EJB(beanInterface = LoginDomainServiceLocal.class)
+    private LoginDomainService service;
 
     private List<LoginDomain> loginDomains;
 
     /**
-     * @return the facade
+     * @return the service
      */
-    public LoginDomainFacade getFacade() {
-	return facade;
+    public LoginDomainService getService() {
+	return service;
     }
 
     /**
-     * @param facade
-     *            the facade to set
+     * @param service
+     *            the service to set
      */
-    public void setFacade(LoginDomainFacade facade) {
-	this.facade = facade;
+    public void setFacade(LoginDomainService service) {
+	this.service = service;
     }
 
     /**
@@ -50,12 +49,7 @@ public class LoginDomainBean implements Serializable {
      */
     public SelectItem[] getLoginDomains() {
 	if (loginDomains == null) {
-	    loginDomains = facade.findAll();
-	    try {
-		MoodleClientHelper.registerLoginDomains(loginDomains);
-	    } catch (MalformedURLException e) {
-		throw new RuntimeException("error.invalidURL.registering.login.domains", e);
-	    }
+	    loginDomains = service.findAll();
 	}
 	return JsfUtil.getSelectItems(loginDomains, false);
     }

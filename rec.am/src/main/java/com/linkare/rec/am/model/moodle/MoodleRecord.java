@@ -18,18 +18,14 @@ public class MoodleRecord implements Serializable {
     @Column(name = "EXTERNAL_COURSE_ID", nullable = true, insertable = true, updatable = true)
     private String externalCourseId;
 
-    @Column(name = "DOMAIN", nullable = true, insertable = true, updatable = false)
-    private String domain;
-
     public MoodleRecord() {
 	super();
     }
 
-    public MoodleRecord(String externalUser, String externalCourseId, String domain) {
+    public MoodleRecord(String externalUser, String externalCourseId) {
 	this();
 	this.externalUser = externalUser;
 	this.externalCourseId = externalCourseId;
-	this.domain = domain;
     }
 
     /**
@@ -62,21 +58,6 @@ public class MoodleRecord implements Serializable {
 	this.externalCourseId = externalCourseId;
     }
 
-    /**
-     * @return the domain
-     */
-    public String getDomain() {
-	return domain;
-    }
-
-    /**
-     * @param domain
-     *            the domain to set
-     */
-    public void setDomain(String domain) {
-	this.domain = domain;
-    }
-
     @Override
     public boolean equals(final Object other) {
 	if (!(other instanceof MoodleRecord)) {
@@ -90,17 +71,15 @@ public class MoodleRecord implements Serializable {
 	int result = 14;
 	result = 29 * result + (getExternalUser() != null ? getExternalUser().hashCode() : 0);
 	result = 29 * result + (getExternalCourseId() != null ? getExternalCourseId().hashCode() : 0);
-	result = 29 * result + (getDomain() != null ? getDomain().hashCode() : 0);
 	return result;
     }
 
     private boolean equalsTo(final MoodleRecord other) {
-	return EqualityUtils.equals(getExternalUser(), other.getExternalUser()) && EqualityUtils.equals(getExternalCourseId(), other.getExternalCourseId())
-		&& EqualityUtils.equals(getDomain(), other.getDomain());
+	return EqualityUtils.equals(getExternalUser(), other.getExternalUser()) && EqualityUtils.equals(getExternalCourseId(), other.getExternalCourseId());
     }
 
     @Override
     public String toString() {
-	return getExternalUser() + "-" + getExternalCourseId() + "-" + getDomain();
+	return getExternalUser() + "-" + getExternalCourseId();
     }
 }

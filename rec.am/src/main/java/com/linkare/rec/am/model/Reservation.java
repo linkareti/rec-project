@@ -37,8 +37,9 @@ import com.linkare.rec.am.model.moodle.MoodleRecord;
 	@NamedQuery(name = "Reservation.findByExperimentNameInInterval", query = "Select r from Reservation r where (r.startDate between :startDate and :endDate or r.endDate between :startDate and :endDate) and r.experiment.name=:experimentName"),
 	@NamedQuery(name = "Reservation.findReservationsForInternalUserInDate", query = "Select r from Reservation r WHERE r.user.username=:username and r.startDate between :start and :end"),
 	@NamedQuery(name = "Reservation.findReservationsForInternalUser", query = "Select r from Reservation r WHERE r.user.username=:username"),
-	@NamedQuery(name = "Reservation.findReservationsForExternalUserInDate", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.moodleRecord.domain=:loginDomain and r.startDate between :start and :end"),
-	@NamedQuery(name = "Reservation.findReservationsForExternalUser", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.moodleRecord.domain=:loginDomain") })
+	@NamedQuery(name = "Reservation.findReservationsForExternalUserInDate", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.domain=:loginDomain and r.startDate between :start and :end"),
+	@NamedQuery(name = "Reservation.findReservationsForExternalUser", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.domain=:loginDomain"),
+	@NamedQuery(name = "Reservation.findAllocationsInIntervalAndLab", query = "Select r from Reservation r where (r.startDate between :startDate and :endDate) and r.experiment.laboratory.name = :laboratoryName") })
 public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +53,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     @Basic
     @Column(name = "TITLE")
     private String title;
+
+    @Column(name = "DOMAIN", nullable = true, insertable = true, updatable = false)
+    private String domain;
 
     @Basic
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -104,9 +108,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     public Reservation() {
     }
 
-    public Reservation(final String externalUser, final String externalCourse, final String domain) {
+    public Reservation(final String externalUser, final String externalCourse) {
 	this();
-	this.moodleRecord = new MoodleRecord(externalUser, externalCourse, domain);
+	this.moodleRecord = new MoodleRecord(externalUser, externalCourse);
     }
 
     /**
@@ -305,7 +309,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     }
 
     public String getReservedBy() {
-	return getUser() != null ? getUser().getUsername() : getMoodleRecord().getExternalUser();
+	return getUser() != null ? getUser().getUsername() : getMoodleRecord().getExternalUser() + "@" + getDomain();
     }
 
     public String getReservedTo() {
@@ -335,13 +339,11 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     }
 
     public String getDomain() {
-	return getMoodleRecord() == null ? null : getMoodleRecord().getDomain();
+	return domain;
     }
 
     public void setDomain(final String domain) {
-	if (getMoodleRecord() != null) {
-	    getMoodleRecord().setDomain(domain);
-	}
+	this.domain = domain;
     }
 
     public String getExternalCourse() {

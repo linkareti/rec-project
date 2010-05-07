@@ -1,23 +1,27 @@
-package com.linkare.rec.am.model;
+package com.linkare.rec.am.service;
 
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import org.primefaces.model.ScheduleEvent;
 
 import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.BooleanResult;
+import com.linkare.rec.am.model.Reservation;
 
 /**
  * 
  * @author Joao
  */
-@Stateless(name = "ReservationFacade")
-public class ReservationFacade extends Facade<Reservation, Long> {
+@Local(ReservationServiceLocal.class)
+@Stateless(name = "ReservationService")
+public class ReservationServiceBean extends BusinessServiceBean<Reservation, Long> implements ReservationService {
 
     @Override
     public void create(final Reservation reservation) {
@@ -33,7 +37,6 @@ public class ReservationFacade extends Facade<Reservation, Long> {
 	return isValid(reservation);
     }
 
-    @Override
     public Reservation edit(final Reservation reservation) {
 	final BooleanResult operationResult = canEdit(reservation);
 	if (operationResult.getResult() == Boolean.TRUE) {
@@ -98,8 +101,8 @@ public class ReservationFacade extends Facade<Reservation, Long> {
     @SuppressWarnings("unchecked")
     public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final User user) {
 	final List<ScheduleEvent> events = getEntityManager().createNamedQuery("Reservation.findReservationsForInternalUserInDate")
-							     .setParameter("username", user.getUsername()).setParameter("start", start)
-							     .setParameter("end", end).getResultList();
+							     .setParameter("username", user.getUsername()).setParameter("start", start, TemporalType.TIMESTAMP)
+							     .setParameter("end", end, TemporalType.TIMESTAMP).getResultList();
 	return events;
     }
 
@@ -115,7 +118,9 @@ public class ReservationFacade extends Facade<Reservation, Long> {
     public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final String externalUser, final String loginDomain) {
 	final List<ScheduleEvent> events = getEntityManager().createNamedQuery("Reservation.findReservationsForExternalUserInDate")
 							     .setParameter("externalUser", externalUser).setParameter("loginDomain", loginDomain)
-							     .setParameter("start", start).setParameter("end", end).getResultList();
+							     .setParameter("start", start, TemporalType.TIMESTAMP).setParameter("end", end,
+																TemporalType.TIMESTAMP)
+							     .getResultList();
 	return events;
     }
 
@@ -125,5 +130,10 @@ public class ReservationFacade extends Facade<Reservation, Long> {
 																	   externalUser)
 							     .setParameter("loginDomain", loginDomain).getResultList();
 	return events;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<ScheduleEvent> findAllReservations() {
+	return getEntityManager().createNamedQuery("Reservation.findAll").getResultList();
     }
 }

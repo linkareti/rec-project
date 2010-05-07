@@ -1,16 +1,20 @@
-package com.linkare.rec.am.model;
+package com.linkare.rec.am.service;
 
 import java.util.List;
 
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+
+import com.linkare.rec.am.model.Laboratory;
 
 /**
  * 
  * @author Joao
  */
-@Stateless(name = "LaboratoryFacade")
-public class LaboratoryFacade extends Facade<Laboratory, Long> {
+@Local(LaboratoryServiceLocal.class)
+@Stateless(name = "LaboratoryService")
+public class LaboratoryServiceBean extends BusinessServiceBean<Laboratory, Long> implements LaboratoryService {
 
     @Override
     public void create(final Laboratory laboratory) {

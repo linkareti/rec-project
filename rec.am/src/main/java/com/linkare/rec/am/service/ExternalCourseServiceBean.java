@@ -1,4 +1,4 @@
-package com.linkare.rec.am.model;
+package com.linkare.rec.am.service;
 
 import java.util.List;
 
@@ -7,7 +7,12 @@ import com.linkare.rec.am.web.moodle.MoodleClientHelper;
 import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.wsgen.moodle.UserRecord;
 
-public class ExternalCourseFacade extends Facade<ExternalCourse, String> {
+/**
+ * 
+ * @author Paulo Zenida - Linkare TI
+ * 
+ */
+public class ExternalCourseServiceBean extends BusinessServiceBean<ExternalCourse, String> implements ExternalCourseService {
 
     private List<ExternalCourse> courseRecords;
 
@@ -49,10 +54,12 @@ public class ExternalCourseFacade extends Facade<ExternalCourse, String> {
 	return findAll().size();
     }
 
+    @Override
     public UserRecord[] getStudents(final String courseShortName) {
 	return MoodleClientHelper.getStudents(courseShortName, SessionHelper.getLoginDomain(), SessionHelper.getLoginReturn());
     }
 
+    @Override
     public UserRecord[] getTeachers(final String courseShortName) {
 	return MoodleClientHelper.getTeachers(courseShortName, SessionHelper.getLoginDomain(), SessionHelper.getLoginReturn());
     }

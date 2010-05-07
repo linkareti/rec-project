@@ -17,7 +17,8 @@ import com.linkare.commons.utils.EqualityUtils;
 @Entity
 @Table(name = "LOGIN_DOMAIN")
 @NamedQueries( { @NamedQuery(name = "LoginDomain.findAll", query = "Select l from LoginDomain l"),
-	@NamedQuery(name = "LoginDomain.countAll", query = "Select count(l) from LoginDomain l") })
+	@NamedQuery(name = "LoginDomain.countAll", query = "Select count(l) from LoginDomain l"),
+	@NamedQuery(name = "LoginDomain.findByName", query = "Select l from LoginDomain l where l.name=:name") })
 public class LoginDomain extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;

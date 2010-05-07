@@ -1,17 +1,22 @@
-package com.linkare.rec.am.model;
+package com.linkare.rec.am.service;
 
 import java.util.List;
 
+import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
+
+import com.linkare.rec.am.model.LoginDomain;
 
 /**
  * 
  * @author Paulo Zenida - Linkare TI
  * 
  */
-@Stateless(name = "LoginDomainFacade")
-public class LoginDomainFacade extends Facade<LoginDomain, Long> {
+@Local(LoginDomainServiceLocal.class)
+@Stateless(name = "LoginDomainService")
+public class LoginDomainServiceBean extends BusinessServiceBean<LoginDomain, Long> implements LoginDomainService {
 
     @Override
     public LoginDomain find(final Long id) {
@@ -38,5 +43,18 @@ public class LoginDomainFacade extends Facade<LoginDomain, Long> {
     public int count() {
 	final Query query = getEntityManager().createNamedQuery("LoginDomain.countAll");
 	return ((Long) query.getSingleResult()).intValue();
+    }
+
+    @Override
+    public LoginDomain findByName(final String name) {
+	if (name == null) {
+	    return null;
+	}
+	try {
+	    return (LoginDomain) getEntityManager().createNamedQuery("LoginDomain.findByName").setParameter("name", name).getSingleResult();
+	} catch (NoResultException e) {
+	    return null;
+	}
+
     }
 }

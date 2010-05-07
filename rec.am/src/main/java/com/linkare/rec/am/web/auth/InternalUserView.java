@@ -50,4 +50,12 @@ public class InternalUserView extends UserView {
     public List<RoleType> getRoles() {
 	return roles = roles == null ? new ArrayList<RoleType>() : roles;
     }
+
+    /**
+     * One internal user is a teacher if it has the role teacher
+     */
+    @Override
+    public boolean isTeacher() {
+	return getRoles().contains(RoleType.TEACHER);
+    }
 }

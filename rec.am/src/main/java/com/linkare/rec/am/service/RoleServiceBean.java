@@ -1,8 +1,10 @@
-package com.linkare.rec.am.model;
+package com.linkare.rec.am.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import com.linkare.commons.dao.security.RoleDAO;
@@ -14,8 +16,9 @@ import com.linkare.commons.jpa.security.User;
  * @author Paulo Zenida - Linkare TI
  * 
  */
-@Stateless(name = "RoleFacade")
-public class RoleFacade extends Facade<Role, Long> {
+@Local(RoleServiceLocal.class)
+@Stateless(name = "RoleService")
+public class RoleServiceBean extends BusinessServiceBean<Role, Long> implements RoleService {
 
     private RoleDAO roleDAO;
 
@@ -65,10 +68,12 @@ public class RoleFacade extends Facade<Role, Long> {
 	return getOrCreateDAO().count();
     }
 
-    public List<User> getNonMembers(final List<User> members) {
-	return getOrCreateDAO().getNonMembers(members);
+    @Override
+    public List<User> getNonMembers(final Role role) {
+	return role == null ? Collections.<User> emptyList() : getOrCreateDAO().getNonMembers(role.getAllUsers());
     }
 
+    @Override
     public Role setUsersMembership(final Role role, final List<User> users) {
 	return getOrCreateDAO().setUsersMembership(role, mergeUsers(users));
     }

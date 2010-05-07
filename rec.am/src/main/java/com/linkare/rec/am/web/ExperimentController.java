@@ -9,18 +9,19 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.linkare.rec.am.model.Experiment;
-import com.linkare.rec.am.model.ExperimentFacade;
+import com.linkare.rec.am.service.ExperimentService;
+import com.linkare.rec.am.service.ExperimentServiceLocal;
 import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.ConstantUtils;
 
 @ManagedBean(name = "experimentController")
 @RequestScoped
-public class ExperimentController extends AbstractController<Long, Experiment, ExperimentFacade> {
+public class ExperimentController extends AbstractController<Long, Experiment, ExperimentService> {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB
-    private ExperimentFacade ejbFacade;
+    @EJB(beanInterface = ExperimentServiceLocal.class)
+    private ExperimentService service;
 
     public final Experiment getSelected() {
 	if (getCurrent() == null) {
@@ -30,8 +31,8 @@ public class ExperimentController extends AbstractController<Long, Experiment, E
     }
 
     @Override
-    protected ExperimentFacade getFacade() {
-	return ejbFacade;
+    protected ExperimentService getService() {
+	return service;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class ExperimentController extends AbstractController<Long, Experiment, E
 	    }
 	    ExperimentController controller = (ExperimentController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
 															    "experimentController");
-	    return controller.ejbFacade.find(getKey(value));
+	    return controller.service.find(getKey(value));
 	}
 
 	private Long getKey(String value) {
