@@ -13,4 +13,6 @@ import java.util.List;
 public interface AllocationManager extends Remote {
 
     public List<AllocationDTO> getBy(final Date begin, final Date end, final String laboratoryID) throws RemoteException, ParameterException;
+
+    public boolean authenticate(final String username, final String password) throws RemoteException, UnknownDomainException;
 }
