@@ -26,7 +26,7 @@ public class DefaultResource implements IResource {
 
 	private IResource enclosingResource = null;
 
-	private ResourceType resourceType = ResourceType.UNDEFINED;
+	private ResourceType resourceType = ResourceType.ROOT;
 
 	/** Creates a new instance of DefaultResource */
 	public DefaultResource(IResource enclosingResource, ResourceType resourceType, Map<String, String> properties) {
