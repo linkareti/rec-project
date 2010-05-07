@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.linkare</groupId>
 	<artifactId>rec.am-api</artifactId>
+	<name>rec.am-api</name>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<repositories>
@@ -18,6 +19,10 @@
 		</repository>
 	</repositories>
 
+	<organization>
+		<name>Linkare TI</name>
+		<url>http://www.linkare.com</url>
+	</organization>
 	<build>
 		<plugins>
 			<!-- Compiler plugin enforces Java 1.6 compatiblity -->
