@@ -5,6 +5,19 @@
 	<artifactId>rec.am-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<repositories>
+		<repository>
+			<id>public-repo</id>
+			<name>Linkare public repository</name>
+			<url>http://nexus.linkare.com/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>snap-repo</id>
+			<name>Linkare public snapshot repository</name>
+			<url>http://nexus.linkare.com/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<!-- Compiler plugin enforces Java 1.6 compatiblity -->
