@@ -43,6 +43,16 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	public static final DataProducerActivator DP_DEACTIVATOR = new DataProducerActivator();
 
 	public static String MCCONTROLLER_LOGGER = "MultiCastController.Logger";
+	
+	public static final String SYSPROP_MULTICAST_INIT_REF = "ReC.MultiCastController.InitRef";
+
+	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(System
+			.getProperty(SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
+
+	public static final String SYSPROP_MULTICAST_BIND_NAME = "ReC.MultiCastController.BindName";
+
+	public static final String MULTICAST_BIND_NAME = Defaults.defaultIfEmpty(System
+		.getProperty(SYSPROP_MULTICAST_BIND_NAME), "MultiCastController");
 
 	/*
 	 * i18n support
@@ -263,6 +273,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	/* End Inner Class - Hardware Connection Checker */
 
 	private ArrayList<ReCMultiCastHardware> multiCastHardwares = null;
+
+	
+	
 
 	/* Inner class - HardwareChangeListener implementation */
 	// Also contains the list of hardwares... in House Management

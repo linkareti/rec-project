@@ -36,7 +36,7 @@ public final class SecurityManagerFactory {
 
 	private void loadSecurityManager() {
 		String secManagerClassName = System.getProperty(SYSPROP_SECURITY_MANAGER_CLASS);
-		if (secManagerClassName == null || secManagerClassName.equals("")) {
+		if (secManagerClassName == null || secManagerClassName.trim().length()==0) {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"SecurityManager System Property not found... Loading DefaultSecurityManager!");
 			secManager = new DefaultSecurityManager();

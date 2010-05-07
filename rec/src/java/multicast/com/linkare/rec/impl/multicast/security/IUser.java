@@ -8,6 +8,8 @@ package com.linkare.rec.impl.multicast.security;
 
 import java.util.Map;
 
+import org.omg.CORBA.Any;
+
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
@@ -17,6 +19,6 @@ public interface IUser extends java.io.Serializable {
 
 	public byte[] getAuth();
 
-	public Map getProperties();
+	public Map<String, Any> getProperties();
 
 }

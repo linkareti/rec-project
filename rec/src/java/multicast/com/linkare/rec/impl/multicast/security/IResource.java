@@ -13,6 +13,7 @@ import java.util.Map;
  * @author José Pedro Pereira - Linkare TI
  */
 public interface IResource extends java.io.Serializable {
+	
 	IResource getEnclosingResource();
 
 	Map<String, String> getProperties();

@@ -30,6 +30,7 @@
 	<classpathentry kind="lib" path="elab/lib/windows/3d/j3daudio.jar"/>
 	<classpathentry kind="lib" path="elab/lib/windows/3d/j3dcore.jar"/>
 	<classpathentry kind="lib" path="rec/lib/compile/client/jcommon-1.0.12.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/multicast/rec.am-api-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="rec/lib/compile/client/javaws.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/jfreechart-1.0.9.jar"/>
