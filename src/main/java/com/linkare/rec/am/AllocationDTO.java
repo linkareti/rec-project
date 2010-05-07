@@ -1,7 +1,7 @@
 package com.linkare.rec.am;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,9 +13,9 @@ public class AllocationDTO implements Serializable {
 
     private static final long serialVersionUID = -4730231207036294734L;
 
-    private Calendar begin;
+    private Date begin;
 
-    private Calendar end;
+    private Date end;
 
     private String experimentId;
 
@@ -27,7 +27,7 @@ public class AllocationDTO implements Serializable {
 	super();
     }
 
-    public AllocationDTO(Calendar begin, Calendar end, String experimentId, List<String> users, List<String> owners) {
+    public AllocationDTO(final Date begin, final Date end, final String experimentId, final List<String> users, final List<String> owners) {
 	super();
 	this.begin = begin;
 	this.end = end;
@@ -39,7 +39,7 @@ public class AllocationDTO implements Serializable {
     /**
      * @return the begin
      */
-    public Calendar getBegin() {
+    public Date getBegin() {
 	return begin;
     }
 
@@ -47,14 +47,14 @@ public class AllocationDTO implements Serializable {
      * @param begin
      *            the begin to set
      */
-    public void setBegin(Calendar begin) {
+    public void setBegin(final Date begin) {
 	this.begin = begin;
     }
 
     /**
      * @return the end
      */
-    public Calendar getEnd() {
+    public Date getEnd() {
 	return end;
     }
 
@@ -62,7 +62,7 @@ public class AllocationDTO implements Serializable {
      * @param end
      *            the end to set
      */
-    public void setEnd(Calendar end) {
+    public void setEnd(final Date end) {
 	this.end = end;
     }
 
@@ -77,7 +77,7 @@ public class AllocationDTO implements Serializable {
      * @param experimentId
      *            the experimentId to set
      */
-    public void setExperimentId(String experimentId) {
+    public void setExperimentId(final String experimentId) {
 	this.experimentId = experimentId;
     }
 
@@ -92,7 +92,7 @@ public class AllocationDTO implements Serializable {
      * @param users
      *            the users to set
      */
-    public void setUsers(List<String> users) {
+    public void setUsers(final List<String> users) {
 	this.users = users;
     }
 
@@ -107,7 +107,7 @@ public class AllocationDTO implements Serializable {
      * @param owners
      *            the owners to set
      */
-    public void setOwners(List<String> owners) {
+    public void setOwners(final List<String> owners) {
 	this.owners = owners;
     }
 }
