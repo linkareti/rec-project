@@ -2,7 +2,7 @@ package com.linkare.rec.am;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface AllocationManager extends Remote {
 
-    public List<AllocationDTO> getBy(final Calendar begin, final Calendar end, final String laboratoryID) throws RemoteException, ParameterException;
+    public List<AllocationDTO> getBy(final Date begin, final Date end, final String laboratoryID) throws RemoteException, ParameterException;
 }
