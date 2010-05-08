@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.inject.Named;
 
-import com.linkare.commons.jpa.Deletable;
-import com.linkare.commons.jpa.Identifiable;
+import com.linkare.commons.dao.Deletable;
+import com.linkare.commons.dao.Identifiable;
 import com.linkare.commons.utils.EqualityUtils;
 import com.linkare.rec.am.web.moodle.MoodleClientHelper;
 import com.linkare.rec.am.wsgen.moodle.CourseRecord;

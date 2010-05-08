@@ -3,8 +3,8 @@ package com.linkare.rec.am.service;
 import java.io.Serializable;
 import java.util.List;
 
-import com.linkare.commons.jpa.Deletable;
-import com.linkare.commons.jpa.Identifiable;
+import com.linkare.commons.dao.Deletable;
+import com.linkare.commons.dao.Identifiable;
 
 /**
  * 

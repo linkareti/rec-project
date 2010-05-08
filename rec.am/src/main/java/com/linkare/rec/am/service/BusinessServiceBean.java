@@ -10,8 +10,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.linkare.commons.jpa.Deletable;
-import com.linkare.commons.jpa.Identifiable;
+import com.linkare.commons.dao.Deletable;
+import com.linkare.commons.dao.Identifiable;
 
 /**
  * 

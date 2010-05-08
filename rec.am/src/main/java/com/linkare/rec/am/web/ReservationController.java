@@ -9,7 +9,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.linkare.rec.am.model.Reservation;
-import com.linkare.rec.am.model.moodle.MoodleRecord;
 import com.linkare.rec.am.service.ReservationService;
 import com.linkare.rec.am.service.ReservationServiceLocal;
 import com.linkare.rec.am.web.controller.AbstractController;
@@ -71,32 +70,6 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	    if (object instanceof Reservation) {
 		Reservation o = (Reservation) object;
 		return getStringKey(o.getIdInternal());
-	    } else {
-		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
-			+ Reservation.class.getName());
-	    }
-	}
-    }
-
-    @FacesConverter(forClass = MoodleRecord.class)
-    public static class MoodleRecordConverter implements Converter {
-
-	@Override
-	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-	    if (value == null || value.length() == 0) {
-		return null;
-	    }
-	    return new MoodleRecord(value);
-	}
-
-	@Override
-	public final String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-	    if (object == null) {
-		return null;
-	    }
-	    if (object instanceof MoodleRecord) {
-		final MoodleRecord record = (MoodleRecord) object;
-		return record.getExternalCourseId();
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
 			+ Reservation.class.getName());

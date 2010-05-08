@@ -9,8 +9,8 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-import com.linkare.commons.jpa.Deletable;
-import com.linkare.commons.jpa.Identifiable;
+import com.linkare.commons.dao.Deletable;
+import com.linkare.commons.dao.Identifiable;
 import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.rec.am.service.BusinessService;
 import com.linkare.rec.am.web.util.ConstantUtils;
