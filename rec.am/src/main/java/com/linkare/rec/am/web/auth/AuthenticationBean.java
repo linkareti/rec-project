@@ -8,12 +8,12 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.service.UserService;
 import com.linkare.rec.am.service.UserServiceLocal;
 import com.linkare.rec.am.web.ex.AuthenticationException;
 import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.web.util.ConstantUtils;
-import com.linkare.rec.am.web.util.JsfUtil;
 
 /**
  * 
@@ -38,7 +38,7 @@ public class AuthenticationBean {
 	    authenticate();
 	    registerUserIfNecessary();
 	} catch (AuthenticationException e) {
-	    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("error.login.failed"));
+	    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("error.login.failed"));
 	    return null;
 	}
 	return "index";

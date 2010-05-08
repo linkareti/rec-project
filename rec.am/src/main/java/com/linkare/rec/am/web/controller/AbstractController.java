@@ -12,9 +12,9 @@ import javax.faces.model.SelectItem;
 import com.linkare.commons.dao.Deletable;
 import com.linkare.commons.dao.Identifiable;
 import com.linkare.commons.jpa.exceptions.DomainException;
+import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.service.BusinessService;
 import com.linkare.rec.am.web.util.ConstantUtils;
-import com.linkare.rec.am.web.util.JsfUtil;
 
 /**
  * 
@@ -40,13 +40,14 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
     public String create() {
 	try {
 	    getService().create(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_CREATE_KEY));
+	    JsfUtil.addSuccessMessage(ConstantUtils.LABEL_INFO, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_CREATE_KEY));
 	    return prepareCreate();
 	} catch (Exception e) {
 	    if (e.getCause() instanceof DomainException) {
-		JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
+		JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
 	    } else {
-		JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+		JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE)
+										 .getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
 	    }
 	    return null;
 	}
@@ -55,10 +56,10 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
     public String update() {
 	try {
 	    getService().edit(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_UPDATE_KEY));
+	    JsfUtil.addSuccessMessage(ConstantUtils.LABEL_INFO, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_UPDATE_KEY));
 	    return ConstantUtils.VIEW;
 	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+	    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
 	    return null;
 	}
     }
@@ -85,9 +86,9 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
     protected void performDestroy() {
 	try {
 	    getService().remove(current);
-	    JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_REMOVE_KEY));
+	    JsfUtil.addSuccessMessage(ConstantUtils.LABEL_INFO, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.INFO_REMOVE_KEY));
 	} catch (Exception e) {
-	    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+	    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
 	}
     }
 

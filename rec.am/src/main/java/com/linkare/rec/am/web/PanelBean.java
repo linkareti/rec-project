@@ -9,8 +9,8 @@ import javax.faces.bean.RequestScoped;
 import org.primefaces.event.CloseEvent;
 import org.primefaces.event.ToggleEvent;
 
+import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.web.util.ConstantUtils;
-import com.linkare.rec.am.web.util.JsfUtil;
 
 /**
  * 
@@ -24,11 +24,11 @@ public class PanelBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public void handleClose(CloseEvent event) {
-	JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.panelClose"));
+	JsfUtil.addSuccessMessage(ConstantUtils.LABEL_INFO, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.panelClose"));
     }
 
     public void handleToggle(ToggleEvent event) {
-	JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.panelToggled")
+	JsfUtil.addSuccessMessage(ConstantUtils.LABEL_INFO, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.panelToggled")
 		+ ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("label." + event.getVisibility().name()));
     }
 }

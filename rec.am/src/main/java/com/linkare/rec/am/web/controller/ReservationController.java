@@ -1,4 +1,4 @@
-package com.linkare.rec.am.web;
+package com.linkare.rec.am.web.controller;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -8,50 +8,48 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.linkare.rec.am.model.Laboratory;
-import com.linkare.rec.am.service.LaboratoryService;
-import com.linkare.rec.am.service.LaboratoryServiceLocal;
-import com.linkare.rec.am.web.controller.AbstractController;
+import com.linkare.rec.am.model.Reservation;
+import com.linkare.rec.am.service.ReservationService;
+import com.linkare.rec.am.service.ReservationServiceLocal;
 import com.linkare.rec.am.web.util.ConstantUtils;
 
-@ManagedBean(name = "laboratoryController")
+@ManagedBean(name = "reservationController")
 @RequestScoped
-public class LaboratoryController extends AbstractController<Long, Laboratory, LaboratoryService> {
+public class ReservationController extends AbstractController<Long, Reservation, ReservationService> {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB(beanInterface = LaboratoryServiceLocal.class)
-    private LaboratoryService service;
+    @EJB(beanInterface = ReservationServiceLocal.class)
+    private ReservationService service;
 
-    @Override
-    public final Laboratory getSelected() {
+    public final Reservation getSelected() {
 	if (getCurrent() == null) {
-	    setCurrent(new Laboratory());
+	    setCurrent(new Reservation());
 	}
 	return getCurrent();
     }
 
     @Override
-    protected LaboratoryService getService() {
+    protected ReservationService getService() {
 	return service;
     }
 
     @Override
     public final String prepareCreate() {
-	setCurrent(new Laboratory());
+	setCurrent(new Reservation());
 	return ConstantUtils.CREATE;
     }
 
-    @FacesConverter(value = "laboratoryConverter", forClass = Laboratory.class)
-    public static class LaboratoryConverter implements Converter {
+    @FacesConverter(value = "reservationConverter", forClass = Reservation.class)
+    public static class ReservationConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
 	    if (value == null || value.length() == 0) {
 		return null;
 	    }
-	    LaboratoryController controller = (LaboratoryController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
-															    "laboratoryController");
+	    ReservationController controller = (ReservationController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(),
+															      null, "reservationController");
 	    return controller.service.find(getKey(value));
 	}
 
@@ -68,12 +66,12 @@ public class LaboratoryController extends AbstractController<Long, Laboratory, L
 	    if (object == null) {
 		return null;
 	    }
-	    if (object instanceof Laboratory) {
-		Laboratory o = (Laboratory) object;
+	    if (object instanceof Reservation) {
+		Reservation o = (Reservation) object;
 		return getStringKey(o.getIdInternal());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
-			+ Laboratory.class.getName());
+			+ Reservation.class.getName());
 	    }
 	}
     }

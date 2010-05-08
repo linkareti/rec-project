@@ -1,4 +1,4 @@
-package com.linkare.rec.am.web;
+package com.linkare.rec.am.web.controller;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -10,7 +10,6 @@ import javax.faces.convert.FacesConverter;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.service.ExternalCourseService;
 import com.linkare.rec.am.service.ExternalCourseServiceBean;
-import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.wsgen.moodle.UserRecord;
 
 /**

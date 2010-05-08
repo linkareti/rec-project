@@ -1,9 +1,9 @@
 package com.linkare.rec.am.web.moodle;
 
+import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.web.auth.ExternalUserView;
 import com.linkare.rec.am.web.auth.UserView;
 import com.linkare.rec.am.web.util.ConstantUtils;
-import com.linkare.rec.am.web.util.JsfUtil;
 import com.linkare.rec.am.wsgen.moodle.LoginReturn;
 
 /**

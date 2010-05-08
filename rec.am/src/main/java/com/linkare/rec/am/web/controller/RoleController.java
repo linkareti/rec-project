@@ -1,4 +1,4 @@
-package com.linkare.rec.am.web;
+package com.linkare.rec.am.web.controller;
 
 import java.util.List;
 import java.util.ResourceBundle;
@@ -15,11 +15,10 @@ import org.primefaces.model.DualListModel;
 
 import com.linkare.commons.jpa.security.Role;
 import com.linkare.commons.jpa.security.User;
+import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.service.RoleService;
 import com.linkare.rec.am.service.RoleServiceLocal;
-import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.ConstantUtils;
-import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "roleController")
 @RequestScoped
@@ -111,7 +110,7 @@ public class RoleController extends AbstractController<Long, Role, RoleService> 
 
     public String setUsersMembership() {
 	getService().setUsersMembership(getSelected(), getUsers().getTarget());
-	JsfUtil.addSuccessMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.association"));
+	JsfUtil.addSuccessMessage(ConstantUtils.LABEL_INFO, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.association"));
 	return prepareEdit();
     }
 }

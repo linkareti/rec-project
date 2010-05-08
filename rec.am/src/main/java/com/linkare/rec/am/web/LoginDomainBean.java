@@ -8,10 +8,10 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 
+import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.service.LoginDomainService;
 import com.linkare.rec.am.service.LoginDomainServiceLocal;
-import com.linkare.rec.am.web.util.JsfUtil;
 
 /**
  * 

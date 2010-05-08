@@ -9,7 +9,8 @@ import org.primefaces.event.CloseEvent;
 import org.primefaces.event.ResizeEvent;
 import org.primefaces.event.ToggleEvent;
 
-import com.linkare.rec.am.web.util.JsfUtil;
+import com.linkare.jsf.utils.JsfUtil;
+import com.linkare.rec.am.web.util.ConstantUtils;
 
 /**
  * 
@@ -23,7 +24,7 @@ public class LayoutBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public void handleClose(CloseEvent event) {
-	JsfUtil.addSuccessMessage("Closed unit id:'" + event.getComponent().getId() + "'");
+	JsfUtil.addSuccessMessage(ConstantUtils.LABEL_INFO, "Closed unit id:'" + event.getComponent().getId() + "'");
     }
 
     public void handleToggle(ToggleEvent event) {

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.linkare.rec.am.web;
+package com.linkare.rec.am.web.controller;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -38,6 +38,7 @@ import org.primefaces.model.ScheduleModel;
 import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.StringUtils;
+import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.service.ExternalCourseServiceBean;
@@ -48,7 +49,6 @@ import com.linkare.rec.am.service.UserServiceLocal;
 import com.linkare.rec.am.web.moodle.MoodleClientHelper;
 import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.web.util.ConstantUtils;
-import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "scheduleController")
 @ViewScoped
@@ -124,9 +124,10 @@ public class ScheduleController implements Serializable {
 		reservationService.create(event);
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
-		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
+		    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
 		} else {
-		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+		    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE)
+										     .getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
 		}
 		// Remove the newly added event if an exception was captured
 		eventModel.deleteEvent(event);
@@ -138,9 +139,10 @@ public class ScheduleController implements Serializable {
 		eventModel.updateEvent(event);
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
-		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
+		    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
 		} else {
-		    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+		    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE)
+										     .getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
 		}
 		event = reservationService.find(event.getIdInternal());
 		eventModel.updateEvent(event);

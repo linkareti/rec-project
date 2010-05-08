@@ -1,4 +1,4 @@
-package com.linkare.rec.am.web;
+package com.linkare.rec.am.web.controller;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -8,49 +8,49 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.linkare.rec.am.model.Experiment;
-import com.linkare.rec.am.service.ExperimentService;
-import com.linkare.rec.am.service.ExperimentServiceLocal;
-import com.linkare.rec.am.web.controller.AbstractController;
+import com.linkare.rec.am.model.Laboratory;
+import com.linkare.rec.am.service.LaboratoryService;
+import com.linkare.rec.am.service.LaboratoryServiceLocal;
 import com.linkare.rec.am.web.util.ConstantUtils;
 
-@ManagedBean(name = "experimentController")
+@ManagedBean(name = "laboratoryController")
 @RequestScoped
-public class ExperimentController extends AbstractController<Long, Experiment, ExperimentService> {
+public class LaboratoryController extends AbstractController<Long, Laboratory, LaboratoryService> {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB(beanInterface = ExperimentServiceLocal.class)
-    private ExperimentService service;
+    @EJB(beanInterface = LaboratoryServiceLocal.class)
+    private LaboratoryService service;
 
-    public final Experiment getSelected() {
+    @Override
+    public final Laboratory getSelected() {
 	if (getCurrent() == null) {
-	    setCurrent(new Experiment());
+	    setCurrent(new Laboratory());
 	}
 	return getCurrent();
     }
 
     @Override
-    protected ExperimentService getService() {
+    protected LaboratoryService getService() {
 	return service;
     }
 
     @Override
     public final String prepareCreate() {
-	setCurrent(new Experiment());
+	setCurrent(new Laboratory());
 	return ConstantUtils.CREATE;
     }
 
-    @FacesConverter(value = "experimentConverter", forClass = Experiment.class)
-    public static class ExperimentConverter implements Converter {
+    @FacesConverter(value = "laboratoryConverter", forClass = Laboratory.class)
+    public static class LaboratoryConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
 	    if (value == null || value.length() == 0) {
 		return null;
 	    }
-	    ExperimentController controller = (ExperimentController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
-															    "experimentController");
+	    LaboratoryController controller = (LaboratoryController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
+															    "laboratoryController");
 	    return controller.service.find(getKey(value));
 	}
 
@@ -67,12 +67,12 @@ public class ExperimentController extends AbstractController<Long, Experiment, E
 	    if (object == null) {
 		return null;
 	    }
-	    if (object instanceof Experiment) {
-		Experiment o = (Experiment) object;
+	    if (object instanceof Laboratory) {
+		Laboratory o = (Laboratory) object;
 		return getStringKey(o.getIdInternal());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
-			+ Experiment.class.getName());
+			+ Laboratory.class.getName());
 	    }
 	}
     }

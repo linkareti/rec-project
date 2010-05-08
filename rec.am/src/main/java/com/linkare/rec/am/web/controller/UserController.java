@@ -1,4 +1,4 @@
-package com.linkare.rec.am.web;
+package com.linkare.rec.am.web.controller;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -11,7 +11,6 @@ import javax.faces.convert.FacesConverter;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.rec.am.service.UserService;
 import com.linkare.rec.am.service.UserServiceLocal;
-import com.linkare.rec.am.web.controller.AbstractController;
 import com.linkare.rec.am.web.util.ConstantUtils;
 
 @ManagedBean(name = "userController")

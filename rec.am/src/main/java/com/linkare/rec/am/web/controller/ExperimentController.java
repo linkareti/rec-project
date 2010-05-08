@@ -1,4 +1,4 @@
-package com.linkare.rec.am.web;
+package com.linkare.rec.am.web.controller;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -8,49 +8,48 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.linkare.rec.am.model.Reservation;
-import com.linkare.rec.am.service.ReservationService;
-import com.linkare.rec.am.service.ReservationServiceLocal;
-import com.linkare.rec.am.web.controller.AbstractController;
+import com.linkare.rec.am.model.Experiment;
+import com.linkare.rec.am.service.ExperimentService;
+import com.linkare.rec.am.service.ExperimentServiceLocal;
 import com.linkare.rec.am.web.util.ConstantUtils;
 
-@ManagedBean(name = "reservationController")
+@ManagedBean(name = "experimentController")
 @RequestScoped
-public class ReservationController extends AbstractController<Long, Reservation, ReservationService> {
+public class ExperimentController extends AbstractController<Long, Experiment, ExperimentService> {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB(beanInterface = ReservationServiceLocal.class)
-    private ReservationService service;
+    @EJB(beanInterface = ExperimentServiceLocal.class)
+    private ExperimentService service;
 
-    public final Reservation getSelected() {
+    public final Experiment getSelected() {
 	if (getCurrent() == null) {
-	    setCurrent(new Reservation());
+	    setCurrent(new Experiment());
 	}
 	return getCurrent();
     }
 
     @Override
-    protected ReservationService getService() {
+    protected ExperimentService getService() {
 	return service;
     }
 
     @Override
     public final String prepareCreate() {
-	setCurrent(new Reservation());
+	setCurrent(new Experiment());
 	return ConstantUtils.CREATE;
     }
 
-    @FacesConverter(value = "reservationConverter", forClass = Reservation.class)
-    public static class ReservationConverter implements Converter {
+    @FacesConverter(value = "experimentConverter", forClass = Experiment.class)
+    public static class ExperimentConverter implements Converter {
 
 	@Override
 	public final Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
 	    if (value == null || value.length() == 0) {
 		return null;
 	    }
-	    ReservationController controller = (ReservationController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(),
-															      null, "reservationController");
+	    ExperimentController controller = (ExperimentController) facesContext.getApplication().getELResolver().getValue(facesContext.getELContext(), null,
+															    "experimentController");
 	    return controller.service.find(getKey(value));
 	}
 
@@ -67,12 +66,12 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	    if (object == null) {
 		return null;
 	    }
-	    if (object instanceof Reservation) {
-		Reservation o = (Reservation) object;
+	    if (object instanceof Experiment) {
+		Experiment o = (Experiment) object;
 		return getStringKey(o.getIdInternal());
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
-			+ Reservation.class.getName());
+			+ Experiment.class.getName());
 	    }
 	}
     }
