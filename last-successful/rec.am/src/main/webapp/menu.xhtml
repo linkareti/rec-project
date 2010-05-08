@@ -1,0 +1,24 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"><h:form>
+	<p:menu style="width:200px">
+		<p:submenu>
+			<p:menuitem value="#{bundle['menu.backoffice']}" ajax="false"
+				action="/protected/backoffice"
+				rendered="#{!userView.external and userView.admin}" />
+			<p:menuitem value="#{bundle['menu.schedule']}" ajax="false"
+				action="/protected/reservation/Schedule"
+				rendered="#{userView.teacher}" />
+			<p:menuitem value="#{bundle['menu.events']}" ajax="false"
+				action="/schedule" />
+		</p:submenu>
+		<p:submenu>
+			<p:menuitem value="#{bundle['menu.index']}" action="/index"
+				immediate="true" ajax="false" />
+			<p:menuitem value="#{bundle['menu.logout']}"
+				action="#{authenticationBean.logout}" />
+		</p:submenu>
+	</p:menu>
+</h:form></div>
