@@ -1,5 +1,16 @@
 package com.linkare.rec.am.service;
 
+import static com.linkare.rec.am.model.Reservation.COUNT_ALL_QUERYNAME;
+import static com.linkare.rec.am.model.Reservation.FIND_ALL_QUERYNAME;
+import static com.linkare.rec.am.model.Reservation.FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERYNAME;
+import static com.linkare.rec.am.model.Reservation.FIND_FOR_USER_AFTER_DATE_QUERYNAME;
+import static com.linkare.rec.am.model.Reservation.FIND_FOR_USER_IN_DATE_QUERYNAME;
+import static com.linkare.rec.am.model.Reservation.FIND_FOR_USER_QUERYNAME;
+import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_END_DATE;
+import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_EXPERIMENT_NAME;
+import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_START_DATE;
+import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_USERNAME;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +30,7 @@ import com.linkare.commons.utils.BooleanResult;
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.model.moodle.ExternalUser;
+import com.linkare.rec.am.web.auth.UserView;
 
 /**
  * 
@@ -34,21 +46,19 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
     @EJB(beanInterface = UserServiceLocal.class)
     private UserService userService;
 
-    private ExternalCourseService externalCourseService;
-
     @Override
     public void create(final Reservation reservation) {
 	final BooleanResult operationResult = canCreate(reservation);
 	if (operationResult.getResult() == Boolean.TRUE) {
-	    if (!reservation.getHasGroup()) {
-		final Group reservationGroup = new Group(reservation.getExternalCourse());
+	    if (!reservation.isInternal()) {
+		final ExternalCourse externalCourse = reservation.getExternalCourse();
+		// Generate some unique name, relating this group with the unique registration uuid
+		final Group reservationGroup = new Group(externalCourse.getShortname() + "@" + reservation.getId());
 		groupService.create(reservationGroup);
 		reservation.setGroup(reservationGroup);
-		externalCourseService = new ExternalCourseServiceBean();
-		final ExternalCourse externalCourse = externalCourseService.find(reservation.getExternalCourse());
-		final List<User> usersToCreate = getUsersToCreate(externalCourse.getStudents());
-		userService.createUsers(usersToCreate);
-		groupService.setUsersMembership(reservationGroup, usersToCreate);
+		final List<String> studentsUsernames = getStudentsUsernames(externalCourse.getStudents());
+		final List<User> users = userService.getOrCreateUsers(studentsUsernames);
+		groupService.setUsersMembership(reservationGroup, users);
 	    }
 	    getEntityManager().persist(reservation);
 	} else {
@@ -56,10 +66,10 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
 	}
     }
 
-    private List<User> getUsersToCreate(final List<ExternalUser> externalUsers) {
-	final List<User> result = new ArrayList<User>();
+    private List<String> getStudentsUsernames(final List<ExternalUser> externalUsers) {
+	final List<String> result = new ArrayList<String>();
 	for (final ExternalUser externalUser : externalUsers) {
-	    result.add(new User(externalUser.toString()));
+	    result.add(externalUser.getFullUsername());
 	}
 	return result;
     }
@@ -83,10 +93,10 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
 
     @SuppressWarnings("unchecked")
     private BooleanResult isValid(final Reservation reservation) {
-	final Query query = getEntityManager().createNamedQuery("Reservation.findByExperimentNameInInterval").setParameter("startDate",
-															   reservation.getStartDate())
-					      .setParameter("endDate", reservation.getEndDate()).setParameter("experimentName",
-													      reservation.getExperiment().getName());
+	final Query query = getEntityManager().createNamedQuery(FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERYNAME).setParameter(QUERY_PARAM_START_DATE,
+															    reservation.getStartDate())
+					      .setParameter(QUERY_PARAM_END_DATE, reservation.getEndDate()).setParameter(QUERY_PARAM_EXPERIMENT_NAME,
+															 reservation.getExperiment().getName());
 	final List<Reservation> reservationsForExperimentNameInInterval = query.getResultList();
 	return reservation.isValid(reservationsForExperimentNameInInterval);
     }
@@ -115,7 +125,7 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
 
     @SuppressWarnings("unchecked")
     public List<Reservation> find(final boolean all, final int firstResult, final int maxResults) {
-	Query q = getEntityManager().createNamedQuery("Reservation.findAll");
+	Query q = getEntityManager().createNamedQuery(FIND_ALL_QUERYNAME);
 	if (!all) {
 	    q.setMaxResults(maxResults);
 	    q.setFirstResult(firstResult);
@@ -125,46 +135,35 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
 
     @Override
     public int count() {
-	final Query query = getEntityManager().createNamedQuery("Reservation.countAll");
+	final Query query = getEntityManager().createNamedQuery(COUNT_ALL_QUERYNAME);
 	return ((Long) query.getSingleResult()).intValue();
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final User user) {
-	final List<ScheduleEvent> events = getEntityManager().createNamedQuery("Reservation.findReservationsForInternalUserInDate")
-							     .setParameter("username", user.getUsername()).setParameter("start", start, TemporalType.TIMESTAMP)
-							     .setParameter("end", end, TemporalType.TIMESTAMP).getResultList();
-	return events;
+    public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final UserView userView) {
+	if (end == null) {
+	    return getEntityManager().createNamedQuery(FIND_FOR_USER_AFTER_DATE_QUERYNAME).setParameter(QUERY_PARAM_USERNAME, userView.getFullUsername())
+				     .setParameter(QUERY_PARAM_START_DATE, start, TemporalType.TIMESTAMP).getResultList();
+	} else {
+	    return getEntityManager().createNamedQuery(FIND_FOR_USER_IN_DATE_QUERYNAME).setParameter(QUERY_PARAM_USERNAME, userView.getFullUsername())
+				     .setParameter(QUERY_PARAM_START_DATE, start, TemporalType.TIMESTAMP).setParameter(QUERY_PARAM_END_DATE, end,
+														       TemporalType.TIMESTAMP).getResultList();
+	}
     }
 
-    @SuppressWarnings("unchecked")
-    public List<ScheduleEvent> findReservationsFor(final User user) {
-	final List<ScheduleEvent> events = getEntityManager().createNamedQuery("Reservation.findReservationsForInternalUser").setParameter("username",
-																	   user.getUsername())
-							     .getResultList();
-	return events;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final String externalUser, final String loginDomain) {
-	final List<ScheduleEvent> events = getEntityManager().createNamedQuery("Reservation.findReservationsForExternalUserInDate")
-							     .setParameter("externalUser", externalUser).setParameter("loginDomain", loginDomain)
-							     .setParameter("start", start, TemporalType.TIMESTAMP).setParameter("end", end,
-																TemporalType.TIMESTAMP)
-							     .getResultList();
-	return events;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<ScheduleEvent> findReservationsFor(final String externalUser, final String loginDomain) {
-	final List<ScheduleEvent> events = getEntityManager().createNamedQuery("Reservation.findReservationsForExternalUser").setParameter("externalUser",
-																	   externalUser)
-							     .setParameter("loginDomain", loginDomain).getResultList();
-	return events;
-    }
-
+    @Override
     @SuppressWarnings("unchecked")
     public List<ScheduleEvent> findAllReservations() {
-	return getEntityManager().createNamedQuery("Reservation.findAll").getResultList();
+	return getEntityManager().createNamedQuery(FIND_ALL_QUERYNAME).getResultList();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<ScheduleEvent> findReservationsFor(UserView userView) {
+	final List<ScheduleEvent> events = getEntityManager().createNamedQuery(FIND_FOR_USER_QUERYNAME).setParameter(QUERY_PARAM_USERNAME,
+														     userView.getFullUsername())
+							     .getResultList();
+	return events;
     }
 }

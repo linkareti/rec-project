@@ -2,12 +2,16 @@ package com.linkare.rec.am.web.auth;
 
 import java.util.ResourceBundle;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import com.linkare.rec.am.service.UserService;
+import com.linkare.rec.am.service.UserServiceLocal;
 import com.linkare.rec.am.web.ex.AuthenticationException;
+import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JsfUtil;
 
@@ -24,19 +28,36 @@ public class AuthenticationBean {
 
     private String password;
 
-    private String loginDomain;
+    private String domain;
+
+    @EJB(beanInterface = UserServiceLocal.class)
+    private UserService userService;
 
     public String login() {
 	try {
-	    LoginProviderFactory.getLoginProvider(getLoginDomain()).login(
-									  (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-													   .getRequest(), getUsername(), getPassword(),
-									  getLoginDomain());
+	    authenticate();
+	    registerUserIfNecessary();
 	} catch (AuthenticationException e) {
 	    JsfUtil.addErrorMessage(ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("error.login.failed"));
 	    return null;
 	}
 	return "index";
+    }
+
+    private void authenticate() throws AuthenticationException {
+	final LoginProvider loginProvider = LoginProviderFactory.getLoginProvider(getDomain());
+	loginProvider
+		     .login((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest(), getUsername(), getPassword(), getDomain());
+    }
+
+    private void registerUserIfNecessary() {
+	if (!isInternalDomain(getDomain())) {
+	    userService.registerExternalUser(SessionHelper.getUserView().getFullUsername());
+	}
+    }
+
+    private boolean isInternalDomain(final String domain) {
+	return ConstantUtils.INTERNAL_DOMAIN_NAME.equalsIgnoreCase(domain);
     }
 
     public String logout() {
@@ -75,17 +96,17 @@ public class AuthenticationBean {
     }
 
     /**
-     * @return the loginDomain
+     * @return the domain
      */
-    public String getLoginDomain() {
-	return loginDomain;
+    public String getDomain() {
+	return domain;
     }
 
     /**
-     * @param loginDomain
-     *            the loginDomain to set
+     * @param domain
+     *            the domain to set
      */
-    public void setLoginDomain(String loginDomain) {
-	this.loginDomain = loginDomain;
+    public void setDomain(String domain) {
+	this.domain = domain;
     }
 }

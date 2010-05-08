@@ -5,13 +5,15 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.linkare.commons.utils.StringUtils;
+
 /**
  * 
  * @author Paulo Zenida - Linkare TI
  * 
  */
-@SessionScoped
 @ManagedBean(name = "userView")
+@SessionScoped
 public class UserView implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,6 +59,10 @@ public class UserView implements Serializable {
      */
     public void setDomain(String domain) {
 	this.domain = domain;
+    }
+
+    public String getFullUsername() {
+	return getUsername() + (StringUtils.isBlank(getDomain()) ? "" : "@" + getDomain());
     }
 
     /**

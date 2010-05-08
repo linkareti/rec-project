@@ -1,7 +1,5 @@
 package com.linkare.rec.am.web;
 
-import java.util.Calendar;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -15,9 +13,7 @@ import com.linkare.rec.am.model.moodle.MoodleRecord;
 import com.linkare.rec.am.service.ReservationService;
 import com.linkare.rec.am.service.ReservationServiceLocal;
 import com.linkare.rec.am.web.controller.AbstractController;
-import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.web.util.ConstantUtils;
-import com.linkare.rec.am.web.util.JsfUtil;
 
 @ManagedBean(name = "reservationController")
 @RequestScoped
@@ -30,7 +26,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 
     public final Reservation getSelected() {
 	if (getCurrent() == null) {
-	    setCurrent(new Reservation(SessionHelper.getLoginDomain()));
+	    setCurrent(new Reservation());
 	}
 	return getCurrent();
     }
@@ -44,21 +40,6 @@ public class ReservationController extends AbstractController<Long, Reservation,
     public final String prepareCreate() {
 	setCurrent(new Reservation());
 	return ConstantUtils.CREATE;
-    }
-
-    public final String prepareCreateExternal() {
-	final String externalUser = SessionHelper.getUsername();
-	final String externalCourse = JsfUtil.getRequestParameter("externalCourse");
-	final String domain = SessionHelper.getLoginDomain();
-	setCurrent(new Reservation(externalUser, externalCourse));
-	return ConstantUtils.CREATE;
-    }
-
-    public final void processEndDateAndEndTimeSlot() {
-	Calendar cal = Calendar.getInstance();
-	cal.setTime(getCurrent().getStartDate());
-	getCurrent().setStartDate(cal.getTime());
-	getCurrent().setEndDate(cal.getTime());
     }
 
     @FacesConverter(value = "reservationConverter", forClass = Reservation.class)
@@ -105,8 +86,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	    if (value == null || value.length() == 0) {
 		return null;
 	    }
-	    final String[] valueElements = value.split("_");
-	    return new MoodleRecord(valueElements[0], valueElements[1]);
+	    return new MoodleRecord(value);
 	}
 
 	@Override
@@ -116,7 +96,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	    }
 	    if (object instanceof MoodleRecord) {
 		final MoodleRecord record = (MoodleRecord) object;
-		return record.getExternalUser() + "_" + record.getExternalCourseId();
+		return record.getExternalCourseId();
 	    } else {
 		throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "
 			+ Reservation.class.getName());

@@ -1,5 +1,6 @@
 package com.linkare.rec.am.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -79,12 +80,25 @@ public class UserServiceBean extends BusinessServiceBean<User, Long> implements 
     }
 
     @Override
-    public void createUsers(List<User> usersToCreate) {
-	for (final User user : usersToCreate) {
-	    final User otherUser = findByUsername(user.getUsername());
-	    if (otherUser != null) {
+    public List<User> getOrCreateUsers(List<String> usernames) {
+	final List<User> result = new ArrayList<User>();
+	for (final String username : usernames) {
+	    User user = findByUsername(username);
+	    if (user == null) {
+		user = new User(username);
 		create(user);
 	    }
+	    result.add(user);
+	}
+	return result;
+    }
+
+    @Override
+    public void registerExternalUser(final String username) {
+	final User existingUser = findByUsername(username);
+	if (existingUser == null) {
+	    User user = new User(username);
+	    create(user);
 	}
     }
 }

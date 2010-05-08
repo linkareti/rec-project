@@ -23,7 +23,7 @@
 					title="#{bundle['user.login.password']}" />
 				<h:outputText value="#{bundle['app.loginDomain']}" for="loginDomain" />
 				<h:selectOneMenu id="loginDomain"
-					value="#{authenticationBean.loginDomain}"
+					value="#{authenticationBean.domain}"
 					title="#{bundle['app.loginDomain']}">
 					<f:selectItems value="#{loginDomainBean.loginDomains}" />
 				</h:selectOneMenu>

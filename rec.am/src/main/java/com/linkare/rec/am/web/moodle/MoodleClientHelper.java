@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.naming.NamingException;
 import javax.xml.rpc.ServiceException;
 
+import com.linkare.commons.utils.StringUtils;
 import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.model.moodle.ExternalUser;
@@ -137,7 +138,9 @@ public final class MoodleClientHelper {
     private static List<ExternalUser> toExternalUsers(final String loginDomain, final UserRecord[] userRecords) {
 	final List<ExternalUser> result = new ArrayList<ExternalUser>(userRecords == null ? 0 : userRecords.length);
 	for (final UserRecord userRecord : userRecords) {
-	    result.add(new ExternalUser(loginDomain, userRecord));
+	    if (StringUtils.isNotBlank(userRecord.getUsername())) {
+		result.add(new ExternalUser(loginDomain, userRecord));
+	    }
 	}
 	return result;
     }

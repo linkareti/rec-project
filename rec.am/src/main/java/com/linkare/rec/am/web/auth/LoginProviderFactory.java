@@ -9,8 +9,8 @@ import com.linkare.rec.am.web.util.ConstantUtils;
  */
 public final class LoginProviderFactory {
 
-    public static LoginProvider getLoginProvider(final String loginDomain) {
-	if (ConstantUtils.INTERNAL_DOMAIN_NAME.equals(loginDomain)) {
+    public static LoginProvider getLoginProvider(final String domain) {
+	if (ConstantUtils.INTERNAL_DOMAIN_NAME.equals(domain)) {
 	    return new LocalLoginProvider();
 	}
 	return new MoodleLoginProvider();

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,6 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 import org.joda.time.Interval;
 import org.joda.time.PeriodType;
@@ -23,7 +23,8 @@ import com.linkare.commons.jpa.security.Group;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.BooleanResult;
 import com.linkare.commons.utils.EqualityUtils;
-import com.linkare.rec.am.model.moodle.MoodleRecord;
+import com.linkare.rec.am.model.moodle.ExternalCourse;
+import com.linkare.rec.am.web.util.ConstantUtils;
 
 /**
  * 
@@ -31,16 +32,46 @@ import com.linkare.rec.am.model.moodle.MoodleRecord;
  */
 @Entity
 @Table(name = "RESERVATION")
-@NamedQueries( {
-	@NamedQuery(name = "Reservation.findAll", query = "Select r from Reservation r"),
-	@NamedQuery(name = "Reservation.countAll", query = "Select count(r) from Reservation r"),
-	@NamedQuery(name = "Reservation.findByExperimentNameInInterval", query = "Select r from Reservation r where (r.startDate between :startDate and :endDate or r.endDate between :startDate and :endDate) and r.experiment.name=:experimentName"),
-	@NamedQuery(name = "Reservation.findReservationsForInternalUserInDate", query = "Select r from Reservation r WHERE r.user.username=:username and r.startDate between :start and :end"),
-	@NamedQuery(name = "Reservation.findReservationsForInternalUser", query = "Select r from Reservation r WHERE r.user.username=:username"),
-	@NamedQuery(name = "Reservation.findReservationsForExternalUserInDate", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.domain=:loginDomain and r.startDate between :start and :end"),
-	@NamedQuery(name = "Reservation.findReservationsForExternalUser", query = "Select r from Reservation r WHERE r.moodleRecord.externalUser=:externalUser and r.domain=:loginDomain"),
-	@NamedQuery(name = "Reservation.findAllocationsInIntervalAndLab", query = "Select r from Reservation r where (r.startDate between :startDate and :endDate) and r.experiment.laboratory.name = :laboratoryName") })
+@NamedQueries( { @NamedQuery(name = Reservation.FIND_ALL_QUERYNAME, query = Reservation.FIND_ALL_QUERY),
+	@NamedQuery(name = Reservation.COUNT_ALL_QUERYNAME, query = Reservation.COUNT_ALL_QUERY),
+	@NamedQuery(name = Reservation.FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERYNAME, query = Reservation.FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERY),
+	@NamedQuery(name = Reservation.FIND_FOR_USER_IN_DATE_QUERYNAME, query = Reservation.FIND_FOR_USER_IN_DATE_QUERY),
+	@NamedQuery(name = Reservation.FIND_FOR_USER_AFTER_DATE_QUERY, query = Reservation.FIND_FOR_USER_AFTER_DATE_QUERY),
+	@NamedQuery(name = Reservation.FIND_FOR_USER_QUERYNAME, query = Reservation.FIND_FOR_USER_QUERY),
+	@NamedQuery(name = Reservation.FIND_IN_INTERVAL_AND_LAB_QUERYNAME, query = Reservation.FIND_IN_INTERVAL_AND_LAB_QUERY) })
 public class Reservation extends DefaultDomainObject implements ScheduleEvent {
+
+    public static final String QUERY_PARAM_START_DATE = "startDate";
+    public static final String QUERY_PARAM_END_DATE = "endDate";
+    public static final String QUERY_PARAM_EXPERIMENT_NAME = "experimentName";
+    public static final String QUERY_PARAM_USERNAME = "username";
+    public static final String QUERY_PARAM_LAB_NAME = "laboratoryName";
+
+    public static final String FIND_ALL_QUERYNAME = "Reservation.findAll";
+    public static final String FIND_ALL_QUERY = "Select r from Reservation r";
+
+    public static final String COUNT_ALL_QUERYNAME = "Reservation.countAll";
+    public static final String COUNT_ALL_QUERY = "Select count(r) from Reservation r";
+
+    public static final String FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERYNAME = "Reservation.findByExperimentNameInInterval";
+    public static final String FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERY = "Select r from Reservation r where (r.startDate between :" + QUERY_PARAM_START_DATE
+	    + " and :" + QUERY_PARAM_END_DATE + " or r.endDate between :" + QUERY_PARAM_START_DATE + " and :" + QUERY_PARAM_END_DATE
+	    + ") and r.experiment.name = :" + QUERY_PARAM_EXPERIMENT_NAME;
+
+    public static final String FIND_FOR_USER_IN_DATE_QUERYNAME = "Reservation.findForUserInDate";
+    public static final String FIND_FOR_USER_IN_DATE_QUERY = "Select r from Reservation r WHERE r.user.username = :" + QUERY_PARAM_USERNAME
+	    + " and r.startDate between :" + QUERY_PARAM_START_DATE + " and :" + QUERY_PARAM_END_DATE;
+
+    public static final String FIND_FOR_USER_AFTER_DATE_QUERYNAME = "Reservation.findForUserAfterDate";
+    public static final String FIND_FOR_USER_AFTER_DATE_QUERY = "Select r from Reservation r WHERE r.user.username = :" + QUERY_PARAM_USERNAME
+	    + " and r.startDate >= :" + QUERY_PARAM_START_DATE;
+
+    public static final String FIND_FOR_USER_QUERYNAME = "Reservation.findForUser";
+    public static final String FIND_FOR_USER_QUERY = "Select r from Reservation r WHERE r.user.username = :" + QUERY_PARAM_USERNAME;
+
+    public static final String FIND_IN_INTERVAL_AND_LAB_QUERYNAME = "Reservation.findInIntervalAndLab";
+    public static final String FIND_IN_INTERVAL_AND_LAB_QUERY = "Select r from Reservation r where (r.startDate between :" + QUERY_PARAM_START_DATE + " and :"
+	    + QUERY_PARAM_END_DATE + ") and r.experiment.laboratory.name = :" + QUERY_PARAM_LAB_NAME;
 
     private static final long serialVersionUID = 1L;
 
@@ -53,9 +84,6 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     @Basic
     @Column(name = "TITLE")
     private String title;
-
-    @Column(name = "DOMAIN", nullable = true, insertable = true, updatable = false)
-    private String domain;
 
     @Basic
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -86,8 +114,8 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     @Column(name = "RESERVATION_ID", insertable = true, updatable = false, unique = true)
     private String reservationId;
 
-    @Embedded
-    private MoodleRecord moodleRecord;
+    @Transient
+    private ExternalCourse externalCourse;
 
     /**
      * Constructor
@@ -108,14 +136,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     public Reservation() {
     }
 
-    public Reservation(final String domain) {
+    public Reservation(final User reservedBy, final String domain) {
 	this();
-	this.domain = domain;
-    }
-
-    public Reservation(final String externalUser, final String externalCourse) {
-	this();
-	this.moodleRecord = new MoodleRecord(externalUser, externalCourse);
+	setUser(reservedBy);
     }
 
     /**
@@ -186,9 +209,6 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
      *            new value of endDate
      */
     public void setEndDate(Date endDate) {
-	//	if(getStartDate() != null && endDate != null && !endDate.after(getStartDate())) {
-	//	    throw new DomainException("error.end")
-	//	}
 	this.endDate = endDate;
     }
 
@@ -298,27 +318,13 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 	this.group = group;
     }
 
-    /**
-     * @return the moodleRecord
-     */
-    public MoodleRecord getMoodleRecord() {
-	return moodleRecord;
-    }
-
-    /**
-     * @param moodleRecord
-     *            the moodleRecord to set
-     */
-    public void setMoodleRecord(MoodleRecord moodleRecord) {
-	this.moodleRecord = moodleRecord;
-    }
-
     public String getReservedBy() {
-	return getUser() != null ? getUser().getUsername() : getMoodleRecord().getExternalUser() + "@" + getDomain();
+	return getUser().getUsername();
     }
 
     public String getReservedTo() {
-	return getGroup() != null ? getGroup().getName() : getMoodleRecord().getExternalCourseId();
+	final String name = getGroup().getName();
+	return name.contains("@") ? name.substring(0, name.indexOf("@")) : name;
     }
 
     public boolean getHasUser() {
@@ -331,38 +337,6 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     public boolean getHasGroup() {
 	return getGroup() != null;
-    }
-
-    public String getExternalUser() {
-	return getMoodleRecord() == null ? null : getMoodleRecord().getExternalUser();
-    }
-
-    public void setExternalUser(final String externalUser) {
-	if (getMoodleRecord() != null) {
-	    getMoodleRecord().setExternalUser(externalUser);
-	}
-    }
-
-    public String getDomain() {
-	return domain;
-    }
-
-    public void setDomain(final String domain) {
-	this.domain = domain;
-    }
-
-    public String getExternalCourse() {
-	return getMoodleRecord() == null ? null : getMoodleRecord().getExternalCourseId();
-    }
-
-    public void setExternalCourse(final String externalCourse) {
-	if (getMoodleRecord() != null) {
-	    getMoodleRecord().setExternalCourseId(externalCourse);
-	}
-    }
-
-    public boolean getHasMoodleRecord() {
-	return getMoodleRecord() != null;
     }
 
     public Interval getInterval() {
@@ -423,5 +397,24 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 	}
 
 	return BooleanResult.TRUE_RESULT;
+    }
+
+    public boolean isInternal() {
+	return getUser().getUsername().endsWith(ConstantUtils.INTERNAL_DOMAIN_NAME);
+    }
+
+    /**
+     * @return the externalCourse
+     */
+    public ExternalCourse getExternalCourse() {
+	return externalCourse;
+    }
+
+    /**
+     * @param externalCourse
+     *            the externalCourse to set
+     */
+    public void setExternalCourse(ExternalCourse externalCourse) {
+	this.externalCourse = externalCourse;
     }
 }

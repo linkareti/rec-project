@@ -182,8 +182,7 @@ public class ExternalUser extends UserRecord {
 	return loginDomain;
     }
 
-    @Override
-    public String toString() {
+    public String getFullUsername() {
 	return getUsername() + "@" + getLoginDomain();
     }
 }

@@ -24,11 +24,6 @@ public final class SessionHelper {
 	return null;
     }
 
-    public static String getUsername() {
-	final UserView userView = getUserView();
-	return userView == null ? null : userView.getUsername();
-    }
-
     public static String getLoginDomain() {
 	final UserView userView = getUserView();
 	return userView == null ? null : userView.getDomain();

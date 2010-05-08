@@ -18,5 +18,7 @@ public interface UserService extends BusinessService<User, Long> {
 
     public User findByUsername(final String username);
 
-    public void createUsers(final List<User> usersToCreate);
+    public List<User> getOrCreateUsers(final List<String> usernames);
+
+    public void registerExternalUser(final String username);
 }

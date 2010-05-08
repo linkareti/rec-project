@@ -20,8 +20,6 @@ import javax.servlet.http.HttpSession;
 
 public final class JsfUtil {
 
-    private static final int MAX_ITEM_INDEX = 49;
-
     private JsfUtil() {
     }
 

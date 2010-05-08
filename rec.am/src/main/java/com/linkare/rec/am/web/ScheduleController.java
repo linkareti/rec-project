@@ -28,7 +28,6 @@ import javax.faces.model.SelectItem;
 
 import org.joda.time.DateTime;
 import org.primefaces.event.DateSelectEvent;
-import org.primefaces.event.FlowEvent;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.ScheduleEntrySelectEvent;
@@ -41,13 +40,12 @@ import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.StringUtils;
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
-import com.linkare.rec.am.model.moodle.MoodleRecord;
 import com.linkare.rec.am.service.ExternalCourseServiceBean;
 import com.linkare.rec.am.service.ReservationService;
 import com.linkare.rec.am.service.ReservationServiceLocal;
 import com.linkare.rec.am.service.UserService;
 import com.linkare.rec.am.service.UserServiceLocal;
-import com.linkare.rec.am.web.auth.UserView;
+import com.linkare.rec.am.web.moodle.MoodleClientHelper;
 import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JsfUtil;
@@ -74,13 +72,10 @@ public class ScheduleController implements Serializable {
 
     private String theme;
 
+    private ExternalCourse externalCourse;
+
     private List<ScheduleEvent> getEvents() {
-	final UserView userView = SessionHelper.getUserView();
-	if (userView.isExternal()) {
-	    return reservationService.findReservationsFor(userView.getUsername(), userView.getDomain());
-	}
-	final User user = userService.findByUsername(userView.getUsername());
-	return reservationService.findReservationsFor(user);
+	return reservationService.findReservationsFor(SessionHelper.getUserView());
     }
 
     private List<ScheduleEvent> getAllEvents() {
@@ -123,6 +118,7 @@ public class ScheduleController implements Serializable {
     public final String createOrUpdate() {
 	if (StringUtils.isBlank(event.getId())) {
 	    try {
+		event.setUser(getUser());
 		// It is necessary to first update the model so that the event has a reservation id
 		eventModel.addEvent(event);
 		reservationService.create(event);
@@ -153,23 +149,22 @@ public class ScheduleController implements Serializable {
 	return null;
     }
 
+    private User getUser() {
+	return userService.findByUsername(SessionHelper.getUserView().getFullUsername());
+    }
+
     public void onEventSelect(ScheduleEntrySelectEvent selectEvent) {
 	event = (Reservation) selectEvent.getScheduleEvent();
+	event.setExternalCourse(MoodleClientHelper.findCourse(event.getReservedTo(), SessionHelper.getLoginDomain(), SessionHelper.getLoginReturn()));
     }
 
     public void onDateSelect(DateSelectEvent selectEvent) {
-	final UserView userView = SessionHelper.getUserView();
 	event = new Reservation("", selectEvent.getDate(), selectEvent.getDate());
-	if (userView.isExternal()) {
-	    event.setMoodleRecord(new MoodleRecord());
-	    event.getMoodleRecord().setExternalUser(userView.getUsername());
-	} else {
-	    event.setUser(userService.findByUsername(userView.getUsername()));
-	}
     }
 
     public void onEventMove(ScheduleEntryMoveEvent selectEvent) {
 	event = (Reservation) selectEvent.getScheduleEvent();
+	event.setExternalCourse(MoodleClientHelper.findCourse(event.getReservedTo(), SessionHelper.getLoginDomain(), SessionHelper.getLoginReturn()));
 	moveEvent(true, event, selectEvent.getMinuteDelta());
 	createOrUpdate();
     }
@@ -206,10 +201,6 @@ public class ScheduleController implements Serializable {
 	return externalCourses = externalCourses == null ? JsfUtil.getSelectItems(new ExternalCourseServiceBean().findAll(), true) : externalCourses;
     }
 
-    public String onFlowProcess(final FlowEvent event) {
-	return event.getNewStep();
-    }
-
     /**
      * @param externalCourses
      *            the externalCourses to set
@@ -218,7 +209,18 @@ public class ScheduleController implements Serializable {
 	this.externalCourses = Arrays.copyOf(externalCourses, externalCourses.length);
     }
 
+    /**
+     * @return the externalCourse
+     */
     public ExternalCourse getExternalCourse() {
-	return getEvent() == null ? null : new ExternalCourseServiceBean().find(getEvent().getExternalCourse());
+	return externalCourse;
+    }
+
+    /**
+     * @param externalCourse
+     *            the externalCourse to set
+     */
+    public void setExternalCourse(ExternalCourse externalCourse) {
+	this.externalCourse = externalCourse;
     }
 }

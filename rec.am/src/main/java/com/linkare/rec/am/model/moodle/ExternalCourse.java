@@ -6,6 +6,7 @@ import javax.inject.Named;
 
 import com.linkare.commons.jpa.Deletable;
 import com.linkare.commons.jpa.Identifiable;
+import com.linkare.commons.utils.EqualityUtils;
 import com.linkare.rec.am.web.moodle.MoodleClientHelper;
 import com.linkare.rec.am.wsgen.moodle.CourseRecord;
 import com.linkare.rec.am.wsgen.moodle.LoginReturn;
@@ -191,5 +192,25 @@ public class ExternalCourse implements Identifiable<String>, Deletable {
     @Override
     public boolean delete() {
 	return false;
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+	if (!(other instanceof ExternalCourse)) {
+	    return false;
+	}
+	return equalsTo((ExternalCourse) other);
+    }
+
+    @Override
+    public int hashCode() {
+	int result = 14;
+	result = 29 * result + (getShortname() != null ? getShortname().hashCode() : 0);
+	result = 29 * result + (getLoginDomain() != null ? getLoginDomain().hashCode() : 0);
+	return result;
+    }
+
+    private boolean equalsTo(final ExternalCourse other) {
+	return EqualityUtils.equals(getShortname(), other.getShortname()) && EqualityUtils.equals(getLoginDomain(), other.getLoginDomain());
     }
 }
