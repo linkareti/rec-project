@@ -77,4 +77,14 @@ public class UserServiceBean extends BusinessServiceBean<User, Long> implements 
 	final User mergedUser = getEntityManager().merge(user);
 	return mergedUser == null ? Collections.<Role> emptyList() : mergedUser.getAllParentRoles();
     }
+
+    @Override
+    public void createUsers(List<User> usersToCreate) {
+	for (final User user : usersToCreate) {
+	    final User otherUser = findByUsername(user.getUsername());
+	    if (otherUser != null) {
+		create(user);
+	    }
+	}
+    }
 }

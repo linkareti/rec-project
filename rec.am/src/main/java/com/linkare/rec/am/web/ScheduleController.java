@@ -28,6 +28,7 @@ import javax.faces.model.SelectItem;
 
 import org.joda.time.DateTime;
 import org.primefaces.event.DateSelectEvent;
+import org.primefaces.event.FlowEvent;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.ScheduleEntrySelectEvent;
@@ -39,6 +40,7 @@ import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.StringUtils;
 import com.linkare.rec.am.model.Reservation;
+import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.model.moodle.MoodleRecord;
 import com.linkare.rec.am.service.ExternalCourseServiceBean;
 import com.linkare.rec.am.service.ReservationService;
@@ -204,11 +206,19 @@ public class ScheduleController implements Serializable {
 	return externalCourses = externalCourses == null ? JsfUtil.getSelectItems(new ExternalCourseServiceBean().findAll(), true) : externalCourses;
     }
 
+    public String onFlowProcess(final FlowEvent event) {
+	return event.getNewStep();
+    }
+
     /**
      * @param externalCourses
      *            the externalCourses to set
      */
     public void setExternalCourses(SelectItem[] externalCourses) {
 	this.externalCourses = Arrays.copyOf(externalCourses, externalCourses.length);
+    }
+
+    public ExternalCourse getExternalCourse() {
+	return getEvent() == null ? null : new ExternalCourseServiceBean().find(getEvent().getExternalCourse());
     }
 }

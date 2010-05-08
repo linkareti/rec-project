@@ -15,6 +15,7 @@ import javax.xml.rpc.ServiceException;
 
 import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
+import com.linkare.rec.am.model.moodle.ExternalUser;
 import com.linkare.rec.am.service.LoginDomainService;
 import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JndiHelper;
@@ -85,8 +86,9 @@ public final class MoodleClientHelper {
 
     public static List<ExternalCourse> getCurrentUserCourses(final String loginDomain, final LoginReturn loginReturn) {
 	try {
-	    return toExternalCourses(getInstance(loginDomain).moodleWsPort.get_my_courses(getClient(loginReturn), getSessionkey(loginReturn), null, null)
-									  .getCourses());
+	    return toExternalCourses(loginDomain, loginReturn, getInstance(loginDomain).moodleWsPort.get_my_courses(getClient(loginReturn),
+														    getSessionkey(loginReturn), null, null)
+												    .getCourses());
 	} catch (RemoteException e) {
 	    return Collections.<ExternalCourse> emptyList();
 	}
@@ -109,22 +111,61 @@ public final class MoodleClientHelper {
     }
 
     public static ExternalCourse findCourse(final String id, final String loginDomain, final LoginReturn loginReturn) {
+	if (id == null) {
+	    return null;
+	}
 	final List<ExternalCourse> courseRecords = new ArrayList<ExternalCourse>(1);
 	try {
-	    courseRecords.addAll(toExternalCourses(getInstance(loginDomain).moodleWsPort.get_course(getClient(loginReturn), getSessionkey(loginReturn),
-												    id == null ? null : id, "shortname").getCourses()));
+	    courseRecords.addAll(toExternalCourses(loginDomain, loginReturn, getInstance(loginDomain).moodleWsPort.get_course(getClient(loginReturn),
+															      getSessionkey(loginReturn),
+															      id == null ? null : id,
+															      "shortname").getCourses()));
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	}
 	return courseRecords.size() == 0 ? null : courseRecords.get(0);
     }
 
-    private static List<ExternalCourse> toExternalCourses(final CourseRecord[] courseRecords) {
+    private static List<ExternalCourse> toExternalCourses(final String loginDomain, final LoginReturn loginReturn, final CourseRecord[] courseRecords) {
 	final List<ExternalCourse> result = new ArrayList<ExternalCourse>(courseRecords == null ? 0 : courseRecords.length);
 	for (final CourseRecord courseRecord : courseRecords) {
-	    result.add(new ExternalCourse(courseRecord));
+	    result.add(new ExternalCourse(loginDomain, loginReturn, courseRecord));
 	}
 	return result;
+    }
+
+    private static List<ExternalUser> toExternalUsers(final String loginDomain, final UserRecord[] userRecords) {
+	final List<ExternalUser> result = new ArrayList<ExternalUser>(userRecords == null ? 0 : userRecords.length);
+	for (final UserRecord userRecord : userRecords) {
+	    result.add(new ExternalUser(loginDomain, userRecord));
+	}
+	return result;
+    }
+
+    public static List<ExternalUser> getStudents(final ExternalCourse externalCourse) {
+	try {
+	    return toExternalUsers(externalCourse.getLoginDomain(),
+				   getInstance(externalCourse.getLoginDomain()).moodleWsPort.get_students(getClient(externalCourse.getLoginReturn()),
+													  getSessionkey(externalCourse.getLoginReturn()),
+													  externalCourse.getShortname(), "shortname")
+											    .getUsers());
+	} catch (RemoteException e) {
+	    e.printStackTrace();
+	    return Collections.<ExternalUser> emptyList();
+	}
+    }
+
+    public static List<ExternalUser> getTeachers(final ExternalCourse externalCourse) {
+	try {
+	    return toExternalUsers(externalCourse.getLoginDomain(),
+				   getInstance(externalCourse.getLoginDomain()).moodleWsPort.get_teachers(getClient(externalCourse.getLoginReturn()),
+													  getSessionkey(externalCourse.getLoginReturn()),
+													  externalCourse.getShortname(), "shortname")
+											    .getUsers());
+	} catch (RemoteException e) {
+	    e.printStackTrace();
+	    return Collections.<ExternalUser> emptyList();
+	}
     }
 
     public static UserRecord[] getStudents(final String courseShortName, final String loginDomain, final LoginReturn loginReturn) {

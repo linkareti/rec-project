@@ -1,8 +1,10 @@
 package com.linkare.rec.am.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
@@ -11,9 +13,12 @@ import javax.persistence.TemporalType;
 import org.primefaces.model.ScheduleEvent;
 
 import com.linkare.commons.jpa.exceptions.DomainException;
+import com.linkare.commons.jpa.security.Group;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.BooleanResult;
 import com.linkare.rec.am.model.Reservation;
+import com.linkare.rec.am.model.moodle.ExternalCourse;
+import com.linkare.rec.am.model.moodle.ExternalUser;
 
 /**
  * 
@@ -23,14 +28,40 @@ import com.linkare.rec.am.model.Reservation;
 @Stateless(name = "ReservationService")
 public class ReservationServiceBean extends BusinessServiceBean<Reservation, Long> implements ReservationService {
 
+    @EJB(beanInterface = GroupServiceLocal.class)
+    private GroupService groupService;
+
+    @EJB(beanInterface = UserServiceLocal.class)
+    private UserService userService;
+
+    private ExternalCourseService externalCourseService;
+
     @Override
     public void create(final Reservation reservation) {
 	final BooleanResult operationResult = canCreate(reservation);
 	if (operationResult.getResult() == Boolean.TRUE) {
+	    if (!reservation.getHasGroup()) {
+		final Group reservationGroup = new Group(reservation.getExternalCourse());
+		groupService.create(reservationGroup);
+		reservation.setGroup(reservationGroup);
+		externalCourseService = new ExternalCourseServiceBean();
+		final ExternalCourse externalCourse = externalCourseService.find(reservation.getExternalCourse());
+		final List<User> usersToCreate = getUsersToCreate(externalCourse.getStudents());
+		userService.createUsers(usersToCreate);
+		groupService.setUsersMembership(reservationGroup, usersToCreate);
+	    }
 	    getEntityManager().persist(reservation);
 	} else {
 	    throw new DomainException(operationResult.getMessage());
 	}
+    }
+
+    private List<User> getUsersToCreate(final List<ExternalUser> externalUsers) {
+	final List<User> result = new ArrayList<User>();
+	for (final ExternalUser externalUser : externalUsers) {
+	    result.add(new User(externalUser.toString()));
+	}
+	return result;
     }
 
     protected BooleanResult canCreate(final Reservation reservation) {

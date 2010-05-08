@@ -30,7 +30,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
 
     public final Reservation getSelected() {
 	if (getCurrent() == null) {
-	    setCurrent(new Reservation());
+	    setCurrent(new Reservation(SessionHelper.getLoginDomain()));
 	}
 	return getCurrent();
     }

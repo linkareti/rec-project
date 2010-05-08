@@ -30,77 +30,136 @@
 					onEventMoveUpdate="msg" onEventResizeUpdate="msg" slotMinutes="15"
 					view="agendaWeek">
 					<p:scheduleEventDialog header="#{bundle['label.event.header']}">
+
 						<h:inputHidden id="idInternal"
 							value="#{scheduleController.event.idInternal}" />
 						<h:inputHidden id="id" value="#{scheduleController.event.id}" />
-						<h:panelGrid columns="2" border="0">
-							<h:outputLabel for="title" value="#{bundle['reservation.title']}" />
-							<h:inputText id="title" value="#{scheduleController.event.title}" />
-							<h:outputLabel value="#{bundle['reservation.experiment']}"
-								for="experiment" />
-							<h:selectOneMenu id="experiment"
-								value="#{scheduleController.event.experiment}"
-								title="#{bundle['reservation.experiment']}" required="true"
-								converter="experimentConverter">
-								<f:selectItems
-									value="#{experimentController.itemsAvailableSelectOne}" />
-							</h:selectOneMenu>
-							<h:outputLabel value="#{bundle['reservation.reservedBy']}"
-								for="user" rendered="#{!userView.external}" />
-							<h:selectOneMenu id="user"
-								value="#{scheduleController.event.user}"
-								title="#{bundle['reservation.user']}"
-								required="#{!userView.external}"
-								rendered="#{!userView.external}" converter="userConverter">
-								<f:selectItems value="#{userController.itemsAvailableSelectOne}" />
-							</h:selectOneMenu>
-							<h:outputLabel value="#{bundle['reservation.reservedBy']}"
-								for="externalUser" rendered="#{userView.external}" />
-							<h:inputText id="externalUser"
-								value="#{scheduleController.event.externalUser}"
-								required="#{userView.external}" rendered="#{userView.external}" />
-							<h:outputLabel value="#{bundle['reservation.reservedTo']}"
-								for="group" rendered="#{!userView.external}" />
-							<h:selectOneMenu id="group"
-								value="#{scheduleController.event.group}"
-								title="#{bundle['reservation.group']}"
-								required="#{!userView.external}" converter="groupConverter"
-								rendered="#{!userView.external}">
-								<f:selectItems
-									value="#{groupController.itemsAvailableSelectOne}" />
-							</h:selectOneMenu>
-							<h:outputLabel value="#{bundle['reservation.reservedTo']}"
-								for="externalCourse" rendered="#{userView.external}" />
-							<h:selectOneMenu id="externalCourse"
-								value="#{scheduleController.event.externalCourse}"
-								required="#{userView.external}" rendered="#{userView.external}">
-								<f:selectItems
-									value="#{externalCourseController.itemsAvailableSelectOne}" />
-							</h:selectOneMenu>
-							<h:outputLabel for="startDate"
-								value="#{bundle['reservation.startDate']}" />
-							<p:inputMask id="startDate"
-								value="#{scheduleController.event.startDate}"
-								mask="99/99/9999 99:99"
-								label="#{bundle['reservation.startDate']}">
-								<f:convertDateTime timeZone="Europe/Lisbon" type="both"
-									pattern="dd/MM/yyyy HH:mm" />
-							</p:inputMask>
-							<h:outputLabel for="endDate"
-								value="#{bundle['reservation.endDate']}" />
-							<p:inputMask id="endDate"
-								value="#{scheduleController.event.endDate}"
-								label="#{bundle['reservation.endDate']}" mask="99/99/9999 99:99">
-								<f:convertDateTime timeZone="Europe/Lisbon" type="both"
-									pattern="dd/MM/yyyy HH:mm" />
-							</p:inputMask>
-							<p:commandButton value="#{bundle['operation.save']}"
-								actionListener="#{scheduleController.addEvent}" update="msg"
-								oncomplete="myschedule.update();" />
-							<p:commandButton value="#{bundle['operation.remove']}"
-								actionListener="#{scheduleController.removeEvent}" update="msg"
-								oncomplete="myschedule.update();" />
-						</h:panelGrid>
+<!-- 
+						<p:wizard widgetVar="wiz"
+							flowListener="#{scheduleController.onFlowProcess}">
+
+							<p:tab>
+
+								<p:panel header="Step1">
+-->
+									<h:panelGrid columns="2" border="0">
+										<h:outputLabel for="title"
+											value="#{bundle['reservation.title']}" />
+										<h:inputText id="title"
+											value="#{scheduleController.event.title}" />
+										<h:outputLabel value="#{bundle['reservation.experiment']}"
+											for="experiment" />
+										<h:selectOneMenu id="experiment"
+											value="#{scheduleController.event.experiment}"
+											title="#{bundle['reservation.experiment']}" required="true"
+											converter="experimentConverter">
+											<f:selectItems
+												value="#{experimentController.itemsAvailableSelectOne}" />
+										</h:selectOneMenu>
+										<h:outputLabel value="#{bundle['reservation.reservedBy']}"
+											for="user" rendered="#{!userView.external}" />
+										<h:selectOneMenu id="user"
+											value="#{scheduleController.event.user}"
+											title="#{bundle['reservation.user']}"
+											required="#{!userView.external}"
+											rendered="#{!userView.external}" converter="userConverter">
+											<f:selectItems
+												value="#{userController.itemsAvailableSelectOne}" />
+										</h:selectOneMenu>
+										<h:outputLabel value="#{bundle['reservation.reservedBy']}"
+											for="externalUser" rendered="#{userView.external}" />
+										<h:inputText id="externalUser"
+											value="#{scheduleController.event.externalUser}"
+											required="#{userView.external}"
+											rendered="#{userView.external}" />
+										<h:outputLabel value="#{bundle['reservation.reservedTo']}"
+											for="group" rendered="#{!userView.external}" />
+										<h:selectOneMenu id="group"
+											value="#{scheduleController.event.group}"
+											title="#{bundle['reservation.group']}"
+											required="#{!userView.external}" converter="groupConverter"
+											rendered="#{!userView.external}">
+											<f:selectItems
+												value="#{groupController.itemsAvailableSelectOne}" />
+										</h:selectOneMenu>
+										<h:outputLabel value="#{bundle['reservation.reservedTo']}"
+											for="externalCourse" rendered="#{userView.external}" />
+										<h:selectOneMenu id="externalCourse"
+											value="#{scheduleController.event.externalCourse}"
+											required="#{userView.external}"
+											rendered="#{userView.external}">
+											<f:selectItems
+												value="#{externalCourseController.itemsAvailableSelectOne}" />
+										</h:selectOneMenu>
+										<h:outputLabel for="startDate"
+											value="#{bundle['reservation.startDate']}" />
+										<p:inputMask id="startDate"
+											value="#{scheduleController.event.startDate}"
+											mask="99/99/9999 99:99"
+											label="#{bundle['reservation.startDate']}">
+											<f:convertDateTime timeZone="Europe/Lisbon" type="both"
+												pattern="dd/MM/yyyy HH:mm" />
+										</p:inputMask>
+										<h:outputLabel for="endDate"
+											value="#{bundle['reservation.endDate']}" />
+										<p:inputMask id="endDate"
+											value="#{scheduleController.event.endDate}"
+											label="#{bundle['reservation.endDate']}"
+											mask="99/99/9999 99:99">
+											<f:convertDateTime timeZone="Europe/Lisbon" type="both"
+												pattern="dd/MM/yyyy HH:mm" />
+										</p:inputMask>
+									</h:panelGrid>
+<!-- 
+								</p:panel>
+
+							</p:tab>
+
+							<p:tab>
+
+								<p:panel header="Step2">
+
+									<h:panelGrid columns="1" id="confirmation">
+
+										<h:dataTable id="students"
+											value="#{scheduleController.externalCourse.students}"
+											var="student" border="0" cellpadding="2" cellspacing="0"
+											rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+											style="border:solid 1px">
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="#{bundle['externalUser.username']}" />
+												</f:facet>
+												<h:outputText value="#{student.username}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="#{bundle['externalUser.firstname']}" />
+												</f:facet>
+												<h:outputText value="#{student.firstname}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="#{bundle['externalUser.lastname']}" />
+												</f:facet>
+												<h:outputText value="#{student.lastname}" />
+											</h:column>
+										</h:dataTable>
+									</h:panelGrid>
+ -->
+									<p:commandButton value="#{bundle['operation.save']}"
+										actionListener="#{scheduleController.addEvent}" update="msg"
+										oncomplete="myschedule.update();" />
+									<p:commandButton value="#{bundle['operation.remove']}"
+										actionListener="#{scheduleController.removeEvent}"
+										update="msg" oncomplete="myschedule.update();" />
+<!-- 
+								</p:panel>
+
+							</p:tab>
+
+						</p:wizard>
+ -->
 					</p:scheduleEventDialog>
 				</p:schedule>
 			</h:form>

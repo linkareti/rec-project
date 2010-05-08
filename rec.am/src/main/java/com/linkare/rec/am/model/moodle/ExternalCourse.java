@@ -1,22 +1,42 @@
 package com.linkare.rec.am.model.moodle;
 
+import java.util.List;
+
+import javax.inject.Named;
+
 import com.linkare.commons.jpa.Deletable;
 import com.linkare.commons.jpa.Identifiable;
+import com.linkare.rec.am.web.moodle.MoodleClientHelper;
 import com.linkare.rec.am.wsgen.moodle.CourseRecord;
+import com.linkare.rec.am.wsgen.moodle.LoginReturn;
 
+/**
+ * 
+ * @author Paulo Zenida - Linkare TI
+ * 
+ */
+@Named("externalCourse")
 public class ExternalCourse implements Identifiable<String>, Deletable {
 
-    private static final long serialVersionUID = 1L;
-
     private CourseRecord delegate;
+
+    private List<ExternalUser> students;
+
+    private List<ExternalUser> teachers;
+
+    private String loginDomain;
+
+    private LoginReturn loginReturn;
 
     public ExternalCourse() {
 	super();
 	this.delegate = new CourseRecord();
     }
 
-    public ExternalCourse(final CourseRecord courseRecord) {
+    public ExternalCourse(final String loginDomain, final LoginReturn loginReturn, final CourseRecord courseRecord) {
 	this();
+	this.loginDomain = loginDomain;
+	this.loginReturn = loginReturn;
 	this.delegate = courseRecord;
     }
 
@@ -71,22 +91,6 @@ public class ExternalCourse implements Identifiable<String>, Deletable {
 
     public java.math.BigInteger getNewsitems() {
 	return delegate.getNewsitems();
-    }
-
-    public java.lang.String getTeacher() {
-	return delegate.getTeacher();
-    }
-
-    public java.lang.String getTeachers() {
-	return delegate.getTeachers();
-    }
-
-    public java.lang.String getStudent() {
-	return delegate.getStudent();
-    }
-
-    public java.lang.String getStudents() {
-	return delegate.getStudents();
     }
 
     public java.math.BigInteger getGuest() {
@@ -157,9 +161,31 @@ public class ExternalCourse implements Identifiable<String>, Deletable {
 	return delegate.getMyrole();
     }
 
+    public String getLoginDomain() {
+	return loginDomain;
+    }
+
+    public LoginReturn getLoginReturn() {
+	return loginReturn;
+    }
+
     @Override
     public String toString() {
 	return getShortname();
+    }
+
+    public List<ExternalUser> getStudents() {
+	if (students == null && getShortname() != null) {
+	    students = MoodleClientHelper.getStudents(this);
+	}
+	return students;
+    }
+
+    public List<ExternalUser> getTeachers() {
+	if (teachers == null && getShortname() != null) {
+	    teachers = MoodleClientHelper.getTeachers(this);
+	}
+	return teachers;
     }
 
     @Override

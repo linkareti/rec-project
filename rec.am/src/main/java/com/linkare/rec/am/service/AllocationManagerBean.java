@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 
+import com.linkare.commons.jpa.security.User;
 import com.linkare.rec.am.AllocationDTO;
 import com.linkare.rec.am.AllocationManager;
 import com.linkare.rec.am.ParameterException;
@@ -34,7 +35,7 @@ public class AllocationManagerBean implements AllocationManager {
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager entityManager;
 
-    @EJB
+    @EJB(beanInterface = LoginDomainServiceLocal.class)
     private LoginDomainService loginDomainService;
 
     @SuppressWarnings("unchecked")
@@ -42,7 +43,7 @@ public class AllocationManagerBean implements AllocationManager {
     public List<AllocationDTO> getBy(Date begin, Date end, String laboratoryID) throws RemoteException, ParameterException {
 	final List<AllocationDTO> result = new ArrayList<AllocationDTO>();
 	final List<Reservation> reservations = entityManager.createNamedQuery("Reservation.findAllocationsInIntervalAndLab")
-							    .setParameter("beginDate", begin, TemporalType.TIMESTAMP).setParameter("endDate", end,
+							    .setParameter("startDate", begin, TemporalType.TIMESTAMP).setParameter("endDate", end,
 																   TemporalType.TIMESTAMP)
 							    .setParameter("laboratoryName", laboratoryID).getResultList();
 	for (final Reservation reservation : reservations) {
@@ -58,8 +59,12 @@ public class AllocationManagerBean implements AllocationManager {
     }
 
     private List<String> getUsers(Reservation reservation) {
-	// TODO: Implement later!!!
-	return Collections.<String> emptyList();
+	final List<String> usernames = new ArrayList<String>();
+	final List<User> users = reservation.getGroup().getAllUsers();
+	for (final User user : users) {
+	    usernames.add(user.getUsername());
+	}
+	return usernames;
     }
 
     @Override

@@ -17,4 +17,6 @@ public interface UserService extends BusinessService<User, Long> {
     public List<Role> getRoles(final User user);
 
     public User findByUsername(final String username);
+
+    public void createUsers(final List<User> usersToCreate);
 }
