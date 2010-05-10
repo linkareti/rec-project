@@ -20,21 +20,21 @@
 	<p:growl id="msg" showDetail="true" />
 
 	<div id="header"><ui:include src="header.xhtml" /></div>
-	
+
 	<div id="nav"><ui:insert name="menu"></ui:insert></div>
-	
+
 	<div id="content">
 
-		<div id="left_col"><ui:insert name="menu"></ui:insert></div>
-		
-		<div id="center">
-			<p><ui:insert name="body">Default Body</ui:insert></p>
-		</div>
+	<div id="left_col"><ui:insert name="menu"></ui:insert></div>
 
-		<div id="right_col"><ui:include src="context.xhtml" /></div>
-		
-		<div id="footer"><ui:include src="footer.xhtml" /></div>
-		
+	<div id="center">
+	<p><ui:insert name="body">Default Body</ui:insert></p>
+	</div>
+
+	<div id="right_col"><ui:include src="context.xhtml" /></div>
+
+	<div id="footer"><ui:include src="footer.xhtml" /></div>
+
 	</div>
 
 </h:body>

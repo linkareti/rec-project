@@ -1,5 +1,4 @@
 /* Linkare TI - CSS by fildefonso - 05/05/2010 */
-
 body {
 	font-family: Arial, Tahoma, Helvetica, sans-serif;
 	font-size: 12px;
@@ -10,7 +9,7 @@ body {
 h1 {
 	font-weight: bold;
 	font-size: 18px;
-	color: #22363A	
+	color: #22363A
 }
 
 /*-------- Header Definitions --------*/
@@ -23,7 +22,7 @@ h1 {
 	color: white;
 	padding-top: 0px;
 	padding-right: 5px;
-	border-right: 1px solid; 
+	border-right: 1px solid;
 }
 
 #logout {
@@ -54,9 +53,9 @@ h1 {
 	list-style-type: none;
 	display: inline;
 	float: left;
-	padding-right:35px;
-	padding-top:15px;
-	text-indent:-19px;
+	padding-right: 35px;
+	padding-top: 15px;
+	text-indent: -19px;
 }
 
 #nav ul li a {
@@ -71,7 +70,7 @@ h1 {
 	color: #283234;
 	background: #E4EEED;
 	height: 28px;
-	padding:15px 0px 15px 0px;
+	padding: 15px 0px 15px 0px;
 }
 
 /*-------- Left Column Definitions --------*/
@@ -80,7 +79,7 @@ h1 {
 	width: 17%;
 	float: left;
 	margin-right: 0.5%;
-	min-height:416px;
+	min-height: 416px;
 }
 
 #left_col ul li {
@@ -107,7 +106,7 @@ h1 {
 	background-color: #E4EEED;
 	float: left;
 	width: 65%;
-	min-height:416px;
+	min-height: 416px;
 }
 
 /*-------- Right Column Definitions --------*/
@@ -116,7 +115,7 @@ h1 {
 	width: 17%;
 	float: left;
 	margin-left: 0.5%;
-	min-height:416px;
+	min-height: 416px;
 }
 
 /*-------- Footer Definitions --------*/
@@ -130,7 +129,7 @@ h1 {
 
 /*-------- Auth Body Definitions --------*/
 #auth {
-	background-color: #283234; 
+	background-color: #283234;
 }
 
 /*-------- Top Login Definitions --------*/
@@ -151,20 +150,20 @@ h1 {
 
 /*-------- Login Definitions --------*/
 #login {
-	min-height:316px;
-	background-color:white;
-	width:100%;
-	padding-top:80px;
+	min-height: 316px;
+	background-color: white;
+	width: 100%;
+	padding-top: 80px;
 }
 
 #login table {
-	padding:33px 0px 0px 45px;
+	padding: 33px 0px 0px 45px;
 	color: white;
 	background: url("../../resources/images/auth_box.png") no-repeat;
-	width:400px;
-	height:200px;
-	border:1px solid;
-	border-color:#0c1011;
+	width: 400px;
+	height: 200px;
+	border: 1px solid;
+	border-color: #0c1011;
 	font-weight: bold;
 	margin-left: 35%;
 }
@@ -173,7 +172,7 @@ h1 {
 #auth_footer {
 	color: white;
 	background-color: #283234;
-	height:30px;
+	height: 30px;
 }
 
 #auth_footer p {
@@ -186,30 +185,76 @@ h1 {
 	font-weight: bold;
 	background-image: url("../../resources/images/login_button.png");
 	border-style: none;
-	height:25px;
-	width:100px;
+	height: 25px;
+	width: 100px;
 }
 
 /*-------- loginDomain Selector Definitions --------*/
 .loginDomain {
-	width:186px;
-	border:1px solid;
-	border-color:black;
-	height:23px;
+	width: 186px;
+	border: 1px solid;
+	border-color: black;
+	height: 23px;
 }
 
 /*-------- username box Definitions --------*/
 .username {
-border:1px solid;
-border-color:black;
-width:185px;
-height:23px;
+	border: 1px solid;
+	border-color: black;
+	width: 185px;
+	height: 23px;
 }
 
 /*-------- password box Definitions --------*/
 .password {
-border:1px solid;
-border-color:black;
-width:185px;
-height:23px;
+	border: 1px solid;
+	border-color: black;
+	width: 185px;
+	height: 23px;
+}
+
+.list {
+	background-color: #283234;
+}
+
+.list_col {
+	background-color: red;
+}
+
+.yui-skin-sam .yui-dt table {
+	border-color: #333333;
+	padding: 0;
+}
+
+.yui-skin-sam .yui-dt table a {
+	text-decoration: none;
+	font-weight: bold;
+	color: orange;
+}
+
+.yui-skin-sam .yui-dt th {
+	background: url("../../resources/images/menu_bg.gif") repeat-x;
+}
+
+.yui-skin-sam tr {
+	color: white;
+}
+
+.yui-skin-sam tr.yui-dt-odd {
+	background: #333333;
+}
+
+.yui-skin-sam tr.yui-dt-even {
+	background: #666666;
+}
+
+.yui-skin-sam .yui-dt-paginator a.yui-pg-last,.yui-skin-sam .yui-dt-paginator a.yui-pg-first,.yui-skin-sam .yui-dt-paginator a.yui-pg-next,.yui-skin-sam .yui-dt-paginator a.yui-pg-previous
+	{
+	color: #333333;
+}
+
+.yui-skin-sam a.yui-pg-page:link,.yui-skin-sam a.yui-pg-page:hover,.yui-skin-sam a.yui-pg-page:visited
+	{
+	background: #333333;
+	color: #FFFFFF;
 }
