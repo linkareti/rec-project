@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="/template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{bundle['page.index.title']}"></h:outputText>
+	</ui:define>
+	<ui:define name="menu">
+		<ui:include src="menu.xhtml" />
+	</ui:define>
+	<ui:define name="body">
+		<h:form>
+			<p:panel id="welcome"
+				header="#{bundle['page.index.introduction.header']}"
+				footer="#{bundle['page.index.introduction.footer']}"
+				toggleable="true" closable="false" toggleSpeed="500"
+				styleClass="dark" closeListener="#{panelBean.handleClose}"
+				onCloseUpdate="msg" closeSpeed="2000"
+				toggleListener="#{panelBean.handleToggle}" onToggleUpdate="msg"
+				widgetVar="panel">
+				<h:outputText escape="false"
+					value="#{bundle['page.index.introduction.body']}" />
+
+				<!-- f:facet name="options">
+					<p:menu>
+						<p:submenu label="#{bundle['menu.settings']}">
+							<p:menuitem value="#{bundle['menu.toggle']}" url="#"
+								icon="/images/update.png" onclick="panel.toggle()" />
+						</p:submenu>
+					</p:menu>
+				</f:facet -->
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
