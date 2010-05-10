@@ -258,3 +258,15 @@ h1 {
 	background: #333333;
 	color: #FFFFFF;
 }
+
+.fc-event, .myevents a {
+	background-color: black !important;
+	border-color: black !important;
+	color: white !important;
+}
+
+.fc-event, .others_events a {
+	background-color: grey !important;
+	border-color: grey !important;
+	font: black !important;
+}

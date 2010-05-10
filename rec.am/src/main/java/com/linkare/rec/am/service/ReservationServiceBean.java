@@ -154,8 +154,10 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ScheduleEvent> findAllReservations() {
-	return getEntityManager().createNamedQuery(FIND_ALL_QUERYNAME).getResultList();
+    public List<ScheduleEvent> findAllReservations(final UserView userView) {
+	final List<ScheduleEvent> events = getEntityManager().createNamedQuery(FIND_ALL_QUERYNAME).getResultList();
+	addStyleclassesToEvents(userView, events);
+	return events;
     }
 
     @Override
@@ -164,6 +166,18 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
 	final List<ScheduleEvent> events = getEntityManager().createNamedQuery(FIND_FOR_USER_QUERYNAME).setParameter(QUERY_PARAM_USERNAME,
 														     userView.getFullUsername())
 							     .getResultList();
+	addStyleclassesToEvents(userView, events);
 	return events;
+    }
+
+    private void addStyleclassesToEvents(UserView userView, final List<ScheduleEvent> events) {
+	for (final ScheduleEvent scheduleEvent : events) {
+	    final Reservation reservation = (Reservation) scheduleEvent;
+	    if (userView.getFullUsername().equals(reservation.getUser().getUsername())) {
+		reservation.setStyleClass("myevents");
+	    } else {
+		reservation.setStyleClass("others_events");
+	    }
+	}
     }
 }

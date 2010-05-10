@@ -19,5 +19,5 @@ public interface ReservationService extends BusinessService<Reservation, Long> {
 
     public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final UserView userView);
 
-    public List<ScheduleEvent> findAllReservations();
+    public List<ScheduleEvent> findAllReservations(final UserView userView);
 }

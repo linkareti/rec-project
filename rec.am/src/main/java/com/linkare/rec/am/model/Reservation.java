@@ -119,6 +119,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     private String reservationId;
 
     @Transient
+    private String styleClass;
+
+    @Transient
     private ExternalCourse externalCourse;
 
     /**
@@ -267,14 +270,6 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     }
 
     /**
-     * @return the styleClass
-     */
-    @Override
-    public String getStyleClass() {
-	return null;
-    }
-
-    /**
      * @return the dataObj
      */
     @Override
@@ -405,6 +400,22 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     public boolean isInternal() {
 	return getUser().getUsername().endsWith(ConstantUtils.INTERNAL_DOMAIN_NAME);
+    }
+
+    /**
+     * @return the styleClass
+     */
+    @Override
+    public String getStyleClass() {
+	return styleClass;
+    }
+
+    /**
+     * @param styleClass
+     *            the styleClass to set
+     */
+    public void setStyleClass(String styleClass) {
+	this.styleClass = styleClass;
     }
 
     /**

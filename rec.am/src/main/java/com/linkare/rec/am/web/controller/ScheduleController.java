@@ -60,7 +60,7 @@ public class ScheduleController implements Serializable {
 
     private ScheduleModel lazyEventModel;
 
-    private Reservation event = new Reservation();
+    private Reservation event;
 
     @EJB(beanInterface = ReservationServiceLocal.class)
     private ReservationService reservationService;
@@ -75,11 +75,17 @@ public class ScheduleController implements Serializable {
     private ExternalCourse externalCourse;
 
     private List<ScheduleEvent> getEvents() {
-	return reservationService.findReservationsFor(SessionHelper.getUserView());
+	final List<ScheduleEvent> events = reservationService.findReservationsFor(SessionHelper.getUserView());
+	for (final ScheduleEvent scheduleEvent : events) {
+	    if (scheduleEvent instanceof Reservation) {
+		((Reservation) scheduleEvent).setStyleClass("myevents");
+	    }
+	}
+	return events;
     }
 
     private List<ScheduleEvent> getAllEvents() {
-	return reservationService.findAllReservations();
+	return reservationService.findAllReservations(SessionHelper.getUserView());
     }
 
     public ScheduleModel getEventModel() {
@@ -92,6 +98,10 @@ public class ScheduleController implements Serializable {
     }
 
     public Reservation getEvent() {
+	if (event == null) {
+	    event = new Reservation();
+	    event.setStyleClass("myevents");
+	}
 	return event;
     }
 
@@ -106,6 +116,7 @@ public class ScheduleController implements Serializable {
 	    createOrUpdate();
 	}
 	event = new Reservation();
+	event.setStyleClass("myevents");
     }
 
     public void removeEvent(ActionEvent actionEvent) {
@@ -119,6 +130,7 @@ public class ScheduleController implements Serializable {
 	if (StringUtils.isBlank(event.getId())) {
 	    try {
 		event.setUser(getUser());
+		event.setStyleClass("myevents");
 		// It is necessary to first update the model so that the event has a reservation id
 		eventModel.addEvent(event);
 		reservationService.create(event);
