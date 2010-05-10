@@ -1,155 +1,215 @@
-root {
-	display: block;
-}
+/* Linkare TI - CSS by fildefonso - 05/05/2010 */
 
 body {
-	font-family: Arial, Helvetica, sans-serif;
-	color: #3a4f54;
-	background-color: #dfecf1;
-	font-size: small;
+	font-family: Arial, Tahoma, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #231F20;
+	background-color: #283234;
 }
 
-a {
-	color: #e33b06;
+h1 {
+	font-weight: bold;
+	font-size: 18px;
+	color: #22363A	
 }
 
-.entry {
-	padding: 0 20px;
+/*-------- Header Definitions --------*/
+#header {
+	background-color: transparent;
 }
-
-.entry p {
-	line-height: 200%;
-}
-
-table {
-	empty-cells: show;
-}
-
-form.jsfcrud_list_form th,td th {
-	font-size: x-small;
-	color: #4e6a71;
-	border-top-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-right-style: solid;
-	border-top-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	border-right-width: 1px;
-	border-top-color: #b2d5d6;
-	border-bottom-color: #b2d5d6;
-	border-left-color: #90b4bd;
-	border-right-color: #90b4bd;
-	letter-spacing: 3px;
-	text-align: left;
-	padding-top: 6px;
-	padding-bottom: 6px;
-	padding-left: 6px;
-	padding-right: 6px;
-	background-color: #b2d5d6;
-}
-
-td {
-	vertical-align: top;
-	padding-bottom: 8px;
-	font-size: small;
-}
-
-form.jsfcrud_list_form td,td td {
-	border-top-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-right-style: solid;
-	border-top-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	border-right-width: 1px;
-	border-top-color: #b2d5d6;
-	border-bottom-color: #b2d5d6;
-	border-left-color: #b2d5d6;
-	border-right-color: #b2d5d6;
-	vertical-align: baseline;
-	padding-bottom: 0px;
-}
-
-tr.jsfcrud_odd_row {
-	background-color: #fefeff;
-	color: #4e6a71;
-}
-
-tr.jsfcrud_even_row {
-	background-color: #eff5fa;
-	color: #4e6a71;
-}
-
-#busyImage {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-}
-
-option.option1 {
-	background-color: #ccc;
-}
-
-option.option2 {
-	background-color: #fcc;
-}
-
-.yui-layout-unit-top .yui-layout-bd {
-	background: url("../images/bottomBack.png") repeat-x;
-}
-
-.yui-skin-sam .yui-layout .yui-layout-unit div.yui-layout-hd .close {
-	background: url("../images/dialogclose.png") no-repeat;
-	border: 0;
-	top: 3px;
-	width: 16px;
-	height: 16px;
-}
-
-.yui-skin-sam .yui-layout .yui-layout-unit-right div.yui-layout-hd .collapse
-	{
-	background: url("../images/right.png")
-		no-repeat;
-}
-
-.yui-skin-sam .yui-layout .yui-layout-unit-left div.yui-layout-hd .collapse
-	{
-	background: url("../images/left.png")
-		no-repeat;
-}
-
-.yui-skin-sam .yui-accordion-toggle.active .indicator {
-	background: url("../images/minus.png")
-		no-repeat;
-	top: 3px;
-}
-
-.yui-skin-sam .yui-accordion-toggle .indicator {
-	background: url("../images/plus.png")
-		no-repeat;
-	top: 3px;
-}
-
-
-/**********************************************/
-/**** Styles added manually by Linkare TI *****/
-/**********************************************/
 
 #welcome {
 	float: right;
+	color: white;
 	padding-top: 0px;
 	padding-right: 5px;
+	border-right: 1px solid; 
 }
 
 #logout {
 	float: right;
 	padding-top: 12px;
 	padding-right: 5px;
+	padding-left: 5px;
+}
+
+#logout a {
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 #banner {
-	background: url("../images/logo.png")
-		no-repeat;
+	padding-left: 10px;
+	padding-top: 15px;
+}
+
+/*-------- Navigation Definitions --------*/
+#nav {
+	background: url("../../resources/images/menu_bg.gif") repeat-x;
+	height: 30px;
+}
+
+#nav ul li {
+	list-style-type: none;
+	display: inline;
+	float: left;
+	padding-right:35px;
+	padding-top:15px;
+	text-indent:-19px;
+}
+
+#nav ul li a {
+	font-weight: bold;
+	text-decoration: none;
+	color: white;
+}
+
+#nav ul li a:hover {
+	font-weight: bold;
+	text-decoration: none;
+	color: #283234;
+	background: #E4EEED;
+	height: 28px;
+	padding:15px 0px 15px 0px;
+}
+
+/*-------- Left Column Definitions --------*/
+#left_col {
+	background-color: #e4eeed;
+	width: 17%;
+	float: left;
+	margin-right: 0.5%;
+	min-height:416px;
+}
+
+#left_col ul li {
+	list-style-type: none;
+	padding-top: 10px;
+	text-indent: -20px;
+}
+
+#left_col ul li a {
+	font-weight: bold;
+	text-decoration: none;
+	color: #283234;
+}
+
+#left_col ul li a:hover {
+	font-weight: bold;
+	text-decoration: none;
+	color: #E4EEED;
+	background: #283234;
+}
+
+/*-------- Contents Area Definitions --------*/
+#center {
+	background-color: #E4EEED;
+	float: left;
+	width: 65%;
+	min-height:416px;
+}
+
+/*-------- Right Column Definitions --------*/
+#right_col {
+	background-color: #E4EEED;
+	width: 17%;
+	float: left;
+	margin-left: 0.5%;
+	min-height:416px;
+}
+
+/*-------- Footer Definitions --------*/
+#footer {
+	color: white;
+}
+
+#footer p {
+	color: white;
+}
+
+/*-------- Auth Body Definitions --------*/
+#auth {
+	background-color: #283234; 
+}
+
+/*-------- Top Login Definitions --------*/
+#top_login {
+	background: url("../../resources/images/logo.png") no-repeat;
+	margin-left: 10px;
+	margin-top: 23px;
+	height: 100px;
+	background-color: #283234;
+}
+
+#top_login h1 {
+	font-size: 25px;
+	text-align: center;
+	padding-top: 30px;
+	color: white;
+}
+
+/*-------- Login Definitions --------*/
+#login {
+	min-height:316px;
+	background-color:white;
+	width:100%;
+	padding-top:80px;
+}
+
+#login table {
+	padding:33px 0px 0px 45px;
+	color: white;
+	background: url("../../resources/images/auth_box.png") no-repeat;
+	width:400px;
+	height:200px;
+	border:1px solid;
+	border-color:#0c1011;
+	font-weight: bold;
+	margin-left: 35%;
+}
+
+/*-------- Auth Footer Definitions --------*/
+#auth_footer {
+	color: white;
+	background-color: #283234;
+	height:30px;
+}
+
+#auth_footer p {
+	color: white;
+}
+
+/*-------- Submit Button Definitions --------*/
+.submit {
+	color: #2b7a3b;
+	font-weight: bold;
+	background-image: url("../../resources/images/login_button.png");
+	border-style: none;
+	height:25px;
+	width:100px;
+}
+
+/*-------- loginDomain Selector Definitions --------*/
+.loginDomain {
+	width:186px;
+	border:1px solid;
+	border-color:black;
+	height:23px;
+}
+
+/*-------- username box Definitions --------*/
+.username {
+border:1px solid;
+border-color:black;
+width:185px;
+height:23px;
+}
+
+/*-------- password box Definitions --------*/
+.password {
+border:1px solid;
+border-color:black;
+width:185px;
+height:23px;
 }
