@@ -1,37 +1,28 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<div xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.prime.com.tr/ui">
+	xmlns:p="http://primefaces.prime.com.tr/ui"><h:form>
 
-<h:form>
-	<p:menu style="width:200px">
-		<p:submenu>
-			<p:menuitem value="#{bundle['menu.externalCourse.list']}"
-				action="/protected/courses/List" rendered="#{userView.external}" />
-			<p:menuitem value="#{bundle['menu.laboratory.list']}"
-				action="/protected/laboratory/List" ajax="false" />
-			<p:menuitem value="#{bundle['menu.experiment.list']}"
-				action="/protected/experiment/List" ajax="false" />
-			<p:menuitem value="#{bundle['menu.user.list']}"
-				action="/protected/user/List" ajax="false" />
-			<p:menuitem value="#{bundle['menu.group.list']}"
-				action="/protected/group/List" ajax="false" />
-			<p:menuitem value="#{bundle['menu.role.list']}"
-				action="/protected/role/List" ajax="false" />
-		</p:submenu>
-		<p:submenu>
-			<p:menuitem value="#{bundle['menu.reservation.list']}"
-				action="/protected/reservation/List" ajax="false" />
-		</p:submenu>
-		<p:submenu>
-			<p:menuitem value="#{bundle['menu.index']}" action="/index"
-				immediate="true" ajax="false" />
-			<p:menuitem value="#{bundle['menu.logout']}"
-				action="#{authenticationBean.logout}" ajax="false" />
-		</p:submenu>
-	</p:menu>
-</h:form>
-</html>
+	<ul>
+		<h:panelGroup rendered="#{userView.external}">
+			<li><h:commandLink action="/protected/courses/List"
+				value="#{bundle['menu.externalCourse.list']}" /></li>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{userView.admin}">
+			<li><h:commandLink action="/protected/laboratory/List"
+				value="#{bundle['menu.laboratory.list']}" /></li>
+			<li><h:commandLink action="/protected/experiment/List"
+				value="#{bundle['menu.experiment.list']}" /></li>
+			<li><h:commandLink action="/protected/user/List"
+				value="#{bundle['menu.user.list']}" /></li>
+			<li><h:commandLink action="/protected/group/List"
+				value="#{bundle['menu.group.list']}" /></li>
+			<li><h:commandLink action="/protected/role/List"
+				value="#{bundle['menu.role.list']}" /></li>
+			<li><h:commandLink action="/protected/reservation/List"
+				value="#{bundle['menu.reservation.list']}" /></li>
+		</h:panelGroup>
+	</ul>
+
+</h:form></div>
