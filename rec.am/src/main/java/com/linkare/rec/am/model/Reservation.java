@@ -36,15 +36,21 @@ import com.linkare.rec.am.web.util.ConstantUtils;
 	@NamedQuery(name = Reservation.COUNT_ALL_QUERYNAME, query = Reservation.COUNT_ALL_QUERY),
 	@NamedQuery(name = Reservation.FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERYNAME, query = Reservation.FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERY),
 	@NamedQuery(name = Reservation.FIND_FOR_USER_IN_DATE_QUERYNAME, query = Reservation.FIND_FOR_USER_IN_DATE_QUERY),
-	@NamedQuery(name = Reservation.FIND_FOR_USER_AFTER_DATE_QUERY, query = Reservation.FIND_FOR_USER_AFTER_DATE_QUERY),
+	@NamedQuery(name = Reservation.FIND_FOR_USER_AFTER_DATE_QUERYNAME, query = Reservation.FIND_FOR_USER_AFTER_DATE_QUERY),
 	@NamedQuery(name = Reservation.FIND_FOR_USER_QUERYNAME, query = Reservation.FIND_FOR_USER_QUERY),
 	@NamedQuery(name = Reservation.FIND_IN_INTERVAL_AND_LAB_QUERYNAME, query = Reservation.FIND_IN_INTERVAL_AND_LAB_QUERY) })
 public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
+    private static final long serialVersionUID = 5501757961910540877L;
+
     public static final String QUERY_PARAM_START_DATE = "startDate";
+
     public static final String QUERY_PARAM_END_DATE = "endDate";
+
     public static final String QUERY_PARAM_EXPERIMENT_NAME = "experimentName";
+
     public static final String QUERY_PARAM_USERNAME = "username";
+
     public static final String QUERY_PARAM_LAB_NAME = "laboratoryName";
 
     public static final String FIND_ALL_QUERYNAME = "Reservation.findAll";
@@ -72,8 +78,6 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     public static final String FIND_IN_INTERVAL_AND_LAB_QUERYNAME = "Reservation.findInIntervalAndLab";
     public static final String FIND_IN_INTERVAL_AND_LAB_QUERY = "Select r from Reservation r where (r.startDate between :" + QUERY_PARAM_START_DATE + " and :"
 	    + QUERY_PARAM_END_DATE + ") and r.experiment.laboratory.name = :" + QUERY_PARAM_LAB_NAME;
-
-    private static final long serialVersionUID = 1L;
 
     private static final int MINIMUM_INTERVAL_IN_MINUTES = 15;
 

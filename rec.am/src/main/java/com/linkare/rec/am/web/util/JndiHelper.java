@@ -4,6 +4,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.linkare.rec.am.service.LoginDomainService;
+import com.linkare.rec.am.service.ReservationService;
 import com.linkare.rec.am.service.UserService;
 
 /**
@@ -13,9 +14,11 @@ import com.linkare.rec.am.service.UserService;
  */
 public final class JndiHelper {
 
-    private static final String USER_FACADE_JNDI_BINDING = "java:global/rec.am/UserService";
+    private static final String USER_SERVICE_JNDI_BINDING = "java:global/rec.am/UserService";
 
-    private static final String LOGIN_DOMAIN_FACADE_JNDI_BINDING = "java:global/rec.am/LoginDomainService";
+    private static final String LOGIN_DOMAIN_SERVICE_JNDI_BINDING = "java:global/rec.am/LoginDomainService";
+
+    private static final String RESERVATION_SERVICE_JNDI_BINDING = "java:global/rec.am/ReservationService";
 
     private static InitialContext ctx;
 
@@ -27,11 +30,18 @@ public final class JndiHelper {
 	}
     }
 
+    private JndiHelper() {
+    }
+
     public static UserService getUserService() throws NamingException {
-	return (UserService) ctx.lookup(USER_FACADE_JNDI_BINDING);
+	return (UserService) ctx.lookup(USER_SERVICE_JNDI_BINDING);
     }
 
     public static LoginDomainService getLoginDomainService() throws NamingException {
-	return (LoginDomainService) ctx.lookup(LOGIN_DOMAIN_FACADE_JNDI_BINDING);
+	return (LoginDomainService) ctx.lookup(LOGIN_DOMAIN_SERVICE_JNDI_BINDING);
+    }
+
+    public static ReservationService getReservationService() throws NamingException {
+	return (ReservationService) ctx.lookup(RESERVATION_SERVICE_JNDI_BINDING);
     }
 }

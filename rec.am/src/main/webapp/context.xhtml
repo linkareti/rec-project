@@ -6,4 +6,11 @@
 
 <p>My events...</p>
 
-</div>
+<h:panelGroup rendered="#{!userView.hasReservations}">No events found...</h:panelGroup>
+<h:panelGroup rendered="#{userView.hasReservations}">
+	<h:dataTable var="reservation" value="#{userView.reservations}">
+		<h:column>
+			<h:outputText value="#{reservation.title}" />
+		</h:column>
+	</h:dataTable>
+</h:panelGroup></div>
