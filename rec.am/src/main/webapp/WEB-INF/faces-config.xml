@@ -6,6 +6,10 @@
 			<base-name>/Bundle</base-name>
 			<var>bundle</var>
 		</resource-bundle>
+		<locale-config>
+			<default-locale>pt</default-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
 	</application>
 	<lifecycle>
 		<phase-listener>com.linkare.rec.am.web.listener.LifeCycleListener</phase-listener>

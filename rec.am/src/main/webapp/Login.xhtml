@@ -11,19 +11,20 @@
 		<h:outputText value="#{bundle['page.login.title']}"></h:outputText>
 	</ui:define>
 	<ui:define name="body" id="auth">
-	<div id="top_login">
-		<h1>Allocation manager - login</h1>
-	</div>
-	<div id="login">
-		<h:form>
+		<div id="top_login">
+		<h1><h:outputText value="#{bundle['page.login.title']}" /></h1>
+		</div>
+		<div id="login"><h:form>
 			<p:focus />
 			<h:panelGrid columns="2">
 				<h:outputLabel value="#{bundle['user.username']}" for="username" />
-				<h:inputText id="username" class="username" value="#{authenticationBean.username}"
+				<h:inputText id="username" class="username"
+					value="#{authenticationBean.username}"
 					title="#{bundle['user.username']}" />
 				<h:outputText value="#{bundle['user.login.password']}"
 					for="password" />
-				<h:inputSecret id="password" class="password" value="#{authenticationBean.password}"
+				<h:inputSecret id="password" class="password"
+					value="#{authenticationBean.password}"
 					title="#{bundle['user.login.password']}" />
 				<h:outputText value="#{bundle['app.loginDomain']}" for="loginDomain" />
 				<h:selectOneMenu id="loginDomain" class="loginDomain"
@@ -33,17 +34,15 @@
 				</h:selectOneMenu>
 				<br />
 				<h:panelGroup>
-					<h:commandButton class="submit" action="#{authenticationBean.login}"
-						value="ENTRAR" />
-					<!-- h:commandButton action="#{authenticationBean.login}" type="reset"
-						value="#{bundle['operation.reset']}" /-->
+					<h:commandButton class="submit"
+						action="#{authenticationBean.login}"
+						value="#{bundle['operation.login']}" />
 				</h:panelGroup>
 			</h:panelGrid>
-		</h:form>
-	</div>
-	<div id="auth_footer">
+		</h:form></div>
+		<div id="auth_footer">
 		<p>footer info...</p>
-	</div>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>
