@@ -1,5 +1,8 @@
 package com.linkare.rec.am.service;
 
+import static com.linkare.rec.am.model.Experiment.COUNT_ALL_QUERYNAME;
+import static com.linkare.rec.am.model.Experiment.FIND_ALL_QUERYNAME;
+
 import java.util.List;
 
 import javax.ejb.Local;
@@ -43,7 +46,7 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
 
     @SuppressWarnings("unchecked")
     public List<Experiment> find(final boolean all, final int firstResult, final int maxResults) {
-	Query q = getEntityManager().createNamedQuery("Experiment.findAll");
+	Query q = getEntityManager().createNamedQuery(FIND_ALL_QUERYNAME);
 	if (!all) {
 	    q.setMaxResults(maxResults);
 	    q.setFirstResult(firstResult);
@@ -53,7 +56,7 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
 
     @Override
     public int count() {
-	final Query query = getEntityManager().createNamedQuery("Experiment.countAll");
+	final Query query = getEntityManager().createNamedQuery(COUNT_ALL_QUERYNAME);
 	return ((Long) query.getSingleResult()).intValue();
     }
 }

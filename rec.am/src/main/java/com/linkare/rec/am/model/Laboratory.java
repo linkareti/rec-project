@@ -25,16 +25,16 @@ import com.linkare.commons.utils.EqualityUtils;
  */
 @Entity
 @Table(name = "LABORATORY")
-@NamedQueries( {
-	@NamedQuery(name = "Laboratory.findAll", query = "Select l from Laboratory l"),
-	@NamedQuery(name = "Laboratory.countAll", query = "Select count(l) from Laboratory l"),
-	@NamedQuery(name = "findByName", query = "SELECT lab FROM Laboratory lab WHERE lab.name=:name"),
-	/* @NamedQuery(name = "findExperiments", query = "SELECT experiments FROM Laboratory lab WHERE lab.name=:name"), */
-	@NamedQuery(name = "findExperiment", query = "SELECT experiment FROM Laboratory lab, Experiment experiment WHERE lab.name=:namelab and experiment.laboratory=lab and experiment.name=:nameexp") })
+@NamedQueries( { @NamedQuery(name = Laboratory.FIND_ALL_QUERYNAME, query = "Select l from Laboratory l"),
+	@NamedQuery(name = Laboratory.COUNT_ALL_QUERYNAME, query = "Select count(l) from Laboratory l") })
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Laboratory extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
+
+    public static final String FIND_ALL_QUERYNAME = "Laboratory.findAll";
+
+    public static final String COUNT_ALL_QUERYNAME = "Laboratory.countAll";
 
     @Column(name = "NAME", unique = true, insertable = true, updatable = true)
     private String name;

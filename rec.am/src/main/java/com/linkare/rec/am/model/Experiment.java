@@ -25,12 +25,19 @@ import com.linkare.commons.jpa.DefaultDomainObject;
  */
 @Entity
 @Table(name = "EXPERIMENT")
-@NamedQueries( { @NamedQuery(name = "Experiment.findAll", query = "Select e from Experiment e"),
-	@NamedQuery(name = "Experiment.countAll", query = "Select count(e) from Experiment e"),
-	@NamedQuery(name = "findByExperimentName", query = "SELECT exp FROM Experiment exp WHERE exp.name=:name") })
+@NamedQueries( { @NamedQuery(name = Experiment.FIND_ALL_QUERYNAME, query = "Select e from Experiment e"),
+	@NamedQuery(name = Experiment.COUNT_ALL_QUERYNAME, query = "Select count(e) from Experiment e") })
 public class Experiment extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
+
+    public static final String FIND_ALL_QUERYNAME = "Experiment.findAll";
+
+    public static final String COUNT_ALL_QUERYNAME = "Experiment.countAll";
+
+    @Basic
+    @Column(name = "EXTERNAL_ID", insertable = true, updatable = true, unique = true)
+    private String externalId;
 
     @Basic
     @Column(name = "NAME")
@@ -49,6 +56,21 @@ public class Experiment extends DefaultDomainObject {
 
     @Embedded
     private State state = new State();
+
+    /**
+     * @return the externalId
+     */
+    public String getExternalId() {
+	return externalId;
+    }
+
+    /**
+     * @param externalId
+     *            the externalId to set
+     */
+    public void setExternalId(String externalId) {
+	this.externalId = externalId;
+    }
 
     /**
      * Get the value of name
