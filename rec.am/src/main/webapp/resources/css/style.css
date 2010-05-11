@@ -117,17 +117,95 @@ h1 {
 
 #content div.pf-panel-hd {
 	background: #283234;
-	color: white;
+	color: #E4EEED;
 	border: 0px;
+	font-size: 10pt;
 }
 
 #content div.pf-panel-bd {
 	border: 0px;
 }
 
+.yui-dt table {
+	border: 0px !important;
+}
+
+.yui-dt table thead th {
+	background: #283234 !important;
+}
+
+table .yui-dt-selected * {
+	background-color: #FFFF9F !important;
+}
+
+.yui-dt-even * {
+	background-color: #f4f9f8 !important;
+	border: 0px !important;
+}
+
+.yui-dt-odd * {
+	background-color: #ffffff !important;
+	border: 0px !important;
+}
+
 form#content div {
 	background: transparent;
 	border: 0px;
+}
+
+.yui-dt-liner {
+	padding: 4px 1px !important;
+}
+
+.list {
+	background-color: #283234;
+}
+
+.list_col {
+	background-color: red;
+}
+/*
+.yui-skin-sam .yui-dt table {
+	border-color: #333333;
+	padding: 0;
+}
+
+.yui-skin-sam .yui-dt table a {
+	text-decoration: none;
+	font-weight: bold;
+	color: orange;
+}
+
+.yui-skin-sam .yui-dt th {
+	background: url("../../resources/images/menu_bg.gif") repeat-x;
+}
+*/
+.yui-skin-sam tr {
+	color: white;
+}
+
+/*
+.yui-skin-sam .yui-dt-paginator a.yui-pg-last,.yui-skin-sam .yui-dt-paginator a.yui-pg-first,.yui-skin-sam .yui-dt-paginator a.yui-pg-next,.yui-skin-sam .yui-dt-paginator a.yui-pg-previous
+	{
+	color: #333333;
+}
+*/
+.yui-skin-sam a.yui-pg-page:link,.yui-skin-sam a.yui-pg-page:hover,.yui-skin-sam a.yui-pg-page:visited
+	{
+	background: #333333;
+	color: #FFFFFF;
+}
+
+.fc-event,.myevents a {
+	background-color: black !important;
+	border-color: black !important;
+	color: white !important;
+}
+
+.fc-event,.others_events a {
+	background-color: grey !important;
+	border-color: grey !important;
+	font: black !important;
 }
 
 /*-------- Right Column Definitions --------*/
@@ -232,62 +310,4 @@ form#content div {
 	border-color: black;
 	width: 185px;
 	height: 23px;
-}
-
-.list {
-	background-color: #283234;
-}
-
-.list_col {
-	background-color: red;
-}
-
-.yui-skin-sam .yui-dt table {
-	border-color: #333333;
-	padding: 0;
-}
-
-.yui-skin-sam .yui-dt table a {
-	text-decoration: none;
-	font-weight: bold;
-	color: orange;
-}
-
-.yui-skin-sam .yui-dt th {
-	background: url("../../resources/images/menu_bg.gif") repeat-x;
-}
-
-.yui-skin-sam tr {
-	color: white;
-}
-
-.yui-skin-sam tr.yui-dt-odd {
-	background: #333333;
-}
-
-.yui-skin-sam tr.yui-dt-even {
-	background: #666666;
-}
-
-.yui-skin-sam .yui-dt-paginator a.yui-pg-last,.yui-skin-sam .yui-dt-paginator a.yui-pg-first,.yui-skin-sam .yui-dt-paginator a.yui-pg-next,.yui-skin-sam .yui-dt-paginator a.yui-pg-previous
-	{
-	color: #333333;
-}
-
-.yui-skin-sam a.yui-pg-page:link,.yui-skin-sam a.yui-pg-page:hover,.yui-skin-sam a.yui-pg-page:visited
-	{
-	background: #333333;
-	color: #FFFFFF;
-}
-
-.fc-event, .myevents a {
-	background-color: black !important;
-	border-color: black !important;
-	color: white !important;
-}
-
-.fc-event, .others_events a {
-	background-color: grey !important;
-	border-color: grey !important;
-	font: black !important;
 }
