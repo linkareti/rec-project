@@ -1,0 +1,28 @@
+<Apparatus location="ELAB_GAMMA_V1.0"
+	customizerClassLocationBundleKey="gamma$rec.exp.customizer.gamma"
+	toolTipBundleKey="gamma$rec.exp.tip.gamma" iconLocationBundleKey="gamma$rec.exp.icon.gamma"
+	displayStringBundleKey="gamma$rec.exp.title.gamma"
+	desktopLocationBundleKey="gamma$rec.exp.background.gamma" order="1">
+	<LocalizationBundle name="gamma"
+		location="recresource:///pt/utl/ist/elab/client/usb/cypress/gamma/resources/messages" />
+	<Display classLocationBundleKey="gamma$rec.exp.display.gamma.loc.1"
+		toolTipBundleKey="gamma$rec.exp.display.gamma.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="gamma$rec.exp.display.gamma.title.1"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="gamma$rec.exp.display.gamma.loc.2"
+		toolTipBundleKey="gamma$rec.exp.display.gamma.tip.2"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="gamma$rec.exp.display.gamma.title.2"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="gamma$rec.exp.display.gamma.loc.3"
+		toolTipBundleKey="gamma$rec.exp.display.gamma.tip.3"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="gamma$rec.exp.display.gamma.title.3"
+		offlineCapable="false" order="3" />
+	<Display classLocationBundleKey="gamma$rec.exp.display.gamma.loc.4"
+		toolTipBundleKey="gamma$rec.exp.display.gamma.tip.4"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="gamma$rec.exp.display.gamma.title.4"
+		offlineCapable="false" order="4" />
+</Apparatus>
