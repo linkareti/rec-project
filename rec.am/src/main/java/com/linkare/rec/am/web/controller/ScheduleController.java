@@ -31,6 +31,7 @@ import com.linkare.rec.am.service.ReservationService;
 import com.linkare.rec.am.service.ReservationServiceLocal;
 import com.linkare.rec.am.service.UserService;
 import com.linkare.rec.am.service.UserServiceLocal;
+import com.linkare.rec.am.web.auth.UserView;
 import com.linkare.rec.am.web.moodle.MoodleClientHelper;
 import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.web.util.ConstantUtils;
@@ -89,6 +90,7 @@ public class ScheduleController implements Serializable {
 		eventModel.deleteEvent(event);
 		reservationService.remove(event);
 		JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);
+		refreshUserView();
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
 		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
@@ -109,6 +111,7 @@ public class ScheduleController implements Serializable {
 		eventModel.addEvent(event);
 		reservationService.create(event);
 		JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
+		refreshUserView();
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
 		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
@@ -124,6 +127,7 @@ public class ScheduleController implements Serializable {
 		event = reservationService.edit(event);
 		eventModel.updateEvent(event);
 		JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
+		refreshUserView();
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
 		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
@@ -135,6 +139,12 @@ public class ScheduleController implements Serializable {
 	    }
 	}
 	return null;
+    }
+
+    private void refreshUserView() {
+	final UserView userView = SessionHelper.getUserView();
+	userView.setReservations(reservationService.findReservationsFor(new Date(), null, userView));
+	SessionHelper.setUserView(userView);
     }
 
     private User getUser() {

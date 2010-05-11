@@ -16,6 +16,10 @@ public final class SessionHelper {
     private SessionHelper() {
     }
 
+    public static void setUserView(final UserView userView) {
+	JsfUtil.getSession().setAttribute(ConstantUtils.USER_VIEW_SESSION_KEY, userView);
+    }
+
     public static LoginReturn getLoginReturn() {
 	final UserView userView = getUserView();
 	if (userView.isExternal()) {

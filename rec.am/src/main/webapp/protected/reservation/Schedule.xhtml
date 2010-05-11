@@ -88,10 +88,12 @@
 							</p:inputMask>
 						</h:panelGrid>
 						<p:commandButton value="#{bundle['operation.save']}"
-							actionListener="#{scheduleController.addEvent}" update="msg"
+							actionListener="#{scheduleController.addEvent}"
+							update="msg, context:myreservations"
 							oncomplete="myschedule.update();" />
 						<p:commandButton value="#{bundle['operation.remove']}"
-							actionListener="#{scheduleController.removeEvent}" update="msg"
+							actionListener="#{scheduleController.removeEvent}"
+							update="msg, context:myreservations"
 							oncomplete="myschedule.update();" />
 					</p:scheduleEventDialog>
 				</p:schedule>

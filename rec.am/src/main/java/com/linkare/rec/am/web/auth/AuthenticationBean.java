@@ -3,8 +3,6 @@ package com.linkare.rec.am.web.auth;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.service.UserService;
@@ -44,8 +42,7 @@ public class AuthenticationBean {
 
     private void authenticate() throws AuthenticationException {
 	final LoginProvider loginProvider = LoginProviderFactory.getLoginProvider(getDomain());
-	loginProvider
-		     .login((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest(), getUsername(), getPassword(), getDomain());
+	loginProvider.login(getUsername(), getPassword(), getDomain());
     }
 
     private void registerUserIfNecessary() {
