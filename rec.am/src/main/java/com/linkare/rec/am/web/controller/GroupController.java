@@ -1,7 +1,6 @@
 package com.linkare.rec.am.web.controller;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -110,7 +109,7 @@ public class GroupController extends AbstractController<Long, Group, GroupServic
 
     public String setUsersMembership() {
 	getService().setUsersMembership(getSelected(), getUsers().getTarget());
-	JsfUtil.addSuccessMessage(ConstantUtils.LABEL_INFO, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("info.association"));
+	JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_ASSOCIATION_KEY);
 	return prepareEdit();
     }
 }

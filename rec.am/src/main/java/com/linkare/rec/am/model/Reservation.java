@@ -38,7 +38,8 @@ import com.linkare.rec.am.web.util.ConstantUtils;
 	@NamedQuery(name = Reservation.FIND_FOR_USER_IN_DATE_QUERYNAME, query = Reservation.FIND_FOR_USER_IN_DATE_QUERY),
 	@NamedQuery(name = Reservation.FIND_FOR_USER_AFTER_DATE_QUERYNAME, query = Reservation.FIND_FOR_USER_AFTER_DATE_QUERY),
 	@NamedQuery(name = Reservation.FIND_FOR_USER_QUERYNAME, query = Reservation.FIND_FOR_USER_QUERY),
-	@NamedQuery(name = Reservation.FIND_IN_INTERVAL_AND_LAB_QUERYNAME, query = Reservation.FIND_IN_INTERVAL_AND_LAB_QUERY) })
+	@NamedQuery(name = Reservation.FIND_IN_INTERVAL_AND_LAB_QUERYNAME, query = Reservation.FIND_IN_INTERVAL_AND_LAB_QUERY),
+	@NamedQuery(name = Reservation.FIND_FOR_DOMAIN_IN_INTERVAL_QUERYNAME, query = Reservation.FIND_FOR_DOMAIN_IN_INTERVAL_QUERY) })
 public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     private static final long serialVersionUID = 5501757961910540877L;
@@ -52,6 +53,8 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     public static final String QUERY_PARAM_USERNAME = "username";
 
     public static final String QUERY_PARAM_LAB_NAME = "laboratoryName";
+
+    public static final String QUERY_PARAM_DOMAIN = "domain";
 
     public static final String FIND_ALL_QUERYNAME = "Reservation.findAll";
     public static final String FIND_ALL_QUERY = "Select r from Reservation r";
@@ -79,6 +82,10 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     public static final String FIND_IN_INTERVAL_AND_LAB_QUERY = "Select r from Reservation r where (r.startDate between :" + QUERY_PARAM_START_DATE + " and :"
 	    + QUERY_PARAM_END_DATE + ") and r.experiment.laboratory.name = :" + QUERY_PARAM_LAB_NAME;
 
+    public static final String FIND_FOR_DOMAIN_IN_INTERVAL_QUERYNAME = "Reservation.findForDomainInDate";
+    public static final String FIND_FOR_DOMAIN_IN_INTERVAL_QUERY = "Select r from Reservation r WHERE r.domain = :" + QUERY_PARAM_DOMAIN
+	    + " and r.startDate between :" + QUERY_PARAM_START_DATE + " and :" + QUERY_PARAM_END_DATE;
+
     private static final int MINIMUM_INTERVAL_IN_MINUTES = 15;
 
     private static final int MAXIMUM_INTERVAL_IN_MINUTES = 120;
@@ -100,7 +107,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     private Date endDate;
 
     @ManyToOne
-    @JoinColumn(name = "KEY_USER", nullable = true)
+    @JoinColumn(name = "KEY_USER", insertable = true, updatable = false, nullable = false)
     private User user;
 
     @ManyToOne
@@ -112,11 +119,14 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     private boolean allDay = false;
 
     @ManyToOne
-    @JoinColumn(name = "KEY_GROUP", nullable = true)
+    @JoinColumn(name = "KEY_GROUP", insertable = true, updatable = false, nullable = false)
     private Group group;
 
     @Column(name = "RESERVATION_ID", insertable = true, updatable = false, unique = true)
     private String reservationId;
+
+    @Column(name = "DOMAIN", insertable = true, updatable = false, nullable = false)
+    private String domain;
 
     @Transient
     private String styleClass;
@@ -146,6 +156,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     public Reservation(final User reservedBy, final String domain) {
 	this();
 	setUser(reservedBy);
+	setDomain(domain);
     }
 
     /**
@@ -398,6 +409,13 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 	return BooleanResult.TRUE_RESULT;
     }
 
+    public BooleanResult checkOwnership(final User user) {
+	if (getUser() != null && !user.equals(getUser())) {
+	    return new BooleanResult(Boolean.FALSE, "error.user.not.owner");
+	}
+	return BooleanResult.TRUE_RESULT;
+    }
+
     public boolean isInternal() {
 	return getUser().getUsername().endsWith(ConstantUtils.INTERNAL_DOMAIN_NAME);
     }
@@ -431,5 +449,20 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
      */
     public void setExternalCourse(ExternalCourse externalCourse) {
 	this.externalCourse = externalCourse;
+    }
+
+    /**
+     * @return the domain
+     */
+    public String getDomain() {
+	return domain;
+    }
+
+    /**
+     * @param domain
+     *            the domain to set
+     */
+    public void setDomain(String domain) {
+	this.domain = domain;
     }
 }

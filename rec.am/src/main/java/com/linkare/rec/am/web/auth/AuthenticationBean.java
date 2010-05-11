@@ -1,7 +1,5 @@
 package com.linkare.rec.am.web.auth;
 
-import java.util.ResourceBundle;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -38,7 +36,7 @@ public class AuthenticationBean {
 	    authenticate();
 	    registerUserIfNecessary();
 	} catch (AuthenticationException e) {
-	    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString("error.login.failed"));
+	    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_LOGIN_FAILED_KEY);
 	    return null;
 	}
 	return "index";

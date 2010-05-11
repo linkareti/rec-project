@@ -22,19 +22,20 @@
 				</p:ajaxStatus>
 				<p:schedule id="schedule" value="#{scheduleController.eventModel}"
 					editable="true" widgetVar="myschedule" allDaySlot="false"
-					showWeekends="true" draggable="true" resizable="true"
+					showWeekends="true" draggable="false" resizable="false"
 					eventSelectListener="#{scheduleController.onEventSelect}"
 					dateSelectListener="#{scheduleController.onDateSelect}"
 					eventMoveListener="#{scheduleController.onEventMove}"
 					eventResizeListener="#{scheduleController.onEventResize}"
-					aspectRatio="0.95" onEventMoveUpdate="msg, schedule" firstHour="8"
-					onEventResizeUpdate="msg, schedule" slotMinutes="15"
-					locale="pt" view="month" theme="true">
+					aspectRatio="0.95" onEventMoveUpdate="msg" firstHour="8"
+					onEventResizeUpdate="msg" slotMinutes="15" locale="pt" view="month">
 					<p:scheduleEventDialog header="#{bundle['label.event.header']}">
 
 						<h:inputHidden id="idInternal"
 							value="#{scheduleController.event.idInternal}" />
 						<h:inputHidden id="id" value="#{scheduleController.event.id}" />
+						<h:inputHidden id="domain"
+							value="#{scheduleController.event.domain}" />
 
 						<h:panelGrid columns="2" border="0">
 							<h:outputLabel for="title" value="#{bundle['reservation.title']}" />

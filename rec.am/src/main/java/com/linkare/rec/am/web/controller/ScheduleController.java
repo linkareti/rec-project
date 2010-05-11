@@ -1,24 +1,9 @@
-/*
- * Copyright 2009 Prime Technology.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.linkare.rec.am.web.controller;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -31,7 +16,7 @@ import org.primefaces.event.DateSelectEvent;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.ScheduleEntrySelectEvent;
-import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
@@ -58,8 +43,6 @@ public class ScheduleController implements Serializable {
 
     private ScheduleModel eventModel;
 
-    private ScheduleModel lazyEventModel;
-
     private Reservation event;
 
     @EJB(beanInterface = ReservationServiceLocal.class)
@@ -74,32 +57,13 @@ public class ScheduleController implements Serializable {
 
     private ExternalCourse externalCourse;
 
-    private List<ScheduleEvent> getEvents() {
-	final List<ScheduleEvent> events = reservationService.findReservationsFor(SessionHelper.getUserView());
-	for (final ScheduleEvent scheduleEvent : events) {
-	    if (scheduleEvent instanceof Reservation) {
-		((Reservation) scheduleEvent).setStyleClass("myevents");
-	    }
-	}
-	return events;
-    }
-
-    private List<ScheduleEvent> getAllEvents() {
-	return reservationService.findAllReservations(SessionHelper.getUserView());
-    }
-
     public ScheduleModel getEventModel() {
-	return eventModel = eventModel == null ? new DefaultScheduleModel(getEvents()) : eventModel;
-    }
-
-    // TODO: It may be necessary to use a lazy event model later!!!
-    public ScheduleModel getLazyEventModel() {
-	return lazyEventModel = lazyEventModel == null ? new DefaultScheduleModel(getAllEvents()) : lazyEventModel;
+	return eventModel = eventModel == null ? new AllocationManagerScheduleModel() : eventModel;
     }
 
     public Reservation getEvent() {
 	if (event == null) {
-	    event = new Reservation();
+	    event = new Reservation(getUser(), SessionHelper.getLoginDomain());
 	    event.setStyleClass("myevents");
 	}
 	return event;
@@ -121,8 +85,17 @@ public class ScheduleController implements Serializable {
 
     public void removeEvent(ActionEvent actionEvent) {
 	if (event.getId() != null) {
-	    eventModel.deleteEvent(event);
-	    reservationService.remove(event);
+	    try {
+		eventModel.deleteEvent(event);
+		reservationService.remove(event);
+		JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);
+	    } catch (Exception e) {
+		if (e.getCause() instanceof DomainException) {
+		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
+		} else {
+		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
+		}
+	    }
 	}
     }
 
@@ -130,16 +103,17 @@ public class ScheduleController implements Serializable {
 	if (StringUtils.isBlank(event.getId())) {
 	    try {
 		event.setUser(getUser());
+		event.setDomain(SessionHelper.getLoginDomain());
 		event.setStyleClass("myevents");
 		// It is necessary to first update the model so that the event has a reservation id
 		eventModel.addEvent(event);
 		reservationService.create(event);
+		JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
-		    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
+		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
 		} else {
-		    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE)
-										     .getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
 		}
 		// Remove the newly added event if an exception was captured
 		eventModel.deleteEvent(event);
@@ -149,12 +123,12 @@ public class ScheduleController implements Serializable {
 		// It is necessary to get the merged event and only after that, update the event model
 		event = reservationService.edit(event);
 		eventModel.updateEvent(event);
+		JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
-		    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE).getString(e.getCause().getMessage()));
+		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
 		} else {
-		    JsfUtil.addErrorMessage(ConstantUtils.LABEL_ERROR, ResourceBundle.getBundle(ConstantUtils.BUNDLE)
-										     .getString(ConstantUtils.ERROR_PERSISTENCE_KEY));
+		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
 		}
 		event = reservationService.find(event.getIdInternal());
 		eventModel.updateEvent(event);
@@ -236,5 +210,19 @@ public class ScheduleController implements Serializable {
      */
     public void setExternalCourse(ExternalCourse externalCourse) {
 	this.externalCourse = externalCourse;
+    }
+
+    private final class AllocationManagerScheduleModel extends LazyScheduleModel {
+
+	private static final long serialVersionUID = -4448226960542846688L;
+
+	@Override
+	public void loadEvents(Date start, Date end) {
+	    clear();
+	    final List<ScheduleEvent> events = reservationService.findAllReservationsFor(start, end, SessionHelper.getUserView());
+	    for (final ScheduleEvent scheduleEvent : events) {
+		addEvent(scheduleEvent);
+	    }
+	}
     }
 }

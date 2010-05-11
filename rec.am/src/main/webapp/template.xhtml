@@ -12,10 +12,10 @@
 	<link type="text/css" rel="stylesheet"
 		href="#{request.contextPath}/resources/css/style.css" />
 	<style type="text/css">
-		.fc-event {
-			background-color: transparent;
-		}
-	</style>
+.fc-event {
+	background-color: transparent;
+}
+</style>
 </h:head>
 
 <h:body>
@@ -26,9 +26,11 @@
 
 	<div id="header"><ui:include src="header.xhtml" /></div>
 
-	<div id="nav">
+	<h:form>
+		<div id="nav">
 		<ul id="main_nav">
-			<li><a href="/index">Home</a></li>
+			<li><h:commandLink value="#{bundle['menu.index']}"
+				action="/index" /></li>
 			<li><a href="#">Pessoal</a></li>
 			<li><a href="#">Testes</a></li>
 		</ul>
@@ -36,7 +38,8 @@
 			<li><a href="#">Linkare</a></li>
 			<li><a href="#">Sponsor</a></li>
 		</ul>
-	</div>
+		</div>
+	</h:form>
 
 	<div id="content">
 

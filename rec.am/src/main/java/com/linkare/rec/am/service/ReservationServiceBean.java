@@ -3,9 +3,11 @@ package com.linkare.rec.am.service;
 import static com.linkare.rec.am.model.Reservation.COUNT_ALL_QUERYNAME;
 import static com.linkare.rec.am.model.Reservation.FIND_ALL_QUERYNAME;
 import static com.linkare.rec.am.model.Reservation.FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERYNAME;
+import static com.linkare.rec.am.model.Reservation.FIND_FOR_DOMAIN_IN_INTERVAL_QUERYNAME;
 import static com.linkare.rec.am.model.Reservation.FIND_FOR_USER_AFTER_DATE_QUERYNAME;
 import static com.linkare.rec.am.model.Reservation.FIND_FOR_USER_IN_DATE_QUERYNAME;
 import static com.linkare.rec.am.model.Reservation.FIND_FOR_USER_QUERYNAME;
+import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_DOMAIN;
 import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_END_DATE;
 import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_EXPERIMENT_NAME;
 import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_START_DATE;
@@ -31,6 +33,7 @@ import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.model.moodle.ExternalUser;
 import com.linkare.rec.am.web.auth.UserView;
+import com.linkare.rec.am.web.moodle.SessionHelper;
 
 /**
  * 
@@ -75,7 +78,9 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
     }
 
     protected BooleanResult canCreate(final Reservation reservation) {
-	return isValid(reservation);
+	final User user = userService.findByUsername(SessionHelper.getUserView().getFullUsername());
+	final BooleanResult ownershipResult = reservation.checkOwnership(user);
+	return ownershipResult.getResult() == Boolean.FALSE ? ownershipResult : isValid(reservation);
     }
 
     public Reservation edit(final Reservation reservation) {
@@ -88,7 +93,9 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
     }
 
     protected BooleanResult canEdit(final Reservation reservation) {
-	return isValid(reservation);
+	final User user = userService.findByUsername(SessionHelper.getUserView().getFullUsername());
+	final BooleanResult ownershipResult = reservation.checkOwnership(user);
+	return ownershipResult.getResult() == Boolean.FALSE ? ownershipResult : isValid(reservation);
     }
 
     @SuppressWarnings("unchecked")
@@ -104,8 +111,18 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
     @Override
     public void remove(final Reservation reservation) {
 	final Reservation mergedReservation = getEntityManager().merge(reservation);
-	mergedReservation.delete();
-	getEntityManager().remove(mergedReservation);
+	final BooleanResult operationResult = canRemove(mergedReservation);
+	if (operationResult.getResult() == Boolean.TRUE) {
+	    mergedReservation.delete();
+	    getEntityManager().remove(mergedReservation);
+	} else {
+	    throw new DomainException(operationResult.getMessage());
+	}
+    }
+
+    protected BooleanResult canRemove(final Reservation reservation) {
+	final User user = userService.findByUsername(SessionHelper.getUserView().getFullUsername());
+	return reservation.checkOwnership(user);
     }
 
     @Override
@@ -142,20 +159,29 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
     @Override
     @SuppressWarnings("unchecked")
     public List<ScheduleEvent> findReservationsFor(final Date start, final Date end, final UserView userView) {
+	final List<ScheduleEvent> events = new ArrayList<ScheduleEvent>();
 	if (end == null) {
-	    return getEntityManager().createNamedQuery(FIND_FOR_USER_AFTER_DATE_QUERYNAME).setParameter(QUERY_PARAM_USERNAME, userView.getFullUsername())
-				     .setParameter(QUERY_PARAM_START_DATE, start, TemporalType.TIMESTAMP).getResultList();
+	    events.addAll(getEntityManager().createNamedQuery(FIND_FOR_USER_AFTER_DATE_QUERYNAME)
+					    .setParameter(QUERY_PARAM_USERNAME, userView.getFullUsername()).setParameter(QUERY_PARAM_START_DATE, start,
+															 TemporalType.TIMESTAMP)
+					    .getResultList());
 	} else {
-	    return getEntityManager().createNamedQuery(FIND_FOR_USER_IN_DATE_QUERYNAME).setParameter(QUERY_PARAM_USERNAME, userView.getFullUsername())
-				     .setParameter(QUERY_PARAM_START_DATE, start, TemporalType.TIMESTAMP).setParameter(QUERY_PARAM_END_DATE, end,
-														       TemporalType.TIMESTAMP).getResultList();
+	    events.addAll(getEntityManager().createNamedQuery(FIND_FOR_USER_IN_DATE_QUERYNAME).setParameter(QUERY_PARAM_USERNAME, userView.getFullUsername())
+					    .setParameter(QUERY_PARAM_START_DATE, start, TemporalType.TIMESTAMP).setParameter(QUERY_PARAM_END_DATE, end,
+															      TemporalType.TIMESTAMP)
+					    .getResultList());
 	}
+	addStyleclassesToEvents(userView, events);
+	return events;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<ScheduleEvent> findAllReservations(final UserView userView) {
-	final List<ScheduleEvent> events = getEntityManager().createNamedQuery(FIND_ALL_QUERYNAME).getResultList();
+    public List<ScheduleEvent> findAllReservationsFor(final Date start, final Date end, final UserView userView) {
+	final List<ScheduleEvent> events = getEntityManager().createNamedQuery(FIND_FOR_DOMAIN_IN_INTERVAL_QUERYNAME).setParameter(QUERY_PARAM_DOMAIN,
+																   userView.getDomain())
+							     .setParameter(QUERY_PARAM_START_DATE, start, TemporalType.TIMESTAMP)
+							     .setParameter(QUERY_PARAM_END_DATE, end, TemporalType.TIMESTAMP).getResultList();
 	addStyleclassesToEvents(userView, events);
 	return events;
     }
