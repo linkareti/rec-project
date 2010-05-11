@@ -73,6 +73,12 @@ h1 {
 	padding: 15px 0px 15px 0px;
 }
 
+#ext_nav {
+	float: right;
+	padding-top: 0px;
+	margin-top: 0px;
+}
+
 /*-------- Left Column Definitions --------*/
 #left_col {
 	background-color: #e4eeed;
@@ -107,6 +113,21 @@ h1 {
 	float: left;
 	width: 65%;
 	min-height: 416px;
+}
+
+#content div.pf-panel-hd {
+	background: #283234;
+	color: white;
+	border: 0px;
+}
+
+#content div.pf-panel-bd {
+	border: 0px;
+}
+
+form#content div {
+	background: transparent;
+	border: 0px;
 }
 
 /*-------- Right Column Definitions --------*/
@@ -151,7 +172,7 @@ h1 {
 /*-------- Login Definitions --------*/
 #login {
 	min-height: 316px;
-	background-color: white;
+	background-color: #E4EEED;
 	width: 100%;
 	padding-top: 80px;
 }
