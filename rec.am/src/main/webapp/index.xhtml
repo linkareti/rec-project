@@ -10,14 +10,13 @@
 		<ui:include src="menu.xhtml" />
 	</ui:define>
 	<ui:define name="body">
-		<h:form>
+		<h:form id="content">
 			<p:panel id="welcome"
 				header="#{bundle['page.index.introduction.header']}"
-				footer="#{bundle['page.index.introduction.footer']}"
 				toggleable="true" closable="false" toggleSpeed="500"
 				styleClass="dark" closeListener="#{panelBean.handleClose}"
-				onCloseUpdate="msg" closeSpeed="2000"
-				toggleListener="#{panelBean.handleToggle}" onToggleUpdate="msg"
+				closeSpeed="2000"
+				toggleListener="#{panelBean.handleToggle}"
 				widgetVar="panel">
 				<h:outputText escape="false"
 					value="#{bundle['page.index.introduction.body']}" />
