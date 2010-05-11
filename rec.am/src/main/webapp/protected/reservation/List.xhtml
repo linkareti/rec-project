@@ -30,14 +30,6 @@
 						<h:outputText value="#{item.title}" />
 					</p:column>
 
-					<p:column width="150" sortBy="#{item.experiment}"
-						filterBy="#{item.experiment}">
-						<f:facet name="header">
-							<h:outputText value="#{bundle['reservation.experiment']}" />
-						</f:facet>
-						<h:outputText value="#{item.experiment}" />
-					</p:column>
-
 					<p:column width="150" sortBy="#{item.reservedBy}"
 						filterBy="#{item.reservedBy}">
 						<f:facet name="header">
@@ -60,16 +52,6 @@
 							<h:outputText value="#{bundle['reservation.startDate']}" />
 						</f:facet>
 						<h:outputText value="#{item.startDate}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-						</h:outputText>
-					</p:column>
-
-					<p:column width="150" sortBy="#{item.endDate}"
-						filterBy="#{item.endDate}">
-						<f:facet name="header">
-							<h:outputText value="#{bundle['reservation.endDate']}" />
-						</f:facet>
-						<h:outputText value="#{item.endDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 						</h:outputText>
 					</p:column>

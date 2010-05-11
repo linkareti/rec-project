@@ -78,9 +78,7 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
     }
 
     protected BooleanResult canCreate(final Reservation reservation) {
-	final User user = userService.findByUsername(SessionHelper.getUserView().getFullUsername());
-	final BooleanResult ownershipResult = reservation.checkOwnership(user);
-	return ownershipResult.getResult() == Boolean.FALSE ? ownershipResult : isValid(reservation);
+	return isValid(reservation);
     }
 
     public Reservation edit(final Reservation reservation) {
@@ -93,9 +91,10 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
     }
 
     protected BooleanResult canEdit(final Reservation reservation) {
+	final UserView userView = SessionHelper.getUserView();
 	final User user = userService.findByUsername(SessionHelper.getUserView().getFullUsername());
 	final BooleanResult ownershipResult = reservation.checkOwnership(user);
-	return ownershipResult.getResult() == Boolean.FALSE ? ownershipResult : isValid(reservation);
+	return (!userView.isAdmin() && ownershipResult.getResult()) == Boolean.FALSE ? ownershipResult : isValid(reservation);
     }
 
     @SuppressWarnings("unchecked")
@@ -121,8 +120,9 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
     }
 
     protected BooleanResult canRemove(final Reservation reservation) {
-	final User user = userService.findByUsername(SessionHelper.getUserView().getFullUsername());
-	return reservation.checkOwnership(user);
+	final UserView userView = SessionHelper.getUserView();
+	final User user = userService.findByUsername(userView.getFullUsername());
+	return userView.isAdmin() ? BooleanResult.TRUE_RESULT : reservation.checkOwnership(user);
     }
 
     @Override

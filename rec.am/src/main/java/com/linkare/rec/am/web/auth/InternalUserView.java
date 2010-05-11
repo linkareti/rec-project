@@ -58,4 +58,9 @@ public class InternalUserView extends UserView {
     public boolean isTeacher() {
 	return getRoles().contains(RoleType.TEACHER);
     }
+
+    @Override
+    public String getFullUsername() {
+	return getUsername();
+    }
 }
