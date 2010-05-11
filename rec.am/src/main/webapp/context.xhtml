@@ -1,16 +1,30 @@
-<div xmlns="http://www.w3.org/1999/xhtml"
+<h:form id="context" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.prime.com.tr/ui">
 
-<p>My events...</p>
+	<p:panel id="myreservations"
+		header="#{bundle['page.context.myreservations.header']}"
+		toggleable="true" closable="false" toggleSpeed="500" styleClass="dark"
+		closeSpeed="2000" widgetVar="myreservations">
 
-<h:panelGroup rendered="#{!userView.hasReservations}">No events found...</h:panelGroup>
-<h:panelGroup rendered="#{userView.hasReservations}">
-	<h:dataTable var="reservation" value="#{userView.reservations}">
-		<h:column>
-			<h:outputText value="#{reservation.title}" />
-		</h:column>
-	</h:dataTable>
-</h:panelGroup></div>
+		<h:panelGroup rendered="#{!userView.hasReservations}">
+			<h:outputText
+				value="#{bundle['page.context.myreservations.body.noreservations']}" />
+		</h:panelGroup>
+
+		<h:panelGroup rendered="#{userView.hasReservations}">
+			<ul>
+				<ui:repeat var="reservation" value="#{userView.reservations}">
+					<li><h:outputText value="#{reservation.title}" /> - <h:outputText
+						value="#{reservation.startDate}">
+						<f:convertDateTime timeZone="Europe/Lisbon" dateStyle="short"
+							type="both" />
+					</h:outputText></li>
+				</ui:repeat>
+			</ul>
+		</h:panelGroup>
+	</p:panel>
+
+</h:form>
