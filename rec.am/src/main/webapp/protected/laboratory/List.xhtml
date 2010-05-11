@@ -19,7 +19,7 @@
 					lastPageLinkLabel="#{bundle['label.lastPage']}"
 					nextPageLinkLabel="#{bundle['label.nextPage']}"
 					previousPageLinkLabel="#{bundle['label.previousPage']}"
-					scrollable="true">
+					scrollable="false">
 					<!-- onselectComplete="dialog.show()" -->
 
 					<p:column width="200" sortBy="#{item.name}" filterBy="#{item.name}">
@@ -37,7 +37,7 @@
 						<h:outputText value="#{item.description}" />
 					</p:column>
 
-					<p:column width="150" resizable="true">
+					<p:column width="150" resizable="false">
 						<f:facet name="header"></f:facet>
 						<h:commandLink action="#{laboratoryController.prepareView}"
 							value="#{bundle['operation.view']}" />
