@@ -8,42 +8,44 @@
 		<h:outputText value="#{bundle['page.group.list.title']}"></h:outputText>
 	</ui:define>
 	<ui:define name="body">
-		<h:form styleClass="jsfcrud_list_form">
-			<h:outputText escape="false" value="#{bundle['info.emptyList']}"
-				rendered="#{groupController.items.rowCount == 0}" />
-			<h:panelGroup rendered="#{groupController.items.rowCount > 0}">
-				<p:dataTable var="item" value="#{groupController.items}"
-					selection="#{groupController.current}" paginator="true" rows="10"
-					selectionMode="single" dynamic="false"
-					firstPageLinkLabel="#{bundle['label.firstPage']}"
-					lastPageLinkLabel="#{bundle['label.lastPage']}"
-					nextPageLinkLabel="#{bundle['label.nextPage']}"
-					previousPageLinkLabel="#{bundle['label.previousPage']}"
-					scrollable="true">
-					<!-- onselectComplete="dialog.show()" -->
+		<h:form id="list-form">
+			<p:dataTable id="items" var="item" width="100%"
+				value="#{groupController.items}"
+				emptyMessage="#{bundle['info.emptyList']}"
+				selection="#{groupController.current}" paginator="true" rows="10"
+				selectionMode="single" dynamic="false"
+				firstPageLinkLabel="#{bundle['label.firstPage']}"
+				lastPageLinkLabel="#{bundle['label.lastPage']}"
+				nextPageLinkLabel="#{bundle['label.nextPage']}"
+				previousPageLinkLabel="#{bundle['label.previousPage']}"
+				scrollable="false">
 
-					<p:column width="200" sortBy="#{item.name}" filterBy="#{item.name}">
-						<f:facet name="header">
-							<h:outputText value="#{bundle['group.name']}" />
-						</f:facet>
-						<h:outputText value="#{item.name}" />
-					</p:column>
+				<p:column width="200" sortBy="#{item.name}" filterBy="#{item.name}">
+					<f:facet name="header">
+						<h:outputText value="#{bundle['group.name']}" />
+					</f:facet>
+					<h:outputText value="#{item.name}" />
+				</p:column>
 
-					<p:column width="150" resizable="true">
-						<f:facet name="header"></f:facet>
-						<h:commandLink action="#{groupController.prepareView}"
-							value="#{bundle['operation.view']}" />
-						<h:outputText value=" " />
-						<h:commandLink action="#{groupController.prepareEdit}"
-							value="#{bundle['operation.edit']}" />
-						<h:outputText value=" " />
-						<h:commandLink action="#{groupController.destroy}">
-							<h:outputText value="#{bundle['operation.remove']}" />
-						</h:commandLink>
-					</p:column>
+				<p:column width="150" resizable="false">
+					<f:facet name="header"></f:facet>
+					<h:commandLink action="#{groupController.prepareView}"
+						value="#{bundle['operation.view']}" />
+					<h:outputText value=" " />
+					<h:commandLink action="#{groupController.prepareEdit}"
+						value="#{bundle['operation.edit']}" />
+					<h:outputText value=" " />
+					<p:commandLink action="#{groupController.destroy}" ajax="false">
+						<h:outputText value="#{bundle['operation.remove']}" />
+						<p:confirmDialog width="200px" draggable="true" effect="FADE"
+							fixedCenter="true" effectDuration="0.2" modal="false"
+							yesLabel="#{bundle['label.yes']}" noLabel="#{bundle['label.no']}"
+							message="#{bundle['label.confirmMessage']}"
+							header="#{bundle['label.confirmHeader']}" severity="warn" />
+					</p:commandLink>
+				</p:column>
 
-				</p:dataTable>
-			</h:panelGroup>
+			</p:dataTable>
 			<h:commandLink action="#{groupController.prepareCreate}"
 				value="#{bundle['operation.create']}" />
 		</h:form>
