@@ -115,6 +115,10 @@ h1 {
 	min-height: 416px;
 }
 
+#center a {
+	color: #283234;
+}
+
 #content div.pf-panel-hd {
 	background: #283234;
 	color: #E4EEED;
@@ -128,24 +132,58 @@ h1 {
 
 .yui-dt table {
 	border: 0px !important;
+	width: 100% !important;
+}
+
+.yui-dt a {
+	text-decoration: underline;
 }
 
 .yui-dt table thead th {
-	background: #283234 !important;
+	background: #cfd7d6 !important;
+	border: 0px !important;
+}
+
+.yui-dt table thead th input {
+	width: 100% !important;
+}
+
+.yui-dt table thead th * {
+	color: #283234 !important;
+	font-size: 10pt !important;
+}
+
+.yui-dt table thead th.details_col {
+	border-left: 1px solid !important;
+	border-right: 1px solid !important;
+	border-color: #E4EEED !important;
+}
+
+.yui-dt table tbody * {
+	border-bottom: 1px solid !important;
+	border-top: 1px solid !important;
+	border-color: #E4EEED !important;
 }
 
 table .yui-dt-selected * {
 	background-color: #FFFF9F !important;
+	color: #283234;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 .yui-dt-even * {
 	background-color: #f4f9f8 !important;
 	border: 0px !important;
+	color: #283234;
+	text-decoration: none;
 }
 
 .yui-dt-odd * {
 	background-color: #ffffff !important;
 	border: 0px !important;
+	color: #283234;
+	text-decoration: none;
 }
 
 form#content div {
@@ -164,6 +202,7 @@ form#content div {
 .list_col {
 	background-color: red;
 }
+
 /*
 .yui-skin-sam .yui-dt table {
 	border-color: #333333;
