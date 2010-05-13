@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
 import com.linkare.jsf.utils.JsfUtil;
@@ -19,7 +19,7 @@ import com.linkare.rec.am.service.LoginDomainServiceLocal;
  * 
  */
 @ManagedBean(name = "loginDomainBean")
-@ApplicationScoped
+@SessionScoped
 public class LoginDomainBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
