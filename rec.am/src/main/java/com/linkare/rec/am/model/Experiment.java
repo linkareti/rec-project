@@ -171,11 +171,19 @@ public class Experiment extends DefaultDomainObject {
 	this.state = state;
     }
 
+    public boolean getHasLaboratory() {
+	return getLaboratory() != null;
+    }
+
     @Override
     public final int hashCode() {
 	int hash = 0;
 	hash += (getIdInternal() != null ? getIdInternal().hashCode() : 0);
 	return hash;
+    }
+
+    public String getPresentationName() {
+	return getName() + (getHasLaboratory() ? ("@" + getLaboratory().getName()) : "");
     }
 
     @Override
@@ -193,15 +201,7 @@ public class Experiment extends DefaultDomainObject {
 
     @Override
     public final String toString() {
-	if (name != null && !name.trim().equals("")) {
-	    if (laboratory != null && !laboratory.toString().trim().equals("")) {
-		return name + '@' + laboratory.toString();
-	    } else {
-		return name;
-	    }
-	} else {
-	    return getIdInternal().toString();
-	}
+	return getPresentationName();
     }
 
     public static final Experiment findByName(String experiencia, EntityManager em) {
