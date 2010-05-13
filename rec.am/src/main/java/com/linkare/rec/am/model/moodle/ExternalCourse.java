@@ -2,7 +2,7 @@ package com.linkare.rec.am.model.moodle;
 
 import java.util.List;
 
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
 
 import com.linkare.commons.dao.Deletable;
 import com.linkare.commons.dao.Identifiable;
@@ -16,7 +16,7 @@ import com.linkare.rec.am.wsgen.moodle.LoginReturn;
  * @author Paulo Zenida - Linkare TI
  * 
  */
-@Named("externalCourse")
+@ManagedBean(name = "externalCourse")
 public class ExternalCourse implements Identifiable<String>, Deletable {
 
     private CourseRecord delegate;
