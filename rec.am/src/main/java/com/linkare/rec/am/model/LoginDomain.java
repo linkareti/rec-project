@@ -16,12 +16,23 @@ import com.linkare.commons.utils.EqualityUtils;
  */
 @Entity
 @Table(name = "LOGIN_DOMAIN")
-@NamedQueries( { @NamedQuery(name = "LoginDomain.findAll", query = "Select l from LoginDomain l"),
-	@NamedQuery(name = "LoginDomain.countAll", query = "Select count(l) from LoginDomain l"),
-	@NamedQuery(name = "LoginDomain.findByName", query = "Select l from LoginDomain l where l.name=:name") })
+@NamedQueries( { @NamedQuery(name = LoginDomain.FIND_ALL_QUERYNAME, query = LoginDomain.FIND_ALL_QUERY),
+	@NamedQuery(name = LoginDomain.COUNT_ALL_QUERYNAME, query = LoginDomain.COUNT_ALL_QUERY),
+	@NamedQuery(name = LoginDomain.FIND_BY_NAME_QUERYNAME, query = LoginDomain.FIND_BY_NAME_QUERY) })
 public class LoginDomain extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
+
+    public static final String QUERY_PARAM_NAME = "name";
+
+    public static final String FIND_ALL_QUERYNAME = "LoginDomain.findAll";
+    public static final String FIND_ALL_QUERY = "Select l from LoginDomain l";
+
+    public static final String COUNT_ALL_QUERYNAME = "LoginDomain.countAll";
+    public static final String COUNT_ALL_QUERY = "Select count(l) from LoginDomain l";
+
+    public static final String FIND_BY_NAME_QUERYNAME = "LoginDomain.findByName";
+    public static final String FIND_BY_NAME_QUERY = "Select l from LoginDomain l where UPPER(l.name)=UPPER(:" + QUERY_PARAM_NAME + ")";
 
     @Column(name = "NAME", insertable = true, updatable = true, nullable = false, unique = true)
     private String name;

@@ -196,6 +196,7 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
 	return events;
     }
 
+    // TODO This method does not make sense in the service class implementation. Move it to the JSF controller later!
     private void addStyleclassesToEvents(UserView userView, final List<ScheduleEvent> events) {
 	for (final ScheduleEvent scheduleEvent : events) {
 	    final Reservation reservation = (Reservation) scheduleEvent;

@@ -1,5 +1,10 @@
 package com.linkare.rec.am.service;
 
+import static com.linkare.rec.am.model.Reservation.FIND_IN_INTERVAL_AND_LAB_QUERYNAME;
+import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_END_DATE;
+import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_LAB_NAME;
+import static com.linkare.rec.am.model.Reservation.QUERY_PARAM_START_DATE;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +19,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 
 import com.linkare.commons.jpa.security.User;
+import com.linkare.commons.utils.StringUtils;
 import com.linkare.rec.am.AllocationDTO;
 import com.linkare.rec.am.AllocationManager;
 import com.linkare.rec.am.ParameterException;
@@ -22,6 +28,7 @@ import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.web.auth.LoginProviderFactory;
 import com.linkare.rec.am.web.ex.AuthenticationException;
+import com.linkare.rec.am.web.util.ConstantUtils;
 
 /**
  * 
@@ -42,10 +49,11 @@ public class AllocationManagerBean implements AllocationManager {
     @Override
     public List<AllocationDTO> getBy(Date begin, Date end, String laboratoryID) throws RemoteException, ParameterException {
 	final List<AllocationDTO> result = new ArrayList<AllocationDTO>();
-	final List<Reservation> reservations = entityManager.createNamedQuery("Reservation.findAllocationsInIntervalAndLab")
-							    .setParameter("startDate", begin, TemporalType.TIMESTAMP).setParameter("endDate", end,
-																   TemporalType.TIMESTAMP)
-							    .setParameter("laboratoryName", laboratoryID).getResultList();
+	final List<Reservation> reservations = entityManager.createNamedQuery(FIND_IN_INTERVAL_AND_LAB_QUERYNAME).setParameter(QUERY_PARAM_START_DATE, begin,
+															       TemporalType.TIMESTAMP)
+							    .setParameter(QUERY_PARAM_END_DATE, end, TemporalType.TIMESTAMP).setParameter(QUERY_PARAM_LAB_NAME,
+																	  laboratoryID)
+							    .getResultList();
 	for (final Reservation reservation : reservations) {
 	    final List<String> users = getUsers(reservation);
 	    final List<String> owners = getOwners(reservation);
@@ -69,13 +77,14 @@ public class AllocationManagerBean implements AllocationManager {
 
     @Override
     public boolean authenticate(String username, String password) throws RemoteException, UnknownDomainException {
-	final String domain = username.contains("@") ? username.substring(username.indexOf("@") + 1) : null;
+	final String simpleUsername = username.contains("@") ? username.substring(0, username.indexOf("@")) : username;
+	final String domain = username.contains("@") ? username.substring(username.indexOf("@") + 1) : ConstantUtils.INTERNAL_DOMAIN_NAME;
 	LoginDomain loginDomain = loginDomainService.findByName(domain);
-	if (domain != null && loginDomain == null) {
+	if (!StringUtils.isBlank(domain) && loginDomain == null) {
 	    throw new UnknownDomainException("domain not found " + domain);
 	}
 	try {
-	    LoginProviderFactory.getLoginProvider(domain).authenticate(username.substring(0, username.indexOf("@")), password, domain);
+	    LoginProviderFactory.getLoginProvider(domain).authenticate(simpleUsername, password, domain);
 	} catch (AuthenticationException e) {
 	    e.printStackTrace();
 	    return false;
