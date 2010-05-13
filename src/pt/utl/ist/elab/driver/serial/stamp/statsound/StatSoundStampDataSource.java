@@ -156,15 +156,15 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				sr.resetRMS();
 
-//				values[0] = PhysicsValueFactory.fromInt(posValor, config.getChannelsConfig(0).getSelectedScale());
-//				values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
-//				values[4] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(4).getSelectedScale());
-//				values[3] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(3).getSelectedScale());
-
 				values[0] = PhysicsValueFactory.fromInt(posValor, config.getChannelsConfig(0).getSelectedScale());
 				values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
-				values[3] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(3).getSelectedScale());
-				values[2] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(2).getSelectedScale());
+				values[3] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(2).getSelectedScale());
+				values[4] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(3).getSelectedScale());
+
+//				values[0] = PhysicsValueFactory.fromInt(posValor, config.getChannelsConfig(0).getSelectedScale());
+//				values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
+//				values[3] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(3).getSelectedScale());
+//				values[2] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(2).getSelectedScale());
 
 				
 				
@@ -229,15 +229,15 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					double rmsRightValor = sr.getRMS(sr.RIGHT_CHANNEL);
 					sr.resetRMS();
 
-//					values[0] = PhysicsValueFactory.fromInt(posIni, config.getChannelsConfig(0).getSelectedScale());
-//					values[1] = PhysicsValueFactory.fromDouble(f, config.getChannelsConfig(1).getSelectedScale());
-//					values[4] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(4).getSelectedScale());
-//					values[3] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(3).getSelectedScale());
-
 					values[0] = PhysicsValueFactory.fromInt(posIni, config.getChannelsConfig(0).getSelectedScale());
 					values[1] = PhysicsValueFactory.fromDouble(f, config.getChannelsConfig(1).getSelectedScale());
-					values[3] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(3).getSelectedScale());
-					values[2] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(2).getSelectedScale());
+					values[3] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(2).getSelectedScale());
+					values[4] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(3).getSelectedScale());
+
+//					values[0] = PhysicsValueFactory.fromInt(posIni, config.getChannelsConfig(0).getSelectedScale());
+//					values[1] = PhysicsValueFactory.fromDouble(f, config.getChannelsConfig(1).getSelectedScale());
+//					values[3] = PhysicsValueFactory.fromDouble(rmsRightValor, config.getChannelsConfig(3).getSelectedScale());
+//					values[2] = PhysicsValueFactory.fromDouble(rmsLeftValor, config.getChannelsConfig(2).getSelectedScale());
 
 					
 					
@@ -295,16 +295,16 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 					System.out.println("block " + i + " : " + string);
 
-//					values[5] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
-//					values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
-//					values[3] = PhysicsValueFactory.fromDouble(((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i * 4])) / 250.0), config.getChannelsConfig(3).getSelectedScale());
-//					values[4] = PhysicsValueFactory.fromDouble((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 2])), config.getChannelsConfig(4).getSelectedScale());
-
-					values[0] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
+					values[5] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
 					values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
-					values[2] = PhysicsValueFactory.fromDouble(((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i * 4]))), config.getChannelsConfig(2).getSelectedScale());
-					values[3] = PhysicsValueFactory.fromDouble(((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 2]))), config.getChannelsConfig(3).getSelectedScale());
+					values[3] = PhysicsValueFactory.fromDouble(((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i * 4]))), config.getChannelsConfig(2).getSelectedScale());
+					values[4] = PhysicsValueFactory.fromDouble(((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 2]))), config.getChannelsConfig(3).getSelectedScale());
 					
+//					values[0] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
+//					values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
+//					values[2] = PhysicsValueFactory.fromDouble(((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i * 4]))), config.getChannelsConfig(2).getSelectedScale());
+//					values[3] = PhysicsValueFactory.fromDouble(((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 2]))), config.getChannelsConfig(3).getSelectedScale());
+		
 					
 					super.addDataRow(values);
 				}
