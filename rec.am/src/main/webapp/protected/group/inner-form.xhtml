@@ -9,12 +9,12 @@
 	<h:inputHidden id="current" value="#{groupController.current}"
 		converter="groupConverter" rendered="#{operation != 'create'}" />
 	<p:focus for="name" />
-	<h:panelGrid columns="2">
+	<h:panelGrid columns="3">
 		<h:outputLabel value="#{bundle['group.name']}" for="name" />
 		<h:inputText id="name" value="#{groupController.selected.name}"
 			title="#{bundle['group.name']}" required="true"
-			label="#{bundle['group.name']}" disabled="#{operation != 'create'}" />
-
+			label="#{bundle['group.name']}" readonly="#{operation != 'create'}" />
+		<p:message for="name" />
 		<h:outputLabel value="#{bundle['group.childUsers']}" for="members"
 			rendered="#{operation == 'edit'}" />
 		<p:pickList id="members" value="#{groupController.users}" var="user"

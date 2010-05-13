@@ -10,7 +10,7 @@
 
 	<ui:define name="body">
 		<h:panelGroup layout="block">
-			<h:form>
+			<h:form id="schedule-form">
 				<p:ajaxStatus style="height:24px;display:block;">
 					<f:facet name="start">
 						<h:graphicImage value="images/ajaxloading.gif" />
@@ -20,6 +20,9 @@
 						<h:outputText value="" />
 					</f:facet>
 				</p:ajaxStatus>
+
+				<p:messages id="messages" showDetail="true" />
+
 				<p:schedule id="schedule" value="#{scheduleController.eventModel}"
 					editable="true" widgetVar="myschedule" allDaySlot="false"
 					showWeekends="true" draggable="false" resizable="false"
@@ -36,29 +39,32 @@
 						<h:inputHidden id="id" value="#{scheduleController.event.id}" />
 						<h:inputHidden id="domain"
 							value="#{scheduleController.event.domain}" />
-
-						<h:panelGrid columns="2" border="0">
+						<h:panelGrid columns="3" border="0">
 							<h:outputLabel for="title" value="#{bundle['reservation.title']}" />
-							<h:inputText id="title" value="#{scheduleController.event.title}" />
+							<h:inputText id="title" value="#{scheduleController.event.title}"
+								required="true" label="#{scheduleController.event.title}" />
+							<p:message for="title" />
 							<h:outputLabel value="#{bundle['reservation.experiment']}"
 								for="experiment" />
 							<h:selectOneMenu id="experiment"
 								value="#{scheduleController.event.experiment}"
-								title="#{bundle['reservation.experiment']}" required="true"
+								label="#{bundle['reservation.experiment']}" required="true"
 								converter="experimentConverter">
 								<f:selectItems
 									value="#{experimentController.itemsAvailableSelectOne}" />
 							</h:selectOneMenu>
+							<p:message for="experiment" />
 							<h:outputLabel value="#{bundle['reservation.reservedTo']}"
 								for="group" rendered="#{!userView.external}" />
 							<h:selectOneMenu id="group"
 								value="#{scheduleController.event.group}"
-								title="#{bundle['reservation.group']}"
+								label="#{bundle['reservation.group']}"
 								required="#{!userView.external}" converter="groupConverter"
 								rendered="#{!userView.external}">
 								<f:selectItems
 									value="#{groupController.itemsAvailableSelectOne}" />
 							</h:selectOneMenu>
+							<p:message for="group" rendered="#{!userView.external}" />
 							<h:outputLabel value="#{bundle['reservation.reservedTo']}"
 								for="externalCourse" rendered="#{userView.external}" />
 							<h:selectOneMenu id="externalCourse"
@@ -69,27 +75,31 @@
 								<f:selectItems
 									value="#{externalCourseController.itemsAvailableSelectOne}" />
 							</h:selectOneMenu>
+							<p:message for="externalCourse" rendered="#{userView.external}" />
 							<h:outputLabel for="startDate"
 								value="#{bundle['reservation.startDate']}" />
 							<p:inputMask id="startDate"
 								value="#{scheduleController.event.startDate}"
 								mask="99/99/9999 99:99"
-								label="#{bundle['reservation.startDate']}">
+								label="#{bundle['reservation.startDate']}" required="true">
 								<f:convertDateTime timeZone="Europe/Lisbon" type="both"
 									pattern="dd/MM/yyyy HH:mm" />
 							</p:inputMask>
+							<p:message for="startDate" />
 							<h:outputLabel for="endDate"
 								value="#{bundle['reservation.endDate']}" />
 							<p:inputMask id="endDate"
 								value="#{scheduleController.event.endDate}"
-								label="#{bundle['reservation.endDate']}" mask="99/99/9999 99:99">
+								label="#{bundle['reservation.endDate']}" mask="99/99/9999 99:99"
+								required="true">
 								<f:convertDateTime timeZone="Europe/Lisbon" type="both"
 									pattern="dd/MM/yyyy HH:mm" />
 							</p:inputMask>
+							<p:message for="endDate" />
 						</h:panelGrid>
 						<p:commandButton value="#{bundle['operation.save']}"
 							actionListener="#{scheduleController.addEvent}"
-							update="msg, context:myreservations"
+							update="msg, context:myreservations, schedule-form:messages"
 							oncomplete="myschedule.update();" />
 						<p:commandButton value="#{bundle['operation.remove']}"
 							actionListener="#{scheduleController.removeEvent}"

@@ -7,12 +7,13 @@
 		value="#{userController.selected.idInternal}" />
 	<h:inputHidden id="version" value="#{userController.selected.version}" />
 	<p:focus for="username" />
-	<h:panelGrid columns="2">
+	<h:panelGrid columns="3">
 		<h:outputLabel value="#{bundle['user.username']}" for="username" />
 		<h:inputText id="username" value="#{userController.selected.username}"
 			title="#{bundle['user.username']}" required="true"
 			label="#{bundle['user.username']}"
-			disabled="#{operation != 'create'}" />
+			readonly="#{operation != 'create'}" />
+		<p:message for="username" />
 	</h:panelGrid>
 	<h:panelGroup rendered="#{operation == 'create'}">
 		<h:commandLink action="#{userController.create}"

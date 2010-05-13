@@ -8,12 +8,13 @@
 	<h:inputHidden id="version"
 		value="#{reservationController.selected.version}" />
 	<p:focus for="title" />
-	<h:panelGrid columns="2">
+	<h:panelGrid columns="3">
 		<h:outputLabel value="#{bundle['reservation.title']}" for="title" />
 		<h:inputText id="title"
 			value="#{reservationController.selected.title}" required="true"
 			label="#{bundle['reservation.title']}"
 			title="#{bundle['reservation.title']}" />
+		<p:message for="title" />
 		<h:outputLabel value="#{bundle['reservation.experiment']}"
 			for="experiment" />
 		<h:selectOneMenu id="experiment"
@@ -25,6 +26,7 @@
 			<f:selectItems
 				value="#{experimentController.itemsAvailableSelectOne}" />
 		</h:selectOneMenu>
+		<p:message for="experiment" />
 		<h:outputLabel value="#{bundle['reservation.reservedBy']}" for="user"
 			rendered="#{!userView.external}" />
 		<h:selectOneMenu id="user"
@@ -35,12 +37,7 @@
 			rendered="#{!userView.external}">
 			<f:selectItems value="#{userController.itemsAvailableSelectOne}" />
 		</h:selectOneMenu>
-		<h:outputLabel value="#{bundle['reservation.reservedBy']}"
-			for="externalUser" rendered="#{userView.external}" />
-		<h:inputText id="externalUser"
-			value="#{reservationController.selected.externalUser}"
-			label="#{bundle['reservation.reservedBy']}"
-			required="#{userView.external}" rendered="#{userView.external}" />
+		<p:message for="user" />
 		<h:outputLabel value="#{bundle['reservation.reservedTo']}" for="group"
 			rendered="#{!userView.external}" />
 		<h:selectOneMenu id="group"
@@ -51,12 +48,7 @@
 			rendered="#{!userView.external}">
 			<f:selectItems value="#{groupController.itemsAvailableSelectOne}" />
 		</h:selectOneMenu>
-		<h:outputLabel value="#{bundle['reservation.reservedTo']}"
-			for="externalCourse" rendered="#{userView.external}" />
-		<h:inputText id="externalCourse"
-			value="#{reservationController.selected.externalCourse}"
-			label="#{bundle['reservation.reservedTo']}"
-			required="#{userView.external}" rendered="#{userView.external}" />
+		<p:message for="group" />
 		<h:outputLabel for="startDate"
 			value="#{bundle['reservation.startDate']}" />
 		<p:inputMask id="startDate"
@@ -65,6 +57,7 @@
 			<f:convertDateTime timeZone="Europe/Lisbon" type="both"
 				pattern="dd/MM/yyyy HH:mm" />
 		</p:inputMask>
+		<p:message for="startDate" />
 		<h:outputLabel for="endDate" value="#{bundle['reservation.endDate']}" />
 		<p:inputMask id="endDate"
 			value="#{reservationController.selected.endDate}"
@@ -72,6 +65,7 @@
 			<f:convertDateTime timeZone="Europe/Lisbon" type="both"
 				pattern="dd/MM/yyyy HH:mm" />
 		</p:inputMask>
+		<p:message for="endDate" />
 	</h:panelGrid>
 
 	<h:panelGroup rendered="#{operation == 'create'}">

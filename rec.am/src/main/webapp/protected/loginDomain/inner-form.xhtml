@@ -10,16 +10,18 @@
 		value="#{loginDomainController.selected.version}"
 		rendered="#{operation != 'create'}" />
 	<p:focus for="name" />
-	<h:panelGrid columns="2">
+	<h:panelGrid columns="3">
 		<h:outputLabel value="#{bundle['loginDomain.name']}" for="name" />
 		<h:inputText id="name" value="#{loginDomainController.selected.name}"
 			title="#{bundle['loginDomain.name']}" required="true"
 			label="#{bundle['laboratory.name']}"
-			disabled="#{operation == 'view'}" />
+			readonly="#{operation == 'view'}" />
+		<p:message for="name" />
 		<h:outputLabel value="#{bundle['loginDomain.url']}" for="url" />
 		<h:inputText id="url" value="#{loginDomainController.selected.url}"
 			title="#{bundle['loginDomain.description']}"
-			disabled="#{operation == 'view'}" />
+			readonly="#{operation == 'view'}" required="true" />
+		<p:message for="url" />
 	</h:panelGrid>
 
 	<h:panelGroup rendered="#{operation == 'create'}">

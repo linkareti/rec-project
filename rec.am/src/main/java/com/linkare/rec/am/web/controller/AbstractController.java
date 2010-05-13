@@ -39,13 +39,13 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
     public String create() {
 	try {
 	    getService().create(current);
-	    JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
+	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
 	    return prepareCreate();
 	} catch (Exception e) {
 	    if (e.getCause() instanceof DomainException) {
-		JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
+		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
 	    } else {
-		JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
+		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
 	    }
 	    return null;
 	}
@@ -54,13 +54,13 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
     public String update() {
 	try {
 	    getService().edit(current);
-	    JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
+	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
 	    return ConstantUtils.VIEW;
 	} catch (Exception e) {
 	    if (e.getCause() instanceof DomainException) {
-		JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
+		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
 	    } else {
-		JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
+		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
 	    }
 	    return null;
 	}
@@ -88,12 +88,12 @@ public abstract class AbstractController<ID extends Serializable, Entity extends
     protected void performDestroy() {
 	try {
 	    getService().remove(current);
-	    JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);
+	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);
 	} catch (Exception e) {
 	    if (e.getCause() instanceof DomainException) {
-		JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
+		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
 	    } else {
-		JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
+		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
 	    }
 	}
     }

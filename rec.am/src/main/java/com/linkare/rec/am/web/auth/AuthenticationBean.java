@@ -34,7 +34,7 @@ public class AuthenticationBean {
 	    authenticate();
 	    registerUserIfNecessary();
 	} catch (AuthenticationException e) {
-	    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_LOGIN_FAILED_KEY);
+	    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_LOGIN_FAILED_KEY);
 	    return null;
 	}
 	return "index";

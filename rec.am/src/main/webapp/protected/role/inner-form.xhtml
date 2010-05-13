@@ -9,11 +9,12 @@
 	<h:inputHidden id="current" value="#{roleController.current}"
 		converter="roleConverter" rendered="#{operation != 'create'}" />
 	<p:focus for="name" />
-	<h:panelGrid columns="2">
+	<h:panelGrid columns="3">
 		<h:outputLabel value="#{bundle['role.name']}" for="name" />
 		<h:inputText id="name" value="#{roleController.selected.name}"
 			title="#{bundle['role.name']}" required="true"
-			label="#{bundle['role.name']}" disabled="#{operation != 'create'}" />
+			label="#{bundle['role.name']}" readonly="#{operation != 'create'}" />
+		<p:message for="name" />
 
 		<h:outputLabel value="#{bundle['role.childUsers']}" for="members"
 			rendered="#{operation == 'edit'}" />

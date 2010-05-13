@@ -5,19 +5,21 @@
 	xmlns:p="http://primefaces.prime.com.tr/ui">
 
 	<p:focus for="shortname" />
-	<h:panelGrid columns="2">
+	<h:panelGrid columns="3">
 		<h:outputLabel value="#{bundle['externalCourse.shortname']}"
 			for="shortname" />
 		<h:inputText id="shortname"
 			value="#{externalCourseController.selected.shortname}"
 			title="#{bundle['externalCourse.shortname']}"
-			disabled="#{operation == 'view'}" />
-		<h:outputText value="#{bundle['externalCourse.fullname']}"
+			readonly="#{operation == 'view'}" />
+		<p:message for="shortname" />
+		<h:outputLabel value="#{bundle['externalCourse.fullname']}"
 			for="fullname" />
 		<h:inputText id="fullname"
 			value="#{externalCourseController.selected.fullname}"
 			title="#{bundle['externalCourse.fullname']}"
-			disabled="#{operation == 'view'}" />
+			readonly="#{operation == 'view'}" />
+		<p:message for="fullname" />
 
 		<h:outputLabel value="#{bundle['externalCourse.teachers']}"
 			for="teachers" />

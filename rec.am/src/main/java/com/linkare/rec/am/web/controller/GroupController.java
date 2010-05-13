@@ -109,7 +109,7 @@ public class GroupController extends AbstractController<Long, Group, GroupServic
 
     public String setUsersMembership() {
 	getService().setUsersMembership(getSelected(), getUsers().getTarget());
-	JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_ASSOCIATION_KEY);
+	JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_ASSOCIATION_KEY);
 	return prepareEdit();
     }
 }

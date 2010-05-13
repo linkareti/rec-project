@@ -89,13 +89,13 @@ public class ScheduleController implements Serializable {
 	    try {
 		eventModel.deleteEvent(event);
 		reservationService.remove(event);
-		JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);
+		JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);
 		refreshUserView();
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
-		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
+		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
 		} else {
-		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
+		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
 		}
 	    }
 	}
@@ -110,13 +110,13 @@ public class ScheduleController implements Serializable {
 		// It is necessary to first update the model so that the event has a reservation id
 		eventModel.addEvent(event);
 		reservationService.create(event);
-		JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
+		JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
 		refreshUserView();
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
-		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
+		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
 		} else {
-		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
+		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
 		}
 		// Remove the newly added event if an exception was captured
 		eventModel.deleteEvent(event);
@@ -126,13 +126,13 @@ public class ScheduleController implements Serializable {
 		// It is necessary to get the merged event and only after that, update the event model
 		event = reservationService.edit(event);
 		eventModel.updateEvent(event);
-		JsfUtil.addSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
+		JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
 		refreshUserView();
 	    } catch (Exception e) {
 		if (e.getCause() instanceof DomainException) {
-		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
+		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
 		} else {
-		    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
+		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
 		}
 		event = reservationService.find(event.getIdInternal());
 		eventModel.updateEvent(event);

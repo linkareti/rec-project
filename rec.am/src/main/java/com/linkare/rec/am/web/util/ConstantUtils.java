@@ -7,7 +7,7 @@ package com.linkare.rec.am.web.util;
  */
 public final class ConstantUtils {
 
-    public static final String BUNDLE = "/Bundle";
+    public static final String BUNDLE = "/messages";
 
     public static final String USER_VIEW_SESSION_KEY = "userView";
 
