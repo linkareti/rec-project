@@ -168,7 +168,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				
 				
-				if (Math.abs(values[2].getValue().getDoubleValue()) > 0.01d && Math.abs(values[3].getValue().getDoubleValue()) > 0.01d) {
+				if (Math.abs(values[3].getValue().getDoubleValue()) > 0.01d && Math.abs(values[4].getValue().getDoubleValue()) > 0.01d) {
 					// System.out.println("Add row : " +
 					// values[2].getValue().getFloatValue() + " , " +
 					// values[3].getValue().getFloatValue());
@@ -241,7 +241,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 					
 					
-					if (Math.abs(values[2].getValue().getDoubleValue()) > 0.01d && Math.abs(values[3].getValue().getDoubleValue()) > 0.01d) {
+					if (Math.abs(values[3].getValue().getDoubleValue()) > 0.01d && Math.abs(values[4].getValue().getDoubleValue()) > 0.01d) {
 						super.addDataRow(values);
 					}
 
