@@ -25,9 +25,13 @@ public final class ConstantUtils {
 
     public static final String INFO_ASSOCIATION_KEY = "info.association";
 
+    public static final String INFO_DISSOCIATION_KEY = "info.dissociation";
+
     public static final String ERROR_PERSISTENCE_KEY = "error.persistence";
 
     public static final String ERROR_LOGIN_FAILED_KEY = "error.login.failed";
+
+    public static final String ERROR_USERNAME_CANNOT_BE_EMPTY_KEY = "error.username.cannot.be.empty";
 
     public static final String VIEW = "View";
 

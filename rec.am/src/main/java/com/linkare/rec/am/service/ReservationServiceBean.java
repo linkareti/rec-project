@@ -207,4 +207,31 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
 	    }
 	}
     }
+
+    @Override
+    public Reservation getReservationDetails(Long id) {
+	final Reservation reservation = find(id);
+	reservation.getGroup().getAllUsers();
+	return reservation;
+    }
+
+    @Override
+    public void addUser(Reservation reservation, User user) {
+	final Reservation mergedReservation = find(reservation.getIdInternal());
+	final Group mergedGroup = groupService.find(mergedReservation.getGroup().getIdInternal());
+	final User mergedUser = userService.find(user.getIdInternal());
+	if (!mergedGroup.hasMember(mergedUser)) {
+	    mergedGroup.addDirectChild(mergedUser);
+	}
+    }
+
+    @Override
+    public void removeUser(Reservation reservation, User user) {
+	final Reservation mergedReservation = find(reservation.getIdInternal());
+	final Group mergedGroup = groupService.find(mergedReservation.getGroup().getIdInternal());
+	final User mergedUser = userService.find(user.getIdInternal());
+	if (mergedGroup.hasMember(mergedUser)) {
+	    mergedGroup.removeDirectChild(mergedUser);
+	}
+    }
 }

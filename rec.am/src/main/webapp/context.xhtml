@@ -15,15 +15,69 @@
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{userView.hasReservations}">
-			<ul>
-				<ui:repeat var="reservation" value="#{userView.reservations}">
-					<li><h:outputText value="#{reservation.title}" /> - <h:outputText
-						value="#{reservation.startDate}">
+			<p:dataTable var="event" value="#{userView.reservations}"
+				paginator="false" selection="#{reservationController.current}"
+				selectionMode="single" update="display"
+				onselectComplete="eventDialog.show()">
+				<p:column>
+					<f:facet name="header" />
+					<h:outputText value="#{event.title}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header" />
+					<h:outputText value="#{event.startDate}">
 						<f:convertDateTime timeZone="Europe/Lisbon" dateStyle="short"
 							type="both" />
-					</h:outputText></li>
-				</ui:repeat>
-			</ul>
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+
+			<p:dialog header="#{bundle['label.event.header']}"
+				widgetVar="eventDialog" modal="true" fixedCenter="true"
+				draggable="true" width="600px" height="400px" resizable="true"
+				underlay="shadow">
+
+				<p:panel id="display">
+					<h3><h:outputText
+						value="#{reservationController.current.title}: #{reservationController.current.reservedTo}@#{reservationController.current.experiment}" /></h3>
+
+					<p><h:outputText value="#{bundle['group.childUsers']}" /></p>
+					<p:dataTable id="users" var="user"
+						value="#{reservationController.currentDetails.group.allUsers}"
+						paginator="false" scrollable="true" height="150px" width="300px">
+						<p:column>
+							<f:facet name="header" />
+							<h:outputText value="#{user.username}" />
+						</p:column>
+					</p:dataTable>
+
+					<p><h:outputLabel value="#{bundle['user.username']}"
+						for="username" /> <p:autoComplete id="username" maxResults="10"
+						widgetVar="username" minQueryLength="2"
+						value="#{userAutoComplete.selectedUser}"
+						completeMethod="#{userAutoComplete.completeUser}" var="user"
+						itemLabel="#{user.username}" itemValue="#{user}"
+						converter="userConverter" /></p>
+
+					<br />
+					<br />
+
+					<p><p:commandLink action="#{reservationController.addUser}"
+						value="#{bundle['operation.add']}" update="users,msg" /> <h:outputText
+						value=" " /> <p:commandLink
+						action="#{reservationController.removeUser}"
+						value="#{bundle['operation.remove']}" update="users,msg">
+						<!--
+						<p:confirmDialog width="200px" draggable="true" effect="FADE"
+							fixedCenter="true" effectDuration="0.2" modal="false"
+							constrainToViewport="false" yesLabel="#{bundle['label.yes']}"
+							noLabel="#{bundle['label.no']}"
+							message="#{bundle['label.confirmMessage']}"
+							header="#{bundle['label.confirmHeader']}" severity="warn" />
+						-->
+					</p:commandLink></p>
+				</p:panel>
+			</p:dialog>
 		</h:panelGroup>
 	</p:panel>
 

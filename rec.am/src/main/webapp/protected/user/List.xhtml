@@ -11,10 +11,8 @@
 		<h:form id="list-form">
 			<p:dataTable id="items" var="item" width="100%"
 				value="#{userController.items}"
-				emptyMessage="#{bundle['info.emptyList']}"
-				selection="#{userController.current}" paginator="true" rows="10"
-				selectionMode="single" dynamic="false"
-				update="details-form:entity-panel"
+				emptyMessage="#{bundle['info.emptyList']}" paginator="true"
+				rows="10" dynamic="false" update="details-form:entity-panel"
 				firstPageLinkLabel="#{bundle['label.firstPage']}"
 				lastPageLinkLabel="#{bundle['label.lastPage']}"
 				nextPageLinkLabel="#{bundle['label.nextPage']}"
@@ -47,7 +45,7 @@
 					</p:commandLink>
 				</p:column>
 			</p:dataTable>
-			<h:commandLink action="#{laboratoryController.prepareCreate}"
+			<h:commandLink action="#{userController.prepareCreate}"
 				value="#{bundle['operation.create']}" />
 		</h:form>
 	</ui:define>
