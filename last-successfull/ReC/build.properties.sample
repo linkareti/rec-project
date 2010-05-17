@@ -1,0 +1,97 @@
+build.dir=build/java
+dist.dir=dist/java
+
+javac.encoding=UTF-8
+javac.debug=true
+javac.optimize=true
+javac.sourcelevel=1.6
+
+copy.encoding=UTF-8
+
+#this next section esplicits which experiments are going to be compiled, packaged, distributed...
+#you need only one list, the reason they are separated is to allow building elab and elab virtual separatly
+#just uncomment the one you need
+#list of experiments in ELab
+experiment.list=aleatorio,gamma,tiro,pend2m
+#list of virtual experiments in ELab Virtual
+#experiment.list=mm,cg
+
+###DEPLOYMENT####
+rec.server=
+rec.server.dir=
+web.server=
+web.server.dir=
+
+##KEYSTORE CONFIGURATION###
+rec.keystore=cert/ISTJavaSign.KeyStore.p12
+#rec.storetype=jks,pkcs12
+rec.storetype=pkcs12
+rec.keypass=askPass
+rec.storepass=askPass
+rec.alias=ISTJavaSign
+
+##KEYSTORE CONFIGURATION###
+elab.keystore=cert/ISTJavaSign.KeyStore.p12
+#elab.storetype=jks,pkcs12
+elab.storetype=pkcs12
+elab.keypass=askPass
+elab.storepass=askPass
+elab.alias=ISTJavaSign
+
+##RUN CONFIGURATION##
+max.memory=1024m
+min.memory=128m
+
+##COMMON MANIFEST## (adopted from com.linkare.commons project)
+com.linkare.rec.spec.title=ReC - Elab
+com.linkare.rec.spec.version=1.0.0
+com.linkare.rec.spec.vendor=Linkare TI
+com.linkare.rec.impl.title=ReC - Elab
+com.linkare.rec.impl.version=1.0.0
+com.linkare.rec.impl.vendor=Linkare TI
+
+###########################SYSTEM PROPERTIES###############################
+rec.multicastcontroller.bindname=MultiCastController 
+rec.multicastcontroller.initref=MultiCastController 
+java.util.logging.config.file=loggers.config.properties
+org.omg.CORBA.ORBClass=org.openorb.orb.core.ORB 
+org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton 
+com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl
+#openorb.config=$OUTPUT_BASE_DIR/openorb/OpenORB.xml 
+#openorb.config.virtual=$OUTPUT_BASE_DIR/openorb/OpenORBVirtual.xml
+
+##MULTICAST PROPERTIES - MULTICAST##
+multicast.openorb.profile=recMultiCastController 
+rec.multicast.securitymanager=pt.utl.ist.elab.security.ElabSecurityManager 
+rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE=15 
+multicast.debug.address.port=8000
+multicast.controller.host=localhost
+multicast.controller.port=9000
+multicast.initial.heap=128m
+multicast.max.heap=1024m
+
+##SYSTEM PROPERTIES - EXPERIMENTS## valer� a pena definir por experiencia?
+experiment.openorb.profile=recHardware 
+experiment.driver.debug.address.port=8001
+hardwareserver.initial.heap=128m
+hardwareserver.max.heap=1024m
+
+##JNLP PROPERTIES
+codebase=http://elab.ist.utl.pt/rec/eLab/
+href=ElabFullClient.jnlp
+title=eLab - Full Laboratory
+vendor=I.S.T. - U.T.L.
+homepage=http://elab.ist.utl.pt/rec
+one-line=Estatistica de dados
+tootip=Estatistica de dados
+short=Estatistica de dados
+j2se-version=1.6
+main-class=pt.utl.ist.elab.client.FullClient
+properties=FullClient.properties
+
+
+##MAIN CLASSES FOR THE VARIOUS COMPONENTS
+client.main-class=pt.utl.ist.elab.client.FullClient
+multicast.main-class=com.linkare.rec.impl.multicast.startup.MultiCastControllerMain
+experiment.client.main-class=pt.utl.ist.elab.client.@{experiment.name}.ClientMain
+experiment.driver.main-class=pt.utl.ist.elab.driver.@{experiment.name}.ServerMain
