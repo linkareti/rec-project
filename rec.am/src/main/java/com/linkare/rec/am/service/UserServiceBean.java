@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import com.linkare.commons.dao.security.UserDAO;
 import com.linkare.commons.jpa.security.Role;
 import com.linkare.commons.jpa.security.User;
+import com.linkare.zas.annotation.AccessControlled;
 
 /**
  * 
@@ -38,6 +39,7 @@ public class UserServiceBean extends BusinessServiceBean<User, Long> implements 
 	return getOrCreateDAO().edit(user);
     }
 
+    @AccessControlled("$currentSubject.isAdmin()")
     @Override
     public void remove(final User user) {
 	getOrCreateDAO().remove(user);
