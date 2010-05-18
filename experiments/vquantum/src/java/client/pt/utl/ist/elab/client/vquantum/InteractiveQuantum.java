@@ -4,7 +4,7 @@
  * Created on 28 de Fevereiro de 2005, 5:28
  */
 
-package pt.utl.ist.elab.virtual.client.quantum;
+package pt.utl.ist.elab.client.vquantum;
 
 import java.awt.event.MouseEvent;
 

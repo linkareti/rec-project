@@ -4,7 +4,7 @@
  * Created on 28 de Mar�o de 2005, 22:03
  */
 
-package pt.utl.ist.elab.virtual.client.quantum;
+package pt.utl.ist.elab.client.vquantum;
 
 import java.awt.Color;
 import java.awt.Graphics;

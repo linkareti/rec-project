@@ -4,7 +4,7 @@
  * Created on 29 de Mar�o de 2005, 19:29
  */
 
-package pt.utl.ist.elab.virtual.client.quantum;
+package pt.utl.ist.elab.client.vquantum;
 
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;

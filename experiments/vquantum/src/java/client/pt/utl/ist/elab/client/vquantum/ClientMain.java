@@ -4,7 +4,7 @@
  * Created on October 27, 2004, 03:34 AM
  */
 
-package pt.utl.ist.elab.virtual.client.quantum;
+package pt.utl.ist.elab.client.vquantum;
 
 import javax.swing.JFrame;
 

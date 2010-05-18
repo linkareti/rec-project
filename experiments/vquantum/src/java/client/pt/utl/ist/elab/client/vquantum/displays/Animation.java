@@ -4,7 +4,7 @@
  * Created on 1 de Mar�o de 2005, 5:52
  */
 
-package pt.utl.ist.elab.virtual.client.quantum.displays;
+package pt.utl.ist.elab.client.vquantum.displays;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 //import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
 //import pt.utl.ist.elab.driver.virtual.utils.Complex;
 //import pt.utl.ist.elab.driver.vquantum.QuantumDataProducer;
-import pt.utl.ist.elab.virtual.client.quantum.ComplexGaussian;
-import pt.utl.ist.elab.virtual.client.quantum.Quantum;
+import pt.utl.ist.elab.client.vquantum.ComplexGaussian;
+import pt.utl.ist.elab.client.vquantum.Quantum;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
