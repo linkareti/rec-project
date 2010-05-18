@@ -4,7 +4,7 @@
  * Created on 28 de Mar�o de 2005, 14:34
  */
 
-package pt.utl.ist.elab.virtual.client.poisson.displays;
+package pt.utl.ist.elab.client.vpoisson.displays;
 
 import java.text.DecimalFormat;
 

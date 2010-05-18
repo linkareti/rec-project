@@ -4,7 +4,7 @@
  * Created on 16 de Outubro de 2004, 11:29
  */
 
-package pt.utl.ist.elab.virtual.client.poisson;
+package pt.utl.ist.elab.client.vpoisson;
 
 import javax.swing.JFrame;
 

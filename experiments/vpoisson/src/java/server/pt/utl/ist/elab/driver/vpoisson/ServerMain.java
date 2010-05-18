@@ -4,7 +4,7 @@
  * Created on 27 de Fevereiro de 2005, 20:07
  */
 
-package pt.utl.ist.elab.virtual.driver.poisson;
+package pt.utl.ist.elab.driver.vpoisson;
 
 import com.linkare.rec.impl.utils.*;
 import com.linkare.rec.impl.driver.*;

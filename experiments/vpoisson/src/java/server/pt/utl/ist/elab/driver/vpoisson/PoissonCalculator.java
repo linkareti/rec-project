@@ -4,7 +4,7 @@
  * Created on June 28, 2005, 2:18 PM
  */
 
-package pt.utl.ist.elab.virtual.driver.poisson;
+package pt.utl.ist.elab.driver.vpoisson;
 
 /**
  *

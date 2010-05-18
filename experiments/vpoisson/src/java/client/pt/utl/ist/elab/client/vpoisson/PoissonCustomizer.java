@@ -4,7 +4,7 @@
  * Created on October 16, 2004, 11:32 AM
  */
 
-package pt.utl.ist.elab.virtual.client.poisson;
+package pt.utl.ist.elab.client.vpoisson;
 
 /**
  *

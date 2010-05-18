@@ -4,7 +4,7 @@
  * Created on 24 de Abril de 2003, 8:53
  */
 
-package pt.utl.ist.elab.virtual.driver.poisson;
+package pt.utl.ist.elab.driver.vpoisson;
 
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
