@@ -4,7 +4,7 @@
  * Created on 5 April 2005, 0:53
  */
 
-package pt.utl.ist.elab.virtual.client.bs.displays;
+package pt.utl.ist.elab.client.bs.displays;
 
 import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
