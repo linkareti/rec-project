@@ -53,7 +53,7 @@
 	<target name="dist.client">
 
 		<mkdir dir="${dist.dir}"/>
-		<zip destfile="${dist.dir}/FullClient_${timestamp}.zip">
+		<zip destfile="${dist.dir}/FullClient_${today}.zip">
 			<zipfileset dir="${client.build.dir}" includes="*_sig.jar,*.jnlp" prefix="client" />
 			
 			<zipfileset dir="${client.build.dir}/lib" includes="*_sig.jar" prefix="client/lib" />
@@ -81,7 +81,7 @@
 			<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
 		</replace>
 
-		<zip destfile="${dist.dir}/multicast_${timestamp}.zip">
+		<zip destfile="${dist.dir}/multicast_${today}.zip">
 			<zipfileset file="${multicast.build.dir}/ELabMulticastController.jar" prefix="multicast" />
 			<zipfileset file="${multicast.build.dir}/ReCMulticastController.jar" prefix="multicast" />
 			<zipfileset file="${multicast.build.dir}/ReCCommon.jar" prefix="multicast" />
@@ -128,7 +128,7 @@
 				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
 			</replace>
 
-			<zip destfile="${dist.dir}/@{experiment.name}HarwareServer_${timestamp}.zip">
+			<zip destfile="${dist.dir}/@{experiment.name}HarwareServer_${today}.zip">
 				<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
 				<zipfileset file="${hardwareserver.build.dir}/ELabHardwareServer.jar" prefix="hardwareserver" />
 				<zipfileset file="${hardwareserver.build.dir}/ReCHardwareServer.jar" prefix="hardwareserver" />

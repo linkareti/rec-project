@@ -67,7 +67,8 @@ multicast.initial.heap=128m
 multicast.max.heap=1024m
 
 ##SYSTEM PROPERTIES - EXPERIMENTS## valer� a pena definir por experiencia?
-experiment.openorb.profile=recHardware 
+experiment.driver.openorb.profile=recHardware
+experiment.client.openorb.profile=recClient
 experiment.driver.debug.address.port=8001
 hardwareserver.initial.heap=128m
 hardwareserver.max.heap=1024m
