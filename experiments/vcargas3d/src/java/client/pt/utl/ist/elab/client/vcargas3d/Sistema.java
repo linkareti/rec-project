@@ -4,7 +4,7 @@
  * Created on 19 de Mar�o de 2005, 16:19
  */
 
-package pt.utl.ist.elab.virtual.client.cargas3d;
+package pt.utl.ist.elab.client.vcargas3d;
 
 import java.awt.Color;
 import java.util.ArrayList;

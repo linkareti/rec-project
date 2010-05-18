@@ -4,7 +4,7 @@
  * Created on 18 de Mar�o de 2005, 11:28
  */
 
-package pt.utl.ist.elab.virtual.client.cargas3d;
+package pt.utl.ist.elab.client.vcargas3d;
 
 import javax.swing.JFrame;
 

@@ -4,7 +4,7 @@
  * Created on 28 de Mar�o de 2005, 14:21
  */
 
-package pt.utl.ist.elab.virtual.client.cargas3d.displays;
+package pt.utl.ist.elab.client.vcargas3d.displays;
 
 import org.opensourcephysics.displayejs.DrawingPanel3D;
 

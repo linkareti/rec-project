@@ -1,12 +1,12 @@
-package pt.utl.ist.elab.virtual.client.cargas3d.displays;
+package pt.utl.ist.elab.client.vcargas3d.displays;
 
 /**
  *
  * @author  n0dP2
  */
 
+import pt.utl.ist.elab.client.vcargas3d.Sistema;
 import pt.utl.ist.elab.driver.virtual.utils.ByteUtil;
-import pt.utl.ist.elab.virtual.client.cargas3d.Sistema;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
