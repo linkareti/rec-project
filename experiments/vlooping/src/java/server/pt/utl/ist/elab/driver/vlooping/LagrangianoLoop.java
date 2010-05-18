@@ -4,7 +4,7 @@
  * Created on 6 de Abril de 2005, 5:11
  */
 
-package pt.utl.ist.elab.virtual.driver.looping;
+package pt.utl.ist.elab.driver.vlooping;
 
 import org.opensourcephysics.numerics.ODE;
 
