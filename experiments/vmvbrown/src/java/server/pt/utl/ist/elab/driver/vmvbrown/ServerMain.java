@@ -4,7 +4,7 @@
  * Created on 10 de Abril de 2003, 20:07
  */
 
-package pt.utl.ist.elab.virtual.driver.mvbrown;
+package pt.utl.ist.elab.driver.vmvbrown;
 
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
