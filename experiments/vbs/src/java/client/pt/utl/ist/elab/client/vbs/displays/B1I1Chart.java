@@ -4,7 +4,7 @@
  * Created on April 03, 2005, 3:40 PM
  */
 
-package pt.utl.ist.elab.client.bs.displays;
+package pt.utl.ist.elab.client.vbs.displays;
 
 /**
  * 
