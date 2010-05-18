@@ -4,7 +4,7 @@
  * Created on 5 de Dezembro de 2004, 2:30
  */
 
-package pt.utl.ist.elab.virtual.client.cartpole.displays;
+package pt.utl.ist.elab.client.vcartpole.displays;
 
 /**
  * 

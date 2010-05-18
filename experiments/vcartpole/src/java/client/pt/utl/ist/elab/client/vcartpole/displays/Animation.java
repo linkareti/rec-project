@@ -4,7 +4,7 @@
  * Created on 1 de Mar�o de 2005, 5:52
  */
 
-package pt.utl.ist.elab.virtual.client.cartpole.displays;
+package pt.utl.ist.elab.client.vcartpole.displays;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;

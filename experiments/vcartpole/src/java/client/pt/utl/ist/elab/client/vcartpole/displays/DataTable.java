@@ -4,7 +4,7 @@
  * Created on 2 de Dezembro de 2004, 2:38
  */
 
-package pt.utl.ist.elab.virtual.client.cartpole.displays;
+package pt.utl.ist.elab.client.vcartpole.displays;
 
 import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
 
