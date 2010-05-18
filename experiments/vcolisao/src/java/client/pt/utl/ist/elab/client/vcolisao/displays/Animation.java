@@ -4,7 +4,7 @@
  * Created on October 16, 2004, 8:48 PM
  */
 
-package pt.utl.ist.elab.virtual.client.colisao.displays;
+package pt.utl.ist.elab.client.vcolisao.displays;
 
 /**
  *
