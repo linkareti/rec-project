@@ -328,8 +328,7 @@
 			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-			<sysproperty key="openorb.config" value="${openorb.config}" />
-			<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
+			<sysproperty key="openorb.config" value="${rec.multicast.classes.dir}/openorb.xml" />
 		</java>
 	</target>
 
@@ -351,8 +350,7 @@
 			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-			<sysproperty key="openorb.config" value="${openorb.config}" />
-			<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
+			<sysproperty key="openorb.config" value="${rec.multicast.classes.dir}/openorb.xml" />
 		</java>
 	</target>
 	

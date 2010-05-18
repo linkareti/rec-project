@@ -12,9 +12,7 @@ copy.encoding=UTF-8
 #you need only one list, the reason they are separated is to allow building elab and elab virtual separatly
 #just uncomment the one you need
 #list of experiments in ELab
-experiment.list=aleatorio,gamma,tiro,pend2m
-#list of virtual experiments in ELab Virtual
-#experiment.list=mm,cg
+experiment.list=aleatorio,gamma,vtiro,vpend2m
 
 ###DEPLOYMENT####
 rec.server=
@@ -57,8 +55,6 @@ java.util.logging.config.file=loggers.config.properties
 org.omg.CORBA.ORBClass=org.openorb.orb.core.ORB 
 org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton 
 com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl
-#openorb.config=$OUTPUT_BASE_DIR/openorb/OpenORB.xml 
-#openorb.config.virtual=$OUTPUT_BASE_DIR/openorb/OpenORBVirtual.xml
 
 ##MULTICAST PROPERTIES - MULTICAST##
 multicast.openorb.profile=recMultiCastController 
