@@ -4,7 +4,7 @@
  * Created on 2 de Dezembro de 2004, 8:12
  */
 
-package pt.utl.ist.elab.virtual.client.cg.displays;
+package pt.utl.ist.elab.client.vcg.displays;
 
 /**
  *
