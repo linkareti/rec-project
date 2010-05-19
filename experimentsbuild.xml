@@ -229,10 +229,9 @@
 				<classpath>
 					<path refid="rec.common.lib.path" />
 					<path refid="rec.client.lib.path" />
-					<path refid="elab.hardwareserver.lib.path" />
+					<path refid="elab.client.lib.path" />
 					<pathelement location="${rec.common.classes.dir}/" />
 					<pathelement location="${rec.client.classes.dir}" />
-					<pathelement location="${rec.ui.classes.dir}" />
 					<pathelement location="${elab.client.classes.dir}/" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/client/" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
@@ -262,10 +261,9 @@
 				<classpath>
 					<path refid="rec.common.lib.path" />
 					<path refid="rec.client.lib.path" />
-					<path refid="elab.hardwareserver.lib.path" />
+					<path refid="elab.client.lib.path" />
 					<pathelement location="${rec.common.classes.dir}/" />
 					<pathelement location="${rec.client.classes.dir}" />
-					<pathelement location="${rec.ui.classes.dir}" />
 					<pathelement location="${elab.client.classes.dir}/" />
 					<pathelement location="${experiments.classes.dir}/@{experiment.name}/client/" />
 					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
