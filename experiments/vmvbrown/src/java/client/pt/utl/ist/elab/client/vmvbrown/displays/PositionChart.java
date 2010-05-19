@@ -53,7 +53,7 @@ public class PositionChart extends com.linkare.rec.impl.baseUI.graph.MultSeriesX
 			gridBagConstraints.weighty = 1;
 
 			javax.swing.JLabel label = new javax.swing.JLabel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/mvbrown/resources/ReCExpMvBrown").getString(
+					"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
 					"rec.exp.displays.inactive"), javax.swing.JLabel.CENTER);
 			removeAll();
 			add(label, gridBagConstraints);

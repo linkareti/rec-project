@@ -108,44 +108,44 @@ public class MovProj extends DrawingPanel3D implements ActionListener, MouseList
 	private void buildPopupMenu() {
 		viewPopMenu = new PopupMenu(this);
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.1"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.1"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.2"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.2"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.3"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.3"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.4"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.4"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.15"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.15"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.16"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.16"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.6"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.6"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.5"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.5"));
 	}
 
@@ -324,50 +324,50 @@ public class MovProj extends DrawingPanel3D implements ActionListener, MouseList
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.1"))) {
 			setAlphaAndBeta(-Math.PI / 2, Math.PI / 2);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.2"))) {
 			if (getZoom() != 1) {
 				setZoom(1);
 				repaint();
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.3"))) {
 			if (getZoom() != .5) {
 				setZoom(.5);
 				repaint();
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.4"))) {
 			this.setDisplayMode(this.DISPLAY_PLANAR_XY);
 			setPan(0, 0);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.15"))) {
 			this.setDisplayMode(this.DISPLAY_PLANAR_XZ);
 			setPan(0, 0);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.16"))) {
 			this.setDisplayMode(this.DISPLAY_PLANAR_YZ);
 			setPan(0, 0);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.6"))) {
 			this.setDisplayMode(this.DISPLAY_NO_PERSPECTIVE);
 			setPan(0, 0);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.5")))
 			snapshot();
 	}

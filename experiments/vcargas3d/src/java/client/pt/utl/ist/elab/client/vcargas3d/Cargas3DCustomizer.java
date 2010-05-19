@@ -126,7 +126,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/cargas3d/resources/cargas3d_iconified.png"));
+				"/pt/utl/ist/elab/client/vcargas3d/resources/cargas3d_iconified.png"));
 	}
 
 	// ESTE � PARA ALTERAR

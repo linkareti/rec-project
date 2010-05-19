@@ -330,7 +330,7 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 	}
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
-		java.net.URL url = getClass().getResource("/pt/utl/ist/elab/virtual/client/bs/resources/bs_iconified.png");
+		java.net.URL url = getClass().getResource("/pt/utl/ist/elab/client/vbs/resources/bs_iconified.png");
 		if (url != null)
 			return new javax.swing.ImageIcon(url);
 

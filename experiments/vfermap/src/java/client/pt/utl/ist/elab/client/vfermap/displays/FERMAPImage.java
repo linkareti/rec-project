@@ -28,22 +28,22 @@ public class FERMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 	/** Creates a new instance of Animation */
 	public FERMAPImage() {
 		super("Psi", "U", java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.title.fermap"), 0,
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.title.fermap"), 0,
 				2 * Math.PI, 0, 0);
 
 		javax.swing.JMenuItem item = new javax.swing.JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.displays.mapanel.menu.title.5"));
 		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.displays.mapanel.menu.tip.5"));
 		item.addActionListener(this);
 		popupmenu.add(item);
 		item = new javax.swing.JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.displays.mapanel.menu.title.6"));
 		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.displays.mapanel.menu.tip.6"));
 		item.addActionListener(this);
 		popupmenu.add(item);
@@ -53,7 +53,7 @@ public class FERMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 
 	public void actionPerformed(java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.displays.mapanel.menu.title.3"))) {
 			xminPreferred = 0;
 			xmaxPreferred = xMaxBound;
@@ -61,28 +61,28 @@ public class FERMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 			ymaxPreferred = yMaxBound;
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.displays.mapanel.menu.title.1"))) {
 			snapshot(null, java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.displays.mapanel.menu.title.1"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.displays.mapanel.menu.title.2"))) {
 			snapshot(mapImg, java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.displays.mapanel.menu.title.2"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.displays.mapanel.menu.title.4"))) {
 			updateImage();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.displays.mapanel.menu.title.5"))) {
 			double tmpUMax = (double) pt.utl.ist.elab.client.virtual.guipack.PopupMenu.dialog(java.util.ResourceBundle
-					.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 							"rec.exp.displays.mapanel.menu.title.7"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.displays.mapanel.menu.tip.7"), "Ok", (int) Math.round(getPreferredYMax() * 10), new int[] {
 					200, 1001, 1, 20 }) / 10d;
 			if (tmpUMax != getPreferredYMax()) {
@@ -90,7 +90,7 @@ public class FERMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 				updateImage();
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.displays.mapanel.menu.title.6"))) {
 			if (uMax == 0)
 				setUMax();

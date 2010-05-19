@@ -198,7 +198,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpLooping",
-				"recresource:///pt/utl/ist/elab/virtual/client/looping/resources/ReCExpLooping");
+				"recresource:///pt/utl/ist/elab/client/vlooping/resources/ReCExpLooping");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new LoopingCustomizer());
 		dummy.pack();
@@ -838,7 +838,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/looping/resources/looping_iconified.png"));
+				"/pt/utl/ist/elab/client/vlooping/resources/looping_iconified.png"));
 	}
 
 	// ESTE É PARA ALTERAR

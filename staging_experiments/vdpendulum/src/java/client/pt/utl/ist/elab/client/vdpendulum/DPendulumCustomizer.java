@@ -1071,7 +1071,7 @@ public class DPendulumCustomizer extends javax.swing.JPanel implements
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/dpendulum/resources/dp_iconified.gif"));
+				"/pt/utl/ist/elab/client/vdpendulum/resources/dp_iconified.gif"));
 	}
 
 	public String getCustomizerTitle() {

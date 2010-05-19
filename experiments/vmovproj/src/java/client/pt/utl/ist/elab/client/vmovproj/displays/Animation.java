@@ -28,7 +28,7 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 	private boolean isConnectedTrail = false, closeUp = false;
 	private InteractiveTrace rasto;
 	private String actionStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+			"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 			"rec.exp.displays.animation.actionStr");
 	private String statusStr = "";
 
@@ -38,24 +38,24 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 		rasto = new InteractiveTrace();
 		rasto.getStyle().setEdgeColor(new java.awt.Color(.243f, .4f, .621f));
 		viewPopMenu.addCheckBoxItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.7"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.7"), true);
 		viewPopMenu.addCheckBoxItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.9"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.9"), true);
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.10"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.10"));
 		viewPopMenu.addCheckBoxItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.title.11"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.viewMenu.tip.11"), false);
 		isConnectedTrail = true;
 		addDrawable(rasto);
@@ -239,26 +239,26 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.1"))) {
 			setAlphaAndBeta(-Math.PI / 2, Math.PI / 2);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.2"))) {
 			if (getZoom() != 1) {
 				setZoom(1);
 				repaint();
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.3"))) {
 			if (getZoom() != .5) {
 				setZoom(.5);
 				repaint();
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.4"))) {
 			this.setDisplayMode(this.DISPLAY_PLANAR_XY);
 			setPan(0, 0);
@@ -269,7 +269,7 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 			}
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.15"))) {
 			this.setDisplayMode(this.DISPLAY_PLANAR_XZ);
 			setPan(0, 0);
@@ -280,7 +280,7 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 			}
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.16"))) {
 			this.setDisplayMode(this.DISPLAY_PLANAR_YZ);
 			setPan(0, 0);
@@ -291,7 +291,7 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 			}
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.6"))) {
 			this.setDisplayMode(this.DISPLAY_NO_PERSPECTIVE);
 			setPan(0, 0);
@@ -303,18 +303,18 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 			}
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.5")))
 			snapshot();
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.7"))) {
 			vel.setVisible(((javax.swing.JMenuItem) e.getSource()).isSelected());
 			spin.setVisible(((javax.swing.JMenuItem) e.getSource()).isSelected());
 			acel.setVisible(((javax.swing.JMenuItem) e.getSource()).isSelected());
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.9"))) {
 			isConnectedTrail = ((javax.swing.JCheckBoxMenuItem) e.getSource()).isSelected();
 
@@ -323,11 +323,11 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 			else
 				addDrawable(rasto);
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.10")))
 			rasto.clear();
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.viewMenu.title.11"))) {
 			closeUp = ((javax.swing.JCheckBoxMenuItem) e.getSource()).isSelected();
 			if (closeUp) {

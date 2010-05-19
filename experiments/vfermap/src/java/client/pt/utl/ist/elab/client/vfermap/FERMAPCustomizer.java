@@ -134,18 +134,18 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 						javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0,
 								51, 153), new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)),
 						java.util.ResourceBundle.getBundle(
-								"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+								"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 								"rec.exp.customizer.title.1")));
 		staticPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.1"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.1"));
 		staticPanel.setMinimumSize(new java.awt.Dimension(290, 50));
 		staticPanel.setPreferredSize(new java.awt.Dimension(290, 50));
 		staticRadioButton
 				.setText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+						"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 						"rec.exp.customizer.title.2"));
 		staticRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.2"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.2"));
 		expButtonGroup.add(staticRadioButton);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.weightx = 1.0;
@@ -154,10 +154,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nonStaticRadioButton.setSelected(true);
 		nonStaticRadioButton
 				.setText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+						"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 						"rec.exp.customizer.title.3"));
 		nonStaticRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.3"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.3"));
 		expButtonGroup.add(nonStaticRadioButton);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.weightx = 1.0;
@@ -175,18 +175,18 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 						javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0,
 								51, 153), new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)),
 						java.util.ResourceBundle.getBundle(
-								"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+								"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 								"rec.exp.customizer.title.4")));
 		simulPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.4"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.4"));
 		simulPanel.setMinimumSize(new java.awt.Dimension(290, 100));
 		simulPanel.setPreferredSize(new java.awt.Dimension(290, 100));
 		mapRadioButton.setSelected(true);
 		mapRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.24"));
 		mapRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.24"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.24"));
 		constsButtonGroup.add(mapRadioButton);
 		mapRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		mapRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -203,10 +203,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		simulPanel.add(mapRadioButton, gridBagConstraints);
 
 		animaRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.25"));
 		animaRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.25"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.25"));
 		constsButtonGroup.add(animaRadioButton);
 		animaRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		animaRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -223,10 +223,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		simulPanel.add(animaRadioButton, gridBagConstraints);
 
 		histRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.26"));
 		histRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.26"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.26"));
 		constsButtonGroup.add(histRadioButton);
 		histRadioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		histRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -252,10 +252,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 						javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0,
 								51, 153), new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)),
 						java.util.ResourceBundle.getBundle(
-								"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+								"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 								"rec.exp.customizer.title.5")));
 		mapaTabbedPane.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.5"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.5"));
 		mapaTabbedPane.setMinimumSize(new java.awt.Dimension(290, 293));
 		mapaTabbedPane.setPreferredSize(new java.awt.Dimension(290, 293));
 		generalPanel.setLayout(new java.awt.GridBagLayout());
@@ -269,10 +269,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		pcorPanel
 				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+						"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 						"rec.exp.customizer.title.8")));
 		pcorPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.8"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.8"));
 		pcorPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		pcorPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -282,7 +282,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorSlider.setPaintLabels(true);
 		pcorSlider.setPaintTicks(true);
 		pcorSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.8"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.8"));
 		pcorSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		pcorSlider.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -300,7 +300,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pcorTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		pcorTextField.setText("50");
 		pcorTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.8"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.8"));
 		pcorTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				pcorTextFieldFocusLost(evt);
@@ -321,10 +321,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		iterPanel
 				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+						"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 						"rec.exp.customizer.title.9")));
 		iterPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.9"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.9"));
 		iterPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		iterPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -335,7 +335,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		iterSlider.setPaintLabels(true);
 		iterSlider.setPaintTicks(true);
 		iterSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.9"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.9"));
 		iterSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		iterSlider.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -353,7 +353,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		iterTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		iterTextField.setText("50");
 		iterTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.9"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.9"));
 		iterTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				iterTextFieldFocusLost(evt);
@@ -374,10 +374,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		mPanel
 				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+						"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 						"rec.exp.customizer.title.7")));
 		mPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.7"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.7"));
 		mPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		mPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -387,7 +387,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		mSlider.setPaintLabels(true);
 		mSlider.setPaintTicks(true);
 		mSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.7"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.7"));
 		mSlider.setValue(160);
 		mSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		mSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -406,7 +406,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		mTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		mTextField.setText("160");
 		mTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.7"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.7"));
 		mTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				mTextFieldFocusLost(evt);
@@ -424,9 +424,9 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		generalPanel.add(mPanel, gridBagConstraints);
 
 		mapaTabbedPane.addTab(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.title.6"), null, generalPanel, java.util.ResourceBundle
-						.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+						.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 								"rec.exp.customizer.tip.6"));
 
 		mainPsiPanel.setLayout(new java.awt.GridBagLayout());
@@ -439,10 +439,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		psiPanel.setLayout(new java.awt.GridBagLayout());
 
 		psiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.11")));
 		psiPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.11"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.11"));
 		psiPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		psiPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -452,7 +452,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		psiSlider.setPaintLabels(true);
 		psiSlider.setPaintTicks(true);
 		psiSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.11"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.11"));
 		psiSlider.setValue(0);
 		psiSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		psiSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -471,7 +471,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		psiTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		psiTextField.setText("0");
 		psiTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.11"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.11"));
 		psiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				psiTextFieldFocusLost(evt);
@@ -491,10 +491,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nPsiPanel.setLayout(new java.awt.GridBagLayout());
 
 		nPsiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.13")));
 		nPsiPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.13"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.13"));
 		nPsiPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		nPsiPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -505,7 +505,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nPsiSlider.setPaintLabels(true);
 		nPsiSlider.setPaintTicks(true);
 		nPsiSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.13"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.13"));
 		nPsiSlider.setValue(30);
 		nPsiSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		nPsiSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -524,7 +524,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nPsiTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		nPsiTextField.setText("30");
 		nPsiTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.13"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.13"));
 		nPsiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				nPsiTextFieldFocusLost(evt);
@@ -544,10 +544,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dPsiPanel.setLayout(new java.awt.GridBagLayout());
 
 		dPsiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.12")));
 		dPsiPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.12"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.12"));
 		dPsiPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		dPsiPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -557,7 +557,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dPsiSlider.setPaintLabels(true);
 		dPsiSlider.setPaintTicks(true);
 		dPsiSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.12"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.12"));
 		dPsiSlider.setValue(15);
 		dPsiSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		dPsiSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -576,7 +576,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dPsiTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dPsiTextField.setText("15");
 		dPsiTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.12"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.12"));
 		dPsiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				dPsiTextFieldFocusLost(evt);
@@ -594,9 +594,9 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		mainPsiPanel.add(dPsiPanel, gridBagConstraints);
 
 		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.10"), null, mainPsiPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.10"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.10"));
 
 		mainUMapaPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -608,10 +608,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMapaPanel.setLayout(new java.awt.GridBagLayout());
 
 		uMapaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.15")));
 		uMapaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.15"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.15"));
 		uMapaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		uMapaPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -622,7 +622,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMapaSlider.setPaintLabels(true);
 		uMapaSlider.setPaintTicks(true);
 		uMapaSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.15"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.15"));
 		uMapaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		uMapaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -640,7 +640,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMapaTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		uMapaTextField.setText("50");
 		uMapaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.15"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.15"));
 		uMapaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				uMapaTextFieldFocusLost(evt);
@@ -660,10 +660,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nUMapaPanel.setLayout(new java.awt.GridBagLayout());
 
 		nUMapaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.17")));
 		nUMapaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.17"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.17"));
 		nUMapaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		nUMapaPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -674,7 +674,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nUMapaSlider.setPaintLabels(true);
 		nUMapaSlider.setPaintTicks(true);
 		nUMapaSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.17"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.17"));
 		nUMapaSlider.setValue(5);
 		nUMapaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		nUMapaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -693,7 +693,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		nUMapaTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		nUMapaTextField.setText("5");
 		nUMapaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.17"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.17"));
 		nUMapaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				nUMapaTextFieldFocusLost(evt);
@@ -713,10 +713,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dUMapaPanel.setLayout(new java.awt.GridBagLayout());
 
 		dUMapaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.16")));
 		dUMapaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.16"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.16"));
 		dUMapaPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		dUMapaPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -727,7 +727,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dUMapaSlider.setPaintLabels(true);
 		dUMapaSlider.setPaintTicks(true);
 		dUMapaSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.16"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.16"));
 		dUMapaSlider.setValue(20);
 		dUMapaSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		dUMapaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -746,7 +746,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		dUMapaTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dUMapaTextField.setText("20");
 		dUMapaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.16"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.16"));
 		dUMapaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				dUMapaTextFieldFocusLost(evt);
@@ -764,9 +764,9 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		mainUMapaPanel.add(dUMapaPanel, gridBagConstraints);
 
 		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.14"), null, mainUMapaPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.14"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.14"));
 
 		resolutionPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -776,10 +776,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		widthPanel.setLayout(new java.awt.GridBagLayout());
 
 		widthPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.19")));
 		widthPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.19"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.19"));
 		widthPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		widthPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -790,7 +790,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		widthSlider.setPaintLabels(true);
 		widthSlider.setPaintTicks(true);
 		widthSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.19"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.19"));
 		widthSlider.setValue(800);
 		widthSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		widthSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -809,7 +809,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		widthTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		widthTextField.setText("800");
 		widthTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.19"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.19"));
 		widthTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				widthTextFieldFocusLost(evt);
@@ -829,10 +829,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		heightPanel.setLayout(new java.awt.GridBagLayout());
 
 		heightPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.20")));
 		heightPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.20"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.20"));
 		heightPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		heightPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -843,7 +843,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		heightSlider.setPaintLabels(true);
 		heightSlider.setPaintTicks(true);
 		heightSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.20"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.20"));
 		heightSlider.setValue(800);
 		heightSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		heightSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -862,7 +862,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		heightTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		heightTextField.setText("800");
 		heightTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.20"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.20"));
 		heightTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				heightTextFieldFocusLost(evt);
@@ -882,10 +882,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pixSizePanel.setLayout(new java.awt.GridBagLayout());
 
 		pixSizePanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.21")));
 		pixSizePanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.21"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.21"));
 		pixSizePanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		pixSizePanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -895,7 +895,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		pixSizeSlider.setPaintTicks(true);
 		pixSizeSlider.setSnapToTicks(true);
 		pixSizeSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.21"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.21"));
 		pixSizeSlider.setValue(1);
 		pixSizeSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -913,9 +913,9 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		resolutionPanel.add(pixSizePanel, gridBagConstraints);
 
 		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.18"), null, resolutionPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.18"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.18"));
 
 		mainUMaxPanel.setLayout(new java.awt.GridBagLayout());
 
@@ -925,10 +925,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMaxPanel.setLayout(new java.awt.GridBagLayout());
 
 		uMaxPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.28")));
 		uMaxPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.28"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.28"));
 		uMaxPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		uMaxPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -939,7 +939,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMaxSlider.setPaintLabels(true);
 		uMaxSlider.setPaintTicks(true);
 		uMaxSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.28"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.28"));
 		uMaxSlider.setValue(8);
 		uMaxSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		uMaxSlider.setEnabled(false);
@@ -962,7 +962,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		uMaxTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		uMaxTextField.setText("8");
 		uMaxTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.28"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.28"));
 		uMaxTextField.setEnabled(false);
 		uMaxTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -979,10 +979,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		uMaxCheckBox.setSelected(true);
 		uMaxCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.29"));
 		uMaxCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.29"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.29"));
 		uMaxCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		uMaxCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1007,9 +1007,9 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		mainUMaxPanel.add(uMaxPanel, gridBagConstraints);
 
 		mapaTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.27"), null, mainUMaxPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.27"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.27"));
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -1028,10 +1028,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		btnPanel.setLayout(new java.awt.GridBagLayout());
 
 		okButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.ok"));
 		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.ok"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				okButtonActionPerformed(evt);
@@ -1041,10 +1041,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		controlBtnPanel.add(okButton);
 
 		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1060,11 +1060,11 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		btnPanel.add(controlBtnPanel, gridBagConstraints);
 
 		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.title.dfc"));
 		defaultButton
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+						"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 						"rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1088,20 +1088,20 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		mainEditPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.BevelBorder(
 				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153),
 				new java.awt.Color(0, 51, 153), new java.awt.Color(0, 51, 153)), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.22")));
 		mainEditPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.22"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.22"));
 		mainEditPanel.setMinimumSize(new java.awt.Dimension(300, 100));
 		mainEditPanel.setPreferredSize(new java.awt.Dimension(300, 200));
 		mainEditPanel.setEnabled(false);
 		editPanel.setLayout(new java.awt.GridBagLayout());
 
 		editPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.23")));
 		editPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.tip.1"));
 		editPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		editPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -1112,7 +1112,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		editSlider.setPaintLabels(true);
 		editSlider.setPaintTicks(true);
 		editSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.23"));
 		editSlider.setValue(0);
 		editSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		editSlider.setEnabled(false);
@@ -1139,7 +1139,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		editTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		editTextField.setText("0");
 		editTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.23"));
 		editTextField.setEnabled(false);
 		editTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -1162,10 +1162,10 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		editLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		editLabel.setForeground(new java.awt.Color(255, 102, 102));
 		editLabel.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 				.getString("rec.exp.customizer.title.23"));
 		editLabel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString("rec.exp.customizer.tip.23"));
 		editLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -1234,95 +1234,95 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	public void actionPerformed(java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.editMenu.title.1")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.title.1"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.tip.1"), (int) Math.round(fermAnima.getSysX() * 10), new int[] {
 					(int) Math.round(fermAnima.getSysXMax() * 2), (int) Math.round(fermAnima.getSysXMax() * 10), 0, 0 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.editMenu.title.2")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.title.2"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.tip.2"), (int) Math.round(fermAnima.getVel() * 10), new int[] { 400,
 					2000, -2000, 100 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.editMenu.title.3")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.title.3"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.tip.3"), (int) Math.round(Math.toDegrees(fermAnima.getPsi())),
 					new int[] { 30, 360, 0, 6 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.editMenu.title.4")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.title.4"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.tip.4"), (int) Math.round(fermAnima.getWallAmp() * 100), new int[] {
 					100, 900, 0, 20 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.editMenu.title.5")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.title.5"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.tip.5"), (int) Math.round(fermAnima.getWallFreq() * 100), new int[] {
 					10, 100, 0, 2 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.editMenu.title.6")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.title.6"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.tip.6"), (int) Math.round(fermAnima.getD() * 10), new int[] { 100,
 					1000, 100, 20 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.editMenu.title.7")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.title.7"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.tip.7"), this.nSamples, new int[] { 100, 1010, 10, 50 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.editMenu.title.8")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.title.8"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.tip.8"), this.tbs, new int[] { 1, 10, 1, 0 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.editMenu.title.9"))) {
 			fermAnima.terminate();
 			fermAnima.setPsi(fermAnima.getPsi());
 			((javax.swing.JMenuItem) e.getSource()).setText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editMenu.title.10"));
 			((javax.swing.JMenuItem) e.getSource()).setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editMenu.tip.10"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.editMenu.title.10"))) {
 			fermAnima.start();
 			((javax.swing.JMenuItem) e.getSource()).setText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editMenu.title.9"));
 			((javax.swing.JMenuItem) e.getSource()).setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editMenu.tip.9"));
 		}
 		/*
@@ -1384,75 +1384,75 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		String str = ((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle();
 
 		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.1")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.title.1"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.editPanel.tip.1"), (int) Math.round(fermAnima.getSysX() * 10), new int[] {
 					(int) Math.round(fermAnima.getSysXMax() * 2), (int) Math.round(fermAnima.getSysXMax() * 10), 0, 0 });
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.2")))
 			editSlider.setValue((int) Math.round(fermAnima.getVel() * 10));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.3")))
 			editSlider.setValue((int) Math.round(Math.toDegrees(fermAnima.getPsi())));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.6")))
 			editSlider.setValue((int) Math.round(fermAnima.getD() * 10));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.4")))
 			editSlider.setValue((int) Math.round(fermAnima.getWallAmp() * 100));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.5")))
 			editSlider.setValue((int) Math.round(fermAnima.getWallFreq() * 100));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.7")))
 			editSlider.setValue(this.nSamples);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.8")))
 			editSlider.setValue(this.tbs);
 	}
 
 	private void editSet(String str, double val) {
 		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.1")))
 			fermAnima.setSysX(val / 10d);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.2")))
 			fermAnima.setVel(val / 10d);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.3")))
 			fermAnima.setPsi(Math.toRadians(val));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.4")))
 			fermAnima.setWallAmp(val / 100d);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.5")))
 			fermAnima.setWallFreq(val / 100d);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.6")))
 			fermAnima.setD(val / 10d);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.7")))
 			this.nSamples = (int) val;
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.editPanel.title.8")))
 			this.tbs = (int) val;
 	}
@@ -1966,7 +1966,7 @@ public class FERMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/fermap/resources/fermap_iconified.PNG"));
+				"/pt/utl/ist/elab/client/vfermap/resources/fermap_iconified.PNG"));
 	}
 
 	public String getCustomizerTitle() {

@@ -154,10 +154,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		btnPanel.setLayout(new java.awt.GridBagLayout());
 
 		okButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.ok"));
 		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,10 +168,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		controlBtnPanel.add(okButton);
 
 		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,10 +187,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		btnPanel.add(controlBtnPanel, gridBagConstraints);
 
 		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.dfc"));
 		defaultButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,17 +225,17 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 				new java.awt.Color(255, 153, 153), new java.awt.Color(255, 153, 153),
 				new java.awt.Color(255, 153, 153), new java.awt.Color(255, 153, 153)));
 		mainEditPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.22"));
 		mainEditPanel.setMinimumSize(new java.awt.Dimension(300, 100));
 		mainEditPanel.setPreferredSize(new java.awt.Dimension(300, 200));
 		editPanel.setLayout(new java.awt.GridBagLayout());
 
 		editPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.23")));
 		editPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.23"));
 		editPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		editPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -292,10 +292,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		editLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		editLabel.setForeground(new java.awt.Color(255, 102, 102));
 		editLabel.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.23"));
 		editLabel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.23"));
 		editLabel.setMaximumSize(null);
 		editLabel.setMinimumSize(null);
@@ -307,9 +307,9 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		mainEditPanel.add(editLabel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.22"), null, mainEditPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.22"));
 
 		posPanel.setLayout(new java.awt.GridBagLayout());
@@ -320,11 +320,11 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		yPosPanel.setLayout(new java.awt.GridBagLayout());
 
 		yPosPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.3")));
 		yPosPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.3"));
 		yPosPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		yPosSlider.setMajorTickSpacing(50);
@@ -334,7 +334,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		yPosSlider.setPaintTicks(true);
 		yPosSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.3"));
 		yPosSlider.setValue(0);
 		yPosSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -361,7 +361,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		yPosTextField.setText("0");
 		yPosTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.3"));
 		yPosTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		yPosTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -383,11 +383,11 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		zPosPanel.setLayout(new java.awt.GridBagLayout());
 
 		zPosPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.4")));
 		zPosPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.4"));
 		zPosPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		zPosSlider.setMajorTickSpacing(50);
@@ -398,7 +398,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		zPosSlider.setPaintTicks(true);
 		zPosSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.4"));
 		zPosSlider.setValue(0);
 		zPosSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -425,7 +425,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		zPosTextField.setText("0");
 		zPosTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.4"));
 		zPosTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		zPosTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -447,11 +447,11 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		xPosPanel.setLayout(new java.awt.GridBagLayout());
 
 		xPosPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.2")));
 		xPosPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.2"));
 		xPosPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		xPosSlider.setMajorTickSpacing(50);
@@ -462,7 +462,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		xPosSlider.setPaintTicks(true);
 		xPosSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.2"));
 		xPosSlider.setValue(0);
 		xPosSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -489,7 +489,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		xPosTextField.setText("0");
 		xPosTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.2"));
 		xPosTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		xPosTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -510,9 +510,9 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 		mainTabbedPane
 				.addTab(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.title.1"), null, posPanel, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.1"));
 
 		velPanel.setLayout(new java.awt.GridBagLayout());
@@ -523,11 +523,11 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		velModPanel.setLayout(new java.awt.GridBagLayout());
 
 		velModPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.6")));
 		velModPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.6"));
 		velModPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		velModSlider.setMajorTickSpacing(400);
@@ -537,7 +537,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		velModSlider.setPaintTicks(true);
 		velModSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.6"));
 		velModSlider.setValue(98);
 		velModSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -564,7 +564,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		velModTextField.setText("98");
 		velModTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.6"));
 		velModTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		velModTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -586,11 +586,11 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		velThetaPanel.setLayout(new java.awt.GridBagLayout());
 
 		velThetaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.7")));
 		velThetaPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.7"));
 		velThetaPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		velThetaSlider.setMajorTickSpacing(60);
@@ -600,7 +600,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		velThetaSlider.setPaintTicks(true);
 		velThetaSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.7"));
 		velThetaSlider.setValue(98);
 		velThetaSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -627,7 +627,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		velThetaTextField.setText("98");
 		velThetaTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.7"));
 		velThetaTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		velThetaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -649,11 +649,11 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		velPhiPanel.setLayout(new java.awt.GridBagLayout());
 
 		velPhiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.8")));
 		velPhiPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.8"));
 		velPhiPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		velPhiSlider.setMajorTickSpacing(30);
@@ -663,7 +663,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		velPhiSlider.setPaintTicks(true);
 		velPhiSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.8"));
 		velPhiSlider.setValue(98);
 		velPhiSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -690,7 +690,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		velPhiTextField.setText("98");
 		velPhiTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.8"));
 		velPhiTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		velPhiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -711,9 +711,9 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 		mainTabbedPane
 				.addTab(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.title.5"), null, velPanel, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.5"));
 
 		spinPanel.setLayout(new java.awt.GridBagLayout());
@@ -724,10 +724,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		spinModPanel.setLayout(new java.awt.GridBagLayout());
 
 		spinModPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.10")));
 		spinModPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.10"));
 		spinModPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		spinModSlider.setMajorTickSpacing(400);
@@ -736,7 +736,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		spinModSlider.setPaintLabels(true);
 		spinModSlider.setPaintTicks(true);
 		spinModSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.10"));
 		spinModSlider.setValue(98);
 		spinModSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -762,7 +762,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		spinModTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		spinModTextField.setText("98");
 		spinModTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.10"));
 		spinModTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		spinModTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -784,10 +784,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		spinThetaPanel.setLayout(new java.awt.GridBagLayout());
 
 		spinThetaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.11")));
 		spinThetaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.11"));
 		spinThetaPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		spinThetaSlider.setMajorTickSpacing(60);
@@ -796,7 +796,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		spinThetaSlider.setPaintLabels(true);
 		spinThetaSlider.setPaintTicks(true);
 		spinThetaSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.11"));
 		spinThetaSlider.setValue(98);
 		spinThetaSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -822,7 +822,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		spinThetaTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		spinThetaTextField.setText("98");
 		spinThetaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.11"));
 		spinThetaTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		spinThetaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -844,10 +844,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		spinPhiPanel.setLayout(new java.awt.GridBagLayout());
 
 		spinPhiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.12")));
 		spinPhiPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.12"));
 		spinPhiPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		spinPhiSlider.setMajorTickSpacing(30);
@@ -856,7 +856,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		spinPhiSlider.setPaintLabels(true);
 		spinPhiSlider.setPaintTicks(true);
 		spinPhiSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.12"));
 		spinPhiSlider.setValue(98);
 		spinPhiSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -882,7 +882,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		spinPhiTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		spinPhiTextField.setText("98");
 		spinPhiTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.12"));
 		spinPhiTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		spinPhiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -903,9 +903,9 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 		mainTabbedPane
 				.addTab(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.title.9"), null, spinPanel, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+						"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 						"rec.exp.customizer.tip.9"));
 
 		dragPanel.setLayout(new java.awt.GridBagLayout());
@@ -916,10 +916,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		dragCoef1Panel.setLayout(new java.awt.GridBagLayout());
 
 		dragCoef1Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.14")));
 		dragCoef1Panel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.14"));
 		dragCoef1Panel.setPreferredSize(new java.awt.Dimension(82, 224));
 		dragCoef1Slider.setMajorTickSpacing(10);
@@ -927,7 +927,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		dragCoef1Slider.setPaintLabels(true);
 		dragCoef1Slider.setPaintTicks(true);
 		dragCoef1Slider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.14"));
 		dragCoef1Slider.setValue(5);
 		dragCoef1Slider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -948,7 +948,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		dragCoef1TextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dragCoef1TextField.setText("5");
 		dragCoef1TextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.14"));
 		dragCoef1TextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		dragCoef1TextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -970,10 +970,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		densPanel.setLayout(new java.awt.GridBagLayout());
 
 		densPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.16")));
 		densPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.16"));
 		densPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		densSlider.setMajorTickSpacing(10);
@@ -981,7 +981,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		densSlider.setPaintLabels(true);
 		densSlider.setPaintTicks(true);
 		densSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.16"));
 		densSlider.setValue(12);
 		densSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -1000,7 +1000,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		densTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		densTextField.setText("12");
 		densTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.16"));
 		densTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		densTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1022,10 +1022,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		dragCoef2Panel.setLayout(new java.awt.GridBagLayout());
 
 		dragCoef2Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.15")));
 		dragCoef2Panel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.15"));
 		dragCoef2Panel.setPreferredSize(new java.awt.Dimension(82, 224));
 		dragCoef2Slider.setMajorTickSpacing(10);
@@ -1033,7 +1033,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		dragCoef2Slider.setPaintLabels(true);
 		dragCoef2Slider.setPaintTicks(true);
 		dragCoef2Slider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.15"));
 		dragCoef2Slider.setValue(7);
 		dragCoef2Slider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -1052,7 +1052,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		dragCoef2TextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dragCoef2TextField.setText("7");
 		dragCoef2TextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.15"));
 		dragCoef2TextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		dragCoef2TextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1073,10 +1073,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 		dragTypeCheckBox.setSelected(true);
 		dragTypeCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.17"));
 		dragTypeCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.17"));
 		dragTypeCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1095,9 +1095,9 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		dragPanel.add(dragTypePanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.13"), null, dragPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.13"));
 
 		realPanel.setLayout(new java.awt.GridBagLayout());
@@ -1108,10 +1108,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		gPanel.setLayout(new java.awt.GridBagLayout());
 
 		gPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.20")));
 		gPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.20"));
 		gPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		gSlider.setMajorTickSpacing(50);
@@ -1120,7 +1120,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		gSlider.setPaintLabels(true);
 		gSlider.setPaintTicks(true);
 		gSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.20"));
 		gSlider.setValue(98);
 		gSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -1146,7 +1146,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		gTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		gTextField.setText("98");
 		gTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.20"));
 		gTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		gTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1168,10 +1168,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		s0Panel.setLayout(new java.awt.GridBagLayout());
 
 		s0Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.19")));
 		s0Panel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.19"));
 		s0Panel.setPreferredSize(new java.awt.Dimension(82, 224));
 		s0Slider.setMajorTickSpacing(200);
@@ -1180,7 +1180,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		s0Slider.setPaintLabels(true);
 		s0Slider.setPaintTicks(true);
 		s0Slider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.19"));
 		s0Slider.setValue(41);
 		s0Slider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -1199,7 +1199,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		s0TextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		s0TextField.setText("41");
 		s0TextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.19"));
 		s0TextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		s0TextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1221,10 +1221,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		dtPanel.setLayout(new java.awt.GridBagLayout());
 
 		dtPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.21")));
 		dtPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.21"));
 		dtPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		dtSlider.setMajorTickSpacing(50);
@@ -1234,7 +1234,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		dtSlider.setPaintLabels(true);
 		dtSlider.setPaintTicks(true);
 		dtSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.21"));
 		dtSlider.setValue(10);
 		dtSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -1253,7 +1253,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		dtTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dtTextField.setText("10");
 		dtTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.21"));
 		dtTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		dtTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1274,29 +1274,29 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 		rkRadioButton.setSelected(true);
 		rkRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.24"));
 		rkRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.24"));
 		odeButtonGroup.add(rkRadioButton);
 		realTypePanel.add(rkRadioButton);
 
 		eulerRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.25"));
 		eulerRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.25"));
 		odeButtonGroup.add(eulerRadioButton);
 		realTypePanel.add(eulerRadioButton);
 
 		gTypeCheckBox.setSelected(true);
 		gTypeCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.26"));
 		gTypeCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.26"));
 		realTypePanel.add(gTypeCheckBox);
 
@@ -1309,9 +1309,9 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		realPanel.add(realTypePanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.18"), null, realPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.18"));
 
 		simulSettingsPanel.setLayout(new java.awt.GridBagLayout());
@@ -1322,10 +1322,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		tbsPanel.setLayout(new java.awt.GridBagLayout());
 
 		tbsPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.tbs")));
 		tbsPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.tip.tbs"));
 		tbsPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		tbsSlider.setMajorTickSpacing(50);
@@ -1335,7 +1335,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		tbsSlider.setPaintLabels(true);
 		tbsSlider.setPaintTicks(true);
 		tbsSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.tip.tbs"));
 		tbsSlider.setValue(100);
 		tbsSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -1354,7 +1354,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		tbsTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		tbsTextField.setText("100");
 		tbsTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.tip.tbs"));
 		tbsTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		tbsTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1377,10 +1377,10 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		samplesPanel.setLayout(new java.awt.GridBagLayout());
 
 		samplesPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.samples")));
 		samplesPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesPanel.setMinimumSize(new java.awt.Dimension(82, 83));
 		samplesPanel.setPreferredSize(new java.awt.Dimension(82, 224));
@@ -1391,7 +1391,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		samplesSlider.setPaintLabels(true);
 		samplesSlider.setPaintTicks(true);
 		samplesSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesSlider.setValue(500);
 		samplesSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -1411,7 +1411,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		samplesTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		samplesTextField.setText("500");
 		samplesTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		samplesTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1431,9 +1431,9 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		simulSettingsPanel.add(samplesPanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.27"), null, simulSettingsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.27"));
 
 		graphicsPanel.setLayout(new java.awt.GridBagLayout());
@@ -1444,7 +1444,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		graph2Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph2Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.32")));
 		graph2XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph2XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "Y", "Z", "| r |", "Vx",
@@ -1481,7 +1481,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		graph3Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph3Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.33")));
 		graph3XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph3XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "Y", "Z", "| r |", "Vx",
@@ -1518,7 +1518,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		graph4Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph4Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.34")));
 		graph4XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph4XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "Y", "Z", "| r |", "Vx",
@@ -1555,7 +1555,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		graph1Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph1Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.31")));
 		graph1XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph1XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "Y", "Z", "| r |", "Vx",
@@ -1591,25 +1591,25 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		genGraphsPanel.setLayout(new java.awt.GridBagLayout());
 
 		genPosPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.39")));
 		genPosPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.39"));
 		posModCheckBox.setSelected(true);
 		posModCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.35"));
 		posModCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.35"));
 		genPosPanel.add(posModCheckBox);
 
 		posAbsCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.37"));
 		posAbsCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.37"));
 		genPosPanel.add(posAbsCheckBox);
 
@@ -1620,25 +1620,25 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		genGraphsPanel.add(genPosPanel, gridBagConstraints);
 
 		genVelPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.40")));
 		genVelPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.40"));
 		velModCheckBox.setSelected(true);
 		velModCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.36"));
 		velModCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.36"));
 		genVelPanel.add(velModCheckBox);
 
 		velAbsCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.38"));
 		velAbsCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.38"));
 		genVelPanel.add(velAbsCheckBox);
 
@@ -1657,9 +1657,9 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		graphicsPanel.add(genGraphsPanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.title.30"), null, graphicsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 				.getString("rec.exp.customizer.tip.30"));
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1949,21 +1949,21 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	public void actionPerformed(java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.editMenu.title.1")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+					"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 					"rec.exp.customizer.editPanel.title.1"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+					"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 					"rec.exp.customizer.editPanel.tip.1"), (int) Math.round(movproj.getMass()), new int[] { 100, 1001,
 					1, 20 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj")
 						.getString("rec.exp.customizer.editMenu.title.2")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+					"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 					"rec.exp.customizer.editPanel.title.2"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+					"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 					"rec.exp.customizer.editPanel.tip.2"), (int) Math.round(movproj.getRadius() * 21), new int[] { 100,
 					1001, 1, 20 });
 		else if (e.getActionCommand().equalsIgnoreCase("Ok")) {
@@ -2028,11 +2028,11 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		String str = ((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle();
 
 		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.editPanel.title.1")))
 			editSlider.setValue((int) Math.round(movproj.getMass()));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.editPanel.title.2")))
 			editSlider.setValue((int) Math.round(movproj.getRadius() * 21));
 
@@ -2053,11 +2053,11 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	private void editSet(String str, double val) {
 		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.editPanel.title.1")))
 			movproj.setMass(val);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/movproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
 				"rec.exp.customizer.editPanel.title.2"))) {
 			movproj.setRadius(val / 21d);
 			yPosSlider.setValue((int) Math.round(movproj.getPosY() * 10));
@@ -2367,7 +2367,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/movproj/resources/movproj_iconified.PNG"));
+				"/pt/utl/ist/elab/client/vmovproj/resources/movproj_iconified.PNG"));
 	}
 
 	public String getCustomizerTitle() {

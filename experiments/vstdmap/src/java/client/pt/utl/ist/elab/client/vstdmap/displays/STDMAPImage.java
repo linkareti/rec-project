@@ -24,7 +24,7 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 	/** Creates a new instance of Animation */
 	public STDMAPImage() {
 		super("Theta", "I", java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/stdmap/resources/ReCExpSTDMAP").getString("rec.exp.title.stdmap"), 0,
+				"pt/utl/ist/elab/client/vstdmap/resources/ReCExpSTDMAP").getString("rec.exp.title.stdmap"), 0,
 				2 * Math.PI, 0, 2 * Math.PI);
 		// this.setPreferredSize(new java.awt.Dimension(500,500));
 	}

@@ -519,7 +519,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/oscilador/resources/oscilador_iconified.png"));
+				"/pt/utl/ist/elab/client/voscilador/resources/oscilador_iconified.png"));
 	}
 
 	// ESTE É PARA ALTERAR

@@ -115,7 +115,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/m3/resources/m3_iconified.png"));
+				"/pt/utl/ist/elab/client/vm3/resources/m3_iconified.png"));
 	}
 
 	// ESTE � PARA ALTERAR
@@ -755,7 +755,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		System.out.println(java.util.Locale.getDefault());
 
 		ReCResourceBundle.loadResourceBundle("ReCExpM3",
-				"recresource:///pt/utl/ist/elab/virtual/client/m3/resources/ReCExpM3");
+				"recresource:///pt/utl/ist/elab/client/vm3/resources/ReCExpM3");
 
 		System.out.println(ReCResourceBundle.findString("ReCExpM3$rec.exp.display.m3.tip.3"));
 		javax.swing.JFrame frame = new javax.swing.JFrame();

@@ -114,7 +114,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpColisao",
-				"recresource:///pt/utl/ist/elab/virtual/client/colisao/resources/ReCExpColisao");
+				"recresource:///pt/utl/ist/elab/client/vcolisao/resources/ReCExpColisao");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new ColisaoCustomizer());
 		dummy.pack();
@@ -846,7 +846,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/colisao/resources/colisao_iconified.png"));
+				"/pt/utl/ist/elab/client/vcolisao/resources/colisao_iconified.png"));
 	}
 
 	// ESTE É PARA ALTERAR

@@ -45,7 +45,7 @@ public class CartPole extends DrawingPanel3D implements ActionListener, MouseLis
 
 	protected String statusStr;
 	private String actionStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+			"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 			"rec.exp.displays.animation.actionStr");
 
 	private PopupMenu viewPopMenu;
@@ -93,10 +93,10 @@ public class CartPole extends DrawingPanel3D implements ActionListener, MouseLis
 
 	public void buildCartPole() {
 		setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.1")));
 		setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.1"));
 		setDecorationType(DECORATION_NONE);
 		setSquareAspect(true);
@@ -200,28 +200,28 @@ public class CartPole extends DrawingPanel3D implements ActionListener, MouseLis
 	private void buildPopupMenu() {
 		viewPopMenu = new PopupMenu(this);
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.viewMenu.title.9"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.viewMenu.tip.9"));
 		viewPopMenu.addCheckBoxItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.viewMenu.title.10"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.viewMenu.tip.10"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.viewMenu.title.11"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.viewMenu.tip.11"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString("rec.exp.displays.save"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString("rec.exp.displays.save"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.displays.save.tip"));
 		viewPopMenu.addItem(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.displays.print"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 						"rec.exp.displays.print.tip"));
 	}
 
@@ -239,22 +239,22 @@ public class CartPole extends DrawingPanel3D implements ActionListener, MouseLis
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.displays.save")))
 			try {
 				doSaveAs();
 			} catch (IOException io) {
 			}
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.displays.print")))
 			createChartPrintJob();
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.viewMenu.title.9"))) {
 			measure();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.viewMenu.title.10"))) {
 			savingPast = ((javax.swing.JCheckBoxMenuItem) e.getSource()).isSelected();
 
@@ -263,7 +263,7 @@ public class CartPole extends DrawingPanel3D implements ActionListener, MouseLis
 			else
 				addDrawable(rasto);
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.viewMenu.title.11"))) {
 			clearTrail();
 		}
@@ -702,7 +702,7 @@ public class CartPole extends DrawingPanel3D implements ActionListener, MouseLis
 
 		JFileChooser fileChooser = new JFileChooser();
 		org.jfree.ui.ExtensionFileFilter filter = new org.jfree.ui.ExtensionFileFilter(java.util.ResourceBundle
-				.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 						"PNG_Image_Files"), ".png");
 		fileChooser.addChoosableFileFilter(filter);
 

@@ -47,7 +47,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	public static void main(String args[]) {
 
 		ReCResourceBundle.loadResourceBundle("ReCExpYoungInterf",
-				"recresource:///pt/utl/ist/elab/virtual/client/younginterf/resources/ReCExpYoungInterf");
+				"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/ReCExpYoungInterf");
 
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new YoungInterfCustomizer());
@@ -491,7 +491,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/younginterf/resources/younginterf_iconified.png"));
+				"/pt/utl/ist/elab/client/vyounginterf/resources/younginterf_iconified.png"));
 	}
 
 	// ESTE É PARA ALTERAR

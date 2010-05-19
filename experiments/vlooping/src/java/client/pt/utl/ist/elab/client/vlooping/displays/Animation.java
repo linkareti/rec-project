@@ -41,7 +41,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		this.add(panel);
 
 		ReCResourceBundle.loadResourceBundle("ReCExpLooping",
-				"recresource:///pt/utl/ist/elab/virtual/client/looping/resources/ReCExpLooping");
+				"recresource:///pt/utl/ist/elab/client/vlooping/resources/ReCExpLooping");
 
 		dataset = new Dataset(Color.BLACK, Color.BLUE, true);
 		dataset.setMarkerShape(Dataset.NO_MARKER);
@@ -138,7 +138,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpLooping",
-				"recresource:///pt/utl/ist/elab/virtual/client/looping/resources/ReCExpLooping");
+				"recresource:///pt/utl/ist/elab/client/vlooping/resources/ReCExpLooping");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Animation());
 		dummy.pack();

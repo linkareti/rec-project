@@ -112,29 +112,29 @@ public class FERMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 	private void buildPopupMenu() {
 		viewPopMenu = new PopupMenu(this);
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.viewMenu.title.1"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.viewMenu.tip.1"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.viewMenu.title.2"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.viewMenu.tip.2"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.viewMenu.title.3"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.viewMenu.tip.3"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.viewMenu.title.4"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.viewMenu.tip.4"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.viewMenu.title.5"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+				"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 				"rec.exp.customizer.viewMenu.tip.5"));
 	}
 
@@ -215,46 +215,46 @@ public class FERMAPAnima extends DrawingPanel3D implements ActionListener, Mouse
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.viewMenu.title.1"))) {
 			setAlphaAndBeta(0, 0);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.viewMenu.title.2"))) {
 			setZoom(1);
 			setPan(0, 0);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.viewMenu.title.3"))) {
 			setZoom(.2);
 			setPan((int) Math.round(-.4 * getWidth()), 0);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.viewMenu.title.4"))) {
 			this.setDisplayMode(this.DISPLAY_PLANAR_YZ);
 			repaint();
 			((javax.swing.JMenuItem) e.getSource()).setText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.viewMenu.title.6"));
 			((javax.swing.JMenuItem) e.getSource()).setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.viewMenu.tip.6"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.viewMenu.title.6"))) {
 			this.setDisplayMode(this.DISPLAY_NO_PERSPECTIVE);
 			repaint();
 			((javax.swing.JMenuItem) e.getSource()).setText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.viewMenu.title.4"));
 			((javax.swing.JMenuItem) e.getSource()).setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP").getString(
+					"pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP").getString(
 					"rec.exp.customizer.viewMenu.tip.4"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/fermap/resources/ReCExpFERMAP")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/ReCExpFERMAP")
 						.getString("rec.exp.customizer.viewMenu.title.5")))
 			snapshot();
 	}

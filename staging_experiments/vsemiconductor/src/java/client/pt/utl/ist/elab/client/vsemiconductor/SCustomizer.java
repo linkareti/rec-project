@@ -2024,7 +2024,7 @@ public class SCustomizer extends JPanel implements com.linkare.rec.impl.client.c
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/semiconductor/resources/diode.gif"));
+				"/pt/utl/ist/elab/client/vsemiconductor/resources/diode.gif"));
 	}
 
 	public String getCustomizerTitle() {

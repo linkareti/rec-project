@@ -606,7 +606,7 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/mm/resources/mm_iconified.png"));
+				"/pt/utl/ist/elab/client/vmm/resources/mm_iconified.png"));
 	}
 
 	// ESTE É PARA ALTERAR

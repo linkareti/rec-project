@@ -120,10 +120,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		mainEditPanel.setLayout(new java.awt.GridBagLayout());
 
 		mainEditPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.22")));
 		mainEditPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.22"));
 		mainEditPanel.setMinimumSize(new java.awt.Dimension(350, 100));
 		mainEditPanel.setPreferredSize(new java.awt.Dimension(350, 200));
@@ -186,10 +186,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		editLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		editLabel.setForeground(new java.awt.Color(255, 102, 102));
 		editLabel.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.23"));
 		editLabel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.23"));
 		editLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -208,10 +208,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		commandsPanel.setMinimumSize(new java.awt.Dimension(100, 100));
 		commandsPanel.setPreferredSize(new java.awt.Dimension(100, 100));
 		okButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.ok"));
 		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,10 +226,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		commandsPanel.add(okButton, gridBagConstraints);
 
 		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,10 +244,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		commandsPanel.add(cancelButton, gridBagConstraints);
 
 		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.dfc"));
 		defaultButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,10 +275,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		gPanel.setLayout(new java.awt.GridBagLayout());
 
 		gPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.2")));
 		gPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.2"));
 		gPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		gPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -289,7 +289,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		gSlider.setPaintLabels(true);
 		gSlider.setPaintTicks(true);
 		gSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.2"));
 		gSlider.setValue(98);
 		gSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -309,7 +309,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		gTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		gTextField.setText("98");
 		gTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.2"));
 		gTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -320,17 +320,17 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		gPanel.add(gTextField, new java.awt.GridBagConstraints());
 
 		setTabbedPane.addTab("g", null, gPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.2"));
 		gPanel.getAccessibleContext().setAccessibleName("");
 
 		xMaxPanel.setLayout(new java.awt.GridBagLayout());
 
 		xMaxPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.4")));
 		xMaxPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.4"));
 		xMaxPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		xMaxPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -341,7 +341,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		xMaxSlider.setPaintLabels(true);
 		xMaxSlider.setPaintTicks(true);
 		xMaxSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.4"));
 		xMaxSlider.setValue(300);
 		xMaxSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -366,7 +366,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		xMaxTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		xMaxTextField.setText("300");
 		xMaxTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.4"));
 		xMaxTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -377,7 +377,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		xMaxPanel.add(xMaxTextField, new java.awt.GridBagConstraints());
 
 		setTabbedPane.addTab("xMax", null, xMaxPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.4"));
 
 		dragPanel.setLayout(new java.awt.GridBagLayout());
@@ -385,10 +385,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		dragCartPanel.setLayout(new java.awt.GridBagLayout());
 
 		dragCartPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.5")));
 		dragCartPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.5"));
 		dragCartPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		dragCartPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -398,7 +398,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		dragCartSlider.setPaintLabels(true);
 		dragCartSlider.setPaintTicks(true);
 		dragCartSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.5"));
 		dragCartSlider.setValue(5000);
 		dragCartSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -418,7 +418,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		dragCartTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dragCartTextField.setText("5000");
 		dragCartTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.5"));
 		dragCartTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -438,10 +438,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		dragPolePanel.setLayout(new java.awt.GridBagLayout());
 
 		dragPolePanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.6")));
 		dragPolePanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.6"));
 		dragPolePanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		dragPolePanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -451,7 +451,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		dragPoleSlider.setPaintLabels(true);
 		dragPoleSlider.setPaintTicks(true);
 		dragPoleSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.6"));
 		dragPoleSlider.setValue(20);
 		dragPoleSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -471,7 +471,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		dragPoleTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dragPoleTextField.setText("20");
 		dragPoleTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.6"));
 		dragPoleTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -490,9 +490,9 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		dragPanel.add(dragPolePanel, gridBagConstraints);
 
 		setTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.3"), null, dragPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.3"));
 
 		tbsNsPanel.setLayout(new java.awt.GridBagLayout());
@@ -500,10 +500,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		tbsPanel.setLayout(new java.awt.GridBagLayout());
 
 		tbsPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.tbs")));
 		tbsPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.tbs"));
 		tbsPanel.setMinimumSize(new java.awt.Dimension(55, 71));
 		tbsPanel.setPreferredSize(new java.awt.Dimension(82, 224));
@@ -514,7 +514,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		tbsSlider.setPaintLabels(true);
 		tbsSlider.setPaintTicks(true);
 		tbsSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.tbs"));
 		tbsSlider.setValue(100);
 		tbsSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -534,7 +534,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		tbsTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		tbsTextField.setText("100");
 		tbsTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.tbs"));
 		tbsTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		tbsTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -558,10 +558,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		samplesPanel.setLayout(new java.awt.GridBagLayout());
 
 		samplesPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.samples")));
 		samplesPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesPanel.setMinimumSize(new java.awt.Dimension(55, 71));
 		samplesPanel.setPreferredSize(new java.awt.Dimension(82, 224));
@@ -572,7 +572,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		samplesSlider.setPaintLabels(true);
 		samplesSlider.setPaintTicks(true);
 		samplesSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesSlider.setValue(500);
 		samplesSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -592,7 +592,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		samplesTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		samplesTextField.setText("500");
 		samplesTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		samplesTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -613,9 +613,9 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		tbsNsPanel.add(samplesPanel, gridBagConstraints);
 
 		setTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.24"), null, tbsNsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.24"));
 
 		failurePanel.setLayout(new java.awt.GridBagLayout());
@@ -623,10 +623,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		failTimePanel.setLayout(new java.awt.GridBagLayout());
 
 		failTimePanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.28")));
 		failTimePanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.28"));
 		failTimePanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		failTimePanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -637,7 +637,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		failTimeSlider.setPaintLabels(true);
 		failTimeSlider.setPaintTicks(true);
 		failTimeSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.28"));
 		failTimeSlider.setValue(20);
 		failTimeSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -656,10 +656,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		failNLapsPanel.setLayout(new java.awt.GridBagLayout());
 
 		failNLapsPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.29")));
 		failNLapsPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.29"));
 		failNLapsPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		failNLapsPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -671,7 +671,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		failNLapsSlider.setPaintTicks(true);
 		failNLapsSlider.setSnapToTicks(true);
 		failNLapsSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.29"));
 		failNLapsSlider.setValue(5);
 		failNLapsSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -690,10 +690,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		failNPanel.setLayout(new java.awt.GridBagLayout());
 
 		failNPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.30")));
 		failNPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.30"));
 		failNPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		failNPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -705,7 +705,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		failNSlider.setPaintTicks(true);
 		failNSlider.setSnapToTicks(true);
 		failNSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.30"));
 		failNSlider.setValue(1);
 		failNSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -723,10 +723,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 		failureActivateCheckBox.setSelected(true);
 		failureActivateCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.26"));
 		failureActivateCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.26"));
 		failureActivateCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -739,9 +739,9 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		failurePanel.add(failureActivateCheckBox, gridBagConstraints);
 
 		setTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.25"), null, failurePanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.25"));
 
 		successPanel.setLayout(new java.awt.GridBagLayout());
@@ -749,10 +749,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		sucAnglePanel.setLayout(new java.awt.GridBagLayout());
 
 		sucAnglePanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.31")));
 		sucAnglePanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.31"));
 		sucAnglePanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		sucAnglePanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -763,7 +763,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		sucAngleSlider.setPaintLabels(true);
 		sucAngleSlider.setPaintTicks(true);
 		sucAngleSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.31"));
 		sucAngleSlider.setValue(12);
 		sucAngleSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -788,7 +788,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		sucAngleTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		sucAngleTextField.setText("12");
 		sucAngleTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.31"));
 		sucAngleTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -808,10 +808,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		sucTimePanel.setLayout(new java.awt.GridBagLayout());
 
 		sucTimePanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.32")));
 		sucTimePanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.32"));
 		sucTimePanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		sucTimePanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -822,7 +822,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		sucTimeSlider.setPaintLabels(true);
 		sucTimeSlider.setPaintTicks(true);
 		sucTimeSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.32"));
 		sucTimeSlider.setValue(5);
 		sucTimeSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -838,10 +838,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 		successActivateCheckBox.setSelected(true);
 		successActivateCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.26"));
 		successActivateCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.26"));
 		successActivateCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -854,9 +854,9 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		successPanel.add(successActivateCheckBox, gridBagConstraints);
 
 		setTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.27"), null, successPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.27"));
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -873,10 +873,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		kpPanel.setLayout(new java.awt.BorderLayout());
 
 		kpPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.34")));
 		kpPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.34"));
 		kpSlider.setMajorTickSpacing(5);
 		kpSlider.setMaximum(30);
@@ -885,7 +885,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		kpSlider.setPaintTicks(true);
 		kpSlider.setSnapToTicks(true);
 		kpSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.34"));
 		kpSlider.setValue(12);
 		kpSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -901,7 +901,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		kpTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		kpTextField.setText("12");
 		kpTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.34"));
 		kpTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		kpTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -923,10 +923,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		kiPanel.setLayout(new java.awt.BorderLayout());
 
 		kiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.7")));
 		kiPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.7"));
 		kiSlider.setMajorTickSpacing(5);
 		kiSlider.setMaximum(30);
@@ -935,7 +935,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		kiSlider.setPaintTicks(true);
 		kiSlider.setSnapToTicks(true);
 		kiSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.7"));
 		kiSlider.setValue(9);
 		kiSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -951,7 +951,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		kiTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		kiTextField.setText("9");
 		kiTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.7"));
 		kiTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		kiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -971,10 +971,10 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		kdPanel.setLayout(new java.awt.BorderLayout());
 
 		kdPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.title.8")));
 		kdPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.8"));
 		kdSlider.setMajorTickSpacing(5);
 		kdSlider.setMaximum(30);
@@ -983,7 +983,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		kdSlider.setPaintTicks(true);
 		kdSlider.setSnapToTicks(true);
 		kdSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.8"));
 		kdSlider.setValue(3);
 		kdSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -999,7 +999,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		kdTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		kdTextField.setText("3");
 		kdTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.tip.8"));
 		kdTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		kdTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1306,35 +1306,35 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	private void editSet(String str, double val) {
 		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.1")))
 			cartPole.setCartMass(val / 100d);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.2")))
 			cartPole.setCartX(val);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.3")))
 			cartPole.setXVecVel(val);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.4")))
 			cartPole.setAction(val);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.5")))
 			cartPole.setPoleMass(val / 100d);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.6")))
 			cartPole.setTheta(Math.toRadians(val));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.7")))
 			cartPole.setThetaVecVel(val);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.8")))
 			cartPole.setPoleLength(val / 10d);
 	}
@@ -1358,23 +1358,23 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		String str = ((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle();
 
 		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.2")))
 			editSlider.setValue((int) Math.round(cartPole.getCartX()));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.6")))
 			editSlider.setValue((int) Math.round(Math.toDegrees(cartPole.getTheta())));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.4")))
 			editSlider.setValue((int) Math.round(cartPole.getAction()));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.7")))
 			editSlider.setValue((int) Math.round(cartPole.getThetaVecVel()));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 				"rec.exp.customizer.editPanel.title.3")))
 			editSlider.setValue((int) Math.round(cartPole.getXVecVel()));
 
@@ -1383,59 +1383,59 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.editMenu.title.1")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+					"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 					"rec.exp.customizer.editPanel.title.1"), (int) Math.round(cartPole.getCartMass() * 100), new int[] {
 					200, 1001, 1, 100 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.editMenu.title.2")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+					"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 					"rec.exp.customizer.editPanel.title.2"), (int) Math.round(cartPole.getCartX()), new int[] { 12,
 					(int) Math.round(cartPole.getXLimit()), (int) Math.round(-cartPole.getXLimit()), 6 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.editMenu.title.3")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+					"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 					"rec.exp.customizer.editPanel.title.3"), (int) Math.round(cartPole.getXVecVel()), new int[] { 20,
 					100, -100, 10 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.editMenu.title.4")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+					"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 					"rec.exp.customizer.editPanel.title.4"), (int) Math.round(cartPole.getAction()), new int[] { 20,
 					100, -100, 10 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.editMenu.title.5")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+					"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 					"rec.exp.customizer.editPanel.title.5"), (int) Math.round(cartPole.getPoleMass() * 100), new int[] {
 					200, 1001, 1, 100 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.editMenu.title.6")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+					"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 					"rec.exp.customizer.editPanel.title.6"), (int) Math.round(Math.toDegrees(cartPole.getTheta())),
 					new int[] { 60, 180, -180, 30 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.editMenu.title.7")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+					"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 					"rec.exp.customizer.editPanel.title.7"), (int) Math.round(cartPole.getThetaVecVel()), new int[] {
 					20, 100, -100, 10 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole")
 						.getString("rec.exp.customizer.editMenu.title.8")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/virtual/client/cartpole/resources/ReCExpCartPole").getString(
+					"pt/utl/ist/elab/client/vcartpole/resources/ReCExpCartPole").getString(
 					"rec.exp.customizer.editPanel.title.8"), (int) Math.round(cartPole.getPoleLength() * 10),
 					new int[] { 200, 1001, 1, 100 });
 		/*
@@ -1661,7 +1661,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/cartpole/resources/cartpole_iconified.PNG"));
+				"/pt/utl/ist/elab/client/vcartpole/resources/cartpole_iconified.PNG"));
 	}
 
 	public String getCustomizerTitle() {

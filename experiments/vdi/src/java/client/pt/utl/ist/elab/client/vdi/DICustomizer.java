@@ -416,7 +416,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/virtual/client/di/resources/di_iconified.png"));
+				"/pt/utl/ist/elab/client/vdi/resources/di_iconified.png"));
 	}
 
 	// ESTE E' PARA ALTERAR
