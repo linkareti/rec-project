@@ -9,6 +9,7 @@
 	<classpathentry kind="src" path="elab/src/java/client"/>
 	<classpathentry kind="src" path="elab/src/java/ui"/>
 	<classpathentry kind="src" path="rec/src/java/ui"/>
+	<classpathentry kind="src" path="other/src/java/JVLC"/>
 	<classpathentry kind="lib" path="lib/avalon-framework.jar"/>
 	<classpathentry kind="lib" path="lib/logkit.jar"/>
 	<classpathentry kind="lib" path="lib/tools-1.4.0.jar"/>
@@ -21,7 +22,6 @@
 	<classpathentry kind="lib" path="lib/test/commons-logging.jar"/>
 	<classpathentry kind="lib" path="lib/uitools/swingx.jar"/>
 	<classpathentry kind="lib" path="lib/newface/AppFramework-1.03.jar" sourcepath="lib/newface/AppFramework-1.03-src.zip"/>
-	<classpathentry kind="lib" path="lib/jvlc-0.9.0.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/client/OSP.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/client/OSP3D.jar"/>
@@ -32,6 +32,7 @@
 	<classpathentry kind="lib" path="rec/lib/compile/client/jcommon-1.0.12.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/multicast/rec.am-api-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/client/jna.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="rec/lib/compile/client/javaws.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/jfreechart-1.0.9.jar"/>
