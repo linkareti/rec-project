@@ -56,8 +56,9 @@
         
         <extension name="JFreeChartClient" href="JFreeChart.jnlp" />
 		<extension name="OpenORBClient" href="OpenORB.jnlp" />
-		<!-- extension name="JVLC" href="jvlc.jnlp" /-->
-       
+		<!--<extension name="JHelp" href="jhelp.jnlp"/>-->
+		<!--<extension name="ReC" href="/ReC.jnlp"/>-->
+		
         <property name="ReCFaceConfig" value="config/ReCFaceConfig.xml" />
         <property name="ReCBaseUIConfig" value="etc/ReCBaseUIConfig.xml" />
         <property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB" />
