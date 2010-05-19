@@ -62,6 +62,38 @@
 	</macrodef>
 
 	<!--
+			=====================================================
+			======================= JVLC ========================
+			=====================================================
+		-->
+
+		<property name="jvlc.classes.dir" value="${build.dir.compile}/classes/jvlc" />
+		<property name="jvlc.build.dir" value="${build.dir.jars}/jvlc" />
+
+		<property name="jvlc.src.java.dir" value="${basedir}/other/src/java/JVLC" />
+
+		<property name="other.lib.dir" value="${basedir}/other/lib" />
+
+		<property name="jvlc.lib.dir" value="${other.lib.dir}/java/jvlc/" />
+
+		<path id="jvlc.lib.path">
+			<fileset dir="${jvlc.lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+
+		<path id="jvlc.compile.lib.path">
+			<fileset dir="${other.lib.dir}/compile/jvlc/">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+
+		<path id="jvlc.libs.classpath">
+			<path refid="jvlc.lib.path" />
+			<path refid="jvlc.compile.lib.path" />
+		</path>
+	
+	<!--
 		=====================================================
 		==================== REC Common =====================
 		=====================================================
@@ -126,7 +158,9 @@
 
 	<path id="rec.compile.client.dependencies.classpath">
 		<pathelement location="${rec.common.classes.dir}/" />
+		<pathelement location="${jvlc.classes.dir}/" />
 		<path refid="rec.common.libs.classpath" />
+		<path refid="jvlc.libs.classpath" />
 	</path>
 
 	<path id="rec.compile.client.classpath">

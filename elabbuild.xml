@@ -127,7 +127,6 @@
 			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 			<sysproperty key="openorb.config" value="${openorb.config}" />
-			<sysproperty key="openorb.config.virtual" value="${openorb.config.virtual}" />
 			
 		</java>
 	</target>

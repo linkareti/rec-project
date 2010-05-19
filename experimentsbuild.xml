@@ -12,8 +12,8 @@
 
 	<property file="build.properties" description="general properties for building project" />
 
-	<import file="generaldefinitions.xml"/>
-	
+	<import file="generaldefinitions.xml" />
+
 	<!--
 		=====================================================
 		====================== Generic ======================
@@ -21,7 +21,7 @@
 	-->
 
 	<target name="help" description="General usage of the build system, it shows a description of each target, and how to use them">
-		<echo>ReC - eBab build system</echo>
+		<echo>ReC - eLab build system</echo>
 	</target>
 
 	<!--
@@ -34,8 +34,8 @@
 		<attribute name="experiment.name" />
 		<sequential>
 			<delete dir="${experiments.classes.dir}/@{experiment.name}" />
-			<delete file="${build.dir.compile}/@{experiment.name}Client.jar"/>
-			<delete file="${build.dir.compile}/@{experiment.name}Client_sig.jar"/>
+			<delete file="${build.dir.compile}/@{experiment.name}Client.jar" />
+			<delete file="${build.dir.compile}/@{experiment.name}Client_sig.jar" />
 			<!--delete file="${client.build.dir}/@{experiment.name}Client.jar"/>
 			<delete file="${client.build.dir}/@{experiment.name}Client_sig.jar"/>
 			<delete file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar"/>
@@ -93,7 +93,7 @@
 			<!--jar.experiment.client experiment.name="@{experiment.name}"/>
 			
 			<sign.jar.rec jar.name="@{experiment.name}Client.jar" folder="${build.dir.compile}"/-->
-			
+
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
 
 		</sequential>
@@ -137,7 +137,7 @@
 					<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 				</section>
 			</manifest>
-			
+
 			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-compile" />
 
 		</sequential>
@@ -156,37 +156,37 @@
 			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
 		<process.list task="compile.experiment.client" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
-	
-	
-	
+
+
+
 	<macrodef name="jar.experiment.client">
-	        <attribute name="experiment.name" />
-	        <sequential>
-	            <mkdir dir="${client.build.dir}"/>
-	        	
-	        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
-	        	
-	        	<jar destfile="${client.build.dir}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client"/>
-	        	
-	        	<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
-	        	
-	        </sequential>
-	    </macrodef>
+		<attribute name="experiment.name" />
+		<sequential>
+			<mkdir dir="${client.build.dir}" />
 
-		<macrodef name="jar.experiment.driver">
-			<attribute name="experiment.name" />
-			<sequential>
-				<mkdir dir="${hardwareserver.build.dir}" />
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
 
-				<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
+			<jar destfile="${client.build.dir}/@{experiment.name}Client.jar" basedir="${experiments.classes.dir}/@{experiment.name}/client" />
 
-				<jar destfile="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/@{experiment.name}/server">
-				</jar>
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
 
-				<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
+		</sequential>
+	</macrodef>
 
-			</sequential>
-		</macrodef>
+	<macrodef name="jar.experiment.driver">
+		<attribute name="experiment.name" />
+		<sequential>
+			<mkdir dir="${hardwareserver.build.dir}" />
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-jar" />
+
+			<jar destfile="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" basedir="${experiments.classes.dir}/@{experiment.name}/server">
+			</jar>
+
+			<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="post-jar" />
+
+		</sequential>
+	</macrodef>
 
 	<target name="jar.experiment.clients.list">
 		<fail unless="experiment.list"> experiments.list must be set to package
@@ -201,7 +201,7 @@
 			it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
 		<process.list task="jar.experiment.driver" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
-		
+
 
 	<macrodef name="sign.experiment">
 		<attribute name="experiment.name" />
@@ -209,9 +209,9 @@
 		<sequential>
 			<signjar storetype="${elab.storetype}" destDir="${client.build.dir}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
 				<fileset dir="${client.build.dir}" includes="@{experiment.name}Client.jar" excludes="*_sig.jar" />
-					<globmapper from="*.jar" to="*_sig.jar" />
-			</signjar>            
-		</sequential>	
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+		</sequential>
 	</macrodef>
 
 	<target name="sign.experiments.list">
@@ -249,7 +249,42 @@
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 				<sysproperty key="openorb.config" value="${rec.client.classes.dir}/openorb.xml" />
-				<sysproperty key="ReCBaseUIConfig" value="${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
+				<sysproperty key="ReCBaseUIConfig" value="file:///${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="debug.experiment.client">
+		<attribute name="experiment.name" />
+		<sequential>
+			<java classname="pt.utl.ist.elab.client.@{experiment.name}.ClientMain" fork="true" failonerror="true">
+				<arg value="-h" />
+				<classpath>
+					<path refid="rec.common.lib.path" />
+					<path refid="rec.client.lib.path" />
+					<path refid="elab.hardwareserver.lib.path" />
+					<pathelement location="${rec.common.classes.dir}/" />
+					<pathelement location="${rec.client.classes.dir}" />
+					<pathelement location="${rec.ui.classes.dir}" />
+					<pathelement location="${elab.client.classes.dir}/" />
+					<pathelement location="${experiments.classes.dir}/@{experiment.name}/client/" />
+					<fileset dir="experiments/@{experiment.name}/lib/java/client/">
+						<include name="**/*.jar" />
+					</fileset>
+				</classpath>
+				<jvmarg value="-Xdebug" />
+				<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.client.debug.address.port},server=y,suspend=y" />
+				<jvmarg value="-Xms${min.memory}" />
+				<jvmarg value="-Xmx${max.memory}" />
+				<jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" />
+				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+				<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
+				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+				<sysproperty key="openorb.config" value="${rec.client.classes.dir}/openorb.xml" />
+				<sysproperty key="ReCBaseUIConfig" value="file:///${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
 			</java>
 		</sequential>
 	</macrodef>
@@ -291,6 +326,12 @@
 		<fail unless="experiment.name">experiment.name must be set to run a single experiment. 
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<run.experiment.client experiment.name="${experiment.name}" />
+	</target>
+	
+	<target name="debug.experiment.client">
+		<fail unless="experiment.name">experiment.name must be set to debug a single experiment. 
+			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
+		<debug.experiment.client experiment.name="${experiment.name}" />
 	</target>
 
 	<target name="run.experiment.driver">
@@ -340,7 +381,7 @@
 			Pass it to jvm as arg like -Dexperiment.name="experiment name"</fail>
 		<debug.experiment.driver experiment.name="${experiment.name}" />
 	</target>
-	
+
 	<macrodef name="create.jnlp.for.experiment">
 		<attribute name="experiment.name" />
 		<sequential>
@@ -357,15 +398,16 @@
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
 				<replacefilter token="@main-class@" property="@{experiment.name}.client.main-class" />
 			</replace>
-			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;"/>
-			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
-			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
-			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
-				<replacevalue><![CDATA[<jar href="client/@temporary.experiment.jar@" main="true"/>
-		<!--End Experiment Jars-->]]></replacevalue>
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="&lt;!--End Experiment Jars--&gt;">
+				<replacevalue>
+					<![CDATA[<jar href="client/@temporary.experiment.jar@" main="true"/>
+					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-		<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar"/>
-		
+			<replace file="${client.build.dir}/@{experiment.name}.jnlp" token="@temporary.experiment.jar@" value="client/@{experiment.name}Client_sig.jar" />
+
 		</sequential>
 	</macrodef>
 
@@ -388,5 +430,5 @@
 				it to jvm as arg like -Dexperiment.list="experiment1,experiment2,..."</fail>
 		<process.list task="build.experiment" list="${experiment.list}" attribute.name="experiment.name" />
 	</target>
-	
+
 </project>

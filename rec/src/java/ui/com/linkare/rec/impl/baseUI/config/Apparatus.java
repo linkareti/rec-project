@@ -24,6 +24,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.linkare.rec.impl.baseUI.config.ReCBaseUIConfig.ValidateException;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseUI.config.CommonBean, OrderedItem {
 	private int _Order = Integer.MAX_VALUE;
@@ -742,10 +743,15 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 				aLocalizationBundle._setPropertyChangeSupport(eventListeners);
 				aLocalizationBundle.readNode(childNode);
 				_LocalizationBundle.add(aLocalizationBundle);
+				loadLocalizationBundle(aLocalizationBundle);
 			} else {
 				// Found extra unrecognized childNode
 			}
 		}
+	}
+	
+	public ReCResourceBundle loadLocalizationBundle(LocalizationBundle bundle) {
+		return ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
 	}
 
 	public void validate() throws ValidateException {
