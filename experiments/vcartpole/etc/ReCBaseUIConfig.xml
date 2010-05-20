@@ -4,7 +4,7 @@
 	displayStringBundleKey="cartpole$rec.exp.title.cartpole"
 	desktopLocationBundleKey="cartpole$rec.exp.background.cartpole" order="1">
 	<LocalizationBundle name="cartpole"
-		location="recresource:///pt/utl/ist/elab/virtual/client/cartpole/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/vcartpole/resources/messages" />
 	<Display classLocationBundleKey="cartpole$rec.exp.display.cartpole.loc.anim"
 		toolTipBundleKey="cartpole$rec.exp.display.cartpole.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
