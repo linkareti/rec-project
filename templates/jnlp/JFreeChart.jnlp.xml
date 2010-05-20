@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <jnlp spec="1.0+" codebase="@codebase@" href="JFreeChart.jnlp">
     <information>
-        <title>JFreeChart/title>
+        <title>JFreeChart</title>
         <vendor>JFreeChart</vendor>
 	<homepage href="http://www.jfree.org/jfreechart/"/>
 	<description kind="one-line">The JFreeChart classes</description>
@@ -10,8 +10,8 @@
 	<icon kind="splash" href="rec_logo.gif"/>
     </information>
     <resources>
-        <jar href="jfreechart-1.0.9_sig.jar"/>
-        <jar href="jcommon-1.0.12_sig.jar"/>
+        <jar href="lib/jfreechart-1.0.9_sig.jar"/>
+        <jar href="lib/jcommon-1.0.12_sig.jar"/>
     </resources>
     <component-desc/>
     <security>

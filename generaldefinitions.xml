@@ -692,6 +692,10 @@
 		<sequential>
 			<copy file="${baseuiconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
 			<process.list task="add.experiment.baseuiconfig" list="${experiment.list}" attribute.name="experiment.name" />
+			
+			
+			
+			
 		</sequential>
 	</macrodef>
 
@@ -714,6 +718,11 @@
 		<sequential>
 			<copy file="${faceconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFaceConfig.xml" />
 			<process.list task="add.experiment.faceconfig" list="${experiment.list}" attribute.name="experiment.name" />
+			
+			
+			
+			
+			
 		</sequential>
 	</macrodef>
 

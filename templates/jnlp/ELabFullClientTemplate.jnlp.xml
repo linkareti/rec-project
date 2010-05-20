@@ -17,10 +17,8 @@
     <resources>
 		<j2se version="@j2se-version@"/>
 
-		<jar href="lib/"/>
-
 		<jar href="lib/avalon-framework_sig.jar"/>
-		<jar href="lib/fits1.3.jar_sig"/>
+		<jar href="lib/fits1.3_sig.jar"/>
 		<jar href="lib/openorb_orb-1.4.0_sig.jar"/>
         <jar href="lib/openorb_orb_omg-1.4.0_sig.jar"/>
         <jar href="lib/openorb_ots-1.4.0_sig.jar"/>
@@ -67,7 +65,7 @@
         <property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton" />
         <property name="ReC.MultiCastController.BindName" value="MultiCastController" />
         <property name="ReC.MultiCastController.InitRef" value="MultiCastController" />
-        <property name="openorb.config" value="etc/OpenORB.xml" />
+        <property name="openorb.config" value="etc/openorb.xml" />
         <property name="openorb.profile" value="ReCClient" />
         <!-- property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
         <property name="vlc.plugins.filename" value="vlcplugins.zip"/-->
@@ -84,7 +82,7 @@
          ******************************************************************* -->
 
 <!-- falta archs x86-64 (ou x86_64?), amd64 e amd-->
-    <!-- resources arch="x86" os="Windows">
+    <resources arch="x86" os="Windows">
         <nativelib href="lib/libsvlc_win32_x86.jar"/>
         <extension href="windowsInstaller.jnlp" name="windowsInstaller"/>
     </resources>
@@ -135,7 +133,7 @@
     <resources arch="x86_64" os="Mac OS X">
         <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
         <jar href="lib/vlcplugins_mac_ppc64.jar"/>
-    </resources-->
+    </resources>
     
     <application-desc main-class="@main-class@">
     	<argument>-resources:http://elab.ist.utl.pt/rec/eLab/FullClient.properties</argument>
