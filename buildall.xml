@@ -58,7 +58,7 @@
 			
 			<zipfileset dir="${client.build.dir}/lib" includes="*_sig.jar" prefix="client/lib" />
 			
-			<zipfileset dir="${templates.dir.images}" includes="*.jpg,*.gif,*.png" prefix="client" />
+			<zipfileset dir="${templates.dir.images}" includes="*.jpg,*.gif,*.png" prefix="client/images" />
 						
 			<zipfileset file="${templates.dir.client}/FullClient.properties" fullpath="client/FullClient.properties" />
 			

@@ -6,8 +6,6 @@
 	<homepage href="http://www.jfree.org/jfreechart/"/>
 	<description kind="one-line">The JFreeChart classes</description>
 	<description kind="tooltip">JFreeChart</description>
-	<icon href="ReCClient_iconified.gif"/>
-	<icon kind="splash" href="rec_logo.gif"/>
     </information>
     <resources>
         <jar href="lib/jfreechart-1.0.9_sig.jar"/>

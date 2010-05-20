@@ -715,10 +715,13 @@
 	<macrodef name="create.baseuiconfig">
 		<sequential>
 			<copy file="${baseuiconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
+		
 			<process.list task="add.experiment.baseuiconfig" list="${experiment.list}" attribute.name="experiment.name" />
 			
-			
-			
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" propertyFile="build.properties">
+				<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+			</replace>
 			
 		</sequential>
 	</macrodef>
@@ -741,11 +744,13 @@
 	<macrodef name="create.faceconfig">
 		<sequential>
 			<copy file="${faceconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFaceConfig.xml" />
+		
 			<process.list task="add.experiment.faceconfig" list="${experiment.list}" attribute.name="experiment.name" />
 			
-			
-			
-			
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" propertyFile="build.properties">
+				<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+			</replace>
 			
 		</sequential>
 	</macrodef>
