@@ -68,11 +68,11 @@
 		</target>
 
 		<target name="jar.jvlc">
-			<create.jar destination.folder="${jvlc.build.dir}" jar.name="jvlc.jar" source.basedir="${jvlc.classes.dir}"/>
+			<create.jar destination.folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" source.basedir="${jvlc.classes.dir}"/>
 		</target>
 		
 		<target name="sign.jvlc">
-			<sign.jar.rec folder="${jvlc.build.dir}" jar.name="jvlc.jar" />
+			<sign.jar.rec folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" />
 		</target>
 		
 		<!--target name="pack.jar.jvlc" description="Packages and compresses the jar for p200 distribution.">
@@ -220,6 +220,7 @@
 		<sign.jars.in.directory source.dir.name="${rec.client.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
 	
 		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}"></copy>
+		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar" todir="${client.build.dir}"></copy>
 		
 		<copy file="${templates.dir.openorb}/OpenORBClientTemplate.xml" overwrite="yes" tofile="${client.build.dir}/etc/openorb.xml" />
 			<replace file="${client.build.dir}/etc/openorb.xml" propertyFile="build.properties">

@@ -29,11 +29,11 @@
 	<property name="templates.dir.logs" value="${basedir}/templates/log" />
 
 	<tstamp>
-		<format property="timestamp" pattern="dd-MM-yyyy hh:mm" locale="en,UK"/>
+		<format property="timestamp" pattern="dd-MM-yyyy hh:mm" locale="en,UK" />
 	</tstamp>
 
 	<tstamp>
-		<format property="today" pattern="dd-MM-yyyy" locale="en,UK"/>
+		<format property="today" pattern="dd-MM-yyyy" locale="en,UK" />
 	</tstamp>
 
 	<macrodef name="process.list">
@@ -67,32 +67,32 @@
 			=====================================================
 		-->
 
-		<property name="jvlc.classes.dir" value="${build.dir.compile}/classes/jvlc" />
-		<property name="jvlc.build.dir" value="${build.dir.jars}/jvlc" />
+	<property name="jvlc.classes.dir" value="${build.dir.compile}/classes/jvlc" />
+	<property name="jvlc.build.dir" value="${build.dir.jars}/jvlc" />
 
-		<property name="jvlc.src.java.dir" value="${basedir}/other/src/java/JVLC" />
+	<property name="jvlc.src.java.dir" value="${basedir}/other/src/java/JVLC" />
 
-		<property name="other.lib.dir" value="${basedir}/other/lib" />
+	<property name="other.lib.dir" value="${basedir}/other/lib" />
 
-		<property name="jvlc.lib.dir" value="${other.lib.dir}/java/jvlc/" />
+	<property name="jvlc.lib.dir" value="${other.lib.dir}/java/jvlc/" />
 
-		<path id="jvlc.lib.path">
-			<fileset dir="${jvlc.lib.dir}">
-				<include name="**/*.jar" />
-			</fileset>
-		</path>
+	<path id="jvlc.lib.path">
+		<fileset dir="${jvlc.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
 
-		<path id="jvlc.compile.lib.path">
-			<fileset dir="${other.lib.dir}/compile/jvlc/">
-				<include name="**/*.jar" />
-			</fileset>
-		</path>
+	<path id="jvlc.compile.lib.path">
+		<fileset dir="${other.lib.dir}/compile/jvlc/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
 
-		<path id="jvlc.libs.classpath">
-			<path refid="jvlc.lib.path" />
-			<path refid="jvlc.compile.lib.path" />
-		</path>
-	
+	<path id="jvlc.libs.classpath">
+		<path refid="jvlc.lib.path" />
+		<path refid="jvlc.compile.lib.path" />
+	</path>
+
 	<!--
 		=====================================================
 		==================== REC Common =====================
@@ -390,14 +390,14 @@
 	-->
 
 	<macrodef name="create.jnlp.full.client.compile">
-		<attribute name="codebase"/>
+		<attribute name="codebase" />
 		<sequential>
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/OpenORB.jnlp" />
-			<replace file="${elab.client.classes.dir}/OpenORB.jnlp" token="@codebase@" value="@{codebase}"/>
+			<replace file="${elab.client.classes.dir}/OpenORB.jnlp" token="@codebase@" value="@{codebase}" />
 			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/JFreeChart.jnlp" />
-			<replace file="${elab.client.classes.dir}/JFreeChart.jnlp" token="@codebase@" value="@{codebase}"/>
+			<replace file="${elab.client.classes.dir}/JFreeChart.jnlp" token="@codebase@" value="@{codebase}" />
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ELabFullClient.jnlp" />
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@codebase@" value="@{codebase}"/>
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@codebase@" value="@{codebase}" />
 			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
 				<replacefilter token="@href@" property="href" />
 				<replacefilter token="@title@" property="title" />
@@ -409,9 +409,10 @@
 				<replacefilter token="@j2se-version@" property="j2se-version" />
 				<replacefilter token="@main-class@" property="main-class" />
 			</replace>
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -420,17 +421,17 @@
 	<macrodef name="add.experiment.to.full.jnlp.compile">
 		<attribute name="experiment.name" />
 		<sequential>
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
-		<![CDATA[<jar href="@temporary.experiment.jar@"/>
-		<!--End Experiment Jars-->]]></replacevalue>
+					<![CDATA[<jar href="@temporary.experiment.jar@"/>
+					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar"/>
+			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
 	</macrodef>
 
 	<macrodef name="create.jnlp.full.client.build">
-		<attribute name="codebase"/>
+		<attribute name="codebase" />
 		<sequential>
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/OpenORB.jnlp" />
 			<replace file="${client.build.dir}/OpenORB.jnlp" propertyFile="build.properties">
@@ -453,9 +454,10 @@
 				<replacefilter token="@j2se-version@" property="j2se-version" />
 				<replacefilter token="@main-class@" property="main-class" />
 			</replace>
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;"/>
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;"/>
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;"/>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.build" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -464,12 +466,12 @@
 	<macrodef name="add.experiment.to.full.jnlp.build">
 		<attribute name="experiment.name" />
 		<sequential>
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;" >
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
-		<![CDATA[<jar href="@temporary.experiment.jar@"/>
-		<!--End Experiment Jars-->]]></replacevalue>
+					<![CDATA[<jar href="@temporary.experiment.jar@"/>
+					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar"/>
+			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
 	</macrodef>
 
@@ -486,8 +488,9 @@
 	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/OpenORB.jnlp.xml" />
 	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/JFreeChart.jnlp.xml" />
 	<property name="baseuiconfig.template.file" value="${basedir}/templates/client/ReCBaseUIConfigTemplate.xml" />
+	<property name="faceconfig.template.file" value="${basedir}/templates/client/ReCFaceConfigTemplate.xml" />
 
-		
+
 	<!--MACROS-->
 
 	<macrodef name="process.list">
@@ -694,17 +697,39 @@
 
 	<macrodef name="add.experiment.baseuiconfig">
 		<attribute name="experiment.name" />
-		<sequential>		
-			
-		    <loadfile property="@{experiment.name}.baseuiconfig" srcFile="experiments/@{experiment.name}/etc/ReCBaseUIConfig.xml"/>
-			
-			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;" >
+		<sequential>
+
+			<loadfile property="@{experiment.name}.baseuiconfig" srcFile="experiments/@{experiment.name}/etc/ReCBaseUIConfig.xml" />
+
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;">
 				<replacevalue>
 					<![CDATA[@temporary.experiment.apparatus@
 		<!--End Apparatus configuration-->]]></replacevalue>
 			</replace>
-			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.baseuiconfig}"/>
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.baseuiconfig}" />
 		</sequential>
 	</macrodef>
-	
+
+	<macrodef name="create.faceconfig">
+		<sequential>
+			<copy file="${faceconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFaceConfig.xml" />
+			<process.list task="add.experiment.faceconfig" list="${experiment.list}" attribute.name="experiment.name" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="add.experiment.faceconfig">
+		<attribute name="experiment.name" />
+		<sequential>
+
+			<loadfile property="@{experiment.name}.faceconfig" srcFile="experiments/@{experiment.name}/etc/ReCFaceConfig.xml" />
+
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration--&gt;">
+				<replacevalue>
+					<![CDATA[@temporary.experiment.apparatus@
+			<!--End Apparatus configuration-->]]></replacevalue>
+			</replace>
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.faceconfig}" />
+		</sequential>
+	</macrodef>
+
 </project>

@@ -79,6 +79,8 @@
 		</manifest>
 
 		<create.baseuiconfig />
+		
+		<create.faceconfig />
 
 	</target>
 
@@ -99,7 +101,10 @@
 
 		<copy file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" tofile="${client.build.dir}/etc/ReCBaseUIConfig.xml">
 		</copy>
-
+		
+		<copy file="${elab.client.classes.dir}/ReCFaceConfig.xml" tofile="${client.build.dir}/etc/ReCFaceConfig.xml">
+		</copy>
+		
 		<sign.jars.in.directory source.dir.name="${elab.client.lib.dir}" destination.dir.name="${client.build.dir}/lib" />
 
 	</target>
