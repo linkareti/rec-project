@@ -21,6 +21,7 @@ import java.util.prefs.Preferences;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -1423,7 +1424,22 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
-		new ReCBaseUI().setVisible(true);
+		JFrame.setDefaultLookAndFeelDecorated(true);
+		final String apparatusAutoConnectID=System.getProperty("ReC.AutoConnectID");
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				ReCBaseUI baseUI = new ReCBaseUI();
+				if(apparatusAutoConnectID!=null)
+				{
+					baseUI.setApparatusAutoConnectID(apparatusAutoConnectID);
+				}
+				baseUI.pack();
+				baseUI.setVisible(true);
+				
+			}
+		});
 	}
 
 	/**

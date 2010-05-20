@@ -90,7 +90,7 @@ properties=FullClient.properties
 
 ##MAIN CLASSES FOR THE VARIOUS COMPONENTS
 #Old interface Main Class - pt.utl.ist.elab.client.FullClient
-#Newface Main Class - com.linkare.rec.impl.newface.ReCApplication
+#Newface Main Class - pt.utl.ist.elab.client.FullClientNewInterface
 client.main-class=pt.utl.ist.elab.client.FullClient
 multicast.main-class=com.linkare.rec.impl.multicast.startup.MultiCastControllerMain
 experiment.client.main-class=pt.utl.ist.elab.client.@{experiment.name}.ClientMain

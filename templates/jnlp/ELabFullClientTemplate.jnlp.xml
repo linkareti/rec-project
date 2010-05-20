@@ -83,60 +83,60 @@
 
 <!-- falta archs x86-64 (ou x86_64?), amd64 e amd-->
     <resources arch="x86" os="Windows">
-        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <nativelib href="lib/libsvlc_win32_x86_sig.jar"/>
         <extension href="windowsInstaller.jnlp" name="windowsInstaller"/>
     </resources>
     
     <resources arch="x86_64" os="Windows">
-        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <nativelib href="lib/libsvlc_win32_x86_sig.jar"/>
         <extension href="windowsInstaller.jnlp" name="windowsInstaller"/>
     </resources>
     
     <resources arch="amd" os="Windows">
-        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <nativelib href="lib/libsvlc_win32_x86_sig.jar"/>
         <extension href="windowsInstaller.jnlp" name="windowsInstaller"/>
     </resources>
 
     <resources arch="amd64" os="Windows">
-        <nativelib href="lib/libsvlc_win32_x86.jar"/>
+        <nativelib href="lib/libsvlc_win32_x86_sig.jar"/>
         <extension href="windowsInstaller.jnlp" name="windowsInstaller"/>
     </resources>
 
     <resources arch="i386" os="Linux">
-        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <nativelib href="lib/libsvlc_linux_i686_sig.jar"/>
         <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
     </resources>
     <resources arch="i586" os="Linux">
-        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <nativelib href="lib/libsvlc_linux_i686_sig.jar"/>
         <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
     </resources>
     <resources arch="i686" os="Linux">
-        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <nativelib href="lib/libsvlc_linux_i686_sig.jar"/>
         <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
     </resources>
     <resources arch="amd64" os="Linux">
-        <nativelib href="lib/libsvlc_linux_amd64.jar"/>
+        <nativelib href="lib/libsvlc_linux_amd64_sig.jar"/>
         <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
     </resources>
     <resources arch="ppc" os="Mac OS X">
-        <nativelib href="lib/libsvlc_mac_ppc.jar"/>
-        <jar href="lib/vlcplugins_mac_ppc.jar"/>
+        <nativelib href="lib/libsvlc_mac_ppc_sig.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc_sig.jar"/>
     </resources>
     <resources arch="ppc64" os="Mac OS X">
-        <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
-        <jar href="lib/vlcplugins_mac_ppc64.jar"/>
+        <nativelib href="lib/libsvlc_mac_ppc64_sig.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc64_sig.jar"/>
     </resources>
     <resources arch="x86" os="Mac OS X">
-        <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
-        <jar href="lib/vlcplugins_mac_ppc64.jar"/>
+        <nativelib href="lib/libsvlc_mac_ppc64_sig.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc64_sig.jar"/>
     </resources>
     <resources arch="x86_64" os="Mac OS X">
-        <nativelib href="lib/libsvlc_mac_ppc64.jar"/>
-        <jar href="lib/vlcplugins_mac_ppc64.jar"/>
+        <nativelib href="lib/libsvlc_mac_ppc64_sig.jar"/>
+        <jar href="lib/vlcplugins_mac_ppc64_sig.jar"/>
     </resources>
     
     <application-desc main-class="@main-class@">
-    	<argument>-resources:http://elab.ist.utl.pt/rec/eLab/FullClient.properties</argument>
+    	<argument>-resources:@codebase@/FullClient.properties</argument>
     </application-desc>
     
 </jnlp>

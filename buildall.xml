@@ -58,7 +58,12 @@
 			
 			<zipfileset dir="${client.build.dir}/lib" includes="*_sig.jar" prefix="client/lib" />
 			
+			<zipfileset dir="${templates.dir.images}" includes="*.jpg,*.gif,*.png" prefix="client" />
+						
+			<zipfileset file="${templates.dir.client}/FullClient.properties" fullpath="client/FullClient.properties" />
+			
 			<zipfileset file="${templates.dir.logs}/loggers.config.properties" fullpath="client/etc/loggers.config.properties" />
+			<zipfileset file="${templates.dir.logs}/newface.logging.properties" fullpath="client/etc/logging.properties" />
 			<zipfileset file="${client.build.dir}/etc/openorb.xml" fullpath="client/etc/openorb.xml" />
 			<zipfileset file="${client.build.dir}/etc/ReCBaseUIConfig.xml" fullpath="client/etc/ReCBaseUIConfig.xml" />
 			<zipfileset file="${client.build.dir}/etc/ReCFaceConfig.xml" fullpath="client/etc/ReCFaceConfig.xml" />
