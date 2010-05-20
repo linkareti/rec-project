@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="planck$rec.exp.background.planck"
 	order="1">
 	<LocalizationBundle name="planck"
-		location="recresource:///pt/utl/ist/elab/client/serial/stamp/planck/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/planck/resources/messages" />
 	<WebResource locationBundleKey="planck$rec.exp.url.planck.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="planck$rec.exp.url.planck.title.1"

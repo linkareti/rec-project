@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="momentoinercia$rec.exp.background.momentoInercia"
 	order="1">
 	<LocalizationBundle name="momentoinercia"
-		location="recresource:///pt/utl/ist/elab/client/serial/stamp/momentoinercia/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/momentoinercia/resources/messages" />
 	<WebResource locationBundleKey="momentoinercia$rec.exp.url.momentoInercia.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="momentoinercia$rec.exp.url.momentoInercia.title.1"

@@ -4,7 +4,7 @@
 	displayStringBundleKey="scuba$rec.exp.title.scuba"
 	desktopLocationBundleKey="scuba$rec.exp.background.scuba" order="1">
 	<LocalizationBundle name="scuba"
-		location="recresource:///pt/utl/ist/elab/client/serial/stamp/scuba/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/scuba/resources/messages" />
 	<WebResource locationBundleKey="scuba$rec.exp.url.scuba.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="scuba$rec.exp.url.scuba.title.1"

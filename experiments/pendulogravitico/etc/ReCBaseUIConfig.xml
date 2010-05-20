@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="pendulogravitico$rec.exp.background.pg"
 	order="1">
 	<LocalizationBundle name="pendulogravitico"
-		location="recresource:///pt/utl/ist/elab/client/serial/stamp/pendulogravitico/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/pendulogravitico/resources/messages" />
 	<Display classLocationBundleKey="pendulogravitico$rec.exp.display.pg.loc.sensor"
 		toolTipBundleKey="pendulogravitico$rec.exp.display.pg.tip.sensor"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
