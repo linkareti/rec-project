@@ -515,7 +515,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpPendulo",
-				"recresource:///pt/utl/ist/elab/client/pendulo/resources/ReCExpPendulo");
+				"recresource:///pt/utl/ist/elab/client/pendulo/resources/messages);
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new PenduloCustomizer());
 		dummy.pack();

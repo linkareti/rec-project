@@ -977,7 +977,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpThomson",
-				"recresource:///pt/utl/ist/elab/client/thomson/resources/ReCExpThomson");
+				"recresource:///pt/utl/ist/elab/client/thomson/resources/messages);
 		JFrame test = new JFrame();
 		UserAnalysisPanel uap = new UserAnalysisPanel();
 		test.getContentPane().add(uap);

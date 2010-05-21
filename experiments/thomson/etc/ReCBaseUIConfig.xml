@@ -3,7 +3,7 @@
 	toolTipBundleKey="thomson$rec.exp.tip.thomson" iconLocationBundleKey="thomson$rec.exp.icon.thomson"
 	displayStringBundleKey="thomson$rec.exp.title.thomson" order="1">
 	<LocalizationBundle name="thomson"
-		location="recresource:///pt/utl/ist/elab/client/thomson/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/thomson/resources/messages />
 	<Display classLocationBundleKey="thomson$rec.exp.display.thomson.loc.sensor"
 		toolTipBundleKey="thomson$rec.exp.display.thomson.tip.sensor"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

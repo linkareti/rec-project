@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="aleatorio$rec.exp.background.aleatorio"
 	order="1">
 	<LocalizationBundle name="aleatorio"
-		location="recresource:///pt/utl/ist/elab/client/aleatorio/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/aleatorio/resources/messages />
 	<WebResource locationBundleKey="aleatorio$rec.exp.url.aleatorio.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="aleatorio$rec.exp.url.aleatorio.title.1"

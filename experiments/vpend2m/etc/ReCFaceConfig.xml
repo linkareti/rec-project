@@ -8,7 +8,7 @@
 	dataModelClassLocationBundleKey="" visible="true" selected="true"
 	enabled="false" connected="false">
 	<localizationBundle name="pend2m"
-		location="recresource:///pt/utl/ist/elab/client/vpend2m/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/vpend2m/resources/messages />
 	<mediaConfig videoLocation="aleatorio$rec.exp.url.aleatorio.video"
 		canSave="true" offlinePlay="true" />
 	<display classLocationBundleKey="pend2m$rec.exp.display.pend2m.loc.anim"

@@ -306,7 +306,7 @@ public class TelescopioCustomizer extends javax.swing.JPanel implements
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpTelescopio",
-				"recresource:///pt/utl/ist/elab/client/telescopio/resources/ReCExpTelescopio");
+				"recresource:///pt/utl/ist/elab/client/telescopio/resources/messages);
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new TelescopioCustomizer());
 		dummy.pack();

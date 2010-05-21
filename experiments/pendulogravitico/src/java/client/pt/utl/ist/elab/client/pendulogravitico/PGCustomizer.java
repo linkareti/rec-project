@@ -502,7 +502,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	public static void main(String[] args) {
 		ReCResourceBundle.loadResourceBundle("ReCExpPG",
-				"recresource:///pt/utl/ist/elab/client/pendulogravitico/resources/ReCExpPG");
+				"recresource:///pt/utl/ist/elab/client/pendulogravitico/resources/messages);
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		PGCustomizer pg = new PGCustomizer();
 		dummy.getContentPane().add(pg, java.awt.BorderLayout.CENTER);

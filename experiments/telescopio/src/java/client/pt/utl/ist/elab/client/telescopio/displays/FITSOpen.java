@@ -153,7 +153,7 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpTelescopio",
-				"recresource:///pt/utl/ist/elab/client/telescopio/resources/ReCExpTelescopio");
+				"recresource:///pt/utl/ist/elab/client/telescopio/resources/messages);
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		FITSOpen p = new FITSOpen();
 		dummy.getContentPane().add(p, java.awt.BorderLayout.CENTER);

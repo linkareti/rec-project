@@ -21,7 +21,7 @@
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Open">
                 <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/ReCExpTelescopio.properties" key="rec.exp.telescopio.lbl.open" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpTelescopio${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.open" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpTelescopio${key}&quot;)"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>
@@ -32,7 +32,7 @@
             <Component class="javax.swing.JButton" name="jButtonOpen">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/ReCExpTelescopio.properties" key="rec.exp.telescopio.lbl.open" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpTelescopio${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/telescopio/resources/messages.properties" key="rec.exp.telescopio.lbl.open" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpTelescopio${key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>

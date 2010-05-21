@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="statsound$rec.exp.background.statsound"
 	order="1">
 	<LocalizationBundle name="statsound"
-		location="recresource:///pt/utl/ist/elab/client/statsound/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/statsound/resources/messages />
 	<WebResource locationBundleKey="statsound$rec.exp.url.statsound.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="statsound$rec.exp.url.statsound.title.1"

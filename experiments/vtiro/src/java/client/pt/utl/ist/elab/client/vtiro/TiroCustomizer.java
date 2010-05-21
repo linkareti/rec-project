@@ -62,10 +62,10 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 
 		commandsPanel.setMinimumSize(new java.awt.Dimension(100, 100));
 		commandsPanel.setPreferredSize(new java.awt.Dimension(100, 100));
-		okButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/ReCExpTiro")
+		okButton.setText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages)
 				.getString("rec.exp.customizer.title.ok"));
 		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/ReCExpTiro").getString("rec.exp.customizer.tip.ok"));
+				"pt/utl/ist/elab/client/vtiro/resources/messages).getString("rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				okButtonActionPerformed(evt);
@@ -79,10 +79,10 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		commandsPanel.add(okButton, gridBagConstraints);
 
 		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/ReCExpTiro")
+				"pt/utl/ist/elab/client/vtiro/resources/messages)
 				.getString("rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/ReCExpTiro").getString("rec.exp.customizer.tip.cancel"));
+				"pt/utl/ist/elab/client/vtiro/resources/messages).getString("rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				cancelButtonActionPerformed(evt);
@@ -98,9 +98,9 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		commandsPanel.add(cancelButton, gridBagConstraints);
 
 		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/ReCExpTiro").getString("rec.exp.customizer.title.dfc"));
+				"pt/utl/ist/elab/client/vtiro/resources/messages).getString("rec.exp.customizer.title.dfc"));
 		defaultButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/ReCExpTiro").getString("rec.exp.customizer.tip.dfc"));
+				"pt/utl/ist/elab/client/vtiro/resources/messages).getString("rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				defaultButtonActionPerformed(evt);
@@ -124,9 +124,9 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		gPanel.setLayout(new java.awt.GridBagLayout());
 
 		gPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/ReCExpTiro").getString("rec.exp.customizer.title.2")));
+				"pt/utl/ist/elab/client/vtiro/resources/messages).getString("rec.exp.customizer.title.2")));
 		gPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/ReCExpTiro").getString("rec.exp.customizer.tip.2"));
+				"pt/utl/ist/elab/client/vtiro/resources/messages).getString("rec.exp.customizer.tip.2"));
 		gPanel.setMinimumSize(new java.awt.Dimension(82, 114));
 		gPanel.setPreferredSize(new java.awt.Dimension(82, 114));
 		gSlider.setMajorTickSpacing(50);
@@ -135,7 +135,7 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		gSlider.setPaintLabels(true);
 		gSlider.setPaintTicks(true);
 		gSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/ReCExpTiro").getString("rec.exp.customizer.tip.2"));
+				"pt/utl/ist/elab/client/vtiro/resources/messages).getString("rec.exp.customizer.tip.2"));
 		gSlider.setValue(98);
 		gSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		gSlider.setRequestFocusEnabled(false);
@@ -155,7 +155,7 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		gTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		gTextField.setText("98");
 		gTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/ReCExpTiro").getString("rec.exp.customizer.tip.2"));
+				"pt/utl/ist/elab/client/vtiro/resources/messages).getString("rec.exp.customizer.tip.2"));
 		gTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		gTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {

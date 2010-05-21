@@ -637,7 +637,7 @@ public class DecayCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpDecay",
-				"recresource:///pt/utl/ist/elab/client/decay/resources/ReCExpDecay");
+				"recresource:///pt/utl/ist/elab/client/decay/resources/messages);
 		javax.swing.JFrame jf = new javax.swing.JFrame();
 		jf.getContentPane().add(new DecayCustomizer());
 		jf.pack();

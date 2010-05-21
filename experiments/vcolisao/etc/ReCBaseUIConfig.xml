@@ -4,7 +4,7 @@
 	displayStringBundleKey="colisao$rec.exp.title.colisao"
 	desktopLocationBundleKey="colisao$rec.exp.background.colisao" order="1">
 	<LocalizationBundle name="colisao"
-		location="recresource:///pt/utl/ist/elab/client/vcolisao/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/vcolisao/resources/messages />
 	<Display classLocationBundleKey="colisao$rec.exp.display.colisao.loc.anim"
 		toolTipBundleKey="colisao$rec.exp.display.colisao.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

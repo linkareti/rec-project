@@ -55,8 +55,6 @@ public class YoungInterfDataProducer extends VirtualBaseDataSource {
 		this.tbs = tbs;
 		this.nSamples = nSamples;
 
-		// ReCResourceBundle.loadResourceBundle("ReCExpYoungInterf",
-		// "recresource:///pt/utl/ist/elab/virtual/client/younginterf/resources/ReCExpYoungInterf");
 	}
 
 	/**

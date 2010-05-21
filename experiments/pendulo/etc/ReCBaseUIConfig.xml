@@ -4,7 +4,7 @@
 	displayStringBundleKey="pendulo$rec.exp.title.pendulo"
 	desktopLocationBundleKey="pendulo$rec.exp.background.pendulo" order="1">
 	<LocalizationBundle name="pendulo"
-		location="recresource:///pt/utl/ist/elab/client/pendulo/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/pendulo/resources/messages />
 	<WebResource locationBundleKey="pendulo$rec.exp.url.pendulo.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="pendulo$rec.exp.url.pendulo.title.1"

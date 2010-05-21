@@ -8,7 +8,7 @@
 	customizerClassLocationBundleKey="momentoinercia$rec.exp.customizer.momentoInercia"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="momentoinercia"
-		location="recresource:///pt/utl/ist/elab/client/momentoinercia/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/momentoinercia/resources/messages />
 	<mediaConfig videoLocation="momentoinercia$rec.exp.url.momentoInercia.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="momentoinercia$rec.exp.display.momentoInercia.tip.sensor"

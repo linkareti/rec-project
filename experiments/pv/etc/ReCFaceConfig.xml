@@ -5,7 +5,7 @@
 	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="pv$rec.exp.customizer.pv"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 		<localizationBundle name="pv"
-		location="recresource:///pt/utl/ist/elab/client/pv/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/pv/resources/messages />
 	<defaultAcquisitionConfig toolTipBundleKey="pv$rec.exp.dftcfg.pv.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
 		displayStringBundleKey="pv$rec.exp.dftcfg.pv.title.1"

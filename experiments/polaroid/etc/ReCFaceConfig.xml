@@ -8,7 +8,7 @@
 	customizerClassLocationBundleKey="polaroid$rec.exp.customizer.polaroid"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 		<localizationBundle name="polaroid"
-		location="recresource:///pt/utl/ist/elab/client/polaroid/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/polaroid/resources/messages />
 	<mediaConfig videoLocation="polaroid$rec.exp.url.polaroid.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="polaroid$rec.exp.display.polaroid.tip.1"

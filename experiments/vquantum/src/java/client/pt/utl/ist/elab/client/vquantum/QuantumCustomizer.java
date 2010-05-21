@@ -120,10 +120,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		btnPanel.setLayout(new java.awt.GridBagLayout());
 
 		okButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.ok"));
 		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,10 +134,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		controlBtnPanel.add(okButton);
 
 		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,10 +153,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		btnPanel.add(controlBtnPanel, gridBagConstraints);
 
 		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.dfc"));
 		defaultButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,7 +202,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 				new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102),
 				new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)));
 		mainEditPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.22"));
 		mainEditPanel.setMinimumSize(new java.awt.Dimension(300, 100));
 		mainEditPanel.setPreferredSize(new java.awt.Dimension(300, 200));
@@ -210,10 +210,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		editLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		editLabel.setForeground(new java.awt.Color(255, 102, 102));
 		editLabel.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.23"));
 		editLabel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.23"));
 		editLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -226,10 +226,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		vWidthPanel.setLayout(new java.awt.GridBagLayout());
 
 		vWidthPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.29")));
 		vWidthPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.29"));
 		vWidthPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		vWidthPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -241,7 +241,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		vWidthSlider.setPaintLabels(true);
 		vWidthSlider.setPaintTicks(true);
 		vWidthSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.29"));
 		vWidthSlider.setValue(0);
 		vWidthSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -263,7 +263,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		vWidthTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		vWidthTextField.setText("0");
 		vWidthTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.29"));
 		vWidthTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -293,10 +293,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		vFuncPanel.setLayout(new java.awt.GridBagLayout());
 
 		vFuncPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.30")));
 		vFuncPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.30"));
 		vFuncPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		vFuncPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -305,7 +305,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		vFuncTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		vFuncTextField.setText("0");
 		vFuncTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.30"));
 		vFuncTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -337,19 +337,19 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		avgVPanel.setLayout(new java.awt.GridBagLayout());
 
 		avgVPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.31")));
 		avgVPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.31"));
 		avgVPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		avgVPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		avgVPanel.setVisible(false);
 		avgVCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.31"));
 		avgVCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.31"));
 		avgVCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,10 +368,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		mainEditPanel.add(avgVPanel, gridBagConstraints);
 
 		addEditVButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.32"));
 		addEditVButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.32"));
 		addEditVButton.setVisible(false);
 		addEditVButton.addActionListener(new java.awt.event.ActionListener() {
@@ -386,7 +386,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		mainEditPanel.add(addEditVButton, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.34"), mainEditPanel);
 
 		electronPanel.setLayout(new java.awt.GridBagLayout());
@@ -397,11 +397,11 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		dX0Panel.setLayout(new java.awt.GridBagLayout());
 
 		dX0Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.1")));
 		dX0Panel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.1"));
 		dX0Panel.setPreferredSize(new java.awt.Dimension(82, 224));
 		dX0Slider.setMajorTickSpacing(250);
@@ -412,7 +412,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		dX0Slider.setPaintTicks(true);
 		dX0Slider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.1"));
 		dX0Slider.setValue(200);
 		dX0Slider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -434,7 +434,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		dX0TextField.setText("200");
 		dX0TextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.1"));
 		dX0TextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		dX0TextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -461,11 +461,11 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		nPanel.setLayout(new java.awt.GridBagLayout());
 
 		nPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.3")));
 		nPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.3"));
 		nPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		nSlider.setMajorTickSpacing(1);
@@ -477,7 +477,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		nSlider.setSnapToTicks(true);
 		nSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.3"));
 		nSlider.setValue(11);
 		nSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -497,7 +497,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		nTextField.setText("11");
 		nTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.3"));
 		nTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		nTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -524,11 +524,11 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		deltaXPanel.setLayout(new java.awt.GridBagLayout());
 
 		deltaXPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.2")));
 		deltaXPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.2"));
 		deltaXPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		deltaXSlider.setMajorTickSpacing(1);
@@ -539,7 +539,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		deltaXSlider.setPaintTicks(true);
 		deltaXSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.2"));
 		deltaXSlider.setValue(2);
 		deltaXSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -559,7 +559,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		deltaXTextField.setText("2");
 		deltaXTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.2"));
 		deltaXTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		deltaXTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -588,9 +588,9 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 
 		mainTabbedPane
 				.addTab(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.title.4"), null, electronPanel, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.4"));
 
 		electronPanel2.setLayout(new java.awt.GridBagLayout());
@@ -601,10 +601,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		ePanel.setLayout(new java.awt.GridBagLayout());
 
 		ePanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.24")));
 		ePanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.24"));
 		ePanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		eLabelPanel.setLayout(new java.awt.BorderLayout());
@@ -627,7 +627,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		xESlider.setPaintTicks(true);
 		xESlider.setSnapToTicks(true);
 		xESlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.25"));
 		xESlider.setValue(2);
 		xESlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -654,7 +654,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		nESlider.setPaintTicks(true);
 		nESlider.setSnapToTicks(true);
 		nESlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.25"));
 		nESlider.setValue(2);
 		nESlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -684,10 +684,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		tolPanel.setLayout(new java.awt.GridBagLayout());
 
 		tolPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.27")));
 		tolPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.27"));
 		tolPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		tolSlider.setMajorTickSpacing(1);
@@ -698,7 +698,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		tolSlider.setPaintTicks(true);
 		tolSlider.setSnapToTicks(true);
 		tolSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.27"));
 		tolSlider.setValue(5);
 		tolSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -717,7 +717,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		tolTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		tolTextField.setText("5");
 		tolTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.27"));
 		tolTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		tolTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -744,10 +744,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		dtPanel.setLayout(new java.awt.GridBagLayout());
 
 		dtPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.25")));
 		dtPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.25"));
 		dtPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		xDtPanel.setBorder(new javax.swing.border.TitledBorder("x"));
@@ -759,7 +759,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		xDtSlider.setPaintTicks(true);
 		xDtSlider.setSnapToTicks(true);
 		xDtSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.25"));
 		xDtSlider.setValue(5);
 		xDtSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -787,7 +787,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		nDtSlider.setPaintTicks(true);
 		nDtSlider.setSnapToTicks(true);
 		nDtSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.25"));
 		nDtSlider.setValue(20);
 		nDtSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -826,9 +826,9 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		electronPanel2.add(dtPanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.26"), null, electronPanel2, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.26"));
 
 		simulSettingsPanel.setLayout(new java.awt.GridBagLayout());
@@ -839,10 +839,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		tbsPanel.setLayout(new java.awt.GridBagLayout());
 
 		tbsPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.tbs")));
 		tbsPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.tip.tbs"));
 		tbsPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		tbsLabelPanel.setLayout(new java.awt.BorderLayout());
@@ -865,7 +865,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		xTbsSlider.setPaintTicks(true);
 		xTbsSlider.setSnapToTicks(true);
 		xTbsSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.25"));
 		xTbsSlider.setValue(5);
 		xTbsSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -893,7 +893,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		nTbsSlider.setPaintTicks(true);
 		nTbsSlider.setSnapToTicks(true);
 		nTbsSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.25"));
 		nTbsSlider.setValue(18);
 		nTbsSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -924,10 +924,10 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		samplesPanel.setLayout(new java.awt.GridBagLayout());
 
 		samplesPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.samples")));
 		samplesPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesPanel.setMinimumSize(new java.awt.Dimension(82, 83));
 		samplesPanel.setPreferredSize(new java.awt.Dimension(82, 224));
@@ -938,7 +938,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		samplesSlider.setPaintLabels(true);
 		samplesSlider.setPaintTicks(true);
 		samplesSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesSlider.setValue(100);
 		samplesSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -958,7 +958,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		samplesTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		samplesTextField.setText("100");
 		samplesTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		samplesTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -984,27 +984,27 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 
 		tunnelingCheckBox.setSelected(true);
 		tunnelingCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.37"));
 		tunnelingCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.37"));
 		compSettingsPanel.add(tunnelingCheckBox);
 
 		wraparoundKSCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.35"));
 		wraparoundKSCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.35"));
 		compSettingsPanel.add(wraparoundKSCheckBox);
 
 		wraparoundXSCheckBox.setSelected(true);
 		wraparoundXSCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.title.36"));
 		wraparoundXSCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.customizer.tip.36"));
 		compSettingsPanel.add(wraparoundXSCheckBox);
 
@@ -1017,9 +1017,9 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 
 		mainTabbedPane
 				.addTab(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.title.5"), null, simulSettingsPanel, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.tip.5"));
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1244,7 +1244,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 
 	public void actionPerformed(java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.customizer.potentialMenu.title.3"))) {
 			if (editPot != null && editPot != quantum.getFocusOwner()
 					&& editPot.getHighLightColor() == java.awt.Color.BLUE)
@@ -1254,7 +1254,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 				updateEditPanel();
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.customizer.potentialMenu.title.2"))) {
 			if (editPot != null && editPot != quantum.getFocusOwner()) {
 				quantum.removePotential((Potential) quantum.getFocusOwner());
@@ -1263,7 +1263,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 			} else
 				removeEdition();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.customizer.potentialMenu.title.1"))) {
 			if (editPot == null || editPot.getHighLightColor() != java.awt.Color.BLUE) {
 				editPot = new Potential(quantum.getMouseX(), 5, "100", true, false, new java.awt.Color(0, 0, .8f),

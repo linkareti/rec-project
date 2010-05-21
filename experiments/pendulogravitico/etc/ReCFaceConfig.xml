@@ -7,7 +7,7 @@
 	customizerClassLocationBundleKey="pendulogravitico$rec.exp.customizer.pg"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="pendulogravitico"
-		location="recresource:///pt/utl/ist/elab/client/pendulogravitico/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/pendulogravitico/resources/messages />
 	<mediaConfig videoLocation="pendulogravitico$rec.exp.url.pg.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="pendulogravitico$rec.exp.display.pg.tip.sensor"

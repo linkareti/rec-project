@@ -48,14 +48,14 @@ public class InteractiveMovProj extends MovProj implements InteractionListener {
 
 		editPopMenu = new PopupMenu(par);
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/messages).getString(
 				"rec.exp.customizer.editMenu.title.1"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/messages).getString(
 				"rec.exp.customizer.editMenu.tip.1"));
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/messages).getString(
 				"rec.exp.customizer.editMenu.title.2"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmovproj/resources/ReCExpMovProj").getString(
+				"pt/utl/ist/elab/client/vmovproj/resources/messages).getString(
 				"rec.exp.customizer.editMenu.tip.2"));
 	}
 

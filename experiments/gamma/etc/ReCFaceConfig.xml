@@ -6,7 +6,7 @@
 	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="gamma$rec.exp.customizer.gamma"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 		<localizationBundle name="gamma"
-		location="recresource:///pt/utl/ist/elab/client/gamma/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/gamma/resources/messages />
 	<mediaConfig videoLocation="gamma$rec.exp.url.gamma.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="gamma$rec.exp.display.gamma.tip.1"

@@ -4,7 +4,7 @@
 	displayStringBundleKey="quantum$rec.exp.title.quantum"
 	desktopLocationBundleKey="quantum$rec.exp.background.quantum" order="1">
 	<LocalizationBundle name="quantum"
-		location="recresource:///pt/utl/ist/elab/client/vquantum/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/vquantum/resources/messages />
 	<Display classLocationBundleKey="quantum$rec.exp.display.quantum.loc.anim"
 		toolTipBundleKey="quantum$rec.exp.display.quantum.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

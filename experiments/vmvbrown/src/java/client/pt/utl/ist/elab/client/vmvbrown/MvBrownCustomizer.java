@@ -150,10 +150,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		btnPanel.setLayout(new java.awt.GridBagLayout());
 
 		okButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.ok"));
 		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,10 +164,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		controlBtnPanel.add(okButton);
 
 		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,10 +183,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		btnPanel.add(controlBtnPanel, gridBagConstraints);
 
 		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.dfc"));
 		defaultButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,19 +210,19 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		modelPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.SoftBevelBorder(
 				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 102, 255),
 				new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255)),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages)
 						.getString("rec.exp.customizer.title.25")));
 		modelPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.25"));
 		modelPanel.setMinimumSize(new java.awt.Dimension(300, 60));
 		modelPanel.setPreferredSize(new java.awt.Dimension(150, 60));
 		langevinRadioButton.setSelected(true);
 		langevinRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.13"));
 		langevinRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.13"));
 		modelButtonGroup.add(langevinRadioButton);
 		langevinRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -234,10 +234,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		modelPanel.add(langevinRadioButton);
 
 		randomRadioButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.14"));
 		randomRadioButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.14"));
 		modelButtonGroup.add(randomRadioButton);
 		randomRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -259,10 +259,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dimPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.SoftBevelBorder(
 				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 102, 255),
 				new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255)),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages)
 						.getString("rec.exp.customizer.title.26")));
 		dimPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.26"));
 		dimPanel.setMinimumSize(new java.awt.Dimension(150, 60));
 		dimPanel.setPreferredSize(new java.awt.Dimension(150, 60));
@@ -292,10 +292,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dPanel.setBorder(new javax.swing.border.TitledBorder(new javax.swing.border.SoftBevelBorder(
 				javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 102, 255),
 				new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255)),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages)
 						.getString("rec.exp.customizer.title.24")));
 		dPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.24"));
 		dPanel.setMinimumSize(new java.awt.Dimension(150, 60));
 		dPanel.setPreferredSize(new java.awt.Dimension(150, 60));
@@ -305,7 +305,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dSlider.setPaintLabels(true);
 		dSlider.setPaintTicks(true);
 		dSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.24"));
 		dSlider.setEnabled(false);
 		dSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -324,7 +324,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dTextField.setText("50");
 		dTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.24"));
 		dTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		dTextField.setEnabled(false);
@@ -360,11 +360,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		massPanel.setLayout(new java.awt.GridBagLayout());
 
 		massPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.3")));
 		massPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.3"));
 		massPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		massSlider.setMajorTickSpacing(100);
@@ -375,7 +375,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		massSlider.setPaintTicks(true);
 		massSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.3"));
 		massSlider.setValue(100);
 		massSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -397,7 +397,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		massTextField.setText("100");
 		massTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.3"));
 		massTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		massTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -419,11 +419,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusPanel.setLayout(new java.awt.GridBagLayout());
 
 		radiusPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.4")));
 		radiusPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.4"));
 		radiusPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		radiusSlider.setMajorTickSpacing(100);
@@ -434,7 +434,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusSlider.setPaintTicks(true);
 		radiusSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.4"));
 		radiusSlider.setValue(10);
 		radiusSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -456,7 +456,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusTextField.setText("10");
 		radiusTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.4"));
 		radiusTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		radiusTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -478,11 +478,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		nPartPanel.setLayout(new java.awt.GridBagLayout());
 
 		nPartPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.2")));
 		nPartPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.2"));
 		nPartPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		nPartSlider.setMajorTickSpacing(200);
@@ -493,7 +493,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		nPartSlider.setPaintTicks(true);
 		nPartSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.2"));
 		nPartSlider.setValue(500);
 		nPartSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -515,7 +515,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		nPartTextField.setText("500");
 		nPartTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.2"));
 		nPartTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		nPartTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -536,9 +536,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		mainTabbedPane
 				.addTab(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.title.1"), null, partPanel, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.1"));
 
 		velPanel.setLayout(new java.awt.GridBagLayout());
@@ -549,11 +549,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velModPanel.setLayout(new java.awt.GridBagLayout());
 
 		velModPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.6")));
 		velModPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.6"));
 		velModPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		velModSlider.setMajorTickSpacing(100);
@@ -563,7 +563,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velModSlider.setPaintTicks(true);
 		velModSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.6"));
 		velModSlider.setValue(0);
 		velModSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -585,7 +585,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velModTextField.setText("0");
 		velModTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.6"));
 		velModTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		velModTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -607,11 +607,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velThetaPanel.setLayout(new java.awt.GridBagLayout());
 
 		velThetaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.7")));
 		velThetaPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.7"));
 		velThetaPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		velThetaSlider.setMajorTickSpacing(60);
@@ -621,7 +621,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velThetaSlider.setPaintTicks(true);
 		velThetaSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.7"));
 		velThetaSlider.setValue(45);
 		velThetaSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -643,7 +643,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velThetaTextField.setText("45");
 		velThetaTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.7"));
 		velThetaTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		velThetaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -665,11 +665,11 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velPhiPanel.setLayout(new java.awt.GridBagLayout());
 
 		velPhiPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.8")));
 		velPhiPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.8"));
 		velPhiPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		velPhiSlider.setMajorTickSpacing(30);
@@ -679,7 +679,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velPhiSlider.setPaintTicks(true);
 		velPhiSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.8"));
 		velPhiSlider.setValue(90);
 		velPhiSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -701,7 +701,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		velPhiTextField.setText("90");
 		velPhiTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.8"));
 		velPhiTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		velPhiTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -722,9 +722,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		mainTabbedPane
 				.addTab(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.title.5"), null, velPanel, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+						"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 						"rec.exp.customizer.tip.5"));
 
 		langevinPanel.setLayout(new java.awt.GridBagLayout());
@@ -735,10 +735,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dPPanel.setLayout(new java.awt.GridBagLayout());
 
 		dPPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.20")));
 		dPPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.20"));
 		dPPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		dPSlider.setMajorTickSpacing(100);
@@ -748,7 +748,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dPSlider.setPaintLabels(true);
 		dPSlider.setPaintTicks(true);
 		dPSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.20"));
 		dPSlider.setValue(10);
 		dPSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -769,7 +769,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		dPTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dPTextField.setText("10");
 		dPTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.20"));
 		dPTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		dPTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -791,10 +791,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		freqPanel.setLayout(new java.awt.GridBagLayout());
 
 		freqPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.19")));
 		freqPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.19"));
 		freqPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		freqSlider.setMajorTickSpacing(100);
@@ -804,7 +804,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		freqSlider.setPaintLabels(true);
 		freqSlider.setPaintTicks(true);
 		freqSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.19"));
 		freqSlider.setValue(25);
 		freqSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -823,7 +823,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		freqTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		freqTextField.setText("25");
 		freqTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.19"));
 		freqTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		freqTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -845,10 +845,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		visPanel.setLayout(new java.awt.GridBagLayout());
 
 		visPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.21")));
 		visPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.21"));
 		visPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		visSlider.setMajorTickSpacing(100);
@@ -858,7 +858,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		visSlider.setPaintLabels(true);
 		visSlider.setPaintTicks(true);
 		visSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.21"));
 		visSlider.setValue(10);
 		visSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -877,7 +877,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		visTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		visTextField.setText("10");
 		visTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.21"));
 		visTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		visTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -897,9 +897,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		langevinPanel.add(visPanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.18"), null, langevinPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.18"));
 
 		simulSettingsPanel.setLayout(new java.awt.GridBagLayout());
@@ -910,10 +910,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		tbsPanel.setLayout(new java.awt.GridBagLayout());
 
 		tbsPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.tbs")));
 		tbsPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.tip.tbs"));
 		tbsPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		tbsSlider.setMajorTickSpacing(50);
@@ -923,7 +923,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		tbsSlider.setPaintLabels(true);
 		tbsSlider.setPaintTicks(true);
 		tbsSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.tip.tbs"));
 		tbsSlider.setValue(100);
 		tbsSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -942,7 +942,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		tbsTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		tbsTextField.setText("100");
 		tbsTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.tip.tbs"));
 		tbsTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		tbsTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -965,10 +965,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		samplesPanel.setLayout(new java.awt.GridBagLayout());
 
 		samplesPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.samples")));
 		samplesPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesPanel.setMinimumSize(new java.awt.Dimension(82, 83));
 		samplesPanel.setPreferredSize(new java.awt.Dimension(82, 224));
@@ -979,7 +979,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		samplesSlider.setPaintLabels(true);
 		samplesSlider.setPaintTicks(true);
 		samplesSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesSlider.setValue(150);
 		samplesSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -999,7 +999,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		samplesTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		samplesTextField.setText("150");
 		samplesTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		samplesTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1019,9 +1019,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		simulSettingsPanel.add(samplesPanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.27"), null, simulSettingsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.27"));
 
 		graphicsPanel.setLayout(new java.awt.GridBagLayout());
@@ -1032,7 +1032,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		graph2Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph2Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.32")));
 		graph2XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph2XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "X^2", "Y", "Y^2", "Z",
@@ -1060,19 +1060,19 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		graph2MedCheckBox.setSelected(true);
 		graph2MedCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.41"));
 		graph2MedCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.41"));
 		graph2Panel.add(graph2MedCheckBox, new java.awt.GridBagConstraints());
 
 		graph2ActCheckBox.setSelected(true);
 		graph2ActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.15"));
 		graph2ActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.15"));
 		graph2ActCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1093,7 +1093,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		graph3Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph3Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.33")));
 		graph3XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph3XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "X^2", "Y", "Y^2", "Z",
@@ -1121,19 +1121,19 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		graph3MedCheckBox.setSelected(true);
 		graph3MedCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.41"));
 		graph3MedCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.41"));
 		graph3Panel.add(graph3MedCheckBox, new java.awt.GridBagConstraints());
 
 		graph3ActCheckBox.setSelected(true);
 		graph3ActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.15"));
 		graph3ActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.15"));
 		graph3ActCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1154,7 +1154,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		graph4Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph4Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.34")));
 		graph4XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph4XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "X^2", "Y", "Y^2", "Z",
@@ -1182,19 +1182,19 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		graph4MedCheckBox.setSelected(true);
 		graph4MedCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.41"));
 		graph4MedCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.41"));
 		graph4Panel.add(graph4MedCheckBox, new java.awt.GridBagConstraints());
 
 		graph4ActCheckBox.setSelected(true);
 		graph4ActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.15"));
 		graph4ActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.15"));
 		graph4ActCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1215,7 +1215,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		graph1Panel.setLayout(new java.awt.GridBagLayout());
 
 		graph1Panel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.31")));
 		graph1XComboBox.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		graph1XComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "X", "X^2", "Y", "Y^2", "Z",
@@ -1243,19 +1243,19 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		graph1MedCheckBox.setSelected(true);
 		graph1MedCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.41"));
 		graph1MedCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.41"));
 		graph1Panel.add(graph1MedCheckBox, new java.awt.GridBagConstraints());
 
 		graph1ActCheckBox.setSelected(true);
 		graph1ActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.15"));
 		graph1ActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.15"));
 		graph1ActCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1284,9 +1284,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		graphicsPanel.add(genGraphsPanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.30"), null, graphicsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.30"));
 
 		genChartsPanel.setLayout(new java.awt.GridBagLayout());
@@ -1295,10 +1295,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 				new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255), new java.awt.Color(0, 102, 255),
 				new java.awt.Color(0, 102, 255)));
 		genPosPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.39")));
 		genPosPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.39"));
 		xCheckBox.setSelected(true);
 		xCheckBox.setText("X");
@@ -1314,26 +1314,26 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		posModCheckBox.setSelected(true);
 		posModCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.35"));
 		posModCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.35"));
 		genPosPanel.add(posModCheckBox);
 
 		posQuadCheckBox.setSelected(true);
 		posQuadCheckBox.setText("^2");
 		posQuadCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.43"));
 		genPosPanel.add(posQuadCheckBox);
 
 		genPosGraphActCheckBox.setSelected(true);
 		genPosGraphActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.15"));
 		genPosGraphActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.15"));
 		genPosGraphActCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1350,10 +1350,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		genChartsPanel.add(genPosPanel, gridBagConstraints);
 
 		genVelPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.40")));
 		genVelPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.40"));
 		vxCheckBox.setSelected(true);
 		vxCheckBox.setText("Vx");
@@ -1369,26 +1369,26 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		velModCheckBox.setSelected(true);
 		velModCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.36"));
 		velModCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.36"));
 		genVelPanel.add(velModCheckBox);
 
 		velQuadCheckBox.setSelected(true);
 		velQuadCheckBox.setText("^2");
 		velQuadCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.43"));
 		genVelPanel.add(velQuadCheckBox);
 
 		genVelGraphActCheckBox.setSelected(true);
 		genVelGraphActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.15"));
 		genVelGraphActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.15"));
 		genVelGraphActCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1407,9 +1407,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		genChartsPanel.add(genVelPanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.42"), null, genChartsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.42"));
 
 		animaPanel.setLayout(new java.awt.GridBagLayout());
@@ -1420,10 +1420,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusAnimaPanel.setLayout(new java.awt.GridBagLayout());
 
 		radiusAnimaPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.23")));
 		radiusAnimaPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.23"));
 		radiusAnimaSlider.setMajorTickSpacing(1);
 		radiusAnimaSlider.setMaximum(6);
@@ -1432,7 +1432,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusAnimaSlider.setPaintTicks(true);
 		radiusAnimaSlider.setSnapToTicks(true);
 		radiusAnimaSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.23"));
 		radiusAnimaSlider.setValue(3);
 		radiusAnimaSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -1451,7 +1451,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		radiusAnimaTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		radiusAnimaTextField.setText("3");
 		radiusAnimaTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.23"));
 		radiusAnimaTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		radiusAnimaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1472,10 +1472,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		animaActCheckBox.setSelected(true);
 		animaActCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.37"));
 		animaActCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.37"));
 		animaActCheckBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1489,9 +1489,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		animaPanel.add(animaActCheckBox, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.22"), null, animaPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.22"));
 
 		chartSettingsPanel.setLayout(new java.awt.GridBagLayout());
@@ -1502,10 +1502,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		widthPanel.setLayout(new java.awt.GridBagLayout());
 
 		widthPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.47")));
 		widthPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.47"));
 		widthPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		widthPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -1516,7 +1516,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		widthSlider.setPaintLabels(true);
 		widthSlider.setPaintTicks(true);
 		widthSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.47"));
 		widthSlider.setValue(800);
 		widthSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -1537,7 +1537,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		widthTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		widthTextField.setText("800");
 		widthTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.47"));
 		widthTextField.setEnabled(false);
 		widthTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1559,10 +1559,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		heightPanel.setLayout(new java.awt.GridBagLayout());
 
 		heightPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.48")));
 		heightPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.48"));
 		heightPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		heightPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -1573,7 +1573,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		heightSlider.setPaintLabels(true);
 		heightSlider.setPaintTicks(true);
 		heightSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.48"));
 		heightSlider.setValue(800);
 		heightSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -1594,7 +1594,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		heightTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		heightTextField.setText("800");
 		heightTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.48"));
 		heightTextField.setEnabled(false);
 		heightTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1615,10 +1615,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 
 		resAdaptedCheckBox.setSelected(true);
 		resAdaptedCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.50"));
 		resAdaptedCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.50"));
 		resAdaptedCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		resAdaptedCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -1630,10 +1630,10 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		otherResSettPanel.add(resAdaptedCheckBox);
 
 		connectedPointsCheckBox.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.49"));
 		connectedPointsCheckBox.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.49"));
 		connectedPointsCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		otherResSettPanel.add(connectedPointsCheckBox);
@@ -1644,9 +1644,9 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		chartSettingsPanel.add(otherResSettPanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown").getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
 				"rec.exp.customizer.title.46"), null, chartSettingsPanel, java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/ReCExpMvBrown")
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
 				.getString("rec.exp.customizer.tip.46"));
 
 		gridBagConstraints = new java.awt.GridBagConstraints();

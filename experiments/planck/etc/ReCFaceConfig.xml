@@ -7,7 +7,7 @@
 	customizerClassLocationBundleKey="planck$rec.exp.customizer.planck"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="planck"
-		location="recresource:///pt/utl/ist/elab/client/planck/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/planck/resources/messages />
 	<mediaConfig videoLocation="planck$rec.exp.url.planck.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="planck$rec.exp.display.planck.tip.sensor"

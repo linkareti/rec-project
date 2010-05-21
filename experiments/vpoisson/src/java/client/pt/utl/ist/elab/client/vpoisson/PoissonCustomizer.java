@@ -800,7 +800,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpPoisson",
-				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/ReCExpPoisson");
+				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages);
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new PoissonCustomizer());
 		dummy.pack();

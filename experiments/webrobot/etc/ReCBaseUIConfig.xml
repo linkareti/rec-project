@@ -4,7 +4,7 @@
 	displayStringBundleKey="webrobot$rec.exp.title.webrobot"
 	desktopLocationBundleKey="webrobot$rec.exp.background.webrobot" order="1">
 	<LocalizationBundle name="webrobot"
-		location="recresource:///pt/utl/ist/elab/client/webrobot/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/webrobot/resources/messages />
 	<WebResource locationBundleKey="webrobot$rec.exp.url.webrobot.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="webrobot$rec.exp.url.webrobot.title.1"

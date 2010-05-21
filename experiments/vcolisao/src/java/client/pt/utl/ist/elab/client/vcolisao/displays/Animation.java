@@ -50,7 +50,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpColisao",
-				"recresource:///pt/utl/ist/elab/client/vcolisao/resources/ReCExpColisao");
+				"recresource:///pt/utl/ist/elab/client/vcolisao/resources/messages);
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Animation());
 		dummy.pack();

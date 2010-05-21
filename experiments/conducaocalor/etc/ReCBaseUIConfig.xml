@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="conducaocalor$rec.exp.background.conducaoCalor"
 	order="1">
 	<LocalizationBundle name="conducaocalor"
-		location="recresource:///pt/utl/ist/elab/client/conducaocalor/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/conducaocalor/resources/messages />
 	<WebResource locationBundleKey="conducaocalor$rec.exp.url.conducaoCalor.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="conducaocalor$rec.exp.url.conducaoCalor.title.1"

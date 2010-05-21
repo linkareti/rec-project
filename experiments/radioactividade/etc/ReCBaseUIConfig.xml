@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="radioactividade$rec.exp.background.radio"
 	order="1">
 	<LocalizationBundle name="radioactividade"
-		location="recresource:///pt/utl/ist/elab/client/radioactividade/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/radioactividade/resources/messages />
 
 	<WebResource locationBundleKey="radioactividade$rec.exp.url.radio.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"

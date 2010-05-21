@@ -132,35 +132,35 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 				moves(model.getValueAt(i, 0).getValue().getByteArrayValue().getData());
 			else if (model.getValueAt(i, 7) != null)
 				messageDialog(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.title.35"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.tip.3"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.title.3"), null, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.title.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.tip.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.title.2"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.tip.2"));
 			else if (model.getValueAt(i, 8) != null)
 				messageDialog(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.customizer.title.36"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.tip.4"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.title.3"), null, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.title.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.tip.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.title.2"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+						"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"rec.exp.displays.dialog.tip.2"));
 		}
 	}

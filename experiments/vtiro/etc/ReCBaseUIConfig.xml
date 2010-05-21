@@ -4,7 +4,7 @@
 	displayStringBundleKey="tiro$rec.exp.title.tiro"
 	desktopLocationBundleKey="tiro$rec.exp.background.tiro" order="1">
 	<LocalizationBundle name="tiro"
-		location="recresource:///pt/utl/ist/elab/client/vtiro/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/vtiro/resources/messages />
 	<Display classLocationBundleKey="tiro$rec.exp.display.tiro.loc.anim"
 		toolTipBundleKey="tiro$rec.exp.display.tiro.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

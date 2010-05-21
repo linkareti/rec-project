@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="oscilador$rec.exp.background.oscilador"
 	order="1">
 	<LocalizationBundle name="oscilador"
-		location="recresource:///pt/utl/ist/elab/client/voscilador/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/voscilador/resources/messages />
 	<Display classLocationBundleKey="oscilador$rec.exp.display.oscilador.loc.anim"
 		toolTipBundleKey="oscilador$rec.exp.display.oscilador.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

@@ -8,7 +8,7 @@
 	customizerClassLocationBundleKey="pendulo$rec.exp.customizer.pendulo"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 		<localizationBundle name="pendulo"
-		location="recresource:///pt/utl/ist/elab/client/pendulo/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/pendulo/resources/messages />
 	<defaultAcquisitionConfig toolTipBundleKey="pendulo$rec.exp.dftcfg.pendulo.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
 		displayStringBundleKey="pendulo$rec.exp.dftcfg.pendulo.title.1"

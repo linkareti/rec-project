@@ -49,7 +49,7 @@ import pt.utl.ist.elab.driver.virtual.utils.Complex;
 public class Quantum extends InteractivePanel implements InteractiveMouseHandler, ActionListener {
 
 	protected String actionStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+			"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 			"rec.exp.displays.animation.actionStr");
 	protected pt.utl.ist.elab.client.virtual.guipack.PopupMenu gaussMenu;
 	private XAxis eixo;
@@ -66,40 +66,40 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 
 		gaussMenu = new pt.utl.ist.elab.client.virtual.guipack.PopupMenu(this);
 		gaussMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.title.1"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.tip.1"));
 		gaussMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.title.2"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.tip.2"));
 		gaussMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.title.3"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.tip.3"));
 		gaussMenu.addCheckBoxItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.title.4"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.tip.4"));
 		gaussMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.title.5"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.tip.5"));
 		gaussMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.title.6"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.customizer.gaussMenu.tip.6"));
 
 		config();
 
 		eixo = new XAxis(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString("rec.exp.quantum.space"));
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString("rec.exp.quantum.space"));
 		eixo.setLocationType(eixo.DRAW_AT_LOCATION);
 		eixo.setY(-.6);
 		addDrawable(eixo);
@@ -128,16 +128,16 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 		item.addActionListener(this);
 		popupmenu.add(item);
 		item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString("rec.exp.displays.save"));
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString("rec.exp.displays.save"));
 		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				"pt/utl/ist/elab/client/vquantum/resources/messages)
 				.getString("rec.exp.displays.save.tip"));
 		item.addActionListener(this);
 		popupmenu.add(item);
 		item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString("rec.exp.displays.print"));
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString("rec.exp.displays.print"));
 		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 				"rec.exp.displays.print.tip"));
 		item.addActionListener(this);
 		popupmenu.add(item);
@@ -223,32 +223,32 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.customizer.gaussMenu.title.5"))) {
 			setPreferredMinMax(gaussian.getX() - 25, gaussian.getX() + 25, -1, 1);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.customizer.gaussMenu.title.6"))) {
 			setPreferredMinMax(gaussian.getX() - gaussian.getDX0() / 2, gaussian.getX() + gaussian.getDX0() / 2, -1, 1);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.customizer.gaussMenu.title.1"))) {
 			gaussian.setDisplay(ComplexGaussian.DISPLAY_PROBABILITY);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.customizer.gaussMenu.title.2"))) {
 			gaussian.setDisplay(ComplexGaussian.DISPLAY_REAL);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.customizer.gaussMenu.title.3"))) {
 			gaussian.setDisplay(ComplexGaussian.DISPLAY_IMAGINARY);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.customizer.gaussMenu.title.4"))) {
 			if (((JCheckBoxMenuItem) gaussMenu.getComponent(3)).isSelected()) {
 				gaussian.setShowingKS(true);
@@ -266,14 +266,14 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 		else if (e.getActionCommand().equalsIgnoreCase("Zoom Out"))
 			zoomOut();
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.displays.save")))
 			try {
 				doSaveAs(render());
 			} catch (IOException io) {
 			}
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages)
 						.getString("rec.exp.displays.print")))
 			createChartPrintJob(this);
 	}
@@ -382,7 +382,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 
 		JFileChooser fileChooser = new JFileChooser();
 		org.jfree.ui.ExtensionFileFilter filter = new org.jfree.ui.ExtensionFileFilter(java.util.ResourceBundle
-				.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+				.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 						"PNG_Image_Files"), ".png");
 		fileChooser.addChoosableFileFilter(filter);
 
@@ -470,26 +470,26 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 			item.addActionListener(this);
 			popupmenu.add(item);
 			item = new JMenuItem(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum")
+					"pt/utl/ist/elab/client/vquantum/resources/messages)
 					.getString("rec.exp.displays.save"));
 			item.setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+					"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 					"rec.exp.displays.save.tip"));
 			item.addActionListener(this);
 			popupmenu.add(item);
 			item = new JMenuItem(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+					"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 					"rec.exp.displays.print"));
 			item.setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+					"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 					"rec.exp.displays.print.tip"));
 			item.addActionListener(this);
 			popupmenu.add(item);
 			item = new JMenuItem(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+					"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 					"rec.exp.customizer.gaussMenu.title.6"));
 			item.setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+					"pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 					"rec.exp.customizer.gaussMenu.tip.6"));
 			item.addActionListener(this);
 			popupmenu.add(item);
@@ -502,7 +502,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 				zoomOut();
 			else if (e.getActionCommand().equalsIgnoreCase(
 					java.util.ResourceBundle
-							.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+							.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 									"rec.exp.customizer.gaussMenu.title.6"))) {
 				xminPreferred = gaussian.getMinMaxXKS()[0];
 				xmaxPreferred = gaussian.getMinMaxXKS()[1];
@@ -511,7 +511,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 				repaint();
 			} else if (e.getActionCommand().equalsIgnoreCase(
 					java.util.ResourceBundle
-							.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+							.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 									"rec.exp.displays.save")))
 				try {
 					doSaveAs(render());
@@ -519,7 +519,7 @@ public class Quantum extends InteractivePanel implements InteractiveMouseHandler
 				}
 			else if (e.getActionCommand().equalsIgnoreCase(
 					java.util.ResourceBundle
-							.getBundle("pt/utl/ist/elab/client/vquantum/resources/ReCExpQuantum").getString(
+							.getBundle("pt/utl/ist/elab/client/vquantum/resources/messages).getString(
 									"rec.exp.displays.print")))
 				createChartPrintJob(this);
 		}

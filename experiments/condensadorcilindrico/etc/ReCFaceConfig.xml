@@ -8,7 +8,7 @@
 	customizerClassLocationBundleKey="condensadorcilindrico$rec.exp.customizer.cc"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="condensadorcilindrico"
-		location="recresource:///pt/utl/ist/elab/client/condensadorcilindrico/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/condensadorcilindrico/resources/messages />
 	<mediaConfig videoLocation="condensadorcilindrico$rec.exp.url.cc.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.1"

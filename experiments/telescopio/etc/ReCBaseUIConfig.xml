@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="telescopio$rec.exp.background.telescopio"
 	order="1">
 	<LocalizationBundle name="telescopio"
-		location="recresource:///pt/utl/ist/elab/client/telescopio/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/telescopio/resources/messages />
 	<Display classLocationBundleKey="telescopio$rec.exp.display.telescopio.loc.1"
 		toolTipBundleKey="telescopio$rec.exp.display.telescopio.tip.1"
 		iconLocationBundleKey="telescopio$rec.exp.display.icon.star"

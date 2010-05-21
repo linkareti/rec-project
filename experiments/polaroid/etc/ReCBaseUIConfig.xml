@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="polaroid$rec.exp.background.polaroid"
 	order="1">
 	<LocalizationBundle name="polaroid"
-		location="recresource:///pt/utl/ist/elab/client/polaroid/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/polaroid/resources/messages />
 	<Display classLocationBundleKey="polaroid$rec.exp.display.polaroid.loc.1"
 		toolTipBundleKey="polaroid$rec.exp.display.polaroid.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"

@@ -4,7 +4,7 @@
 	displayStringBundleKey="pend2m$rec.exp.title.pend2m"
 	desktopLocationBundleKey="pend2m$rec.exp.background.pend2m" order="1">
 	<LocalizationBundle name="pend2m"
-		location="recresource:///pt/utl/ist/elab/client/vpend2m/resources/messages" />
+		location="recresource:///pt/utl/ist/elab/client/vpend2m/resources/messages />
 	<Display classLocationBundleKey="pend2m$rec.exp.display.pend2m.loc.anim"
 		toolTipBundleKey="pend2m$rec.exp.display.pend2m.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
