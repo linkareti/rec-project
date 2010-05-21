@@ -31,7 +31,7 @@ public class Animation extends Pend2M implements ExpDataDisplay, ExpDataModelLis
 	private boolean isTrailing = false, isConnectedTrail = false;
 	private InteractiveTrace[] rasto;
 	private String actionStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+			"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 			"rec.exp.displays.animation.actionStr");
 	private double a, w;
 
@@ -43,24 +43,24 @@ public class Animation extends Pend2M implements ExpDataDisplay, ExpDataModelLis
 		rasto = new InteractiveTrace[] { new InteractiveTrace(), new InteractiveTrace() };
 
 		viewPopMenu.addCheckBoxItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.viewMenu.title.7"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.viewMenu.tip.7"), true);
 		viewPopMenu.addCheckBoxItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.viewMenu.title.8"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.viewMenu.tip.8"));
 		viewPopMenu.addCheckBoxItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.viewMenu.title.9"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.viewMenu.tip.9"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.viewMenu.title.10"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.viewMenu.tip.10"));
 
 		viewPopMenu.getComponent(6).setEnabled(false);
@@ -232,54 +232,54 @@ public class Animation extends Pend2M implements ExpDataDisplay, ExpDataModelLis
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.viewMenu.title.1"))) {
 			setAlphaAndBeta(0, 0);
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.viewMenu.title.2"))) {
 			if (getZoom() != 1) {
 				setZoom(1);
 				clearTrail();
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.viewMenu.title.3"))) {
 			if (getZoom() != .5) {
 				setZoom(.5);
 				clearTrail();
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.viewMenu.title.4"))) {
 			this.setDisplayMode(this.DISPLAY_PLANAR_YZ);
 			repaint();
 			viewPopMenu.getComponent(6).setEnabled(true);
 			((javax.swing.JMenuItem) e.getSource()).setText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.viewMenu.title.6"));
 			((javax.swing.JMenuItem) e.getSource()).setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.viewMenu.tip.6"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.viewMenu.title.6"))) {
 			this.setDisplayMode(this.DISPLAY_NO_PERSPECTIVE);
 			clearTrail();
 			viewPopMenu.getComponent(6).setEnabled(false);
 			((javax.swing.JMenuItem) e.getSource()).setText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.viewMenu.title.4"));
 			((javax.swing.JMenuItem) e.getSource()).setToolTipText(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.viewMenu.tip.4"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.viewMenu.title.5")))
 			snapshot();
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.viewMenu.title.7"))) {
 			vel[0].setVisible(((javax.swing.JMenuItem) e.getSource()).isSelected());
 			vel[1].setVisible(((javax.swing.JMenuItem) e.getSource()).isSelected());
@@ -287,11 +287,11 @@ public class Animation extends Pend2M implements ExpDataDisplay, ExpDataModelLis
 			acel[1].setVisible(((javax.swing.JMenuItem) e.getSource()).isSelected());
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.viewMenu.title.8"))) {
 			isTrailing = ((javax.swing.JCheckBoxMenuItem) e.getSource()).isSelected();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.viewMenu.title.9"))) {
 			isConnectedTrail = ((javax.swing.JCheckBoxMenuItem) e.getSource()).isSelected();
 
@@ -303,7 +303,7 @@ public class Animation extends Pend2M implements ExpDataDisplay, ExpDataModelLis
 				addDrawable(rasto[1]);
 			}
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.viewMenu.title.10"))) {
 			rasto[0].clear();
 			rasto[1].clear();

@@ -40,7 +40,7 @@ public class Animation2D extends DrawingPanel implements Drawable, ActionListene
 	private Dataset avgPos;
 
 	private String actionStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
+			"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
 			"rec.exp.displays.animation.actionStr");
 
 	/** Creates a new instance of Animation2D */
@@ -61,16 +61,16 @@ public class Animation2D extends DrawingPanel implements Drawable, ActionListene
 		item.addActionListener(listener);
 		popupmenu.add(item);
 		item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString("rec.exp.displays.save"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.displays.save"));
 		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages)
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages")
 				.getString("rec.exp.displays.save.tip"));
 		item.addActionListener(listener);
 		popupmenu.add(item);
 		item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString("rec.exp.displays.print"));
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.displays.print"));
 		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
 				"rec.exp.displays.print.tip"));
 		item.addActionListener(listener);
 		popupmenu.add(item);
@@ -136,14 +136,14 @@ public class Animation2D extends DrawingPanel implements Drawable, ActionListene
 		else if (e.getActionCommand().equalsIgnoreCase("Zoom Out"))
 			zoomOut();
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
 						.getString("rec.exp.displays.save")))
 			try {
 				doSaveAs();
 			} catch (IOException io) {
 			}
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
 						.getString("rec.exp.displays.print")))
 			createChartPrintJob();
 	}
@@ -203,7 +203,7 @@ public class Animation2D extends DrawingPanel implements Drawable, ActionListene
 
 		JFileChooser fileChooser = new JFileChooser();
 		org.jfree.ui.ExtensionFileFilter filter = new org.jfree.ui.ExtensionFileFilter(java.util.ResourceBundle
-				.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
+				.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
 						"PNG_Image_Files"), ".png");
 		fileChooser.addChoosableFileFilter(filter);
 

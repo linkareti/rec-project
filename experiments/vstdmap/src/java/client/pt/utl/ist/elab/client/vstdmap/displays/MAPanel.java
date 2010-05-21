@@ -36,7 +36,7 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 	protected int iter, nn;
 	protected float[] mData;
 	protected String statusStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+			"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 			"rec.exp.displays.statusStr.recImage");
 	protected int dataCounter = 0;
 	protected Graphics g;
@@ -121,34 +121,34 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 		popupmenu.setEnabled(true);
 		ActionListener listener = this;
 		JMenuItem item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.mapanel.menu.title.1"));
 		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.mapanel.menu.tip.1"));
 		item.addActionListener(listener);
 		popupmenu.add(item);
 		item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.mapanel.menu.title.2"));
 		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.mapanel.menu.tip.2"));
 		item.addActionListener(listener);
 		popupmenu.add(item);
 		item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.mapanel.menu.title.3"));
 		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.mapanel.menu.tip.3"));
 		item.addActionListener(listener);
 		popupmenu.add(item);
 		item = new JMenuItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.mapanel.menu.title.4"));
 		item.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.mapanel.menu.tip.4"));
 		item.addActionListener(listener);
 		popupmenu.add(item);
@@ -183,7 +183,7 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 		axes.draw(this, g);
 
 		if (!statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.statusStr.recImage"))) {
 			if (!staticImg
 					&& (xmaxImg != xmaxPreferred || ymaxImg != ymaxPreferred || xminImg != xminPreferred || yminImg != yminPreferred))
@@ -214,7 +214,7 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 
 	public void actionPerformed(java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
 						.getString("rec.exp.displays.mapanel.menu.title.3"))) {
 			xminPreferred = 0;
 			xmaxPreferred = xMaxBound;
@@ -222,19 +222,19 @@ public class MAPanel extends PlottingPanel implements ActionListener, Printable 
 			ymaxPreferred = yMaxBound;
 			repaint();
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
 						.getString("rec.exp.displays.mapanel.menu.title.1"))) {
 			snapshot(null, java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 					"rec.exp.displays.mapanel.menu.title.1"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
 						.getString("rec.exp.displays.mapanel.menu.title.2"))) {
 			snapshot(mapImg, java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 					"rec.exp.displays.mapanel.menu.title.2"));
 		} else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
 						.getString("rec.exp.displays.mapanel.menu.title.4"))) {
 			updateImage();
 		}

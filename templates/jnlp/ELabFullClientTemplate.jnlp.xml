@@ -29,14 +29,14 @@
 		<extension name="ReCFramework" href="ReCFramework.jnlp" />
 		<!--<extension name="JHelp" href="jhelp.jnlp"/>-->
 		
-        <property name="ReCFaceConfig" value="etc/ReCFaceConfig.xml" />
-        <property name="ReCBaseUIConfig" value="etc/ReCBaseUIConfig.xml" />
+        <property name="ReCFaceConfig" value="@codebase@/etc/ReCFaceConfig.xml" />
+        <property name="ReCBaseUIConfig" value="@codebase@/etc/ReCBaseUIConfig.xml" />
 
 		<property name="ReC.MultiCastController.BindName" value="MultiCastController"/>
 		<property name="ReC.MultiCastController.InitRef" value="MultiCastController"/>
 
 		<property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB"/>
-		<property name="org.omg.CORBA.ORBSingletonClass" value="org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton"/>
+		<property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton"/>
 		<property name="openorb.config" value="etc/openorb.xml"/>
   		<property name="openorb.profile" value="ReCClient"/>
 
@@ -48,8 +48,6 @@
         
     </resources>
     
-    <application-desc main-class="@main-class@">
-    	<argument>-resources:@codebase@/FullClient.properties</argument>
-    </application-desc>
+    <application-desc main-class="@main-class@" />
     
 </jnlp>

@@ -53,46 +53,46 @@ public class InteractiveCartPole extends CartPole implements InteractionListener
 		setListener(this);
 		cartPopMenu = new PopupMenu(par);
 		cartPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.1"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.1"));
 		cartPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.2"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.2"));
 		cartPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.3"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.3"));
 		cartPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.4"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.4"));
 
 		polePopMenu = new PopupMenu(par);
 		polePopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.5"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.5"));
 		polePopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.6"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.6"));
 		polePopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.7"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.7"));
 		polePopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.8"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+				"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.8"));
 	}
 

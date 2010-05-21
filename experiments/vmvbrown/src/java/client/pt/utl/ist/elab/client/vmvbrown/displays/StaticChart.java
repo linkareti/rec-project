@@ -51,12 +51,12 @@ public class StaticChart extends javax.swing.JPanel implements Printable, Action
 	private void buildPopupMenu() {
 		viewPopMenu = new pt.utl.ist.elab.client.virtual.guipack.PopupMenu(this);
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString("rec.exp.displays.save"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages)
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.displays.save"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
 						.getString("rec.exp.displays.save.tip"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString("rec.exp.displays.print"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages)
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("rec.exp.displays.print"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
 						.getString("rec.exp.displays.print.tip"));
 	}
 
@@ -78,7 +78,7 @@ public class StaticChart extends javax.swing.JPanel implements Printable, Action
 			g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 		else {
 			String statusStr = java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString(
+					"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString(
 					"rec.exp.displays.statusStr.recImage");
 			g.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 26));
 
@@ -102,7 +102,7 @@ public class StaticChart extends javax.swing.JPanel implements Printable, Action
 
 		JFileChooser fileChooser = new JFileChooser();
 		ExtensionFileFilter filter = new ExtensionFileFilter(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vmvbrown/resources/messages).getString("PNG_Image_Files"), ".png");
+				"pt/utl/ist/elab/client/vmvbrown/resources/messages").getString("PNG_Image_Files"), ".png");
 		fileChooser.addChoosableFileFilter(filter);
 
 		int option = fileChooser.showSaveDialog(this);
@@ -156,14 +156,14 @@ public class StaticChart extends javax.swing.JPanel implements Printable, Action
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
 						.getString("rec.exp.displays.save")))
 			try {
 				doSaveAs();
 			} catch (IOException io) {
 			}
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vmvbrown/resources/messages")
 						.getString("rec.exp.displays.print")))
 			createChartPrintJob();
 	}

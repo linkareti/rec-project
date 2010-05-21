@@ -18,7 +18,7 @@ set MULTICAST_CLASSPATH=%MULTICAST_BASE_DIR%/ReCMulticastController.jar;%MULTICA
 
 set DEBUG=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,address=60002,suspend=n
 
-set BOOTCLASSPATH=-Xbootclasspath/p:%MULTICAST_BASE_DIR%/lib/openorb_orb_omg-1.4.0.jar 
+REM set BOOTCLASSPATH=-Xbootclasspath/p:%MULTICAST_BASE_DIR%/lib/openorb_orb_omg-1.4.0.jar 
 
 echo --------------------------------------------------------------------------------
 echo BootClassPath    : %BOOTCLASSPATH%

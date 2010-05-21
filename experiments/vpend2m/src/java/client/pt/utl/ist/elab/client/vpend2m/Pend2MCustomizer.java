@@ -88,10 +88,10 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		btnPanel.setLayout(new java.awt.GridBagLayout());
 
 		okButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages)
+				"pt/utl/ist/elab/client/vpend2m/resources/messages")
 				.getString("rec.exp.customizer.title.ok"));
 		okButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.ok"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				okButtonActionPerformed(evt);
@@ -101,10 +101,10 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		controlBtnPanel.add(okButton);
 
 		cancelButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.title.cancel"));
 		cancelButton.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.tip.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,11 +120,11 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		btnPanel.add(controlBtnPanel, gridBagConstraints);
 
 		defaultButton.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.title.dfc"));
 		defaultButton
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+						"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 						"rec.exp.customizer.tip.dfc"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,17 +159,17 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 				new java.awt.Color(255, 153, 0), new java.awt.Color(255, 153, 0), new java.awt.Color(255, 153, 0),
 				new java.awt.Color(255, 153, 0)));
 		mainEditPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.22"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.22"));
 		mainEditPanel.setMinimumSize(new java.awt.Dimension(300, 100));
 		mainEditPanel.setPreferredSize(new java.awt.Dimension(300, 200));
 		mainEditPanel.setEnabled(false);
 		editPanel.setLayout(new java.awt.GridBagLayout());
 
 		editPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages)
+				"pt/utl/ist/elab/client/vpend2m/resources/messages")
 				.getString("rec.exp.customizer.title.23")));
 		editPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.23"));
 		editPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		editPanel.setPreferredSize(new java.awt.Dimension(250, 80));
 		editPanel.setVisible(false);
@@ -179,7 +179,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		editSlider.setPaintLabels(true);
 		editSlider.setPaintTicks(true);
 		editSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.23"));
 		editSlider.setValue(0);
 		editSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		editSlider.setEnabled(false);
@@ -206,7 +206,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		editTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		editTextField.setText("0");
 		editTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.23"));
 		editTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				editTextFieldFocusLost(evt);
@@ -228,10 +228,10 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		editLabel.setFont(new java.awt.Font("MS Sans Serif", 0, 24));
 		editLabel.setForeground(new java.awt.Color(255, 102, 102));
 		editLabel.setText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages)
+				"pt/utl/ist/elab/client/vpend2m/resources/messages")
 				.getString("rec.exp.customizer.title.23"));
 		editLabel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.23"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.23"));
 		editLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -239,9 +239,9 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		mainEditPanel.add(editLabel, gridBagConstraints);
 
 		mainTabbedPane.addTab(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.title.6"), null, mainEditPanel, java.util.ResourceBundle
-						.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+						.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 								"rec.exp.customizer.tip.6"));
 
 		phySettingsPanel.setLayout(new java.awt.GridBagLayout());
@@ -253,10 +253,10 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		gPanel
 				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+						"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 						"rec.exp.customizer.title.1")));
 		gPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.1"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.1"));
 		gPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		gSlider.setMajorTickSpacing(50);
 		gSlider.setMaximum(500);
@@ -264,7 +264,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		gSlider.setPaintLabels(true);
 		gSlider.setPaintTicks(true);
 		gSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.1"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.1"));
 		gSlider.setValue(98);
 		gSlider.setMinimumSize(new java.awt.Dimension(200, 47));
 		gSlider.setRequestFocusEnabled(false);
@@ -284,7 +284,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		gTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		gTextField.setText("98");
 		gTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.1"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.1"));
 		gTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		gTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -306,10 +306,10 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		m2Panel
 				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+						"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 						"rec.exp.customizer.title.3")));
 		m2Panel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.3"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.3"));
 		m2Panel.setPreferredSize(new java.awt.Dimension(82, 224));
 		m2Slider.setMajorTickSpacing(50);
 		m2Slider.setMaximum(501);
@@ -318,7 +318,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		m2Slider.setPaintLabels(true);
 		m2Slider.setPaintTicks(true);
 		m2Slider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.3"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.3"));
 		m2Slider.setValue(100);
 		m2Slider.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -336,7 +336,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		m2TextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		m2TextField.setText("100");
 		m2TextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.3"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.3"));
 		m2TextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		m2TextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -358,10 +358,10 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		m1Panel
 				.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+						"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 						"rec.exp.customizer.title.2")));
 		m1Panel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.2"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.2"));
 		m1Panel.setPreferredSize(new java.awt.Dimension(82, 224));
 		m1Slider.setMajorTickSpacing(50);
 		m1Slider.setMaximum(501);
@@ -370,7 +370,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		m1Slider.setPaintLabels(true);
 		m1Slider.setPaintTicks(true);
 		m1Slider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.2"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.2"));
 		m1Slider.setValue(100);
 		m1Slider.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -388,7 +388,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		m1TextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		m1TextField.setText("100");
 		m1TextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString("rec.exp.customizer.tip.2"));
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString("rec.exp.customizer.tip.2"));
 		m1TextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		m1TextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -407,9 +407,9 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		phySettingsPanel.add(m1Panel, gridBagConstraints);
 
 		mainTabbedPane.addTab(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.title.4"), null, phySettingsPanel, java.util.ResourceBundle
-						.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+						.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 								"rec.exp.customizer.tip.4"));
 
 		simulSettingsPanel.setLayout(new java.awt.GridBagLayout());
@@ -420,11 +420,11 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		tbsPanel.setLayout(new java.awt.GridBagLayout());
 
 		tbsPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.title.tbs")));
 		tbsPanel
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+						"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 						"rec.exp.customizer.tip.tbs"));
 		tbsPanel.setPreferredSize(new java.awt.Dimension(82, 224));
 		tbsSlider.setMajorTickSpacing(50);
@@ -435,7 +435,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		tbsSlider.setPaintTicks(true);
 		tbsSlider
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+						"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 						"rec.exp.customizer.tip.tbs"));
 		tbsSlider.setValue(100);
 		tbsSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -455,7 +455,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		tbsTextField.setText("100");
 		tbsTextField
 				.setToolTipText(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+						"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 						"rec.exp.customizer.tip.tbs"));
 		tbsTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		tbsTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -478,10 +478,10 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		samplesPanel.setLayout(new java.awt.GridBagLayout());
 
 		samplesPanel.setBorder(new javax.swing.border.TitledBorder(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.title.samples")));
 		samplesPanel.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesPanel.setMinimumSize(new java.awt.Dimension(82, 83));
 		samplesPanel.setPreferredSize(new java.awt.Dimension(82, 224));
@@ -492,7 +492,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		samplesSlider.setPaintLabels(true);
 		samplesSlider.setPaintTicks(true);
 		samplesSlider.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesSlider.setValue(200);
 		samplesSlider.setMinimumSize(new java.awt.Dimension(200, 47));
@@ -512,7 +512,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		samplesTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		samplesTextField.setText("200");
 		samplesTextField.setToolTipText(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.tip.samples"));
 		samplesTextField.setMinimumSize(new java.awt.Dimension(43, 20));
 		samplesTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -532,9 +532,9 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		simulSettingsPanel.add(samplesPanel, gridBagConstraints);
 
 		mainTabbedPane.addTab(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.title.5"), null, simulSettingsPanel, java.util.ResourceBundle
-						.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+						.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 								"rec.exp.customizer.tip.5"));
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -608,84 +608,84 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 
 	public void actionPerformed(java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.editMenu.title.1")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.title.1"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.tip.1"), (int) Math.round(Math.toDegrees(pend2m.getTheta())),
 					new int[] { 60, 180, -180, 20 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.editMenu.title.2")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.title.2"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.tip.2"), (int) Math.round(Math.toDegrees(pend2m.getThetaVecVel())),
 					new int[] { 60, 360, -360, 20 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.editMenu.title.3")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.title.3"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.tip.3"), (int) Math.round(Math.toDegrees(pend2m.getPhi())),
 					new int[] { 60, 180, -180, 20 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.editMenu.title.4")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.title.4"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.tip.4"), (int) Math.round(Math.toDegrees(pend2m.getPhiVecVel())),
 					new int[] { 60, 360, -360, 20 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.editMenu.title.5")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.title.5"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.tip.5"), (int) Math.round(pend2m.getL1() * 10), new int[] { 10, 151,
 					1, 2 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.editMenu.title.6")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.title.6"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.tip.6"), (int) Math.round(pend2m.getL2() * 10), new int[] { 10, 151,
 					1, 2 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.editMenu.title.7")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.title.7"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.tip.7"), (int) Math.round(100 * pend2m.getFreq()), new int[] { 10,
 					100, 0, 2 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.editMenu.title.8")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.title.8"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.tip.8"), (int) Math.round(Math.toDegrees(pend2m.getFase())),
 					new int[] { 60, 180, -180, 20 });
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vpend2m/resources/messages")
 						.getString("rec.exp.customizer.editMenu.title.9")))
 			updateEditPanel(java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.title.9"), java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+					"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 					"rec.exp.customizer.editPanel.tip.9"), (int) Math.round(pend2m.getAmp() * 10), new int[] { 10, 150,
 					0, 2 });
 		/*
@@ -746,78 +746,78 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		String str = ((javax.swing.border.TitledBorder) editPanel.getBorder()).getTitle();
 
 		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.1")))
 			editSlider.setValue((int) Math.round(Math.toDegrees(pend2m.getTheta())));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.2")))
 			editSlider.setValue((int) Math.round(Math.toDegrees(pend2m.getThetaVecVel())));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.3")))
 			editSlider.setValue((int) Math.round(Math.toDegrees(pend2m.getPhi())));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.4")))
 			editSlider.setValue((int) Math.round(Math.toDegrees(pend2m.getPhiVecVel())));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.8")))
 			editSlider.setValue((int) Math.round(Math.toDegrees(pend2m.getFase())));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.9")))
 			editSlider.setValue((int) Math.round(pend2m.getAmp() * 10));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.5")))
 			editSlider.setValue((int) Math.round(pend2m.getL1() * 10));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.6")))
 			editSlider.setValue((int) Math.round(pend2m.getL2() * 10));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.7")))
 			editSlider.setValue((int) Math.round(100 * pend2m.getFreq()));
 	}
 
 	private void editSet(String str, double val) {
 		if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.1")))
 			pend2m.setTheta(Math.toRadians(val));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.2")))
 			pend2m.setThetaVecVel(Math.toRadians(val));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.3")))
 			pend2m.setPhi(Math.toRadians(val));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.4")))
 			pend2m.setPhiVecVel(Math.toRadians(val));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.5")))
 			pend2m.setL1(val / 10d);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.6")))
 			pend2m.setL2(val / 10d);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.7")))
 			pend2m.setFreq(val / 100d);
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.8")))
 			pend2m.setFase(Math.toRadians(val));
 		else if (str.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/messages).getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editPanel.title.9")))
 			pend2m.setAmp(val / 10d);
 	}

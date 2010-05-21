@@ -120,35 +120,35 @@ public class Animation extends CartPole implements ExpDataDisplay, ExpDataModelL
 						.getValueAt(i, 4).getValue().getFloatValue());
 			else if (model.getValueAt(i, 6) != null)
 				messageDialog(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.customizer.title.35"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.tip.3"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.title.3"), null, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.title.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.tip.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.title.2"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.tip.2"));
 			else if (model.getValueAt(i, 7) != null)
 				messageDialog(java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.customizer.title.36"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.tip.4"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.title.3"), null, java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.title.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.tip.1"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.title.2"), java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vcartpole/resources/messages).getString(
+						"pt/utl/ist/elab/client/vcartpole/resources/messages").getString(
 						"rec.exp.displays.dialog.tip.2"));
 		}
 	}

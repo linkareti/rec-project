@@ -30,7 +30,7 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 public class STDHistogram extends PlottingPanel implements ExpDataDisplay, ExpDataModelListener {
 
 	private String statusStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+			"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 			"rec.exp.displays.statusStr.recData");
 	private Histogram hist;
 
@@ -146,7 +146,7 @@ public class STDHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 
 	public void dataModelEnded() {
 		if (statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.statusStr.recData"))) {
 			statusStr = "";
 			repaint();
@@ -158,7 +158,7 @@ public class STDHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 
 	public void dataModelStarted() {
 		if (statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.statusStr.recData"))) {
 			statusStr = "";
 			repaint();
@@ -173,7 +173,7 @@ public class STDHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 		// if (simulType == 1)
 		// setVisible(false);
 		if (simulType != 1) {
-			setTitle(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages)
+			setTitle(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages")
 					.getString("rec.exp.display.stdmap.title.2"));
 			setPreferredMinMaxX(0, 2 * Math.PI);
 			hist = new Histogram();
@@ -181,28 +181,28 @@ public class STDHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 			if (simulType == 2) {
 				setXLabel("dTheta/dt");
 				hist.setXYColumnNames("dTheta/dt", java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+						"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 						"rec.exp.displays.histogram.title.1"));
 			} else {
 				setXLabel("I");
 				hist.setXYColumnNames("I", java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+						"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 						"rec.exp.displays.histogram.title.1"));
 			}
 			setYLabel(java.util.ResourceBundle
-					.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+					.getBundle("pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 							"rec.exp.displays.histogram.title.1"));
 			addDrawable(hist);
 		} else
 			statusStr = java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+					"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 					"rec.exp.displays.inactive");
 		repaint();
 	}
 
 	public void dataModelStoped() {
 		if (statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vstdmap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vstdmap/resources/messages").getString(
 				"rec.exp.displays.statusStr.recData"))) {
 			statusStr = "";
 			repaint();

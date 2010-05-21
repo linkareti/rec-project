@@ -42,7 +42,7 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 
 	protected String statusStr;
 	private String actionStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vtiro/resources/messages).getString(
+			"pt/utl/ist/elab/client/vtiro/resources/messages").getString(
 			"rec.exp.displays.animation.actionStr");
 
 	private PopupMenu viewPopMenu;
@@ -68,7 +68,7 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 	}
 
 	public void buildTiro() {
-		setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages)
+		setToolTipText(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
 				.getString("rec.exp.customizer.tip.1"));
 		setDecorationType(DECORATION_AXES);
 		setSquareAspect(true);
@@ -193,25 +193,25 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 	private void buildPopupMenu() {
 		viewPopMenu = new PopupMenu(this);
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/messages).getString("rec.exp.displays.save"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages)
+				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.displays.save"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
 						.getString("rec.exp.displays.save.tip"));
 		viewPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vtiro/resources/messages).getString("rec.exp.displays.print"),
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages)
+				"pt/utl/ist/elab/client/vtiro/resources/messages").getString("rec.exp.displays.print"),
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
 						.getString("rec.exp.displays.print.tip"));
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
 						.getString("rec.exp.displays.save")))
 			try {
 				doSaveAs();
 			} catch (IOException io) {
 			}
 		else if (e.getActionCommand().equalsIgnoreCase(
-				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages)
+				java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages")
 						.getString("rec.exp.displays.print")))
 			createChartPrintJob();
 	}
@@ -310,7 +310,7 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 
 		JFileChooser fileChooser = new JFileChooser();
 		org.jfree.ui.ExtensionFileFilter filter = new org.jfree.ui.ExtensionFileFilter(java.util.ResourceBundle
-				.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages).getString("PNG_Image_Files"),
+				.getBundle("pt/utl/ist/elab/client/vtiro/resources/messages").getString("PNG_Image_Files"),
 				".png");
 		fileChooser.addChoosableFileFilter(filter);
 

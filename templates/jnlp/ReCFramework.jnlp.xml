@@ -14,9 +14,13 @@
         <jar href="lib/swing-worker-1.1_sig.jar"/>
         <jar href="lib/swingx_sig.jar"/>
         
-        <jar href="lib/JCFN.jar"/>
-        <jar href="lib/jmf.jar"/>
-		<jar href="lib/jna.jar"/>
+        <jar href="lib/JCFN_sig.jar"/>
+        <jar href="lib/jmf_sig.jar"/>
+		<jar href="lib/jna_sig.jar"/>
+		
+		<jar href="lib/OSP_sig.jar"/>
+        <jar href="lib/OSP3D_sig.jar"/>
+		<jar href="lib/vecmath_sig.jar"/>
         
         <!-- Jar ReC Client -->
 

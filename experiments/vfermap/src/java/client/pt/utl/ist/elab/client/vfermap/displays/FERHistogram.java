@@ -30,7 +30,7 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDataModelListener {
 
 	private String statusStr = java.util.ResourceBundle.getBundle(
-			"pt/utl/ist/elab/client/vfermap/resources/messages).getString(
+			"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
 			"rec.exp.displays.statusStr.recData");
 	private Histogram hist;
 
@@ -78,7 +78,7 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 		 * addDrawable(hist); repaint();
 		 */
 		// statusStr =
-		// java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages).getString("rec.exp.displays.inactive");
+		// java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString("rec.exp.displays.inactive");
 
 	}
 
@@ -159,7 +159,7 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 
 	public void dataModelEnded() {
 		if (statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
 				"rec.exp.displays.statusStr.recData"))) {
 			statusStr = "";
 			repaint();
@@ -171,7 +171,7 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 
 	public void dataModelStarted() {
 		if (statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
 				"rec.exp.displays.statusStr.recData"))) {
 			statusStr = "";
 			repaint();
@@ -189,35 +189,35 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 			float uMax = Float.parseFloat(header.getSelectedHardwareParameterValue("uMax"));
 			if (uMax != -1)
 				setPreferredMinMaxX(0, uMax);
-			setTitle(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages)
+			setTitle(java.util.ResourceBundle.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages")
 					.getString("rec.exp.display.fermap.title.2"));
 			hist = new Histogram();
 			hist.setBinWidth(.4 / uMax);
 			if (simulType == 2) {
 				setXLabel("dX/dt");
 				hist.setXYColumnNames("dX/dt", java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vfermap/resources/messages).getString(
+						"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
 						"rec.exp.displays.histogram.title.1"));
 			} else {
 				setXLabel("U");
 				hist.setXYColumnNames("U", java.util.ResourceBundle.getBundle(
-						"pt/utl/ist/elab/client/vfermap/resources/messages).getString(
+						"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
 						"rec.exp.displays.histogram.title.1"));
 			}
 			setYLabel(java.util.ResourceBundle
-					.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages).getString(
+					.getBundle("pt/utl/ist/elab/client/vfermap/resources/messages").getString(
 							"rec.exp.displays.histogram.title.1"));
 			addDrawable(hist);
 		} else
 			statusStr = java.util.ResourceBundle.getBundle(
-					"pt/utl/ist/elab/client/vfermap/resources/messages).getString(
+					"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
 					"rec.exp.displays.inactive");
 		repaint();
 	}
 
 	public void dataModelStoped() {
 		if (statusStr.equalsIgnoreCase(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vfermap/resources/messages).getString(
+				"pt/utl/ist/elab/client/vfermap/resources/messages").getString(
 				"rec.exp.displays.statusStr.recData"))) {
 			statusStr = "";
 			repaint();

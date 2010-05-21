@@ -138,7 +138,7 @@
 			</classpath>
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
-			<jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" />
+			<!--jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" /-->
 			<sysproperty key="ReCFaceConfig" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
 			<sysproperty key="ReCBaseUIConfig" value="file:///${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
 			<sysproperty key="ReC.MultiCastController.InitRef" value="${rec.multicastcontroller.initref}" />
