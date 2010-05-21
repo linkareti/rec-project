@@ -113,7 +113,6 @@
 			</fileset>
 		</copy>
 		
-		<copy file="${templates.dir.client}/FullClient.properties" tofile="${client.build.dir}/FullClient.properties" />
 		
 		<sign.all.jars.in.directory.rec.certificate source.dir.name="${elab.client.lib.dir}" destination.dir.name="${client.build.dir}/lib" />
 
