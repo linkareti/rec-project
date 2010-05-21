@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<jnlp spec="1.0+" codebase="@codebase@" href="ReCFramework.jnlp">
+    <information>
+        <title>JFreeChart</title>
+        <vendor>JFreeChart</vendor>
+	<homepage href="@homepage@"/>
+	<description kind="one-line">ReC Framework</description>
+	<description kind="tooltip">ReC Framework</description>
+    </information>
+    <resources>
+        <!-- Jar ReC Client -->
+
+        <!-- Jar ReC Common -->
+        
+        <!-- Jar ReC jvlc -->
+
+    </resources>
+    <component-desc/>
+    <security>
+        <all-permissions/>
+    </security>
+</jnlp>

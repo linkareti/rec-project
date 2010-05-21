@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp codebase="${jnlp.codebase}" href="MacInstallerTemplate.jnlp" spec="1.0+">
+<jnlp codebase="@codebase@" href="MacInstallerTemplate.jnlp" spec="1.0+">
     <information>
         <title>eLab</title>
-        <vendor>Linkare TI, Instituto Superior Técnico</vendor>
+        <vendor>Linkare TI</vendor>
         <homepage href="http://elab.ist.utl.pt/rec/"/>
         <description>Laboratório de experiências online.</description>
         <description kind="short">eLab</description>

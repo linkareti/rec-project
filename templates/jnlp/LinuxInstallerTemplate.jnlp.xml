@@ -2,8 +2,8 @@
 <jnlp codebase="@codebase@" href="LinuxInstaller.jnlp" spec="1.0+">
     <information>
         <title>@title@</title>
-        <vendor>@vendor@</vendor>
-        <homepage href="@homepage@"/>
+        <vendor>Linkare TI</vendor>
+        <homepage href="http://elab.ist.utl.pt/rec/"/>
         <description>Linux Installer.</description>
         <description kind="short">Linux Installer</description>
         <offline-allowed/>

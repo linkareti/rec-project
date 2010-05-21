@@ -393,16 +393,32 @@
 	<macrodef name="create.jnlp.full.client.compile">
 		<attribute name="codebase" />
 		<sequential>
+			
+			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFramework.jnlp" />
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" propertyFile="build.properties">
+				<replacefilter token="@href@" property="href" />
+			</replace>
+			
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
+			
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/OpenORB.jnlp" />
 			<replace file="${elab.client.classes.dir}/OpenORB.jnlp" token="@codebase@" value="@{codebase}" />
+			
 			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/JFreeChart.jnlp" />
 			<replace file="${elab.client.classes.dir}/JFreeChart.jnlp" token="@codebase@" value="@{codebase}" />
+			
 			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linuxInstaller.jnlp" />
 			<replace file="${elab.client.classes.dir}/linuxInstaller.jnlp" token="@codebase@" value="@{codebase}" />
+			
 			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macInstaller.jnlp" />
 			<replace file="${elab.client.classes.dir}/macInstaller.jnlp" token="@codebase@" value="@{codebase}" />
+			
 			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windowsInstaller.jnlp" />
 			<replace file="${elab.client.classes.dir}/windowsInstaller.jnlp" token="@codebase@" value="@{codebase}" />
+			
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ELabFullClient.jnlp" />
 			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@codebase@" value="@{codebase}" />
 			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
@@ -416,10 +432,8 @@
 				<replacefilter token="@j2se-version@" property="j2se-version" />
 				<replacefilter token="@main-class@" property="main-class" />
 			</replace>
+			
 			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -439,6 +453,18 @@
 
 	<macrodef name="create.jnlp.full.client.build">
 		<sequential>
+			
+			
+			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/ReCFramework.jnlp" />
+			<replace file="${client.build.dir}/ReCFramework.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@href@" property="href" />
+			</replace>		
+
+			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />			
+			
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/OpenORB.jnlp" />
 			<replace file="${client.build.dir}/OpenORB.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
@@ -472,10 +498,8 @@
 				<replacefilter token="@j2se-version@" property="j2se-version" />
 				<replacefilter token="@main-class@" property="main-class" />
 			</replace>
+
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.build" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -503,6 +527,8 @@
 	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
 
 	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/ELabFullClientTemplate.jnlp.xml" />
+	<property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/ReCFramework.jnlp.xml" />
+	
 	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/OpenORB.jnlp.xml" />
 	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/JFreeChart.jnlp.xml" />
 	
