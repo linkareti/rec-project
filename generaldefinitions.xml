@@ -444,8 +444,8 @@
 		<sequential>
 			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
-					<![CDATA[<jar href="@temporary.experiment.jar@"/>
-					<!--End Experiment Jars-->]]></replacevalue>
+		<![CDATA[<jar href="@temporary.experiment.jar@"/>
+		<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
 			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
@@ -510,8 +510,8 @@
 		<sequential>
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
-					<![CDATA[<jar href="@temporary.experiment.jar@"/>
-					<!--End Experiment Jars-->]]></replacevalue>
+		<![CDATA[<jar href="@temporary.experiment.jar@"/>
+		<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
 			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
