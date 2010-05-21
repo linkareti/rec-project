@@ -216,9 +216,9 @@
 	
 	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client,sign.rec.client">
 		
-		<sign.jars.in.directory source.dir.name="${rec.common.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
-		<sign.jars.in.directory source.dir.name="${rec.client.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
-		<sign.jars.in.directory source.dir.name="${jvlc.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
+		<sign.all.jars.in.directory.rec.certificate source.dir.name="${rec.common.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
+		<sign.all.jars.in.directory.rec.certificate source.dir.name="${rec.client.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
+		<sign.all.jars.in.directory.rec.certificate source.dir.name="${jvlc.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
 	
 		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}"></copy>
 		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar" todir="${client.build.dir}"></copy>

@@ -628,12 +628,24 @@
 		================================================================
 		-->
 
-	<macrodef name="sign.jars.in.directory">
+	<macrodef name="sign.all.jars.in.directory.rec.certificate">
 		<attribute name="source.dir.name" />
 		<attribute name="destination.dir.name" />
 		<sequential>
 			<mkdir dir="@{destination.dir.name}" />
 			<signjar storetype="${rec.storetype}" destDir="@{destination.dir.name}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
+				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="sign.all.jars.in.directory.elab.certificate">
+		<attribute name="source.dir.name" />
+		<attribute name="destination.dir.name" />
+		<sequential>
+			<mkdir dir="@{destination.dir.name}" />
+			<signjar storetype="${elab.storetype}" destDir="@{destination.dir.name}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
 				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
