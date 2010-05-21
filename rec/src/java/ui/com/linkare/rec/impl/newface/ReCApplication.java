@@ -496,10 +496,24 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 				log.fine("recFaceConfig.isAutoConnectLab() = " + recFaceConfig.isAutoConnectLab());
 			}
 
+			
+			
 			// Load Localization Bundles
 			for (LocalizationBundle bundle : recFaceConfig.getLocalizationBundle()) {
 				ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
 			}
+			for (Lab lab:recFaceConfig.getLab()) {
+				for (LocalizationBundle bundle : lab.getLocalizationBundle()) {
+					ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
+				}	
+				for(Apparatus apparatus:lab.getApparatus())
+				{
+					for (LocalizationBundle bundle : apparatus.getLocalizationBundle()) {
+						ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
+					}
+				}
+			}
+			
 			apparatusComboBoxModel = new ApparatusComboBoxModel(currentLab.getApparatus());
 
 			// Show view

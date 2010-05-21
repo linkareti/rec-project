@@ -132,22 +132,66 @@
 				<pathelement location="${rec.common.classes.dir}/" />
 				<pathelement location="${rec.client.classes.dir}" />
 				<pathelement location="${elab.client.classes.dir}/" />
+				<dirset dir="${experiments.classes.dir}">
+					<include name="*/client/**"/>
+				</dirset>
 			</classpath>
 			<jvmarg value="-Xms${min.memory}" />
 			<jvmarg value="-Xmx${max.memory}" />
 			<jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" />
 			<sysproperty key="ReCFaceConfig" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
 			<sysproperty key="ReCBaseUIConfig" value="file:///${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
-			<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
-			<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
+			<sysproperty key="ReC.MultiCastController.InitRef" value="${rec.multicastcontroller.initref}" />
+			<sysproperty key="ReC.MultiCastController.BindName" value="${rec.multicastcontroller.bindname}" />
+			<!--sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" /-->
 			<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
 			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 			<sysproperty key="openorb.config" value="${rec.client.classes.dir}/openorb.xml" />
+			
+			<sysproperty key="vlc.plugins.destdir" value="eLab/native/plugins" />
+			<sysproperty key="vlc.plugins.filename" value="vlcplugins.zip" />
+			<sysproperty key="video.development.enabled" value="no" />
 		</java>
 	</target>
-
+	
+	<target name="debug.elab.client">
+		<java classname="${client.main-class}" fork="true" failonerror="true">
+			<arg value="-h" />
+			<classpath>
+				<path refid="rec.common.lib.path" />
+				<path refid="rec.client.lib.path" />
+				<path refid="elab.client.lib.path" />
+				<pathelement location="${rec.common.classes.dir}/" />
+				<pathelement location="${rec.client.classes.dir}" />
+				<pathelement location="${elab.client.classes.dir}/" />
+				<dirset dir="${experiments.classes.dir}">
+					<include name="*/client/**"/>
+				</dirset>
+			</classpath>
+			<jvmarg value="-Xdebug" />
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=${experiment.client.debug.address.port},server=y,suspend=y" />
+			<jvmarg value="-Xms${min.memory}" />
+			<jvmarg value="-Xmx${max.memory}" />
+			<jvmarg value="-Xbootclasspath/p:${rec.common.lib.dir}/openorb_orb_omg-1.4.0.jar" />
+			<sysproperty key="ReCFaceConfig" value="file:///${elab.client.classes.dir}/ReCFaceConfig.xml" />
+			<sysproperty key="ReCBaseUIConfig" value="file:///${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
+			<sysproperty key="ReC.MultiCastController.InitRef" value="${rec.multicastcontroller.initref}" />
+			<sysproperty key="ReC.MultiCastController.BindName" value="${rec.multicastcontroller.bindname}" />
+			<!--sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" /-->
+			<sysproperty key="openorb.profile" value="${experiment.client.openorb.profile}" />
+			<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
+			<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
+			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
+			<sysproperty key="openorb.config" value="${rec.client.classes.dir}/openorb.xml" />
+			
+			<sysproperty key="vlc.plugins.destdir" value="eLab/native/plugins" />
+			<sysproperty key="vlc.plugins.filename" value="vlcplugins.zip" />
+			<sysproperty key="video.development.enabled" value="no" />
+		</java>
+	</target>
+	
 <!--
 		=====================================================
 		=================== Elab driver =====================

@@ -63,49 +63,49 @@ public class InteractivePend2M extends Pend2M implements InteractionListener, Ru
 
 		editPopMenu = new PopupMenu(par);
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.1"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.1"));
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.2"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.2"));
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.3"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.3"));
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.4"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.4"));
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.5"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.5"));
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.6"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.6"));
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.7"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.7"));
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.8"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.8"));
 		editPopMenu.addItem(java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.title.9"), java.util.ResourceBundle.getBundle(
-				"pt/utl/ist/elab/client/vpend2m/resources/ReCExpPend2M").getString(
+				"pt/utl/ist/elab/client/vpend2m/resources/messages").getString(
 				"rec.exp.customizer.editMenu.tip.9"));
 	}
 

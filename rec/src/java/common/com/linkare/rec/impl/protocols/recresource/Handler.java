@@ -40,6 +40,13 @@ public class Handler extends java.net.URLStreamHandler {
 			} else {
 				resourceURL = getClass().getResource(
 						url.toExternalForm().substring(RECRESOURCE_PROTOCOL_IDENTIFIER.length()));
+
+				// Maybe the user forgot to define the three (3) slashes but
+				// still wants an absolute URL... Try it!
+				if (resourceURL == null) {
+					resourceURL = getClass().getClassLoader().getResource(
+							url.toExternalForm().substring(RECRESOURCE_PROTOCOL_IDENTIFIER.length()));
+				}
 			}
 
 			if (resourceURL == null) {

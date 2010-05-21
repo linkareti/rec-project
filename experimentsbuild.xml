@@ -307,8 +307,8 @@
 				</classpath>
 				<jvmarg value="-Xms${min.memory}" />
 				<jvmarg value="-Xmx${max.memory}" />
-				<sysproperty key="rec.multicastcontroller.bindname" value="${rec.multicastcontroller.bindname}" />
-				<sysproperty key="rec.multicastcontroller.initref" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="ReC.MultiCastController.InitRef" value="${rec.multicastcontroller.initref}" />
+				<sysproperty key="ReC.MultiCastController.BindName" value="${rec.multicastcontroller.bindname}" />
 				<sysproperty key="java.util.logging.config.file" value="${java.util.logging.config.file}" />
 				<sysproperty key="openorb.profile" value="${experiment.driver.openorb.profile}" />
 				<sysproperty key="eLab.@{experiment.name}.HardwareInfo" value="${experiment.eLab.HardwareInfo}" />

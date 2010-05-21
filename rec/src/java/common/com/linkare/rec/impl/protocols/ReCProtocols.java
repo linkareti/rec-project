@@ -9,6 +9,8 @@ package com.linkare.rec.impl.protocols;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.linkare.rec.impl.protocols.recresource.Handler;
+
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
@@ -19,9 +21,9 @@ public class ReCProtocols {
 		if (spec == null || spec.length() == 0)
 			throw new MalformedURLException("spec is null or with length 0 - returning Exception from ReCProtocols...");
 
-		if (spec.startsWith("recresource://")) {
+		if (spec.startsWith(Handler.RECRESOURCE_PROTOCOL_IDENTIFIER)) {
 			String protocol = "recresource";
-			int protocolLength = (protocol + "://").length();
+			int protocolLength = Handler.RECRESOURCE_PROTOCOL_IDENTIFIER.length();
 			String file = "";
 			String host = "localhost";
 			if (spec.indexOf("/", protocolLength) != -1) {

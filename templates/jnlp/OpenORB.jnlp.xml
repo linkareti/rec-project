@@ -20,8 +20,6 @@
 	
 	<property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB"/>
 	<property name="org.omg.CORBA.ORBSingletonClass" value="org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton"/>
-	<property name="ReC.MultiCastController.BindName" value="MultiCastController"/>
-	<property name="ReC.MultiCastController.InitRef" value="MultiCastController"/>
 	<property name="openorb.config" value="etc/openorb.xml"/>
   	<property name="openorb.profile" value="ReCClient"/>
     </resources>

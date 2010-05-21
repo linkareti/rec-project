@@ -32,6 +32,9 @@
         <property name="ReCFaceConfig" value="etc/ReCFaceConfig.xml" />
         <property name="ReCBaseUIConfig" value="etc/ReCBaseUIConfig.xml" />
 
+		<property name="ReC.MultiCastController.BindName" value="MultiCastController"/>
+		<property name="ReC.MultiCastController.InitRef" value="MultiCastController"/>
+
         <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
         <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
         
