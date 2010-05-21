@@ -1,0 +1,41 @@
+<Apparatus location="ELAB_PV_STAMP_V02"
+	customizerClassLocationBundleKey="pv$rec.exp.customizer.pv"
+	toolTipBundleKey="pv$rec.exp.tip.pv" iconLocationBundleKey="pv$rec.exp.icon.pv"
+	displayStringBundleKey="pv$rec.exp.title.pv" desktopLocationBundleKey="pv$rec.exp.background.pv"
+	order="1">
+	<LocalizationBundle name="pv"
+		location="recresource:///pt/utl/ist/elab/client/pv/resources/messages" />
+	<WebResource locationBundleKey="pv$rec.exp.url.pv.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="pv$rec.exp.url.pv.title.1"
+		toolTipLocationBundleKey="pv$rec.exp.url.pv.title.1" internalBrowser="false"
+		order="1" />
+	<WebResource locationBundleKey="pv$rec.exp.url.pv.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="pv$rec.exp.url.pv.title.video"
+		toolTipLocationBundleKey="pv$rec.exp.url.pv.title.video"
+		internalBrowser="false" order="2" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="pv$rec.exp.dftcfg.pv.loc.1" toolTipBundleKey="pv$rec.exp.dftcfg.pv.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="pv$rec.exp.dftcfg.pv.title.1" order="1" />
+
+	<Display classLocationBundleKey="pv$rec.exp.display.pv.loc.sensor"
+		toolTipBundleKey="pv$rec.exp.display.pv.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="pv$rec.exp.display.pv.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="pv$rec.exp.display.pv.loc.1"
+		toolTipBundleKey="pv$rec.exp.display.pv.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="pv$rec.exp.display.pv.title.1" offlineCapable="false"
+		order="2" />
+	<Display classLocationBundleKey="pv$rec.exp.display.pv.loc.2"
+		toolTipBundleKey="pv$rec.exp.display.pv.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="pv$rec.exp.display.pv.title.2" offlineCapable="false"
+		order="3" />
+	<Display classLocationBundleKey="pv$rec.exp.display.pv.loc.3"
+		toolTipBundleKey="pv$rec.exp.display.pv.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="pv$rec.exp.display.pv.title.3" offlineCapable="false"
+		order="4" />
+</Apparatus>
