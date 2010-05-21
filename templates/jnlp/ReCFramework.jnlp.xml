@@ -9,29 +9,14 @@
     </information>
     <resources>
     
-    	<jar href="lib/avalon-framework_sig.jar"/>
 		<jar href="lib/fits1.3_sig.jar"/>
-		<jar href="lib/openorb_orb-1.4.0_sig.jar"/>
-        <jar href="lib/openorb_orb_omg-1.4.0_sig.jar"/>
-        <jar href="lib/openorb_ots-1.4.0_sig.jar"/>
-        <jar href="lib/openorb_pss-1.4.0_sig.jar"/>
-		<jar href="lib/tools-1.4.0_sig.jar"/>
-        <jar href="lib/xercesImpl_sig.jar"/>
-		<jar href="lib/xml-apis_sig.jar"/>
-        <jar href="lib/jfreechart-1.0.9_sig.jar"/>
-        <jar href="lib/logkit_sig.jar"/>
-        <jar href="lib/jcommon-1.0.12_sig.jar"/>
         <jar href="lib/appframework-1.0.3_sig.jar"/>
         <jar href="lib/swing-worker-1.1_sig.jar"/>
         <jar href="lib/swingx_sig.jar"/>
         
-        <jar href="lib/comm.jar"/>
         <jar href="lib/JCFN.jar"/>
         <jar href="lib/jmf.jar"/>
 		<jar href="lib/jna.jar"/>
-        <jar href="lib/jsr80.jar"/>
-        <jar href="lib/jsr80_ri.jar"/>        
-        <jar href="lib/RXTXcomm.jar"/>
         
         <!-- Jar ReC Client -->
 

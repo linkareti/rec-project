@@ -4,7 +4,7 @@
 	displayStringBundleKey="g$rec.exp.title.g" desktopLocationBundleKey="g$rec.exp.background.g"
 	order="1">
 	<LocalizationBundle name="g"
-		location="recresource:///pt/utl/ist/elab/client/g/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/g/resources/messages" />
 	<WebResource locationBundleKey="g$rec.exp.url.g.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="g$rec.exp.url.g.title.1"

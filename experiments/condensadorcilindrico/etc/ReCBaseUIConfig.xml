@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="condensadorcilindrico$rec.exp.background.cc"
 	videoLocation="condensadorcilindrico$rec.exp.url.cc.video" order="1">
 	<LocalizationBundle name="condensadorcilindrico"
-		location="recresource:///pt/utl/ist/elab/client/condensadorcilindrico/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/condensadorcilindrico/resources/messages" />
 	<Display classLocationBundleKey="condensadorcilindrico$rec.exp.display.cc.loc.1"
 		toolTipBundleKey="condensadorcilindrico$rec.exp.display.cc.tip.1"
 		iconLocationBundleKey="ReCBaseCC$rec.bui.icon.sensor"

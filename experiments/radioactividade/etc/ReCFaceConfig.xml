@@ -6,7 +6,7 @@
 	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="radioactividade$rec.exp.customizer.radio"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="radioactividade"
-		location="recresource:///pt/utl/ist/elab/client/radioactividade/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/radioactividade/resources/messages" />
 	<defaultAcquisitionConfig toolTipBundleKey="radioactividade$rec.exp.dftcfg.radio.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
 		displayStringBundleKey="radioactividade$rec.exp.dftcfg.radio.title.1"

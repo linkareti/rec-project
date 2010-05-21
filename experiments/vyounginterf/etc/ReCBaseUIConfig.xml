@@ -6,7 +6,7 @@
 	desktopLocationBundleKey="younginterf$rec.exp.background.younginterf"
 	order="1">
 	<LocalizationBundle name="younginterf"
-		location="recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages" />
 	<Display classLocationBundleKey="younginterf$rec.exp.display.younginterf.loc.1"
 		toolTipBundleKey="younginterf$rec.exp.display.younginterf.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"

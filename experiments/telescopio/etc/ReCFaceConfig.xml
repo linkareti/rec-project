@@ -8,7 +8,7 @@
 	customizerClassLocationBundleKey="telescopio$rec.exp.customizer.telescopio"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 		<localizationBundle name="telescopio"
-		location="recresource:///pt/utl/ist/elab/client/telescopio/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/telescopio/resources/messages" />
 	<mediaConfig videoLocation="telescopio$rec.exp.url.telescopio.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="telescopio$rec.exp.display.telescopio.tip.1"

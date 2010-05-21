@@ -4,7 +4,7 @@
 	displayStringBundleKey="pv$rec.exp.title.pv" desktopLocationBundleKey="pv$rec.exp.background.pv"
 	order="1">
 	<LocalizationBundle name="pv"
-		location="recresource:///pt/utl/ist/elab/client/pv/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/pv/resources/messages" />
 	<WebResource locationBundleKey="pv$rec.exp.url.pv.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="pv$rec.exp.url.pv.title.1"

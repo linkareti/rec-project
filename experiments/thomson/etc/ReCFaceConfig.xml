@@ -7,7 +7,7 @@
 	customizerClassLocationBundleKey="thomson$rec.exp.customizer.thomson"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 		<localizationBundle name="thomson"
-		location="recresource:///pt/utl/ist/elab/client/thomson/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/thomson/resources/messages" />
 	<mediaConfig videoLocation="thomson$rec.exp.url.thomson.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="thomson$rec.exp.display.thomson.tip.sensor"

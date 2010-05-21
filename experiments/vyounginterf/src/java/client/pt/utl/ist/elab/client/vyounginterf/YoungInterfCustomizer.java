@@ -47,7 +47,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 	public static void main(String args[]) {
 
 		ReCResourceBundle.loadResourceBundle("ReCExpYoungInterf",
-				"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages);
+				"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages");
 
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new YoungInterfCustomizer());

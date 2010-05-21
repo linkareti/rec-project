@@ -131,7 +131,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.weighty = 1.0;
 		jPanel2.add(jLabel3, gridBagConstraints);
 
-		jChkCalibrate.setText(ReCResourceBundle.findString("ReCExpCC$rec.exp.customizer.title4")); // NOI18N
+		jChkCalibrate.setText(ReCResourceBundle.findString("cc$rec.exp.customizer.title4")); // NOI18N
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 3;
 		gridBagConstraints.gridy = 1;
@@ -143,7 +143,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
 		jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle
-				.findString("ReCExpCC$rec.exp.customizer.title2"))); // NOI18N
+				.findString("cc$rec.exp.customizer.title2"))); // NOI18N
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -191,7 +191,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel3.add(jPanel6);
 
 		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle
-				.findString("ReCExpCC$rec.exp.customizer.title3"))); // NOI18N
+				.findString("cc$rec.exp.customizer.title3"))); // NOI18N
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -290,7 +290,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		lblErrorVolsAreEqua.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorVolsAreEqua.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorVolsAreEqua.setText(ReCResourceBundle.findString("ReCExpCC$rec.exp.customizer.label1")); // NOI18N
+		lblErrorVolsAreEqua.setText(ReCResourceBundle.findString("cc$rec.exp.customizer.label1")); // NOI18N
 		lblErrorVolsAreEqua.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -584,7 +584,7 @@ public class CCCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpCC$rec.exp.cc.customizer.title");
+		return ReCResourceBundle.findString("cc$rec.exp.cc.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

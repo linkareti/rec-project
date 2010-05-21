@@ -151,7 +151,7 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 	private String name = "Accumulated Statistics";
 
 	private javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/pt/utl/ist/elab/client/Aleatorio/Resource/AleatorioIcon.gif"));
+			"/pt/utl/ist/elab/client/aleatorio/resources/AleatorioIcon.gif"));
 
 	/**
 	 *ExpDataDisplay Implementation

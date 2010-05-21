@@ -53,8 +53,8 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 
 	public DICustomizer() {
 		r1i = new VariablePanel(0, 0.15, 0.15, 3, 3, ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.title.r1i", "R Interno 1 (m)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.tip.r1i", "Raio interno do disco 1"));
+				"di$rec.exp.customizer.title.r1i", "R Interno 1 (m)"), ReCResourceBundle.findStringOrDefault(
+				"di$rec.exp.customizer.tip.r1i", "Raio interno do disco 1"));
 
 		r1i.addExecutor(new VariableExecutor() {
 			public void execute() {
@@ -63,8 +63,8 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		});
 
 		r1e = new VariablePanel(0.15, 0.30, 0.15, 3, 3, ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.title.r1e", "R Externo 1 (m)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.tip.r1e", "Raio externo do disco 1"));
+				"di$rec.exp.customizer.title.r1e", "R Externo 1 (m)"), ReCResourceBundle.findStringOrDefault(
+				"di$rec.exp.customizer.tip.r1e", "Raio externo do disco 1"));
 
 		r1e.addExecutor(new VariableExecutor() {
 			public void execute() {
@@ -73,8 +73,8 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		});
 
 		r2i = new VariablePanel(0, 0.15, 0, 3, 3, ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.title.r2i", "R Interno 2 (m)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.tip.r2i", "Raio interno do disco 2"));
+				"di$rec.exp.customizer.title.r2i", "R Interno 2 (m)"), ReCResourceBundle.findStringOrDefault(
+				"di$rec.exp.customizer.tip.r2i", "Raio interno do disco 2"));
 
 		r2i.addExecutor(new VariableExecutor() {
 			public void execute() {
@@ -83,8 +83,8 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		});
 
 		r2e = new VariablePanel(0.15, 0.30, 0.15, 3, 3, ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.title.r2e", "R Externo 2 (m)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.tip.r2e", "Raio externo do disco 2"));
+				"di$rec.exp.customizer.title.r2e", "R Externo 2 (m)"), ReCResourceBundle.findStringOrDefault(
+				"di$rec.exp.customizer.tip.r2e", "Raio externo do disco 2"));
 
 		r2e.addExecutor(new VariableExecutor() {
 			public void execute() {
@@ -93,16 +93,16 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		});
 
 		m1 = new VariablePanel(0.1, 1.0, 0.5, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.title.m1", "Massa 1 (kg)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.tip.m1", "Massa do disco 1"));
+				"di$rec.exp.customizer.title.m1", "Massa 1 (kg)"), ReCResourceBundle.findStringOrDefault(
+				"di$rec.exp.customizer.tip.m1", "Massa do disco 1"));
 
 		m2 = new VariablePanel(0.1, 1.0, 0.5, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.title.m2", "Massa 2 (kg)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.tip.m2", "Massa do disco 2"));
+				"di$rec.exp.customizer.title.m2", "Massa 2 (kg)"), ReCResourceBundle.findStringOrDefault(
+				"di$rec.exp.customizer.tip.m2", "Massa do disco 2"));
 
 		inc = new VariablePanel(5, 35, 20, 1, 5, ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.title.inc", "Inclinacao (graus)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.tip.inc", "Inclinacao do plano"));
+				"di$rec.exp.customizer.title.inc", "Inclinacao (graus)"), ReCResourceBundle.findStringOrDefault(
+				"di$rec.exp.customizer.tip.inc", "Inclinacao do plano"));
 
 		inc.addExecutor(new VariableExecutor() {
 			public void execute() {
@@ -111,14 +111,14 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 		});
 
 		tbs = new VariablePanel(20, 50, 30, 0, 5, ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.title.tbs", "dt (ms)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.tip.tbs", "Tempo entre Amostras"));
+				"di$rec.exp.customizer.title.tbs", "dt (ms)"), ReCResourceBundle.findStringOrDefault(
+				"di$rec.exp.customizer.tip.tbs", "Tempo entre Amostras"));
 
 		nSamples = new VariablePanel(10, 150, 150, 0, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpDI$rec.exp.customizer.title.nsamps", "Numero de Amostras"), ReCResourceBundle
-				.findStringOrDefault("ReCExpDI$rec.exp.customizer.tip.nsamps", "Numero de Amostras"));
+				"di$rec.exp.customizer.title.nsamps", "Numero de Amostras"), ReCResourceBundle
+				.findStringOrDefault("di$rec.exp.customizer.tip.nsamps", "Numero de Amostras"));
 
-		buttonOK = new JButton(ReCResourceBundle.findStringOrDefault("ReCExpDI$rec.exp.customizer.title.ok", "Correr"));
+		buttonOK = new JButton(ReCResourceBundle.findStringOrDefault("di$rec.exp.customizer.title.ok", "Correr"));
 		buttonOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				// OK o utilizador quer enviar as informacoes, vamos colocar os
@@ -139,7 +139,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 			}
 		});
 
-		buttonCancel = new JButton(ReCResourceBundle.findStringOrDefault("ReCExpDI$rec.exp.customizer.title.cancel",
+		buttonCancel = new JButton(ReCResourceBundle.findStringOrDefault("di$rec.exp.customizer.title.cancel",
 				"Cancelar"));
 		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -148,7 +148,7 @@ public class DICustomizer extends JPanel implements com.linkare.rec.impl.client.
 			}
 		});
 
-		buttonReset = new JButton(ReCResourceBundle.findStringOrDefault("ReCExpDI$rec.exp.customizer.title.dfc",
+		buttonReset = new JButton(ReCResourceBundle.findStringOrDefault("di$rec.exp.customizer.title.dfc",
 				"Restaurar"));
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {

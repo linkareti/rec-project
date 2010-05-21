@@ -5,7 +5,7 @@
 	desktopLocationBundleKey="cargas3d$rec.exp.background.cargas3d" order="1">
 
 	<LocalizationBundle name="cargas3d"
-		location="recresource:///pt/utl/ist/elab/client/vcargas3d/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/vcargas3d/resources/messages" />
 	<Display classLocationBundleKey="cargas3d$rec.exp.display.cargas3d.loc.1"
 		toolTipBundleKey="cargas3d$rec.exp.display.cargas3d.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

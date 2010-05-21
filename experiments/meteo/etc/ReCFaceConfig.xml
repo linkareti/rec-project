@@ -6,7 +6,7 @@
 	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="meteo$rec.exp.customizer.meteo"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="meteo"
-		location="recresource:///pt/utl/ist/elab/client/meteo/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/meteo/resources/messages" />
 	<mediaConfig videoLocation="meteo$rec.exp.url.meteo.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="meteo$rec.exp.display.meteo.tip.sensor"

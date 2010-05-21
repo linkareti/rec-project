@@ -6,7 +6,7 @@
 	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="scuba$rec.exp.customizer.scuba"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="scuba"
-		location="recresource:///pt/utl/ist/elab/client/scuba/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/scuba/resources/messages" />
 	<defaultAcquisitionConfig toolTipBundleKey="scuba$rec.exp.dftcfg.scuba.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
 		displayStringBundleKey="scuba$rec.exp.dftcfg.scuba.title.1"

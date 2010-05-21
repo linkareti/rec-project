@@ -55,7 +55,7 @@ public class youngImage extends JComponent {
 		frame.show();
 
 		ReCResourceBundle.loadResourceBundle("ReCExpYoungInterf",
-				"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages);
+				"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages");
 
 		JFrame frame2 = new JFrame("Young's Interferences ImageIcon Test");
 		JPanel pane = new JPanel(true);

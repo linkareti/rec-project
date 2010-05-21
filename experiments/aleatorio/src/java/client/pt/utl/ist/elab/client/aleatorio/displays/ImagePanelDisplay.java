@@ -404,7 +404,7 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 	private String name = "Image Analysis";
 
 	private javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/pt/utl/ist/elab/client/Aleatorio/Resource/AleatorioIcon.gif"));
+			"/pt/utl/ist/elab/client/aleatorio/resources/AleatorioIcon.gif"));
 
 	private int imageWidth = 640;
 	private int imageHeight = 480;

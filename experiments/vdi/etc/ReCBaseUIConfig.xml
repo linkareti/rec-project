@@ -4,7 +4,7 @@
 	displayStringBundleKey="di$rec.exp.title.di" desktopLocationBundleKey="di$rec.exp.background.di"
 	order="1">
 	<LocalizationBundle name="di"
-		location="recresource:///pt/utl/ist/elab/client/vdi/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/vdi/resources/messages" />
 	<Display classLocationBundleKey="di$rec.exp.display.di.loc.anim"
 		toolTipBundleKey="di$rec.exp.display.di.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

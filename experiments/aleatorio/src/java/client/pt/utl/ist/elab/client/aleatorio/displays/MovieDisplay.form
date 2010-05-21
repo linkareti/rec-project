@@ -45,7 +45,7 @@
         <Component class="javax.swing.JButton" name="playButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
-              <Image iconType="3" name="/pt/utl/ist/elab/client/Aleatorio/Resource/Play.gif"/>
+              <Image iconType="3" name="/pt/utl/ist/elab/client/aleatorio/resources/Play.gif"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -62,7 +62,7 @@
         <Component class="javax.swing.JButton" name="repeatButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
-              <Image iconType="3" name="/pt/utl/ist/elab/client/Aleatorio/Resource/Undo.gif"/>
+              <Image iconType="3" name="/pt/utl/ist/elab/client/aleatorio/resources/Undo.gif"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Rewind"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -98,7 +98,7 @@
         <Component class="javax.swing.JButton" name="pauseButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.openide.explorer.propertysheet.editors.IconEditor">
-              <Image iconType="3" name="/pt/utl/ist/elab/client/Aleatorio/Resource/Pause.gif"/>
+              <Image iconType="3" name="/pt/utl/ist/elab/client/aleatorio/resources/Pause.gif"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>

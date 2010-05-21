@@ -516,7 +516,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
 		return new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/client/Aleatorio/Resource/AleatorioIcon.gif"));
+				"/pt/utl/ist/elab/client/aleatorio/resources/AleatorioIcon.gif"));
 	}
 
 	public String getCustomizerTitle() {

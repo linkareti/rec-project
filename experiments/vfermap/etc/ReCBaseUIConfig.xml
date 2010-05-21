@@ -4,7 +4,7 @@
 	displayStringBundleKey="fermap$rec.exp.title.fermap"
 	desktopLocationBundleKey="fermap$rec.exp.background.fermap" order="1">
 	<LocalizationBundle name="fermap"
-		location="recresource:///pt/utl/ist/elab/client/vfermap/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/vfermap/resources/messages" />
 	<Display classLocationBundleKey="fermap$rec.exp.display.fermap.loc.anim"
 		toolTipBundleKey="fermap$rec.exp.display.fermap.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

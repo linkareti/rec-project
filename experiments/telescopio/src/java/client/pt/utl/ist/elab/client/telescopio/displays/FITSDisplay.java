@@ -91,8 +91,8 @@ public class FITSDisplay extends javax.swing.JPanel implements com.linkare.rec.i
 
 				if (error != null && error.length > 0)
 					javax.swing.JOptionPane.showMessageDialog(null, ReCResourceBundle
-							.findString("ReCExpTelescopio$rec.exp.telescopio.lbl.error"), ReCResourceBundle
-							.findString("ReCExpTelescopio$rec.exp.telescopio.title.error"),
+							.findString("telescopio$rec.exp.telescopio.lbl.error"), ReCResourceBundle
+							.findString("telescopio$rec.exp.telescopio.title.error"),
 							javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -111,7 +111,7 @@ public class FITSDisplay extends javax.swing.JPanel implements com.linkare.rec.i
 	}
 
 	public String getName() {
-		return ReCResourceBundle.findStringOrDefault("ReCExpTelescopio$rec.exp.display.telescopio.title.1", "FITS");
+		return ReCResourceBundle.findStringOrDefault("telescopio$rec.exp.display.telescopio.title.1", "FITS");
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

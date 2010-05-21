@@ -49,7 +49,7 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 
 		controlsPanel.setBorder(new javax.swing.border.TitledBorder("Controls"));
 		playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/client/Aleatorio/Resource/Play.gif")));
+				"/pt/utl/ist/elab/client/aleatorio/resources/Play.gif")));
 		playButton.setEnabled(false);
 		playButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +63,7 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 		controlsPanel.add(playButton, gridBagConstraints);
 
 		repeatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/client/Aleatorio/Resource/Undo.gif")));
+				"/pt/utl/ist/elab/client/aleatorio/resources/Undo.gif")));
 		repeatButton.setToolTipText("Rewind");
 		repeatButton.setEnabled(false);
 		repeatButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +99,7 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 		controlsPanel.add(movieSlider, gridBagConstraints);
 
 		pauseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/pt/utl/ist/elab/client/Aleatorio/Resource/Pause.gif")));
+				"/pt/utl/ist/elab/client/aleatorio/resources/Pause.gif")));
 		pauseButton.setEnabled(false);
 		pauseButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,13 +181,13 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 	boolean play = false;
 	boolean repeat = false;
 	private javax.swing.Icon playIcon = new javax.swing.ImageIcon(getClass().getResource(
-			"/pt/utl/ist/elab/client/Aleatorio/Resource/Play.gif"));
+			"/pt/utl/ist/elab/client/aleatorio/resources/Play.gif"));
 	private javax.swing.Icon pauseIcon = new javax.swing.ImageIcon(getClass().getResource(
-			"/pt/utl/ist/elab/client/Aleatorio/Resource/Pause.gif"));
+			"/pt/utl/ist/elab/client/aleatorio/resources/Pause.gif"));
 	private javax.swing.Icon repeatIcon = new javax.swing.ImageIcon(getClass().getResource(
-			"/pt/utl/ist/elab/client/Aleatorio/Resource/Undo.gif"));
+			"/pt/utl/ist/elab/client/aleatorio/resources/Undo.gif"));
 	private javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/pt/utl/ist/elab/client/Aleatorio/Resource/Movie_sm.gif"));
+			"/pt/utl/ist/elab/client/aleatorio/resources/Movie_sm.gif"));
 	// java.util.Vector movieVector = new java.util.Vector();
 	// java.awt.Image[] movieArray = null;
 	// java.util.Vector movieBytesArray = null;

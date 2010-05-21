@@ -4,7 +4,7 @@
 	displayStringBundleKey="mvbrown$rec.exp.title.mvbrown"
 	desktopLocationBundleKey="mvbrown$rec.exp.background.mvbrown" order="1">
 	<LocalizationBundle name="mvbrown"
-		location="recresource:///pt/utl/ist/elab/client/vmvbrown/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/vmvbrown/resources/messages" />
 	<Display classLocationBundleKey="mvbrown$rec.exp.display.mvbrown.loc.anim"
 		toolTipBundleKey="mvbrown$rec.exp.display.mvbrown.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

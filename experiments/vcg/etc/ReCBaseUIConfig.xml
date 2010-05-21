@@ -4,7 +4,7 @@
 	displayStringBundleKey="cg$rec.exp.title.cg" desktopLocationBundleKey="cg$rec.exp.background.cg"
 	order="1">
 	<LocalizationBundle name="cg"
-		location="recresource:///pt/utl/ist/elab/client/vcg/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/vcg/resources/messages" />
 	<Display classLocationBundleKey="cg$rec.exp.display.cg.loc.anim"
 		toolTipBundleKey="cg$rec.exp.display.cg.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

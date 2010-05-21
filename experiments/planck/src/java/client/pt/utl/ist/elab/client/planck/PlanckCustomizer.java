@@ -662,8 +662,8 @@ public class PlanckCustomizer extends javax.swing.JPanel implements com.linkare.
 	}
 
 	public static void main(String args[]) {
-		ReCResourceBundle.loadResourceBundle("ReCExpPlanck",
-				"recresource:///pt/utl/ist/elab/client/planck/resources/messages);
+		ReCResourceBundle.loadResourceBundle("planck",
+				"recresource:///pt/utl/ist/elab/client/planck/resources/messages");
 		javax.swing.JFrame jf = new javax.swing.JFrame();
 		PlanckCustomizer pc = new PlanckCustomizer();
 		jf.getContentPane().add(pc, java.awt.BorderLayout.CENTER);

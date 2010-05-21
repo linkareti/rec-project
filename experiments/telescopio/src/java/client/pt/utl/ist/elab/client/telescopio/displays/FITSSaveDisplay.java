@@ -225,7 +225,7 @@ public class FITSSaveDisplay extends javax.swing.JPanel implements
 
 	public String getName() {
 		return ReCResourceBundle
-				.findStringOrDefault("ReCExpTelescopio$rec.exp.display.telescopio.title.2", "FITS Save");
+				.findStringOrDefault("telescopio$rec.exp.display.telescopio.title.2", "FITS Save");
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

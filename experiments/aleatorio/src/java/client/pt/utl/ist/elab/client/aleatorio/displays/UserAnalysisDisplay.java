@@ -934,7 +934,7 @@ public class UserAnalysisDisplay extends javax.swing.JPanel implements
 	private com.linkare.rec.impl.client.experiment.ExpDataModel model;
 	private String name = "User Image Analysis";
 	private javax.swing.Icon icon = new javax.swing.ImageIcon(getClass().getResource(
-			"/pt/utl/ist/elab/client/Aleatorio/Resource/AleatorioIcon.gif"));
+			"/pt/utl/ist/elab/client/aleatorio/resources/AleatorioIcon.gif"));
 	/** Filter for the file chooser, so we only load known images */
 	private pt.utl.ist.elab.client.aleatorio.utils.ImageFilter imageFilter = new pt.utl.ist.elab.client.aleatorio.utils.ImageFilter();
 	private pt.utl.ist.elab.client.aleatorio.utils.JPEGImageFilter jpegImageFilter = new pt.utl.ist.elab.client.aleatorio.utils.JPEGImageFilter();

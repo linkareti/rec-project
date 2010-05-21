@@ -4,7 +4,7 @@
 	displayStringBundleKey="movproj$rec.exp.title.movproj"
 	desktopLocationBundleKey="movproj$rec.exp.background.movproj" order="1">
 	<LocalizationBundle name="movproj"
-		location="recresource:///pt/utl/ist/elab/client/vmovproj/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/vmovproj/resources/messages" />
 	<Display classLocationBundleKey="movproj$rec.exp.display.movproj.loc.anim"
 		toolTipBundleKey="movproj$rec.exp.display.movproj.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

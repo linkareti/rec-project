@@ -40,7 +40,7 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jButtonOpen.setText(ReCResourceBundle.findString("ReCExpTelescopio$rec.exp.telescopio.lbl.open"));
+		jButtonOpen.setText(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.open"));
 		jButtonOpen.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonOpenActionPerformed(evt);
@@ -49,7 +49,7 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 
 		jPanel1.add(jButtonOpen, new java.awt.GridBagConstraints());
 
-		jTabbedPaneOpen.addTab(ReCResourceBundle.findString("ReCExpTelescopio$rec.exp.telescopio.lbl.open"), jPanel1);
+		jTabbedPaneOpen.addTab(ReCResourceBundle.findString("telescopio$rec.exp.telescopio.lbl.open"), jPanel1);
 
 		add(jTabbedPaneOpen, java.awt.BorderLayout.CENTER);
 
@@ -148,12 +148,12 @@ public class FITSOpen extends javax.swing.JPanel implements com.linkare.rec.impl
 
 	public String getName() {
 		return ReCResourceBundle
-				.findStringOrDefault("ReCExpTelescopio$rec.exp.display.telescopio.title.3", "FITS Open");
+				.findStringOrDefault("telescopio$rec.exp.display.telescopio.title.3", "FITS Open");
 	}
 
 	public static void main(String args[]) {
-		ReCResourceBundle.loadResourceBundle("ReCExpTelescopio",
-				"recresource:///pt/utl/ist/elab/client/telescopio/resources/messages);
+		ReCResourceBundle.loadResourceBundle("telescopio",
+				"recresource:///pt/utl/ist/elab/client/telescopio/resources/messages");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		FITSOpen p = new FITSOpen();
 		dummy.getContentPane().add(p, java.awt.BorderLayout.CENTER);

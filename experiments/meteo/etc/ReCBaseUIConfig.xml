@@ -4,7 +4,7 @@
 	displayStringBundleKey="meteo$rec.exp.title.meteo"
 	desktopLocationBundleKey="meteo$rec.exp.background.meteo" order="1">
 	<LocalizationBundle name="meteo"
-		location="recresource:///pt/utl/ist/elab/client/meteo/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/meteo/resources/messages" />
 	<WebResource locationBundleKey="meteo$rec.exp.url.meteo.1"
 		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
 		displayStringBundleKey="meteo$rec.exp.url.meteo.title.1"

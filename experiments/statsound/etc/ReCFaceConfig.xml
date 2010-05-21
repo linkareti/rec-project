@@ -8,7 +8,7 @@
 	customizerClassLocationBundleKey="statsound$rec.exp.customizer.statsound"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 		<localizationBundle name="statsound"
-		location="recresource:///pt/utl/ist/elab/client/statsound/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/statsound/resources/messages" />
 	<mediaConfig videoLocation="statsound$rec.exp.url.statsound.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.sensor"

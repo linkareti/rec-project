@@ -376,7 +376,7 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpPoisson",
-				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages);
+				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Viewer());
 		dummy.setDefaultCloseOperation(dummy.EXIT_ON_CLOSE);

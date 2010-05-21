@@ -8,7 +8,7 @@
 	customizerClassLocationBundleKey="conducaocalor$rec.exp.customizer.conducaoCalor"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="conducaocalor"
-		location="recresource:///pt/utl/ist/elab/client/conducaocalor/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/conducaocalor/resources/messages" />
 	<mediaConfig videoLocation="conducaocalor$rec.exp.url.conducaoCalor.video"
 		canSave="true" offlinePlay="true" />
 	<display toolTipBundleKey="conducaocalor$rec.exp.display.conducaoCalor.tip.sensor"

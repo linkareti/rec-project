@@ -4,7 +4,7 @@
 	displayStringBundleKey="poisson$rec.exp.title.poisson"
 	desktopLocationBundleKey="poisson$rec.exp.background.poisson" order="1">
 	<LocalizationBundle name="poisson"
-		location="recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages" />
 	<Display classLocationBundleKey="poisson$rec.exp.display.poisson.loc.anim"
 		toolTipBundleKey="poisson$rec.exp.display.poisson.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

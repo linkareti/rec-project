@@ -198,7 +198,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 
 	public static void main(String args[]) {
 		ReCResourceBundle.loadResourceBundle("ReCExpLooping",
-				"recresource:///pt/utl/ist/elab/client/vlooping/resources/messages);
+				"recresource:///pt/utl/ist/elab/client/vlooping/resources/messages");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new LoopingCustomizer());
 		dummy.pack();

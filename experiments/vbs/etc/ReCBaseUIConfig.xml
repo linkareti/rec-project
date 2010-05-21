@@ -4,7 +4,7 @@
 	displayStringBundleKey="bs$rec.exp.title.bs" desktopLocationBundleKey="bs$rec.exp.background.bs"
 	order="1">
 	<LocalizationBundle name="bs"
-		location="recresource:///pt/utl/ist/elab/client/vbs/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/vbs/resources/messages" />
 	<Display classLocationBundleKey="bs$rec.exp.display.bs.loc.anim"
 		toolTipBundleKey="bs$rec.exp.display.bs.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

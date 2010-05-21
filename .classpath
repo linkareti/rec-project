@@ -26,5 +26,6 @@
 	<classpathentry kind="lib" path="elab/lib/java/driver/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/jsr80.jar"/>
 	<classpathentry kind="lib" path="elab/lib/java/driver/jsr80_ri.jar"/>
+	<classpathentry kind="lib" path="elab/lib/java/driver/jmf.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

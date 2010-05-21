@@ -4,7 +4,7 @@
 	displayStringBundleKey="stdmap$rec.exp.title.stdmap"
 	desktopLocationBundleKey="stdmap$rec.exp.background.stdmap" order="1">
 	<LocalizationBundle name="stdmap"
-		location="recresource:///pt/utl/ist/elab/client/vstdmap/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/vstdmap/resources/messages" />
 	<Display classLocationBundleKey="stdmap$rec.exp.display.stdmap.loc.anim"
 		toolTipBundleKey="stdmap$rec.exp.display.stdmap.tip.anim"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

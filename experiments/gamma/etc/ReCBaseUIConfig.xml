@@ -4,7 +4,7 @@
 	displayStringBundleKey="gamma$rec.exp.title.gamma"
 	desktopLocationBundleKey="gamma$rec.exp.background.gamma" order="1">
 	<LocalizationBundle name="gamma"
-		location="recresource:///pt/utl/ist/elab/client/gamma/resources/messages />
+		location="recresource:///pt/utl/ist/elab/client/gamma/resources/messages" />
 	<Display classLocationBundleKey="gamma$rec.exp.display.gamma.loc.1"
 		toolTipBundleKey="gamma$rec.exp.display.gamma.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
