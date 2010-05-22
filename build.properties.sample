@@ -84,7 +84,6 @@ one-line=Estatistica de dados
 tootip=Estatistica de dados
 short=Estatistica de dados
 j2se-version=1.6
-main-class=pt.utl.ist.elab.client.FullClient
 properties=FullClient.properties
 
 
