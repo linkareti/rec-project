@@ -46,7 +46,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 
 	public static void main(String args[]) {
 
-		ReCResourceBundle.loadResourceBundle("ReCExpYoungInterf",
+		ReCResourceBundle.loadResourceBundle("younginterf",
 				"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages");
 
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
@@ -107,7 +107,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 
 		jPanelBtns.setLayout(new java.awt.GridBagLayout());
 
-		jButtonOK.setText(ReCResourceBundle.findStringOrDefault("ReCExpYoungInterf$rec.exp.customizer.title.ok", "OK"));
+		jButtonOK.setText(ReCResourceBundle.findStringOrDefault("younginterf$rec.exp.customizer.title.ok", "OK"));
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
@@ -117,7 +117,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jPanelOKCnl.add(jButtonOK);
 
 		jButtonCancel.setText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpYoungInterf$rec.exp.customizer.title.cancel", "Cancel"));
+				"younginterf$rec.exp.customizer.title.cancel", "Cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonCancelActionPerformed(evt);
@@ -132,7 +132,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jPanelBtns.add(jPanelOKCnl, gridBagConstraints);
 
 		jButtonDefaultConfig.setText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpYoungInterf$rec.exp.customizer.title.dfc", "Default config"));
+				"younginterf$rec.exp.customizer.title.dfc", "Default config"));
 		jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonDefaultConfigActionPerformed(evt);
@@ -154,7 +154,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jPanelLAD.setLayout(new javax.swing.BoxLayout(jPanelLAD, javax.swing.BoxLayout.Y_AXIS));
 
 		jPanelL.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpYoungInterf$rec.exp.customizer.title.1", "Wavelenght (\u03BB nm)")));
+				"younginterf$rec.exp.customizer.title.1", "Wavelenght (\u03BB nm)")));
 		jPanelWave.setLayout(new java.awt.BorderLayout());
 
 		jPanelL.add(jPanelWave);
@@ -175,7 +175,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jPanelAD.setLayout(new javax.swing.BoxLayout(jPanelAD, javax.swing.BoxLayout.X_AXIS));
 
 		jPanelA.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpYoungInterf$rec.exp.customizer.title.2", "Distance between slits (mm)")));
+				"younginterf$rec.exp.customizer.title.2", "Distance between slits (mm)")));
 		jSliderDFendas.setPaintLabels(true);
 		jSliderDFendas.setPaintTicks(true);
 		jSliderDFendas.setMinorTickSpacing(50);
@@ -205,7 +205,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jPanelAD.add(jPanelA);
 
 		jPanelD.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpYoungInterf$rec.exp.customizer.title.3", "Distance between planes (m)")));
+				"younginterf$rec.exp.customizer.title.3", "Distance between planes (m)")));
 		jSliderDPlanos.setPaintLabels(true);
 		jSliderDPlanos.setPaintTicks(true);
 		jSliderDPlanos.setMinorTickSpacing(50);
@@ -239,7 +239,7 @@ public class YoungInterfCustomizer extends javax.swing.JPanel implements
 		jPanelSliders.add(jPanelLAD);
 
 		jPanelArea.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpYoungInterf$rec.exp.customizer.title.5", "Projection area width (mm)")));
+				"younginterf$rec.exp.customizer.title.5", "Projection area width (mm)")));
 		jPanelArea.setVerifyInputWhenFocusTarget(false);
 		jSliderArea.setPaintLabels(true);
 		jSliderArea.setOrientation(javax.swing.JSlider.VERTICAL);

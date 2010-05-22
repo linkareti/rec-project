@@ -44,21 +44,21 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 	private int nPoints;
 
 	private static final String MAX_SAMPLES_STR = ReCResourceBundle
-			.findString("ReCExpStatSound$rec.exp.statsoud.lbl.maxsamples");
+			.findString("statsound$rec.exp.statsoud.lbl.maxsamples");
 
 	/** REC */
 	private HardwareInfo hardwareInfo = null;
 	private HardwareAcquisitionConfig acqConfig = null;
 	private final javax.swing.ImageIcon ICON = new javax.swing.ImageIcon(getClass().getResource(
 			"/pt/utl/ist/elab/client/statsound/resources/sound.gif"));
-	private final String TITLE = ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsoud.customizer.title");;
+	private final String TITLE = ReCResourceBundle.findString("statsound$rec.exp.statsoud.customizer.title");;
 
 	/** Creates new form StatSoundCustomizer */
 	public StatSoundCustomizer() {
 		initComponents();
 
-		String pink = ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsound.lbl.pink");
-		String pulse = ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsound.lbl.pulse");
+		String pink = ReCResourceBundle.findString("statsound$rec.exp.statsound.lbl.pink");
+		String pulse = ReCResourceBundle.findString("statsound$rec.exp.statsound.lbl.pulse");
 		jComboBoxSoundVel.addItem(pink);
 		jComboBoxSoundVel.addItem(pulse);
 
@@ -175,14 +175,14 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelTypeExp.setLayout(new java.awt.GridBagLayout());
 
 		jPanelTypeExp.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle
-				.findString("ReCExpStatSound$rec.exp.statsoud.lbl.type"),
+				.findString("statsound$rec.exp.statsoud.lbl.type"),
 				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 11),
 				new java.awt.Color(0, 0, 153)));
 		jRadioButtonStatWaves.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonStatWaves.setForeground(new java.awt.Color(0, 0, 153));
 		jRadioButtonStatWaves.setSelected(true);
-		jRadioButtonStatWaves.setText(ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsoud.lbl.stat"));
+		jRadioButtonStatWaves.setText(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.stat"));
 		buttonGroup1.add(jRadioButtonStatWaves);
 		jRadioButtonStatWaves.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,7 +197,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jRadioButtonVaryPiston.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonVaryPiston.setForeground(new java.awt.Color(0, 0, 153));
 		jRadioButtonVaryPiston.setSelected(true);
-		jRadioButtonVaryPiston.setText(ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsoud.lbl.vpiston"));
+		jRadioButtonVaryPiston.setText(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.vpiston"));
 		buttonGroup2.add(jRadioButtonVaryPiston);
 		jRadioButtonVaryPiston.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,7 +217,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelPiston.setLayout(new java.awt.GridBagLayout());
 
 		jPanelPiston.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle
-				.findString("ReCExpStatSound$rec.exp.statsoud.lbl.pistonend"),
+				.findString("statsound$rec.exp.statsoud.lbl.pistonend"),
 				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 11),
 				new java.awt.Color(0, 0, 153)));
@@ -274,7 +274,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
 		jRadioButtonVaryFreq.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonVaryFreq.setForeground(new java.awt.Color(0, 0, 153));
-		jRadioButtonVaryFreq.setText(ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsoud.lbl.vfreq"));
+		jRadioButtonVaryFreq.setText(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.vfreq"));
 		buttonGroup2.add(jRadioButtonVaryFreq);
 		jRadioButtonVaryFreq.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,7 +294,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelFrequency.setLayout(new java.awt.GridBagLayout());
 
 		jPanelFrequency.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle
-				.findString("ReCExpStatSound$rec.exp.statsoud.lbl.efreq"),
+				.findString("statsound$rec.exp.statsoud.lbl.efreq"),
 				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 11),
 				new java.awt.Color(0, 0, 153)));
@@ -361,7 +361,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
 		jRadioButtonSoundVel.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jRadioButtonSoundVel.setForeground(new java.awt.Color(0, 0, 153));
-		jRadioButtonSoundVel.setText(ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsoud.lbl.soundvel"));
+		jRadioButtonSoundVel.setText(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.soundvel"));
 		buttonGroup1.add(jRadioButtonSoundVel);
 		jRadioButtonSoundVel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,7 +385,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
 		jLabelSoundVel.setFont(new java.awt.Font("Comic Sans MS", 0, 12));
 		jLabelSoundVel.setForeground(new java.awt.Color(0, 0, 153));
-		jLabelSoundVel.setText(ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsoud.lbl.waveform"));
+		jLabelSoundVel.setText(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.waveform"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
@@ -403,14 +403,14 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelGenConfs.setLayout(new java.awt.GridBagLayout());
 
 		jPanelGenConfs.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle
-				.findString("ReCExpStatSound$rec.exp.statsoud.lbl.mainpars"),
+				.findString("statsound$rec.exp.statsoud.lbl.mainpars"),
 				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 11),
 				new java.awt.Color(0, 0, 153)));
 		jPanelMics.setLayout(new java.awt.GridBagLayout());
 
 		jPanelMics.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle
-				.findString("ReCExpStatSound$rec.exp.statsoud.lbl.channels"),
+				.findString("statsound$rec.exp.statsoud.lbl.channels"),
 				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 11),
 				new java.awt.Color(0, 0, 153)));
@@ -526,13 +526,13 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
 		jCheckBoxHeat.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jCheckBoxHeat.setForeground(new java.awt.Color(0, 0, 153));
-		jCheckBoxHeat.setText(ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsoud.lbl.heating"));
+		jCheckBoxHeat.setText(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.heating"));
 		jPanelGenConfs.add(jCheckBoxHeat, new java.awt.GridBagConstraints());
 
 		jPanelPistonIni.setLayout(new java.awt.GridBagLayout());
 
 		jPanelPistonIni.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle
-				.findString("ReCExpStatSound$rec.exp.statsoud.lbl.pistonstart"),
+				.findString("statsound$rec.exp.statsoud.lbl.pistonstart"),
 				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 11),
 				new java.awt.Color(0, 0, 153)));
@@ -589,7 +589,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelFrequencyIni.setLayout(new java.awt.GridBagLayout());
 
 		jPanelFrequencyIni.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle
-				.findString("ReCExpStatSound$rec.exp.statsoud.lbl.freqstart"),
+				.findString("statsound$rec.exp.statsoud.lbl.freqstart"),
 				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 11),
 				new java.awt.Color(0, 0, 153)));
@@ -646,7 +646,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelNSamples.setLayout(new java.awt.GridBagLayout());
 
 		jPanelNSamples.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle
-				.findString("ReCExpStatSound$rec.exp.statsoud.lbl.nsamples"),
+				.findString("statsound$rec.exp.statsoud.lbl.nsamples"),
 				javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 11),
 				new java.awt.Color(0, 0, 153)));
@@ -675,7 +675,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
 		jLabelNSamplesAlert.setFont(new java.awt.Font("Dialog", 3, 12));
 		jLabelNSamplesAlert.setForeground(new java.awt.Color(255, 51, 51));
-		jLabelNSamplesAlert.setText(ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsoud.lbl.maxsamples"));
+		jLabelNSamplesAlert.setText(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.maxsamples"));
 		jLabelNSamplesAlert.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -712,7 +712,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 		jPanelSend.setPreferredSize(new java.awt.Dimension(350, 42));
 		jButtonOK.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jButtonOK.setForeground(new java.awt.Color(0, 0, 153));
-		jButtonOK.setText(ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsoud.lbl.ok"));
+		jButtonOK.setText(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.ok"));
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
@@ -726,7 +726,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
 		jButtonCancel.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jButtonCancel.setForeground(new java.awt.Color(0, 0, 153));
-		jButtonCancel.setText(ReCResourceBundle.findString("ReCExpStatSound$rec.exp.statsoud.lbl.cancel"));
+		jButtonCancel.setText(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonCancelActionPerformed(evt);
@@ -747,7 +747,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
 		jButtonDefaults.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
 		jButtonDefaults.setForeground(new java.awt.Color(0, 0, 153));
-		jButtonDefaults.setText(ReCResourceBundle.findString("ReCExpStatSound$rec.exp.dftcfg.statsound.title.1"));
+		jButtonDefaults.setText(ReCResourceBundle.findString("statsound$rec.exp.dftcfg.statsound.title.1"));
 		jButtonDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonDefaultsActionPerformed(evt);

@@ -29,12 +29,12 @@ public class AnimationOscilador extends javax.swing.JPanel implements ExpDataDis
 	/** Creates new form Animation */
 	public AnimationOscilador() {
 		painel2DLateralFixo = new PlottingPanel("x(m)", "z(m)", ReCResourceBundle.findStringOrDefault(
-				"ReCExpOscilador$rec.exp.display.oscilador.title.anim1", "2D Lateral Fixed Animation"));
+				"oscilador$rec.exp.display.oscilador.title.anim1", "2D Lateral Fixed Animation"));
 		painel2DLateral = new PlottingPanel(ReCResourceBundle.findStringOrDefault(
-				"ReCExpOscilador$rec.exp.display.oscilador.title.anim2", "Radius (m)"), "z(m)", ReCResourceBundle
-				.findStringOrDefault("ReCExpOscilador$rec.exp.display.oscilador.title.anim3", "2D Lateral Animation"));
+				"oscilador$rec.exp.display.oscilador.title.anim2", "Radius (m)"), "z(m)", ReCResourceBundle
+				.findStringOrDefault("oscilador$rec.exp.display.oscilador.title.anim3", "2D Lateral Animation"));
 		painel2DSuperior = new PlottingPanel("y(m)", "x(m)", ReCResourceBundle.findStringOrDefault(
-				"ReCExpOscilador$rec.exp.display.oscilador.title.anim4", "2D Superior Animation"));
+				"oscilador$rec.exp.display.oscilador.title.anim4", "2D Superior Animation"));
 
 		contaLateralFixa = new Circle();
 		contaLateral = new Circle();

@@ -58,7 +58,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		setToolTipText("");
 		setName("AleatorioCustomizerComponent");
 		numberOfSamplesPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpAleatorio$rec.exp.aleatorio.lbl.nsamples")));
+				.findString("aleatorio$rec.exp.aleatorio.lbl.nsamples")));
 		numberOfSamplesPanel.setName("numberOfSamplesPanel");
 		numberOfSamplesSlider.setMajorTickSpacing(4);
 		numberOfSamplesSlider.setMaximum(20);
@@ -106,7 +106,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		add(numberOfSamplesPanel, new java.awt.GridBagConstraints());
 
 		soundDuration.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpAleatorio$rec.exp.aleatorio.lbl.sounddur")));
+				.findString("aleatorio$rec.exp.aleatorio.lbl.sounddur")));
 		soundDuration.setName("soundDuration");
 		soundDurationSlider.setMajorTickSpacing(1700);
 		soundDurationSlider.setMaximum(10000);
@@ -144,14 +144,14 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 1;
 		add(soundDuration, gridBagConstraints);
 
-		watchMovieCheckBox.setText(ReCResourceBundle.findString("ReCExpAleatorio$rec.exp.aleatorio.lbl.wmovie"));
+		watchMovieCheckBox.setText(ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.lbl.wmovie"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
 		add(watchMovieCheckBox, gridBagConstraints);
 
 		okButton.setMnemonic('o');
-		okButton.setText(ReCResourceBundle.findString("ReCExpAleatorio$rec.exp.aleatorio.lbl.ok"));
+		okButton.setText(ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.lbl.ok"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				okButtonActionPerformedHandler(evt);
@@ -161,7 +161,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		buttonsPanel.add(okButton);
 
 		cancelButton.setMnemonic('c');
-		cancelButton.setText(ReCResourceBundle.findString("ReCExpAleatorio$rec.exp.aleatorio.lbl.cancel"));
+		cancelButton.setText(ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.lbl.cancel"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				cancelButtonActionPerformedHandler(evt);
@@ -188,7 +188,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		frequency1Slider.setToolTipText("Select the Initial frequency of the sound wave.");
 		frequency1Slider.setValue(48);
 		frequency1Slider.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpAleatorio$rec.exp.aleatorio.lbl.1freq")));
+				.findString("aleatorio$rec.exp.aleatorio.lbl.1freq")));
 		frequency1Slider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
 			public void mouseDragged(java.awt.event.MouseEvent evt) {
 				frequency1SliderMouseDraggedHandler(evt);
@@ -207,7 +207,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		frequency2Slider.setToolTipText("Select the final frequency of the sound wave.");
 		frequency2Slider.setValue(32);
 		frequency2Slider.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpAleatorio$rec.exp.aleatorio.lbl.ffreq")));
+				.findString("aleatorio$rec.exp.aleatorio.lbl.ffreq")));
 		frequency2Slider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
 			public void mouseDragged(java.awt.event.MouseEvent evt) {
 				frequency2SliderMouseDraggedHandler(evt);
@@ -520,7 +520,7 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpAleatorio$rec.exp.aleatorio.customizer.title");
+		return ReCResourceBundle.findString("aleatorio$rec.exp.aleatorio.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

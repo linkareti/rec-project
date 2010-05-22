@@ -29,7 +29,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelListener {
 
 	private PlottingPanel panel = new PlottingPanel("X (m)", "Y (m)", ReCResourceBundle.findStringOrDefault(
-			"ReCExpColisao$rec.exp.customizer.title.graph", "Trajectory"));
+			"colisao$rec.exp.customizer.title.graph", "Trajectory"));
 	private DatasetManager dataset = null;
 	Arrow[] vects = new Arrow[2];
 	DrawableShape[] circulos = new DrawableShape[2];
@@ -49,7 +49,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	}
 
 	public static void main(String args[]) {
-		ReCResourceBundle.loadResourceBundle("ReCExpColisao",
+		ReCResourceBundle.loadResourceBundle("colisao",
 				"recresource:///pt/utl/ist/elab/client/vcolisao/resources/messages");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Animation());

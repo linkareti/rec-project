@@ -67,15 +67,15 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		jPanel4.setLayout(new java.awt.GridBagLayout());
 
 		jPanel4.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpT$rec.exp.t.lbl.mode")));
+				.findString("conducaocalor$rec.exp.t.lbl.mode")));
 		jRadioButtonOsc.setSelected(true);
-		jRadioButtonOsc.setText(ReCResourceBundle.findString("ReCExpT$rec.exp.t.lbl.osc"));
+		jRadioButtonOsc.setText(ReCResourceBundle.findString("conducaocalor$rec.exp.t.lbl.osc"));
 		buttonGroup1.add(jRadioButtonOsc);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		jPanel4.add(jRadioButtonOsc, gridBagConstraints);
 
-		jRadioButtonEst.setText(ReCResourceBundle.findString("ReCExpT$rec.exp.t.lbl.stat"));
+		jRadioButtonEst.setText(ReCResourceBundle.findString("conducaocalor$rec.exp.t.lbl.stat"));
 		buttonGroup1.add(jRadioButtonEst);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -91,7 +91,7 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpT$rec.exp.t.lbl.heattime")));
+				.findString("conducaocalor$rec.exp.t.lbl.heattime")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 80));
 		jSliderAqc.setMajorTickSpacing(20);
@@ -132,7 +132,7 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel1
 				.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-						.findString("ReCExpT$rec.exp.t.lbl.tbs")));
+						.findString("conducaocalor$rec.exp.t.lbl.tbs")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		jSliderTBS.setMajorTickSpacing(1);
@@ -178,7 +178,7 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
 		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpT$rec.exp.t.lbl.nsamples")));
+				.findString("conducaocalor$rec.exp.t.lbl.nsamples")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -225,7 +225,7 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jLabelInfo.setForeground(new java.awt.Color(255, 0, 0));
 		jLabelInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelInfo.setText(ReCResourceBundle.findString("ReCExpT$rec.exp.t.lbl.exptime"));
+		jLabelInfo.setText(ReCResourceBundle.findString("conducaocalor$rec.exp.t.lbl.exptime"));
 		jLabelInfo.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -241,7 +241,7 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		jPanel8.setLayout(new java.awt.GridBagLayout());
 
 		jPanel8.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpT$rec.exp.t.lbl.maxtemp")));
+				.findString("conducaocalor$rec.exp.t.lbl.maxtemp")));
 		jPanel8.setMinimumSize(new java.awt.Dimension(170, 85));
 		jPanel8.setPreferredSize(new java.awt.Dimension(170, 85));
 		jSliderTMax.setMajorTickSpacing(10);
@@ -289,7 +289,7 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findString("ReCExpT$rec.exp.t.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findString("conducaocalor$rec.exp.t.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -301,7 +301,7 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("ReCExpT$rec.exp.t.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findString("conducaocalor$rec.exp.t.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -320,7 +320,7 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("ReCExpT$rec.exp.t.lbl.dftacq"));
+		btnDefaults.setText(ReCResourceBundle.findString("conducaocalor$rec.exp.t.lbl.dftacq"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -440,12 +440,12 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		if (duration > 1500) {
 			jLabelInfo.setEnabled(true);
-			jLabelInfo.setText(ReCResourceBundle.findString("ReCExpT$rec.exp.t.lbl.maxsamples") + " <= "
+			jLabelInfo.setText(ReCResourceBundle.findString("conducaocalor$rec.exp.t.lbl.maxsamples") + " <= "
 					+ (1500 / jSliderTBS.getValue()));
 			btnOK.setEnabled(false);
 		} else {
 			jLabelInfo.setEnabled(false);
-			jLabelInfo.setText(ReCResourceBundle.findString("ReCExpT$rec.exp.t.lbl.exptime") + " " + duration + " s");
+			jLabelInfo.setText(ReCResourceBundle.findString("conducaocalor$rec.exp.t.lbl.exptime") + " " + duration + " s");
 			btnOK.setEnabled(true);
 		}
 	}
@@ -645,7 +645,7 @@ public class TCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpT$rec.exp.t.customizer.title");
+		return ReCResourceBundle.findString("conducaocalor$rec.exp.t.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

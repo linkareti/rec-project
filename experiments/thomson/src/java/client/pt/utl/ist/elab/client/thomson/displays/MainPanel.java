@@ -215,7 +215,7 @@ public class MainPanel extends javax.swing.JPanel implements com.linkare.rec.imp
 	}
 
 	public String getName() {
-		return ReCResourceBundle.findStringOrDefault("ReCExpThomson$rec.exp.display.thomson.title.sensor", "Sensors");
+		return ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.thomson.title.sensor", "Sensors");
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

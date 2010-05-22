@@ -29,7 +29,7 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 
 	public Superficies() {
 		initComponents();
-		painel.setMessage(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.14",
+		painel.setMessage(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.14",
 				"Ajust the slider to visualise more equimodal surfaces"));
 	}
 
@@ -58,7 +58,7 @@ public class Superficies extends javax.swing.JPanel implements ExpDataDisplay, E
 
 		jSlider1.setMaximum(19);
 		jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
-		jSlider1.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.13",
+		jSlider1.setToolTipText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.13",
 				"Ajust the slider to visualise more equimodal surfaces"));
 		jSlider1.setValue(0);
 		jSlider1.setEnabled(false);

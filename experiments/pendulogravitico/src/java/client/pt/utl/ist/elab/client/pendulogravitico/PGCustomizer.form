@@ -39,7 +39,7 @@
         <Component class="javax.swing.JButton" name="btnOK">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.ok" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPG${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.ok" replaceFormat="ReCResourceBundle.findString(&quot;pendulogravitico${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -54,7 +54,7 @@
         <Component class="javax.swing.JButton" name="btnCancel">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.cancel" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPG${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.cancel" replaceFormat="ReCResourceBundle.findString(&quot;pendulogravitico${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -76,7 +76,7 @@
         <Component class="javax.swing.JButton" name="btnDefaults">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.dftacq" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPG${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.dftacq" replaceFormat="ReCResourceBundle.findString(&quot;pendulogravitico${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -121,7 +121,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Initial Angle [º]">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.iniang" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPG${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.iniang" replaceFormat="ReCResourceBundle.findString(&quot;pendulogravitico${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -203,7 +203,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Number of samples">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.ns" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPG${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.ns" replaceFormat="ReCResourceBundle.findString(&quot;pendulogravitico${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -308,7 +308,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Frequency [Hz]">
-                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.freq" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPG${key}&quot;)"/>
+                  <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.freq" replaceFormat="ReCResourceBundle.findString(&quot;pendulogravitico${key}&quot;)"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -395,7 +395,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Initial Height [cm]">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.iniheight" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPG${key}&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/pendulogravitico/resources/messages.properties" key="rec.exp.lbl.pg.iniheight" replaceFormat="ReCResourceBundle.findString(&quot;pendulogravitico${key}&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>

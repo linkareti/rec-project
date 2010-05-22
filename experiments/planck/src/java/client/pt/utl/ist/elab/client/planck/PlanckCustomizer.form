@@ -52,7 +52,7 @@
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.1.check.1" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.1.check.1" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                 </Property>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
@@ -70,7 +70,7 @@
             <Component class="javax.swing.JRadioButton" name="jRadioButtonFix">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.1.check.2" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                  <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.1.check.2" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                 </Property>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
@@ -105,7 +105,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Filters">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -127,7 +127,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Filter 1">
-                          <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.1" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                          <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.1" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                         </TitledBorder>
                       </Border>
                     </Property>
@@ -151,7 +151,7 @@
                         </Property>
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.1.check.1" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                          <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.1.check.1" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                         </Property>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="buttonGroup2"/>
@@ -164,7 +164,7 @@
                           <Color blue="0" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.1.check.2" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                          <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.1.check.2" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                         </Property>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="buttonGroup2"/>
@@ -177,7 +177,7 @@
                           <Color blue="0" green="cc" red="66" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.1.check.3" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                          <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.1.check.3" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                         </Property>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="buttonGroup2"/>
@@ -190,7 +190,7 @@
                           <Color blue="b9" green="b9" red="b9" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.1.check.4" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                          <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.1.check.4" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                         </Property>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="buttonGroup2"/>
@@ -204,7 +204,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Filter 2">
-                          <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.2" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                          <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.2.2" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                         </TitledBorder>
                       </Border>
                     </Property>
@@ -297,7 +297,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Angular position">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.3" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.3" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -368,7 +368,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Number of samples">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.4" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.customizer.title.4" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -464,7 +464,7 @@
         <Component class="javax.swing.JButton" name="btnOK">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.planck.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.planck.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -479,7 +479,7 @@
         <Component class="javax.swing.JButton" name="btnCancel">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.planck.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.planck.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -501,7 +501,7 @@
         <Component class="javax.swing.JButton" name="btnDefaults">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.dftcfg.planck.title.1" replaceFormat="ReCResourceBundle.findString(&quot;ReCExpPlanck${key}&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/planck/resources/messages.properties" key="rec.exp.dftcfg.planck.title.1" replaceFormat="ReCResourceBundle.findString(&quot;planck${key}&quot;)"/>
             </Property>
           </Properties>
           <Events>

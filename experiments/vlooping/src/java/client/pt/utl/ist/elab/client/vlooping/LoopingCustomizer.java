@@ -87,7 +87,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		dx = 0.01;
 
 		dpanel = new PlottingPanel("x (m)", "y (m)", ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.graph", "Trajectory"));// new
+				"looping$rec.exp.customizer.title.graph", "Trajectory"));// new
 		// DrawingPanel();
 		dpanel.setPreferredSize(new java.awt.Dimension(267, 100));
 		panelPreview.add(dpanel);
@@ -137,7 +137,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 	public void updateTimer() {
 		float expDuration = jSliderSamples.getValue() * jSliderTBS.getValue();
 		expDuration /= 1000;
-		jLabelExpTime.setText(ReCResourceBundle.findStringOrDefault("ReCExpLooping$rec.exp.customizer.title.timer",
+		jLabelExpTime.setText(ReCResourceBundle.findStringOrDefault("looping$rec.exp.customizer.title.timer",
 				"Experiment Duration: ")
 				+ expDuration + " s");
 	}
@@ -197,7 +197,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 	}
 
 	public static void main(String args[]) {
-		ReCResourceBundle.loadResourceBundle("ReCExpLooping",
+		ReCResourceBundle.loadResourceBundle("looping",
 				"recresource:///pt/utl/ist/elab/client/vlooping/resources/messages");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new LoopingCustomizer());
@@ -263,7 +263,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		panelPreview.setLayout(new java.awt.BorderLayout());
 
 		panelPreview.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.1", "System Preview")));
+				"looping$rec.exp.customizer.title.1", "System Preview")));
 		panelRoot2.add(panelPreview, java.awt.BorderLayout.CENTER);
 
 		panelTime.setLayout(new java.awt.BorderLayout());
@@ -273,8 +273,8 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanelTBS.setLayout(new java.awt.BorderLayout());
 
 		jPanelTBS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.tbs", "TBS")));
-		jPanelTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpLooping$rec.exp.customizer.tip.tbs",
+				"looping$rec.exp.customizer.title.tbs", "TBS")));
+		jPanelTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("looping$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		jPanelTBS.setVerifyInputWhenFocusTarget(false);
 		jSliderTBS.setPaintLabels(true);
@@ -283,7 +283,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderTBS.setMinorTickSpacing(2);
 		jSliderTBS.setMajorTickSpacing(10);
 		jSliderTBS.setMinimum(5);
-		jSliderTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpLooping$rec.exp.customizer.tip.tbs",
+		jSliderTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("looping$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		jSliderTBS.setMaximum(55);
 		jSliderTBS.setSnapToTicks(true);
@@ -311,8 +311,8 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanelNS.setLayout(new java.awt.BorderLayout());
 
 		jPanelNS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.samples", "N Samples")));
-		jPanelNS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpLooping$rec.exp.customizer.tip.samples",
+				"looping$rec.exp.customizer.title.samples", "N Samples")));
+		jPanelNS.setToolTipText(ReCResourceBundle.findStringOrDefault("looping$rec.exp.customizer.tip.samples",
 				"Number of samples"));
 		jPanelNS.setVerifyInputWhenFocusTarget(false);
 		jSliderSamples.setPaintLabels(true);
@@ -323,7 +323,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderSamples.setValue(100);
 		jSliderSamples.setMinimum(10);
 		jSliderSamples.setToolTipText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.tip.samples", "Number of samples"));
+				"looping$rec.exp.customizer.tip.samples", "Number of samples"));
 		jSliderSamples.setMaximum(1110);
 		jSliderSamples.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -358,7 +358,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars1.setLayout(new java.awt.BorderLayout());
 
 		jPanelG.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.4", "Gravitational acceleration")));
+				"looping$rec.exp.customizer.title.4", "Gravitational acceleration")));
 		jSliderG.setPaintLabels(true);
 		jSliderG.setPaintTicks(true);
 		jSliderG.setMinorTickSpacing(50);
@@ -387,7 +387,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars1.add(jPanelG, java.awt.BorderLayout.SOUTH);
 
 		jPanelVi.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.3", "Initial velocity")));
+				"looping$rec.exp.customizer.title.3", "Initial velocity")));
 		jPanelVi.setEnabled(false);
 		jSliderVi.setPaintLabels(true);
 		jSliderVi.setPaintTicks(true);
@@ -417,7 +417,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars1.add(jPanelVi, java.awt.BorderLayout.CENTER);
 
 		jPanelXi.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.2", "Initial position")));
+				"looping$rec.exp.customizer.title.2", "Initial position")));
 		jSliderXi.setPaintLabels(true);
 		jSliderXi.setPaintTicks(true);
 		jSliderXi.setMinorTickSpacing(5);
@@ -445,13 +445,13 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 
 		panelVars1.add(jPanelXi, java.awt.BorderLayout.NORTH);
 
-		tabVars.addTab(ReCResourceBundle.findStringOrDefault("ReCExpLooping$rec.exp.customizer.title.8",
+		tabVars.addTab(ReCResourceBundle.findStringOrDefault("looping$rec.exp.customizer.title.8",
 				"Particle Settings"), panelVars1);
 
 		panelVars2.setLayout(new java.awt.BorderLayout());
 
 		jPanelH2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.6", "Second Height (m)")));
+				"looping$rec.exp.customizer.title.6", "Second Height (m)")));
 		jSliderH2.setPaintLabels(true);
 		jSliderH2.setPaintTicks(true);
 		jSliderH2.setMinorTickSpacing(50);
@@ -480,7 +480,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars2.add(jPanelH2, java.awt.BorderLayout.CENTER);
 
 		jPanelH1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.5", "First Height (m)")));
+				"looping$rec.exp.customizer.title.5", "First Height (m)")));
 		jSliderH1.setPaintLabels(true);
 		jSliderH1.setPaintTicks(true);
 		jSliderH1.setMinorTickSpacing(50);
@@ -509,7 +509,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars2.add(jPanelH1, java.awt.BorderLayout.NORTH);
 
 		jPanelR.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.7", "Looping Radius (m)")));
+				"looping$rec.exp.customizer.title.7", "Looping Radius (m)")));
 		jSliderR.setPaintLabels(true);
 		jSliderR.setPaintTicks(true);
 		jSliderR.setMinorTickSpacing(25);
@@ -538,7 +538,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 
 		panelVars2.add(jPanelR, java.awt.BorderLayout.SOUTH);
 
-		tabVars.addTab(ReCResourceBundle.findStringOrDefault("ReCExpLooping$rec.exp.customizer.title.9",
+		tabVars.addTab(ReCResourceBundle.findStringOrDefault("looping$rec.exp.customizer.title.9",
 				"Track Settings"), panelVars2);
 
 		panelRoot.add(tabVars, java.awt.BorderLayout.SOUTH);
@@ -547,7 +547,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanelBtns.setLayout(new java.awt.GridBagLayout());
 
-		jButtonOK.setText(ReCResourceBundle.findStringOrDefault("ReCExpLooping$rec.exp.customizer.title.ok", "OK"));
+		jButtonOK.setText(ReCResourceBundle.findStringOrDefault("looping$rec.exp.customizer.title.ok", "OK"));
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
@@ -556,7 +556,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanelOKCnl.add(jButtonOK);
 
-		jButtonCancel.setText(ReCResourceBundle.findStringOrDefault("ReCExpLooping$rec.exp.customizer.title.cancel",
+		jButtonCancel.setText(ReCResourceBundle.findStringOrDefault("looping$rec.exp.customizer.title.cancel",
 				"Cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -572,7 +572,7 @@ public class LoopingCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanelBtns.add(jPanelOKCnl, gridBagConstraints);
 
 		jButtonDefaultConfig.setText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpLooping$rec.exp.customizer.title.dfc", "Default Configuration"));
+				"looping$rec.exp.customizer.title.dfc", "Default Configuration"));
 		jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonDefaultConfigActionPerformed(evt);

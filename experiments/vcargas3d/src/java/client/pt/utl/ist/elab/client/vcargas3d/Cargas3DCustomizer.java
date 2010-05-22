@@ -131,7 +131,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 
 	// ESTE � PARA ALTERAR
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.12",
+		return ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.12",
 				"3D Charges Experiment Configuration Utility");
 	}
 
@@ -190,7 +190,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		buttonDefault = new javax.swing.JButton();
 
 		painelAdd.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle.findStringOrDefault(
-				"ReCExpCargas3D$rec.exp.customizer.title.2", "Add Charge"), javax.swing.border.TitledBorder.CENTER,
+				"cargas3d$rec.exp.customizer.title.2", "Add Charge"), javax.swing.border.TitledBorder.CENTER,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14)));
 		painelComum.setLayout(new java.awt.GridBagLayout());
 
@@ -233,7 +233,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 3);
 		painelComum.add(labelZ, gridBagConstraints);
 
-		labelQ.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.4", "Charge"));
+		labelQ.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.4", "Charge"));
 		labelQ.setMaximumSize(new java.awt.Dimension(40, 15));
 		labelQ.setMinimumSize(new java.awt.Dimension(40, 15));
 		labelQ.setPreferredSize(new java.awt.Dimension(40, 15));
@@ -340,7 +340,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
 		painelComum.add(labelQU, gridBagConstraints);
 
-		labelInfoX.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.6",
+		labelInfoX.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.6",
 				"position values"));
 		labelInfoX.setMaximumSize(new java.awt.Dimension(100, 15));
 		labelInfoX.setMinimumSize(new java.awt.Dimension(100, 15));
@@ -353,7 +353,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelComum.add(labelInfoX, gridBagConstraints);
 
 		labelInfoY.setText(ReCResourceBundle
-				.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.7", "between"));
+				.findStringOrDefault("cargas3d$rec.exp.customizer.title.7", "between"));
 		labelInfoY.setMaximumSize(new java.awt.Dimension(100, 15));
 		labelInfoY.setMinimumSize(new java.awt.Dimension(100, 15));
 		labelInfoY.setPreferredSize(new java.awt.Dimension(100, 15));
@@ -365,7 +365,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelComum.add(labelInfoY, gridBagConstraints);
 
 		labelInfoZ.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		labelInfoZ.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.8",
+		labelInfoZ.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.8",
 				"10 and -10"));
 		labelInfoZ.setMaximumSize(new java.awt.Dimension(100, 15));
 		labelInfoZ.setMinimumSize(new java.awt.Dimension(100, 15));
@@ -378,7 +378,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelComum.add(labelInfoZ, gridBagConstraints);
 
 		labelInfoQ.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		labelInfoQ.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.9",
+		labelInfoQ.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.9",
 				"between -25 and 25"));
 		labelInfoQ.setMaximumSize(new java.awt.Dimension(120, 15));
 		labelInfoQ.setMinimumSize(new java.awt.Dimension(120, 15));
@@ -391,7 +391,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 
 		painelAdd.add(painelComum);
 
-		addButton.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.2",
+		addButton.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.2",
 				"Add Charge"));
 		addButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -402,7 +402,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelAdd.add(addButton);
 
 		painelEdit.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle.findStringOrDefault(
-				"ReCExpCargas3D$rec.exp.customizer.title.3", "Edit Charge"), javax.swing.border.TitledBorder.CENTER,
+				"cargas3d$rec.exp.customizer.title.3", "Edit Charge"), javax.swing.border.TitledBorder.CENTER,
 				javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14)));
 		painelComum1.setLayout(new java.awt.GridBagLayout());
 
@@ -445,7 +445,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 3);
 		painelComum1.add(labelZ1, gridBagConstraints);
 
-		labelQ1.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.4", "Charge"));
+		labelQ1.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.4", "Charge"));
 		labelQ1.setMaximumSize(new java.awt.Dimension(40, 15));
 		labelQ1.setMinimumSize(new java.awt.Dimension(40, 15));
 		labelQ1.setPreferredSize(new java.awt.Dimension(40, 15));
@@ -552,7 +552,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
 		painelComum1.add(labelQU1, gridBagConstraints);
 
-		labelInfoX1.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.6",
+		labelInfoX1.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.6",
 				"position values"));
 		labelInfoX1.setMaximumSize(new java.awt.Dimension(100, 15));
 		labelInfoX1.setMinimumSize(new java.awt.Dimension(100, 15));
@@ -564,7 +564,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
 		painelComum1.add(labelInfoX1, gridBagConstraints);
 
-		labelInfoY1.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.7",
+		labelInfoY1.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.7",
 				"between"));
 		labelInfoY1.setMaximumSize(new java.awt.Dimension(100, 15));
 		labelInfoY1.setMinimumSize(new java.awt.Dimension(100, 15));
@@ -577,7 +577,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelComum1.add(labelInfoY1, gridBagConstraints);
 
 		labelInfoZ1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		labelInfoZ1.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.8",
+		labelInfoZ1.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.8",
 				"10 and -10"));
 		labelInfoZ1.setMaximumSize(new java.awt.Dimension(100, 15));
 		labelInfoZ1.setMinimumSize(new java.awt.Dimension(100, 15));
@@ -590,7 +590,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelComum1.add(labelInfoZ1, gridBagConstraints);
 
 		labelInfoQ1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		labelInfoQ1.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.9",
+		labelInfoQ1.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.9",
 				"between -25 and 25"));
 		labelInfoQ1.setMaximumSize(new java.awt.Dimension(120, 15));
 		labelInfoQ1.setMinimumSize(new java.awt.Dimension(120, 15));
@@ -612,7 +612,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 
 		painelEdit.add(editOK);
 
-		editApagar.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.5",
+		editApagar.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.5",
 				"remove charge"));
 		editApagar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -638,13 +638,13 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		painelSistema.setMinimumSize(new java.awt.Dimension(400, 400));
 		painelSistema.setPreferredSize(new java.awt.Dimension(400, 400));
 		painelSistema.add(painelCargas);
-		painelTabs.addTab(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.1", "System"),
+		painelTabs.addTab(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.1", "System"),
 				painelSistema);
 
 		painelAddEdit.setLayout(new java.awt.BorderLayout());
 
 		painelAddEdit.add(painelAdd);
-		painelTabs.addTab(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.2",
+		painelTabs.addTab(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.2",
 				"Add Charge"), painelAddEdit);
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -668,7 +668,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 
 		panelDefault.add(buttonOK, new java.awt.GridBagConstraints());
 
-		buttonCancel.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.cancel",
+		buttonCancel.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.cancel",
 				"Cancel"));
 		buttonCancel.setMaximumSize(new java.awt.Dimension(130, 23));
 		buttonCancel.setMinimumSize(new java.awt.Dimension(130, 23));
@@ -681,7 +681,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 
 		panelDefault.add(buttonCancel, new java.awt.GridBagConstraints());
 
-		buttonDefault.setText(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.dfc",
+		buttonDefault.setText(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.dfc",
 				"Default Config"));
 		buttonDefault.setMaximumSize(new java.awt.Dimension(140, 23));
 		buttonDefault.setMinimumSize(new java.awt.Dimension(140, 23));
@@ -789,7 +789,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		if (painelTabs.getSelectedIndex() == 0 && painelTabs.getTabCount() == 2) {
 			painelTabs.remove(1);
 			painelTabs.add(painelAdd, 1);
-			painelTabs.setTitleAt(1, ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.2",
+			painelTabs.setTitleAt(1, ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.2",
 					"Add Charge"));
 		}
 	}// GEN-LAST:event_painelTabsStateChanged
@@ -820,7 +820,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 				painelTabs.add(painelEdit, 1);
 				painelTabs.setSelectedIndex(1);
 				painelTabs.setTitleAt(1, ReCResourceBundle.findStringOrDefault(
-						"ReCExpCargas3D$rec.exp.customizer.title.3", "Edit Charge"));
+						"cargas3d$rec.exp.customizer.title.3", "Edit Charge"));
 				setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 				carga.getStyle().setFillPattern(cor);
 
@@ -842,7 +842,7 @@ public class Cargas3DCustomizer extends javax.swing.JPanel implements
 		Interaction interaction = new Interaction();
 
 		public PainelCargas() {
-			setMessage(ReCResourceBundle.findStringOrDefault("ReCExpCargas3D$rec.exp.customizer.title.11",
+			setMessage(ReCResourceBundle.findStringOrDefault("cargas3d$rec.exp.customizer.title.11",
 					"Click on a charge to edit it."));
 			setPreferredSize(new java.awt.Dimension(400, 400));
 			setPreferredMinMax(0, 10, 0, 10, 0, 10);

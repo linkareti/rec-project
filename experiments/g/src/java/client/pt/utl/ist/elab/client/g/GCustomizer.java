@@ -59,7 +59,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findString("ReCExpG$rec.exp.g.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -71,7 +71,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("ReCExpG$rec.exp.g.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -90,7 +90,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("ReCExpG$rec.exp.g.lbl.dftcfg"));
+		btnDefaults.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.dftcfg"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -156,7 +156,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		jPanel1
 				.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-						.findString("ReCExpG$rec.exp.g.lbl.tbs")));
+						.findString("g$rec.exp.g.lbl.tbs")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldFreq.setMajorTickSpacing(40);
@@ -202,7 +202,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
 		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpG$rec.exp.g.lbl.nsamples")));
+				.findString("g$rec.exp.g.lbl.nsamples")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -249,7 +249,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 
 		lblErrorSamplesTooHigh.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorSamplesTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("ReCExpG$rec.exp.g.lbl.maxsamples"));
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.maxsamples"));
 		lblErrorSamplesTooHigh.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -346,7 +346,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 		float maxValue = Math.min(500.F, 500.F - ((float) sldFreq.getValue() - 1.F) * 480.F / 249.F);
 		lblErrorSamplesTooHigh.setEnabled(sldNumSamples.getValue() > maxValue);
 		btnOK.setEnabled(!lblErrorSamplesTooHigh.isEnabled());
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("ReCExpG$rec.exp.g.lbl.maxsamples")
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.maxsamples")
 				+ (int) maxValue);
 	}
 
@@ -493,7 +493,7 @@ public class GCustomizer extends javax.swing.JPanel implements com.linkare.rec.i
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpG$rec.exp.g.customizer.title");
+		return ReCResourceBundle.findString("g$rec.exp.g.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

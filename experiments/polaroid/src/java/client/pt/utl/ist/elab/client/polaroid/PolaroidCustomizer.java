@@ -64,7 +64,7 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findString("ReCExpPolaroid$rec.exp.polaroid.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findString("polaroid$rec.exp.polaroid.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -76,7 +76,7 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("ReCExpPolaroid$rec.exp.polaroid.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findString("polaroid$rec.exp.polaroid.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -95,7 +95,7 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("ReCExpPolaroid$rec.exp.dftcfg.polaroid.title.1"));
+		btnDefaults.setText(ReCResourceBundle.findString("polaroid$rec.exp.dftcfg.polaroid.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -123,7 +123,7 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jPanel3.setLayout(new java.awt.BorderLayout());
 
 		jPanel3.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPolaroid$rec.exp.polaroid.lbl.fixedpol")));
+				.findString("polaroid$rec.exp.polaroid.lbl.fixedpol")));
 		jPanel3.setPreferredSize(new java.awt.Dimension(400, 66));
 		jSliderPolFixo.setMajorTickSpacing(20);
 		jSliderPolFixo.setMaximum(180);
@@ -156,7 +156,7 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jPanel5.setLayout(new java.awt.BorderLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPolaroid$rec.exp.polaroid.lbl.movepolini")));
+				.findString("polaroid$rec.exp.polaroid.lbl.movepolini")));
 		jSliderPolVarIni.setMajorTickSpacing(20);
 		jSliderPolVarIni.setMaximum(180);
 		jSliderPolVarIni.setPaintLabels(true);
@@ -187,7 +187,7 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		jPanel7.setLayout(new java.awt.BorderLayout());
 
 		jPanel7.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPolaroid$rec.exp.polaroid.lbl.movepolend")));
+				.findString("polaroid$rec.exp.polaroid.lbl.movepolend")));
 		jSliderPolVarEnd.setMajorTickSpacing(20);
 		jSliderPolVarEnd.setMaximum(180);
 		jSliderPolVarEnd.setPaintLabels(true);
@@ -219,7 +219,7 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 
 		jPanel10.setLayout(new java.awt.GridBagLayout());
 
-		jCheckBoxLightPol.setText(ReCResourceBundle.findString("ReCExpPolaroid$rec.exp.polaroid.lbl.pollight"));
+		jCheckBoxLightPol.setText(ReCResourceBundle.findString("polaroid$rec.exp.polaroid.lbl.pollight"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -227,7 +227,7 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.weightx = 1.0;
 		jPanel10.add(jCheckBoxLightPol, gridBagConstraints);
 
-		jCheckBoxCalib.setText(ReCResourceBundle.findString("ReCExpPolaroid$rec.exp.polaroid.lbl.calib"));
+		jCheckBoxCalib.setText(ReCResourceBundle.findString("polaroid$rec.exp.polaroid.lbl.calib"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 0;
@@ -420,7 +420,7 @@ public class PolaroidCustomizer extends javax.swing.JPanel implements
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpPolaroid$rec.exp.polaroid.customizer.title");
+		return ReCResourceBundle.findString("polaroid$rec.exp.polaroid.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

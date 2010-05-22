@@ -763,7 +763,7 @@ public class JPrograf extends javax.swing.JPanel {
 		}
 		java.net.URL url;
 		try {
-			url = new java.net.URL(ReCResourceBundle.findStringOrDefault("ReCExpWebRobot$rec.exp.url.webrobot.4",
+			url = new java.net.URL(ReCResourceBundle.findStringOrDefault("webrobot$rec.exp.url.webrobot.4",
 					"http://elab.ist.utl.pt/rec/eLab/webrobot/default.grf"));
 		} catch (java.net.MalformedURLException murle) {
 			System.out.println("The url is wrong!!");
@@ -3061,7 +3061,7 @@ public class JPrograf extends javax.swing.JPanel {
 	private boolean runStandAloneApp = false;
 
 	/** Help variables */
-	private String helpURL = ReCResourceBundle.findStringOrDefault("ReCExpWebRobot$rec.exp.url.webrobot.3",
+	private String helpURL = ReCResourceBundle.findStringOrDefault("webrobot$rec.exp.url.webrobot.3",
 			"http://www.e-escola.pt/site-bin/licao_frame.asp?tema_id=43&mat_id=82&dif_id=1");
 
 	/*

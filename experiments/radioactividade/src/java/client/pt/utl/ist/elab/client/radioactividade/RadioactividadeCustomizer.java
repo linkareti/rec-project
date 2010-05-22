@@ -66,7 +66,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		jPanel2.setLayout(new java.awt.GridBagLayout());
 
-		btnOK.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -78,7 +78,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -97,7 +97,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.dftcfg.radio.title.1"));
+		btnDefaults.setText(ReCResourceBundle.findString("radioactividade$rec.exp.dftcfg.radio.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -123,12 +123,12 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		jPanel4.setLayout(new java.awt.GridBagLayout());
 
 		jPanel4.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle
-				.findString("ReCExpRadio$rec.exp.radio.lbl.mode"), javax.swing.border.TitledBorder.LEFT,
+				.findString("radioactividade$rec.exp.radio.lbl.mode"), javax.swing.border.TitledBorder.LEFT,
 				javax.swing.border.TitledBorder.TOP));
 		jPanel4.setMaximumSize(new java.awt.Dimension(2147483647, 80));
 		jPanel4.setMinimumSize(new java.awt.Dimension(170, 50));
 		jPanel4.setPreferredSize(new java.awt.Dimension(170, 50));
-		btnModeCounter.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.counts"));
+		btnModeCounter.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.counts"));
 		buttonGroupMode.add(btnModeCounter);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -136,7 +136,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.weightx = 1.0;
 		jPanel4.add(btnModeCounter, gridBagConstraints);
 
-		btnModeTimer.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.tinter"));
+		btnModeTimer.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.tinter"));
 		buttonGroupMode.add(btnModeTimer);
 		btnModeTimer.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -154,7 +154,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
 		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpRadio$rec.exp.radio.lbl.nsamples")));
+				.findString("radioactividade$rec.exp.radio.lbl.nsamples")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(100, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(140, 80));
@@ -196,7 +196,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpRadio$rec.exp.radio.lbl.dheight")));
+				.findString("radioactividade$rec.exp.radio.lbl.dheight")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(90, 225));
 		jPanel1.setPreferredSize(new java.awt.Dimension(90, 225));
 		sldDetectorHeight.setMajorTickSpacing(10);
@@ -221,10 +221,10 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpRadio$rec.exp.radio.lbl.material")));
+				.findString("radioactividade$rec.exp.radio.lbl.material")));
 		btnWood.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/wood.gif")));
-		btnWood.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.wood"));
+		btnWood.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.wood"));
 		buttonGroupMaterial.add(btnWood);
 		btnWood.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -234,7 +234,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnCork.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/corticite.gif")));
-		btnCork.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.cork"));
+		btnCork.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.cork"));
 		buttonGroupMaterial.add(btnCork);
 		btnCork.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -246,7 +246,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnCopper2.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/cobre2.gif")));
-		btnCopper2.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.copper1"));
+		btnCopper2.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.copper1"));
 		buttonGroupMaterial.add(btnCopper2);
 		btnCopper2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -258,7 +258,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnCopper4.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/cobre4.gif")));
-		btnCopper4.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.copper2"));
+		btnCopper4.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.copper2"));
 		buttonGroupMaterial.add(btnCopper4);
 		btnCopper4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -270,7 +270,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnCopper8.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/cobre8.gif")));
-		btnCopper8.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.copper3"));
+		btnCopper8.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.copper3"));
 		buttonGroupMaterial.add(btnCopper8);
 		btnCopper8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -282,7 +282,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnCopper16.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/cobre16.gif")));
-		btnCopper16.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.copper4"));
+		btnCopper16.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.copper4"));
 		buttonGroupMaterial.add(btnCopper16);
 		btnCopper16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -294,7 +294,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnCopper32.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/cobre32.gif")));
-		btnCopper32.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.copper5"));
+		btnCopper32.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.copper5"));
 		buttonGroupMaterial.add(btnCopper32);
 		btnCopper32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -306,7 +306,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnAir.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/air.gif")));
-		btnAir.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.air"));
+		btnAir.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.air"));
 		buttonGroupMaterial.add(btnAir);
 		btnAir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -317,7 +317,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnLead.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/chumbo.gif")));
-		btnLead.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.lead"));
+		btnLead.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.lead"));
 		buttonGroupMaterial.add(btnLead);
 		btnLead.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -329,7 +329,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 
 		btnBrick.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/pt/utl/ist/elab/client/radioactividade/resources/brick.gif")));
-		btnBrick.setText(ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.lbl.brick"));
+		btnBrick.setText(ReCResourceBundle.findString("radioactividade$rec.exp.radio.lbl.brick"));
 		buttonGroupMaterial.add(btnBrick);
 		btnBrick.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -565,7 +565,7 @@ public class RadioactividadeCustomizer extends javax.swing.JPanel implements
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpRadio$rec.exp.radio.customizer.title");
+		return ReCResourceBundle.findString("radioactividade$rec.exp.radio.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

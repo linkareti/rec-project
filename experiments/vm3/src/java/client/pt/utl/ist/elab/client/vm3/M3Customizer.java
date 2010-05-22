@@ -181,7 +181,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		panelMassa.setLayout(new java.awt.GridBagLayout());
 
 		panelMassa.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpM3$rec.exp.customizer.title.1", "Mass")));
+				"m3$rec.exp.customizer.title.1", "Mass")));
 		panelMassa.setMinimumSize(new java.awt.Dimension(220, 50));
 		panelMassa.setPreferredSize(new java.awt.Dimension(220, 50));
 		sliderMassa.setMajorTickSpacing(1);
@@ -226,7 +226,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		panelK1.setLayout(new java.awt.GridBagLayout());
 
 		panelK1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpM3$rec.exp.customizer.title.2", "Spring 1 Constant")));
+				"m3$rec.exp.customizer.title.2", "Spring 1 Constant")));
 		panelK1.setMinimumSize(new java.awt.Dimension(220, 50));
 		panelK1.setPreferredSize(new java.awt.Dimension(220, 50));
 		sliderK1.setMaximum(1000);
@@ -268,7 +268,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		panelK2.setLayout(new java.awt.GridBagLayout());
 
 		panelK2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpM3$rec.exp.customizer.title.3", "Spring 2 Constant")));
+				"m3$rec.exp.customizer.title.3", "Spring 2 Constant")));
 		panelK2.setMinimumSize(new java.awt.Dimension(220, 50));
 		panelK2.setPreferredSize(new java.awt.Dimension(220, 50));
 		sliderK2.setMaximum(1000);
@@ -310,7 +310,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		panelK3.setLayout(new java.awt.GridBagLayout());
 
 		panelK3.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpM3$rec.exp.customizer.title.4", "Spring 3 Constant")));
+				"m3$rec.exp.customizer.title.4", "Spring 3 Constant")));
 		panelK3.setMaximumSize(new java.awt.Dimension(220, 50));
 		panelK3.setMinimumSize(new java.awt.Dimension(220, 50));
 		panelK3.setPreferredSize(new java.awt.Dimension(220, 50));
@@ -353,7 +353,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		panelTBS.setLayout(new java.awt.GridBagLayout());
 
 		panelTBS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpM3$rec.exp.customizer.title.tbs", "Time Between Samples")));
+				"m3$rec.exp.customizer.title.tbs", "Time Between Samples")));
 		panelTBS.setMaximumSize(new java.awt.Dimension(220, 50));
 		panelTBS.setMinimumSize(new java.awt.Dimension(220, 50));
 		panelTBS.setPreferredSize(new java.awt.Dimension(220, 50));
@@ -397,7 +397,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		panelNS.setLayout(new java.awt.GridBagLayout());
 
 		panelNS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpM3$rec.exp.customizer.title.samples", "Number of Samples")));
+				"m3$rec.exp.customizer.title.samples", "Number of Samples")));
 		panelNS.setMaximumSize(new java.awt.Dimension(220, 50));
 		panelNS.setMinimumSize(new java.awt.Dimension(220, 50));
 		panelNS.setPreferredSize(new java.awt.Dimension(220, 50));
@@ -466,7 +466,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		panelDefault.add(buttonOK, new java.awt.GridBagConstraints());
 
 		buttonCancel.setText(ReCResourceBundle
-				.findStringOrDefault("ReCExpM3$rec.exp.customizer.title.cancel", "Cancel"));
+				.findStringOrDefault("m3$rec.exp.customizer.title.cancel", "Cancel"));
 		buttonCancel.setMaximumSize(new java.awt.Dimension(140, 23));
 		buttonCancel.setMinimumSize(new java.awt.Dimension(140, 23));
 		buttonCancel.setPreferredSize(new java.awt.Dimension(140, 23));
@@ -478,7 +478,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		panelDefault.add(buttonCancel, new java.awt.GridBagConstraints());
 
-		buttonDefault.setText(ReCResourceBundle.findStringOrDefault("ReCExpM3$rec.exp.customizer.title.dfc",
+		buttonDefault.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.dfc",
 				"Default Configuration"));
 		buttonDefault.setMaximumSize(new java.awt.Dimension(160, 23));
 		buttonDefault.setMinimumSize(new java.awt.Dimension(160, 23));
@@ -575,7 +575,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		labelInf1.setFont(new java.awt.Font("Arial", 1, 11));
 		labelInf1.setForeground(java.awt.Color.red);
-		labelInf1.setText(ReCResourceBundle.findStringOrDefault("ReCExpM3$rec.exp.customizer.title.9",
+		labelInf1.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.9",
 				"Please disturb the system"));
 		labelInf1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 		labelInf1.setMaximumSize(new java.awt.Dimension(100, 20));
@@ -589,7 +589,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		labelInf2.setFont(new java.awt.Font("Arial", 1, 11));
 		labelInf2.setForeground(java.awt.Color.red);
-		labelInf2.setText(ReCResourceBundle.findStringOrDefault("ReCExpM3$rec.exp.customizer.title.10",
+		labelInf2.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.10",
 				"by dragging the mass."));
 		labelInf2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 		labelInf2.setMaximumSize(new java.awt.Dimension(100, 20));
@@ -601,7 +601,7 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		add(labelInf2, gridBagConstraints);
 
-		labelT.setText(ReCResourceBundle.findStringOrDefault("ReCExpM3$rec.exp.customizer.title.12", "Simulation Time")
+		labelT.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.12", "Simulation Time")
 				+ ": 10 s");
 		labelT.setMaximumSize(new java.awt.Dimension(130, 12));
 		labelT.setMinimumSize(new java.awt.Dimension(130, 12));
@@ -617,13 +617,13 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	private void sliderNSStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderNSStateChanged
 		textNS.setText(String.valueOf((int) QMethods.arredondar(sliderNS.getValue() * 0.01, 0)));
-		labelT.setText(ReCResourceBundle.findStringOrDefault("ReCExpM3$rec.exp.customizer.title.12", "Simulation Time")
+		labelT.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.12", "Simulation Time")
 				+ ": " + String.valueOf((int) (sliderTBS.getValue() * 1E-7 * sliderNS.getValue())) + " s");
 	}// GEN-LAST:event_sliderNSStateChanged
 
 	private void sliderTBSStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_sliderTBSStateChanged
 		textTBS.setText(String.valueOf((int) QMethods.arredondar(sliderTBS.getValue() * 0.01, 0)));
-		labelT.setText(ReCResourceBundle.findStringOrDefault("ReCExpM3$rec.exp.customizer.title.12", "Simulation Time")
+		labelT.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.12", "Simulation Time")
 				+ ": " + String.valueOf((int) (sliderTBS.getValue() * 1E-7 * sliderNS.getValue())) + " s");
 	}// GEN-LAST:event_sliderTBSStateChanged
 
@@ -731,15 +731,15 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 		text.setText(Float.toString(num));
 		if (textX.getText().equals("5.0") && textY.getText().equals("5.0")) {
 			labelInf2.setForeground(java.awt.Color.red);
-			labelInf1.setText(ReCResourceBundle.findStringOrDefault("ReCExpM3$rec.exp.customizer.title.9",
+			labelInf1.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.9",
 					"Please disturb the system"));
-			labelInf2.setText(ReCResourceBundle.findStringOrDefault("ReCExpM3$rec.exp.customizer.title.10",
+			labelInf2.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.10",
 					"by dragging the mass."));
 			buttonOK.setEnabled(false);
 		} else {
 			labelInf1.setText("");
 			labelInf2.setForeground(new java.awt.Color(0, 125, 0));
-			labelInf2.setText(ReCResourceBundle.findStringOrDefault("ReCExpM3$rec.exp.customizer.title.11", "Ready."));
+			labelInf2.setText(ReCResourceBundle.findStringOrDefault("m3$rec.exp.customizer.title.11", "Ready."));
 			buttonOK.setEnabled(true);
 		}
 		if (panel == true) {
@@ -754,10 +754,10 @@ public class M3Customizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		System.out.println(java.util.Locale.getDefault());
 
-		ReCResourceBundle.loadResourceBundle("ReCExpM3",
+		ReCResourceBundle.loadResourceBundle("m3",
 				"recresource:///pt/utl/ist/elab/client/vm3/resources/messages");
 
-		System.out.println(ReCResourceBundle.findString("ReCExpM3$rec.exp.display.m3.tip.3"));
+		System.out.println(ReCResourceBundle.findString("m3$rec.exp.display.m3.tip.3"));
 		javax.swing.JFrame frame = new javax.swing.JFrame();
 		frame.getContentPane().add(new M3Customizer());
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);

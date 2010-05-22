@@ -100,7 +100,7 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelK.setLayout(new java.awt.GridBagLayout());
 
 		jPanelK.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpMM$rec.exp.customizer.title.1", "Spring constant (N/m)")));
+				"mm$rec.exp.customizer.title.1", "Spring constant (N/m)")));
 		jPanelK.setPreferredSize(new java.awt.Dimension(270, 65));
 		jSliderK.setMajorTickSpacing(2);
 		jSliderK.setMaximum(20);
@@ -135,7 +135,7 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelM.setLayout(new java.awt.GridBagLayout());
 
 		jPanelM.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpMM$rec.exp.customizer.title.2", "Mass (Kg)")));
+				"mm$rec.exp.customizer.title.2", "Mass (Kg)")));
 		jSliderM.setMajorTickSpacing(10);
 		jSliderM.setMaximum(50);
 		jSliderM.setMinorTickSpacing(5);
@@ -169,7 +169,7 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelFric.setLayout(new java.awt.GridBagLayout());
 
 		jPanelFric.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpMM$rec.exp.customizer.title.3", "Friction constant (Kg/s)")));
+				"mm$rec.exp.customizer.title.3", "Friction constant (Kg/s)")));
 		jSliderFric.setMajorTickSpacing(1);
 		jSliderFric.setMaximum(10);
 		jSliderFric.setMinorTickSpacing(1);
@@ -203,7 +203,7 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelX0.setLayout(new java.awt.GridBagLayout());
 
 		jPanelX0.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpMM$rec.exp.customizer.title.4", "Initial position (m)")));
+				"mm$rec.exp.customizer.title.4", "Initial position (m)")));
 		jSliderX0.setMajorTickSpacing(10);
 		jSliderX0.setMaximum(20);
 		jSliderX0.setMinimum(-20);
@@ -242,8 +242,8 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelTBS.setLayout(new java.awt.GridBagLayout());
 
 		jPanelTBS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpMM$rec.exp.customizer.title.tbs", "TBS")));
-		jPanelTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.tbs",
+				"mm$rec.exp.customizer.title.tbs", "TBS")));
+		jPanelTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		jPanelTBS.setPreferredSize(new java.awt.Dimension(82, 224));
 		jSliderTBS.setMajorTickSpacing(100);
@@ -253,7 +253,7 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jSliderTBS.setOrientation(javax.swing.JSlider.VERTICAL);
 		jSliderTBS.setPaintLabels(true);
 		jSliderTBS.setPaintTicks(true);
-		jSliderTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.tbs",
+		jSliderTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		jSliderTBS.setValue(100);
 		jSliderTBS.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -292,8 +292,8 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanelSamples.setLayout(new java.awt.GridBagLayout());
 
 		jPanelSamples.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpMM$rec.exp.customizer.title.samples", "N Samples")));
-		jPanelSamples.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.samples",
+				"mm$rec.exp.customizer.title.samples", "N Samples")));
+		jPanelSamples.setToolTipText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.tip.samples",
 				"Number of samples"));
 		jPanelSamples.setPreferredSize(new java.awt.Dimension(82, 224));
 		jSliderSamples.setMajorTickSpacing(100);
@@ -303,7 +303,7 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jSliderSamples.setOrientation(javax.swing.JSlider.VERTICAL);
 		jSliderSamples.setPaintLabels(true);
 		jSliderSamples.setPaintTicks(true);
-		jSliderSamples.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.samples",
+		jSliderSamples.setToolTipText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.tip.samples",
 				"Number of samples"));
 		jSliderSamples.setValue(100);
 		jSliderSamples.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -347,7 +347,7 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
 		jPanel3.setMinimumSize(new java.awt.Dimension(143, 25));
-		btnOK.setText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.title.ok", "OK"));
+		btnOK.setText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.title.ok", "OK"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -356,7 +356,7 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		jPanel3.add(btnOK);
 
-		btnCancel.setText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.title.cancel", "Cancel"));
+		btnCancel.setText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.title.cancel", "Cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -371,7 +371,7 @@ public class MMCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel2.add(jPanel3, gridBagConstraints);
 
 		jPanel4.setMinimumSize(new java.awt.Dimension(136, 25));
-		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.title.dfc",
+		btnDefaults.setText(ReCResourceBundle.findStringOrDefault("mm$rec.exp.customizer.title.dfc",
 				"Default config"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {

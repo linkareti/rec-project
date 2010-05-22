@@ -93,7 +93,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jPanel8.setLayout(new java.awt.GridBagLayout());
 
 		jPanel8.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDiscos$rec.exp.discos.lbl.launch")));
+				.findString("momentoinercia$rec.exp.discos.lbl.launch")));
 		jPanel8.setMinimumSize(new java.awt.Dimension(250, 80));
 		jPanel8.setPreferredSize(new java.awt.Dimension(250, 80));
 		jSliderLaunch.setMajorTickSpacing(10000);
@@ -147,7 +147,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDiscos$rec.exp.discos.lbl.break")));
+				.findString("momentoinercia$rec.exp.discos.lbl.break")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(250, 80));
 		jPanel5.setPreferredSize(new java.awt.Dimension(250, 80));
 		jSliderStop.setMajorTickSpacing(10000);
@@ -202,7 +202,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDiscos$rec.exp.discos.lbl.tbs")));
+				.findString("momentoinercia$rec.exp.discos.lbl.tbs")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(250, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(250, 80));
 		jSliderTBS.setMajorTickSpacing(200);
@@ -247,7 +247,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
 		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpDiscos$rec.exp.discos.lbl.nsamples")));
+				.findString("momentoinercia$rec.exp.discos.lbl.nsamples")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(250, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -294,7 +294,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 		jLabelInfo.setForeground(new java.awt.Color(255, 0, 0));
 		jLabelInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelInfo.setText(ReCResourceBundle.findString("ReCExpDiscos$rec.exp.discos.lbl.expdur"));
+		jLabelInfo.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.discos.lbl.expdur"));
 		jLabelInfo.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -313,7 +313,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findString("ReCExpDiscos$rec.exp.discos.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.discos.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -325,7 +325,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("ReCExpDiscos$rec.exp.discos.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.discos.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -344,7 +344,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("ReCExpDiscos$rec.exp.dftcfg.momentoInercia.title.1"));
+		btnDefaults.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.dftcfg.momentoInercia.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -485,12 +485,12 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 
 		if (duration > 90) {
 			jLabelInfo.setEnabled(true);
-			jLabelInfo.setText(ReCResourceBundle.findString("ReCExpDiscos$rec.exp.discos.lbl.maxsamples")
+			jLabelInfo.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.discos.lbl.maxsamples")
 					+ (90000 / jSliderTBS.getValue()));
 			btnOK.setEnabled(false);
 		} else {
 			jLabelInfo.setEnabled(false);
-			jLabelInfo.setText(ReCResourceBundle.findString("ReCExpDiscos$rec.exp.discos.lbl.expdur")
+			jLabelInfo.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.discos.lbl.expdur")
 					+ df.format(duration) + " s");
 			btnOK.setEnabled(true);
 		}
@@ -501,7 +501,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		int launch = jSliderLaunch.getValue() / jSliderTBS.getValue();
 		if (launch > jSliderNumSamples.getValue() && jCheckBoxLaunch.isSelected()) {
 			jLabelInfo.setEnabled(true);
-			jLabelInfo.setText(ReCResourceBundle.findString("ReCExpDiscos$rec.exp.lbl.discos.invlaunch"));
+			jLabelInfo.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.lbl.discos.invlaunch"));
 			btnOK.setEnabled(false);
 			ret = false;
 		} else {
@@ -516,7 +516,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 		int stop = jSliderStop.getValue() / jSliderTBS.getValue();
 		if (stop > jSliderNumSamples.getValue() && jCheckStop.isSelected()) {
 			jLabelInfo.setEnabled(true);
-			jLabelInfo.setText(ReCResourceBundle.findString("ReCExpDiscos$rec.exp.discos.lbl.invstop"));
+			jLabelInfo.setText(ReCResourceBundle.findString("momentoinercia$rec.exp.discos.lbl.invstop"));
 			btnOK.setEnabled(false);
 			ret = false;
 		} else {
@@ -717,7 +717,7 @@ public class MomInerciaCustomizer extends javax.swing.JPanel implements
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpDiscos$rec.exp.customizer.title.discos");
+		return ReCResourceBundle.findString("momentoinercia$rec.exp.customizer.title.discos");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

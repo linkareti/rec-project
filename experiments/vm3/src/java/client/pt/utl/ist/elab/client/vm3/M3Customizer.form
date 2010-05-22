@@ -12,7 +12,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Mass">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;Mass&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.1" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;Mass&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -99,7 +99,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Spring 1 Constant">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.2" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;Spring 1 Constant&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.2" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;Spring 1 Constant&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -183,7 +183,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Spring 2 Constant">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.3" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;Spring 2 Constant&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.3" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;Spring 2 Constant&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -267,7 +267,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Spring 3 Constant">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.4" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;Spring 3 Constant&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.4" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;Spring 3 Constant&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -354,7 +354,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Time Between Samples">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.tbs" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;Time Between Samples&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.tbs" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;Time Between Samples&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -442,7 +442,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Number of Samples">
-              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.samples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;Number of Samples&quot;)"/>
+              <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.samples" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;Number of Samples&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -581,7 +581,7 @@
         <Component class="javax.swing.JButton" name="buttonCancel">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;Cancel&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.cancel" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;Cancel&quot;)"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[140, 23]"/>
@@ -605,7 +605,7 @@
         <Component class="javax.swing.JButton" name="buttonDefault">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.dfc" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;Default Configuration&quot;)"/>
+              <ResourceString bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.dfc" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;Default Configuration&quot;)"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[160, 23]"/>
@@ -737,7 +737,7 @@
           <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.9" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;Please disturb the system&quot;)"/>
+          <ResourceString bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.9" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;Please disturb the system&quot;)"/>
         </Property>
         <Property name="verticalAlignment" type="int" value="3"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -768,7 +768,7 @@
           <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.10" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;by dragging the mass.&quot;)"/>
+          <ResourceString bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.10" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;by dragging the mass.&quot;)"/>
         </Property>
         <Property name="verticalAlignment" type="int" value="1"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -793,7 +793,7 @@
     <Component class="javax.swing.JLabel" name="labelT">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.12" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpM3${key}&quot;,&quot;Simulation Time&quot;)+&quot;: 10 s&quot;"/>
+          <ResourceString bundle="pt/utl/ist/elab/client/vm3/resources/messages.properties" key="rec.exp.customizer.title.12" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;m3${key}&quot;,&quot;Simulation Time&quot;)+&quot;: 10 s&quot;"/>
         </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[130, 12]"/>

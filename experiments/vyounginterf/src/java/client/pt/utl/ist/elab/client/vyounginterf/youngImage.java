@@ -54,7 +54,7 @@ public class youngImage extends JComponent {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.show();
 
-		ReCResourceBundle.loadResourceBundle("ReCExpYoungInterf",
+		ReCResourceBundle.loadResourceBundle("younginterf",
 				"recresource:///pt/utl/ist/elab/client/vyounginterf/resources/messages");
 
 		JFrame frame2 = new JFrame("Young's Interferences ImageIcon Test");
@@ -123,7 +123,7 @@ public class youngImage extends JComponent {
 		int tag = 0;
 		int tag_ = 0;
 		boolean passa;
-		String s1 = ReCResourceBundle.findStringOrDefault("ReCExpYoungInterf$rec.exp.display.younginterf.string",
+		String s1 = ReCResourceBundle.findStringOrDefault("younginterf$rec.exp.display.younginterf.string",
 				"Distance between maximums (minimums) (mm)");
 		do {// start do cicle
 			passa = true;

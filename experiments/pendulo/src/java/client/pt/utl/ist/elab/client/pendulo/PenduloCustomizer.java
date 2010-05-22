@@ -67,7 +67,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findString("pendulo$rec.exp.pendulo.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -79,7 +79,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findString("pendulo$rec.exp.pendulo.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -98,7 +98,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.dftcfg.pendulo.title.1"));
+		btnDefaults.setText(ReCResourceBundle.findString("pendulo$rec.exp.dftcfg.pendulo.title.1"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -125,7 +125,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPendulo$rec.exp.pendulo.lbl.angini")));
+				.findString("pendulo$rec.exp.pendulo.lbl.angini")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldAngle.setMajorTickSpacing(5);
@@ -171,7 +171,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
 		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPendulo$rec.exp.pendulo.lbl.nsamples")));
+				.findString("pendulo$rec.exp.pendulo.lbl.nsamples")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -218,7 +218,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 
 		lblErrorSamplesTooHigh.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorSamplesTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.maxsamples.1"));
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("pendulo$rec.exp.pendulo.lbl.maxsamples.1"));
 		lblErrorSamplesTooHigh.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -232,7 +232,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPendulo$rec.exp.pendulo.lbl.freq")));
+				.findString("pendulo$rec.exp.pendulo.lbl.freq")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldFreq.setMajorTickSpacing(25);
@@ -282,7 +282,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel51.setLayout(new java.awt.GridBagLayout());
 
 		jPanel51.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPendulo$rec.exp.pendulo.lbl.hini")));
+				.findString("pendulo$rec.exp.pendulo.lbl.hini")));
 		jPanel51.setMinimumSize(new java.awt.Dimension(100, 350));
 		jPanel51.setPreferredSize(new java.awt.Dimension(100, 350));
 		sldHeight.setMajorTickSpacing(10);
@@ -331,7 +331,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel511.setLayout(new java.awt.GridBagLayout());
 
 		jPanel511.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPendulo$rec.exp.pendulo.lbl.friction.tittle")));
+				.findString("pendulo$rec.exp.pendulo.lbl.friction.tittle")));
 		jPanel511.setMinimumSize(new java.awt.Dimension(150, 50));
 		jPanel511.setPreferredSize(new java.awt.Dimension(150, 50));
 		radioStatus00.setSelected(true);
@@ -341,7 +341,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		jPanel511.add(radioStatus00, gridBagConstraints);
 
-		radioStatus01.setText(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.friction.25"));
+		radioStatus01.setText(ReCResourceBundle.findString("pendulo$rec.exp.pendulo.lbl.friction.25"));
 		buttonGroupStatus.add(radioStatus01);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -349,7 +349,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		jPanel511.add(radioStatus01, gridBagConstraints);
 
-		radioStatus10.setText(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.friction.17"));
+		radioStatus10.setText(ReCResourceBundle.findString("pendulo$rec.exp.pendulo.lbl.friction.17"));
 		buttonGroupStatus.add(radioStatus10);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 2;
@@ -357,7 +357,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		jPanel511.add(radioStatus10, gridBagConstraints);
 
-		radioStatus11.setText(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.friction.12"));
+		radioStatus11.setText(ReCResourceBundle.findString("pendulo$rec.exp.pendulo.lbl.friction.12"));
 		buttonGroupStatus.add(radioStatus11);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 3;
@@ -460,7 +460,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 	private void checkMaxNumSamples() {
 		lblErrorSamplesTooHigh.setEnabled(sldNumSamples.getValue() > 4 * sldFreq.getValue());
 		btnOK.setEnabled(!lblErrorSamplesTooHigh.isEnabled());
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.lbl.maxsamples.2")
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("pendulo$rec.exp.pendulo.lbl.maxsamples.2")
 				+ 4 * sldFreq.getValue());
 	}
 
@@ -662,7 +662,7 @@ public class PenduloCustomizer extends javax.swing.JPanel implements com.linkare
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpPendulo$rec.exp.pendulo.customizer.title");
+		return ReCResourceBundle.findString("pendulo$rec.exp.pendulo.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

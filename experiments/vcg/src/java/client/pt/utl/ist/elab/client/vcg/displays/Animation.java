@@ -213,9 +213,9 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	public void actionPerformed(java.awt.event.ActionEvent e) {
 		if (e.getActionCommand().equalsIgnoreCase("Edit")) {
 			balanca.setReguaSize(PopupMenu.dialog(ReCResourceBundle.findStringOrDefault(
-					"ReCExpCG$rec.exp.customizer.balanca.title.15", "Edit Target Ruler (cm)"), ReCResourceBundle
-					.findStringOrDefault("ReCExpCG$rec.exp.customizer.balanca.tip.15", "Ruler length"),
-					ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.balanca.tip.16",
+					"cg$rec.exp.customizer.balanca.title.15", "Edit Target Ruler (cm)"), ReCResourceBundle
+					.findStringOrDefault("cg$rec.exp.customizer.balanca.tip.15", "Ruler length"),
+					ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.balanca.tip.16",
 							"Accept the configuration"), (int) Math.round(reg.getPreferredXMax() * 10), new int[] {
 							100, 500, 50, 50 }));
 			constTextBox.setX(balanca.getReguaSize() / 20);

@@ -28,7 +28,7 @@
             <Component class="javax.swing.JButton" name="jButtonOK">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpYoungInterf$rec.exp.customizer.title.ok&quot;,&quot;OK&quot;)" type="code"/>
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;younginterf$rec.exp.customizer.title.ok&quot;,&quot;OK&quot;)" type="code"/>
                 </Property>
               </Properties>
               <Events>
@@ -38,7 +38,7 @@
             <Component class="javax.swing.JButton" name="jButtonCancel">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpYoungInterf$rec.exp.customizer.title.cancel&quot;,&quot;Cancel&quot;)" type="code"/>
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;younginterf$rec.exp.customizer.title.cancel&quot;,&quot;Cancel&quot;)" type="code"/>
                 </Property>
               </Properties>
               <Events>
@@ -59,7 +59,7 @@
             <Component class="javax.swing.JButton" name="jButtonDefaultConfig">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpYoungInterf$rec.exp.customizer.title.dfc&quot;,&quot;Default config&quot;)" type="code"/>
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;younginterf$rec.exp.customizer.title.dfc&quot;,&quot;Default config&quot;)" type="code"/>
                 </Property>
               </Properties>
               <Events>
@@ -96,7 +96,7 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="&lt;User Code&gt;">
-                          <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpYoungInterf$rec.exp.customizer.title.1&quot;,&quot;Wavelenght (\u03BB nm)&quot;)" type="code"/>
+                          <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;younginterf$rec.exp.customizer.title.1&quot;,&quot;Wavelenght (\u03BB nm)&quot;)" type="code"/>
                         </TitledBorder>
                       </Border>
                     </Property>
@@ -129,7 +129,7 @@
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder title="&lt;User Code&gt;">
-                              <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpYoungInterf$rec.exp.customizer.title.2&quot;,&quot;Distance between slits (mm)&quot;)" type="code"/>
+                              <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;younginterf$rec.exp.customizer.title.2&quot;,&quot;Distance between slits (mm)&quot;)" type="code"/>
                             </TitledBorder>
                           </Border>
                         </Property>
@@ -168,7 +168,7 @@
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder title="&lt;User Code&gt;">
-                              <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpYoungInterf$rec.exp.customizer.title.3&quot;,&quot;Distance between planes (m)&quot;)" type="code"/>
+                              <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;younginterf$rec.exp.customizer.title.3&quot;,&quot;Distance between planes (m)&quot;)" type="code"/>
                             </TitledBorder>
                           </Border>
                         </Property>
@@ -211,7 +211,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="&lt;User Code&gt;">
-                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpYoungInterf$rec.exp.customizer.title.5&quot; ,&quot;Projection area width (mm)&quot;)" type="code"/>
+                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;younginterf$rec.exp.customizer.title.5&quot; ,&quot;Projection area width (mm)&quot;)" type="code"/>
                     </TitledBorder>
                   </Border>
                 </Property>

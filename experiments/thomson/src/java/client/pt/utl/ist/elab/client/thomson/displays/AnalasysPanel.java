@@ -560,7 +560,7 @@ public class AnalasysPanel extends javax.swing.JPanel implements com.linkare.rec
 	}
 
 	public String getName() {
-		return ReCResourceBundle.findStringOrDefault("ReCExpThomson$rec.exp.display.thomson.title.1", "Analasys Panel");
+		return ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.thomson.title.1", "Analasys Panel");
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

@@ -48,26 +48,26 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 
 	public BSCustomizer() {
 		f1_Iini = new VariablePanel(-1, 1, 0.6, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.title.i1ini", "I Inicial Fio 1 (A)"), ReCResourceBundle
-				.findStringOrDefault("ReCExpBS$rec.exp.customizer.tip.i1ini",
+				"bs$rec.exp.customizer.title.i1ini", "I Inicial Fio 1 (A)"), ReCResourceBundle
+				.findStringOrDefault("bs$rec.exp.customizer.tip.i1ini",
 						"Intensidade de corrente inicial do fio 1"));
 
 		f1_Ifin = new VariablePanel(-1, 1, -0.2, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.title.i1fin", "I Final Fio 1 (A)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.tip.i1fin", "Intensidade de corrente final do fio 1"));
+				"bs$rec.exp.customizer.title.i1fin", "I Final Fio 1 (A)"), ReCResourceBundle.findStringOrDefault(
+				"bs$rec.exp.customizer.tip.i1fin", "Intensidade de corrente final do fio 1"));
 
 		f2_Iini = new VariablePanel(-1, 1, -0.2, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.title.i2ini", "I Inicial Fio 2 (A)"), ReCResourceBundle
-				.findStringOrDefault("ReCExpBS$rec.exp.customizer.tip.i2ini",
+				"bs$rec.exp.customizer.title.i2ini", "I Inicial Fio 2 (A)"), ReCResourceBundle
+				.findStringOrDefault("bs$rec.exp.customizer.tip.i2ini",
 						"Intensidade de corrente inicial do fio 2"));
 
 		f2_Ifin = new VariablePanel(-1, 1, 0.6, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.title.i2fin", "I Final Fio 2 (A)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.tip.i2fin", "Intensidade de corrente final do fio 2"));
+				"bs$rec.exp.customizer.title.i2fin", "I Final Fio 2 (A)"), ReCResourceBundle.findStringOrDefault(
+				"bs$rec.exp.customizer.tip.i2fin", "Intensidade de corrente final do fio 2"));
 
 		distFios = new VariablePanel(0.01, 0.25, 0.1, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.title.dist", "Distancia (m)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.tip.dist", "Distancia entre os dois fios"));
+				"bs$rec.exp.customizer.title.dist", "Distancia (m)"), ReCResourceBundle.findStringOrDefault(
+				"bs$rec.exp.customizer.tip.dist", "Distancia entre os dois fios"));
 
 		distFios.addExecutor(new VariableExecutor() {
 			public void execute() {
@@ -76,12 +76,12 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 		});
 
 		numSamples = new VariablePanel(10, 500, 250, 0, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.title.samples", "Numero de Amostras"), ReCResourceBundle
-				.findStringOrDefault("ReCExpBS$rec.exp.customizer.tip.samples", "Numero de amostras"));
+				"bs$rec.exp.customizer.title.samples", "Numero de Amostras"), ReCResourceBundle
+				.findStringOrDefault("bs$rec.exp.customizer.tip.samples", "Numero de amostras"));
 
 		xPto = new VariablePanel(-0.15, 0.15, 0, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.title.xpto", "X Ponto (m)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.tip.xpto", "Coordenada X do ponto a observar"));
+				"bs$rec.exp.customizer.title.xpto", "X Ponto (m)"), ReCResourceBundle.findStringOrDefault(
+				"bs$rec.exp.customizer.tip.xpto", "Coordenada X do ponto a observar"));
 
 		xPto.addExecutor(new VariableExecutor() {
 			public void execute() {
@@ -90,8 +90,8 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 		});
 
 		yPto = new VariablePanel(-0.15, 0.15, 0, 3, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.title.ypto", "Y Ponto (m)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.tip.ypto", "Coordenada Y do ponto a observar"));
+				"bs$rec.exp.customizer.title.ypto", "Y Ponto (m)"), ReCResourceBundle.findStringOrDefault(
+				"bs$rec.exp.customizer.tip.ypto", "Coordenada Y do ponto a observar"));
 
 		yPto.addExecutor(new VariableExecutor() {
 			public void execute() {
@@ -100,10 +100,10 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 		});
 
 		tbs = new VariablePanel(100, 500, 300, 0, 2, ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.title.tbs", "dt (ms)"), ReCResourceBundle.findStringOrDefault(
-				"ReCExpBS$rec.exp.customizer.tip.tbs", "Tempo entre Amostras"));
+				"bs$rec.exp.customizer.title.tbs", "dt (ms)"), ReCResourceBundle.findStringOrDefault(
+				"bs$rec.exp.customizer.tip.tbs", "Tempo entre Amostras"));
 
-		buttonOK = new JButton(ReCResourceBundle.findStringOrDefault("ReCExpBS$rec.exp.customizer.title.ok", "Correr"));
+		buttonOK = new JButton(ReCResourceBundle.findStringOrDefault("bs$rec.exp.customizer.title.ok", "Correr"));
 		buttonOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				// OK o utilizador quer enviar as informacoes, vamos colocar os
@@ -124,7 +124,7 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 			}
 		});
 
-		buttonCancel = new JButton(ReCResourceBundle.findStringOrDefault("ReCExpBS$rec.exp.customizer.title.cancel",
+		buttonCancel = new JButton(ReCResourceBundle.findStringOrDefault("bs$rec.exp.customizer.title.cancel",
 				"Cancelar"));
 		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -133,7 +133,7 @@ public class BSCustomizer extends JPanel implements com.linkare.rec.impl.client.
 			}
 		});
 
-		buttonReset = new JButton(ReCResourceBundle.findStringOrDefault("ReCExpBS$rec.exp.customizer.title.dfc",
+		buttonReset = new JButton(ReCResourceBundle.findStringOrDefault("bs$rec.exp.customizer.title.dfc",
 				"Restaurar"));
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {

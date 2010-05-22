@@ -129,7 +129,7 @@ public class YoungInterfDataProducer extends VirtualBaseDataSource {
 				int tag_ = 0;
 				boolean passa;
 //				String s1 = ReCResourceBundle.findStringOrDefault(
-//						"ReCExpYoungInterf$rec.exp.display.younginterf.string",
+//						"younginterf$rec.exp.display.younginterf.string",
 //						"Distance between maximums (minimums) (mm)");
 
 				// envia as amostra calculadas!

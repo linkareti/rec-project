@@ -61,7 +61,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jPanelControl.setLayout(new java.awt.GridBagLayout());
 
 		jPanelControl.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpOscilador$rec.exp.customizer.title.control", "Control")));
+				"oscilador$rec.exp.customizer.title.control", "Control")));
 		jPanelControl.setMaximumSize(new java.awt.Dimension(600, 200));
 		jPanelControl.setMinimumSize(new java.awt.Dimension(600, 200));
 		jPanelControl.setPreferredSize(new java.awt.Dimension(600, 200));
@@ -71,7 +71,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jPanelButtons.setMinimumSize(new java.awt.Dimension(140, 160));
 		jPanelButtons.setPreferredSize(new java.awt.Dimension(140, 160));
 		jButtonDafaultConfig.setText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpOscilador$rec.exp.customizer.title.default", "Default Settings"));
+				"oscilador$rec.exp.customizer.title.default", "Default Settings"));
 		jButtonDafaultConfig.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jButtonDafaultConfig.setMaximumSize(new java.awt.Dimension(100, 40));
 		jButtonDafaultConfig.setMinimumSize(new java.awt.Dimension(100, 40));
@@ -87,7 +87,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 3;
 		jPanelButtons.add(jButtonDafaultConfig, gridBagConstraints);
 
-		jButtonStop.setText(ReCResourceBundle.findStringOrDefault("ReCExpOscilador$rec.exp.customizer.title.cancel",
+		jButtonStop.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.cancel",
 				"Cancel"));
 		jButtonStop.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jButtonStop.setMaximumSize(new java.awt.Dimension(100, 40));
@@ -104,7 +104,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 1;
 		jPanelButtons.add(jButtonStop, gridBagConstraints);
 
-		jButtonStart.setText(ReCResourceBundle.findStringOrDefault("ReCExpOscilador$rec.exp.customizer.title.ok",
+		jButtonStart.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.ok",
 				"Start"));
 		jButtonStart.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jButtonStart.setMaximumSize(new java.awt.Dimension(100, 40));
@@ -139,7 +139,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jSliderTBS.setSnapToTicks(true);
 		jSliderTBS.setValue(100);
 		jSliderTBS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpOscilador$rec.exp.customizer.title.tbs", "Time Between Samples")));
+				"oscilador$rec.exp.customizer.title.tbs", "Time Between Samples")));
 		jSliderTBS.setMaximumSize(new java.awt.Dimension(300, 80));
 		jSliderTBS.setMinimumSize(new java.awt.Dimension(300, 80));
 		jSliderTBS.setPreferredSize(new java.awt.Dimension(300, 80));
@@ -154,7 +154,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jSliderNSamples.setSnapToTicks(true);
 		jSliderNSamples.setValue(100);
 		jSliderNSamples.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpOscilador$rec.exp.customizer.title.nSamples", "Number of Samples")));
+				"oscilador$rec.exp.customizer.title.nSamples", "Number of Samples")));
 		jSliderNSamples.setMaximumSize(new java.awt.Dimension(300, 80));
 		jSliderNSamples.setMinimumSize(new java.awt.Dimension(300, 80));
 		jSliderNSamples.setPreferredSize(new java.awt.Dimension(300, 80));
@@ -167,7 +167,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jPanelInput.setLayout(new java.awt.GridBagLayout());
 
 		jPanelInput.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpOscilador$rec.exp.customizer.title.config", "Parameters")));
+				"oscilador$rec.exp.customizer.title.config", "Parameters")));
 		jPanelInput.setMaximumSize(new java.awt.Dimension(600, 100));
 		jPanelInput.setMinimumSize(new java.awt.Dimension(600, 100));
 		jPanelInput.setPreferredSize(new java.awt.Dimension(600, 100));
@@ -257,7 +257,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jPanelInput.add(jTextFieldG, gridBagConstraints);
 
 		jLabelA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelA.setText(ReCResourceBundle.findStringOrDefault("ReCExpOscilador$rec.exp.customizer.title.a",
+		jLabelA.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.a",
 				"Parabola Width"));
 		jLabelA.setMaximumSize(new java.awt.Dimension(300, 15));
 		jLabelA.setMinimumSize(new java.awt.Dimension(300, 15));
@@ -266,7 +266,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 
 		jLabelFrequencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		jLabelFrequencia.setText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpOscilador$rec.exp.customizer.title.frequencia", "Rotation Frequency"));
+				"oscilador$rec.exp.customizer.title.frequencia", "Rotation Frequency"));
 		jLabelFrequencia.setMaximumSize(new java.awt.Dimension(300, 15));
 		jLabelFrequencia.setMinimumSize(new java.awt.Dimension(300, 15));
 		jLabelFrequencia.setPreferredSize(new java.awt.Dimension(300, 15));
@@ -277,7 +277,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 
 		jLabelAltura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		jLabelAltura.setText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpOscilador$rec.exp.customizer.title.alturaInicial", "Starting Position"));
+				"oscilador$rec.exp.customizer.title.alturaInicial", "Starting Position"));
 		jLabelAltura.setMaximumSize(new java.awt.Dimension(300, 15));
 		jLabelAltura.setMinimumSize(new java.awt.Dimension(300, 15));
 		jLabelAltura.setPreferredSize(new java.awt.Dimension(300, 15));
@@ -287,7 +287,7 @@ public class OsciladorCustomizer extends javax.swing.JPanel implements
 		jPanelInput.add(jLabelAltura, gridBagConstraints);
 
 		jLabelG.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabelG.setText(ReCResourceBundle.findStringOrDefault("ReCExpOscilador$rec.exp.customizer.title.g",
+		jLabelG.setText(ReCResourceBundle.findStringOrDefault("oscilador$rec.exp.customizer.title.g",
 				"Gravitic Acceleration"));
 		jLabelG.setMaximumSize(new java.awt.Dimension(300, 15));
 		jLabelG.setMinimumSize(new java.awt.Dimension(300, 15));

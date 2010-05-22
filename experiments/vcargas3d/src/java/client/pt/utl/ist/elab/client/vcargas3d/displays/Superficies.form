@@ -37,7 +37,7 @@
         <Property name="maximum" type="int" value="19"/>
         <Property name="orientation" type="int" value="1"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="" key="rec.exp.customizer.title.13" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;ReCExpCargas3D${key}&quot;,&quot;Ajust the slider to visualise more equimodal surfaces&quot;)"/>
+          <ResourceString bundle="" key="rec.exp.customizer.title.13" replaceFormat="ReCResourceBundle.findStringOrDefault(&quot;cargas3d${key}&quot;,&quot;Ajust the slider to visualise more equimodal surfaces&quot;)"/>
         </Property>
         <Property name="value" type="int" value="0"/>
         <Property name="enabled" type="boolean" value="false"/>

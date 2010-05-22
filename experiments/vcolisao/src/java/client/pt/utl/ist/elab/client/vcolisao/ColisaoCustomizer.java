@@ -67,7 +67,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		updateVars();
 
 		dpanel = new PlottingPanel("x (m)", "y (m)", ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.1", "Impact Preview"));// new
+				"colisao$rec.exp.customizer.title.1", "Impact Preview"));// new
 		// DrawingPanel();
 		dpanel.setPreferredSize(new java.awt.Dimension(267, 100));
 
@@ -113,7 +113,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 	}
 
 	public static void main(String args[]) {
-		ReCResourceBundle.loadResourceBundle("ReCExpColisao",
+		ReCResourceBundle.loadResourceBundle("colisao",
 				"recresource:///pt/utl/ist/elab/client/vcolisao/resources/messages");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new ColisaoCustomizer());
@@ -125,7 +125,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 	public void updateTimer() {
 		float expDuration = jSliderSamples.getValue() * jSliderTBS.getValue();
 		expDuration /= 1000;
-		jLabelExpTime.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.timer",
+		jLabelExpTime.setText(ReCResourceBundle.findStringOrDefault("colisao$rec.exp.customizer.title.timer",
 				"Experiment Duration: ")
 				+ expDuration + " s");
 	}
@@ -194,7 +194,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		panelPreview.setLayout(new java.awt.BorderLayout());
 
 		panelPreview.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.1", "System Preview")));
+				"colisao$rec.exp.customizer.title.1", "System Preview")));
 		panelRoot2.add(panelPreview, java.awt.BorderLayout.CENTER);
 
 		panelTime.setLayout(new java.awt.BorderLayout());
@@ -204,8 +204,8 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanelTBS.setLayout(new java.awt.BorderLayout());
 
 		jPanelTBS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.tbs", "TBS")));
-		jPanelTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.tip.tbs",
+				"colisao$rec.exp.customizer.title.tbs", "TBS")));
+		jPanelTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("colisao$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		jPanelTBS.setVerifyInputWhenFocusTarget(false);
 		jSliderTBS.setPaintLabels(true);
@@ -215,7 +215,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderTBS.setMajorTickSpacing(4);
 		jSliderTBS.setValue(5);
 		jSliderTBS.setMinimum(1);
-		jSliderTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.tip.tbs",
+		jSliderTBS.setToolTipText(ReCResourceBundle.findStringOrDefault("colisao$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		jSliderTBS.setMaximum(25);
 		jSliderTBS.setSnapToTicks(true);
@@ -243,8 +243,8 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanelNS.setLayout(new java.awt.BorderLayout());
 
 		jPanelNS.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.samples", "N Samples")));
-		jPanelNS.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.tip.samples",
+				"colisao$rec.exp.customizer.title.samples", "N Samples")));
+		jPanelNS.setToolTipText(ReCResourceBundle.findStringOrDefault("colisao$rec.exp.customizer.tip.samples",
 				"Number of samples"));
 		jPanelNS.setVerifyInputWhenFocusTarget(false);
 		jSliderSamples.setPaintLabels(true);
@@ -255,7 +255,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderSamples.setValue(100);
 		jSliderSamples.setMinimum(1);
 		jSliderSamples.setToolTipText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.tip.samples", "Number of samples"));
+				"colisao$rec.exp.customizer.tip.samples", "Number of samples"));
 		jSliderSamples.setMaximum(1001);
 		jSliderSamples.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -290,7 +290,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars1.setLayout(new java.awt.GridLayout(4, 0));
 
 		jPanelV1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.2", "Circle 1 Velocity (m/s)")));
+				"colisao$rec.exp.customizer.title.2", "Circle 1 Velocity (m/s)")));
 		jSliderV1.setPaintLabels(true);
 		jSliderV1.setPaintTicks(true);
 		jSliderV1.setMinorTickSpacing(10);
@@ -319,7 +319,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars1.add(jPanelV1);
 
 		jPanelV2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.3", "Circle 2 Velocity (m/s)")));
+				"colisao$rec.exp.customizer.title.3", "Circle 2 Velocity (m/s)")));
 		jPanelV2.setEnabled(false);
 		jSliderV2.setPaintLabels(true);
 		jSliderV2.setPaintTicks(true);
@@ -349,7 +349,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars1.add(jPanelV2);
 
 		jPanelR1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.4", "Circle 1 Redius (m)")));
+				"colisao$rec.exp.customizer.title.4", "Circle 1 Redius (m)")));
 		jPanelR1.setEnabled(false);
 		jSliderR1.setPaintLabels(true);
 		jSliderR1.setPaintTicks(true);
@@ -379,7 +379,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars1.add(jPanelR1);
 
 		jPanelR2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.5", "Circle 2 Radius (m)")));
+				"colisao$rec.exp.customizer.title.5", "Circle 2 Radius (m)")));
 		jSliderR2.setPaintLabels(true);
 		jSliderR2.setPaintTicks(true);
 		jSliderR2.setMinorTickSpacing(4);
@@ -407,13 +407,13 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 
 		panelVars1.add(jPanelR2);
 
-		tabVars.addTab(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.12",
+		tabVars.addTab(ReCResourceBundle.findStringOrDefault("colisao$rec.exp.customizer.title.12",
 				"Particle Settings"), panelVars1);
 
 		panelVars2.setLayout(new java.awt.GridLayout(4, 0));
 
 		jPanelM1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.6", "Circle 1 Mass (kg)")));
+				"colisao$rec.exp.customizer.title.6", "Circle 1 Mass (kg)")));
 		jSliderM1.setPaintLabels(true);
 		jSliderM1.setPaintTicks(true);
 		jSliderM1.setMinorTickSpacing(20);
@@ -443,7 +443,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars2.add(jPanelM1);
 
 		jPanelM2.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.7", "Circle 1 Mass (kg)")));
+				"colisao$rec.exp.customizer.title.7", "Circle 1 Mass (kg)")));
 		jSliderM2.setPaintLabels(true);
 		jSliderM2.setPaintTicks(true);
 		jSliderM2.setMinorTickSpacing(20);
@@ -473,7 +473,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars2.add(jPanelM2);
 
 		jPanelA.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.8", "Impact Angle (degrees)")));
+				"colisao$rec.exp.customizer.title.8", "Impact Angle (degrees)")));
 		jSliderA.setPaintLabels(true);
 		jSliderA.setPaintTicks(true);
 		jSliderA.setMinorTickSpacing(10);
@@ -502,21 +502,21 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		panelVars2.add(jPanelA);
 
 		jPanelC.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.9", "Type of Impact")));
+				"colisao$rec.exp.customizer.title.9", "Type of Impact")));
 		jRadioButtonElastica.setSelected(true);
-		jRadioButtonElastica.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.10",
+		jRadioButtonElastica.setText(ReCResourceBundle.findStringOrDefault("colisao$rec.exp.customizer.title.10",
 				"Elastic"));
 		buttonGroup1.add(jRadioButtonElastica);
 		jPanelC.add(jRadioButtonElastica);
 
 		jRadioButtonNElastica.setText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.11", "Perfectly Inelastic"));
+				"colisao$rec.exp.customizer.title.11", "Perfectly Inelastic"));
 		buttonGroup1.add(jRadioButtonNElastica);
 		jPanelC.add(jRadioButtonNElastica);
 
 		panelVars2.add(jPanelC);
 
-		tabVars.addTab(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.13",
+		tabVars.addTab(ReCResourceBundle.findStringOrDefault("colisao$rec.exp.customizer.title.13",
 				"Particle and Coliison Settings"), panelVars2);
 
 		panelRoot.add(tabVars, java.awt.BorderLayout.SOUTH);
@@ -525,7 +525,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanelBtns.setLayout(new java.awt.GridBagLayout());
 
-		jButtonOK.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.ok", "OK"));
+		jButtonOK.setText(ReCResourceBundle.findStringOrDefault("colisao$rec.exp.customizer.title.ok", "OK"));
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
@@ -534,7 +534,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanelOKCnl.add(jButtonOK);
 
-		jButtonCancel.setText(ReCResourceBundle.findStringOrDefault("ReCExpColisao$rec.exp.customizer.title.cancel",
+		jButtonCancel.setText(ReCResourceBundle.findStringOrDefault("colisao$rec.exp.customizer.title.cancel",
 				"Cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -550,7 +550,7 @@ public class ColisaoCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanelBtns.add(jPanelOKCnl, gridBagConstraints);
 
 		jButtonDefaultConfig.setText(ReCResourceBundle.findStringOrDefault(
-				"ReCExpColisao$rec.exp.customizer.title.dfc", "Default Configuration"));
+				"colisao$rec.exp.customizer.title.dfc", "Default Configuration"));
 		jButtonDefaultConfig.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonDefaultConfigActionPerformed(evt);

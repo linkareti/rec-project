@@ -39,7 +39,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="&lt;User Code&gt;">
-                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.title.1&quot;,&quot;Spring constant (N/m)&quot;)" type="code"/>
+                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.title.1&quot;,&quot;Spring constant (N/m)&quot;)" type="code"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -90,7 +90,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="&lt;User Code&gt;">
-                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.title.2&quot;,&quot;Mass (Kg)&quot;)" type="code"/>
+                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.title.2&quot;,&quot;Mass (Kg)&quot;)" type="code"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -138,7 +138,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="&lt;User Code&gt;">
-                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.title.3&quot;,&quot;Friction constant (Kg/s)&quot;)" type="code"/>
+                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.title.3&quot;,&quot;Friction constant (Kg/s)&quot;)" type="code"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -186,7 +186,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="&lt;User Code&gt;">
-                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.title.4&quot;,&quot;Initial position (m)&quot;)" type="code"/>
+                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.title.4&quot;,&quot;Initial position (m)&quot;)" type="code"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -246,12 +246,12 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="&lt;User Code&gt;">
-                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.title.tbs&quot;,&quot;TBS&quot;)" type="code"/>
+                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.title.tbs&quot;,&quot;TBS&quot;)" type="code"/>
                     </TitledBorder>
                   </Border>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.tip.tbs&quot;,&quot;Time between samples&quot;)" type="code"/>
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.tip.tbs&quot;,&quot;Time between samples&quot;)" type="code"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[82, 224]"/>
@@ -275,7 +275,7 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.tip.tbs&quot;,&quot;Time between samples&quot;)" type="code"/>
+                      <Connection code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.tip.tbs&quot;,&quot;Time between samples&quot;)" type="code"/>
                     </Property>
                     <Property name="value" type="int" value="100"/>
                   </Properties>
@@ -310,12 +310,12 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="&lt;User Code&gt;">
-                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.title.samples&quot;,&quot;N Samples&quot;)" type="code"/>
+                      <Connection PropertyName="titleX" code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.title.samples&quot;,&quot;N Samples&quot;)" type="code"/>
                     </TitledBorder>
                   </Border>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.tip.samples&quot;,&quot;Number of samples&quot;)" type="code"/>
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.tip.samples&quot;,&quot;Number of samples&quot;)" type="code"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[82, 224]"/>
@@ -339,7 +339,7 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.tip.samples&quot;,&quot;Number of samples&quot;)" type="code"/>
+                      <Connection code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.tip.samples&quot;,&quot;Number of samples&quot;)" type="code"/>
                     </Property>
                     <Property name="value" type="int" value="100"/>
                   </Properties>
@@ -412,7 +412,7 @@
             <Component class="javax.swing.JButton" name="btnOK">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.title.ok&quot;,&quot;OK&quot;)" type="code"/>
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.title.ok&quot;,&quot;OK&quot;)" type="code"/>
                 </Property>
               </Properties>
               <Events>
@@ -422,7 +422,7 @@
             <Component class="javax.swing.JButton" name="btnCancel">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.title.cancel&quot;,&quot;Cancel&quot;)" type="code"/>
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.title.cancel&quot;,&quot;Cancel&quot;)" type="code"/>
                 </Property>
               </Properties>
               <Events>
@@ -448,7 +448,7 @@
             <Component class="javax.swing.JButton" name="btnDefaults">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;ReCExpMM$rec.exp.customizer.title.dfc&quot;,&quot;Default config&quot;)" type="code"/>
+                  <Connection code="ReCResourceBundle.findStringOrDefault(&quot;mm$rec.exp.customizer.title.dfc&quot;,&quot;Default config&quot;)" type="code"/>
                 </Property>
               </Properties>
               <Events>

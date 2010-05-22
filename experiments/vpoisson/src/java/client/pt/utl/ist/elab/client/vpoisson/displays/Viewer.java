@@ -69,7 +69,7 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 
 		jPanel45.setLayout(new java.awt.GridBagLayout());
 
-		jButtonShowSolutionX.setText(ReCResourceBundle.findString("ReCExpPoisson$rec.exp.poisson.show"));
+		jButtonShowSolutionX.setText(ReCResourceBundle.findString("poisson$rec.exp.poisson.show"));
 		jButtonShowSolutionX.setEnabled(false);
 		jButtonShowSolutionX.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +124,7 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 
 		jPanel46.setLayout(new java.awt.GridBagLayout());
 
-		jButtonShowSolutionY.setText(ReCResourceBundle.findString("ReCExpPoisson$rec.exp.poisson.show"));
+		jButtonShowSolutionY.setText(ReCResourceBundle.findString("poisson$rec.exp.poisson.show"));
 		jButtonShowSolutionY.setEnabled(false);
 		jButtonShowSolutionY.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +179,7 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 
 		jPanel47.setLayout(new java.awt.GridBagLayout());
 
-		jButtonShowSolutionZ.setText(ReCResourceBundle.findString("ReCExpPoisson$rec.exp.poisson.show"));
+		jButtonShowSolutionZ.setText(ReCResourceBundle.findString("poisson$rec.exp.poisson.show"));
 		jButtonShowSolutionZ.setEnabled(false);
 		jButtonShowSolutionZ.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,7 +234,7 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 
 		jPanel16.setLayout(new java.awt.GridBagLayout());
 
-		jLabelXCut7.setText(ReCResourceBundle.findString("ReCExpPoisson$rec.exp.poisson.cuts"));
+		jLabelXCut7.setText(ReCResourceBundle.findString("poisson$rec.exp.poisson.cuts"));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -375,7 +375,7 @@ public class Viewer extends javax.swing.JPanel implements ExpDataDisplay, ExpDat
 	}
 
 	public static void main(String args[]) {
-		ReCResourceBundle.loadResourceBundle("ReCExpPoisson",
+		ReCResourceBundle.loadResourceBundle("poisson",
 				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Viewer());

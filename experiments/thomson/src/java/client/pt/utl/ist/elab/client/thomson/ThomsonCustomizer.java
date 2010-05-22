@@ -73,7 +73,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderTAce.setToolTipText("escolher o valor da tens\u00e3o de acelera\u00e7\u00e3o dos electr\u00f5es");
 		jSliderTAce.setValue(4000);
 		jSliderTAce.setBorder(new javax.swing.border.TitledBorder(null, ReCResourceBundle
-				.findString("ReCExpThomson$rec.exp.thomson.lbl.vpot"), javax.swing.border.TitledBorder.LEFT,
+				.findString("thomson$rec.exp.thomson.lbl.vpot"), javax.swing.border.TitledBorder.LEFT,
 				javax.swing.border.TitledBorder.TOP));
 		jSliderTAce.setMinimumSize(new java.awt.Dimension(200, 67));
 		jSliderTAce.setName("tensao1");
@@ -121,7 +121,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderTDef.setSnapToTicks(true);
 		jSliderTDef.setValue(0);
 		jSliderTDef.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpThomson$rec.exp.thomson.lbl.dpot")));
+				.findString("thomson$rec.exp.thomson.lbl.dpot")));
 		jSliderTDef.setPreferredSize(new java.awt.Dimension(300, 59));
 		jSliderTDef.setEnabled(false);
 		jSliderTDef.setValueIsAdjusting(true);
@@ -171,7 +171,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jSliderIHelm.setSnapToTicks(true);
 		jSliderIHelm.setValue(800);
 		jSliderIHelm.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpThomson$rec.exp.thomson.lbl.current")));
+				.findString("thomson$rec.exp.thomson.lbl.current")));
 		jSliderIHelm.setPreferredSize(new java.awt.Dimension(300, 59));
 		jSliderIHelm.setValueIsAdjusting(true);
 		jSliderIHelm.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -215,7 +215,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel6.setLayout(new java.awt.GridLayout(3, 0));
 
 		jRadioButtonB.setSelected(true);
-		jRadioButtonB.setText(ReCResourceBundle.findString("ReCExpThomson$rec.exp.thomson.lbl.magdef"));
+		jRadioButtonB.setText(ReCResourceBundle.findString("thomson$rec.exp.thomson.lbl.magdef"));
 		buttonGroup1.add(jRadioButtonB);
 		jRadioButtonB.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -225,7 +225,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel6.add(jRadioButtonB);
 
-		jRadioButtonF.setText(ReCResourceBundle.findString("ReCExpThomson$rec.exp.thomson.lbl.eqforce"));
+		jRadioButtonF.setText(ReCResourceBundle.findString("thomson$rec.exp.thomson.lbl.eqforce"));
 		buttonGroup1.add(jRadioButtonF);
 		jRadioButtonF.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -235,7 +235,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel6.add(jRadioButtonF);
 
-		jCheckBoxVideo.setText(ReCResourceBundle.findString("ReCExpThomson$rec.exp.thomson.lbl.wvideo"));
+		jCheckBoxVideo.setText(ReCResourceBundle.findString("thomson$rec.exp.thomson.lbl.wvideo"));
 		jPanel6.add(jCheckBoxVideo);
 
 		jPanel5.add(jPanel6, java.awt.BorderLayout.WEST);
@@ -253,7 +253,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanelSend.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanelSend.setPreferredSize(new java.awt.Dimension(350, 42));
 		jButtonOK.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
-		jButtonOK.setText(ReCResourceBundle.findString("ReCExpThomson$rec.exp.thomson.lbl.ok"));
+		jButtonOK.setText(ReCResourceBundle.findString("thomson$rec.exp.thomson.lbl.ok"));
 		jButtonOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonOKActionPerformed(evt);
@@ -266,7 +266,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanelSend.add(jButtonOK, gridBagConstraints);
 
 		jButtonCancel.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
-		jButtonCancel.setText(ReCResourceBundle.findString("ReCExpThomson$rec.exp.thomson.lbl.cancel"));
+		jButtonCancel.setText(ReCResourceBundle.findString("thomson$rec.exp.thomson.lbl.cancel"));
 		jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonCancelActionPerformed(evt);
@@ -286,7 +286,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanelSend.add(jLabel2, gridBagConstraints);
 
 		jButtonDefaults.setFont(new java.awt.Font("Comic Sans MS", 1, 12));
-		jButtonDefaults.setText(ReCResourceBundle.findString("ReCExpThomson$rec.exp.dftcfg.thomson.title.1"));
+		jButtonDefaults.setText(ReCResourceBundle.findString("thomson$rec.exp.dftcfg.thomson.title.1"));
 		jButtonDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonDefaultsActionPerformed(evt);
@@ -505,7 +505,7 @@ public class ThomsonCustomizer extends javax.swing.JPanel implements com.linkare
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("ReCExpThomson$rec.exp.thomson.customizer.title");
+		return ReCResourceBundle.findString("thomson$rec.exp.thomson.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {

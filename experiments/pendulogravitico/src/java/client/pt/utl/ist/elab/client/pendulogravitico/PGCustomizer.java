@@ -103,7 +103,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findString("ReCExpPG$rec.exp.lbl.pg.ok"));
+		btnOK.setText(ReCResourceBundle.findString("pendulogravitico$rec.exp.lbl.pg.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -115,7 +115,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("ReCExpPG$rec.exp.lbl.pg.cancel"));
+		btnCancel.setText(ReCResourceBundle.findString("pendulogravitico$rec.exp.lbl.pg.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -134,7 +134,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("ReCExpPG$rec.exp.lbl.pg.dftacq"));
+		btnDefaults.setText(ReCResourceBundle.findString("pendulogravitico$rec.exp.lbl.pg.dftacq"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -161,7 +161,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel5.setLayout(new java.awt.BorderLayout());
 
 		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPG$rec.exp.lbl.pg.iniang")));
+				.findString("pendulogravitico$rec.exp.lbl.pg.iniang")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel5.setPreferredSize(new java.awt.Dimension(450, 80));
 		sldAngle.setMajorTickSpacing(10);
@@ -207,7 +207,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel6.setLayout(new java.awt.BorderLayout());
 
 		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPG$rec.exp.lbl.pg.ns")));
+				.findString("pendulogravitico$rec.exp.lbl.pg.ns")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -261,7 +261,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel1.setLayout(new java.awt.BorderLayout());
 
 		jPanel1.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPG$rec.exp.lbl.pg.freq")));
+				.findString("pendulogravitico$rec.exp.lbl.pg.freq")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldFreq.setMajorTickSpacing(25);
@@ -311,7 +311,7 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel51.setLayout(new java.awt.BorderLayout());
 
 		jPanel51.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("ReCExpPG$rec.exp.lbl.pg.iniheight")));
+				.findString("pendulogravitico$rec.exp.lbl.pg.iniheight")));
 		jPanel51.setMinimumSize(new java.awt.Dimension(100, 350));
 		jPanel51.setPreferredSize(new java.awt.Dimension(150, 350));
 		sldHeight.setMajorTickSpacing(10);
@@ -451,11 +451,11 @@ public class PGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		btnOK.setEnabled(!lblErrorSamplesTooHigh.isEnabled());
 
 		if (!btnOK.isEnabled())
-			lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("ReCExpPG$rec.exp.lbl.pg.maxsamples",
+			lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("pendulogravitico$rec.exp.lbl.pg.maxsamples",
 					"The number of samples must be: ")
 					+ (sldFreq.getValue() * 60));
 		else
-			lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("ReCExpPG$rec.exp.lbl.pg.time",
+			lblErrorSamplesTooHigh.setText(ReCResourceBundle.findStringOrDefault("pendulogravitico$rec.exp.lbl.pg.time",
 					"Exp duration: ")
 					+ df.format((float) sldNumSamples.getValue() / sldFreq.getValue()) + " s");
 	}

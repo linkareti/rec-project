@@ -297,7 +297,7 @@ public class VideoPanel extends javax.swing.JPanel implements com.linkare.rec.im
 	}// byteArray2Image(byte[] byteArray)
 
 	public String getName() {
-		return ReCResourceBundle.findStringOrDefault("ReCExpThomson$rec.exp.display.thomson.title.video", "Video");
+		return ReCResourceBundle.findStringOrDefault("thomson$rec.exp.display.thomson.title.video", "Video");
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

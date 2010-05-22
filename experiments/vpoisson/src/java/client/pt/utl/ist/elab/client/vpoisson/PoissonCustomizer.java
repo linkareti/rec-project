@@ -647,7 +647,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel13.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel13.setPreferredSize(new java.awt.Dimension(350, 42));
 		jPanel14.setMinimumSize(new java.awt.Dimension(143, 25));
-		btnOK.setText(ReCResourceBundle.findString("ReCExpPoisson$rec.exp.customizer.title.ok"));
+		btnOK.setText(ReCResourceBundle.findString("poisson$rec.exp.customizer.title.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -656,7 +656,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 
 		jPanel14.add(btnOK);
 
-		btnCancel.setText(ReCResourceBundle.findString("ReCExpPoisson$rec.exp.customizer.title.cancel"));
+		btnCancel.setText(ReCResourceBundle.findString("poisson$rec.exp.customizer.title.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -671,7 +671,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 		jPanel13.add(jPanel14, gridBagConstraints);
 
 		jPanel15.setMinimumSize(new java.awt.Dimension(136, 25));
-		btnDefaults.setText(ReCResourceBundle.findString("ReCExpPoisson$rec.exp.customizer.title.dfc"));
+		btnDefaults.setText(ReCResourceBundle.findString("poisson$rec.exp.customizer.title.dfc"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -799,7 +799,7 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	}// GEN-LAST:event_jTextFieldNxFocusLost
 
 	public static void main(String args[]) {
-		ReCResourceBundle.loadResourceBundle("ReCExpPoisson",
+		ReCResourceBundle.loadResourceBundle("poisson",
 				"recresource:///pt/utl/ist/elab/client/vpoisson/resources/messages");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new PoissonCustomizer());
@@ -816,9 +816,9 @@ public class PoissonCustomizer extends javax.swing.JPanel implements com.linkare
 	}
 
 	private void verifyTextParser(JTextField field, String[] s) {
-		String error = ReCResourceBundle.findStringOrDefault("ReCExpPoisson$rec.exp.customizer.title.errorfunc",
+		String error = ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.errorfunc",
 				"Wrong function!");
-		String title = ReCResourceBundle.findStringOrDefault("ReCExpPoisson$rec.exp.customizer.title.error", "Error");
+		String title = ReCResourceBundle.findStringOrDefault("poisson$rec.exp.customizer.title.error", "Error");
 		try {
 			new ParsedMultiVarFunction(field.getText(), s);
 		} catch (ParserException pe) {

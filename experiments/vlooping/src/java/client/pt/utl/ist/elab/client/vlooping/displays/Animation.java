@@ -29,7 +29,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelListener {
 
 	private PlottingPanel panel = new PlottingPanel("X (m)", "Y (m)", ReCResourceBundle.findStringOrDefault(
-			"ReCExpLooping$rec.exp.customizer.title.graph", "Trajectory"));
+			"looping$rec.exp.customizer.title.graph", "Trajectory"));
 	private Dataset dataset = null;
 	private Circle circle = null;
 	private double xini, h1, h2, r1, xc, yc;
@@ -40,7 +40,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 		this.setLayout(new java.awt.BorderLayout());
 		this.add(panel);
 
-		ReCResourceBundle.loadResourceBundle("ReCExpLooping",
+		ReCResourceBundle.loadResourceBundle("looping",
 				"recresource:///pt/utl/ist/elab/client/vlooping/resources/messages");
 
 		dataset = new Dataset(Color.BLACK, Color.BLUE, true);
@@ -137,7 +137,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	}
 
 	public static void main(String args[]) {
-		ReCResourceBundle.loadResourceBundle("ReCExpLooping",
+		ReCResourceBundle.loadResourceBundle("looping",
 				"recresource:///pt/utl/ist/elab/client/vlooping/resources/messages");
 		javax.swing.JFrame dummy = new javax.swing.JFrame();
 		dummy.getContentPane().add(new Animation());

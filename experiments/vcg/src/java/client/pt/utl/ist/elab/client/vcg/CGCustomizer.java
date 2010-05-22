@@ -50,9 +50,9 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		reg = new DrawingPanel();
 		reg.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.balanca.title.14", "Target")));
+				"cg$rec.exp.customizer.balanca.title.14", "Target")));
 		reg.setToolTipText(ReCResourceBundle
-				.findStringOrDefault("ReCExpCG$rec.exp.customizer.balanca.tip.14", "Target"));
+				.findStringOrDefault("cg$rec.exp.customizer.balanca.tip.14", "Target"));
 		XAxis norm = new XAxis("dm");
 		reg.addDrawable(norm);
 		reg.setMinimumSize(new java.awt.Dimension(150, 100));
@@ -183,14 +183,14 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		expPanel.setLayout(new java.awt.GridBagLayout());
 
 		expPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.title.1", "Experiment")));
-		expPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.1",
+				"cg$rec.exp.customizer.title.1", "Experiment")));
+		expPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.1",
 				"Experiment Goal"));
 		expPanel.setMinimumSize(new java.awt.Dimension(250, 50));
 		expPanel.setPreferredSize(new java.awt.Dimension(250, 50));
-		expCRadioButton.setText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.title.2",
+		expCRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.2",
 				"Torsion Constant"));
-		expCRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.3",
+		expCRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.3",
 				"Fiber Torsion Constant"));
 		expButtonGroup.add(expCRadioButton);
 		expCRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -202,8 +202,8 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		expPanel.add(expCRadioButton, new java.awt.GridBagConstraints());
 
 		expGRadioButton.setSelected(true);
-		expGRadioButton.setText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.title.3", "G"));
-		expGRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.3",
+		expGRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.3", "G"));
+		expGRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.3",
 				"Gravitational Constant"));
 		expButtonGroup.add(expGRadioButton);
 		expPanel.add(expGRadioButton, new java.awt.GridBagConstraints());
@@ -218,27 +218,27 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		constPanel.setLayout(new java.awt.GridBagLayout());
 
 		constPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.title.4", "Constants")));
-		constPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.4",
+				"cg$rec.exp.customizer.title.4", "Constants")));
+		constPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.4",
 				"Constants nature"));
 		constPanel.setMinimumSize(new java.awt.Dimension(250, 50));
 		constPanel.setPreferredSize(new java.awt.Dimension(250, 50));
-		randConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.title.5",
+		randConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.5",
 				"Random"));
-		randConstRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.5",
+		randConstRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.5",
 				"Variable constants"));
 		constsButtonGroup.add(randConstRadioButton);
 		constPanel.add(randConstRadioButton, new java.awt.GridBagConstraints());
 
 		realConstRadioButton.setSelected(true);
-		realConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.title.6",
+		realConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.6",
 				"Real"));
-		realConstRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.6",
+		realConstRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.6",
 				"Real value constants"));
 		constsButtonGroup.add(realConstRadioButton);
 		constPanel.add(realConstRadioButton, new java.awt.GridBagConstraints());
 
-		sameConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.title.13",
+		sameConstRadioButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.13",
 				"The same"));
 		sameConstRadioButton.setToolTipText(ReCResourceBundle.findStringOrDefault("rec.exp.customizer.tip.13",
 				"The same constants used in the last simulation"));
@@ -255,8 +255,8 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		angInitPanel.setLayout(new java.awt.GridBagLayout());
 
 		angInitPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.title.7", "Initial Angle (degrees)")));
-		angInitPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.7",
+				"cg$rec.exp.customizer.title.7", "Initial Angle (degrees)")));
+		angInitPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.7",
 				"Initial Angle (degrees)"));
 		angInitPanel.setMinimumSize(new java.awt.Dimension(250, 80));
 		angInitPanel.setPreferredSize(new java.awt.Dimension(250, 80));
@@ -265,7 +265,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		angInitSlider.setMinorTickSpacing(10);
 		angInitSlider.setPaintLabels(true);
 		angInitSlider.setPaintTicks(true);
-		angInitSlider.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.7",
+		angInitSlider.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.7",
 				"Initial Angle (degrees)"));
 		angInitSlider.setValue(0);
 		angInitSlider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -289,7 +289,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		angInitTextField.setColumns(4);
 		angInitTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		angInitTextField.setText("0");
-		angInitTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.7",
+		angInitTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.7",
 				"Initial Angle (degrees)"));
 		angInitTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
@@ -309,16 +309,16 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		propPanel.setLayout(new java.awt.GridLayout(4, 0));
 
 		propPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.title.8", "Properties")));
-		propPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.8",
+				"cg$rec.exp.customizer.title.8", "Properties")));
+		propPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.8",
 				"General properties"));
 		propPanel.setMinimumSize(new java.awt.Dimension(250, 300));
 		propPanel.setPreferredSize(new java.awt.Dimension(250, 380));
 		lPanel.setLayout(new java.awt.GridBagLayout());
 
 		lPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.title.9", "L (dm)")));
-		lPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.9",
+				"cg$rec.exp.customizer.title.9", "L (dm)")));
+		lPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.9",
 				"Distance between the axis and the target"));
 		lSlider.setFont(new java.awt.Font("MS Sans Serif", 0, 11));
 		lSlider.setMajorTickSpacing(10);
@@ -326,7 +326,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		lSlider.setMinorTickSpacing(5);
 		lSlider.setPaintLabels(true);
 		lSlider.setPaintTicks(true);
-		lSlider.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.9",
+		lSlider.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.9",
 				"Distance between the axis and the target"));
 		lSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		lSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -348,7 +348,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		lTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		lTextField.setText("50");
-		lTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.9",
+		lTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.9",
 				"Distance between the axis and the target"));
 		lTextField.setPreferredSize(new java.awt.Dimension(43, 20));
 		lTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -364,8 +364,8 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		s0Panel.setLayout(new java.awt.GridBagLayout());
 
 		s0Panel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.title.10", "S0 (mm/10)")));
-		s0Panel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.10",
+				"cg$rec.exp.customizer.title.10", "S0 (mm/10)")));
+		s0Panel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.10",
 				"Distance between the bigger and the smaller spheres"));
 		s0Slider.setMajorTickSpacing(200);
 		s0Slider.setMaximum(1000);
@@ -373,7 +373,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		s0Slider.setMinorTickSpacing(100);
 		s0Slider.setPaintLabels(true);
 		s0Slider.setPaintTicks(true);
-		s0Slider.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.10",
+		s0Slider.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.10",
 				"Distance between the bigger and the smaller spheres"));
 		s0Slider.setValue(465);
 		s0Slider.setPreferredSize(new java.awt.Dimension(36, 24));
@@ -396,7 +396,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		s0TextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		s0TextField.setText("465");
-		s0TextField.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.10",
+		s0TextField.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.10",
 				"Distance between the bigger and the smaller spheres"));
 		s0TextField.setPreferredSize(new java.awt.Dimension(43, 20));
 		s0TextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -412,15 +412,15 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		dPanel.setLayout(new java.awt.GridBagLayout());
 
 		dPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.title.11", "d (mm)")));
-		dPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.11",
+				"cg$rec.exp.customizer.title.11", "d (mm)")));
+		dPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.11",
 				"Half the bar's size"));
 		dSlider.setMajorTickSpacing(20);
 		dSlider.setMinimum(10);
 		dSlider.setMinorTickSpacing(10);
 		dSlider.setPaintLabels(true);
 		dSlider.setPaintTicks(true);
-		dSlider.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.11",
+		dSlider.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.11",
 				"Half the bar's size"));
 		dSlider.setPreferredSize(new java.awt.Dimension(36, 24));
 		dSlider.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -442,7 +442,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		dTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 		dTextField.setText("50");
-		dTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.11",
+		dTextField.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.11",
 				"Half the bar's size"));
 		dTextField.setPreferredSize(new java.awt.Dimension(43, 20));
 		dTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -458,31 +458,31 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		mPanel.setLayout(new java.awt.GridLayout(2, 2));
 
 		mPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.title.12", "Masses (Kg)")));
-		mPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.12",
+				"cg$rec.exp.customizer.title.12", "Masses (Kg)")));
+		mPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.12",
 				"1st row are the smaller spheres (Editable through the Torsion Beam View)"));
 		mm1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		mm1Label.setText("[0.015]");
-		mm1Label.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.14",
+		mm1Label.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.14",
 				"Smaller sphere (Left)"));
 		mm1Label.setPreferredSize(new java.awt.Dimension(35, 20));
 		mPanel.add(mm1Label);
 
 		mm0Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		mm0Label.setText("[0.015]");
-		mm0Label.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.15",
+		mm0Label.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.15",
 				"Smaller sphere (Right)"));
 		mPanel.add(mm0Label);
 
 		mM1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		mM1Label.setText("[1.5]");
-		mM1Label.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.16",
+		mM1Label.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.16",
 				"Bigger sphere (Left)"));
 		mPanel.add(mM1Label);
 
 		mM0Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		mM0Label.setText("[1.5]");
-		mM0Label.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.17",
+		mM0Label.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.17",
 				"Bigger sphere (Right)"));
 		mPanel.add(mM0Label);
 
@@ -504,8 +504,8 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		btnPanel.setLayout(new java.awt.GridBagLayout());
 
-		okButton.setText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.title.ok", "OK"));
-		okButton.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.ok",
+		okButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.ok", "OK"));
+		okButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.ok",
 				"Run the simulation"));
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -516,8 +516,8 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		controlBtnPanel.add(okButton);
 
 		cancelButton.setText(ReCResourceBundle
-				.findStringOrDefault("ReCExpCG$rec.exp.customizer.title.cancel", "Cancel"));
-		cancelButton.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.cancel",
+				.findStringOrDefault("cg$rec.exp.customizer.title.cancel", "Cancel"));
+		cancelButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.cancel",
 				"Cancel the experiment"));
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -532,9 +532,9 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.weightx = 1.0;
 		btnPanel.add(controlBtnPanel, gridBagConstraints);
 
-		defaultButton.setText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.title.dfc",
+		defaultButton.setText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.title.dfc",
 				"Default config"));
-		defaultButton.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpCG$rec.exp.customizer.tip.dfc",
+		defaultButton.setToolTipText(ReCResourceBundle.findStringOrDefault("cg$rec.exp.customizer.tip.dfc",
 				"Load the default parameters of the experiment"));
 		defaultButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -558,7 +558,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		tbsPanel.setLayout(new java.awt.GridBagLayout());
 
 		tbsPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.title.tbs", "TBS")));
+				"cg$rec.exp.customizer.title.tbs", "TBS")));
 		tbsPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.tbs",
 				"Time between samples"));
 		tbsPanel.setPreferredSize(new java.awt.Dimension(82, 224));
@@ -610,7 +610,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		samplesPanel.setLayout(new java.awt.GridBagLayout());
 
 		samplesPanel.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findStringOrDefault(
-				"ReCExpCG$rec.exp.customizer.title.samples", "N Samples")));
+				"cg$rec.exp.customizer.title.samples", "N Samples")));
 		samplesPanel.setToolTipText(ReCResourceBundle.findStringOrDefault("ReCExpMM$rec.exp.customizer.tip.samples",
 				"Number of samples"));
 		samplesPanel.setMinimumSize(new java.awt.Dimension(70, 83));
