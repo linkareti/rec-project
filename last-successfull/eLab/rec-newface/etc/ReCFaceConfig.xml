@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<reCFaceConfig usersListRefreshRateMs="10000" splashIconLocationBundleKey="ReCBaseUI$rec.bui.icon.splash" showVideoFrame="false" showUserList="true" showChatFrame="true" iconSponsorLocationBundleKey="bundleName#bundleKey" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.frame" helpPageLocationBundleKey="ReCBaseUI$rec.bui.url.help" frameTitleBundleKey="ReCBaseUI$rec.bui.title.frame" enterApparatusChatRoom="true" enableVideoFrame="false" enableUsersList="true" enableLoginPassword="false" enableChatFrame="true" autoConnectLab="false" appPreferredWidth="848" appPreferredHeight="478" aboutPageLocationBundleKey="ReCBaseUI$rec.bui.url.about">
+	
+	<!-- Nota: Nao esquecer de actualizar a localizacao do bundle de acordo com a respectiva refactorizacao no ReC -->
+	
+	<localizationBundle name="ReCBaseUI" 
+			location="recresource:///com/linkare/rec/impl/baseUI/resources/ReCBaseUI"/>
+	<localizationBundle name="ReCLabeLab" 
+			location="recresource:///pt/utl/ist/elab/resources/ReCLabeLab"/>
+	
+	    
+	<localizationBundle name="ReCExpScuba"
+                        location="recresource:///pt/utl/ist/elab/client/scuba/resources/ReCExpScuba"/>
+    <localizationBundle name="ReCExpRadio"
+                        location="recresource:///pt/utl/ist/elab/client/radioactividade/resources/ReCExpRadio"/>
+    <localizationBundle name="ReCExpT"
+                        location="recresource:///pt/utl/ist/elab/client/conducaocalor/resources/ReCExpT"/>
+						
+	<localizationBundle name="ReCExpG"
+                        location="recresource:///pt/utl/ist/elab/client/g/resources/ReCExpG"/>	
+	<localizationBundle name="ReCExpPendulo"
+                        location="recresource:///pt/utl/ist/elab/client/pendulo/resources/ReCExpPendulo"/>
+	<localizationBundle name="ReCExpPV"
+                        location="recresource:///pt/utl/ist/elab/client/pv/resources/ReCExpPV"/>
+   	
+	<lab toolTipBundleKey="ReCLabeLab$rec.lab.tip.elab" location="corbaloc:iiop:1.2@elab.ist.utl.pt:9003/MultiCastController" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.lab" displayStringBundleKey="ReCLabeLab$rec.lab.title.elab" desktopLocationBundleKey="ReCBaseUI$rec.bui.image.desktop">
+        <!-- ============================================== -->
+		<!--  Experiencias de Testes (radio, scuba e heat)  -->
+		<!-- ============================================== -->
+		<apparatus toolTipBundleKey="ReCExpRadio$rec.exp.tip.radio" location="ELAB_RAD_STAMP_V02" iconLocationBundleKey="ReCExpRadio$rec.exp.icon.radio" headerDisplayClassLocationBundleKey="" displayStringBundleKey="ReCExpRadio$rec.exp.title.radio" descriptionStringBundleKey="ReCExpRadio$rec.exp.description.radio" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="ReCExpRadio$rec.exp.background.radio" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="ReCExpRadio$rec.exp.customizer.radio" visible="true" selected="true" order="0" enabled="false" connected="false">
+            <defaultAcquisitionConfig toolTipBundleKey="ReCExpRadio$rec.exp.dftcfg.radio.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize" displayStringBundleKey="ReCExpRadio$rec.exp.dftcfg.radio.title.1" classLocationBundleKey="ReCExpRadio$rec.exp.dftcfg.radio.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <mediaConfig videoLocation="ReCExpRadio$rec.exp.url.radio.video" canSave="true" offlinePlay="true"/>
+            <display toolTipBundleKey="ReCExpRadio$rec.exp.display.radio.tip.sensor" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpRadio$rec.exp.display.radio.title.sensor" classLocationBundleKey="ReCExpRadio$rec.exp.display.radio.loc.sensor" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpRadio$rec.exp.display.radio.tip.1" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpRadio$rec.exp.display.radio.title.1" classLocationBundleKey="ReCExpRadio$rec.exp.display.radio.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpRadio$rec.exp.display.radio.tip.2" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpRadio$rec.exp.display.radio.title.2" classLocationBundleKey="ReCExpRadio$rec.exp.display.radio.loc.2" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource locationBundleKey="ReCExpRadio$rec.exp.url.radio.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpRadio$rec.exp.url.radio.title.1"
+                 toolTipLocationBundleKey="ReCExpRadio$rec.exp.url.radio.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+        </apparatus>
+        <apparatus toolTipBundleKey="ReCExpScuba$rec.exp.tip.scuba" location="ELAB_SCUBA_STAMP_V02" iconLocationBundleKey="ReCExpScuba$rec.exp.icon.scuba" headerDisplayClassLocationBundleKey="" displayStringBundleKey="ReCExpScuba$rec.exp.title.scuba" descriptionStringBundleKey="ReCExpScuba$rec.exp.description.scuba" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="ReCExpScuba$rec.exp.background.scuba" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="ReCExpScuba$rec.exp.customizer.scuba" visible="true" selected="true" order="0" enabled="false" connected="false">
+            <defaultAcquisitionConfig toolTipBundleKey="ReCExpScuba$rec.exp.dftcfg.scuba.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize" displayStringBundleKey="ReCExpScuba$rec.exp.dftcfg.scuba.title.1" classLocationBundleKey="ReCExpScuba$rec.exp.dftcfg.scuba.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <mediaConfig videoLocation="ReCExpScuba$rec.exp.url.scuba.video" canSave="true" offlinePlay="true"/>
+            <display toolTipBundleKey="ReCExpScuba$rec.exp.display.scuba.tip.sensor" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpScuba$rec.exp.display.scuba.title.sensor" classLocationBundleKey="ReCExpScuba$rec.exp.display.scuba.loc.sensor" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpScuba$rec.exp.display.scuba.tip.1" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpScuba$rec.exp.display.scuba.title.1" classLocationBundleKey="ReCExpScuba$rec.exp.display.scuba.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpScuba$rec.exp.display.scuba.tip.2" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpScuba$rec.exp.display.scuba.title.2" classLocationBundleKey="ReCExpScuba$rec.exp.display.scuba.loc.2" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpScuba$rec.exp.display.scuba.tip.3" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpScuba$rec.exp.display.scuba.title.3" classLocationBundleKey="ReCExpScuba$rec.exp.display.scuba.loc.3" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpScuba$rec.exp.display.scuba.tip.4" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpScuba$rec.exp.display.scuba.title.4" classLocationBundleKey="ReCExpScuba$rec.exp.display.scuba.loc.4" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpScuba$rec.exp.display.scuba.tip.5" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpScuba$rec.exp.display.scuba.title.5" classLocationBundleKey="ReCExpScuba$rec.exp.display.scuba.loc.5" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpScuba$rec.exp.display.scuba.tip.6" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpScuba$rec.exp.display.scuba.title.6" classLocationBundleKey="ReCExpScuba$rec.exp.display.scuba.loc.6" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource locationBundleKey="ReCExpScuba$rec.exp.url.scuba.1"
+                 iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+                 displayStringBundleKey="ReCExpScuba$rec.exp.url.scuba.title.1"
+                 toolTipLocationBundleKey="ReCExpScuba$rec.exp.url.scuba.title.1"
+                 internalBrowser="false"
+                 order="1"/>
+        </apparatus>
+        <apparatus toolTipBundleKey="ReCExpT$rec.exp.tip.conducaoCalor" location="ELAB_CONDCALOR_STAMP_V1.0" iconLocationBundleKey="ReCExpT$rec.exp.icon.conducaoCalor" headerDisplayClassLocationBundleKey="" displayStringBundleKey="ReCExpT$rec.exp.title.conducaoCalor" descriptionStringBundleKey="ReCExpT$rec.exp.description.conducaoCalor" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="ReCExpT$rec.exp.background.conducaoCalor" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="ReCExpT$rec.exp.customizer.conducaoCalor" visible="true" selected="true" order="0" enabled="false" connected="false">
+            <mediaConfig videoLocation="ReCExpT$rec.exp.url.conducaoCalor.video" canSave="true" offlinePlay="true"/>
+            <display toolTipBundleKey="ReCExpT$rec.exp.display.conducaoCalor.tip.sensor" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpT$rec.exp.display.conducaoCalor.title.sensor" classLocationBundleKey="ReCExpT$rec.exp.display.conducaoCalor.loc.sensor" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpT$rec.exp.display.conducaoCalor.tip.1" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpT$rec.exp.display.conducaoCalor.title.1" classLocationBundleKey="ReCExpT$rec.exp.display.conducaoCalor.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpT$rec.exp.display.conducaoCalor.tip.2" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpT$rec.exp.display.conducaoCalor.title.2" classLocationBundleKey="ReCExpT$rec.exp.display.conducaoCalor.loc.2" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpT$rec.exp.display.conducaoCalor.tip.3" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpT$rec.exp.display.conducaoCalor.title.3" classLocationBundleKey="ReCExpT$rec.exp.display.conducaoCalor.loc.3" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpT$rec.exp.display.conducaoCalor.tip.4" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpT$rec.exp.display.conducaoCalor.title.4" classLocationBundleKey="ReCExpT$rec.exp.display.conducaoCalor.loc.4" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpT$rec.exp.display.conducaoCalor.tip.5" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpT$rec.exp.display.conducaoCalor.title.5" classLocationBundleKey="ReCExpT$rec.exp.display.conducaoCalor.loc.5" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpT$rec.exp.display.conducaoCalor.tip.6" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpT$rec.exp.display.conducaoCalor.title.6" classLocationBundleKey="ReCExpT$rec.exp.display.conducaoCalor.loc.6" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+        </apparatus>
+		<!-- ============================================== -->
+		<!--  Experiencias disponiveis no servidor antigo   -->
+		<!-- ============================================== -->
+		<apparatus videoLocation="" toolTipBundleKey="ReCExpG$rec.exp.tip.g" location="ELAB_G_STAMP_V02" iconLocationBundleKey="ReCExpG$rec.exp.icon.g" headerDisplayClassLocationBundleKey="" displayStringBundleKey="ReCExpG$rec.exp.title.g" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="ReCExpG$rec.exp.background.g" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="ReCExpG$rec.exp.customizer.g" visible="true" selected="true" order="0" enabled="false" connected="false">
+            <mediaConfig videoLocation="ReCExpG$rec.exp.url.g.video" canSave="true" offlinePlay="true"/>
+            <defaultAcquisitionConfig toolTipBundleKey="ReCExpG$rec.exp.dftcfg.g.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize" displayStringBundleKey="ReCExpG$rec.exp.dftcfg.g.title.1" classLocationBundleKey="ReCExpG$rec.exp.dftcfg.g.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpG$rec.exp.display.g.tip.sensor" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpG$rec.exp.display.g.title.sensor" classLocationBundleKey="ReCExpG$rec.exp.display.g.loc.sensor" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpG$rec.exp.display.g.tip.1" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpG$rec.exp.display.g.title.1" classLocationBundleKey="ReCExpG$rec.exp.display.g.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpG$rec.exp.display.g.tip.2" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpG$rec.exp.display.g.title.2" classLocationBundleKey="ReCExpG$rec.exp.display.g.loc.2" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+        </apparatus>
+		<apparatus videoLocation="" toolTipBundleKey="ReCExpPendulo$rec.exp.tip.pendulo" location="ELAB_PENDULO_STAMP_V02" iconLocationBundleKey="ReCExpPendulo$rec.exp.icon.pendulo" headerDisplayClassLocationBundleKey="" displayStringBundleKey="ReCExpPendulo$rec.exp.title.pendulo" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="ReCExpPendulo$rec.exp.background.pendulo" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="ReCExpPendulo$rec.exp.customizer.pendulo" visible="true" selected="true" order="0" enabled="false" connected="false">
+            <mediaConfig videoLocation="ReCExpPendulo$rec.exp.url.pendulo.video" canSave="true" offlinePlay="true"/>
+            <defaultAcquisitionConfig toolTipBundleKey="ReCExpPendulo$rec.exp.dftcfg.pendulo.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize" displayStringBundleKey="ReCExpPendulo$rec.exp.dftcfg.pendulo.title.1" classLocationBundleKey="ReCExpPendulo$rec.exp.dftcfg.pendulo.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpPendulo$rec.exp.display.pendulo.tip.sensor" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpPendulo$rec.exp.display.pendulo.title.sensor" classLocationBundleKey="ReCExpPendulo$rec.exp.display.pendulo.loc.sensor" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpPendulo$rec.exp.display.pendulo.tip.1" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpPendulo$rec.exp.display.pendulo.title.1" classLocationBundleKey="ReCExpPendulo$rec.exp.display.pendulo.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpPendulo$rec.exp.display.pendulo.tip.2" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpPendulo$rec.exp.display.pendulo.title.2" classLocationBundleKey="ReCExpPendulo$rec.exp.display.pendulo.loc.2" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+        </apparatus>
+        <apparatus videoLocation="" toolTipBundleKey="ReCExpPV$rec.exp.tip.pv" location="ELAB_PV_STAMP_V02" iconLocationBundleKey="ReCExpPV$rec.exp.icon.pv" headerDisplayClassLocationBundleKey="" displayStringBundleKey="ReCExpPV$rec.exp.title.pv" displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="ReCExpPV$rec.exp.background.pv" dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="ReCExpPV$rec.exp.customizer.pv" visible="true" selected="true" order="0" enabled="false" connected="false">
+            <mediaConfig videoLocation="ReCExpPV$rec.exp.url.pv.video" canSave="true" offlinePlay="true"/>
+            <defaultAcquisitionConfig toolTipBundleKey="ReCExpPV$rec.exp.dftcfg.pv.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize" displayStringBundleKey="ReCExpPV$rec.exp.dftcfg.pv.title.1" classLocationBundleKey="ReCExpPV$rec.exp.dftcfg.pv.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpPV$rec.exp.display.pv.tip.sensor" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" displayStringBundleKey="ReCExpPV$rec.exp.display.pv.title.sensor" classLocationBundleKey="ReCExpPV$rec.exp.display.pv.loc.sensor" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpPV$rec.exp.display.pv.tip.1" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table" displayStringBundleKey="ReCExpPV$rec.exp.display.pv.title.1" classLocationBundleKey="ReCExpPV$rec.exp.display.pv.loc.1" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpPV$rec.exp.display.pv.tip.2" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpPV$rec.exp.display.pv.title.2" classLocationBundleKey="ReCExpPV$rec.exp.display.pv.loc.2" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <display toolTipBundleKey="ReCExpPV$rec.exp.display.pv.tip.3" offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart" displayStringBundleKey="ReCExpPV$rec.exp.display.pv.title.3" classLocationBundleKey="ReCExpPV$rec.exp.display.pv.loc.3" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+            <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+        </apparatus>
+   </lab>
+    <webResource toolTipLocationBundleKey="" internalBrowser="false" iconLocationBundleKey="" visible="true" selected="true" order="0" enabled="false" connected="false"/>
+</reCFaceConfig>
