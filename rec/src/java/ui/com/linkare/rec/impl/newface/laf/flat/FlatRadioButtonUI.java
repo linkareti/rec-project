@@ -12,6 +12,8 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
@@ -23,7 +25,6 @@ import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.metal.MetalRadioButtonUI;
 import javax.swing.text.View;
 
-import sun.swing.SwingUtilities2;
 
 /**
  * 
@@ -47,7 +48,7 @@ public class FlatRadioButtonUI extends MetalRadioButtonUI {
 
 		Font f = c.getFont();
 		g.setFont(f);
-		FontMetrics fm = SwingUtilities2.getFontMetrics(c, g, f);
+		FontMetrics fm = g.getFontMetrics();
 
 		Rectangle viewRect = new Rectangle(size);
 		Rectangle iconRect = new Rectangle();
@@ -114,7 +115,9 @@ public class FlatRadioButtonUI extends MetalRadioButtonUI {
 					// *** paint the text disabled
 					g.setColor(getDisabledTextColor());
 				}
-				SwingUtilities2.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
+				AttributedString as=new AttributedString(text);
+				as.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON,mnemIndex,mnemIndex+1);
+				g.drawString(as.getIterator(), textRect.x, textRect.y + fm.getAscent());
 			}
 			if (b.hasFocus() && b.isFocusPainted() && textRect.width > 0 && textRect.height > 0) {
 				paintFocus(g, textRect, size);
