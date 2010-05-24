@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<jnlp spec="1.0+" codebase="@codebase@" href="OpenORB.jnlp">
+    <information>
+        <title>OpenORB Library</title>
+        <vendor>OpenORB.org</vendor>
+	<homepage href="http://openorb.sourceforge.net"/>
+	<description kind="one-line">The base classes for the ORB Implementation OpenORB</description>
+	<description kind="tooltip">OpenORB Client Library</description>
+    </information>
+    <resources>
+    	<jar href="lib/openorb_orb-1.4.0_sig.jar"/>	
+		<jar href="lib/avalon-framework_sig.jar"/>
+		<jar href="lib/xercesImpl_sig.jar"/> 
+		<jar href="lib/logkit_sig.jar"/> 
+		<jar href="lib/tools-1.4.0_sig.jar"/>
+		<jar href="lib/xml-apis_sig.jar"/>
+		<jar href="lib/openorb_orb_omg-1.4.0_sig.jar"/>
+		<jar href="lib/openorb_ots-1.4.0_sig.jar"/>
+		<jar href="lib/openorb_pss-1.4.0_sig.jar"/>
+    </resources>
+    <component-desc/>
+    <security>
+        <all-permissions/>
+    </security>
+</jnlp>
