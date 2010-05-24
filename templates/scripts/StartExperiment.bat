@@ -22,7 +22,7 @@ set TOOLKIT_SYSPROPS=-Dawt.toolkit=sun.awt.motif.MToolkit -Djava.awt.headless=tr
 set RECCLASSPATH=%DRIVER_BASE_DIR%/lib/xml-apis.jar;%DRIVER_BASE_DIR%/lib/tools-1.4.0.jar;%DRIVER_BASE_DIR%/lib/openorb_orb-1.4.0.jar;%DRIVER_BASE_DIR%/lib/openorb_pss-1.4.0.jar;%DRIVER_BASE_DIR%/lib/openorb_ots-1.4.0.jar;%DRIVER_BASE_DIR%/lib/logkit.jar;%DRIVER_BASE_DIR%/lib/xercesImpl.jar;%DRIVER_BASE_DIR%/lib/avalon-framework.jar;%DRIVER_BASE_DIR%/lib/OSP.jar
 set DRIVER_CLASSPATH=%DRIVER_BASE_DIR%/@experiment.name@Driver.jar;%DRIVER_BASE_DIR%/ELabHardwareServer.jar;%DRIVER_BASE_DIR%/ReCHardwareServer.jar;%DRIVER_BASE_DIR%/ReCCommon.jar
 
-set DEBUG=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,address=60001,suspend=n 
+REM set DEBUG=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,address=60001,suspend=n 
 
 set BOOTCLASSPATH=-Xbootclasspath/p:%DRIVER_BASE_DIR%/lib/openorb_orb_omg-1.4.0.jar
 
