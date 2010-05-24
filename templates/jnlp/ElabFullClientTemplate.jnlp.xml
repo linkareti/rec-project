@@ -37,7 +37,7 @@
 
 		<property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB"/>
 		<property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton"/>
-		<property name="openorb.config" value="etc/openorb.xml"/>
+		<property name="openorb.config" value="@codebase@/etc/openorb.xml"/>
   		<property name="openorb.profile" value="ReCClient"/>
 
         <property name="vlc.plugins.destdir" value=".eLab/native/plugins"/>
