@@ -116,9 +116,9 @@ public class FlatRadioButtonUI extends MetalRadioButtonUI {
 					g.setColor(getDisabledTextColor());
 				}
 				AttributedString as=new AttributedString(text);
-				if(mnemIndex!=-1)
+				if(mnemIndex>0 && mnemIndex<=text.length())
 				{
-					as.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON,mnemIndex,mnemIndex+1);
+					as.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON,mnemIndex-1,mnemIndex);
 				}
 				g.drawString(as.getIterator(), textRect.x, textRect.y + fm.getAscent());
 			}
