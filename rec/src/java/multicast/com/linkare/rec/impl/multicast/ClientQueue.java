@@ -7,7 +7,11 @@
 package com.linkare.rec.impl.multicast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import com.linkare.rec.acquisition.DataClient;
@@ -27,6 +31,8 @@ import com.linkare.rec.impl.multicast.security.DefaultUser;
 import com.linkare.rec.impl.multicast.security.IOperation;
 import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
+import com.linkare.rec.impl.threading.ExecutorScheduler;
+import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 
@@ -45,7 +51,7 @@ public class ClientQueue {
 	private IClientQueueListener clientQueueListener = null;
 
 	// private internal state variables
-	private ArrayList<DataClientForQueue> queueOrg = null;
+	private List<DataClientForQueue> queueOrg = new LinkedList<DataClientForQueue>();
 
 	private EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher());
 
@@ -53,11 +59,17 @@ public class ClientQueue {
 
 	private IDataClientForQueueListener dataClientForQueueAdapter = new DataClientForQueueAdapter();
 
-	/** Creates a new instance of HardwareClientQueue */
+	/**
+	 * Creates the <code>ClientQueue</code>.
+	 * 
+	 * @param clientQueueListener - The listener party
+	 * @param maximumClients - Maximum number of clients to be registered in the
+	 *            queue
+	 */
 	public ClientQueue(IClientQueueListener clientQueueListener, int maximumClients) {
 		setClientQueueListener(clientQueueListener);
 		setMaximumClients(maximumClients);
-		clientsConnectionChecker.start();
+		ExecutorScheduler.scheduleAtFixedRate(clientsConnectionChecker, 0, 1000, TimeUnit.MILLISECONDS);
 	}
 
 	/* Delegate Implementations for MCHardware & MCController */
@@ -82,15 +94,15 @@ public class ClientQueue {
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
 		}
 
-		Iterator iter = iterator();
+		Iterator<DataClientForQueue> iter = iterator();
 
 		ArrayList<UserInfo> userInfosOut = new ArrayList<UserInfo>(queueOrg.size());
 		while (iter.hasNext()) {
-			Object nextObj = iter.next();
-			DataClientForQueue otherUser = (DataClientForQueue) nextObj;
+			DataClientForQueue otherUser = iter.next();
 			opList.getProperties().put(IOperation.PROPKEY_USERID_OTHER, otherUser.getAsDefaultUser());
-			if (SecurityManagerFactory.authorize(resource, securityUser, opList))
+			if (SecurityManagerFactory.authorize(resource, securityUser, opList)) {
 				userInfosOut.add(otherUser.getUserInfoCleaned());
+			}
 		}
 
 		/*
@@ -98,7 +110,7 @@ public class ClientQueue {
 		 * System.arraycopy(userInfosOut,0, retVal, 0, retVal.length); return
 		 * retVal;
 		 */
-		UserInfo[] retVal = (UserInfo[]) userInfosOut.toArray(new UserInfo[0]);
+		UserInfo[] retVal = userInfosOut.toArray(new UserInfo[0]);
 		return retVal;
 	}
 
@@ -151,9 +163,9 @@ public class ClientQueue {
 
 	// Helper function for chat messages...
 	private UserInfo userNameToUserInfo(String userName) {
-		Iterator iter = iterator();
+		Iterator<DataClientForQueue> iter = iterator();
 		while (iter.hasNext()) {
-			DataClientForQueue dcfq = (DataClientForQueue) iter.next();
+			DataClientForQueue dcfq = iter.next();
 			if (dcfq.getUserName().equals(userName)) {
 				return dcfq.getUserInfo();
 			}
@@ -176,9 +188,9 @@ public class ClientQueue {
 		getClientQueueListener().log(Level.INFO, "ClientQueue - clients connection checker is shut down!");
 
 		getClientQueueListener().log(Level.INFO, "ClientQueue - shutting down clients!");
-		Iterator iter = iterator();
+		Iterator<DataClientForQueue> iter = iterator();
 		while (iter.hasNext()) {
-			DataClientForQueue dcfq = (DataClientForQueue) iter.next();
+			DataClientForQueue dcfq = iter.next();
 			getClientQueueListener().log(Level.INFO, "ClientQueue - shutting down client " + dcfq.getUserName());
 			dcfq.shutdown();
 			getClientQueueListener().log(Level.INFO, "ClientQueue - client " + dcfq.getUserName() + " is shut down!");
@@ -190,10 +202,6 @@ public class ClientQueue {
 	public boolean add(DataClient dc, IResource resource) throws MaximumClientsReached, NotAuthorized {
 		getClientQueueListener().log(Level.INFO, "ClientQueue - trying to register new client!");
 		boolean retVal = false;
-		DataClientForQueue dcfq = new DataClientForQueue(resource, dc, dataClientForQueueAdapter);
-
-		if (!SecurityManagerFactory.authenticate(resource, dcfq.getAsDefaultUser()))
-			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_PASSWORD_NOT_MATCH);
 
 		synchronized (queueOrg) {
 			getClientQueueListener().log(Level.INFO, "CHECKING IF THERE IS SPACE AVAILABLE...");
@@ -209,6 +217,11 @@ public class ClientQueue {
 			}
 
 		}
+
+		DataClientForQueue dcfq = new DataClientForQueue(resource, dc, dataClientForQueueAdapter);
+
+		if (!SecurityManagerFactory.authenticate(resource, dcfq.getAsDefaultUser()))
+			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_PASSWORD_NOT_MATCH);
 
 		getClientQueueListener().log(Level.INFO,
 				"ClientQueue : checking to see if DataClient " + dcfq.getUserName() + " is allready registered!");
@@ -273,8 +286,6 @@ public class ClientQueue {
 		return retVal;
 	}
 
-	private boolean removingAClient = false;
-
 	public boolean add(DataClientForQueue dcfq, IResource resource) throws MaximumClientsReached, NotAuthorized {
 		getClientQueueListener().log(Level.INFO, "ClientQueue - trying to register new client!");
 		boolean retVal = false;
@@ -327,7 +338,7 @@ public class ClientQueue {
 	public DataClientForQueue first() {
 		synchronized (queueOrg) {
 			try {
-				return (DataClientForQueue) queueOrg.get(0);
+				return queueOrg.get(0);
 			} catch (Exception e) {
 				getClientQueueListener().log(Level.INFO, "ClientQueue - No client at first position!");
 				return null;
@@ -341,9 +352,9 @@ public class ClientQueue {
 		}
 	}
 
-	public Iterator iterator() {
+	public Iterator<DataClientForQueue> iterator() {
 		synchronized (queueOrg) {
-			return ((ArrayList) queueOrg.clone()).iterator();
+			return Collections.unmodifiableList(queueOrg).iterator();
 		}
 	}
 
@@ -366,9 +377,10 @@ public class ClientQueue {
 							clientQueueListener.dataClientForQueueIsGone(dcfq);
 						}
 					}
-				} else
+				} else {
 					getClientQueueListener().log(Level.INFO,
 							"ClientQueue - client " + dcfq.getUserName() + " isn't registered here!");
+				}
 
 			} catch (Exception e) {
 				getClientQueueListener().logThrowable(
@@ -395,56 +407,26 @@ public class ClientQueue {
 	}
 
 	public boolean contains(UserInfo user) {
-		Iterator iter = iterator();
+		Iterator<DataClientForQueue> iter = iterator();
 		while (iter.hasNext()) {
-			DataClientForQueue dcfq = (DataClientForQueue) iter.next();
-
-			if (dcfq.getUserName().equals(user.getUserName()))
+			DataClientForQueue dcfq = iter.next();
+			if (dcfq.getUserName().equals(user.getUserName())) {
 				return true;
+			}
 
 		}
 		return false;
 	}
 
 	private DataClientForQueue getWrapperForUser(UserInfo user) {
-		Iterator iter = iterator();
+		Iterator<DataClientForQueue> iter = iterator();
 		while (iter.hasNext()) {
 			DataClientForQueue dcfq = (DataClientForQueue) iter.next();
-			if (dcfq.getUserName().equals(user.getUserName()))
+			if (dcfq.getUserName().equals(user.getUserName())) {
 				return dcfq;
+			}
 		}
 		return null;
-	}
-
-	public DataClientForQueue getWrapperForDataClient(DataClient client) { // ????Isto
-		// ´´e
-		// estupido
-		// agora...
-		// mas
-		// nao
-		// sei
-		// o
-		// que
-		// mais
-		// vai
-		// quebrar...
-		// pode ser que esteja a usar isto noutros sitions... antes de apagar
-		// convem
-		// perceber onde... e verificar se afinal nao faz assim tanto sentido...
-		// pode eventualmente fazer sentido para o chat...
-		// TODO check with JP, this wasn't working well...I'm going to check
-		// with username because it works
-		// apparently the delegates aren't the same...
-		/*
-		 * exactly - the wrappers shouldn't be the same... this is highly stupid
-		 * from me... the fact is that LabClientBeans is one client and
-		 * Apparatus clientbean ´´e outro... very very stupid from me...
-		 * Iterator iter=iterator(); while(iter.hasNext()) { DataClientForQueue
-		 * dcfq=(DataClientForQueue)iter.next();
-		 * if(dcfq.getDataClient().isSameDelegate(client)) return dcfq; } return
-		 * null;
-		 */
-		return getWrapperForUser(client.getUserInfo());
 	}
 
 	public String toString() {
@@ -452,9 +434,10 @@ public class ClientQueue {
 
 		returnClients.append("******************************************" + "\r\n");
 		returnClients.append("Client Queue Contents: \r\n");
-		Iterator iter = iterator();
-		while (iter.hasNext())
+		Iterator<DataClientForQueue> iter = iterator();
+		while (iter.hasNext()) {
 			returnClients.append(iter.next() + "\r\n");
+		}
 		returnClients.append("******************************************" + "\r\n");
 		return returnClients.toString();
 	}
@@ -477,7 +460,6 @@ public class ClientQueue {
 	 */
 	public void setMaximumClients(int maximumClients) {
 		this.maximumClients = maximumClients;
-		queueOrg = new ArrayList<DataClientForQueue>(maximumClients);
 	}
 
 	/**
@@ -558,10 +540,10 @@ public class ClientQueue {
 			} else if (o instanceof HardwareChangeEvent) {
 				getClientQueueListener().log(Level.INFO, "ClientQueue - dispatching Hardware Change event!");
 
-				Iterator iter = iterator();
+				Iterator<DataClientForQueue> iter = iterator();
 				while (iter.hasNext()) {
 					try {
-						((DataClientForQueue) iter.next()).hardwareChange();
+						iter.next().hardwareChange();
 					} catch (Exception e) {
 						getClientQueueListener().logThrowable("ClientQueue - Error dispatching Hardware Change event!",
 								e);
@@ -580,38 +562,19 @@ public class ClientQueue {
 	/* End Inner Class - Queue Dispatcher */
 
 	/* Inner Class - Clients Connection Checker */
-	private class ClientsConnectionCheck extends Thread {
+	private class ClientsConnectionCheck extends ScheduledWorkUnit {
 		private boolean shutdown = false;
 
-		public void shutdown() {
-			shutdown = true;
-			try {
-				synchronized (this) {
-					this.join();
-				}
-			} catch (Exception e) {
-			}
-		}
-
 		public void run() {
-			while (!shutdown) {
-				synchronized (this) {
-					try {
-						this.wait(1000);
-					} catch (Exception ignored) {
+			Iterator<DataClientForQueue> iterClients = iterator();
+			while (iterClients.hasNext()) {
+				try {
+					DataClientForQueue dcfq = iterClients.next();
+					if (!dcfq.isConnected()) {
+						dcfq.shutdown();
 					}
-				}
-				Iterator iterClients = iterator();
-				while (iterClients.hasNext()) {
-					try {
-						DataClientForQueue dcfq = (DataClientForQueue) iterClients.next();
-						if (!dcfq.isConnected()) {
-							dcfq.shutdown();
-						}
-					} catch (Exception e) {
-						getClientQueueListener().logThrowable("ClientQueue - Error cheking client connection status!",
-								e);
-					}
+				} catch (Exception e) {
+					getClientQueueListener().logThrowable("ClientQueue - Error cheking client connection status!", e);
 				}
 			}
 		}
