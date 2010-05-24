@@ -187,7 +187,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		}
 
 		if (!foundUserEveryone) {
-			everyone = null;
+			everyone = new UserInfo(ChatMessageEvent.EVERYONE_USER);
 		}
 	}
 
