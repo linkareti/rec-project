@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp codebase="@codebase@" href="LinuxInstaller.jnlp" spec="1.0+">
+<jnlp codebase="@codebase@" href="linuxInstaller.jnlp" spec="1.0+">
     <information>
         <title>@title@</title>
         <vendor>Linkare TI</vendor>
