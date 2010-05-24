@@ -111,7 +111,7 @@ import com.linkare.rec.impl.utils.ORBBean;
  * The main class of the application.
  */
 public class ReCApplication extends SingleFrameApplication implements ApparatusListSourceListener,
-LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistoryDisplayFactory {
+		LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistoryDisplayFactory {
 
 	private static final Logger log = Logger.getLogger(ReCApplication.class.getName());
 
@@ -127,7 +127,8 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	}
 
 	/**
-	 * Initializes the mediaController with default parameters for vlc, if it hasn't been initialized yet.
+	 * Initializes the mediaController with default parameters for vlc, if it
+	 * hasn't been initialized yet.
 	 */
 	private void initializeMediaController() {
 
@@ -151,7 +152,8 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			@Override
 			public void timeChanged(MediaTimeChangedEvent evt) {
 				log.fine("Handling time changed!!!!!!!");
-				//TODO lançar evento para a view para colocar slider com time actual do controller.
+				// TODO lançar evento para a view para colocar slider com time
+				// actual do controller.
 			}
 
 			@Override
@@ -163,13 +165,14 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			@Override
 			public void stopped(MediaStoppedEvent evt) {
 				log.fine("Handling stopped!!!!!!!");
-				//TODO lançar evento para a view para colocar slider a 0.
+				// TODO lançar evento para a view para colocar slider a 0.
 			}
 		};
 	}
 
 	/**
-	 * Plays the given media using the native vlc installed on the user's local machine.
+	 * Plays the given media using the native vlc installed on the user's local
+	 * machine.
 	 * 
 	 * @param mrl
 	 */
@@ -178,15 +181,15 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			Runtime.getRuntime().exec(PreferencesUtils.readUserPreference("vlcpath") + " " + mrl);
 		} catch (IOException e) {
 			log.info("VLC not installed on the specified directory");
-			//Bruno mensagem de erro para o utilizador? verificar se a user preference está set ou se deu erro.
+			// Bruno mensagem de erro para o utilizador? verificar se a user
+			// preference está set ou se deu erro.
 		}
 	}
 
 	/**
 	 * Plays the media identified by the given mrl.
 	 * 
-	 * @param mrl
-	 *            URL for the media to play.
+	 * @param mrl URL for the media to play.
 	 */
 	public void playMedia(String mrl) {
 
@@ -263,11 +266,11 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 	private HardwareAcquisitionConfig userAcquisitionConfig;
 
-	//	private ExpDataModel experimentDataModel;
+	// private ExpDataModel experimentDataModel;
 	//
-	//	private List<ExpDataDisplay> experimentDataDisplays;
+	// private List<ExpDataDisplay> experimentDataDisplays;
 
-	//	private final ExperimentUIData experimentData;
+	// private final ExperimentUIData experimentData;
 
 	private boolean experimentAutoplay = false;
 
@@ -297,7 +300,8 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	}
 
 	/**
-	 * @return The web context codebase if available, otherwise returns an empty string
+	 * @return The web context codebase if available, otherwise returns an empty
+	 *         string
 	 */
 	public String getCodeBase() {
 		String codeBase = "";
@@ -390,13 +394,13 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 		return mediaController;
 	}
 
-	//	public ExpDataModel getExperimentDataModel() {
-	//		return experimentDataModel;
-	//	}
+	// public ExpDataModel getExperimentDataModel() {
+	// return experimentDataModel;
+	// }
 	//
-	//	public List<ExpDataDisplay> getExperimentDataDisplays() {
-	//		return experimentDataDisplays;
-	//	}
+	// public List<ExpDataDisplay> getExperimentDataDisplays() {
+	// return experimentDataDisplays;
+	// }
 
 	// -------------------------------------------------------------------------
 	// Application Startup Workflow
@@ -420,7 +424,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			System.setProperty("swing.aatext", "true");
 
 		} else {
-			//TODO Check other platforms
+			// TODO Check other platforms
 		}
 	}
 
@@ -462,7 +466,10 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			log.info("ReC System Properties are checked.");
 
 			// Unmarshal xml configuration
-			String configLocationUrl = getCodeBase() + System.getProperty(ReCSystemProperty.RECFACECONFIG.getName());
+			String configLocationUrl = System.getProperty(ReCSystemProperty.RECFACECONFIG.getName());
+			if (!configLocationUrl.contains("://")) {
+				configLocationUrl = getCodeBase() + configLocationUrl;
+			}
 			if (log.isLoggable(Level.FINE)) {
 				log.fine("Unmarshalling ReCFaceConfig from input stream location = " + configLocationUrl);
 			}
@@ -496,24 +503,21 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 				log.fine("recFaceConfig.isAutoConnectLab() = " + recFaceConfig.isAutoConnectLab());
 			}
 
-			
-			
 			// Load Localization Bundles
 			for (LocalizationBundle bundle : recFaceConfig.getLocalizationBundle()) {
 				ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
 			}
-			for (Lab lab:recFaceConfig.getLab()) {
+			for (Lab lab : recFaceConfig.getLab()) {
 				for (LocalizationBundle bundle : lab.getLocalizationBundle()) {
 					ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
-				}	
-				for(Apparatus apparatus:lab.getApparatus())
-				{
+				}
+				for (Apparatus apparatus : lab.getApparatus()) {
 					for (LocalizationBundle bundle : apparatus.getLocalizationBundle()) {
 						ReCResourceBundle.loadResourceBundle(bundle.getName(), bundle.getLocation());
 					}
 				}
 			}
-			
+
 			apparatusComboBoxModel = new ApparatusComboBoxModel(currentLab.getApparatus());
 
 			// Show view
@@ -522,7 +526,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 
 		} catch (Exception e) {
 			log.log(Level.SEVERE, "Some error occured.", e);
-			//show(getUnexpectedErrorBox(e));
+			// show(getUnexpectedErrorBox(e));
 			System.exit(ExceptionCode.THE_FAMOUS_UNKNOWN_ERROR.getId());
 		}
 
@@ -551,13 +555,15 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	}
 
 	/*
-	 * This method runs after startup has completed and the GUI is visible and ready. If there are tasks that are worth
-	 * doing at startup time, but not worth delaying showing the initial GUI, do them here.
+	 * This method runs after startup has completed and the GUI is visible and
+	 * ready. If there are tasks that are worth doing at startup time, but not
+	 * worth delaying showing the initial GUI, do them here.
 	 */
 	@Override
 	protected void ready() {
 		super.ready();
-		// This stage is reached just after login. Login modal dialog blocks this call.
+		// This stage is reached just after login. Login modal dialog blocks
+		// this call.
 		if (log.isLoggable(Level.FINE)) {
 			log.fine("Ready");
 		}
@@ -566,9 +572,9 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	@Override
 	protected void shutdown() {
 
-		//      Save session state for the component hierarchy rooted by
-		//      the mainFrame.  SingleFrameApplication subclasses that override
-		//      shutdown need to remember call {@code super.shutdown()}.
+		// Save session state for the component hierarchy rooted by
+		// the mainFrame. SingleFrameApplication subclasses that override
+		// shutdown need to remember call {@code super.shutdown()}.
 
 		if (apparatusClientBean != null) {
 			apparatusClientBean.disconnect();
@@ -587,8 +593,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	/**
 	 * Check for the ReC System Properties Availability.
 	 * 
-	 * @throws ReCConfigurationException
-	 *             If some required property is missing.
+	 * @throws ReCConfigurationException If some required property is missing.
 	 */
 	public void checkSystemProperties() throws ReCConfigurationException {
 		List<String> missingRequiredProperties = new ArrayList<String>();
@@ -626,7 +631,8 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			log.info("Connect user " + getUsername());
 			labClientBean.connect(currentLab.getLocation());
 
-			// TODO Verify if this is the best place to initializeMediaController
+			// TODO Verify if this is the best place to
+			// initializeMediaController
 			if (IS_VIDEO_DEVELOPMENT_ENABLED) {
 				initializeMediaController();
 			}
@@ -771,7 +777,8 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	// -------------------------------------------------------------------------
 	// Video events
 
-	//Bruno ver se é necessário mais algum evento e tratar os eventos no cliente adequadamente
+	// Bruno ver se é necessário mais algum evento e tratar os eventos no
+	// cliente adequadamente
 	public enum VideoEvent {
 		NOTCONNECTED, STOPPED, TIMECHANGED
 	}
@@ -780,9 +787,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 	// Apparatus events
 
 	public enum ApparatusEvent {
-		CONNECTING, CONNECTED, DISCONNECTING, DISCONNECTED, LOCKABLE, LOCKED, STATECONFIGURING, STATECONFIGURED,
-		INCORRECTSTATE, MAXUSERS, NOTAUTHORIZED, NOTOWNER, NOTREGISTERED, STATECONFIGERROR, STATERESETING,
-		STATERESETED, STATESTARTING, STATESTARTED, STATESTOPING, STATESTOPED, STATEUNKNOW, UNREACHABLE;
+		CONNECTING, CONNECTED, DISCONNECTING, DISCONNECTED, LOCKABLE, LOCKED, STATECONFIGURING, STATECONFIGURED, INCORRECTSTATE, MAXUSERS, NOTAUTHORIZED, NOTOWNER, NOTREGISTERED, STATECONFIGERROR, STATERESETING, STATERESETED, STATESTARTING, STATESTARTED, STATESTOPING, STATESTOPED, STATEUNKNOW, UNREACHABLE;
 	}
 
 	@Override
@@ -942,8 +947,8 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			log.fine("ApparatusConnectorEvent " + evt.getMessage());
 		}
 
-		lastExperimentHistory = new ExperimentHistoryUINode(this, evt.getDataSource(),
-				apparatusClientBean.getApparatus(), currentApparatusConfig);
+		lastExperimentHistory = new ExperimentHistoryUINode(this, evt.getDataSource(), apparatusClientBean
+				.getApparatus(), currentApparatusConfig);
 
 		lastExperimentHistory.setLocallyOwned(currentState.matches(APPARATUS_LOCKED));
 		lastExperimentHistory.setOwnerUserName(apparatusClientBean.getUserInfo().getUserName());
@@ -1029,7 +1034,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			try {
 				ArrayList<ExpDataDisplay> experimentDataDisplays = new ArrayList<ExpDataDisplay>();
 				Object dataDisplayTemp = java.beans.Beans.instantiate(this.getClass().getClassLoader(),
-				"com.linkare.rec.impl.baseUI.DefaultExperimentDataTable");
+						"com.linkare.rec.impl.baseUI.DefaultExperimentDataTable");
 				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class)) {
 					experimentDataDisplays.set(0, (ExpDataDisplay) dataDisplayTemp);
 				}
@@ -1072,7 +1077,8 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 			experimentData.setDataModel(experimentDataModel);
 		} catch (Exception e) {
 			log.log(Level.SEVERE, "Failed data output connection...", e);
-			// TODO statusPanelApparatus Failed data output connection - forward view event
+			// TODO statusPanelApparatus Failed data output connection - forward
+			// view event
 		}
 
 		return experimentData;
@@ -1216,7 +1222,7 @@ LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistor
 		private List<ExpDataDisplay> experimentDataDisplays;
 
 		private ExpDataModel experimentDataModel;
-		
+
 		private ExperimentHistoryUINode experimentHistoryUINode;
 
 		private ExperimentUIData() {
