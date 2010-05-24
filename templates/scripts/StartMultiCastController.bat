@@ -13,7 +13,7 @@ set MEM_SYSPROPS=-Xms%INITIAL_HEAP_MEM% -Xmx%MAX_HEAP_MEM%
 set LOG_SYSPROPS=-Djava.util.logging.config.file=%MULTICAST_BASE_DIR%/etc/loggers.config.properties 
 set TOOLKIT_SYSPROPS=-Djava.awt.headless=true
 set SECURITYMANAGER_SYSPROPS=-DReC.MultiCast.SecurityManager=com.linkare.rec.impl.multicast.security.CompositeSecurityManager -DReC.MultiCast.CompositeSecurityManager.list=com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
-set ALLOCATIONMANAGER_SYSPROPS=-DReC.MultiCast.LabID=@rec.am.lab.id@ -DReC.MultiCast.AllocationManagerHost=localhost -DReC.MultiCast.AllocationManagerPort=3700
+set ALLOCATIONMANAGER_SYSPROPS=-DReC.MultiCast.LabID=@rec.am.lab.id@ -DReC.MultiCast.AllocationManagerHost=@rec.am.host@ -DReC.MultiCast.AllocationManagerPort=@rec.am.port@
 
 set RECCLASSPATH=%MULTICAST_BASE_DIR%/lib/xml-apis.jar;%MULTICAST_BASE_DIR%/lib/tools-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/openorb_orb-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/openorb_pss-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/openorb_ots-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/logkit.jar;%MULTICAST_BASE_DIR%/lib/xercesImpl.jar;%MULTICAST_BASE_DIR%/lib/avalon-framework.jar
 set MULTICAST_CLASSPATH=%MULTICAST_BASE_DIR%/ReCMulticastController.jar;%MULTICAST_BASE_DIR%/ELabMulticastController.jar;%MULTICAST_BASE_DIR%/ReCCommon.jar;

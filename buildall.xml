@@ -118,6 +118,8 @@
 				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
 				<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
+				<replacefilter token="@rec.am.host@" property="rec.am.host" />
+				<replacefilter token="@rec.am.port@" property="rec.am.port" />
 			</replace>
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />

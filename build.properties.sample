@@ -69,6 +69,8 @@ multicast.max.heap=1024m
 ##SECURITYMANAGER PROPERTIES##
 # This property is necessary for the StartMultiCastController to deal with the security managers that enable the communication with the rec.am.
 # It should match the ID/NAME of the laboratory
+rec.am.host=localhost
+rec.am.port=3700
 rec.am.lab.id=LAB_ME
 
 ##SYSTEM PROPERTIES - EXPERIMENTS## valerá a pena definir por experiencia?
