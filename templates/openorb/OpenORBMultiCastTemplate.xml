@@ -51,14 +51,14 @@
 	<profile name="ReCMultiCastController" extends="default">
 		<import xlink:href="${openorb.home}config/default.xml#iiop">
 			<property name="port" value="@multicast.controller.port@" />
-			<property name="bidirOnlyServer" value="true" />
+			<property name="bidirOnlyServer" value="false" />
 		</import>
 	</profile>
 	
 	<profile name="ReCMultiCastControllerDebug" extends="debug">
 		<import xlink:href="${openorb.home}config/default.xml#iiop">
 			<property name="port" value="@multicast.controller.port@" />
-			<property name="bidirOnlyServer" value="true" />
+			<property name="bidirOnlyServer" value="false" />
 		</import>
 	</profile>
 
