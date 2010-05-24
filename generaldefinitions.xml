@@ -419,9 +419,9 @@
 			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windowsInstaller.jnlp" />
 			<replace file="${elab.client.classes.dir}/windowsInstaller.jnlp" token="@codebase@" value="@{codebase}" />
 			
-			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ELabFullClient.jnlp" />
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@codebase@" value="@{codebase}" />
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ElabFullClient.jnlp" />
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" propertyFile="build.properties">
 				<replacefilter token="@href@" property="href" />
 				<replacefilter token="@title@" property="title" />
 				<replacefilter token="@vendor@" property="vendor" />
@@ -433,7 +433,7 @@
 				<replacefilter token="@main-class@" property="client.main-class" />
 			</replace>
 			
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -442,12 +442,12 @@
 	<macrodef name="add.experiment.to.full.jnlp.compile">
 		<attribute name="experiment.name" />
 		<sequential>
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
 		<![CDATA[<jar href="@temporary.experiment.jar@"/>
 		<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-			<replace file="${elab.client.classes.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
 	</macrodef>
 
@@ -485,8 +485,8 @@
 			<replace file="${client.build.dir}/windowsInstaller.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 			</replace>			
-			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/ELabFullClient.jnlp" />
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/ElabFullClient.jnlp" />
+			<replace file="${client.build.dir}/ElabFullClient.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 				<replacefilter token="@href@" property="href" />
 				<replacefilter token="@title@" property="title" />
@@ -499,7 +499,7 @@
 				<replacefilter token="@main-class@" property="client.main-class" />
 			</replace>
 
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.build" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -508,12 +508,12 @@
 	<macrodef name="add.experiment.to.full.jnlp.build">
 		<attribute name="experiment.name" />
 		<sequential>
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
+			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
 		<![CDATA[<jar href="@temporary.experiment.jar@"/>
 		<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-			<replace file="${client.build.dir}/ELabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
+			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
 	</macrodef>
 
@@ -526,7 +526,7 @@
 	<property name="experiments.classes.dir" value="${build.dir.compile}/classes/experiments" />
 	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
 
-	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/ELabFullClientTemplate.jnlp.xml" />
+	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/ElabFullClientTemplate.jnlp.xml" />
 	<property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/ReCFramework.jnlp.xml" />
 	
 	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/OpenORB.jnlp.xml" />
