@@ -66,7 +66,12 @@ multicast.controller.port=9000
 multicast.initial.heap=128m
 multicast.max.heap=1024m
 
-##SYSTEM PROPERTIES - EXPERIMENTS## valer� a pena definir por experiencia?
+##SECURITYMANAGER PROPERTIES##
+# This property is necessary for the StartMultiCastController to deal with the security managers that enable the communication with the rec.am.
+# It should match the ID/NAME of the laboratory
+rec.am.lab.id=LAB_ME
+
+##SYSTEM PROPERTIES - EXPERIMENTS## valerá a pena definir por experiencia?
 experiment.driver.openorb.profile=recHardware
 experiment.client.openorb.profile=recClient
 experiment.client.debug.address.port=8001

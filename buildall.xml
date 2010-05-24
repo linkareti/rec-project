@@ -117,6 +117,7 @@
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="build.properties">
 				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
+				<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
 			</replace>
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
@@ -127,6 +128,7 @@
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="build.properties">
 				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
+				<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
 			</replace>
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
