@@ -75,7 +75,8 @@ hardwareserver.initial.heap=128m
 hardwareserver.max.heap=1024m
 
 ##JNLP PROPERTIES
-codebase=http://elab.ist.utl.pt/rec/eLab/
+#Please define the codebase without the trailing slash... It will be added automagically when needed!
+codebase=http://elab.ist.utl.pt/rec/eLab
 href=ElabFullClient.jnlp
 title=eLab - Full Laboratory
 vendor=I.S.T. - U.T.L.
@@ -84,7 +85,6 @@ one-line=Estatistica de dados
 tootip=Estatistica de dados
 short=Estatistica de dados
 j2se-version=1.6
-properties=FullClient.properties
 
 
 ##MAIN CLASSES FOR THE VARIOUS COMPONENTS
