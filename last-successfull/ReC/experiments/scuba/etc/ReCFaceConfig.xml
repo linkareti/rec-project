@@ -1,0 +1,58 @@
+<apparatus toolTipBundleKey="scuba$rec.exp.tip.scuba"
+	location="ELAB_SCUBA_STAMP_V02" iconLocationBundleKey="scuba$rec.exp.icon.scuba"
+	headerDisplayClassLocationBundleKey="" displayStringBundleKey="scuba$rec.exp.title.scuba"
+	displayFactoryClassLocationBundleKey=""
+	desktopLocationBundleKey="scuba$rec.exp.background.scuba"
+	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="scuba$rec.exp.customizer.scuba"
+	visible="true" selected="true" order="0" enabled="false" connected="false">
+	<localizationBundle name="scuba"
+		location="recresource:///pt/utl/ist/elab/client/scuba/resources/messages" />
+	<defaultAcquisitionConfig toolTipBundleKey="scuba$rec.exp.dftcfg.scuba.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="scuba$rec.exp.dftcfg.scuba.title.1"
+		classLocationBundleKey="scuba$rec.exp.dftcfg.scuba.loc.1"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<mediaConfig videoLocation="scuba$rec.exp.url.scuba.video"
+		canSave="true" offlinePlay="true" />
+	<display toolTipBundleKey="scuba$rec.exp.display.scuba.tip.sensor"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.sensor"
+		classLocationBundleKey="scuba$rec.exp.display.scuba.loc.sensor"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="scuba$rec.exp.display.scuba.tip.1"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.1"
+		classLocationBundleKey="scuba$rec.exp.display.scuba.loc.1"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="scuba$rec.exp.display.scuba.tip.2"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.2"
+		classLocationBundleKey="scuba$rec.exp.display.scuba.loc.2"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="scuba$rec.exp.display.scuba.tip.3"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.3"
+		classLocationBundleKey="scuba$rec.exp.display.scuba.loc.3"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="scuba$rec.exp.display.scuba.tip.4"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.4"
+		classLocationBundleKey="scuba$rec.exp.display.scuba.loc.4"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="scuba$rec.exp.display.scuba.tip.5"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.5"
+		classLocationBundleKey="scuba$rec.exp.display.scuba.loc.5"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="scuba$rec.exp.display.scuba.tip.6"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="scuba$rec.exp.display.scuba.title.6"
+		classLocationBundleKey="scuba$rec.exp.display.scuba.loc.6"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+</apparatus>
