@@ -430,7 +430,7 @@
 				<replacefilter token="@tooltip@" property="tooltip" />
 				<replacefilter token="@short@" property="short" />
 				<replacefilter token="@j2se-version@" property="j2se-version" />
-				<replacefilter token="@main-class@" property="client.main-class" />
+				<replacefilter token="@client.main-class@" property="client.main-class" />
 			</replace>
 			
 			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
@@ -496,7 +496,7 @@
 				<replacefilter token="@tooltip@" property="tooltip" />
 				<replacefilter token="@short@" property="short" />
 				<replacefilter token="@j2se-version@" property="j2se-version" />
-				<replacefilter token="@main-class@" property="client.main-class" />
+				<replacefilter token="@client.main-class@" property="client.main-class" />
 			</replace>
 
 			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />

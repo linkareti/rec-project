@@ -45,6 +45,6 @@
         
     </resources>
     
-    <application-desc main-class="@main-class@" />
+    <application-desc main-class="@client.main-class@" />
     
 </jnlp>
