@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+		=======================================================
+		=== 2009/03/29 Build Rec - Elab General Definitions ===
+		=======================================================
+	-->
+
+<project name="ReC - general definitions" basedir=".">
+	<description>
+		Compile, package, sign and run the project ReC and each of the experiments.
+	</description>
+
+	<property file="build.properties" description="general properties for building project" />
+
+	<!--
+		=====================================================
+		====================== Generic ======================
+		=====================================================
+	-->
+
+	<property name="build.dir.compile" value="${basedir}/${build.dir}/compile" />
+	<property name="build.dir.jars" value="${basedir}/${build.dir}/jars" />
+
+	<property name="templates.dir" value="${basedir}/templates" />
+	<property name="templates.dir.client" value="${basedir}/templates/client" />
+	<property name="templates.dir.openorb" value="${basedir}/templates/openorb" />
+	<property name="templates.dir.jnlp" value="${basedir}/templates/jnlp" />
+	<property name="templates.dir.scripts" value="${basedir}/templates/scripts" />
+	<property name="templates.dir.logs" value="${basedir}/templates/log" />
+	<property name="templates.dir.images" value="${basedir}/templates/images" />
+
+	<tstamp>
+		<format property="timestamp" pattern="dd-MM-yyyy hh:mm" locale="en,UK" />
+	</tstamp>
+
+	<tstamp>
+		<format property="today" pattern="dd-MM-yyyy" locale="en,UK" />
+	</tstamp>
+
+	<macrodef name="process.list">
+		<attribute name="list" />
+		<attribute name="task" />
+		<attribute name="attribute.name" />
+
+		<sequential>
+			<script language="javascript">
+				<![CDATA[
+					var list="@{list}";
+					var task="@{task}";
+					var attribute_name="@{attribute.name}";
+				    var splitVars=list.split(",");
+					
+				    for(var i=0;i<splitVars.length;i++)
+				    {    
+						var oTask=project.createTask(task);
+						oTask.init();
+						oTask.setDynamicAttribute(attribute_name,splitVars[i]);
+						oTask.execute();
+					}
+				]]>
+			</script>
+		</sequential>
+	</macrodef>
+
+	<!--
+			=====================================================
+			======================= JVLC ========================
+			=====================================================
+		-->
+
+	<property name="jvlc.classes.dir" value="${build.dir.compile}/classes/jvlc" />
+	<property name="jvlc.build.dir" value="${build.dir.jars}/jvlc" />
+
+	<property name="jvlc.src.java.dir" value="${basedir}/other/src/java/JVLC" />
+
+	<property name="other.lib.dir" value="${basedir}/other/lib" />
+
+	<property name="jvlc.lib.dir" value="${other.lib.dir}/java/jvlc/" />
+
+	<path id="jvlc.lib.path">
+		<fileset dir="${jvlc.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="jvlc.compile.lib.path">
+		<fileset dir="${other.lib.dir}/compile/jvlc/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="jvlc.libs.classpath">
+		<path refid="jvlc.lib.path" />
+		<path refid="jvlc.compile.lib.path" />
+	</path>
+
+	<!--
+		=====================================================
+		==================== REC Common =====================
+		=====================================================
+	-->
+
+	<property name="rec.common.classes.dir" value="${build.dir.compile}/classes/rec/common" />
+	<property name="common.build.dir" value="${build.dir.jars}/common" />
+
+	<property name="rec.common.src.java.dir" value="${basedir}/rec/src/java/common" />
+
+	<property name="rec.lib.dir" value="${basedir}/rec/lib" />
+
+	<property name="rec.common.lib.dir" value="${rec.lib.dir}/java/common/" />
+
+	<path id="rec.common.lib.path">
+		<fileset dir="${rec.common.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="rec.common.compile.lib.path">
+		<fileset dir="${rec.lib.dir}/compile/common/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="rec.common.libs.classpath">
+		<path refid="rec.common.lib.path" />
+		<path refid="rec.common.compile.lib.path" />
+	</path>
+
+	<!--
+		=====================================================
+		==================== ReC Client =====================
+		=====================================================
+	-->
+
+	<property name="rec.client.classes.dir" value="${build.dir.compile}/classes/rec/client" />
+	<property name="client.build.dir" value="${build.dir.jars}/client" />
+
+	<property name="rec.client.src.java.dir" value="${basedir}/rec/src/java/client" />
+	<property name="rec.ui.src.java.dir" value="${basedir}/rec/src/java/ui" />
+
+	<property name="rec.client.lib.dir" value="${rec.lib.dir}/java/client/" />
+
+	<path id="rec.client.lib.path">
+		<fileset dir="${rec.client.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="rec.client.compile.lib.path">
+		<fileset dir="${rec.lib.dir}/compile/client/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="rec.client.libs.classpath">
+		<path refid="rec.client.lib.path" />
+		<path refid="rec.client.compile.lib.path" />
+	</path>
+
+	<path id="rec.compile.client.dependencies.classpath">
+		<pathelement location="${rec.common.classes.dir}/" />
+		<pathelement location="${jvlc.classes.dir}/" />
+		<path refid="rec.common.libs.classpath" />
+		<path refid="jvlc.libs.classpath" />
+	</path>
+
+	<path id="rec.compile.client.classpath">
+		<path refid="rec.client.libs.classpath" />
+		<path refid="rec.compile.client.dependencies.classpath" />
+	</path>
+
+	<!--
+		=====================================================
+		================ ReC Hardware Server ================
+		=====================================================
+	-->
+
+	<property name="rec.hardwareserver.classes.dir" value="${build.dir.compile}/classes/rec/hardwareserver" />
+	<property name="hardwareserver.build.dir" value="${build.dir.jars}/hardwareserver" />
+
+	<property name="rec.hardwareserver.src.java.dir" value="${basedir}/rec/src/java/hardwareserver" />
+
+	<property name="rec.hardwareserver.lib.dir" value="${rec.lib.dir}/java/hardwareserver/" />
+
+	<path id="rec.hardwareserver.lib.path">
+		<fileset dir="${rec.hardwareserver.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="rec.hardwareserver.compile.lib.path">
+		<fileset dir="${rec.lib.dir}/compile/hardwareserver/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="rec.hardwareserver.libs.classpath">
+		<path refid="rec.hardwareserver.lib.path" />
+		<path refid="rec.hardwareserver.compile.lib.path" />
+	</path>
+
+	<path id="rec.compile.hardwareserver.dependencies.classpath">
+		<pathelement location="${rec.common.classes.dir}/" />
+		<path refid="rec.common.libs.classpath" />
+	</path>
+
+	<path id="rec.compile.hardwareserver.classpath">
+		<path refid="rec.hardwareserver.libs.classpath" />
+		<path refid="rec.compile.hardwareserver.dependencies.classpath" />
+	</path>
+
+	<!--
+		=====================================================
+		============= ReC Multicast Controller===============
+		=====================================================
+	-->
+
+	<property name="rec.multicast.classes.dir" value="${build.dir.compile}/classes/rec/multicast" />
+	<property name="multicast.build.dir" value="${build.dir.jars}/multicast" />
+
+	<property name="rec.multicast.src.java.dir" value="${basedir}/rec/src/java/multicast" />
+
+	<property name="rec.multicast.lib.dir" value="${rec.lib.dir}/java/multicast/" />
+
+	<path id="rec.multicast.lib.path">
+		<fileset dir="${rec.multicast.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="rec.multicast.compile.lib.path">
+		<fileset dir="${rec.lib.dir}/compile/multicast/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="rec.multicastcontroller.libs.classpath">
+		<path refid="rec.multicast.lib.path" />
+		<path refid="rec.multicast.compile.lib.path" />
+	</path>
+
+	<path id="rec.compile.multicastcontroller.dependencies.classpath">
+		<pathelement location="${rec.common.classes.dir}/" />
+		<path refid="rec.common.libs.classpath" />
+	</path>
+
+	<path id="rec.compile.multicastcontroller.classpath">
+		<path refid="rec.multicastcontroller.libs.classpath" />
+		<path refid="rec.compile.multicastcontroller.dependencies.classpath" />
+	</path>
+
+
+	<path id="run.multicastcontroller.classpath">
+		<path refid="rec.common.lib.path" />
+		<path refid="rec.multicast.lib.path" />
+		<pathelement location="${rec.common.classes.dir}/" />
+		<pathelement location="${rec.multicast.classes.dir}/" />
+	</path>
+
+	<!--
+		=====================================================
+		=================== Elab Client =====================
+		=====================================================
+	-->
+
+	<property name="elab.client.classes.dir" value="${build.dir.compile}/classes/elab/client" />
+
+	<property name="elab.client.src.java.dir" value="${basedir}/elab/src/java/client" />
+	<property name="elab.ui.src.java.dir" value="${basedir}/elab/src/java/ui" />
+
+	<property name="elab.lib.dir" value="${basedir}/elab/lib" />
+
+	<property name="elab.client.lib.dir" value="${elab.lib.dir}/java/client/" />
+
+	<path id="elab.client.lib.path">
+		<fileset dir="${elab.client.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="elab.client.compile.lib.path">
+		<fileset dir="${elab.lib.dir}/compile/client/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="elab.client.libs.classpath">
+		<path refid="elab.client.lib.path" />
+		<path refid="elab.client.compile.lib.path" />
+	</path>
+
+	<path id="elab.compile.client.dependencies.classpath">
+		<path refid="rec.client.libs.classpath" />
+		<pathelement location="${rec.client.classes.dir}/" />
+		<path refid="rec.common.libs.classpath" />
+		<pathelement location="${rec.common.classes.dir}/" />
+	</path>
+
+	<path id="elab.compile.client.classpath">
+		<path refid="elab.client.libs.classpath" />
+		<path refid="elab.compile.client.dependencies.classpath" />
+	</path>
+
+	<!--
+		=====================================================
+		=================== Elab driver =====================
+		=====================================================
+	-->
+
+	<property name="elab.hardwareserver.classes.dir" value="${build.dir.compile}/classes/elab/hardwareserver" />
+
+	<property name="elab.hardwareserver.src.java.dir" value="${basedir}/elab/src/java/driver" />
+
+	<property name="elab.hardwareserver.lib.dir" value="${elab.lib.dir}/java/driver/" />
+
+
+	<path id="elab.hardwareserver.lib.path">
+		<fileset dir="${elab.hardwareserver.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="elab.hardwareserver.compile.lib.path">
+		<fileset dir="${elab.lib.dir}/compile/driver/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="elab.hardwareserver.libs.classpath">
+		<path refid="elab.hardwareserver.lib.path" />
+		<path refid="elab.hardwareserver.compile.lib.path" />
+	</path>
+
+	<path id="elab.compile.hardwareserver.dependencies.classpath">
+		<pathelement location="${rec.hardwareserver.classes.dir}/" />
+		<path refid="rec.hardwareserver.libs.classpath" />
+		<pathelement location="${rec.common.classes.dir}/" />
+		<path refid="rec.common.libs.classpath" />
+	</path>
+
+	<path id="elab.compile.hardwareserver.classpath">
+		<path refid="elab.hardwareserver.libs.classpath" />
+		<path refid="elab.compile.hardwareserver.dependencies.classpath" />
+	</path>
+
+	<!--
+		=====================================================
+		=========== Elab Multicast Controller ===============
+		=====================================================
+	-->
+
+	<property name="elab.multicast.classes.dir" value="${build.dir.compile}/classes/elab/multicast" />
+
+	<property name="elab.multicast.src.java.dir" value="${basedir}/elab/src/java/multicast" />
+
+	<property name="elab.multicast.lib.dir" value="${elab.lib.dir}/java/multicast/" />
+
+	<path id="elab.multicast.lib.path">
+		<fileset dir="${elab.multicast.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="elab.multicast.compile.lib.path">
+		<fileset dir="${elab.lib.dir}/compile/multicast/">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="elab.multicastcontroller.libs.classpath">
+		<path refid="elab.multicast.lib.path" />
+		<path refid="elab.multicast.compile.lib.path" />
+	</path>
+
+	<path id="elab.compile.multicastcontroller.dependencies.classpath">
+		<path refid="rec.common.libs.classpath" />
+		<pathelement location="${rec.common.classes.dir}/" />
+		<path refid="rec.multicastcontroller.libs.classpath" />
+		<pathelement location="${rec.multicast.classes.dir}/" />
+	</path>
+
+	<path id="elab.compile.multicastcontroller.classpath">
+		<path refid="elab.multicastcontroller.libs.classpath" />
+		<path refid="elab.compile.multicastcontroller.dependencies.classpath" />
+	</path>
+
+	<!--
+		=====================================================
+		===============ReC Entire Project====================
+		=====================================================
+	-->
+
+	<macrodef name="create.jnlp.full.client.compile">
+		<attribute name="codebase" />
+		<sequential>
+			
+			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFramework.jnlp" />
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" propertyFile="build.properties">
+				<replacefilter token="@href@" property="href" />
+			</replace>
+			
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
+			
+			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/OpenORB.jnlp" />
+			<replace file="${elab.client.classes.dir}/OpenORB.jnlp" token="@codebase@" value="@{codebase}" />
+			
+			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/JFreeChart.jnlp" />
+			<replace file="${elab.client.classes.dir}/JFreeChart.jnlp" token="@codebase@" value="@{codebase}" />
+			
+			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linuxInstaller.jnlp" />
+			<replace file="${elab.client.classes.dir}/linuxInstaller.jnlp" token="@codebase@" value="@{codebase}" />
+			
+			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macInstaller.jnlp" />
+			<replace file="${elab.client.classes.dir}/macInstaller.jnlp" token="@codebase@" value="@{codebase}" />
+			
+			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windowsInstaller.jnlp" />
+			<replace file="${elab.client.classes.dir}/windowsInstaller.jnlp" token="@codebase@" value="@{codebase}" />
+			
+			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ElabFullClient.jnlp" />
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" propertyFile="build.properties">
+				<replacefilter token="@href@" property="href" />
+				<replacefilter token="@title@" property="title" />
+				<replacefilter token="@vendor@" property="vendor" />
+				<replacefilter token="@homepage@" property="homepage" />
+				<replacefilter token="@one-line@" property="one-line" />
+				<replacefilter token="@tootip@" property="tootip" />
+				<replacefilter token="@short@" property="short" />
+				<replacefilter token="@j2se-version@" property="j2se-version" />
+				<replacefilter token="@main-class@" property="client.main-class" />
+			</replace>
+			
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+
+			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="add.experiment.to.full.jnlp.compile">
+		<attribute name="experiment.name" />
+		<sequential>
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
+				<replacevalue>
+		<![CDATA[<jar href="@temporary.experiment.jar@"/>
+		<!--End Experiment Jars-->]]></replacevalue>
+			</replace>
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="create.jnlp.full.client.build">
+		<sequential>
+			
+			
+			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/ReCFramework.jnlp" />
+			<replace file="${client.build.dir}/ReCFramework.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@href@" property="href" />
+			</replace>		
+
+			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />			
+			
+			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/OpenORB.jnlp" />
+			<replace file="${client.build.dir}/OpenORB.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+			</replace>
+			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${client.build.dir}/JFreeChart.jnlp" />
+			<replace file="${client.build.dir}/JFreeChart.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+			</replace>
+			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/linuxInstaller.jnlp" />
+			<replace file="${client.build.dir}/linuxInstaller.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+			</replace>
+			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/macInstaller.jnlp" />
+			<replace file="${client.build.dir}/macInstaller.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+			</replace>
+			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/windowsInstaller.jnlp" />
+			<replace file="${client.build.dir}/windowsInstaller.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+			</replace>			
+			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/ElabFullClient.jnlp" />
+			<replace file="${client.build.dir}/ElabFullClient.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@href@" property="href" />
+				<replacefilter token="@title@" property="title" />
+				<replacefilter token="@vendor@" property="vendor" />
+				<replacefilter token="@homepage@" property="homepage" />
+				<replacefilter token="@one-line@" property="one-line" />
+				<replacefilter token="@tootip@" property="tootip" />
+				<replacefilter token="@short@" property="short" />
+				<replacefilter token="@j2se-version@" property="j2se-version" />
+				<replacefilter token="@main-class@" property="client.main-class" />
+			</replace>
+
+			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+
+			<process.list task="add.experiment.to.full.jnlp.build" list="${experiment.list}" attribute.name="experiment.name" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="add.experiment.to.full.jnlp.build">
+		<attribute name="experiment.name" />
+		<sequential>
+			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
+				<replacevalue>
+		<![CDATA[<jar href="@temporary.experiment.jar@"/>
+		<!--End Experiment Jars-->]]></replacevalue>
+			</replace>
+			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
+		</sequential>
+	</macrodef>
+
+	<!--
+		=====================================================
+		================ReC Experiments======================
+		=====================================================
+	-->
+
+	<property name="experiments.classes.dir" value="${build.dir.compile}/classes/experiments" />
+	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
+
+	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/ElabFullClientTemplate.jnlp.xml" />
+	<property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/ReCFramework.jnlp.xml" />
+	
+	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/OpenORB.jnlp.xml" />
+	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/JFreeChart.jnlp.xml" />
+	
+	<property name="jnlp.linuxinstaller.template.file" value="${basedir}/templates/jnlp/LinuxInstallerTemplate.jnlp.xml" />
+	<property name="jnlp.macinstaller.template.file" value="${basedir}/templates/jnlp/MacInstallerTemplate.jnlp.xml" />
+	<property name="jnlp.windowsinstaller.template.file" value="${basedir}/templates/jnlp/WindowsInstallerTemplate.jnlp.xml" />
+	
+	
+	<property name="baseuiconfig.template.file" value="${basedir}/templates/client/ReCBaseUIConfigTemplate.xml" />
+	<property name="faceconfig.template.file" value="${basedir}/templates/client/ReCFaceConfigTemplate.xml" />
+
+
+	<!--MACROS-->
+
+	<macrodef name="process.list">
+		<attribute name="list" />
+		<attribute name="task" />
+		<attribute name="attribute.name" />
+
+		<sequential>
+			<script language="javascript">
+				<![CDATA[
+					var list="@{list}";
+					var task="@{task}";
+					var attribute_name="@{attribute.name}";
+				    var splitVars=list.split(",");
+					
+				    for(var i=0;i<splitVars.length;i++)
+				    {    
+						var oTask=project.createTask(task);
+						oTask.init();
+						oTask.setDynamicAttribute(attribute_name,splitVars[i]);
+						oTask.execute();
+					}
+				]]>
+			</script>
+		</sequential>
+	</macrodef>
+
+
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: create.jar          
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="create.jar">
+		<attribute name="destination.folder" />
+		<attribute name="jar.name" />
+		<attribute name="source.basedir" />
+
+		<sequential>
+			<mkdir dir="@{destination.folder}" />
+			<jar destfile="@{destination.folder}/@{jar.name}" basedir="@{source.basedir}">
+				<manifest>
+					<section name="common">
+						<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+						<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+						<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+						<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+						<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${TODAY}" />
+						<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+					</section>
+				</manifest>
+			</jar>
+		</sequential>
+	</macrodef>
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: sign.jar          
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="sign.jar.rec">
+		<attribute name="folder" />
+		<attribute name="jar.name" />
+		<sequential>
+			<signjar storetype="${rec.storetype}" destDir="@{folder}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
+				<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sign.jar.elab">
+		<attribute name="folder" />
+		<attribute name="jar.name" />
+		<sequential>
+			<signjar storetype="${elab.storetype}" destDir="@{folder}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
+				<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+		</sequential>
+	</macrodef>
+
+	<!--/MACROS-->
+
+	<!--
+		================================================================
+		========================== Libraries ===========================
+		================================================================
+		-->
+
+	<macrodef name="sign.all.jars.in.directory.rec.certificate">
+		<attribute name="source.dir.name" />
+		<attribute name="destination.dir.name" />
+		<sequential>
+			<mkdir dir="@{destination.dir.name}" />
+			<signjar storetype="${rec.storetype}" destDir="@{destination.dir.name}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
+				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="sign.all.jars.in.directory.elab.certificate">
+		<attribute name="source.dir.name" />
+		<attribute name="destination.dir.name" />
+		<sequential>
+			<mkdir dir="@{destination.dir.name}" />
+			<signjar storetype="${elab.storetype}" destDir="@{destination.dir.name}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
+				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+		</sequential>
+	</macrodef>
+
+	<!--
+		================================================================
+		========================== Javadocs ============================
+		================================================================
+		-->
+
+	<!--taskdef name="p200ant" classname="de.matthiasmann.p200ant.P200AntTask" classpath="${rec.lib.dir}/compile/common/p200ant.jar" />
+
+	
+	<macrodef name="pack.200.all.jar.in.dir">
+		<attribute name="source.directory" />
+		<attribute name="destination.directory"/>
+		<sequential>
+			<delete failonerror="false">
+				<fileset dir="@{destination.directory}"> 
+					<include name="**/*_sig.jar" />
+					<include name="**/*_sig.jar.pack.gz" />
+				</fileset>
+			</delete>
+
+			<mkdir dir="@{destination.directory}" />
+
+			<copy todir="@{destination.directory}">
+				<fileset dir="@{source.directory}"> 
+					<include name="**/*.jar" />
+				</fileset>
+			</copy>
+
+			<p200ant repack="true">
+				<fileset dir="@{destination.directory}"> 
+					<include name="**/*.jar" />
+				</fileset>
+			</p200ant>
+
+			<signjar destDir="@{destination.directory}" keystore="${keystore}" storepass="${keypass}" alias="${alias}" storetype="${storetype}">
+				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="*_sig.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+
+			<delete failonerror="false">
+				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="**/*_sig.jar" />
+			</delete>
+
+			<p200ant destdir="@{destination.directory}">
+				<fileset dir="@{destination.directory}"> 
+					<include name="**/*_sig.jar" />
+				</fileset>
+			</p200ant>
+
+		</sequential>
+	</macrodef>
+
+	
+	<macrodef name="pack.200.single.jar">
+		<attribute name="source.jar.without.extension" />
+		<attribute name="source.directory"/>
+		<attribute name="destination.directory"/>
+		<sequential>
+			<delete failonerror="false">
+				<fileset dir="@{destination.directory}"> 
+					<include name="@{source.jar.without.extension}_sig.jar"/> 
+					<include name="@{source.jar.without.extension}_sig.jar.pack.gz"/>
+				</fileset>
+			</delete>
+			<mkdir dir="@{destination.directory}" />
+			<copy file="@{source.directory}/@{source.jar.without.extension}.jar" todir="@{destination.directory}" overwrite="true"/>
+			<p200ant repack="true" srcfile="@{destination.directory}/@{source.jar.without.extension}.jar" />
+			<signjar destDir="@{destination.directory}" keystore="${keystore}" storepass="${keypass}" alias="${alias}" storetype="${storetype}">
+				<fileset file="@{destination.directory}/@{source.jar.without.extension}.jar" />
+				<globmapper from="*.jar" to="*_sig.jar" />
+			</signjar>
+			<delete failonerror="false">
+				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="**/*_sig.jar" />
+			</delete>
+			<p200ant repack="false" destdir="@{destination.directory}" srcfile="@{destination.directory}/@{source.jar.without.extension}_sig.jar" />
+
+		</sequential>
+	</macrodef-->
+
+	<path id="compile.experiment.client.classpath">
+		<pathelement location="${rec.common.classes.dir}" />
+		<path refid="rec.common.libs.classpath" />
+		<pathelement location="${rec.client.classes.dir}" />
+		<pathelement location="${rec.ui.classes.dir}" />
+		<path refid="rec.client.libs.classpath" />
+		<pathelement location="${elab.client.classes.dir}" />
+		<path refid="elab.client.libs.classpath" />
+	</path>
+
+	<path id="compile.experiment.driver.classpath">
+		<pathelement location="${rec.common.classes.dir}" />
+		<path refid="rec.common.libs.classpath" />
+		<pathelement location="${rec.hardwareserver.classes.dir}" />
+		<path refid="rec.hardwareserver.libs.classpath" />
+		<pathelement location="${elab.hardwareserver.classes.dir}" />
+		<path refid="elab.hardwareserver.libs.classpath" />
+	</path>
+
+	<macrodef name="create.baseuiconfig">
+		<sequential>
+			<copy file="${baseuiconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
+		
+			<process.list task="add.experiment.baseuiconfig" list="${experiment.list}" attribute.name="experiment.name" />
+			
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" propertyFile="build.properties">
+				<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+			</replace>
+			
+		</sequential>
+	</macrodef>
+
+	<macrodef name="add.experiment.baseuiconfig">
+		<attribute name="experiment.name" />
+		<sequential>
+
+			<loadfile property="@{experiment.name}.baseuiconfig" srcFile="experiments/@{experiment.name}/etc/ReCBaseUIConfig.xml" />
+
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;">
+				<replacevalue>
+					<![CDATA[@temporary.experiment.apparatus@
+		<!--End Apparatus configuration-->]]></replacevalue>
+			</replace>
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.baseuiconfig}" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="create.faceconfig">
+		<sequential>
+			<copy file="${faceconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFaceConfig.xml" />
+		
+			<process.list task="add.experiment.faceconfig" list="${experiment.list}" attribute.name="experiment.name" />
+			
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" propertyFile="build.properties">
+				<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+			</replace>
+			
+		</sequential>
+	</macrodef>
+
+	<macrodef name="add.experiment.faceconfig">
+		<attribute name="experiment.name" />
+		<sequential>
+
+			<loadfile property="@{experiment.name}.faceconfig" srcFile="experiments/@{experiment.name}/etc/ReCFaceConfig.xml" />
+
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration--&gt;">
+				<replacevalue>
+					<![CDATA[@temporary.experiment.apparatus@
+			<!--End Apparatus configuration-->]]></replacevalue>
+			</replace>
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.experiment.apparatus@" value="${@{experiment.name}.faceconfig}" />
+		</sequential>
+	</macrodef>
+
+</project>
