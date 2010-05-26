@@ -5,7 +5,7 @@
         <vendor>@vendor@</vendor>
 		<homepage href="@homepage@"/>
 		<description kind="one-line">@one-line@</description>
-		<description kind="tooltip">@tootip@</description>
+		<description kind="tooltip">@tooltip@</description>
 		<description kind="short">@short@</description>
 		<icon href="images/fullclient_iconified.gif"/>
 		<icon kind="splash" href="images/elab_logo.png"/>

@@ -391,7 +391,7 @@
 				<replacefilter token="@vendor@" property="@{experiment.name}.vendor" />
 				<replacefilter token="@homepage@" property="@{experiment.name}.homepage" />
 				<replacefilter token="@one-line@" property="@{experiment.name}.one-line" />
-				<replacefilter token="@tootip@" property="@{experiment.name}.tootip" />
+				<replacefilter token="@tooltip@" property="@{experiment.name}.tooltip" />
 				<replacefilter token="@short@" property="@{experiment.name}.short" />
 				<replacefilter token="@j2se-version@" property="@{experiment.name}.j2se-version" />
 				<replacefilter token="@main-class@" property="@{experiment.name}.client.main-class" />

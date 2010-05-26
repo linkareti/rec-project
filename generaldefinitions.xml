@@ -427,7 +427,7 @@
 				<replacefilter token="@vendor@" property="vendor" />
 				<replacefilter token="@homepage@" property="homepage" />
 				<replacefilter token="@one-line@" property="one-line" />
-				<replacefilter token="@tootip@" property="tootip" />
+				<replacefilter token="@tooltip@" property="tooltip" />
 				<replacefilter token="@short@" property="short" />
 				<replacefilter token="@j2se-version@" property="j2se-version" />
 				<replacefilter token="@main-class@" property="client.main-class" />
@@ -493,7 +493,7 @@
 				<replacefilter token="@vendor@" property="vendor" />
 				<replacefilter token="@homepage@" property="homepage" />
 				<replacefilter token="@one-line@" property="one-line" />
-				<replacefilter token="@tootip@" property="tootip" />
+				<replacefilter token="@tooltip@" property="tooltip" />
 				<replacefilter token="@short@" property="short" />
 				<replacefilter token="@j2se-version@" property="j2se-version" />
 				<replacefilter token="@main-class@" property="client.main-class" />
