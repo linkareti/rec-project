@@ -16,21 +16,23 @@ import com.linkare.rec.impl.newface.utils.ZipExtractor;
  * @author bcatarino
  */
 public class WindowsInstaller extends Installer {
+	
+	/**
+	 * Indica a versão do instalador. Sempre que seja feita uma alteração 
+	 * à aplicação que implique nova instalar, deverá ser incrementado 
+	 * manualmente este valor.
+	 */
+	private static final int INSTALLER_VERSION = 1;
 
 	@Override
 	public void installSpecificSO() throws UnavailableServiceException {
 
 		log.fine("Beginning installation");
 
-		log.fine("Installed native libraries and extracted media plugins");
-
 		try {
-
-			int result = JOptionPane.showConfirmDialog(null, "A aplicação requer que os codecs de xvid estejam instalados."
-					+ System.getProperty("line.separator") + "Se não tem, ou não tem a certeza se estão instalados, carregue ok. "
-					+ System.getProperty("line.separator") + "Não poderá visualizar o vídeo se não tiver os codecs "
-					+ System.getProperty("line.separator") + "necessários instalados na sua máquina.", "Instalação de codecs xvid",
-					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			
+			int result = JOptionPane.showConfirmDialog(null, bundle.getString("windows.ask.install.xvid"), bundle
+					.getString("install.codecs"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			boolean agree = (result == JOptionPane.YES_OPTION);
 
 			boolean installOk = false;
@@ -39,9 +41,9 @@ public class WindowsInstaller extends Installer {
 			}
 
 			if (installOk) {
-				JOptionPane.showMessageDialog(null, "Codecs instalados com sucesso");
+				JOptionPane.showMessageDialog(null, bundle.getString("codecs.installed"));
 			} else {
-				JOptionPane.showMessageDialog(null, "Os codecs não foram instalados. O vídeo poderá não ser visível.");
+				JOptionPane.showMessageDialog(null, bundle.getString("codecs.not.installed"));
 			}
 
 		} catch (InterruptedException ex) {
@@ -51,12 +53,11 @@ public class WindowsInstaller extends Installer {
 		}
 	}
 
+	//Bruno passar para superclasse e utilizar para tratar todas as excepções!
 	private void handleException() throws UnavailableServiceException {
 
-		int installationResult = JOptionPane.showConfirmDialog(null,
-				"Erro na instalação. Deseja prosseguir, mesmo podendo não ter vídeo?",
-				"", JOptionPane.OK_CANCEL_OPTION,
-				JOptionPane.QUESTION_MESSAGE);
+		int installationResult = JOptionPane.showConfirmDialog(null, bundle.getString("bundle"), "",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 		if (installationResult != JOptionPane.OK_OPTION) {
 			getInstallerService().installFailed();
@@ -75,7 +76,8 @@ public class WindowsInstaller extends Installer {
 
 		log.fine("Path of temporary xvid.zip temporary file: " + path);
 
-		ZipExtractor.extractFiles(path, System.getProperty("user.home"));
+		ZipExtractor extractor = new ZipExtractor(path);
+		extractor.extractFiles(System.getProperty("user.home"));
 
 		String xvidPath = System.getProperty("user.home") + File.separator + "xvid.exe";
 
@@ -86,12 +88,16 @@ public class WindowsInstaller extends Installer {
 
 		return xvid.waitFor() == 0;
 	}
+	
+	protected int getInstallerVersion() {
+		return INSTALLER_VERSION;
+	}
 
 	public static void main(String[] args) throws UnavailableServiceException {
 
 		try {
 			//Bruno deixa rebentar ou trata de alguma forma?
-			new WindowsInstaller().install(args);
+			new WindowsInstaller().executeInstaller(args);
 		} catch (IOException e) {
 			//Bruno falta tratamento do erro
 		}

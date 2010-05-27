@@ -14,12 +14,19 @@ import com.linkare.rec.impl.newface.installer.Installer;
  * @author bcatarino
  */
 public class LinuxInstaller extends Installer {
+	
+	/**
+	 * Indica a versão do instalador. Sempre que seja feita uma alteração 
+	 * à aplicação que implique nova instalar, deverá ser incrementado 
+	 * manualmente este valor.
+	 */
+	private static final int INSTALLER_VERSION = 0;
 
 	public static void main(String[] args) throws UnavailableServiceException {
 
 		try {
 			//Bruno deixa rebentar ou trata de alguma forma?
-			new LinuxInstaller().install(args);
+			new LinuxInstaller().executeInstaller(args);
 		} catch (IOException e) {
 			//Bruno fazer tratamento da excepção
 		}
@@ -28,16 +35,19 @@ public class LinuxInstaller extends Installer {
 	@Override
 	public void installSpecificSO() throws UnavailableServiceException {
 
-		int result = JOptionPane.showConfirmDialog(null, "A aplicação requer que os codecs de xvid estejam instalados."
-				+ System.getProperty("line.separator") + "Por favor, verifique no seu gestor de pacotes se tem o ffmpeg "
-				+ System.getProperty("line.separator") + "instalado. Deseja continuar?", "Instalação de codecs", JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE);
+		int result = JOptionPane.showConfirmDialog(null, bundle.getString("linux.ask.install.xvid"), bundle
+				.getString("install.codecs"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 		boolean agree = (result == JOptionPane.YES_OPTION);
 
 		if (!agree) {
-			JOptionPane.showMessageDialog(null, "A execução da aplicação foi cancelada.");
+			//Bruno um por SO?
+			JOptionPane.showMessageDialog(null, bundle.getString("linux.canceled"));
 			getInstallerService().installFailed();
 		}
+	}
+	
+	protected int getInstallerVersion() {
+		return INSTALLER_VERSION;
 	}
 }

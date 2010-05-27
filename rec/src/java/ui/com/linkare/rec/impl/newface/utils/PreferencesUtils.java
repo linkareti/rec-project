@@ -39,7 +39,24 @@ public class PreferencesUtils {
 		try {
 			Preferences.userRoot().sync();
 		} catch (BackingStoreException e) {
-			log.severe("Error writing preference " + key + "with value " + value + ": " + e.getMessage());
+			log.severe("Error writing preference " + key 
+					+ "with value " + value + ": " + e.getMessage());
+		}
+	}
+	
+	/**
+	 * Removes a preference from the preference tree root.
+	 * @param key The key name of the preference to remove.
+	 */
+	public static void removeUserPreference(String key) {
+		
+		Preferences.userRoot().remove(key);
+		
+		try {
+			Preferences.userRoot().sync();
+		} catch (BackingStoreException e) {
+			log.severe("Error removing preference " + key 
+					+ ": " + e.getMessage());
 		}
 	}
 }
