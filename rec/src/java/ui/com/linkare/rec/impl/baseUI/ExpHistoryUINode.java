@@ -9,7 +9,6 @@ package com.linkare.rec.impl.baseUI;
 import javax.swing.Icon;
 
 import com.linkare.rec.impl.client.apparatus.Apparatus;
-import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpHistory;
 import com.linkare.rec.impl.client.experiment.ExpHistoryDisplayFactory;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
