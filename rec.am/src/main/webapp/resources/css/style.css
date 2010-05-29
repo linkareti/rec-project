@@ -300,12 +300,35 @@ form#content div {
 	padding: 33px 0px 0px 45px;
 	color: white;
 	background: url("../../resources/images/auth_box.png") no-repeat;
-	width: 400px;
+	width: 32%;
 	height: 200px;
 	border: 1px solid;
 	border-color: #0c1011;
 	font-weight: bold;
-	margin-left: 35%;
+	margin-left: 18%;
+}
+
+#login ul {
+	list-style: none;
+	background: url("../../resources/images/auth_box.png") no-repeat;
+	width: 28%;
+	height: 200px;
+	float: right;
+	margin-top: -200px;
+	margin-right: 20%;
+	border-left: 1px solid #E4EEED;
+	padding-top: 65px;
+}
+
+#login ul li {
+	margin-left: -40px;
+	text-align: center;
+	padding-top: 10px;
+}
+
+#login ul li a {
+	font-weight: bold;
+	color: #E4EEED;
 }
 
 /*-------- Auth Footer Definitions --------*/
