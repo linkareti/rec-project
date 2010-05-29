@@ -5,6 +5,7 @@ import java.net.Socket;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.event.ActionEvent;
 
 import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.web.util.ConstantUtils;
@@ -20,7 +21,8 @@ public class PortScannerBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public String scan() {
+    public void scan(final ActionEvent event) {
+	System.out.println("SCANNING PORTS...");
 	boolean canAccessPort = false;
 	int startPortRange = 9000;
 	int stopPortRange = 9001;

@@ -40,7 +40,7 @@
 		<div id="auth_footer"><h:form>
 			<p id="ext_nav"><h:outputText
 				value="#{bundle['page.login.body.elabclient']}" /> <h:commandLink
-				action="#{portScannerBean.scan}">
+				actionListener="#{portScannerBean.scan}">
 				<script src="http://www.java.com/js/deployJava.js"></script>
 				<script>
         			// using JavaScript to get location of JNLP file relative to HTML page
