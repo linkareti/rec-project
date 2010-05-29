@@ -38,7 +38,9 @@
 			</h:panelGrid>
 		</h:form></div>
 		<div id="auth_footer"><h:form>
-			<h:commandLink action="#{portScannerBean.scan}">
+			<p id="ext_nav"><h:outputText
+				value="#{bundle['page.login.body.elabclient']}" /> <h:commandLink
+				action="#{portScannerBean.scan}">
 				<script src="http://www.java.com/js/deployJava.js"></script>
 				<script>
         			// using JavaScript to get location of JNLP file relative to HTML page
@@ -46,7 +48,7 @@
         			var url = dir + "client/ElabFullClient.jnlp";
         			deployJava.createWebStartLaunchButton(url, '1.6.0');
 				</script>
-			</h:commandLink>
+			</h:commandLink></p>
 		</h:form></div>
 	</ui:define>
 </ui:composition>
