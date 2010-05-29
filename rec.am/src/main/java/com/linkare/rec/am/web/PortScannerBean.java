@@ -30,7 +30,7 @@ public class PortScannerBean implements Serializable {
 		break;
 	    }
 	    try {
-		Socket ServerSok = new Socket("http://elab1.ist.utl.pt", i);
+		Socket ServerSok = new Socket("elab1.ist.utl.pt", i);
 		System.out.println("Port in use: " + i);
 		ServerSok.close();
 	    } catch (Exception e) {
