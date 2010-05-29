@@ -37,17 +37,13 @@
 				</h:panelGroup>
 			</h:panelGrid>
 		</h:form></div>
+
 		<div id="auth_footer"><h:form>
+			<script src="http://www.java.com/js/deployJava.js"></script>
 			<p id="ext_nav"><h:outputText
 				value="#{bundle['page.login.body.elabclient']}" /> <h:commandLink
-				actionListener="#{portScannerBean.scan}">
-				<script src="http://www.java.com/js/deployJava.js"></script>
-				<script>
-        			// using JavaScript to get location of JNLP file relative to HTML page
-        			var dir = location.href.substring(0, location.href.lastIndexOf('/')+1);
-        			var url = dir + "client/ElabFullClient.jnlp";
-        			deployJava.createWebStartLaunchButton(url, '1.6.0');
-				</script>
+				actionListener="#{portScannerBean.scan}" value="ok"
+				onclick="if (!deployJava.isWebStartInstalled('1.6')) {	if (deployJava.installLatestJRE()) { if (deployJava.launch('http://elab1.ist.utl.pt:8080/rec.am/client/ElabFullClient.jnlp')) {	} }	} else { if (deployJava.launch('http://elab1.ist.utl.pt:8080/rec.am/client/ElabFullClient.jnlp')) {	} }">
 			</h:commandLink></p>
 		</h:form></div>
 	</ui:define>
