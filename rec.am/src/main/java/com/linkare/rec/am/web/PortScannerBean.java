@@ -41,6 +41,5 @@ public class PortScannerBean implements Serializable {
 	if (!canAccessPort) {
 	    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, "error.elab.port.not.accessible");
 	}
-	return null;
     }
 }
