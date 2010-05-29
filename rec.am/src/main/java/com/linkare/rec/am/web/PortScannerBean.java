@@ -31,12 +31,10 @@ public class PortScannerBean implements Serializable {
 	    }
 	    try {
 		Socket ServerSok = new Socket("elab1.ist.utl.pt", i);
-		System.out.println("Port in use: " + i);
+		canAccessPort = true;
 		ServerSok.close();
 	    } catch (Exception e) {
 	    }
-	    System.out.println("Port not in use: " + i);
-	    canAccessPort = true;
 	}
 	if (!canAccessPort) {
 	    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, "error.elab.port.not.accessible");
