@@ -289,45 +289,61 @@ form#content div {
 
 /*-------- Login Definitions --------*/
 #login {
-	min-height: 316px;
 	background-color: #E4EEED;
-	width: 100%;
+	min-height: 316px;
 	padding-top: 60px;
+	width: 100%;
+}
+
+#login form.elab_launch {
+	background: url("../../resources/images/auth_box.png") no-repeat;
+	border-left: 1px solid #E4EEED;
+	float: right;
+	height: 200px;
+	width: 30%;
+	margin-top: -202px;
+	margin-right: 19%;
+	border: 1px solid #0C1011;
+}
+
+#login form.elab_launch h1 {
+	text-align: center;
+	color: white;
+}
+
+#login form.am_login {
+	background: url("../../resources/images/auth_box.png") no-repeat;
+	border: 1px solid #0C1011;
+	height: 200px;
+	margin-left: 20%;
+	width: 30%;
+}
+
+#login form.am_login h1 {
+	text-align: center;
+	color: white;
 }
 
 #login table {
-	padding: 33px 0px 0px 45px;
 	color: white;
-	background: url("../../resources/images/auth_box.png") no-repeat;
-	width: 32%;
-	height: 200px;
-	border: 1px solid;
-	border-color: #0c1011;
 	font-weight: bold;
-	margin-left: 18%;
+	padding: 12px 0 0 45px;
 }
 
 #login ul {
-	list-style: none;
-	background: url("../../resources/images/auth_box.png") no-repeat;
-	width: 28%;
-	height: 200px;
-	float: right;
-	margin-top: -200px;
-	margin-right: 20%;
-	border-left: 1px solid #E4EEED;
-	padding-top: 65px;
+	list-style: none outside none;
+	padding-top: 30px;
 }
 
 #login ul li {
 	margin-left: -40px;
-	text-align: center;
 	padding-top: 10px;
+	text-align: center;
 }
 
 #login ul li a {
-	font-weight: bold;
 	color: #E4EEED;
+	font-weight: bold;
 }
 
 /*-------- Auth Footer Definitions --------*/
