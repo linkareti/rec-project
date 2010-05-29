@@ -77,6 +77,8 @@ h1 {
 	float: right;
 	padding-top: 0px;
 	margin-top: 0px;
+	vertical-align: middle;
+	color: white;
 }
 
 /*-------- Left Column Definitions --------*/
@@ -291,7 +293,7 @@ form#content div {
 	min-height: 316px;
 	background-color: #E4EEED;
 	width: 100%;
-	padding-top: 80px;
+	padding-top: 60px;
 }
 
 #login table {

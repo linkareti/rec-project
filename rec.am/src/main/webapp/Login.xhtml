@@ -13,16 +13,6 @@
 	<ui:define name="body" id="auth">
 		<div id="top_login">
 		<h1><h:outputText value="#{bundle['page.login.title']}" /></h1>
-		<div id="launch" align="center">
-		<p><h:outputText value="#{bundle['page.login.body.elabclient']}"
-			escape="false" /></p>
-
-		<!-- TODO: How to make the URL not be hard coded? --> <span
-			id="jws-launcher"> <script
-			src="http://java.com/js/deployJava.js"></script> <script>
-		var url="http://elab1.ist.utl.pt:8080/rec.am/client/ElabFullClient.jnlp"
-        deployJava.createWebStartLaunchButton(url, "1.6")
-	</script> </span></div>
 		</div>
 		<div id="login"><h:form>
 			<p:focus />
@@ -50,7 +40,13 @@
 				</h:panelGroup>
 			</h:panelGrid>
 		</h:form></div>
-		<div id="auth_footer"><ui:include src="footer.xhtml" /></div>
+		<div id="auth_footer"><!-- TODO: How to make the URL not be hard coded? -->
+		<span id="ext_nav"><h:outputText
+			value="#{bundle['page.login.body.elabclient']}" escape="false" /> <script
+			src="http://java.com/js/deployJava.js"></script> <script>
+								var url="http://elab1.ist.utl.pt:8080/rec.am/client/ElabFullClient.jnlp";
+			        			deployJava.createWebStartLaunchButton(url, "1.6");
+							</script></span></div>
 	</ui:define>
 </ui:composition>
 </html>
