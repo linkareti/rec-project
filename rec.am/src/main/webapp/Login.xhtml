@@ -11,7 +11,8 @@
 		<div id="top_login">
 		<h1><h:outputText value="#{bundle['page.login.title']}" /></h1>
 		</div>
-		<div id="login"><h:form>
+		<div id="login">
+		<h:form>
 			<p:focus />
 			<h:panelGrid columns="2">
 				<h:outputLabel value="#{bundle['user.username']}" for="username" />
@@ -36,20 +37,19 @@
 						value="#{bundle['operation.login']}" />
 				</h:panelGroup>
 			</h:panelGrid>
-		</h:form></div>
-
-		<div id="auth_footer"><h:form>
+		</h:form>
+		<h:form>
 			<script src="http://www.java.com/js/deployJava.js"></script>
-			<p id="ext_nav"><h:outputText
-				value="#{bundle['page.login.body.elabclient']}" /> 
-				<h:commandLink
+			<h:outputText value="#{bundle['page.login.body.elabclient']}" /> 
+			<h:commandLink 
 				actionListener="#{portScannerBean.scan}"
 				onclick="if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch('http://elab1.ist.utl.pt:8080/rec.am/client/ElabFullClient.jnlp')) {}}} else {if (deployJava.launch('http://elab1.ist.utl.pt:8080/rec.am/client/ElabFullClient.jnlp')) {}}">
-				<img
-					src="http://java.sun.com/products/jfc/tsc/articles/swing2d/webstart.png"
-					border="0" />
-			</h:commandLink></p>
-		</h:form></div>
+				<img src="http://java.sun.com/products/jfc/tsc/articles/swing2d/webstart.png" border="0" />
+			</h:commandLink>
+		</h:form>
+		</div>
+
+		<div id="auth_footer"><p id="ext_nav"></p></div>
 
 	</ui:define>
 </ui:composition>
