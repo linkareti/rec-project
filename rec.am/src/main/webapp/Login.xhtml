@@ -13,7 +13,7 @@
 	<ui:define name="body" id="auth">
 		<div id="top_login">
 		<h1><h:outputText value="#{bundle['page.login.title']}" /></h1>
-		</div>
+			</div>
 		<div id="login"><h:form>
 			<p:focus />
 			<h:panelGrid columns="2">
@@ -40,9 +40,7 @@
 				</h:panelGroup>
 			</h:panelGrid>
 		</h:form></div>
-		<div id="auth_footer">
-		<p>footer info...</p>
-		</div>
+		<div id="auth_footer"><ui:include src="footer.xhtml" /></div>
 	</ui:define>
 </ui:composition>
 </html>
