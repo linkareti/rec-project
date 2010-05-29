@@ -24,7 +24,7 @@ public class PortScannerBean implements Serializable {
     public void scan(final ActionEvent event) {
 	System.out.println("SCANNING PORTS...");
 	boolean canAccessPort = false;
-	int startPortRange = 9000;
+	int startPortRange = 9001;
 	int stopPortRange = 9001;
 
 	for (int i = startPortRange; i <= stopPortRange; i++) {
@@ -40,6 +40,8 @@ public class PortScannerBean implements Serializable {
 	}
 	if (!canAccessPort) {
 	    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, "error.elab.port.not.accessible");
+	} else {
+	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, "info.elab.port.accessible");
 	}
     }
 }
