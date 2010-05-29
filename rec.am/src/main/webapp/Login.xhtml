@@ -1,12 +1,9 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.prime.com.tr/ui">
-
-<ui:composition template="/nomenu-template.xhtml">
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/nomenu-template.xhtml">
 	<ui:define name="title">
 		<h:outputText value="#{bundle['page.login.title']}"></h:outputText>
 	</ui:define>
@@ -40,13 +37,15 @@
 				</h:panelGroup>
 			</h:panelGrid>
 		</h:form></div>
-		<div id="auth_footer"><!-- TODO: How to make the URL not be hard coded? -->
-		<span id="ext_nav"><h:outputText
-			value="#{bundle['page.login.body.elabclient']}" escape="false" /> <script
-			src="http://java.com/js/deployJava.js"></script> <script>
-								var url="http://elab1.ist.utl.pt:8080/rec.am/client/ElabFullClient.jnlp";
-			        			deployJava.createWebStartLaunchButton(url, "1.6");
-							</script></span></div>
+		<div id="auth_footer">
+		<p id="ext_nav"><h:outputText
+			value="#{bundle['page.login.body.elabclient']}" /> <script
+			src="http://www.java.com/js/deployJava.js"></script> <script>
+                                        // using JavaScript to get location of JNLP file relative to HTML page
+                                        var dir = location.href.substring(0, location.href.lastIndexOf('/')+1);
+                                        var url = dir + "client/ElabFullClient.jnlp";
+                                        deployJava.createWebStartLaunchButton(url, '1.6.0');
+                                </script></p>
+		</div>
 	</ui:define>
 </ui:composition>
-</html>
