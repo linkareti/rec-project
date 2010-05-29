@@ -9,9 +9,10 @@
 	</ui:define>
 	<ui:define name="body" id="auth">
 		<div id="top_login">
-		<h1><h:outputText value="#{bundle['page.login.title']}" /></h1>
+		<!--h1><h:outputText value="#{bundle['page.login.title']}" /></h1-->
 		</div>
 		<div id="login"><h:form>
+			<h1></h1><h:outputText value="#{bundle['rec.am.title']}" /></h1>
 			<p:focus />
 			<h:panelGrid columns="2">
 				<h:outputLabel value="#{bundle['user.username']}" for="username" />
@@ -38,6 +39,7 @@
 			</h:panelGrid>
 		</h:form>
 		<h:form>
+			<h1></h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
 			<ul>
 				<li><h:commandLink actionListener="#{portScannerBean.scan}"
 					value="#{bundle['operation.checkElab']}" /></li>
