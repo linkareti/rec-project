@@ -11,6 +11,8 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.omg.BiDirPolicy.BIDIRECTIONAL_POLICY_TYPE;
 import org.omg.BiDirPolicy.BOTH;
@@ -75,8 +77,6 @@ public class ORBBean {
 	private Applet applet;
 
 	private org.omg.CORBA.ORB the_orb = null;
-
-	private POA rootPOA = null;
 
 	private POA dataProducerPOA = null;
 
@@ -166,8 +166,7 @@ public class ORBBean {
 					opm.set_policy_overrides(new Policy[] { bidirpol }, SetOverrideType.ADD_OVERRIDE);
 
 				} catch (Exception e) {
-					// System.out.println("Couldn't init Bidir Policy...");
-					// e.printStackTrace();
+					logThrowable(Level.SEVERE, e.getMessage(), e);
 				}
 			}
 
@@ -330,7 +329,7 @@ public class ORBBean {
 			try {
 				getAutoIdRootPOA().deactivate_object(getAutoIdRootPOA().servant_to_id(servant));
 			} catch (Exception e) {
-				e.printStackTrace();
+				logThrowable(Level.SEVERE, e.getMessage(), e);
 			}
 		}
 	}
@@ -340,7 +339,7 @@ public class ORBBean {
 			try {
 				getAutoIdRootPOA().deactivate_object(oid);
 			} catch (Exception e) {
-				e.printStackTrace();
+				logThrowable(Level.SEVERE, e.getMessage(), e);
 			}
 		}
 	}
@@ -477,8 +476,7 @@ public class ORBBean {
 				ns = NamingContextExtHelper.narrow(getORB().resolve_initial_references("NameService"));
 				return ns;
 			} catch (Exception e) {
-				// System.out.println("Couldn't create name service...");
-				e.printStackTrace();
+				logThrowable(Level.SEVERE, e.getMessage(), e);
 				throw e;
 			}
 		}
@@ -492,7 +490,7 @@ public class ORBBean {
 		try {
 			out = getNameService().resolve_str(FullName);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logThrowable(Level.SEVERE, e.getMessage(), e);
 		}
 
 		return out;
@@ -500,7 +498,6 @@ public class ORBBean {
 
 	public org.omg.CORBA.Object getRemoteObject(NameComponent[] fullname) throws Exception {
 		synchronized (the_orb) {
-			String Fullname = getNameService().to_string(fullname);
 			org.omg.CORBA.Object out = getNameService().resolve(fullname);
 			return out;
 		}
@@ -509,9 +506,7 @@ public class ORBBean {
 	public void removeNSRegistration(NameComponent[] fullname) {
 		synchronized (the_orb) {
 			try {
-				String Fullname = getNameService().to_string(fullname);
 				getNameService().unbind(fullname);
-
 			} catch (Exception ignored) {
 			}
 		}
@@ -525,7 +520,7 @@ public class ORBBean {
 		try {
 			obj = getORB().string_to_object(corbalocURL);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logThrowable(Level.SEVERE, e.getMessage(), e);
 			throw e;
 		}
 
@@ -663,7 +658,7 @@ public class ORBBean {
 				result = ctor.newInstance(new java.lang.Object[] { ((ObjectImpl) obj)._get_delegate() });
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			logThrowable(Level.SEVERE, ex.getMessage(), ex);
 		}
 		return result;
 	}
@@ -680,16 +675,20 @@ public class ORBBean {
 		synchronized (orb_synch) {
 			try {
 				the_orb.shutdown(true);
-			} catch (Throwable e) {
-				// e.printStackTrace();
+			} catch (Exception e) {
+				logThrowable(Level.SEVERE, e.getMessage(), e);
 			}
 			try {
 				the_orb.destroy();
-			} catch (Throwable e) {
-				// e.printStackTrace();
+			} catch (Exception e) {
+				logThrowable(Level.SEVERE, e.getMessage(), e);
 			}
 			the_orb = null;
 		}
+	}
+
+	private void logThrowable(Level l, String message, Throwable t) {
+		Logger.getLogger(getClass().getName()).log(Level.ALL, message, t);
 	}
 
 }
