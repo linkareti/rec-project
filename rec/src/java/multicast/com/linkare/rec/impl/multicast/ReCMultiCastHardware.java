@@ -616,7 +616,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	DateTime timeStartMin = null;
 
 	public UserInfo[] getClientList(UserInfo user) throws NotRegistered, NotAuthorized {
+		log(Level.FINEST, "Hardware - Getting the client list for user " + (user == null ? "(user is null)" : user.getUserName()));
 		UserInfo[] retVal = clientQueue.getUsers(user, resource);
+		log(Level.FINEST, "Hardware - Got as retVal " + retVal);
 
 		DateTime timeStartMax = null;
 

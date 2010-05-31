@@ -43,7 +43,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	public static final DataProducerActivator DP_DEACTIVATOR = new DataProducerActivator();
 
 	public static String MCCONTROLLER_LOGGER = "MultiCastController.Logger";
-	
+
 	public static final String SYSPROP_MULTICAST_INIT_REF = "ReC.MultiCastController.InitRef";
 
 	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(System
@@ -52,7 +52,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	public static final String SYSPROP_MULTICAST_BIND_NAME = "ReC.MultiCastController.BindName";
 
 	public static final String MULTICAST_BIND_NAME = Defaults.defaultIfEmpty(System
-		.getProperty(SYSPROP_MULTICAST_BIND_NAME), "MultiCastController");
+			.getProperty(SYSPROP_MULTICAST_BIND_NAME), "MultiCastController");
 
 	/*
 	 * i18n support
@@ -166,7 +166,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	 * @see com.linkare.rec.acquisition.MultiCastControllerOperations#getClientList(com.linkare.rec.acquisition.UserInfo)
 	 */
 	public UserInfo[] getClientList(UserInfo user) throws NotRegistered, NotAuthorized {
+		log(Level.FINEST, "Controller - Getting the client list for user " + (user == null ? "(user is null)" : user.getUserName()));
 		UserInfo[] retVal = clientQueue.getUsers(user, resource);
+		log(Level.FINEST, "Controller - Got as retVal " + retVal);
 		return retVal;
 	}
 
@@ -273,9 +275,6 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	/* End Inner Class - Hardware Connection Checker */
 
 	private ArrayList<ReCMultiCastHardware> multiCastHardwares = null;
-
-	
-	
 
 	/* Inner class - HardwareChangeListener implementation */
 	// Also contains the list of hardwares... in House Management
