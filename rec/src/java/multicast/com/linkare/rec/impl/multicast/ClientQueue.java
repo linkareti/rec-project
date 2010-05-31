@@ -408,8 +408,11 @@ public class ClientQueue {
 
 	public boolean contains(UserInfo user) {
 		Iterator<DataClientForQueue> iter = iterator();
+		getClientQueueListener().log(Level.FINEST, "ClientQueue - users size is " + Collections.unmodifiableList(queueOrg).size());
+		getClientQueueListener().log(Level.FINEST, "ClientQueue - username passed in is " + user == null ? "(user is null)" : user.getUserName());
 		while (iter.hasNext()) {
 			DataClientForQueue dcfq = iter.next();
+			getClientQueueListener().log(Level.FINEST, "ClientQueue - dcfq.getUserName() " + dcfq.getUserName());
 			if (dcfq.getUserName().equals(user.getUserName())) {
 				return true;
 			}
