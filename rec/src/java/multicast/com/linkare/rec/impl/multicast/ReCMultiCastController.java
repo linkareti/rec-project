@@ -226,7 +226,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 		// private boolean shutdown = false;
 
 		HardwareConnectionCheck() {
-			ExecutorScheduler.scheduleAtFixedRate(this, 1, 5, SECONDS);
+			ExecutorScheduler.scheduleAtFixedRate(this, 1, 60, SECONDS);
 		}
 
 		// public void shutdown() {
