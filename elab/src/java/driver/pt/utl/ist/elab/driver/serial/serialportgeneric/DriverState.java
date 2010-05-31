@@ -3,11 +3,10 @@ package pt.utl.ist.elab.driver.serial.serialportgeneric;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.linkare.rec.acquisition.IncorrectStateException;
-import com.linkare.rec.impl.threading.TimedOutException;
-
-import pt.utl.ist.elab.driver.serial.serialportgeneric.config.TimeoutNode;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandList;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.config.TimeoutNode;
+
+import com.linkare.rec.acquisition.IncorrectStateException;
 
 /**
  * 

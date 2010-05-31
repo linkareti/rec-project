@@ -25,7 +25,6 @@
 
 package org.videolan.jvlc;
 
-import com.sun.jna.Native;
 import java.awt.Canvas;
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -38,6 +37,8 @@ import org.videolan.jvlc.internal.LibVlcEventType;
 import org.videolan.jvlc.internal.LibVlc.LibVlcEventManager;
 import org.videolan.jvlc.internal.LibVlc.LibVlcMediaInstance;
 import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
+
+import com.sun.jna.Native;
 
 public class MediaPlayer {
 

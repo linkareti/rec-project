@@ -7,9 +7,6 @@
 package pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.AbstractSerialPortDataSource;
-import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
-
-import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 
 /**
  * 

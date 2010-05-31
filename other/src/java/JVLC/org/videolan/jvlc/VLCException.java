@@ -28,7 +28,6 @@
 
 package org.videolan.jvlc;
 
-import java.lang.Exception;
 
 public class VLCException extends Exception {
 

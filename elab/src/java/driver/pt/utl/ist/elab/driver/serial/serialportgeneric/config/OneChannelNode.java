@@ -17,8 +17,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode.TransferFunctionType;
-
 /**
  * <p>
  * Java class for OneChannelNode complex type.

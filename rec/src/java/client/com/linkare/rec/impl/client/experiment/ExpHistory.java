@@ -8,7 +8,6 @@ package com.linkare.rec.impl.client.experiment;
 
 import javax.swing.Icon;
 
-//import com.linkare.rec.impl.client.apparatus.Apparatus;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**

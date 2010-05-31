@@ -19,10 +19,10 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDriver;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandList;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandListener;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDriver;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.threading.TimedOutException;

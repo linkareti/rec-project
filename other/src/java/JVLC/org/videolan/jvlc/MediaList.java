@@ -26,7 +26,6 @@
 package org.videolan.jvlc;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.videolan.jvlc.internal.LibVlc.LibVlcEventManager;

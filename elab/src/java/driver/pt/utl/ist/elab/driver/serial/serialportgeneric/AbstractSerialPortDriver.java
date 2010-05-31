@@ -25,12 +25,12 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import pt.utl.ist.elab.driver.serial.serialportgeneric.config.HardwareNode;
-import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode;
-import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDataSource;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandList;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandListener;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.config.HardwareNode;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDataSource;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
