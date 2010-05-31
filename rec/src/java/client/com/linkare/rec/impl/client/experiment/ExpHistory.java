@@ -31,19 +31,29 @@ public class ExpHistory {
 
 	private String ownerUserName = null;
 
-    private com.linkare.rec.impl.client.apparatus.Apparatus apparatus = null;
-	//private com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig = null;
+	private com.linkare.rec.impl.client.apparatus.Apparatus apparatus = null;
+
+	// private com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig =
+	// null;
 
 	/** Creates a new instance of ExperimentHistory */
 	public ExpHistory(ExpHistoryDisplayFactory expHistoryDisplayFactory, DataProducerWrapper producerWrapper,
-			com.linkare.rec.impl.client.apparatus.Apparatus apparatus/*,
-			com.linkare.rec.impl.baseUI.config.Apparatus apparatusConfig*/) {
+			com.linkare.rec.impl.client.apparatus.Apparatus apparatus/*
+																	 * ,
+																	 * com.linkare
+																	 * .
+																	 * rec.impl.
+																	 * baseUI
+																	 * .config
+																	 * .Apparatus
+																	 * apparatusConfig
+																	 */) {
 
 		this.expHistoryDisplayFactory = expHistoryDisplayFactory;
 		this.producerWrapper = producerWrapper;
 		expCount = ExpHistoryCounter.getExperimentNumber(apparatus.getHardwareInfo().getHardwareUniqueID());
 		this.apparatus = apparatus;
-		//this.apparatusConfig = apparatusConfig;
+		// this.apparatusConfig = apparatusConfig;
 	}
 
 	public DataProducerWrapper getProducerWrapper() {
@@ -53,10 +63,11 @@ public class ExpHistory {
 	public com.linkare.rec.impl.client.apparatus.Apparatus getApparatus() {
 		return this.apparatus;
 	}
-	
-//	public com.linkare.rec.impl.baseUI.config.Apparatus getApparatusConfig() {
-//		return this.apparatusConfig;
-//	}
+
+	// public com.linkare.rec.impl.baseUI.config.Apparatus getApparatusConfig()
+	// {
+	// return this.apparatusConfig;
+	// }
 
 	public void setDelete() {
 		deleted = true;
@@ -93,15 +104,15 @@ public class ExpHistory {
 	public String getApparatusName() {
 		return apparatus.getHardwareInfo().getFamiliarName();
 	}
-	
-//	/**
-//	 * Getter for property apparatusIcon.
-//	 * 
-//	 * @return Value of property apparatusIcon.
-//	 */
-//	public Icon getApparatusIcon() {
-//		return apparatusConfig.getIcon();
-//	} 
+
+	// /**
+	// * Getter for property apparatusIcon.
+	// *
+	// * @return Value of property apparatusIcon.
+	// */
+	// public Icon getApparatusIcon() {
+	// return apparatusConfig.getIcon();
+	// }
 
 	/**
 	 * Getter for property locallyOwned.

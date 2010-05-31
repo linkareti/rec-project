@@ -27,77 +27,68 @@ package org.videolan.jvlc;
 
 import org.videolan.jvlc.internal.LibVlc.libvlc_log_message_t;
 
+public class LoggerMessage {
 
-public class LoggerMessage
-{
+	private LoggerVerbosityLevel severity;
+	private String header;
+	private String message;
+	private String name;
+	private String type;
 
-    private LoggerVerbosityLevel severity;
-    private String header;
-    private String message;
-    private String name;
-    private String type;
+	/**
+	 * @param message
+	 */
+	LoggerMessage(libvlc_log_message_t message) {
+		this.severity = LoggerVerbosityLevel.getSeverity(message.i_severity);
+		this.header = message.psz_header;
+		this.message = message.psz_message;
+		this.name = message.psz_name;
+		this.type = message.psz_type;
+	}
 
-    /**
-     * @param message
-     */
-    LoggerMessage(libvlc_log_message_t message)
-    {
-        this.severity = LoggerVerbosityLevel.getSeverity(message.i_severity);
-        this.header = message.psz_header;
-        this.message = message.psz_message;
-        this.name = message.psz_name;
-        this.type = message.psz_type;
-    }
+	/**
+	 * Returns the header.
+	 * 
+	 * @return the header
+	 */
+	public String getHeader() {
+		return header;
+	}
 
-    
-    /**
-     * Returns the header.
-     * @return the header
-     */
-    public String getHeader()
-    {
-        return header;
-    }
+	/**
+	 * Returns the message.
+	 * 
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
 
-    
-    /**
-     * Returns the message.
-     * @return the message
-     */
-    public String getMessage()
-    {
-        return message;
-    }
+	/**
+	 * Returns the name.
+	 * 
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
 
-    
-    /**
-     * Returns the name.
-     * @return the name
-     */
-    public String getName()
-    {
-        return name;
-    }
+	/**
+	 * Returns the type.
+	 * 
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
 
-    
-    /**
-     * Returns the type.
-     * @return the type
-     */
-    public String getType()
-    {
-        return type;
-    }
-
-
-    
-    /**
-     * Returns the severity.
-     * @return the severity
-     */
-    public LoggerVerbosityLevel getSeverity()
-    {
-        return severity;
-    }
+	/**
+	 * Returns the severity.
+	 * 
+	 * @return the severity
+	 */
+	public LoggerVerbosityLevel getSeverity() {
+		return severity;
+	}
 
 }

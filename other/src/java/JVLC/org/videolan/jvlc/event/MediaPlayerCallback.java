@@ -36,66 +36,49 @@ import org.videolan.jvlc.internal.LibVlc.media_player_time_changed;
 
 import com.sun.jna.Pointer;
 
+public class MediaPlayerCallback implements LibVlcCallback {
+	private static final Logger log = Logger.getLogger(MediaPlayerCallback.class.getName());
 
-public class MediaPlayerCallback implements LibVlcCallback
-{
-	private static final Logger log = Logger
-			.getLogger(MediaPlayerCallback.class.getName());
+	private final MediaPlayerListener listener;
+	private final MediaPlayer mediaPlayer;
 
-    private final MediaPlayerListener listener;
-    private final MediaPlayer mediaPlayer;
+	public MediaPlayerCallback(MediaPlayer mediaInstance, MediaPlayerListener listener) {
+		this.mediaPlayer = mediaInstance;
+		this.listener = listener;
+	}
 
-    public MediaPlayerCallback(MediaPlayer mediaInstance, MediaPlayerListener listener)
-    {
-        this.mediaPlayer = mediaInstance;
-        this.listener = listener;
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void callback(libvlc_event_t libvlc_event, Pointer userData)
-    {
-        if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPlaying.ordinal())
-        {
-            listener.playing(mediaPlayer);
-        }
-        else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPaused.ordinal())
-        {
-            listener.paused(mediaPlayer);
-        }
-        else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerEndReached.ordinal())
-        {
-            listener.endReached(mediaPlayer);
-        }
-        else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPositionChanged.ordinal())
-        {
-            listener.positionChanged(mediaPlayer);
-        }
-        else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerStopped.ordinal())
-        {
-            listener.stopped(mediaPlayer);
-        }
-        else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerTimeChanged.ordinal())
-        {
-			//TODO suprimir listener.timeChanged quando foi feito um ajuste pelo user mas este ainda não foi feito no vídeo, de facto.
-            libvlc_event.event_type_specific.setType(LibVlc.media_player_time_changed.class);
-            LibVlc.media_player_time_changed timeChanged = (media_player_time_changed) libvlc_event.event_type_specific
-                .readField("media_player_time_changed");
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void callback(libvlc_event_t libvlc_event, Pointer userData) {
+		if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPlaying.ordinal()) {
+			listener.playing(mediaPlayer);
+		} else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPaused.ordinal()) {
+			listener.paused(mediaPlayer);
+		} else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerEndReached.ordinal()) {
+			listener.endReached(mediaPlayer);
+		} else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerPositionChanged.ordinal()) {
+			listener.positionChanged(mediaPlayer);
+		} else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerStopped.ordinal()) {
+			listener.stopped(mediaPlayer);
+		} else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerTimeChanged.ordinal()) {
+			// TODO suprimir listener.timeChanged quando foi feito um ajuste
+			// pelo user mas este ainda não foi feito no vídeo, de facto.
+			libvlc_event.event_type_specific.setType(LibVlc.media_player_time_changed.class);
+			LibVlc.media_player_time_changed timeChanged = (media_player_time_changed) libvlc_event.event_type_specific
+					.readField("media_player_time_changed");
 
-			//Bruno Evita que em streaming sejam lançados e tratados eventos desnecessários. Ver se é necessário
-//            if (timeChanged != null && timeChanged.new_time > 0)
-                listener.timeChanged(mediaPlayer, timeChanged.new_time);
+			// Bruno Evita que em streaming sejam lançados e tratados eventos
+			// desnecessários. Ver se é necessário
+			// if (timeChanged != null && timeChanged.new_time > 0)
+			listener.timeChanged(mediaPlayer, timeChanged.new_time);
 
-        }
-        else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerEncounteredError.ordinal())
-        {
-            log.warning("Media player encountered error.");
-            listener.errorOccurred(mediaPlayer);
-        }
-        else
-        {
-            log.fine(String.format("Unsupported event error. Event id: {%d}", libvlc_event.type));
-        }
-    }
+		} else if (libvlc_event.type == LibVlcEventType.libvlc_MediaPlayerEncounteredError.ordinal()) {
+			log.warning("Media player encountered error.");
+			listener.errorOccurred(mediaPlayer);
+		} else {
+			log.fine(String.format("Unsupported event error. Event id: {%d}", libvlc_event.type));
+		}
+	}
 }

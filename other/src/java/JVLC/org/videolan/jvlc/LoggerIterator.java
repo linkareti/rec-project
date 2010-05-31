@@ -31,64 +31,54 @@ import org.videolan.jvlc.internal.LibVlc.LibVlcLogIterator;
 import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
 import org.videolan.jvlc.internal.LibVlc.libvlc_log_message_t;
 
+public class LoggerIterator implements Iterator<LoggerMessage> {
 
-public class LoggerIterator implements Iterator<LoggerMessage>
-{
+	private Logger logger;
+	private LibVlcLogIterator logIterator;
 
-    private Logger logger;
-    private LibVlcLogIterator logIterator;
+	/**
+	 * @param logInstance
+	 */
+	LoggerIterator(Logger logger) {
+		this.logger = logger;
+		libvlc_exception_t exception = new libvlc_exception_t();
+		this.logIterator = logger.libvlc.libvlc_log_get_iterator(logger.logInstance, exception);
+	}
 
-    /**
-     * @param logInstance
-     */
-    LoggerIterator(Logger logger)
-    {
-        this.logger = logger;
-        libvlc_exception_t exception = new libvlc_exception_t();
-        this.logIterator = logger.libvlc.libvlc_log_get_iterator(logger.logInstance, exception);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	public boolean hasNext() {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		return logger.libvlc.libvlc_log_iterator_has_next(logIterator, exception) != 0;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public boolean hasNext()
-    {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        return logger.libvlc.libvlc_log_iterator_has_next(logIterator, exception) != 0;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	public LoggerMessage next() {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc_log_message_t message = new libvlc_log_message_t();
+		logger.libvlc.libvlc_log_iterator_next(logIterator, message, exception);
+		LoggerMessage result = new LoggerMessage(message);
+		return result;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public LoggerMessage next()
-    {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc_log_message_t message = new libvlc_log_message_t();
-        logger.libvlc.libvlc_log_iterator_next(logIterator, message, exception);
-        LoggerMessage result = new LoggerMessage(message);
-        return result;
-    }
+	/**
+	 * {@inheritDoc} Does not remove the element.
+	 */
+	public void remove() {
+		//        
+	}
 
-    /**
-     * {@inheritDoc}
-     * Does not remove the element.
-     */
-    public void remove()
-    {
-        //        
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void finalize() throws Throwable {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		logger.libvlc.libvlc_log_iterator_free(logIterator, exception);
+		super.finalize();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void finalize() throws Throwable
-    {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        logger.libvlc.libvlc_log_iterator_free(logIterator, exception);
-        super.finalize();
-    }
-
-    
-    
 }

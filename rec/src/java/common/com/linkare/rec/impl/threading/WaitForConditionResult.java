@@ -6,7 +6,6 @@
 
 package com.linkare.rec.impl.threading;
 
-
 /**
  * 
  * @author Jose Pedro Pereira

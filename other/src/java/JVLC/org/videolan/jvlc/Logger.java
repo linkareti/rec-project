@@ -31,49 +31,39 @@ import org.videolan.jvlc.internal.LibVlc;
 import org.videolan.jvlc.internal.LibVlc.LibVlcLog;
 import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
 
+public class Logger {
+	LibVlcLog logInstance;
+	LibVlc libvlc;
 
-public class Logger
-{
-    LibVlcLog logInstance;
-    LibVlc libvlc;
+	/**
+	 * @param jvlc The current jvlc instance
+	 */
+	public Logger(JVLC jvlc) {
+		this.libvlc = jvlc.getLibvlc();
+		libvlc_exception_t exception = new libvlc_exception_t();
+		this.logInstance = jvlc.getLibvlc().libvlc_log_open(jvlc.getInstance(), exception);
+		if (exception.raised == 1) {
+			throw new RuntimeException("Native exception thrown: " + exception.message);
+		}
+	}
 
-    
-    /**
-     * @param jvlc The current jvlc instance 
-     */
-    public Logger(JVLC jvlc)
-    {
-        this.libvlc = jvlc.getLibvlc();
-        libvlc_exception_t exception = new libvlc_exception_t();
-        this.logInstance = jvlc.getLibvlc().libvlc_log_open(jvlc.getInstance(), exception);
-        if (exception.raised == 1)
-        {
-            throw new RuntimeException("Native exception thrown: " + exception.message);
-        }
-    }
-    
-    public void clear()
-    {
-        libvlc_exception_t exception = new libvlc_exception_t();    
-        libvlc.libvlc_log_clear(logInstance, exception);
-    }
-    
-    public void close()
-    {
-        libvlc_exception_t exception = new libvlc_exception_t();    
-        libvlc.libvlc_log_close(logInstance, exception);
-    }
-    
-    public int count()
-    {
-        libvlc_exception_t exception = new libvlc_exception_t();    
-        return libvlc.libvlc_log_count(logInstance, exception);
-    }
-    
-    public Iterator<LoggerMessage> iterator()
-    {
-        return new LoggerIterator(this);
-    }
+	public void clear() {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_log_clear(logInstance, exception);
+	}
 
-    
+	public void close() {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_log_close(logInstance, exception);
+	}
+
+	public int count() {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		return libvlc.libvlc_log_count(logInstance, exception);
+	}
+
+	public Iterator<LoggerMessage> iterator() {
+		return new LoggerIterator(this);
+	}
+
 }

@@ -25,17 +25,15 @@
 
 package org.videolan.jvlc.internal;
 
-
-public enum LibVlcState
-{
-    libvlc_NothingSpecial, // 0
-    libvlc_Opening, // 1
-    libvlc_Buffering, // 2
-    libvlc_Playing, // 3
-    libvlc_Paused, // 4
-    libvlc_Stopped, // 5
-    libvlc_Forward, // 6
-    libvlc_Backward, // 7
-    libvlc_Ended, // 8
-    libvlc_Error; // 9
+public enum LibVlcState {
+	libvlc_NothingSpecial, // 0
+	libvlc_Opening, // 1
+	libvlc_Buffering, // 2
+	libvlc_Playing, // 3
+	libvlc_Paused, // 4
+	libvlc_Stopped, // 5
+	libvlc_Forward, // 6
+	libvlc_Backward, // 7
+	libvlc_Ended, // 8
+	libvlc_Error; // 9
 }

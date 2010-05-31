@@ -30,92 +30,79 @@ import org.videolan.jvlc.internal.LibVlc.LibVlcEventManager;
 import org.videolan.jvlc.internal.LibVlc.LibVlcMediaDescriptor;
 import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
 
+public class MediaDescriptor {
+	private LibVlcMediaDescriptor instance;
+	private LibVlc libvlc;
+	private LibVlcEventManager eventManager;
+	private boolean released;
 
-public class MediaDescriptor
-{
-    private LibVlcMediaDescriptor instance;
-    private LibVlc libvlc;
-    private LibVlcEventManager eventManager;
-    private boolean released;
-    
-    /**
-     * @param jvlc The jvlc instance to create the media descriptor for.
-     * @param media The media string
-     */
-    public MediaDescriptor(JVLC jvlc, String media)
-    {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc = jvlc.getLibvlc();
-        instance = libvlc.libvlc_media_new(jvlc.getInstance(), media, exception);
-        eventManager = libvlc.libvlc_media_event_manager(instance, exception);
-    }
+	/**
+	 * @param jvlc The jvlc instance to create the media descriptor for.
+	 * @param media The media string
+	 */
+	public MediaDescriptor(JVLC jvlc, String media) {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc = jvlc.getLibvlc();
+		instance = libvlc.libvlc_media_new(jvlc.getInstance(), media, exception);
+		eventManager = libvlc.libvlc_media_event_manager(instance, exception);
+	}
 
-    MediaDescriptor(JVLC jvlc, LibVlcMediaDescriptor instance)
-    {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc = jvlc.getLibvlc();
-        this.instance = instance;
-        eventManager = libvlc.libvlc_media_event_manager(instance, exception);
-    }
+	MediaDescriptor(JVLC jvlc, LibVlcMediaDescriptor instance) {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc = jvlc.getLibvlc();
+		this.instance = instance;
+		eventManager = libvlc.libvlc_media_event_manager(instance, exception);
+	}
 
-    public void addOption(String option)
-    {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc.libvlc_media_add_option(instance, option, exception );
-    }
-    
-    public String getMrl()
-    {
-        return libvlc.libvlc_media_get_mrl(instance);
-    }
-    
-    public MediaPlayer getMediaPlayer()
-    {
-        return new MediaPlayer(this);
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void finalize() throws Throwable
-    {
-        release();
-        super.finalize();
-    }
+	public void addOption(String option) {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_media_add_option(instance, option, exception);
+	}
 
-    
-    
-    /**
-     * Returns the instance.
-     * @return the instance
-     */
-    LibVlcMediaDescriptor getInstance()
-    {
-        return instance;
-    }
-    
-    /**
-     * Returns the libvlc.
-     * @return the libvlc
-     */
-    LibVlc getLibvlc()
-    {
-        return libvlc;
-    }
+	public String getMrl() {
+		return libvlc.libvlc_media_get_mrl(instance);
+	}
 
-    /**
+	public MediaPlayer getMediaPlayer() {
+		return new MediaPlayer(this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void finalize() throws Throwable {
+		release();
+		super.finalize();
+	}
+
+	/**
+	 * Returns the instance.
+	 * 
+	 * @return the instance
+	 */
+	LibVlcMediaDescriptor getInstance() {
+		return instance;
+	}
+
+	/**
+	 * Returns the libvlc.
+	 * 
+	 * @return the libvlc
+	 */
+	LibVlc getLibvlc() {
+		return libvlc;
+	}
+
+	/**
      * 
      */
-    public void release()
-    {
-        if (released)
-        {
-            return;
-        }
-        released = true;
-        libvlc.libvlc_media_release(instance);
-    }
-    
-    
+	public void release() {
+		if (released) {
+			return;
+		}
+		released = true;
+		libvlc.libvlc_media_release(instance);
+	}
+
 }

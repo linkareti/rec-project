@@ -1,4 +1,4 @@
- /*****************************************************************************
+/*****************************************************************************
  * Playlist.java: PlaylistIntf implementation class
  *****************************************************************************
  *
@@ -26,7 +26,6 @@
  * 
  */
 
-
 package org.videolan.jvlc;
 
 import org.videolan.jvlc.internal.LibVlc;
@@ -35,92 +34,90 @@ import org.videolan.jvlc.internal.LibVlc.LibVlcMediaInstance;
 import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
 
 /**
- * The playlist is deprecated and will be removed. Use MediaList and MediaListPlayer instead.
+ * The playlist is deprecated and will be removed. Use MediaList and
+ * MediaListPlayer instead.
  */
 @Deprecated
 public class Playlist {
-    
-    
-    private final LibVlcInstance libvlcInstance;
-    private final LibVlc libvlc;
-    private final JVLC jvlc;
 
-    public Playlist(JVLC jvlc) {
-        this.jvlc = jvlc;
-        this.libvlcInstance = jvlc.getInstance();
-        this.libvlc = jvlc.getLibvlc();
-    }
-    
-    public synchronized void play(int id, String[] options) throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc.libvlc_playlist_play(libvlcInstance, id, options.length, options, exception);
-    }
+	private final LibVlcInstance libvlcInstance;
+	private final LibVlc libvlc;
+	private final JVLC jvlc;
 
-    public synchronized void play() throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc.libvlc_playlist_play(libvlcInstance, -1, 0, new String[] {}, exception);
-    }
+	public Playlist(JVLC jvlc) {
+		this.jvlc = jvlc;
+		this.libvlcInstance = jvlc.getInstance();
+		this.libvlc = jvlc.getLibvlc();
+	}
 
-    public synchronized void togglePause() throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc.libvlc_playlist_pause(libvlcInstance, exception);
-    }
+	public synchronized void play(int id, String[] options) throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_playlist_play(libvlcInstance, id, options.length, options, exception);
+	}
 
-    public synchronized void stop() throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc.libvlc_playlist_stop(libvlcInstance, exception);
-    }
+	public synchronized void play() throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_playlist_play(libvlcInstance, -1, 0, new String[] {}, exception);
+	}
 
-    public boolean isRunning() throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        return libvlc.libvlc_playlist_isplaying(libvlcInstance, exception) == 0? false : true;
-    }
+	public synchronized void togglePause() throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_playlist_pause(libvlcInstance, exception);
+	}
 
-    public synchronized int itemsCount() throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        return libvlc.libvlc_playlist_items_count(libvlcInstance, exception);
-    }
+	public synchronized void stop() throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_playlist_stop(libvlcInstance, exception);
+	}
 
-    public synchronized void next() throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        if (! isRunning())
-            play();
-        libvlc.libvlc_playlist_next(libvlcInstance, exception);
-    }
+	public boolean isRunning() throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		return libvlc.libvlc_playlist_isplaying(libvlcInstance, exception) == 0 ? false : true;
+	}
 
-    public synchronized void prev() throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        if (! isRunning())
-            play();
-        libvlc.libvlc_playlist_prev(libvlcInstance, exception);
-    }
+	public synchronized int itemsCount() throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		return libvlc.libvlc_playlist_items_count(libvlcInstance, exception);
+	}
 
-    public synchronized void clear() throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc.libvlc_playlist_clear(libvlcInstance, exception);
-    }
-    
-    public synchronized int add(String uri, String name) throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        return libvlc.libvlc_playlist_add(libvlcInstance, uri, name, exception);
-    }
+	public synchronized void next() throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		if (!isRunning())
+			play();
+		libvlc.libvlc_playlist_next(libvlcInstance, exception);
+	}
 
+	public synchronized void prev() throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		if (!isRunning())
+			play();
+		libvlc.libvlc_playlist_prev(libvlcInstance, exception);
+	}
 
-    public synchronized void deleteItem(int itemID) throws VLCException {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc.libvlc_playlist_delete_item(libvlcInstance, itemID, exception);
-    }
-    
-    public synchronized void setLoop(boolean loop) {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libvlc.libvlc_playlist_loop(libvlcInstance, loop? 1 : 0, exception);
-    }
-    
-    public MediaPlayer getMediaInstance()
-    {
-        libvlc_exception_t exception = new libvlc_exception_t();
-        LibVlcMediaInstance mi = libvlc.libvlc_playlist_get_media_player(libvlcInstance, exception);
-        return new MediaPlayer(jvlc, mi);
-        
-    }
+	public synchronized void clear() throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_playlist_clear(libvlcInstance, exception);
+	}
+
+	public synchronized int add(String uri, String name) throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		return libvlc.libvlc_playlist_add(libvlcInstance, uri, name, exception);
+	}
+
+	public synchronized void deleteItem(int itemID) throws VLCException {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_playlist_delete_item(libvlcInstance, itemID, exception);
+	}
+
+	public synchronized void setLoop(boolean loop) {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_playlist_loop(libvlcInstance, loop ? 1 : 0, exception);
+	}
+
+	public MediaPlayer getMediaInstance() {
+		libvlc_exception_t exception = new libvlc_exception_t();
+		LibVlcMediaInstance mi = libvlc.libvlc_playlist_get_media_player(libvlcInstance, exception);
+		return new MediaPlayer(jvlc, mi);
+
+	}
 }

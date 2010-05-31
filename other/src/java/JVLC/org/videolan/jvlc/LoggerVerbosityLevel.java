@@ -27,11 +27,10 @@ package org.videolan.jvlc;
 
 public enum LoggerVerbosityLevel {
 
-    INFO, ERROR, WARNING, DEBUG;
+	INFO, ERROR, WARNING, DEBUG;
 
-    public static LoggerVerbosityLevel getSeverity(int ordinal)
-    {
-        return new LoggerVerbosityLevel[]{INFO, ERROR, WARNING, DEBUG }[ordinal];
-    }
+	public static LoggerVerbosityLevel getSeverity(int ordinal) {
+		return new LoggerVerbosityLevel[] { INFO, ERROR, WARNING, DEBUG }[ordinal];
+	}
 
 }

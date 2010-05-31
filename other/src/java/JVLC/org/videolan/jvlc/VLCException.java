@@ -30,32 +30,26 @@ package org.videolan.jvlc;
 
 import java.lang.Exception;
 
+public class VLCException extends Exception {
 
-public class VLCException extends Exception
-{
-
-    /**
+	/**
      * 
      */
-    private static final long serialVersionUID = -3063632323017889L;
+	private static final long serialVersionUID = -3063632323017889L;
 
-    public VLCException()
-    {
-        super();
-    }
+	public VLCException() {
+		super();
+	}
 
-    public VLCException(String message)
-    {
-        super(message);
-    }
+	public VLCException(String message) {
+		super(message);
+	}
 
-    public VLCException(String message, Throwable cause)
-    {
-        super(message, cause);
-    }
+	public VLCException(String message, Throwable cause) {
+		super(message, cause);
+	}
 
-    public VLCException(Throwable cause)
-    {
-        super(cause);
-    }
+	public VLCException(Throwable cause) {
+		super(cause);
+	}
 }

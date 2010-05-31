@@ -168,7 +168,7 @@ public class PopupMenu extends JPopupMenu implements ActionListener {
 				(int) ((screenSize.height - tempSize.getHeight()) / 2d));
 
 		tempDialog.setVisible(true);
-		
+
 		return dialogSlider.getValue();
 	}
 

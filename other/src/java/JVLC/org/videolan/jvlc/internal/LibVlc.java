@@ -35,15 +35,12 @@ import com.sun.jna.PointerType;
 import com.sun.jna.Structure;
 import com.sun.jna.Union;
 
-
-public interface LibVlc extends Library
-{
-	LibVlc INSTANCE = (LibVlc) Native.loadLibrary(Platform.isWindows()? "libvlc" : "vlc", LibVlc.class);
+public interface LibVlc extends Library {
+	LibVlc INSTANCE = (LibVlc) Native.loadLibrary(Platform.isWindows() ? "libvlc" : "vlc", LibVlc.class);
 
 	LibVlc SYNC_INSTANCE = (LibVlc) Native.synchronizedLibrary(INSTANCE);
 
-	public static class libvlc_exception_t extends Structure
-	{
+	public static class libvlc_exception_t extends Structure {
 
 		public int raised;
 
@@ -52,10 +49,12 @@ public interface LibVlc extends Library
 		public String message;
 	}
 
-	public static class libvlc_log_message_t extends Structure
-	{
+	public static class libvlc_log_message_t extends Structure {
 
-		public int sizeof_msg; /* sizeof() of message structure, must be filled in by user */
+		public int sizeof_msg; /*
+								 * sizeof() of message structure, must be filled
+								 * in by user
+								 */
 
 		public int i_severity; /* 0=INFO, 1=ERR, 2=WARN, 3=DBG */
 
@@ -68,8 +67,7 @@ public interface LibVlc extends Library
 		public String psz_message; /* message */
 	}
 
-	public static class libvlc_event_t extends Structure
-	{
+	public static class libvlc_event_t extends Structure {
 
 		public int type;
 
@@ -79,38 +77,32 @@ public interface LibVlc extends Library
 
 	}
 
-	public class media_meta_changed extends Structure
-	{
+	public class media_meta_changed extends Structure {
 
 		public Pointer meta_type;
 	}
 
-	public class media_subitem_added extends Structure
-	{
+	public class media_subitem_added extends Structure {
 
 		public LibVlcMediaDescriptor new_child;
 	}
 
-	public class media_duration_changed extends Structure
-	{
+	public class media_duration_changed extends Structure {
 
 		public NativeLong new_duration;
 	}
 
-	public class media_preparsed_changed extends Structure
-	{
+	public class media_preparsed_changed extends Structure {
 
 		public int new_status;
 	}
 
-	public class media_freed extends Structure
-	{
+	public class media_freed extends Structure {
 
 		public LibVlcMediaDescriptor md;
 	}
 
-	public class media_state_changed extends Structure
-	{
+	public class media_state_changed extends Structure {
 
 		// @todo: check this one
 		public int new_state;
@@ -118,46 +110,40 @@ public interface LibVlc extends Library
 
 	/* media instance */
 
-	public class media_player_position_changed extends Structure
-	{
+	public class media_player_position_changed extends Structure {
 
 		public float new_position;
 	}
 
-	public class media_player_time_changed extends Structure
-	{
+	public class media_player_time_changed extends Structure {
 
 		// @todo: check this one
 		public long new_time;
 	}
 
 	/* media list */
-	public class media_list_item_added extends Structure
-	{
+	public class media_list_item_added extends Structure {
 
 		public LibVlcMediaDescriptor item;
 
 		public int index;
 	}
 
-	public class media_list_will_add_item extends Structure
-	{
+	public class media_list_will_add_item extends Structure {
 
 		public LibVlcMediaDescriptor item;
 
 		public int index;
 	}
 
-	public class media_list_item_deleted extends Structure
-	{
+	public class media_list_item_deleted extends Structure {
 
 		public LibVlcMediaDescriptor item;
 
 		public int index;
 	}
 
-	public class media_list_will_delete_item extends Structure
-	{
+	public class media_list_will_delete_item extends Structure {
 
 		public LibVlcMediaDescriptor item;
 
@@ -165,32 +151,28 @@ public interface LibVlc extends Library
 	}
 
 	/* media list view */
-	public class media_list_view_item_added extends Structure
-	{
+	public class media_list_view_item_added extends Structure {
 
 		public LibVlcMediaDescriptor item;
 
 		public int index;
 	}
 
-	public class media_list_view_will_add_item extends Structure
-	{
+	public class media_list_view_will_add_item extends Structure {
 
 		public LibVlcMediaDescriptor item;
 
 		public int index;
 	}
 
-	public class media_list_view_item_deleted extends Structure
-	{
+	public class media_list_view_item_deleted extends Structure {
 
 		public LibVlcMediaDescriptor item;
 
 		public int index;
 	}
 
-	public class media_list_view_will_delete_item extends Structure
-	{
+	public class media_list_view_will_delete_item extends Structure {
 
 		public LibVlcMediaDescriptor item;
 
@@ -198,20 +180,17 @@ public interface LibVlc extends Library
 	}
 
 	/* media discoverer */
-	public class media_media_discoverer_started extends Structure
-	{
+	public class media_media_discoverer_started extends Structure {
 
 		public Pointer unused;
 	}
 
-	public class media_media_discoverer_ended extends Structure
-	{
+	public class media_media_discoverer_ended extends Structure {
 
 		public Pointer unused;
 	}
 
-	public class event_type_specific extends Union
-	{
+	public class event_type_specific extends Union {
 
 		public media_meta_changed media_meta_changed;
 
@@ -304,7 +283,7 @@ public interface LibVlc extends Library
 
 	void libvlc_video_set_parent(LibVlcInstance libvlc_instance, long drawable, libvlc_exception_t exception);
 
-	//Bruno não é usado
+	// Bruno não é usado
 	void libvlc_toggle_fullscreen(LibVlcMediaInstance libvlc_instance);
 
 	void libvlc_set_fullscreen(LibVlcMediaInstance instance, int fullscreen, libvlc_exception_t exception);
@@ -313,23 +292,23 @@ public interface LibVlc extends Library
 
 	int libvlc_video_get_height(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
-	//Bruno n e usado. Erro?
+	// Bruno n e usado. Erro?
 	int libvlc_video_get_width(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
-	//Bruno não é usado e chama-se libvlc_video_get_aspect_ratio
+	// Bruno não é usado e chama-se libvlc_video_get_aspect_ratio
 	String libvlc_video_get_aspect_ration(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
-	//Bruno não é usado e chama-se libvlc_video_set_aspect_ratio
+	// Bruno não é usado e chama-se libvlc_video_set_aspect_ratio
 	void libvlc_video_set_aspect_ration(LibVlcMediaInstance instance, String ratio, libvlc_exception_t exception);
 
 	int libvlc_video_get_spu(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
 	int libvlc_video_set_spu(LibVlcMediaInstance instance, int spu, libvlc_exception_t exception);
 
-	//Bruno não é usado
+	// Bruno não é usado
 	String libvlc_video_get_crop_geometry(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
-	//Bruno não é usado
+	// Bruno não é usado
 	void libvlc_video_set_crop_geometry(LibVlcMediaInstance instance, String geometry, libvlc_exception_t exception);
 
 	void libvlc_video_take_snapshot(LibVlcMediaInstance instance, String filename, int width, int height,
@@ -355,7 +334,8 @@ public interface LibVlc extends Library
 
 	int libvlc_audio_set_volume(LibVlcInstance instance, int volume, libvlc_exception_t exception);
 
-	//Bruno pode ser util de alguma forma? Para controlar se há output ou algo do género????
+	// Bruno pode ser util de alguma forma? Para controlar se há output ou algo
+	// do género????
 	int libvlc_audio_get_track_count(LibVlcMediaInstance mediaInstance, libvlc_exception_t exception);
 
 	int libvlc_audio_get_track(LibVlcMediaInstance mediaInstance, libvlc_exception_t exception);
@@ -395,7 +375,7 @@ public interface LibVlc extends Library
 
 	int libvlc_media_player_is_seekable(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
-	//Bruno não é usado! O que faz isto e de que forma ajuda?
+	// Bruno não é usado! O que faz isto e de que forma ajuda?
 	int libvlc_media_player_can_pause(LibVlcMediaInstance instance, libvlc_exception_t exception);
 
 	// media descriptor
@@ -412,7 +392,8 @@ public interface LibVlc extends Library
 
 	// media player
 
-	//Bruno ver se é possível criar media player a partir daqui e usar sempre o mesmo.
+	// Bruno ver se é possível criar media player a partir daqui e usar sempre o
+	// mesmo.
 	LibVlcMediaInstance libvlc_media_player_new(LibVlcInstance instance, libvlc_exception_t exception);
 
 	LibVlcMediaInstance libvlc_media_player_new_from_media(LibVlcMediaDescriptor media, libvlc_exception_t exception);
@@ -423,7 +404,7 @@ public interface LibVlc extends Library
 
 	void libvlc_media_player_stop(LibVlcMediaInstance media_player, libvlc_exception_t exception);
 
-	//Bruno não é usado!!!
+	// Bruno não é usado!!!
 	void libvlc_media_player_set_drawable(LibVlcMediaInstance libvlc_media_player, int drawable,
 			libvlc_exception_t exception);
 
@@ -554,8 +535,7 @@ public interface LibVlc extends Library
 
 	// event manager
 
-	public static interface LibVlcCallback extends Callback
-	{
+	public static interface LibVlcCallback extends Callback {
 
 		void callback(libvlc_event_t libvlc_event, Pointer userData);
 	}

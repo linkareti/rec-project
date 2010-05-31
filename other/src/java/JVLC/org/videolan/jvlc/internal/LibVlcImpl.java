@@ -40,88 +40,74 @@ import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
 
 import com.sun.jna.Pointer;
 
+public class LibVlcImpl {
 
-public class LibVlcImpl
-{
+	public static boolean done;
 
-    public static boolean done;
+	public static void main(String[] args) throws InterruptedException {
+		LibVlc libVlc = LibVlc.SYNC_INSTANCE;
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libVlc.libvlc_exception_init(exception);
 
-    public static void main(String[] args) throws InterruptedException
-    {
-        LibVlc libVlc = LibVlc.SYNC_INSTANCE;
-        libvlc_exception_t exception = new libvlc_exception_t();
-        libVlc.libvlc_exception_init(exception);
+		final Object lock = new Object();
 
-        final Object lock = new Object();
+		System.out.println("Starting vlc");
+		System.out.println("version: " + libVlc.libvlc_get_version());
+		System.out.println("changeset: " + libVlc.libvlc_get_changeset());
+		System.out.println("compiler: " + libVlc.libvlc_get_compiler());
 
-        System.out.println("Starting vlc");
-        System.out.println("version: " + libVlc.libvlc_get_version());
-        System.out.println("changeset: " + libVlc.libvlc_get_changeset());
-        System.out.println("compiler: " + libVlc.libvlc_get_compiler());
-        
-//        LibVlcInstance libvlc_instance_t = libVlc.libvlc_new(0, new String[] {"/usr/local/bin/vlc"}, exception);
-        LibVlcInstance libvlc_instance_t = libVlc.libvlc_new(0, new String[] {"/usr/lib/vlc"}, exception);
+		// LibVlcInstance libvlc_instance_t = libVlc.libvlc_new(0, new String[]
+		// {"/usr/local/bin/vlc"}, exception);
+		LibVlcInstance libvlc_instance_t = libVlc.libvlc_new(0, new String[] { "/usr/lib/vlc" }, exception);
 
-        LibVlcMediaDescriptor mediaDescriptor = libVlc
-//            .libvlc_media_new(libvlc_instance_t, "/home/carone/a.avi", exception);
-               .libvlc_media_new(libvlc_instance_t, "/home/bcatarino/Documentos/NetBeansProjects/xpto.avi", exception);
+		LibVlcMediaDescriptor mediaDescriptor = libVlc
+		// .libvlc_media_new(libvlc_instance_t, "/home/carone/a.avi",
+		// exception);
+				.libvlc_media_new(libvlc_instance_t, "/home/bcatarino/Documentos/NetBeansProjects/xpto.avi", exception);
 
-        LibVlcMediaInstance mediaPlayer = libVlc.libvlc_media_player_new_from_media(mediaDescriptor, exception);
+		LibVlcMediaInstance mediaPlayer = libVlc.libvlc_media_player_new_from_media(mediaDescriptor, exception);
 
-        LibVlcEventManager mediaInstanceEventManager = libVlc.libvlc_media_player_event_manager(mediaPlayer, exception);
+		LibVlcEventManager mediaInstanceEventManager = libVlc.libvlc_media_player_event_manager(mediaPlayer, exception);
 
-        LibVlcCallback played = new LibVlcCallback()
-        {
+		LibVlcCallback played = new LibVlcCallback() {
 
-            public void callback(libvlc_event_t libvlc_event_t, Pointer pointer)
-            {
-                System.out.println("Playing started.");
-            }
-        };
+			public void callback(libvlc_event_t libvlc_event_t, Pointer pointer) {
+				System.out.println("Playing started.");
+			}
+		};
 
-        LibVlcCallback endReached = new LibVlcCallback()
-        {
+		LibVlcCallback endReached = new LibVlcCallback() {
 
-            public void callback(libvlc_event_t libvlc_event_t, Pointer pointer)
-            {
-                synchronized (lock)
-                {
-                    System.out.println("Playing finished.");
-                    LibVlcImpl.done = true;
-                }
-            }
-        };
+			public void callback(libvlc_event_t libvlc_event_t, Pointer pointer) {
+				synchronized (lock) {
+					System.out.println("Playing finished.");
+					LibVlcImpl.done = true;
+				}
+			}
+		};
 
-        libVlc.libvlc_event_attach(
-            mediaInstanceEventManager,
-            LibVlcEventType.libvlc_MediaPlayerPlaying.ordinal(),
-            played,
-            null,
-            exception);
+		libVlc.libvlc_event_attach(mediaInstanceEventManager, LibVlcEventType.libvlc_MediaPlayerPlaying.ordinal(),
+				played, null, exception);
 
-        libVlc.libvlc_event_attach(
-            mediaInstanceEventManager,
-            LibVlcEventType.libvlc_MediaPlayerEndReached.ordinal(),
-            endReached,
-            null,
-            exception);
+		libVlc.libvlc_event_attach(mediaInstanceEventManager, LibVlcEventType.libvlc_MediaPlayerEndReached.ordinal(),
+				endReached, null, exception);
 
-        JFrame frame = new JFrame("title");
-        frame.setVisible(true);
-        frame.setLocation(100, 100);
-        frame.setSize(500, 500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        JPanel panel = new JPanel();
-        Canvas canvas = new Canvas();
-        canvas.setSize(500, 500);
-        panel.add(canvas);
-        frame.getContentPane().add(panel);
-        frame.pack();
-        
-        int drawable = (int) com.sun.jna.Native.getComponentID(canvas);
+		JFrame frame = new JFrame("title");
+		frame.setVisible(true);
+		frame.setLocation(100, 100);
+		frame.setSize(500, 500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        libVlc.libvlc_video_set_parent(libvlc_instance_t, drawable, exception);
-        libVlc.libvlc_media_player_play(mediaPlayer, exception);
-    }
+		JPanel panel = new JPanel();
+		Canvas canvas = new Canvas();
+		canvas.setSize(500, 500);
+		panel.add(canvas);
+		frame.getContentPane().add(panel);
+		frame.pack();
+
+		int drawable = (int) com.sun.jna.Native.getComponentID(canvas);
+
+		libVlc.libvlc_video_set_parent(libvlc_instance_t, drawable, exception);
+		libVlc.libvlc_media_player_play(mediaPlayer, exception);
+	}
 }

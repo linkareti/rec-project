@@ -27,22 +27,20 @@ package org.videolan.jvlc.event;
 
 import org.videolan.jvlc.MediaPlayer;
 
+public interface MediaPlayerListener {
 
-public interface MediaPlayerListener
-{
+	void playing(MediaPlayer mediaPlayer);
 
-    void playing(MediaPlayer mediaPlayer);
-    
-    void paused(MediaPlayer mediaPlayer);
-    
-    void stopped(MediaPlayer mediaPlayer);
-    
-    void endReached(MediaPlayer mediaPlayer);
-    
-    void timeChanged(MediaPlayer mediaPlayer, long newTime);
-    
-    void positionChanged(MediaPlayer mediaPlayer);
-    
-    void errorOccurred(MediaPlayer mediaPlayer);
-    
+	void paused(MediaPlayer mediaPlayer);
+
+	void stopped(MediaPlayer mediaPlayer);
+
+	void endReached(MediaPlayer mediaPlayer);
+
+	void timeChanged(MediaPlayer mediaPlayer, long newTime);
+
+	void positionChanged(MediaPlayer mediaPlayer);
+
+	void errorOccurred(MediaPlayer mediaPlayer);
+
 }

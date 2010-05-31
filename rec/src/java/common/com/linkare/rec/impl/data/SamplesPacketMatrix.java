@@ -268,9 +268,9 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
 	public void addSamplesPackets(SamplesPacket[] samples_packet)
 
 	{
-		if(samples_packet==null)
+		if (samples_packet == null)
 			return;
-		
+
 		if (serialized)
 
 		{
