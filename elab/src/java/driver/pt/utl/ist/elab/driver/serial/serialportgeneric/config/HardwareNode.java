@@ -5,7 +5,6 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,11 +12,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for HardwareNode complex type.
+ * <p>
+ * Java class for HardwareNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="HardwareNode">
@@ -38,139 +39,117 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "HardwareNode", propOrder = {
-    "rs232"
-})
+@XmlType(name = "HardwareNode", propOrder = { "rs232" })
 public class HardwareNode {
 
-    protected Rs232Node rs232;
-    @XmlAttribute(required = true)
-    protected String id;
-    @XmlAttribute(required = true)
-    protected String maxfrequency;
-    @XmlAttribute(required = true)
-    protected String minfrequency;
-    @XmlAttribute(name = "num_channels", required = true)
-    protected String numChannels;
+	protected Rs232Node rs232;
+	@XmlAttribute(required = true)
+	protected String id;
+	@XmlAttribute(required = true)
+	protected String maxfrequency;
+	@XmlAttribute(required = true)
+	protected String minfrequency;
+	@XmlAttribute(name = "num_channels", required = true)
+	protected String numChannels;
 
-    /**
-     * Gets the value of the rs232 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Rs232Node }
-     *     
-     */
-    public Rs232Node getRs232() {
-        return rs232;
-    }
+	/**
+	 * Gets the value of the rs232 property.
+	 * 
+	 * @return possible object is {@link Rs232Node }
+	 * 
+	 */
+	public Rs232Node getRs232() {
+		return rs232;
+	}
 
-    /**
-     * Sets the value of the rs232 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Rs232Node }
-     *     
-     */
-    public void setRs232(Rs232Node value) {
-        this.rs232 = value;
-    }
+	/**
+	 * Sets the value of the rs232 property.
+	 * 
+	 * @param value allowed object is {@link Rs232Node }
+	 * 
+	 */
+	public void setRs232(Rs232Node value) {
+		this.rs232 = value;
+	}
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getId() {
-        return id;
-    }
+	/**
+	 * Gets the value of the id property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getId() {
+		return id;
+	}
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(String value) {
-        this.id = value;
-    }
+	/**
+	 * Sets the value of the id property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setId(String value) {
+		this.id = value;
+	}
 
-    /**
-     * Gets the value of the maxfrequency property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMaxfrequency() {
-        return maxfrequency;
-    }
+	/**
+	 * Gets the value of the maxfrequency property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getMaxfrequency() {
+		return maxfrequency;
+	}
 
-    /**
-     * Sets the value of the maxfrequency property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMaxfrequency(String value) {
-        this.maxfrequency = value;
-    }
+	/**
+	 * Sets the value of the maxfrequency property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setMaxfrequency(String value) {
+		this.maxfrequency = value;
+	}
 
-    /**
-     * Gets the value of the minfrequency property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMinfrequency() {
-        return minfrequency;
-    }
+	/**
+	 * Gets the value of the minfrequency property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getMinfrequency() {
+		return minfrequency;
+	}
 
-    /**
-     * Sets the value of the minfrequency property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMinfrequency(String value) {
-        this.minfrequency = value;
-    }
+	/**
+	 * Sets the value of the minfrequency property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setMinfrequency(String value) {
+		this.minfrequency = value;
+	}
 
-    /**
-     * Gets the value of the numChannels property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNumChannels() {
-        return numChannels;
-    }
+	/**
+	 * Gets the value of the numChannels property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getNumChannels() {
+		return numChannels;
+	}
 
-    /**
-     * Sets the value of the numChannels property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNumChannels(String value) {
-        this.numChannels = value;
-    }
+	/**
+	 * Sets the value of the numChannels property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setNumChannels(String value) {
+		this.numChannels = value;
+	}
 
 }

@@ -260,7 +260,7 @@ public class SerialPortFinder {
 
 	@SuppressWarnings("unchecked")
 	public void startSearch() {
-		
+
 		Enumeration<CommPortIdentifier> commPortIdentifiers = gnu.io.CommPortIdentifier.getPortIdentifiers();
 		LinkedList<CommPortIdentifier> tempPorts = new LinkedList<CommPortIdentifier>();
 		List<String> restrictedPorts = new ArrayList<String>();

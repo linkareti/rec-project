@@ -12,11 +12,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TimeoutNode complex type.
+ * <p>
+ * Java class for TimeoutNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="TimeoutNode">
@@ -44,333 +46,273 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TimeoutNode", propOrder = {
-    "defaultTimeout",
-    "id",
-    "cfg",
-    "cur",
-    "str",
-    "datBin",
-    "datNoData",
-    "binNoData",
-    "stp",
-    "rst",
-    "hardwareDied",
-    "portListen"
-})
+@XmlType(name = "TimeoutNode", propOrder = { "defaultTimeout", "id", "cfg", "cur", "str", "datBin", "datNoData",
+		"binNoData", "stp", "rst", "hardwareDied", "portListen" })
 public class TimeoutNode {
 
-    @XmlElement(name = "default_timeout", required = true)
-    protected OneTimeoutNode defaultTimeout;
-    @XmlElement(required = true)
-    protected OneTimeoutNode id;
-    @XmlElement(required = true)
-    protected OneTimeoutNode cfg;
-    @XmlElement(required = true)
-    protected OneTimeoutNode cur;
-    @XmlElement(required = true)
-    protected OneTimeoutNode str;
-    @XmlElement(name = "dat_bin", required = true)
-    protected OneTimeoutNode datBin;
-    @XmlElement(name = "dat_no_data", required = true)
-    protected OneTimeoutNode datNoData;
-    @XmlElement(name = "bin_no_data", required = true)
-    protected OneTimeoutNode binNoData;
-    @XmlElement(required = true)
-    protected OneTimeoutNode stp;
-    @XmlElement(required = true)
-    protected OneTimeoutNode rst;
-    @XmlElement(name = "hardware_died", required = true)
-    protected OneTimeoutNode hardwareDied;
-    @XmlElement(name = "listen_to_port", required = true)
-    protected OneTimeoutNode portListen;
+	@XmlElement(name = "default_timeout", required = true)
+	protected OneTimeoutNode defaultTimeout;
+	@XmlElement(required = true)
+	protected OneTimeoutNode id;
+	@XmlElement(required = true)
+	protected OneTimeoutNode cfg;
+	@XmlElement(required = true)
+	protected OneTimeoutNode cur;
+	@XmlElement(required = true)
+	protected OneTimeoutNode str;
+	@XmlElement(name = "dat_bin", required = true)
+	protected OneTimeoutNode datBin;
+	@XmlElement(name = "dat_no_data", required = true)
+	protected OneTimeoutNode datNoData;
+	@XmlElement(name = "bin_no_data", required = true)
+	protected OneTimeoutNode binNoData;
+	@XmlElement(required = true)
+	protected OneTimeoutNode stp;
+	@XmlElement(required = true)
+	protected OneTimeoutNode rst;
+	@XmlElement(name = "hardware_died", required = true)
+	protected OneTimeoutNode hardwareDied;
+	@XmlElement(name = "listen_to_port", required = true)
+	protected OneTimeoutNode portListen;
 
-    /**
-     * Gets the value of the defaultTimeout property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getDefaultTimeout() {
-        return defaultTimeout;
-    }
+	/**
+	 * Gets the value of the defaultTimeout property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getDefaultTimeout() {
+		return defaultTimeout;
+	}
 
-    /**
-     * Sets the value of the defaultTimeout property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setDefaultTimeout(OneTimeoutNode value) {
-        this.defaultTimeout = value;
-    }
+	/**
+	 * Sets the value of the defaultTimeout property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setDefaultTimeout(OneTimeoutNode value) {
+		this.defaultTimeout = value;
+	}
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getId() {
-        return id;
-    }
+	/**
+	 * Gets the value of the id property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getId() {
+		return id;
+	}
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setId(OneTimeoutNode value) {
-        this.id = value;
-    }
+	/**
+	 * Sets the value of the id property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setId(OneTimeoutNode value) {
+		this.id = value;
+	}
 
-    /**
-     * Gets the value of the cfg property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getCfg() {
-        return cfg;
-    }
+	/**
+	 * Gets the value of the cfg property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getCfg() {
+		return cfg;
+	}
 
-    /**
-     * Sets the value of the cfg property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setCfg(OneTimeoutNode value) {
-        this.cfg = value;
-    }
+	/**
+	 * Sets the value of the cfg property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setCfg(OneTimeoutNode value) {
+		this.cfg = value;
+	}
 
-    /**
-     * Gets the value of the cur property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getCur() {
-        return cur;
-    }
+	/**
+	 * Gets the value of the cur property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getCur() {
+		return cur;
+	}
 
-    /**
-     * Sets the value of the cur property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setCur(OneTimeoutNode value) {
-        this.cur = value;
-    }
+	/**
+	 * Sets the value of the cur property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setCur(OneTimeoutNode value) {
+		this.cur = value;
+	}
 
-    /**
-     * Gets the value of the str property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getStr() {
-        return str;
-    }
+	/**
+	 * Gets the value of the str property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getStr() {
+		return str;
+	}
 
-    /**
-     * Sets the value of the str property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setStr(OneTimeoutNode value) {
-        this.str = value;
-    }
+	/**
+	 * Sets the value of the str property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setStr(OneTimeoutNode value) {
+		this.str = value;
+	}
 
-    /**
-     * Gets the value of the datBin property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getDatBin() {
-        return datBin;
-    }
+	/**
+	 * Gets the value of the datBin property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getDatBin() {
+		return datBin;
+	}
 
-    /**
-     * Sets the value of the datBin property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setDatBin(OneTimeoutNode value) {
-        this.datBin = value;
-    }
+	/**
+	 * Sets the value of the datBin property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setDatBin(OneTimeoutNode value) {
+		this.datBin = value;
+	}
 
-    /**
-     * Gets the value of the datNoData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getDatNoData() {
-        return datNoData;
-    }
+	/**
+	 * Gets the value of the datNoData property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getDatNoData() {
+		return datNoData;
+	}
 
-    /**
-     * Sets the value of the datNoData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setDatNoData(OneTimeoutNode value) {
-        this.datNoData = value;
-    }
+	/**
+	 * Sets the value of the datNoData property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setDatNoData(OneTimeoutNode value) {
+		this.datNoData = value;
+	}
 
-    /**
-     * Gets the value of the binNoData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getBinNoData() {
-        return binNoData;
-    }
+	/**
+	 * Gets the value of the binNoData property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getBinNoData() {
+		return binNoData;
+	}
 
-    /**
-     * Sets the value of the binNoData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setBinNoData(OneTimeoutNode value) {
-        this.binNoData = value;
-    }
+	/**
+	 * Sets the value of the binNoData property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setBinNoData(OneTimeoutNode value) {
+		this.binNoData = value;
+	}
 
-    /**
-     * Gets the value of the stp property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getStp() {
-        return stp;
-    }
+	/**
+	 * Gets the value of the stp property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getStp() {
+		return stp;
+	}
 
-    /**
-     * Sets the value of the stp property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setStp(OneTimeoutNode value) {
-        this.stp = value;
-    }
+	/**
+	 * Sets the value of the stp property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setStp(OneTimeoutNode value) {
+		this.stp = value;
+	}
 
-    /**
-     * Gets the value of the rst property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getRst() {
-        return rst;
-    }
+	/**
+	 * Gets the value of the rst property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getRst() {
+		return rst;
+	}
 
-    /**
-     * Sets the value of the rst property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setRst(OneTimeoutNode value) {
-        this.rst = value;
-    }
+	/**
+	 * Sets the value of the rst property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setRst(OneTimeoutNode value) {
+		this.rst = value;
+	}
 
-    /**
-     * Gets the value of the hardwareDied property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getHardwareDied() {
-        return hardwareDied;
-    }
+	/**
+	 * Gets the value of the hardwareDied property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getHardwareDied() {
+		return hardwareDied;
+	}
 
-    /**
-     * Sets the value of the hardwareDied property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setHardwareDied(OneTimeoutNode value) {
-        this.hardwareDied = value;
-    }
+	/**
+	 * Sets the value of the hardwareDied property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setHardwareDied(OneTimeoutNode value) {
+		this.hardwareDied = value;
+	}
 
-    /**
-     * Gets the value of the portListen property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public OneTimeoutNode getPortListen() {
-        return portListen;
-    }
+	/**
+	 * Gets the value of the portListen property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getPortListen() {
+		return portListen;
+	}
 
-    /**
-     * Sets the value of the portListen property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OneTimeoutNode }
-     *     
-     */
-    public void setPortListen(OneTimeoutNode value) {
-        this.portListen = value;
-    }
+	/**
+	 * Sets the value of the portListen property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setPortListen(OneTimeoutNode value) {
+		this.portListen = value;
+	}
 
 }

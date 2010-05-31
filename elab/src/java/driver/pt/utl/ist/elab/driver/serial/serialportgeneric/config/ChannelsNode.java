@@ -5,7 +5,6 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import java.text.DecimalFormat;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for ChannelsNode complex type.
+ * <p>
+ * Java class for ChannelsNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="ChannelsNode">
@@ -38,54 +39,53 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ChannelsNode", propOrder = {
-    "channel"
-})
+@XmlType(name = "ChannelsNode", propOrder = { "channel" })
 public class ChannelsNode {
 
-    protected List<OneChannelNode> channel;
-    @XmlTransient
-    protected DecimalFormat valueFormat = null;
+	protected List<OneChannelNode> channel;
+	@XmlTransient
+	protected DecimalFormat valueFormat = null;
 
-    /**
-     * Gets the value of the channel property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the channel property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getChannel().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link OneChannelNode }
-     * 
-     * 
-     */
-    public List<OneChannelNode> getChannel() {
-        if (channel == null) {
-            channel = new ArrayList<OneChannelNode>();
-        }
-        return this.channel;
-    }
-    
-    public OneChannelNode getChannelToOrder(int order) {
-    	if (channel == null)
-    		return new OneChannelNode();
-    	for (OneChannelNode oneChannelNode : channel) {
+	/**
+	 * Gets the value of the channel property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the channel property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getChannel().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link OneChannelNode }
+	 * 
+	 * 
+	 */
+	public List<OneChannelNode> getChannel() {
+		if (channel == null) {
+			channel = new ArrayList<OneChannelNode>();
+		}
+		return this.channel;
+	}
+
+	public OneChannelNode getChannelToOrder(int order) {
+		if (channel == null)
+			return new OneChannelNode();
+		for (OneChannelNode oneChannelNode : channel) {
 			if (oneChannelNode.getOrder().intValue() == order)
 				return oneChannelNode;
 		}
-    	return new OneChannelNode();
-    }
-	
+		return new OneChannelNode();
+	}
+
 	public String formatValue(Double value) {
 		if (valueFormat == null)
 			return value.toString();

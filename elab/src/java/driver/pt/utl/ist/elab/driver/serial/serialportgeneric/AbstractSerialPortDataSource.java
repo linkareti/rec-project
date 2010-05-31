@@ -58,17 +58,19 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 
 			for (int channelNumber = 0; channelNumber < cmd.getDataHashMap().size(); channelNumber++) {
 				OneChannelNode oneChannelNode = rs232configs.getRs232().getChannels().getChannelToOrder(channelNumber);
-				
+
 				if (channelNumber < getAcquisitionHeader().getChannelsConfig().length) {
 					// these are pure data channels
-					phValue = PhysicsValFactory.fromDouble(oneChannelNode.calculate(Double.valueOf(cmd.getDataHashMap().get(channelNumber))));
+					phValue = PhysicsValFactory.fromDouble(oneChannelNode.calculate(Double.valueOf(cmd.getDataHashMap()
+							.get(channelNumber))));
 					phError = getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
 							.getDefaultErrorValue();
 					phMultiplier = getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
 							.getMultiplier();
 				} else if (channelNumber == getAcquisitionHeader().getChannelsConfig().length) {
 					// this is a clock value channel
-					phValue = PhysicsValFactory.fromDouble(oneChannelNode.calculate(Double.valueOf(cmd.getDataHashMap().get(channelNumber))));
+					phValue = PhysicsValFactory.fromDouble(oneChannelNode.calculate(Double.valueOf(cmd.getDataHashMap()
+							.get(channelNumber))));
 					phError = getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
 							.getDefaultErrorValue();
 					phMultiplier = getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()

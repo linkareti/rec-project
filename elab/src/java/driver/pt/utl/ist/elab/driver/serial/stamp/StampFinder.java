@@ -480,6 +480,7 @@ public class StampFinder {
 			 * 
 			 * 
 			 * 
+			 * 
 			 * if(serialPortEvent.getEventType()==SerialPortEvent.DATA_AVAILABLE)
 			 * { String line="";
 			 * 

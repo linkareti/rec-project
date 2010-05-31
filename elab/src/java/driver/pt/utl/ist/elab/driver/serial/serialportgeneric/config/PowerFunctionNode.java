@@ -5,18 +5,19 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for PowerFunctionNode complex type.
+ * <p>
+ * Java class for PowerFunctionNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="PowerFunctionNode">
@@ -33,35 +34,29 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PowerFunctionNode", propOrder = {
-    "param"
-})
+@XmlType(name = "PowerFunctionNode", propOrder = { "param" })
 public class PowerFunctionNode {
 
-    protected ParamValuesNode param;
+	protected ParamValuesNode param;
 
-    /**
-     * Gets the value of the param property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ParamValuesNode }
-     *     
-     */
-    public ParamValuesNode getParam() {
-        return param;
-    }
+	/**
+	 * Gets the value of the param property.
+	 * 
+	 * @return possible object is {@link ParamValuesNode }
+	 * 
+	 */
+	public ParamValuesNode getParam() {
+		return param;
+	}
 
-    /**
-     * Sets the value of the param property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ParamValuesNode }
-     *     
-     */
-    public void setParam(ParamValuesNode value) {
-        this.param = value;
-    }
+	/**
+	 * Sets the value of the param property.
+	 * 
+	 * @param value allowed object is {@link ParamValuesNode }
+	 * 
+	 */
+	public void setParam(ParamValuesNode value) {
+		this.param = value;
+	}
 
 }

@@ -5,7 +5,6 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import java.math.BigInteger;
@@ -22,11 +21,13 @@ import javax.xml.bind.annotation.XmlType;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.IncorrectRs232ValuesException;
 
-
 /**
- * <p>Java class for OneParameterNode complex type.
+ * <p>
+ * Java class for OneParameterNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="OneParameterNode">
@@ -44,195 +45,173 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.IncorrectRs232ValuesExcep
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OneParameterNode", propOrder = {
-    "transferFunction"
-})
+@XmlType(name = "OneParameterNode", propOrder = { "transferFunction" })
 public class OneParameterNode {
 
-    @XmlElement(name = "transfer_function")
-    protected List<TransferFunctionNode> transferFunction;
+	@XmlElement(name = "transfer_function")
+	protected List<TransferFunctionNode> transferFunction;
 
 	@XmlAttribute(required = true)
-    protected String input;
-    @XmlAttribute(required = true)
-    protected float maxvalue;
-    @XmlAttribute(required = true)
-    protected float minvalue;
-    @XmlAttribute(required = true)
-    protected BigInteger order;
-    @XmlAttribute(required = true)
-    protected String output;
-    
-    @XmlTransient
-    protected DecimalFormat inputFormat = null;
-    @XmlTransient
-    protected DecimalFormat outputFormat = null;
+	protected String input;
+	@XmlAttribute(required = true)
+	protected float maxvalue;
+	@XmlAttribute(required = true)
+	protected float minvalue;
+	@XmlAttribute(required = true)
+	protected BigInteger order;
+	@XmlAttribute(required = true)
+	protected String output;
 
-    /**
-     * Gets the value of the transferFunction property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the transferFunction property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTransferFunction().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TransferFunctionNode }
-     * 
-     * 
-     */
-    public List<TransferFunctionNode> getTransferFunction() {
-        if (transferFunction == null) {
-            transferFunction = new ArrayList<TransferFunctionNode>();
-        }
-        return this.transferFunction;
-    }
+	@XmlTransient
+	protected DecimalFormat inputFormat = null;
+	@XmlTransient
+	protected DecimalFormat outputFormat = null;
 
+	/**
+	 * Gets the value of the transferFunction property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the transferFunction property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getTransferFunction().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link TransferFunctionNode }
+	 * 
+	 * 
+	 */
+	public List<TransferFunctionNode> getTransferFunction() {
+		if (transferFunction == null) {
+			transferFunction = new ArrayList<TransferFunctionNode>();
+		}
+		return this.transferFunction;
+	}
 
-    /**
-     * Gets the value of the input property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getInput() {
-        return input;
-    }
+	/**
+	 * Gets the value of the input property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getInput() {
+		return input;
+	}
 
-    /**
-     * Sets the value of the input property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     * @throws IncorrectRs232ValuesException 
-     *     
-     */
-    public void setInput(String value) throws IncorrectRs232ValuesException {
-        this.input = value;
-        inputFormat = new DecimalFormat();
-        try {
+	/**
+	 * Sets the value of the input property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * @throws IncorrectRs232ValuesException
+	 * 
+	 */
+	public void setInput(String value) throws IncorrectRs232ValuesException {
+		this.input = value;
+		inputFormat = new DecimalFormat();
+		try {
 			inputFormat.applyPattern(value.replace("#", "0"));
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-		    throw new IncorrectRs232ValuesException("input format for this parameter is not valid");
+			throw new IncorrectRs232ValuesException("input format for this parameter is not valid");
 		}
-    }
+	}
 
-    /**
-     * Gets the value of the maxvalue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public float getMaxvalue() {
-        return maxvalue;
-    }
+	/**
+	 * Gets the value of the maxvalue property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public float getMaxvalue() {
+		return maxvalue;
+	}
 
-    /**
-     * Sets the value of the maxvalue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setMaxvalue(float value) {
-        this.maxvalue = value;
-    }
+	/**
+	 * Sets the value of the maxvalue property.
+	 * 
+	 * @param value allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setMaxvalue(float value) {
+		this.maxvalue = value;
+	}
 
-    /**
-     * Gets the value of the minvalue property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public float getMinvalue() {
-        return minvalue;
-    }
+	/**
+	 * Gets the value of the minvalue property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public float getMinvalue() {
+		return minvalue;
+	}
 
-    /**
-     * Sets the value of the minvalue property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setMinvalue(float value) {
-        this.minvalue = value;
-    }
+	/**
+	 * Sets the value of the minvalue property.
+	 * 
+	 * @param value allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setMinvalue(float value) {
+		this.minvalue = value;
+	}
 
-    /**
-     * Gets the value of the order property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getOrder() {
-        return order;
-    }
+	/**
+	 * Gets the value of the order property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getOrder() {
+		return order;
+	}
 
-    /**
-     * Sets the value of the order property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setOrder(BigInteger value) {
-        this.order = value;
-    }
+	/**
+	 * Sets the value of the order property.
+	 * 
+	 * @param value allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setOrder(BigInteger value) {
+		this.order = value;
+	}
 
-    /**
-     * Gets the value of the output property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getOutput() {
-        return output;
-    }
+	/**
+	 * Gets the value of the output property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getOutput() {
+		return output;
+	}
 
-    /**
-     * Sets the value of the output property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     * @throws IncorrectRs232ValuesException 
-     *     
-     */
-    public void setOutput(String value) throws IncorrectRs232ValuesException {
-        this.output = value;
-        outputFormat = new DecimalFormat();
-        try {
+	/**
+	 * Sets the value of the output property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * @throws IncorrectRs232ValuesException
+	 * 
+	 */
+	public void setOutput(String value) throws IncorrectRs232ValuesException {
+		this.output = value;
+		outputFormat = new DecimalFormat();
+		try {
 			outputFormat.applyPattern(value.replace("#", "0"));
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-		    throw new IncorrectRs232ValuesException("output format for this parameter is not valid");
+			throw new IncorrectRs232ValuesException("output format for this parameter is not valid");
 		}
-    }
+	}
 
 	public Double calculate(Double value, TransferFunctionType type) {
 		Double total = 0D;
@@ -240,45 +219,51 @@ public class OneParameterNode {
 		for (TransferFunctionNode node : transferFunction) {
 			if (node.type.equalsIgnoreCase(type.toString())) {
 				if (!node.getLinear().isEmpty()) {
-					for (LinearFunctionNode	linear : node.getLinear()) {
+					for (LinearFunctionNode linear : node.getLinear()) {
 						haveFunctions = true;
 						total = total + linear.getParam().getDWeight() * value - linear.getParam().getDCenter();
 					}
 					for (PowerFunctionNode power : node.getPower()) {
 						haveFunctions = true;
-						total = total + power.getParam().getDWeight() * Math.pow((value - power.getParam().getDCenter()),power.getParam().getDPower());
+						total = total + power.getParam().getDWeight()
+								* Math.pow((value - power.getParam().getDCenter()), power.getParam().getDPower());
 					}
 					for (ExpFunctionNode expon : node.getExponential()) {
 						haveFunctions = true;
-						total = total + expon.getParam().getDWeight() * Math.exp(expon.getParam().getDCoeficient() * (value - expon.getParam().getDCenter()));
+						total = total + expon.getParam().getDWeight()
+								* Math.exp(expon.getParam().getDCoeficient() * (value - expon.getParam().getDCenter()));
 					}
 					for (LogFunctionNode log : node.getLogarithm()) {
 						haveFunctions = true;
-						total = total + log.getParam().getDWeight() * Math.log(log.getParam().getDWeight() * (value - log.getParam().getDCenter())); 
+						total = total + log.getParam().getDWeight()
+								* Math.log(log.getParam().getDWeight() * (value - log.getParam().getDCenter()));
 					}
 					for (SinFunctionNode sin : node.getSin()) {
 						haveFunctions = true;
-						total = total + sin.getParam().getDWeight() * Math.sin(sin.getParam().getDCoeficient() * value - sin.getParam().getDDelta()); 
+						total = total + sin.getParam().getDWeight()
+								* Math.sin(sin.getParam().getDCoeficient() * value - sin.getParam().getDDelta());
 					}
 					for (TgFunctionNode tg : node.getTg()) {
 						haveFunctions = true;
-						total = total + tg.getParam().getDWeight() * Math.tan(tg.getParam().getDCoeficient() * value - tg.getParam().getDDelta()); 
+						total = total + tg.getParam().getDWeight()
+								* Math.tan(tg.getParam().getDCoeficient() * value - tg.getParam().getDDelta());
 					}
 				}
 			}
 		}
-		
+
 		if (haveFunctions)
 			return total;
 		else
 			return value;
 	}
-	
+
 	public String formatOutput(Double value) {
 		if (outputFormat == null)
 			return value.toString();
 		return outputFormat.format(value).toString();
 	}
+
 	public String formatOutput(Float value) {
 		if (outputFormat == null)
 			return value.toString();
@@ -290,9 +275,9 @@ public class OneParameterNode {
 			return value.toString();
 		return inputFormat.format(value).toString();
 	}
-	
+
 	public static enum TransferFunctionType {
 		INPUT, OUTPUT, BIDIRECTIONAL
 	}
-	
+
 }

@@ -5,7 +5,6 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import java.math.BigInteger;
@@ -15,11 +14,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Rs232Node complex type.
+ * <p>
+ * Java class for Rs232Node complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="Rs232Node">
@@ -44,243 +45,202 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Rs232Node", propOrder = {
-    "parameters",
-    "channels",
-    "timeout",
-    "errors"
-})
+@XmlType(name = "Rs232Node", propOrder = { "parameters", "channels", "timeout", "errors" })
 public class Rs232Node {
 
-    protected ParametersNode parameters;
-    protected ChannelsNode channels;
-    protected TimeoutNode timeout;
-    protected ErrorsNode errors;
-    @XmlAttribute(required = true)
-    protected BigInteger baud;
-    @XmlAttribute(required = true)
-    protected BigInteger numbits;
-    @XmlAttribute(required = true)
-    protected BigInteger paritybits;
-    @XmlAttribute(name = "ports_restrict", required = true)
-    protected String portsRestrict;
-    @XmlAttribute(required = true)
-    protected BigInteger stopbits;
+	protected ParametersNode parameters;
+	protected ChannelsNode channels;
+	protected TimeoutNode timeout;
+	protected ErrorsNode errors;
+	@XmlAttribute(required = true)
+	protected BigInteger baud;
+	@XmlAttribute(required = true)
+	protected BigInteger numbits;
+	@XmlAttribute(required = true)
+	protected BigInteger paritybits;
+	@XmlAttribute(name = "ports_restrict", required = true)
+	protected String portsRestrict;
+	@XmlAttribute(required = true)
+	protected BigInteger stopbits;
 
-    /**
-     * Gets the value of the parameters property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ParametersNode }
-     *     
-     */
-    public ParametersNode getParameters() {
-        return parameters;
-    }
+	/**
+	 * Gets the value of the parameters property.
+	 * 
+	 * @return possible object is {@link ParametersNode }
+	 * 
+	 */
+	public ParametersNode getParameters() {
+		return parameters;
+	}
 
-    /**
-     * Sets the value of the parameters property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ParametersNode }
-     *     
-     */
-    public void setParameters(ParametersNode value) {
-        this.parameters = value;
-    }
+	/**
+	 * Sets the value of the parameters property.
+	 * 
+	 * @param value allowed object is {@link ParametersNode }
+	 * 
+	 */
+	public void setParameters(ParametersNode value) {
+		this.parameters = value;
+	}
 
-    /**
-     * Gets the value of the channels property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ChannelsNode }
-     *     
-     */
-    public ChannelsNode getChannels() {
-        return channels;
-    }
+	/**
+	 * Gets the value of the channels property.
+	 * 
+	 * @return possible object is {@link ChannelsNode }
+	 * 
+	 */
+	public ChannelsNode getChannels() {
+		return channels;
+	}
 
-    /**
-     * Sets the value of the channels property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ChannelsNode }
-     *     
-     */
-    public void setChannels(ChannelsNode value) {
-        this.channels = value;
-    }
+	/**
+	 * Sets the value of the channels property.
+	 * 
+	 * @param value allowed object is {@link ChannelsNode }
+	 * 
+	 */
+	public void setChannels(ChannelsNode value) {
+		this.channels = value;
+	}
 
-    /**
-     * Gets the value of the timeout property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TimeoutNode }
-     *     
-     */
-    public TimeoutNode getTimeout() {
-        return timeout;
-    }
+	/**
+	 * Gets the value of the timeout property.
+	 * 
+	 * @return possible object is {@link TimeoutNode }
+	 * 
+	 */
+	public TimeoutNode getTimeout() {
+		return timeout;
+	}
 
-    /**
-     * Sets the value of the timeout property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TimeoutNode }
-     *     
-     */
-    public void setTimeout(TimeoutNode value) {
-        this.timeout = value;
-    }
+	/**
+	 * Sets the value of the timeout property.
+	 * 
+	 * @param value allowed object is {@link TimeoutNode }
+	 * 
+	 */
+	public void setTimeout(TimeoutNode value) {
+		this.timeout = value;
+	}
 
-    /**
-     * Gets the value of the errors property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ErrorsNode }
-     *     
-     */
-    public ErrorsNode getErrors() {
-        return errors;
-    }
+	/**
+	 * Gets the value of the errors property.
+	 * 
+	 * @return possible object is {@link ErrorsNode }
+	 * 
+	 */
+	public ErrorsNode getErrors() {
+		return errors;
+	}
 
-    /**
-     * Sets the value of the errors property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ErrorsNode }
-     *     
-     */
-    public void setErrors(ErrorsNode value) {
-        this.errors = value;
-    }
+	/**
+	 * Sets the value of the errors property.
+	 * 
+	 * @param value allowed object is {@link ErrorsNode }
+	 * 
+	 */
+	public void setErrors(ErrorsNode value) {
+		this.errors = value;
+	}
 
-    /**
-     * Gets the value of the baud property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getBaud() {
-        return baud;
-    }
+	/**
+	 * Gets the value of the baud property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getBaud() {
+		return baud;
+	}
 
-    /**
-     * Sets the value of the baud property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setBaud(BigInteger value) {
-        this.baud = value;
-    }
+	/**
+	 * Sets the value of the baud property.
+	 * 
+	 * @param value allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setBaud(BigInteger value) {
+		this.baud = value;
+	}
 
-    /**
-     * Gets the value of the numbits property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getNumbits() {
-        return numbits;
-    }
+	/**
+	 * Gets the value of the numbits property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getNumbits() {
+		return numbits;
+	}
 
-    /**
-     * Sets the value of the numbits property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setNumbits(BigInteger value) {
-        this.numbits = value;
-    }
+	/**
+	 * Sets the value of the numbits property.
+	 * 
+	 * @param value allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setNumbits(BigInteger value) {
+		this.numbits = value;
+	}
 
-    /**
-     * Gets the value of the paritybits property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getParitybits() {
-        return paritybits;
-    }
+	/**
+	 * Gets the value of the paritybits property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getParitybits() {
+		return paritybits;
+	}
 
-    /**
-     * Sets the value of the paritybits property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setParitybits(BigInteger value) {
-        this.paritybits = value;
-    }
+	/**
+	 * Sets the value of the paritybits property.
+	 * 
+	 * @param value allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setParitybits(BigInteger value) {
+		this.paritybits = value;
+	}
 
-    /**
-     * Gets the value of the portsRestrict property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPortsRestrict() {
-        return portsRestrict;
-    }
+	/**
+	 * Gets the value of the portsRestrict property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getPortsRestrict() {
+		return portsRestrict;
+	}
 
-    /**
-     * Sets the value of the portsRestrict property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPortsRestrict(String value) {
-        this.portsRestrict = value;
-    }
+	/**
+	 * Sets the value of the portsRestrict property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setPortsRestrict(String value) {
+		this.portsRestrict = value;
+	}
 
-    /**
-     * Gets the value of the stopbits property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getStopbits() {
-        return stopbits;
-    }
+	/**
+	 * Gets the value of the stopbits property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getStopbits() {
+		return stopbits;
+	}
 
-    /**
-     * Sets the value of the stopbits property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setStopbits(BigInteger value) {
-        this.stopbits = value;
-    }
+	/**
+	 * Sets the value of the stopbits property.
+	 * 
+	 * @param value allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setStopbits(BigInteger value) {
+		this.stopbits = value;
+	}
 
 }

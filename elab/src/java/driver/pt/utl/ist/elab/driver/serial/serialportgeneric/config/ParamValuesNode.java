@@ -5,7 +5,6 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -15,11 +14,13 @@ import javax.xml.bind.annotation.XmlType;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.IncorrectRs232ValuesException;
 
-
 /**
- * <p>Java class for ParamValuesNode complex type.
+ * <p>
+ * Java class for ParamValuesNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="ParamValuesNode">
@@ -41,186 +42,171 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.IncorrectRs232ValuesExcep
 @XmlType(name = "ParamValuesNode")
 public class ParamValuesNode {
 
-    @XmlAttribute(required = true)
-    protected String center;
-    @XmlAttribute(required = true)
-    protected String coeficient;
-    @XmlAttribute(required = true)
-    protected String delta;
-    @XmlAttribute(required = true)
-    protected String power;
-    @XmlAttribute(required = true)
-    protected String weight;
-    
-    protected Double dcenter = Double.NaN;
-    protected Double dcoeficient = Double.NaN;
-    protected Double ddelta = Double.NaN;
-    protected Double dpower = Double.NaN;
-    protected Double dweight = Double.NaN;
+	@XmlAttribute(required = true)
+	protected String center;
+	@XmlAttribute(required = true)
+	protected String coeficient;
+	@XmlAttribute(required = true)
+	protected String delta;
+	@XmlAttribute(required = true)
+	protected String power;
+	@XmlAttribute(required = true)
+	protected String weight;
 
-    /**
-     * Gets the value of the center property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCenter() {
-        return center;
-    }
-    public Double getDCenter() {
-        return dcenter;
-    }
+	protected Double dcenter = Double.NaN;
+	protected Double dcoeficient = Double.NaN;
+	protected Double ddelta = Double.NaN;
+	protected Double dpower = Double.NaN;
+	protected Double dweight = Double.NaN;
 
-    /**
-     * Sets the value of the center property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     * @throws IncorrectRs232ValuesException 
-     *     
-     */
-    public void setCenter(String value) throws IncorrectRs232ValuesException {
-        this.center = value;
-        try {
+	/**
+	 * Gets the value of the center property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getCenter() {
+		return center;
+	}
+
+	public Double getDCenter() {
+		return dcenter;
+	}
+
+	/**
+	 * Sets the value of the center property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * @throws IncorrectRs232ValuesException
+	 * 
+	 */
+	public void setCenter(String value) throws IncorrectRs232ValuesException {
+		this.center = value;
+		try {
 			this.dcenter = Double.valueOf(value);
 		} catch (NumberFormatException e) {
 			throw new IncorrectRs232ValuesException("Center definition is incorrect: " + value);
 		}
-    }
+	}
 
-    /**
-     * Gets the value of the coeficient property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCoeficient() {
-        return coeficient;
-    }
-    public Double getDCoeficient() {
-        return dcoeficient;
-    }
+	/**
+	 * Gets the value of the coeficient property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getCoeficient() {
+		return coeficient;
+	}
 
-    /**
-     * Sets the value of the coeficient property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     * @throws IncorrectRs232ValuesException 
-     *     
-     */
-    public void setCoeficient(String value) throws IncorrectRs232ValuesException {
-        this.coeficient = value;
-        try {
+	public Double getDCoeficient() {
+		return dcoeficient;
+	}
+
+	/**
+	 * Sets the value of the coeficient property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * @throws IncorrectRs232ValuesException
+	 * 
+	 */
+	public void setCoeficient(String value) throws IncorrectRs232ValuesException {
+		this.coeficient = value;
+		try {
 			this.dcoeficient = Double.valueOf(value);
 		} catch (NumberFormatException e) {
 			throw new IncorrectRs232ValuesException("Coeficient definition is incorrect: " + value);
 		}
-    }
+	}
 
-    /**
-     * Gets the value of the delta property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDelta() {
-        return delta;
-    }
-    public Double getDDelta() {
-        return ddelta;
-    }
+	/**
+	 * Gets the value of the delta property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getDelta() {
+		return delta;
+	}
 
-    /**
-     * Sets the value of the delta property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     * @throws IncorrectRs232ValuesException 
-     *     
-     */
-    public void setDelta(String value) throws IncorrectRs232ValuesException {
-        this.delta = value;
-        try {
+	public Double getDDelta() {
+		return ddelta;
+	}
+
+	/**
+	 * Sets the value of the delta property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * @throws IncorrectRs232ValuesException
+	 * 
+	 */
+	public void setDelta(String value) throws IncorrectRs232ValuesException {
+		this.delta = value;
+		try {
 			this.ddelta = Double.valueOf(value);
 		} catch (NumberFormatException e) {
 			throw new IncorrectRs232ValuesException("Delta definition is incorrect: " + value);
 		}
-    }
+	}
 
-    /**
-     * Gets the value of the power property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPower() {
-        return power;
-    }
-    public Double getDPower() {
-        return dpower;
-    }
+	/**
+	 * Gets the value of the power property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getPower() {
+		return power;
+	}
 
-    /**
-     * Sets the value of the power property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     * @throws IncorrectRs232ValuesException 
-     *     
-     */
-    public void setPower(String value) throws IncorrectRs232ValuesException {
-        this.power = value;
-        try {
+	public Double getDPower() {
+		return dpower;
+	}
+
+	/**
+	 * Sets the value of the power property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * @throws IncorrectRs232ValuesException
+	 * 
+	 */
+	public void setPower(String value) throws IncorrectRs232ValuesException {
+		this.power = value;
+		try {
 			this.dpower = Double.valueOf(value);
 		} catch (NumberFormatException e) {
 			throw new IncorrectRs232ValuesException("Power definition is incorrect: " + value);
 		}
-    }
+	}
 
-    /**
-     * Gets the value of the weight property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getWeight() {
-        return weight;
-    }
-    public Double getDWeight() {
-        return dweight;
-    }
+	/**
+	 * Gets the value of the weight property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getWeight() {
+		return weight;
+	}
 
-    /**
-     * Sets the value of the weight property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     * @throws IncorrectRs232ValuesException 
-     *     
-     */
-    public void setWeight(String value) throws IncorrectRs232ValuesException {
-        this.weight = value;
-        try {
+	public Double getDWeight() {
+		return dweight;
+	}
+
+	/**
+	 * Sets the value of the weight property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * @throws IncorrectRs232ValuesException
+	 * 
+	 */
+	public void setWeight(String value) throws IncorrectRs232ValuesException {
+		this.weight = value;
+		try {
 			this.dweight = Double.valueOf(value);
 		} catch (NumberFormatException e) {
 			throw new IncorrectRs232ValuesException("Weight definition is incorrect: " + value);
 		}
-    }
+	}
 
 }

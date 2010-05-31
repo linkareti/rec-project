@@ -14,9 +14,10 @@ public class IncorrectRs232ValuesException extends Exception {
 
 	private static final long serialVersionUID = -5169126140740897351L;
 	private String message = "";
-	
+
 	/**
 	 * Creates the <code>IncorrectRs232ValuesException</code>.
+	 * 
 	 * @param string
 	 */
 	public IncorrectRs232ValuesException(String string) {

@@ -5,7 +5,6 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import java.util.ArrayList;
@@ -15,11 +14,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for ErrorsNode complex type.
+ * <p>
+ * Java class for ErrorsNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="ErrorsNode">
@@ -36,40 +37,39 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ErrorsNode", propOrder = {
-    "error"
-})
+@XmlType(name = "ErrorsNode", propOrder = { "error" })
 public class ErrorsNode {
 
-    protected List<OneErrorNode> error;
+	protected List<OneErrorNode> error;
 
-    /**
-     * Gets the value of the error property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the error property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getError().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link OneErrorNode }
-     * 
-     * 
-     */
-    public List<OneErrorNode> getError() {
-        if (error == null) {
-            error = new ArrayList<OneErrorNode>();
-        }
-        return this.error;
-    }
+	/**
+	 * Gets the value of the error property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the error property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getError().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link OneErrorNode }
+	 * 
+	 * 
+	 */
+	public List<OneErrorNode> getError() {
+		if (error == null) {
+			error = new ArrayList<OneErrorNode>();
+		}
+		return this.error;
+	}
 
 }

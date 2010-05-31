@@ -20,7 +20,6 @@ import com.linkare.rec.data.metadata.HardwareInfo;
  */
 public class GenericSerialPortDriver extends AbstractSerialPortDriver {
 
-
 	public GenericSerialPortDriver() {
 		super();
 	}
@@ -33,7 +32,7 @@ public class GenericSerialPortDriver extends AbstractSerialPortDriver {
 	@Override
 	public void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
 			throws WrongConfigurationException {
-		
+
 	}
 
 }

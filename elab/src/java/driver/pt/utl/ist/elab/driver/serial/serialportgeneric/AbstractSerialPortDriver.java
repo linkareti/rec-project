@@ -76,23 +76,23 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	private EventQueue serialCommands = null;
 	private SerialPortCommand serialPortCommand = null;
 	private String rememberLastWrittenMessage = null;
-	
+
 	public static HardwareNode rs232configs = null;
-			
+
 	public static DriverState currentDriverState = DriverState.UNKNOWN;
 
-	
 	/**
 	 * 
-	 * Once upon a time, there was a great explosion, and between electrons, protons,
-	 * and lots of hydrogen atoms running to achieve an energetic stability, there, was
-	 * born the constructor of this driver. Then, everything of right and wrong have
-	 * started to happen between software and hardware...
+	 * Once upon a time, there was a great explosion, and between electrons,
+	 * protons, and lots of hydrogen atoms running to achieve an energetic
+	 * stability, there, was born the constructor of this driver. Then,
+	 * everything of right and wrong have started to happen between software and
+	 * hardware...
 	 * 
 	 * @author fdias
 	 */
 	public AbstractSerialPortDriver() {
-		
+
 		try {
 			rs232configs = loadRs232Configs("Rs232Config.xml");
 		} catch (IncorrectRs232ValuesException e) {
@@ -102,7 +102,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			logMe("SERIAL PORT DRIVER CONSTRUCTOR : Error reading rs232 config file" + e.getMessage());
 			return;
 		}
-		
+
 		className = this.getClass().getName().replaceFirst("StampDriver", "").replaceFirst(".class", "");
 		packageName = getClass().getPackage().getName() + ".";
 
@@ -111,7 +111,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		loadCommandHandlers();
 
 		serialFinder = new SerialPortFinder();
-		
+
 		setDriverUniqueID(rs232configs.getId());
 		setApplicationNameLockPort(rs232configs.getId());
 		try {
@@ -128,27 +128,27 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			System.out.println(e.getCause());
 			e.printStackTrace();
 		}
-		
+
 		serialFinder.addStampFinderListener(this);
 		serialCommands = new EventQueue(new CommandDispatcher());
 	}
-	
+
 	/**
 	 * 
-	 * One day, men started to print lines on the clay to represent pounds of wheat.
-	 * Accounting was born. Then they started to print figures as a representation of
-	 * an idea. Logic writing was born. Then they put each vocal sound in a symbol and
-	 * called them letters. Linguistics was born. Then they put two symbols surrounding
-	 * each word, one < and one >. They said XML was born. I think they reused the same
-	 * idea of the egyptian writing, but as they couldn't write capsules, they wrote these
-	 * two symbols that nobody types.
-	 * What if I could use this XML to represent structured ideas of relationships between
-	 * objects? Then JAXB was born...
+	 * One day, men started to print lines on the clay to represent pounds of
+	 * wheat. Accounting was born. Then they started to print figures as a
+	 * representation of an idea. Logic writing was born. Then they put each
+	 * vocal sound in a symbol and called them letters. Linguistics was born.
+	 * Then they put two symbols surrounding each word, one < and one >. They
+	 * said XML was born. I think they reused the same idea of the egyptian
+	 * writing, but as they couldn't write capsules, they wrote these two
+	 * symbols that nobody types. What if I could use this XML to represent
+	 * structured ideas of relationships between objects? Then JAXB was born...
 	 * 
 	 * @return HardwareNode
 	 * @throws IncorrectRs232ValuesException
 	 * @author fdias
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@SuppressWarnings("unchecked")
 	private HardwareNode loadRs232Configs(String file) throws IncorrectRs232ValuesException, IOException {
@@ -159,7 +159,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			return (HardwareNode) jaxbElement.getValue();
 		} catch (JAXBException e) {
 			e.printStackTrace();
-			throw new IncorrectRs232ValuesException("Error \"" + e.getMessage() + "\" on reading Rs232 definitions file: " + new File(file).getCanonicalPath());
+			throw new IncorrectRs232ValuesException("Error \"" + e.getMessage()
+					+ "\" on reading Rs232 definitions file: " + new File(file).getCanonicalPath());
 		}
 	}
 
@@ -196,15 +197,14 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		return url;
 
-	}	
+	}
 
 	/**
-	 * - Please, do this work for me.
-	 * - Okay, I will ask a friend of mine to do it for me.
-	 * - Ah, thanks, what is his name?
-	 * - He is the loadExtraCommandHandlers. A cool and hard working guy.
-	 * - And what are you going to do?
-	 * - Give him the work. I think there's no problem, I return void anyway...
+	 * - Please, do this work for me. - Okay, I will ask a friend of mine to do
+	 * it for me. - Ah, thanks, what is his name? - He is the
+	 * loadExtraCommandHandlers. A cool and hard working guy. - And what are you
+	 * going to do? - Give him the work. I think there's no problem, I return
+	 * void anyway...
 	 * 
 	 * @author fdias
 	 * 
@@ -215,13 +215,14 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	/**
 	 * 
-	 * Why the art tends to be so abstract? Well... is this class only one method is abstract.
-	 * This is not abstract, nor impressionist, neither cubist. This is only a method that
-	 * avoids this class to be the generic driver. - Why? This is not meant to be a
-	 * generic driver? - Yes it is. But, everything is not so generic as you think it is...<br />
+	 * Why the art tends to be so abstract? Well... is this class only one
+	 * method is abstract. This is not abstract, nor impressionist, neither
+	 * cubist. This is only a method that avoids this class to be the generic
+	 * driver. - Why? This is not meant to be a generic driver? - Yes it is.
+	 * But, everything is not so generic as you think it is...<br />
 	 * <br />
-	 * If you don't have code to put inside this method, just give a good name to your class and
-	 * leave it empty.
+	 * If you don't have code to put inside this method, just give a good name
+	 * to your class and leave it empty.
 	 * 
 	 * @author fdias
 	 * 
@@ -230,9 +231,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	/**
 	 * 
-	 * Validates the configuration of the parameters using the HardwareInfo.xml data.
-	 * Leave it blank if you don't need this.
-	 *
+	 * Validates the configuration of the parameters using the HardwareInfo.xml
+	 * data. Leave it blank if you don't need this.
+	 * 
 	 */
 	public abstract void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
 			throws WrongConfigurationException;
@@ -270,12 +271,13 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	/**
 	 * 
-	 * At the beginning there was nothing. So YHVH created the Earth and the skies around.
-	 * The earth was without colour and void. So YHVH separated the light from the darkness,
-	 * and called day to the light, and night to the darkness. And there was the beginning...
+	 * At the beginning there was nothing. So YHVH created the Earth and the
+	 * skies around. The earth was without colour and void. So YHVH separated
+	 * the light from the darkness, and called day to the light, and night to
+	 * the darkness. And there was the beginning...
 	 * 
-	 * After that, the driver spoke through the serial port - let it be light. And there
-	 * was light in all the LEDs of an experience set.
+	 * After that, the driver spoke through the serial port - let it be light.
+	 * And there was light in all the LEDs of an experience set.
 	 * 
 	 * @param HardwareInfo
 	 * @author fdias
@@ -283,54 +285,56 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public void init(HardwareInfo info) {
 		this.info = info;
-		if (serialIO != null) 
+		if (serialIO != null)
 			serialIO.shutdown();
 		serialIO = null;
-		//serialFinder.startSearch();
-		//if (serialIO != null) {
-			currentDriverState = DriverState.UNKNOWN;
-			currentDriverState.startTimeoutClock();
-			fireIDriverStateListenerDriverInited();
-		//} else {
-		//	currentDriverState = DriverState.UNKNOWN;
-		//	currentDriverState.startTimeoutClock();
-		//	fireIDriverStateListenerDriverShutdown();
-		//}
+		// serialFinder.startSearch();
+		// if (serialIO != null) {
+		currentDriverState = DriverState.UNKNOWN;
+		currentDriverState.startTimeoutClock();
+		fireIDriverStateListenerDriverInited();
+		// } else {
+		// currentDriverState = DriverState.UNKNOWN;
+		// currentDriverState.startTimeoutClock();
+		// fireIDriverStateListenerDriverShutdown();
+		// }
 	}
 
 	/**
 	 * 
-	 * For 20 minutes the telescreen repeats over and over the same images and sounds and
-	 * Winston Smith enters in a trance of delusion and hate. The Big Brother is configuring
-	 * him for perpetual war and freedom. But, meanwhile, a thought of Julia appears on his 
-	 * mind.<br />
-	 * And all that trance disappeared again. There is no more doublethink on his mind, but the
-	 * eyes of Julia under that tree on the fields outside of London<br />
-	 * A new configuration, a new way to this experience react. Beware the MiniTrue.
+	 * For 20 minutes the telescreen repeats over and over the same images and
+	 * sounds and Winston Smith enters in a trance of delusion and hate. The Big
+	 * Brother is configuring him for perpetual war and freedom. But, meanwhile,
+	 * a thought of Julia appears on his mind.<br />
+	 * And all that trance disappeared again. There is no more doublethink on
+	 * his mind, but the eyes of Julia under that tree on the fields outside of
+	 * London<br />
+	 * A new configuration, a new way to this experience react. Beware the
+	 * MiniTrue.
 	 * 
 	 * @throws IncorrectStateException
 	 * @throws WrongConfigurationException
-	 * @throws TimedOutException 
+	 * @throws TimedOutException
 	 * @author fdias
 	 * 
 	 */
-	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException, IncorrectStateException, TimedOutException {
-		
+	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException,
+			IncorrectStateException, TimedOutException {
+
 		currentDriverState.explodeOnTimeout();
-		
-		// verifies if the driver can configure the hardware at this moment through the current state
-		if (currentDriverState != DriverState.CONFIGURED
-			&& currentDriverState != DriverState.STOPPED
-			&& currentDriverState != DriverState.RESETED
-			&& currentDriverState != DriverState.UNKNOWN) {
+
+		// verifies if the driver can configure the hardware at this moment
+		// through the current state
+		if (currentDriverState != DriverState.CONFIGURED && currentDriverState != DriverState.STOPPED
+				&& currentDriverState != DriverState.RESETED && currentDriverState != DriverState.UNKNOWN) {
 			logMe("CONFIGURE : Cannot configure while on state " + currentDriverState.toString());
 			throw new IncorrectStateException();
 		}
-		
+
 		fireIDriverStateListenerDriverConfiguring();
 
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.CFG.toString().toLowerCase());
-		
+
 		// loop through each parameter and add data to each one
 		for (int i = 1; i < rs232configs.getRs232().getParameters().getParameter().size(); i++) {
 			// parameter from rs232
@@ -340,16 +344,12 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			// if is legible value...
 			if (channelParameter.getParameterType() != ParameterType.BlackBoxValue) {
 				String parameterName = channelParameter.getParameterName();
-				Float parameterValue = new Float(
-						Defaults.defaultIfEmpty(
-								config.getSelectedHardwareParameterValue(parameterName),
-								info.getHardwareParameterValue(parameterName)
-								)
-				);
+				Float parameterValue = new Float(Defaults.defaultIfEmpty(config
+						.getSelectedHardwareParameterValue(parameterName), info
+						.getHardwareParameterValue(parameterName)));
 				// add to command
 				serialPortCommand.addCommandData(parameterName, parameterNone.formatOutput(parameterValue));
-			}
-			else {
+			} else {
 				// TODO : send a blackbox value on cfg
 			}
 		}
@@ -357,7 +357,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		currentDriverState = DriverState.CONFIGURING;
 		currentDriverState.startTimeoutClock();
 		fireIDriverStateListenerDriverConfigured();
-	}	
+	}
 
 	/**
 	 * 
@@ -369,9 +369,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void reset(HardwareInfo info) throws IncorrectStateException {
-		
+
 		currentDriverState.explodeOnTimeout();
-		
+
 		fireIDriverStateListenerDriverReseting();
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.RST.toString().toLowerCase());
 		writeMessage(serialPortCommand.getCommand());
@@ -408,14 +408,14 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
 
 		currentDriverState.explodeOnTimeout();
-		
-		// verifies if the driver can start the hardware at this moment through the current state
-		if (currentDriverState != DriverState.CONFIGURED
-			&& currentDriverState != DriverState.STOPPED) {
+
+		// verifies if the driver can start the hardware at this moment through
+		// the current state
+		if (currentDriverState != DriverState.CONFIGURED && currentDriverState != DriverState.STOPPED) {
 			logMe("START : Cannot start while on state " + currentDriverState.toString());
 			throw new IncorrectStateException();
 		}
-		
+
 		fireIDriverStateListenerDriverStarting();
 		dataSource = initDataSource();
 		dataSource.setRs232configs(rs232configs);
@@ -437,13 +437,13 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			fireIDriverStateListenerDriverStarted();
 			return dataSource;
 		} else
-			return null;	
+			return null;
 	}
 
 	public void startNow() throws IncorrectStateException {
-		
+
 		currentDriverState.explodeOnTimeout();
-		
+
 		if (serialPortCommand == null) {
 			logMe("No configuration available yet!");
 			throw new IncorrectStateException();
@@ -470,15 +470,15 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public void stop(HardwareInfo info) throws IncorrectStateException {
 
 		currentDriverState.explodeOnTimeout();
-		
-		// verifies if the driver can stop the hardware at this moment through the current state
-		if (currentDriverState != DriverState.STARTED
-			&& currentDriverState != DriverState.RECEIVINGDATA
-			&& currentDriverState != DriverState.RECEIVINGBIN) {
+
+		// verifies if the driver can stop the hardware at this moment through
+		// the current state
+		if (currentDriverState != DriverState.STARTED && currentDriverState != DriverState.RECEIVINGDATA
+				&& currentDriverState != DriverState.RECEIVINGBIN) {
 			logMe("STOP : Cannot stop while on state " + currentDriverState.toString());
 			throw new IncorrectStateException();
 		}
-		
+
 		fireIDriverStateListenerDriverStoping();
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
 		serialIO.reopen();
@@ -509,7 +509,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 * Only for maintaining compatibility with older versions of ReC.
 	 * 
-	 * @deprecated Use <code><b>processCommand</b></code> method instead 
+	 * @deprecated Use <code><b>processCommand</b></code> method instead
 	 * @throws IncorrectStateException
 	 * @throws TimedOutException
 	 * @author fdias
@@ -524,11 +524,11 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		if (dataSource != null)
 			dataSource.processDataCommand(command);
 	}
-	
+
 	/**
 	 * 
-	 * Initiates a GenericSerialPortDataSource as datasource for this driver.
-	 * If you want to use an specific datasource, extend it from this class and
+	 * Initiates a GenericSerialPortDataSource as datasource for this driver. If
+	 * you want to use an specific datasource, extend it from this class and
 	 * override this method to create an instance of your datasource.
 	 * 
 	 * @return AbstractSerialPortDataSource
@@ -544,11 +544,12 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public HardwareAcquisitionConfig getAcquisitionHeader() {
 		return config;
 	}
-	
+
 	/**
 	 * 
-	 * This method processes the commands received from the hardware, tries to understand
-	 * them and fire the driver states. Any data command are relayed to processDataCommand.
+	 * This method processes the commands received from the hardware, tries to
+	 * understand them and fire the driver states. Any data command are relayed
+	 * to processDataCommand.
 	 * 
 	 * @param cmd
 	 * @throws TimedOutException
@@ -558,7 +559,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public void processCommand(SerialPortCommand cmd) throws IncorrectStateException, TimedOutException {
 
-		// is this time to 
+		// is this time to
 		currentDriverState.explodeOnTimeout();
 
 		DriverState newDriverState = null;
@@ -587,7 +588,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			// terminates this driver execution
 			currentDriverState = DriverState.UNKNOWN;
 			currentDriverState.startTimeoutClock();
-			fireIDriverStateListenerDriverShutdown();			
+			fireIDriverStateListenerDriverShutdown();
 			return;
 		}
 		logMe("PROCESSCOMMAND : I'm gonna process the line : " + cmd.getCommand());
@@ -605,7 +606,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		if (currentDriverState.processeMe(thisCommand)) {
 			if (thisCommand.equals(SerialPortCommandList.IDS)) {
 				if (cmd.getDataHashMap() == null || cmd.getDataHashMap().size() != 2) {
-					// Houston we have a problem, IDS always comes with two parameters
+					// Houston we have a problem, IDS always comes with two
+					// parameters
 					logMe("PROCESSCOMMAND : Error on command IDS, incorrect number of parameters: "
 							+ cmd.getDataHashMap() == null ? "null" : cmd.getDataHashMap().size()
 							+ " parameters instead of 2");
@@ -616,7 +618,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					return;
 				} else {
 					if (!rs232configs.getId().equals(cmd.getDataHashMap().get(1))) {
-						logMe("PROCESSCOMMAND : Error on command IDS, wrong ID of hardware: " + (cmd.getDataHashMap().size() > 1 ? cmd.getDataHashMap().get(1) : "null"));
+						logMe("PROCESSCOMMAND : Error on command IDS, wrong ID of hardware: "
+								+ (cmd.getDataHashMap().size() > 1 ? cmd.getDataHashMap().get(1) : "null"));
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
 						// terminates this driver execution
@@ -624,7 +627,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 						return;
 					}
 					if (!HardwareStatus.isValid(cmd.getDataHashMap().get(2))) {
-						logMe("PROCESSCOMMAND : Error on command IDS, wrong status of hardware:" + (cmd.getDataHashMap().size() > 2 ? cmd.getDataHashMap().get(2) : "null"));
+						logMe("PROCESSCOMMAND : Error on command IDS, wrong status of hardware:"
+								+ (cmd.getDataHashMap().size() > 2 ? cmd.getDataHashMap().get(2) : "null"));
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
 						// terminates this driver execution
@@ -632,41 +636,43 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 						return;
 					}
 					if (!currentDriverState.acceptHardwareStatus(HardwareStatus.valueOf(cmd.getDataHashMap().get(2)))) {
-						logMe("PROCESSCOMMAND : Current driver state: " + currentDriverState.toString() + " does not matches hardware status:" + (cmd.getDataHashMap().size() > 2 ? cmd.getDataHashMap().get(2) : "null") + ". Shuting down driver.");
+						logMe("PROCESSCOMMAND : Current driver state: " + currentDriverState.toString()
+								+ " does not matches hardware status:"
+								+ (cmd.getDataHashMap().size() > 2 ? cmd.getDataHashMap().get(2) : "null")
+								+ ". Shuting down driver.");
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
 						// terminates this driver execution
 						fireIDriverStateListenerDriverShutdown();
-						return;						
+						return;
 					}
 				} // is an IDS
-				  // else ...
+				// else ...
 			} else if (thisCommand.equals(SerialPortCommandList.CFG)) {
 				if (SerialPortCommand.isResponse(cmd.getCommand(), rememberLastWrittenMessage))
 					currentDriverState = DriverState.CONFIGUREWAIT;
 				currentDriverState.startTimeoutClock();
-				}
-				else {
-					logMe("PROCESSCOMMAND : Configuration recieved from the hardware does not match: " + cmd.getCommand());
-					currentDriverState = DriverState.UNKNOWN;
-					currentDriverState.startTimeoutClock();
-					fireIDriverStateListenerDriverShutdown();
-					return;	
-				}
-			} else if (thisCommand.equals(SerialPortCommandList.CUR)) {
-				// TODO : what must I do with this?
-			} else if (thisCommand.equals(SerialPortCommandList.ERR)) {
-				logMe("PROCESSCOMMAND : Recieved error from the hardware: " + cmd.getCommand()); 
+			} else {
+				logMe("PROCESSCOMMAND : Configuration recieved from the hardware does not match: " + cmd.getCommand());
+				currentDriverState = DriverState.UNKNOWN;
+				currentDriverState.startTimeoutClock();
 				fireIDriverStateListenerDriverShutdown();
-				throw new IncorrectStateException();
+				return;
 			}
-			// new state for the driver
-			logMe("PROCESSCOMMAND : Switching between driver state " + currentDriverState.toString() + " and " + newDriverState.toString());
-			currentDriverState = newDriverState;
-			currentDriverState.startTimeoutClock();
+		} else if (thisCommand.equals(SerialPortCommandList.CUR)) {
+			// TODO : what must I do with this?
+		} else if (thisCommand.equals(SerialPortCommandList.ERR)) {
+			logMe("PROCESSCOMMAND : Recieved error from the hardware: " + cmd.getCommand());
+			fireIDriverStateListenerDriverShutdown();
+			throw new IncorrectStateException();
 		}
-	
-	
+		// new state for the driver
+		logMe("PROCESSCOMMAND : Switching between driver state " + currentDriverState.toString() + " and "
+				+ newDriverState.toString());
+		currentDriverState = newDriverState;
+		currentDriverState.startTimeoutClock();
+	}
+
 	public class CommandDispatcher implements EventQueueDispatcher {
 
 		public void dispatchEvent(Object evt) {
@@ -858,7 +864,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	protected void writeMessage(String message) {
 		if (serialIO != null) {
-			rememberLastWrittenMessage  = message;
+			rememberLastWrittenMessage = message;
 			serialIO.writeMessage(message);
 		}
 	}

@@ -5,7 +5,6 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import java.math.BigInteger;
@@ -15,11 +14,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for OneTimeoutNode complex type.
+ * <p>
+ * Java class for OneTimeoutNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="OneTimeoutNode">
@@ -37,35 +38,31 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "OneTimeoutNode")
 public class OneTimeoutNode {
 
-    @XmlAttribute
-    protected BigInteger time;
+	@XmlAttribute
+	protected BigInteger time;
 
-    /**
-     * Gets the value of the time property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getTime() {
-        return time;
-    }
-    
-    public int getTimeInt() {
-    	return time.intValue();
-    }
+	/**
+	 * Gets the value of the time property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getTime() {
+		return time;
+	}
 
-    /**
-     * Sets the value of the time property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setTime(BigInteger value) {
-        this.time = value;
-    }
+	public int getTimeInt() {
+		return time.intValue();
+	}
+
+	/**
+	 * Sets the value of the time property.
+	 * 
+	 * @param value allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setTime(BigInteger value) {
+		this.time = value;
+	}
 
 }

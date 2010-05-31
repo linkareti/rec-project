@@ -24,7 +24,7 @@ import com.linkare.rec.impl.utils.ORBBean;
  */
 public abstract class GenericHardwareServerMain {
 
-	// TODO : please, replace this values 
+	// TODO : please, replace this values
 	private static String HARDWARE_LOGGER = "GenericHardware.Logger";
 
 	static {

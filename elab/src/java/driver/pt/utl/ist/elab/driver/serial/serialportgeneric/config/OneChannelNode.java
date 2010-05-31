@@ -5,7 +5,6 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import java.math.BigInteger;
@@ -20,11 +19,13 @@ import javax.xml.bind.annotation.XmlType;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode.TransferFunctionType;
 
-
 /**
- * <p>Java class for OneChannelNode complex type.
+ * <p>
+ * Java class for OneChannelNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="OneChannelNode">
@@ -43,132 +44,127 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode.T
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "OneChannelNode", propOrder = {
-    "transferFunction"
-})
+@XmlType(name = "OneChannelNode", propOrder = { "transferFunction" })
 public class OneChannelNode {
 
-    @XmlElement(name = "transfer_function")
-    protected List<TransferFunctionNode> transferFunction;
-    @XmlAttribute(required = true)
-    protected String format;
-    @XmlAttribute(required = true)
-    protected BigInteger order;
+	@XmlElement(name = "transfer_function")
+	protected List<TransferFunctionNode> transferFunction;
+	@XmlAttribute(required = true)
+	protected String format;
+	@XmlAttribute(required = true)
+	protected BigInteger order;
 
-    /**
-     * Gets the value of the transferFunction property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the transferFunction property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTransferFunction().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TransferFunctionNode }
-     * 
-     * 
-     */
-    public List<TransferFunctionNode> getTransferFunction() {
-        if (transferFunction == null) {
-            transferFunction = new ArrayList<TransferFunctionNode>();
-        }
-        return this.transferFunction;
-    }
+	/**
+	 * Gets the value of the transferFunction property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the transferFunction property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getTransferFunction().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link TransferFunctionNode }
+	 * 
+	 * 
+	 */
+	public List<TransferFunctionNode> getTransferFunction() {
+		if (transferFunction == null) {
+			transferFunction = new ArrayList<TransferFunctionNode>();
+		}
+		return this.transferFunction;
+	}
 
-    /**
-     * Gets the value of the format property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFormat() {
-        return format;
-    }
+	/**
+	 * Gets the value of the format property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getFormat() {
+		return format;
+	}
 
-    /**
-     * Sets the value of the format property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFormat(String value) {
-        this.format = value;
-    }
+	/**
+	 * Sets the value of the format property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setFormat(String value) {
+		this.format = value;
+	}
 
-    /**
-     * Gets the value of the order property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getOrder() {
-        return order;
-    }
+	/**
+	 * Gets the value of the order property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getOrder() {
+		return order;
+	}
 
-    /**
-     * Sets the value of the order property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setOrder(BigInteger value) {
-        this.order = value;
-    }
+	/**
+	 * Sets the value of the order property.
+	 * 
+	 * @param value allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setOrder(BigInteger value) {
+		this.order = value;
+	}
 
 	public Double calculate(Double value) {
 		Double total = 0D;
 		boolean haveFunctions = false;
 		for (TransferFunctionNode node : transferFunction) {
 			if (!node.getLinear().isEmpty()) {
-				for (LinearFunctionNode	linear : node.getLinear()) {
+				for (LinearFunctionNode linear : node.getLinear()) {
 					haveFunctions = true;
 					total = total + linear.getParam().getDWeight() * value - linear.getParam().getDCenter();
 				}
 				for (PowerFunctionNode power : node.getPower()) {
 					haveFunctions = true;
-					total = total + power.getParam().getDWeight() * Math.pow((value - power.getParam().getDCenter()),power.getParam().getDPower());
+					total = total + power.getParam().getDWeight()
+							* Math.pow((value - power.getParam().getDCenter()), power.getParam().getDPower());
 				}
 				for (ExpFunctionNode expon : node.getExponential()) {
 					haveFunctions = true;
-					total = total + expon.getParam().getDWeight() * Math.exp(expon.getParam().getDCoeficient() * (value - expon.getParam().getDCenter()));
+					total = total + expon.getParam().getDWeight()
+							* Math.exp(expon.getParam().getDCoeficient() * (value - expon.getParam().getDCenter()));
 				}
 				for (LogFunctionNode log : node.getLogarithm()) {
 					haveFunctions = true;
-					total = total + log.getParam().getDWeight() * Math.log(log.getParam().getDWeight() * (value - log.getParam().getDCenter())); 
+					total = total + log.getParam().getDWeight()
+							* Math.log(log.getParam().getDWeight() * (value - log.getParam().getDCenter()));
 				}
 				for (SinFunctionNode sin : node.getSin()) {
 					haveFunctions = true;
-					total = total + sin.getParam().getDWeight() * Math.sin(sin.getParam().getDCoeficient() * value - sin.getParam().getDDelta()); 
+					total = total + sin.getParam().getDWeight()
+							* Math.sin(sin.getParam().getDCoeficient() * value - sin.getParam().getDDelta());
 				}
 				for (TgFunctionNode tg : node.getTg()) {
 					haveFunctions = true;
-					total = total + tg.getParam().getDWeight() * Math.tan(tg.getParam().getDCoeficient() * value - tg.getParam().getDDelta()); 
+					total = total + tg.getParam().getDWeight()
+							* Math.tan(tg.getParam().getDCoeficient() * value - tg.getParam().getDDelta());
 				}
 			}
 		}
-		
+
 		if (haveFunctions)
 			return total;
 		else
 			return value;
 	}
-    
-    
+
 }

@@ -23,12 +23,12 @@ public class SerialPortCommand implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7857767506247594478L;
-	
+
 	private String commandIdentifier = null;
 	private String command = null;
 	private HashMap<String, String> commandDataMap = null;
-	private HashMap<Integer,String> returnHashMap = null;
-	
+	private HashMap<Integer, String> returnHashMap = null;
+
 	private boolean isData = false;
 
 	/**
@@ -39,7 +39,7 @@ public class SerialPortCommand implements java.io.Serializable {
 	public SerialPortCommand(String commandIdentifier) {
 		this.commandIdentifier = commandIdentifier;
 	}
-	
+
 	public void setCommand(String command) {
 		this.command = command;
 	}
@@ -82,13 +82,13 @@ public class SerialPortCommand implements java.io.Serializable {
 	 * @author fdias
 	 * @return HashMap<Integer,String>
 	 */
-	public HashMap<Integer,String> getDataHashMap() {
+	public HashMap<Integer, String> getDataHashMap() {
 		// no command, no donut for you
 		if (command == null)
 			return null;
 		// there is a command but no data hashmap? populate it
 		if (returnHashMap == null) {
-			returnHashMap = new HashMap<Integer,String>();
+			returnHashMap = new HashMap<Integer, String>();
 			String[] commandStringArray = command.split("\t");
 			for (int i = 1; i < commandStringArray.length; i++) {
 				returnHashMap.put(i, commandStringArray[i]);
@@ -99,35 +99,33 @@ public class SerialPortCommand implements java.io.Serializable {
 		else
 			return returnHashMap;
 	}
-	
+
 	public static boolean isResponse(String response, String sentMessage) {
 		if (response == null || sentMessage == null)
 			return false;
 		String[] responseArray = response.split("\t", 2);
 		String[] sentMessageArray = sentMessage.split("\t", 2);
-		if (responseArray.length < 1 || sentMessageArray.length <1)
+		if (responseArray.length < 1 || sentMessageArray.length < 1)
 			return false;
 		if (responseArray[0].isEmpty() || sentMessageArray[0].isEmpty())
 			return false;
-		// both are equivalent but response is upper case and set message is lower case
-		if (responseArray[0].equalsIgnoreCase(sentMessageArray[0]) &&
-				responseArray[0].toUpperCase().equals(responseArray[0]) &&
-				sentMessageArray[0].toLowerCase().equals(sentMessageArray[0])) {
+		// both are equivalent but response is upper case and set message is
+		// lower case
+		if (responseArray[0].equalsIgnoreCase(sentMessageArray[0])
+				&& responseArray[0].toUpperCase().equals(responseArray[0])
+				&& sentMessageArray[0].toLowerCase().equals(sentMessageArray[0])) {
 			// Okay, it can be a valid response!
-			
-			if (responseArray.length == 2 && sentMessageArray.length == 2)  {
+
+			if (responseArray.length == 2 && sentMessageArray.length == 2) {
 				// command information must be equal
 				if (responseArray[1].equals(sentMessageArray[1])) {
 					return true;
-				}
-				else
+				} else
 					return false;
-			}
-			else
+			} else
 				return true;
-			
-		}
-		else
+
+		} else
 			return false;
 	}
 

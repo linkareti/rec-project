@@ -161,7 +161,7 @@ public class BaseSerialPortIO {
 								}
 							} else {
 								if (lineReadTemp.length() <= GenericSerialPortDriver.currentBinaryLength + 5)
-										/* 5 = length of _BIN header */
+									/* 5 = length of _BIN header */
 									lineReadTemp.append(readChar);
 								else
 									break;
@@ -225,12 +225,11 @@ public class BaseSerialPortIO {
 		if (lineRead == null) {
 			return;
 		}
-		
+
 		if (AbstractSerialPortDriver.currentDriverState == DriverState.RECEIVINGBIN) {
 			if (lineRead.length() >= AbstractSerialPortDriver.totalBinaryLength) {
-				
-			}
-			else {
+
+			} else {
 				// TODO : binary buffer
 			}
 		}
@@ -249,9 +248,10 @@ public class BaseSerialPortIO {
 				inCommand.setCommand(commandTemp);
 			}
 		}
-		if (GenericSerialPortDriver.currentDriverState == DriverState.RECEIVINGDATA && !inCommand.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.END.toString()))
+		if (GenericSerialPortDriver.currentDriverState == DriverState.RECEIVINGDATA
+				&& !inCommand.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.END.toString()))
 			return;
-		
+
 		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Firing stamp command listener...");
 		fireStampCommandListenerHandleStampCommand(inCommand);
 		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Fired stamp command listener...");

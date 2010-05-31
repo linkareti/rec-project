@@ -5,7 +5,6 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import java.util.ArrayList;
@@ -15,11 +14,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for ParametersNode complex type.
+ * <p>
+ * Java class for ParametersNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="ParametersNode">
@@ -41,51 +42,51 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ParametersNode", propOrder = {
-    "parameter"
-})
+@XmlType(name = "ParametersNode", propOrder = { "parameter" })
 public class ParametersNode {
 
-    protected List<OneParameterNode> parameter;
+	protected List<OneParameterNode> parameter;
 
-    /**
-     * Gets the value of the parameter property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parameter property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParameter().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link OneParameterNode }
-     * @return List<OneParameterNode>
-     * 
-     * 
-     */
-    public List<OneParameterNode> getParameter() {
-        if (parameter == null) {
-            parameter = new ArrayList<OneParameterNode>();
-        }
-        return this.parameter;
-    }
-    
-    public OneParameterNode getParameterToOrder(int order) {
-    	if (parameter == null)
-    		return new OneParameterNode();
-    	for (OneParameterNode oneParameterNode : parameter) {
-    		if (oneParameterNode.getOrder().intValue() == order)
-    			return oneParameterNode;
+	/**
+	 * Gets the value of the parameter property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the parameter property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getParameter().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link OneParameterNode }
+	 * 
+	 * @return List<OneParameterNode>
+	 * 
+	 * 
+	 */
+	public List<OneParameterNode> getParameter() {
+		if (parameter == null) {
+			parameter = new ArrayList<OneParameterNode>();
 		}
-    	return new OneParameterNode();
-    }
+		return this.parameter;
+	}
+
+	public OneParameterNode getParameterToOrder(int order) {
+		if (parameter == null)
+			return new OneParameterNode();
+		for (OneParameterNode oneParameterNode : parameter) {
+			if (oneParameterNode.getOrder().intValue() == order)
+				return oneParameterNode;
+		}
+		return new OneParameterNode();
+	}
 
 }

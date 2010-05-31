@@ -5,7 +5,6 @@
 // Generated on: 2009.10.02 at 10:54:22 AM BST 
 //
 
-
 package pt.utl.ist.elab.driver.serial.serialportgeneric.config;
 
 import java.math.BigInteger;
@@ -15,11 +14,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for OneErrorNode complex type.
+ * <p>
+ * Java class for OneErrorNode complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="OneErrorNode">
@@ -39,83 +40,71 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "OneErrorNode")
 public class OneErrorNode {
 
-    @XmlAttribute(required = true)
-    protected BigInteger code;
-    @XmlAttribute(required = true)
-    protected String key;
-    @XmlAttribute(required = true)
-    protected String message;
+	@XmlAttribute(required = true)
+	protected BigInteger code;
+	@XmlAttribute(required = true)
+	protected String key;
+	@XmlAttribute(required = true)
+	protected String message;
 
-    /**
-     * Gets the value of the code property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getCode() {
-        return code;
-    }
+	/**
+	 * Gets the value of the code property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getCode() {
+		return code;
+	}
 
-    /**
-     * Sets the value of the code property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setCode(BigInteger value) {
-        this.code = value;
-    }
+	/**
+	 * Sets the value of the code property.
+	 * 
+	 * @param value allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setCode(BigInteger value) {
+		this.code = value;
+	}
 
-    /**
-     * Gets the value of the key property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getKey() {
-        return key;
-    }
+	/**
+	 * Gets the value of the key property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getKey() {
+		return key;
+	}
 
-    /**
-     * Sets the value of the key property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setKey(String value) {
-        this.key = value;
-    }
+	/**
+	 * Sets the value of the key property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setKey(String value) {
+		this.key = value;
+	}
 
-    /**
-     * Gets the value of the message property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMessage() {
-        return message;
-    }
+	/**
+	 * Gets the value of the message property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getMessage() {
+		return message;
+	}
 
-    /**
-     * Sets the value of the message property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMessage(String value) {
-        this.message = value;
-    }
+	/**
+	 * Sets the value of the message property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setMessage(String value) {
+		this.message = value;
+	}
 
 }
