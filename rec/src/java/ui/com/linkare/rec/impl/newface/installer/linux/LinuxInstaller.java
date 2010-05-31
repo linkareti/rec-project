@@ -1,7 +1,5 @@
 package com.linkare.rec.impl.newface.installer.linux;
 
-import java.io.IOException;
-
 import javax.jnlp.UnavailableServiceException;
 import javax.swing.JOptionPane;
 
@@ -22,14 +20,8 @@ public class LinuxInstaller extends Installer {
 	 */
 	private static final int INSTALLER_VERSION = 0;
 
-	public static void main(String[] args) throws UnavailableServiceException {
-
-		try {
-			//Bruno deixa rebentar ou trata de alguma forma?
-			new LinuxInstaller().executeInstaller(args);
-		} catch (IOException e) {
-			//Bruno fazer tratamento da excepção
-		}
+	public static void main(String[] args) {
+		new LinuxInstaller().executeInstaller(args);
 	}
 
 	@Override
@@ -41,7 +33,6 @@ public class LinuxInstaller extends Installer {
 		boolean agree = (result == JOptionPane.YES_OPTION);
 
 		if (!agree) {
-			//Bruno um por SO?
 			JOptionPane.showMessageDialog(null, bundle.getString("linux.canceled"));
 			getInstallerService().installFailed();
 		}

@@ -41,16 +41,34 @@ public abstract class Installer implements Observer {
 		return installerService;
 	}
 
-	public void executeInstaller(String[] args) 
-			throws UnavailableServiceException, IOException {
+	public void executeInstaller(String[] args) {
 
 		for (String arg : args) {
 			log.fine("Installer arg: " + arg);
 		}
 
-		if ("install".equals(args[0])) {
+		try {
+			
+			executeInstaller(args[0]);
+			
+		} catch (UnavailableServiceException e) {
+			log.severe(e.getMessage());
+			handleException();	
+		} catch (IOException e) {
+			log.severe(e.getMessage());
+			handleException();
+		} catch (RuntimeException e) {
+			log.severe(e.getMessage());
+			handleException();
+		}
+	}
+	
+	private void executeInstaller(String type) 
+			throws UnavailableServiceException, IOException {
+	
+		if ("install".equals(type)) {
 			install();
-		} else if ("uninstall".equals(args[0])) {
+		} else if ("uninstall".equals(type)) {
 			new Uninstaller().uninstall();
 		} else {
 			throw new UnsupportedOperationException("Apenas as opções " +
@@ -59,7 +77,7 @@ public abstract class Installer implements Observer {
 
 		getInstallerService().updateProgress(100);
 		getInstallerService().setStatus(bundle.getString("complete"));
-		getInstallerService().installSucceeded(false);
+		getInstallerService().installSucceeded(false);	
 	}
 	
 	private void install() throws IOException, UnavailableServiceException {
@@ -191,12 +209,10 @@ public abstract class Installer implements Observer {
 							.replace("$2", String.valueOf(params[1]));
 					getInstallerService().setStatus(message);
 				} catch (UnavailableServiceException e) {
-					//Bruno tratar excepção
-					e.printStackTrace();
+					log.severe(e.getMessage());
 				}
 			}
 		}
-		//Bruno else dá erro ou deixa passar?
 	}
 	
 	class Uninstaller {
@@ -227,15 +243,14 @@ public abstract class Installer implements Observer {
 				getInstallerService().setStatus(bundle.getString("remove.preferences"));
 				PreferencesUtils.removeUserPreference(INSTALLER_VERSION);
 			
-				//Bruno deveria remover também o xvid e a directoria do VLC 
+				//Bruno remover também o xvid e a directoria do VLC das preferences 
 
 				if (agree) {
 					getInstallerService().setStatus(bundle.getString("remove.plugins"));
 					deleteDir(eLabDir);
 				}
 			} catch (UnavailableServiceException e) {
-				//Bruno tratar excepcao
-				e.printStackTrace();
+				log.severe(e.getMessage());
 			}
 
 			log.fine("eLab directory deleted");			
@@ -258,6 +273,25 @@ public abstract class Installer implements Observer {
 			getInstallerService().updateProgress(progressValue);
 			
 			return dir.delete(); 
+		}
+	}
+	
+	/**
+	 * Efectua o tratamento de excepções ocorridas na aplicação, 
+	 * dando a possibilidade ao utilizador de prosseguir. 
+	 */
+	protected void handleException() {
+
+		try {
+			
+			int installationResult = JOptionPane.showConfirmDialog(null, bundle.getString("failed"), "",
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+	
+			if (installationResult != JOptionPane.OK_OPTION) {
+				getInstallerService().installFailed();
+			}
+		} catch (UnavailableServiceException e) {
+			log.severe(e.getMessage());
 		}
 	}
 }

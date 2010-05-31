@@ -53,17 +53,6 @@ public class WindowsInstaller extends Installer {
 		}
 	}
 
-	//Bruno passar para superclasse e utilizar para tratar todas as excepções!
-	private void handleException() throws UnavailableServiceException {
-
-		int installationResult = JOptionPane.showConfirmDialog(null, bundle.getString("bundle"), "",
-				JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-		if (installationResult != JOptionPane.OK_OPTION) {
-			getInstallerService().installFailed();
-		}
-	}
-
 	private boolean installXvid() throws IOException, InterruptedException {
 
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
@@ -93,13 +82,7 @@ public class WindowsInstaller extends Installer {
 		return INSTALLER_VERSION;
 	}
 
-	public static void main(String[] args) throws UnavailableServiceException {
-
-		try {
-			//Bruno deixa rebentar ou trata de alguma forma?
-			new WindowsInstaller().executeInstaller(args);
-		} catch (IOException e) {
-			//Bruno falta tratamento do erro
-		}
+	public static void main(String[] args) {
+		new WindowsInstaller().executeInstaller(args);
 	}
 }

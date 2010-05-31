@@ -1,7 +1,5 @@
 package com.linkare.rec.impl.newface.installer.mac;
 
-import java.io.IOException;
-
 import javax.jnlp.UnavailableServiceException;
 
 import com.linkare.rec.impl.newface.installer.Installer;
@@ -22,22 +20,11 @@ public class MacInstaller extends Installer {
 	private static final int INSTALLER_VERSION = 1;
 
 	public static void main(String[] args) throws UnavailableServiceException {
-
-		try {
-			//Bruno deixa rebentar ou trata de alguma forma?
-			new MacInstaller().executeInstaller(args);
-		} catch (IOException e) {
-			//Bruno fazer tratamento da excepção
-		}
+		new MacInstaller().executeInstaller(args);
 	}
 
 	@Override
 	public void installSpecificSO() {
-
-//		System.out.println(System.getProperty("java.library.path"));
-//		System.setProperty("java.library.path", "/Applications/VLC.app/Contents/MacOS/lib");
-//		System.out.println("Running mac installer");
-
 		//Bruno falta a parte de mostrar a mensagem a dizer q n foi possível instalar o JVLC.
 	}
 	
