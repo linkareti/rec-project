@@ -257,8 +257,8 @@ public class CypressFinder {
 	 * @param productId The product id to match.
 	 * @param A List of any matching UsbDevice(s).
 	 */
-	private List getUsbDevicesWithId(UsbDevice usbDevice, short vendorId, short productId) {
-		List list = new ArrayList();
+	private List<UsbDevice> getUsbDevicesWithId(UsbDevice usbDevice, short vendorId, short productId) {
+		List<UsbDevice> list = new ArrayList<UsbDevice>();
 
 		/*
 		 * A device's descriptor is always available. All descriptor field names

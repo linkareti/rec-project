@@ -35,69 +35,114 @@ public class ByteArrayValBuffer {
 	public ByteArrayValBuffer() {
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param mimeType */
 	public ByteArrayValBuffer(String mimeType) {
 		setMimeType(mimeType);
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param mimeType 
+	 * @param data */
 	public ByteArrayValBuffer(String mimeType, byte[] data) {
 		setMimeType(mimeType);
 		setData(data);
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param mimeType 
+	 * @param file_loc 
+	 * @throws FileNotFoundException 
+	 * @throws IOException */
 	public ByteArrayValBuffer(String mimeType, String file_loc) throws FileNotFoundException, IOException {
 		setMimeType(mimeType);
 		readInData(file_loc);
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param mimeType 
+	 * @param file_loc 
+	 * @param startIndex 
+	 * @throws FileNotFoundException 
+	 * @throws IOException */
 	public ByteArrayValBuffer(String mimeType, String file_loc, int startIndex) throws FileNotFoundException,
 			IOException {
 		setMimeType(mimeType);
 		readInData(file_loc, startIndex);
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param mimeType 
+	 * @param file_loc 
+	 * @param startIndex 
+	 * @param endIndex 
+	 * @throws FileNotFoundException 
+	 * @throws IOException */
 	public ByteArrayValBuffer(String mimeType, String file_loc, int startIndex, int endIndex)
 			throws FileNotFoundException, IOException {
 		setMimeType(mimeType);
 		readInData(file_loc, startIndex, endIndex);
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param mimeType 
+	 * @param url 
+	 * @throws FileNotFoundException 
+	 * @throws IOException */
 	public ByteArrayValBuffer(String mimeType, URL url) throws FileNotFoundException, IOException {
 		setMimeType(mimeType);
 		readInData(url);
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param mimeType 
+	 * @param url 
+	 * @param startIndex 
+	 * @throws FileNotFoundException 
+	 * @throws IOException */
 	public ByteArrayValBuffer(String mimeType, URL url, int startIndex) throws FileNotFoundException, IOException {
 		setMimeType(mimeType);
 		readInData(url, startIndex);
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param mimeType 
+	 * @param url 
+	 * @param startIndex 
+	 * @param endIndex 
+	 * @throws FileNotFoundException 
+	 * @throws IOException */
 	public ByteArrayValBuffer(String mimeType, URL url, int startIndex, int endIndex) throws FileNotFoundException,
 			IOException {
 		setMimeType(mimeType);
 		readInData(url, startIndex, endIndex);
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param url 
+	 * @throws FileNotFoundException 
+	 * @throws IOException */
 	public ByteArrayValBuffer(URL url) throws FileNotFoundException, IOException {
 		setMimeType(url.openConnection().getContentType());
 		readInData(url);
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param url 
+	 * @param startIndex 
+	 * @throws FileNotFoundException 
+	 * @throws IOException */
 	public ByteArrayValBuffer(URL url, int startIndex) throws FileNotFoundException, IOException {
 		setMimeType(url.openConnection().getContentType());
 		readInData(url, startIndex);
 	}
 
-	/** Creates a new instance of ByteArrayValBuffer */
+	/** Creates a new instance of ByteArrayValBuffer 
+	 * @param url 
+	 * @param startIndex 
+	 * @param endIndex 
+	 * @throws FileNotFoundException 
+	 * @throws IOException */
 	public ByteArrayValBuffer(URL url, int startIndex, int endIndex) throws FileNotFoundException, IOException {
 		setMimeType(url.openConnection().getContentType());
 		readInData(url, startIndex, endIndex);
