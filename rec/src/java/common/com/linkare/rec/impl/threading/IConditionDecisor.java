@@ -13,7 +13,7 @@ package com.linkare.rec.impl.threading;
 public interface IConditionDecisor {
 	public enum ConditionResult {
 		CONDITION_NOT_MET, CONDITION_MET_TRUE, CONDITION_MET_FALSE
-	};
+	}
 
 	public ConditionResult getConditionResult();
 

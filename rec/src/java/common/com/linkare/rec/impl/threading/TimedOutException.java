@@ -13,6 +13,12 @@ package com.linkare.rec.impl.threading;
 public class TimedOutException extends java.lang.Exception {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7306618511566262991L;
+	
+
+	/**
 	 * Creates a new instance of <code>TimedOutException</code> without detail
 	 * message.
 	 */

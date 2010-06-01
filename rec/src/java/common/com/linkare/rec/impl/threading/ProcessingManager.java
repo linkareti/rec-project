@@ -25,8 +25,8 @@ public final class ProcessingManager {
 			new LinkedBlockingQueue<Runnable>());
 
 	/**
-	 * Singleton instance A constru��o do objecto ProcessingManager de imediato
-	 * permite evitar as quest�es de multithreaded access
+	 * Singleton instance A construção do objecto ProcessingManager de imediato
+	 * permite evitar as questões de multithreaded access
 	 */
 	private final static ProcessingManager instance = new ProcessingManager();
 
@@ -38,9 +38,9 @@ public final class ProcessingManager {
 	}
 
 	/**
-	 * Este m�todo permite aceder � inst�ncia singlet�o do Processing Manager
+	 * Este método permite aceder a instância singletão do Processing Manager
 	 * 
-	 * @return A inst�ncia �nica de ProcessingManager
+	 * @return A instância única de ProcessingManager
 	 */
 
 	public static ProcessingManager getInstance() {
@@ -59,7 +59,7 @@ public final class ProcessingManager {
 			this.threadPoolMinPriority.execute(task);
 			break;
 		default:
-			System.out.println("ERRO, prioridade n�o reconhecida.....");
+			System.out.println("ERROR, Priority Level not recognized.....");
 			break;
 		}
 	}
@@ -76,7 +76,7 @@ public final class ProcessingManager {
 			this.threadPoolMinPriority.getQueue().add(task);
 			break;
 		default:
-			System.out.println("ERRO, prioridade n�o reconhecida.....");
+			System.out.println("ERROR, Priority Level not recognized.....");
 			break;
 		}
 	}
