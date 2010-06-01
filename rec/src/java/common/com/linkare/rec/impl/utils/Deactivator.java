@@ -15,7 +15,11 @@ public class Deactivator extends Thread {
 	private long DEACTIVATION_TIME = 40000;
 	private boolean deactivated = false;
 
-	/** Creates a new instance of Deactivator */
+	/**
+	 * Creates a new instance of Deactivator
+	 * 
+	 * @param deactivatable
+	 */
 	public Deactivator(Deactivatable deactivatable) {
 		super("Deactivator Thread...");
 		setDaemon(true);

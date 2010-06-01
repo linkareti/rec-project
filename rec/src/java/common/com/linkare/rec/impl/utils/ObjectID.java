@@ -12,6 +12,10 @@ package com.linkare.rec.impl.utils;
  */
 public class ObjectID implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1519605890599740771L;
 	/** Holds value of property oid. */
 	private byte[] oid;
 

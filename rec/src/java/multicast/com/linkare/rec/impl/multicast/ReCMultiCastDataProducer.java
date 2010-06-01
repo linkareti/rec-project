@@ -46,6 +46,11 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 public class ReCMultiCastDataProducer extends DataCollector implements DataProducerOperations, Deactivatable,
 		Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5596097800609305018L;
+	
 	private transient DataProducerWrapper remoteDataProducer = null;
 	private transient DataProducer _this = null;
 	private transient DataReceiverQueue dataReceiversQueue = null;
@@ -191,7 +196,6 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 			return true;
 		} else {
 			log(Level.FINE, getOID() + " is not deactivatable! State is " + getDataProducerState());
-
 			return false;
 		}
 	}

@@ -19,6 +19,11 @@ import com.linkare.rec.data.synch.FrequencyDefType;
  * @author José Pedro Pereira - Linkare TI
  */
 public class PreciseCalendar extends GregorianCalendar {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5926592879006322379L;
+	
 	private int picos = 0;
 	private int nanos = 0;
 	private int micros = 0;
@@ -32,7 +37,11 @@ public class PreciseCalendar extends GregorianCalendar {
 		setTimeInMillis(millis);
 	}
 
-	/** Creates a new instance of PreciseCalendar */
+	/**
+	 * Creates a new instance of PreciseCalendar
+	 * 
+	 * @param dateTime
+	 */
 	public PreciseCalendar(DateTime dateTime) {
 		super((int) dateTime.getDate().getYear(), (int) dateTime.getDate().getMonth(), (int) dateTime.getDate()
 				.getDay(), (int) dateTime.getTime().getHours(), (int) dateTime.getTime().getMinutes(), (int) dateTime

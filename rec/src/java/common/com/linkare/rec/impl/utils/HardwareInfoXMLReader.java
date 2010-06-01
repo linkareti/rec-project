@@ -80,7 +80,8 @@ public class HardwareInfoXMLReader {
 	/** Holds value of property hardwareInfo. */
 	private HardwareInfo hardwareInfo;
 
-	/** Creates a new instance of HardwareInfoXMLReader */
+	/** Creates a new instance of HardwareInfoXMLReader 
+	 * @param document */
 	public HardwareInfoXMLReader(Document document) {
 		this.document = document;
 	}
@@ -208,9 +209,6 @@ public class HardwareInfoXMLReader {
 					throw new RuntimeException("frequency type should be FrequencyType or SamplingIntervalType");
 			}
 			if (attr.getName().equals("multiplier")) { // <Frequency
-				// multiplier="???">
-				String multiplier = attr.getValue();
-
 				frequency.setMultiplier(readMultiplier(attr.getValue()));
 			}
 		}
@@ -652,7 +650,7 @@ public class HardwareInfoXMLReader {
 			}
 		}
 
-		Collection col = tableSelectionList.values();
+		Collection<String> col = tableSelectionList.values();
 		String[] selectionList = new String[col.size()];
 		Object[] selectionListObj = col.toArray();
 		System.arraycopy(selectionListObj, 0, selectionList, 0, selectionList.length);
