@@ -53,6 +53,8 @@
 
 	<target name="dist.client" description="Creates a zip of the client experiments selected inside dist/java">
 
+		<antcall target="copy.client.to.rec.am" />
+		
 		<mkdir dir="${dist.dir}" />
 		<zip destfile="${dist.dir}/FullClient_${today}.zip">
 			<zipfileset dir="${client.build.dir}" includes="*_sig.jar,*.jnlp" prefix="client" />
@@ -69,6 +71,15 @@
 
 	</target>
 
+	<target name="copy.client.to.rec.am">
+		<delete dir="${client.rec.am.webapp}/client" failonerror="false" />
+		<mkdir dir="${client.rec.am.webapp}/client" />
+		<copy overwrite="true" todir="${client.rec.am.webapp}/client">
+			<fileset dir="${client.build.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+	</target>
 
 	<target name="dist.multicast" description="Creates a zip file with the multicast distribution">
 
