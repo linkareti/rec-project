@@ -96,7 +96,7 @@
 		<pack.200.single.jar destination.directory="${client.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ELabClient"/>
 	</target-->
 
-	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client">
+	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
 		<create.jnlp.full.client.build />
 
 		<copy file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" tofile="${client.build.dir}/etc/ReCBaseUIConfig.xml">
