@@ -17,7 +17,7 @@ import com.linkare.rec.impl.logging.LoggerUtil;
  * @author José Pedro Pereira - Linkare TI
  */
 public final class SecurityManagerFactory {
-	private static SecurityManagerFactory instance = null;
+	private static SecurityManagerFactory instance = new SecurityManagerFactory();
 
 	private ISecurityManager secManager = null;
 
@@ -36,7 +36,7 @@ public final class SecurityManagerFactory {
 
 	private void loadSecurityManager() {
 		String secManagerClassName = System.getProperty(SYSPROP_SECURITY_MANAGER_CLASS);
-		if (secManagerClassName == null || secManagerClassName.trim().length()==0) {
+		if (secManagerClassName == null || secManagerClassName.trim().length() == 0) {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"SecurityManager System Property not found... Loading DefaultSecurityManager!");
 			secManager = new DefaultSecurityManager();
@@ -50,7 +50,17 @@ public final class SecurityManagerFactory {
 							+ " - loading DefaultSecurityManager!");
 			LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
 					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
-			secManager = new DefaultSecurityManager();
+		} catch (NoClassDefFoundError e) {
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+					Level.INFO,
+					"Unable to load SecurityManager defined at system : " + secManagerClassName
+							+ " - loading DefaultSecurityManager!");
+			LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
+					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+		} finally {
+			if (secManager == null) {
+				secManager = new DefaultSecurityManager();
+			}
 		}
 
 	}
@@ -61,9 +71,6 @@ public final class SecurityManagerFactory {
 	}
 
 	private static SecurityManagerFactory getInstance() {
-		if (instance == null)
-			instance = new SecurityManagerFactory();
-
 		return instance;
 	}
 

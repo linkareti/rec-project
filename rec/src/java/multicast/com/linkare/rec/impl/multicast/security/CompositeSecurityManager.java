@@ -50,6 +50,11 @@ public class CompositeSecurityManager implements ISecurityManager {
 						"Unable to load SecurityManager defined at system : " + className + " - ignoring!");
 				LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
 						.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			} catch (NoClassDefFoundError e) {
+				Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+						"Unable to load SecurityManager defined at system : " + className + "!");
+				LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
+						.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
 			}
 		}
 	}
