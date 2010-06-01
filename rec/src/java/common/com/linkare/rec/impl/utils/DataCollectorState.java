@@ -4,7 +4,14 @@ import com.linkare.rec.acquisition.DataProducerState;
 
 //Version 7.0 Change - added state to DataProducer... simpler to maintain
 public class DataCollectorState implements java.io.Serializable {
-	private byte value;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3583154368813945489L;
+
+	
+	private byte value=0x0;
 
 	public static final byte _DP_WAITING = DataProducerState._DP_WAITING;
 	public static final DataCollectorState DP_WAITING = new DataCollectorState(_DP_WAITING);
@@ -91,10 +98,19 @@ public class DataCollectorState implements java.io.Serializable {
 		return new DataProducerState(getValue());
 	}
 
+	@Override
 	public boolean equals(Object other) {
 		if (other == null || !(other instanceof DataCollectorState))
 			return false;
 
 		return ((DataCollectorState) other).getValue() == getValue();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return this.getValue();
 	}
 } // class DataCollectorState
