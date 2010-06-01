@@ -439,7 +439,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				Object source = (e != null) ? e.getSource() : null;
 				Component owner = (source instanceof Component) ? (Component) source : null;
 				int option = JOptionPane.showConfirmDialog(owner, resourceMap
-						.getString("Application.exitListener.message"));
+						.getString("Application.exitListener.message"), resourceMap
+						.getString("Application.confirmationDialog.message"), JOptionPane.YES_NO_OPTION);
 				return option == JOptionPane.YES_OPTION;
 			}
 
