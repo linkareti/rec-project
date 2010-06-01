@@ -41,8 +41,18 @@
 		<ant antfile="recbuild.xml" dir="." target="build.all" />
 		<ant antfile="elabbuild.xml" dir="." target="build.all" />
 		<ant antfile="experimentsbuild.xml" dir="." target="build.experiments.list" />
+		<ant antfile="buildall.xml" dir="." target="copy.client.to.rec.am" />
 	</target>
 
+	<target name="copy.client.to.rec.am">
+		<delete dir="${client.rec.am.webapp}/client" failonerror="false" />
+		<mkdir dir="${client.rec.am.webapp}/client" />
+		<copy overwrite="true" todir="${client.rec.am.webapp}/client">
+			<fileset dir="${client.build.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
           target: dist.all
@@ -53,8 +63,6 @@
 
 	<target name="dist.client" description="Creates a zip of the client experiments selected inside dist/java">
 
-		<antcall target="copy.client.to.rec.am" />
-		
 		<mkdir dir="${dist.dir}" />
 		<zip destfile="${dist.dir}/FullClient_${today}.zip">
 			<zipfileset dir="${client.build.dir}" includes="*_sig.jar,*.jnlp" prefix="client" />
@@ -71,16 +79,6 @@
 
 	</target>
 
-	<target name="copy.client.to.rec.am">
-		<delete dir="${client.rec.am.webapp}/client" failonerror="false" />
-		<mkdir dir="${client.rec.am.webapp}/client" />
-		<copy overwrite="true" todir="${client.rec.am.webapp}/client">
-			<fileset dir="${client.build.dir}">
-				<include name="**/*" />
-			</fileset>
-		</copy>
-	</target>
-
 	<target name="dist.multicast" description="Creates a zip file with the multicast distribution">
 
 		<mkdir dir="${dist.dir}" />
@@ -95,7 +93,7 @@
 			<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
 			<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
 		</replace>
-		
+
 		<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/etc/loggers.config.properties" />
 
 		<zip destfile="${dist.dir}/multicast_${today}.zip">
@@ -128,7 +126,7 @@
 			<copy file="${templates.dir.scripts}/StartExperiment.sh" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.sh" />
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" token="@experiment.name@" value="@{experiment.name}" />
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="build.properties">
-				<replacefilter token="@experiment.name@" value="@{experiment.name}"/>
+				<replacefilter token="@experiment.name@" value="@{experiment.name}" />
 				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
 				<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
@@ -142,7 +140,7 @@
 			<copy file="${templates.dir.scripts}/StartExperiment.bat" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" token="@experiment.name@" value="@{experiment.name}" />
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="build.properties">
-				<replacefilter token="@experiment.name@" value="@{experiment.name}"/>
+				<replacefilter token="@experiment.name@" value="@{experiment.name}" />
 				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
 				<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
@@ -156,10 +154,10 @@
 
 			<copy file="${templates.dir.logs}/hardwareserver.loggers.config.properties" overwrite="yes" tofile="${experiments.build.dir}/etc/loggers.config.properties" />
 			<replace file="${experiments.build.dir}/etc/loggers.config.properties" propertyFile="build.properties">
-				<replacefilter token="@experiment.name@" value="@{experiment.name}"/>
+				<replacefilter token="@experiment.name@" value="@{experiment.name}" />
 			</replace>
-			
-			
+
+
 			<zip destfile="${dist.dir}/@{experiment.name}HarwareServer_${today}.zip">
 				<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
 				<zipfileset file="${hardwareserver.build.dir}/ELabHardwareServer.jar" prefix="hardwareserver" />
