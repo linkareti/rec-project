@@ -50,7 +50,7 @@ public final class SecurityManagerFactory {
 							+ " - loading DefaultSecurityManager!");
 			LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
 					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
-		} catch (NoClassDefFoundError e) {
+		} catch (LinkageError e) {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 					Level.INFO,
 					"Unable to load SecurityManager defined at system : " + secManagerClassName
