@@ -96,7 +96,7 @@
 		<pack.200.single.jar destination.directory="${client.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ELabClient"/>
 	</target-->
 
-	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client,copy.client.to.rec.am">
+	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client,sign.elab.client">
 		<create.jnlp.full.client.build />
 
 		<copy file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" tofile="${client.build.dir}/etc/ReCBaseUIConfig.xml">
@@ -116,12 +116,14 @@
 
 		<sign.all.jars.in.directory.rec.certificate source.dir.name="${elab.client.lib.dir}" destination.dir.name="${client.build.dir}/lib" />
 
+		<antcall target="copy.client.to.rec.am" />
+
 	</target>
 
 	<target name="copy.client.to.rec.am">
-		<delete dir="${client.rec.am.webapps}/client" />
-		<mkdir dir="${client.rec.am.webapps}/client" />
-		<copy overwrite="true" todir="${client.rec.am.webapps}/client">
+		<delete dir="${client.rec.am.webapp}/client" failonerror="false" />
+		<mkdir dir="${client.rec.am.webapp}/client" />
+		<copy overwrite="true" todir="${client.rec.am.webapp}/client">
 			<fileset dir="${client.build.dir}">
 				<include name="**/*" />
 			</fileset>
