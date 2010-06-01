@@ -1,6 +1,7 @@
 <apparatus toolTipBundleKey="g$rec.exp.tip.g" location="ELAB_G_STAMP_V02"
 	iconLocationBundleKey="g$rec.exp.icon.g"
 	headerDisplayClassLocationBundleKey="" displayStringBundleKey="g$rec.exp.title.g"
+	descriptionStringBundleKey="g$rec.exp.description.g"
 	displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="g$rec.exp.background.g"
 	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="g$rec.exp.customizer.g"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
