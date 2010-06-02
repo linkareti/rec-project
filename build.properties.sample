@@ -50,15 +50,15 @@ com.linkare.rec.impl.vendor=Linkare TI
 
 ###########################SYSTEM PROPERTIES###############################
 rec.multicastcontroller.bindname=MultiCastController 
-rec.multicastcontroller.initref=MultiCastController 
+rec.multicastcontroller.initref=MultiCastController
 java.util.logging.config.file=loggers.config.properties
 org.omg.CORBA.ORBClass=org.openorb.orb.core.ORB 
 org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton 
 com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl
 
 ##MULTICAST PROPERTIES - MULTICAST##
-multicast.openorb.profile=recMultiCastController 
-rec.multicast.securitymanager=pt.utl.ist.elab.security.ElabSecurityManager 
+multicast.openorb.profile=recMultiCastController
+rec.multicast.securitymanager=pt.utl.ist.elab.security.ElabSecurityManager
 rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE=15 
 multicast.debug.address.port=8000
 multicast.controller.host=localhost
@@ -88,16 +88,16 @@ href=ElabFullClient.jnlp
 title=eLab - Full Laboratory
 vendor=I.S.T. - U.T.L.
 homepage=http://elab.ist.utl.pt/rec
-one-line=Estatistica de dados
-tooltip=Estatistica de dados
-short=Estatistica de dados
+one-line=Laboratório eLab - ME
+tooltip=Laboratório eLab - ME
+short=Laboratório eLab - ME
 j2se-version=1.6
 
 
 ##MAIN CLASSES FOR THE VARIOUS COMPONENTS
 #Old interface Main Class - pt.utl.ist.elab.client.FullClient
 #Newface Main Class - pt.utl.ist.elab.client.FullClientNewInterface
-client.main-class=pt.utl.ist.elab.client.FullClient
+client.main-class=pt.utl.ist.elab.client.FullClientNewInterface
 multicast.main-class=com.linkare.rec.impl.multicast.startup.MultiCastControllerMain
 experiment.client.main-class=pt.utl.ist.elab.client.@{experiment.name}.ClientMain
 experiment.driver.main-class=pt.utl.ist.elab.driver.@{experiment.name}.ServerMain
