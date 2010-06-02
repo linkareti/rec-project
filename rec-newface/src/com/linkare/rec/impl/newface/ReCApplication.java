@@ -232,6 +232,9 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	/** ResourceMap shortcut */
 	private ResourceMap resourceMap;
+	
+	/** Yes No Options text */
+	private Object[] dialogYesNoOptions;
 
 	/** Holds the listeners to the ReC Application underlying model changes */
 	private List<ReCApplicationListener> appListeners;
@@ -410,6 +413,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		super.initialize(args);
 
 		resourceMap = getContext().getResourceMap();
+		
+		// read yes no option text
+		String yesOption = resourceMap.getString("Application.confirmationDialog.option.yes");
+		String noOption = resourceMap.getString("Application.confirmationDialog.option.no");
+		dialogYesNoOptions = new Object [2];
+		dialogYesNoOptions[0] = yesOption;
+		dialogYesNoOptions[1] = noOption;
 
 		if (log.isLoggable(Level.FINE)) {
 			log.fine("Initializing system properties...");
@@ -438,9 +448,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			public boolean canExit(EventObject e) {
 				Object source = (e != null) ? e.getSource() : null;
 				Component owner = (source instanceof Component) ? (Component) source : null;
-				int option = JOptionPane.showConfirmDialog(owner, resourceMap
+				int option = JOptionPane.showOptionDialog(owner, resourceMap
 						.getString("Application.exitListener.message"), resourceMap
-						.getString("Application.confirmationDialog.message"), JOptionPane.YES_NO_OPTION);
+						.getString("Application.confirmationDialog.message"), JOptionPane.YES_NO_OPTION, 
+						JOptionPane.QUESTION_MESSAGE, null, dialogYesNoOptions, dialogYesNoOptions[0]);
 				return option == JOptionPane.YES_OPTION;
 			}
 
