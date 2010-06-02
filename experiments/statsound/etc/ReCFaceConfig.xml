@@ -2,6 +2,7 @@
 	location="ELAB_STATSOUND_STAMP_V01" iconLocationBundleKey="statsound$rec.exp.icon.statsound"
 	headerDisplayClassLocationBundleKey=""
 	displayStringBundleKey="statsound$rec.exp.title.statsound"
+	descriptionStringBundleKey="statsound$rec.exp.description.statsound"
 	displayFactoryClassLocationBundleKey=""
 	desktopLocationBundleKey="statsound$rec.exp.background.statsound"
 	dataModelClassLocationBundleKey=""
