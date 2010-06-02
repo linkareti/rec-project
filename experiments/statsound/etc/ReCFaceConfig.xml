@@ -1,14 +1,13 @@
 <apparatus toolTipBundleKey="statsound$rec.exp.tip.statsound"
 	location="ELAB_STATSOUND_STAMP_V01" iconLocationBundleKey="statsound$rec.exp.icon.statsound"
-	headerDisplayClassLocationBundleKey=""
-	displayStringBundleKey="statsound$rec.exp.title.statsound"
+	headerDisplayClassLocationBundleKey="" displayStringBundleKey="statsound$rec.exp.title.statsound"
 	descriptionStringBundleKey="statsound$rec.exp.description.statsound"
 	displayFactoryClassLocationBundleKey=""
 	desktopLocationBundleKey="statsound$rec.exp.background.statsound"
 	dataModelClassLocationBundleKey=""
 	customizerClassLocationBundleKey="statsound$rec.exp.customizer.statsound"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
-		<localizationBundle name="statsound"
+	<localizationBundle name="statsound"
 		location="recresource:///pt/utl/ist/elab/client/statsound/resources/messages" />
 	<mediaConfig videoLocation="statsound$rec.exp.url.statsound.video"
 		canSave="true" offlinePlay="true" />
