@@ -1,13 +1,14 @@
 <apparatus toolTipBundleKey="aleatorio$rec.exp.tip.aleatorio"
 	location="ELAB_ALEATORIO_V02" iconLocationBundleKey="aleatorio$rec.exp.icon.aleatorio"
 	headerDisplayClassLocationBundleKey=""
+	descriptionStringBundleKey="aleatorio$rec.exp.description.aleatorio"
 	displayStringBundleKey="aleatorio$rec.exp.title.aleatorio"
 	displayFactoryClassLocationBundleKey=""
 	desktopLocationBundleKey="aleatorio$rec.exp.background.aleatorio"
 	dataModelClassLocationBundleKey=""
 	customizerClassLocationBundleKey="aleatorio$rec.exp.customizer.aleatorio"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
-		<localizationBundle name="aleatorio"
+	<localizationBundle name="aleatorio"
 		location="recresource:///pt/utl/ist/elab/client/aleatorio/resources/messages" />
 	<mediaConfig videoLocation="aleatorio$rec.exp.url.aleatorio.video"
 		canSave="true" offlinePlay="true" />
@@ -32,10 +33,10 @@
 		classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.4"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.5"
-	offlineCapable="true" iconLocationBundleKey="aleatorio$rec.exp.display.aleatorio.icon.1"
-	displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.5"
-	classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.5"
-	visible="true" selected="true" order="0" enabled="false" connected="false" />
+		offlineCapable="true" iconLocationBundleKey="aleatorio$rec.exp.display.aleatorio.icon.1"
+		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.5"
+		classLocationBundleKey="aleatorio$rec.exp.display.aleatorio.loc.5"
+		visible="true" selected="true" order="0" enabled="false" connected="false" />
 	<webResource toolTipLocationBundleKey="" internalBrowser="false"
 		iconLocationBundleKey="" visible="true" selected="true" order="0"
 		enabled="false" connected="false" />
