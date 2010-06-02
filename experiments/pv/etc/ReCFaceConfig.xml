@@ -1,10 +1,10 @@
-<apparatus toolTipBundleKey="pv$rec.exp.tip.pv"
-	location="ELAB_PV_STAMP_V02" iconLocationBundleKey="pv$rec.exp.icon.pv"
+<apparatus toolTipBundleKey="pv$rec.exp.tip.pv" location="ELAB_PV_STAMP_V02"
+	iconLocationBundleKey="pv$rec.exp.icon.pv" descriptionStringBundleKey="pv$rec.exp.description.pv"
 	headerDisplayClassLocationBundleKey="" displayStringBundleKey="pv$rec.exp.title.pv"
 	displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="pv$rec.exp.background.pv"
 	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="pv$rec.exp.customizer.pv"
 	visible="true" selected="true" order="0" enabled="false" connected="false">
-		<localizationBundle name="pv"
+	<localizationBundle name="pv"
 		location="recresource:///pt/utl/ist/elab/client/pv/resources/messages" />
 	<defaultAcquisitionConfig toolTipBundleKey="pv$rec.exp.dftcfg.pv.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
@@ -16,8 +16,8 @@
 	<display toolTipBundleKey="pv$rec.exp.display.pv.tip.sensor"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
 		displayStringBundleKey="pv$rec.exp.display.pv.title.sensor"
-		classLocationBundleKey="pv$rec.exp.display.pv.loc.sensor"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		classLocationBundleKey="pv$rec.exp.display.pv.loc.sensor" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<display toolTipBundleKey="pv$rec.exp.display.pv.tip.1"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
 		displayStringBundleKey="pv$rec.exp.display.pv.title.1"
