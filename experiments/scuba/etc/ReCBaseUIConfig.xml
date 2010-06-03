@@ -1,6 +1,7 @@
 <Apparatus location="ELAB_SCUBA_STAMP_V02"
 	customizerClassLocationBundleKey="scuba$rec.exp.customizer.scuba"
 	toolTipBundleKey="scuba$rec.exp.tip.scuba" iconLocationBundleKey="scuba$rec.exp.icon.scuba"
+	descriptionStringBundleKey="scuba$rec.exp.description.scuba"
 	displayStringBundleKey="scuba$rec.exp.title.scuba"
 	desktopLocationBundleKey="scuba$rec.exp.background.scuba" order="1">
 	<LocalizationBundle name="scuba"
