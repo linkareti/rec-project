@@ -1,6 +1,7 @@
 <Apparatus location="ELAB_G_STAMP_V02"
 	customizerClassLocationBundleKey="g$rec.exp.customizer.g"
 	toolTipBundleKey="g$rec.exp.tip.g" iconLocationBundleKey="g$rec.exp.icon.g"
+	descriptionStringBundleKey="g$rec.exp.description.g"
 	displayStringBundleKey="g$rec.exp.title.g" desktopLocationBundleKey="g$rec.exp.background.g"
 	order="1">
 	<LocalizationBundle name="g"
