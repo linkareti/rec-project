@@ -14,6 +14,13 @@ copy.encoding=UTF-8
 #list of experiments in ELab
 experiment.list=aleatorio,gamma,vtiro,vpend2m
 
+#In case you wish to run a specific experiment
+#please define the following property to enable
+#just that specific experiment. In every case,
+#the main targets will compile/build/distribute all
+#the experiments defined in the experiment.list
+#experiment.name=vtiro
+
 ###DEPLOYMENT####
 rec.server=
 rec.server.dir=
