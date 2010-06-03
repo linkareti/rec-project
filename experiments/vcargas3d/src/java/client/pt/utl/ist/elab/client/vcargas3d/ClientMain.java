@@ -25,6 +25,6 @@ public class ClientMain {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("CARGAS3D_V1.0");
-		ui.show();
+		ui.setVisible(true);
 	}
 }

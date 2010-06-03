@@ -154,7 +154,7 @@ public class FERHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 		FERHistogram ferim = new FERHistogram();
 		test.getContentPane().add(ferim);
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	public void dataModelEnded() {

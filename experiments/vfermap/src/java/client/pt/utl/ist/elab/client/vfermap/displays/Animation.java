@@ -47,7 +47,7 @@ public class Animation extends FERMAPAnima implements ExpDataDisplay, ExpDataMod
 		Animation ferim = new Animation();
 		test.getContentPane().add(ferim);
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	public void dataModelEnded() {

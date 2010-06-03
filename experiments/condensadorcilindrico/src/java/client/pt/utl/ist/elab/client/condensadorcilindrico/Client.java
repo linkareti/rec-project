@@ -24,6 +24,6 @@ public class Client {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("ELAB_CC_STAMP_V02");
-		ui.show();
+		ui.setVisible(true);
 	}
 }

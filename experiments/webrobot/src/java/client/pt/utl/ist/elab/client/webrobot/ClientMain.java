@@ -25,6 +25,6 @@ public class ClientMain {
 		javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("ELAB_WEBROBOT_V01");
-		ui.show();
+		ui.setVisible(true);
 	}
 }

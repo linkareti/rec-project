@@ -74,7 +74,7 @@ public class Animation extends JPanel implements ExpDataDisplay, ExpDataModelLis
 	 * java.awt.event.WindowAdapter() { public void
 	 * windowClosing(java.awt.event.WindowEvent e) { System.exit(0); }; });
 	 * Animation stdim = new Animation(); test.getContentPane().add(stdim);
-	 * test.pack(); test.show(); stdim.start(); }
+	 * test.pack(); test.setVisible(true); stdim.start(); }
 	 */
 
 	public void dataModelEnded() {

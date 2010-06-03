@@ -23,6 +23,6 @@ public class ClientMain {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("ELAB_RAD_STAMP_V02");
-		ui.show();
+		ui.setVisible(true);
 	}
 }

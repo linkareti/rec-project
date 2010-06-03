@@ -21,7 +21,7 @@ public class ClientMain {
 		/*
 		 * JFrame.setDefaultLookAndFeelDecorated(true); ReCBaseUI ui=new
 		 * ReCBaseUI(); initUI(ui);
-		 * //ui.setApparatusAutoConnectId("EXP_RAYLEIGH_STAMP_V1.1"); ui.show();
+		 * //ui.setApparatusAutoConnectId("EXP_RAYLEIGH_STAMP_V1.1"); ui.setVisible(true);
 		 */
 	}
 

@@ -40,7 +40,7 @@ public class Atribui extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 		model = new pt.utl.ist.elab.client.webrobot.customizer.Models.ModelAtribui();
 		confAtribui = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfAtribui(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confAtribui);
-		confAtribui.show();
+		confAtribui.setVisible(true);
 		if (confAtribui.isCancel()) {
 			setCancel(true);
 			return;
@@ -113,7 +113,7 @@ public class Atribui extends pt.utl.ist.elab.client.webrobot.customizer.Comps.Bl
 	public void edit(javax.swing.JFrame parent) {
 		confAtribui = new pt.utl.ist.elab.client.webrobot.customizer.Comps.Configs.ConfAtribui(parent, true, model);
 		new pt.utl.ist.elab.client.webrobot.customizer.Utils.CenterFrame(parent, confAtribui);
-		confAtribui.show();
+		confAtribui.setVisible(true);
 	}
 
 	public int getTipo() {

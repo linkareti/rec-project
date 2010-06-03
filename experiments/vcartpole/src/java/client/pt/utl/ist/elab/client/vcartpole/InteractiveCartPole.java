@@ -162,6 +162,6 @@ public class InteractiveCartPole extends CartPole implements InteractionListener
 		});
 		test.getContentPane().add(new InteractiveCartPole());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 }

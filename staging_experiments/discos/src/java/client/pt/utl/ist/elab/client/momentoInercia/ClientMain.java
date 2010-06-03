@@ -24,7 +24,7 @@ public class ClientMain {
 		ReCBaseUI ui = new ReCBaseUI();
 		initUI(ui);
 		ui.setApparatusAutoConnectID("EXP_ANGULAR_STAMP_V1.0");
-		ui.show();
+		ui.setVisible(true);
 	}
 
 	public static void initUI(ReCBaseUI ui) {

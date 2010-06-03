@@ -1351,7 +1351,7 @@ public class CartPoleCustomizer extends javax.swing.JPanel implements
 		});
 		test.getContentPane().add(new CartPoleCustomizer());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	public void update() {

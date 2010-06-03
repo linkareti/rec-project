@@ -133,7 +133,7 @@ public class Chart1 extends com.linkare.rec.impl.baseUI.graph.DefaultXYExperimen
 	 * java.awt.event.WindowAdapter() { public void
 	 * windowClosing(java.awt.event.WindowEvent e) { System.exit(0); }; });
 	 * Chart1 stdim = new Chart1(); test.getContentPane().add(stdim);
-	 * test.pack(); test.show(); stdim.start(); }
+	 * test.pack(); test.setVisible(true); stdim.start(); }
 	 */
 	public static byte[] nameToChannels(String name) {
 		String[] str = name.split(" vs ");

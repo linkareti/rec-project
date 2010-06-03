@@ -23,6 +23,6 @@ public class ClientMain {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("EXP_PLANCK_STAMP_V1.1");
-		ui.show();
+		ui.setVisible(true);
 	}
 }

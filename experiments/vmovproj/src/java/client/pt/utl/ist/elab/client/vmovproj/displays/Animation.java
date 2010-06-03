@@ -149,7 +149,7 @@ public class Animation extends MovProj implements ExpDataDisplay, ExpDataModelLi
 		 * test.addWindowListener(new java.awt.event.WindowAdapter() { public
 		 * void windowClosing(java.awt.event.WindowEvent e) { System.exit(0); };
 		 * }); Animation stdim = new Animation();
-		 * test.getContentPane().add(stdim); test.pack(); test.show();
+		 * test.getContentPane().add(stdim); test.pack(); test.setVisible(true);
 		 * stdim.start();
 		 */
 	}

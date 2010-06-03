@@ -982,7 +982,7 @@ public class UserAnalysisPanel extends javax.swing.JPanel implements
 		UserAnalysisPanel uap = new UserAnalysisPanel();
 		test.getContentPane().add(uap);
 		test.pack();
-		test.show();
+		test.setVisible(true);
 		try {
 			Image img = javax.imageio.ImageIO.read(new java.io.File("/home/andre/Image1.jpg"));
 			uap.imageAnalyser.setOriginalImage(img);

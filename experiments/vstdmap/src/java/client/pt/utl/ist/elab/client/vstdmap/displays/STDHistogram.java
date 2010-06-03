@@ -141,7 +141,7 @@ public class STDHistogram extends PlottingPanel implements ExpDataDisplay, ExpDa
 		STDHistogram stdim = new STDHistogram();
 		test.getContentPane().add(stdim);
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	public void dataModelEnded() {

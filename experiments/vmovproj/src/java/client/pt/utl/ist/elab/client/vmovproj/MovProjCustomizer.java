@@ -2197,7 +2197,7 @@ public class MovProjCustomizer extends javax.swing.JPanel implements
 		});
 		test.getContentPane().add(new MovProjCustomizer());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	// ****************************REC********************************************/

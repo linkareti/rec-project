@@ -907,7 +907,7 @@ public class Pend2MCustomizer extends javax.swing.JPanel implements com.linkare.
 		});
 		test.getContentPane().add(new Pend2MCustomizer());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	// ****************************REC********************************************/

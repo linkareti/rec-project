@@ -2275,7 +2275,7 @@ public class MvBrownCustomizer extends javax.swing.JPanel implements com.linkare
 		});
 		test.getContentPane().add(new MvBrownCustomizer());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	// ****************************REC********************************************/

@@ -192,7 +192,7 @@ public class FERMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 		FERMAPImage ferim = new FERMAPImage();
 		test.getContentPane().add(ferim);
 		test.pack();
-		test.show();
+		test.setVisible(true);
 
 		ferim.start();
 	}

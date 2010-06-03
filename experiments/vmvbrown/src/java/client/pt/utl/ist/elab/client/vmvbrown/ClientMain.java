@@ -23,6 +23,6 @@ public class ClientMain {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("MOVIMENTO_BROWNIANO_V1.0");
-		ui.show();
+		ui.setVisible(true);
 	}
 }

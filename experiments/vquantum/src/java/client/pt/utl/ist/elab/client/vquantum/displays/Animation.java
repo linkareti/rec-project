@@ -72,7 +72,7 @@ public class Animation extends Quantum implements ExpDataDisplay, ExpDataModelLi
 		Animation stdim = new Animation();
 		test.getContentPane().add(stdim);
 		test.pack();
-		test.show();
+		test.setVisible(true);
 		stdim.start();
 	}
 

@@ -1625,7 +1625,7 @@ public class STDMAPCustomizer extends javax.swing.JPanel implements com.linkare.
 		});
 		test.getContentPane().add(new STDMAPCustomizer());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	// ****************************REC********************************************/

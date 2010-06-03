@@ -23,6 +23,6 @@ public class ClientMain {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("ELAB_POLAROID_V1.3");
-		ui.show();
+		ui.setVisible(true);
 	}
 }

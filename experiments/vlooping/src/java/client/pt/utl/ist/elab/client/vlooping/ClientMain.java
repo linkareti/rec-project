@@ -24,6 +24,6 @@ public class ClientMain {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("LOOPING_V1.0");
-		ui.show();
+		ui.setVisible(true);
 	}
 }

@@ -838,7 +838,7 @@ public class CGCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		});
 		test.getContentPane().add(new CGCustomizer());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	// ****************************REC********************************************/

@@ -98,7 +98,7 @@ public class STDMAPImage extends MAPanel implements ExpDataDisplay, ExpDataModel
 		STDMAPImage stdim = new STDMAPImage();
 		test.getContentPane().add(stdim);
 		test.pack();
-		test.show();
+		test.setVisible(true);
 
 		stdim.start();
 	}

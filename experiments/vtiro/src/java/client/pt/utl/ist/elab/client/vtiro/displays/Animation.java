@@ -45,7 +45,7 @@ public class Animation extends Tiro implements ExpDataDisplay, ExpDataModelListe
 //		Animation stdim = new Animation();
 //		test.getContentPane().add(stdim);
 //		test.pack();
-//		test.show();
+//		test.setVisible(true);
 //		stdim.start();
 //	}
 

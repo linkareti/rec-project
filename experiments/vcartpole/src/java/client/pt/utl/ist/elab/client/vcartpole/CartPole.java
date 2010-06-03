@@ -672,7 +672,7 @@ public class CartPole extends DrawingPanel3D implements ActionListener, MouseLis
 		});
 		test.getContentPane().add(new CartPole());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	public void componentHidden(ComponentEvent e) {

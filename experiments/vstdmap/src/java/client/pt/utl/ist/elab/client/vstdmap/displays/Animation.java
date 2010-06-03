@@ -44,7 +44,7 @@ public class Animation extends STDMAPAnima implements ExpDataDisplay, ExpDataMod
 		Animation stdim = new Animation();
 		test.getContentPane().add(stdim);
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	public void dataModelEnded() {

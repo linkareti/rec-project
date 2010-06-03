@@ -1456,7 +1456,7 @@ public class QuantumCustomizer extends javax.swing.JPanel implements
 		});
 		test.getContentPane().add(new QuantumCustomizer());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	// ****************************REC********************************************/

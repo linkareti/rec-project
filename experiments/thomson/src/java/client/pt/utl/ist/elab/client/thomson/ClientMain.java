@@ -23,6 +23,6 @@ public class ClientMain {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("ELAB_THOMSON_STAMP_V01");
-		ui.show();
+		ui.setVisible(true);
 	}
 }

@@ -23,7 +23,7 @@ public class Client {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("ELAB_CONDCALOR_STAMP_V1.0");
-		ui.show();
+		ui.setVisible(true);
 	}
 
 }

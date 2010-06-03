@@ -27,7 +27,7 @@ public class ClientMain {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
 		ui.setApparatusAutoConnectID("MOLAS3_V1.0");
-		ui.show();
+		ui.setVisible(true);
 		// TODO code application logic here
 	}
 
