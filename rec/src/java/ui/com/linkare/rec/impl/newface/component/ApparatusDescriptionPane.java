@@ -63,18 +63,20 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 			String descriptionStringBundleKey = null;
 			String webResourceLocation = null;
 			
-			if (apparatusConfig.getDesktopLocationBundleKey() != null) {
+			if (apparatusConfig.getDesktopLocationBundleKey() != null && apparatusConfig.getDesktopLocationBundleKey().trim().length()>0) {
 				desktopLocationBundleKey = apparatusConfig.getDesktopLocationBundleKey();
 			}
-			if (apparatusConfig.getDisplayStringBundleKey() != null) {
+			if (apparatusConfig.getDisplayStringBundleKey() != null && apparatusConfig.getDisplayStringBundleKey().trim().length()>0) {
 				displayStringBundleKey = apparatusConfig.getDisplayStringBundleKey();
 			}
-			if (apparatusConfig.getDescriptionStringBundleKey() != null) {
+			if (apparatusConfig.getDescriptionStringBundleKey() != null && apparatusConfig.getDescriptionStringBundleKey().trim().length()>0) {
 				descriptionStringBundleKey = apparatusConfig.getDescriptionStringBundleKey();
 			}
 			if (apparatusConfig.getWebResource() != null && apparatusConfig.getWebResource().size() > 0) {
 				String webResourceLocationBundleKey = null;
 				try {
+					//FIXME HFernandes - You should support more than one webresource... That is not uncommon... So, please, add links for every resource
+					//And then again, why are the links handled as buttons and not as hyperlinks inside some html... Please see the way we do it in Chat
 					// Get the first web resource for the link
 					WebResource webResource = apparatusConfig.getWebResource().get(0);
 					webResourceLocationBundleKey = webResource.getLocationBundleKey();
