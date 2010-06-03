@@ -89,7 +89,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 		try {
 			return findString(bundleName, key);
 		} catch (Exception e) {
-			logThrowable("Couldn't find key " + key + " on bundle " + bundleName, e);
+			logThrowable("Couldn't find key '" + key + "' on bundle " + bundleName, e);
 			return defaultValue;
 		}
 	}
@@ -99,7 +99,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 		try {
 			return findImageIcon(bundleName, key);
 		} catch (Exception e) {
-			logThrowable("Couldn't find key " + key + " on bundle " + bundleName, e);
+			logThrowable("Couldn't find key '" + key + "' on bundle " + bundleName, e);
 			return defaultValue;
 		}
 	}
@@ -109,7 +109,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 		try {
 			return findObject(bundleName, key);
 		} catch (Exception e) {
-			logThrowable("Couldn't find key " + key + " on bundle " + bundleName, e);
+			logThrowable("Couldn't find key '" + key + "' on bundle " + bundleName, e);
 			return defaultValue;
 		}
 	}
@@ -146,14 +146,14 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 			}
 		}
 
-		throw new MissingResourceException("Key not found in any bundle here", ReCResourceBundle.class.getName(), key);
+		throw new MissingResourceException("Key '"+key+"' not found in any bundle here", ReCResourceBundle.class.getName(), key);
 	}
 
 	public static String findStringOrDefault(String key, String defaultValue) throws MissingResourceException {
 		try {
 			return findString(key);
 		} catch (Exception e) {
-			logThrowable("Couldn't find key " + key + " on any bundle!", e);
+			logThrowable("Couldn't find key '" + key + "' on any bundle!", e);
 			return defaultValue;
 		}
 	}
@@ -162,7 +162,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 		try {
 			return findImageIcon(key);
 		} catch (Exception e) {
-			logThrowable("Couldn't find key " + key + " on any bundle!", e);
+			logThrowable("Couldn't find key '" + key + "' on any bundle!", e);
 			return defaultValue;
 		}
 	}
@@ -171,7 +171,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 		try {
 			return findObject(key);
 		} catch (Exception e) {
-			logThrowable("Couldn't find key " + key + " on any bundle!", e);
+			logThrowable("Couldn't find key '" + key + "' on any bundle!", e);
 			return defaultValue;
 		}
 	}
