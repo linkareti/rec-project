@@ -17,6 +17,11 @@ import org.opensourcephysics.displayejs.InteractiveParticle;
  */
 public class InteractiveTiro extends Tiro implements InteractionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8579125164257042254L;
+
 	/** Creates a new instance of InteractiveBalancaTorsao */
 	public InteractiveTiro() {
 		super();
@@ -65,6 +70,6 @@ public class InteractiveTiro extends Tiro implements InteractionListener {
 		});
 		test.getContentPane().add(new InteractiveTiro());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 }

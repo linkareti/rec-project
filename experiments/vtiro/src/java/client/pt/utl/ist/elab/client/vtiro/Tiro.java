@@ -303,7 +303,7 @@ public class Tiro extends DrawingPanel3D implements ActionListener, MouseListene
 		});
 		test.getContentPane().add(new Tiro());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	public void doSaveAs() throws IOException {

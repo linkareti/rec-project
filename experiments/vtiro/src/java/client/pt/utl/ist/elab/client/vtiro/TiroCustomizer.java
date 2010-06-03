@@ -17,6 +17,10 @@ import com.linkare.rec.impl.client.customizer.ICustomizerListener;
  */
 public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7955478140331063895L;
 	private InteractiveTiro tiro;
 
 	/** Creates new form TiroCustomizer */
@@ -238,7 +242,7 @@ public class TiroCustomizer extends javax.swing.JPanel implements com.linkare.re
 		});
 		test.getContentPane().add(new TiroCustomizer());
 		test.pack();
-		test.show();
+		test.setVisible(true);
 	}
 
 	// ****************************REC********************************************/
