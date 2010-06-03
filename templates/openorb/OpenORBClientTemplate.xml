@@ -51,7 +51,7 @@
 	<profile name="ReCClient" extends="default">
 		<import xlink:href="${openorb.home}config/default.xml#iiop">
 			<property name="publishIP" value="true" />
-			<property name="bidirOnlyServer" value="false" />
+			<property name="bidirOnlyServer" value="true" />
 			<!--	<property name="port" value="@hardware.client@"/>-->
 		</import>
 	</profile>
@@ -59,7 +59,7 @@
 	<profile name="ReCClientDebug" extends="debug">
 		<import xlink:href="${openorb.home}config/default.xml#iiop">
 			<property name="publishIP" value="true" />
-			<property name="bidirOnlyServer" value="false" />
+			<property name="bidirOnlyServer" value="true" />
 			<!--	<property name="port" value="@hardware.client@"/>-->
 		</import>
 	</profile>
