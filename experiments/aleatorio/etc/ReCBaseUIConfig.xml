@@ -2,6 +2,7 @@
 	customizerClassLocationBundleKey="aleatorio$rec.exp.customizer.aleatorio"
 	toolTipBundleKey="aleatorio$rec.exp.tip.aleatorio"
 	iconLocationBundleKey="aleatorio$rec.exp.icon.aleatorio"
+	descriptionStringBundleKey="aleatorio$rec.exp.description.aleatorio"
 	displayStringBundleKey="aleatorio$rec.exp.title.aleatorio"
 	desktopLocationBundleKey="aleatorio$rec.exp.background.aleatorio"
 	order="1">
