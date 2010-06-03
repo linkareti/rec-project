@@ -1,6 +1,7 @@
 <Apparatus location="ELAB_PV_STAMP_V02"
 	customizerClassLocationBundleKey="pv$rec.exp.customizer.pv"
 	toolTipBundleKey="pv$rec.exp.tip.pv" iconLocationBundleKey="pv$rec.exp.icon.pv"
+	descriptionStringBundleKey="pv$rec.exp.description.pv"
 	displayStringBundleKey="pv$rec.exp.title.pv" desktopLocationBundleKey="pv$rec.exp.background.pv"
 	order="1">
 	<LocalizationBundle name="pv"
