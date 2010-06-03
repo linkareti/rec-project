@@ -2,6 +2,7 @@
 	customizerClassLocationBundleKey="statsound$rec.exp.customizer.statsound"
 	toolTipBundleKey="statsound$rec.exp.tip.statsound"
 	iconLocationBundleKey="statsound$rec.exp.icon.statsound"
+	descriptionStringBundleKey="statsound$rec.exp.description.statsound"
 	displayStringBundleKey="statsound$rec.exp.title.statsound"
 	desktopLocationBundleKey="statsound$rec.exp.background.statsound"
 	order="1">
@@ -53,9 +54,9 @@
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.4"
 		offlineCapable="false" order="6" />
 	<Display classLocationBundleKey="statsound$rec.exp.display.statsound.loc.5"
-	toolTipBundleKey="statsound$rec.exp.display.statsound.tip.5"
-	iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
-	displayStringBundleKey="statsound$rec.exp.display.statsound.title.5"
-	offlineCapable="false" order="7" />
+		toolTipBundleKey="statsound$rec.exp.display.statsound.tip.5"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="statsound$rec.exp.display.statsound.title.5"
+		offlineCapable="false" order="7" />
 </Apparatus>
 	
