@@ -13,6 +13,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 @XmlType
 public class Apparatus extends DisplayNode {
 
+	//FIXME - HFernandes - Please set it to null or document why we need this anyhow! 
 	private String displayStringBundleKey = "";
 
 	private String descriptionStringBundleKey = "";
