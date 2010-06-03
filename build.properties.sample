@@ -80,7 +80,7 @@ rec.am.host=localhost
 rec.am.port=3700
 rec.am.lab.id=LAB_ME
 
-##SYSTEM PROPERTIES - EXPERIMENTS## valerá a pena definir por experiencia?
+##SYSTEM PROPERTIES - EXPERIMENTS## 
 experiment.driver.openorb.profile=recHardware
 experiment.client.openorb.profile=recClient
 experiment.client.debug.address.port=8001
