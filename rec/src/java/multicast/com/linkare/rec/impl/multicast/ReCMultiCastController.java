@@ -8,6 +8,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -253,10 +255,10 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 			// }
 			// }
 			synchronized (multiCastHardwares) {
-				Iterator iterHardwares = ((ArrayList) multiCastHardwares.clone()).iterator();
-				while (iterHardwares.hasNext()) {
+				Collection<ReCMultiCastHardware> iterateHardwares = Collections.unmodifiableCollection(multiCastHardwares);
+				for(ReCMultiCastHardware rmch:iterateHardwares)
+				{
 					try {
-						ReCMultiCastHardware rmch = (ReCMultiCastHardware) iterHardwares.next();
 						if (!rmch.getHardware().isConnected()) {
 							rmch.shutdown();
 							multiCastHardwares.remove(rmch);

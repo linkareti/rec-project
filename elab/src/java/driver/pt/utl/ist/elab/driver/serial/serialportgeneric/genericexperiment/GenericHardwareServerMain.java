@@ -39,13 +39,13 @@ public abstract class GenericHardwareServerMain {
 	 */
 	public static void main(String[] args) {
 		try {
-			ORBBean.getORBBean(args);
+			ORBBean.getORBBean();
 			@SuppressWarnings("unused")
 			BaseHardware baseHardware = new BaseHardware((IDriver) new GenericSerialPortDriver());
 			Thread.currentThread().join();
 
 		} catch (Exception e) {
-			ORBBean.getORBBean(args).killORB();
+			ORBBean.getORBBean().killORB();
 			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(HARDWARE_LOGGER));
 		}
 	}

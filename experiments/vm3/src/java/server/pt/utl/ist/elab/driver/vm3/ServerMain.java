@@ -37,14 +37,14 @@ public class ServerMain {
 	public static void main(String[] args) {
 
 		try {
-			ORBBean.getORBBean(args);
+			ORBBean.getORBBean();
 
 			BaseHardware baseHardware = new BaseHardware(new M3Driver());
 
 			Thread.currentThread().join();
 
 		} catch (Exception e) {
-			ORBBean.getORBBean(args).killORB();
+			ORBBean.getORBBean().killORB();
 			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(M3_HARDWARE_LOGGER));
 		}
 		// TODO code application logic here

@@ -13,16 +13,15 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
+import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
 
 /**
@@ -40,21 +39,20 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 		}
 	}
 
-	private static void log(Level debugLevel, String message) {
-		Logger.getLogger(REC_RESBUNDLE_LOGGER).log(debugLevel, "ReCResourceBundle - " + message);
-	}
+	// private static void log(Level debugLevel, String message) {
+	// Logger.getLogger(REC_RESBUNDLE_LOGGER).log(debugLevel,
+	// "ReCResourceBundle - " + message);
+	// }
 
 	private static void logThrowable(String message, Throwable t) {
-		// LoggerUtil.logThrowable("ReCResourceBundle - "+message,t,
-		// Logger.getLogger(REC_RESBUNDLE_LOGGER));
-		System.out.println(message);
+		LoggerUtil.logThrowable("ReCResourceBundle - " + message, t, Logger.getLogger(REC_RESBUNDLE_LOGGER));
 	}
 
 	private static HashMap<String, ReCResourceBundle> bundles = new HashMap<String, ReCResourceBundle>();
 
 	public static String findString(String bundleName, String key) throws MissingResourceException {
 
-		ArrayList bundleNames = calculateLanguageVariants(bundleName, Locale.getDefault());
+		ArrayList<String> bundleNames = calculateLanguageVariants(bundleName, Locale.getDefault());
 
 		ResourceBundle bundle = null;
 
@@ -128,7 +126,6 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 	}
 
 	public static String findString(String key) throws MissingResourceException {
-		ResourceBundle bundle = null;
 
 		if (key != null && key.indexOf('$') != -1) {
 			int loc = key.indexOf('$');
@@ -137,16 +134,15 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 			return findString(bundleName, bundleKey);
 		}
 
-		Iterator iter = bundles.values().iterator();
-		while (iter.hasNext()) {
-			bundle = (ResourceBundle) iter.next();
+		for (ReCResourceBundle bundle : bundles.values()) {
 			try {
 				return bundle.getString(key);
 			} catch (Exception e) {
 			}
 		}
 
-		throw new MissingResourceException("Key '"+key+"' not found in any bundle here", ReCResourceBundle.class.getName(), key);
+		throw new MissingResourceException("Key '" + key + "' not found in any bundle here", ReCResourceBundle.class
+				.getName(), key);
 	}
 
 	public static String findStringOrDefault(String key, String defaultValue) throws MissingResourceException {
@@ -188,7 +184,7 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 			return bundles.get(bundleNameKey);
 
 		// next calculate the languageVariants
-		ArrayList bundleLocations = calculateLanguageVariants(bundleLocation, locale);
+		ArrayList<String> bundleLocations = calculateLanguageVariants(bundleLocation, locale);
 
 		for (int i = 0; i < bundleLocations.size(); i++) {
 			String bundleLocationCurrent = (String) bundleLocations.get(i);

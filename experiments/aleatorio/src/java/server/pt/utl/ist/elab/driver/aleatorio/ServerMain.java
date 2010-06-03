@@ -32,7 +32,7 @@ public class ServerMain {
 	 */
 	public static void main(String[] args) {
 		try {
-			ORBBean.getORBBean(args);
+			ORBBean.getORBBean();
 			new BaseHardware(new AleatorioDriver());
 
 			try {
@@ -40,7 +40,7 @@ public class ServerMain {
 			} catch (Exception ignored) {
 			}
 
-			ORBBean.getORBBean(args).killORB();
+			ORBBean.getORBBean().killORB();
 		} catch (Exception e) {
 			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(ALEATORIO_HARDWARE_LOGGER));
 		}

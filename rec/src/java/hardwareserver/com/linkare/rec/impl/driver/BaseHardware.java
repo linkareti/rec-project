@@ -6,12 +6,19 @@
 
 package com.linkare.rec.impl.driver;
 
+import java.awt.Color;
+import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.DataProducer;
@@ -142,6 +149,24 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 
 	public BaseHardware() {
 		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher());
+
+		if (!GraphicsEnvironment.isHeadless()) {
+			JFrame frameForKill = new JFrame();
+			JButton btnExit = new JButton("End Driver!");
+			btnExit.setBackground(Color.blue);
+			btnExit.setForeground(Color.white);
+			btnExit.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.exit(-1);
+
+				}
+			});
+			frameForKill.getContentPane().add(btnExit);
+			frameForKill.setVisible(true);
+			frameForKill.pack();
+		}
 	}
 
 	/** Creates a new instance of SimulationHardwareImpl */

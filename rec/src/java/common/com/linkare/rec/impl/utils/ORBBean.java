@@ -54,13 +54,6 @@ public class ORBBean {
 		return this_object;
 	}
 
-	public static ORBBean getORBBean(String[] args) {
-		if (this_object == null)
-			this_object = new ORBBean(args);
-
-		return this_object;
-	}
-
 	public static ORBBean getORBBean(Applet applet) {
 		if (this_object == null)
 			this_object = new ORBBean(applet);
@@ -70,20 +63,13 @@ public class ORBBean {
 
 	/* Singleton Pattern */
 	private static ORBBean this_object = null;
-	/** Holds value of property app_args. */
-	private String[] app_args;
-
+	
 	/** Holds value of property applet. */
 	private Applet applet;
 
 	private org.omg.CORBA.ORB the_orb = null;
 
 	private POA dataProducerPOA = null;
-
-	private ORBBean(String[] args) {
-		this.app_args = args;
-		initORB();
-	}
 
 	private ORBBean() {
 		initORB();
@@ -102,10 +88,10 @@ public class ORBBean {
 				return;
 
 			if (this.applet != null)
+			{
 				the_orb = ORB.init(this.applet, null);
-			else if (this.app_args != null) {
-				the_orb = ORB.init(this.app_args, null);
-			} else {
+			}
+			else {
 				Properties props = System.getProperties();
 				the_orb = ORB.init(new String[] {}, props);
 			}

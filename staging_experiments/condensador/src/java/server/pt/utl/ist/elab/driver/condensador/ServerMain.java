@@ -35,7 +35,7 @@ public class ServerMain {
 	 */
 	public static void main(String[] args) {
 		try {
-			ORBBean.getORBBean(args);
+			ORBBean.getORBBean();
 
 			BaseHardware baseHardware = new BaseHardware(new CondensadorStampDriver());
 
@@ -44,7 +44,7 @@ public class ServerMain {
 			} catch (Exception ignored) {
 			}
 
-			ORBBean.getORBBean(args).killORB();
+			ORBBean.getORBBean().killORB();
 		} catch (Exception e) {
 			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(CONDENSADOR_HARDWARE_LOGGER));
 		}

@@ -31,14 +31,14 @@ public class ServerMain {
 	 */
 	public static void main(String[] args) {
 		try {
-			ORBBean.getORBBean(args);
+			ORBBean.getORBBean();
 
 			BaseHardware baseHardware = new BaseHardware(new RobotDriver());
 
 			Thread.currentThread().join();
 
 		} catch (Exception e) {
-			ORBBean.getORBBean(args).killORB();
+			ORBBean.getORBBean().killORB();
 			LoggerUtil.logThrowable("Error on Main...", e, Logger.getLogger(WEBROBOT_HARDWARE_LOGGER));
 		}
 	}
