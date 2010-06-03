@@ -294,6 +294,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 			try {
 				MultiCastController mcc = MultiCastControllerHelper.narrow(o);
 				if (mcc != null) {
+					System.out.println("mcw is being build with "+mcc);
 					mcw = new MultiCastControllerWrapper(mcc);
 					if (mcw.isConnected()) {
 						try {
@@ -305,6 +306,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 								return;
 							}
 							mcw.registerDataClient(_this());
+							System.out.println("Registered data client on mcw");
 							fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_CONNECTED);
 							fireIChatMessageListenerConnectionChanged(true);
 
@@ -463,6 +465,14 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	public void sendMessage(ChatMessageEvent evt) {
 		if (mcw != null) {
 			try {
+				System.out.println("MCW is "+mcw);
+				System.out.println("getUserInfo() "+getUserInfo());
+				System.out.println("evt.getUserTo() "+evt.getUserTo());
+				if(evt.getUserTo()!=null)
+				{
+					System.out.println("evt.getUserTo().getUserName()" +evt.getUserTo().getUserName());
+				}
+				System.out.println("evt.getMessage() "+evt.getMessage());
 				mcw.sendMessage(getUserInfo(), evt.getUserTo().getUserName(), evt.getMessage());
 			} catch (NotRegistered e) {
 				fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_NOT_REGISTERED);
