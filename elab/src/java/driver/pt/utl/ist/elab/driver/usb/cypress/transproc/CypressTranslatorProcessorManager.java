@@ -26,8 +26,8 @@ public class CypressTranslatorProcessorManager {
 		}
 	}
 
-	private static Hashtable translators = new Hashtable(5);
-	private static Hashtable processors = new Hashtable(5);
+	private static Hashtable<String,CypressTranslator> translators = new Hashtable<String, CypressTranslator>(5);
+	private static Hashtable<String, CypressProcessor> processors = new Hashtable<String, CypressProcessor>(5);
 
 	/** Creates a new instance of SerialPortTranslatorManager */
 	private CypressTranslatorProcessorManager() {
@@ -63,7 +63,7 @@ public class CypressTranslatorProcessorManager {
 
 	public static void initCypressProcessorTranslator(String className) {
 		try {
-			Class c = Class.forName(className);
+			Class<?> c = Class.forName(className);
 			c.newInstance();
 		} catch (Exception e) {
 			LoggerUtil.logThrowable("Unable to load class:" + className, e, Logger.getLogger(Cypress_TPMANAGER_LOGGER));
@@ -74,7 +74,7 @@ public class CypressTranslatorProcessorManager {
 		for (int i = 0; i < classNames.length; i++) {
 			String className = classNames[i];
 			try {
-				Class c = Class.forName(className);
+				Class<?> c = Class.forName(className);
 				c.newInstance();
 			} catch (Exception e) {
 				LoggerUtil.logThrowable("Unable to load class:" + className, e, Logger
