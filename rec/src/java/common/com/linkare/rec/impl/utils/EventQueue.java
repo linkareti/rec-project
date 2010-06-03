@@ -25,7 +25,11 @@ public class EventQueue {
 	private ArrayList<Object> levts = null;
 	private volatile boolean stopdispatching = false;
 
-	/** Creates a new instance of EventQueue */
+	/**
+	 * Creates a new instance of EventQueue
+	 * 
+	 * @param dispatcher
+	 */
 
 	public EventQueue(EventQueueDispatcher dispatcher) {
 		this.dispatcher = dispatcher;

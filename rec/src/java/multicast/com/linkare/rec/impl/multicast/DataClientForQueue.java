@@ -182,8 +182,9 @@ public class DataClientForQueue {
 		 */
 
 		if (evt.getUserTo() == null || evt.getUserTo().getUserName() == null
-				|| evt.getUserTo().getUserName().equals(getUserName()))
+				|| evt.getUserTo().getUserName().equals(getUserName())) {
 			messageQueue.addEvent(evt);
+		}
 	}
 
 	public DataClientWrapper getDataClient() {
