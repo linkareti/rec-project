@@ -107,11 +107,11 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     private Date endDate;
 
     @ManyToOne
-    @JoinColumn(name = "KEY_USER", insertable = true, updatable = false, nullable = false)
+    @JoinColumn(name = "KEY_USER", insertable = true, updatable = true, nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "KEY_EXPERIMENT", nullable = true)
+    @JoinColumn(name = "KEY_EXPERIMENT", insertable = true, updatable = true, nullable = true)
     private Experiment experiment;
 
     @Basic
@@ -329,11 +329,16 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     }
 
     public String getReservedBy() {
-	return getUser().getUsername();
+	final User user = getUser();
+	return user == null ? null : user.getUsername();
     }
 
     public String getReservedTo() {
-	final String name = getGroup().getName();
+	final Group group = getGroup();
+	if (group == null) {
+	    return null;
+	}
+	final String name = group.getName();
 	return name.contains("@") ? name.substring(0, name.indexOf("@")) : name;
     }
 
@@ -417,7 +422,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     }
 
     public boolean isInternal() {
-	return getUser().getUsername().endsWith(ConstantUtils.INTERNAL_DOMAIN_NAME);
+	return getUser().getUsername().indexOf("@") == -1 || getUser().getUsername().endsWith(ConstantUtils.INTERNAL_DOMAIN_NAME);
     }
 
     /**
@@ -464,5 +469,13 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
      */
     public void setDomain(String domain) {
 	this.domain = domain;
+    }
+
+    @Override
+    public void prePersist() {
+	if (getDomain() == null) {
+	    setDomain(ConstantUtils.INTERNAL_DOMAIN_NAME);
+	}
+	super.prePersist();
     }
 }

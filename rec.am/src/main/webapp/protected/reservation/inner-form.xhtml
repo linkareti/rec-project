@@ -4,9 +4,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.prime.com.tr/ui">
 	<h:inputHidden id="idInternal"
-		value="#{reservationController.selected.idInternal}" />
+		value="#{reservationController.selected.idInternal}"
+		rendered="#{operation != 'create'}" />
 	<h:inputHidden id="version"
-		value="#{reservationController.selected.version}" />
+		value="#{reservationController.selected.version}"
+		rendered="#{operation != 'create'}" />
 	<p:focus for="title" />
 	<h:panelGrid columns="3">
 		<h:outputLabel value="#{bundle['reservation.title']}" for="title" />
@@ -24,7 +26,7 @@
 			converter="experimentConverter">
 			<f:attribute name="optionClasses" value="option1, option2" />
 			<f:selectItems
-				value="#{experimentController.itemsAvailableSelectOne}" />
+				value="#{experimentController.activeItemsAvailableSelectOne}" />
 		</h:selectOneMenu>
 		<p:message for="experiment" />
 		<h:outputLabel value="#{bundle['reservation.reservedBy']}" for="user"

@@ -1,5 +1,7 @@
 package com.linkare.rec.am.web.controller;
 
+import java.util.Date;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -18,6 +20,8 @@ import com.linkare.rec.am.service.ReservationService;
 import com.linkare.rec.am.service.ReservationServiceLocal;
 import com.linkare.rec.am.service.UserService;
 import com.linkare.rec.am.service.UserServiceLocal;
+import com.linkare.rec.am.web.auth.UserView;
+import com.linkare.rec.am.web.moodle.SessionHelper;
 import com.linkare.rec.am.web.util.ConstantUtils;
 
 /**
@@ -52,7 +56,7 @@ public class ReservationController extends AbstractController<Long, Reservation,
     }
 
     public Reservation getCurrentDetails() {
-	if (getCurrent() != null) {
+	if (getCurrent() != null && getCurrent().getIdInternal() != null) {
 	    return service.getReservationDetails(getCurrent().getIdInternal());
 	}
 	return null;
@@ -66,6 +70,33 @@ public class ReservationController extends AbstractController<Long, Reservation,
     public final String prepareCreate() {
 	setCurrent(new Reservation());
 	return ConstantUtils.CREATE;
+    }
+
+    @Override
+    public String create() {
+	final String result = super.create();
+	refreshUserView();
+	return result;
+    }
+
+    @Override
+    public String update() {
+	final String result = super.update();
+	refreshUserView();
+	return result;
+    }
+
+    @Override
+    public String destroy() {
+	final String result = super.destroy();
+	refreshUserView();
+	return result;
+    }
+
+    private void refreshUserView() {
+	final UserView userView = SessionHelper.getUserView();
+	userView.setReservations(getService().findReservationsFor(new Date(), null, userView));
+	SessionHelper.setUserView(userView);
     }
 
     public void prepareUpdateEvent(ActionEvent actionEvent) {

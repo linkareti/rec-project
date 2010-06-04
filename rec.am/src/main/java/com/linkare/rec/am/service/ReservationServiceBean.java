@@ -43,6 +43,10 @@ import com.linkare.rec.am.web.moodle.SessionHelper;
 @Stateless(name = "ReservationService")
 public class ReservationServiceBean extends BusinessServiceBean<Reservation, Long> implements ReservationService {
 
+    private static final String CSS_OTHERS_EVENTS_CLASS = "others_events";
+
+    private static final String CSS_MYEVENTS_CLASS = "myevents";
+
     @EJB(beanInterface = GroupServiceLocal.class)
     private GroupService groupService;
 
@@ -53,10 +57,11 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
     public void create(final Reservation reservation) {
 	final BooleanResult operationResult = canCreate(reservation);
 	if (operationResult.getResult() == Boolean.TRUE) {
-	    if (!reservation.isInternal()) {
+	    if (reservation.getExternalCourse() != null) {
 		final ExternalCourse externalCourse = reservation.getExternalCourse();
 		// Generate some unique name, relating this group with the unique registration uuid
-		final Group reservationGroup = new Group(externalCourse.getShortname() + "@" + reservation.getId());
+		final Group reservationGroup = reservation.getGroup() == null ? new Group(externalCourse.getShortname() + "@" + reservation.getId())
+			: reservation.getGroup();
 		groupService.create(reservationGroup);
 		reservation.setGroup(reservationGroup);
 		final List<String> studentsUsernames = getStudentsUsernames(externalCourse.getStudents());
@@ -94,7 +99,7 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
 	final UserView userView = SessionHelper.getUserView();
 	final User user = userService.findByUsername(SessionHelper.getUserView().getFullUsername());
 	final BooleanResult ownershipResult = reservation.checkOwnership(user);
-	return (!userView.isAdmin() && ownershipResult.getResult()) == Boolean.FALSE ? ownershipResult : isValid(reservation);
+	return (!userView.isAdmin() && ownershipResult.getResult() == Boolean.FALSE) ? ownershipResult : isValid(reservation);
     }
 
     @SuppressWarnings("unchecked")
@@ -201,9 +206,9 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
 	for (final ScheduleEvent scheduleEvent : events) {
 	    final Reservation reservation = (Reservation) scheduleEvent;
 	    if (userView.getFullUsername().equals(reservation.getUser().getUsername())) {
-		reservation.setStyleClass("myevents");
+		reservation.setStyleClass(CSS_MYEVENTS_CLASS);
 	    } else {
-		reservation.setStyleClass("others_events");
+		reservation.setStyleClass(CSS_OTHERS_EVENTS_CLASS);
 	    }
 	}
     }
@@ -211,7 +216,9 @@ public class ReservationServiceBean extends BusinessServiceBean<Reservation, Lon
     @Override
     public Reservation getReservationDetails(Long id) {
 	final Reservation reservation = find(id);
-	reservation.getGroup().getAllUsers();
+	if (reservation != null) {
+	    reservation.getGroup().getAllUsers();
+	}
 	return reservation;
     }
 
