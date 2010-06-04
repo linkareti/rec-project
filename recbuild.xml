@@ -231,8 +231,8 @@
 		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}" />
 		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar" todir="${client.build.dir}" />
 
-		<copy file="${common.build.dir}/ReCCommon_sig.jar.pack.gz" todir="${client.build.dir}" />
-		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar.pack.gz" todir="${client.build.dir}" />
+		<copy file="${common.build.dir}/ReCCommon_sig.jar.pack.gz" todir="${client.build.dir}" failonerror="false"/>
+		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar.pack.gz" todir="${client.build.dir}" failonerror="false"/>
 
 		<copy file="${templates.dir.openorb}/OpenORBClientTemplate.xml" overwrite="yes" tofile="${client.build.dir}/etc/openorb.xml" />
 		<replace file="${client.build.dir}/etc/openorb.xml" propertyFile="build.properties">

@@ -182,7 +182,7 @@
 
 	<target name="copy.client.external.lib.dependencies.to.build.structure">
 		<mkdir dir="${client.build.dir}/lib" />
-		<copy todir="${client.build.dir}/lib" overwrite="true">
+		<copy todir="${client.build.dir}/lib" overwrite="true" failonerror="false">
 			<fileset dir="${rec.common.lib.dir}">
 				<include name="*.jar" />
 			</fileset>
