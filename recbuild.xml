@@ -12,8 +12,8 @@
 
 	<property file="build.properties" description="general properties for building project" />
 
-	<import file="generaldefinitions.xml"/>
-	
+	<import file="generaldefinitions.xml" />
+
 	<!--
 		=====================================================
 		====================== Generic ======================
@@ -23,66 +23,70 @@
 	<target name="help" description="General usage of the build system, it shows a description of each target, and how to use them">
 		<echo>ReC - eBab build system</echo>
 	</target>
-	
-	
+
+
 	<!--
 			=====================================================
 			======================= JVLC ========================
 			=====================================================
 		-->
 
-		<target name="clean.jvlc" description="Delete the build folder containing the jvlc compiled code.">
-			<delete dir="${jvlc.classes.dir}" />
-			<delete file="${build.dir.compile}/jvlc.jar" />
-			<delete file="${build.dir.compile}/jvlc_sig.jar" />
-		</target>
+	<target name="clean.rec.jvlc" description="Delete the build folder containing the jvlc compiled code.">
+		<delete dir="${jvlc.classes.dir}" />
+		<delete file="${build.dir.compile}/jvlc.jar" />
+		<delete file="${build.dir.compile}/jvlc_sig.jar" />
+	</target>
 
-		<target name="compile.jvlc" description="Compile the jvlc project independently.">
-			<mkdir dir="${jvlc.classes.dir}" />
-			<mkdir dir="${jvlc.classes.dir}/META-INF" />
+	<target name="compile.rec.jvlc" description="Compile the jvlc project independently.">
+		<mkdir dir="${jvlc.classes.dir}" />
+		<mkdir dir="${jvlc.classes.dir}/META-INF" />
 
-			<javac srcdir="${jvlc.src.java.dir}" destdir="${jvlc.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
-				<include name="**/*.java" />
-				<classpath refid="jvlc.libs.classpath" />
-				<compilerarg value="-Xlint:unchecked, cast, -serial" />
-			</javac>
+		<javac srcdir="${jvlc.src.java.dir}" destdir="${jvlc.classes.dir}" encoding="${javac.encoding}" debug="${javac.debug}" optimize="${javac.optimize}" source="${javac.sourcelevel}" target="${javac.sourcelevel}" deprecation="yes">
+			<include name="**/*.java" />
+			<classpath refid="jvlc.libs.classpath" />
+			<compilerarg value="-Xlint:unchecked, cast, -serial" />
+		</javac>
+
+		<copy todir="${jvlc.classes.dir}" overwrite="true">
+			<fileset dir="${rec.common.src.java.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="**/*.form" />
+			</fileset>
+		</copy>
+
+		<manifest file="${jvlc.classes.dir}/META-INF/MANIFEST.MF">
+			<section name="common">
+				<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
+				<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
+				<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
+				<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
+				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
+			</section>
+		</manifest>
+
+	</target>
+
+	<target name="jar.rec.jvlc">
+		<create.jar destination.folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" source.basedir="${jvlc.classes.dir}" />
+	</target>
+
+	<target name="repack.jar.rec.jvlc" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<repack.jar file="${jvlc.build.dir}/ReCjvlc.jar" />
+	</target>
 			
-			<copy todir="${jvlc.classes.dir}" overwrite="true">
-				<fileset dir="${rec.common.src.java.dir}">
-					<exclude name="**/*.java" />
-					<exclude name="**/*.form" />
-				</fileset>
-			</copy>
+	<target name="sign.rec.jvlc">
+		<sign.jar.rec folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" />
+	</target>
 
-			<manifest file="${jvlc.classes.dir}/META-INF/MANIFEST.MF">
-				<section name="common">
-					<attribute name="Specification-Title" value="${com.linkare.rec.spec.title}" />
-					<attribute name="Specification-Version" value="${com.linkare.rec.spec.version}" />
-					<attribute name="Specification-Vendor" value="${com.linkare.rec.spec.title}" />
-					<attribute name="Implementation-Title" value="${com.linkare.rec.impl.title}" />
-					<attribute name="Implementation-Version" value="${com.linkare.rec.impl.version} ${timestamp}" />
-					<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
-				</section>
-			</manifest>
-			
-		</target>
+	<target name="pack.jar.rec.jvlc" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<pack.200.jar file="${jvlc.build.dir}/ReCjvlc_sig.jar" />
+	</target>
 
-		<target name="jar.jvlc">
-			<create.jar destination.folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" source.basedir="${jvlc.classes.dir}"/>
-		</target>
-		
-		<target name="sign.jvlc">
-			<sign.jar.rec folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" />
-		</target>
-		
-		<!--target name="pack.jar.jvlc" description="Packages and compresses the jar for p200 distribution.">
-			<pack.200.single.jar destination.directory="${jvlc.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="jvlc"/>
-		</target-->
+	<target name="build.rec.jvlc" depends="clean.rec.jvlc,compile.rec.jvlc, jar.rec.jvlc, repack.jar.rec.jvlc, sign.rec.jvlc, pack.jar.rec.jvlc">
 
-		<target name="build.jvlc" depends="clean.jvlc,compile.jvlc, jar.jvlc, sign.jvlc">
+	</target>
 
-		</target>
-	
 	<!--
 		=====================================================
 		==================== REC Common =====================
@@ -104,7 +108,7 @@
 			<classpath refid="rec.common.libs.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
-		
+
 		<copy todir="${rec.common.classes.dir}" overwrite="true">
 			<fileset dir="${rec.common.src.java.dir}">
 				<exclude name="**/*.java" />
@@ -122,25 +126,29 @@
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
-		
+
 	</target>
 
 	<target name="jar.rec.common">
-		<create.jar destination.folder="${common.build.dir}" jar.name="ReCCommon.jar" source.basedir="${rec.common.classes.dir}"/>
+		<create.jar destination.folder="${common.build.dir}" jar.name="ReCCommon.jar" source.basedir="${rec.common.classes.dir}" />
 	</target>
-	
+
+	<target name="repack.jar.rec.common" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<repack.jar file="${common.build.dir}/ReCCommon.jar" />
+	</target>
+
 	<target name="sign.rec.common">
 		<sign.jar.rec folder="${common.build.dir}" jar.name="ReCCommon.jar" />
 	</target>
-	
-	<!--target name="pack.jar.rec.common" description="Packages and compresses the jar for p200 distribution.">
-		<pack.200.single.jar destination.directory="${common.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ReCCommon"/>
-	</target-->
 
-	<target name="build.rec.common" depends="clean.rec.common,compile.rec.common, jar.rec.common, sign.rec.common">
+	<target name="pack.jar.rec.common" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<pack.200.jar file="${common.build.dir}/ReCCommon_sig.jar" />
+	</target>
+
+	<target name="build.rec.common" depends="clean.rec.common,compile.rec.common, jar.rec.common, repack.jar.rec.common, sign.rec.common, pack.jar.rec.common">
 
 	</target>
-	
+
 	<!--
 		=====================================================
 		==================== ReC Client =====================
@@ -162,7 +170,7 @@
 			<classpath refid="rec.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
-		
+
 		<copy todir="${rec.client.classes.dir}" overwrite="true">
 			<fileset dir="${rec.client.src.java.dir}">
 				<exclude name="**/*.java" />
@@ -175,7 +183,7 @@
 			<classpath refid="rec.compile.client.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
-		
+
 		<copy todir="${rec.client.classes.dir}" overwrite="true">
 			<fileset dir="${rec.ui.src.java.dir}">
 				<exclude name="**/*.java" />
@@ -193,42 +201,45 @@
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
-		
+
 		<copy file="${templates.dir.openorb}/OpenORBClientTemplate.xml" overwrite="yes" tofile="${rec.client.classes.dir}/openorb.xml" />
 		<replace file="${rec.client.classes.dir}/openorb.xml" propertyFile="build.properties">
 			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
 			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
 		</replace>
-		
+
 	</target>
 
-		<target name="jar.rec.client">
-			<create.jar destination.folder="${client.build.dir}" jar.name="ReCClient.jar" source.basedir="${rec.client.classes.dir}"/>
-		</target>
-		
-		<target name="sign.rec.client">
-			<sign.jar.rec folder="${client.build.dir}" jar.name="ReCClient.jar" />
-		</target>
+	<target name="jar.rec.client">
+		<create.jar destination.folder="${client.build.dir}" jar.name="ReCClient.jar" source.basedir="${rec.client.classes.dir}" />
+	</target>
 	
-	<!--target name="pack.jar.rec.client" description="Packages and compresses the jar for p200 distribution.">
-		<pack.200.single.jar destination.directory="${client.build.dir}" source.directory="${build.dir.compile}" source.jar.without.extension="ReCClient"/>
-	</target-->
+	<target name="repack.jar.rec.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<repack.jar file="${common.build.dir}/ReCClient.jar" />
+	</target>
 	
-	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client,sign.rec.client">
-		
-		<sign.all.jars.in.directory.rec.certificate source.dir.name="${rec.common.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
-		<sign.all.jars.in.directory.rec.certificate source.dir.name="${rec.client.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
-		<sign.all.jars.in.directory.rec.certificate source.dir.name="${jvlc.lib.dir}" destination.dir.name="${client.build.dir}/lib"/>
-	
-		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}"></copy>
-		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar" todir="${client.build.dir}"></copy>
-		
+	<target name="sign.rec.client">
+		<sign.jar.rec folder="${client.build.dir}" jar.name="ReCClient.jar" />
+	</target>	
+
+	<target name="pack.jar.rec.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
+		<pack.200.jar file="${client.build.dir}/ReCClient_sig.jar" />
+	</target>
+
+	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client, repack.jar.rec.client, sign.rec.client, pack.jar.rec.client">
+
+		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}" />
+		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar" todir="${client.build.dir}" />
+
+		<copy file="${common.build.dir}/ReCCommon_sig.jar.pack.gz" todir="${client.build.dir}" />
+		<copy file="${jvlc.build.dir}/ReCjvlc_sig.jar.pack.gz" todir="${client.build.dir}" />
+
 		<copy file="${templates.dir.openorb}/OpenORBClientTemplate.xml" overwrite="yes" tofile="${client.build.dir}/etc/openorb.xml" />
-			<replace file="${client.build.dir}/etc/openorb.xml" propertyFile="build.properties">
+		<replace file="${client.build.dir}/etc/openorb.xml" propertyFile="build.properties">
 			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
 			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
 		</replace>
-		
+
 	</target>
 
 	<!--
@@ -250,7 +261,7 @@
 			<classpath refid="rec.compile.hardwareserver.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
-		
+
 		<copy todir="${rec.hardwareserver.classes.dir}" overwrite="true">
 			<fileset dir="${rec.hardwareserver.classes.dir}">
 				<exclude name="**/*.java" />
@@ -268,21 +279,21 @@
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
-		
+
 		<copy file="${templates.dir.openorb}/OpenORBHardwareTemplate.xml" overwrite="yes" tofile="${rec.hardwareserver.classes.dir}/openorb.xml" />
 		<replace file="${rec.hardwareserver.classes.dir}/openorb.xml" propertyFile="build.properties">
 			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
 			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
 		</replace>
-		
+
 	</target>
 
 	<target name="jar.rec.hardwareserver">
-		<create.jar destination.folder="${hardwareserver.build.dir}" jar.name="ReCHardwareServer.jar" source.basedir="${rec.hardwareserver.classes.dir}"/>
+		<create.jar destination.folder="${hardwareserver.build.dir}" jar.name="ReCHardwareServer.jar" source.basedir="${rec.hardwareserver.classes.dir}" />
 	</target>
 
 	<target name="build.rec.hardwareserver" depends="clean.rec.hardwareserver,compile.rec.hardwareserver,jar.rec.hardwareserver">
-		
+
 		<copy todir="${hardwareserver.build.dir}/lib" overwrite="true">
 			<fileset dir="${rec.common.lib.dir}">
 				<include name="**/*.jar" />
@@ -291,15 +302,16 @@
 				<include name="**/*.jar" />
 			</fileset>
 		</copy>
-		
-		<copy file="${common.build.dir}/ReCCommon.jar" todir="${hardwareserver.build.dir}"></copy>
-		
+
+		<copy file="${common.build.dir}/ReCCommon.jar" todir="${hardwareserver.build.dir}">
+		</copy>
+
 		<copy file="${templates.dir.openorb}/OpenORBHardwareTemplate.xml" overwrite="yes" tofile="${hardwareserver.build.dir}/etc/openorb.xml" />
-			<replace file="${hardwareserver.build.dir}/etc/openorb.xml" propertyFile="build.properties">
+		<replace file="${hardwareserver.build.dir}/etc/openorb.xml" propertyFile="build.properties">
 			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
 			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
 		</replace>
-				
+
 	</target>
 
 	<!--
@@ -321,7 +333,7 @@
 			<classpath refid="rec.compile.multicastcontroller.classpath" />
 			<compilerarg value="-Xlint:unchecked, cast, -serial" />
 		</javac>
-		
+
 		<copy todir="${rec.multicast.classes.dir}" overwrite="true">
 			<fileset dir="${rec.multicast.src.java.dir}">
 				<exclude name="**/*.java" />
@@ -340,20 +352,20 @@
 				<attribute name="Implementation-Vendor" value="${com.linkare.rec.impl.vendor}" />
 			</section>
 		</manifest>
-		
+
 		<copy file="${templates.dir.openorb}/OpenORBMultiCastTemplate.xml" overwrite="yes" tofile="${rec.multicast.classes.dir}/openorb.xml" />
 		<replace file="${rec.multicast.classes.dir}/openorb.xml" propertyFile="build.properties">
 			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
 			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
-		</replace>		
+		</replace>
 	</target>
 
 	<target name="jar.rec.multicastcontroller">
-		<create.jar destination.folder="${multicast.build.dir}" jar.name="ReCMulticastController.jar" source.basedir="${rec.multicast.classes.dir}"/>
+		<create.jar destination.folder="${multicast.build.dir}" jar.name="ReCMulticastController.jar" source.basedir="${rec.multicast.classes.dir}" />
 	</target>
 
 	<target name="build.rec.multicastcontroller" depends="clean.rec.multicastcontroller,compile.rec.multicastcontroller,jar.rec.multicastcontroller">
-	
+
 		<copy todir="${multicast.build.dir}/lib" overwrite="true">
 			<fileset dir="${rec.common.lib.dir}">
 				<include name="**/*.jar" />
@@ -363,14 +375,15 @@
 			</fileset>
 		</copy>
 
-		<copy file="${common.build.dir}/ReCCommon.jar" todir="${multicast.build.dir}"></copy>
-		
-	<copy file="${templates.dir.openorb}/OpenORBMultiCastTemplate.xml" overwrite="yes" tofile="${multicast.build.dir}/etc/openorb.xml" />
+		<copy file="${common.build.dir}/ReCCommon.jar" todir="${multicast.build.dir}">
+		</copy>
+
+		<copy file="${templates.dir.openorb}/OpenORBMultiCastTemplate.xml" overwrite="yes" tofile="${multicast.build.dir}/etc/openorb.xml" />
 		<replace file="${multicast.build.dir}/etc/openorb.xml" propertyFile="build.properties">
-		<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
-		<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
-	</replace>
-		
+			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
+			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+		</replace>
+
 	</target>
 
 	<target name="run.rec.multicast">
@@ -414,42 +427,43 @@
 			<sysproperty key="openorb.config" value="${rec.multicast.classes.dir}/openorb.xml" />
 		</java>
 	</target>
-	
+
 	<target name="clean.all" depends="clean.rec.common,clean.rec.client,clean.rec.hardwareserver,clean.rec.multicastcontroller" />
-	
-	<target name="build.all" depends="build.rec.common,build.jvlc,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller" />
+
+	<target name="build.all" depends="build.rec.common,build.rec.jvlc,build.rec.client,build.rec.hardwareserver,build.rec.multicastcontroller" />
 
 	<target name="javadoc.rec">
-		<javadoc destdir="${build.dir}/javadocs/rec" author="true" version="true" use="true" windowtitle="ReC - Javadocs" >
-		    <packageset dir="${rec.common.src.java.dir}" defaultexcludes="yes" >
-		    	<include name="com/linkare/rec/**"/>
-		    </packageset>
-		 	<classpath refid="rec.common.libs.classpath" />
-		 	<packageset dir="${rec.client.src.java.dir}" defaultexcludes="yes" >
-		 		<include name="com/linkare/**"/>
-		    </packageset>
-			 <packageset dir="${rec.ui.src.java.dir}" defaultexcludes="yes" >
-				<include name="com/linkare/rec/impl**"/>
-		    </packageset>
-		 	<classpath refid="rec.client.libs.classpath" />
-		 	<packageset dir="${rec.multicast.src.java.dir}" defaultexcludes="yes" >
-		 		<include name="com/linkare/rec/impl/**"/>
-		    </packageset>
-		 	<classpath refid="rec.multicastcontroller.libs.classpath" />
-			 <packageset dir="${rec.hardwareserver.src.java.dir}" defaultexcludes="yes" >
-				<include name="com/linkare/rec/impl/**"/>
-		    </packageset>
-		 	<classpath refid="rec.hardwareserver.libs.classpath" />
-		    <doctitle>ReC  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
-		    <bottom><![CDATA[<i>Copyright &#169; 2010 Linkare TI All Rights Reserved.</i>]]></bottom>
-		    <tag name="todo" scope="all" description="To do:"/>
-		    <link href="http://java.sun.com/javase/6/docs/api/"/>
-	  </javadoc>
-	</target>
-	
+		<javadoc destdir="${build.dir}/javadocs/rec" author="true" version="true" use="true" windowtitle="ReC - Javadocs">
+			<packageset dir="${rec.common.src.java.dir}" defaultexcludes="yes">
+				<include name="com/linkare/rec/**" />
+			</packageset>
+			<classpath refid="rec.common.libs.classpath" />
+			<packageset dir="${rec.client.src.java.dir}" defaultexcludes="yes">
+				<include name="com/linkare/**" />
+			</packageset>
+			<packageset dir="${rec.ui.src.java.dir}" defaultexcludes="yes">
+				<include name="com/linkare/rec/impl**" />
+			</packageset>
+			<classpath refid="rec.client.libs.classpath" />
+			<packageset dir="${rec.multicast.src.java.dir}" defaultexcludes="yes">
+				<include name="com/linkare/rec/impl/**" />
+			</packageset>
+			<classpath refid="rec.multicastcontroller.libs.classpath" />
+			<packageset dir="${rec.hardwareserver.src.java.dir}" defaultexcludes="yes">
+				<include name="com/linkare/rec/impl/**" />
+			</packageset>
+			<classpath refid="rec.hardwareserver.libs.classpath" />
+			<doctitle>ReC  <![CDATA[<h1>Package Overview</h1>]]></doctitle>
+		<bottom>
+			<![CDATA[<i>Copyright &#169; 2010 Linkare TI All Rights Reserved.</i>]]></bottom>
+	<tag name="todo" scope="all" description="To do:" />
+	<link href="http://java.sun.com/javase/6/docs/api/" />
+</javadoc>
+</target>
 
-	<target name="clean.javadocs">
-		<delete dir="${build.dir}/javadocs/rec" />
-	</target>	
-	
+
+<target name="clean.javadocs">
+<delete dir="${build.dir}/javadocs/rec" />
+</target>
+
 </project>

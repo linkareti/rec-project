@@ -41,7 +41,8 @@
 		<ant antfile="recbuild.xml" dir="." target="build.all" />
 		<ant antfile="elabbuild.xml" dir="." target="build.all" />
 		<ant antfile="experimentsbuild.xml" dir="." target="build.experiments.list" />
-		<ant antfile="buildall.xml" dir="." target="copy.client.to.rec.am" />
+		<antcall target="copy.client.to.rec.am" />
+		<antcall target="build.client.lib.dependencies" />
 	</target>
 
 	<target name="copy.client.to.rec.am">
@@ -65,9 +66,9 @@
 
 		<mkdir dir="${dist.dir}" />
 		<zip destfile="${dist.dir}/FullClient_${today}.zip">
-			<zipfileset dir="${client.build.dir}" includes="*_sig.jar,*.jnlp" prefix="client" />
+			<zipfileset dir="${client.build.dir}" includes="*_sig.jar,*.jnlp,*_sig.jar.pack.gz" prefix="client" />
 
-			<zipfileset dir="${client.build.dir}/lib" includes="*_sig.jar" prefix="client/lib" />
+			<zipfileset dir="${client.build.dir}/lib" includes="*_sig.jar,*_sig.jar.pack.gz" prefix="client/lib" />
 
 			<zipfileset dir="${templates.dir.images}" includes="*.jpg,*.gif,*.png" prefix="client/images" />
 
@@ -165,7 +166,6 @@
 				<zipfileset file="${hardwareserver.build.dir}/ReCCommon.jar" prefix="hardwareserver" />
 
 				<zipfileset dir="${hardwareserver.build.dir}/lib" includes="**/*.jar" prefix="hardwareserver/lib" />
-				<zipfileset dir="${hardwareserver.build.dir}/lib" includes="**/*.jar" prefix="hardwareserver/lib" />
 
 				<zipfileset file="${experiments.build.dir}/etc/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
 				<zipfileset file="${hardwareserver.build.dir}/etc/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
@@ -180,4 +180,38 @@
 	</macrodef>
 
 
+	<target name="copy.client.external.lib.dependencies.to.build.structure">
+		<mkdir dir="${client.build.dir}/lib" />
+		<copy todir="${client.build.dir}/lib" overwrite="true">
+			<fileset dir="${rec.common.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${rec.client.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${elab.client.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${jvlc.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="repack.client.external.lib.dependencies" if="generate.pack200">
+		<repack.all.jars.in.directory dir="${client.build.dir}/lib" />
+	</target>
+	
+	<target name="sign.client.external.lib.dependencies">
+		<sign.all.jars.in.directory.rec.certificate source.dir.name="${client.build.dir}/lib" destination.dir.name="${client.build.dir}/lib" />
+	</target>
+	
+	<target name="pack.client.external.lib.dependencies" if="generate.pack200">	
+		<pack.200.all.jar.in.dir dir="${client.build.dir}/lib" />
+	</target>
+	
+	<target name="build.client.lib.dependencies" depends="copy.client.external.lib.dependencies.to.build.structure, repack.client.external.lib.dependencies, sign.client.external.lib.dependencies, pack.client.external.lib.dependencies">
+	
+	</target>
+	
 </project>

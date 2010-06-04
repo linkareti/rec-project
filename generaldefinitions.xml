@@ -394,32 +394,32 @@
 	<macrodef name="create.jnlp.full.client.compile">
 		<attribute name="codebase" />
 		<sequential>
-			
+
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFramework.jnlp" />
 			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="@codebase@" value="@{codebase}" />
 			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" propertyFile="build.properties">
 				<replacefilter token="@href@" property="href" />
 			</replace>
-			
+
 			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
 			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
 			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
-			
+
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/OpenORB.jnlp" />
 			<replace file="${elab.client.classes.dir}/OpenORB.jnlp" token="@codebase@" value="@{codebase}" />
-			
+
 			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/JFreeChart.jnlp" />
 			<replace file="${elab.client.classes.dir}/JFreeChart.jnlp" token="@codebase@" value="@{codebase}" />
-			
+
 			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linuxInstaller.jnlp" />
 			<replace file="${elab.client.classes.dir}/linuxInstaller.jnlp" token="@codebase@" value="@{codebase}" />
-			
+
 			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macInstaller.jnlp" />
 			<replace file="${elab.client.classes.dir}/macInstaller.jnlp" token="@codebase@" value="@{codebase}" />
-			
+
 			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windowsInstaller.jnlp" />
 			<replace file="${elab.client.classes.dir}/windowsInstaller.jnlp" token="@codebase@" value="@{codebase}" />
-			
+
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ElabFullClient.jnlp" />
 			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@codebase@" value="@{codebase}" />
 			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" propertyFile="build.properties">
@@ -433,7 +433,7 @@
 				<replacefilter token="@j2se-version@" property="j2se-version" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
 			</replace>
-			
+
 			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
@@ -445,8 +445,8 @@
 		<sequential>
 			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
-		<![CDATA[<jar href="@temporary.experiment.jar@"/>
-		<!--End Experiment Jars-->]]></replacevalue>
+					<![CDATA[<jar href="@temporary.experiment.jar@"/>
+					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
 			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
@@ -454,18 +454,18 @@
 
 	<macrodef name="create.jnlp.full.client.build">
 		<sequential>
-			
-			
+
+
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/ReCFramework.jnlp" />
 			<replace file="${client.build.dir}/ReCFramework.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 				<replacefilter token="@href@" property="href" />
-			</replace>		
+			</replace>
 
 			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
 			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
-			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />			
-			
+			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
+
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/OpenORB.jnlp" />
 			<replace file="${client.build.dir}/OpenORB.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
@@ -485,7 +485,7 @@
 			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/windowsInstaller.jnlp" />
 			<replace file="${client.build.dir}/windowsInstaller.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
-			</replace>			
+			</replace>
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/ElabFullClient.jnlp" />
 			<replace file="${client.build.dir}/ElabFullClient.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
@@ -511,8 +511,8 @@
 		<sequential>
 			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
-		<![CDATA[<jar href="@temporary.experiment.jar@"/>
-		<!--End Experiment Jars-->]]></replacevalue>
+					<![CDATA[<jar href="@temporary.experiment.jar@"/>
+					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
 			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
@@ -529,15 +529,15 @@
 
 	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/ElabFullClientTemplate.jnlp.xml" />
 	<property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/ReCFramework.jnlp.xml" />
-	
+
 	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/OpenORB.jnlp.xml" />
 	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/JFreeChart.jnlp.xml" />
-	
+
 	<property name="jnlp.linuxinstaller.template.file" value="${basedir}/templates/jnlp/LinuxInstallerTemplate.jnlp.xml" />
 	<property name="jnlp.macinstaller.template.file" value="${basedir}/templates/jnlp/MacInstallerTemplate.jnlp.xml" />
 	<property name="jnlp.windowsinstaller.template.file" value="${basedir}/templates/jnlp/WindowsInstallerTemplate.jnlp.xml" />
-	
-	
+
+
 	<property name="baseuiconfig.template.file" value="${basedir}/templates/client/ReCBaseUIConfigTemplate.xml" />
 	<property name="faceconfig.template.file" value="${basedir}/templates/client/ReCFaceConfigTemplate.xml" />
 
@@ -603,10 +603,12 @@
 		<attribute name="folder" />
 		<attribute name="jar.name" />
 		<sequential>
+
 			<signjar storetype="${rec.storetype}" destDir="@{folder}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
 				<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
+			
 		</sequential>
 	</macrodef>
 
@@ -614,10 +616,12 @@
 		<attribute name="folder" />
 		<attribute name="jar.name" />
 		<sequential>
+
 			<signjar storetype="${elab.storetype}" destDir="@{folder}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
 				<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
+			
 		</sequential>
 	</macrodef>
 
@@ -634,23 +638,47 @@
 		<attribute name="destination.dir.name" />
 		<sequential>
 			<mkdir dir="@{destination.dir.name}" />
+
 			<signjar storetype="${rec.storetype}" destDir="@{destination.dir.name}" keystore="${rec.keystore}" keypass="${rec.keypass}" storepass="${rec.storepass}" alias="${rec.alias}">
 				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
+			
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="sign.all.jars.in.directory.elab.certificate">
 		<attribute name="source.dir.name" />
 		<attribute name="destination.dir.name" />
 		<sequential>
 			<mkdir dir="@{destination.dir.name}" />
+
 			<signjar storetype="${elab.storetype}" destDir="@{destination.dir.name}" keystore="${elab.keystore}" keypass="${elab.keypass}" storepass="${elab.storepass}" alias="${elab.alias}">
 				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
+			
 		</sequential>
+	</macrodef>
+	
+	<macrodef name="repack.all.jars.in.directory">
+		<attribute name="dir"/>
+	<sequential>
+		<p200ant repack="true">
+			<fileset dir="@{dir}">
+				<include name="*.jar" />
+			</fileset>
+		</p200ant>
+	</sequential>
+	</macrodef>
+	
+	<macrodef name="repack.jar">
+		<attribute name="file"/>
+	<sequential>
+		<p200ant repack="true">
+			<fileset file="@{file}" />
+		</p200ant>
+	</sequential>
 	</macrodef>
 
 	<!--
@@ -659,79 +687,32 @@
 		================================================================
 		-->
 
-	<!--taskdef name="p200ant" classname="de.matthiasmann.p200ant.P200AntTask" classpath="${rec.lib.dir}/compile/common/p200ant.jar" />
+	<taskdef name="p200ant" classname="de.matthiasmann.p200ant.P200AntTask" classpath="${rec.lib.dir}/compile/common/p200ant.jar" />
 
-	
+	<condition property="use.pack200">
+		<istrue value="${generate.pack200}" />
+	</condition>
+
 	<macrodef name="pack.200.all.jar.in.dir">
-		<attribute name="source.directory" />
-		<attribute name="destination.directory"/>
+		<attribute name="dir" />
 		<sequential>
-			<delete failonerror="false">
-				<fileset dir="@{destination.directory}"> 
-					<include name="**/*_sig.jar" />
-					<include name="**/*_sig.jar.pack.gz" />
-				</fileset>
-			</delete>
-
-			<mkdir dir="@{destination.directory}" />
-
-			<copy todir="@{destination.directory}">
-				<fileset dir="@{source.directory}"> 
-					<include name="**/*.jar" />
-				</fileset>
-			</copy>
-
-			<p200ant repack="true">
-				<fileset dir="@{destination.directory}"> 
-					<include name="**/*.jar" />
+			<p200ant destdir="@{dir}">
+				<fileset dir="@{dir}">
+					<include name="*_sig.jar" />
 				</fileset>
 			</p200ant>
-
-			<signjar destDir="@{destination.directory}" keystore="${keystore}" storepass="${keypass}" alias="${alias}" storetype="${storetype}">
-				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="*_sig.jar" />
-				<globmapper from="*.jar" to="*_sig.jar" />
-			</signjar>
-
-			<delete failonerror="false">
-				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="**/*_sig.jar" />
-			</delete>
-
-			<p200ant destdir="@{destination.directory}">
-				<fileset dir="@{destination.directory}"> 
-					<include name="**/*_sig.jar" />
-				</fileset>
-			</p200ant>
-
 		</sequential>
 	</macrodef>
-
 	
-	<macrodef name="pack.200.single.jar">
-		<attribute name="source.jar.without.extension" />
-		<attribute name="source.directory"/>
-		<attribute name="destination.directory"/>
+	<macrodef name="pack.200.jar">
+		<attribute name="file" />
 		<sequential>
-			<delete failonerror="false">
-				<fileset dir="@{destination.directory}"> 
-					<include name="@{source.jar.without.extension}_sig.jar"/> 
-					<include name="@{source.jar.without.extension}_sig.jar.pack.gz"/>
-				</fileset>
-			</delete>
-			<mkdir dir="@{destination.directory}" />
-			<copy file="@{source.directory}/@{source.jar.without.extension}.jar" todir="@{destination.directory}" overwrite="true"/>
-			<p200ant repack="true" srcfile="@{destination.directory}/@{source.jar.without.extension}.jar" />
-			<signjar destDir="@{destination.directory}" keystore="${keystore}" storepass="${keypass}" alias="${alias}" storetype="${storetype}">
-				<fileset file="@{destination.directory}/@{source.jar.without.extension}.jar" />
-				<globmapper from="*.jar" to="*_sig.jar" />
-			</signjar>
-			<delete failonerror="false">
-				<fileset dir="@{destination.directory}" includes="**/*.jar" excludes="**/*_sig.jar" />
-			</delete>
-			<p200ant repack="false" destdir="@{destination.directory}" srcfile="@{destination.directory}/@{source.jar.without.extension}_sig.jar" />
-
+			<p200ant>
+				<fileset file="@{file}" />
+			</p200ant>
 		</sequential>
-	</macrodef-->
-
+	</macrodef>
+	
 	<path id="compile.experiment.client.classpath">
 		<pathelement location="${rec.common.classes.dir}" />
 		<path refid="rec.common.libs.classpath" />
@@ -754,14 +735,14 @@
 	<macrodef name="create.baseuiconfig">
 		<sequential>
 			<copy file="${baseuiconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
-		
+
 			<process.list task="add.experiment.baseuiconfig" list="${experiment.list}" attribute.name="experiment.name" />
-			
+
 			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" propertyFile="build.properties">
 				<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
 				<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
 			</replace>
-			
+
 		</sequential>
 	</macrodef>
 
@@ -783,14 +764,14 @@
 	<macrodef name="create.faceconfig">
 		<sequential>
 			<copy file="${faceconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFaceConfig.xml" />
-		
+
 			<process.list task="add.experiment.faceconfig" list="${experiment.list}" attribute.name="experiment.name" />
-			
+
 			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" propertyFile="build.properties">
 				<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
 				<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
 			</replace>
-			
+
 		</sequential>
 	</macrodef>
 
