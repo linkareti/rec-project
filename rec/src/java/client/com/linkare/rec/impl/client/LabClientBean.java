@@ -26,6 +26,7 @@ import com.linkare.rec.acquisition.MultiCastHardware;
 import com.linkare.rec.acquisition.NotAuthorized;
 import com.linkare.rec.acquisition.NotRegistered;
 import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.apparatus.Apparatus;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListSource;
@@ -170,18 +171,19 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 				for (int i = 0; i < hardwares.length; i++) {
 					MultiCastHardwareWrapper mchw = new MultiCastHardwareWrapper(hardwares[i]);
 
-					if (mchw.getHardwareInfo(getUserInfo()) == null) {
+					HardwareInfo hardwareInfo = mchw.getHardwareInfo(getUserInfo());
+					
+					if (hardwareInfo == null) {
 						continue;
 					}
 
-					Apparatus app = new Apparatus(mchw, mchw.getHardwareInfo(getUserInfo()));
+					Apparatus app = new Apparatus(mchw, hardwareInfo);
 
 					apparatusListTemp.add(app);
 				}
 			}
 			Apparatus[] newApparatusList = new Apparatus[apparatusListTemp.size()];
 
-			((ArrayList) apparatusList).trimToSize();
 			for (int i = 0; i < apparatusListTemp.size(); i++) {
 				newApparatusList[i] = (Apparatus) apparatusListTemp.get(i);
 			}
