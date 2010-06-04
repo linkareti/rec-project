@@ -137,8 +137,6 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	/** ** DataClient Operations *** */
 
 	public UserInfo getUserInfo() {
-		// TODO check with JP
-		// userInfo = _this().getUserInfo();
 		if (userInfo == null)
 			userInfo = new UserInfo();
 		return userInfo;
@@ -294,7 +292,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 			try {
 				MultiCastController mcc = MultiCastControllerHelper.narrow(o);
 				if (mcc != null) {
-					System.out.println("mcw is being build with "+mcc);
+					System.out.println("mcw is being build with " + mcc);
 					mcw = new MultiCastControllerWrapper(mcc);
 					if (mcw.isConnected()) {
 						try {
@@ -465,14 +463,13 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	public void sendMessage(ChatMessageEvent evt) {
 		if (mcw != null) {
 			try {
-				System.out.println("MCW is "+mcw);
-				System.out.println("getUserInfo() "+getUserInfo());
-				System.out.println("evt.getUserTo() "+evt.getUserTo());
-				if(evt.getUserTo()!=null)
-				{
-					System.out.println("evt.getUserTo().getUserName()" +evt.getUserTo().getUserName());
+				System.out.println("MCW is " + mcw);
+				System.out.println("getUserInfo() " + getUserInfo());
+				System.out.println("evt.getUserTo() " + evt.getUserTo());
+				if (evt.getUserTo() != null) {
+					System.out.println("evt.getUserTo().getUserName()" + evt.getUserTo().getUserName());
 				}
-				System.out.println("evt.getMessage() "+evt.getMessage());
+				System.out.println("evt.getMessage() " + evt.getMessage());
 				mcw.sendMessage(getUserInfo(), evt.getUserTo().getUserName(), evt.getMessage());
 			} catch (NotRegistered e) {
 				fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_NOT_REGISTERED);
@@ -679,10 +676,9 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	}
 
 	public Apparatus getApparatusByID(String uniqueID) {
-		Apparatus[] appList = (Apparatus[]) (apparatusList.toArray(new Apparatus[0]));
-		for (int i = 0; i < appList.length; i++) {
-			if (appList[i].getHardwareInfo().getHardwareUniqueID().equals(uniqueID)) {
-				return appList[i];
+		for (Apparatus app : apparatusList) {
+			if (app.getHardwareInfo().getHardwareUniqueID().equals(uniqueID)) {
+				return app;
 			}
 		}
 		return null;

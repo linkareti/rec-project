@@ -37,6 +37,7 @@
 
 		<property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB"/>
 		<property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton"/>
+		<property name="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl" />
 		<property name="openorb.config" value="@codebase@/etc/openorb.xml"/>
   		<property name="openorb.profile" value="ReCClient"/>
 
