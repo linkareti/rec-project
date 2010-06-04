@@ -33,17 +33,14 @@
 
 					<h:outputLabel value="#{bundle['user.login.confirmPassword']}"
 						for="confirmPassword" />
-					<h:inputSecret id="confirmPassword"
+					<p:password id="confirmPassword"
 						binding="#{userWizard.confirmPasswordInput}"
 						value="#{userWizard.user.login.confirmPassword}"
 						validator="#{userWizard.validatePasswords}"
 						title="#{bundle['user.login.confirmPassword']}" required="true"
 						label="#{bundle['user.login.confirmPassword']}"
-						readonly="#{operation == 'view'}" />
+						readonly="#{operation == 'view'}" inline="true" />
 					<p:message for="confirmPassword" />
-
-					<h:outputText value="#{bundle['operation.skip']}" />
-					<h:selectBooleanCheckbox value="#{userWizard.skip}" />
 				</h:panelGrid>
 			</p:panel>
 		</p:tab>
@@ -69,9 +66,6 @@
 						readonly="#{operation == 'view'}"
 						label="#{bundle['person.personName.lastName']}" />
 					<p:message for="lastName" />
-
-					<h:outputText value="#{bundle['operation.skip']}" />
-					<h:selectBooleanCheckbox value="#{userWizard.skip}" />
 				</h:panelGrid>
 			</p:panel>
 		</p:tab>
@@ -89,9 +83,6 @@
 						validator="#{userWizard.validateEmail}"
 						label="#{bundle['person.emailAddress.email']}" />
 					<p:message for="email" />
-
-					<h:outputText value="#{bundle['operation.skip']}" />
-					<h:selectBooleanCheckbox value="#{userWizard.skip}" />
 				</h:panelGrid>
 			</p:panel>
 		</p:tab>
