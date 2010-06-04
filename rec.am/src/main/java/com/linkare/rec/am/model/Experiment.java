@@ -26,7 +26,8 @@ import com.linkare.commons.jpa.DefaultDomainObject;
 @Entity
 @Table(name = "EXPERIMENT")
 @NamedQueries( { @NamedQuery(name = Experiment.FIND_ALL_QUERYNAME, query = "Select e from Experiment e"),
-	@NamedQuery(name = Experiment.COUNT_ALL_QUERYNAME, query = "Select count(e) from Experiment e") })
+	@NamedQuery(name = Experiment.COUNT_ALL_QUERYNAME, query = "Select count(e) from Experiment e"),
+	@NamedQuery(name = Experiment.FIND_ALL_ACTIVE_QUERYNAME, query = "Select e from Experiment e where e.state.active = '1'") })
 public class Experiment extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +35,8 @@ public class Experiment extends DefaultDomainObject {
     public static final String FIND_ALL_QUERYNAME = "Experiment.findAll";
 
     public static final String COUNT_ALL_QUERYNAME = "Experiment.countAll";
+
+    public static final String FIND_ALL_ACTIVE_QUERYNAME = "Experiment.findAllActive";
 
     @Basic
     @Column(name = "EXTERNAL_ID", insertable = true, updatable = true, unique = true)

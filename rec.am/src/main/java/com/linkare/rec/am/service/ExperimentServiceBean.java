@@ -1,6 +1,7 @@
 package com.linkare.rec.am.service;
 
 import static com.linkare.rec.am.model.Experiment.COUNT_ALL_QUERYNAME;
+import static com.linkare.rec.am.model.Experiment.FIND_ALL_ACTIVE_QUERYNAME;
 import static com.linkare.rec.am.model.Experiment.FIND_ALL_QUERYNAME;
 
 import java.util.List;
@@ -58,5 +59,11 @@ public class ExperimentServiceBean extends BusinessServiceBean<Experiment, Long>
     public int count() {
 	final Query query = getEntityManager().createNamedQuery(COUNT_ALL_QUERYNAME);
 	return ((Long) query.getSingleResult()).intValue();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Experiment> findAllActiveExperiments() {
+	return getEntityManager().createNamedQuery(FIND_ALL_ACTIVE_QUERYNAME).getResultList();
     }
 }

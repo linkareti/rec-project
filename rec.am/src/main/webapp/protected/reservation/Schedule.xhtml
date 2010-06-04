@@ -51,7 +51,7 @@
 								label="#{bundle['reservation.experiment']}" required="true"
 								converter="experimentConverter">
 								<f:selectItems
-									value="#{experimentController.itemsAvailableSelectOne}" />
+									value="#{experimentController.activeItemsAvailableSelectOne}" />
 							</h:selectOneMenu>
 							<p:message for="experiment" />
 							<h:outputLabel value="#{bundle['reservation.reservedTo']}"

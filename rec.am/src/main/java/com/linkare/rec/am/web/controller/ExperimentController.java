@@ -7,7 +7,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.SelectItem;
 
+import com.linkare.jsf.utils.JsfUtil;
 import com.linkare.rec.am.model.Experiment;
 import com.linkare.rec.am.service.ExperimentService;
 import com.linkare.rec.am.service.ExperimentServiceLocal;
@@ -38,6 +40,10 @@ public class ExperimentController extends AbstractController<Long, Experiment, E
     public final String prepareCreate() {
 	setCurrent(new Experiment());
 	return ConstantUtils.CREATE;
+    }
+
+    public SelectItem[] getActiveItemsAvailableSelectOne() {
+	return JsfUtil.getSelectItems(getService().findAllActiveExperiments(), true);
     }
 
     @FacesConverter(value = "experimentConverter", forClass = Experiment.class)
