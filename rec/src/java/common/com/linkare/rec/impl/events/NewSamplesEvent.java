@@ -16,7 +16,11 @@ public class NewSamplesEvent implements IntersectableEvent {
 
 	private int largestNumPacket;
 
-	/** Creates a new instance of NewSamplesEvent */
+	/**
+	 * Creates a new instance of NewSamplesEvent
+	 * 
+	 * @param largestNumPacket
+	 */
 	public NewSamplesEvent(int largestNumPacket) {
 		this.largestNumPacket = largestNumPacket;
 	}
@@ -38,6 +42,19 @@ public class NewSamplesEvent implements IntersectableEvent {
 		NewSamplesEvent evt = (NewSamplesEvent) other;
 		largestNumPacket = Math.max(largestNumPacket, evt.getLargestNumPacket());
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder("[");
+		builder.append(getClass().getSimpleName());
+		builder.append(">largestNumPacket: ");
+		builder.append(largestNumPacket);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }
