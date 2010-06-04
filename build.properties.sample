@@ -64,7 +64,7 @@ org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton
 com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl
 
 ##MULTICAST PROPERTIES - MULTICAST##
-multicast.openorb.profile=recMultiCastController
+multicast.openorb.profile=ReCMultiCastController
 rec.multicast.securitymanager=pt.utl.ist.elab.security.ElabSecurityManager
 rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE=15 
 multicast.debug.address.port=8000
@@ -81,8 +81,8 @@ rec.am.port=3700
 rec.am.lab.id=LAB_ME
 
 ##SYSTEM PROPERTIES - EXPERIMENTS## 
-experiment.driver.openorb.profile=recHardware
-experiment.client.openorb.profile=recClient
+experiment.driver.openorb.profile=ReCHardware
+experiment.client.openorb.profile=ReCClient
 experiment.client.debug.address.port=8001
 experiment.driver.debug.address.port=8002
 hardwareserver.initial.heap=128m

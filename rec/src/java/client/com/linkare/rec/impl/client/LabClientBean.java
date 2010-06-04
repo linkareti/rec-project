@@ -209,6 +209,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	}
 
 	public void receiveMessage(String clientFrom, String clientTo, String message) {
+		System.out.println("Received a remote message: "+message+", coming from "+clientFrom+" to->"+clientTo);
 		fireIChatMessageListenerNewChatMessage(new ChatMessageEvent(this, new UserInfo(clientFrom), new UserInfo(
 				clientTo == ChatMessageEvent.EVERYONE_USER ? ChatMessageEvent.EVERYONE_USER_ALIAS : clientTo), message));
 	}
