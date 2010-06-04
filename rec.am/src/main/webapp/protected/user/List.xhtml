@@ -30,10 +30,14 @@
 				<p:column resizable="false">
 					<f:facet name="header"></f:facet>
 					<h:commandLink action="#{userController.prepareView}"
-						value="#{bundle['operation.view']}" />
+						value="#{bundle['operation.view']}">
+						<f:param name="userId" value="#{item.idInternal}" />
+					</h:commandLink>
 					<h:outputText value=" " />
 					<h:commandLink action="#{userController.prepareEdit}"
-						value="#{bundle['operation.edit']}" />
+						value="#{bundle['operation.edit']}">
+						<f:param name="userId" value="#{item.idInternal}" />
+					</h:commandLink>
 					<h:outputText value=" " />
 					<p:commandLink action="#{userController.destroy}" ajax="false">
 						<h:outputText value="#{bundle['operation.remove']}" />

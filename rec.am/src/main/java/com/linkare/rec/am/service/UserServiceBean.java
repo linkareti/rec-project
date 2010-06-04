@@ -42,17 +42,28 @@ public class UserServiceBean extends BusinessServiceBean<User, Long> implements 
     @AccessControlled("$currentSubject.isAdmin()")
     @Override
     public void remove(final User user) {
-	getOrCreateDAO().remove(user);
+	getOrCreateDAO().remove(find(user.getIdInternal()));
     }
 
     @Override
     public User find(final Long id) {
-	return getOrCreateDAO().find(id);
+	final User user = getOrCreateDAO().find(id);
+	loadRelations(user);
+	return user;
+    }
+
+    private void loadRelations(final User user) {
+	if (user != null) {
+	    user.getSubject();
+	    user.getLogin();
+	}
     }
 
     @Override
     public User findByUsername(final String username) {
-	return getOrCreateDAO().findByUsername(username);
+	final User user = getOrCreateDAO().findByUsername(username);
+	loadRelations(user);
+	return user;
     }
 
     @Override
