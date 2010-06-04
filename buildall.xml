@@ -198,7 +198,7 @@
 		</copy>
 	</target>
 
-	<target name="repack.client.external.lib.dependencies" if="generate.pack200">
+	<target name="repack.client.external.lib.dependencies" if="use.pack200">
 		<repack.all.jars.in.directory dir="${client.build.dir}/lib" />
 	</target>
 	
@@ -206,7 +206,7 @@
 		<sign.all.jars.in.directory.rec.certificate source.dir.name="${client.build.dir}/lib" destination.dir.name="${client.build.dir}/lib" />
 	</target>
 	
-	<target name="pack.client.external.lib.dependencies" if="generate.pack200">	
+	<target name="pack.client.external.lib.dependencies" if="use.pack200">	
 		<pack.200.all.jar.in.dir dir="${client.build.dir}/lib" />
 	</target>
 	
