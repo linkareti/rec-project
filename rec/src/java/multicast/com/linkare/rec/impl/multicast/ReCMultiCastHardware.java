@@ -407,7 +407,10 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		 * if(!clientQueue.contains(user)) throw new NotRegistered();
 		 */
 		if (!mainQueue.contains(user))
+		{
+			System.out.println("OOOppsss... This is strange... user "+user+" is not in the main queue... how did he get to us?");
 			throw new NotRegistered();
+		}
 
 		DefaultOperation op = new DefaultOperation(IOperation.OP_GET_HARDWAREINFO);
 		op.getProperties().put(IOperation.PROPKEY_HARDWAREINFO, getHardwareInfo());
