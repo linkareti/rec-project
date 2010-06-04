@@ -41,8 +41,8 @@
 		<ant antfile="recbuild.xml" dir="." target="build.all" />
 		<ant antfile="elabbuild.xml" dir="." target="build.all" />
 		<ant antfile="experimentsbuild.xml" dir="." target="build.experiments.list" />
-		<antcall target="copy.client.to.rec.am" />
 		<antcall target="build.client.lib.dependencies" />
+		<antcall target="copy.client.to.rec.am" />
 	</target>
 
 	<target name="copy.client.to.rec.am">
