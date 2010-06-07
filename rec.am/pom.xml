@@ -455,6 +455,13 @@
 								<include>wsdl/**</include>
 							</includes>
 						</resource>
+						<resource>
+							<directory>src/main/resources/skins/${rec.am.skin.name}</directory>
+							<targetPath>resources</targetPath>
+							<includes>
+								<include>**</include>
+							</includes>
+						</resource>
 					</webResources>
 				</configuration>
 			</plugin>
@@ -479,4 +486,23 @@
 
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>skin.default</id>
+			<activation>
+	        		<activeByDefault>true</activeByDefault>
+		        </activation>
+			<properties>
+				<rec.am.skin.name>default</rec.am.skin.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>skin.alternate</id>
+			<properties>
+				<rec.am.skin.name>alternate</rec.am.skin.name>
+			</properties>
+		</profile>
+	</profiles>
+
 </project>

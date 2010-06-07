@@ -157,3 +157,39 @@ php-soap from urpmi (urpmi php-soap).
 Credentials for login through wspp: 
 admin
 Linkare.2009
+
+
+=== Skinning ===
+
+Rec.am supports basic skinning. The two following two skins are included with the project's source:
+
+ * default
+ * alternate
+
+The skin "alternate" is there for example purposes and doesn't add much over the "default" besides a demonstrative (aka ugly) background.
+
+Maven will by default include the skin "default" while generating the WAR file. To use the "alternate" instead, the maven profile "skin.alternate"
+must be activated. This can be achieved passing the switch "-Pskin.alternate" in the command line, e.g.:
+
+ - mvn -Pskin.alternate clean package
+
+
+To create a new skin:
+
+ 1. Go to folder "src/main/resources/skins/" (relatively to the pom.xml) and copy any of the existing skin folders. Give the new folder a meaningful
+    name related to the skin you wish to create.
+ 2. Inside the new folder, make the necessary changes to the files. However, do not try to rename or remove files
+ 3. Add a new profile to the pom.xml so the skin can be used in the package phase.
+    Tipically, the modifications to the pom.xml will resemble the following:
+
+	<profile>
+	  <id>skin.folder_name</id>
+	  <properties>
+	    <rec.am.skin.name>folder_name</rec.am.skin.name>
+	  </properties>
+	</profile>
+
+    Where folder_name corresponds to the folder created in 1.
+  4. Skin can now be used, by typing:
+      - mvn -Pskin.folder_name clean package
+
