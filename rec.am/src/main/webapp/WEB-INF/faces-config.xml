@@ -17,14 +17,9 @@
 	</lifecycle>
 	<render-kit>
 		<renderer>
-			<component-family>javax.faces.SelectOne</component-family>
-			<renderer-type>javax.faces.Menu</renderer-type>
-			<renderer-class>com.linkare.rec.am.web.util.ExtendedMenuRenderer</renderer-class>
-		</renderer>
-		<renderer>
-			<component-family>javax.faces.SelectMany</component-family>
-			<renderer-type>javax.faces.Menu</renderer-type>
-			<renderer-class>com.linkare.rec.am.web.util.ExtendedMenuRenderer</renderer-class>
+			<component-family>javax.faces.Output</component-family>
+			<renderer-type>javax.faces.Label</renderer-type>
+			<renderer-class>com.linkare.rec.am.web.util.LabelRenderer</renderer-class>
 		</renderer>
 	</render-kit>
 	<navigation-rule>
