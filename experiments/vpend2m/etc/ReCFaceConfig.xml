@@ -1,6 +1,7 @@
 <apparatus location="PENDULO_DUPLO_MOTORIZADO_V1.0"
 	customizerClassLocationBundleKey="pend2m$rec.exp.customizer.pend2m"
 	toolTipBundleKey="pend2m$rec.exp.tip.pend2m" iconLocationBundleKey="pend2m$rec.exp.icon.pend2m"
+	descriptionStringBundleKey="pend2m$rec.exp.description.pend2m"
 	displayStringBundleKey="pend2m$rec.exp.title.pend2m"
 	desktopLocationBundleKey="pend2m$rec.exp.background.pend2m" order="1"
 	headerDisplayClassLocationBundleKey=""
