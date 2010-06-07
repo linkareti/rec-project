@@ -128,6 +128,7 @@ public class UserWizard implements Serializable {
 		return ConstantUtils.CREATE;
 	    } else {
 		userService.edit(getUser());
+		setUser(userService.find(getUser().getIdInternal()));
 		JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
 		return ConstantUtils.VIEW;
 	    }
