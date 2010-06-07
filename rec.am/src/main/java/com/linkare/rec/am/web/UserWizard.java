@@ -183,9 +183,6 @@ public class UserWizard implements Serializable {
 	    getConfirmPasswordInput().setValid(false);
 	    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, getConfirmPasswordInput().getClientId(context), ConstantUtils.LABEL_ERROR_KEY,
 				    LoginDAO.ERROR_PASSWORD_AND_CONFIRM_PASSWORD_ARE_DIFFERENT);
-	    getPasswordInput().setValid(false);
-	    JsfUtil.addErrorMessage(ConstantUtils.BUNDLE, getPasswordInput().getClientId(context), ConstantUtils.LABEL_ERROR_KEY,
-				    LoginDAO.ERROR_PASSWORD_AND_CONFIRM_PASSWORD_ARE_DIFFERENT);
 	}
     }
 

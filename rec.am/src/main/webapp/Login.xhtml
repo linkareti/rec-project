@@ -8,21 +8,18 @@
 		<h:outputText value="#{bundle['page.login.title']}"></h:outputText>
 	</ui:define>
 	<ui:define name="body" id="auth">
-		<div id="top_login">
-		<!--h1><h:outputText value="#{bundle['page.login.title']}" /></h1-->
+		<div id="top_login"><!--h1><h:outputText value="#{bundle['page.login.title']}" /></h1-->
 		</div>
-		<div id="login">
-		<h:form class="am_login">
+		<div id="login"><h:form class="am_login">
 			<h1><h:outputText value="#{bundle['rec.am.title']}" /></h1>
 			<p:focus />
 			<h:panelGrid columns="2">
-				<h:outputLabel value="#{bundle['user.username']}" for="username" />
-				<h:inputText id="username" class="username"
+				<h:outputLabel value="#{bundle['user.username']}" for="login" />
+				<h:inputText id="login" class="username"
 					value="#{authenticationBean.username}"
 					title="#{bundle['user.username']}" />
-				<h:outputText value="#{bundle['user.login.password']}"
-					for="password" />
-				<h:inputSecret id="password" class="password"
+				<h:outputText value="#{bundle['user.login.password']}" for="passwd" />
+				<h:inputSecret id="passwd" class="password"
 					value="#{authenticationBean.password}"
 					title="#{bundle['user.login.password']}" />
 				<h:outputText value="#{bundle['app.loginDomain']}" for="loginDomain" />
@@ -38,8 +35,7 @@
 						value="#{bundle['operation.login']}" />
 				</h:panelGroup>
 			</h:panelGrid>
-		</h:form>
-		<h:form class="elab_launch">
+		</h:form> <h:form class="elab_launch">
 			<h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
 			<ul>
 				<li><h:commandLink actionListener="#{portScannerBean.scan}"
@@ -51,10 +47,11 @@
 					src="http://java.sun.com/products/jfc/tsc/articles/swing2d/webstart.png"
 					border="0" /> </a></li>
 			</ul>
-		</h:form>
-		</div>
+		</h:form></div>
 
-		<div id="auth_footer"><p id="ext_nav"></p></div>
+		<div id="auth_footer">
+		<p id="ext_nav"></p>
+		</div>
 
 	</ui:define>
 </ui:composition>
