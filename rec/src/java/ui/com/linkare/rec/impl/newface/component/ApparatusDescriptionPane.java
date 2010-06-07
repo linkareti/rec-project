@@ -107,25 +107,24 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
         lblApparatusName = new javax.swing.JLabel();
         lblApparatusImg = new javax.swing.JLabel();
         btnLink = new javax.swing.JButton();
-        scrollApparatusDescription = new javax.swing.JScrollPane();
-        txtApparatusDescription = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtApparatusDescription = new javax.swing.JTextPane();
 
         setMaximumSize(new java.awt.Dimension(32767, 500));
         setMinimumSize(new java.awt.Dimension(388, 398));
         setName("Form"); // NOI18N
 
         lblApparatusName.setFont(lblApparatusName.getFont().deriveFont(lblApparatusName.getFont().getStyle() | java.awt.Font.BOLD, 16));
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ApparatusDescriptionPane.class);
-        lblApparatusName.setText(resourceMap.getString("lblApparatusName.text")); // NOI18N
+        lblApparatusName.setText(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ApparatusDescriptionPane.class).getString("lblApparatusName.text")); // NOI18N
         lblApparatusName.setName("lblApparatusName"); // NOI18N
 
-        lblApparatusImg.setIcon(resourceMap.getIcon("lblApparatusImg.icon")); // NOI18N
+        lblApparatusImg.setIcon(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ApparatusDescriptionPane.class).getIcon("lblApparatusImg.icon")); // NOI18N
         lblApparatusImg.setName("lblApparatusImg"); // NOI18N
 
-        btnLink.setBackground(resourceMap.getColor("btnLink.background")); // NOI18N
+        btnLink.setBackground(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ApparatusDescriptionPane.class).getColor("btnLink.background")); // NOI18N
         btnLink.setFont(btnLink.getFont().deriveFont((float)11));
-        btnLink.setForeground(resourceMap.getColor("btnLink.foreground")); // NOI18N
-        btnLink.setText(resourceMap.getString("btnLink.text")); // NOI18N
+        btnLink.setForeground(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ApparatusDescriptionPane.class).getColor("btnLink.foreground")); // NOI18N
+        btnLink.setText(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ApparatusDescriptionPane.class).getString("btnLink.text")); // NOI18N
         btnLink.setBorderPainted(false);
         btnLink.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLink.setName("btnLink"); // NOI18N
@@ -135,20 +134,12 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
             }
         });
 
-        scrollApparatusDescription.setBackground(resourceMap.getColor("scrollApparatusDescription.background")); // NOI18N
-        scrollApparatusDescription.setBorder(null);
-        scrollApparatusDescription.setName("scrollApparatusDescription"); // NOI18N
-        scrollApparatusDescription.setOpaque(false);
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        txtApparatusDescription.setBackground(resourceMap.getColor("txtApparatusDescription.background")); // NOI18N
-        txtApparatusDescription.setEditable(false);
-        txtApparatusDescription.setFont(txtApparatusDescription.getFont());
-        txtApparatusDescription.setLineWrap(true);
-        txtApparatusDescription.setRows(5);
-        txtApparatusDescription.setTabSize(4);
-        txtApparatusDescription.setText(resourceMap.getString("txtApparatusDescription.text")); // NOI18N
+        txtApparatusDescription.setContentType(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ApparatusDescriptionPane.class).getString("txtApparatusDescription.contentType")); // NOI18N
+        txtApparatusDescription.setToolTipText(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ApparatusDescriptionPane.class).getString("txtApparatusDescription.toolTipText")); // NOI18N
         txtApparatusDescription.setName("txtApparatusDescription"); // NOI18N
-        scrollApparatusDescription.setViewportView(txtApparatusDescription);
+        jScrollPane1.setViewportView(txtApparatusDescription);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -157,11 +148,12 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollApparatusDescription)
-                    .addComponent(lblApparatusImg)
                     .addComponent(lblApparatusName)
-                    .addComponent(btnLink, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnLink, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblApparatusImg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,13 +163,13 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
                 .addGap(18, 18, 18)
                 .addComponent(lblApparatusImg, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollApparatusDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        lblApparatusName.getAccessibleContext().setAccessibleName(resourceMap.getString("lblApparatusName.AccessibleContext.accessibleName")); // NOI18N
+        lblApparatusName.getAccessibleContext().setAccessibleName(org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ApparatusDescriptionPane.class).getString("lblApparatusName.AccessibleContext.accessibleName")); // NOI18N
     }// </editor-fold>//GEN-END:initComponents
 
     private void onInfoButtonAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onInfoButtonAction
@@ -202,10 +194,10 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLink;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApparatusImg;
     private javax.swing.JLabel lblApparatusName;
-    private javax.swing.JScrollPane scrollApparatusDescription;
-    private javax.swing.JTextArea txtApparatusDescription;
+    private javax.swing.JTextPane txtApparatusDescription;
     // End of variables declaration//GEN-END:variables
 
 }

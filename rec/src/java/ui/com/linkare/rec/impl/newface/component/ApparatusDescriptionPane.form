@@ -28,12 +28,14 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollApparatusDescription" alignment="0" max="32767" attributes="0"/>
-                  <Component id="lblApparatusImg" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblApparatusName" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLink" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="1"/>
+                      <Component id="lblApparatusImg" alignment="0" max="32767" attributes="1"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="61" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,7 +47,7 @@
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="lblApparatusImg" min="-2" pref="132" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrollApparatusDescription" pref="179" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="179" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnLink" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -94,14 +96,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onInfoButtonAction"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="scrollApparatusDescription">
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Properties>
-        <Property name="background" type="java.awt.Color" resourceKey="scrollApparatusDescription.background"/>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="null"/>
-        </Property>
-        <Property name="name" type="java.lang.String" value="scrollApparatusDescription" noResource="true"/>
-        <Property name="opaque" type="boolean" value="false"/>
+        <Property name="name" type="java.lang.String" value="jScrollPane1" noResource="true"/>
       </Properties>
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -109,19 +106,10 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="txtApparatusDescription">
+        <Component class="javax.swing.JTextPane" name="txtApparatusDescription">
           <Properties>
-            <Property name="background" type="java.awt.Color" resourceKey="txtApparatusDescription.background"/>
-            <Property name="editable" type="boolean" value="false"/>
-            <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.modules.form.editors2.FontEditor">
-              <FontInfo relative="true">
-                <Font component="txtApparatusDescription" property="font" relativeSize="true" size="0"/>
-              </FontInfo>
-            </Property>
-            <Property name="lineWrap" type="boolean" value="true"/>
-            <Property name="rows" type="int" value="5"/>
-            <Property name="tabSize" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" resourceKey="txtApparatusDescription.text"/>
+            <Property name="contentType" type="java.lang.String" resourceKey="txtApparatusDescription.contentType"/>
+            <Property name="toolTipText" type="java.lang.String" resourceKey="txtApparatusDescription.toolTipText"/>
             <Property name="name" type="java.lang.String" value="txtApparatusDescription" noResource="true"/>
           </Properties>
         </Component>
