@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/nomenu-template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{bundle['page.login.title']}"></h:outputText>
+	</ui:define>
+	<ui:define name="body" id="auth">
+		<div id="top_login"><!--h1><h:outputText value="#{bundle['page.login.title']}" /></h1-->
+		</div>
+		<div id="login"><h:form class="am_login">
+			<h1><h:outputText value="#{bundle['rec.am.title']}" /></h1>
+			<p:focus />
+			<h:panelGrid columns="2">
+				<h:outputLabel value="#{bundle['user.username']}" for="login" />
+				<h:inputText id="login" class="username"
+					value="#{authenticationBean.username}"
+					title="#{bundle['user.username']}" />
+				<h:outputText value="#{bundle['user.login.password']}" for="passwd" />
+				<h:inputSecret id="passwd" class="password"
+					value="#{authenticationBean.password}"
+					title="#{bundle['user.login.password']}" />
+				<h:outputText value="#{bundle['app.loginDomain']}" for="loginDomain" />
+				<h:selectOneMenu id="loginDomain" class="loginDomain"
+					value="#{authenticationBean.domain}"
+					title="#{bundle['app.loginDomain']}">
+					<f:selectItems value="#{loginDomainBean.loginDomains}" />
+				</h:selectOneMenu>
+				<br />
+				<h:panelGroup>
+					<h:commandButton class="submit"
+						action="#{authenticationBean.login}"
+						value="#{bundle['operation.login']}" />
+				</h:panelGroup>
+			</h:panelGrid>
+		</h:form> <h:form class="elab_launch">
+			<h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
+			<ul>
+				<li><h:commandLink actionListener="#{portScannerBean.scan}"
+					value="#{bundle['operation.checkElab']}" /></li>
+				<li><script src="http://www.java.com/js/deployJava.js"></script>
+				<a
+					href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/ElabFullClient.jnlp'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}">
+				<img
+					src="http://java.sun.com/products/jfc/tsc/articles/swing2d/webstart.png"
+					border="0" /> </a></li>
+			</ul>
+		</h:form></div>
+
+		<div id="auth_footer">
+		<p id="ext_nav"></p>
+		</div>
+
+	</ui:define>
+</ui:composition>
