@@ -60,13 +60,12 @@ h1 {
 	text-decoration: none;
 	color: white;
 	display:block;
-	padding: 12px 5px 0px 5px;
+	padding: 10px 8px 10px 8px;
 }
 
 #nav ul li a:hover {
 	color: #283234;
 	background: #E4EEED;
-	display:block;
 }
 
 #ext_nav {
