@@ -80,7 +80,7 @@ public class LabelRenderer extends Renderer {
 	while (it.hasNext()) {
 	    String id = it.next();
 
-	    if ((component != null) && id.equals(component.getClientId(context))) {
+	    if ((component != null && id != null) && id.equals(component.getClientId(context))) {
 		found = true;
 		break;
 	    }
