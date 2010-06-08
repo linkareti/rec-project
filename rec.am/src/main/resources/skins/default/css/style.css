@@ -44,23 +44,15 @@ h1 {
 }
 
 /*-------- Navigation Definitions --------*/
-#nav {
-	background: url("../../resources/images/menu_bg.gif") repeat-x;
-	height: 30px;
-}
-#nav ul {margin:0;padding:0;height: 30px;}
-#nav ul li {list-style-type: none;display: inline;float: left;padding:0;margin:0;height: 30px;}
+#nav {background: url("../../resources/images/menu_bg.gif") repeat-x;height: 30px;}
 
-#nav ul li a {font-weight: bold;text-decoration: none;color: white;display:block;padding: 8px 8px 7px 8px;}
-#nav ul li a:hover {color: #283234;	background: #E4EEED;}
+#main_nav {margin:0;padding:0;height: 30px;float:left;}
+#ext_nav {margin:0;padding:0;height: 30px;float:right;}
 
-#ext_nav {
-	float: right;
-	padding-top: 0px;
-	margin-top: 0px;
-	vertical-align: middle;
-	color: white;
-}
+#main_nav li,#ext_nav li {list-style-type: none;display: inline;float: left;padding:0;margin:0;height: 30px;}
+
+#main_nav li a, #ext_nav li a {font-weight: bold;text-decoration: none;color: white;display:block;padding: 8px 8px 7px 8px;}
+#main_nav li a:hover, #ext_nav li a:hover {color: #283234;	background: #E4EEED;}
 
 /*-------- Left Column Definitions --------*/
 #left_col {
