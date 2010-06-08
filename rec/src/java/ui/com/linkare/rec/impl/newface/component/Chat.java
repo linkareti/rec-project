@@ -16,12 +16,12 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
@@ -201,27 +201,40 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 			log.fine(evt != null ? evt.getMessage() : "null event");
 		}
 
-		String userFrom = evt.getUserFrom().getUserName();
+		final String userFrom = evt.getUserFrom().getUserName();
 		String msg = evt.getMessage();
 
 		if (msg.length() > 0) {
-			String escapedMsg = StringEscapeUtils.escapeHtml(msg);
+			final String escapedMsg = StringEscapeUtils.escapeHtml(msg);
 
-			Element msgList = getHTMLDocument().getElement(MESSAGE_LIST);
+			final Element msgList = getHTMLDocument().getElement(MESSAGE_LIST);
 
-			try {
-				getHTMLDocument().insertBeforeEnd(msgList, new UserMessage(userFrom, escapedMsg).toString());
-
-			} catch (BadLocationException e) {
-				log.log(Level.SEVERE, "Trying to insert html element", e);
-			} catch (IOException e) {
-				log.log(Level.SEVERE, "Trying to insert html element", e);
+			if (!SwingUtilities.isEventDispatchThread()) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						insertMessageIntoChat(userFrom, escapedMsg, msgList);
+					}
+				});
+			} else {
+				insertMessageIntoChat(userFrom, escapedMsg, msgList);
 			}
-			// TODO improve the method to scroll to the end of the jEditorPane
-			int editorPaneHeight = (int) msgPane.getBounds().getHeight();
-			msgPane.scrollRectToVisible(new Rectangle(new Point(0, editorPaneHeight + 15)));
-
 		}
+	}
+
+	private void insertMessageIntoChat(final String userFrom, final String escapedMsg, final Element msgList) {
+		try {
+			getHTMLDocument().insertBeforeEnd(msgList, new UserMessage(userFrom, escapedMsg).toString());
+
+		} catch (BadLocationException e) {
+			log.log(Level.SEVERE, "Trying to insert html element", e);
+		} catch (IOException e) {
+			log.log(Level.SEVERE, "Trying to insert html element", e);
+		}
+		// TODO improve the method to scroll to the end of the
+		// jEditorPane
+		int editorPaneHeight = (int) msgPane.getBounds().getHeight();
+		msgPane.scrollRectToVisible(new Rectangle(new Point(0, editorPaneHeight + 15)));
 	}
 
 	@Action
