@@ -53,8 +53,6 @@ h1 {
 	list-style-type: none;
 	display: inline;
 	float: left;
-	padding-right: 35px;
-	text-indent: -19px;
 }
 
 #nav ul li a {
@@ -62,14 +60,12 @@ h1 {
 	text-decoration: none;
 	color: white;
 	display:block;
+	padding: 12px 5px 0px 5px;
 }
 
 #nav ul li a:hover {
-	font-weight: bold;
-	text-decoration: none;
 	color: #283234;
 	background: #E4EEED;
-	padding: 15px 5px 15px 5px;
 	display:block;
 }
 
