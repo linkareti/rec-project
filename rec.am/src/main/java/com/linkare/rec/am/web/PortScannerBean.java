@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.Socket;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.html.HtmlCommandLink;
 import javax.faces.event.ActionEvent;
 
@@ -19,16 +19,22 @@ import com.linkare.rec.am.web.util.ConstantUtils;
  * 
  */
 @ManagedBean(name = "portScannerBean")
-@ApplicationScoped
+@RequestScoped
 public class PortScannerBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     public static final String DEFAULT_ELAB_HOST = "elab1.ist.utl.pt";
 
+    private static String elabHost;
+
     public static final int DEFAULT_START_PORT = 9000;
 
+    private static int startPort = -1;
+
     public static final int DEFAULT_END_PORT = 9001;
+
+    private static int endPort = -1;
 
     public static final String ELAB_HOST_KEY = "elab.host";
 
@@ -86,28 +92,37 @@ public class PortScannerBean implements Serializable {
 	}
     }
 
-    private int getPortRangeStart() {
-	try {
-	    return PropertiesManager.getIntegerProperty(ELAB_PORTRANGE_START_KEY);
-	} catch (NumberFormatException e) {
-	    return DEFAULT_START_PORT;
+    private static int getPortRangeStart() {
+	if (startPort == -1) {
+	    try {
+		startPort = PropertiesManager.getIntegerProperty(ELAB_PORTRANGE_START_KEY);
+	    } catch (NumberFormatException e) {
+		startPort = DEFAULT_START_PORT;
+	    }
 	}
+	return startPort;
     }
 
     private int getPortRangeEnd() {
-	try {
-	    return PropertiesManager.getIntegerProperty(ELAB_PORTRANGE_END_KEY);
-	} catch (NumberFormatException e) {
-	    return DEFAULT_END_PORT;
+	if (endPort == -1) {
+	    try {
+		endPort = PropertiesManager.getIntegerProperty(ELAB_PORTRANGE_END_KEY);
+	    } catch (NumberFormatException e) {
+		endPort = DEFAULT_END_PORT;
+	    }
 	}
+	return endPort;
     }
 
     private String getElabHost() {
-	String elabHostKey = PropertiesManager.getProperty(ELAB_HOST_KEY);
-	if (elabHostKey != null) {
-	    return elabHostKey;
-	} else {
-	    return DEFAULT_ELAB_HOST;
+	if (elabHost == null) {
+	    String elabHostKey = PropertiesManager.getProperty(ELAB_HOST_KEY);
+	    if (elabHostKey != null) {
+		elabHost = elabHostKey;
+	    } else {
+		elabHost = DEFAULT_ELAB_HOST;
+	    }
 	}
+	return elabHost;
     }
 }

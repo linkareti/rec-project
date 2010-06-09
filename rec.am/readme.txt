@@ -137,13 +137,9 @@
 
 
 
-=== Linkare - Paulo Zenida ===
+=== Moodle integration ===
 
-This project still has several problems, namely:
-
-1 - The webservices client is not generated using the maven axis plugin but through eclipse (check this out, later).
-2 - The number of webservices invocations should be decreased. But, to do so, we will probably need to change the PHP code from the wspp package
-from which this project largely depends on. That project was checked out from the following location and installed in the moodle home directory:
+This project is integrated with a Moodle through Webservices. To do so, simply install a Moodle together with the wspp patch:
 
 host: 				es.cvs.moodle.org
 user: 				anonymous
@@ -153,11 +149,6 @@ tag:				HEAD
 
 The installation of this plugin as well as moodle itself should be straightforward. Nevertheless, just as a reminder, don't forget to install the
 php-soap from urpmi (urpmi php-soap).
-
-Credentials for login through wspp: 
-admin
-Linkare.2009
-
 
 === Skinning ===
 
@@ -192,4 +183,3 @@ To create a new skin:
     Where folder_name corresponds to the folder created in 1.
   4. Skin can now be used, by typing:
       - mvn -Pskin.folder_name clean package
-

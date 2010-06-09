@@ -35,7 +35,7 @@
 						value="#{bundle['operation.login']}" />
 				</h:panelGroup>
 			</h:panelGrid>
-		</h:form> <h:form class="elab_launch">
+		</h:form> <h:form id="elab_launch_form" class="elab_launch">
 			<h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
 			<ul>
 				<li>
@@ -43,11 +43,13 @@
 					binding="#{portScannerBean.checkMulticastServerLink}"
 					actionListener="#{portScannerBean.scan}"
 					value="#{bundle['operation.check.multicastServer']}" /></p>
-				<p><h:message for="checkMulticastServer" styleClass="elab_info"
-					errorClass="elab_error" infoStyle="elab_info" /></p>
+				<p><h:message id="multicastServerMessage" for="checkMulticastServer"
+					styleClass="elab_info" errorClass="elab_error"
+					infoStyle="elab_info" /></p>
 				</li>
 
-				<li><h:commandLink onclick="run();return false;"
+				<li><h:commandLink
+					onclick="run();hideMulticastServerMessage();return false;"
 					value="#{bundle['operation.check.elab']}" /> <applet
 					id="JavaSocketBridge" archive="JavaSocketBridge.jar"
 					code="JavaSocketBridge.class" width="0" height="0"> </applet>
