@@ -25,7 +25,7 @@ public class OpenURLAction extends javax.swing.AbstractAction {
 
 	/** Creates a new instance of OpenURLAction */
 	public OpenURLAction(final String strName, final String strURLResource) {
-		this.putValue(this.NAME, strName);
+		this.putValue(OpenURLAction.NAME, strName);
 
 		try {
 			url = new URL(strURLResource);
