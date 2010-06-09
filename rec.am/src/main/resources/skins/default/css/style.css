@@ -261,7 +261,7 @@ form#content div {
 	margin-left: 0.5%;
 	min-height: 416px;
 }
-
+.pf-panel-ft {margin:0; !important;}
 /*-------- Footer Definitions --------*/
 #footer {
 	color: white;
