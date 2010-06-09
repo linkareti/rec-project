@@ -28,14 +28,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="scrollApparatusDescription" alignment="0" pref="356" max="32767" attributes="1"/>
                   <Component id="lblApparatusName" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLink" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="1"/>
-                      <Component id="lblApparatusImg" alignment="0" max="32767" attributes="1"/>
-                  </Group>
+                  <Component id="lblApparatusImg" alignment="0" min="-2" max="-2" attributes="1"/>
               </Group>
-              <EmptySpace pref="61" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,7 +45,7 @@
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="lblApparatusImg" min="-2" pref="132" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="179" max="32767" attributes="0"/>
+              <Component id="scrollApparatusDescription" pref="179" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnLink" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -96,9 +94,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onInfoButtonAction"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="scrollApparatusDescription">
       <Properties>
-        <Property name="name" type="java.lang.String" value="jScrollPane1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="scrollApparatusDescription" noResource="true"/>
       </Properties>
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -111,6 +109,7 @@
             <Property name="contentType" type="java.lang.String" resourceKey="txtApparatusDescription.contentType"/>
             <Property name="toolTipText" type="java.lang.String" resourceKey="txtApparatusDescription.toolTipText"/>
             <Property name="name" type="java.lang.String" value="txtApparatusDescription" noResource="true"/>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
