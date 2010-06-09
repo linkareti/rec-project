@@ -38,8 +38,21 @@
 		</h:form> <h:form class="elab_launch">
 			<h1><h:outputText value="#{bundle['rec.elab.title']}" /></h1>
 			<ul>
-				<li><h:commandLink actionListener="#{portScannerBean.scan}"
-					value="#{bundle['operation.checkElab']}" /></li>
+				<li>
+				<p><h:commandLink id="checkMulticastServer"
+					binding="#{portScannerBean.checkMulticastServerLink}"
+					actionListener="#{portScannerBean.scan}"
+					value="#{bundle['operation.check.multicastServer']}" /></p>
+				<p><h:message for="checkMulticastServer" styleClass="elab_info"
+					errorClass="elab_error" infoStyle="elab_info" /></p>
+				</li>
+
+				<li><h:commandLink onclick="run();return false;"
+					value="#{bundle['operation.check.elab']}" /> <applet
+					id="JavaSocketBridge" archive="JavaSocketBridge.jar"
+					code="JavaSocketBridge.class" width="0" height="0"> </applet>
+				<p id="the_message" />
+				</li>
 				<li><script src="http://www.java.com/js/deployJava.js"></script>
 				<a
 					href="javascript:var dir = location.href.substring(0, location.href.lastIndexOf('/')+1); var url = dir + 'client/ElabFullClient.jnlp'; if (!deployJava.isWebStartInstalled('1.6')) {if (deployJava.installLatestJRE()) {if (deployJava.launch(url)) {}}} else {if (deployJava.launch(url)) {}}">

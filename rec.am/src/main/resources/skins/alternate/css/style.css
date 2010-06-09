@@ -332,12 +332,12 @@ form#content div {
 
 #login ul {
 	list-style: none outside none;
-	padding-top: 30px;
+	padding-top: 0px;
 }
 
 #login ul li {
 	margin-left: -40px;
-	padding-top: 10px;
+	padding-top: 5px;
 	text-align: center;
 }
 
@@ -389,4 +389,12 @@ form#content div {
 	border-color: black;
 	width: 185px;
 	height: 23px;
+}
+
+.elab_error {
+	color: red;
+}
+
+.elab_info {
+	color: white;
 }

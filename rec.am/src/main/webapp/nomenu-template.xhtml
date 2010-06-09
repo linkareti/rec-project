@@ -10,11 +10,24 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><ui:insert name="title">Default Title</ui:insert></title>
 	<h:outputStylesheet name="css/style.css" />
+	<script type="text/javascript" src="scripts/java_socket_bridge.js" />
+	<script type="text/javascript">
+		function run(){
+			var result = socket_connect('elab1.ist.utl.pt', 9000);
+			var message_field = document.getElementById('the_message');
+			if(result) {
+				message_field.innerHTML += 'ok';
+				message_field.className += 'elab_info';
+			} else {
+				message_field.innerHTML += 'not ok';
+				message_field.className += 'elab_error';
+			}
+		}
+	</script>
 </h:head>
+<h:body>
 
-<h:body id="auth">
-
-	<p:growl id="msg" showDetail="true" />
+	<p:growl id="msg" showDetail="true" globalOnly="true" />
 
 	<!-- p:layout fullPage="true" toggleListener="#{layoutBean.handleToggle}"
 		onToggleUpdate="msg" closeListener="#{layoutBean.handleClose}"

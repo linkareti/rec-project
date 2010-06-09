@@ -19,7 +19,7 @@
 		<renderer>
 			<component-family>javax.faces.Output</component-family>
 			<renderer-type>javax.faces.Label</renderer-type>
-			<renderer-class>com.linkare.rec.am.web.util.LabelRenderer</renderer-class>
+			<renderer-class>com.linkare.jsf.components.LabelRenderer</renderer-class>
 		</renderer>
 	</render-kit>
 	<navigation-rule>

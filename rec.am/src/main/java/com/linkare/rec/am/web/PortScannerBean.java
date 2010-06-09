@@ -6,6 +6,7 @@ import java.net.Socket;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.component.html.HtmlCommandLink;
 import javax.faces.event.ActionEvent;
 
 import com.linkare.commons.utils.PropertiesManager;
@@ -35,6 +36,23 @@ public class PortScannerBean implements Serializable {
 
     public static final String ELAB_PORTRANGE_END_KEY = "elab.portrange.end";
 
+    private HtmlCommandLink checkMulticastServerLink;
+
+    /**
+     * @return the checkMulticastServerLink
+     */
+    public HtmlCommandLink getCheckMulticastServerLink() {
+	return checkMulticastServerLink;
+    }
+
+    /**
+     * @param checkMulticastServerLink
+     *            the checkMulticastServerLink to set
+     */
+    public void setCheckMulticastServerLink(HtmlCommandLink outputLink) {
+	this.checkMulticastServerLink = outputLink;
+    }
+
     public PortScannerBean() {
 	try {
 	    PropertiesManager.loadProperties("/configuration.properties");
@@ -60,9 +78,11 @@ public class PortScannerBean implements Serializable {
 	    }
 	}
 	if (!canAccessPort) {
-	    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, "error.elab.port.not.accessible");
+	    JsfUtil.addErrorMessage(getCheckMulticastServerLink().getClientId(), ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY,
+				    "error.multicastServer.not.available");
 	} else {
-	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, "info.elab.port.accessible");
+	    JsfUtil.addSuccessMessage(getCheckMulticastServerLink().getClientId(), ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY,
+				      "info.multicastServer.available");
 	}
     }
 
