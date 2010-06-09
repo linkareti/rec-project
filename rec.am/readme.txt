@@ -167,7 +167,7 @@ must be activated. This can be achieved passing the switch "-Pskin.alternate" in
 
 To create a new skin:
 
- 1. Go to folder "src/main/resources/skins/" (relatively to the pom.xml) and copy any of the existing skin folders. Give the new folder a meaningful
+ 1. Go to folder "src/main/skins/" (relatively to the pom.xml) and copy any of the existing skin folders. Give the new folder a meaningful
     name related to the skin you wish to create.
  2. Inside the new folder, make the necessary changes to the files. However, do not try to rename or remove files
  3. Add a new profile to the pom.xml so the skin can be used in the package phase.
@@ -183,3 +183,15 @@ To create a new skin:
     Where folder_name corresponds to the folder created in 1.
   4. Skin can now be used, by typing:
       - mvn -Pskin.folder_name clean package
+
+=== Target Environments ===
+
+The pom.xml is prepared to build this project for various target environments. Currently production and development environments are
+supported with development being the default one. To use any of the environments specify one of the follwing maven profiles during the build:
+
+ * targetenv.dev
+ * targetenv.prod
+
+NOTE: When specifying any profiles, a skin profile and a environment profile must both be provided. Failing to do so will either prevent the
+creation of the WAR file or create it containing bad configurations.
+

@@ -313,6 +313,22 @@
 		<url>http://www.linkare.com</url>
 	</organization>
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>META-INF/persistence.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>META-INF/persistence.xml</exclude>
+				</excludes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 		<finalName>${artifactId}</finalName>
 		<plugins>
 			<!-- Compiler plugin enforces Java 1.6 compatiblity -->
@@ -455,7 +471,7 @@
 							</includes>
 						</resource>
 						<resource>
-							<directory>src/main/resources/skins/${rec.am.skin.name}</directory>
+							<directory>src/main/skins/${rec.am.skin.name}</directory>
 							<targetPath>resources</targetPath>
 							<includes>
 								<include>**</include>
@@ -500,6 +516,23 @@
 			<id>skin.alternate</id>
 			<properties>
 				<rec.am.skin.name>alternate</rec.am.skin.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>targetenv.dev</id>
+			<activation>
+	        		<activeByDefault>true</activeByDefault>
+		        </activation>
+			<properties>
+				<targetenv.hibernate.show_sql>true</targetenv.hibernate.show_sql>
+				<targetenv.hibernate.hbm2ddl.auto>update</targetenv.hibernate.hbm2ddl.auto>
+			</properties>
+		</profile>
+		<profile>
+			<id>targetenv.prod</id>
+			<properties>
+				<targetenv.hibernate.show_sql>false</targetenv.hibernate.show_sql>
+				<targetenv.hibernate.hbm2ddl.auto>validate</targetenv.hibernate.hbm2ddl.auto>
 			</properties>
 		</profile>
 	</profiles>
