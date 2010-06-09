@@ -155,8 +155,8 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     public Reservation(final User reservedBy, final String domain) {
 	this();
-	setUser(reservedBy);
-	setDomain(domain);
+	this.user = reservedBy;
+	this.domain = domain;
     }
 
     /**
