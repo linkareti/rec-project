@@ -190,6 +190,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 		if (expDataModel != null) {
 			expDataModel.addExpDataModelListener(this);
 		}
+		resultsActionBar.setExpDataModel(experimentDataModel);
 	}
 
 	private void addExperimentDataDisplays(List<ExpDataDisplay> displays) {

@@ -11,9 +11,17 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.logging.Logger;
 
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+
+import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
+import com.linkare.rec.impl.client.experiment.ExpDataModel;
 
 /**
  * 
@@ -24,6 +32,9 @@ public class ResultsActionBar extends javax.swing.JPanel {
 	private static final Logger log = Logger.getLogger(ResultsActionBar.class.getName());
 
 	private JComponent activeExpDataDisplay;
+	
+	/** Holds value of property expDataModel. */
+	private ExpDataModel expDataModel;
 
 	/** Creates new form ExperimentActionBar */
 	public ResultsActionBar() {
@@ -44,6 +55,10 @@ public class ResultsActionBar extends javax.swing.JPanel {
 
 	public void setActiveExpDataDisplay(JComponent activeExpDataDisplay) {
 		this.activeExpDataDisplay = activeExpDataDisplay;
+	}
+	
+	public void setExpDataModel(ExpDataModel expDataModel) {
+		this.expDataModel = expDataModel;
 	}
 
 	/**
@@ -176,61 +191,67 @@ public class ResultsActionBar extends javax.swing.JPanel {
 	// @see GDataTable
 
 	private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-	//		javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
-	//
-	//		ExtensionFilter textExtension = new ExtensionFilter("csv", "ext");
-	//
-	//		textExtension.setDescription("Comma separated files");
-	//		jFileChooserSave.setAcceptAllFileFilterUsed(false);
-	//		jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
-	//		jFileChooserSave.setFileFilter(textExtension);
-	//
-	//		int returnValue = jFileChooserSave.showSaveDialog(this);
-	//		String extension = null;
-	//		if (returnValue == jFileChooserSave.APPROVE_OPTION) {
-	//			extension = textExtension.getExtension();
-	//		}
-	//		String path = jFileChooserSave.getSelectedFile().getPath();
-	//		if (path.endsWith(extension)) {
-	//			path = path.substring(0, path.length() - 4);
-	//		}
-	//		File saveFile = new File(path + "." + extension);
-	//		saveTable(saveFile, false);
+		if (expDataModel != null) {
+			
+			javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
+			ExtensionFilter textExtension = new ExtensionFilter("csv", "ext");
+	
+			textExtension.setDescription("Comma separated files");
+			jFileChooserSave.setAcceptAllFileFilterUsed(false);
+			jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+			jFileChooserSave.setFileFilter(textExtension);
+	
+			int returnValue = jFileChooserSave.showSaveDialog(this);
+			String extension = null;
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				extension = textExtension.getExtension();
+			}
+			String path = jFileChooserSave.getSelectedFile().getPath();
+			if (path.endsWith(extension)) {
+				path = path.substring(0, path.length() - 4);
+			}
+			File saveFile = new File(path + "." + extension);
+			saveTable(saveFile, false);
+			
+		} else {
+			log.warning("There is no data to save");
+		}
 	}//GEN-LAST:event_btnSaveActionPerformed
 
-	//	public void saveTable(File saveFile, boolean append) {
-	//		try {
-	//			Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
-	//			final String LS = System.getProperty("line.separator");
-	//			final String COMMA = ",";
-	//			final String QUOTE = "\"";
-	//			// java.io.FileWriter fileWriter = new java.io.FileWriter(saveFile,
-	//			// append);
-	//			for (int headerCol = 0; headerCol < dataTable.getColumnCount(); headerCol++) {
-	//				fileWriter.write(QUOTE + dataTable.getColumnName(headerCol) + QUOTE);
-	//				fileWriter.write(COMMA);
-	//			}
-	//			fileWriter.write(LS);
-	//			for (int row = 0; row < dataTable.getRowCount(); row++) {
-	//				for (int col = 0; col < dataTable.getColumnCount(); col++) {
-	//					fileWriter.write(QUOTE + new String().valueOf(dataTable.getValueAt(row, col)) + QUOTE);
-	//					fileWriter.write(COMMA);
-	//				}
-	//				fileWriter.write(LS);
-	//			}
-	//			fileWriter.flush();
-	//			fileWriter.close();
-	//		} catch (java.io.IOException ioe) {
-	//			System.out.println("Error while trying to save data to file: " + ioe);
-	//		}
-	//	}
+	public void saveTable(File saveFile, boolean append) {
+		try {
+			Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
+			final String LS = System.getProperty("line.separator");
+			final String COMMA = ",";
+			final String QUOTE = "\"";
+			
+			for (int headerCol = 0; headerCol < expDataModel.getChannelCount(); headerCol++) {
+				fileWriter.write(QUOTE + expDataModel.getChannelName(headerCol) + QUOTE);
+				fileWriter.write(COMMA);
+			}
+			fileWriter.write(LS);
+			for (int row = 0; row < expDataModel.getTotalSamples(); row++) {
+				for (int col = 0; col < expDataModel.getChannelCount(); col++) {
+					fileWriter.write(QUOTE + String.valueOf(expDataModel.getValueAt(row, col)) + QUOTE);
+					fileWriter.write(COMMA);
+				}
+				fileWriter.write(LS);
+			}
+			fileWriter.flush();
+			fileWriter.close();
+		} catch (java.io.IOException ioe) {
+			log.warning("Error while trying to save data to file: " + ioe);
+		}
+	}
 
 	private void btnCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopyActionPerformed
 		// TODO add your handling code here:
+		log.warning("Copy action not implemented");
 	}//GEN-LAST:event_btnCopyActionPerformed
 
 	private void btnSelectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectAllActionPerformed
 		// TODO add your handling code here:
+		log.warning("Select all action not implemented");
 	}//GEN-LAST:event_btnSelectAllActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
