@@ -202,7 +202,8 @@ form#content div {
 
 .yui-dt-liner {
 	padding: 4px 1px !important;
-	margin:0 auto;
+	margin-left:auto !important;
+	margin-right:auto !important;
 }
 
 .list {
