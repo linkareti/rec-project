@@ -93,22 +93,23 @@ h1 {
 	margin-right: 0.5%;
 	min-height: 416px;
 }
+#left_col ul {margin:0;padding:0;}
 
 #left_col ul li {
 	list-style-type: none;
-	padding-top: 10px;
-	text-indent: -20px;
+	padding: 0px;
+	margin:0;
 }
 
 #left_col ul li a {
 	font-weight: bold;
 	text-decoration: none;
 	color: #283234;
+	padding:3px;
+	display:block;
 }
 
 #left_col ul li a:hover {
-	font-weight: bold;
-	text-decoration: none;
 	color: #E4EEED;
 	background: #283234;
 }
