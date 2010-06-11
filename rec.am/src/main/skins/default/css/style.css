@@ -144,7 +144,10 @@ h1 {
 }
 
 .yui-dt a {
-	text-decoration: none;
+	text-decoration: none !important;
+	display:block !important;
+	padding:0 !important;
+	margin:0 !important;
 }
 
 .yui-dt table thead th {
@@ -154,7 +157,7 @@ h1 {
 }
 
 .yui-dt table thead th input {
-	
+	width: 100% !important;
 }
 
 .yui-dt table thead th * {
