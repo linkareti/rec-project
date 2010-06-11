@@ -98,7 +98,7 @@ h1 {
 #left_col ul li {
 	list-style-type: none;
 	padding: 0px;
-	margin:0;
+	margin:0 0 1px 0;
 }
 
 #left_col ul li a {
@@ -107,10 +107,11 @@ h1 {
 	color: #283234;
 	padding:3px 3px 3px 7px;
 	display:block;
+	background: #cfd7d6;
 }
 
 #left_col ul li a:hover {
-	color: #E4EEED;
+	color: #e4eeed;
 	background: #283234;
 }
 
