@@ -141,11 +141,10 @@ h1 {
 
 .yui-dt table {
 	border: 0px !important;
-	width: 100% !important;
 }
 
 .yui-dt a {
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 .yui-dt table thead th {
@@ -155,7 +154,7 @@ h1 {
 }
 
 .yui-dt table thead th input {
-	width: 100% !important;
+	
 }
 
 .yui-dt table thead th * {
