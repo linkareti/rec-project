@@ -147,8 +147,9 @@ h1 {
 	text-decoration: none !important;
 	display:block !important;
 	padding:0 !important;
-	margin:0 !important;
+	margin:0 5px 0 5px !important;
 }
+.yui-dt a:hover {text-decoration:none !important;}
 
 .yui-dt table thead th {
 	background: #cfd7d6 !important;
