@@ -217,9 +217,12 @@ form#content div {
 	cursor:default !important;
 }
 .title_col .yui-dt-liner,.details_col .yui-dt-liner,.links_col .yui-dt-liner {
-	padding:0 !important;
-	margin:2px 4px 2px 4px !important;
-	cursor:default !important;	
+	margin:0 !important;
+	padding:2px 4px 2px 4px !important;
+	cursor:default !important;
+	border:none !important;
+	color:#283234;
+		
 }
 .links_col .yui-dt-liner a{
 	display:inline !important; 	
