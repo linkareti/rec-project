@@ -157,6 +157,8 @@ h1 {
 	text-align:center !important;
 	padding:3px 5px 3px 5px !important;
 	cursor:default !important;
+	color: #283234 !important;
+	font-size: 10pt !important;	
 }
 
 .yui-dt table thead th input {
@@ -165,24 +167,19 @@ h1 {
 	margin-top:3px !important;
 }
 
-.yui-dt table thead th * {
-	color: #283234 !important;
-	font-size: 10pt !important;
-}
-
 .yui-dt table thead th.details_col {
 	border-left: 1px solid !important;
 	border-right: 1px solid !important;
 	border-color: #E4EEED !important;
 }
 
-.yui-dt table tbody * {
+.yui-dt table tbody {
 	border-bottom: 1px solid !important;
 	border-top: 1px solid !important;
 	border-color: #E4EEED !important;
 }
 
-table .yui-dt-selected * {
+table .yui-dt-selected {
 	background-color: #FFFF9F !important;
 	color: #283234;
 	font-weight: bold;
