@@ -156,6 +156,7 @@ h1 {
 	border: 0px !important;
 	text-align:center !important;
 	padding:3px 5px 3px 5px !important;
+	cursor:default !important;
 }
 
 .yui-dt table thead th input {
