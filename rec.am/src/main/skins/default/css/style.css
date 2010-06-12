@@ -189,18 +189,20 @@ table .yui-dt-selected * {
 	text-decoration: none;
 }
 
-.yui-dt-even * {
+.yui-dt-even {
 	background-color: #f4f9f8 !important;
 	border: 0px !important;
 	color: #283234;
 	text-decoration: none;
+	cursor:default !important;
 }
 
-.yui-dt-odd * {
+.yui-dt-odd {
 	background-color: #ffffff !important;
 	border: 0px !important;
 	color: #283234;
 	text-decoration: none;
+	cursor:default !important;
 }
 
 form#content div {
