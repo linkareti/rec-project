@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://elab.ist.utl.pt/rec/eLab" href="eLabFullClient.jnlp">
+    <information>
+        <title>eLab - Full Laboratory</title>
+        <vendor>I.S.T. - U.T.L.</vendor>
+	<homepage href="http://elab.ist.utl.pt/rec"/>
+	<description kind="one-line">Todas as experiências eLab</description>
+	<description kind="tooltip">Elab - Laboratório Completo</description>
+	<description kind="short">Acesso a todas as experiências disponíveis</description>
+	<icon href="fullclient_iconified.gif"/>
+	<icon kind="splash" href="elab_logo.png"/>
+    </information>
+    <resources>
+        <j2se version="1.5+" initial-heap-size="32m" max-heap-size="256m"/>
+        <jar href="ElabFullClient_sig.jar" main="true"/>
+	<jar href="g/ElabGCustomizer_sig.jar"/>
+	<jar href="radio/ElabRadioactividadeCustomizer_sig.jar"/>
+	<jar href="scuba/ElabScubaCustomizer_sig.jar"/>
+	<jar href="pv/ElabPVCustomizer_sig.jar"/>
+        <jar href="pendulo/ElabPenduloCustomizer_sig.jar"/>
+	<jar href="planck/ElabPlanckCustomizer_sig.jar"/>
+        <jar href="discos/ElabMomInerciaCustomizer_sig.jar"/>
+        <jar href="aleatorio/ElabAleatorioCustomizer_sig.jar"/>
+        <jar href="t/ElabTCustomizer_sig.jar"/>
+        <jar href="meteo/ElabMeteoCustomizer_sig.jar"/>
+        <jar href="meteo/JCFN_sig.jar"/>
+	<jar href="statsound/ElabStatSoundCustomizer_sig.jar" />
+	<jar href="webrobot/ElabWebRobotCustomizer_sig.jar" />
+        <jar href="thomson/ElabThomsonCustomizer_sig.jar" />
+	<jar href="polaroid/ElabPolaroidCustomizer_sig.jar" />
+        <jar href="gamma/ElabGammaCustomizer_sig.jar" />
+        <jar href="telescopio/ElabTelescopioCustomizer_sig.jar" />
+        <jar href="pg/ElabPGCustomizer_sig.jar"/>
+        <jar href="telescopio/fits1.3_sig.jar" />
+	<jar href="condensadorcilindrico/ElabCondensadorCilindricoCustomizer_sig.jar" />
+	<extension name="JFreeChartClient" href="../jfreechart/JFreeChartClient.jnlp" />
+	<extension name="ReCClient" href="../recbase/ReCClient.jnlp" />
+	<extension name="OpenORBClient" href="../openorb/OpenORBClient.jnlp" />
+	<property name="ReC.PercentFreeMemoryThreshold2Serialization" value="80" />
+
+	<!--Thomson properties-->
+        <property name="Thomson.Cross" value="17" />
+        <property name="Thomson.D1" value="18" />
+        <property name="Thomson.D2" value="53" />
+        <property name="Thomson.Preto.R1" value="133" />
+        <property name="Thomson.Preto.G1" value="129" />
+        <property name="Thomson.Preto.B1" value="117" />
+        <property name="Thomson.Azul.R" value="198" />
+        <property name="Thomson.Azul.G" value="218" />
+        <property name="Thomson.Azul.B" value="255" />
+        <property name="Thomson.Azul.Raio" value="76" />
+        <property name="Thomson.N.Esp" value="640" />
+        <property name="Thomson.D.Esp" value="0.085" />
+        <property name="Thomson.P" value="1" />
+        <property name="Thomson.Ransac.Error" value="10" />
+			
+        <!--End of thomson properties-->
+    <!--<extension name="JHelp" href="../jh/jhelp.jnlp"/>-->        
+    </resources>
+    <application-desc main-class="pt.utl.ist.elab.client.FullClient">
+    	<argument>-resources:http://elab.ist.utl.pt/rec/eLab/FullClient.properties</argument>
+    </application-desc>
+    <security>
+        <all-permissions/>
+    </security>
+</jnlp>

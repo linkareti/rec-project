@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="title">Default Title</ui:insert></title>
+	<h:outputStylesheet name="css/style.css" />
+	<script type="text/javascript" src="scripts/java_socket_bridge.js" />
+	<script type="text/javascript">
+		function run() {
+			var result = socket_connect('elab1.ist.utl.pt', 9000);
+			var message_field = document.getElementById('the_message');
+			if(result) {
+				message_field.innerHTML += 'ok';
+				message_field.className += 'elab_info';
+			} else {
+				message_field.innerHTML += 'not ok';
+				message_field.className += 'elab_error';
+			}
+		}
+		function hideMulticastServerMessage() {
+			document.getElementById('elab_launch_form:multicastServerMessage').style.display="none";
+		}
+	</script>
+</h:head>
+<h:body>
+
+	<p:growl id="msg" showDetail="true" globalOnly="true" />
+
+	<!-- p:layout fullPage="true" toggleListener="#{layoutBean.handleToggle}"
+		onToggleUpdate="msg" closeListener="#{layoutBean.handleClose}"
+		onCloseUpdate="msg" resizeListener="#{layoutBean.handleResize}"
+		onResizeUpdate="msg" -->
+
+	<p><ui:insert name="body">Default Body</ui:insert></p>
+
+</h:body>
+</html>
