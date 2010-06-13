@@ -43,7 +43,7 @@ public class EditorPaneStyle extends DefaultStyle {
 	@Override
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
-		map.put(BORDER, THIN_BLUE_BORDER);
+//		map.put(BORDER, THIN_BLUE_BORDER);   //IF uncomment create double border in chatbox
 		map.put(FOREGROUND, COLOR_EDITORPANE_FG);
 		map.put(BACKGROUND, COLOR_EDITORPANE_BG);
 	}
