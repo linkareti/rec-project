@@ -188,7 +188,7 @@ table .yui-dt-selected {
 
 .yui-dt-even {
 	background-color: #f4f9f8 !important;
-	border: 0px !important;
+	border: none !important;
 	color: #283234;
 	text-decoration: none;
 	cursor:default !important;
@@ -196,11 +196,13 @@ table .yui-dt-selected {
 
 .yui-dt-odd {
 	background-color: #ffffff !important;
-	border: 0px !important;
+	border: none !important;
 	color: #283234;
 	text-decoration: none;
 	cursor:default !important;
 }
+
+.yui-dt-even td,.yui-dt-odd td {border:none;}
 
 form#content div {
 	background: transparent;
