@@ -503,10 +503,26 @@
 	</build>
 
 	<profiles>
+		<!-- Profiles skin.empty and skin.default are duplicates since maven doesn't allow multiples of the "property" tag
+			in a single "activation" tag -->
+		<profile>
+			<id>skin.empty</id>
+			<activation>
+				<property>
+					<name>!skin</name>
+				</property>
+			</activation>
+			<properties>
+				<rec.am.skin.name>default</rec.am.skin.name>
+			</properties>
+		</profile>
 		<profile>
 			<id>skin.default</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>skin</name>
+					<value>default</value>
+				</property>
 			</activation>
 			<properties>
 				<rec.am.skin.name>default</rec.am.skin.name>
@@ -514,14 +530,37 @@
 		</profile>
 		<profile>
 			<id>skin.alternate</id>
+			<activation>
+				<property>
+					<name>skin</name>
+					<value>alternate</value>
+				</property>
+			</activation>
 			<properties>
 				<rec.am.skin.name>alternate</rec.am.skin.name>
+			</properties>
+		</profile>
+		<!-- Profiles targetenv.empty and targetenv.dev are duplicates since maven doesn't allow multiples of the "property" tag
+			in a single "activation" tag -->
+		<profile>
+			<id>targetenv.empty</id>
+			<activation>
+				<property>
+					<name>!targetenv</name>
+				</property>
+		        </activation>
+			<properties>
+				<targetenv.hibernate.show_sql>true</targetenv.hibernate.show_sql>
+				<targetenv.hibernate.hbm2ddl.auto>update</targetenv.hibernate.hbm2ddl.auto>
 			</properties>
 		</profile>
 		<profile>
 			<id>targetenv.dev</id>
 			<activation>
-	        		<activeByDefault>true</activeByDefault>
+				<property>
+					<name>targetenv</name>
+					<value>dev</value>
+				</property>
 		        </activation>
 			<properties>
 				<targetenv.hibernate.show_sql>true</targetenv.hibernate.show_sql>
@@ -530,6 +569,12 @@
 		</profile>
 		<profile>
 			<id>targetenv.prod</id>
+			<activation>
+				<property>
+					<name>targetenv</name>
+					<value>prod</value>
+				</property>
+		        </activation>
 			<properties>
 				<targetenv.hibernate.show_sql>false</targetenv.hibernate.show_sql>
 				<targetenv.hibernate.hbm2ddl.auto>validate</targetenv.hibernate.hbm2ddl.auto>

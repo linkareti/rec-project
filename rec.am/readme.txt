@@ -159,10 +159,10 @@ Rec.am supports basic skinning. The two following two skins are included with th
 
 The skin "alternate" is there for example purposes and doesn't add much over the "default" besides a demonstrative (aka ugly) background.
 
-Maven will by default include the skin "default" while generating the WAR file. To use the "alternate" instead, the maven profile "skin.alternate"
-must be activated. This can be achieved passing the switch "-Pskin.alternate" in the command line, e.g.:
+Maven will by default include the skin "default" while generating the WAR file. To use the "alternate" instead, you must set the "skin" property
+to "alternate". This can be achieved passing the switch "-Dskin=alternate" in the command line, e.g.:
 
- - mvn -Pskin.alternate clean package
+ - mvn -Dskin=alternate clean package
 
 
 To create a new skin:
@@ -175,6 +175,12 @@ To create a new skin:
 
 	<profile>
 	  <id>skin.folder_name</id>
+	  <activation>
+	    <property>
+	      <name>skin</name>
+	      <value>folder_name</value>
+	  </property>
+	  </activation>
 	  <properties>
 	    <rec.am.skin.name>folder_name</rec.am.skin.name>
 	  </properties>
@@ -182,16 +188,16 @@ To create a new skin:
 
     Where folder_name corresponds to the folder created in 1.
   4. Skin can now be used, by typing:
-      - mvn -Pskin.folder_name clean package
+      - mvn -Dskin=folder_name clean package
 
 === Target Environments ===
 
 The pom.xml is prepared to build this project for various target environments. Currently production and development environments are
-supported with development being the default one. To use any of the environments specify one of the follwing maven profiles during the build:
+supported with development being the default one. To use any of the environments set the variable "targetenv" to any of  following values:
 
- * targetenv.dev
- * targetenv.prod
+ * dev
+ * prod
 
-NOTE: When specifying any profiles, a skin profile and a environment profile must both be provided. Failing to do so will either prevent the
-creation of the WAR file or create it containing bad configurations.
+For example, to configure the project for production:
+ - mvn -Dtargetenv=prod clean package
 
