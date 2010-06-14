@@ -186,23 +186,15 @@ table .yui-dt-selected {
 	text-decoration: none;
 }
 
-.yui-dt-even {
-	background-color: #f4f9f8 !important;
-	border: none !important;
+.yui-dt-even td,.yui-dt-odd td {
+	border:none !important;
 	color: #283234;
 	text-decoration: none;
 	cursor:default !important;
 }
 
-.yui-dt-odd {
-	background-color: #ffffff !important;
-	border: none !important;
-	color: #283234;
-	text-decoration: none;
-	cursor:default !important;
-}
-
-.yui-dt-even td,.yui-dt-odd td {border:none;}
+.yui-dt-even td {background: #f4f9f8 !important;}
+.yui-dt-odd td  {background: #ffffff !important;}
 
 form#content div {
 	background: transparent;
