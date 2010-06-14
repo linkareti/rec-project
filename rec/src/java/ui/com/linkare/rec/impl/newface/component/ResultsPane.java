@@ -23,6 +23,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.Border;
@@ -31,6 +32,7 @@ import javax.swing.border.EmptyBorder;
 import org.jdesktop.application.Action;
 
 import com.linkare.rec.acquisition.NotAvailableException;
+import com.linkare.rec.impl.baseUI.table.ExperimentTableOperation;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
@@ -230,6 +232,11 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 			String uniquedisplayName = getUniqueDisplayName(displayName);
 			addDataDisplay(uniquedisplayName, dataDisplay);
 			dataDisplay.setExpDataModel(experimentDataModel);
+			
+			// FIXME MARTELADA npadriano
+			if (dataDisplay.getDisplay() instanceof ExperimentTableOperation) {
+				resultsActionBar.setExperimentTableOperation((ExperimentTableOperation)dataDisplay.getDisplay());
+			}
 
 		} catch (Exception e) {
 			log.log(Level.SEVERE, "Couldn't add DataDisplay Component " + dataDisplay, e);

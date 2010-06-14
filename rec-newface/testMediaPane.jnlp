@@ -39,6 +39,7 @@
         <jar href="lib/JCFN.jar"/>
         <jar href="lib/jcommon-1.0.12.jar"/>
         <jar href="lib/jfreechart-1.0.9.jar"/>
+        <jar href="lib/commons-csv-1.0-SNAPSHOT.jar"/>
         <jar href="lib/jmf.jar"/>
         <jar href="lib/jsr80.jar"/>
         <jar href="lib/jsr80_ri.jar"/>

@@ -20,8 +20,11 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
+import com.linkare.rec.impl.baseUI.table.ExperimentTableOperation;
 import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataSaveCSV;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -30,11 +33,16 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
 public class ResultsActionBar extends javax.swing.JPanel {
 
 	private static final Logger log = Logger.getLogger(ResultsActionBar.class.getName());
+	
+	private static final String CSV_DESCRIPTION_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.csv.discription", "Comma separeted files");
 
 	private JComponent activeExpDataDisplay;
 	
 	/** Holds value of property expDataModel. */
 	private ExpDataModel expDataModel;
+	
+	/** Interface to access the select all and copy rows operation of the results table */
+	private ExperimentTableOperation experimentTableOperation;
 
 	/** Creates new form ExperimentActionBar */
 	public ResultsActionBar() {
@@ -60,6 +68,13 @@ public class ResultsActionBar extends javax.swing.JPanel {
 	public void setExpDataModel(ExpDataModel expDataModel) {
 		this.expDataModel = expDataModel;
 	}
+	
+	/**
+	 * @param display
+	 */
+	public void setExperimentTableOperation(ExperimentTableOperation experimentTableOperation) {
+		this.experimentTableOperation = experimentTableOperation;
+	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
@@ -83,17 +98,17 @@ public class ResultsActionBar extends javax.swing.JPanel {
         btnPlayStop.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
         btnPlayStop.setIcon(resourceMap.getIcon("btnPlayStop.icon")); // NOI18N
         btnPlayStop.setText(resourceMap.getString("btnPlayStop.text")); // NOI18N
+        btnPlayStop.setToolTipText(resourceMap.getString("btnPlayStop.toolTipText")); // NOI18N
         btnPlayStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         btnPlayStop.setBorderPainted(false);
         btnPlayStop.setName("btnPlayStop"); // NOI18N
-        btnPlayStop.setOpaque(false);
 
         btnPrint.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
         btnPrint.setIcon(resourceMap.getIcon("btnPrint.icon")); // NOI18N
+        btnPrint.setToolTipText(resourceMap.getString("btnPrint.toolTipText")); // NOI18N
         btnPrint.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         btnPrint.setBorderPainted(false);
         btnPrint.setName("btnPrint"); // NOI18N
-        btnPrint.setOpaque(false);
         btnPrint.setPressedIcon(resourceMap.getIcon("btnPrint.pressedIcon")); // NOI18N
         btnPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,10 +118,10 @@ public class ResultsActionBar extends javax.swing.JPanel {
 
         btnSave.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
         btnSave.setIcon(resourceMap.getIcon("btnSave.icon")); // NOI18N
+        btnSave.setToolTipText(resourceMap.getString("btnSave.toolTipText")); // NOI18N
         btnSave.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         btnSave.setBorderPainted(false);
         btnSave.setName("btnSave"); // NOI18N
-        btnSave.setOpaque(false);
         btnSave.setPressedIcon(resourceMap.getIcon("btnSave.pressedIcon")); // NOI18N
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,10 +131,10 @@ public class ResultsActionBar extends javax.swing.JPanel {
 
         btnCopy.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
         btnCopy.setIcon(resourceMap.getIcon("btnCopy.icon")); // NOI18N
+        btnCopy.setToolTipText(resourceMap.getString("btnCopy.toolTipText")); // NOI18N
         btnCopy.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         btnCopy.setBorderPainted(false);
         btnCopy.setName("btnCopy"); // NOI18N
-        btnCopy.setOpaque(false);
         btnCopy.setPressedIcon(resourceMap.getIcon("btnCopy.pressedIcon")); // NOI18N
         btnCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,10 +144,10 @@ public class ResultsActionBar extends javax.swing.JPanel {
 
         btnSelectAll.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
         btnSelectAll.setIcon(resourceMap.getIcon("btnSelectAll.icon")); // NOI18N
+        btnSelectAll.setToolTipText(resourceMap.getString("btnSelectAll.toolTipText")); // NOI18N
         btnSelectAll.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         btnSelectAll.setBorderPainted(false);
         btnSelectAll.setName("btnSelectAll"); // NOI18N
-        btnSelectAll.setOpaque(false);
         btnSelectAll.setPressedIcon(resourceMap.getIcon("btnSelectAll.pressedIcon")); // NOI18N
         btnSelectAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +175,7 @@ public class ResultsActionBar extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
             .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-            .addComponent(btnPlayStop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnPlayStop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
             .addComponent(btnCopy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
             .addComponent(btnSelectAll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
@@ -194,9 +209,9 @@ public class ResultsActionBar extends javax.swing.JPanel {
 		if (expDataModel != null) {
 			
 			javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
-			ExtensionFilter textExtension = new ExtensionFilter("csv", "ext");
+			ExtensionFilter textExtension = new ExtensionFilter(ExpDataSaveCSV.CSV_EXTENTION_FILE, "ext");
 	
-			textExtension.setDescription("Comma separated files");
+			textExtension.setDescription(CSV_DESCRIPTION_STR);
 			jFileChooserSave.setAcceptAllFileFilterUsed(false);
 			jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 			jFileChooserSave.setFileFilter(textExtension);
@@ -221,22 +236,7 @@ public class ResultsActionBar extends javax.swing.JPanel {
 	public void saveTable(File saveFile, boolean append) {
 		try {
 			Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
-			final String LS = System.getProperty("line.separator");
-			final String COMMA = ",";
-			final String QUOTE = "\"";
-			
-			for (int headerCol = 0; headerCol < expDataModel.getChannelCount(); headerCol++) {
-				fileWriter.write(QUOTE + expDataModel.getChannelName(headerCol) + QUOTE);
-				fileWriter.write(COMMA);
-			}
-			fileWriter.write(LS);
-			for (int row = 0; row < expDataModel.getTotalSamples(); row++) {
-				for (int col = 0; col < expDataModel.getChannelCount(); col++) {
-					fileWriter.write(QUOTE + String.valueOf(expDataModel.getValueAt(row, col)) + QUOTE);
-					fileWriter.write(COMMA);
-				}
-				fileWriter.write(LS);
-			}
+			fileWriter.write(ExpDataSaveCSV.print(expDataModel));
 			fileWriter.flush();
 			fileWriter.close();
 		} catch (java.io.IOException ioe) {
@@ -245,13 +245,19 @@ public class ResultsActionBar extends javax.swing.JPanel {
 	}
 
 	private void btnCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopyActionPerformed
-		// TODO add your handling code here:
-		log.warning("Copy action not implemented");
+		if (experimentTableOperation != null) {
+			experimentTableOperation.copyToClipBoard();
+		} else {
+			log.warning("There is no data to save");
+		}
 	}//GEN-LAST:event_btnCopyActionPerformed
 
 	private void btnSelectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectAllActionPerformed
-		// TODO add your handling code here:
-		log.warning("Select all action not implemented");
+		if (experimentTableOperation != null) {
+			experimentTableOperation.selectAll();
+		} else {
+			log.warning("There is no data to select");
+		}
 	}//GEN-LAST:event_btnSelectAllActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

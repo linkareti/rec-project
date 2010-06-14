@@ -53,6 +53,7 @@
         <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnPlayStop.icon"/>
         <Property name="text" type="java.lang.String" resourceKey="btnPlayStop.text"/>
+        <Property name="toolTipText" type="java.lang.String" resourceKey="btnPlayStop.toolTipText"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder bottom="4" left="4" right="4" top="4"/>
@@ -66,6 +67,7 @@
       <Properties>
         <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnPrint.icon"/>
+        <Property name="toolTipText" type="java.lang.String" resourceKey="btnPrint.toolTipText"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder bottom="4" left="4" right="4" top="4"/>
@@ -83,6 +85,7 @@
       <Properties>
         <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnSave.icon"/>
+        <Property name="toolTipText" type="java.lang.String" resourceKey="btnSave.toolTipText"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder bottom="4" left="4" right="4" top="4"/>
@@ -100,6 +103,7 @@
       <Properties>
         <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnCopy.icon"/>
+        <Property name="toolTipText" type="java.lang.String" resourceKey="btnCopy.toolTipText"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder bottom="4" left="4" right="4" top="4"/>
@@ -117,6 +121,7 @@
       <Properties>
         <Property name="background" type="java.awt.Color" resourceKey="btnPlayStop.background"/>
         <Property name="icon" type="javax.swing.Icon" resourceKey="btnSelectAll.icon"/>
+        <Property name="toolTipText" type="java.lang.String" resourceKey="btnSelectAll.toolTipText"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
             <EmptyBorder bottom="4" left="4" right="4" top="4"/>

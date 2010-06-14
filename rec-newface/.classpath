@@ -12,6 +12,7 @@
 	<classpathentry kind="lib" path="lib/JCFN.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon-1.0.12.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.9.jar"/>
+	<classpathentry kind="lib" path="lib/commons-csv-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/jmf.jar"/>
 	<classpathentry kind="lib" path="lib/jsr80_ri.jar"/>
 	<classpathentry kind="lib" path="lib/jsr80.jar"/>

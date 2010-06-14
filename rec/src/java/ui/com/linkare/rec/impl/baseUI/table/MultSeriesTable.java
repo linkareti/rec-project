@@ -30,7 +30,7 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  * 
  * @author José Pedro Pereira - Linkare TI & Andr�
  */
-public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDisplay, Printable {
+public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDisplay, Printable, ExperimentTableOperation {
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 	private ExcelAdapter excelAdapter = null;
 	static {
@@ -391,4 +391,20 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	private javax.swing.JButton copyBtn;
 	private javax.swing.JButton selectAllBtn;
 	// End of variables declaration
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void copyToClipBoard() {
+		excelAdapter.copyToClipBoard();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void selectAll() {
+		dataTable.selectAll();
+	}
 }
