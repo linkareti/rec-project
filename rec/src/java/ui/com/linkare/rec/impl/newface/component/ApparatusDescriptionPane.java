@@ -136,11 +136,11 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
         });
 
         scrollApparatusDescription.setName("scrollApparatusDescription"); // NOI18N
-
+        txtApparatusDescription.setBackground(resourceMap.getColor("txtApparatusDescription.background"));
         txtApparatusDescription.setContentType(resourceMap.getString("txtApparatusDescription.contentType")); // NOI18N
+        txtApparatusDescription.setText(resourceMap.getString("txtApparatusDescription.text")); // NOI18N
         txtApparatusDescription.setToolTipText(resourceMap.getString("txtApparatusDescription.toolTipText")); // NOI18N
         txtApparatusDescription.setName("txtApparatusDescription"); // NOI18N
-        txtApparatusDescription.setOpaque(false);
         scrollApparatusDescription.setViewportView(txtApparatusDescription);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -150,7 +150,7 @@ public class ApparatusDescriptionPane extends AbstractContentPane {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollApparatusDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                    .addComponent(scrollApparatusDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                     .addComponent(lblApparatusName)
                     .addComponent(btnLink, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblApparatusImg))

@@ -28,7 +28,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollApparatusDescription" alignment="0" pref="356" max="32767" attributes="1"/>
+                  <Component id="scrollApparatusDescription" alignment="0" pref="368" max="32767" attributes="1"/>
                   <Component id="lblApparatusName" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLink" alignment="0" min="-2" pref="206" max="-2" attributes="0"/>
                   <Component id="lblApparatusImg" alignment="0" min="-2" max="-2" attributes="1"/>
@@ -107,9 +107,9 @@
         <Component class="javax.swing.JTextPane" name="txtApparatusDescription">
           <Properties>
             <Property name="contentType" type="java.lang.String" resourceKey="txtApparatusDescription.contentType"/>
+            <Property name="text" type="java.lang.String" resourceKey="txtApparatusDescription.text"/>
             <Property name="toolTipText" type="java.lang.String" resourceKey="txtApparatusDescription.toolTipText"/>
             <Property name="name" type="java.lang.String" value="txtApparatusDescription" noResource="true"/>
-            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
