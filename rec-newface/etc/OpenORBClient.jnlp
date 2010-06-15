@@ -15,6 +15,7 @@
 	<jar href="tools-1.4.0_sig.jar"/>
 	<jar href="xml-apis_sig.jar"/>
 	<jar href="openorb_orb_omg-1.4.0_sig.jar"/>
+	<jar href="commons-csv-1.0-SNAPSHOT_sig.jar"/>
 	<!--<jar href="openorb_ots-1.4.0_sig.jar"/>
 	<jar href="openorb_pss-1.4.0_sig.jar"/>-->
 	<property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB"/>
