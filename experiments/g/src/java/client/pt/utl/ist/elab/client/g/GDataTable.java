@@ -28,6 +28,7 @@ import javax.swing.table.TableColumnModel;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.baseUI.table.ExcelAdapter;
 import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
+import com.linkare.rec.impl.baseUI.table.ExperimentTableOperation;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
@@ -37,7 +38,7 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class GDataTable extends javax.swing.JPanel implements ExpDataDisplay, Printable {
+public class GDataTable extends javax.swing.JPanel implements ExpDataDisplay, Printable, ExperimentTableOperation {
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 	private ExcelAdapter excelAdapter = null;
 	static {
@@ -384,4 +385,20 @@ public class GDataTable extends javax.swing.JPanel implements ExpDataDisplay, Pr
 	private javax.swing.JButton selectAllBtn;
 	// End of variables declaration//GEN-END:variables
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void copyToClipBoard() {
+		excelAdapter.copyToClipBoard();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void selectAll() {
+		dataTable.selectAll();
+	}
+	
 }
