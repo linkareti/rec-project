@@ -40,6 +40,7 @@
         <jar href="lib/tools-1.4.0.jar"/>
         <jar href="lib/xercesImpl.jar"/>
         <jar href="lib/xml-apis.jar"/>
+        <jar href="lib/commons-csv-1.0-SNAPSHOT.jar"/>
         <jar href="lib/ReCClient.jar"/>
         <jar href="lib/ReCCommon.jar"/>
         <jar href="lib/ReCHardwareServer.jar"/>
