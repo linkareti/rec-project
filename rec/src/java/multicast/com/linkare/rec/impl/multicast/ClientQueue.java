@@ -228,10 +228,11 @@ public class ClientQueue {
 
 		if (contains(dcfq.getUserInfo())) {
 			DataClientForQueue otherDcfq = getWrapperForUser(dcfq.getUserInfo());
-			// TODO CHECK WITH JP
-			if (otherDcfq.isShuttingDown()) {
-				// Let's wait for the other client to unregister shall we? Come
-				// on give the guy a break...
+			if (otherDcfq.isShuttingDown() || !otherDcfq.isConnected()) {
+				if(!otherDcfq.isShuttingDown())
+				{
+					otherDcfq.shutdown();
+				}
 				synchronized (this) {
 					try {
 						while (otherDcfq.isShuttingDown()) {
@@ -244,25 +245,6 @@ public class ClientQueue {
 						e.printStackTrace();
 					}
 				}
-			} else if (!otherDcfq.isConnected()) {
-				getClientQueueListener().log(Level.INFO,
-						"ClientQueue : client " + otherDcfq.getUserName() + " is not conencted - shutting it down!");
-				otherDcfq.shutdown();
-				synchronized (this) {
-					try {
-						while (otherDcfq.isShuttingDown()) {
-							// Waiting for other to finish...please be
-							// patient...at least 20 seconds of the messageQueue
-							// shutdown...
-							wait(1000);
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-
-				// Test
-				return false;
 			} else if (!otherDcfq.getDataClient().isSameDelegate(dcfq.getDataClient())) {
 				getClientQueueListener().log(
 						Level.INFO,
@@ -286,55 +268,7 @@ public class ClientQueue {
 		return retVal;
 	}
 
-	public boolean add(DataClientForQueue dcfq, IResource resource) throws MaximumClientsReached, NotAuthorized {
-		getClientQueueListener().log(Level.INFO, "ClientQueue - trying to register new client!");
-		boolean retVal = false;
-
-		if (!SecurityManagerFactory.authenticate(resource, dcfq.getAsDefaultUser()))
-			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_PASSWORD_NOT_MATCH);
-
-		synchronized (queueOrg) {
-			if (queueOrg.size() >= getMaximumClients()) {
-				getClientQueueListener()
-						.log(Level.INFO,
-								"ClientQueue - Maximum capacity reached... Going to deny client's request for registration! Maybe try later?");
-				throw new MaximumClientsReached(
-						MaximumClientsReachedConstants.MAXIMUM_CLIENTS_REACHED_IN_HARDWARE_QUEUE, getMaximumClients());
-			}
-
-			getClientQueueListener().log(Level.INFO,
-					"ClientQueue : checking to see if DataClient " + dcfq.getUserName() + " is allready registered!");
-
-			if (contains(dcfq.getUserInfo())) {
-				DataClientForQueue otherDcfq = getWrapperForUser(dcfq.getUserInfo());
-				if (!otherDcfq.isConnected()) {
-					getClientQueueListener()
-							.log(
-									Level.INFO,
-									"ClientQueue : client " + otherDcfq.getUserName()
-											+ " is not conencted - shutting it down!");
-					otherDcfq.shutdown();
-				} else if (!otherDcfq.getDataClient().isSameDelegate(dcfq.getDataClient())) {
-					getClientQueueListener().log(
-							Level.INFO,
-							"ClientQueue : There is allready a user with that name : " + otherDcfq.getUserName()
-									+ " - Sending a NotAuthorized Exception!");
-					throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_REPEATED);
-				} else {
-					// user is allready registered... just ignore it...
-					return true;
-				}
-			}
-
-			getClientQueueListener().log(Level.INFO,
-					"ClientQueue - Going to register client " + dcfq.getUserName() + " !");
-			retVal = queueOrg.add(dcfq);
-			getClientQueueListener().log(Level.INFO,
-					"ClientQueue - registered client " + dcfq.getUserName() + (retVal ? " successfully!" : " failed!"));
-		}
-		return retVal;
-	}
-
+	
 	public DataClientForQueue first() {
 		synchronized (queueOrg) {
 			try {
