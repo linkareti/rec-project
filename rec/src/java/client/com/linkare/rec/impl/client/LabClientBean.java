@@ -7,6 +7,7 @@
 package com.linkare.rec.impl.client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -161,7 +162,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	private void refreshHardwares() {
 		try {
 			MultiCastHardware[] hardwares = mcw.enumerateHardware(getUserInfo());
-
+			
 			if (hardwares == null)
 				return;
 
@@ -188,6 +189,9 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 				newApparatusList[i] = (Apparatus) apparatusListTemp.get(i);
 			}
 
+			Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.INFO,
+					"Hardwares received from Multicast. New Aparatus list: " + Arrays.deepToString(newApparatusList));
+
 			apparatusList = apparatusListTemp;
 			fireApparatusListSourceListenerApparatusChanged(new ApparatusListChangeEvent(this, newApparatusList));
 
@@ -211,7 +215,8 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	}
 
 	public void receiveMessage(String clientFrom, String clientTo, String message) {
-		System.out.println("Received a remote message: "+message+", coming from "+clientFrom+" to->"+clientTo);
+		Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.INFO,
+				"Received a remote message: " + message + ", coming from " + clientFrom + " to->" + clientTo);
 		fireIChatMessageListenerNewChatMessage(new ChatMessageEvent(this, new UserInfo(clientFrom), new UserInfo(
 				clientTo == ChatMessageEvent.EVERYONE_USER ? ChatMessageEvent.EVERYONE_USER_ALIAS : clientTo), message));
 	}
