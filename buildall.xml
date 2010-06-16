@@ -70,7 +70,7 @@
 
 			<zipfileset dir="${client.build.dir}/lib" includes="*_sig.jar,*_sig.jar.pack.gz" prefix="client/lib" />
 
-			<zipfileset dir="${templates.dir.images}" includes="*.jpg,*.gif,*.png" prefix="client/images" />
+			<zipfileset dir="${client.build.dir}/images" includes="*.jpg,*.gif,*.png" prefix="client/images" />
 
 			<zipfileset file="${templates.dir.logs}/client.loggers.config.properties" fullpath="client/etc/loggers.config.properties" />
 			<zipfileset file="${client.build.dir}/etc/openorb.xml" fullpath="client/etc/openorb.xml" />

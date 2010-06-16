@@ -109,7 +109,7 @@
 		<copy file="${elab.client.classes.dir}/ReCFaceConfig.xml" tofile="${client.build.dir}/etc/ReCFaceConfig.xml">
 		</copy>
 
-		<copy todir="${client.build.dir}" overwrite="true">
+		<copy todir="${client.build.dir}/images" overwrite="true">
 			<fileset dir="${templates.dir.images}">
 				<include name="**/*.gif" />
 				<include name="**/*.jpg" />
