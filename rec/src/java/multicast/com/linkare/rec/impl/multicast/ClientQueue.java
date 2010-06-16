@@ -288,7 +288,7 @@ public class ClientQueue {
 
 	public Iterator<DataClientForQueue> iterator() {
 		synchronized (queueOrg) {
-			return Collections.unmodifiableList(queueOrg).iterator();
+			return Collections.unmodifiableList(new LinkedList<DataClientForQueue>(queueOrg)).iterator();
 		}
 	}
 

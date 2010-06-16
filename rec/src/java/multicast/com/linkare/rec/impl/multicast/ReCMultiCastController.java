@@ -168,7 +168,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	 * @see com.linkare.rec.acquisition.MultiCastControllerOperations#getClientList(com.linkare.rec.acquisition.UserInfo)
 	 */
 	public UserInfo[] getClientList(UserInfo user) throws NotRegistered, NotAuthorized {
-		log(Level.FINEST, "Controller - Getting the client list for user " + (user == null ? "(user is null)" : user.getUserName()));
+		log(Level.FINEST, "Controller - Getting the client list for user "
+				+ (user == null ? "(user is null)" : user.getUserName()));
 		UserInfo[] retVal = clientQueue.getUsers(user, resource);
 		log(Level.FINEST, "Controller - Got as retVal " + retVal);
 		return retVal;
@@ -255,14 +256,21 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 			// }
 			// }
 			synchronized (multiCastHardwares) {
-				Collection<ReCMultiCastHardware> iterateHardwares = Collections.unmodifiableCollection(multiCastHardwares);
-				for(ReCMultiCastHardware rmch:iterateHardwares)
-				{
+				Collection<ReCMultiCastHardware> iterateHardwares = Collections
+						.unmodifiableCollection(multiCastHardwares);
+				for (ReCMultiCastHardware rmch : iterateHardwares) {
 					try {
 						if (!rmch.getHardware().isConnected()) {
+							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId() + " is gone! Shutting it down!");
 							rmch.shutdown();
+							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
+									+ " was shutdown successfully - Now removing it from MCController list!");
 							multiCastHardwares.remove(rmch);
+							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
+									+ " removed from MCCContoller sucessfully. Now tell clients it is gone!");
 							clientQueue.hardwareChanged(new HardwareChangeEvent());
+							log(Level.FINEST, "Clients were told that hardware " + rmch.getHardwareUniqueId()
+									+ " is gone!");
 						}
 					} catch (Exception e) {
 						logThrowable("MultiCastController - Error cheking hardware connection status!", e);
