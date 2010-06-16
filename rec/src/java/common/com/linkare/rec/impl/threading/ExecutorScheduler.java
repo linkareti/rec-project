@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ExecutorScheduler {
 
-	private static final ScheduledExecutorService scheduler = newScheduledThreadPool(1);
+	private static final ScheduledExecutorService scheduler = newScheduledThreadPool(5);
 
 	public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
 		return new ScheduledThreadPoolExecutor(corePoolSize, new ReCThreadFactory());
