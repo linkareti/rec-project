@@ -23,8 +23,8 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -134,7 +134,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 
 	private Map<String, Integer> displaySelectorNames = new HashMap<String, Integer>();
 
-	private Map<String, JComponent> displayMap = new HashMap<String, JComponent>();
+	private Map<String, ExpDataDisplay> displayMap = new HashMap<String, ExpDataDisplay>();
 
 	private JComboBox comboDisplaySelector;
 
@@ -145,6 +145,13 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 	private JScrollPane experimentInfoScrollPane;
 
 	private ResultsActionBar resultsActionBar;
+
+	/**
+	 * Creates new form ResultsPane
+	 */
+	public ResultsPane() {
+		initComponents();
+	}
 
 	/**
 	 * Creates new form ResultsPane
@@ -192,7 +199,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 		if (expDataModel != null) {
 			expDataModel.addExpDataModelListener(this);
 		}
-		resultsActionBar.setExpDataModel(experimentDataModel);
+//		resultsActionBar.setExpDataModel(experimentDataModel); // FIXME
 	}
 
 	private void addExperimentDataDisplays(List<ExpDataDisplay> displays) {
@@ -234,9 +241,9 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 			dataDisplay.setExpDataModel(experimentDataModel);
 			
 			// FIXME MARTELADA npadriano
-			if (dataDisplay.getDisplay() instanceof ExperimentTableOperation) {
-				resultsActionBar.setExperimentTableOperation((ExperimentTableOperation)dataDisplay.getDisplay());
-			}
+//			if (dataDisplay.getDisplay() instanceof ExperimentTableOperation) {
+//				resultsActionBar.setExperimentTableOperation((ExperimentTableOperation)dataDisplay.getDisplay());
+//			}
 
 		} catch (Exception e) {
 			log.log(Level.SEVERE, "Couldn't add DataDisplay Component " + dataDisplay, e);
@@ -258,7 +265,7 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 	}
 
 	private void addDataDisplay(String displayName, ExpDataDisplay dataDisplay) {
-		displayMap.put(displayName, dataDisplay.getDisplay());
+		displayMap.put(displayName, dataDisplay);
 		addDisplaySelector(displayName, dataDisplay);
 	}
 
@@ -313,8 +320,9 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 	}
 
 	private void showSelectedDisplay(String displayName) {
-		JComponent display = displayMap.get(displayName);
-		resultsActionBar.setActiveExpDataDisplay(display);
+		JComponent display = displayMap.get(displayName).getDisplay();
+		// FIXME
+//		resultsActionBar.setActiveExpDataDisplay(display);
 		setDisplayPane(display);
 	}
 

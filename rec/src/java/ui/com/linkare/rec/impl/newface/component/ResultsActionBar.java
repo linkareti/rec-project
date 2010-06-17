@@ -7,24 +7,8 @@
 
 package com.linkare.rec.impl.newface.component;
 
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.logging.Logger;
-
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-
-import com.linkare.rec.impl.baseUI.table.ExperimentTableOperation;
-import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
-import com.linkare.rec.impl.client.experiment.ExpDataModel;
-import com.linkare.rec.impl.client.experiment.ExpDataSaveCSV;
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -34,16 +18,6 @@ public class ResultsActionBar extends javax.swing.JPanel {
 
 	private static final Logger log = Logger.getLogger(ResultsActionBar.class.getName());
 	
-	private static final String CSV_DESCRIPTION_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.csv.discription", "Comma separeted files");
-
-	private JComponent activeExpDataDisplay;
-	
-	/** Holds value of property expDataModel. */
-	private ExpDataModel expDataModel;
-	
-	/** Interface to access the select all and copy rows operation of the results table */
-	private ExperimentTableOperation experimentTableOperation;
-
 	/** Creates new form ExperimentActionBar */
 	public ResultsActionBar() {
 		initComponents();
@@ -59,21 +33,6 @@ public class ResultsActionBar extends javax.swing.JPanel {
 
 	public boolean isPlayStopButtonEnabled() {
 		return btnPlayStop.isEnabled();
-	}
-
-	public void setActiveExpDataDisplay(JComponent activeExpDataDisplay) {
-		this.activeExpDataDisplay = activeExpDataDisplay;
-	}
-	
-	public void setExpDataModel(ExpDataModel expDataModel) {
-		this.expDataModel = expDataModel;
-	}
-	
-	/**
-	 * @param display
-	 */
-	public void setExperimentTableOperation(ExperimentTableOperation experimentTableOperation) {
-		this.experimentTableOperation = experimentTableOperation;
 	}
 
 	/**
@@ -182,82 +141,21 @@ public class ResultsActionBar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-		if (activeExpDataDisplay instanceof Printable) {
-			PrinterJob job = PrinterJob.getPrinterJob();
-			PageFormat pf = job.defaultPage();
-			pf.setOrientation(PageFormat.PORTRAIT);
-			PageFormat pf2 = job.pageDialog(pf);
-			if (pf2 != pf) {
-				job.setPrintable((Printable) activeExpDataDisplay, pf2);
-				if (job.printDialog()) {
-					try {
-						job.print();
-					} catch (PrinterException e) {
-						javax.swing.JOptionPane.showMessageDialog(this, e);
-					}
-				}
-			}
-		} else {
-			log.warning("The active data display is not printable: " + activeExpDataDisplay.getName());
-		}
 	}//GEN-LAST:event_btnPrintActionPerformed
 
 	// TODO The folowing actions must be implemented. Check the experiments code.
 	// @see GDataTable
 
 	private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-		if (expDataModel != null) {
-			
-			javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
-			ExtensionFilter textExtension = new ExtensionFilter(ExpDataSaveCSV.CSV_EXTENTION_FILE, "ext");
-	
-			textExtension.setDescription(CSV_DESCRIPTION_STR);
-			jFileChooserSave.setAcceptAllFileFilterUsed(false);
-			jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
-			jFileChooserSave.setFileFilter(textExtension);
-	
-			int returnValue = jFileChooserSave.showSaveDialog(this);
-			String extension = null;
-			if (returnValue == JFileChooser.APPROVE_OPTION) {
-				extension = textExtension.getExtension();
-			}
-			String path = jFileChooserSave.getSelectedFile().getPath();
-			if (path.endsWith(extension)) {
-				path = path.substring(0, path.length() - 4);
-			}
-			File saveFile = new File(path + "." + extension);
-			saveTable(saveFile, false);
-			
-		} else {
-			log.warning("There is no data to save");
-		}
 	}//GEN-LAST:event_btnSaveActionPerformed
 
 	public void saveTable(File saveFile, boolean append) {
-		try {
-			Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
-			fileWriter.write(ExpDataSaveCSV.print(expDataModel));
-			fileWriter.flush();
-			fileWriter.close();
-		} catch (java.io.IOException ioe) {
-			log.warning("Error while trying to save data to file: " + ioe);
-		}
 	}
 
 	private void btnCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopyActionPerformed
-		if (experimentTableOperation != null) {
-			experimentTableOperation.copyToClipBoard();
-		} else {
-			log.warning("There is no data to save");
-		}
 	}//GEN-LAST:event_btnCopyActionPerformed
 
 	private void btnSelectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectAllActionPerformed
-		if (experimentTableOperation != null) {
-			experimentTableOperation.selectAll();
-		} else {
-			log.warning("There is no data to select");
-		}
 	}//GEN-LAST:event_btnSelectAllActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

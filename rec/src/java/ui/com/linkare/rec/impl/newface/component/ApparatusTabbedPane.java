@@ -8,12 +8,16 @@
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.BorderLayout;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 
 /**
  * 
@@ -33,6 +37,8 @@ public class ApparatusTabbedPane extends AbstractContentPane implements ChangeLi
 	public static final int TAB_USERS = 3;
 
 	private boolean lastSelectedTabResults = false;
+	
+	private JToolBar toolBar;
 
 	/** Creates new form ApparatusTabbedPane */
 	public ApparatusTabbedPane() {
@@ -82,18 +88,46 @@ public class ApparatusTabbedPane extends AbstractContentPane implements ChangeLi
 	public void setTabIndexEnabled(int index, boolean enabled) {
 		tabbedPane.setEnabledAt(index, enabled);
 	}
+	
+	/**
+	 * @param dataDisplays
+	 */
+	public void setDataDisplays(List<ExpDataDisplay> dataDisplays) {
+		for (ExpDataDisplay display : dataDisplays) {
+			if (display.getToolBar() != null) {
+				JToolBar newToolBar = display.getToolBar();
+				newToolBar.setName("toolBar");
+				newToolBar.setMinimumSize(experimentActionBar.getMinimumSize());
+				if (!lastSelectedTabResults) {
+					if (TAB_RESULTS == tabbedPane.getSelectedIndex()) {
+						actionBarHolderPane.remove(experimentActionBar);
+						actionBarHolderPane.add(newToolBar, BorderLayout.LINE_START);
+						lastSelectedTabResults = true;
+					}
+				} else {
+					actionBarHolderPane.remove(toolBar);
+					actionBarHolderPane.add(newToolBar, BorderLayout.LINE_START);
+				}
+				toolBar = newToolBar;
+				revalidate();
+				repaint();
+			}
+		}
+	}
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		if (TAB_RESULTS == tabbedPane.getSelectedIndex()) {
-			actionBarHolderPane.remove(experimentActionBar);
-			actionBarHolderPane.add(resultsActionBar, BorderLayout.LINE_START);
-			lastSelectedTabResults = true;
-
-		} else if (lastSelectedTabResults) {
-			actionBarHolderPane.remove(resultsActionBar);
-			actionBarHolderPane.add(experimentActionBar, BorderLayout.LINE_START);
-			lastSelectedTabResults = false;
+		if (toolBar != null) {
+			if (TAB_RESULTS == tabbedPane.getSelectedIndex() && !lastSelectedTabResults) {
+				actionBarHolderPane.remove(experimentActionBar);
+				actionBarHolderPane.add(toolBar, BorderLayout.LINE_START);
+				lastSelectedTabResults = true;
+	
+			} else if (lastSelectedTabResults) {
+				actionBarHolderPane.remove(toolBar);
+				actionBarHolderPane.add(experimentActionBar, BorderLayout.LINE_START);
+				lastSelectedTabResults = false;
+			}
 		}
 		revalidate();
 		repaint();
@@ -187,4 +221,5 @@ public class ApparatusTabbedPane extends AbstractContentPane implements ChangeLi
 	// End of variables declaration//GEN-END:variables
 
 	private final ResultsActionBar resultsActionBar;
+
 }

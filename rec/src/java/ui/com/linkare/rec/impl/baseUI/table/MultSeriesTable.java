@@ -7,7 +7,6 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterGraphics;
-import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -16,6 +15,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
+import javax.swing.JFileChooser;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -25,20 +25,30 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.MultSeriesTableModelProxy;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.client.experiment.export.csv.ExportCSV;
+import com.linkare.rec.impl.client.experiment.export.printer.ExportPrinter;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI & Andr�
  */
+@Deprecated
 public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDisplay, Printable, ExperimentTableOperation {
+	
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
+	
 	private ExcelAdapter excelAdapter = null;
+	
+	private static Logger log = null;
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
-		if (l == null) {
+		log = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		if (log == null) {
 			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
 		}
 	}
+	
+	private static final String CSV_DESCRIPTION_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.csv.discription", "Comma separeted files");
 
 	/** Creates new form DefaultExperimentDataTable */
 	public MultSeriesTable() {
@@ -127,74 +137,56 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	private void copyBtnActionPerformed(java.awt.event.ActionEvent evt) {
 		excelAdapter.copyToClipBoard();
 	}
-
+	
 	private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {
+		saveTableToFile();
+	}
+	
+	private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {
+		try {
+			ExportPrinter.print(this);
+		} catch (PrinterException e) {
+			log.warning("Error while trying to print: " + e);
+			javax.swing.JOptionPane.showMessageDialog(this, e);
+		}
+	}
+	
+	private void saveTableToFile() {
 		javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
+		ExtensionFilter textExtension = new ExtensionFilter(ExportCSV.CSV_EXTENTION_FILE, "ext");
 
-		ExtensionFilter textExtension = new ExtensionFilter("csv", "ext");
-
-		textExtension.setDescription("Comma separated values files");
+		textExtension.setDescription(CSV_DESCRIPTION_STR);
 		jFileChooserSave.setAcceptAllFileFilterUsed(false);
 		jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
 		jFileChooserSave.setFileFilter(textExtension);
 
 		int returnValue = jFileChooserSave.showSaveDialog(this);
 		String extension = null;
-		if (returnValue == jFileChooserSave.APPROVE_OPTION) {
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			extension = textExtension.getExtension();
 		}
-		String path = jFileChooserSave.getSelectedFile().getPath();
-		if (path.endsWith(extension)) {
-			path = path.substring(0, path.length() - 4);
+		File selectedFile = jFileChooserSave.getSelectedFile();
+		if (selectedFile != null) {
+			String path = selectedFile.getPath();
+			if (path != null && path.trim().length() > 0) {
+				if (path.endsWith(extension)) {
+					path = path.substring(0, path.length() - 4);
+				}
+				File saveFile = new File(path + "." + extension);
+				saveTable(saveFile, false);
+			}
 		}
-		File saveFile = new File(path + "." + extension);
-		saveTable(saveFile, false);
 	}
 
-	public void saveTable(File saveFile, boolean append) {
+	private void saveTable(File saveFile, boolean append) {
 		try {
 			Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
-			final String LS = System.getProperty("line.separator");
-			final String COMMA = ",";
-			final String QUOTE = "\"";
-			// java.io.FileWriter fileWriter = new java.io.FileWriter(saveFile,
-			// append);
-			for (int headerCol = 0; headerCol < dataTable.getColumnCount(); headerCol++) {
-				fileWriter.write(QUOTE + dataTable.getColumnName(headerCol) + QUOTE);
-				fileWriter.write(COMMA);
-			}
-			fileWriter.write(LS);
-			for (int row = 0; row < dataTable.getRowCount(); row++) {
-				for (int col = 0; col < dataTable.getColumnCount(); col++) {
-					fileWriter.write(QUOTE + new String().valueOf(dataTable.getValueAt(row, col)) + QUOTE);
-					fileWriter.write(COMMA);
-				}
-				fileWriter.write(LS);
-			}
+			fileWriter.write(ExportCSV.print(defaultTableModelProxy));
 			fileWriter.flush();
 			fileWriter.close();
 		} catch (java.io.IOException ioe) {
-			System.err.println("Error while trying to save data to file: " + ioe);
+			log.warning("Error while trying to save data to file: " + ioe);
 		}
-	}
-
-	private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {
-
-		PrinterJob job = PrinterJob.getPrinterJob();
-		PageFormat pf = job.defaultPage();
-		pf.setOrientation(PageFormat.PORTRAIT);
-		PageFormat pf2 = job.pageDialog(pf);
-		if (pf2 != pf) {
-			job.setPrintable(this, pf2);
-			if (job.printDialog()) {
-				try {
-					job.print();
-				} catch (PrinterException e) {
-					javax.swing.JOptionPane.showMessageDialog(this, e);
-				}
-			}
-		}
-
 	}
 
 	private void defaultTableModelProxyTableChanged(javax.swing.event.TableModelEvent evt) {
@@ -357,7 +349,9 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	/**
 	 * Setter for property channelDisplayY.
 	 * 
+	 * @param col 
 	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @return 
 	 */
 	public int getColAtArray(int col) {
 		return defaultTableModelProxy.getColAtArray(col);
@@ -367,6 +361,7 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	 * Setter for property channelDisplayY.
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
+	 * @return 
 	 */
 	public int[] getColArray() {
 		return defaultTableModelProxy.getColArray();
@@ -375,6 +370,7 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	/**
 	 * Setter for property channelDisplayY.
 	 * 
+	 * @param colArray 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
 	public void setColArray(int[] colArray) {
@@ -407,4 +403,5 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	public void selectAll() {
 		dataTable.selectAll();
 	}
+
 }

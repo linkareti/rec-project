@@ -7,9 +7,14 @@
 
 package com.linkare.rec.impl.newface.component;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
+
+import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
+import com.linkare.rec.impl.newface.ReCApplication.ExperimentUIData;
 
 /**
  * 
@@ -24,12 +29,12 @@ public class ApparatusTabbedHistoryPane extends GradientPane {
 
 	public static final int TAB_RESULTS = 1;
 
-	private boolean lastSelectedTabResults = false;
-
 	/** Creates new form ApparatusTabbedPane */
-	public ApparatusTabbedHistoryPane() {
+	public ApparatusTabbedHistoryPane(ExperimentUIData experimentUIData) {
 		initComponents();
-                resultsActionBar.setPlayStopButtonVisible(false);
+		resultsActionBar.setPlayStopButtonVisible(false);
+		
+		setDataDisplays(experimentUIData.getDataDisplays());
 	}
 
 	public ApparatusDescriptionPane getDescriptionPane() {
@@ -40,16 +45,26 @@ public class ApparatusTabbedHistoryPane extends GradientPane {
 		return resultsHolderPane;
 	}
 
-        public ResultsActionBar getResultsActionBar() {
-            return resultsActionBar;
-        }
-
 	public void setSelectedTabIndex(int index) {
 		tabbedPane.setSelectedIndex(index);
 	}
 
 	public void setTabIndexEnabled(int index, boolean enabled) {
 		tabbedPane.setEnabledAt(index, enabled);
+	}
+	
+	private void setDataDisplays(List<ExpDataDisplay> displays) {
+		for (ExpDataDisplay display : displays) {
+			if (display.getToolBar() != null) {
+				JToolBar toolBar = display.getToolBar();
+				toolBar.setName("toolBar");
+				toolBar.setMinimumSize(resultsActionBar.getMinimumSize());
+				resultsHolderPane.remove(resultsActionBar);
+				resultsHolderPane.add(toolBar, java.awt.BorderLayout.PAGE_END);
+				revalidate();
+				repaint();
+			}
+		}
 	}
 
 
