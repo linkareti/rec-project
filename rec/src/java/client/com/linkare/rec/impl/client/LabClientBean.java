@@ -660,7 +660,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		if (usersListRefreshThread != null) {
 			usersListRefreshThread.stopNow();
 			while (usersListRefreshThread.isAlive()) {
-				Thread.currentThread().yield();
+				Thread.yield();
 			}
 		}
 		usersListRefreshThread = new UsersListRefresher();
