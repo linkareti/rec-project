@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class LoggerUtil {
 
 	/**
-	 * This utility method writes a logging entry in WARNING mode to the logger
+	 * This utility method writes a logging entry in SEVERE mode to the logger
 	 * and logs also the full stack trace and info message in FINEST level if
 	 * the logger is currenly configured to get that level of detail
 	 * 
@@ -25,14 +25,14 @@ public class LoggerUtil {
 	 */
 	public static void logThrowable(String info_message, Throwable t, Logger logger) {
 		if (info_message != null && logger != null && logger.getLevel() != null
-				&& logger.getLevel().intValue() <= Level.WARNING.intValue()) {
+				&& logger.getLevel().intValue() <= Level.SEVERE.intValue()) {
 			if (t != null) {
 				StackTraceElement[] trace = t.getStackTrace();
 				info_message = " @class " + trace[0].getClassName() + " ,@method " + trace[0].getMethodName()
 						+ " ,@line " + trace[0].getLineNumber() + " " + info_message;
 			}
 
-			logger.log(Level.WARNING, info_message);
+			logger.log(Level.SEVERE, info_message);
 		}
 
 		if (t != null && logger != null && logger.getLevel() != null

@@ -6,10 +6,11 @@
 
 package com.linkare.rec.impl.multicast;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,6 +36,11 @@ import com.linkare.rec.impl.utils.EventQueueDispatcher;
 // TODO -> TESTING implements java.io.Serializable
 public class DataReceiverQueue implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1810449051214754798L;
+
 	private boolean shutDown = false;
 
 	private int maximumDataReceivers = 1;
@@ -42,7 +48,7 @@ public class DataReceiverQueue implements java.io.Serializable {
 	private IDataReceiverQueueListener dataReceiverQueueListener = null;
 
 	// private internal state variables
-	private ArrayList<DataReceiverForQueue> queueOrg = null;
+	private List<DataReceiverForQueue> queueOrg = new LinkedList<DataReceiverForQueue>();
 
 	private EventQueue messageQueue = new EventQueue(new DataReceiverQueueDispatcher());
 
@@ -52,7 +58,12 @@ public class DataReceiverQueue implements java.io.Serializable {
 
 	public static String DATARECEIVERQUEUE_LOGGER = "DataReceiverQueue.Logger";
 
-	/** Creates a new instance of HardwareDataReceiverQueue */
+	/**
+	 * Creates a new instance of HardwareDataReceiverQueue
+	 * 
+	 * @param dataReceiverQueueListener
+	 * @param maximumDataReceivers
+	 */
 	public DataReceiverQueue(IDataReceiverQueueListener dataReceiverQueueListener, int maximumDataReceivers) {
 		setDataReceiverQueueListener(dataReceiverQueueListener);
 		setMaximumDataReceivers(maximumDataReceivers);
@@ -85,7 +96,7 @@ public class DataReceiverQueue implements java.io.Serializable {
 		log(Level.INFO, "DataReceiverQueue - dataReceivers connection checker is shut down!");
 
 		log(Level.INFO, "DataReceiverQueue - shutting down dataReceivers!");
-		Iterator iter = iterator();
+		Iterator<DataReceiverForQueue> iter = iterator();
 		while (iter.hasNext()) {
 			DataReceiverForQueue drfq = (DataReceiverForQueue) iter.next();
 			log(Level.INFO, "DataReceiverQueue - shutting down dataReceiver " + drfq.getDataReceiver().getDelegate());
@@ -102,12 +113,7 @@ public class DataReceiverQueue implements java.io.Serializable {
 		log(Level.INFO, "DataReceiverQueue - trying to register new dataReceiver!");
 		boolean retVal = false;
 		DataReceiverForQueue drfq = new DataReceiverForQueue(dr, dataReceiverForQueueAdapter);
-		// TODO - Reimplement DataReceiver or find alternative way to check
-		// security at this level
-		// if(!SecurityManagerFactory.authenticate(resource,dr.getAsDefaultUser()))
-		// throw new
-		// NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_PASSWORD_NOT_MATCH);
-
+		
 		synchronized (queueOrg) {
 			if (queueOrg.size() >= getMaximumDataReceivers()) {
 				log(
@@ -146,9 +152,9 @@ public class DataReceiverQueue implements java.io.Serializable {
 		return retVal;
 	}
 
-	public Iterator iterator() {
+	public Iterator<DataReceiverForQueue> iterator() {
 		synchronized (queueOrg) {
-			return ((ArrayList) queueOrg.clone()).iterator();
+			return Collections.unmodifiableList(new LinkedList<DataReceiverForQueue>(queueOrg)).iterator();
 		}
 	}
 
@@ -195,7 +201,7 @@ public class DataReceiverQueue implements java.io.Serializable {
 
 		returnDataReceivers.append("******************************************" + "\r\n");
 		returnDataReceivers.append("DataReceiver Queue Contents: \r\n");
-		Iterator iter = iterator();
+		Iterator<DataReceiverForQueue> iter = iterator();
 		while (iter.hasNext())
 			returnDataReceivers.append(iter.next() + "\r\n");
 		returnDataReceivers.append("******************************************" + "\r\n");
@@ -220,7 +226,6 @@ public class DataReceiverQueue implements java.io.Serializable {
 	 */
 	public void setMaximumDataReceivers(int maximumDataReceivers) {
 		this.maximumDataReceivers = maximumDataReceivers;
-		queueOrg = new ArrayList<DataReceiverForQueue>(maximumDataReceivers);
 	}
 
 	/**
@@ -269,7 +274,7 @@ public class DataReceiverQueue implements java.io.Serializable {
 					log(Level.INFO, "DataReceiverQueue - dispatching DataProducer State change event. New State is: "
 							+ evt.getDataProducerState());
 
-					Iterator iter = iterator();
+					Iterator<DataReceiverForQueue> iter = iterator();
 					while (iter.hasNext()) {
 						try {
 							((DataReceiverForQueue) iter.next()).stateChanged(evt);
@@ -284,9 +289,9 @@ public class DataReceiverQueue implements java.io.Serializable {
 				}
 			} else if (o instanceof NewSamplesEvent) {
 				NewSamplesEvent evt = (NewSamplesEvent) o;
-				log(Level.INFO, "DataReceiverQueue - dispatching new samples message event "+evt);
+				log(Level.INFO, "DataReceiverQueue - dispatching new samples message event " + evt);
 
-				Iterator iter = iterator();
+				Iterator<DataReceiverForQueue> iter = iterator();
 				while (iter.hasNext()) {
 					try {
 						((DataReceiverForQueue) iter.next()).newSamples(evt);
@@ -310,41 +315,31 @@ public class DataReceiverQueue implements java.io.Serializable {
 		private boolean shutdown = false;
 
 		DataReceiversConnectionCheck() {
-			ExecutorScheduler.scheduleAtFixedRate(this, 1, 1, SECONDS);
+			ExecutorScheduler.scheduleAtFixedRate(this, 1, 1, TimeUnit.SECONDS);
 		}
 
-		// public void shutdown() {
-		// shutdown = true;
-		// try {
-		// synchronized (this) {
-		// this.join(1000);
-		// }
-		// } catch (Exception e) {
-		// }
-		// }
-
 		public void run() {
-			// while (!shutdown) {
-			// synchronized (this) {
-			// try {
-			// this.wait(1000);
-			// } catch (Exception ignored) {
-			// }
-			// }
 
-			Iterator iterDataReceivers = iterator();
+			Iterator<DataReceiverForQueue> iterDataReceivers = iterator();
 			while (iterDataReceivers.hasNext() /* && !shutdown */) {
 				try {
 					DataReceiverForQueue drfq = (DataReceiverForQueue) iterDataReceivers.next();
 					if (!drfq.isConnected() && !shutdown) {
-						// drfq.shutdown();
 						drfq.shutdownAsSoonAsPossible();
 					}
 				} catch (Exception e) {
 					logThrowable("DataReceiverQueue - Error cheking dataReceiver connection status!", e);
 				}
 			}
-			// }
+
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void logThrowable(String message, Throwable throwable) {
+			DataReceiverQueue.this.logThrowable(message, throwable);
 		}
 	}
 

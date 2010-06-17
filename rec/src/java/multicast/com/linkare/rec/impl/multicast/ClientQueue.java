@@ -229,8 +229,7 @@ public class ClientQueue {
 		if (contains(dcfq.getUserInfo())) {
 			DataClientForQueue otherDcfq = getWrapperForUser(dcfq.getUserInfo());
 			if (otherDcfq.isShuttingDown() || !otherDcfq.isConnected()) {
-				if(!otherDcfq.isShuttingDown())
-				{
+				if (!otherDcfq.isShuttingDown()) {
 					otherDcfq.shutdown();
 				}
 				synchronized (this) {
@@ -268,7 +267,6 @@ public class ClientQueue {
 		return retVal;
 	}
 
-	
 	public DataClientForQueue first() {
 		synchronized (queueOrg) {
 			try {
@@ -342,8 +340,10 @@ public class ClientQueue {
 
 	public boolean contains(UserInfo user) {
 		Iterator<DataClientForQueue> iter = iterator();
-		getClientQueueListener().log(Level.FINEST, "ClientQueue - users size is " + Collections.unmodifiableList(queueOrg).size());
-		getClientQueueListener().log(Level.FINEST, "ClientQueue - username passed in is " + (user == null ? "(user is null)" : user.getUserName()));
+		getClientQueueListener().log(Level.FINEST,
+				"ClientQueue - users size is " + Collections.unmodifiableList(queueOrg).size());
+		getClientQueueListener().log(Level.FINEST,
+				"ClientQueue - username passed in is " + (user == null ? "(user is null)" : user.getUserName()));
 		while (iter.hasNext()) {
 			DataClientForQueue dcfq = iter.next();
 			getClientQueueListener().log(Level.FINEST, "ClientQueue - dcfq.getUserName() " + dcfq.getUserName());
@@ -434,7 +434,7 @@ public class ClientQueue {
 							"ClientQueue - dispatching Hardware State change event. New State is: "
 									+ ((HardwareStateChangeEvent) o).getNewState());
 
-					Iterator iter = iterator();
+					Iterator<DataClientForQueue> iter = iterator();
 					while (iter.hasNext()) {
 						try {
 							((DataClientForQueue) iter.next()).hardwareStateChange((HardwareStateChangeEvent) o);
@@ -449,7 +449,7 @@ public class ClientQueue {
 			} else if (o instanceof ChatMessageEvent) {
 				getClientQueueListener().log(Level.INFO, "ClientQueue - dispatching chat message event.");
 
-				Iterator iter = iterator();
+				Iterator<DataClientForQueue> iter = iterator();
 				while (iter.hasNext()) {
 					try {
 						((DataClientForQueue) iter.next()).receiveMessage((ChatMessageEvent) o);
@@ -500,7 +500,6 @@ public class ClientQueue {
 
 	/* Inner Class - Clients Connection Checker */
 	private class ClientsConnectionCheck extends ScheduledWorkUnit {
-		private boolean shutdown = false;
 
 		public void run() {
 			Iterator<DataClientForQueue> iterClients = iterator();
@@ -514,6 +513,14 @@ public class ClientQueue {
 					getClientQueueListener().logThrowable("ClientQueue - Error cheking client connection status!", e);
 				}
 			}
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void logThrowable(String message, Throwable throwable) {
+			getClientQueueListener().logThrowable(message, throwable);
 		}
 	}
 

@@ -16,4 +16,11 @@ public abstract class ScheduledWorkUnit {
 		this.shutdownHandler = shutdownHandler;
 	}
 
+	/**
+	 * 
+	 * @param message The message to display in case some exception is caught on execution
+	 * @param throwable The exception stack trace
+	 */
+	public abstract void logThrowable(String message, Throwable throwable);
+
 }

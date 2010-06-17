@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -330,7 +331,13 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 				}
 			}
 		}
-
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void logThrowable(String message, Throwable throwable) {
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.SEVERE, message, throwable);
+		}
 	}
 
 }

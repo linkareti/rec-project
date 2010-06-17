@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ExecutorScheduler {
 
-	private static final ScheduledExecutorService scheduler = newScheduledThreadPool(5);
+	private static final ScheduledExecutorService scheduler = newScheduledThreadPool(1);
 
 	public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
 		return new ScheduledThreadPoolExecutor(corePoolSize, new ReCThreadFactory());
@@ -34,8 +34,13 @@ public class ExecutorScheduler {
 		}
 
 		public void run() {
+			try {
 			if (work != null) {
 				work.run();
+			}
+			}catch(Throwable t)
+			{
+				work.logThrowable("Throwable caught upon execution of Scheduled Work Unit of type "+work.getClass().getCanonicalName()+":"+t.getMessage(),t);
 			}
 		}
 
