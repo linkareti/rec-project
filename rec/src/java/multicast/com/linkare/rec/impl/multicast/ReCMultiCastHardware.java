@@ -106,7 +106,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	private boolean shuttingDown = false;
 
 	// TODO - put the LockCycler in the constructor...
-	private LockCycler currentLocker = new LockCycler();
+	private LockCycler currentLocker = null;
 
 	private ConditionChecker checkerStart = null;
 
@@ -144,6 +144,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		clientQueue = new ClientQueue(new ClientQueueAdapter(), maximumClients);
 
 		setHardware(hardware);
+
+		currentLocker = new LockCycler();
 
 		try {
 			this.hardware.registerDataClient(dataClient._this());
@@ -406,18 +408,29 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		/*
 		 * if(!clientQueue.contains(user)) throw new NotRegistered();
 		 */
-		if (!mainQueue.contains(user))
-			throw new NotRegistered();
 
+		log(Level.FINEST, "Fetching hardware info by user " + user.getUserName());
+
+		if (!mainQueue.contains(user)) {
+			log(Level.FINEST, "User " + user.getUserName()
+					+ " is not on the main queue... throwing a NotRegistered exception from hardware "
+					+ getHardwareUniqueId());
+			throw new NotRegistered();
+		}
 		DefaultOperation op = new DefaultOperation(IOperation.OP_GET_HARDWAREINFO);
-		op.getProperties().put(IOperation.PROPKEY_HARDWAREINFO, getHardwareInfo());
+		HardwareInfo hardwareInfo = getHardwareInfo();
+		op.getProperties().put(IOperation.PROPKEY_HARDWAREINFO, hardwareInfo);
 		DefaultUser securityUser = new DefaultUser(user);
 
 		if (!SecurityManagerFactory.authorize(getResource(), securityUser, op)) {
+			log(Level.FINEST, "User " + user.getUserName()
+					+ " is not authorized to access the hardware info on hardware " + getHardwareUniqueId());
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
 		}
 
-		return getHardwareInfo();
+		log(Level.FINEST, "User " + user.getUserName() + " on hardware " + getHardwareUniqueId()
+				+ " will receive a hardware info that is " + (hardwareInfo == null ? "null" : "not null") + "!");
+		return hardwareInfo;
 	}
 
 	public HardwareState getHardwareState(UserInfo user) throws NotAuthorized, NotRegistered {
@@ -616,7 +629,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	DateTime timeStartMin = null;
 
 	public UserInfo[] getClientList(UserInfo user) throws NotRegistered, NotAuthorized {
-		log(Level.FINEST, "Hardware - Getting the client list for user " + (user == null ? "(user is null)" : user.getUserName()));
+		log(Level.FINEST, "Hardware - Getting the client list for user "
+				+ (user == null ? "(user is null)" : user.getUserName()));
 		UserInfo[] retVal = clientQueue.getUsers(user, resource);
 		log(Level.FINEST, "Hardware - Got as retVal " + retVal);
 
