@@ -13,6 +13,7 @@
         <jar href="lib/appframework-1.0.3_sig.jar"/>
         <jar href="lib/swing-worker-1.1_sig.jar"/>
         <jar href="lib/swingx_sig.jar"/>
+        <jar href="lib/commons-lang-2.4_sig.jar"/>
         
         <jar href="lib/JCFN_sig.jar"/>
         <jar href="lib/jmf_sig.jar"/>
