@@ -272,6 +272,7 @@ form#content div {
 	padding:3px 6px !important;
 	float:left;
 	font-weight:bold !important;
+	border:none !important;
 }
 
 .yui-pg-pages a.yui-pg-page:hover,.yui-pg-container a.yui-pg-first:hover, .yui-pg-container a.yui-pg-previous:hover, .yui-pg-container a.yui-pg-last:hover, .yui-pg-container a.yui-pg-next:hover	{
@@ -282,8 +283,9 @@ form#content div {
 
 .yui-pg-container .yui-pg-first, .yui-pg-container .yui-pg-previous, .yui-pg-container .yui-pg-last, .yui-pg-container .yui-pg-next	{
 	background: #cfd7d6 !important;
-	color: #333333 !important;
+	color: #afafaf !important;
 	padding:3px 6px !important;
+	margin:0 6px 0 6px !important;
 	float:left;
 	font-weight:bold !important;
 }
