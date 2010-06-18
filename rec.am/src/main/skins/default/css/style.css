@@ -273,20 +273,21 @@ form#content div {
 	float:left;
 	font-weight:bold !important;
 	border:none !important;
+	margin-right:3px !important;
+	margin-top:3px !important;
 }
 
 .yui-pg-pages a.yui-pg-page:hover,.yui-pg-container a.yui-pg-first:hover, .yui-pg-container a.yui-pg-previous:hover, .yui-pg-container a.yui-pg-last:hover, .yui-pg-container a.yui-pg-next:hover	{
 	background: #7f7f7f !important;
 	}
 	
-.yui-pg-pages .yui-pg-current-page	{float:left;background:#cfd7d6;}
+.yui-pg-pages .yui-pg-current-page	{float:left;background:#cfd7d6;margin-right:3px !important;}
 
 .yui-pg-container .yui-pg-first, .yui-pg-container .yui-pg-previous, .yui-pg-container .yui-pg-last, .yui-pg-container .yui-pg-next	{
 	background: #cfd7d6 !important;
 	color: #afafaf !important;
 	padding:3px 6px !important;
-	margin:0 6px 0 6px !important;
-	float:left;
+	margin-right:3px !important;
 	font-weight:bold !important;
 }
 
