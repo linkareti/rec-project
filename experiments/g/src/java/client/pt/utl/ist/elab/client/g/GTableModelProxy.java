@@ -16,7 +16,7 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class GTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener {
+public class GTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener, com.linkare.rec.impl.client.experiment.ExpDataModelContainer {
 	/** Holds value of property expDataModel. */
 	private ExpDataModel expDataModel = null;
 

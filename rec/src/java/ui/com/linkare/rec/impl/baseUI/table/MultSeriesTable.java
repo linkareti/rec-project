@@ -19,12 +19,15 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.border.Border;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataModelContainer;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.MultSeriesTableModelProxy;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
@@ -43,6 +46,11 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	
 	private ExcelAdapter excelAdapter = null;
 	
+	private ExpDataModelContainer expDataModelContainer = null;
+	
+	private DefaultTableModel actualTableModel = null;
+	private TableModelListener actualTableActionListener = null;
+	
 	private static Logger log = null;
 	static {
 		log = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
@@ -56,6 +64,9 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	/** Creates new form DefaultExperimentDataTable */
 	public MultSeriesTable() {
 		initComponents();
+		
+		actualTableModel = defaultTableModelProxy;
+		expDataModelContainer = defaultTableModelProxy;
 		// setColArray(new int[]{0,1});
 		excelAdapter = new ExcelAdapter(dataTable);
 		dataTable.setCellSelectionEnabled(true);
@@ -77,11 +88,12 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 		scrollPaneTable = new javax.swing.JScrollPane();
 		dataTable = new javax.swing.JTable();
 
-		defaultTableModelProxy.addTableModelListener(new javax.swing.event.TableModelListener() {
+		actualTableActionListener = new javax.swing.event.TableModelListener() {
 			public void tableChanged(javax.swing.event.TableModelEvent evt) {
 				defaultTableModelProxyTableChanged(evt);
 			}
-		});
+		};
+		defaultTableModelProxy.addTableModelListener(actualTableActionListener);
 		
 		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ResultsActionBar.class);
 
@@ -182,6 +194,17 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 		Border border = BorderFactory.createEmptyBorder(top, left, bottom, right);
 		button.setBorder(border);
 	}
+	
+	protected void setActualTableModel(DefaultTableModel model) {
+		actualTableModel.removeTableModelListener(actualTableActionListener);
+		actualTableModel = model;
+		actualTableModel.addTableModelListener(actualTableActionListener);
+		dataTable.setModel(actualTableModel);
+	}
+	
+	protected void setExpDataModelContainer(ExpDataModelContainer expDataModelContainer) {
+		this.expDataModelContainer = expDataModelContainer;
+	}
 
 	private void selectAllBtnActionPerformed(java.awt.event.ActionEvent evt) {
 		dataTable.selectAll();
@@ -234,7 +257,7 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	private void saveTable(File saveFile, boolean append) {
 		try {
 			Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
-			fileWriter.write(ExportCSV.print(defaultTableModelProxy));
+			fileWriter.write(ExportCSV.print(actualTableModel));
 			fileWriter.flush();
 			fileWriter.close();
 		} catch (java.io.IOException ioe) {
@@ -268,7 +291,7 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	}
 
 	public void setExpDataModel(ExpDataModel model) {
-		defaultTableModelProxy.setExpDataModel(model);
+		expDataModelContainer.setExpDataModel(model);
 		model.addExpDataModelListener(new ExpDataModelListener() {
 			private boolean resizeDone = false;
 

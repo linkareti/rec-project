@@ -15,7 +15,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * 
  * @author Andr�
  */
-public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener {
+public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener, com.linkare.rec.impl.client.experiment.ExpDataModelContainer {
 	/** Holds value of property expDataModel. */
 	private ExpDataModel expDataModel = null;
 	private java.text.DecimalFormat df = new java.text.DecimalFormat("###0.0");

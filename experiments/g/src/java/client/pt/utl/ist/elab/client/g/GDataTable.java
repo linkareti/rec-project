@@ -12,12 +12,16 @@ import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class GDataTable extends MultSeriesTable  {
+public class GDataTable extends MultSeriesTable {
 
 	/** Creates new form DefaultExperimentDataTable */
 	public GDataTable() {
 		super();
-//		setColArray(new int[] { 0, 2, 1, 3, 4 });
+		// setColArray(new int[] { 0, 2, 4, 6, 8 });
+		
+		pt.utl.ist.elab.client.g.GTableModelProxy model = new pt.utl.ist.elab.client.g.GTableModelProxy();
+		setActualTableModel(model);
+		setExpDataModelContainer(model);
 	}
 	
 }

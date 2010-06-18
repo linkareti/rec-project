@@ -8,6 +8,8 @@ package com.linkare.rec.impl.client.experiment.export.csv;
 
 import java.io.StringWriter;
 
+import javax.swing.table.DefaultTableModel;
+
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVStrategy;
 
@@ -70,6 +72,16 @@ public class ExportCSV {
 	 */
 	public static String print(MultSeriesTableModelProxy model) {
 		return print(new CSVMultSeriesTableModelProxy(model));
+	}
+	
+	/**
+	 * Format data in CSV using excel strategy.
+	 * 
+	 * @param model model with the data
+	 * @return csv file content
+	 */
+	public static String print(DefaultTableModel model) {
+		return print(new CSVDefaultTableModelProxy(model));
 	}
 	
 	/**
