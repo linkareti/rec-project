@@ -213,7 +213,7 @@ form#content div {
 	margin-right:auto !important;
 	cursor:default !important;
 }
-.title_col .yui-dt-liner,.details_col .yui-dt-liner,.links_col .yui-dt-liner {
+.title_col .yui-dt-liner,.details_col .yui-dt-liner,.links_col .yui-dt-liner,.yui-dt-last .yui-dt-empty .yui-dt-liner {
 	margin:0 !important;
 	padding:2px 4px 2px 4px !important;
 	cursor:default !important;
