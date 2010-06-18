@@ -18,6 +18,7 @@ import com.linkare.rec.am.model.LoginDomain;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.model.moodle.ExternalUser;
 import com.linkare.rec.am.service.LoginDomainService;
+import com.linkare.rec.am.web.ex.AllocationManagerException;
 import com.linkare.rec.am.web.util.ConstantUtils;
 import com.linkare.rec.am.web.util.JndiHelper;
 import com.linkare.rec.am.wsgen.moodle.CourseRecord;
@@ -34,6 +35,14 @@ import com.linkare.rec.am.wsgen.moodle.UserRecord;
  */
 public final class MoodleClientHelper {
 
+    private static final String SHORTNAME = "shortname";
+
+    private static final String EXTERNAL_SYSTEM_CONFIGURATION_PROBLEMS = "external.system.configuration.problems";
+
+    private static final String ERROR_INVALID_URL_REGISTERING_LOGIN_DOMAINS = "error.invalidURL.registering.login.domains";
+
+    private static final String ERROR_ACCESSING_LOGIN_DOMAIN_FACADE_IN_JNDI = "error.accessing.loginDomainFacade.in.jndi";
+
     /**
      * This map saves all the moodle client help instances, indexed by the login domains.
      */
@@ -47,9 +56,9 @@ public final class MoodleClientHelper {
 		final LoginDomainService loginDomainService = JndiHelper.getLoginDomainService();
 		registerLoginDomains(loginDomainService.findAll());
 	    } catch (NamingException e) {
-		throw new RuntimeException("error.accessing.loginDomainFacade.in.jndi", e);
+		throw new AllocationManagerException(ERROR_ACCESSING_LOGIN_DOMAIN_FACADE_IN_JNDI, e);
 	    } catch (MalformedURLException e) {
-		throw new RuntimeException("error.invalidURL.registering.login.domains", e);
+		throw new AllocationManagerException(ERROR_INVALID_URL_REGISTERING_LOGIN_DOMAINS, e);
 	    }
 	}
 	return instancesMap;
@@ -73,7 +82,7 @@ public final class MoodleClientHelper {
 	try {
 	    moodleWsPort = moodleWS.getMoodleWSPort(url);
 	} catch (ServiceException e) {
-	    throw new RuntimeException("external.system.configuration.problems", e);
+	    throw new AllocationManagerException(EXTERNAL_SYSTEM_CONFIGURATION_PROBLEMS, e);
 	}
     }
 
@@ -81,7 +90,7 @@ public final class MoodleClientHelper {
 	try {
 	    return getInstance(loginDomain).moodleWsPort.login(username, password);
 	} catch (RemoteException e) {
-	    throw new RuntimeException(e);
+	    throw new AllocationManagerException(e);
 	}
     }
 
@@ -95,7 +104,6 @@ public final class MoodleClientHelper {
 	}
     }
 
-    // TODO: Possible improvement point, by extending the Moodle WS to return the teachers of the course!
     public static List<ExternalCourse> getUserLecturedCourses(final String username, final String loginDomain, final LoginReturn loginReturn) {
 	final List<ExternalCourse> result = new ArrayList<ExternalCourse>();
 	final List<ExternalCourse> externalCourses = getCurrentUserCourses(loginDomain, loginReturn);
@@ -117,10 +125,9 @@ public final class MoodleClientHelper {
 	}
 	final List<ExternalCourse> courseRecords = new ArrayList<ExternalCourse>(1);
 	try {
-	    courseRecords.addAll(toExternalCourses(loginDomain, loginReturn, getInstance(loginDomain).moodleWsPort.get_course(getClient(loginReturn),
-															      getSessionkey(loginReturn),
-															      id == null ? null : id,
-															      "shortname").getCourses()));
+	    courseRecords.addAll(toExternalCourses(loginDomain, loginReturn,
+						   getInstance(loginDomain).moodleWsPort.get_course(getClient(loginReturn), getSessionkey(loginReturn),
+												    id == null ? null : id, SHORTNAME).getCourses()));
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	}
@@ -150,8 +157,7 @@ public final class MoodleClientHelper {
 	    return toExternalUsers(externalCourse.getLoginDomain(),
 				   getInstance(externalCourse.getLoginDomain()).moodleWsPort.get_students(getClient(externalCourse.getLoginReturn()),
 													  getSessionkey(externalCourse.getLoginReturn()),
-													  externalCourse.getShortname(), "shortname")
-											    .getUsers());
+													  externalCourse.getShortname(), SHORTNAME).getUsers());
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	    return Collections.<ExternalUser> emptyList();
@@ -163,8 +169,7 @@ public final class MoodleClientHelper {
 	    return toExternalUsers(externalCourse.getLoginDomain(),
 				   getInstance(externalCourse.getLoginDomain()).moodleWsPort.get_teachers(getClient(externalCourse.getLoginReturn()),
 													  getSessionkey(externalCourse.getLoginReturn()),
-													  externalCourse.getShortname(), "shortname")
-											    .getUsers());
+													  externalCourse.getShortname(), SHORTNAME).getUsers());
 	} catch (RemoteException e) {
 	    e.printStackTrace();
 	    return Collections.<ExternalUser> emptyList();
@@ -173,7 +178,7 @@ public final class MoodleClientHelper {
 
     public static UserRecord[] getStudents(final String courseShortName, final String loginDomain, final LoginReturn loginReturn) {
 	try {
-	    return getInstance(loginDomain).moodleWsPort.get_students(getClient(loginReturn), getSessionkey(loginReturn), courseShortName, "shortname")
+	    return getInstance(loginDomain).moodleWsPort.get_students(getClient(loginReturn), getSessionkey(loginReturn), courseShortName, SHORTNAME)
 							.getUsers();
 	} catch (RemoteException e) {
 	    e.printStackTrace();
@@ -183,7 +188,7 @@ public final class MoodleClientHelper {
 
     public static UserRecord[] getTeachers(final String courseShortName, final String loginDomain, final LoginReturn loginReturn) {
 	try {
-	    return getInstance(loginDomain).moodleWsPort.get_teachers(getClient(loginReturn), getSessionkey(loginReturn), courseShortName, "shortname")
+	    return getInstance(loginDomain).moodleWsPort.get_teachers(getClient(loginReturn), getSessionkey(loginReturn), courseShortName, SHORTNAME)
 							.getUsers();
 	} catch (RemoteException e) {
 	    e.printStackTrace();
