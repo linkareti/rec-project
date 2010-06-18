@@ -28,34 +28,28 @@ public class DefaultDialog<C extends AbstractContentPane> extends JDialog {
 
 	protected C content;
 
-	//protected Component container;
-
 	public DefaultDialog(C content) {
 		this(null, "", content);
 	}
 
 	public DefaultDialog(Window owner, String title, C content) {
 		super(owner, title);
-		//this.container = container;
 		this.content = content;
 		this.content.setContainer(this);
 		add(content);
 		init();
 	}
 
+	protected void init() {
+		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		setModal(true);
+	}
+	
 	/**
 	 * @return the dialog content.
 	 */
 	public C getContent() {
 		return content;
-	}
-
-	protected void init() {
-		setPreferredSize(content.getPreferredSize());
-		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-		pack();
-		setModal(true);
-		//setLocationRelativeTo(container);
 	}
 
 }
