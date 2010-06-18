@@ -566,7 +566,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 	}
 
 	/**
-	 * Inseri um m�todo main para testar o customizer Teste Ok 17-10-2004
+	 * Inseri um metodo main para testar o customizer Teste Ok 17-10-2004
 	 * 
 	 * @author Sergio Pino
 	 */
@@ -575,7 +575,7 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 		ScubaCustomizer sc = new ScubaCustomizer();
 		jf.getContentPane().add(sc, java.awt.BorderLayout.CENTER);
 		jf.pack();
-		jf.show();
+		jf.setVisible(true);
 	}
 
 }
