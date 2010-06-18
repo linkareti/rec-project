@@ -261,11 +261,10 @@ form#content div {
 	display:inline !important;
 }
 
-
-a.yui-pg-page:link,a.yui-pg-page:hover,a.yui-pg-page:visited
-	{
+.yui-pg-pages .yui-pg-page	{
 	background: #333333;
 	color: #FFFFFF;
+	float:left;
 }
 
 .fc-event,.myevents a {
