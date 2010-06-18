@@ -264,6 +264,8 @@ form#content div {
 	padding:3px 6px !important;
 }
 
+
+	
 .yui-pg-pages a.yui-pg-page	{
 	background: #333333;
 	color: #ffffff !important;
@@ -271,12 +273,19 @@ form#content div {
 	float:left;
 	font-weight:bold !important;
 }
+
+.yui-pg-pages a.yui-pg-page:hover,.yui-pg-container a.yui-pg-first:hover, .yui-pg-container a.yui-pg-previous:hover, .yui-pg-container a.yui-pg-last:hover, .yui-pg-container a.yui-pg-next:hover	{
+	background: #7f7f7f !important;
+	}
+	
 .yui-pg-pages .yui-pg-current-page	{float:left;background:#cfd7d6;}
 
 .yui-pg-container .yui-pg-first, .yui-pg-container .yui-pg-previous, .yui-pg-container .yui-pg-last, .yui-pg-container .yui-pg-next	{
 	background: #cfd7d6 !important;
 	color: #333333 !important;
 	padding:3px 6px !important;
+	float:left;
+	font-weight:bold !important;
 }
 
 .fc-event,.myevents a {
