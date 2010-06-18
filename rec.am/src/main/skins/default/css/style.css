@@ -221,9 +221,8 @@ form#content div {
 	color:#283234;
 		
 }
-.links_col .yui-dt-liner a,.yui-dt-last .yui-dt-liner a,.yui-dt-liner a{
+.links_col .yui-dt-liner a, .yui-dt-even .yui-dt-last .yui-dt-liner a, .yui-dt-odd .yui-dt-last .yui-dt-liner a{
 	display:inline !important;
-	border:red 1px solid; 	
 }
 
 .list {
