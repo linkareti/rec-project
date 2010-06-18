@@ -58,6 +58,7 @@ public class ApparatusTabbedHistoryPane extends GradientPane {
 			if (display.getToolBar() != null) {
 				JToolBar toolBar = display.getToolBar();
 				toolBar.setName("toolBar");
+				toolBar.setOpaque(false);
 				toolBar.setMinimumSize(resultsActionBar.getMinimumSize());
 				resultsHolderPane.remove(resultsActionBar);
 				resultsHolderPane.add(toolBar, java.awt.BorderLayout.PAGE_END);

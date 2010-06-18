@@ -98,6 +98,7 @@ public class ApparatusTabbedPane extends AbstractContentPane implements ChangeLi
 				JToolBar newToolBar = display.getToolBar();
 				newToolBar.setName("toolBar");
 				newToolBar.setMinimumSize(experimentActionBar.getMinimumSize());
+				newToolBar.setOpaque(false);
 				if (!lastSelectedTabResults) {
 					if (TAB_RESULTS == tabbedPane.getSelectedIndex()) {
 						actionBarHolderPane.remove(experimentActionBar);
