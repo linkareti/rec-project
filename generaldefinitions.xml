@@ -392,11 +392,10 @@
 	-->
 
 	<macrodef name="create.jnlp.full.client.compile">
-		<attribute name="codebase" />
 		<sequential>
 
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFramework.jnlp" />
-			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
 			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" propertyFile="build.properties">
 				<replacefilter token="@href@" property="href" />
 			</replace>
@@ -406,22 +405,22 @@
 			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/OpenORB.jnlp" />
-			<replace file="${elab.client.classes.dir}/OpenORB.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/OpenORB.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 
 			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/JFreeChart.jnlp" />
-			<replace file="${elab.client.classes.dir}/JFreeChart.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/JFreeChart.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 
 			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linuxInstaller.jnlp" />
-			<replace file="${elab.client.classes.dir}/linuxInstaller.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/linuxInstaller.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 
 			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macInstaller.jnlp" />
-			<replace file="${elab.client.classes.dir}/macInstaller.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/macInstaller.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 
 			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windowsInstaller.jnlp" />
-			<replace file="${elab.client.classes.dir}/windowsInstaller.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/windowsInstaller.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ElabFullClient.jnlp" />
-			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@codebase@" value="@{codebase}" />
+			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" propertyFile="build.properties">
 				<replacefilter token="@href@" property="href" />
 				<replacefilter token="@title@" property="title" />
@@ -454,7 +453,6 @@
 
 	<macrodef name="create.jnlp.full.client.build">
 		<sequential>
-
 
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/ReCFramework.jnlp" />
 			<replace file="${client.build.dir}/ReCFramework.jnlp" propertyFile="build.properties">

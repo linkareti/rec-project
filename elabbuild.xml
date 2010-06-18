@@ -34,7 +34,7 @@
 		<delete dir="${elab.client.classes.dir}" />
 		<delete file="${build.dir.compile}/ReELabClient.jar" />
 		<delete file="${build.dir.compile}/ELabClient_sig.jar" />
-		<delete file="create.jnlp.full.client.compile" />
+		<delete file="${elab.client.classes.dir}/ElabFullClient.jnlp" />
 	</target>
 
 	<target name="compile.elab.client">
@@ -101,6 +101,7 @@
 	</target>
 
 	<target name="build.elab.client" depends="clean.elab.client,compile.elab.client,jar.elab.client, repack.jar.elab.client, sign.elab.client, pack.jar.elab.client">
+		<create.jnlp.full.client.compile />
 		<create.jnlp.full.client.build />
 
 		<copy file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" tofile="${client.build.dir}/etc/ReCBaseUIConfig.xml">
@@ -108,6 +109,7 @@
 
 		<copy file="${elab.client.classes.dir}/ReCFaceConfig.xml" tofile="${client.build.dir}/etc/ReCFaceConfig.xml">
 		</copy>
+		
 
 		<copy todir="${client.build.dir}/images" overwrite="true">
 			<fileset dir="${templates.dir.images}">
@@ -119,9 +121,21 @@
 
 	</target>
 
-	<target name="run.elab.client.web.start">
+	<target name="run.elab.local.client.web.start">
+		<exec executable="javaws" dir="${java.home}/bin">
+			<arg value="${elab.client.classes.dir}/ElabFullClient.jnlp" />
+		</exec>
 	</target>
-
+		
+	<target name="debug.elab.local.client.web.start">
+		<exec executable="javaws" dir="${java.home}/bin">
+			<arg value="-J-Xdebug" />
+			<arg value="-J-Xnoagent" />
+			<arg value="-J-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000" />
+			<arg value="${elab.client.classes.dir}/ElabFullClient.jnlp" />
+		</exec>
+	</target>
+	
 	<target name="run.elab.client">
 		<java classname="${client.main-class}" fork="true" failonerror="true">
 			<arg value="-h" />
