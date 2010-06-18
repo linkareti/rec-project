@@ -256,8 +256,7 @@ form#content div {
 }
 
 
-.yui-pg-paginator a.yui-pg-last, .yui-pg-paginator a.yui-pg-first,.yui-pg-paginator a.yui-pg-next,.yui-pg-paginator a.yui-pg-previous
-	{
+.yui-pg-container a.yui-pg-first, .yui-pg-container a.yui-pg-previous, .yui-pg-container a.yui-pg-last, .yui-pg-container a.yui-pg-next	{
 	color: #333333; 
 	display:inline !important;
 }
