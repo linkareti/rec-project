@@ -207,6 +207,8 @@ form#content div {
 	border: 0px;
 }
 
+.yui-dt-empty {border-top:none !important;background:#ffffff !important;}
+
 .yui-dt-liner {
 	padding: 4px 1px !important;
 	margin-left:auto !important;
