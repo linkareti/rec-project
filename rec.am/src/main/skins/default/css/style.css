@@ -189,7 +189,7 @@ table .yui-dt-selected {
 	text-decoration: none;
 }
 
-.yui-dt-even td,.yui-dt-odd td {
+.yui-dt-even td,.yui-dt-odd td,.yui-dt-empty td {
 	border:none !important;
 	color: #283234;
 	text-decoration: none;
