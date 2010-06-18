@@ -256,13 +256,14 @@ form#content div {
 }
 
 
-.yui-skin-sam .yui-dt-paginator a.yui-pg-last,.yui-skin-sam .yui-dt-paginator a.yui-pg-first,.yui-skin-sam .yui-dt-paginator a.yui-pg-next,.yui-skin-sam .yui-dt-paginator a.yui-pg-previous
+.yui-pg-paginator a.yui-pg-last, .yui-pg-paginator a.yui-pg-first,.yui-pg-paginator a.yui-pg-next,.yui-pg-paginator a.yui-pg-previous
 	{
 	color: #333333; 
 	display:inline !important;
 }
 
-.yui-skin-sam a.yui-pg-page:link,.yui-skin-sam a.yui-pg-page:hover,.yui-skin-sam a.yui-pg-page:visited
+
+a.yui-pg-page:link,a.yui-pg-page:hover,a.yui-pg-page:visited
 	{
 	background: #333333;
 	color: #FFFFFF;
