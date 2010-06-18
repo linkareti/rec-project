@@ -275,13 +275,14 @@ form#content div {
 	border:none !important;
 	margin-right:3px !important;
 	margin-top:3px !important;
+	margin-bottom:0 !important;
 }
 
 .yui-pg-pages a.yui-pg-page:hover,.yui-pg-container a.yui-pg-first:hover, .yui-pg-container a.yui-pg-previous:hover, .yui-pg-container a.yui-pg-last:hover, .yui-pg-container a.yui-pg-next:hover	{
 	background: #7f7f7f !important;
 	}
 	
-.yui-pg-pages .yui-pg-current-page	{float:left;background:#cfd7d6;margin-right:3px !important;}
+.yui-pg-pages .yui-pg-current-page	{float:left;background:#cfd7d6;margin-bottom:0 !important;margin-right:3px !important;margin-top:3px !important;}
 
 .yui-pg-container .yui-pg-first, .yui-pg-container .yui-pg-previous, .yui-pg-container .yui-pg-last, .yui-pg-container .yui-pg-next	{
 	background: #cfd7d6 !important;
