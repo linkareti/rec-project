@@ -255,12 +255,13 @@ form#content div {
 	color: white;
 }
 
-/*
+
 .yui-skin-sam .yui-dt-paginator a.yui-pg-last,.yui-skin-sam .yui-dt-paginator a.yui-pg-first,.yui-skin-sam .yui-dt-paginator a.yui-pg-next,.yui-skin-sam .yui-dt-paginator a.yui-pg-previous
 	{
-	color: #333333;
+	color: #333333; 
+	display:inline !important;
 }
-*/
+
 .yui-skin-sam a.yui-pg-page:link,.yui-skin-sam a.yui-pg-page:hover,.yui-skin-sam a.yui-pg-page:visited
 	{
 	background: #333333;
