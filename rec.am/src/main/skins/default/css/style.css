@@ -263,10 +263,11 @@ form#content div {
 
 .yui-pg-pages a.yui-pg-page	{
 	background: #333333;
-	color: #FFFFFF;
+	color: #ffffff !important;
+	padding:3px 6px !important;
 	float:left;
 }
-
+.yui-pg-pages .yui-pg-current-page	{float:left;}
 
 .fc-event,.myevents a {
 	background-color: black !important;
