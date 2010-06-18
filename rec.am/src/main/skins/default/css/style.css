@@ -261,11 +261,12 @@ form#content div {
 	display:inline !important;
 }
 
-.yui-pg-pages .yui-pg-page	{
+.yui-pg-pages a.yui-pg-page	{
 	background: #333333;
 	color: #FFFFFF;
 	float:left;
 }
+
 
 .fc-event,.myevents a {
 	background-color: black !important;
