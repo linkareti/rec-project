@@ -620,7 +620,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				}
 			} else { // Optional Property
 				if (propertyValue == null || propertyValue.isEmpty()) {
-					log.warning("Optional ReC system property is missing: " + property);
+					log.fine("Optional ReC system property is missing: " + property);
 				}
 			}
 		}
