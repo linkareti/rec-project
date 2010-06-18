@@ -162,7 +162,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	private void refreshHardwares() {
 		try {
 			MultiCastHardware[] hardwares = mcw.enumerateHardware(getUserInfo());
-			
+
 			if (hardwares == null)
 				return;
 
@@ -173,7 +173,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 					MultiCastHardwareWrapper mchw = new MultiCastHardwareWrapper(hardwares[i]);
 
 					HardwareInfo hardwareInfo = mchw.getHardwareInfo(getUserInfo());
-					
+
 					if (hardwareInfo == null) {
 						continue;
 					}
@@ -414,7 +414,12 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == LabConnectorListener.class) {
-				((LabConnectorListener) listeners[i + 1]).labStatusChanged(new LabConnectorEvent(this, statusCode));
+				try {
+					((LabConnectorListener) listeners[i + 1]).labStatusChanged(new LabConnectorEvent(this, statusCode));
+				} catch (Exception e) {
+					LoggerUtil.logThrowable("Unable to send lab status change information to listener", e, Logger
+							.getLogger(LAB_CLIENT_LOGGER));
+				}
 			}
 		}
 	}
@@ -462,8 +467,13 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener.class) {
-				((com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener) listeners[i + 1])
-						.apparatusListChanged(newApparatusList);
+				try {
+					((com.linkare.rec.impl.client.apparatus.ApparatusListSourceListener) listeners[i + 1])
+							.apparatusListChanged(newApparatusList);
+				} catch (Exception e) {
+					LoggerUtil.logThrowable("Unable to inform listener of apparatus list changes!", e, Logger
+							.getLogger(LAB_CLIENT_LOGGER));
+				}
 			}
 		}
 	}
@@ -579,11 +589,20 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == IChatMessageListener.class) {
-				((IChatMessageListener) listeners[i + 1]).connectionChanged(new ChatConnectionEvent(this, isConnected));
-				if (isConnected)
-					refreshUsersList();
+				try {
+					((IChatMessageListener) listeners[i + 1]).connectionChanged(new ChatConnectionEvent(this,
+							isConnected));
+				} catch (Exception e) {
+					LoggerUtil.logThrowable("Unable to deliver connection change event to listener", e, Logger
+							.getLogger(LAB_CLIENT_LOGGER));
+				}
+
 			}
 		}
+		if (isConnected) {
+			refreshUsersList();
+		}
+
 	}
 
 	/**
@@ -597,7 +616,12 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == IChatMessageListener.class) {
-				((IChatMessageListener) listeners[i + 1]).roomChanged(new ChatRoomEvent(this, newRoomName));
+				try {
+					((IChatMessageListener) listeners[i + 1]).roomChanged(new ChatRoomEvent(this, newRoomName));
+				} catch (Exception e) {
+					LoggerUtil.logThrowable("Unable to deliver chat room change event to listener", e, Logger
+							.getLogger(LAB_CLIENT_LOGGER));
+				}
 			}
 		}
 	}
@@ -612,11 +636,18 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 			return;
 		Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == ExpUsersListChangeListener.class) {
-				((ExpUsersListChangeListener) listeners[i + 1]).usersListChanged(new ExpUsersListEvent(this, event));
-			} else if (listeners[i] == IChatMessageListener.class) {
-				((IChatMessageListener) listeners[i + 1]).userListChanged(event);
+			try {
+				if (listeners[i] == ExpUsersListChangeListener.class) {
+					((ExpUsersListChangeListener) listeners[i + 1])
+							.usersListChanged(new ExpUsersListEvent(this, event));
+				} else if (listeners[i] == IChatMessageListener.class) {
+					((IChatMessageListener) listeners[i + 1]).userListChanged(event);
+				}
+			} catch (Exception e) {
+				LoggerUtil.logThrowable("Unable to deliver users list change event to listener", e, Logger
+						.getLogger(LAB_CLIENT_LOGGER));
 			}
+
 		}
 	}
 
@@ -631,7 +662,12 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == IChatMessageListener.class) {
-				((IChatMessageListener) listeners[i + 1]).newChatMessage(evt);
+				try {
+					((IChatMessageListener) listeners[i + 1]).newChatMessage(evt);
+				} catch (Exception e) {
+					LoggerUtil.logThrowable("Unable to deliver chat message to listener", e, Logger
+							.getLogger(LAB_CLIENT_LOGGER));
+				}
 			}
 		}
 	}
