@@ -14,8 +14,11 @@ import java.io.Writer;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.border.Border;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -28,12 +31,12 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 import com.linkare.rec.impl.client.experiment.export.csv.ExportCSV;
 import com.linkare.rec.impl.client.experiment.export.printer.ExportPrinter;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.newface.component.ResultsActionBar;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI & Andr�
  */
-@Deprecated
 public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDisplay, Printable, ExperimentTableOperation {
 	
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
@@ -70,6 +73,7 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 		saveBtn = new javax.swing.JButton();
 		copyBtn = new javax.swing.JButton();
 		selectAllBtn = new javax.swing.JButton();
+		btnPlayStop = new javax.swing.JButton();
 		scrollPaneTable = new javax.swing.JScrollPane();
 		dataTable = new javax.swing.JTable();
 
@@ -78,46 +82,86 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 				defaultTableModelProxyTableChanged(evt);
 			}
 		});
+		
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ResultsActionBar.class);
 
 		toolBarTable.setRollover(true);
-		printBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/Print16.gif")));
-		printBtn.setToolTipText("Print");
+		toolBarTable.setOpaque(false);
+		
+        btnPlayStop.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
+        btnPlayStop.setIcon(resourceMap.getIcon("btnPlayStop.icon")); // NOI18N
+        btnPlayStop.setText(resourceMap.getString("btnPlayStop.text")); // NOI18N
+        btnPlayStop.setToolTipText(resourceMap.getString("btnPlayStop.toolTipText")); // NOI18N
+        btnPlayStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        btnPlayStop.setBorderPainted(false);
+        btnPlayStop.setName("btnPlayStop"); // NOI18N
+        
+		setButtonBorder(btnPlayStop);
+//		toolBarTable.addSeparator();
+		toolBarTable.add(btnPlayStop);
+		
+		printBtn.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
+		printBtn.setIcon(resourceMap.getIcon("btnPrint.icon")); // NOI18N
+		printBtn.setToolTipText(resourceMap.getString("btnPrint.toolTipText")); // NOI18N
+		printBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		printBtn.setBorderPainted(false);
+		printBtn.setName("printBtn"); // NOI18N
+		printBtn.setPressedIcon(resourceMap.getIcon("btnPrint.pressedIcon")); // NOI18N
 		printBtn.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				printBtnActionPerformed(evt);
 			}
 		});
-
+		setButtonBorder(printBtn);
+//		toolBarTable.addSeparator();
 		toolBarTable.add(printBtn);
 
-		saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/Save16.gif")));
-		saveBtn.setToolTipText("Save csv file");
+		saveBtn.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
+		saveBtn.setIcon(resourceMap.getIcon("btnSave.icon")); // NOI18N
+		saveBtn.setToolTipText(resourceMap.getString("btnSave.toolTipText")); // NOI18N
+		saveBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		saveBtn.setBorderPainted(false);
+		saveBtn.setName("saveBtn"); // NOI18N
+		saveBtn.setPressedIcon(resourceMap.getIcon("btnSave.pressedIcon")); // NOI18N
 		saveBtn.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				saveBtnActionPerformed(evt);
 			}
 		});
+		setButtonBorder(saveBtn);
+//		toolBarTable.addSeparator();
 		toolBarTable.add(saveBtn);
-
-		copyBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/Copy16.gif")));
-		copyBtn.setToolTipText("Copy to Clipboard in Excel Format");
+		
+		copyBtn.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
+		copyBtn.setIcon(resourceMap.getIcon("btnCopy.icon")); // NOI18N
+		copyBtn.setToolTipText(resourceMap.getString("btnCopy.toolTipText")); // NOI18N
+		copyBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		copyBtn.setBorderPainted(false);
+		copyBtn.setName("btnCopy"); // NOI18N
+		copyBtn.setPressedIcon(resourceMap.getIcon("btnCopy.pressedIcon")); // NOI18N
 		copyBtn.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				copyBtnActionPerformed(evt);
 			}
 		});
+		setButtonBorder(copyBtn);
+//		toolBarTable.addSeparator();
 		toolBarTable.add(copyBtn);
-		selectAllBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/tableSelectAll16.gif")));
-		selectAllBtn.setToolTipText("Select All");
+		
+		selectAllBtn.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
+        selectAllBtn.setIcon(resourceMap.getIcon("btnSelectAll.icon")); // NOI18N
+        selectAllBtn.setToolTipText(resourceMap.getString("btnSelectAll.toolTipText")); // NOI18N
+        selectAllBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        selectAllBtn.setBorderPainted(false);
+        selectAllBtn.setName("btnSelectAll"); // NOI18N
+        selectAllBtn.setPressedIcon(resourceMap.getIcon("btnSelectAll.pressedIcon")); // NOI18N
 		selectAllBtn.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				selectAllBtnActionPerformed(evt);
 			}
 		});
+		setButtonBorder(selectAllBtn);
+//		toolBarTable.addSeparator();
 		toolBarTable.add(selectAllBtn);
 
 		setLayout(new java.awt.BorderLayout());
@@ -128,6 +172,15 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 		scrollPaneTable.setViewportView(dataTable);
 
 		add(scrollPaneTable, java.awt.BorderLayout.CENTER);
+	}
+	
+	private void setButtonBorder(JButton button) {
+		int top = 0;
+		int left = 6;
+		int bottom = 0;
+		int right = 6;
+		Border border = BorderFactory.createEmptyBorder(top, left, bottom, right);
+		button.setBorder(border);
 	}
 
 	private void selectAllBtnActionPerformed(java.awt.event.ActionEvent evt) {
@@ -386,6 +439,7 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	private javax.swing.JToolBar toolBarTable;
 	private javax.swing.JButton copyBtn;
 	private javax.swing.JButton selectAllBtn;
+	private javax.swing.JButton btnPlayStop;
 	// End of variables declaration
 	
 	/**
