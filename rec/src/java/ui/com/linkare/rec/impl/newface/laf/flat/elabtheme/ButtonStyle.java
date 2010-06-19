@@ -34,10 +34,10 @@ public class ButtonStyle extends DefaultStyle {
 //        New Button
     	private static final FontUIResource FONT_BUTTON = new FontUIResource(DEFAULT_FONT.getFontName(), Font.PLAIN, 12);
 	private static final List BUTTON_GRADIENT = Arrays.asList(new Object[] { new Float(.1f), new Float(0f), new ColorUIResource(0xD8E8F6),
-			new ColorUIResource(0xEDF5FB), new ColorUIResource(0xA7CCEC) });
+			new ColorUIResource(0xEDF5FB), new ColorUIResource(0xD8F0FF) });
 	private static final Border COLOR_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0x636767)),
 			BorderFactory.createEmptyBorder(4, 16, 4, 16));
-	private static final Color COLOR_BUTTON_FG = new Color(0x00617C);
+	private static final Color COLOR_BUTTON_FG = new Color(0x395882);
 
 	//PROPERTIES
 	private static final String PT_GRADIENT = "gradient";
