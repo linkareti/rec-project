@@ -71,8 +71,21 @@
 			<name>Java.net</name>
 			<url>http://download.java.net/maven/2</url>
 		</repository>
-
 	</repositories>
+	<distributionManagement>
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>public-repo</id>
+			<name>Linkare public repository</name>
+			<url>http://nexus.linkare.com/content/repositories/releases/</url>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<snapshotRepository>
+			<id>snap-repo</id>
+			<name>Linkare public snapshot repository</name>
+			<url>http://nexus.linkare.com/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
@@ -503,8 +516,11 @@
 	</build>
 
 	<profiles>
-		<!-- Profiles skin.empty and skin.default are duplicates since maven doesn't allow multiples of the "property" tag
-			in a single "activation" tag -->
+		<!--
+			Profiles skin.empty and skin.default are duplicates since maven
+			doesn't allow multiples of the "property" tag in a single
+			"activation" tag
+		-->
 		<profile>
 			<id>skin.empty</id>
 			<activation>
@@ -540,15 +556,18 @@
 				<rec.am.skin.name>alternate</rec.am.skin.name>
 			</properties>
 		</profile>
-		<!-- Profiles targetenv.empty and targetenv.dev are duplicates since maven doesn't allow multiples of the "property" tag
-			in a single "activation" tag -->
+		<!--
+			Profiles targetenv.empty and targetenv.dev are duplicates since maven
+			doesn't allow multiples of the "property" tag in a single
+			"activation" tag
+		-->
 		<profile>
 			<id>targetenv.empty</id>
 			<activation>
 				<property>
 					<name>!targetenv</name>
 				</property>
-		        </activation>
+			</activation>
 			<properties>
 				<targetenv.hibernate.show_sql>true</targetenv.hibernate.show_sql>
 				<targetenv.hibernate.hbm2ddl.auto>update</targetenv.hibernate.hbm2ddl.auto>
@@ -561,7 +580,7 @@
 					<name>targetenv</name>
 					<value>dev</value>
 				</property>
-		        </activation>
+			</activation>
 			<properties>
 				<targetenv.hibernate.show_sql>true</targetenv.hibernate.show_sql>
 				<targetenv.hibernate.hbm2ddl.auto>update</targetenv.hibernate.hbm2ddl.auto>
@@ -574,7 +593,7 @@
 					<name>targetenv</name>
 					<value>prod</value>
 				</property>
-		        </activation>
+			</activation>
 			<properties>
 				<targetenv.hibernate.show_sql>false</targetenv.hibernate.show_sql>
 				<targetenv.hibernate.hbm2ddl.auto>validate</targetenv.hibernate.hbm2ddl.auto>
