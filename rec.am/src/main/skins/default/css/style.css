@@ -256,29 +256,21 @@ form#content div {
 }
 .yui-pg-container,.yui-pg-container .yui-pg-pages {white-space:nowrap;}
 
-.yui-pg-container a.yui-pg-first, .yui-pg-container a.yui-pg-previous {
+.yui-pg-container a.yui-pg-first, .yui-pg-container a.yui-pg-previous,.yui-pg-container a.yui-pg-last, .yui-pg-container a.yui-pg-next {
 	background: #333333 !important;
 	color: #ffffff !important;
 	display:inline !important;
 	font-weight:bold !important;
 	padding:3px 6px !important;
-
+	position:relative;
+	top:-6px;
 }
 
-.yui-pg-container a.yui-pg-last, .yui-pg-container a.yui-pg-next {
-	background: #333333 !important;
-	color: #ffffff !important;
-	display:inline !important;
-	font-weight:bold !important;
-	padding:3px 6px !important;
-
-}
-	
 .yui-pg-pages a.yui-pg-page	{
 	background: #333333;
 	color: #ffffff !important;
 	padding:3px 6px !important;
-float:left !important;
+	float:left !important;
 	font-weight:bold !important;
 	border:none !important;
 	margin-right:3px !important;
@@ -297,6 +289,8 @@ float:left !important;
 	padding:3px 6px !important;
 	margin-right:3px !important;
 	font-weight:bold !important;
+	position:relative;
+	top:-6px;	
 }
 
 .fc-event,.myevents a {
