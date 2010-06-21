@@ -278,7 +278,7 @@ form#content div {
 	background: #333333;
 	color: #ffffff !important;
 	padding:3px 6px !important;
-
+float:left !important;
 	font-weight:bold !important;
 	border:none !important;
 	margin-right:3px !important;
@@ -289,7 +289,7 @@ form#content div {
 	background: #7f7f7f !important;
 	}
 	
-.yui-pg-pages .yui-pg-current-page	{background:#cfd7d6;margin-bottom:0 !important;margin-right:3px !important;}
+.yui-pg-pages .yui-pg-current-page	{float:left !important;background:#cfd7d6;margin-bottom:0 !important;margin-right:3px !important;}
 
 .yui-pg-container .yui-pg-first, .yui-pg-container .yui-pg-previous, .yui-pg-container .yui-pg-last, .yui-pg-container .yui-pg-next	{
 	background: #cfd7d6 !important;
