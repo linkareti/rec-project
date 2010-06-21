@@ -254,7 +254,7 @@ form#content div {
 .yui-skin-sam tr {
 	color: white;
 }
-.yui-pg-container {white-space:nowrap;}
+.yui-pg-container,.yui-pg-container .yui-pg-pages {white-space:nowrap;}
 
 .yui-pg-container a.yui-pg-first, .yui-pg-container a.yui-pg-previous {
 	background: #333333 !important;
