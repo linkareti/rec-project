@@ -182,12 +182,7 @@ h1 {
 	border-color: #E4EEED !important;
 }
 
-table .yui-dt-selected {
-	background-color: #FFFF9F !important;
-	color: #283234;
-	font-weight: bold;
-	text-decoration: none;
-}
+
 
 .yui-dt-even td,.yui-dt-odd td,.yui-dt-empty td {
 	border:none !important;
@@ -201,6 +196,10 @@ table .yui-dt-selected {
 
 .yui-dt-even td {background: #f4f9f8 !important;}
 .yui-dt-odd  td {background: #ffffff !important;}
+
+.yui-dt-selected td{
+	font-weight: bold !important;
+}
 
 form#content div {
 	background: transparent;
