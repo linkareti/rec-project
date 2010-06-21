@@ -38,9 +38,9 @@ import com.linkare.rec.impl.newface.component.ResultsActionBar;
 
 /**
  * 
- * @author José Pedro Pereira - Linkare TI & Andr�
+ * @author José Pedro Pereira - Linkare TI & André
  */
-public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDisplay, Printable, ExperimentTableOperation {
+public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDisplay, Printable {
 	
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
 	
@@ -465,20 +465,4 @@ public class MultSeriesTable extends javax.swing.JPanel implements ExpDataDispla
 	private javax.swing.JButton btnPlayStop;
 	// End of variables declaration
 	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void copyToClipBoard() {
-		excelAdapter.copyToClipBoard();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void selectAll() {
-		dataTable.selectAll();
-	}
-
 }
