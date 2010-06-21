@@ -83,7 +83,7 @@ public class GTableModelProxy extends javax.swing.table.DefaultTableModel implem
 			return null;
 		}
 		if (columnIndex == 0)
-			return "Sample N�";
+			return "Sample Nº";
 
 		int channelIndex = (int) Math.floor(((double) columnIndex - 1.) / 2.);
 
