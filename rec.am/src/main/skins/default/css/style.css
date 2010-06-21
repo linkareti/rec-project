@@ -199,6 +199,7 @@ h1 {
 
 .yui-dt-selected td{
 	font-weight: bold !important;
+	color:#283234 !important;
 }
 
 form#content div {
