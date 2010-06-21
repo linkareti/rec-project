@@ -12,7 +12,7 @@ import com.linkare.rec.data.acquisition.PhysicsValue;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener {
+public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener, ExpDataModelContainer {
 	/** Holds value of property expDataModel. */
 	private ExpDataModel expDataModel = null;
 

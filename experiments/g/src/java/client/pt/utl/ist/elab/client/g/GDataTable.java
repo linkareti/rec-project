@@ -6,13 +6,11 @@
 
 package pt.utl.ist.elab.client.g;
 
-import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
-
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class GDataTable extends MultSeriesTable {
+public class GDataTable extends com.linkare.rec.impl.baseUI.table.DefaultExperimentDataTable {
 
 	/** Creates new form DefaultExperimentDataTable */
 	public GDataTable() {

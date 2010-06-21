@@ -13,7 +13,6 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterGraphics;
-import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -21,33 +20,63 @@ import java.io.Writer;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.border.Border;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import com.linkare.rec.impl.baseUI.utils.ExtensionFilter;
 import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
+import com.linkare.rec.impl.client.experiment.ExpDataModelContainer;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.client.experiment.export.csv.ExportCSV;
+import com.linkare.rec.impl.client.experiment.export.printer.ExportPrinter;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.newface.component.ResultsActionBar;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
 public class DefaultExperimentDataTable extends javax.swing.JPanel implements ExpDataDisplay, Printable {
+	
+	/** Generated UID */
+	private static final long serialVersionUID = 1441407957009157543L;
+
 	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
+	
 	private ExcelAdapter excelAdapter = null;
+	
+	private ExpDataModelContainer expDataModelContainer = null;
+	
+	private DefaultTableModel actualTableModel = null;
+	
+	private TableModelListener actualTableActionListener = null;
+	
+	private static Logger log = null;
 	static {
-		Logger l = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
-		if (l == null) {
+		log = LogManager.getLogManager().getLogger(UI_CLIENT_LOGGER);
+		if (log == null) {
 			LogManager.getLogManager().addLogger(Logger.getLogger(UI_CLIENT_LOGGER));
 		}
 	}
+	
+	private static final String CSV_DESCRIPTION_STR = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.csv.discription", "Comma separeted files");
 
 	/** Creates new form DefaultExperimentDataTable */
 	public DefaultExperimentDataTable() {
 		initComponents();
+		
+		actualTableModel = defaultTableModelProxy;
+		expDataModelContainer = defaultTableModelProxy;
+		
 		excelAdapter = new ExcelAdapter(dataTable);
 		dataTable.setCellSelectionEnabled(true);
 	}
@@ -59,74 +88,183 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 	 */
 	private void initComponents()// GEN-BEGIN:initComponents
 	{
+		// FIXME codigo inserido manualmente vindo do MultSeriesTable
 		defaultTableModelProxy = new com.linkare.rec.impl.client.experiment.DefaultTableModelProxy();
 		toolBarTable = new javax.swing.JToolBar();
 		printBtn = new javax.swing.JButton();
 		saveBtn = new javax.swing.JButton();
 		copyBtn = new javax.swing.JButton();
 		selectAllBtn = new javax.swing.JButton();
+		btnPlayStop = new javax.swing.JButton();
 		scrollPaneTable = new javax.swing.JScrollPane();
 		dataTable = new javax.swing.JTable();
 
-		defaultTableModelProxy.addTableModelListener(new javax.swing.event.TableModelListener() {
+		actualTableActionListener = new javax.swing.event.TableModelListener() {
 			public void tableChanged(javax.swing.event.TableModelEvent evt) {
 				defaultTableModelProxyTableChanged(evt);
 			}
-		});
+		};
+		defaultTableModelProxy.addTableModelListener(actualTableActionListener);
+		
+		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ResultsActionBar.class);
 
 		toolBarTable.setRollover(true);
-		printBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/Print16.gif")));
-		printBtn.setToolTipText("Print");
+		toolBarTable.setOpaque(false);
+		
+        btnPlayStop.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
+        btnPlayStop.setIcon(resourceMap.getIcon("btnPlayStop.icon")); // NOI18N
+        btnPlayStop.setText(resourceMap.getString("btnPlayStop.text")); // NOI18N
+        btnPlayStop.setToolTipText(resourceMap.getString("btnPlayStop.toolTipText")); // NOI18N
+        btnPlayStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        btnPlayStop.setBorderPainted(false);
+        btnPlayStop.setName("btnPlayStop"); // NOI18N
+        
+		setButtonBorder(btnPlayStop);
+//		toolBarTable.addSeparator();
+		toolBarTable.add(btnPlayStop);
+		
+		printBtn.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
+		printBtn.setIcon(resourceMap.getIcon("btnPrint.icon")); // NOI18N
+		printBtn.setToolTipText(resourceMap.getString("btnPrint.toolTipText")); // NOI18N
+		printBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		printBtn.setBorderPainted(false);
+		printBtn.setName("printBtn"); // NOI18N
+		printBtn.setPressedIcon(resourceMap.getIcon("btnPrint.pressedIcon")); // NOI18N
 		printBtn.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				printBtnActionPerformed(evt);
 			}
 		});
-
+		setButtonBorder(printBtn);
+//		toolBarTable.addSeparator();
 		toolBarTable.add(printBtn);
 
-		saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/Save16.gif")));
-		saveBtn.setToolTipText("Save csv file");
+		saveBtn.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
+		saveBtn.setIcon(resourceMap.getIcon("btnSave.icon")); // NOI18N
+		saveBtn.setToolTipText(resourceMap.getString("btnSave.toolTipText")); // NOI18N
+		saveBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		saveBtn.setBorderPainted(false);
+		saveBtn.setName("saveBtn"); // NOI18N
+		saveBtn.setPressedIcon(resourceMap.getIcon("btnSave.pressedIcon")); // NOI18N
 		saveBtn.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				saveBtnActionPerformed(evt);
 			}
 		});
-
+		setButtonBorder(saveBtn);
+//		toolBarTable.addSeparator();
 		toolBarTable.add(saveBtn);
-
-		copyBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/Copy16.gif")));
-		copyBtn.setToolTipText("Copy to Clipboard in Excel Format");
+		
+		copyBtn.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
+		copyBtn.setIcon(resourceMap.getIcon("btnCopy.icon")); // NOI18N
+		copyBtn.setToolTipText(resourceMap.getString("btnCopy.toolTipText")); // NOI18N
+		copyBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		copyBtn.setBorderPainted(false);
+		copyBtn.setName("btnCopy"); // NOI18N
+		copyBtn.setPressedIcon(resourceMap.getIcon("btnCopy.pressedIcon")); // NOI18N
 		copyBtn.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				copyBtnActionPerformed(evt);
 			}
 		});
-
+		setButtonBorder(copyBtn);
+//		toolBarTable.addSeparator();
 		toolBarTable.add(copyBtn);
-
-		selectAllBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/linkare/rec/impl/baseUI/resources/tableSelectAll16.gif")));
-		selectAllBtn.setToolTipText("Select All");
+		
+		selectAllBtn.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
+        selectAllBtn.setIcon(resourceMap.getIcon("btnSelectAll.icon")); // NOI18N
+        selectAllBtn.setToolTipText(resourceMap.getString("btnSelectAll.toolTipText")); // NOI18N
+        selectAllBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        selectAllBtn.setBorderPainted(false);
+        selectAllBtn.setName("btnSelectAll"); // NOI18N
+        selectAllBtn.setPressedIcon(resourceMap.getIcon("btnSelectAll.pressedIcon")); // NOI18N
 		selectAllBtn.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				selectAllBtnActionPerformed(evt);
 			}
 		});
-
+		setButtonBorder(selectAllBtn);
+//		toolBarTable.addSeparator();
 		toolBarTable.add(selectAllBtn);
 
 		setLayout(new java.awt.BorderLayout());
-
 		dataTable.setModel(defaultTableModelProxy);
 		dataTable.setAutoCreateColumnsFromModel(true);
-		dataTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+		// dataTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+		dataTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
 		scrollPaneTable.setViewportView(dataTable);
 
 		add(scrollPaneTable, java.awt.BorderLayout.CENTER);
+		
+		// FIXME codigo em conformidade com o .form
+//		defaultTableModelProxy = new com.linkare.rec.impl.client.experiment.DefaultTableModelProxy();
+//		toolBarTable = new javax.swing.JToolBar();
+//		printBtn = new javax.swing.JButton();
+//		saveBtn = new javax.swing.JButton();
+//		copyBtn = new javax.swing.JButton();
+//		selectAllBtn = new javax.swing.JButton();
+//		scrollPaneTable = new javax.swing.JScrollPane();
+//		dataTable = new javax.swing.JTable();
+//
+//		defaultTableModelProxy.addTableModelListener(new javax.swing.event.TableModelListener() {
+//			public void tableChanged(javax.swing.event.TableModelEvent evt) {
+//				defaultTableModelProxyTableChanged(evt);
+//			}
+//		});
+//
+//		toolBarTable.setRollover(true);
+//		printBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+//				"/com/linkare/rec/impl/baseUI/resources/Print16.gif")));
+//		printBtn.setToolTipText("Print");
+//		printBtn.addActionListener(new java.awt.event.ActionListener() {
+//			public void actionPerformed(java.awt.event.ActionEvent evt) {
+//				printBtnActionPerformed(evt);
+//			}
+//		});
+//
+//		toolBarTable.add(printBtn);
+//
+//		saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+//				"/com/linkare/rec/impl/baseUI/resources/Save16.gif")));
+//		saveBtn.setToolTipText("Save csv file");
+//		saveBtn.addActionListener(new java.awt.event.ActionListener() {
+//			public void actionPerformed(java.awt.event.ActionEvent evt) {
+//				saveBtnActionPerformed(evt);
+//			}
+//		});
+//
+//		toolBarTable.add(saveBtn);
+//
+//		copyBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+//				"/com/linkare/rec/impl/baseUI/resources/Copy16.gif")));
+//		copyBtn.setToolTipText("Copy to Clipboard in Excel Format");
+//		copyBtn.addActionListener(new java.awt.event.ActionListener() {
+//			public void actionPerformed(java.awt.event.ActionEvent evt) {
+//				copyBtnActionPerformed(evt);
+//			}
+//		});
+//
+//		toolBarTable.add(copyBtn);
+//
+//		selectAllBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+//				"/com/linkare/rec/impl/baseUI/resources/tableSelectAll16.gif")));
+//		selectAllBtn.setToolTipText("Select All");
+//		selectAllBtn.addActionListener(new java.awt.event.ActionListener() {
+//			public void actionPerformed(java.awt.event.ActionEvent evt) {
+//				selectAllBtnActionPerformed(evt);
+//			}
+//		});
+//
+//		toolBarTable.add(selectAllBtn);
+//
+//		setLayout(new java.awt.BorderLayout());
+//
+//		dataTable.setModel(defaultTableModelProxy);
+//		dataTable.setAutoCreateColumnsFromModel(true);
+//		dataTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+//		scrollPaneTable.setViewportView(dataTable);
+//
+//		add(scrollPaneTable, java.awt.BorderLayout.CENTER);
 
 	}// GEN-END:initComponents
 
@@ -142,73 +280,17 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 
 	private void saveBtnActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_saveBtnActionPerformed
 	{// GEN-HEADEREND:event_saveBtnActionPerformed
-		javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
-
-		ExtensionFilter textExtension = new ExtensionFilter("csv", "ext");
-
-		textExtension.setDescription("Comma separated values files");
-		jFileChooserSave.setAcceptAllFileFilterUsed(false);
-		jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
-		jFileChooserSave.setFileFilter(textExtension);
-
-		int returnValue = jFileChooserSave.showSaveDialog(this);
-		String extension = null;
-		if (returnValue == jFileChooserSave.APPROVE_OPTION) {
-			extension = textExtension.getExtension();
-		}
-		String path = jFileChooserSave.getSelectedFile().getPath();
-		if (path.endsWith(extension)) {
-			path = path.substring(0, path.length() - 4);
-		}
-		File saveFile = new File(path + "." + extension);
-		saveTable(saveFile, false);
+		saveTableToFile();
 	}// GEN-LAST:event_saveBtnActionPerformed
-
-	public void saveTable(File saveFile, boolean append) {
-		try {
-			Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
-			final String LS = System.getProperty("line.separator");
-			final String COMMA = ",";
-			final String QUOTE = "\"";
-			// java.io.FileWriter fileWriter = new java.io.FileWriter(saveFile,
-			// append);
-			for (int headerCol = 0; headerCol < dataTable.getColumnCount(); headerCol++) {
-				fileWriter.write(QUOTE + dataTable.getColumnName(headerCol) + QUOTE);
-				fileWriter.write(COMMA);
-			}
-			fileWriter.write(LS);
-			for (int row = 0; row < dataTable.getRowCount(); row++) {
-				for (int col = 0; col < dataTable.getColumnCount(); col++) {
-					fileWriter.write(QUOTE + new String().valueOf(dataTable.getValueAt(row, col)) + QUOTE);
-					fileWriter.write(COMMA);
-				}
-				fileWriter.write(LS);
-			}
-			fileWriter.flush();
-			fileWriter.close();
-		} catch (java.io.IOException ioe) {
-			System.err.println("Error while trying to save data to file: " + ioe);
-		}
-	}
 
 	private void printBtnActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_printBtnActionPerformed
 	{// GEN-HEADEREND:event_printBtnActionPerformed
-
-		PrinterJob job = PrinterJob.getPrinterJob();
-		PageFormat pf = job.defaultPage();
-		pf.setOrientation(PageFormat.PORTRAIT);
-		PageFormat pf2 = job.pageDialog(pf);
-		if (pf2 != pf) {
-			job.setPrintable(this, pf2);
-			if (job.printDialog()) {
-				try {
-					job.print();
-				} catch (PrinterException e) {
-					javax.swing.JOptionPane.showMessageDialog(this, e);
-				}
-			}
+		try {
+			ExportPrinter.print(this);
+		} catch (PrinterException e) {
+			log.warning("Error while trying to print: " + e);
+			javax.swing.JOptionPane.showMessageDialog(this, e);
 		}
-
 	}// GEN-LAST:event_printBtnActionPerformed
 
 	private void defaultTableModelProxyTableChanged(javax.swing.event.TableModelEvent evt)// GEN-FIRST:event_defaultTableModelProxyTableChanged
@@ -224,6 +306,64 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 		});
 
 	}// GEN-LAST:event_defaultTableModelProxyTableChanged
+	
+	private void setButtonBorder(JButton button) {
+		int top = 0;
+		int left = 6;
+		int bottom = 0;
+		int right = 6;
+		Border border = BorderFactory.createEmptyBorder(top, left, bottom, right);
+		button.setBorder(border);
+	}
+	
+	protected void setActualTableModel(DefaultTableModel model) {
+		actualTableModel.removeTableModelListener(actualTableActionListener);
+		actualTableModel = model;
+		actualTableModel.addTableModelListener(actualTableActionListener);
+		dataTable.setModel(actualTableModel);
+	}
+	
+	protected void setExpDataModelContainer(ExpDataModelContainer expDataModelContainer) {
+		this.expDataModelContainer = expDataModelContainer;
+	}
+	
+	private void saveTableToFile() {
+		javax.swing.JFileChooser jFileChooserSave = new javax.swing.JFileChooser();
+		ExtensionFilter textExtension = new ExtensionFilter(ExportCSV.CSV_EXTENTION_FILE, "ext");
+
+		textExtension.setDescription(CSV_DESCRIPTION_STR);
+		jFileChooserSave.setAcceptAllFileFilterUsed(false);
+		jFileChooserSave.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+		jFileChooserSave.setFileFilter(textExtension);
+
+		int returnValue = jFileChooserSave.showSaveDialog(this);
+		String extension = null;
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			extension = textExtension.getExtension();
+		}
+		File selectedFile = jFileChooserSave.getSelectedFile();
+		if (selectedFile != null) {
+			String path = selectedFile.getPath();
+			if (path != null && path.trim().length() > 0) {
+				if (path.endsWith(extension)) {
+					path = path.substring(0, path.length() - 4);
+				}
+				File saveFile = new File(path + "." + extension);
+				saveTable(saveFile, false);
+			}
+		}
+	}
+
+	private void saveTable(File saveFile, boolean append) {
+		try {
+			Writer fileWriter = new OutputStreamWriter(new FileOutputStream(saveFile, append));
+			fileWriter.write(ExportCSV.print(actualTableModel));
+			fileWriter.flush();
+			fileWriter.close();
+		} catch (java.io.IOException ioe) {
+			log.warning("Error while trying to save data to file: " + ioe);
+		}
+	}
 
 	public javax.swing.JComponent getDisplay() {
 		return this;
@@ -241,7 +381,7 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 		if (model == null)
 			return;
 
-		defaultTableModelProxy.setExpDataModel(model);
+		expDataModelContainer.setExpDataModel(model);
 		model.addExpDataModelListener(new ExpDataModelListener() {
 			private boolean resizeDone = false;
 
@@ -385,5 +525,7 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 	private javax.swing.JButton copyBtn;
 	private javax.swing.JButton selectAllBtn;
 	// End of variables declaration//GEN-END:variables
+
+	private javax.swing.JButton btnPlayStop;
 
 }
