@@ -8,7 +8,6 @@ package com.linkare.rec.impl.client.experiment;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.metadata.Scale;
-import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
@@ -16,12 +15,11 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author Andr�
  */
 public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableModel implements ExpDataModelListener, com.linkare.rec.impl.client.experiment.ExpDataModelContainer {
-	/** Holds value of property expDataModel. */
-	private ExpDataModel expDataModel = null;
-	private java.text.DecimalFormat df = new java.text.DecimalFormat("###0.0");
-	DateTime firstSampleTime = new DateTime();
 
-	private int[] colArray;
+	/** Holds value of property expDataModel. */
+	protected ExpDataModel expDataModel = null;
+
+	protected int[] colArray;
 
 	public void dataModelStoped() {
 		// BIG SILENT NOOP

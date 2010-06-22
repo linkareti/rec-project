@@ -15,13 +15,20 @@ public class MultSeriesTable extends DefaultExperimentDataTable {
 	
 	/** Creates new form DefaultExperimentDataTable */
 	public MultSeriesTable() {
+		this(new MultSeriesTableModelProxy());
+	}
+	
+	/**
+	 * Creates the <code>MultSeriesTable</code>.
+	 * @param defaultTableModelProxy
+	 */
+	public MultSeriesTable(MultSeriesTableModelProxy defaultTableModelProxy) {
 		super();
 		
-		defaultTableModelProxy = new MultSeriesTableModelProxy();
-		setActualTableModel(defaultTableModelProxy);
-		setExpDataModelContainer(defaultTableModelProxy);
+		this.defaultTableModelProxy = defaultTableModelProxy;
+		setActualTableModel(this.defaultTableModelProxy);
+		setExpDataModelContainer(this.defaultTableModelProxy);
 	}
-
 
 	/**
 	 * Setter for property channelDisplayY.
