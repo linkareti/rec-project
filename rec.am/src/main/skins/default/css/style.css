@@ -93,7 +93,7 @@ h1 {
 	margin-right: 0.5%;
 	min-height: 416px;
 }
-#left_col ul {margin:75px 1px 0 1px;padding:0;}
+#left_col ul {margin:5px 1px 0 1px;padding:0;}
 
 #left_col ul li {
 	list-style-type: none;
@@ -208,6 +208,7 @@ form#content div {
 }
 
 #center form table tbody tr td label {color:#283234 !important;}
+#center form table tbody tr td {color:#cfd7d6 !important;padding:5px;}
 
 .yui-dt-empty {border-top:none !important;background:#ffffff !important;}
 
