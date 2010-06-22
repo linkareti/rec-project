@@ -210,10 +210,10 @@ form#content div {
 #center p {margin:0;padding:0;}
 
 #center form table tbody tr td label {color:#283234 !important;font-weight:bold;font-size:12px;}
-#center form table {background:#cfd7d6 !important;margin-top:2px !important;margin-left:2px !important;}
-#center form table tbody tr td {border-top:#E4EEED 2px solid !important;}
-#center form table tbody tr td input{margin:5px;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;width:300px !important;}
-#center form table tbody tr td select{margin:5px;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;}
+#center form table {background:#cfd7d6 !important;margin-top:2px !important;margin-left:2px !important;border-collapse: collapse !important;}
+#center form table tbody tr td {border-top:#E4EEED 2px solid !important;padding:0 5px 0 5px;}
+#center form table tbody tr td input{margin:5px 0 5px 0;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;width:300px !important;}
+#center form table tbody tr td select{margin:5px 0 5px 0;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;}
 
 .yui-dt-empty {border-top:none !important;background:#ffffff !important;}
 
