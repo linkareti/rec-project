@@ -207,6 +207,8 @@ form#content div {
 	border: 0px;
 }
 
+#center form table tbody tr td label {color:#283234 !important;}
+
 .yui-dt-empty {border-top:none !important;background:#ffffff !important;}
 
 .yui-dt-liner {
