@@ -10,6 +10,7 @@ package com.linkare.rec.impl.newface.component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.swing.DefaultComboBoxModel;
@@ -39,6 +40,10 @@ public class ApparatusComboBoxModel extends DefaultComboBoxModel {
 
 	public Apparatus getApparatus(String locationKey) {
 		return apparatusMap.get(locationKey);
+	}
+	
+	public Set<String> getApparatusHardwareUniqueID() {
+		return apparatusMap.keySet();
 	}
 
 	public void fireContentsChanged(Object source) {

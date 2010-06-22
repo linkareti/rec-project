@@ -17,6 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import javax.swing.SwingUtilities;
+
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.DataClientHelper;
 import com.linkare.rec.acquisition.DataClientOperations;
@@ -151,11 +153,13 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	public void hardwareChange() {
 		Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.INFO, "Hardware Change information received...");
 
-		(new Thread() {
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
 			public void run() {
 				refreshHardwares();
 			}
-		}).start();
+		});
 
 	}
 

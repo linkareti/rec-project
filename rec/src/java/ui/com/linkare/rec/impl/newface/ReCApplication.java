@@ -45,8 +45,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EventObject;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -767,15 +769,17 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			}
 
 			// Enable apparatus combo box list
+			Set<String> activeApparatusUIDs = new HashSet<String>();
 			for (com.linkare.rec.impl.client.apparatus.Apparatus clientApparatus : evt.getApparatus()) {
-				Apparatus apparatus = apparatusComboBoxModel.getApparatus(clientApparatus.getHardwareInfo()
-						.getHardwareUniqueID());
-
-				if (apparatus != null && !apparatus.isEnabled()) {
-					apparatus.setEnabled(true);
+				activeApparatusUIDs.add(clientApparatus.getHardwareInfo().getHardwareUniqueID());
+			}
+			for (String ApparatusUID : apparatusComboBoxModel.getApparatusHardwareUniqueID()) {
+				Apparatus apparatus = apparatusComboBoxModel.getApparatus(ApparatusUID);
+				if (apparatus != null) {
+					apparatus.setEnabled(activeApparatusUIDs.contains(ApparatusUID));
 				}
 			}
-
+			
 			// Update view
 			apparatusComboBoxModel.fireContentsChanged(this);
 
