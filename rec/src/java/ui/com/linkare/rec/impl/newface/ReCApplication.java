@@ -780,6 +780,14 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				}
 			}
 			
+			// Exit experiment if it was connected but tha driver went offline
+			if (currentApparatus != null
+					&& apparatusComboBoxModel.getApparatusHardwareUniqueID().contains(
+							currentApparatus.getHardwareInfo().getHardwareUniqueID())
+					&& !activeApparatusUIDs.contains(currentApparatus.getHardwareInfo().getHardwareUniqueID())) {
+				toggleApparatusState();
+			}
+			
 			// Update view
 			apparatusComboBoxModel.fireContentsChanged(this);
 
