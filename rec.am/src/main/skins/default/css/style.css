@@ -131,14 +131,12 @@ h1 {
 	font-weight:bold !important;
 }
 
-#center form table tbody tr td label {color:#283234 !important;font-weight:bold;font-size:12px;}
+#center form#j_idt46 table tbody tr td label {color:#283234 !important;font-weight:bold;font-size:12px;}
 #center form#j_idt46 table {background:#cfd7d6 !important;margin-left:2px !important;border-collapse: collapse !important;}
-#center form table tbody tr td {border-top:#E4EEED 2px solid !important;padding:0 5px 0 5px;text-align:left !important;}
-#center form table tbody tr td input{margin:5px 2px 5px 2px;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;width:300px !important;}
-#center form table tbody tr td div.ft input{width:auto !important;}
-#center form table tbody tr td select{margin:5px 0 5px 0;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;}
-
-
+#center form#j_idt46 table tbody tr td {border-top:#E4EEED 2px solid !important;padding:0 5px 0 5px;text-align:left !important;}
+#center form#j_idt46 table tbody tr td input{margin:5px 2px 5px 2px;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;width:300px !important;}
+#center form#j_idt46 table tbody tr td div.ft input{width:auto !important;}
+#center form#j_idt46 table tbody tr td select{margin:5px 0 5px 0;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;}
 
 #content div.pf-panel-hd {
 	background: #283234;
@@ -218,7 +216,10 @@ form#content div {
 	border: 0px;
 }
 
-.yui-dt-empty {border-top:none !important;background:#ffffff !important;}
+.yui-dt-empty {
+	border-top:none !important;
+	background:#ffffff !important;
+	}
 
 .yui-dt-liner {
 	padding: 4px 1px !important;
@@ -261,10 +262,10 @@ form#content div {
 .yui-skin-sam .yui-dt th {
 	background: url("../../resources/images/menu_bg.gif") repeat-x;
 }
-*/
+
 .yui-skin-sam tr {
 	color: white;
-}
+}*/
 .yui-pg-container,.yui-pg-container .yui-pg-pages {white-space:nowrap;}
 
 .yui-pg-container a.yui-pg-first, .yui-pg-container a.yui-pg-previous,.yui-pg-container a.yui-pg-last, .yui-pg-container a.yui-pg-next {
@@ -292,7 +293,12 @@ form#content div {
 	background: #7f7f7f !important;
 	}
 	
-.yui-pg-pages .yui-pg-current-page	{float:left !important;background:#cfd7d6;margin-bottom:0 !important;margin-right:3px !important;}
+.yui-pg-pages .yui-pg-current-page	{
+	float:left !important;
+	background:#cfd7d6;
+	margin-bottom:0 !important;
+	margin-right:3px !important;
+	}
 
 .yui-pg-container .yui-pg-first, .yui-pg-container .yui-pg-previous, .yui-pg-container .yui-pg-last, .yui-pg-container .yui-pg-next	{
 	background: #cfd7d6 !important;
@@ -465,3 +471,8 @@ form#content div {
 .elab_info {
 	color: white;
 }
+
+/*--------Calendar Definitions----------*/
+.fc-header-center {color:#283234;}
+.fc-view.month table tbody tr td {height:50px !important;width:75px !important;}
+.bd td input,.bd td select{border:#283234 1px solid !important;}
