@@ -709,6 +709,19 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 		this.experimentAutoplay = enabled;
 	}
+	
+	/**
+	 * Apparatus stop action
+	 */
+	@Action
+	public void stop() {
+		if (currentApparatus != null) {
+			if (log.isLoggable(Level.FINE)) {
+				log.fine("stop");
+			}
+			apparatusClientBean.stop();
+		}
+	}
 
 	public boolean getExperimentAutoplay() {
 		return experimentAutoplay;

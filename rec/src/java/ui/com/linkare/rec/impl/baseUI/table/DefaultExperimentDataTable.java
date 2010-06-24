@@ -111,6 +111,9 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 		toolBarTable.setRollover(true);
 		toolBarTable.setOpaque(false);
 		
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getActionMap(DefaultExperimentDataTable.class, this);
+        btnPlayStop.setAction(actionMap.get("stop")); // NOI18N
+		
         btnPlayStop.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
         btnPlayStop.setIcon(resourceMap.getIcon("btnPlayStop.icon")); // NOI18N
         btnPlayStop.setText(resourceMap.getString("btnPlayStop.text")); // NOI18N

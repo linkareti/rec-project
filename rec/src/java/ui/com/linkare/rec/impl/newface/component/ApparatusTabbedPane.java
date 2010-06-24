@@ -89,6 +89,12 @@ public class ApparatusTabbedPane extends AbstractContentPane implements ChangeLi
 		tabbedPane.setEnabledAt(index, enabled);
 	}
 	
+	public void setStopButtonEnabled(boolean enabled) {
+		if (toolBar != null) {
+			toolBar.getComponent(0).setEnabled(enabled);
+		}
+	}
+	
 	/**
 	 * @param dataDisplays
 	 */

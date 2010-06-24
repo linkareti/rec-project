@@ -828,11 +828,20 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 				.setActionStateText(
 						getStatusActionBarResourceMap().getString("lblActionState.apparatusStarted.text"),
 				YELLOW);
+		setStopButtonEnabled(true);
 	}
 
 	private void stopedExperiment() {
 		getExperimentStatusActionBar().setActionStateText(
 				getStatusActionBarResourceMap().getString("lblActionState.apparatusStoped.text"), RED);
+		setStopButtonEnabled(false);
+	}
+	
+	private void setStopButtonEnabled(boolean enable) {
+		ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
+		if (apparatusTabbedPane != null) {
+			apparatusTabbedPane.setStopButtonEnabled(enable);
+		}
 	}
 
 	private void clearLastExperimentResults() {
