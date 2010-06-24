@@ -289,6 +289,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		historyResultsPane.setExperimentResults(experimentUIData.getHistoryUINode(), experimentUIData.getDataModel(), experimentUIData
 				.getDataDisplays());
 		apparatusTabbedPane.getResultsHolderPane().add(historyResultsPane);
+		// Select the results panel by default
+		apparatusTabbedPane.setSelectedTabIndex(ApparatusTabbedHistoryPane.TAB_RESULTS);
 		// Return dialog
 		DefaultDialog<ApparatusTabbedHistoryPane> dialog = new DefaultDialog<ApparatusTabbedHistoryPane>(getFrame(), experimentUIData
 				.getHistoryUINode().getApparatusName(), apparatusTabbedPane);
