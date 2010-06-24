@@ -284,7 +284,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		// Set description
 		apparatusTabbedPane.getDescriptionPane().setApparatusConfig(experimentUIData.getHistoryUINode().getApparatusConfig());
 		// Set results
-//		ResultsPane historyResultsPane = new ResultsPane(apparatusTabbedPane.getResultsActionBar()); // FIXME
 		ResultsPane historyResultsPane = new ResultsPane();
 		historyResultsPane.setExperimentResults(experimentUIData.getHistoryUINode(), experimentUIData.getDataModel(), experimentUIData
 				.getDataDisplays());
@@ -839,10 +838,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		setStopButtonEnabled(false);
 	}
 	
-	private void setStopButtonEnabled(boolean enable) {
+	private void setStopButtonEnabled(boolean enabled) {
 		ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
 		if (apparatusTabbedPane != null) {
-			apparatusTabbedPane.setStopButtonEnabled(enable);
+			apparatusTabbedPane.setStopButtonEnabled(enabled);
+			apparatusTabbedPane.getExperimentActionBar().setPlayStopButtonEnabled(!enabled);
 		}
 	}
 
@@ -851,7 +851,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	private void showExperimentResults(ExperimentUIData experimentUIData) {
-//		getLayoutContainerPane().enableApparatusTabbedPane(experimentUIData); // FIXME
 		getLayoutContainerPane().getApparatusTabbedPane().setDataDisplays(experimentUIData.getDataDisplays());
 
 		getResultsPane().setExperimentResults(experimentUIData.getHistoryUINode(), experimentUIData.getDataModel(),
@@ -862,7 +861,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private ResultsPane getResultsPane() {
 		if (resultsPane == null) {
-//			resultsPane = new ResultsPane(getApparatusTabbedPane().getResultsActionBar()); // FIXME
 			resultsPane = new ResultsPane();
 			getApparatusTabbedPane().getResultsHolderPane().add(resultsPane);
 		}
