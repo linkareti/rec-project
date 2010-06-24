@@ -1,6 +1,29 @@
 package com.linkare.rec.data.config;
 
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+
 public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity {
+	
+	private static final String APPARATUS = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.apparatus");
+	
+	private static final String EXPERIENCE_START_TIME = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.experience.start.time");
+	
+	private static final String FREQUENCY = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.frequency");
+	
+	private static final String TOTAL_SAMPLES = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.total.samples");
+	
+	private static final String TOTAL_SAMPLES_UNDETERMINED = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.total.samples.undetermined");
+	
+	private static final String PARAMETERS = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.parameters");
+	
+	private static final String CHANNELS_CONFIGURATION = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.channels.onfiguration");
+	
+	private static final String CHANNEL = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.channel");
+	
+	private static final String CONFIGURATION = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.configuration");
+
+	private static final String CONFIGURATION_UNDEFINED = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.configuration.undefined");
+	
 	/** Holds value of property timeStart. */
 	private com.linkare.rec.data.synch.DateTime timeStart;
 
@@ -333,21 +356,21 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		String linesep = System.getProperty("line.separator");
 
 		if (familiarName != null)
-			strBufOut.append("Apparatus: ").append(familiarName).append(linesep);
+			strBufOut.append(APPARATUS).append(familiarName).append(linesep);
 
 		if (timeStart != null)
-			strBufOut.append("Experience Start Time: ").append(timeStart.toSimpleString()).append(linesep);
+			strBufOut.append(EXPERIENCE_START_TIME).append(timeStart.toSimpleString()).append(linesep);
 
 		if (selectedFrequency != null)
-			strBufOut.append("Frequency: ").append(selectedFrequency).append(linesep);
+			strBufOut.append(FREQUENCY).append(selectedFrequency).append(linesep);
 
 		if (totalSamples != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append("Total Samples: ").append(totalSamples).append(linesep);
+			strBufOut.append(TOTAL_SAMPLES).append(totalSamples).append(linesep);
 		else if (totalSamples == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append("Total Samples Undetermined!").append(linesep);
+			strBufOut.append(TOTAL_SAMPLES_UNDETERMINED).append(linesep);
 
 		if (selectedHardwareParameters != null) {
-			strBufOut.append("Parameters: ").append(linesep);
+			strBufOut.append(PARAMETERS).append(linesep);
 			for (int i = 0; i < selectedHardwareParameters.length; i++) {
 				if (selectedHardwareParameters[i] != null)
 					strBufOut.append("\t").append(selectedHardwareParameters[i]).append(linesep);
@@ -355,13 +378,13 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		}
 
 		if (channelsConfig != null) {
-			strBufOut.append("Channels Configuration: ").append(linesep);
+			strBufOut.append(CHANNELS_CONFIGURATION).append(linesep);
 			for (int i = 0; i < channelsConfig.length; i++) {
 				if (channelsConfig[i] != null)
-					strBufOut.append("\tChannel " + i + " configuration:").append(linesep).append(channelsConfig[i])
+					strBufOut.append("\t" + CHANNEL + i + CONFIGURATION).append(linesep).append(channelsConfig[i])
 							.append(linesep);
 				else
-					strBufOut.append("\tChannel " + i + " configuration undefined...").append(linesep);
+					strBufOut.append("\t" + CHANNEL + i + CONFIGURATION_UNDEFINED).append(linesep);
 			}
 		}
 

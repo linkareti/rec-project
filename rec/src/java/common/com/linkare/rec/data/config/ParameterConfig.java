@@ -1,6 +1,13 @@
 package com.linkare.rec.data.config;
 
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+
 public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
+
+	private static final String UNDEFINED_PARAMETER_NAME = ReCResourceBundle.findString("ReCBaseUI$rec.bui.parameter.config.undefined.parameter.name");
+	
+	private static final String UNDEFINED = ReCResourceBundle.findString("ReCBaseUI$rec.bui.parameter.config.undefined");
+	
 	/** Holds value of property parameterName. */
 	private String parameterName;
 
@@ -89,8 +96,8 @@ public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
 	 * @return a string representation of the object.
 	 */
 	public String toString() {
-		return "" + (parameterName == null ? "Undefined parameter name" : parameterName) + " : "
-				+ (parameterValue == null ? "Undefined" : parameterValue);
+		return "" + (parameterName == null ? UNDEFINED_PARAMETER_NAME : parameterName) + " : "
+				+ (parameterValue == null ? UNDEFINED : parameterValue);
 	}
 
 } // class ParameterConfig

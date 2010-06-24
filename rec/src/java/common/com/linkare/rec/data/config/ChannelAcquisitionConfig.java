@@ -1,6 +1,23 @@
 package com.linkare.rec.data.config;
 
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+
 public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity {
+	
+	private static final String CHANNEL_NAME = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.name");
+	
+	private static final String CHANNEL_START_TIME = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.start.time");
+	
+	private static final String CHANNEL_FREQUENCY = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.frequency");
+	
+	private static final String CHANNEL_SCALE = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.scale");
+	
+	private static final String CHANNEL_TOTAL_SAMPLES = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.total.samples");
+	
+	private static final String CHANNEL_TOTAL_SAMPLES_UNDETERMINED = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.total.samples.undetermined");
+	
+	private static final String CHANNEL_PARAMETERS = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.parameters");
+	
 	/** Holds value of property timeStart. */
 	private com.linkare.rec.data.synch.DateTime timeStart;
 
@@ -263,24 +280,24 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 		String linesep = System.getProperty("line.separator");
 
 		if (channelName != null)
-			strBufOut.append("\tData Channel Name: ").append(channelName).append(linesep);
+			strBufOut.append("\t" + CHANNEL_NAME).append(channelName).append(linesep);
 
 		if (timeStart != null)
-			strBufOut.append("\tData Channel Start Time: ").append(timeStart.toSimpleString()).append(linesep);
+			strBufOut.append("\t" + CHANNEL_START_TIME).append(timeStart.toSimpleString()).append(linesep);
 
 		if (selectedFrequency != null)
-			strBufOut.append("\tData Channel Frequency: ").append(selectedFrequency).append(linesep);
+			strBufOut.append("\t" + CHANNEL_FREQUENCY).append(selectedFrequency).append(linesep);
 
 		if (selected_scale != null)
-			strBufOut.append("\tData Channel Scale: ").append(selected_scale).append(linesep);
+			strBufOut.append("\t" + CHANNEL_SCALE).append(selected_scale).append(linesep);
 
 		if (total_samples != com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append("\tData Channel Total Samples: ").append(total_samples).append(linesep);
+			strBufOut.append("\t" + CHANNEL_TOTAL_SAMPLES).append(total_samples).append(linesep);
 		else if (total_samples == com.linkare.rec.data.acquisition.TOTAL_PACKETS_UNDEFINED.value)
-			strBufOut.append("\tData Channel Total Samples Undetermined!").append(linesep);
+			strBufOut.append("\t" + CHANNEL_TOTAL_SAMPLES_UNDETERMINED).append(linesep);
 
 		if (selectedChannelParameters != null) {
-			strBufOut.append("\tData Channel Parameters: ").append(linesep);
+			strBufOut.append("\t" + CHANNEL_PARAMETERS).append(linesep);
 			for (int i = 0; i < selectedChannelParameters.length; i++) {
 				if (selectedChannelParameters[i] != null)
 					strBufOut.append("\t\t").append(selectedChannelParameters[i]).append(linesep);
