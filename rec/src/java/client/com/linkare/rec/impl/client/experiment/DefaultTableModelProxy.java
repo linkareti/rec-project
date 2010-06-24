@@ -7,6 +7,7 @@
 package com.linkare.rec.impl.client.experiment;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -74,18 +75,19 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 	 */
 	public String getColumnName(int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
-			if (columnIndex == 0)
-				return "No data available...";
+			if (columnIndex == 0) {
+				return ReCResourceBundle.findString("ReCBaseUI$rec.bui.lbl.nodata");
+			}
 			return null;
 		}
 		if (columnIndex == 0)
-			return "Sample Num";
+			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.sample");
 		if (columnIndex == 1)
-			return "Date";
+			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.date");
 		if (columnIndex == 2)
-			return "Time";
+			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.time");
 		if (columnIndex == 3)
-			return "Milliseconds";
+			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.milliseconds");
 
 		int channelIndex = (int) Math.floor(((double) columnIndex - 4.) / 2.);
 

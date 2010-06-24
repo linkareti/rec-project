@@ -11,6 +11,7 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -78,12 +79,14 @@ public class GTableModelProxy extends javax.swing.table.DefaultTableModel implem
 	 */
 	public String getColumnName(int columnIndex) {
 		if (expDataModel == null || !expDataModel.isDataAvailable()) {
-			if (columnIndex == 0)
-				return "No data available...";
+			if (columnIndex == 0) {
+				return ReCResourceBundle.findString("ReCBaseUI$rec.bui.lbl.nodata");
+			}
 			return null;
 		}
-		if (columnIndex == 0)
-			return "Sample Nº";
+		if (columnIndex == 0) {
+			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.sample");
+		}
 
 		int channelIndex = (int) Math.floor(((double) columnIndex - 1.) / 2.);
 
