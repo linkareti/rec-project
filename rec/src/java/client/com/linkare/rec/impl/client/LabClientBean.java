@@ -184,7 +184,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 				if (hardwareInfo == null) {
 					Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.INFO,
-							"Can't get HardwareInfo for hardware " + i + " of " + hardwares.length);
+							"Can't get HardwareInfo for hardware index " + i + " of max index " + hardwares.length);
 					continue;
 				}
 
