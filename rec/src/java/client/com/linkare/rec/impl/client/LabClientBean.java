@@ -167,25 +167,29 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		try {
 			MultiCastHardware[] hardwares = mcw.enumerateHardware(getUserInfo());
 
-			if (hardwares == null)
+			if (hardwares == null) {
+				Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.WARNING,
+						"There are no hardwares available at the Laboratory that this user may access");
 				return;
+			}
+			Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.FINE,
+					"There are " + hardwares.length + " hardwares available at the Laboratory that this user may access");
 
-			ArrayList<Apparatus> apparatusListTemp = new ArrayList<Apparatus>(hardwares == null ? 0 : hardwares.length);
+			ArrayList<Apparatus> apparatusListTemp = new ArrayList<Apparatus>(hardwares.length);
 
-			if (hardwares != null) {
-				for (int i = 0; i < hardwares.length; i++) {
-					MultiCastHardwareWrapper mchw = new MultiCastHardwareWrapper(hardwares[i]);
+			for (int i = 0; i < hardwares.length; i++) {
+				MultiCastHardwareWrapper mchw = new MultiCastHardwareWrapper(hardwares[i]);
 
-					HardwareInfo hardwareInfo = mchw.getHardwareInfo(getUserInfo());
+				HardwareInfo hardwareInfo = mchw.getHardwareInfo(getUserInfo());
 
-					if (hardwareInfo == null) {
-						continue;
-					}
-
-					Apparatus app = new Apparatus(mchw, hardwareInfo);
-
-					apparatusListTemp.add(app);
+				if (hardwareInfo == null) {
+					Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.INFO,
+							"Can't get HardwareInfo for hardware " + i + " of " + hardwares.length);
+					continue;
 				}
+
+				Apparatus app = new Apparatus(mchw, hardwareInfo);
+				apparatusListTemp.add(app);
 			}
 			Apparatus[] newApparatusList = new Apparatus[apparatusListTemp.size()];
 
