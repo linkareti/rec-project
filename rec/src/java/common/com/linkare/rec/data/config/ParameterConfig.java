@@ -1,12 +1,14 @@
 package com.linkare.rec.data.config;
 
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import java.util.ResourceBundle;
 
 public final class ParameterConfig implements org.omg.CORBA.portable.IDLEntity {
-
-	private static final String UNDEFINED_PARAMETER_NAME = ReCResourceBundle.findString("ReCBaseUI$rec.bui.parameter.config.undefined.parameter.name");
 	
-	private static final String UNDEFINED = ReCResourceBundle.findString("ReCBaseUI$rec.bui.parameter.config.undefined");
+	private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("com/linkare/rec/data/resources/messages");
+
+	private static final String UNDEFINED_PARAMETER_NAME = resourceBundle.getString("rec.bui.parameter.config.undefined.parameter.name");
+	
+	private static final String UNDEFINED = resourceBundle.getString("rec.bui.parameter.config.undefined");
 	
 	/** Holds value of property parameterName. */
 	private String parameterName;

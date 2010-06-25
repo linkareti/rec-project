@@ -1,28 +1,30 @@
 package com.linkare.rec.data.config;
 
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import java.util.ResourceBundle;
 
 public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity {
 	
-	private static final String APPARATUS = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.apparatus");
+	private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("com/linkare/rec/data/resources/messages");
 	
-	private static final String EXPERIENCE_START_TIME = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.experience.start.time");
+	private static final String APPARATUS = resourceBundle.getString("rec.bui.hardware.acquisition.config.apparatus");
 	
-	private static final String FREQUENCY = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.frequency");
+	private static final String EXPERIENCE_START_TIME = resourceBundle.getString("rec.bui.hardware.acquisition.config.experience.start.time");
 	
-	private static final String TOTAL_SAMPLES = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.total.samples");
+	private static final String FREQUENCY = resourceBundle.getString("rec.bui.hardware.acquisition.config.frequency");
 	
-	private static final String TOTAL_SAMPLES_UNDETERMINED = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.total.samples.undetermined");
+	private static final String TOTAL_SAMPLES = resourceBundle.getString("rec.bui.hardware.acquisition.config.total.samples");
 	
-	private static final String PARAMETERS = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.parameters");
+	private static final String TOTAL_SAMPLES_UNDETERMINED = resourceBundle.getString("rec.bui.hardware.acquisition.config.total.samples.undetermined");
 	
-	private static final String CHANNELS_CONFIGURATION = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.channels.onfiguration");
+	private static final String PARAMETERS = resourceBundle.getString("rec.bui.hardware.acquisition.config.parameters");
 	
-	private static final String CHANNEL = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.channel");
+	private static final String CHANNELS_CONFIGURATION = resourceBundle.getString("rec.bui.hardware.acquisition.config.channels.onfiguration");
 	
-	private static final String CONFIGURATION = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.configuration");
+	private static final String CHANNEL = resourceBundle.getString("rec.bui.hardware.acquisition.config.channel");
+	
+	private static final String CONFIGURATION = resourceBundle.getString("rec.bui.hardware.acquisition.config.configuration");
 
-	private static final String CONFIGURATION_UNDEFINED = ReCResourceBundle.findString("ReCBaseUI$rec.bui.hardware.acquisition.config.configuration.undefined");
+	private static final String CONFIGURATION_UNDEFINED = resourceBundle.getString("rec.bui.hardware.acquisition.config.configuration.undefined");
 	
 	/** Holds value of property timeStart. */
 	private com.linkare.rec.data.synch.DateTime timeStart;

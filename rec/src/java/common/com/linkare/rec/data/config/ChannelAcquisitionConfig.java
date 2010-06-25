@@ -1,22 +1,24 @@
 package com.linkare.rec.data.config;
 
-import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import java.util.ResourceBundle;
 
 public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.IDLEntity {
 	
-	private static final String CHANNEL_NAME = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.name");
+	private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("com/linkare/rec/data/resources/messages");
 	
-	private static final String CHANNEL_START_TIME = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.start.time");
+	private static final String CHANNEL_NAME = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.name");
 	
-	private static final String CHANNEL_FREQUENCY = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.frequency");
+	private static final String CHANNEL_START_TIME = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.start.time");
 	
-	private static final String CHANNEL_SCALE = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.scale");
+	private static final String CHANNEL_FREQUENCY = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.frequency");
 	
-	private static final String CHANNEL_TOTAL_SAMPLES = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.total.samples");
+	private static final String CHANNEL_SCALE = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.scale");
 	
-	private static final String CHANNEL_TOTAL_SAMPLES_UNDETERMINED = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.total.samples.undetermined");
+	private static final String CHANNEL_TOTAL_SAMPLES = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.total.samples");
 	
-	private static final String CHANNEL_PARAMETERS = ReCResourceBundle.findString("ReCBaseUI$rec.bui.channel.acquisition.config.data.channel.parameters");
+	private static final String CHANNEL_TOTAL_SAMPLES_UNDETERMINED = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.total.samples.undetermined");
+	
+	private static final String CHANNEL_PARAMETERS = resourceBundle.getString("rec.bui.channel.acquisition.config.data.channel.parameters");
 	
 	/** Holds value of property timeStart. */
 	private com.linkare.rec.data.synch.DateTime timeStart;

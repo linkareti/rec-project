@@ -36,6 +36,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
+import com.linkare.rec.impl.newface.utils.DataConfigInternationalization;
 
 /**
  * 
@@ -301,7 +302,8 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 		try {
 			String acquisitionInfo = "Acquisition info is not available";
 			if (experimentHistoryUI.getProducerWrapper() != null && experimentHistoryUI.getProducerWrapper().getAcquisitionHeader() != null) {
-				acquisitionInfo = experimentHistoryUI.getProducerWrapper().getAcquisitionHeader().toString();
+				acquisitionInfo = DataConfigInternationalization.toString(experimentHistoryUI.getProducerWrapper().getAcquisitionHeader());
+//				acquisitionInfo = experimentHistoryUI.getProducerWrapper().getAcquisitionHeader().toString();
 			}
 			infoTextArea.setText(acquisitionInfo);
 		} catch (NotAvailableException e) {
