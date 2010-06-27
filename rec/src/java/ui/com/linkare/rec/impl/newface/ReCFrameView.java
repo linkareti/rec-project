@@ -523,7 +523,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		}
 
 		//Bruno ver se existe mais algum tipo de validação que garanta que é mesmo o executavel (em windows tem de ser o exe...)
-		if (!vlcExec.getName().substring(0, 3).equals("vlc")) {
+		if (!vlcExec.getName().substring(0, 3).equalsIgnoreCase("vlc")) {
 			return false;
 		}
 
