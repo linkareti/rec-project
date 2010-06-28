@@ -57,7 +57,7 @@ public class MenuStyle extends DefaultStyle {
 		map.put(PT_MENU_SELECTION_FG, COLOR_MENU_ITEM_HOVER);
 		map.put(PT_MENU_SELECTION_BG, COLOR_MENU_FG);
 
-		map.put(BORDER, EMPTY_BORDER);
+		map.put(BORDER, EMPTY_BORDER_MARGIN_2);
 		map.put(FONT, FONT_MENU);
 
 	}
