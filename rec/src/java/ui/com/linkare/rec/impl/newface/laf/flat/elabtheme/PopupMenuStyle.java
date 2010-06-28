@@ -20,13 +20,14 @@ import com.linkare.rec.impl.newface.laf.flat.theme.Style;
  * @author João FLorindo
  */
 @Style
-public class PopupMenuStyle extends DefaultStyle {
+public class PopupMenuStyle extends MenuStyle {
 
 	//ENABLED COLORS
 	private static final Color COLOR_MENU_ITEM_BG = new Color(0x263537);
 	private static final Color COLOR_MENU_ITEM_FG = new Color(0xE4EEED);
 	private static final Color COLOR_MENU_BORDER = new Color(0xE4EEED);
 	private static final Color COLOR_MENU_DISABLED_FG = new Color(0x22363A);
+	private static final Color COLOR_MENU_ITEM_HOVER = new Color(0x22363A);
 	//PROPERTIES
 	private static final String PT_MENU_SELECTION_BG = "selectionBackground";
 	private static final String PT_MENU_SELECTION_FG = "selectionForeground";
@@ -57,7 +58,9 @@ public class PopupMenuStyle extends DefaultStyle {
 	public void updatePropertyMap(Map<String, Object> map) {
 		super.updatePropertyMap(map);
 		map.put(BORDER, SOLID_THIN_BORDER);
-
+		map.put(FONT, FONT_MENU);
+		map.put(FOREGROUND, COLOR_MENU_ITEM_FG);
+		map.put(BACKGROUND, COLOR_MENU_ITEM_BG);
 	}
 
 	// -------------------------------------------------------------------------

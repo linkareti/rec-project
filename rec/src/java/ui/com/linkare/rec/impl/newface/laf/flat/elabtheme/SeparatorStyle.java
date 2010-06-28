@@ -16,7 +16,8 @@ import java.util.Map;
 public class SeparatorStyle extends DefaultStyle {
 
 	//ENABLED COLORS
-	private static final Color COLOR_SEPARATOR_BG = new Color(0x263537);
+//	private static final Color COLOR_SEPARATOR_BG = new Color(0x263537);
+	private static final Color COLOR_SEPARATOR_BG = new Color(0xE4EEED);
 	private static final Color COLOR_SEPARATOR_FG = new Color(0xE4EEED);
 	private static final Color COLOR_SEPARATOR_SHADOW = new Color(0xE4EEED);
 	private static final Color COLOR_SEPARATOR_HIGHTLIGHT = new Color(0xE4EEED);
@@ -43,8 +44,8 @@ public class SeparatorStyle extends DefaultStyle {
 		super.updatePropertyMap(map);
 		map.put(FOREGROUND, COLOR_SEPARATOR_FG);
 		map.put(BACKGROUND, COLOR_SEPARATOR_BG);
-		map.put(PT_SEPARATOR_SHADOW, COLOR_SEPARATOR_SHADOW);
-		map.put(PT_SEPARATOR_HIGHTLIGHT, COLOR_SEPARATOR_HIGHTLIGHT);
+//		map.put(PT_SEPARATOR_SHADOW, COLOR_SEPARATOR_SHADOW);
+//		map.put(PT_SEPARATOR_HIGHTLIGHT, COLOR_SEPARATOR_HIGHTLIGHT);
 
 	}
 }
