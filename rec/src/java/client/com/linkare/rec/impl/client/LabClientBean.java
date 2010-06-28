@@ -168,8 +168,10 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 						"There are no hardwares available at the Laboratory that this user may access");
 				return;
 			}
-			Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.FINE,
-					"There are " + hardwares.length + " hardwares available at the Laboratory that this user may access");
+			Logger.getLogger(LAB_CLIENT_LOGGER).log(
+					Level.FINE,
+					"There are " + hardwares.length
+							+ " hardwares available at the Laboratory that this user may access");
 
 			ArrayList<Apparatus> apparatusListTemp = new ArrayList<Apparatus>(hardwares == null ? 0 : hardwares.length);
 
@@ -179,14 +181,15 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 					HardwareInfo hardwareInfo = mchw.getHardwareInfo(getUserInfo());
 
-				if (hardwareInfo == null) {
-					Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.INFO,
-							"Can't get HardwareInfo for hardware index " + i + " of max index " + hardwares.length);
-					continue;
-				}
+					if (hardwareInfo == null) {
+						Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.INFO,
+								"Can't get HardwareInfo for hardware index " + i + " of max index " + hardwares.length);
+						continue;
+					}
 
-				Apparatus app = new Apparatus(mchw, hardwareInfo);
-				apparatusListTemp.add(app);
+					Apparatus app = new Apparatus(mchw, hardwareInfo);
+					apparatusListTemp.add(app);
+				}
 			}
 			Apparatus[] newApparatusList = new Apparatus[apparatusListTemp.size()];
 
