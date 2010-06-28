@@ -61,6 +61,7 @@ public class ResultsActionBar extends javax.swing.JPanel {
         btnPlayStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         btnPlayStop.setBorderPainted(false);
         btnPlayStop.setName("btnPlayStop"); // NOI18N
+        btnPlayStop.setPressedIcon(resourceMap.getIcon("btnPlayStop.pressedIcon")); // NOI18N
 
         btnPrint.setBackground(resourceMap.getColor("btnPlayStop.background")); // NOI18N
         btnPrint.setIcon(resourceMap.getIcon("btnPrint.icon")); // NOI18N

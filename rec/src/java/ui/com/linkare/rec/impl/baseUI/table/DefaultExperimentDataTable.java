@@ -121,6 +121,7 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
         btnPlayStop.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         btnPlayStop.setBorderPainted(false);
         btnPlayStop.setName("btnPlayStop"); // NOI18N
+        btnPlayStop.setPressedIcon(resourceMap.getIcon("btnPlayStop.pressedIcon")); // NOI18N
         
 		setButtonBorder(btnPlayStop);
 //		toolBarTable.addSeparator();

@@ -61,6 +61,7 @@
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnPlayStop" noResource="true"/>
+        <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPlayStop.pressedIcon"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPrint">
