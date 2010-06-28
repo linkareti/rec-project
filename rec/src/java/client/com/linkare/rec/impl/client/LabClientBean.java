@@ -17,8 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import javax.swing.SwingUtilities;
-
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.DataClientHelper;
 import com.linkare.rec.acquisition.DataClientOperations;
@@ -153,13 +151,11 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 	public void hardwareChange() {
 		Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.INFO, "Hardware Change information received...");
 
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
+		(new Thread() {
 			public void run() {
 				refreshHardwares();
 			}
-		});
+		}).start();
 
 	}
 
@@ -175,12 +171,13 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 			Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.FINE,
 					"There are " + hardwares.length + " hardwares available at the Laboratory that this user may access");
 
-			ArrayList<Apparatus> apparatusListTemp = new ArrayList<Apparatus>(hardwares.length);
+			ArrayList<Apparatus> apparatusListTemp = new ArrayList<Apparatus>(hardwares == null ? 0 : hardwares.length);
 
-			for (int i = 0; i < hardwares.length; i++) {
-				MultiCastHardwareWrapper mchw = new MultiCastHardwareWrapper(hardwares[i]);
+			if (hardwares != null) {
+				for (int i = 0; i < hardwares.length; i++) {
+					MultiCastHardwareWrapper mchw = new MultiCastHardwareWrapper(hardwares[i]);
 
-				HardwareInfo hardwareInfo = mchw.getHardwareInfo(getUserInfo());
+					HardwareInfo hardwareInfo = mchw.getHardwareInfo(getUserInfo());
 
 				if (hardwareInfo == null) {
 					Logger.getLogger(LAB_CLIENT_LOGGER).log(Level.INFO,
