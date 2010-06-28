@@ -34,6 +34,22 @@
 			<property name="recieveBufferSize" value="64000" />
 			<property name="bufferedOutputStreamSize" value="8192" />
 			<property name="serverMinSocketAcceptTimeout" value="-1" />
+			<!--
+				do not use any rmi features
+			-->
+			<property name="deserializationEngine" value="none" />
+			<!--
+				keep the sockets alive by pinging... this is good for the client
+				firewalls with bidir remaining open
+			-->
+			<property name="keepAlive" value="true" />
+		</import>
+		<import xlink:href="${openorb.home}config/default.xml#rmi">
+			<!--
+				Use the orb singleton per default and do not try to open a second
+				orb listening on the same port
+			-->
+			<property name="defaultorbSingleton" value="true" />
 		</import>
 	</profile>
 
@@ -55,7 +71,7 @@
 			<!--	<property name="port" value="@hardware.client@"/>-->
 		</import>
 	</profile>
-	
+
 	<profile name="ReCClientDebug" extends="debug">
 		<import xlink:href="${openorb.home}config/default.xml#iiop">
 			<property name="publishIP" value="true" />
