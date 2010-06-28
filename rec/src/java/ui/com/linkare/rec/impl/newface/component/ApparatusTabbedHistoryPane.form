@@ -39,7 +39,9 @@
       <SubComponents>
         <Component class="com.linkare.rec.impl.newface.component.ApparatusDescriptionPane" name="descriptionPane">
           <Properties>
+            <Property name="background" type="java.awt.Color" resourceKey="descriptionPane.background"/>
             <Property name="name" type="java.lang.String" value="descriptionPane" noResource="true"/>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">

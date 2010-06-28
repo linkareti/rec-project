@@ -90,8 +90,10 @@ public class ApparatusTabbedHistoryPane extends GradientPane {
         tabbedPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 6, 6, 6));
         tabbedPane.setName("tabbedPane"); // NOI18N
 
-        descriptionPane.setName("descriptionPane"); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(ApparatusTabbedHistoryPane.class);
+        descriptionPane.setBackground(resourceMap.getColor("descriptionPane.background")); // NOI18N
+        descriptionPane.setName("descriptionPane"); // NOI18N
+        descriptionPane.setOpaque(false);
         tabbedPane.addTab(resourceMap.getString("descriptionPane.TabConstraints.tabTitle"), resourceMap.getIcon("descriptionPane.TabConstraints.tabIcon"), descriptionPane); // NOI18N
 
         resultsHolderPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 6, 6, 6));
