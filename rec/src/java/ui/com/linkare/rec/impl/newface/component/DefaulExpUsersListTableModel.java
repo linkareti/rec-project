@@ -12,6 +12,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.SwingUtilities;
+
 import com.linkare.rec.acquisition.UserInfo;
 import com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener;
 import com.linkare.rec.impl.client.experiment.ExpUsersListEvent;
@@ -20,7 +22,7 @@ import com.linkare.rec.impl.events.ChatMessageEvent;
 
 /**
  * 
- * @author Jos� Pedro Pereira
+ * @author José Pedro Pereira
  */
 public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTableModel implements ExpUsersListChangeListener {
 	//    private static String UI_CLIENT_LOGGER="ReC.baseUI";
@@ -73,94 +75,104 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 	}
 
 	public void usersListChanged(ExpUsersListEvent evt) {
-		UserInfo[] expUsers = evt.getUserInfo();
-		if (expUsers == null) {
-			setDataVector(new Object[0][1], new Object[] { noUsersList });
-			return;
-		}
-
-		Arrays.sort(expUsers, new Comparator<UserInfo>() {
-			public int compare(UserInfo u1, UserInfo u2) {
-				if (u1 == null && u2 == null)
-					return 0;
-
-				if (u1 == null)
-					return -1;
-				if (u2 == null)
-					return +1;
-
-				if (u1.getNextLockTime() == null && u2.getNextLockTime() == null)
-					return 0;
-				if (u1.getNextLockTime() == null)
-					return -1;
-				if (u2.getNextLockTime() == null)
-					return +1;
-				if (u1.getNextLockTime()[0] == null)
-					return -1;
-				if (u2.getNextLockTime()[0] == null)
-					return +1;
-
-				if (u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)
-						|| u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
-					return 0;
-
-				if (u1.getNextLockTime()[0].getMilliSeconds() - u2.getNextLockTime()[0].getMilliSeconds() == 0)
-					return 0;
-
-				return (u1.getNextLockTime()[0].getMilliSeconds() - u2.getNextLockTime()[0].getMilliSeconds()) > 0 ? +1 : -1;
-			}
-
+		final UserInfo[] expUsers = evt.getUserInfo();
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			/**
+			 * {@inheritDoc}
+			 */
 			@Override
-			public boolean equals(Object other) {
-				if (other == null || !(other.getClass() == this.getClass()))
-					return false;
+			public void run() {
+				
+				if (expUsers == null) {
+					setDataVector(new Object[0][1], new Object[] { noUsersList });
+					return;
+				}
 
-				return true;
+				Arrays.sort(expUsers, new Comparator<UserInfo>() {
+					public int compare(UserInfo u1, UserInfo u2) {
+						if (u1 == null && u2 == null)
+							return 0;
+
+						if (u1 == null)
+							return -1;
+						if (u2 == null)
+							return +1;
+
+						if (u1.getNextLockTime() == null && u2.getNextLockTime() == null)
+							return 0;
+						if (u1.getNextLockTime() == null)
+							return -1;
+						if (u2.getNextLockTime() == null)
+							return +1;
+						if (u1.getNextLockTime()[0] == null)
+							return -1;
+						if (u2.getNextLockTime()[0] == null)
+							return +1;
+
+						if (u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)
+								|| u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
+							return 0;
+
+						if (u1.getNextLockTime()[0].getMilliSeconds() - u2.getNextLockTime()[0].getMilliSeconds() == 0)
+							return 0;
+
+						return (u1.getNextLockTime()[0].getMilliSeconds() - u2.getNextLockTime()[0].getMilliSeconds()) > 0 ? +1 : -1;
+					}
+
+					@Override
+					public boolean equals(Object other) {
+						if (other == null || !(other.getClass() == this.getClass()))
+							return false;
+
+						return true;
+					}
+				});
+
+				Vector<String[]> expUsersList = new Vector<String[]>(expUsers.length);
+
+				for (int i = 0; i < expUsers.length; i++) {
+					if (expUsers[i].getUserName() != null && !expUsers[i].getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
+						String userName = expUsers[i].getUserName();
+						String controlInMin = "";
+						String controlInMax = "";
+						if (expUsers[i].getLockedTime() != null && expUsers[i].getLockedTime().getMilliSeconds() != 0) {
+							controlInMin = lblInControl;
+							controlInMax = "" + expUsers[i].getLockedTime().toSimpleString();
+						} else {
+							if (expUsers[i].getNextLockTime() != null && expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK] != null)
+								controlInMin = expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK].toSimpleStringTimeFirst();
+							if (expUsers[i].getNextLockTime() != null && expUsers[i].getNextLockTime()[UserInfo.MAX_TIME_LOCK] != null)
+								controlInMax = expUsers[i].getNextLockTime()[UserInfo.MAX_TIME_LOCK].toSimpleStringTimeFirst();
+
+						}
+
+						if (i == 1 && controlInMin == controlInMax) {
+							controlInMin = lblControlNow;
+							controlInMax = controlInMin;
+						}
+
+						if (log.isLoggable(Level.FINEST)) {
+							log.finest("Username = " + userName);
+							log.finest("controlInMin = " + controlInMin);
+							log.finest("controlInMax = " + controlInMax);
+						}
+
+						expUsersList.add(new String[] { userName, controlInMin, controlInMax });
+					}
+				}
+
+				expUsersList.trimToSize();
+				Object[] values = expUsersList.toArray();
+
+				Object[][] valuesMatrix = new Object[values.length][];
+				System.arraycopy(values, 0, valuesMatrix, 0, values.length);
+
+				setDataVector(valuesMatrix, new Object[] { lblUserName, lbltime_to_control_min, lbltime_to_control_max });
+				fireTableDataChanged();
+				
 			}
 		});
-
-		Vector<String[]> expUsersList = new Vector<String[]>(expUsers.length);
-
-		for (int i = 0; i < expUsers.length; i++) {
-			if (expUsers[i].getUserName() != null && !expUsers[i].getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
-				String userName = expUsers[i].getUserName();
-				String controlInMin = "";
-				String controlInMax = "";
-				if (expUsers[i].getLockedTime() != null && expUsers[i].getLockedTime().getMilliSeconds() != 0) {
-					controlInMin = lblInControl;
-					controlInMax = "" + expUsers[i].getLockedTime().toSimpleString();
-				} else {
-					if (expUsers[i].getNextLockTime() != null && expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK] != null)
-						controlInMin = expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK].toSimpleStringTimeFirst();
-					if (expUsers[i].getNextLockTime() != null && expUsers[i].getNextLockTime()[UserInfo.MAX_TIME_LOCK] != null)
-						controlInMax = expUsers[i].getNextLockTime()[UserInfo.MAX_TIME_LOCK].toSimpleStringTimeFirst();
-
-				}
-
-				if (i == 1 && controlInMin == controlInMax) {
-					controlInMin = lblControlNow;
-					controlInMax = controlInMin;
-				}
-
-				if (log.isLoggable(Level.FINEST)) {
-					log.finest("Username = " + userName);
-					log.finest("controlInMin = " + controlInMin);
-					log.finest("controlInMax = " + controlInMax);
-				}
-
-				expUsersList.add(new String[] { userName, controlInMin, controlInMax });
-			}
-		}
-
-		expUsersList.trimToSize();
-		Object[] values = expUsersList.toArray();
-
-		Object[][] valuesMatrix = new Object[values.length][];
-		System.arraycopy(values, 0, valuesMatrix, 0, values.length);
-
-		setDataVector(valuesMatrix, new Object[] { lblUserName, lbltime_to_control_min, lbltime_to_control_max });
-		fireTableDataChanged();
-
 	}
 
 	/**
