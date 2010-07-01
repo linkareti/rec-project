@@ -24,6 +24,9 @@ public class ExperimentActionBar extends javax.swing.JPanel {
 		initComponents();
 
 		checkAutoPlay.setSelected(recApplication.getExperimentAutoplay());
+		
+		// TODO remove this code line only for demo
+		checkAutoPlay.setVisible(false);
 	}
 
 	public void setPlayStopButtonEnabled(boolean enabled) {
