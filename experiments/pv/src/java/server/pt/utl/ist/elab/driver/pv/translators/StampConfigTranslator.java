@@ -43,12 +43,12 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		int userposhigh = (int) Math.floor(userposhighf);
 		int dt = ((Integer) command.getCommandData(FREQ_INTERVAL_STR)).intValue();
 
-		if (userposhigh > 70 || userposhigh < 40) {
+		if (userposhigh > 50 || userposhigh < 20) {
 			System.out.println("userposhigh is wrong..." + userposhigh);
 			return false;
 		}
 
-		if (userposlow > 70 || userposlow < 40) {
+		if (userposlow > 50 || userposlow < 20) {
 			System.out.println("userposlow is wrong..." + userposlow);
 			return false;
 		}
