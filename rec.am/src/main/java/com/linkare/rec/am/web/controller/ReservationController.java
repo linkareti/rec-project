@@ -15,6 +15,9 @@ import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.StringUtils;
 import com.linkare.jsf.utils.JsfUtil;
+import com.linkare.rec.am.aop.AllocationManagerExceptionHandler;
+import com.linkare.rec.am.aop.ExceptionHandle;
+import com.linkare.rec.am.aop.ExceptionHandleCase;
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.service.ReservationService;
 import com.linkare.rec.am.service.ReservationServiceLocal;
@@ -104,48 +107,34 @@ public class ReservationController extends AbstractController<Long, Reservation,
 	setCurrent(service.getReservationDetails(reservationId));
     }
 
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
     public String addUser() {
-	try {
-	    String username = JsfUtil.getRequestParameter(CONTEXT_USERNAME_INPUT);
-	    if (StringUtils.isBlank(username)) {
-		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_USERNAME_CANNOT_BE_EMPTY_KEY);
-		return null;
-	    }
-	    User user = userService.findByUsername(username);
-	    if (user == null) {
-		user = new User(username);
-		userService.create(user);
-	    }
-	    service.addUser(getCurrent(), user);
-	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_ASSOCIATION_KEY);
-	} catch (Exception e) {
-	    if (e.getCause() instanceof DomainException) {
-		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
-	    } else {
-		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
-	    }
+	String username = JsfUtil.getRequestParameter(CONTEXT_USERNAME_INPUT);
+	if (StringUtils.isBlank(username)) {
+	    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_USERNAME_CANNOT_BE_EMPTY_KEY);
+	    return null;
 	}
+	User user = userService.findByUsername(username);
+	if (user == null) {
+	    user = new User(username);
+	    userService.create(user);
+	}
+	service.addUser(getCurrent(), user);
+	JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_ASSOCIATION_KEY);
 	return null;
     }
 
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
     public String removeUser() {
-	try {
-	    String username = JsfUtil.getRequestParameter(CONTEXT_USERNAME_INPUT);
-	    if (StringUtils.isBlank(username)) {
-		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_USERNAME_CANNOT_BE_EMPTY_KEY);
-		return null;
-	    }
-	    User user = userService.findByUsername(username);
-	    if (user != null) {
-		service.removeUser(getCurrent(), user);
-		JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_DISSOCIATION_KEY);
-	    }
-	} catch (Exception e) {
-	    if (e.getCause() instanceof DomainException) {
-		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
-	    } else {
-		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
-	    }
+	String username = JsfUtil.getRequestParameter(CONTEXT_USERNAME_INPUT);
+	if (StringUtils.isBlank(username)) {
+	    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_USERNAME_CANNOT_BE_EMPTY_KEY);
+	    return null;
+	}
+	User user = userService.findByUsername(username);
+	if (user != null) {
+	    service.removeUser(getCurrent(), user);
+	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_DISSOCIATION_KEY);
 	}
 	return null;
     }

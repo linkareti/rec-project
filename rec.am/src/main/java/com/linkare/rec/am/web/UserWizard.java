@@ -13,10 +13,12 @@ import org.apache.commons.validator.EmailValidator;
 import org.primefaces.event.FlowEvent;
 
 import com.linkare.commons.dao.security.LoginDAO;
-import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.EqualityUtils;
 import com.linkare.jsf.utils.JsfUtil;
+import com.linkare.rec.am.aop.AllocationManagerExceptionHandler;
+import com.linkare.rec.am.aop.ExceptionHandle;
+import com.linkare.rec.am.aop.ExceptionHandleCase;
 import com.linkare.rec.am.model.Person;
 import com.linkare.rec.am.service.UserService;
 import com.linkare.rec.am.service.UserServiceLocal;
@@ -120,26 +122,17 @@ public class UserWizard implements Serializable {
 	this.user = user;
     }
 
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
     public String save() {
-	try {
-	    if (isNew()) {
-		userService.create(getUser());
-		JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
-		return ConstantUtils.CREATE;
-	    } else {
-		userService.edit(getUser());
-		setUser(userService.find(getUser().getIdInternal()));
-		JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
-		return ConstantUtils.VIEW;
-	    }
-	} catch (Exception e) {
-	    getUser().setIdInternal(null);
-	    if (e.getCause() instanceof DomainException) {
-		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
-	    } else {
-		JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
-	    }
-	    return null;
+	if (isNew()) {
+	    userService.create(getUser());
+	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
+	    return ConstantUtils.CREATE;
+	} else {
+	    userService.edit(getUser());
+	    setUser(userService.find(getUser().getIdInternal()));
+	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
+	    return ConstantUtils.VIEW;
 	}
     }
 

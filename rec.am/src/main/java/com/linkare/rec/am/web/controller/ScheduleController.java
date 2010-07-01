@@ -20,10 +20,13 @@ import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
-import com.linkare.commons.jpa.exceptions.DomainException;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.commons.utils.StringUtils;
 import com.linkare.jsf.utils.JsfUtil;
+import com.linkare.rec.am.aop.AllocationManagerExceptionHandler;
+import com.linkare.rec.am.aop.ExceptionHandle;
+import com.linkare.rec.am.aop.ExceptionHandleCase;
+import com.linkare.rec.am.aop.ScheduleControllerCreateOrUpdateExceptionHandler;
 import com.linkare.rec.am.model.Reservation;
 import com.linkare.rec.am.model.moodle.ExternalCourse;
 import com.linkare.rec.am.service.ExternalCourseServiceBean;
@@ -62,6 +65,20 @@ public class ScheduleController implements Serializable {
 	return eventModel = eventModel == null ? new AllocationManagerScheduleModel() : eventModel;
     }
 
+    /**
+     * @return the reservationService
+     */
+    public ReservationService getReservationService() {
+	return reservationService;
+    }
+
+    /**
+     * @return the userService
+     */
+    public UserService getUserService() {
+	return userService;
+    }
+
     public Reservation getEvent() {
 	if (event == null) {
 	    event = new Reservation(getUser(), SessionHelper.getLoginDomain());
@@ -84,59 +101,34 @@ public class ScheduleController implements Serializable {
 	event.setStyleClass("myevents");
     }
 
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
     public void removeEvent(ActionEvent actionEvent) {
 	if (event.getId() != null) {
-	    try {
-		eventModel.deleteEvent(event);
-		reservationService.remove(event);
-		JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);
-		refreshUserView();
-	    } catch (Exception e) {
-		if (e.getCause() instanceof DomainException) {
-		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
-		} else {
-		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
-		}
-	    }
+	    eventModel.deleteEvent(event);
+	    reservationService.remove(event);
+	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_REMOVE_KEY);
+	    refreshUserView();
+
 	}
     }
 
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = ScheduleControllerCreateOrUpdateExceptionHandler.class))
     public final String createOrUpdate() {
 	if (StringUtils.isBlank(event.getId())) {
-	    try {
-		event.setUser(getUser());
-		event.setDomain(SessionHelper.getLoginDomain());
-		event.setStyleClass("myevents");
-		// It is necessary to first update the model so that the event has a reservation id
-		eventModel.addEvent(event);
-		reservationService.create(event);
-		JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
-		refreshUserView();
-	    } catch (Exception e) {
-		if (e.getCause() instanceof DomainException) {
-		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
-		} else {
-		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
-		}
-		// Remove the newly added event if an exception was captured
-		eventModel.deleteEvent(event);
-	    }
+	    event.setUser(getUser());
+	    event.setDomain(SessionHelper.getLoginDomain());
+	    event.setStyleClass("myevents");
+	    // It is necessary to first update the model so that the event has a reservation id
+	    eventModel.addEvent(event);
+	    reservationService.create(event);
+	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_CREATE_KEY);
+	    refreshUserView();
 	} else {
-	    try {
-		// It is necessary to get the merged event and only after that, update the event model
-		event = reservationService.edit(event);
-		eventModel.updateEvent(event);
-		JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
-		refreshUserView();
-	    } catch (Exception e) {
-		if (e.getCause() instanceof DomainException) {
-		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, e.getCause().getMessage());
-		} else {
-		    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_PERSISTENCE_KEY);
-		}
-		event = reservationService.find(event.getIdInternal());
-		eventModel.updateEvent(event);
-	    }
+	    // It is necessary to get the merged event and only after that, update the event model
+	    event = reservationService.edit(event);
+	    eventModel.updateEvent(event);
+	    JsfUtil.addGlobalSuccessMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_INFO_KEY, ConstantUtils.INFO_UPDATE_KEY);
+	    refreshUserView();
 	}
 	return null;
     }

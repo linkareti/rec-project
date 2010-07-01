@@ -37,11 +37,11 @@ public final class MoodleClientHelper {
 
     private static final String SHORTNAME = "shortname";
 
-    private static final String EXTERNAL_SYSTEM_CONFIGURATION_PROBLEMS = "external.system.configuration.problems";
+    public static final String EXTERNAL_SYSTEM_CONFIGURATION_PROBLEMS = "external.system.configuration.problems";
 
-    private static final String ERROR_INVALID_URL_REGISTERING_LOGIN_DOMAINS = "error.invalidURL.registering.login.domains";
+    public static final String ERROR_INVALID_URL_REGISTERING_LOGIN_DOMAINS = "error.invalidURL.registering.login.domains";
 
-    private static final String ERROR_ACCESSING_LOGIN_DOMAIN_FACADE_IN_JNDI = "error.accessing.loginDomainFacade.in.jndi";
+    public static final String ERROR_ACCESSING_LOGIN_DOMAIN_FACADE_IN_JNDI = "error.accessing.loginDomainFacade.in.jndi";
 
     /**
      * This map saves all the moodle client help instances, indexed by the login domains.

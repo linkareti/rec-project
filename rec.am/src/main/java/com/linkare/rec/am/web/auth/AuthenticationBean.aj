@@ -5,6 +5,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.linkare.jsf.utils.JsfUtil;
+import com.linkare.rec.am.aop.AllocationManagerExceptionHandler;
+import com.linkare.rec.am.aop.ExceptionHandle;
+import com.linkare.rec.am.aop.ExceptionHandleCase;
 import com.linkare.rec.am.service.UserService;
 import com.linkare.rec.am.service.UserServiceLocal;
 import com.linkare.rec.am.web.ex.AuthenticationException;
@@ -29,14 +32,10 @@ public class AuthenticationBean {
     @EJB(beanInterface = UserServiceLocal.class)
     private UserService userService;
 
+    @ExceptionHandle(@ExceptionHandleCase(exceptionHandler = AllocationManagerExceptionHandler.class))
     public String login() {
-	try {
-	    authenticate();
-	    registerUserIfNecessary();
-	} catch (AuthenticationException e) {
-	    JsfUtil.addGlobalErrorMessage(ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY, ConstantUtils.ERROR_LOGIN_FAILED_KEY);
-	    return null;
-	}
+	authenticate();
+	registerUserIfNecessary();
 	return "index";
     }
 

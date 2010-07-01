@@ -1,6 +1,5 @@
 package com.linkare.rec.am.web;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.net.Socket;
 
@@ -11,6 +10,8 @@ import javax.faces.event.ActionEvent;
 
 import com.linkare.commons.utils.PropertiesManager;
 import com.linkare.jsf.utils.JsfUtil;
+import com.linkare.rec.am.aop.ExceptionHandle;
+import com.linkare.rec.am.aop.ExceptionHandleCase;
 import com.linkare.rec.am.web.util.ConstantUtils;
 
 /**
@@ -59,14 +60,12 @@ public class PortScannerBean implements Serializable {
 	this.checkMulticastServerLink = outputLink;
     }
 
+    @ExceptionHandle(@ExceptionHandleCase)
     public PortScannerBean() {
-	try {
-	    PropertiesManager.loadProperties("/configuration.properties");
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+	PropertiesManager.loadProperties("/configuration.properties");
     }
 
+    @ExceptionHandle(@ExceptionHandleCase)
     public void scan(final ActionEvent event) {
 	boolean canAccessPort = false;
 	int startPortRange = getPortRangeStart();
@@ -76,12 +75,9 @@ public class PortScannerBean implements Serializable {
 	    if (canAccessPort) {
 		break;
 	    }
-	    try {
-		Socket ServerSok = new Socket(getElabHost(), i);
-		canAccessPort = true;
-		ServerSok.close();
-	    } catch (Exception e) {
-	    }
+	    Socket ServerSok = new Socket(getElabHost(), i);
+	    canAccessPort = true;
+	    ServerSok.close();
 	}
 	if (!canAccessPort) {
 	    JsfUtil.addErrorMessage(getCheckMulticastServerLink().getClientId(), ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY,

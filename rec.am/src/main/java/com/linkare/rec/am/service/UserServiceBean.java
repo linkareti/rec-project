@@ -55,7 +55,9 @@ public class UserServiceBean extends BusinessServiceBean<User, Long> implements 
     private void loadRelations(final User user) {
 	if (user != null) {
 	    user.getSubject();
-	    user.getLogin();
+	    if (user.hasLogin()) {
+		user.getLogin();
+	    }
 	}
     }
 
