@@ -659,10 +659,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			break;
 		case STATECONFIGERROR:
 			break;
-		case STATERESETING:
-			break;
-		case STATERESETED:
-			break;
 		case STATESTARTING:
 			progressCicleTask.start();
 			startingExperiment();
@@ -675,6 +671,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			break;
 		case STATESTOPING:
 			break;
+		case STATERESETING:
+			break;
+		case STATERESETED:
+			// do the same as stop
 		case STATESTOPED:
 			stopedExperiment();
 			progressCicleTask.stop();
