@@ -1,0 +1,25 @@
+<Apparatus location="ELAB_TELESCOPIO_V01"
+	customizerClassLocationBundleKey="telescopio$rec.exp.customizer.telescopio"
+	toolTipBundleKey="telescopio$rec.exp.tip.telescopio"
+	iconLocationBundleKey="telescopio$rec.exp.icon.telescopio"
+	displayStringBundleKey="telescopio$rec.exp.title.telescopio"
+	desktopLocationBundleKey="telescopio$rec.exp.background.telescopio"
+	order="1">
+	<LocalizationBundle name="telescopio"
+		location="recresource:///pt/utl/ist/elab/client/telescopio/resources/messages" />
+	<Display classLocationBundleKey="telescopio$rec.exp.display.telescopio.loc.1"
+		toolTipBundleKey="telescopio$rec.exp.display.telescopio.tip.1"
+		iconLocationBundleKey="telescopio$rec.exp.display.icon.star"
+		displayStringBundleKey="telescopio$rec.exp.display.telescopio.title.1"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="telescopio$rec.exp.display.telescopio.loc.2"
+		toolTipBundleKey="telescopio$rec.exp.display.telescopio.tip.2"
+		iconLocationBundleKey="telescopio$rec.exp.display.icon.save"
+		displayStringBundleKey="telescopio$rec.exp.display.telescopio.title.2"
+		offlineCapable="false" order="2" />
+	<Display classLocationBundleKey="telescopio$rec.exp.display.telescopio.loc.3"
+		toolTipBundleKey="telescopio$rec.exp.display.telescopio.tip.3"
+		iconLocationBundleKey="telescopio$rec.exp.display.icon.open"
+		displayStringBundleKey="telescopio$rec.exp.display.telescopio.title.3"
+		offlineCapable="true" order="2" />
+</Apparatus>
