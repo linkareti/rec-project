@@ -471,8 +471,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		String vlcPath = PreferencesUtils.readUserPreference(key);
 		if (vlcPath == null) {
 
-			//Bruno ver se o getFrame esta correcto
-			//Bruno colocar texto por props.
 			int result = JOptionPane.showConfirmDialog(this.getFrame(), "Não foi possível iniciar a reprodução de vídeo. " + LINE_SEPARATOR
 					+ "No entanto, pode visualizar a experiência instalando " + LINE_SEPARATOR
 					+ "o VLC. Deseja especificar a directoria de instalação do VLC?", "", JOptionPane.YES_NO_OPTION,
@@ -495,7 +493,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		
 			proceed = true;
 			JFileChooser chooser = new JFileChooser();
-			//Bruno Ver o tipo de formatação da janela
 			chooser.showOpenDialog(this.getFrame());
 			selected = chooser.getSelectedFile();
 			
@@ -522,7 +519,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			return false;
 		}
 
-		//Bruno ver se existe mais algum tipo de validação que garanta que é mesmo o executavel (em windows tem de ser o exe...)
 		if (!vlcExec.getName().substring(0, 3).equalsIgnoreCase("vlc")) {
 			return false;
 		}

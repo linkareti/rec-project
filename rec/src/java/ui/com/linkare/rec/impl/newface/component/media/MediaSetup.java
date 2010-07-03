@@ -69,15 +69,7 @@ public class MediaSetup {
 	}
 
 	private static void loadLibrary(String name) {
-
-		try {
-
-			log.fine("!!!!!!!!!!!!!!! Loading " + name + "!!!!!!!!!!!!!!!!!!");
-			System.loadLibrary(name);
-			log.fine("!!!!!!!!!!!!!!! Done Loading " + name + "!!!!!!!!!!!!!!!!!!");
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
+		System.loadLibrary(name);
 	}
 
 	//Delete

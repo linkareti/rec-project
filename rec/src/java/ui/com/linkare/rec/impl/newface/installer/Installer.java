@@ -14,6 +14,7 @@ import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
 import javax.swing.JOptionPane;
 
+import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.utils.PreferencesUtils;
 import com.linkare.rec.impl.newface.utils.ZipExtractor;
 
@@ -242,6 +243,7 @@ public abstract class Installer implements Observer {
 
 				getInstallerService().setStatus(bundle.getString("remove.preferences"));
 				PreferencesUtils.removeUserPreference(INSTALLER_VERSION);
+				PreferencesUtils.removeUserPreference(VideoViewerController.VLC_PATH_KEY);
 			
 				//Bruno remover também o xvid e a directoria do VLC das preferences 
 
