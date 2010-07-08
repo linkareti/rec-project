@@ -30,8 +30,9 @@
 					dateSelectListener="#{scheduleController.onDateSelect}"
 					eventMoveListener="#{scheduleController.onEventMove}"
 					eventResizeListener="#{scheduleController.onEventResize}"
-					aspectRatio="0.95" onEventMoveUpdate="msg" firstHour="8"
+					onEventMoveUpdate="msg" firstHour="8"
 					onEventResizeUpdate="msg" slotMinutes="15" locale="pt" view="month">
+					
 					<p:scheduleEventDialog header="#{bundle['label.event.header']}">
 
 						<h:inputHidden id="idInternal"
