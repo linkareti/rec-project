@@ -708,6 +708,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			log.fine("Auto-play enabled = " + enabled);
 		}
 		this.experimentAutoplay = enabled;
+		
+		if (this.experimentAutoplay && currentState.equals(APPARATUS_CONFIGURED)) {
+			// TODO correr o play noutra thread pois este metodo e' executado a partir do GUI ???
+			play();
+		}
 	}
 	
 	/**
@@ -1174,12 +1179,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		userAcquisitionConfig = getCurrentCustomizer().getAcquisitionConfig();
 
 		setCurrentState(APPARATUS_CONFIGURED);
+		
+		// Forward event to the view
+		fireApplicationEvent(new ReCAppEvent(this, ReCCommand.CUSTOMIZER_DONE));
 
 		if (experimentAutoplay) {
 			play();
-		} else {
-			// Forward event to the view
-			fireApplicationEvent(new ReCAppEvent(this, ReCCommand.CUSTOMIZER_DONE));
 		}
 	}
 
