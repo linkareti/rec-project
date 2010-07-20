@@ -779,17 +779,22 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	 * @param evt
 	 */
 	private void lockableApparatus(ApparatusConnectorEvent evt) {
-		apparatusLockInitialTimeMs = TimeUtils.getSystemCurrentTimeMs();
-		millisToLockSuccess = evt.getMillisToLockSuccess();
-
-		getExperimentStatusActionBar().setActionStateText(
-				getStatusActionBarResourceMap().getString("lblActionState.apparatusLockable.text",
-						TimeUtils.msToSeconds(millisToLockSuccess)), GREEN);
-
-		getExperimentStatusActionBar().setActionStateLabelVisible(true);
-
-		apparatusLockTimer.setInitialDelay(1); // ready, set
-		apparatusLockTimer.start(); // go
+		
+		// if it is in auto-play mode doesn't show the countdown because it will play now
+		if (!recApplication.getExperimentAutoplay()) {
+			
+			apparatusLockInitialTimeMs = TimeUtils.getSystemCurrentTimeMs();
+			millisToLockSuccess = evt.getMillisToLockSuccess();
+			
+			getExperimentStatusActionBar().setActionStateText(
+					getStatusActionBarResourceMap().getString("lblActionState.apparatusLockable.text",
+							TimeUtils.msToSeconds(millisToLockSuccess)), GREEN);
+			
+			getExperimentStatusActionBar().setActionStateLabelVisible(true);
+			
+			apparatusLockTimer.setInitialDelay(1); // ready, set
+			apparatusLockTimer.start(); // go
+		}
 	}
 
 	private void lockApparatus() {

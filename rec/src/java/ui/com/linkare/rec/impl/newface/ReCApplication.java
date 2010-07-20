@@ -894,6 +894,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		if (currentState.matches(APPARATUS_CONFIGURED)) {
 			// Forward event to the view
 			fireApparatusStateChanged(LOCKABLE, evt);
+			
+			if (experimentAutoplay) {
+				play();
+			}
 		}
 	}
 
@@ -1182,10 +1186,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		
 		// Forward event to the view
 		fireApplicationEvent(new ReCAppEvent(this, ReCCommand.CUSTOMIZER_DONE));
-
-		if (experimentAutoplay) {
-			play();
-		}
 	}
 
 	@Override
