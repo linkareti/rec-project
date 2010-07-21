@@ -380,7 +380,9 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 */
 	// TODO CHECK WITH JP
 	public int getTotalSamples() {
-		return depacketizer.getLastSampleNum();
+		// o lastSampleNum por omissao tem -1 pois o primeiro index e' o 0 (zero)
+		return depacketizer.getLastSampleNum() + 1;
+		
 		// return getAcquisitionConfig().getTotalSamples();
 		/*
 		 * if(samples!=null) { synchronized(samples) { return samples.size(); }
