@@ -102,7 +102,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 		}
 		this.setChannelsInfo(temp);
 		temp = null;
-		System.gc();
 
 		ChannelParameter[] temp2 = null;
 		if (other.getHardwareParameters() != null) {
@@ -111,7 +110,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 		}
 		this.setHardwareParameters(temp2);
 		temp2 = null;
-		System.gc();
 
 		FrequencyScale[] temp3 = null;
 		if (other.getHardwareFrequencies() != null) {
@@ -120,7 +118,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 		}
 		this.setHardwareFrequencies(temp3);
 		temp3 = null;
-		System.gc();
 
 		this.setSelectedFrequency(other.getSelectedFrequency());
 
@@ -291,7 +288,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 			temp[index] = channelsInfo;
 			this.channelsInfo = temp;
 			temp = null;
-			System.gc();
 		}
 	}
 
@@ -368,7 +364,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 			temp[index] = hardwareParameters;
 			this.hardwareParameters = temp;
 			temp = null;
-			System.gc();
 		}
 	}
 
@@ -427,7 +422,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 			temp[index] = hardwareFrequencies;
 			this.hardwareFrequencies = temp;
 			temp = null;
-			System.gc();
 		}
 
 	}

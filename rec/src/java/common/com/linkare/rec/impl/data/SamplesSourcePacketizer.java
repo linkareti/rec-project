@@ -239,7 +239,6 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 			packetsLocations = new ArrayList<int[]>(totalPackets);
 			packetsLocations.addAll(tempPacketsLocations);
 			tempPacketsLocations = null;
-			System.gc();
 		}
 
 		this.totalPackets = totalPackets;

@@ -549,7 +549,6 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		dataClient.shutdown();
 
 		shuttingDown = false;
-		System.gc();
 	}
 
 	/** Utility field holding the MCHardwareChangeListener. */

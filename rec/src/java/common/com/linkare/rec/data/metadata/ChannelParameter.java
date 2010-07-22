@@ -50,7 +50,6 @@ public final class ChannelParameter implements org.omg.CORBA.portable.IDLEntity 
 		}
 		this.setParameterSelectionList(temp);
 		temp = null;
-		System.gc();
 		this.setSelectedParameterValue(other.getSelectedParameterValue());
 	}
 
@@ -130,7 +129,6 @@ public final class ChannelParameter implements org.omg.CORBA.portable.IDLEntity 
 			temp[index] = parameterSelectionList;
 			this.parameterSelectionList = temp;
 			temp = null;
-			System.gc();
 		}
 	}
 

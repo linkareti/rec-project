@@ -87,7 +87,6 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 			System.arraycopy(channelIndexesValidated, 0, channelIndexes, 0, indexChannelsValidated + 1);
 
 		channelIndexesValidated = null;
-		System.gc();
 
 		for (int i = 0; i < channelIndexes.length; i++) {
 			JToggleButton btnAddRemoveSeries = new JToggleButton(getSeriesName(i), true);

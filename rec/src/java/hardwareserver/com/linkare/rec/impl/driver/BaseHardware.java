@@ -96,7 +96,6 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			} catch (Exception ignored) {
 			}
 			driver = null;
-			System.gc();
 			System.exit(-1);
 			return null;
 		}

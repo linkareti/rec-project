@@ -89,7 +89,6 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		}
 		this.setSelectedHardwareParameters(temp);
 		temp = null;
-		System.gc();
 
 		ChannelAcquisitionConfig[] temp2 = null;
 		if (other.getChannelsConfig() != null) {
@@ -98,7 +97,6 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		}
 		this.setChannelsConfig(temp2);
 		temp2 = null;
-		System.gc();
 		this.setTotalSamples(other.getTotalSamples());
 	}
 
@@ -231,7 +229,6 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 			temp[index] = selectedHardwareParameters;
 			this.selectedHardwareParameters = temp;
 			temp = null;
-			System.gc();
 		}
 	}
 
@@ -331,7 +328,6 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 			temp[index] = channelsConfig;
 			this.channelsConfig = temp;
 			temp = null;
-			System.gc();
 		}
 
 	}

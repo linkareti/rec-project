@@ -512,7 +512,6 @@ public class AleatorioDriver extends BaseDriver {
 					// aleatorioDataSource.sendMovieFrame(movieFrames[i]);
 					// }//for_i
 					// movieFrames=null;
-					// System.gc();
 				}// if
 				else {// se nao quisermos filme segue por aqui. isto funciona!
 					while (!webcam.isVideoPlayerStarted()) {
@@ -560,7 +559,6 @@ public class AleatorioDriver extends BaseDriver {
 				// aleatorioDataSource.sendCenterCounter(centerCounterArray[index]);
 
 				webcamImage.flush();
-				System.gc();
 
 				try {
 					Thread.currentThread().sleep(50);
@@ -652,7 +650,6 @@ public class AleatorioDriver extends BaseDriver {
 			imageToAnalyze = videoReader.lastFrame;
 
 			// System.out.println("frames caught:"+ totalFrames);
-			System.gc();
 			System.out.println("Done Filming!");
 			recording = false;
 		}// run

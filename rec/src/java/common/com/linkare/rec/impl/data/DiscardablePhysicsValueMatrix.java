@@ -147,7 +147,6 @@ public class DiscardablePhysicsValueMatrix implements SamplesSource {
 				samplesRows.clear();
 				// Try to signal the garbage collector since we are near
 				// exaustion
-				System.gc();
 			} catch (IOException e) {
 
 			}

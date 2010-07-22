@@ -203,8 +203,6 @@ implements ControllerListener, DataSinkListener {
 		handler.queue.shutdown();
 		p.stop();
 		p.deallocate();
-
-		System.gc();
 	}// stopBuff
 
 	/**

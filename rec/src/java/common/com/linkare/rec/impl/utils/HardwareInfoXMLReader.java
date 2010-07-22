@@ -656,7 +656,6 @@ public class HardwareInfoXMLReader {
 		System.arraycopy(selectionListObj, 0, selectionList, 0, selectionList.length);
 		tableSelectionList = null;
 		selectionListObj = null;
-		System.gc();
 		return selectionList;
 
 	}

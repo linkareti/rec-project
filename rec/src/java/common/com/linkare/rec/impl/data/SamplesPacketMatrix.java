@@ -317,8 +317,6 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
 
 				samples.clear();
 
-				System.gc();
-
 			}
 
 			catch (IOException e)
@@ -499,8 +497,6 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
 
 				samples.clear();
 
-				System.gc();
-
 				return;
 			}
 
@@ -508,8 +504,6 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
 				ioDelegate.setFile(outputSamplesFile);
 
 				stream.writeObject(ioDelegate);
-
-				System.gc();
 			}
 
 			catch (IOException e)

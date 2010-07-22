@@ -84,7 +84,6 @@ public final class ChannelInfo implements IDLEntity {
 		}
 		this.setScales(temp);
 		temp = null;
-		System.gc();
 
 		this.setActualSelectedScale(other.getActualSelectedScale());
 
@@ -96,7 +95,6 @@ public final class ChannelInfo implements IDLEntity {
 
 		this.setFrequencies(temp2);
 		temp2 = null;
-		System.gc();
 
 		this.setSelectedFrequency(other.getSelectedFrequency());
 
@@ -107,7 +105,6 @@ public final class ChannelInfo implements IDLEntity {
 		}
 		this.setChannelParameters(temp3);
 		temp3 = null;
-		System.gc();
 
 		this.setChannelDirection(other.getChannelDirection());
 		this.setChannelIndependent(other.isChannelIndependent());
@@ -169,7 +166,6 @@ public final class ChannelInfo implements IDLEntity {
 			temp[index] = scales;
 			this.scales = temp;
 			temp = null;
-			System.gc();
 		}
 
 	}
@@ -248,7 +244,6 @@ public final class ChannelInfo implements IDLEntity {
 			temp[index] = frequencies;
 			this.frequencies = temp;
 			temp = null;
-			System.gc();
 		}
 
 	}
@@ -344,7 +339,6 @@ public final class ChannelInfo implements IDLEntity {
 			temp[index] = channelParameters;
 			this.channelParameters = temp;
 			temp = null;
-			System.gc();
 		}
 
 	}

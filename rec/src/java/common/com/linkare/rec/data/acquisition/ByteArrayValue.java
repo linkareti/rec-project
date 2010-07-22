@@ -35,7 +35,6 @@ public final class ByteArrayValue implements org.omg.CORBA.portable.IDLEntity {
 			temp[index] = byteValue;
 			this.data = temp;
 			temp = null;
-			System.gc();
 		}
 	}
 

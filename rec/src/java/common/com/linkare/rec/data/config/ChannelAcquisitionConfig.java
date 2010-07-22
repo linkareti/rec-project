@@ -81,7 +81,6 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 
 		this.setSelectedChannelParameters(temp);
 		temp = null;
-		System.gc();
 		this.setTotalSamples(other.getTotalSamples());
 	}
 
@@ -217,7 +216,6 @@ public final class ChannelAcquisitionConfig implements org.omg.CORBA.portable.ID
 			temp[index] = selectedChannelParameters;
 			this.selectedChannelParameters = temp;
 			temp = null;
-			System.gc();
 		}
 	}
 

@@ -162,8 +162,6 @@ public final class UserInfo implements IDLEntity
 
 		userProps = tempProps;
 		tempProps = null;
-		System.gc();
-
 	}
 
 	public Any getPropertyValue(String propName)
@@ -401,8 +399,6 @@ public final class UserInfo implements IDLEntity
 
 			userProps = tempProps;
 			tempProps = null;
-			System.gc();
-
 		}
 
 	}
