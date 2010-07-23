@@ -135,7 +135,6 @@ public class DataReceiverForQueue
 		messageQueue.shutdown();
 
 		log(Level.INFO, "receiver " + drw.getDelegate() + " - message queue is shut down!");
-		;
 
 		log(Level.INFO, "receiver " + drw.getDelegate() + " - informing dataReceiverForQueueListener that I'm gone!");
 
