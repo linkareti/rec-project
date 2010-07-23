@@ -8,7 +8,7 @@ set MAX_HEAP_MEM=@multicast.max.heap@
 set MULTICAST_BASE_DIR=%CD%\multicast
 
 set GENERIC_ORB_SYSPROPS=-Dorg.omg.CORBA.ORBClass=org.openorb.orb.core.ORB -Dorg.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton -Dopenorb.config=%MULTICAST_BASE_DIR%/etc/openorb.xml
-set MULTICAST_ORB_SYSPROPS=-Dopenorb.profile=ReCMultiCastController -DReC.MultiCastController.BindName=MultiCastController -DReC.MultiCastController.InitRef=MultiCastController
+set MULTICAST_ORB_SYSPROPS=-Dopenorb.profile=ReCMultiCastController -DReC.MultiCastController.BindName=MultiCastController -DReC.MultiCastController.InitRef=MultiCastController -DReC.PercentFreeMemoryThreshold2Serialization=10
 set MEM_SYSPROPS=-Xms%INITIAL_HEAP_MEM% -Xmx%MAX_HEAP_MEM%
 set LOG_SYSPROPS=-Djava.util.logging.config.file=%MULTICAST_BASE_DIR%/etc/loggers.config.properties 
 set TOOLKIT_SYSPROPS=-Djava.awt.headless=true
