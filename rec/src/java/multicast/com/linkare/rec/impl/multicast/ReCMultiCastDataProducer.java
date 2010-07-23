@@ -224,6 +224,11 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	public void fireStateChanged() {
 		dataReceiversQueue.stateChanged(getDataProducerState());
+		
+		if (getDataCollectorState().equals(com.linkare.rec.impl.utils.DataCollectorState.DP_ENDED)) {
+			// notificar o DataReceiverQueue para que a thread de notificacao dos eventos de newSamples termine
+			dataReceiversQueue.shutdown();
+		}
 	}
 
 	/* Proxy Logging methods */
