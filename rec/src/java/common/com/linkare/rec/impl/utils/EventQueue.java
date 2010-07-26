@@ -12,6 +12,8 @@ package com.linkare.rec.impl.utils;
 
 import java.util.ArrayList;
 
+import com.linkare.rec.impl.events.NewPoisonSamplesEvent;
+
 /**
  * 
  * 
@@ -109,6 +111,11 @@ public class EventQueue {
 						}
 						if (!stopdispatching) {
 							dispatcher.dispatchEvent(evt);
+						}
+						
+						// verificar se e' um evento de paragem da thread
+						if ( evt instanceof NewPoisonSamplesEvent ) {
+							shutdown();
 						}
 					}
 					try {

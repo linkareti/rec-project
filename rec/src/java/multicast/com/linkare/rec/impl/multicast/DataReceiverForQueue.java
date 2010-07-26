@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.NotAuthorized;
 import com.linkare.rec.impl.events.DataProducerStateChangeEvent;
+import com.linkare.rec.impl.events.NewPoisonSamplesEvent;
 import com.linkare.rec.impl.events.NewSamplesEvent;
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
 import com.linkare.rec.impl.utils.EventQueue;
@@ -232,6 +233,11 @@ public class DataReceiverForQueue
 					NewSamplesEvent evt = (NewSamplesEvent) o;
 
 					drw.newSamples(evt.getLargestNumPacket());
+					
+					// verificar se e' um evento de paragem da thread
+					if ( o instanceof NewPoisonSamplesEvent ) {
+						shutdownAsSoonAsPossible();
+					}
 
 				}
 

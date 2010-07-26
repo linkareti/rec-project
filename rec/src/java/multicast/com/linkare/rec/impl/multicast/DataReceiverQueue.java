@@ -19,6 +19,7 @@ import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.MaximumClientsReached;
 import com.linkare.rec.acquisition.NotAuthorized;
 import com.linkare.rec.impl.events.DataProducerStateChangeEvent;
+import com.linkare.rec.impl.events.NewPoisonSamplesEvent;
 import com.linkare.rec.impl.events.NewSamplesEvent;
 import com.linkare.rec.impl.exceptions.MaximumClientsReachedConstants;
 import com.linkare.rec.impl.logging.LoggerUtil;
@@ -78,6 +79,10 @@ public class DataReceiverQueue implements java.io.Serializable {
 
 	public void newSamples(int largestPacketNum) {
 		messageQueue.addEvent(new NewSamplesEvent(largestPacketNum));
+	}
+
+	public void newPoisonSamples(int largestPacketNum) {
+		messageQueue.addEvent(new NewPoisonSamplesEvent(largestPacketNum));
 	}
 
 	// Helper function for chat messages...
