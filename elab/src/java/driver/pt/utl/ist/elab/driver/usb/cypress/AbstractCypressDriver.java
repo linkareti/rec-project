@@ -60,7 +60,7 @@ public abstract class AbstractCypressDriver extends BaseDriver implements Cypres
 	public AbstractCypressDriver() {
 		cypressFinder = new CypressFinder();
 		cypressFinder.addCypressFinderListener(this);
-		cypressCommands = new EventQueue(new CommandDispatcher());
+		cypressCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName());
 	}
 
 	public byte getInputChannelNumber() {

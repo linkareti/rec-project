@@ -53,7 +53,7 @@ public class ClientQueue {
 	// private internal state variables
 	private List<DataClientForQueue> queueOrg = new LinkedList<DataClientForQueue>();
 
-	private EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher());
+	private EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher(), this.getClass().getSimpleName());
 
 	private ClientsConnectionCheck clientsConnectionChecker = new ClientsConnectionCheck();
 

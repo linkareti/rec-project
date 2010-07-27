@@ -51,6 +51,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 	protected void setLargestPacketKnown(int largestPacketKnown) {
 		this.largestPacketKnown = largestPacketKnown;
+		
+		log(Level.FINE, "Setting DataCollector for the largest packet know = " + largestPacketKnown);
 
 		synchronized (synchWaitFetchData) {
 			synchWaitFetchData.notify();

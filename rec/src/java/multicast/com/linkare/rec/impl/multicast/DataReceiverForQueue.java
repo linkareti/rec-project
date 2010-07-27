@@ -59,7 +59,7 @@ public class DataReceiverForQueue
 
 		}
 
-		messageQueue = new EventQueue(new DataReceiverQueueDispatcher());
+		messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass().getSimpleName());
 
 	}
 
@@ -235,7 +235,7 @@ public class DataReceiverForQueue
 					drw.newSamples(evt.getLargestNumPacket());
 					
 					// verificar se e' um evento de paragem da thread
-					if ( o instanceof NewPoisonSamplesEvent ) {
+					if (evt.isPoisoned()) {
 						shutdownAsSoonAsPossible();
 					}
 

@@ -286,7 +286,7 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		if (this.chatServer != null)
 			this.chatServer.addChatMessageListener(this);
 		if (messageQueue == null)
-			messageQueue = new EventQueue(new MessageQueueDispatcher());
+			messageQueue = new EventQueue(new MessageQueueDispatcher(), this.getClass().getSimpleName());
 	}
 
 	/**

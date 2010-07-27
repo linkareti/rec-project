@@ -54,7 +54,7 @@ public abstract class AbstractStampDriver extends BaseDriver implements StampFin
 	public AbstractStampDriver() {
 		stampFinder = new StampFinder();
 		stampFinder.addStampFinderListener(this);
-		stampCommands = new EventQueue(new CommandDispatcher());
+		stampCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName());
 	}
 
 	protected void loadCommandHandlers() {

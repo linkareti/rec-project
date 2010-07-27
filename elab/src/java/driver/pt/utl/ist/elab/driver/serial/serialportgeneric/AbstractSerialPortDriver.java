@@ -130,7 +130,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		}
 
 		serialFinder.addStampFinderListener(this);
-		serialCommands = new EventQueue(new CommandDispatcher());
+		serialCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName());
 	}
 
 	/**

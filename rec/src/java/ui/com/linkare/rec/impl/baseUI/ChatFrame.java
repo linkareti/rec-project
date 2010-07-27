@@ -476,7 +476,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 		if (chatServer != null)
 			chatServer.addChatMessageListener(this);
 		if (messageQueue == null)
-			messageQueue = new EventQueue(new MessageQueueDispatcher());
+			messageQueue = new EventQueue(new MessageQueueDispatcher(), "ChatServer - " + getUser());
 	}
 
 	/**

@@ -74,7 +74,7 @@ public class BaseDataProducer implements DataProducerOperations {
 	/** Creates a new instance of SimulationDataProducerImpl */
 	public BaseDataProducer(IDataSource dataSource, DataReceiver dataReceiver) {
 
-		eventQueueDataReceiver = new EventQueue(new DataProducerEventsDispatcher());
+		eventQueueDataReceiver = new EventQueue(new DataProducerEventsDispatcher(), this.getClass().getSimpleName());
 
 		this.dataSource = dataSource;
 

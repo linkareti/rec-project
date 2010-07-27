@@ -43,6 +43,13 @@ public class NewSamplesEvent implements IntersectableEvent {
 		largestNumPacket = Math.max(largestNumPacket, evt.getLargestNumPacket());
 		return true;
 	}
+	
+	/**
+	 * @return
+	 */
+	public boolean isPoisoned() {
+		return false;
+	}
 
 	/**
 	 * {@inheritDoc}

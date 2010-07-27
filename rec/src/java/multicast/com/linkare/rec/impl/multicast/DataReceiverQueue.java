@@ -51,7 +51,7 @@ public class DataReceiverQueue implements java.io.Serializable {
 	// private internal state variables
 	private List<DataReceiverForQueue> queueOrg = new LinkedList<DataReceiverForQueue>();
 
-	private EventQueue messageQueue = new EventQueue(new DataReceiverQueueDispatcher());
+	private EventQueue messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass().getSimpleName());
 
 	private DataReceiversConnectionCheck dataReceiversConnectionChecker = new DataReceiversConnectionCheck();
 
@@ -303,6 +303,11 @@ public class DataReceiverQueue implements java.io.Serializable {
 					} catch (Exception e) {
 						logThrowable("DataReceiverQueue - Error dispatching new samples message event!", e);
 					}
+				}
+				
+				// verificar se e' um evento de paragem da thread
+				if (evt.isPoisoned()) {
+					messageQueue.shutdown();
 				}
 			}
 		}

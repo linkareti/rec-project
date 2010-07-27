@@ -67,7 +67,7 @@ public class DataClientForQueue {
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_SECURITY_MANAGER);
 		}
 
-		messageQueue = new EventQueue(new DataClientQueueDispatcher());
+		messageQueue = new EventQueue(new DataClientQueueDispatcher(), "DataClientForQueue - " + userInfo.getUserName());
 	}
 
 	public String getUserName() {

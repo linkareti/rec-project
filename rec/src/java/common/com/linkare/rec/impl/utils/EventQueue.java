@@ -31,13 +31,15 @@ public class EventQueue {
 	 * Creates a new instance of EventQueue
 	 * 
 	 * @param dispatcher
+	 * @param threadName 
 	 */
 
-	public EventQueue(EventQueueDispatcher dispatcher) {
+	public EventQueue(EventQueueDispatcher dispatcher, String threadName) {
 		this.dispatcher = dispatcher;
 		levts = new ArrayList<Object>(1000);
-		threadedQueueDispatcher = new EventQueueThread();
+		threadedQueueDispatcher = new EventQueueThread(threadName);
 		threadedQueueDispatcher.setPriority(dispatcher.getPriority());
+		threadedQueueDispatcher.setName(threadedQueueDispatcher.getName() + " - " + threadName);
 		stopdispatching = false;
 		threadedQueueDispatcher.start();
 	}
@@ -69,8 +71,12 @@ public class EventQueue {
 	}
 
 	private class EventQueueThread extends Thread {
-		public EventQueueThread() {
-			// super.setPriority(Thread.NORM_PRIORITY+2);
+		private String threadName;
+		
+		public EventQueueThread(String threadName) {
+			super();
+//			super(threadName);
+			this.threadName = threadName;
 		}
 
 		public void run() {
@@ -113,10 +119,10 @@ public class EventQueue {
 							dispatcher.dispatchEvent(evt);
 						}
 						
-						// verificar se e' um evento de paragem da thread
-						if ( evt instanceof NewPoisonSamplesEvent ) {
-							shutdown();
-						}
+//						// verificar se e' um evento de paragem da thread
+//						if ( evt instanceof NewPoisonSamplesEvent ) {
+//							shutdown();
+//						}
 					}
 					try {
 						synchronized (levts) {

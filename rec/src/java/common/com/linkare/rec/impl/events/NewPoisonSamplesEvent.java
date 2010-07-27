@@ -38,6 +38,14 @@ public class NewPoisonSamplesEvent extends NewSamplesEvent {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public boolean isPoisoned() {
+		return true;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String toString() {
 		return super.toString();
 	}

@@ -147,7 +147,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	EventQueue eventQueue = null;
 
 	public BaseHardware() {
-		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher());
+		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName());
 
 		if (!GraphicsEnvironment.isHeadless()) {
 			JFrame frameForKill = new JFrame();
