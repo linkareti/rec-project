@@ -72,7 +72,8 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 		stream.defaultReadObject();
-		initInternalQueue();
+		// TODO pq inicializar as queues? lanca threads q n morrem
+//		initInternalQueue();
 	}
 
 	public ReCMultiCastDataProducer(IResource resource, int maximum_receivers, String fileName) {
