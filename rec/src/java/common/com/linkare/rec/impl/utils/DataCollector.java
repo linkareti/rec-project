@@ -43,6 +43,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	public DataCollector() {
 		samplesPackets = new SamplesPacketMatrix();
 		releaseAcquisitionThread();
+		setName(getName() + " - DataCollector");
 	}
 
 	public SamplesPacketSource getSamplesPacketSource() {
