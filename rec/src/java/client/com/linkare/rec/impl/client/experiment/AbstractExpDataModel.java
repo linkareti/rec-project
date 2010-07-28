@@ -556,6 +556,14 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		private long millisChecked = System.currentTimeMillis();
 		private Thread currentThread = null;
 		private boolean shutdown = false;
+		
+		/**
+		 * Creates the <code>AbstractExpDataModel.DataProducerRunningCheck</code>.
+		 */
+		public DataProducerRunningCheck() {
+			super();
+			setName(getName() + " - AbstractExpDataModel - DataProducerRunningCheck");
+		}
 
 		public void startCheck() {
 			setPriority(Thread.NORM_PRIORITY - 2);
