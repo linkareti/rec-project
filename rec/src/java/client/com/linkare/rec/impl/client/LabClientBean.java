@@ -153,6 +153,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 		(new Thread() {
 			public void run() {
+				setName(getName() + " - LabClientBean - refreshHardwares");
 				refreshHardwares();
 			}
 		}).start();
@@ -274,6 +275,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 		try {
 			connectThread = new Thread() {
 				public void run() {
+					setName(getName() + " - LabClientBean - doConnect");
 					doConnect(adress);
 				}
 			};
@@ -742,6 +744,14 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 	public class UsersListRefresher extends Thread {
 		private volatile boolean stop = false;
+		
+		/**
+		 * Creates the <code>LabClientBean.UsersListRefresher</code>.
+		 */
+		public UsersListRefresher() {
+			super();
+			setName(getName() + " - LabClientBean - UsersListRefresher");
+		}
 
 		public void stopNow() {
 			stop = true;

@@ -68,6 +68,14 @@ public class ConditionChecker {
 		private boolean cancel = false;
 		private boolean stoped = false;
 		public Object synchInternal = new Object();
+		
+		/**
+		 * Creates the <code>ConditionChecker.ConditionCheckerTask</code>.
+		 */
+		public ConditionCheckerTask() {
+			super();
+			setName(getName() + " - ConditionCheckerTask");
+		}
 
 		public void run() {
 			synchronized (synch) {

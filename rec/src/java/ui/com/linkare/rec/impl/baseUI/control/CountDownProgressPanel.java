@@ -34,6 +34,15 @@ public class CountDownProgressPanel extends javax.swing.JPanel {
 	}
 
 	private class Runner extends Thread {
+		
+		/**
+		 * Creates the <code>CountDownProgressPanel.Runner</code>.
+		 */
+		public Runner() {
+			super();
+			setName(getName() + " - CountDownProgressPanel - Runner");
+		}
+		
 		public void run() {
 			counter = countDownFrom;
 			stop = false;

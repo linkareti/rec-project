@@ -1125,6 +1125,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 		private volatile boolean stop = false;
 
 		public UsersListRefresher() {
+			setName(getName() + " - UsersListRefresher");
 		}
 
 		public void stopNow() {

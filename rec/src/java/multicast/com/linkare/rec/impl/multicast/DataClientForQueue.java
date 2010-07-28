@@ -101,6 +101,7 @@ public class DataClientForQueue {
 		// it's dispatching Thread...
 		(new Thread() {
 			public void run() {
+				setName(getName() + " - DataClientForQueue - shutdown");
 				shutdown();
 			}
 		}).start();

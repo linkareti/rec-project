@@ -39,7 +39,6 @@ public class EventQueue {
 		levts = new ArrayList<Object>(1000);
 		threadedQueueDispatcher = new EventQueueThread(threadName);
 		threadedQueueDispatcher.setPriority(dispatcher.getPriority());
-		threadedQueueDispatcher.setName(threadedQueueDispatcher.getName() + " - " + threadName);
 		stopdispatching = false;
 		threadedQueueDispatcher.start();
 	}
@@ -71,12 +70,10 @@ public class EventQueue {
 	}
 
 	private class EventQueueThread extends Thread {
-		private String threadName;
 		
 		public EventQueueThread(String threadName) {
 			super();
-//			super(threadName);
-			this.threadName = threadName;
+			setName(getName() + " - " + threadName);
 		}
 
 		public void run() {

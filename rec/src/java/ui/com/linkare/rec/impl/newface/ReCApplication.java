@@ -680,6 +680,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			new Thread() {
 				@Override
 				public void run() {
+					setName(getName() + " - ReCApplication - connect");
 					apparatusClientBean.connect(); // Background task
 				}
 			}.start();
