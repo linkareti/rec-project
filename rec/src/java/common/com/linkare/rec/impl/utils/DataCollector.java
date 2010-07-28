@@ -54,7 +54,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	protected void setLargestPacketKnown(int largestPacketKnown) {
 		this.largestPacketKnown = largestPacketKnown;
 		
-		log(Level.FINE, "Setting DataCollector for the largest packet know = " + largestPacketKnown);
+		log(Level.FINEST, "Setting DataCollector for the largest packet know = " + largestPacketKnown);
 
 		synchronized (synchWaitFetchData) {
 			synchWaitFetchData.notify();
@@ -206,63 +206,69 @@ public abstract class DataCollector extends Thread implements Serializable {
 		exit = false;
 		pause = false;
 		acquisitionThread = currentThread();
-
-		setDataCollectorState(DataCollectorState.DP_WAITING);
-
-		while (remoteDataProducerState.equals(DataProducerState.DP_WAITING) && !pause && !exit) {
-			try {
-				synchronized (synchWaitFetchData) {
-					synchWaitFetchData.wait();
-				}
-			} catch (Exception e) {
-				logThrowable("Exception while waiting for data available on Thread", e);
-				return;
-			}
-		}
-
-		setDataCollectorState(DataCollectorState.DP_STARTED_NODATA);
-
-		fetchPackets();
-
-		while (samplesPackets.size() - 1 <= largestPacketKnown
-				&& remoteDataProducerState.equals(DataProducerState.DP_STARTED) && !exit) {
-			while (pause && !exit) {
-				synchronized (synchWaitFetchData) {
-					DataCollectorState stateBeforePausing = getDataCollectorState();
-					setDataCollectorState(new DataCollectorState(DataCollectorState.DP_WAITING));
-					try {
+		
+		try {
+			setDataCollectorState(DataCollectorState.DP_WAITING);
+	
+			while (remoteDataProducerState.equals(DataProducerState.DP_WAITING) && !pause && !exit) {
+				try {
+					synchronized (synchWaitFetchData) {
 						synchWaitFetchData.wait();
-					} catch (Exception e) {
-						logThrowable("Exception while pausing", e);
-						return;
 					}
-					setDataCollectorState(new DataCollectorState(stateBeforePausing));
+				} catch (Exception e) {
+					logThrowable("Exception while waiting for data available on Thread", e);
+					return;
 				}
 			}
-
+	
+			setDataCollectorState(DataCollectorState.DP_STARTED_NODATA);
+	
 			fetchPackets();
-
-			while (remoteDataProducerState.equals(DataProducerState.DP_STARTED)
-					&& samplesPackets.size() - 1 == largestPacketKnown && !exit) {
-				synchronized (synchWaitFetchData) {
-					try {
-						synchWaitFetchData.wait();
-					} catch (Exception e) {
-						logThrowable("Exception while waiting for data available", e);
-						return;
+	
+			while (samplesPackets.size() - 1 <= largestPacketKnown
+					&& remoteDataProducerState.equals(DataProducerState.DP_STARTED) && !exit) {
+				while (pause && !exit) {
+					synchronized (synchWaitFetchData) {
+						DataCollectorState stateBeforePausing = getDataCollectorState();
+						setDataCollectorState(new DataCollectorState(DataCollectorState.DP_WAITING));
+						try {
+							synchWaitFetchData.wait();
+						} catch (Exception e) {
+							logThrowable("Exception while pausing", e);
+							return;
+						}
+						setDataCollectorState(new DataCollectorState(stateBeforePausing));
+					}
+				}
+	
+				fetchPackets();
+	
+				while (remoteDataProducerState.equals(DataProducerState.DP_STARTED)
+						&& samplesPackets.size() - 1 == largestPacketKnown && !exit) {
+					synchronized (synchWaitFetchData) {
+						try {
+							synchWaitFetchData.wait();
+						} catch (Exception e) {
+							logThrowable("Exception while waiting for data available", e);
+							return;
+						}
 					}
 				}
 			}
+	
+			fetchLastPackets();
+	
+			setDataCollectorState(new DataCollectorState(remoteDataProducerState));
+	
+			acquisitionThread = null;
+	
+			exit = true;
+			// pause = true;
+		
+		} catch (Exception e) {
+			logThrowable("Unexpected exception while running DataCollector!", e);
+			return;
 		}
-
-		fetchLastPackets();
-
-		setDataCollectorState(new DataCollectorState(remoteDataProducerState));
-
-		acquisitionThread = null;
-
-		exit = true;
-		// pause = true;
 
 	}
 

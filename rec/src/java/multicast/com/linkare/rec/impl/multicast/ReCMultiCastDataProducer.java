@@ -221,13 +221,17 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	public void fireNewSamples() {
 		int maxPacketNum = getMaxPacketNum();
-		if ((cachedAcqHeader.getTotalSamples() - 1 == maxPacketNum)
-				|| (maxPacketNum == -1 && getDataCollectorState().equals(
-						com.linkare.rec.impl.utils.DataCollectorState.DP_ENDED))) {
-			// condicao de te'rmino da recepcao de dados
-			dataReceiversQueue.newPoisonSamples(maxPacketNum);
-		} else {
-			dataReceiversQueue.newSamples(maxPacketNum);
+		try {
+			if ((getAcquisitionHeader().getTotalSamples() - 1 == maxPacketNum)
+					|| (maxPacketNum == -1 && getDataCollectorState().equals(
+							com.linkare.rec.impl.utils.DataCollectorState.DP_ENDED))) {
+				// condicao de te'rmino da recepcao de dados
+				dataReceiversQueue.newPoisonSamples(maxPacketNum);
+			} else {
+				dataReceiversQueue.newSamples(maxPacketNum);
+			}
+		} catch (NotAvailableException e) {
+			logThrowable("Exception obtaining aquisition header.", e);
 		}
 	}
 
