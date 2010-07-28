@@ -32,6 +32,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private int largestPacketKnown = MaxPacketNumUnknown.value;
 	private DataProducerState remoteDataProducerState = DataProducerState.DP_WAITING;
 	private DataCollectorState dataCollectorState = DataCollectorState.DP_WAITING;
+	private boolean startedSamples = false;
 
 	static {
 		Logger l = LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER);
@@ -77,7 +78,10 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 	public void addSamplesPackets(SamplesPacket[] samples_packet) {
 		samplesPackets.addSamplesPackets(samples_packet);
-		setDataCollectorState(DataCollectorState.DP_STARTED);
+		if (!startedSamples && samplesPackets.size() > 0) {
+			startedSamples  = true;
+			setDataCollectorState(DataCollectorState.DP_STARTED);
+		}
 		fireNewSamples();
 	}
 
