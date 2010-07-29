@@ -66,6 +66,14 @@ public class EventQueue {
 		}
 
 	}
+	
+	public boolean isStopdispatching() {
+		return stopdispatching;
+	}
+	
+	public boolean isEmpty() {
+		return levts.size() == 0;
+	}
 
 	private class EventQueueThread extends Thread {
 		

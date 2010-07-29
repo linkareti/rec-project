@@ -127,6 +127,8 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			}
 
 		}
+		
+		setTotalSamples(getAcquisitionConfig().getTotalSamples());
 	}
 
 	public HardwareAcquisitionConfig getAcquisitionConfig() {
@@ -318,31 +320,13 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		System.out.println("State CHANGED!");
 		if (getDataCollectorState().equals(com.linkare.rec.impl.utils.DataCollectorState.DP_ENDED)) {
 			fireExpDataModelListenerDataModelEnded();
-			if (dataProducerRunningCheck != null) {
-				// long millis=System.currentTimeMillis();
-				dataProducerRunningCheck.shutdown();
-				// System.out.println("Took me "+(System.currentTimeMillis()-millis)/1000
-				// +
-				// " s to shutdown the Thread checking if remote data producer is alive...");
-			}
+			shutdownDataProducerRunningCheck();
 		} else if (getDataCollectorState().equals(com.linkare.rec.impl.utils.DataCollectorState.DP_STOPED)) {
 			fireExpDataModelListenerDataModelStoped();
-			if (dataProducerRunningCheck != null) {
-				// long millis=System.currentTimeMillis();
-				dataProducerRunningCheck.shutdown();
-				// System.out.println("Took me "+(System.currentTimeMillis()-millis)/1000
-				// +
-				// " s to shutdown the Thread checking if remote data producer is alive...");
-			}
+			shutdownDataProducerRunningCheck();
 		} else if (getDataCollectorState().equals(com.linkare.rec.impl.utils.DataCollectorState.DP_ERROR)) {
 			fireExpDataModelListenerDataModelError();
-			if (dataProducerRunningCheck != null) {
-				// long millis=System.currentTimeMillis();
-				dataProducerRunningCheck.shutdown();
-				// System.out.println("Took me "+(System.currentTimeMillis()-millis)/1000
-				// +
-				// " s to shutdown the Thread checking if remote data producer is alive...");
-			}
+			shutdownDataProducerRunningCheck();
 		} else if (getDataCollectorState().equals(com.linkare.rec.impl.utils.DataCollectorState.DP_STARTED)) {
 			System.out.println("Data Model Started!");
 			fireExpDataModelListenerDataModelStarted();
@@ -533,6 +517,24 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 
 	public void newSamples(int largestNumPacket) {
 		setLargestPacketKnown(largestNumPacket);
+	}
+	
+	/**
+	 * Shutdown the RunningCheck thread if alive
+	 */
+	private void shutdownDataProducerRunningCheck() {
+		if (dataProducerRunningCheck != null) {
+			dataProducerRunningCheck.shutdown();
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void finishDataCollectorRun() {
+		super.finishDataCollectorRun();
+		shutdownDataProducerRunningCheck();
 	}
 
 	private int lastsample = 0;

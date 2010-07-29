@@ -50,6 +50,9 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	 * 
 	 */
 	private static final long serialVersionUID = 5596097800609305018L;
+
+	// TODO colocar numa propriedade
+	private static final long GET_SAMPLES_IDLE_TIME = 60000;
 	
 	private transient DataProducerWrapper remoteDataProducer = null;
 	private transient DataProducer _this = null;
@@ -64,6 +67,8 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	private boolean alreadySerialized = false;
 	private int maximum_receivers = 1;
+	
+	private long lastGetSamplesTimestamp = System.currentTimeMillis();
 
 	private void writeObject(ObjectOutputStream stream) throws IOException {
 		alreadySerialized = true;
@@ -104,6 +109,11 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	public void setRemoteDataProducer(DataProducer remoteDataProducer) {
 		this.remoteDataProducer = new DataProducerWrapper(remoteDataProducer);
 		setPriority(Thread.MAX_PRIORITY - 1);
+		try {
+			setTotalSamples(getAcquisitionHeader().getTotalSamples());
+		} catch (NotAvailableException e) {
+			logThrowable("Error getting total samples", e);
+		}
 		try {
 			setLargestPacketKnown(getRemoteDataProducer().getMaxPacketNum());
 		} catch (Exception e) {
@@ -189,14 +199,16 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	}
 
 	public boolean isDeactivationPossible() {
-		if (getDataProducerState().equals(DataProducerState.DP_ENDED)
-				|| getDataProducerState().equals(DataProducerState.DP_ERROR)
-				|| getDataProducerState().equals(DataProducerState.DP_STOPED)) {
+		boolean elapsedTime = lastGetSamplesTimestamp < System.currentTimeMillis() - GET_SAMPLES_IDLE_TIME;
+		if ((!getDataProducerState().equals(DataProducerState.DP_WAITING) && !getDataProducerState().equals(DataProducerState.DP_STARTED_NODATA))
+				&& isExit() && dataReceiversQueue.isShutdown() && elapsedTime) {
 			log(Level.FINE, getOID() + " is now deactivatable!");
-			log(Level.FINE, getOID() + " State is " + getDataProducerState());
+			log(Level.FINE, getOID() + " Data Producer State is " + getDataProducerState()
+					+ " and Data Receivers Queue Shutdown is " + dataReceiversQueue.isShutdown() + " and elapsed time is " + elapsedTime);
 			return true;
 		} else {
-			log(Level.FINE, getOID() + " is not deactivatable! State is " + getDataProducerState());
+			log(Level.FINE, getOID() + " is not deactivatable! Data Producer State is " + getDataProducerState()
+					+ " and Data Receivers Queue Shutdown is " + dataReceiversQueue.isShutdown() + " and elapsed time is " + elapsedTime);
 			return false;
 		}
 	}
@@ -221,17 +233,12 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	public void fireNewSamples() {
 		int maxPacketNum = getMaxPacketNum();
-		try {
-			if ((getAcquisitionHeader().getTotalSamples() - 1 == maxPacketNum)
-					|| (maxPacketNum == -1 && getDataCollectorState().equals(
-							com.linkare.rec.impl.utils.DataCollectorState.DP_ENDED))) {
-				// condicao de te'rmino da recepcao de dados
-				dataReceiversQueue.newPoisonSamples(maxPacketNum);
-			} else {
-				dataReceiversQueue.newSamples(maxPacketNum);
-			}
-		} catch (NotAvailableException e) {
-			logThrowable("Exception obtaining aquisition header.", e);
+		if ((getTotalSamples() - 1 == maxPacketNum)
+				|| (maxPacketNum == -1 && getDataCollectorState().equals(com.linkare.rec.impl.utils.DataCollectorState.DP_ENDED))) {
+			// condicao de te'rmino da recepcao de dados
+			dataReceiversQueue.newPoisonSamples(maxPacketNum);
+		} else {
+			dataReceiversQueue.newSamples(maxPacketNum);
 		}
 	}
 
@@ -299,6 +306,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	public SamplesPacket[] getSamples(int packetIndexStart, int packetIndexEnd)
 			throws NotAnAvailableSamplesPacketException {
 		try {
+			lastGetSamplesTimestamp = System.currentTimeMillis();
 			return getSamplesPacketSource().getSamplesPackets(packetIndexStart, packetIndexEnd);
 		} catch (SamplesPacketReadException e) {
 			logThrowable("Error getting samples packet " + e.getErrorPacketNumber()

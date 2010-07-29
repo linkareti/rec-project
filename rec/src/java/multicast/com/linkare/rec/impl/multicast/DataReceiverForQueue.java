@@ -61,6 +61,10 @@ public class DataReceiverForQueue
 		messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass().getSimpleName());
 
 	}
+	
+	public boolean isEmpty() {
+		return messageQueue.isEmpty();
+	}
 
 	/* Proxy Logging methods */
 	public void log(Level debugLevel, String message) {
@@ -143,6 +147,10 @@ public class DataReceiverForQueue
 			getDataReceiverForQueueListener().dataReceiverForQueueIsGone(this);
 
 		log(Level.INFO, "receiver " + drw.getDelegate() + " is shut down!");
+	}
+	
+	public boolean isShutdown() {
+		return shutdown;
 	}
 
 	public void stateChanged(DataProducerStateChangeEvent event)

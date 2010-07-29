@@ -33,6 +33,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private DataProducerState remoteDataProducerState = DataProducerState.DP_WAITING;
 	private DataCollectorState dataCollectorState = DataCollectorState.DP_WAITING;
 	private boolean startedSamples = false;
+	private int totalSamples;
 
 	static {
 		Logger l = LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER);
@@ -225,8 +226,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	
 			fetchPackets();
 	
-			while (samplesPackets.size() - 1 <= largestPacketKnown
-					&& remoteDataProducerState.equals(DataProducerState.DP_STARTED) && !exit) {
+			while (samplesPackets.size() < totalSamples && !exit) {
 				while (pause && !exit) {
 					synchronized (synchWaitFetchData) {
 						DataCollectorState stateBeforePausing = getDataCollectorState();
@@ -242,34 +242,37 @@ public abstract class DataCollector extends Thread implements Serializable {
 				}
 	
 				fetchPackets();
-	
-				while (remoteDataProducerState.equals(DataProducerState.DP_STARTED)
-						&& samplesPackets.size() - 1 == largestPacketKnown && !exit) {
-					synchronized (synchWaitFetchData) {
-						try {
-							synchWaitFetchData.wait();
-						} catch (Exception e) {
-							logThrowable("Exception while waiting for data available", e);
-							return;
-						}
+				
+				synchronized (synchWaitFetchData) {
+					// se ainda nao obteve tudo e entretanto nao chegou notificacao de nova amostra fica 'a espera
+					if (samplesPackets.size() < totalSamples && !exit
+							&& samplesPackets.size() - 1 == largestPacketKnown) {
+						synchWaitFetchData.wait();
 					}
 				}
 			}
-	
-			fetchLastPackets();
-	
-			setDataCollectorState(new DataCollectorState(remoteDataProducerState));
-	
-			acquisitionThread = null;
-	
-			exit = true;
-			// pause = true;
+			
+			finishDataCollectorRun();
 		
 		} catch (Exception e) {
 			logThrowable("Unexpected exception while running DataCollector!", e);
 			return;
 		}
 
+	}
+	
+	/**
+	 * Cleanup before the data collector thread terminates
+	 */
+	protected void finishDataCollectorRun() {
+		fetchLastPackets();
+		
+		setDataCollectorState(new DataCollectorState(remoteDataProducerState));
+
+		acquisitionThread = null;
+
+		exit = true;
+		// pause = true;
 	}
 
 	protected void shutdownThread() {
@@ -375,5 +378,19 @@ public abstract class DataCollector extends Thread implements Serializable {
 		synchronized (synchWaitFetchData) {
 			synchWaitFetchData.notifyAll();
 		}
+	}
+
+	/**
+	 * @return the totalSamples
+	 */
+	public int getTotalSamples() {
+		return totalSamples;
+	}
+
+	/**
+	 * @param totalSamples the totalSamples to set
+	 */
+	public void setTotalSamples(int totalSamples) {
+		this.totalSamples = totalSamples;
 	}
 }

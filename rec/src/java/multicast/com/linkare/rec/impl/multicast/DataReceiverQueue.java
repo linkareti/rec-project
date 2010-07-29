@@ -200,6 +200,32 @@ public class DataReceiverQueue implements java.io.Serializable {
 	public boolean contains(DataReceiverForQueue drfq) {
 		return queueOrg.contains(drfq);
 	}
+	
+	public boolean isShutdown() {
+		return messageQueue.isStopdispatching() && isDispatcherQueueShutdown();
+	}
+	
+	private boolean isDispatcherQueueShutdown() {
+		boolean ret = true;
+		Iterator<DataReceiverForQueue> queue = iterator();
+		while (queue.hasNext()) {
+			ret = ret && queue.next().isShutdown();
+		}
+		return ret;
+	}
+	
+	public boolean isEmpty() {
+		return messageQueue.isEmpty() && isDispatcherQueueEmpty();
+	}
+	
+	private boolean isDispatcherQueueEmpty() {
+		boolean ret = true;
+		Iterator<DataReceiverForQueue> queue = iterator();
+		while (queue.hasNext()) {
+			ret = ret && queue.next().isEmpty();
+		}
+		return ret;
+	}
 
 	public String toString() {
 		StringBuffer returnDataReceivers = new StringBuffer("");
@@ -307,7 +333,10 @@ public class DataReceiverQueue implements java.io.Serializable {
 				
 				// verificar se e' um evento de paragem da thread
 				if (evt.isPoisoned()) {
+					log(Level.INFO, "DataReceiverQueue - shutting down message queue!");
 					messageQueue.shutdown();
+					log(Level.INFO, "DataReceiverQueue - shutting down dataReceivers connection checker!");
+					dataReceiversConnectionChecker.shutdown();
 				}
 			}
 		}
