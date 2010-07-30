@@ -520,7 +520,7 @@ implements ControllerListener, DataSinkListener {
 		}
 
 		private com.linkare.rec.impl.utils.EventQueue queue = new com.linkare.rec.impl.utils.EventQueue(
-				new VideoBufferDispatcher());
+				new VideoBufferDispatcher(), this.getClass().getSimpleName());
 
 		/**
 		 *Inner class VideoBufferDispatcher

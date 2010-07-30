@@ -20,7 +20,7 @@ import pt.utl.ist.elab.driver.aleatorio.Hardware.WebCamThread;
 public class VideoReader extends Thread {
 
 	private com.linkare.rec.impl.utils.EventQueue queue = new com.linkare.rec.impl.utils.EventQueue(
-			new VideoBufferDispatcher());
+			new VideoBufferDispatcher(), this.getClass().getSimpleName());
 	private int totalFrames, frameCounter, bufferCounter;
 	private WebCamThread webcam = null;
 	private AleatorioDataSource aDS = null;
