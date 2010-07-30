@@ -29,10 +29,10 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		initComponents();
 
 		Hashtable slidersPosLabels = new Hashtable(4);
-		slidersPosLabels.put(new Integer(2000), new JLabel("2.0"));
-		slidersPosLabels.put(new Integer(3000), new JLabel("3.0"));
 		slidersPosLabels.put(new Integer(4000), new JLabel("4.0"));
 		slidersPosLabels.put(new Integer(5000), new JLabel("5.0"));
+		slidersPosLabels.put(new Integer(6000), new JLabel("6.0"));
+		slidersPosLabels.put(new Integer(7000), new JLabel("7.0"));
 
 		sldPos1.setLabelTable(slidersPosLabels);
 		sldPos2.setLabelTable(slidersPosLabels);
@@ -283,8 +283,8 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 160));
 		sldPos1.setMajorTickSpacing(1000);
-		sldPos1.setMaximum(5000);
-		sldPos1.setMinimum(2000);
+		sldPos1.setMaximum(7000);
+		sldPos1.setMinimum(4000);
 		sldPos1.setMinorTickSpacing(100);
 		sldPos1.setPaintLabels(true);
 		sldPos1.setPaintTicks(true);
@@ -306,14 +306,14 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		jPanel5.add(sldPos1, gridBagConstraints);
 
 		sldPos2.setMajorTickSpacing(1000);
-		sldPos2.setMaximum(5000);
-		sldPos2.setMinimum(2000);
+		sldPos2.setMaximum(7000);
+		sldPos2.setMinimum(4000);
 		sldPos2.setMinorTickSpacing(100);
 		sldPos2.setPaintLabels(true);
 		sldPos2.setPaintTicks(true);
 		sldPos2.setPaintTrack(false);
 		sldPos2.setSnapToTicks(true);
-		sldPos2.setValue(5000);
+		sldPos2.setValue(7000);
 		sldPos2.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldPos2.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldPos2.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -341,7 +341,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		jPanel5.add(lblErrorVolsAreEqua, gridBagConstraints);
 
-		tfPos1.setText("2.0");
+		tfPos1.setText("4.0");
 		tfPos1.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				tfPos1FocusLost(evt);
@@ -352,7 +352,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
 		jPanel5.add(tfPos1, gridBagConstraints);
 
-		tfPos2.setText("5.0");
+		tfPos2.setText("7.0");
 		tfPos2.addFocusListener(new java.awt.event.FocusAdapter() {
 			public void focusLost(java.awt.event.FocusEvent evt) {
 				tfPos2FocusLost(evt);
