@@ -514,10 +514,10 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
 		sldNumSamples.setValue(150);
 		tfNumSamples.setText("150");
-		sldPos1.setValue(2000);
-		tfPos1.setValue(new Float(2.0));
-		sldPos2.setValue(5000);
-		tfPos2.setValue(new Float(5.0));
+		sldPos1.setValue(4000);
+		tfPos1.setValue(new Float(4.0));
+		sldPos2.setValue(7000);
+		tfPos2.setValue(new Float(7.0));
 		sldFreq.setValue(150);
 		tfFreq.setText("" + 150);
 	}// GEN-LAST:event_btnDefaultsActionPerformed

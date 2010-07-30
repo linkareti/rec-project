@@ -50,8 +50,8 @@
     </ChannelInfo>
     <ChannelInfo name="Volume" independent="false" direction="CHANNEL_INPUT">
         <scale label="Volume [ml]" physicsunitname="litros" physicsunitsymbol="l" multiplier="milli" selected="true">
-            <min><PhysicsVal type="float">2</PhysicsVal></min>
-            <max><PhysicsVal type="float">5</PhysicsVal></max>
+            <min><PhysicsVal type="float">4</PhysicsVal></min>
+            <max><PhysicsVal type="float">7</PhysicsVal></max>
             <step><PhysicsVal type="float">0.001</PhysicsVal></step>
             <errordefault><PhysicsVal type="float">0.20</PhysicsVal></errordefault>
         </scale>
