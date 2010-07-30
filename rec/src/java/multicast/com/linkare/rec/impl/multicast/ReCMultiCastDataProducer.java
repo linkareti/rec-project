@@ -35,6 +35,7 @@ import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.ResourceType;
 import com.linkare.rec.impl.utils.DataCollector;
 import com.linkare.rec.impl.utils.Deactivatable;
+import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
@@ -51,8 +52,8 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	 */
 	private static final long serialVersionUID = 5596097800609305018L;
 
-	// TODO colocar numa propriedade
-	private static final long GET_SAMPLES_IDLE_TIME = 60000;
+	private static final long GET_SAMPLES_IDLE_TIME = Defaults.defaultIfEmpty(System
+			.getProperty("ReC.MultiCastDataProducer.GET_SAMPLES_IDLE_TIME"), 60) * 1000;
 	
 	private transient DataProducerWrapper remoteDataProducer = null;
 	private transient DataProducer _this = null;
