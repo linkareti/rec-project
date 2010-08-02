@@ -205,11 +205,13 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 				&& isExit() && dataReceiversQueue.isShutdown() && elapsedTime) {
 			log(Level.FINE, getOID() + " is now deactivatable!");
 			log(Level.FINE, getOID() + " Data Producer State is " + getDataProducerState()
-					+ " and Data Receivers Queue Shutdown is " + dataReceiversQueue.isShutdown() + " and elapsed time is " + elapsedTime);
+					+ " and Data Receivers Queue Shutdown is " + dataReceiversQueue.isShutdown()
+					+ " DataCollector exit is " + isExit() + " and elapsed time is " + elapsedTime);
 			return true;
 		} else {
 			log(Level.FINE, getOID() + " is not deactivatable! Data Producer State is " + getDataProducerState()
-					+ " and Data Receivers Queue Shutdown is " + dataReceiversQueue.isShutdown() + " and elapsed time is " + elapsedTime);
+					+ " and Data Receivers Queue Shutdown is " + dataReceiversQueue.isShutdown()
+					+ " DataCollector exit is " + isExit() + " and elapsed time is " + elapsedTime);
 			return false;
 		}
 	}
