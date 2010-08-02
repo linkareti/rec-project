@@ -183,7 +183,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 	}
 
 	private void remoteDataProducerStoped() {
-		setExit(true);
+		// TODO verificar que nao pode sair sem ter recebido todas as amostras
+//		setExit(true);
 	}
 
 	private void remoteDataProducerError() {
