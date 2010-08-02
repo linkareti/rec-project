@@ -227,6 +227,13 @@ form#content div {
 	margin-right:auto !important;
 	cursor:default !important;
 }
+
+.yui-skin-sam th.yui-dt-asc  .yui-dt-liner .yui-dt-label .yui-dt-sortable {background: url('../../resources/images/dt-arrow-up.png') top right no-repeat !important;}
+.yui-skin-sam th.yui-dt-desc .yui-dt-liner .yui-dt-label .yui-dt-sortable {background: url('../../resources/images/dt-arrow-dn.png') top right no-repeat !important;}
+
+.yui-skin-sam th.yui-dt-asc  .yui-dt-liner,.yui-skin-sam th.yui-dt-desc .yui-dt-liner {background: none !important;}
+
+
 .title_col .yui-dt-liner,.details_col .yui-dt-liner,.links_col .yui-dt-liner,.yui-dt-last .yui-dt-empty .yui-dt-liner {
 	margin:0 !important;
 	padding:2px 4px 2px 4px !important;

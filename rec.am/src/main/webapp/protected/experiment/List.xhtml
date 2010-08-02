@@ -18,9 +18,9 @@
 				lastPageLinkLabel="#{bundle['label.lastPage']}"
 				nextPageLinkLabel="#{bundle['label.nextPage']}"
 				previousPageLinkLabel="#{bundle['label.previousPage']}"
-				scrollable="false">
+				scrollable="false" update="display">
 
-				<p:column width="200" sortBy="#{item.name}" filterBy="#{item.name}">
+				<p:column sortBy="#{item.name}" filterBy="#{item.name}">
 					<f:facet name="header">
 						<h:outputText value="#{bundle['experiment.name']}" />
 					</f:facet>
