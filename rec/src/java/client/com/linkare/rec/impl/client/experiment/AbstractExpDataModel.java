@@ -129,6 +129,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		}
 		
 		setTotalSamples(getAcquisitionConfig().getTotalSamples());
+		setFrequency((long) getAcquisitionConfig().getSelectedFrequency().getFrequency());
 	}
 
 	public HardwareAcquisitionConfig getAcquisitionConfig() {

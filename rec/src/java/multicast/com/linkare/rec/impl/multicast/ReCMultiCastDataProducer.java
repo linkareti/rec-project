@@ -112,8 +112,9 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		setPriority(Thread.MAX_PRIORITY - 1);
 		try {
 			setTotalSamples(getAcquisitionHeader().getTotalSamples());
+			setFrequency((long) getAcquisitionHeader().getSelectedFrequency().getFrequency());
 		} catch (NotAvailableException e) {
-			logThrowable("Error getting total samples", e);
+			logThrowable("Error getting AcquisitionHeader info", e);
 		}
 		try {
 			setLargestPacketKnown(getRemoteDataProducer().getMaxPacketNum());
@@ -304,6 +305,17 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		setRemoteDataProducerState(DataProducerState.DP_ERROR);
 		dataReceiversQueue.shutdown();
 		shutdownThread();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void finishDataCollectorRun() {
+		super.finishDataCollectorRun();
+		// condicao de te'rmino das queues
+		log(Level.FINEST, "Finishing data collector run - Creating poison event to terminate queues");
+		dataReceiversQueue.newPoisonSamples(getLargestPacketKnown());
 	}
 
 	public SamplesPacket[] getSamples(int packetIndexStart, int packetIndexEnd)

@@ -34,6 +34,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private DataCollectorState dataCollectorState = DataCollectorState.DP_WAITING;
 	private boolean startedSamples = false;
 	private int totalSamples;
+	private long frequency = 100; // default
+	long lastFetchPacketsTimestamp = System.currentTimeMillis();
 
 	static {
 		Logger l = LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER);
@@ -60,6 +62,10 @@ public abstract class DataCollector extends Thread implements Serializable {
 		synchronized (synchWaitFetchData) {
 			synchWaitFetchData.notify();
 		}
+	}
+	
+	protected int getLargestPacketKnown() {
+		return largestPacketKnown;
 	}
 
 	private void releaseAcquisitionThread() {
@@ -178,13 +184,11 @@ public abstract class DataCollector extends Thread implements Serializable {
 	}
 
 	private void remoteDataProducerEnded() {
-		// TODO verificar que nao pode sair sem ter recebido todas as amostras
-//		setExit(true);
+		setExit(true);
 	}
 
 	private void remoteDataProducerStoped() {
-		// TODO verificar que nao pode sair sem ter recebido todas as amostras
-//		setExit(true);
+		setExit(true);
 	}
 
 	private void remoteDataProducerError() {
@@ -216,7 +220,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 			while (remoteDataProducerState.equals(DataProducerState.DP_WAITING) && !pause && !exit) {
 				try {
 					synchronized (synchWaitFetchData) {
-						synchWaitFetchData.wait();
+						synchWaitFetchData.wait(calcWaitTime());
 					}
 				} catch (Exception e) {
 					logThrowable("Exception while waiting for data available on Thread", e);
@@ -226,7 +230,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	
 			setDataCollectorState(DataCollectorState.DP_STARTED_NODATA);
 	
-			fetchPackets();
+			fetchAvailablePackets();
 	
 			while (samplesPackets.size() < totalSamples && !exit) {
 				while (pause && !exit) {
@@ -234,7 +238,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 						DataCollectorState stateBeforePausing = getDataCollectorState();
 						setDataCollectorState(new DataCollectorState(DataCollectorState.DP_WAITING));
 						try {
-							synchWaitFetchData.wait();
+							synchWaitFetchData.wait(calcWaitTime());
 						} catch (Exception e) {
 							logThrowable("Exception while pausing", e);
 							return;
@@ -249,7 +253,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 					// se ainda nao obteve tudo e entretanto nao chegou notificacao de nova amostra fica 'a espera
 					if (samplesPackets.size() < totalSamples && !exit
 							&& samplesPackets.size() - 1 == largestPacketKnown) {
-						synchWaitFetchData.wait();
+						synchWaitFetchData.wait(calcWaitTime());
 					}
 				}
 			}
@@ -267,7 +271,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	 * Cleanup before the data collector thread terminates
 	 */
 	protected void finishDataCollectorRun() {
-		fetchLastPackets();
+		fetchAvailablePackets();
 		
 		setDataCollectorState(new DataCollectorState(remoteDataProducerState));
 
@@ -276,7 +280,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		exit = true;
 		// pause = true;
 	}
-
+	
 	protected void shutdownThread() {
 		if (acquisitionThread != null)
 			try {
@@ -287,6 +291,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	}
 
 	private void fetchPackets() {
+		lastFetchPacketsTimestamp = System.currentTimeMillis();
 		int lastPacket = samplesPackets.size();
 		if (lastPacket > largestPacketKnown || largestPacketKnown == MaxPacketNumUnknown.value)
 			return;
@@ -309,31 +314,18 @@ public abstract class DataCollector extends Thread implements Serializable {
 		}
 	}
 
-	public void fetchLastPackets() {
+	public void fetchAvailablePackets() {
 		try {
 			largestPacketKnown = Math.max(getRemoteDataProducer().getMaxPacketNum(), largestPacketKnown);
-
-			/*
-			 * System.out.println("***********************************");
-			 * System.out.println("***********************************");
-			 * System.out.println("***********************************");
-			 * System.out.println(
-			 * "Fetching last packets... largest packet known after direct query to the remote data producer is now "
-			 * +largestPacketKnown);
-			 * System.out.println("***********************************");
-			 * System.out.println("***********************************");
-			 * System.out.println("***********************************");
-			 */
-
 		} catch (Exception e) {
 			if (!isConnected())
 				setRemoteDataProducerState(DataProducerState.DP_ERROR);
 		}
+		
 		fetchPackets();
 		if (largestPacketKnown != samplesPackets.size() - 1)
 			if (!isConnected())
 				setRemoteDataProducerState(DataProducerState.DP_ERROR);
-
 	}
 
 	private boolean isConnected() {
@@ -381,18 +373,37 @@ public abstract class DataCollector extends Thread implements Serializable {
 			synchWaitFetchData.notifyAll();
 		}
 	}
+	
+	private long calcWaitTime() {
+		return frequency - (System.currentTimeMillis() - lastFetchPacketsTimestamp);
+	}
 
 	/**
 	 * @return the totalSamples
 	 */
-	public int getTotalSamples() {
+	protected int getTotalSamples() {
 		return totalSamples;
 	}
 
 	/**
 	 * @param totalSamples the totalSamples to set
 	 */
-	public void setTotalSamples(int totalSamples) {
+	protected void setTotalSamples(int totalSamples) {
 		this.totalSamples = totalSamples;
 	}
+
+	/**
+	 * @return the frequency
+	 */
+	protected long getFrequency() {
+		return frequency;
+	}
+
+	/**
+	 * @param frequency the frequency to set
+	 */
+	protected void setFrequency(long frequency) {
+		this.frequency = frequency;
+	}
+	
 }
