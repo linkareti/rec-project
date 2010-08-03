@@ -244,6 +244,7 @@ public class DataReceiverForQueue
 					
 					// verificar se e' um evento de paragem da thread
 					if (evt.isPoisoned()) {
+						log(Level.FINE, "receiver " + drw.getDelegate() + " - received a poison sample with largest num packet = " + evt.getLargestNumPacket());
 						shutdownAsSoonAsPossible();
 					}
 

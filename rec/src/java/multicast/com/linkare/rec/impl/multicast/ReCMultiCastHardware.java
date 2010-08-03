@@ -292,7 +292,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients);
 			recMultiCastDataProducer.setRemoteDataProducer(hardware.start(recMultiCastDataProducer.getDataReceiver()));
 
-			return recMultiCastDataProducer._this();
+			DataProducer dataProducer = recMultiCastDataProducer._this();
+			recMultiCastDataProducer.initAcquisitionThread();
+			return dataProducer;
 		} else
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
 					proxyHardwareState, HardwareState.CONFIGURING);
@@ -323,7 +325,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients);
 			recMultiCastDataProducer.setRemoteDataProducer(hardware.startOutput(recMultiCastDataProducer
 					.getDataReceiver(), data_source));
-			return recMultiCastDataProducer._this();
+			DataProducer dataProducer = recMultiCastDataProducer._this();
+			recMultiCastDataProducer.initAcquisitionThread();
+			return dataProducer;
 		} else
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
 					proxyHardwareState, HardwareState.CONFIGURING);
@@ -392,7 +396,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_OPERATION);
 		}
 
-		return producer._this();
+		DataProducer dataProducer = recMultiCastDataProducer._this();
+		recMultiCastDataProducer.initAcquisitionThread();
+		return dataProducer;
 	}
 
 	public void sendMessage(UserInfo user, String clientTo, String message) throws NotRegistered, NotAuthorized {

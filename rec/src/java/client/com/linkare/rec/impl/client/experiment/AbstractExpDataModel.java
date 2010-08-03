@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import com.linkare.rec.acquisition.DataProducer;
 import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.DataReceiverHelper;
 import com.linkare.rec.acquisition.DataReceiverOperations;
@@ -71,6 +72,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		depacketizer = new SamplesPacketSourceDepacketizer();
 		depacketizer.addSamplesSourceEventListener(new SamplesDepacketizingAdapter());
 		depacketizer.setSamplesPacketSource(getSamplesPacketSource());
+		initAcquisitionThread();
 	}
 
 	private DataReceiver getDataReceiver() {

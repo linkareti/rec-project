@@ -46,7 +46,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 	public DataCollector() {
 		samplesPackets = new SamplesPacketMatrix();
-		releaseAcquisitionThread();
+//		releaseAcquisitionThread();
 		setName(getName() + " - DataCollector");
 	}
 
@@ -68,15 +68,15 @@ public abstract class DataCollector extends Thread implements Serializable {
 		return largestPacketKnown;
 	}
 
-	private void releaseAcquisitionThread() {
-		initAcquisitionThread();
+//	private void releaseAcquisitionThread() {
+//		initAcquisitionThread();
+//
+//		synchronized (synchWaitFetchData) {
+//			synchWaitFetchData.notify();
+//		}
+//	}
 
-		synchronized (synchWaitFetchData) {
-			synchWaitFetchData.notify();
-		}
-	}
-
-	private void initAcquisitionThread() {
+	public void initAcquisitionThread() {
 		if (!acquisitionThreadInited) {
 			acquisitionThreadInited = true;
 			start();
