@@ -290,10 +290,12 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			DefaultResource dataProducerResource = getResource().createChildResource();
 			recMultiCastDataProducer = ReCMultiCastDataProducerFactory.createReCMultiCastDataProducer(
 					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients);
-			recMultiCastDataProducer.setRemoteDataProducer(hardware.start(recMultiCastDataProducer.getDataReceiver()));
 
-			DataProducer dataProducer = recMultiCastDataProducer._this();
-			recMultiCastDataProducer.initAcquisitionThread();
+			DataProducer dataProducer = recMultiCastDataProducer._this(); // registar o objecto corba
+			log(Level.INFO, "Going to start the hardware");
+			recMultiCastDataProducer.setRemoteDataProducer(hardware.start(recMultiCastDataProducer.getDataReceiver())); // iniciar o driver
+			recMultiCastDataProducer.initAcquisitionThread(); // iniciar a aquisicao de dados do driver
+			
 			return dataProducer;
 		} else
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
@@ -323,10 +325,13 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			DefaultResource dataProducerResource = getResource().createChildResource();
 			recMultiCastDataProducer = ReCMultiCastDataProducerFactory.createReCMultiCastDataProducer(
 					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients);
+			
+			DataProducer dataProducer = recMultiCastDataProducer._this(); // registar o objecto corba
+			log(Level.INFO, "Going to start output the hardware");
 			recMultiCastDataProducer.setRemoteDataProducer(hardware.startOutput(recMultiCastDataProducer
-					.getDataReceiver(), data_source));
-			DataProducer dataProducer = recMultiCastDataProducer._this();
-			recMultiCastDataProducer.initAcquisitionThread();
+					.getDataReceiver(), data_source)); // iniciar o driver
+			recMultiCastDataProducer.initAcquisitionThread(); // iniciar a aquisicao de dados do driver
+			
 			return dataProducer;
 		} else
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,

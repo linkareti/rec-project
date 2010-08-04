@@ -214,6 +214,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 		pause = false;
 		acquisitionThread = currentThread();
 		
+		log(Level.INFO, "DataCollector started. Remote data producer state = " + remoteDataProducerState);
+		
 		try {
 			setDataCollectorState(DataCollectorState.DP_WAITING);
 	
@@ -229,7 +231,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 			}
 	
 			setDataCollectorState(DataCollectorState.DP_STARTED_NODATA);
-	
+			log(Level.FINEST, "DataCollector is going to fetch available packets");
 			fetchAvailablePackets();
 	
 			while (samplesPackets.size() < totalSamples && !exit) {
@@ -259,6 +261,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 			}
 			
 			finishDataCollectorRun();
+			
+			log(Level.INFO, "DataCollector ended. Remote data producer state = " + remoteDataProducerState);
 		
 		} catch (Exception e) {
 			logThrowable("Unexpected exception while running DataCollector!", e);
@@ -271,8 +275,9 @@ public abstract class DataCollector extends Thread implements Serializable {
 	 * Cleanup before the data collector thread terminates
 	 */
 	protected void finishDataCollectorRun() {
-		fetchAvailablePackets();
+		log(Level.FINEST, "DataCollector is going to finish the run");
 		
+		fetchAvailablePackets();
 		setDataCollectorState(new DataCollectorState(remoteDataProducerState));
 
 		acquisitionThread = null;
@@ -296,6 +301,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		if (lastPacket > largestPacketKnown || largestPacketKnown == MaxPacketNumUnknown.value)
 			return;
 		try {
+			log(Level.FINE, "DataCollector is going to fetch packets from " + lastPacket + " to " + largestPacketKnown);
 			addSamplesPackets(getRemoteDataProducer().getSamples(lastPacket, largestPacketKnown));
 		} catch (NotAnAvailableSamplesPacketException e) {
 			logThrowable("Error fetching samples Packet " + e.firstPacketNotFound, e);
