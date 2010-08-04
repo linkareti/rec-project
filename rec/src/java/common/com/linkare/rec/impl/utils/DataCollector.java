@@ -24,6 +24,10 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  * @author José Pedro Pereira - Linkare TI
  */
 public abstract class DataCollector extends Thread implements Serializable {
+	
+	/** Generated UID */
+	private static final long serialVersionUID = -3995567625115922087L;
+	
 	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
 	private transient Thread acquisitionThread = null;
 	private boolean acquisitionThreadInited = false;
@@ -55,12 +59,13 @@ public abstract class DataCollector extends Thread implements Serializable {
 	}
 
 	protected void setLargestPacketKnown(int largestPacketKnown) {
-		this.largestPacketKnown = largestPacketKnown;
-		
-		log(Level.FINEST, "Setting DataCollector for the largest packet know = " + largestPacketKnown);
-
 		synchronized (synchWaitFetchData) {
-			synchWaitFetchData.notify();
+			log(Level.FINEST, "Setting DataCollector for the largest packet know = " + largestPacketKnown);
+			if (largestPacketKnown > this.largestPacketKnown) {
+				this.largestPacketKnown = largestPacketKnown;
+				notified = true;
+				synchWaitFetchData.notify();
+			}
 		}
 	}
 	
@@ -87,7 +92,9 @@ public abstract class DataCollector extends Thread implements Serializable {
 		samplesPackets.addSamplesPackets(samples_packet);
 		if (!startedSamples && samplesPackets.size() > 0) {
 			startedSamples  = true;
-			setDataCollectorState(DataCollectorState.DP_STARTED);
+			if (DataCollectorState.DP_STARTED_NODATA.equals(dataCollectorState)) {
+				setDataCollectorState(DataCollectorState.DP_STARTED);
+			}
 		}
 		fireNewSamples();
 	}
@@ -198,6 +205,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private volatile boolean exit = true;
 
 	private volatile boolean pause = true;
+	
+	private volatile boolean notified = false;
 
 	abstract public void log(Level debugLevel, String message);
 
@@ -217,20 +226,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 		log(Level.INFO, "DataCollector started. Remote data producer state = " + remoteDataProducerState);
 		
 		try {
-			setDataCollectorState(DataCollectorState.DP_WAITING);
-	
-			while (remoteDataProducerState.equals(DataProducerState.DP_WAITING) && !pause && !exit) {
-				try {
-					synchronized (synchWaitFetchData) {
-						synchWaitFetchData.wait(calcWaitTime());
-					}
-				} catch (Exception e) {
-					logThrowable("Exception while waiting for data available on Thread", e);
-					return;
-				}
-			}
-	
 			setDataCollectorState(DataCollectorState.DP_STARTED_NODATA);
+			
 			log(Level.FINEST, "DataCollector is going to fetch available packets");
 			fetchAvailablePackets();
 	
@@ -248,8 +245,6 @@ public abstract class DataCollector extends Thread implements Serializable {
 						setDataCollectorState(new DataCollectorState(stateBeforePausing));
 					}
 				}
-	
-				fetchPackets();
 				
 				synchronized (synchWaitFetchData) {
 					// se ainda nao obteve tudo e entretanto nao chegou notificacao de nova amostra fica 'a espera
@@ -257,6 +252,14 @@ public abstract class DataCollector extends Thread implements Serializable {
 							&& samplesPackets.size() - 1 == largestPacketKnown) {
 						synchWaitFetchData.wait(calcWaitTime());
 					}
+				}
+				
+				if (!exit) {
+					// se nao sai' do wait por ter sido notificado vai actualizar o numero do ultimo pacote
+					if (!notified) {
+						updateLargestPacketKnown();
+					}
+					fetchPackets();
 				}
 			}
 			
@@ -321,17 +324,23 @@ public abstract class DataCollector extends Thread implements Serializable {
 	}
 
 	public void fetchAvailablePackets() {
-		try {
-			largestPacketKnown = Math.max(getRemoteDataProducer().getMaxPacketNum(), largestPacketKnown);
-		} catch (Exception e) {
-			if (!isConnected())
-				setRemoteDataProducerState(DataProducerState.DP_ERROR);
-		}
-		
+		updateLargestPacketKnown();
 		fetchPackets();
 		if (largestPacketKnown != samplesPackets.size() - 1)
 			if (!isConnected())
 				setRemoteDataProducerState(DataProducerState.DP_ERROR);
+	}
+	
+	private void updateLargestPacketKnown() {
+		try {
+			synchronized (synchWaitFetchData) {
+				largestPacketKnown = Math.max(getRemoteDataProducer().getMaxPacketNum(), largestPacketKnown);
+				log(Level.FINEST, "Updated DataCollector for the largest packet know = " + largestPacketKnown);
+			}
+		} catch (Exception e) {
+			if (!isConnected())
+				setRemoteDataProducerState(DataProducerState.DP_ERROR);
+		}
 	}
 
 	private boolean isConnected() {
@@ -355,6 +364,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	public void setExit(boolean exit) {
 		this.exit = exit;
 		synchronized (synchWaitFetchData) {
+			notified = true;
 			synchWaitFetchData.notifyAll();
 		}
 	}
@@ -380,8 +390,12 @@ public abstract class DataCollector extends Thread implements Serializable {
 		}
 	}
 	
+	/**
+	 * @return
+	 */
 	private long calcWaitTime() {
-		return frequency - (System.currentTimeMillis() - lastFetchPacketsTimestamp);
+		long time = frequency - (System.currentTimeMillis() - lastFetchPacketsTimestamp);
+		return time > 0 ? time : 10;
 	}
 
 	/**

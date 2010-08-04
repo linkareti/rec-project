@@ -43,6 +43,7 @@ public class BaseDataProducer implements DataProducerOperations {
 
 	// private transient BaseHardware hardware=null;
 	private transient IDataSource dataSource = null;
+	private transient boolean dataSourceInitiated = false;
 	private transient DataReceiverWrapper dataReceiver = null;
 	private transient DataProducer _this = null;
 	public SamplesSourcePacketizer packetizer = null;
@@ -72,54 +73,15 @@ public class BaseDataProducer implements DataProducerOperations {
 	}
 
 	/** Creates a new instance of SimulationDataProducerImpl */
-	public BaseDataProducer(IDataSource dataSource, DataReceiver dataReceiver) {
-
+	public BaseDataProducer(DataReceiver dataReceiver) {
+		
 		eventQueueDataReceiver = new EventQueue(new DataProducerEventsDispatcher(), this.getClass().getSimpleName());
-
-		this.dataSource = dataSource;
-
-		packetizer = new SamplesSourcePacketizer(dataSource.getAcquisitionHeader().getSelectedFrequency(), dataSource
-				.getPacketSize(), (int) Math.ceil((double) dataSource.getTotalSamples()
-				/ (double) dataSource.getPacketSize()));
-
-		packetizer.addSamplesPacketSourceEventListener(new SamplesPacketSourceEventListener() {
-			public void newSamplesPackets(SamplesPacketSourceEvent evt) {
-				fireNewSamples(evt);
-			}
-		});
-		packetizer.setSamplesSource(dataSource);
 		try {
 			registerDataReceiver(dataReceiver);
 		} catch (MaximumClientsReached e) {
 			LoggerUtil.logThrowable("Unable to register DataReceiver with this BaseDataProducer", e, Logger
 					.getLogger(BASE_DATAPRODUCER_LOGGER));
 		}
-
-		dataSource.addIDataSourceListener(new IDataSourceListener() {
-			public void dataSourceWaiting() {
-				dataSourceStateWaiting();
-			}
-
-			public void dataSourceStarted() {
-				dataSourceStateStarted();
-			}
-
-			public void dataSourceEnded() {
-				dataSourceStateEnded();
-			}
-
-			public void dataSourceStoped() {
-				dataSourceStateStoped();
-			}
-
-			public void dataSourceError() {
-				dataSourceStateError();
-			}
-
-			public void newSamples(SamplesSourceEvent evt) {
-			}
-		});
-
 	}
 
 	public HardwareAcquisitionConfig getAcquisitionHeader() throws NotAvailableException {
@@ -286,6 +248,59 @@ public class BaseDataProducer implements DataProducerOperations {
 
 	public void dataSourceStateError() {
 		setDataProducerState(DataProducerState.DP_ERROR);
+	}
+
+	/**
+	 * @return the dataSource
+	 */
+	public IDataSource getDataSource() {
+		return dataSource;
+	}
+
+	/**
+	 * @param dataSource the dataSource to set
+	 */
+	public void setDataSource(IDataSource dataSource) {
+		if (!dataSourceInitiated) {
+			dataSourceInitiated = true;
+			this.dataSource = dataSource;
+			
+			packetizer = new SamplesSourcePacketizer(dataSource.getAcquisitionHeader().getSelectedFrequency(), dataSource
+					.getPacketSize(), (int) Math.ceil((double) dataSource.getTotalSamples()
+							/ (double) dataSource.getPacketSize()));
+			
+			packetizer.addSamplesPacketSourceEventListener(new SamplesPacketSourceEventListener() {
+				public void newSamplesPackets(SamplesPacketSourceEvent evt) {
+					fireNewSamples(evt);
+				}
+			});
+			packetizer.setSamplesSource(dataSource);
+			
+			dataSource.addIDataSourceListener(new IDataSourceListener() {
+				public void dataSourceWaiting() {
+					dataSourceStateWaiting();
+				}
+				
+				public void dataSourceStarted() {
+					dataSourceStateStarted();
+				}
+				
+				public void dataSourceEnded() {
+					dataSourceStateEnded();
+				}
+				
+				public void dataSourceStoped() {
+					dataSourceStateStoped();
+				}
+				
+				public void dataSourceError() {
+					dataSourceStateError();
+				}
+				
+				public void newSamples(SamplesSourceEvent evt) {
+				}
+			});
+		}
 	}
 
 }

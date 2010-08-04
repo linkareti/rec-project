@@ -47,6 +47,7 @@ import com.linkare.rec.impl.client.experiment.ExpHistory;
 import com.linkare.rec.impl.client.experiment.ExpHistoryDisplayFactory;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.DataCollector;
 import com.linkare.rec.impl.utils.ORBBean;
 
 public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener, ExpHistoryDisplayFactory {
@@ -2007,6 +2008,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 		try {
 			dataModel.setDpwDataSource(expHistory.getProducerWrapper());
+			((DataCollector) dataModel).initAcquisitionThread(); // iniciar a aquisicao de dados do multicast
 		} catch (Exception e) {
 			e.printStackTrace();
 			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(UI_CLIENT_LOGGER));

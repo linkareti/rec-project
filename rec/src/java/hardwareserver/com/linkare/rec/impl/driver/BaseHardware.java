@@ -310,15 +310,19 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 					HardwareState.STARTING);
 
 		try {
-			IDataSource ds = driver.start(getHardwareInfo());
-			dataProducerInEffect = new BaseDataProducer(ds, receiver);
+			dataProducerInEffect = new BaseDataProducer(receiver);
 			dataProducerInEffect.addBaseDataProducerListener(this);
 
 			// TODO CHECK WITH JP
 			// dataProducerInEffect.dataSourceStateStarted();
 
 			oldDataProducers.add(dataProducerInEffect);
-			return dataProducerInEffect._this();
+			DataProducer dataProducer = dataProducerInEffect._this();
+			
+			IDataSource ds = driver.start(getHardwareInfo());
+			dataProducerInEffect.setDataSource(ds);
+			
+			return dataProducer;
 		} catch (IncorrectStateException e) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
 					getHardwareState(), HardwareState.STARTING);
@@ -336,12 +340,16 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 					HardwareState.STARTING);
 
 		try {
-			IDataSource ds = driver.startOutput(getHardwareInfo(), new DataProducer2IDataSourceAdapter(
-					new DataProducerWrapper(data_source)));
-			dataProducerInEffect = new BaseDataProducer(ds, receiver);
+			dataProducerInEffect = new BaseDataProducer(receiver);
 			oldDataProducers.add(dataProducerInEffect);
 			dataProducerInEffect.addBaseDataProducerListener(this);
-			return dataProducerInEffect._this();
+			DataProducer dataProducer = dataProducerInEffect._this();
+			
+			IDataSource ds = driver.startOutput(getHardwareInfo(), new DataProducer2IDataSourceAdapter(
+					new DataProducerWrapper(data_source)));
+			dataProducerInEffect.setDataSource(ds);
+			
+			return dataProducer;
 		} catch (IncorrectStateException e) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
 					getHardwareState(), HardwareState.STARTING);

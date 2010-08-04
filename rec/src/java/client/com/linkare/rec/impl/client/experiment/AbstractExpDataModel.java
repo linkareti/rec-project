@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import com.linkare.rec.acquisition.DataProducer;
 import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.DataReceiverHelper;
 import com.linkare.rec.acquisition.DataReceiverOperations;
@@ -35,6 +34,10 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  * @author André Neto - LEFT - IST
  */
 public abstract class AbstractExpDataModel extends DataCollector implements ExpDataModel, DataReceiverOperations {
+	
+	/** Gnerated UID */
+	private static final long serialVersionUID = 5721300601918680941L;
+
 	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
 
 	private HardwareAcquisitionConfig acqHeader = null;
@@ -72,7 +75,6 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		depacketizer = new SamplesPacketSourceDepacketizer();
 		depacketizer.addSamplesSourceEventListener(new SamplesDepacketizingAdapter());
 		depacketizer.setSamplesPacketSource(getSamplesPacketSource());
-		initAcquisitionThread();
 	}
 
 	private DataReceiver getDataReceiver() {
@@ -113,25 +115,24 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			Logger.getLogger(DATA_RECEIVER_LOGGER).log(Level.SEVERE,
 					"DataProducer is disconnected! Check it out, please...");
 		}
-
 		this.remoteDataProducer = remoteDataProducer;
-		dataProducerRunningCheck = new DataProducerRunningCheck();
-		dataProducerRunningCheck.startCheck();
-
+		
 		if (getDataReceiver() != null) {
 			try {
 				this.remoteDataProducer.registerDataReceiver(_thisDataReceiver);
-
+				
 			} catch (MaximumClientsReached e) {
 				// System.out.println("NOT Registered with dataProducer");
 				LoggerUtil.logThrowable(null, e, LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
 				throw e;
 			}
-
 		}
 		
 		setTotalSamples(getAcquisitionConfig().getTotalSamples());
 		setFrequency((long) getAcquisitionConfig().getSelectedFrequency().getFrequency());
+
+		dataProducerRunningCheck = new DataProducerRunningCheck();
+		dataProducerRunningCheck.startCheck();
 	}
 
 	public HardwareAcquisitionConfig getAcquisitionConfig() {

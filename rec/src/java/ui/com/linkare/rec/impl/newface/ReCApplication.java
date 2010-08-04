@@ -107,6 +107,7 @@ import com.linkare.rec.impl.newface.display.DisplayFactory;
 import com.linkare.rec.impl.newface.utils.OS;
 import com.linkare.rec.impl.newface.utils.PreferencesUtils;
 import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.rec.impl.utils.DataCollector;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -1121,6 +1122,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		try {
 			experimentDataModel.setDpwDataSource(experimentHistory.getProducerWrapper());
+			experimentDataModel.initAcquisitionThread(); // iniciar a aquisicao de dados do multicast
 			experimentData.setDataModel(experimentDataModel);
 		} catch (Exception e) {
 			log.log(Level.SEVERE, "Failed data output connection...", e);
