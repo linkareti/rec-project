@@ -29,5 +29,13 @@ public class DataProducerStateChangeEvent {
 	public DataProducerState getDataProducerState() {
 		return dataProducerState;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + " - State = " + dataProducerState;
+	}
 
 }

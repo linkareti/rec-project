@@ -323,7 +323,7 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 				}
 			} else if (o instanceof NewSamplesEvent) {
 				NewSamplesEvent evt = (NewSamplesEvent) o;
-				log(Level.INFO, "DataReceiverQueue - dispatching new samples message event " + evt);
+				log(Level.INFO, "DataReceiverQueue - dispatching new samples message event " + evt + " to " + queueOrg.size() + " DataReceiverForQueue");
 
 				Iterator<DataReceiverForQueue> iter = iterator();
 				while (iter.hasNext()) {

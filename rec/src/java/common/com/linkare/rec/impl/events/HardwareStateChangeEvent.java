@@ -45,5 +45,13 @@ public class HardwareStateChangeEvent implements IntersectableEvent {
 		}
 		return false;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + " - State = " + newState;
+	}
 
 }
