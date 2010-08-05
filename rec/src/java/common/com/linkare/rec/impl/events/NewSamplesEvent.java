@@ -34,12 +34,22 @@ public class NewSamplesEvent implements IntersectableEvent {
 	public int getLargestNumPacket() {
 		return largestNumPacket;
 	}
+	
+	/**
+	 * @param largestNumPacket the largestNumPacket to set
+	 */
+	public void setLargestNumPacket(int largestNumPacket) {
+		this.largestNumPacket = largestNumPacket;
+	}
 
 	public boolean intersectTo(IntersectableEvent other) {
 		if (!(other instanceof NewSamplesEvent))
 			return false;
 
 		NewSamplesEvent evt = (NewSamplesEvent) other;
+		if (evt.isPoisoned()) {
+			return false;
+		}
 		largestNumPacket = Math.max(largestNumPacket, evt.getLargestNumPacket());
 		return true;
 	}

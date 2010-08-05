@@ -163,6 +163,9 @@ public class EventQueue {
 								log(Level.WARNING, "EventQueue isn't dispatching the event " + evt
 										+ " because the stopdispatching is " + stopdispatching);
 							}
+						} else {
+							log(Level.WARNING, "EventQueue isn't dispatching the event " + evt
+									+ " because the stopdispatching is " + stopdispatching);
 						}
 						try {
 							synchronized (levts) {

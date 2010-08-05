@@ -31,9 +31,11 @@ public class NewPoisonSamplesEvent extends NewSamplesEvent {
 		if (!(other instanceof NewPoisonSamplesEvent))
 			return false;
 		
-		return super.intersectTo(other);
+		NewPoisonSamplesEvent evt = (NewPoisonSamplesEvent) other;
+		setLargestNumPacket(Math.max(getLargestNumPacket(), evt.getLargestNumPacket()));
+		return true;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
