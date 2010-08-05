@@ -11,6 +11,7 @@
 package com.linkare.rec.impl.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 
 /**
@@ -55,6 +56,7 @@ public class EventQueue {
 	}
 
 	public void addEvent(Object evt) {
+		log(Level.FINEST, "EventQueue add event " + evt);
 		levts.add(evt);
 		synchronized (levts) {
 			levts.notify();
@@ -66,7 +68,7 @@ public class EventQueue {
 	}
 
 	public void shutdown() {
-		log(Level.FINE, "Event queue received shutdown. Queue size = " + levts.size());
+		log(Level.FINE, "EventQueue received shutdown. Queue size = " + levts.size());
 		
 		stopdispatching = true;
 		levts.clear();
@@ -110,7 +112,10 @@ public class EventQueue {
 		}
 
 		public void run() {
-			log(Level.INFO, "Thread " + getName() + " started.");
+//			log(Level.INFO, "Thread " + getName() + " started.");
+			// TODO debug the UnDead threads
+			log(Level.INFO, "Thread " + getName() + " started. Event list size = " + levts.size()
+					+ " with the contents " + Arrays.deepToString(levts.toArray(new Object[levts.size()])));
 			
 			try {
 				Object evt = null;
@@ -136,12 +141,14 @@ public class EventQueue {
 						}
 					} else {
 						if (!stopdispatching) {
+							log(Level.FINEST, "EventQueue handling the event " + evt);
 							if (evt instanceof IntersectableEvent) {
 								IntersectableEvent intersectableEvent = (IntersectableEvent) evt;
 								for (int i = levts.size() - 1; i >= 0 && !stopdispatching; i--) {
 									Object eventAfter = levts.get(i);
 									if (eventAfter instanceof IntersectableEvent) {
 										IntersectableEvent intersectableEventAfter = (IntersectableEvent) eventAfter;
+										log(Level.FINEST, "EventQueue the event " + evt + " might intersect " + eventAfter);
 										if (intersectableEvent.intersectTo(intersectableEventAfter)) {
 											levts.remove(i);
 										}
@@ -149,6 +156,7 @@ public class EventQueue {
 								}
 							}
 							if (!stopdispatching) {
+								log(Level.FINER, "EventQueue dispatching the event " + evt);
 								dispatcher.dispatchEvent(evt);
 							}
 						}
@@ -168,7 +176,7 @@ public class EventQueue {
 			}
 			
 			stopdispatching = true;
-			log(Level.INFO, "Event queue thread " + getName() + " ended.");
+			log(Level.INFO, "EventQueue thread " + getName() + " ended.");
 		}
 	}
 }

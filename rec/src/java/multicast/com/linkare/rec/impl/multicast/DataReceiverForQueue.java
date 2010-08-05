@@ -238,8 +238,10 @@ public class DataReceiverForQueue implements QueueLogger
 				if (o instanceof NewSamplesEvent)
 
 				{
-
+					
 					NewSamplesEvent evt = (NewSamplesEvent) o;
+
+					log(Level.INFO, "DataReceiverForQueue - dispatching new samples message event " + evt);
 
 					drw.newSamples(evt.getLargestNumPacket());
 					
