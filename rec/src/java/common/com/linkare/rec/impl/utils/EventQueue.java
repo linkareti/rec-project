@@ -141,7 +141,7 @@ public class EventQueue {
 						}
 					} else {
 						if (!stopdispatching) {
-							log(Level.FINEST, "EventQueue handling the event " + evt);
+							log(Level.FINEST, "EventQueue handling the event " + evt + " of " + levts.size() + " still in the list");
 							if (evt instanceof IntersectableEvent) {
 								IntersectableEvent intersectableEvent = (IntersectableEvent) evt;
 								for (int i = levts.size() - 1; i >= 0 && !stopdispatching; i--) {
@@ -150,6 +150,7 @@ public class EventQueue {
 										IntersectableEvent intersectableEventAfter = (IntersectableEvent) eventAfter;
 										log(Level.FINEST, "EventQueue the event " + evt + " might intersect " + eventAfter);
 										if (intersectableEvent.intersectTo(intersectableEventAfter)) {
+											log(Level.FINEST, "EventQueue removed the event at the index " + i);
 											levts.remove(i);
 										}
 									}
@@ -158,6 +159,9 @@ public class EventQueue {
 							if (!stopdispatching) {
 								log(Level.FINER, "EventQueue dispatching the event " + evt);
 								dispatcher.dispatchEvent(evt);
+							} else {
+								log(Level.WARNING, "EventQueue isn't dispatching the event " + evt
+										+ " because the stopdispatching is " + stopdispatching);
 							}
 						}
 						try {
