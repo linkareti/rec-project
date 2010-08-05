@@ -119,6 +119,13 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 	public boolean add(DataReceiver dr, IResource resource, DataProducerState currentState)
 			throws MaximumClientsReached, NotAuthorized {
 		log(Level.INFO, "DataReceiverQueue - trying to register new dataReceiver!");
+		
+		if (messageQueue.isStopdispatching()) {
+			log(Level.WARNING, "DataReceiverQueue - The EventQueue is already stoped dispatching. "
+					+ "Can't register DataReceiver if ain't gonna be nothing more to dispatch!");
+			return false;
+		}
+		
 		boolean retVal = false;
 		DataReceiverForQueue drfq = new DataReceiverForQueue(dr, dataReceiverForQueueAdapter);
 		
