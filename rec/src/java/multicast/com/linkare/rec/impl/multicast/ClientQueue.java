@@ -35,12 +35,13 @@ import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
+import com.linkare.rec.impl.utils.QueueLogger;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class ClientQueue {
+public class ClientQueue implements QueueLogger {
 
 	private boolean cyclingQueue = false;
 
@@ -53,7 +54,7 @@ public class ClientQueue {
 	// private internal state variables
 	private List<DataClientForQueue> queueOrg = new LinkedList<DataClientForQueue>();
 
-	private EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher(), this.getClass().getSimpleName());
+	private EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher(), this.getClass().getSimpleName(), this);
 
 	private ClientsConnectionCheck clientsConnectionChecker = new ClientsConnectionCheck();
 
@@ -543,4 +544,20 @@ public class ClientQueue {
 
 	}
 	/* End Inner Class - Clients callbacks */
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void log(Level debugLevel, String message) {
+		getClientQueueListener().log(debugLevel, message);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void logThrowable(String message, Throwable t) {
+		getClientQueueListener().logThrowable(message, t);
+	}
 }

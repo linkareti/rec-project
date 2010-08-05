@@ -19,6 +19,7 @@ import com.linkare.rec.impl.events.NewSamplesEvent;
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
+import com.linkare.rec.impl.utils.QueueLogger;
 import com.linkare.rec.impl.wrappers.DataReceiverWrapper;
 
 /**
@@ -29,7 +30,7 @@ import com.linkare.rec.impl.wrappers.DataReceiverWrapper;
  * 
  */
 
-public class DataReceiverForQueue
+public class DataReceiverForQueue implements QueueLogger
 
 {
 
@@ -58,7 +59,7 @@ public class DataReceiverForQueue
 
 		}
 
-		messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass().getSimpleName());
+		messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass().getSimpleName(), this);
 
 	}
 	

@@ -23,6 +23,7 @@ import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
+import com.linkare.rec.impl.utils.QueueLogger;
 import com.linkare.rec.impl.wrappers.DataClientWrapper;
 
 /**
@@ -30,7 +31,7 @@ import com.linkare.rec.impl.wrappers.DataClientWrapper;
  * @author José Pedro Pereira - Linkare TI
  */
 
-public class DataClientForQueue {
+public class DataClientForQueue implements QueueLogger {
 
 	private DataClientWrapper dcw = null;
 	private IDataClientForQueueListener dataClientForQueueListener = null;
@@ -45,7 +46,7 @@ public class DataClientForQueue {
 		this.dcw = new DataClientWrapper(dc);
 
 		if (!dcw.isConnected()) {
-			getDataClientForQueueListener().log(Level.SEVERE,
+			log(Level.SEVERE,
 					"Error getting username in DataClientForQueue - Throwing not authorized...");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_NOT_AVAILABLE);
 		}
@@ -53,21 +54,21 @@ public class DataClientForQueue {
 		setUserInfo(dcw.getUserInfo());
 
 		if (getUserInfo() == null || getUserInfo().getUserName() == null) {
-			getDataClientForQueueListener().log(Level.SEVERE, "Username is null - Throwing not authorized...");
+			log(Level.SEVERE, "Username is null - Throwing not authorized...");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_NULL);
 		}
 
 		if (getUserInfo().getUserName().equals("")) {
-			getDataClientForQueueListener().log(Level.SEVERE, "Username is empty - Throwing not authorized...");
+			log(Level.SEVERE, "Username is empty - Throwing not authorized...");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_EMPTY);
 		}
 
 		if (!SecurityManagerFactory.authenticate(resource, getAsDefaultUser())) {
-			getDataClientForQueueListener().log(Level.SEVERE, "SecurityManager didn't authenticate you");
+			log(Level.SEVERE, "SecurityManager didn't authenticate you");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_SECURITY_MANAGER);
 		}
 
-		messageQueue = new EventQueue(new DataClientQueueDispatcher(), "DataClientForQueue - " + userInfo.getUserName());
+		messageQueue = new EventQueue(new DataClientQueueDispatcher(), "DataClientForQueue - " + userInfo.getUserName(), this);
 	}
 
 	public String getUserName() {
@@ -113,15 +114,14 @@ public class DataClientForQueue {
 		if (shutDown)
 			return;
 		shutDown = true;
-		getDataClientForQueueListener().log(Level.INFO, "client " + getUserName() + " - Shutting down!");
-		getDataClientForQueueListener().log(Level.INFO, "client " + getUserName() + " - shutting down message queue!");
+		log(Level.INFO, "client " + getUserName() + " - Shutting down!");
+		log(Level.INFO, "client " + getUserName() + " - shutting down message queue!");
 		messageQueue.shutdown();
-		getDataClientForQueueListener().log(Level.INFO, "client " + getUserName() + " - message queue is shut down!");
-		;
-		getDataClientForQueueListener().log(Level.INFO,
+		log(Level.INFO, "client " + getUserName() + " - message queue is shut down!");
+		log(Level.INFO,
 				"client " + getUserName() + " - informing dataClientForQueueListener that I'm gone!");
 		getDataClientForQueueListener().dataClientForQueueIsGone(this);
-		getDataClientForQueueListener().log(Level.INFO, "client " + getUserName() + " is shut down!");
+		log(Level.INFO, "client " + getUserName() + " is shut down!");
 		shutDown = false;
 	}
 
@@ -298,7 +298,7 @@ public class DataClientForQueue {
 				}
 
 			} catch (Exception e) {
-				getDataClientForQueueListener().logThrowable(
+				logThrowable(
 						"Oooppss.. client gone? - Error dispatching event to client! Why? Gone?", e);
 				if (!isConnected()) {
 					shutdownAsSoonAsPossible();
@@ -311,6 +311,22 @@ public class DataClientForQueue {
 			return Thread.NORM_PRIORITY;
 		}
 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void log(Level debugLevel, String message) {
+		getDataClientForQueueListener().log(debugLevel, message);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void logThrowable(String message, Throwable t) {
+		getDataClientForQueueListener().logThrowable(message, t);
 	}
 
 }

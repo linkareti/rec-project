@@ -28,6 +28,7 @@ import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
+import com.linkare.rec.impl.utils.QueueLogger;
 
 /**
  * 
@@ -35,7 +36,7 @@ import com.linkare.rec.impl.utils.EventQueueDispatcher;
  */
 
 // TODO -> TESTING implements java.io.Serializable
-public class DataReceiverQueue implements java.io.Serializable {
+public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 
 	/**
 	 * 
@@ -51,7 +52,7 @@ public class DataReceiverQueue implements java.io.Serializable {
 	// private internal state variables
 	private List<DataReceiverForQueue> queueOrg = new LinkedList<DataReceiverForQueue>();
 
-	private EventQueue messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass().getSimpleName());
+	private EventQueue messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass().getSimpleName(), this);
 
 	private DataReceiversConnectionCheck dataReceiversConnectionChecker = new DataReceiversConnectionCheck();
 
@@ -204,10 +205,10 @@ public class DataReceiverQueue implements java.io.Serializable {
 	}
 	
 	public boolean isShutdown() {
-		return messageQueue.isStopdispatching() && isDispatcherQueueShutdown();
+		return messageQueue.isStopdispatching() && isDispatcherQueueStopdispatching();
 	}
 	
-	private boolean isDispatcherQueueShutdown() {
+	private boolean isDispatcherQueueStopdispatching() {
 		boolean ret = true;
 		Iterator<DataReceiverForQueue> queue = iterator();
 		while (queue.hasNext()) {
