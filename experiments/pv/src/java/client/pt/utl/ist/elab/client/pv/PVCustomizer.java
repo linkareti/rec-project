@@ -170,6 +170,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldNumSamples.setMaximumSize(new java.awt.Dimension(1000, 32767));
 		sldNumSamples.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldNumSamples.setPreferredSize(new java.awt.Dimension(250, 42));
+		sldNumSamples.setValue(1);
 		sldNumSamples.addChangeListener(new javax.swing.event.ChangeListener() {
 			public void stateChanged(javax.swing.event.ChangeEvent evt) {
 				sldNumSamplesStateChanged(evt);
@@ -290,6 +291,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldPos1.setPaintTicks(true);
 		sldPos1.setPaintTrack(false);
 		sldPos1.setSnapToTicks(true);
+		sldPos1.setValue(4000);
 		sldPos1.setMinimumSize(new java.awt.Dimension(250, 42));
 		sldPos1.setPreferredSize(new java.awt.Dimension(250, 42));
 		sldPos1.addChangeListener(new javax.swing.event.ChangeListener() {
