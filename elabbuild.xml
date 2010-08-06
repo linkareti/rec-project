@@ -164,9 +164,9 @@
 			<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
 			<sysproperty key="openorb.config" value="${rec.client.classes.dir}/openorb.xml" />
 
-			<sysproperty key="vlc.plugins.destdir" value="eLab/native/plugins" />
-			<sysproperty key="vlc.plugins.filename" value="vlcplugins.zip" />
-			<sysproperty key="video.development.enabled" value="no" />
+			<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
+			<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
+			<sysproperty key="video.development.enabled" value="${video.development.enabled}" />
 		</java>
 	</target>
 
@@ -203,7 +203,7 @@
 
 			<sysproperty key="vlc.plugins.destdir" value="eLab/native/plugins" />
 			<sysproperty key="vlc.plugins.filename" value="vlcplugins.zip" />
-			<sysproperty key="video.development.enabled" value="no" />
+			<sysproperty key="video.development.enabled" value="yes" />
 		</java>
 	</target>
 
