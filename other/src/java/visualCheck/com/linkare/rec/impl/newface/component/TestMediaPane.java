@@ -50,7 +50,8 @@ public class TestMediaPane extends AbstractContentPane {
 	//Windows Local
 	//    private static final String MRL = "C:\\Development\\NetBeansProjects\\xpto.avi";
 	//rtsp 
-	private static final String MRL = "rtsp://elabmc.ist.utl.pt/radiare.sdp";
+//	private static final String MRL = "rtsp://elabmc.ist.utl.pt/radiare.sdp"; // rediare experiment isn't needed in the project for the ME
+	private static final String MRL = "rtsp://elabmc.ist.utl.pt/g.sdp"; // plz test g
 
 	VideoViewerController controller;
 
