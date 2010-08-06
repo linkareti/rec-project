@@ -121,7 +121,7 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 		log(Level.INFO, "DataReceiverQueue - trying to register new dataReceiver!");
 		
 		if (messageQueue.isStopdispatching()) {
-			log(Level.WARNING, "DataReceiverQueue - The EventQueue is already stoped dispatching. "
+			log(Level.INFO, "DataReceiverQueue - The EventQueue is already stoped dispatching. "
 					+ "Can't register DataReceiver if ain't gonna be nothing more to dispatch!");
 			return false;
 		}
