@@ -43,9 +43,9 @@
   		<property name="openorb.profile" value="ReCClient"/>
 
         <!-- change this value to disable video -->
-        <property name="video.development.enabled" value="yes"/>
-        <property name="vlc.plugins.destdir" value="eLab/native/plugins"/>
-        <property name="vlc.plugins.filename" value="vlcplugins.zip"/>
+        <property name="video.development.enabled" value="@video.development.enabled@"/>
+        <property name="vlc.plugins.destdir" value="@vlc.plugins.destdir@"/>
+        <property name="vlc.plugins.filename" value="@vlc.plugins.filename@"/>
         
     </resources>
     

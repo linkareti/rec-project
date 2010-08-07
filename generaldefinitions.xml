@@ -430,6 +430,9 @@
 				<replacefilter token="@tooltip@" property="tooltip" />
 				<replacefilter token="@short@" property="short" />
 				<replacefilter token="@j2se-version@" property="j2se-version" />
+				<replacefilter token="@video.development.enabled@" property="video.development.enabled" />
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
 			</replace>
 
@@ -495,6 +498,9 @@
 				<replacefilter token="@tooltip@" property="tooltip" />
 				<replacefilter token="@short@" property="short" />
 				<replacefilter token="@j2se-version@" property="j2se-version" />
+				<replacefilter token="@video.development.enabled@" property="video.development.enabled" />
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 				<replacefilter token="@client.main-class@" property="client.main-class" />
 			</replace>
 
