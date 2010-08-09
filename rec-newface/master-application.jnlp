@@ -102,7 +102,7 @@
         <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
     </resources>
     <resources arch="i586" os="Linux">
-        <nativelib href="lib/libsvlc_linux_i686.jar"/>
+        <nativelib href="lib/libsvlc_linux_i586.jar"/>
         <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
     </resources>
     <resources arch="i686" os="Linux">
