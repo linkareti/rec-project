@@ -11,10 +11,10 @@ public enum ReCSystemProperty {
 			"openorb.profile", true), ORG_OMG_CORBA_ORBCLASS("org.omg.CORBA.ORBClass", true), ORG_OMG_CORBA_ORBSINGLETONCLASS(
 			"org.omg.CORBA.ORBSingletonClass", true),
 
-	VIDEO_DEVELOPMENT_ENABLED("video.development.enabled", false), // FIXME Remove VIDEO_DEVELOPMENT_ENABLED flag after video tests
+	VIDEO_ENABLED("video.enabled", false),
 
-	VLC_PLUGINS_FILENAME("vlc.plugins.filename", ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED), VLC_PLUGINS_DESTDIR("vlc.plugins.destdir",
-			ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED);
+	VLC_PLUGINS_FILENAME("vlc.plugins.filename", ReCApplication.IS_VIDEO_ENABLED), VLC_PLUGINS_DESTDIR("vlc.plugins.destdir",
+			ReCApplication.IS_VIDEO_ENABLED);
 
 	String name;
 	boolean required;

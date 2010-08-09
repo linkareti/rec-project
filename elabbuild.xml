@@ -166,7 +166,7 @@
 
 			<sysproperty key="vlc.plugins.destdir" value="${vlc.plugins.destdir}" />
 			<sysproperty key="vlc.plugins.filename" value="${vlc.plugins.filename}" />
-			<sysproperty key="video.development.enabled" value="${video.development.enabled}" />
+			<sysproperty key="video.enabled" value="${video.enabled}" />
 		</java>
 	</target>
 
@@ -203,7 +203,7 @@
 
 			<sysproperty key="vlc.plugins.destdir" value="eLab/native/plugins" />
 			<sysproperty key="vlc.plugins.filename" value="vlcplugins.zip" />
-			<sysproperty key="video.development.enabled" value="yes" />
+			<sysproperty key="video.enabled" value="yes" />
 		</java>
 	</target>
 

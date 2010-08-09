@@ -95,7 +95,7 @@ hardwareserver.max.heap=1024m
 ##SYSTEM PROPERTIES - VIDEO##
 vlc.plugins.destdir=eLab/native/plugins
 vlc.plugins.filename=vlcplugins.zip
-video.development.enabled=yes
+video.enabled=yes
 
 ##JNLP PROPERTIES
 #Please define the codebase without the trailing slash... It will be added automagically when needed!

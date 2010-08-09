@@ -223,12 +223,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	}
 
 	/**
-	 * Temporary flag that enables video development.
-	 * 
-	 * FIXME Remove IS_VIDEO_DEVELOPMENT_ENABLED flag after video testing.
+	 * flag that enables video development.
 	 */
-	public static boolean IS_VIDEO_DEVELOPMENT_ENABLED = "yes".equals(System
-			.getProperty(ReCSystemProperty.VIDEO_DEVELOPMENT_ENABLED.getName()));
+	public static boolean IS_VIDEO_ENABLED = "yes".equals(System
+			.getProperty(ReCSystemProperty.VIDEO_ENABLED.getName()));
 
 	/** Holds the jws basic service context */
 	private BasicService basicService;
@@ -648,7 +646,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 			// TODO Verify if this is the best place to
 			// initializeMediaController
-			if (IS_VIDEO_DEVELOPMENT_ENABLED) {
+			if (IS_VIDEO_ENABLED) {
 				initializeMediaController();
 			}
 		}
@@ -862,7 +860,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		// Listen to current customizer events (done/canceled)
 		currentCustomizer.addICustomizerListener(this);
 
-		if (IS_VIDEO_DEVELOPMENT_ENABLED) {
+		if (IS_VIDEO_ENABLED) {
 			playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
 		}
 
@@ -880,7 +878,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	@Override
 	public void apparatusDisconnected(ApparatusConnectorEvent evt) {
-		if (IS_VIDEO_DEVELOPMENT_ENABLED) {
+		if (IS_VIDEO_ENABLED) {
 			stopMedia();
 		}
 

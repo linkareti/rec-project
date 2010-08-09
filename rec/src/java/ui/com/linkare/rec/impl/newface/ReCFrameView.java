@@ -701,7 +701,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private void connectToApparatus() {
 
 		// Video
-		if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED && recApplication.getMediaController() != null) {
+		if (ReCApplication.IS_VIDEO_ENABLED && recApplication.getMediaController() != null) {
 			getVideoBox().initializeVideoOutput();
 			recApplication.setVideoOutput(getVideoBox().getVideoOutput());
 		}
@@ -760,7 +760,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	private void disconnectFromApparatus() {
-		if (ReCApplication.IS_VIDEO_DEVELOPMENT_ENABLED && recApplication.getMediaController() != null) {
+		if (ReCApplication.IS_VIDEO_ENABLED && recApplication.getMediaController() != null) {
 			getVideoBox().destroyVideoOutput();
 		}
 
