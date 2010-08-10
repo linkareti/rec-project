@@ -20,11 +20,11 @@
 
 	<!-- hopefully funciona para todas as archs e windows -->
 	<resources arch="i386" os="Linux">
-		<jar download="lazy" href="lib/vlcplugins_linux_i686_sig.jar" />
+		<jar download="lazy" href="lib/vlcplugins_linux_i386_sig.jar" />
 	</resources>
 
 	<resources arch="i586" os="Linux">
-		<jar download="lazy" href="lib/vlcplugins_linux_i586_sig.jar" />
+		<jar download="lazy" href="lib/vlcplugins_linux_i686_sig.jar" />
 	</resources>
 
 	<resources arch="i686" os="Linux">
