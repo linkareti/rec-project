@@ -861,7 +861,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		currentCustomizer.addICustomizerListener(this);
 
 		if (IS_VIDEO_ENABLED) {
-			playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
+			if (currentApparatusConfig.getMediaConfig() != null
+					&& currentApparatusConfig.getMediaConfig().getVideoLocation() != null
+					&& !currentApparatusConfig.getMediaConfig().getVideoLocation().equals("")) {
+				playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
+			} else {
+				log.info("Video is enable but the isn't a valid media configuration with video location defined.");
+			}
 		}
 
 		setCurrentState(CONNECTED_TO_APPARATUS);
