@@ -14,8 +14,8 @@
 	<resources>
 		<j2se version="1.6+" />
 		<jar download="eager" href="ReCClient_sig.jar" main="true" />
-		<property name="vlc.plugins.destdir" value=".eLab/native/plugins" />
-		<property name="vlc.plugins.filename" value="vlcplugins.zip" />
+		<property name="vlc.plugins.destdir" value="@vlc.plugins.destdir@" />
+		<property name="vlc.plugins.filename" value="@vlc.plugins.filename@" />
 	</resources>
 
 	<!-- hopefully funciona para todas as archs e windows -->
