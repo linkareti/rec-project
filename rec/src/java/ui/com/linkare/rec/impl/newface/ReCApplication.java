@@ -181,11 +181,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	 */
 	public void playMediaExternal(String mrl) {
 		try {
-			Runtime.getRuntime().exec(PreferencesUtils.readUserPreference("vlcpath") + " " + mrl);
+			String vlc = PreferencesUtils.readUserPreference("vlcpath");
+			if (vlc != null) {
+				vlc = "vlc";
+			}
+			Runtime.getRuntime().exec(vlc + " " + mrl);
 		} catch (IOException e) {
 			log.info("VLC not installed on the specified directory");
-			// Bruno mensagem de erro para o utilizador? verificar se a user
-			// preference está set ou se deu erro.
 		}
 	}
 
