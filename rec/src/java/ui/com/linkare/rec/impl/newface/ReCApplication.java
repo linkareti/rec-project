@@ -389,6 +389,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public Apparatus getSelectedApparatusConfig() {
 		return currentApparatusConfig;
 	}
+	
+	public boolean isApparatusVideoEnabled() {
+		return IS_VIDEO_ENABLED && currentApparatusConfig != null && currentApparatusConfig.getMediaConfig() != null
+				&& currentApparatusConfig.getMediaConfig().getVideoLocation() != null
+				&& !currentApparatusConfig.getMediaConfig().getVideoLocation().equals("");
+	}
 
 	public ICustomizer getCurrentCustomizer() {
 		return currentCustomizer;
@@ -646,7 +652,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 			// TODO Verify if this is the best place to
 			// initializeMediaController
-			if (IS_VIDEO_ENABLED) {
+			if (isApparatusVideoEnabled()) {
 				initializeMediaController();
 			}
 		}
@@ -860,14 +866,11 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		// Listen to current customizer events (done/canceled)
 		currentCustomizer.addICustomizerListener(this);
 
-		if (IS_VIDEO_ENABLED) {
-			if (currentApparatusConfig.getMediaConfig() != null
-					&& currentApparatusConfig.getMediaConfig().getVideoLocation() != null
-					&& !currentApparatusConfig.getMediaConfig().getVideoLocation().equals("")) {
-				playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
-			} else {
-				log.info("Video is enable but the isn't a valid media configuration with video location defined.");
-			}
+		if (isApparatusVideoEnabled()) {
+			log.info("Video is enable for the selected apparatus.");
+			playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
+		} else {
+			log.info("Video isn't enable for the selected apparatus.");
 		}
 
 		setCurrentState(CONNECTED_TO_APPARATUS);
@@ -884,7 +887,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	@Override
 	public void apparatusDisconnected(ApparatusConnectorEvent evt) {
-		if (IS_VIDEO_ENABLED) {
+		if (isApparatusVideoEnabled()) {
 			stopMedia();
 		}
 
