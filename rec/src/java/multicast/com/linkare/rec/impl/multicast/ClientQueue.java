@@ -54,11 +54,12 @@ public class ClientQueue implements QueueLogger {
 	// private internal state variables
 	private List<DataClientForQueue> queueOrg = new LinkedList<DataClientForQueue>();
 
-	private EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher(), this.getClass().getSimpleName(), this);
-
 	private ClientsConnectionCheck clientsConnectionChecker = new ClientsConnectionCheck();
 
 	private IDataClientForQueueListener dataClientForQueueAdapter = new DataClientForQueueAdapter();
+	
+	/** Client queue to send events for dispatch. This attribute must be the last of the class to be declared! */
+	private EventQueue messageQueue = new EventQueue(new ClientQueueDispatcher(), this.getClass().getSimpleName(), this);
 
 	/**
 	 * Creates the <code>ClientQueue</code>.
