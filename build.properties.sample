@@ -93,7 +93,7 @@ hardwareserver.initial.heap=128m
 hardwareserver.max.heap=1024m
 
 ##SYSTEM PROPERTIES - VIDEO##
-vlc.plugins.destdir=.eLab/native/plugins
+vlc.plugins.destdir=eLab/native/plugins
 vlc.plugins.filename=vlcplugins.zip
 video.enabled=yes
 
