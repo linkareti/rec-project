@@ -346,9 +346,11 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 							connectedBefore = true;
 						} catch (MaximumClientsReached e) {
+							LoggerUtil.logThrowable("Error registring data client. Server maximum capacity reached.", e, Logger.getLogger(LAB_CLIENT_LOGGER));
 							fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_MAX_USERS);
 							fireIChatMessageListenerConnectionChanged(false);
 						} catch (NotAuthorized e) {
+							LoggerUtil.logThrowable("Error registring data client. User not authorized.", e, Logger.getLogger(LAB_CLIENT_LOGGER));
 							fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_NOT_AUTHORIZED);
 							fireIChatMessageListenerConnectionChanged(false);
 						}
@@ -364,6 +366,7 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(LAB_CLIENT_LOGGER));
 				fireLabConnectorListenerLabStatusChanged(LabConnectorEvent.STATUS_UNREACHABLE);
 			}
 

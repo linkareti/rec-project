@@ -37,6 +37,9 @@ public enum NavigationWorkflow {
 
 		availableTransitions.put(CONNECTED_TO_LAB, transitions(APPARATUS_CONNECT_PERFORMED, LAB_DISCONNECT_PERFORMED));
 
+		// if there is error connecting to apparatus should return no previous state
+		availableTransitions.put(APPARATUS_CONNECT_PERFORMED, transitions(CONNECTED_TO_LAB, LAB_DISCONNECT_PERFORMED));
+
 		availableTransitions.put(CONNECTED_TO_APPARATUS, transitions(APPARATUS_CONFIGURED, LAB_DISCONNECT_PERFORMED,
 				APPARATUS_DISCONNECT_PERFORMED /* returns to CONNECTED_TO_LAB */));
 

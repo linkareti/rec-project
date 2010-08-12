@@ -941,10 +941,13 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 					connectedBefore = true;
 					fireApparatusConnectorListenerApparatusConnected(null);
 				} catch (MaximumClientsReached e) {
+					LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
 					fireApparatusConnectorListenerApparatusMaxUsers(e.getMessage());
 				} catch (NotAuthorized e) {
+					LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
 					fireApparatusConnectorListenerApparatusNotAuthorized(e.getMessage());
 				} catch (NotAvailableException e) {
+					LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
 					fireApparatusConnectorListenerApparatusDisconnected(e.getMessage());
 				}
 
@@ -971,6 +974,7 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				fireApparatusConnectorListenerApparatusDisconnected(null);
 				connectedBefore = false;
 			} catch (Exception e) {
+				LoggerUtil.logThrowable(null, e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
 				e.printStackTrace();
 			}
 		}

@@ -46,6 +46,7 @@ import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.apparatus.ApparatusConnectorEvent;
 import com.linkare.rec.impl.client.apparatus.ApparatusListChangeEvent;
 import com.linkare.rec.impl.client.lab.LabConnectorEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent;
 import com.linkare.rec.impl.newface.ReCApplication.ExperimentUIData;
 import com.linkare.rec.impl.newface.component.AbstractContentPane;
@@ -646,8 +647,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		case INCORRECTSTATE:
 			break;
 		case MAXUSERS:
+			maxUsers();
 			break;
 		case NOTAUTHORIZED:
+			notAuthorized();
 			break;
 		case NOTOWNER:
 			break;
@@ -773,6 +776,24 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getApparatusCombo().setEnabled(true);
 		getLayoutContainerPane().disableApparatusTabbedPane();
 		updateStatus(getResourceMap().getString("lblTaskMessage.connectedToLab.text", recApplication.getCurrentLabName()));
+	}
+	
+	private void maxUsers() {
+		String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.maxUsers",
+				"Sorry, the lab is full. Please try again later...");
+		errorConnectingToApparatus(errorMessage);
+	}
+
+	private void notAuthorized() {
+		String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notAuthorized",
+				"Not authorized, please confirm your login/password and try again!");
+		errorConnectingToApparatus(errorMessage);
+	}
+	
+	private void errorConnectingToApparatus(String errorMessage) {
+		getApparatusSelectBox().getProgressCicle().stop();
+		JOptionPane.showMessageDialog(null, errorMessage);
+		disconnectFromApparatus();
 	}
 
 	/**

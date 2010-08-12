@@ -45,6 +45,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpHistory;
 import com.linkare.rec.impl.client.experiment.ExpHistoryDisplayFactory;
+import com.linkare.rec.impl.client.lab.LabConnectorEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.DataCollector;
@@ -781,11 +782,11 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 
 	private void labClientBeanLabStatusChanged(com.linkare.rec.impl.client.lab.LabConnectorEvent evt)// GEN-FIRST:event_labClientBeanLabStatusChanged
 	{// GEN-HEADEREND:event_labClientBeanLabStatusChanged
-		if (evt.getStatusCode() == evt.STATUS_UNREACHABLE) {
+		if (evt.getStatusCode() == LabConnectorEvent.STATUS_UNREACHABLE) {
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.unreachable",
 					"Unreachable"));
 			setConnectLab(false);
-		} else if (evt.getStatusCode() == evt.STATUS_CONNECTED) {
+		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_CONNECTED) {
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.connected",
 					"Connected"));
 			if (currentLab != null)
@@ -798,25 +799,29 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 								currentLab.getDesktopLocationBundleKey(),
 								new ImageIcon(getClass().getResource(
 										"/com/linkare/rec/impl/baseUI/resources/desktopback.png"))).getImage(), false);
-		} else if (evt.getStatusCode() == evt.STATUS_CONNECTING)
+		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_CONNECTING)
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.connecting",
 					"Connecting"));
-		else if (evt.getStatusCode() == evt.STATUS_DISCONNECTED) {
+		else if (evt.getStatusCode() == LabConnectorEvent.STATUS_DISCONNECTED) {
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.disconnected",
 					"Disconnected"));
 			setConnectLab(false);
-		} else if (evt.getStatusCode() == evt.STATUS_DISCONNECTING)
+		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_DISCONNECTING)
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.disconnecting",
 					"Disconnecting"));
-		else if (evt.getStatusCode() == evt.STATUS_MAX_USERS) {
-			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.maxUsers",
-					"Sorry, the lab is full. Please try again later..."));
+		else if (evt.getStatusCode() == LabConnectorEvent.STATUS_MAX_USERS) {
+			String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.maxUsers",
+					"Sorry, the lab is full. Please try again later...");
+			statusPanelLab.setStatus(errorMessage);
+			JOptionPane.showMessageDialog(this, errorMessage);
 			setConnectLab(false);
-		} else if (evt.getStatusCode() == evt.STATUS_NOT_AUTHORIZED) {
-			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notAuthorized",
-					"Not authorized, please confirm your login/password and try again!"));
+		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_NOT_AUTHORIZED) {
+			String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notAuthorized",
+					"Not authorized, please confirm your login/password and try again!");
+			statusPanelLab.setStatus(errorMessage);
+			JOptionPane.showMessageDialog(this, errorMessage);
 			setConnectLab(false);
-		} else if (evt.getStatusCode() == evt.STATUS_NOT_REGISTERED) {
+		} else if (evt.getStatusCode() == LabConnectorEvent.STATUS_NOT_REGISTERED) {
 			statusPanelLab.setStatus(ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.notRegistered",
 					"Not registered..."));
 			setConnectLab(false);

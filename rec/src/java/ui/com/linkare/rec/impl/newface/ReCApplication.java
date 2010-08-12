@@ -952,12 +952,20 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	@Override
 	public void apparatusMaxUsers(ApparatusConnectorEvent evt) {
+		if (currentState.canGoTo(CONNECTED_TO_LAB)) {
+			setCurrentState(CONNECTED_TO_LAB);
+		}
+		
 		// Forward event to the view
 		fireApparatusStateChanged(MAXUSERS, evt);
 	}
 
 	@Override
 	public void apparatusNotAuthorized(ApparatusConnectorEvent evt) {
+		if (currentState.canGoTo(CONNECTED_TO_LAB)) {
+			setCurrentState(CONNECTED_TO_LAB);
+		}
+		
 		// Forward event to the view
 		fireApparatusStateChanged(NOTAUTHORIZED, evt);
 	}
