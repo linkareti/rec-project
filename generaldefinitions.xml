@@ -412,12 +412,24 @@
 
 			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linuxInstaller.jnlp" />
 			<replace file="${elab.client.classes.dir}/linuxInstaller.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<replace file="${elab.client.classes.dir}/linuxInstaller.jnlp" propertyFile="build.properties">
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+			</replace>
 
 			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macInstaller.jnlp" />
 			<replace file="${elab.client.classes.dir}/macInstaller.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<replace file="${elab.client.classes.dir}/macInstaller.jnlp" propertyFile="build.properties">
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+			</replace>
 
 			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windowsInstaller.jnlp" />
 			<replace file="${elab.client.classes.dir}/windowsInstaller.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<replace file="${elab.client.classes.dir}/windowsInstaller.jnlp" propertyFile="build.properties">
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+			</replace>
 
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ElabFullClient.jnlp" />
 			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
@@ -478,14 +490,20 @@
 			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/linuxInstaller.jnlp" />
 			<replace file="${client.build.dir}/linuxInstaller.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
 			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/macInstaller.jnlp" />
 			<replace file="${client.build.dir}/macInstaller.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
 			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/windowsInstaller.jnlp" />
 			<replace file="${client.build.dir}/windowsInstaller.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/ElabFullClient.jnlp" />
 			<replace file="${client.build.dir}/ElabFullClient.jnlp" propertyFile="build.properties">
