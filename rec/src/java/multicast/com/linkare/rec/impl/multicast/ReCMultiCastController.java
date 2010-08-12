@@ -88,7 +88,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	/*
 	 * The maximum number of apparatus available on this lab
 	 */
-	private static final int MAXIMUM_HARDWARES = 40;
+	private static final int MAXIMUM_HARDWARES = Defaults.defaultIfEmpty(System
+			.getProperty("ReC.MultiCastController.MAXIMUM_HARDWARES"), 40);
 
 	/*
 	 * The maximum number of clients to register with each hardware
