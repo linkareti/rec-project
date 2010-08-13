@@ -162,7 +162,12 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			@Override
 			public void notConnected(MediaNotConnectedEvent evt) {
 				log.fine("Handling not connected!!!!!!!");
-				playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
+				if (isApparatusVideoEnabled()) {
+					log.info("Video is enable for the selected apparatus.");
+					playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
+				} else {
+					log.info("Video isn't enable for the selected apparatus.");
+				}
 			}
 
 			@Override
@@ -182,7 +187,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public void playMediaExternal(String mrl) {
 		try {
 			String vlc = PreferencesUtils.readUserPreference("vlcpath");
-			if (vlc != null) {
+			if (vlc == null) {
 				vlc = "vlc";
 			}
 			Runtime.getRuntime().exec(vlc + " " + mrl);
@@ -210,6 +215,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		} else {
 			playMediaExternal(mrl);
 		}
+	}
+	
+	/**
+	 * Plays the media for the current apparatus configuration.
+	 */
+	public void playMediaCurrentApparatus() {
+		playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
 	}
 
 	/**
@@ -867,13 +879,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 		// Listen to current customizer events (done/canceled)
 		currentCustomizer.addICustomizerListener(this);
-
-		if (isApparatusVideoEnabled()) {
-			log.info("Video is enable for the selected apparatus.");
-			playMedia(ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation()));
-		} else {
-			log.info("Video isn't enable for the selected apparatus.");
-		}
 
 		setCurrentState(CONNECTED_TO_APPARATUS);
 

@@ -704,9 +704,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private void connectToApparatus() {
 
 		// Video
-		if (ReCApplication.IS_VIDEO_ENABLED && recApplication.getMediaController() != null) {
+		if (recApplication.isApparatusVideoEnabled() && recApplication.getMediaController() != null) {
+			log.info("Video is enable for the selected apparatus.");
 			getVideoBox().initializeVideoOutput();
 			recApplication.setVideoOutput(getVideoBox().getVideoOutput());
+			recApplication.playMediaCurrentApparatus();
+		} else {
+			log.info("Video isn't enable for the selected apparatus.");
 		}
 
 		// Toggle apparatus connected UI state 
