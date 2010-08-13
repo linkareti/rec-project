@@ -108,6 +108,11 @@ public class VideoViewerController {
 	 * Event listeners do controller.
 	 */
 	EventListenerList eventListeners = new EventListenerList();
+	
+	/**
+	 * URL to media for play
+	 */
+	private String mrl;
 
 	private VideoViewerController() {
 
@@ -224,11 +229,21 @@ public class VideoViewerController {
 	 *            URL a reproduzir. Pode ser um URL remoto ou local.
 	 */
 	public void setMediaToPlay(String mrl) {
+		this.mrl = mrl;
 		MediaDescriptor mediaDescriptor = new MediaDescriptor(jvlc, mrl);
 		this.player = new MediaPlayer(mediaDescriptor);
 		this.player.addListener(mediaListener);
 		this.state = MediaPlayerState.STOPPED;
 		resetFrame0();
+	}
+	
+	/**
+	 * Getter for the media url to play.
+	 * 
+	 * @return
+	 */
+	public String getMediaURL() {
+		return mrl;
 	}
 
 	/**
@@ -373,16 +388,20 @@ public class VideoViewerController {
 	 */
 	public void play() {
 
-		setPlayRate(1f);
-		if (this.state == MediaPlayerState.STOPPED) {
-			player.play();
-			//            mediaListPlayer.playItem(0, true);
-			if (vlm != null)
-				vlm.playMedia(BROADCAST_NAME);
+		if (player != null) {
+			setPlayRate(1f);
+			if (this.state == MediaPlayerState.STOPPED) {
+				player.play();
+				//            mediaListPlayer.playItem(0, true);
+				if (vlm != null)
+					vlm.playMedia(BROADCAST_NAME);
+			} else {
+				pause();
+				if (vlm != null)
+					vlm.pauseMedia(BROADCAST_NAME);
+			}
 		} else {
-			pause();
-			if (vlm != null)
-				vlm.pauseMedia(BROADCAST_NAME);
+			log.warning("There is no player!");
 		}
 	}
 

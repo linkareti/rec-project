@@ -204,7 +204,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public void playMedia(String mrl) {
 
 		log.info("Playing media: " + mrl);
-		if (mrl.equals("")) {
+		if (mrl == null || mrl.equals("")) {
 			log.info("There is not a valid media to play for this " + "experience. Proceding without video.");
 			return;
 		}
@@ -215,6 +215,52 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		} else {
 			playMediaExternal(mrl);
 		}
+	}
+
+	/**
+	 * Set the media identified by the given mrl.
+	 * 
+	 * @param mrl URL for the media to play.
+	 */
+	public void setMediaToPlay(String mrl) {
+		log.info("Setting to play media: " + mrl);
+		if (mrl == null || mrl.equals("")) {
+			log.info("There is not a valid media to play for this experiment. Proceding without video.");
+			return;
+		}
+
+		if (mediaController != null) {
+			mediaController.setMediaToPlay(mrl);
+		} else {
+			log.warning("There is no media controller!");
+		}
+	}
+	
+	/**
+	 * Plays the initialized media.
+	 */
+	public void playMedia() {
+		if (mediaController != null && mediaController.getMediaURL() != null) {
+			log.info("Playing media: " + mediaController.getMediaURL());
+			mediaController.play();
+		} else if (mediaController.getMediaURL() != null) {
+			log.info("Playing media with external player: " + mediaController.getMediaURL());
+			playMediaExternal(mediaController.getMediaURL());
+		} else {
+			log.warning("There is no initialized media.");
+		}
+	}
+	
+	/**
+	 * Getter for the media for the current apparatus configuration.
+	 * 
+	 * @return Video location or null if the current apparatus doesn't have the video enabled.
+	 */
+	public String getCurrentApparatusVideoLocation() {
+		if (isApparatusVideoEnabled()) {
+			return ReCResourceBundle.findString(currentApparatusConfig.getMediaConfig().getVideoLocation());
+		}
+		return null;
 	}
 	
 	/**
