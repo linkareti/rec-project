@@ -44,10 +44,17 @@
 
         <!-- change this value to disable video -->
         <property name="video.enabled" value="@video.enabled@"/>
-        <property name="vlc.plugins.destdir" value="@vlc.plugins.destdir@"/>
         <property name="vlc.plugins.filename" value="@vlc.plugins.filename@"/>
         
     </resources>
+    
+    <resources os="Linux">
+        <property name="vlc.plugins.destdir" value=".@vlc.plugins.destdir@"/>
+	</resources>
+    
+    <resources os="Windows">
+        <property name="vlc.plugins.destdir" value="@vlc.plugins.destdir@"/>
+	</resources>
     
     <application-desc main-class="@client.main-class@" />
     

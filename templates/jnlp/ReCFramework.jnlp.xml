@@ -59,7 +59,7 @@
     </resources>
 
     <resources arch="i386" os="Linux">
-        <nativelib href="lib/libsvlc_linux_i686_sig.jar"/>
+        <nativelib href="lib/libsvlc_linux_i386_sig.jar"/>
         <extension href="linuxInstaller.jnlp" name="linuxInstaller"/>
     </resources>
     <resources arch="i586" os="Linux">
