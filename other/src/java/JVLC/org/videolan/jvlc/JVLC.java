@@ -33,6 +33,7 @@ import java.awt.Canvas;
 
 import org.videolan.jvlc.internal.LibVlc;
 import org.videolan.jvlc.internal.LibVlc.LibVlcInstance;
+import org.videolan.jvlc.internal.LibVlc.LibVlcMediaInstance;
 import org.videolan.jvlc.internal.LibVlc.libvlc_exception_t;
 
 import com.sun.jna.Native;
@@ -84,6 +85,12 @@ public class JVLC {
 		long drawable = Native.getComponentID(canvas);
 		libvlc_exception_t exception = new libvlc_exception_t();
 		libvlc.libvlc_video_set_parent(instance, drawable, exception);
+	}
+
+	public void setVideoOutput(Canvas canvas, LibVlcMediaInstance mediaInstance) {
+		long drawable = Native.getComponentID(canvas);
+		libvlc_exception_t exception = new libvlc_exception_t();
+		libvlc.libvlc_media_player_set_drawable(mediaInstance, (int)drawable, exception);
 	}
 
 	public Logger getLogger() {

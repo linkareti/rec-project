@@ -205,7 +205,9 @@ public class VideoViewerController {
 	public void setVideoOutput(final Canvas jvlcCanvas) {
 
 		if (!player.hasVideoOutput()) {
-			jvlc.setVideoOutput(jvlcCanvas);
+			// TODO testing video window...
+//			jvlc.setVideoOutput(jvlcCanvas);
+			jvlc.setVideoOutput(jvlcCanvas, player.getInstance());
 		} else {
 			video.reparent(player, jvlcCanvas);
 		}

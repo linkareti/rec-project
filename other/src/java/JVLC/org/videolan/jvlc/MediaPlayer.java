@@ -243,7 +243,7 @@ public class MediaPlayer {
 	 * 
 	 * @return the instance
 	 */
-	LibVlcMediaInstance getInstance() {
+	public LibVlcMediaInstance getInstance() {
 		return instance;
 	}
 }
