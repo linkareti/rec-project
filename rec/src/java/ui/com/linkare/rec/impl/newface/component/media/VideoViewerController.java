@@ -21,6 +21,7 @@ import com.linkare.rec.impl.newface.component.media.events.MediaNotConnectedEven
 import com.linkare.rec.impl.newface.component.media.events.MediaStoppedEvent;
 import com.linkare.rec.impl.newface.component.media.events.MediaTimeChangedEvent;
 import com.linkare.rec.impl.newface.component.media.transcoding.TranscodingConfig;
+import com.sun.jna.Platform;
 
 /**
  * Wrapper em volta do JVLC e que contém as funcionalidades de controlo e manipulação de vídeo e audio.
@@ -206,8 +207,11 @@ public class VideoViewerController {
 
 		if (!player.hasVideoOutput()) {
 			// TODO testing video window...
-//			jvlc.setVideoOutput(jvlcCanvas);
-			jvlc.setVideoOutput(jvlcCanvas, player.getInstance());
+			if (Platform.isWindows()) {
+				jvlc.setVideoOutput(jvlcCanvas);
+			} else {
+				jvlc.setVideoOutput(jvlcCanvas, player.getInstance());
+			}
 		} else {
 			video.reparent(player, jvlcCanvas);
 		}
