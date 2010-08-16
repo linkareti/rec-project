@@ -206,7 +206,7 @@ public class VideoViewerController {
 	public void setVideoOutput(final Canvas jvlcCanvas) {
 
 		if (!player.hasVideoOutput()) {
-			// TODO testing video window...
+			// Video output method is platform dependant. Perhaps the windows lib version is old.
 			if (Platform.isWindows()) {
 				jvlc.setVideoOutput(jvlcCanvas);
 			} else {
