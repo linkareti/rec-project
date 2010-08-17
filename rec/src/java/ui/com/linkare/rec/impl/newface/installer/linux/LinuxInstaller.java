@@ -18,7 +18,7 @@ public class LinuxInstaller extends Installer {
 	 * à aplicação que implique nova instalar, deverá ser incrementado 
 	 * manualmente este valor.
 	 */
-	private static final int INSTALLER_VERSION = 0;
+	private static final int INSTALLER_VERSION = 2;
 
 	public static void main(String[] args) {
 		new LinuxInstaller().executeInstaller(args);
