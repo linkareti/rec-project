@@ -39,24 +39,21 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 		this.rs232configs = rs232configs;
 	}
 
-	public void processDataCommand(SerialPortCommand cmd) {
-
-		PhysicsVal phValue = null;
-		PhysicsVal phError = null;
-		Multiplier phMultiplier = null;
-
-		if (stopped)
-			return;
+	public PhysicsValue[] processDataCommand(SerialPortCommand cmd) {
 
 		// _DAT e _BIN
-		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
-			return;
+		if (stopped || cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null)
+			return null;
 
-		PhysicsValue[] values = new PhysicsValue[cmd.getDataHashMap().size() - 1];
+		PhysicsValue[] values = new PhysicsValue[cmd.getDataHashMap().size()];
 
-		if (cmd.getCommandIdentifier().equals(SerialPortCommandList.DAT)) {
+		if (cmd.getCommandIdentifier().equals(SerialPortCommandList.DAT.toString())) {
 
 			for (int channelNumber = 0; channelNumber < cmd.getDataHashMap().size(); channelNumber++) {
+				PhysicsVal phValue = null;
+				PhysicsVal phError = null;
+				Multiplier phMultiplier = null;
+				
 				OneChannelNode oneChannelNode = rs232configs.getRs232().getChannels().getChannelToOrder(channelNumber);
 
 				if (channelNumber < getAcquisitionHeader().getChannelsConfig().length) {
@@ -69,15 +66,14 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 							.getMultiplier();
 				} else if (channelNumber == getAcquisitionHeader().getChannelsConfig().length) {
 					// this is a clock value channel
-					phValue = PhysicsValFactory.fromDouble(oneChannelNode.calculate(Double.valueOf(cmd.getDataHashMap()
-							.get(channelNumber))));
-					phError = getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
-							.getDefaultErrorValue();
-					phMultiplier = getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
-							.getMultiplier();
+					// so it is a direct value without transformation
+					phValue = PhysicsValFactory.fromLong(Long.valueOf(cmd.getDataHashMap().get(channelNumber)));
+//					phError = getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
+//							.getDefaultErrorValue();
+//					phMultiplier = getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
+//							.getMultiplier();
 				} else {
 					// this is trash and should be ignored
-					phValue = null;
 				}
 
 				if (phValue != null)
@@ -91,6 +87,8 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 		counter++;
 		if (counter == total_samples)
 			setDataSourceEnded();
+		
+		return values;
 
 	}
 

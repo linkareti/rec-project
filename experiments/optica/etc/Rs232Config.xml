@@ -32,10 +32,10 @@
 	    </parameter>
 	</parameters>
 	<channels>
-	    <channel format="###" order="1">
+	    <channel format="###" order="0">
 		<transfer_function>
 		      <linear>
-			  <param weight="1" center="1" />
+			  <param weight="2" center="1" />
 		      </linear>
 		</transfer_function>
 	    </channel>

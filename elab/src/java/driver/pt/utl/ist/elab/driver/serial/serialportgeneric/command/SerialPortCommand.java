@@ -90,7 +90,7 @@ public class SerialPortCommand implements java.io.Serializable {
 		if (returnHashMap == null) {
 			returnHashMap = new HashMap<Integer, String>();
 			String[] commandStringArray = command.split("\t");
-			for (int i = 1; i < commandStringArray.length; i++) {
+			for (int i = 0; i < commandStringArray.length; i++) {
 				returnHashMap.put(i, commandStringArray[i]);
 			}
 			return returnHashMap;
