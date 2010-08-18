@@ -13,19 +13,14 @@ package pt.utl.ist.elab.driver.serial.serialportgeneric;
 public class IncorrectRs232ValuesException extends Exception {
 
 	private static final long serialVersionUID = -5169126140740897351L;
-	private String message = "";
 
 	/**
 	 * Creates the <code>IncorrectRs232ValuesException</code>.
 	 * 
-	 * @param string
+	 * @param message
 	 */
-	public IncorrectRs232ValuesException(String string) {
-		this.message = string;
-	}
-
-	public String getMessage() {
-		return message;
+	public IncorrectRs232ValuesException(String message) {
+		super(message);
 	}
 
 }
