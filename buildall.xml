@@ -169,6 +169,7 @@
 
 				<zipfileset file="${experiments.build.dir}/etc/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
 				<zipfileset file="${hardwareserver.build.dir}/etc/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
+				<zipfileset file="experiments/@{experiment.name}/etc/Rs232Config.xml" fullpath="hardwareserver/etc/Rs232Config.xml" />
 				<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" filemode="755" />
 				<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" filemode="755" />
 			</zip>

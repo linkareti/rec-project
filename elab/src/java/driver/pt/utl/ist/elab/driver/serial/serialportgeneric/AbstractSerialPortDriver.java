@@ -56,6 +56,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	protected static BaseHardware baseHardware = null;
 	protected static int currentBinaryLength = 0;
 	protected static int totalBinaryLength = 0;
+	
+	private static final String RS232_CONFIG_FILE_PATH = Defaults.defaultIfEmpty(System
+			.getProperty("ReC.Driver.RS232_CONFIG_FILE_PATH"), "hardwareserver/etc/Rs232Config.xml");
 
 	static {
 		Logger l = LogManager.getLogManager().getLogger(SERIAL_PORT_LOGGER);
@@ -94,7 +97,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public AbstractSerialPortDriver() {
 
 		try {
-			rs232configs = loadRs232Configs("Rs232Config.xml");
+			rs232configs = loadRs232Configs(RS232_CONFIG_FILE_PATH);
 		} catch (IncorrectRs232ValuesException e) {
 			logMe("SERIAL PORT DRIVER CONSTRUCTOR : Incorrect values on rs232 config file" + e.getMessage());
 			return;
@@ -107,6 +110,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		packageName = getClass().getPackage().getName() + ".";
 
 		ID_STR = rs232configs.getId();
+		logMe("Driver Unique ID = " + ID_STR);
 
 		loadCommandHandlers();
 
@@ -114,20 +118,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		setDriverUniqueID(rs232configs.getId());
 		setApplicationNameLockPort(rs232configs.getId());
-		try {
-			System.out.println(1);
-			rs232configs.getRs232();
-			System.out.println(2);
-			rs232configs.getRs232().getTimeout();
-			System.out.println(3);
-			rs232configs.getRs232().getTimeout().getPortListen();
-			System.out.println(4);
-			setTimeOutPerPort(rs232configs.getRs232().getTimeout().getPortListen().getTimeInt());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getCause());
-			e.printStackTrace();
-		}
+		setTimeOutPerPort(rs232configs.getRs232().getTimeout().getPortListen().getTimeInt());
 
 		serialFinder.addStampFinderListener(this);
 		serialCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName());
