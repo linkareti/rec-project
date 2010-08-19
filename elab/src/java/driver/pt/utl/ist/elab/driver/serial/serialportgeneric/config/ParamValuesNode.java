@@ -53,10 +53,15 @@ public class ParamValuesNode {
 	@XmlAttribute(required = true)
 	protected String weight;
 
+	@Deprecated
 	protected Double dcenter = Double.NaN;
+	@Deprecated
 	protected Double dcoeficient = Double.NaN;
+	@Deprecated
 	protected Double ddelta = Double.NaN;
+	@Deprecated
 	protected Double dpower = Double.NaN;
+	@Deprecated
 	protected Double dweight = Double.NaN;
 
 	/**
@@ -69,6 +74,7 @@ public class ParamValuesNode {
 		return center;
 	}
 
+	@Deprecated
 	public Double getDCenter() {
 		return dcenter;
 	}
@@ -99,6 +105,7 @@ public class ParamValuesNode {
 		return coeficient;
 	}
 
+	@Deprecated
 	public Double getDCoeficient() {
 		return dcoeficient;
 	}
@@ -129,6 +136,7 @@ public class ParamValuesNode {
 		return delta;
 	}
 
+	@Deprecated
 	public Double getDDelta() {
 		return ddelta;
 	}
@@ -159,6 +167,7 @@ public class ParamValuesNode {
 		return power;
 	}
 
+	@Deprecated
 	public Double getDPower() {
 		return dpower;
 	}
@@ -189,6 +198,7 @@ public class ParamValuesNode {
 		return weight;
 	}
 
+	@Deprecated
 	public Double getDWeight() {
 		return dweight;
 	}

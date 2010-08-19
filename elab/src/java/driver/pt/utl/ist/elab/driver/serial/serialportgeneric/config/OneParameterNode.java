@@ -214,48 +214,44 @@ public class OneParameterNode {
 	}
 
 	public Double calculate(Double value, TransferFunctionType type) {
+		if (transferFunction == null || transferFunction.isEmpty()) {
+			return value;
+		}
+		
 		Double total = 0D;
-		boolean haveFunctions = false;
 		for (TransferFunctionNode node : transferFunction) {
 			if (node.type.equalsIgnoreCase(type.toString())) {
-				if (!node.getLinear().isEmpty()) {
-					for (LinearFunctionNode linear : node.getLinear()) {
-						haveFunctions = true;
-						total = total + linear.getParam().getDWeight() * value - linear.getParam().getDCenter();
-					}
-					for (PowerFunctionNode power : node.getPower()) {
-						haveFunctions = true;
-						total = total + power.getParam().getDWeight()
-								* Math.pow((value - power.getParam().getDCenter()), power.getParam().getDPower());
-					}
-					for (ExpFunctionNode expon : node.getExponential()) {
-						haveFunctions = true;
-						total = total + expon.getParam().getDWeight()
-								* Math.exp(expon.getParam().getDCoeficient() * (value - expon.getParam().getDCenter()));
-					}
-					for (LogFunctionNode log : node.getLogarithm()) {
-						haveFunctions = true;
-						total = total + log.getParam().getDWeight()
-								* Math.log(log.getParam().getDWeight() * (value - log.getParam().getDCenter()));
-					}
-					for (SinFunctionNode sin : node.getSin()) {
-						haveFunctions = true;
-						total = total + sin.getParam().getDWeight()
-								* Math.sin(sin.getParam().getDCoeficient() * value - sin.getParam().getDDelta());
-					}
-					for (TgFunctionNode tg : node.getTg()) {
-						haveFunctions = true;
-						total = total + tg.getParam().getDWeight()
-								* Math.tan(tg.getParam().getDCoeficient() * value - tg.getParam().getDDelta());
-					}
+				for (LinearFunctionNode linear : node.getLinear()) {
+					total = total + pD(linear.getParam().getWeight()) * value - pD(linear.getParam().getCenter());
+				}
+				for (PowerFunctionNode power : node.getPower()) {
+					total = total + pD(power.getParam().getWeight())
+							* Math.pow((value - pD(power.getParam().getCenter())), pD(power.getParam().getPower()));
+				}
+				for (ExpFunctionNode expon : node.getExponential()) {
+					total = total + pD(expon.getParam().getWeight())
+							* Math.exp(pD(expon.getParam().getCoeficient()) * (value - pD(expon.getParam().getCenter())));
+				}
+				for (LogFunctionNode log : node.getLogarithm()) {
+					total = total + pD(log.getParam().getWeight())
+							* Math.log(pD(log.getParam().getCoeficient()) * (value - pD(log.getParam().getCenter())));
+				}
+				for (SinFunctionNode sin : node.getSin()) {
+					total = total + pD(sin.getParam().getWeight())
+							* Math.sin(pD(sin.getParam().getCoeficient()) * value - pD(sin.getParam().getDelta()));
+				}
+				for (TgFunctionNode tg : node.getTg()) {
+					total = total + pD(tg.getParam().getWeight())
+							* Math.tan(pD(tg.getParam().getCoeficient()) * value - pD(tg.getParam().getDelta()));
 				}
 			}
 		}
 
-		if (haveFunctions)
-			return total;
-		else
-			return value;
+		return total;
+	}
+	
+	private static Double pD(String s) {
+		return Double.parseDouble(s);
 	}
 
 	public String formatOutput(Double value) {

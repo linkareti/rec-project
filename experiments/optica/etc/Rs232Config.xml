@@ -9,7 +9,7 @@
 		      </linear>
 		      <power>
 			  <param weight="0.5" center="3" power="2" />
-			  <param weight="0.25" center="2" power="2" />
+			  <!-- param weight="0.25" center="2" power="2" / -->
 		      </power>
 		      <exponential>
 			  <param weight="1" center="0" coeficient="1" />
@@ -38,6 +38,43 @@
 			  <param weight="2" center="1" />
 		      </linear>
 		</transfer_function>
+	    </channel>
+	    <channel format="###" order="1">
+		<transfer_function>
+		      <power>
+			  <param weight="3" center="1" power="2" />
+		      </power>
+		</transfer_function>
+	    </channel>
+	    <channel format="###" order="2">
+		<transfer_function>
+		      <exponential>
+			  <param weight="1" center="0" coeficient="1" />
+		      </exponential>
+		</transfer_function>
+	    </channel>
+	    <channel format="###" order="3">
+		<transfer_function>
+		      <logarithm>
+			  <param weight="2" center="10" coeficient="100" />
+		      </logarithm>
+		</transfer_function>
+	    </channel>
+	    <channel format="###" order="4">
+		<transfer_function>
+		      <sin>
+			  <param weight="100" coeficient="2" delta="3.1416" />
+		      </sin>
+		</transfer_function>
+	    </channel>
+	    <channel format="###" order="5">
+		<transfer_function>
+		      <tg>
+			  <param weight="1" coeficient="3" delta="0" />
+		      </tg>
+		</transfer_function>
+	    </channel>
+	    <channel format="###" order="6">
 	    </channel>
 	</channels>
 	<timeout>

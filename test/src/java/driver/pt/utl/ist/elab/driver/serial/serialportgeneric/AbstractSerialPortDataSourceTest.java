@@ -37,7 +37,7 @@ import com.linkare.rec.data.metadata.Scale;
 public class AbstractSerialPortDataSourceTest {
 	
 	private static final String RS232_CONFIG_FILE_PATH = "experiments/optica/etc/Rs232Config.xml";
-	private static final int CHANNELS_CONFIG_LENGTH = 1;
+	private static final int CHANNELS_CONFIG_LENGTH = 7;
 	
 	private AbstractSerialPortDataSource dataSource = new GenericSerialPortDataSource();
 	private HardwareNode rs232configs;
@@ -70,8 +70,9 @@ public class AbstractSerialPortDataSourceTest {
 		for (int i = 0; i < channelsConfig.length; i++) {
 			ChannelAcquisitionConfig cConfig = new ChannelAcquisitionConfig();
 			Scale scale = new Scale();
-			PhysicsVal defaultError = new PhysicsVal();
-			scale.setDefaultErrorValue(defaultError);
+//			PhysicsVal defaultError = new PhysicsVal();
+//			scale.setDefaultErrorValue(defaultError);
+			scale.setDefaultErrorValue(null);
 			cConfig.setSelectedScale(scale);
 			channelsConfig[i] = cConfig;
 		}
@@ -111,14 +112,23 @@ public class AbstractSerialPortDataSourceTest {
 		PhysicsValue[] value = null;
 		
 		// beware of CHANNELS_CONFIG_LENGTH
-		cmd = createDataCommand("10	1");
+		String cmdStr = "10	3	5	20	2	15	123	1";
+		cmd = createDataCommand(cmdStr);
 		value = dataSource.processDataCommand(cmd);
-		System.out.println("Value = " + Arrays.deepToString(value));
+		System.out.println("Cmd ["+cmdStr+"] Value " + Arrays.deepToString(value));
 		
 		Assert.assertNotNull(value);
 		Assert.assertTrue(value.length == CHANNELS_CONFIG_LENGTH + 1);
-		Assert.assertTrue(value[0].getValue().getIntValue() == 19);
-		Assert.assertTrue(value[1].getValue().getIntValue() == 1);
+		
+		Assert.assertTrue(value[0].getValue().getDoubleValue() == 19);
+		Assert.assertTrue(value[1].getValue().getDoubleValue() == 12);
+		Assert.assertTrue(value[2].getValue().getDoubleValue() > 148 && value[2].getValue().getDoubleValue() < 149); // TODO confirm result value
+		Assert.assertTrue(value[3].getValue().getDoubleValue() > 13 && value[3].getValue().getDoubleValue() < 14);
+		Assert.assertTrue(value[4].getValue().getDoubleValue() > 75 && value[4].getValue().getDoubleValue() < 76);
+		Assert.assertTrue(value[5].getValue().getDoubleValue() > 1.6 && value[5].getValue().getDoubleValue() < 1.7);
+		Assert.assertTrue(value[6].getValue().getDoubleValue() == 123);
+		
+		Assert.assertTrue(value[CHANNELS_CONFIG_LENGTH].getValue().getLongValue() == 1);
 		System.out.println("OK");
 	}
 
