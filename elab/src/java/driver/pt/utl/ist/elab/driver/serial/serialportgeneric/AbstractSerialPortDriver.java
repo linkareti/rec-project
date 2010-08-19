@@ -16,6 +16,8 @@ import gnu.io.SerialPort;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -31,6 +33,7 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.HardwareNode;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDataSource;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.translator.SerialPortTranslator;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
@@ -327,6 +330,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.CFG.toString().toLowerCase());
 
 		// loop through each parameter and add data to each one
+		List<OneParameterNode> commandParameterNodes = new ArrayList<OneParameterNode>();
 		for (int i = 1; i < rs232configs.getRs232().getParameters().getParameter().size(); i++) {
 			// parameter from rs232
 			OneParameterNode parameterNone = rs232configs.getRs232().getParameters().getParameterToOrder(i);
@@ -335,15 +339,21 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			// if is legible value...
 			if (channelParameter.getParameterType() != ParameterType.BlackBoxValue) {
 				String parameterName = channelParameter.getParameterName();
-				Float parameterValue = new Float(Defaults.defaultIfEmpty(config
-						.getSelectedHardwareParameterValue(parameterName), info
-						.getHardwareParameterValue(parameterName)));
+				String parameterValue = Defaults.defaultIfEmpty(
+						config.getSelectedHardwareParameterValue(parameterName), info
+								.getHardwareParameterValue(parameterName));
 				// add to command
-				serialPortCommand.addCommandData(parameterName, parameterNone.formatOutput(parameterValue));
+				serialPortCommand.addCommandData(parameterNone.getOrder().toString(), parameterValue);
+				commandParameterNodes.add(parameterNone);
 			} else {
 				// TODO : send a blackbox value on cfg
 			}
 		}
+		
+		if (!SerialPortTranslator.translateConfig(serialPortCommand, commandParameterNodes)) {
+			throw new WrongConfigurationException("Cannot translate config command!", -1);
+		}
+		
 		writeMessage(serialPortCommand.getCommand());
 		currentDriverState = DriverState.CONFIGURING;
 		currentDriverState.startTimeoutClock();

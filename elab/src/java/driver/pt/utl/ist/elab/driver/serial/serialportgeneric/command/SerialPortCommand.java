@@ -66,7 +66,7 @@ public class SerialPortCommand implements java.io.Serializable {
 		this.commandDataMap.put(commandDataKey, commandDataObject);
 	}
 
-	public Object getCommandData(Object commandDataKey) {
+	public String getCommandData(String commandDataKey) {
 		return this.commandDataMap.get(commandDataKey);
 	}
 
