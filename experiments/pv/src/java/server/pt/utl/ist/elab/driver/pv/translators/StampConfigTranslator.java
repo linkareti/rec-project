@@ -75,11 +75,11 @@ public class StampConfigTranslator extends AbstractStampTranslator {
 		 */
 
 		// Horacio said that this parameters can't have zeros
-//		String userposlowstr = "" + userposlow;
+		String userposlowstr = "" + userposlow;
 //		while (userposlowstr.length() < 4)
 //			userposlowstr = "0" + userposlowstr;
 //
-//		String userposhighstr = "" + userposhigh;
+		String userposhighstr = "" + userposhigh;
 //		while (userposhighstr.length() < 4)
 //			userposhighstr = "0" + userposhighstr;
 
