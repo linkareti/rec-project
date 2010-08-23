@@ -87,5 +87,17 @@ public class SerialPortTranslator {
 
 		return true;
 	}
+	
+	public static void translateReset(SerialPortCommand command) {
+		command.setCommand(command.getCommandIdentifier());
+	}
+	
+	public static void translateStart(SerialPortCommand command) {
+		command.setCommand(command.getCommandIdentifier());
+	}
+	
+	public static void translateStop(SerialPortCommand command) {
+		command.setCommand(command.getCommandIdentifier());
+	}
 
 }

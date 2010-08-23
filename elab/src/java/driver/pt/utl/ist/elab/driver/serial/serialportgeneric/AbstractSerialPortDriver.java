@@ -375,6 +375,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		fireIDriverStateListenerDriverReseting();
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.RST.toString().toLowerCase());
+		SerialPortTranslator.translateReset(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
 		currentDriverState = DriverState.RESETING;
 		currentDriverState.startTimeoutClock();
@@ -450,6 +451,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			throw new IncorrectStateException();
 		}
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.STR.toString().toLowerCase());
+		SerialPortTranslator.translateStart(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
 		currentDriverState = DriverState.STARTING;
 		currentDriverState.startTimeoutClock();
@@ -482,6 +484,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		fireIDriverStateListenerDriverStoping();
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
+		SerialPortTranslator.translateStop(serialPortCommand);
 		serialIO.reopen();
 		fireIDriverStateListenerDriverStoped();
 	}
