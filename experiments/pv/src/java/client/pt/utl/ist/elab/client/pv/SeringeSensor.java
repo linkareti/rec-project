@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 
 import javax.swing.Icon;
 import javax.swing.JMenuBar;
@@ -28,6 +29,8 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
  */
 public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+	
+	private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
 	private BufferedImage imgEmbolo = new BufferedImage(30, 57, BufferedImage.TYPE_INT_ARGB);
 	private BufferedImage imgSeringe = new BufferedImage(36, 65, BufferedImage.TYPE_INT_ARGB);
@@ -130,7 +133,7 @@ public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec
 				+ header.getChannelsConfig(0).getSelectedScale().getPhysicsUnitSymbol() + "] = " + (int) pressure,
 				center_x + imgSeringe.getWidth() + 10, center_y + imgSeringe.getHeight());
 		g2D.drawString("V [" + header.getChannelsConfig(1).getSelectedScale().getMultiplier()
-				+ header.getChannelsConfig(1).getSelectedScale().getPhysicsUnitSymbol() + "] = " + (int) volume,
+				+ header.getChannelsConfig(1).getSelectedScale().getPhysicsUnitSymbol() + "] = " + decimalFormat.format(volume),
 				center_x + imgSeringe.getWidth() + 10, center_y + imgSeringe.getHeight()
 						+ g2D.getFontMetrics().getHeight() + 8);
 
