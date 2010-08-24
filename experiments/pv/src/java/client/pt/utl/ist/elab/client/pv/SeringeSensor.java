@@ -117,6 +117,8 @@ public class SeringeSensor extends javax.swing.JPanel implements com.linkare.rec
 		int pressureColor = 155 * (int) Math.floor((pressure - PRESS_MIN) / (PRESS_MAX - PRESS_MIN));
 		if (pressureColor > 155) {
 			pressureColor = 155;
+		} else if (pressureColor < -100) {
+			pressureColor = -100;
 		}
 		g2D.drawImage(imgEmbolo, center_x + 4, center_y + 20 + volumepos, imgEmbolo.getWidth(), imgEmbolo.getHeight(),
 				null);
