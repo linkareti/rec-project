@@ -44,14 +44,7 @@ public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset i
 	public void dataModelWaiting() {
 	}
 
-	int nsamples = 0;
-
 	public void newSamples(NewExpDataEvent evt) {
-		for (int i = evt.getSamplesStartIndex(); i < evt.getSamplesEndIndex(); i++) {
-			if (expDataModel.getValueAt(i, getChannelDisplayY()) != null) {
-				nsamples++;
-			}
-		}
 		fireDatasetChanged();
 	}
 
@@ -110,8 +103,7 @@ public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset i
 
 		if (expDataModel.getTotalSamples() == -1)
 			return 0;
-		// return expDataModel.getTotalSamples();
-		return nsamples;
+		return expDataModel.getTotalSamples();
 	}
 
 	/**
