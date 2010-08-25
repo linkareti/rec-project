@@ -49,7 +49,6 @@ import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
-import com.linkare.rec.impl.threading.IConditionDecisor.ConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
@@ -66,10 +65,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	private static final String RS232_CONFIG_FILE_PATH = Defaults.defaultIfEmpty(System
 			.getProperty("ReC.Driver.RS232_CONFIG_FILE_PATH"), "hardwareserver/etc/Rs232Config.xml");
 
-	private static Logger logger = null;
 	static {
-		logger = LogManager.getLogManager().getLogger(SERIAL_PORT_LOGGER);
-		if (logger == null) {
+		Logger l = LogManager.getLogManager().getLogger(SERIAL_PORT_LOGGER);
+		if (l == null) {
 			LogManager.getLogManager().addLogger(Logger.getLogger(SERIAL_PORT_LOGGER));
 		}
 	}
@@ -103,11 +101,11 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public AbstractSerialPortDriver() {
 		
-		logger.log(Level.FINE, "Instantiating the " + this.getClass().getSimpleName());
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Instantiating the " + this.getClass().getSimpleName());
 
 		try {
 			rs232configs = loadRs232Configs(RS232_CONFIG_FILE_PATH);
-			logger.log(Level.FINE, "Loaded the RS232 configuration.");
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Loaded the RS232 configuration.");
 		} catch (IncorrectRs232ValuesException e) {
 			logMe("SERIAL PORT DRIVER CONSTRUCTOR : Incorrect values on rs232 config file" + e.getMessage());
 			return;
@@ -124,7 +122,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		loadCommandHandlers();
 
-		logger.log(Level.FINE, "Creating the serial finder.");
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating the serial finder.");
 		serialFinder = new SerialPortFinder();
 
 		setDriverUniqueID(rs232configs.getId());
@@ -133,7 +131,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		serialFinder.addStampFinderListener(this);
 		
-		logger.log(Level.FINE, "Creating the EventQueue for the serial commands.");
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating the EventQueue for the serial commands.");
 		serialCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName());
 	}
 
@@ -288,7 +286,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void init(HardwareInfo info) {
-		logger.log(Level.FINE, "Initializing driver");
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Initializing driver");
 		this.info = info;
 		
 		if (serialIO != null) {
@@ -321,7 +319,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			fireIDriverStateListenerDriverShutdown();
 		}
 
-		logger.log(Level.FINE, "Driver initialized");
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Driver initialized");
 	}
 
 	/**
