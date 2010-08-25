@@ -272,13 +272,18 @@ public class SerialPortFinder {
 				"Are there COMM Ports on the System? " + commPortIdentifiers.hasMoreElements());
 
 		if (AbstractSerialPortDriver.rs232configs != null) {
-			configuredPorts.addAll(Arrays.asList(AbstractSerialPortDriver.rs232configs.getRs232().getPortsRestrict()
-					.split(",")));
+			String[] ports = AbstractSerialPortDriver.rs232configs.getRs232().getPortsRestrict().split(",");
+			Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.FINE,
+					"RS232 xml configured ports = " + Arrays.deepToString(ports));
+			configuredPorts.addAll(Arrays.asList(ports));
 		}
 
 		// Lists all the ports and filters included on rs232 configuration file
 		while (commPortIdentifiers.hasMoreElements()) {
 			CommPortIdentifier identifier = commPortIdentifiers.nextElement();
+			Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.FINE,
+					"CommPortIdentifier Name = " + identifier.getName() + " is it Serial = "
+							+ String.valueOf(identifier.getPortType() == CommPortIdentifier.PORT_SERIAL));
 			if (identifier.getPortType() == CommPortIdentifier.PORT_SERIAL) {
 				if (configuredPorts.contains(identifier.getName())) {
 					tempPorts.add(identifier);
