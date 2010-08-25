@@ -14,9 +14,12 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -263,24 +266,21 @@ public class SerialPortFinder {
 
 		Enumeration<CommPortIdentifier> commPortIdentifiers = gnu.io.CommPortIdentifier.getPortIdentifiers();
 		LinkedList<CommPortIdentifier> tempPorts = new LinkedList<CommPortIdentifier>();
-		List<String> restrictedPorts = new ArrayList<String>();
+		Set<String> configuredPorts = new HashSet<String>();
 
 		Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
 				"Are there COMM Ports on the System? " + commPortIdentifiers.hasMoreElements());
 
 		if (AbstractSerialPortDriver.rs232configs != null) {
-			for (String port : AbstractSerialPortDriver.rs232configs.getRs232().getPortsRestrict().split(",")) {
-				restrictedPorts.add(port);
-			}
+			configuredPorts.addAll(Arrays.asList(AbstractSerialPortDriver.rs232configs.getRs232().getPortsRestrict()
+					.split(",")));
 		}
 
-		/*
-		 * Lists all the ports and filters included on rs232 configuration file
-		 */
+		// Lists all the ports and filters included on rs232 configuration file
 		while (commPortIdentifiers.hasMoreElements()) {
 			CommPortIdentifier identifier = commPortIdentifiers.nextElement();
 			if (identifier.getPortType() == CommPortIdentifier.PORT_SERIAL) {
-				if (restrictedPorts.contains(identifier.getName())) {
+				if (configuredPorts.contains(identifier.getName())) {
 					tempPorts.add(identifier);
 				}
 			}
@@ -298,10 +298,15 @@ public class SerialPortFinder {
 		for (int i = 0; i < ports.length; i++) {
 			Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Port[" + i + "]=" + ports[i].getName());
 		}
-
-		runner = new SerialPortFinderRunner();
-		runner.setPriority(Thread.NORM_PRIORITY + 2);
-		runner.start();
+		
+		if (ports.length > 0) {
+			runner = new SerialPortFinderRunner();
+			runner.setPriority(Thread.NORM_PRIORITY + 2);
+			runner.start();
+		} else {
+			Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.SEVERE,
+					"There are none of the configured serial ports on the System!");
+		}
 
 	}
 
@@ -389,8 +394,10 @@ public class SerialPortFinder {
 		}
 
 		public void cyclePort() {
-			if (ports == null)
+			if (ports == null || ports.length == 0) {
+				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "There are no ports!");
 				return;
+			}
 
 			if (currentPort >= ports.length) {
 				currentPort = 0;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <hardware id="ELAB_OPTICA_STAMP_V02" num_channels="2" minfrequency="10Hz" maxfrequency="1000Hz">
-     <rs232 baud="19200" stopbits="1" paritybits="1" numbits="8" ports_restrict="1,2,3,4">
+     <rs232 baud="19200" stopbits="1" paritybits="1" numbits="8" ports_restrict="0,1,2,3,4">
 	<parameters>
 	    <parameter output="####" input="####.##" maxvalue="100" minvalue="1" order="1">
 		  <transfer_function type="output">
