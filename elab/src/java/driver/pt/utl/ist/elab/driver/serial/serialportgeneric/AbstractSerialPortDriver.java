@@ -46,7 +46,10 @@ import com.linkare.rec.impl.driver.BaseHardware;
 import com.linkare.rec.impl.driver.IDataSource;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
+import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
+import com.linkare.rec.impl.threading.WaitForConditionResult;
+import com.linkare.rec.impl.threading.IConditionDecisor.ConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
@@ -63,9 +66,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	private static final String RS232_CONFIG_FILE_PATH = Defaults.defaultIfEmpty(System
 			.getProperty("ReC.Driver.RS232_CONFIG_FILE_PATH"), "hardwareserver/etc/Rs232Config.xml");
 
+	private static Logger logger = null;
 	static {
-		Logger l = LogManager.getLogManager().getLogger(SERIAL_PORT_LOGGER);
-		if (l == null) {
+		logger = LogManager.getLogManager().getLogger(SERIAL_PORT_LOGGER);
+		if (logger == null) {
 			LogManager.getLogManager().addLogger(Logger.getLogger(SERIAL_PORT_LOGGER));
 		}
 	}
@@ -98,9 +102,12 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * @author fdias
 	 */
 	public AbstractSerialPortDriver() {
+		
+		logger.log(Level.FINE, "Instantiating the " + this.getClass().getSimpleName());
 
 		try {
 			rs232configs = loadRs232Configs(RS232_CONFIG_FILE_PATH);
+			logger.log(Level.FINE, "Loaded the RS232 configuration.");
 		} catch (IncorrectRs232ValuesException e) {
 			logMe("SERIAL PORT DRIVER CONSTRUCTOR : Incorrect values on rs232 config file" + e.getMessage());
 			return;
@@ -117,6 +124,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		loadCommandHandlers();
 
+		logger.log(Level.FINE, "Creating the serial finder.");
 		serialFinder = new SerialPortFinder();
 
 		setDriverUniqueID(rs232configs.getId());
@@ -124,6 +132,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		setTimeOutPerPort(rs232configs.getRs232().getTimeout().getPortListen().getTimeInt());
 
 		serialFinder.addStampFinderListener(this);
+		
+		logger.log(Level.FINE, "Creating the EventQueue for the serial commands.");
 		serialCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName());
 	}
 
@@ -278,20 +288,40 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void init(HardwareInfo info) {
+		logger.log(Level.FINE, "Initializing driver");
 		this.info = info;
-		if (serialIO != null)
+		
+		if (serialIO != null) {
 			serialIO.shutdown();
+		}
+
 		serialIO = null;
-		// serialFinder.startSearch();
-		// if (serialIO != null) {
+		serialFinder.startSearch();
+		try {
+			WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
+				public ConditionResult getConditionResult() {
+					synchronized (serialFinder) {
+						if (serialIO != null) {
+							return ConditionResult.CONDITION_MET_TRUE;
+						}
+					}
+					return ConditionResult.CONDITION_NOT_MET;
+				}
+			}, 120 * 1000, serialFinder.getTimeOutPerPort());
+		} catch (TimedOutException e) {
+			LoggerUtil.logThrowable("Couldn't find port for serial in 120 s", e, Logger.getLogger(SERIAL_PORT_LOGGER));
+		}
+
 		currentDriverState = DriverState.UNKNOWN;
 		currentDriverState.startTimeoutClock();
-		fireIDriverStateListenerDriverInited();
-		// } else {
-		// currentDriverState = DriverState.UNKNOWN;
-		// currentDriverState.startTimeoutClock();
-		// fireIDriverStateListenerDriverShutdown();
-		// }
+
+		if (serialIO != null) {
+			fireIDriverStateListenerDriverInited();
+		} else {
+			fireIDriverStateListenerDriverShutdown();
+		}
+
+		logger.log(Level.FINE, "Driver initialized");
 	}
 
 	/**
@@ -875,10 +905,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	protected void logMe(String message) {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, message);
-	}
-
-	protected void setBase(BaseHardware baseHardware) {
-		baseHardware.getHardwareInfo();
 	}
 
 }

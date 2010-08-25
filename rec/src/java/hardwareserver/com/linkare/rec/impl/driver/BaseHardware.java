@@ -147,6 +147,9 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	EventQueue eventQueue = null;
 
 	public BaseHardware() {
+		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Instatiating the BaseHardware.");
+		
+		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Creating EventQueue for data client dispatcher.");
 		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName());
 
 		if (!GraphicsEnvironment.isHeadless()) {
@@ -191,6 +194,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 	 * @param driver New value of property driver.
 	 */
 	public void setDriver(IDriver driver) {
+		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.FINE, "Setting the driver for the BaseHardware.");
 
 		if (this.driver != null) {
 			this.driver.removeIDriverStateListener(stateMachine);

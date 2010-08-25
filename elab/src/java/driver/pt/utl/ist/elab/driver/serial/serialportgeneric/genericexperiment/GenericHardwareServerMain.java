@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment;
 
+import java.util.Arrays;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -27,9 +28,10 @@ public abstract class GenericHardwareServerMain {
 	// TODO : please, replace this values
 	private static String HARDWARE_LOGGER = "GenericHardware.Logger";
 
+	private static Logger log = null;
 	static {
-		Logger l = LogManager.getLogManager().getLogger(HARDWARE_LOGGER);
-		if (l == null) {
+		log = LogManager.getLogManager().getLogger(HARDWARE_LOGGER);
+		if (log == null) {
 			LogManager.getLogManager().addLogger(Logger.getLogger(HARDWARE_LOGGER));
 		}
 	}
@@ -39,6 +41,7 @@ public abstract class GenericHardwareServerMain {
 	 */
 	public static void main(String[] args) {
 		try {
+			log.info("Started the Driver with the args " + Arrays.deepToString(args));
 			ORBBean.getORBBean();
 			@SuppressWarnings("unused")
 			BaseHardware baseHardware = new BaseHardware((IDriver) new GenericSerialPortDriver());
