@@ -13,12 +13,10 @@ package pt.utl.ist.elab.driver.serial.serialportgeneric;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
