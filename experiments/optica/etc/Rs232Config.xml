@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <hardware id="ELAB_OPTICA_STAMP_V02" num_channels="2" minfrequency="10Hz" maxfrequency="1000Hz">
-  <rs232 baud="19200" stopbits="1" paritybits="1" numbits="8" ports_restrict="/dev/ttyS0,/dev/ttyS1">
+  <rs232 baud="9600" stopbits="2" paritybits="0" numbits="8" ports_restrict="/dev/ttyS0,/dev/ttyS1">
 	<parameters>
 	    <parameter output="####" input="####.##" maxvalue="100" minvalue="1" order="1">
 		  <transfer_function type="output">
@@ -89,7 +89,7 @@
 	    <stp time="20" />
 	    <rst time="20" />
 	    <hardware_died time="3600" />
-	    <listen_to_port time="600" />
+	    <listen_to_port time="10000" />
 	</timeout>
 	<errors>
 	    <error code="0" key="OPS" message="Something wrong happened !" />
