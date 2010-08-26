@@ -404,7 +404,7 @@ public class SerialPortFinder {
 
 			if (currentPort >= ports.length) {
 				currentPort = 0;
-				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Restarting from the first port!");
+				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.FINE, "Restarting from the first port!");
 			}
 
 			CommPortIdentifier cpi = ports[currentPort];
@@ -422,6 +422,13 @@ public class SerialPortFinder {
 					"Serial Port " + cpi.getName() + " is not Owned - Opening & Locking It! ");
 
 			try {
+				Logger.getLogger(STAMP_FINDER_LOGGER).log(
+						Level.FINE,
+						"Port IO configurations = ApplicationNameLockPort [" + getApplicationNameLockPort()
+								+ "] BaudRate [" + getPortBaudRate() + "] DataBits [" + getPortDataBits()
+								+ "] Parity [" + getPortParity() + "] StopBits [" + getPortStopBits() + "] DTR ["
+								+ isDTR() + "] RST [" + isRTS() + "] WaitForEcho [" + isWaitForEcho() + "]");
+
 				currentPortOpen = (SerialPort) cpi.open(applicationNameLockPort, 100);
 				stampIO = new BaseSerialPortIO();
 				stampIO.setApplicationNameLockPort(getApplicationNameLockPort());
