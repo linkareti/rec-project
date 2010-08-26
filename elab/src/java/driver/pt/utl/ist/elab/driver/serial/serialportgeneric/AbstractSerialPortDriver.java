@@ -126,8 +126,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		serialFinder = new SerialPortFinder();
 
 		setDriverUniqueID(rs232configs.getId());
-		setApplicationNameLockPort(rs232configs.getId());
+		setApplicationNameLockPort(rs232configs.getId()); // TODO shoud be a new atribute in the xml node
 		setTimeOutPerPort(rs232configs.getRs232().getTimeout().getPortListen().getTimeInt());
+		setPortBaudRate(rs232configs.getRs232().getBaud().intValue());
 
 		serialFinder.addStampFinderListener(this);
 		
