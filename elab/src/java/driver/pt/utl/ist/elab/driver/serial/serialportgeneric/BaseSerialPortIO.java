@@ -30,7 +30,6 @@ import com.linkare.rec.impl.threading.TimedOutException;
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
- * @param <DriverState>
  */
 public class BaseSerialPortIO {
 
