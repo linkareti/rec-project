@@ -549,6 +549,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	@Deprecated
 	public void handleStampCommand(SerialPortCommand command) throws IncorrectStateException, TimedOutException {
+		logMe("Received a command " + command.getCommandIdentifier() + " !");
 		processCommand(command);
 	}
 
@@ -590,6 +591,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void processCommand(SerialPortCommand cmd) throws IncorrectStateException, TimedOutException {
+		logMe("Going to process the command " + cmd);
 
 		// is this time to
 		currentDriverState.explodeOnTimeout();
@@ -603,6 +605,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					+ (cmd != null && cmd.getCommandIdentifier() != null ? cmd.getCommandIdentifier() : "\"null\""));
 			return;
 		}
+		
+		logMe("Processing the serial port command with ID [" + cmd.getCommandIdentifier() + "] and command [" + cmd.getCommand() + "]");
 
 		// if the hardware is sending data to the driver, OR
 		// if the hardware speaks a unknown language, forget about it
