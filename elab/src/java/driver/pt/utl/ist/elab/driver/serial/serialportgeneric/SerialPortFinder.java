@@ -23,6 +23,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandList;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandListener;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.HardwareNode;
 
@@ -486,9 +487,14 @@ public class SerialPortFinder {
 		private class SerialPortFinderRunnerPortListener implements SerialPortCommandListener {
 
 			public void handleStampCommand(SerialPortCommand command) {
-				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Received a command " + command);
+				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Received a command [" + command + "]");
+				Logger.getLogger(STAMP_FINDER_LOGGER).log(
+						Level.FINE,
+						"Current serial identifier [" + serialIdentifier + "] + port open ["
+								+ currentPortOpen.getName() + "]");
+				
 				if (command != null && command.getCommandIdentifier() != null && command.getCommand() != null
-						&& command.getCommandIdentifier().equals("IDS")
+						&& command.getCommandIdentifier().equals(SerialPortCommandList.IDS.toString())
 						&& command.getCommand().equals(serialIdentifier)) {
 					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
 							"Identified STAMP on port " + currentPortOpen.getName() + "!");
