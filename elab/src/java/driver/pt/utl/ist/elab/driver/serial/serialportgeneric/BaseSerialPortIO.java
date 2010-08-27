@@ -173,7 +173,7 @@ public class BaseSerialPortIO {
 						}
 
 						lineRead = lineReadTemp.toString().trim();
-						Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Line read from STAMP: " + lineRead);
+						Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Line read from STAMP [" + lineRead + "]");
 
 						if (waitForEcho && lastOutputMessage != null) {
 							Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Ignoring message...");
@@ -185,7 +185,7 @@ public class BaseSerialPortIO {
 					}
 
 					if (!lineRead.equals("")) {
-						Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Processing message...");
+						Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINE, "Processing message...");
 						processIncomingLine(lineRead);
 					}
 
