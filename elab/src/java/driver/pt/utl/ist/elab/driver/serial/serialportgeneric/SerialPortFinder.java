@@ -504,7 +504,7 @@ public class SerialPortFinder {
 					exit = true;
 				} else {
 					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.FINE,
-							"Command ignored for stamp finder. Command [" + command + "]");
+							"Command ignored for serial port finder. Command [" + command + "]");
 				}
 			}
 
