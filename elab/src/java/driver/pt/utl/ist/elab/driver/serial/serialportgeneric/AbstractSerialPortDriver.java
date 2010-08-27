@@ -290,7 +290,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void init(HardwareInfo info) {
-		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Initializing driver");
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Initializing driver");
 		this.info = info;
 		
 		if (serialIO != null) {
@@ -299,6 +299,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		serialIO = null;
 		serialFinder.startSearch();
+		
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Waiting for serial IO to be instantiated.");
 		try {
 			WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
 				public ConditionResult getConditionResult() {
@@ -313,6 +315,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		} catch (TimedOutException e) {
 			LoggerUtil.logThrowable("Couldn't find port for serial in 120 s", e, Logger.getLogger(SERIAL_PORT_LOGGER));
 		}
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "The wait has ended with serial IO = " + serialIO);
 
 		currentDriverState = DriverState.UNKNOWN;
 		currentDriverState.startTimeoutClock();

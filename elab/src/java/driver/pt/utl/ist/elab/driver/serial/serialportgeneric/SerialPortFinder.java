@@ -262,6 +262,7 @@ public class SerialPortFinder {
 
 	@SuppressWarnings("unchecked")
 	public void startSearch() {
+		Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Starting the search for the hardware serial port.");
 
 		Enumeration<CommPortIdentifier> commPortIdentifiers = gnu.io.CommPortIdentifier.getPortIdentifiers();
 		LinkedList<CommPortIdentifier> tempPorts = new LinkedList<CommPortIdentifier>();
@@ -331,8 +332,8 @@ public class SerialPortFinder {
 	 * 
 	 * @param listener The listener to remove.
 	 */
-	public synchronized void removeStampFinderListener(pt.utl.ist.elab.driver.serial.stamp.StampFinderListener listener) {
-		listenerList.remove(pt.utl.ist.elab.driver.serial.stamp.StampFinderListener.class, listener);
+	public synchronized void removeStampFinderListener(SerialPortFinderListener listener) {
+		listenerList.remove(pt.utl.ist.elab.driver.serial.serialportgeneric.SerialPortFinderListener.class, listener);
 	}
 
 	/**
@@ -345,8 +346,8 @@ public class SerialPortFinder {
 			return;
 		Object[] listeners = listenerList.getListenerList();
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
-			if (listeners[i] == pt.utl.ist.elab.driver.serial.stamp.StampFinderListener.class) {
-				((pt.utl.ist.elab.driver.serial.stamp.StampFinderListener) listeners[i + 1]).stampFound(event);
+			if (listeners[i] == pt.utl.ist.elab.driver.serial.serialportgeneric.SerialPortFinderListener.class) {
+				((SerialPortFinderListener) listeners[i + 1]).stampFound(event);
 			}
 		}
 	}
@@ -395,6 +396,7 @@ public class SerialPortFinder {
 				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Cycling port...");
 				cyclePort();
 			}
+			Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Serial port finder thread ended.");
 		}
 
 		public void cyclePort() {
