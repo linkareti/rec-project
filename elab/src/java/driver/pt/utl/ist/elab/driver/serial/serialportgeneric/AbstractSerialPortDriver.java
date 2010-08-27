@@ -350,7 +350,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException,
 			IncorrectStateException, TimedOutException {
 
-		currentDriverState.explodeOnTimeout();
+		// TODO explode???
+//		currentDriverState.explodeOnTimeout();
 
 		// verifies if the driver can configure the hardware at this moment
 		// through the current state
@@ -406,7 +407,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public void reset(HardwareInfo info) throws IncorrectStateException {
 
-		currentDriverState.explodeOnTimeout();
+		// TODO explode???
+//		currentDriverState.explodeOnTimeout();
 
 		fireIDriverStateListenerDriverReseting();
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.RST.toString().toLowerCase());
@@ -444,7 +446,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
 
-		currentDriverState.explodeOnTimeout();
+		// TODO explode???
+//		currentDriverState.explodeOnTimeout();
 
 		// verifies if the driver can start the hardware at this moment through
 		// the current state
@@ -479,7 +482,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	public void startNow() throws IncorrectStateException {
 
-		currentDriverState.explodeOnTimeout();
+		// TODO explode???
+//		currentDriverState.explodeOnTimeout();
 
 		if (serialPortCommand == null) {
 			logMe("No configuration available yet!");
@@ -507,7 +511,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public void stop(HardwareInfo info) throws IncorrectStateException {
 
-		currentDriverState.explodeOnTimeout();
+		// TODO explode???
+//		currentDriverState.explodeOnTimeout();
 
 		// verifies if the driver can stop the hardware at this moment through
 		// the current state
@@ -601,7 +606,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		logMe("Going to process the command " + cmd);
 
 		// is this time to
-		currentDriverState.explodeOnTimeout();
+		// TODO explode???
+//		currentDriverState.explodeOnTimeout();
 
 		DriverState newDriverState = null;
 		SerialPortCommandList thisCommand = null;
