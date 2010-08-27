@@ -486,15 +486,18 @@ public class SerialPortFinder {
 		private class SerialPortFinderRunnerPortListener implements SerialPortCommandListener {
 
 			public void handleStampCommand(SerialPortCommand command) {
-				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
-						"Received a command " + command.getCommandIdentifier() + "!");
-				if (command.getCommandIdentifier().equals(serialIdentifier)) {
+				Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO, "Received a command " + command);
+				if (command != null && command.getCommandIdentifier() != null && command.getCommand() != null
+						&& command.getCommandIdentifier().equals("IDS")
+						&& command.getCommand().equals(serialIdentifier)) {
 					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
 							"Identified STAMP on port " + currentPortOpen.getName() + "!");
 					stampIO.shutdown();
 					fireStampFinderListenerStampFound(currentPortOpen);
 					portFound = true;
 					exit = true;
+				} else {
+					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.FINE, "Command ignored for serial port finder.");
 				}
 			}
 
