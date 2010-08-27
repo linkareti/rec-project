@@ -662,28 +662,28 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					fireIDriverStateListenerDriverShutdown();
 					return;
 				} else {
-					if (!rs232configs.getId().equals(cmd.getDataHashMap().get(1))) {
+					if (!rs232configs.getId().equals(cmd.getDataHashMap().get(0))) {
 						logMe("PROCESSCOMMAND : Error on command IDS, wrong ID of hardware: "
-								+ (cmd.getDataHashMap().size() > 1 ? cmd.getDataHashMap().get(1) : "null"));
+								+ (cmd.getDataHashMap().size() > 1 ? cmd.getDataHashMap().get(0) : "null"));
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
 						// terminates this driver execution
 						fireIDriverStateListenerDriverShutdown();
 						return;
 					}
-					if (!HardwareStatus.isValid(cmd.getDataHashMap().get(2))) {
+					if (!HardwareStatus.isValid(cmd.getDataHashMap().get(1))) {
 						logMe("PROCESSCOMMAND : Error on command IDS, wrong status of hardware:"
-								+ (cmd.getDataHashMap().size() > 2 ? cmd.getDataHashMap().get(2) : "null"));
+								+ (cmd.getDataHashMap().size() > 2 ? cmd.getDataHashMap().get(1) : "null"));
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
 						// terminates this driver execution
 						fireIDriverStateListenerDriverShutdown();
 						return;
 					}
-					if (!currentDriverState.acceptHardwareStatus(HardwareStatus.valueOf(cmd.getDataHashMap().get(2)))) {
+					if (!currentDriverState.acceptHardwareStatus(HardwareStatus.valueOf(cmd.getDataHashMap().get(1)))) {
 						logMe("PROCESSCOMMAND : Current driver state: " + currentDriverState.toString()
 								+ " does not matches hardware status:"
-								+ (cmd.getDataHashMap().size() > 2 ? cmd.getDataHashMap().get(2) : "null")
+								+ (cmd.getDataHashMap().size() == 2 ? cmd.getDataHashMap().get(1) : "null")
 								+ ". Shuting down driver.");
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
