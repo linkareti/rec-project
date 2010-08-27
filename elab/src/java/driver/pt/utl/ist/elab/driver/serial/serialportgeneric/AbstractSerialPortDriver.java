@@ -603,7 +603,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void processCommand(SerialPortCommand cmd) throws IncorrectStateException, TimedOutException {
-		logMe("Going to process the command " + cmd);
+		logMe("Going to process the command " + cmd + " with the driver in state " + currentDriverState);
 
 		// is this time to
 		// TODO explode???
@@ -612,14 +612,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		DriverState newDriverState = null;
 		SerialPortCommandList thisCommand = null;
 
-		// if the command is null, forget about it
-		if (cmd == null || cmd.getCommandIdentifier() == null || baseHardware == null) {
-			logMe("PROCESSCOMMAND : Cannot interpret command "
-					+ (cmd != null && cmd.getCommandIdentifier() != null ? cmd.getCommandIdentifier() : "\"null\""));
+		if (cmd == null || cmd.getCommandIdentifier() == null) {
+			logMe("PROCESSCOMMAND : Cannot interpret command " + cmd);
 			return;
 		}
-		
-		logMe("Processing the serial port command with ID [" + cmd.getCommandIdentifier() + "] and command [" + cmd.getCommand() + "]");
 
 		// if the hardware is sending data to the driver, OR
 		// if the hardware speaks a unknown language, forget about it
@@ -633,7 +629,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				return;
 			}
 			// the driver seems to speak Fortran 77, I cannot understand it
-			logMe("PROCESSCOMMAND : Cannot interpret command " + cmd.getCommandIdentifier());
+			logMe("PROCESSCOMMAND : Cannot interpret command identifier " + cmd.getCommandIdentifier());
 			// terminates this driver execution
 			currentDriverState = DriverState.UNKNOWN;
 			currentDriverState.startTimeoutClock();
