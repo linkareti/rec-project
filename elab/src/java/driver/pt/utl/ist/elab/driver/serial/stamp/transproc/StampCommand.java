@@ -70,4 +70,13 @@ public class StampCommand implements java.io.Serializable {
 
 		return processor;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + " CommandIdentifier [" + commandIdentifier + "] Command [" + command + "] IsData ["
+				+ isData + "]";
+	}
 }

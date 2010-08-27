@@ -512,6 +512,9 @@ public class StampFinder {
 					fireStampFinderListenerStampFound(currentPortOpen);
 					portFound = true;
 					exit = true;
+				} else {
+					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.FINE,
+							"Command ignored for stamp finder. Command [" + command + "]");
 				}
 			}
 
