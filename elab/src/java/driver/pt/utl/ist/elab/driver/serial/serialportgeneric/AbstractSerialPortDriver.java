@@ -553,7 +553,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	@Deprecated
 	public void handleStampCommand(SerialPortCommand command) throws IncorrectStateException, TimedOutException {
-		logMe("Received a command " + command.getCommandIdentifier() + " !");
+//		logMe("Received the command " + command + " !"); // logged in processCommand
 		processCommand(command);
 	}
 

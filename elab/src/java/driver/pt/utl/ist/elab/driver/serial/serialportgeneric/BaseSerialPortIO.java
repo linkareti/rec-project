@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -184,8 +185,7 @@ public class BaseSerialPortIO {
 						}
 					}
 
-					if (!lineRead.equals("")) {
-						Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINE, "Processing message...");
+					if (lineRead != null && !lineRead.equals("")) {
 						processIncomingLine(lineRead);
 					}
 
@@ -218,6 +218,8 @@ public class BaseSerialPortIO {
 	}
 
 	private void processIncomingLine(String lineRead) throws Exception {
+		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINE, "Processing message incoming line ["+lineRead+"]");
+		
 		SerialPortCommand inCommand = null;
 		String[] commandArray = null;
 
@@ -234,17 +236,15 @@ public class BaseSerialPortIO {
 		}
 
 		commandArray = lineRead.split("\t");
+		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINEST, "Splited tabbed line " + Arrays.deepToString(commandArray));
 		if (commandArray.length > 0) {
 			inCommand = new SerialPortCommand(commandArray[0]);
 			if (commandArray.length > 1) {
-				String commandTemp = "";
-				for (int i = 1; i < commandArray.length; i++) {
-					if (i > 1)
-						commandTemp = commandTemp + "\t" + commandArray[i];
-					else
-						commandTemp = commandArray[i];
+				StringBuilder commandTemp = new StringBuilder(commandArray[1]);
+				for (int i = 2; i < commandArray.length; i++) {
+					commandTemp.append("\t").append(commandArray[i]);
 				}
-				inCommand.setCommand(commandTemp);
+				inCommand.setCommand(commandTemp.toString());
 			}
 		}
 		if (GenericSerialPortDriver.currentDriverState == DriverState.RECEIVINGDATA
@@ -253,7 +253,7 @@ public class BaseSerialPortIO {
 
 		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Firing stamp command listener...");
 		fireStampCommandListenerHandleStampCommand(inCommand);
-		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Fired stamp command listener...");
+		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINE, "Fired stamp command listener...");
 
 	}
 

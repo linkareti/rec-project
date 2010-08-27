@@ -128,5 +128,14 @@ public class SerialPortCommand implements java.io.Serializable {
 		} else
 			return false;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + " CommandIdentifier [" + commandIdentifier + "] Command [" + command + "] IsData ["
+				+ isData + "]";
+	}
 
 }
