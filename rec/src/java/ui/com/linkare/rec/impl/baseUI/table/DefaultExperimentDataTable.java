@@ -194,8 +194,8 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 		setLayout(new java.awt.BorderLayout());
 		dataTable.setModel(defaultTableModelProxy);
 		dataTable.setAutoCreateColumnsFromModel(true);
-		// dataTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-		dataTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+		dataTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+//		dataTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
 		scrollPaneTable.setViewportView(dataTable);
 
 		add(scrollPaneTable, java.awt.BorderLayout.CENTER);
