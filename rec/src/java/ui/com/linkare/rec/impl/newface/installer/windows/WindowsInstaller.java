@@ -22,7 +22,7 @@ public class WindowsInstaller extends Installer {
 	 * à aplicação que implique nova instalar, deverá ser incrementado 
 	 * manualmente este valor.
 	 */
-	private static final int INSTALLER_VERSION = 2;
+	private static final int INSTALLER_VERSION = 3;
 
 	@Override
 	public void installSpecificSO() throws UnavailableServiceException {

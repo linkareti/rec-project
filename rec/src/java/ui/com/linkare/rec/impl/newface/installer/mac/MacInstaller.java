@@ -17,7 +17,7 @@ public class MacInstaller extends Installer {
 	 * à aplicação que implique nova instalar, deverá ser incrementado 
 	 * manualmente este valor.
 	 */
-	private static final int INSTALLER_VERSION = 1;
+	private static final int INSTALLER_VERSION = 3;
 
 	public static void main(String[] args) throws UnavailableServiceException {
 		new MacInstaller().executeInstaller(args);
