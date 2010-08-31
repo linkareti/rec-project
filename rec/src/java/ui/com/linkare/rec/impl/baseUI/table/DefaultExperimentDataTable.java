@@ -79,6 +79,8 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 		
 		excelAdapter = new ExcelAdapter(dataTable);
 		dataTable.setCellSelectionEnabled(true);
+		
+		resizeDataTableColumns();
 	}
 
 	/**
@@ -325,6 +327,8 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 		actualTableModel = model;
 		actualTableModel.addTableModelListener(actualTableActionListener);
 		dataTable.setModel(actualTableModel);
+		
+		resizeDataTableColumns();
 	}
 	
 	protected void setExpDataModelContainer(ExpDataModelContainer expDataModelContainer) {
@@ -380,6 +384,16 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 	public String getName() {
 		return "Data Table";
 	}
+	
+	private void resizeDataTableColumns() {
+		FontMetrics fm = dataTable.getFontMetrics(dataTable.getFont());
+		TableColumnModel model = dataTable.getColumnModel();
+		for (int i = 0; i < model.getColumnCount(); i++) {
+			TableColumn col = model.getColumn(i);
+			int width = fm.stringWidth(dataTable.getColumnName(i)) + model.getColumnMargin() * 2 + 10;
+			col.setPreferredWidth(width);
+		}
+	}
 
 	public void setExpDataModel(ExpDataModel model) {
 		if (model == null)
@@ -392,13 +406,7 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 			public void newSamples(NewExpDataEvent evt) {
 				if (!resizeDone) {
 					resizeDone = true;
-					FontMetrics fm = dataTable.getFontMetrics(dataTable.getFont());
-					TableColumnModel model = dataTable.getColumnModel();
-					for (int i = 0; i < model.getColumnCount(); i++) {
-						TableColumn col = model.getColumn(i);
-						int width = fm.stringWidth(dataTable.getColumnName(i)) + model.getColumnMargin() * 2 + 10;
-						col.setPreferredWidth(width);
-					}
+					resizeDataTableColumns();
 				}
 			}
 
