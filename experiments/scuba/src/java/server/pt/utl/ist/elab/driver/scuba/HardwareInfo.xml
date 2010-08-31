@@ -46,7 +46,7 @@
         <step-samples>1</step-samples>
     </sampling-scale>
     
-    <ChannelInfo name="Pressão relativa Glicerina" independent="false" direction="CHANNEL_INPUT">
+    <ChannelInfo name="Pressão Glicerina" independent="false" direction="CHANNEL_INPUT">
         <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">10</PhysicsVal></max>
@@ -54,7 +54,7 @@
             <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
-    <ChannelInfo name="Pressão relativa Água Salgada" independent="false" direction="CHANNEL_INPUT">
+    <ChannelInfo name="Pressão Água Salgada" independent="false" direction="CHANNEL_INPUT">
         <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">10</PhysicsVal></max>
@@ -62,7 +62,7 @@
             <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
-    <ChannelInfo name="Pressão relativa Água" independent="false" direction="CHANNEL_INPUT">
+    <ChannelInfo name="Pressão Água" independent="false" direction="CHANNEL_INPUT">
         <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">10</PhysicsVal></max>
@@ -70,7 +70,7 @@
             <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
-    <ChannelInfo name="Pressão relativa Óleo" independent="false" direction="CHANNEL_INPUT">
+    <ChannelInfo name="Pressão Óleo" independent="false" direction="CHANNEL_INPUT">
         <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">10</PhysicsVal></max>
