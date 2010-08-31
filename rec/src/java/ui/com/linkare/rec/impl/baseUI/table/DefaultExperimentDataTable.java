@@ -400,38 +400,8 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 			return;
 
 		expDataModelContainer.setExpDataModel(model);
-		model.addExpDataModelListener(new ExpDataModelListener() {
-			private boolean resizeDone = false;
-
-			public void newSamples(NewExpDataEvent evt) {
-				if (!resizeDone) {
-					resizeDone = true;
-					resizeDataTableColumns();
-				}
-			}
-
-			public void dataModelRunning() {
-			}
-
-			public void dataModelStoped() {
-			}
-
-			public void dataModelError() {
-			}
-
-			public void dataModelEnded() {
-			}
-
-			public void dataModelStarted() {
-			}
-
-			public void dataModelWaiting() {
-			}
-
-			public void dataModelStartedNoData() {
-			}
-		});
-
+		// after set the model the columns size must be set
+		resizeDataTableColumns();
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {
