@@ -514,14 +514,14 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
-		sldNumSamples.setValue(150);
-		tfNumSamples.setText("150");
+		sldNumSamples.setValue(18);
+		tfNumSamples.setText("18");
 		sldPos1.setValue(4000);
 		tfPos1.setValue(new Float(4.0));
 		sldPos2.setValue(7000);
 		tfPos2.setValue(new Float(7.0));
 		sldFreq.setValue(150);
-		tfFreq.setText("" + 150);
+		tfFreq.setText("150");
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
@@ -634,7 +634,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
-			int nsamples = acqConfig.getTotalSamples() - 1;
+			int nsamples = acqConfig.getTotalSamples();
 			sldNumSamples.setValue(nsamples);
 			tfNumSamples.setText("" + nsamples);
 

@@ -406,12 +406,12 @@ public class ScubaCustomizer extends javax.swing.JPanel implements com.linkare.r
 
 	private void btnDefaultsActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnDefaultsActionPerformed
 	{// GEN-HEADEREND:event_btnDefaultsActionPerformed
-		sldNumSamples.setValue(150);
-		tfNumSamples.setText("150");
-		sldPos1.setValue(900);
-		tfPos1.setText("900");
-		sldPos2.setValue(0);
-		tfPos2.setText("0");
+		sldNumSamples.setValue(45);
+		tfNumSamples.setText("45");
+		sldPos1.setValue(0);
+		tfPos1.setText("0");
+		sldPos2.setValue(450);
+		tfPos2.setText("450");
 	}// GEN-LAST:event_btnDefaultsActionPerformed
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnCancelActionPerformed
