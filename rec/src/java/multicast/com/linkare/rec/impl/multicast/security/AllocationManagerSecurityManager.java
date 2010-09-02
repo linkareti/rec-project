@@ -37,7 +37,9 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	/**
 	 * 
 	 */
-	private static final String ALLOCATION_MANAGER_GLOBAL_JNDI_NAME = "java:global/rec.am/AllocationManager!com.linkare.rec.am.model.AllocationManager";
+	private static final String ALLOCATION_MANAGER_GLOBAL_JNDI_NAME = "java:global/rec.am/AllocationManager!com.linkare.rec.am.AllocationManager";
+	// jndi name used in develpment tests
+//	private static final String ALLOCATION_MANAGER_GLOBAL_JNDI_NAME = "java:global/rec.am/AllocationManager";
 
 	// public static final String
 	// MCCONTROLLER_SECURITYMANAGER_LOGGER=ReCMultiCastController.MCCONTROLLER_LOGGER;

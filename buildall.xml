@@ -87,12 +87,22 @@
 		<replace file="${multicast.build.dir}/StartMultiCastController.sh" propertyFile="build.properties">
 			<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
 			<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+			<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
+			<replacefilter token="@rec.am.host@" property="rec.am.host" />
+			<replacefilter token="@rec.am.port@" property="rec.am.port" />
+			<replacefilter token="@rec.am.securitymanager@" property="rec.am.securitymanager" />
+			<replacefilter token="@rec.am.compositesecuritymanager.list@" property="rec.am.compositesecuritymanager.list" />
 		</replace>
 
 		<copy file="${templates.dir.scripts}/StartMultiCastController.bat" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.bat" />
 		<replace file="${multicast.build.dir}/StartMultiCastController.bat" propertyFile="build.properties">
 			<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
 			<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+			<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
+			<replacefilter token="@rec.am.host@" property="rec.am.host" />
+			<replacefilter token="@rec.am.port@" property="rec.am.port" />
+			<replacefilter token="@rec.am.securitymanager@" property="rec.am.securitymanager" />
+			<replacefilter token="@rec.am.compositesecuritymanager.list@" property="rec.am.compositesecuritymanager.list" />
 		</replace>
 
 		<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/etc/loggers.config.properties" />
@@ -130,9 +140,6 @@
 				<replacefilter token="@experiment.name@" value="@{experiment.name}" />
 				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
-				<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
-				<replacefilter token="@rec.am.host@" property="rec.am.host" />
-				<replacefilter token="@rec.am.port@" property="rec.am.port" />
 			</replace>
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
@@ -144,10 +151,6 @@
 				<replacefilter token="@experiment.name@" value="@{experiment.name}" />
 				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
 				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
-				<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
-				<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
-				<replacefilter token="@rec.am.host@" property="rec.am.host" />
-				<replacefilter token="@rec.am.port@" property="rec.am.port" />
 			</replace>
 			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />

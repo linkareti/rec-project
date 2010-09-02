@@ -12,11 +12,11 @@ set MULTICAST_ORB_SYSPROPS=-Dopenorb.profile=ReCMultiCastController -DReC.MultiC
 set MEM_SYSPROPS=-Xms%INITIAL_HEAP_MEM% -Xmx%MAX_HEAP_MEM%
 set LOG_SYSPROPS=-Djava.util.logging.config.file=%MULTICAST_BASE_DIR%/etc/loggers.config.properties 
 set TOOLKIT_SYSPROPS=-Djava.awt.headless=true
-set SECURITYMANAGER_SYSPROPS=-DReC.MultiCast.SecurityManager=com.linkare.rec.impl.multicast.security.CompositeSecurityManager -DReC.MultiCast.CompositeSecurityManager.list=com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
+set SECURITYMANAGER_SYSPROPS=-DReC.MultiCast.SecurityManager=@rec.am.securitymanager@ -DReC.MultiCast.CompositeSecurityManager.list=@rec.am.compositesecuritymanager.list@
 set ALLOCATIONMANAGER_SYSPROPS=-DReC.MultiCast.LabID=@rec.am.lab.id@ -DReC.MultiCast.AllocationManagerHost=@rec.am.host@ -DReC.MultiCast.AllocationManagerPort=@rec.am.port@
 
 set RECCLASSPATH=%MULTICAST_BASE_DIR%/lib/xml-apis.jar;%MULTICAST_BASE_DIR%/lib/tools-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/openorb_orb-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/openorb_pss-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/openorb_ots-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/logkit.jar;%MULTICAST_BASE_DIR%/lib/xercesImpl.jar;%MULTICAST_BASE_DIR%/lib/avalon-framework.jar
-set MULTICAST_CLASSPATH=%MULTICAST_BASE_DIR%/ReCMulticastController.jar;%MULTICAST_BASE_DIR%/ELabMulticastController.jar;%MULTICAST_BASE_DIR%/ReCCommon.jar;
+set MULTICAST_CLASSPATH=%MULTICAST_BASE_DIR%/ReCMulticastController.jar;%MULTICAST_BASE_DIR%/ELabMulticastController.jar;%MULTICAST_BASE_DIR%/ReCCommon.jar;;%MULTICAST_BASE_DIR%/lib/rec.am-api-0.0.1-SNAPSHOT.jar;%MULTICAST_BASE_DIR%/lib/glassfish/ejb-container.jar;%MULTICAST_BASE_DIR%/lib/glassfish/appclient.security.jar
 
 REM set DEBUG=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,address=60002,suspend=n
 
