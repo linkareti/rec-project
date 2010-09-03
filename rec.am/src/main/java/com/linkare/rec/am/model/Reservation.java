@@ -79,8 +79,9 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     public static final String FIND_FOR_USER_QUERY = "Select r from Reservation r WHERE r.user.username = :" + QUERY_PARAM_USERNAME;
 
     public static final String FIND_IN_INTERVAL_AND_LAB_QUERYNAME = "Reservation.findInIntervalAndLab";
-    public static final String FIND_IN_INTERVAL_AND_LAB_QUERY = "Select r from Reservation r where (r.startDate between :" + QUERY_PARAM_START_DATE + " and :"
-	    + QUERY_PARAM_END_DATE + ") and r.experiment.laboratory.name = :" + QUERY_PARAM_LAB_NAME;
+    public static final String FIND_IN_INTERVAL_AND_LAB_QUERY = "Select r from Reservation r where ( :" + QUERY_PARAM_START_DATE
+	    + " between r.startDate and r.endDate  or :" + QUERY_PARAM_END_DATE
+	    + " between r.startDate and r.endDate ) and r.experiment.laboratory.name = :" + QUERY_PARAM_LAB_NAME;
 
     public static final String FIND_FOR_DOMAIN_IN_INTERVAL_QUERYNAME = "Reservation.findForDomainInDate";
     public static final String FIND_FOR_DOMAIN_IN_INTERVAL_QUERY = "Select r from Reservation r WHERE r.domain = :" + QUERY_PARAM_DOMAIN
