@@ -9,7 +9,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -55,19 +57,19 @@ public class AllocationManagerBean implements AllocationManager {
 																	  laboratoryID)
 							    .getResultList();
 	for (final Reservation reservation : reservations) {
-	    final List<String> users = getUsers(reservation);
-	    final List<String> owners = getOwners(reservation);
+	    final Set<String> users = getUsers(reservation);
+	    final Set<String> owners = getOwners(reservation);
 	    result.add(new AllocationDTO(reservation.getStartDate(), reservation.getEndDate(), reservation.getExperiment().toString(), users, owners));
 	}
 	return result;
     }
 
-    private List<String> getOwners(Reservation reservation) {
-	return Collections.singletonList(reservation.getReservedBy());
+    private Set<String> getOwners(Reservation reservation) {
+	return Collections.singleton(reservation.getReservedBy());
     }
 
-    private List<String> getUsers(Reservation reservation) {
-	final List<String> usernames = new ArrayList<String>();
+    private Set<String> getUsers(Reservation reservation) {
+	final Set<String> usernames = new HashSet<String>();
 	final List<User> users = reservation.getGroup().getAllUsers();
 	for (final User user : users) {
 	    usernames.add(user.getUsername());
