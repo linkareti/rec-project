@@ -141,6 +141,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 		hardwareConnectionChecker = new HardwareConnectionCheck();
 		// Start it up
 		// hardwareConnectionChecker.start();
+		
+		// Initialize Security Manager
+		SecurityManagerFactory.getSecurityManager();
 
 		log(Level.INFO, "Started ReCMulticastController OK.");
 	}
