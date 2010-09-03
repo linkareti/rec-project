@@ -2,7 +2,7 @@ package com.linkare.rec.am;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  * 
@@ -19,15 +19,15 @@ public class AllocationDTO implements Serializable {
 
     private String experimentId;
 
-    private List<String> users;
+    private Set<String> users;
 
-    private List<String> owners;
+    private Set<String> owners;
 
     public AllocationDTO() {
 	super();
     }
 
-    public AllocationDTO(final Date begin, final Date end, final String experimentId, final List<String> users, final List<String> owners) {
+    public AllocationDTO(final Date begin, final Date end, final String experimentId, final Set<String> users, final Set<String> owners) {
 	super();
 	this.begin = begin;
 	this.end = end;
@@ -84,7 +84,7 @@ public class AllocationDTO implements Serializable {
     /**
      * @return the users
      */
-    public List<String> getUsers() {
+    public Set<String> getUsers() {
 	return users;
     }
 
@@ -92,14 +92,14 @@ public class AllocationDTO implements Serializable {
      * @param users
      *            the users to set
      */
-    public void setUsers(final List<String> users) {
+    public void setUsers(final Set<String> users) {
 	this.users = users;
     }
 
     /**
      * @return the owners
      */
-    public List<String> getOwners() {
+    public Set<String> getOwners() {
 	return owners;
     }
 
@@ -107,7 +107,7 @@ public class AllocationDTO implements Serializable {
      * @param owners
      *            the owners to set
      */
-    public void setOwners(final List<String> owners) {
+    public void setOwners(final Set<String> owners) {
 	this.owners = owners;
     }
 }
