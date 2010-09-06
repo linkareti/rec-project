@@ -178,20 +178,31 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 * @return
 	 */
 	private boolean checkAllocationsEnter(String hardwareId, String username) {
+		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
+				"Check allocations for user [" + username + "] hardware ["+hardwareId+"]");
+		
 		List<AllocationDTO> allocations = findAllocationFor(hardwareId);
 		if (allocations.isEmpty()) {
+			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+					"There aren't allocations.");
 			return true;
 		}
-		return checkUserOrOwner(allocations, username);
+		
+		boolean checkUserOrOwner = checkUserOrOwner(allocations, username);
+		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+				"Check allocations is [" + checkUserOrOwner + "]");
+		return checkUserOrOwner;
 	}
 
 	private List<AllocationDTO> findAllocationFor(String hardwareId) {
 		List<AllocationDTO> retAllocations = new ArrayList<AllocationDTO>();
 		final Calendar currentTime = Calendar.getInstance();
 		List<AllocationDTO> hardwareAllocations = allocationsMap.get(hardwareId);
-		for (AllocationDTO allocation : hardwareAllocations) {
-			if (isInIntervalOrNear(currentTime, allocation)) {
-				retAllocations.add(allocation);
+		if (hardwareAllocations != null) {
+			for (AllocationDTO allocation : hardwareAllocations) {
+				if (isInIntervalOrNear(currentTime, allocation)) {
+					retAllocations.add(allocation);
+				}
 			}
 		}
 		return retAllocations;
@@ -259,7 +270,10 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		try {
 			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
 					"Autenticating user [" + username + "]");
-			return allocationManager.authenticate(username, password);
+			boolean authenticate = allocationManager.authenticate(username, password);
+			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+					"Authentication is [" + authenticate + "]");
+			return authenticate;
 		} catch (RemoteException e) {
 			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER)
 					.log(java.util.logging.Level.FINEST,
@@ -318,15 +332,29 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 * @return
 	 */
 	private boolean checkMCHardwareOperations(IResource resource, IUser user, IOperation op) {
+		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+				Level.FINE,
+				"Checking multicast hardware operations for user [" + user.getUserName() + "] resource ["
+						+ resource.getProperties().get(resource.getResourceType().getPropertyKey()) + "] operation ["
+						+ op.getOperation() + "]");
+
 		List<AllocationDTO> currentAllocation = findAllocationFor(resource.getProperties().get(
 				resource.getResourceType().getPropertyKey()));
 
 		if (!currentAllocation.isEmpty()) {
 			if (op.getOperation() == IOperation.OP_LOCK || op.getOperation() == IOperation.OP_CONFIG
 					|| op.getOperation() == IOperation.OP_START || op.getOperation() == IOperation.OP_START_OUTPUT) {
-				return checkUserAsOwner(currentAllocation, user.getUserName());
+				boolean checkUserAsOwner = checkUserAsOwner(currentAllocation, user.getUserName());
+				LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+						"Hardware operations is [" + checkUserAsOwner + "]");
+				return checkUserAsOwner;
 			}
+		} else {
+			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+					"There aren't allocations.");
 		}
+		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+				"Hardware operations is [true]");
 		return true;
 	}
 	
@@ -344,47 +372,6 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			experimentAllocations.add(allocation);
 		}
 		allocationsMap = newAllocationsMap;
-		
-//		Calendar currentTime = Calendar.getInstance();
-//		
-//		// clear old allocations
-//		Set<String> experimentsId = allocationsMap.keySet();
-//		for (String key : experimentsId) {
-//			List<AllocationDTO> newExperimentAllocations = new ArrayList<AllocationDTO>();
-//			
-//			// check if the allocations are still in time
-//			List<AllocationDTO> experimentAllocations = allocationsMap.get(key);
-//			for (AllocationDTO allocation : experimentAllocations) {
-//				if (!allocation.getEnd().before(currentTime.getTime())) {
-//					newExperimentAllocations.add(allocation);
-//				}
-//			}
-//			
-//			if (newExperimentAllocations.size() > 0) {
-//				allocationsMap.put(key, newExperimentAllocations);
-//			} else {
-//				allocationsMap.remove(key);
-//			}
-//		}
-//		
-//		// add new allocations
-//		for (AllocationDTO newAllocation : newAllocations) {
-//			List<AllocationDTO> experimentAllocations = allocationsMap.get(newAllocation.getExperimentId());
-//			if (experimentAllocations != null) {
-//				List<AllocationDTO> interceptedExperiment = new ArrayList<AllocationDTO>();
-//				for (AllocationDTO currentAllocation : experimentAllocations) {
-//					if (newAllocation.getBegin().before(currentAllocation.getEnd()) && newAllocation.getEnd().after(currentAllocation.getBegin())) {
-//						interceptedExperiment.add(currentAllocation);
-//					}
-//				}
-//				experimentAllocations.removeAll(interceptedExperiment);
-//				experimentAllocations.add(newAllocation);
-//			} else {
-//				experimentAllocations = new ArrayList<AllocationDTO>();
-//				experimentAllocations.add(newAllocation);
-//				allocationsMap.put(newAllocation.getExperimentId(), experimentAllocations);
-//			}
-//		}
 	}
 	
 	/**
