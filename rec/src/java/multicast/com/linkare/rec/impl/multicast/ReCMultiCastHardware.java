@@ -615,6 +615,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			return;
 
 		if (dcfq.equals(ownerDataClient)) {
+			// FIXME if the client is the owner then if the experiment is running it must be stoped!
+			
 			locked = false;
 			locking = false;
 
