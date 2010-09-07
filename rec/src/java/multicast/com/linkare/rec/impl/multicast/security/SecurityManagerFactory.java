@@ -6,11 +6,14 @@
 
 package com.linkare.rec.impl.multicast.security;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.multicast.ClientQueue;
+import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 
 /**
  * 
@@ -141,6 +144,14 @@ public final class SecurityManagerFactory {
 			// + op + " for Resource: " + resource + " to User: " + user
 			// +" OK!");
 			return true;
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares) {
+			// this security implementation doesn't require the multicast hardwares
 		}
 	}
 

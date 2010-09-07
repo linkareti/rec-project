@@ -39,9 +39,12 @@ public class DataClientForQueue implements QueueLogger {
 	private UserInfo userInfo = null;
 	private UserInfo userInfoCleaned = null;
 	private DefaultUser defaultUser = null;
+	private IResource resource = null;
 
 	public DataClientForQueue(IResource resource, DataClient dc, IDataClientForQueueListener dataClientForQueueListener)
 			throws NotAuthorized {
+		this.resource = resource;
+		
 		setDataClientForQueueListener(dataClientForQueueListener);
 		this.dcw = new DataClientWrapper(dc);
 
@@ -63,7 +66,7 @@ public class DataClientForQueue implements QueueLogger {
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_EMPTY);
 		}
 
-		if (!SecurityManagerFactory.authenticate(resource, getAsDefaultUser())) {
+		if (!SecurityManagerFactory.authenticate(this.resource, getAsDefaultUser())) {
 			log(Level.SEVERE, "SecurityManager didn't authenticate you");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_SECURITY_MANAGER);
 		}
@@ -327,6 +330,13 @@ public class DataClientForQueue implements QueueLogger {
 	@Override
 	public void logThrowable(String message, Throwable t) {
 		getDataClientForQueueListener().logThrowable(message, t);
+	}
+
+	/**
+	 * @return the resource
+	 */
+	public IResource getResource() {
+		return resource;
 	}
 
 }

@@ -11,8 +11,11 @@ import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -29,6 +32,7 @@ import javax.rmi.PortableRemoteObject;
 import com.linkare.rec.am.AllocationDTO;
 import com.linkare.rec.am.AllocationManager;
 import com.linkare.rec.am.UnknownDomainException;
+import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.Defaults;
@@ -98,6 +102,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	private static final int INTERVAL_TIME_LAP_MINUTES = 0;
 	private static final int NEAR_TIME_LAP_MINUTES = 5;
 	private static final int REFRESH_TIME_LAP_MINUTES = 15;
+	private static final int REFRESH_TIME_ALLOCATIONS_CLIENT_QUEUE_MINUTES = 1;
 
 	/**
 	 * Creates the <code>AllocationManagerSecurityManager</code>.
@@ -112,6 +117,9 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		
 		ExecutorScheduler.scheduleAtFixedRate(new AllocationsRefreshScheduledUnit(), 1, REFRESH_TIME_LAP_MINUTES,
 				TimeUnit.MINUTES);
+		
+		ExecutorScheduler.scheduleAtFixedRate(new ClientsAllocationCheckScheduledUnit(), 1,
+				REFRESH_TIME_ALLOCATIONS_CLIENT_QUEUE_MINUTES, TimeUnit.MINUTES);
 		
 		// force update the allocations list because the scheduler might take time until it starts running
 		initializeAllocations();
@@ -431,6 +439,140 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		public void logThrowable(String message, Throwable throwable) {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.SEVERE, message, throwable);
 		}
+	}
+	
+	public class ClientsAllocationCheckScheduledUnit extends ScheduledWorkUnit {
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void run() {
+			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+					"ClientsAllocationScheduledUnit - Going to check clients allocations.");
+			
+			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+					Level.FINE,
+					"Are there allocations [" + (!allocationsMap.isEmpty()) + "] and multicast hardwares ["
+							+ (multiCastHardwares != null) + "]");
+			
+			int kickedClients = 0;
+			
+			if (multiCastHardwares != null && !allocationsMap.isEmpty()) {
+				Map<String, List<AllocationDTO>> currentAllocationsMap = findCurrentAllocations();
+				if (!currentAllocationsMap.isEmpty()) {
+					
+					synchronized (multiCastHardwares) {
+						Collection<ReCMultiCastHardware> iterateHardwares = Collections
+								.unmodifiableCollection(multiCastHardwares);
+						for (ReCMultiCastHardware rmch : iterateHardwares) {
+							
+							if (currentAllocationsMap.containsKey(rmch.getHardwareUniqueId())) {
+								List<AllocationDTO> hardwareAllocations = currentAllocationsMap.get(rmch.getHardwareUniqueId());
+								List<String> clientUsernames = rmch.getClientUsernames();
+								Set<String> usernamesToKick = new HashSet<String>();
+								
+								for (String username : clientUsernames) {
+									// there is a allocation for this hardware so
+									// the user must be in the allocation
+									if (!checkUserAsOwner(hardwareAllocations, username)) {
+										// clientQueue.sendChatMessage(user,
+										// clientTo, message, resource);
+										LogManager
+												.getLogManager()
+												.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER)
+												.log(
+														Level.INFO,
+														"The user ["
+																+ username
+																+ "] isn't in the current allocation. It is going to be kicked.");
+										
+										usernamesToKick.add(username);
+										kickedClients++;
+									}
+								}
+								
+								rmch.kickUsers(usernamesToKick);
+							} else {
+								LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+										Level.FINE,
+										"There are no current allocations for the hardware ["
+												+ rmch.getHardwareUniqueId() + "]");
+							}
+						}
+					}
+					
+					
+//					Iterator<DataClientForQueue> iter = clientQueue.iterator();
+//
+//					while (iter.hasNext()) {
+//						DataClientForQueue dcfq = iter.next();
+//						if (ResourceType.MCHARDWARE == dcfq.getResource().getResourceType()) {
+//							String hardware = dcfq.getResource().getProperties().get(
+//									dcfq.getResource().getResourceType().getPropertyKey());
+//
+//							if (currentAllocationsMap.containsKey(hardware)) {
+//								// there is a allocation for this hardware so
+//								// the user must be in the allocation
+//								String userName = dcfq.getUserInfo().getUserName();
+//								if (checkUserAsOwner(currentAllocationsMap.get(hardware), userName)) {
+//									// clientQueue.sendChatMessage(user,
+//									// clientTo, message, resource);
+//
+//									LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+//											Level.INFO,
+//											"The user [" + userName
+//													+ "] isn't in the current allocation. It is going to be shutdown.");
+//
+//									dcfq.shutdownAsSoonAsPossible();
+//									clientQueue.remove(dcfq);
+//
+//									kickedClients++;
+//								}
+//							}
+//						} else {
+//							LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+//									"The resource [" + dcfq.getResource().getResourceType() + "] is not an hardware.");
+//						}
+//					}
+				} else {
+					LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
+							"There are no current allocations at this time");
+				}
+			}
+			
+			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+					"Client allocations terminated and kicked [" + kickedClients + "] clients");
+		}
+		
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void logThrowable(String message, Throwable throwable) {
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.SEVERE, message, throwable);
+		}
+	}
+	
+	private Map<String, List<AllocationDTO>> findCurrentAllocations() {
+		Map<String, List<AllocationDTO>> currentAllocationsMap = new HashMap<String, List<AllocationDTO>>();
+		for (String key : allocationsMap.keySet()) {
+			List<AllocationDTO> allocations = findAllocationFor(key);
+			if (!allocations.isEmpty()) {
+				currentAllocationsMap.put(key, allocations);
+			}
+		}
+		return currentAllocationsMap;
+	}
+	
+	private List<ReCMultiCastHardware> multiCastHardwares = null;
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares) {
+		this.multiCastHardwares = multiCastHardwares;
 	}
 
 }

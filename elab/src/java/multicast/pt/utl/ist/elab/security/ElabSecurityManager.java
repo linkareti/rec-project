@@ -17,11 +17,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 import com.linkare.rec.impl.multicast.security.IOperation;
 import com.linkare.rec.impl.multicast.security.IResource;
 import com.linkare.rec.impl.multicast.security.ISecurityManager;
@@ -97,4 +99,13 @@ public class ElabSecurityManager implements ISecurityManager {
 				+ (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR) + " at " + cal.get(Calendar.HOUR_OF_DAY)
 				+ ":" + cal.get(Calendar.MINUTE));
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares) {
+		// this security implementation doesn't require the multicast hardwares
+	}
+
 }

@@ -6,6 +6,10 @@
 
 package com.linkare.rec.impl.multicast;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -635,6 +639,23 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		}
 
 	}
+	
+	/**
+	 * Getter for the usernames of this hardware clients.
+	 * 
+	 * @return Usernames list.
+	 */
+	public List<String> getClientUsernames() {
+		List<String> usernames = new ArrayList<String>();
+		
+		Iterator<DataClientForQueue> iterator = clientQueue.iterator();
+		while (iterator.hasNext()) {
+			DataClientForQueue dcfq = iterator.next();
+			usernames.add(dcfq.getUserName());
+		}
+		
+		return usernames;
+	}
 
 	DateTime timeStartMin = null;
 
@@ -1044,4 +1065,22 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		}
 	}
 	/* End Inner Class - LockCycler - manages the cycling of locks */
+
+	/**
+	 * Shuts down the users that are connected to this hardware and contained in the parameter.
+	 * 
+	 * @param usernamesToKick
+	 */
+	public void kickUsers(Set<String> usernamesToKick) {
+		Iterator<DataClientForQueue> iterator = clientQueue.iterator();
+		while (iterator.hasNext()) {
+			DataClientForQueue dcfq = iterator.next();
+			if (usernamesToKick.contains(dcfq.getUserName())) {
+				log(Level.INFO, "Shuting down user [" + dcfq.getUserName() + "] in the hardware ["
+						+ getHardwareUniqueId() + "]");
+				dcfq.shutdownAsSoonAsPossible();
+			}
+		}
+	}
+	
 }

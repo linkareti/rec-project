@@ -131,6 +131,10 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 
 			// Create a client queue with a max of MAXIMUM_CLIENTS
 			clientQueue = new ClientQueue(clientQueueAdapter, MAXIMUM_CLIENTS);
+			
+			// Initialize Security Manager
+			SecurityManagerFactory.getSecurityManager().registerMultiCastHardware(multiCastHardwares);
+			
 		} catch (Exception e) {
 			// REMOVE THIS TRY CATCH BLOCK AFTER FINISHING THE TEST PHASE...
 			LoggerUtil.logThrowable("Error initializing the ReCMultiCastController", e, Logger
@@ -141,9 +145,6 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 		hardwareConnectionChecker = new HardwareConnectionCheck();
 		// Start it up
 		// hardwareConnectionChecker.start();
-		
-		// Initialize Security Manager
-		SecurityManagerFactory.getSecurityManager();
 
 		log(Level.INFO, "Started ReCMulticastController OK.");
 	}

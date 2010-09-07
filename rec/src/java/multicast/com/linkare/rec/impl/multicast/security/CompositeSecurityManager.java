@@ -13,6 +13,8 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.multicast.ClientQueue;
+import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 
 /**
  * 
@@ -98,6 +100,18 @@ public class CompositeSecurityManager implements ISecurityManager {
 			}
 		}
 		return retVal;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares) {
+		if (securityManagers != null) {
+			for (ISecurityManager secManager : securityManagers) {
+				secManager.registerMultiCastHardware(multiCastHardwares);
+			}
+		}
 	}
 
 }
