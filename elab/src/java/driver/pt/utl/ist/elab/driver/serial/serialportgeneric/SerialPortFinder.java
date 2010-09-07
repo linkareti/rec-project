@@ -497,7 +497,7 @@ public class SerialPortFinder {
 				
 				if (command != null && command.getCommandIdentifier() != null && command.getCommand() != null
 						&& command.getCommandIdentifier().equals(SerialPortCommandList.IDS.toString())
-						&& command.getCommand().equals(serialIdentifier)) {
+						&& !command.getDataHashMap().isEmpty() && command.getDataHashMap().get(0).equals(serialIdentifier)) {
 					Logger.getLogger(STAMP_FINDER_LOGGER).log(Level.INFO,
 							"Identified STAMP on port " + currentPortOpen.getName() + "!");
 					stampIO.shutdown();
