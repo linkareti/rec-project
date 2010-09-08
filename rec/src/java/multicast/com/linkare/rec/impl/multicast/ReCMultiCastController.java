@@ -317,6 +317,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 				} catch (Exception e) {
 					LoggerUtil.logThrowable("Error Trying to add an Hardware - Couldn't get it's ID", e, Logger
 							.getLogger(MCCONTROLLER_LOGGER));
+					log(Level.INFO,
+							"Exception occurred while getting the hardware ID. The hardware will not be added.");
+					return;
 				}
 
 				Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();
