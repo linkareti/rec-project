@@ -57,7 +57,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		SerialPortCommandListener {
 
 	protected static String SERIAL_PORT_LOGGER = "SerialPortDriver.Logger";
-	protected static final String hardwareConfigFile = "HardwareConfig.xml";
 	protected static BaseHardware baseHardware = null;
 	protected static int currentBinaryLength = 0;
 	protected static int totalBinaryLength = 0;
@@ -170,20 +169,11 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		}
 	}
 
-	/**
-	 * 
-	 * Loads the information from HardwareInfo.xml
-	 * 
-	 * @author fdias
-	 * @return {@link Object}
-	 * 
-	 */
 	public Object getHardwareInfo() {
-		// TODO : define the url to hardware info xml
-		// TODO : change this url
-		String packageBase = "recresource://pt/utl/ist/elab/driver/serial/stampgeneric/genericexperiment";
-		String prop = Defaults.defaultIfEmpty(System.getProperty("eLab." + className + ".HardwareInfo"),
-				hardwareConfigFile);
+
+		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
+		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
@@ -194,15 +184,14 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		} catch (java.net.MalformedURLException e) {
 			LoggerUtil.logThrowable("Unable to load resource: " + prop, e, Logger.getLogger(SERIAL_PORT_LOGGER));
 			try {
-				url = new java.net.URL(hardwareConfigFile);
+				url = new java.net.URL(baseHardwareInfoFile);
 			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + hardwareConfigFile, e2, Logger
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
 						.getLogger(SERIAL_PORT_LOGGER));
 			}
 		}
 
 		return url;
-
 	}
 
 	/**
@@ -291,7 +280,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public void init(HardwareInfo info) {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Initializing driver");
-		this.info = info;
 		
 		if (serialIO != null) {
 			serialIO.shutdown();

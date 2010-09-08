@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<HardwareInfo id="ELAB_OPTICA_STAMP_V02" familiarName="optica" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+<HardwareInfo id="OPTICA" familiarName="optica" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    
+    <!-- This elements are still just for test -->
+    
     <description>
         <![CDATA[ 
         Esta experiência serve para - não esquecer de alterar esta descrição
