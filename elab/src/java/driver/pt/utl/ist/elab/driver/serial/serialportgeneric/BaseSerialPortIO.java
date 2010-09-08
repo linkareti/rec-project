@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandList;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandListener;
-import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDriver;
 
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.threading.TimedOutException;
@@ -138,10 +137,10 @@ public class BaseSerialPortIO {
 					synchronized (sPort) {
 						char readChar = 0;
 						lineRead = null;
-						if (GenericSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN)
+						if (AbstractSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN)
 							lineReadTemp = new StringBuffer(1024);
 						else {
-							lineReadTemp = new StringBuffer(GenericSerialPortDriver.currentBinaryLength + 5 /*
+							lineReadTemp = new StringBuffer(AbstractSerialPortDriver.currentBinaryLength + 5 /*
 																											 * length
 																											 * of
 																											 * _BIN
@@ -153,14 +152,14 @@ public class BaseSerialPortIO {
 								sleep(0, 500);
 							}
 							readChar = (char) inReader.read();
-							if (GenericSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN) {
+							if (AbstractSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN) {
 								if (readChar != '\r' && readChar != '\n') {
 									lineReadTemp.append(readChar);
 								} else {
 									break;
 								}
 							} else {
-								if (lineReadTemp.length() <= GenericSerialPortDriver.currentBinaryLength + 5)
+								if (lineReadTemp.length() <= AbstractSerialPortDriver.currentBinaryLength + 5)
 									/* 5 = length of _BIN header */
 									lineReadTemp.append(readChar);
 								else
@@ -247,7 +246,7 @@ public class BaseSerialPortIO {
 				inCommand.setCommand(commandTemp.toString());
 			}
 		}
-		if (GenericSerialPortDriver.currentDriverState == DriverState.RECEIVINGDATA
+		if (AbstractSerialPortDriver.currentDriverState == DriverState.RECEIVINGDATA
 				&& !inCommand.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.END.toString()))
 			return;
 
