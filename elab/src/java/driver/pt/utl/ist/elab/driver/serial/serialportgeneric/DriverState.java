@@ -1624,13 +1624,9 @@ public enum DriverState {
 	}
 
 	private static DriverState logAndReturn(DriverState driverState) {
-		Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+		Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.FINE,
 				"Returning next state... New state: " + driverState.toString());
 		return driverState;
-	}
-
-	private static void logMe(String message) {
-		Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO, message);
 	}
 
 	/**
