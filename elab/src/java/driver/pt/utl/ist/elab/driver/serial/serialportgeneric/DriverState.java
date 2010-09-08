@@ -1475,126 +1475,143 @@ public enum DriverState {
 	public void explodeOnTimeout() throws IncorrectStateException {
 		// is hardware dead?
 		if (getTimeoutNode().getHardwareDied().getTimeInt() > getTimeoutClock()) {
-			logMe("TIMEOUT : Hardware died");
+			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO, "Hardware died");
 			throw new IncorrectStateException();
 		}
 		// is current state on timeout?
 		switch (this) {
 		case UNKNOWN: {
 			if (getTimeoutNode().getId().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Id timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Id timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case ERROR: {
 			if (getTimeoutNode().getDefaultTimeout().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Default timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Default timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case RESETING: {
 			if (getTimeoutNode().getDefaultTimeout().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Default timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Default timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case RESETWAIT: {
 			if (getTimeoutNode().getRst().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Reset timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Reset timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case RESETED: {
 			if (getTimeoutNode().getId().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Id timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Id timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case STOPING: {
 			if (getTimeoutNode().getDefaultTimeout().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Default timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Default timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case STOPWAIT: {
 			if (getTimeoutNode().getStp().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Stop timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Stop timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case STOPPED: {
 			if (getTimeoutNode().getId().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Id timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Id timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case CONFIGURING: {
 			if (getTimeoutNode().getDefaultTimeout().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Default timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Default timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case CONFIGUREWAIT: {
 			if (getTimeoutNode().getCfg().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Config timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Config timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case CONFIGURED: {
 			if (getTimeoutNode().getId().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Id timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Id timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case STARTING: {
 			if (getTimeoutNode().getDefaultTimeout().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Default timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Default timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case STARTWAIT: {
 			if (getTimeoutNode().getStr().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Start timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Start timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case STARTED: {
 			if (getTimeoutNode().getDatBin().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Dat/Bin timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Dat/Bin timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case RECEIVINGCONFIG: {
 			if (getTimeoutNode().getCur().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : Current config timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Current config timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case RECEIVINGDATA: {
 			if (getTimeoutNode().getDatNoData().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : No DAT data timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"No DAT data timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;
 		}
 		case RECEIVINGBIN: {
 			if (getTimeoutNode().getBinNoData().getTimeInt() > getTimeoutClock()) {
-				logMe("TIMEOUT : No BIN data timeout on state " + this.toString());
+				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
+						"No BIN data timeout on state " + this.toString());
 				throw new IncorrectStateException();
 			}
 			break;

@@ -100,16 +100,17 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public AbstractSerialPortDriver() {
 		
-		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Instantiating the " + this.getClass().getSimpleName());
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Instantiating the " + this.getClass().getSimpleName());
 
 		try {
 			rs232configs = loadRs232Configs(RS232_CONFIG_FILE_PATH);
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Loaded the RS232 configuration.");
 		} catch (IncorrectRs232ValuesException e) {
-			logMe("SERIAL PORT DRIVER CONSTRUCTOR : Incorrect values on rs232 config file" + e.getMessage());
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.SEVERE,
+					"Incorrect values on rs232 config file" + e.getMessage());
 			return;
 		} catch (IOException e) {
-			logMe("SERIAL PORT DRIVER CONSTRUCTOR : Error reading rs232 config file" + e.getMessage());
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.SEVERE, "Error reading rs232 config file" + e.getMessage());
 			return;
 		}
 
@@ -117,7 +118,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		packageName = getClass().getPackage().getName() + ".";
 
 		ID_STR = rs232configs.getId();
-		logMe("Driver Unique ID = " + ID_STR);
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Driver Unique ID = " + ID_STR);
 
 		loadCommandHandlers();
 
@@ -345,7 +346,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		// through the current state
 		if (currentDriverState != DriverState.CONFIGURED && currentDriverState != DriverState.STOPPED
 				&& currentDriverState != DriverState.RESETED && currentDriverState != DriverState.UNKNOWN) {
-			logMe("CONFIGURE : Cannot configure while on state " + currentDriverState.toString());
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.WARNING,
+					"Cannot configure while on state " + currentDriverState.toString());
 			throw new IncorrectStateException();
 		}
 
@@ -440,7 +442,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		// verifies if the driver can start the hardware at this moment through
 		// the current state
 		if (currentDriverState != DriverState.CONFIGURED && currentDriverState != DriverState.STOPPED) {
-			logMe("START : Cannot start while on state " + currentDriverState.toString());
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.WARNING,
+					"Cannot start while on state " + currentDriverState.toString());
 			throw new IncorrectStateException();
 		}
 
@@ -474,7 +477,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 //		currentDriverState.explodeOnTimeout();
 
 		if (serialPortCommand == null) {
-			logMe("No configuration available yet!");
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "No configuration available yet!");
 			throw new IncorrectStateException();
 		}
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.STR.toString().toLowerCase());
@@ -506,7 +509,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		// the current state
 		if (currentDriverState != DriverState.STARTED && currentDriverState != DriverState.RECEIVINGDATA
 				&& currentDriverState != DriverState.RECEIVINGBIN) {
-			logMe("STOP : Cannot stop while on state " + currentDriverState.toString());
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.WARNING,
+					"Cannot stop while on state " + currentDriverState.toString());
 			throw new IncorrectStateException();
 		}
 
@@ -549,7 +553,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	@Deprecated
 	public void handleStampCommand(SerialPortCommand command) throws IncorrectStateException, TimedOutException {
-//		logMe("Received the command " + command + " !"); // logged in processCommand
 		processCommand(command);
 	}
 
@@ -591,7 +594,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void processCommand(SerialPortCommand cmd) throws IncorrectStateException, TimedOutException {
-		logMe("Going to process the command " + cmd + " with the driver in state " + currentDriverState);
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
+				"Going to process the command " + cmd + " with the driver in state " + currentDriverState);
 
 		// is this time to
 		// TODO explode???
@@ -601,7 +605,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		SerialPortCommandList thisCommand = null;
 
 		if (cmd == null || cmd.getCommandIdentifier() == null) {
-			logMe("PROCESSCOMMAND : Cannot interpret command " + cmd);
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "PROCESSCOMMAND : Cannot interpret command " + cmd);
 			return;
 		}
 
@@ -617,14 +621,14 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				return;
 			}
 			// the driver seems to speak Fortran 77, I cannot understand it
-			logMe("PROCESSCOMMAND : Cannot interpret command identifier " + cmd.getCommandIdentifier());
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
+					"PROCESSCOMMAND : Cannot interpret command identifier " + cmd.getCommandIdentifier());
 			// terminates this driver execution
 			currentDriverState = DriverState.UNKNOWN;
 			currentDriverState.startTimeoutClock();
 			fireIDriverStateListenerDriverShutdown();
 			return;
 		}
-		logMe("PROCESSCOMMAND : I'm gonna process the line : " + cmd.getCommand());
 
 		// but if we understand it, let's listen to it
 		thisCommand = SerialPortCommandList.valueOf(cmd.getCommandIdentifier());
@@ -641,9 +645,12 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				if (cmd.getDataHashMap() == null || cmd.getDataHashMap().size() != 2) {
 					// Houston we have a problem, IDS always comes with two
 					// parameters
-					logMe("PROCESSCOMMAND : Error on command IDS, incorrect number of parameters: "
-							+ cmd.getDataHashMap() == null ? "null" : cmd.getDataHashMap().size()
-							+ " parameters instead of 2");
+					Logger
+							.getLogger(SERIAL_PORT_LOGGER)
+							.log(
+									Level.WARNING,
+									"Error on command IDS, incorrect number of parameters: " + cmd.getDataHashMap() == null ? "null"
+											: cmd.getDataHashMap().size() + " parameters instead of 2");
 					currentDriverState = DriverState.UNKNOWN;
 					currentDriverState.startTimeoutClock();
 					// terminates this driver execution
@@ -651,8 +658,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					return;
 				} else {
 					if (!rs232configs.getId().equals(cmd.getDataHashMap().get(0))) {
-						logMe("PROCESSCOMMAND : Error on command IDS, wrong ID of hardware: "
-								+ (cmd.getDataHashMap().size() > 1 ? cmd.getDataHashMap().get(0) : "null"));
+						Logger.getLogger(SERIAL_PORT_LOGGER).log(
+								Level.WARNING,
+								"Error on command IDS, wrong ID of hardware: "
+										+ (cmd.getDataHashMap().size() > 1 ? cmd.getDataHashMap().get(0) : "null"));
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
 						// terminates this driver execution
@@ -660,8 +669,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 						return;
 					}
 					if (!HardwareStatus.isValid(cmd.getDataHashMap().get(1))) {
-						logMe("PROCESSCOMMAND : Error on command IDS, wrong status of hardware:"
-								+ (cmd.getDataHashMap().size() > 2 ? cmd.getDataHashMap().get(1) : "null"));
+						Logger.getLogger(SERIAL_PORT_LOGGER).log(
+								Level.WARNING,
+								"Error on command IDS, wrong status of hardware:"
+										+ (cmd.getDataHashMap().size() > 2 ? cmd.getDataHashMap().get(1) : "null"));
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
 						// terminates this driver execution
@@ -669,10 +680,12 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 						return;
 					}
 					if (!currentDriverState.acceptHardwareStatus(HardwareStatus.valueOf(cmd.getDataHashMap().get(1)))) {
-						logMe("PROCESSCOMMAND : Current driver state: " + currentDriverState.toString()
-								+ " does not matches hardware status:"
-								+ (cmd.getDataHashMap().size() == 2 ? cmd.getDataHashMap().get(1) : "null")
-								+ ". Shuting down driver.");
+						Logger.getLogger(SERIAL_PORT_LOGGER).log(
+								Level.WARNING,
+								"Current driver state: " + currentDriverState.toString()
+										+ " does not matches hardware status:"
+										+ (cmd.getDataHashMap().size() == 2 ? cmd.getDataHashMap().get(1) : "null")
+										+ ". Shuting down driver.");
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
 						// terminates this driver execution
@@ -686,7 +699,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					currentDriverState = DriverState.CONFIGUREWAIT;
 				currentDriverState.startTimeoutClock();
 			} else {
-				logMe("PROCESSCOMMAND : Configuration recieved from the hardware does not match: " + cmd.getCommand());
+				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
+						"Configuration recieved from the hardware does not match: " + cmd.getCommand());
 				currentDriverState = DriverState.UNKNOWN;
 				currentDriverState.startTimeoutClock();
 				fireIDriverStateListenerDriverShutdown();
@@ -695,13 +709,17 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		} else if (thisCommand.equals(SerialPortCommandList.CUR)) {
 			// TODO : what must I do with this?
 		} else if (thisCommand.equals(SerialPortCommandList.ERR)) {
-			logMe("PROCESSCOMMAND : Recieved error from the hardware: " + cmd.getCommand());
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Recieved error from the hardware: " + cmd.getCommand());
 			fireIDriverStateListenerDriverShutdown();
 			throw new IncorrectStateException();
 		}
 		// new state for the driver
-		logMe("PROCESSCOMMAND : Switching between driver state " + currentDriverState.toString() + " and "
-				+ newDriverState.toString());
+		Logger.getLogger(SERIAL_PORT_LOGGER)
+				.log(
+						Level.FINEST,
+						"Switching between driver state " + currentDriverState.toString() + " and "
+								+ newDriverState.toString());
 		currentDriverState = newDriverState;
 		currentDriverState.startTimeoutClock();
 	}
@@ -714,7 +732,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					// dataSource.setRunning(false);
 					dataSource.stopNow();
 			} else {
-				logMe("CommandDispatcher only messes with StampCommand objects");
+				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
+						"CommandDispatcher only messes with StampCommand objects");
 			}
 		}
 
@@ -900,10 +919,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			rememberLastWrittenMessage = message;
 			serialIO.writeMessage(message);
 		}
-	}
-
-	protected void logMe(String message) {
-		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, message);
 	}
 
 }
