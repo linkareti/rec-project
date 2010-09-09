@@ -340,6 +340,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException,
 			IncorrectStateException, TimedOutException {
+		
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Configuring driver...");
 
 		// TODO explode???
 //		currentDriverState.explodeOnTimeout();
@@ -355,6 +357,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		fireIDriverStateListenerDriverConfiguring();
 
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating command.");
+		
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.CFG.toString().toLowerCase());
 
 		// loop through each parameter and add data to each one
@@ -384,12 +388,22 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		}
 		
 		if (!SerialPortTranslator.translateConfig(serialPortCommand, commandParameterNodes)) {
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.WARNING, "Error translating command.");
 			throw new WrongConfigurationException("Cannot translate config command!", -1);
 		}
 		
+		Logger.getLogger(SERIAL_PORT_LOGGER)
+				.log(Level.INFO, "Created command [" + serialPortCommand.getCommand() + "]");
+		
 		ChannelAcquisitionConfig[] channelsConfig = config.getChannelsConfig();
-		for (ChannelAcquisitionConfig channelAcquisitionConfig : channelsConfig) {
-			channelAcquisitionConfig.setTotalSamples(config.getTotalSamples());
+		if (channelsConfig != null) {
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
+					"Setting the channel acquisition total samples with [" + config.getTotalSamples() + "]");
+			for (ChannelAcquisitionConfig channelAcquisitionConfig : channelsConfig) {
+				channelAcquisitionConfig.setTotalSamples(config.getTotalSamples());
+			}
+		} else {
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "There aren't defined channels config.");
 		}
 
 		this.config = config;
