@@ -32,11 +32,13 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandListener;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.HardwareNode;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode.TransferFunctionType;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDataSource;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.translator.SerialPortTranslator;
 
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
+import com.linkare.rec.data.config.ChannelAcquisitionConfig;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.ChannelParameter;
 import com.linkare.rec.data.metadata.HardwareInfo;
@@ -365,9 +367,14 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			// if is legible value...
 			if (channelParameter.getParameterType() != ParameterType.BlackBoxValue) {
 				String parameterName = channelParameter.getParameterName();
-				String parameterValue = Defaults.defaultIfEmpty(
+				String parameterValueInput = Defaults.defaultIfEmpty(
 						config.getSelectedHardwareParameterValue(parameterName), info
 								.getHardwareParameterValue(parameterName));
+				
+				// transform the data from client to the hardware config format
+				Double value = parameterNone.calculate(Double.valueOf(parameterValueInput), TransferFunctionType.INPUT);
+				String parameterValue = parameterNone.formatInput(value);
+				
 				// add to command
 				serialPortCommand.addCommandData(parameterNone.getOrder().toString(), parameterValue);
 				commandParameterNodes.add(parameterNone);
@@ -379,6 +386,13 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		if (!SerialPortTranslator.translateConfig(serialPortCommand, commandParameterNodes)) {
 			throw new WrongConfigurationException("Cannot translate config command!", -1);
 		}
+		
+		ChannelAcquisitionConfig[] channelsConfig = config.getChannelsConfig();
+		for (ChannelAcquisitionConfig channelAcquisitionConfig : channelsConfig) {
+			channelAcquisitionConfig.setTotalSamples(config.getTotalSamples());
+		}
+
+		this.config = config;
 		
 		writeMessage(serialPortCommand.getCommand());
 		currentDriverState = DriverState.CONFIGURING;

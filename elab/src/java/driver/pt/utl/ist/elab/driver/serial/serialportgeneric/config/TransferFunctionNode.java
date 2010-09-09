@@ -76,6 +76,7 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link LinearFunctionNode }
+	 * @return 
 	 * 
 	 * 
 	 */
@@ -106,6 +107,7 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link PowerFunctionNode }
+	 * @return 
 	 * 
 	 * 
 	 */
@@ -136,6 +138,7 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link ExpFunctionNode }
+	 * @return 
 	 * 
 	 * 
 	 */
@@ -166,6 +169,7 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link LogFunctionNode }
+	 * @return 
 	 * 
 	 * 
 	 */
@@ -196,6 +200,7 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link SinFunctionNode }
+	 * @return 
 	 * 
 	 * 
 	 */
@@ -226,6 +231,7 @@ public class TransferFunctionNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link TgFunctionNode }
+	 * @return 
 	 * 
 	 * 
 	 */

@@ -34,56 +34,19 @@ public class SerialPortTranslator {
 			return false;
 		}
 		
-		// FIXME TODO validate the parameter values
-
-		// validation example code from g experiment
-//		int numsamples = ((Integer) command.getCommandData(NUMSAMPLES_STR)).intValue();
-//		int delay_time = ((Integer) command.getCommandData(DELAY_STR)).intValue();
-//		int power = ((Integer) command.getCommandData(POWER_STR)).intValue();
-//
-//		if (power > 100 || power < 0) {
-//			System.out.println("power launch is wrong..." + power);
-//			return false;
-//		}
-//
-//		if (delay_time > 250 || delay_time < 10) {
-//			System.out.println("delay_time is wrong..." + delay_time);
-//			return false;
-//		}
-//
-//		if (numsamples > (int) Math.floor(500. - ((float) delay_time - 1.) * 480. / 249.)) {
-//			System.out.println("numsamples>=500-(delay_time-1)*480/249)");
-//			return false;
-//		}
-//
-//		if (numsamples < 10) {
-//			System.out.println("numsamples<10");
-//			return false;
-//		}
-//
-//		String powerstr = "" + power;
-//		while (powerstr.length() < 3)
-//			powerstr = "0" + powerstr;
-//
-//		String delay_time_str = "" + delay_time;
-//		while (delay_time_str.length() < 3)
-//			delay_time_str = "0" + delay_time_str;
-//
-//		String numSamplesStr = "" + (numsamples - 1);
-//		while (numSamplesStr.length() < 4)
-//			numSamplesStr = "0" + numSamplesStr;
+		// the parameter values validation must be made in the GUI
 		
 		// ordering list by order
 		Collections.sort(commandParameterNodes, new OneParameterNodeOrderComparator());
 		
 		// build the command
-		String commandStr = command.getCommandIdentifier();
+		StringBuilder commandStr = new StringBuilder(command.getCommandIdentifier());
 		for (OneParameterNode oneParameterNode : commandParameterNodes) {
 			String parameterValue = command.getCommandData(oneParameterNode.getOrder().toString());
 			String formatedParameterValue = oneParameterNode.formatOutput(Double.valueOf(parameterValue));
-			commandStr.concat("\t").concat(formatedParameterValue);
+			commandStr.append("\t").append(formatedParameterValue);
 		}
-		command.setCommand(commandStr);
+		command.setCommand(commandStr.toString());
 
 		return true;
 	}

@@ -36,6 +36,7 @@ import com.linkare.rec.data.metadata.Scale;
  */
 public class AbstractSerialPortDataSourceTest {
 	
+	// TODO change the file path to this class package path
 	private static final String RS232_CONFIG_FILE_PATH = "experiments/optica/etc/Rs232Config.xml";
 	private static final int CHANNELS_CONFIG_LENGTH = 7;
 	

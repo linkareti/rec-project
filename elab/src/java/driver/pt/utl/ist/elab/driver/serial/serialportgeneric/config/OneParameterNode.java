@@ -19,8 +19,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import pt.utl.ist.elab.driver.serial.serialportgeneric.IncorrectRs232ValuesException;
-
 /**
  * <p>
  * Java class for OneParameterNode complex type.
@@ -63,9 +61,9 @@ public class OneParameterNode {
 	protected String output;
 
 	@XmlTransient
-	protected DecimalFormat inputFormat = null;
+	private DecimalFormat inputFormat = null;
 	@XmlTransient
-	protected DecimalFormat outputFormat = null;
+	private DecimalFormat outputFormat = null;
 
 	/**
 	 * Gets the value of the transferFunction property.
@@ -87,6 +85,7 @@ public class OneParameterNode {
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link TransferFunctionNode }
+	 * @return 
 	 * 
 	 * 
 	 */
@@ -111,18 +110,10 @@ public class OneParameterNode {
 	 * Sets the value of the input property.
 	 * 
 	 * @param value allowed object is {@link String }
-	 * @throws IncorrectRs232ValuesException
 	 * 
 	 */
-	public void setInput(String value) throws IncorrectRs232ValuesException {
+	public void setInput(String value) {
 		this.input = value;
-		inputFormat = new DecimalFormat();
-		try {
-			inputFormat.applyPattern(value.replace("#", "0"));
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-			throw new IncorrectRs232ValuesException("input format for this parameter is not valid");
-		}
 	}
 
 	/**
@@ -199,18 +190,10 @@ public class OneParameterNode {
 	 * Sets the value of the output property.
 	 * 
 	 * @param value allowed object is {@link String }
-	 * @throws IncorrectRs232ValuesException
 	 * 
 	 */
-	public void setOutput(String value) throws IncorrectRs232ValuesException {
+	public void setOutput(String value) {
 		this.output = value;
-		outputFormat = new DecimalFormat();
-		try {
-			outputFormat.applyPattern(value.replace("#", "0"));
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-			throw new IncorrectRs232ValuesException("output format for this parameter is not valid");
-		}
 	}
 
 	public Double calculate(Double value, TransferFunctionType type) {
@@ -220,7 +203,7 @@ public class OneParameterNode {
 		
 		Double total = 0D;
 		for (TransferFunctionNode node : transferFunction) {
-			if (node.type.equalsIgnoreCase(type.toString())) {
+			if (type.toString().equalsIgnoreCase(node.type)) {
 				for (LinearFunctionNode linear : node.getLinear()) {
 					total = total + pD(linear.getParam().getWeight()) * value - pD(linear.getParam().getCenter());
 				}
@@ -254,22 +237,40 @@ public class OneParameterNode {
 		return Double.parseDouble(s);
 	}
 
-	public String formatOutput(Double value) {
-		if (outputFormat == null)
-			return value.toString();
-		return outputFormat.format(value).toString();
+	public String formatOutput(Number value) {
+		if (getOutputFormat() == null) {
+			return String.valueOf(value);
+		}
+		return getOutputFormat().format(value);
 	}
 
-	public String formatOutput(Float value) {
-		if (outputFormat == null)
-			return value.toString();
-		return outputFormat.format(value).toString();
+	public String formatInput(Number value) {
+		if (getInputFormat() == null) {
+			return String.valueOf(value);
+		}
+		return getInputFormat().format(value);
 	}
 
-	public String formatInput(Double value) {
-		if (inputFormat == null)
-			return value.toString();
-		return inputFormat.format(value).toString();
+	/**
+	 * @return the outputFormat
+	 */
+	public DecimalFormat getOutputFormat() {
+		if (outputFormat == null && getOutput() != null) {
+			outputFormat = new DecimalFormat();
+			outputFormat.applyPattern(getOutput());
+		}
+		return outputFormat;
+	}
+
+	/**
+	 * @return the inputFormat
+	 */
+	public DecimalFormat getInputFormat() {
+		if (inputFormat == null && getInput() != null) {
+			inputFormat = new DecimalFormat();
+			inputFormat.applyPattern(getInput());
+		}
+		return inputFormat;
 	}
 
 	public static enum TransferFunctionType {
