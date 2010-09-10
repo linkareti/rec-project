@@ -20,41 +20,12 @@
 		</selection-list>
 	</parameter>
 
-	<!--
-		<parameter name="protocolo" type="ContinuousValue" value="1">
-		<selection-list> <value order="1">1</value> <value order="2">1</value>
-		<value order="3">1</value> </selection-list> </parameter> <parameter
-		name="ang1_min" type="ContinuousValue" value="0"> <selection-list>
-		<value order="1">0</value> <value order="2">360</value> <value
-		order="3">1</value> </selection-list> </parameter> <parameter
-		name="ang1_max" type="ContinuousValue" value="360"> <selection-list>
-		<value order="1">0</value> <value order="2">360</value> <value
-		order="3">1</value> </selection-list> </parameter> <parameter
-		name="delta_ang1" type="ContinuousValue" value="10"> <selection-list>
-		<value order="1">0.2</value> <value order="2">360</value> <value
-		order="3">0.2</value> </selection-list> </parameter> <parameter
-		name="delay" type="ContinuousValue" value="2"> <selection-list> <value
-		order="1">1</value> <value order="2">5</value> <value
-		order="3">1</value> </selection-list> </parameter>
-	-->
-
 	<frequency-scale label="Sampling Interval">
-		<min-frequency>
-			<Frequency type="SamplingIntervalType" multiplier="milli">100
-			</Frequency>
-		</min-frequency>
-		<max-frequency>
-			<Frequency type="SamplingIntervalType" multiplier="milli">5000
-			</Frequency>
-		</max-frequency>
-		<step-frequency>
-			<Frequency type="SamplingIntervalType" multiplier="milli">100
-			</Frequency>
-		</step-frequency>
+		<min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency></min-frequency>
+		<max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">5000</Frequency></max-frequency>
+		<step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency></step-frequency>
 	</frequency-scale>
-
-	<Frequency type="SamplingIntervalType" multiplier="milli">100
-	</Frequency>
+	<Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency>
 
 	<sampling-scale>
 		<min-samples>10</min-samples>
@@ -62,97 +33,48 @@
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
-	<ChannelInfo name="Protocolo" independent="false"
-		direction="CHANNEL_INPUT">
-		<scale label="Protocolo" physicsunitname="" physicsunitsymbol=""
-			multiplier="none" selected="true">
-			<min>
-				<PhysicsVal type="int">1</PhysicsVal>
-			</min>
-			<max>
-				<PhysicsVal type="int">5</PhysicsVal>
-			</max>
-			<step>
-				<PhysicsVal type="int">1</PhysicsVal>
-			</step>
-			<errordefault>
-				<PhysicsVal type="int">0</PhysicsVal>
-			</errordefault>
+	<ChannelInfo name="Protocolo" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Protocolo" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+			<min><PhysicsVal type="int">1</PhysicsVal></min>
+			<max><PhysicsVal type="int">5</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">0</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="Ângulo mínimo" independent="false"
-		direction="CHANNEL_INPUT">
-		<scale label="Ângulo mínimo [º]" physicsunitname="grau"
-			physicsunitsymbol="º" multiplier="none" selected="true">
-			<min>
-				<PhysicsVal type="float">0.</PhysicsVal>
-			</min>
-			<max>
-				<PhysicsVal type="float">360.</PhysicsVal>
-			</max>
-			<step>
-				<PhysicsVal type="float">0.2</PhysicsVal>
-			</step>
-			<errordefault>
-				<PhysicsVal type="float">0.001</PhysicsVal>
-			</errordefault>
+	<ChannelInfo name="Ângulo mínimo" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Ângulo mínimo [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">360.</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="Ângulo máximo" independent="false"
-		direction="CHANNEL_INPUT">
-		<scale label="Ângulo máximo [º]" physicsunitname="grau"
-			physicsunitsymbol="º" multiplier="none" selected="true">
-			<min>
-				<PhysicsVal type="float">0.</PhysicsVal>
-			</min>
-			<max>
-				<PhysicsVal type="float">360.</PhysicsVal>
-			</max>
-			<step>
-				<PhysicsVal type="float">0.2</PhysicsVal>
-			</step>
-			<errordefault>
-				<PhysicsVal type="float">0.001</PhysicsVal>
-			</errordefault>
+	<ChannelInfo name="Ângulo máximo" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Ângulo máximo [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">360.</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="Incremento" independent="false"
-		direction="CHANNEL_INPUT">
-		<scale label="Incremento [º]" physicsunitname="grau"
-			physicsunitsymbol="º" multiplier="none" selected="true">
-			<min>
-				<PhysicsVal type="float">0.2</PhysicsVal>
-			</min>
-			<max>
-				<PhysicsVal type="float">360.</PhysicsVal>
-			</max>
-			<step>
-				<PhysicsVal type="float">0.2</PhysicsVal>
-			</step>
-			<errordefault>
-				<PhysicsVal type="float">0.001</PhysicsVal>
-			</errordefault>
+	<ChannelInfo name="Incremento" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Incremento [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.2</PhysicsVal></min>
+			<max><PhysicsVal type="float">360.</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
 	<ChannelInfo name="Delay" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Delay [s]" physicsunitname="segundos"
-			physicsunitsymbol="s" multiplier="none" selected="true">
-			<min>
-				<PhysicsVal type="float">0.1</PhysicsVal>
-			</min>
-			<max>
-				<PhysicsVal type="float">360.</PhysicsVal>
-			</max>
-			<step>
-				<PhysicsVal type="float">0.1</PhysicsVal>
-			</step>
-			<errordefault>
-				<PhysicsVal type="float">0.01</PhysicsVal>
-			</errordefault>
+		<scale label="Delay [s]" physicsunitname="segundos" physicsunitsymbol="s" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.1</PhysicsVal></min>
+			<max><PhysicsVal type="float">360.</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.01</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 
