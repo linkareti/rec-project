@@ -162,6 +162,23 @@ public class ClientQueue implements QueueLogger {
 			messageQueue.addEvent(new ChatMessageEvent(this, user, otherUser, message));
 		}
 	}
+	
+	public void sendMulticastChatMessage(String clientTo, String message) {
+		synchronized (queueOrg) {
+			UserInfo otherUser = userNameToUserInfo(clientTo);
+
+			if (otherUser == null || otherUser.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
+				return;
+			}
+			
+			UserInfo adminUser = new UserInfo(ChatMessageEvent.MULTICAST_USERNAME);
+
+			DefaultOperation op = new DefaultOperation(IOperation.OP_SEND_MESSAGE);
+			op.getProperties().put(IOperation.PROPKEY_USERID_OTHER, otherUser);
+
+			messageQueue.addEvent(new ChatMessageEvent(this, adminUser, otherUser, message));
+		}
+	}
 
 	// Helper function for chat messages...
 	private UserInfo userNameToUserInfo(String userName) {

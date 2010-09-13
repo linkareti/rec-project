@@ -26,6 +26,7 @@ import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 import com.linkare.rec.impl.multicast.security.IOperation;
 import com.linkare.rec.impl.multicast.security.IResource;
+import com.linkare.rec.impl.multicast.security.ISecurityCommunicator;
 import com.linkare.rec.impl.multicast.security.ISecurityManager;
 import com.linkare.rec.impl.multicast.security.IUser;
 import com.linkare.rec.impl.multicast.security.ResourceType;
@@ -105,6 +106,14 @@ public class ElabSecurityManager implements ISecurityManager {
 	 */
 	@Override
 	public void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares) {
+		// this security implementation doesn't require the multicast hardwares
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerSecurityCommunicator(ISecurityCommunicator communicator) {
 		// this security implementation doesn't require the multicast hardwares
 	}
 

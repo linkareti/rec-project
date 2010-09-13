@@ -33,6 +33,7 @@ import com.linkare.rec.impl.multicast.security.DefaultOperation;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
 import com.linkare.rec.impl.multicast.security.DefaultUser;
 import com.linkare.rec.impl.multicast.security.IOperation;
+import com.linkare.rec.impl.multicast.security.ISecurityCommunicator;
 import com.linkare.rec.impl.multicast.security.IUser;
 import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
@@ -43,7 +44,7 @@ import com.linkare.rec.impl.utils.Defaults;
 /**
  * @author José Pedro Pereira - Linkare TI
  */
-public class ReCMultiCastController implements MultiCastControllerOperations {
+public class ReCMultiCastController implements MultiCastControllerOperations, ISecurityCommunicator {
 
 	public static final DataProducerActivator DP_DEACTIVATOR = new DataProducerActivator();
 
@@ -135,6 +136,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 			// Initialize Security Manager
 			SecurityManagerFactory.getSecurityManager().registerMultiCastHardware(multiCastHardwares);
 			
+			// TODO register security communicator
+			SecurityManagerFactory.getSecurityManager().registerSecurityCommunicator(this);
+			
 		} catch (Exception e) {
 			// REMOVE THIS TRY CATCH BLOCK AFTER FINISHING THE TEST PHASE...
 			LoggerUtil.logThrowable("Error initializing the ReCMultiCastController", e, Logger
@@ -191,6 +195,14 @@ public class ReCMultiCastController implements MultiCastControllerOperations {
 	 */
 	public void sendMessage(UserInfo user, String clientTo, String message) throws NotRegistered, NotAuthorized {
 		clientQueue.sendChatMessage(user, clientTo, message, resource);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void sendMulticastMessage(String clientTo, String message) {
+		clientQueue.sendMulticastChatMessage(clientTo, message);
 	}
 
 	/*

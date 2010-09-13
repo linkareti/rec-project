@@ -32,6 +32,7 @@ import javax.rmi.PortableRemoteObject;
 import com.linkare.rec.am.AllocationDTO;
 import com.linkare.rec.am.AllocationManager;
 import com.linkare.rec.am.UnknownDomainException;
+import com.linkare.rec.impl.events.ChatMessageEvent;
 import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
@@ -103,6 +104,10 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	private static final int NEAR_TIME_LAP_MINUTES = 5;
 	private static final int REFRESH_TIME_LAP_MINUTES = 15;
 	private static final int REFRESH_TIME_ALLOCATIONS_CLIENT_QUEUE_MINUTES = 1;
+	
+	private List<ReCMultiCastHardware> multiCastHardwares = null;
+	
+	private ISecurityCommunicator communicator = null;
 
 	/**
 	 * Creates the <code>AllocationManagerSecurityManager</code>.
@@ -403,7 +408,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 				List<AllocationDTO> newAllocations = allocationManager.getBy(begin, end, LABORATORY_ID);
 				mergeAllocations(newAllocations);
 			} catch (Exception e2) {
-				// TODO - What if I can't lookup it up again??? Down for
+				// What if I can't lookup it up again??? Down for
 				// long??? No allocations available... Ooops!
 			}
 		}
@@ -487,6 +492,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 																+ username
 																+ "] isn't in the current allocation. It is going to be kicked.");
 										
+										sendKickMessage(username);
+										
 										usernamesToKick.add(username);
 										kickedClients++;
 									}
@@ -501,40 +508,6 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 							}
 						}
 					}
-					
-					
-//					Iterator<DataClientForQueue> iter = clientQueue.iterator();
-//
-//					while (iter.hasNext()) {
-//						DataClientForQueue dcfq = iter.next();
-//						if (ResourceType.MCHARDWARE == dcfq.getResource().getResourceType()) {
-//							String hardware = dcfq.getResource().getProperties().get(
-//									dcfq.getResource().getResourceType().getPropertyKey());
-//
-//							if (currentAllocationsMap.containsKey(hardware)) {
-//								// there is a allocation for this hardware so
-//								// the user must be in the allocation
-//								String userName = dcfq.getUserInfo().getUserName();
-//								if (checkUserAsOwner(currentAllocationsMap.get(hardware), userName)) {
-//									// clientQueue.sendChatMessage(user,
-//									// clientTo, message, resource);
-//
-//									LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
-//											Level.INFO,
-//											"The user [" + userName
-//													+ "] isn't in the current allocation. It is going to be shutdown.");
-//
-//									dcfq.shutdownAsSoonAsPossible();
-//									clientQueue.remove(dcfq);
-//
-//									kickedClients++;
-//								}
-//							}
-//						} else {
-//							LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
-//									"The resource [" + dcfq.getResource().getResourceType() + "] is not an hardware.");
-//						}
-//					}
 				} else {
 					LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
 							"There are no current allocations at this time");
@@ -565,14 +538,42 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		return currentAllocationsMap;
 	}
 	
-	private List<ReCMultiCastHardware> multiCastHardwares = null;
-
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares) {
 		this.multiCastHardwares = multiCastHardwares;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerSecurityCommunicator(ISecurityCommunicator communicator) {
+		this.communicator = communicator;
+	}
+	
+	/**
+	 * Sends a message to the client saying that he is going to be shutdown from the experiment.
+	 * 
+	 * @param clientTo
+	 */
+	private void sendKickMessage(String clientTo) {
+		if (communicator != null) {
+			communicator.sendMulticastMessage(clientTo, ChatMessageEvent.SECURITY_COMMUNICATION_MSG_ON_KICK_KEY);
+		}
+	}
+	
+	/**
+	 * Sends a message warning the client that he is going to be shutdown from the experiment in some time.
+	 * 
+	 * @param clientTo
+	 */
+	private void sendWarningMessage(String clientTo) {
+		if (communicator != null) {
+			communicator.sendMulticastMessage(clientTo, ChatMessageEvent.SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY); 
+		}
 	}
 
 }

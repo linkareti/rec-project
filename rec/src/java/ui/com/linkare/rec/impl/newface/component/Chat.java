@@ -36,6 +36,7 @@ import com.linkare.rec.impl.client.chat.ChatRoomEvent;
 import com.linkare.rec.impl.client.chat.IChatMessageListener;
 import com.linkare.rec.impl.client.chat.IChatServer;
 import com.linkare.rec.impl.events.ChatMessageEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 
@@ -99,6 +100,15 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 			log.info(CHAT_TEMPLATE);
 		}
 	}
+	
+	private static final String MULTICAST_STR = ReCResourceBundle.findStringOrDefault(
+			"ReCBaseUI$rec.bui.lbl.multicast", "Server");
+	private static final String SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR = ReCResourceBundle.findStringOrDefault(
+			"ReCBaseUI$rec.bui.lbl.multicast.security.communicator.msg.before.kick",
+			"Warning! You are going to be kicked from the experiment because there is an experiment reservation.");
+	private static final String SECURITY_COMMUNICATOR_MSG_ON_KICK_STR = ReCResourceBundle.findStringOrDefault(
+			"ReCBaseUI$rec.bui.lbl.multicast.security.communicator.msg.on.kick",
+			"Info! You were kicked from the experiment because there is an experiment reservation.");
 
 	private static class UserMessage {
 
@@ -201,10 +211,20 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 			log.fine(evt != null ? evt.getMessage() : "null event");
 		}
 
-		final String userFrom = evt.getUserFrom().getUserName();
+		String user = evt.getUserFrom().getUserName();
 		String msg = evt.getMessage();
+		
+		if (user.equals(ChatMessageEvent.MULTICAST_USERNAME)) {
+			user = MULTICAST_STR;
+			if (ChatMessageEvent.SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY.equals(msg)) {
+				msg = new String(SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR);
+			} else if (ChatMessageEvent.SECURITY_COMMUNICATION_MSG_ON_KICK_KEY.equals(msg)) {
+				msg = new String(SECURITY_COMMUNICATOR_MSG_ON_KICK_STR);
+			}
+		}
 
 		if (msg.length() > 0) {
+			final String userFrom = user;
 			final String escapedMsg = StringEscapeUtils.escapeHtml(msg);
 
 			final Element msgList = getHTMLDocument().getElement(MESSAGE_LIST);

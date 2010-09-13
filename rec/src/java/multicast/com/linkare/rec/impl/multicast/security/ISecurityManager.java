@@ -21,5 +21,7 @@ public interface ISecurityManager {
 	boolean authenticate(IResource resource, IUser user);
 	
 	void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares);
+	
+	void registerSecurityCommunicator(ISecurityCommunicator communicator);
 
 }

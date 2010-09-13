@@ -153,6 +153,14 @@ public final class SecurityManagerFactory {
 		public void registerMultiCastHardware(List<ReCMultiCastHardware> multiCastHardwares) {
 			// this security implementation doesn't require the multicast hardwares
 		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void registerSecurityCommunicator(ISecurityCommunicator communicator) {
+			// this security implementation doesn't require the multicast hardwares
+		}
 	}
 
 }

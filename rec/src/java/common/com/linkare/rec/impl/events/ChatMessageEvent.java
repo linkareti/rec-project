@@ -18,6 +18,10 @@ public class ChatMessageEvent extends java.util.EventObject {
 
 	public static final String EVERYONE_USER = null;
 
+	public static final String MULTICAST_USERNAME = "SysAdmin";
+	public static final String SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY = "before.kick";
+	public static final String SECURITY_COMMUNICATION_MSG_ON_KICK_KEY = "on.kick";
+
 	/** Holds value of property userTo. */
 	private UserInfo userTo;
 

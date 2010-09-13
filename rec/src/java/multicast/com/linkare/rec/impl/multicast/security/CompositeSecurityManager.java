@@ -114,4 +114,16 @@ public class CompositeSecurityManager implements ISecurityManager {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void registerSecurityCommunicator(ISecurityCommunicator communicator) {
+		if (securityManagers != null) {
+			for (ISecurityManager secManager : securityManagers) {
+				secManager.registerSecurityCommunicator(communicator);
+			}
+		}
+	}
+
 }
