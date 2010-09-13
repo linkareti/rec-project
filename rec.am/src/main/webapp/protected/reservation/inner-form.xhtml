@@ -55,7 +55,8 @@
 			value="#{bundle['reservation.startDate']}" />
 		<p:inputMask id="startDate"
 			value="#{reservationController.selected.startDate}"
-			mask="99/99/9999 99:99" label="#{bundle['reservation.startDate']}">
+			mask="99/99/9999 99:99" label="#{bundle['reservation.startDate']}"
+			required="#{!userView.external}">
 			<f:convertDateTime timeZone="Europe/Lisbon" type="both"
 				pattern="dd/MM/yyyy HH:mm" />
 		</p:inputMask>
@@ -63,7 +64,8 @@
 		<h:outputLabel for="endDate" value="#{bundle['reservation.endDate']}" />
 		<p:inputMask id="endDate"
 			value="#{reservationController.selected.endDate}"
-			label="#{bundle['reservation.endDate']}" mask="99/99/9999 99:99">
+			label="#{bundle['reservation.endDate']}" mask="99/99/9999 99:99"
+			required="#{!userView.external}">
 			<f:convertDateTime timeZone="Europe/Lisbon" type="both"
 				pattern="dd/MM/yyyy HH:mm" />
 		</p:inputMask>
