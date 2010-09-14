@@ -12,6 +12,8 @@ import java.util.Set;
 public class AllocationDTO implements Serializable {
 
     private static final long serialVersionUID = -4730231207036294734L;
+    
+    private Long id;
 
     private Date begin;
 
@@ -27,13 +29,28 @@ public class AllocationDTO implements Serializable {
 	super();
     }
 
-    public AllocationDTO(final Date begin, final Date end, final String experimentId, final Set<String> users, final Set<String> owners) {
+    public AllocationDTO(final Long id, final Date begin, final Date end, final String experimentId, final Set<String> users, final Set<String> owners) {
 	super();
+	this.id = id;
 	this.begin = begin;
 	this.end = end;
 	this.experimentId = experimentId;
 	this.users = users;
 	this.owners = owners;
+    }
+    
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+	this.id = id;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+	return id;
     }
 
     /**
