@@ -59,7 +59,7 @@ public class AllocationManagerBean implements AllocationManager {
 	for (final Reservation reservation : reservations) {
 	    final Set<String> users = getUsers(reservation);
 	    final Set<String> owners = getOwners(reservation);
-	    result.add(new AllocationDTO(reservation.getStartDate(), reservation.getEndDate(), reservation.getExperiment().getExternalId(), users, owners));
+	    result.add(new AllocationDTO(reservation.getIdInternal(), reservation.getStartDate(), reservation.getEndDate(), reservation.getExperiment().getExternalId(), users, owners));
 	}
 	return result;
     }

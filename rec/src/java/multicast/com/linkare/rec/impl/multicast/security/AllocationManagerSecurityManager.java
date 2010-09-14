@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -207,18 +208,22 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		return checkUserOrOwner;
 	}
 
-	private List<AllocationDTO> findAllocationFor(String hardwareId) {
+	private List<AllocationDTO> findAllocationFor(String hardwareId, int interval) {
 		List<AllocationDTO> retAllocations = new ArrayList<AllocationDTO>();
 		final Calendar currentTime = Calendar.getInstance();
 		List<AllocationDTO> hardwareAllocations = allocationsMap.get(hardwareId);
 		if (hardwareAllocations != null) {
 			for (AllocationDTO allocation : hardwareAllocations) {
-				if (isInIntervalOrNear(currentTime, allocation)) {
+				if (isInIntervalOrNear(currentTime, interval, allocation)) {
 					retAllocations.add(allocation);
 				}
 			}
 		}
 		return retAllocations;
+	}
+	
+	private List<AllocationDTO> findAllocationFor(String hardwareId) {
+		return findAllocationFor(hardwareId, INTERVAL_TIME_LAP_MINUTES);
 	}
 
 	/**
@@ -262,13 +267,14 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 
 	/**
 	 * @param currentTime
+	 * @param interval
 	 * @param allocation
 	 * @return
 	 */
-	private boolean isInIntervalOrNear(Calendar currentTime, AllocationDTO allocation) {
+	private boolean isInIntervalOrNear(Calendar currentTime, int interval, AllocationDTO allocation) {
 		Calendar nearTime = Calendar.getInstance();
 		nearTime.setTimeInMillis(currentTime.getTimeInMillis());
-		nearTime.add(Calendar.MINUTE, INTERVAL_TIME_LAP_MINUTES);
+		nearTime.add(Calendar.MINUTE, interval);
 
 		return !nearTime.getTime().before(allocation.getBegin()) && !currentTime.getTime().after(allocation.getEnd());
 	}
@@ -387,6 +393,25 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		allocationsMap = newAllocationsMap;
 	}
 	
+	private void cleanNotifiedUsers(List<AllocationDTO> newAllocations) {
+		Set<Long> allocationsId = new HashSet<Long>();
+		for (AllocationDTO allocationDTO : newAllocations) {
+			allocationsId.add(allocationDTO.getId());
+		}
+		// remove old allocations from the users notification list
+		for (Long id : notifiedUsersNotInAllocation.keySet()) {
+			if (!allocationsId.contains(id)) {
+				notifiedUsersNotInAllocation.remove(id);
+			}
+		}
+		// add the new allocations
+		for (AllocationDTO allocationDTO : newAllocations) {
+			if (!notifiedUsersNotInAllocation.containsKey(allocationDTO.getId())) {
+				notifiedUsersNotInAllocation.put(allocationDTO.getId(), new HashSet<String>());
+			}
+		}
+	}
+	
 	/**
 	 * @param begin
 	 * @param end
@@ -400,6 +425,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 					"Received " + newAllocations.size() + " allocations.");
 
 			mergeAllocations(newAllocations);
+			cleanNotifiedUsers(newAllocations);
 			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 					"Merged allocations " + allocationsMap);
 		} catch (Exception e) {
@@ -407,6 +433,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 				lookupAllocationManager();
 				List<AllocationDTO> newAllocations = allocationManager.getBy(begin, end, LABORATORY_ID);
 				mergeAllocations(newAllocations);
+				cleanNotifiedUsers(newAllocations);
 			} catch (Exception e2) {
 				// What if I can't lookup it up again??? Down for
 				// long??? No allocations available... Ooops!
@@ -417,6 +444,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	private AllocationManager allocationManager = null;
 
 	private Map<String, List<AllocationDTO>> allocationsMap = new HashMap<String, List<AllocationDTO>>();
+	
+	private Map<Long, Set<String>> notifiedUsersNotInAllocation = new Hashtable<Long, Set<String>>();
 	
 	public class AllocationsRefreshScheduledUnit extends ScheduledWorkUnit {
 
@@ -462,60 +491,88 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 							+ (multiCastHardwares != null) + "]");
 			
 			int kickedClients = 0;
+			int notifiedClients = 0;
 			
 			if (multiCastHardwares != null && !allocationsMap.isEmpty()) {
-				Map<String, List<AllocationDTO>> currentAllocationsMap = findCurrentAllocations();
-				if (!currentAllocationsMap.isEmpty()) {
+				Map<String, List<AllocationDTO>> nearAllocationsMap = findNearAllocations();
+				if (!nearAllocationsMap.isEmpty()) {
+					Map<String, List<AllocationDTO>> currentAllocationsMap = findCurrentAllocations();
 					
 					synchronized (multiCastHardwares) {
 						Collection<ReCMultiCastHardware> iterateHardwares = Collections
 								.unmodifiableCollection(multiCastHardwares);
 						for (ReCMultiCastHardware rmch : iterateHardwares) {
 							
-							if (currentAllocationsMap.containsKey(rmch.getHardwareUniqueId())) {
-								List<AllocationDTO> hardwareAllocations = currentAllocationsMap.get(rmch.getHardwareUniqueId());
-								List<String> clientUsernames = rmch.getClientUsernames();
-								Set<String> usernamesToKick = new HashSet<String>();
+							// kick users that are connected to the hardware but aren't in the current allocations
+							Set<String> usernamesToKick = findHardwareUsersNotInAllocations(currentAllocationsMap, rmch);
+							if (!usernamesToKick.isEmpty()) {
+								LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+										Level.INFO,
+										"The users [" + usernamesToKick
+												+ "] aren't in the current allocation for the hardware ["
+												+ rmch.getHardwareUniqueId() + "] and are going to be kicked.");
 								
-								for (String username : clientUsernames) {
-									// there is a allocation for this hardware so
-									// the user must be in the allocation
-									if (!checkUserAsOwner(hardwareAllocations, username)) {
-										// clientQueue.sendChatMessage(user,
-										// clientTo, message, resource);
-										LogManager
-												.getLogManager()
-												.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER)
-												.log(
-														Level.INFO,
-														"The user ["
-																+ username
-																+ "] isn't in the current allocation. It is going to be kicked.");
-										
-										sendKickMessage(username);
-										
-										usernamesToKick.add(username);
-										kickedClients++;
+								sendKickMessage(usernamesToKick);								
+								rmch.kickUsers(usernamesToKick);
+								kickedClients += usernamesToKick.size();
+							}
+							
+							// notify users that are connected to the hardware but aren't in the near allocations and heren't already notified
+							Set<String> usernamesNotInAllocations = findHardwareUsersNotInAllocations(nearAllocationsMap, rmch);
+							if (!usernamesNotInAllocations.isEmpty()) {
+								List<AllocationDTO> hardwareAllocations = nearAllocationsMap.get(rmch.getHardwareUniqueId());
+								Set<String> usernamesToNotify = new HashSet<String>();
+								for (String username : usernamesNotInAllocations) {
+									for (AllocationDTO allocationDTO : hardwareAllocations) {
+										// check if the user wasn't already notified
+										if (notifiedUsersNotInAllocation.containsKey(allocationDTO.getId())
+												&& !notifiedUsersNotInAllocation.get(allocationDTO.getId()).contains(
+														username)) {
+											if (!checkUserOrOwner(Collections.singletonList(allocationDTO), username)) {
+												usernamesToNotify.add(username);
+											}
+										}
 									}
 								}
-								
-								rmch.kickUsers(usernamesToKick);
-							} else {
-								LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
-										Level.FINE,
-										"There are no current allocations for the hardware ["
-												+ rmch.getHardwareUniqueId() + "]");
+								if (!usernamesToNotify.isEmpty()) {
+									LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+											Level.INFO,
+											"The users [" + usernamesToNotify
+													+ "] aren't in the current allocation for the hardware ["
+													+ rmch.getHardwareUniqueId() + "] and are going to be notified.");
+									
+									notifiedClients += usernamesToNotify.size();
+									sendWarningMessage(usernamesToNotify);
+								}
 							}
 						}
 					}
 				} else {
 					LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
-							"There are no current allocations at this time");
+							"There are no near allocations at this time");
 				}
 			}
-			
+
 			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"Client allocations terminated and kicked [" + kickedClients + "] clients");
+			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+					"Client allocations notified [" + notifiedClients + "] clients");
+		}
+		
+		private Set<String> findHardwareUsersNotInAllocations(Map<String, List<AllocationDTO>> allocationsMap, ReCMultiCastHardware rmch) {
+			Set<String> usernames = new HashSet<String>();
+			if (allocationsMap.containsKey(rmch.getHardwareUniqueId())) {
+				List<AllocationDTO> hardwareAllocations = allocationsMap.get(rmch.getHardwareUniqueId());
+				List<String> clientUsernames = rmch.getClientUsernames();
+				for (String username : clientUsernames) {
+					// there is a allocation for this hardware so
+					// the user must be in the allocation
+					if (!checkUserOrOwner(hardwareAllocations, username)) {
+						usernames.add(username);
+					}
+				}
+			}
+			return usernames;
 		}
 		
 		/**
@@ -528,9 +585,17 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	}
 	
 	private Map<String, List<AllocationDTO>> findCurrentAllocations() {
+		return findAllocations(INTERVAL_TIME_LAP_MINUTES);
+	}
+	
+	private Map<String, List<AllocationDTO>> findNearAllocations() {
+		return findAllocations(NEAR_TIME_LAP_MINUTES);
+	}
+	
+	private Map<String, List<AllocationDTO>> findAllocations(int interval) {
 		Map<String, List<AllocationDTO>> currentAllocationsMap = new HashMap<String, List<AllocationDTO>>();
 		for (String key : allocationsMap.keySet()) {
-			List<AllocationDTO> allocations = findAllocationFor(key);
+			List<AllocationDTO> allocations = findAllocationFor(key, interval);
 			if (!allocations.isEmpty()) {
 				currentAllocationsMap.put(key, allocations);
 			}
@@ -573,6 +638,24 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	private void sendWarningMessage(String clientTo) {
 		if (communicator != null) {
 			communicator.sendMulticastMessage(clientTo, ChatMessageEvent.SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY); 
+		}
+	}
+	
+	/**
+	 * @param usernames
+	 */
+	private void sendKickMessage(Set<String> usernames) {
+		for (String clientTo : usernames) {
+			sendKickMessage(clientTo);
+		}
+	}
+	
+	/**
+	 * @param usernames
+	 */
+	private void sendWarningMessage(Set<String> usernames) {
+		for (String clientTo : usernames) {
+			sendWarningMessage(clientTo);
 		}
 	}
 
