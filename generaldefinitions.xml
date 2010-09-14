@@ -394,11 +394,17 @@
 	<macrodef name="create.jnlp.full.client.compile">
 		<sequential>
 
-			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" />
+			
+			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" >
+				<filterset begintoken="@" endtoken="@" filtersfile="build.properties"/>
+			</copy>
+			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
+						
+			<!--copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" />
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties">
 				<replacefilter token="@href@" property="href" />
-			</replace>
+			</replace-->
 
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
@@ -549,7 +555,7 @@
 	<property name="experiments.classes.dir" value="${build.dir.compile}/classes/experiments" />
 	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
 
-	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/elab-client.jnlp" />
+	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/elab-client.jnlp.xml" />
 	<property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/rec-framework.jnlp.xml" />
 
 	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/openorb.jnlp.xml" />
