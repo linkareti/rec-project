@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jnlp codebase="${jnlp.codebase}" href="windowsInstaller.jnlp" spec="1.0+">
+<jnlp codebase="${jnlp.codebase}" href="windows-vlc-installer.jnlp" spec="1.0+">
     <information>
         <title>eLab</title>
         <vendor>Linkare TI, Instituto Superior Técnico</vendor>

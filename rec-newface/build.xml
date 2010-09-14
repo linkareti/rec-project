@@ -102,8 +102,8 @@
     	
     	<!-- installer -->
     	<copy todir="dist">
-    		<fileset file="windowsInstaller.jnlp"/>
-    		<fileset file="linuxInstaller.jnlp"/>
+    		<fileset file="windows-vlc-installer.jnlp"/>
+    		<fileset file="linux-vlc-installer.jnlp"/>
     	</copy>
 
     </target>

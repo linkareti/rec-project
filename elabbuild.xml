@@ -34,7 +34,7 @@
 		<delete dir="${elab.client.classes.dir}" />
 		<delete file="${build.dir.compile}/ReELabClient.jar" />
 		<delete file="${build.dir.compile}/ELabClient_sig.jar" />
-		<delete file="${elab.client.classes.dir}/ElabFullClient.jnlp" />
+		<delete file="${elab.client.classes.dir}/elab-client.jnlp" />
 	</target>
 
 	<target name="compile.elab.client">
@@ -123,7 +123,7 @@
 
 	<target name="run.elab.local.client.web.start">
 		<exec executable="javaws" dir="${java.home}/bin">
-			<arg value="${elab.client.classes.dir}/ElabFullClient.jnlp" />
+			<arg value="${elab.client.classes.dir}/elab-client.jnlp" />
 		</exec>
 	</target>
 		
@@ -132,7 +132,7 @@
 			<arg value="-J-Xdebug" />
 			<arg value="-J-Xnoagent" />
 			<arg value="-J-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000" />
-			<arg value="${elab.client.classes.dir}/ElabFullClient.jnlp" />
+			<arg value="${elab.client.classes.dir}/elab-client.jnlp" />
 		</exec>
 	</target>
 	

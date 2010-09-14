@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0.10//EN" "http://java.sun.com/dtd/JNLP-6.0.10.dtd">
+<jnlp spec="1.5+" codebase="@codebase@" href="rec-framework.jnlp">
+	<information>
+		<title>@rec.title@</title>
+		<vendor>@rec.vendor@</vendor>
+		<homepage href="@rec.homepage@" />
+		<description>@rec.description@</description>
+		<description kind="one-line">@rec.description.oneline@
+		</description>
+		<description kind="tooltip">@rec.description.tooltip@
+		</description>
+		<description kind="short">@rec.description.short@
+		</description>
+		<icon href="@rec.icon@" />
+		<icon kind="splash" href="@rec.icon.splash@" />
+		<offline-allowed />
+		<related-content href="@linkare.home.url@>
+			<title>@linkare.home.title@</title>
+			<description>@linkare.home.description@</description>
+			<icon href="@linkare.home.icon@" />
+		</related-content>
+	</information>
+	<information locale="en">
+		<title>@rec.title.en@</title>
+		<homepage href="@rec.homepage.en@" />
+		<description>@rec.description.en@</description>
+		<description kind="one-line">@rec.description.oneline.en@
+		</description>
+		<description kind="tooltip">@rec.description.tooltip.en@
+		</description>
+		<description kind="short">@rec.description.short.en@
+			</description>
+		<related-content href="@linkare.home.url.en@>
+			<title>@linkare.home.title.en@</title>
+			<description>@linkare.home.description.en@</description>
+			<icon href="@linkare.home.icon@" />
+		</related-content>
+	</information>
+	<security>
+		<all-permissions />
+	</security>
+	<update check="always" policy="always" />
+	<resources>
+
+		<jar href="lib/fits1.3_sig.jar" />
+		<jar href="lib/appframework-1.0.3_sig.jar" />
+		<jar href="lib/swing-worker-1.1_sig.jar" />
+		<jar href="lib/swingx_sig.jar" />
+		<jar href="lib/commons-lang-2.4_sig.jar" />
+
+		<jar href="lib/JCFN_sig.jar" />
+		<jar href="lib/jmf_sig.jar" />
+		<jar href="lib/jna_sig.jar" />
+
+		<jar href="lib/OSP_sig.jar" />
+		<jar href="lib/OSP3D_sig.jar" />
+		<jar href="lib/vecmath_sig.jar" />
+
+		<!-- Jar ReC Client -->
+
+		<!-- Jar ReC Common -->
+
+		<!-- Jar ReC jvlc -->
+
+		<!--
+			property name="ReC.PercentFreeMemoryThreshold2Serialization"
+			value="80" /
+		-->
+
+	</resources>
+
+	<!--
+		*******************************************************************
+		****************** Resources por SO / Arch ************************
+		*******************************************************************
+	-->
+
+	<!-- falta archs x86-64 (ou x86_64?), amd64 e amd-->
+	<resources arch="x86" os="Windows">
+		<nativelib href="lib/libsvlc_win32_x86_sig.jar" />
+		<extension href="windows-vlc-installer.jnlp" name="WindowsInstaller" />
+	</resources>
+
+	<resources arch="x86_64" os="Windows">
+		<nativelib href="lib/libsvlc_win32_x86_sig.jar" />
+		<extension href="windows-vlc-installer.jnlp" name="WindowsInstaller" />
+	</resources>
+
+	<resources arch="amd" os="Windows">
+		<nativelib href="lib/libsvlc_win32_x86_sig.jar" />
+		<extension href="windows-vlc-installer.jnlp" name="WindowsInstaller" />
+	</resources>
+
+	<resources arch="amd64" os="Windows">
+		<nativelib href="lib/libsvlc_win32_x86_sig.jar" />
+		<extension href="windows-vlc-installer.jnlp" name="windowsInstaller" />
+	</resources>
+
+	<resources arch="i386" os="Linux">
+		<nativelib href="lib/libsvlc_linux_i386_sig.jar" />
+		<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />
+	</resources>
+	<resources arch="i586" os="Linux">
+		<nativelib href="lib/libsvlc_linux_i686_sig.jar" />
+		<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />
+	</resources>
+	<resources arch="i686" os="Linux">
+		<nativelib href="lib/libsvlc_linux_i686_sig.jar" />
+		<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />
+	</resources>
+	<resources arch="amd64" os="Linux">
+		<nativelib href="lib/libsvlc_linux_amd64_sig.jar" />
+		<extension href="linux-vlc-installer.jnlp" name="linuxInstaller" />
+	</resources>
+	<resources arch="ppc" os="Mac OS X">
+		<nativelib href="lib/libsvlc_mac_ppc_sig.jar" />
+		<jar href="lib/vlcplugins_mac_ppc_sig.jar" />
+	</resources>
+	<resources arch="ppc64" os="Mac OS X">
+		<nativelib href="lib/libsvlc_mac_ppc64_sig.jar" />
+		<jar href="lib/vlcplugins_mac_ppc64_sig.jar" />
+	</resources>
+	<resources arch="x86" os="Mac OS X">
+		<nativelib href="lib/libsvlc_mac_ppc64_sig.jar" />
+		<jar href="lib/vlcplugins_mac_ppc64_sig.jar" />
+	</resources>
+	<resources arch="x86_64" os="Mac OS X">
+		<nativelib href="lib/libsvlc_mac_ppc64_sig.jar" />
+		<jar href="lib/vlcplugins_mac_ppc64_sig.jar" />
+	</resources>
+	<component-desc />
+</jnlp>

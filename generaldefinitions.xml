@@ -394,46 +394,46 @@
 	<macrodef name="create.jnlp.full.client.compile">
 		<sequential>
 
-			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFramework.jnlp" />
-			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
-			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" />
+			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
+			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties">
 				<replacefilter token="@href@" property="href" />
 			</replace>
 
-			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
-			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
-			<replace file="${elab.client.classes.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
+			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
-			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/OpenORB.jnlp" />
-			<replace file="${elab.client.classes.dir}/OpenORB.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/openorb.jnlp" />
+			<replace file="${elab.client.classes.dir}/openorb.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 
-			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/JFreeChart.jnlp" />
-			<replace file="${elab.client.classes.dir}/JFreeChart.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/jfreechart.jnlp" />
+			<replace file="${elab.client.classes.dir}/jfreechart.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 
-			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linuxInstaller.jnlp" />
-			<replace file="${elab.client.classes.dir}/linuxInstaller.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/linuxInstaller.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linux-vlc-installer.jnlp" />
+			<replace file="${elab.client.classes.dir}/linux-vlc-installer.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<replace file="${elab.client.classes.dir}/linux-vlc-installer.jnlp" propertyFile="build.properties">
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
 
-			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macInstaller.jnlp" />
-			<replace file="${elab.client.classes.dir}/macInstaller.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/macInstaller.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" />
+			<replace file="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<replace file="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties">
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
 
-			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windowsInstaller.jnlp" />
-			<replace file="${elab.client.classes.dir}/windowsInstaller.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/windowsInstaller.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windows-vlc-installer.jnlp" />
+			<replace file="${elab.client.classes.dir}/windows-vlc-installer.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<replace file="${elab.client.classes.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties">
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
 
-			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ElabFullClient.jnlp" />
-			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
-			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/elab-client.jnlp" />
+			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<replace file="${elab.client.classes.dir}/elab-client.jnlp" propertyFile="build.properties">
 				<replacefilter token="@href@" property="href" />
 				<replacefilter token="@title@" property="title" />
 				<replacefilter token="@vendor@" property="vendor" />
@@ -448,7 +448,7 @@
 				<replacefilter token="@client.main-class@" property="client.main-class" />
 			</replace>
 
-			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.compile" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -457,56 +457,56 @@
 	<macrodef name="add.experiment.to.full.jnlp.compile">
 		<attribute name="experiment.name" />
 		<sequential>
-			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
+			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
 					<![CDATA[<jar href="@temporary.experiment.jar@"/>
 					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-			<replace file="${elab.client.classes.dir}/ElabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
+			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
 	</macrodef>
 
 	<macrodef name="create.jnlp.full.client.build">
 		<sequential>
 
-			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/ReCFramework.jnlp" />
-			<replace file="${client.build.dir}/ReCFramework.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/rec-framework.jnlp" />
+			<replace file="${client.build.dir}/rec-framework.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 				<replacefilter token="@href@" property="href" />
 			</replace>
 
-			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
-			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
-			<replace file="${client.build.dir}/ReCFramework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Common --&gt;" value="&lt;jar href=&quot;ReCCommon_sig.jar&quot;/&gt;" />
+			<replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC jvlc --&gt;" value="&lt;jar href=&quot;ReCjvlc_sig.jar&quot;/&gt;" />
 
-			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/OpenORB.jnlp" />
-			<replace file="${client.build.dir}/OpenORB.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/openorb.jnlp" />
+			<replace file="${client.build.dir}/openorb.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 			</replace>
-			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${client.build.dir}/JFreeChart.jnlp" />
-			<replace file="${client.build.dir}/JFreeChart.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${client.build.dir}/jfreechart.jnlp" />
+			<replace file="${client.build.dir}/jfreechart.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 			</replace>
-			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/linuxInstaller.jnlp" />
-			<replace file="${client.build.dir}/linuxInstaller.jnlp" propertyFile="build.properties">
-				<replacefilter token="@codebase@" property="codebase" />
-				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
-				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
-			</replace>
-			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/macInstaller.jnlp" />
-			<replace file="${client.build.dir}/macInstaller.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/linux-vlc-installer.jnlp" />
+			<replace file="${client.build.dir}/linux-vlc-installer.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
-			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/windowsInstaller.jnlp" />
-			<replace file="${client.build.dir}/windowsInstaller.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/macosx-vlc-installer.jnlp" />
+			<replace file="${client.build.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
-			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/ElabFullClient.jnlp" />
-			<replace file="${client.build.dir}/ElabFullClient.jnlp" propertyFile="build.properties">
+			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/windows-vlc-installer.jnlp" />
+			<replace file="${client.build.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties">
+				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
+				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
+			</replace>
+			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/elab-client.jnlp" />
+			<replace file="${client.build.dir}/elab-client.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
 				<replacefilter token="@href@" property="href" />
 				<replacefilter token="@title@" property="title" />
@@ -522,7 +522,7 @@
 				<replacefilter token="@client.main-class@" property="client.main-class" />
 			</replace>
 
-			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
+			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!-- Jar eLab Client --&gt;" value="&lt;jar href=&quot;ELabClient_sig.jar&quot; main=&quot;true&quot; /&gt;" />
 
 			<process.list task="add.experiment.to.full.jnlp.build" list="${experiment.list}" attribute.name="experiment.name" />
 		</sequential>
@@ -531,12 +531,12 @@
 	<macrodef name="add.experiment.to.full.jnlp.build">
 		<attribute name="experiment.name" />
 		<sequential>
-			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="&lt;!--End Experiment Jars--&gt;">
+			<replace file="${client.build.dir}/elab-client.jnlp" token="&lt;!--End Experiment Jars--&gt;">
 				<replacevalue>
 					<![CDATA[<jar href="@temporary.experiment.jar@"/>
 					<!--End Experiment Jars-->]]></replacevalue>
 			</replace>
-			<replace file="${client.build.dir}/ElabFullClient.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
+			<replace file="${client.build.dir}/elab-client.jnlp" token="@temporary.experiment.jar@" value="@{experiment.name}Client_sig.jar" />
 		</sequential>
 	</macrodef>
 
@@ -549,15 +549,15 @@
 	<property name="experiments.classes.dir" value="${build.dir.compile}/classes/experiments" />
 	<property name="experiments.build.dir" value="${build.dir.jars}/experiments" />
 
-	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/ElabFullClientTemplate.jnlp.xml" />
-	<property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/ReCFramework.jnlp.xml" />
+	<property name="jnlp.template.file" value="${basedir}/templates/jnlp/elab-client.jnlp" />
+	<property name="jnlp.rec.template.file" value="${basedir}/templates/jnlp/rec-framework.jnlp.xml" />
 
-	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/OpenORB.jnlp.xml" />
-	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/JFreeChart.jnlp.xml" />
+	<property name="jnlp.orb.template.file" value="${basedir}/templates/jnlp/openorb.jnlp.xml" />
+	<property name="jnlp.jfreechart.template.file" value="${basedir}/templates/jnlp/jfreechart.jnlp.xml" />
 
-	<property name="jnlp.linuxinstaller.template.file" value="${basedir}/templates/jnlp/LinuxInstallerTemplate.jnlp.xml" />
-	<property name="jnlp.macinstaller.template.file" value="${basedir}/templates/jnlp/MacInstallerTemplate.jnlp.xml" />
-	<property name="jnlp.windowsinstaller.template.file" value="${basedir}/templates/jnlp/WindowsInstallerTemplate.jnlp.xml" />
+	<property name="jnlp.linuxinstaller.template.file" value="${basedir}/templates/jnlp/linux-vlc-installer.jnlp.xml" />
+	<property name="jnlp.macinstaller.template.file" value="${basedir}/templates/jnlp/macosx-vlc-installer.jnlp.xml" />
+	<property name="jnlp.windowsinstaller.template.file" value="${basedir}/templates/jnlp/windows-vlc-installer.jnlp.xml" />
 
 
 	<property name="baseuiconfig.template.file" value="${basedir}/templates/client/ReCBaseUIConfigTemplate.xml" />
