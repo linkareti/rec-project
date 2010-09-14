@@ -9,6 +9,7 @@ package com.linkare.rec.impl.multicast.security;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -30,6 +31,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
 
+import com.linkare.commons.utils.Pair;
 import com.linkare.rec.am.AllocationDTO;
 import com.linkare.rec.am.AllocationManager;
 import com.linkare.rec.am.UnknownDomainException;
@@ -447,6 +449,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	
 	private Map<Long, Set<String>> notifiedUsersNotInAllocation = new Hashtable<Long, Set<String>>();
 	
+	private static final SimpleDateFormat notificationTimeFormatter = new SimpleDateFormat("HH:mm");
+	
 	public class AllocationsRefreshScheduledUnit extends ScheduledWorkUnit {
 
 		/**
@@ -497,13 +501,14 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 				Map<String, List<AllocationDTO>> nearAllocationsMap = findNearAllocations();
 				if (!nearAllocationsMap.isEmpty()) {
 					Map<String, List<AllocationDTO>> currentAllocationsMap = findCurrentAllocations();
-					
+
 					synchronized (multiCastHardwares) {
 						Collection<ReCMultiCastHardware> iterateHardwares = Collections
 								.unmodifiableCollection(multiCastHardwares);
 						for (ReCMultiCastHardware rmch : iterateHardwares) {
-							
-							// kick users that are connected to the hardware but aren't in the current allocations
+
+							// kick users that are connected to the hardware but
+							// aren't in the current allocations
 							Set<String> usernamesToKick = findHardwareUsersNotInAllocations(currentAllocationsMap, rmch);
 							if (!usernamesToKick.isEmpty()) {
 								LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
@@ -511,25 +516,31 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 										"The users [" + usernamesToKick
 												+ "] aren't in the current allocation for the hardware ["
 												+ rmch.getHardwareUniqueId() + "] and are going to be kicked.");
-								
-								sendKickMessage(usernamesToKick);								
+
+								sendKickMessage(usernamesToKick);
 								rmch.kickUsers(usernamesToKick);
 								kickedClients += usernamesToKick.size();
 							}
-							
-							// notify users that are connected to the hardware but aren't in the near allocations and heren't already notified
-							Set<String> usernamesNotInAllocations = findHardwareUsersNotInAllocations(nearAllocationsMap, rmch);
+
+							// notify users that are connected to the hardware
+							// but aren't in the near allocations and heren't
+							// already notified
+							Set<String> usernamesNotInAllocations = findHardwareUsersNotInAllocations(
+									nearAllocationsMap, rmch);
 							if (!usernamesNotInAllocations.isEmpty()) {
-								List<AllocationDTO> hardwareAllocations = nearAllocationsMap.get(rmch.getHardwareUniqueId());
-								Set<String> usernamesToNotify = new HashSet<String>();
+								List<AllocationDTO> hardwareAllocations = nearAllocationsMap.get(rmch
+										.getHardwareUniqueId());
+								Set<Pair<String, Date>> usernamesToNotify = new HashSet<Pair<String, Date>>();
 								for (String username : usernamesNotInAllocations) {
 									for (AllocationDTO allocationDTO : hardwareAllocations) {
-										// check if the user wasn't already notified
+										// check if the user wasn't already
+										// notified
 										if (notifiedUsersNotInAllocation.containsKey(allocationDTO.getId())
 												&& !notifiedUsersNotInAllocation.get(allocationDTO.getId()).contains(
 														username)) {
 											if (!checkUserOrOwner(Collections.singletonList(allocationDTO), username)) {
-												usernamesToNotify.add(username);
+												usernamesToNotify.add(new Pair<String, Date>(username, allocationDTO.getBegin()));
+												notifiedUsersNotInAllocation.get(allocationDTO.getId()).add(username);
 											}
 										}
 									}
@@ -540,7 +551,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 											"The users [" + usernamesToNotify
 													+ "] aren't in the current allocation for the hardware ["
 													+ rmch.getHardwareUniqueId() + "] and are going to be notified.");
-									
+
 									notifiedClients += usernamesToNotify.size();
 									sendWarningMessage(usernamesToNotify);
 								}
@@ -635,9 +646,12 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 * 
 	 * @param clientTo
 	 */
-	private void sendWarningMessage(String clientTo) {
+	private void sendWarningMessage(Pair<String, Date> clientTo) {
 		if (communicator != null) {
-			communicator.sendMulticastMessage(clientTo, ChatMessageEvent.SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY); 
+			String message = ChatMessageEvent.SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY
+					+ ChatMessageEvent.SECURITY_COMMUNICATION_MSG_SEPARATOR
+					+ notificationTimeFormatter.format(clientTo.getValue());
+			communicator.sendMulticastMessage(clientTo.getKey(), message); 
 		}
 	}
 	
@@ -653,8 +667,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	/**
 	 * @param usernames
 	 */
-	private void sendWarningMessage(Set<String> usernames) {
-		for (String clientTo : usernames) {
+	private void sendWarningMessage(Set<Pair<String, Date>> usernames) {
+		for (Pair<String, Date> clientTo : usernames) {
 			sendWarningMessage(clientTo);
 		}
 	}

@@ -14,6 +14,9 @@ import com.linkare.rec.acquisition.UserInfo;
  */
 public class ChatMessageEvent extends java.util.EventObject {
 
+	/** Generated UID */
+	private static final long serialVersionUID = 5094517997811244867L;
+
 	public static final String EVERYONE_USER_ALIAS = "Everyone";
 
 	public static final String EVERYONE_USER = null;
@@ -21,6 +24,7 @@ public class ChatMessageEvent extends java.util.EventObject {
 	public static final String MULTICAST_USERNAME = "SysAdmin";
 	public static final String SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY = "before.kick";
 	public static final String SECURITY_COMMUNICATION_MSG_ON_KICK_KEY = "on.kick";
+	public static final String SECURITY_COMMUNICATION_MSG_SEPARATOR = "###";
 
 	/** Holds value of property userTo. */
 	private UserInfo userTo;

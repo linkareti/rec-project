@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.SwingUtilities;
@@ -204,6 +206,10 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		// If we only communicate with "everyone", then why try to find it? Why
 		// even handle a usersListChange???
 	}
+	
+	private static final Pattern securityCommunicationBeforeKickPattern = Pattern
+			.compile(ChatMessageEvent.SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY
+					+ ChatMessageEvent.SECURITY_COMMUNICATION_MSG_SEPARATOR + "(([01]?[0-9]|2[0-3]):[0-5][0-9])");
 
 	@Override
 	public void newChatMessage(ChatMessageEvent evt) {
@@ -216,10 +222,14 @@ public class Chat extends javax.swing.JPanel implements IChatMessageListener {
 		
 		if (user.equals(ChatMessageEvent.MULTICAST_USERNAME)) {
 			user = MULTICAST_STR;
-			if (ChatMessageEvent.SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY.equals(msg)) {
-				msg = new String(SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR);
-			} else if (ChatMessageEvent.SECURITY_COMMUNICATION_MSG_ON_KICK_KEY.equals(msg)) {
+			if (ChatMessageEvent.SECURITY_COMMUNICATION_MSG_ON_KICK_KEY.equals(msg)) {
 				msg = new String(SECURITY_COMMUNICATOR_MSG_ON_KICK_STR);
+			} else {
+				Matcher matcher = securityCommunicationBeforeKickPattern.matcher(msg); 
+				if (matcher.matches()) {
+					String time = matcher.group(1); 
+					msg = new String(SECURITY_COMMUNICATOR_MSG_BEFORE_KICK_STR).replace("{1}", time);
+				}
 			}
 		}
 
