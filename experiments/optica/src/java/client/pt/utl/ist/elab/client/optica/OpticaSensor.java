@@ -23,6 +23,9 @@ import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 public class OpticaSensor extends javax.swing.JPanel implements com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
+	/** Generated UID */
+	private static final long serialVersionUID = -2818554520798772975L;
+	
 	private BufferedImage imgTube1 = new BufferedImage(50, 200, BufferedImage.TYPE_INT_ARGB);
 	private Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
@@ -35,7 +38,6 @@ public class OpticaSensor extends javax.swing.JPanel implements com.linkare.rec.
 		setMaximumSize(getPreferredSize());
 
 		Graphics2D g2D = (Graphics2D) imgTube1.getGraphics();
-		Color baseColor = Color.cyan;
 		g2D.setColor(Color.white);
 		g2D.drawRect(0, 0, imgTube1.getWidth() - 1, imgTube1.getHeight() - 1);
 		g2D.setColor(Color.cyan);
@@ -101,16 +103,6 @@ public class OpticaSensor extends javax.swing.JPanel implements com.linkare.rec.
 
 		g2D.setPaint(new Color(240, 240, 0, 255));
 		g2D.fillOval(x_start + imgTube1.getWidth() / 2 - radius, y_start + heightPos - radius, 2 * radius, 2 * radius);
-
-		// g2D.setFont(new Font("Verdana",Font.PLAIN,12));
-		// g2D.setColor(new Color(255,255,230));
-		// g2D.drawString("P ["+header.getChannelsConfig(0).getSelectedScale().getMultiplier()+header.getChannelsConfig(0).getSelectedScale().getPhysicsUnitSymbol()+"] = "
-		// +
-		// (int)pressure,center_x+imgSeringe.getWidth()+10,center_y+imgSeringe.getHeight());
-		// g2D.drawString("V ["+header.getChannelsConfig(1).getSelectedScale().getMultiplier()+header.getChannelsConfig(1).getSelectedScale().getPhysicsUnitSymbol()+"] = "
-		// +
-		// (int)volume,center_x+imgSeringe.getWidth()+10,center_y+imgSeringe.getHeight()+g2D.getFontMetrics().getHeight()+8);
-
 	}
 
 	public double HEIGHT_MAX = 2.;
@@ -149,11 +141,14 @@ public class OpticaSensor extends javax.swing.JPanel implements com.linkare.rec.
 
 	public void headerAvailable(HardwareAcquisitionConfig header) {
 		acqHeaderInited = true;
-
 		this.header = header;
+		
+		System.out.println("OpticaSensor.headerAvailable(HardwareAcquisitionConfig  header)");
+		System.out.println("header ["+header+"]");
 
-		HEIGHT_MAX = header.getChannelsConfig(0).getSelectedScale().getMaximumValue().toDouble();
-		HEIGHT_MIN = header.getChannelsConfig(0).getSelectedScale().getMinimumValue().toDouble();
+		// TODO 
+//		HEIGHT_MAX = this.header.getChannelsConfig(0).getSelectedScale().getMaximumValue().toDouble();
+//		HEIGHT_MIN = this.header.getChannelsConfig(0).getSelectedScale().getMinimumValue().toDouble();
 
 	}
 
@@ -169,7 +164,7 @@ public class OpticaSensor extends javax.swing.JPanel implements com.linkare.rec.
 	}
 
 	public String getName() {
-		return "Height Sensor";
+		return "Laser Sensor";
 	}
 
 	public JMenuBar getMenuBar() {

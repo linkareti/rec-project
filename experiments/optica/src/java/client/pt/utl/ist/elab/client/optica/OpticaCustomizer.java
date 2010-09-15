@@ -13,6 +13,9 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  */
 public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
+	/** Generated UID */
+	private static final long serialVersionUID = 283872826983362152L;
+
 	/** Creates new form RadioactividadeCustomizer */
 	public OpticaCustomizer() {
 		initComponents();
@@ -54,7 +57,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel2.setMinimumSize(new java.awt.Dimension(350, 42));
 		jPanel2.setPreferredSize(new java.awt.Dimension(350, 42));
-		btnOK.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.ok"));
+		btnOK.setText(ReCResourceBundle.findString("optica$rec.exp.optica.lbl.ok"));
 		btnOK.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnOKActionPerformed(evt);
@@ -66,7 +69,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.gridy = 1;
 		jPanel2.add(btnOK, gridBagConstraints);
 
-		btnCancel.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.cancel"));
+		btnCancel.setText(ReCResourceBundle.findString("optica$rec.exp.optica.lbl.cancel"));
 		btnCancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnCancelActionPerformed(evt);
@@ -85,7 +88,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		gridBagConstraints.weightx = 10.0;
 		jPanel2.add(jLabel1, gridBagConstraints);
 
-		btnDefaults.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.dftcfg"));
+		btnDefaults.setText(ReCResourceBundle.findString("optica$rec.exp.optica.lbl.dftcfg"));
 		btnDefaults.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnDefaultsActionPerformed(evt);
@@ -111,7 +114,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel3.setMinimumSize(new java.awt.Dimension(350, 160));
 		jPanel5.setLayout(new java.awt.GridBagLayout());
 
-		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findString("g$rec.exp.g.lbl.power")));
+		jPanel5.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle.findString("optica$rec.exp.optica.lbl.power")));
 		jPanel5.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel5.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldPos1.setMajorTickSpacing(10);
@@ -151,7 +154,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		jPanel1
 				.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-						.findString("g$rec.exp.g.lbl.tbs")));
+						.findString("optica$rec.exp.optica.lbl.tbs")));
 		jPanel1.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel1.setPreferredSize(new java.awt.Dimension(350, 80));
 		sldFreq.setMajorTickSpacing(40);
@@ -197,7 +200,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		jPanel6.setLayout(new java.awt.GridBagLayout());
 
 		jPanel6.setBorder(new javax.swing.border.TitledBorder(ReCResourceBundle
-				.findString("g$rec.exp.g.lbl.nsamples")));
+				.findString("optica$rec.exp.optica.lbl.nsamples")));
 		jPanel6.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
 		jPanel6.setMinimumSize(new java.awt.Dimension(350, 80));
 		jPanel6.setPreferredSize(new java.awt.Dimension(350, 80));
@@ -244,7 +247,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 
 		lblErrorSamplesTooHigh.setForeground(new java.awt.Color(255, 0, 0));
 		lblErrorSamplesTooHigh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.maxsamples"));
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("optica$rec.exp.optica.lbl.maxsamples"));
 		lblErrorSamplesTooHigh.setEnabled(false);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -341,7 +344,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		float maxValue = Math.min(500.F, 500.F - ((float) sldFreq.getValue() - 1.F) * 480.F / 249.F);
 		lblErrorSamplesTooHigh.setEnabled(sldNumSamples.getValue() > maxValue);
 		btnOK.setEnabled(!lblErrorSamplesTooHigh.isEnabled());
-		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("g$rec.exp.g.lbl.maxsamples")
+		lblErrorSamplesTooHigh.setText(ReCResourceBundle.findString("optica$rec.exp.optica.lbl.maxsamples")
 				+ (int) maxValue);
 	}
 
@@ -457,16 +460,20 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 	public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig acqConfig) {
 		this.acqConfig = acqConfig;
 		if (acqConfig != null) {
-			sldNumSamples.setValue(acqConfig.getTotalSamples());
-			tfNumSamples.setText("" + acqConfig.getTotalSamples());
-
-			int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
-			sldFreq.setValue(freq);
-			tfFreq.setText("" + freq);
-
-			int power = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("power"));
-			sldPos1.setValue(power);
-			tfPos1.setText("" + power);
+			System.out.println("OpticaCustomizer.setHardwareAcquisitionConfig(HardwareAcquisitionConfig  acqConfig)");
+			System.out.println("acqConfig: ["+acqConfig+"]");
+			
+			// TODO 
+//			sldNumSamples.setValue(acqConfig.getTotalSamples());
+//			tfNumSamples.setText("" + acqConfig.getTotalSamples());
+//
+//			int freq = (int) acqConfig.getSelectedFrequency().getFrequency();
+//			sldFreq.setValue(freq);
+//			tfFreq.setText("" + freq);
+//
+//			int power = Integer.parseInt(acqConfig.getSelectedHardwareParameterValue("power"));
+//			sldPos1.setValue(power);
+//			tfPos1.setText("" + power);
 
 		}
 	}
@@ -484,11 +491,11 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 	}
 
 	public javax.swing.ImageIcon getCustomizerIcon() {
-		return new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/g/resources/g_iconified.gif"));
+		return new javax.swing.ImageIcon(getClass().getResource("/pt/utl/ist/elab/client/optica/resources/optica_iconified.gif"));
 	}
 
 	public String getCustomizerTitle() {
-		return ReCResourceBundle.findString("g$rec.exp.g.customizer.title");
+		return ReCResourceBundle.findString("optica$rec.exp.optica.customizer.title");
 	}
 
 	public javax.swing.JMenuBar getMenuBar() {
