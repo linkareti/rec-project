@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0.10//EN" "http://java.sun.com/dtd/JNLP-6.0.10.dtd">
-<jnlp codebase="@codebase@" href="macosx-vlc-installer.jnlp" spec="1.5+">
+<!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.0//EN" "http://java.sun.com/dtd/JNLP-6.0.dtd">
+<jnlp codebase="@codebase@" href="macosx-vlc-installer.jnlp" spec="6.0+">
 	<information>
 		<title>@mac.vlc.intaller.title@</title>
 		<vendor>@mac.vlc.intaller.vendor@</vendor>
@@ -15,7 +15,7 @@
 		<icon href="@mac.vlc.intaller.icon@" />
 		<icon kind="splash" href="@mac.vlc.intaller.icon.splash@" />
 		<offline-allowed />
-		<related-content href="@vlc.home.url@>
+		<related-content href="@vlc.home.url@">
 			<title>@vlc.home.title@</title>
 			<description>@vlc.home.description@</description>
 			<icon href="@vlc.home.icon@" />
@@ -31,7 +31,7 @@
 		</description>
 		<description kind="short">@mac.vlc.intaller.description.short.en@
 		</description>
-		<related-content href="@vlc.home.url.en@>
+		<related-content href="@vlc.home.url.en@">
 			<title>@vlc.home.title.en@</title>
 			<description>@vlc.home.description.en@</description>
 			<icon href="@vlc.home.icon@" />
