@@ -12,11 +12,43 @@
         ]]>
 	</description>
 
-	<parameter name="ang1" type="ContinuousValue" value="0">
+	<parameter name="protocolo" type="ContinuousValue" value="1">
+		<selection-list>
+			<value order="1">1</value>
+			<value order="2">5</value>
+			<value order="3">1</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="ang1_min" type="ContinuousValue" value="0">
 		<selection-list>
 			<value order="1">0</value>
 			<value order="2">360</value>
 			<value order="3">0.2</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="ang1_max" type="ContinuousValue" value="360">
+		<selection-list>
+			<value order="1">0</value>
+			<value order="2">360</value>
+			<value order="3">0.2</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="delta_ang1" type="ContinuousValue" value="10">
+		<selection-list>
+			<value order="1">0.2</value>
+			<value order="2">360</value>
+			<value order="3">0.2</value>
+		</selection-list>
+	</parameter>
+
+	<parameter name="delay" type="ContinuousValue" value="2">
+		<selection-list>
+			<value order="1">0.1</value>
+			<value order="2">360</value>
+			<value order="3">0.1</value>
 		</selection-list>
 	</parameter>
 
