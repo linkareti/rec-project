@@ -394,12 +394,37 @@
 	<macrodef name="create.jnlp.full.client.compile">
 		<sequential>
 
-			
+
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" >
 				<filterset begintoken="@" endtoken="@" filtersfile="build.properties"/>
 			</copy>
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
-						
+			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties">
+				<replacefilter token="@rec.title@" property="rec.title" />
+				<replacefilter token="@rec.vendor@" property="rec.vendor" />
+				<replacefilter token="@rec.homepage@" property="rec.homepage" />
+				<replacefilter token="@rec.description@" property="rec.description" />
+				<replacefilter token="@rec.description.oneline@" property="rec.description.oneline" />
+				<replacefilter token="@rec.description.tooltip@" property="rec.description.tooltip" />
+				<replacefilter token="@rec.description.short@" property="rec.description.short" />
+				<replacefilter token="@rec.icon@" property="rec.icon" />
+				<replacefilter token="@rec.icon.splash@" property="rec.icon.splash" />
+				<replacefilter token="@linkare.home.url@" property="linkare.home.url" />
+				<replacefilter token="@linkare.home.title@" property="linkare.home.title" />
+				<replacefilter token="@linkare.home.description@" property="linkare.home.description" />
+				<replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
+				<replacefilter token="@rec.title.en@" property="rec.title.en" />
+				<replacefilter token="@rec.homepage.en@" property="rec.homepage.en" />
+				<replacefilter token="@rec.description.en@" property="rec.description.en" />
+				<replacefilter token="@rec.description.oneline.en@" property="rec.description.oneline.en" />
+				<replacefilter token="@rec.description.tooltip.en@" property="rec.description.tooltip.en" />
+				<replacefilter token="@rec.description.short.en@" property="rec.description.short.en" />
+				<replacefilter token="@linkare.home.url.en@" property="linkare.home.url.en" />
+				<replacefilter token="@linkare.home.title.en@" property="linkare.home.title.en" />
+				<replacefilter token="@linkare.home.description.en@" property="linkare.home.description.en" />
+				<replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
+			</replace>
+
 			<!--copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/rec-framework.jnlp" />
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}" />
 			<replace file="${elab.client.classes.dir}/rec-framework.jnlp" propertyFile="build.properties">
@@ -412,13 +437,54 @@
 
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/openorb.jnlp" />
 			<replace file="${elab.client.classes.dir}/openorb.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<replace file="${elab.client.classes.dir}/openorb.jnlp" propertyFile="build.properties">
+				<replacefilter token="@openorb.title@" property="openorb.title" />
+				<replacefilter token="@openorb.vendor@" property="openorb.vendor" />
+				<replacefilter token="@openorb.homepage@" property="openorb.homepage" />
+				<replacefilter token="@openorb.description@" property="openorb.description" />
+				<replacefilter token="@openorb.description.oneline@" property="openorb.description.oneline" />
+				<replacefilter token="@openorb.description.tooltip@" property="openorb.description.tooltip" />
+				<replacefilter token="@openorb.description.short@" property="openorb.description.short" />
+			</replace>
 
 			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/jfreechart.jnlp" />
 			<replace file="${elab.client.classes.dir}/jfreechart.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
+			<replace file="${elab.client.classes.dir}/jfreechart.jnlp" propertyFile="build.properties">
+				<replacefilter token="@jfreechart.title@" property="jfreechart.title" />
+				<replacefilter token="@jfreechart.vendor@" property="jfreechart.vendor" />
+				<replacefilter token="@jfreechart.homepage@" property="jfreechart.homepage" />
+				<replacefilter token="@jfreechart.description@" property="jfreechart.description" />
+				<replacefilter token="@jfreechart.description.oneline@" property="jfreechart.description.oneline" />
+				<replacefilter token="@jfreechart.description.tooltip@" property="jfreechart.description.tooltip" />
+				<replacefilter token="@jfreechart.description.short@" property="jfreechart.description.short" />
+			</replace>
 
 			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/linux-vlc-installer.jnlp" />
 			<replace file="${elab.client.classes.dir}/linux-vlc-installer.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 			<replace file="${elab.client.classes.dir}/linux-vlc-installer.jnlp" propertyFile="build.properties">
+				<replacefilter token="@linux.vlc.intaller.title@" property="linux.vlc.intaller.title" />
+				<replacefilter token="@linux.vlc.intaller.vendor@" property="linux.vlc.intaller.vendor" />
+				<replacefilter token="@linux.intaller.homepage@" property="linux.intaller.homepage" />
+				<replacefilter token="@linux.vlc.intaller.description@" property="linux.vlc.intaller.description" />
+				<replacefilter token="@linux.vlc.intaller.description.oneline@" property="linux.vlc.intaller.description.oneline" />
+				<replacefilter token="@linux.vlc.intaller.description.tooltip@" property="linux.vlc.intaller.description.tooltip" />
+				<replacefilter token="@linux.vlc.intaller.description.short@" property="linux.vlc.intaller.description.short" />
+				<replacefilter token="@linux.vlc.intaller.icon@" property="linux.vlc.intaller.icon" />
+				<replacefilter token="@linux.vlc.intaller.icon.splash@" property="linux.vlc.intaller.icon.splash" />
+				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+				<replacefilter token="@linux.vlc.intaller.title.en@" property="linux.vlc.intaller.title.en" />
+				<replacefilter token="@linux.vlc.intaller.homepage.en@" property="linux.vlc.intaller.homepage.en" />
+				<replacefilter token="@linux.vlc.intaller.description.en@" property="linux.vlc.intaller.description.en" />
+				<replacefilter token="@linux.vlc.intaller.description.oneline.en@" property="linux.vlc.intaller.description.oneline.en" />
+				<replacefilter token="@linux.vlc.intaller.description.tooltip.en@" property="linux.vlc.intaller.description.tooltip.en" />
+				<replacefilter token="@linux.vlc.intaller.description.short.en@" property="linux.vlc.intaller.description.short.en" />
+				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
@@ -426,6 +492,29 @@
 			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" />
 			<replace file="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 			<replace file="${elab.client.classes.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties">
+				<replacefilter token="@mac.vlc.intaller.title@" property="mac.vlc.intaller.title" />
+				<replacefilter token="@mac.vlc.intaller.vendor@" property="mac.vlc.intaller.vendor" />
+				<replacefilter token="@mac.intaller.homepage@" property="mac.intaller.homepage" />
+				<replacefilter token="@mac.vlc.intaller.description@" property="mac.vlc.intaller.description" />
+				<replacefilter token="@mac.vlc.intaller.description.oneline@" property="mac.vlc.intaller.description.oneline" />
+				<replacefilter token="@mac.vlc.intaller.description.tooltip@" property="mac.vlc.intaller.description.tooltip" />
+				<replacefilter token="@mac.vlc.intaller.description.short@" property="mac.vlc.intaller.description.short" />
+				<replacefilter token="@mac.vlc.intaller.icon@" property="mac.vlc.intaller.icon" />
+				<replacefilter token="@mac.vlc.intaller.icon.splash@" property="mac.vlc.intaller.icon.splash" />
+				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+				<replacefilter token="@mac.vlc.intaller.title.en@" property="mac.vlc.intaller.title.en" />
+				<replacefilter token="@mac.vlc.intaller.homepage.en@" property="mac.vlc.intaller.homepage.en" />
+				<replacefilter token="@mac.vlc.intaller.description.en@" property="mac.vlc.intaller.description.en" />
+				<replacefilter token="@mac.vlc.intaller.description.oneline.en@" property="mac.vlc.intaller.description.oneline.en" />
+				<replacefilter token="@mac.vlc.intaller.description.tooltip.en@" property="mac.vlc.intaller.description.tooltip.en" />
+				<replacefilter token="@mac.vlc.intaller.description.short.en@" property="mac.vlc.intaller.description.short.en" />
+				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
@@ -433,6 +522,29 @@
 			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/windows-vlc-installer.jnlp" />
 			<replace file="${elab.client.classes.dir}/windows-vlc-installer.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 			<replace file="${elab.client.classes.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties">
+				<replacefilter token="@windows.vlc.intaller.title@" property="windows.vlc.intaller.title" />
+				<replacefilter token="@windows.vlc.intaller.vendor@" property="windows.vlc.intaller.vendor" />
+				<replacefilter token="@windows.intaller.homepage@" property="windows.intaller.homepage" />
+				<replacefilter token="@windows.vlc.intaller.description@" property="windows.vlc.intaller.description" />
+				<replacefilter token="@windows.vlc.intaller.description.oneline@" property="windows.vlc.intaller.description.oneline" />
+				<replacefilter token="@windows.vlc.intaller.description.tooltip@" property="windows.vlc.intaller.description.tooltip" />
+				<replacefilter token="@windows.vlc.intaller.description.short@" property="windows.vlc.intaller.description.short" />
+				<replacefilter token="@windows.vlc.intaller.icon@" property="windows.vlc.intaller.icon" />
+				<replacefilter token="@windows.vlc.intaller.icon.splash@" property="windows.vlc.intaller.icon.splash" />
+				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+				<replacefilter token="@windows.vlc.intaller.title.en@" property="windows.vlc.intaller.title.en" />
+				<replacefilter token="@windows.vlc.intaller.homepage.en@" property="windows.vlc.intaller.homepage.en" />
+				<replacefilter token="@windows.vlc.intaller.description.en@" property="windows.vlc.intaller.description.en" />
+				<replacefilter token="@windows.vlc.intaller.description.oneline.en@" property="windows.vlc.intaller.description.oneline.en" />
+				<replacefilter token="@windows.vlc.intaller.description.tooltip.en@" property="windows.vlc.intaller.description.tooltip.en" />
+				<replacefilter token="@windows.vlc.intaller.description.short.en@" property="windows.vlc.intaller.description.short.en" />
+				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
@@ -440,13 +552,21 @@
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/elab-client.jnlp" />
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" token="@codebase@" value="file://localhost/${client.build.dir}/" />
 			<replace file="${elab.client.classes.dir}/elab-client.jnlp" propertyFile="build.properties">
-				<replacefilter token="@href@" property="href" />
-				<replacefilter token="@title@" property="title" />
-				<replacefilter token="@vendor@" property="vendor" />
-				<replacefilter token="@homepage@" property="homepage" />
-				<replacefilter token="@one-line@" property="one-line" />
-				<replacefilter token="@tooltip@" property="tooltip" />
-				<replacefilter token="@short@" property="short" />
+				<replacefilter token="@elab.title@" property="elab.title" />
+				<replacefilter token="@elab.vendor@" property="elab.vendor" />
+				<replacefilter token="@elab.homepage@" property="elab.homepage" />
+				<replacefilter token="@elab.description@" property="elab.description" />
+				<replacefilter token="@elab.description.oneline@" property="elab.description.oneline" />
+				<replacefilter token="@elab.description.tooltip@" property="elab.description.tooltip" />
+				<replacefilter token="@elab.description.short@" property="elab.description.short" />
+				<replacefilter token="@elab.icon@" property="elab.icon" />
+				<replacefilter token="@elab.icon.splash@" property="elab.icon.splash" />
+				<replacefilter token="@elab.title.en@" property="elab.title.en" />
+				<replacefilter token="@elab.homepage.en@" property="elab.homepage.en" />
+				<replacefilter token="@elab.description.en@" property="elab.description.en" />
+				<replacefilter token="@elab.description.oneline.en@" property="elab.description.oneline.en" />
+				<replacefilter token="@elab.description.tooltip.en@" property="elab.description.tooltip.en" />
+				<replacefilter token="@elab.description.short.en@" property="elab.description.short.en" />
 				<replacefilter token="@j2se-version@" property="j2se-version" />
 				<replacefilter token="@video.enabled@" property="video.enabled" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
@@ -478,7 +598,29 @@
 			<copy file="${jnlp.rec.template.file}" overwrite="yes" tofile="${client.build.dir}/rec-framework.jnlp" />
 			<replace file="${client.build.dir}/rec-framework.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
-				<replacefilter token="@href@" property="href" />
+				<replacefilter token="@rec.title@" property="rec.title" />
+				<replacefilter token="@rec.vendor@" property="rec.vendor" />
+				<replacefilter token="@rec.homepage@" property="rec.homepage" />
+				<replacefilter token="@rec.description@" property="rec.description" />
+				<replacefilter token="@rec.description.oneline@" property="rec.description.oneline" />
+				<replacefilter token="@rec.description.tooltip@" property="rec.description.tooltip" />
+				<replacefilter token="@rec.description.short@" property="rec.description.short" />
+				<replacefilter token="@rec.icon@" property="rec.icon" />
+				<replacefilter token="@rec.icon.splash@" property="rec.icon.splash" />
+				<replacefilter token="@linkare.home.url@" property="linkare.home.url" />
+				<replacefilter token="@linkare.home.title@" property="linkare.home.title" />
+				<replacefilter token="@linkare.home.description@" property="linkare.home.description" />
+				<replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
+				<replacefilter token="@rec.title.en@" property="rec.title.en" />
+				<replacefilter token="@rec.homepage.en@" property="rec.homepage.en" />
+				<replacefilter token="@rec.description.en@" property="rec.description.en" />
+				<replacefilter token="@rec.description.oneline.en@" property="rec.description.oneline.en" />
+				<replacefilter token="@rec.description.tooltip.en@" property="rec.description.tooltip.en" />
+				<replacefilter token="@rec.description.short.en@" property="rec.description.short.en" />
+				<replacefilter token="@linkare.home.url.en@" property="linkare.home.url.en" />
+				<replacefilter token="@linkare.home.title.en@" property="linkare.home.title.en" />
+				<replacefilter token="@linkare.home.description.en@" property="linkare.home.description.en" />
+				<replacefilter token="@linkare.home.icon@" property="linkare.home.icon" />
 			</replace>
 
 			<replace file="${client.build.dir}/rec-framework.jnlp" token="&lt;!-- Jar ReC Client --&gt;" value="&lt;jar href=&quot;ReCClient_sig.jar&quot;/&gt;" />
@@ -488,39 +630,133 @@
 			<copy file="${jnlp.orb.template.file}" overwrite="yes" tofile="${client.build.dir}/openorb.jnlp" />
 			<replace file="${client.build.dir}/openorb.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@openorb.title@" property="openorb.title" />
+				<replacefilter token="@openorb.vendor@" property="openorb.vendor" />
+				<replacefilter token="@openorb.homepage@" property="openorb.homepage" />
+				<replacefilter token="@openorb.description@" property="openorb.description" />
+				<replacefilter token="@openorb.description.oneline@" property="openorb.description.oneline" />
+				<replacefilter token="@openorb.description.tooltip@" property="openorb.description.tooltip" />
+				<replacefilter token="@openorb.description.short@" property="openorb.description.short" />
 			</replace>
+
 			<copy file="${jnlp.jfreechart.template.file}" overwrite="yes" tofile="${client.build.dir}/jfreechart.jnlp" />
 			<replace file="${client.build.dir}/jfreechart.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@jfreechart.title@" property="jfreechart.title" />
+				<replacefilter token="@jfreechart.vendor@" property="jfreechart.vendor" />
+				<replacefilter token="@jfreechart.homepage@" property="jfreechart.homepage" />
+				<replacefilter token="@jfreechart.description@" property="jfreechart.description" />
+				<replacefilter token="@jfreechart.description.oneline@" property="jfreechart.description.oneline" />
+				<replacefilter token="@jfreechart.description.tooltip@" property="jfreechart.description.tooltip" />
+				<replacefilter token="@jfreechart.description.short@" property="jfreechart.description.short" />
 			</replace>
+
 			<copy file="${jnlp.linuxinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/linux-vlc-installer.jnlp" />
 			<replace file="${client.build.dir}/linux-vlc-installer.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@linux.vlc.intaller.title@" property="linux.vlc.intaller.title" />
+				<replacefilter token="@linux.vlc.intaller.vendor@" property="linux.vlc.intaller.vendor" />
+				<replacefilter token="@linux.intaller.homepage@" property="linux.intaller.homepage" />
+				<replacefilter token="@linux.vlc.intaller.description@" property="linux.vlc.intaller.description" />
+				<replacefilter token="@linux.vlc.intaller.description.oneline@" property="linux.vlc.intaller.description.oneline" />
+				<replacefilter token="@linux.vlc.intaller.description.tooltip@" property="linux.vlc.intaller.description.tooltip" />
+				<replacefilter token="@linux.vlc.intaller.description.short@" property="linux.vlc.intaller.description.short" />
+				<replacefilter token="@linux.vlc.intaller.icon@" property="linux.vlc.intaller.icon" />
+				<replacefilter token="@linux.vlc.intaller.icon.splash@" property="linux.vlc.intaller.icon.splash" />
+				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+				<replacefilter token="@linux.vlc.intaller.title.en@" property="linux.vlc.intaller.title.en" />
+				<replacefilter token="@linux.vlc.intaller.homepage.en@" property="linux.vlc.intaller.homepage.en" />
+				<replacefilter token="@linux.vlc.intaller.description.en@" property="linux.vlc.intaller.description.en" />
+				<replacefilter token="@linux.vlc.intaller.description.oneline.en@" property="linux.vlc.intaller.description.oneline.en" />
+				<replacefilter token="@linux.vlc.intaller.description.tooltip.en@" property="linux.vlc.intaller.description.tooltip.en" />
+				<replacefilter token="@linux.vlc.intaller.description.short.en@" property="linux.vlc.intaller.description.short.en" />
+				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
 			<copy file="${jnlp.macinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/macosx-vlc-installer.jnlp" />
 			<replace file="${client.build.dir}/macosx-vlc-installer.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@mac.vlc.intaller.title@" property="mac.vlc.intaller.title" />
+				<replacefilter token="@mac.vlc.intaller.vendor@" property="mac.vlc.intaller.vendor" />
+				<replacefilter token="@mac.intaller.homepage@" property="mac.intaller.homepage" />
+				<replacefilter token="@mac.vlc.intaller.description@" property="mac.vlc.intaller.description" />
+				<replacefilter token="@mac.vlc.intaller.description.oneline@" property="mac.vlc.intaller.description.oneline" />
+				<replacefilter token="@mac.vlc.intaller.description.tooltip@" property="mac.vlc.intaller.description.tooltip" />
+				<replacefilter token="@mac.vlc.intaller.description.short@" property="mac.vlc.intaller.description.short" />
+				<replacefilter token="@mac.vlc.intaller.icon@" property="mac.vlc.intaller.icon" />
+				<replacefilter token="@mac.vlc.intaller.icon.splash@" property="mac.vlc.intaller.icon.splash" />
+				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+				<replacefilter token="@mac.vlc.intaller.title.en@" property="mac.vlc.intaller.title.en" />
+				<replacefilter token="@mac.vlc.intaller.homepage.en@" property="mac.vlc.intaller.homepage.en" />
+				<replacefilter token="@mac.vlc.intaller.description.en@" property="mac.vlc.intaller.description.en" />
+				<replacefilter token="@mac.vlc.intaller.description.oneline.en@" property="mac.vlc.intaller.description.oneline.en" />
+				<replacefilter token="@mac.vlc.intaller.description.tooltip.en@" property="mac.vlc.intaller.description.tooltip.en" />
+				<replacefilter token="@mac.vlc.intaller.description.short.en@" property="mac.vlc.intaller.description.short.en" />
+				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
 			<copy file="${jnlp.windowsinstaller.template.file}" overwrite="yes" tofile="${client.build.dir}/windows-vlc-installer.jnlp" />
 			<replace file="${client.build.dir}/windows-vlc-installer.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
+				<replacefilter token="@windows.vlc.intaller.title@" property="windows.vlc.intaller.title" />
+				<replacefilter token="@windows.vlc.intaller.vendor@" property="windows.vlc.intaller.vendor" />
+				<replacefilter token="@windows.intaller.homepage@" property="windows.intaller.homepage" />
+				<replacefilter token="@windows.vlc.intaller.description@" property="windows.vlc.intaller.description" />
+				<replacefilter token="@windows.vlc.intaller.description.oneline@" property="windows.vlc.intaller.description.oneline" />
+				<replacefilter token="@windows.vlc.intaller.description.tooltip@" property="windows.vlc.intaller.description.tooltip" />
+				<replacefilter token="@windows.vlc.intaller.description.short@" property="windows.vlc.intaller.description.short" />
+				<replacefilter token="@windows.vlc.intaller.icon@" property="windows.vlc.intaller.icon" />
+				<replacefilter token="@windows.vlc.intaller.icon.splash@" property="windows.vlc.intaller.icon.splash" />
+				<replacefilter token="@vlc.home.url@" property="vlc.home.url" />
+				<replacefilter token="@vlc.home.title@" property="vlc.home.title" />
+				<replacefilter token="@vlc.home.description@" property="vlc.home.description" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
+				<replacefilter token="@windows.vlc.intaller.title.en@" property="windows.vlc.intaller.title.en" />
+				<replacefilter token="@windows.vlc.intaller.homepage.en@" property="windows.vlc.intaller.homepage.en" />
+				<replacefilter token="@windows.vlc.intaller.description.en@" property="windows.vlc.intaller.description.en" />
+				<replacefilter token="@windows.vlc.intaller.description.oneline.en@" property="windows.vlc.intaller.description.oneline.en" />
+				<replacefilter token="@windows.vlc.intaller.description.tooltip.en@" property="windows.vlc.intaller.description.tooltip.en" />
+				<replacefilter token="@windows.vlc.intaller.description.short.en@" property="windows.vlc.intaller.description.short.en" />
+				<replacefilter token="@vlc.home.url.en@" property="vlc.home.url.en" />
+				<replacefilter token="@vlc.home.title.en@" property="vlc.home.title.en" />
+				<replacefilter token="@vlc.home.description.en@" property="vlc.home.description.en" />
+				<replacefilter token="@vlc.home.icon@" property="vlc.home.icon" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
 				<replacefilter token="@vlc.plugins.filename@" property="vlc.plugins.filename" />
 			</replace>
+
 			<copy file="${jnlp.template.file}" overwrite="yes" tofile="${client.build.dir}/elab-client.jnlp" />
 			<replace file="${client.build.dir}/elab-client.jnlp" propertyFile="build.properties">
 				<replacefilter token="@codebase@" property="codebase" />
-				<replacefilter token="@href@" property="href" />
-				<replacefilter token="@title@" property="title" />
-				<replacefilter token="@vendor@" property="vendor" />
-				<replacefilter token="@homepage@" property="homepage" />
-				<replacefilter token="@one-line@" property="one-line" />
-				<replacefilter token="@tooltip@" property="tooltip" />
-				<replacefilter token="@short@" property="short" />
+				<replacefilter token="@elab.title@" property="elab.title" />
+				<replacefilter token="@elab.vendor@" property="elab.vendor" />
+				<replacefilter token="@elab.homepage@" property="elab.homepage" />
+				<replacefilter token="@elab.description@" property="elab.description" />
+				<replacefilter token="@elab.description.oneline@" property="elab.description.oneline" />
+				<replacefilter token="@elab.description.tooltip@" property="elab.description.tooltip" />
+				<replacefilter token="@elab.description.short@" property="elab.description.short" />
+				<replacefilter token="@elab.icon@" property="elab.icon" />
+				<replacefilter token="@elab.icon.splash@" property="elab.icon.splash" />
+				<replacefilter token="@elab.title.en@" property="elab.title.en" />
+				<replacefilter token="@elab.homepage.en@" property="elab.homepage.en" />
+				<replacefilter token="@elab.description.en@" property="elab.description.en" />
+				<replacefilter token="@elab.description.oneline.en@" property="elab.description.oneline.en" />
+				<replacefilter token="@elab.description.tooltip.en@" property="elab.description.tooltip.en" />
+				<replacefilter token="@elab.description.short.en@" property="elab.description.short.en" />
 				<replacefilter token="@j2se-version@" property="j2se-version" />
 				<replacefilter token="@video.enabled@" property="video.enabled" />
 				<replacefilter token="@vlc.plugins.destdir@" property="vlc.plugins.destdir" />
@@ -636,7 +872,7 @@
 				<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
-			
+
 		</sequential>
 	</macrodef>
 
@@ -649,7 +885,7 @@
 				<fileset dir="@{folder}" includes="@{jar.name}" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
-			
+
 		</sequential>
 	</macrodef>
 
@@ -671,7 +907,7 @@
 				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
-			
+
 		</sequential>
 	</macrodef>
 
@@ -685,28 +921,28 @@
 				<fileset dir="@{source.dir.name}" includes="*.jar" excludes="*_sig.jar" />
 				<globmapper from="*.jar" to="*_sig.jar" />
 			</signjar>
-			
+
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="repack.all.jars.in.directory">
 		<attribute name="dir"/>
-	<sequential>
-		<p200ant repack="true">
-			<fileset dir="@{dir}">
-				<include name="*.jar" />
-			</fileset>
-		</p200ant>
-	</sequential>
+		<sequential>
+			<p200ant repack="true">
+				<fileset dir="@{dir}">
+					<include name="*.jar" />
+				</fileset>
+			</p200ant>
+		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="repack.jar">
 		<attribute name="file"/>
-	<sequential>
-		<p200ant repack="true">
-			<fileset file="@{file}" />
-		</p200ant>
-	</sequential>
+		<sequential>
+			<p200ant repack="true">
+				<fileset file="@{file}" />
+			</p200ant>
+		</sequential>
 	</macrodef>
 
 	<!--
@@ -731,7 +967,7 @@
 			</p200ant>
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="pack.200.jar">
 		<attribute name="file" />
 		<sequential>
@@ -740,7 +976,7 @@
 			</p200ant>
 		</sequential>
 	</macrodef>
-	
+
 	<path id="compile.experiment.client.classpath">
 		<pathelement location="${rec.common.classes.dir}" />
 		<path refid="rec.common.libs.classpath" />
