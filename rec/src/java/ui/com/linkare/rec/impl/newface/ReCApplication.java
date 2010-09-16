@@ -733,22 +733,27 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	@Action
 	public void toggleApparatusState() {
 		if (currentState.canGoTo(APPARATUS_CONNECT_PERFORMED)) {
-
-			setCurrentState(APPARATUS_CONNECT_PERFORMED);
-
-			apparatusClientBean.getUserInfo().setUserName(getUsername());
-			apparatusClientBean.getUserInfo().setPassword(getUsername());
-
-			apparatusClientBean.setApparatus(updateCurrentApparatusFromComboModel());
-
-			// FIXME Check this background task implmentation
-			new Thread() {
-				@Override
-				public void run() {
-					setName(getName() + " - ReCApplication - connect");
-					apparatusClientBean.connect(); // Background task
-				}
-			}.start();
+			
+			com.linkare.rec.impl.client.apparatus.Apparatus apparatus = labClientBean.getApparatusByID(currentApparatusConfig.getLocation());
+			log.info("Selected apparatus is " + (apparatus != null ? "online" : "offline"));
+			if (apparatus != null) {
+				setCurrentState(APPARATUS_CONNECT_PERFORMED);
+				
+				apparatusClientBean.getUserInfo().setUserName(getUsername());
+				apparatusClientBean.getUserInfo().setPassword(getUsername());
+				
+				apparatusClientBean.setApparatus(updateCurrentApparatusFromComboModel());
+				
+				// FIXME Check this background task implmentation
+				new Thread() {
+					@Override
+					public void run() {
+						setName(getName() + " - ReCApplication - connect");
+						apparatusClientBean.connect(); // Background task
+					}
+				}.start();
+				
+			}
 
 		} else if (currentState.canGoTo(APPARATUS_DISCONNECT_PERFORMED)) {
 
