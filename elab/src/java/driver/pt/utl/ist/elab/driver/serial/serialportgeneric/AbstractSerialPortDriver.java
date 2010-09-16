@@ -409,7 +409,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		this.config = config;
 		
 		writeMessage(serialPortCommand.getCommand());
-		currentDriverState = DriverState.CONFIGURING;
+		currentDriverState = DriverState.CONFIGURED;
 		currentDriverState.startTimeoutClock();
 		fireIDriverStateListenerDriverConfigured();
 	}
@@ -629,7 +629,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		// TODO explode???
 //		currentDriverState.explodeOnTimeout();
 
-		DriverState newDriverState = null;
 		SerialPortCommandList thisCommand = null;
 
 		if (cmd == null || cmd.getCommandIdentifier() == null) {
@@ -660,12 +659,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		// but if we understand it, let's listen to it
 		thisCommand = SerialPortCommandList.valueOf(cmd.getCommandIdentifier());
-
-		// the next state according to the message of the driver
-		newDriverState = currentDriverState.nextState(thisCommand);
-		if (newDriverState != currentDriverState) {
-			currentDriverState.startTimeoutClock();
-		}
 
 		// process received data or states
 		if (currentDriverState.processeMe(thisCommand)) {
@@ -742,13 +735,21 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			fireIDriverStateListenerDriverShutdown();
 			throw new IncorrectStateException();
 		}
-		// new state for the driver
-		Logger.getLogger(SERIAL_PORT_LOGGER)
-				.log(
-						Level.FINEST,
-						"Switching between driver state " + currentDriverState.toString() + " and "
-								+ newDriverState.toString());
-		currentDriverState = newDriverState;
+		
+		// the next state according to the message of the driver
+		DriverState newDriverState = currentDriverState.nextState(thisCommand);
+		if (newDriverState != currentDriverState) {
+			// new state for the driver
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINEST,
+					"Switching between driver state " + currentDriverState + " and " + newDriverState);
+			currentDriverState = newDriverState;
+			
+			if (currentDriverState == DriverState.RESETED) {
+				fireIDriverStateListenerDriverReseted();
+			} else if (currentDriverState == DriverState.STOPPED) {
+				fireIDriverStateListenerDriverStoped();
+			}
+		}
 		currentDriverState.startTimeoutClock();
 	}
 

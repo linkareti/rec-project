@@ -142,7 +142,7 @@ public enum DriverState {
 							+ command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
+				return logAndReturn(RESETED);
 			case CFG:
 				return logAndReturn(this);
 			case CFGOK:
