@@ -245,6 +245,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 	public void configure(UserInfo user, HardwareAcquisitionConfig configuration) throws IncorrectStateException,
 			NotAvailableException, WrongConfigurationException, NotOwnerException, NotAuthorized {
+		log(Level.INFO, "Received the configuration [" + configuration + "] from user [" + user
+				+ "] and the hardware state is [" + getHardwareState() + "]");
 
 		DefaultOperation op = new DefaultOperation(IOperation.OP_CONFIG);
 		op.getProperties().put(IOperation.PROPKEY_HARDWARESTATE, getHardwareState());

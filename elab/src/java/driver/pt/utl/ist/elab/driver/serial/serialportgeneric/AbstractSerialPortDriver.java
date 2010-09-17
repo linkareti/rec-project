@@ -463,6 +463,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
+		
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Starting with the hardware info [" + info + "]");
 
 		// TODO explode???
 //		currentDriverState.explodeOnTimeout();
@@ -529,6 +531,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void stop(HardwareInfo info) throws IncorrectStateException {
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Stopping hardware.");
 
 		// TODO explode???
 //		currentDriverState.explodeOnTimeout();
