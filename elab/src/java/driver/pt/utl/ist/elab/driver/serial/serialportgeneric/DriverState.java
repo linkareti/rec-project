@@ -1440,6 +1440,7 @@ public enum DriverState {
 
 		public boolean acceptHardwareStatus(HardwareStatus status) {
 			switch (status) {
+			case UNKNOWN: // FIXME martelanço para aceitar este estado da optica
 			case RESETED:
 				return true;
 			default:
