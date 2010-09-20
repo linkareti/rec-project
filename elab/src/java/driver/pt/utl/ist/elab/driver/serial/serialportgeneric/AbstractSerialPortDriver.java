@@ -363,7 +363,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		// loop through each parameter and add data to each one
 		List<OneParameterNode> commandParameterNodes = new ArrayList<OneParameterNode>();
-		for (int i = 1; i < rs232configs.getRs232().getParameters().getParameter().size(); i++) {
+		for (int i = 0; i < rs232configs.getRs232().getParameters().getParameter().size(); i++) {
 			// parameter from rs232
 			OneParameterNode parameterNone = rs232configs.getRs232().getParameters().getParameterToOrder(i);
 			// parameter from hardwareinfo
