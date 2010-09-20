@@ -313,6 +313,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		if (serialIO != null) {
 			fireIDriverStateListenerDriverInited();
+			writeResetCmd(); // TODO 
 		} else {
 			fireIDriverStateListenerDriverShutdown();
 		}
@@ -412,6 +413,12 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		currentDriverState = DriverState.CONFIGURED;
 		currentDriverState.startTimeoutClock();
 		fireIDriverStateListenerDriverConfigured();
+	}
+	
+	@Deprecated
+	private void writeResetCmd() {
+		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.RST.toString().toLowerCase());
+		writeMessage(serialPortCommand.getCommand());
 	}
 
 	/**
