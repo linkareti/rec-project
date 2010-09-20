@@ -566,9 +566,9 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 		acqConfig.getSelectedHardwareParameter("delta_ang1").setParameterValue("10");
 		acqConfig.getSelectedHardwareParameter("delay").setParameterValue("2");
 
-		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+//		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
+//				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
+//				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
 
 		fireICustomizerListenerDone();
 		
