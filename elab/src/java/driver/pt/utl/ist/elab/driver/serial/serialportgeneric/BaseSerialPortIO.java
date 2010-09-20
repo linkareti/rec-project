@@ -177,7 +177,13 @@ public class BaseSerialPortIO {
 
 						if (waitForEcho && lastOutputMessage != null) {
 							Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Ignoring message...");
-							if (lastOutputMessage.startsWith(lineRead) || lineRead.startsWith(lastOutputMessage)) {
+							Logger.getLogger(STAMP_IO_LOGGER).log(
+									Level.FINER,
+									"Line read [" + lineRead + "] ignored because it's waiting for echo ["
+											+ waitForEcho + "] of output message [" + lastOutputMessage + "]");
+							
+							if (lastOutputMessage.startsWith(lineRead.toLowerCase())
+									|| lineRead.toLowerCase().startsWith(lastOutputMessage)) {
 								lastOutputMessage = null;
 							}
 							continue;
