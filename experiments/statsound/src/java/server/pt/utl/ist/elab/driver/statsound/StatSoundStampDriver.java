@@ -144,7 +144,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	}
 
 	public Object getHardwareInfo() {
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)

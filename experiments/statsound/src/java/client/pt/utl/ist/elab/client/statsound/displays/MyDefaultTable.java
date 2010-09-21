@@ -9,8 +9,8 @@ public class MyDefaultTable extends com.linkare.rec.impl.baseUI.table.MultSeries
 	/** Creates new form DefaultExperimentDataTable */
 	public MyDefaultTable() {
 		super(new MyTableModelProxy());
-		
+
 		setColArray(new int[] { 0, 1 });
 	}
-	
+
 }

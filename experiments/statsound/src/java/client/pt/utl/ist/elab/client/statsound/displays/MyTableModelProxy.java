@@ -80,14 +80,14 @@ public class MyTableModelProxy extends com.linkare.rec.impl.client.experiment.Mu
 		// super doesn't have this method defined
 	}
 
-//	public void dataModelStarted() {
-//		fireTableStructureChanged();
-//		// super also does fireTableDataChanged();
-//	}
-//
-//	public void dataModelStartedNoData() {
-//		fireTableStructureChanged();
-//		// super also does fireTableDataChanged();
-//	}
+	// public void dataModelStarted() {
+	// fireTableStructureChanged();
+	// // super also does fireTableDataChanged();
+	// }
+	//
+	// public void dataModelStartedNoData() {
+	// fireTableStructureChanged();
+	// // super also does fireTableDataChanged();
+	// }
 
 }
