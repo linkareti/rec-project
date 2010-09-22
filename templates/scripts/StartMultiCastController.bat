@@ -13,6 +13,7 @@ set MEM_SYSPROPS=-Xms%INITIAL_HEAP_MEM% -Xmx%MAX_HEAP_MEM%
 set LOG_SYSPROPS=-Djava.util.logging.config.file=%MULTICAST_BASE_DIR%/etc/loggers.config.properties 
 set TOOLKIT_SYSPROPS=-Djava.awt.headless=true
 set SECURITYMANAGER_SYSPROPS=-DReC.MultiCast.SecurityManager=@rec.am.securitymanager@ -DReC.MultiCast.CompositeSecurityManager.list=@rec.am.compositesecuritymanager.list@
+set SECURITYMANAGER_TIMES_SYSPROPS=-DReC.MultiCast.SecurityManager.Interval.Lap.Time.Minutes=@rec.am.securitymanager.interval.lap.time.minutes@ -DReC.MultiCast.SecurityManager.Near.Lap.Time.Minutes=@rec.am.securitymanager.near.lap.time.minutes@ -DReC.MultiCast.SecurityManager.Refresh.Lap.Time.Minutes=@rec.am.securitymanager.refresh.lap.time.minutes@
 set ALLOCATIONMANAGER_SYSPROPS=-DReC.MultiCast.LabID=@rec.am.lab.id@ -DReC.MultiCast.AllocationManagerHost=@rec.am.host@ -DReC.MultiCast.AllocationManagerPort=@rec.am.port@
 
 set RECCLASSPATH=%MULTICAST_BASE_DIR%/lib/xml-apis.jar;%MULTICAST_BASE_DIR%/lib/tools-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/openorb_orb-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/openorb_pss-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/openorb_ots-1.4.0.jar;%MULTICAST_BASE_DIR%/lib/logkit.jar;%MULTICAST_BASE_DIR%/lib/xercesImpl.jar;%MULTICAST_BASE_DIR%/lib/avalon-framework.jar
@@ -30,4 +31,4 @@ echo ---------------------------------------------------------------------------
 echo System Properties: %GENERIC_ORB_SYSPROPS% %MULTICAST_ORB_SYSPROPS% %LOG_SYSPROPS% %MEM_SYSPROPS% 
 echo --------------------------------------------------------------------------------
 
-java %BOOTCLASSPATH% -classpath %RECCLASSPATH%;%MULTICAST_CLASSPATH% %GENERIC_ORB_SYSPROPS% %SECURITYMANAGER_SYSPROPS% %ALLOCATIONMANAGER_SYSPROPS% %MULTICAST_ORB_SYSPROPS% %LOG_SYSPROPS% %MEM_SYSPROPS% %TOOLKIT_SYSPROPS% %DEBUG% com.linkare.rec.impl.multicast.startup.MultiCastControllerMain
+java %BOOTCLASSPATH% -classpath %RECCLASSPATH%;%MULTICAST_CLASSPATH% %GENERIC_ORB_SYSPROPS% %SECURITYMANAGER_SYSPROPS% %SECURITYMANAGER_TIMES_SYSPROPS% %ALLOCATIONMANAGER_SYSPROPS% %MULTICAST_ORB_SYSPROPS% %LOG_SYSPROPS% %MEM_SYSPROPS% %TOOLKIT_SYSPROPS% %DEBUG% com.linkare.rec.impl.multicast.startup.MultiCastControllerMain

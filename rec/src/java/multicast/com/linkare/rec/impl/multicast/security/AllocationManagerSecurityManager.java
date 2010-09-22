@@ -71,6 +71,10 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 */
 	public static final String SYSPROP_LABORATORY_ID = "ReC.MultiCast.LabID";
 
+	public static final String SYSPROP_INTERVAL_TIME_LAP_MINUTES = "ReC.MultiCast.SecurityManager.Interval.Lap.Time.Minutes";
+	public static final String SYSPROP_NEAR_TIME_LAP_MINUTES = "ReC.MultiCast.SecurityManager.Near.Lap.Time.Minutes";
+	public static final String SYSPROP_REFRESH_TIME_LAP_MINUTES = "ReC.MultiCast.SecurityManager.Refresh.Lap.Time.Minutes";
+
 	public static final String LABORATORY_ID;
 
 	static {
@@ -103,9 +107,12 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	private static final String ORG_OMG_CORBA_ORB_INITIAL_PORT = "org.omg.CORBA.ORBInitialPort";
 	private static final String ORG_OMG_CORBA_ORB_INITIAL_HOST = "org.omg.CORBA.ORBInitialHost";
 
-	private static final int INTERVAL_TIME_LAP_MINUTES = 0;
-	private static final int NEAR_TIME_LAP_MINUTES = 5;
-	private static final int REFRESH_TIME_LAP_MINUTES = 15;
+	private static final int INTERVAL_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(System
+			.getProperty(SYSPROP_INTERVAL_TIME_LAP_MINUTES), 0);
+	private static final int NEAR_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(System
+			.getProperty(SYSPROP_NEAR_TIME_LAP_MINUTES), 5);
+	private static final int REFRESH_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(System
+			.getProperty(SYSPROP_REFRESH_TIME_LAP_MINUTES), 15);
 	private static final int REFRESH_TIME_ALLOCATIONS_CLIENT_QUEUE_MINUTES = 1;
 	
 	private List<ReCMultiCastHardware> multiCastHardwares = null;

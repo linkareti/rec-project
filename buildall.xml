@@ -92,6 +92,9 @@
 			<replacefilter token="@rec.am.port@" property="rec.am.port" />
 			<replacefilter token="@rec.am.securitymanager@" property="rec.am.securitymanager" />
 			<replacefilter token="@rec.am.compositesecuritymanager.list@" property="rec.am.compositesecuritymanager.list" />
+			<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
+			<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
+			<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
 		</replace>
 
 		<copy file="${templates.dir.scripts}/StartMultiCastController.bat" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.bat" />
@@ -103,6 +106,9 @@
 			<replacefilter token="@rec.am.port@" property="rec.am.port" />
 			<replacefilter token="@rec.am.securitymanager@" property="rec.am.securitymanager" />
 			<replacefilter token="@rec.am.compositesecuritymanager.list@" property="rec.am.compositesecuritymanager.list" />
+			<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
+			<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
+			<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
 		</replace>
 
 		<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/etc/loggers.config.properties" />

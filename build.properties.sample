@@ -85,6 +85,9 @@ rec.am.port=3700
 rec.am.lab.id=LAB_ME
 rec.am.securitymanager=com.linkare.rec.impl.multicast.security.CompositeSecurityManager
 rec.am.compositesecuritymanager.list=com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
+rec.am.securitymanager.interval.lap.time.minutes=0
+rec.am.securitymanager.near.lap.time.minutes=5
+rec.am.securitymanager.refresh.lap.time.minutes=15
 
 ##SYSTEM PROPERTIES - EXPERIMENTS## 
 experiment.driver.openorb.profile=ReCHardware
