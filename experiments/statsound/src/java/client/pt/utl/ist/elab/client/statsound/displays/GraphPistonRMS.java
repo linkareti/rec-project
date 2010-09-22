@@ -15,7 +15,7 @@ public class GraphPistonRMS extends MyDefaultXYExperimentGraph {
 	public GraphPistonRMS() {
 		super();
 		setChannelDisplayX(0);
-		setChannelDisplayYArray(new int[] { 2, 3 });
+		setChannelDisplayYArray(new int[] { 3, 4 });
 	}
 
 	public String getName() {

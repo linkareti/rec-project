@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.driver.statsound.audio;
 
+
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
@@ -14,17 +15,29 @@ public class PlaySineWave extends javax.swing.JFrame {
 	SoundRecorder sr = null;
 	Process proc = null;
 
+	static SoundProducer soundProducer = null;
+	private SoundThread soundBoard = null;
+
 	/** Creates new form PlaySineWave */
 	public PlaySineWave() {
-		/*
-		 * try {//proc=Runtime.getRuntime().exec(
-		 * "/opt/j2sdk_nb/j2sdk1.4.2/jre/bin/java pt.utl.ist.elab.driver.statsound.audio.SoundProducer"
-		 * );proc=Runtime.getRuntime().exec(
-		 * "/home/elab/DEBUG/ReC6.0/driver/eLab/StatSound/StartSoundProducer");
-		 * proc.toString(); } catch(java.io.IOException ioe) {
-		 * System.out.println("Could not start Sound Producer!");
-		 * ioe.printStackTrace(); }
-		 */
+		try {
+
+			soundBoard = new SoundThread();
+			soundBoard.newLine();
+			soundBoard.configure(100, 2000, 2, 0);
+			soundBoard.newLine();
+			soundBoard.run();
+
+			// proc=Runtime.getRuntime().exec("/opt/j2sdk_nb/j2sdk1.4.2/jre/bin/java pt.utl.ist.elab.driver.serial.stamp.statsound.audio.SoundProducer");
+			// proc=Runtime.getRuntime().exec("/home/elab/DEBUG/ReC6.0/driver/eLab/StatSound/StartSoundProducer");
+			// proc.toString();
+
+			// soundProducer = new SoundProducer();
+
+		} catch (Exception ioe) {
+			System.out.println("Could not start Sound Producer!");
+			ioe.printStackTrace();
+		}
 		initComponents();
 		sr = new SoundRecorder();
 	}
@@ -118,6 +131,8 @@ public class PlaySineWave extends javax.swing.JFrame {
 
 	private void stopCaptureActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_stopCaptureActionPerformed
 		sr.stopAcquiring();
+		sr = null;
+
 	}// GEN-LAST:event_stopCaptureActionPerformed
 
 	private void stopPlayActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_stopPlayActionPerformed

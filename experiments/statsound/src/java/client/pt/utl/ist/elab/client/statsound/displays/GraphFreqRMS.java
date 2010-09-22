@@ -15,7 +15,7 @@ public class GraphFreqRMS extends MyDefaultXYExperimentGraph {
 	public GraphFreqRMS() {
 		super();
 		setChannelDisplayX(1);
-		setChannelDisplayYArray(new int[] { 2, 3 });
+		setChannelDisplayYArray(new int[] { 3, 4 });
 	}
 
 	public String getName() {

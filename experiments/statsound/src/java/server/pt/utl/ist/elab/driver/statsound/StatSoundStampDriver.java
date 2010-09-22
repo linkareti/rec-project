@@ -22,18 +22,20 @@ import pt.utl.ist.elab.driver.statsound.translators.StampConfigTranslator;
 import com.linkare.rec.acquisition.IncorrectStateException;
 import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
+import com.linkare.rec.impl.threading.IConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
- * @author José Pedro Pereira - Linkare TI & Andr�
+ * @author José Pedro Pereira - Linkare TI & André
  */
 public class StatSoundStampDriver extends AbstractStampDriver {
 	private StampCommand stampConfig = null;
@@ -77,13 +79,34 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		String posIni = config.getSelectedHardwareParameterValue(StampConfigTranslator.POS_INIT_STR);
 		String posFin = config.getSelectedHardwareParameterValue(StampConfigTranslator.POS_FIN_STR);
 
+		System.out.println("Parametros recebidos:");
+		for (ParameterConfig pconfig : config.getSelectedHardwareParameters()) {
+			System.out.println(pconfig.getParameterName() + "=" + pconfig.getParameterValue());
+		}
+
 		freqIni = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_INI));
 		freqFin = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_END));
+
+		// System.out.println("freqini : " + freqIni);
+		if (typeOfExp.equals(StatSoundStampDataSource.EXP_1) || typeOfExp.equals(StatSoundStampDataSource.EXP_3)) {
+			freqFin = freqIni;
+		}
+
+		// System.out.println("freqfin : " + freqFin);
+
+		if (freqFin < freqIni && !typeOfExp.equals(StatSoundStampDataSource.EXP_3)) {
+			int temp = freqFin;
+			freqFin = freqIni;
+			freqIni = temp;
+		}
 
 		typeOfExp = config.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);
 		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_1)) {
 			/** This are the stamp n Samples... */
 			nSamples = config.getTotalSamples();
+			// } else if
+			// (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
+			// nSamples = 500;
 		} else {
 			nSamples = 1;
 			posFin = posIni;
@@ -100,7 +123,12 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 		waveForm = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.WAVE_FORM));
 
-		nPoints = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS));
+		try {
+			nPoints = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS));
+		} catch (NumberFormatException e) {
+			System.out.println("nPoint throw an exception");
+			nPoints = 50;
+		}
 
 		stampConfig = new StampCommand(CONFIG_OUT_STRING);
 
@@ -184,6 +212,10 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	}
 
 	public void processCommand(StampCommand cmd) {
+		// Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO,"Passou por aqui com mensagem: "
+		// + cmd.getCommand() + " " + cmd.getCommandIdentifier() +
+		// " processado por " + cmd.getProcessor().toString());
+
 		if (cmd == null || cmd.getCommandIdentifier() == null) {
 			Logger.getLogger(STAMP_DRIVER_LOGGER).log(Level.INFO, "Can not interpret command " + cmd);
 			return;
@@ -240,16 +272,24 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			dataSource.setFreqStep(step);
 			dataSource.setNPoints(nPoints);
 			dataSource.setFirstTime(true);
+
+			System.out.println("Debug Version 001");
+
 			if (typeOfExp.equalsIgnoreCase(dataSource.EXP_1)) {
-				dataSource.playSinWave(freqIni);
 				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			} else if (typeOfExp.equalsIgnoreCase(dataSource.EXP_2)) {
-				dataSource.playSinWave(freqIni);
 				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			} else {
-				dataSource.setWaveForm(waveForm);
+				// dataSource.setWaveForm(waveForm);
+				System.out.println("Running waveform : " + waveForm);
+				if (waveForm == 0)
+					dataSource.playPinkNoise(freqIni, 15, 2000);
+				else if (waveForm == 1) {
+					dataSource.playPulseWave(freqIni, 15, 2000);
+				}
+				dataSource.startAcquiring(false);
 				dataSource.setExpEnded(false);
 			}
 			fireIDriverStateListenerDriverStarted();

@@ -6,12 +6,20 @@
 
 package pt.utl.ist.elab.driver.statsound.audio;
 
-import pt.utl.ist.elab.driver.statsound.audio.media.protocol.sinewavegenerator.DataSource;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import pt.utl.ist.elab.driver.statsound.audio.media.protocol.sinewavegenerator.InterLacedSineWaveStream;
 
 /**
  * 
- * @author André Neto - LEFT - IST
+ * @author andre
  */
 
 public class SoundProducer implements javax.media.ControllerListener, Runnable {
@@ -28,41 +36,41 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 		new Thread(this).start();
 	}
 
-	public void startPlayingAudioFile(java.io.File file) {
-		System.out.println("Playing audio file!");
-		playing = true;
-		try {
-			p = null;
-			p = javax.media.Manager.createPlayer(file.toURL());
+	public void startPlayingAudioFile(java.io.File file) throws UnsupportedAudioFileException, IOException,
+			LineUnavailableException {
+		AudioInputStream AIStream = AudioSystem.getAudioInputStream(file);
+		DataLine.Info Info = new DataLine.Info(SourceDataLine.class, AIStream.getFormat());
+		SourceDataLine Line = (SourceDataLine) AudioSystem.getLine(Info);
+		Line.open(AIStream.getFormat());
+		Line.start();
+		byte[] Buffer = new byte[16384];
+		int Count;
+		while ((Count = AIStream.read(Buffer)) > 0)
+			Line.write(Buffer, 0, Count);
+		AIStream.close();
+		Line.drain();
+		Line.stop();
+		Line.close();
+		Line = null;
 
-			p.addControllerListener(this);
-
-			p.realize();
-			if (!waitForState(p.Realized)) {
-				System.out.println("Failed to realize the processor.");
-				return;
-			}
-
-			p.start();
-			if (!waitForState(p.Started)) {
-				System.out.println("Failed to start the processor.");
-				return;
-			}
-		} catch (Exception e) {
-			System.out.println("Failed playing audio file");
-			e.printStackTrace();
-		}
 	}
 
-	public void startPlayingAudioFile(int waveForm) {
+	public void startPlayingAudioFile(int waveForm) throws UnsupportedAudioFileException, IOException,
+			LineUnavailableException {
 		if (waveForm == 0) {
 			// startPlayingAudioFile(new
 			// java.io.File("/home/elab/java/pink.wav"));
-			startPlayingAudioFile(new java.io.File("/usr/local/ReC6.0/driver/eLab/StatSound/pink.wav"));
+			// startPlayingAudioFile(new
+			// java.io.File("/usr/local/ReC6.0/driver/eLab/StatSound/pink.wav"));
+			startPlayingAudioFile(new java.io.File("/home/elab/whitenoise.wav"));
 		} else if (waveForm == 1) {
-			startPlayingAudioFile(new java.io.File("/usr/local/ReC6.0/driver/eLab/StatSound/pulse.wav"));
+			// startPlayingAudioFile(new
+			// java.io.File("/usr/local/ReC6.0/driver/eLab/StatSound/pulse.wav"));
+			startPlayingAudioFile(new java.io.File("/home/elab/pulse.wav"));
 		}
 	}
+
+	private SoundThread soundBoard = null;
 
 	public void startPlayingSinWave(double freq) {
 		System.out.println("Playing sin wave with freq=" + freq);
@@ -70,36 +78,46 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 		playing = true;
 		this.freq = freq;
 		try {
-			javax.media.PackageManager.getProtocolPrefixList().add("pt.utl.ist.elab.driver.statsound.audio");
-			javax.media.MediaLocator loc = new javax.media.MediaLocator("sinewavegenerator:");
-			DataSource source = (DataSource) javax.media.Manager.createDataSource(loc);
 
-			baseStream = (InterLacedSineWaveStream) source.getStreams()[0];
-			baseStream.setWaveLeftFreq(freq);
-			baseStream.setWaveRightFreq(freq);
+			soundBoard = new SoundThread();
+			soundBoard.newLine();
+			soundBoard.configure((float) freq, (float) freq, 15, 0);
+			soundBoard.newLine();
+			soundBoard.run();
 
-			p = null;
-			p = javax.media.Manager.createPlayer(source);
-
-			p.addControllerListener(this);
-
-			p.realize();
-			if (!waitForState(p.Realized)) {
-				System.out.println("Failed to realize the processor.");
-				return;
-			}
-
-			p.prefetch();
-			if (!waitForState(p.Prefetched)) {
-				System.out.println("Failed to prefetch the processor.");
-				return;
-			}
-
-			p.start();
-			if (!waitForState(p.Started)) {
-				System.out.println("Failed to start the processor.");
-				return;
-			}
+			// javax.media.PackageManager.getProtocolPrefixList().add(
+			// "pt.utl.ist.elab.driver.serial.stamp.statsound.audio");
+			// javax.media.MediaLocator loc = new javax.media.MediaLocator(
+			// "sinewavegenerator:");
+			// DataSource source = (DataSource) javax.media.Manager
+			// .createDataSource(loc);
+			//
+			// baseStream = (InterLacedSineWaveStream) source.getStreams()[0];
+			// baseStream.setWaveLeftFreq(freq);
+			// baseStream.setWaveRightFreq(freq);
+			//
+			// p = null;
+			// p = javax.media.Manager.createPlayer(source);
+			//
+			// p.addControllerListener(this);
+			//
+			// p.realize();
+			// if (!waitForState(p.Realized)) {
+			// System.out.println("Failed to realize the processor.");
+			// return;
+			// }
+			//
+			// p.prefetch();
+			// if (!waitForState(p.Prefetched)) {
+			// System.out.println("Failed to prefetch the processor.");
+			// return;
+			// }
+			//
+			// p.start();
+			// if (!waitForState(p.Started)) {
+			// System.out.println("Failed to start the processor.");
+			// return;
+			// }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -110,11 +128,13 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 			return;
 		}
 		System.out.println("Stoping");
+		soundBoard.stopWave();
+		soundBoard = null;
 		playing = false;
-		if (p != null) {
-			p.stop();
-			p.deallocate();
-		}
+		// if (p != null) {
+		// p.stop();
+		// p.deallocate();
+		// }
 	}
 
 	public static void main(String args[]) {
@@ -195,6 +215,15 @@ public class SoundProducer implements javax.media.ControllerListener, Runnable {
 						startPlayingAudioFile(wave);
 						fileFound = true;
 					} catch (NumberFormatException nfe) {
+					} catch (UnsupportedAudioFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (LineUnavailableException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
 

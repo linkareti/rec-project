@@ -10,10 +10,12 @@ package pt.utl.ist.elab.client.statsound.displays;
  * 
  * @author André Neto - LEFT - IST
  */
-public class GraphSoundVel extends SoundXYExperimentGraph {
+public class GraphSoundVel extends MyDefaultXYExperimentGraph {
 	/** Creates a new instance of PistonRMS */
 	public GraphSoundVel() {
 		super();
+		setChannelDisplayX(5);
+		setChannelDisplayYArray(new int[] { 3, 4 });
 	}
 
 	public String getName() {

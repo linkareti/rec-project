@@ -142,7 +142,6 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		if (proc != null) {
 			proc.stop();
 			proc.close();
-			proc.deallocate();
 		}
 	}
 
@@ -171,6 +170,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		synchronized (waitSync) {
 			try {
 				while (proc.getState() < state && stateTransitionOK) {
+					System.out.println("waiting 1");
 					waitSync.wait();
 				}
 			} catch (Exception e) {
@@ -187,11 +187,13 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		if (evt instanceof ConfigureCompleteEvent || evt instanceof RealizeCompleteEvent
 				|| evt instanceof PrefetchCompleteEvent || evt instanceof StartEvent) {
 			synchronized (waitSync) {
+				System.out.println("waiting 2");
 				stateTransitionOK = true;
 				waitSync.notifyAll();
 			}
 		} else if (evt instanceof ResourceUnavailableEvent) {
 			synchronized (waitSync) {
+				System.out.println("waiting 3");
 				stateTransitionOK = false;
 				waitSync.notifyAll();
 			}
@@ -265,6 +267,7 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 				// stream to pull data from the source.
 				loops = new Loop[pullStrms.length];
 				for (int i = 0; i < pullStrms.length; i++) {
+					System.out.println("waiting 4");
 					loops[i] = new Loop(this, pullStrms[i]);
 					unfinishedStrms[i] = pullStrms[i];
 				}
@@ -352,8 +355,10 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		protected void sendEvent(DataSinkEvent event) {
 			if (!listeners.isEmpty()) {
 				synchronized (listeners) {
+					System.out.println("waiting 5");
 					Enumeration list = listeners.elements();
 					while (list.hasMoreElements()) {
+						System.out.println("waiting 6");
 						DataSinkListener listener = (DataSinkListener) list.nextElement();
 						listener.dataSinkUpdate(event);
 					}
@@ -536,8 +541,10 @@ public class DataSourceReader implements ControllerListener, DataSinkListener {
 		 */
 		public void run() {
 			while (!killed) {
+				System.out.println("waiting 7");
 				try {
 					while (paused && !killed) {
+						System.out.println("waiting 8");
 						wait();
 					}
 				} catch (InterruptedException e) {
