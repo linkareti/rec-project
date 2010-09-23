@@ -322,31 +322,6 @@ public class AleatorioDataSource extends BaseDataSource {
 		return byteArray;
 	}// image2ByteArray(Image image)
 
-	// private byte[] image2ByteArray_old(Image image)
-	// {
-	// int imageWidth = this.aleatorioDriver.webcam.getImageWidth();
-	// int imageHeight = this.aleatorioDriver.webcam.getImageHeight();
-	// int imageArea = imageWidth * imageHeight;
-	// int[] pixels = new int[imageArea];
-	// byte[] pixels3 = new byte[imageArea * 3];
-	//        
-	// PixelGrabber pg = new PixelGrabber(image, 0, 0, imageWidth, imageHeight,
-	// pixels, 0, imageWidth);
-	// try {pg.grabPixels();}
-	// catch(InterruptedException e){e.printStackTrace();}
-	//        
-	// for (int index = 0; index < imageArea; index++)
-	// {
-	// pixels3[3*index] = (byte)((pixels[index] & 0x00ff0000) >> 16); //the red
-	// component
-	// pixels3[3*index + 1] = (byte)((pixels[index] & 0x0000ff00) >> 8); //the
-	// green component
-	// pixels3[3*index + 2] = (byte)(pixels[index] & 0x000000ff); //the blue
-	// component
-	// }
-	// return pixels3;
-	// }//image2ByteArray(Image image)
-
 	private byte[] int2ByteArray(int[] intArray) {
 		// each int takes 3 bytes
 		byte[] byteArray = new byte[intArray.length * 4];
@@ -359,28 +334,6 @@ public class AleatorioDataSource extends BaseDataSource {
 		}
 		return byteArray;
 	}// int2ByteArray(int[] intArray)
-
-	/**
-	 *each int takes 4 bytes and the order is x1, y1, x2, y2,.....xN,yN
-	 * intArray[0][0] = x1; intArray[0][1] = y1 intArray[1][0] = x2;
-	 * intArray[1][1] = y2 ... intArray[N][0] = xN; intArray[N][1] = yN
-	 */
-	// private byte[] int2ByteArray(int[][] intArray) {
-	// byte[] byteArray = new byte[intArray[0].length * intArray.length * 4];
-	// for (int index1 = 0; index1 < intArray.length; index1++)
-	// for (int index2 = 0; index2 < intArray[0].length; index2++) {
-	// byteArray[8 * index1 + 4 * index2] = (byte) ((intArray[index1][index2] &
-	// 0x00ff0000) >> 24);
-	// byteArray[8 * index1 + 4 * index2 + 1] = (byte)
-	// ((intArray[index1][index2] & 0x0000ff00) >> 16);
-	// byteArray[8 * index1 + 4 * index2 + 2] = (byte)
-	// ((intArray[index1][index2] & 0x000000ff) >> 8);
-	// byteArray[8 * index1 + 4 * index2 + 3] = (byte) (intArray[index1][index2]
-	// & 0x000000ff);
-	// }
-	// return byteArray;
-	//
-	// }// int2ByteArray(int[][] intArray)
 
 	public void updateStatisticsFile(int pos, int value) {
 		file.updateFile(pos, value);

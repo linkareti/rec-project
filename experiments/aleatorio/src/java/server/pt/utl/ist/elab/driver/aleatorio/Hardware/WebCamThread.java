@@ -35,13 +35,25 @@ public class WebCamThread implements Runnable {
 
 	private static boolean debugDeviceList = false;
 
+	private static String defaultVideoDeviceName = "vfw:Microsoft WDM Image Capture (Win32):0";// Logitech
+	// USB
+	// Video
+	// Camera
+	private static String defaultVideoFormatString = "size=640x480, encoding=rgb, maxdatalength=921600";// "size=320x240, encoding=yuv, maxdatalength=115200";
+
 	private static CaptureDeviceInfo captureVideoDevice = null;
+	private static VideoFormat captureVideoFormat = null;
+
+	private DataSource processorDataSource;
 	private DataSink outputDataSink;
 
 	private static Player videoPlayer;
+	private Image videoFrame = null;
 	private int imageWidth = 640;
 	private int imageHeight = 480;
 	public long milisecs; // length of the movie file in milisecs
+	private String movieFileName = null;
+
 	private DataSource videoDataSource = null;
 
 	public boolean recording = false;
@@ -52,7 +64,6 @@ public class WebCamThread implements Runnable {
 	// private FrameGrabbingControl fgc=null;
 
 	/** Creates a new instance of WebCam */
-	@SuppressWarnings("unchecked")
 	public WebCamThread() {
 
 		// get a list of all media devices, search default devices and formats,
@@ -61,7 +72,7 @@ public class WebCamThread implements Runnable {
 
 		System.out.println(">>> get list of all media devices ...");
 
-		java.util.Vector<CaptureDeviceInfo> deviceListVector = CaptureDeviceManager.getDeviceList(null);
+		java.util.Vector deviceListVector = CaptureDeviceManager.getDeviceList(null);
 		if (deviceListVector == null) {
 			System.out.println("... error: media device list vector is null, program aborted");
 			System.exit(0);
@@ -73,7 +84,7 @@ public class WebCamThread implements Runnable {
 
 		for (int x = 0; x < deviceListVector.size(); x++) {
 			// display device name
-			CaptureDeviceInfo deviceInfo = deviceListVector.elementAt(x);
+			CaptureDeviceInfo deviceInfo = (CaptureDeviceInfo) deviceListVector.elementAt(x);
 			String deviceInfoText = deviceInfo.getName();
 			if (debugDeviceList)
 				System.out.println("device " + x + ": " + deviceInfoText);
@@ -81,7 +92,7 @@ public class WebCamThread implements Runnable {
 			// display device formats
 			Format deviceFormat[] = deviceInfo.getFormats();
 			for (int y = 0; y < deviceFormat.length; y++) {
-				// search for default video device
+				// serach for default video device
 				if (captureVideoDevice == null)
 					if (deviceFormat[y] instanceof VideoFormat)
 					// if (deviceInfo.getName().indexOf(defaultVideoDeviceName)
@@ -175,6 +186,7 @@ public class WebCamThread implements Runnable {
 
 		// create a new processor
 		// ----------------------
+
 		// setup output file format ->> msvideo
 		/*
 		 * FileTypeDescriptor outputType = new
@@ -216,7 +228,7 @@ public class WebCamThread implements Runnable {
 
 	public void videoPlayerStart() {
 		videoPlayer.start();
-		while (videoPlayer.getState() != Controller.Started) {
+		while (videoPlayer.getState() != videoPlayer.Started) {
 		} // wait for player to start!
 	}// videoPlayerStart
 
@@ -225,7 +237,7 @@ public class WebCamThread implements Runnable {
 	}// videoPlayerStop
 
 	public boolean isVideoPlayerStarted() {
-		return (videoPlayer.getState() == Controller.Started);
+		return (videoPlayer.getState() == videoPlayer.Started);
 	}// isVideoPlayerStarted
 
 	public DataSource getVideoDataSource() {
@@ -360,6 +372,7 @@ public class WebCamThread implements Runnable {
 			videoPlayer.start();
 		}
 
+		// //Acquiring image
 		videoPlayer.getControls();
 		FrameGrabbingControl fgc = (FrameGrabbingControl) videoPlayer
 				.getControl("javax.media.control.FrameGrabbingControl");
@@ -376,7 +389,7 @@ public class WebCamThread implements Runnable {
 
 			// System.out.println(">>graphics:"+imagemCapturada.getGraphics());
 			/*
-			 * int inPixels[] = new int[640480];
+			 * int inPixels[] = new int[640*480];
 			 * 
 			 * java.awt.image.PixelGrabber pg = new
 			 * java.awt.image.PixelGrabber(imagemCapturada, 0, 0, 640, 480,

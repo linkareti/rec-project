@@ -37,8 +37,6 @@ public class AleatorioDriver extends BaseDriver {
 	public static final String DRIVER_UNIQUE_ID = "ELAB_ALEATORIO_V02";
 	public static final String HW_VERSION = "0.1";
 
-	private static AleatorioDriver instance = null;
-
 	private HardwareAcquisitionConfig config = null;
 	private HardwareInfo info = null;
 	private AleatorioDataSource aleatorioDataSource = null;
@@ -102,9 +100,9 @@ public class AleatorioDriver extends BaseDriver {
 	public Object getHardwareInfo() {
 		// com.linkare.rec.impl.protocols.ReCProtocols.init();
 
-		String baseHardwareInfoFile = "recresource://"+getClass().getPackage().getName().replaceAll("\\.","/")+"/HardwareInfo.xml";
+		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
+				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
-
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
@@ -535,13 +533,20 @@ public class AleatorioDriver extends BaseDriver {
 				}
 
 				imageToAnalyze = webcam.getImage();
-				System.out.println(">>> Analysing Image...");
-				analyseImage(); // first, analyse the current image
+				// 09/10/2008
+				// change to speed up transmission of image and avoid crashing
+				// due to poor lighting!
+				// this means, no more statistics.... but it's been like that
+				// for eons!
+				// System.out.println(">>> Analysing Image...");
+				// analyseImage(); //first, analyse the current image
+				// centerCounterArray[index] = imageAnalyser.getCenterCounter();
+				centerCounterArray[index] = 0; // something must be sent, here!
+
 				// aleatorioDataSource.sendImageCenters(webcam.getImage(),
 				// getCenters()); //then supply the data to the client
 				// System.out.println(">>> Sending Centers!");
 				// aleatorioDataSource.sendCenters(getCenters());
-				centerCounterArray[index] = imageAnalyser.getCenterCounter();
 
 				System.out.println(">>> Sending Image!");
 				java.awt.Image webcamImage;
@@ -569,6 +574,7 @@ public class AleatorioDriver extends BaseDriver {
 				}
 			}// end -for
 			AleatorioDriver.this.fireIDriverStateListenerDriverStoping();
+			aleatorioDataSource.endAcquisition();
 			webcam.videoPlayerStop();
 			// updates the Statistics data file after all samples (of this
 			// experiment) have been processed!
@@ -590,7 +596,7 @@ public class AleatorioDriver extends BaseDriver {
 					.getProperty("numberOfDice")));
 			System.out.println("Ended acquisition...");
 			AleatorioDriver.this.fireIDriverStateListenerDriverStoped();
-			aleatorioDataSource.endAcquisition();
+
 		}// run
 	}// AleatorioThread
 

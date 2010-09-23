@@ -115,7 +115,7 @@ implements ControllerListener, DataSinkListener {
 
 		// Put the Processor into configured state.
 		p.configure();
-		if (!waitForState(Processor.Configured)) {
+		if (!waitForState(p.Configured)) {
 			System.err.println("Failed to configure the processor.");
 			return false;
 		}
@@ -124,7 +124,7 @@ implements ControllerListener, DataSinkListener {
 		p.setContentDescriptor(new ContentDescriptor(ContentDescriptor.RAW));
 
 		p.realize();
-		if (!waitForState(Controller.Realized)) {
+		if (!waitForState(p.Realized)) {
 			System.err.println("Failed to realize the processor.");
 			return false;
 		}
@@ -189,7 +189,7 @@ implements ControllerListener, DataSinkListener {
 
 		// Prefetch the processor.
 		p.prefetch();
-		if (!waitForState(Controller.Prefetched)) {
+		if (!waitForState(p.Prefetched)) {
 			System.err.println("Failed to prefetch the processor.");
 			throw new Exception();
 			// return false;
