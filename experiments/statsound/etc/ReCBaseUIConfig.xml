@@ -18,11 +18,11 @@
 		displayStringBundleKey="statsound$rec.exp.url.statsound.title.2"
 		toolTipLocationBundleKey="statsound$rec.exp.url.statsound.title.2"
 		internalBrowser="false" order="2" />
-	<WebResource locationBundleKey="statsound$rec.exp.url.statsound.video"
+	<!--  WebResource locationBundleKey="statsound$rec.exp.url.statsound.video"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
 		displayStringBundleKey="statsound$rec.exp.url.statsound.title.video"
 		toolTipLocationBundleKey="statsound$rec.exp.url.statsound.title.video"
-		internalBrowser="false" order="3" />
+		internalBrowser="false" order="3" / -->
 	<Display classLocationBundleKey="statsound$rec.exp.display.statsound.loc.sensor"
 		toolTipBundleKey="statsound$rec.exp.display.statsound.tip.sensor"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"

@@ -10,8 +10,8 @@
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="aleatorio"
 		location="recresource:///pt/utl/ist/elab/client/aleatorio/resources/messages" />
-	<mediaConfig videoLocation="aleatorio$rec.exp.url.aleatorio.video"
-		canSave="true" offlinePlay="true" />
+	<!-- mediaConfig videoLocation="aleatorio$rec.exp.url.aleatorio.video"
+		canSave="true" offlinePlay="true" / -->
 	<display toolTipBundleKey="aleatorio$rec.exp.display.aleatorio.tip.1"
 		offlineCapable="false" iconLocationBundleKey="aleatorio$rec.exp.display.aleatorio.icon.1"
 		displayStringBundleKey="aleatorio$rec.exp.display.aleatorio.title.1"
