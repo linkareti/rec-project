@@ -267,7 +267,7 @@ public class BaseDataProducer implements DataProducerOperations {
 			
 			packetizer = new SamplesSourcePacketizer(dataSource.getAcquisitionHeader().getSelectedFrequency(), dataSource
 					.getPacketSize(), (int) Math.ceil((double) dataSource.getTotalSamples()
-							/ (double) dataSource.getPacketSize()));
+							/ (double) dataSource.getPacketSize()), dataSource.getTotalSamples());
 			
 			packetizer.addSamplesPacketSourceEventListener(new SamplesPacketSourceEventListener() {
 				public void newSamplesPackets(SamplesPacketSourceEvent evt) {

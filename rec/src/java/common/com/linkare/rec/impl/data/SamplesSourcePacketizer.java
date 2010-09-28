@@ -9,11 +9,14 @@ import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.data.synch.Frequency;
 
 public class SamplesSourcePacketizer implements SamplesPacketSource {
+	
+	private static final int NOT_AVAILABLE_TOTAL_SAMPLES_VALUE = -1;
 	private SamplesSource samplesSource = null;
 	private Frequency frequency = null;
 	private int packetSize = 1;
 	private ArrayList<int[]> packetsLocations = null;
 	private int totalPackets = 1;
+	private int totalSamples = NOT_AVAILABLE_TOTAL_SAMPLES_VALUE;
 	private int countSamplesCurrentPacket = 0;
 	private int currentPacketSampleStartIndex = 0;
 	private SamplesSourceAdapter adapter = null;
@@ -23,20 +26,21 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 
 	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer */
 	public SamplesSourcePacketizer(Frequency freq) {
-		this(freq, null, 1, 1);
+		this(freq, null, 1, 1, NOT_AVAILABLE_TOTAL_SAMPLES_VALUE);
 	}
 
 	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer */
-	public SamplesSourcePacketizer(Frequency freq, int packetSize, int totalPackets) {
-		this(freq, null, packetSize, totalPackets);
+	public SamplesSourcePacketizer(Frequency freq, int packetSize, int totalPackets, int totalSamples) {
+		this(freq, null, packetSize, totalPackets, totalSamples);
 	}
 
 	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer */
-	public SamplesSourcePacketizer(Frequency freq, SamplesSource samplesSource, int packetSize, int totalPackets) {
+	public SamplesSourcePacketizer(Frequency freq, SamplesSource samplesSource, int packetSize, int totalPackets, int totalSamples) {
 		setSamplesSource(samplesSource);
-		setPacketSize(packetSize);
+		this.packetSize = packetSize;
 		setTotalPackets(totalPackets);
-		setFrequency(freq);
+		this.frequency = freq;
+		this.totalSamples = totalSamples;
 	}
 
 	public SamplesPacket[] getSamplesPackets(int packetStartIndex, int packetEndIndex)
@@ -88,6 +92,10 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 
 		if (countSamplesCurrentPacket + newSamplesCount < getPacketSize()) {
 			countSamplesCurrentPacket += newSamplesCount;
+			if (totalSamples != NOT_AVAILABLE_TOTAL_SAMPLES_VALUE
+					&& totalSamples == currentPacketSampleStartIndex + countSamplesCurrentPacket) {
+				finishLastPacket();
+			}
 			return;
 		}
 
@@ -103,8 +111,12 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 		} while (notConsumedSamplesCount >= getPacketSize());
 
 		countSamplesCurrentPacket = notConsumedSamplesCount;
-
-		fireNewSamplesPackets(packetsLocations.size() - 1);
+		if (countSamplesCurrentPacket > 0 && totalSamples != NOT_AVAILABLE_TOTAL_SAMPLES_VALUE
+				&& totalSamples == currentPacketSampleStartIndex) {
+			finishLastPacket();
+		} else {
+			fireNewSamplesPackets(packetsLocations.size() - 1);
+		}
 	}
 
 	/**
@@ -201,18 +213,19 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 		return packetSize;
 	}
 
-	/**
-	 * Setter for property packetSize.
-	 * 
-	 * @param packetSize New value of property packetSize.
-	 * 
-	 */
-	public void setPacketSize(int packetSize) {
-		if (packetSize <= 0)
-			return;
-		this.packetSize = packetSize;
-		refreshState(currentPacketSampleStartIndex + countSamplesCurrentPacket);
-	}
+	// TODO remove not needed code
+//	/**
+//	 * Setter for property packetSize.
+//	 * 
+//	 * @param packetSize New value of property packetSize.
+//	 * 
+//	 */
+//	public void setPacketSize(int packetSize) {
+//		if (packetSize <= 0)
+//			return;
+//		this.packetSize = packetSize;
+//		refreshState(currentPacketSampleStartIndex + countSamplesCurrentPacket);
+//	}
 
 	/**
 	 * Getter for property totalPackets.
@@ -252,16 +265,6 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 	 */
 	public Frequency getFrequency() {
 		return frequency;
-	}
-
-	/**
-	 * Setter for property frequency.
-	 * 
-	 * @param frequency New value of property frequency.
-	 * 
-	 */
-	private void setFrequency(Frequency frequency) {
-		this.frequency = frequency;
 	}
 
 	public int size() {
