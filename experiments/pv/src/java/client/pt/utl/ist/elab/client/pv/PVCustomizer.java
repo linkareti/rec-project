@@ -532,7 +532,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		int nsamples = sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue();
-		acqConfig.setTotalSamples(nsamples + 1);
+		acqConfig.setTotalSamples(nsamples);
 		acqConfig.getSelectedHardwareParameter("UserPosLow").setParameterValue(
 				"" + ((float) sldPos1.getValue() / 1000.F));
 		acqConfig.getSelectedHardwareParameter("UserPosHigh").setParameterValue(
