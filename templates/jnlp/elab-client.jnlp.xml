@@ -52,7 +52,6 @@
 		<property name="ReCBaseUIConfig" value="@codebase@/etc/ReCBaseUIConfig.xml" />
 
 		<property name="ReC.MultiCastController.BindName" value="MultiCastController" />
-		<property name="ReC.MultiCastController.InitRef" value="MultiCastController" />
 
 		<property name="org.omg.CORBA.ORBClass" value="org.openorb.orb.core.ORB" />
 		<property name="org.omg.CORBA.ORBSingletonClass" value="org.openorb.orb.core.ORBSingleton" />

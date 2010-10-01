@@ -6,10 +6,9 @@ package com.linkare.rec.impl.newface;
 public enum ReCSystemProperty {
 
 	//RECBASEUICONFIG("ReCBaseUIConfig", true),
-	RECFACECONFIG("ReCFaceConfig", true), REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true),
-	REC_MULTICASTCONTROLLER_INITREF("ReC.MultiCastController.InitRef", true), OPENORB_CONFIG("openorb.config", true), OPENORB_PROFILE(
-			"openorb.profile", true), ORG_OMG_CORBA_ORBCLASS("org.omg.CORBA.ORBClass", true), ORG_OMG_CORBA_ORBSINGLETONCLASS(
-			"org.omg.CORBA.ORBSingletonClass", true),
+	RECFACECONFIG("ReCFaceConfig", true), REC_MULTICASTCONTROLLER_BINDNAME("ReC.MultiCastController.BindName", true), OPENORB_CONFIG(
+			"openorb.config", true), OPENORB_PROFILE("openorb.profile", true), ORG_OMG_CORBA_ORBCLASS(
+			"org.omg.CORBA.ORBClass", true), ORG_OMG_CORBA_ORBSINGLETONCLASS("org.omg.CORBA.ORBSingletonClass", true),
 
 	VIDEO_ENABLED("video.enabled", false),
 
