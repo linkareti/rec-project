@@ -220,7 +220,6 @@
 		<pack.200.jar file="${client.build.dir}/ReCClient_sig.jar" />
 	</target>
 
-	<!-- TODO client openorb by lab ??? -->
 	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client, repack.jar.rec.client, sign.rec.client, pack.jar.rec.client">
 
 		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}" />

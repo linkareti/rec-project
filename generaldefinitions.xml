@@ -1028,6 +1028,7 @@
 			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" propertyFile="build.properties">
 				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
 				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
+				<replacefilter token="@lab.name@" property="@{lab.name}.rec.am.lab.id" />
 			</replace>
 
 			<process.list task="add.experiment.baseuiconfig" list="${@{lab.name}.experiment.list}" attribute.name="experiment.name" />
@@ -1079,6 +1080,7 @@
 			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" propertyFile="build.properties">
 				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
 				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
+				<replacefilter token="@lab.name@" property="@{lab.name}.rec.am.lab.id" />
 			</replace>
 
 			<process.list task="add.experiment.faceconfig" list="${@{lab.name}.experiment.list}" attribute.name="experiment.name" />

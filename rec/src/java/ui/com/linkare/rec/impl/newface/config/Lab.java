@@ -25,6 +25,10 @@ public class Lab extends AbstractConfigBean {
 
 	private List<LocalizationBundle> localizationBundle = new ArrayList<LocalizationBundle>();
 
+	private String labId = "";
+	
+	private String labIdStringBundleKey = "";
+
 	public Lab() {
 		super();
 	}
@@ -153,6 +157,38 @@ public class Lab extends AbstractConfigBean {
 	public void setLocalizationBundle(List<LocalizationBundle> localizationBundle) {
 		this.localizationBundle = localizationBundle;
 	}
+	
+	/**
+	 * @return the labId
+	 */
+	@XmlAttribute
+	public String getLabId() {
+		return labId;
+	}
+	
+	/**
+	 * @param labId
+	 *            the labId to set
+	 */
+	public void setLabId(String labId) {
+		this.labId = labId;
+	}
+	
+	/**
+	 * @return the labIdStringBundleKey
+	 */
+	@XmlAttribute
+	public String getLabIdStringBundleKey() {
+		return labIdStringBundleKey;
+	}
+	
+	/**
+	 * @param labIdStringBundleKey
+	 *            the labIdStringBundleKey to set
+	 */
+	public void setLabIdStringBundleKey(String labIdStringBundleKey) {
+		this.labIdStringBundleKey = labIdStringBundleKey;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -191,6 +227,12 @@ public class Lab extends AbstractConfigBean {
 				&& (this.localizationBundle == null || !this.localizationBundle.equals(other.localizationBundle))) {
 			return false;
 		}
+		if ((this.labId == null) ? (other.labId != null) : !this.labId.equals(other.labId)) {
+			return false;
+		}
+		if ((this.labIdStringBundleKey == null) ? (other.labIdStringBundleKey != null) : !this.labIdStringBundleKey.equals(other.labIdStringBundleKey)) {
+			return false;
+		}
 		return true;
 	}
 
@@ -205,6 +247,8 @@ public class Lab extends AbstractConfigBean {
 		hash = 19 * hash + (this.apparatus != null ? this.apparatus.hashCode() : 0);
 		hash = 19 * hash + (this.webResource != null ? this.webResource.hashCode() : 0);
 		hash = 19 * hash + (this.localizationBundle != null ? this.localizationBundle.hashCode() : 0);
+		hash = 19 * hash + (this.labId != null ? this.labId.hashCode() : 0);
+		hash = 19 * hash + (this.labIdStringBundleKey != null ? this.labIdStringBundleKey.hashCode() : 0);
 		return hash;
 	}
 
