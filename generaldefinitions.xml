@@ -66,7 +66,7 @@
 			=====================================================
 			======================= JVLC ========================
 			=====================================================
-		-->
+	-->
 
 	<property name="jvlc.classes.dir" value="${build.dir.compile}/classes/jvlc" />
 	<property name="jvlc.build.dir" value="${build.dir.jars}/jvlc" />
@@ -125,6 +125,12 @@
 		<path refid="rec.common.lib.path" />
 		<path refid="rec.common.compile.lib.path" />
 	</path>
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml" >
+		<classpath>
+			<pathelement location="${rec.lib.dir}/compile/common/ant-contrib-1.0b3.jar"/>
+		</classpath>
+	</taskdef>
 
 	<!--
 		=====================================================
@@ -803,8 +809,9 @@
 
 
 	<property name="baseuiconfig.template.file" value="${basedir}/templates/client/ReCBaseUIConfigTemplate.xml" />
+	<property name="baseuiconfig.lab.template.file" value="${basedir}/templates/client/ReCBaseUIConfigLabTemplate.xml" />
 	<property name="faceconfig.template.file" value="${basedir}/templates/client/ReCFaceConfigTemplate.xml" />
-
+	<property name="faceconfig.lab.template.file" value="${basedir}/templates/client/ReCFaceConfigLabTemplate.xml" />
 
 	<!--MACROS-->
 
@@ -1002,10 +1009,32 @@
 
 			<process.list task="add.experiment.baseuiconfig" list="${experiment.list}" attribute.name="experiment.name" />
 
-			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" propertyFile="build.properties">
-				<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
-				<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="add.lab.baseuiconfig">
+		<attribute name="lab.name" />
+		<sequential>
+
+			<loadfile property="@{lab.name}.baseuiconfig" srcFile="${baseuiconfig.lab.template.file}" />
+
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--End Lab configuration--&gt;">
+				<replacevalue>
+					<![CDATA[@temporary.lab@
+			<!--End Lab configuration-->]]></replacevalue>
 			</replace>
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="@temporary.lab@" value="${@{lab.name}.baseuiconfig}" />
+
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" propertyFile="build.properties">
+				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
+			</replace>
+
+			<process.list task="add.experiment.baseuiconfig" list="${@{lab.name}.experiment.list}" attribute.name="experiment.name" />
+
+			<!-- experiment apparatus comments -->
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--Start Apparatus configuration--&gt;" value="&lt;!--Start @{lab.name} Apparatus configuration--&gt;" />
+			<replace file="${elab.client.classes.dir}/ReCBaseUIConfig.xml" token="&lt;!--End Apparatus configuration--&gt;" value="&lt;!--End @{lab.name} Apparatus configuration--&gt;" />
 
 		</sequential>
 	</macrodef>
@@ -1029,12 +1058,34 @@
 		<sequential>
 			<copy file="${faceconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCFaceConfig.xml" />
 
-			<process.list task="add.experiment.faceconfig" list="${experiment.list}" attribute.name="experiment.name" />
+			<process.list task="add.lab.faceconfig" list="${lab.list}" attribute.name="lab.name" />
+
+		</sequential>
+	</macrodef>
+
+	<macrodef name="add.lab.faceconfig">
+		<attribute name="lab.name" />
+		<sequential>
+
+			<loadfile property="@{lab.name}.faceconfig" srcFile="${faceconfig.lab.template.file}" />
+
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Lab configuration--&gt;">
+				<replacevalue>
+					<![CDATA[@temporary.lab@
+			<!--End Lab configuration-->]]></replacevalue>
+			</replace>
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="@temporary.lab@" value="${@{lab.name}.faceconfig}" />
 
 			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" propertyFile="build.properties">
-				<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
-				<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
+				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
 			</replace>
+
+			<process.list task="add.experiment.faceconfig" list="${@{lab.name}.experiment.list}" attribute.name="experiment.name" />
+
+			<!-- experiment apparatus comments -->
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--Start Apparatus configuration--&gt;" value="&lt;!--Start @{lab.name} Apparatus configuration--&gt;" />
+			<replace file="${elab.client.classes.dir}/ReCFaceConfig.xml" token="&lt;!--End Apparatus configuration--&gt;" value="&lt;!--End @{lab.name} Apparatus configuration--&gt;" />
 
 		</sequential>
 	</macrodef>

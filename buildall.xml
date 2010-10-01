@@ -83,112 +83,123 @@
 	<target name="dist.multicast" description="Creates a zip file with the multicast distribution">
 
 		<mkdir dir="${dist.dir}" />
-		<copy file="${templates.dir.scripts}/StartMultiCastController.sh" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.sh" />
-		<replace file="${multicast.build.dir}/StartMultiCastController.sh" propertyFile="build.properties">
-			<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
-			<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
-			<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
-			<replacefilter token="@rec.am.host@" property="rec.am.host" />
-			<replacefilter token="@rec.am.port@" property="rec.am.port" />
-			<replacefilter token="@rec.am.securitymanager@" property="rec.am.securitymanager" />
-			<replacefilter token="@rec.am.compositesecuritymanager.list@" property="rec.am.compositesecuritymanager.list" />
-			<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
-			<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
-			<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
-		</replace>
 
-		<copy file="${templates.dir.scripts}/StartMultiCastController.bat" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.bat" />
-		<replace file="${multicast.build.dir}/StartMultiCastController.bat" propertyFile="build.properties">
-			<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
-			<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
-			<replacefilter token="@rec.am.lab.id@" property="rec.am.lab.id" />
-			<replacefilter token="@rec.am.host@" property="rec.am.host" />
-			<replacefilter token="@rec.am.port@" property="rec.am.port" />
-			<replacefilter token="@rec.am.securitymanager@" property="rec.am.securitymanager" />
-			<replacefilter token="@rec.am.compositesecuritymanager.list@" property="rec.am.compositesecuritymanager.list" />
-			<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
-			<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
-			<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
-		</replace>
-
-		<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/etc/loggers.config.properties" />
-
-		<zip destfile="${dist.dir}/multicast_${today}.zip">
-			<zipfileset file="${multicast.build.dir}/ELabMulticastController.jar" prefix="multicast" />
-			<zipfileset file="${multicast.build.dir}/ReCMulticastController.jar" prefix="multicast" />
-			<zipfileset file="${multicast.build.dir}/ReCCommon.jar" prefix="multicast" />
-
-			<zipfileset dir="${multicast.build.dir}/lib" includes="**/*.jar" prefix="multicast/lib" />
-			<zipfileset file="${multicast.build.dir}/etc/loggers.config.properties" fullpath="multicast/etc/loggers.config.properties" />
-			<zipfileset file="${multicast.build.dir}/etc/openorb.xml" fullpath="multicast/etc/openorb.xml" />
-
-			<zipfileset file="${multicast.build.dir}/StartMultiCastController.sh" filemode="755" />
-			<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" />
-		</zip>
-
-		<delete file="${multicast.build.dir}/StartMultiCastController.sh" />
-		<delete file="${multicast.build.dir}/StartMultiCastController.bat" />
+		<process.list task="dist.multicast.zip" list="${lab.list}" attribute.name="lab.name" />
 
 	</target>
 
-	<target name="dist.harwareserver" description="Creates a zip of all the drivers of the experiments being built!">
-		<mkdir dir="${dist.dir}" />
-		<process.list task="dist.experiment.hardwareserver" list="${experiment.list}" attribute.name="experiment.name" />
-	</target>
-
-	<macrodef name="dist.experiment.hardwareserver">
-		<attribute name="experiment.name" />
+	<macrodef name="dist.multicast.zip">
+		<attribute name="lab.name" />
 		<sequential>
 
-			<copy file="${templates.dir.scripts}/StartExperiment.sh" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.sh" />
-			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" token="@experiment.name@" value="@{experiment.name}" />
-			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="build.properties">
-				<replacefilter token="@experiment.name@" value="@{experiment.name}" />
-				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
-				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
-			</replace>
-			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
-				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
-			</replace>
-
-			<copy file="${templates.dir.scripts}/StartExperiment.bat" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
-			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" token="@experiment.name@" value="@{experiment.name}" />
-			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="build.properties">
-				<replacefilter token="@experiment.name@" value="@{experiment.name}" />
-				<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
-				<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
-			</replace>
-			<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
-				<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
+			<copy file="${templates.dir.scripts}/StartMultiCastController.sh" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.sh" />
+			<replace file="${multicast.build.dir}/StartMultiCastController.sh" propertyFile="build.properties">
+				<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
+				<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+				<replacefilter token="@rec.am.lab.id@" property="@{lab.name}.rec.am.lab.id" />
+				<replacefilter token="@rec.am.host@" property="rec.am.host" />
+				<replacefilter token="@rec.am.port@" property="rec.am.port" />
+				<replacefilter token="@rec.am.securitymanager@" property="rec.am.securitymanager" />
+				<replacefilter token="@rec.am.compositesecuritymanager.list@" property="rec.am.compositesecuritymanager.list" />
+				<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
+				<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
+				<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
 			</replace>
 
-			<copy file="${templates.dir.logs}/hardwareserver.loggers.config.properties" overwrite="yes" tofile="${experiments.build.dir}/etc/loggers.config.properties" />
-			<replace file="${experiments.build.dir}/etc/loggers.config.properties" propertyFile="build.properties">
-				<replacefilter token="@experiment.name@" value="@{experiment.name}" />
+			<copy file="${templates.dir.scripts}/StartMultiCastController.bat" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.bat" />
+			<replace file="${multicast.build.dir}/StartMultiCastController.bat" propertyFile="build.properties">
+				<replacefilter token="@multicast.initial.heap@" property="multicast.initial.heap" />
+				<replacefilter token="@multicast.max.heap@" property="multicast.max.heap" />
+				<replacefilter token="@rec.am.lab.id@" property="@{lab.name}.rec.am.lab.id" />
+				<replacefilter token="@rec.am.host@" property="rec.am.host" />
+				<replacefilter token="@rec.am.port@" property="rec.am.port" />
+				<replacefilter token="@rec.am.securitymanager@" property="rec.am.securitymanager" />
+				<replacefilter token="@rec.am.compositesecuritymanager.list@" property="rec.am.compositesecuritymanager.list" />
+				<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
+				<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
+				<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
 			</replace>
 
+			<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/etc/loggers.config.properties" />
 
-			<zip destfile="${dist.dir}/@{experiment.name}HarwareServer_${today}.zip">
-				<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
-				<zipfileset file="${hardwareserver.build.dir}/ELabHardwareServer.jar" prefix="hardwareserver" />
-				<zipfileset file="${hardwareserver.build.dir}/ReCHardwareServer.jar" prefix="hardwareserver" />
-				<zipfileset file="${hardwareserver.build.dir}/ReCCommon.jar" prefix="hardwareserver" />
+			<zip destfile="${dist.dir}/multicast_@{lab.name}_${today}.zip">
+				<zipfileset file="${multicast.build.dir}/ELabMulticastController.jar" prefix="multicast" />
+				<zipfileset file="${multicast.build.dir}/ReCMulticastController.jar" prefix="multicast" />
+				<zipfileset file="${multicast.build.dir}/ReCCommon.jar" prefix="multicast" />
 
-				<zipfileset dir="${hardwareserver.build.dir}/lib" includes="**/*.jar" prefix="hardwareserver/lib" />
+				<zipfileset dir="${multicast.build.dir}/lib" includes="**/*.jar" prefix="multicast/lib" />
+				<zipfileset file="${multicast.build.dir}/etc/loggers.config.properties" fullpath="multicast/etc/loggers.config.properties" />
+				<zipfileset file="${multicast.build.dir}/@{lab.name}/etc/openorb.xml" fullpath="multicast/etc/openorb.xml" />
 
-				<zipfileset file="${experiments.build.dir}/etc/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
-				<zipfileset file="${hardwareserver.build.dir}/etc/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
-				<zipfileset file="experiments/@{experiment.name}/etc/Rs232Config.xml" fullpath="hardwareserver/etc/Rs232Config.xml" />
-				<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" filemode="755" />
-				<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" filemode="755" />
+				<zipfileset file="${multicast.build.dir}/StartMultiCastController.sh" fullpath="StartMultiCastController.sh" filemode="755" />
+				<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" fullpath="StartMultiCastController.bat" />
 			</zip>
 
-			<delete file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" />
-			<delete file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
+			<delete file="${multicast.build.dir}/StartMultiCastController.sh" />
+			<delete file="${multicast.build.dir}/StartMultiCastController.bat" />
 
 		</sequential>
 	</macrodef>
 
+	<target name="dist.harwareserver" description="Creates a zip of all the drivers of the experiments being built!">
+		<mkdir dir="${dist.dir}" />
+		<process.list task="dist.lab.hardwareserver" list="${lab.list}" attribute.name="lab.name" />
+	</target>
+
+	<macrodef name="dist.lab.hardwareserver">
+		<attribute name="lab.name" />
+		<sequential>
+
+			<for list="${@{lab.name}.experiment.list}" param="experiment.name">
+				<sequential>
+					<copy file="${templates.dir.scripts}/StartExperiment.sh" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.sh" />
+					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="build.properties">
+						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
+						<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
+						<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
+					</replace>
+					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+						<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
+					</replace>
+
+					<copy file="${templates.dir.scripts}/StartExperiment.bat" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
+					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="build.properties">
+						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
+						<replacefilter token="@hardwareserver.initial.heap@" property="hardwareserver.initial.heap" />
+						<replacefilter token="@hardwareserver.max.heap@" property="hardwareserver.max.heap" />
+					</replace>
+					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="experiments/@{experiment.name}/etc/build.properties">
+						<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
+					</replace>
+
+					<copy file="${templates.dir.logs}/hardwareserver.loggers.config.properties" overwrite="yes" tofile="${experiments.build.dir}/etc/loggers.config.properties" />
+					<replace file="${experiments.build.dir}/etc/loggers.config.properties" propertyFile="build.properties">
+						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
+					</replace>
+
+
+					<zip destfile="${dist.dir}/@{experiment.name}HarwareServer_${today}.zip">
+						<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
+						<zipfileset file="${hardwareserver.build.dir}/ELabHardwareServer.jar" prefix="hardwareserver" />
+						<zipfileset file="${hardwareserver.build.dir}/ReCHardwareServer.jar" prefix="hardwareserver" />
+						<zipfileset file="${hardwareserver.build.dir}/ReCCommon.jar" prefix="hardwareserver" />
+
+						<zipfileset dir="${hardwareserver.build.dir}/lib" includes="**/*.jar" prefix="hardwareserver/lib" />
+
+						<zipfileset file="${experiments.build.dir}/etc/loggers.config.properties" fullpath="hardwareserver/etc/loggers.config.properties" />
+						<zipfileset file="${hardwareserver.build.dir}/@{lab.name}/etc/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
+						<zipfileset file="experiments/@{experiment.name}/etc/Rs232Config.xml" fullpath="hardwareserver/etc/Rs232Config.xml" />
+						<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" filemode="755" />
+						<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" filemode="755" />
+					</zip>
+
+					<delete file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" />
+					<delete file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
+				</sequential>
+			</for>
+			
+		</sequential>
+	</macrodef>
 
 	<target name="copy.client.external.lib.dependencies.to.build.structure">
 		<mkdir dir="${client.build.dir}/lib" />
@@ -211,17 +222,17 @@
 	<target name="repack.client.external.lib.dependencies" if="use.pack200">
 		<repack.all.jars.in.directory dir="${client.build.dir}/lib" />
 	</target>
-	
+
 	<target name="sign.client.external.lib.dependencies">
 		<sign.all.jars.in.directory.rec.certificate source.dir.name="${client.build.dir}/lib" destination.dir.name="${client.build.dir}/lib" />
 	</target>
-	
-	<target name="pack.client.external.lib.dependencies" if="use.pack200">	
+
+	<target name="pack.client.external.lib.dependencies" if="use.pack200">
 		<pack.200.all.jar.in.dir dir="${client.build.dir}/lib" />
 	</target>
-	
+
 	<target name="build.client.lib.dependencies" depends="copy.client.external.lib.dependencies.to.build.structure, repack.client.external.lib.dependencies, sign.client.external.lib.dependencies, pack.client.external.lib.dependencies">
-	
+
 	</target>
-	
+
 </project>

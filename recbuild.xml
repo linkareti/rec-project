@@ -74,7 +74,7 @@
 	<target name="repack.jar.rec.jvlc" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
 		<repack.jar file="${jvlc.build.dir}/ReCjvlc.jar" />
 	</target>
-			
+
 	<target name="sign.rec.jvlc">
 		<sign.jar.rec folder="${jvlc.build.dir}" jar.name="ReCjvlc.jar" />
 	</target>
@@ -202,30 +202,25 @@
 			</section>
 		</manifest>
 
-		<copy file="${templates.dir.openorb}/OpenORBClientTemplate.xml" overwrite="yes" tofile="${rec.client.classes.dir}/openorb.xml" />
-		<replace file="${rec.client.classes.dir}/openorb.xml" propertyFile="build.properties">
-			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
-			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
-		</replace>
-
 	</target>
 
 	<target name="jar.rec.client">
 		<create.jar destination.folder="${client.build.dir}" jar.name="ReCClient.jar" source.basedir="${rec.client.classes.dir}" />
 	</target>
-	
+
 	<target name="repack.jar.rec.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
 		<repack.jar file="${common.build.dir}/ReCClient.jar" />
 	</target>
-	
+
 	<target name="sign.rec.client">
 		<sign.jar.rec folder="${client.build.dir}" jar.name="ReCClient.jar" />
-	</target>	
+	</target>
 
 	<target name="pack.jar.rec.client" description="Packages and compresses the jar for p200 distribution." if="use.pack200">
 		<pack.200.jar file="${client.build.dir}/ReCClient_sig.jar" />
 	</target>
 
+	<!-- TODO client openorb by lab ??? -->
 	<target name="build.rec.client" depends="clean.rec.client,compile.rec.client,jar.rec.client, repack.jar.rec.client, sign.rec.client, pack.jar.rec.client">
 
 		<copy file="${common.build.dir}/ReCCommon_sig.jar" todir="${client.build.dir}" />
@@ -280,12 +275,6 @@
 			</section>
 		</manifest>
 
-		<copy file="${templates.dir.openorb}/OpenORBHardwareTemplate.xml" overwrite="yes" tofile="${rec.hardwareserver.classes.dir}/openorb.xml" />
-		<replace file="${rec.hardwareserver.classes.dir}/openorb.xml" propertyFile="build.properties">
-			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
-			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
-		</replace>
-
 	</target>
 
 	<target name="jar.rec.hardwareserver">
@@ -306,13 +295,22 @@
 		<copy file="${common.build.dir}/ReCCommon.jar" todir="${hardwareserver.build.dir}">
 		</copy>
 
-		<copy file="${templates.dir.openorb}/OpenORBHardwareTemplate.xml" overwrite="yes" tofile="${hardwareserver.build.dir}/etc/openorb.xml" />
-		<replace file="${hardwareserver.build.dir}/etc/openorb.xml" propertyFile="build.properties">
-			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
-			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
-		</replace>
+		<process.list task="openorb.rec.hardwareserver" list="${lab.list}" attribute.name="lab.name" />
 
 	</target>
+
+	<macrodef name="openorb.rec.hardwareserver">
+		<attribute name="lab.name" />
+		<sequential>
+
+			<copy file="${templates.dir.openorb}/OpenORBHardwareTemplate.xml" overwrite="yes" tofile="${hardwareserver.build.dir}/@{lab.name}/etc/openorb.xml" />
+			<replace file="${hardwareserver.build.dir}/@{lab.name}/etc/openorb.xml" propertyFile="build.properties">
+				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
+			</replace>
+
+		</sequential>
+	</macrodef>
 
 	<!--
 		=====================================================
@@ -353,11 +351,6 @@
 			</section>
 		</manifest>
 
-		<copy file="${templates.dir.openorb}/OpenORBMultiCastTemplate.xml" overwrite="yes" tofile="${rec.multicast.classes.dir}/openorb.xml" />
-		<replace file="${rec.multicast.classes.dir}/openorb.xml" propertyFile="build.properties">
-			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
-			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
-		</replace>
 	</target>
 
 	<target name="jar.rec.multicastcontroller">
@@ -378,13 +371,22 @@
 		<copy file="${common.build.dir}/ReCCommon.jar" todir="${multicast.build.dir}">
 		</copy>
 
-		<copy file="${templates.dir.openorb}/OpenORBMultiCastTemplate.xml" overwrite="yes" tofile="${multicast.build.dir}/etc/openorb.xml" />
-		<replace file="${multicast.build.dir}/etc/openorb.xml" propertyFile="build.properties">
-			<replacefilter token="@multicast.controller.host@" property="multicast.controller.host" />
-			<replacefilter token="@multicast.controller.port@" property="multicast.controller.port" />
-		</replace>
+		<process.list task="openorb.rec.multicastcontroller" list="${lab.list}" attribute.name="lab.name" />
 
 	</target>
+
+	<macrodef name="openorb.rec.multicastcontroller">
+		<attribute name="lab.name" />
+		<sequential>
+
+			<copy file="${templates.dir.openorb}/OpenORBMultiCastTemplate.xml" overwrite="yes" tofile="${multicast.build.dir}/@{lab.name}/etc/openorb.xml" />
+			<replace file="${multicast.build.dir}/@{lab.name}/etc/openorb.xml" propertyFile="build.properties">
+				<replacefilter token="@multicast.controller.host@" property="@{lab.name}.multicast.controller.host" />
+				<replacefilter token="@multicast.controller.port@" property="@{lab.name}.multicast.controller.port" />
+			</replace>
+
+		</sequential>
+	</macrodef>
 
 	<target name="run.rec.multicast">
 		<java classname="${multicast.main-class}" fork="true" failonerror="true" maxmemory="${max.memory}">

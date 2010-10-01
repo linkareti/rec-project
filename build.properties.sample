@@ -14,6 +14,13 @@ copy.encoding=UTF-8
 #list of experiments in ELab
 experiment.list=aleatorio,gamma,vtiro,vpend2m
 
+#this next section esplicits which labs are going to be compiled, packaged, distributed...
+#the experiments must be the same as in the property experiment.list
+lab.list=basic,intermediate,advanced
+basic.experiment.list=aleatorio
+intermediate.experiment.list=gamma,vtiro
+advanced.experiment.list=vpend2m
+
 #In case you wish to run a specific experiment
 #please define the following property to enable
 #just that specific experiment. In every case,
@@ -72,8 +79,19 @@ multicast.openorb.profile=ReCMultiCastController
 rec.multicast.securitymanager=pt.utl.ist.elab.security.ElabSecurityManager
 rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE=15 
 multicast.debug.address.port=8000
+
+# TODO remove
 multicast.controller.host=localhost
+# TODO remove
 multicast.controller.port=9000
+
+basic.multicast.controller.host=localhost
+basic.multicast.controller.port=9001
+intermediate.multicast.controller.host=localhost
+intermediate.multicast.controller.port=9002
+advanced.multicast.controller.host=localhost
+advanced.multicast.controller.port=9003
+
 multicast.initial.heap=128m
 multicast.max.heap=1024m
 
@@ -82,7 +100,9 @@ multicast.max.heap=1024m
 # It should match the ID/NAME of the laboratory
 rec.am.host=localhost
 rec.am.port=3700
-rec.am.lab.id=LAB_ME
+basic.rec.am.lab.id=LAB_ME_BASIC
+intermediate.rec.am.lab.id=LAB_ME_INTERMEDIATE
+advanced.rec.am.lab.id=LAB_ME_ADVANCED
 rec.am.securitymanager=com.linkare.rec.impl.multicast.security.CompositeSecurityManager
 rec.am.compositesecuritymanager.list=com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
 rec.am.securitymanager.interval.lap.time.minutes=0
