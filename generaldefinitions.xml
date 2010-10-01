@@ -1007,7 +1007,7 @@
 		<sequential>
 			<copy file="${baseuiconfig.template.file}" overwrite="yes" tofile="${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
 
-			<process.list task="add.lab.baseuiconfig" list="${experiment.list}" attribute.name="experiment.name" />
+			<process.list task="add.lab.baseuiconfig" list="${lab.list}" attribute.name="lab.name" />
 
 		</sequential>
 	</macrodef>
