@@ -247,7 +247,7 @@
 				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-				<sysproperty key="openorb.config" value="${rec.client.classes.dir}/openorb.xml" />
+				<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
 				<sysproperty key="ReCBaseUIConfig" value="file:///${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
 			</java>
 		</sequential>
@@ -281,7 +281,7 @@
 				<sysproperty key="org.omg.CORBA.ORBClass" value="${org.omg.CORBA.ORBClass}" />
 				<sysproperty key="org.omg.CORBA.ORBSingletonClass" value="${org.omg.CORBA.ORBSingletonClass}" />
 				<sysproperty key="com.sun.CORBA.ORBDynamicStubFactoryFactoryClass" value="${com.sun.CORBA.ORBDynamicStubFactoryFactoryClass}" />
-				<sysproperty key="openorb.config" value="${rec.client.classes.dir}/openorb.xml" />
+				<sysproperty key="openorb.config" value="${client.build.dir}/etc/openorb.xml" />
 				<sysproperty key="ReCBaseUIConfig" value="file:///${elab.client.classes.dir}/ReCBaseUIConfig.xml" />
 			</java>
 		</sequential>
