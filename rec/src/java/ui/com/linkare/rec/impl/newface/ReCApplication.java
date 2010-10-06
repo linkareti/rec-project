@@ -348,10 +348,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		apparatusComboBoxModel = new ApparatusComboBoxModel();
 	}
 
-	public ReCFaceConfig getRecFaceConfig() {
-		return recFaceConfig;
-	}
-
 	public ApparatusClientBean getApparatusClientBean() {
 		return apparatusClientBean;
 	}
@@ -376,10 +372,14 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 		return codeBase;
 	}
+	
+	public void setCurrentLab(Lab lab) {
+		currentLab = lab;
+	}
 
-	public void setUserInfo(String username) {
+	public void setUserInfo(String username, String password) {
 		labClientBean.getUserInfo().setUserName(username);
-		labClientBean.getUserInfo().setPassword(username);
+		labClientBean.getUserInfo().setPassword(password);
 	}
 
 	public String getUsername() {
@@ -693,14 +693,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		if (currentState.canGoTo(LAB_CONNECT_PERFORMED)) {
 			setCurrentState(LAB_CONNECT_PERFORMED);
 			
-			// TODO Current Lab setup
-			// if(recFaceConfig.isAutoConnectLab()) {
-			currentLab = recFaceConfig.getLab().get(0);
-			// }
-			if (log.isLoggable(Level.FINE)) {
-				log.fine("recFaceConfig.isAutoConnectLab() = " + recFaceConfig.isAutoConnectLab());
-			}
-
 			apparatusComboBoxModel.addApparatusList(currentLab.getApparatus());
 			
 			// ORB initialization

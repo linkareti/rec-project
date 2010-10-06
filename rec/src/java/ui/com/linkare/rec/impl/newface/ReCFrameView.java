@@ -761,7 +761,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getApparatusUserListPane().getModel().setExpUsersListSource(recApplication.getApparatusClientBean());
 		log.fine("Users List source took @ " + (System.currentTimeMillis() - timeStart) / 1000 + "s to start...");
 		timeStart = System.currentTimeMillis();
-		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getRecFaceConfig().getUsersListRefreshRateMs());
+		getApparatusUserListPane().getModel().setAutoRefresh(recApplication.getReCFaceConfig().getUsersListRefreshRateMs());
 
 		log.fine("Auto Refresh set took @ " + (System.currentTimeMillis() - timeStart) / 1000 + "s to do!");
 		//getApparatusUserListPane().getModel().chechRefresh();

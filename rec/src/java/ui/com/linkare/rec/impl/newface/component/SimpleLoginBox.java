@@ -119,7 +119,10 @@ public class SimpleLoginBox extends GradientPane {
 	public void next() {
 		setLoginProgressVisible(true);
 
-		recApplication.setUserInfo(getUsername());
+		recApplication.setUserInfo(getUsername(), getUsername());
+		
+		// TODO set lab with selected from lab combo
+		recApplication.setCurrentLab(recApplication.getReCFaceConfig().getLab().get(0));
 
 		// Connect
 		recApplication.connect();
