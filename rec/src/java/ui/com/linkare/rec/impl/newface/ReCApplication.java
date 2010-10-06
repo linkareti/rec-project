@@ -556,10 +556,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			recFaceConfig = ReCFaceConfig.unmarshall(is);
 			log.info("ReCFaceConfig is unmarshalled.");
 
-			// ORB initialization
-			ORBBean.getORBBean();
-			log.info("ORBBean is initialized.");
-
 			// Lab Client setup
 			labClientBean = new LabClientBean();
 			labClientBean.setUsersListRefreshPeriod(recFaceConfig.getUsersListRefreshRateMs());
@@ -573,14 +569,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			// User List
 			apparatusClientBean.setUsersListRefreshPeriod(recFaceConfig.getUsersListRefreshRateMs());
 			labClientBean.setUsersListRefreshPeriod(recFaceConfig.getUsersListRefreshRateMs());
-
-			// TODO Current Lab setup
-			// if(recFaceConfig.isAutoConnectLab()) {
-			currentLab = recFaceConfig.getLab().get(0);
-			// }
-			if (log.isLoggable(Level.FINE)) {
-				log.fine("recFaceConfig.isAutoConnectLab() = " + recFaceConfig.isAutoConnectLab());
-			}
 
 			// Load Localization Bundles
 			for (LocalizationBundle bundle : recFaceConfig.getLocalizationBundle()) {
@@ -596,9 +584,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 					}
 				}
 			}
-
-			apparatusComboBoxModel = new ApparatusComboBoxModel(currentLab.getApparatus());
-
+			
 			// Show view
 			log.info("Starting user interface...");
 			showView();
@@ -706,6 +692,20 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public void connect() {
 		if (currentState.canGoTo(LAB_CONNECT_PERFORMED)) {
 			setCurrentState(LAB_CONNECT_PERFORMED);
+			
+			// TODO Current Lab setup
+			// if(recFaceConfig.isAutoConnectLab()) {
+			currentLab = recFaceConfig.getLab().get(0);
+			// }
+			if (log.isLoggable(Level.FINE)) {
+				log.fine("recFaceConfig.isAutoConnectLab() = " + recFaceConfig.isAutoConnectLab());
+			}
+
+			apparatusComboBoxModel.addApparatusList(currentLab.getApparatus());
+			
+			// ORB initialization
+			ORBBean.getORBBean();
+			log.info("ORBBean is initialized.");
 
 			log.info("Connect user " + getUsername());
 			labClientBean.connect(currentLab.getLocation());
@@ -727,6 +727,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			apparatusClientBean.disconnect();
 			labClientBean.disconnect();
 			apparatusComboBoxModel.setAllApparatusEnabled(false);
+			apparatusComboBoxModel.removeAllElements();
 		}
 	}
 

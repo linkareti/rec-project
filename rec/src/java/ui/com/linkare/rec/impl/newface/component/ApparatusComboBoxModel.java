@@ -23,6 +23,9 @@ import com.linkare.rec.impl.newface.config.Apparatus;
  */
 public class ApparatusComboBoxModel extends DefaultComboBoxModel {
 
+	/** Generated UID */
+	private static final long serialVersionUID = -4195398474801265740L;
+
 	/** Holds the apparatus location key -> apparatus mapping */
 	protected Map<String, Apparatus> apparatusMap = new HashMap<String, Apparatus>();
 
@@ -37,7 +40,64 @@ public class ApparatusComboBoxModel extends DefaultComboBoxModel {
 			apparatusMap.put(apparatus.getLocation(), apparatus);
 		}
 	}
-
+	
+	public void addApparatus(Apparatus apparatus) {
+		apparatusMap.put(apparatus.getLocation(), apparatus);
+		
+		super.addElement(apparatus);
+	}
+	
+	public void addApparatusList(List<Apparatus> apparatusList) {
+		for (Apparatus apparatus : apparatusList) {
+			addApparatus(apparatus);
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addElement(Object anObject) {
+		if (anObject instanceof Apparatus) {
+			addApparatus((Apparatus) anObject);
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void removeAllElements() {
+		apparatusMap.clear();
+		super.removeAllElements();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void removeElement(Object anObject) {
+		if (anObject instanceof Apparatus) {
+			Apparatus apparatus = (Apparatus) anObject;
+			apparatusMap.remove(apparatus.getLocation());
+			
+			super.removeElement(anObject);
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void removeElementAt(int index) {
+		Apparatus apparatus =  (Apparatus) getElementAt(index);
+		if (apparatus != null) {
+			apparatusMap.remove(apparatus.getLocation());
+			
+			super.removeElementAt(index);
+		}
+	}
+	
 	public Apparatus getApparatus(String locationKey) {
 		return apparatusMap.get(locationKey);
 	}
