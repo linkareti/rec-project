@@ -64,6 +64,7 @@ import com.linkare.rec.impl.newface.component.ExperimentHistoryBox;
 import com.linkare.rec.impl.newface.component.FlatButton;
 import com.linkare.rec.impl.newface.component.GlassLayer;
 import com.linkare.rec.impl.newface.component.InfoPopup;
+import com.linkare.rec.impl.newface.component.LabLoginBox;
 import com.linkare.rec.impl.newface.component.LayoutContainerPane;
 import com.linkare.rec.impl.newface.component.ResultsPane;
 import com.linkare.rec.impl.newface.component.SimpleLoginBox;
@@ -300,12 +301,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		return dialog;
 	}
 
-	public UndecoratedDialog<SimpleLoginBox> getLoginBox() {
+	public UndecoratedDialog<LabLoginBox> getLoginBox() {
 		if (loginBox == null) {
-			SimpleLoginBox simpleLoginBoxPane = new SimpleLoginBox();
-			simpleLoginBoxPane.setIdleIcon(idleIcon);
-			simpleLoginBoxPane.setBusyIcons(busyIcons);
-			loginBox = new UndecoratedDialog<SimpleLoginBox>(getFrame(), simpleLoginBoxPane);
+			LabLoginBox loginBoxPane = new LabLoginBox();
+			loginBoxPane.setIdleIcon(idleIcon);
+			loginBoxPane.setBusyIcons(busyIcons);
+			loginBox = new UndecoratedDialog<LabLoginBox>(getFrame(), loginBoxPane);
 		}
 		loginBox.getContent().setLoginProgressVisible(false);
 		loginBox.pack();
@@ -382,6 +383,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	private void showLoginBox() {
+		getLoginBox().getContent().reset();
 		setGlassPaneVisible(true);
 
 		// Get username
@@ -459,6 +461,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 	private void showExperimentHistoryHeaderInfo(HardwareAcquisitionConfig config) {
 		if (config != null) {
+			getLoginBox().getContent().reset();
 			setGlassPaneVisible(true);
 			getExperimentHeaderInfoBox(config.toString()).setVisible(true);
 		}
@@ -1109,7 +1112,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private final int busyAnimationRate;
 
 	private JDialog aboutBox;
-	private UndecoratedDialog<SimpleLoginBox> loginBox;
+	private UndecoratedDialog<LabLoginBox> loginBox;
 	private UndecoratedDialog<ExperimentHeaderInfoBox> experimentInfoBox;
 	private static DefaultDialog<UnexpectedErrorPane> unexpectedErrorBox;
 	private final GlassLayer glassPane = new GlassLayer(CatchEvents.NONE);

@@ -91,6 +91,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 import com.linkare.rec.impl.newface.ReCAppEvent.ReCCommand;
 import com.linkare.rec.impl.newface.component.ApparatusComboBoxModel;
 import com.linkare.rec.impl.newface.component.ExperimentHistoryUINode;
+import com.linkare.rec.impl.newface.component.LabComboBoxModel;
 import com.linkare.rec.impl.newface.component.media.MediaSetup;
 import com.linkare.rec.impl.newface.component.media.VideoViewerController;
 import com.linkare.rec.impl.newface.component.media.events.MediaApplicationEventListener;
@@ -324,6 +325,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	private ApparatusComboBoxModel apparatusComboBoxModel;
 
+	private LabComboBoxModel labComboBoxModel;
+
 	private ICustomizer currentCustomizer;
 
 	private HardwareAcquisitionConfig currentHardwareAcquisitionConfig;
@@ -346,6 +349,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 	public ReCApplication() {
 		setCurrentState(DISCONNECTED_OFFLINE);
 		apparatusComboBoxModel = new ApparatusComboBoxModel();
+		labComboBoxModel = new LabComboBoxModel();
 	}
 
 	public ApparatusClientBean getApparatusClientBean() {
@@ -389,6 +393,14 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 		return result;
 	}
+	
+	public String getPassword() {
+		String result = null;
+		if (labClientBean != null && labClientBean.getUserInfo() != null) {
+			result = labClientBean.getUserInfo().getPassword();
+		}
+		return result;
+	}
 
 	public ExperimentHistoryUINode getLastExperimentHistory() {
 		return lastExperimentHistory;
@@ -428,6 +440,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	public ApparatusComboBoxModel getApparatusComboBoxModel() {
 		return apparatusComboBoxModel;
+	}
+
+	public LabComboBoxModel getLabComboBoxModel() {
+		return labComboBoxModel;
 	}
 
 	public IChatServer getChatServer() {
@@ -561,6 +577,9 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			labClientBean.setUsersListRefreshPeriod(recFaceConfig.getUsersListRefreshRateMs());
 			labClientBean.addApparatusListSourceListener(this);
 			labClientBean.addLabConnectorListener(this);
+			
+			// Lab combobox model
+			labComboBoxModel.addLabList(recFaceConfig.getLab());
 
 			// Apparatus Client setup
 			apparatusClientBean = new ApparatusClientBean();
@@ -693,6 +712,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		if (currentState.canGoTo(LAB_CONNECT_PERFORMED)) {
 			setCurrentState(LAB_CONNECT_PERFORMED);
 			
+			apparatusComboBoxModel.removeAllElements();
 			apparatusComboBoxModel.addApparatusList(currentLab.getApparatus());
 			
 			// ORB initialization
@@ -733,7 +753,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 				setCurrentState(APPARATUS_CONNECT_PERFORMED);
 				
 				apparatusClientBean.getUserInfo().setUserName(getUsername());
-				apparatusClientBean.getUserInfo().setPassword(getUsername());
+				apparatusClientBean.getUserInfo().setPassword(getPassword());
 				
 				apparatusClientBean.setApparatus(updateCurrentApparatusFromComboModel());
 				
