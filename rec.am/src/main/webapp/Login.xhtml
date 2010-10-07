@@ -49,7 +49,7 @@
 				</li>
 
 				<li><h:commandLink
-					onclick="run();hideMulticastServerMessage();return false;"
+					onclick="test_connection_to_multicasts(#{bundle['multicast.controller.hosts.and.ports']});hideMulticastServerMessage();return false;"
 					value="#{bundle['operation.check.elab']}" /> <applet
 					id="JavaSocketBridge" archive="JavaSocketBridge.jar"
 					code="JavaSocketBridge.class" width="0" height="0"> </applet>

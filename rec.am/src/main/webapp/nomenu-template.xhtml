@@ -11,22 +11,7 @@
 	<title><ui:insert name="title">Default Title</ui:insert></title>
 	<h:outputStylesheet name="css/style.css" />
 	<script type="text/javascript" src="scripts/java_socket_bridge.js" />
-	<script type="text/javascript">
-		function run() {
-			var result = socket_connect('elab1.ist.utl.pt', 9000);
-			var message_field = document.getElementById('the_message');
-			if(result) {
-				message_field.innerHTML += 'ok';
-				message_field.className += 'elab_info';
-			} else {
-				message_field.innerHTML += 'not ok';
-				message_field.className += 'elab_error';
-			}
-		}
-		function hideMulticastServerMessage() {
-			document.getElementById('elab_launch_form:multicastServerMessage').style.display="none";
-		}
-	</script>
+	<script type="text/javascript" src="scripts/multicast.js" />
 </h:head>
 <h:body>
 
