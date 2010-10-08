@@ -2,6 +2,8 @@ package com.linkare.rec.am.web;
 
 import java.io.Serializable;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -25,23 +27,7 @@ public class PortScannerBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final String DEFAULT_ELAB_HOST = "elab1.ist.utl.pt";
-
-    private static String elabHost;
-
-    public static final int DEFAULT_START_PORT = 9000;
-
-    private static int startPort = -1;
-
-    public static final int DEFAULT_END_PORT = 9001;
-
-    private static int endPort = -1;
-
-    public static final String ELAB_HOST_KEY = "elab.host";
-
-    public static final String ELAB_PORTRANGE_START_KEY = "elab.portrange.start";
-
-    public static final String ELAB_PORTRANGE_END_KEY = "elab.portrange.end";
+    public static final String ELAB_HOSTS_AND_PORTS_KEY = "elab.hosts.and.ports";
 
     private HtmlCommandLink checkMulticastServerLink;
 
@@ -68,14 +54,13 @@ public class PortScannerBean implements Serializable {
     @ExceptionHandle(@ExceptionHandleCase)
     public void scan(final ActionEvent event) {
 	boolean canAccessPort = false;
-	int startPortRange = getPortRangeStart();
-	int stopPortRange = getPortRangeEnd();
 
-	for (int i = startPortRange; i <= stopPortRange; i++) {
+	List<ElabServer> elabServers = getElabServerInstances(PropertiesManager.getProperty(ELAB_HOSTS_AND_PORTS_KEY));
+	for (ElabServer elabServer : elabServers) {
 	    if (canAccessPort) {
 		break;
 	    }
-	    Socket ServerSok = new Socket(getElabHost(), i);
+	    Socket ServerSok = new Socket(elabServer.getHost(), elabServer.getPort());
 	    canAccessPort = true;
 	    ServerSok.close();
 	}
@@ -88,37 +73,56 @@ public class PortScannerBean implements Serializable {
 	}
     }
 
-    private static int getPortRangeStart() {
-	if (startPort == -1) {
-	    try {
-		startPort = PropertiesManager.getIntegerProperty(ELAB_PORTRANGE_START_KEY);
-	    } catch (NumberFormatException e) {
-		startPort = DEFAULT_START_PORT;
+    private List<ElabServer> getElabServerInstances(String propValue) {
+	List<ElabServer> elabs = new ArrayList<ElabServer>();
+	if (propValue != null) {
+	    String[] split = propValue.split(",");
+	    for (int i = 0; i < split.length; i += 2) {
+		elabs.add(new ElabServer(split[i], Integer.parseInt(split[i + 1])));
 	    }
 	}
-	return startPort;
+	return elabs;
     }
 
-    private int getPortRangeEnd() {
-	if (endPort == -1) {
-	    try {
-		endPort = PropertiesManager.getIntegerProperty(ELAB_PORTRANGE_END_KEY);
-	    } catch (NumberFormatException e) {
-		endPort = DEFAULT_END_PORT;
-	    }
-	}
-	return endPort;
-    }
+    private class ElabServer {
 
-    private String getElabHost() {
-	if (elabHost == null) {
-	    String elabHostKey = PropertiesManager.getProperty(ELAB_HOST_KEY);
-	    if (elabHostKey != null) {
-		elabHost = elabHostKey;
-	    } else {
-		elabHost = DEFAULT_ELAB_HOST;
-	    }
+	private String host;
+	private int port;
+
+	public ElabServer(String host, int port) {
+	    this.setHost(host);
+	    this.setPort(port);
 	}
-	return elabHost;
+
+	/**
+	 * @param host
+	 *            the host to set
+	 */
+	public void setHost(String host) {
+	    this.host = host;
+	}
+
+	/**
+	 * @return the host
+	 */
+	public String getHost() {
+	    return host;
+	}
+
+	/**
+	 * @param port
+	 *            the port to set
+	 */
+	public void setPort(int port) {
+	    this.port = port;
+	}
+
+	/**
+	 * @return the port
+	 */
+	public int getPort() {
+	    return port;
+	}
+
     }
 }

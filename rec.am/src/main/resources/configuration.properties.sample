@@ -1,3 +1,7 @@
 elab.host=elab1.ist.utl.pt
 elab.portrange.start=9000
 elab.portrange.end=9001
+
+#multicasts with hosts and ports
+#format must be host,port,host,port...
+elab.hosts.and.ports=consum.ist.utl.pt,9001,consum.ist.utl.pt,9002,consum.ist.utl.pt,9003
