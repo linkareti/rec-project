@@ -57,12 +57,14 @@ public class PortScannerBean implements Serializable {
 
 	List<ElabServer> elabServers = getElabServerInstances(PropertiesManager.getProperty(ELAB_HOSTS_AND_PORTS_KEY));
 	for (ElabServer elabServer : elabServers) {
-	    if (canAccessPort) {
+	    try {
+		Socket ServerSok = new Socket(elabServer.getHost(), elabServer.getPort());
+		canAccessPort = true;
+		ServerSok.close();
+	    } catch (Exception e) {
+		canAccessPort = false;
 		break;
 	    }
-	    Socket ServerSok = new Socket(elabServer.getHost(), elabServer.getPort());
-	    canAccessPort = true;
-	    ServerSok.close();
 	}
 	if (!canAccessPort) {
 	    JsfUtil.addErrorMessage(getCheckMulticastServerLink().getClientId(), ConstantUtils.BUNDLE, ConstantUtils.LABEL_ERROR_KEY,
