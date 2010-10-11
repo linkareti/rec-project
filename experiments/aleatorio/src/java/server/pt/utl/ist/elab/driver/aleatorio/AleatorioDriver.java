@@ -6,6 +6,7 @@
 
 package pt.utl.ist.elab.driver.aleatorio;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import pt.utl.ist.elab.driver.aleatorio.Hardware.HardwareInit;
@@ -381,19 +382,12 @@ public class AleatorioDriver extends BaseDriver {
 	 */
 	public void readProperties() {
 
-		propertiesLocation = "./configurator/AleatorioConfigurator.properties";
-		propFile = new java.io.File(propertiesLocation);
-
+		props = new java.util.Properties();
 		try {
-			is = new java.io.FileInputStream(propFile);
-			props = new java.util.Properties();
-			props.load(is);
-			is.close();
-		} catch (java.io.FileNotFoundException fnfe) {
-			System.out.println("Couldn't find the file...\n" + fnfe);
-			System.exit(0);
-		} catch (java.io.IOException ioe) {
-			System.out.println("Exception...\n" + ioe);
+			props.load(getClass().getResourceAsStream("/pt/utl/ist/elab/driver/aleatorio/configurator/AleatorioConfigurator.properties"));
+		} catch (IOException e) {
+			System.out.println("Error loading the configurations.");
+			e.printStackTrace();
 			System.exit(0);
 		}
 	}
