@@ -35,6 +35,7 @@ import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.events.HardwareStateChangeEvent;
 import com.linkare.rec.impl.exceptions.IncorrectStateExceptionConstants;
 import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.utils.HardwareBinder;
@@ -56,6 +57,9 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			LogManager.getLogManager().addLogger(Logger.getLogger(BASE_HARDWARE_LOGGER));
 		}
 	}
+	
+	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(System
+			.getProperty("ReC.Driver.ShowGUI"), "false"));
 
 	private HardwareBinder refBinder = new HardwareBinder();
 
@@ -151,8 +155,8 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		
 		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Creating EventQueue for data client dispatcher.");
 		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName());
-
-		if (!GraphicsEnvironment.isHeadless()) {
+		
+		if (!GraphicsEnvironment.isHeadless() && SHOW_GUI) {
 			JFrame frameForKill = new JFrame();
 			JButton btnExit = new JButton("End Driver!");
 			btnExit.setBackground(Color.blue);

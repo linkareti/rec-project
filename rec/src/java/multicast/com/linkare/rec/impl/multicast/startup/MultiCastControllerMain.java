@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import com.linkare.rec.acquisition.MultiCastController;
 import com.linkare.rec.acquisition.MultiCastControllerPOATie;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
+import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -24,6 +25,10 @@ import com.linkare.rec.impl.utils.ORBBean;
  * @author José Pedro Pereira - Linkare TI
  */
 public class MultiCastControllerMain {
+	
+	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(System
+			.getProperty("ReC.MultiCastController.ShowGUI"), "false"));
+	
 	/** Creates a new instance of MultiCastControllerMain */
 	public MultiCastControllerMain() {
 
@@ -47,7 +52,7 @@ public class MultiCastControllerMain {
 
 			System.out.println("MultiCastController listening for requests at URL " + corbaURL);
 
-			if (!GraphicsEnvironment.isHeadless()) {
+			if (!GraphicsEnvironment.isHeadless() && SHOW_GUI) {
 				JFrame frameForKill = new JFrame();
 				JButton btnExit = new JButton("End MulticastController!");
 				btnExit.setBackground(Color.red);

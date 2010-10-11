@@ -177,6 +177,7 @@
 						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
 					</replace>
 
+					<ant antfile="build.xml" dir="experiments/@{experiment.name}/etc" target="pre-zip.dist.harwareserver" />
 
 					<zip destfile="${dist.dir}/@{experiment.name}HarwareServer_${today}.zip">
 						<zipfileset file="${hardwareserver.build.dir}/@{experiment.name}Driver.jar" prefix="hardwareserver" />
@@ -197,7 +198,7 @@
 					<delete file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
 				</sequential>
 			</for>
-			
+
 		</sequential>
 	</macrodef>
 
