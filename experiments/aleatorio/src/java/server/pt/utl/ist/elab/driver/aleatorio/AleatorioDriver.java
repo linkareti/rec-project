@@ -572,17 +572,18 @@ public class AleatorioDriver extends BaseDriver {
 			webcam.videoPlayerStop();
 			// updates the Statistics data file after all samples (of this
 			// experiment) have been processed!
-			for (int i = 0; i < numberOfSamples; i++) {
+			int numberOfDice;
+			try {
+				numberOfDice = Integer.parseInt(props.getProperty("numberOfDice"));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				numberOfDice = NUMBER_OF_DICE;
+			}
+			// int numberOfDice =
+			// Integer.getInteger(props.getProperty("numberOfDice")).intValue();
+//			for (int i = 0; i < numberOfSamples; i++) {
+			for (int i = 0; i < centerCounterArray.length; i++) {
 				System.out.println("numberOfspotsDetected=" + centerCounterArray[i]);
-				int numberOfDice;
-				try {
-					numberOfDice = Integer.parseInt(props.getProperty("numberOfDice"));
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-					numberOfDice = NUMBER_OF_DICE;
-				}
-				// int numberOfDice =
-				// Integer.getInteger(props.getProperty("numberOfDice")).intValue();
 				aleatorioDataSource.updateStatisticsFile(centerCounterArray[i],
 						aleatorioDataSource.statisticY[centerCounterArray[i] - numberOfDice]++);
 			}// for_i
