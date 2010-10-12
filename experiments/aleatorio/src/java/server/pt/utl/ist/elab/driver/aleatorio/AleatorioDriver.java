@@ -570,25 +570,25 @@ public class AleatorioDriver extends BaseDriver {
 			AleatorioDriver.this.fireIDriverStateListenerDriverStoping();
 			aleatorioDataSource.endAcquisition();
 			webcam.videoPlayerStop();
-			// updates the Statistics data file after all samples (of this
-			// experiment) have been processed!
-			int numberOfDice;
-			try {
-				numberOfDice = Integer.parseInt(props.getProperty("numberOfDice"));
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				numberOfDice = NUMBER_OF_DICE;
-			}
-			// int numberOfDice =
-			// Integer.getInteger(props.getProperty("numberOfDice")).intValue();
-//			for (int i = 0; i < numberOfSamples; i++) {
-			for (int i = 0; i < centerCounterArray.length; i++) {
-				System.out.println("numberOfspotsDetected=" + centerCounterArray[i]);
-				aleatorioDataSource.updateStatisticsFile(centerCounterArray[i],
-						aleatorioDataSource.statisticY[centerCounterArray[i] - numberOfDice]++);
-			}// for_i
-			aleatorioDataSource.sessionStatisticsFile(centerCounterArray, Integer.parseInt(props
-					.getProperty("numberOfDice")));
+//			// updates the Statistics data file after all samples (of this
+//			// experiment) have been processed!
+//			int numberOfDice;
+//			try {
+//				numberOfDice = Integer.parseInt(props.getProperty("numberOfDice"));
+//			} catch (NumberFormatException e) {
+//				e.printStackTrace();
+//				numberOfDice = NUMBER_OF_DICE;
+//			}
+//			// int numberOfDice =
+//			// Integer.getInteger(props.getProperty("numberOfDice")).intValue();
+////			for (int i = 0; i < numberOfSamples; i++) {
+//			for (int i = 0; i < centerCounterArray.length; i++) {
+//				System.out.println("numberOfspotsDetected=" + centerCounterArray[i]);
+//				aleatorioDataSource.updateStatisticsFile(centerCounterArray[i],
+//						aleatorioDataSource.statisticY[centerCounterArray[i] - numberOfDice]++);
+//			}// for_i
+//			aleatorioDataSource.sessionStatisticsFile(centerCounterArray, Integer.parseInt(props
+//					.getProperty("numberOfDice")));
 			System.out.println("Ended acquisition...");
 			AleatorioDriver.this.fireIDriverStateListenerDriverStoped();
 
