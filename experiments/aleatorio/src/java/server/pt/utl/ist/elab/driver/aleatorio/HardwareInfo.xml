@@ -64,34 +64,34 @@
 
     <ChannelInfo name="Image" independent="true" direction="CHANNEL_INPUT">
         <scale label="Image" physicsunitname="Pixel" physicsunitsymbol="Pxl" multiplier="none" selected="true">
-            <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </min>
-            <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </max>
-            <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </step>
-            <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </errordefault>
+            <min><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="image/jpeg"/> </min>
+            <max><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="image/jpeg"/> </max>
+            <step><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="image/jpeg"/> </step>
+            <errordefault><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="image/jpeg"/> </errordefault>
         </scale>
     </ChannelInfo>
     <ChannelInfo name="XX" independent="true" direction="CHANNEL_INPUT">
             <scale label="XAxis" physicsunitname="Numero de Pintas" physicsunitsymbol="Npt" multiplier="none" selected="true">
-                <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </min>
-                <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </max>
-                <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </step>
-                <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </errordefault>
+                <min><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </min>
+                <max><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </max>
+                <step><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </step>
+                <errordefault><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </errordefault>
             </scale>
         </ChannelInfo>
         <ChannelInfo name="YY" independent="true" direction="CHANNEL_INPUT">
             <scale label="YAxis" physicsunitname="Numero de Ocorrências" physicsunitsymbol="Noc" multiplier="none" selected="true">
-                <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </min>
-                <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </max>
-                <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </step>
-                <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </errordefault>
+                <min><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </min>
+                <max><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </max>
+                <step><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </step>
+                <errordefault><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </errordefault>
             </scale>
         </ChannelInfo>
         <ChannelInfo name="Movie" independent="true" direction="CHANNEL_INPUT">
             <scale label="Movie" physicsunitname="movieFramesInJPEG" physicsunitsymbol="mov" multiplier="none" selected="true">
-                <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </min>
-                <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </max>
-                <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </step>
-                <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </errordefault>
+                <min><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="image/jpeg"/> </min>
+                <max><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="image/jpeg"/> </max>
+                <step><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="image/jpeg"/> </step>
+                <errordefault><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="image/jpeg"/> </errordefault>
             </scale>
         </ChannelInfo>
         <ChannelInfo name="CenterCount" independent="true" direction="CHANNEL_INPUT">
@@ -104,10 +104,10 @@
         </ChannelInfo>
         <ChannelInfo name="Configuration" independent="true" direction="CHANNEL_INPUT">
             <scale label="Configuration" physicsunitname="Configuration" physicsunitsymbol="cfg" multiplier="none" selected="true">
-                <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </min>
-                <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </max>
-                <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </step>
-                <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="array/int"/> </errordefault>
+                <min><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </min>
+                <max><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </max>
+                <step><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </step>
+                <errordefault><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/Resource/AleatorioByteArray.txt" mimetype="array/int"/> </errordefault>
             </scale>
     </ChannelInfo>
 </HardwareInfo>
