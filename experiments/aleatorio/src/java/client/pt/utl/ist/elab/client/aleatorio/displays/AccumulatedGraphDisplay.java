@@ -241,28 +241,29 @@ public class AccumulatedGraphDisplay extends javax.swing.JPanel implements
 					// }//for_j
 				}// if
 			}// if
-			if (model.getValueAt(i, model.getChannelIndex("CenterCount")) != null && xx != null) {
-				// sessionY[sessionGraphDisplaySingleton.sessGetStoredInt() -
-				// xx[0]]++;
-				accuY[model.getValueAt(i, model.getChannelIndex("CenterCount")).getValue().getIntValue() - xx[0]]++;
-
-				double lambda = 0.01; // 0.001
-				double termEpsilon = 0.01;
-				int maxIter = 100;
-				double[] params = pt.utl.ist.elab.client.aleatorio.utils.LMFit.solve(accuX, accuY, mu, sigma, y0, Amp,
-						lambda, termEpsilon, maxIter);
-				graphPanel.updateGraph(accuX, accuY, params[0], params[1], params[2], params[3]);
-				imageStorePanel.setImage(graphPanel.getImage());
-				imageStorePanel.repaint();
-
-				counts++;
-				muText.setText(String.valueOf(params[0]));
-				sigmaText.setText(String.valueOf(params[1]));
-				y0Text.setText(String.valueOf(params[2]));
-				ampText.setText(String.valueOf(params[3]));
-				chiSqText.setText(String.valueOf(params[4]));
-				countsText.setText(String.valueOf(counts));
-			}// if
+			// TODO FIXME out of bounds -14 again?!?!?
+//			if (model.getValueAt(i, model.getChannelIndex("CenterCount")) != null && xx != null) {
+//				// sessionY[sessionGraphDisplaySingleton.sessGetStoredInt() -
+//				// xx[0]]++;
+//				accuY[model.getValueAt(i, model.getChannelIndex("CenterCount")).getValue().getIntValue() - xx[0]]++;
+//
+//				double lambda = 0.01; // 0.001
+//				double termEpsilon = 0.01;
+//				int maxIter = 100;
+//				double[] params = pt.utl.ist.elab.client.aleatorio.utils.LMFit.solve(accuX, accuY, mu, sigma, y0, Amp,
+//						lambda, termEpsilon, maxIter);
+//				graphPanel.updateGraph(accuX, accuY, params[0], params[1], params[2], params[3]);
+//				imageStorePanel.setImage(graphPanel.getImage());
+//				imageStorePanel.repaint();
+//
+//				counts++;
+//				muText.setText(String.valueOf(params[0]));
+//				sigmaText.setText(String.valueOf(params[1]));
+//				y0Text.setText(String.valueOf(params[2]));
+//				ampText.setText(String.valueOf(params[3]));
+//				chiSqText.setText(String.valueOf(params[4]));
+//				countsText.setText(String.valueOf(counts));
+//			}// if
 		}// for_i
 		// System.out.println("Processed new samples in Accu!");
 	}// newSamples(NewExpDataEvent evt)

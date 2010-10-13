@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.aleatorio.displays;
 
+import com.linkare.rec.data.acquisition.PhysicsValue;
+
 /**
  * 
  * @author Pedro Carvalho - LEFT - IST
@@ -429,8 +431,13 @@ public class MovieDisplay extends javax.swing.JPanel implements com.linkare.rec.
 		// System.out.println("startFrameCounter[moviesIndex]="+startFrameCounter[moviesIndex]);
 		// System.out.println("model.getValueAt(model.getChannelIndex(\"Movie\"),startFrameCounter[moviesIndex]+index)="+model.getValueAt(startFrameCounter[moviesIndex]+index,model.getChannelIndex("Movie")));
 
-		return model.getValueAt(startFrameCounter[moviesIndex] + index, model.getChannelIndex("Movie")).getValue()
-				.getByteArrayValue().getData();
+		PhysicsValue value = model.getValueAt(startFrameCounter[moviesIndex] + index, model.getChannelIndex("Movie"));
+		if (value != null && value.getValue() != null && value.getValue().getByteArrayValue() != null) {
+			return value.getValue().getByteArrayValue().getData();
+		}
+		return null;
+		
+//		return model.getValueAt(startFrameCounter[moviesIndex] + index, model.getChannelIndex("Movie")).getValue().getByteArrayValue().getData();
 	}
 
 	public void dataModelWaiting() {
