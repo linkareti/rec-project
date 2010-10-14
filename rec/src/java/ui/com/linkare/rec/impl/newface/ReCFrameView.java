@@ -771,7 +771,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	private void disconnectFromApparatus() {
-		if (ReCApplication.IS_VIDEO_ENABLED && recApplication.getMediaController() != null) {
+		if (recApplication.isApparatusVideoEnabled() && recApplication.getMediaController() != null) {
 			getVideoBox().destroyVideoOutput();
 		}
 

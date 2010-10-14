@@ -724,7 +724,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 			// TODO Verify if this is the best place to
 			// initializeMediaController
-			if (IS_VIDEO_ENABLED) {
+			if (isApparatusVideoEnabled()) {
 				initializeMediaController();
 			}
 		}
@@ -958,7 +958,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	@Override
 	public void apparatusDisconnected(ApparatusConnectorEvent evt) {
-		if (IS_VIDEO_ENABLED) {
+		if (isApparatusVideoEnabled()) {
 			stopMedia();
 		}
 
