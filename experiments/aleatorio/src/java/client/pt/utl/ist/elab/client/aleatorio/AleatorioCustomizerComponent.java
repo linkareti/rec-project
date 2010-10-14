@@ -11,6 +11,9 @@ package pt.utl.ist.elab.client.aleatorio;
  * @author Pedro Carvalho - LEFT - IST
  */
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
@@ -26,6 +29,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 	/** Creates new form AleatorioCustomizer */
 	public AleatorioCustomizerComponent() {
 		initComponents();
+		
+		initWatchMovieCheckBox();
 	}
 
 	/**
@@ -449,6 +454,21 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 				((com.linkare.rec.impl.client.customizer.ICustomizerListener) listeners[i + 1]).done();
 			}
 		}
+	}
+	
+	private void initWatchMovieCheckBox() {
+	    ChangeListener changeListener = new ChangeListener() {
+	        public void stateChanged(ChangeEvent changeEvent) {
+	        	boolean isSelected = watchMovieCheckBox.isSelected();
+	        	if (isSelected) {
+	        		numberOfSamplesText.setText("1");
+	        		numberOfSamplesSlider.setValue(1);
+	        	}
+	        	numberOfSamplesText.setEnabled(!isSelected);
+	        	numberOfSamplesSlider.setEnabled(!isSelected);
+	        }
+	      };
+		watchMovieCheckBox.addChangeListener(changeListener);
 	}
 
 	private com.linkare.rec.data.metadata.HardwareInfo hardwareInfo = null;
