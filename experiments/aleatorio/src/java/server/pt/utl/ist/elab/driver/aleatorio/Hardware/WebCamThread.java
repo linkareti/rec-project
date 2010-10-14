@@ -13,7 +13,6 @@ import javax.media.Buffer;
 import javax.media.CannotRealizeException;
 import javax.media.CaptureDeviceInfo;
 import javax.media.CaptureDeviceManager;
-import javax.media.Controller;
 import javax.media.DataSink;
 import javax.media.Format;
 import javax.media.Manager;
@@ -229,6 +228,10 @@ public class WebCamThread implements Runnable {
 	public void videoPlayerStart() {
 		videoPlayer.start();
 		while (videoPlayer.getState() != videoPlayer.Started) {
+			try {
+				Thread.sleep((1000 / pt.utl.ist.elab.driver.aleatorio.AleatorioDriver.FRAME_RATE) * 2);
+			} catch (InterruptedException e) {
+			}
 		} // wait for player to start!
 	}// videoPlayerStart
 

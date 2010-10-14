@@ -75,7 +75,7 @@ public class AleatorioDriver extends BaseDriver {
 	private static final int NUMBER_OF_DICE = 14; // this is the original number
 	// of dice
 
-	private static final int FRAME_RATE = 5; // number of frames per second
+	public static final int FRAME_RATE = 5; // number of frames per second
 	pt.utl.ist.elab.driver.aleatorio.Utils.ImageAnalyser imageAnalyser = null;
 	private java.awt.Image imageToAnalyze = null;
 
