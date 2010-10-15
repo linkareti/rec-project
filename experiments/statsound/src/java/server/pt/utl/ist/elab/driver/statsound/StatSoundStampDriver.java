@@ -172,12 +172,14 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	}
 
 	public Object getHardwareInfo() {
+
 		String baseHardwareInfoFile = "recresource://" + getClass().getPackage().getName().replaceAll("\\.", "/")
 				+ "/HardwareInfo.xml";
 		String prop = Defaults.defaultIfEmpty(System.getProperty("HardwareInfo"), baseHardwareInfoFile);
 
 		if (prop.indexOf("://") == -1)
 			prop = "file:///" + System.getProperty("user.dir") + "/" + prop;
+
 		java.net.URL url = null;
 		try {
 			url = ReCProtocols.getURL(prop);
@@ -190,9 +192,9 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 						.getLogger(STAMP_DRIVER_LOGGER));
 			}
 		}
-		System.out.println("Returning url=" + url);
-		System.out.println("File=" + url.getFile());
+
 		return url;
+
 	}
 
 	private StatSoundStampDataSource dataSource;
