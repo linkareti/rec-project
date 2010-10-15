@@ -158,19 +158,19 @@
 	<ChannelInfo name="wave1" independent="true" direction="CHANNEL_INPUT">
 		<scale label="Wave 1 sound channel" physicsunitname=""
 			physicsunitsymbol="" multiplier="none" selected="true">
-			<min><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></min>
-			<max><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></max>
-			<step><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></step>
-			<errordefault><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></errordefault>
+			<min><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/statsound/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></min>
+			<max><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/statsound/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></max>
+			<step><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/statsound/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></step>
+			<errordefault><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/statsound/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 	<ChannelInfo name="wave2" independent="true" direction="CHANNEL_INPUT">
 		<scale label="Wave 1 sound channel" physicsunitname=""
 			physicsunitsymbol="" multiplier="none" selected="true">
-			<min><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></min>
-			<max><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></max>
-			<step><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></step>
-			<errordefault><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/aleatorio/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></errordefault>
+			<min><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/statsound/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></min>
+			<max><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/statsound/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></max>
+			<step><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/statsound/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></step>
+			<errordefault><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/statsound/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
 </HardwareInfo>
