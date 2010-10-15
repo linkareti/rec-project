@@ -182,11 +182,12 @@ public final class ChannelParameter implements org.omg.CORBA.portable.IDLEntity 
 
 		case ParameterType._OnOffValue:
 		case ParameterType._SelectionListValue: {
-			boolean outReturn = false;
-			for (int i = 0; i < parameterSelectionList.length && !outReturn; i++) {
-				outReturn = outReturn || parameterSelectionList[i].equals(selectedParameterValue);
+			for (int i = 0; i < parameterSelectionList.length; i++) {
+				if (parameterSelectionList[i].equals(selectedParameterValue)) {
+					return true;
+				}
 			}
-			return outReturn;
+			return false;
 		}
 
 		case ParameterType._BlackBoxValue: {
