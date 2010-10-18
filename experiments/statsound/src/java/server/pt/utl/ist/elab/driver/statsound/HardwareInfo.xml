@@ -62,12 +62,10 @@
 		</selection-list>
 
 	</parameter>
-	<parameter name="Wave form" type="SelectionListValue" value="Wave 1">
+	<parameter name="Wave form" type="SelectionListValue" value="0">
 		<selection-list>
-			<value order="1">Wave 1</value>
-			<value order="2">Wave 2</value>
-			<value order="3">Wave 3</value>
-			<value order="4">Wave 4</value>
+			<value order="1">0</value>
+			<value order="2">1</value>
 		</selection-list>
 	</parameter>
 	<parameter name="Type of experiment" type="SelectionListValue"
