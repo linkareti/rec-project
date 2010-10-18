@@ -115,12 +115,14 @@ public class FlatRadioButtonUI extends MetalRadioButtonUI {
 					// *** paint the text disabled
 					g.setColor(getDisabledTextColor());
 				}
-				AttributedString as=new AttributedString(text);
 				if(mnemIndex>0 && mnemIndex<=text.length())
 				{
+					AttributedString as=new AttributedString(text);
 					as.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON,mnemIndex-1,mnemIndex);
+					g.drawString(as.getIterator(), textRect.x, textRect.y + fm.getAscent());
+				} else {
+					g.drawString(text, textRect.x, textRect.y + fm.getAscent());
 				}
-				g.drawString(as.getIterator(), textRect.x, textRect.y + fm.getAscent());
 			}
 			if (abstractButton.hasFocus() && abstractButton.isFocusPainted() && textRect.width > 0 && textRect.height > 0) {
 				paintFocus(g, textRect, size);
