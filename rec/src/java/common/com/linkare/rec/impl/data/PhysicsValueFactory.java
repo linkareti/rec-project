@@ -95,9 +95,11 @@ public class PhysicsValueFactory {
 			aux /= 10.;
 		}
 		aux = step;
-		while (aux < 1.) {
-			multiplier_exp++;
-			aux *= 10.;
+		if (aux > 0) { // aux can be zero...
+			while (aux < 1.) {
+				multiplier_exp++;
+				aux *= 10.;
+			}
 		}
 
 		double multiplier = Math.pow(10., (double) multiplier_exp);
