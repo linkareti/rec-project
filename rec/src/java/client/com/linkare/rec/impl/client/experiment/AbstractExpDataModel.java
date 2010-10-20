@@ -547,13 +547,19 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	private class SamplesDepacketizingAdapter implements SamplesSourceEventListener {
 		public void newSamples(SamplesSourceEvent evt) {
 			try {
-				largestnumsample = evt.getSampleLargestIndex();
-				fireExpDataModelListenerNewSamples(new NewExpDataEvent(this, lastsample, largestnumsample));
-				lastsample = largestnumsample;
+				fireExpDataModelListenerNewSamples(evt.getSampleLargestIndex());
 			} catch (Exception e) {
 				LoggerUtil.logThrowable("Exception when newSamples(SamplesSourceEvent evt) from AbstractDataModel", e,
 						Logger.getLogger(DATA_RECEIVER_LOGGER));
 			}
+		}
+	}
+	
+	protected void fireExpDataModelListenerNewSamples(int sampleLargestIndex) {
+		if (sampleLargestIndex > largestnumsample) {
+			largestnumsample = sampleLargestIndex;
+			fireExpDataModelListenerNewSamples(new NewExpDataEvent(this, lastsample, largestnumsample));
+			lastsample = largestnumsample;
 		}
 	}
 

@@ -8,10 +8,6 @@ package pt.utl.ist.elab.client.statsound.displays;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
-import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.impl.client.experiment.ExpDataModel;
-import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
-import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
@@ -80,14 +76,23 @@ public class MyTableModelProxy extends com.linkare.rec.impl.client.experiment.Mu
 		// super doesn't have this method defined
 	}
 
-	// public void dataModelStarted() {
-	// fireTableStructureChanged();
-	// // super also does fireTableDataChanged();
-	// }
-	//
-	// public void dataModelStartedNoData() {
-	// fireTableStructureChanged();
-	// // super also does fireTableDataChanged();
-	// }
+	public void dataModelStarted() {
+		fireTableStructureChanged();
+	}
+
+	public void dataModelStartedNoData() {
+		fireTableStructureChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Class getColumnClass(int columnIndex) {
+		if (expDataModel == null || !expDataModel.isDataAvailable()) {
+			return null;
+		}
+		return String.class;
+	}
 
 }

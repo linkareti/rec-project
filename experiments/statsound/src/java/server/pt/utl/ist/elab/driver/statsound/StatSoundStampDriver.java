@@ -104,9 +104,9 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_1)) {
 			/** This are the stamp n Samples... */
 			nSamples = config.getTotalSamples();
-			// } else if
-			// (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
-			// nSamples = 500;
+		} else if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
+			// TODO WTF???
+			nSamples = 500;
 		} else {
 			nSamples = 1;
 			posFin = posIni;
@@ -150,14 +150,14 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		if (!translator.translate(stampConfig))
 			throw new WrongConfigurationException("Cannot translate StampCommand!", -1);
 
-		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_2)) {
-			config.setTotalSamples(config.getTotalSamples() + 1);
-		} else {
-			config.setTotalSamples(config.getTotalSamples() + 2); // +2 for temp
-			// ini and
-			// temp
-			// final
-		}
+//		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_2)) {
+//			config.setTotalSamples(config.getTotalSamples() + 1);
+//		} else {
+//			config.setTotalSamples(config.getTotalSamples() + 2); // +2 for temp
+//			// ini and
+//			// temp
+//			// final
+//		}
 
 		for (int i = 0; i < config.getChannelsConfig().length; i++) {
 			config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
