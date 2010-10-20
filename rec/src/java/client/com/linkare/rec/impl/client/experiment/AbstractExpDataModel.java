@@ -415,9 +415,11 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	}
 
 	public void log(Level debugLevel, String message) {
+		Logger.getLogger(DATA_RECEIVER_LOGGER).log(debugLevel, message);
 	}
 
 	public void logThrowable(String message, Throwable t) {
+		LoggerUtil.logThrowable(t.getMessage(), t, LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
 	}
 
 	public void pause() {
