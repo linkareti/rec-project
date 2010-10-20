@@ -178,10 +178,10 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					// values[2].getValue().getFloatValue() + " , " +
 					// values[3].getValue().getFloatValue());
 					super.addDataRow(values);
+				} else {
+					// System.out.println("Passed through..." + posValor);
+					super.addDataRow(values);
 				}
-
-				// System.out.println("Passed through..." + posValor);
-				super.addDataRow(values);
 
 				counter++;
 				if (counter == total_samples)
