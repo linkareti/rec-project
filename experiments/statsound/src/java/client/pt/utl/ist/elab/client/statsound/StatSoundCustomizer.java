@@ -794,11 +794,11 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 			typeExp = "Sound Vel";
 		}
 
-		if (typeExp.equalsIgnoreCase("Sound Vel")) {
-			acqConfig.setTotalSamples(1);
-		} else {
+//		if (typeExp.equalsIgnoreCase("Sound Vel")) {
+//			acqConfig.setTotalSamples(1);
+//		} else {
 			acqConfig.setTotalSamples(nSamples);
-		}
+//		}
 
 		acqConfig.getSelectedHardwareParameter("Type of experiment").setParameterValue(typeExp);
 		acqConfig.getSelectedHardwareParameter("Piston start").setParameterValue("" + pistonIni);

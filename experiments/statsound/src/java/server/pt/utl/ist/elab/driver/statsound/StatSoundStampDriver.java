@@ -100,18 +100,18 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			freqIni = temp;
 		}
 
-		typeOfExp = config.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);
-		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_1)
-				|| typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
-			/** This are the stamp n Samples... */
+//		typeOfExp = config.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);
+//		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_1)
+//				|| typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
+//			/** This are the stamp n Samples... */
 			nSamples = config.getTotalSamples();
-//		} else if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
-//			// TODO WTF???
-//			nSamples = 500;
-		} else {
-			nSamples = 1;
-			posFin = posIni;
-		}
+////		} else if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
+////			// TODO WTF???
+////			nSamples = 500;
+//		} else {
+//			nSamples = 1;
+//			posFin = posIni;
+//		}
 
 		if (config.getTotalSamples() != 1) {
 			step = Math.abs((double) (freqIni - freqFin)) / ((double) (config.getTotalSamples() - 1));
