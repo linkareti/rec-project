@@ -101,12 +101,13 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		}
 
 		typeOfExp = config.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);
-		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_1)) {
+		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_1)
+				|| typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
 			/** This are the stamp n Samples... */
 			nSamples = config.getTotalSamples();
-		} else if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
-			// TODO WTF???
-			nSamples = 500;
+//		} else if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
+//			// TODO WTF???
+//			nSamples = 500;
 		} else {
 			nSamples = 1;
 			posFin = posIni;
@@ -123,10 +124,9 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 		waveForm = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.WAVE_FORM));
 
-		try {
+		if (config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS) != null) {
 			nPoints = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS));
-		} catch (NumberFormatException e) {
-			System.out.println("nPoint throw an exception");
+		} else {
 			nPoints = 50;
 		}
 
