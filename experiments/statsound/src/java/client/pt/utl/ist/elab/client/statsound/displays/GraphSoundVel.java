@@ -14,7 +14,7 @@ public class GraphSoundVel extends MyDefaultXYExperimentGraph {
 	/** Creates a new instance of PistonRMS */
 	public GraphSoundVel() {
 		super();
-		setChannelDisplayX(5);
+		setChannelDisplayX(2);
 		setChannelDisplayYArray(new int[] { 3, 4 });
 	}
 
