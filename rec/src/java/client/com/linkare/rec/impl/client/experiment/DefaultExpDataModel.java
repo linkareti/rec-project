@@ -41,8 +41,8 @@ public class DefaultExpDataModel extends AbstractExpDataModel {
 	}
 
 	public void fireNewSamples() {
-		int maxpacket = getSamplesPacketSource().getLargestNumPacket();
-		fireExpDataModelListenerNewSamples(maxpacket);
+//		int maxpacket = getSamplesPacketSource().getLargestNumPacket();
+//		fireExpDataModelListenerNewSamples(maxpacket);
 	}
 
 	/**
