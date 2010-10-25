@@ -24,12 +24,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tabs" alignment="0" pref="413" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="tabs" min="-2" pref="730" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tabs" min="-2" pref="309" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="tabs" min="-2" pref="309" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -67,29 +73,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="jScrollPaneME">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="jScrollPaneME" noResource="true"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Sobre o ME">
-                <Property name="tabTitle" type="java.lang.String" resourceKey="jScrollPaneME.TabConstraints.tabTitle"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTextPane" name="jTextPaneME">
-              <Properties>
-                <Property name="contentType" type="java.lang.String" resourceKey="jTextPaneME.contentType"/>
-                <Property name="text" type="java.lang.String" resourceKey="jTextPaneME.text"/>
-                <Property name="name" type="java.lang.String" value="jTextPaneME" noResource="true"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Container class="javax.swing.JScrollPane" name="jScrollPaneSobreElab">
           <Properties>
             <Property name="name" type="java.lang.String" value="jScrollPaneSobreElab" noResource="true"/>
@@ -113,29 +96,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="jScrollPaneDGIDC">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="jScrollPaneDGIDC" noResource="true"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Sobre o DGIDC">
-                <Property name="tabTitle" type="java.lang.String" resourceKey="jScrollPaneDGIDC.TabConstraints.tabTitle"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTextPane" name="jTextPaneDGIDC">
-              <Properties>
-                <Property name="contentType" type="java.lang.String" resourceKey="jTextPaneDGIDC.contentType"/>
-                <Property name="text" type="java.lang.String" resourceKey="jTextPaneDGIDC.text"/>
-                <Property name="name" type="java.lang.String" value="jTextPaneDGIDC" noResource="true"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Container class="javax.swing.JScrollPane" name="jScrollPaneIST">
           <Properties>
             <Property name="name" type="java.lang.String" value="jScrollPaneIST" noResource="true"/>
@@ -155,6 +115,29 @@
                 <Property name="contentType" type="java.lang.String" resourceKey="jTextPaneIST.contentType"/>
                 <Property name="text" type="java.lang.String" resourceKey="jTextPaneIST.text"/>
                 <Property name="name" type="java.lang.String" value="jTextPaneIST" noResource="true"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JScrollPane" name="jScrollPaneME">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="jScrollPaneME" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Sobre a DGIDC e o ME">
+                <Property name="tabTitle" type="java.lang.String" resourceKey="jScrollPaneME.TabConstraints.tabTitle"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextPane" name="jTextPaneME">
+              <Properties>
+                <Property name="contentType" type="java.lang.String" resourceKey="jTextPaneME.contentType"/>
+                <Property name="text" type="java.lang.String" resourceKey="jTextPaneME.text"/>
+                <Property name="name" type="java.lang.String" value="jTextPaneME" noResource="true"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -188,7 +171,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Licen&#xe7;a e Direitos">
+              <JTabbedPaneConstraints tabName="Direitos de autor">
                 <Property name="tabTitle" type="java.lang.String" resourceKey="jScrollPaneLicence.TabConstraints.tabTitle"/>
               </JTabbedPaneConstraints>
             </Constraint>

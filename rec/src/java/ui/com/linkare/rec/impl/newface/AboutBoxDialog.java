@@ -39,14 +39,12 @@ public class AboutBoxDialog extends javax.swing.JDialog {
         tabs = new javax.swing.JTabbedPane();
         jScrollPaneElab = new javax.swing.JScrollPane();
         about_image = new javax.swing.JLabel();
-        jScrollPaneME = new javax.swing.JScrollPane();
-        jTextPaneME = new javax.swing.JTextPane();
         jScrollPaneSobreElab = new javax.swing.JScrollPane();
         jTextPaneSobreElab = new javax.swing.JTextPane();
-        jScrollPaneDGIDC = new javax.swing.JScrollPane();
-        jTextPaneDGIDC = new javax.swing.JTextPane();
         jScrollPaneIST = new javax.swing.JScrollPane();
         jTextPaneIST = new javax.swing.JTextPane();
+        jScrollPaneME = new javax.swing.JScrollPane();
+        jTextPaneME = new javax.swing.JTextPane();
         jScrollPaneLinkare = new javax.swing.JScrollPane();
         jTextPaneLinkare = new javax.swing.JTextPane();
         jScrollPaneLicence = new javax.swing.JScrollPane();
@@ -68,15 +66,6 @@ public class AboutBoxDialog extends javax.swing.JDialog {
 
         tabs.addTab(resourceMap.getString("jScrollPaneElab.TabConstraints.tabTitle"), jScrollPaneElab); // NOI18N
 
-        jScrollPaneME.setName("jScrollPaneME"); // NOI18N
-
-        jTextPaneME.setContentType(resourceMap.getString("jTextPaneME.contentType")); // NOI18N
-        jTextPaneME.setText(resourceMap.getString("jTextPaneME.text")); // NOI18N
-        jTextPaneME.setName("jTextPaneME"); // NOI18N
-        jScrollPaneME.setViewportView(jTextPaneME);
-
-        tabs.addTab(resourceMap.getString("jScrollPaneME.TabConstraints.tabTitle"), jScrollPaneME); // NOI18N
-
         jScrollPaneSobreElab.setName("jScrollPaneSobreElab"); // NOI18N
 
         jTextPaneSobreElab.setContentType(resourceMap.getString("jTextPaneSobreElab.contentType")); // NOI18N
@@ -86,15 +75,6 @@ public class AboutBoxDialog extends javax.swing.JDialog {
 
         tabs.addTab(resourceMap.getString("jScrollPaneSobreElab.TabConstraints.tabTitle"), jScrollPaneSobreElab); // NOI18N
 
-        jScrollPaneDGIDC.setName("jScrollPaneDGIDC"); // NOI18N
-
-        jTextPaneDGIDC.setContentType(resourceMap.getString("jTextPaneDGIDC.contentType")); // NOI18N
-        jTextPaneDGIDC.setText(resourceMap.getString("jTextPaneDGIDC.text")); // NOI18N
-        jTextPaneDGIDC.setName("jTextPaneDGIDC"); // NOI18N
-        jScrollPaneDGIDC.setViewportView(jTextPaneDGIDC);
-
-        tabs.addTab(resourceMap.getString("jScrollPaneDGIDC.TabConstraints.tabTitle"), jScrollPaneDGIDC); // NOI18N
-
         jScrollPaneIST.setName("jScrollPaneIST"); // NOI18N
 
         jTextPaneIST.setContentType(resourceMap.getString("jTextPaneIST.contentType")); // NOI18N
@@ -103,6 +83,15 @@ public class AboutBoxDialog extends javax.swing.JDialog {
         jScrollPaneIST.setViewportView(jTextPaneIST);
 
         tabs.addTab(resourceMap.getString("jScrollPaneIST.TabConstraints.tabTitle"), jScrollPaneIST); // NOI18N
+
+        jScrollPaneME.setName("jScrollPaneME"); // NOI18N
+
+        jTextPaneME.setContentType(resourceMap.getString("jTextPaneME.contentType")); // NOI18N
+        jTextPaneME.setText(resourceMap.getString("jTextPaneME.text")); // NOI18N
+        jTextPaneME.setName("jTextPaneME"); // NOI18N
+        jScrollPaneME.setViewportView(jTextPaneME);
+
+        tabs.addTab(resourceMap.getString("jScrollPaneME.TabConstraints.tabTitle"), jScrollPaneME); // NOI18N
 
         jScrollPaneLinkare.setName("jScrollPaneLinkare"); // NOI18N
 
@@ -126,11 +115,15 @@ public class AboutBoxDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabs.getAccessibleContext().setAccessibleName(resourceMap.getString("tabs.AccessibleContext.accessibleName")); // NOI18N
@@ -157,14 +150,12 @@ public class AboutBoxDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel about_image;
-    private javax.swing.JScrollPane jScrollPaneDGIDC;
     private javax.swing.JScrollPane jScrollPaneElab;
     private javax.swing.JScrollPane jScrollPaneIST;
     private javax.swing.JScrollPane jScrollPaneLicence;
     private javax.swing.JScrollPane jScrollPaneLinkare;
     private javax.swing.JScrollPane jScrollPaneME;
     private javax.swing.JScrollPane jScrollPaneSobreElab;
-    private javax.swing.JTextPane jTextPaneDGIDC;
     private javax.swing.JTextPane jTextPaneIST;
     private javax.swing.JTextPane jTextPaneLicence;
     private javax.swing.JTextPane jTextPaneLinkare;
