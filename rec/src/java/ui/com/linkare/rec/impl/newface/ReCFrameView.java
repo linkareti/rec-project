@@ -67,7 +67,6 @@ import com.linkare.rec.impl.newface.component.InfoPopup;
 import com.linkare.rec.impl.newface.component.LabLoginBox;
 import com.linkare.rec.impl.newface.component.LayoutContainerPane;
 import com.linkare.rec.impl.newface.component.ResultsPane;
-import com.linkare.rec.impl.newface.component.SimpleLoginBox;
 import com.linkare.rec.impl.newface.component.StatusActionBar;
 import com.linkare.rec.impl.newface.component.UndecoratedDialog;
 import com.linkare.rec.impl.newface.component.UnexpectedErrorPane;
@@ -339,7 +338,9 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	public JDialog getAboutBox() {
 		if (aboutBox == null) {
 			JFrame mainFrame = recApplication.getMainFrame();
-			aboutBox = new ReCAboutBox(mainFrame);
+//			aboutBox = new ReCAboutBox(mainFrame);
+//			aboutBox = new AboutDialog();
+			aboutBox = new AboutBoxDialog(mainFrame);
 			aboutBox.setLocationRelativeTo(mainFrame);
 		}
 		return aboutBox;
