@@ -15,6 +15,7 @@
 	<classpathentry kind="lib" path="rec/lib/java/client/appframework-1.0.3.jar"/>
 	<classpathentry kind="lib" path="other/lib/java/jvlc/jna.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="rec/lib/java/client/joda-time-1.6.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/javaws.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/jfreechart-1.0.9.jar"/>
 	<classpathentry kind="lib" path="rec/lib/java/client/commons-csv-1.0-SNAPSHOT.jar"/>

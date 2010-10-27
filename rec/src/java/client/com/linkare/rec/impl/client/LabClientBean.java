@@ -773,11 +773,11 @@ public class LabClientBean implements DataClientOperations, LabConnector, Appara
 
 				while ((mcw != null && mcw.isConnected()) && !stop) {
 					try {
+						// refresh ASAP when it is possible and then wait for next refresh
+						
+						refreshUsersList();
+						// refreshHardwares();
 						sleep(usersListRefreshPeriod);
-						if (!stop) {
-							refreshUsersList();
-							// refreshHardwares();
-						}
 					} catch (Exception e) {
 						LoggerUtil.logThrowable(null, e, Logger.getLogger(LAB_CLIENT_LOGGER));
 						return;

@@ -134,6 +134,10 @@ public final class DateTime implements org.omg.CORBA.portable.IDLEntity {
 		this.setDate(new Date(c));
 		this.setTime(new Time(c));
 	}
+	
+	public void removeMillis(long millis) {
+		addMillis(millis * -1);
+	}
 
 	public DateTime calculateDateTime(Frequency f, int sample_index) {
 		return PreciseCalendar.calculateDateTime(this, f, sample_index);

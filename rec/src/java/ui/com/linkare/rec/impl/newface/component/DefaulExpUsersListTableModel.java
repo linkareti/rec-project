@@ -9,12 +9,15 @@ package com.linkare.rec.impl.newface.component;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Vector;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
+
 import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.client.experiment.ExpUsersListChangeListener;
 import com.linkare.rec.impl.client.experiment.ExpUsersListEvent;
 import com.linkare.rec.impl.client.experiment.ExpUsersListSource;
@@ -73,6 +76,26 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 		lbltime_to_control_max = resourceMap.getString("lbltime_to_control_max.text");
 
 	}
+	
+	private static String calcPeriod(long startDateMillis, long endDateMillis) {
+		org.joda.time.DateTime start = new org.joda.time.DateTime(startDateMillis);
+		org.joda.time.DateTime end = new org.joda.time.DateTime(endDateMillis);
+		Period period = new Period(start, end, PeriodType.yearMonthDayTime());
+
+		if (period.getYears() > 0) {
+			return period.getYears() + "Y:" + period.getMonths() + "M";
+		} else if (period.getMonths() > 0) {
+			return period.getMonths() + "M:" + period.getDays() + "d";
+		} else if (period.getDays() > 0) {
+			return period.getDays() + "d:" + period.getHours() + "h";
+		} else if (period.getHours() > 0) {
+			return period.getHours() + "h:" + period.getMinutes() + "m";
+		} else if (period.getMinutes() > 0) {
+			return period.getMinutes() + "m:" + period.getSeconds() + "s";
+		} else {
+			return period.getSeconds() + "s";
+		}
+	}
 
 	public void usersListChanged(ExpUsersListEvent evt) {
 		final UserInfo[] expUsers = evt.getUserInfo();
@@ -111,7 +134,7 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 							return +1;
 
 						if (u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)
-								|| u1.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
+								|| u2.getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS))
 							return 0;
 
 						if (u1.getNextLockTime()[0].getMilliSeconds() - u2.getNextLockTime()[0].getMilliSeconds() == 0)
@@ -130,34 +153,20 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 				});
 
 				Vector<String[]> expUsersList = new Vector<String[]>(expUsers.length);
-
+				DateTime initTime = null;
 				for (int i = 0; i < expUsers.length; i++) {
 					if (expUsers[i].getUserName() != null && !expUsers[i].getUserName().equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
+						if (initTime == null) {
+							initTime = expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK];
+						}
+						
+						DateTime expMin = expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK];
+						DateTime expMax = expUsers[i].getNextLockTime()[UserInfo.MAX_TIME_LOCK];
+						
+						String controlInMin = calcPeriod(initTime.getMilliSeconds(), expMin.getMilliSeconds());
+						String controlInMax = calcPeriod(initTime.getMilliSeconds(), expMax.getMilliSeconds());
 						String userName = expUsers[i].getUserName();
-						String controlInMin = "";
-						String controlInMax = "";
-						if (expUsers[i].getLockedTime() != null && expUsers[i].getLockedTime().getMilliSeconds() != 0) {
-							controlInMin = lblInControl;
-							controlInMax = "" + expUsers[i].getLockedTime().toSimpleString();
-						} else {
-							if (expUsers[i].getNextLockTime() != null && expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK] != null)
-								controlInMin = expUsers[i].getNextLockTime()[UserInfo.MIN_TIME_LOCK].toSimpleStringTimeFirst();
-							if (expUsers[i].getNextLockTime() != null && expUsers[i].getNextLockTime()[UserInfo.MAX_TIME_LOCK] != null)
-								controlInMax = expUsers[i].getNextLockTime()[UserInfo.MAX_TIME_LOCK].toSimpleStringTimeFirst();
-
-						}
-
-						if (i == 1 && controlInMin == controlInMax) {
-							controlInMin = lblControlNow;
-							controlInMax = controlInMin;
-						}
-
-						if (log.isLoggable(Level.FINEST)) {
-							log.finest("Username = " + userName);
-							log.finest("controlInMin = " + controlInMin);
-							log.finest("controlInMax = " + controlInMax);
-						}
-
+						
 						expUsersList.add(new String[] { userName, controlInMin, controlInMax });
 					}
 				}

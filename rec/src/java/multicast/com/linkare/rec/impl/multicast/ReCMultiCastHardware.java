@@ -636,7 +636,6 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			if (clientQueue.isEmpty()) {
 				locked = false;
 				locking = false;
-				ownerDataClient = null;
 				currentLocker.stopCountDown();
 			} else
 				cycleLockHardware();
@@ -669,8 +668,6 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		UserInfo[] retVal = clientQueue.getUsers(user, resource);
 		log(Level.FINEST, "Hardware - Got as retVal " + retVal);
 
-		DateTime timeStartMax = null;
-
 		// TODO CHECK WITH JP &&
 		// ownerDataClient.getUserInfo().getLockedTime()!=null
 		// Para que esta informação seja igual para todos os utilizadores
@@ -678,43 +675,15 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		// mover isto para o cycleLockHardware, assim o timeStartMin é igual
 		// para todos...
 
-		timeStartMax = new DateTime(timeStartMin);
-
-		long experimentMaxTimeShift = FrequencyUtil.getMaximumExperimentTime(getHardwareInfo());
-
-		// TESTING
 		if (retVal != null) {
+			long experimentMaxTimeShift = FrequencyUtil.getMaximumExperimentTime(getHardwareInfo());
+			DateTime initTime = new DateTime(timeStartMin);
+			
 			for (int i = 0; i < retVal.length; i++) {
-				if (i == 0 && retVal[0].getUserName().equals(ownerDataClient.getUserName())
-						&& ownerDataClient.getUserInfo().getLockedTime() != null
-						&& ownerDataClient.getUserInfo().getLockedTime().getMilliSeconds() != 0) {
-					DateTime dateTimeCycleTotalMin = new DateTime(timeStartMin);
-					DateTime dateTimeCycleTotalMax = new DateTime(timeStartMax);
-
-					dateTimeCycleTotalMin.addMillis(LOCK_PERIOD * retVal.length);
-					dateTimeCycleTotalMax.addMillis(experimentMaxTimeShift * retVal.length);
-
-					retVal[0].setNextLockTime(dateTimeCycleTotalMin, dateTimeCycleTotalMax);
-				} else if (ownerDataClient.getUserInfo().getLockedTime() != null
-						&& ownerDataClient.getUserInfo().getLockedTime().getMilliSeconds() != 0) {
-					timeStartMin.addMillis(LOCK_PERIOD);
-					timeStartMax.addMillis(experimentMaxTimeShift);
-					retVal[i].setNextLockTime(new DateTime(timeStartMin), new DateTime(timeStartMax));
-				}
-				// TESTING
-				else {
-					timeStartMin.addMillis(i * LOCK_PERIOD);
-					retVal[i].setNextLockTime(new DateTime(timeStartMin), new DateTime(timeStartMin));
-				}
-
-				// TODO CHECK WITH JP, IS THIS THE BEST PLACE TO TO THIS???
-				/*
-				 * if(retVal[i] != null && getHardwareInfo() != null) {
-				 * //retVal[
-				 * i].setHardwaresConnectedTo(getHardwareInfo().getFamiliarName
-				 * ());//retVal[i].setHardwaresConnectedTo(getHardwareInfo().
-				 * getHardwareUniqueID()); }
-				 */
+				DateTime endTime = new DateTime(initTime);
+				endTime.addMillis(experimentMaxTimeShift);
+				retVal[i].setNextLockTime(initTime, endTime);
+				initTime = new DateTime(endTime);
 			}
 
 		}
