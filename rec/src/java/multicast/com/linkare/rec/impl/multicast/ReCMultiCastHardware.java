@@ -678,14 +678,16 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		if (retVal != null) {
 			long experimentMaxTimeShift = FrequencyUtil.getMaximumExperimentTime(getHardwareInfo());
 			DateTime initTime = new DateTime(timeStartMin);
+			DateTime endTime = new DateTime(initTime);
 			
-			for (int i = 0; i < retVal.length; i++) {
-				DateTime endTime = new DateTime(initTime);
-				endTime.addMillis(experimentMaxTimeShift);
-				retVal[i].setNextLockTime(initTime, endTime);
-				initTime = new DateTime(endTime);
+			if (retVal.length > 0) {
+				retVal[0].setNextLockTime(new DateTime(initTime), new DateTime(initTime));
 			}
-
+			for (int i = 1; i < retVal.length; i++) {
+				initTime.addMillis(LOCK_PERIOD);
+				endTime.addMillis(experimentMaxTimeShift + LOCK_PERIOD);
+				retVal[i].setNextLockTime(new DateTime(initTime), new DateTime(endTime));
+			}
 		}
 		return retVal;
 	}
