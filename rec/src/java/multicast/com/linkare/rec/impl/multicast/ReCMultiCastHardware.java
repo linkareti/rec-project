@@ -650,6 +650,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			currentLocker.stopCountDown();
 			// if(currentLocker!=null)
 			// currentLocker.exit();
+			
+			stopExperimentStats();
 
 			// ChangeOwnerInNextLockCycle=OWNER_REMOVED_GIVE_STOP_LOCK;
 			if (clientQueue.isEmpty()) {
