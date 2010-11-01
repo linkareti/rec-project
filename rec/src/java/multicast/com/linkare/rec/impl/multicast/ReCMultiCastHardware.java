@@ -51,6 +51,7 @@ import com.linkare.rec.impl.multicast.security.SecurityManagerFactory;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
 import com.linkare.rec.impl.threading.ConditionChecker;
 import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.impl.utils.MultiCastExperimentStats;
 import com.linkare.rec.impl.utils.ORBBean;
 import com.linkare.rec.impl.utils.ObjectID;
 import com.linkare.rec.impl.wrappers.HardwareWrapper;
@@ -94,12 +95,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 	private boolean startCalled = false;
 	
-	private Object experimentStatsSync = new Object();
-	private long totalNumberOfExecutions = 0;
-	private long runningAverageTimeOfExecution = 0;
-	private long totalLockEventsSent = 0;
-	private long experimentStartTimestamp = 0;
-
+	private MultiCastExperimentStats experimentStats;
 
 	// ... and by whom?
 	private DataClientForQueue ownerDataClient = null;
@@ -309,7 +305,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			recMultiCastDataProducer.setRemoteDataProducer(hardware.start(recMultiCastDataProducer.getDataReceiver())); // iniciar o driver
 			recMultiCastDataProducer.initAcquisitionThread(); // iniciar a aquisicao de dados do driver
 			
-			startExperimentStats();
+			experimentStats.startExperimentStats();
 			
 			return dataProducer;
 		} else
@@ -500,7 +496,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			proxyHardwareInfo = this.hardware.getHardwareInfo();
 			proxyHardwareUniqueId = proxyHardwareInfo.getHardwareUniqueID();
 			
-			runningAverageTimeOfExecution = FrequencyUtil.getMaximumExperimentTime(proxyHardwareInfo);
+			experimentStats = MultiCastExperimentStats.getInstance(proxyHardwareInfo, LOCK_PERIOD);
 
 			getResource().getProperties().put(ResourceType.MCHARDWARE.getPropertyKey(), proxyHardwareUniqueId);
 
@@ -566,6 +562,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			currentLocker.exit();
 			currentLocker = null;
 		}
+		
+		experimentStats.shutdown();
 
 		log(Level.INFO, "Shut down completed!");
 
@@ -610,10 +608,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 				ownerDataClient = clientQueue.first();
 				locking = true;
-				synchronized (experimentStatsSync) {
-					if (oldOwnerDataClient != ownerDataClient) {
-						totalLockEventsSent++;
-					}
+				
+				if (oldOwnerDataClient != ownerDataClient) {
+					experimentStats.lockEventSent();
 				}
 
 				if (ownerDataClient != null) {
@@ -651,7 +648,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			// if(currentLocker!=null)
 			// currentLocker.exit();
 			
-			stopExperimentStats();
+			experimentStats.stopExperimentStats();
 
 			// ChangeOwnerInNextLockCycle=OWNER_REMOVED_GIVE_STOP_LOCK;
 			if (clientQueue.isEmpty()) {
@@ -713,16 +710,11 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 //			}
 
 			// Average values version
-			synchronized (experimentStatsSync) {
-				double averageUsedLocks = (totalLockEventsSent == 0 ? 1 : ((double) totalNumberOfExecutions) / ((double)totalLockEventsSent));
-//				long averageExecutionTime = (long) (runningAverageTimeOfExecution * averageUsedLocks);
-				long averageExecutionTime = (long) (runningAverageTimeOfExecution * averageUsedLocks) + LOCK_PERIOD;
-				
-				for (int i = 1; i < retVal.length; i++) {
-					initTime.addMillis(LOCK_PERIOD);
-					endTime.addMillis(averageExecutionTime);
-					retVal[i].setNextLockTime(new DateTime(initTime), new DateTime(endTime));
-				}
+			long averageExecutionTime = experimentStats.calcAverageExecutionTime();
+			for (int i = 1; i < retVal.length; i++) {
+				initTime.addMillis(LOCK_PERIOD);
+				endTime.addMillis(averageExecutionTime);
+				retVal[i].setNextLockTime(new DateTime(initTime), new DateTime(endTime));
 			}
 		}
 		return retVal;
@@ -901,7 +893,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 					ownerDataClient = null;
 
 					currentLocker.stopCountDown();
-					stopExperimentStats();
+					experimentStats.stopExperimentStats();
 					cycleLockHardware();
 					recMultiCastDataProducer = null;
 				}
@@ -1091,28 +1083,6 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 				log(Level.INFO, "Shuting down user [" + dcfq.getUserName() + "] in the hardware ["
 						+ getHardwareUniqueId() + "]");
 				dcfq.shutdownAsSoonAsPossible();
-			}
-		}
-	}
-	
-	private void startExperimentStats() {
-		synchronized (experimentStatsSync) {
-			if (experimentStartTimestamp == 0) {
-				experimentStartTimestamp = System.currentTimeMillis();
-			}
-		}
-	}
-	
-	private void stopExperimentStats() {
-		synchronized (experimentStatsSync) {
-			if (experimentStartTimestamp > 0) {
-				long totalTimeOfCurrentExecution = System.currentTimeMillis() - experimentStartTimestamp;
-				experimentStartTimestamp = 0;
-				
-				runningAverageTimeOfExecution = (runningAverageTimeOfExecution * totalNumberOfExecutions + totalTimeOfCurrentExecution)
-						/ (totalNumberOfExecutions + 1);
-				
-				totalNumberOfExecutions++;
 			}
 		}
 	}
