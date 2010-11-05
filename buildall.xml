@@ -169,6 +169,11 @@
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" propertyFile="experiments/@{experiment.name}/etc/build.properties">
 						<replacefilter token="@driver.main.class@" property="@{experiment.name}.driver.main-class" />
 					</replace>
+					
+					<copy file="${templates.dir.scripts}/ExperimentDeamon.sh" overwrite="yes" tofile="${experiments.build.dir}/@{experiment.name}Deamon.sh" />
+					<replace file="${experiments.build.dir}/@{experiment.name}Deamon.sh" propertyFile="build.properties">
+						<replacefilter token="@experiment.name@" value="@{experiment.name}" />
+					</replace>
 
 					<copy file="${templates.dir.scripts}/StartExperiment.bat" overwrite="yes" tofile="${experiments.build.dir}/Start@{experiment.name}Driver.bat" />
 					<replace file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" propertyFile="build.properties">
@@ -199,6 +204,7 @@
 						<zipfileset file="${hardwareserver.build.dir}/@{lab.name}/etc/openorb.xml" fullpath="hardwareserver/etc/openorb.xml" />
 						<zipfileset file="experiments/@{experiment.name}/etc/Rs232Config.xml" fullpath="hardwareserver/etc/Rs232Config.xml" />
 						<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.sh" filemode="755" />
+						<zipfileset file="${experiments.build.dir}/@{experiment.name}Deamon.sh" filemode="755" />
 						<zipfileset file="${experiments.build.dir}/Start@{experiment.name}Driver.bat" filemode="755" />
 					</zip>
 

@@ -37,3 +37,6 @@ echo ---------------------------------------------------------------------------
 
 
 java $BOOTCLASSPATH -classpath $RECCLASSPATH:$DRIVER_CLASSPATH:$DRIVER_EXPERIMENT_CLASSPATH $GENERIC_ORB_SYSPROPS $DRIVER_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $DRIVER_HARWARE_INFO_SYSPROPS $TOOLKIT_SYSPROPS $DEBUG @driver.main.class@ &
+
+PID=$!
+echo $PID > @experiment.name@.pid
