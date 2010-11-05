@@ -104,6 +104,12 @@
 				<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
 				<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
 				<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
+				<replacefilter token="@lab.name@" value="@{lab.name}" />
+			</replace>
+
+			<copy file="${templates.dir.scripts}/MultiCastDeamon.sh" overwrite="yes" tofile="${multicast.build.dir}/MultiCastDeamon.sh" />
+			<replace file="${multicast.build.dir}/MultiCastDeamon.sh" propertyFile="build.properties">
+				<replacefilter token="@lab.name@" value="@{lab.name}" />
 			</replace>
 
 			<copy file="${templates.dir.scripts}/StartMultiCastController.bat" overwrite="yes" tofile="${multicast.build.dir}/StartMultiCastController.bat" />
@@ -132,10 +138,12 @@
 				<zipfileset file="${multicast.build.dir}/@{lab.name}/etc/openorb.xml" fullpath="multicast/etc/openorb.xml" />
 
 				<zipfileset file="${multicast.build.dir}/StartMultiCastController.sh" fullpath="StartMultiCastController.sh" filemode="755" />
+				<zipfileset file="${multicast.build.dir}/MultiCastDeamon.sh" fullpath="MultiCastDeamon.sh" filemode="755" />
 				<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" fullpath="StartMultiCastController.bat" />
 			</zip>
 
 			<delete file="${multicast.build.dir}/StartMultiCastController.sh" />
+			<delete file="${multicast.build.dir}/MultiCastDeamon.sh" />
 			<delete file="${multicast.build.dir}/StartMultiCastController.bat" />
 
 		</sequential>
