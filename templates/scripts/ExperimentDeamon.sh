@@ -28,23 +28,40 @@ start() {
         return $RETVAL
 }
 stop() {
-        PID=`cat @experiment.name@.pid`
-        gprintf "Stoping @experiment.name@ $BASE_USER Service"
-#         su -l $BASE_USER -c kill $PID
-        `kill $PID`
-        RETVAL=$?
-        echo
-        [ $RETVAL -eq 0 ] && rm -rf @experiment.name@.lock && rm -rf @experiment.name@.pid || \
-           RETVAL=1
-        return $RETVAL
+        if [ -f @experiment.name@.pid ]
+        then
+            PID=`cat @experiment.name@.pid`
+            gprintf "Stopping @experiment.name@ $BASE_USER Service"
+#             su -l $BASE_USER -c kill $PID
+            `kill $PID`
+            RETVAL=$?
+            echo
+            [ $RETVAL -eq 0 ] && rm -rf @experiment.name@.lock && rm -rf @experiment.name@.pid || \
+               RETVAL=1
+            return $RETVAL
+        else
+            gprintf "The service @experiment.name@ is not running!\n"
+            return $RETVAL
+        fi
 }
 restart() {
         stop
         start
 }
 status() {
-        PID_FILE=`cat @experiment.name@.pid`
-        status $PID
+        if [ -f @experiment.name@.pid ]
+        then
+            PID=`cat @experiment.name@.pid`
+            if ps ax | grep -v grep | grep $PID > /dev/null
+            then
+                gprintf "The service @experiment.name@ is running.\n"
+            else
+                gprintf "The service @experiment.name@ is not running!\n"
+            fi
+#           status $PID
+        else
+            gprintf "The service @experiment.name@ is not running!\n"
+        fi
 }
 
 case "$1" in

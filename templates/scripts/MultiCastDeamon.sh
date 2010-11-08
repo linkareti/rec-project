@@ -28,23 +28,41 @@ start() {
         return $RETVAL
 }
 stop() {
-        PID=`cat multicast_@lab.name@.pid`
-        gprintf "Stoping multicast_@lab.name@ $BASE_USER Service"
-#         su -l $BASE_USER -c kill $PID
-        `kill $PID`
-        RETVAL=$?
-        echo
-        [ $RETVAL -eq 0 ] && rm -rf multicast_@lab.name@.lock && rm -rf multicast_@lab.name@.pid || \
-           RETVAL=1
-        return $RETVAL
+        if [ -f multicast_@lab.name@.pid ]
+        then
+            PID=`cat multicast_@lab.name@.pid`
+            gprintf "Stopping multicast_@lab.name@ $BASE_USER Service"
+#             su -l $BASE_USER -c kill $PID
+            `kill $PID`
+            RETVAL=$?
+            echo
+            [ $RETVAL -eq 0 ] && rm -rf multicast_@lab.name@.lock && rm -rf multicast_@lab.name@.pid || \
+               RETVAL=1
+            return $RETVAL
+        else
+            gprintf "The service multicast_@lab.name@ is not running!\n"
+            return $RETVAL
+        fi
 }
 restart() {
         stop
         start
 }
+        
 status() {
-        PID_FILE=`cat multicast_@lab.name@.pid`
-        status $PID
+        if [ -f multicast_@lab.name@.pid ]
+        then
+            PID=`cat multicast_@lab.name@.pid`
+            if ps ax | grep -v grep | grep $PID > /dev/null
+            then
+                gprintf "The service multicast_@lab.name@ is running.\n"
+            else
+                gprintf "The service multicast_@lab.name@ is not running!\n"
+            fi
+#           status $PID
+        else
+            gprintf "The service multicast_@lab.name@ is not running!\n"
+        fi
 }
 
 case "$1" in
