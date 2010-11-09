@@ -11,6 +11,7 @@
             <name>rec-newface</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <source-roots>
+                <root id="src.client2.dir" name="optica/src/java/client"/>
                 <root id="src.ui.dir" name="rec/src/java/ui"/>
                 <root id="src.client.dir" name="rec/src/java/client"/>
                 <root id="src.common.dir" name="rec/src/java/common"/>

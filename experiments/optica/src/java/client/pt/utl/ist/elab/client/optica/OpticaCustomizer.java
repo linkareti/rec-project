@@ -2,6 +2,7 @@
 package pt.utl.ist.elab.client.optica;
 
 import java.text.DecimalFormat;
+import java.util.Dictionary;
 import java.util.Hashtable;
 
 import javax.swing.JLabel;
@@ -9,13 +10,11 @@ import javax.swing.text.NumberFormatter;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
-import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
- * @author José Pedro Pereira - Linkare TI
  */
 public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
@@ -26,7 +25,7 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 	public OpticaCustomizer() {
 		initComponents();
 
-		Hashtable slidersPosLabels = new Hashtable(4);
+		Dictionary<Integer, JLabel> slidersPosLabels = new Hashtable<Integer, JLabel>(4);
 		slidersPosLabels.put(new Integer(0), new JLabel("0.0"));
 		slidersPosLabels.put(new Integer(900), new JLabel("90.0"));
 		slidersPosLabels.put(new Integer(1800), new JLabel("180.0"));
