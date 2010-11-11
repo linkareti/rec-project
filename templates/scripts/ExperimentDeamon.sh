@@ -4,21 +4,12 @@
 # description: Starts and stops the @experiment.name@ daemon \
 #
 
-# Source function library.
-if [ -f /etc/init.d/functions ] ; then
-  . /etc/init.d/functions
-elif [ -f /etc/rc.d/init.d/functions ] ; then
-  . /etc/rc.d/init.d/functions
-else
-  exit 0
-fi
-
 BASE_USER=elab
 
 RETVAL=0
 
 start() {
-        gprintf "Starting @experiment.name@ $BASE_USER Service"
+        echo "Starting @experiment.name@ $BASE_USER Service"
 #         su -l $BASE_USER -c "nohup ./Start@experiment.name@Driver.sh &"
         `sh Start@experiment.name@Driver.sh &>/dev/null`
         RETVAL=$?
@@ -31,7 +22,7 @@ stop() {
         if [ -f @experiment.name@.pid ]
         then
             PID=`cat @experiment.name@.pid`
-            gprintf "Stopping @experiment.name@ $BASE_USER Service"
+            echo "Stopping @experiment.name@ $BASE_USER Service"
 #             su -l $BASE_USER -c kill $PID
             `kill $PID`
             RETVAL=$?
@@ -40,7 +31,7 @@ stop() {
                RETVAL=1
             return $RETVAL
         else
-            gprintf "The service @experiment.name@ is not running!\n"
+            echo "The service @experiment.name@ is not running!"
             return $RETVAL
         fi
 }
@@ -54,13 +45,13 @@ status() {
             PID=`cat @experiment.name@.pid`
             if ps ax | grep -v grep | grep $PID > /dev/null
             then
-                gprintf "The service @experiment.name@ is running.\n"
+                echo "The service @experiment.name@ is running."
             else
-                gprintf "The service @experiment.name@ is not running!\n"
+                echo "The service @experiment.name@ is not running!"
             fi
 #           status $PID
         else
-            gprintf "The service @experiment.name@ is not running!\n"
+            echo "The service @experiment.name@ is not running!"
         fi
 }
 
@@ -78,7 +69,7 @@ case "$1" in
         status
         ;;
   *)
-        gprintf "Usage: %s {start|stop|restart|status}\n" "$0"
+        echo "Usage: %s {start|stop|restart|status}\n" "$0"
         exit 1
 esac
 
