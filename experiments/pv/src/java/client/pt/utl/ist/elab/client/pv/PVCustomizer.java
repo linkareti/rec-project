@@ -23,6 +23,13 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author José Pedro Pereira - Linkare TI
  */
 public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
+	
+	private static DecimalFormat decimalFormat = new DecimalFormat("0.0");
+	static {
+		decimalFormat.setDecimalSeparatorAlwaysShown(true);
+		decimalFormat.setGroupingUsed(false);
+		decimalFormat.setMinimumFractionDigits(1);
+	}
 
 	/** Creates new form RadioactividadeCustomizer */
 	public PVCustomizer() {
@@ -36,12 +43,9 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 
 		sldPos1.setLabelTable(slidersPosLabels);
 		sldPos2.setLabelTable(slidersPosLabels);
-		DecimalFormat format = new DecimalFormat("0.0");
-		format.setDecimalSeparatorAlwaysShown(true);
-		format.setGroupingUsed(false);
-		format.setMinimumFractionDigits(1);
-		NumberFormatter formatterUserPos1 = new NumberFormatter(format);
-		NumberFormatter formatterUserPos2 = new NumberFormatter(format);
+		
+		NumberFormatter formatterUserPos1 = new NumberFormatter(decimalFormat);
+		NumberFormatter formatterUserPos2 = new NumberFormatter(decimalFormat);
 
 		// formatterUserPos1.setAllowsInvalid(false);
 		// formatterUserPos2.setAllowsInvalid(false);
@@ -416,9 +420,9 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 			if (Pos2 <= sldPos2.getMaximum() && Pos2 > sldPos2.getMinimum())
 				sldPos2.setValue(Pos2);
 			else
-				tfPos2.setValue(new Float(((float) sldPos2.getValue() / 1000.F)));
+				tfPos2.setValue(decimalFormat.format(new Float(((float) sldPos2.getValue() / 1000.F))));
 		} catch (Exception e) {
-			tfPos2.setValue(new Float(((float) sldPos2.getValue() / 1000.F)));
+			tfPos2.setValue(decimalFormat.format(new Float(((float) sldPos2.getValue() / 1000.F))));
 		}
 		checkPosOverlap();
 		checkMaxNumSamples();
@@ -434,11 +438,12 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 			int Pos1 = (int) (Float.parseFloat(strPos1) * 1000.F);
 			if (Pos1 <= sldPos1.getMaximum() && Pos1 > sldPos1.getMinimum())
 				sldPos1.setValue(Pos1);
-			else
-				tfPos1.setValue(new Float(((float) sldPos1.getValue() / 1000.F)));
+			else {
+				tfPos1.setValue(decimalFormat.format(new Float(((float) sldPos1.getValue() / 1000.F))));
+			}
 
 		} catch (Exception e) {
-			tfPos1.setValue(new Float(((float) sldPos1.getValue() / 1000.F)));
+			tfPos1.setValue(decimalFormat.format(new Float(((float) sldPos1.getValue() / 1000.F))));
 		}
 		checkPosOverlap();
 		checkMaxNumSamples();
@@ -448,7 +453,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private void sldPos1StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos1StateChanged
 	{// GEN-HEADEREND:event_sldPos1StateChanged
 
-		tfPos1.setValue(new Float(((float) sldPos1.getValue() / 1000.F)));
+		tfPos1.setValue(decimalFormat.format(new Float(((float) sldPos1.getValue() / 1000.F))));
 		checkPosOverlap();
 		checkMaxNumSamples();
 
@@ -457,7 +462,7 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 	private void sldPos2StateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldPos2StateChanged
 	{// GEN-HEADEREND:event_sldPos2StateChanged
 
-		tfPos2.setValue(new Float(((float) sldPos2.getValue() / 1000.F)));
+		tfPos2.setValue(decimalFormat.format(new Float(((float) sldPos2.getValue() / 1000.F))));
 		checkPosOverlap();
 		checkMaxNumSamples();
 
@@ -517,9 +522,9 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 		sldNumSamples.setValue(18);
 		tfNumSamples.setText("18");
 		sldPos1.setValue(4000);
-		tfPos1.setValue(new Float(4.0));
+		tfPos1.setValue(decimalFormat.format(new Float(4.0)));
 		sldPos2.setValue(7000);
-		tfPos2.setValue(new Float(7.0));
+		tfPos2.setValue(decimalFormat.format(new Float(7.0)));
 		sldFreq.setValue(150);
 		tfFreq.setText("150");
 	}// GEN-LAST:event_btnDefaultsActionPerformed
@@ -645,12 +650,12 @@ public class PVCustomizer extends javax.swing.JPanel implements com.linkare.rec.
 			float pos1f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosLow"));
 			int pos1 = (int) Math.floor(pos1f * 1000.F);
 			sldPos1.setValue(pos1);
-			tfPos1.setValue(new Float(pos1f));
+			tfPos1.setValue(decimalFormat.format(new Float(pos1f)));
 
 			float pos2f = Float.parseFloat(acqConfig.getSelectedHardwareParameterValue("UserPosHigh"));
 			int pos2 = (int) Math.floor(pos2f * 1000.F);
 			sldPos2.setValue(pos2);
-			tfPos2.setValue(new Float(pos2f));
+			tfPos2.setValue(decimalFormat.format(new Float(pos2f)));
 		}
 	}
 
