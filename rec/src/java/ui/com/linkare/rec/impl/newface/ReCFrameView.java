@@ -650,7 +650,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			break;
 		case INCORRECTSTATE:
 			incorrectStateExperiment();
-			progressCicleTask.stop();
 			break;
 		case MAXUSERS:
 			maxUsers();
@@ -878,6 +877,11 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getExperimentStatusActionBar().setActionStateText(
 				getStatusActionBarResourceMap().getString("lblActionState.apparatusIncorrectState.text"), RED);
 		setStopButtonEnabled(false);
+		getApparatusTabbedPane().getExperimentActionBar().setPlayStopButtonEnabled(false);
+		
+		String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.apparatus.incorrect.state",
+				"The experiment is in an incorrect state! Please contact the administrator.");
+		errorConnectingToApparatus(errorMessage);
 	}
 	
 	private void setStopButtonEnabled(boolean enabled) {
