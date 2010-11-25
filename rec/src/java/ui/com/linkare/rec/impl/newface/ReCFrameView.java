@@ -649,6 +649,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			configuredApparatus();
 			break;
 		case INCORRECTSTATE:
+			incorrectStateExperiment();
+			progressCicleTask.stop();
 			break;
 		case MAXUSERS:
 			maxUsers();
@@ -869,6 +871,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private void stopedExperiment() {
 		getExperimentStatusActionBar().setActionStateText(
 				getStatusActionBarResourceMap().getString("lblActionState.apparatusStoped.text"), RED);
+		setStopButtonEnabled(false);
+	}
+
+	private void incorrectStateExperiment() {
+		getExperimentStatusActionBar().setActionStateText(
+				getStatusActionBarResourceMap().getString("lblActionState.apparatusIncorrectState.text"), RED);
 		setStopButtonEnabled(false);
 	}
 	
