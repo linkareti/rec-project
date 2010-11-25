@@ -45,8 +45,9 @@ public class VideoBox extends AbstractContentPane {
      * avoid the component lock by native JVC.
 	 */
 	public void destroyVideoOutput() {
-
-        videoPanel.remove(videoCanvas);
+		if (videoPanel != null && videoCanvas != null) {
+			videoPanel.remove(videoCanvas);
+		}
         videoCanvas = null;
 	}
 
