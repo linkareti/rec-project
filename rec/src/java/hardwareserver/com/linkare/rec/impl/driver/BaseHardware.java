@@ -41,6 +41,7 @@ import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.utils.HardwareBinder;
 import com.linkare.rec.impl.utils.HardwareInfoXMLReader;
 import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.impl.utils.QueueLogger;
 import com.linkare.rec.impl.wrappers.DataClientWrapper;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
@@ -48,7 +49,7 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class BaseHardware implements HardwareOperations, BaseDataProducerListener {
+public class BaseHardware implements HardwareOperations, BaseDataProducerListener, QueueLogger {
 	private static String BASE_HARDWARE_LOGGER = "BaseHardware.Logger";
 
 	static {
@@ -154,7 +155,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Instatiating the BaseHardware.");
 		
 		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Creating EventQueue for data client dispatcher.");
-		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName());
+		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName(), this);
 		
 		if (!GraphicsEnvironment.isHeadless() && SHOW_GUI) {
 			JFrame frameForKill = new JFrame();
@@ -421,8 +422,10 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		public void dispatchEvent(Object o) {
 			try {
 				if (o instanceof HardwareStateChangeEvent) {
-					if (dataClient != null)
+					if (dataClient != null) {
+						Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.FINE, "Dispatching hardware state ["+((HardwareStateChangeEvent) o).getNewState()+"]");
 						dataClient.hardwareStateChange(((HardwareStateChangeEvent) o).getNewState());
+					}
 				}
 			} catch (Exception e) {
 				LoggerUtil.logThrowable("Error comunicating HardwareStateChange to dataClient", e, Logger
@@ -434,6 +437,22 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			return Thread.NORM_PRIORITY;
 		}
 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void log(Level debugLevel, String message) {
+		Logger.getLogger(BASE_HARDWARE_LOGGER).log(debugLevel, message);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void logThrowable(String message, Throwable t) {
+		LoggerUtil.logThrowable(message, t, Logger.getLogger(BASE_HARDWARE_LOGGER));
 	}
 
 }

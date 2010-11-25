@@ -28,9 +28,10 @@ import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.impl.utils.QueueLogger;
 import com.linkare.rec.impl.wrappers.DataReceiverWrapper;
 
-public class BaseDataProducer implements DataProducerOperations {
+public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 	private DataProducerState dataProducerState = DataProducerState.DP_WAITING;
 	private static String BASE_DATAPRODUCER_LOGGER = "BaseDataProducer.Logger";
 
@@ -75,7 +76,7 @@ public class BaseDataProducer implements DataProducerOperations {
 	/** Creates a new instance of SimulationDataProducerImpl */
 	public BaseDataProducer(DataReceiver dataReceiver) {
 		
-		eventQueueDataReceiver = new EventQueue(new DataProducerEventsDispatcher(), this.getClass().getSimpleName());
+		eventQueueDataReceiver = new EventQueue(new DataProducerEventsDispatcher(), this.getClass().getSimpleName(), this);
 		try {
 			registerDataReceiver(dataReceiver);
 		} catch (MaximumClientsReached e) {
@@ -301,6 +302,22 @@ public class BaseDataProducer implements DataProducerOperations {
 				}
 			});
 		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void log(Level debugLevel, String message) {
+		Logger.getLogger(BASE_DATAPRODUCER_LOGGER).log(debugLevel, message);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void logThrowable(String message, Throwable t) {
+		LoggerUtil.logThrowable(message, t, Logger.getLogger(BASE_DATAPRODUCER_LOGGER));
 	}
 
 }

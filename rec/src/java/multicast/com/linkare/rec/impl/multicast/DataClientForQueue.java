@@ -7,6 +7,7 @@
 package com.linkare.rec.impl.multicast;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.NotAuthorized;
@@ -275,6 +276,7 @@ public class DataClientForQueue implements QueueLogger {
 			try {
 				if (o instanceof HardwareStateChangeEvent) {
 					HardwareStateChangeEvent evt = (HardwareStateChangeEvent) o;
+					log(Level.FINE, "Dispatching hardware state ["+evt.getNewState()+"]");
 					dcw.hardwareStateChange(evt.getNewState());
 				}
 				if (o instanceof HardwareChangeEvent) {

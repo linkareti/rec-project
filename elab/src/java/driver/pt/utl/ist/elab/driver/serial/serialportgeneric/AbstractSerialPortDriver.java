@@ -54,9 +54,10 @@ import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.EventQueue;
 import com.linkare.rec.impl.utils.EventQueueDispatcher;
+import com.linkare.rec.impl.utils.QueueLogger;
 
 public abstract class AbstractSerialPortDriver extends BaseDriver implements SerialPortFinderListener,
-		SerialPortCommandListener {
+		SerialPortCommandListener, QueueLogger {
 
 	protected static String SERIAL_PORT_LOGGER = "SerialPortDriver.Logger";
 	protected static BaseHardware baseHardware = null;
@@ -138,7 +139,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		serialFinder.addStampFinderListener(this);
 		
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating the EventQueue for the serial commands.");
-		serialCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName());
+		serialCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName(), this);
 	}
 
 	/**
@@ -951,6 +952,22 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			rememberLastWrittenMessage = message;
 			serialIO.writeMessage(message);
 		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void log(Level debugLevel, String message) {
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(debugLevel, message);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void logThrowable(String message, Throwable t) {
+		LoggerUtil.logThrowable(message, t, Logger.getLogger(SERIAL_PORT_LOGGER));
 	}
 
 }
