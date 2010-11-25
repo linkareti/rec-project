@@ -27,7 +27,7 @@
               <Component id="btnPlayStop" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="checkAutoPlay" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,6 +57,9 @@
         <Property name="opaque" type="boolean" value="false"/>
         <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="btnPlayStop.pressedIcon"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlayStopActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="checkAutoPlay">
       <Properties>
