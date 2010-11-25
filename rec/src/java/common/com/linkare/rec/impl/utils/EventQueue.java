@@ -57,8 +57,8 @@ public class EventQueue {
 
 	public void addEvent(Object evt) {
 		log(Level.FINEST, "EventQueue add event " + evt);
-		levts.add(evt);
 		synchronized (levts) {
+			levts.add(evt);
 			levts.notify();
 		}
 	}
@@ -71,8 +71,8 @@ public class EventQueue {
 		log(Level.FINE, "EventQueue received shutdown. Queue size = " + levts.size());
 		
 		stopdispatching = true;
-		levts.clear();
 		synchronized (levts) {
+			levts.clear();
 			levts.notify();
 		}
 		try {
@@ -89,7 +89,7 @@ public class EventQueue {
 	}
 	
 	public boolean isEmpty() {
-		return levts.size() == 0;
+		return levts.isEmpty();
 	}
 	
 	public void log(Level debugLevel, String message) {
@@ -123,15 +123,16 @@ public class EventQueue {
 					evt = null;
 					try {
 						synchronized (levts) {
-							if (levts.size() > 0)
+							if (!levts.isEmpty()) {
 								evt = levts.remove(0);
+							}
 						}
 					} catch (IndexOutOfBoundsException ignored) {
 						// System.out.println("Accessing array at position 0 was a big problem... But I solved it...");
 					}
 					if (evt == null) {
 						try {
-							while (levts.size() == 0 && !stopdispatching) {
+							while (levts.isEmpty() && !stopdispatching) {
 								synchronized (levts) {
 									levts.wait(10);
 								}
@@ -144,14 +145,17 @@ public class EventQueue {
 							log(Level.FINEST, "EventQueue handling the event " + evt + " of " + levts.size() + " still in the list");
 							if (evt instanceof IntersectableEvent) {
 								IntersectableEvent intersectableEvent = (IntersectableEvent) evt;
-								for (int i = levts.size() - 1; i >= 0 && !stopdispatching; i--) {
-									Object eventAfter = levts.get(i);
-									if (eventAfter instanceof IntersectableEvent) {
-										IntersectableEvent intersectableEventAfter = (IntersectableEvent) eventAfter;
-										log(Level.FINEST, "EventQueue the event " + evt + " might intersect " + eventAfter);
-										if (intersectableEvent.intersectTo(intersectableEventAfter)) {
-											log(Level.FINEST, "EventQueue removed the event at the index " + i);
-											levts.remove(i);
+								synchronized (levts) {
+									for (int i = levts.size() - 1; i >= 0 && !stopdispatching; i--) {
+										Object eventAfter = levts.get(i);
+										if (eventAfter instanceof IntersectableEvent) {
+											IntersectableEvent intersectableEventAfter = (IntersectableEvent) eventAfter;
+											log(Level.FINEST, "EventQueue the event " + evt + " might intersect "
+													+ eventAfter);
+											if (intersectableEvent.intersectTo(intersectableEventAfter)) {
+												log(Level.FINEST, "EventQueue removed the event at the index " + i);
+												levts.remove(i);
+											}
 										}
 									}
 								}
