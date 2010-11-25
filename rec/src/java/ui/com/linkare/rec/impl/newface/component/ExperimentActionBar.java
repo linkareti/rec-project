@@ -88,6 +88,10 @@ public class ExperimentActionBar extends javax.swing.JPanel {
 	public void setAutoplay() {
 		recApplication.setExperimentAutoplay(checkAutoPlay.isSelected());
 	}
+	
+	public void unCheckExperimentAutoplay() {
+		checkAutoPlay.setSelected(false);
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPlayStop;

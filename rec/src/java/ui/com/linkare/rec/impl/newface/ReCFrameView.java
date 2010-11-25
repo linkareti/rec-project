@@ -819,6 +819,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 			getExperimentStatusActionBar().setActionStateText(
 					getStatusActionBarResourceMap().getString("lblActionState.apparatusLockable.text",
 							TimeUtils.msToSeconds(millisToLockSuccess)), GREEN);
+			getExperimentActionBar().setPlayStopButtonEnabled(true);
 			
 			getExperimentStatusActionBar().setActionStateLabelVisible(true);
 			
@@ -860,6 +861,8 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 				.setActionStateText(
 						getStatusActionBarResourceMap().getString("lblActionState.apparatusStarted.text"),
 				YELLOW);
+		setExperimentAutoplay(false);
+		setPlayButtonEnabled(false);
 		setStopButtonEnabled(true);
 	}
 
@@ -873,8 +876,18 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		ApparatusTabbedPane apparatusTabbedPane = getApparatusTabbedPane();
 		if (apparatusTabbedPane != null) {
 			apparatusTabbedPane.setStopButtonEnabled(enabled);
-			apparatusTabbedPane.getExperimentActionBar().setPlayStopButtonEnabled(!enabled);
+			// the play button is enabled by the lock cycle
+//			apparatusTabbedPane.getExperimentActionBar().setPlayStopButtonEnabled(!enabled);
 		}
+	}
+	
+	private void setExperimentAutoplay(boolean enabled) {
+		getExperimentActionBar().unCheckExperimentAutoplay();
+		recApplication.setExperimentAutoplay(false);
+	}
+	
+	private void setPlayButtonEnabled(boolean enabled) {
+		getExperimentActionBar().setPlayStopButtonEnabled(enabled);
 	}
 
 	private void clearLastExperimentResults() {
@@ -905,11 +918,13 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
 		if (lockCountDownGreaterThanZero) {
 			getExperimentStatusActionBar().setActionStateText(
-					getStatusActionBarResourceMap().getString("lblActionState.apparatusLockable.text",
-							lockCountDown), GREEN);
+					getStatusActionBarResourceMap().getString("lblActionState.apparatusLockable.text", lockCountDown),
+					GREEN);
 		}
 
 		if (getExperimentActionBar().isPlayStopButtonEnabled() != lockCountDownGreaterThanZero) {
+			getExperimentStatusActionBar().setActionStateText(
+					getStatusActionBarResourceMap().getString("lblActionState.apparatusLockable.text", 0), GREEN);
 			getExperimentActionBar().setPlayStopButtonEnabled(lockCountDownGreaterThanZero);
 		}
 	}

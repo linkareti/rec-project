@@ -108,7 +108,6 @@ import com.linkare.rec.impl.newface.display.DisplayFactory;
 import com.linkare.rec.impl.newface.utils.OS;
 import com.linkare.rec.impl.newface.utils.PreferencesUtils;
 import com.linkare.rec.impl.protocols.ReCProtocols;
-import com.linkare.rec.impl.utils.DataCollector;
 import com.linkare.rec.impl.utils.ORBBean;
 
 /**
@@ -793,7 +792,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 		this.experimentAutoplay = enabled;
 		
-		if (this.experimentAutoplay && currentState.equals(APPARATUS_CONFIGURED)) {
+		if (this.experimentAutoplay
+				&& (currentState.equals(APPARATUS_CONFIGURED) || currentState.equals(APPARATUS_STARTED))) {
 			// TODO correr o play noutra thread pois este metodo e' executado a partir do GUI ???
 			play();
 		}
@@ -971,7 +971,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	@Override
 	public void apparatusLockable(ApparatusConnectorEvent evt) {
-		if (currentState.matches(APPARATUS_CONFIGURED)) {
+		if (currentState.matches(APPARATUS_CONFIGURED) || currentState.matches(APPARATUS_STARTED)) {
 			// Forward event to the view
 			fireApparatusStateChanged(LOCKABLE, evt);
 			
