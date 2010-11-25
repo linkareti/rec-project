@@ -874,12 +874,15 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	}
 
 	private void incorrectStateExperiment() {
+		apparatusLockTimer.stop();
+		progressCicleTask.stop();
+		setStopButtonEnabled(false);
 		getExperimentStatusActionBar().setActionStateText(
 				getStatusActionBarResourceMap().getString("lblActionState.apparatusIncorrectState.text"), RED);
-		setStopButtonEnabled(false);
 		getApparatusTabbedPane().getExperimentActionBar().setPlayStopButtonEnabled(false);
-		
-		String errorMessage = ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.status.apparatus.incorrect.state",
+
+		String errorMessage = ReCResourceBundle.findStringOrDefault(
+				"ReCBaseUI$rec.bui.status.apparatus.incorrect.state",
 				"The experiment is in an incorrect state! Please contact the administrator.");
 		errorConnectingToApparatus(errorMessage);
 	}
