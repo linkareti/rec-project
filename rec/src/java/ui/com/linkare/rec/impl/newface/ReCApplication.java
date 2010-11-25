@@ -340,6 +340,8 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	private boolean experimentAutoplay = false;
 
+	private boolean experimentPlayButtonEnabled = false;
+
 	private ExperimentHistoryUINode lastExperimentHistory;
 
 	private ApparatusConnectorEvent apparatusStateStartedEvent;
@@ -792,7 +794,7 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 		this.experimentAutoplay = enabled;
 		
-		if (this.experimentAutoplay
+		if (this.experimentAutoplay && experimentPlayButtonEnabled
 				&& (currentState.equals(APPARATUS_CONFIGURED) || currentState.equals(APPARATUS_STARTED))) {
 			// TODO correr o play noutra thread pois este metodo e' executado a partir do GUI ???
 			play();
@@ -814,6 +816,20 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 
 	public boolean getExperimentAutoplay() {
 		return experimentAutoplay;
+	}
+	
+	/**
+	 * @return the experimentPlayButtonEnabled
+	 */
+	public boolean isExperimentPlayButtonEnabled() {
+		return experimentPlayButtonEnabled;
+	}
+
+	/**
+	 * @param enabled the experimentPlayButtonEnabled to set
+	 */
+	public void setExperimentPlayButtonEnabled(boolean enabled) {
+		this.experimentPlayButtonEnabled = enabled;
 	}
 
 	// -------------------------------------------------------------------------

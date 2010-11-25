@@ -17,6 +17,9 @@ import com.linkare.rec.impl.newface.ReCApplication;
  */
 public class ExperimentActionBar extends javax.swing.JPanel {
 
+	/** Generated UID */
+	private static final long serialVersionUID = -1051541255320337251L;
+	
 	private final ReCApplication recApplication = ReCApplication.getApplication();
 
 	/** Creates new form ExperimentActionBar */
@@ -28,6 +31,7 @@ public class ExperimentActionBar extends javax.swing.JPanel {
 
 	public void setPlayStopButtonEnabled(boolean enabled) {
 		btnPlayStop.setEnabled(enabled);
+		recApplication.setExperimentPlayButtonEnabled(enabled);
 	}
 
 	public boolean isPlayStopButtonEnabled() {
@@ -60,6 +64,11 @@ public class ExperimentActionBar extends javax.swing.JPanel {
         btnPlayStop.setName("btnPlayStop"); // NOI18N
         btnPlayStop.setOpaque(false);
         btnPlayStop.setPressedIcon(resourceMap.getIcon("btnPlayStop.pressedIcon")); // NOI18N
+        btnPlayStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayStopActionPerformed(evt);
+            }
+        });
 
         checkAutoPlay.setAction(actionMap.get("setAutoplay")); // NOI18N
         checkAutoPlay.setText(resourceMap.getString("checkAutoPlay.text")); // NOI18N
@@ -75,7 +84,7 @@ public class ExperimentActionBar extends javax.swing.JPanel {
                 .addComponent(btnPlayStop)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkAutoPlay)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,6 +92,10 @@ public class ExperimentActionBar extends javax.swing.JPanel {
             .addComponent(checkAutoPlay, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+        private void btnPlayStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayStopActionPerformed
+        	setPlayStopButtonEnabled(!isPlayStopButtonEnabled());
+        }//GEN-LAST:event_btnPlayStopActionPerformed
 
 	@Action
 	public void setAutoplay() {
