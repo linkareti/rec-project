@@ -21,7 +21,7 @@ import org.openorb.orb.net.SocketStreamDecorationStrategy;
  */
 public final class SoTimeoutDecorationStrategy implements SocketStreamDecorationStrategy {
 
-	public final class Factory implements SocketStreamDecorationStrategy.Factory {
+	public static final class Factory implements SocketStreamDecorationStrategy.Factory {
 
 		public SocketStreamDecorationStrategy create(LoggerTeam logger, ORBLoader loader, String prefix) {
 			return new SoTimeoutDecorationStrategy();
