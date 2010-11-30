@@ -33,7 +33,9 @@
 			<property name="sendBufferSize" value="64000" />
 			<property name="recieveBufferSize" value="64000" />
 			<property name="bufferedOutputStreamSize" value="8192" />
-			<property name="serverMinSocketAcceptTimeout" value="-1" />
+			<property name="serverMinSocketAcceptTimeout" value="0" />
+			<property name="serverMaxSocketAcceptTimeout" value="250" />
+			<property name="serverOverrideSocketTimeout" value="250" />
 			<!--
 				do not use any rmi features
 			-->
@@ -43,6 +45,16 @@
 				firewalls with bidir remaining open
 			-->
 			<property name="keepAlive" value="true" />
+			<propertyset prefix="stream-decoration">
+				<property name="1"
+					value="com.linkare.rec.openorb.SoTimeoutDecorationStrategy$Factory" />
+				<property name="2"
+					value="org.openorb.orb.net.PriorityBoostingSocketStreamDecorationStrategy$Factory" />
+				<property name="3"
+					value="org.openorb.orb.net.BufferingSocketStreamDecorationStrategy$Factory" />
+				<property name="4"
+					value="org.openorb.orb.net.LegacySocketStreamDecorationStrategy$Factory" />
+			</propertyset>
 		</import>
 		<import xlink:href="${openorb.home}config/default.xml#rmi">
 			<!--
