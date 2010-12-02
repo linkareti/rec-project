@@ -633,7 +633,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 						DataClientForQueue owner = ownerDataClient;
 						
 						public ConditionResult getConditionResult() {
-							if (sentHardwareLockableTimestamp != lastSentHardwareLockableTimestamp) {
+							if (sentHardwareLockableTimestamp != lastSentHardwareLockableTimestamp || !locking && locked) {
 								timeoutCycleLockChecker = null;
 								return ConditionResult.CONDITION_MET_TRUE;
 							}
