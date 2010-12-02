@@ -218,6 +218,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 				locking = false;
 				locked = true;
+				cancelTimeoutCycleLockChecker();
 
 				ownerDataClient.getUserInfo().setLockedTime(new DateTime());
 
@@ -581,6 +582,16 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	/** Utility field holding the MCHardwareChangeListener. */
 	// private transient MCHardwareChangeListener
 	// listenerMCHardwareChangeListener = null;
+	
+	long lastSentHardwareLockableTimestamp = 0;
+	ConditionChecker timeoutCycleLockChecker = null;
+	
+	private void cancelTimeoutCycleLockChecker() {
+		if (timeoutCycleLockChecker != null) {
+			timeoutCycleLockChecker.cancelCheck();
+		}
+	}
+	
 	private void cycleLockHardware() {
 
 		synchronized (this) {
@@ -614,7 +625,28 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 				}
 
 				if (ownerDataClient != null) {
+					lastSentHardwareLockableTimestamp = System.currentTimeMillis();
 					clientQueue.hardwareLockable(new HardwareLockEvent(currentLocker, LOCK_PERIOD, ownerDataClient));
+					
+					timeoutCycleLockChecker = new ConditionChecker(LOCK_PERIOD * 2, LOCK_PERIOD, new AbstractConditionDecisor() {
+						long sentHardwareLockableTimestamp = lastSentHardwareLockableTimestamp;
+						DataClientForQueue owner = ownerDataClient;
+						
+						public ConditionResult getConditionResult() {
+							if (sentHardwareLockableTimestamp != lastSentHardwareLockableTimestamp) {
+								timeoutCycleLockChecker = null;
+								return ConditionResult.CONDITION_MET_TRUE;
+							}
+							return ConditionResult.CONDITION_NOT_MET;
+						}
+
+						public void onConditionTimeOut() {
+									log(Level.INFO, "Hardware lock was sent to owner " + owner.getUserName()
+											+ " but hasn't locked it, so I'm considering it is gone!");
+							timeoutCycleLockChecker = null;
+							owner.shutdown();
+						}
+					});
 				}
 
 				if (ownerDataClient != null && ownerDataClient.getUserInfo().getLockedTime() != null
