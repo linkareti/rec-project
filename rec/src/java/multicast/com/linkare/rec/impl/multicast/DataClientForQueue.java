@@ -7,7 +7,6 @@
 package com.linkare.rec.impl.multicast;
 
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.NotAuthorized;
@@ -154,38 +153,18 @@ public class DataClientForQueue implements QueueLogger {
 	}
 
 	public void hardwareChange() {
-		if (!dcw.isConnected()) {
-			shutdown();
-			return;
-		}
 		messageQueue.addEvent(new HardwareChangeEvent());
 	}
 
 	public void hardwareLockable(HardwareLockEvent evt) {
-		if (!dcw.isConnected()) {
-			shutdown();
-			return;
-		}
 		messageQueue.addEvent(evt);
 	}
 
 	public void hardwareStateChange(HardwareStateChangeEvent evt) {
-		if (!dcw.isConnected()) {
-			shutdown();
-			return;
-		}
 		messageQueue.addEvent(evt);
 	}
 
 	public void receiveMessage(ChatMessageEvent evt) {
-		if (!dcw.isConnected()) {
-			shutdown();
-			return;
-		}
-		/*
-		 * if(evt.getUserTo()==null) return;
-		 */
-
 		if (evt.getUserTo() == null || evt.getUserTo().getUserName() == null
 				|| evt.getUserTo().getUserName().equals(getUserName())) {
 			messageQueue.addEvent(evt);
@@ -193,11 +172,6 @@ public class DataClientForQueue implements QueueLogger {
 	}
 
 	public DataClientWrapper getDataClient() {
-		if (!dcw.isConnected()) {
-			shutdown();
-			return null;
-		}
-
 		return dcw;
 	}
 
@@ -268,11 +242,14 @@ public class DataClientForQueue implements QueueLogger {
 	}
 
 	private class DataClientQueueDispatcher implements EventQueueDispatcher {
+		
 		public void dispatchEvent(Object o) {
+			// Connection check
 			if (!dcw.isConnected()) {
 				shutdownAsSoonAsPossible();
 				return;
 			}
+			
 			try {
 				if (o instanceof HardwareStateChangeEvent) {
 					HardwareStateChangeEvent evt = (HardwareStateChangeEvent) o;
