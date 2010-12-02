@@ -628,25 +628,33 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 					lastSentHardwareLockableTimestamp = System.currentTimeMillis();
 					clientQueue.hardwareLockable(new HardwareLockEvent(currentLocker, LOCK_PERIOD, ownerDataClient));
 					
-					timeoutCycleLockChecker = new ConditionChecker(LOCK_PERIOD * 2, LOCK_PERIOD, new AbstractConditionDecisor() {
-						long sentHardwareLockableTimestamp = lastSentHardwareLockableTimestamp;
-						DataClientForQueue owner = ownerDataClient;
-						
-						public ConditionResult getConditionResult() {
-							if (sentHardwareLockableTimestamp != lastSentHardwareLockableTimestamp || !locking && locked) {
-								timeoutCycleLockChecker = null;
-								return ConditionResult.CONDITION_MET_TRUE;
-							}
-							return ConditionResult.CONDITION_NOT_MET;
-						}
+					timeoutCycleLockChecker = new ConditionChecker(LOCK_PERIOD * 2, LOCK_PERIOD,
+							new AbstractConditionDecisor() {
+								long sentHardwareLockableTimestamp = lastSentHardwareLockableTimestamp;
+								DataClientForQueue owner = ownerDataClient;
 
-						public void onConditionTimeOut() {
-									log(Level.INFO, "Hardware lock was sent to owner " + owner.getUserName()
-											+ " but hasn't locked it, so I'm considering it is gone!");
-							timeoutCycleLockChecker = null;
-							owner.shutdown();
-						}
-					});
+								public ConditionResult getConditionResult() {
+									if (isLockCycleOk()) {
+										timeoutCycleLockChecker = null;
+										return ConditionResult.CONDITION_MET_TRUE;
+									}
+									return ConditionResult.CONDITION_NOT_MET;
+								}
+
+								public void onConditionTimeOut() {
+									if (!isLockCycleOk()) {
+										log(Level.INFO, "Hardware lock was sent to owner " + owner.getUserName()
+												+ " but hasn't locked it, so I'm considering it is gone!");
+										timeoutCycleLockChecker = null;
+										owner.shutdown();
+									}
+								}
+
+								private boolean isLockCycleOk() {
+									return sentHardwareLockableTimestamp != lastSentHardwareLockableTimestamp
+											|| !locking && locked;
+								}
+							});
 				}
 
 				if (ownerDataClient != null && ownerDataClient.getUserInfo().getLockedTime() != null
