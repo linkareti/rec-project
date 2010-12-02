@@ -19,6 +19,8 @@ import com.linkare.rec.acquisition.MultiCastControllerPOATie;
 import com.linkare.rec.impl.multicast.ReCMultiCastController;
 import com.linkare.rec.impl.utils.Defaults;
 import com.linkare.rec.impl.utils.ORBBean;
+import com.linkare.rec.openorb.SoTimeoutDecorationStrategy;
+import com.linkare.rec.openorb.SoTimeoutDecorationStrategy.Factory;
 
 /**
  * 
