@@ -1,0 +1,41 @@
+<apparatus toolTipBundleKey="optica$rec.exp.tip.optica" location="OPTICA"
+	iconLocationBundleKey="optica$rec.exp.icon.optica"
+	headerDisplayClassLocationBundleKey="" displayStringBundleKey="optica$rec.exp.title.optica"
+	descriptionStringBundleKey="optica$rec.exp.description.optica"
+	displayFactoryClassLocationBundleKey="" desktopLocationBundleKey="optica$rec.exp.background.optica"
+	dataModelClassLocationBundleKey="" customizerClassLocationBundleKey="optica$rec.exp.customizer.optica"
+	visible="true" selected="true" order="0" enabled="false" connected="false">
+	<localizationBundle name="optica"
+		location="recresource:///pt/utl/ist/elab/client/optica/resources/messages" />
+	<defaultAcquisitionConfig toolTipBundleKey="optica$rec.exp.dftcfg.optica.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="optica$rec.exp.dftcfg.optica.title.1"
+		classLocationBundleKey="optica$rec.exp.dftcfg.optica.loc.1" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+	<mediaConfig videoLocation="optica$rec.exp.url.optica.video" canSave="true"
+		offlinePlay="true" />
+	<display toolTipBundleKey="optica$rec.exp.display.optica.tip.sensor"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="optica$rec.exp.display.optica.title.sensor"
+		classLocationBundleKey="optica$rec.exp.display.optica.loc.sensor" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="optica$rec.exp.display.optica.tip.1"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="optica$rec.exp.display.optica.title.1"
+		classLocationBundleKey="optica$rec.exp.display.optica.loc.1" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
+	<!-- display toolTipBundleKey="optica$rec.exp.display.optica.tip.2"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="optica$rec.exp.display.optica.title.2"
+		classLocationBundleKey="optica$rec.exp.display.optica.loc.2" visible="true"
+		selected="true" order="0" enabled="false" connected="false" / -->
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+	<webResource toolTipLocationBundleKey="" internalBrowser="false"
+		iconLocationBundleKey="" visible="true" selected="true" order="0"
+		enabled="false" connected="false" />
+</apparatus>
