@@ -2,11 +2,11 @@
 <definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:si="http://soapinterop.org/xsd"
-	xmlns:tns="http://consum.ist.utl.pt/moodle/wspp/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://elab.ist.utl.pt/moodle/wspp/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
-	targetNamespace="http://consum.ist.utl.pt/moodle/wspp/wsdl">
+	targetNamespace="http://elab.ist.utl.pt/moodle/wspp/wsdl">
 	<types>
-		<xsd:schema targetNamespace="http://consum.ist.utl.pt/moodle/wspp/wsdl">
+		<xsd:schema targetNamespace="http://elab.ist.utl.pt/moodle/wspp/wsdl">
 			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
 			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
 
@@ -3023,321 +3023,321 @@
 		<soap:binding style="rpc"
 			transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="login">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#login"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#login"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="logout">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#logout"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#logout"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="edit_users">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_users"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_users"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="get_users">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_users"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_users"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="edit_courses">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_courses"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_courses"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="get_courses">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_courses"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_courses"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 <operation name="get_courses_search">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_courses_search"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_courses_search"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_resources">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_resources"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_resources"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="get_version">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_version"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_version"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="get_sections">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_sections"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_sections"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_instances_bytype">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_instances_bytype"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_instances_bytype"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 
 		<operation name="get_grades">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_grades"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_grades"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_user_grades">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_user_grades"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_user_grades"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="get_course_grades">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_course_grades"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_course_grades"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="enrol_students">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#enrol_students"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#enrol_students"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="unenrol_students">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#unenrol_students"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#unenrol_students"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 
 		<operation name="get_last_changes">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_last_changes"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_last_changes"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_events">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_events"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_events"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_course">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_course"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_course"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_course_byid">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_course_byid"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_course_byid"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_course_byidnumber">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_course_byidnumber"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_course_byidnumber"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 
 		<operation name="get_user">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_user"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_user"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 
 		<operation name="get_roles">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_roles"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_roles"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_role_byid">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_role_byid"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_role_byid"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_role_byname">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_role_byname"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_role_byname"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
@@ -3347,80 +3347,80 @@
 
 
 		<operation name="get_categories">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_categories"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_categories"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_category_byid">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_category_byid"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_category_byid"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_category_byname">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_category_byname"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_category_byname"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 
 		<operation name="get_my_courses">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_my_courses"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_my_courses"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_my_courses_byusername">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_my_courses_byusername"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_my_courses_byusername"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_my_courses_byidnumber">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_my_courses_byidnumber"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_my_courses_byidnumber"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
@@ -3428,549 +3428,549 @@
 
 
 		<operation name="get_user_byusername">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_user_byusername"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_user_byusername"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="get_user_byidnumber">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_user_byidnumber"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_user_byidnumber"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="get_user_byid">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_user_byid"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_user_byid"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="get_users_bycourse">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_users_bycourse"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_users_bycourse"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="count_users_bycourse">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#count_users_bycourse"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#count_users_bycourse"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_courses_bycategory">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_courses_bycategory"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_courses_bycategory"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_groups_bycourse">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_groups_bycourse"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_groups_bycourse"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_group_byid">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_group_byid"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_group_byid"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_groups_byname">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_groups_byname"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_groups_byname"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 
 		<operation name="get_group_members">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_group_members"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_group_members"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_grouping_members">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_grouping_members"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_grouping_members"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_my_id">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_my_id"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_my_id"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 
 		<operation name="get_my_group">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_my_group"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_my_group"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_my_groups">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_my_groups"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_my_groups"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="get_teachers">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_teachers"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_teachers"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_students">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_students"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_students"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="has_role_incourse">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#has_role_incourse"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#has_role_incourse"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_primaryrole_incourse">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_primaryrole_incourse"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_primaryrole_incourse"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 
 		<operation name="get_activities">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_activities"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_activities"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="count_activities">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#count_activities"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#count_activities"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 		<operation name="get_assignment_submissions">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_assignment_submissions"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_assignment_submissions"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 
 		<operation name="add_user">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_user"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_user"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="add_course">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_course"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_course"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="add_group">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_group"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_group"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="add_grouping">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_grouping"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_grouping"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 		<operation name="add_section">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_section"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_section"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 		<operation name="add_label">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_label"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_label"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 <operation name="add_forum">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_forum"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_forum"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 <operation name="add_database">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_database"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_database"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 <operation name="add_assignment">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_assignment"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_assignment"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>		
 		
 		<operation name="add_wiki">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_wiki"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_wiki"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 		<operation name="add_pagewiki">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_pagewiki"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_pagewiki"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		<operation name="delete_user">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#delete_user"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#delete_user"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 		
 		<operation name="add_category">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#add_category"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#add_category"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 
 		<operation name="delete_course">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#delete_course"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#delete_course"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="delete_group">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#delete_group"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#delete_group"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="delete_grouping">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#delete_grouping"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#delete_grouping"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 
 		<operation name="update_user">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#update_user"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#update_user"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="update_course">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#update_course"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#update_course"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 <operation name="update_section">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#update_section"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#update_section"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="update_group">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#update_group"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#update_group"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="update_grouping">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#update_grouping"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#update_grouping"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
@@ -3978,66 +3978,66 @@
 		<!-- BINDING FROM LILLE -->
 
 		<operation name="edit_labels">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_labels"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_labels"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="edit_groups">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_groups"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_groups"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="edit_assignments">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_assignments"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_assignments"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="edit_databases">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_databases"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_databases"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="edit_categories">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_categories"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_categories"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
@@ -4045,313 +4045,313 @@
 
 
 		<operation name="edit_sections">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_sections"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_sections"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="edit_forums">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_forums"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_forums"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="edit_wikis">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_wikis"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_wikis"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="edit_pagesWiki">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_pagesWiki"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_pagesWiki"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_course_to_category">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_course_to_category"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_course_to_category"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_label_to_section">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_label_to_section"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_label_to_section"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_forum_to_section">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_forum_to_section"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_forum_to_section"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_section_to_course">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_section_to_course"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_section_to_course"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_user_to_group">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_user_to_group"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_user_to_group"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_group_to_course">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_group_to_course"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_group_to_course"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_wiki_to_section">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_wiki_to_section"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_wiki_to_section"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_database_to_section">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_database_to_section"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_database_to_section"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_assignment_to_section">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_assignment_to_section"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_assignment_to_section"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_user_to_course">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_user_to_course"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_user_to_course"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_pageWiki_to_wiki">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_pageWiki_to_wiki"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_pageWiki_to_wiki"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="remove_user_from_course">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#remove_user_from_course"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#remove_user_from_course"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_all_groups">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_all_groups"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_all_groups"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_all_forums">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_all_forums"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_all_forums"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_all_labels">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_all_labels"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_all_labels"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_all_wikis">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_all_wikis"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_all_wikis"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_all_pagesWiki">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_all_pagesWiki"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_all_pagesWiki"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_all_assignments">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_all_assignments"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_all_assignments"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_all_databases">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_all_databases"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_all_databases"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="get_all_groupings">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_all_groupings"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_all_groupings"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
@@ -4359,82 +4359,82 @@
 		<!-- /BINDING FROM LILLE -->
 
 		<operation name="remove_user_from_group">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#remove_user_from_group"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#remove_user_from_group"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 
 		<operation name="edit_groupings">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#edit_groupings"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#edit_groupings"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="remove_group_from_grouping">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#remove_group_from_grouping"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#remove_group_from_grouping"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		<operation name="affect_group_to_grouping">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#affect_group_to_grouping"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#affect_group_to_grouping"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 
 		
 		<operation name="set_user_profile_values">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#set_user_profile_values"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#set_user_profile_values"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
 		
 		
 		<operation name="get_users_byprofile">
-			<soap:operation soapAction="http://consum.ist.utl.pt/moodle/wspp/wsdl#get_users_byprofile"
+			<soap:operation soapAction="http://elab.ist.utl.pt/moodle/wspp/wsdl#get_users_byprofile"
 				style="rpc" />
 			<input>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</input>
 			<output>
-				<soap:body use="encoded" namespace="http://consum.ist.utl.pt/moodle/wspp/wsdl"
+				<soap:body use="encoded" namespace="http://elab.ist.utl.pt/moodle/wspp/wsdl"
 					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
 			</output>
 		</operation>
@@ -4442,7 +4442,7 @@
 	</binding>
 	<service name="MoodleWS">
 		<port name="MoodleWSPort" binding="tns:MoodleWSBinding">
-			<soap:address location="http://consum.ist.utl.pt/moodle/wspp/service_pp.php" />
+			<soap:address location="http://elab.ist.utl.pt/moodle/wspp/service_pp.php" />
 		</port>
 	</service>
 </definitions>
