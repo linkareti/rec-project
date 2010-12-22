@@ -1,7 +1,11 @@
 package com.linkare.rec.am.web.auth;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.naming.NamingException;
 
+import com.linkare.commons.jpa.security.Role;
 import com.linkare.commons.jpa.security.User;
 import com.linkare.rec.am.service.UserService;
 import com.linkare.rec.am.web.ex.AuthenticationException;
@@ -26,7 +30,12 @@ public class LocalLoginProvider extends LoginProvider {
 
     @Override
     public UserView authenticate(final String username, final String password, final String loginDomain) throws AuthenticationException {
-	final User user = service.authenticate(username, password);
+	User user = service.findByUsername(username);
+	if (user == null) {
+	    List<Role> emptyList = Collections.emptyList();
+	    return new InternalUserView(username, loginDomain, emptyList);
+	}
+	user = service.authenticate(user, password);
 	if (user == null) {
 	    throw new AuthenticationException();
 	}

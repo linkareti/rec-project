@@ -12,6 +12,8 @@ import com.linkare.commons.jpa.security.User;
  */
 public interface UserService extends BusinessService<User, Long> {
 
+    public User authenticate(final User user, final String password);
+
     public User authenticate(final String username, final String password);
 
     public List<Role> getRoles(final User user);

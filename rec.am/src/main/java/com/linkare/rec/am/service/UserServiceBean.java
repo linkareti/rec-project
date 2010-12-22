@@ -89,6 +89,14 @@ public class UserServiceBean extends BusinessServiceBean<User, Long> implements 
     }
 
     @Override
+    public User authenticate(final User user, final String password) {
+	if (user == null) {
+	    return null;
+	}
+	return getOrCreateDAO().authenticate(user, password);
+    }
+
+    @Override
     public List<Role> getRoles(final User user) {
 	final User mergedUser = getEntityManager().merge(user);
 	return mergedUser == null ? Collections.<Role> emptyList() : mergedUser.getAllParentRoles();
