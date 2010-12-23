@@ -93,7 +93,7 @@ public enum DriverState {
 							+ command.toString());
 			switch (command) {
 			case IDS:
-				if (STOPPED.toString().equals(cmd.getDataHashMap().get(1))) {
+				if (HardwareStatus.valueOf(cmd.getDataHashMap().get(1)) == HardwareStatus.STOPPED) {
 					return logAndReturn(STOPPED);
 				}
 				return logAndReturn(RESETED);
@@ -133,7 +133,7 @@ public enum DriverState {
 			switch (status) {
 			case UNKNOWN:
 			case RESETED:
-			case STOPED:
+			case STOPPED:
 				return true;
 			case ERROR:
 				return true;
@@ -308,7 +308,7 @@ public enum DriverState {
 
 		public boolean acceptHardwareStatus(HardwareStatus status) {
 			switch (status) {
-			case STOPED:
+			case STOPPED:
 				return true;
 			default:
 				return false;
@@ -395,7 +395,7 @@ public enum DriverState {
 
 		public boolean acceptHardwareStatus(HardwareStatus status) {
 			switch (status) {
-			case STOPED:
+			case STOPPED:
 				return true;
 			case UNKNOWN:
 				return true;
@@ -486,7 +486,7 @@ public enum DriverState {
 
 		public boolean acceptHardwareStatus(HardwareStatus status) {
 			switch (status) {
-			case STOPED:
+			case STOPPED:
 				return true;
 			case UNKNOWN:
 				return true;
@@ -666,7 +666,7 @@ public enum DriverState {
 			switch (status) {
 			case CONFIGURED:
 				return true;
-			case STOPED:
+			case STOPPED:
 				return true;
 			default:
 				return false;
@@ -755,7 +755,7 @@ public enum DriverState {
 			switch (status) {
 			case CONFIGURED:
 				return true;
-			case STOPED:
+			case STOPPED:
 				return true;
 			default:
 				return false;
@@ -1012,7 +1012,7 @@ public enum DriverState {
 			switch (status) {
 			case UNKNOWN:
 				return true;
-			case STOPED:
+			case STOPPED:
 				return true;
 			case CONFIGURED:
 				return true;
@@ -1273,7 +1273,7 @@ public enum DriverState {
 
 		public boolean acceptHardwareStatus(HardwareStatus status) {
 			switch (status) {
-			case STOPED:
+			case STOPPED:
 			case RESETED:
 				return true;
 			default:
