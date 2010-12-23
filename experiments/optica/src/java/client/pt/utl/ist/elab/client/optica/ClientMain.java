@@ -17,7 +17,7 @@ public class ClientMain {
 	public static void main(String[] args) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		ReCBaseUI ui = new ReCBaseUI();
-		ui.setApparatusAutoConnectID("OPTICA");
+		ui.setApparatusAutoConnectID("ELAB_OPTICA_DSPIC_V1.0");
 		ui.setVisible(true);
 	}
 }
