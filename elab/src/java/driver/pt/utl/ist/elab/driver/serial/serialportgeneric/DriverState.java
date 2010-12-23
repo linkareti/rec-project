@@ -3,6 +3,7 @@ package pt.utl.ist.elab.driver.serial.serialportgeneric;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandList;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.TimeoutNode;
 
@@ -45,7 +46,7 @@ import com.linkare.rec.acquisition.IncorrectStateException;
 public enum DriverState {
 
 	ERROR {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -84,7 +85,7 @@ public enum DriverState {
 	},
 
 	UNKNOWN {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -92,6 +93,9 @@ public enum DriverState {
 							+ command.toString());
 			switch (command) {
 			case IDS:
+				if (STOPPED.toString().equals(cmd.getDataHashMap().get(1))) {
+					return logAndReturn(STOPPED);
+				}
 				return logAndReturn(RESETED);
 			case CFG:
 			case CFGOK:
@@ -138,7 +142,7 @@ public enum DriverState {
 	},
 
 	STOPING {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -181,7 +185,7 @@ public enum DriverState {
 	},
 
 	STOPWAIT {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -224,7 +228,7 @@ public enum DriverState {
 	},
 
 	STOPPED {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -311,7 +315,7 @@ public enum DriverState {
 	},
 
 	CONFIGURING {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -402,7 +406,7 @@ public enum DriverState {
 	},
 
 	CONFIGUREWAIT {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -493,7 +497,7 @@ public enum DriverState {
 	},
 
 	CONFIGURED {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -580,7 +584,7 @@ public enum DriverState {
 	},
 
 	STARTING {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -669,7 +673,7 @@ public enum DriverState {
 	},
 
 	STARTWAIT {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -758,7 +762,7 @@ public enum DriverState {
 	},
 
 	STARTED {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -845,7 +849,7 @@ public enum DriverState {
 	},
 
 	RECEIVINGDATA {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -889,7 +893,7 @@ public enum DriverState {
 
 	RECEIVINGBIN {
 		@Deprecated
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -924,7 +928,7 @@ public enum DriverState {
 	},
 
 	RECEIVINGCONFIG {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -1019,7 +1023,7 @@ public enum DriverState {
 	},
 
 	RESETING {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -1104,7 +1108,7 @@ public enum DriverState {
 	},
 
 	RESETWAIT {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -1189,7 +1193,7 @@ public enum DriverState {
 	},
 
 	RESETED {
-		public DriverState nextState(SerialPortCommandList command) {
+		public DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd) {
 			// Log this event
 			Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(
 					Level.INFO,
@@ -1267,7 +1271,7 @@ public enum DriverState {
 
 		public boolean acceptHardwareStatus(HardwareStatus status) {
 			switch (status) {
-			case UNKNOWN: // FIXME martelanço para aceitar este estado da optica
+			case STOPED:
 			case RESETED:
 				return true;
 			default:
@@ -1465,8 +1469,9 @@ public enum DriverState {
 	 * @param command
 	 * @return {@link DriverState}
 	 * @author fdias
+	 * @param cmd 
 	 */
-	public abstract DriverState nextState(SerialPortCommandList command);
+	public abstract DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd);
 
 	/**
 	 * 

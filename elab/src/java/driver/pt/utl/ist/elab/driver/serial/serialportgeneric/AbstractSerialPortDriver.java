@@ -741,7 +741,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		}
 		
 		// the next state according to the message of the driver
-		DriverState newDriverState = currentDriverState.nextState(thisCommand);
+		DriverState newDriverState = currentDriverState.nextState(thisCommand, cmd);
 		if (newDriverState != currentDriverState) {
 			// new state for the driver
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINEST,
