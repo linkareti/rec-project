@@ -132,6 +132,8 @@ public enum DriverState {
 		public boolean acceptHardwareStatus(HardwareStatus status) {
 			switch (status) {
 			case UNKNOWN:
+			case RESETED:
+			case STOPED:
 				return true;
 			case ERROR:
 				return true;
