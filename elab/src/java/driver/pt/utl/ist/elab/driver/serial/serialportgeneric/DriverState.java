@@ -54,32 +54,6 @@ public enum DriverState {
 			switch (command) {
 			case IDS:
 				return logAndReturn(DriverState.UNKNOWN);
-			case CFG:
-				return logAndReturn(this);
-			case CFGOK:
-				return logAndReturn(this);
-			case CUR:
-				return logAndReturn(this);
-			case STR:
-				return logAndReturn(this);
-			case STROK:
-				return logAndReturn(this);
-			case DAT:
-				return logAndReturn(this);
-			case BIN:
-				return logAndReturn(this);
-			case END:
-				return logAndReturn(this);
-			case STP:
-				return logAndReturn(this);
-			case STPOK:
-				return logAndReturn(this);
-			case RST:
-				return logAndReturn(this);
-			case RSTOK:
-				return logAndReturn(this);
-			case ERR:
-				return logAndReturn(this);
 			default:
 				return logAndReturn(this);
 			}
@@ -90,30 +64,6 @@ public enum DriverState {
 			switch (command) {
 			case IDS:
 				return true;
-			case CFG:
-				return false;
-			case CFGOK:
-				return false;
-			case CUR:
-				return false;
-			case STR:
-				return false;
-			case STROK:
-				return false;
-			case DAT:
-				return false;
-			case BIN:
-				return false;
-			case END:
-				return false;
-			case STP:
-				return false;
-			case STPOK:
-				return false;
-			case RST:
-				return false;
-			case RSTOK:
-				return false;
 			case ERR:
 				return true;
 			default:
@@ -144,27 +94,16 @@ public enum DriverState {
 			case IDS:
 				return logAndReturn(RESETED);
 			case CFG:
-				return logAndReturn(this);
 			case CFGOK:
-				return logAndReturn(this);
 			case CUR:
-				return logAndReturn(this);
 			case STR:
-				return logAndReturn(this);
 			case STROK:
-				return logAndReturn(this);
 			case DAT:
-				return logAndReturn(this);
 			case BIN:
-				return logAndReturn(this);
 			case END:
-				return logAndReturn(this);
 			case STP:
-				return logAndReturn(this);
 			case STPOK:
-				return logAndReturn(this);
 			case RST:
-				return logAndReturn(this);
 			case RSTOK:
 				return logAndReturn(this);
 			case ERR:
@@ -179,30 +118,6 @@ public enum DriverState {
 			switch (command) {
 			case IDS:
 				return true;
-			case CFG:
-				return false;
-			case CFGOK:
-				return false;
-			case CUR:
-				return false;
-			case STR:
-				return false;
-			case STROK:
-				return false;
-			case DAT:
-				return false;
-			case BIN:
-				return false;
-			case END:
-				return false;
-			case STP:
-				return false;
-			case STPOK:
-				return false;
-			case RST:
-				return false;
-			case RSTOK:
-				return false;
 			case ERR:
 				return true;
 			default:
@@ -232,30 +147,8 @@ public enum DriverState {
 			switch (command) {
 			case IDS:
 				return logAndReturn(this);
-			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
-			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
-			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
-			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
-			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
-			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
-			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
-			case END:
-				return logAndReturn(DriverState.UNKNOWN);
 			case STP:
 				return logAndReturn(DriverState.STOPWAIT);
-			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
-			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
-			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
 			case ERR:
 				return logAndReturn(DriverState.ERROR);
 			default:
@@ -268,30 +161,8 @@ public enum DriverState {
 			switch (command) {
 			case IDS:
 				return true;
-			case CFG:
-				return false;
-			case CFGOK:
-				return false;
-			case CUR:
-				return false;
-			case STR:
-				return false;
-			case STROK:
-				return false;
-			case DAT:
-				return false;
-			case BIN:
-				return false;
-			case END:
-				return false;
 			case STP:
 				return true;
-			case STPOK:
-				return false;
-			case RST:
-				return false;
-			case RSTOK:
-				return false;
 			case ERR:
 				return true;
 			default:
@@ -319,30 +190,8 @@ public enum DriverState {
 			switch (command) {
 			case IDS:
 				return logAndReturn(this);
-			case CFG:
-				return logAndReturn(DriverState.UNKNOWN);
-			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
-			case CUR:
-				return logAndReturn(DriverState.UNKNOWN);
-			case STR:
-				return logAndReturn(DriverState.UNKNOWN);
-			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
-			case DAT:
-				return logAndReturn(DriverState.UNKNOWN);
-			case BIN:
-				return logAndReturn(DriverState.UNKNOWN);
-			case END:
-				return logAndReturn(DriverState.UNKNOWN);
-			case STP:
-				return logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
 				return logAndReturn(DriverState.STOPPED);
-			case RST:
-				return logAndReturn(DriverState.UNKNOWN);
-			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
 			case ERR:
 				return logAndReturn(DriverState.ERROR);
 			default:
@@ -355,30 +204,8 @@ public enum DriverState {
 			switch (command) {
 			case IDS:
 				return true;
-			case CFG:
-				return false;
-			case CFGOK:
-				return false;
-			case CUR:
-				return false;
-			case STR:
-				return false;
-			case STROK:
-				return false;
-			case DAT:
-				return false;
-			case BIN:
-				return false;
-			case END:
-				return false;
-			case STP:
-				return false;
 			case STPOK:
 				return true;
-			case RST:
-				return false;
-			case RSTOK:
-				return false;
 			case ERR:
 				return true;
 			default:
