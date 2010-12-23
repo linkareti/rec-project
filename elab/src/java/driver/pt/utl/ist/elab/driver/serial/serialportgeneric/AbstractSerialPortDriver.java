@@ -686,7 +686,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 						Logger.getLogger(SERIAL_PORT_LOGGER).log(
 								Level.WARNING,
 								"Error on command IDS, wrong ID of hardware: "
-										+ (cmd.getDataHashMap().size() > 1 ? cmd.getDataHashMap().get(0) : "null"));
+										+ (cmd.getDataHashMap().size() > 0 ? cmd.getDataHashMap().get(0) : "null"));
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
 						// terminates this driver execution
@@ -697,7 +697,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 						Logger.getLogger(SERIAL_PORT_LOGGER).log(
 								Level.WARNING,
 								"Error on command IDS, wrong status of hardware:"
-										+ (cmd.getDataHashMap().size() > 2 ? cmd.getDataHashMap().get(1) : "null"));
+										+ (cmd.getDataHashMap().size() > 1 ? cmd.getDataHashMap().get(1) : "null"));
 						currentDriverState = DriverState.UNKNOWN;
 						currentDriverState.startTimeoutClock();
 						// terminates this driver execution
