@@ -1200,20 +1200,89 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 //		fireICustomizerListenerDone();
 
         // int nsamples = sldNumSamples.getValue() < 10 ? 10 : sldNumSamples.getValue();
+    	
+    	int nsamples = 0;
+    	
+    	// inicializar parametros
+    	int protocol = 1;
+    	float ang1Min = 0;
+    	float ang1Max = 360;
+    	float deltaAng1 = 0.2f;
+    	int delay = 0;
+    	int polarizacao = 0;
+    	float angPol = 0;
+    	int checkBox = 0;
+    	
+		protocol = jTabbedPaneOptica.getSelectedIndex() + 1;
+		
+		switch (protocol) {
+		case 1:
+			ang1Min = (float) jSliderSnellAngleVarationMin.getValue() / 10.F;
+			ang1Max = (float) jSliderSnellAngleVarationMax.getValue() / 10.F;
+			deltaAng1 = (float) jSliderSnellDelta.getValue() / 10.F;
+			
+			delay = jSliderSnellDelay.getValue();
+			nsamples = (int) ((ang1Max - ang1Min) / deltaAng1);
+			break;
+			
+		case 2:
+			ang1Min = (float) jSliderEnergyConservationPexiglass.getValue() / 10.F;
+			if (jRadioButtonEnergyConservationIsPolarizationYes.isSelected()) {
+				polarizacao = 1;
+			} else {
+				// valores identicos 'a inicializacao
+				polarizacao = 0;
+			}
+			angPol = (float) jSliderEnergyConservationPolarization.getValue() / 10.F;
+			
+			nsamples = 1; // TODO FIXME 
+			break;
+			
+		case 3:
+			ang1Min = (float) jSliderCriticalAngleVarationMin.getValue() / 10.F;
+			ang1Max = (float) jSliderCriticalAngleVarationMax.getValue() / 10.F;
+			
+//			checkBox // TODO FIXME  
+			
+			nsamples = (int) ((ang1Max - ang1Min) / deltaAng1); // TODO ?
+			break;
+			
+		case 4:
+			ang1Min = (float) jSliderBrewsterAngleVarationMin.getValue() / 10.F;
+			ang1Max = (float) jSliderBrewsterAngleVarationMax.getValue() / 10.F;
+			angPol = (float) jSliderBrewsterAnglePolarization.getValue() / 10.F;
+			
+//			checkBox // TODO FIXME
+			
+			nsamples = (int) ((ang1Max - ang1Min) / deltaAng1); // TODO ?
+			break;
+			
+		case 5:
+			ang1Min = 3;
+			ang1Max = 1;
+			deltaAng1 = 1;
+			// valores identicos 'a inicializacao
+//			delay = 0;
+//			polarizacao = 0;
+//			angPol = 0;
+//			checkBox = 0;
+			nsamples = 0; // TODO verificar viabilidade mas o data collector deve estar 'a espera de ler resultado
+			break;
 
-        int protocol = 1;
-        float minAngle = (float) jSliderSnellAngleVarationMin.getValue() / 10.F;
-        float maxAngle = (float) jSliderSnellAngleVarationMax.getValue() / 10.F;
-        float deltaAngle = (float) jSliderSnellDelta.getValue() / 10.F;
-        int delay = jSliderSnellDelay.getValue();
-        int nsamples = (int) ((maxAngle - minAngle) / deltaAngle);
+		default:
+			// TODO protocolo inválido
+			return;
+		}
 
         acqConfig.setTotalSamples(nsamples);
         acqConfig.getSelectedHardwareParameter("protocolo").setParameterValue(String.valueOf(protocol));
-        acqConfig.getSelectedHardwareParameter("ang1_min").setParameterValue(String.valueOf(minAngle));
-        acqConfig.getSelectedHardwareParameter("ang1_max").setParameterValue(String.valueOf(maxAngle));
-        acqConfig.getSelectedHardwareParameter("delta_ang1").setParameterValue(String.valueOf(deltaAngle));
+        acqConfig.getSelectedHardwareParameter("ang1_min").setParameterValue(String.valueOf(ang1Min));
+        acqConfig.getSelectedHardwareParameter("ang1_max").setParameterValue(String.valueOf(ang1Max));
+        acqConfig.getSelectedHardwareParameter("delta_ang1").setParameterValue(String.valueOf(deltaAng1));
         acqConfig.getSelectedHardwareParameter("delay").setParameterValue(String.valueOf(delay));
+        acqConfig.getSelectedHardwareParameter("polarizacao").setParameterValue(String.valueOf(polarizacao));
+        acqConfig.getSelectedHardwareParameter("ang_pol").setParameterValue(String.valueOf(angPol));
+        acqConfig.getSelectedHardwareParameter("check_box").setParameterValue(String.valueOf(checkBox));
 
 //		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
 //				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
