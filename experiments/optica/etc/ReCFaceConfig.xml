@@ -1,4 +1,4 @@
-<apparatus toolTipBundleKey="optica$rec.exp.tip.optica" location="OPTICA"
+<apparatus toolTipBundleKey="optica$rec.exp.tip.optica" location="ELAB_OPTICA_DSPIC_V1.0"
 	iconLocationBundleKey="optica$rec.exp.icon.optica"
 	headerDisplayClassLocationBundleKey="" displayStringBundleKey="optica$rec.exp.title.optica"
 	descriptionStringBundleKey="optica$rec.exp.description.optica"

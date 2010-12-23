@@ -1,4 +1,4 @@
-<Apparatus location="OPTICA"
+<Apparatus location="ELAB_OPTICA_DSPIC_V1.0"
 	customizerClassLocationBundleKey="optica$rec.exp.customizer.optica"
 	toolTipBundleKey="optica$rec.exp.tip.optica" iconLocationBundleKey="optica$rec.exp.icon.optica"
 	descriptionStringBundleKey="optica$rec.exp.description.optica"
