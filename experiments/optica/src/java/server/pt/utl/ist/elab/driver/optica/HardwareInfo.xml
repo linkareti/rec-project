@@ -134,4 +134,31 @@
 		</scale>
 	</ChannelInfo>
 
+	<ChannelInfo name="Polarização" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Polarização" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">1</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">0</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="Ângulo polarização" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Ângulo polarização [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">90.</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="Check box" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Check box" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">7</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">0</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
 </HardwareInfo>
