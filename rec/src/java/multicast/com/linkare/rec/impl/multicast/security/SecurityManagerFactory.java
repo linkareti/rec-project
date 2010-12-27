@@ -53,6 +53,7 @@ public final class SecurityManagerFactory {
 							+ " - loading DefaultSecurityManager!");
 			LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
 					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			e.printStackTrace();
 		} catch (LinkageError e) {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 					Level.INFO,
@@ -60,6 +61,7 @@ public final class SecurityManagerFactory {
 							+ " - loading DefaultSecurityManager!");
 			LoggerUtil.logThrowable("Error loading specified SecurityManager", e, Logger
 					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			e.printStackTrace();
 		} finally {
 			if (secManager == null) {
 				secManager = new DefaultSecurityManager();
@@ -109,6 +111,7 @@ public final class SecurityManagerFactory {
 		} catch (Exception e) {
 			LoggerUtil.logThrowable("Exception occured authenticating user! Returning false!", e, Logger
 					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -119,6 +122,7 @@ public final class SecurityManagerFactory {
 		} catch (Exception e) {
 			LoggerUtil.logThrowable("Exception occured authorizing user for operation! Returning false!", e, Logger
 					.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
+			e.printStackTrace();
 			return false;
 		}
 	}
