@@ -526,7 +526,15 @@ public class AleatorioDriver extends BaseDriver {
 				} catch (InterruptedException e) {
 				}
 
-				imageToAnalyze = webcam.getImage();
+				try {
+					imageToAnalyze = webcam.getImage();
+				} catch (Exception e) {
+					LoggerUtil
+							.logThrowable("Unable to get image from webcam!", e, Logger.getLogger("Aleatorio.logger"));
+					// TODO FIXME Handle exception and shutdown experiment!
+				}
+				
+				
 				// 09/10/2008
 				// change to speed up transmission of image and avoid crashing
 				// due to poor lighting!
