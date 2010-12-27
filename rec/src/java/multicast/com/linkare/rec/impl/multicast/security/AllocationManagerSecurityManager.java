@@ -334,6 +334,12 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 * @return
 	 */
 	private boolean checkDataProducerOperations(IResource resource, IUser user, IOperation op) {
+		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+				Level.FINE,
+				"Checking data producer operations for user [" + user.getUserName() + "] resource ["
+						+ resource.getProperties().get(resource.getResourceType().getPropertyKey()) + "] operation ["
+						+ op.getOperation() + "]");
+		
 		IResource hardwareResource = resource.getEnclosingResource();
 		List<AllocationDTO> currentAllocation = findAllocationFor(hardwareResource.getProperties().get(
 				hardwareResource.getResourceType().getPropertyKey()));
