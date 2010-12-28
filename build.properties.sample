@@ -9,9 +9,9 @@ javac.sourcelevel=1.6
 copy.encoding=UTF-8
 
 #this next section esplicits which experiments are going to be compiled, packaged, distributed...
-#you need only one list, the reason they are separated is to allow building elab and elab virtual separatly
+#you need only one list, the reason they are separated is to allow building e-lab and e-lab virtual separatly
 #just uncomment the one you need
-#list of experiments in ELab
+#list of experiments in e-lab
 experiment.list=aleatorio,gamma,vtiro,vpend2m
 
 #this next section esplicits which labs are going to be compiled, packaged, distributed...
@@ -59,10 +59,10 @@ max.memory=1024m
 min.memory=128m
 
 ##COMMON MANIFEST## (adopted from com.linkare.commons project)
-com.linkare.rec.spec.title=ReC - Elab
+com.linkare.rec.spec.title=ReC - e-lab
 com.linkare.rec.spec.version=1.0.0
 com.linkare.rec.spec.vendor=Linkare TI
-com.linkare.rec.impl.title=ReC - Elab
+com.linkare.rec.impl.title=ReC - e-lab
 com.linkare.rec.impl.version=1.0.0
 com.linkare.rec.impl.vendor=Linkare TI
 
@@ -117,14 +117,14 @@ video.enabled=yes
 
 ##JNLP PROPERTIES
 #Please define the codebase without the trailing slash... It will be added automagically when needed!
-codebase=http://elab.ist.utl.pt/rec/eLab
+codebase=http://elab.ist.utl.pt/rec/e-lab
 href=elab-client.jnlp
-title=eLab - Full Laboratory
+title=e-lab - Full Laboratory
 vendor=I.S.T. - U.T.L.
 homepage=http://elab.ist.utl.pt/rec
-one-line=Laboratório eLab - ME
-tooltip=Laboratório eLab - ME
-short=Laboratório eLab - ME
+one-line=Laboratório e-lab - ME
+tooltip=Laboratório e-lab - ME
+short=Laboratório e-lab - ME
 j2se-version=1.6
 
 
@@ -140,7 +140,7 @@ experiment.driver.main-class=pt.utl.ist.elab.driver.@{experiment.name}.ServerMai
 
 #Marketing/Information messages
 #The following properties are for the elab application title.
-elab.title=eLab
+elab.title=e-lab
 elab.vendor=IST
 elab.homepage=http://elab.ist.utl.pt
 elab.description=Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal
@@ -149,7 +149,7 @@ elab.description.tooltip=Laboratórios Online
 elab.description.short=Labs Online
 elab.icon=images/elab_icon.jpg
 elab.icon.splash=images/elab_splash.jpg
-elab.title.en=eLab
+elab.title.en=e-lab
 elab.homepage.en=http://elab.ist.utl.pt
 elab.description.en=Instituto Superior Técnico's online laboratories - available for the Portuguese Education Ministery
 elab.description.oneline.en=Online Labs
