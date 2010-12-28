@@ -59,7 +59,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	public static final String MCCONTROLLER_SECURITYMANAGER_LOGGER = "ReC.MultiCast.SecurityManager.Logger";
 
 	static {
-		Logger l = LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER);
+		Logger l = Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER);
 		if (l == null) {
 			LogManager.getLogManager().addLogger(Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER));
 		}
@@ -82,7 +82,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		try {
 			localInetAddress = InetAddress.getLocalHost().getCanonicalHostName();
 		} catch (UnknownHostException e) {
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 					java.util.logging.Level.FINEST, "Unable to find local host name " + e.getMessage());
 		}
 		LABORATORY_ID = Defaults.defaultIfEmpty(System.getProperty(SYSPROP_LABORATORY_ID), localInetAddress);
@@ -126,7 +126,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 */
 	public AllocationManagerSecurityManager() throws NamingException {
 		
-		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO, "Instatiating the allocation security manager.");
+		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO, "Instatiating the allocation security manager.");
 
 		lookupAllocationManager();
 		
@@ -201,18 +201,18 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 * @return
 	 */
 	private boolean checkAllocationsEnter(String hardwareId, String username) {
-		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
+		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
 				"Check allocations for user [" + username + "] hardware ["+hardwareId+"]");
 		
 		List<AllocationDTO> allocations = findAllocationFor(hardwareId);
 		if (allocations.isEmpty()) {
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 					"There aren't allocations.");
 			return true;
 		}
 		
 		boolean checkUserOrOwner = checkUserOrOwner(allocations, username);
-		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 				"Check allocations is [" + checkUserOrOwner + "]");
 		return checkUserOrOwner;
 	}
@@ -296,14 +296,14 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	private boolean checkLogin(String username, byte[] auth) {
 		String password = new String(auth);
 		try {
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
 					"Autenticating user [" + username + "]");
 			boolean authenticate = allocationManager.authenticate(username, password);
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 					"Authentication is [" + authenticate + "]");
 			return authenticate;
 		} catch (RemoteException e) {
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER)
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER)
 					.log(java.util.logging.Level.FINEST,
 							"Unable to comunicate with allocation manager " + e.getMessage(), e);
 			return false;
@@ -334,7 +334,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 * @return
 	 */
 	private boolean checkDataProducerOperations(IResource resource, IUser user, IOperation op) {
-		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 				Level.FINE,
 				"Checking data producer operations for user [" + user.getUserName() + "] resource ["
 						+ resource.getProperties().get(resource.getResourceType().getPropertyKey()) + "] operation ["
@@ -366,7 +366,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 * @return
 	 */
 	private boolean checkMCHardwareOperations(IResource resource, IUser user, IOperation op) {
-		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 				Level.FINE,
 				"Checking multicast hardware operations for user [" + user.getUserName() + "] resource ["
 						+ resource.getProperties().get(resource.getResourceType().getPropertyKey()) + "] operation ["
@@ -379,15 +379,15 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			if (op.getOperation() == IOperation.OP_LOCK || op.getOperation() == IOperation.OP_CONFIG
 					|| op.getOperation() == IOperation.OP_START || op.getOperation() == IOperation.OP_START_OUTPUT) {
 				boolean checkUserAsOwner = checkUserAsOwner(currentAllocation, user.getUserName());
-				LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+				Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 						"Hardware operations is [" + checkUserAsOwner + "]");
 				return checkUserAsOwner;
 			}
 		} else {
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 					"There aren't allocations.");
 		}
-		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 				"Hardware operations is [true]");
 		return true;
 	}
@@ -432,16 +432,16 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 * @param end
 	 */
 	private void refreshAllocations(Date begin, Date end) {
-		LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
+		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
 				"Refresh allocation with Begin [" + begin + "] End [" + end + "]");
 		try {
 			List<AllocationDTO> newAllocations = allocationManager.getBy(begin, end, LABORATORY_ID);
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 					"Received " + newAllocations.size() + " allocations.");
 
 			mergeAllocations(newAllocations);
 			cleanNotifiedUsers(newAllocations);
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 					"Merged allocations " + allocationsMap);
 		} catch (Exception e) {
 			try {
@@ -471,7 +471,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		 */
 		@Override
 		public void run() {
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"AllocationsRefreshScheduledUnit - Going to refresh the allocations.");
 			
 			Calendar nearTime = Calendar.getInstance();
@@ -499,10 +499,10 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		 */
 		@Override
 		public void run() {
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"ClientsAllocationScheduledUnit - Going to check clients allocations.");
 			
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 					Level.FINE,
 					"Are there allocations [" + (!allocationsMap.isEmpty()) + "] and multicast hardwares ["
 							+ (multiCastHardwares != null) + "]");
@@ -524,7 +524,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 							// aren't in the current allocations
 							Set<String> usernamesToKick = findHardwareUsersNotInAllocations(currentAllocationsMap, rmch);
 							if (!usernamesToKick.isEmpty()) {
-								LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+								Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 										Level.INFO,
 										"The users [" + usernamesToKick
 												+ "] aren't in the current allocation for the hardware ["
@@ -559,7 +559,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 									}
 								}
 								if (!usernamesToNotify.isEmpty()) {
-									LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+									Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 											Level.INFO,
 											"The users [" + usernamesToNotify
 													+ "] aren't in the current allocation for the hardware ["
@@ -572,14 +572,14 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 						}
 					}
 				} else {
-					LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
+					Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
 							"There are no near allocations at this time");
 				}
 			}
 
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"Client allocations terminated and kicked [" + kickedClients + "] clients");
-			LogManager.getLogManager().getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"Client allocations notified [" + notifiedClients + "] clients");
 		}
 		
