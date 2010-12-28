@@ -317,6 +317,12 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 */
 	@Override
 	public boolean authorize(IResource resource, IUser user, IOperation op) {
+		if (user == null || user.getUserName() == null || resource == null || resource.getResourceType() == null
+				|| resource.getProperties().get(resource.getResourceType().getPropertyKey()) == null || op == null) {
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
+					Level.WARNING, "Invalid parameters in authorize method");
+			throw new RuntimeException("Invalid parameters in authorize method");
+		}
 		switch (resource.getResourceType()) {
 		case MCHARDWARE:
 			return checkMCHardwareOperations(resource, user, op);
