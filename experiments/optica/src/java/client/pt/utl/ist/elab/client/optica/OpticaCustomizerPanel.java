@@ -108,9 +108,9 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jButtonCancel = new javax.swing.JButton();
         jButtonDefaultConfig = new javax.swing.JButton();
 
-        setMinimumSize(new java.awt.Dimension(350, 460));
+        setMinimumSize(new java.awt.Dimension(350, 490));
         setName("OpticaCustomizer"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(350, 460));
+        setPreferredSize(new java.awt.Dimension(350, 490));
 
         jTabbedPaneOptica.setName("jTabbedPaneOptica"); // NOI18N
         jTabbedPaneOptica.setPreferredSize(new java.awt.Dimension(350, 417));
@@ -1606,42 +1606,48 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jLabelSnellDelay.setVisible(false);
         jLabelSnellDelta.setVisible(false);
 
-        Dictionary<Integer, JLabel> slidersAngle360Labels = new Hashtable<Integer, JLabel>();
-        slidersAngle360Labels.put(new Integer(0), new JLabel("0.0"));
-        slidersAngle360Labels.put(new Integer(900), new JLabel("90.0"));
-        slidersAngle360Labels.put(new Integer(1800), new JLabel("180.0"));
-        slidersAngle360Labels.put(new Integer(2700), new JLabel("270.0"));
-        slidersAngle360Labels.put(new Integer(3600), new JLabel("360.0"));
+        Dictionary<Integer, JLabel> slidersAngle0360Labels = new Hashtable<Integer, JLabel>();
+        slidersAngle0360Labels.put(new Integer(0), new JLabel("0.0"));
+        slidersAngle0360Labels.put(new Integer(900), new JLabel("90.0"));
+        slidersAngle0360Labels.put(new Integer(1800), new JLabel("180.0"));
+        slidersAngle0360Labels.put(new Integer(2700), new JLabel("270.0"));
+        slidersAngle0360Labels.put(new Integer(3600), new JLabel("360.0"));
+
+        Dictionary<Integer, JLabel> slidersAngle02360Labels = new Hashtable<Integer, JLabel>();
+        slidersAngle02360Labels.put(new Integer(2), new JLabel("0.2"));
+        slidersAngle02360Labels.put(new Integer(900), new JLabel("90.0"));
+        slidersAngle02360Labels.put(new Integer(1800), new JLabel("180.0"));
+        slidersAngle02360Labels.put(new Integer(2700), new JLabel("270.0"));
+        slidersAngle02360Labels.put(new Integer(3600), new JLabel("360.0"));
 
         Dictionary<Integer, JLabel> slidersAngle90Labels = new Hashtable<Integer, JLabel>();
         slidersAngle90Labels.put(new Integer(0), new JLabel("0.0"));
         slidersAngle90Labels.put(new Integer(450), new JLabel("45.0"));
         slidersAngle90Labels.put(new Integer(900), new JLabel("90.0"));
 
-        jSliderSnellAngleVarationMin.setLabelTable(slidersAngle360Labels);
-        jSliderSnellAngleVarationMax.setLabelTable(slidersAngle360Labels);
-        jSliderSnellDelta.setLabelTable(slidersAngle360Labels);
+        jSliderSnellAngleVarationMin.setLabelTable(slidersAngle0360Labels);
+        jSliderSnellAngleVarationMax.setLabelTable(slidersAngle0360Labels);
+        jSliderSnellDelta.setLabelTable(slidersAngle02360Labels);
         installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMin);
         installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMax);
         installDecimalFormatter(jFormattedTextFieldSnellDelta);
         installNaturalFormatter(jFormattedTextFieldSnellDelay);
 
-        jSliderEnergyConservationPexiglass.setLabelTable(slidersAngle360Labels);
+        jSliderEnergyConservationPexiglass.setLabelTable(slidersAngle0360Labels);
         jSliderEnergyConservationPolarization.setLabelTable(slidersAngle90Labels);
         installDecimalFormatter(jFormattedTextFieldEnergyConservationPexiglass);
         installDecimalFormatter(jFormattedTextFieldEnergyConservationPolarization);
 
-        jSliderCriticalAngleVarationMin.setLabelTable(slidersAngle360Labels);
-        jSliderCriticalAngleVarationMax.setLabelTable(slidersAngle360Labels);
-        jSliderCriticalAngleDelta.setLabelTable(slidersAngle360Labels);
+        jSliderCriticalAngleVarationMin.setLabelTable(slidersAngle0360Labels);
+        jSliderCriticalAngleVarationMax.setLabelTable(slidersAngle0360Labels);
+        jSliderCriticalAngleDelta.setLabelTable(slidersAngle02360Labels);
         installDecimalFormatter(jFormattedTextFieldCriticalAngleVarationMin);
         installDecimalFormatter(jFormattedTextFieldCriticalAngleVarationMax);
         installDecimalFormatter(jFormattedTextFieldCriticalAngleDelta);
 
-        jSliderBrewsterAngleVarationMin.setLabelTable(slidersAngle360Labels);
-        jSliderBrewsterAngleVarationMax.setLabelTable(slidersAngle360Labels);
-        jSliderBrewsterAngleDelta.setLabelTable(slidersAngle360Labels);
-
+        jSliderBrewsterAngleVarationMin.setLabelTable(slidersAngle0360Labels);
+        jSliderBrewsterAngleVarationMax.setLabelTable(slidersAngle0360Labels);
+        jSliderBrewsterAngleDelta.setLabelTable(slidersAngle02360Labels);
         jSliderBrewsterAnglePolarization.setLabelTable(slidersAngle90Labels);
         installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMin);
         installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMax);

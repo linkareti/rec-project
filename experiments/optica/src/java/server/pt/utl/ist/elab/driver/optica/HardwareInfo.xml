@@ -84,7 +84,7 @@
 	<Frequency type="SamplingIntervalType" multiplier="milli">100</Frequency>
 
 	<sampling-scale>
-		<min-samples>10</min-samples>
+		<min-samples>1</min-samples>
 		<max-samples>1800</max-samples>
 		<step-samples>1</step-samples>
 	</sampling-scale>
