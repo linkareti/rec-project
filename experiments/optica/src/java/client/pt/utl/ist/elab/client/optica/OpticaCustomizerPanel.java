@@ -10,16 +10,16 @@
  */
 package pt.utl.ist.elab.client.optica;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
-import java.text.DecimalFormat;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -27,7 +27,10 @@ import javax.swing.text.NumberFormatter;
  */
 public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.linkare.rec.impl.client.customizer.ICustomizer {
 
-    /** Creates new form OpticaCustomizerPanel */
+    /** Generated UID */
+	private static final long serialVersionUID = -6367415208236048245L;
+
+	/** Creates new form OpticaCustomizerPanel */
     public OpticaCustomizerPanel() {
         initComponents();
 
@@ -147,7 +150,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderSnellAngleVarationMax.setValue(3600);
         jSliderSnellAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderSnellAngleVarationMax.setName("jSliderSnellAngleVarationMax"); // NOI18N
-        jSliderSnellAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderSnellAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderSnellAngleVarationMax.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderSnellAngleVarationMaxStateChanged(evt);
@@ -201,15 +204,22 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelSnellAngleVariationLayout.setVerticalGroup(
             jPanelSnellAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSnellAngleVariationLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelSnellAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderSnellAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldSnellAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelSnellAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldSnellAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSliderSnellAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelSnellAngleVariationLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSliderSnellAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelSnellAngleVariationLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jFormattedTextFieldSnellAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanelSnellAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelSnellAngleVariationLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSliderSnellAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelSnellAngleVariationLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldSnellAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jLabelSnellAngleVaration)
                 .addGap(24, 24, 24))
         );
@@ -228,7 +238,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderSnellDelta.setSnapToTicks(true);
         jSliderSnellDelta.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderSnellDelta.setName("jSliderSnellDelta"); // NOI18N
-        jSliderSnellDelta.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderSnellDelta.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderSnellDelta.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderSnellDeltaStateChanged(evt);
@@ -269,12 +279,12 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             jPanelSnellDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSnellDeltaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelSnellDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelSnellDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSliderSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedTextFieldSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelSnellDelta)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanelSnellDelay.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelSnellDelay.border.title"))); // NOI18N
@@ -332,10 +342,13 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelSnellDelayLayout.setVerticalGroup(
             jPanelSnellDelayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelSnellDelayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSliderSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jFormattedTextFieldSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelSnellDelay)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -347,22 +360,23 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             jPanelSnellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSnellLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelSnellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelSnellDelay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelSnellAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelSnellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanelSnellAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelSnellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanelSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanelSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelSnellLayout.setVerticalGroup(
             jPanelSnellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSnellLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelSnellAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelSnellAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(jPanelSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelSnell.TabConstraints.tabTitle"), jPanelSnell); // NOI18N
@@ -382,7 +396,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderEnergyConservationPexiglass.setValue(0);
         jSliderEnergyConservationPexiglass.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderEnergyConservationPexiglass.setName("jSliderEnergyConservationPexiglass"); // NOI18N
-        jSliderEnergyConservationPexiglass.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderEnergyConservationPexiglass.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderEnergyConservationPexiglass.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderEnergyConservationPexiglassStateChanged(evt);
@@ -415,10 +429,12 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             jPanelEnergyConservationPexiglassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEnergyConservationPexiglassLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelEnergyConservationPexiglassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderEnergyConservationPexiglass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldEnergyConservationPexiglass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jSliderEnergyConservationPexiglass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEnergyConservationPexiglassLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jFormattedTextFieldEnergyConservationPexiglass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         jPanelEnergyConservationPolarization.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelEnergyConservationPolarization.border.title"))); // NOI18N
@@ -434,7 +450,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderEnergyConservationPolarization.setValue(0);
         jSliderEnergyConservationPolarization.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderEnergyConservationPolarization.setName("jSliderEnergyConservationPolarization"); // NOI18N
-        jSliderEnergyConservationPolarization.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderEnergyConservationPolarization.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderEnergyConservationPolarization.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderEnergyConservationPolarizationStateChanged(evt);
@@ -466,10 +482,13 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelEnergyConservationPolarizationLayout.setVerticalGroup(
             jPanelEnergyConservationPolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEnergyConservationPolarizationLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelEnergyConservationPolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelEnergyConservationPolarizationLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSliderEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelEnergyConservationPolarizationLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jFormattedTextFieldEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -526,7 +545,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
                 .addComponent(jPanelEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelEnergyConservationIsPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelEnergyConservation.TabConstraints.tabTitle"), jPanelEnergyConservation); // NOI18N
@@ -547,7 +566,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderCriticalAngleVarationMin.setValue(0);
         jSliderCriticalAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderCriticalAngleVarationMin.setName("jSliderCriticalAngleVarationMin"); // NOI18N
-        jSliderCriticalAngleVarationMin.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderCriticalAngleVarationMin.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderCriticalAngleVarationMin.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderCriticalAngleVarationMinStateChanged(evt);
@@ -564,7 +583,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderCriticalAngleVarationMax.setValue(3600);
         jSliderCriticalAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderCriticalAngleVarationMax.setName("jSliderCriticalAngleVarationMax"); // NOI18N
-        jSliderCriticalAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderCriticalAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderCriticalAngleVarationMax.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderCriticalAngleVarationMaxStateChanged(evt);
@@ -618,15 +637,22 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelCriticalAngleVariationLayout.setVerticalGroup(
             jPanelCriticalAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCriticalAngleVariationLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelCriticalAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderCriticalAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldCriticalAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCriticalAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldCriticalAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSliderCriticalAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelCriticalAngleVariationLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSliderCriticalAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCriticalAngleVariationLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jFormattedTextFieldCriticalAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanelCriticalAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelCriticalAngleVariationLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSliderCriticalAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelCriticalAngleVariationLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldCriticalAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jLabelCriticalAngleVaration)
                 .addGap(24, 24, 24))
         );
@@ -646,7 +672,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderCriticalAngleDelta.setValue(2);
         jSliderCriticalAngleDelta.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderCriticalAngleDelta.setName("jSliderCriticalAngleDelta"); // NOI18N
-        jSliderCriticalAngleDelta.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderCriticalAngleDelta.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderCriticalAngleDelta.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderCriticalAngleDeltaStateChanged(evt);
@@ -686,10 +712,13 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelCriticalAngleDeltaLayout.setVerticalGroup(
             jPanelCriticalAngleDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCriticalAngleDeltaLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelCriticalAngleDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCriticalAngleDeltaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSliderCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCriticalAngleDeltaLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jFormattedTextFieldCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelCriticalAngleDelta)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -702,18 +731,18 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             .addGroup(jPanelCriticalAngleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCriticalAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelCriticalAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelCriticalAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanelCriticalAngleLayout.setVerticalGroup(
             jPanelCriticalAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCriticalAngleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelCriticalAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addComponent(jPanelCriticalAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelCriticalAngle.TabConstraints.tabTitle"), jPanelCriticalAngle); // NOI18N
@@ -734,7 +763,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderBrewsterAngleVarationMin.setValue(0);
         jSliderBrewsterAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderBrewsterAngleVarationMin.setName("jSliderBrewsterAngleVarationMin"); // NOI18N
-        jSliderBrewsterAngleVarationMin.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderBrewsterAngleVarationMin.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderBrewsterAngleVarationMin.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderBrewsterAngleVarationMinStateChanged(evt);
@@ -751,7 +780,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderBrewsterAngleVarationMax.setValue(3600);
         jSliderBrewsterAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderBrewsterAngleVarationMax.setName("jSliderBrewsterAngleVarationMax"); // NOI18N
-        jSliderBrewsterAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderBrewsterAngleVarationMax.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderBrewsterAngleVarationMax.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderBrewsterAngleVarationMaxStateChanged(evt);
@@ -805,17 +834,24 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelBrewsterAngleVariationLayout.setVerticalGroup(
             jPanelBrewsterAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBrewsterAngleVariationLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelBrewsterAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderBrewsterAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldBrewsterAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelBrewsterAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldBrewsterAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSliderBrewsterAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelBrewsterAngleVariationLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSliderBrewsterAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelBrewsterAngleVariationLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jFormattedTextFieldBrewsterAngleVarationMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanelBrewsterAngleVariationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelBrewsterAngleVariationLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSliderBrewsterAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelBrewsterAngleVariationLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldBrewsterAngleVarationMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jLabelBrewsterAngleVaration)
-                .addGap(24, 24, 24))
+                .addGap(3, 3, 3))
         );
 
         jPanelBrewsterAngleDelta.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelBrewsterAngleDelta.border.title"))); // NOI18N
@@ -833,7 +869,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderBrewsterAngleDelta.setValue(2);
         jSliderBrewsterAngleDelta.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderBrewsterAngleDelta.setName("jSliderBrewsterAngleDelta"); // NOI18N
-        jSliderBrewsterAngleDelta.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderBrewsterAngleDelta.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderBrewsterAngleDelta.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderBrewsterAngleDeltaStateChanged(evt);
@@ -873,10 +909,13 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelBrewsterAngleDeltaLayout.setVerticalGroup(
             jPanelBrewsterAngleDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBrewsterAngleDeltaLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelBrewsterAngleDeltaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderBrewsterAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldBrewsterAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelBrewsterAngleDeltaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSliderBrewsterAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelBrewsterAngleDeltaLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jFormattedTextFieldBrewsterAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelBrewsterAngleDelta)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -895,7 +934,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderBrewsterAnglePolarization.setValue(0);
         jSliderBrewsterAnglePolarization.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderBrewsterAnglePolarization.setName("jSliderBrewsterAnglePolarization"); // NOI18N
-        jSliderBrewsterAnglePolarization.setPreferredSize(new java.awt.Dimension(250, 16));
+        jSliderBrewsterAnglePolarization.setPreferredSize(new java.awt.Dimension(250, 42));
         jSliderBrewsterAnglePolarization.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderBrewsterAnglePolarizationStateChanged(evt);
@@ -927,10 +966,13 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelBrewsterAnglePolarizationLayout.setVerticalGroup(
             jPanelBrewsterAnglePolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBrewsterAnglePolarizationLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelBrewsterAnglePolarizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelBrewsterAnglePolarizationLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSliderBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelBrewsterAnglePolarizationLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jFormattedTextFieldBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -950,12 +992,12 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             jPanelBrewsterAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBrewsterAngleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelBrewsterAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelBrewsterAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelBrewsterAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelBrewsterAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelBrewsterAngle.TabConstraints.tabTitle"), jPanelBrewsterAngle); // NOI18N
@@ -1009,7 +1051,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             .addGroup(jPanelCalibrationLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelCalibrationButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(308, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelCalibration.TabConstraints.tabTitle"), jPanelCalibration); // NOI18N
@@ -1070,13 +1112,16 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelControlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jTabbedPaneOptica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPaneOptica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelControlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTabbedPaneOptica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPaneOptica, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelControlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
