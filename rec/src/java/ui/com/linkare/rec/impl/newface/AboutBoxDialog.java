@@ -52,6 +52,11 @@ public class AboutBoxDialog extends javax.swing.JDialog {
 
         setModal(true);
         setName("Form"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         tabs.setName("tabs"); // NOI18N
 
@@ -129,6 +134,10 @@ public class AboutBoxDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        tabs.setSelectedIndex(0);
+    }//GEN-LAST:event_formWindowActivated
 
     /**
     * @param args the command line arguments
