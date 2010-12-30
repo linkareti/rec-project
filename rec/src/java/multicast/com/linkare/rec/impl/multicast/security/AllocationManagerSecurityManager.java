@@ -304,11 +304,25 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			return authenticate;
 		} catch (RemoteException e) {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER)
-					.log(java.util.logging.Level.FINEST,
+					.log(java.util.logging.Level.WARNING,
 							"Unable to comunicate with allocation manager " + e.getMessage(), e);
 			return false;
 		} catch (UnknownDomainException e) {
 			return true;
+		} catch (Exception e) {
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(java.util.logging.Level.WARNING,
+					"Exception while comunicating with allocation manager " + e.getMessage(), e);
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(java.util.logging.Level.INFO,
+					"Reconnecting ");
+			try {
+				lookupAllocationManager();
+				boolean authenticate = allocationManager.authenticate(username, password);
+				Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
+						"Authentication is [" + authenticate + "]");
+				return authenticate;
+			} catch (Exception e2) {
+				return false;
+			}
 		}
 	}
 
@@ -458,6 +472,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			} catch (Exception e2) {
 				// What if I can't lookup it up again??? Down for
 				// long??? No allocations available... Ooops!
+				
 			}
 		}
 	}
