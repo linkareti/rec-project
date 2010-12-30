@@ -1677,8 +1677,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         strPos1 = strPos1.replace(",", ".");
         try {
             int pos1 = (int) (Float.parseFloat(strPos1) * 10.F);
-            if (pos1 <= slider.getMaximum() && pos1 > slider.getMinimum()) {
-                slider.setValue(pos1);
+            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
+                slider.setValue(pos1 - slider.getMinimum());
             } else {
                 textField.setValue(Float.toString((float) slider.getValue() / 10.F));
             }
@@ -1695,8 +1695,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         strPos1 = strPos1.replace(",", ".");
         try {
             int pos1 = (int) Integer.parseInt(strPos1);
-            if (pos1 <= slider.getMaximum() && pos1 > slider.getMinimum()) {
-                slider.setValue(pos1);
+            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
+                slider.setValue(pos1 - slider.getMinimum());
             } else {
                 textField.setValue(slider.getValue());
             }
