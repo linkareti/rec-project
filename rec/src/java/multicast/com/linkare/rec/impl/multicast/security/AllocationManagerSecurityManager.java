@@ -52,7 +52,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 */
 	private static final String ALLOCATION_MANAGER_GLOBAL_JNDI_NAME = "java:global/rec.am/AllocationManager!com.linkare.rec.am.AllocationManager";
 	// jndi name used in develpment tests
-//	private static final String ALLOCATION_MANAGER_GLOBAL_JNDI_NAME = "java:global/rec.am/AllocationManager";
+	// private static final String ALLOCATION_MANAGER_GLOBAL_JNDI_NAME =
+	// "java:global/rec.am/AllocationManager";
 
 	// public static final String
 	// MCCONTROLLER_SECURITYMANAGER_LOGGER=ReCMultiCastController.MCCONTROLLER_LOGGER;
@@ -82,8 +83,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		try {
 			localInetAddress = InetAddress.getLocalHost().getCanonicalHostName();
 		} catch (UnknownHostException e) {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
-					java.util.logging.Level.FINEST, "Unable to find local host name " + e.getMessage());
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(java.util.logging.Level.FINEST,
+					"Unable to find local host name " + e.getMessage());
 		}
 		LABORATORY_ID = Defaults.defaultIfEmpty(System.getProperty(SYSPROP_LABORATORY_ID), localInetAddress);
 	}
@@ -114,9 +115,9 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	private static final int REFRESH_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(System
 			.getProperty(SYSPROP_REFRESH_TIME_LAP_MINUTES), 15);
 	private static final int REFRESH_TIME_ALLOCATIONS_CLIENT_QUEUE_MINUTES = 1;
-	
+
 	private List<ReCMultiCastHardware> multiCastHardwares = null;
-	
+
 	private ISecurityCommunicator communicator = null;
 
 	/**
@@ -125,18 +126,20 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 * @throws NamingException
 	 */
 	public AllocationManagerSecurityManager() throws NamingException {
-		
-		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO, "Instatiating the allocation security manager.");
+
+		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+				"Instatiating the allocation security manager.");
 
 		lookupAllocationManager();
-		
+
 		ExecutorScheduler.scheduleAtFixedRate(new AllocationsRefreshScheduledUnit(), 1, REFRESH_TIME_LAP_MINUTES,
 				TimeUnit.MINUTES);
-		
+
 		ExecutorScheduler.scheduleAtFixedRate(new ClientsAllocationCheckScheduledUnit(), 1,
 				REFRESH_TIME_ALLOCATIONS_CLIENT_QUEUE_MINUTES, TimeUnit.MINUTES);
-		
-		// force update the allocations list because the scheduler might take time until it starts running
+
+		// force update the allocations list because the scheduler might take
+		// time until it starts running
 		initializeAllocations();
 	}
 
@@ -155,10 +158,10 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		allocationManager = (AllocationManager) PortableRemoteObject.narrow(allocationManagerStub,
 				AllocationManager.class);
 	}
-	
+
 	/**
-	 * Update the allocations from the current time.
-	 * This method should only be invoked in the contructor!
+	 * Update the allocations from the current time. This method should only be
+	 * invoked in the contructor!
 	 */
 	private void initializeAllocations() {
 		new Thread() {
@@ -202,15 +205,14 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 */
 	private boolean checkAllocationsEnter(String hardwareId, String username) {
 		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
-				"Check allocations for user [" + username + "] hardware ["+hardwareId+"]");
-		
+				"Check allocations for user [" + username + "] hardware [" + hardwareId + "]");
+
 		List<AllocationDTO> allocations = findAllocationFor(hardwareId);
 		if (allocations.isEmpty()) {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
-					"There aren't allocations.");
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST, "There aren't allocations.");
 			return true;
 		}
-		
+
 		boolean checkUserOrOwner = checkUserOrOwner(allocations, username);
 		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 				"Check allocations is [" + checkUserOrOwner + "]");
@@ -230,7 +232,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		}
 		return retAllocations;
 	}
-	
+
 	private List<AllocationDTO> findAllocationFor(String hardwareId) {
 		return findAllocationFor(hardwareId, INTERVAL_TIME_LAP_MINUTES);
 	}
@@ -250,7 +252,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	 * @return
 	 */
 	private boolean checkUserAsOwner(List<AllocationDTO> allocations, String username) {
-		for (AllocationDTO allocation: allocations) {
+		for (AllocationDTO allocation : allocations) {
 			Set<String> ownersList = allocation.getOwners() == null ? allocation.getUsers() : allocation.getOwners();
 			boolean contains = ownersList.contains(username);
 			if (contains) {
@@ -302,18 +304,12 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
 					"Authentication is [" + authenticate + "]");
 			return authenticate;
-		} catch (RemoteException e) {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER)
-					.log(java.util.logging.Level.WARNING,
-							"Unable to comunicate with allocation manager " + e.getMessage(), e);
-			return false;
 		} catch (UnknownDomainException e) {
 			return true;
 		} catch (Exception e) {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(java.util.logging.Level.WARNING,
 					"Exception while comunicating with allocation manager " + e.getMessage(), e);
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(java.util.logging.Level.INFO,
-					"Reconnecting ");
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(java.util.logging.Level.INFO, "Reconnecting ");
 			try {
 				lookupAllocationManager();
 				boolean authenticate = allocationManager.authenticate(username, password);
@@ -333,8 +329,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	public boolean authorize(IResource resource, IUser user, IOperation op) {
 		if (user == null || user.getUserName() == null || resource == null || resource.getResourceType() == null
 				|| resource.getProperties().get(resource.getResourceType().getPropertyKey()) == null || op == null) {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
-					Level.WARNING, "Invalid parameters in authorize method");
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.WARNING,
+					"Invalid parameters in authorize method");
 			throw new RuntimeException("Invalid parameters in authorize method");
 		}
 		switch (resource.getResourceType()) {
@@ -359,7 +355,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 				"Checking data producer operations for user [" + user.getUserName() + "] resource ["
 						+ resource.getProperties().get(resource.getResourceType().getPropertyKey()) + "] operation ["
 						+ op.getOperation() + "]");
-		
+
 		IResource hardwareResource = resource.getEnclosingResource();
 		List<AllocationDTO> currentAllocation = findAllocationFor(hardwareResource.getProperties().get(
 				hardwareResource.getResourceType().getPropertyKey()));
@@ -404,14 +400,12 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 				return checkUserAsOwner;
 			}
 		} else {
-			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
-					"There aren't allocations.");
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST, "There aren't allocations.");
 		}
-		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST,
-				"Hardware operations is [true]");
+		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINEST, "Hardware operations is [true]");
 		return true;
 	}
-	
+
 	/**
 	 * @param newAllocations
 	 */
@@ -427,7 +421,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		}
 		allocationsMap = newAllocationsMap;
 	}
-	
+
 	private void cleanNotifiedUsers(List<AllocationDTO> newAllocations) {
 		Set<Long> allocationsId = new HashSet<Long>();
 		for (AllocationDTO allocationDTO : newAllocations) {
@@ -446,7 +440,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			}
 		}
 	}
-	
+
 	/**
 	 * @param begin
 	 * @param end
@@ -472,7 +466,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			} catch (Exception e2) {
 				// What if I can't lookup it up again??? Down for
 				// long??? No allocations available... Ooops!
-				
+
 			}
 		}
 	}
@@ -480,11 +474,11 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	private AllocationManager allocationManager = null;
 
 	private Map<String, List<AllocationDTO>> allocationsMap = new HashMap<String, List<AllocationDTO>>();
-	
+
 	private Map<Long, Set<String>> notifiedUsersNotInAllocation = new Hashtable<Long, Set<String>>();
-	
+
 	private static final SimpleDateFormat notificationTimeFormatter = new SimpleDateFormat("HH:mm");
-	
+
 	public class AllocationsRefreshScheduledUnit extends ScheduledWorkUnit {
 
 		/**
@@ -494,7 +488,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		public void run() {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"AllocationsRefreshScheduledUnit - Going to refresh the allocations.");
-			
+
 			Calendar nearTime = Calendar.getInstance();
 			Calendar farTime = Calendar.getInstance();
 			farTime.setTimeInMillis(nearTime.getTimeInMillis());
@@ -503,7 +497,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 
 			refreshAllocations(nearTime.getTime(), farTime.getTime());
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -512,7 +506,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.SEVERE, message, throwable);
 		}
 	}
-	
+
 	public class ClientsAllocationCheckScheduledUnit extends ScheduledWorkUnit {
 
 		/**
@@ -522,15 +516,15 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		public void run() {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"ClientsAllocationScheduledUnit - Going to check clients allocations.");
-			
+
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 					Level.FINE,
 					"Are there allocations [" + (!allocationsMap.isEmpty()) + "] and multicast hardwares ["
 							+ (multiCastHardwares != null) + "]");
-			
+
 			int kickedClients = 0;
 			int notifiedClients = 0;
-			
+
 			if (multiCastHardwares != null && !allocationsMap.isEmpty()) {
 				Map<String, List<AllocationDTO>> nearAllocationsMap = findNearAllocations();
 				if (!nearAllocationsMap.isEmpty()) {
@@ -573,7 +567,8 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 												&& !notifiedUsersNotInAllocation.get(allocationDTO.getId()).contains(
 														username)) {
 											if (!checkUserOrOwner(Collections.singletonList(allocationDTO), username)) {
-												usernamesToNotify.add(new Pair<String, Date>(username, allocationDTO.getBegin()));
+												usernamesToNotify.add(new Pair<String, Date>(username, allocationDTO
+														.getBegin()));
 												notifiedUsersNotInAllocation.get(allocationDTO.getId()).add(username);
 											}
 										}
@@ -603,8 +598,9 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 					"Client allocations notified [" + notifiedClients + "] clients");
 		}
-		
-		private Set<String> findHardwareUsersNotInAllocations(Map<String, List<AllocationDTO>> allocationsMap, ReCMultiCastHardware rmch) {
+
+		private Set<String> findHardwareUsersNotInAllocations(Map<String, List<AllocationDTO>> allocationsMap,
+				ReCMultiCastHardware rmch) {
 			Set<String> usernames = new HashSet<String>();
 			if (allocationsMap.containsKey(rmch.getHardwareUniqueId())) {
 				List<AllocationDTO> hardwareAllocations = allocationsMap.get(rmch.getHardwareUniqueId());
@@ -619,7 +615,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			}
 			return usernames;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -628,15 +624,15 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.SEVERE, message, throwable);
 		}
 	}
-	
+
 	private Map<String, List<AllocationDTO>> findCurrentAllocations() {
 		return findAllocations(INTERVAL_TIME_LAP_MINUTES);
 	}
-	
+
 	private Map<String, List<AllocationDTO>> findNearAllocations() {
 		return findAllocations(NEAR_TIME_LAP_MINUTES);
 	}
-	
+
 	private Map<String, List<AllocationDTO>> findAllocations(int interval) {
 		Map<String, List<AllocationDTO>> currentAllocationsMap = new HashMap<String, List<AllocationDTO>>();
 		for (String key : allocationsMap.keySet()) {
@@ -647,7 +643,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		}
 		return currentAllocationsMap;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -663,9 +659,10 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	public void registerSecurityCommunicator(ISecurityCommunicator communicator) {
 		this.communicator = communicator;
 	}
-	
+
 	/**
-	 * Sends a message to the client saying that he is going to be shutdown from the experiment.
+	 * Sends a message to the client saying that he is going to be shutdown from
+	 * the experiment.
 	 * 
 	 * @param clientTo
 	 */
@@ -674,9 +671,10 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			communicator.sendMulticastMessage(clientTo, ChatMessageEvent.SECURITY_COMMUNICATION_MSG_ON_KICK_KEY);
 		}
 	}
-	
+
 	/**
-	 * Sends a message warning the client that he is going to be shutdown from the experiment in some time.
+	 * Sends a message warning the client that he is going to be shutdown from
+	 * the experiment in some time.
 	 * 
 	 * @param clientTo
 	 */
@@ -685,10 +683,10 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			String message = ChatMessageEvent.SECURITY_COMMUNICATION_MSG_BEFORE_KICK_KEY
 					+ ChatMessageEvent.SECURITY_COMMUNICATION_MSG_SEPARATOR
 					+ notificationTimeFormatter.format(clientTo.getValue());
-			communicator.sendMulticastMessage(clientTo.getKey(), message); 
+			communicator.sendMulticastMessage(clientTo.getKey(), message);
 		}
 	}
-	
+
 	/**
 	 * @param usernames
 	 */
@@ -697,7 +695,7 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 			sendKickMessage(clientTo);
 		}
 	}
-	
+
 	/**
 	 * @param usernames
 	 */
