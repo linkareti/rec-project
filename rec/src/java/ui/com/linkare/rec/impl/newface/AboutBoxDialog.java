@@ -50,7 +50,6 @@ public class AboutBoxDialog extends javax.swing.JDialog {
         jScrollPaneLicence = new javax.swing.JScrollPane();
         jTextPaneLicence = new javax.swing.JTextPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
         setName("Form"); // NOI18N
 
