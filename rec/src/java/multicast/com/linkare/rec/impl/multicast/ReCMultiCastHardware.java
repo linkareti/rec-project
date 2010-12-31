@@ -932,7 +932,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 						ownerDataClient.getUserInfo().setLockedTime(new DateTime(0));
 					ownerDataClient = null;
 
-					currentLocker.stopCountDown();
+					if (currentLocker != null) {
+						currentLocker.stopCountDown();
+					}
 					experimentStats.stopExperimentStats();
 					cycleLockHardware();
 					recMultiCastDataProducer = null;
