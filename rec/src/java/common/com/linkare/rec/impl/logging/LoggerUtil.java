@@ -24,19 +24,19 @@ public class LoggerUtil {
 	 *            message
 	 */
 	public static void logThrowable(String info_message, Throwable t, Logger logger) {
-		if (info_message != null && logger != null && logger.getLevel() != null
-				&& logger.getLevel().intValue() <= Level.SEVERE.intValue()) {
+		if (info_message != null && logger != null && logger.isLoggable(Level.SEVERE)) {
 			if (t != null) {
 				StackTraceElement[] trace = t.getStackTrace();
-				info_message = " @class " + trace[0].getClassName() + " ,@method " + trace[0].getMethodName()
-						+ " ,@line " + trace[0].getLineNumber() + " " + info_message;
+				if (trace != null && trace.length > 0) {
+					info_message = " @class " + trace[0].getClassName() + " ,@method " + trace[0].getMethodName()
+					+ " ,@line " + trace[0].getLineNumber() + " " + info_message;
+				}
 			}
 
 			logger.log(Level.SEVERE, info_message);
 		}
 
-		if (t != null && logger != null && logger.getLevel() != null
-				&& logger.getLevel().intValue() <= Level.FINEST.intValue()) {
+		if (t != null && logger != null && logger.isLoggable(Level.FINEST)) {
 			logger.log(Level.FINEST, info_message, t);
 		}
 	}
