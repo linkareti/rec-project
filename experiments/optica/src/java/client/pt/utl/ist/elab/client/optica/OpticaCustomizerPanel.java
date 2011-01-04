@@ -125,10 +125,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jSliderSnellAngleVarationMin.setMajorTickSpacing(900);
         jSliderSnellAngleVarationMin.setMaximum(3600);
-        jSliderSnellAngleVarationMin.setMinorTickSpacing(100);
+        jSliderSnellAngleVarationMin.setMinorTickSpacing(2);
         jSliderSnellAngleVarationMin.setPaintLabels(true);
-        jSliderSnellAngleVarationMin.setPaintTicks(true);
-        jSliderSnellAngleVarationMin.setPaintTrack(false);
         jSliderSnellAngleVarationMin.setSnapToTicks(true);
         jSliderSnellAngleVarationMin.setValue(0);
         jSliderSnellAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -142,10 +140,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jSliderSnellAngleVarationMax.setMajorTickSpacing(900);
         jSliderSnellAngleVarationMax.setMaximum(3600);
-        jSliderSnellAngleVarationMax.setMinorTickSpacing(100);
+        jSliderSnellAngleVarationMax.setMinorTickSpacing(2);
         jSliderSnellAngleVarationMax.setPaintLabels(true);
-        jSliderSnellAngleVarationMax.setPaintTicks(true);
-        jSliderSnellAngleVarationMax.setPaintTrack(false);
         jSliderSnellAngleVarationMax.setSnapToTicks(true);
         jSliderSnellAngleVarationMax.setValue(3600);
         jSliderSnellAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -231,10 +227,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderSnellDelta.setMajorTickSpacing(900);
         jSliderSnellDelta.setMaximum(3600);
         jSliderSnellDelta.setMinimum(2);
-        jSliderSnellDelta.setMinorTickSpacing(100);
+        jSliderSnellDelta.setMinorTickSpacing(2);
         jSliderSnellDelta.setPaintLabels(true);
-        jSliderSnellDelta.setPaintTicks(true);
-        jSliderSnellDelta.setPaintTrack(false);
         jSliderSnellDelta.setSnapToTicks(true);
         jSliderSnellDelta.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderSnellDelta.setName("jSliderSnellDelta"); // NOI18N
@@ -296,8 +290,6 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderSnellDelay.setMinimum(1);
         jSliderSnellDelay.setMinorTickSpacing(1);
         jSliderSnellDelay.setPaintLabels(true);
-        jSliderSnellDelay.setPaintTicks(true);
-        jSliderSnellDelay.setPaintTrack(false);
         jSliderSnellDelay.setSnapToTicks(true);
         jSliderSnellDelay.setValue(1);
         jSliderSnellDelay.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -388,10 +380,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jSliderEnergyConservationPexiglass.setMajorTickSpacing(900);
         jSliderEnergyConservationPexiglass.setMaximum(3600);
-        jSliderEnergyConservationPexiglass.setMinorTickSpacing(100);
+        jSliderEnergyConservationPexiglass.setMinorTickSpacing(2);
         jSliderEnergyConservationPexiglass.setPaintLabels(true);
-        jSliderEnergyConservationPexiglass.setPaintTicks(true);
-        jSliderEnergyConservationPexiglass.setPaintTrack(false);
         jSliderEnergyConservationPexiglass.setSnapToTicks(true);
         jSliderEnergyConservationPexiglass.setValue(0);
         jSliderEnergyConservationPexiglass.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -442,10 +432,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jSliderEnergyConservationPolarization.setMajorTickSpacing(225);
         jSliderEnergyConservationPolarization.setMaximum(900);
-        jSliderEnergyConservationPolarization.setMinorTickSpacing(100);
+        jSliderEnergyConservationPolarization.setMinorTickSpacing(2);
         jSliderEnergyConservationPolarization.setPaintLabels(true);
-        jSliderEnergyConservationPolarization.setPaintTicks(true);
-        jSliderEnergyConservationPolarization.setPaintTrack(false);
         jSliderEnergyConservationPolarization.setSnapToTicks(true);
         jSliderEnergyConservationPolarization.setValue(0);
         jSliderEnergyConservationPolarization.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -558,10 +546,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jSliderCriticalAngleVarationMin.setMajorTickSpacing(900);
         jSliderCriticalAngleVarationMin.setMaximum(3600);
-        jSliderCriticalAngleVarationMin.setMinorTickSpacing(100);
+        jSliderCriticalAngleVarationMin.setMinorTickSpacing(2);
         jSliderCriticalAngleVarationMin.setPaintLabels(true);
-        jSliderCriticalAngleVarationMin.setPaintTicks(true);
-        jSliderCriticalAngleVarationMin.setPaintTrack(false);
         jSliderCriticalAngleVarationMin.setSnapToTicks(true);
         jSliderCriticalAngleVarationMin.setValue(0);
         jSliderCriticalAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -575,10 +561,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jSliderCriticalAngleVarationMax.setMajorTickSpacing(900);
         jSliderCriticalAngleVarationMax.setMaximum(3600);
-        jSliderCriticalAngleVarationMax.setMinorTickSpacing(100);
+        jSliderCriticalAngleVarationMax.setMinorTickSpacing(2);
         jSliderCriticalAngleVarationMax.setPaintLabels(true);
-        jSliderCriticalAngleVarationMax.setPaintTicks(true);
-        jSliderCriticalAngleVarationMax.setPaintTrack(false);
         jSliderCriticalAngleVarationMax.setSnapToTicks(true);
         jSliderCriticalAngleVarationMax.setValue(3600);
         jSliderCriticalAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -664,10 +648,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderCriticalAngleDelta.setMajorTickSpacing(900);
         jSliderCriticalAngleDelta.setMaximum(3600);
         jSliderCriticalAngleDelta.setMinimum(2);
-        jSliderCriticalAngleDelta.setMinorTickSpacing(100);
+        jSliderCriticalAngleDelta.setMinorTickSpacing(2);
         jSliderCriticalAngleDelta.setPaintLabels(true);
-        jSliderCriticalAngleDelta.setPaintTicks(true);
-        jSliderCriticalAngleDelta.setPaintTrack(false);
         jSliderCriticalAngleDelta.setSnapToTicks(true);
         jSliderCriticalAngleDelta.setValue(2);
         jSliderCriticalAngleDelta.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -755,10 +737,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jSliderBrewsterAngleVarationMin.setMajorTickSpacing(900);
         jSliderBrewsterAngleVarationMin.setMaximum(3600);
-        jSliderBrewsterAngleVarationMin.setMinorTickSpacing(100);
+        jSliderBrewsterAngleVarationMin.setMinorTickSpacing(2);
         jSliderBrewsterAngleVarationMin.setPaintLabels(true);
-        jSliderBrewsterAngleVarationMin.setPaintTicks(true);
-        jSliderBrewsterAngleVarationMin.setPaintTrack(false);
         jSliderBrewsterAngleVarationMin.setSnapToTicks(true);
         jSliderBrewsterAngleVarationMin.setValue(0);
         jSliderBrewsterAngleVarationMin.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -772,10 +752,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jSliderBrewsterAngleVarationMax.setMajorTickSpacing(900);
         jSliderBrewsterAngleVarationMax.setMaximum(3600);
-        jSliderBrewsterAngleVarationMax.setMinorTickSpacing(100);
+        jSliderBrewsterAngleVarationMax.setMinorTickSpacing(2);
         jSliderBrewsterAngleVarationMax.setPaintLabels(true);
-        jSliderBrewsterAngleVarationMax.setPaintTicks(true);
-        jSliderBrewsterAngleVarationMax.setPaintTrack(false);
         jSliderBrewsterAngleVarationMax.setSnapToTicks(true);
         jSliderBrewsterAngleVarationMax.setValue(3600);
         jSliderBrewsterAngleVarationMax.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -861,10 +839,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderBrewsterAngleDelta.setMajorTickSpacing(900);
         jSliderBrewsterAngleDelta.setMaximum(3600);
         jSliderBrewsterAngleDelta.setMinimum(2);
-        jSliderBrewsterAngleDelta.setMinorTickSpacing(100);
+        jSliderBrewsterAngleDelta.setMinorTickSpacing(2);
         jSliderBrewsterAngleDelta.setPaintLabels(true);
-        jSliderBrewsterAngleDelta.setPaintTicks(true);
-        jSliderBrewsterAngleDelta.setPaintTrack(false);
         jSliderBrewsterAngleDelta.setSnapToTicks(true);
         jSliderBrewsterAngleDelta.setValue(2);
         jSliderBrewsterAngleDelta.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -926,10 +902,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jSliderBrewsterAnglePolarization.setMajorTickSpacing(225);
         jSliderBrewsterAnglePolarization.setMaximum(900);
-        jSliderBrewsterAnglePolarization.setMinorTickSpacing(100);
+        jSliderBrewsterAnglePolarization.setMinorTickSpacing(2);
         jSliderBrewsterAnglePolarization.setPaintLabels(true);
-        jSliderBrewsterAnglePolarization.setPaintTicks(true);
-        jSliderBrewsterAnglePolarization.setPaintTrack(false);
         jSliderBrewsterAnglePolarization.setSnapToTicks(true);
         jSliderBrewsterAnglePolarization.setValue(0);
         jSliderBrewsterAnglePolarization.setMinimumSize(new java.awt.Dimension(250, 16));
@@ -1606,58 +1580,58 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jLabelSnellDelay.setVisible(false);
         jLabelSnellDelta.setVisible(false);
 
-        Dictionary<Integer, JLabel> slidersAngle0360Labels = new Hashtable<Integer, JLabel>();
-        slidersAngle0360Labels.put(new Integer(0), new JLabel("0.0"));
-        slidersAngle0360Labels.put(new Integer(900), new JLabel("90.0"));
-        slidersAngle0360Labels.put(new Integer(1800), new JLabel("180.0"));
-        slidersAngle0360Labels.put(new Integer(2700), new JLabel("270.0"));
-        slidersAngle0360Labels.put(new Integer(3600), new JLabel("360.0"));
-
-        Dictionary<Integer, JLabel> slidersAngle02360Labels = new Hashtable<Integer, JLabel>();
-        slidersAngle02360Labels.put(new Integer(2), new JLabel("0.2"));
-        slidersAngle02360Labels.put(new Integer(900), new JLabel("90.0"));
-        slidersAngle02360Labels.put(new Integer(1800), new JLabel("180.0"));
-        slidersAngle02360Labels.put(new Integer(2700), new JLabel("270.0"));
-        slidersAngle02360Labels.put(new Integer(3600), new JLabel("360.0"));
-
-        Dictionary<Integer, JLabel> slidersAngle90Labels = new Hashtable<Integer, JLabel>();
-        slidersAngle90Labels.put(new Integer(0), new JLabel("0.0"));
-        slidersAngle90Labels.put(new Integer(450), new JLabel("45.0"));
-        slidersAngle90Labels.put(new Integer(900), new JLabel("90.0"));
-
-        jSliderSnellAngleVarationMin.setLabelTable(slidersAngle0360Labels);
-        jSliderSnellAngleVarationMax.setLabelTable(slidersAngle0360Labels);
-        jSliderSnellDelta.setLabelTable(slidersAngle02360Labels);
-        installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMin);
-        installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMax);
-        installDecimalFormatter(jFormattedTextFieldSnellDelta);
-        installNaturalFormatter(jFormattedTextFieldSnellDelay);
-
-        jSliderEnergyConservationPexiglass.setLabelTable(slidersAngle0360Labels);
-        jSliderEnergyConservationPolarization.setLabelTable(slidersAngle90Labels);
-        installDecimalFormatter(jFormattedTextFieldEnergyConservationPexiglass);
-        installDecimalFormatter(jFormattedTextFieldEnergyConservationPolarization);
-
-        jSliderCriticalAngleVarationMin.setLabelTable(slidersAngle0360Labels);
-        jSliderCriticalAngleVarationMax.setLabelTable(slidersAngle0360Labels);
-        jSliderCriticalAngleDelta.setLabelTable(slidersAngle02360Labels);
-        installDecimalFormatter(jFormattedTextFieldCriticalAngleVarationMin);
-        installDecimalFormatter(jFormattedTextFieldCriticalAngleVarationMax);
-        installDecimalFormatter(jFormattedTextFieldCriticalAngleDelta);
-
-        jSliderBrewsterAngleVarationMin.setLabelTable(slidersAngle0360Labels);
-        jSliderBrewsterAngleVarationMax.setLabelTable(slidersAngle0360Labels);
-        jSliderBrewsterAngleDelta.setLabelTable(slidersAngle02360Labels);
-        jSliderBrewsterAnglePolarization.setLabelTable(slidersAngle90Labels);
-        installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMin);
-        installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMax);
-        installDecimalFormatter(jFormattedTextFieldBrewsterAngleDelta);
-        installDecimalFormatter(jFormattedTextFieldBrewsterAnglePolarization);
-
-        // TODO 
-        // checkMaxNumSamples();
-        // checkMaxTime();
-        // checkPosOverlap();
+//        Dictionary<Integer, JLabel> slidersAngle0360Labels = new Hashtable<Integer, JLabel>();
+//        slidersAngle0360Labels.put(new Integer(0), new JLabel("0.0"));
+//        slidersAngle0360Labels.put(new Integer(900), new JLabel("90.0"));
+//        slidersAngle0360Labels.put(new Integer(1800), new JLabel("180.0"));
+//        slidersAngle0360Labels.put(new Integer(2700), new JLabel("270.0"));
+//        slidersAngle0360Labels.put(new Integer(3600), new JLabel("360.0"));
+//
+//        Dictionary<Integer, JLabel> slidersAngle02360Labels = new Hashtable<Integer, JLabel>();
+//        slidersAngle02360Labels.put(new Integer(2), new JLabel("0.2"));
+//        slidersAngle02360Labels.put(new Integer(900), new JLabel("90.0"));
+//        slidersAngle02360Labels.put(new Integer(1800), new JLabel("180.0"));
+//        slidersAngle02360Labels.put(new Integer(2700), new JLabel("270.0"));
+//        slidersAngle02360Labels.put(new Integer(3600), new JLabel("360.0"));
+//
+//        Dictionary<Integer, JLabel> slidersAngle90Labels = new Hashtable<Integer, JLabel>();
+//        slidersAngle90Labels.put(new Integer(0), new JLabel("0.0"));
+//        slidersAngle90Labels.put(new Integer(450), new JLabel("45.0"));
+//        slidersAngle90Labels.put(new Integer(900), new JLabel("90.0"));
+//
+//        jSliderSnellAngleVarationMin.setLabelTable(slidersAngle0360Labels);
+//        jSliderSnellAngleVarationMax.setLabelTable(slidersAngle0360Labels);
+//        jSliderSnellDelta.setLabelTable(slidersAngle02360Labels);
+//        installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMin);
+//        installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMax);
+//        installDecimalFormatter(jFormattedTextFieldSnellDelta);
+//        installNaturalFormatter(jFormattedTextFieldSnellDelay);
+//
+//        jSliderEnergyConservationPexiglass.setLabelTable(slidersAngle0360Labels);
+//        jSliderEnergyConservationPolarization.setLabelTable(slidersAngle90Labels);
+//        installDecimalFormatter(jFormattedTextFieldEnergyConservationPexiglass);
+//        installDecimalFormatter(jFormattedTextFieldEnergyConservationPolarization);
+//
+//        jSliderCriticalAngleVarationMin.setLabelTable(slidersAngle0360Labels);
+//        jSliderCriticalAngleVarationMax.setLabelTable(slidersAngle0360Labels);
+//        jSliderCriticalAngleDelta.setLabelTable(slidersAngle02360Labels);
+//        installDecimalFormatter(jFormattedTextFieldCriticalAngleVarationMin);
+//        installDecimalFormatter(jFormattedTextFieldCriticalAngleVarationMax);
+//        installDecimalFormatter(jFormattedTextFieldCriticalAngleDelta);
+//
+//        jSliderBrewsterAngleVarationMin.setLabelTable(slidersAngle0360Labels);
+//        jSliderBrewsterAngleVarationMax.setLabelTable(slidersAngle0360Labels);
+//        jSliderBrewsterAngleDelta.setLabelTable(slidersAngle02360Labels);
+//        jSliderBrewsterAnglePolarization.setLabelTable(slidersAngle90Labels);
+//        installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMin);
+//        installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMax);
+//        installDecimalFormatter(jFormattedTextFieldBrewsterAngleDelta);
+//        installDecimalFormatter(jFormattedTextFieldBrewsterAnglePolarization);
+//
+//        // TODO 
+//        // checkMaxNumSamples();
+//        // checkMaxTime();
+//        // checkPosOverlap();
 
     }
 
@@ -1670,38 +1644,38 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     }
 
     private void formattedMultipliedTextChanged(javax.swing.JSlider slider, javax.swing.JFormattedTextField textField) {
-        String strPos1 = textField.getText();
-        if (strPos1.trim().equals("")) {
-            return;
-        }
-        strPos1 = strPos1.replace(",", ".");
-        try {
-            int pos1 = (int) (Float.parseFloat(strPos1) * 10.F);
-            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
-                slider.setValue(pos1 - slider.getMinimum());
-            } else {
-                textField.setValue(Float.toString((float) slider.getValue() / 10.F));
-            }
-        } catch (Exception e) {
-            textField.setValue(Float.toString((float) slider.getValue() / 10.F));
-        }
+//        String strPos1 = textField.getText();
+//        if (strPos1.trim().equals("")) {
+//            return;
+//        }
+//        strPos1 = strPos1.replace(",", ".");
+//        try {
+//            int pos1 = (int) (Float.parseFloat(strPos1) * 10.F);
+//            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
+//                slider.setValue(pos1 - slider.getMinimum());
+//            } else {
+//                textField.setValue(Float.toString((float) slider.getValue() / 10.F));
+//            }
+//        } catch (Exception e) {
+//            textField.setValue(Float.toString((float) slider.getValue() / 10.F));
+//        }
     }
 
     private void formattedTextChanged(javax.swing.JSlider slider, javax.swing.JFormattedTextField textField) {
-        String strPos1 = textField.getText();
-        if (strPos1.trim().equals("")) {
-            return;
-        }
-        strPos1 = strPos1.replace(",", ".");
-        try {
-            int pos1 = (int) Integer.parseInt(strPos1);
-            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
-                slider.setValue(pos1 - slider.getMinimum());
-            } else {
-                textField.setValue(slider.getValue());
-            }
-        } catch (Exception e) {
-            textField.setValue(slider.getValue());
-        }
+//        String strPos1 = textField.getText();
+//        if (strPos1.trim().equals("")) {
+//            return;
+//        }
+//        strPos1 = strPos1.replace(",", ".");
+//        try {
+//            int pos1 = (int) Integer.parseInt(strPos1);
+//            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
+//                slider.setValue(pos1 - slider.getMinimum());
+//            } else {
+//                textField.setValue(slider.getValue());
+//            }
+//        } catch (Exception e) {
+//            textField.setValue(slider.getValue());
+//        }
     }
 }

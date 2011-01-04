@@ -180,10 +180,8 @@
                   <Properties>
                     <Property name="majorTickSpacing" type="int" value="900"/>
                     <Property name="maximum" type="int" value="3600"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="0"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -202,10 +200,8 @@
                   <Properties>
                     <Property name="majorTickSpacing" type="int" value="900"/>
                     <Property name="maximum" type="int" value="3600"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="3600"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -316,10 +312,8 @@
                     <Property name="majorTickSpacing" type="int" value="900"/>
                     <Property name="maximum" type="int" value="3600"/>
                     <Property name="minimum" type="int" value="2"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[250, 16]"/>
@@ -421,8 +415,6 @@
                     <Property name="minimum" type="int" value="1"/>
                     <Property name="minorTickSpacing" type="int" value="1"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="1"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -552,10 +544,8 @@
                   <Properties>
                     <Property name="majorTickSpacing" type="int" value="900"/>
                     <Property name="maximum" type="int" value="3600"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="0"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -637,10 +627,8 @@
                   <Properties>
                     <Property name="majorTickSpacing" type="int" value="225"/>
                     <Property name="maximum" type="int" value="900"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="0"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -846,10 +834,8 @@
                   <Properties>
                     <Property name="majorTickSpacing" type="int" value="900"/>
                     <Property name="maximum" type="int" value="3600"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="0"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -868,10 +854,8 @@
                   <Properties>
                     <Property name="majorTickSpacing" type="int" value="900"/>
                     <Property name="maximum" type="int" value="3600"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="3600"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -987,10 +971,8 @@
                     <Property name="majorTickSpacing" type="int" value="900"/>
                     <Property name="maximum" type="int" value="3600"/>
                     <Property name="minimum" type="int" value="2"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="2"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1149,10 +1131,8 @@
                   <Properties>
                     <Property name="majorTickSpacing" type="int" value="900"/>
                     <Property name="maximum" type="int" value="3600"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="0"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1171,10 +1151,8 @@
                   <Properties>
                     <Property name="majorTickSpacing" type="int" value="900"/>
                     <Property name="maximum" type="int" value="3600"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="3600"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1290,10 +1268,8 @@
                     <Property name="majorTickSpacing" type="int" value="900"/>
                     <Property name="maximum" type="int" value="3600"/>
                     <Property name="minimum" type="int" value="2"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="2"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1383,10 +1359,8 @@
                   <Properties>
                     <Property name="majorTickSpacing" type="int" value="225"/>
                     <Property name="maximum" type="int" value="900"/>
-                    <Property name="minorTickSpacing" type="int" value="100"/>
+                    <Property name="minorTickSpacing" type="int" value="2"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
-                    <Property name="paintTicks" type="boolean" value="true"/>
-                    <Property name="paintTrack" type="boolean" value="false"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
                     <Property name="value" type="int" value="0"/>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
