@@ -612,6 +612,13 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public HardwareAcquisitionConfig getAcquisitionHeader() {
 		return config;
 	}
+	
+	private static SerialPortCommand createTransformedDataCommand(SerialPortCommand command) {
+		SerialPortCommand cmd = new SerialPortCommand(SerialPortCommandList.DAT.toString());
+		cmd.setData(true);
+		cmd.setCommand(command.getCommandIdentifier().concat("	").concat(command.getCommand()));
+		return cmd;
+	}
 
 	/**
 	 * 
@@ -645,6 +652,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		if (!SerialPortCommandList.exists(cmd.getCommandIdentifier())) {
 
 			if (currentDriverState.equals(DriverState.RECEIVINGDATA)) {
+				// FIXEM hack! martelada! it shouln't be necessary to transform but BaseSerialPort doesn't now...
+				cmd = createTransformedDataCommand(cmd);
 				dataSource.processDataCommand(cmd);
 				return;
 			} else if (currentDriverState.equals(DriverState.RECEIVINGBIN)) {
