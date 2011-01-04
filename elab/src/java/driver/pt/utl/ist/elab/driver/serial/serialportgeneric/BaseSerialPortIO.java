@@ -81,7 +81,7 @@ public class BaseSerialPortIO {
 			try {
 				Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Write Line to STAMP: " + writeMessage);
 				byte[] message = (writeMessage + "\r").getBytes("us-ascii");
-				lastOutputMessage = writeMessage;
+				lastOutputMessage = writeMessage.trim();
 
 				if (sPort.getBaudRate() >= 9600) {
 					try {
@@ -176,15 +176,14 @@ public class BaseSerialPortIO {
 						Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Line read from STAMP [" + lineRead + "]");
 
 						if (waitForEcho && lastOutputMessage != null) {
-							Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Ignoring message...");
 							Logger.getLogger(STAMP_IO_LOGGER).log(
 									Level.FINER,
-									"Line read [" + lineRead + "] ignored because it's waiting for echo ["
-											+ waitForEcho + "] of output message [" + lastOutputMessage + "]");
+									"Line read [" + lineRead + "] waiting for echo ["
+									+ waitForEcho + "] of output message [" + lastOutputMessage + "]");
 							
-							if (lastOutputMessage.startsWith(lineRead.toLowerCase())
-									|| lineRead.toLowerCase().startsWith(lastOutputMessage)) {
+							if (lastOutputMessage.equalsIgnoreCase(lineRead)) {
 								lastOutputMessage = null;
+								Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Received the echo message.");
 							}
 							continue;
 						}
