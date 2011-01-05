@@ -444,11 +444,11 @@ form#content div {
 	font-weight: bold;
 }
 
-linkableImage {
+.linkableImage {
 	border: 0 none;	
 }
 
-commemorationBox {
+.commemorationBox {
 	text-align: center;
 }
 
