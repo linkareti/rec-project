@@ -446,10 +446,16 @@ form#content div {
 
 .linkableImage {
 	border: 0 none;	
+	background: url("../../resources/images/auth_box.png") no-repeat scroll 0 0 transparent;
+    border: 0 none;
+    margin: 25px;
+    padding: 70px;
 }
 
 .commemorationBox {
-	text-align: center;
+	color: white;
+	margin-left: 140px;
+	
 }
 
 
