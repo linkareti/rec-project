@@ -362,6 +362,66 @@ form#content div {
 	color: white;
 }
 
+#e-escola_logo img {
+    height: 22px;
+}
+#e-escola_logo {
+    float: left;
+}
+#footer_logos div img {
+    height: 100px;
+}
+#footer-logos {
+    overflow: hidden;
+    max-height: 150px;
+    text-align: center;
+    width: 100%;
+    padding-left: 20px;
+    position: absolute;
+    left: 25%;
+}
+#feder_logo img {
+    height: 22px;
+}
+#feder_logo {
+    float: left;
+    padding-left: 10px;
+}
+#linkare_logo {
+    float: left;
+    padding-left: 10px;
+}
+#linkare_logo img {
+    height: 22px;
+}
+#dgidc_logo img {
+    height: 22px;
+}
+#dgidc_logo {
+    float: left;
+    padding-left: 10px;
+}
+#posconhecimento_logo {
+    FLOAT: left;
+    padding-left: 10px;
+}
+#posconhecimento_logo img {
+    height: 22px;
+}
+#copyright {
+    text-align: center;
+    padding-bottom: 10px;
+}
+#contacto-email {
+    float: left;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+a img {
+    border: 0 none;
+}
+
 /*-------- Auth Body Definitions --------*/
 #auth {
 	background-color: #283234;
