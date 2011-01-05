@@ -358,6 +358,10 @@ form#content div {
 	color: white;
 }
 
+#footer a {
+   color: white;
+}
+
 #footer p {
 	color: white;
 }
@@ -367,7 +371,7 @@ form#content div {
 }
 #e-escola_logo {
     float: left;
-    padding-left: 25%;
+    padding-left: 30%;
 }
 
 #footer-logos {
@@ -415,6 +419,15 @@ form#content div {
 
 a img {
     border: 0 none;
+}
+
+#poweredby  {
+   padding-top: 15px;
+   text-align: center;
+}
+
+#poweredby a {
+   color: white;
 }
 
 /*-------- Auth Body Definitions --------*/
