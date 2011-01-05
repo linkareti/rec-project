@@ -732,6 +732,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				if (SerialPortCommand.isResponse(cmd.getCommand(), rememberLastWrittenMessage))
 					currentDriverState = DriverState.CONFIGUREWAIT;
 				currentDriverState.startTimeoutClock();
+			} else if (thisCommand.equals(SerialPortCommandList.DAT) || thisCommand.equals(SerialPortCommandList.END)) {
+				// valid command
 			} else {
 				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
 						"Configuration recieved from the hardware does not match: " + cmd.getCommand());
