@@ -251,13 +251,14 @@ public class BaseSerialPortIO {
 				inCommand.setCommand(commandTemp.toString());
 			}
 		}
-		if (AbstractSerialPortDriver.currentDriverState == DriverState.RECEIVINGDATA
-				&& !inCommand.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.END.toString()))
-			return;
+		// FIXME what is this doing here?
+//		if (AbstractSerialPortDriver.currentDriverState == DriverState.RECEIVINGDATA
+//				&& !inCommand.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.END.toString()))
+//			return;
 
-		Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Firing stamp command listener...");
+		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINE, "Firing stamp command listener...");
 		fireStampCommandListenerHandleStampCommand(inCommand);
-		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINE, "Fired stamp command listener...");
+		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINEST, "Fired stamp command listener...");
 
 	}
 

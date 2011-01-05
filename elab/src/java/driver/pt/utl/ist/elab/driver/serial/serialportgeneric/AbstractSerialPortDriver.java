@@ -654,6 +654,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			if (currentDriverState.equals(DriverState.RECEIVINGDATA)) {
 				// FIXME hack! martelada! it shouln't be necessary to transform but BaseSerialPort doesn't now...
 				cmd = createTransformedDataCommand(cmd);
+				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINEST, "Going to process the received command.");
 				dataSource.processDataCommand(cmd);
 				return;
 			} else if (currentDriverState.equals(DriverState.RECEIVINGBIN)) {
