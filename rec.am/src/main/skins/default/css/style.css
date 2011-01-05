@@ -153,14 +153,6 @@ h1 {
 #center form#j_idt46 table tbody tr td div.ft input{width:auto !important;}
 #center form#j_idt46 table tbody tr td select{margin:5px 0 5px 0;border:#283234 1px solid !important;font-size:12px;color:#283234 !important;}
 
-#linkableImage {
-	border: 0 none;	
-}
-
-#commemorationBox {
-	text-align: center;
-}
-
 #content div.pf-panel-hd {
 	background: #283234;
 	color: #E4EEED;
@@ -451,6 +443,15 @@ form#content div {
 	color: #E4EEED;
 	font-weight: bold;
 }
+
+linkableImage {
+	border: 0 none;	
+}
+
+commemorationBox {
+	text-align: center;
+}
+
 
 /*-------- Auth Footer Definitions --------*/
 #auth_footer {
