@@ -367,19 +367,14 @@ form#content div {
 }
 #e-escola_logo {
     float: left;
+    padding-left: 25%;
 }
-#footer_logos div img {
-    height: 100px;
-}
+
 #footer-logos {
-    overflow: hidden;
-    max-height: 150px;
-    text-align: center;
-    padding-left: 20px;
-    position: absolute;
-    left: 25%;
+    width: 100%;
     padding-bottom: 20px;
 }
+
 #feder_logo img {
     height: 22px;
 }
@@ -413,7 +408,7 @@ form#content div {
     padding-bottom: 10px;
 }
 #contacto-email {
-    float: left;
+    float: right;
     padding-left: 10px;
     padding-top: 5px;
 }
