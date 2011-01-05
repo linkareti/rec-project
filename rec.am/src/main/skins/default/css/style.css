@@ -3,7 +3,7 @@ body {
 	font-family: Arial, Tahoma, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #231F20;
-	background-color: #283234;
+	background-color: #455660;
 }
 
 h1 {
@@ -41,6 +41,12 @@ h1 {
 #banner {
 	padding-left: 10px;
 	padding-top: 15px;
+}
+
+#banner-p-elab {
+}
+
+#banner-p-labs {
 }
 
 /*-------- Navigation Definitions --------*/
@@ -354,10 +360,9 @@ form#content div {
 
 /*-------- Top Login Definitions --------*/
 #top_login {
-	background: url("../../resources/images/logo.png") no-repeat;
 	margin-left: 10px;
 	height: 100px;
-	background-color: #283234;
+	background-color: #455660;
 }
 
 #top_login h1 {
@@ -429,7 +434,7 @@ form#content div {
 /*-------- Auth Footer Definitions --------*/
 #auth_footer {
 	color: white;
-	background-color: #283234;
+	background-color: #455660;
 	height: 30px;
 }
 
