@@ -511,7 +511,7 @@ public enum DriverState {
 			case CFG:
 				return logAndReturn(DriverState.UNKNOWN);
 			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return logAndReturn(DriverState.CONFIGURED);
 			case CUR:
 				return logAndReturn(DriverState.UNKNOWN);
 			case STR:
@@ -604,7 +604,7 @@ public enum DriverState {
 			case STR:
 				return logAndReturn(DriverState.STARTWAIT);
 			case STROK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return logAndReturn(DriverState.STARTED);
 			case DAT:
 				return logAndReturn(DriverState.UNKNOWN);
 			case BIN:
@@ -792,7 +792,7 @@ public enum DriverState {
 			case STP:
 				return logAndReturn(DriverState.UNKNOWN);
 			case STPOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return logAndReturn(DriverState.STOPPED);
 			case RST:
 				return logAndReturn(DriverState.UNKNOWN);
 			case RSTOK:
