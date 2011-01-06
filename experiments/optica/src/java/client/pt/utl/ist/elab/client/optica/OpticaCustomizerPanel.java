@@ -1286,7 +1286,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 //			polarizacao = 0;
 //			angPol = 0;
 //			checkBox = 0;
-			nsamples = 0; // TODO verificar viabilidade mas o data collector deve estar 'a espera de ler resultado
+			nsamples = 1; // TODO verificar viabilidade mas o data collector deve estar 'a espera de ler resultado
 			break;
 
 		default:
