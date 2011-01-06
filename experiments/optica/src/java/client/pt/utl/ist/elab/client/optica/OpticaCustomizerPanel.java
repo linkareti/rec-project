@@ -325,8 +325,9 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
                 .addContainerGap()
                 .addGroup(jPanelSnellDelayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
-                        .addComponent(jSliderSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(10, 10, 10)
+                        .addComponent(jSliderSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jFormattedTextFieldSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabelSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -336,11 +337,11 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
                 .addGroup(jPanelSnellDelayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSliderSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jFormattedTextFieldSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jFormattedTextFieldSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelSnellDelayLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSliderSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelSnellDelay)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1580,58 +1581,58 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jLabelSnellDelay.setVisible(false);
         jLabelSnellDelta.setVisible(false);
 
-//        Dictionary<Integer, JLabel> slidersAngle0360Labels = new Hashtable<Integer, JLabel>();
-//        slidersAngle0360Labels.put(new Integer(0), new JLabel("0.0"));
-//        slidersAngle0360Labels.put(new Integer(900), new JLabel("90.0"));
-//        slidersAngle0360Labels.put(new Integer(1800), new JLabel("180.0"));
-//        slidersAngle0360Labels.put(new Integer(2700), new JLabel("270.0"));
-//        slidersAngle0360Labels.put(new Integer(3600), new JLabel("360.0"));
-//
-//        Dictionary<Integer, JLabel> slidersAngle02360Labels = new Hashtable<Integer, JLabel>();
-//        slidersAngle02360Labels.put(new Integer(2), new JLabel("0.2"));
-//        slidersAngle02360Labels.put(new Integer(900), new JLabel("90.0"));
-//        slidersAngle02360Labels.put(new Integer(1800), new JLabel("180.0"));
-//        slidersAngle02360Labels.put(new Integer(2700), new JLabel("270.0"));
-//        slidersAngle02360Labels.put(new Integer(3600), new JLabel("360.0"));
-//
-//        Dictionary<Integer, JLabel> slidersAngle90Labels = new Hashtable<Integer, JLabel>();
-//        slidersAngle90Labels.put(new Integer(0), new JLabel("0.0"));
-//        slidersAngle90Labels.put(new Integer(450), new JLabel("45.0"));
-//        slidersAngle90Labels.put(new Integer(900), new JLabel("90.0"));
-//
-//        jSliderSnellAngleVarationMin.setLabelTable(slidersAngle0360Labels);
-//        jSliderSnellAngleVarationMax.setLabelTable(slidersAngle0360Labels);
-//        jSliderSnellDelta.setLabelTable(slidersAngle02360Labels);
-//        installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMin);
-//        installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMax);
-//        installDecimalFormatter(jFormattedTextFieldSnellDelta);
-//        installNaturalFormatter(jFormattedTextFieldSnellDelay);
-//
-//        jSliderEnergyConservationPexiglass.setLabelTable(slidersAngle0360Labels);
-//        jSliderEnergyConservationPolarization.setLabelTable(slidersAngle90Labels);
-//        installDecimalFormatter(jFormattedTextFieldEnergyConservationPexiglass);
-//        installDecimalFormatter(jFormattedTextFieldEnergyConservationPolarization);
-//
-//        jSliderCriticalAngleVarationMin.setLabelTable(slidersAngle0360Labels);
-//        jSliderCriticalAngleVarationMax.setLabelTable(slidersAngle0360Labels);
-//        jSliderCriticalAngleDelta.setLabelTable(slidersAngle02360Labels);
-//        installDecimalFormatter(jFormattedTextFieldCriticalAngleVarationMin);
-//        installDecimalFormatter(jFormattedTextFieldCriticalAngleVarationMax);
-//        installDecimalFormatter(jFormattedTextFieldCriticalAngleDelta);
-//
-//        jSliderBrewsterAngleVarationMin.setLabelTable(slidersAngle0360Labels);
-//        jSliderBrewsterAngleVarationMax.setLabelTable(slidersAngle0360Labels);
-//        jSliderBrewsterAngleDelta.setLabelTable(slidersAngle02360Labels);
-//        jSliderBrewsterAnglePolarization.setLabelTable(slidersAngle90Labels);
-//        installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMin);
-//        installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMax);
-//        installDecimalFormatter(jFormattedTextFieldBrewsterAngleDelta);
-//        installDecimalFormatter(jFormattedTextFieldBrewsterAnglePolarization);
-//
-//        // TODO 
-//        // checkMaxNumSamples();
-//        // checkMaxTime();
-//        // checkPosOverlap();
+        Dictionary<Integer, JLabel> slidersAngle0360Labels = new Hashtable<Integer, JLabel>();
+        slidersAngle0360Labels.put(new Integer(0), new JLabel("0.0"));
+        slidersAngle0360Labels.put(new Integer(900), new JLabel("90.0"));
+        slidersAngle0360Labels.put(new Integer(1800), new JLabel("180.0"));
+        slidersAngle0360Labels.put(new Integer(2700), new JLabel("270.0"));
+        slidersAngle0360Labels.put(new Integer(3600), new JLabel("360.0"));
+
+        Dictionary<Integer, JLabel> slidersAngle02360Labels = new Hashtable<Integer, JLabel>();
+        slidersAngle02360Labels.put(new Integer(2), new JLabel("0.2"));
+        slidersAngle02360Labels.put(new Integer(900), new JLabel("90.0"));
+        slidersAngle02360Labels.put(new Integer(1800), new JLabel("180.0"));
+        slidersAngle02360Labels.put(new Integer(2700), new JLabel("270.0"));
+        slidersAngle02360Labels.put(new Integer(3600), new JLabel("360.0"));
+
+        Dictionary<Integer, JLabel> slidersAngle90Labels = new Hashtable<Integer, JLabel>();
+        slidersAngle90Labels.put(new Integer(0), new JLabel("0.0"));
+        slidersAngle90Labels.put(new Integer(450), new JLabel("45.0"));
+        slidersAngle90Labels.put(new Integer(900), new JLabel("90.0"));
+
+        jSliderSnellAngleVarationMin.setLabelTable(slidersAngle0360Labels);
+        jSliderSnellAngleVarationMax.setLabelTable(slidersAngle0360Labels);
+        jSliderSnellDelta.setLabelTable(slidersAngle02360Labels);
+        installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMin);
+        installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMax);
+        installDecimalFormatter(jFormattedTextFieldSnellDelta);
+        installNaturalFormatter(jFormattedTextFieldSnellDelay);
+
+        jSliderEnergyConservationPexiglass.setLabelTable(slidersAngle0360Labels);
+        jSliderEnergyConservationPolarization.setLabelTable(slidersAngle90Labels);
+        installDecimalFormatter(jFormattedTextFieldEnergyConservationPexiglass);
+        installDecimalFormatter(jFormattedTextFieldEnergyConservationPolarization);
+
+        jSliderCriticalAngleVarationMin.setLabelTable(slidersAngle0360Labels);
+        jSliderCriticalAngleVarationMax.setLabelTable(slidersAngle0360Labels);
+        jSliderCriticalAngleDelta.setLabelTable(slidersAngle02360Labels);
+        installDecimalFormatter(jFormattedTextFieldCriticalAngleVarationMin);
+        installDecimalFormatter(jFormattedTextFieldCriticalAngleVarationMax);
+        installDecimalFormatter(jFormattedTextFieldCriticalAngleDelta);
+
+        jSliderBrewsterAngleVarationMin.setLabelTable(slidersAngle0360Labels);
+        jSliderBrewsterAngleVarationMax.setLabelTable(slidersAngle0360Labels);
+        jSliderBrewsterAngleDelta.setLabelTable(slidersAngle02360Labels);
+        jSliderBrewsterAnglePolarization.setLabelTable(slidersAngle90Labels);
+        installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMin);
+        installDecimalFormatter(jFormattedTextFieldBrewsterAngleVarationMax);
+        installDecimalFormatter(jFormattedTextFieldBrewsterAngleDelta);
+        installDecimalFormatter(jFormattedTextFieldBrewsterAnglePolarization);
+
+        // TODO 
+        // checkMaxNumSamples();
+        // checkMaxTime();
+        // checkPosOverlap();
 
     }
 
@@ -1644,38 +1645,38 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     }
 
     private void formattedMultipliedTextChanged(javax.swing.JSlider slider, javax.swing.JFormattedTextField textField) {
-//        String strPos1 = textField.getText();
-//        if (strPos1.trim().equals("")) {
-//            return;
-//        }
-//        strPos1 = strPos1.replace(",", ".");
-//        try {
-//            int pos1 = (int) (Float.parseFloat(strPos1) * 10.F);
-//            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
-//                slider.setValue(pos1 - slider.getMinimum());
-//            } else {
-//                textField.setValue(Float.toString((float) slider.getValue() / 10.F));
-//            }
-//        } catch (Exception e) {
-//            textField.setValue(Float.toString((float) slider.getValue() / 10.F));
-//        }
+        String strPos1 = textField.getText();
+        if (strPos1.trim().equals("")) {
+            return;
+        }
+        strPos1 = strPos1.replace(",", ".");
+        try {
+            int pos1 = (int) (Float.parseFloat(strPos1) * 10.F);
+            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
+                slider.setValue(pos1 - slider.getMinimum());
+            } else {
+                textField.setValue(Float.toString((float) slider.getValue() / 10.F));
+            }
+        } catch (Exception e) {
+            textField.setValue(Float.toString((float) slider.getValue() / 10.F));
+        }
     }
 
     private void formattedTextChanged(javax.swing.JSlider slider, javax.swing.JFormattedTextField textField) {
-//        String strPos1 = textField.getText();
-//        if (strPos1.trim().equals("")) {
-//            return;
-//        }
-//        strPos1 = strPos1.replace(",", ".");
-//        try {
-//            int pos1 = (int) Integer.parseInt(strPos1);
-//            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
-//                slider.setValue(pos1 - slider.getMinimum());
-//            } else {
-//                textField.setValue(slider.getValue());
-//            }
-//        } catch (Exception e) {
-//            textField.setValue(slider.getValue());
-//        }
+        String strPos1 = textField.getText();
+        if (strPos1.trim().equals("")) {
+            return;
+        }
+        strPos1 = strPos1.replace(",", ".");
+        try {
+            int pos1 = (int) Integer.parseInt(strPos1);
+            if (pos1 <= slider.getMaximum() && pos1 >= slider.getMinimum()) {
+                slider.setValue(pos1 - slider.getMinimum());
+            } else {
+                textField.setValue(slider.getValue());
+            }
+        } catch (Exception e) {
+            textField.setValue(slider.getValue());
+        }
     }
 }
