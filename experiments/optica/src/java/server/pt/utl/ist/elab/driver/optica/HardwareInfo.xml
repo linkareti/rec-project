@@ -89,7 +89,35 @@
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
-	<ChannelInfo name="Protocolo" independent="false" direction="CHANNEL_INPUT">
+	<ChannelInfo name="Ângulo pexiglass" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Ângulo pexiglass [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">360.</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="Ângulo sensor óptico" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Ângulo sensor óptico [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
+			<min><PhysicsVal type="float">0.</PhysicsVal></min>
+			<max><PhysicsVal type="float">360.</PhysicsVal></max>
+			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
+			<errordefault><PhysicsVal type="float">0.</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<ChannelInfo name="ADC" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Intensidade do sensor óptico" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">4095</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">0</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+
+	<!-- Temporary definitions // TODO remove commented code -->
+	<!-- ChannelInfo name="Protocolo" independent="false" direction="CHANNEL_INPUT">
 		<scale label="Protocolo" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
 			<min><PhysicsVal type="int">1</PhysicsVal></min>
 			<max><PhysicsVal type="int">5</PhysicsVal></max>
@@ -159,6 +187,6 @@
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
 			<errordefault><PhysicsVal type="int">0</PhysicsVal></errordefault>
 		</scale>
-	</ChannelInfo>
+	</ChannelInfo -->
 
 </HardwareInfo>
