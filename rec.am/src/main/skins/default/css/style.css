@@ -483,6 +483,7 @@ a img {
 	overflow: hidden;
 	margin-left: 13.3%;
 	display: inline-block;
+	float: left;
 }
 
 #login form.am_login h1 {
