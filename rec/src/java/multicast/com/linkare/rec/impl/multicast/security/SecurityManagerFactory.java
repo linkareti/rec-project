@@ -45,7 +45,12 @@ public final class SecurityManagerFactory {
 			secManager = new DefaultSecurityManager();
 		}
 		try {
-			secManager = (ISecurityManager) Class.forName(secManagerClassName).newInstance();
+			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.FINE,
+					"Trying to load the SecurityManager class [" + secManagerClassName + "]");
+			Class<?> clazz = Class.forName(secManagerClassName);
+			if (clazz != null) {
+				secManager = (ISecurityManager) Class.forName(secManagerClassName).newInstance();
+			}
 		} catch (Exception e) {
 			Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(
 					Level.INFO,
@@ -64,10 +69,11 @@ public final class SecurityManagerFactory {
 			e.printStackTrace();
 		} finally {
 			if (secManager == null) {
+				Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
+						"SecurityManager not instatiated... Loading DefaultSecurityManager!");
 				secManager = new DefaultSecurityManager();
 			}
 		}
-
 	}
 
 	/** Creates a new instance of SecurityManagerFactory */
