@@ -88,8 +88,8 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 		if (columnIndex == 0) {
 			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.sample");
 		}
-
-		int channelIndex = (int) Math.floor(((double) columnIndex - 1.) / 2.);
+		
+		int channelIndex = columnIndex - 1;
 
 		String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
 		String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getPhysicsUnitSymbol();
@@ -131,7 +131,8 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 		if (columnIndex == 0) {
 			return String.valueOf(rowIndex + 1);
 		}
-		PhysicsValue value = expDataModel.getValueAt(rowIndex, columnIndex + 1);
+		int channelIndex = columnIndex - 1;
+		PhysicsValue value = expDataModel.getValueAt(rowIndex, channelIndex);
 		return value.getValue().toEngineeringNotation();
 	}
 
