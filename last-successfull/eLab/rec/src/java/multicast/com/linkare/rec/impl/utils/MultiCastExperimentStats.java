@@ -1,0 +1,161 @@
+/* 
+ * MultiCastExperimentStats.java created on 1 Nov 2010
+ *
+ * Copyright 2009 Linkare TI. All rights reserved.
+ * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package com.linkare.rec.impl.utils;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
+import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.impl.data.FrequencyUtil;
+
+/**
+ * 
+ * @author npadriano
+ */
+public class MultiCastExperimentStats implements Serializable {
+
+	/** Generated UID */
+	private static final long serialVersionUID = -2442955578118794705L;
+
+	private static String LOGGER = "ReCMultiCastDataProducer.Logger";
+
+	static {
+		Logger l = LogManager.getLogManager().getLogger(LOGGER);
+		if (l == null) {
+			LogManager.getLogManager().addLogger(Logger.getLogger(LOGGER));
+		}
+	}
+
+	private static String baseDir = null;
+	static {
+		baseDir = System.getProperty("user.dir") + System.getProperty("file.separator") + "ExperimentStats";
+		java.io.File f = new java.io.File(baseDir);
+		if (!f.exists())
+			f.mkdirs();
+		f = null;
+	}
+
+	private String hardwareUniqueId;
+	private long lockPeriod;
+
+	private long totalNumberOfExecutions = 0;
+	private long runningAverageTimeOfExecution = 0;
+	private long totalLockEventsSent = 0;
+	private transient long experimentStartTimestamp = 0;
+
+	/**
+	 * Creates the <code>MultiCastExperimentStats</code>.
+	 * 
+	 * @param hardwareInfo
+	 * @param lockPeriod
+	 */
+	private MultiCastExperimentStats(HardwareInfo hardwareInfo, long lockPeriod) {
+		this.lockPeriod = lockPeriod;
+		this.hardwareUniqueId = hardwareInfo.getHardwareUniqueID();
+
+		Logger.getLogger(LOGGER).log(Level.INFO,
+				"Stats instantiated for hardware " + hardwareUniqueId + " with lock period " + lockPeriod);
+
+		this.runningAverageTimeOfExecution = FrequencyUtil.getMaximumExperimentTime(hardwareInfo);
+	}
+
+	public synchronized void lockEventSent() {
+		totalLockEventsSent++;
+	}
+
+	public synchronized void startExperimentStats() {
+		if (experimentStartTimestamp == 0) {
+			experimentStartTimestamp = System.currentTimeMillis();
+		}
+	}
+
+	public synchronized void stopExperimentStats() {
+		if (experimentStartTimestamp > 0) {
+			long totalTimeOfCurrentExecution = System.currentTimeMillis() - experimentStartTimestamp;
+			experimentStartTimestamp = 0;
+
+			runningAverageTimeOfExecution = (runningAverageTimeOfExecution * totalNumberOfExecutions + totalTimeOfCurrentExecution)
+					/ (totalNumberOfExecutions + 1);
+
+			totalNumberOfExecutions++;
+		}
+	}
+
+	public synchronized long calcAverageExecutionTime() {
+		double averageUsedLocks = (totalLockEventsSent == 0 ? 1 : ((double) totalNumberOfExecutions)
+				/ ((double) totalLockEventsSent));
+		// long averageExecutionTime = (long) (runningAverageTimeOfExecution *
+		// averageUsedLocks);
+		long averageExecutionTime = (long) (runningAverageTimeOfExecution * averageUsedLocks) + lockPeriod;
+
+		return averageExecutionTime;
+	}
+
+	public synchronized void shutdown() {
+		Logger.getLogger(LOGGER).log(Level.INFO, "Stats shutdown for hardware " + hardwareUniqueId);
+		writeObject();
+	}
+
+	/**
+	 * @param hardwareInfo
+	 * @param lockPeriod
+	 * @return
+	 */
+	public static MultiCastExperimentStats getInstance(HardwareInfo hardwareInfo, long lockPeriod) {
+		File file = new File(getFileName(hardwareInfo.getHardwareUniqueID()));
+		if (file.exists()) {
+			try {
+				Logger.getLogger(LOGGER).log(Level.FINE, "Getting stats instance from file.");
+				return readObject(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+				Logger.getLogger(LOGGER).log(Level.WARNING,
+						"Exception ocurred reading serialized stats object. Message: " + e.getMessage());
+			}
+		}
+		Logger.getLogger(LOGGER).log(Level.FINE, "Getting new stats instance.");
+		return new MultiCastExperimentStats(hardwareInfo, lockPeriod);
+	}
+
+	private static String getFileName(String hardwareUniqueId) {
+		return baseDir + System.getProperty("file.separator") + hardwareUniqueId + ".ser";
+	}
+
+	private void writeObject() {
+		File file = new File(getFileName(hardwareUniqueId));
+		Logger.getLogger(LOGGER).log(Level.FINE, "Writing stats to file " + file.getAbsoluteFile());
+		if (file.exists()) {
+			file.delete();
+		}
+
+		FileObjectOutputStream oos;
+		try {
+			oos = new FileObjectOutputStream(file);
+			oos.writeObject(this);
+			oos.flush();
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Logger.getLogger(LOGGER).log(Level.WARNING,
+					"Exception ocurred writing serialized stats object. Message: " + e.getMessage());
+		}
+	}
+
+	private static MultiCastExperimentStats readObject(File file) throws IOException, ClassNotFoundException {
+		Logger.getLogger(LOGGER).log(Level.FINE, "Reading stats from file " + file.getAbsoluteFile());
+
+		FileObjectInputStream ois = new FileObjectInputStream(file);
+		Object o = ois.readObject();
+		ois.close();
+		return (MultiCastExperimentStats) o;
+	}
+
+}
