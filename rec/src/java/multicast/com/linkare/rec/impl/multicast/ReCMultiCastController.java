@@ -271,16 +271,15 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 			// }
 			// }
 			synchronized (multiCastHardwares) {
-				Collection<ReCMultiCastHardware> iterateHardwares = Collections
-						.unmodifiableCollection(multiCastHardwares);
-				for (ReCMultiCastHardware rmch : iterateHardwares) {
+				for (Iterator<ReCMultiCastHardware> it = multiCastHardwares.iterator(); it.hasNext();) {
+					ReCMultiCastHardware rmch = it.next();
 					try {
 						if (!rmch.getHardware().isConnected()) {
 							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId() + " is gone! Shutting it down!");
 							rmch.shutdown();
 							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
 									+ " was shutdown successfully - Now removing it from MCController list!");
-							multiCastHardwares.remove(rmch);
+							it.remove();
 							log(Level.FINEST, "Hardware " + rmch.getHardwareUniqueId()
 									+ " removed from MCCContoller sucessfully. Now tell clients it is gone!");
 							clientQueue.hardwareChanged(new HardwareChangeEvent());
@@ -354,7 +353,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 								log(Level.INFO, "The old hardware with " + hardwareId
 										+ " has gonne bananas... Shut it down and replace it by a new one...");
 								hardware.shutdown();
-								multiCastHardwares.remove(hardware);
+								iter.remove();
 								break;
 							} else {
 								log(Level.INFO, "The old hardware with " + hardwareId
