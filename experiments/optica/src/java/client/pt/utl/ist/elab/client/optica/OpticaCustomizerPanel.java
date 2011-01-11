@@ -1255,7 +1255,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			}
 			angPol = (float) jSliderEnergyConservationPolarization.getValue() / 10.F;
 			
-			nsamples = 1; // TODO FIXME 
+			nsamples = 1625; 
 			break;
 			
 		case 3:
