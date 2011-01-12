@@ -1723,11 +1723,11 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         
         Dictionary<Integer, JLabel> slidersDelayLabels = new Hashtable<Integer, JLabel>();
         slidersDelayLabels.put(new Integer(0), new JLabel("0.0"));
-        slidersDelayLabels.put(new Integer(10), new JLabel("10.0"));
-        slidersDelayLabels.put(new Integer(20), new JLabel("20.0"));
-        slidersDelayLabels.put(new Integer(30), new JLabel("30.0"));
-        slidersDelayLabels.put(new Integer(40), new JLabel("40.0"));
-        slidersDelayLabels.put(new Integer(50), new JLabel("50.0"));
+        slidersDelayLabels.put(new Integer(10), new JLabel("1.0"));
+        slidersDelayLabels.put(new Integer(20), new JLabel("2.0"));
+        slidersDelayLabels.put(new Integer(30), new JLabel("3.0"));
+        slidersDelayLabels.put(new Integer(40), new JLabel("4.0"));
+        slidersDelayLabels.put(new Integer(50), new JLabel("5.0"));
 
         jSliderSnellAngleVarationMin.setLabelTable(slidersAngle0360Labels);
         jSliderSnellAngleVarationMax.setLabelTable(slidersAngle0360Labels);
