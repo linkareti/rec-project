@@ -135,57 +135,60 @@ public class BaseSerialPortIO {
 				try {
 
 					synchronized (sPort) {
-						char readChar = 0;
-						lineRead = null;
-						if (AbstractSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN)
-							lineReadTemp = new StringBuffer(1024);
-						else {
-							lineReadTemp = new StringBuffer(AbstractSerialPortDriver.currentBinaryLength + 5 /*
-																											 * length
-																											 * of
-																											 * _BIN
-																											 */);
-							lineReadTemp.append("_BIN\t");
-						}
-						while (!exit) {
-							while (!inReader.ready()) {
-								sleep(0, 500);
+						if (inReader != null) {
+							char readChar = 0;
+							lineRead = null;
+							if (AbstractSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN)
+								lineReadTemp = new StringBuffer(1024);
+							else {
+								lineReadTemp = new StringBuffer(AbstractSerialPortDriver.currentBinaryLength + 5 /*
+																												 * length
+																												 * of
+																												 * _BIN
+																												 */);
+								lineReadTemp.append("_BIN\t");
 							}
-							readChar = (char) inReader.read();
-							if (AbstractSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN) {
-								if (readChar != '\r' && readChar != '\n') {
-									lineReadTemp.append(readChar);
-								} else {
-									break;
+							while (!exit) {
+								while (!inReader.ready()) {
+									sleep(0, 500);
 								}
-							} else {
-								if (lineReadTemp.length() <= AbstractSerialPortDriver.currentBinaryLength + 5)
-									/* 5 = length of _BIN header */
-									lineReadTemp.append(readChar);
-								else
-									break;
+								readChar = (char) inReader.read();
+								if (AbstractSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN) {
+									if (readChar != '\r' && readChar != '\n') {
+										lineReadTemp.append(readChar);
+									} else {
+										break;
+									}
+								} else {
+									if (lineReadTemp.length() <= AbstractSerialPortDriver.currentBinaryLength + 5)
+										/* 5 = length of _BIN header */
+										lineReadTemp.append(readChar);
+									else
+										break;
+								}
 							}
-						}
 
-						if (exit) {
-							currentThread = null;
-							return;
-						}
-
-						lineRead = lineReadTemp.toString().trim();
-						Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Line read from STAMP [" + lineRead + "]");
-
-						if (waitForEcho && lastOutputMessage != null) {
-							Logger.getLogger(STAMP_IO_LOGGER).log(
-									Level.FINER,
-									"Line read [" + lineRead + "] waiting for echo ["
-									+ waitForEcho + "] of output message [" + lastOutputMessage + "]");
-							
-							if (lastOutputMessage.equalsIgnoreCase(lineRead)) {
-								lastOutputMessage = null;
-								Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Received the echo message.");
+							if (exit) {
+								currentThread = null;
+								return;
 							}
-							continue;
+
+							lineRead = lineReadTemp.toString().trim();
+							Logger.getLogger(STAMP_IO_LOGGER)
+									.log(Level.INFO, "Line read from STAMP [" + lineRead + "]");
+
+							if (waitForEcho && lastOutputMessage != null) {
+								Logger.getLogger(STAMP_IO_LOGGER).log(
+										Level.FINER,
+										"Line read [" + lineRead + "] waiting for echo [" + waitForEcho
+												+ "] of output message [" + lastOutputMessage + "]");
+
+								if (lastOutputMessage.equalsIgnoreCase(lineRead)) {
+									lastOutputMessage = null;
+									Logger.getLogger(STAMP_IO_LOGGER).log(Level.INFO, "Received the echo message.");
+								}
+								continue;
+							}
 						}
 					}
 
