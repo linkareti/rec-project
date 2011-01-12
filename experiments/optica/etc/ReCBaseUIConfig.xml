@@ -27,17 +27,25 @@
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
 		displayStringBundleKey="optica$rec.exp.dftcfg.optica.title.1" order="1" />
 
-	<Display classLocationBundleKey="optica$rec.exp.display.optica.loc.sensor"
+	<!--Display classLocationBundleKey="optica$rec.exp.display.optica.loc.sensor"
 		toolTipBundleKey="optica$rec.exp.display.optica.tip.sensor"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
 		displayStringBundleKey="optica$rec.exp.display.optica.title.sensor"
-		offlineCapable="false" order="1" />
+		offlineCapable="false" order="1" /-->
 	<Display classLocationBundleKey="optica$rec.exp.display.optica.loc.1"
 		toolTipBundleKey="optica$rec.exp.display.optica.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
 		displayStringBundleKey="optica$rec.exp.display.optica.title.1" offlineCapable="false"
-		order="2" />
-	<!-- Display classLocationBundleKey="optica$rec.exp.display.optica.loc.2"
+		order="1" />
+	<Display classLocationBundleKey="optica$rec.exp.display.optica.loc.2"
 		toolTipBundleKey="optica$rec.exp.display.optica.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="optica$rec.exp.display.optica.title.2" offlineCapable="false"
-		order="3" / -->
+		order="2" />
+	<Display classLocationBundleKey="optica$rec.exp.display.optica.loc.3"
+		toolTipBundleKey="optica$rec.exp.display.optica.tip.3" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="optica$rec.exp.display.optica.title.3" offlineCapable="false"
+		order="3" />
+	<Display classLocationBundleKey="optica$rec.exp.display.optica.loc.4"
+		toolTipBundleKey="optica$rec.exp.display.optica.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="optica$rec.exp.display.optica.title.4" offlineCapable="false"
+		order="4" />
 </Apparatus>

@@ -29,6 +29,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
     /** Generated UID */
 	private static final long serialVersionUID = -6367415208236048245L;
+	
+	private static final int NUMBER_OF_SAMPLES_FOR_SERIES = 1625;
 
 	/** Creates new form OpticaCustomizerPanel */
     public OpticaCustomizerPanel() {
@@ -85,6 +87,10 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderCriticalAngleDelta = new javax.swing.JSlider();
         jLabelCriticalAngleDelta = new javax.swing.JLabel();
         jFormattedTextFieldCriticalAngleDelta = new javax.swing.JFormattedTextField();
+        jPanelCriticalAngleAngle = new javax.swing.JPanel();
+        jCheckBoxCriticalAngleMinimalAngle = new javax.swing.JCheckBox();
+        jCheckBoxCriticalAngleMediumAngle = new javax.swing.JCheckBox();
+        jCheckBoxCriticalAngleMaximumAngle = new javax.swing.JCheckBox();
         jPanelBrewsterAngle = new javax.swing.JPanel();
         jPanelBrewsterAngleVariation = new javax.swing.JPanel();
         jSliderBrewsterAngleVarationMin = new javax.swing.JSlider();
@@ -99,6 +105,10 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelBrewsterAnglePolarization = new javax.swing.JPanel();
         jSliderBrewsterAnglePolarization = new javax.swing.JSlider();
         jFormattedTextFieldBrewsterAnglePolarization = new javax.swing.JFormattedTextField();
+        jPanelBrewsterAngleAngle = new javax.swing.JPanel();
+        jCheckBoxBrewsterAngleMinimalAngle = new javax.swing.JCheckBox();
+        jCheckBoxBrewsterAngleMediumAngle = new javax.swing.JCheckBox();
+        jCheckBoxBrewsterAngleMaximumAngle = new javax.swing.JCheckBox();
         jPanelCalibration = new javax.swing.JPanel();
         jPanelCalibrationButtons = new javax.swing.JPanel();
         jRadioButtonCalibrationPexiglass = new javax.swing.JRadioButton();
@@ -370,7 +380,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
                 .addComponent(jPanelSnellDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelSnellDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelSnell.TabConstraints.tabTitle"), jPanelSnell); // NOI18N
@@ -535,7 +545,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
                 .addComponent(jPanelEnergyConservationPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelEnergyConservationIsPolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelEnergyConservation.TabConstraints.tabTitle"), jPanelEnergyConservation); // NOI18N
@@ -708,6 +718,42 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelCriticalAngleAngle.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelCriticalAngleAngle.border.title"))); // NOI18N
+        jPanelCriticalAngleAngle.setName("jPanelCriticalAngleAngle"); // NOI18N
+        jPanelCriticalAngleAngle.setPreferredSize(new java.awt.Dimension(330, 95));
+
+        jCheckBoxCriticalAngleMinimalAngle.setText(resourceMap.getString("jCheckBoxCriticalAngleMinimalAngle.text")); // NOI18N
+        jCheckBoxCriticalAngleMinimalAngle.setName("jCheckBoxCriticalAngleMinimalAngle"); // NOI18N
+
+        jCheckBoxCriticalAngleMediumAngle.setText(resourceMap.getString("jCheckBoxCriticalAngleMediumAngle.text")); // NOI18N
+        jCheckBoxCriticalAngleMediumAngle.setName("jCheckBoxCriticalAngleMediumAngle"); // NOI18N
+
+        jCheckBoxCriticalAngleMaximumAngle.setText(resourceMap.getString("jCheckBoxCriticalAngleMaximumAngle.text")); // NOI18N
+        jCheckBoxCriticalAngleMaximumAngle.setName("jCheckBoxCriticalAngleMaximumAngle"); // NOI18N
+
+        javax.swing.GroupLayout jPanelCriticalAngleAngleLayout = new javax.swing.GroupLayout(jPanelCriticalAngleAngle);
+        jPanelCriticalAngleAngle.setLayout(jPanelCriticalAngleAngleLayout);
+        jPanelCriticalAngleAngleLayout.setHorizontalGroup(
+            jPanelCriticalAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCriticalAngleAngleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBoxCriticalAngleMinimalAngle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBoxCriticalAngleMediumAngle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBoxCriticalAngleMaximumAngle)
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+        jPanelCriticalAngleAngleLayout.setVerticalGroup(
+            jPanelCriticalAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCriticalAngleAngleLayout.createSequentialGroup()
+                .addGroup(jPanelCriticalAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxCriticalAngleMinimalAngle)
+                    .addComponent(jCheckBoxCriticalAngleMediumAngle)
+                    .addComponent(jCheckBoxCriticalAngleMaximumAngle))
+                .addContainerGap(10, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanelCriticalAngleLayout = new javax.swing.GroupLayout(jPanelCriticalAngle);
         jPanelCriticalAngle.setLayout(jPanelCriticalAngleLayout);
         jPanelCriticalAngleLayout.setHorizontalGroup(
@@ -716,17 +762,20 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
                 .addContainerGap()
                 .addGroup(jPanelCriticalAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelCriticalAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jPanelCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelCriticalAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCriticalAngleLayout.setVerticalGroup(
             jPanelCriticalAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCriticalAngleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelCriticalAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelCriticalAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelCriticalAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelCriticalAngle.TabConstraints.tabTitle"), jPanelCriticalAngle); // NOI18N
@@ -952,6 +1001,42 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelBrewsterAngleAngle.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanelBrewsterAngleAngle.border.title"))); // NOI18N
+        jPanelBrewsterAngleAngle.setName("jPanelBrewsterAngleAngle"); // NOI18N
+        jPanelBrewsterAngleAngle.setPreferredSize(new java.awt.Dimension(330, 95));
+
+        jCheckBoxBrewsterAngleMinimalAngle.setText(resourceMap.getString("jCheckBoxBrewsterAngleMinimalAngle.text")); // NOI18N
+        jCheckBoxBrewsterAngleMinimalAngle.setName("jCheckBoxBrewsterAngleMinimalAngle"); // NOI18N
+
+        jCheckBoxBrewsterAngleMediumAngle.setText(resourceMap.getString("jCheckBoxBrewsterAngleMediumAngle.text")); // NOI18N
+        jCheckBoxBrewsterAngleMediumAngle.setName("jCheckBoxBrewsterAngleMediumAngle"); // NOI18N
+
+        jCheckBoxBrewsterAngleMaximumAngle.setText(resourceMap.getString("jCheckBoxBrewsterAngleMaximumAngle.text")); // NOI18N
+        jCheckBoxBrewsterAngleMaximumAngle.setName("jCheckBoxBrewsterAngleMaximumAngle"); // NOI18N
+
+        javax.swing.GroupLayout jPanelBrewsterAngleAngleLayout = new javax.swing.GroupLayout(jPanelBrewsterAngleAngle);
+        jPanelBrewsterAngleAngle.setLayout(jPanelBrewsterAngleAngleLayout);
+        jPanelBrewsterAngleAngleLayout.setHorizontalGroup(
+            jPanelBrewsterAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBrewsterAngleAngleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBoxBrewsterAngleMinimalAngle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBoxBrewsterAngleMediumAngle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBoxBrewsterAngleMaximumAngle)
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+        jPanelBrewsterAngleAngleLayout.setVerticalGroup(
+            jPanelBrewsterAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBrewsterAngleAngleLayout.createSequentialGroup()
+                .addGroup(jPanelBrewsterAngleAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxBrewsterAngleMinimalAngle)
+                    .addComponent(jCheckBoxBrewsterAngleMediumAngle)
+                    .addComponent(jCheckBoxBrewsterAngleMaximumAngle))
+                .addContainerGap(10, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanelBrewsterAngleLayout = new javax.swing.GroupLayout(jPanelBrewsterAngle);
         jPanelBrewsterAngle.setLayout(jPanelBrewsterAngleLayout);
         jPanelBrewsterAngleLayout.setHorizontalGroup(
@@ -959,10 +1044,11 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             .addGroup(jPanelBrewsterAngleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelBrewsterAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelBrewsterAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelBrewsterAngleVariation, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jPanelBrewsterAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelBrewsterAngleLayout.setVerticalGroup(
             jPanelBrewsterAngleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -972,8 +1058,10 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelBrewsterAngleDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(jPanelBrewsterAnglePolarization, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelBrewsterAngleAngle, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelBrewsterAngle.TabConstraints.tabTitle"), jPanelBrewsterAngle); // NOI18N
@@ -1027,7 +1115,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             .addGroup(jPanelCalibrationLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelCalibrationButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(335, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelCalibration.TabConstraints.tabTitle"), jPanelCalibration); // NOI18N
@@ -1209,6 +1297,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         // int nsamples = sldNumSamples.getValue() < 10 ? 10 : sldNumSamples.getValue();
     	
+    	int selectCheckBoxCount = 0;
     	int nsamples = 0;
     	
     	// inicializar parametros
@@ -1243,16 +1332,30 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			}
 			angPol = (float) jSliderEnergyConservationPolarization.getValue() / 10.F;
 			
-			nsamples = 1625; 
+			nsamples = NUMBER_OF_SAMPLES_FOR_SERIES; 
 			break;
 			
 		case 3:
 			ang1Min = (float) jSliderCriticalAngleVarationMin.getValue() / 10.F;
 			ang1Max = (float) jSliderCriticalAngleVarationMax.getValue() / 10.F;
 			
-//			checkBox // TODO FIXME  
+			if (jCheckBoxCriticalAngleMinimalAngle.isSelected() || jCheckBoxCriticalAngleMediumAngle.isSelected()
+					|| jCheckBoxCriticalAngleMaximumAngle.isSelected()) {
+				if (jCheckBoxCriticalAngleMinimalAngle.isSelected()) {
+					checkBox += 1;
+					selectCheckBoxCount++;
+				}
+				if (jCheckBoxCriticalAngleMediumAngle.isSelected()) {
+					checkBox += 2;
+					selectCheckBoxCount++;
+				}
+				if (jCheckBoxCriticalAngleMaximumAngle.isSelected()) {
+					checkBox += 4;
+					selectCheckBoxCount++;
+				}
+			}
 			
-			nsamples = (int) ((ang1Max - ang1Min) / deltaAng1); // TODO ?
+			nsamples = NUMBER_OF_SAMPLES_FOR_SERIES * selectCheckBoxCount;
 			break;
 			
 		case 4:
@@ -1260,9 +1363,23 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			ang1Max = (float) jSliderBrewsterAngleVarationMax.getValue() / 10.F;
 			angPol = (float) jSliderBrewsterAnglePolarization.getValue() / 10.F;
 			
-//			checkBox // TODO FIXME
+			if (jCheckBoxBrewsterAngleMinimalAngle.isSelected() || jCheckBoxBrewsterAngleMediumAngle.isSelected()
+					|| jCheckBoxBrewsterAngleMaximumAngle.isSelected()) {
+				if (jCheckBoxBrewsterAngleMinimalAngle.isSelected()) {
+					checkBox += 1;
+					selectCheckBoxCount++;
+				}
+				if (jCheckBoxBrewsterAngleMediumAngle.isSelected()) {
+					checkBox += 2;
+					selectCheckBoxCount++;
+				}
+				if (jCheckBoxBrewsterAngleMaximumAngle.isSelected()) {
+					checkBox += 4;
+					selectCheckBoxCount++;
+				}
+			}
 			
-			nsamples = (int) ((ang1Max - ang1Min) / deltaAng1); // TODO ?
+			nsamples = NUMBER_OF_SAMPLES_FOR_SERIES * selectCheckBoxCount;
 			break;
 			
 		case 5:
@@ -1357,6 +1474,12 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDefaultConfig;
     private javax.swing.JButton jButtonOk;
+    private javax.swing.JCheckBox jCheckBoxBrewsterAngleMaximumAngle;
+    private javax.swing.JCheckBox jCheckBoxBrewsterAngleMediumAngle;
+    private javax.swing.JCheckBox jCheckBoxBrewsterAngleMinimalAngle;
+    private javax.swing.JCheckBox jCheckBoxCriticalAngleMaximumAngle;
+    private javax.swing.JCheckBox jCheckBoxCriticalAngleMediumAngle;
+    private javax.swing.JCheckBox jCheckBoxCriticalAngleMinimalAngle;
     private javax.swing.JFormattedTextField jFormattedTextFieldBrewsterAngleDelta;
     private javax.swing.JFormattedTextField jFormattedTextFieldBrewsterAnglePolarization;
     private javax.swing.JFormattedTextField jFormattedTextFieldBrewsterAngleVarationMax;
@@ -1378,6 +1501,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     private javax.swing.JLabel jLabelSnellDelay;
     private javax.swing.JLabel jLabelSnellDelta;
     private javax.swing.JPanel jPanelBrewsterAngle;
+    private javax.swing.JPanel jPanelBrewsterAngleAngle;
     private javax.swing.JPanel jPanelBrewsterAngleDelta;
     private javax.swing.JPanel jPanelBrewsterAnglePolarization;
     private javax.swing.JPanel jPanelBrewsterAngleVariation;
@@ -1385,6 +1509,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     private javax.swing.JPanel jPanelCalibrationButtons;
     private javax.swing.JPanel jPanelControlButtons;
     private javax.swing.JPanel jPanelCriticalAngle;
+    private javax.swing.JPanel jPanelCriticalAngleAngle;
     private javax.swing.JPanel jPanelCriticalAngleDelta;
     private javax.swing.JPanel jPanelCriticalAngleVariation;
     private javax.swing.JPanel jPanelEnergyConservation;

@@ -26,6 +26,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,0,0,0,1,94"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -85,7 +86,7 @@
                       <Component id="jPanelSnellDelta" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelSnellDelay" min="-2" pref="107" max="-2" attributes="0"/>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <EmptySpace pref="39" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -479,7 +480,7 @@
                       <Component id="jPanelEnergyConservationPolarization" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelEnergyConservationIsPolarization" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="123" max="32767" attributes="0"/>
+                      <EmptySpace pref="145" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -723,13 +724,14 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jPanelCriticalAngleVariation" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
                           <Component id="jPanelCriticalAngleDelta" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
+                          <Component id="jPanelCriticalAngleAngle" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -738,9 +740,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelCriticalAngleVariation" min="-2" pref="155" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelCriticalAngleDelta" min="-2" pref="107" max="-2" attributes="0"/>
-                      <EmptySpace pref="122" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanelCriticalAngleAngle" min="-2" pref="58" max="-2" attributes="0"/>
+                      <EmptySpace pref="86" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1000,6 +1004,69 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Container class="javax.swing.JPanel" name="jPanelCriticalAngleAngle">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="&#xc2;ngulo">
+                      <Property name="titleX" resourceKey="jPanelCriticalAngleAngle.border.title"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelCriticalAngleAngle" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[330, 95]"/>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jCheckBoxCriticalAngleMinimalAngle" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxCriticalAngleMediumAngle" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxCriticalAngleMaximumAngle" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="95" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jCheckBoxCriticalAngleMinimalAngle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxCriticalAngleMediumAngle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxCriticalAngleMaximumAngle" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxCriticalAngleMinimalAngle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jCheckBoxCriticalAngleMinimalAngle.text"/>
+                    <Property name="name" type="java.lang.String" value="jCheckBoxCriticalAngleMinimalAngle" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxCriticalAngleMediumAngle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jCheckBoxCriticalAngleMediumAngle.text"/>
+                    <Property name="name" type="java.lang.String" value="jCheckBoxCriticalAngleMediumAngle" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxCriticalAngleMaximumAngle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jCheckBoxCriticalAngleMaximumAngle.text"/>
+                    <Property name="name" type="java.lang.String" value="jCheckBoxCriticalAngleMaximumAngle" noResource="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanelBrewsterAngle">
@@ -1017,14 +1084,15 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanelBrewsterAnglePolarization" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jPanelBrewsterAngleDelta" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
                           <Component id="jPanelBrewsterAngleVariation" alignment="0" min="-2" pref="330" max="-2" attributes="0"/>
-                          <Component id="jPanelBrewsterAnglePolarization" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanelBrewsterAngleAngle" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1036,8 +1104,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelBrewsterAngleDelta" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanelBrewsterAnglePolarization" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="35" max="32767" attributes="0"/>
+                      <Component id="jPanelBrewsterAnglePolarization" min="-2" pref="77" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanelBrewsterAngleAngle" min="-2" pref="58" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1380,6 +1450,69 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Container class="javax.swing.JPanel" name="jPanelBrewsterAngleAngle">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="&#xc2;ngulo">
+                      <Property name="titleX" resourceKey="jPanelBrewsterAngleAngle.border.title"/>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jPanelBrewsterAngleAngle" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[330, 95]"/>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jCheckBoxBrewsterAngleMinimalAngle" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxBrewsterAngleMediumAngle" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxBrewsterAngleMaximumAngle" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="95" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jCheckBoxBrewsterAngleMinimalAngle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxBrewsterAngleMediumAngle" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxBrewsterAngleMaximumAngle" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxBrewsterAngleMinimalAngle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jCheckBoxBrewsterAngleMinimalAngle.text"/>
+                    <Property name="name" type="java.lang.String" value="jCheckBoxBrewsterAngleMinimalAngle" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxBrewsterAngleMediumAngle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jCheckBoxBrewsterAngleMediumAngle.text"/>
+                    <Property name="name" type="java.lang.String" value="jCheckBoxBrewsterAngleMediumAngle" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBoxBrewsterAngleMaximumAngle">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jCheckBoxBrewsterAngleMaximumAngle.text"/>
+                    <Property name="name" type="java.lang.String" value="jCheckBoxBrewsterAngleMaximumAngle" noResource="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanelCalibration">
@@ -1409,7 +1542,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanelCalibrationButtons" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="313" max="32767" attributes="0"/>
+                      <EmptySpace pref="335" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
