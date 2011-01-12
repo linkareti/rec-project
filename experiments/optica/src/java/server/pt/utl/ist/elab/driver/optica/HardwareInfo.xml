@@ -85,7 +85,7 @@
 
 	<sampling-scale>
 		<min-samples>1</min-samples>
-		<max-samples>1800</max-samples>
+		<max-samples>4875</max-samples>
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
@@ -115,78 +115,5 @@
 			<errordefault><PhysicsVal type="int">0</PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
-
-	<!-- Temporary definitions // TODO remove commented code -->
-	<!-- ChannelInfo name="Protocolo" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Protocolo" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
-			<min><PhysicsVal type="int">1</PhysicsVal></min>
-			<max><PhysicsVal type="int">5</PhysicsVal></max>
-			<step><PhysicsVal type="int">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="int">0</PhysicsVal></errordefault>
-		</scale>
-	</ChannelInfo>
-
-	<ChannelInfo name="Ângulo mínimo" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Ângulo mínimo [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
-			<min><PhysicsVal type="float">0.</PhysicsVal></min>
-			<max><PhysicsVal type="float">360.</PhysicsVal></max>
-			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
-		</scale>
-	</ChannelInfo>
-
-	<ChannelInfo name="Ângulo máximo" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Ângulo máximo [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
-			<min><PhysicsVal type="float">0.</PhysicsVal></min>
-			<max><PhysicsVal type="float">360.</PhysicsVal></max>
-			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
-		</scale>
-	</ChannelInfo>
-
-	<ChannelInfo name="Incremento" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Incremento [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
-			<min><PhysicsVal type="float">0.2</PhysicsVal></min>
-			<max><PhysicsVal type="float">360.</PhysicsVal></max>
-			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
-		</scale>
-	</ChannelInfo>
-
-	<ChannelInfo name="Delay" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Delay [s]" physicsunitname="segundos" physicsunitsymbol="s" multiplier="none" selected="true">
-			<min><PhysicsVal type="float">0.1</PhysicsVal></min>
-			<max><PhysicsVal type="float">360.</PhysicsVal></max>
-			<step><PhysicsVal type="float">0.1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.01</PhysicsVal></errordefault>
-		</scale>
-	</ChannelInfo>
-
-	<ChannelInfo name="Polarização" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Polarização" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
-			<min><PhysicsVal type="int">0</PhysicsVal></min>
-			<max><PhysicsVal type="int">1</PhysicsVal></max>
-			<step><PhysicsVal type="int">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="int">0</PhysicsVal></errordefault>
-		</scale>
-	</ChannelInfo>
-
-	<ChannelInfo name="Ângulo polarização" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Ângulo polarização [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
-			<min><PhysicsVal type="float">0.</PhysicsVal></min>
-			<max><PhysicsVal type="float">90.</PhysicsVal></max>
-			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
-			<errordefault><PhysicsVal type="float">0.001</PhysicsVal></errordefault>
-		</scale>
-	</ChannelInfo>
-
-	<ChannelInfo name="Check box" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Check box" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
-			<min><PhysicsVal type="int">0</PhysicsVal></min>
-			<max><PhysicsVal type="int">7</PhysicsVal></max>
-			<step><PhysicsVal type="int">1</PhysicsVal></step>
-			<errordefault><PhysicsVal type="int">0</PhysicsVal></errordefault>
-		</scale>
-	</ChannelInfo -->
 
 </HardwareInfo>
