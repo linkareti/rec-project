@@ -296,13 +296,12 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelSnellDelay.setName("jPanelSnellDelay"); // NOI18N
         jPanelSnellDelay.setPreferredSize(new java.awt.Dimension(330, 95));
 
-        jSliderSnellDelay.setMajorTickSpacing(2);
-        jSliderSnellDelay.setMaximum(5);
-        jSliderSnellDelay.setMinimum(1);
+        jSliderSnellDelay.setMajorTickSpacing(10);
+        jSliderSnellDelay.setMaximum(50);
         jSliderSnellDelay.setMinorTickSpacing(1);
         jSliderSnellDelay.setPaintLabels(true);
         jSliderSnellDelay.setSnapToTicks(true);
-        jSliderSnellDelay.setValue(1);
+        jSliderSnellDelay.setValue(10);
         jSliderSnellDelay.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderSnellDelay.setName("jSliderSnellDelay"); // NOI18N
         jSliderSnellDelay.setPreferredSize(new java.awt.Dimension(250, 42));
@@ -1192,8 +1191,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderSnellDelta.setValue(2);
         jFormattedTextFieldSnellDelta.setText("0.2");
         jLabelSnellDelta.setEnabled(false);
-        jSliderSnellDelay.setValue(1);
-        jFormattedTextFieldSnellDelay.setText("1");
+        jSliderSnellDelay.setValue(10);
+        jFormattedTextFieldSnellDelay.setText("1.0");
         jLabelSnellDelay.setEnabled(false);
 
         // tab Energy conservation
@@ -1212,6 +1211,9 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderCriticalAngleDelta.setValue(2);
         jFormattedTextFieldCriticalAngleDelta.setText("0.2");
         jLabelCriticalAngleDelta.setEnabled(false);
+        jCheckBoxCriticalAngleMinimalAngle.setSelected(false);
+        jCheckBoxCriticalAngleMediumAngle.setSelected(false);
+        jCheckBoxCriticalAngleMaximumAngle.setSelected(false);
 
         // tab Brewster
         jSliderBrewsterAngleVarationMin.setValue(0);
@@ -1224,6 +1226,9 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jLabelBrewsterAngleDelta.setEnabled(false);
         jSliderBrewsterAnglePolarization.setValue(0);
         jFormattedTextFieldBrewsterAnglePolarization.setText("0.0");
+        jCheckBoxBrewsterAngleMinimalAngle.setSelected(false);
+        jCheckBoxBrewsterAngleMediumAngle.setSelected(false);
+        jCheckBoxBrewsterAngleMaximumAngle.setSelected(false);
 
         // tab Calibration
         jRadioButtonCalibrationPexiglass.setSelected(true);
@@ -1243,7 +1248,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     }//GEN-LAST:event_jFormattedTextFieldSnellDeltaFocusLost
 
     private void jFormattedTextFieldSnellDelayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldSnellDelayFocusLost
-        formattedTextChanged(jSliderSnellDelay, jFormattedTextFieldSnellDelay);
+    	formattedMultipliedTextChanged(jSliderSnellDelay, jFormattedTextFieldSnellDelay);
     }//GEN-LAST:event_jFormattedTextFieldSnellDelayFocusLost
 
     private void jFormattedTextFieldEnergyConservationPexiglassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextFieldEnergyConservationPexiglassFocusLost
@@ -1305,7 +1310,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     	float ang1Min = 0;
     	float ang1Max = 360;
     	float deltaAng1 = 0.2f;
-    	int delay = 0;
+    	float delay = 0;
     	int polarizacao = 0;
     	float angPol = 0;
     	int checkBox = 0;
@@ -1318,8 +1323,11 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			ang1Max = (float) jSliderSnellAngleVarationMax.getValue() / 10.F;
 			deltaAng1 = (float) jSliderSnellDelta.getValue() / 10.F;
 			
-			delay = jSliderSnellDelay.getValue();
-			nsamples = (int) ((ang1Max - ang1Min) / deltaAng1);
+			delay = (float) jSliderSnellDelay.getValue() / 10.F;
+			nsamples = (int) ((ang1Max - ang1Min) / deltaAng1 + 0.5);
+			if (nsamples * deltaAng1 < ang1Max) {
+				nsamples++;
+			}
 			break;
 			
 		case 2:
@@ -1429,7 +1437,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     }//GEN-LAST:event_jSliderSnellDeltaStateChanged
 
     private void jSliderSnellDelayStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderSnellDelayStateChanged
-        sliderChanged(jSliderSnellDelay, jFormattedTextFieldSnellDelay);
+    	sliderMultipliedChanged(jSliderSnellDelay, jFormattedTextFieldSnellDelay);
     }//GEN-LAST:event_jSliderSnellDelayStateChanged
 
     private void jSliderEnergyConservationPexiglassStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderEnergyConservationPexiglassStateChanged
@@ -1712,14 +1720,23 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         slidersAngle90Labels.put(new Integer(0), new JLabel("0.0"));
         slidersAngle90Labels.put(new Integer(450), new JLabel("45.0"));
         slidersAngle90Labels.put(new Integer(900), new JLabel("90.0"));
+        
+        Dictionary<Integer, JLabel> slidersDelayLabels = new Hashtable<Integer, JLabel>();
+        slidersDelayLabels.put(new Integer(0), new JLabel("0.0"));
+        slidersDelayLabels.put(new Integer(10), new JLabel("10.0"));
+        slidersDelayLabels.put(new Integer(20), new JLabel("20.0"));
+        slidersDelayLabels.put(new Integer(30), new JLabel("30.0"));
+        slidersDelayLabels.put(new Integer(40), new JLabel("40.0"));
+        slidersDelayLabels.put(new Integer(50), new JLabel("50.0"));
 
         jSliderSnellAngleVarationMin.setLabelTable(slidersAngle0360Labels);
         jSliderSnellAngleVarationMax.setLabelTable(slidersAngle0360Labels);
         jSliderSnellDelta.setLabelTable(slidersAngle02360Labels);
+        jSliderSnellDelay.setLabelTable(slidersDelayLabels);
         installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMin);
         installDecimalFormatter(jFormattedTextFieldSnellAngleVarationMax);
         installDecimalFormatter(jFormattedTextFieldSnellDelta);
-        installNaturalFormatter(jFormattedTextFieldSnellDelay);
+        installDecimalFormatter(jFormattedTextFieldSnellDelay);
 
         jSliderEnergyConservationPexiglass.setLabelTable(slidersAngle0360Labels);
         jSliderEnergyConservationPolarization.setLabelTable(slidersAngle90Labels);
