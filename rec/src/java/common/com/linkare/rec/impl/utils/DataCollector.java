@@ -235,6 +235,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		
 		try {
 			// Thread to check is the data collector is receiving samples
+			lastPacketFetchedTimestamp = System.currentTimeMillis();
 			fetchPacketCheck = new DataCollectorFetchPacketCheck();
 			
 			setDataCollectorState(DataCollectorState.DP_STARTED_NODATA);
