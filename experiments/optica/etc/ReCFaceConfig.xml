@@ -39,6 +39,11 @@
 		displayStringBundleKey="optica$rec.exp.display.optica.title.4"
 		classLocationBundleKey="optica$rec.exp.display.optica.loc.4" visible="true"
 		selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="optica$rec.exp.display.optica.tip.5"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="optica$rec.exp.display.optica.title.5"
+		classLocationBundleKey="optica$rec.exp.display.optica.loc.5" visible="true"
+		selected="true" order="0" enabled="false" connected="false" />
 	<webResource toolTipLocationBundleKey="" internalBrowser="false"
 		iconLocationBundleKey="" visible="true" selected="true" order="0"
 		enabled="false" connected="false" />

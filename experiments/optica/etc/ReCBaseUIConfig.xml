@@ -48,4 +48,8 @@
 		toolTipBundleKey="optica$rec.exp.display.optica.tip.4" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="optica$rec.exp.display.optica.title.4" offlineCapable="false"
 		order="4" />
+	<Display classLocationBundleKey="optica$rec.exp.display.optica.loc.5"
+		toolTipBundleKey="optica$rec.exp.display.optica.tip.5" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="optica$rec.exp.display.optica.title.5" offlineCapable="false"
+		order="5" />
 </Apparatus>
