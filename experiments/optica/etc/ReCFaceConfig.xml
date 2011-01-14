@@ -24,7 +24,7 @@
 		displayStringBundleKey="optica$rec.exp.display.optica.title.1"
 		classLocationBundleKey="optica$rec.exp.display.optica.loc.1" visible="true"
 		selected="true" order="0" enabled="false" connected="false" />
-	<display toolTipBundleKey="optica$rec.exp.display.optica.tip.2"
+	<!-- display toolTipBundleKey="optica$rec.exp.display.optica.tip.2"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="optica$rec.exp.display.optica.title.2"
 		classLocationBundleKey="optica$rec.exp.display.optica.loc.2" visible="true"
@@ -39,6 +39,11 @@
 		displayStringBundleKey="optica$rec.exp.display.optica.title.4"
 		classLocationBundleKey="optica$rec.exp.display.optica.loc.4" visible="true"
 		selected="true" order="0" enabled="false" connected="false" />
+	<display toolTipBundleKey="optica$rec.exp.display.optica.tip.5"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="optica$rec.exp.display.optica.title.5"
+		classLocationBundleKey="optica$rec.exp.display.optica.loc.5" visible="true"
+		selected="true" order="0" enabled="false" connected="false" / -->
 	<display toolTipBundleKey="optica$rec.exp.display.optica.tip.5"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="optica$rec.exp.display.optica.title.5"
