@@ -150,6 +150,7 @@ public class MultSeriesXYInBlockDataSetProxy extends org.jfree.data.xy.AbstractX
 	 */
 	public double getXValue(int series, int item) {
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series > (seriesCount - 1)
+				|| expDataModel.getTotalSamples() > item + series * blockSize
 				|| expDataModel.getValueAt(item + series * blockSize, getChannelDisplayX()) == null) {
 			return 0;
 		}
