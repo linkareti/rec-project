@@ -6,6 +6,8 @@
 
 package com.linkare.rec.impl.utils;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -17,6 +19,8 @@ import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
 import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.impl.data.SamplesPacketMatrix;
 import com.linkare.rec.impl.data.SamplesPacketSource;
+import com.linkare.rec.impl.threading.ExecutorScheduler;
+import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.wrappers.DataProducerWrapper;
 
 /**
@@ -40,6 +44,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private int totalSamples;
 	private long frequency = 100; // default
 	long lastFetchPacketsTimestamp = System.currentTimeMillis();
+	long lastPacketFetchedTimestamp; 
+	private DataCollectorFetchPacketCheck fetchPacketCheck = null;
 
 	static {
 		Logger l = LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER);
@@ -89,6 +95,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 	}
 
 	public void addSamplesPackets(SamplesPacket[] samples_packet) {
+		lastPacketFetchedTimestamp = System.currentTimeMillis();
+		
 		samplesPackets.addSamplesPackets(samples_packet);
 		if (!startedSamples && samplesPackets.size() > 0) {
 			startedSamples  = true;
@@ -226,6 +234,9 @@ public abstract class DataCollector extends Thread implements Serializable {
 		log(Level.INFO, "DataCollector started. Remote data producer state = " + remoteDataProducerState);
 		
 		try {
+			// Thread to check is the data collector is receiving samples
+			fetchPacketCheck = new DataCollectorFetchPacketCheck();
+			
 			setDataCollectorState(DataCollectorState.DP_STARTED_NODATA);
 			
 			log(Level.FINEST, "DataCollector is going to fetch available packets");
@@ -287,6 +298,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 		exit = true;
 		// pause = true;
+		
+		fetchPacketCheck.shutdown();
 	}
 	
 	protected void shutdownThread() {
@@ -424,6 +437,32 @@ public abstract class DataCollector extends Thread implements Serializable {
 	 */
 	protected void setFrequency(long frequency) {
 		this.frequency = frequency;
+	}
+	
+	private class DataCollectorFetchPacketCheck extends ScheduledWorkUnit {
+
+		private int periodChecker = 60; // seconds // TODO must be a system property
+		private int timeSpend = 5 * 60 * 1000; // milliseconds // TODO must be a system property
+
+		DataCollectorFetchPacketCheck() {
+			ExecutorScheduler.scheduleAtFixedRate(this, 1, periodChecker, SECONDS);
+		}
+
+		public void run() {
+			if (System.currentTimeMillis() - lastPacketFetchedTimestamp >= 0) {
+				log(Level.INFO, "Going to exit because it has passed more than " + ((int)(timeSpend/1000)) + " seconds since it was received a sample.");
+				exit = true;
+				shutdown();
+			}
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void logThrowable(String message, Throwable throwable) {
+			logThrowable(message, throwable);
+		}
 	}
 	
 }
