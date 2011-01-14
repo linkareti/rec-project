@@ -449,7 +449,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 		}
 
 		public void run() {
-			if (System.currentTimeMillis() - lastPacketFetchedTimestamp >= 0) {
+			if (System.currentTimeMillis() - lastPacketFetchedTimestamp >= timeSpend) {
 				log(Level.INFO, "Going to exit because it has passed more than " + ((int)(timeSpend/1000)) + " seconds since it was received a sample.");
 				exit = true;
 				shutdown();
