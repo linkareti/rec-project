@@ -96,7 +96,7 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 
 			ReCMultiCastDataProducer dataProducer = (ReCMultiCastDataProducer) readed;
 
-			Deactivator deactivator = new Deactivator(dataProducer);
+			Deactivator deactivator = new Deactivator(dataProducer, Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER));
 
 			dataProducer.setOID(new String(oid));
 

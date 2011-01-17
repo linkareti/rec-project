@@ -6,6 +6,10 @@
 
 package com.linkare.rec.impl.utils;
 
+import java.util.logging.Logger;
+
+import com.linkare.rec.impl.logging.LoggerUtil;
+
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
@@ -14,6 +18,8 @@ public class Deactivator extends Thread {
 	private Deactivatable deactivatable = null;
 	private long DEACTIVATION_TIME = 40000;
 	private boolean deactivated = false;
+	
+	private Logger logger = null;
 
 	/**
 	 * Creates a new instance of Deactivator
@@ -27,6 +33,18 @@ public class Deactivator extends Thread {
 		start();
 
 		this.deactivatable = deactivatable;
+	}
+
+	/**
+	 * Creates a new instance of Deactivator
+	 * 
+	 * @param deactivatable
+	 * @param logger 
+	 */
+	public Deactivator(Deactivatable deactivatable, Logger logger) {
+		this(deactivatable);
+		
+		this.logger = logger;
 	}
 
 	public void run() {
@@ -81,6 +99,7 @@ public class Deactivator extends Thread {
 			deactivated = true;
 		} catch (Exception e) {
 			deactivated = false;
+			LoggerUtil.logThrowable("Exception while trying to deactivate.", e, logger);
 		}
 	}
 }
