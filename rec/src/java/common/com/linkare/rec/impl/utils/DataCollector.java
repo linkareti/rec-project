@@ -44,8 +44,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private int totalSamples;
 	private long frequency = 100; // default
 	long lastFetchPacketsTimestamp = System.currentTimeMillis();
-	long lastPacketFetchedTimestamp; 
-	private DataCollectorFetchPacketCheck fetchPacketCheck = null;
+	long lastPacketFetchedTimestamp = System.currentTimeMillis();
+	private transient DataCollectorFetchPacketCheck fetchPacketCheck = null;
 
 	static {
 		Logger l = LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER);
