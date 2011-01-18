@@ -554,8 +554,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			// TODO Launch Splash Screen (AppFramework?)
 			log.warning("TODO Launch Splash Screen");
 
-			log.info("Setting default locale " + PORTUGAL);
-			Locale.setDefault(PORTUGAL);
+//			log.info("Setting default locale " + PORTUGAL);
+//			Locale.setDefault(PORTUGAL);
+			
+			log.info("Defined locale is " + java.util.Locale.getDefault());
 
 			// Check System Properties Availability
 			checkSystemProperties();
