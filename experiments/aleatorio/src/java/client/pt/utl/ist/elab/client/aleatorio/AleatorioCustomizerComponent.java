@@ -11,6 +11,10 @@ package pt.utl.ist.elab.client.aleatorio;
  * @author Pedro Carvalho - LEFT - IST
  */
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
+import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -31,6 +35,8 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 		initComponents();
 		
 		initWatchMovieCheckBox();
+		
+		initComponentsManual();
 	}
 
 	/**
@@ -574,5 +580,13 @@ public class AleatorioCustomizerComponent extends javax.swing.JPanel implements
 			return true;
 		else
 			return false;
+	}
+	
+	private void initComponentsManual() {
+		Dictionary<Integer, JLabel> sliderLabels = new Hashtable<Integer, JLabel>();
+        sliderLabels.put(new Integer(1500), new JLabel("1500"));
+        sliderLabels.put(new Integer(5000), new JLabel("5000"));
+        sliderLabels.put(new Integer(10000), new JLabel("10000"));
+        soundDurationSlider.setLabelTable(sliderLabels);
 	}
 }
