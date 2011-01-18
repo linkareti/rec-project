@@ -101,6 +101,9 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 		super.setAcquisitionHeader(config);
 
 		total_samples = config.getTotalSamples();
+		
+		// FIXME this is an example from g experiment 
+//		setPacketSize((int) Math.ceil(1. / (8. * config.getSelectedFrequency().getFrequency() * config.getSelectedFrequency().getMultiplier().getExpValue())));
 	}
 
 	private boolean stopped = false;
