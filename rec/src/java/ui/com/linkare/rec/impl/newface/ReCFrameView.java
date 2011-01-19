@@ -662,6 +662,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		case NOTREGISTERED:
 			break;
 		case STATECONFIGERROR:
+			configError();
 			break;
 		case STATESTARTING:
 			progressCicleTask.start();
@@ -871,6 +872,21 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getExperimentStatusActionBar().setActionStateText(
 				getStatusActionBarResourceMap().getString("lblActionState.apparatusStoped.text"), RED);
 		setStopButtonEnabled(false);
+	}
+	
+	private void configError() {
+		apparatusLockTimer.stop();
+		progressCicleTask.stop();
+		setStopButtonEnabled(false);
+		getExperimentStatusActionBar().setActionStateText(
+				getStatusActionBarResourceMap().getString("lblActionState.apparatusConfigErrorState.text"), RED);
+		getApparatusTabbedPane().getExperimentActionBar().setPlayStopButtonEnabled(false);
+
+		// showing this message can be necessary because the status bar message is going to be hidden with stopped message
+		String errorMessage = ReCResourceBundle.findStringOrDefault(
+				"ReCBaseUI$rec.bui.status.apparatus.config.error.state",
+				"The experiment has a wrong configuration! Please check the customizer.");
+		JOptionPane.showMessageDialog(null, errorMessage);
 	}
 
 	private void incorrectStateExperiment() {
