@@ -303,6 +303,10 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 
 		try {
 			driver.config(config, getHardwareInfo());
+		} catch (WrongConfigurationException e) {
+			Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.WARNING, "Invalid configuration. Thowing the exception.", e);
+			e.printStackTrace();
+			throw e;
 		} catch (Exception e) {
 			Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.WARNING, "Error configuring the hardware.", e);
 			e.printStackTrace();

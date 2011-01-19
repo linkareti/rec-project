@@ -164,10 +164,14 @@ public abstract class BaseDriver implements com.linkare.rec.impl.driver.IDriver 
 	public void config(HardwareAcquisitionConfig config, HardwareInfo info) throws IncorrectStateException,
 			WrongConfigurationException {
 		fireIDriverStateListenerDriverConfiguring();
-		info.validateConfig(config);
-		extraValidateConfig(config, info);
 		try {
+			info.validateConfig(config);
+			extraValidateConfig(config, info);
 			configure(config, info);
+		} catch (WrongConfigurationException e) {
+			fireIDriverStateListenerDriverStoped();
+			e.printStackTrace();
+			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new WrongConfigurationException(20);
