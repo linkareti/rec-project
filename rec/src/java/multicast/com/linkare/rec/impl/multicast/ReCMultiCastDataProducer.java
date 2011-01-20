@@ -202,7 +202,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	public boolean isDeactivationPossible() {
 		boolean elapsedTime = lastGetSamplesTimestamp < System.currentTimeMillis() - GET_SAMPLES_IDLE_TIME;
-		if ((!getDataProducerState().equals(DataProducerState.DP_WAITING) && !getDataProducerState().equals(DataProducerState.DP_STARTED_NODATA))
+		if ((!getDataProducerState().equals(DataProducerState.DP_WAITING))
 				&& isExit() && dataReceiversQueue.isShutdown() && elapsedTime) {
 			log(Level.FINE, getOID() + " is now deactivatable!");
 			log(Level.FINE, getOID() + " Data Producer State is " + getDataProducerState()
