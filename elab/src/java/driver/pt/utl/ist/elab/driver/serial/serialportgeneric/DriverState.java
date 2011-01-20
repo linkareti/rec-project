@@ -329,7 +329,7 @@ public enum DriverState {
 			case CFG:
 				return logAndReturn(DriverState.CONFIGUREWAIT);
 			case CFGOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return logAndReturn(DriverState.CONFIGURED);
 			case CUR:
 				return logAndReturn(DriverState.UNKNOWN);
 			case STR:
@@ -365,7 +365,7 @@ public enum DriverState {
 			case CFG:
 				return true;
 			case CFGOK:
-				return false;
+				return true;
 			case CUR:
 				return false;
 			case STR:
@@ -640,7 +640,7 @@ public enum DriverState {
 			case STR:
 				return true;
 			case STROK:
-				return false;
+				return true;
 			case DAT:
 				return false;
 			case BIN:

@@ -356,6 +356,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			throw new IncorrectStateException();
 		}
 
+		currentDriverState = DriverState.CONFIGURING;
+		currentDriverState.startTimeoutClock();
 		fireIDriverStateListenerDriverConfiguring();
 
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating command.");
@@ -410,9 +412,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		this.config = config;
 		
 		writeMessage(serialPortCommand.getCommand());
-		currentDriverState = DriverState.CONFIGURED;
-		currentDriverState.startTimeoutClock();
-		fireIDriverStateListenerDriverConfigured();
+//		currentDriverState = DriverState.CONFIGURED;
+//		currentDriverState.startTimeoutClock();
+//		fireIDriverStateListenerDriverConfigured();
 	}
 
 	/**
@@ -478,7 +480,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			throw new IncorrectStateException();
 		}
 
-		fireIDriverStateListenerDriverStarting();
 		dataSource = initDataSource();
 		dataSource.setRs232configs(rs232configs);
 		dataSource.setAcquisitionHeader(getAcquisitionHeader());
@@ -496,7 +497,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				fireIDriverStateListenerDriverReseted();
 				throw new IncorrectStateException();
 			}
-			fireIDriverStateListenerDriverStarted();
+//			fireIDriverStateListenerDriverStarted();
 			return dataSource;
 		} else
 			return null;
@@ -511,11 +512,14 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "No configuration available yet!");
 			throw new IncorrectStateException();
 		}
+		
+		currentDriverState = DriverState.STARTING;
+		currentDriverState.startTimeoutClock();
+		fireIDriverStateListenerDriverStarting();
+		
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.STR.toString().toLowerCase());
 		SerialPortTranslator.translateStart(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
-		currentDriverState = DriverState.STARTING;
-		currentDriverState.startTimeoutClock();
 	}
 
 	public IDataSource startOutput(HardwareInfo info, IDataSource source) throws IncorrectStateException {
@@ -734,11 +738,14 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				} // is an IDS
 				// else ...
 			} else if (thisCommand.equals(SerialPortCommandList.CFG)) {
+				// is this used???
 				if (SerialPortCommand.isResponse(cmd.getCommand(), rememberLastWrittenMessage))
 					currentDriverState = DriverState.CONFIGUREWAIT;
 				currentDriverState.startTimeoutClock();
-			} else if (thisCommand.equals(SerialPortCommandList.DAT)) {
-				// valid command
+			} else if (thisCommand.equals(SerialPortCommandList.CFGOK)
+					|| thisCommand.equals(SerialPortCommandList.STROK) || thisCommand.equals(SerialPortCommandList.DAT)
+					|| thisCommand.equals(SerialPortCommandList.BIN)) {
+				// valid commands
 			} else if (thisCommand.equals(SerialPortCommandList.END)) {
 				// send stp command
 				serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
@@ -768,11 +775,15 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINEST,
 					"Switching between driver state " + currentDriverState + " and " + newDriverState);
 			currentDriverState = newDriverState;
-			
+
 			if (currentDriverState == DriverState.RESETED) {
 				fireIDriverStateListenerDriverReseted();
 			} else if (currentDriverState == DriverState.STOPPED) {
 				fireIDriverStateListenerDriverStoped();
+			} else if (currentDriverState == DriverState.CONFIGURED) {
+				fireIDriverStateListenerDriverConfigured();
+			} else if (currentDriverState == DriverState.STARTED) {
+				fireIDriverStateListenerDriverStarted();
 			}
 		}
 		currentDriverState.startTimeoutClock();
