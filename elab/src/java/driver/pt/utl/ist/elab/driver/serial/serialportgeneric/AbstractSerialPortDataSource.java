@@ -6,6 +6,10 @@
 
 package pt.utl.ist.elab.driver.serial.serialportgeneric;
 
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandList;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.HardwareNode;
@@ -25,6 +29,15 @@ import com.linkare.rec.impl.driver.BaseDataSource;
  * 
  */
 public abstract class AbstractSerialPortDataSource extends BaseDataSource {
+	
+	protected static String ABSTRACT_PORT_DATA_SOURCE_LOGGER = "AbstractSerialPortDataSource.Logger";
+	
+	static {
+		Logger l = LogManager.getLogManager().getLogger(ABSTRACT_PORT_DATA_SOURCE_LOGGER);
+		if (l == null) {
+			LogManager.getLogManager().addLogger(Logger.getLogger(ABSTRACT_PORT_DATA_SOURCE_LOGGER));
+		}
+	}
 
 	private int counter = 0;
 	private int total_samples = 0;
@@ -99,6 +112,8 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 
 	public void setAcquisitionHeader(HardwareAcquisitionConfig config) {
 		super.setAcquisitionHeader(config);
+		Logger.getLogger(ABSTRACT_PORT_DATA_SOURCE_LOGGER).log(Level.FINE,
+				"Setting Hardware Acquisition Config [" + config + "]");
 
 		total_samples = config.getTotalSamples();
 		
