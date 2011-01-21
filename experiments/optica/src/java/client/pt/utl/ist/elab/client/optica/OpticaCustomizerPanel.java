@@ -16,8 +16,11 @@ import java.util.Hashtable;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 
+import com.linkare.rec.data.Multiplier;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
+import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.data.synch.FrequencyDefType;
 import com.linkare.rec.impl.client.customizer.ICustomizerListener;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
@@ -31,6 +34,11 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 	private static final long serialVersionUID = -6367415208236048245L;
 	
 	public static final int NUMBER_OF_SAMPLES_FOR_SERIES = 1625;
+	public static final int PROTOCOL_1_WAIT_MS = 20000;
+	public static final int PROTOCOL_2_SAMPLING_INTERVAL_MS = 44;
+	public static final int PROTOCOL_3_SAMPLING_INTERVAL_MS = 43;
+	public static final int PROTOCOL_4_SAMPLING_INTERVAL_MS = 45;
+	public static final int PROTOCOL_5_SAMPLING_INTERVAL_MS = 60000;
 
 	/** Creates new form OpticaCustomizerPanel */
     public OpticaCustomizerPanel() {
@@ -1117,6 +1125,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     	
     	int selectCheckBoxCount = 0;
     	int nsamples = 0;
+    	Frequency freq = null;
     	
     	// inicializar parametros
     	int protocol = 1;
@@ -1141,6 +1150,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			if (nsamples * deltaAng1 < ang1Max) {
 				nsamples++;
 			}
+			int time = (int) Math.ceil((PROTOCOL_1_WAIT_MS + nsamples * delay) / nsamples);
+			freq = new Frequency(time, Multiplier.none, FrequencyDefType.SamplingIntervalType);
 			break;
 			
 		case 2:
@@ -1153,7 +1164,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			}
 			angPol = (float) jSliderEnergyConservationPolarization.getValue() / 10.F;
 			
-			nsamples = NUMBER_OF_SAMPLES_FOR_SERIES; 
+			nsamples = NUMBER_OF_SAMPLES_FOR_SERIES;
+			freq = new Frequency(PROTOCOL_2_SAMPLING_INTERVAL_MS, Multiplier.none, FrequencyDefType.SamplingIntervalType);
 			break;
 			
 		case 3:
@@ -1177,6 +1189,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			}
 			
 			nsamples = NUMBER_OF_SAMPLES_FOR_SERIES * selectCheckBoxCount;
+			freq = new Frequency(PROTOCOL_3_SAMPLING_INTERVAL_MS, Multiplier.none, FrequencyDefType.SamplingIntervalType);
 			break;
 			
 		case 4:
@@ -1201,6 +1214,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			}
 			
 			nsamples = NUMBER_OF_SAMPLES_FOR_SERIES * selectCheckBoxCount;
+			freq = new Frequency(PROTOCOL_4_SAMPLING_INTERVAL_MS, Multiplier.none, FrequencyDefType.SamplingIntervalType);
 			break;
 			
 		case 5:
@@ -1213,6 +1227,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 //			angPol = 0;
 //			checkBox = 0;
 			nsamples = 1; // TODO verificar viabilidade mas o data collector deve estar 'a espera de ler resultado
+			freq = new Frequency(PROTOCOL_5_SAMPLING_INTERVAL_MS, Multiplier.none, FrequencyDefType.SamplingIntervalType);
 			break;
 
 		default:
@@ -1230,9 +1245,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         acqConfig.getSelectedHardwareParameter("ang_pol").setParameterValue(String.valueOf(angPol));
         acqConfig.getSelectedHardwareParameter("check_box").setParameterValue(String.valueOf(checkBox));
 
-//		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
-//				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-//				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
+		acqConfig.setSelectedFrequency(freq);
 
         fireICustomizerListenerDone();
     }//GEN-LAST:event_jButtonOkActionPerformed
