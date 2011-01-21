@@ -1151,7 +1151,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 				nsamples++;
 			}
 			int time = (int) Math.ceil((PROTOCOL_1_WAIT_MS + nsamples * delay) / nsamples);
-			freq = new Frequency(time, Multiplier.none, FrequencyDefType.SamplingIntervalType);
+			freq = new Frequency(time, Multiplier.mili, FrequencyDefType.SamplingIntervalType);
 			break;
 			
 		case 2:
@@ -1165,7 +1165,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			angPol = (float) jSliderEnergyConservationPolarization.getValue() / 10.F;
 			
 			nsamples = NUMBER_OF_SAMPLES_FOR_SERIES;
-			freq = new Frequency(PROTOCOL_2_SAMPLING_INTERVAL_MS, Multiplier.none, FrequencyDefType.SamplingIntervalType);
+			freq = new Frequency(PROTOCOL_2_SAMPLING_INTERVAL_MS, Multiplier.mili, FrequencyDefType.SamplingIntervalType);
 			break;
 			
 		case 3:
@@ -1189,7 +1189,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			}
 			
 			nsamples = NUMBER_OF_SAMPLES_FOR_SERIES * selectCheckBoxCount;
-			freq = new Frequency(PROTOCOL_3_SAMPLING_INTERVAL_MS, Multiplier.none, FrequencyDefType.SamplingIntervalType);
+			freq = new Frequency(PROTOCOL_3_SAMPLING_INTERVAL_MS, Multiplier.mili, FrequencyDefType.SamplingIntervalType);
 			break;
 			
 		case 4:
@@ -1214,7 +1214,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			}
 			
 			nsamples = NUMBER_OF_SAMPLES_FOR_SERIES * selectCheckBoxCount;
-			freq = new Frequency(PROTOCOL_4_SAMPLING_INTERVAL_MS, Multiplier.none, FrequencyDefType.SamplingIntervalType);
+			freq = new Frequency(PROTOCOL_4_SAMPLING_INTERVAL_MS, Multiplier.mili, FrequencyDefType.SamplingIntervalType);
 			break;
 			
 		case 5:
@@ -1227,7 +1227,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 //			angPol = 0;
 //			checkBox = 0;
 			nsamples = 1; // TODO verificar viabilidade mas o data collector deve estar 'a espera de ler resultado
-			freq = new Frequency(PROTOCOL_5_SAMPLING_INTERVAL_MS, Multiplier.none, FrequencyDefType.SamplingIntervalType);
+			freq = new Frequency(PROTOCOL_5_SAMPLING_INTERVAL_MS, Multiplier.mili, FrequencyDefType.SamplingIntervalType);
 			break;
 
 		default:
