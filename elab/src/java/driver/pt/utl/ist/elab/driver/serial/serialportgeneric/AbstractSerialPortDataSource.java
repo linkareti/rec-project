@@ -116,9 +116,14 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 				"Setting Hardware Acquisition Config [" + config + "]");
 
 		total_samples = config.getTotalSamples();
+
+		// this is a formula from g experiment 
+		int packetSize = (int) Math.ceil(1. / (8. * config.getSelectedFrequency().getFrequency() * config
+				.getSelectedFrequency().getMultiplier().getExpValue()));
+		Logger.getLogger(ABSTRACT_PORT_DATA_SOURCE_LOGGER).log(Level.FINEST,
+				"Setting packet size to [" + packetSize + "]");
 		
-		// FIXME this is an example from g experiment 
-//		setPacketSize((int) Math.ceil(1. / (8. * config.getSelectedFrequency().getFrequency() * config.getSelectedFrequency().getMultiplier().getExpValue())));
+		setPacketSize(packetSize);
 	}
 
 	private boolean stopped = false;
