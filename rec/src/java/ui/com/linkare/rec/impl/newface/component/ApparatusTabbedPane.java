@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
