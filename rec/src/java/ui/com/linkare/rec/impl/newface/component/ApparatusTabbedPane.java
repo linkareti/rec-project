@@ -8,6 +8,7 @@
 package com.linkare.rec.impl.newface.component;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -73,8 +74,12 @@ public class ApparatusTabbedPane extends AbstractContentPane implements ChangeLi
 		return statusActionBar;
 	}
 
-	public JPanel getResultsHolderPane() {
-		return resultsHolderPane;
+//	public JPanel getResultsHolderPane() {
+//		return resultsHolderPane;
+//	}
+
+	public void addResultsComponent(Component controller) {
+		resultsHolderScrollPane.setViewportView(controller);
 	}
 
 	public void addCustomizerComponent(JComponent controller) {
@@ -156,6 +161,7 @@ public class ApparatusTabbedPane extends AbstractContentPane implements ChangeLi
 		controllerHolderPane = new javax.swing.JPanel();
 		controllerHolderScrollPane = new javax.swing.JScrollPane();
 		resultsHolderPane = new javax.swing.JPanel();
+		resultsHolderScrollPane = new javax.swing.JScrollPane();
 		userListHolderPane = new javax.swing.JPanel();
 		apparatusUserList = new com.linkare.rec.impl.newface.component.ApparatusUserList();
 
@@ -200,6 +206,12 @@ public class ApparatusTabbedPane extends AbstractContentPane implements ChangeLi
 		resultsHolderPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 6, 6, 6));
 		resultsHolderPane.setName("resultsHolderPane"); // NOI18N
 		resultsHolderPane.setLayout(new java.awt.BorderLayout());
+		
+		resultsHolderScrollPane.setBorder(null);
+		resultsHolderScrollPane.setName("resultsHolderScrollPane"); // NOI18N
+		resultsHolderScrollPane.setOpaque(false);
+		resultsHolderPane.add(resultsHolderScrollPane, java.awt.BorderLayout.CENTER);
+		
 		tabbedPane.addTab(resourceMap.getString("resultsHolderPane.TabConstraints.tabTitle"), resultsHolderPane); // NOI18N
 
 		userListHolderPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 6, 6, 6));
@@ -222,6 +234,7 @@ public class ApparatusTabbedPane extends AbstractContentPane implements ChangeLi
 	private com.linkare.rec.impl.newface.component.ApparatusDescriptionPane descriptionPane;
 	private com.linkare.rec.impl.newface.component.ExperimentActionBar experimentActionBar;
 	private javax.swing.JPanel resultsHolderPane;
+	private javax.swing.JScrollPane resultsHolderScrollPane;
 	private com.linkare.rec.impl.newface.component.StatusActionBar statusActionBar;
 	private javax.swing.JTabbedPane tabbedPane;
 	private javax.swing.JPanel userListHolderPane;

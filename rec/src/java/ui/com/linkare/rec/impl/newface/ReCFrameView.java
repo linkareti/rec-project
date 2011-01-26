@@ -937,7 +937,7 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 	private ResultsPane getResultsPane() {
 		if (resultsPane == null) {
 			resultsPane = new ResultsPane();
-			getApparatusTabbedPane().getResultsHolderPane().add(resultsPane);
+			getApparatusTabbedPane().addResultsComponent(resultsPane);
 		}
 		return resultsPane;
 	}
