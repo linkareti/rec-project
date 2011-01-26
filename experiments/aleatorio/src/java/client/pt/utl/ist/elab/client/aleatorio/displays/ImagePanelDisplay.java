@@ -6,6 +6,8 @@
 
 package pt.utl.ist.elab.client.aleatorio.displays;
 
+import javax.swing.JScrollPane;
+
 /**
  * 
  * @author Pedro Carvalho - LEFT - IST
@@ -14,9 +16,14 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
+	private JScrollPane  scroll;
+	
 	/** Creates new form ImagePanelDisplay */
 	public ImagePanelDisplay() {
 		initComponents();
+		
+		scroll = new JScrollPane();
+		scroll.setViewportView(this);
 	}
 
 	/**
@@ -34,7 +41,7 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		dotsFoundText = new javax.swing.JTextField();
 		diceFoundText = new javax.swing.JTextField();
 		imageScrollPanel = new javax.swing.JScrollPane();
-		ButtonsScrollPanel = new javax.swing.JScrollPane();
+//		ButtonsScrollPanel = new javax.swing.JScrollPane();
 		controlsPanel = new javax.swing.JPanel();
 		originalButton = new javax.swing.JButton();
 		BWButton = new javax.swing.JButton();
@@ -90,9 +97,9 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		imageScrollPanel.setPreferredSize(new java.awt.Dimension(100, 100));
 		add(imageScrollPanel, java.awt.BorderLayout.CENTER);
 
-		ButtonsScrollPanel.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-		ButtonsScrollPanel.setMinimumSize(new java.awt.Dimension(7, 43));
-		ButtonsScrollPanel.setPreferredSize(new java.awt.Dimension(624, 43));
+//		ButtonsScrollPanel.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+//		ButtonsScrollPanel.setMinimumSize(new java.awt.Dimension(7, 43));
+//		ButtonsScrollPanel.setPreferredSize(new java.awt.Dimension(624, 43));
 		controlsPanel.setLayout(new java.awt.GridBagLayout());
 
 		controlsPanel.setName("controlsPanel");
@@ -240,9 +247,10 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 		gridBagConstraints.gridy = 0;
 		controlsPanel.add(arrowLabel14, gridBagConstraints);
 
-		ButtonsScrollPanel.setViewportView(controlsPanel);
-
-		add(ButtonsScrollPanel, java.awt.BorderLayout.SOUTH);
+//		ButtonsScrollPanel.setViewportView(controlsPanel);
+//
+//		add(ButtonsScrollPanel, java.awt.BorderLayout.SOUTH);
+		add(controlsPanel, java.awt.BorderLayout.SOUTH);
 
 	}// GEN-END:initComponents
 
@@ -377,7 +385,7 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton BWButton;
-	private javax.swing.JScrollPane ButtonsScrollPanel;
+//	private javax.swing.JScrollPane ButtonsScrollPanel;
 	private javax.swing.JLabel arrowLabel1;
 	private javax.swing.JLabel arrowLabel11;
 	private javax.swing.JLabel arrowLabel12;
@@ -433,7 +441,8 @@ public class ImagePanelDisplay extends javax.swing.JPanel implements
 	}// setExpDataModel(ExpDataModel model)
 
 	public javax.swing.JComponent getDisplay() {
-		return this;
+//		return this;
+		return scroll;
 	}// getDisplay()
 
 	public String getName() {
