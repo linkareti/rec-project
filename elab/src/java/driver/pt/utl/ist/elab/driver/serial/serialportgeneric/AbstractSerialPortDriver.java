@@ -85,7 +85,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	private BaseSerialPortIO serialIO = null;
 	private SerialPortFinder serialFinder = null;
 	private EventQueue serialCommands = null;
-	private SerialPortCommand serialPortCommand = null;
 	private String rememberLastWrittenMessage = null;
 
 	public static HardwareNode rs232configs = null;
@@ -154,7 +153,31 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public void commandTimeout(SerialPortCommand command) {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
 				"Received notification for command timeout [" + command + "]");
-		// TODO implement business logic
+		// timeout business logic
+		if (command != null) {
+			if (!command.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.RST.toString())) {
+				writeResetCommand();
+			} else {
+				// reset was attemped but failed!
+				shutdown();
+			}
+		} else {
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.SEVERE,
+					"Command is null. Something umpredicted has happened at timmeout checker!");
+		}
+	}
+	
+	private void writeResetCommand() {
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Going to send a reset command.");
+		
+		// FIXME the currentDriverState change must be synchronized with proccess
+		serialIO.resetLastOutputMessage();
+		currentDriverState = DriverState.RESETING;
+		fireIDriverStateListenerDriverReseting();
+		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.RST.toString().toLowerCase());
+		SerialPortTranslator.translate(serialPortCommand);
+		writeMessage(serialPortCommand.getCommand());
+		commandTimeoutChecker.checkCommand(serialPortCommand);
 	}
 	
 	/**
@@ -164,7 +187,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public void commandTimeoutNoData() {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
 				"Received notification for no data.");
-		// TODO implement business logic
+		// timeout business logic
+		writeResetCommand();
 	}
 
 	/**
@@ -387,7 +411,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating command.");
 		
-		serialPortCommand = new SerialPortCommand(SerialPortCommandList.CFG.toString().toLowerCase());
+		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.CFG.toString().toLowerCase());
 
 		// loop through each parameter and add data to each one
 		List<OneParameterNode> commandParameterNodes = new ArrayList<OneParameterNode>();
@@ -455,7 +479,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 //		currentDriverState.explodeOnTimeout();
 
 		fireIDriverStateListenerDriverReseting();
-		serialPortCommand = new SerialPortCommand(SerialPortCommandList.RST.toString().toLowerCase());
+		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.RST.toString().toLowerCase());
 		SerialPortTranslator.translate(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
 		commandTimeoutChecker.checkCommand(serialPortCommand);
@@ -473,6 +497,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void shutdown() {
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.SEVERE,
+				"Shutdown was invoked! Going to terminate...");
+		
 		if (serialIO != null)
 			serialIO.shutdown();
 		currentDriverState = DriverState.UNKNOWN;
@@ -509,39 +536,19 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		dataSource.setAcquisitionHeader(getAcquisitionHeader());
 
 		if (dataSource != null) {
-			try {
-				startNow();
-			} catch (IncorrectStateException e) {
-				LoggerUtil.logThrowable("Error on datasource start. Throwing IncorrectStateException!", e, Logger
-						.getLogger(SERIAL_PORT_LOGGER));
-				currentDriverState = DriverState.UNKNOWN;
-				currentDriverState.startTimeoutClock();
-				fireIDriverStateListenerDriverReseting();
-				serialIO.reopen(); // why reopen? this is not a stop...
-				fireIDriverStateListenerDriverReseted();
-				throw new IncorrectStateException();
-			}
-//			fireIDriverStateListenerDriverStarted();
+			startNow();
 			return dataSource;
 		} else
 			return null;
 	}
 
-	public void startNow() throws IncorrectStateException {
-
-		// TODO explode???
-//		currentDriverState.explodeOnTimeout();
-
-		if (serialPortCommand == null) {
-			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "No configuration available yet!");
-			throw new IncorrectStateException();
-		}
+	private void startNow() {
 		
 		currentDriverState = DriverState.STARTING;
 		currentDriverState.startTimeoutClock();
 		fireIDriverStateListenerDriverStarting();
 		
-		serialPortCommand = new SerialPortCommand(SerialPortCommandList.STR.toString().toLowerCase());
+		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.STR.toString().toLowerCase());
 		SerialPortTranslator.translate(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
 		commandTimeoutChecker.checkCommand(serialPortCommand);
@@ -576,8 +583,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		}
 
 		fireIDriverStateListenerDriverStoping();
-		serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
+		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
 		SerialPortTranslator.translate(serialPortCommand);
+		writeMessage(serialPortCommand.getCommand());
 		serialIO.reopen();
 		fireIDriverStateListenerDriverStoped();
 	}
@@ -782,7 +790,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				commandTimeoutChecker.checkNoData();
 			} else if (thisCommand.equals(SerialPortCommandList.END)) {
 				// send stp command
-				serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
+				SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
 				SerialPortTranslator.translate(serialPortCommand);
 				writeMessage(serialPortCommand.getCommand());
 				commandTimeoutChecker.checkCommand(serialPortCommand);

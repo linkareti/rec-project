@@ -195,6 +195,7 @@ public class CommandTimeoutChecker {
 
 					synchronized (synch) {
 						while (running && waiting && waitTime > 0) {
+							Logger.getLogger(LOGGER).log(Level.INFO, "Going to wait for [" + waitTime + "] ms");
 							// waiting for the specified cmd time
 							synch.wait(waitTime);
 
