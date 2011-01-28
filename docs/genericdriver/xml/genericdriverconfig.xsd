@@ -123,8 +123,7 @@
 		<xsd:element name="cur" type="OneTimeoutNode" />
 		<xsd:element name="str" type="OneTimeoutNode" />
 		<xsd:element name="dat_bin" type="OneTimeoutNode" />
-		<xsd:element name="dat_no_data" type="OneTimeoutNode" />
-		<xsd:element name="bin_no_data" type="OneTimeoutNode" />
+		<xsd:element name="no_data" type="OneTimeoutNode" />
 		<xsd:element name="stp" type="OneTimeoutNode" />
 		<xsd:element name="rst" type="OneTimeoutNode" />
 		<xsd:element name="hardware_died" type="OneTimeoutNode" />

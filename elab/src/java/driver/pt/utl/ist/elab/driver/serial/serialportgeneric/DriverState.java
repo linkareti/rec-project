@@ -1435,7 +1435,7 @@ public enum DriverState {
 			break;
 		}
 		case RECEIVINGDATA: {
-			if (getTimeoutNode().getDatNoData().getTimeInt() > getTimeoutClock()) {
+			if (getTimeoutNode().getNoData().getTimeInt() > getTimeoutClock()) {
 				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
 						"No DAT data timeout on state " + this.toString());
 				throw new IncorrectStateException();
@@ -1443,7 +1443,7 @@ public enum DriverState {
 			break;
 		}
 		case RECEIVINGBIN: {
-			if (getTimeoutNode().getBinNoData().getTimeInt() > getTimeoutClock()) {
+			if (getTimeoutNode().getNoData().getTimeInt() > getTimeoutClock()) {
 				Logger.getLogger(AbstractSerialPortDriver.SERIAL_PORT_LOGGER).log(Level.INFO,
 						"No BIN data timeout on state " + this.toString());
 				throw new IncorrectStateException();

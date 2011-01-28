@@ -31,8 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="cur" type="{}OneTimeoutNode"/>
  *         &lt;element name="str" type="{}OneTimeoutNode"/>
  *         &lt;element name="dat_bin" type="{}OneTimeoutNode"/>
- *         &lt;element name="dat_no_data" type="{}OneTimeoutNode"/>
- *         &lt;element name="bin_no_data" type="{}OneTimeoutNode"/>
+ *         &lt;element name="no_data" type="{}OneTimeoutNode"/>
  *         &lt;element name="stp" type="{}OneTimeoutNode"/>
  *         &lt;element name="rst" type="{}OneTimeoutNode"/>
  *         &lt;element name="hardware_died" type="{}OneTimeoutNode"/>
@@ -46,8 +45,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TimeoutNode", propOrder = { "defaultTimeout", "id", "cfg", "cur", "str", "datBin", "datNoData",
-		"binNoData", "stp", "rst", "hardwareDied", "portListen" })
+@XmlType(name = "TimeoutNode", propOrder = { "defaultTimeout", "id", "cfg", "cur", "str", "datBin", "noData",
+		"stp", "rst", "hardwareDied", "portListen" })
 public class TimeoutNode {
 
 	@XmlElement(name = "default_timeout", required = true)
@@ -62,10 +61,8 @@ public class TimeoutNode {
 	protected OneTimeoutNode str;
 	@XmlElement(name = "dat_bin", required = true)
 	protected OneTimeoutNode datBin;
-	@XmlElement(name = "dat_no_data", required = true)
-	protected OneTimeoutNode datNoData;
-	@XmlElement(name = "bin_no_data", required = true)
-	protected OneTimeoutNode binNoData;
+	@XmlElement(name = "no_data", required = true)
+	protected OneTimeoutNode noData;
 	@XmlElement(required = true)
 	protected OneTimeoutNode stp;
 	@XmlElement(required = true)
@@ -201,8 +198,8 @@ public class TimeoutNode {
 	 * @return possible object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public OneTimeoutNode getDatNoData() {
-		return datNoData;
+	public OneTimeoutNode getNoData() {
+		return noData;
 	}
 
 	/**
@@ -211,28 +208,8 @@ public class TimeoutNode {
 	 * @param value allowed object is {@link OneTimeoutNode }
 	 * 
 	 */
-	public void setDatNoData(OneTimeoutNode value) {
-		this.datNoData = value;
-	}
-
-	/**
-	 * Gets the value of the binNoData property.
-	 * 
-	 * @return possible object is {@link OneTimeoutNode }
-	 * 
-	 */
-	public OneTimeoutNode getBinNoData() {
-		return binNoData;
-	}
-
-	/**
-	 * Sets the value of the binNoData property.
-	 * 
-	 * @param value allowed object is {@link OneTimeoutNode }
-	 * 
-	 */
-	public void setBinNoData(OneTimeoutNode value) {
-		this.binNoData = value;
+	public void setNoData(OneTimeoutNode value) {
+		this.noData = value;
 	}
 
 	/**

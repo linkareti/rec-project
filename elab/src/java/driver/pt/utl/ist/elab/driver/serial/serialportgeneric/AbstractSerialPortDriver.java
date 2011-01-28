@@ -32,6 +32,7 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand
 import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommandListener;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.HardwareNode;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode;
+import pt.utl.ist.elab.driver.serial.serialportgeneric.config.TimeoutNode;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.config.OneParameterNode.TransferFunctionType;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.genericexperiment.GenericSerialPortDataSource;
 import pt.utl.ist.elab.driver.serial.serialportgeneric.translator.SerialPortTranslator;
@@ -57,7 +58,7 @@ import com.linkare.rec.impl.utils.EventQueueDispatcher;
 import com.linkare.rec.impl.utils.QueueLogger;
 
 public abstract class AbstractSerialPortDriver extends BaseDriver implements SerialPortFinderListener,
-		SerialPortCommandListener, QueueLogger {
+		SerialPortCommandListener, QueueLogger, ICommandTimeoutListener {
 
 	protected static String SERIAL_PORT_LOGGER = "SerialPortDriver.Logger";
 	protected static BaseHardware baseHardware = null;
@@ -88,6 +89,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	private String rememberLastWrittenMessage = null;
 
 	public static HardwareNode rs232configs = null;
+	private CommandTimeoutChecker commandTimeoutChecker = null;
 
 	public static DriverState currentDriverState = DriverState.UNKNOWN;
 
@@ -140,6 +142,29 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating the EventQueue for the serial commands.");
 		serialCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName(), this);
+		
+		TimeoutNode timeoutNode = rs232configs.getRs232().getTimeout();
+		commandTimeoutChecker = new CommandTimeoutChecker(this, timeoutNode);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void commandTimeout(SerialPortCommand command) {
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
+				"Received notification for command timeout [" + command + "]");
+		// TODO implement business logic
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void commandTimeoutNoData() {
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
+				"Received notification for no data.");
+		// TODO implement business logic
 	}
 
 	/**
@@ -412,9 +437,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		this.config = config;
 		
 		writeMessage(serialPortCommand.getCommand());
-//		currentDriverState = DriverState.CONFIGURED;
-//		currentDriverState.startTimeoutClock();
-//		fireIDriverStateListenerDriverConfigured();
+		commandTimeoutChecker.checkCommand(serialPortCommand);
 	}
 
 	/**
@@ -433,8 +456,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		fireIDriverStateListenerDriverReseting();
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.RST.toString().toLowerCase());
-		SerialPortTranslator.translateReset(serialPortCommand);
+		SerialPortTranslator.translate(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
+		commandTimeoutChecker.checkCommand(serialPortCommand);
 		currentDriverState = DriverState.RESETING;
 		currentDriverState.startTimeoutClock();
 		serialIO.reopen();
@@ -518,8 +542,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		fireIDriverStateListenerDriverStarting();
 		
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.STR.toString().toLowerCase());
-		SerialPortTranslator.translateStart(serialPortCommand);
+		SerialPortTranslator.translate(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
+		commandTimeoutChecker.checkCommand(serialPortCommand);
 	}
 
 	public IDataSource startOutput(HardwareInfo info, IDataSource source) throws IncorrectStateException {
@@ -552,7 +577,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		fireIDriverStateListenerDriverStoping();
 		serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
-		SerialPortTranslator.translateStop(serialPortCommand);
+		SerialPortTranslator.translate(serialPortCommand);
 		serialIO.reopen();
 		fireIDriverStateListenerDriverStoped();
 	}
@@ -659,6 +684,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		if (!SerialPortCommandList.exists(cmd.getCommandIdentifier())) {
 
 			if (currentDriverState.equals(DriverState.RECEIVINGDATA)) {
+				commandTimeoutChecker.reset();
 				// FIXME hack! martelada! it shouln't be necessary to transform but BaseSerialPort doesn't now...
 				cmd = createTransformedDataCommand(cmd);
 				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINEST,
@@ -743,14 +769,23 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					currentDriverState = DriverState.CONFIGUREWAIT;
 				currentDriverState.startTimeoutClock();
 			} else if (thisCommand.equals(SerialPortCommandList.CFGOK)
-					|| thisCommand.equals(SerialPortCommandList.STROK) || thisCommand.equals(SerialPortCommandList.DAT)
+					|| thisCommand.equals(SerialPortCommandList.STROK)
+					|| thisCommand.equals(SerialPortCommandList.STPOK)
+					|| thisCommand.equals(SerialPortCommandList.RSTOK)) {
+				// valid commands
+				commandTimeoutChecker.reset();
+			} else if (thisCommand.equals(SerialPortCommandList.DAT)
 					|| thisCommand.equals(SerialPortCommandList.BIN)) {
 				// valid commands
+				commandTimeoutChecker.reset();
+				// TODO confirm is there is an awake synch problem?
+				commandTimeoutChecker.checkNoData();
 			} else if (thisCommand.equals(SerialPortCommandList.END)) {
 				// send stp command
 				serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
-				SerialPortTranslator.translateStop(serialPortCommand);
+				SerialPortTranslator.translate(serialPortCommand);
 				writeMessage(serialPortCommand.getCommand());
+				commandTimeoutChecker.checkCommand(serialPortCommand);
 			} else {
 				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
 						"Configuration recieved from the hardware does not match: " + cmd.getCommand());

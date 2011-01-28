@@ -192,11 +192,7 @@
 					<xs:attribute name="time" type="xs:integer" use="required" />
 				</xs:complexType>
 
-				<xs:complexType name="dat_no_data" minOccurs ="0" maxOccurs="1">
-					<xs:attribute name="time" type="xs:integer" use="required" />
-				</xs:complexType>
-
-				<xs:complexType name="bin_no_data" minOccurs ="0" maxOccurs="1">
+				<xs:complexType name="no_data" minOccurs ="0" maxOccurs="1">
 					<xs:attribute name="time" type="xs:integer" use="required" />
 				</xs:complexType>
 

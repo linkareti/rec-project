@@ -39,17 +39,16 @@
 	    </channel>
 	</channels>
 	<timeout>
-	    <default_timeout time="45" />
-	    <id time="10" />
-	    <cfg time="5" />
-	    <cur time="5" />
-	    <str time="45" />
-	    <dat_bin time="12" />
-	    <dat_no_data time="120" />
-	    <bin_no_data time="120" />
-	    <stp time="20" />
-	    <rst time="20" />
-	    <hardware_died time="3600" />
+	    <default_timeout time="45000" />
+	    <id time="10000" />
+	    <cfg time="5000" />
+	    <cur time="5000" />
+	    <str time="45000" />
+	    <dat_bin time="12000" />
+	    <no_data time="120000" />
+	    <stp time="20000" />
+	    <rst time="20000" />
+	    <hardware_died time="3600000" />
 	    <listen_to_port time="10000" />
 	</timeout>
 	<errors>
