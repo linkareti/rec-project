@@ -87,8 +87,7 @@
 			<cur time="5" />
 			<str time="45" />
 			<dat_bin time="12" />
-			<dat_no_data time="120" />
-			<bin_no_data time="120" />
+			<no_data time="120" />
 			<stp time="20" />
 			<rst time="20" />
 			<hardware_died time="3600" />
