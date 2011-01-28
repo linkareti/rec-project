@@ -161,10 +161,10 @@ public class CommandTimeoutChecker {
 		}
 
 		public void reset() {
-			Logger.getLogger(LOGGER).log(Level.FINEST,
-					"Reset the command timeout checker for the command [" + command + "]");
 			synchronized (synch) {
 				if (waiting) {
+					Logger.getLogger(LOGGER).log(Level.FINEST,
+							"Reset the command timeout checker for the command [" + command + "]");
 					waiting = false;
 					synch.notifyAll();
 				}
@@ -172,9 +172,9 @@ public class CommandTimeoutChecker {
 		}
 
 		public void shutdown() {
-			Logger.getLogger(LOGGER).log(Level.INFO, "Shuting down the command timeout checker thread - " + getName());
-			running = false;
 			synchronized (synch) {
+				Logger.getLogger(LOGGER).log(Level.INFO, "Shuting down the command timeout checker thread - " + getName());
+				running = false;
 				synch.notifyAll();
 			}
 		}
@@ -279,6 +279,7 @@ public class CommandTimeoutChecker {
 		 */
 		public void waitTime(long waitTime) {
 			synchronized (synch) {
+				Logger.getLogger(LOGGER).log(Level.FINEST, "Setting wait time [" + waitTime + "] ms");
 				this.waitTime = waitTime;
 				waiting = true;
 				waitRequestTimestamp = System.currentTimeMillis();

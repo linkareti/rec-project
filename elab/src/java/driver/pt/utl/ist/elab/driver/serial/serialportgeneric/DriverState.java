@@ -152,9 +152,10 @@ public enum DriverState {
 							+ command.toString());
 			switch (command) {
 			case IDS:
-				return logAndReturn(this);
 			case STP:
-				return logAndReturn(DriverState.STOPWAIT);
+				return logAndReturn(this);
+			case STPOK:
+				return logAndReturn(DriverState.STOPPED);
 			case ERR:
 				return logAndReturn(DriverState.ERROR);
 			default:

@@ -715,6 +715,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 		// but if we understand it, let's listen to it
 		thisCommand = SerialPortCommandList.valueOf(cmd.getCommandIdentifier());
+		SerialPortCommand writeStopCommand = null;
 
 		// process received data or states
 		if (currentDriverState.processeMe(thisCommand)) {
@@ -789,11 +790,11 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				// TODO confirm is there is an awake synch problem?
 				commandTimeoutChecker.checkNoData();
 			} else if (thisCommand.equals(SerialPortCommandList.END)) {
+				// valid command
+				
 				// send stp command
-				SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
-				SerialPortTranslator.translate(serialPortCommand);
-				writeMessage(serialPortCommand.getCommand());
-				commandTimeoutChecker.checkCommand(serialPortCommand);
+				writeStopCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
+				SerialPortTranslator.translate(writeStopCommand);
 			} else {
 				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
 						"Configuration recieved from the hardware does not match: " + cmd.getCommand());
@@ -829,7 +830,15 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				fireIDriverStateListenerDriverStarted();
 			}
 		}
-		currentDriverState.startTimeoutClock();
+//		currentDriverState.startTimeoutClock();
+		
+		// is it to send a stop command
+		if (writeStopCommand != null && currentDriverState != DriverState.STOPPED
+				&& currentDriverState != DriverState.STOPING) {
+			writeMessage(writeStopCommand.getCommand());
+			commandTimeoutChecker.checkCommand(writeStopCommand);
+			fireIDriverStateListenerDriverStoping();
+		}
 	}
 
 	public class CommandDispatcher implements EventQueueDispatcher {
