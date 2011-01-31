@@ -77,10 +77,13 @@ public class SerialPortFinder {
 
 	/** Holds value of property timeOutPerPort. */
 	private long timeOutPerPort = 1000;
+	
+	private AbstractSerialPortDriver driver;
 
-	/** Creates a new instance of StampFinder */
-	public SerialPortFinder() {
-
+	/** Creates a new instance of StampFinder 
+	 * @param driver */
+	public SerialPortFinder(AbstractSerialPortDriver driver) {
+		this.driver = driver;
 	}
 
 	/**
@@ -433,7 +436,7 @@ public class SerialPortFinder {
 								+ isDTR() + "] RST [" + isRTS() + "] WaitForEcho [" + isWaitForEcho() + "]");
 
 				currentPortOpen = (SerialPort) cpi.open(applicationNameLockPort, 100);
-				stampIO = new BaseSerialPortIO();
+				stampIO = new BaseSerialPortIO(driver);
 				stampIO.setApplicationNameLockPort(getApplicationNameLockPort());
 				stampIO.setPortBaudRate(getPortBaudRate());
 				stampIO.setPortDataBits(getPortDataBits());

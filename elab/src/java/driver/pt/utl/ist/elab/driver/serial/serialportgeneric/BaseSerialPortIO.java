@@ -48,9 +48,13 @@ public class BaseSerialPortIO {
 	/** Utility field used by event firing mechanism. */
 	private SerialPortCommandListener listener = null;
 	private String portName = "COM1";
+	
+	private AbstractSerialPortDriver driver;
 
-	/** Creates a new instance of BaseStampIO */
-	public BaseSerialPortIO() {
+	/** Creates a new instance of BaseStampIO 
+	 * @param driver */
+	public BaseSerialPortIO(AbstractSerialPortDriver driver) {
+		this.driver = driver;
 	}
 
 	public void setPort(SerialPort sPort) {
@@ -143,7 +147,7 @@ public class BaseSerialPortIO {
 						if (inReader != null) {
 							char readChar = 0;
 							lineRead = null;
-							if (AbstractSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN)
+							if (!driver.isDriverInState(DriverState.RECEIVINGBIN))
 								lineReadTemp = new StringBuffer(1024);
 							else {
 								lineReadTemp = new StringBuffer(AbstractSerialPortDriver.currentBinaryLength + 5 /*
@@ -158,7 +162,7 @@ public class BaseSerialPortIO {
 									sleep(0, 500);
 								}
 								readChar = (char) inReader.read();
-								if (AbstractSerialPortDriver.currentDriverState != DriverState.RECEIVINGBIN) {
+								if (!driver.isDriverInState(DriverState.RECEIVINGBIN)) {
 									if (readChar != '\r' && readChar != '\n') {
 										lineReadTemp.append(readChar);
 									} else {
@@ -239,7 +243,7 @@ public class BaseSerialPortIO {
 			return;
 		}
 
-		if (AbstractSerialPortDriver.currentDriverState == DriverState.RECEIVINGBIN) {
+		if (driver.isDriverInState(DriverState.RECEIVINGBIN)) {
 			if (lineRead.length() >= AbstractSerialPortDriver.totalBinaryLength) {
 
 			} else {

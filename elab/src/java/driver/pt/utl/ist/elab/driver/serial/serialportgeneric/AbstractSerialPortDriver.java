@@ -89,8 +89,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	public static HardwareNode rs232configs = null;
 	private CommandTimeoutChecker commandTimeoutChecker = null;
+	private Object synch = null;
 
-	public static DriverState currentDriverState = DriverState.UNKNOWN;
+	public DriverState currentDriverState = DriverState.UNKNOWN;
 
 	/**
 	 * 
@@ -127,7 +128,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		loadCommandHandlers();
 
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating the serial finder.");
-		serialFinder = new SerialPortFinder();
+		serialFinder = new SerialPortFinder(this);
 
 		setApplicationNameLockPort(rs232configs.getId()); // TODO shoud be a new atribute in the xml node
 		setDriverUniqueID(rs232configs.getId());
@@ -144,6 +145,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		
 		TimeoutNode timeoutNode = rs232configs.getRs232().getTimeout();
 		commandTimeoutChecker = new CommandTimeoutChecker(this, timeoutNode);
+		synch = commandTimeoutChecker;
 	}
 	
 	/**
@@ -170,10 +172,11 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	private void writeResetCommand() {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Going to send a reset command.");
 		
-		// FIXME the currentDriverState change must be synchronized with proccess
 		serialIO.resetLastOutputMessage();
-		currentDriverState = DriverState.RESETING;
-		fireIDriverStateListenerDriverReseting();
+		synchronized (synch) {
+			currentDriverState = DriverState.RESETING;
+			fireIDriverStateListenerDriverReseting();
+		}
 		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.RST.toString().toLowerCase());
 		SerialPortTranslator.translate(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
@@ -358,8 +361,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		}
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "The wait has ended with serial IO = " + serialIO);
 
-		currentDriverState = DriverState.UNKNOWN;
-		currentDriverState.startTimeoutClock();
+		synchronized (synch) {
+			currentDriverState = DriverState.UNKNOWN;
+		}
 
 		if (serialIO != null) {
 			fireIDriverStateListenerDriverInited();
@@ -390,24 +394,21 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException,
 			IncorrectStateException, TimedOutException {
-		
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Configuring driver...");
-
-		// TODO explode???
-//		currentDriverState.explodeOnTimeout();
 
 		// verifies if the driver can configure the hardware at this moment
 		// through the current state
-		if (currentDriverState != DriverState.CONFIGURED && currentDriverState != DriverState.STOPPED
-				&& currentDriverState != DriverState.RESETED && currentDriverState != DriverState.UNKNOWN) {
-			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.WARNING,
-					"Cannot configure while on state " + currentDriverState.toString());
-			throw new IncorrectStateException();
-		}
+		synchronized (synch) {
+			if (!isDriverInState(DriverState.CONFIGURED) && !isDriverInState(DriverState.STOPPED)
+					&& !isDriverInState(DriverState.RESETED) && !isDriverInState(DriverState.UNKNOWN)) {
+				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.WARNING,
+						"Cannot configure while on state " + currentDriverState.toString());
+				throw new IncorrectStateException();
+			}
 
-		currentDriverState = DriverState.CONFIGURING;
-		currentDriverState.startTimeoutClock();
-		fireIDriverStateListenerDriverConfiguring();
+			currentDriverState = DriverState.CONFIGURING;
+			fireIDriverStateListenerDriverConfiguring();
+		}
 
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating command.");
 		
@@ -474,19 +475,16 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void reset(HardwareInfo info) throws IncorrectStateException {
-
-		// TODO explode???
-//		currentDriverState.explodeOnTimeout();
-
 		fireIDriverStateListenerDriverReseting();
 		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.RST.toString().toLowerCase());
 		SerialPortTranslator.translate(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
 		commandTimeoutChecker.checkCommand(serialPortCommand);
-		currentDriverState = DriverState.RESETING;
-		currentDriverState.startTimeoutClock();
+		synchronized (synch) {
+			currentDriverState = DriverState.RESETING;
+			fireIDriverStateListenerDriverReseted();
+		}
 		serialIO.reopen();
-		fireIDriverStateListenerDriverReseted();
 	}
 
 	/**
@@ -502,9 +500,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		
 		if (serialIO != null)
 			serialIO.shutdown();
-		currentDriverState = DriverState.UNKNOWN;
-		currentDriverState.startTimeoutClock();
-		fireIDriverStateListenerDriverShutdown();
+		synchronized (synch) {
+			currentDriverState = DriverState.UNKNOWN;
+			fireIDriverStateListenerDriverShutdown();
+		}
 		// super.shutDownNow();
 	}
 
@@ -520,12 +519,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Starting with the hardware info [" + info + "]");
 
-		// TODO explode???
-//		currentDriverState.explodeOnTimeout();
-
 		// verifies if the driver can start the hardware at this moment through
 		// the current state
-		if (currentDriverState != DriverState.CONFIGURED && currentDriverState != DriverState.STOPPED) {
+		if (!isDriverInState(DriverState.CONFIGURED) && !isDriverInState(DriverState.STOPPED)) {
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.WARNING,
 					"Cannot start while on state " + currentDriverState.toString());
 			throw new IncorrectStateException();
@@ -544,9 +540,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	private void startNow() {
 		
-		currentDriverState = DriverState.STARTING;
-		currentDriverState.startTimeoutClock();
-		fireIDriverStateListenerDriverStarting();
+		synchronized (synch) {
+			currentDriverState = DriverState.STARTING;
+			fireIDriverStateListenerDriverStarting();
+		}
 		
 		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.STR.toString().toLowerCase());
 		SerialPortTranslator.translate(serialPortCommand);
@@ -570,13 +567,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public void stop(HardwareInfo info) throws IncorrectStateException {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Stopping hardware.");
 
-		// TODO explode???
-//		currentDriverState.explodeOnTimeout();
-
 		// verifies if the driver can stop the hardware at this moment through
 		// the current state
-		if (currentDriverState != DriverState.STARTED && currentDriverState != DriverState.RECEIVINGDATA
-				&& currentDriverState != DriverState.RECEIVINGBIN) {
+		if (!isDriverInState(DriverState.STARTED) && !isDriverInState(DriverState.RECEIVINGDATA)
+				&& !isDriverInState(DriverState.RECEIVINGBIN)) {
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.WARNING,
 					"Cannot stop while on state " + currentDriverState.toString());
 			throw new IncorrectStateException();
@@ -586,6 +580,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
 		SerialPortTranslator.translate(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
+		commandTimeoutChecker.checkCommand(serialPortCommand);
 		serialIO.reopen();
 		fireIDriverStateListenerDriverStoped();
 	}
@@ -596,7 +591,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 
 	public void stampFound(SerialPort sPort) {
 		synchronized (serialFinder) {
-			serialIO = new BaseSerialPortIO();
+			serialIO = new BaseSerialPortIO(this);
 			serialIO.setApplicationNameLockPort(serialFinder.getApplicationNameLockPort());
 			serialIO.setPortBaudRate(serialFinder.getPortBaudRate());
 			serialIO.setPortDataBits(serialFinder.getPortDataBits());
@@ -673,171 +668,164 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void processCommand(SerialPortCommand cmd) throws IncorrectStateException, TimedOutException {
-		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
-				"Going to process the command " + cmd + " with the driver in state " + currentDriverState);
+		synchronized (synch) {
+			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
+					"Going to process the command " + cmd + " with the driver in state " + currentDriverState);
 
-		// is this time to
-		// TODO explode???
-//		currentDriverState.explodeOnTimeout();
+			SerialPortCommandList thisCommand = null;
 
-		SerialPortCommandList thisCommand = null;
-
-		if (cmd == null || cmd.getCommandIdentifier() == null) {
-			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "PROCESSCOMMAND : Cannot interpret command " + cmd);
-			return;
-		}
-
-		// if the hardware is sending data to the driver, OR
-		// if the hardware speaks a unknown language, forget about it
-		if (!SerialPortCommandList.exists(cmd.getCommandIdentifier())) {
-
-			if (currentDriverState.equals(DriverState.RECEIVINGDATA)) {
-				commandTimeoutChecker.reset();
-				// FIXME hack! martelada! it shouln't be necessary to transform but BaseSerialPort doesn't now...
-				cmd = createTransformedDataCommand(cmd);
-				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINEST,
-						"Going to process the transformed data command [" + cmd + "]");
-				dataSource.processDataCommand(cmd);
-				return;
-			} else if (currentDriverState.equals(DriverState.RECEIVINGBIN)) {
-				dataSource.processBinaryCommand(cmd);
+			if (cmd == null || cmd.getCommandIdentifier() == null) {
+				Logger.getLogger(SERIAL_PORT_LOGGER)
+						.log(Level.INFO, "PROCESSCOMMAND : Cannot interpret command " + cmd);
 				return;
 			}
-			// the driver seems to speak Fortran 77, I cannot understand it
-			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
-					"PROCESSCOMMAND : Cannot interpret command identifier " + cmd.getCommandIdentifier());
-			// terminates this driver execution
-			currentDriverState = DriverState.UNKNOWN;
-			currentDriverState.startTimeoutClock();
-			fireIDriverStateListenerDriverShutdown();
-			return;
-		}
 
-		// but if we understand it, let's listen to it
-		thisCommand = SerialPortCommandList.valueOf(cmd.getCommandIdentifier());
-		SerialPortCommand writeStopCommand = null;
+			// if the hardware is sending data to the driver, OR
+			// if the hardware speaks a unknown language, forget about it
+			if (!SerialPortCommandList.exists(cmd.getCommandIdentifier())) {
 
-		// process received data or states
-		if (currentDriverState.processeMe(thisCommand)) {
-			if (thisCommand.equals(SerialPortCommandList.IDS)) {
-				if (cmd.getDataHashMap() == null || cmd.getDataHashMap().size() != 2) {
-					// Houston we have a problem, IDS always comes with two
-					// parameters
-					Logger
-							.getLogger(SERIAL_PORT_LOGGER)
-							.log(
-									Level.WARNING,
-									"Error on command IDS, incorrect number of parameters: " + cmd.getDataHashMap() == null ? "null"
-											: cmd.getDataHashMap().size() + " parameters instead of 2");
-					currentDriverState = DriverState.UNKNOWN;
-					currentDriverState.startTimeoutClock();
-					// terminates this driver execution
-					fireIDriverStateListenerDriverShutdown();
+				if (currentDriverState.equals(DriverState.RECEIVINGDATA)) {
+					commandTimeoutChecker.reset();
+					// FIXME hack! martelada! it shouln't be necessary to
+					// transform but BaseSerialPort doesn't now...
+					cmd = createTransformedDataCommand(cmd);
+					Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINEST,
+							"Going to process the transformed data command [" + cmd + "]");
+					dataSource.processDataCommand(cmd);
 					return;
-				} else {
-					if (!rs232configs.getId().equals(cmd.getDataHashMap().get(0))) {
-						Logger.getLogger(SERIAL_PORT_LOGGER).log(
-								Level.WARNING,
-								"Error on command IDS, wrong ID of hardware: "
-										+ (cmd.getDataHashMap().size() > 0 ? cmd.getDataHashMap().get(0) : "null"));
-						currentDriverState = DriverState.UNKNOWN;
-						currentDriverState.startTimeoutClock();
-						// terminates this driver execution
-						fireIDriverStateListenerDriverShutdown();
-						return;
-					}
-					if (!HardwareStatus.isValid(cmd.getDataHashMap().get(1))) {
-						Logger.getLogger(SERIAL_PORT_LOGGER).log(
-								Level.WARNING,
-								"Error on command IDS, wrong status of hardware:"
-										+ (cmd.getDataHashMap().size() > 1 ? cmd.getDataHashMap().get(1) : "null"));
-						currentDriverState = DriverState.UNKNOWN;
-						currentDriverState.startTimeoutClock();
-						// terminates this driver execution
-						fireIDriverStateListenerDriverShutdown();
-						return;
-					}
-					if (!currentDriverState.acceptHardwareStatus(HardwareStatus.valueOf(cmd.getDataHashMap().get(1)))) {
-						Logger.getLogger(SERIAL_PORT_LOGGER).log(
-								Level.WARNING,
-								"Current driver state: " + currentDriverState.toString()
-										+ " does not matches hardware status:"
-										+ (cmd.getDataHashMap().size() == 2 ? cmd.getDataHashMap().get(1) : "null")
-										+ ". Shuting down driver.");
-						currentDriverState = DriverState.UNKNOWN;
-						currentDriverState.startTimeoutClock();
-						// terminates this driver execution
-						fireIDriverStateListenerDriverShutdown();
-						return;
-					}
-				} // is an IDS
-				// else ...
-			} else if (thisCommand.equals(SerialPortCommandList.CFG)) {
-				// is this used???
-				if (SerialPortCommand.isResponse(cmd.getCommand(), rememberLastWrittenMessage))
-					currentDriverState = DriverState.CONFIGUREWAIT;
-				currentDriverState.startTimeoutClock();
-			} else if (thisCommand.equals(SerialPortCommandList.CFGOK)
-					|| thisCommand.equals(SerialPortCommandList.STROK)
-					|| thisCommand.equals(SerialPortCommandList.STPOK)
-					|| thisCommand.equals(SerialPortCommandList.RSTOK)) {
-				// valid commands
-				commandTimeoutChecker.reset();
-			} else if (thisCommand.equals(SerialPortCommandList.DAT)
-					|| thisCommand.equals(SerialPortCommandList.BIN)) {
-				// valid commands
-				commandTimeoutChecker.reset();
-				// TODO confirm is there is an awake synch problem?
-				commandTimeoutChecker.checkNoData();
-			} else if (thisCommand.equals(SerialPortCommandList.END)) {
-				// valid command
-				
-				// send stp command
-				writeStopCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
-				SerialPortTranslator.translate(writeStopCommand);
-			} else {
-				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
-						"Configuration recieved from the hardware does not match: " + cmd.getCommand());
+				} else if (currentDriverState.equals(DriverState.RECEIVINGBIN)) {
+					dataSource.processBinaryCommand(cmd);
+					return;
+				}
+				// the driver seems to speak Fortran 77, I cannot understand it
+				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
+						"PROCESSCOMMAND : Cannot interpret command identifier " + cmd.getCommandIdentifier());
+				// terminates this driver execution
 				currentDriverState = DriverState.UNKNOWN;
-				currentDriverState.startTimeoutClock();
 				fireIDriverStateListenerDriverShutdown();
 				return;
 			}
-		} else if (thisCommand.equals(SerialPortCommandList.CUR)) {
-			// TODO : what must I do with this?
-		} else if (thisCommand.equals(SerialPortCommandList.ERR)) {
-			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
-					"Recieved error from the hardware: " + cmd.getCommand());
-			fireIDriverStateListenerDriverShutdown();
-			throw new IncorrectStateException();
-		}
-		
-		// the next state according to the message of the driver
-		DriverState newDriverState = currentDriverState.nextState(thisCommand, cmd);
-		if (newDriverState != currentDriverState) {
-			// new state for the driver
-			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINEST,
-					"Switching between driver state " + currentDriverState + " and " + newDriverState);
-			currentDriverState = newDriverState;
 
-			if (currentDriverState == DriverState.RESETED) {
-				fireIDriverStateListenerDriverReseted();
-			} else if (currentDriverState == DriverState.STOPPED) {
-				fireIDriverStateListenerDriverStoped();
-			} else if (currentDriverState == DriverState.CONFIGURED) {
-				fireIDriverStateListenerDriverConfigured();
-			} else if (currentDriverState == DriverState.STARTED) {
-				fireIDriverStateListenerDriverStarted();
+			// but if we understand it, let's listen to it
+			thisCommand = SerialPortCommandList.valueOf(cmd.getCommandIdentifier());
+			SerialPortCommand writeStopCommand = null;
+
+			// process received data or states
+			if (currentDriverState.processeMe(thisCommand)) {
+				if (thisCommand.equals(SerialPortCommandList.IDS)) {
+					if (cmd.getDataHashMap() == null || cmd.getDataHashMap().size() != 2) {
+						// Houston we have a problem, IDS always comes with two
+						// parameters
+						Logger
+								.getLogger(SERIAL_PORT_LOGGER)
+								.log(
+										Level.WARNING,
+										"Error on command IDS, incorrect number of parameters: " + cmd.getDataHashMap() == null ? "null"
+												: cmd.getDataHashMap().size() + " parameters instead of 2");
+						currentDriverState = DriverState.UNKNOWN;
+						// terminates this driver execution
+						fireIDriverStateListenerDriverShutdown();
+						return;
+					} else {
+						if (!rs232configs.getId().equals(cmd.getDataHashMap().get(0))) {
+							Logger.getLogger(SERIAL_PORT_LOGGER).log(
+									Level.WARNING,
+									"Error on command IDS, wrong ID of hardware: "
+											+ (cmd.getDataHashMap().size() > 0 ? cmd.getDataHashMap().get(0) : "null"));
+							currentDriverState = DriverState.UNKNOWN;
+							// terminates this driver execution
+							fireIDriverStateListenerDriverShutdown();
+							return;
+						}
+						if (!HardwareStatus.isValid(cmd.getDataHashMap().get(1))) {
+							Logger.getLogger(SERIAL_PORT_LOGGER).log(
+									Level.WARNING,
+									"Error on command IDS, wrong status of hardware:"
+											+ (cmd.getDataHashMap().size() > 1 ? cmd.getDataHashMap().get(1) : "null"));
+							currentDriverState = DriverState.UNKNOWN;
+							// terminates this driver execution
+							fireIDriverStateListenerDriverShutdown();
+							return;
+						}
+						if (!currentDriverState.acceptHardwareStatus(HardwareStatus
+								.valueOf(cmd.getDataHashMap().get(1)))) {
+							Logger.getLogger(SERIAL_PORT_LOGGER).log(
+									Level.WARNING,
+									"Current driver state: " + currentDriverState.toString()
+											+ " does not matches hardware status:"
+											+ (cmd.getDataHashMap().size() == 2 ? cmd.getDataHashMap().get(1) : "null")
+											+ ". Shuting down driver.");
+							currentDriverState = DriverState.UNKNOWN;
+							// terminates this driver execution
+							fireIDriverStateListenerDriverShutdown();
+							return;
+						}
+					} // is an IDS
+					// else ...
+				} else if (thisCommand.equals(SerialPortCommandList.CFG)) {
+					// is this used???
+					if (SerialPortCommand.isResponse(cmd.getCommand(), rememberLastWrittenMessage))
+						currentDriverState = DriverState.CONFIGUREWAIT;
+				} else if (thisCommand.equals(SerialPortCommandList.CFGOK)
+						|| thisCommand.equals(SerialPortCommandList.STROK)
+						|| thisCommand.equals(SerialPortCommandList.STPOK)
+						|| thisCommand.equals(SerialPortCommandList.RSTOK)) {
+					// valid commands
+					commandTimeoutChecker.reset();
+				} else if (thisCommand.equals(SerialPortCommandList.DAT)
+						|| thisCommand.equals(SerialPortCommandList.BIN)) {
+					// valid commands
+					commandTimeoutChecker.reset();
+					// TODO confirm is there is an awake synch problem?
+					commandTimeoutChecker.checkNoData();
+				} else if (thisCommand.equals(SerialPortCommandList.END)) {
+					// valid command
+
+					// send stp command
+					writeStopCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
+					SerialPortTranslator.translate(writeStopCommand);
+				} else {
+					Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
+							"Configuration recieved from the hardware does not match: " + cmd.getCommand());
+					currentDriverState = DriverState.UNKNOWN;
+					fireIDriverStateListenerDriverShutdown();
+					return;
+				}
+			} else if (thisCommand.equals(SerialPortCommandList.CUR)) {
+				// TODO : what must I do with this?
+			} else if (thisCommand.equals(SerialPortCommandList.ERR)) {
+				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
+						"Recieved error from the hardware: " + cmd.getCommand());
+				fireIDriverStateListenerDriverShutdown();
+				throw new IncorrectStateException();
 			}
-		}
-//		currentDriverState.startTimeoutClock();
-		
-		// is it to send a stop command
-		if (writeStopCommand != null && currentDriverState != DriverState.STOPPED
-				&& currentDriverState != DriverState.STOPING) {
-			writeMessage(writeStopCommand.getCommand());
-			commandTimeoutChecker.checkCommand(writeStopCommand);
-			fireIDriverStateListenerDriverStoping();
+
+			// the next state according to the message of the driver
+			DriverState newDriverState = currentDriverState.nextState(thisCommand, cmd);
+			if (newDriverState != currentDriverState) {
+				// new state for the driver
+				Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINEST,
+						"Switching between driver state " + currentDriverState + " and " + newDriverState);
+				currentDriverState = newDriverState;
+
+				if (currentDriverState == DriverState.RESETED) {
+					fireIDriverStateListenerDriverReseted();
+				} else if (currentDriverState == DriverState.STOPPED) {
+					fireIDriverStateListenerDriverStoped();
+				} else if (currentDriverState == DriverState.CONFIGURED) {
+					fireIDriverStateListenerDriverConfigured();
+				} else if (currentDriverState == DriverState.STARTED) {
+					fireIDriverStateListenerDriverStarted();
+				}
+			}
+
+			// is it to send a stop command
+			if (writeStopCommand != null && currentDriverState != DriverState.STOPPED
+					&& currentDriverState != DriverState.STOPING) {
+				writeMessage(writeStopCommand.getCommand());
+				commandTimeoutChecker.checkCommand(writeStopCommand);
+				fireIDriverStateListenerDriverStoping();
+			}
 		}
 	}
 
@@ -1036,6 +1024,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			rememberLastWrittenMessage = message;
 			serialIO.writeMessage(message);
 		}
+	}
+	
+	public boolean isDriverInState(DriverState state) {
+		return currentDriverState == state;
 	}
 	
 	/**
