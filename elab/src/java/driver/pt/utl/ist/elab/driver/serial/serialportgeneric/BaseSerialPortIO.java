@@ -251,8 +251,8 @@ public class BaseSerialPortIO {
 			}
 		}
 
-		commandArray = lineRead.split("\t");
-		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINEST, "Splited tabbed line " + Arrays.deepToString(commandArray));
+		commandArray = lineRead.split("\\s");
+		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINEST, "Splited (whitepaces) line " + Arrays.deepToString(commandArray));
 		if (commandArray.length > 0) {
 			inCommand = new SerialPortCommand(commandArray[0]);
 			if (commandArray.length > 1) {
