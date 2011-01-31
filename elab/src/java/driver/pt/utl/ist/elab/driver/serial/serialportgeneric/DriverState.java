@@ -164,8 +164,8 @@ public enum DriverState {
 			// Log this event
 			switch (command) {
 			case IDS:
-				return true;
 			case STP:
+			case STPOK:
 				return true;
 			case ERR:
 				return true;
@@ -1091,7 +1091,7 @@ public enum DriverState {
 			case RST:
 				return true;
 			case RSTOK:
-				return false;
+				return true;
 			case ERR:
 				return true;
 			default:

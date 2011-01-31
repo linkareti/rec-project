@@ -824,6 +824,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					&& currentDriverState != DriverState.STOPING) {
 				writeMessage(writeStopCommand.getCommand());
 				commandTimeoutChecker.checkCommand(writeStopCommand);
+				currentDriverState = DriverState.STOPING;
 				fireIDriverStateListenerDriverStoping();
 			}
 		}
