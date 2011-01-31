@@ -1055,7 +1055,7 @@ public enum DriverState {
 			case RST:
 				return logAndReturn(DriverState.RESETWAIT);
 			case RSTOK:
-				return logAndReturn(DriverState.UNKNOWN);
+				return logAndReturn(DriverState.RESETED);
 			case ERR:
 				return logAndReturn(DriverState.ERROR);
 			default:
