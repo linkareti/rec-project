@@ -41,9 +41,9 @@
 	<timeout>
 	    <default_timeout time="45000" />
 	    <id time="10000" />
-	    <cfg time="5000" />
-	    <cur time="5000" />
-	    <str time="45000" />
+	    <cfg time="25000" />
+	    <cur time="15000" />
+	    <str time="90000" />
 	    <dat_bin time="12000" />
 	    <no_data time="120000" />
 	    <stp time="20000" />
