@@ -3,28 +3,28 @@
   <rs232 baud="115200" stopbits="1" paritybits="0" numbits="8" ports_restrict="/dev/ttyS0">
 	<parameters>
 	    <!-- protocolo -->
-	    <parameter output="#" input="#" maxvalue="5" minvalue="1" order="0">
+	    <parameter output="0" input="0" maxvalue="5" minvalue="1" order="0">
 	    </parameter>
 	    <!-- ang1_min -->
-	    <parameter output="###.#" input="###.#" maxvalue="359.8" minvalue="0" order="1">
+	    <parameter output="##0.0" input="##0.0" maxvalue="359.8" minvalue="0" order="1">
 	    </parameter>
 	    <!-- ang1_max -->
-	    <parameter output="###.#" input="###.#" maxvalue="360" minvalue="0" order="2">
+	    <parameter output="##0.0" input="##0.0" maxvalue="360" minvalue="0" order="2">
 	    </parameter>
 	    <!-- delta_ang1 -->
-	    <parameter output="###.#" input="###.#" maxvalue="360" minvalue="0.2" order="3">
+	    <parameter output="##0.0" input="##0.0" maxvalue="360" minvalue="0.2" order="3">
 	    </parameter>
 	    <!-- delay -->
-	    <parameter output="#.#" input="#.#" maxvalue="5" minvalue="0" order="4">
+	    <parameter output="0.0" input="0.0" maxvalue="5" minvalue="0" order="4">
 	    </parameter>
 	    <!-- polarizacao -->
-	    <parameter output="#" input="#" maxvalue="1" minvalue="0" order="5">
+	    <parameter output="0" input="0" maxvalue="1" minvalue="0" order="5">
 	    </parameter>
 	    <!-- ang_pol -->
-	    <parameter output="##.#" input="##.#" maxvalue="90" minvalue="0" order="6">
+	    <parameter output="#0.0" input="#0.0" maxvalue="90" minvalue="0" order="6">
 	    </parameter>
 	    <!-- check_box -->
-	    <parameter output="#" input="#" maxvalue="7" minvalue="0" order="7">
+	    <parameter output="0" input="0" maxvalue="7" minvalue="0" order="7">
 	    </parameter>
 	</parameters>
 	<channels>
