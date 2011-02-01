@@ -47,7 +47,6 @@ import java.util.Arrays;
 import java.util.EventObject;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -117,8 +116,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		LabConnectorListener, ApparatusConnectorListener, ICustomizerListener, ExpHistoryDisplayFactory {
 
 	private static final Logger log = Logger.getLogger(ReCApplication.class.getName());
-
-	private static final Locale PORTUGAL = new Locale("pt", "PT");
 
 	/**
 	 * Sets the video output for this application controller.
@@ -786,7 +783,19 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 			if (log.isLoggable(Level.FINE)) {
 				log.fine("play");
 			}
-			apparatusClientBean.lock();
+			
+			// block interface so that is impossible o repeate play event
+			apparatusStateConfiguring(new ApparatusConnectorEvent(this, ""));
+			
+			if (SwingUtilities.isEventDispatchThread()) {
+				(new Thread() {
+					public void run() {
+						apparatusClientBean.lock();
+					}
+				}).start();
+			} else {
+				apparatusClientBean.lock();
+			}
 		}
 	}
 
@@ -798,7 +807,6 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		
 		if (this.experimentAutoplay && experimentPlayButtonEnabled
 				&& (currentState.equals(APPARATUS_CONFIGURED) || currentState.equals(APPARATUS_STARTED))) {
-			// TODO correr o play noutra thread pois este metodo e' executado a partir do GUI ???
 			play();
 		}
 	}

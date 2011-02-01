@@ -838,6 +838,10 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		getExperimentStatusActionBar().setActionStateText(
 				getStatusActionBarResourceMap().getString("lblActionState.apparatusConfiguring.text"),
 				GREEN);
+		lockApparatus();
+		setExperimentAutoplay(false);
+		setPlayButtonEnabled(false);
+		setStopButtonEnabled(true);
 	}
 
 	private void configuredApparatus() {
