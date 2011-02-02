@@ -88,6 +88,7 @@
 			<str time="45" />
 			<dat_bin time="12" />
 			<no_data time="120" />
+	    	<end time="230000" />
 			<stp time="20" />
 			<rst time="20" />
 			<hardware_died time="3600" />

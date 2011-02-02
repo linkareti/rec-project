@@ -114,10 +114,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		} catch (IncorrectRs232ValuesException e) {
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.SEVERE,
 					"Incorrect values on rs232 config file" + e.getMessage());
-			return;
+			throw new RuntimeException(e);
 		} catch (IOException e) {
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.SEVERE, "Error reading rs232 config file" + e.getMessage());
-			return;
+			throw new RuntimeException(e);
 		}
 
 		className = this.getClass().getName().replaceFirst("StampDriver", "").replaceFirst(".class", "");

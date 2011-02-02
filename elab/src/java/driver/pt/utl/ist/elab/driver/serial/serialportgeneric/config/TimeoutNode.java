@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TimeoutNode", propOrder = { "defaultTimeout", "id", "cfg", "cur", "str", "datBin", "noData",
-		"stp", "rst", "hardwareDied", "portListen" })
+		"end", "stp", "rst", "hardwareDied", "portListen" })
 public class TimeoutNode {
 
 	@XmlElement(name = "default_timeout", required = true)
