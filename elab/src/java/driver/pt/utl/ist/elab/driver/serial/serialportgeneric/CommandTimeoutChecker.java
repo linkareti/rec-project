@@ -68,6 +68,7 @@ public class CommandTimeoutChecker {
 		this.str = str;
 		this.datBin = datBin;
 		this.noData = noData;
+		this.end = end;
 		this.stp = stp;
 		this.rst = rst;
 
