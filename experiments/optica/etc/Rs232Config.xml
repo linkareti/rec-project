@@ -41,13 +41,14 @@
 	<timeout>
 	    <default_timeout time="45000" />
 	    <id time="10000" />
-	    <cfg time="60000" />
-	    <cur time="15000" />
-	    <str time="90000" />
-	    <dat_bin time="12000" />
-	    <no_data time="120000" />
-	    <stp time="60000" />
-	    <rst time="60000" />
+	    <cfg time="80000" />
+	    <cur time="5000" />
+	    <str time="5000" />
+	    <dat_bin time="120000" />
+	    <no_data time="60000" />
+	    <end time="230000" />
+	    <stp time="180000" />
+	    <rst time="180000" />
 	    <hardware_died time="3600000" />
 	    <listen_to_port time="10000" />
 	</timeout>

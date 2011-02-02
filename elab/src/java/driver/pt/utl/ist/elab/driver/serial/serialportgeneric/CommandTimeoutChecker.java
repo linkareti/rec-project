@@ -36,6 +36,7 @@ public class CommandTimeoutChecker {
 	private int str;
 	private int datBin;
 	private int noData;
+	private int end;
 	private int stp;
 	private int rst;
 
@@ -54,12 +55,13 @@ public class CommandTimeoutChecker {
 	 * @param str
 	 * @param datBin
 	 * @param noData
+	 * @param end 
 	 * @param binNoData
 	 * @param stp
 	 * @param rst
 	 */
 	public CommandTimeoutChecker(ICommandTimeoutListener listener, int cfg, int cur, int str, int datBin, int noData,
-			int stp, int rst) {
+			int end, int stp, int rst) {
 		this.listenerICommandTimeoutListener = listener;
 		this.cfg = cfg;
 		this.cur = cur;
@@ -81,8 +83,8 @@ public class CommandTimeoutChecker {
 	 */
 	public CommandTimeoutChecker(ICommandTimeoutListener listener, TimeoutNode node) {
 		this(listener, node.getCfg().getTimeInt(), node.getCur().getTimeInt(), node.getStr().getTimeInt(), node
-				.getDatBin().getTimeInt(), node.getNoData().getTimeInt(), node.getStp().getTimeInt(), node.getRst()
-				.getTimeInt());
+				.getDatBin().getTimeInt(), node.getNoData().getTimeInt(), node.getEnd().getTimeInt(), node.getStp()
+				.getTimeInt(), node.getRst().getTimeInt());
 	}
 
 	/**
@@ -127,6 +129,8 @@ public class CommandTimeoutChecker {
 		} else if (command.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.DAT.toString())
 				|| command.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.BIN.toString())) {
 			time = datBin;
+		} else if (command.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.END.toString())) {
+			time = end;
 		} else if (command.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.STP.toString())) {
 			time = stp;
 		} else if (command.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.RST.toString())) {

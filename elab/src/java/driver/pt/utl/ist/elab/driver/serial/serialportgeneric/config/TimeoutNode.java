@@ -64,6 +64,8 @@ public class TimeoutNode {
 	@XmlElement(name = "no_data", required = true)
 	protected OneTimeoutNode noData;
 	@XmlElement(required = true)
+	protected OneTimeoutNode end;
+	@XmlElement(required = true)
 	protected OneTimeoutNode stp;
 	@XmlElement(required = true)
 	protected OneTimeoutNode rst;
@@ -210,6 +212,26 @@ public class TimeoutNode {
 	 */
 	public void setNoData(OneTimeoutNode value) {
 		this.noData = value;
+	}
+
+	/**
+	 * Gets the value of the end property.
+	 * 
+	 * @return possible object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public OneTimeoutNode getEnd() {
+		return end;
+	}
+
+	/**
+	 * Sets the value of the end property.
+	 * 
+	 * @param value allowed object is {@link OneTimeoutNode }
+	 * 
+	 */
+	public void setEnd(OneTimeoutNode value) {
+		this.end = value;
 	}
 
 	/**

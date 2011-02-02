@@ -92,6 +92,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	private Object synch = null;
 
 	public DriverState currentDriverState = DriverState.UNKNOWN;
+	public DriverState previousDriverState = DriverState.UNKNOWN;
 
 	/**
 	 * 
@@ -174,6 +175,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		
 		serialIO.resetLastOutputMessage();
 		synchronized (synch) {
+			previousDriverState = currentDriverState;
 			currentDriverState = DriverState.RESETING;
 			fireIDriverStateListenerDriverReseting();
 		}
@@ -362,6 +364,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "The wait has ended with serial IO = " + serialIO);
 
 		synchronized (synch) {
+			previousDriverState = currentDriverState;
 			currentDriverState = DriverState.UNKNOWN;
 		}
 
@@ -406,6 +409,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				throw new IncorrectStateException();
 			}
 
+			previousDriverState = currentDriverState;
 			currentDriverState = DriverState.CONFIGURING;
 			fireIDriverStateListenerDriverConfiguring();
 		}
@@ -481,6 +485,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		writeMessage(serialPortCommand.getCommand());
 		commandTimeoutChecker.checkCommand(serialPortCommand);
 		synchronized (synch) {
+			previousDriverState = currentDriverState;
 			currentDriverState = DriverState.RESETING;
 			fireIDriverStateListenerDriverReseted();
 		}
@@ -501,6 +506,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		if (serialIO != null)
 			serialIO.shutdown();
 		synchronized (synch) {
+			previousDriverState = currentDriverState;
 			currentDriverState = DriverState.UNKNOWN;
 			fireIDriverStateListenerDriverShutdown();
 		}
@@ -541,6 +547,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	private void startNow() {
 		
 		synchronized (synch) {
+			previousDriverState = currentDriverState;
 			currentDriverState = DriverState.STARTING;
 			fireIDriverStateListenerDriverStarting();
 		}
@@ -671,6 +678,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		synchronized (synch) {
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO,
 					"Going to process the command " + cmd + " with the driver in state " + currentDriverState);
+			previousDriverState = currentDriverState;
 
 			SerialPortCommandList thisCommand = null;
 
@@ -685,7 +693,13 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			if (!SerialPortCommandList.exists(cmd.getCommandIdentifier())) {
 
 				if (currentDriverState.equals(DriverState.RECEIVINGDATA)) {
-					commandTimeoutChecker.reset();
+					if (previousDriverState.equals(DriverState.RECEIVINGDATA)) {
+						// only do reset on changed state 
+						commandTimeoutChecker.reset();
+						
+						commandTimeoutChecker.checkCommand(new SerialPortCommand(SerialPortCommandList.END.toString()
+								.toLowerCase()));
+					}
 					// FIXME hack! martelada! it shouln't be necessary to
 					// transform but BaseSerialPort doesn't now...
 					cmd = createTransformedDataCommand(cmd);
@@ -780,6 +794,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					commandTimeoutChecker.checkNoData();
 				} else if (thisCommand.equals(SerialPortCommandList.END)) {
 					// valid command
+					commandTimeoutChecker.reset();
 
 					// send stp command
 					writeStopCommand = new SerialPortCommand(SerialPortCommandList.STP.toString().toLowerCase());
