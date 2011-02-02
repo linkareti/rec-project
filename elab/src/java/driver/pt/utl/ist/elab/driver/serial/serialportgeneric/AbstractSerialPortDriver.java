@@ -693,7 +693,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			if (!SerialPortCommandList.exists(cmd.getCommandIdentifier())) {
 
 				if (currentDriverState.equals(DriverState.RECEIVINGDATA)) {
-					if (previousDriverState.equals(DriverState.RECEIVINGDATA)) {
+					if (!previousDriverState.equals(DriverState.RECEIVINGDATA)) {
 						// only do reset on changed state 
 						commandTimeoutChecker.reset();
 						
