@@ -234,6 +234,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderSnellDelta.setMinorTickSpacing(2);
         jSliderSnellDelta.setPaintLabels(true);
         jSliderSnellDelta.setSnapToTicks(true);
+        jSliderSnellDelta.setValue(2);
         jSliderSnellDelta.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderSnellDelta.setName("jSliderSnellDelta"); // NOI18N
         jSliderSnellDelta.setPreferredSize(new java.awt.Dimension(250, 42));
