@@ -55,7 +55,7 @@ public class CommandTimeoutChecker {
 	 * @param str
 	 * @param datBin
 	 * @param noData
-	 * @param end 
+	 * @param end
 	 * @param binNoData
 	 * @param stp
 	 * @param rst
@@ -178,7 +178,8 @@ public class CommandTimeoutChecker {
 
 		public void shutdown() {
 			synchronized (synch) {
-				Logger.getLogger(LOGGER).log(Level.INFO, "Shuting down the command timeout checker thread - " + getName());
+				Logger.getLogger(LOGGER).log(Level.INFO,
+						"Shuting down the command timeout checker thread - " + getName());
 				running = false;
 				synch.notifyAll();
 			}
@@ -196,7 +197,7 @@ public class CommandTimeoutChecker {
 					synchronized (synch) {
 						// waiting for the next check
 						synch.wait();
-						
+
 						while (running && waiting && waitTime > 0) {
 							Logger.getLogger(LOGGER).log(Level.INFO, "Going to wait for [" + waitTime + "] ms");
 							// waiting for the specified cmd time
@@ -216,51 +217,18 @@ public class CommandTimeoutChecker {
 									waiting = false;
 									command = null;
 								} else {
-									Logger.getLogger(LOGGER)
-											.log(
-													Level.FINE,
-													"Wait time must have been update. Diff time is [" + diffTime
-															+ "] ms. Wait again ["
-															+ (running && waiting && waitTime > 0) + "]");
-
-									waitTime = diffTime;
+									waitTime -= diffTime;
+									Logger.getLogger(LOGGER).log(
+											Level.FINE,
+											"Wait time must have been update. Diff [" + diffTime + "] ms Wait ["
+													+ waitTime + "] ms. Wait again ["
+													+ (running && waiting && waitTime > 0) + "]");
 								}
 							}
 						}
 						// paranoia check
 						waiting = false;
 						command = null;
-
-						// TODO remove old version that migh have problem with
-						// sequential reset and wait invocations.
-						// if (running) {
-						// // waiting for the specified cmd time
-						// synch.wait(waitTime);
-						// }
-						//						
-						// if (running && waiting) {
-						// long diffTime = System.currentTimeMillis() -
-						// waitRequestTimestamp;
-						// if ((diffTime >= waitTime)) {
-						// // notify that the time has passed
-						// Logger.getLogger(LOGGER).log(
-						// Level.INFO,
-						// "Firing timeout checker for the command [" + command
-						// + "] and diff time of ["
-						// + diffTime + "] ms");
-						// fireTimeout();
-						// } else {
-						// // something is wrong because the synch was
-						// // notified while waiting
-						// Logger.getLogger(LOGGER).log(
-						// Level.SEVERE,
-						// "Something is wrong because the synch was notified while waiting with the diff time of ["
-						// + diffTime + "] ms");
-						// }
-						// }
-						// // done waiting
-						// waiting = false;
-						// command = null;
 					}
 
 				} catch (Throwable e) {
