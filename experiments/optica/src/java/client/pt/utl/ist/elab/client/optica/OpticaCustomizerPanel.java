@@ -125,6 +125,11 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jTabbedPaneOptica.setName("jTabbedPaneOptica"); // NOI18N
         jTabbedPaneOptica.setPreferredSize(new java.awt.Dimension(350, 417));
+        jTabbedPaneOptica.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPaneOpticaStateChanged(evt);
+            }
+        });
 
         jPanelSnell.setName("jPanelSnell"); // NOI18N
         jPanelSnell.setPreferredSize(new java.awt.Dimension(350, 372));
@@ -295,7 +300,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderSnellDelay.setMinorTickSpacing(1);
         jSliderSnellDelay.setPaintLabels(true);
         jSliderSnellDelay.setSnapToTicks(true);
-        jSliderSnellDelay.setValue(10);
+        jSliderSnellDelay.setValue(5);
         jSliderSnellDelay.setMinimumSize(new java.awt.Dimension(250, 16));
         jSliderSnellDelay.setName("jSliderSnellDelay"); // NOI18N
         jSliderSnellDelay.setPreferredSize(new java.awt.Dimension(250, 42));
@@ -1021,14 +1026,14 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         // tab Snell
         jSliderSnellAngleVarationMin.setValue(0);
         jFormattedTextFieldSnellAngleVarationMin.setText("0.0");
-        jSliderSnellAngleVarationMax.setValue(360);
+        jSliderSnellAngleVarationMax.setValue(3600);
         jFormattedTextFieldSnellAngleVarationMax.setText("360.0");
         jLabelSnellAngleVaration.setEnabled(false);
         jSliderSnellDelta.setValue(2);
         jFormattedTextFieldSnellDelta.setText("0.2");
         jLabelSnellDelta.setEnabled(false);
-        jSliderSnellDelay.setValue(10);
-        jFormattedTextFieldSnellDelay.setText("1.0");
+        jSliderSnellDelay.setValue(5);
+        jFormattedTextFieldSnellDelay.setText("0.5");
         jLabelSnellDelay.setEnabled(false);
 
         // tab Energy conservation
@@ -1041,7 +1046,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         // tab Critical angle
         jSliderCriticalAngleVarationMin.setValue(0);
         jFormattedTextFieldCriticalAngleVarationMin.setText("0.0");
-        jSliderCriticalAngleVarationMax.setValue(360);
+        jSliderCriticalAngleVarationMax.setValue(3600);
         jFormattedTextFieldCriticalAngleVarationMax.setText("360.0");
         jLabelCriticalAngleVaration.setEnabled(false);
         jCheckBoxCriticalAngleMinimalAngle.setSelected(false);
@@ -1051,7 +1056,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         // tab Brewster
         jSliderBrewsterAngleVarationMin.setValue(0);
         jFormattedTextFieldBrewsterAngleVarationMin.setText("0.0");
-        jSliderBrewsterAngleVarationMax.setValue(360);
+        jSliderBrewsterAngleVarationMax.setValue(3600);
         jFormattedTextFieldBrewsterAngleVarationMax.setText("360.0");
         jLabelBrewsterAngleVaration.setEnabled(false);
         jSliderBrewsterAnglePolarization.setValue(0);
@@ -1257,47 +1262,62 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
     private void jSliderSnellAngleVarationMinStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderSnellAngleVarationMinStateChanged
         sliderMultipliedChanged(jSliderSnellAngleVarationMin, jFormattedTextFieldSnellAngleVarationMin);
+        validateScreen();
     }//GEN-LAST:event_jSliderSnellAngleVarationMinStateChanged
 
     private void jSliderSnellAngleVarationMaxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderSnellAngleVarationMaxStateChanged
         sliderMultipliedChanged(jSliderSnellAngleVarationMax, jFormattedTextFieldSnellAngleVarationMax);
+        validateScreen();
     }//GEN-LAST:event_jSliderSnellAngleVarationMaxStateChanged
 
     private void jSliderSnellDeltaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderSnellDeltaStateChanged
         sliderMultipliedChanged(jSliderSnellDelta, jFormattedTextFieldSnellDelta);
+        validateScreen();
     }//GEN-LAST:event_jSliderSnellDeltaStateChanged
 
     private void jSliderSnellDelayStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderSnellDelayStateChanged
     	sliderMultipliedChanged(jSliderSnellDelay, jFormattedTextFieldSnellDelay);
+    	validateScreen();
     }//GEN-LAST:event_jSliderSnellDelayStateChanged
 
     private void jSliderEnergyConservationPexiglassStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderEnergyConservationPexiglassStateChanged
         sliderMultipliedChanged(jSliderEnergyConservationPexiglass, jFormattedTextFieldEnergyConservationPexiglass);
+        validateScreen();
     }//GEN-LAST:event_jSliderEnergyConservationPexiglassStateChanged
 
     private void jSliderEnergyConservationPolarizationStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderEnergyConservationPolarizationStateChanged
         sliderMultipliedChanged(jSliderEnergyConservationPolarization, jFormattedTextFieldEnergyConservationPolarization);
+        validateScreen();
     }//GEN-LAST:event_jSliderEnergyConservationPolarizationStateChanged
 
     private void jSliderCriticalAngleVarationMinStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderCriticalAngleVarationMinStateChanged
         sliderMultipliedChanged(jSliderCriticalAngleVarationMin, jFormattedTextFieldCriticalAngleVarationMin);
+        validateScreen();
     }//GEN-LAST:event_jSliderCriticalAngleVarationMinStateChanged
 
     private void jSliderCriticalAngleVarationMaxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderCriticalAngleVarationMaxStateChanged
         sliderMultipliedChanged(jSliderCriticalAngleVarationMax, jFormattedTextFieldCriticalAngleVarationMax);
+        validateScreen();
     }//GEN-LAST:event_jSliderCriticalAngleVarationMaxStateChanged
 
     private void jSliderBrewsterAngleVarationMinStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderBrewsterAngleVarationMinStateChanged
         sliderMultipliedChanged(jSliderBrewsterAngleVarationMin, jFormattedTextFieldBrewsterAngleVarationMin);
+        validateScreen();
     }//GEN-LAST:event_jSliderBrewsterAngleVarationMinStateChanged
 
     private void jSliderBrewsterAngleVarationMaxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderBrewsterAngleVarationMaxStateChanged
         sliderMultipliedChanged(jSliderBrewsterAngleVarationMax, jFormattedTextFieldBrewsterAngleVarationMax);
+        validateScreen();
     }//GEN-LAST:event_jSliderBrewsterAngleVarationMaxStateChanged
 
     private void jSliderBrewsterAnglePolarizationStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderBrewsterAnglePolarizationStateChanged
         sliderMultipliedChanged(jSliderBrewsterAnglePolarization, jFormattedTextFieldBrewsterAnglePolarization);
+        validateScreen();
     }//GEN-LAST:event_jSliderBrewsterAnglePolarizationStateChanged
+
+    private void jTabbedPaneOpticaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneOpticaStateChanged
+        validateScreen();
+    }//GEN-LAST:event_jTabbedPaneOpticaStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupCalibration;
@@ -1575,6 +1595,65 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         // checkMaxTime();
         // checkPosOverlap();
 
+    }
+    
+    private void validateScreen() {
+    	boolean valid = true;
+    	int protocol = jTabbedPaneOptica.getSelectedIndex() + 1;
+    	
+    	switch (protocol) {
+		case 1:
+			// angle variation
+			if (jSliderSnellAngleVarationMin.getValue() < jSliderSnellAngleVarationMax.getValue()) {
+				jLabelSnellAngleVaration.setEnabled(false);
+			} else {
+				jLabelSnellAngleVaration.setEnabled(true);
+				valid = false;
+			}
+			//delta angle
+			if (jSliderSnellDelta.getValue() > Math.abs(jSliderSnellAngleVarationMax.getValue() - jSliderSnellAngleVarationMin.getValue())) {
+				jLabelSnellDelta.setEnabled(true);
+				jLabelSnellDelta.setVisible(true);
+				valid = false;
+			} else {
+				jLabelSnellDelta.setEnabled(false);
+				jLabelSnellDelta.setVisible(false);
+			}
+			// delay
+			if (jSliderSnellDelay.getValue()/10 > ((18*jSliderSnellDelta.getValue()) / (Math.abs((jSliderSnellAngleVarationMax.getValue()/10 - jSliderSnellAngleVarationMin.getValue()/10)) + 1))) {
+				jLabelSnellDelay.setEnabled(true);
+				jLabelSnellDelay.setVisible(true);
+				valid = false;
+			} else {
+				jLabelSnellDelay.setEnabled(false);
+				jLabelSnellDelay.setVisible(false);
+			}
+			break;
+		case 2:
+			// always valid			
+			break;
+		case 3:
+			if (jSliderCriticalAngleVarationMin.getValue() < jSliderCriticalAngleVarationMax.getValue()) {
+				jLabelCriticalAngleVaration.setEnabled(false);
+			} else {
+				jLabelCriticalAngleVaration.setEnabled(true);
+				valid = false;
+			}
+			break;
+		case 4:
+			if (jSliderBrewsterAngleVarationMin.getValue() < jSliderBrewsterAngleVarationMax.getValue()) {
+				jLabelBrewsterAngleVaration.setEnabled(false);
+			} else {
+				jLabelBrewsterAngleVaration.setEnabled(true);
+				valid = false;
+			}
+			break;
+		case 5:
+			// always valid
+			break;
+		}
+    	
+    	jButtonOk.setEnabled(valid);
     }
 
     private void sliderMultipliedChanged(javax.swing.JSlider slider, javax.swing.JFormattedTextField textField) {
