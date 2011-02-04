@@ -34,7 +34,6 @@ import com.linkare.rec.acquisition.WrongConfigurationException;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.data.metadata.HardwareInfo;
 import com.linkare.rec.data.synch.DateTime;
-import com.linkare.rec.impl.data.FrequencyUtil;
 import com.linkare.rec.impl.events.HardwareLockEvent;
 import com.linkare.rec.impl.events.LockCountDown;
 import com.linkare.rec.impl.exceptions.IncorrectStateExceptionConstants;
@@ -94,7 +93,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	private boolean locked = false;
 
 	private boolean startCalled = false;
-	
+
 	private MultiCastExperimentStats experimentStats;
 
 	// ... and by whom?
@@ -301,13 +300,21 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			recMultiCastDataProducer = ReCMultiCastDataProducerFactory.createReCMultiCastDataProducer(
 					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients);
 
-			DataProducer dataProducer = recMultiCastDataProducer._this(); // registar o objecto corba
+			DataProducer dataProducer = recMultiCastDataProducer._this(); // registar
+			// o
+			// objecto
+			// corba
 			log(Level.INFO, "Going to start the hardware");
-			recMultiCastDataProducer.setRemoteDataProducer(hardware.start(recMultiCastDataProducer.getDataReceiver())); // iniciar o driver
-			recMultiCastDataProducer.initAcquisitionThread(); // iniciar a aquisicao de dados do driver
-			
+			recMultiCastDataProducer.setRemoteDataProducer(hardware.start(recMultiCastDataProducer.getDataReceiver())); // iniciar
+			// o
+			// driver
+			recMultiCastDataProducer.initAcquisitionThread(); // iniciar a
+			// aquisicao de
+			// dados do
+			// driver
+
 			experimentStats.startExperimentStats();
-			
+
 			return dataProducer;
 		} else
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
@@ -337,13 +344,19 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			DefaultResource dataProducerResource = getResource().createChildResource();
 			recMultiCastDataProducer = ReCMultiCastDataProducerFactory.createReCMultiCastDataProducer(
 					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients);
-			
-			DataProducer dataProducer = recMultiCastDataProducer._this(); // registar o objecto corba
+
+			DataProducer dataProducer = recMultiCastDataProducer._this(); // registar
+			// o
+			// objecto
+			// corba
 			log(Level.INFO, "Going to start output the hardware");
 			recMultiCastDataProducer.setRemoteDataProducer(hardware.startOutput(recMultiCastDataProducer
 					.getDataReceiver(), data_source)); // iniciar o driver
-			recMultiCastDataProducer.initAcquisitionThread(); // iniciar a aquisicao de dados do driver
-			
+			recMultiCastDataProducer.initAcquisitionThread(); // iniciar a
+			// aquisicao de
+			// dados do
+			// driver
+
 			return dataProducer;
 		} else
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
@@ -424,15 +437,6 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	}
 
 	public HardwareInfo getHardwareInfo(UserInfo user) throws NotAuthorized, NotRegistered {
-		/*
-		 * TODO check with JP. The labClientBean needs to enumerate the
-		 * hardware...I don't want to be in the MulticastHardware client queue
-		 * just to enumerate,so I'm going to ask in the mainQueue, OK?
-		 */
-		/*
-		 * if(!clientQueue.contains(user)) throw new NotRegistered();
-		 */
-
 		log(Level.FINEST, "Fetching hardware info by user " + user.getUserName());
 
 		if (!mainQueue.contains(user)) {
@@ -458,14 +462,6 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	}
 
 	public HardwareState getHardwareState(UserInfo user) throws NotAuthorized, NotRegistered {
-		/*
-		 * TODO check with JP. The labClientBean needs to enumerate the
-		 * hardware...I don't want to be in the MulticastHardware client queue
-		 * just to enumerate,so I'm going to ask in the mainQueue, OK?
-		 */
-		/*
-		 * if(!clientQueue.contains(user)) throw new NotRegistered();
-		 */
 		if (!mainQueue.contains(user))
 			throw new NotRegistered();
 
@@ -496,7 +492,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		try {
 			proxyHardwareInfo = this.hardware.getHardwareInfo();
 			proxyHardwareUniqueId = proxyHardwareInfo.getHardwareUniqueID();
-			
+
 			experimentStats = MultiCastExperimentStats.getInstance(proxyHardwareInfo, LOCK_PERIOD);
 
 			getResource().getProperties().put(ResourceType.MCHARDWARE.getPropertyKey(), proxyHardwareUniqueId);
@@ -518,10 +514,6 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	}
 
 	private void verifyOwnership(UserInfo user) throws NotOwnerException {
-		// TODO CHECK with JP..this wasn't working...only works if I compare the
-		// usernames, I think that is the right to do it
-		// if(ownerDataClient==null ||
-		// !ownerDataClient.getUserInfo().equals(user))
 		if (ownerDataClient == null || !ownerDataClient.getUserInfo().getUserName().equals(user.getUserName())) {
 			if (locked && !locking)
 				throw new NotOwnerException(NotOwnerExceptionConstants.HARDWARE_LOCKED_TO_ANOTHER, ownerDataClient
@@ -563,7 +555,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			currentLocker.exit();
 			currentLocker = null;
 		}
-		
+
 		experimentStats.shutdown();
 
 		log(Level.INFO, "Shut down completed!");
@@ -582,16 +574,16 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	/** Utility field holding the MCHardwareChangeListener. */
 	// private transient MCHardwareChangeListener
 	// listenerMCHardwareChangeListener = null;
-	
+
 	long lastSentHardwareLockableTimestamp = 0;
 	ConditionChecker timeoutCycleLockChecker = null;
-	
+
 	private void cancelTimeoutCycleLockChecker() {
 		if (timeoutCycleLockChecker != null) {
 			timeoutCycleLockChecker.cancelCheck();
 		}
 	}
-	
+
 	private void cycleLockHardware() {
 
 		synchronized (this) {
@@ -603,7 +595,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			if (!locked) {
 				if (clientQueue.first() == null)
 					return; // the queue was empty
-				
+
 				DataClientForQueue oldOwnerDataClient = ownerDataClient;
 
 				if (ChangeOwnerInNextLockCycle == OWNER_CHANGE) {
@@ -619,7 +611,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 				ownerDataClient = clientQueue.first();
 				locking = true;
-				
+
 				if (oldOwnerDataClient != ownerDataClient) {
 					experimentStats.lockEventSent();
 				}
@@ -627,7 +619,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 				if (ownerDataClient != null) {
 					lastSentHardwareLockableTimestamp = System.currentTimeMillis();
 					clientQueue.hardwareLockable(new HardwareLockEvent(currentLocker, LOCK_PERIOD, ownerDataClient));
-					
+
 					timeoutCycleLockChecker = new ConditionChecker(LOCK_PERIOD * 2, LOCK_PERIOD,
 							new AbstractConditionDecisor() {
 								long sentHardwareLockableTimestamp = lastSentHardwareLockableTimestamp;
@@ -673,8 +665,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			return;
 
 		if (dcfq.equals(ownerDataClient)) {
-			// FIXME if the client is the owner then if the experiment is running it must be stoped!
-			
+			// FIXME if the client is the owner then if the experiment is
+			// running it must be stoped!
+
 			locked = false;
 			locking = false;
 
@@ -687,7 +680,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			currentLocker.stopCountDown();
 			// if(currentLocker!=null)
 			// currentLocker.exit();
-			
+
 			experimentStats.stopExperimentStats();
 
 			// ChangeOwnerInNextLockCycle=OWNER_REMOVED_GIVE_STOP_LOCK;
@@ -700,7 +693,7 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		}
 
 	}
-	
+
 	/**
 	 * Getter for the usernames of this hardware clients.
 	 * 
@@ -708,13 +701,13 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	 */
 	public List<String> getClientUsernames() {
 		List<String> usernames = new ArrayList<String>();
-		
+
 		Iterator<DataClientForQueue> iterator = clientQueue.iterator();
 		while (iterator.hasNext()) {
 			DataClientForQueue dcfq = iterator.next();
 			usernames.add(dcfq.getUserName());
 		}
-		
+
 		return usernames;
 	}
 
@@ -726,28 +719,23 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 		UserInfo[] retVal = clientQueue.getUsers(user, resource);
 		log(Level.FINEST, "Hardware - Got as retVal " + retVal);
 
-		// TODO CHECK WITH JP &&
-		// ownerDataClient.getUserInfo().getLockedTime()!=null
-		// Para que esta informação seja igual para todos os utilizadores
-		// ligados, vou
-		// mover isto para o cycleLockHardware, assim o timeStartMin é igual
-		// para todos...
-
 		if (retVal != null) {
 			DateTime initTime = new DateTime(timeStartMin);
 			DateTime endTime = new DateTime(initTime);
-			
+
 			if (retVal.length > 0) {
 				retVal[0].setNextLockTime(new DateTime(initTime), new DateTime(initTime));
 			}
-			
+
 			// Fixed values version
-//			long experimentMaxTimeShift = FrequencyUtil.getMaximumExperimentTime(getHardwareInfo());
-//			for (int i = 1; i < retVal.length; i++) {
-//				initTime.addMillis(LOCK_PERIOD);
-//				endTime.addMillis(experimentMaxTimeShift + LOCK_PERIOD);
-//				retVal[i].setNextLockTime(new DateTime(initTime), new DateTime(endTime));
-//			}
+			// long experimentMaxTimeShift =
+			// FrequencyUtil.getMaximumExperimentTime(getHardwareInfo());
+			// for (int i = 1; i < retVal.length; i++) {
+			// initTime.addMillis(LOCK_PERIOD);
+			// endTime.addMillis(experimentMaxTimeShift + LOCK_PERIOD);
+			// retVal[i].setNextLockTime(new DateTime(initTime), new
+			// DateTime(endTime));
+			// }
 
 			// Average values version
 			long averageExecutionTime = experimentStats.calcAverageExecutionTime();
@@ -1110,10 +1098,12 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			}
 		}
 	}
+
 	/* End Inner Class - LockCycler - manages the cycling of locks */
 
 	/**
-	 * Shuts down the users that are connected to this hardware and contained in the parameter.
+	 * Shuts down the users that are connected to this hardware and contained in
+	 * the parameter.
 	 * 
 	 * @param usernamesToKick
 	 */
@@ -1128,5 +1118,5 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			}
 		}
 	}
-	
+
 }
