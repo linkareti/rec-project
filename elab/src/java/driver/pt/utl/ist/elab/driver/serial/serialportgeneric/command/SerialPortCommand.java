@@ -75,8 +75,8 @@ public class SerialPortCommand implements java.io.Serializable {
 	}
 
 	/**
-	 * @author fdias
-	 * @return HashMap<Integer,String>
+	 * 
+	 * @return
 	 */
 	public HashMap<Integer, String> getDataHashMap() {
 		// no command, no donut for you
