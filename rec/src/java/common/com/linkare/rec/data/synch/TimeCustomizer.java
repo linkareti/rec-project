@@ -295,7 +295,6 @@ public class TimeCustomizer extends javax.swing.JPanel implements java.beans.Cus
 			int minutes = ((Integer) minuteSelector.getValue()).intValue();
 			int hours = ((Integer) hourSelector.getValue()).intValue();
 
-			// TODO
 			mybean.setPicos((short) picos);
 			mybean.setNanos((short) nanos);
 			mybean.setMicros((short) micros);
