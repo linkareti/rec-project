@@ -425,7 +425,6 @@ public final class ChannelInfo implements IDLEntity {
 	public void validateConfig(ChannelAcquisitionConfig config) throws WrongConfigurationException {
 		// check selected frequency
 
-		// TODO:JP
 		boolean freq_ok = false;
 		if (config.getSelectedFrequency() == null) {
 			// frequency not defined... don't know better
