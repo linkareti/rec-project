@@ -38,9 +38,9 @@ public final class ProcessingManager {
 	}
 
 	/**
-	 * Este método permite aceder a instância singletão do Processing Manager
+	 * This method enables access to the singleton instance of ProcessingManager
 	 * 
-	 * @return A instância única de ProcessingManager
+	 * @return the single instance of ProcessingManager
 	 */
 
 	public static ProcessingManager getInstance() {
