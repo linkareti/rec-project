@@ -15,8 +15,6 @@ import com.linkare.rec.data.metadata.HardwareInfo;
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
- * @author fdias
- * @version Oct 2009
  */
 public class GenericSerialPortDriver extends AbstractSerialPortDriver {
 
