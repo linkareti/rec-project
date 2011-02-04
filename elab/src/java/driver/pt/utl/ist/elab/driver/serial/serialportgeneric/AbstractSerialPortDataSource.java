@@ -25,13 +25,12 @@ import com.linkare.rec.impl.driver.BaseDataSource;
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
- * @author fdias - Linkare TI
  * 
  */
 public abstract class AbstractSerialPortDataSource extends BaseDataSource {
-	
+
 	protected static String ABSTRACT_PORT_DATA_SOURCE_LOGGER = "AbstractSerialPortDataSource.Logger";
-	
+
 	static {
 		Logger l = LogManager.getLogManager().getLogger(ABSTRACT_PORT_DATA_SOURCE_LOGGER);
 		if (l == null) {
@@ -66,7 +65,7 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 				PhysicsVal phValue = null;
 				PhysicsVal phError = null;
 				Multiplier phMultiplier = null;
-				
+
 				OneChannelNode oneChannelNode = rs232configs.getRs232().getChannels().getChannelToOrder(channelNumber);
 
 				if (channelNumber < getAcquisitionHeader().getChannelsConfig().length) {
@@ -81,10 +80,12 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 					// this is a clock value channel
 					// so it is a direct value without transformation
 					phValue = PhysicsValFactory.fromLong(Long.valueOf(cmd.getDataHashMap().get(channelNumber)));
-//					phError = getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
-//							.getDefaultErrorValue();
-//					phMultiplier = getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
-//							.getMultiplier();
+					// phError =
+					// getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
+					// .getDefaultErrorValue();
+					// phMultiplier =
+					// getAcquisitionHeader().getChannelsConfig(channelNumber).getSelectedScale()
+					// .getMultiplier();
 				} else {
 					// this is trash and should be ignored
 				}
@@ -100,7 +101,7 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 		counter++;
 		if (counter == total_samples)
 			setDataSourceEnded();
-		
+
 		return values;
 
 	}
@@ -117,14 +118,14 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 
 		total_samples = config.getTotalSamples();
 
-		// this is a formula from g experiment 
+		// this is a formula from g experiment
 		int packetSize = calcPacketSize(config);
 		Logger.getLogger(ABSTRACT_PORT_DATA_SOURCE_LOGGER).log(Level.FINEST,
 				"Setting packet size to [" + packetSize + "]");
-		
+
 		setPacketSize(packetSize);
 	}
-	
+
 	/**
 	 * Method with the packet size formula.
 	 * 
@@ -132,8 +133,8 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 	 * @return
 	 */
 	private static int calcPacketSize(HardwareAcquisitionConfig config) {
-		return (int) Math.ceil(1. / (8. * config.getSelectedFrequency().getFrequency() * config
-				.getSelectedFrequency().getMultiplier().getExpValue()));
+		return (int) Math.ceil(1. / (8. * config.getSelectedFrequency().getFrequency() * config.getSelectedFrequency()
+				.getMultiplier().getExpValue()));
 	}
 
 	private boolean stopped = false;
