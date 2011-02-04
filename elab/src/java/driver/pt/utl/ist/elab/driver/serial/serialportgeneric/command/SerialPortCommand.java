@@ -12,10 +12,6 @@ import java.util.HashMap;
  * 
  * @author José Pedro Pereira - Linkare TI
  * 
- * @author fdias
- * @date 10/2009
- * 
- * 
  */
 public class SerialPortCommand implements java.io.Serializable {
 
@@ -128,7 +124,7 @@ public class SerialPortCommand implements java.io.Serializable {
 		} else
 			return false;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
