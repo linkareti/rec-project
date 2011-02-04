@@ -105,8 +105,6 @@ public class MomInerciaStampDataSource extends AbstractStampDataSource {
 	 */
 	@Override
 	public void stopNow() {
-		// FIXME - New Method
-
 	}
 
 }

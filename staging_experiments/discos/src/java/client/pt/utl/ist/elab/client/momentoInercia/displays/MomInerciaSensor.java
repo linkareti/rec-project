@@ -320,7 +320,6 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 	 */
 	@Override
 	public void dataModelError() {
-		// FIXME - New Methods
 	}
 
 	/**
@@ -328,7 +327,6 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 	 */
 	@Override
 	public void dataModelStarted() {
-		// FIXME - New Methods
 	}
 
 	/**
@@ -336,7 +334,6 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 	 */
 	@Override
 	public void dataModelStartedNoData() {
-		// FIXME - New Methods
 	}
 
 	/**
@@ -344,6 +341,5 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 	 */
 	@Override
 	public void dataModelWaiting() {
-		// FIXME - New Methods
 	}
 }
