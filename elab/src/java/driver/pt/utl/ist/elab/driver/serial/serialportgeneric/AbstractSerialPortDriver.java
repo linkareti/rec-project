@@ -64,7 +64,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	protected static BaseHardware baseHardware = null;
 	protected static int currentBinaryLength = 0;
 	protected static int totalBinaryLength = 0;
-	
+
 	private static final String RS232_CONFIG_FILE_PATH = Defaults.defaultIfEmpty(System
 			.getProperty("ReC.Driver.RS232_CONFIG_FILE_PATH"), "hardwareserver/etc/Rs232Config.xml");
 
@@ -105,7 +105,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * @author fdias
 	 */
 	public AbstractSerialPortDriver() {
-		
+
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Instantiating the " + this.getClass().getSimpleName());
 
 		try {
@@ -131,7 +131,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating the serial finder.");
 		serialFinder = new SerialPortFinder(this);
 
-		setApplicationNameLockPort(rs232configs.getId()); // TODO shoud be a new atribute in the xml node
+		setApplicationNameLockPort(rs232configs.getId()); // TODO shoud be a new
+															// atribute in the
+															// xml node
 		setDriverUniqueID(rs232configs.getId());
 		setTimeOutPerPort(rs232configs.getRs232().getTimeout().getPortListen().getTimeInt());
 		setPortBaudRate(rs232configs.getRs232().getBaud().intValue());
@@ -140,15 +142,15 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		setPortParity(rs232configs.getRs232().getParitybits().intValue());
 
 		serialFinder.addStampFinderListener(this);
-		
+
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating the EventQueue for the serial commands.");
 		serialCommands = new EventQueue(new CommandDispatcher(), this.getClass().getSimpleName(), this);
-		
+
 		TimeoutNode timeoutNode = rs232configs.getRs232().getTimeout();
 		commandTimeoutChecker = new CommandTimeoutChecker(this, timeoutNode);
 		synch = commandTimeoutChecker;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -169,10 +171,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 					"Command is null. Something umpredicted has happened at timmeout checker!");
 		}
 	}
-	
+
 	private void writeResetCommand() {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Going to send a reset command.");
-		
+
 		serialIO.resetLastOutputMessage();
 		synchronized (synch) {
 			currentDriverState = DriverState.RESETING;
@@ -183,33 +185,21 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		writeMessage(serialPortCommand.getCommand());
 		commandTimeoutChecker.checkCommand(serialPortCommand);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void commandTimeoutNoData() {
-		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
-				"Received notification for no data.");
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Received notification for no data.");
 		// timeout business logic
 		writeResetCommand();
 	}
 
 	/**
 	 * 
-	 * One day, men started to print lines on the clay to represent pounds of
-	 * wheat. Accounting was born. Then they started to print figures as a
-	 * representation of an idea. Logic writing was born. Then they put each
-	 * vocal sound in a symbol and called them letters. Linguistics was born.
-	 * Then they put two symbols surrounding each word, one < and one >. They
-	 * said XML was born. I think they reused the same idea of the egyptian
-	 * writing, but as they couldn't write capsules, they wrote these two
-	 * symbols that nobody types. What if I could use this XML to represent
-	 * structured ideas of relationships between objects? Then JAXB was born...
-	 * 
 	 * @return HardwareNode
 	 * @throws IncorrectRs232ValuesException
-	 * @author fdias
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unchecked")
@@ -337,14 +327,14 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 */
 	public void init(HardwareInfo info) {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Initializing driver");
-		
+
 		if (serialIO != null) {
 			serialIO.shutdown();
 		}
 
 		serialIO = null;
 		serialFinder.startSearch();
-		
+
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Waiting for serial IO to be instantiated.");
 		try {
 			WaitForConditionResult.waitForConditionTrue(new AbstractConditionDecisor() {
@@ -412,7 +402,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		}
 
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Creating command.");
-		
+
 		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.CFG.toString().toLowerCase());
 
 		// loop through each parameter and add data to each one
@@ -425,14 +415,14 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			// if is legible value...
 			if (channelParameter.getParameterType() != ParameterType.BlackBoxValue) {
 				String parameterName = channelParameter.getParameterName();
-				String parameterValueInput = Defaults.defaultIfEmpty(
-						config.getSelectedHardwareParameterValue(parameterName), info
-								.getHardwareParameterValue(parameterName));
-				
+				String parameterValueInput = Defaults.defaultIfEmpty(config
+						.getSelectedHardwareParameterValue(parameterName), info
+						.getHardwareParameterValue(parameterName));
+
 				// transform the data from client to the hardware config format
 				Double value = parameterNone.calculate(Double.valueOf(parameterValueInput), TransferFunctionType.INPUT);
 				String parameterValue = parameterNone.formatInput(value);
-				
+
 				// add to command
 				serialPortCommand.addCommandData(parameterNone.getOrder().toString(), parameterValue);
 				commandParameterNodes.add(parameterNone);
@@ -440,15 +430,15 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				// TODO : send a blackbox value on cfg
 			}
 		}
-		
+
 		if (!SerialPortTranslator.translateConfig(serialPortCommand, commandParameterNodes)) {
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.WARNING, "Error translating command.");
 			throw new WrongConfigurationException("Cannot translate config command!", -1);
 		}
-		
+
 		Logger.getLogger(SERIAL_PORT_LOGGER)
 				.log(Level.INFO, "Created command [" + serialPortCommand.getCommand() + "]");
-		
+
 		ChannelAcquisitionConfig[] channelsConfig = config.getChannelsConfig();
 		if (channelsConfig != null) {
 			Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE,
@@ -461,7 +451,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		}
 
 		this.config = config;
-		
+
 		writeMessage(serialPortCommand.getCommand());
 		commandTimeoutChecker.checkCommand(serialPortCommand);
 	}
@@ -496,9 +486,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public void shutdown() {
-		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.SEVERE,
-				"Shutdown was invoked! Going to terminate...");
-		
+		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.SEVERE, "Shutdown was invoked! Going to terminate...");
+
 		if (serialIO != null)
 			serialIO.shutdown();
 		synchronized (synch) {
@@ -517,7 +506,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 */
 	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
-		
+
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Starting with the hardware info [" + info + "]");
 
 		// verifies if the driver can start the hardware at this moment through
@@ -540,12 +529,12 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	}
 
 	private void startNow() {
-		
+
 		synchronized (synch) {
 			currentDriverState = DriverState.STARTING;
 			fireIDriverStateListenerDriverStarting();
 		}
-		
+
 		SerialPortCommand serialPortCommand = new SerialPortCommand(SerialPortCommandList.STR.toString().toLowerCase());
 		SerialPortTranslator.translate(serialPortCommand);
 		writeMessage(serialPortCommand.getCommand());
@@ -645,7 +634,7 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public HardwareAcquisitionConfig getAcquisitionHeader() {
 		return config;
 	}
-	
+
 	private static SerialPortCommand createTransformedDataCommand(SerialPortCommand command) {
 		if (command == null || command.getCommandIdentifier() == null || command.getCommand() == null) {
 			return null;
@@ -688,9 +677,9 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 				if (currentDriverState.equals(DriverState.RECEIVINGDATA)) {
 					if (resetNoData) {
 						resetNoData = false;
-						// only do reset on changed state 
+						// only do reset on changed state
 						commandTimeoutChecker.reset();
-						
+
 						commandTimeoutChecker.checkCommand(new SerialPortCommand(SerialPortCommandList.END.toString()
 								.toLowerCase()));
 					}
@@ -1037,11 +1026,11 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 			serialIO.writeMessage(message);
 		}
 	}
-	
+
 	public boolean isDriverInState(DriverState state) {
 		return currentDriverState == state;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
