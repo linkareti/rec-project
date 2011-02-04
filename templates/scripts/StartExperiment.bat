@@ -2,6 +2,8 @@ cls
 @ECHO OFF
 echo Starting @experiment.name@ Driver
 
+REM @ Initializing driver starter script @
+
 set INITIAL_HEAP_MEM=@hardwareserver.initial.heap@
 set MAX_HEAP_MEM=@hardwareserver.max.heap@
 

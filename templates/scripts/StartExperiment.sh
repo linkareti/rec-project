@@ -2,6 +2,8 @@
 clear
 echo Starting @experiment.name@ Driver
 
+# @ Initializing driver starter script @
+
 INITIAL_HEAP_MEM=@hardwareserver.initial.heap@
 MAX_HEAP_MEM=@hardwareserver.max.heap@
 
