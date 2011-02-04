@@ -44,7 +44,6 @@ import org.omg.PortableServer.ThreadPolicyValue;
  * @version
  */
 @SuppressWarnings("unchecked")
-// TODO...
 public class ORBBean {
 	public static ORBBean getORBBean() {
 		if (this_object == null) {
@@ -63,7 +62,7 @@ public class ORBBean {
 
 	/* Singleton Pattern */
 	private static ORBBean this_object = null;
-	
+
 	/** Holds value of property applet. */
 	private Applet applet;
 
@@ -87,11 +86,9 @@ public class ORBBean {
 			if (the_orb != null)
 				return;
 
-			if (this.applet != null)
-			{
+			if (this.applet != null) {
 				the_orb = ORB.init(this.applet, null);
-			}
-			else {
+			} else {
 				Properties props = System.getProperties();
 				the_orb = ORB.init(new String[] {}, props);
 			}
