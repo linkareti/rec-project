@@ -1115,19 +1115,6 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     }//GEN-LAST:event_jFormattedTextFieldBrewsterAnglePolarizationFocusLost
 
     private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOkActionPerformed
-        // TODO FIXME
-//		int nsamples = sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue();
-//		acqConfig.setTotalSamples(nsamples + 1);
-//		acqConfig.getSelectedHardwareParameter("UserPosLow").setParameterValue(
-//				"" + ((float) sldPos1.getValue() / 1000.F));
-//		acqConfig.getSelectedHardwareParameter("UserPosHigh").setParameterValue(
-//				"" + ((float) sldPos2.getValue() / 1000.F));
-//		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
-//				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-//				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
-//		fireICustomizerListenerDone();
-
-        // int nsamples = sldNumSamples.getValue() < 10 ? 10 : sldNumSamples.getValue();
     	
     	int selectCheckBoxCount = 0;
     	int nsamples = 0;
