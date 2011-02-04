@@ -313,8 +313,6 @@ public class MomInerciaSensor extends javax.swing.JPanel implements
 	 */
 	@Override
 	public void dataModelEnded() {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**

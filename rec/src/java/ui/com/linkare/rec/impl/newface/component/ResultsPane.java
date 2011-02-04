@@ -375,37 +375,30 @@ public class ResultsPane extends AbstractContentPane implements ExpDataModelList
 
 	@Override
 	public void dataModelEnded() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void dataModelError() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void dataModelStarted() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void dataModelStartedNoData() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void dataModelStoped() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void dataModelWaiting() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void newSamples(NewExpDataEvent evt) {
-		// TODO Auto-generated method stub
 	}
 
 	/**
