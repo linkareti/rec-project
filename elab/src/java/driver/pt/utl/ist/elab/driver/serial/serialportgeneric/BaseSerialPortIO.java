@@ -263,10 +263,6 @@ public class BaseSerialPortIO {
 				inCommand.setCommand(commandTemp.toString());
 			}
 		}
-		// FIXME what is this doing here?
-//		if (AbstractSerialPortDriver.currentDriverState == DriverState.RECEIVINGDATA
-//				&& !inCommand.getCommandIdentifier().equalsIgnoreCase(SerialPortCommandList.END.toString()))
-//			return;
 
 		Logger.getLogger(STAMP_IO_LOGGER).log(Level.FINE, "Firing stamp command listener...");
 		fireStampCommandListenerHandleStampCommand(inCommand);
