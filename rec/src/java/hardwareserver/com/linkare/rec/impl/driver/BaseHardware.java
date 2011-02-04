@@ -58,7 +58,7 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			LogManager.getLogManager().addLogger(Logger.getLogger(BASE_HARDWARE_LOGGER));
 		}
 	}
-	
+
 	private static final boolean SHOW_GUI = Boolean.parseBoolean(Defaults.defaultIfEmpty(System
 			.getProperty("ReC.Driver.ShowGUI"), "false"));
 
@@ -153,10 +153,10 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 
 	public BaseHardware() {
 		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Instatiating the BaseHardware.");
-		
+
 		Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.INFO, "Creating EventQueue for data client dispatcher.");
 		eventQueue = new EventQueue(new BaseHardwareDataClientDispatcher(), this.getClass().getSimpleName(), this);
-		
+
 		if (!GraphicsEnvironment.isHeadless() && SHOW_GUI) {
 			JFrame frameForKill = new JFrame();
 			JButton btnExit = new JButton("End Driver!");
@@ -304,7 +304,8 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 		try {
 			driver.config(config, getHardwareInfo());
 		} catch (WrongConfigurationException e) {
-			Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.WARNING, "Invalid configuration. Thowing the exception.", e);
+			Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.WARNING, "Invalid configuration. Thowing the exception.",
+					e);
 			e.printStackTrace();
 			throw e;
 		} catch (Exception e) {
@@ -327,15 +328,12 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			dataProducerInEffect = new BaseDataProducer(receiver);
 			dataProducerInEffect.addBaseDataProducerListener(this);
 
-			// TODO CHECK WITH JP
-			// dataProducerInEffect.dataSourceStateStarted();
-
 			oldDataProducers.add(dataProducerInEffect);
 			DataProducer dataProducer = dataProducerInEffect._this();
-			
+
 			IDataSource ds = driver.start(getHardwareInfo());
 			dataProducerInEffect.setDataSource(ds);
-			
+
 			return dataProducer;
 		} catch (IncorrectStateException e) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
@@ -358,11 +356,11 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			oldDataProducers.add(dataProducerInEffect);
 			dataProducerInEffect.addBaseDataProducerListener(this);
 			DataProducer dataProducer = dataProducerInEffect._this();
-			
+
 			IDataSource ds = driver.startOutput(getHardwareInfo(), new DataProducer2IDataSourceAdapter(
 					new DataProducerWrapper(data_source)));
 			dataProducerInEffect.setDataSource(ds);
-			
+
 			return dataProducer;
 		} catch (IncorrectStateException e) {
 			throw new IncorrectStateException(IncorrectStateExceptionConstants.WRONG_HARDWARE_STATE,
@@ -384,7 +382,6 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			if (this.dataProducerInEffect != null) {
 				dataProducerInEffect.stopNow();
 
-				// TODO CHECK WITH JP
 				dataProducerInEffect.dataSourceStateStoped();
 			}
 
@@ -427,7 +424,8 @@ public class BaseHardware implements HardwareOperations, BaseDataProducerListene
 			try {
 				if (o instanceof HardwareStateChangeEvent) {
 					if (dataClient != null) {
-						Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.FINE, "Dispatching hardware state ["+((HardwareStateChangeEvent) o).getNewState()+"]");
+						Logger.getLogger(BASE_HARDWARE_LOGGER).log(Level.FINE,
+								"Dispatching hardware state [" + ((HardwareStateChangeEvent) o).getNewState() + "]");
 						dataClient.hardwareStateChange(((HardwareStateChangeEvent) o).getNewState());
 					}
 				}
