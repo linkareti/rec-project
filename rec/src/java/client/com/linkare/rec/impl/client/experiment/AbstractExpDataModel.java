@@ -34,7 +34,7 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  * @author André Neto - LEFT - IST
  */
 public abstract class AbstractExpDataModel extends DataCollector implements ExpDataModel, DataReceiverOperations {
-	
+
 	/** Gnerated UID */
 	private static final long serialVersionUID = 5721300601918680941L;
 
@@ -116,18 +116,18 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 					"DataProducer is disconnected! Check it out, please...");
 		}
 		this.remoteDataProducer = remoteDataProducer;
-		
+
 		if (getDataReceiver() != null) {
 			try {
 				this.remoteDataProducer.registerDataReceiver(_thisDataReceiver);
-				
+
 			} catch (MaximumClientsReached e) {
 				// System.out.println("NOT Registered with dataProducer");
 				LoggerUtil.logThrowable(null, e, LogManager.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
 				throw e;
 			}
 		}
-		
+
 		setTotalSamples(getAcquisitionConfig().getTotalSamples());
 		setFrequency((long) getAcquisitionConfig().getSelectedFrequency().getFrequency());
 
@@ -366,16 +366,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	 * 
 	 * @return Value of property totalSamples.
 	 */
-	// TODO CHECK WITH JP
 	public int getTotalSamples() {
-		// o lastSampleNum por omissao tem -1 pois o primeiro index e' o 0 (zero)
+		// o lastSampleNum por omissao tem -1 pois o primeiro index e' o 0
+		// (zero)
 		return depacketizer.getLastSampleNum() + 1;
-		
-		// return getAcquisitionConfig().getTotalSamples();
-		/*
-		 * if(samples!=null) { synchronized(samples) { return samples.size(); }
-		 * } else return 0;
-		 */
 	}
 
 	private void deactivateDataReceiver() {
@@ -524,7 +518,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 	public void newSamples(int largestNumPacket) {
 		setLargestPacketKnown(largestNumPacket);
 	}
-	
+
 	/**
 	 * Shutdown the RunningCheck thread if alive
 	 */
@@ -533,7 +527,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			dataProducerRunningCheck.shutdown();
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -556,7 +550,7 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 			}
 		}
 	}
-	
+
 	protected void fireExpDataModelListenerNewSamples(int sampleLargestIndex) {
 		if (sampleLargestIndex > largestnumsample) {
 			largestnumsample = sampleLargestIndex;
@@ -570,9 +564,10 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		private long millisChecked = System.currentTimeMillis();
 		private Thread currentThread = null;
 		private boolean shutdown = false;
-		
+
 		/**
-		 * Creates the <code>AbstractExpDataModel.DataProducerRunningCheck</code>.
+		 * Creates the
+		 * <code>AbstractExpDataModel.DataProducerRunningCheck</code>.
 		 */
 		public DataProducerRunningCheck() {
 			super();
