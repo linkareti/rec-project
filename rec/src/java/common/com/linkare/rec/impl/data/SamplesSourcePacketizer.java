@@ -9,7 +9,7 @@ import com.linkare.rec.data.acquisition.SamplesPacket;
 import com.linkare.rec.data.synch.Frequency;
 
 public class SamplesSourcePacketizer implements SamplesPacketSource {
-	
+
 	private static final int NOT_AVAILABLE_TOTAL_SAMPLES_VALUE = -1;
 	private SamplesSource samplesSource = null;
 	private Frequency frequency = null;
@@ -35,7 +35,8 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 	}
 
 	/** Creates a new instance of DiscardablePhysicsValueMatrixPacketizer */
-	public SamplesSourcePacketizer(Frequency freq, SamplesSource samplesSource, int packetSize, int totalPackets, int totalSamples) {
+	public SamplesSourcePacketizer(Frequency freq, SamplesSource samplesSource, int packetSize, int totalPackets,
+			int totalSamples) {
 		setSamplesSource(samplesSource);
 		this.packetSize = packetSize;
 		setTotalPackets(totalPackets);
@@ -212,20 +213,6 @@ public class SamplesSourcePacketizer implements SamplesPacketSource {
 	public int getPacketSize() {
 		return packetSize;
 	}
-
-	// TODO remove not needed code
-//	/**
-//	 * Setter for property packetSize.
-//	 * 
-//	 * @param packetSize New value of property packetSize.
-//	 * 
-//	 */
-//	public void setPacketSize(int packetSize) {
-//		if (packetSize <= 0)
-//			return;
-//		this.packetSize = packetSize;
-//		refreshState(currentPacketSampleStartIndex + countSamplesCurrentPacket);
-//	}
 
 	/**
 	 * Getter for property totalPackets.
