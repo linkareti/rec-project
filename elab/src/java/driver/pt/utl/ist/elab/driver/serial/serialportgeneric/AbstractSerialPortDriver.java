@@ -94,16 +94,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	private DriverState currentDriverState = DriverState.UNKNOWN;
 	private boolean resetNoData = false;
 
-	/**
-	 * 
-	 * Once upon a time, there was a great explosion, and between electrons,
-	 * protons, and lots of hydrogen atoms running to achieve an energetic
-	 * stability, there, was born the constructor of this driver. Then,
-	 * everything of right and wrong have started to happen between software and
-	 * hardware...
-	 * 
-	 * @author fdias
-	 */
 	public AbstractSerialPortDriver() {
 
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Instantiating the " + this.getClass().getSimpleName());
@@ -132,8 +122,8 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		serialFinder = new SerialPortFinder(this);
 
 		setApplicationNameLockPort(rs232configs.getId()); // TODO shoud be a new
-															// atribute in the
-															// xml node
+		// atribute in the
+		// xml node
 		setDriverUniqueID(rs232configs.getId());
 		setTimeOutPerPort(rs232configs.getRs232().getTimeout().getPortListen().getTimeInt());
 		setPortBaudRate(rs232configs.getRs232().getBaud().intValue());
@@ -241,34 +231,10 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		return url;
 	}
 
-	/**
-	 * - Please, do this work for me. - Okay, I will ask a friend of mine to do
-	 * it for me. - Ah, thanks, what is his name? - He is the
-	 * loadExtraCommandHandlers. A cool and hard working guy. - And what are you
-	 * going to do? - Give him the work. I think there's no problem, I return
-	 * void anyway...
-	 * 
-	 * @author fdias
-	 * 
-	 */
 	protected void loadCommandHandlers() {
 		loadExtraCommandHandlers();
 	}
 
-	/**
-	 * 
-	 * Why the art tends to be so abstract? Well... is this class only one
-	 * method is abstract. This is not abstract, nor impressionist, neither
-	 * cubist. This is only a method that avoids this class to be the generic
-	 * driver. - Why? This is not meant to be a generic driver? - Yes it is.
-	 * But, everything is not so generic as you think it is...<br />
-	 * <br />
-	 * If you don't have code to put inside this method, just give a good name
-	 * to your class and leave it empty.
-	 * 
-	 * @author fdias
-	 * 
-	 */
 	protected abstract void loadExtraCommandHandlers();
 
 	/**
@@ -280,21 +246,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	public abstract void extraValidateConfig(HardwareAcquisitionConfig config, HardwareInfo info)
 			throws WrongConfigurationException;
 
-	/**
-	 * 
-	 * In front of the tree the ReC asks to the cat at the top:<br />
-	 * - Who are you?<br />
-	 * - Hello little girl. I am who I am, why you care about it?<br />
-	 * - But you are a pink cat? What's your name?<br />
-	 * - I'm the Cheshire cat.<br />
-	 * - Impossible, I was expecting for a driver!<br />
-	 * - What's the problem? You're neither a girl Alice! You're a framework!<br />
-	 * - And this is not Wonderland?<br />
-	 * - No... this is eLab.<br />
-	 * 
-	 * @author fdias
-	 * 
-	 */
 	public String getDriverUniqueID() {
 		return ID_STR;
 	}
@@ -311,20 +262,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		serialFinder.setStampIdentifier(IdStr);
 	}
 
-	/**
-	 * 
-	 * At the beginning there was nothing. So YHVH created the Earth and the
-	 * skies around. The earth was without colour and void. So YHVH separated
-	 * the light from the darkness, and called day to the light, and night to
-	 * the darkness. And there was the beginning...
-	 * 
-	 * After that, the driver spoke through the serial port - let it be light.
-	 * And there was light in all the LEDs of an experience set.
-	 * 
-	 * @param HardwareInfo
-	 * @author fdias
-	 * 
-	 */
 	public void init(HardwareInfo info) {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Initializing driver");
 
@@ -365,24 +302,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.FINE, "Driver initialized");
 	}
 
-	/**
-	 * 
-	 * For 20 minutes the telescreen repeats over and over the same images and
-	 * sounds and Winston Smith enters in a trance of delusion and hate. The Big
-	 * Brother is configuring him for perpetual war and freedom. But, meanwhile,
-	 * a thought of Julia appears on his mind.<br />
-	 * And all that trance disappeared again. There is no more doublethink on
-	 * his mind, but the eyes of Julia under that tree on the fields outside of
-	 * London<br />
-	 * A new configuration, a new way to this experience react. Beware the
-	 * MiniTrue.
-	 * 
-	 * @throws IncorrectStateException
-	 * @throws WrongConfigurationException
-	 * @throws TimedOutException
-	 * @author fdias
-	 * 
-	 */
 	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException,
 			IncorrectStateException, TimedOutException {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.INFO, "Configuring driver...");
@@ -462,7 +381,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 * @throws {@link IncorrectStateException}
 	 * @throws {@link TimedOutException}
-	 * @author fdias
 	 * 
 	 */
 	public void reset(HardwareInfo info) throws IncorrectStateException {
@@ -482,8 +400,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * 
 	 * Shuts down the driver
 	 * 
-	 * @author fdias
-	 * 
 	 */
 	public void shutdown() {
 		Logger.getLogger(SERIAL_PORT_LOGGER).log(Level.SEVERE, "Shutdown was invoked! Going to terminate...");
@@ -502,7 +418,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * Starts the driver
 	 * 
 	 * @throws IncorrectStateException
-	 * @author fdias
 	 * 
 	 */
 	public IDataSource start(HardwareInfo info) throws IncorrectStateException {
@@ -551,7 +466,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * Stops the driver
 	 * 
 	 * @throws IncorrectStateException
-	 * @author fdias
 	 * 
 	 */
 	public void stop(HardwareInfo info) throws IncorrectStateException {
@@ -602,7 +516,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * @deprecated Use <code><b>processCommand</b></code> method instead
 	 * @throws IncorrectStateException
 	 * @throws TimedOutException
-	 * @author fdias
 	 * 
 	 */
 	@Deprecated
@@ -622,8 +535,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * override this method to create an instance of your datasource.
 	 * 
 	 * @return AbstractSerialPortDataSource
-	 * @author fdias
-	 * 
 	 */
 	public AbstractSerialPortDataSource initDataSource() {
 		AbstractSerialPortDataSource dataSource = new GenericSerialPortDataSource();
@@ -654,7 +565,6 @@ public abstract class AbstractSerialPortDriver extends BaseDriver implements Ser
 	 * @param cmd
 	 * @throws TimedOutException
 	 * @throws IncorrectStateException
-	 * @author fdias
 	 * 
 	 */
 	public void processCommand(SerialPortCommand cmd) throws IncorrectStateException, TimedOutException {
