@@ -20,12 +20,10 @@ import com.linkare.rec.impl.utils.ORBBean;
  * class that recieves a stamp driver class name through an argument.
  * 
  * @author José Pedro Pereira - Linkare TI
- * @author Francisco Dias - Linkare TI, also had passed here on March 2009
  * @version 0.2 : March 2009
  */
 public abstract class GenericHardwareServerMain {
 
-	// TODO : please, replace this values
 	private static String HARDWARE_LOGGER = "GenericHardware.Logger";
 
 	static {
