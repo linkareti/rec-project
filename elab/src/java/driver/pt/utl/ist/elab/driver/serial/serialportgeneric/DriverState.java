@@ -31,15 +31,9 @@ import pt.utl.ist.elab.driver.serial.serialportgeneric.command.SerialPortCommand
  * better and faster.
  * </p>
  * 
- * <p>
- * Thank you for your time. Have a nice day here on eLab code.
- * </p>
- * 
- * @author fdias
  * @version Oct 2009
  * 
  */
-
 public enum DriverState {
 
 	ERROR {
@@ -1299,8 +1293,7 @@ public enum DriverState {
 	 * 
 	 * @param command
 	 * @return {@link DriverState}
-	 * @author fdias
-	 * @param cmd 
+	 * @param cmd
 	 */
 	public abstract DriverState nextState(SerialPortCommandList command, SerialPortCommand cmd);
 
@@ -1310,7 +1303,6 @@ public enum DriverState {
 	 * 
 	 * @param command
 	 * @return boolean
-	 * @author fdias
 	 */
 	public abstract boolean processeMe(SerialPortCommandList command);
 
@@ -1321,7 +1313,6 @@ public enum DriverState {
 	 * 
 	 * @param status
 	 * @return boolean
-	 * @author fdias
 	 */
 	public abstract boolean acceptHardwareStatus(HardwareStatus status);
 
