@@ -27,14 +27,15 @@ import sun.swing.SwingUtilities2;
  */
 public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 
-	//FIXME: Corrigir esta forma de obter as cores. Tem de ser por intermédio de propriedades
-	//ENABLED COLORS
+	// FIXME: Corrigir esta forma de obter as cores. Tem de ser por intermédio
+	// de propriedades
+	// ENABLED COLORS
 	private static final Color COLOR_SELECTED_TAB_BG = new Color(0xE4EEED);
 	private static final Color COLOR_SELECTED_TAB_FG = new Color(0x22363A);
 
 	private static final Color COLOR_UNSELECTED_TAB_FG = new Color(0xE4EEED);
 	private static final Color COLOR_UNSELECTED_TAB_BG = new Color(0x424A4E);
-	//OTHER COLORS
+	// OTHER COLORS
 	public static final Color COLOR_DISABLE_TAB_FG = new Color(0x677478);
 
 	public static ComponentUI createUI(JComponent c) {
@@ -50,7 +51,8 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 	}
 
 	@Override
-	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
+	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
+			boolean isSelected) {
 
 		if (isSelected) {
 			g.setColor(COLOR_SELECTED_TAB_BG);
@@ -94,8 +96,9 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 			tabPane.validate();
 		}
 		/*
-		 * If tabPane doesn't have a peer yet, the validate() call will silently fail. We handle that by forcing a
-		 * layout if tabPane is still invalid. See bug 4237677.
+		 * If tabPane doesn't have a peer yet, the validate() call will silently
+		 * fail. We handle that by forcing a layout if tabPane is still invalid.
+		 * See bug 4237677.
 		 */
 		if (!tabPane.isValid()) {
 			TabbedPaneLayout layout = (TabbedPaneLayout) tabPane.getLayout();
@@ -104,24 +107,26 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 	}
 
 	@Override
-	protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex, Rectangle iconRect,
-			Rectangle textRect, boolean isSelected) {
+	protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,
+			Rectangle iconRect, Rectangle textRect, boolean isSelected) {
 		// Painting spec
 	}
 
 	@Override
-	protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
-		// Painting spec
-	}
-
-	@Override
-	protected void paintContentBorderLeftEdge(Graphics g, int tabPlacement, int selectedIndex, int x, int y, int w, int h) {
-		// Painting spec
-	}
-
-	@Override
-	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect,
+	protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
 			boolean isSelected) {
+		// Painting spec
+	}
+
+	@Override
+	protected void paintContentBorderLeftEdge(Graphics g, int tabPlacement, int selectedIndex, int x, int y, int w,
+			int h) {
+		// Painting spec
+	}
+
+	@Override
+	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
+			Rectangle textRect, boolean isSelected) {
 
 		g.setFont(font);
 
@@ -133,18 +138,20 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 
 			// plain text
 			int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
-			//FIXME Substituir estas constantes por propriedades
 			if (tabPane.isEnabled() && isSelected) {
 				g.setColor(COLOR_SELECTED_TAB_FG);
-				SwingUtilities2.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
+				SwingUtilities2.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y
+						+ metrics.getAscent());
 
 			} else if (tabPane.isEnabled() && !isSelected) {
 				g.setColor(COLOR_UNSELECTED_TAB_FG);
-				SwingUtilities2.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
+				SwingUtilities2.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y
+						+ metrics.getAscent());
 
 			} else { // tab disabled
 				g.setColor(COLOR_DISABLE_TAB_FG);
-				SwingUtilities2.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
+				SwingUtilities2.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y
+						+ metrics.getAscent());
 
 			}
 		}
