@@ -544,18 +544,6 @@ public class OpticaCustomizer extends javax.swing.JPanel implements com.linkare.
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnOKActionPerformed
 	{// GEN-HEADEREND:event_btnOKActionPerformed
 		
-		// TODO FIXME 
-//		int nsamples = sldNumSamples.getValue() == 0 ? 1 : sldNumSamples.getValue();
-//		acqConfig.setTotalSamples(nsamples + 1);
-//		acqConfig.getSelectedHardwareParameter("UserPosLow").setParameterValue(
-//				"" + ((float) sldPos1.getValue() / 1000.F));
-//		acqConfig.getSelectedHardwareParameter("UserPosHigh").setParameterValue(
-//				"" + ((float) sldPos2.getValue() / 1000.F));
-//		acqConfig.setSelectedFrequency(new Frequency((double) sldFreq.getValue(), hardwareInfo
-//				.getHardwareFrequencies(0).getMinimumFrequency().getMultiplier(), hardwareInfo
-//				.getHardwareFrequencies(0).getMinimumFrequency().getFrequencyDefType()));
-//		fireICustomizerListenerDone();
-		
 		int nsamples = sldNumSamples.getValue() < 10 ? 10 : sldNumSamples.getValue();
 		acqConfig.setTotalSamples(nsamples);
 
