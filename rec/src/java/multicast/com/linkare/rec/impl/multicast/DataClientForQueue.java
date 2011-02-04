@@ -44,13 +44,12 @@ public class DataClientForQueue implements QueueLogger {
 	public DataClientForQueue(IResource resource, DataClient dc, IDataClientForQueueListener dataClientForQueueListener)
 			throws NotAuthorized {
 		this.resource = resource;
-		
+
 		setDataClientForQueueListener(dataClientForQueueListener);
 		this.dcw = new DataClientWrapper(dc);
 
 		if (!dcw.isConnected()) {
-			log(Level.SEVERE,
-					"Error getting username in DataClientForQueue - Throwing not authorized...");
+			log(Level.SEVERE, "Error getting username in DataClientForQueue - Throwing not authorized...");
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_USERNAME_NOT_AVAILABLE);
 		}
 
@@ -71,7 +70,8 @@ public class DataClientForQueue implements QueueLogger {
 			throw new NotAuthorized(NotAuthorizedConstants.NOT_AUTHORIZED_SECURITY_MANAGER);
 		}
 
-		messageQueue = new EventQueue(new DataClientQueueDispatcher(), "DataClientForQueue - " + userInfo.getUserName(), this);
+		messageQueue = new EventQueue(new DataClientQueueDispatcher(),
+				"DataClientForQueue - " + userInfo.getUserName(), this);
 	}
 
 	public String getUserName() {
@@ -121,14 +121,12 @@ public class DataClientForQueue implements QueueLogger {
 		log(Level.INFO, "client " + getUserName() + " - shutting down message queue!");
 		messageQueue.shutdown();
 		log(Level.INFO, "client " + getUserName() + " - message queue is shut down!");
-		log(Level.INFO,
-				"client " + getUserName() + " - informing dataClientForQueueListener that I'm gone!");
+		log(Level.INFO, "client " + getUserName() + " - informing dataClientForQueueListener that I'm gone!");
 		getDataClientForQueueListener().dataClientForQueueIsGone(this);
 		log(Level.INFO, "client " + getUserName() + " is shut down!");
 		shutDown = false;
 	}
 
-	// I want to now if the user is shutting down TODO CHECK WITH JP
 	public boolean isShuttingDown() {
 		return shutDown;
 	}
@@ -242,18 +240,18 @@ public class DataClientForQueue implements QueueLogger {
 	}
 
 	private class DataClientQueueDispatcher implements EventQueueDispatcher {
-		
+
 		public void dispatchEvent(Object o) {
 			// Connection check
 			if (!dcw.isConnected()) {
 				shutdownAsSoonAsPossible();
 				return;
 			}
-			
+
 			try {
 				if (o instanceof HardwareStateChangeEvent) {
 					HardwareStateChangeEvent evt = (HardwareStateChangeEvent) o;
-					log(Level.FINE, "Dispatching hardware state ["+evt.getNewState()+"]");
+					log(Level.FINE, "Dispatching hardware state [" + evt.getNewState() + "]");
 					dcw.hardwareStateChange(evt.getNewState());
 				}
 				if (o instanceof HardwareChangeEvent) {
@@ -280,8 +278,7 @@ public class DataClientForQueue implements QueueLogger {
 				}
 
 			} catch (Exception e) {
-				logThrowable(
-						"Oooppss.. client gone? - Error dispatching event to client! Why? Gone?", e);
+				logThrowable("Oooppss.. client gone? - Error dispatching event to client! Why? Gone?", e);
 				if (!isConnected()) {
 					shutdownAsSoonAsPossible();
 					return;
