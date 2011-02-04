@@ -136,7 +136,6 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 	 *         with the apparatus server
 	 */
 	public com.linkare.rec.acquisition.UserInfo getUserInfo() {
-		// TODO check with JP
 		// userInfo = _this().getUserInfo();
 		if (userInfo == null)
 			userInfo = new UserInfo();
