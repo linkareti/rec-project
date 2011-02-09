@@ -1223,11 +1223,11 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			ang1Max = 1;
 			deltaAng1 = 1;
 			if (jRadioButtonCalibrationPexiglass.isSelected()) {
-				polarizacao = 0;
+				checkBox = 0;
 			} else if (jRadioButtonCalibrationSensor.isSelected()) {
-				polarizacao = 1;
+				checkBox = 1;
 			} else if (jRadioButtonCalibrationBoth.isSelected()) {
-				polarizacao = 2;
+				checkBox = 2;
 			}
 			// valores identicos 'a inicializacao
 //			delay = 0;
