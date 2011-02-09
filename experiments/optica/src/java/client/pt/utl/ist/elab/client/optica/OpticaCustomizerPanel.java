@@ -111,9 +111,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jCheckBoxBrewsterAngleMaximumAngle = new javax.swing.JCheckBox();
         jPanelCalibration = new javax.swing.JPanel();
         jPanelCalibrationButtons = new javax.swing.JPanel();
-        jRadioButtonCalibrationPexiglass = new javax.swing.JRadioButton();
-        jRadioButtonCalibrationSensor = new javax.swing.JRadioButton();
-        jRadioButtonCalibrationBoth = new javax.swing.JRadioButton();
+        jCheckBoxCalibrationPexiglass = new javax.swing.JCheckBox();
+        jCheckBoxCalibrationSensor = new javax.swing.JCheckBox();
         jPanelControlButtons = new javax.swing.JPanel();
         jButtonOk = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
@@ -913,18 +912,11 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelCalibrationButtons.setName("jPanelCalibrationButtons"); // NOI18N
         jPanelCalibrationButtons.setPreferredSize(new java.awt.Dimension(330, 83));
 
-        buttonGroupCalibration.add(jRadioButtonCalibrationPexiglass);
-        jRadioButtonCalibrationPexiglass.setSelected(true);
-        jRadioButtonCalibrationPexiglass.setText(resourceMap.getString("jRadioButtonCalibrationPexiglass.text")); // NOI18N
-        jRadioButtonCalibrationPexiglass.setName("jRadioButtonCalibrationPexiglass"); // NOI18N
+        jCheckBoxCalibrationPexiglass.setText(resourceMap.getString("jCheckBoxCalibrationPexiglass.text")); // NOI18N
+        jCheckBoxCalibrationPexiglass.setName("jCheckBoxCalibrationPexiglass"); // NOI18N
 
-        buttonGroupCalibration.add(jRadioButtonCalibrationSensor);
-        jRadioButtonCalibrationSensor.setText(resourceMap.getString("jRadioButtonCalibrationSensor.text")); // NOI18N
-        jRadioButtonCalibrationSensor.setName("jRadioButtonCalibrationSensor"); // NOI18N
-
-        buttonGroupCalibration.add(jRadioButtonCalibrationBoth);
-        jRadioButtonCalibrationBoth.setText(resourceMap.getString("jRadioButtonCalibrationBoth.text")); // NOI18N
-        jRadioButtonCalibrationBoth.setName("jRadioButtonCalibrationBoth"); // NOI18N
+        jCheckBoxCalibrationSensor.setText(resourceMap.getString("jCheckBoxCalibrationSensor.text")); // NOI18N
+        jCheckBoxCalibrationSensor.setName("jCheckBoxCalibrationSensor"); // NOI18N
 
         javax.swing.GroupLayout jPanelCalibrationButtonsLayout = new javax.swing.GroupLayout(jPanelCalibrationButtons);
         jPanelCalibrationButtons.setLayout(jPanelCalibrationButtonsLayout);
@@ -933,20 +925,18 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             .addGroup(jPanelCalibrationButtonsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCalibrationButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonCalibrationPexiglass)
-                    .addComponent(jRadioButtonCalibrationSensor)
-                    .addComponent(jRadioButtonCalibrationBoth))
+                    .addComponent(jCheckBoxCalibrationPexiglass)
+                    .addComponent(jCheckBoxCalibrationSensor))
                 .addContainerGap(229, Short.MAX_VALUE))
         );
         jPanelCalibrationButtonsLayout.setVerticalGroup(
             jPanelCalibrationButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCalibrationButtonsLayout.createSequentialGroup()
-                .addComponent(jRadioButtonCalibrationPexiglass)
+                .addContainerGap()
+                .addComponent(jCheckBoxCalibrationPexiglass)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButtonCalibrationSensor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButtonCalibrationBoth)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(jCheckBoxCalibrationSensor)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelCalibrationLayout = new javax.swing.GroupLayout(jPanelCalibration);
@@ -962,8 +952,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             jPanelCalibrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCalibrationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelCalibrationButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(281, Short.MAX_VALUE))
+                .addComponent(jPanelCalibrationButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(305, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelCalibration.TabConstraints.tabTitle"), jPanelCalibration); // NOI18N
@@ -1074,7 +1064,6 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jCheckBoxBrewsterAngleMaximumAngle.setSelected(false);
 
         // tab Calibration
-        jRadioButtonCalibrationPexiglass.setSelected(true);
 
     }//GEN-LAST:event_jButtonDefaultConfigActionPerformed
 
@@ -1222,12 +1211,12 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			ang1Min = 3;
 			ang1Max = 1;
 			deltaAng1 = 1;
-			if (jRadioButtonCalibrationPexiglass.isSelected()) {
-				checkBox = 0;
-			} else if (jRadioButtonCalibrationSensor.isSelected()) {
-				checkBox = 1;
-			} else if (jRadioButtonCalibrationBoth.isSelected()) {
+			if (jCheckBoxCalibrationPexiglass.isSelected() && jCheckBoxCalibrationSensor.isSelected()) {
 				checkBox = 2;
+			} else if (jCheckBoxCalibrationSensor.isSelected()) {
+				checkBox = 1;
+			} else if (jCheckBoxCalibrationPexiglass.isSelected()) {
+				checkBox = 0;
 			}
 			// valores identicos 'a inicializacao
 //			delay = 0;
@@ -1325,6 +1314,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     private javax.swing.JCheckBox jCheckBoxBrewsterAngleMaximumAngle;
     private javax.swing.JCheckBox jCheckBoxBrewsterAngleMediumAngle;
     private javax.swing.JCheckBox jCheckBoxBrewsterAngleMinimalAngle;
+    private javax.swing.JCheckBox jCheckBoxCalibrationPexiglass;
+    private javax.swing.JCheckBox jCheckBoxCalibrationSensor;
     private javax.swing.JCheckBox jCheckBoxCriticalAngleMaximumAngle;
     private javax.swing.JCheckBox jCheckBoxCriticalAngleMediumAngle;
     private javax.swing.JCheckBox jCheckBoxCriticalAngleMinimalAngle;
@@ -1362,9 +1353,6 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     private javax.swing.JPanel jPanelSnellAngleVariation;
     private javax.swing.JPanel jPanelSnellDelay;
     private javax.swing.JPanel jPanelSnellDelta;
-    private javax.swing.JRadioButton jRadioButtonCalibrationBoth;
-    private javax.swing.JRadioButton jRadioButtonCalibrationPexiglass;
-    private javax.swing.JRadioButton jRadioButtonCalibrationSensor;
     private javax.swing.JRadioButton jRadioButtonEnergyConservationIsPolarizationNo;
     private javax.swing.JRadioButton jRadioButtonEnergyConservationIsPolarizationYes;
     private javax.swing.JSlider jSliderBrewsterAnglePolarization;
@@ -1648,6 +1636,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 			break;
 		case 5:
 			// always valid
+			valid = jCheckBoxCalibrationPexiglass.isSelected() || jCheckBoxCalibrationSensor.isSelected();
 			break;
 		}
     	
