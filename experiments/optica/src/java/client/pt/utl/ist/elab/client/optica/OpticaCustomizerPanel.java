@@ -113,6 +113,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jPanelCalibrationButtons = new javax.swing.JPanel();
         jRadioButtonCalibrationPexiglass = new javax.swing.JRadioButton();
         jRadioButtonCalibrationSensor = new javax.swing.JRadioButton();
+        jRadioButtonCalibrationBoth = new javax.swing.JRadioButton();
         jPanelControlButtons = new javax.swing.JPanel();
         jButtonOk = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
@@ -921,6 +922,10 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jRadioButtonCalibrationSensor.setText(resourceMap.getString("jRadioButtonCalibrationSensor.text")); // NOI18N
         jRadioButtonCalibrationSensor.setName("jRadioButtonCalibrationSensor"); // NOI18N
 
+        buttonGroupCalibration.add(jRadioButtonCalibrationBoth);
+        jRadioButtonCalibrationBoth.setText(resourceMap.getString("jRadioButtonCalibrationBoth.text")); // NOI18N
+        jRadioButtonCalibrationBoth.setName("jRadioButtonCalibrationBoth"); // NOI18N
+
         javax.swing.GroupLayout jPanelCalibrationButtonsLayout = new javax.swing.GroupLayout(jPanelCalibrationButtons);
         jPanelCalibrationButtons.setLayout(jPanelCalibrationButtonsLayout);
         jPanelCalibrationButtonsLayout.setHorizontalGroup(
@@ -929,7 +934,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
                 .addContainerGap()
                 .addGroup(jPanelCalibrationButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButtonCalibrationPexiglass)
-                    .addComponent(jRadioButtonCalibrationSensor))
+                    .addComponent(jRadioButtonCalibrationSensor)
+                    .addComponent(jRadioButtonCalibrationBoth))
                 .addContainerGap(229, Short.MAX_VALUE))
         );
         jPanelCalibrationButtonsLayout.setVerticalGroup(
@@ -938,7 +944,9 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
                 .addComponent(jRadioButtonCalibrationPexiglass)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButtonCalibrationSensor)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButtonCalibrationBoth)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelCalibrationLayout = new javax.swing.GroupLayout(jPanelCalibration);
@@ -954,8 +962,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
             jPanelCalibrationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCalibrationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelCalibrationButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addComponent(jPanelCalibrationButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(281, Short.MAX_VALUE))
         );
 
         jTabbedPaneOptica.addTab(resourceMap.getString("jPanelCalibration.TabConstraints.tabTitle"), jPanelCalibration); // NOI18N
@@ -1218,6 +1226,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 				polarizacao = 0;
 			} else if (jRadioButtonCalibrationSensor.isSelected()) {
 				polarizacao = 1;
+			} else if (jRadioButtonCalibrationBoth.isSelected()) {
+				polarizacao = 2;
 			}
 			// valores identicos 'a inicializacao
 //			delay = 0;
@@ -1352,6 +1362,7 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     private javax.swing.JPanel jPanelSnellAngleVariation;
     private javax.swing.JPanel jPanelSnellDelay;
     private javax.swing.JPanel jPanelSnellDelta;
+    private javax.swing.JRadioButton jRadioButtonCalibrationBoth;
     private javax.swing.JRadioButton jRadioButtonCalibrationPexiglass;
     private javax.swing.JRadioButton jRadioButtonCalibrationSensor;
     private javax.swing.JRadioButton jRadioButtonEnergyConservationIsPolarizationNo;

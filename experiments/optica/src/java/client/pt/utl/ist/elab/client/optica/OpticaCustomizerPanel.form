@@ -1289,8 +1289,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanelCalibrationButtons" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="313" max="32767" attributes="0"/>
+                      <Component id="jPanelCalibrationButtons" min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace pref="281" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1319,6 +1319,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jRadioButtonCalibrationPexiglass" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jRadioButtonCalibrationSensor" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonCalibrationBoth" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="229" max="32767" attributes="0"/>
                       </Group>
@@ -1330,7 +1331,9 @@
                           <Component id="jRadioButtonCalibrationPexiglass" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jRadioButtonCalibrationSensor" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonCalibrationBoth" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="13" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1353,6 +1356,15 @@
                     </Property>
                     <Property name="text" type="java.lang.String" resourceKey="jRadioButtonCalibrationSensor.text"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonCalibrationSensor" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="jRadioButtonCalibrationBoth">
+                  <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroupCalibration"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" resourceKey="jRadioButtonCalibrationBoth.text"/>
+                    <Property name="name" type="java.lang.String" value="jRadioButtonCalibrationBoth" noResource="true"/>
                   </Properties>
                 </Component>
               </SubComponents>
