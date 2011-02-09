@@ -914,9 +914,19 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 
         jCheckBoxCalibrationPexiglass.setText(resourceMap.getString("jCheckBoxCalibrationPexiglass.text")); // NOI18N
         jCheckBoxCalibrationPexiglass.setName("jCheckBoxCalibrationPexiglass"); // NOI18N
+        jCheckBoxCalibrationPexiglass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxCalibrationPexiglassActionPerformed(evt);
+            }
+        });
 
         jCheckBoxCalibrationSensor.setText(resourceMap.getString("jCheckBoxCalibrationSensor.text")); // NOI18N
         jCheckBoxCalibrationSensor.setName("jCheckBoxCalibrationSensor"); // NOI18N
+        jCheckBoxCalibrationSensor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxCalibrationSensorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCalibrationButtonsLayout = new javax.swing.GroupLayout(jPanelCalibrationButtons);
         jPanelCalibrationButtons.setLayout(jPanelCalibrationButtonsLayout);
@@ -1304,6 +1314,14 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
     private void jTabbedPaneOpticaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneOpticaStateChanged
         validateScreen();
     }//GEN-LAST:event_jTabbedPaneOpticaStateChanged
+
+    private void jCheckBoxCalibrationPexiglassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxCalibrationPexiglassActionPerformed
+        validateScreen();
+    }//GEN-LAST:event_jCheckBoxCalibrationPexiglassActionPerformed
+
+    private void jCheckBoxCalibrationSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxCalibrationSensorActionPerformed
+        validateScreen();
+    }//GEN-LAST:event_jCheckBoxCalibrationSensorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupCalibration;

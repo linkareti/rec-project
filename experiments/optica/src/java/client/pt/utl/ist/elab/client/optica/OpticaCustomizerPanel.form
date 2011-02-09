@@ -1342,12 +1342,18 @@
                     <Property name="text" type="java.lang.String" resourceKey="jCheckBoxCalibrationPexiglass.text"/>
                     <Property name="name" type="java.lang.String" value="jCheckBoxCalibrationPexiglass" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxCalibrationPexiglassActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxCalibrationSensor">
                   <Properties>
                     <Property name="text" type="java.lang.String" resourceKey="jCheckBoxCalibrationSensor.text"/>
                     <Property name="name" type="java.lang.String" value="jCheckBoxCalibrationSensor" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxCalibrationSensorActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
