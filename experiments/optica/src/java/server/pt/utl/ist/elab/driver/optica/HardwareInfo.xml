@@ -23,7 +23,7 @@
 	<parameter name="ang1_min" type="ContinuousValue" value="0">
 		<selection-list>
 			<value order="1">0</value>
-			<value order="2">359.8</value>
+			<value order="2">360.0</value>
 			<value order="3">0.2</value>
 		</selection-list>
 	</parameter>
