@@ -98,8 +98,8 @@
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="Ângulo sensor óptico" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Ângulo sensor óptico [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
+	<ChannelInfo name="Ângulo sensor" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Ângulo sensor [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
 			<min><PhysicsVal type="float">0.</PhysicsVal></min>
 			<max><PhysicsVal type="float">360.</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
@@ -107,8 +107,8 @@
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="ADC" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Intensidade do sensor óptico" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+	<ChannelInfo name="Intensidade luminosa" independent="false" direction="CHANNEL_INPUT">
+		<scale label="Intensidade luminosa [Lux]" physicsunitname="Lux" physicsunitsymbol="Lux" multiplier="none" selected="true">
 			<min><PhysicsVal type="int">0</PhysicsVal></min>
 			<max><PhysicsVal type="int">4095</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
