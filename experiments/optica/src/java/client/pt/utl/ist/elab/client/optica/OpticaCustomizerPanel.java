@@ -1086,6 +1086,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
         jSliderSnellDelay.setValue(25);
         jFormattedTextFieldSnellDelay.setText("2.5");
         jLabelSnellDelay.setEnabled(false);
+        jSliderSnellDelta.setEnabled(true);
+		jFormattedTextFieldSnellDelta.setEnabled(true);
 
         // tab Energy conservation
         jSliderEnergyConservationPexiglass.setValue(900);
@@ -1188,12 +1190,16 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 		case 1:
 			ang1Min = (float) jSliderSnellAngleVarationMin.getValue() / 10.F;
 			ang1Max = (float) jSliderSnellAngleVarationMax.getValue() / 10.F;
-			deltaAng1 = (float) jSliderSnellDelta.getValue() / 10.F;
-			
 			delay = (float) jSliderSnellDelay.getValue() / 10.F;
-			nsamples = (int) ((ang1Max - ang1Min) / deltaAng1 + 0.5);
-			if (nsamples * deltaAng1 < ang1Max) {
-				nsamples++;
+			if (ang1Min == ang1Max) {
+				deltaAng1 = 1;
+				nsamples = 1;
+			} else {
+				deltaAng1 = (float) jSliderSnellDelta.getValue() / 10.F;
+				nsamples = (int) ((ang1Max - ang1Min) / deltaAng1 + 0.5);
+				if (nsamples * deltaAng1 < ang1Max) {
+					nsamples++;
+				}
 			}
 			int time = (int) Math.ceil((PROTOCOL_1_WAIT_MS + nsamples * delay) / nsamples);
 			freq = new Frequency(time, Multiplier.mili, FrequencyDefType.SamplingIntervalType);
@@ -1664,16 +1670,31 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 				valid = false;
 			}
 			//delta angle
-			if (jSliderSnellDelta.getValue() > Math.abs(jSliderSnellAngleVarationMax.getValue() - jSliderSnellAngleVarationMin.getValue())) {
-				jLabelSnellDelta.setEnabled(true);
-				jLabelSnellDelta.setVisible(true);
-				valid = false;
-			} else {
+			if (jSliderSnellAngleVarationMin.getValue() == jSliderSnellAngleVarationMax.getValue()) {
+				jSliderSnellDelta.setEnabled(false);
+				jFormattedTextFieldSnellDelta.setEnabled(false);
+				
 				jLabelSnellDelta.setEnabled(false);
 				jLabelSnellDelta.setVisible(false);
+			} else {
+				jSliderSnellDelta.setEnabled(true);
+				jFormattedTextFieldSnellDelta.setEnabled(true);
+				
+				if (jSliderSnellDelta.getValue() > Math.abs(jSliderSnellAngleVarationMax.getValue() - jSliderSnellAngleVarationMin.getValue())) {
+					jLabelSnellDelta.setEnabled(true);
+					jLabelSnellDelta.setVisible(true);
+					valid = false;
+				} else {
+					jLabelSnellDelta.setEnabled(false);
+					jLabelSnellDelta.setVisible(false);
+				}
 			}
 			// delay
-			if (jSliderSnellDelay.getValue() > (1800*jSliderSnellDelta.getValue()) / (Math.abs(jSliderSnellAngleVarationMax.getValue() - jSliderSnellAngleVarationMin.getValue()) + 1)) {
+			int delta = jSliderSnellDelta.getValue();
+			if (jSliderSnellAngleVarationMin.getValue() == jSliderSnellAngleVarationMax.getValue()) {
+				delta = 10;
+			}
+			if (jSliderSnellDelay.getValue() > (1800*delta) / (Math.abs(jSliderSnellAngleVarationMax.getValue() - jSliderSnellAngleVarationMin.getValue()) + 1)) {
 				jLabelSnellDelay.setEnabled(true);
 				jLabelSnellDelay.setVisible(true);
 				valid = false;
