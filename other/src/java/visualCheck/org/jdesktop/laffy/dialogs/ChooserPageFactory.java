@@ -35,7 +35,6 @@ import org.jdesktop.laffy.I18nResourceHandler;
 import org.jdesktop.laffy.Laffy;
 import org.jdesktop.laffy.Page;
 
-import sun.swing.SwingUtilities2;
 
 /**
  * ChooserPageFactory
@@ -128,13 +127,27 @@ public class ChooserPageFactory {
 				JButton cancelButton = new JButton(cancelString);
 				buttonPane.add(cancelButton);
 				JButton resetButton = new JButton(resetString);
-				int mnemonic = SwingUtilities2.getUIDefaultsInt("ColorChooser.resetMnemonic", -1);
+				int mnemonic = getUIDefaultsInt("ColorChooser.resetMnemonic", -1);
 				if (mnemonic != -1) {
 					resetButton.setMnemonic(mnemonic);
 				}
 				buttonPane.add(resetButton);
 				panel.add(buttonPane, BorderLayout.SOUTH);
 				return panel;
+			}
+			
+			public static int getUIDefaultsInt(Object key, int defaultValue) {
+				Object value = javax.swing.UIManager.get(key);
+				if (value instanceof Integer) {
+					return ((Integer) value).intValue();
+				}
+				if (value instanceof String) {
+					try {
+						return Integer.parseInt((String) value);
+					} catch (NumberFormatException nfe) {
+					}
+				}
+				return defaultValue;
 			}
 		};
 		//return new Page("File & Color Choosers", open, openFilesOnly, save, color);

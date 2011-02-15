@@ -15,9 +15,8 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.metal.MetalButtonUI;
-
-import sun.swing.SwingUtilities2;
 
 import com.linkare.rec.impl.newface.component.FlatButton;
 
@@ -74,7 +73,7 @@ public class FlatButtonUI extends MetalButtonUI {
 	protected void paintText(Graphics g, JComponent c, Rectangle textRect, String text) {
 		AbstractButton b = (AbstractButton) c;
 		ButtonModel model = b.getModel();
-		FontMetrics fm = SwingUtilities2.getFontMetrics(c, g);
+		FontMetrics fm = g.getFontMetrics(c.getFont());
 		int mnemIndex = b.getDisplayedMnemonicIndex();
 
 		/* Draw the Text */
@@ -85,7 +84,7 @@ public class FlatButtonUI extends MetalButtonUI {
 			/*** paint the text disabled ***/
 			g.setColor(getDisabledTextColor());
 		}
-		SwingUtilities2.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
+		BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
 	}
 
 }

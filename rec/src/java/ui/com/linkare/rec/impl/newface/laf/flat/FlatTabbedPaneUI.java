@@ -16,10 +16,9 @@ import java.awt.Rectangle;
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.metal.MetalTabbedPaneUI;
 import javax.swing.text.View;
-
-import sun.swing.SwingUtilities2;
 
 /**
  * 
@@ -140,17 +139,17 @@ public class FlatTabbedPaneUI extends MetalTabbedPaneUI {
 			int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
 			if (tabPane.isEnabled() && isSelected) {
 				g.setColor(COLOR_SELECTED_TAB_FG);
-				SwingUtilities2.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y
+				BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x, textRect.y
 						+ metrics.getAscent());
 
 			} else if (tabPane.isEnabled() && !isSelected) {
 				g.setColor(COLOR_UNSELECTED_TAB_FG);
-				SwingUtilities2.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y
+				BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x, textRect.y
 						+ metrics.getAscent());
 
 			} else { // tab disabled
 				g.setColor(COLOR_DISABLE_TAB_FG);
-				SwingUtilities2.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y
+				BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex, textRect.x, textRect.y
 						+ metrics.getAscent());
 
 			}
