@@ -1196,8 +1196,8 @@ public class OpticaCustomizerPanel extends javax.swing.JPanel implements com.lin
 				nsamples = 1;
 			} else {
 				deltaAng1 = (float) jSliderSnellDelta.getValue() / 10.F;
-				nsamples = (int) ((ang1Max - ang1Min) / deltaAng1 + 0.5);
-				if (nsamples * deltaAng1 < ang1Max) {
+				nsamples = (int) ((ang1Max - ang1Min) / deltaAng1 + 1.5);
+				if ((nsamples - 1) * deltaAng1 < ang1Max) {
 					nsamples++;
 				}
 			}
