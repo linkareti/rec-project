@@ -96,7 +96,7 @@ public class GTableModelProxy extends javax.swing.table.DefaultTableModel implem
 		String experimentFamiliarName = expDataModel.getApparatusName();
 		String multiplier = ReCChannelResourceUtil.findMultiplier(experimentFamiliarName, channelIndex);
 		if (multiplier == null) {
-			expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
+			multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
 		}
 		String ph_unit_symbol = ReCChannelResourceUtil.findPhysicsUnitSymbol(experimentFamiliarName, channelIndex);
 		if (ph_unit_symbol == null) {
