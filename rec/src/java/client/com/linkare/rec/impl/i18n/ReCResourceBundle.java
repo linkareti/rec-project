@@ -136,7 +136,9 @@ public abstract class ReCResourceBundle extends ResourceBundle {
 
 		for (ReCResourceBundle bundle : bundles.values()) {
 			try {
-				return bundle.getString(key);
+				if (bundle.containsKey(key)) {
+					return bundle.getString(key);
+				}
 			} catch (Exception e) {
 			}
 		}
