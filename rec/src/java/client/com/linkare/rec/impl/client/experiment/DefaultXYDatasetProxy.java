@@ -6,6 +6,8 @@
 
 package com.linkare.rec.impl.client.experiment;
 
+import com.linkare.rec.impl.i18n.ReCChannelResourceUtil;
+
 /**
  * 
  * @author Jos� Pedro Pereira
@@ -73,17 +75,36 @@ public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset i
 			return null;
 		}
 
-		String multiplierX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale().getMultiplier()
+		String experimentFamiliarName = expDataModel.getApparatusName();
+		String multiplierX = ReCChannelResourceUtil.findMultiplier(experimentFamiliarName, getChannelDisplayX());
+		if (multiplierX == null) {
+			multiplierX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale().getMultiplier()
 				.toString();
-		String ph_unit_symbolX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale()
+		}
+		String ph_unit_symbolX = ReCChannelResourceUtil.findPhysicsUnitSymbol(experimentFamiliarName, getChannelDisplayX());
+		if (ph_unit_symbolX == null) {
+			ph_unit_symbolX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale()
 				.getPhysicsUnitSymbol();
-		String ch_nameX = expDataModel.getChannelConfig(getChannelDisplayX()).getChannelName();
-
-		String multiplierY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale().getMultiplier()
+		}
+		String ch_nameX = ReCChannelResourceUtil.findName(experimentFamiliarName, getChannelDisplayX());
+		if (ch_nameX == null) {
+			ch_nameX = expDataModel.getChannelConfig(getChannelDisplayX()).getChannelName();
+		}
+		
+		String multiplierY = ReCChannelResourceUtil.findMultiplier(experimentFamiliarName, getChannelDisplayY());
+		if (multiplierY == null) {
+			multiplierY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale().getMultiplier()
 				.toString();
-		String ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
+		}
+		String ph_unit_symbolY = ReCChannelResourceUtil.findPhysicsUnitSymbol(experimentFamiliarName, getChannelDisplayY());
+		if (ph_unit_symbolY == null) {
+			ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
 				.getPhysicsUnitSymbol();
-		String ch_nameY = expDataModel.getChannelConfig(getChannelDisplayY()).getChannelName();
+		}
+		String ch_nameY = ReCChannelResourceUtil.findName(experimentFamiliarName, getChannelDisplayY());
+		if (ch_nameY == null) {
+			ch_nameY = expDataModel.getChannelConfig(getChannelDisplayY()).getChannelName();
+		}
 
 		return ch_nameX + " [" + multiplierX + ph_unit_symbolX + "] vs " + ch_nameY + " [" + multiplierY
 				+ ph_unit_symbolY + "]";

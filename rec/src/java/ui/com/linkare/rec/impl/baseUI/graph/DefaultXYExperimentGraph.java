@@ -24,6 +24,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.i18n.ReCChannelResourceUtil;
 
 /**
  * 
@@ -189,13 +190,27 @@ public class DefaultXYExperimentGraph extends javax.swing.JPanel implements ExpD
 
 		Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
 		String chnX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName();
-		String pusX = scaleX.getPhysicsUnitSymbol();
-		String multiplierX = scaleX.getMultiplier().toString();
+		
+		String pusX = ReCChannelResourceUtil.findPhysicsUnitSymbol(header.getFamiliarName(), defaultXYDatasetProxy.getChannelDisplayX());
+		if (pusX == null) {
+			pusX = scaleX.getPhysicsUnitSymbol();
+		}
+		String multiplierX = ReCChannelResourceUtil.findMultiplier(header.getFamiliarName(), defaultXYDatasetProxy.getChannelDisplayX());
+		if (multiplierX == null) {
+			multiplierX = scaleX.getMultiplier().toString();
+		}
 
 		Scale scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getSelectedScale();
 		String chnY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName();
-		String pusY = scaleY.getPhysicsUnitSymbol();
-		String multiplierY = scaleY.getMultiplier().toString();
+		
+		String pusY = ReCChannelResourceUtil.findPhysicsUnitSymbol(header.getFamiliarName(), defaultXYDatasetProxy.getChannelDisplayY());
+		if (pusY == null) {
+			pusY = scaleY.getPhysicsUnitSymbol();
+		}
+		String multiplierY = ReCChannelResourceUtil.findMultiplier(header.getFamiliarName(), defaultXYDatasetProxy.getChannelDisplayY());
+		if (multiplierY == null) {
+			multiplierY = scaleY.getMultiplier().toString();
+		}
 
 		NumberAxis xAxis = new NumberAxis(chnX + " [" + multiplierX + pusX + "]");
 		xAxis.setAutoRange(true);
