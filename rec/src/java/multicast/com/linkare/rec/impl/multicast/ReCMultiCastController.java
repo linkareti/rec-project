@@ -8,8 +8,6 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -323,11 +321,17 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 				log(Level.INFO, "Trying to add an Hardware");
 				String hardwareId = null;
 
-				if (evt == null || evt.getHardware() == null || evt.getHardware().getHardwareInfo() == null
-						|| evt.getHardware().getHardwareInfo().getHardwareUniqueID() == null) {
-					log(Level.WARNING, "Error Trying to add an Hardware - Couldn't get it's ID");
+				try {
+					if (evt == null || evt.getHardware() == null || evt.getHardware().getHardwareInfo() == null
+							|| evt.getHardware().getHardwareInfo().getHardwareUniqueID() == null) {
+						log(Level.WARNING, "Error Trying to add an Hardware - Couldn't get it's ID");
+						return;
+					}
+				} catch (Throwable t) {
+					log(Level.WARNING, "Exception occurred while access hardware info. " + t.getMessage());
 					return;
 				}
+
 				hardwareId = evt.getHardware().getHardwareInfo().getHardwareUniqueID();
 
 				Iterator<ReCMultiCastHardware> iter = multiCastHardwares.iterator();

@@ -2,7 +2,7 @@
 
 <!-- Created by jp on 9 de Maio de 2003, 19:07 -->
 
-<HardwareInfo id="ELAB_PV_STAMP_V02" familiarName="Boyle Mariotte" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+<HardwareInfo id="ELAB_PV_STAMP_V02" familiarName="Boyle Mariotte" apparatusBundleName="pv" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
     <description>
         <![CDATA[ 
         Esta experiência serve para - não esquecer de alterar esta descrição

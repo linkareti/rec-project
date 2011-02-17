@@ -189,25 +189,32 @@ public class DefaultXYExperimentGraph extends javax.swing.JPanel implements ExpD
 		this.header = header;
 
 		Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
-		String chnX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName();
 		
-		String pusX = ReCChannelResourceUtil.findPhysicsUnitSymbol(header.getFamiliarName(), defaultXYDatasetProxy.getChannelDisplayX());
+		String bundleName = header.getApparatusBundleName();
+		String chnX = ReCChannelResourceUtil.findName(bundleName, defaultXYDatasetProxy.getChannelDisplayX());
+		if (chnX == null) {
+			chnX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName();
+		}
+		String pusX = ReCChannelResourceUtil.findPhysicsUnitSymbol(bundleName, defaultXYDatasetProxy.getChannelDisplayX());
 		if (pusX == null) {
 			pusX = scaleX.getPhysicsUnitSymbol();
 		}
-		String multiplierX = ReCChannelResourceUtil.findMultiplier(header.getFamiliarName(), defaultXYDatasetProxy.getChannelDisplayX());
+		String multiplierX = ReCChannelResourceUtil.findMultiplier(bundleName, defaultXYDatasetProxy.getChannelDisplayX());
 		if (multiplierX == null) {
 			multiplierX = scaleX.getMultiplier().toString();
 		}
 
 		Scale scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getSelectedScale();
-		String chnY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName();
 		
-		String pusY = ReCChannelResourceUtil.findPhysicsUnitSymbol(header.getFamiliarName(), defaultXYDatasetProxy.getChannelDisplayY());
+		String chnY = ReCChannelResourceUtil.findName(bundleName, defaultXYDatasetProxy.getChannelDisplayY());
+		if (chnY == null) {
+			chnY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName();
+		}
+		String pusY = ReCChannelResourceUtil.findPhysicsUnitSymbol(bundleName, defaultXYDatasetProxy.getChannelDisplayY());
 		if (pusY == null) {
 			pusY = scaleY.getPhysicsUnitSymbol();
 		}
-		String multiplierY = ReCChannelResourceUtil.findMultiplier(header.getFamiliarName(), defaultXYDatasetProxy.getChannelDisplayY());
+		String multiplierY = ReCChannelResourceUtil.findMultiplier(bundleName, defaultXYDatasetProxy.getChannelDisplayY());
 		if (multiplierY == null) {
 			multiplierY = scaleY.getMultiplier().toString();
 		}

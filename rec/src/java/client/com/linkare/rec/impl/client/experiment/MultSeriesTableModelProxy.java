@@ -8,6 +8,7 @@ package com.linkare.rec.impl.client.experiment;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.metadata.Scale;
+import com.linkare.rec.impl.i18n.ReCChannelResourceUtil;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
@@ -95,13 +96,26 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 			}
 		}
 
+		String bundleName = expDataModel.getApparatusBundleName();
+		int channelIndex = getColAtArray(columnIndex / 2);
+		String ch_name = ReCChannelResourceUtil.findName(bundleName, channelIndex);
+		if (ch_name == null) {
+			ch_name = expDataModel.getChannelConfig(channelIndex).getChannelName();
+		}
+		
 		if (columnIndex % 2 == 0) {
-			Scale scale = expDataModel.getChannelConfig(getColAtArray(columnIndex / 2)).getSelectedScale();
-			return expDataModel.getChannelConfig(getColAtArray(columnIndex / 2)).getChannelName() + "["
-					+ scale.getMultiplier().toString() + scale.getPhysicsUnitSymbol() + "]";
+			String multiplier = ReCChannelResourceUtil.findMultiplier(bundleName, channelIndex);
+			if (multiplier == null) {
+				multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
+			}
+			String ph_unit_symbol = ReCChannelResourceUtil.findPhysicsUnitSymbol(bundleName, channelIndex);
+			if (ph_unit_symbol == null) {
+				ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getPhysicsUnitSymbol();
+			}
+			return ch_name + "[" + multiplier + ph_unit_symbol + "]";
 		} else {
-			if ((columnIndex / 2) >= 0 && expDataModel.getChannelConfig(getColAtArray(columnIndex / 2)) != null) {
-				return "\u03B5 " + expDataModel.getChannelConfig(getColAtArray(columnIndex / 2)).getChannelName();
+			if ((columnIndex / 2) >= 0 && expDataModel.getChannelConfig(channelIndex) != null) {
+				return "\u03B5 " + ch_name;
 			}
 		}
 

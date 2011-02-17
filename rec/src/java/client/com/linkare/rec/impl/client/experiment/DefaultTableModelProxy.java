@@ -7,6 +7,7 @@
 package com.linkare.rec.impl.client.experiment;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
+import com.linkare.rec.impl.i18n.ReCChannelResourceUtil;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
@@ -90,10 +91,20 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.milliseconds");
 
 		int channelIndex = (int) Math.floor(((double) columnIndex - 4.) / 2.);
-
-		String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
-		String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getPhysicsUnitSymbol();
-		String ch_name = expDataModel.getChannelConfig(channelIndex).getChannelName();
+		
+		String bundleName = expDataModel.getApparatusBundleName();
+		String multiplier = ReCChannelResourceUtil.findMultiplier(bundleName, channelIndex);
+		if (multiplier == null) {
+			multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
+		}
+		String ph_unit_symbol = ReCChannelResourceUtil.findPhysicsUnitSymbol(bundleName, channelIndex);
+		if (ph_unit_symbol == null) {
+			ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getPhysicsUnitSymbol();
+		}
+		String ch_name = ReCChannelResourceUtil.findName(bundleName, channelIndex);
+		if (ch_name == null) {
+			ch_name = expDataModel.getChannelConfig(channelIndex).getChannelName();
+		}
 
 		String retorna = ch_name + " [" + multiplier + ph_unit_symbol + "]";
 

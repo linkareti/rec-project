@@ -27,6 +27,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.i18n.ReCChannelResourceUtil;
 
 /**
  * 
@@ -133,11 +134,20 @@ public class DefaultExperimentTimeSeriesGraph extends javax.swing.JPanel impleme
 		timeAxis.setAutoRangeIncludesZero(false);
 
 		for (int i = 0; i < header.getChannelsConfig().length; i++) {
-
+			
 			Scale scale = header.getChannelsConfig(i).getSelectedScale();
-			String chn = header.getChannelsConfig(i).getChannelName();
-			String pus = scale.getPhysicsUnitSymbol();
-			String multiplier = scale.getMultiplier().toString();
+			String chn = ReCChannelResourceUtil.findName(header.getFamiliarName(), i);
+			if (chn == null) {
+				chn = header.getChannelsConfig(i).getChannelName();
+			}
+			String pus = ReCChannelResourceUtil.findPhysicsUnitSymbol(header.getFamiliarName(), i);
+			if (pus == null) {
+				pus = scale.getPhysicsUnitSymbol();
+			}
+			String multiplier = ReCChannelResourceUtil.findMultiplier(header.getFamiliarName(), i);
+			if (multiplier == null) {
+				multiplier = scale.getMultiplier().toString();
+			}
 
 			NumberAxis valueAxis = new NumberAxis(chn + " [" + multiplier + pus + "]");
 			valueAxis.setAutoRange(true);
