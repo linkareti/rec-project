@@ -108,7 +108,7 @@
 	</ChannelInfo>
 
 	<ChannelInfo name="optica$rec.exp.optica.hardwareinfo.channel.2.name" independent="false" direction="CHANNEL_INPUT">
-		<scale label="optica$rec.exp.optica.hardwareinfo.channel.2.label" physicsunitname="Lux" physicsunitsymbol="optica$rec.exp.optica.hardwareinfo.channel.2.physicsunitname" multiplier="none" selected="true">
+		<scale label="optica$rec.exp.optica.hardwareinfo.channel.2.label" physicsunitname="optica$rec.exp.optica.hardwareinfo.channel.2.physicsunitname" physicsunitsymbol="Lux" multiplier="none" selected="true">
 			<min><PhysicsVal type="int">0</PhysicsVal></min>
 			<max><PhysicsVal type="int">4095</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>
