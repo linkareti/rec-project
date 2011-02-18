@@ -2,7 +2,7 @@
 
 
 //Configuration bits
-_FOSC(CSW_FSCM_OFF & XT_PLL4);  //oscilator
+_FOSC(CSW_FSCM_OFF & XT_PLL16);  //oscilator
 //_FWDT(WDT_ON & WDTPSA_512 & WDTPSB_16);  //watchdog timer (interval of ~ 16s)
 _FWDT(WDT_OFF);
 
@@ -11,8 +11,7 @@ int main(){
 	
 	TRISB=0x0000;	
 	ADPCFG=0xFFFF;
-	config_uart2();
-	open_timer1_for_communication();
+	configure_uart2();
 	open_motor();
 	open_motor2();
 	open_servo();
@@ -22,13 +21,22 @@ int main(){
 	LASER_TRIS = OUTPUT;
 	LASER = OFF;
 
-	sprintf(state,"UNKNOWN");
-	rec_generic_driver();
-
+	//Calibracao dos motores
 	ClrWdt();
 	calibrate_motor2();
 	ClrWdt();
 	calibrate_motor();
+
+	//inicia no estado STOPED
+	sprintf(state,"STOPED");
+	//No caso de ter havido um reset
+	rec_generic_driver();
+	//Importante iniciar somente depois do rec_generic_driver
+	//Para que não haja msg de IDS antes de ter corrido pelo
+	//menos uma vez o rec_generic_driver.
+	open_timer1_for_communication();
+
+
 
 	while(1){
 

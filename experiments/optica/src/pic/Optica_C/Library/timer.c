@@ -64,7 +64,7 @@ void open_timer1_for_communication(void){	// Timer1
 						// 1-External clock from pin T1CK
 
 //PR1: 16-bit period register associated with the timer
-	PR1=28800;	//Ciclos correspondente ao tempo de 1 segundo para XT_PLL4
+	PR1=0xFFFF;	//Ciclos correspondente ao tempo de aprox. 0.5 segundo para XT_PLL16
 
 //Timer Interrupts configuration
 	_T1IF=0;	// 0-Interrupt request has not occurred

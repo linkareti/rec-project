@@ -22,27 +22,6 @@ void walk_motor2(unsigned int way, unsigned int steps, unsigned int delay){ //th
     }
   MOTOR2_LAT&=MOTOR2_BITS_LOW; //put MOTOR pins LOW (motor stoped)
 }
-/*
-void walk_motor2_to(unsigned int to, unsigned int delay){  //the motor walks to the position to
-   unsigned int i;
-   char way;
-   if(!to) i=POSITION2_MAX;  //if to==0, motor walks until the END_CURSE
-   else  i=motor2_actual_position;
-   if(to>POSITION2_MAX) to=POSITION2_MAX;
-   if(i<to) way=1;
-   else way=-1; 
-   while((!END_CURSE2 || way==1) && i!=to){
-    MOTOR2_LAT=(MOTOR2_LAT&MOTOR2_BITS_LOW)+(step[UP_WAY2][i%8]<<MOTOR2_FIRST_BIT); //walks the following step
-    i+=way;
-    delay_100ys(delay);
-	if(!END_CURSE2) _LATB4 = 1;
-	else _LATB4 = 0;
-   }
-   MOTOR2_LAT&=MOTOR2_BITS_LOW; //put MOTOR pins LOW (motor stoped)
-   if(!END_CURSE2 && way==-1) motor2_actual_position=0;  //actual position is calibrated in the END_CURSE
-   else motor2_actual_position=i;
-}
-*/
 
 void walk_motor2_to(unsigned int to, unsigned int delay){
 	int limit = 0;
@@ -80,7 +59,6 @@ void walk_motor2_to(unsigned int to, unsigned int delay){
    	}
 	if(limit == 1) real_position2 -= way;
 	MOTOR2_LAT &= MOTOR2_BITS_LOW; //put MOTOR pins LOW (motor stoped)
-	//printf("real_position2: %d\r", real_position2);
 }
 
 void calibrate_motor2(){

@@ -1,4 +1,4 @@
-Microchip Technology Inc, vv3_20 (B) P
+Microchip Technology Inc, vv3_24 (A) >
 
 Tool Name:
   c:\programas\microchip\mplab c30\bin\bin\..\bin/pic30-coff-ld.exe
@@ -24,10 +24,10 @@ Command:
   step_motor.o \
   step_motor2.o \
   timer.o \
-  uart_stdio.o \
   optica_exp.o \
   protocolos.o \
   maq_de_estados.o \
+  uart.o \
   -LC:\Program Files\Microchip\MPLAB C30\lib \
   -Tp30F4013.gld.00 \
   --defsym=__MPLAB_BUILD=1 \
@@ -42,20 +42,12 @@ Command:
 
 Archive member included because of file (symbol)
 
-c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(CloseUART2.o)
-                              uart_stdio.o (CloseUART2)
-c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(ConfigIntUART2.o)
-                              uart_stdio.o (ConfigIntUART2)
-c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(OpenUART2.o)
-                              uart_stdio.o (OpenUART2)
 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(ReadUART2.o)
-                              uart_stdio.o (ReadUART2)
-c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(DataRdyUART2.o)
-                              uart_stdio.o (DataRdyUART2)
+                              uart.o (ReadUART2)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
                               (_resetPRI)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(c30_uart.o)
-                              uart_stdio.o (__C30_UART)
+                              uart.o (__C30_UART)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o) (_data_init_standard)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsisf.o)
@@ -63,7 +55,7 @@ c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsisf.o)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsf3.o)
                               step_motor.o (__divsf3)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(addsf3.o)
-                              step_motor.o (__addsf3)
+                              protocolos.o (__subsf3)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixsfsi.o)
                               step_motor.o (__fixsfsi)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsf3.o)
@@ -84,26 +76,26 @@ c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixsfsi.o) (_funpack)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fcompare.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(feqltle.o) (_fcompare)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.io)
-                              rec_generic_driver.o (_iprintf)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.o)
+                              rec_generic_driver.o (printf)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strcmp.o)
+                              rec_generic_driver.o (strcmp)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strncmp.o)
                               rec_generic_driver.o (strncmp)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.o)
-                              protocolos.o (printf)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strcmp.o)
-                              maq_de_estados.o (strcmp)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(sscanf.o)
-                              maq_de_estados.o (sscanf)
+                              rec_generic_driver.o (sscanf)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.io)
+                              step_motor.o (_iprintf)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fwrite.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.io) (fwrite)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.o) (fwrite)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xfiles.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.io) (_Stdout)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.io)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.io) (__iPrintf)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.o) (_Stdout)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.o) (_Printf)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xscanf.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(sscanf.o) (_Scanf)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.io)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.io) (__iPrintf)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xfwprep.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fwrite.o) (_Fwprep)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(memchr.o)
@@ -113,29 +105,29 @@ c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(memcpy.o)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fflush.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fwrite.o) (_DNKfflush)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xvacopy.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.io) (_Vacopy)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o) (_Vacopy)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strchr.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.io) (strchr)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.io)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.io) (__iPutfld)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputtxt.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.io) (_Puttxt)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o) (strchr)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o) (_Putfld)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputtxt.o)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o) (_Puttxt)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(isspace.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xscanf.o) (isspace)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfld.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xscanf.o) (_Getfld)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.io)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.io) (__iPutfld)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(malloc.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xfwprep.o) (malloc)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fclose.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xfwprep.o) (_Closreg)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.io) (_Litob)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strlen.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.io) (strlen)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.o) (_Ldtob)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.o) (_Litob)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strlen.o)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.o) (strlen)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetint.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfld.o) (_Getint)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfloa.o)
@@ -194,18 +186,6 @@ c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(brk.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(sbrk.o) (brk)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(extendsfdf.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.o) (__extendsfdf2)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(umodsi3.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__umodsi3)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(udivsi3.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__udivsi3)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsi3.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__divsi3)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsi3.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__mulsi3)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divmoddi3.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__udivdi3)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldi3.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__muldi3)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(deqltle.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtento.o) (__eqdf2)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixdfsi.o)
@@ -216,16 +196,26 @@ c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(subdf3.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o) (__subdf3)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dgtge.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o) (__gtdf2)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsi3.o)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o) (__divsi3)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldf3.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o) (__muldf3)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divdf3.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o) (__divdf3)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(umodsi3.o)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__umodsi3)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(udivsi3.o)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__udivsi3)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsi3.o)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__mulsi3)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divmoddi3.o)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__udivdi3)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldi3.o)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o) (__muldi3)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(truncdfsf.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfloa.o) (__truncdfsf2)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(adddf3.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstold.o) (__adddf3)
-c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(umuldi3.o)
-                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldi3.o) (__umuldi3)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dcompare.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(deqltle.o) (_dcompare)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dunpack.o)
@@ -236,6 +226,8 @@ c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatdidf.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsidf.o) (__floatdidf)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dpack.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldf3.o) (_dpack)
+c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(umuldi3.o)
+                              c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldi3.o) (__umuldi3)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dtype.o)
                               c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dcompare.o) (_dtype)
 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dpropagateNaN.o)
@@ -246,120 +238,126 @@ Program Memory  [Origin = 0x100, Length = 0x7f00]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x100              0x3c42          0x5a63  (23139)
-.const                      0x3d42               0x132           0x1cb  (459)
-.text                       0x3e74               0xad2          0x103b  (4155)
-.dinit                      0x4946               0x292           0x3db  (987)
-.text                       0x4bd8               0x768           0xb1c  (2844)
-.isr                        0x5340                 0x2             0x3  (3)
+.text                        0x100              0x3bda          0x59c7  (22983)
+.const                      0x3cda               0x182           0x243  (579)
+.text                       0x3e5c               0xd20          0x13b0  (5040)
+.dinit                      0x4b7c               0x284           0x3c6  (966)
+.text                       0x4e00               0x68a           0x9cf  (2511)
+.isr                        0x548a                 0x2             0x3  (3)
 
-                     Total program memory used (bytes):         0x7b63  (31587) 64%
+                     Total program memory used (bytes):         0x7d52  (32082) 65%
 
 
 Data Memory  [Origin = 0x800, Length = 0x800]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0            0xec  (236)
-.ndata                       0x8ec                   0             0x6  (6)
-.nbss                        0x8f2                   0             0x6  (6)
-.ndata                       0x8f8                   0             0xa  (10)
-.data                        0x902                   0           0x162  (354)
-.dconst                      0xa64                   0            0x32  (50)
-.data                        0xa96                   0            0xe0  (224)
-.dconst                      0xb76                   0            0x14  (20)
-.data                        0xb8a                   0             0xc  (12)
-.bss                         0xb96                   0             0x2  (2)
-.data                        0xb98                   0             0x2  (2)
-.dconst                      0xb9a                   0             0x2  (2)
-.data                        0xb9c                   0             0x2  (2)
-.bss                         0xb9e                   0             0x2  (2)
-.heap                        0xba0                   0            0x80  (128)
+.nbss                        0x800                   0           0x130  (304)
+.ndata                       0x930                   0             0xc  (12)
+.nbss                        0x93c                   0             0x6  (6)
+.ndata                       0x942                   0             0x4  (4)
+.data                        0x946                   0           0x162  (354)
+.dconst                      0xaa8                   0            0x32  (50)
+.data                        0xada                   0            0xe0  (224)
+.dconst                      0xbba                   0            0x14  (20)
+.data                        0xbce                   0             0xc  (12)
+.bss                         0xbda                   0             0x2  (2)
+.data                        0xbdc                   0             0x2  (2)
+.dconst                      0xbde                   0             0x2  (2)
+.data                        0xbe0                   0             0x2  (2)
+.bss                         0xbe2                   0             0x2  (2)
+.heap                        0xbe4                   0            0x80  (128)
 
-                        Total data memory used (bytes):          0x420  (1056) 51%
+                        Total data memory used (bytes):          0x464  (1124) 54%
 
 
 Dynamic Memory Usage
 
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
-heap                         0xba0                                0x80  (128)
-stack                        0xc20                               0x3e0  (992)
+heap                         0xbe4                                0x80  (128)
+stack                        0xc64                               0x39c  (924)
 
-                        Maximum dynamic memory (bytes):          0x460  (1120)
+                        Maximum dynamic memory (bytes):          0x41c  (1052)
 
 
 External Symbols in Data Memory (by address):
 
                     0x0800                  _state
                     0x0814                  _parameters
-                    0x0878                  _Serial
-                    0x08ca                  _param_1_aux
-                    0x08ce                  _angle
-                    0x08d0                  _angle_2
-                    0x08d2                  _adc_value
-                    0x08d4                  _param_4_aux
-                    0x08d8                  _param_2_aux
-                    0x08dc                  _param_1
-                    0x08e0                  _param_2
-                    0x08e4                  _param_3
-                    0x08e8                  _param_4
-                    0x08ec                  _motor_actual_position
-                    0x08ee                  _real_position
-                    0x08f0                  _last_way
-                    0x08f2                  _motor2_actual_position
-                    0x08f4                  _last_way2
-                    0x08f6                  _real_position2
-                    0x08f8                  _stop
-                    0x08fa                  _reset
-                    0x08fc                  _angle_2_min
-                    0x0900                  _protocolo
-                    0x0902                  __Files
-                    0x0912                  __Stderr
-                    0x093a                  __Stdout
-                    0x0962                  __Stdin
-                    0x0b8a                  __Size_block
-                    0x0b8c                  __Aldata
-                    0x0b90                  __Tls_setup_errno
-                    0x0b92                  _errno
-                    0x0b94                  ___C30_UART
-                    0x0b9e                  ___curbrk
+                    0x08b4                  _param_1
+                    0x08b8                  _param_2
+                    0x08bc                  _param_3
+                    0x08c0                  _param_4
+                    0x08c4                  _param_5
+                    0x08c6                  _param_6
+                    0x08ca                  _param_7
+                    0x08cc                  _Serial
+                    0x091e                  _param_1_aux
+                    0x0922                  _angle
+                    0x0924                  _angle_2
+                    0x0926                  _adc_value
+                    0x0928                  _param_4_aux
+                    0x092c                  _param_2_aux
+                    0x0930                  _stop
+                    0x0932                  _time_out
+                    0x0934                  _protocolo
+                    0x0936                  _motor_actual_position
+                    0x0938                  _real_position
+                    0x093a                  _last_way
+                    0x093c                  _motor2_actual_position
+                    0x093e                  _last_way2
+                    0x0940                  _real_position2
+                    0x0942                  _angle_2_min
+                    0x0946                  __Files
+                    0x0956                  __Stderr
+                    0x097e                  __Stdout
+                    0x09a6                  __Stdin
+                    0x0bce                  __Size_block
+                    0x0bd0                  __Aldata
+                    0x0bd4                  __Tls_setup_errno
+                    0x0bd6                  _errno
+                    0x0bd8                  ___C30_UART
+                    0x0be2                  ___curbrk
 
 External Symbols in Data Memory (by name):
 
-                    0x0878                  _Serial
-                    0x0b8c                  __Aldata
-                    0x0902                  __Files
-                    0x0b8a                  __Size_block
-                    0x0912                  __Stderr
-                    0x0962                  __Stdin
-                    0x093a                  __Stdout
-                    0x0b90                  __Tls_setup_errno
-                    0x0b94                  ___C30_UART
-                    0x0b9e                  ___curbrk
-                    0x08d2                  _adc_value
-                    0x08ce                  _angle
-                    0x08d0                  _angle_2
-                    0x08fc                  _angle_2_min
-                    0x0b92                  _errno
-                    0x08f0                  _last_way
-                    0x08f4                  _last_way2
-                    0x08f2                  _motor2_actual_position
-                    0x08ec                  _motor_actual_position
-                    0x08dc                  _param_1
-                    0x08ca                  _param_1_aux
-                    0x08e0                  _param_2
-                    0x08d8                  _param_2_aux
-                    0x08e4                  _param_3
-                    0x08e8                  _param_4
-                    0x08d4                  _param_4_aux
+                    0x08cc                  _Serial
+                    0x0bd0                  __Aldata
+                    0x0946                  __Files
+                    0x0bce                  __Size_block
+                    0x0956                  __Stderr
+                    0x09a6                  __Stdin
+                    0x097e                  __Stdout
+                    0x0bd4                  __Tls_setup_errno
+                    0x0bd8                  ___C30_UART
+                    0x0be2                  ___curbrk
+                    0x0926                  _adc_value
+                    0x0922                  _angle
+                    0x0924                  _angle_2
+                    0x0942                  _angle_2_min
+                    0x0bd6                  _errno
+                    0x093a                  _last_way
+                    0x093e                  _last_way2
+                    0x093c                  _motor2_actual_position
+                    0x0936                  _motor_actual_position
+                    0x08b4                  _param_1
+                    0x091e                  _param_1_aux
+                    0x08b8                  _param_2
+                    0x092c                  _param_2_aux
+                    0x08bc                  _param_3
+                    0x08c0                  _param_4
+                    0x0928                  _param_4_aux
+                    0x08c4                  _param_5
+                    0x08c6                  _param_6
+                    0x08ca                  _param_7
                     0x0814                  _parameters
-                    0x0900                  _protocolo
-                    0x08ee                  _real_position
-                    0x08f6                  _real_position2
-                    0x08fa                  _reset
+                    0x0934                  _protocolo
+                    0x0938                  _real_position
+                    0x0940                  _real_position2
                     0x0800                  _state
-                    0x08f8                  _stop
+                    0x0930                  _stop
+                    0x0932                  _time_out
 
 External Symbols in Program Memory (by address):
 
@@ -367,16 +365,16 @@ External Symbols in Program Memory (by address):
                   0x000122                  __psv_init
                   0x000132                  __data_init
                   0x000132                  __data_init_standard
-                  0x0001a0                  _strncmp
-                  0x0001c4                  printf.o:_prout
-                  0x0001de                  __iprintf
-                  0x0001de                  _printf
-                  0x0001ee                  _strcmp
+                  0x0001a0                  printf.o:_prout
+                  0x0001ba                  _printf
+                  0x0001ba                  __iprintf
+                  0x0001ca                  _strcmp
+                  0x0001ee                  _strncmp
                   0x000212                  sscanf.o:_scin
                   0x00022a                  _sscanf
                   0x00023c                  _fwrite
-                  0x0002e6                  ___iPrintf
                   0x0002e6                  __Printf
+                  0x0002e6                  ___iPrintf
                   0x000458                  __Scanf
                   0x0005e8                  __Fwprep
                   0x00066e                  _memchr
@@ -384,307 +382,301 @@ External Symbols in Program Memory (by address):
                   0x000690                  __DNKfflush
                   0x00070a                  __Vacopy
                   0x000714                  _strchr
-                  0x000726                  __Puttxt
-                  0x0008ba                  ___iPutfld
-                  0x0008ba                  __Putfld
+                  0x000726                  __Putfld
+                  0x000726                  ___iPutfld
+                  0x000a20                  __Puttxt
                   0x000bb4                  _isspace
                   0x000bc4                  __Getfld
                   0x000d1e                  _malloc
                   0x000dc2                  __Closreg
                   0x000dd6                  _fclose
                   0x000e5a                  fclose.o:_closeall
-                  0x000e72                  __Litob
-                  0x00118c                  _strlen
-                  0x00119a                  __Ldtob
-                  0x0015ec                  __Getint
-                  0x001862                  __Getfloat
-                  0x001eac                  __Getstr
-                  0x002086                  __Getmem
-                  0x002094                  _free
-                  0x0020fc                  __Atexit
-                  0x002116                  __LDunscale
-                  0x00216e                  __LDscale
-                  0x002260                  _ldiv
-                  0x00229a                  __Genld
-                  0x002502                  __Stoll
-                  0x0025b6                  __Stoull
-                  0x00277a                  _isalnum
-                  0x002796                  __Stold
-                  0x002906                  __Dnorm
-                  0x00299e                  _div
-                  0x0029b4                  __Geterrno
-                  0x0029c0                  _tolower
-                  0x0029ce                  __Stopfx
-                  0x002ad8                  __Stoflt
-                  0x002c9c                  __Stoxflt
-                  0x002eba                  __LDtento
-                  0x003000                  __Feraise
-                  0x0030ec                  ___mulsi3
-                  0x0030ec                  ___mulp32peds3
-                  0x0030ec                  ___mulp32eds3
-                  0x0030f8                  ___floatsisf
-                  0x00314e                  ___divsf3
-                  0x0031d2                  ___subsf3
-                  0x0031d4                  ___addsf3
-                  0x00328e                  ___fixsfsi
-                  0x0032d0                  ___mulsf3
-                  0x003338                  ___eqsf2
-                  0x003338                  ___lesf2
-                  0x003338                  ___ltsf2
-                  0x00333c                  ___gesf2
-                  0x00333c                  ___gtsf2
-                  0x003340                  ___fixunssfsi
-                  0x003376                  __fpack
-                  0x0033c2                  __funpack2
-                  0x0033d2                  __fPropagateNaN
-                  0x0033e4                  __fbopExit
-                  0x0033ec                  __fbopReturnNaN
-                  0x0033f2                  __funpack
-                  0x00341c                  __fcompare
-                  0x003452                  ___extendsfdf2
-                  0x003490                  ___umodsi3
-                  0x003496                  ___udivsi3
-                  0x0034b6                  ___divsi3
-                  0x0034fa                  ___udivmoddi3
-                  0x0035c8                  ___udivdi3
-                  0x0035d6                  ___umoddi3
-                  0x0035de                  ___divdi3
-                  0x003618                  ___moddi3
-                  0x0036ea                  ___muldi3
-                  0x003746                  ___ledf2
-                  0x003746                  ___ltdf2
-                  0x003746                  ___eqdf2
-                  0x003750                  ___fixdfsi
-                  0x0037a8                  ___floatsidf
-                  0x0037ae                  ___subdf3
-                  0x0037b2                  ___gtdf2
-                  0x0037b2                  ___gedf2
-                  0x0037bc                  ___muldf3
-                  0x0038a6                  ___divdf3
-                  0x00395a                  ___truncdfsf2
-                  0x0039b0                  ___adddf3
-                  0x003aaa                  ___umuldi3
-                  0x003aee                  __dcompare
-                  0x003b40                  __dunpack
-                  0x003b8e                  __dunpack2
-                  0x003bb0                  __dreturnNaN
-                  0x003bb6                  __dunpack2exit
-                  0x003bc0                  ___floatdidf
-                  0x003c2e                  __dpack
-                  0x003c86                  __dtype
-                  0x003caa                  __dPropagateNaN
-                  0x003cc6                  _CloseUART2
-                  0x003cd2                  _ConfigIntUART2
-                  0x003d22                  _OpenUART2
-                  0x003d2a                  _ReadUART2
-                  0x003d3c                  _DataRdyUART2
-                  0x003e4c                  _step
-                  0x003e74                  _protocolo_1_configuring
-                  0x003ea0                  _protocolo_2_configuring
-                  0x003f46                  _protocolo_3_configuring
-                  0x003fb2                  _protocolo_4_configuring
-                  0x004056                  _protocolo_1_starting
-                  0x00405e                  _protocolo_2_starting
-                  0x004066                  _protocolo_3_starting
-                  0x00406e                  _protocolo_4_starting
-                  0x004076                  _protocolo_1_started
-                  0x004110                  _protocolo_2_started
-                  0x004178                  _protocolo_3_started
-                  0x004252                  _protocolo_4_started
-                  0x00432c                  _protocolo_5_started
-                  0x004336                  _open_motor2
-                  0x004352                  _walk_motor2
-                  0x004392                  _walk_motor2_to
-                  0x0044de                  _calibrate_motor2
-                  0x0045f0                  _motor2_compensation
-                  0x004660                  _open_motor
-                  0x00467a                  _walk_motor
-                  0x0046c2                  _walk_motor_to
-                  0x0047fe                  _calibrate_motor
-                  0x0048d6                  _motor_compensation
-                  0x004bd8                  _maq_de_estados
-                  0x004de2                  _rec_generic_driver
-                  0x004fe0                  _config_uart2
-                  0x005008                  _command_received
-                  0x005050                  __U2RXInterrupt
-                  0x0050dc                  _configure_adc
-                  0x005148                  _configure_adc_channel
-                  0x005172                  _read_adc
-                  0x0051a4                  _main
-                  0x0051da                  _angle_1_conversion
-                  0x0051f8                  _conv_angle_1
-                  0x005212                  _angle_2_conversion
-                  0x005230                  _conv_angle_2
-                  0x00524a                  _delay_ms
-                  0x00526c                  _delay_100ys
-                  0x00528e                  _delay_10ys
-                  0x0052b0                  _open_timer1
-                  0x0052e4                  _open_timer1_for_communication
-                  0x005314                  _open_servo
-                  0x00531e                  _move_servo
-                  0x005340                  __DefaultInterrupt
+                  0x000e72                  __Ldtob
+                  0x0012c4                  __Litob
+                  0x0015d6                  _strlen
+                  0x0015e4                  __Getint
+                  0x00185a                  __Getfloat
+                  0x001ea4                  __Getstr
+                  0x00207e                  __Getmem
+                  0x00208c                  _free
+                  0x0020f4                  __Atexit
+                  0x00210e                  __LDunscale
+                  0x002166                  __LDscale
+                  0x00225c                  _ldiv
+                  0x002296                  __Genld
+                  0x0024fe                  __Stoll
+                  0x0025b2                  __Stoull
+                  0x002776                  _isalnum
+                  0x002792                  __Stold
+                  0x002902                  __Dnorm
+                  0x00299a                  _div
+                  0x0029b0                  __Geterrno
+                  0x0029bc                  _tolower
+                  0x0029ca                  __Stopfx
+                  0x002ad4                  __Stoflt
+                  0x002c98                  __Stoxflt
+                  0x002eb6                  __LDtento
+                  0x002ffc                  __Feraise
+                  0x0030ee                  ___mulsi3
+                  0x0030ee                  ___mulp32peds3
+                  0x0030ee                  ___mulp32eds3
+                  0x0030fa                  ___floatsisf
+                  0x003150                  ___divsf3
+                  0x0031d4                  ___subsf3
+                  0x0031d6                  ___addsf3
+                  0x003290                  ___fixsfsi
+                  0x0032d2                  ___mulsf3
+                  0x00333a                  ___lesf2
+                  0x00333a                  ___ltsf2
+                  0x00333a                  ___eqsf2
+                  0x00333e                  ___gtsf2
+                  0x00333e                  ___gesf2
+                  0x003342                  ___fixunssfsi
+                  0x003378                  __fpack
+                  0x0033c4                  __funpack2
+                  0x0033d4                  __fPropagateNaN
+                  0x0033e6                  __fbopExit
+                  0x0033ee                  __fbopReturnNaN
+                  0x0033f4                  __funpack
+                  0x00341e                  __fcompare
+                  0x003454                  ___extendsfdf2
+                  0x003492                  ___ledf2
+                  0x003492                  ___ltdf2
+                  0x003492                  ___eqdf2
+                  0x00349c                  ___fixdfsi
+                  0x0034f4                  ___floatsidf
+                  0x0034fa                  ___subdf3
+                  0x0034fe                  ___gtdf2
+                  0x0034fe                  ___gedf2
+                  0x003508                  ___divsi3
+                  0x003526                  ___muldf3
+                  0x003610                  ___divdf3
+                  0x0036c4                  ___umodsi3
+                  0x0036ca                  ___udivsi3
+                  0x003710                  ___udivmoddi3
+                  0x0037de                  ___udivdi3
+                  0x0037ec                  ___umoddi3
+                  0x0037f4                  ___divdi3
+                  0x00382e                  ___moddi3
+                  0x003900                  ___muldi3
+                  0x00395c                  ___truncdfsf2
+                  0x0039b2                  ___adddf3
+                  0x003aac                  __dcompare
+                  0x003afe                  __dunpack
+                  0x003b4c                  __dunpack2
+                  0x003b6e                  __dreturnNaN
+                  0x003b74                  __dunpack2exit
+                  0x003b7e                  ___floatdidf
+                  0x003bec                  __dpack
+                  0x003c44                  ___umuldi3
+                  0x003c88                  __dtype
+                  0x003cac                  __dPropagateNaN
+                  0x003cc8                  _ReadUART2
+                  0x003e2e                  _step
+                  0x003e5c                  _protocolo_1_configuring
+                  0x003e96                  _protocolo_2_configuring
+                  0x003f2a                  _protocolo_3_configuring
+                  0x003f9e                  _protocolo_4_configuring
+                  0x00404a                  _protocolo_1_starting
+                  0x004052                  _protocolo_2_starting
+                  0x00405a                  _protocolo_3_starting
+                  0x004062                  _protocolo_4_starting
+                  0x00406a                  _protocolo_1_started
+                  0x00410a                  _protocolo_2_started
+                  0x004172                  _protocolo_3_started
+                  0x00434e                  _protocolo_4_started
+                  0x00452a                  _protocolo_5_started
+                  0x004564                  _stopping
+                  0x00456c                  _open_motor2
+                  0x004588                  _walk_motor2
+                  0x0045c8                  _walk_motor2_to
+                  0x004714                  _calibrate_motor2
+                  0x004826                  _motor2_compensation
+                  0x004896                  _open_motor
+                  0x0048b0                  _walk_motor
+                  0x0048f8                  _walk_motor_to
+                  0x004a34                  _calibrate_motor
+                  0x004b0c                  _motor_compensation
+                  0x004e00                  _maq_de_estados
+                  0x004fa8                  _rec_generic_driver
+                  0x005120                  _configure_uart2
+                  0x00516a                  _command_received
+                  0x00519a                  __U2RXInterrupt
+                  0x00522a                  _configure_adc
+                  0x005296                  _configure_adc_channel
+                  0x0052bc                  _read_adc
+                  0x0052ee                  _main
+                  0x005324                  _angle_1_conversion
+                  0x005342                  _conv_angle_1
+                  0x00535c                  _angle_2_conversion
+                  0x00537a                  _conv_angle_2
+                  0x005394                  _delay_ms
+                  0x0053b6                  _delay_100ys
+                  0x0053d8                  _delay_10ys
+                  0x0053fa                  _open_timer1
+                  0x00542e                  _open_timer1_for_communication
+                  0x00545e                  _open_servo
+                  0x005468                  _move_servo
+                  0x00548a                  __DefaultInterrupt
 
 External Symbols in Program Memory (by name):
 
-                  0x003cc6                  _CloseUART2
-                  0x003cd2                  _ConfigIntUART2
-                  0x003d3c                  _DataRdyUART2
-                  0x003d22                  _OpenUART2
-                  0x003d2a                  _ReadUART2
-                  0x0020fc                  __Atexit
+                  0x003cc8                  _ReadUART2
+                  0x0020f4                  __Atexit
                   0x000dc2                  __Closreg
                   0x000690                  __DNKfflush
-                  0x005340                  __DefaultInterrupt
-                  0x002906                  __Dnorm
-                  0x003000                  __Feraise
+                  0x00548a                  __DefaultInterrupt
+                  0x002902                  __Dnorm
+                  0x002ffc                  __Feraise
                   0x0005e8                  __Fwprep
-                  0x00229a                  __Genld
-                  0x0029b4                  __Geterrno
+                  0x002296                  __Genld
+                  0x0029b0                  __Geterrno
                   0x000bc4                  __Getfld
-                  0x001862                  __Getfloat
-                  0x0015ec                  __Getint
-                  0x002086                  __Getmem
-                  0x001eac                  __Getstr
-                  0x00216e                  __LDscale
-                  0x002eba                  __LDtento
-                  0x002116                  __LDunscale
-                  0x00119a                  __Ldtob
-                  0x000e72                  __Litob
+                  0x00185a                  __Getfloat
+                  0x0015e4                  __Getint
+                  0x00207e                  __Getmem
+                  0x001ea4                  __Getstr
+                  0x002166                  __LDscale
+                  0x002eb6                  __LDtento
+                  0x00210e                  __LDunscale
+                  0x000e72                  __Ldtob
+                  0x0012c4                  __Litob
                   0x0002e6                  __Printf
-                  0x0008ba                  __Putfld
-                  0x000726                  __Puttxt
+                  0x000726                  __Putfld
+                  0x000a20                  __Puttxt
                   0x000458                  __Scanf
-                  0x002ad8                  __Stoflt
-                  0x002796                  __Stold
-                  0x002502                  __Stoll
-                  0x0029ce                  __Stopfx
-                  0x0025b6                  __Stoull
-                  0x002c9c                  __Stoxflt
-                  0x005050                  __U2RXInterrupt
+                  0x002ad4                  __Stoflt
+                  0x002792                  __Stold
+                  0x0024fe                  __Stoll
+                  0x0029ca                  __Stopfx
+                  0x0025b2                  __Stoull
+                  0x002c98                  __Stoxflt
+                  0x00519a                  __U2RXInterrupt
                   0x00070a                  __Vacopy
-                  0x0039b0                  ___adddf3
-                  0x0031d4                  ___addsf3
-                  0x0038a6                  ___divdf3
-                  0x0035de                  ___divdi3
-                  0x00314e                  ___divsf3
-                  0x0034b6                  ___divsi3
-                  0x003746                  ___eqdf2
-                  0x003338                  ___eqsf2
-                  0x003452                  ___extendsfdf2
-                  0x003750                  ___fixdfsi
-                  0x00328e                  ___fixsfsi
-                  0x003340                  ___fixunssfsi
-                  0x003bc0                  ___floatdidf
-                  0x0037a8                  ___floatsidf
-                  0x0030f8                  ___floatsisf
-                  0x0037b2                  ___gedf2
-                  0x00333c                  ___gesf2
-                  0x0037b2                  ___gtdf2
-                  0x00333c                  ___gtsf2
+                  0x0039b2                  ___adddf3
+                  0x0031d6                  ___addsf3
+                  0x003610                  ___divdf3
+                  0x0037f4                  ___divdi3
+                  0x003150                  ___divsf3
+                  0x003508                  ___divsi3
+                  0x003492                  ___eqdf2
+                  0x00333a                  ___eqsf2
+                  0x003454                  ___extendsfdf2
+                  0x00349c                  ___fixdfsi
+                  0x003290                  ___fixsfsi
+                  0x003342                  ___fixunssfsi
+                  0x003b7e                  ___floatdidf
+                  0x0034f4                  ___floatsidf
+                  0x0030fa                  ___floatsisf
+                  0x0034fe                  ___gedf2
+                  0x00333e                  ___gesf2
+                  0x0034fe                  ___gtdf2
+                  0x00333e                  ___gtsf2
                   0x0002e6                  ___iPrintf
-                  0x0008ba                  ___iPutfld
-                  0x003746                  ___ledf2
-                  0x003338                  ___lesf2
-                  0x003746                  ___ltdf2
-                  0x003338                  ___ltsf2
-                  0x003618                  ___moddi3
-                  0x0037bc                  ___muldf3
-                  0x0036ea                  ___muldi3
-                  0x0030ec                  ___mulp32eds3
-                  0x0030ec                  ___mulp32peds3
-                  0x0032d0                  ___mulsf3
-                  0x0030ec                  ___mulsi3
-                  0x0037ae                  ___subdf3
-                  0x0031d2                  ___subsf3
-                  0x00395a                  ___truncdfsf2
-                  0x0035c8                  ___udivdi3
-                  0x0034fa                  ___udivmoddi3
-                  0x003496                  ___udivsi3
-                  0x0035d6                  ___umoddi3
-                  0x003490                  ___umodsi3
-                  0x003aaa                  ___umuldi3
-                  0x003caa                  __dPropagateNaN
+                  0x000726                  ___iPutfld
+                  0x003492                  ___ledf2
+                  0x00333a                  ___lesf2
+                  0x003492                  ___ltdf2
+                  0x00333a                  ___ltsf2
+                  0x00382e                  ___moddi3
+                  0x003526                  ___muldf3
+                  0x003900                  ___muldi3
+                  0x0030ee                  ___mulp32eds3
+                  0x0030ee                  ___mulp32peds3
+                  0x0032d2                  ___mulsf3
+                  0x0030ee                  ___mulsi3
+                  0x0034fa                  ___subdf3
+                  0x0031d4                  ___subsf3
+                  0x00395c                  ___truncdfsf2
+                  0x0037de                  ___udivdi3
+                  0x003710                  ___udivmoddi3
+                  0x0036ca                  ___udivsi3
+                  0x0037ec                  ___umoddi3
+                  0x0036c4                  ___umodsi3
+                  0x003c44                  ___umuldi3
+                  0x003cac                  __dPropagateNaN
                   0x000132                  __data_init
                   0x000132                  __data_init_standard
-                  0x003aee                  __dcompare
-                  0x003c2e                  __dpack
-                  0x003bb0                  __dreturnNaN
-                  0x003c86                  __dtype
-                  0x003b40                  __dunpack
-                  0x003b8e                  __dunpack2
-                  0x003bb6                  __dunpack2exit
-                  0x0033d2                  __fPropagateNaN
-                  0x0033e4                  __fbopExit
-                  0x0033ec                  __fbopReturnNaN
-                  0x00341c                  __fcompare
-                  0x003376                  __fpack
-                  0x0033f2                  __funpack
-                  0x0033c2                  __funpack2
-                  0x0001de                  __iprintf
+                  0x003aac                  __dcompare
+                  0x003bec                  __dpack
+                  0x003b6e                  __dreturnNaN
+                  0x003c88                  __dtype
+                  0x003afe                  __dunpack
+                  0x003b4c                  __dunpack2
+                  0x003b74                  __dunpack2exit
+                  0x0033d4                  __fPropagateNaN
+                  0x0033e6                  __fbopExit
+                  0x0033ee                  __fbopReturnNaN
+                  0x00341e                  __fcompare
+                  0x003378                  __fpack
+                  0x0033f4                  __funpack
+                  0x0033c4                  __funpack2
+                  0x0001ba                  __iprintf
                   0x000122                  __psv_init
                   0x000100                  __resetPRI
-                  0x0051da                  _angle_1_conversion
-                  0x005212                  _angle_2_conversion
-                  0x0047fe                  _calibrate_motor
-                  0x0044de                  _calibrate_motor2
-                  0x005008                  _command_received
-                  0x004fe0                  _config_uart2
-                  0x0050dc                  _configure_adc
-                  0x005148                  _configure_adc_channel
-                  0x0051f8                  _conv_angle_1
-                  0x005230                  _conv_angle_2
-                  0x00526c                  _delay_100ys
-                  0x00528e                  _delay_10ys
-                  0x00524a                  _delay_ms
-                  0x00299e                  _div
+                  0x005324                  _angle_1_conversion
+                  0x00535c                  _angle_2_conversion
+                  0x004a34                  _calibrate_motor
+                  0x004714                  _calibrate_motor2
+                  0x00516a                  _command_received
+                  0x00522a                  _configure_adc
+                  0x005296                  _configure_adc_channel
+                  0x005120                  _configure_uart2
+                  0x005342                  _conv_angle_1
+                  0x00537a                  _conv_angle_2
+                  0x0053b6                  _delay_100ys
+                  0x0053d8                  _delay_10ys
+                  0x005394                  _delay_ms
+                  0x00299a                  _div
                   0x000dd6                  _fclose
-                  0x002094                  _free
+                  0x00208c                  _free
                   0x00023c                  _fwrite
-                  0x00277a                  _isalnum
+                  0x002776                  _isalnum
                   0x000bb4                  _isspace
-                  0x002260                  _ldiv
-                  0x0051a4                  _main
+                  0x00225c                  _ldiv
+                  0x0052ee                  _main
                   0x000d1e                  _malloc
-                  0x004bd8                  _maq_de_estados
+                  0x004e00                  _maq_de_estados
                   0x00066e                  _memchr
                   0x000682                  _memcpy
-                  0x0045f0                  _motor2_compensation
-                  0x0048d6                  _motor_compensation
-                  0x00531e                  _move_servo
-                  0x004660                  _open_motor
-                  0x004336                  _open_motor2
-                  0x005314                  _open_servo
-                  0x0052b0                  _open_timer1
-                  0x0052e4                  _open_timer1_for_communication
-                  0x0001de                  _printf
-                  0x003e74                  _protocolo_1_configuring
-                  0x004076                  _protocolo_1_started
-                  0x004056                  _protocolo_1_starting
-                  0x003ea0                  _protocolo_2_configuring
-                  0x004110                  _protocolo_2_started
-                  0x00405e                  _protocolo_2_starting
-                  0x003f46                  _protocolo_3_configuring
-                  0x004178                  _protocolo_3_started
-                  0x004066                  _protocolo_3_starting
-                  0x003fb2                  _protocolo_4_configuring
-                  0x004252                  _protocolo_4_started
-                  0x00406e                  _protocolo_4_starting
-                  0x00432c                  _protocolo_5_started
-                  0x005172                  _read_adc
-                  0x004de2                  _rec_generic_driver
+                  0x004826                  _motor2_compensation
+                  0x004b0c                  _motor_compensation
+                  0x005468                  _move_servo
+                  0x004896                  _open_motor
+                  0x00456c                  _open_motor2
+                  0x00545e                  _open_servo
+                  0x0053fa                  _open_timer1
+                  0x00542e                  _open_timer1_for_communication
+                  0x0001ba                  _printf
+                  0x003e5c                  _protocolo_1_configuring
+                  0x00406a                  _protocolo_1_started
+                  0x00404a                  _protocolo_1_starting
+                  0x003e96                  _protocolo_2_configuring
+                  0x00410a                  _protocolo_2_started
+                  0x004052                  _protocolo_2_starting
+                  0x003f2a                  _protocolo_3_configuring
+                  0x004172                  _protocolo_3_started
+                  0x00405a                  _protocolo_3_starting
+                  0x003f9e                  _protocolo_4_configuring
+                  0x00434e                  _protocolo_4_started
+                  0x004062                  _protocolo_4_starting
+                  0x00452a                  _protocolo_5_started
+                  0x0052bc                  _read_adc
+                  0x004fa8                  _rec_generic_driver
                   0x00022a                  _sscanf
-                  0x003e4c                  _step
+                  0x003e2e                  _step
+                  0x004564                  _stopping
                   0x000714                  _strchr
-                  0x0001ee                  _strcmp
-                  0x00118c                  _strlen
-                  0x0001a0                  _strncmp
-                  0x0029c0                  _tolower
-                  0x00467a                  _walk_motor
-                  0x004352                  _walk_motor2
-                  0x004392                  _walk_motor2_to
-                  0x0046c2                  _walk_motor_to
+                  0x0001ca                  _strcmp
+                  0x0015d6                  _strlen
+                  0x0001ee                  _strncmp
+                  0x0029bc                  _tolower
+                  0x0048b0                  _walk_motor
+                  0x004588                  _walk_motor2
+                  0x0045c8                  _walk_motor2_to
+                  0x0048f8                  _walk_motor_to
                   0x000e5a                  fclose.o:_closeall
-                  0x0001c4                  printf.o:_prout
+                  0x0001a0                  printf.o:_prout
                   0x000212                  sscanf.o:_scin
 
 Memory Configuration
@@ -718,10 +710,10 @@ LOAD servo.o
 LOAD step_motor.o
 LOAD step_motor2.o
 LOAD timer.o
-LOAD uart_stdio.o
 LOAD optica_exp.o
 LOAD protocolos.o
 LOAD maq_de_estados.o
+LOAD uart.o
 LOAD c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a
                     0x0001                  __NO_HANDLES = 0x1
                     0xf80000                  __FOSC = 0xf80000
@@ -749,7 +741,7 @@ LOAD c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-cof
                   0x000002          0x2 SHORT 0x0 ((<code 339> (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000100       0x3c42
+.text             0x000100       0x3bda
  *(.init)
  .init            0x000100         0x32 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
                   0x000100                  _resetPRI
@@ -761,14 +753,14 @@ LOAD c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-cof
  *(.user_init)
  *(.handle)
  *(.libc)
- .libc            0x0001a0         0x24 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strncmp.o)
-                  0x0001a0                  strncmp
- .libc            0x0001c4         0x2a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.o)
-                  0x0001c4                  printf.o:_prout
-                  0x0001de                  printf
-                  0x0001de                  _iprintf
- .libc            0x0001ee         0x24 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strcmp.o)
-                  0x0001ee                  strcmp
+ .libc            0x0001a0         0x2a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.o)
+                  0x0001a0                  printf.o:_prout
+                  0x0001ba                  printf
+                  0x0001ba                  _iprintf
+ .libc            0x0001ca         0x24 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strcmp.o)
+                  0x0001ca                  strcmp
+ .libc            0x0001ee         0x24 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strncmp.o)
+                  0x0001ee                  strncmp
  .libc            0x000212         0x2a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(sscanf.o)
                   0x000212                  sscanf.o:_scin
                   0x00022a                  sscanf
@@ -791,11 +783,11 @@ LOAD c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-cof
                   0x00070a                  _Vacopy
  .libc            0x000714         0x12 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strchr.o)
                   0x000714                  strchr
- .libc            0x000726        0x194 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputtxt.o)
-                  0x000726                  _Puttxt
- .libc            0x0008ba        0x2fa c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.o)
-                  0x0008ba                  __iPutfld
-                  0x0008ba                  _Putfld
+ .libc            0x000726        0x2fa c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.o)
+                  0x000726                  __iPutfld
+                  0x000726                  _Putfld
+ .libc            0x000a20        0x194 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputtxt.o)
+                  0x000a20                  _Puttxt
  .libc            0x000bb4         0x10 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(isspace.o)
                   0x000bb4                  isspace
  .libc            0x000bc4        0x15a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfld.o)
@@ -806,172 +798,164 @@ LOAD c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-cof
                   0x000dc2                  _Closreg
                   0x000dd6                  fclose
                   0x000e5a                  fclose.o:_closeall
- .libc            0x000e72        0x31a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o)
-                  0x000e72                  _Litob
- .libc            0x00118c          0xe c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strlen.o)
-                  0x00118c                  strlen
- .libc            0x00119a        0x452 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o)
-                  0x00119a                  _Ldtob
- .libc            0x0015ec        0x276 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetint.o)
-                  0x0015ec                  _Getint
- .libc            0x001862        0x60e c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfloa.o)
-                  0x001862                  _Getfloat
- .libc            0x001e70        0x216 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetstr.o)
-                  0x001eac                  _Getstr
- .libc            0x002086          0xe c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetmem.o)
-                  0x002086                  _Getmem
- .libc            0x002094         0x68 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(free.o)
-                  0x002094                  free
- .libc            0x0020fc         0x1a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xatexit.o)
-                  0x0020fc                  _Atexit
- .libc            0x002116         0x58 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldunsca.o)
-                  0x002116                  _LDunscale
- .libc            0x00216e         0xf2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldscale.o)
-                  0x00216e                  _LDscale
- .libc            0x002260         0x3a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(ldiv.o)
-                  0x002260                  ldiv
- .libc            0x00229a        0x268 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgenld.o)
-                  0x00229a                  _Genld
- .libc            0x002502         0xb4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoll.o)
-                  0x002502                  _Stoll
- .libc            0x0025b6        0x1c4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoull.o)
-                  0x0025b6                  _Stoull
- .libc            0x00277a         0x1c c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(isalnum.o)
-                  0x00277a                  isalnum
- .libc            0x002796        0x170 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstold.o)
-                  0x002796                  _Stold
- .libc            0x002906         0x98 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xdnorm.o)
-                  0x002906                  _Dnorm
- .libc            0x00299e         0x16 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(div.o)
-                  0x00299e                  div
- .libc            0x0029b4          0xc c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(errno.o)
-                  0x0029b4                  _Geterrno
- .libc            0x0029c0          0xe c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(tolower.o)
-                  0x0029c0                  tolower
- .libc            0x0029ce        0x10a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstopfx.o)
-                  0x0029ce                  _Stopfx
- .libc            0x002ad8        0x1c4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoflt.o)
-                  0x002ad8                  _Stoflt
- .libc            0x002c9c        0x1ea c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoxflt.o)
-                  0x002c9c                  _Stoxflt
- .libc            0x002e86        0x17a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtento.o)
-                  0x002eba                  _LDtento
- .libc            0x003000         0x16 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xferaise.o)
-                  0x003000                  _Feraise
- .libc            0x003016         0x68 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(write.o)
-                  0x003016                  write
- .libc            0x00307e         0x12 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(close.o)
-                  0x00307e                  close
- .libc            0x003090         0x12 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(remove.o)
-                  0x003090                  remove
- .libc            0x0030a2         0x2c c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(sbrk.o)
-                  0x0030a2                  sbrk
- .libc            0x0030ce         0x1e c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(brk.o)
-                  0x0030ce                  brk
- .libc            0x0030ec          0xc c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsi3.o)
-                  0x0030ec                  __mulp32peds3
-                  0x0030ec                  __mulsi3
-                  0x0030ec                  __mulp32eds3
+ .libc            0x000e72        0x452 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o)
+                  0x000e72                  _Ldtob
+ .libc            0x0012c4        0x312 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o)
+                  0x0012c4                  _Litob
+ .libc            0x0015d6          0xe c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strlen.o)
+                  0x0015d6                  strlen
+ .libc            0x0015e4        0x276 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetint.o)
+                  0x0015e4                  _Getint
+ .libc            0x00185a        0x60e c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfloa.o)
+                  0x00185a                  _Getfloat
+ .libc            0x001e68        0x216 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetstr.o)
+                  0x001ea4                  _Getstr
+ .libc            0x00207e          0xe c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetmem.o)
+                  0x00207e                  _Getmem
+ .libc            0x00208c         0x68 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(free.o)
+                  0x00208c                  free
+ .libc            0x0020f4         0x1a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xatexit.o)
+                  0x0020f4                  _Atexit
+ .libc            0x00210e         0x58 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldunsca.o)
+                  0x00210e                  _LDunscale
+ .libc            0x002166         0xf6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldscale.o)
+                  0x002166                  _LDscale
+ .libc            0x00225c         0x3a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(ldiv.o)
+                  0x00225c                  ldiv
+ .libc            0x002296        0x268 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgenld.o)
+                  0x002296                  _Genld
+ .libc            0x0024fe         0xb4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoll.o)
+                  0x0024fe                  _Stoll
+ .libc            0x0025b2        0x1c4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoull.o)
+                  0x0025b2                  _Stoull
+ .libc            0x002776         0x1c c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(isalnum.o)
+                  0x002776                  isalnum
+ .libc            0x002792        0x170 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstold.o)
+                  0x002792                  _Stold
+ .libc            0x002902         0x98 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xdnorm.o)
+                  0x002902                  _Dnorm
+ .libc            0x00299a         0x16 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(div.o)
+                  0x00299a                  div
+ .libc            0x0029b0          0xc c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(errno.o)
+                  0x0029b0                  _Geterrno
+ .libc            0x0029bc          0xe c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(tolower.o)
+                  0x0029bc                  tolower
+ .libc            0x0029ca        0x10a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstopfx.o)
+                  0x0029ca                  _Stopfx
+ .libc            0x002ad4        0x1c4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoflt.o)
+                  0x002ad4                  _Stoflt
+ .libc            0x002c98        0x1ea c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoxflt.o)
+                  0x002c98                  _Stoxflt
+ .libc            0x002e82        0x17a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtento.o)
+                  0x002eb6                  _LDtento
+ .libc            0x002ffc         0x16 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xferaise.o)
+                  0x002ffc                  _Feraise
+ .libc            0x003012         0x6e c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(write.o)
+                  0x003012                  write
+ .libc            0x003080         0x12 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(close.o)
+                  0x003080                  close
+ .libc            0x003092         0x12 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(remove.o)
+                  0x003092                  remove
+ .libc            0x0030a4         0x2c c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(sbrk.o)
+                  0x0030a4                  sbrk
+ .libc            0x0030d0         0x1e c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(brk.o)
+                  0x0030d0                  brk
+ .libc            0x0030ee          0xc c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsi3.o)
+                  0x0030ee                  __mulp32peds3
+                  0x0030ee                  __mulsi3
+                  0x0030ee                  __mulp32eds3
  *(.libm)
- .libm            0x0030f8         0x56 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsisf.o)
-                  0x0030f8                  __floatsisf
- .libm            0x00314e         0x84 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsf3.o)
-                  0x00314e                  __divsf3
- .libm            0x0031d2         0xbc c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(addsf3.o)
-                  0x0031d2                  __subsf3
-                  0x0031d4                  __addsf3
- .libm            0x00328e         0x42 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixsfsi.o)
-                  0x00328e                  __fixsfsi
- .libm            0x0032d0         0x68 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsf3.o)
-                  0x0032d0                  __mulsf3
- .libm            0x003338          0x4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(feqltle.o)
-                  0x003338                  __eqsf2
-                  0x003338                  __ltsf2
-                  0x003338                  __lesf2
- .libm            0x00333c          0x4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fgtge.o)
-                  0x00333c                  __gesf2
-                  0x00333c                  __gtsf2
- .libm            0x003340         0x36 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
-                  0x003340                  __fixunssfsi
- .libm            0x003376         0x4c c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fpack.o)
-                  0x003376                  _fpack
- .libm            0x0033c2         0x10 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack2.o)
-                  0x0033c2                  _funpack2
- .libm            0x0033d2         0x20 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(futil.o)
-                  0x0033d2                  _fPropagateNaN
-                  0x0033e4                  _fbopExit
-                  0x0033ec                  _fbopReturnNaN
- .libm            0x0033f2         0x2a c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack.o)
-                  0x0033f2                  _funpack
- .libm            0x00341c         0x36 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fcompare.o)
-                  0x00341c                  _fcompare
- .libm            0x003452         0x3e c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(extendsfdf.o)
-                  0x003452                  __extendsfdf2
- .libm            0x003490          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(umodsi3.o)
-                  0x003490                  __umodsi3
- .libm            0x003496         0x20 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(udivsi3.o)
-                  0x003496                  __udivsi3
- .libm            0x0034b6         0x1e c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsi3.o)
-                  0x0034b6                  __divsi3
- .libm            0x0034d4        0x216 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divmoddi3.o)
-                  0x0034fa                  __udivmoddi3
-                  0x0035c8                  __udivdi3
-                  0x0035d6                  __umoddi3
-                  0x0035de                  __divdi3
-                  0x003618                  __moddi3
- .libm            0x0036ea         0x5c c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldi3.o)
-                  0x0036ea                  __muldi3
- .libm            0x003746          0xa c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(deqltle.o)
-                  0x003746                  __eqdf2
-                  0x003746                  __ltdf2
-                  0x003746                  __ledf2
- .libm            0x003750         0x58 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixdfsi.o)
-                  0x003750                  __fixdfsi
- .libm            0x0037a8          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsidf.o)
-                  0x0037a8                  __floatsidf
- .libm            0x0037ae          0x4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(subdf3.o)
-                  0x0037ae                  __subdf3
- .libm            0x0037b2          0xa c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dgtge.o)
-                  0x0037b2                  __gtdf2
-                  0x0037b2                  __gedf2
- .libm            0x0037bc         0xea c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldf3.o)
-                  0x0037bc                  __muldf3
- .libm            0x0038a6         0xb4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divdf3.o)
-                  0x0038a6                  __divdf3
- .libm            0x00395a         0x56 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(truncdfsf.o)
-                  0x00395a                  __truncdfsf2
- .libm            0x0039b0         0xfa c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(adddf3.o)
-                  0x0039b0                  __adddf3
- .libm            0x003aaa         0x44 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(umuldi3.o)
-                  0x003aaa                  __umuldi3
- .libm            0x003aee         0x52 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dcompare.o)
-                  0x003aee                  _dcompare
- .libm            0x003b40         0x4e c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dunpack.o)
-                  0x003b40                  _dunpack
- .libm            0x003b8e         0x32 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dunpack2.o)
-                  0x003b8e                  _dunpack2
-                  0x003bb0                  _dreturnNaN
-                  0x003bb6                  _dunpack2exit
- .libm            0x003bc0         0x6e c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatdidf.o)
-                  0x003bc0                  __floatdidf
- .libm            0x003c2e         0x58 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dpack.o)
-                  0x003c2e                  _dpack
- .libm            0x003c86         0x24 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dtype.o)
-                  0x003c86                  _dtype
- .libm            0x003caa         0x1c c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dpropagateNaN.o)
-                  0x003caa                  _dPropagateNaN
+ .libm            0x0030fa         0x56 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsisf.o)
+                  0x0030fa                  __floatsisf
+ .libm            0x003150         0x84 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsf3.o)
+                  0x003150                  __divsf3
+ .libm            0x0031d4         0xbc c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(addsf3.o)
+                  0x0031d4                  __subsf3
+                  0x0031d6                  __addsf3
+ .libm            0x003290         0x42 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixsfsi.o)
+                  0x003290                  __fixsfsi
+ .libm            0x0032d2         0x68 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsf3.o)
+                  0x0032d2                  __mulsf3
+ .libm            0x00333a          0x4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(feqltle.o)
+                  0x00333a                  __eqsf2
+                  0x00333a                  __ltsf2
+                  0x00333a                  __lesf2
+ .libm            0x00333e          0x4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fgtge.o)
+                  0x00333e                  __gesf2
+                  0x00333e                  __gtsf2
+ .libm            0x003342         0x36 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
+                  0x003342                  __fixunssfsi
+ .libm            0x003378         0x4c c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fpack.o)
+                  0x003378                  _fpack
+ .libm            0x0033c4         0x10 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack2.o)
+                  0x0033c4                  _funpack2
+ .libm            0x0033d4         0x20 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(futil.o)
+                  0x0033d4                  _fPropagateNaN
+                  0x0033e6                  _fbopExit
+                  0x0033ee                  _fbopReturnNaN
+ .libm            0x0033f4         0x2a c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack.o)
+                  0x0033f4                  _funpack
+ .libm            0x00341e         0x36 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fcompare.o)
+                  0x00341e                  _fcompare
+ .libm            0x003454         0x3e c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(extendsfdf.o)
+                  0x003454                  __extendsfdf2
+ .libm            0x003492          0xa c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(deqltle.o)
+                  0x003492                  __eqdf2
+                  0x003492                  __ltdf2
+                  0x003492                  __ledf2
+ .libm            0x00349c         0x58 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixdfsi.o)
+                  0x00349c                  __fixdfsi
+ .libm            0x0034f4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsidf.o)
+                  0x0034f4                  __floatsidf
+ .libm            0x0034fa          0x4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(subdf3.o)
+                  0x0034fa                  __subdf3
+ .libm            0x0034fe          0xa c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dgtge.o)
+                  0x0034fe                  __gtdf2
+                  0x0034fe                  __gedf2
+ .libm            0x003508         0x1e c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsi3.o)
+                  0x003508                  __divsi3
+ .libm            0x003526         0xea c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldf3.o)
+                  0x003526                  __muldf3
+ .libm            0x003610         0xb4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divdf3.o)
+                  0x003610                  __divdf3
+ .libm            0x0036c4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(umodsi3.o)
+                  0x0036c4                  __umodsi3
+ .libm            0x0036ca         0x20 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(udivsi3.o)
+                  0x0036ca                  __udivsi3
+ .libm            0x0036ea        0x216 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divmoddi3.o)
+                  0x003710                  __udivmoddi3
+                  0x0037de                  __udivdi3
+                  0x0037ec                  __umoddi3
+                  0x0037f4                  __divdi3
+                  0x00382e                  __moddi3
+ .libm            0x003900         0x5c c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldi3.o)
+                  0x003900                  __muldi3
+ .libm            0x00395c         0x56 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(truncdfsf.o)
+                  0x00395c                  __truncdfsf2
+ .libm            0x0039b2         0xfa c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(adddf3.o)
+                  0x0039b2                  __adddf3
+ .libm            0x003aac         0x52 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dcompare.o)
+                  0x003aac                  _dcompare
+ .libm            0x003afe         0x4e c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dunpack.o)
+                  0x003afe                  _dunpack
+ .libm            0x003b4c         0x32 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dunpack2.o)
+                  0x003b4c                  _dunpack2
+                  0x003b6e                  _dreturnNaN
+                  0x003b74                  _dunpack2exit
+ .libm            0x003b7e         0x6e c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatdidf.o)
+                  0x003b7e                  __floatdidf
+ .libm            0x003bec         0x58 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dpack.o)
+                  0x003bec                  _dpack
+ .libm            0x003c44         0x44 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(umuldi3.o)
+                  0x003c44                  __umuldi3
+ .libm            0x003c88         0x24 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dtype.o)
+                  0x003c88                  _dtype
+ .libm            0x003cac         0x1c c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dpropagateNaN.o)
+                  0x003cac                  _dPropagateNaN
  *(.libdsp)
  *(.lib*)
- .libperi         0x003cc6          0xc c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(CloseUART2.o)
-                  0x003cc6                  CloseUART2
- .libperi         0x003cd2         0x50 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(ConfigIntUART2.o)
-                  0x003cd2                  ConfigIntUART2
- .libperi         0x003d22          0x8 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(OpenUART2.o)
-                  0x003d22                  OpenUART2
- .libperi         0x003d2a         0x12 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(ReadUART2.o)
-                  0x003d2a                  ReadUART2
- .libperi         0x003d3c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(DataRdyUART2.o)
-                  0x003d3c                  DataRdyUART2
+ .libperi         0x003cc8         0x12 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(ReadUART2.o)
+                  0x003cc8                  ReadUART2
 
 usercode
  *(usercode)
@@ -1053,132 +1037,132 @@ userdata
  *(.debug_aranges)
 
 .ivt              0x000004         0x7c
-                  0x000004          0x4 LONG 0x5340 DEFINED (__ReservedTrap0)?<code 339> (__ReservedTrap0):<code 339> (__DefaultInterrupt)
-                  0x000006          0x4 LONG 0x5340 DEFINED (__OscillatorFail)?<code 339> (__OscillatorFail):<code 339> (__DefaultInterrupt)
-                  0x000008          0x4 LONG 0x5340 DEFINED (__AddressError)?<code 339> (__AddressError):<code 339> (__DefaultInterrupt)
-                  0x00000a          0x4 LONG 0x5340 DEFINED (__StackError)?<code 339> (__StackError):<code 339> (__DefaultInterrupt)
-                  0x00000c          0x4 LONG 0x5340 DEFINED (__MathError)?<code 339> (__MathError):<code 339> (__DefaultInterrupt)
-                  0x00000e          0x4 LONG 0x5340 DEFINED (__ReservedTrap5)?<code 339> (__ReservedTrap5):<code 339> (__DefaultInterrupt)
-                  0x000010          0x4 LONG 0x5340 DEFINED (__ReservedTrap6)?<code 339> (__ReservedTrap6):<code 339> (__DefaultInterrupt)
-                  0x000012          0x4 LONG 0x5340 DEFINED (__ReservedTrap7)?<code 339> (__ReservedTrap7):<code 339> (__DefaultInterrupt)
-                  0x000014          0x4 LONG 0x5340 DEFINED (__INT0Interrupt)?<code 339> (__INT0Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000016          0x4 LONG 0x5340 DEFINED (__IC1Interrupt)?<code 339> (__IC1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000018          0x4 LONG 0x5340 DEFINED (__OC1Interrupt)?<code 339> (__OC1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x5340 DEFINED (__T1Interrupt)?<code 339> (__T1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00001c          0x4 LONG 0x5340 DEFINED (__IC2Interrupt)?<code 339> (__IC2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00001e          0x4 LONG 0x5340 DEFINED (__OC2Interrupt)?<code 339> (__OC2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000020          0x4 LONG 0x5340 DEFINED (__T2Interrupt)?<code 339> (__T2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000022          0x4 LONG 0x5340 DEFINED (__T3Interrupt)?<code 339> (__T3Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000024          0x4 LONG 0x5340 DEFINED (__SPI1Interrupt)?<code 339> (__SPI1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000026          0x4 LONG 0x5340 DEFINED (__U1RXInterrupt)?<code 339> (__U1RXInterrupt):<code 339> (__DefaultInterrupt)
-                  0x000028          0x4 LONG 0x5340 DEFINED (__U1TXInterrupt)?<code 339> (__U1TXInterrupt):<code 339> (__DefaultInterrupt)
-                  0x00002a          0x4 LONG 0x5340 DEFINED (__ADCInterrupt)?<code 339> (__ADCInterrupt):<code 339> (__DefaultInterrupt)
-                  0x00002c          0x4 LONG 0x5340 DEFINED (__NVMInterrupt)?<code 339> (__NVMInterrupt):<code 339> (__DefaultInterrupt)
-                  0x00002e          0x4 LONG 0x5340 DEFINED (__SI2CInterrupt)?<code 339> (__SI2CInterrupt):<code 339> (__DefaultInterrupt)
-                  0x000030          0x4 LONG 0x5340 DEFINED (__MI2CInterrupt)?<code 339> (__MI2CInterrupt):<code 339> (__DefaultInterrupt)
-                  0x000032          0x4 LONG 0x5340 DEFINED (__CNInterrupt)?<code 339> (__CNInterrupt):<code 339> (__DefaultInterrupt)
-                  0x000034          0x4 LONG 0x5340 DEFINED (__INT1Interrupt)?<code 339> (__INT1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000036          0x4 LONG 0x5340 DEFINED (__IC7Interrupt)?<code 339> (__IC7Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000038          0x4 LONG 0x5340 DEFINED (__IC8Interrupt)?<code 339> (__IC8Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00003a          0x4 LONG 0x5340 DEFINED (__OC3Interrupt)?<code 339> (__OC3Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00003c          0x4 LONG 0x5340 DEFINED (__OC4Interrupt)?<code 339> (__OC4Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00003e          0x4 LONG 0x5340 DEFINED (__T4Interrupt)?<code 339> (__T4Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000040          0x4 LONG 0x5340 DEFINED (__T5Interrupt)?<code 339> (__T5Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000042          0x4 LONG 0x5340 DEFINED (__INT2Interrupt)?<code 339> (__INT2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000044          0x4 LONG 0x5050 DEFINED (__U2RXInterrupt)?<code 339> (__U2RXInterrupt):<code 339> (__DefaultInterrupt)
-                  0x000046          0x4 LONG 0x5340 DEFINED (__U2TXInterrupt)?<code 339> (__U2TXInterrupt):<code 339> (__DefaultInterrupt)
-                  0x000048          0x4 LONG 0x5340 DEFINED (__SPI2Interrupt)?<code 339> (__SPI2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00004a          0x4 LONG 0x5340 DEFINED (__C1Interrupt)?<code 339> (__C1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00004c          0x4 LONG 0x5340 DEFINED (__IC3Interrupt)?<code 339> (__IC3Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00004e          0x4 LONG 0x5340 DEFINED (__IC4Interrupt)?<code 339> (__IC4Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000050          0x4 LONG 0x5340 DEFINED (__IC5Interrupt)?<code 339> (__IC5Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000052          0x4 LONG 0x5340 DEFINED (__IC6Interrupt)?<code 339> (__IC6Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000054          0x4 LONG 0x5340 DEFINED (__OC5Interrupt)?<code 339> (__OC5Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000056          0x4 LONG 0x5340 DEFINED (__OC6Interrupt)?<code 339> (__OC6Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000058          0x4 LONG 0x5340 DEFINED (__OC7Interrupt)?<code 339> (__OC7Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00005a          0x4 LONG 0x5340 DEFINED (__OC8Interrupt)?<code 339> (__OC8Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00005c          0x4 LONG 0x5340 DEFINED (__INT3Interrupt)?<code 339> (__INT3Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00005e          0x4 LONG 0x5340 DEFINED (__INT4Interrupt)?<code 339> (__INT4Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000060          0x4 LONG 0x5340 DEFINED (__C2Interrupt)?<code 339> (__C2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000062          0x4 LONG 0x5340 DEFINED (__PWMInterrupt)?<code 339> (__PWMInterrupt):<code 339> (__DefaultInterrupt)
-                  0x000064          0x4 LONG 0x5340 DEFINED (__QEIInterrupt)?<code 339> (__QEIInterrupt):<code 339> (__DefaultInterrupt)
-                  0x000066          0x4 LONG 0x5340 DEFINED (__DCIInterrupt)?<code 339> (__DCIInterrupt):<code 339> (__DefaultInterrupt)
-                  0x000068          0x4 LONG 0x5340 DEFINED (__LVDInterrupt)?<code 339> (__LVDInterrupt):<code 339> (__DefaultInterrupt)
-                  0x00006a          0x4 LONG 0x5340 DEFINED (__FLTAInterrupt)?<code 339> (__FLTAInterrupt):<code 339> (__DefaultInterrupt)
-                  0x00006c          0x4 LONG 0x5340 DEFINED (__FLTBInterrupt)?<code 339> (__FLTBInterrupt):<code 339> (__DefaultInterrupt)
-                  0x00006e          0x4 LONG 0x5340 DEFINED (__Interrupt45)?<code 339> (__Interrupt45):<code 339> (__DefaultInterrupt)
-                  0x000070          0x4 LONG 0x5340 DEFINED (__Interrupt46)?<code 339> (__Interrupt46):<code 339> (__DefaultInterrupt)
-                  0x000072          0x4 LONG 0x5340 DEFINED (__Interrupt47)?<code 339> (__Interrupt47):<code 339> (__DefaultInterrupt)
-                  0x000074          0x4 LONG 0x5340 DEFINED (__Interrupt48)?<code 339> (__Interrupt48):<code 339> (__DefaultInterrupt)
-                  0x000076          0x4 LONG 0x5340 DEFINED (__Interrupt49)?<code 339> (__Interrupt49):<code 339> (__DefaultInterrupt)
-                  0x000078          0x4 LONG 0x5340 DEFINED (__Interrupt50)?<code 339> (__Interrupt50):<code 339> (__DefaultInterrupt)
-                  0x00007a          0x4 LONG 0x5340 DEFINED (__Interrupt51)?<code 339> (__Interrupt51):<code 339> (__DefaultInterrupt)
-                  0x00007c          0x4 LONG 0x5340 DEFINED (__Interrupt52)?<code 339> (__Interrupt52):<code 339> (__DefaultInterrupt)
-                  0x00007e          0x4 LONG 0x5340 DEFINED (__Interrupt53)?<code 339> (__Interrupt53):<code 339> (__DefaultInterrupt)
+                  0x000004          0x4 LONG 0x548a DEFINED (__ReservedTrap0)?<code 339> (__ReservedTrap0):<code 339> (__DefaultInterrupt)
+                  0x000006          0x4 LONG 0x548a DEFINED (__OscillatorFail)?<code 339> (__OscillatorFail):<code 339> (__DefaultInterrupt)
+                  0x000008          0x4 LONG 0x548a DEFINED (__AddressError)?<code 339> (__AddressError):<code 339> (__DefaultInterrupt)
+                  0x00000a          0x4 LONG 0x548a DEFINED (__StackError)?<code 339> (__StackError):<code 339> (__DefaultInterrupt)
+                  0x00000c          0x4 LONG 0x548a DEFINED (__MathError)?<code 339> (__MathError):<code 339> (__DefaultInterrupt)
+                  0x00000e          0x4 LONG 0x548a DEFINED (__ReservedTrap5)?<code 339> (__ReservedTrap5):<code 339> (__DefaultInterrupt)
+                  0x000010          0x4 LONG 0x548a DEFINED (__ReservedTrap6)?<code 339> (__ReservedTrap6):<code 339> (__DefaultInterrupt)
+                  0x000012          0x4 LONG 0x548a DEFINED (__ReservedTrap7)?<code 339> (__ReservedTrap7):<code 339> (__DefaultInterrupt)
+                  0x000014          0x4 LONG 0x548a DEFINED (__INT0Interrupt)?<code 339> (__INT0Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000016          0x4 LONG 0x548a DEFINED (__IC1Interrupt)?<code 339> (__IC1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000018          0x4 LONG 0x548a DEFINED (__OC1Interrupt)?<code 339> (__OC1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x548a DEFINED (__T1Interrupt)?<code 339> (__T1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00001c          0x4 LONG 0x548a DEFINED (__IC2Interrupt)?<code 339> (__IC2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00001e          0x4 LONG 0x548a DEFINED (__OC2Interrupt)?<code 339> (__OC2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000020          0x4 LONG 0x548a DEFINED (__T2Interrupt)?<code 339> (__T2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000022          0x4 LONG 0x548a DEFINED (__T3Interrupt)?<code 339> (__T3Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000024          0x4 LONG 0x548a DEFINED (__SPI1Interrupt)?<code 339> (__SPI1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000026          0x4 LONG 0x548a DEFINED (__U1RXInterrupt)?<code 339> (__U1RXInterrupt):<code 339> (__DefaultInterrupt)
+                  0x000028          0x4 LONG 0x548a DEFINED (__U1TXInterrupt)?<code 339> (__U1TXInterrupt):<code 339> (__DefaultInterrupt)
+                  0x00002a          0x4 LONG 0x548a DEFINED (__ADCInterrupt)?<code 339> (__ADCInterrupt):<code 339> (__DefaultInterrupt)
+                  0x00002c          0x4 LONG 0x548a DEFINED (__NVMInterrupt)?<code 339> (__NVMInterrupt):<code 339> (__DefaultInterrupt)
+                  0x00002e          0x4 LONG 0x548a DEFINED (__SI2CInterrupt)?<code 339> (__SI2CInterrupt):<code 339> (__DefaultInterrupt)
+                  0x000030          0x4 LONG 0x548a DEFINED (__MI2CInterrupt)?<code 339> (__MI2CInterrupt):<code 339> (__DefaultInterrupt)
+                  0x000032          0x4 LONG 0x548a DEFINED (__CNInterrupt)?<code 339> (__CNInterrupt):<code 339> (__DefaultInterrupt)
+                  0x000034          0x4 LONG 0x548a DEFINED (__INT1Interrupt)?<code 339> (__INT1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000036          0x4 LONG 0x548a DEFINED (__IC7Interrupt)?<code 339> (__IC7Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000038          0x4 LONG 0x548a DEFINED (__IC8Interrupt)?<code 339> (__IC8Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00003a          0x4 LONG 0x548a DEFINED (__OC3Interrupt)?<code 339> (__OC3Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00003c          0x4 LONG 0x548a DEFINED (__OC4Interrupt)?<code 339> (__OC4Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00003e          0x4 LONG 0x548a DEFINED (__T4Interrupt)?<code 339> (__T4Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000040          0x4 LONG 0x548a DEFINED (__T5Interrupt)?<code 339> (__T5Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000042          0x4 LONG 0x548a DEFINED (__INT2Interrupt)?<code 339> (__INT2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000044          0x4 LONG 0x519a DEFINED (__U2RXInterrupt)?<code 339> (__U2RXInterrupt):<code 339> (__DefaultInterrupt)
+                  0x000046          0x4 LONG 0x548a DEFINED (__U2TXInterrupt)?<code 339> (__U2TXInterrupt):<code 339> (__DefaultInterrupt)
+                  0x000048          0x4 LONG 0x548a DEFINED (__SPI2Interrupt)?<code 339> (__SPI2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00004a          0x4 LONG 0x548a DEFINED (__C1Interrupt)?<code 339> (__C1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00004c          0x4 LONG 0x548a DEFINED (__IC3Interrupt)?<code 339> (__IC3Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00004e          0x4 LONG 0x548a DEFINED (__IC4Interrupt)?<code 339> (__IC4Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000050          0x4 LONG 0x548a DEFINED (__IC5Interrupt)?<code 339> (__IC5Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000052          0x4 LONG 0x548a DEFINED (__IC6Interrupt)?<code 339> (__IC6Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000054          0x4 LONG 0x548a DEFINED (__OC5Interrupt)?<code 339> (__OC5Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000056          0x4 LONG 0x548a DEFINED (__OC6Interrupt)?<code 339> (__OC6Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000058          0x4 LONG 0x548a DEFINED (__OC7Interrupt)?<code 339> (__OC7Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00005a          0x4 LONG 0x548a DEFINED (__OC8Interrupt)?<code 339> (__OC8Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00005c          0x4 LONG 0x548a DEFINED (__INT3Interrupt)?<code 339> (__INT3Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00005e          0x4 LONG 0x548a DEFINED (__INT4Interrupt)?<code 339> (__INT4Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000060          0x4 LONG 0x548a DEFINED (__C2Interrupt)?<code 339> (__C2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000062          0x4 LONG 0x548a DEFINED (__PWMInterrupt)?<code 339> (__PWMInterrupt):<code 339> (__DefaultInterrupt)
+                  0x000064          0x4 LONG 0x548a DEFINED (__QEIInterrupt)?<code 339> (__QEIInterrupt):<code 339> (__DefaultInterrupt)
+                  0x000066          0x4 LONG 0x548a DEFINED (__DCIInterrupt)?<code 339> (__DCIInterrupt):<code 339> (__DefaultInterrupt)
+                  0x000068          0x4 LONG 0x548a DEFINED (__LVDInterrupt)?<code 339> (__LVDInterrupt):<code 339> (__DefaultInterrupt)
+                  0x00006a          0x4 LONG 0x548a DEFINED (__FLTAInterrupt)?<code 339> (__FLTAInterrupt):<code 339> (__DefaultInterrupt)
+                  0x00006c          0x4 LONG 0x548a DEFINED (__FLTBInterrupt)?<code 339> (__FLTBInterrupt):<code 339> (__DefaultInterrupt)
+                  0x00006e          0x4 LONG 0x548a DEFINED (__Interrupt45)?<code 339> (__Interrupt45):<code 339> (__DefaultInterrupt)
+                  0x000070          0x4 LONG 0x548a DEFINED (__Interrupt46)?<code 339> (__Interrupt46):<code 339> (__DefaultInterrupt)
+                  0x000072          0x4 LONG 0x548a DEFINED (__Interrupt47)?<code 339> (__Interrupt47):<code 339> (__DefaultInterrupt)
+                  0x000074          0x4 LONG 0x548a DEFINED (__Interrupt48)?<code 339> (__Interrupt48):<code 339> (__DefaultInterrupt)
+                  0x000076          0x4 LONG 0x548a DEFINED (__Interrupt49)?<code 339> (__Interrupt49):<code 339> (__DefaultInterrupt)
+                  0x000078          0x4 LONG 0x548a DEFINED (__Interrupt50)?<code 339> (__Interrupt50):<code 339> (__DefaultInterrupt)
+                  0x00007a          0x4 LONG 0x548a DEFINED (__Interrupt51)?<code 339> (__Interrupt51):<code 339> (__DefaultInterrupt)
+                  0x00007c          0x4 LONG 0x548a DEFINED (__Interrupt52)?<code 339> (__Interrupt52):<code 339> (__DefaultInterrupt)
+                  0x00007e          0x4 LONG 0x548a DEFINED (__Interrupt53)?<code 339> (__Interrupt53):<code 339> (__DefaultInterrupt)
 
 .aivt             0x000084         0x7c
-                  0x000084          0x4 LONG 0x5340 DEFINED (__AltReservedTrap0)?<code 339> (__AltReservedTrap0):DEFINED (__ReservedTrap0)?<code 339> (__ReservedTrap0):<code 339> (__DefaultInterrupt)
-                  0x000086          0x4 LONG 0x5340 DEFINED (__AltOscillatorFail)?<code 339> (__AltOscillatorFail):DEFINED (__OscillatorFail)?<code 339> (__OscillatorFail):<code 339> (__DefaultInterrupt)
-                  0x000088          0x4 LONG 0x5340 DEFINED (__AltAddressError)?<code 339> (__AltAddressError):DEFINED (__AddressError)?<code 339> (__AddressError):<code 339> (__DefaultInterrupt)
-                  0x00008a          0x4 LONG 0x5340 DEFINED (__AltStackError)?<code 339> (__AltStackError):DEFINED (__StackError)?<code 339> (__StackError):<code 339> (__DefaultInterrupt)
-                  0x00008c          0x4 LONG 0x5340 DEFINED (__AltMathError)?<code 339> (__AltMathError):DEFINED (__MathError)?<code 339> (__MathError):<code 339> (__DefaultInterrupt)
-                  0x00008e          0x4 LONG 0x5340 DEFINED (__AltReservedTrap5)?<code 339> (__AltReservedTrap5):DEFINED (__ReservedTrap5)?<code 339> (__ReservedTrap5):<code 339> (__DefaultInterrupt)
-                  0x000090          0x4 LONG 0x5340 DEFINED (__AltReservedTrap6)?<code 339> (__AltReservedTrap6):DEFINED (__ReservedTrap6)?<code 339> (__ReservedTrap6):<code 339> (__DefaultInterrupt)
-                  0x000092          0x4 LONG 0x5340 DEFINED (__AltReservedTrap7)?<code 339> (__AltReservedTrap7):DEFINED (__ReservedTrap7)?<code 339> (__ReservedTrap7):<code 339> (__DefaultInterrupt)
-                  0x000094          0x4 LONG 0x5340 DEFINED (__AltINT0Interrupt)?<code 339> (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?<code 339> (__INT0Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000096          0x4 LONG 0x5340 DEFINED (__AltIC1Interrupt)?<code 339> (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?<code 339> (__IC1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x000098          0x4 LONG 0x5340 DEFINED (__AltOC1Interrupt)?<code 339> (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?<code 339> (__OC1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00009a          0x4 LONG 0x5340 DEFINED (__AltT1Interrupt)?<code 339> (__AltT1Interrupt):DEFINED (__T1Interrupt)?<code 339> (__T1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00009c          0x4 LONG 0x5340 DEFINED (__AltIC2Interrupt)?<code 339> (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?<code 339> (__IC2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x00009e          0x4 LONG 0x5340 DEFINED (__AltOC2Interrupt)?<code 339> (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?<code 339> (__OC2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000a0          0x4 LONG 0x5340 DEFINED (__AltT2Interrupt)?<code 339> (__AltT2Interrupt):DEFINED (__T2Interrupt)?<code 339> (__T2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000a2          0x4 LONG 0x5340 DEFINED (__AltT3Interrupt)?<code 339> (__AltT3Interrupt):DEFINED (__T3Interrupt)?<code 339> (__T3Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000a4          0x4 LONG 0x5340 DEFINED (__AltSPI1Interrupt)?<code 339> (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?<code 339> (__SPI1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000a6          0x4 LONG 0x5340 DEFINED (__AltU1RXInterrupt)?<code 339> (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?<code 339> (__U1RXInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000a8          0x4 LONG 0x5340 DEFINED (__AltU1TXInterrupt)?<code 339> (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?<code 339> (__U1TXInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000aa          0x4 LONG 0x5340 DEFINED (__AltADCInterrupt)?<code 339> (__AltADCInterrupt):DEFINED (__ADCInterrupt)?<code 339> (__ADCInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000ac          0x4 LONG 0x5340 DEFINED (__AltNVMInterrupt)?<code 339> (__AltNVMInterrupt):DEFINED (__NVMInterrupt)?<code 339> (__NVMInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000ae          0x4 LONG 0x5340 DEFINED (__AltSI2CInterrupt)?<code 339> (__AltSI2CInterrupt):DEFINED (__SI2CInterrupt)?<code 339> (__SI2CInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000b0          0x4 LONG 0x5340 DEFINED (__AltMI2CInterrupt)?<code 339> (__AltMI2CInterrupt):DEFINED (__MI2CInterrupt)?<code 339> (__MI2CInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000b2          0x4 LONG 0x5340 DEFINED (__AltCNInterrupt)?<code 339> (__AltCNInterrupt):DEFINED (__CNInterrupt)?<code 339> (__CNInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000b4          0x4 LONG 0x5340 DEFINED (__AltINT1Interrupt)?<code 339> (__AltINT1Interrupt):DEFINED (__INT1Interrupt)?<code 339> (__INT1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000b6          0x4 LONG 0x5340 DEFINED (__AltIC7Interrupt)?<code 339> (__AltIC7Interrupt):DEFINED (__IC7Interrupt)?<code 339> (__IC7Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000b8          0x4 LONG 0x5340 DEFINED (__AltIC8Interrupt)?<code 339> (__AltIC8Interrupt):DEFINED (__IC8Interrupt)?<code 339> (__IC8Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000ba          0x4 LONG 0x5340 DEFINED (__AltOC3Interrupt)?<code 339> (__AltOC3Interrupt):DEFINED (__OC3Interrupt)?<code 339> (__OC3Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000bc          0x4 LONG 0x5340 DEFINED (__AltOC4Interrupt)?<code 339> (__AltOC4Interrupt):DEFINED (__OC4Interrupt)?<code 339> (__OC4Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000be          0x4 LONG 0x5340 DEFINED (__AltT4Interrupt)?<code 339> (__AltT4Interrupt):DEFINED (__T4Interrupt)?<code 339> (__T4Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000c0          0x4 LONG 0x5340 DEFINED (__AltT5Interrupt)?<code 339> (__AltT5Interrupt):DEFINED (__T5Interrupt)?<code 339> (__T5Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000c2          0x4 LONG 0x5340 DEFINED (__AltINT2Interrupt)?<code 339> (__AltINT2Interrupt):DEFINED (__INT2Interrupt)?<code 339> (__INT2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000c4          0x4 LONG 0x5050 DEFINED (__AltU2RXInterrupt)?<code 339> (__AltU2RXInterrupt):DEFINED (__U2RXInterrupt)?<code 339> (__U2RXInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000c6          0x4 LONG 0x5340 DEFINED (__AltU2TXInterrupt)?<code 339> (__AltU2TXInterrupt):DEFINED (__U2TXInterrupt)?<code 339> (__U2TXInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000c8          0x4 LONG 0x5340 DEFINED (__AltSPI2Interrupt)?<code 339> (__AltSPI2Interrupt):DEFINED (__SPI2Interrupt)?<code 339> (__SPI2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000ca          0x4 LONG 0x5340 DEFINED (__AltC1Interrupt)?<code 339> (__AltC1Interrupt):DEFINED (__C1Interrupt)?<code 339> (__C1Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000cc          0x4 LONG 0x5340 DEFINED (__AltIC3Interrupt)?<code 339> (__AltIC3Interrupt):DEFINED (__IC3Interrupt)?<code 339> (__IC3Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000ce          0x4 LONG 0x5340 DEFINED (__AltIC4Interrupt)?<code 339> (__AltIC4Interrupt):DEFINED (__IC4Interrupt)?<code 339> (__IC4Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000d0          0x4 LONG 0x5340 DEFINED (__AltIC5Interrupt)?<code 339> (__AltIC5Interrupt):DEFINED (__IC5Interrupt)?<code 339> (__IC5Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000d2          0x4 LONG 0x5340 DEFINED (__AltIC6Interrupt)?<code 339> (__AltIC6Interrupt):DEFINED (__IC6Interrupt)?<code 339> (__IC6Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000d4          0x4 LONG 0x5340 DEFINED (__AltOC5Interrupt)?<code 339> (__AltOC5Interrupt):DEFINED (__OC5Interrupt)?<code 339> (__OC5Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000d6          0x4 LONG 0x5340 DEFINED (__AltOC6Interrupt)?<code 339> (__AltOC6Interrupt):DEFINED (__OC6Interrupt)?<code 339> (__OC6Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000d8          0x4 LONG 0x5340 DEFINED (__AltOC7Interrupt)?<code 339> (__AltOC7Interrupt):DEFINED (__OC7Interrupt)?<code 339> (__OC7Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000da          0x4 LONG 0x5340 DEFINED (__AltOC8Interrupt)?<code 339> (__AltOC8Interrupt):DEFINED (__OC8Interrupt)?<code 339> (__OC8Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000dc          0x4 LONG 0x5340 DEFINED (__AltINT3Interrupt)?<code 339> (__AltINT3Interrupt):DEFINED (__INT3Interrupt)?<code 339> (__INT3Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000de          0x4 LONG 0x5340 DEFINED (__AltINT4Interrupt)?<code 339> (__AltINT4Interrupt):DEFINED (__INT4Interrupt)?<code 339> (__INT4Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000e0          0x4 LONG 0x5340 DEFINED (__AltC2Interrupt)?<code 339> (__AltC2Interrupt):DEFINED (__C2Interrupt)?<code 339> (__C2Interrupt):<code 339> (__DefaultInterrupt)
-                  0x0000e2          0x4 LONG 0x5340 DEFINED (__AltPWMInterrupt)?<code 339> (__AltPWMInterrupt):DEFINED (__PWMInterrupt)?<code 339> (__PWMInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000e4          0x4 LONG 0x5340 DEFINED (__AltQEIInterrupt)?<code 339> (__AltQEIInterrupt):DEFINED (__QEIInterrupt)?<code 339> (__QEIInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000e6          0x4 LONG 0x5340 DEFINED (__AltDCIInterrupt)?<code 339> (__AltDCIInterrupt):DEFINED (__DCIInterrupt)?<code 339> (__DCIInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000e8          0x4 LONG 0x5340 DEFINED (__AltLVDInterrupt)?<code 339> (__AltLVDInterrupt):DEFINED (__LVDInterrupt)?<code 339> (__LVDInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000ea          0x4 LONG 0x5340 DEFINED (__AltFLTAInterrupt)?<code 339> (__AltFLTAInterrupt):DEFINED (__FLTAInterrupt)?<code 339> (__FLTAInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000ec          0x4 LONG 0x5340 DEFINED (__AltFLTBInterrupt)?<code 339> (__AltFLTBInterrupt):DEFINED (__FLTBInterrupt)?<code 339> (__FLTBInterrupt):<code 339> (__DefaultInterrupt)
-                  0x0000ee          0x4 LONG 0x5340 DEFINED (__AltInterrupt45)?<code 339> (__AltInterrupt45):DEFINED (__Interrupt45)?<code 339> (__Interrupt45):<code 339> (__DefaultInterrupt)
-                  0x0000f0          0x4 LONG 0x5340 DEFINED (__AltInterrupt46)?<code 339> (__AltInterrupt46):DEFINED (__Interrupt46)?<code 339> (__Interrupt46):<code 339> (__DefaultInterrupt)
-                  0x0000f2          0x4 LONG 0x5340 DEFINED (__AltInterrupt47)?<code 339> (__AltInterrupt47):DEFINED (__Interrupt47)?<code 339> (__Interrupt47):<code 339> (__DefaultInterrupt)
-                  0x0000f4          0x4 LONG 0x5340 DEFINED (__AltInterrupt48)?<code 339> (__AltInterrupt48):DEFINED (__Interrupt48)?<code 339> (__Interrupt48):<code 339> (__DefaultInterrupt)
-                  0x0000f6          0x4 LONG 0x5340 DEFINED (__AltInterrupt49)?<code 339> (__AltInterrupt49):DEFINED (__Interrupt49)?<code 339> (__Interrupt49):<code 339> (__DefaultInterrupt)
-                  0x0000f8          0x4 LONG 0x5340 DEFINED (__AltInterrupt50)?<code 339> (__AltInterrupt50):DEFINED (__Interrupt50)?<code 339> (__Interrupt50):<code 339> (__DefaultInterrupt)
-                  0x0000fa          0x4 LONG 0x5340 DEFINED (__AltInterrupt51)?<code 339> (__AltInterrupt51):DEFINED (__Interrupt51)?<code 339> (__Interrupt51):<code 339> (__DefaultInterrupt)
-                  0x0000fc          0x4 LONG 0x5340 DEFINED (__AltInterrupt52)?<code 339> (__AltInterrupt52):DEFINED (__Interrupt52)?<code 339> (__Interrupt52):<code 339> (__DefaultInterrupt)
-                  0x0000fe          0x4 LONG 0x5340 DEFINED (__AltInterrupt53)?<code 339> (__AltInterrupt53):DEFINED (__Interrupt53)?<code 339> (__Interrupt53):<code 339> (__DefaultInterrupt)
+                  0x000084          0x4 LONG 0x548a DEFINED (__AltReservedTrap0)?<code 339> (__AltReservedTrap0):DEFINED (__ReservedTrap0)?<code 339> (__ReservedTrap0):<code 339> (__DefaultInterrupt)
+                  0x000086          0x4 LONG 0x548a DEFINED (__AltOscillatorFail)?<code 339> (__AltOscillatorFail):DEFINED (__OscillatorFail)?<code 339> (__OscillatorFail):<code 339> (__DefaultInterrupt)
+                  0x000088          0x4 LONG 0x548a DEFINED (__AltAddressError)?<code 339> (__AltAddressError):DEFINED (__AddressError)?<code 339> (__AddressError):<code 339> (__DefaultInterrupt)
+                  0x00008a          0x4 LONG 0x548a DEFINED (__AltStackError)?<code 339> (__AltStackError):DEFINED (__StackError)?<code 339> (__StackError):<code 339> (__DefaultInterrupt)
+                  0x00008c          0x4 LONG 0x548a DEFINED (__AltMathError)?<code 339> (__AltMathError):DEFINED (__MathError)?<code 339> (__MathError):<code 339> (__DefaultInterrupt)
+                  0x00008e          0x4 LONG 0x548a DEFINED (__AltReservedTrap5)?<code 339> (__AltReservedTrap5):DEFINED (__ReservedTrap5)?<code 339> (__ReservedTrap5):<code 339> (__DefaultInterrupt)
+                  0x000090          0x4 LONG 0x548a DEFINED (__AltReservedTrap6)?<code 339> (__AltReservedTrap6):DEFINED (__ReservedTrap6)?<code 339> (__ReservedTrap6):<code 339> (__DefaultInterrupt)
+                  0x000092          0x4 LONG 0x548a DEFINED (__AltReservedTrap7)?<code 339> (__AltReservedTrap7):DEFINED (__ReservedTrap7)?<code 339> (__ReservedTrap7):<code 339> (__DefaultInterrupt)
+                  0x000094          0x4 LONG 0x548a DEFINED (__AltINT0Interrupt)?<code 339> (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?<code 339> (__INT0Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000096          0x4 LONG 0x548a DEFINED (__AltIC1Interrupt)?<code 339> (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?<code 339> (__IC1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x000098          0x4 LONG 0x548a DEFINED (__AltOC1Interrupt)?<code 339> (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?<code 339> (__OC1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00009a          0x4 LONG 0x548a DEFINED (__AltT1Interrupt)?<code 339> (__AltT1Interrupt):DEFINED (__T1Interrupt)?<code 339> (__T1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00009c          0x4 LONG 0x548a DEFINED (__AltIC2Interrupt)?<code 339> (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?<code 339> (__IC2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x00009e          0x4 LONG 0x548a DEFINED (__AltOC2Interrupt)?<code 339> (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?<code 339> (__OC2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000a0          0x4 LONG 0x548a DEFINED (__AltT2Interrupt)?<code 339> (__AltT2Interrupt):DEFINED (__T2Interrupt)?<code 339> (__T2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000a2          0x4 LONG 0x548a DEFINED (__AltT3Interrupt)?<code 339> (__AltT3Interrupt):DEFINED (__T3Interrupt)?<code 339> (__T3Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000a4          0x4 LONG 0x548a DEFINED (__AltSPI1Interrupt)?<code 339> (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?<code 339> (__SPI1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000a6          0x4 LONG 0x548a DEFINED (__AltU1RXInterrupt)?<code 339> (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?<code 339> (__U1RXInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000a8          0x4 LONG 0x548a DEFINED (__AltU1TXInterrupt)?<code 339> (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?<code 339> (__U1TXInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000aa          0x4 LONG 0x548a DEFINED (__AltADCInterrupt)?<code 339> (__AltADCInterrupt):DEFINED (__ADCInterrupt)?<code 339> (__ADCInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000ac          0x4 LONG 0x548a DEFINED (__AltNVMInterrupt)?<code 339> (__AltNVMInterrupt):DEFINED (__NVMInterrupt)?<code 339> (__NVMInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000ae          0x4 LONG 0x548a DEFINED (__AltSI2CInterrupt)?<code 339> (__AltSI2CInterrupt):DEFINED (__SI2CInterrupt)?<code 339> (__SI2CInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000b0          0x4 LONG 0x548a DEFINED (__AltMI2CInterrupt)?<code 339> (__AltMI2CInterrupt):DEFINED (__MI2CInterrupt)?<code 339> (__MI2CInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000b2          0x4 LONG 0x548a DEFINED (__AltCNInterrupt)?<code 339> (__AltCNInterrupt):DEFINED (__CNInterrupt)?<code 339> (__CNInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000b4          0x4 LONG 0x548a DEFINED (__AltINT1Interrupt)?<code 339> (__AltINT1Interrupt):DEFINED (__INT1Interrupt)?<code 339> (__INT1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000b6          0x4 LONG 0x548a DEFINED (__AltIC7Interrupt)?<code 339> (__AltIC7Interrupt):DEFINED (__IC7Interrupt)?<code 339> (__IC7Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000b8          0x4 LONG 0x548a DEFINED (__AltIC8Interrupt)?<code 339> (__AltIC8Interrupt):DEFINED (__IC8Interrupt)?<code 339> (__IC8Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000ba          0x4 LONG 0x548a DEFINED (__AltOC3Interrupt)?<code 339> (__AltOC3Interrupt):DEFINED (__OC3Interrupt)?<code 339> (__OC3Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000bc          0x4 LONG 0x548a DEFINED (__AltOC4Interrupt)?<code 339> (__AltOC4Interrupt):DEFINED (__OC4Interrupt)?<code 339> (__OC4Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000be          0x4 LONG 0x548a DEFINED (__AltT4Interrupt)?<code 339> (__AltT4Interrupt):DEFINED (__T4Interrupt)?<code 339> (__T4Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000c0          0x4 LONG 0x548a DEFINED (__AltT5Interrupt)?<code 339> (__AltT5Interrupt):DEFINED (__T5Interrupt)?<code 339> (__T5Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000c2          0x4 LONG 0x548a DEFINED (__AltINT2Interrupt)?<code 339> (__AltINT2Interrupt):DEFINED (__INT2Interrupt)?<code 339> (__INT2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000c4          0x4 LONG 0x519a DEFINED (__AltU2RXInterrupt)?<code 339> (__AltU2RXInterrupt):DEFINED (__U2RXInterrupt)?<code 339> (__U2RXInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000c6          0x4 LONG 0x548a DEFINED (__AltU2TXInterrupt)?<code 339> (__AltU2TXInterrupt):DEFINED (__U2TXInterrupt)?<code 339> (__U2TXInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000c8          0x4 LONG 0x548a DEFINED (__AltSPI2Interrupt)?<code 339> (__AltSPI2Interrupt):DEFINED (__SPI2Interrupt)?<code 339> (__SPI2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000ca          0x4 LONG 0x548a DEFINED (__AltC1Interrupt)?<code 339> (__AltC1Interrupt):DEFINED (__C1Interrupt)?<code 339> (__C1Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000cc          0x4 LONG 0x548a DEFINED (__AltIC3Interrupt)?<code 339> (__AltIC3Interrupt):DEFINED (__IC3Interrupt)?<code 339> (__IC3Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000ce          0x4 LONG 0x548a DEFINED (__AltIC4Interrupt)?<code 339> (__AltIC4Interrupt):DEFINED (__IC4Interrupt)?<code 339> (__IC4Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000d0          0x4 LONG 0x548a DEFINED (__AltIC5Interrupt)?<code 339> (__AltIC5Interrupt):DEFINED (__IC5Interrupt)?<code 339> (__IC5Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000d2          0x4 LONG 0x548a DEFINED (__AltIC6Interrupt)?<code 339> (__AltIC6Interrupt):DEFINED (__IC6Interrupt)?<code 339> (__IC6Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000d4          0x4 LONG 0x548a DEFINED (__AltOC5Interrupt)?<code 339> (__AltOC5Interrupt):DEFINED (__OC5Interrupt)?<code 339> (__OC5Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000d6          0x4 LONG 0x548a DEFINED (__AltOC6Interrupt)?<code 339> (__AltOC6Interrupt):DEFINED (__OC6Interrupt)?<code 339> (__OC6Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000d8          0x4 LONG 0x548a DEFINED (__AltOC7Interrupt)?<code 339> (__AltOC7Interrupt):DEFINED (__OC7Interrupt)?<code 339> (__OC7Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000da          0x4 LONG 0x548a DEFINED (__AltOC8Interrupt)?<code 339> (__AltOC8Interrupt):DEFINED (__OC8Interrupt)?<code 339> (__OC8Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000dc          0x4 LONG 0x548a DEFINED (__AltINT3Interrupt)?<code 339> (__AltINT3Interrupt):DEFINED (__INT3Interrupt)?<code 339> (__INT3Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000de          0x4 LONG 0x548a DEFINED (__AltINT4Interrupt)?<code 339> (__AltINT4Interrupt):DEFINED (__INT4Interrupt)?<code 339> (__INT4Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000e0          0x4 LONG 0x548a DEFINED (__AltC2Interrupt)?<code 339> (__AltC2Interrupt):DEFINED (__C2Interrupt)?<code 339> (__C2Interrupt):<code 339> (__DefaultInterrupt)
+                  0x0000e2          0x4 LONG 0x548a DEFINED (__AltPWMInterrupt)?<code 339> (__AltPWMInterrupt):DEFINED (__PWMInterrupt)?<code 339> (__PWMInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000e4          0x4 LONG 0x548a DEFINED (__AltQEIInterrupt)?<code 339> (__AltQEIInterrupt):DEFINED (__QEIInterrupt)?<code 339> (__QEIInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000e6          0x4 LONG 0x548a DEFINED (__AltDCIInterrupt)?<code 339> (__AltDCIInterrupt):DEFINED (__DCIInterrupt)?<code 339> (__DCIInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000e8          0x4 LONG 0x548a DEFINED (__AltLVDInterrupt)?<code 339> (__AltLVDInterrupt):DEFINED (__LVDInterrupt)?<code 339> (__LVDInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000ea          0x4 LONG 0x548a DEFINED (__AltFLTAInterrupt)?<code 339> (__AltFLTAInterrupt):DEFINED (__FLTAInterrupt)?<code 339> (__FLTAInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000ec          0x4 LONG 0x548a DEFINED (__AltFLTBInterrupt)?<code 339> (__AltFLTBInterrupt):DEFINED (__FLTBInterrupt)?<code 339> (__FLTBInterrupt):<code 339> (__DefaultInterrupt)
+                  0x0000ee          0x4 LONG 0x548a DEFINED (__AltInterrupt45)?<code 339> (__AltInterrupt45):DEFINED (__Interrupt45)?<code 339> (__Interrupt45):<code 339> (__DefaultInterrupt)
+                  0x0000f0          0x4 LONG 0x548a DEFINED (__AltInterrupt46)?<code 339> (__AltInterrupt46):DEFINED (__Interrupt46)?<code 339> (__Interrupt46):<code 339> (__DefaultInterrupt)
+                  0x0000f2          0x4 LONG 0x548a DEFINED (__AltInterrupt47)?<code 339> (__AltInterrupt47):DEFINED (__Interrupt47)?<code 339> (__Interrupt47):<code 339> (__DefaultInterrupt)
+                  0x0000f4          0x4 LONG 0x548a DEFINED (__AltInterrupt48)?<code 339> (__AltInterrupt48):DEFINED (__Interrupt48)?<code 339> (__Interrupt48):<code 339> (__DefaultInterrupt)
+                  0x0000f6          0x4 LONG 0x548a DEFINED (__AltInterrupt49)?<code 339> (__AltInterrupt49):DEFINED (__Interrupt49)?<code 339> (__Interrupt49):<code 339> (__DefaultInterrupt)
+                  0x0000f8          0x4 LONG 0x548a DEFINED (__AltInterrupt50)?<code 339> (__AltInterrupt50):DEFINED (__Interrupt50)?<code 339> (__Interrupt50):<code 339> (__DefaultInterrupt)
+                  0x0000fa          0x4 LONG 0x548a DEFINED (__AltInterrupt51)?<code 339> (__AltInterrupt51):DEFINED (__Interrupt51)?<code 339> (__Interrupt51):<code 339> (__DefaultInterrupt)
+                  0x0000fc          0x4 LONG 0x548a DEFINED (__AltInterrupt52)?<code 339> (__AltInterrupt52):DEFINED (__Interrupt52)?<code 339> (__Interrupt52):<code 339> (__DefaultInterrupt)
+                  0x0000fe          0x4 LONG 0x548a DEFINED (__AltInterrupt53)?<code 339> (__AltInterrupt53):DEFINED (__Interrupt53)?<code 339> (__Interrupt53):<code 339> (__DefaultInterrupt)
                     0x0000                  _WREG0 = 0x0
                     0x0000                  WREG0 = 0x0
                     0x0002                  _WREG1 = 0x2
@@ -2046,7 +2030,7 @@ LOAD default_isr
 LOAD heap
 
 __c30_signature
-                  0x00005e        0x192
+                  0x00005e        0x258
  __c30_signature
                   0x00005e          0x6 adc.o
  __c30_signature
@@ -2062,291 +2046,360 @@ __c30_signature
  __c30_signature
                   0x000082          0x6 timer.o
  __c30_signature
-                  0x000088          0x6 uart_stdio.o
+                  0x000088          0x6 optica_exp.o
  __c30_signature
-                  0x00008e          0x6 optica_exp.o
+                  0x00008e          0x6 protocolos.o
  __c30_signature
-                  0x000094          0x6 protocolos.o
+                  0x000094          0x6 maq_de_estados.o
  __c30_signature
-                  0x00009a          0x6 maq_de_estados.o
+                  0x00009a          0x6 uart.o
  __c30_signature
-                  0x0000a0          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(CloseUART2.o)
+                  0x0000a0          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(ReadUART2.o)
  __c30_signature
-                  0x0000a6          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(ConfigIntUART2.o)
+                  0x0000a6          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
  __c30_signature
-                  0x0000ac          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(OpenUART2.o)
+                  0x0000ac          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(c30_uart.o)
  __c30_signature
-                  0x0000b2          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(ReadUART2.o)
+                  0x0000b2          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
  __c30_signature
-                  0x0000b8          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a(DataRdyUART2.o)
+                  0x0000b8          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsisf.o)
  __c30_signature
-                  0x0000be          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(c30_uart.o)
+                  0x0000be          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsf3.o)
  __c30_signature
-                  0x0000c4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strncmp.o)
+                  0x0000c4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(addsf3.o)
  __c30_signature
-                  0x0000ca          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.o)
+                  0x0000ca          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixsfsi.o)
  __c30_signature
-                  0x0000d0          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strcmp.o)
+                  0x0000d0          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsf3.o)
  __c30_signature
-                  0x0000d6          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(sscanf.o)
+                  0x0000d6          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(feqltle.o)
  __c30_signature
-                  0x0000dc          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fwrite.o)
+                  0x0000dc          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fgtge.o)
  __c30_signature
-                  0x0000e2          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xfiles.o)
+                  0x0000e2          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
  __c30_signature
-                  0x0000e8          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o)
+                  0x0000e8          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fpack.o)
  __c30_signature
-                  0x0000ee          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xscanf.o)
+                  0x0000ee          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack2.o)
  __c30_signature
-                  0x0000f4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xfwprep.o)
+                  0x0000f4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(futil.o)
  __c30_signature
-                  0x0000fa          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(memchr.o)
+                  0x0000fa          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(funpack.o)
  __c30_signature
-                  0x000100          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(memcpy.o)
+                  0x000100          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fcompare.o)
  __c30_signature
-                  0x000106          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fflush.o)
+                  0x000106          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(printf.o)
  __c30_signature
-                  0x00010c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xvacopy.o)
+                  0x00010c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strcmp.o)
  __c30_signature
-                  0x000112          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strchr.o)
+                  0x000112          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strncmp.o)
  __c30_signature
-                  0x000118          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputtxt.o)
+                  0x000118          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(sscanf.o)
  __c30_signature
-                  0x00011e          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.o)
+                  0x00011e          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fwrite.o)
  __c30_signature
-                  0x000124          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfld.o)
+                  0x000124          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xfiles.o)
  __c30_signature
-                  0x00012a          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(malloc.o)
+                  0x00012a          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o)
  __c30_signature
-                  0x000130          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fclose.o)
+                  0x000130          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xscanf.o)
  __c30_signature
-                  0x000136          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o)
+                  0x000136          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xfwprep.o)
  __c30_signature
-                  0x00013c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strlen.o)
+                  0x00013c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(memchr.o)
  __c30_signature
-                  0x000142          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o)
+                  0x000142          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(memcpy.o)
  __c30_signature
-                  0x000148          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetint.o)
+                  0x000148          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fflush.o)
  __c30_signature
-                  0x00014e          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfloa.o)
+                  0x00014e          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xvacopy.o)
  __c30_signature
-                  0x000154          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetstr.o)
+                  0x000154          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strchr.o)
  __c30_signature
-                  0x00015a          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetmem.o)
+                  0x00015a          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputfld.o)
  __c30_signature
-                  0x000160          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(free.o)
+                  0x000160          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xputtxt.o)
  __c30_signature
-                  0x000166          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xatexit.o)
+                  0x000166          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfld.o)
  __c30_signature
-                  0x00016c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldunsca.o)
+                  0x00016c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(malloc.o)
  __c30_signature
-                  0x000172          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldscale.o)
+                  0x000172          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fclose.o)
  __c30_signature
-                  0x000178          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(ldiv.o)
+                  0x000178          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o)
  __c30_signature
-                  0x00017e          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgenld.o)
+                  0x00017e          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o)
  __c30_signature
-                  0x000184          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoll.o)
+                  0x000184          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(strlen.o)
  __c30_signature
-                  0x00018a          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoull.o)
+                  0x00018a          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetint.o)
  __c30_signature
-                  0x000190          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstold.o)
+                  0x000190          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfloa.o)
  __c30_signature
-                  0x000196          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xdnorm.o)
+                  0x000196          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetstr.o)
  __c30_signature
-                  0x00019c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(div.o)
+                  0x00019c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetmem.o)
  __c30_signature
-                  0x0001a2          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(errno.o)
+                  0x0001a2          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(free.o)
  __c30_signature
-                  0x0001a8          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstopfx.o)
+                  0x0001a8          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xatexit.o)
  __c30_signature
-                  0x0001ae          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoflt.o)
+                  0x0001ae          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldunsca.o)
  __c30_signature
-                  0x0001b4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoxflt.o)
+                  0x0001b4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldscale.o)
  __c30_signature
-                  0x0001ba          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtento.o)
+                  0x0001ba          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(ldiv.o)
  __c30_signature
-                  0x0001c0          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xferaise.o)
+                  0x0001c0          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgenld.o)
  __c30_signature
-                  0x0001c6          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(write.o)
+                  0x0001c6          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoll.o)
  __c30_signature
-                  0x0001cc          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(close.o)
+                  0x0001cc          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoull.o)
  __c30_signature
-                  0x0001d2          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(remove.o)
+                  0x0001d2          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstold.o)
  __c30_signature
-                  0x0001d8          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(sbrk.o)
+                  0x0001d8          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xdnorm.o)
  __c30_signature
-                  0x0001de          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(brk.o)
+                  0x0001de          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(div.o)
  __c30_signature
-                  0x0001e4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divmoddi3.o)
+                  0x0001e4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(errno.o)
  __c30_signature
-                  0x0001ea          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldi3.o)
+                  0x0001ea          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstopfx.o)
+ __c30_signature
+                  0x0001f0          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoflt.o)
+ __c30_signature
+                  0x0001f6          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoxflt.o)
+ __c30_signature
+                  0x0001fc          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtento.o)
+ __c30_signature
+                  0x000202          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xferaise.o)
+ __c30_signature
+                  0x000208          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(write.o)
+ __c30_signature
+                  0x00020e          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(close.o)
+ __c30_signature
+                  0x000214          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(remove.o)
+ __c30_signature
+                  0x00021a          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(sbrk.o)
+ __c30_signature
+                  0x000220          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(brk.o)
+ __c30_signature
+                  0x000226          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(extendsfdf.o)
+ __c30_signature
+                  0x00022c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(deqltle.o)
+ __c30_signature
+                  0x000232          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(fixdfsi.o)
+ __c30_signature
+                  0x000238          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatsidf.o)
+ __c30_signature
+                  0x00023e          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(subdf3.o)
+ __c30_signature
+                  0x000244          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dgtge.o)
+ __c30_signature
+                  0x00024a          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divsi3.o)
+ __c30_signature
+                  0x000250          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldf3.o)
+ __c30_signature
+                  0x000256          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divdf3.o)
+ __c30_signature
+                  0x00025c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(umodsi3.o)
+ __c30_signature
+                  0x000262          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(udivsi3.o)
+ __c30_signature
+                  0x000268          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(mulsi3.o)
+ __c30_signature
+                  0x00026e          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(divmoddi3.o)
+ __c30_signature
+                  0x000274          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(muldi3.o)
+ __c30_signature
+                  0x00027a          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(truncdfsf.o)
+ __c30_signature
+                  0x000280          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(adddf3.o)
+ __c30_signature
+                  0x000286          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dcompare.o)
+ __c30_signature
+                  0x00028c          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dunpack.o)
+ __c30_signature
+                  0x000292          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dunpack2.o)
+ __c30_signature
+                  0x000298          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(floatdidf.o)
+ __c30_signature
+                  0x00029e          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dpack.o)
+ __c30_signature
+                  0x0002a4          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(umuldi3.o)
+ __c30_signature
+                  0x0002aa          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dtype.o)
+ __c30_signature
+                  0x0002b0          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libm-coff.a(dpropagateNaN.o)
 
-.nbss               0x0800         0xec
- .nbss              0x0800         0x78 rec_generic_driver.o
+.nbss               0x0800        0x130
+ .nbss              0x0800         0xcc rec_generic_driver.o
                     0x0800                  state
                     0x0814                  parameters
- .nbss              0x0878         0x52 uart_stdio.o
-                    0x0878                  Serial
- .nbss              0x08ca         0x12 protocolos.o
-                    0x08ca                  param_1_aux
-                    0x08ce                  angle
-                    0x08d0                  angle_2
-                    0x08d2                  adc_value
-                    0x08d4                  param_4_aux
-                    0x08d8                  param_2_aux
- .nbss              0x08dc         0x10 maq_de_estados.o
-                    0x08dc                  param_1
-                    0x08e0                  param_2
-                    0x08e4                  param_3
-                    0x08e8                  param_4
+                    0x08b4                  param_1
+                    0x08b8                  param_2
+                    0x08bc                  param_3
+                    0x08c0                  param_4
+                    0x08c4                  param_5
+                    0x08c6                  param_6
+                    0x08ca                  param_7
+ .nbss              0x08cc         0x52 uart.o
+                    0x08cc                  Serial
+ .nbss              0x091e         0x12 protocolos.o
+                    0x091e                  param_1_aux
+                    0x0922                  angle
+                    0x0924                  angle_2
+                    0x0926                  adc_value
+                    0x0928                  param_4_aux
+                    0x092c                  param_2_aux
 
-.ndata              0x08ec          0x6
- .ndata             0x08ec          0x6 step_motor.o
-                    0x08ec                  motor_actual_position
-                    0x08ee                  real_position
-                    0x08f0                  last_way
+.ndata              0x0930          0xc
+ .ndata             0x0930          0x6 rec_generic_driver.o
+                    0x0930                  stop
+                    0x0932                  time_out
+                    0x0934                  protocolo
+ .ndata             0x0936          0x6 step_motor.o
+                    0x0936                  motor_actual_position
+                    0x0938                  real_position
+                    0x093a                  last_way
 
-.nbss               0x08f2          0x6
- .nbss              0x08f2          0x6 step_motor2.o
-                    0x08f2                  motor2_actual_position
-                    0x08f4                  last_way2
-                    0x08f6                  real_position2
+.nbss               0x093c          0x6
+ .nbss              0x093c          0x6 step_motor2.o
+                    0x093c                  motor2_actual_position
+                    0x093e                  last_way2
+                    0x0940                  real_position2
 
-.ndata              0x08f8          0xa
- .ndata             0x08f8          0x4 rec_generic_driver.o
-                    0x08f8                  stop
-                    0x08fa                  reset
- .ndata             0x08fc          0x4 protocolos.o
-                    0x08fc                  angle_2_min
- .ndata             0x0900          0x2 maq_de_estados.o
-                    0x0900                  protocolo
+.ndata              0x0942          0x4
+ .ndata             0x0942          0x4 protocolos.o
+                    0x0942                  angle_2_min
 
-.data               0x0902        0x162
- .data              0x0902         0x88 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xfiles.o)
-                    0x0902                  _Files
-                    0x0912                  _Stderr
-                    0x093a                  _Stdout
-                    0x0962                  _Stdin
- .data              0x098a         0x4a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoull.o)
- .data              0x09d4         0x48 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o)
- .data              0x0a1c         0x48 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtento.o)
+.data               0x0946        0x162
+ .data              0x0946         0x88 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xfiles.o)
+                    0x0946                  _Files
+                    0x0956                  _Stderr
+                    0x097e                  _Stdout
+                    0x09a6                  _Stdin
+ .data              0x09ce         0x4a c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoull.o)
+ .data              0x0a18         0x48 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o)
+ .data              0x0a60         0x48 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtento.o)
 
-.dconst             0x0a64         0x32
- .dconst            0x0a64         0x32 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o)
+.dconst             0x0aa8         0x32
+ .dconst            0x0aa8         0x32 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xldtob.o)
 
-.data               0x0a96         0xe0
- .data              0x0a96         0x2e c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoxflt.o)
- .data              0x0ac4         0x26 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetint.o)
- .data              0x0aea         0x22 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o)
- .data              0x0b0c         0x20 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstold.o)
- .data              0x0b2c         0x20 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoflt.o)
- .data              0x0b4c         0x18 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfloa.o)
- .data              0x0b64         0x12 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o)
+.data               0x0ada         0xe0
+ .data              0x0ada         0x2e c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoxflt.o)
+ .data              0x0b08         0x26 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetint.o)
+ .data              0x0b2e         0x22 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xlitob.o)
+ .data              0x0b50         0x20 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstold.o)
+ .data              0x0b70         0x20 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xstoflt.o)
+ .data              0x0b90         0x18 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgetfloa.o)
+ .data              0x0ba8         0x12 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o)
 
-.dconst             0x0b76         0x14
- .dconst            0x0b76          0xc c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xscanf.o)
- .dconst            0x0b82          0x8 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o)
+.dconst             0x0bba         0x14
+ .dconst            0x0bba          0xc c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xscanf.o)
+ .dconst            0x0bc6          0x8 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xprintf.o)
 
-.data               0x0b8a          0xc
- .data              0x0b8a          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(malloc.o)
-                    0x0b8a                  _Size_block
-                    0x0b8c                  _Aldata
- .data              0x0b90          0x4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(errno.o)
-                    0x0b90                  _Tls_setup_errno
-                    0x0b92                  errno
- .data              0x0b94          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(c30_uart.o)
-                    0x0b94                  __C30_UART
+.data               0x0bce          0xc
+ .data              0x0bce          0x6 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(malloc.o)
+                    0x0bce                  _Size_block
+                    0x0bd0                  _Aldata
+ .data              0x0bd4          0x4 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(errno.o)
+                    0x0bd4                  _Tls_setup_errno
+                    0x0bd6                  errno
+ .data              0x0bd8          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(c30_uart.o)
+                    0x0bd8                  __C30_UART
 
-.bss                0x0b96          0x2
- .bss               0x0b96          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fclose.o)
+.bss                0x0bda          0x2
+ .bss               0x0bda          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(fclose.o)
 
-.data               0x0b98          0x2
- .data              0x0b98          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(ldiv.o)
+.data               0x0bdc          0x2
+ .data              0x0bdc          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(ldiv.o)
 
-.dconst             0x0b9a          0x2
- .dconst            0x0b9a          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgenld.o)
+.dconst             0x0bde          0x2
+ .dconst            0x0bde          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(xgenld.o)
 
-.data               0x0b9c          0x2
- .data              0x0b9c          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(div.o)
+.data               0x0be0          0x2
+ .data              0x0be0          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libc-coff.a(div.o)
 
-.bss                0x0b9e          0x2
- .bss               0x0b9e          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(brk.o)
-                    0x0b9e                  __curbrk
+.bss                0x0be2          0x2
+ .bss               0x0be2          0x2 c:/programas/microchip/mplab c30/bin/bin/../../lib\libpic30-coff.a(brk.o)
+                    0x0be2                  __curbrk
 
-.heap               0x0ba0         0x80
- .heap              0x0ba0         0x80 heap
+.heap               0x0be4         0x80
+ .heap              0x0be4         0x80 heap
 
-.const              0xbd42        0x132 load address 0x003d42  
- .const             0xbd42         0x74 maq_de_estados.o
- .const             0xbdb6         0x64 rec_generic_driver.o
- .const             0xbe1a         0x32 protocolos.o
- .const             0xbe4c         0x18 step_motor.o
-                    0xbe4c                  step
- .const             0xbe64          0x8 step_motor2.o
- .const             0xbe6c          0x8 optica_exp.o
+.const              0xbcda        0x182 load address 0x003cda  
+ .const             0xbcda         0xbc rec_generic_driver.o
+ .const             0xbd96         0x66 maq_de_estados.o
+ .const             0xbdfc         0x32 protocolos.o
+ .const             0xbe2e         0x18 step_motor.o
+                    0xbe2e                  step
+ .const             0xbe46          0x8 step_motor2.o
+ .const             0xbe4e          0x8 optica_exp.o
+ .const             0xbe56          0x6 uart.o
 
-.text             0x003e74        0xad2
- .text            0x003e74        0x4c2 protocolos.o
-                  0x003e74                  protocolo_1_configuring
-                  0x003ea0                  protocolo_2_configuring
-                  0x003f46                  protocolo_3_configuring
-                  0x003fb2                  protocolo_4_configuring
-                  0x004056                  protocolo_1_starting
-                  0x00405e                  protocolo_2_starting
-                  0x004066                  protocolo_3_starting
-                  0x00406e                  protocolo_4_starting
-                  0x004076                  protocolo_1_started
-                  0x004110                  protocolo_2_started
-                  0x004178                  protocolo_3_started
-                  0x004252                  protocolo_4_started
-                  0x00432c                  protocolo_5_started
- .text            0x004336        0x32a step_motor2.o
-                  0x004336                  open_motor2
-                  0x004352                  walk_motor2
-                  0x004392                  walk_motor2_to
-                  0x0044de                  calibrate_motor2
-                  0x0045f0                  motor2_compensation
- .text            0x004660        0x2e6 step_motor.o
-                  0x004660                  open_motor
-                  0x00467a                  walk_motor
-                  0x0046c2                  walk_motor_to
-                  0x0047fe                  calibrate_motor
-                  0x0048d6                  motor_compensation
+.text             0x003e5c        0xd20
+ .text            0x003e5c        0x710 protocolos.o
+                  0x003e5c                  protocolo_1_configuring
+                  0x003e96                  protocolo_2_configuring
+                  0x003f2a                  protocolo_3_configuring
+                  0x003f9e                  protocolo_4_configuring
+                  0x00404a                  protocolo_1_starting
+                  0x004052                  protocolo_2_starting
+                  0x00405a                  protocolo_3_starting
+                  0x004062                  protocolo_4_starting
+                  0x00406a                  protocolo_1_started
+                  0x00410a                  protocolo_2_started
+                  0x004172                  protocolo_3_started
+                  0x00434e                  protocolo_4_started
+                  0x00452a                  protocolo_5_started
+                  0x004564                  stopping
+ .text            0x00456c        0x32a step_motor2.o
+                  0x00456c                  open_motor2
+                  0x004588                  walk_motor2
+                  0x0045c8                  walk_motor2_to
+                  0x004714                  calibrate_motor2
+                  0x004826                  motor2_compensation
+ .text            0x004896        0x2e6 step_motor.o
+                  0x004896                  open_motor
+                  0x0048b0                  walk_motor
+                  0x0048f8                  walk_motor_to
+                  0x004a34                  calibrate_motor
+                  0x004b0c                  motor_compensation
 
-.dinit            0x004946        0x292
- .dinit           0x004946        0x292 data_init
+.dinit            0x004b7c        0x284
+ .dinit           0x004b7c        0x284 data_init
 
-.text             0x004bd8        0x768
- .text            0x004bd8        0x20a maq_de_estados.o
-                  0x004bd8                  maq_de_estados
- .text            0x004de2        0x1fe rec_generic_driver.o
-                  0x004de2                  rec_generic_driver
- .text            0x004fe0         0xfc uart_stdio.o
-                  0x004fe0                  config_uart2
-                  0x005008                  command_received
-                  0x005050                  _U2RXInterrupt
- .text            0x0050dc         0xc8 adc.o
-                  0x0050dc                  configure_adc
-                  0x005148                  configure_adc_channel
-                  0x005172                  read_adc
- .text            0x0051a4         0xa6 optica_exp.o
-                  0x0051a4                  main
-                  0x0051da                  angle_1_conversion
-                  0x0051f8                  conv_angle_1
-                  0x005212                  angle_2_conversion
-                  0x005230                  conv_angle_2
- .text            0x00524a         0x66 delays.o
-                  0x00524a                  delay_ms
-                  0x00526c                  delay_100ys
-                  0x00528e                  delay_10ys
- .text            0x0052b0         0x64 timer.o
-                  0x0052b0                  open_timer1
-                  0x0052e4                  open_timer1_for_communication
- .text            0x005314         0x2c servo.o
-                  0x005314                  open_servo
-                  0x00531e                  move_servo
+.text             0x004e00        0x68a
+ .text            0x004e00        0x1a8 maq_de_estados.o
+                  0x004e00                  maq_de_estados
+ .text            0x004fa8        0x178 rec_generic_driver.o
+                  0x004fa8                  rec_generic_driver
+ .text            0x005120        0x10a uart.o
+                  0x005120                  configure_uart2
+                  0x00516a                  command_received
+                  0x00519a                  _U2RXInterrupt
+ .text            0x00522a         0xc4 adc.o
+                  0x00522a                  configure_adc
+                  0x005296                  configure_adc_channel
+                  0x0052bc                  read_adc
+ .text            0x0052ee         0xa6 optica_exp.o
+                  0x0052ee                  main
+                  0x005324                  angle_1_conversion
+                  0x005342                  conv_angle_1
+                  0x00535c                  angle_2_conversion
+                  0x00537a                  conv_angle_2
+ .text            0x005394         0x66 delays.o
+                  0x005394                  delay_ms
+                  0x0053b6                  delay_100ys
+                  0x0053d8                  delay_10ys
+ .text            0x0053fa         0x64 timer.o
+                  0x0053fa                  open_timer1
+                  0x00542e                  open_timer1_for_communication
+ .text            0x00545e         0x2c servo.o
+                  0x00545e                  open_servo
+                  0x005468                  move_servo
 
-.isr              0x005340          0x2
- .isr             0x005340          0x2 default_isr
-                  0x005340                  _DefaultInterrupt
+.isr              0x00548a          0x2
+ .isr             0x00548a          0x2 default_isr
+                  0x00548a                  _DefaultInterrupt

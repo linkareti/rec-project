@@ -27,26 +27,6 @@ void walk_motor(unsigned int way, unsigned int steps, unsigned int delay){ //the
   MOTOR_LAT&=MOTOR_BITS_LOW; //put MOTOR pins LOW (motor stoped)
 }
 
-/*
-void walk_motor_to(unsigned int to, unsigned int delay){  //the motor walks to the position to
-   unsigned int i;
-   char way;
-   i=motor_actual_position;
-   if(to==0) {i=POSITION_MAX;}  //if to==0, motor walks until the END_CURSE
-   else if(to>POSITION_MAX) to=POSITION_MAX;
-   if(i<to) way=1;
-   else way=-1;
-   while(way==1 && i!=to){
-    MOTOR_LAT=(MOTOR_LAT&MOTOR_BITS_LOW)+(step[UP_WAY][i%8]<<MOTOR_FIRST_BIT); //walks the following step
-    i+=way;
-    delay_100ys(delay);
-   }
-   MOTOR_LAT&=MOTOR_BITS_LOW; //put MOTOR pins LOW (motor stoped)
-   if(way==-1) motor_actual_position=0;  //actual position is calibrated in the END_CURSE
-   else motor_actual_position=i;
-}
-*/
-
 void walk_motor_to(unsigned int to, unsigned int delay){
 	int limit = 0;
 	int way; 
@@ -85,84 +65,6 @@ void walk_motor_to(unsigned int to, unsigned int delay){
 	//printf("real_position: %d\r", real_position);
 }
 
-/*
-void calibrate_motor(){
-	int x = 0;
-	int i;
-	int x_last_0 = 0;
-	int x_last_1 = 0;
-	int x_last_2 = 0;
-	int detected = 0;
-	int count = 0;
-	int aux = 0, aux_last = 0;
-	move_servo(FREE);
-	walk_motor2_to(CALIB_AUX2 + 653, MOTOR2_SPEED);
-	LASER = ON;
-	i = POSITION_MIN;
-	last_way = 1;
-	real_position = 0;
-	while((i >= POSITION_MIN) && (i <= POSITION_MAX)){
-		walk_motor_to(i, MOTOR_SPEED);
-		x_last_2 = x_last_1;
-		x_last_1 = x_last_0;
-		x_last_0 = x;
-		x = read_adc(ADC_CHANNEL);
-		if(x > VAL_THRES_MIN){
-			aux = 1;
-			if(aux != aux_last){
-				printf("***************\r");
-				aux_last = 1;
-			}
-			printf("ADC=%d,  i=%d\r", x, i);
-		}
-		else if(x < 1100){
-			aux = 0;
-			aux_last = 0;
-		}	
-		if((x_last_2 < VAL_THRES_MIN) && (x_last_1 > VAL_THRES_MAX) && (x_last_0 > VAL_THRES_MAX)){
-			i = -5;
-			detected = 1;
-			printf("detectou\r");
-		}	
-		if((i == POSITION_MAX) && (detected == 0)){		//When de calibration failed one time - make a recalibration til 5 times (count)
-			i = POSITION_MIN;
-			real_position = 0;
-			//ClrWdt();
-			count++;
-		}
-		if(detected == 1){		//For verifiy if the calibration is correct
-			count = 0;
-			detected = 0;
-			real_position = CALIB1_AUX;		//Save the real position
-			i = CALIB1_AUX;
-			while(i >= POSITION_MIN){
-				walk_motor_to(i, MOTOR_SPEED);
-				x = read_adc(ADC_CHANNEL);
-				if(x > 1600){
-					count++;
-					printf("ADC=%d,  i=%d\r", x, i);
-					if((count > 6) && (i > 400) && (i < 500)){
-						detected = 1;
-						i = -5;
-						//printf("Calibracao correcta\r");
-						walk_motor_to(0, MOTOR_SPEED);
-					}
-				}
-				else{count = 0;}
-				i--;
-			}//End of while(i >= POSITION_MIN)
-			if(detected == 0) count = 3;
-		}
-		if(count == 3){
-			i = POSITION_MAX + 1;		//To exit the while
-			printf("ERR\t%d\r", 1);
-		}
-	i++;
-	}	
-	LASER = OFF;
-}*/
-
-
 void calibrate_motor(){
 	int x = 0;
 	int i;
@@ -176,7 +78,7 @@ void calibrate_motor(){
 	i = POSITION_MIN;
 	last_way = 1;
 	real_position = 0;
-	while(i <= POSITION_MAX){
+	while(i <= (POSITION_MAX+100)){
 		ClrWdt();
 		walk_motor_to(i, MOTOR_SPEED);
 		x = read_adc(ADC_CHANNEL);
@@ -192,13 +94,13 @@ void calibrate_motor(){
 			j = 0;
 		}	
 		if((detected == 1) && (j == 0)){
-			i = POSITION_MAX;
+			i = POSITION_MAX+100;
 			real_position = angle_1_conversion(90) + (int) (j_aux/2. + 1.5) - CALIB1_AUX;
 			walk_motor_to(0, MOTOR_SPEED);
 		}	
 
-		if((detected == 0) && (i == POSITION_MAX)){
-			i = POSITION_MAX;		//To exit the while
+		if((detected == 0) && (i == (POSITION_MAX+100))){
+			i = POSITION_MAX+100;		//To exit the while
 			printf("ERR\t%d\r", 1);
 		}
 	i++;

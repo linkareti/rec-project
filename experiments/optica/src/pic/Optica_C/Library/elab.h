@@ -22,7 +22,7 @@ void delay_100ys(unsigned int delay);
 void delay_10ys(unsigned int delay);
 
 //
-// uart_stdio.c
+// uart.c
 //
 typedef struct{
 	char rbuf[80];
@@ -31,7 +31,7 @@ typedef struct{
 
 extern Communication Serial;
 
-void config_uart2(void);
+void configure_uart2(void);
 int command_received(void);
 void __attribute__((__interrupt__,auto_psv)) _U2RXInterrupt(void);
 
@@ -111,16 +111,28 @@ double conv_angle_2(int);
 extern char state[20];
 extern char parameters[N_PARAMETERS_MAX][20];
 extern int stop;
-extern int reset;
 void rec_generic_driver(void);
 
-//
-// maq_de_estados.c
-//
+extern int protocolo;
 extern double param_1;
 extern double param_2;
 extern double param_3;
 extern double param_4;
+extern int param_5;
+extern double param_6;
+extern int param_7;
+
+//
+// maq_de_estados.c
+//
+//extern int protocolo;
+//extern double param_1;
+//extern double param_2;
+//extern double param_3;
+//extern double param_4;
+//extern double param_5;
+//extern double param_6;
+//extern int param_7;
 void maq_de_estados(void);
 
 
@@ -142,3 +154,4 @@ void protocolo_3_started();
 void protocolo_4_started();
 void protocolo_5_started();
 void protocolo_6_started();
+void stopping();

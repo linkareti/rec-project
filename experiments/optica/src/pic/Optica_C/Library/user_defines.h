@@ -7,16 +7,17 @@
 #define OFF 0
 
 //
-// uart_stdio.c
+// uart.c
 //
-#define FCY ((long) 7373) //instruction frequency in kHz
+#define FCY ((long) 29491) //instruction frequency in kHz
 #define BAUD_RATE 115200
 
 //
 // rec_generic_driver.c
 //
-#define ID_DO_HARDWARE "OPTICA"
-#define N_PARAMETERS_MAX 5
+#define ID_DO_HARDWARE "ELAB_OPTICA_DSPIC_V1.0"
+#define N_PARAMETERS_MAX 8
+#define TIME_OUT 180 //* ~0.5s, this value should be relatively well majored (2x higher)
 
 //
 // adc.c
@@ -34,12 +35,12 @@
 #define MOTOR_TRIS TRISB
 #define MOTOR_FIRST_BIT 8
 #define UP_WAY 0
-#define POSITION_MAX 1853
+#define POSITION_MAX 1852
 #define POSITION_MIN 0
 #define MOTOR_SPEED 100
 #define FOLGA 10
 #define VAL_THRES_MIN 1400
-#define CALIB1_AUX 4
+#define CALIB1_AUX 4	//4
 
 //
 //step_motor2.c
@@ -50,11 +51,11 @@
 #define MOTOR2_TRIS TRISD
 #define MOTOR2_FIRST_BIT 0
 #define UP_WAY2 1
-#define POSITION2_MAX 1662	//1674
+#define POSITION2_MAX 1662	//1662
 #define REAL_MAX_POS 1700	//1700	(1708)
 #define POSITION2_MIN 38	//38
-#define CALIB_AUX 200
-#define CALIB_AUX2 191
+#define CALIB_AUX 200	//se está antes do sensor calibracao
+#define CALIB_AUX2 187	//define a posicao onde detectou
 #define MOTOR2_SPEED 100
 #define FOLGA2 13
 
@@ -63,6 +64,6 @@
 //
 #define SERVO _LATD9                                                                                 
 #define SERVO_TRIS _TRISD9
-#define FREE 150
-#define POL_VER 40
-#define POL_HOR 119
+#define FREE 160
+#define POL_VER 44.5	//For PLL 16x
+#define POL_HOR 132		//For PLL 16x
