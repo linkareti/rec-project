@@ -258,11 +258,6 @@ public class HardwareInfoXMLReader {
 				// attr.getValue();
 				hardwareInfo.setFamiliarName(attr.getValue());
 			}
-			if (attr.getName().equals("apparatusBundleName")) { // <HardwareInfo
-				// apparatusBundleName="???">
-				// attr.getValue();
-				hardwareInfo.setApparatusBundleName(attr.getValue());
-			}
 			if (attr.getName().equals("name")) { // <HardwareInfo name="???">
 				// attr.getValue();
 				hardwareInfo.setHardwareName(attr.getValue());

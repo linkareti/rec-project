@@ -2,7 +2,7 @@
 
 <!-- Created by jp on 9 de Maio de 2003, 19:07 -->
 
-<HardwareInfo id="ELAB_PV_STAMP_V02" familiarName="Boyle Mariotte" apparatusBundleName="pv" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+<HardwareInfo id="ELAB_PV_STAMP_V02" familiarName="Boyle Mariotte" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
     <description>
         <![CDATA[ 
         Esta experiência serve para - não esquecer de alterar esta descrição
@@ -40,16 +40,16 @@
         <step-samples>1</step-samples>
     </sampling-scale>
     
-    <ChannelInfo name="Pressão" independent="false" direction="CHANNEL_INPUT">
-        <scale label="Pressão [mBar]" physicsunitname="Bar" physicsunitsymbol="Bar" multiplier="milli" selected="true">
+    <ChannelInfo name="pv$rec.exp.pv.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
+        <scale label="pv$rec.exp.pv.hardwareinfo.channel.0.label" physicsunitname="pv$rec.exp.pv.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="Bar" multiplier="milli" selected="true">
             <min><PhysicsVal type="int">800</PhysicsVal></min>
             <max><PhysicsVal type="int">2500</PhysicsVal></max>
             <step><PhysicsVal type="int">10</PhysicsVal></step>
             <errordefault><PhysicsVal type="int">10</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
-    <ChannelInfo name="Volume" independent="false" direction="CHANNEL_INPUT">
-        <scale label="Volume [ml]" physicsunitname="litros" physicsunitsymbol="l" multiplier="milli" selected="true">
+    <ChannelInfo name="pv$rec.exp.pv.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
+        <scale label="pv$rec.exp.pv.hardwareinfo.channel.1.label" physicsunitname="pv$rec.exp.pv.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="l" multiplier="milli" selected="true">
             <min><PhysicsVal type="float">4</PhysicsVal></min>
             <max><PhysicsVal type="float">7</PhysicsVal></max>
             <step><PhysicsVal type="float">0.001</PhysicsVal></step>

@@ -27,9 +27,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 
 	/** Holds value of property familiarName. */
 	private String familiarName = null;
-	
-	/** Holds value of property apparatusBundleName. */
-	private String apparatusBundleName = null;
 
 	/** Holds value of property channelsInfo. */
 	private com.linkare.rec.data.metadata.ChannelInfo[] channelsInfo;
@@ -71,8 +68,7 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 			String hardware_unique_id, com.linkare.rec.data.metadata.ChannelInfo[] channels_info,
 			com.linkare.rec.data.metadata.ChannelParameter[] hardware_parameters,
 			com.linkare.rec.data.metadata.FrequencyScale[] hardware_frequencies,
-			com.linkare.rec.data.synch.Frequency selectedFrequency, SamplesNumScale samplingScale,
-			String apparatusBundleName) {
+			com.linkare.rec.data.synch.Frequency selectedFrequency, SamplesNumScale samplingScale) {
 		this.setFamiliarName(familiarName);
 		this.setDriverVersion(DriverVersion);
 		this.setHardwareName(HardwareName);
@@ -85,7 +81,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 		this.setHardwareFrequencies(hardware_frequencies);
 		this.setSelectedFrequency(selectedFrequency);
 		this.setSamplingScale(samplingScale);
-		this.setApparatusBundleName(apparatusBundleName);
 	}
 
 	/**
@@ -99,7 +94,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 		this.setHardwareManufacturer(other.getHardwareManufacturer());
 		this.setDescriptionText(other.getDescriptionText());
 		this.setHardwareUniqueID(other.getHardwareUniqueID());
-		this.setApparatusBundleName(other.getApparatusBundleName());
 
 		ChannelInfo[] temp = null;
 		if (other.getChannelsInfo() != null) {
@@ -146,24 +140,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 	 */
 	public void setFamiliarName(String familiarName) {
 		this.familiarName = familiarName;
-	}
-
-	/**
-	 * Getter for property apparatusBundleName.
-	 * 
-	 * @return Value of property apparatusBundleName.
-	 */
-	public String getApparatusBundleName() {
-		return this.apparatusBundleName;
-	}
-
-	/**
-	 * Setter for property apparatusBundleName.
-	 * 
-	 * @param apparatusBundleName New value of property apparatusBundleName.
-	 */
-	public void setApparatusBundleName(String apparatusBundleName) {
-		this.apparatusBundleName = apparatusBundleName;
 	}
 
 	/**
@@ -596,7 +572,6 @@ public final class HardwareInfo implements org.omg.CORBA.portable.IDLEntity {
 
 		config.setTotalSamples(samplingScale.getMinSamples());
 		config.setFamiliarName(getFamiliarName());
-		config.setApparatusBundleName(getApparatusBundleName());
 		config.setHardwareUniqueID(getHardwareUniqueID());
 		config.setTimeStart(new com.linkare.rec.data.synch.DateTime());
 

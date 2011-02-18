@@ -60,8 +60,6 @@ public interface ExpDataModel {
 
 	public String getApparatusName();
 
-	public String getApparatusBundleName();
-
 	public void pause();
 
 	public void play();

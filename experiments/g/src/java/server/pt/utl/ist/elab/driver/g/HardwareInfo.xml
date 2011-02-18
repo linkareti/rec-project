@@ -31,16 +31,16 @@
         <step-samples>1</step-samples>
     </sampling-scale>
     
-    <ChannelInfo name="Height" independent="false" direction="CHANNEL_INPUT">
-        <scale label="Height [m]" physicsunitname="meter" physicsunitsymbol="m" multiplier="none" selected="true">
+    <ChannelInfo name="g$rec.exp.g.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
+        <scale label="g$rec.exp.g.hardwareinfo.channel.0.label" physicsunitname="g$rec.exp.g.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="m" multiplier="none" selected="true">
             <min><PhysicsVal type="float">0.</PhysicsVal></min>
             <max><PhysicsVal type="float">1.50</PhysicsVal></max>
             <step><PhysicsVal type="float">0.000346</PhysicsVal></step>
             <errordefault><PhysicsVal type="float">0.0005</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
-    <ChannelInfo name="Relative Time" independent="false" direction="CHANNEL_INPUT">
-        <scale label="Relative Time [ms]" physicsunitname="seconds" physicsunitsymbol="s" multiplier="milli" selected="true">
+    <ChannelInfo name="g$rec.exp.g.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
+        <scale label="g$rec.exp.g.hardwareinfo.channel.1.label" physicsunitname="g$rec.exp.g.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="s" multiplier="milli" selected="true">
             <min><PhysicsVal type="int">0</PhysicsVal></min>
             <max><PhysicsVal type="int">200000</PhysicsVal></max>
             <step><PhysicsVal type="int">1</PhysicsVal></step>

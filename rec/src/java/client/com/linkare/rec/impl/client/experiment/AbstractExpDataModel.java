@@ -42,7 +42,6 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 
 	private HardwareAcquisitionConfig acqHeader = null;
 	private String apparatusName = null;
-	private String apparatusBundleName = null;
 
 	private transient DataReceiver _this = null;
 	private transient ObjectID oid = null;
@@ -165,20 +164,6 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		}
 
 		return "Unknown";
-	}
-	
-	public String getApparatusBundleName() {
-		if (apparatusBundleName != null) {
-			return apparatusBundleName;
-		}
-		try {
-			apparatusBundleName = getAcquisitionConfig().getApparatusBundleName();
-			return apparatusBundleName;
-		} catch (NullPointerException npe) {
-			LoggerUtil.logThrowable("Couldn't get Bundle Name from Acquisition Header!", npe, LogManager
-					.getLogManager().getLogger(DATA_RECEIVER_LOGGER));
-		}
-		return null;
 	}
 
 	/**

@@ -25,6 +25,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataDisplay;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -115,7 +116,7 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 
 	public void headerAvailable(HardwareAcquisitionConfig header) {
 		Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
-		String chnX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName();
+		String chnX = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName());
 		String pusX = scaleX.getPhysicsUnitSymbol();
 		String multiplierX = scaleX.getMultiplier().toString();
 
@@ -126,13 +127,12 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 
 		if (getChannelDisplayYArray().length == 0) {
 			scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getSelectedScale();
-			chnY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName();
+			chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName());
 			pusY = scaleY.getPhysicsUnitSymbol();
 			multiplierY = scaleY.getMultiplier().toString();
 		} else {
 			scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayAtYArray(0)).getSelectedScale();
-			chnY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayAtYArray(0)).getChannelName();
-			chnY = scaleY.getPhysicsUnitName();
+			chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName());
 			pusY = scaleY.getPhysicsUnitSymbol();
 			multiplierY = scaleY.getMultiplier().toString();
 		}

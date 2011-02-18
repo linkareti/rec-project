@@ -47,7 +47,9 @@ public class MyTableModelProxy extends com.linkare.rec.impl.client.experiment.Mu
 				return null;
 			}
 		}
-		return expDataModel.getChannelConfig(getColAtArray(columnIndex)).getChannelName() + "["
+		String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(getColAtArray(columnIndex))
+				.getChannelName());
+		return ch_name + "["
 				+ expDataModel.getChannelConfig(getColAtArray(columnIndex)).getSelectedScale().getPhysicsUnitSymbol()
 				+ "]";
 	}

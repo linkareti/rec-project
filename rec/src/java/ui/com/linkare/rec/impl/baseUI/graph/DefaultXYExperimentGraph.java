@@ -25,6 +25,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
 import com.linkare.rec.impl.i18n.ReCChannelResourceUtil;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -190,35 +191,16 @@ public class DefaultXYExperimentGraph extends javax.swing.JPanel implements ExpD
 
 		Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
 		
-		String bundleName = header.getApparatusBundleName();
-		String chnX = ReCChannelResourceUtil.findName(bundleName, defaultXYDatasetProxy.getChannelDisplayX());
-		if (chnX == null) {
-			chnX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName();
-		}
-		String pusX = ReCChannelResourceUtil.findPhysicsUnitSymbol(bundleName, defaultXYDatasetProxy.getChannelDisplayX());
-		if (pusX == null) {
-			pusX = scaleX.getPhysicsUnitSymbol();
-		}
-		String multiplierX = ReCChannelResourceUtil.findMultiplier(bundleName, defaultXYDatasetProxy.getChannelDisplayX());
-		if (multiplierX == null) {
-			multiplierX = scaleX.getMultiplier().toString();
-		}
+		String chnX = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName());
+		String pusX = scaleX.getPhysicsUnitSymbol();
+		String multiplierX = scaleX.getMultiplier().toString();
 
 		Scale scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getSelectedScale();
 		
-		String chnY = ReCChannelResourceUtil.findName(bundleName, defaultXYDatasetProxy.getChannelDisplayY());
-		if (chnY == null) {
-			chnY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName();
-		}
-		String pusY = ReCChannelResourceUtil.findPhysicsUnitSymbol(bundleName, defaultXYDatasetProxy.getChannelDisplayY());
-		if (pusY == null) {
-			pusY = scaleY.getPhysicsUnitSymbol();
-		}
-		String multiplierY = ReCChannelResourceUtil.findMultiplier(bundleName, defaultXYDatasetProxy.getChannelDisplayY());
-		if (multiplierY == null) {
-			multiplierY = scaleY.getMultiplier().toString();
-		}
-
+		String chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName());
+		String pusY = scaleY.getPhysicsUnitSymbol();
+		String multiplierY = scaleY.getMultiplier().toString();
+		
 		NumberAxis xAxis = new NumberAxis(chnX + " [" + multiplierX + pusX + "]");
 		xAxis.setAutoRange(true);
 		xAxis.setAutoRangeStickyZero(false);

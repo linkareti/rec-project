@@ -7,6 +7,7 @@
 package com.linkare.rec.impl.client.experiment;
 
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -98,17 +99,15 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 				.toString();
 		String ph_unit_symbolX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale()
 				.getPhysicsUnitSymbol();
-		String ch_nameX = expDataModel.getChannelConfig(getChannelDisplayX()).getChannelName();
+		String ch_nameX = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayX())
+				.getChannelName());
 
-		String multiplierY;
-		String ph_unit_symbolY;
-		String ch_nameY;
-
-		multiplierY = expDataModel.getChannelConfig(getChannelDisplayAtYArray(series)).getSelectedScale()
-				.getMultiplier().toString();
-		ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayAtYArray(series)).getSelectedScale()
+		String multiplierY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale().getMultiplier()
+				.toString();
+		String ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
 				.getPhysicsUnitSymbol();
-		ch_nameY = expDataModel.getChannelConfig(getChannelDisplayAtYArray(series)).getChannelName();
+		String ch_nameY = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayY())
+				.getChannelName());
 
 		return ch_nameX + " [" + multiplierX + ph_unit_symbolX + "] vs " + ch_nameY + " [" + multiplierY
 				+ ph_unit_symbolY + "]";

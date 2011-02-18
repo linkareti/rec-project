@@ -46,40 +46,40 @@
         <step-samples>1</step-samples>
     </sampling-scale>
     
-    <ChannelInfo name="Pressão Glicerina" independent="false" direction="CHANNEL_INPUT">
-        <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
+    <ChannelInfo name="scuba$rec.exp.scuba.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
+        <scale label="scuba$rec.exp.scuba.hardwareinfo.channel.0.label" physicsunitname="scuba$rec.exp.scuba.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">10</PhysicsVal></max>
             <step><PhysicsVal type="float">0.020</PhysicsVal></step>
             <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
-    <ChannelInfo name="Pressão Água Salgada" independent="false" direction="CHANNEL_INPUT">
-        <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
+    <ChannelInfo name="scuba$rec.exp.scuba.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
+        <scale label="scuba$rec.exp.scuba.hardwareinfo.channel.1.label" physicsunitname="scuba$rec.exp.scuba.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">10</PhysicsVal></max>
             <step><PhysicsVal type="float">0.020</PhysicsVal></step>
             <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
-    <ChannelInfo name="Pressão Água" independent="false" direction="CHANNEL_INPUT">
-        <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
+    <ChannelInfo name="scuba$rec.exp.scuba.hardwareinfo.channel.2.name" independent="false" direction="CHANNEL_INPUT">
+        <scale label="scuba$rec.exp.scuba.hardwareinfo.channel.2.label" physicsunitname="scuba$rec.exp.scuba.hardwareinfo.channel.2.physicsunitname" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">10</PhysicsVal></max>
             <step><PhysicsVal type="float">0.020</PhysicsVal></step>
             <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
-    <ChannelInfo name="Pressão Óleo" independent="false" direction="CHANNEL_INPUT">
-        <scale label="Pressão relativa [kPa]" physicsunitname="Pascal" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
+    <ChannelInfo name="scuba$rec.exp.scuba.hardwareinfo.channel.3.name" independent="false" direction="CHANNEL_INPUT">
+        <scale label="scuba$rec.exp.scuba.hardwareinfo.channel.3.label" physicsunitname="scuba$rec.exp.scuba.hardwareinfo.channel.3.physicsunitname" physicsunitsymbol="Pa" multiplier="kilo" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">10</PhysicsVal></max>
             <step><PhysicsVal type="float">0.020</PhysicsVal></step>
             <errordefault><PhysicsVal type="float">0.005</PhysicsVal></errordefault>
         </scale>
     </ChannelInfo>
-    <ChannelInfo name="Profundidade" independent="false" direction="CHANNEL_INPUT">
-        <scale label="Profundidade [mm]" physicsunitname="metro" physicsunitsymbol="m" multiplier="milli" selected="true">
+    <ChannelInfo name="scuba$rec.exp.scuba.hardwareinfo.channel.4.name" independent="false" direction="CHANNEL_INPUT">
+        <scale label="scuba$rec.exp.scuba.hardwareinfo.channel.4.label" physicsunitname="scuba$rec.exp.scuba.hardwareinfo.channel.4.physicsunitname" physicsunitsymbol="m" multiplier="milli" selected="true">
             <min><PhysicsVal type="float">0</PhysicsVal></min>
             <max><PhysicsVal type="float">900</PhysicsVal></max>
             <step><PhysicsVal type="float">1</PhysicsVal></step>

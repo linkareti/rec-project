@@ -91,20 +91,10 @@ public class GTableModelProxy extends javax.swing.table.DefaultTableModel implem
 		}
 
 		int channelIndex = (int) Math.floor(((double) columnIndex - 1.) / 2.);
-
-		String bundleName = expDataModel.getApparatusBundleName();
-		String multiplier = ReCChannelResourceUtil.findMultiplier(bundleName, channelIndex);
-		if (multiplier == null) {
-			multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
-		}
-		String ph_unit_symbol = ReCChannelResourceUtil.findPhysicsUnitSymbol(bundleName, channelIndex);
-		if (ph_unit_symbol == null) {
-			ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getPhysicsUnitSymbol();
-		}
-		String ch_name = ReCChannelResourceUtil.findName(bundleName, channelIndex);
-		if (ch_name == null) {
-			ch_name = expDataModel.getChannelConfig(channelIndex).getChannelName();
-		}
+		
+		String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex).getChannelName());
+		String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
+		String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getPhysicsUnitSymbol();
 
 		String retorna = ch_name + " [" + multiplier + ph_unit_symbol + "]";
 

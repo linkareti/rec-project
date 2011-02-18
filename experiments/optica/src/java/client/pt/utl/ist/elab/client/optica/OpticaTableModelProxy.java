@@ -90,10 +90,10 @@ public class OpticaTableModelProxy extends DefaultTableModel implements ExpDataM
 		}
 		
 		int channelIndex = columnIndex - 1;
-
+		
+		String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(channelIndex).getChannelName());
 		String multiplier = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getMultiplier().toString();
 		String ph_unit_symbol = expDataModel.getChannelConfig(channelIndex).getSelectedScale().getPhysicsUnitSymbol();
-		String ch_name = expDataModel.getChannelConfig(channelIndex).getChannelName();
 
 		return ch_name + " [" + multiplier + ph_unit_symbol + "]";
 	}

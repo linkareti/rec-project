@@ -20,6 +20,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.ExpDataModelListener;
 import com.linkare.rec.impl.client.experiment.MultSeriesXYInBlockDataSetProxy;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -149,19 +150,14 @@ public class MultSeriesXYInBlockExperimentGraph extends javax.swing.JPanel imple
 
 		this.header = header;
 		Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
-		String chnX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName();
+		String chnX = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName());
 		String pusX = scaleX.getPhysicsUnitSymbol();
 		String multiplierX = scaleX.getMultiplier().toString();
 
-		Scale scaleY;
-		String chnY;
-		String pusY;
-		String multiplierY;
-
-		scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getSelectedScale();
-		chnY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName();
-		pusY = scaleY.getPhysicsUnitSymbol();
-		multiplierY = scaleY.getMultiplier().toString();
+		Scale scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getSelectedScale();
+		String chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName());
+		String pusY = scaleY.getPhysicsUnitSymbol();
+		String multiplierY = scaleY.getMultiplier().toString();
 
 		NumberAxis xAxis = new NumberAxis(chnX + " [" + multiplierX + pusX + "]");
 		xAxis.setAutoRange(true);

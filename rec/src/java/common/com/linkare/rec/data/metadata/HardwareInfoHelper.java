@@ -25,7 +25,7 @@ abstract public class HardwareInfoHelper {
 						return org.omg.CORBA.ORB.init().create_recursive_tc(_id);
 					}
 					__active = true;
-					org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember[13];
+					org.omg.CORBA.StructMember[] _members0 = new org.omg.CORBA.StructMember[12];
 					org.omg.CORBA.TypeCode _tcOf_members0 = null;
 					_tcOf_members0 = org.omg.CORBA.WStringValueHelper.type();
 					_members0[0] = new org.omg.CORBA.StructMember("DriverVersion", _tcOf_members0, null);
@@ -40,27 +40,25 @@ abstract public class HardwareInfoHelper {
 					_tcOf_members0 = org.omg.CORBA.ORB.init().create_wstring_tc(0);
 					_members0[5] = new org.omg.CORBA.StructMember("familiarName", _tcOf_members0, null);
 					_tcOf_members0 = org.omg.CORBA.ORB.init().create_wstring_tc(0);
-					_members0[6] = new org.omg.CORBA.StructMember("apparatusBundleName", _tcOf_members0, null);
-					_tcOf_members0 = org.omg.CORBA.ORB.init().create_wstring_tc(0);
-					_members0[7] = new org.omg.CORBA.StructMember("hardware_unique_id", _tcOf_members0, null);
+					_members0[6] = new org.omg.CORBA.StructMember("hardware_unique_id", _tcOf_members0, null);
 					_tcOf_members0 = com.linkare.rec.data.metadata.ChannelInfoHelper.type();
 					_tcOf_members0 = org.omg.CORBA.ORB.init().create_sequence_tc(0, _tcOf_members0);
 					_tcOf_members0 = org.omg.CORBA.ORB.init()
 							.create_alias_tc(com.linkare.rec.data.metadata.ChannelInfoListHelper.id(),
 									"ChannelInfoList", _tcOf_members0);
-					_members0[8] = new org.omg.CORBA.StructMember("channels_info", _tcOf_members0, null);
+					_members0[7] = new org.omg.CORBA.StructMember("channels_info", _tcOf_members0, null);
 					_tcOf_members0 = com.linkare.rec.data.metadata.VTHardwareParameterListHelper.type();
-					_members0[9] = new org.omg.CORBA.StructMember("hardware_parameters", _tcOf_members0, null);
+					_members0[8] = new org.omg.CORBA.StructMember("hardware_parameters", _tcOf_members0, null);
 					_tcOf_members0 = com.linkare.rec.data.metadata.FrequencyScaleHelper.type();
 					_tcOf_members0 = org.omg.CORBA.ORB.init().create_sequence_tc(0, _tcOf_members0);
 					_tcOf_members0 = org.omg.CORBA.ORB.init().create_alias_tc(
 							com.linkare.rec.data.metadata.FrequencyScaleListHelper.id(), "FrequencyScaleList",
 							_tcOf_members0);
-					_members0[10] = new org.omg.CORBA.StructMember("hardware_frequencies", _tcOf_members0, null);
+					_members0[9] = new org.omg.CORBA.StructMember("hardware_frequencies", _tcOf_members0, null);
 					_tcOf_members0 = com.linkare.rec.data.synch.FrequencyHelper.type();
-					_members0[11] = new org.omg.CORBA.StructMember("selected_frequency", _tcOf_members0, null);
+					_members0[10] = new org.omg.CORBA.StructMember("selected_frequency", _tcOf_members0, null);
 					_tcOf_members0 = com.linkare.rec.data.metadata.SamplesNumScaleHelper.type();
-					_members0[12] = new org.omg.CORBA.StructMember("sampling_scale", _tcOf_members0, null);
+					_members0[11] = new org.omg.CORBA.StructMember("sampling_scale", _tcOf_members0, null);
 					__typeCode = org.omg.CORBA.ORB.init().create_struct_tc(
 							com.linkare.rec.data.metadata.HardwareInfoHelper.id(), "HardwareInfo", _members0);
 					__active = false;
@@ -84,7 +82,6 @@ abstract public class HardwareInfoHelper {
 		new_one.setHardwareManufacturer(org.omg.CORBA.WStringValueHelper.read(istream));
 		new_one.setDescriptionText(org.omg.CORBA.WStringValueHelper.read(istream));
 		new_one.setFamiliarName(istream.read_wstring());
-		new_one.setApparatusBundleName(istream.read_wstring());
 		new_one.setHardwareUniqueID(istream.read_wstring());
 		new_one.setChannelsInfo(com.linkare.rec.data.metadata.ChannelInfoListHelper.read(istream));
 		new_one.setHardwareParameters(com.linkare.rec.data.metadata.VTHardwareParameterListHelper.read(istream));
@@ -103,7 +100,6 @@ abstract public class HardwareInfoHelper {
 		org.omg.CORBA.WStringValueHelper.write(ostream, value.getHardwareManufacturer());
 		org.omg.CORBA.WStringValueHelper.write(ostream, value.getDescriptionText());
 		ostream.write_wstring(value.getFamiliarName());
-		ostream.write_wstring(value.getApparatusBundleName());
 		ostream.write_wstring(value.getHardwareUniqueID());
 		com.linkare.rec.data.metadata.ChannelInfoListHelper.write(ostream, value.getChannelsInfo());
 		com.linkare.rec.data.metadata.VTHardwareParameterListHelper.write(ostream, value.getHardwareParameters());

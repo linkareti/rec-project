@@ -9,6 +9,7 @@ package pt.utl.ist.elab.client.statsound.displays;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -77,7 +78,7 @@ public class MyDefaultXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset
 				.toString();
 		String ph_unit_symbolX = expDataModel.getChannelConfig(getChannelDisplayX()).getSelectedScale()
 				.getPhysicsUnitSymbol();
-		String ch_nameX = expDataModel.getChannelConfig(getChannelDisplayX()).getChannelName();
+		String ch_nameX = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayX()).getChannelName());
 
 		String multiplierY;
 		String ph_unit_symbolY;
@@ -88,13 +89,13 @@ public class MyDefaultXYDataSetProxy extends org.jfree.data.xy.AbstractXYDataset
 					.toString();
 			ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayY()).getSelectedScale()
 					.getPhysicsUnitSymbol();
-			ch_nameY = expDataModel.getChannelConfig(getChannelDisplayY()).getChannelName();
+			ch_nameY = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayY()).getChannelName());
 		} else {
 			multiplierY = expDataModel.getChannelConfig(getChannelDisplayAtYArray(series)).getSelectedScale()
 					.getMultiplier().toString();
 			ph_unit_symbolY = expDataModel.getChannelConfig(getChannelDisplayAtYArray(series)).getSelectedScale()
 					.getPhysicsUnitSymbol();
-			ch_nameY = expDataModel.getChannelConfig(getChannelDisplayAtYArray(series)).getChannelName();
+			ch_nameY = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplayAtYArray(series)).getChannelName());
 		}
 		return ch_nameX + " [" + multiplierX + ph_unit_symbolX + "] vs " + ch_nameY + " [" + multiplierY
 				+ ph_unit_symbolY + "]";

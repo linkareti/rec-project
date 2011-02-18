@@ -10,6 +10,7 @@ import com.linkare.rec.data.Multiplier;
 import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.data.synch.FrequencyDefType;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
@@ -76,7 +77,8 @@ public class DefaultDatasetProxy extends org.jfree.data.xy.AbstractXYDataset imp
 				.toString();
 		String ph_unit_symbol = expDataModel.getChannelConfig(getChannelDisplay()).getSelectedScale()
 				.getPhysicsUnitSymbol();
-		String ch_name = expDataModel.getChannelConfig(getChannelDisplay()).getChannelName();
+		String ch_name = ReCResourceBundle.findString(expDataModel.getChannelConfig(getChannelDisplay())
+				.getChannelName());
 
 		return ch_name + " [" + multiplier + ph_unit_symbol + "]";
 	}

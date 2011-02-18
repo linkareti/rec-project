@@ -89,8 +89,8 @@
 		<step-samples>1</step-samples>
 	</sampling-scale>
 
-	<ChannelInfo name="Ângulo pexiglass" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Ângulo pexiglass [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
+	<ChannelInfo name="optica$rec.exp.optica.hardwareinfo.channel.0.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="optica$rec.exp.optica.hardwareinfo.channel.0.label" physicsunitname="optica$rec.exp.optica.hardwareinfo.channel.0.physicsunitname" physicsunitsymbol="º" multiplier="none" selected="true">
 			<min><PhysicsVal type="float">0.</PhysicsVal></min>
 			<max><PhysicsVal type="float">360.</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
@@ -98,8 +98,8 @@
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="Ângulo sensor" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Ângulo sensor [º]" physicsunitname="grau" physicsunitsymbol="º" multiplier="none" selected="true">
+	<ChannelInfo name="optica$rec.exp.optica.hardwareinfo.channel.1.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="optica$rec.exp.optica.hardwareinfo.channel.1.label" physicsunitname="optica$rec.exp.optica.hardwareinfo.channel.1.physicsunitname" physicsunitsymbol="º" multiplier="none" selected="true">
 			<min><PhysicsVal type="float">0.</PhysicsVal></min>
 			<max><PhysicsVal type="float">360.</PhysicsVal></max>
 			<step><PhysicsVal type="float">0.2</PhysicsVal></step>
@@ -107,8 +107,8 @@
 		</scale>
 	</ChannelInfo>
 
-	<ChannelInfo name="Intensidade luminosa" independent="false" direction="CHANNEL_INPUT">
-		<scale label="Intensidade luminosa [Lux]" physicsunitname="Lux" physicsunitsymbol="Lux" multiplier="none" selected="true">
+	<ChannelInfo name="optica$rec.exp.optica.hardwareinfo.channel.2.name" independent="false" direction="CHANNEL_INPUT">
+		<scale label="optica$rec.exp.optica.hardwareinfo.channel.2.label" physicsunitname="Lux" physicsunitsymbol="optica$rec.exp.optica.hardwareinfo.channel.2.physicsunitname" multiplier="none" selected="true">
 			<min><PhysicsVal type="int">0</PhysicsVal></min>
 			<max><PhysicsVal type="int">4095</PhysicsVal></max>
 			<step><PhysicsVal type="int">1</PhysicsVal></step>

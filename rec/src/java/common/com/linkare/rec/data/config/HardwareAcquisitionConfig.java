@@ -43,9 +43,6 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 
 	/** Holds value of property familiarName. */
 	private String familiarName;
-	
-	/** Holds value of property apparatusBundleName. */
-	private String apparatusBundleName;
 
 	/** Holds value of property hardwareUniqueID. */
 	private String hardwareUniqueID;
@@ -68,8 +65,7 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 	public HardwareAcquisitionConfig(String familiarName, String hardwareUniqueID,
 			com.linkare.rec.data.synch.DateTime time_start, com.linkare.rec.data.synch.Frequency selected_frequency,
 			com.linkare.rec.data.config.ChannelAcquisitionConfig[] channels_config,
-			com.linkare.rec.data.config.ParameterConfig[] selected_hardware_parameters, int total_samples, 
-			String apparatusBundleName) {
+			com.linkare.rec.data.config.ParameterConfig[] selected_hardware_parameters, int total_samples) {
 		this.setFamiliarName(familiarName);
 		this.setHardwareUniqueID(hardwareUniqueID);
 		this.setTimeStart(time_start);
@@ -77,7 +73,6 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		this.setSelectedHardwareParameters(selected_hardware_parameters);
 		this.setChannelsConfig(channels_config);
 		this.setTotalSamples(total_samples);
-		this.setApparatusBundleName(apparatusBundleName);
 	}
 
 	public HardwareAcquisitionConfig(HardwareAcquisitionConfig other) {
@@ -103,13 +98,11 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		this.setChannelsConfig(temp2);
 		temp2 = null;
 		this.setTotalSamples(other.getTotalSamples());
-		this.setApparatusBundleName(other.getApparatusBundleName());
 	}
 
 	public HardwareAcquisitionConfig(com.linkare.rec.data.metadata.HardwareInfo info) {
 		setFamiliarName(info.getFamiliarName());
 		setHardwareUniqueID(info.getHardwareUniqueID());
-		setApparatusBundleName(info.getApparatusBundleName());
 
 		ParameterConfig[] params = null;
 		com.linkare.rec.data.metadata.ChannelParameter[] params_info = null;
@@ -414,24 +407,6 @@ public final class HardwareAcquisitionConfig implements org.omg.CORBA.portable.I
 		this.familiarName = familiarName;
 	}
 
-	/**
-	 * Getter for property apparatusBundleName.
-	 * 
-	 * @return Value of property apparatusBundleName.
-	 */
-	public String getApparatusBundleName() {
-		return this.apparatusBundleName;
-	}
-
-	/**
-	 * Setter for property apparatusBundleName.
-	 * 
-	 * @param apparatusBundleName New value of property apparatusBundleName.
-	 */
-	public void setApparatusBundleName(String apparatusBundleName) {
-		this.apparatusBundleName = apparatusBundleName;
-	}
-	
 	/**
 	 * Getter for property hardwareUniqueID.
 	 * 
