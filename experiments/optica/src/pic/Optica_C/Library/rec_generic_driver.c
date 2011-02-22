@@ -41,14 +41,13 @@ void rec_generic_driver(void ){
 	the parameters[N][]*/
 		if(strncmp(Serial.rbuf,"cfg",3) == 0){
 			sscanf(Serial.rbuf,"%*s\t%d\t%lf\t%lf\t%lf\t%lf\t%d\t%lf\t%d",&protocolo,&param_1,&param_2,&param_3,&param_4,&param_5,&param_6,&param_7);
-			printf("\nCFG\t%d\t%.1lf\t%.1lf\t%.1lf\t%.1lf\t%d\t%.1lf\t%d\r\n",protocolo,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+			printf("CFG\t%d\t%.1lf\t%.1lf\t%.1lf\t%.1lf\t%d\t%.1lf\t%d\r",protocolo,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 			sprintf(state,"CONFIGURING");
 		}
 
 	//cur - current configuration command
 		if(strncmp(Serial.rbuf,"cur",3) == 0){
-			printf("CUR\t");
-			printf("\nCFG\t%d\t%.1lf\t%.1lf\t%.1lf\t%.1lf\t%d\t%.1lf\t%d\r\n",protocolo,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+			printf("CUR\t%d\t%.1lf\t%.1lf\t%.1lf\t%.1lf\t%d\t%.1lf\t%d\r",protocolo,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 		}
 
 	//str - strat command
