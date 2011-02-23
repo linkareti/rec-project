@@ -777,6 +777,12 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 		if (recApplication.isApparatusVideoEnabled() && recApplication.getMediaController() != null) {
 			getVideoBox().destroyVideoOutput();
 		}
+		
+		// Reset apparatus actions
+		apparatusLockTimer.stop();
+		progressCicleTask.stop();
+		setStopButtonEnabled(false);
+		getApparatusTabbedPane().getExperimentActionBar().setPlayStopButtonEnabled(false);
 
 		// Toggle apparatus connected UI state 
 		StatusActionBar experimentStatusActionBar = getExperimentStatusActionBar();
