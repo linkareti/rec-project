@@ -269,7 +269,6 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jPanelSoundSpeed.setName("jPanelSoundSpeed"); // NOI18N
         jPanelSoundSpeed.setPreferredSize(new java.awt.Dimension(1000, 637));
-        jPanelSoundSpeed.setLayout(null);
 
         jPanelSoundVelocityMics.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.channels"))); // NOI18N
         jPanelSoundVelocityMics.setName("jPanelSoundVelocityMics"); // NOI18N
@@ -364,14 +363,12 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanelSoundSpeed.add(jPanelSoundVelocityMics);
-        jPanelSoundVelocityMics.setBounds(12, 12, 410, 95);
-
         jPanelSoundVelocityNSamples.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.nsamples"))); // NOI18N
         jPanelSoundVelocityNSamples.setName("jPanelSoundVelocityNSamples"); // NOI18N
 
         jTextFieldSoundVelocityNSamples.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldSoundVelocityNSamples.setText(resourceMap.getString("jTextFieldSoundVelocityNSamples.text")); // NOI18N
+        jTextFieldSoundVelocityNSamples.setFocusable(false);
         jTextFieldSoundVelocityNSamples.setName("jTextFieldSoundVelocityNSamples"); // NOI18N
         jTextFieldSoundVelocityNSamples.setPreferredSize(new java.awt.Dimension(40, 19));
 
@@ -415,9 +412,6 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
                 .addComponent(jLabelSoundVelocityNSamplesAlert))
         );
 
-        jPanelSoundSpeed.add(jPanelSoundVelocityNSamples);
-        jPanelSoundVelocityNSamples.setBounds(432, 12, 400, 95);
-
         jPanelSoundVelocityPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonstart"))); // NOI18N
         jPanelSoundVelocityPiston.setForeground(resourceMap.getColor("jPanelSoundVelocityPiston.foreground")); // NOI18N
         jPanelSoundVelocityPiston.setName("jPanelSoundVelocityPiston"); // NOI18N
@@ -438,6 +432,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jTextFieldSoundVelocityPiston.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldSoundVelocityPiston.setText(resourceMap.getString("jTextFieldSoundVelocityPiston.text")); // NOI18N
+        jTextFieldSoundVelocityPiston.setFocusable(false);
         jTextFieldSoundVelocityPiston.setName("jTextFieldSoundVelocityPiston"); // NOI18N
         jTextFieldSoundVelocityPiston.setPreferredSize(new java.awt.Dimension(40, 19));
 
@@ -457,10 +452,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
                 .addComponent(jTextFieldSoundVelocityPiston, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanelSoundSpeed.add(jPanelSoundVelocityPiston);
-        jPanelSoundVelocityPiston.setBounds(12, 113, 410, 80);
-
-        jPanelSoundVelocityWaveForm.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.nsamples"))); // NOI18N
+        jPanelSoundVelocityWaveForm.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.waveform"))); // NOI18N
         jPanelSoundVelocityWaveForm.setName("jPanelSoundVelocityWaveForm"); // NOI18N
         jPanelSoundVelocityWaveForm.setPreferredSize(new java.awt.Dimension(408, 200));
 
@@ -488,9 +480,6 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jPanelSoundSpeed.add(jPanelSoundVelocityWaveForm);
-        jPanelSoundVelocityWaveForm.setBounds(432, 113, 408, 80);
-
         jPanelSoundVelocityFrequency.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.freqstart"))); // NOI18N
         jPanelSoundVelocityFrequency.setName("jPanelSoundVelocityFrequency"); // NOI18N
 
@@ -510,6 +499,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jTextFieldSoundVelocityFrequency.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldSoundVelocityFrequency.setText(resourceMap.getString("jTextFieldSoundVelocityFrequency.text")); // NOI18N
+        jTextFieldSoundVelocityFrequency.setFocusable(false);
         jTextFieldSoundVelocityFrequency.setName("jTextFieldSoundVelocityFrequency"); // NOI18N
         jTextFieldSoundVelocityFrequency.setPreferredSize(new java.awt.Dimension(40, 19));
 
@@ -529,8 +519,38 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
                 .addComponent(jTextFieldSoundVelocityFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanelSoundSpeed.add(jPanelSoundVelocityFrequency);
-        jPanelSoundVelocityFrequency.setBounds(12, 199, 410, 80);
+        javax.swing.GroupLayout jPanelSoundSpeedLayout = new javax.swing.GroupLayout(jPanelSoundSpeed);
+        jPanelSoundSpeed.setLayout(jPanelSoundSpeedLayout);
+        jPanelSoundSpeedLayout.setHorizontalGroup(
+            jPanelSoundSpeedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSoundSpeedLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jPanelSoundVelocityMics, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanelSoundVelocityNSamples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelSoundSpeedLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jPanelSoundVelocityPiston, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanelSoundVelocityWaveForm, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelSoundSpeedLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jPanelSoundVelocityFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanelSoundSpeedLayout.setVerticalGroup(
+            jPanelSoundSpeedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSoundSpeedLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanelSoundSpeedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelSoundVelocityMics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelSoundVelocityNSamples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanelSoundSpeedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelSoundVelocityPiston, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelSoundVelocityWaveForm, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addComponent(jPanelSoundVelocityFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         jTabbedPaneStatSound.addTab(resourceMap.getString("jPanelSoundSpeed.TabConstraints.tabTitle"), jPanelSoundSpeed); // NOI18N
 
@@ -636,6 +656,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jTextFieldStatSoundINSamples.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldStatSoundINSamples.setText(resourceMap.getString("jTextFieldStatSoundINSamples.text")); // NOI18N
+        jTextFieldStatSoundINSamples.setFocusable(false);
         jTextFieldStatSoundINSamples.setName("jTextFieldStatSoundINSamples"); // NOI18N
         jTextFieldStatSoundINSamples.setPreferredSize(new java.awt.Dimension(40, 19));
 
@@ -701,6 +722,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jTextFieldStatSoundIPistonInitial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldStatSoundIPistonInitial.setText(resourceMap.getString("jTextFieldStatSoundIPistonInitial.text")); // NOI18N
+        jTextFieldStatSoundIPistonInitial.setFocusable(false);
         jTextFieldStatSoundIPistonInitial.setName("jTextFieldStatSoundIPistonInitial"); // NOI18N
         jTextFieldStatSoundIPistonInitial.setPreferredSize(new java.awt.Dimension(40, 19));
 
@@ -742,6 +764,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jTextFieldStatSoundIPistonEnd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldStatSoundIPistonEnd.setText(resourceMap.getString("jTextFieldStatSoundIPistonEnd.text")); // NOI18N
+        jTextFieldStatSoundIPistonEnd.setFocusable(false);
         jTextFieldStatSoundIPistonEnd.setName("jTextFieldStatSoundIPistonEnd"); // NOI18N
         jTextFieldStatSoundIPistonEnd.setPreferredSize(new java.awt.Dimension(40, 19));
 
@@ -783,6 +806,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jTextFieldStatSoundIFrequency.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldStatSoundIFrequency.setText(resourceMap.getString("jTextFieldStatSoundIFrequency.text")); // NOI18N
+        jTextFieldStatSoundIFrequency.setFocusable(false);
         jTextFieldStatSoundIFrequency.setName("jTextFieldStatSoundIFrequency"); // NOI18N
         jTextFieldStatSoundIFrequency.setPreferredSize(new java.awt.Dimension(40, 19));
 
@@ -909,6 +933,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jTextFieldStatSoundIINSamples.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldStatSoundIINSamples.setText(resourceMap.getString("jTextFieldStatSoundIINSamples.text")); // NOI18N
+        jTextFieldStatSoundIINSamples.setFocusable(false);
         jTextFieldStatSoundIINSamples.setName("jTextFieldStatSoundIINSamples"); // NOI18N
         jTextFieldStatSoundIINSamples.setPreferredSize(new java.awt.Dimension(40, 19));
 
@@ -978,6 +1003,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jTextFieldStatSoundIIPiston.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldStatSoundIIPiston.setText(resourceMap.getString("jTextFieldStatSoundIIPiston.text")); // NOI18N
+        jTextFieldStatSoundIIPiston.setFocusable(false);
         jTextFieldStatSoundIIPiston.setName("jTextFieldStatSoundIIPiston"); // NOI18N
         jTextFieldStatSoundIIPiston.setPreferredSize(new java.awt.Dimension(40, 19));
 
@@ -1019,6 +1045,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jTextFieldStatSoundIIFrequencyInitial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldStatSoundIIFrequencyInitial.setText(resourceMap.getString("jTextFieldStatSoundIIFrequencyInitial.text")); // NOI18N
+        jTextFieldStatSoundIIFrequencyInitial.setFocusable(false);
         jTextFieldStatSoundIIFrequencyInitial.setName("jTextFieldStatSoundIIFrequencyInitial"); // NOI18N
         jTextFieldStatSoundIIFrequencyInitial.setPreferredSize(new java.awt.Dimension(40, 19));
 
@@ -1060,6 +1087,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
 
         jTextFieldStatSoundIIFrequencyEnd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldStatSoundIIFrequencyEnd.setText(resourceMap.getString("jTextFieldStatSoundIIFrequencyEnd.text")); // NOI18N
+        jTextFieldStatSoundIIFrequencyEnd.setFocusable(false);
         jTextFieldStatSoundIIFrequencyEnd.setName("jTextFieldStatSoundIIFrequencyEnd"); // NOI18N
         jTextFieldStatSoundIIFrequencyEnd.setPreferredSize(new java.awt.Dimension(40, 19));
 
