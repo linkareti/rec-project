@@ -52,8 +52,6 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
             "/pt/utl/ist/elab/client/statsound/resources/sound.gif"));
     private final String TITLE = ReCResourceBundle.findString("statsound$rec.exp.statsoud.customizer.title");
 
-    ;
-
     /** Creates new form NewJPanel */
     public StatSoundCustomizer() {
         initComponents();
@@ -62,6 +60,10 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         String pulse = ReCResourceBundle.findString("statsound$rec.exp.statsound.lbl.pulse");
         jComboBoxSoundVelocityWaveForm.addItem(pink);
         jComboBoxSoundVelocityWaveForm.addItem(pulse);
+        
+        jLabelSoundVelocityNSamplesAlert.setVisible(false);
+        jLabelStatSoundINSamplesAlert.setVisible(false);
+        jLabelStatSoundIINSamplesAlert.setVisible(false);
 
         defaultConfig();
     }
@@ -808,7 +810,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundII.setName("jPanelStatSoundII"); // NOI18N
         jPanelStatSoundII.setLayout(null);
 
-        jPanelStatSoundIIMics.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.efreq"))); // NOI18N
+        jPanelStatSoundIIMics.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.channels"))); // NOI18N
         jPanelStatSoundIIMics.setName("jPanelStatSoundIIMics"); // NOI18N
 
         jLabelStatSoundIIMic1.setText(resourceMap.getString("jLabelStatSoundIIMic1.text")); // NOI18N
@@ -902,7 +904,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundII.add(jPanelStatSoundIIMics);
         jPanelStatSoundIIMics.setBounds(12, 12, 410, 95);
 
-        jPanelStatSoundIINSamples.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.efreq"))); // NOI18N
+        jPanelStatSoundIINSamples.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.nsamples"))); // NOI18N
         jPanelStatSoundIINSamples.setName("jPanelStatSoundIINSamples"); // NOI18N
 
         jTextFieldStatSoundIINSamples.setColumns(4);
@@ -957,7 +959,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundII.add(jPanelStatSoundIINSamples);
         jPanelStatSoundIINSamples.setBounds(432, 12, 408, 95);
 
-        jPanelStatSoundIIPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.efreq"))); // NOI18N
+        jPanelStatSoundIIPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonstart"))); // NOI18N
         jPanelStatSoundIIPiston.setName("jPanelStatSoundIIPiston"); // NOI18N
 
         jSliderStatSoundIIPiston.setMajorTickSpacing(40);
@@ -998,7 +1000,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundII.add(jPanelStatSoundIIPiston);
         jPanelStatSoundIIPiston.setBounds(12, 113, 410, 80);
 
-        jPanelStatSoundIIFrequencyInitial.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.efreq"))); // NOI18N
+        jPanelStatSoundIIFrequencyInitial.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.freqstart"))); // NOI18N
         jPanelStatSoundIIFrequencyInitial.setName("jPanelStatSoundIIFrequencyInitial"); // NOI18N
 
         jSliderStatSoundIIFrequencyInitial.setMajorTickSpacing(200);
@@ -1259,9 +1261,11 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
                 minSamples = Math.round(MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG / jSliderSoundVelocityNSamples.getValue());
                 if ((jSliderSoundVelocityNSamples.getValue() * jSliderSoundVelocityFrequency.getValue()) > MIN_VALUE_FOR_VALID_SOUND_VELOCITY_CONFIG) {
                     jLabelSoundVelocityNSamplesAlert.setEnabled(false);
+                    jLabelSoundVelocityNSamplesAlert.setVisible(false);
                     jButtonOK.setEnabled(true);
                 } else {
                     jLabelSoundVelocityNSamplesAlert.setEnabled(true);
+                    jLabelSoundVelocityNSamplesAlert.setVisible(true);
                     jButtonOK.setEnabled(false);
                 }
                 jLabelSoundVelocityNSamplesAlert.setText(MIN_SAMPLES_STR + minSamples);
@@ -1270,9 +1274,11 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
                 maxSamples = (int) (Math.abs(jSliderStatSoundIPistonInitial.getValue() - jSliderStatSoundIPistonEnd.getValue()) / 1.69231);
                 if (jSliderStatSoundINSamples.getValue() > maxSamples) {
                     jLabelStatSoundINSamplesAlert.setEnabled(true);
+                    jLabelStatSoundINSamplesAlert.setVisible(true);
                     jButtonOK.setEnabled(false);
                 } else {
                     jLabelStatSoundINSamplesAlert.setEnabled(false);
+                    jLabelStatSoundINSamplesAlert.setVisible(false);
                     jButtonOK.setEnabled(true);
                 }
                 jLabelStatSoundINSamplesAlert.setText(MAX_SAMPLES_STR + maxSamples);
@@ -1281,9 +1287,11 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
                 minSamples = Math.round((jSliderStatSoundIIFrequencyEnd.getValue() - jSliderStatSoundIIFrequencyInitial.getValue()) / 2);
                 if (jSliderStatSoundIINSamples.getValue() >= minSamples) {
                     jLabelStatSoundIINSamplesAlert.setEnabled(false);
+                    jLabelStatSoundIINSamplesAlert.setVisible(false);
                     jButtonOK.setEnabled(true);
                 } else {
                     jLabelStatSoundIINSamplesAlert.setEnabled(true);
+                    jLabelStatSoundIINSamplesAlert.setVisible(true);
                     jButtonOK.setEnabled(false);
                 }
                 jLabelStatSoundIINSamplesAlert.setText(MIN_SAMPLES_STR + minSamples);
