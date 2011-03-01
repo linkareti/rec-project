@@ -156,8 +156,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Canais">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelSoundVelocityMics.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelSoundVelocityMics.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -319,8 +317,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="N&#xba; de amostras">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelSoundVelocityNSamples.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelSoundVelocityNSamples.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -401,8 +397,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Posi&#xe7;&#xe3;o do &#xea;mbolo [mm]">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelSoundVelocityPiston.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelSoundVelocityPiston.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -466,8 +460,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="N&#xba; de amostras">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelSoundVelocityWaveForm.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelSoundVelocityWaveForm.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -530,8 +522,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Frequ&#xea;ncia inicial [Hz]">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.freqstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelSoundVelocityFrequency.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelSoundVelocityFrequency.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -612,8 +602,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Canais">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelStatSoundIMics.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelStatSoundIMics.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -772,8 +760,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="N&#xba; de amostras">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelStatSoundINSamples.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelStatSoundINSamples.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -854,8 +840,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Posi&#xe7;&#xe3;o do &#xea;mbolo [mm]">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelStatSoundPistonIInitial.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelStatSoundPistonIInitial.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -918,8 +902,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Posi&#xe7;&#xe3;o final do &#xea;mbolo [mm]">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonend" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelStatSoundIPistonEnd.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelStatSoundIPistonEnd.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -982,8 +964,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Frequ&#xea;ncia inicial [Hz]">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.freqstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelStatSoundIFrequency.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelStatSoundIFrequency.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1062,10 +1042,8 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Canais">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.channels" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelStatSoundIIMics.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelStatSoundIIMics.border.titleColor"/>
+                    <TitledBorder title="Frequ&#xea;ncia final [Hz]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.efreq" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1222,10 +1200,8 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="N&#xba; de amostras">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.nsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelStatSoundIINSamples.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelStatSoundIINSamples.border.titleColor"/>
+                    <TitledBorder title="Frequ&#xea;ncia final [Hz]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.efreq" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1309,10 +1285,8 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Posi&#xe7;&#xe3;o do &#xea;mbolo [mm]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelStatSoundIIPiston.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelStatSoundIIPiston.border.titleColor"/>
+                    <TitledBorder title="Frequ&#xea;ncia final [Hz]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.efreq" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1373,10 +1347,8 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Frequ&#xea;ncia inicial [Hz]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.freqstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelStatSoundIIFrequencyInitial.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelStatSoundIIFrequencyInitial.border.titleColor"/>
+                    <TitledBorder title="Frequ&#xea;ncia final [Hz]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.efreq" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1439,8 +1411,6 @@
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Frequ&#xea;ncia final [Hz]">
                       <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.efreq" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
-                      <Property name="font" resourceKey="jPanelStatSoundIIFrequencyEnd.border.titleFont"/>
-                      <Property name="color" resourceKey="jPanelStatSoundIIFrequencyEnd.border.titleColor"/>
                     </TitledBorder>
                   </Border>
                 </Property>

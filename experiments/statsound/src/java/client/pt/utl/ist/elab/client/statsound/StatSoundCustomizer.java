@@ -269,11 +269,11 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelSoundSpeed.setPreferredSize(new java.awt.Dimension(1000, 637));
         jPanelSoundSpeed.setLayout(null);
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(StatSoundCustomizer.class); // NOI18N
-        jPanelSoundVelocityMics.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.channels"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelSoundVelocityMics.border.titleFont"), resourceMap.getColor("jPanelSoundVelocityMics.border.titleColor"))); // NOI18N
+        jPanelSoundVelocityMics.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.channels"))); // NOI18N
         jPanelSoundVelocityMics.setName("jPanelSoundVelocityMics"); // NOI18N
         jPanelSoundVelocityMics.setPreferredSize(new java.awt.Dimension(408, 95));
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.linkare.rec.impl.newface.ReCApplication.class).getContext().getResourceMap(StatSoundCustomizer.class);
         jLabelSoundVelocityMic1.setText(resourceMap.getString("jLabelSoundVelocityMic1.text")); // NOI18N
         jLabelSoundVelocityMic1.setName("jLabelSoundVelocityMic1"); // NOI18N
 
@@ -365,7 +365,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelSoundSpeed.add(jPanelSoundVelocityMics);
         jPanelSoundVelocityMics.setBounds(12, 12, 410, 95);
 
-        jPanelSoundVelocityNSamples.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.nsamples"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelSoundVelocityNSamples.border.titleFont"), resourceMap.getColor("jPanelSoundVelocityNSamples.border.titleColor"))); // NOI18N
+        jPanelSoundVelocityNSamples.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.nsamples"))); // NOI18N
         jPanelSoundVelocityNSamples.setName("jPanelSoundVelocityNSamples"); // NOI18N
 
         jTextFieldSoundVelocityNSamples.setColumns(4);
@@ -416,7 +416,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelSoundSpeed.add(jPanelSoundVelocityNSamples);
         jPanelSoundVelocityNSamples.setBounds(432, 12, 408, 95);
 
-        jPanelSoundVelocityPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonstart"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelSoundVelocityPiston.border.titleFont"), resourceMap.getColor("jPanelSoundVelocityPiston.border.titleColor"))); // NOI18N
+        jPanelSoundVelocityPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonstart"))); // NOI18N
         jPanelSoundVelocityPiston.setForeground(resourceMap.getColor("jPanelSoundVelocityPiston.foreground")); // NOI18N
         jPanelSoundVelocityPiston.setName("jPanelSoundVelocityPiston"); // NOI18N
 
@@ -458,7 +458,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelSoundSpeed.add(jPanelSoundVelocityPiston);
         jPanelSoundVelocityPiston.setBounds(12, 113, 410, 80);
 
-        jPanelSoundVelocityWaveForm.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.nsamples"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelSoundVelocityWaveForm.border.titleFont"), resourceMap.getColor("jPanelSoundVelocityWaveForm.border.titleColor"))); // NOI18N
+        jPanelSoundVelocityWaveForm.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.nsamples"))); // NOI18N
         jPanelSoundVelocityWaveForm.setName("jPanelSoundVelocityWaveForm"); // NOI18N
         jPanelSoundVelocityWaveForm.setPreferredSize(new java.awt.Dimension(408, 200));
 
@@ -489,7 +489,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelSoundSpeed.add(jPanelSoundVelocityWaveForm);
         jPanelSoundVelocityWaveForm.setBounds(432, 113, 408, 80);
 
-        jPanelSoundVelocityFrequency.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.freqstart"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelSoundVelocityFrequency.border.titleFont"), resourceMap.getColor("jPanelSoundVelocityFrequency.border.titleColor"))); // NOI18N
+        jPanelSoundVelocityFrequency.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.freqstart"))); // NOI18N
         jPanelSoundVelocityFrequency.setName("jPanelSoundVelocityFrequency"); // NOI18N
 
         jSliderSoundVelocityFrequency.setMajorTickSpacing(200);
@@ -535,7 +535,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundI.setName("jPanelStatSoundI"); // NOI18N
         jPanelStatSoundI.setLayout(null);
 
-        jPanelStatSoundIMics.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.channels"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelStatSoundIMics.border.titleFont"), resourceMap.getColor("jPanelStatSoundIMics.border.titleColor"))); // NOI18N
+        jPanelStatSoundIMics.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.channels"))); // NOI18N
         jPanelStatSoundIMics.setName("jPanelStatSoundIMics"); // NOI18N
 
         jLabelStatSoundIMic1.setText(resourceMap.getString("jLabelStatSoundIMic1.text")); // NOI18N
@@ -629,7 +629,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundI.add(jPanelStatSoundIMics);
         jPanelStatSoundIMics.setBounds(12, 12, 410, 95);
 
-        jPanelStatSoundINSamples.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.nsamples"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelStatSoundINSamples.border.titleFont"), resourceMap.getColor("jPanelStatSoundINSamples.border.titleColor"))); // NOI18N
+        jPanelStatSoundINSamples.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.nsamples"))); // NOI18N
         jPanelStatSoundINSamples.setName("jPanelStatSoundINSamples"); // NOI18N
 
         jTextFieldStatSoundINSamples.setColumns(4);
@@ -680,7 +680,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundI.add(jPanelStatSoundINSamples);
         jPanelStatSoundINSamples.setBounds(432, 12, 408, 95);
 
-        jPanelStatSoundPistonIInitial.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonstart"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelStatSoundPistonIInitial.border.titleFont"), resourceMap.getColor("jPanelStatSoundPistonIInitial.border.titleColor"))); // NOI18N
+        jPanelStatSoundPistonIInitial.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonstart"))); // NOI18N
         jPanelStatSoundPistonIInitial.setName("jPanelStatSoundPistonIInitial"); // NOI18N
 
         jSliderStatSoundIPistonInitial.setMajorTickSpacing(40);
@@ -721,7 +721,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundI.add(jPanelStatSoundPistonIInitial);
         jPanelStatSoundPistonIInitial.setBounds(12, 113, 410, 80);
 
-        jPanelStatSoundIPistonEnd.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonend"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelStatSoundIPistonEnd.border.titleFont"), resourceMap.getColor("jPanelStatSoundIPistonEnd.border.titleColor"))); // NOI18N
+        jPanelStatSoundIPistonEnd.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonend"))); // NOI18N
         jPanelStatSoundIPistonEnd.setName("jPanelStatSoundIPistonEnd"); // NOI18N
 
         jSliderStatSoundIPistonEnd.setMajorTickSpacing(40);
@@ -762,7 +762,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundI.add(jPanelStatSoundIPistonEnd);
         jPanelStatSoundIPistonEnd.setBounds(432, 113, 408, 80);
 
-        jPanelStatSoundIFrequency.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.freqstart"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelStatSoundIFrequency.border.titleFont"), resourceMap.getColor("jPanelStatSoundIFrequency.border.titleColor"))); // NOI18N
+        jPanelStatSoundIFrequency.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.freqstart"))); // NOI18N
         jPanelStatSoundIFrequency.setName("jPanelStatSoundIFrequency"); // NOI18N
 
         jSliderStatSoundIFrequency.setMajorTickSpacing(200);
@@ -808,7 +808,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundII.setName("jPanelStatSoundII"); // NOI18N
         jPanelStatSoundII.setLayout(null);
 
-        jPanelStatSoundIIMics.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.channels"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelStatSoundIIMics.border.titleFont"), resourceMap.getColor("jPanelStatSoundIIMics.border.titleColor"))); // NOI18N
+        jPanelStatSoundIIMics.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.efreq"))); // NOI18N
         jPanelStatSoundIIMics.setName("jPanelStatSoundIIMics"); // NOI18N
 
         jLabelStatSoundIIMic1.setText(resourceMap.getString("jLabelStatSoundIIMic1.text")); // NOI18N
@@ -902,7 +902,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundII.add(jPanelStatSoundIIMics);
         jPanelStatSoundIIMics.setBounds(12, 12, 410, 95);
 
-        jPanelStatSoundIINSamples.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.nsamples"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelStatSoundIINSamples.border.titleFont"), resourceMap.getColor("jPanelStatSoundIINSamples.border.titleColor"))); // NOI18N
+        jPanelStatSoundIINSamples.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.efreq"))); // NOI18N
         jPanelStatSoundIINSamples.setName("jPanelStatSoundIINSamples"); // NOI18N
 
         jTextFieldStatSoundIINSamples.setColumns(4);
@@ -957,7 +957,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundII.add(jPanelStatSoundIINSamples);
         jPanelStatSoundIINSamples.setBounds(432, 12, 408, 95);
 
-        jPanelStatSoundIIPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonstart"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelStatSoundIIPiston.border.titleFont"), resourceMap.getColor("jPanelStatSoundIIPiston.border.titleColor"))); // NOI18N
+        jPanelStatSoundIIPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.efreq"))); // NOI18N
         jPanelStatSoundIIPiston.setName("jPanelStatSoundIIPiston"); // NOI18N
 
         jSliderStatSoundIIPiston.setMajorTickSpacing(40);
@@ -998,7 +998,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundII.add(jPanelStatSoundIIPiston);
         jPanelStatSoundIIPiston.setBounds(12, 113, 410, 80);
 
-        jPanelStatSoundIIFrequencyInitial.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.freqstart"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelStatSoundIIFrequencyInitial.border.titleFont"), resourceMap.getColor("jPanelStatSoundIIFrequencyInitial.border.titleColor"))); // NOI18N
+        jPanelStatSoundIIFrequencyInitial.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.efreq"))); // NOI18N
         jPanelStatSoundIIFrequencyInitial.setName("jPanelStatSoundIIFrequencyInitial"); // NOI18N
 
         jSliderStatSoundIIFrequencyInitial.setMajorTickSpacing(200);
@@ -1039,7 +1039,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundII.add(jPanelStatSoundIIFrequencyInitial);
         jPanelStatSoundIIFrequencyInitial.setBounds(12, 199, 410, 80);
 
-        jPanelStatSoundIIFrequencyEnd.setBorder(javax.swing.BorderFactory.createTitledBorder(null, ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.efreq"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, resourceMap.getFont("jPanelStatSoundIIFrequencyEnd.border.titleFont"), resourceMap.getColor("jPanelStatSoundIIFrequencyEnd.border.titleColor"))); // NOI18N
+        jPanelStatSoundIIFrequencyEnd.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.efreq"))); // NOI18N
         jPanelStatSoundIIFrequencyEnd.setName("jPanelStatSoundIIFrequencyEnd"); // NOI18N
 
         jSliderStatSoundIIFrequencyEnd.setMajorTickSpacing(200);
