@@ -359,10 +359,12 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="jTextFieldSoundVelocityNSamples">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityNSamples.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityNSamples" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityNSamplesAlert">
@@ -446,10 +448,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldSoundVelocityPiston">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityPiston.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityPiston" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -570,10 +574,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldSoundVelocityFrequency">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityFrequency.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityFrequency" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -802,10 +808,12 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundINSamples">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundINSamples.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundINSamples" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundINSamplesAlert">
@@ -888,10 +896,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIPistonInitial">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIPistonInitial.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIPistonInitial" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -950,10 +960,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIPistonEnd">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIPistonEnd.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIPistonEnd" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1012,10 +1024,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIFrequency">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIFrequency.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIFrequency" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1244,10 +1258,12 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIINSamples">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIINSamples.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIINSamples" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIINSamplesAlert">
@@ -1335,10 +1351,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIIPiston">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIPiston.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIPiston" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1397,10 +1415,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIIFrequencyInitial">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIFrequencyInitial.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIFrequencyInitial" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1459,10 +1479,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIIFrequencyEnd">
                   <Properties>
-                    <Property name="columns" type="int" value="4"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIFrequencyEnd.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIFrequencyEnd" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[40, 19]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
