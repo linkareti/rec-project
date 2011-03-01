@@ -66,8 +66,6 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonOK">
           <Properties>
-            <Property name="font" type="java.awt.Font" resourceKey="jButtonOK.font"/>
-            <Property name="foreground" type="java.awt.Color" resourceKey="jButtonOK.foreground"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.ok" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
             </Property>
@@ -84,8 +82,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonCancel">
           <Properties>
-            <Property name="font" type="java.awt.Font" resourceKey="jButtonCancel.font"/>
-            <Property name="foreground" type="java.awt.Color" resourceKey="jButtonCancel.foreground"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.cancel" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
             </Property>
@@ -112,8 +108,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonDefaults">
           <Properties>
-            <Property name="font" type="java.awt.Font" resourceKey="jButtonDefaults.font"/>
-            <Property name="foreground" type="java.awt.Color" resourceKey="jButtonDefaults.foreground"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.dftcfg.statsound.title.1" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
             </Property>
@@ -167,7 +161,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelSoundVelocityMics.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelSoundVelocityMics" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[408, 95]"/>
@@ -183,7 +176,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace pref="17" max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -244,56 +237,42 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityMic1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelSoundVelocityMic1.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelSoundVelocityMic1.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityMic1.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelSoundVelocityMic1" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityMic2">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelSoundVelocityMic2.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelSoundVelocityMic2.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityMic2.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelSoundVelocityMic2" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityMic3">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelSoundVelocityMic3.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelSoundVelocityMic3.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityMic3.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelSoundVelocityMic3" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityMic4">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelSoundVelocityMic4.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelSoundVelocityMic4.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityMic4.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelSoundVelocityMic4" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityCH1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelSoundVelocityCH1.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelSoundVelocityCH1.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityCH1.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelSoundVelocityCH1" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityCH2">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelSoundVelocityCH2.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelSoundVelocityCH2.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelSoundVelocityCH2.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelSoundVelocityCH2" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonSoundVelocityMic1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonSoundVelocityMic1.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonSoundVelocityMic1.foreground"/>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonSoundVelocityMic1" noResource="true"/>
@@ -304,8 +283,6 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="soundVelocityMicGroup"/>
                     </Property>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonSoundVelocityMic2.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonSoundVelocityMic2.foreground"/>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonSoundVelocityMic2" noResource="true"/>
                   </Properties>
@@ -315,8 +292,6 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="soundVelocityMicGroup"/>
                     </Property>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonSoundVelocityMic3.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonSoundVelocityMic3.foreground"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonSoundVelocityMic3" noResource="true"/>
                   </Properties>
                 </Component>
@@ -325,15 +300,11 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="soundVelocityMicGroup"/>
                     </Property>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonSoundVelocityMic4.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonSoundVelocityMic4.foreground"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonSoundVelocityMic4" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxSoundVelocityHeat">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jCheckBoxSoundVelocityHeat.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jCheckBoxSoundVelocityHeat.foreground"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </Property>
@@ -353,7 +324,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelSoundVelocityNSamples.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelSoundVelocityNSamples" noResource="true"/>
               </Properties>
               <Constraints>
@@ -394,8 +364,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldSoundVelocityNSamples">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldSoundVelocityNSamples.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldSoundVelocityNSamples.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityNSamples.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityNSamples" noResource="true"/>
@@ -403,7 +371,6 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityNSamplesAlert">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelSoundVelocityNSamplesAlert.font"/>
                     <Property name="foreground" type="java.awt.Color" resourceKey="jLabelSoundVelocityNSamplesAlert.foreground"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
@@ -486,8 +453,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldSoundVelocityPiston">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldSoundVelocityPiston.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldSoundVelocityPiston.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityPiston.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityPiston" noResource="true"/>
@@ -506,7 +471,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelSoundVelocityWaveForm.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelSoundVelocityWaveForm" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[408, 200]"/>
@@ -544,8 +508,6 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabelSoundVelocityWaveForm">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelSoundVelocityWaveForm.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelSoundVelocityWaveForm.foreground"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.waveform" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </Property>
@@ -554,8 +516,6 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jComboBoxSoundVelocityWaveForm">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jComboBoxSoundVelocityWaveForm.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jComboBoxSoundVelocityWaveForm.foreground"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
                     </Property>
@@ -575,7 +535,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelSoundVelocityFrequency.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelSoundVelocityFrequency" noResource="true"/>
               </Properties>
               <Constraints>
@@ -606,7 +565,6 @@
               <SubComponents>
                 <Component class="javax.swing.JSlider" name="jSliderSoundVelocityFrequency">
                   <Properties>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jSliderSoundVelocityFrequency.foreground"/>
                     <Property name="majorTickSpacing" type="int" value="200"/>
                     <Property name="maximum" type="int" value="2000"/>
                     <Property name="minimum" type="int" value="100"/>
@@ -623,8 +581,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldSoundVelocityFrequency">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldSoundVelocityFrequency.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldSoundVelocityFrequency.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldSoundVelocityFrequency.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldSoundVelocityFrequency" noResource="true"/>
@@ -661,7 +617,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelStatSoundIMics.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelStatSoundIMics" noResource="true"/>
               </Properties>
               <Constraints>
@@ -674,7 +629,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace pref="17" max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -735,56 +690,42 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIMic1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIMic1.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIMic1.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIMic1.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIMic1" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIMic2">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIMic2.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIMic2.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIMic2.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIMic2" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIMic3">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIMic3.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIMic3.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIMic3.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIMic3" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIMic4">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIMic4.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIMic4.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIMic4.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIMic4" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundICH1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundICH1.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundICH1.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundICH1.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundICH1" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundICH2">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundICH2.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundICH2.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundICH2.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundICH2" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonStatSoundIMic1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonStatSoundIMic1.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonStatSoundIMic1.foreground"/>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIMic1" noResource="true"/>
@@ -795,8 +736,6 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="statSoundIMicGroup"/>
                     </Property>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonStatSoundIMic2.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonStatSoundIMic2.foreground"/>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIMic2" noResource="true"/>
                   </Properties>
@@ -806,8 +745,6 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="statSoundIMicGroup"/>
                     </Property>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonStatSoundIMic3.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonStatSoundIMic3.foreground"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIMic3" noResource="true"/>
                   </Properties>
                 </Component>
@@ -816,15 +753,11 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="statSoundIMicGroup"/>
                     </Property>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonStatSoundIMic4.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonStatSoundIMic4.foreground"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIMic4" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxStatSoundIHeat">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jCheckBoxStatSoundIHeat.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jCheckBoxStatSoundIHeat.foreground"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </Property>
@@ -844,7 +777,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelStatSoundINSamples.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelStatSoundINSamples" noResource="true"/>
               </Properties>
               <Constraints>
@@ -885,8 +817,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundINSamples">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldStatSoundINSamples.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldStatSoundINSamples.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundINSamples.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundINSamples" noResource="true"/>
@@ -894,7 +824,6 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundINSamplesAlert">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundINSamplesAlert.font"/>
                     <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundINSamplesAlert.foreground"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
@@ -930,7 +859,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelStatSoundPistonIInitial.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelStatSoundPistonIInitial" noResource="true"/>
               </Properties>
               <Constraints>
@@ -977,8 +905,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIPistonInitial">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldStatSoundIPistonInitial.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldStatSoundIPistonInitial.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIPistonInitial.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIPistonInitial" noResource="true"/>
@@ -997,7 +923,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelStatSoundIPistonEnd.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelStatSoundIPistonEnd" noResource="true"/>
               </Properties>
               <Constraints>
@@ -1044,8 +969,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIPistonEnd">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldStatSoundIPistonEnd.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldStatSoundIPistonEnd.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIPistonEnd.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIPistonEnd" noResource="true"/>
@@ -1064,7 +987,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelStatSoundIFrequency.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelStatSoundIFrequency" noResource="true"/>
               </Properties>
               <Constraints>
@@ -1095,7 +1017,6 @@
               <SubComponents>
                 <Component class="javax.swing.JSlider" name="jSliderStatSoundIFrequency">
                   <Properties>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jSliderStatSoundIFrequency.foreground"/>
                     <Property name="majorTickSpacing" type="int" value="200"/>
                     <Property name="maximum" type="int" value="2000"/>
                     <Property name="minimum" type="int" value="100"/>
@@ -1112,8 +1033,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIFrequency">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldStatSoundIFrequency.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldStatSoundIFrequency.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIFrequency.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIFrequency" noResource="true"/>
@@ -1150,7 +1069,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelStatSoundIIMics.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelStatSoundIIMics" noResource="true"/>
               </Properties>
               <Constraints>
@@ -1163,7 +1081,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace pref="17" max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -1224,56 +1142,42 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIIMic1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIIMic1.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIIMic1.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIIMic1.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIIMic1" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIIMic2">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIIMic2.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIIMic2.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIIMic2.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIIMic2" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIIMic3">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIIMic3.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIIMic3.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIIMic3.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIIMic3" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIIMic4">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIIMic4.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIIMic4.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIIMic4.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIIMic4" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIICH1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIICH1.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIICH1.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIICH1.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIICH1" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIICH2">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIICH2.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIICH2.foreground"/>
                     <Property name="text" type="java.lang.String" resourceKey="jLabelStatSoundIICH2.text"/>
                     <Property name="name" type="java.lang.String" value="jLabelStatSoundIICH2" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonStatSoundIIMic1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonStatSoundIIMic1.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonStatSoundIIMic1.foreground"/>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIIMic1" noResource="true"/>
@@ -1284,8 +1188,6 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="statSoundIIMicGroup"/>
                     </Property>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonStatSoundIIMic2.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonStatSoundIIMic2.foreground"/>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIIMic2" noResource="true"/>
                   </Properties>
@@ -1295,8 +1197,6 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="statSoundIIMicGroup"/>
                     </Property>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonStatSoundIIMic3.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonStatSoundIIMic3.foreground"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIIMic3" noResource="true"/>
                   </Properties>
                 </Component>
@@ -1305,15 +1205,11 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="statSoundIIMicGroup"/>
                     </Property>
-                    <Property name="font" type="java.awt.Font" resourceKey="jRadioButtonStatSoundIIMic4.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jRadioButtonStatSoundIIMic4.foreground"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonStatSoundIIMic4" noResource="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxStatSoundIIHeat">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jCheckBoxStatSoundIIHeat.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jCheckBoxStatSoundIIHeat.foreground"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.heating" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </Property>
@@ -1333,7 +1229,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelStatSoundIINSamples.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelStatSoundIINSamples" noResource="true"/>
               </Properties>
               <Constraints>
@@ -1374,8 +1269,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIINSamples">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldStatSoundIINSamples.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldStatSoundIINSamples.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIINSamples.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIINSamples" noResource="true"/>
@@ -1383,7 +1276,6 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelStatSoundIINSamplesAlert">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jLabelStatSoundIINSamplesAlert.font"/>
                     <Property name="foreground" type="java.awt.Color" resourceKey="jLabelStatSoundIINSamplesAlert.foreground"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.maxsamples" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
@@ -1424,7 +1316,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelStatSoundIIPiston.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelStatSoundIIPiston" noResource="true"/>
               </Properties>
               <Constraints>
@@ -1471,8 +1362,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIIPiston">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldStatSoundIIPiston.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldStatSoundIIPiston.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIPiston.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIPiston" noResource="true"/>
@@ -1491,7 +1380,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelStatSoundIIFrequencyInitial.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelStatSoundIIFrequencyInitial" noResource="true"/>
               </Properties>
               <Constraints>
@@ -1522,7 +1410,6 @@
               <SubComponents>
                 <Component class="javax.swing.JSlider" name="jSliderStatSoundIIFrequencyInitial">
                   <Properties>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jSliderStatSoundIIFrequencyInitial.foreground"/>
                     <Property name="majorTickSpacing" type="int" value="200"/>
                     <Property name="maximum" type="int" value="2000"/>
                     <Property name="minimum" type="int" value="100"/>
@@ -1539,8 +1426,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIIFrequencyInitial">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldStatSoundIIFrequencyInitial.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldStatSoundIIFrequencyInitial.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIFrequencyInitial.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIFrequencyInitial" noResource="true"/>
@@ -1559,7 +1444,6 @@
                     </TitledBorder>
                   </Border>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" resourceKey="jPanelStatSoundIIFrequencyEnd.foreground"/>
                 <Property name="name" type="java.lang.String" value="jPanelStatSoundIIFrequencyEnd" noResource="true"/>
               </Properties>
               <Constraints>
@@ -1590,7 +1474,6 @@
               <SubComponents>
                 <Component class="javax.swing.JSlider" name="jSliderStatSoundIIFrequencyEnd">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" resourceKey="jSliderStatSoundIIFrequencyEnd.font"/>
                     <Property name="majorTickSpacing" type="int" value="200"/>
                     <Property name="maximum" type="int" value="2000"/>
                     <Property name="minimum" type="int" value="100"/>
@@ -1607,8 +1490,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldStatSoundIIFrequencyEnd">
                   <Properties>
                     <Property name="columns" type="int" value="4"/>
-                    <Property name="font" type="java.awt.Font" resourceKey="jTextFieldStatSoundIIFrequencyEnd.font"/>
-                    <Property name="foreground" type="java.awt.Color" resourceKey="jTextFieldStatSoundIIFrequencyEnd.foreground"/>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" resourceKey="jTextFieldStatSoundIIFrequencyEnd.text"/>
                     <Property name="name" type="java.lang.String" value="jTextFieldStatSoundIIFrequencyEnd" noResource="true"/>
