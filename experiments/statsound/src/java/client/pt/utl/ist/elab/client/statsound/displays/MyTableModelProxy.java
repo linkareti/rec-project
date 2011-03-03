@@ -12,7 +12,7 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
- * @author Andr�
+ * @author André
  */
 public class MyTableModelProxy extends com.linkare.rec.impl.client.experiment.MultSeriesTableModelProxy {
 

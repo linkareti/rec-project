@@ -120,7 +120,7 @@ public class SoundXYExperimentGraph extends javax.swing.JPanel implements ExpDat
 		XYPlot plot = new XYPlot(defaultXYDatasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
 				StandardXYItemRenderer.SHAPES_AND_LINES, tooltipGenerator));
 
-		chart = new JFreeChart(header.getFamiliarName(), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+		chart = new JFreeChart(getChartName(header), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 		ChartPanel panel = new ChartPanel(chart);
 
 		panel.setPreferredSize(new java.awt.Dimension(350, 250));
@@ -128,6 +128,10 @@ public class SoundXYExperimentGraph extends javax.swing.JPanel implements ExpDat
 
 		scrollPane.remove(labelWaitData);
 		scrollPane.setViewportView(panel);
+	}
+	
+	protected String getChartName(final HardwareAcquisitionConfig header) {
+		return header.getFamiliarName();
 	}
 
 	/*

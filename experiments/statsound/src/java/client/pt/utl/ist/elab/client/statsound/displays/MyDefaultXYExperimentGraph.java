@@ -116,7 +116,8 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 
 	public void headerAvailable(HardwareAcquisitionConfig header) {
 		Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
-		String chnX = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName());
+		String chnX = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX())
+				.getChannelName());
 		String pusX = scaleX.getPhysicsUnitSymbol();
 		String multiplierX = scaleX.getMultiplier().toString();
 
@@ -127,12 +128,14 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 
 		if (getChannelDisplayYArray().length == 0) {
 			scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getSelectedScale();
-			chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName());
+			chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY())
+					.getChannelName());
 			pusY = scaleY.getPhysicsUnitSymbol();
 			multiplierY = scaleY.getMultiplier().toString();
 		} else {
 			scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayAtYArray(0)).getSelectedScale();
-			chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName());
+			chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY())
+					.getChannelName());
 			pusY = scaleY.getPhysicsUnitSymbol();
 			multiplierY = scaleY.getMultiplier().toString();
 		}
@@ -152,7 +155,7 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 		XYPlot plot = new XYPlot(defaultXYDatasetProxy, xAxis, yAxis, new StandardXYItemRenderer(
 				StandardXYItemRenderer.SHAPES_AND_LINES, tooltipGenerator));
 
-		chart = new JFreeChart(header.getFamiliarName(), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+		chart = new JFreeChart(getChartName(header), JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 		ChartPanel panel = new ChartPanel(chart);
 
 		panel.setPreferredSize(new java.awt.Dimension(350, 250));
@@ -160,6 +163,17 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 
 		scrollPane.remove(labelWaitData);
 		scrollPane.setViewportView(panel);
+	}
+
+	/**
+	 * This method is protected so that each subclass may override it and choose
+	 * a different name to be presented as the chart title.
+	 * 
+	 * @param header the HardwareAcquisitionConfig element
+	 * @return the name of the chart to be instantiated
+	 */
+	protected String getChartName(final HardwareAcquisitionConfig header) {
+		return header.getFamiliarName();
 	}
 
 	/*

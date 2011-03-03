@@ -6,11 +6,15 @@
 
 package pt.utl.ist.elab.client.statsound.displays;
 
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
+
 /**
  * 
  * @author André Neto - LEFT - IST
  */
 public class TableFreqRMS extends MyDefaultTable {
+
+	private static final String NAME = ReCResourceBundle.findString("statsound$rec.exp.display.statsound.title.1");
 
 	/** Creates a new instance of TableFreqRMS */
 	public TableFreqRMS() {
@@ -19,6 +23,6 @@ public class TableFreqRMS extends MyDefaultTable {
 	}
 
 	public String getName() {
-		return "Table Freq vs RMS";
+		return NAME;
 	}
 }
