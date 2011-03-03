@@ -326,6 +326,7 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	private boolean reseting = true;
 
 	public void stopDataSource() {
+		super.stopDataSource();
 		if (dataSource != null) {
 			System.out.println("Stoping data source!");
 			dataSource.stopPlaying();
