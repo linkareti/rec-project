@@ -150,20 +150,20 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-                      <Component id="jPanelSoundVelocityMics" min="-2" pref="410" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                      <Component id="jPanelSoundVelocityNSamples" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-                      <Component id="jPanelSoundVelocityPiston" min="-2" pref="410" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                      <Component id="jPanelSoundVelocityWaveForm" min="-2" pref="400" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-                      <Component id="jPanelSoundVelocityFrequency" min="-2" pref="410" max="-2" attributes="0"/>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jPanelSoundVelocityMics" min="-2" pref="410" max="-2" attributes="0"/>
+                              <EmptySpace min="10" pref="10" max="10" attributes="0"/>
+                              <Component id="jPanelSoundVelocityNSamples" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jPanelSoundVelocityPiston" min="-2" pref="410" max="-2" attributes="0"/>
+                              <EmptySpace min="10" pref="10" max="10" attributes="0"/>
+                              <Component id="jPanelSoundVelocityWaveForm" min="-2" pref="400" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jPanelSoundVelocityFrequency" min="-2" pref="410" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -426,7 +426,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Posi&#xe7;&#xe3;o do &#xea;mbolo [mm]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.piston" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -543,8 +543,8 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Frequ&#xea;ncia inicial [Hz]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.freqstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    <TitledBorder title="Frequ&#xea;ncia [Hz]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.frequency" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -992,8 +992,8 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Frequ&#xea;ncia inicial [Hz]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.freqstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                    <TitledBorder title="Frequ&#xea;ncia [Hz]">
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.frequency" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>
@@ -1322,7 +1322,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Posi&#xe7;&#xe3;o do &#xea;mbolo [mm]">
-                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.pistonstart" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
+                      <ResourceString PropertyName="titleX" bundle="pt/utl/ist/elab/client/statsound/resources/messages.properties" key="rec.exp.statsoud.lbl.piston" replaceFormat="ReCResourceBundle.findString(&quot;statsound${key}&quot;)"/>
                     </TitledBorder>
                   </Border>
                 </Property>

@@ -412,7 +412,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
                 .addComponent(jLabelSoundVelocityNSamplesAlert))
         );
 
-        jPanelSoundVelocityPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonstart"))); // NOI18N
+        jPanelSoundVelocityPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.piston"))); // NOI18N
         jPanelSoundVelocityPiston.setForeground(resourceMap.getColor("jPanelSoundVelocityPiston.foreground")); // NOI18N
         jPanelSoundVelocityPiston.setName("jPanelSoundVelocityPiston"); // NOI18N
 
@@ -480,7 +480,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jPanelSoundVelocityFrequency.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.freqstart"))); // NOI18N
+        jPanelSoundVelocityFrequency.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.frequency"))); // NOI18N
         jPanelSoundVelocityFrequency.setName("jPanelSoundVelocityFrequency"); // NOI18N
 
         jSliderSoundVelocityFrequency.setMajorTickSpacing(200);
@@ -525,17 +525,16 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
             jPanelSoundSpeedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSoundSpeedLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jPanelSoundVelocityMics, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jPanelSoundVelocityNSamples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanelSoundSpeedLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jPanelSoundVelocityPiston, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jPanelSoundVelocityWaveForm, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanelSoundSpeedLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jPanelSoundVelocityFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelSoundSpeedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSoundSpeedLayout.createSequentialGroup()
+                        .addComponent(jPanelSoundVelocityMics, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanelSoundVelocityNSamples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelSoundSpeedLayout.createSequentialGroup()
+                        .addComponent(jPanelSoundVelocityPiston, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanelSoundVelocityWaveForm, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelSoundVelocityFrequency, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanelSoundSpeedLayout.setVerticalGroup(
             jPanelSoundSpeedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -787,7 +786,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundI.add(jPanelStatSoundIPistonEnd);
         jPanelStatSoundIPistonEnd.setBounds(432, 113, 400, 80);
 
-        jPanelStatSoundIFrequency.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.freqstart"))); // NOI18N
+        jPanelStatSoundIFrequency.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.frequency"))); // NOI18N
         jPanelStatSoundIFrequency.setName("jPanelStatSoundIFrequency"); // NOI18N
 
         jSliderStatSoundIFrequency.setMajorTickSpacing(200);
@@ -984,7 +983,7 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
         jPanelStatSoundII.add(jPanelStatSoundIINSamples);
         jPanelStatSoundIINSamples.setBounds(432, 12, 400, 95);
 
-        jPanelStatSoundIIPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.pistonstart"))); // NOI18N
+        jPanelStatSoundIIPiston.setBorder(javax.swing.BorderFactory.createTitledBorder(ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.piston"))); // NOI18N
         jPanelStatSoundIIPiston.setName("jPanelStatSoundIIPiston"); // NOI18N
 
         jSliderStatSoundIIPiston.setMajorTickSpacing(40);
