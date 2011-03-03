@@ -28,35 +28,37 @@
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.sensor"
 		offlineCapable="false" order="1" />
+	<!-- 
 	<Display classLocationBundleKey="statsound$rec.exp.display.statsound.loc.sensor.temp"
 		toolTipBundleKey="statsound$rec.exp.display.statsound.tip.sensor.temp"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.sensor.temp"
 		offlineCapable="false" order="2" />
+	 -->
 	<Display classLocationBundleKey="statsound$rec.exp.display.statsound.loc.1"
 		toolTipBundleKey="statsound$rec.exp.display.statsound.tip.1"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.1"
-		offlineCapable="false" order="3" />
+		offlineCapable="false" order="2" />
 	<Display classLocationBundleKey="statsound$rec.exp.display.statsound.loc.2"
 		toolTipBundleKey="statsound$rec.exp.display.statsound.tip.2"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.2"
-		offlineCapable="false" order="4" />
+		offlineCapable="false" order="3" />
 	<Display classLocationBundleKey="statsound$rec.exp.display.statsound.loc.3"
 		toolTipBundleKey="statsound$rec.exp.display.statsound.tip.3"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.3"
-		offlineCapable="false" order="5" />
+		offlineCapable="false" order="4" />
 	<Display classLocationBundleKey="statsound$rec.exp.display.statsound.loc.4"
 		toolTipBundleKey="statsound$rec.exp.display.statsound.tip.4"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.4"
-		offlineCapable="false" order="6" />
+		offlineCapable="false" order="5" />
 	<Display classLocationBundleKey="statsound$rec.exp.display.statsound.loc.5"
 		toolTipBundleKey="statsound$rec.exp.display.statsound.tip.5"
 		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.5"
-		offlineCapable="false" order="7" />
+		offlineCapable="false" order="6" />
 </Apparatus>
 	

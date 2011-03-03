@@ -16,11 +16,13 @@
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.sensor"
 		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.sensor"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	<!-- 
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.sensor.temp"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.sensor.temp"
 		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.sensor.temp"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
+	 -->
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.1"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.1"

@@ -95,8 +95,8 @@ public class Temperature extends javax.swing.JPanel implements ExpDataDisplay, E
 
 	public void newSamples(NewExpDataEvent evt) {
 		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
-			System.out.println(model.getValueAt(i, model.getChannelIndex("temp")));
 			if (model.getValueAt(i, model.getChannelIndex("temp")) != null) {
+				System.out.println(model.getValueAt(i, model.getChannelIndex("temp")));
 				if (firstTime) {
 					jTextFieldTempIni.setText("" + model.getValueAt(i, model.getChannelIndex("temp")).getValueNumber());
 					firstTime = false;
