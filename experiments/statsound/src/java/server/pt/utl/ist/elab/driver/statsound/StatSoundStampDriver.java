@@ -28,7 +28,6 @@ import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.protocols.ReCProtocols;
 import com.linkare.rec.impl.threading.AbstractConditionDecisor;
-import com.linkare.rec.impl.threading.IConditionDecisor;
 import com.linkare.rec.impl.threading.TimedOutException;
 import com.linkare.rec.impl.threading.WaitForConditionResult;
 import com.linkare.rec.impl.utils.Defaults;
@@ -326,6 +325,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	private boolean reseting = true;
 
 	public void stopDataSource() {
+		writeMessage("stp");
+		
 		super.stopDataSource();
 		if (dataSource != null) {
 			System.out.println("Stoping data source!");
