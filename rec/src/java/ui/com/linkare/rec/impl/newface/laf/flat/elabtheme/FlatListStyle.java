@@ -42,7 +42,7 @@ public class FlatListStyle extends DefaultStyle {
 		super.updatePropertyMap(map);
 		map.put(BACKGROUND, LIST_BACKGROUND);
 		map.put(FOREGROUND, LIST_FOREGROUND);
-		map.put(FONT, new FontUIResource("Arial", Font.PLAIN, 20));
+		map.put(FONT, new FontUIResource("Arial", Font.PLAIN, 13));
 	}
 
 }
