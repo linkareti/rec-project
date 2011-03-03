@@ -8,7 +8,7 @@ package pt.utl.ist.elab.client.statsound.displays;
 
 /**
  *
- * @author  Andr�
+ * @author André
  */
 
 import java.awt.BasicStroke;
@@ -25,19 +25,35 @@ import javax.swing.JToolBar;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.client.experiment.ExpDataModel;
 import com.linkare.rec.impl.client.experiment.NewExpDataEvent;
+import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 public class StatSoundSensor extends javax.swing.JPanel implements
 		com.linkare.rec.impl.client.experiment.ExpDataDisplay,
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
+
 	private BufferedImage imgTube1 = new BufferedImage(290, 30, BufferedImage.TYPE_INT_ARGB);
+
 	private BufferedImage imgPiston = new BufferedImage(50, 28, BufferedImage.TYPE_INT_ARGB);
+
 	private Icon icon = new javax.swing.ImageIcon(getClass().getResource(
 			"/com/linkare/rec/impl/baseUI/resources/sensor16.gif"));
 
+	private int cpos = 0;
+
+	double L = 1450;
+
+	private boolean expStarted = false;
+
 	private double freq = 500;
-	private double SOUND_VEL = 345;
+
+	private final double SOUND_VEL = 345;
 
 	private java.text.DecimalFormat df = new java.text.DecimalFormat();
+
+	private static final String FREQUENCY_LABEL = ReCResourceBundle
+			.findString("statsound$rec.exp.statsoud.lbl.frequency");
+
+	private static final String POSITION_LABEL = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.piston");
 
 	/** Creates new form StatSoundSensor */
 	public StatSoundSensor() {
@@ -73,10 +89,6 @@ public class StatSoundSensor extends javax.swing.JPanel implements
 		setBackground(new java.awt.Color(204, 204, 255));
 		setForeground(new java.awt.Color(51, 51, 255));
 	}// GEN-END:initComponents
-
-	private int cpos = 0;
-	double L = 1450;
-	private boolean expStarted = false;
 
 	private void setCPos(int cpos) {
 		if (cpos > 1450) {
@@ -176,8 +188,8 @@ public class StatSoundSensor extends javax.swing.JPanel implements
 		g2D.drawImage(imgPiston, x2_start, y2_start, imgPiston.getWidth(), imgPiston.getHeight(), null);
 
 		g2D.setColor(Color.red);
-		g2D.drawString("Frequ�ncia(Hz) = " + df.format(freq), x_start, y2_start + imgTube1.getHeight() + 20);
-		g2D.drawString("Posi��o(mm) = " + df.format(L), x_start, y2_start + imgTube1.getHeight() + 40);
+		g2D.drawString(FREQUENCY_LABEL + " = " + df.format(freq), x_start, y2_start + imgTube1.getHeight() + 20);
+		g2D.drawString(POSITION_LABEL + " = " + df.format(L), x_start, y2_start + imgTube1.getHeight() + 40);
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
