@@ -22,7 +22,7 @@ public class FlatListStyle extends DefaultStyle {
 
 	public static final String ID = "List";
 
-	public static final Color LIST_BACKGROUND = new Color(0xE4EEED);
+	public static final Color LIST_BACKGROUND = WHITE_DEFAULT_COLOR;
 	public static final Color LIST_FOREGROUND = new Color(0x231F20);
 
 	/**
@@ -42,7 +42,7 @@ public class FlatListStyle extends DefaultStyle {
 		super.updatePropertyMap(map);
 		map.put(BACKGROUND, LIST_BACKGROUND);
 		map.put(FOREGROUND, LIST_FOREGROUND);
-		map.put(FONT, new FontUIResource("Arial", Font.PLAIN, 13));
+		map.put(FONT, DEFAULT_FONT);
 	}
 
 }
