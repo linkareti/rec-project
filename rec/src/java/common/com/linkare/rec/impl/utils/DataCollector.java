@@ -28,10 +28,9 @@ import com.linkare.rec.impl.wrappers.DataProducerWrapper;
  * @author José Pedro Pereira - Linkare TI
  */
 public abstract class DataCollector extends Thread implements Serializable {
-	
-	/** Generated UID */
-	private static final long serialVersionUID = -3995567625115922087L;
-	
+
+	private static final long serialVersionUID = -5606372174593582642L;
+
 	private static String DATA_RECEIVER_LOGGER = "DataReceiver.Logger";
 	private transient Thread acquisitionThread = null;
 	private boolean acquisitionThreadInited = false;
@@ -42,9 +41,10 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private DataCollectorState dataCollectorState = DataCollectorState.DP_WAITING;
 	private boolean startedSamples = false;
 	private int totalSamples;
-	private long frequency = 100; // default
-	long lastFetchPacketsTimestamp = System.currentTimeMillis();
-	long lastPacketFetchedTimestamp = System.currentTimeMillis();
+	private static final int DEFAULT_FREQUENCY_TIME = 100;
+	private long frequency = DEFAULT_FREQUENCY_TIME;
+	private long lastFetchPacketsTimestamp = System.currentTimeMillis();
+	private long lastPacketFetchedTimestamp = System.currentTimeMillis();
 	private transient DataCollectorFetchPacketCheck fetchPacketCheck = null;
 
 	static {
@@ -56,7 +56,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 	public DataCollector() {
 		samplesPackets = new SamplesPacketMatrix();
-//		releaseAcquisitionThread();
+		// releaseAcquisitionThread();
 		setName(getName() + " - DataCollector");
 	}
 
@@ -74,18 +74,18 @@ public abstract class DataCollector extends Thread implements Serializable {
 			}
 		}
 	}
-	
+
 	protected int getLargestPacketKnown() {
 		return largestPacketKnown;
 	}
 
-//	private void releaseAcquisitionThread() {
-//		initAcquisitionThread();
-//
-//		synchronized (synchWaitFetchData) {
-//			synchWaitFetchData.notify();
-//		}
-//	}
+	// private void releaseAcquisitionThread() {
+	// initAcquisitionThread();
+	//
+	// synchronized (synchWaitFetchData) {
+	// synchWaitFetchData.notify();
+	// }
+	// }
 
 	public void initAcquisitionThread() {
 		if (!acquisitionThreadInited) {
@@ -96,10 +96,10 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 	public void addSamplesPackets(SamplesPacket[] samples_packet) {
 		lastPacketFetchedTimestamp = System.currentTimeMillis();
-		
+
 		samplesPackets.addSamplesPackets(samples_packet);
 		if (!startedSamples && samplesPackets.size() > 0) {
-			startedSamples  = true;
+			startedSamples = true;
 			if (DataCollectorState.DP_STARTED_NODATA.equals(dataCollectorState)) {
 				setDataCollectorState(DataCollectorState.DP_STARTED);
 			}
@@ -213,7 +213,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 	private volatile boolean exit = true;
 
 	private volatile boolean pause = true;
-	
+
 	private volatile boolean notified = false;
 
 	abstract public void log(Level debugLevel, String message);
@@ -230,19 +230,19 @@ public abstract class DataCollector extends Thread implements Serializable {
 		exit = false;
 		pause = false;
 		acquisitionThread = currentThread();
-		
+
 		log(Level.INFO, "DataCollector started. Remote data producer state = " + remoteDataProducerState);
-		
+
 		try {
 			// Thread to check is the data collector is receiving samples
 			lastPacketFetchedTimestamp = System.currentTimeMillis();
 			fetchPacketCheck = new DataCollectorFetchPacketCheck();
-			
+
 			setDataCollectorState(DataCollectorState.DP_STARTED_NODATA);
-			
+
 			log(Level.FINEST, "DataCollector is going to fetch available packets");
 			fetchAvailablePackets();
-	
+
 			while (samplesPackets.size() < totalSamples && !exit) {
 				while (pause && !exit) {
 					synchronized (synchWaitFetchData) {
@@ -257,41 +257,43 @@ public abstract class DataCollector extends Thread implements Serializable {
 						setDataCollectorState(new DataCollectorState(stateBeforePausing));
 					}
 				}
-				
+
 				synchronized (synchWaitFetchData) {
-					// se ainda nao obteve tudo e entretanto nao chegou notificacao de nova amostra fica 'a espera
+					// se ainda nao obteve tudo e entretanto nao chegou
+					// notificacao de nova amostra fica 'a espera
 					if (samplesPackets.size() < totalSamples && !exit
 							&& samplesPackets.size() - 1 == largestPacketKnown) {
 						synchWaitFetchData.wait(calcWaitTime());
 					}
 				}
-				
+
 				if (!exit) {
-					// se nao sai' do wait por ter sido notificado vai actualizar o numero do ultimo pacote
+					// se nao sai' do wait por ter sido notificado vai
+					// actualizar o numero do ultimo pacote
 					if (!notified) {
 						updateLargestPacketKnown();
 					}
 					fetchPackets();
 				}
 			}
-			
+
 			finishDataCollectorRun();
-			
+
 			log(Level.INFO, "DataCollector ended. Remote data producer state = " + remoteDataProducerState);
-		
+
 		} catch (Exception e) {
 			logThrowable("Unexpected exception while running DataCollector!", e);
 			return;
 		}
 
 	}
-	
+
 	/**
 	 * Cleanup before the data collector thread terminates
 	 */
 	protected void finishDataCollectorRun() {
 		log(Level.FINEST, "DataCollector is going to finish the run");
-		
+
 		fetchAvailablePackets();
 		setDataCollectorState(new DataCollectorState(remoteDataProducerState));
 
@@ -299,10 +301,10 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 		exit = true;
 		// pause = true;
-		
+
 		fetchPacketCheck.shutdown();
 	}
-	
+
 	protected void shutdownThread() {
 		if (acquisitionThread != null)
 			try {
@@ -344,7 +346,7 @@ public abstract class DataCollector extends Thread implements Serializable {
 			if (!isConnected())
 				setRemoteDataProducerState(DataProducerState.DP_ERROR);
 	}
-	
+
 	private void updateLargestPacketKnown() {
 		try {
 			synchronized (synchWaitFetchData) {
@@ -403,13 +405,17 @@ public abstract class DataCollector extends Thread implements Serializable {
 			synchWaitFetchData.notifyAll();
 		}
 	}
-	
+
 	/**
-	 * @return
+	 * This method should be used as a way to change the behaviour of the data
+	 * collector on the GUI and on the multicast. This way, we are allowed to
+	 * make both collectors behave differently, as needed.
+	 * 
+	 * @return the waiting time to check for new packets
 	 */
-	private long calcWaitTime() {
+	protected long calcWaitTime() {
 		long time = frequency - (System.currentTimeMillis() - lastFetchPacketsTimestamp);
-		return time > 0 ? time : 10;
+		return time > 0 ? time : DEFAULT_FREQUENCY_TIME;
 	}
 
 	/**
@@ -439,11 +445,13 @@ public abstract class DataCollector extends Thread implements Serializable {
 	protected void setFrequency(long frequency) {
 		this.frequency = frequency;
 	}
-	
+
 	private class DataCollectorFetchPacketCheck extends ScheduledWorkUnit {
 
-		private int periodChecker = 60; // seconds // TODO must be a system property
-		private int timeSpend = 5 * 60 * 1000; // milliseconds // TODO must be a system property
+		private int periodChecker = 60; // seconds // TODO must be a system
+										// property
+		private int timeSpend = 5 * 60 * 1000; // milliseconds // TODO must be a
+												// system property
 
 		DataCollectorFetchPacketCheck() {
 			ExecutorScheduler.scheduleAtFixedRate(this, 1, periodChecker, SECONDS);
@@ -451,7 +459,8 @@ public abstract class DataCollector extends Thread implements Serializable {
 
 		public void run() {
 			if (System.currentTimeMillis() - lastPacketFetchedTimestamp >= timeSpend) {
-				log(Level.INFO, "Going to exit because it has passed more than " + ((int)(timeSpend/1000)) + " seconds since it was received a sample.");
+				log(Level.INFO, "Going to exit because it has passed more than " + ((int) (timeSpend / 1000))
+						+ " seconds since it was received a sample.");
 				exit = true;
 				shutdown();
 			}
@@ -465,5 +474,5 @@ public abstract class DataCollector extends Thread implements Serializable {
 			logThrowable(message, throwable);
 		}
 	}
-	
+
 }
