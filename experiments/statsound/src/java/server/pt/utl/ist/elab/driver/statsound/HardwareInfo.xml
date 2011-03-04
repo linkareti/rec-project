@@ -18,32 +18,13 @@
 			<value order="2">1480</value>
 			<value order="3">1</value>
 		</selection-list>
-
 	</parameter>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<parameter name="Piston end" value="1300" type="ContinuousValue">
 		<selection-list>
 			<value order="1">1258</value>
 			<value order="2">1480</value>
 			<value order="3">1</value>
 		</selection-list>
-
 	</parameter>
 	<parameter name="Frequency start" type="ContinuousValue"
 		value="250">
@@ -52,7 +33,6 @@
 			<value order="2">2000</value>
 			<value order="3">1</value>
 		</selection-list>
-
 	</parameter>
 	<parameter name="Frequency end" type="ContinuousValue" value="250">
 		<selection-list>
@@ -60,7 +40,6 @@
 			<value order="2">2000</value>
 			<value order="3">1</value>
 		</selection-list>
-
 	</parameter>
 	<parameter name="Wave form" type="SelectionListValue" value="0">
 		<selection-list>
@@ -74,7 +53,6 @@
 			<value order="1">Vary Piston</value>
 			<value order="2">Vary Freq</value>
 			<value order="3">Sound Vel</value>
-
 		</selection-list>
 	</parameter>
 	<parameter name="Status" type="SelectionListValue" value="0000">
@@ -82,7 +60,6 @@
 			<value order="1">0000</value>
 			<value order="2">0001</value>
 			<value order="3">0010</value>
-
 			<value order="4">0011</value>
 			<value order="5">0100</value>
 			<value order="6">0101</value>
@@ -91,28 +68,11 @@
 			<value order="9">1000</value>
 		</selection-list>
 	</parameter>
-
-
-
-
-
-
-
-
-
 	<parameter name="Calibration" type="SelectionListValue"
 		value="1">
 		<selection-list>
 			<value order="1">0</value>
 			<value order="2">1</value>
-
-
-
-
-
-
-
-
 		</selection-list>
 	</parameter>
 	<frequency-scale label="Sampling Frequency">
@@ -172,4 +132,3 @@
 		</scale>
 	</ChannelInfo>
 </HardwareInfo>
-

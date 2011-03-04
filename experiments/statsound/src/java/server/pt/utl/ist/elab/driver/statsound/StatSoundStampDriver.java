@@ -37,15 +37,28 @@ import com.linkare.rec.impl.utils.Defaults;
  * @author José Pedro Pereira - Linkare TI & André
  */
 public class StatSoundStampDriver extends AbstractStampDriver {
+
 	private StampCommand stampConfig = null;
+
 	private String typeOfExp = "";
+
 	private int nSamples = 0;
+
 	private int waveForm = 0;
+
 	private int posIni = 0;
+
 	private int posFin = 0;
+
 	private int freqIni = 0;
+
 	private int freqFin = 0;
+
 	private int nPoints = 0;
+
+	private double step = 0;
+
+	private StatSoundStampDataSource dataSource;
 
 	/** Creates a new instance of RadioactividadeStampDriver */
 	public StatSoundStampDriver() {
@@ -56,8 +69,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		setPortBaudRate(9600);
 		loadCommandHandlers();
 	}
-
-	private double step = 0;
 
 	public void configure(HardwareAcquisitionConfig config, HardwareInfo info) throws WrongConfigurationException {
 
@@ -86,43 +97,28 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		freqIni = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_INI));
 		freqFin = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.FREQ_END));
 
-		// System.out.println("freqini : " + freqIni);
-		if (typeOfExp.equals(StatSoundStampDataSource.EXP_1) || typeOfExp.equals(StatSoundStampDataSource.EXP_3)) {
-			freqFin = freqIni;
-		}
-
-		// System.out.println("freqfin : " + freqFin);
-
-		if (freqFin < freqIni && !typeOfExp.equals(StatSoundStampDataSource.EXP_3)) {
+		if (freqFin < freqIni) {
 			int temp = freqFin;
 			freqFin = freqIni;
 			freqIni = temp;
 		}
 
-//		typeOfExp = config.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP);
-//		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_1)
-//				|| typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
-//			/** This are the stamp n Samples... */
-			nSamples = config.getTotalSamples();
-////		} else if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_3)) {
-////			// TODO WTF???
-////			nSamples = 500;
-//		} else {
-//			nSamples = 1;
-//			posFin = posIni;
-//		}
+		// /** This are the stamp n Samples... */
+		nSamples = config.getTotalSamples();
 
-		if (config.getTotalSamples() != 1) {
-			step = Math.abs((double) (freqIni - freqFin)) / ((double) (config.getTotalSamples() - 1));
+		if (nSamples != 1) {
+			step = Math.abs((double) (freqIni - freqFin)) / ((double) (nSamples - 1));
 			System.out.println("Step=" + step);
 		} else {
 			/** Step needs to be bigger than 1 to get out of the for cycle */
 			step = 1;
+			// TODO: Paulo Zenida - why is this here?!
 			freqIni = freqFin;
 		}
 
 		waveForm = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.WAVE_FORM));
 
+		// The customizer does not have NPOINTS: it will always be 50
 		if (config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS) != null) {
 			nPoints = Integer.parseInt(config.getSelectedHardwareParameterValue(StatSoundStampDataSource.N_POINTS));
 		} else {
@@ -130,33 +126,21 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		}
 
 		stampConfig = new StampCommand(CONFIG_OUT_STRING);
-
 		stampConfig.addCommandData(StampConfigTranslator.NUMSAMPLES_STR, new Integer(nSamples));
 
 		this.posIni = Integer.parseInt(posIni);
+		this.posFin = Integer.parseInt(posFin);
 
-		stampConfig.addCommandData(StampConfigTranslator.POS_INIT_STR, new Integer(posIni));
-
-		stampConfig.addCommandData(StampConfigTranslator.POS_FIN_STR, new Integer(posFin));
-
-		stampConfig.addCommandData(StampConfigTranslator.STATUS_STR, new String(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.STATUS_STR)));
-
-		stampConfig.addCommandData(StampConfigTranslator.RESET_STR, new Integer(config
-				.getSelectedHardwareParameterValue(StampConfigTranslator.RESET_STR)));
+		stampConfig.addCommandData(StampConfigTranslator.POS_INIT_STR, this.posIni);
+		stampConfig.addCommandData(StampConfigTranslator.POS_FIN_STR, this.posFin);
+		stampConfig.addCommandData(StampConfigTranslator.STATUS_STR,
+				new String(config.getSelectedHardwareParameterValue(StampConfigTranslator.STATUS_STR)));
+		stampConfig.addCommandData(StampConfigTranslator.RESET_STR,
+				new Integer(config.getSelectedHardwareParameterValue(StampConfigTranslator.RESET_STR)));
 
 		StampTranslator translator = StampTranslatorProcessorManager.getTranslator(stampConfig);
 		if (!translator.translate(stampConfig))
 			throw new WrongConfigurationException("Cannot translate StampCommand!", -1);
-
-//		if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.EXP_2)) {
-//			config.setTotalSamples(config.getTotalSamples() + 1);
-//		} else {
-//			config.setTotalSamples(config.getTotalSamples() + 2); // +2 for temp
-//			// ini and
-//			// temp
-//			// final
-//		}
 
 		for (int i = 0; i < config.getChannelsConfig().length; i++) {
 			config.getChannelsConfig(i).setTotalSamples(config.getTotalSamples());
@@ -187,16 +171,14 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 			try {
 				url = new java.net.URL(baseHardwareInfoFile);
 			} catch (java.net.MalformedURLException e2) {
-				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2, Logger
-						.getLogger(STAMP_DRIVER_LOGGER));
+				LoggerUtil.logThrowable("Unable to load resource: " + baseHardwareInfoFile, e2,
+						Logger.getLogger(STAMP_DRIVER_LOGGER));
 			}
 		}
 
 		return url;
 
 	}
-
-	private StatSoundStampDataSource dataSource;
 
 	public AbstractStampDataSource initDataSource() {
 		dataSource = new StatSoundStampDataSource();
@@ -225,8 +207,8 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		if (cmd.getCommandIdentifier().equals(ID_STR)) {
 			if (dataSource != null
 					&& !dataSource.isExpEnded()
-					&& !config.getSelectedHardwareParameterValue(dataSource.TYPE_OF_EXP).equalsIgnoreCase(
-							dataSource.EXP_1)) {
+					&& !config.getSelectedHardwareParameterValue(StatSoundStampDataSource.TYPE_OF_EXP)
+							.equalsIgnoreCase(StatSoundStampDataSource.STATSOUND_I_VARY_PISTON)) {
 				System.out.println("Returning");
 				return;
 			}
@@ -261,11 +243,12 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 		} else if (cmd.getCommandIdentifier().equals(StampStartProcessor.COMMAND_IDENTIFIER)) {
 			started = true;
 
+			final DateTime timeStart = new DateTime();
 			for (int i = 0; i < config.getChannelsConfig().length; i++) {
-				config.getChannelsConfig(i).setTimeStart(new DateTime());
+				config.getChannelsConfig(i).setTimeStart(timeStart);
 			}
 
-			config.setTimeStart(new DateTime());
+			config.setTimeStart(timeStart);
 			dataSource.setPosIni(posIni);
 			dataSource.setPosFin(posFin);
 			dataSource.setFreqIni(freqIni);
@@ -276,23 +259,19 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 
 			System.out.println("Debug Version 001");
 
-			if (typeOfExp.equalsIgnoreCase(dataSource.EXP_1)) {
-				dataSource.startAcquiring(false);
-				dataSource.setExpEnded(false);
-			} else if (typeOfExp.equalsIgnoreCase(dataSource.EXP_2)) {
-				dataSource.startAcquiring(false);
-				dataSource.setExpEnded(false);
-			} else {
+			if (typeOfExp.equalsIgnoreCase(StatSoundStampDataSource.SOUND_VELOCITY)) {
 				// dataSource.setWaveForm(waveForm);
 				System.out.println("Running waveform : " + waveForm);
 				if (waveForm == 0)
 					dataSource.playPinkNoise(freqIni, 15, 2000);
 				else if (waveForm == 1) {
 					dataSource.playPulseWave(freqIni, 15, 2000);
+				} else {
+					dataSource.playSinWave(freqIni, freqFin, nSamples, 0);
 				}
-				dataSource.startAcquiring(false);
-				dataSource.setExpEnded(false);
 			}
+			dataSource.startAcquiring(false);
+			dataSource.setExpEnded(false);
 			fireIDriverStateListenerDriverStarted();
 			if (dataSource != null) {
 				// dataSource.setRunning(true);
@@ -325,8 +304,6 @@ public class StatSoundStampDriver extends AbstractStampDriver {
 	private boolean reseting = true;
 
 	public void stopDataSource() {
-		writeMessage("stp");
-		
 		super.stopDataSource();
 		if (dataSource != null) {
 			System.out.println("Stoping data source!");
