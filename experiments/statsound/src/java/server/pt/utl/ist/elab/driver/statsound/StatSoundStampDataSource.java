@@ -75,7 +75,6 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 		soundPlaying = false;
 	}
 
-	@SuppressWarnings("static-access")
 	public void processDataCommand(StampCommand cmd) {
 		if (cmd == null || !cmd.isData() || cmd.getCommandIdentifier() == null) {
 			Logger.getLogger("StampDriver.Logger").log(Level.FINEST, "Return from process data...cmd isn't valid");
@@ -106,7 +105,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 				try {
 					synchronized (syncWait) {
-						Thread.currentThread().sleep(200);
+						Thread.sleep(200);
 
 						while (!rmsAvailable && !expEnded) {
 							syncWait.wait();
@@ -116,8 +115,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				} catch (InterruptedException ie) {
 				}
 
-				double rmsLeftValor = sr.getRMS(sr.LEFT_CHANNEL);
-				double rmsRightValor = sr.getRMS(sr.RIGHT_CHANNEL);
+				double rmsLeftValor = sr.getRMS(SoundRecorder.LEFT_CHANNEL);
+				double rmsRightValor = sr.getRMS(SoundRecorder.RIGHT_CHANNEL);
 
 				sr.resetRMS();
 
@@ -146,7 +145,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				}
 				try {
 					// initial time till acquisition
-					Thread.currentThread().sleep(500);
+					Thread.sleep(500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -161,7 +160,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					}
 					try {
 						// waiting time between two acquisitions
-						Thread.currentThread().sleep(170);
+						Thread.sleep(170);
 						synchronized (syncWait) {
 							Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering syncronized");
 							while (!rmsAvailable && !expEnded) {
@@ -176,8 +175,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					}
 
 					Logger.getLogger("StampDriver.Logger").log(Level.FINEST, "Current frequency=" + f);
-					double rmsLeftValor = sr.getRMS(sr.LEFT_CHANNEL);
-					double rmsRightValor = sr.getRMS(sr.RIGHT_CHANNEL);
+					double rmsLeftValor = sr.getRMS(SoundRecorder.LEFT_CHANNEL);
+					double rmsRightValor = sr.getRMS(SoundRecorder.RIGHT_CHANNEL);
 					sr.resetRMS();
 
 					values[0] = PhysicsValueFactory.fromInt(posIni, config.getChannelsConfig(0).getSelectedScale());
@@ -199,7 +198,7 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 				Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Inside no expEnded");
 				sr.startAcquiring(true);
 				try {
-					Thread.currentThread().sleep(800);
+					Thread.sleep(800);
 					synchronized (syncWait) {
 						Logger.getLogger("StampDriver.Logger").log(Level.INFO, "Entering not expEnded syncronized");
 						while (!rmsAvailable && !expEnded) {
