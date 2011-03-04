@@ -38,11 +38,6 @@ public class StatSoundCustomizer extends javax.swing.JPanel implements
     private final int DEFAULT_STATSOUND_II_FREQUENCY_INITIAL = 250;
     private final int DEFAULT_STATSOUND_II_FREQUENCY_END = 1000;
     private final int DEFAULT_STATSOUND_II_PISTON = 1300;
-//    private int nSamples;
-//    private int frequencyInitial;
-//    private int frequencyEnd;
-//    private int pistonPositionInitial;
-//    private int pistonPositionEnd;
     private static final String MIN_SAMPLES_STR = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.minsamples");
     private static final String MAX_SAMPLES_STR = ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.maxsamples");
     /** REC */
