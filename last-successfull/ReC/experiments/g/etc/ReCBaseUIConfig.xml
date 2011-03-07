@@ -1,0 +1,43 @@
+<Apparatus location="ELAB_G_STAMP_V02"
+	customizerClassLocationBundleKey="g$rec.exp.customizer.g"
+	toolTipBundleKey="g$rec.exp.tip.g" iconLocationBundleKey="g$rec.exp.icon.g"
+	descriptionStringBundleKey="g$rec.exp.description.g"
+	displayStringBundleKey="g$rec.exp.title.g" desktopLocationBundleKey="g$rec.exp.background.g"
+	order="1">
+	<LocalizationBundle name="g"
+		location="recresource:///pt/utl/ist/elab/client/g/resources/messages" />
+	<WebResource locationBundleKey="g$rec.exp.url.g.1"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="g$rec.exp.url.g.title.1"
+		toolTipLocationBundleKey="g$rec.exp.url.g.title.1" internalBrowser="false"
+		order="1" />
+	<WebResource locationBundleKey="g$rec.exp.url.g.2"
+		iconLocationBundleKey="ReCLabeLab$rec.lab.icon.webpage"
+		displayStringBundleKey="g$rec.exp.url.g.title.2"
+		toolTipLocationBundleKey="g$rec.exp.url.g.title.2" internalBrowser="false"
+		order="2" />
+	<WebResource locationBundleKey="g$rec.exp.url.g.video"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.movie"
+		displayStringBundleKey="g$rec.exp.url.g.title.video"
+		toolTipLocationBundleKey="g$rec.exp.url.g.title.video"
+		internalBrowser="false" order="3" />
+
+	<DefaultAcquisitionConfig
+		classLocationBundleKey="g$rec.exp.dftcfg.g.loc.1" toolTipBundleKey="g$rec.exp.dftcfg.g.tip.1"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.customize"
+		displayStringBundleKey="g$rec.exp.dftcfg.g.title.1" order="1" />
+
+	<Display classLocationBundleKey="g$rec.exp.display.g.loc.sensor"
+		toolTipBundleKey="g$rec.exp.display.g.tip.sensor"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="g$rec.exp.display.g.title.sensor"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="g$rec.exp.display.g.loc.1"
+		toolTipBundleKey="g$rec.exp.display.g.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="g$rec.exp.display.g.title.1" offlineCapable="false"
+		order="2" />
+	<Display classLocationBundleKey="g$rec.exp.display.g.loc.2"
+		toolTipBundleKey="g$rec.exp.display.g.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="g$rec.exp.display.g.title.2" offlineCapable="false"
+		order="3" />
+</Apparatus>
