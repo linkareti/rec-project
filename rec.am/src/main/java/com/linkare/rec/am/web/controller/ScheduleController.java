@@ -92,11 +92,7 @@ public class ScheduleController implements Serializable {
     }
 
     public void addEvent(ActionEvent actionEvent) {
-	if (event.getId() == null) {
-	    createOrUpdate();
-	} else {
-	    createOrUpdate();
-	}
+	createOrUpdate();
 	event = new Reservation();
 	event.setStyleClass("myevents");
     }
@@ -145,7 +141,9 @@ public class ScheduleController implements Serializable {
 
     public void onEventSelect(ScheduleEntrySelectEvent selectEvent) {
 	event = (Reservation) selectEvent.getScheduleEvent();
-	event.setExternalCourse(MoodleClientHelper.findCourse(event.getReservedTo(), SessionHelper.getLoginDomain(), SessionHelper.getLoginReturn()));
+	if (!event.isInternal()) {
+	    event.setExternalCourse(MoodleClientHelper.findCourse(event.getReservedTo(), SessionHelper.getLoginDomain(), SessionHelper.getLoginReturn()));
+	}
     }
 
     public void onDateSelect(DateSelectEvent selectEvent) {
@@ -154,7 +152,9 @@ public class ScheduleController implements Serializable {
 
     public void onEventMove(ScheduleEntryMoveEvent selectEvent) {
 	event = (Reservation) selectEvent.getScheduleEvent();
-	event.setExternalCourse(MoodleClientHelper.findCourse(event.getReservedTo(), SessionHelper.getLoginDomain(), SessionHelper.getLoginReturn()));
+	if (!event.isInternal()) {
+	    event.setExternalCourse(MoodleClientHelper.findCourse(event.getReservedTo(), SessionHelper.getLoginDomain(), SessionHelper.getLoginReturn()));
+	}
 	moveEvent(true, event, selectEvent.getMinuteDelta());
 	createOrUpdate();
     }
