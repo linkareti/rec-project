@@ -132,7 +132,7 @@ public abstract class AbstractSerialPortDataSource extends BaseDataSource {
 	 * @param config experiment configuration with the frequency defined
 	 * @return
 	 */
-	private static int calcPacketSize(HardwareAcquisitionConfig config) {
+	protected int calcPacketSize(HardwareAcquisitionConfig config) {
 		return (int) Math.ceil(1. / (8. * config.getSelectedFrequency().getFrequency() * config.getSelectedFrequency()
 				.getMultiplier().getExpValue()));
 	}
