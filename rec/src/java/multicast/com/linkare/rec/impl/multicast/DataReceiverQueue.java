@@ -315,10 +315,10 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 					log(Level.INFO, "DataReceiverQueue - dispatching DataProducer State change event. New State is: "
 							+ evt.getDataProducerState());
 
-					Iterator<DataReceiverForQueue> iter = iterator();
-					while (iter.hasNext()) {
+					Iterator<DataReceiverForQueue> clients = iterator();
+					while (clients.hasNext()) {
 						try {
-							((DataReceiverForQueue) iter.next()).stateChanged(evt);
+							((DataReceiverForQueue) clients.next()).stateChanged(evt);
 						} catch (Exception e) {
 							logThrowable(
 									"DataReceiverQueue - Error dispatching DataProducer State change events to dataReceivers!",
@@ -333,10 +333,10 @@ public class DataReceiverQueue implements java.io.Serializable, QueueLogger {
 				log(Level.INFO, "DataReceiverQueue - dispatching new samples message event " + evt + " to "
 						+ queueOrg.size() + " DataReceiverForQueue");
 
-				Iterator<DataReceiverForQueue> iter = iterator();
-				while (iter.hasNext()) {
+				Iterator<DataReceiverForQueue> clients = iterator();
+				while (clients.hasNext()) {
 					try {
-						((DataReceiverForQueue) iter.next()).newSamples(evt);
+						((DataReceiverForQueue) clients.next()).newSamples(evt);
 					} catch (Exception e) {
 						logThrowable("DataReceiverQueue - Error dispatching new samples message event!", e);
 					}

@@ -62,7 +62,7 @@ public class DataReceiverForQueue implements QueueLogger
 		messageQueue = new EventQueue(new DataReceiverQueueDispatcher(), this.getClass().getSimpleName(), this);
 
 	}
-	
+
 	public boolean isEmpty() {
 		return messageQueue.isEmpty();
 	}
@@ -149,7 +149,7 @@ public class DataReceiverForQueue implements QueueLogger
 
 		log(Level.INFO, "receiver " + drw.getDelegate() + " is shut down!");
 	}
-	
+
 	public boolean isShutdown() {
 		return shutdown;
 	}
@@ -238,24 +238,21 @@ public class DataReceiverForQueue implements QueueLogger
 				if (o instanceof NewSamplesEvent)
 
 				{
-					
+
 					NewSamplesEvent evt = (NewSamplesEvent) o;
 
 					log(Level.INFO, "DataReceiverForQueue - dispatching new samples message event " + evt);
 
 					drw.newSamples(evt.getLargestNumPacket());
-					
+
 					// verificar se e' um evento de paragem da thread
 					if (evt.isPoisoned()) {
-						log(Level.FINE, "receiver " + drw.getDelegate() + " - received a poison sample with largest num packet = " + evt.getLargestNumPacket());
+						log(Level.FINE, "receiver " + drw.getDelegate()
+								+ " - received a poison sample with largest num packet = " + evt.getLargestNumPacket());
 						shutdownAsSoonAsPossible();
 					}
 
-				}
-
-				if (o instanceof DataProducerStateChangeEvent)
-
-				{
+				} else if (o instanceof DataProducerStateChangeEvent) {
 
 					DataProducerStateChangeEvent evt = (DataProducerStateChangeEvent) o;
 
