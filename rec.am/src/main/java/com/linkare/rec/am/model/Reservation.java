@@ -32,7 +32,7 @@ import com.linkare.rec.am.web.util.ConstantUtils;
  */
 @Entity
 @Table(name = "RESERVATION")
-@NamedQueries( { @NamedQuery(name = Reservation.FIND_ALL_QUERYNAME, query = Reservation.FIND_ALL_QUERY),
+@NamedQueries({ @NamedQuery(name = Reservation.FIND_ALL_QUERYNAME, query = Reservation.FIND_ALL_QUERY),
 	@NamedQuery(name = Reservation.COUNT_ALL_QUERYNAME, query = Reservation.COUNT_ALL_QUERY),
 	@NamedQuery(name = Reservation.FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERYNAME, query = Reservation.FIND_BY_EXPERIMENT_NAME_IN_INTERVAL_QUERY),
 	@NamedQuery(name = Reservation.FIND_FOR_USER_IN_DATE_QUERYNAME, query = Reservation.FIND_FOR_USER_IN_DATE_QUERY),
@@ -80,8 +80,8 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
 
     public static final String FIND_IN_INTERVAL_AND_LAB_QUERYNAME = "Reservation.findInIntervalAndLab";
     public static final String FIND_IN_INTERVAL_AND_LAB_QUERY = "Select r from Reservation r where ( :" + QUERY_PARAM_START_DATE
-	    + " between r.startDate and r.endDate  or :" + QUERY_PARAM_END_DATE
-	    + " between r.startDate and r.endDate ) and r.experiment.laboratory.name = :" + QUERY_PARAM_LAB_NAME;
+	    + " between r.startDate and r.endDate  or :" + QUERY_PARAM_END_DATE + " between r.startDate and r.endDate ) and r.experiment.laboratory.name = :"
+	    + QUERY_PARAM_LAB_NAME;
 
     public static final String FIND_FOR_DOMAIN_IN_INTERVAL_QUERYNAME = "Reservation.findForDomainInDate";
     public static final String FIND_FOR_DOMAIN_IN_INTERVAL_QUERY = "Select r from Reservation r WHERE r.domain = :" + QUERY_PARAM_DOMAIN
@@ -423,7 +423,7 @@ public class Reservation extends DefaultDomainObject implements ScheduleEvent {
     }
 
     public boolean isInternal() {
-	return getUser().getUsername().indexOf("@") == -1 || getUser().getUsername().endsWith(ConstantUtils.INTERNAL_DOMAIN_NAME);
+	return ConstantUtils.INTERNAL_DOMAIN_NAME.equalsIgnoreCase(getDomain());
     }
 
     /**
