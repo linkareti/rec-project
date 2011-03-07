@@ -6,15 +6,20 @@
 
 package com.linkare.rec.impl.client.experiment;
 
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
- * @author Jos� Pedro Pereira
+ * @author José Pedro Pereira
  */
 public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset implements
 		com.linkare.rec.impl.client.experiment.ExpDataModelListener {
 
+	private int updateFrequency = 1;
+	
+	private HardwareAcquisitionConfig header = null;
+	
 	/** Creates a new instance of DefaultXYDatasetProxy */
 	public DefaultXYDatasetProxy() {
 
@@ -36,10 +41,16 @@ public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset i
 	}
 
 	public void dataModelStarted() {
+		if (header == null && expDataModel != null) {
+			header = expDataModel.getAcquisitionConfig();
+		}
 		fireDatasetChanged();
 	}
 
 	public void dataModelStartedNoData() {
+		if (header == null && expDataModel != null) {
+			header = expDataModel.getAcquisitionConfig();
+		}
 		fireDatasetChanged();
 	}
 
@@ -47,7 +58,12 @@ public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset i
 	}
 
 	public void newSamples(NewExpDataEvent evt) {
-		fireDatasetChanged();
+		for (int i = evt.getSamplesStartIndex(); i <= evt.getSamplesEndIndex(); i++) {
+			if (i % updateFrequency == 0 || i == (header.getTotalSamples() - 1)) {
+				fireDatasetChanged();
+				break;
+			}
+		}
 	}
 
 	/**
@@ -228,5 +244,17 @@ public class DefaultXYDatasetProxy extends org.jfree.data.xy.AbstractXYDataset i
 
 	public org.jfree.data.DomainOrder getDomainOrder() {
 		return org.jfree.data.DomainOrder.NONE;
+	}
+
+	public int getUpdateFrequency() {
+		return this.updateFrequency;
+	}
+
+	/** Update from updateFrequency to updateFrequency points */
+	public void setUpdateFrequency(int updateFrequency) {
+		if (updateFrequency < 1) {
+			updateFrequency = 1;
+		}
+		this.updateFrequency = updateFrequency;
 	}
 }

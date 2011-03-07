@@ -1,4 +1,3 @@
-
 package com.linkare.rec.impl.baseUI.graph;
 
 import java.util.logging.LogManager;
@@ -25,18 +24,22 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
 /**
  * 
  */
-public class MultSeriesXYInBlockExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay, ExpDataModelListener {
+public class MultSeriesXYInBlockExperimentGraph extends javax.swing.JPanel implements ExpDataDisplay,
+		ExpDataModelListener {
 
 	/** Generated UID */
 	private static final long serialVersionUID = 3162657571661485941L;
 
+	private static final double DEFAULT_UPDATE_FREQUENCY_WEIGTH = 0.1;
+
 	/**
 	 * Creates the <code>MultSeriesXYInBlockExperimentGraph</code>.
+	 * 
 	 * @param blockSize
 	 */
 	public MultSeriesXYInBlockExperimentGraph(int blockSize) {
 		this.blockSize = blockSize;
-		
+
 		initComponents();
 	}
 
@@ -81,7 +84,7 @@ public class MultSeriesXYInBlockExperimentGraph extends javax.swing.JPanel imple
 
 	/** Holds value of property channelY. */
 	private int channelY;
-	
+
 	private int blockSize;
 
 	public javax.swing.JComponent getDisplay() {
@@ -150,12 +153,14 @@ public class MultSeriesXYInBlockExperimentGraph extends javax.swing.JPanel imple
 
 		this.header = header;
 		Scale scaleX = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getSelectedScale();
-		String chnX = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX()).getChannelName());
+		String chnX = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayX())
+				.getChannelName());
 		String pusX = scaleX.getPhysicsUnitSymbol();
 		String multiplierX = scaleX.getMultiplier().toString();
 
 		Scale scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getSelectedScale();
-		String chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY()).getChannelName());
+		String chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY())
+				.getChannelName());
 		String pusY = scaleY.getPhysicsUnitSymbol();
 		String multiplierY = scaleY.getMultiplier().toString();
 
@@ -182,6 +187,10 @@ public class MultSeriesXYInBlockExperimentGraph extends javax.swing.JPanel imple
 
 		scrollPane.remove(labelWaitData);
 		scrollPane.setViewportView(panel);
+
+		if (getUpdateFrequency() == null) {
+			setUpdateFrequency((int) (header.getTotalSamples() * DEFAULT_UPDATE_FREQUENCY_WEIGTH));
+		}
 	}
 
 	private boolean isScaleSet = false;
@@ -228,18 +237,7 @@ public class MultSeriesXYInBlockExperimentGraph extends javax.swing.JPanel imple
 		defaultXYDatasetProxy.setChannelDisplayY(channelDisplayY);
 	}
 
-	/** Deprecated!! Use getUpdateFrequency */
-	public int getUpdatePercentage() {
-		return getUpdateFrequency();
-	}
-
-	/** Deprecated!! Use setUpdateFrequency */
-	public void setUpdatePercentage(int updatePercentage) {
-		// this.updatePercentage = updatePercentage;
-		setUpdateFrequency(updatePercentage);
-	}
-
-	public int getUpdateFrequency() {
+	public Integer getUpdateFrequency() {
 		return defaultXYDatasetProxy.getUpdateFrequency();
 	}
 

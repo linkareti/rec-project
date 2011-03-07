@@ -24,6 +24,8 @@ public class MultSeriesXYInBlockDataSetProxy extends org.jfree.data.xy.AbstractX
 	private int blockSize;
 	
 	private int seriesCount;
+	
+	private Integer updateFrequency = null;
 
 	/**
 	 * Creates the <code>MultSeriesXYInBlockDataSetProxy</code>.
@@ -119,8 +121,6 @@ public class MultSeriesXYInBlockDataSetProxy extends org.jfree.data.xy.AbstractX
 		return ch_nameX + " [" + multiplierX + ph_unit_symbolX + "] vs " + ch_nameY + " [" + multiplierY
 				+ ph_unit_symbolY + "]";
 	}
-
-	private int updateFrequency = 1;
 
 	/**
 	 * Returns the number of items in a series.
@@ -261,18 +261,7 @@ public class MultSeriesXYInBlockDataSetProxy extends org.jfree.data.xy.AbstractX
 		this.channelDisplayX = channelDisplayX;
 	}
 
-	///** Deprecated!! Use getUpdateFrequency */
-	public int getUpdatePercentage() {
-		return this.updateFrequency;
-	}
-
-	///** Deprecated!! Use setUpdateFrequency */
-	public void setUpdatePercentage(int updatePercentage) {
-		// this.updatePercentage = updatePercentage;
-		setUpdateFrequency(updatePercentage);
-	}
-
-	public int getUpdateFrequency() {
+	public Integer getUpdateFrequency() {
 		return this.updateFrequency;
 	}
 
