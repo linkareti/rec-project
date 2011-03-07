@@ -990,7 +990,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
         menuItemConnect = new javax.swing.JMenuItem();
         sep1 = new javax.swing.JSeparator();
         javax.swing.JMenuItem menuItemSair = new javax.swing.JMenuItem();
-        menuLanguage = new javax.swing.JMenu();
         javax.swing.JMenu menuHelp = new javax.swing.JMenu();
         javax.swing.JMenuItem menuItemAbout = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
@@ -1085,11 +1084,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
 
         menuBar.add(menuLab);
 
-        menuLanguage.setText(resourceMap.getString("menuLanguage.text")); // NOI18N
-        menuLanguage.setEnabled(false);
-        menuLanguage.setName("menuLanguage"); // NOI18N
-        menuBar.add(menuLanguage);
-
         menuHelp.setText(resourceMap.getString("menuHelp.text")); // NOI18N
         menuHelp.setName("menuHelp"); // NOI18N
 
@@ -1145,7 +1139,6 @@ public class ReCFrameView extends FrameView implements ReCApplicationListener, I
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemConnect;
-    private javax.swing.JMenu menuLanguage;
     private com.linkare.rec.impl.newface.component.ProgressCicle progressCicleTask;
     private javax.swing.JSeparator sep1;
     private javax.swing.JPanel statusPanel;
