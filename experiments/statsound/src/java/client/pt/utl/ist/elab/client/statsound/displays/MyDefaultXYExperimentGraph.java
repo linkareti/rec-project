@@ -134,8 +134,8 @@ public class MyDefaultXYExperimentGraph extends javax.swing.JPanel implements Ex
 			multiplierY = scaleY.getMultiplier().toString();
 		} else {
 			scaleY = header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayAtYArray(0)).getSelectedScale();
-			chnY = ReCResourceBundle.findString(header.getChannelsConfig(defaultXYDatasetProxy.getChannelDisplayY())
-					.getChannelName());
+			chnY = ReCResourceBundle.findString(header.getChannelsConfig(
+					defaultXYDatasetProxy.getChannelDisplayAtYArray(0)).getChannelName());
 			pusY = scaleY.getPhysicsUnitSymbol();
 			multiplierY = scaleY.getMultiplier().toString();
 		}

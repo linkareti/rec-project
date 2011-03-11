@@ -239,14 +239,22 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 
 					Logger.getLogger("StampDriver.Logger").log(Level.FINEST, "block " + i + " : " + string);
 
-					values[5] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
+					// Piston position
+					values[0] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
+					// Temperature
 					values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
-					values[3] = PhysicsValueFactory.fromDouble(
-							((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i * 4]))), config.getChannelsConfig(2)
-									.getSelectedScale());
+					// values[3] = PhysicsValueFactory.fromDouble(
+					// ((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i *
+					// 4]))), config.getChannelsConfig(2)
+					// .getSelectedScale());
+					// Wave1
 					values[4] = PhysicsValueFactory.fromDouble(
 							((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 2]))), config
 									.getChannelsConfig(3).getSelectedScale());
+					// Wave2
+					values[5] = PhysicsValueFactory.fromDouble(
+							((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 2]))), config
+									.getChannelsConfig(4).getSelectedScale());
 
 					super.addDataRow(values);
 				}

@@ -9,45 +9,49 @@
 	visible="true" selected="true" order="0" enabled="false" connected="false">
 	<localizationBundle name="statsound"
 		location="recresource:///pt/utl/ist/elab/client/statsound/resources/messages" />
-	<!-- mediaConfig videoLocation="statsound$rec.exp.url.statsound.video"
-		canSave="true" offlinePlay="true" / -->
+	<!-- mediaConfig videoLocation="statsound$rec.exp.url.statsound.video" canSave="true" 
+		offlinePlay="true" / -->
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.sensor"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.sensor"
 		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.sensor"
 		visible="true" selected="true" order="0" enabled="false" connected="false" />
-	<!-- 
-	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.sensor.temp"
-		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
-		displayStringBundleKey="statsound$rec.exp.display.statsound.title.sensor.temp"
-		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.sensor.temp"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
-	 -->
+	<!-- <display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.sensor.temp" 
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor" 
+		displayStringBundleKey="statsound$rec.exp.display.statsound.title.sensor.temp" 
+		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.sensor.temp" 
+		visible="true" selected="true" order="0" enabled="false" connected="false" 
+		/> -->
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.1"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.1"
 		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.1"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		visible="true" selected="true" order="1" enabled="false" connected="false" />
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.2"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.2"
 		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.2"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		visible="true" selected="true" order="2" enabled="false" connected="false" />
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.3"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.3"
 		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.3"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		visible="true" selected="true" order="3" enabled="false" connected="false" />
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.4"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.4"
 		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.4"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		visible="true" selected="true" order="4" enabled="false" connected="false" />
 	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.5"
 		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
 		displayStringBundleKey="statsound$rec.exp.display.statsound.title.5"
 		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.5"
-		visible="true" selected="true" order="0" enabled="false" connected="false" />
+		visible="true" selected="true" order="5" enabled="false" connected="false" />
+	<display toolTipBundleKey="statsound$rec.exp.display.statsound.tip.soundVelocityTable"
+		offlineCapable="false" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="statsound$rec.exp.display.statsound.title.soundVelocityTable"
+		classLocationBundleKey="statsound$rec.exp.display.statsound.loc.soundVelocityTable"
+		visible="true" selected="true" order="6" enabled="false" connected="false" />
 	<webResource toolTipLocationBundleKey="" internalBrowser="false"
 		iconLocationBundleKey="" visible="true" selected="true" order="0"
 		enabled="false" connected="false" />
