@@ -39,6 +39,8 @@ import static com.linkare.rec.impl.newface.ReCApplication.ApparatusEvent.UNREACH
 
 import java.awt.Canvas;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,6 +56,7 @@ import java.util.logging.Logger;
 import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.jnlp.UnavailableServiceException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RootPaneContainer;
 import javax.swing.SwingUtilities;
@@ -622,7 +625,13 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		}
 		ReCFrameView recView = new ReCFrameView(this);
 		getAppListeners().add(recView);
+
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension dimension = tk.getScreenSize();
+		recView.getFrame().setPreferredSize(dimension);
+
 		recView.getFrame().pack();
+
 		recView.getFrame().setLocationRelativeTo(null);
 		show(recView);
 
