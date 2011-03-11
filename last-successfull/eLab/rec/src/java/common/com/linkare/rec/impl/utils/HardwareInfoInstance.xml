@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE HardwareInfo SYSTEM "HardwareInfoSchema.dtd">
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="id" familiarName="familiar_name" name="hardware_name" version="hardware_version" manufacturer="manufacturer" driverVersion="driverVersion">
+    <description>
+        <![CDATA[ 
+        description text (any format, preferably HTML)
+        ]]>
+    </description>
+    
+    <parameter name="parameter_name" type="parameter_type" value="parameter_value">
+        <selection-list>
+            <value order="1">parameter_selection_list_value1</value>
+            <value order="2">parameter_selection_list_value1</value>
+            <value order="3">parameter_selection_list_value1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="parameter_name" type="parameter_type" value="parameter_value"/>
+    
+    <frequency-scale label="frequency_scale_label">
+        <min-frequency>
+            <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+        </min-frequency>
+        <max-frequency>
+            <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+        </max-frequency>
+        <step-frequency>
+            <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+        </step-frequency>
+    </frequency-scale>
+    <frequency-scale label="frequency_scale_label">
+        <min-frequency>
+            <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+        </min-frequency>
+        <max-frequency>
+            <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+        </max-frequency>
+        <step-frequency>
+            <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+        </step-frequency>
+    </frequency-scale>
+
+    <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+
+    
+    <sampling-scale>
+        <min-samples>sampling_scale_min_samples</min-samples>
+        <max-samples>sampling_scale_max_samples</max-samples>
+        <step-samples>sampling_scale_step_samples</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="channel_name" independent="false" direction="channel_direction">
+        <customizer href="channel_customizer_href"/>
+        <scale label="scale_label" physicsunitname="physics_unit_name" physicsunitsymbol="physics_unit_symbol" multiplier="scale_multiplier" selected="false">
+            <min>
+                <PhysicsVal type="physics_val_type">physicsvalvalue</PhysicsVal>
+            </min>
+            <max>
+                <PhysicsVal type="physics_val_type" href="url_for_ByteVal"/>
+            </max>
+            <step>
+                <PhysicsVal type="physics_val_type" file="fullpath_to_ByteArrayVal" mimetype="ByteArrayVal_mimeType"/>
+            </step>
+            <errordefault>
+                <PhysicsVal type="physics_val_type">value</PhysicsVal>>
+            </errordefault>
+        </scale>
+        <scale label="scale_label" physicsunitname="physics_unit_name" physicsunitsymbol="physics_unit_symbol" multiplier="scale_multiplier" selected="true">
+            <min>
+                <PhysicsVal type="physics_val_type">physicsvalvalue</PhysicsVal>
+            </min>
+            <max>
+                <PhysicsVal type="physics_val_type" href="url_for_ByteVal"/>
+            </max>
+            <step>
+                <PhysicsVal type="physics_val_type" file="fullpath_to_ByteArrayVal" mimetype="ByteArrayVal_mimeType"/>
+            </step>
+            <errordefault>
+                <PhysicsVal type="physics_val_type">value</PhysicsVal>>
+            </errordefault>
+        </scale>
+        
+        <frequency-scale label="frequency_scale_label">
+            <min-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </min-frequency>
+            <max-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </max-frequency>
+            <step-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </step-frequency>
+        </frequency-scale>
+        <frequency-scale label="frequency_scale_label">
+            <min-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </min-frequency>
+            <max-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </max-frequency>
+            <step-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </step-frequency>
+        </frequency-scale>
+        
+        <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+        
+        <parameter name="parameter_name" type="parameter_type" value="parameter_value">
+            <selection-list>
+                <value order="1">parameter_selection_list_value1</value>
+                <value order="2">parameter_selection_list_value1</value>
+                <value order="3">parameter_selection_list_value1</value>
+            </selection-list>
+        </parameter>
+        <parameter name="parameter_name" type="parameter_type" value="parameter_value"/>
+        
+        <sampling-scale>
+            <min-samples>sampling_scale_min_samples</min-samples>
+            <max-samples>sampling_scale_max_samples</max-samples>
+            <step-samples>sampling_scale_step_samples</step-samples>
+        </sampling-scale>
+        
+        <AvailableOutputIDataSource href="available_output_IDataSource"/>
+        <AvailableOutputIDataSource href="available_output_IDataSource"/>
+        <AvailableOutputIDataSource href="available_output_IDataSource"/>
+        
+    </ChannelInfo>
+
+    <ChannelInfo name="channel_name" independent="false" direction="channel_direction">
+        <customizer href="channel_customizer_href"/>
+        <scale label="scale_label" physicsunitname="physics_unit_name" physicsunitsymbol="physics_unit_symbol" multiplier="scale_multiplier" selected="false">
+            <min>
+                <PhysicsVal type="physics_val_type">physicsvalvalue</PhysicsVal>
+            </min>
+            <max>
+                <PhysicsVal type="physics_val_type" href="url_for_ByteVal"/>
+            </max>
+            <step>
+                <PhysicsVal type="physics_val_type" file="fullpath_to_ByteArrayVal" mimetype="ByteArrayVal_mimeType"/>
+            </step>
+            <errordefault>
+                <PhysicsVal type="physics_val_type">value</PhysicsVal>>
+            </errordefault>
+        </scale>
+        <scale label="scale_label" physicsunitname="physics_unit_name" physicsunitsymbol="physics_unit_symbol" multiplier="scale_multiplier" selected="true">
+            <min>
+                <PhysicsVal type="physics_val_type">physicsvalvalue</PhysicsVal>
+            </min>
+            <max>
+                <PhysicsVal type="physics_val_type" href="url_for_ByteVal"/>
+            </max>
+            <step>
+                <PhysicsVal type="physics_val_type" file="fullpath_to_ByteArrayVal" mimetype="ByteArrayVal_mimeType"/>
+            </step>
+            <errordefault>
+                <PhysicsVal type="physics_val_type">value</PhysicsVal>>
+            </errordefault>
+        </scale>
+        
+        <frequency-scale label="frequency_scale_label">
+            <min-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </min-frequency>
+            <max-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </max-frequency>
+            <step-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </step-frequency>
+        </frequency-scale>
+        <frequency-scale label="frequency_scale_label">
+            <min-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </min-frequency>
+            <max-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </max-frequency>
+            <step-frequency>
+                <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+            </step-frequency>
+        </frequency-scale>
+        
+        <Frequency type="frequency_def_type" multiplier="frequency_multiplier">frequencydoubleval</Frequency>
+        
+        <parameter name="parameter_name" type="parameter_type" value="parameter_value">
+            <selection-list>
+                <value order="1">parameter_selection_list_value1</value>
+                <value order="2">parameter_selection_list_value1</value>
+                <value order="3">parameter_selection_list_value1</value>
+            </selection-list>
+        </parameter>
+        <parameter name="parameter_name" type="parameter_type" value="parameter_value"/>
+        
+        <sampling-scale>
+            <min-samples>sampling_scale_min_samples</min-samples>
+            <max-samples>sampling_scale_max_samples</max-samples>
+            <step-samples>sampling_scale_step_samples</step-samples>
+        </sampling-scale>
+        
+        <AvailableOutputIDataSource href="available_output_IDataSource"/>
+        <AvailableOutputIDataSource href="available_output_IDataSource"/>
+        <AvailableOutputIDataSource href="available_output_IDataSource"/>
+        
+    </ChannelInfo>
+
+</HardwareInfo>
+
