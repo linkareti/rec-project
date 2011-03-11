@@ -131,4 +131,22 @@
 			<errordefault><PhysicsVal type="byteArray" href="recresource:///pt/utl/ist/elab/driver/statsound/resource/StatSoundByteArray.txt" mimetype="sound/wav"></PhysicsVal></errordefault>
 		</scale>
 	</ChannelInfo>
+	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.5.name" independent="true" direction="CHANNEL_INPUT">
+		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.5.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.5.physicsunitname"
+			physicsunitsymbol="" multiplier="none" selected="true">
+			<min><PhysicsVal type="int">0</PhysicsVal></min>
+			<max><PhysicsVal type="int">1480</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
+	<ChannelInfo name="statsound$rec.exp.statsound.hardwareinfo.channel.6.name" independent="true" direction="CHANNEL_INPUT">
+		<scale label="statsound$rec.exp.statsound.hardwareinfo.channel.6.label" physicsunitname="statsound$rec.exp.statsound.hardwareinfo.channel.6.physicsunitname"
+			physicsunitsymbol="ms" multiplier="1000" selected="true">
+			<min><PhysicsVal type="int">0.0</PhysicsVal></min>
+			<max><PhysicsVal type="int">14800000.0</PhysicsVal></max>
+			<step><PhysicsVal type="int">1</PhysicsVal></step>
+			<errordefault><PhysicsVal type="int">1</PhysicsVal></errordefault>
+		</scale>
+	</ChannelInfo>
 </HardwareInfo>

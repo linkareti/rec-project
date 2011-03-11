@@ -14,7 +14,7 @@ public class TableSoundVelocity extends MyDefaultTable {
 	/** Creates a new instance of TablePistonRMS */
 	public TableSoundVelocity() {
 		super();
-		setColArray(new int[] { 4, 5, 0, 1 });
+		setColArray(new int[] { 3, 4, 0, 1 });
 	}
 
 	public String getName() {

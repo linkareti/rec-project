@@ -240,13 +240,15 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					Logger.getLogger("StampDriver.Logger").log(Level.FINEST, "block " + i + " : " + string);
 
 					// Piston position
-					values[0] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
+					values[0] = PhysicsValueFactory.fromInt(posIni, config.getChannelsConfig(0).getSelectedScale());
 					// Temperature
 					values[1] = PhysicsValueFactory.fromDouble(freqIni, config.getChannelsConfig(1).getSelectedScale());
-					// values[3] = PhysicsValueFactory.fromDouble(
-					// ((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i *
-					// 4]))), config.getChannelsConfig(2)
-					// .getSelectedScale());
+					// Sample number
+					values[2] = PhysicsValueFactory.fromInt(i, config.getChannelsConfig(0).getSelectedScale());
+					// RMS
+					values[3] = PhysicsValueFactory.fromDouble(
+							((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i * 4]))), config.getChannelsConfig(2)
+									.getSelectedScale());
 					// Wave1
 					values[4] = PhysicsValueFactory.fromDouble(
 							((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 2]))), config
@@ -255,7 +257,8 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 					values[5] = PhysicsValueFactory.fromDouble(
 							((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 2]))), config
 									.getChannelsConfig(4).getSelectedScale());
-
+					// Time
+					values[6] = PhysicsValueFactory.fromDouble((1 / freqIni), config.getChannelsConfig(1).getSelectedScale());
 					super.addDataRow(values);
 				}
 				setDataSourceEnded();
