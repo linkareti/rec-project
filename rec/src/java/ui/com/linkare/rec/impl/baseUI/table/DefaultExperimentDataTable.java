@@ -401,6 +401,10 @@ public class DefaultExperimentDataTable extends javax.swing.JPanel implements Ex
 		// after set the model the columns size must be set
 		resizeDataTableColumns();
 	}
+	
+	public ExpDataModel getExpDataModel() {
+		return expDataModelContainer == null ? null : expDataModelContainer.getExpDataModel();
+	}
 
 	public javax.swing.JMenuBar getMenuBar() {
 		return null;

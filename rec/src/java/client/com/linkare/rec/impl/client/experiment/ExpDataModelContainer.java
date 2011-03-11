@@ -13,7 +13,7 @@ import com.linkare.rec.impl.client.experiment.ExpDataModel;
  * @author npadriano
  */
 public interface ExpDataModelContainer {
-	
+
 	/**
 	 * Setter for ExpDataModel
 	 * 
@@ -21,4 +21,10 @@ public interface ExpDataModelContainer {
 	 */
 	public void setExpDataModel(ExpDataModel expDataModel);
 
+	/**
+	 * Getter for ExpDataModel
+	 * 
+	 * @return returns the expDataModel
+	 */
+	public ExpDataModel getExpDataModel();
 }
