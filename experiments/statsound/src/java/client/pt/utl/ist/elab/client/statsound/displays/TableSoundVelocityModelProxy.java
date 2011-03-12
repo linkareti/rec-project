@@ -1,32 +1,14 @@
 package pt.utl.ist.elab.client.statsound.displays;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
-import com.linkare.rec.impl.baseUI.table.MultSeriesTable;
+import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
 
 /**
  * 
  * @author Paulo Zenida - Linkare TI
  */
-public class TableSoundVelocityModelProxy extends MultSeriesTable {
-
-	/**
-	 * Returns the most specific superclass for all the cell values in the
-	 * column. This is used by the <code>JTable</code> to set up a default
-	 * renderer and editor for the column.
-	 * 
-	 * @param columnIndex the index of the column
-	 * @return the common ancestor class of the object values in the model.
-	 */
-	@SuppressWarnings("unchecked")
-	public Class getColumnClass(int columnIndex) {
-		if (getExpDataModel() == null || !getExpDataModel().isDataAvailable()) {
-			if (columnIndex == 0)
-				return String.class;
-			return null;
-		}
-		return String.class;
-	}
+public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.experiment.MultSeriesTableModelProxy {
 
 	/**
 	 * Returns the number of columns in the model. A <code>JTable</code> uses
@@ -37,12 +19,10 @@ public class TableSoundVelocityModelProxy extends MultSeriesTable {
 	 * @see #getRowCount
 	 */
 	public int getColumnCount() {
-		if (getExpDataModel() == null || !getExpDataModel().isDataAvailable()) {
+		if (colArray == null) {
 			return 1;
 		}
-
-		// 2 because of the added sample number and the time
-		return getExpDataModel().getChannelCount() + 2;
+		return colArray.length;
 	}
 
 	/**
@@ -54,46 +34,28 @@ public class TableSoundVelocityModelProxy extends MultSeriesTable {
 	 * @return the name of the column
 	 */
 	public String getColumnName(int columnIndex) {
-		if (getExpDataModel() == null || !getExpDataModel().isDataAvailable()) {
+		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			if (columnIndex == 0) {
-				return ReCResourceBundle.findString("ReCBaseUI$rec.bui.lbl.nodata");
+				return ReCResourceBundle.findStringOrDefault("ReCBaseUI$rec.bui.lbl.nodata", "No data available...");
+			} else {
+				return null;
 			}
-			return null;
 		}
-		if (columnIndex == 2) {
-			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.sample");
-		} else if (columnIndex == 6) {
-			return ReCResourceBundle.findString("ReCBaseUI$rec.bui.table.model.column.sample");
+		switch (columnIndex) {
+		case 0:
+			return ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.sampleNumber");
+		case 1:
+			return ReCResourceBundle.findString("statsound$rec.exp.statsoud.lbl.acquisitionTime");
+		case 2:
+			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.3.name");
+		case 3:
+			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.4.name");
+		case 4:
+			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.0.name");
+		case 5:
+			return ReCResourceBundle.findString("rec.exp.statsound.hardwareinfo.channel.1.name");
 		}
-
-		int channelIndex = columnIndex - 1;
-
-		String ch_name = ReCResourceBundle
-				.findString(getExpDataModel().getChannelConfig(channelIndex).getChannelName());
-		String multiplier = getExpDataModel().getChannelConfig(channelIndex).getSelectedScale().getMultiplier()
-				.toString();
-		String ph_unit_symbol = getExpDataModel().getChannelConfig(channelIndex).getSelectedScale()
-				.getPhysicsUnitSymbol();
-
-		return ch_name + " [" + multiplier + ph_unit_symbol + "]";
-	}
-
-	/**
-	 * Returns the number of rows in the model. A <code>JTable</code> uses this
-	 * method to determine how many rows it should display. This method should
-	 * be quick, as it is called frequently during rendering.
-	 * 
-	 * @return the number of rows in the model
-	 * @see #getColumnCount
-	 */
-	public int getRowCount() {
-		if (getExpDataModel() == null || !getExpDataModel().isDataAvailable()) {
-			return 0;
-		}
-
-		if (getExpDataModel().getTotalSamples() == -1)
-			return 0;
-		return getExpDataModel().getTotalSamples();
+		return "?";
 	}
 
 	/**
@@ -105,22 +67,53 @@ public class TableSoundVelocityModelProxy extends MultSeriesTable {
 	 * @return the value Object at the specified cell
 	 */
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		if (getExpDataModel() == null || !getExpDataModel().isDataAvailable())
+		if (expDataModel == null || !expDataModel.isDataAvailable()) {
 			return null;
-
-		if (columnIndex == 2) {
+		}
+		if (columnIndex == 0) {
+			// sample number
 			return String.valueOf(rowIndex + 1);
-		} else if (columnIndex == 6) {
-			float time = 0f;
-			for (int i = 1; i < rowIndex; i++) {
-				time += (1 / 11000);
-			}
-			// turn it into miliseconds
+		} else if (columnIndex == 1) {
+			// acquisition time
+			float time = 0;
+			int i = 0;
+			do {
+				time += 1f / 11000;
+			} while (++i <= rowIndex);
+			// turn it into seconds
 			time *= 1000;
 			return String.valueOf(time);
 		}
-		int channelIndex = columnIndex - 1;
-		PhysicsValue value = getExpDataModel().getValueAt(rowIndex, channelIndex);
-		return value.getValue().toEngineeringNotation();
+		PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
+		if (value == null) {
+			return null;
+		}
+		return value.getValue().toString();
+	}
+
+	public void headerAvailable(HardwareAcquisitionConfig header) {
+		fireTableStructureChanged();
+		// super doesn't have this method defined
+	}
+
+	@Override
+	public void dataModelStarted() {
+		fireTableStructureChanged();
+	}
+
+	@Override
+	public void dataModelStartedNoData() {
+		fireTableStructureChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Class getColumnClass(int columnIndex) {
+		if (expDataModel == null || !expDataModel.isDataAvailable()) {
+			return null;
+		}
+		return String.class;
 	}
 }
