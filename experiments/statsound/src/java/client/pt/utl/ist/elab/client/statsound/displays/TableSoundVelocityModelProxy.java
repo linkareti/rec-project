@@ -80,7 +80,7 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 			do {
 				time += 1f / 11000;
 			} while (++i <= rowIndex);
-			// turn it into seconds
+			// turn it into miliseconds
 			time *= 1000;
 			return String.valueOf(time);
 		}
