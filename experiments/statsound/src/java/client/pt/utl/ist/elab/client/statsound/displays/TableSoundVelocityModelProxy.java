@@ -1,6 +1,7 @@
 package pt.utl.ist.elab.client.statsound.displays;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
@@ -11,6 +12,8 @@ import com.linkare.rec.impl.i18n.ReCResourceBundle;
  * @author Paulo Zenida - Linkare TI
  */
 public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.experiment.MultSeriesTableModelProxy {
+
+	private static final MathContext MATH_CONTEXT = new MathContext(2);
 
 	/**
 	 * Returns the number of columns in the model. A <code>JTable</code> uses
@@ -77,9 +80,9 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 			return String.valueOf(rowIndex + 1);
 		} else if (columnIndex == 1) {
 			// acquisition time
-			final BigDecimal time = new BigDecimal(((double) rowIndex) / ((double) 11.025));
+			final BigDecimal time = new BigDecimal(((double) rowIndex + 1) / ((double) 11.025));
 			time.setScale(2, BigDecimal.ROUND_HALF_DOWN);
-			return time.toString();
+			return time.round(MATH_CONTEXT);
 		}
 		PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
 		if (value == null) {
