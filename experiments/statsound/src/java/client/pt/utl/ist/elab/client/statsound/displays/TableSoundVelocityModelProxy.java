@@ -76,7 +76,7 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 		} else if (columnIndex == 1) {
 			// acquisition time
 			double time = ((double) rowIndex) / ((double) 11.0);
-			return String.valueOf(Math.round(time));
+			return String.valueOf(time);
 		}
 		PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
 		if (value == null) {
