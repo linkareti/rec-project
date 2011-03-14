@@ -1,5 +1,7 @@
 package pt.utl.ist.elab.client.statsound.displays;
 
+import java.math.BigDecimal;
+
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.config.HardwareAcquisitionConfig;
 import com.linkare.rec.impl.i18n.ReCResourceBundle;
@@ -75,8 +77,9 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 			return String.valueOf(rowIndex + 1);
 		} else if (columnIndex == 1) {
 			// acquisition time
-			double time = ((double) rowIndex) / ((double) 11.0);
-			return String.valueOf(time);
+			final BigDecimal time = new BigDecimal(((double) rowIndex) / ((double) 11.025));
+			time.setScale(2, BigDecimal.ROUND_HALF_DOWN);
+			return time.toString();
 		}
 		PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
 		if (value == null) {

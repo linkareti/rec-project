@@ -251,11 +251,11 @@ public class StatSoundStampDataSource extends AbstractStampDataSource implements
 							.getSelectedScale());
 					// Wave1
 					values[4] = PhysicsValueFactory.fromDouble(
-							((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i * 4]))), config.getChannelsConfig(3)
-									.getSelectedScale());
+							((double) (acqByte[i * 4 + 1] << 8 | (255 & acqByte[i * 4 + 2]))), config
+									.getChannelsConfig(3).getSelectedScale());
 					// Wave2
 					values[5] = PhysicsValueFactory.fromDouble(
-							((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 2]))), config
+							((double) (acqByte[i * 4 + 3] << 8 | (255 & acqByte[i * 4 + 4]))), config
 									.getChannelsConfig(4).getSelectedScale());
 					super.addDataRow(values);
 				}
