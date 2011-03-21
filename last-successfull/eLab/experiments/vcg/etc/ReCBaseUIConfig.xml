@@ -1,0 +1,21 @@
+<Apparatus location="CAVENDISH_G_V1.0"
+	customizerClassLocationBundleKey="cg$rec.exp.customizer.cg"
+	toolTipBundleKey="cg$rec.exp.tip.cg" iconLocationBundleKey="cg$rec.exp.icon.cg"
+	displayStringBundleKey="cg$rec.exp.title.cg" desktopLocationBundleKey="cg$rec.exp.background.cg"
+	order="1">
+	<LocalizationBundle name="cg"
+		location="recresource:///pt/utl/ist/elab/client/vcg/resources/messages" />
+	<Display classLocationBundleKey="cg$rec.exp.display.cg.loc.anim"
+		toolTipBundleKey="cg$rec.exp.display.cg.tip.anim"
+		iconLocationBundleKey="ReCBaseUI$rec.bui.icon.sensor"
+		displayStringBundleKey="cg$rec.exp.display.cg.title.anim"
+		offlineCapable="false" order="1" />
+	<Display classLocationBundleKey="cg$rec.exp.display.cg.loc.1"
+		toolTipBundleKey="cg$rec.exp.display.cg.tip.1" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.table"
+		displayStringBundleKey="cg$rec.exp.display.cg.title.1" offlineCapable="false"
+		order="2" />
+	<Display classLocationBundleKey="cg$rec.exp.display.cg.loc.2"
+		toolTipBundleKey="cg$rec.exp.display.cg.tip.2" iconLocationBundleKey="ReCBaseUI$rec.bui.icon.chart"
+		displayStringBundleKey="cg$rec.exp.display.cg.title.2" offlineCapable="false"
+		order="3" />
+</Apparatus>
