@@ -12,13 +12,13 @@ public class ThreadFactoryMediumPriority implements ThreadFactory {
 	public ThreadFactoryMediumPriority() {
 		SecurityManager s = System.getSecurityManager();
 		group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
-		namePrefix = "pool-" + poolNumber.getAndIncrement() + "-thread-";
+		namePrefix = "RecPool-" + poolNumber.getAndIncrement() + "-MediumPrioritythread-";
 	}
 
 	public Thread newThread(Runnable r) {
 		Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
 		if (t.isDaemon()) {
-			t.setDaemon(false);
+			t.setDaemon(true);
 		}
 		if (t.getPriority() != Thread.NORM_PRIORITY) {
 			t.setPriority(Thread.NORM_PRIORITY);

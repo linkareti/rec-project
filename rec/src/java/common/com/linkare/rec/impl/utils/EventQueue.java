@@ -11,8 +11,18 @@
 package com.linkare.rec.impl.utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.concurrent.Future;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
+
+import com.linkare.rec.impl.threading.PriorityRunnable;
+import com.linkare.rec.impl.threading.ProcessingManager;
+import com.linkare.rec.impl.threading.util.EnumPriority;
 
 /**
  * 
@@ -22,172 +32,261 @@ import java.util.logging.Level;
  */
 
 public class EventQueue {
+
 	private QueueLogger logger = null;
-	private EventQueueDispatcher dispatcher = null;
-	private EventQueueThread threadedQueueDispatcher = null;
-	private ArrayList<Object> levts = null;
+	private final EventQueueDispatcher dispatcher;
+	private final ArrayList<Object> levts;
 	private volatile boolean stopdispatching = false;
+
+	/**
+	 * 
+	 * Runnable to execute on ProcessingManager
+	 * 
+	 */
+	private final PriorityRunnable priorityRunnable;
+
+	/**
+	 * Permits cancel all tasks if someone call shutdown on this queue
+	 * 
+	 */
+	private final Collection<Future<?>> tasks;
+
+	/**
+	 * main lock for concurrency.
+	 * 
+	 */
+	private final ReadWriteLock mainLock;
 
 	/**
 	 * Creates a new instance of EventQueue
 	 * 
 	 * @param dispatcher
-	 * @param threadName 
+	 * @param threadName
 	 */
 	public EventQueue(EventQueueDispatcher dispatcher, String threadName) {
 		this.dispatcher = dispatcher;
 		levts = new ArrayList<Object>(1000);
-		threadedQueueDispatcher = new EventQueueThread(threadName);
-		threadedQueueDispatcher.setPriority(dispatcher.getPriority());
 		stopdispatching = false;
-		threadedQueueDispatcher.start();
+		priorityRunnable = new PriorityRunnableImpl();
+		tasks = new LinkedList<Future<?>>();
+		mainLock = new ReentrantReadWriteLock();
+
 	}
-	
+
 	/**
 	 * Creates the <code>EventQueue</code>.
+	 * 
 	 * @param dispatcher
 	 * @param threadName
 	 * @param logger
 	 */
 	public EventQueue(EventQueueDispatcher dispatcher, String threadName, QueueLogger logger) {
 		this(dispatcher, threadName);
-		
+
 		this.logger = logger;
 	}
 
 	public void addEvent(Object evt) {
 		log(Level.FINEST, "EventQueue add event " + evt);
-		synchronized (levts) {
+
+		final Lock writeLock = this.mainLock.writeLock();
+		writeLock.lock();
+		try {
 			levts.add(evt);
-			levts.notify();
+
+			cleanDoneTasks();
+
+			// add task to execute in processing manager
+			tasks.add(ProcessingManager.getInstance().submit(priorityRunnable));
+		} finally {
+			writeLock.unlock();
 		}
 	}
 
+	/**
+	 * clean done tasks from list.
+	 * 
+	 */
+	private void cleanDoneTasks() {
+
+		// avoiding ConcurrentModificationException
+		final Iterator<Future<?>> iterator = tasks.iterator();
+		while (iterator.hasNext()) {
+			final Future<?> future = iterator.next();
+			if (future.isDone()) {
+				iterator.remove();
+			}
+		}
+	}
+
+	/**
+	 * cancel all tasks if not already done
+	 * 
+	 */
+	private void cancelAllTasks() {
+		for (final Future<?> future : tasks) {
+			if (!future.isDone()) {
+				future.cancel(true);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * 
+	 * @return true if
+	 */
 	public boolean hasEvents() {
-		return !levts.isEmpty();
+
+		final Lock readLock = this.mainLock.readLock();
+		readLock.lock();
+		try {
+			return !levts.isEmpty();
+		} finally {
+			readLock.unlock();
+		}
+
 	}
 
 	public void shutdown() {
 		log(Level.FINE, "EventQueue received shutdown. Queue size = " + levts.size());
-		
+
 		stopdispatching = true;
-		synchronized (levts) {
-			levts.clear();
-			levts.notify();
-		}
+		final Lock writeLock = this.mainLock.writeLock();
+		writeLock.lock();
 		try {
-			if (threadedQueueDispatcher.isAlive()) {
-				threadedQueueDispatcher.join(20000);
-			}
-		} catch (InterruptedException ignored) {
+			cancelAllTasks();
+			tasks.clear();
+			levts.clear();
+		} finally {
+			writeLock.unlock();
 		}
 
 	}
-	
+
 	public boolean isStopdispatching() {
 		return stopdispatching;
 	}
-	
+
 	public boolean isEmpty() {
-		return levts.isEmpty();
+		final Lock readLock = this.mainLock.readLock();
+		readLock.lock();
+		try {
+			return !levts.isEmpty();
+		} finally {
+			readLock.unlock();
+		}
 	}
-	
+
 	public void log(Level debugLevel, String message) {
 		if (logger != null) {
 			logger.log(debugLevel, message);
 		}
 	}
-	
+
 	public void logThrowable(String message, Throwable t) {
 		if (logger != null) {
 			logger.logThrowable(message, t);
 		}
 	}
 
-	private class EventQueueThread extends Thread {
-		
-		public EventQueueThread(String threadName) {
-			super();
-			setName(getName() + " - " + threadName);
+	/**
+	 * 
+	 * 
+	 * This runnable should respond as soon as possible to interrupts.
+	 * 
+	 * 
+	 * @author artur
+	 */
+
+	private class PriorityRunnableImpl implements PriorityRunnable {
+
+		private boolean isInterrupted() {
+			return Thread.currentThread().isInterrupted();
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
 		public void run() {
-//			log(Level.INFO, "Thread " + getName() + " started.");
-			// TODO debug the UnDead threads
-			log(Level.INFO, "Thread " + getName() + " started. Event list size = " + levts.size()
-					+ " with the contents " + Arrays.deepToString(levts.toArray(new Object[levts.size()])));
-			
+
 			try {
-				Object evt = null;
-				while (!stopdispatching) {
-					evt = null;
-					try {
-						synchronized (levts) {
-							if (!levts.isEmpty()) {
-								evt = levts.remove(0);
-							}
-						}
-					} catch (IndexOutOfBoundsException ignored) {
-						// System.out.println("Accessing array at position 0 was a big problem... But I solved it...");
+
+				final Object evt = getEvent();
+
+				if (evt != null && !isInterrupted()) {
+
+					if (evt instanceof IntersectableEvent) {
+						intersectEvent((IntersectableEvent) evt);
 					}
-					if (evt == null) {
-						try {
-							while (levts.isEmpty() && !stopdispatching) {
-								synchronized (levts) {
-									levts.wait(10);
-								}
-							}
-						} catch (InterruptedException e) {
-							// System.out.println("EventQueueDispatchingThread received an interruptedException waiting for notifies...");
-						}
+
+					if (!isInterrupted()) {
+						log(Level.FINER, "EventQueue dispatching the event " + evt);
+						dispatcher.dispatchEvent(evt);
 					} else {
-						if (!stopdispatching) {
-							log(Level.FINEST, "EventQueue handling the event " + evt + " of " + levts.size() + " still in the list");
-							if (evt instanceof IntersectableEvent) {
-								IntersectableEvent intersectableEvent = (IntersectableEvent) evt;
-								synchronized (levts) {
-									for (int i = levts.size() - 1; i >= 0 && !stopdispatching; i--) {
-										Object eventAfter = levts.get(i);
-										if (eventAfter instanceof IntersectableEvent) {
-											IntersectableEvent intersectableEventAfter = (IntersectableEvent) eventAfter;
-											log(Level.FINEST, "EventQueue the event " + evt + " might intersect "
-													+ eventAfter);
-											if (intersectableEvent.intersectTo(intersectableEventAfter)) {
-												log(Level.FINEST, "EventQueue removed the event at the index " + i);
-												levts.remove(i);
-											}
-										}
-									}
-								}
-							}
-							if (!stopdispatching) {
-								log(Level.FINER, "EventQueue dispatching the event " + evt);
-								dispatcher.dispatchEvent(evt);
-							} else {
-								log(Level.WARNING, "EventQueue isn't dispatching the event " + evt
-										+ " because the stopdispatching is " + stopdispatching);
-							}
-						} else {
-							log(Level.WARNING, "EventQueue isn't dispatching the event " + evt
-									+ " because the stopdispatching is " + stopdispatching);
-						}
-						try {
-							synchronized (levts) {
-								if (!stopdispatching) {
-									levts.wait(20);
-								}
-							}
-						} catch (InterruptedException e) {
-							// System.out.println("EventQueueDispatchingThread received an interruptedException waiting for notifies...");
+						log(Level.WARNING, "EventQueue isn't dispatching the event " + evt
+								+ " because the stopdispatching is " + stopdispatching);
+					}
+
+				}
+			} catch (InterruptedException e) {
+				log(Level.FINER, "This runnable has been interrupted " + e.toString());
+			} catch (Exception e) {
+				logThrowable("Exception ocorred in event queue thread ", e);
+			}
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public EnumPriority getPriority() {
+			return EnumPriority.valueOfFromInt(dispatcher.getPriority());
+		}
+
+		private Object getEvent() throws InterruptedException {
+
+			final Lock writeLock = EventQueue.this.mainLock.writeLock();
+			writeLock.lockInterruptibly();
+			try {
+				if (!levts.isEmpty()) {
+					return levts.remove(0);
+				}
+				return null;
+			} finally {
+				writeLock.unlock();
+			}
+		}
+
+		private void intersectEvent(final IntersectableEvent intersectableEvent) throws InterruptedException {
+
+			final Lock writeLock = EventQueue.this.mainLock.writeLock();
+
+			writeLock.lockInterruptibly();
+			try {
+				for (int i = levts.size() - 1; i >= 0 && !isInterrupted(); i--) {
+
+					final Object eventAfter = levts.get(i);
+
+					if (eventAfter instanceof IntersectableEvent) {
+
+						final IntersectableEvent intersectableEventAfter = (IntersectableEvent) eventAfter;
+
+						log(Level.FINEST, "EventQueue the event " + intersectableEvent + " might intersect "
+								+ eventAfter);
+
+						if (intersectableEvent.intersectTo(intersectableEventAfter)) {
+							log(Level.FINEST, "EventQueue removed the event at the index " + i);
+							levts.remove(i);
 						}
 					}
 				}
-			} catch (Exception e) {
-				logThrowable("Exception ocorred in event queue thread " + getName(), e);
+			} finally {
+				writeLock.unlock();
 			}
-			
-			stopdispatching = true;
-			log(Level.INFO, "EventQueue thread " + getName() + " ended.");
 		}
+
 	}
+
 }

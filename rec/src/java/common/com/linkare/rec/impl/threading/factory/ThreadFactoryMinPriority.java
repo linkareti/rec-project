@@ -12,13 +12,14 @@ public class ThreadFactoryMinPriority implements ThreadFactory {
 	public ThreadFactoryMinPriority() {
 		SecurityManager s = System.getSecurityManager();
 		group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
-		namePrefix = "pool-" + poolNumber.getAndIncrement() + "-thread-";
+		namePrefix = "RecPool-" + poolNumber.getAndIncrement() + "-MinPrioritythread-";
 	}
 
+	// review this method maybe we shoudn't set Thread priorities
 	public Thread newThread(Runnable r) {
 		Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
-		if (t.isDaemon()) {
-			t.setDaemon(false);
+		if (!t.isDaemon()) {
+			t.setDaemon(true);
 		}
 		if (t.getPriority() != Thread.MIN_PRIORITY) {
 			t.setPriority(Thread.MIN_PRIORITY);

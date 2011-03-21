@@ -12,13 +12,13 @@ public class ThreadFactoryMaxPriority implements ThreadFactory {
 	public ThreadFactoryMaxPriority() {
 		SecurityManager s = System.getSecurityManager();
 		group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
-		namePrefix = "pool-" + poolNumber.getAndIncrement() + "-thread-";
+		namePrefix = "RecPool-" + poolNumber.getAndIncrement() + "-MaxPriorityThread-";
 	}
 
 	public Thread newThread(Runnable r) {
 		Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
 		if (t.isDaemon()) {
-			t.setDaemon(false);
+			t.setDaemon(true);
 		}
 		if (t.getPriority() != Thread.MAX_PRIORITY) {
 			t.setPriority(Thread.MAX_PRIORITY);

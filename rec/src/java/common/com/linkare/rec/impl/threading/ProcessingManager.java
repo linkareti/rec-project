@@ -1,12 +1,17 @@
 package com.linkare.rec.impl.threading;
 
+import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import com.linkare.rec.impl.threading.factory.ThreadFactoryMaxPriority;
+import com.linkare.rec.impl.threading.factory.ThreadFactoryMediumPriority;
+import com.linkare.rec.impl.threading.factory.ThreadFactoryMinPriority;
+
 /**
  * This class is responsible for managing threading pool scheduling and
- * priorities
+ * priorities.
  * 
  * @author André Nuno Calado Leitão - Linkare TI
  * @version 0.1
@@ -14,19 +19,20 @@ import java.util.concurrent.TimeUnit;
  */
 public final class ProcessingManager {
 
-	private static final int MAX_POOL_SIZE_MAX_PRIORITY = 10;
-	private static final int MIN_POOL_SIZE_MAX_PRIORITY = 1;
+	// TODO: extract as properties
+	private static final int MAX_POOL_SIZE_MAX_PRIORITY = 100;
+	private static final int MIN_POOL_SIZE_MAX_PRIORITY = 50;
+	private static final int MAX_POOL_SIZE_MEDIUM_PRIORITY = 20;
+	private static final int MIN_POOL_SIZE_MEDIUM_PRIORITY = 10;
+	private static final int MAX_POOL_SIZE_MIN_PRIORITY = 10;
+	private static final int MIN_POOL_SIZE_MIN_PRIORITY = 1;
 
-	private ThreadPoolExecutor threadPoolMaxPriority = new ThreadPoolExecutor(MIN_POOL_SIZE_MAX_PRIORITY,
-			MAX_POOL_SIZE_MAX_PRIORITY, 10L, TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>());
-	private ThreadPoolExecutor threadPoolMinPriority = new ThreadPoolExecutor(10, 100, 10L, TimeUnit.NANOSECONDS,
-			new LinkedBlockingQueue<Runnable>());
-	private ThreadPoolExecutor threadPoolMediumPriority = new ThreadPoolExecutor(10, 100, 10L, TimeUnit.NANOSECONDS,
-			new LinkedBlockingQueue<Runnable>());
+	private final ThreadPoolExecutor threadPoolMaxPriority;
+	private final ThreadPoolExecutor threadPoolMinPriority;
+	private final ThreadPoolExecutor threadPoolMediumPriority;
 
 	/**
-	 * Singleton instance A construção do objecto ProcessingManager de imediato
-	 * permite evitar as questões de multithreaded access
+	 * Singleton instance
 	 */
 	private final static ProcessingManager instance = new ProcessingManager();
 
@@ -35,6 +41,18 @@ public final class ProcessingManager {
 	 * this class.
 	 */
 	private ProcessingManager() {
+
+		threadPoolMaxPriority = new ThreadPoolExecutor(MIN_POOL_SIZE_MAX_PRIORITY, MAX_POOL_SIZE_MAX_PRIORITY, 10L,
+				TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadFactoryMaxPriority());
+		threadPoolMaxPriority.prestartAllCoreThreads();
+
+		threadPoolMinPriority = new ThreadPoolExecutor(MIN_POOL_SIZE_MEDIUM_PRIORITY, MAX_POOL_SIZE_MEDIUM_PRIORITY,
+				10L, TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadFactoryMediumPriority());
+		threadPoolMinPriority.prestartAllCoreThreads();
+
+		threadPoolMediumPriority = new ThreadPoolExecutor(MIN_POOL_SIZE_MIN_PRIORITY, MAX_POOL_SIZE_MIN_PRIORITY, 10L,
+				TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadFactoryMinPriority());
+		threadPoolMediumPriority.prestartAllCoreThreads();
 	}
 
 	/**
@@ -47,7 +65,16 @@ public final class ProcessingManager {
 		return instance;
 	}
 
-	public void executeWorkUnit(WorkUnit task) {
+	/**
+	 * Executes the given task sometimes in the future. Divide tasks by
+	 * priority.
+	 * 
+	 * 
+	 * @param task to process
+	 * @throws NullPointerException if task is null
+	 */
+	public void execute(PriorityRunnable task) {
+
 		switch (task.getPriority()) {
 		case MAXIMUM:
 			this.threadPoolMaxPriority.execute(task);
@@ -59,25 +86,28 @@ public final class ProcessingManager {
 			this.threadPoolMinPriority.execute(task);
 			break;
 		default:
-			System.out.println("ERROR, Priority Level not recognized.....");
-			break;
+			throw new IllegalArgumentException("Invalid priority value");
 		}
 	}
 
-	public void queueWorkUnit(WorkUnit task) {
+	public Future<?> submit(PriorityRunnable task) {
+
 		switch (task.getPriority()) {
 		case MAXIMUM:
-			this.threadPoolMaxPriority.getQueue().add(task);
-			break;
+			return this.threadPoolMaxPriority.submit(task);
 		case MEDIUM:
-			this.threadPoolMediumPriority.getQueue().add(task);
-			break;
+			return this.threadPoolMediumPriority.submit(task);
 		case MINIMUM:
-			this.threadPoolMinPriority.getQueue().add(task);
-			break;
+			return this.threadPoolMinPriority.submit(task);
 		default:
-			System.out.println("ERROR, Priority Level not recognized.....");
-			break;
+			throw new IllegalArgumentException("Invalid priority value");
 		}
 	}
+
+	public void shutdown() {
+		this.threadPoolMaxPriority.shutdownNow();
+		this.threadPoolMinPriority.shutdownNow();
+		this.threadPoolMediumPriority.shutdownNow();
+	}
+
 }
