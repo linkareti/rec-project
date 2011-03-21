@@ -20,9 +20,6 @@ public class ThreadFactoryMediumPriority implements ThreadFactory {
 		if (t.isDaemon()) {
 			t.setDaemon(true);
 		}
-		if (t.getPriority() != Thread.NORM_PRIORITY) {
-			t.setPriority(Thread.NORM_PRIORITY);
-		}
 		return t;
 	}
 

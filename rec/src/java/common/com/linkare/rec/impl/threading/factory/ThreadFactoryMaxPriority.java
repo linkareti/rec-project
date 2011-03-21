@@ -20,9 +20,6 @@ public class ThreadFactoryMaxPriority implements ThreadFactory {
 		if (t.isDaemon()) {
 			t.setDaemon(true);
 		}
-		if (t.getPriority() != Thread.MAX_PRIORITY) {
-			t.setPriority(Thread.MAX_PRIORITY);
-		}
 		return t;
 	}
 

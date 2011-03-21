@@ -21,9 +21,6 @@ public class ThreadFactoryMinPriority implements ThreadFactory {
 		if (!t.isDaemon()) {
 			t.setDaemon(true);
 		}
-		if (t.getPriority() != Thread.MIN_PRIORITY) {
-			t.setPriority(Thread.MIN_PRIORITY);
-		}
 		return t;
 	}
 
