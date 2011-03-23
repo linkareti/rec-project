@@ -5,27 +5,53 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.linkare.rec.impl.threading.factory.ThreadFactoryMaxPriority;
-import com.linkare.rec.impl.threading.factory.ThreadFactoryMediumPriority;
-import com.linkare.rec.impl.threading.factory.ThreadFactoryMinPriority;
+import com.linkare.rec.impl.threading.factory.RecThreadFactory;
+import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * This class is responsible for managing threading pool scheduling and
  * priorities.
  * 
  * @author André Nuno Calado Leitão - Linkare TI
- * @version 0.1
+ * @author Artur Correia - Linkare TI
+ * 
  * 
  */
 public final class ProcessingManager {
 
-	// TODO: extract as properties
-	private static final int MAX_POOL_SIZE_MAX_PRIORITY = 100;
-	private static final int MIN_POOL_SIZE_MAX_PRIORITY = 50;
-	private static final int MAX_POOL_SIZE_MEDIUM_PRIORITY = 20;
-	private static final int MIN_POOL_SIZE_MEDIUM_PRIORITY = 10;
-	private static final int MAX_POOL_SIZE_MIN_PRIORITY = 10;
-	private static final int MIN_POOL_SIZE_MIN_PRIORITY = 1;
+	// system properties
+	public static final String SYSPROP_CORE_POOL_SIZE_MAX_PRIORITY = "ReC.MultiCast.ProcessingManager.MaxThreadPool.Coresize";
+	public static final String SYSPROP_MAX_POOL_SIZE_MAX_PRIORITY = "ReC.MultiCast.ProcessingManager.MaxThreadPool.Maxsize";
+	public static final String SYSPROP_CORE_POOL_SIZE_MEDIUM_PRIORITY = "ReC.MultiCast.ProcessingManager.MediumThreadPool.Coresize";
+	public static final String SYSPROP_MAX_POOL_SIZE_MEDIUM_PRIORITY = "ReC.MultiCast.ProcessingManager.MediumThreadPool.Maxsize";
+	public static final String SYSPROP_CORE_POOL_SIZE_MIN_PRIORITY = "ReC.MultiCast.ProcessingManager.MinThreadPool.Coresize";
+	public static final String SYSPROP_MAX_POOL_SIZE_MIN_PRIORITY = "ReC.MultiCast.ProcessingManager.MinThreadPool.Maxsize";
+	public static final String SYSPROP_THREAD_IDLE_TIME = "DReC.MultiCast.ProcessingManager.Thread.Idletime";
+
+	private static final int MAX_POOL_SIZE_MAX_PRIORITY = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_MAX_POOL_SIZE_MAX_PRIORITY), 100);
+
+	private static final int CORE_POOL_SIZE_MAX_PRIORITY = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_CORE_POOL_SIZE_MAX_PRIORITY), 50);
+
+	private static final int MAX_POOL_SIZE_MEDIUM_PRIORITY = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_MAX_POOL_SIZE_MEDIUM_PRIORITY), 20);
+
+	private static final int CORE_POOL_SIZE_MEDIUM_PRIORITY = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_CORE_POOL_SIZE_MEDIUM_PRIORITY), 10);
+
+	private static final int MAX_POOL_SIZE_MIN_PRIORITY = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_MAX_POOL_SIZE_MIN_PRIORITY), 10);
+
+	private static final int CORE_POOL_SIZE_MIN_PRIORITY = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_CORE_POOL_SIZE_MIN_PRIORITY), 1);
+
+	private static final int THREAD_IDLE_TIME = Defaults.defaultIfEmpty(System.getProperty(SYSPROP_THREAD_IDLE_TIME),
+			10);
+
+	private static final String MAX_THREADPOOL_PREFIX = "MaxThreadPool";
+	private static final String MEDIUM_THREADPOOL_PREFIX = "MediumThreadPool";
+	private static final String MIN_THREADPOOL_PREFIX = "MinThreadPool";
 
 	private final ThreadPoolExecutor threadPoolMaxPriority;
 	private final ThreadPoolExecutor threadPoolMinPriority;
@@ -42,17 +68,20 @@ public final class ProcessingManager {
 	 */
 	private ProcessingManager() {
 
-		threadPoolMaxPriority = new ThreadPoolExecutor(MIN_POOL_SIZE_MAX_PRIORITY, MAX_POOL_SIZE_MAX_PRIORITY, 10L,
-				TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadFactoryMaxPriority());
+		threadPoolMaxPriority = new ThreadPoolExecutor(CORE_POOL_SIZE_MAX_PRIORITY, MAX_POOL_SIZE_MAX_PRIORITY,
+				THREAD_IDLE_TIME, TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>(), new RecThreadFactory(
+						MAX_THREADPOOL_PREFIX));
 		threadPoolMaxPriority.prestartAllCoreThreads();
 
-		threadPoolMinPriority = new ThreadPoolExecutor(MIN_POOL_SIZE_MEDIUM_PRIORITY, MAX_POOL_SIZE_MEDIUM_PRIORITY,
-				10L, TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadFactoryMediumPriority());
-		threadPoolMinPriority.prestartAllCoreThreads();
-
-		threadPoolMediumPriority = new ThreadPoolExecutor(MIN_POOL_SIZE_MIN_PRIORITY, MAX_POOL_SIZE_MIN_PRIORITY, 10L,
-				TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadFactoryMinPriority());
+		threadPoolMediumPriority = new ThreadPoolExecutor(CORE_POOL_SIZE_MEDIUM_PRIORITY,
+				MAX_POOL_SIZE_MEDIUM_PRIORITY, THREAD_IDLE_TIME, TimeUnit.NANOSECONDS,
+				new LinkedBlockingQueue<Runnable>(), new RecThreadFactory(MIN_THREADPOOL_PREFIX));
 		threadPoolMediumPriority.prestartAllCoreThreads();
+
+		threadPoolMinPriority = new ThreadPoolExecutor(CORE_POOL_SIZE_MIN_PRIORITY, MAX_POOL_SIZE_MIN_PRIORITY,
+				THREAD_IDLE_TIME, TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>(), new RecThreadFactory(
+						MEDIUM_THREADPOOL_PREFIX));
+		threadPoolMinPriority.prestartAllCoreThreads();
 	}
 
 	/**
@@ -110,4 +139,24 @@ public final class ProcessingManager {
 		this.threadPoolMediumPriority.shutdownNow();
 	}
 
+	public ThreadPoolExecutorStatistics getMediumThreadPoolStatistics() {
+		return new ThreadPoolExecutorStatistics(this.threadPoolMediumPriority.getQueue().size(),
+				this.threadPoolMediumPriority.getCorePoolSize(), this.threadPoolMediumPriority.getMaximumPoolSize(),
+				this.threadPoolMediumPriority.getActiveCount(), this.threadPoolMediumPriority.getCompletedTaskCount(),
+				this.threadPoolMediumPriority.getLargestPoolSize());
+	}
+
+	public ThreadPoolExecutorStatistics getMinThreadPoolStatistics() {
+		return new ThreadPoolExecutorStatistics(this.threadPoolMinPriority.getQueue().size(),
+				this.threadPoolMinPriority.getCorePoolSize(), this.threadPoolMinPriority.getMaximumPoolSize(),
+				this.threadPoolMinPriority.getActiveCount(), this.threadPoolMinPriority.getCompletedTaskCount(),
+				this.threadPoolMinPriority.getLargestPoolSize());
+	}
+
+	public ThreadPoolExecutorStatistics getMaxThreadPoolStatistics() {
+		return new ThreadPoolExecutorStatistics(this.threadPoolMaxPriority.getQueue().size(),
+				this.threadPoolMaxPriority.getCorePoolSize(), this.threadPoolMaxPriority.getMaximumPoolSize(),
+				this.threadPoolMaxPriority.getActiveCount(), this.threadPoolMaxPriority.getCompletedTaskCount(),
+				this.threadPoolMaxPriority.getLargestPoolSize());
+	}
 }

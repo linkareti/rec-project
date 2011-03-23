@@ -15,6 +15,8 @@ export TOOLKIT_SYSPROPS="-Djava.awt.headless=true"
 #export SECURITYMANAGER_SYSPROPS="-DReC.MultiCast.SecurityManager=@rec.am.securitymanager@ -DReC.MultiCast.CompositeSecurityManager.list=@rec.am.compositesecuritymanager.list@"
 #export SECURITYMANAGER_TIMES_SYSPROPS="-DReC.MultiCast.SecurityManager.Interval.Lap.Time.Minutes=@rec.am.securitymanager.interval.lap.time.minutes@ -DReC.MultiCast.SecurityManager.Near.Lap.Time.Minutes=@rec.am.securitymanager.near.lap.time.minutes@ -DReC.MultiCast.SecurityManager.Refresh.Lap.Time.Minutes=@rec.am.securitymanager.refresh.lap.time.minutes@"
 #export ALLOCATIONMANAGER_SYSPROPS="-DReC.MultiCast.LabID=@rec.am.lab.id@ -DReC.MultiCast.AllocationManagerHost=@rec.am.host@ -DReC.MultiCast.AllocationManagerPort=@rec.am.port@"
+#export PROCESSINGMANAGER_SYSPROPS="-DReC.MultiCast.ProcessingManager.MinThreadPool.Coresize=@rec.am.processingmanager.minthreadpool.coresize@ -DReC.MultiCast.ProcessingManager.MinThreadPool.Maxsize=@rec.am.processingmanager.minthreadpool.maxsize@ -DReC.MultiCast.ProcessingManager.MediumThreadPool.Coresize=@rec.am.processingmanager.mediumthreadpool.coresize@ -DReC.MultiCast.ProcessingManager.MediumThreadPool.Maxsize=@rec.am.processingmanager.mediumthreadpool.maxsize@ -DReC.MultiCast.ProcessingManager.MaxThreadPool.Coresize=@rec.am.processingmanager.maxthreadpool.coresize@ -DReC.MultiCast.ProcessingManager.MaxThreadPool.Maxsize=@rec.am.processingmanager.maxthreadpool.maxsize@ -DReC.MultiCast.ProcessingManager.Thread.Idletime=@rec.am.processingmanager.thread.idletime@"
+
 
 export RECCLASSPATH=$MULTICAST_BASE_DIR/lib/xml-apis.jar:$MULTICAST_BASE_DIR/lib/tools-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_orb-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_pss-1.4.0.jar:$MULTICAST_BASE_DIR/lib/openorb_ots-1.4.0.jar:$MULTICAST_BASE_DIR/lib/logkit.jar:$MULTICAST_BASE_DIR/lib/xercesImpl.jar:$MULTICAST_BASE_DIR/lib/avalon-framework.jar
 export MULTICAST_CLASSPATH=$MULTICAST_BASE_DIR/ReCMulticastController.jar:$MULTICAST_BASE_DIR/ELabMulticastController.jar:$MULTICAST_BASE_DIR/ReCCommon.jar:$MULTICAST_BASE_DIR/lib/rec.am-api-0.0.1-SNAPSHOT.jar:$MULTICAST_BASE_DIR/lib/commons-0.0.1.jar:$MULTICAST_BASE_DIR/lib/glassfish/ejb-container.jar:$MULTICAST_BASE_DIR/lib/glassfish/appclient.security.jar
@@ -30,7 +32,7 @@ echo ClassPath        : $RECCLASSPATH;$MULTICAST_CLASSPATH
 echo --------------------------------------------------------------------------------
 echo System Properties: $GENERIC_ORB_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS 
 
-java $BOOTCLASSPATH -classpath $RECCLASSPATH:$MULTICAST_CLASSPATH $GENERIC_ORB_SYSPROPS $SECURITYMANAGER_SYSPROPS $SECURITYMANAGER_TIMES_SYSPROPS $ALLOCATIONMANAGER_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $TOOLKIT_SYSPROPS $DEBUG com.linkare.rec.impl.multicast.startup.MultiCastControllerMain &
+java $BOOTCLASSPATH -classpath $RECCLASSPATH:$MULTICAST_CLASSPATH $GENERIC_ORB_SYSPROPS $SECURITYMANAGER_SYSPROPS $SECURITYMANAGER_TIMES_SYSPROPS $ALLOCATIONMANAGER_SYSPROPS $PROCESSINGMANAGER_SYSPROPS $MULTICAST_ORB_SYSPROPS $LOG_SYSPROPS $MEM_SYSPROPS $TOOLKIT_SYSPROPS $DEBUG com.linkare.rec.impl.multicast.startup.MultiCastControllerMain &
 
 PID=$!
 echo $PID > multicast_@lab.name@.pid

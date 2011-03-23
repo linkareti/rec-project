@@ -226,7 +226,7 @@ public class EventQueue {
 						dispatcher.dispatchEvent(evt);
 					} else {
 						log(Level.WARNING, "EventQueue isn't dispatching the event " + evt
-								+ " because the stopdispatching is " + stopdispatching);
+								+ " because the this runnable has been interrupted ");
 					}
 
 				}

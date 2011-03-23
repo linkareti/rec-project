@@ -105,6 +105,13 @@
 				<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
 				<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
 				<replacefilter token="@lab.name@" value="@{lab.name}" />
+				<replacefilter token="@rec.am.processingmanager.minthreadpool.coresize@" property="rec.am.processingmanager.minthreadpool.coresize" />
+				<replacefilter token="@rec.am.processingmanager.minthreadpool.maxsize@" property="rec.am.processingmanager.minthreadpool.maxsize" />
+				<replacefilter token="@rec.am.processingmanager.mediumthreadpool.coresize@" property="rec.am.processingmanager.mediumthreadpool.coresize" />
+				<replacefilter token="@rec.am.processingmanager.mediumthreadpool.maxsize@" property="rec.am.processingmanager.mediumthreadpool.maxsize" />
+				<replacefilter token="@rec.am.processingmanager.maxthreadpool.coresize@" property="rec.am.processingmanager.maxthreadpool.coresize" />
+				<replacefilter token="@rec.am.processingmanager.maxthreadpool.maxsize@" property="rec.am.processingmanager.maxthreadpool.maxsize" />
+				<replacefilter token="@rec.am.processingmanager.thread.idletime@" property="rec.am.processingmanager.thread.idletime" />	
 			</replace>
 
 			<copy file="${templates.dir.scripts}/MultiCastDeamon.sh" overwrite="yes" tofile="${multicast.build.dir}/MultiCastDeamon.sh" />
@@ -124,6 +131,13 @@
 				<replacefilter token="@rec.am.securitymanager.interval.lap.time.minutes@" property="rec.am.securitymanager.interval.lap.time.minutes" />
 				<replacefilter token="@rec.am.securitymanager.near.lap.time.minutes@" property="rec.am.securitymanager.near.lap.time.minutes" />
 				<replacefilter token="@rec.am.securitymanager.refresh.lap.time.minutes@" property="rec.am.securitymanager.refresh.lap.time.minutes" />
+				<replacefilter token="@rec.am.processingmanager.minthreadpool.coresize@" property="rec.am.processingmanager.minthreadpool.coresize" />
+				<replacefilter token="@rec.am.processingmanager.minthreadpool.maxsize@" property="rec.am.processingmanager.minthreadpool.maxsize" />
+				<replacefilter token="@rec.am.processingmanager.mediumthreadpool.coresize@" property="rec.am.processingmanager.mediumthreadpool.coresize" />
+				<replacefilter token="@rec.am.processingmanager.mediumthreadpool.maxsize@" property="rec.am.processingmanager.mediumthreadpool.maxsize" />
+				<replacefilter token="@rec.am.processingmanager.maxthreadpool.coresize@" property="rec.am.processingmanager.maxthreadpool.coresize" />
+				<replacefilter token="@rec.am.processingmanager.maxthreadpool.maxsize@" property="rec.am.processingmanager.maxthreadpool.maxsize" />
+				<replacefilter token="@rec.am.processingmanager.thread.idletime@" property="rec.am.processingmanager.thread.idletime" />	
 			</replace>
 
 			<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/etc/loggers.config.properties" />
