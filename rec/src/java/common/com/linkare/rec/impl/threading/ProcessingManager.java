@@ -141,22 +141,68 @@ public final class ProcessingManager {
 
 	public ThreadPoolExecutorStatistics getMediumThreadPoolStatistics() {
 		return new ThreadPoolExecutorStatistics(this.threadPoolMediumPriority.getQueue().size(),
-				this.threadPoolMediumPriority.getCorePoolSize(), this.threadPoolMediumPriority.getMaximumPoolSize(),
 				this.threadPoolMediumPriority.getActiveCount(), this.threadPoolMediumPriority.getCompletedTaskCount(),
 				this.threadPoolMediumPriority.getLargestPoolSize());
 	}
 
 	public ThreadPoolExecutorStatistics getMinThreadPoolStatistics() {
 		return new ThreadPoolExecutorStatistics(this.threadPoolMinPriority.getQueue().size(),
-				this.threadPoolMinPriority.getCorePoolSize(), this.threadPoolMinPriority.getMaximumPoolSize(),
 				this.threadPoolMinPriority.getActiveCount(), this.threadPoolMinPriority.getCompletedTaskCount(),
 				this.threadPoolMinPriority.getLargestPoolSize());
 	}
 
 	public ThreadPoolExecutorStatistics getMaxThreadPoolStatistics() {
 		return new ThreadPoolExecutorStatistics(this.threadPoolMaxPriority.getQueue().size(),
-				this.threadPoolMaxPriority.getCorePoolSize(), this.threadPoolMaxPriority.getMaximumPoolSize(),
 				this.threadPoolMaxPriority.getActiveCount(), this.threadPoolMaxPriority.getCompletedTaskCount(),
 				this.threadPoolMaxPriority.getLargestPoolSize());
 	}
+
+	public void setMaxThreadPoolCoreSize(final int corePoolSize) {
+		this.threadPoolMaxPriority.setCorePoolSize(corePoolSize);
+	}
+
+	public int getMaxThreadPoolCoreSize() {
+		return this.threadPoolMaxPriority.getCorePoolSize();
+	}
+
+	public void setMediumThreadPoolCoreSize(final int corePoolSize) {
+		this.threadPoolMediumPriority.setCorePoolSize(corePoolSize);
+	}
+
+	public int getMediumThreadPoolCoreSize() {
+		return this.threadPoolMediumPriority.getCorePoolSize();
+	}
+
+	public void setMinThreadPoolCoreSize(final int corePoolSize) {
+		this.threadPoolMinPriority.setCorePoolSize(corePoolSize);
+	}
+
+	public int getMinThreadPoolCoreSize() {
+		return this.threadPoolMinPriority.getCorePoolSize();
+	}
+
+	public void setMaxThreadPoolMaxSize(final int maxsize) {
+		this.threadPoolMaxPriority.setMaximumPoolSize(maxsize);
+	}
+
+	public int getMaxThreadPoolMaxSize() {
+		return this.threadPoolMaxPriority.getMaximumPoolSize();
+	}
+
+	public void setMediumThreadPoolMaxSize(final int maxsize) {
+		this.threadPoolMediumPriority.setMaximumPoolSize(maxsize);
+	}
+
+	public int getMediumThreadPoolMaxSize() {
+		return this.threadPoolMediumPriority.getMaximumPoolSize();
+	}
+
+	public void setMinThreadPoolMaxSize(final int maxsize) {
+		this.threadPoolMinPriority.setMaximumPoolSize(maxsize);
+	}
+
+	public int getMinThreadPoolMaxSize() {
+		return this.threadPoolMinPriority.getMaximumPoolSize();
+	}
+
 }

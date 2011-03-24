@@ -9,26 +9,22 @@ package com.linkare.rec.impl.threading;
 import java.beans.ConstructorProperties;
 
 /**
+ * Immutable object
  * 
  * @author Artur Correia - Linkare TI
  */
 public class ThreadPoolExecutorStatistics {
 
 	private final int numberOfTaskOnQueue;
-	private final int corePoolSize;
-	private final int maxPoolSize;
 	private final int activeCount;
 	private final long completedCount;
 	private final int largestPoolSize;
 
-	@ConstructorProperties({ "numberOfTaskOnQueue", "corePoolSize", "maxPoolSize", "activeCount", "completedCount",
-			"largestPoolSize" })
-	public ThreadPoolExecutorStatistics(final int numberOfTaskOnQueue, final int corePoolSize, final int maxPoolSize,
-			final int activeCount, final long completedCount, final int largestPoolSize) {
+	@ConstructorProperties({ "numberOfTaskOnQueue", "activeCount", "completedCount", "largestPoolSize" })
+	public ThreadPoolExecutorStatistics(final int numberOfTaskOnQueue, final int activeCount,
+			final long completedCount, final int largestPoolSize) {
 		super();
 		this.numberOfTaskOnQueue = numberOfTaskOnQueue;
-		this.corePoolSize = corePoolSize;
-		this.maxPoolSize = maxPoolSize;
 		this.activeCount = activeCount;
 		this.completedCount = completedCount;
 		this.largestPoolSize = largestPoolSize;
@@ -36,14 +32,6 @@ public class ThreadPoolExecutorStatistics {
 
 	public int getNumberOfTaskOnQueue() {
 		return numberOfTaskOnQueue;
-	}
-
-	public int getCorePoolSize() {
-		return corePoolSize;
-	}
-
-	public int getMaxPoolSize() {
-		return maxPoolSize;
 	}
 
 	public int getActiveCount() {

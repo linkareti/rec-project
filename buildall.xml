@@ -111,7 +111,8 @@
 				<replacefilter token="@rec.processingmanager.mediumthreadpool.maxsize@" property="rec.processingmanager.mediumthreadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.maxthreadpool.coresize@" property="rec.processingmanager.maxthreadpool.coresize" />
 				<replacefilter token="@rec.processingmanager.maxthreadpool.maxsize@" property="rec.processingmanager.maxthreadpool.maxsize" />
-				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />	
+				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
 			</replace>
 
 			<copy file="${templates.dir.scripts}/MultiCastDeamon.sh" overwrite="yes" tofile="${multicast.build.dir}/MultiCastDeamon.sh" />
@@ -137,11 +138,14 @@
 				<replacefilter token="@rec.processingmanager.mediumthreadpool.maxsize@" property="rec.processingmanager.mediumthreadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.maxthreadpool.coresize@" property="rec.processingmanager.maxthreadpool.coresize" />
 				<replacefilter token="@rec.processingmanager.maxthreadpool.maxsize@" property="rec.processingmanager.maxthreadpool.maxsize" />
-				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />	
+				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
+				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
 			</replace>
 
 			<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/etc/loggers.config.properties" />
-
+			<copy file="${templates.dir.jmx}/jmxremote.access" overwrite="yes" tofile="${multicast.build.dir}/etc/jmxremote.access" />
+			<copy file="${templates.dir.jmx}/jmxremote.password" overwrite="yes" tofile="${multicast.build.dir}/etc/jmxremote.password" />
+			
 			<zip destfile="${dist.dir}/multicast_@{lab.name}_${today}.zip">
 				<zipfileset file="${multicast.build.dir}/ELabMulticastController.jar" prefix="multicast" />
 				<zipfileset file="${multicast.build.dir}/ReCMulticastController.jar" prefix="multicast" />
@@ -150,7 +154,10 @@
 				<zipfileset dir="${multicast.build.dir}/lib" includes="**/*.jar" prefix="multicast/lib" />
 				<zipfileset file="${multicast.build.dir}/etc/loggers.config.properties" fullpath="multicast/etc/loggers.config.properties" />
 				<zipfileset file="${multicast.build.dir}/@{lab.name}/etc/openorb.xml" fullpath="multicast/etc/openorb.xml" />
-
+				
+				<zipfileset file="${multicast.build.dir}/etc/jmxremote.password" fullpath="multicast/etc/jmxremote.password" filemode="500" />
+				<zipfileset file="${multicast.build.dir}/etc/jmxremote.access" fullpath="multicast/etc/jmxremote.access" />
+				
 				<zipfileset file="${multicast.build.dir}/StartMultiCastController.sh" fullpath="StartMultiCastController.sh" filemode="755" />
 				<zipfileset file="${multicast.build.dir}/MultiCastDeamon.sh" fullpath="MultiCastDeamon.sh" filemode="755" />
 				<zipfileset file="${multicast.build.dir}/StartMultiCastController.bat" fullpath="StartMultiCastController.bat" />

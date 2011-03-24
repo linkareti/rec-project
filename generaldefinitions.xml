@@ -28,6 +28,7 @@
 	<property name="templates.dir.scripts" value="${basedir}/templates/scripts" />
 	<property name="templates.dir.logs" value="${basedir}/templates/log" />
 	<property name="templates.dir.images" value="${basedir}/templates/images" />
+	<property name="templates.dir.jmx" value="${basedir}/templates/jmx" />
 
 	<tstamp>
 		<format property="timestamp" pattern="dd-MM-yyyy hh:mm" locale="en,UK" />

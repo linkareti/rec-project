@@ -38,4 +38,28 @@ public interface ThreadPoolExecutorStatisticsMXBean {
 	 */
 	public ThreadPoolExecutorStatistics getMinThreadPoolStatistics();
 
+	public void setMaxThreadPoolCoreSize(final int corePoolSize);
+
+	public int getMaxThreadPoolCoreSize();
+
+	public void setMediumThreadPoolCoreSize(final int corePoolSize);
+
+	public int getMediumThreadPoolCoreSize();
+
+	public void setMinThreadPoolCoreSize(final int corePoolSize);
+
+	public int getMinThreadPoolCoreSize();
+
+	public void setMaxThreadPoolMaxSize(final int maxsize);
+
+	public int getMaxThreadPoolMaxSize();
+
+	public void setMediumThreadPoolMaxSize(final int maxsize);
+
+	public int getMediumThreadPoolMaxSize();
+
+	public void setMinThreadPoolMaxSize(final int maxsize);
+
+	public int getMinThreadPoolMaxSize();
+
 }
