@@ -113,6 +113,7 @@
 				<replacefilter token="@rec.processingmanager.maxthreadpool.maxsize@" property="rec.processingmanager.maxthreadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
+				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
 			</replace>
 
 			<copy file="${templates.dir.scripts}/MultiCastDeamon.sh" overwrite="yes" tofile="${multicast.build.dir}/MultiCastDeamon.sh" />
@@ -140,6 +141,7 @@
 				<replacefilter token="@rec.processingmanager.maxthreadpool.maxsize@" property="rec.processingmanager.maxthreadpool.maxsize" />
 				<replacefilter token="@rec.processingmanager.thread.idletime@" property="rec.processingmanager.thread.idletime" />
 				<replacefilter token="@com.sun.management.jmxremote.port@" property="@{lab.name}.rec.multicastcontroller.jmxremote.port" />
+				<replacefilter token="@java.rmi.server.hostname@" property="java.rmi.server.hostname" />
 			</replace>
 
 			<copy file="${templates.dir.logs}/multicast.loggers.config.properties" overwrite="yes" tofile="${multicast.build.dir}/etc/loggers.config.properties" />
