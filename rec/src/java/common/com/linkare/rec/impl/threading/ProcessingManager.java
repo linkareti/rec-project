@@ -75,12 +75,12 @@ public final class ProcessingManager {
 
 		threadPoolMediumPriority = new ThreadPoolExecutor(CORE_POOL_SIZE_MEDIUM_PRIORITY,
 				MAX_POOL_SIZE_MEDIUM_PRIORITY, THREAD_IDLE_TIME, TimeUnit.NANOSECONDS,
-				new LinkedBlockingQueue<Runnable>(), new RecThreadFactory(MIN_THREADPOOL_PREFIX));
+				new LinkedBlockingQueue<Runnable>(), new RecThreadFactory(MEDIUM_THREADPOOL_PREFIX));
 		threadPoolMediumPriority.prestartAllCoreThreads();
 
 		threadPoolMinPriority = new ThreadPoolExecutor(CORE_POOL_SIZE_MIN_PRIORITY, MAX_POOL_SIZE_MIN_PRIORITY,
 				THREAD_IDLE_TIME, TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>(), new RecThreadFactory(
-						MEDIUM_THREADPOOL_PREFIX));
+						MIN_THREADPOOL_PREFIX));
 		threadPoolMinPriority.prestartAllCoreThreads();
 	}
 
