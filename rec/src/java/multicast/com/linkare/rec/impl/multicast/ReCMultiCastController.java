@@ -6,6 +6,7 @@ package com.linkare.rec.impl.multicast;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,6 +28,8 @@ import com.linkare.rec.impl.events.HardwareChangeEvent;
 import com.linkare.rec.impl.events.HardwareChangeListener;
 import com.linkare.rec.impl.exceptions.NotAuthorizedConstants;
 import com.linkare.rec.impl.logging.LoggerUtil;
+import com.linkare.rec.impl.mbean.MBeanObjectNameFactory;
+import com.linkare.rec.impl.mbean.ThreadPoolExecutorStatistics;
 import com.linkare.rec.impl.multicast.security.DefaultOperation;
 import com.linkare.rec.impl.multicast.security.DefaultResource;
 import com.linkare.rec.impl.multicast.security.DefaultUser;
@@ -50,13 +53,13 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 
 	public static final String SYSPROP_MULTICAST_INIT_REF = "ReC.MultiCastController.InitRef";
 
-	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
+	public static final String MULTICAST_INIT_REF = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_MULTICAST_INIT_REF), "MultiCastController");
 
 	public static final String SYSPROP_MULTICAST_BIND_NAME = "ReC.MultiCastController.BindName";
 
-	public static final String MULTICAST_BIND_NAME = Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_MULTICAST_BIND_NAME), "MultiCastController");
+	public static final String MULTICAST_BIND_NAME = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_MULTICAST_BIND_NAME), "MultiCastController");
 
 	/*
 	 * i18n support
@@ -87,14 +90,14 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	/*
 	 * The maximum number of apparatus available on this lab
 	 */
-	private static final int MAXIMUM_HARDWARES = Defaults.defaultIfEmpty(System
-			.getProperty("ReC.MultiCastController.MAXIMUM_HARDWARES"), 40);
+	private static final int MAXIMUM_HARDWARES = Defaults.defaultIfEmpty(
+			System.getProperty("ReC.MultiCastController.MAXIMUM_HARDWARES"), 40);
 
 	/*
 	 * The maximum number of clients to register with each hardware
 	 */
-	private static final int MAXIMUM_CLIENTS_PER_HARDWARE = Defaults.defaultIfEmpty(System
-			.getProperty("ReC.MultiCastController.MAX_CLIENTS_PER_HARDWARE"), 20);
+	private static final int MAXIMUM_CLIENTS_PER_HARDWARE = Defaults.defaultIfEmpty(
+			System.getProperty("ReC.MultiCastController.MAX_CLIENTS_PER_HARDWARE"), 20);
 
 	/*
 	 * The maximum number of clients to register with this lab
@@ -116,8 +119,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 		try {
 			multiCastLocation = InetAddress.getLocalHost().getCanonicalHostName();
 		} catch (Exception e) {
-			LoggerUtil.logThrowable("Error determining MultiCastController Location", e, Logger
-					.getLogger(MCCONTROLLER_LOGGER));
+			LoggerUtil.logThrowable("Error determining MultiCastController Location", e,
+					Logger.getLogger(MCCONTROLLER_LOGGER));
 		}
 
 		try {
@@ -130,17 +133,21 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 
 			// Create a client queue with a max of MAXIMUM_CLIENTS
 			clientQueue = new ClientQueue(clientQueueAdapter, MAXIMUM_CLIENTS);
-			
+
 			// Initialize Security Manager
 			SecurityManagerFactory.getSecurityManager().registerMultiCastHardware(multiCastHardwares);
-			
+
 			// TODO register security communicator
 			SecurityManagerFactory.getSecurityManager().registerSecurityCommunicator(this);
-			
+
+			// register mbean to expose some statistics from processingmanager
+			ManagementFactory.getPlatformMBeanServer().registerMBean(new ThreadPoolExecutorStatistics(),
+					MBeanObjectNameFactory.getThreadPoolExecutorStatisticsObjectName());
+
 		} catch (Exception e) {
 			// REMOVE THIS TRY CATCH BLOCK AFTER FINISHING THE TEST PHASE...
-			LoggerUtil.logThrowable("Error initializing the ReCMultiCastController", e, Logger
-					.getLogger(MCCONTROLLER_LOGGER));
+			LoggerUtil.logThrowable("Error initializing the ReCMultiCastController", e,
+					Logger.getLogger(MCCONTROLLER_LOGGER));
 		}
 
 		// Create a hardware connection checker
@@ -180,8 +187,9 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	 * @see com.linkare.rec.acquisition.MultiCastControllerOperations#getClientList(com.linkare.rec.acquisition.UserInfo)
 	 */
 	public UserInfo[] getClientList(UserInfo user) throws NotRegistered, NotAuthorized {
-		log(Level.FINEST, "Controller - Getting the client list for user "
-				+ (user == null ? "(user is null)" : user.getUserName()));
+		log(Level.FINEST,
+				"Controller - Getting the client list for user "
+						+ (user == null ? "(user is null)" : user.getUserName()));
 		UserInfo[] retVal = clientQueue.getUsers(user, resource);
 		log(Level.FINEST, "Controller - Got as retVal " + retVal);
 		return retVal;
@@ -194,7 +202,7 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 	public void sendMessage(UserInfo user, String clientTo, String message) throws NotRegistered, NotAuthorized {
 		clientQueue.sendChatMessage(user, clientTo, message, resource);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -386,8 +394,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 							MAXIMUM_CLIENTS_PER_HARDWARE, clientQueue);
 				} catch (Exception e) {
 					LoggerUtil.logThrowable(
-							"Couldn't create a ReCMultiCastHardware for a Hardware that is registering!", e, Logger
-									.getLogger(MCCONTROLLER_LOGGER));
+							"Couldn't create a ReCMultiCastHardware for a Hardware that is registering!", e,
+							Logger.getLogger(MCCONTROLLER_LOGGER));
 					return;
 				}
 
