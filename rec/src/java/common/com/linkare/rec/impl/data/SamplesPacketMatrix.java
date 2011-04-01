@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryUsage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -32,23 +34,23 @@ import com.linkare.rec.impl.utils.FileObjectOutputStream;
 
 /**
  * 
- * 
- * 
  * @author José Pedro Pereira - Linkare TI
  * 
  */
+public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
+	/**
+	 * 
+	 */
+	private static final String TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG = "Tryed to serialize packets but error occurred";
 
-public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
-
-{
-
-	// Added by André... the free mem should be defined by in the init
+	// TODO - define this property in jnlp, build properties and startup
 	// scripts...
-
 	public static final String SYSPROP_FREE_THRESHOLD_NAME = "ReC.PercentFreeMemoryThreshold2Serialization";
 
-	public static final String FREE_THRESHOLD_NAME = com.linkare.rec.impl.utils.Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_FREE_THRESHOLD_NAME), "10");
+	public static final String FREE_THRESHOLD_NAME = com.linkare.rec.impl.utils.Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_FREE_THRESHOLD_NAME), "10");
+
+	private static final int PREDICTION_SIZE_READ = 10;
 
 	private transient ArrayList<SamplesPacket> samples = null;
 
@@ -62,151 +64,115 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
 
 	private double percentFreeThreshold = 10.;
 
+	private SamplesPacketPredictiveBuffer predictiveReadingBuffer = null;
+
+	private class SamplesPacketPredictiveBuffer {
+
+		private SamplesPacket[] predictedReadPackets;
+		private int packetStart;
+		private int packetEnd;
+
+		public SamplesPacketPredictiveBuffer(SamplesPacket[] predictedReadPackets, int packetStart) {
+			this.predictedReadPackets = predictedReadPackets;
+			this.packetStart = packetStart;
+			this.packetEnd = packetStart + (predictedReadPackets == null ? 0 : predictedReadPackets.length);
+		}
+
+		public SamplesPacket getSamplesPacketIfAvailable(int packetNumber) {
+			if (packetNumber >= packetStart && packetNumber < packetEnd) {
+				return predictedReadPackets[packetNumber - packetStart];
+			}
+			return null;
+		}
+	}
+
 	/** Creates a new instance of SamplesPacketMatrix */
 
 	public SamplesPacketMatrix()
 
 	{
-
 		samples = new ArrayList<SamplesPacket>(1000);
-
-		try
-
-		{
-
+		try {
 			percentFreeThreshold = Double.parseDouble(FREE_THRESHOLD_NAME);
-
-		}
-
-		catch (NumberFormatException nfe)
-
-		{
-
+		} catch (NumberFormatException nfe) {
 			percentFreeThreshold = 10.;
-
 		}
-
 	}
 
-	public SamplesPacketMatrix(SamplesPacket[] samples_packets)
-
-	{
-
+	public SamplesPacketMatrix(SamplesPacket[] samples_packets) {
 		samples = new ArrayList<SamplesPacket>(samples_packets.length);
-
 		addSamplesPackets(samples_packets);
-
-		try
-
-		{
-
+		try {
 			percentFreeThreshold = Double.parseDouble(FREE_THRESHOLD_NAME);
-
-		}
-
-		catch (NumberFormatException nfe)
-
-		{
-
+		} catch (NumberFormatException nfe) {
 			percentFreeThreshold = 10.;
-
 		}
-
 	}
 
 	/**
 	 * Indexed getter for property samples_packet.
 	 * 
+	 * @param packet_num
+	 * 
 	 * @param index Index of the property.
 	 * 
 	 * @return Value of the property at <CODE>index</CODE>.
+	 * @throws NotAnAvailableSamplesPacketException
 	 * 
 	 */
-
-	public SamplesPacket getSamplesPacket(int packet_num) throws NotAnAvailableSamplesPacketException
-
-	{
-
-		if (serialized)
-
-		{
-
-			try
-
-			{
-
-				return ioDelegate.getSamplesPackets(packet_num, packet_num)[0];
-
-			} catch (IOException e)
-
-			{
-
-				throw new NotAnAvailableSamplesPacketException(
-						NotAnAvailableSamplesPacketExceptionConstants.PACKET_NOT_FOUND_IN_CACHE, packet_num);
-
+	public SamplesPacket getSamplesPacket(int packet_num) throws NotAnAvailableSamplesPacketException {
+		if (serialized) {
+			if (predictiveReadingBuffer != null) {
+				SamplesPacket retPacket = predictiveReadingBuffer.getSamplesPacketIfAvailable(packet_num);
+				if (retPacket != null) {
+					return retPacket;
+				}
 			}
 
+			try {
+				predictiveReadingBuffer = new SamplesPacketPredictiveBuffer(ioDelegate.getSamplesPackets(packet_num,
+						packet_num + PREDICTION_SIZE_READ), packet_num);
+				return predictiveReadingBuffer.getSamplesPacketIfAvailable(packet_num);
+			} catch (IOException e) {
+				throw new NotAnAvailableSamplesPacketException(
+						NotAnAvailableSamplesPacketExceptionConstants.PACKET_NOT_FOUND_IN_CACHE, packet_num);
+			}
 		}
-
 		SamplesPacket p = null;
-
-		try
-
-		{
-
+		try {
 			p = (SamplesPacket) samples.get(packet_num);
-
-		} catch (IndexOutOfBoundsException e)
-
-		{
-
+		} catch (IndexOutOfBoundsException e) {
 			throw new NotAnAvailableSamplesPacketException(
 					NotAnAvailableSamplesPacketExceptionConstants.PACKET_NOT_FOUND_IN_CACHE, packet_num);
-
 		}
-
-		if (p == null)
-
+		if (p == null) {
 			throw new NotAnAvailableSamplesPacketException(
 					NotAnAvailableSamplesPacketExceptionConstants.PACKET_NOT_FOUND_IN_CACHE, packet_num);
-
+		}
 		return p;
-
 	}
 
 	/**
 	 * Getter for property samples_packet.
 	 * 
 	 * @return Value of property samples_packet.
+	 * @throws SamplesPacketReadException
 	 * 
 	 */
-
-	public SamplesPacket[] getSamplesPackets() throws SamplesPacketReadException
-
-	{
-
+	public SamplesPacket[] getSamplesPackets() throws SamplesPacketReadException {
 		return getSamplesPackets(0, getLargestNumPacket());
-
 	}
 
-	public int size()
-
-	{
-
-		if (serialized)
-
+	public int size() {
+		if (serialized) {
 			return ioDelegate.size();
+		}
 
 		return samples.size();
-
 	}
 
-	public int getLargestNumPacket()
-
-	{
-
+	public int getLargestNumPacket() {
 		return size() - 1;
-
 	}
 
 	/**
@@ -216,46 +182,26 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
 	 * 
 	 */
 
-	public SamplesPacket[] getSamplesPackets(int packetStart, int packetEnd) throws SamplesPacketReadException
-
-	{
-
-		if (serialized)
-
-		{
-
+	public SamplesPacket[] getSamplesPackets(int packetStart, int packetEnd) throws SamplesPacketReadException {
+		if (serialized) {
 			return ioDelegate.getSamplesPackets(packetStart, packetEnd);
-
 		}
-
-		try
-
-		{
-
-			if (packetStart > packetEnd)
-
+		try {
+			if (packetStart > packetEnd) {
 				throw new SamplesPacketReadException("Passed me a packetStart>packetEnd", packetEnd);
+			}
 
-			if (samples.size() <= packetEnd)
-
+			if (samples.size() <= packetEnd) {
 				throw new SamplesPacketReadException("We still don't have all the packets required", samples.size() - 1);
+			}
 
 			SamplesPacket[] packets = new SamplesPacket[packetEnd - packetStart + 1];
-
 			System.arraycopy(samples.toArray(new SamplesPacket[0]), packetStart, packets, 0, packets.length);
-
 			return packets;
-
-		} catch (Exception e)
-
-		{
-
+		} catch (Exception e) {
 			e.printStackTrace();
-
 			throw new SamplesPacketReadException(e.getMessage(), packetStart);
-
 		}
-
 	}
 
 	/**
@@ -264,150 +210,84 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
 	 * @param samples_packet New value of property samples_packet.
 	 * 
 	 */
-
-	public void addSamplesPackets(SamplesPacket[] samples_packet)
-
-	{
-		if (samples_packet == null)
+	public void addSamplesPackets(SamplesPacket[] samples_packet) {
+		if (samples_packet == null) {
 			return;
+		}
 
-		if (serialized)
-
-		{
-
-			try
-
-			{
-
+		if (serialized) {
+			try {
 				ioDelegate.write(samples_packet);
-
-			}
-
-			catch (IOException e)
-
-			{
-
-				LoggerUtil.logThrowable("Tryed to serialize packets but error occurred", e, Logger
-						.getLogger("SamplesPacketIO"));
+			} catch (IOException e) {
+				LoggerUtil.logThrowable(TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e,
+						Logger.getLogger("SamplesPacketIO"));
 
 				Logger.getLogger("SamplesPacketIO").log(Level.WARNING,
 						"Couldn't serialize SamplePackets to file... Defaulting to in memory ArrayList!");
 
 			}
-
-		}
-
-		else
-
+		} else {
 			samples.addAll(Arrays.asList(samples_packet));
+		}
 
-		if (shouldSerialize() && !serialized)
-
-		{
-
-			try
-
-			{
-
+		if (shouldSerialize() && !serialized) {
+			try {
 				ioDelegate = new SamplesPacketMatrixIO();
-
 				ioDelegate.write(getSamplesPackets());
-
 				serialized = true;
-
 				samples.clear();
-
-			}
-
-			catch (IOException e)
-
-			{
-
-				LoggerUtil.logThrowable("Tryed to serialize packets but error occurred", e, Logger
-						.getLogger("SamplesPacketIO"));
+			} catch (IOException e) {
+				LoggerUtil.logThrowable(TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e,
+						Logger.getLogger("SamplesPacketIO"));
 
 				Logger.getLogger("SamplesPacketIO").log(Level.WARNING,
 						"Couldn't serialize SamplePackets to file... Defaulting to in memory ArrayList!");
-
 			}
-
 		}
-
 		fireNewSamplesPackets(getLargestNumPacket());
-
 	}
 
-	public void addSamplesPacket(SamplesPacket samples_packet)
-
-	{
-
-		addSamplesPackets(new SamplesPacket[]
-
-		{ samples_packet });
-
+	public void addSamplesPacket(SamplesPacket samples_packet) {
+		addSamplesPackets(new SamplesPacket[] { samples_packet });
 	}
 
 	// Just for the sake of xml serialization
-
-	public void setSamplesPackets(SamplesPacket[] samples_packet)
-
-	{
-
+	public void setSamplesPackets(SamplesPacket[] samples_packet) {
 		addSamplesPackets(samples_packet);
-
 	}
 
-	private boolean shouldSerialize()
-
-	{
-
-		return ((double) Runtime.getRuntime().freeMemory() <= percentFreeThreshold / 100.
-				* (double) Runtime.getRuntime().maxMemory());
-
+	private boolean shouldSerialize() {
+		// return ((double) Runtime.getRuntime().freeMemory() <=
+		// percentFreeThreshold / 100.
+		// * (double) Runtime.getRuntime().maxMemory());
+		MemoryUsage heapMemoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
+		double maxMem = heapMemoryUsage.getMax();
+		double availableMem = heapMemoryUsage.getMax() - heapMemoryUsage.getUsed();
+		double currentPercentFreeMem = 100. * availableMem / maxMem;
+		return currentPercentFreeMem <= percentFreeThreshold;
 	}
 
 	/**
 	 * Registers SamplesPacketSourceEventListener to receive events.
 	 * 
 	 * @param listener The listener to register.
-	 * 
-	 * 
-	 * 
 	 */
-
 	public synchronized void addSamplesPacketSourceEventListener(
-			com.linkare.rec.impl.data.SamplesPacketSourceEventListener listener)
-
-	{
-
-		if (listenerList == null)
-
-		{
-
+			com.linkare.rec.impl.data.SamplesPacketSourceEventListener listener) {
+		if (listenerList == null) {
 			listenerList = new EventListenerList();
-
 		}
-
 		listenerList.add(com.linkare.rec.impl.data.SamplesPacketSourceEventListener.class, listener);
-
 	}
 
 	/**
 	 * Removes SamplesPacketSourceEventListener from the list of listeners.
 	 * 
 	 * @param listener The listener to remove.
-	 * 
-	 * 
-	 * 
 	 */
-
 	public synchronized void removeSamplesPacketSourceEventListener(
-			com.linkare.rec.impl.data.SamplesPacketSourceEventListener listener)
-
-	{
-
+			com.linkare.rec.impl.data.SamplesPacketSourceEventListener listener) {
 		listenerList.remove(com.linkare.rec.impl.data.SamplesPacketSourceEventListener.class, listener);
-
 	}
 
 	/**
@@ -416,63 +296,35 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
 	 * 
 	 * 
 	 * @param event The event to be fired
-	 * 
-	 * 
-	 * 
 	 */
-
-	private void fireNewSamplesPackets(int packetLargestIndex)
-
-	{
-
+	private void fireNewSamplesPackets(int packetLargestIndex) {
 		com.linkare.rec.impl.data.SamplesPacketSourceEvent event = new com.linkare.rec.impl.data.SamplesPacketSourceEvent(
 				this, packetLargestIndex);
 
-		if (listenerList == null)
+		if (listenerList == null) {
 			return;
+		}
 
 		Object[] listeners = listenerList.getListenerList();
 
-		for (int i = listeners.length - 2; i >= 0; i -= 2)
-
-		{
-
-			if (listeners[i] == com.linkare.rec.impl.data.SamplesPacketSourceEventListener.class)
-
-			{
-
+		for (int i = listeners.length - 2; i >= 0; i -= 2) {
+			if (listeners[i] == com.linkare.rec.impl.data.SamplesPacketSourceEventListener.class) {
 				// System.out.println("Firing newSamplesPackets at SamplesPacketMatrix to registered only "
 				// + packetLargestIndex);
-
 				((com.linkare.rec.impl.data.SamplesPacketSourceEventListener) listeners[i + 1])
 						.newSamplesPackets(event);
-
 			}
-
 		}
-
 	}
 
-	private void writeObject(ObjectOutputStream stream) throws IOException
-
-	{
-
+	private void writeObject(ObjectOutputStream stream) throws IOException {
 		stream.defaultWriteObject();
-
-		if (stream instanceof FileObjectOutputStream)
-
-		{
-
+		if (stream instanceof FileObjectOutputStream) {
 			// System.out.println("Writing to a FileObjectOutputStream...");
-
 			FileObjectOutputStream fos = (FileObjectOutputStream) stream;
-
 			String samplesFileName = fos.getFile().getAbsolutePath();
-
 			samplesFileName = samplesFileName.substring(0, samplesFileName.lastIndexOf('.')) + "_Samples.ser";
-
 			File outputSamplesFile = new File(samplesFileName);
-
 			if (!serialized) {
 				try {
 
@@ -486,68 +338,41 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
 					stream.writeObject(outputSamplesFile);
 
 				} catch (IOException e) {
-
-					LoggerUtil.logThrowable("Tryed to serialize packets but error occurred", e, Logger
-							.getLogger("SamplesPacketIO"));
+					LoggerUtil.logThrowable(TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e,
+							Logger.getLogger("SamplesPacketIO"));
 
 					Logger.getLogger("SamplesPacketIO").log(Level.WARNING,
 							"Couldn't serialize SamplePackets to file...");
-
 				}
-
 				samples.clear();
-
 				return;
 			}
-
 			try {
 				ioDelegate.setFile(outputSamplesFile);
-
 				stream.writeObject(ioDelegate);
-			}
-
-			catch (IOException e)
-
-			{
-
-				LoggerUtil.logThrowable("Tryed to serialize packets but error occurred", e, Logger
-						.getLogger("SamplesPacketIO"));
+			} catch (IOException e) {
+				LoggerUtil.logThrowable(TRYED_TO_SERIALIZE_PACKETS_BUT_ERROR_OCCURRED_LOGMSG, e,
+						Logger.getLogger("SamplesPacketIO"));
 
 				Logger.getLogger("SamplesPacketIO").log(Level.WARNING, "Couldn't serialize SamplePackets to file...");
-
 			}
-
 		} else {
-
-			if (serialized)
-
-			{
-
+			if (serialized) {
 				SamplesPacket[] packets = ioDelegate.getSamplesPackets(0, ioDelegate.size() - 1);
-
 				samples.addAll(Arrays.asList(packets));
-
 				stream.writeObject(samples);
-
 			}
-
 		}
-
 	}
 
 	@SuppressWarnings("unchecked")
 	// readObject warnings...
-	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException
-
-	{
+	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 		try {
 			stream.defaultReadObject();
-
-			if (serialized)
-
+			if (serialized) {
 				ioDelegate = (SamplesPacketMatrixIO) stream.readObject();
-
-			else {
+			} else {
 				Object read = stream.readObject();
 
 				if (read instanceof File) {
@@ -564,7 +389,5 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }
