@@ -130,8 +130,8 @@ public class SoundVelocityDataSetProxy extends org.jfree.data.xy.AbstractXYDatas
 		if (expDataModel == null || !expDataModel.isDataAvailable() || series >= expDataModel.getChannelCount()) {
 			return 0;
 		}
-		final BigDecimal time = new BigDecimal(((double) series + 1) / ((double) 11.025));
-		time.setScale(2, BigDecimal.ROUND_HALF_DOWN);
+		BigDecimal time = new BigDecimal(((double) series + 1) / ((double) 11.025));
+		time = time.setScale(2, BigDecimal.ROUND_HALF_DOWN);
 		return time.round(MATH_CONTEXT).doubleValue();
 	}
 

@@ -80,8 +80,8 @@ public class TableSoundVelocityModelProxy extends com.linkare.rec.impl.client.ex
 			return String.valueOf(rowIndex + 1);
 		} else if (columnIndex == 1) {
 			// acquisition time
-			final BigDecimal time = new BigDecimal(((double) rowIndex + 1) / ((double) 11.025));
-			time.setScale(2, BigDecimal.ROUND_HALF_DOWN);
+			BigDecimal time = new BigDecimal(((double) rowIndex + 1) / ((double) 11.025));
+			time = time.setScale(2, BigDecimal.ROUND_HALF_DOWN);
 			return time.round(MATH_CONTEXT);
 		}
 		PhysicsValue value = expDataModel.getValueAt(rowIndex, getColAtArray(columnIndex));
