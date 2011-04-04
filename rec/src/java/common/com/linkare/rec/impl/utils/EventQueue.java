@@ -62,7 +62,7 @@ public class EventQueue {
 	 */
 	public EventQueue(EventQueueDispatcher dispatcher, String threadName) {
 		this.dispatcher = dispatcher;
-		levts = new ArrayList<Prioritazible>(1000);
+		levts = new LinkedList<Prioritazible>();
 		stopdispatching = false;
 		tasks = new LinkedList<Future<?>>();
 		mainLock = new ReentrantReadWriteLock();
