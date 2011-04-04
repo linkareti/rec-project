@@ -6,15 +6,25 @@
 
 package com.linkare.rec.impl.events;
 
+import com.linkare.rec.impl.threading.util.EnumPriority;
+
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class HardwareChangeEvent {
+public class HardwareChangeEvent implements Prioritazible{
 
 	/** Creates a new instance of HardwareChangeEvent */
 	public HardwareChangeEvent() {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public EnumPriority getPriority() {
+		return EnumPriority.MINIMUM;
 	}
 
 }

@@ -6,13 +6,15 @@
 
 package com.linkare.rec.impl.data;
 
+import com.linkare.rec.impl.events.Prioritazible;
+import com.linkare.rec.impl.threading.util.EnumPriority;
 import com.linkare.rec.impl.utils.IntersectableEvent;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class SamplesPacketSourceEvent extends java.util.EventObject implements IntersectableEvent {
+public class SamplesPacketSourceEvent extends java.util.EventObject implements IntersectableEvent,Prioritazible {
 	private int packetLargestIndex;
 
 	/** Creates a new instance of SamplesSourceEvent */
@@ -48,6 +50,14 @@ public class SamplesPacketSourceEvent extends java.util.EventObject implements I
 	 */
 	private void setPacketLargestIndex(int packetLargestIndex) {
 		this.packetLargestIndex = packetLargestIndex;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public EnumPriority getPriority() {
+		return EnumPriority.MEDIUM;
 	}
 
 }

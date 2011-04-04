@@ -7,12 +7,13 @@
 package com.linkare.rec.impl.events;
 
 import com.linkare.rec.impl.multicast.DataClientForQueue;
+import com.linkare.rec.impl.threading.util.EnumPriority;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class HardwareLockEvent {
+public class HardwareLockEvent implements Prioritazible {
 
 	/** Holds value of property milliseconds_to_lock_success. */
 	private long milliseconds_to_lock_success;
@@ -41,5 +42,13 @@ public class HardwareLockEvent {
 
 	public DataClientForQueue getLockerClient() {
 		return lockerClient;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public EnumPriority getPriority() {
+		return EnumPriority.MAXIMUM;
 	}
 }

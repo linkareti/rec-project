@@ -14,12 +14,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 
+import com.linkare.rec.impl.events.Prioritazible;
 import com.linkare.rec.impl.threading.PriorityRunnable;
 import com.linkare.rec.impl.threading.ProcessingManager;
 import com.linkare.rec.impl.threading.util.EnumPriority;
@@ -35,15 +37,9 @@ public class EventQueue {
 
 	private QueueLogger logger = null;
 	private final EventQueueDispatcher dispatcher;
-	private final ArrayList<Object> levts;
+	private final List<Prioritazible> levts;
 	private volatile boolean stopdispatching = false;
-
-	/**
-	 * 
-	 * Runnable to execute on ProcessingManager
-	 * 
-	 */
-	private final PriorityRunnable priorityRunnable;
+	
 
 	/**
 	 * Permits cancel all tasks if someone call shutdown on this queue
@@ -56,6 +52,7 @@ public class EventQueue {
 	 * 
 	 */
 	private final ReadWriteLock mainLock;
+	
 
 	/**
 	 * Creates a new instance of EventQueue
@@ -65,9 +62,8 @@ public class EventQueue {
 	 */
 	public EventQueue(EventQueueDispatcher dispatcher, String threadName) {
 		this.dispatcher = dispatcher;
-		levts = new ArrayList<Object>(1000);
+		levts = new ArrayList<Prioritazible>(1000);
 		stopdispatching = false;
-		priorityRunnable = new PriorityRunnableImpl();
 		tasks = new LinkedList<Future<?>>();
 		mainLock = new ReentrantReadWriteLock();
 
@@ -86,7 +82,7 @@ public class EventQueue {
 		this.logger = logger;
 	}
 
-	public void addEvent(Object evt) {
+	public void addEvent(Prioritazible evt) {
 		log(Level.FINEST, "EventQueue add event " + evt);
 
 		final Lock writeLock = this.mainLock.writeLock();
@@ -95,9 +91,9 @@ public class EventQueue {
 			levts.add(evt);
 
 			cleanDoneTasks();
-
+			
 			// add task to execute in processing manager
-			tasks.add(ProcessingManager.getInstance().submit(priorityRunnable));
+			tasks.add(ProcessingManager.getInstance().submit(new PriorityRunnableImpl(evt.getPriority())));
 		} finally {
 			writeLock.unlock();
 		}
@@ -201,6 +197,13 @@ public class EventQueue {
 
 	private class PriorityRunnableImpl implements PriorityRunnable {
 
+		private final EnumPriority eventPriority;
+		
+		private PriorityRunnableImpl(final EnumPriority priority){
+			this.eventPriority=priority;
+		}
+		
+		
 		private boolean isInterrupted() {
 			return Thread.currentThread().isInterrupted();
 		}
@@ -242,7 +245,7 @@ public class EventQueue {
 		 */
 		@Override
 		public EnumPriority getPriority() {
-			return EnumPriority.valueOfFromInt(dispatcher.getPriority());
+			return eventPriority;
 		}
 
 		private Object getEvent() throws InterruptedException {
@@ -286,7 +289,7 @@ public class EventQueue {
 				writeLock.unlock();
 			}
 		}
-
 	}
+
 
 }

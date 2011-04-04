@@ -7,12 +7,13 @@
 package com.linkare.rec.impl.events;
 
 import com.linkare.rec.acquisition.DataProducerState;
+import com.linkare.rec.impl.threading.util.EnumPriority;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class DataProducerStateChangeEvent {
+public class DataProducerStateChangeEvent implements Prioritazible {
 	DataProducerState dataProducerState = null;
 
 	/** Creates a new instance of DataEndedEvent */
@@ -36,6 +37,14 @@ public class DataProducerStateChangeEvent {
 	@Override
 	public String toString() {
 		return super.toString() + " - State = " + dataProducerState;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public EnumPriority getPriority() {
+		return EnumPriority.MAXIMUM;
 	}
 
 }

@@ -6,12 +6,14 @@
 
 package com.linkare.rec.impl.events;
 
+import com.linkare.rec.impl.threading.util.EnumPriority;
+
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class HardwareStateChangeEvent {
+public class HardwareStateChangeEvent implements Prioritazible {
 
 	/** Holds value of property newState. */
 	private com.linkare.rec.acquisition.HardwareState newState;
@@ -37,6 +39,14 @@ public class HardwareStateChangeEvent {
 	@Override
 	public String toString() {
 		return super.toString() + " - State = " + newState;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public EnumPriority getPriority() {
+		return EnumPriority.MAXIMUM;
 	}
 
 }

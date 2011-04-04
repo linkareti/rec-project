@@ -6,13 +6,14 @@
 
 package com.linkare.rec.impl.events;
 
+import com.linkare.rec.impl.threading.util.EnumPriority;
 import com.linkare.rec.impl.utils.IntersectableEvent;
 
 /**
  * 
  * @author José Pedro Pereira - Linkare TI
  */
-public class NewSamplesEvent implements IntersectableEvent {
+public class NewSamplesEvent implements IntersectableEvent,Prioritazible {
 
 	private int largestNumPacket;
 
@@ -72,6 +73,14 @@ public class NewSamplesEvent implements IntersectableEvent {
 		builder.append(largestNumPacket);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public EnumPriority getPriority() {
+		return EnumPriority.MEDIUM;
 	}
 
 }

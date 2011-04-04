@@ -7,12 +7,13 @@
 package com.linkare.rec.impl.events;
 
 import com.linkare.rec.acquisition.UserInfo;
+import com.linkare.rec.impl.threading.util.EnumPriority;
 
 /**
  * 
  * @author José Pedro Pereira
  */
-public class ChatMessageEvent extends java.util.EventObject {
+public class ChatMessageEvent extends java.util.EventObject implements Prioritazible {
 
 	/** Generated UID */
 	private static final long serialVersionUID = 5094517997811244867L;
@@ -95,6 +96,14 @@ public class ChatMessageEvent extends java.util.EventObject {
 	 */
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public EnumPriority getPriority() {
+		return EnumPriority.MINIMUM;
 	}
 
 }
