@@ -15,17 +15,12 @@
 	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
-		<!--
-			Explicitly declaring the source encoding eliminates the following
-			message: [WARNING] Using platform encoding (UTF-8 actually) to copy
-			filtered resources, i.e. build is platform dependent!
-		-->
+		<!-- Explicitly declaring the source encoding eliminates the following 
+			message: [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
+			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!--
-			To set the jboss.home environment variable the Maven way, set the
-			jboss.home property in an active profile in the Maven 2 settings.xml
-			file
-		-->
+		<!-- To set the jboss.home environment variable the Maven way, set the 
+			jboss.home property in an active profile in the Maven 2 settings.xml file -->
 		<jboss.home>${env.JBOSS_HOME}</jboss.home>
 		<jboss.domain>default</jboss.domain>
 		<!-- The version of Weld extensions in use -->
@@ -33,14 +28,9 @@
 	</properties>
 
 	<repositories>
-		<!--
-			Several key Java EE APIs and RIs are missing from the Maven Central
-			Repository
-		-->
-		<!--
-			The goal is to eventually eliminate the reliance on the JBoss
-			repository
-		-->
+		<!-- Several key Java EE APIs and RIs are missing from the Maven Central 
+			Repository -->
+		<!-- The goal is to eventually eliminate the reliance on the JBoss repository -->
 		<repository>
 			<id>jboss-repo</id>
 			<name>JBoss maven repository</name>
@@ -94,10 +84,8 @@
 			<scope>provided</scope>
 			<version>3.1.0</version>
 		</dependency>
-		<!--
-			Common annotations (e.g., @PostConstruct, @PreDestroy, @Generated,
-			@Resource)
-		-->
+		<!-- Common annotations (e.g., @PostConstruct, @PreDestroy, @Generated, 
+			@Resource) -->
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>jsr250-api</artifactId>
@@ -110,13 +98,9 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- Bean Validation Implementation -->
-		<!--
-			Provides portable constraints such as @NotEmpty, @Email and @Url
-		-->
-		<!--
-			Hibernate Validator is only the JSR-303 implementation at the moment,
-			so we can assume it's provided
-		-->
+		<!-- Provides portable constraints such as @NotEmpty, @Email and @Url -->
+		<!-- Hibernate Validator is only the JSR-303 implementation at the moment, 
+			so we can assume it's provided -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -209,6 +193,13 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.3.2</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -348,10 +339,7 @@
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
 					<wtpversion>2.0</wtpversion>
-					<!--
-						<downloadSources>true</downloadSources>
-						<downloadJavadocs>true</downloadJavadocs>
-					-->
+					<!-- <downloadSources>true</downloadSources> <downloadJavadocs>true</downloadJavadocs> -->
 				</configuration>
 			</plugin>
 
@@ -407,53 +395,36 @@
 					<driver>com.mysql.jdbc.Driver</driver>
 					<url>jdbc:mysql://localhost:3306/allocation</url>
 
-					<!--
-						You can comment out username/password configurations and have
-						maven to look them up in your settings.xml using ${settingsKey}
-					-->
+					<!-- You can comment out username/password configurations and have maven 
+						to look them up in your settings.xml using ${settingsKey} -->
 					<!--username>username</username -->
 					<!--password>password</password -->
 					<settingsKey>mysql</settingsKey>
 
-					<!--all executions are ignored if -Dmaven.test.skip=true-->
+					<!--all executions are ignored if -Dmaven.test.skip=true -->
 					<skip>${maven.test.skip}</skip>
 				</configuration>
 
 				<executions>
-					<!--
-						<execution> <id>drop-db-before-test-if-any</id>
-						<phase>process-test-resources</phase> <goals> <goal>execute</goal>
-						</goals> <configuration> need another database to drop the
-						targeted one <url>jdbc:mysql://localhost:3306/mysql</url>
-						<autocommit>true</autocommit> <sqlCommand>drop database
-						allocation</sqlCommand> ignore error when database is not avaiable
-						<onError>continue</onError> </configuration> </execution>
-					-->
+					<!-- <execution> <id>drop-db-before-test-if-any</id> <phase>process-test-resources</phase> 
+						<goals> <goal>execute</goal> </goals> <configuration> need another database 
+						to drop the targeted one <url>jdbc:mysql://localhost:3306/mysql</url> <autocommit>true</autocommit> 
+						<sqlCommand>drop database allocation</sqlCommand> ignore error when database 
+						is not avaiable <onError>continue</onError> </configuration> </execution> -->
 
-					<!--
-						<execution> <id>create-db</id>
-						<phase>process-test-resources</phase> <goals> <goal>execute</goal>
-						</goals> <configuration> <url>jdbc:mysql://localhost:3306</url> no
-						transaction <autocommit>true</autocommit> <sqlCommand>create
-						database allocation</sqlCommand> <onError>continue</onError>
-						</configuration> </execution>
-					-->
+					<!-- <execution> <id>create-db</id> <phase>process-test-resources</phase> 
+						<goals> <goal>execute</goal> </goals> <configuration> <url>jdbc:mysql://localhost:3306</url> 
+						no transaction <autocommit>true</autocommit> <sqlCommand>create database 
+						allocation</sqlCommand> <onError>continue</onError> </configuration> </execution> -->
 
-					<!--
-						<execution> <id>create-schema</id>
-						<phase>process-test-resources</phase> <goals> <goal>execute</goal>
-						</goals> <configuration> <autocommit>true</autocommit> <srcFiles>
-						<srcFile>src/main/sql/create-am-schema.sql</srcFile> </srcFiles>
-						<onError>continue</onError> </configuration> </execution>
-
-						<execution> <id>create-data</id>
-						<phase>process-test-resources</phase> <goals> <goal>execute</goal>
-						</goals> <configuration> <orderFile>ascending</orderFile>
-						<fileset> <basedir>${basedir}</basedir> <includes>
-						<include>src/main/sql/data-initialization.sql</include>
-						</includes> </fileset> <onError>continue</onError>
-						</configuration> </execution>
-					-->
+					<!-- <execution> <id>create-schema</id> <phase>process-test-resources</phase> 
+						<goals> <goal>execute</goal> </goals> <configuration> <autocommit>true</autocommit> 
+						<srcFiles> <srcFile>src/main/sql/create-am-schema.sql</srcFile> </srcFiles> 
+						<onError>continue</onError> </configuration> </execution> <execution> <id>create-data</id> 
+						<phase>process-test-resources</phase> <goals> <goal>execute</goal> </goals> 
+						<configuration> <orderFile>ascending</orderFile> <fileset> <basedir>${basedir}</basedir> 
+						<includes> <include>src/main/sql/data-initialization.sql</include> </includes> 
+						</fileset> <onError>continue</onError> </configuration> </execution> -->
 
 				</executions>
 			</plugin>
@@ -504,11 +475,8 @@
 	</build>
 
 	<profiles>
-		<!--
-			Profiles skin.empty and skin.default are duplicates since maven
-			doesn't allow multiples of the "property" tag in a single
-			"activation" tag
-		-->
+		<!-- Profiles skin.empty and skin.default are duplicates since maven doesn't 
+			allow multiples of the "property" tag in a single "activation" tag -->
 		<profile>
 			<id>skin.empty</id>
 			<activation>
@@ -544,11 +512,8 @@
 				<rec.am.skin.name>alternate</rec.am.skin.name>
 			</properties>
 		</profile>
-		<!--
-			Profiles targetenv.empty and targetenv.dev are duplicates since maven
-			doesn't allow multiples of the "property" tag in a single
-			"activation" tag
-		-->
+		<!-- Profiles targetenv.empty and targetenv.dev are duplicates since maven 
+			doesn't allow multiples of the "property" tag in a single "activation" tag -->
 		<profile>
 			<id>targetenv.empty</id>
 			<activation>

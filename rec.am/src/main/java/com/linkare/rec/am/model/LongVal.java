@@ -1,0 +1,26 @@
+package com.linkare.rec.am.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+/**
+ * 
+ * @author artur
+ */
+@Entity
+public class LongVal extends PhysicsVal {
+
+    private static final long serialVersionUID = 1L;
+
+    @Column(name = "LONG_VALUE")
+    private Long value;
+
+    public Long getValue() {
+	return value;
+    }
+
+    public void setValue(Long value) {
+	this.value = value;
+    }
+
+}
