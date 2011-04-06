@@ -1,0 +1,63 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package com.linkare.rec.am.experiment;
+
+import java.util.List;
+
+/**
+ * 
+ * @author artur
+ */
+public class DataProducerDTO extends AbstractBaseDTO {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    private HardwareAcquisitionConfigDTO acqHeader;
+
+    private String dataProducerName;
+
+    private String oid;
+
+    private List<SamplesPacketDTO> samplesPacketMatrix;
+
+    public DataProducerDTO() {
+    }
+
+    public HardwareAcquisitionConfigDTO getAcqHeader() {
+	return acqHeader;
+    }
+
+    public void setAcqHeader(HardwareAcquisitionConfigDTO acqHeader) {
+	this.acqHeader = acqHeader;
+    }
+
+    public String getDataProducerName() {
+	return dataProducerName;
+    }
+
+    public void setDataProducerName(String dataProducerName) {
+	this.dataProducerName = dataProducerName;
+    }
+
+    public String getOid() {
+	return oid;
+    }
+
+    public void setOid(String oid) {
+	this.oid = oid;
+    }
+
+    public List<SamplesPacketDTO> getSamplesPacketMatrix() {
+	return samplesPacketMatrix;
+    }
+
+    public void setSamplesPacketMatrix(List<SamplesPacketDTO> samplesPacketMatrix) {
+	this.samplesPacketMatrix = samplesPacketMatrix;
+    }
+}
