@@ -24,6 +24,8 @@ public class DataProducerDTO extends AbstractBaseDTO {
 
     private String oid;
 
+    private String user;
+
     private List<SamplesPacketDTO> samplesPacketMatrix;
 
     public DataProducerDTO() {
@@ -60,4 +62,13 @@ public class DataProducerDTO extends AbstractBaseDTO {
     public void setSamplesPacketMatrix(List<SamplesPacketDTO> samplesPacketMatrix) {
 	this.samplesPacketMatrix = samplesPacketMatrix;
     }
+
+    public String getUser() {
+	return user;
+    }
+
+    public void setUser(String user) {
+	this.user = user;
+    }
+
 }

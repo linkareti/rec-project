@@ -5,7 +5,7 @@
 
 package com.linkare.rec.am.experiment;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * 
@@ -19,23 +19,23 @@ public class HardwareAcquisitionConfigDTO extends AbstractBaseDTO {
 
     private DateTimeDTO timeStart;
 
-    private FrequencyDTO selectedFrequency;
+    private FrequencyDTO frequency;
 
-    private Collection<HardwareParameterConfigDTO> selectedHardwareParameters;
+    private List<HardwareParameterConfigDTO> hardwareParameters;
 
     private int totalSamples;
 
-    private Collection<ChannelAcquisitionConfigDTO> channelsConfig;
+    private List<ChannelAcquisitionConfigDTO> channelsConfig;
 
     private String familiarName;
 
     private String hardwareUniqueID;
 
-    public Collection<ChannelAcquisitionConfigDTO> getChannelsConfig() {
+    public List<ChannelAcquisitionConfigDTO> getChannelsConfig() {
 	return channelsConfig;
     }
 
-    public void setChannelsConfig(Collection<ChannelAcquisitionConfigDTO> channelsConfig) {
+    public void setChannelsConfig(List<ChannelAcquisitionConfigDTO> channelsConfig) {
 	this.channelsConfig = channelsConfig;
     }
 
@@ -55,20 +55,20 @@ public class HardwareAcquisitionConfigDTO extends AbstractBaseDTO {
 	this.hardwareUniqueID = hardwareUniqueID;
     }
 
-    public FrequencyDTO getSelectedFrequency() {
-	return selectedFrequency;
+    public FrequencyDTO getFrequency() {
+	return frequency;
     }
 
-    public void setSelectedFrequency(FrequencyDTO selectedFrequency) {
-	this.selectedFrequency = selectedFrequency;
+    public void setFrequency(FrequencyDTO frequency) {
+	this.frequency = frequency;
     }
 
-    public Collection<HardwareParameterConfigDTO> getSelectedHardwareParameters() {
-	return selectedHardwareParameters;
+    public List<HardwareParameterConfigDTO> getHardwareParameters() {
+	return hardwareParameters;
     }
 
-    public void setSelectedHardwareParameters(Collection<HardwareParameterConfigDTO> selectedHardwareParameters) {
-	this.selectedHardwareParameters = selectedHardwareParameters;
+    public void setHardwareParameters(List<HardwareParameterConfigDTO> hardwareParameters) {
+	this.hardwareParameters = hardwareParameters;
     }
 
     public DateTimeDTO getTimeStart() {

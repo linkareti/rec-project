@@ -2,8 +2,12 @@ package com.linkare.rec.am.experiment;
 
 import java.util.List;
 
-public class ColumnPhysicsValueDTO {
+public class ColumnPhysicsValueDTO extends AbstractBaseDTO {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private List<PhysicsValueDTO> columnValues;
 
     public ColumnPhysicsValueDTO() {
