@@ -2,11 +2,11 @@ package com.linkare.rec.am.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,11 +30,12 @@ public class ChannelAcquisitionConfig extends DefaultDomainObject {
     @Column(name = "FREQUENCY")
     private Frequency frequency;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "KEY_SCALE")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "KEY_SCALE", nullable = false, updatable = false)
     private Scale scale;
 
-    @OneToMany(mappedBy = "channel")
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "KEY_CHANNEL_ACQUISITION_CONFIG", nullable = true, updatable = false)
     private List<ChannelParameterConfig> channelParameters;
 
     @Column(name = "TOTAL_SAMPLES")
@@ -42,10 +43,6 @@ public class ChannelAcquisitionConfig extends DefaultDomainObject {
 
     @Column(name = "CHANNEL_NAME")
     private String channelName;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "KEY_HARDWAREACQUISITIONCONFIG")
-    private HardwareAcquisitionConfig hardwareAcquisitionConfig;
 
     public ChannelAcquisitionConfig() {
     }
@@ -98,11 +95,4 @@ public class ChannelAcquisitionConfig extends DefaultDomainObject {
 	this.channelName = channelName;
     }
 
-    public HardwareAcquisitionConfig getHardwareAcquisitionConfig() {
-	return hardwareAcquisitionConfig;
-    }
-
-    public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig hardwareAcquisitionConfig) {
-	this.hardwareAcquisitionConfig = hardwareAcquisitionConfig;
-    }
 }

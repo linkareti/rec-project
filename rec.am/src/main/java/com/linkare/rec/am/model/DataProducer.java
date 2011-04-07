@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -21,16 +22,21 @@ public class DataProducer extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToOne(mappedBy = "recMultiCastDataProducer", optional = false)
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "KEY_HARDWARE_ACQUISITION_CONFIG", nullable = false, updatable = false)
     private HardwareAcquisitionConfig acqHeader;
 
     @Column(name = "DATA_PRODUCER_NAME")
     private String dataProducerName;
 
-    @Column(name = "OID")
+    @Column(name = "OID", unique = true)
     private String oid;
 
-    @OneToMany(mappedBy = "dataProducer", cascade = CascadeType.PERSIST)
+    @Column(name = "USER")
+    private String user;
+
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "KEY_DATAPRODUCER", nullable = false, updatable = false)
     private List<SamplesPacket> samplesPacketMatrix;
 
     public DataProducer() {
@@ -66,6 +72,14 @@ public class DataProducer extends DefaultDomainObject {
 
     public void setSamplesPacketMatrix(List<SamplesPacket> samplesPacketMatrix) {
 	this.samplesPacketMatrix = samplesPacketMatrix;
+    }
+
+    public String getUser() {
+	return user;
+    }
+
+    public void setUser(String user) {
+	this.user = user;
     }
 
 }

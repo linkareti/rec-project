@@ -4,12 +4,12 @@
  */
 package com.linkare.rec.am.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,21 +26,17 @@ public class PhysicsValue extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "KEY_PHYSICS_VAL_VALUE")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "KEY_PHYSICS_VAL_VALUE", nullable = false, updatable = false)
     private PhysicsVal value;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "KEY_PHYSICS_VAL_ERROR")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "KEY_PHYSICS_VAL_ERROR", nullable = false, updatable = false)
     private PhysicsVal error;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "APPLIED_MULTIPLIER")
     private MultiplierEnum appliedMultiplier;
-
-    @ManyToOne
-    @JoinColumn(name = "KEY_COLUMN_PHYSICS_VALUE")
-    private ColumnPhysicsValue column;
 
     public PhysicsValue() {
     }
@@ -67,14 +63,6 @@ public class PhysicsValue extends DefaultDomainObject {
 
     public void setAppliedMultiplier(MultiplierEnum appliedMultiplier) {
 	this.appliedMultiplier = appliedMultiplier;
-    }
-
-    public ColumnPhysicsValue getColumn() {
-	return column;
-    }
-
-    public void setColumn(ColumnPhysicsValue column) {
-	this.column = column;
     }
 
 }

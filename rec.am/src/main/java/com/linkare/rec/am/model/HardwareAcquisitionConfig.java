@@ -2,6 +2,7 @@ package com.linkare.rec.am.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -28,13 +29,15 @@ public class HardwareAcquisitionConfig extends DefaultDomainObject {
     @Embedded
     private Frequency frequency;
 
-    @OneToMany(mappedBy = "hardware")
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "KEY_HARDWARE_ACQUISITION_CONFIG", nullable = true, updatable = false)
     private List<HardwareParameterConfig> hardwareParameters;
 
     @Column(name = "TOTAL_SAMPLES")
     private int totalSamples;
 
-    @OneToMany(mappedBy = "hardwareAcquisitionConfig")
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "KEY_CHANNEL_ACQUISITION_CONFIG", nullable = true, updatable = false)
     private List<ChannelAcquisitionConfig> channelsConfig;
 
     @Column(name = "FAMILIAR_NAME")
@@ -43,8 +46,7 @@ public class HardwareAcquisitionConfig extends DefaultDomainObject {
     @Column(name = "HARDWARE_UNIQUE_ID")
     private String hardwareUniqueID;
 
-    @OneToOne
-    @JoinColumn(name = "KEY_DATA_PRODUCER")
+    @OneToOne(mappedBy = "acqHeader")
     private DataProducer recMultiCastDataProducer;
 
     //default constructor
@@ -63,15 +65,15 @@ public class HardwareAcquisitionConfig extends DefaultDomainObject {
 	return frequency;
     }
 
-    public void setSelectedFrequency(Frequency frequency) {
+    public void setFrequency(Frequency frequency) {
 	this.frequency = frequency;
     }
 
-    public Integer getTotalSamples() {
+    public int getTotalSamples() {
 	return totalSamples;
     }
 
-    public void setTotalSamples(Integer totalSamples) {
+    public void setTotalSamples(int totalSamples) {
 	this.totalSamples = totalSamples;
     }
 

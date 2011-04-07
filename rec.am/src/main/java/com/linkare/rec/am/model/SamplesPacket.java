@@ -2,11 +2,11 @@ package com.linkare.rec.am.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,15 +28,12 @@ public class SamplesPacket extends DefaultDomainObject {
     @Column(name = "TOTAL_PACKETS")
     private int totalPackets;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "KEY_SAMPLES_PACKET", nullable = false, updatable = false)
     private List<ColumnPhysicsValue> data;
 
     @Embedded
     private DateTime timeStart = null;
-
-    @ManyToOne
-    @JoinColumn(name = "KEY_DATAPRODUCER")
-    private DataProducer dataProducer;
 
     public SamplesPacket() {
     }
@@ -71,14 +68,6 @@ public class SamplesPacket extends DefaultDomainObject {
 
     public void setTimeStart(DateTime timeStart) {
 	this.timeStart = timeStart;
-    }
-
-    public DataProducer getDataProducer() {
-	return dataProducer;
-    }
-
-    public void setDataProducer(DataProducer dataProducer) {
-	this.dataProducer = dataProducer;
     }
 
 }
