@@ -1,5 +1,11 @@
 package com.linkare.rec.am.experiment;
 
+/**
+ * 
+ * 
+ * @author Artur Correia - Linkare TI
+ * 
+ */
 public class PhysicsValueDTO extends AbstractBaseDTO {
 
     /**
@@ -38,6 +44,19 @@ public class PhysicsValueDTO extends AbstractBaseDTO {
 
     public void setAppliedMultiplier(MultiplierEnum appliedMultiplier) {
 	this.appliedMultiplier = appliedMultiplier;
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("PhysicsValueDTO [value=");
+	builder.append(value);
+	builder.append(", error=");
+	builder.append(error);
+	builder.append(", appliedMultiplier=");
+	builder.append(appliedMultiplier);
+	builder.append("]");
+	return builder.toString();
     }
 
 }

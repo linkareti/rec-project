@@ -7,7 +7,7 @@ package com.linkare.rec.am.experiment;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 public class ScaleDTO extends AbstractBaseDTO {
 
@@ -16,7 +16,7 @@ public class ScaleDTO extends AbstractBaseDTO {
      */
     private static final long serialVersionUID = 1L;
 
-    private MultiplierEnum appliedMultiplier;
+    private MultiplierEnum multiplier;
 
     private PhysicsValDTO minValue;
 
@@ -35,12 +35,12 @@ public class ScaleDTO extends AbstractBaseDTO {
     public ScaleDTO() {
     }
 
-    public MultiplierEnum getAppliedMultiplier() {
-	return appliedMultiplier;
+    public MultiplierEnum getMultiplier() {
+	return multiplier;
     }
 
-    public void setAppliedMultiplier(MultiplierEnum appliedMultiplier) {
-	this.appliedMultiplier = appliedMultiplier;
+    public void setMultiplier(MultiplierEnum appliedMultiplier) {
+	this.multiplier = appliedMultiplier;
     }
 
     public PhysicsValDTO getMinValue() {
@@ -97,6 +97,29 @@ public class ScaleDTO extends AbstractBaseDTO {
 
     public void setScaleLabel(String scaleLabel) {
 	this.scaleLabel = scaleLabel;
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("ScaleDTO [multiplier=");
+	builder.append(multiplier);
+	builder.append(", minValue=");
+	builder.append(minValue);
+	builder.append(", maxValue=");
+	builder.append(maxValue);
+	builder.append(", defaultError=");
+	builder.append(defaultError);
+	builder.append(", step=");
+	builder.append(step);
+	builder.append(", physicsUnitName=");
+	builder.append(physicsUnitName);
+	builder.append(", physicsUnitSymbol=");
+	builder.append(physicsUnitSymbol);
+	builder.append(", scaleLabel=");
+	builder.append(scaleLabel);
+	builder.append("]");
+	return builder.toString();
     }
 
 }

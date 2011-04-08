@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 public class HardwareAcquisitionConfigDTO extends AbstractBaseDTO {
     /**
@@ -21,7 +21,7 @@ public class HardwareAcquisitionConfigDTO extends AbstractBaseDTO {
 
     private FrequencyDTO frequency;
 
-    private List<HardwareParameterConfigDTO> hardwareParameters;
+    private List<ParameterConfigDTO> hardwareParameters;
 
     private int totalSamples;
 
@@ -63,11 +63,11 @@ public class HardwareAcquisitionConfigDTO extends AbstractBaseDTO {
 	this.frequency = frequency;
     }
 
-    public List<HardwareParameterConfigDTO> getHardwareParameters() {
+    public List<ParameterConfigDTO> getHardwareParameters() {
 	return hardwareParameters;
     }
 
-    public void setHardwareParameters(List<HardwareParameterConfigDTO> hardwareParameters) {
+    public void setHardwareParameters(List<ParameterConfigDTO> hardwareParameters) {
 	this.hardwareParameters = hardwareParameters;
     }
 
@@ -86,4 +86,26 @@ public class HardwareAcquisitionConfigDTO extends AbstractBaseDTO {
     public void setTotalSamples(int totalSamples) {
 	this.totalSamples = totalSamples;
     }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("HardwareAcquisitionConfigDTO [timeStart=");
+	builder.append(timeStart);
+	builder.append(", frequency=");
+	builder.append(frequency);
+	builder.append(", hardwareParameters=");
+	builder.append(hardwareParameters);
+	builder.append(", totalSamples=");
+	builder.append(totalSamples);
+	builder.append(", channelsConfig=");
+	builder.append(channelsConfig);
+	builder.append(", familiarName=");
+	builder.append(familiarName);
+	builder.append(", hardwareUniqueID=");
+	builder.append(hardwareUniqueID);
+	builder.append("]");
+	return builder.toString();
+    }
+
 }

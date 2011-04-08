@@ -7,7 +7,7 @@ package com.linkare.rec.am.experiment;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 public class FrequencyDTO extends AbstractBaseDTO {
 

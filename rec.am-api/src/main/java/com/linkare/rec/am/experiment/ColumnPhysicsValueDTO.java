@@ -2,6 +2,12 @@ package com.linkare.rec.am.experiment;
 
 import java.util.List;
 
+/**
+ * 
+ * 
+ * @author Artur Correia - Linkare TI
+ * 
+ */
 public class ColumnPhysicsValueDTO extends AbstractBaseDTO {
 
     /**
@@ -19,6 +25,15 @@ public class ColumnPhysicsValueDTO extends AbstractBaseDTO {
 
     public void setColumnValues(List<PhysicsValueDTO> column) {
 	this.columnValues = column;
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("ColumnPhysicsValueDTO [columnValues=");
+	builder.append(columnValues);
+	builder.append("]");
+	return builder.toString();
     }
 
 }

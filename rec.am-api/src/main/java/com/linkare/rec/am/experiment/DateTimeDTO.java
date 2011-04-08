@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 public class DateTimeDTO extends AbstractBaseDTO {
 
@@ -99,6 +99,29 @@ public class DateTimeDTO extends AbstractBaseDTO {
 
     public void setSeconds(byte seconds) {
 	this.seconds = seconds;
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("DateTimeDTO [date=");
+	builder.append(date);
+	builder.append(", picos=");
+	builder.append(picos);
+	builder.append(", nanos=");
+	builder.append(nanos);
+	builder.append(", micros=");
+	builder.append(micros);
+	builder.append(", milis=");
+	builder.append(milis);
+	builder.append(", seconds=");
+	builder.append(seconds);
+	builder.append(", minutes=");
+	builder.append(minutes);
+	builder.append(", hours=");
+	builder.append(hours);
+	builder.append("]");
+	return builder.toString();
     }
 
 }

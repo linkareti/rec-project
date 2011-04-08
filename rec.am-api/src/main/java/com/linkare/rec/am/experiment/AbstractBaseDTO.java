@@ -8,8 +8,10 @@ package com.linkare.rec.am.experiment;
 import java.io.Serializable;
 
 /**
+ * Maybe not necessary! but for now dont hurt :D
  * 
- * @author artur
+ * 
+ * @author Artur Correia - Linkare TI
  */
 public abstract class AbstractBaseDTO implements Serializable {
 

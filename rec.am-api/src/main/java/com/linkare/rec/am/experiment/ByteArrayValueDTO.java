@@ -7,7 +7,7 @@ package com.linkare.rec.am.experiment;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 public class ByteArrayValueDTO extends AbstractBaseDTO {
 
@@ -52,7 +52,15 @@ public class ByteArrayValueDTO extends AbstractBaseDTO {
 
     @Override
     public String toString() {
-	return "ByteArrayValueDTO [mimeType=" + mimeType + ", virtualPath=" + virtualPath + "]";
+	StringBuilder builder = new StringBuilder();
+	builder.append("ByteArrayValueDTO [data.lenght=");
+	builder.append(data != null ? data.length : "null");
+	builder.append(", mimeType=");
+	builder.append(mimeType);
+	builder.append(", virtualPath=");
+	builder.append(virtualPath);
+	builder.append("]");
+	return builder.toString();
     }
 
 }

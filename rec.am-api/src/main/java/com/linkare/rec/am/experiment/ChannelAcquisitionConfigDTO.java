@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 public class ChannelAcquisitionConfigDTO extends AbstractBaseDTO {
 
@@ -24,13 +24,11 @@ public class ChannelAcquisitionConfigDTO extends AbstractBaseDTO {
 
     private ScaleDTO scale;
 
-    private List<ChannelParameterConfigDTO> channelParameters;
+    private List<ParameterConfigDTO> channelParameters;
 
     private int totalSamples;
 
     private String channelName;
-
-    private HardwareAcquisitionConfigDTO hardwareAcquisitionConfig;
 
     public ChannelAcquisitionConfigDTO() {
     }
@@ -59,11 +57,11 @@ public class ChannelAcquisitionConfigDTO extends AbstractBaseDTO {
 	this.scale = scale;
     }
 
-    public List<ChannelParameterConfigDTO> getChannelParameters() {
+    public List<ParameterConfigDTO> getChannelParameters() {
 	return channelParameters;
     }
 
-    public void setChannelParameters(List<ChannelParameterConfigDTO> channelParameters) {
+    public void setChannelParameters(List<ParameterConfigDTO> channelParameters) {
 	this.channelParameters = channelParameters;
     }
 
@@ -81,6 +79,25 @@ public class ChannelAcquisitionConfigDTO extends AbstractBaseDTO {
 
     public void setChannelName(String channelName) {
 	this.channelName = channelName;
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("ChannelAcquisitionConfigDTO [timeStart=");
+	builder.append(timeStart);
+	builder.append(", frequency=");
+	builder.append(frequency);
+	builder.append(", scale=");
+	builder.append(scale);
+	builder.append(", channelParameters=");
+	builder.append(channelParameters);
+	builder.append(", totalSamples=");
+	builder.append(totalSamples);
+	builder.append(", channelName=");
+	builder.append(channelName);
+	builder.append("]");
+	return builder.toString();
     }
 
 }

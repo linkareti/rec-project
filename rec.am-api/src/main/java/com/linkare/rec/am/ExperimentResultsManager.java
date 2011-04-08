@@ -7,6 +7,6 @@ import com.linkare.rec.am.experiment.DataProducerDTO;
 
 public interface ExperimentResultsManager extends Remote {
 
-    public void persistExperimentResults(DataProducerDTO experimentResult) throws RemoteException;
+    public void mergeExperimentResults(DataProducerDTO experimentResult) throws RemoteException;
 
 }

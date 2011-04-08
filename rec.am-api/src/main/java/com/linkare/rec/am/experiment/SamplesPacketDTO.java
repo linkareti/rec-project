@@ -2,6 +2,12 @@ package com.linkare.rec.am.experiment;
 
 import java.util.List;
 
+/**
+ * 
+ * 
+ * @author Artur Correia - Linkare TI
+ * 
+ */
 public class SamplesPacketDTO extends AbstractBaseDTO {
 
     /**
@@ -51,4 +57,20 @@ public class SamplesPacketDTO extends AbstractBaseDTO {
     public void setTimeStart(DateTimeDTO timeStart) {
 	this.timeStart = timeStart;
     }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("SamplesPacketDTO [packetNumber=");
+	builder.append(packetNumber);
+	builder.append(", totalPackets=");
+	builder.append(totalPackets);
+	builder.append(", data=");
+	builder.append(data);
+	builder.append(", timeStart=");
+	builder.append(timeStart);
+	builder.append("]");
+	return builder.toString();
+    }
+
 }

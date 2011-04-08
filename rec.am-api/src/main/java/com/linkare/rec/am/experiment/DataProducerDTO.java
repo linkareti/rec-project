@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 public class DataProducerDTO extends AbstractBaseDTO {
 
@@ -69,6 +69,23 @@ public class DataProducerDTO extends AbstractBaseDTO {
 
     public void setUser(String user) {
 	this.user = user;
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("DataProducerDTO [acqHeader=");
+	builder.append(acqHeader);
+	builder.append(", dataProducerName=");
+	builder.append(dataProducerName);
+	builder.append(", oid=");
+	builder.append(oid);
+	builder.append(", user=");
+	builder.append(user);
+	builder.append(", samplesPacketMatrix=");
+	builder.append(samplesPacketMatrix);
+	builder.append("]");
+	return builder.toString();
     }
 
 }

@@ -7,7 +7,7 @@ package com.linkare.rec.am.experiment;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 public class ParameterConfigDTO extends AbstractBaseDTO {
 
@@ -33,4 +33,16 @@ public class ParameterConfigDTO extends AbstractBaseDTO {
     public void setParameterValue(String parameterValue) {
 	this.parameterValue = parameterValue;
     }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("ParameterConfigDTO [parameterName=");
+	builder.append(parameterName);
+	builder.append(", parameterValue=");
+	builder.append(parameterValue);
+	builder.append("]");
+	return builder.toString();
+    }
+
 }
