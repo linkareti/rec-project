@@ -36,7 +36,7 @@ public class ChannelAcquisitionConfig extends DefaultDomainObject {
 
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "KEY_CHANNEL_ACQUISITION_CONFIG", nullable = true, updatable = false)
-    private List<ChannelParameterConfig> channelParameters;
+    private List<ParameterConfig> channelParameters;
 
     @Column(name = "TOTAL_SAMPLES")
     private int totalSamples;
@@ -71,11 +71,11 @@ public class ChannelAcquisitionConfig extends DefaultDomainObject {
 	this.scale = scale;
     }
 
-    public List<ChannelParameterConfig> getChannelParameters() {
+    public List<ParameterConfig> getChannelParameters() {
 	return channelParameters;
     }
 
-    public void setChannelParameters(List<ChannelParameterConfig> channelParameters) {
+    public void setChannelParameters(List<ParameterConfig> channelParameters) {
 	this.channelParameters = channelParameters;
     }
 

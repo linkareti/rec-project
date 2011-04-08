@@ -31,7 +31,7 @@ public class HardwareAcquisitionConfig extends DefaultDomainObject {
 
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "KEY_HARDWARE_ACQUISITION_CONFIG", nullable = true, updatable = false)
-    private List<HardwareParameterConfig> hardwareParameters;
+    private List<ParameterConfig> hardwareParameters;
 
     @Column(name = "TOTAL_SAMPLES")
     private int totalSamples;
@@ -101,11 +101,11 @@ public class HardwareAcquisitionConfig extends DefaultDomainObject {
 	this.hardwareUniqueID = hardwareUniqueID;
     }
 
-    public List<HardwareParameterConfig> getHardwareParameters() {
+    public List<ParameterConfig> getHardwareParameters() {
 	return hardwareParameters;
     }
 
-    public void setHardwareParameters(List<HardwareParameterConfig> hardwareParameters) {
+    public void setHardwareParameters(List<ParameterConfig> hardwareParameters) {
 	this.hardwareParameters = hardwareParameters;
     }
 

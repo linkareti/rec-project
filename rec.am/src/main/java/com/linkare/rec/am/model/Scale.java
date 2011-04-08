@@ -24,7 +24,7 @@ public class Scale extends DefaultDomainObject {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "APPLIED_MULTIPLIER")
-    private MultiplierEnum appliedMultiplier;
+    private MultiplierEnum multiplier;
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "KEY_PHYSICS_VAL_MINVALUE")
@@ -54,12 +54,12 @@ public class Scale extends DefaultDomainObject {
     public Scale() {
     }
 
-    public MultiplierEnum getAppliedMultiplier() {
-	return appliedMultiplier;
+    public MultiplierEnum getMultiplier() {
+	return multiplier;
     }
 
-    public void setAppliedMultiplier(MultiplierEnum appliedMultiplier) {
-	this.appliedMultiplier = appliedMultiplier;
+    public void setMultiplier(MultiplierEnum appliedMultiplier) {
+	this.multiplier = appliedMultiplier;
     }
 
     public PhysicsVal getMinValue() {

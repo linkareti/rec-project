@@ -14,7 +14,7 @@ import com.linkare.rec.am.experiment.ColumnPhysicsValueDTO;
 import com.linkare.rec.am.experiment.DateTimeDTO;
 import com.linkare.rec.am.experiment.FrequencyDTO;
 import com.linkare.rec.am.experiment.HardwareAcquisitionConfigDTO;
-import com.linkare.rec.am.experiment.HardwareParameterConfigDTO;
+import com.linkare.rec.am.experiment.ParameterConfigDTO;
 import com.linkare.rec.am.experiment.PhysicsValDTO;
 import com.linkare.rec.am.experiment.PhysicsValueDTO;
 import com.linkare.rec.am.experiment.SamplesPacketDTO;
@@ -23,7 +23,7 @@ import com.linkare.rec.am.model.ColumnPhysicsValue;
 import com.linkare.rec.am.model.DateTime;
 import com.linkare.rec.am.model.Frequency;
 import com.linkare.rec.am.model.HardwareAcquisitionConfig;
-import com.linkare.rec.am.model.HardwareParameterConfig;
+import com.linkare.rec.am.model.ParameterConfig;
 import com.linkare.rec.am.model.PhysicsVal;
 import com.linkare.rec.am.model.PhysicsValue;
 import com.linkare.rec.am.model.SamplesPacket;
@@ -129,7 +129,7 @@ public final class DozerBeanMapperSingletonWrapper implements Mapper {
 
 		@Override
 		protected void configure() {
-		    mapping(HardwareParameterConfigDTO.class, HardwareParameterConfig.class);
+		    mapping(ParameterConfigDTO.class, ParameterConfig.class);
 		}
 
 	    };

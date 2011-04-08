@@ -17,7 +17,6 @@ import com.linkare.rec.am.model.BooleanVal;
 import com.linkare.rec.am.model.ByteArrayValue;
 import com.linkare.rec.am.model.ByteVal;
 import com.linkare.rec.am.model.ChannelAcquisitionConfig;
-import com.linkare.rec.am.model.ChannelParameterConfig;
 import com.linkare.rec.am.model.ColumnPhysicsValue;
 import com.linkare.rec.am.model.DataProducer;
 import com.linkare.rec.am.model.DateTime;
@@ -25,7 +24,6 @@ import com.linkare.rec.am.model.DoubleVal;
 import com.linkare.rec.am.model.FloatVal;
 import com.linkare.rec.am.model.Frequency;
 import com.linkare.rec.am.model.HardwareAcquisitionConfig;
-import com.linkare.rec.am.model.HardwareParameterConfig;
 import com.linkare.rec.am.model.IntVal;
 import com.linkare.rec.am.model.LongVal;
 import com.linkare.rec.am.model.ParameterConfig;
@@ -152,7 +150,7 @@ public class TestDozzerMapping {
 	Assert.assertEquals(dto.getPhysicsUnitName(), destObject.getPhysicsUnitName());
 	Assert.assertEquals(dto.getPhysicsUnitSymbol(), destObject.getPhysicsUnitSymbol());
 	Assert.assertEquals(dto.getScaleLabel(), destObject.getScaleLabel());
-	Assert.assertEquals(dto.getAppliedMultiplier(), destObject.getAppliedMultiplier());
+	Assert.assertEquals(dto.getMultiplier(), destObject.getMultiplier());
 
 	Assert.assertEquals(dto.getDefaultError().getValue(), ((ByteVal) destObject.getDefaultError()).getValue());
 	Assert.assertEquals(dto.getMaxValue().getValue(), ((ShortVal) destObject.getMaxValue()).getValue());
@@ -192,17 +190,17 @@ public class TestDozzerMapping {
     }
 
     @Test
-    public void convertToHardwareParameterConfigTest() {
-	final HardwareParameterConfigDTO dto = getHardwareParameterConfigDTO();
+    public void convertToParameterConfigTest() {
+	final ParameterConfigDTO dto = getChannelParameterConfigDTO();
 
-	final HardwareParameterConfig entity = DozerBeanMapperSingletonWrapper.getInstance().map(dto, HardwareParameterConfig.class);
+	final ParameterConfig entity = DozerBeanMapperSingletonWrapper.getInstance().map(dto, ParameterConfig.class);
 
 	assertParameterConfig(dto, entity);
 
     }
 
-    private HardwareParameterConfigDTO getHardwareParameterConfigDTO() {
-	final HardwareParameterConfigDTO dto = new HardwareParameterConfigDTO();
+    private ParameterConfigDTO getHardwareParameterConfigDTO() {
+	final ParameterConfigDTO dto = new ParameterConfigDTO();
 	dto.setParameterName("hparameterName");
 	dto.setParameterValue("hparameterValue");
 	return dto;
@@ -233,9 +231,9 @@ public class TestDozzerMapping {
 
     @Test
     public void convertToChannelParameterConfig() {
-	final ChannelParameterConfigDTO dto = getChannelParameterConfigDTO();
+	final ParameterConfigDTO dto = getChannelParameterConfigDTO();
 
-	final ChannelParameterConfig entity = DozerBeanMapperSingletonWrapper.getInstance().map(dto, ChannelParameterConfig.class);
+	final ParameterConfig entity = DozerBeanMapperSingletonWrapper.getInstance().map(dto, ParameterConfig.class);
 
 	assertParameterConfig(dto, entity);
 
@@ -410,11 +408,11 @@ public class TestDozzerMapping {
 	return dto;
     }
 
-    private List<HardwareParameterConfigDTO> getHardwareParameterConfigDTOs() {
-	final HardwareParameterConfigDTO dto = new HardwareParameterConfigDTO();
+    private List<ParameterConfigDTO> getHardwareParameterConfigDTOs() {
+	final ParameterConfigDTO dto = new ParameterConfigDTO();
 	dto.setParameterName("hparameterName");
 	dto.setParameterValue("hparameterValue");
-	return Arrays.asList(new HardwareParameterConfigDTO[] { dto });
+	return Arrays.asList(new ParameterConfigDTO[] { dto });
     }
 
     private List<ChannelAcquisitionConfigDTO> getChannelAcquisitionConfigDTOs() {
@@ -432,15 +430,15 @@ public class TestDozzerMapping {
 	return dto1;
     }
 
-    private List<ChannelParameterConfigDTO> getChannelParameterConfigDTOs() {
-	final ChannelParameterConfigDTO dto = new ChannelParameterConfigDTO();
+    private List<ParameterConfigDTO> getChannelParameterConfigDTOs() {
+	final ParameterConfigDTO dto = new ParameterConfigDTO();
 	dto.setParameterName("parameterName");
 	dto.setParameterValue("parameterValue");
-	return Arrays.asList(new ChannelParameterConfigDTO[] { getChannelParameterConfigDTO() });
+	return Arrays.asList(new ParameterConfigDTO[] { getChannelParameterConfigDTO() });
     }
 
-    private ChannelParameterConfigDTO getChannelParameterConfigDTO() {
-	final ChannelParameterConfigDTO dto = new ChannelParameterConfigDTO();
+    private ParameterConfigDTO getChannelParameterConfigDTO() {
+	final ParameterConfigDTO dto = new ParameterConfigDTO();
 	dto.setParameterName("parameterName");
 	dto.setParameterValue("parameterValue");
 	return dto;
@@ -448,7 +446,7 @@ public class TestDozzerMapping {
 
     private ScaleDTO getScaleDTO() {
 	final ScaleDTO dto = new ScaleDTO();
-	dto.setAppliedMultiplier(MultiplierEnum.KILO);
+	dto.setMultiplier(MultiplierEnum.KILO);
 	dto.setDefaultError(getBytePhysicsValDTO());
 	dto.setMaxValue(getShortPhysicsValDTO());
 	dto.setMinValue(getIntPhysicsValDTO());
@@ -558,7 +556,7 @@ public class TestDozzerMapping {
 
 	try {
 	    DataProducerDTO dto = new TestDozzerMapping().getDataProducerDTO();
-	    ejb.persistExperimentResults(dto);
+	    ejb.mergeExperimentResults(dto);
 	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
