@@ -16,7 +16,7 @@ import com.linkare.rec.am.experiment.MultiplierEnum;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 @Embeddable
 public class Frequency implements Serializable {

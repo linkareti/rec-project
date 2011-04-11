@@ -6,7 +6,7 @@ import javax.persistence.PrePersist;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 @Entity
 public class ByteArrayVal extends PhysicsVal {

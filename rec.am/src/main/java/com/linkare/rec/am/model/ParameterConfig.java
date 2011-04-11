@@ -8,7 +8,7 @@ import com.linkare.commons.jpa.DefaultDomainObject;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 @Entity
 @Table(name = "PARAMETER_CONFIG")

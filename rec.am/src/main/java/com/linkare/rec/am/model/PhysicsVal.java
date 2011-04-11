@@ -10,7 +10,7 @@ import com.linkare.commons.jpa.DefaultDomainObject;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

@@ -15,7 +15,7 @@ import com.linkare.commons.jpa.DefaultDomainObject;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 @Entity
 @Table(name = "CHANNEL_AQUISITION_CONFIG")

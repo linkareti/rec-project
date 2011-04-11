@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 @Embeddable
 public class DateTime implements Serializable {

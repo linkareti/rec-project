@@ -14,7 +14,7 @@ import com.linkare.rec.am.experiment.MultiplierEnum;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 @Entity
 @Table(name = "SCALE")

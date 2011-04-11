@@ -2,24 +2,19 @@ package com.linkare.rec.am.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Transient;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 @Embeddable
 public class ByteArrayValue {
 
-    // this will be saved in the File System
-    @Transient
+    @Column(name = "DATA")
     private byte[] data = null;
 
     @Column(name = "MIMETYPE")
     private String mimeType = null;
-
-    @Column(name = "VIRTUALPATH")
-    private String virtualPath = null;
 
     public ByteArrayValue() {
     }
@@ -38,13 +33,5 @@ public class ByteArrayValue {
 
     public void setMimeType(String mimeType) {
 	this.mimeType = mimeType;
-    }
-
-    public String getVirtualPath() {
-	return virtualPath;
-    }
-
-    public void setVirtualPath(String virtualPath) {
-	this.virtualPath = virtualPath;
     }
 }

@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 @Entity
 public class BooleanVal extends PhysicsVal {

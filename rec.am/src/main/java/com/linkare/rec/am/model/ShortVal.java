@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 @Entity
 public class ShortVal extends PhysicsVal {
