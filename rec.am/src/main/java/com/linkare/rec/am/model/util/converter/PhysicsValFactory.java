@@ -65,7 +65,7 @@ public final class PhysicsValFactory implements BeanFactory {
 	    }
 	    case BYTEARRAY_VAL: {
 		final ByteArrayVal result = new ByteArrayVal();
-		result.setValue(DozerBeanMapperSingletonWrapper.getInstance().map(dto, ByteArrayValue.class));
+		result.setValue(DozerBeanMapperSingletonWrapper.getInstance().map(dto.getValue(), ByteArrayValue.class));
 		return result;
 	    }
 	    default:

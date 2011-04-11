@@ -19,8 +19,10 @@ public class TracingInterceptor {
 
     @AroundInvoke
     public Object log(InvocationContext ctx) throws Exception {
+
 	//enable tracing only if debug is enabled
 	if (LOG.isInfoEnabled()) {
+
 	    LOG.info("*** TracingInterceptor intercepting " + ctx.getMethod().getName());
 	    final long start = System.currentTimeMillis();
 	    try {
@@ -29,8 +31,9 @@ public class TracingInterceptor {
 		final long time = System.currentTimeMillis() - start;
 		final String method = new StringBuilder(ctx.getTarget().getClass().getName()).append(".").append(ctx.getMethod().getName()).append("()")
 											     .toString();
-		LOG.info("*** TracingInterceptor invocation of " + method + " took " + time + "ms");
+		LOG.info(new StringBuilder("*** TracingInterceptor invocation of ").append(method).append(" took ").append(time).append("ms").toString());
 	    }
+
 	} else {
 	    return ctx.proceed();
 	}

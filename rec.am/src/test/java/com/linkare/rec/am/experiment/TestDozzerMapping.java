@@ -91,7 +91,6 @@ public class TestDozzerMapping {
     private void assertByteArrayValue(final ByteArrayValueDTO dto, final ByteArrayValue destObject) {
 	Assert.assertNotNull(destObject);
 	Assert.assertEquals(dto.getMimeType(), destObject.getMimeType());
-	Assert.assertEquals(dto.getVirtualPath(), destObject.getVirtualPath());
 	Assert.assertTrue(Arrays.equals(dto.getData(), destObject.getData()));
     }
 
@@ -467,7 +466,6 @@ public class TestDozzerMapping {
 	final ByteArrayValueDTO dto = new ByteArrayValueDTO();
 	dto.setData(new byte[0]);
 	dto.setMimeType("mimeType");
-	dto.setVirtualPath("virtualPath");
 	return dto;
     }
 
