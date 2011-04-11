@@ -16,12 +16,9 @@ public class ByteArrayValueDTO extends AbstractBaseDTO {
      */
     private static final long serialVersionUID = 1L;
 
-    // this will be saved in the File System
     private byte[] data = null;
 
     private String mimeType = null;
-
-    private String virtualPath = null;
 
     public ByteArrayValueDTO() {
     }
@@ -42,14 +39,6 @@ public class ByteArrayValueDTO extends AbstractBaseDTO {
 	this.mimeType = mimeType;
     }
 
-    public String getVirtualPath() {
-	return virtualPath;
-    }
-
-    public void setVirtualPath(String virtualPath) {
-	this.virtualPath = virtualPath;
-    }
-
     @Override
     public String toString() {
 	StringBuilder builder = new StringBuilder();
@@ -57,8 +46,6 @@ public class ByteArrayValueDTO extends AbstractBaseDTO {
 	builder.append(data != null ? data.length : "null");
 	builder.append(", mimeType=");
 	builder.append(mimeType);
-	builder.append(", virtualPath=");
-	builder.append(virtualPath);
 	builder.append("]");
 	return builder.toString();
     }
