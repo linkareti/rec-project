@@ -3,8 +3,6 @@ package com.linkare.rec.am.model.util.converter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.MappingException;
@@ -29,7 +27,6 @@ import com.linkare.rec.am.model.ParameterConfig;
 import com.linkare.rec.am.model.PhysicsVal;
 import com.linkare.rec.am.model.PhysicsValue;
 import com.linkare.rec.am.model.SamplesPacket;
-import com.linkare.rec.am.service.interceptor.TracingInterceptor;
 
 /**
  * 
@@ -39,8 +36,6 @@ import com.linkare.rec.am.service.interceptor.TracingInterceptor;
  * 
  */
 public final class DozerBeanMapperSingletonWrapper implements Mapper {
-
-    private static final Log LOG = LogFactory.getLog(TracingInterceptor.class);
 
     private static final Mapper INSTANCE = new DozerBeanMapperSingletonWrapper();
 
@@ -59,19 +54,7 @@ public final class DozerBeanMapperSingletonWrapper implements Mapper {
 
     @Override
     public <T> T map(Object arg0, Class<T> arg1) throws MappingException {
-	if (LOG.isInfoEnabled()) {
-	    final long start = System.currentTimeMillis();
-	    try {
-		return mapper.map(arg0, arg1);
-	    } finally {
-		final long time = System.currentTimeMillis() - start;
-		LOG.info(new StringBuilder("time to mapping ").append(arg1.getName()).append(" :").append(time).toString());
-	    }
-
-	} else {
-	    return mapper.map(arg0, arg1);
-	}
-
+	return mapper.map(arg0, arg1);
     }
 
     @Override

@@ -12,6 +12,9 @@ import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.linkare.rec.am.ExperimentResultsManager;
 import com.linkare.rec.am.experiment.DataProducerDTO;
 import com.linkare.rec.am.model.DataProducer;
@@ -25,12 +28,28 @@ import com.linkare.rec.am.service.interceptor.TracingInterceptor;
 @Interceptors({ TracingInterceptor.class })
 public class ExperimentResultsManagerBean implements ExperimentResultsManager {
 
+    private static final Log LOG = LogFactory.getLog(ExperimentResultsManagerBean.class);
+
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager entityManager;
 
     @Override
     public void persistExperimentResults(DataProducerDTO experimentResult) throws RemoteException {
-	entityManager.persist(DozerBeanMapperSingletonWrapper.getInstance().map(experimentResult, DataProducer.class));
+	final DataProducer entity;
+	if (LOG.isInfoEnabled()) {
+	    final long start = System.currentTimeMillis();
+	    try {
+		entity = DozerBeanMapperSingletonWrapper.getInstance().map(experimentResult, DataProducer.class);
+	    } finally {
+		final long time = System.currentTimeMillis() - start;
+		LOG.info(new StringBuilder("time to mapping DataProducer entity").append(" :").append(time).toString());
+	    }
+
+	} else {
+	    entity = DozerBeanMapperSingletonWrapper.getInstance().map(experimentResult, DataProducer.class);
+	}
+
+	entityManager.persist(entity);
     }
 
 }
