@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -29,15 +28,13 @@ public class HardwareAcquisitionConfig extends DefaultDomainObject {
     @Embedded
     private Frequency frequency;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "KEY_HARDWARE_ACQUISITION_CONFIG", nullable = true, updatable = false)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "hardwareAcquisitionConfig")
     private List<ParameterConfig> hardwareParameters;
 
     @Column(name = "TOTAL_SAMPLES")
     private int totalSamples;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "KEY_CHANNEL_ACQUISITION_CONFIG", nullable = true, updatable = false)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "hardwareAcquisitionConfig")
     private List<ChannelAcquisitionConfig> channelsConfig;
 
     @Column(name = "FAMILIAR_NAME")
@@ -83,6 +80,12 @@ public class HardwareAcquisitionConfig extends DefaultDomainObject {
 
     public void setChannelsConfig(List<ChannelAcquisitionConfig> channelsConfig) {
 	this.channelsConfig = channelsConfig;
+
+	if (channelsConfig != null) {
+	    for (final ChannelAcquisitionConfig channelAcquisitionConfig : channelsConfig) {
+		channelAcquisitionConfig.setHardwareAcquisitionConfig(this);
+	    }
+	}
     }
 
     public String getFamiliarName() {
@@ -107,6 +110,13 @@ public class HardwareAcquisitionConfig extends DefaultDomainObject {
 
     public void setHardwareParameters(List<ParameterConfig> hardwareParameters) {
 	this.hardwareParameters = hardwareParameters;
+
+	//bidirectionality
+	if (hardwareParameters != null && hardwareParameters.size() > 0) {
+	    for (final ParameterConfig parameterConfig : hardwareParameters) {
+		parameterConfig.setHardwareAcquisitionConfig(this);
+	    }
+	}
     }
 
     public DataProducer getRecMultiCastDataProducer() {

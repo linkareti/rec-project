@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,13 +27,17 @@ public class PhysicsValue extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "KEY_PHYSICS_VAL_VALUE", nullable = false, updatable = false)
     private PhysicsVal value;
 
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "KEY_PHYSICS_VAL_ERROR", nullable = false, updatable = false)
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "KEY_PHYSICS_VAL_ERROR", updatable = false)
     private PhysicsVal error;
+
+    @ManyToOne
+    @JoinColumn(name = "KEY_COLUMN", nullable = false, updatable = false)
+    private ColumnPhysicsValue column;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "APPLIED_MULTIPLIER")
@@ -63,6 +68,14 @@ public class PhysicsValue extends DefaultDomainObject {
 
     public void setAppliedMultiplier(MultiplierEnum appliedMultiplier) {
 	this.appliedMultiplier = appliedMultiplier;
+    }
+
+    public ColumnPhysicsValue getColumn() {
+	return column;
+    }
+
+    public void setColumn(ColumnPhysicsValue column) {
+	this.column = column;
     }
 
 }

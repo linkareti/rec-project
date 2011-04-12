@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,12 +31,11 @@ public class ChannelAcquisitionConfig extends DefaultDomainObject {
     @Column(name = "FREQUENCY")
     private Frequency frequency;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "KEY_SCALE", nullable = false, updatable = false)
     private Scale scale;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "KEY_CHANNEL_ACQUISITION_CONFIG", nullable = true, updatable = false)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "channelAcquisitionConfig")
     private List<ParameterConfig> channelParameters;
 
     @Column(name = "TOTAL_SAMPLES")
@@ -43,6 +43,10 @@ public class ChannelAcquisitionConfig extends DefaultDomainObject {
 
     @Column(name = "CHANNEL_NAME")
     private String channelName;
+
+    @ManyToOne
+    @JoinColumn(name = "KEY_HARDWARE_ACQUISITION_CONFIG")
+    private HardwareAcquisitionConfig hardwareAcquisitionConfig;
 
     public ChannelAcquisitionConfig() {
     }
@@ -77,13 +81,21 @@ public class ChannelAcquisitionConfig extends DefaultDomainObject {
 
     public void setChannelParameters(List<ParameterConfig> channelParameters) {
 	this.channelParameters = channelParameters;
+
+	// bidirectionality
+	if (channelParameters != null) {
+	    for (final ParameterConfig parameterConfig : channelParameters) {
+		parameterConfig.setChannelAcquisitionConfig(this);
+	    }
+	}
+
     }
 
-    public Integer getTotalSamples() {
+    public int getTotalSamples() {
 	return totalSamples;
     }
 
-    public void setTotalSamples(Integer totalSamples) {
+    public void setTotalSamples(int totalSamples) {
 	this.totalSamples = totalSamples;
     }
 
@@ -93,6 +105,14 @@ public class ChannelAcquisitionConfig extends DefaultDomainObject {
 
     public void setChannelName(String channelName) {
 	this.channelName = channelName;
+    }
+
+    public HardwareAcquisitionConfig getHardwareAcquisitionConfig() {
+	return hardwareAcquisitionConfig;
+    }
+
+    public void setHardwareAcquisitionConfig(HardwareAcquisitionConfig hardwareAcquisitionConfig) {
+	this.hardwareAcquisitionConfig = hardwareAcquisitionConfig;
     }
 
 }

@@ -26,19 +26,19 @@ public class Scale extends DefaultDomainObject {
     @Column(name = "APPLIED_MULTIPLIER")
     private MultiplierEnum multiplier;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "KEY_PHYSICS_VAL_MINVALUE")
     private PhysicsVal minValue;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "KEY_PHYSICS_VAL_MAXVALUE")
     private PhysicsVal maxValue;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "KEY_PHYSICS_VAL_DEFAULTERROR")
     private PhysicsVal defaultError;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "KEY_PHYSICS_VAL_STEP")
     private PhysicsVal step;
 

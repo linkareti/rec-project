@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import com.linkare.rec.am.ExperimentResultsManager;
 import com.linkare.rec.am.model.BooleanVal;
+import com.linkare.rec.am.model.ByteArrayVal;
 import com.linkare.rec.am.model.ByteArrayValue;
 import com.linkare.rec.am.model.ByteVal;
 import com.linkare.rec.am.model.ChannelAcquisitionConfig;
@@ -131,6 +132,11 @@ public class TestDozzerMapping {
 	entity = DozerBeanMapperSingletonWrapper.getInstance().map(dto, PhysicsVal.class);
 	assertPhysicalValType(entity, DoubleVal.class);
 	Assert.assertEquals(dto.getValue(), ((DoubleVal) entity).getValue());
+
+	dto = getByteArrayPhysicsValDTO();
+	entity = DozerBeanMapperSingletonWrapper.getInstance().map(dto, PhysicsVal.class);
+	assertPhysicalValType(entity, ByteArrayVal.class);
+	assertByteArrayValue((ByteArrayValueDTO) dto.getValue(), ((ByteArrayVal) entity).getValue());
 
     }
 
@@ -518,6 +524,13 @@ public class TestDozzerMapping {
 	return dto;
     }
 
+    private PhysicsValDTO getByteArrayPhysicsValDTO() {
+	final PhysicsValDTO dto = new PhysicsValDTO();
+	dto.setValueType(PhysicsValueTypeEnum.BYTEARRAY_VAL);
+	dto.setValue(getByteArrayValueDTO());
+	return dto;
+    }
+
     //    private PhysicsValDTO getByteArrayPhysicsValDTO() {
     //	final PhysicsValDTO dto = new PhysicsValDTO();
     //	//dto.setDiscriminatorValue(2);
@@ -554,7 +567,7 @@ public class TestDozzerMapping {
 
 	try {
 	    DataProducerDTO dto = new TestDozzerMapping().getDataProducerDTO();
-	    ejb.mergeExperimentResults(dto);
+	    ejb.persistExperimentResults(dto);
 	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();

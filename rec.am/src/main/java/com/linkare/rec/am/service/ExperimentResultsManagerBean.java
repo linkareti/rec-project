@@ -29,8 +29,8 @@ public class ExperimentResultsManagerBean implements ExperimentResultsManager {
     private EntityManager entityManager;
 
     @Override
-    public void mergeExperimentResults(DataProducerDTO experimentResult) throws RemoteException {
-	entityManager.merge(DozerBeanMapperSingletonWrapper.getInstance().map(experimentResult, DataProducer.class));
+    public void persistExperimentResults(DataProducerDTO experimentResult) throws RemoteException {
+	entityManager.persist(DozerBeanMapperSingletonWrapper.getInstance().map(experimentResult, DataProducer.class));
     }
 
 }

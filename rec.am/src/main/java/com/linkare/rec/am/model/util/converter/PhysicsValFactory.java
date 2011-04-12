@@ -1,7 +1,6 @@
 package com.linkare.rec.am.model.util.converter;
 
 import org.dozer.BeanFactory;
-import org.dozer.DozerBeanMapperSingletonWrapper;
 
 import com.linkare.rec.am.experiment.PhysicsValDTO;
 import com.linkare.rec.am.model.BooleanVal;

@@ -11,7 +11,6 @@ import org.dozer.MappingException;
 import org.dozer.loader.api.BeanMappingBuilder;
 import org.dozer.loader.api.TypeMappingOptions;
 
-import com.linkare.rec.am.experiment.ByteArrayValueDTO;
 import com.linkare.rec.am.experiment.ChannelAcquisitionConfigDTO;
 import com.linkare.rec.am.experiment.ColumnPhysicsValueDTO;
 import com.linkare.rec.am.experiment.DateTimeDTO;
@@ -21,7 +20,6 @@ import com.linkare.rec.am.experiment.ParameterConfigDTO;
 import com.linkare.rec.am.experiment.PhysicsValDTO;
 import com.linkare.rec.am.experiment.PhysicsValueDTO;
 import com.linkare.rec.am.experiment.SamplesPacketDTO;
-import com.linkare.rec.am.model.ByteArrayValue;
 import com.linkare.rec.am.model.ChannelAcquisitionConfig;
 import com.linkare.rec.am.model.ColumnPhysicsValue;
 import com.linkare.rec.am.model.DateTime;
@@ -192,17 +190,6 @@ public final class DozerBeanMapperSingletonWrapper implements Mapper {
 		@Override
 		protected void configure() {
 		    mapping(PhysicsValDTO.class, PhysicsVal.class, TypeMappingOptions.beanFactory(PhysicsValFactory.class.getName()));
-		}
-
-	    };
-
-	    builders.add(aux);
-
-	    aux = new BeanMappingBuilder() {
-
-		@Override
-		protected void configure() {
-		    mapping(ByteArrayValueDTO.class, ByteArrayValue.class);
 		}
 
 	    };

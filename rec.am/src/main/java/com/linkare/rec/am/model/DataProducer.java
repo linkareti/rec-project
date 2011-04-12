@@ -22,7 +22,7 @@ public class DataProducer extends DefaultDomainObject {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "KEY_HARDWARE_ACQUISITION_CONFIG", nullable = false, updatable = false)
     private HardwareAcquisitionConfig acqHeader;
 
@@ -35,8 +35,7 @@ public class DataProducer extends DefaultDomainObject {
     @Column(name = "USER")
     private String user;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "KEY_DATAPRODUCER", nullable = false, updatable = false)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "dataProducer")
     private List<SamplesPacket> samplesPacketMatrix;
 
     public DataProducer() {
@@ -72,6 +71,13 @@ public class DataProducer extends DefaultDomainObject {
 
     public void setSamplesPacketMatrix(List<SamplesPacket> samplesPacketMatrix) {
 	this.samplesPacketMatrix = samplesPacketMatrix;
+
+	if (samplesPacketMatrix != null) {
+	    for (final SamplesPacket samplesPacket : samplesPacketMatrix) {
+		samplesPacket.setDataProducer(this);
+	    }
+	}
+
     }
 
     public String getUser() {

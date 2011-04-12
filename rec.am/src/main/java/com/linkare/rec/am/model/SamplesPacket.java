@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,9 +29,12 @@ public class SamplesPacket extends DefaultDomainObject {
     @Column(name = "TOTAL_PACKETS")
     private int totalPackets;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "KEY_SAMPLES_PACKET", nullable = false, updatable = false)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "samplesPacket")
     private List<ColumnPhysicsValue> data;
+
+    @ManyToOne
+    @JoinColumn(name = "KEY_DATAPRODUCER", nullable = false, updatable = false)
+    private DataProducer dataProducer;
 
     @Embedded
     private DateTime timeStart = null;
@@ -60,6 +64,13 @@ public class SamplesPacket extends DefaultDomainObject {
 
     public void setData(List<ColumnPhysicsValue> data) {
 	this.data = data;
+
+	if (data != null) {
+	    for (final ColumnPhysicsValue columnPhysicsValue : data) {
+		columnPhysicsValue.setSamplesPacket(this);
+	    }
+	}
+
     }
 
     public DateTime getTimeStart() {
@@ -68,6 +79,14 @@ public class SamplesPacket extends DefaultDomainObject {
 
     public void setTimeStart(DateTime timeStart) {
 	this.timeStart = timeStart;
+    }
+
+    public DataProducer getDataProducer() {
+	return dataProducer;
+    }
+
+    public void setDataProducer(DataProducer dataProducer) {
+	this.dataProducer = dataProducer;
     }
 
 }
