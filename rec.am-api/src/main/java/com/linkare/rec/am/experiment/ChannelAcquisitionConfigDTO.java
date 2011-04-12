@@ -65,11 +65,11 @@ public class ChannelAcquisitionConfigDTO extends AbstractBaseDTO {
 	this.channelParameters = channelParameters;
     }
 
-    public Integer getTotalSamples() {
+    public int getTotalSamples() {
 	return totalSamples;
     }
 
-    public void setTotalSamples(Integer totalSamples) {
+    public void setTotalSamples(int totalSamples) {
 	this.totalSamples = totalSamples;
     }
 
