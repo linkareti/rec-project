@@ -28,6 +28,8 @@ public class DataProducerDTO extends AbstractBaseDTO {
 
     private List<SamplesPacketDTO> samplesPacketMatrix;
 
+    private byte[] samplesPacketMatrixSerialized;
+
     public DataProducerDTO() {
     }
 
@@ -71,6 +73,14 @@ public class DataProducerDTO extends AbstractBaseDTO {
 	this.user = user;
     }
 
+    public byte[] getSamplesPacketMatrixSerialized() {
+	return samplesPacketMatrixSerialized;
+    }
+
+    public void setSamplesPacketMatrixSerialized(byte[] samplesPacketMatrixSerialized) {
+	this.samplesPacketMatrixSerialized = samplesPacketMatrixSerialized;
+    }
+
     @Override
     public String toString() {
 	StringBuilder builder = new StringBuilder();
@@ -82,8 +92,6 @@ public class DataProducerDTO extends AbstractBaseDTO {
 	builder.append(oid);
 	builder.append(", user=");
 	builder.append(user);
-	builder.append(", samplesPacketMatrix=");
-	builder.append(samplesPacketMatrix);
 	builder.append("]");
 	return builder.toString();
     }

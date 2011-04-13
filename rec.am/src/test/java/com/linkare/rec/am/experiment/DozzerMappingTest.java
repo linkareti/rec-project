@@ -18,7 +18,6 @@ import com.linkare.rec.am.model.ByteArrayVal;
 import com.linkare.rec.am.model.ByteArrayValue;
 import com.linkare.rec.am.model.ByteVal;
 import com.linkare.rec.am.model.ChannelAcquisitionConfig;
-import com.linkare.rec.am.model.ColumnPhysicsValue;
 import com.linkare.rec.am.model.DataProducer;
 import com.linkare.rec.am.model.DateTime;
 import com.linkare.rec.am.model.DoubleVal;
@@ -29,13 +28,11 @@ import com.linkare.rec.am.model.IntVal;
 import com.linkare.rec.am.model.LongVal;
 import com.linkare.rec.am.model.ParameterConfig;
 import com.linkare.rec.am.model.PhysicsVal;
-import com.linkare.rec.am.model.PhysicsValue;
-import com.linkare.rec.am.model.SamplesPacket;
 import com.linkare.rec.am.model.Scale;
 import com.linkare.rec.am.model.ShortVal;
 import com.linkare.rec.am.model.util.converter.DozerBeanMapperSingletonWrapper;
 
-public class TestDozzerMapping {
+public class DozzerMappingTest {
 
     @Test
     public void convertToDatetimeTest() {
@@ -204,13 +201,6 @@ public class TestDozzerMapping {
 
     }
 
-    private ParameterConfigDTO getHardwareParameterConfigDTO() {
-	final ParameterConfigDTO dto = new ParameterConfigDTO();
-	dto.setParameterName("hparameterName");
-	dto.setParameterValue("hparameterValue");
-	return dto;
-    }
-
     //    private Collection<HardwareParameterConfigDTO> getHardwareParameterConfigDTOs() {
     //	return Arrays.asList(new HardwareParameterConfigDTO[] { getHardwareAcquisitionConfigDTO() });
     //    }
@@ -269,92 +259,12 @@ public class TestDozzerMapping {
 
     }
 
-    @Test
-    public void convertToSamplesPacketTest() {
-	final SamplesPacketDTO dto = getSamplesPacketDTO();
-
-	final SamplesPacket entity = DozerBeanMapperSingletonWrapper.getInstance().map(dto, SamplesPacket.class);
-
-	assertSamplesPacket(dto, entity);
-
-    }
-
-    private void assertSamplesPackets(final List<SamplesPacketDTO> dtos, final List<SamplesPacket> entities) {
-	Assert.assertEquals(dtos.size(), entities.size());
-	for (int i = 0; i < dtos.size(); i++) {
-	    assertSamplesPacket(dtos.get(i), entities.get(i));
-	}
-
-    }
-
-    private void assertSamplesPacket(final SamplesPacketDTO dto, final SamplesPacket entity) {
-	Assert.assertNotNull(entity);
-	Assert.assertEquals(dto.getPacketNumber(), entity.getPacketNumber());
-	Assert.assertEquals(dto.getTotalPackets(), entity.getTotalPackets());
-	assertColumnPhysicsValues(dto.getData(), entity.getData());
-	assertDatetime(dto.getTimeStart(), entity.getTimeStart());
-    }
-
-    @Test
-    public void convertToColumnPhysicsValueTest() {
-	final ColumnPhysicsValueDTO dto = getColumnPhysicsValueDTO();
-
-	final ColumnPhysicsValue entity = DozerBeanMapperSingletonWrapper.getInstance().map(dto, ColumnPhysicsValue.class);
-
-	assertColumnPhysicsValue(dto, entity);
-
-    }
-
-    private void assertColumnPhysicsValues(final List<ColumnPhysicsValueDTO> dtos, final List<ColumnPhysicsValue> entities) {
-	Assert.assertEquals(dtos.size(), entities.size());
-
-	for (int i = 0; i < dtos.size(); i++) {
-	    assertColumnPhysicsValue(dtos.get(i), entities.get(i));
-	}
-
-    }
-
-    private void assertColumnPhysicsValue(final ColumnPhysicsValueDTO dto, final ColumnPhysicsValue entity) {
-	Assert.assertNotNull(entity);
-	assertPhysicsValues(dto.getColumnValues(), entity.getColumnValues());
-    }
-
-    @Test
-    public void convertToPhysicsValueTest() {
-	final PhysicsValueDTO dto = getPhysicsValueDTO();
-
-	final PhysicsValue entity = DozerBeanMapperSingletonWrapper.getInstance().map(dto, PhysicsValue.class);
-
-	assertPhysicsValue(dto, entity);
-
-    }
-
-    private void assertPhysicsValues(final List<PhysicsValueDTO> dtos, final List<PhysicsValue> entities) {
-	Assert.assertEquals(dtos.size(), entities.size());
-
-	for (int i = 0; i < dtos.size(); i++) {
-	    assertPhysicsValue(dtos.get(i), entities.get(i));
-	}
-
-    }
-
-    private void assertPhysicsValue(final PhysicsValueDTO dto, final PhysicsValue entity) {
-	Assert.assertNotNull(entity);
-	Assert.assertEquals(dto.getAppliedMultiplier(), entity.getAppliedMultiplier());
-
-	assertPhysicalValType(entity.getError(), ByteVal.class);
-	Assert.assertEquals(dto.getValue().getValue(), ((ByteVal) entity.getError()).getValue());
-
-	assertPhysicalValType(entity.getValue(), ByteVal.class);
-	Assert.assertEquals(dto.getValue().getValue(), ((ByteVal) entity.getValue()).getValue());
-    }
-
     private void assertDataProducer(final DataProducerDTO dto, DataProducer entity) {
 	Assert.assertNotNull(entity);
 	assertHardwareAcquisitionTest(dto.getAcqHeader(), entity.getAcqHeader());
 	Assert.assertEquals(dto.getOid(), entity.getOid());
 	Assert.assertEquals(dto.getDataProducerName(), entity.getDataProducerName());
-	assertSamplesPackets(dto.getSamplesPacketMatrix(), entity.getSamplesPacketMatrix());
+	//	assertSamplesPackets(dto.getSamplesPacketMatrix(), entity.getSamplesPacketMatrix());
     }
 
     private DataProducerDTO getDataProducerDTO() {
@@ -566,7 +476,7 @@ public class TestDozzerMapping {
 	ExperimentResultsManager ejb = (ExperimentResultsManager) ic.lookup("java:global/rec.am/ExperimentResultsManagerBean");
 
 	try {
-	    DataProducerDTO dto = new TestDozzerMapping().getDataProducerDTO();
+	    DataProducerDTO dto = new DozzerMappingTest().getDataProducerDTO();
 	    ejb.persistExperimentResults(dto);
 	} catch (Exception e) {
 	    // TODO Auto-generated catch block

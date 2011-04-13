@@ -9,4 +9,6 @@ public interface ExperimentResultsManager extends Remote {
 
     public void persistExperimentResults(DataProducerDTO experimentResult) throws RemoteException;
 
+    public DataProducerDTO getExperimentResultByID(final Long id);
+
 }

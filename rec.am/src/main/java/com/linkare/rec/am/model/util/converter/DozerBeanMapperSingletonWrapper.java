@@ -10,23 +10,17 @@ import org.dozer.loader.api.BeanMappingBuilder;
 import org.dozer.loader.api.TypeMappingOptions;
 
 import com.linkare.rec.am.experiment.ChannelAcquisitionConfigDTO;
-import com.linkare.rec.am.experiment.ColumnPhysicsValueDTO;
 import com.linkare.rec.am.experiment.DateTimeDTO;
 import com.linkare.rec.am.experiment.FrequencyDTO;
 import com.linkare.rec.am.experiment.HardwareAcquisitionConfigDTO;
 import com.linkare.rec.am.experiment.ParameterConfigDTO;
 import com.linkare.rec.am.experiment.PhysicsValDTO;
-import com.linkare.rec.am.experiment.PhysicsValueDTO;
-import com.linkare.rec.am.experiment.SamplesPacketDTO;
 import com.linkare.rec.am.model.ChannelAcquisitionConfig;
-import com.linkare.rec.am.model.ColumnPhysicsValue;
 import com.linkare.rec.am.model.DateTime;
 import com.linkare.rec.am.model.Frequency;
 import com.linkare.rec.am.model.HardwareAcquisitionConfig;
 import com.linkare.rec.am.model.ParameterConfig;
 import com.linkare.rec.am.model.PhysicsVal;
-import com.linkare.rec.am.model.PhysicsValue;
-import com.linkare.rec.am.model.SamplesPacket;
 
 /**
  * 
@@ -95,17 +89,6 @@ public final class DozerBeanMapperSingletonWrapper implements Mapper {
 
 		@Override
 		protected void configure() {
-		    mapping(SamplesPacketDTO.class, SamplesPacket.class);
-		}
-
-	    };
-
-	    builders.add(aux);
-
-	    aux = new BeanMappingBuilder() {
-
-		@Override
-		protected void configure() {
 		    mapping(DateTimeDTO.class, DateTime.class);
 		}
 
@@ -140,28 +123,6 @@ public final class DozerBeanMapperSingletonWrapper implements Mapper {
 		@Override
 		protected void configure() {
 		    mapping(ChannelAcquisitionConfigDTO.class, ChannelAcquisitionConfig.class);
-		}
-
-	    };
-
-	    builders.add(aux);
-
-	    aux = new BeanMappingBuilder() {
-
-		@Override
-		protected void configure() {
-		    mapping(ColumnPhysicsValueDTO.class, ColumnPhysicsValue.class);
-		}
-
-	    };
-
-	    builders.add(aux);
-
-	    aux = new BeanMappingBuilder() {
-
-		@Override
-		protected void configure() {
-		    mapping(PhysicsValueDTO.class, PhysicsValue.class);
 		}
 
 	    };

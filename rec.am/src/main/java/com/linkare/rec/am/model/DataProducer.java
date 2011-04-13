@@ -1,12 +1,10 @@
 package com.linkare.rec.am.model;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,8 +33,9 @@ public class DataProducer extends DefaultDomainObject {
     @Column(name = "USER")
     private String user;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "dataProducer")
-    private List<SamplesPacket> samplesPacketMatrix;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "KEY_SAMPLES_PACKET_BLOB", updatable = false)
+    private SamplesPacketBlob serializedSamples;
 
     public DataProducer() {
     }
@@ -65,27 +64,30 @@ public class DataProducer extends DefaultDomainObject {
 	this.oid = oid;
     }
 
-    public List<SamplesPacket> getSamplesPacketMatrix() {
-	return samplesPacketMatrix;
-    }
-
-    public void setSamplesPacketMatrix(List<SamplesPacket> samplesPacketMatrix) {
-	this.samplesPacketMatrix = samplesPacketMatrix;
-
-	if (samplesPacketMatrix != null) {
-	    for (final SamplesPacket samplesPacket : samplesPacketMatrix) {
-		samplesPacket.setDataProducer(this);
-	    }
-	}
-
-    }
-
     public String getUser() {
 	return user;
     }
 
     public void setUser(String user) {
 	this.user = user;
+    }
+
+    public SamplesPacketBlob getSerializedSamples() {
+	return serializedSamples;
+    }
+
+    public void setSerializedSamples(SamplesPacketBlob serializedSamples) {
+	this.serializedSamples = serializedSamples;
+    }
+
+    public byte[] getSamplesPacketMatrixSerialized() {
+	return getSerializedSamples() != null ? getSerializedSamples().getSamplesPacketMatrixSerialized() : null;
+    }
+
+    public void setSamplesPacketMatrixSerialized(byte[] samplesPacketMatrixSerialized) {
+	final SamplesPacketBlob samplesPacketBlob = new SamplesPacketBlob();
+	samplesPacketBlob.setSamplesPacketMatrixSerialized(samplesPacketMatrixSerialized);
+	this.serializedSamples = samplesPacketBlob;
     }
 
 }

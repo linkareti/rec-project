@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
@@ -42,9 +41,6 @@ public class HardwareAcquisitionConfig extends DefaultDomainObject {
 
     @Column(name = "HARDWARE_UNIQUE_ID")
     private String hardwareUniqueID;
-
-    @OneToOne(mappedBy = "acqHeader")
-    private DataProducer recMultiCastDataProducer;
 
     //default constructor
     public HardwareAcquisitionConfig() {
@@ -117,14 +113,6 @@ public class HardwareAcquisitionConfig extends DefaultDomainObject {
 		parameterConfig.setHardwareAcquisitionConfig(this);
 	    }
 	}
-    }
-
-    public DataProducer getRecMultiCastDataProducer() {
-	return recMultiCastDataProducer;
-    }
-
-    public void setRecMultiCastDataProducer(DataProducer recMultiCastDataProducer) {
-	this.recMultiCastDataProducer = recMultiCastDataProducer;
     }
 
 }

@@ -42,7 +42,7 @@ public class ExperimentResultsManagerBean implements ExperimentResultsManager {
 		entity = DozerBeanMapperSingletonWrapper.getInstance().map(experimentResult, DataProducer.class);
 	    } finally {
 		final long time = System.currentTimeMillis() - start;
-		LOG.info(new StringBuilder("time to mapping DataProducer entity").append(" :").append(time).toString());
+		LOG.info(new StringBuilder("time spent mapping DataProducer entity").append(" :").append(time).toString());
 	    }
 
 	} else {
@@ -50,6 +50,20 @@ public class ExperimentResultsManagerBean implements ExperimentResultsManager {
 	}
 
 	entityManager.persist(entity);
+    }
+
+    //only for test purposes
+    public DataProducerDTO getExperimentResultByID(final Long id) {
+
+	if (id == null) {
+	    throw new NullPointerException("id cannot be null");
+	}
+
+	final DataProducer dataProducer = entityManager.find(DataProducer.class, id);
+
+	final DataProducerDTO dto = DozerBeanMapperSingletonWrapper.getInstance().map(dataProducer, DataProducerDTO.class);
+
+	return dto;
     }
 
 }
