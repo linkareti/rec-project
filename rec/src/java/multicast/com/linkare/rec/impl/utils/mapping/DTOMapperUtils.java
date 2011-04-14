@@ -4,38 +4,32 @@
  * Copyright 2009 Linkare TI. All rights reserved.
  * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
-package com.linkare.rec.impl.utils;
+package com.linkare.rec.impl.utils.mapping;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.naming.InitialContext;
-
-import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
-import com.linkare.rec.acquisition.NotAvailableException;
-import com.linkare.rec.am.ExperimentResultsManager;
-import com.linkare.rec.am.experiment.ChannelAcquisitionConfigDTO;
-import com.linkare.rec.am.experiment.ColumnPhysicsValueDTO;
-import com.linkare.rec.am.experiment.DataProducerDTO;
-import com.linkare.rec.am.experiment.DateTimeDTO;
-import com.linkare.rec.am.experiment.FrequencyDTO;
-import com.linkare.rec.am.experiment.FrequencyDefTypeEnum;
-import com.linkare.rec.am.experiment.HardwareAcquisitionConfigDTO;
-import com.linkare.rec.am.experiment.MultiplierEnum;
-import com.linkare.rec.am.experiment.ParameterConfigDTO;
-import com.linkare.rec.am.experiment.PhysicsValDTO;
-import com.linkare.rec.am.experiment.PhysicsValueDTO;
-import com.linkare.rec.am.experiment.PhysicsValueTypeEnum;
-import com.linkare.rec.am.experiment.SamplesPacketDTO;
-import com.linkare.rec.am.experiment.ScaleDTO;
+import com.linkare.rec.am.repository.ByteArrayValueDTO;
+import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
+import com.linkare.rec.am.repository.ColumnPhysicsValueDTO;
+import com.linkare.rec.am.repository.DataProducerDTO;
+import com.linkare.rec.am.repository.DateTimeDTO;
+import com.linkare.rec.am.repository.FrequencyDTO;
+import com.linkare.rec.am.repository.FrequencyDefTypeEnum;
+import com.linkare.rec.am.repository.HardwareAcquisitionConfigDTO;
+import com.linkare.rec.am.repository.MultiplierEnum;
+import com.linkare.rec.am.repository.ParameterConfigDTO;
+import com.linkare.rec.am.repository.PhysicsValDTO;
+import com.linkare.rec.am.repository.PhysicsValueDTO;
+import com.linkare.rec.am.repository.PhysicsValueTypeEnum;
+import com.linkare.rec.am.repository.SamplesPacketDTO;
+import com.linkare.rec.am.repository.ScaleDTO;
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.acquisition.SamplesPacket;
@@ -48,7 +42,7 @@ import com.linkare.rec.data.synch.Frequency;
 import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
 
 /**
- * Utils methods to convert form rec model to DTO.
+ * Utils methods to convert from rec model to DTO and DTO to rec model.
  * 
  * 
  * @author Artur Correia - Linkare TI
@@ -66,27 +60,49 @@ public final class DTOMapperUtils {
 	 * @param recMultiCastDataProducer
 	 * @param username
 	 * @return
-	 * @throws NotAvailableException
-	 * @throws NotAnAvailableSamplesPacketException
+	 * @throws DTOMappingException
 	 * 
 	 */
-	public static DataProducerDTO getDataProducerDTO(final ReCMultiCastDataProducer recMultiCastDataProducer,
-			final String username) throws NotAvailableException, NotAnAvailableSamplesPacketException {
+	public static DataProducerDTO mapToDataProducerDTO(final ReCMultiCastDataProducer recMultiCastDataProducer,
+			final String username) throws DTOMappingException {
 
-		DataProducerDTO result = null;
+		try {
 
-		if (recMultiCastDataProducer != null) {
-			result = new DataProducerDTO();
-			result.setAcqHeader(getHardwareAcquisitionConfigDTO(recMultiCastDataProducer.getAcquisitionHeader()));
-			result.setDataProducerName(recMultiCastDataProducer.getDataProducerName());
-			result.setOid(recMultiCastDataProducer.getOID());
-			result.setSamplesPacketMatrix(getSamplesPacketDTO(recMultiCastDataProducer.getSamples(0,
-					recMultiCastDataProducer.getMaxPacketNum())));
-			result.setUser(username);
+			DataProducerDTO result = null;
 
+			if (recMultiCastDataProducer != null) {
+				result = new DataProducerDTO();
+				result.setAcqHeader(getHardwareAcquisitionConfigDTO(recMultiCastDataProducer.getAcquisitionHeader()));
+				result.setDataProducerName(recMultiCastDataProducer.getDataProducerName());
+				result.setOid(recMultiCastDataProducer.getOID());
+
+				if (recMultiCastDataProducer.getSamplesPacketSource().getLargestNumPacket() == -1) {
+					List<SamplesPacketDTO> emptyList = Collections.emptyList();
+					result.setSamplesPacketMatrixSerialized(getSamplesPacketAsByteArray(emptyList));
+				} else {
+					result.setSamplesPacketMatrixSerialized(getSamplesPacketAsByteArray(getSamplesPacketDTO(recMultiCastDataProducer
+							.getSamples(0, recMultiCastDataProducer.getSamplesPacketSource().getLargestNumPacket()))));
+				}
+				result.setUser(username);
+			}
+
+			return result;
+
+		} catch (Exception e) {
+			throw new DTOMappingException(e);
 		}
 
-		return result;
+	}
+
+	private static byte[] getSamplesPacketAsByteArray(final List<SamplesPacketDTO> samplesPacketMatrix)
+			throws IOException {
+
+		final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		final ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+		objectOutputStream.writeObject(samplesPacketMatrix);
+		objectOutputStream.flush();
+		objectOutputStream.close();
+		return byteArrayOutputStream.toByteArray();
 	}
 
 	/**
@@ -396,15 +412,53 @@ public final class DTOMapperUtils {
 	 * @param defaultErrorValue
 	 * @return
 	 */
-	private static PhysicsValDTO getPhysicsValDTO(PhysicsVal value) {
+	private static PhysicsValDTO getPhysicsValDTO(PhysicsVal physicsVal) {
 		PhysicsValDTO result = null;
 
-		if (value != null) {
+		if (physicsVal != null) {
 			result = new PhysicsValDTO();
-			result.setValue(value);
-			result.setValueType(PhysicsValueTypeEnum.fromInt(value.getDiscriminator().getValue()));
+			result.setValueType(PhysicsValueTypeEnum.fromInt(physicsVal.getDiscriminator().getValue()));
+			result.setValue(getPhysicsValValue(physicsVal, result.getValueType()));
 		}
 
+		return result;
+	}
+
+	private static Object getPhysicsValValue(final PhysicsVal physicsVal, final PhysicsValueTypeEnum valueType) {
+		Object result = null;
+
+		switch (valueType) {
+		case BOOLEAN_VAL:
+			result = physicsVal.isBooleanValue();
+			break;
+		case BYTE_VAL:
+			result = physicsVal.getByteValue();
+			break;
+		case SHORT_VAL:
+			result = physicsVal.getShortValue();
+			break;
+		case INT_VAL:
+			result = physicsVal.getIntValue();
+			break;
+		case LONG_VAL:
+			result = physicsVal.getLongValue();
+			break;
+		case FLOAT_VAL:
+			result = physicsVal.getFloatValue();
+			break;
+		case DOUBLE_VAL:
+			result = physicsVal.getDoubleValue();
+			break;
+		case BYTEARRAY_VAL:
+			ByteArrayValueDTO dto = null;
+			if (physicsVal.getByteArrayValue() != null) {
+				dto = new ByteArrayValueDTO();
+				dto.setData(physicsVal.getByteArrayValue().getData());
+				dto.setMimeType(physicsVal.getByteArrayValue().getMimeType());
+			}
+			result = dto;
+			break;
+		}
 		return result;
 	}
 
@@ -425,72 +479,147 @@ public final class DTOMapperUtils {
 		return result;
 	}
 
+	/**
+	 * @param experimentResultByOID
+	 * @return
+	 */
+	public static ReCMultiCastDataProducer mapToRecMultiCastDataProducer(DataProducerDTO experimentResultByOID) {
+		return null;
+	}
+
 	// Only for test purposes
-	public static void main(String[] args) throws Exception {
-
-		try {
-
-			final File f = new File(
-					"/home/elab/ReC7.0/multicast/DataProducers/EXP_ANGULAR_STAMP_V1.0/DataBuffer_Wed_Nov_21_18_28_57_GMT_2007.ser");
-
-			final InitialContext ic = new InitialContext();
-
-			final ExperimentResultsManager ejb = (ExperimentResultsManager) ic
-					.lookup("java:global/rec.am/ExperimentResultsManagerBean");
-
-			final List<ReCMultiCastDataProducer> recMultiCastDataProducers = getRecMultiCastDataProducers(f);
-
-			for (final ReCMultiCastDataProducer reCMultiCastDataProducer2 : recMultiCastDataProducers) {
-				ejb.mergeExperimentResults(DTOMapperUtils.getDataProducerDTO(reCMultiCastDataProducer2, "username"));
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static List<ReCMultiCastDataProducer> getRecMultiCastDataProducers(final File f) throws Exception {
-
-		try {
-
-			List<ReCMultiCastDataProducer> result = Collections.emptyList();
-			if (f.isFile()) {
-				result = new ArrayList<ReCMultiCastDataProducer>(1);
-				result.add(getRecMultiCastDataProducer(f));
-			} else if (f.isDirectory()) {
-				File[] listFiles = f.listFiles();
-				result = new ArrayList<ReCMultiCastDataProducer>(listFiles.length);
-				for (final File file : listFiles) {
-					if (file.isFile() && file.getName().endsWith(".ser")) {
-						result.add(getRecMultiCastDataProducer(file));
-					}
-				}
-			}
-			return result;
-
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	private static ReCMultiCastDataProducer getRecMultiCastDataProducer(final File f) throws FileNotFoundException,
-			IOException, ClassNotFoundException {
-
-		if (!f.isFile()) {
-			throw new IllegalArgumentException("invalid file.");
-		}
-
-		ObjectInputStream objectInputStream = null;
-		try {
-			objectInputStream = new ObjectInputStream(new FileInputStream(f));
-			return (ReCMultiCastDataProducer) objectInputStream.readObject();
-		} finally {
-			try {
-				objectInputStream.close();
-			} catch (IOException io) {
-				io.printStackTrace();
-			}
-		}
-	}
+	// public static void main(String[] args) throws Exception {
+	//
+	// final ExperimentResultsManager lookup = lookup();
+	// final DataProducerDTO experimentResultByID =
+	// lookup.getExperimentResultByID(1L);
+	// System.out.println(experimentResultByID);
+	// System.out.println("experimentResultByID.getSamplesPacketMatrixSerialized().length: "
+	// + experimentResultByID.getSamplesPacketMatrixSerialized().length);
+	//
+	// final List<SamplesPacketDTO> samples =
+	// getSamplesPacket(experimentResultByID.getSamplesPacketMatrixSerialized());
+	// System.out.println(samples.size());
+	//
+	// // testExperimentResultsPersistence();
+	//
+	// }
+	//
+	// private static ExperimentResultsManager lookup() throws NamingException {
+	// final InitialContext ic = new InitialContext();
+	//
+	// return (ExperimentResultsManager)
+	// ic.lookup("java:global/rec.am/ExperimentResultsManagerBean");
+	// }
+	//
+	// private static void testExperimentResultsPersistence() {
+	// try {
+	//
+	// final File f = new
+	// File("/home/elab/ReC7.0/multicast/ELAB_OPTICA_DSPIC_V1.0");
+	//
+	// final ExperimentResultsManager ejb = lookup();
+	//
+	// final List<ReCMultiCastDataProducer> recMultiCastDataProducers =
+	// getRecMultiCastDataProducers(f);
+	//
+	// for (final ReCMultiCastDataProducer reCMultiCastDataProducer2 :
+	// recMultiCastDataProducers) {
+	//
+	// final DataProducerDTO dataProducerDTO =
+	// DTOMapperUtils.getDataProducerDTO(reCMultiCastDataProducer2,
+	// "username");
+	// System.out.println("sending dataproducer:  " +
+	// reCMultiCastDataProducer2.getOID());
+	// System.out
+	// .println("samples byte[] leght: " +
+	// dataProducerDTO.getSamplesPacketMatrixSerialized().length);
+	// System.out.println("dataProducerDTO.getAcqHeader()" +
+	// dataProducerDTO.getAcqHeader());
+	// try {
+	// ejb.persistExperimentResults(dataProducerDTO);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	//
+	// }
+	//
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
+	//
+	// private static List<ReCMultiCastDataProducer>
+	// getRecMultiCastDataProducers(final File f) throws Exception {
+	//
+	// try {
+	//
+	// List<ReCMultiCastDataProducer> result = Collections.emptyList();
+	// if (f.isFile()) {
+	// result = new ArrayList<ReCMultiCastDataProducer>(1);
+	// result.add(getRecMultiCastDataProducer(f));
+	// } else if (f.isDirectory()) {
+	// File[] listFiles = f.listFiles();
+	// result = new ArrayList<ReCMultiCastDataProducer>(listFiles.length);
+	// for (final File file : listFiles) {
+	// if (file.isFile() && file.getName().indexOf("Samples") == -1
+	// && file.getName().startsWith("DataBuffer")) {
+	// result.add(getRecMultiCastDataProducer(file));
+	// }
+	// }
+	// }
+	// return result;
+	//
+	// } catch (Exception e) {
+	// throw e;
+	// }
+	// }
+	//
+	// private static ReCMultiCastDataProducer getRecMultiCastDataProducer(final
+	// File f) throws Exception {
+	//
+	// if (!f.isFile()) {
+	// throw new IllegalArgumentException("invalid file.");
+	// }
+	//
+	// ObjectInputStream objectInputStream = null;
+	// try {
+	// objectInputStream = new ObjectInputStream(new FileInputStream(f));
+	//
+	// return (ReCMultiCastDataProducer) objectInputStream.readObject();
+	// } catch (Exception e) {
+	// System.out.println(f);
+	// System.out.println(e);
+	// throw e;
+	// } finally {
+	// try {
+	// if (objectInputStream != null) {
+	// objectInputStream.close();
+	// }
+	// } catch (IOException io) {
+	// io.printStackTrace();
+	// }
+	// }
+	// }
+	//
+	// private static List<SamplesPacketDTO> getSamplesPacket(final byte[]
+	// samples) throws Exception {
+	//
+	// ObjectInputStream objectInputStream = null;
+	// try {
+	// objectInputStream = new ObjectInputStream(new
+	// ByteArrayInputStream(samples));
+	//
+	// return (List<SamplesPacketDTO>) objectInputStream.readObject();
+	// } finally {
+	// try {
+	// if (objectInputStream != null) {
+	// objectInputStream.close();
+	// }
+	// } catch (IOException io) {
+	// io.printStackTrace();
+	// }
+	// }
+	// }
 
 }
