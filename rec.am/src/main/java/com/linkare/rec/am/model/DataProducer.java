@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,7 +18,12 @@ import com.linkare.commons.jpa.DefaultDomainObject;
  */
 @Entity
 @Table(name = "DATA_PRODUCER")
+@NamedQueries({ @NamedQuery(name = DataProducer.FIND_BY_OID_QUERYNAME, query = DataProducer.FIND_BY_OID_QUERY) })
 public class DataProducer extends DefaultDomainObject {
+
+    public static final String QUERY_PARAM_OID = "oid";
+    public static final String FIND_BY_OID_QUERYNAME = "DataProducer.findByOID";
+    public static final String FIND_BY_OID_QUERY = "Select dp from DataProducer dp where dp.oid like :" + QUERY_PARAM_OID;
 
     private static final long serialVersionUID = 1L;
 
@@ -27,7 +34,7 @@ public class DataProducer extends DefaultDomainObject {
     @Column(name = "DATA_PRODUCER_NAME")
     private String dataProducerName;
 
-    @Column(name = "OID", unique = true)
+    @Column(name = "OID", unique = true, nullable = false)
     private String oid;
 
     @Column(name = "USER")

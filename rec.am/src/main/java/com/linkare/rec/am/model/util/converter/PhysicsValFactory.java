@@ -2,7 +2,6 @@ package com.linkare.rec.am.model.util.converter;
 
 import org.dozer.BeanFactory;
 
-import com.linkare.rec.am.experiment.PhysicsValDTO;
 import com.linkare.rec.am.model.BooleanVal;
 import com.linkare.rec.am.model.ByteArrayVal;
 import com.linkare.rec.am.model.ByteArrayValue;
@@ -12,6 +11,7 @@ import com.linkare.rec.am.model.FloatVal;
 import com.linkare.rec.am.model.IntVal;
 import com.linkare.rec.am.model.LongVal;
 import com.linkare.rec.am.model.ShortVal;
+import com.linkare.rec.am.repository.PhysicsValDTO;
 
 public final class PhysicsValFactory implements BeanFactory {
 

@@ -12,7 +12,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.linkare.rec.am.ExperimentResultsManager;
+import com.linkare.rec.am.RepositoryFacade;
 import com.linkare.rec.am.model.BooleanVal;
 import com.linkare.rec.am.model.ByteArrayVal;
 import com.linkare.rec.am.model.ByteArrayValue;
@@ -31,6 +31,21 @@ import com.linkare.rec.am.model.PhysicsVal;
 import com.linkare.rec.am.model.Scale;
 import com.linkare.rec.am.model.ShortVal;
 import com.linkare.rec.am.model.util.converter.DozerBeanMapperSingletonWrapper;
+import com.linkare.rec.am.repository.ByteArrayValueDTO;
+import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
+import com.linkare.rec.am.repository.ColumnPhysicsValueDTO;
+import com.linkare.rec.am.repository.DataProducerDTO;
+import com.linkare.rec.am.repository.DateTimeDTO;
+import com.linkare.rec.am.repository.FrequencyDTO;
+import com.linkare.rec.am.repository.FrequencyDefTypeEnum;
+import com.linkare.rec.am.repository.HardwareAcquisitionConfigDTO;
+import com.linkare.rec.am.repository.MultiplierEnum;
+import com.linkare.rec.am.repository.ParameterConfigDTO;
+import com.linkare.rec.am.repository.PhysicsValDTO;
+import com.linkare.rec.am.repository.PhysicsValueDTO;
+import com.linkare.rec.am.repository.PhysicsValueTypeEnum;
+import com.linkare.rec.am.repository.SamplesPacketDTO;
+import com.linkare.rec.am.repository.ScaleDTO;
 
 public class DozzerMappingTest {
 
@@ -473,7 +488,7 @@ public class DozzerMappingTest {
     public static void main(String[] args) throws NamingException, RemoteException {
 	InitialContext ic = new InitialContext();
 
-	ExperimentResultsManager ejb = (ExperimentResultsManager) ic.lookup("java:global/rec.am/ExperimentResultsManagerBean");
+	RepositoryFacade ejb = (RepositoryFacade) ic.lookup("java:global/rec.am/ExperimentResultsManagerBean");
 
 	try {
 	    DataProducerDTO dto = new DozzerMappingTest().getDataProducerDTO();

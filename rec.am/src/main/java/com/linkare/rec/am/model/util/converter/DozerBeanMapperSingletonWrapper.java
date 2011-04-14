@@ -9,18 +9,18 @@ import org.dozer.MappingException;
 import org.dozer.loader.api.BeanMappingBuilder;
 import org.dozer.loader.api.TypeMappingOptions;
 
-import com.linkare.rec.am.experiment.ChannelAcquisitionConfigDTO;
-import com.linkare.rec.am.experiment.DateTimeDTO;
-import com.linkare.rec.am.experiment.FrequencyDTO;
-import com.linkare.rec.am.experiment.HardwareAcquisitionConfigDTO;
-import com.linkare.rec.am.experiment.ParameterConfigDTO;
-import com.linkare.rec.am.experiment.PhysicsValDTO;
 import com.linkare.rec.am.model.ChannelAcquisitionConfig;
 import com.linkare.rec.am.model.DateTime;
 import com.linkare.rec.am.model.Frequency;
 import com.linkare.rec.am.model.HardwareAcquisitionConfig;
 import com.linkare.rec.am.model.ParameterConfig;
 import com.linkare.rec.am.model.PhysicsVal;
+import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
+import com.linkare.rec.am.repository.DateTimeDTO;
+import com.linkare.rec.am.repository.FrequencyDTO;
+import com.linkare.rec.am.repository.HardwareAcquisitionConfigDTO;
+import com.linkare.rec.am.repository.ParameterConfigDTO;
+import com.linkare.rec.am.repository.PhysicsValDTO;
 
 /**
  * 
@@ -47,23 +47,41 @@ public final class DozerBeanMapperSingletonWrapper implements Mapper {
     }
 
     @Override
-    public <T> T map(Object arg0, Class<T> arg1) throws MappingException {
-	return mapper.map(arg0, arg1);
+    public <T> T map(Object arg0, Class<T> arg1) {
+	try {
+	    return mapper.map(arg0, arg1);
+	} catch (MappingException e) {
+	    throw new RecMappingException(e);
+	}
+
     }
 
     @Override
-    public void map(Object arg0, Object arg1) throws MappingException {
-	mapper.map(arg0, arg1);
+    public void map(Object arg0, Object arg1) {
+	try {
+	    mapper.map(arg0, arg1);
+	} catch (MappingException e) {
+	    throw new RecMappingException(e);
+	}
+
     }
 
     @Override
     public <T> T map(Object arg0, Class<T> arg1, String arg2) throws MappingException {
-	return mapper.map(arg0, arg1);
+	try {
+	    return mapper.map(arg0, arg1);
+	} catch (MappingException e) {
+	    throw new RecMappingException(e);
+	}
     }
 
     @Override
     public void map(Object arg0, Object arg1, String arg2) throws MappingException {
-	mapper.map(arg0, arg1);
+	try {
+	    mapper.map(arg0, arg1);
+	} catch (MappingException e) {
+	    throw new RecMappingException(e);
+	}
     }
 
     private final static class DozerBuildersRegistry {

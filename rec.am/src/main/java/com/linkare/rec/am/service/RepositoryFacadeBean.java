@@ -1,6 +1,7 @@
 package com.linkare.rec.am.service;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -11,30 +12,36 @@ import javax.ejb.TransactionManagementType;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.linkare.rec.am.ExperimentResultsManager;
-import com.linkare.rec.am.experiment.DataProducerDTO;
+import com.linkare.rec.am.RepositoryFacade;
 import com.linkare.rec.am.model.DataProducer;
 import com.linkare.rec.am.model.util.converter.DozerBeanMapperSingletonWrapper;
+import com.linkare.rec.am.repository.DataProducerDTO;
 import com.linkare.rec.am.service.interceptor.TracingInterceptor;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Remote(ExperimentResultsManager.class)
+@Remote(RepositoryFacade.class)
 @Interceptors({ TracingInterceptor.class })
-public class ExperimentResultsManagerBean implements ExperimentResultsManager {
+public class RepositoryFacadeBean implements RepositoryFacade {
 
-    private static final Log LOG = LogFactory.getLog(ExperimentResultsManagerBean.class);
+    private static final Log LOG = LogFactory.getLog(RepositoryFacadeBean.class);
 
     @PersistenceContext(unitName = "AllocationManagerPU")
     private EntityManager entityManager;
 
     @Override
     public void persistExperimentResults(DataProducerDTO experimentResult) throws RemoteException {
+
+	if (experimentResult == null) {
+	    throw new NullPointerException("experiment cannot be null");
+	}
+
 	final DataProducer entity;
 	if (LOG.isInfoEnabled()) {
 	    final long start = System.currentTimeMillis();
@@ -52,18 +59,23 @@ public class ExperimentResultsManagerBean implements ExperimentResultsManager {
 	entityManager.persist(entity);
     }
 
-    //only for test purposes
-    public DataProducerDTO getExperimentResultByID(final Long id) {
+    public DataProducerDTO getExperimentResultByOID(final String oid) throws RemoteException {
 
-	if (id == null) {
-	    throw new NullPointerException("id cannot be null");
+	if (oid == null) {
+	    throw new NullPointerException("oid cannot be null");
 	}
 
-	final DataProducer dataProducer = entityManager.find(DataProducer.class, id);
+	final TypedQuery<DataProducer> query = entityManager.createNamedQuery(DataProducer.FIND_BY_OID_QUERYNAME, DataProducer.class)
+							    .setParameter(DataProducer.QUERY_PARAM_OID, oid);
 
-	final DataProducerDTO dto = DozerBeanMapperSingletonWrapper.getInstance().map(dataProducer, DataProducerDTO.class);
+	final List<DataProducer> dataProducers = query.getResultList();
 
-	return dto;
+	if (dataProducers.size() > 0) {
+	    return DozerBeanMapperSingletonWrapper.getInstance().map(dataProducers.get(0), DataProducerDTO.class);
+	} else {
+	    return null;
+	}
+
     }
 
 }

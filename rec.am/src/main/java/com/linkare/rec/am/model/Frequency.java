@@ -11,8 +11,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
-import com.linkare.rec.am.experiment.FrequencyDefTypeEnum;
-import com.linkare.rec.am.experiment.MultiplierEnum;
+import com.linkare.rec.am.repository.FrequencyDefTypeEnum;
+import com.linkare.rec.am.repository.MultiplierEnum;
 
 /**
  * 

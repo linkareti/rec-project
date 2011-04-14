@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
-import com.linkare.rec.am.experiment.MultiplierEnum;
+import com.linkare.rec.am.repository.MultiplierEnum;
 
 /**
  * 
