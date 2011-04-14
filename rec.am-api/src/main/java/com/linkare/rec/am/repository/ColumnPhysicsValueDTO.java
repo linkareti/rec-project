@@ -1,4 +1,4 @@
-package com.linkare.rec.am.experiment;
+package com.linkare.rec.am.repository;
 
 import java.util.List;
 
