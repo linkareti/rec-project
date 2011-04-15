@@ -12,7 +12,6 @@ import javax.ejb.TransactionManagementType;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,10 +64,11 @@ public class RepositoryFacadeBean implements RepositoryFacade {
 	    throw new NullPointerException("oid cannot be null");
 	}
 
-	final TypedQuery<DataProducer> query = entityManager.createNamedQuery(DataProducer.FIND_BY_OID_QUERYNAME, DataProducer.class)
-							    .setParameter(DataProducer.QUERY_PARAM_OID, oid);
+	final javax.persistence.Query query = entityManager.createNamedQuery(DataProducer.FIND_BY_OID_QUERYNAME)
+							   .setParameter(DataProducer.QUERY_PARAM_OID, oid);
 
-	final List<DataProducer> dataProducers = query.getResultList();
+	@SuppressWarnings("unchecked")
+	final List<DataProducer> dataProducers = (List<DataProducer>) query.getResultList();
 
 	if (dataProducers.size() > 0) {
 	    return DozerBeanMapperSingletonWrapper.getInstance().map(dataProducers.get(0), DataProducerDTO.class);
