@@ -6,8 +6,12 @@
  */
 package com.linkare.rec.impl.utils.mapping;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,6 +19,12 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
+import com.linkare.rec.acquisition.NotAvailableException;
+import com.linkare.rec.am.RepositoryFacade;
 import com.linkare.rec.am.repository.ByteArrayValueDTO;
 import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
 import com.linkare.rec.am.repository.ColumnPhysicsValueDTO;
@@ -30,6 +40,8 @@ import com.linkare.rec.am.repository.PhysicsValueDTO;
 import com.linkare.rec.am.repository.PhysicsValueTypeEnum;
 import com.linkare.rec.am.repository.SamplesPacketDTO;
 import com.linkare.rec.am.repository.ScaleDTO;
+import com.linkare.rec.data.Multiplier;
+import com.linkare.rec.data.acquisition.ByteArrayValue;
 import com.linkare.rec.data.acquisition.PhysicsVal;
 import com.linkare.rec.data.acquisition.PhysicsValue;
 import com.linkare.rec.data.acquisition.SamplesPacket;
@@ -39,6 +51,9 @@ import com.linkare.rec.data.config.ParameterConfig;
 import com.linkare.rec.data.metadata.Scale;
 import com.linkare.rec.data.synch.DateTime;
 import com.linkare.rec.data.synch.Frequency;
+import com.linkare.rec.data.synch.FrequencyDefType;
+import com.linkare.rec.data.synch.Time;
+import com.linkare.rec.impl.data.SamplesPacketMatrix;
 import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
 
 /**
@@ -76,19 +91,25 @@ public final class DTOMapperUtils {
 				result.setDataProducerName(recMultiCastDataProducer.getDataProducerName());
 				result.setOid(recMultiCastDataProducer.getOID());
 
-				if (recMultiCastDataProducer.getSamplesPacketSource().getLargestNumPacket() == -1) {
-					List<SamplesPacketDTO> emptyList = Collections.emptyList();
+				final int largestNumPacket = recMultiCastDataProducer.getMaxPacketNum();
+
+				if (largestNumPacket == -1) {
+					final List<SamplesPacketDTO> emptyList = Collections.emptyList();
 					result.setSamplesPacketMatrixSerialized(getSamplesPacketAsByteArray(emptyList));
 				} else {
 					result.setSamplesPacketMatrixSerialized(getSamplesPacketAsByteArray(getSamplesPacketDTO(recMultiCastDataProducer
-							.getSamples(0, recMultiCastDataProducer.getSamplesPacketSource().getLargestNumPacket()))));
+							.getSamples(0, largestNumPacket))));
 				}
 				result.setUser(username);
 			}
 
 			return result;
 
-		} catch (Exception e) {
+		} catch (IOException e) {
+			throw new DTOMappingException(e);
+		} catch (NotAnAvailableSamplesPacketException e) {
+			throw new DTOMappingException(e);
+		} catch (NotAvailableException e) {
 			throw new DTOMappingException(e);
 		}
 
@@ -103,6 +124,19 @@ public final class DTOMapperUtils {
 		objectOutputStream.flush();
 		objectOutputStream.close();
 		return byteArrayOutputStream.toByteArray();
+	}
+
+	@SuppressWarnings("unchecked")
+	private static List<SamplesPacketDTO> getListFromByteArray(final byte[] samples) throws IOException,
+			ClassNotFoundException {
+		List<SamplesPacketDTO> result = Collections.emptyList();
+		if (samples != null) {
+			final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(samples);
+			final ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+			result = (List<SamplesPacketDTO>) objectInputStream.readObject();
+			objectInputStream.close();
+		}
+		return result;
 	}
 
 	/**
@@ -482,144 +516,456 @@ public final class DTOMapperUtils {
 	/**
 	 * @param experimentResultByOID
 	 * @return
+	 * @throws DTOMappingException
 	 */
-	public static ReCMultiCastDataProducer mapToRecMultiCastDataProducer(DataProducerDTO experimentResultByOID) {
-		return null;
+	public static ReCMultiCastDataProducer mapToRecMultiCastDataProducer(final DataProducerDTO experimentResultByOID)
+			throws DTOMappingException {
+
+		ReCMultiCastDataProducer result = null;
+		if (experimentResultByOID != null) {
+			result = new ReCMultiCastDataProducer();
+			result.setAcquisitionHeader(getHardwareAcquisitionConfig(experimentResultByOID.getAcqHeader()));
+			result.setDataProducerName(experimentResultByOID.getDataProducerName());
+			result.setOID(experimentResultByOID.getOid());
+
+			experimentResultByOID.getSamplesPacketMatrix();
+
+			List<SamplesPacketDTO> listOfSamples = Collections.emptyList();
+			try {
+				listOfSamples = getListFromByteArray(experimentResultByOID.getSamplesPacketMatrixSerialized());
+			} catch (IOException e) {
+				throw new DTOMappingException(e);
+			} catch (ClassNotFoundException e) {
+				throw new DTOMappingException(e);
+			}
+
+			result.setSamplesPacketMatrix(new SamplesPacketMatrix(getSamplesPacket(listOfSamples)));
+
+			// FIXME: what i have to do with user ?????
+			experimentResultByOID.getUser();
+		}
+
+		return result;
+	}
+
+	private static SamplesPacket[] getSamplesPacket(final List<SamplesPacketDTO> listOfDtos) {
+		List<SamplesPacket> result = Collections.emptyList();
+		if (listOfDtos != null && listOfDtos.size() > 0) {
+			result = new ArrayList<SamplesPacket>(listOfDtos.size());
+			for (final SamplesPacketDTO samplesPacketDTO : listOfDtos) {
+				result.add(getSamplesPacket(samplesPacketDTO));
+			}
+		}
+		return result.toArray(new SamplesPacket[0]);
+
+	}
+
+	/**
+	 * @param samplesPacketDTO
+	 * @return
+	 */
+	private static SamplesPacket getSamplesPacket(final SamplesPacketDTO samplesPacketDTO) {
+		SamplesPacket result = null;
+		if (samplesPacketDTO != null) {
+			result = new SamplesPacket();
+			result.setData(getPhysicsValues(samplesPacketDTO.getData()));
+			result.setPacketNumber(samplesPacketDTO.getPacketNumber());
+			result.setTimeStart(getDateTime(samplesPacketDTO.getTimeStart()));
+			result.setTotalPackets(samplesPacketDTO.getTotalPackets());
+		}
+
+		return result;
+	}
+
+	private static PhysicsValue[][] getPhysicsValues(final List<ColumnPhysicsValueDTO> dtos) {
+		PhysicsValue[][] result = new PhysicsValue[0][0];
+		if (dtos != null && dtos.size() > 0 && dtos.get(0) != null && dtos.get(0).getColumnValues() != null) {
+
+			result = new PhysicsValue[dtos.size()][dtos.get(0).getColumnValues().size()];
+
+			for (int i = 0; i < dtos.size(); i++) {
+				result[i] = getPhysicsValuesColumnAsArray(dtos.get(i).getColumnValues());
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * @param columnValues
+	 * @return
+	 */
+	private static PhysicsValue[] getPhysicsValuesColumnAsArray(final List<PhysicsValueDTO> columnValues) {
+		List<PhysicsValue> result = Collections.emptyList();
+
+		if (columnValues != null && columnValues.size() > 0) {
+			final List<PhysicsValue> auxList = new ArrayList<PhysicsValue>(columnValues.size());
+			for (final PhysicsValueDTO physicsValueDTO : columnValues) {
+				auxList.add(getPhysicValue(physicsValueDTO));
+			}
+		}
+
+		return result.toArray(new PhysicsValue[0]);
+	}
+
+	/**
+	 * @param physicsValueDTO
+	 * @return
+	 */
+	private static PhysicsValue getPhysicValue(final PhysicsValueDTO physicsValueDTO) {
+		PhysicsValue result = null;
+		if (physicsValueDTO != null) {
+			result = new PhysicsValue();
+			result.setAppliedMultiplier(new Multiplier(physicsValueDTO.getAppliedMultiplier().getCode()));
+			result.setError(getPhysicsVal(physicsValueDTO.getError()));
+			result.setValue(getPhysicsVal(physicsValueDTO.getValue()));
+		}
+
+		return result;
+	}
+
+	/**
+	 * @param acqHeader
+	 * @return
+	 */
+	private static HardwareAcquisitionConfig getHardwareAcquisitionConfig(final HardwareAcquisitionConfigDTO acqHeader) {
+		HardwareAcquisitionConfig result = null;
+		if (acqHeader != null) {
+			result = new HardwareAcquisitionConfig();
+			result.setChannelsConfig(getChannelsAcquistionConfigs(acqHeader.getChannelsConfig()));
+			result.setFamiliarName(acqHeader.getFamiliarName());
+			result.setSelectedFrequency(getFrequency(acqHeader.getFrequency()));
+			result.setSelectedHardwareParameters(getParameterConfig(acqHeader.getHardwareParameters()));
+			result.setHardwareUniqueID(acqHeader.getHardwareUniqueID());
+			result.setTimeStart(getDateTime(acqHeader.getTimeStart()));
+			result.setTotalSamples(acqHeader.getTotalSamples());
+		}
+
+		return result;
+	}
+
+	/**
+	 * @param timeStart
+	 * @return
+	 */
+	private static DateTime getDateTime(final DateTimeDTO timeStart) {
+
+		DateTime result = null;
+		if (timeStart != null) {
+			result = new DateTime();
+
+			if (timeStart.getDate() != null) {
+				final Calendar calendarAux = Calendar.getInstance();
+				calendarAux.setTime(timeStart.getDate());
+				com.linkare.rec.data.synch.Date recDate = new com.linkare.rec.data.synch.Date(calendarAux);
+				result.setDate(recDate);
+			}
+
+			final Time time = new Time(timeStart.getPicos(), timeStart.getNanos(), timeStart.getMicros(),
+					timeStart.getMilis(), timeStart.getSeconds(), timeStart.getMinutes(), timeStart.getHours());
+			result.setTime(time);
+
+		}
+
+		return result;
+	}
+
+	/**
+	 * @param hardwareParameters
+	 * @return
+	 */
+	private static ParameterConfig[] getParameterConfig(final List<ParameterConfigDTO> hardwareParameters) {
+		List<ParameterConfig> result = Collections.emptyList();
+		if (hardwareParameters != null && hardwareParameters.size() > 0) {
+			final List<ParameterConfig> auxCollection = new ArrayList<ParameterConfig>(hardwareParameters.size());
+			for (final ParameterConfigDTO parameterConfigDTO : hardwareParameters) {
+				auxCollection.add(getParameterConfig(parameterConfigDTO));
+			}
+		}
+
+		return result.toArray(new ParameterConfig[0]);
+	}
+
+	/**
+	 * @param parameterConfigDTO
+	 * @return
+	 */
+	private static ParameterConfig getParameterConfig(final ParameterConfigDTO parameterConfigDTO) {
+		ParameterConfig result = null;
+		if (parameterConfigDTO != null) {
+			result = new ParameterConfig();
+			result.setParameterName(parameterConfigDTO.getParameterName());
+			result.setParameterValue(parameterConfigDTO.getParameterValue());
+		}
+		return result;
+	}
+
+	/**
+	 * @param frequency
+	 * @return
+	 */
+	private static Frequency getFrequency(FrequencyDTO frequency) {
+		Frequency result = null;
+
+		if (frequency != null) {
+			result = new Frequency();
+			result.setFrequency(frequency.getFrequency());
+
+			final FrequencyDefType frequencyDefType = new FrequencyDefType();
+			frequencyDefType.setValue(frequency.getFrequencyDefType().getCode());
+			result.setFrequencyDefType(frequencyDefType);
+
+			result.setMultiplier(new Multiplier(frequency.getAppliedMultiplier().getCode()));
+		}
+
+		return result;
+	}
+
+	/**
+	 * @param channelsConfig
+	 * @return
+	 */
+	private static ChannelAcquisitionConfig[] getChannelsAcquistionConfigs(
+			List<ChannelAcquisitionConfigDTO> channelsConfig) {
+		List<ChannelAcquisitionConfig> result = Collections.emptyList();
+		if (channelsConfig != null && channelsConfig.size() > 0) {
+			final List<ChannelAcquisitionConfig> auxCollection = new ArrayList<ChannelAcquisitionConfig>(
+					channelsConfig.size());
+			for (final ChannelAcquisitionConfigDTO channelAcquisitionConfigDTO : channelsConfig) {
+				auxCollection.add(getChannelAcquisitionConfig(channelAcquisitionConfigDTO));
+			}
+		}
+
+		return result.toArray(new ChannelAcquisitionConfig[0]);
+	}
+
+	/**
+	 * @param channelAcquisitionConfigDTO
+	 * @return
+	 */
+	private static ChannelAcquisitionConfig getChannelAcquisitionConfig(
+			final ChannelAcquisitionConfigDTO channelAcquisitionConfigDTO) {
+
+		ChannelAcquisitionConfig result = null;
+		if (channelAcquisitionConfigDTO != null) {
+			result = new ChannelAcquisitionConfig();
+			result.setChannelName(channelAcquisitionConfigDTO.getChannelName());
+			result.setSelectedChannelParameters(getParameterConfig(channelAcquisitionConfigDTO.getChannelParameters()));
+			result.setSelectedFrequency(getFrequency(channelAcquisitionConfigDTO.getFrequency()));
+			result.setSelectedScale(getScale(channelAcquisitionConfigDTO.getScale()));
+			result.setTimeStart(getDateTime(channelAcquisitionConfigDTO.getTimeStart()));
+			result.setTotalSamples(channelAcquisitionConfigDTO.getTotalSamples());
+		}
+
+		return result;
+	}
+
+	/**
+	 * @param scale
+	 * @return
+	 */
+	private static Scale getScale(ScaleDTO scale) {
+		Scale result = null;
+		if (scale != null) {
+			result = new Scale();
+			result.setDefaultErrorValue(getPhysicsVal(scale.getDefaultError()));
+			result.setMaximumValue(getPhysicsVal(scale.getMaxValue()));
+			result.setMinimumValue(getPhysicsVal(scale.getMinValue()));
+			result.setMultiplier(new Multiplier(scale.getMultiplier().getCode()));
+			result.setPhysicsUnitName(scale.getPhysicsUnitName());
+			result.setPhysicsUnitSymbol(scale.getPhysicsUnitSymbol());
+			result.setScaleLabel(scale.getScaleLabel());
+			result.setStepValue(getPhysicsVal(scale.getStep()));
+		}
+		return result;
+	}
+
+	/**
+	 * @param defaultError
+	 * @return
+	 */
+	private static PhysicsVal getPhysicsVal(PhysicsValDTO dto) {
+		PhysicsVal result = null;
+
+		if (dto != null) {
+
+			result = new PhysicsVal();
+
+			switch (dto.getValueType()) {
+
+			case BOOLEAN_VAL: {
+				result.setBooleanValue((Boolean) dto.getValue());
+				break;
+			}
+			case BYTE_VAL: {
+				result.setByteValue((Byte) dto.getValue());
+				break;
+			}
+			case SHORT_VAL: {
+				result.setShortValue((Short) dto.getValue());
+				break;
+			}
+			case INT_VAL: {
+				result.setIntValue((Integer) dto.getValue());
+				break;
+			}
+			case LONG_VAL: {
+				result.setLongValue((Long) dto.getValue());
+				break;
+			}
+			case FLOAT_VAL: {
+				result.setFloatValue((Float) dto.getValue());
+				break;
+			}
+			case DOUBLE_VAL: {
+				result.setDoubleValue((Double) dto.getValue());
+				break;
+			}
+			case BYTEARRAY_VAL: {
+				result.setByteArrayValue(getByteArrayValue((ByteArrayValueDTO) dto.getValue()));
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("invalid valueType");
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * @param value
+	 * @return
+	 */
+	private static ByteArrayValue getByteArrayValue(final ByteArrayValueDTO dto) {
+		ByteArrayValue result = null;
+		if (dto != null) {
+			result = new ByteArrayValue();
+			result.setData(dto.getData());
+			result.setMimeType(dto.getMimeType());
+		}
+		return result;
 	}
 
 	// Only for test purposes
-	// public static void main(String[] args) throws Exception {
-	//
-	// final ExperimentResultsManager lookup = lookup();
-	// final DataProducerDTO experimentResultByID =
-	// lookup.getExperimentResultByID(1L);
-	// System.out.println(experimentResultByID);
-	// System.out.println("experimentResultByID.getSamplesPacketMatrixSerialized().length: "
-	// + experimentResultByID.getSamplesPacketMatrixSerialized().length);
-	//
-	// final List<SamplesPacketDTO> samples =
-	// getSamplesPacket(experimentResultByID.getSamplesPacketMatrixSerialized());
-	// System.out.println(samples.size());
-	//
-	// // testExperimentResultsPersistence();
-	//
-	// }
-	//
-	// private static ExperimentResultsManager lookup() throws NamingException {
-	// final InitialContext ic = new InitialContext();
-	//
-	// return (ExperimentResultsManager)
-	// ic.lookup("java:global/rec.am/ExperimentResultsManagerBean");
-	// }
-	//
-	// private static void testExperimentResultsPersistence() {
-	// try {
-	//
-	// final File f = new
-	// File("/home/elab/ReC7.0/multicast/ELAB_OPTICA_DSPIC_V1.0");
-	//
-	// final ExperimentResultsManager ejb = lookup();
-	//
-	// final List<ReCMultiCastDataProducer> recMultiCastDataProducers =
-	// getRecMultiCastDataProducers(f);
-	//
-	// for (final ReCMultiCastDataProducer reCMultiCastDataProducer2 :
-	// recMultiCastDataProducers) {
-	//
-	// final DataProducerDTO dataProducerDTO =
-	// DTOMapperUtils.getDataProducerDTO(reCMultiCastDataProducer2,
-	// "username");
-	// System.out.println("sending dataproducer:  " +
-	// reCMultiCastDataProducer2.getOID());
-	// System.out
-	// .println("samples byte[] leght: " +
-	// dataProducerDTO.getSamplesPacketMatrixSerialized().length);
-	// System.out.println("dataProducerDTO.getAcqHeader()" +
-	// dataProducerDTO.getAcqHeader());
-	// try {
-	// ejb.persistExperimentResults(dataProducerDTO);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	//
-	// }
-	//
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	//
-	// private static List<ReCMultiCastDataProducer>
-	// getRecMultiCastDataProducers(final File f) throws Exception {
-	//
-	// try {
-	//
-	// List<ReCMultiCastDataProducer> result = Collections.emptyList();
-	// if (f.isFile()) {
-	// result = new ArrayList<ReCMultiCastDataProducer>(1);
-	// result.add(getRecMultiCastDataProducer(f));
-	// } else if (f.isDirectory()) {
-	// File[] listFiles = f.listFiles();
-	// result = new ArrayList<ReCMultiCastDataProducer>(listFiles.length);
-	// for (final File file : listFiles) {
-	// if (file.isFile() && file.getName().indexOf("Samples") == -1
-	// && file.getName().startsWith("DataBuffer")) {
-	// result.add(getRecMultiCastDataProducer(file));
-	// }
-	// }
-	// }
-	// return result;
-	//
-	// } catch (Exception e) {
-	// throw e;
-	// }
-	// }
-	//
-	// private static ReCMultiCastDataProducer getRecMultiCastDataProducer(final
-	// File f) throws Exception {
-	//
-	// if (!f.isFile()) {
-	// throw new IllegalArgumentException("invalid file.");
-	// }
-	//
-	// ObjectInputStream objectInputStream = null;
-	// try {
-	// objectInputStream = new ObjectInputStream(new FileInputStream(f));
-	//
-	// return (ReCMultiCastDataProducer) objectInputStream.readObject();
-	// } catch (Exception e) {
-	// System.out.println(f);
-	// System.out.println(e);
-	// throw e;
-	// } finally {
-	// try {
-	// if (objectInputStream != null) {
-	// objectInputStream.close();
-	// }
-	// } catch (IOException io) {
-	// io.printStackTrace();
-	// }
-	// }
-	// }
-	//
-	// private static List<SamplesPacketDTO> getSamplesPacket(final byte[]
-	// samples) throws Exception {
-	//
-	// ObjectInputStream objectInputStream = null;
-	// try {
-	// objectInputStream = new ObjectInputStream(new
-	// ByteArrayInputStream(samples));
-	//
-	// return (List<SamplesPacketDTO>) objectInputStream.readObject();
-	// } finally {
-	// try {
-	// if (objectInputStream != null) {
-	// objectInputStream.close();
-	// }
-	// } catch (IOException io) {
-	// io.printStackTrace();
-	// }
-	// }
-	// }
+	public static void main(String[] args) throws Exception {
+
+		final RepositoryFacade repositoryFacade = lookup();
+		final DataProducerDTO experimentResultByID = repositoryFacade
+				.getExperimentResultByOID("ELAB_OPTICA_DSPIC_V1.0/Fri_Apr_01_09_18_22_GMT_2011");
+		System.out.println(experimentResultByID);
+		System.out.println("experimentResultByID.getSamplesPacketMatrixSerialized().length: "
+				+ experimentResultByID.getSamplesPacketMatrixSerialized().length);
+
+		final List<SamplesPacketDTO> samples = getSamplesPacket(experimentResultByID.getSamplesPacketMatrixSerialized());
+		System.out.println(samples.size());
+
+		// testExperimentResultsPersistence();
+
+	}
+
+	private static RepositoryFacade lookup() throws NamingException {
+		final InitialContext ic = new InitialContext();
+
+		return (RepositoryFacade) ic
+				.lookup("java:global/rec.am/RepositoryFacadeBean!com.linkare.rec.am.RepositoryFacade");
+	}
+
+	private static void testExperimentResultsPersistence() {
+		try {
+
+			final File f = new File("/home/elab/ReC7.0/multicast/ELAB_OPTICA_DSPIC_V1.0");
+
+			final RepositoryFacade ejb = lookup();
+
+			final List<ReCMultiCastDataProducer> recMultiCastDataProducers = getRecMultiCastDataProducers(f);
+
+			for (final ReCMultiCastDataProducer reCMultiCastDataProducer2 : recMultiCastDataProducers) {
+
+				final DataProducerDTO dataProducerDTO = DTOMapperUtils.mapToDataProducerDTO(reCMultiCastDataProducer2,
+						"username");
+				System.out.println("sending dataproducer:  " + reCMultiCastDataProducer2.getOID());
+				System.out
+						.println("samples byte[] leght: " + dataProducerDTO.getSamplesPacketMatrixSerialized().length);
+				System.out.println("dataProducerDTO.getAcqHeader()" + dataProducerDTO.getAcqHeader());
+				try {
+					ejb.persistExperimentResults(dataProducerDTO);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static List<ReCMultiCastDataProducer> getRecMultiCastDataProducers(final File f) throws Exception {
+
+		try {
+
+			List<ReCMultiCastDataProducer> result = Collections.emptyList();
+			if (f.isFile()) {
+				result = new ArrayList<ReCMultiCastDataProducer>(1);
+				result.add(getRecMultiCastDataProducer(f));
+			} else if (f.isDirectory()) {
+				File[] listFiles = f.listFiles();
+				result = new ArrayList<ReCMultiCastDataProducer>(listFiles.length);
+				for (final File file : listFiles) {
+					if (file.isFile() && file.getName().indexOf("Samples") == -1
+							&& file.getName().startsWith("DataBuffer")) {
+						result.add(getRecMultiCastDataProducer(file));
+					}
+				}
+			}
+			return result;
+
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	private static ReCMultiCastDataProducer getRecMultiCastDataProducer(final File f) throws Exception {
+
+		if (!f.isFile()) {
+			throw new IllegalArgumentException("invalid file.");
+		}
+
+		ObjectInputStream objectInputStream = null;
+		try {
+			objectInputStream = new ObjectInputStream(new FileInputStream(f));
+
+			return (ReCMultiCastDataProducer) objectInputStream.readObject();
+		} catch (Exception e) {
+			System.out.println(f);
+			System.out.println(e);
+			throw e;
+		} finally {
+			try {
+				if (objectInputStream != null) {
+					objectInputStream.close();
+				}
+			} catch (IOException io) {
+				io.printStackTrace();
+			}
+		}
+	}
+
+	private static List<SamplesPacketDTO> getSamplesPacket(final byte[] samples) throws Exception {
+
+		ObjectInputStream objectInputStream = null;
+		try {
+			objectInputStream = new ObjectInputStream(new ByteArrayInputStream(samples));
+
+			return (List<SamplesPacketDTO>) objectInputStream.readObject();
+		} finally {
+			try {
+				if (objectInputStream != null) {
+					objectInputStream.close();
+				}
+			} catch (IOException io) {
+				io.printStackTrace();
+			}
+		}
+	}
 
 }

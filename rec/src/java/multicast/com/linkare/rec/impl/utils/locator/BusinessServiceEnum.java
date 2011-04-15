@@ -11,7 +11,7 @@ package com.linkare.rec.impl.utils.locator;
  * @author artur
  */
 public enum BusinessServiceEnum {
-	REPOSITORY_FACADE("java:global/rec.am/.RepositoryFacade!com.linkare.rec.am.RepositoryFacade"), ALLOCATION_MANAGER(
+	REPOSITORY_FACADE("java:global/rec.am/RepositoryFacadeBean!com.linkare.rec.am.RepositoryFacade"), ALLOCATION_MANAGER(
 			"java:global/rec.am/AllocationManager!com.linkare.rec.am.AllocationManager");
 
 	private final String jndiName;

@@ -1,5 +1,5 @@
 /* 
- * ExperimentResultsBusinessDelegate.java created on Apr 13, 2011
+ *RepositoryFacadeDelegate.java created on Apr 13, 2011
  *
  * Copyright 2009 Linkare TI. All rights reserved.
  * Linkare TI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +56,8 @@ public final class RepositoryFacadeDelegate {
 
 			return DTOMapperUtils.mapToRecMultiCastDataProducer(repositoryFacade.getExperimentResultByOID(oid));
 		} catch (RemoteException e) {
+			throw new RepositoryException(e);
+		} catch (DTOMappingException e) {
 			throw new RepositoryException(e);
 		}
 	}

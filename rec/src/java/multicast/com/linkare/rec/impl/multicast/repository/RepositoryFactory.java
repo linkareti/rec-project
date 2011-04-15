@@ -8,7 +8,10 @@ package com.linkare.rec.impl.multicast.repository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import com.linkare.rec.impl.logging.LoggerUtil;
 import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
 import com.linkare.rec.impl.utils.SerializationHelper;
 
@@ -19,21 +22,60 @@ import com.linkare.rec.impl.utils.SerializationHelper;
  */
 public final class RepositoryFactory {
 
+	private static final Logger LOG = Logger.getLogger(RepositoryFactory.class.getName());
+
+	public static final String SYSPROP_REPOSITORY_CLASS = "ReC.MultiCast.Repository";
+
+	private static IRepository REPOSITORY = null;
+
+	static {
+
+		final String repositoryClassName = System.getProperty(SYSPROP_REPOSITORY_CLASS);
+
+		if (repositoryClassName == null || repositoryClassName.trim().length() == 0) {
+
+			LOG.log(Level.INFO, "Repository System Property not found... Loading DefaultRepository!");
+			REPOSITORY = new FSRepository();
+
+		} else {
+			try {
+				LOG.log(Level.FINE, "Trying to load the Repository class [" + repositoryClassName + "]");
+
+				REPOSITORY = (IRepository) Class.forName(repositoryClassName).newInstance();
+
+			} catch (Exception e) {
+				LOG.log(Level.INFO,
+						new StringBuilder("Unable to load Repository defined by className : ")
+								.append(repositoryClassName).append(" - loading DefaultSecurityManager!").toString());
+				LoggerUtil.logThrowable("Error loading specified SecurityManager", e, LOG);
+			} catch (LinkageError e) {
+				LOG.log(Level.INFO,
+						new StringBuilder("Unable to load Repository defined by className : ")
+								.append(repositoryClassName).append(" - loading DefaultRepository!").toString());
+				LoggerUtil.logThrowable("Error loading specified SecurityManager", e, LOG);
+			} finally {
+				if (REPOSITORY == null) {
+					LOG.log(Level.INFO, "Respository not instantiated... Loading FSRepository!");
+					REPOSITORY = new FSRepository();
+				}
+			}
+		}
+
+	}
+
 	private RepositoryFactory() {
 		throw new UnsupportedOperationException("instance creation not available");
 	}
 
-	private static final IRepository DEFAULT_REPOSITORY = new FSRepository();
-
 	public static IRepository getRepository() throws RepositoryException {
-		return null;
+		return REPOSITORY;
 	}
 
 	/**
 	 * 
 	 * @author Artur Correia - Linkare TI
 	 */
-	private static class FSRepository implements IRepository {
+	public static class FSRepository implements IRepository {
 
 		private static final String baseDir = new StringBuilder(System.getProperty("user.dir")).append(File.separator)
 				.append("DataProducers").toString();
@@ -100,13 +142,7 @@ public final class RepositoryFactory {
 		}
 	}
 
-	private static class RemoteRepository implements IRepository {
-
-		private final RepositoryFacadeDelegate delegate;
-
-		private RemoteRepository() throws RepositoryException {
-			delegate = new RepositoryFacadeDelegate();
-		}
+	public static class RemoteRepository implements IRepository {
 
 		/**
 		 * {@inheritDoc}
@@ -127,6 +163,8 @@ public final class RepositoryFactory {
 			// dataProducer.getOID().equals(oid)) {
 			//
 			// }
+
+			final RepositoryFacadeDelegate delegate = new RepositoryFacadeDelegate();
 			// FIXME: user ???? where can i now the user associated with
 			// experiment to persist
 			delegate.persistExperiment((ReCMultiCastDataProducer) experimentResult, "user");
@@ -137,7 +175,7 @@ public final class RepositoryFactory {
 		 */
 		@Override
 		public Object getExperimentResult(String oid) throws RepositoryException {
-			return delegate.getExperiment(oid);
+			return new RepositoryFacadeDelegate().getExperiment(oid);
 		}
 
 	}

@@ -52,9 +52,9 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	 */
 	private static final long serialVersionUID = 5596097800609305018L;
 
-	private static final long GET_SAMPLES_IDLE_TIME = Defaults.defaultIfEmpty(System
-			.getProperty("ReC.MultiCastDataProducer.GET_SAMPLES_IDLE_TIME"), 60) * 1000;
-	
+	private static final long GET_SAMPLES_IDLE_TIME = Defaults.defaultIfEmpty(
+			System.getProperty("ReC.MultiCastDataProducer.GET_SAMPLES_IDLE_TIME"), 60) * 1000;
+
 	private transient DataProducerWrapper remoteDataProducer = null;
 	private transient DataProducer _this = null;
 	private transient DataReceiverQueue dataReceiversQueue = null;
@@ -68,7 +68,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	private boolean alreadySerialized = false;
 	private int maximum_receivers = 1;
-	
+
 	private long lastGetSamplesTimestamp = System.currentTimeMillis();
 
 	private void writeObject(ObjectOutputStream stream) throws IOException {
@@ -79,7 +79,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 		stream.defaultReadObject();
 		// TODO pq inicializar as queues? lanca threads q n morrem
-//		initInternalQueue();
+		// initInternalQueue();
 	}
 
 	public ReCMultiCastDataProducer(IResource resource, int maximum_receivers, String fileName) {
@@ -149,8 +149,8 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 			Servant servant = ORBBean.getORBBean().registerDataProducerPOAServant(DataProducer.class, this,
 					ORBBean.StrToOid(getOID()), ReCMultiCastController.DP_DEACTIVATOR);
 			log(Level.FINEST, "Registered with the POA... " + getOID());
-			return (_this = DataProducerHelper.narrow(ORBBean.getORBBean().getDataProducerPOA(
-					ReCMultiCastController.DP_DEACTIVATOR).servant_to_reference(servant)));
+			return (_this = DataProducerHelper.narrow(ORBBean.getORBBean()
+					.getDataProducerPOA(ReCMultiCastController.DP_DEACTIVATOR).servant_to_reference(servant)));
 		} catch (Exception e) {
 			logThrowable("Couldn't register this DataProducer with the ORB!", e);
 		}
@@ -187,6 +187,11 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		return cachedDataProducerName;
 	}
 
+	public void setDataProducerName(final String dataProducerName) {
+		// FIXME: is correct?
+		this.cachedDataProducerName = dataProducerName;
+	}
+
 	public String getOID() {
 		return this.oid;
 	}
@@ -202,8 +207,8 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	public boolean isDeactivationPossible() {
 		boolean elapsedTime = lastGetSamplesTimestamp < System.currentTimeMillis() - GET_SAMPLES_IDLE_TIME;
-		if ((!getDataProducerState().equals(DataProducerState.DP_WAITING))
-				&& isExit() && dataReceiversQueue.isShutdown() && elapsedTime) {
+		if ((!getDataProducerState().equals(DataProducerState.DP_WAITING)) && isExit()
+				&& dataReceiversQueue.isShutdown() && elapsedTime) {
 			log(Level.FINE, getOID() + " is now deactivatable!");
 			log(Level.FINE, getOID() + " Data Producer State is " + getDataProducerState()
 					+ " and Data Receivers Queue Shutdown is " + dataReceiversQueue.isShutdown()
@@ -238,7 +243,8 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	public void fireNewSamples() {
 		int maxPacketNum = getMaxPacketNum();
 		if ((getTotalSamples() - 1 == maxPacketNum)
-				|| (maxPacketNum == -1 && getDataCollectorState().equals(com.linkare.rec.impl.utils.DataCollectorState.DP_ENDED))) {
+				|| (maxPacketNum == -1 && getDataCollectorState().equals(
+						com.linkare.rec.impl.utils.DataCollectorState.DP_ENDED))) {
 			// condicao de te'rmino da recepcao de dados
 			dataReceiversQueue.newPoisonSamples(maxPacketNum);
 		} else {
@@ -306,7 +312,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		dataReceiversQueue.shutdown();
 		shutdownThread();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -354,8 +360,11 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 				return _this;
 
 			try {
-				return (_this = DataReceiverHelper.narrow(ORBBean.getORBBean().getAutoIdRootPOA().servant_to_reference(
-						ORBBean.getORBBean().registerAutoIdRootPOAServant(DataReceiver.class, this, objectID))));
+				return (_this = DataReceiverHelper.narrow(ORBBean
+						.getORBBean()
+						.getAutoIdRootPOA()
+						.servant_to_reference(
+								ORBBean.getORBBean().registerAutoIdRootPOAServant(DataReceiver.class, this, objectID))));
 			} catch (Exception e) {
 				logThrowable("Couldn't register DataReceiver with the ORB!", e);
 			}
@@ -402,6 +411,14 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 			ReCMultiCastDataProducer.this.fireOneDataReceiverGone();
 		}
 
+	}
+
+	/**
+	 * @param hardwareAcquisitionConfig
+	 */
+	public void setAcquisitionHeader(final HardwareAcquisitionConfig hardwareAcquisitionConfig) {
+		// FIXME: is correct?
+		this.cachedAcqHeader = hardwareAcquisitionConfig;
 	}
 
 }// ReCMultiCastDataProducer

@@ -64,6 +64,10 @@ public abstract class DataCollector extends Thread implements Serializable {
 		return samplesPackets;
 	}
 
+	public void setSamplesPacketMatrix(final SamplesPacketMatrix samplesPacketMAtrix) {
+		this.samplesPackets = samplesPacketMAtrix;
+	}
+
 	protected void setLargestPacketKnown(int largestPacketKnown) {
 		synchronized (synchWaitFetchData) {
 			log(Level.FINEST, "Setting DataCollector for the largest packet know = " + largestPacketKnown);
