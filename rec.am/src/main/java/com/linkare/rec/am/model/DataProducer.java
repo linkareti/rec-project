@@ -3,6 +3,8 @@ package com.linkare.rec.am.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -11,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.linkare.commons.jpa.DefaultDomainObject;
+import com.linkare.rec.am.repository.DataProducerStateEnum;
 
 /**
  * 
@@ -39,6 +42,10 @@ public class DataProducer extends DefaultDomainObject {
 
     @Column(name = "USER")
     private String user;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "DATA_COLLECTOR_STATE")
+    private DataProducerStateEnum dataCollectorState;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "KEY_SAMPLES_PACKET_BLOB", updatable = false)
@@ -95,6 +102,14 @@ public class DataProducer extends DefaultDomainObject {
 	final SamplesPacketBlob samplesPacketBlob = new SamplesPacketBlob();
 	samplesPacketBlob.setSamplesPacketMatrixSerialized(samplesPacketMatrixSerialized);
 	this.serializedSamples = samplesPacketBlob;
+    }
+
+    public DataProducerStateEnum getDataCollectorState() {
+	return dataCollectorState;
+    }
+
+    public void setDataCollectorState(DataProducerStateEnum dataCollectorState) {
+	this.dataCollectorState = dataCollectorState;
     }
 
 }
