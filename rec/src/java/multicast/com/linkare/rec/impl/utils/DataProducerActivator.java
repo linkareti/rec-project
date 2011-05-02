@@ -56,7 +56,7 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 			Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER).log(Level.FINE,
 					"Etherealizing object " + (new String(oid)) + " in POA " + poa.the_name());
 			Deactivatable objdataser = (Deactivatable) (((DataProducerPOATie) servant)._delegate());
-			if (!objdataser.alreadySerialized()) {
+			if (!objdataser.alreadySavedOnRepository()) {
 
 				String filename = new String(oid);
 
@@ -64,6 +64,7 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 						"Deactivating object " + filename + " in POA " + poa.the_name());
 
 				RepositoryFactory.getRepository().persistExperimentResult(objdataser, filename);
+				objdataser.setAlreadySavedOnRepository();
 				// SerializationHelper.writeObject(filename, dir, objdataser);
 				Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER)
 						.log(Level.FINE, "Serializing for the first time...!");
@@ -71,7 +72,7 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 						"Deactivated object " + filename + " in POA " + poa.the_name());
 			} else {
 				Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER).log(Level.FINE,
-						"Object already serialized no needed to serialize again!");
+						"Object already saved on repository no needed to serialize again!");
 			}
 
 		} catch (RepositoryException e) {
@@ -86,9 +87,6 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 
 		try {
 			String filename = new String(oid);
-			int barPos = filename.lastIndexOf(System.getProperty("file.separator"));
-			String dir = baseDir + System.getProperty("file.separator") + filename.substring(0, barPos);
-			filename = filename.substring(barPos + 1);
 
 			Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER).log(Level.FINE,
 					"Activating object " + filename + " in POA " + poa.the_name());
@@ -99,10 +97,11 @@ public class DataProducerActivator extends LocalObject implements ServantActivat
 
 			final ReCMultiCastDataProducer dataProducer = (ReCMultiCastDataProducer) RepositoryFactory.getRepository()
 					.getExperimentResult(filename);
+			dataProducer.setAlreadySavedOnRepository();
 
-			Deactivator deactivator = new Deactivator(dataProducer, Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER));
+			new Deactivator(dataProducer, Logger.getLogger(RECMULTICAST_DATAPRODUCER_LOGGER));
 
-			dataProducer.setOID(new String(oid));
+			dataProducer.setOID(filename);
 
 			// org.omg.PortableServer.Servant s=null;
 			// s=poa.reference_to_servant(dataProducerImpl.getDataProducer());

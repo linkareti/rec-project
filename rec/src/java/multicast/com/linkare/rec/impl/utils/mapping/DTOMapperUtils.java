@@ -22,13 +22,13 @@ import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import com.linkare.rec.acquisition.NotAnAvailableSamplesPacketException;
 import com.linkare.rec.acquisition.NotAvailableException;
 import com.linkare.rec.am.RepositoryFacade;
 import com.linkare.rec.am.repository.ByteArrayValueDTO;
 import com.linkare.rec.am.repository.ChannelAcquisitionConfigDTO;
 import com.linkare.rec.am.repository.ColumnPhysicsValueDTO;
 import com.linkare.rec.am.repository.DataProducerDTO;
+import com.linkare.rec.am.repository.DataProducerStateEnum;
 import com.linkare.rec.am.repository.DateTimeDTO;
 import com.linkare.rec.am.repository.FrequencyDTO;
 import com.linkare.rec.am.repository.FrequencyDefTypeEnum;
@@ -55,6 +55,9 @@ import com.linkare.rec.data.synch.FrequencyDefType;
 import com.linkare.rec.data.synch.Time;
 import com.linkare.rec.impl.data.SamplesPacketMatrix;
 import com.linkare.rec.impl.multicast.ReCMultiCastDataProducer;
+import com.linkare.rec.impl.multicast.repository.IRepository;
+import com.linkare.rec.impl.multicast.repository.RepositoryFactory;
+import com.linkare.rec.impl.utils.DataCollectorState;
 
 /**
  * Utils methods to convert from rec model to DTO and DTO to rec model.
@@ -90,6 +93,8 @@ public final class DTOMapperUtils {
 				result.setAcqHeader(getHardwareAcquisitionConfigDTO(recMultiCastDataProducer.getAcquisitionHeader()));
 				result.setDataProducerName(recMultiCastDataProducer.getDataProducerName());
 				result.setOid(recMultiCastDataProducer.getOID());
+				result.setDataCollectorState(DataProducerStateEnum.fromByte(recMultiCastDataProducer
+						.getDataCollectorState().getValue()));
 
 				final int largestNumPacket = recMultiCastDataProducer.getMaxPacketNum();
 
@@ -98,7 +103,7 @@ public final class DTOMapperUtils {
 					result.setSamplesPacketMatrixSerialized(getSamplesPacketAsByteArray(emptyList));
 				} else {
 					result.setSamplesPacketMatrixSerialized(getSamplesPacketAsByteArray(getSamplesPacketDTO(recMultiCastDataProducer
-							.getSamples(0, largestNumPacket))));
+							.getSamplesPacketSource().getSamplesPackets(0, largestNumPacket))));
 				}
 				result.setUser(username);
 			}
@@ -106,8 +111,6 @@ public final class DTOMapperUtils {
 			return result;
 
 		} catch (IOException e) {
-			throw new DTOMappingException(e);
-		} catch (NotAnAvailableSamplesPacketException e) {
 			throw new DTOMappingException(e);
 		} catch (NotAvailableException e) {
 			throw new DTOMappingException(e);
@@ -264,6 +267,7 @@ public final class DTOMapperUtils {
 					.getSelectedHardwareParameters()));
 			result.setTimeStart(getDateTimeDTO(hardwareAcquisitionConfig.getTimeStart()));
 			result.setTotalSamples(hardwareAcquisitionConfig.getTotalSamples());
+			result.setHardwareUniqueID(hardwareAcquisitionConfig.getHardwareUniqueID());
 		}
 
 		return result;
@@ -523,12 +527,6 @@ public final class DTOMapperUtils {
 
 		ReCMultiCastDataProducer result = null;
 		if (experimentResultByOID != null) {
-			result = new ReCMultiCastDataProducer();
-			result.setAcquisitionHeader(getHardwareAcquisitionConfig(experimentResultByOID.getAcqHeader()));
-			result.setDataProducerName(experimentResultByOID.getDataProducerName());
-			result.setOID(experimentResultByOID.getOid());
-
-			experimentResultByOID.getSamplesPacketMatrix();
 
 			List<SamplesPacketDTO> listOfSamples = Collections.emptyList();
 			try {
@@ -539,7 +537,10 @@ public final class DTOMapperUtils {
 				throw new DTOMappingException(e);
 			}
 
-			result.setSamplesPacketMatrix(new SamplesPacketMatrix(getSamplesPacket(listOfSamples)));
+			result = new ReCMultiCastDataProducer(getHardwareAcquisitionConfig(experimentResultByOID.getAcqHeader()),
+					experimentResultByOID.getDataProducerName(), experimentResultByOID.getOid(),
+					new DataCollectorState(experimentResultByOID.getDataCollectorState().getCode()),
+					new SamplesPacketMatrix(getSamplesPacket(listOfSamples)));
 
 			// FIXME: what i have to do with user ?????
 			experimentResultByOID.getUser();
@@ -598,9 +599,9 @@ public final class DTOMapperUtils {
 		List<PhysicsValue> result = Collections.emptyList();
 
 		if (columnValues != null && columnValues.size() > 0) {
-			final List<PhysicsValue> auxList = new ArrayList<PhysicsValue>(columnValues.size());
+			result = new ArrayList<PhysicsValue>(columnValues.size());
 			for (final PhysicsValueDTO physicsValueDTO : columnValues) {
-				auxList.add(getPhysicValue(physicsValueDTO));
+				result.add(getPhysicValue(physicsValueDTO));
 			}
 		}
 
@@ -728,10 +729,9 @@ public final class DTOMapperUtils {
 			List<ChannelAcquisitionConfigDTO> channelsConfig) {
 		List<ChannelAcquisitionConfig> result = Collections.emptyList();
 		if (channelsConfig != null && channelsConfig.size() > 0) {
-			final List<ChannelAcquisitionConfig> auxCollection = new ArrayList<ChannelAcquisitionConfig>(
-					channelsConfig.size());
+			result = new ArrayList<ChannelAcquisitionConfig>(channelsConfig.size());
 			for (final ChannelAcquisitionConfigDTO channelAcquisitionConfigDTO : channelsConfig) {
-				auxCollection.add(getChannelAcquisitionConfig(channelAcquisitionConfigDTO));
+				result.add(getChannelAcquisitionConfig(channelAcquisitionConfigDTO));
 			}
 		}
 
@@ -848,17 +848,73 @@ public final class DTOMapperUtils {
 	// Only for test purposes
 	public static void main(String[] args) throws Exception {
 
-		final RepositoryFacade repositoryFacade = lookup();
-		final DataProducerDTO experimentResultByID = repositoryFacade
-				.getExperimentResultByOID("ELAB_OPTICA_DSPIC_V1.0/Fri_Apr_01_09_18_22_GMT_2011");
-		System.out.println(experimentResultByID);
-		System.out.println("experimentResultByID.getSamplesPacketMatrixSerialized().length: "
-				+ experimentResultByID.getSamplesPacketMatrixSerialized().length);
-
-		final List<SamplesPacketDTO> samples = getSamplesPacket(experimentResultByID.getSamplesPacketMatrixSerialized());
-		System.out.println(samples.size());
+		// final RepositoryFacade repositoryFacade = lookup();
+		// final DataProducerDTO experimentResultByID = repositoryFacade
+		// .getExperimentResultByOID("ELAB_OPTICA_DSPIC_V1.0/Fri_Apr_01_09_18_22_GMT_2011");
+		// System.out.println(experimentResultByID);
+		// System.out.println("experimentResultByID.getSamplesPacketMatrixSerialized().length: "
+		// + experimentResultByID.getSamplesPacketMatrixSerialized().length);
+		//
+		// final List<SamplesPacketDTO> samples =
+		// getSamplesPacket(experimentResultByID.getSamplesPacketMatrixSerialized());
+		// System.out.println(samples.size());
+		//
+		// final ReCMultiCastDataProducer mapToRecMultiCastDataProducer =
+		// mapToRecMultiCastDataProducer(experimentResultByID);
+		//
+		// System.out.println("getDataProducerName: " +
+		// mapToRecMultiCastDataProducer.getDataProducerName());
+		// System.out.println("getOID: " +
+		// mapToRecMultiCastDataProducer.getOID());
 
 		// testExperimentResultsPersistence();
+
+		// testRepositoryFactory();
+
+		testRepositoryFactoryGet();
+
+	}
+
+	private static void testRepositoryFactory() throws Exception {
+		final String expOptica = "ELAB_OPTICA_DSPIC_V1.0";
+
+		final File f = new File("/home/elab/ReC7.0/multicast/" + expOptica);
+		final List<ReCMultiCastDataProducer> recMultiCastDataProducers = getRecMultiCastDataProducers(f);
+
+		System.setProperty("ReC.MultiCast.Repository",
+				"com.linkare.rec.impl.multicast.repository.RepositoryFactory$RemoteRepository");
+
+		IRepository repository = RepositoryFactory.getRepository();
+		repository.persistExperimentResult(recMultiCastDataProducers.get(0), expOptica);
+
+	}
+
+	private static void testRepositoryFactoryGet() throws Exception {
+		final String oid = "ELAB_OPTICA_DSPIC_V1.0/Fri_Apr_01_09_18_22_GMT_2011";
+
+		System.setProperty("ReC.MultiCast.Repository",
+				"com.linkare.rec.impl.multicast.repository.RepositoryFactory$RemoteRepository");
+
+		IRepository repository = RepositoryFactory.getRepository();
+		final ReCMultiCastDataProducer experimentResult = (ReCMultiCastDataProducer) repository
+				.getExperimentResult(oid);
+		System.out.println(experimentResult);
+
+		final HardwareAcquisitionConfig acquisitionHeader = experimentResult.getAcquisitionHeader();
+
+		System.out.println("getFamiliarName(): " + acquisitionHeader.getFamiliarName());
+		System.out.println("getHardwareUniqueID(): " + acquisitionHeader.getHardwareUniqueID());
+		System.out.println("getTotalSamples(): " + acquisitionHeader.getTotalSamples());
+		System.out.println("getSelectedFrequency(): " + acquisitionHeader.getSelectedFrequency());
+
+		for (final ChannelAcquisitionConfig channelAcquisitionConfig : acquisitionHeader.getChannelsConfig()) {
+			System.out.println("channelAcquisitionConfig.getChannelName(): "
+					+ channelAcquisitionConfig.getChannelName());
+			System.out.println("channelAcquisitionConfig.getFrequency(): "
+					+ channelAcquisitionConfig.getSelectedFrequency().getFrequency());
+			System.out.println("channelAcquisitionConfig.getChannelName(): "
+					+ channelAcquisitionConfig.getSelectedScale());
+		}
 
 	}
 

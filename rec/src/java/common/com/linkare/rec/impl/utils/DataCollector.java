@@ -60,12 +60,16 @@ public abstract class DataCollector extends Thread implements Serializable {
 		setName(getName() + " - DataCollector");
 	}
 
-	public SamplesPacketSource getSamplesPacketSource() {
-		return samplesPackets;
+	protected DataCollector(final DataCollectorState collectorState, final SamplesPacketMatrix samplesPacketMAtrix) {
+		this.samplesPackets = samplesPacketMAtrix;
+		this.dataCollectorState = collectorState;
+		if (samplesPacketMAtrix != null && samplesPacketMAtrix.size() > 0) {
+			this.largestPacketKnown = samplesPacketMAtrix.size();
+		}
 	}
 
-	public void setSamplesPacketMatrix(final SamplesPacketMatrix samplesPacketMAtrix) {
-		this.samplesPackets = samplesPacketMAtrix;
+	public SamplesPacketSource getSamplesPacketSource() {
+		return samplesPackets;
 	}
 
 	protected void setLargestPacketKnown(int largestPacketKnown) {

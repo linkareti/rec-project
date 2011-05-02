@@ -8,7 +8,6 @@ package com.linkare.rec.impl.multicast.security;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,7 +42,7 @@ import com.linkare.rec.impl.utils.Defaults;
 
 /**
  * 
- * @author José Pedro Pereira - Linkare TI
+ * @author JosÃ© Pedro Pereira - Linkare TI
  */
 public class AllocationManagerSecurityManager implements ISecurityManager {
 
@@ -92,28 +91,28 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	public static final String SYSPROP_ALLOCATIONMANAGER_HOST = "ReC.MultiCast.AllocationManagerHost";
 	public static final String SYSPROP_ALLOCATIONMANAGER_PORT = "ReC.MultiCast.AllocationManagerPort";
 
-	public static final String NAMING_FACTORY = Defaults.defaultIfEmpty(System
-			.getProperty(InitialContext.INITIAL_CONTEXT_FACTORY),
+	public static final String NAMING_FACTORY = Defaults.defaultIfEmpty(
+			System.getProperty(InitialContext.INITIAL_CONTEXT_FACTORY),
 			"com.sun.enterprise.naming.impl.SerialInitContextFactory");
-	public static final String NAMING_URL_PKGS = Defaults.defaultIfEmpty(System
-			.getProperty(InitialContext.URL_PKG_PREFIXES), "com.sun.enterprise.naming");
-	public static final String NAMING_STATE = Defaults
-			.defaultIfEmpty(System.getProperty(InitialContext.STATE_FACTORIES),
-					"com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
-	public static final String ORB_ENV_HOST = Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_ALLOCATIONMANAGER_HOST), "localhost");
-	public static final String ORB_ENV_PORT = Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_ALLOCATIONMANAGER_PORT), "3700");
+	public static final String NAMING_URL_PKGS = Defaults.defaultIfEmpty(
+			System.getProperty(InitialContext.URL_PKG_PREFIXES), "com.sun.enterprise.naming");
+	public static final String NAMING_STATE = Defaults.defaultIfEmpty(
+			System.getProperty(InitialContext.STATE_FACTORIES),
+			"com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
+	public static final String ORB_ENV_HOST = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_ALLOCATIONMANAGER_HOST), "localhost");
+	public static final String ORB_ENV_PORT = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_ALLOCATIONMANAGER_PORT), "3700");
 
 	private static final String ORG_OMG_CORBA_ORB_INITIAL_PORT = "org.omg.CORBA.ORBInitialPort";
 	private static final String ORG_OMG_CORBA_ORB_INITIAL_HOST = "org.omg.CORBA.ORBInitialHost";
 
-	private static final int INTERVAL_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_INTERVAL_TIME_LAP_MINUTES), 0);
-	private static final int NEAR_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_NEAR_TIME_LAP_MINUTES), 5);
-	private static final int REFRESH_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_REFRESH_TIME_LAP_MINUTES), 15);
+	private static final int INTERVAL_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_INTERVAL_TIME_LAP_MINUTES), 0);
+	private static final int NEAR_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_NEAR_TIME_LAP_MINUTES), 5);
+	private static final int REFRESH_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_REFRESH_TIME_LAP_MINUTES), 15);
 	private static final int REFRESH_TIME_ALLOCATIONS_CLIENT_QUEUE_MINUTES = 1;
 
 	private List<ReCMultiCastHardware> multiCastHardwares = null;
@@ -190,8 +189,9 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 					user.getUserName());
 		case DATAPRODUCER:
 			IResource hardwareResource = resource.getEnclosingResource();
-			return checkAllocationsEnter(hardwareResource.getProperties().get(
-					hardwareResource.getResourceType().getPropertyKey()), user.getUserName());
+			return checkAllocationsEnter(
+					hardwareResource.getProperties().get(hardwareResource.getResourceType().getPropertyKey()),
+					user.getUserName());
 		default:
 			return true;
 		}

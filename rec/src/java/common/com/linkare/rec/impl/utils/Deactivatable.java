@@ -13,7 +13,9 @@ import org.omg.PortableServer.POA;
  * @author José Pedro Pereira - Linkare TI
  */
 public interface Deactivatable {
-	public boolean alreadySerialized();
+	public boolean alreadySavedOnRepository();
+
+	public void setAlreadySavedOnRepository();
 
 	public boolean isDeactivationPossible();
 
