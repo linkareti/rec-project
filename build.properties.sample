@@ -274,3 +274,6 @@ basic.rec.multicastcontroller.jmxremote.port=25001
 intermediate.rec.multicastcontroller.jmxremote.port=25002
 advanced.rec.multicastcontroller.jmxremote.port=25003
 java.rmi.server.hostname=`hostname -i`
+
+###EXPERIMENT REPOSITORY###
+rec.multicast.repository=com.linkare.rec.impl.multicast.repository.impl.RemoteRepository
