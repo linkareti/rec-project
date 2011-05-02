@@ -26,6 +26,8 @@ public class DataProducerDTO extends AbstractBaseDTO {
 
     private String user;
 
+    private DataProducerStateEnum dataCollectorState;
+
     private List<SamplesPacketDTO> samplesPacketMatrix;
 
     private byte[] samplesPacketMatrixSerialized;
@@ -79,6 +81,14 @@ public class DataProducerDTO extends AbstractBaseDTO {
 
     public void setSamplesPacketMatrixSerialized(byte[] samplesPacketMatrixSerialized) {
 	this.samplesPacketMatrixSerialized = samplesPacketMatrixSerialized;
+    }
+
+    public DataProducerStateEnum getDataCollectorState() {
+	return dataCollectorState;
+    }
+
+    public void setDataCollectorState(DataProducerStateEnum dataCollectorState) {
+	this.dataCollectorState = dataCollectorState;
     }
 
     @Override
