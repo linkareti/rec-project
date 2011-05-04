@@ -677,9 +677,9 @@ public final class DTOMapperUtils {
 	private static ParameterConfig[] getParameterConfig(final List<ParameterConfigDTO> hardwareParameters) {
 		List<ParameterConfig> result = Collections.emptyList();
 		if (hardwareParameters != null && hardwareParameters.size() > 0) {
-			final List<ParameterConfig> auxCollection = new ArrayList<ParameterConfig>(hardwareParameters.size());
+			result = new ArrayList<ParameterConfig>(hardwareParameters.size());
 			for (final ParameterConfigDTO parameterConfigDTO : hardwareParameters) {
-				auxCollection.add(getParameterConfig(parameterConfigDTO));
+				result.add(getParameterConfig(parameterConfigDTO));
 			}
 		}
 
