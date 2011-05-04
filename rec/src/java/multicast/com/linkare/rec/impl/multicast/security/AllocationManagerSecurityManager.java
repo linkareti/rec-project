@@ -19,16 +19,11 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.rmi.PortableRemoteObject;
 
 import com.linkare.commons.utils.Pair;
 import com.linkare.rec.am.AllocationDTO;
@@ -39,20 +34,15 @@ import com.linkare.rec.impl.multicast.ReCMultiCastHardware;
 import com.linkare.rec.impl.threading.ExecutorScheduler;
 import com.linkare.rec.impl.threading.ScheduledWorkUnit;
 import com.linkare.rec.impl.utils.Defaults;
+import com.linkare.rec.impl.utils.locator.BusinessServiceEnum;
+import com.linkare.rec.impl.utils.locator.BusinessServiceLocator;
+import com.linkare.rec.impl.utils.locator.BusinessServiceLocatorException;
 
 /**
  * 
  * @author JosÃ© Pedro Pereira - Linkare TI
  */
 public class AllocationManagerSecurityManager implements ISecurityManager {
-
-	/**
-	 * 
-	 */
-	private static final String ALLOCATION_MANAGER_GLOBAL_JNDI_NAME = "java:global/rec.am/AllocationManager!com.linkare.rec.am.AllocationManager";
-	// jndi name used in develpment tests
-	// private static final String ALLOCATION_MANAGER_GLOBAL_JNDI_NAME =
-	// "java:global/rec.am/AllocationManager";
 
 	// public static final String
 	// MCCONTROLLER_SECURITYMANAGER_LOGGER=ReCMultiCastController.MCCONTROLLER_LOGGER;
@@ -88,25 +78,6 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 		LABORATORY_ID = Defaults.defaultIfEmpty(System.getProperty(SYSPROP_LABORATORY_ID), localInetAddress);
 	}
 
-	public static final String SYSPROP_ALLOCATIONMANAGER_HOST = "ReC.MultiCast.AllocationManagerHost";
-	public static final String SYSPROP_ALLOCATIONMANAGER_PORT = "ReC.MultiCast.AllocationManagerPort";
-
-	public static final String NAMING_FACTORY = Defaults.defaultIfEmpty(
-			System.getProperty(InitialContext.INITIAL_CONTEXT_FACTORY),
-			"com.sun.enterprise.naming.impl.SerialInitContextFactory");
-	public static final String NAMING_URL_PKGS = Defaults.defaultIfEmpty(
-			System.getProperty(InitialContext.URL_PKG_PREFIXES), "com.sun.enterprise.naming");
-	public static final String NAMING_STATE = Defaults.defaultIfEmpty(
-			System.getProperty(InitialContext.STATE_FACTORIES),
-			"com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
-	public static final String ORB_ENV_HOST = Defaults.defaultIfEmpty(
-			System.getProperty(SYSPROP_ALLOCATIONMANAGER_HOST), "localhost");
-	public static final String ORB_ENV_PORT = Defaults.defaultIfEmpty(
-			System.getProperty(SYSPROP_ALLOCATIONMANAGER_PORT), "3700");
-
-	private static final String ORG_OMG_CORBA_ORB_INITIAL_PORT = "org.omg.CORBA.ORBInitialPort";
-	private static final String ORG_OMG_CORBA_ORB_INITIAL_HOST = "org.omg.CORBA.ORBInitialHost";
-
 	private static final int INTERVAL_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(
 			System.getProperty(SYSPROP_INTERVAL_TIME_LAP_MINUTES), 0);
 	private static final int NEAR_TIME_LAP_MINUTES = Defaults.defaultIfEmpty(
@@ -122,9 +93,10 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	/**
 	 * Creates the <code>AllocationManagerSecurityManager</code>.
 	 * 
-	 * @throws NamingException
+	 * @throws BusinessServiceLocatorException
+	 * 
 	 */
-	public AllocationManagerSecurityManager() throws NamingException {
+	public AllocationManagerSecurityManager() throws BusinessServiceLocatorException {
 
 		Logger.getLogger(MCCONTROLLER_SECURITYMANAGER_LOGGER).log(Level.INFO,
 				"Instatiating the allocation security manager.");
@@ -143,19 +115,11 @@ public class AllocationManagerSecurityManager implements ISecurityManager {
 	}
 
 	/**
-	 * @throws NamingException
+	 * @throws BusinessServiceLocatorException
 	 */
-	private void lookupAllocationManager() throws NamingException {
-		Properties jndiProps = new Properties();
-		jndiProps.put(InitialContext.INITIAL_CONTEXT_FACTORY, NAMING_FACTORY);
-		jndiProps.put(InitialContext.URL_PKG_PREFIXES, NAMING_URL_PKGS);
-		jndiProps.put(InitialContext.STATE_FACTORIES, NAMING_STATE);
-		jndiProps.setProperty(ORG_OMG_CORBA_ORB_INITIAL_HOST, ORB_ENV_HOST);
-		jndiProps.setProperty(ORG_OMG_CORBA_ORB_INITIAL_PORT, ORB_ENV_PORT);
-		InitialContext ctx = new InitialContext(jndiProps);
-		Object allocationManagerStub = ctx.lookup(ALLOCATION_MANAGER_GLOBAL_JNDI_NAME);
-		allocationManager = (AllocationManager) PortableRemoteObject.narrow(allocationManagerStub,
-				AllocationManager.class);
+	private void lookupAllocationManager() throws BusinessServiceLocatorException {
+		allocationManager = BusinessServiceLocator.getInstance().getBusinessInterface(
+				BusinessServiceEnum.ALLOCATION_MANAGER);
 	}
 
 	/**
