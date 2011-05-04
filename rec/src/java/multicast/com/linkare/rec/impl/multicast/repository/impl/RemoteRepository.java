@@ -29,12 +29,6 @@ public class RemoteRepository implements IRepository {
 		if (!(experimentResult instanceof ReCMultiCastDataProducer)) {
 			throw new IllegalArgumentException("experiment Result must be a instanceOf ReCMultiCastDataProducer");
 		}
-		// final ReCMultiCastDataProducer dataProducer =
-		// (ReCMultiCastDataProducer) experimentResult;
-		// if (dataProducer.getOID() == null ||
-		// dataProducer.getOID().equals(oid)) {
-		//
-		// }
 
 		final RepositoryFacadeDelegate delegate = new RepositoryFacadeDelegate();
 		// FIXME: user ???? where can i now the user associated with
