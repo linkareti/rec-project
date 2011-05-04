@@ -41,6 +41,11 @@ public class RepositoryFacadeBean implements RepositoryFacade {
 	    throw new NullPointerException("experiment cannot be null");
 	}
 
+	//if already persisted just return	
+	if (getExperimentResultByOID(experimentResult.getOid()) != null) {
+	    return;
+	}
+
 	final DataProducer entity;
 	if (LOG.isInfoEnabled()) {
 	    final long start = System.currentTimeMillis();
