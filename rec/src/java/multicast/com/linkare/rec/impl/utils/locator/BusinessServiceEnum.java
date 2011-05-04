@@ -8,7 +8,7 @@ package com.linkare.rec.impl.utils.locator;
 
 /**
  * 
- * @author artur
+ * @author Artur Correia - Linkare TI
  */
 public enum BusinessServiceEnum {
 	REPOSITORY_FACADE("java:global/rec.am/RepositoryFacadeBean!com.linkare.rec.am.RepositoryFacade"), ALLOCATION_MANAGER(
