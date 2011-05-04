@@ -81,8 +81,8 @@ public final class DTOMapperUtils {
 	 * @throws DTOMappingException
 	 * 
 	 */
-	public static DataProducerDTO mapToDataProducerDTO(final ReCMultiCastDataProducer recMultiCastDataProducer,
-			final String username) throws DTOMappingException {
+	public static DataProducerDTO mapToDataProducerDTO(final ReCMultiCastDataProducer recMultiCastDataProducer)
+			throws DTOMappingException {
 
 		try {
 
@@ -105,7 +105,7 @@ public final class DTOMapperUtils {
 					result.setSamplesPacketMatrixSerialized(getSamplesPacketAsByteArray(getSamplesPacketDTO(recMultiCastDataProducer
 							.getSamplesPacketSource().getSamplesPackets(0, largestNumPacket))));
 				}
-				result.setUser(username);
+				result.setUser(recMultiCastDataProducer.getUser());
 			}
 
 			return result;
@@ -540,10 +540,7 @@ public final class DTOMapperUtils {
 			result = new ReCMultiCastDataProducer(getHardwareAcquisitionConfig(experimentResultByOID.getAcqHeader()),
 					experimentResultByOID.getDataProducerName(), experimentResultByOID.getOid(),
 					new DataCollectorState(experimentResultByOID.getDataCollectorState().getCode()),
-					new SamplesPacketMatrix(getSamplesPacket(listOfSamples)));
-
-			// FIXME: what i have to do with user ?????
-			experimentResultByOID.getUser();
+					new SamplesPacketMatrix(getSamplesPacket(listOfSamples)), experimentResultByOID.getUser());
 		}
 
 		return result;
@@ -936,8 +933,7 @@ public final class DTOMapperUtils {
 
 			for (final ReCMultiCastDataProducer reCMultiCastDataProducer2 : recMultiCastDataProducers) {
 
-				final DataProducerDTO dataProducerDTO = DTOMapperUtils.mapToDataProducerDTO(reCMultiCastDataProducer2,
-						"username");
+				final DataProducerDTO dataProducerDTO = DTOMapperUtils.mapToDataProducerDTO(reCMultiCastDataProducer2);
 				System.out.println("sending dataproducer:  " + reCMultiCastDataProducer2.getOID());
 				System.out
 						.println("samples byte[] leght: " + dataProducerDTO.getSamplesPacketMatrixSerialized().length);

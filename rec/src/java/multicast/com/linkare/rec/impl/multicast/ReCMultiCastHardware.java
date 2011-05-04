@@ -72,8 +72,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 	public static final String SYSPROP_MULTICASTHARDWARE_LOCK_PERIOD = "MultiCastHardware.LockPeriod";
 
-	private static final long LOCK_PERIOD = Defaults.defaultIfEmpty(System
-			.getProperty(SYSPROP_MULTICASTHARDWARE_LOCK_PERIOD), 10 * 1000);
+	private static final long LOCK_PERIOD = Defaults.defaultIfEmpty(
+			System.getProperty(SYSPROP_MULTICASTHARDWARE_LOCK_PERIOD), 10 * 1000);
 
 	// private static final long
 	// HARDWAREINFO_REFRESH_PERIOD=Defaults.defaultIfEmpty(System.getProperty("HARDWAREINFO_REFRESH_PERIOD"),60*1000);
@@ -172,7 +172,9 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			return _this;
 
 		try {
-			return (_this = MultiCastHardwareHelper.narrow(ORBBean.getORBBean().getAutoIdRootPOA()
+			return (_this = MultiCastHardwareHelper.narrow(ORBBean
+					.getORBBean()
+					.getAutoIdRootPOA()
 					.servant_to_reference(
 							ORBBean.getORBBean().registerAutoIdRootPOAServant(MultiCastHardware.class, this,
 									(objectID = new ObjectID())))));
@@ -298,7 +300,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 			// jobEnded(proxyDataProducer);
 			DefaultResource dataProducerResource = getResource().createChildResource();
 			recMultiCastDataProducer = ReCMultiCastDataProducerFactory.createReCMultiCastDataProducer(
-					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients);
+					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients,
+					user.getUserName());
 
 			DataProducer dataProducer = recMultiCastDataProducer._this(); // registar
 			// o
@@ -343,15 +346,18 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 
 			DefaultResource dataProducerResource = getResource().createChildResource();
 			recMultiCastDataProducer = ReCMultiCastDataProducerFactory.createReCMultiCastDataProducer(
-					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients);
+					dataProducerResource, new DataProducerAdapter(), getHardwareUniqueId(), maximumClients,
+					user.getUserName());
 
 			DataProducer dataProducer = recMultiCastDataProducer._this(); // registar
 			// o
 			// objecto
 			// corba
 			log(Level.INFO, "Going to start output the hardware");
-			recMultiCastDataProducer.setRemoteDataProducer(hardware.startOutput(recMultiCastDataProducer
-					.getDataReceiver(), data_source)); // iniciar o driver
+			recMultiCastDataProducer.setRemoteDataProducer(hardware.startOutput(
+					recMultiCastDataProducer.getDataReceiver(), data_source)); // iniciar
+																				// o
+																				// driver
 			recMultiCastDataProducer.initAcquisitionThread(); // iniciar a
 			// aquisicao de
 			// dados do
@@ -516,8 +522,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	private void verifyOwnership(UserInfo user) throws NotOwnerException {
 		if (ownerDataClient == null || !ownerDataClient.getUserInfo().getUserName().equals(user.getUserName())) {
 			if (locked && !locking)
-				throw new NotOwnerException(NotOwnerExceptionConstants.HARDWARE_LOCKED_TO_ANOTHER, ownerDataClient
-						.getUserName());
+				throw new NotOwnerException(NotOwnerExceptionConstants.HARDWARE_LOCKED_TO_ANOTHER,
+						ownerDataClient.getUserName());
 			else if (locked && locking)
 				throw new NotOwnerException(NotOwnerExceptionConstants.HARDWARE_IN_LOCK_PROCESS_TO_ANOTHER,
 						ownerDataClient.getUserName());
@@ -525,8 +531,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 				throw new NotOwnerException(NotOwnerExceptionConstants.HARDWARE_LOCK_AVAILABLE_TO_ANOTHER,
 						ownerDataClient.getUserName());
 			else if (!locked && !locking)
-				throw new NotOwnerException(NotOwnerExceptionConstants.HARDWARE_NOT_LOCKABLE_TO_ANYONE, ownerDataClient
-						.getUserName());
+				throw new NotOwnerException(NotOwnerExceptionConstants.HARDWARE_NOT_LOCKABLE_TO_ANYONE,
+						ownerDataClient.getUserName());
 		}
 	}
 
@@ -714,8 +720,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	DateTime timeStartMin = null;
 
 	public UserInfo[] getClientList(UserInfo user) throws NotRegistered, NotAuthorized {
-		log(Level.FINEST, "Hardware - Getting the client list for user "
-				+ (user == null ? "(user is null)" : user.getUserName()));
+		log(Level.FINEST,
+				"Hardware - Getting the client list for user " + (user == null ? "(user is null)" : user.getUserName()));
 		UserInfo[] retVal = clientQueue.getUsers(user, resource);
 		log(Level.FINEST, "Hardware - Got as retVal " + retVal);
 
@@ -838,8 +844,8 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 	}
 
 	private void logThrowable(String message, Throwable t) {
-		LoggerUtil.logThrowable("MultiCastHardware " + getHardwareUniqueId() + " - " + message, t, Logger
-				.getLogger(MC_HARDWARE_LOGGER));
+		LoggerUtil.logThrowable("MultiCastHardware " + getHardwareUniqueId() + " - " + message, t,
+				Logger.getLogger(MC_HARDWARE_LOGGER));
 	}
 
 	/**
@@ -887,9 +893,12 @@ public class ReCMultiCastHardware implements MultiCastHardwareOperations {
 				return _this;
 
 			try {
-				return (_this = DataClientHelper.narrow(ORBBean.getORBBean().getAutoIdRootPOA().servant_to_reference(
-						ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this,
-								(objectID = new ObjectID())))));
+				return (_this = DataClientHelper.narrow(ORBBean
+						.getORBBean()
+						.getAutoIdRootPOA()
+						.servant_to_reference(
+								ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this,
+										(objectID = new ObjectID())))));
 			} catch (Exception e) {
 				logThrowable("Couldn't register as a DataClient in the ORB!", e);
 				return null;

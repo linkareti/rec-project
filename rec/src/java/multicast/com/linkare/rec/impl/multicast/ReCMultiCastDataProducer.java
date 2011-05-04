@@ -67,6 +67,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 	private transient ReCMultiCastDataProducerListener reCMultiCastDataProducerListener = null;
 	private IResource resource = null;
 	private transient ReCMultiCastDataProducerDataReceiver dataReceiver = null;
+	private String user = null;
 
 	private volatile boolean alreadySavedOnRepository = false;
 	private int maximum_receivers = 1;
@@ -83,7 +84,7 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		// initInternalQueue();
 	}
 
-	public ReCMultiCastDataProducer(IResource resource, int maximum_receivers, String fileName) {
+	public ReCMultiCastDataProducer(IResource resource, int maximum_receivers, String fileName, String user) {
 		super();
 		this.fileName = fileName;
 
@@ -91,14 +92,17 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 		this.maximum_receivers = maximum_receivers;
 		initInternalQueue();
 		dataReceiver = new ReCMultiCastDataProducerDataReceiver();
+		this.user = user;
 	}
 
 	public ReCMultiCastDataProducer(final HardwareAcquisitionConfig header, final String dataProducerName,
-			final String oid, final DataCollectorState dataCollectorState, final SamplesPacketMatrix packetMatrix) {
+			final String oid, final DataCollectorState dataCollectorState, final SamplesPacketMatrix packetMatrix,
+			final String user) {
 		super(dataCollectorState, packetMatrix);
 		this.cachedAcqHeader = header;
 		this.cachedDataProducerName = dataProducerName;
 		this.oid = oid;
+		this.user = user;
 	}
 
 	private void initInternalQueue() {
@@ -350,6 +354,10 @@ public class ReCMultiCastDataProducer extends DataCollector implements DataProdu
 
 	public DataProducerState getDataProducerState() {
 		return getDataCollectorState().toDataProducerState();
+	}
+
+	public String getUser() {
+		return user;
 	}
 
 	public boolean alreadySavedOnRepository() {

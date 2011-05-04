@@ -30,10 +30,7 @@ public class RemoteRepository implements IRepository {
 			throw new IllegalArgumentException("experiment Result must be a instanceOf ReCMultiCastDataProducer");
 		}
 
-		final RepositoryFacadeDelegate delegate = new RepositoryFacadeDelegate();
-		// FIXME: user ???? where can i now the user associated with
-		// experiment to persist
-		delegate.persistExperiment((ReCMultiCastDataProducer) experimentResult, "user");
+		new RepositoryFacadeDelegate().persistExperiment((ReCMultiCastDataProducer) experimentResult);
 	}
 
 	/**

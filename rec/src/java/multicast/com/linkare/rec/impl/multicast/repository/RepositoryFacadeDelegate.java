@@ -36,10 +36,9 @@ public final class RepositoryFacadeDelegate {
 		}
 	}
 
-	public void persistExperiment(final ReCMultiCastDataProducer dataProducer, final String user)
-			throws RepositoryException {
+	public void persistExperiment(final ReCMultiCastDataProducer dataProducer) throws RepositoryException {
 		try {
-			repositoryFacade.persistExperimentResults(DTOMapperUtils.mapToDataProducerDTO(dataProducer, user));
+			repositoryFacade.persistExperimentResults(DTOMapperUtils.mapToDataProducerDTO(dataProducer));
 		} catch (DTOMappingException e) {
 			throw new RepositoryException(e);
 		} catch (RemoteException e) {

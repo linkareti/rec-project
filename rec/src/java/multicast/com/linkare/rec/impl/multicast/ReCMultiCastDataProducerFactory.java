@@ -19,7 +19,7 @@ import com.linkare.rec.impl.utils.Deactivator;
  * @author José Pedro Pereira - Linkare TI
  */
 public final class ReCMultiCastDataProducerFactory {
-	
+
 	public static String MC_DATA_PRODUCER_FACTORY_LOGGER = "ReCMultiCastDataProducerFactory.Logger";
 
 	static {
@@ -34,10 +34,11 @@ public final class ReCMultiCastDataProducerFactory {
 	}
 
 	public static final ReCMultiCastDataProducer createReCMultiCastDataProducer(IResource resource,
-			ReCMultiCastDataProducerListener listener, String baseDir, int maximum_receivers) {
+			ReCMultiCastDataProducerListener listener, String baseDir, int maximum_receivers, String user) {
 		String fileName = (new Date()).toString().replaceAll(":", "_").replaceAll(" ", "_");
 		fileName = baseDir + File.separator + fileName;
-		ReCMultiCastDataProducer dataProducer = new ReCMultiCastDataProducer(resource, maximum_receivers, fileName);
+		ReCMultiCastDataProducer dataProducer = new ReCMultiCastDataProducer(resource, maximum_receivers, fileName,
+				user);
 		dataProducer.setReCMultiCastDataProducerListener(listener);
 		Deactivator deactivator = new Deactivator(dataProducer, Logger.getLogger(MC_DATA_PRODUCER_FACTORY_LOGGER));
 		return dataProducer;
