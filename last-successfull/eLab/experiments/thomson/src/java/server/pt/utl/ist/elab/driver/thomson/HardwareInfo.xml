@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="ELAB_THOMSON_STAMP_V01" familiarName="Thomson" name="Basic STAMP" version="BS2" manufacturer="Parallax" driverVersion="v2">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+    
+    <parameter name="tensaoaceleracao" type="ContinuousValue" value="4000">
+        <selection-list>
+            <value order="1">500</value>
+            <value order="2">5000</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter> 
+    <parameter name="correntebobines" type="ContinuousValue" value="400">
+        <selection-list>
+            <value order="1">-2000</value>
+            <value order="2">2000</value>
+	    <value order="3">0</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="video" type="OnOffValue" value="0">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">0</value>
+        </selection-list>
+    </parameter>
+    
+    <parameter name="modo" type="SelectionListValue" value="defmag">
+        <selection-list>
+            <value order="1">defmag</value>
+            <value order="2">eqforce</value>
+        </selection-list>
+    </parameter>        
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">5000</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="milli">1000</Frequency>
+    
+    <sampling-scale>
+        <min-samples>6</min-samples>
+        <max-samples>15</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+    
+    <ChannelInfo name="Corrente nas bobines" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Corrente nas bobines" physicsunitname="Ampere" physicsunitsymbol="A" multiplier="milli" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">2000</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">10</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>   
+    <ChannelInfo name="Tensao de aceleracao" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Tensao de aceleracao" physicsunitname="Volt" physicsunitsymbol="V" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">5000</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">20</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Tensao de defleccao" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Tensao de defleccao" physicsunitname="Volt" physicsunitsymbol="V" multiplier="none" selected="true">
+            <min><PhysicsVal type="int">0</PhysicsVal></min>
+            <max><PhysicsVal type="int">5000</PhysicsVal></max>
+            <step><PhysicsVal type="int">1</PhysicsVal></step>
+            <errordefault><PhysicsVal type="int">20</PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Image" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Image" physicsunitname="Pixel" physicsunitsymbol="Pxl" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </min>
+            <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </max>
+            <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </step>
+            <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </errordefault>
+        </scale>
+    </ChannelInfo>
+    <ChannelInfo name="Video" independent="true" direction="CHANNEL_INPUT">
+        <scale label="Image" physicsunitname="Pixel" physicsunitsymbol="Pxl" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </min>
+            <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </max>
+            <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </step>
+            <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="image/jpeg"/> </errordefault>
+        </scale>
+    </ChannelInfo>
+</HardwareInfo>
