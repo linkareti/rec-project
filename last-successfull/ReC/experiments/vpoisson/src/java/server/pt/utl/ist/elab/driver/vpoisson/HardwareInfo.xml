@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by jp on 9 de Maio de 2003, 19:07 -->
+
+<HardwareInfo id="POISSON_V1.0" familiarName="Poisson" name="Poisson" version="01" manufacturer="Elab - UTL" driverVersion="v1">
+    <description>
+        <![CDATA[ 
+        Esta experiência serve para - não esquecer de alterar esta descrição
+        <b>Penso que pode ter coisas maradas aqui como html</b>
+        ]]>
+    </description>
+            
+    <parameter name="Nx" type="ContinuousValue" value="60">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">80</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="Ny" type="ContinuousValue" value="60">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">80</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>
+    <parameter name="Nz" type="ContinuousValue" value="60">
+        <selection-list>
+            <value order="1">1</value>
+            <value order="2">80</value>
+	    <value order="3">1</value>
+        </selection-list>
+    </parameter>    
+    
+    <parameter name="fnFace1" type="BlackBoxValue" value="1">  
+    </parameter>
+    <parameter name="fnFace2" type="BlackBoxValue" value="1">  
+    </parameter>
+    <parameter name="fnFace3" type="BlackBoxValue" value="1">  
+    </parameter>
+    <parameter name="fnFace4" type="BlackBoxValue" value="1">  
+    </parameter>
+    <parameter name="fnFace5" type="BlackBoxValue" value="1">  
+    </parameter>
+    <parameter name="fnFace6" type="BlackBoxValue" value="1">  
+    </parameter>
+    <parameter name="fnRho" type="BlackBoxValue" value="0">  
+    </parameter>
+    
+    <frequency-scale label="Sampling Interval">
+        <min-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></min-frequency>
+        <max-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></max-frequency>
+        <step-frequency><Frequency type="SamplingIntervalType" multiplier="milli">1</Frequency></step-frequency>
+    </frequency-scale>
+    <Frequency type="SamplingIntervalType" multiplier="none">1</Frequency>
+    
+    <sampling-scale>
+        <min-samples>1</min-samples>
+        <max-samples>1000</max-samples>
+        <step-samples>1</step-samples>
+    </sampling-scale>
+
+    <ChannelInfo name="Cargaas" independent="false" direction="CHANNEL_INPUT">
+        <scale label="Cargaas" physicsunitname="" physicsunitsymbol="" multiplier="none" selected="true">
+            <min><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></min>
+            <max><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></max>
+            <step><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></step>
+            <errordefault><PhysicsVal type="byteArray" file="/home/elab/ReC7.0/EmptyByteArray.txt" mimetype="data/raw"> </PhysicsVal></errordefault>
+        </scale>
+    </ChannelInfo>
+ </HardwareInfo>
