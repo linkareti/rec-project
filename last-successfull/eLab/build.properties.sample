@@ -1,0 +1,276 @@
+build.dir=build/java
+dist.dir=dist/java
+
+javac.encoding=UTF-8
+javac.debug=true
+javac.optimize=true
+javac.sourcelevel=1.6
+
+copy.encoding=UTF-8
+
+#this next section esplicits which experiments are going to be compiled, packaged, distributed...
+#you need only one list, the reason they are separated is to allow building e-lab and e-lab virtual separatly
+#just uncomment the one you need
+#list of experiments in e-lab
+experiment.list=aleatorio,gamma,vtiro,vpend2m
+
+#this next section esplicits which labs are going to be compiled, packaged, distributed...
+#the experiments must be the same as in the property experiment.list
+lab.list=basic,intermediate,advanced
+basic.experiment.list=aleatorio
+intermediate.experiment.list=gamma,vtiro
+advanced.experiment.list=vpend2m
+
+#In case you wish to run a specific experiment
+#please define the following property to enable
+#just that specific experiment. In every case,
+#the main targets will compile/build/distribute all
+#the experiments defined in the experiment.list
+#experiment.name=vtiro
+
+###DEPLOYMENT####
+rec.server=
+rec.server.dir=
+web.server=
+web.server.dir=
+
+##KEYSTORE CONFIGURATION###
+rec.keystore=cert/ISTJavaSign.KeyStore.p12
+#rec.storetype=jks,pkcs12
+rec.storetype=pkcs12
+rec.keypass=askPass
+rec.storepass=askPass
+rec.alias=ISTJavaSign
+
+##KEYSTORE CONFIGURATION###
+elab.keystore=cert/ISTJavaSign.KeyStore.p12
+#elab.storetype=jks,pkcs12
+elab.storetype=pkcs12
+elab.keypass=askPass
+elab.storepass=askPass
+elab.alias=ISTJavaSign
+
+##PACK 200##
+#set it to true if you want to generate packed client libs for smaller client deployment
+generate.pack200=true
+
+##RUN CONFIGURATION##
+max.memory=1024m
+min.memory=128m
+
+##COMMON MANIFEST## (adopted from com.linkare.commons project)
+com.linkare.rec.spec.title=ReC - e-lab
+com.linkare.rec.spec.version=1.0.0
+com.linkare.rec.spec.vendor=Linkare TI
+com.linkare.rec.impl.title=ReC - e-lab
+com.linkare.rec.impl.version=1.0.0
+com.linkare.rec.impl.vendor=Linkare TI
+
+###########################SYSTEM PROPERTIES###############################
+rec.multicastcontroller.bindname=MultiCastController 
+rec.multicastcontroller.initref=MultiCastController
+java.util.logging.config.file=loggers.config.properties
+org.omg.CORBA.ORBClass=org.openorb.orb.core.ORB 
+org.omg.CORBA.ORBSingletonClass=org.openorb.orb.core.ORBSingleton 
+com.sun.CORBA.ORBDynamicStubFactoryFactoryClass=com.sun.corba.se.impl.presentation.rmi.StubFactoryFactoryStaticImpl
+
+##MULTICAST PROPERTIES - MULTICAST##
+multicast.openorb.profile=ReCMultiCastController
+rec.multicast.securitymanager=pt.utl.ist.elab.security.ElabSecurityManager
+rec.multicastcontroller.MAX_CLIENTS_PER_HARDWARE=15 
+multicast.initial.heap=128m
+multicast.max.heap=1024m
+multicast.debug.address.port=8000
+basic.multicast.controller.host=localhost
+basic.multicast.controller.port=9001
+intermediate.multicast.controller.host=localhost
+intermediate.multicast.controller.port=9002
+advanced.multicast.controller.host=localhost
+advanced.multicast.controller.port=9003
+
+##SECURITYMANAGER PROPERTIES##
+# This property is necessary for the StartMultiCastController to deal with the security managers that enable the communication with the rec.am.
+# It should match the ID/NAME of the laboratory
+rec.am.host=localhost
+rec.am.port=3700
+basic.rec.am.lab.id=LAB_ME_BASIC
+intermediate.rec.am.lab.id=LAB_ME_INTERMEDIATE
+advanced.rec.am.lab.id=LAB_ME_ADVANCED
+rec.am.securitymanager=com.linkare.rec.impl.multicast.security.CompositeSecurityManager
+rec.am.compositesecuritymanager.list=com.linkare.rec.impl.multicast.security.AllocationManagerSecurityManager
+rec.am.securitymanager.interval.lap.time.minutes=0
+rec.am.securitymanager.near.lap.time.minutes=5
+rec.am.securitymanager.refresh.lap.time.minutes=15
+
+##SYSTEM PROPERTIES - EXPERIMENTS## 
+experiment.driver.openorb.profile=ReCHardware
+experiment.client.openorb.profile=ReCClient
+experiment.client.debug.address.port=8001
+experiment.driver.debug.address.port=8002
+hardwareserver.initial.heap=128m
+hardwareserver.max.heap=1024m
+
+##SYSTEM PROPERTIES - VIDEO##
+vlc.plugins.destdir=eLab/native/plugins
+vlc.plugins.filename=vlcplugins.zip
+video.enabled=yes
+
+##JNLP PROPERTIES
+#Please define the codebase without the trailing slash... It will be added automagically when needed!
+codebase=http://elab.ist.utl.pt/rec/e-lab
+href=elab-client.jnlp
+title=e-lab - Full Laboratory
+vendor=I.S.T. - U.T.L.
+homepage=http://elab.ist.utl.pt/rec
+one-line=Laboratório e-lab - ME
+tooltip=Laboratório e-lab - ME
+short=Laboratório e-lab - ME
+j2se-version=1.6
+
+
+##MAIN CLASSES FOR THE VARIOUS COMPONENTS
+#Old interface Main Class - pt.utl.ist.elab.client.FullClient
+#Newface Main Class - pt.utl.ist.elab.client.FullClientNewInterface
+client.main-class=pt.utl.ist.elab.client.FullClientNewInterface
+multicast.main-class=com.linkare.rec.impl.multicast.startup.MultiCastControllerMain
+experiment.client.main-class=pt.utl.ist.elab.client.@{experiment.name}.ClientMain
+experiment.driver.main-class=pt.utl.ist.elab.driver.@{experiment.name}.ServerMain
+
+
+
+#Marketing/Information messages
+#The following properties are for the elab application title.
+elab.title=e-lab
+elab.vendor=IST
+elab.homepage=http://elab.ist.utl.pt
+elab.description=Laboratórios Online do Instituto Superior Técnico - disponibilizados para o Ministério da Educação de Portugal
+elab.description.oneline=Labs Online
+elab.description.tooltip=Laboratórios Online
+elab.description.short=Labs Online
+elab.icon=images/elab_icon.jpg
+elab.icon.splash=images/elab_splash.jpg
+elab.title.en=e-lab
+elab.homepage.en=http://elab.ist.utl.pt
+elab.description.en=Instituto Superior Técnico's online laboratories - available for the Portuguese Education Ministery
+elab.description.oneline.en=Online Labs
+elab.description.tooltip.en=Online Laboratories
+elab.description.short.en=Online Labs
+
+#and the next ones for the ReC framework and the Linkare TI vendor
+rec.title=Framework ReC
+rec.vendor=Linkare TI
+rec.homepage=http://www.linkare.com/rec
+rec.description='Remote Experienced Control' sistema distribuído de controle e aquisição de dados para suporte de experimentação online, telemedicina e soluções industriais
+rec.description.oneline=Framework Remote Experienced Control
+rec.description.tooltip=Framework distribuída de controle de aquisição de dados
+rec.description.short=Framework ReC
+rec.icon=images/rec_icon.jpg
+rec.icon.splash=images/rec_splash.jpg
+linkare.home.url=http://www.linkare.com
+linkare.home.title=Homepage Linkare TI
+linkare.home.description=Página de entrada do sítio da internet do fornecedor da framework 'Remote Experienced Control', Linkare TI.
+linkare.home.icon=images/linkare_icon.jpg
+rec.title.en=ReC Framework
+rec.homepage.en=http://www.linkare.com/en/rec
+rec.description.en='Remote Experienced Control' distributed data acquisition and control framework for online experiments, telemedicine and industrial solutions
+rec.description.oneline.en=Remote Experienced Control Framework
+rec.description.tooltip.en=Data acquisition and control distributed Framework
+rec.description.short.en=ReC Framework
+linkare.home.url.en=http://www.linkare.com/en
+linkare.home.title.en=Linkare TI's Homepage
+linkare.home.description.en=Linkare TI's webSite, the provider of Remote Experienced Control Framework
+linkare.home.icon=images/linkare_icon.jpg
+
+#The next ones relate to the JFreeChart underlying library
+jfreechart.title=JFreeChart Library
+jfreechart.vendor=JFree.org - David Gilbert (Object Refinery Limited)
+jfreechart.homepage=http://www.jfree.org/jfreechart
+jfreechart.description=JFreeChart is a free 100% Java chart library that makes it easy for developers to display professional quality charts in their applications.
+jfreechart.description.oneline=JFreeChart charting library
+jfreechart.description.tooltip=JFreeChart Library 
+jfreechart.description.short=Charting library
+
+#Last but not least, the OpenORB Java CORBA Object Request Broker 
+openorb.title=Community OpenORB
+openorb.vendor=The Community OpenORB community - see http://openorb.sourceforge.net/who-we-are.html
+openorb.homepage=http://openorb.sourceforge.net/
+openorb.description=OpenORB provides a Java implementation of the OMG CORBA 2.4.2 specification.
+openorb.description.oneline=OpenORB Implementation of OMG CORBA 2.4.2 ORB
+openorb.description.tooltip=Community OpenORB
+openorb.description.short=OpenSource CORBA ORB
+
+#And still the vlc/jvlc properties
+vlc.home.url=http://www.videolan.org/
+vlc.home.title=Videolan Media Player
+vlc.home.description=A Multimedia Player based on opensource GPL License and other underlying software such as gstreamer, ffmpeg and alike
+vlc.home.icon=fetch_from_videolan.png
+vlc.home.url.en=http://www.videolan.org/
+vlc.home.title.en=Videolan Media Player
+vlc.home.description.en=A Multimedia Player based on opensource GPL License and other underlying software such as gstreamer, ffmpeg and alike
+
+#And the os based installer ones
+linux.vlc.intaller.title=Instalador VLC para Linux
+linux.vlc.intaller.vendor=Linkare TI
+linux.intaller.homepage=http://www.linkare.com
+linux.vlc.intaller.description=Instalador do Videolan MediaPlayer e plugins
+linux.vlc.intaller.description.oneline=Instalador VLC para Linux
+linux.vlc.intaller.description.tooltip=Instalador VLC para Linux
+linux.vlc.intaller.description.short=Instalador VLC para Linux
+linux.vlc.intaller.icon=fetch_from_linkare.png
+linux.vlc.intaller.icon.splash=fetch_from_linkare.png
+linux.vlc.intaller.title.en=Linux VLC Installer
+linux.vlc.intaller.homepage.en=http://www.linkare.com
+linux.vlc.intaller.description.en=Videolan MediaPlayer and plugins installer
+linux.vlc.intaller.description.oneline.en=VLC Installer for Linux
+linux.vlc.intaller.description.tooltip.en=VLC Installer for Linux
+linux.vlc.intaller.description.short.en=VLC Installer for Linux
+
+
+windows.vlc.intaller.title=Instalador VLC para Windows
+windows.vlc.intaller.vendor=Linkare TI
+windows.intaller.homepage=http://www.linkare.com
+windows.vlc.intaller.description=Instalador do Videolan MediaPlayer e plugins
+windows.vlc.intaller.description.oneline=Instalador VLC para Windows
+windows.vlc.intaller.description.tooltip=Instalador VLC para Windows
+windows.vlc.intaller.description.short=Instalador VLC para Windows
+windows.vlc.intaller.icon=fetch_from_linkare.png
+windows.vlc.intaller.icon.splash=fetch_from_linkare.png
+windows.vlc.intaller.title.en=Windows VLC Installer
+windows.vlc.intaller.homepage.en=http://www.linkare.com
+windows.vlc.intaller.description.en=Videolan MediaPlayer and plugins installer
+windows.vlc.intaller.description.oneline.en=VLC Installer for Windows
+windows.vlc.intaller.description.tooltip.en=VLC Installer for Windows
+windows.vlc.intaller.description.short.en=VLC Installer for Windows
+
+mac.vlc.intaller.title=Instalador VLC para MaCOSX
+mac.vlc.intaller.vendor=Linkare TI
+mac.intaller.homepage=http://www.linkare.com
+mac.vlc.intaller.description=Instalador do Videolan MediaPlayer e plugins
+mac.vlc.intaller.description.oneline=Instalador VLC para MaCOSX
+mac.vlc.intaller.description.tooltip=Instalador VLC para MaCOSX
+mac.vlc.intaller.description.short=Instalador VLC para MaCOSX
+mac.vlc.intaller.icon=fetch_from_linkare.png
+mac.vlc.intaller.icon.splash=fetch_from_linkare.png
+mac.vlc.intaller.title.en=mac VLC Installer
+mac.vlc.intaller.homepage.en=http://www.linkare.com
+mac.vlc.intaller.description.en=Videolan MediaPlayer and plugins installer
+mac.vlc.intaller.description.oneline.en=VLC Installer for MaCOSX
+mac.vlc.intaller.description.tooltip.en=VLC Installer for MaCOSX
+mac.vlc.intaller.description.short.en=VLC Installer for MaCOSX
+
+##PROCESSINGMANAGER PROPERTIES##
+rec.processingmanager.minthreadpool.coresize= 1
+rec.processingmanager.minthreadpool.maxsize=10
+rec.processingmanager.mediumthreadpool.coresize=10
+rec.processingmanager.mediumthreadpool.maxsize=20
+rec.processingmanager.maxthreadpool.coresize=50
+rec.processingmanager.maxthreadpool.maxsize=100
+#NANOSECONDS
+rec.processingmanager.thread.idletime=11
+
+
+##JMX PROPERTIES##
+basic.rec.multicastcontroller.jmxremote.port=25001
+intermediate.rec.multicastcontroller.jmxremote.port=25002
+advanced.rec.multicastcontroller.jmxremote.port=25003
+java.rmi.server.hostname=`hostname -i`
