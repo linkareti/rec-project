@@ -1959,17 +1959,17 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 	}
 
 	public void showExperimentHeader(final ExpHistory expHistory) {
-		HardwareAcquisitionConfig config = null;
+		HardwareAcquisitionConfig historyExperimentConfig = null;
 		try {
-			config = expHistory.getProducerWrapper().getAcquisitionHeader();
+			historyExperimentConfig = expHistory.getProducerWrapper().getAcquisitionHeader();
 		} catch (final Exception ignored) {
 			LoggerUtil.logThrowable("Couldn't show Experiment Info...", ignored,
 					Logger.getLogger(ReCBaseUI.UI_CLIENT_LOGGER));
 			return;
 		}
 
-		final javax.swing.JFrame frame = new javax.swing.JFrame("Experiment [" + config.getFamiliarName() + "] - "
-				+ config.getTimeStart() + " Info");
+		final javax.swing.JFrame frame = new javax.swing.JFrame("Experiment [" + historyExperimentConfig.getFamiliarName() + "] - "
+				+ historyExperimentConfig.getTimeStart() + " Info");
 		frame.setIconImage((new javax.swing.ImageIcon(getClass().getResource(
 				"/com/linkare/rec/impl/baseUI/resources/hwinfo16.gif"))).getImage());
 
@@ -1988,7 +1988,7 @@ public class ReCBaseUI extends javax.swing.JFrame implements ICustomizerListener
 																		 * getOwnerUserName
 																		 * ()
 																		 */);
-		tainfo.append(ReCBaseUI.LS + config.toString());
+		tainfo.append(ReCBaseUI.LS + historyExperimentConfig.toString());
 		tainfo.setColumns(40);
 		tainfo.setRows(20);
 		frame.getContentPane().add(new javax.swing.JScrollPane(tainfo));

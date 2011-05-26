@@ -27,6 +27,7 @@ public class MultiPanelExperimentGraph extends javax.swing.JPanel implements Exp
 	private final javax.swing.JPanel jPanelContainer;
 	private final javax.swing.JScrollPane jScrollPane1;
 
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public MultiPanelExperimentGraph(final Object[] expDataList) {
 		this.expDataList = expDataList;
 		setLayout(new java.awt.BorderLayout());

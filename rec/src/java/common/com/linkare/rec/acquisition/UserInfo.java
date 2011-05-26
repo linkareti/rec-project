@@ -10,9 +10,7 @@ import com.linkare.rec.data.synch.VTDateTimeHelper;
 
 //Version 7.0 Addition
 
-public final class UserInfo implements IDLEntity
-
-{
+public final class UserInfo implements IDLEntity {
 
 	/**
 	 * 
@@ -27,17 +25,13 @@ public final class UserInfo implements IDLEntity
 
 	public static final int MIN_TIME_LOCK = 0;
 
-	public UserInfo()
-
-	{
+	public UserInfo() {
 
 		setUserName("");
 
 	} // ctor
 
-	public UserInfo(final String userName)
-
-	{
+	public UserInfo(final String userName) {
 
 		setUserName(userName);
 
@@ -134,7 +128,7 @@ public final class UserInfo implements IDLEntity
 	 * 
 	 * 
 	 */
-
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public void setUserProps(final com.linkare.rec.acquisition.Property[] userProps)
 
 	{

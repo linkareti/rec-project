@@ -13,6 +13,7 @@ public final class MultiCastHardwareListHolder implements org.omg.CORBA.portable
 	public MultiCastHardwareListHolder() {
 	}
 
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public MultiCastHardwareListHolder(final com.linkare.rec.acquisition.MultiCastHardware[] initialValue) {
 		value = initialValue;
 	}

@@ -5,7 +5,7 @@ public final class VTDataClientListHolder implements org.omg.CORBA.portable.Stre
 
 	public VTDataClientListHolder() {
 	}
-
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public VTDataClientListHolder(final com.linkare.rec.acquisition.DataClient[] initialValue) {
 		value = initialValue;
 	}

@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import org.omg.PortableServer.Servant;
+
 import com.linkare.rec.acquisition.DataReceiver;
 import com.linkare.rec.acquisition.DataReceiverHelper;
 import com.linkare.rec.acquisition.DataReceiverOperations;
@@ -83,12 +85,13 @@ public abstract class AbstractExpDataModel extends DataCollector implements ExpD
 		}
 
 		try {
-			return (_thisDataReceiver = DataReceiverHelper.narrow(ORBBean
-					.getORBBean()
-					.getAutoIdRootPOA()
-					.servant_to_reference(
-							ORBBean.getORBBean().registerAutoIdRootPOAServant(DataReceiver.class, this,
-									(oid = new ObjectID())))));
+			oid = new ObjectID();
+			Servant registeredServant = ORBBean.getORBBean()
+					.registerAutoIdRootPOAServant(DataReceiver.class, this, oid);
+			org.omg.CORBA.Object thisReference = ORBBean.getORBBean().getAutoIdRootPOA()
+					.servant_to_reference(registeredServant);
+			_thisDataReceiver = DataReceiverHelper.narrow(thisReference);
+			return _thisDataReceiver;
 
 		} catch (final Exception e) {
 			e.printStackTrace();

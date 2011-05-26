@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
@@ -507,24 +509,25 @@ public class Lab extends DisplayNode implements com.linkare.rec.impl.baseUI.conf
 			final String childNodeName = (childNode.getLocalName() == null ? childNode.getNodeName().intern()
 					: childNode.getLocalName().intern());
 
-			if (childNodeName.equals("Apparatus")) {
+			if ("Apparatus".equals(childNodeName)) {
 				final Apparatus aApparatus = new com.linkare.rec.impl.baseUI.config.Apparatus();
 				aApparatus._setPropertyChangeSupport(eventListeners);
 				aApparatus.readNode(childNode);
 				_Apparatus.add(aApparatus);
-			} else if (childNodeName.equals("WebResource")) {
+			} else if ("WebResource".equals(childNodeName)) {
 				final WebResource aWebResource = new com.linkare.rec.impl.baseUI.config.WebResource();
 				aWebResource._setPropertyChangeSupport(eventListeners);
 				aWebResource.readNode(childNode);
 				_WebResource.add(aWebResource);
-			} else if (childNodeName.equals("LocalizationBundle")) {
+			} else if ("LocalizationBundle".equals(childNodeName)) {
 				final LocalizationBundle aLocalizationBundle = new com.linkare.rec.impl.baseUI.config.LocalizationBundle();
 				aLocalizationBundle._setPropertyChangeSupport(eventListeners);
 				aLocalizationBundle.readNode(childNode);
 				_LocalizationBundle.add(aLocalizationBundle);
 				loadLocalizationBundle(aLocalizationBundle);
 			} else {
-				// Found extra unrecognized childNode
+				Logger.getLogger(Lab.class.getName()).log(Level.WARNING,
+						"Found a child nome of type '" + childNodeName + "' that is not recognized!");
 			}
 		}
 	}

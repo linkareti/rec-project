@@ -58,40 +58,40 @@ public class DisplayNodeTreeCellRenderer extends DefaultTreeCellRenderer {
 		if (o instanceof DisplayNode) {
 			dtn = (DisplayNode) o;
 
-			final JPanel panel = new JPanel(new java.awt.BorderLayout());
-			panel.setBackground(UIManager.getColor("Tree.textBackground"));
+			final JPanel nodePanel = new JPanel(new java.awt.BorderLayout());
+			nodePanel.setBackground(UIManager.getColor("Tree.textBackground"));
 
-			final JCheckBox checkBox = new JCheckBox();
-			checkBox.setBackground(UIManager.getColor("Tree.textBackground"));
+			final JCheckBox nodeCheckBox = new JCheckBox();
+			nodeCheckBox.setBackground(UIManager.getColor("Tree.textBackground"));
 
 			if (o instanceof Display) {
 				if (dtn.getIcon() != null) {
-					final JLabel labelIcon = new JLabel();
-					labelIcon.setBackground(UIManager.getColor("Tree.textBackground"));
-					panel.add(labelIcon, java.awt.BorderLayout.WEST);
-					labelIcon.setIcon(dtn.getIcon());
-					labelIcon.setEnabled(dtn.isEnabled());
+					final JLabel nodeLabelIcon = new JLabel();
+					nodeLabelIcon.setBackground(UIManager.getColor("Tree.textBackground"));
+					nodePanel.add(nodeLabelIcon, java.awt.BorderLayout.WEST);
+					nodeLabelIcon.setIcon(dtn.getIcon());
+					nodeLabelIcon.setEnabled(dtn.isEnabled());
 				}
 
 				if (dtn.getText() != null) {
-					final JLabel label = new JLabel();
+					final JLabel nodeLabel = new JLabel();
 					if (!dtn.isConnected()) {
-						label.setFont(new java.awt.Font("Dialog", 0, 12));
+						nodeLabel.setFont(new java.awt.Font("Dialog", 0, 12));
 					} else {
-						label.setFont(new java.awt.Font("Dialog", 3, 12));
+						nodeLabel.setFont(new java.awt.Font("Dialog", 3, 12));
 					}
 
-					label.setBackground(UIManager.getColor("Tree.textBackground"));
-					label.setText(dtn.getText());
-					label.setEnabled(dtn.isEnabled());
-					panel.add(label, java.awt.BorderLayout.EAST);
+					nodeLabel.setBackground(UIManager.getColor("Tree.textBackground"));
+					nodeLabel.setText(dtn.getText());
+					nodeLabel.setEnabled(dtn.isEnabled());
+					nodePanel.add(nodeLabel, java.awt.BorderLayout.EAST);
 				}
 
-				panel.add(checkBox, java.awt.BorderLayout.CENTER);
-				checkBox.setVisible(true);
-				checkBox.setSelected(dtn.isSelected());
+				nodePanel.add(nodeCheckBox, java.awt.BorderLayout.CENTER);
+				nodeCheckBox.setVisible(true);
+				nodeCheckBox.setSelected(dtn.isSelected());
 
-				final JCheckBox checkBoxf = checkBox;
+				final JCheckBox checkBoxf = nodeCheckBox;
 				dtn.addDisplayNodePropertyChangeListener(new java.beans.PropertyChangeListener() {
 					@Override
 					public void propertyChange(final java.beans.PropertyChangeEvent event) {
@@ -112,43 +112,43 @@ public class DisplayNodeTreeCellRenderer extends DefaultTreeCellRenderer {
 				 * });
 				 */
 			} else {
-				final JLabel label = new JLabel();
+				final JLabel nodeLabel = new JLabel();
 
 				final int minHeight = 0;
 
 				if (dtn.getIcon() != null) {
-					label.setBackground(UIManager.getColor("Tree.textBackground"));
-					label.setIcon(dtn.getIcon());
+					nodeLabel.setBackground(UIManager.getColor("Tree.textBackground"));
+					nodeLabel.setIcon(dtn.getIcon());
 				}
 
 				if (dtn.getText() != null) {
-					label.setFont(new java.awt.Font("Dialog", 0, 12));
-					label.setText(dtn.getText());
+					nodeLabel.setFont(new java.awt.Font("Dialog", 0, 12));
+					nodeLabel.setText(dtn.getText());
 					if (!dtn.isConnected()) {
-						label.setFont(new java.awt.Font("Dialog", 0, 12));
+						nodeLabel.setFont(new java.awt.Font("Dialog", 0, 12));
 					} else {
-						label.setFont(new java.awt.Font("Dialog", 3, 12));
+						nodeLabel.setFont(new java.awt.Font("Dialog", 3, 12));
 					}
-					label.setEnabled(dtn.isEnabled());
+					nodeLabel.setEnabled(dtn.isEnabled());
 				}
-				label.setMinimumSize(new java.awt.Dimension((int) label.getPreferredSize().getWidth(), (int) label
+				nodeLabel.setMinimumSize(new java.awt.Dimension((int) nodeLabel.getPreferredSize().getWidth(), (int) nodeLabel
 						.getPreferredSize().getHeight() + 2));
-				label.setPreferredSize(new java.awt.Dimension((int) label.getPreferredSize().getWidth(), (int) label
+				nodeLabel.setPreferredSize(new java.awt.Dimension((int) nodeLabel.getPreferredSize().getWidth(), (int) nodeLabel
 						.getPreferredSize().getHeight() + 2));
-				panel.add(label, java.awt.BorderLayout.CENTER);
+				nodePanel.add(nodeLabel, java.awt.BorderLayout.CENTER);
 			}
 			if (sel) {
-				panel.setBackground(selectedColor);
+				nodePanel.setBackground(selectedColor);
 			} else {
-				panel.setBackground(unSelectedColor);
+				nodePanel.setBackground(unSelectedColor);
 			}
 
 			if (dtn.getToolTipText() != null) {
-				panel.setToolTipText("<html>" + dtn.getToolTipText() + "</html>");
-				ToolTipManager.sharedInstance().registerComponent(panel);
+				nodePanel.setToolTipText("<html>" + dtn.getToolTipText() + "</html>");
+				ToolTipManager.sharedInstance().registerComponent(nodePanel);
 			}
 
-			return panel;
+			return nodePanel;
 		} else {
 			final JLabel labelReC = new JLabel();
 			labelReC.setFont(new java.awt.Font("Dialog", 0, 12));

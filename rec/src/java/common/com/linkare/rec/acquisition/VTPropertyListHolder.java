@@ -12,7 +12,7 @@ public final class VTPropertyListHolder implements org.omg.CORBA.portable.Stream
 
 	public VTPropertyListHolder() {
 	}
-
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public VTPropertyListHolder(final com.linkare.rec.acquisition.Property[] initialValue) {
 		value = initialValue;
 	}

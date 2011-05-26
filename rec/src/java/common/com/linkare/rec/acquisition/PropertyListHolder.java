@@ -14,6 +14,7 @@ public final class PropertyListHolder implements org.omg.CORBA.portable.Streamab
 	public PropertyListHolder() {
 	}
 
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public PropertyListHolder(final com.linkare.rec.acquisition.Property[] initialValue) {
 		value = initialValue;
 	}

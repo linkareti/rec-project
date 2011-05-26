@@ -134,7 +134,7 @@ public class ORBBean {
 		}
 	}
 
-	Policy bidirpol = null;
+	private Policy bidirpol = null;
 
 	private Policy getBidirPolicy() {
 		synchronized (orb_synch) {
@@ -169,11 +169,11 @@ public class ORBBean {
 
 					rootPOA.the_POAManager().activate();
 
-					final Policy bidirpol = getBidirPolicy();
+					final Policy currentBidirPolicy = getBidirPolicy();
 
 					Policy[] poa_policies = null;
 
-					if (bidirpol == null) {
+					if (currentBidirPolicy == null) {
 						poa_policies = new Policy[] {
 								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
 								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
@@ -184,7 +184,7 @@ public class ORBBean {
 								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
 					} else {
 						poa_policies = new Policy[] {
-								bidirpol,
+								currentBidirPolicy,
 								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.USER_ID),
 								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
 								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.NO_IMPLICIT_ACTIVATION),
@@ -265,10 +265,10 @@ public class ORBBean {
 					final POA rootPOA = POAHelper.narrow(the_orb.resolve_initial_references("RootPOA"));
 					rootPOA.the_POAManager().activate();
 
-					final Policy bidirpol = getBidirPolicy();
+					final Policy currentBidirPolicy = getBidirPolicy();
 					Policy[] poa_policies = null;
 
-					if (bidirpol == null) {
+					if (currentBidirPolicy == null) {
 						poa_policies = new Policy[] {
 								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.SYSTEM_ID),
 								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
@@ -279,7 +279,7 @@ public class ORBBean {
 								rootPOA.create_thread_policy(ThreadPolicyValue.ORB_CTRL_MODEL), };
 					} else {
 						poa_policies = new Policy[] {
-								bidirpol,
+								currentBidirPolicy,
 								rootPOA.create_id_assignment_policy(IdAssignmentPolicyValue.SYSTEM_ID),
 								rootPOA.create_id_uniqueness_policy(IdUniquenessPolicyValue.UNIQUE_ID),
 								rootPOA.create_implicit_activation_policy(ImplicitActivationPolicyValue.IMPLICIT_ACTIVATION),

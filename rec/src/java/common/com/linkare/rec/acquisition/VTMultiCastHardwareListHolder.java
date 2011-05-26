@@ -5,7 +5,7 @@ public final class VTMultiCastHardwareListHolder implements org.omg.CORBA.portab
 
 	public VTMultiCastHardwareListHolder() {
 	}
-
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public VTMultiCastHardwareListHolder(final com.linkare.rec.acquisition.MultiCastHardware[] initialValue) {
 		value = initialValue;
 	}

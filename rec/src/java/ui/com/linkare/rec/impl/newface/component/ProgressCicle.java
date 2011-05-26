@@ -65,6 +65,7 @@ public class ProgressCicle extends JLabel {
 		setIcon(idleIcon);
 	}
 
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public void setBusyIcons(final Icon[] busyIcons) {
 		this.busyIcons = busyIcons;
 		initBusyIconTimer(30, busyIcons);

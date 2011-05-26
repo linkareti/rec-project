@@ -13,6 +13,7 @@ public final class UserInfoListHolder implements org.omg.CORBA.portable.Streamab
 	public UserInfoListHolder() {
 	}
 
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public UserInfoListHolder(final com.linkare.rec.acquisition.UserInfo[] initialValue) {
 		value = initialValue;
 	}

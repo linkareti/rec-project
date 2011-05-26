@@ -262,6 +262,7 @@ public class MultSeriesTableModelProxy extends javax.swing.table.DefaultTableMod
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public void setColArray(final int[] colArray) {
 		this.colArray = colArray;
 	}

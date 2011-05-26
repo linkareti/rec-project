@@ -37,6 +37,7 @@ public class ObjectID implements java.io.Serializable {
 	 * 
 	 * @param oid New value of property oid.
 	 */
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public void setOid(final byte[] oid) {
 		this.oid = oid;
 	}

@@ -319,6 +319,7 @@ public class MultSeriesXYDataSetProxy extends org.jfree.data.xy.AbstractXYDatase
 	 * 
 	 * @param channelDisplayY New value of property channelDisplayY.
 	 */
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public void setChannelDisplayYArray(final int[] channelDisplayYArray) {
 		this.channelDisplayYArray = channelDisplayYArray;
 	}

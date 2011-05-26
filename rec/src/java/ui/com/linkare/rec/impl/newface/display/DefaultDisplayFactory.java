@@ -41,8 +41,8 @@ public class DefaultDisplayFactory extends AbstractDisplayFactory {
 					tempDisplays.add(new ExpDataDisplayTreeIconAndName((ExpDataDisplay) dataDisplayTemp, display));
 				}
 
-			} catch (final Throwable t) {
-				DefaultDisplayFactory.log.log(Level.SEVERE, "Could not instantiate display", t);
+			} catch (final Exception e) {
+				DefaultDisplayFactory.log.log(Level.SEVERE, "Could not instantiate display", e);
 			}
 		}
 		return tempDisplays;

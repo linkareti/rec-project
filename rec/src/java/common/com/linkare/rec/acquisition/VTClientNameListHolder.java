@@ -5,7 +5,8 @@ public final class VTClientNameListHolder implements org.omg.CORBA.portable.Stre
 
 	public VTClientNameListHolder() {
 	}
-
+	
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public VTClientNameListHolder(final String[] initialValue) {
 		value = initialValue;
 	}

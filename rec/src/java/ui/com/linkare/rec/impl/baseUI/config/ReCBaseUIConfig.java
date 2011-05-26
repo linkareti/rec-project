@@ -983,23 +983,24 @@ public class ReCBaseUIConfig implements CommonBean {
 			if (childNode.getFirstChild() != null) {
 				childNodeValue = childNode.getFirstChild().getNodeValue();
 			}
-			if (childNodeName == "Lab") {
+			if ("Lab".equals(childNodeName)) {
 				final Lab aLab = new Lab();
 				aLab._setPropertyChangeSupport(eventListeners);
 				aLab.readNode(childNode);
 				_Lab.add(aLab);
-			} else if (childNodeName == "WebResource") {
+			} else if ("WebResource".equals(childNodeName)) {
 				final WebResource aWebResource = new WebResource();
 				aWebResource._setPropertyChangeSupport(eventListeners);
 				aWebResource.readNode(childNode);
 				_WebResource.add(aWebResource);
-			} else if (childNodeName == "LocalizationBundle") {
+			} else if ("LocalizationBundle".equals(childNodeName)) {
 				final LocalizationBundle aLocalizationBundle = new LocalizationBundle();
 				aLocalizationBundle._setPropertyChangeSupport(eventListeners);
 				aLocalizationBundle.readNode(childNode);
 				addLocalizationBundle(aLocalizationBundle);
 			} else {
-				// Found extra unrecognized childNode
+				Logger.getLogger(ReCBaseUIConfig.class.getName()).log(Level.WARNING,
+						"Found a child nome of type '" + childNodeName + "' that is not recognized!");
 			}
 		}
 	}

@@ -103,17 +103,17 @@ public class HardwareInfoXMLReader {
 	/** Scan through org.w3c.dom.Element named AvailableOutputIDataSource. */
 	void visitElement_AvailableOutputIDataSource(final Element element, final ChannelInfo info) { // <AvailableOutputIDataSource>
 		// element.getValue();
-		final NamedNodeMap attrs = element.getAttributes();
-		for (int i = 0; i < attrs.getLength(); i++) {
-			final Attr attr = (Attr) attrs.item(i);
-			if (attr.getName().equals("href")) { // <AvailableOutputIDataSource
-				// href="???">
-				// attr.getValue();
-				// TODO: Big silent noop for now... should instanciate
-				// IDataSource class, add it to a DataProducer and make it
-				// available...
-			}
-		}
+//		final NamedNodeMap attrs = element.getAttributes();
+//		for (int i = 0; i < attrs.getLength(); i++) {
+//			final Attr attr = (Attr) attrs.item(i);
+//			// TODO: Big silent noop for now... should instanciate
+//			// IDataSource class, add it to a DataProducer and make it
+//			// available...
+//			//if (attr.getName().equals("href")) { // <AvailableOutputIDataSource
+//				// href="???">
+//				// attr.getValue();
+//			//}
+//		}
 	}
 
 	/** Scan through org.w3c.dom.Element named ChannelInfo. */

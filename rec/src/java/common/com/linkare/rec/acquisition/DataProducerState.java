@@ -98,4 +98,14 @@ public class DataProducerState implements org.omg.CORBA.portable.IDLEntity {
 
 		return ((DataProducerState) other).getValue() == getValue();
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		int retVal = 35;
+		retVal += 17 * getValue();
+		return retVal;
+	}
 } // class DataProducerState

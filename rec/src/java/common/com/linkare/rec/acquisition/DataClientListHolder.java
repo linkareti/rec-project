@@ -7,6 +7,7 @@ public final class DataClientListHolder implements org.omg.CORBA.portable.Stream
 	public DataClientListHolder() {
 	}
 
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public DataClientListHolder(final com.linkare.rec.acquisition.DataClient[] initialValue) {
 		value = initialValue;
 	}

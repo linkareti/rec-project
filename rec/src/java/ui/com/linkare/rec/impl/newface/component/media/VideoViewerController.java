@@ -2,6 +2,7 @@ package com.linkare.rec.impl.newface.component.media;
 
 import java.awt.Canvas;
 import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
@@ -31,8 +32,7 @@ import com.sun.jna.Platform;
  */
 public class VideoViewerController {
 
-	// TODO colocar logging do video module
-	private static final Logger log = Logger.getLogger(VideoViewerController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(VideoViewerController.class.getName());
 
 	/**
 	 * The key that specifies the preference name for the path where the local
@@ -127,6 +127,7 @@ public class VideoViewerController {
 		initPlayer();
 	}
 
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	private VideoViewerController(final String[] params) {
 
 		jvlc = new JVLC(params);
@@ -161,6 +162,7 @@ public class VideoViewerController {
 	 *      href="http://wiki.videolan.org/Documentation:Play_HowTo/Advanced_Use_of_VLC">
 	 *      Lista de parâmetros suportados pelo VLC.</a>.
 	 */
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public static VideoViewerController getInstance(final String[] params) {
 
 		if (VideoViewerController.controller == null) {
@@ -335,7 +337,7 @@ public class VideoViewerController {
 			@Override
 			public void endReached(final MediaPlayer arg0) {
 
-				VideoViewerController.log.info("MediaPlayer end reached.");
+				VideoViewerController.LOGGER.info("MediaPlayer end reached.");
 
 				// Se quando chega ao end está stopped é porque não recebeu mais
 				// streams.
@@ -426,22 +428,11 @@ public class VideoViewerController {
 				}
 			}
 		} else {
-			VideoViewerController.log.warning("There is no player!");
+			VideoViewerController.LOGGER.warning("There is no player!");
 		}
 	}
 
-	/**
-	 * Permite a execução de um mrl directamente, sem ser necessário criar os
-	 * objectos auxiliares, como o MediaPlayer e os descriptors. Deve ser usado
-	 * sempre que se pretende efectuar o play de um vídeo remotamente.
-	 * 
-	 * @param mrl Media URL remoto que se pretende usar.
-	 */
-	// Delete: N funciona como pretendido e nem sequer tem o event handling!!!!
-	// public void play(String mrl) {
-	// jvlc.play(mrl);
-	// //TODO falta a parte do VLM
-	// }
+	
 	/**
 	 * Termina a execução do player. Se estiver a fazer transcoding, termina
 	 * também e liberta os recursos do vlm.
@@ -460,8 +451,8 @@ public class VideoViewerController {
 		try {
 			// mediaListPlayer.stop();
 			player.stop();
-		} catch (final Throwable e) {
-			e.printStackTrace();
+		} catch (final Exception e) {
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
 
 		if (vlm != null) {
@@ -642,8 +633,7 @@ public class VideoViewerController {
 			try {
 				Thread.sleep(VideoViewerController.PAUSE_TIME);
 			} catch (final InterruptedException e) {
-				// Catarino: esta excepção é mesmo para ignorar totalmente ou
-				// devemos apresentar o log pelo menos?
+				LOGGER.log(Level.WARNING,e.getMessage(),e);
 			}
 			pause();
 		}
@@ -714,7 +704,7 @@ public class VideoViewerController {
 
 		// TODO falta sincronizar correctamente para que o player não sobreponha
 		// frames às definidas por acção do utilizador.
-		VideoViewerController.log.fine("TimeChanged event tratado por " + Thread.currentThread());
+		VideoViewerController.LOGGER.fine("TimeChanged event tratado por " + Thread.currentThread());
 		final long newPosition = getNewVideoPosition(pos, max);
 		player.setTime(newPosition);
 		refreshPausedVideo();
@@ -764,28 +754,11 @@ public class VideoViewerController {
 		absoluteFrame0 = -1;
 	}
 
-	/********************************************************************
+	/* *******************************************************************
 	 * Código para event handling *
-	 ********************************************************************/
+	 ******************************************************************* */
 
-	// Delete
-	/*
-	 * public void
-	 * addMediaTimeChangedEventListener(MediaTimeChangedEventListener listener)
-	 * { eventListeners.add(MediaTimeChangedEventListener.class, listener); }
-	 * 
-	 * public void
-	 * removeMediaTimeChangedEventListener(MediaTimeChangedEventListener
-	 * listener) { eventListeners.remove(MediaTimeChangedEventListener.class,
-	 * listener); }
-	 * 
-	 * private void fireMediaTimeChangedEvent(MediaTimeChangedEvent evt) {
-	 * Object[] listeners = eventListeners.getListenerList(); for (int i=0;
-	 * i<listeners.length; i+=2) { if
-	 * (listeners[i]==MediaTimeChangedEventListener.class) {
-	 * ((MediaTimeChangedEventListener)listeners[i+1]).timeChanged(evt); } } }
-	 */
-
+	
 	public void addMediaApplicationEventListener(final MediaApplicationEventListener listener) {
 		eventListeners.add(MediaApplicationEventListener.class, listener);
 	}

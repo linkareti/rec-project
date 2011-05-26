@@ -119,15 +119,6 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 				return (u1.getNextLockTime()[0].getMilliSeconds() - u2.getNextLockTime()[0].getMilliSeconds()) > 0 ? +1
 						: -1;
 			}
-
-			@Override
-			public boolean equals(final Object other) {
-				if (other == null || !(other.getClass() == this.getClass())) {
-					return false;
-				}
-
-				return true;
-			}
 		});
 
 		final Vector<String[]> expUsersList = new Vector<String[]>(expUsers.length);

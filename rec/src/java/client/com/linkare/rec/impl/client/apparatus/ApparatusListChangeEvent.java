@@ -25,6 +25,7 @@ public class ApparatusListChangeEvent extends java.util.EventObject {
 	 * @param source
 	 * @param apparatus
 	 */
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public ApparatusListChangeEvent(final Object source, final Apparatus[] apparatus) {
 		super(source);
 		this.apparatus = apparatus;
@@ -44,6 +45,7 @@ public class ApparatusListChangeEvent extends java.util.EventObject {
 	 * 
 	 * @param apparatus New value of property apparatus.
 	 */
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public void setApparatus(final Apparatus[] apparatus) {
 		this.apparatus = apparatus;
 	}

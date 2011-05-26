@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 
 import javax.swing.event.EventListenerList;
 
+import org.omg.PortableServer.Servant;
+
 import com.linkare.rec.acquisition.DataProducer;
 import com.linkare.rec.acquisition.DataProducerHelper;
 import com.linkare.rec.acquisition.DataProducerOperations;
@@ -57,11 +59,14 @@ public class BaseDataProducer implements DataProducerOperations, QueueLogger {
 		}
 
 		try {
-			return (_this = DataProducerHelper.narrow(ORBBean
+			Servant registeredServant = ORBBean.getORBBean().registerAutoIdRootPOAServant(DataProducer.class, this, null);
+			org.omg.CORBA.Object thisReference = ORBBean
 					.getORBBean()
 					.getAutoIdRootPOA()
 					.servant_to_reference(
-							ORBBean.getORBBean().registerAutoIdRootPOAServant(DataProducer.class, this, null))));
+							registeredServant);
+			_this = DataProducerHelper.narrow(thisReference);
+			return _this;
 		} catch (final Exception e) {
 			LoggerUtil.logThrowable("Couldn't Register this BaseDataProducer with ORB", e,
 					Logger.getLogger(BaseDataProducer.BASE_DATAPRODUCER_LOGGER));

@@ -17,6 +17,7 @@ public class ExpUsersListEvent extends java.util.EventObject {
 	private static final long serialVersionUID = 5596745922812557782L;
 	private final com.linkare.rec.acquisition.UserInfo[] userInfo;
 
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public ExpUsersListEvent(final Object source, final com.linkare.rec.acquisition.UserInfo[] userInfo) {
 		super(source);
 		this.userInfo = userInfo;

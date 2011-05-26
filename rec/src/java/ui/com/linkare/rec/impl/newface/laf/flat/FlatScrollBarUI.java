@@ -65,10 +65,11 @@ public class FlatScrollBarUI extends MetalScrollBarUI {
 				// trackBounds.height );//BOTTOM
 				// g.drawLine( 1, 1, trackBounds.width - 1, 1 ); //TOP
 
-			} else {
+			} 
+			//else {
 				// MetalUtils.drawDisabledBorder(g, 0, 0, trackBounds.width,
 				// trackBounds.height );
-			}
+			//}
 
 		} else // HORIZONTAL
 		{
@@ -85,10 +86,11 @@ public class FlatScrollBarUI extends MetalScrollBarUI {
 				// g.drawLine( trackBounds.width , 1, trackBounds.width ,
 				// trackBounds.height - 1 ); // RIGHT
 
-			} else {
+			} 
+			//else {
 				// MetalUtils.drawDisabledBorder(g, 0, 0, trackBounds.width,
 				// trackBounds.height );
-			}
+			//}
 		}
 
 		g.translate(-trackBounds.x, -trackBounds.y);

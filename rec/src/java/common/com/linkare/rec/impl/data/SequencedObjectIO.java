@@ -19,6 +19,10 @@ import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+
+import com.linkare.rec.impl.logging.LoggerUtil;
 
 /**
  * 
@@ -28,13 +32,17 @@ public class SequencedObjectIO implements Serializable {
 	/**
 	 * 
 	 */
+	private static final int BUFFER_SIZE = 1024;
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1382237311327166592L;
 	private transient File file;
-	private boolean file_dirty = false;
+	private boolean dirtyFile = false;
 	private boolean isTemporary = false;
 	private transient RandomAccessFile raf;
 	private transient ObjectOutputStream seqWriteStream;
-	private ArrayList<long[]> objectsLocations = null;
+	private List<long[]> objectsLocations = null;
 	private int currentIndex = 0;
 
 	public SequencedObjectIO() throws IOException {
@@ -53,6 +61,7 @@ public class SequencedObjectIO implements Serializable {
 	 * Getter for property file.
 	 * 
 	 * @return Value of property file.
+	 * @throws IOException
 	 * 
 	 */
 	public File getFile() throws IOException {
@@ -62,16 +71,18 @@ public class SequencedObjectIO implements Serializable {
 	/**
 	 * Setter for property file.
 	 * 
-	 * @param file New value of property file.
+	 * @param outFile
+	 * @throws IOException
 	 * 
 	 */
-	public void setFile(File f) throws IOException {
-		if (file != null && f != null && f.equals(file)) {
+	public final void setFile(final File outFile) throws IOException {
+		File tempFile = outFile;
+		if (file != null && tempFile != null && tempFile.equals(file)) {
 			return;
 		} else {
 
-			if (f == null) {
-				f = File.createTempFile("TempIndexedObjectIO_", ".mser");
+			if (tempFile == null) {
+				tempFile = File.createTempFile("TempIndexedObjectIO_", ".mser");
 				objectsLocations = new ArrayList<long[]>();
 				isTemporary = true;
 				if (file != null) {
@@ -79,18 +90,15 @@ public class SequencedObjectIO implements Serializable {
 				}
 			} else {
 				isTemporary = false;
-				if (!f.exists()) {
-					f.createNewFile();
+				if (!tempFile.exists()) {
+					tempFile.createNewFile();
 				}
 				if (file != null) {
 					closeIO();
 
-					// System.out.println("Renaming file from:" +
-					// file.getAbsolutePath() + "to:" + f.getAbsolutePath());
-
 					final FileInputStream fis = new FileInputStream(file);
-					final FileOutputStream fos = new FileOutputStream(f);
-					final byte[] dataChunk = new byte[1024];
+					final FileOutputStream fos = new FileOutputStream(tempFile);
+					final byte[] dataChunk = new byte[BUFFER_SIZE];
 					int bytesCount = 0;
 					while ((bytesCount = fis.read(dataChunk)) != -1) {
 						fos.write(dataChunk, 0, bytesCount);
@@ -99,17 +107,15 @@ public class SequencedObjectIO implements Serializable {
 					fos.flush();
 					fos.close();
 
-					// System.out.println("Renamed and moved contents of file from:"
-					// + file.getAbsolutePath() + "to:" + f.getAbsolutePath());
 				} else {
 					objectsLocations = new ArrayList<long[]>();
 				}
 
 			}
 
-			file = f;
+			file = tempFile;
 
-			file_dirty = true;
+			dirtyFile = true;
 
 			openIO();
 		}
@@ -126,23 +132,15 @@ public class SequencedObjectIO implements Serializable {
 				raf = null;
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(SequencedObjectIO.class.getName()));
 		}
-		// System.out.println("No exception here at closeIO");
 	}
 
 	private void openIO() throws IOException {
-		if (file_dirty) {
+		if (dirtyFile) {
 			closeIO();
-			// nc
 			raf = new RandomAccessFile(getFile(), "rw");
-			// *nc
-			// raf=new RandomAccessFile(getFile(),"r");
-
-			// seqWriteStream=new ObjectOutputStream(new
-			// FileOutputStream(getFile()));
-
-			file_dirty = false;
+			dirtyFile = false;
 		}
 	}
 
@@ -175,30 +173,18 @@ public class SequencedObjectIO implements Serializable {
 		Object retVal = null;
 		synchronized (raf) {
 			try {
-				/*
-				 * raf.seek(location[0]); raf.readFully(data);
-				 * ByteArrayInputStream bais=new ByteArrayInputStream(data);
-				 * ObjectInputStream ois=new ObjectInputStream(bais);
-				 * retVal=ois.readObject(); ois.close(); bais.close();
-				 */
-
 				raf.seek(location[0]);
 				raf.readFully(data);
 				final ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
-				// nc
 				final BufferedInputStream bis = new BufferedInputStream(bais);
-				// *nc
 
-				// ObjectInputStream ois=new ObjectInputStream(bais);
 				final ObjectInputStream ois = new ObjectInputStream(bis);
 				retVal = ois.readObject();
 				ois.close();
 
-				// nc
 				bis.close();
 				bais.close();
-				// *nc
 			} catch (final IOException e) {
 				throw new SequencedObjectReadException(e, index);
 			} catch (final ClassNotFoundException e) {
@@ -214,14 +200,6 @@ public class SequencedObjectIO implements Serializable {
 			synchronized (raf)
 
 			{
-				/*
-				 * long startPos=getFile().length();
-				 * seqWriteStream.writeObject(value); seqWriteStream.flush();
-				 * long endPos=getFile().length()-1; //oos.close();
-				 * objectsLocations.add(new long[] {startPos,endPos});
-				 * currentIndex++;
-				 */
-
 				long startPos = 0;
 
 				if (currentIndex > 0) {
@@ -229,40 +207,25 @@ public class SequencedObjectIO implements Serializable {
 					startPos = location[1] + 1;
 				}
 
-				// THE FILE LENGTH WASN'T WORKING IN WINDOWS...
-				// long startPos=getFile().length();
-
-				// nc
 				final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				seqWriteStream = new ObjectOutputStream(baos);
-				// *nc
 
 				seqWriteStream.writeObject(value);
 				seqWriteStream.flush();
 
-				// nc
 				raf.seek(startPos);
 				raf.write(baos.toByteArray());
-				// *nc
 
-				// TESTING
 				baos.close();
 				seqWriteStream.close();
-				// END TESTING
 
-				// long endPos=getFile().length()-1;
 				final long endPos = startPos + baos.toByteArray().length - 1;
 
 				objectsLocations.add(new long[] { startPos, endPos });
 				currentIndex++;
 			}
-		} catch (final java.io.IOException ioe) {
-			/*
-			 * System.out.println("********************");
-			 * System.out.println("Exception AT indexed Object IO");
-			 * System.out.println("********************");
-			 */
-			ioe.printStackTrace();
+		} catch (final IOException e) {
+			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(SequencedObjectIO.class.getName()));
 		}
 	}
 
@@ -271,10 +234,9 @@ public class SequencedObjectIO implements Serializable {
 			for (final Object object : objects) {
 				writeObject(object);
 			}
-		} catch (final Throwable t) {
-			// System.out.println("Error at writeObjects in SequencedObjectIO...");
-			t.printStackTrace(System.out);
-			throw new IOException(t.getMessage());
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(SequencedObjectIO.class.getName()));
+			throw new IOException(e.getMessage());
 		}
 
 	}
@@ -295,7 +257,6 @@ public class SequencedObjectIO implements Serializable {
 		return retVal;
 	}
 
-	// private static final long serialVersionUID=1938846425062959110L;
 	private void writeObject(final ObjectOutputStream oos) throws IOException {
 		oos.defaultWriteObject();
 		oos.writeObject(getFile());
@@ -317,38 +278,13 @@ public class SequencedObjectIO implements Serializable {
 	@Override
 	protected void finalize() throws Throwable {
 		try {
-			// System.out.println("Class not need any more  - SequencedObjectIO...");
 			closeIO();
-			/*
-			 * System.out.println("file is temporary? "+isTemporary);
-			 * System.out.println("*******************************");
-			 * System.out.
-			 * println("Where is the file? "+getFile().getAbsolutePath());
-			 */
 			if (isTemporary && getFile() != null) {
-				// System.out.println("Deleting File...!");
 				getFile().delete();
 			}
 		} catch (final Exception e) {
-			/*
-			 * System.out.println("*******************************");
-			 * System.out.println("*******************************");
-			 * System.out.println("GOT AN EXCEPTION WHILE FINALIZING");
-			 * e.printStackTrace();
-			 * System.out.println("*******************************");
-			 * System.out.println("*******************************");
-			 */
+			LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(SequencedObjectIO.class.getName()));
 		}
+		super.finalize();
 	}
-	/*
-	 * public Object removeObject(Object key) throws IndexedObjectReadException
-	 * { Object retVal=readObject(key); objectsLocations.remove(key); return
-	 * retVal; }
-	 * 
-	 * public Object[] removeObjects(Object[] keys) throws
-	 * IndexedObjectReadException { Object[] retVal=readObjects(keys); for(int
-	 * i=0;i<keys.length;i++) objectsLocations.remove(keys[i]);
-	 * 
-	 * return retVal; }
-	 */
 }

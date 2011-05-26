@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
@@ -297,15 +299,15 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	public com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig[] getDefaultAcquisitionConfig() {
 		// Check this --- it should be probably 0 here
 		final DefaultAcquisitionConfig[] arr = new DefaultAcquisitionConfig[_DefaultAcquisitionConfig.size()];
-		return (DefaultAcquisitionConfig[]) _DefaultAcquisitionConfig.toArray(arr);
+		return _DefaultAcquisitionConfig.toArray(arr);
 	}
 
-	public List fetchDefaultAcquisitionConfigList() {
+	public List<DefaultAcquisitionConfig> fetchDefaultAcquisitionConfigList() {
 		return _DefaultAcquisitionConfig;
 	}
 
 	public com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig getDefaultAcquisitionConfig(final int index) {
-		return (DefaultAcquisitionConfig) _DefaultAcquisitionConfig.get(index);
+		return _DefaultAcquisitionConfig.get(index);
 	}
 
 	// Return the number of defaultAcquisitionConfig
@@ -375,15 +377,15 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 	}
 
 	public com.linkare.rec.impl.baseUI.config.Display[] getDisplay() {
-		return (Display[]) _Display.toArray(new Display[0]);
+		return _Display.toArray(new Display[0]);
 	}
 
-	public List fetchDisplayList() {
+	public List<Display> fetchDisplayList() {
 		return _Display;
 	}
 
 	public com.linkare.rec.impl.baseUI.config.Display getDisplay(final int index) {
-		return (Display) _Display.get(index);
+		return _Display.get(index);
 	}
 
 	// Return the number of display
@@ -453,15 +455,15 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 
 	public com.linkare.rec.impl.baseUI.config.WebResource[] getWebResource() {
 		final WebResource[] arr = new WebResource[_WebResource.size()];
-		return (WebResource[]) _WebResource.toArray(arr);
+		return _WebResource.toArray(arr);
 	}
 
-	public List fetchWebResourceList() {
+	public List<WebResource> fetchWebResourceList() {
 		return _WebResource;
 	}
 
 	public com.linkare.rec.impl.baseUI.config.WebResource getWebResource(final int index) {
-		return (WebResource) _WebResource.get(index);
+		return _WebResource.get(index);
 	}
 
 	// Return the number of webResource
@@ -531,15 +533,15 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 
 	public com.linkare.rec.impl.baseUI.config.LocalizationBundle[] getLocalizationBundle() {
 		final LocalizationBundle[] arr = new LocalizationBundle[_LocalizationBundle.size()];
-		return (LocalizationBundle[]) _LocalizationBundle.toArray(arr);
+		return _LocalizationBundle.toArray(arr);
 	}
 
-	public List fetchLocalizationBundleList() {
+	public List<LocalizationBundle> fetchLocalizationBundleList() {
 		return _LocalizationBundle;
 	}
 
 	public com.linkare.rec.impl.baseUI.config.LocalizationBundle getLocalizationBundle(final int index) {
-		return (LocalizationBundle) _LocalizationBundle.get(index);
+		return _LocalizationBundle.get(index);
 	}
 
 	// Return the number of localizationBundle
@@ -743,29 +745,29 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 			if (childNode.getFirstChild() != null) {
 				childNodeValue = childNode.getFirstChild().getNodeValue();
 			}
-			if (childNodeName == "DefaultAcquisitionConfig") {
+			if ("DefaultAcquisitionConfig".equals(childNodeName)) {
 				final DefaultAcquisitionConfig aDefaultAcquisitionConfig = new com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig();
 				aDefaultAcquisitionConfig._setPropertyChangeSupport(eventListeners);
 				aDefaultAcquisitionConfig.readNode(childNode);
 				_DefaultAcquisitionConfig.add(aDefaultAcquisitionConfig);
-			} else if (childNodeName == "Display") {
+			} else if ("Display".equals(childNodeName)) {
 				final Display aDisplay = new com.linkare.rec.impl.baseUI.config.Display();
 				aDisplay._setPropertyChangeSupport(eventListeners);
 				aDisplay.readNode(childNode);
 				_Display.add(aDisplay);
-			} else if (childNodeName == "WebResource") {
+			} else if ("WebResource".equals(childNodeName)) {
 				final WebResource aWebResource = new com.linkare.rec.impl.baseUI.config.WebResource();
 				aWebResource._setPropertyChangeSupport(eventListeners);
 				aWebResource.readNode(childNode);
 				_WebResource.add(aWebResource);
-			} else if (childNodeName == "LocalizationBundle") {
+			} else if ("LocalizationBundle".equals(childNodeName)) {
 				final LocalizationBundle aLocalizationBundle = new com.linkare.rec.impl.baseUI.config.LocalizationBundle();
 				aLocalizationBundle._setPropertyChangeSupport(eventListeners);
 				aLocalizationBundle.readNode(childNode);
 				_LocalizationBundle.add(aLocalizationBundle);
 				loadLocalizationBundle(aLocalizationBundle);
 			} else {
-				// Found extra unrecognized childNode
+				Logger.getLogger(Apparatus.class.getName()).log(Level.WARNING,"Found a child nome of type '"+childNodeName+"' that is not recognized!");
 			}
 		}
 	}
@@ -1002,7 +1004,7 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 		childBeans(recursive, children);
 		final com.linkare.rec.impl.baseUI.config.CommonBean[] result = new com.linkare.rec.impl.baseUI.config.CommonBean[children
 				.size()];
-		return (com.linkare.rec.impl.baseUI.config.CommonBean[]) children.toArray(result);
+		return children.toArray(result);
 	}
 
 	// Put all child beans into the beans list.
@@ -1098,11 +1100,11 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 			return false;
 		}
 		// Compare every element.
-		for (Iterator it = _DefaultAcquisitionConfig.iterator(), it2 = inst._DefaultAcquisitionConfig.iterator(); it
+		for (Iterator<DefaultAcquisitionConfig> it = _DefaultAcquisitionConfig.iterator(), it2 = inst._DefaultAcquisitionConfig.iterator(); it
 				.hasNext() && it2.hasNext();) {
-			final com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig element = (com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig) it
+			final com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig element = it
 					.next();
-			final com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig element2 = (com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig) it2
+			final com.linkare.rec.impl.baseUI.config.DefaultAcquisitionConfig element2 = it2
 					.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
@@ -1112,10 +1114,10 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 			return false;
 		}
 		// Compare every element.
-		for (Iterator it = _Display.iterator(), it2 = inst._Display.iterator(); it.hasNext() && it2.hasNext();) {
-			final com.linkare.rec.impl.baseUI.config.Display element = (com.linkare.rec.impl.baseUI.config.Display) it
+		for (Iterator<Display> it = _Display.iterator(), it2 = inst._Display.iterator(); it.hasNext() && it2.hasNext();) {
+			final com.linkare.rec.impl.baseUI.config.Display element = it
 					.next();
-			final com.linkare.rec.impl.baseUI.config.Display element2 = (com.linkare.rec.impl.baseUI.config.Display) it2
+			final com.linkare.rec.impl.baseUI.config.Display element2 = it2
 					.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
@@ -1125,10 +1127,10 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 			return false;
 		}
 		// Compare every element.
-		for (Iterator it = _WebResource.iterator(), it2 = inst._WebResource.iterator(); it.hasNext() && it2.hasNext();) {
-			final com.linkare.rec.impl.baseUI.config.WebResource element = (com.linkare.rec.impl.baseUI.config.WebResource) it
+		for (Iterator<WebResource> it = _WebResource.iterator(), it2 = inst._WebResource.iterator(); it.hasNext() && it2.hasNext();) {
+			final com.linkare.rec.impl.baseUI.config.WebResource element = it
 					.next();
-			final com.linkare.rec.impl.baseUI.config.WebResource element2 = (com.linkare.rec.impl.baseUI.config.WebResource) it2
+			final com.linkare.rec.impl.baseUI.config.WebResource element2 = it2
 					.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;
@@ -1138,11 +1140,11 @@ public class Apparatus extends DisplayNode implements com.linkare.rec.impl.baseU
 			return false;
 		}
 		// Compare every element.
-		for (Iterator it = _LocalizationBundle.iterator(), it2 = inst._LocalizationBundle.iterator(); it.hasNext()
+		for (Iterator<LocalizationBundle> it = _LocalizationBundle.iterator(), it2 = inst._LocalizationBundle.iterator(); it.hasNext()
 				&& it2.hasNext();) {
-			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it
+			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element = it
 					.next();
-			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element2 = (com.linkare.rec.impl.baseUI.config.LocalizationBundle) it2
+			final com.linkare.rec.impl.baseUI.config.LocalizationBundle element2 = it2
 					.next();
 			if (!(element == null ? element2 == null : element.equals(element2))) {
 				return false;

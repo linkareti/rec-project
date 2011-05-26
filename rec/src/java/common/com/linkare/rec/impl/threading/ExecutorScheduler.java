@@ -40,9 +40,9 @@ public class ExecutorScheduler {
 				if (work != null) {
 					work.run();
 				}
-			} catch (final Throwable t) {
+			} catch (final Exception e) {
 				work.logThrowable("Throwable caught upon execution of Scheduled Work Unit of type "
-						+ work.getClass().getCanonicalName() + ":" + t.getMessage(), t);
+						+ work.getClass().getCanonicalName() + ":" + e.getMessage(), e);
 			}
 		}
 

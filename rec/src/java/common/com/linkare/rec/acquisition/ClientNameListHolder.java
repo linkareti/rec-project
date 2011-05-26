@@ -7,6 +7,7 @@ public final class ClientNameListHolder implements org.omg.CORBA.portable.Stream
 	public ClientNameListHolder() {
 	}
 
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public ClientNameListHolder(final String[] initialValue) {
 		value = initialValue;
 	}

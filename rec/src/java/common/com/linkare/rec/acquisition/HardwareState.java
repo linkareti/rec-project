@@ -182,5 +182,15 @@ public class HardwareState implements org.omg.CORBA.portable.IDLEntity {
 
 		return ((HardwareState) other).getValue() == getValue();
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		int retVal=35;
+		retVal+=17*getValue();
+		return retVal;
+	}
 
 } // class HardwareState

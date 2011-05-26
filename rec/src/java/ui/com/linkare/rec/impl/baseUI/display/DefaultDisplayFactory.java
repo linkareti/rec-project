@@ -56,7 +56,7 @@ public class DefaultDisplayFactory extends AbstractDisplayFactory {
 				if (java.beans.Beans.isInstanceOf(dataDisplayTemp, ExpDataDisplay.class)) {
 					tempDisplays.add(new ExpDataDisplayTreeIconAndName((ExpDataDisplay) dataDisplayTemp, display));
 				}
-			} catch (final Throwable e) {
+			} catch (final Exception e) {
 				LoggerUtil.logThrowable(e.getMessage(), e, Logger.getLogger(DefaultDisplayFactory.UI_CLIENT_LOGGER));
 			}
 		}

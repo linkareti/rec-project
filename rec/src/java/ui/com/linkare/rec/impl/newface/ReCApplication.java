@@ -519,9 +519,10 @@ public class ReCApplication extends SingleFrameApplication implements ApparatusL
 		} else if (OS.isWindows()) {
 			System.setProperty("swing.aatext", "true");
 
-		} else {
+		} 
+		/*else {
 			// TODO Check other platforms
-		}
+		}*/
 	}
 
 	/**

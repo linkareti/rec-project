@@ -11,7 +11,7 @@ public final class VTUserInfoListHolder implements org.omg.CORBA.portable.Stream
 
 	public VTUserInfoListHolder() {
 	}
-
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public VTUserInfoListHolder(final com.linkare.rec.acquisition.UserInfo[] initialValue) {
 		value = initialValue;
 	}

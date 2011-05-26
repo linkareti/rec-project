@@ -201,8 +201,9 @@ public class DefaultTableModelProxy extends javax.swing.table.DefaultTableModel 
 
 	@Override
 	public void newSamples(final NewExpDataEvent evt) {
-		fireTableRowsInserted(Math.min(evt.getSamplesStartIndex(), lastnewsamples),
-				(lastnewsamples = evt.getSamplesEndIndex()));
+		int oldLastNewSamples = lastnewsamples;
+		lastnewsamples = evt.getSamplesEndIndex();
+		fireTableRowsInserted(Math.min(evt.getSamplesStartIndex(), oldLastNewSamples), lastnewsamples);
 	}
 
 	/**

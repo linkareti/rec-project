@@ -67,35 +67,45 @@ public class DisplayNode extends AbstractConfigBean {
 	 * @param order the order to set
 	 */
 	public void setOrder(final int order) {
-		changeSupport.firePropertyChange("order", this.order, this.order = order);
+		int oldOrder = this.order;
+		this.order = order;
+		changeSupport.firePropertyChange("order", oldOrder, this.order);
 	}
 
 	/**
 	 * @param enabled the enabled to set
 	 */
 	public void setEnabled(final boolean enabled) {
-		changeSupport.firePropertyChange("enabled", this.enabled, this.enabled = enabled);
+		boolean oldEnabled = this.enabled;
+		this.enabled = enabled;
+		changeSupport.firePropertyChange("enabled", oldEnabled, enabled);
 	}
 
 	/**
 	 * @param visible the visible to set
 	 */
 	public void setVisible(final boolean visible) {
-		changeSupport.firePropertyChange("visible", this.visible, this.visible = visible);
+		boolean oldVisible=this.visible;
+		this.visible=visible;
+		changeSupport.firePropertyChange("visible", oldVisible,this.visible);
 	}
 
 	/**
 	 * @param selected the selected to set
 	 */
 	public void setSelected(final boolean selected) {
-		changeSupport.firePropertyChange("selected", this.selected, this.selected = selected);
+		boolean oldSelected = this.selected;
+		this.selected = selected;
+		changeSupport.firePropertyChange("selected", oldSelected, this.selected);
 	}
 
 	/**
 	 * @param connected the connected to set
 	 */
 	public void setConnected(final boolean connected) {
-		changeSupport.firePropertyChange("connected", this.connected, this.connected = connected);
+		boolean oldConnected = this.connected;
+		this.connected = connected;
+		changeSupport.firePropertyChange("connected", oldConnected, this.connected);
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class ControllerPanel extends javax.swing.JPanel implements java.io.Seria
 	 * 
 	 */
 	private static final long serialVersionUID = -869866736417188281L;
-	private static String UI_CLIENT_LOGGER = "ReC.baseUI";
+	private static final String UI_CLIENT_LOGGER = "ReC.baseUI";
 
 	static {
 		final Logger l = LogManager.getLogManager().getLogger(ControllerPanel.UI_CLIENT_LOGGER);

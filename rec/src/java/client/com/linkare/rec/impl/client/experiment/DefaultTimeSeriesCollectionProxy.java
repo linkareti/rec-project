@@ -293,6 +293,7 @@ public class DefaultTimeSeriesCollectionProxy extends XYSeriesCollection impleme
 	 * 
 	 * @param channelIndexes New value of property channelIndexes.
 	 */
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public void setChannelIndexes(final int[] channelIndexes) {
 		this.channelIndexes = channelIndexes;
 	}

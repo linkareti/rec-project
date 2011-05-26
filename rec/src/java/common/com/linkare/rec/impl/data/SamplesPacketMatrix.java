@@ -77,6 +77,7 @@ public class SamplesPacketMatrix implements SamplesPacketSource, Serializable {
 		private final int packetStart;
 		private final int packetEnd;
 
+		@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 		public SamplesPacketPredictiveBuffer(final SamplesPacket[] predictedReadPackets, final int packetStart) {
 			this.predictedReadPackets = predictedReadPackets;
 			this.packetStart = packetStart;

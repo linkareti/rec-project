@@ -141,8 +141,8 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 	}
 
 	public void comboBoxItemStateChanged(final ItemEvent evt) {
-		final JComboBox combo = (JComboBox) evt.getSource();
-		final String tag = (String) combo.getSelectedItem();
+		final JComboBox eventSourceCombo = (JComboBox) evt.getSource();
+		final String tag = (String) eventSourceCombo.getSelectedItem();
 		try {
 			value.getPropertyEditor().setAsText(tag);
 			value.setValue(value.getPropertyEditor().getValue());
@@ -153,15 +153,15 @@ public class PropertyObjectTableCellEditor extends AbstractCellEditor implements
 	}
 
 	public void tfActionPerformed(final ActionEvent evt) {
-		final JTextField tf = (JTextField) evt.getSource();
-		final String val = tf.getText();
+		final JTextField eventSourceTF = (JTextField) evt.getSource();
+		final String val = eventSourceTF.getText();
 		try {
 			value.getPropertyEditor().setAsText(val);
 			value.setValue(value.getPropertyEditor().getValue());
 			fireEditingStopped();
 		} catch (final Exception e) {
 			JOptionPane.showMessageDialog(null, "Unable to change value\n\rReason:" + e.getMessage());
-			tf.requestFocus();
+			eventSourceTF.requestFocus();
 		}
 
 	}

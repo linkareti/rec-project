@@ -111,10 +111,10 @@ public class FlatScrollButton extends MetalScrollButton {
 			if (isEnabled) {
 				g.setColor(FlatScrollButton.COLOR_BORDER);
 				// FIXME: Decidir como ficam as cores quando há PRESS
-				if (!isPressed) {
+				//if (!isPressed) {
 					// g.drawLine( 1, 1, width - 3, 1 );
 					// g.drawLine( 1, 1, 1, height - 1 );
-				}
+				//}
 
 				g.drawLine(0, height - 1, width - 1, height - 1); // BOTTOM
 				g.drawLine(width - 1, 1, width - 1, height - 1); // RIGHT
@@ -138,10 +138,10 @@ public class FlatScrollButton extends MetalScrollButton {
 			if (isEnabled) {
 				g.setColor(FlatScrollButton.COLOR_BORDER);
 
-				if (!isPressed) {
+				//if (!isPressed) {
 					// g.drawLine( 1, 0, width - 3, 0 );
 					// g.drawLine( 1, 0, 1, height - 3 );
-				}
+				//}
 				g.drawLine(0, height - 1, width - 1, height - 1); // BOTTOM
 				g.drawLine(width - 1, 1, width - 1, height - 1); // RIGHT
 				g.drawLine(0, 0, width - 1, 0); // UP
@@ -162,10 +162,10 @@ public class FlatScrollButton extends MetalScrollButton {
 			if (isEnabled) {
 				g.setColor(FlatScrollButton.COLOR_BORDER);
 
-				if (!isPressed) {
+				//if (!isPressed) {
 					// g.drawLine( 0, 1, width - 3, 1 );
 					// g.drawLine( 0, 1, 0, height - 3 );
-				}
+				//}
 				g.drawLine(0, height - 1, width - 1, height - 1); // BOTTOM
 				g.drawLine(width - 1, 1, width - 1, height - 1); // RIGHT
 				g.drawLine(0, 0, width - 1, 0); // UP
@@ -186,10 +186,10 @@ public class FlatScrollButton extends MetalScrollButton {
 			if (isEnabled) {
 				g.setColor(FlatScrollButton.COLOR_BORDER);
 
-				if (!isPressed) {
+				//if (!isPressed) {
 					// g.drawLine( 1, 1, width - 1, 1 );
 					// g.drawLine( 1, 1, 1, height - 3 );
-				}
+				//}
 				g.drawLine(0, height - 1, width - 1, height - 1); // BOTTOM
 				g.drawLine(width - 1, 1, width - 1, height - 1); // RIGHT
 				g.drawLine(0, 0, width - 1, 0); // UP

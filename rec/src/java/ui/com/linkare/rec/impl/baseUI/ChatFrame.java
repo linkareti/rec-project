@@ -92,16 +92,16 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 
 			if (value instanceof UserInfo) {
 				final JPanel panelinfo = new JPanel();
-				final UserInfo user = (UserInfo) value;
+				final UserInfo currentUser = (UserInfo) value;
 
-				String userName = user.getUserName();
+				String userName = currentUser.getUserName();
 				if (userName.equals(ChatMessageEvent.EVERYONE_USER_ALIAS)) {
 					userName = ChatFrame.EVERYONE_STR;
 				}
 				final JLabel jLabelName = new JLabel(userName);
 
 				final JLabel jLabelIcon = new JLabel();
-				final Apparatus app = getApparatus(user.getHardwaresConnectedTo());
+				final Apparatus app = getApparatus(currentUser.getHardwaresConnectedTo());
 				if (app != null) {
 					jLabelIcon.setIcon(app.getIcon());
 				} else {
@@ -123,9 +123,10 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 		if (root == null || uniqueID == null) {
 			return null;
 		}
-		final java.util.Enumeration allChild = (root).breadthFirstEnumeration();
+		@SuppressWarnings("unchecked")
+		final java.util.Enumeration<DefaultMutableTreeNode> allChild = root.breadthFirstEnumeration();
 		while (allChild.hasMoreElements()) {
-			final Object currentNode = ((DefaultMutableTreeNode) allChild.nextElement()).getUserObject();
+			final Object currentNode =  allChild.nextElement().getUserObject();
 			if (currentNode instanceof Apparatus) {
 				if (((Apparatus) currentNode).getLocation().equals(uniqueID)) {
 					return (Apparatus) currentNode;
@@ -247,15 +248,7 @@ public class ChatFrame extends javax.swing.JInternalFrame implements IChatMessag
 
 				return Collator.getInstance().compare(u1.getUserName(), u2.getUserName());
 			}
-
-			@Override
-			public boolean equals(final Object other) {
-				if (other == null || !(other.getClass() == this.getClass())) {
-					return false;
-				}
-
-				return true;
-			}
+			
 		});
 
 		cleanUsersList();

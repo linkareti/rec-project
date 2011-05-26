@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import org.omg.PortableServer.Servant;
+
 import com.linkare.rec.acquisition.DataClient;
 import com.linkare.rec.acquisition.DataClientHelper;
 import com.linkare.rec.acquisition.DataClientOperations;
@@ -86,12 +88,12 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 		}
 
 		try {
-			return (_this = DataClientHelper.narrow(ORBBean
-					.getORBBean()
-					.getAutoIdRootPOA()
-					.servant_to_reference(
-							ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this,
-									(oid = new ObjectID())))));
+			oid = new ObjectID();
+			Servant registeredServant = ORBBean.getORBBean().registerAutoIdRootPOAServant(DataClient.class, this, oid);
+			org.omg.CORBA.Object thisReference = ORBBean.getORBBean().getAutoIdRootPOA()
+					.servant_to_reference(registeredServant);
+			_this = DataClientHelper.narrow(thisReference);
+			return _this;
 		} catch (final Exception e) {
 			LoggerUtil.logThrowable("Couldn't register this DataClient with ORB", e,
 					Logger.getLogger(ApparatusClientBean.APPARATUS_CLIENT_LOGGER));
@@ -211,17 +213,8 @@ public class ApparatusClientBean implements DataClientOperations, ExpUsersListSo
 				dataProducerInEffect = null;
 				// locked = false;
 			}
-		} catch (final Throwable e) {
-			/*
-			 * System.out.println("**************************");
-			 * System.out.println("**************************");
-			 * System.out.println("**************************");
-			 * System.out.println("Error processing state...");
-			 * e.printStackTrace();
-			 * System.out.println("**************************");
-			 * System.out.println("**************************");
-			 * System.out.println("**************************");
-			 */
+		} catch (final Exception e) {
+			LoggerUtil.logThrowable("Error processing state", e, Logger.getLogger(APPARATUS_CLIENT_LOGGER));
 		}
 	}
 

@@ -345,8 +345,8 @@ public class ReCMultiCastController implements MultiCastControllerOperations, IS
 						log(Level.WARNING, "Error Trying to add an Hardware - Couldn't get it's ID");
 						return;
 					}
-				} catch (final Throwable t) {
-					log(Level.WARNING, "Exception occurred while access hardware info. " + t.getMessage());
+				} catch (final Exception e) {
+					log(Level.WARNING, "Exception occurred while access hardware info. " + e.getMessage());
 					return;
 				}
 

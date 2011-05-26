@@ -167,14 +167,6 @@ public class DefaulExpUsersListTableModel extends javax.swing.table.DefaultTable
 								: -1;
 					}
 
-					@Override
-					public boolean equals(final Object other) {
-						if (other == null || !(other.getClass() == this.getClass())) {
-							return false;
-						}
-
-						return true;
-					}
 				});
 
 				final Vector<String[]> expUsersList = new Vector<String[]>(expUsers.length);

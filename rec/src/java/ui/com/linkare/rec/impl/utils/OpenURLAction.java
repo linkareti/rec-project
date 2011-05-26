@@ -57,13 +57,16 @@ public class OpenURLAction extends javax.swing.AbstractAction {
 		}
 
 		if (!bs.isOffline()) {
+			bs.showDocument(url);
 			// if(bs.showDocument(url))
 			// System.out.println("A abrir o URL...");
 			// else
-			// System.out.println("N�o foi poss�vel abrir o URL.");
-		} else {
-			// System.out.println("Est� off-line... N�o � poss�vel abrir o URL.");
+			// System.out.println("Nao foi possivel abrir o URL.");
 		}
+		// else {
+		// //
+		// System.out.println("Esta off-line... Nao e possivel abrir o URL.");
+		// }
 	}
 
 }

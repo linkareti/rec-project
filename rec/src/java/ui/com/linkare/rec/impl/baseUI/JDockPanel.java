@@ -437,9 +437,10 @@ public class JDockPanel extends javax.swing.JPanel {
 				parent = parent.getParent();
 			}
 
-			if (parent == this) {
-				// BIG SILENT NOOP... for now!
-			} else if (parent != null && parent instanceof JSplitPane) {
+			// if (parent == this) {
+			// // BIG SILENT NOOP... for now!
+			// } else
+				if (parent != null && parent instanceof JSplitPane) {
 				final JSplitPane parentSplit = (JSplitPane) parent;
 				if (lastPositionOfHidden.get(c) != null) {
 					final Component top = parentSplit.getTopComponent();

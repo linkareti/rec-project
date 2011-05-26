@@ -91,6 +91,7 @@ public class DefaultUser implements IUser {
 	 * @param auth New value of property auth.
 	 * 
 	 */
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
 	public void setAuth(final byte[] auth) {
 		this.auth = auth;
 	}
